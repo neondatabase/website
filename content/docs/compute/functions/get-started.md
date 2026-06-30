@@ -55,7 +55,7 @@ To start from a working example instead, run `neonctl bootstrap`. It scaffolds a
 Create `neon.ts` at your project root. It declares your functions and is what `neonctl dev` and `neonctl deploy` read:
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   // preview groups features still in beta: functions, AI Gateway, and object-storage buckets.
@@ -77,7 +77,7 @@ The slug is permanent: it can't be renamed after the first deploy. See the [neon
 Install dependencies:
 
 ```bash
-npm install @neondatabase/config hono pg
+npm install @neon/config hono pg
 npm install --save-dev @types/pg
 ```
 

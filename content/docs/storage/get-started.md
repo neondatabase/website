@@ -24,7 +24,7 @@ To follow this guide, you need a new project in the AWS us-east-2 region.
 The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Declare buckets under `preview.buckets`, then run `neonctl deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
 
 ```typescript filename="neon.ts"
-import { defineConfig } from '@neondatabase/config/v1';
+import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   preview: {

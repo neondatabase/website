@@ -211,12 +211,12 @@ After applying fixes:
 The fixes above cut **egress** (data transferred out of Postgres). The other big non-prod cost lever is **compute**, and you can codify it durably in `neon.ts` — Neon's infrastructure-as-code file (see the `neon` skill for the full reference) — so dev, preview, and CI branches stay cheap by default instead of relying on per-branch flags:
 
 ```bash
-npm i @neondatabase/config
+npm i @neon/config
 ```
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   branch: (branch) => {

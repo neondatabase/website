@@ -20,7 +20,7 @@ Neon Functions use different limits: begin responding within 15 minutes, then ke
 Declare the AI Gateway and the function in `neon.ts`. `neonctl deploy` provisions the gateway and injects its credentials at runtime:
 
 ```ts filename="neon.ts"
-import { defineConfig } from '@neondatabase/config/v1';
+import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   preview: {
@@ -38,13 +38,13 @@ export default defineConfig({
 Install the AI SDK, the Neon provider, and `pg`:
 
 ```bash
-npm install ai @neondatabase/ai-sdk-provider pg zod
+npm install ai @neon/ai-sdk-provider pg zod
 ```
 
-The handler streams a tool-calling agent. The `@neondatabase/ai-sdk-provider` reads the injected gateway credentials on its own, so `neon('<model>')` is the only model configuration you need. Tools run inside the function, right next to Postgres:
+The handler streams a tool-calling agent. The `@neon/ai-sdk-provider` reads the injected gateway credentials on its own, so `neon('<model>')` is the only model configuration you need. Tools run inside the function, right next to Postgres:
 
 ```ts filename="functions/agent.ts"
-import { neon } from '@neondatabase/ai-sdk-provider';
+import { neon } from '@neon/ai-sdk-provider';
 import { streamText, tool, stepCountIs, type ModelMessage } from 'ai';
 import { z } from 'zod';
 import { Pool } from 'pg';

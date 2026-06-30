@@ -29,7 +29,7 @@ When the platform stops a function, it sends `SIGINT`. If the process is still r
 
 ```ts
 import { Hono } from 'hono';
-import { waitUntil } from '@neondatabase/functions';
+import { waitUntil } from '@neon/functions';
 
 const app = new Hono();
 

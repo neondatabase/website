@@ -202,12 +202,12 @@ After branch creation, ask whether the user wants to update local environment cr
 Beyond creating branches imperatively (CLI / MCP / API above), you can **program what configuration new branches receive** declaratively in `neon.ts` — Neon's infrastructure-as-code file (see the `neon` skill for the full reference). The `branch` property is a function of the branch being evaluated that returns its settings, so every branch born from your project gets a consistent lifecycle and compute profile without per-branch flags.
 
 ```bash
-npm i @neondatabase/config
+npm i @neon/config
 ```
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   branch: (branch) => {

@@ -226,15 +226,15 @@ Neon Auth is also embedded in the Neon JS SDK. Depending on your use case, you m
 
 `neon.ts` is Neon's branch config and infrastructure-as-code file: declare which services your branches have, get type-safe env vars, and program per-branch compute — all in TypeScript (see the `neon` skill for the full reference). Postgres always exists on every branch, so you never declare the database itself; what you codify here is the Postgres-adjacent surface — Neon Auth, the Data API, and per-branch compute settings (autoscaling and scale-to-zero).
 
-Add it with `@neondatabase/config`:
+Add it with `@neon/config`:
 
 ```bash
-npm i @neondatabase/config
+npm i @neon/config
 ```
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   auth: true, // Neon Auth (adds NEON_AUTH_* env vars)
@@ -270,10 +270,10 @@ Because `neonctl checkout` applies the policy as it **creates** a branch, a fres
 
 Since `neon.ts` is TypeScript, invalid combinations fail to compile with an actionable message: the Data API verifies requests with Neon Auth by default, so `dataApi: true` without `auth: true` is a type error (the fix — `auth: true`, or `authProvider: 'external'` with a `jwksUrl` — is in the message). See the `neon` skill's type-safe config note.
 
-Read the resulting env back, typed and validated against the policy, with `parseEnv` from `@neondatabase/env`:
+Read the resulting env back, typed and validated against the policy, with `parseEnv` from `@neon/env`:
 
 ```typescript
-import { parseEnv } from "@neondatabase/env/v1";
+import { parseEnv } from "@neon/env/v1";
 import config from "./neon";
 
 const env = parseEnv(config);

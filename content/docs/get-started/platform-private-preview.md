@@ -100,13 +100,13 @@ Similar to `vercel link`, this connects the directory to a Neon project and crea
 `neon.ts` is the infrastructure-as-code config for your Neon project. Install the config package first:
 
 ```bash
-npm install @neondatabase/config
+npm install @neon/config
 ```
 
 Then create `neon.ts` in your project root. This example enables the AI Gateway, creates a storage bucket, and declares a function:
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   preview: {

@@ -20,14 +20,14 @@
     "checkout": {
       "options": {
         "env-pull": {
-          "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neondatabase/env`) or `neonctl dev`."
+          "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neonctl dev`."
         }
       }
     },
     "link": {
       "options": {
         "env-pull": {
-          "describe": "Pull the linked branch's Neon env vars (DATABASE_URL, ...) into a local .env after linking. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neondatabase/env`) or `neonctl dev`."
+          "describe": "Pull the linked branch's Neon env vars (DATABASE_URL, ...) into a local .env after linking. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neonctl dev`."
         }
       }
     },
