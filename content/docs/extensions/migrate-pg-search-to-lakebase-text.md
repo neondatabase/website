@@ -64,7 +64,7 @@ ALTER TABLE mock_items ADD COLUMN search_tsv tsvector
 CREATE INDEX mock_items_bm25 ON mock_items USING lakebase_bm25 (search_tsv);
 ```
 
-To search a single column instead of several, point `to_tsvector` at just that column. BM25 scores depend on corpus statistics gathered at build time, so create the index after your data is loaded, and run `VACUUM` after large bulk loads to keep scores accurate.
+To search a single column instead of several, point `to_tsvector` at just that column. `'english'` is one of several built-in [Postgres text-search configurations](https://www.postgresql.org/docs/current/textsearch.html); list the ones available on your database with `SELECT cfgname FROM pg_ts_config;`. BM25 scores depend on corpus statistics gathered at build time, so create the index after your data is loaded, and run `VACUUM` after large bulk loads to keep scores accurate.
 
 ## Migrate your queries
 
@@ -118,7 +118,7 @@ Before you drop `pg_search`, confirm the features you rely on carry over. A few 
 
 - **Fuzzy / typo matching** (`paradedb.match(..., distance => 1)`): no direct equivalent. Use [`pg_trgm`](/docs/extensions/pg_trgm) for similarity and typo-tolerant matching.
 - **Highlighting** (`paradedb.snippet()`): use Postgres [`ts_headline()`](https://www.postgresql.org/docs/current/textsearch-controls.html#TEXTSEARCH-HEADLINE).
-- **JSON query objects and advanced tokenizers** (ICU, Lindera): not supported. Use `tsquery` operators (`&`, `|`, `<->`) and Postgres text-search configurations.
+- **JSON query objects and advanced tokenizers** (ICU, Lindera): not supported. Use `tsquery` operators (`&`, `|`, `<->`) and [Postgres text-search](https://www.postgresql.org/docs/current/textsearch.html) configurations.
 
 ## Remove pg_search
 
