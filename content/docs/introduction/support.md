@@ -8,7 +8,7 @@ summary: >-
   understand how tickets are prioritized by severity, and review the general
   support policy.
 enableTableOfContents: true
-updatedOn: '2026-06-30T15:58:53.991Z'
+updatedOn: '2026-06-30T18:26:43.964Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -55,7 +55,7 @@ The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Open the Help menu (`?`) in the top right corner and select **Technical Support**. This opens the AI assistant so you can ask questions about Neon.
+- **Neon Console**: Open the Help menu (`?`) in the top right corner and select **Support**. This opens the **Neon AI Assistant** so you can ask questions about Neon.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
 
@@ -75,8 +75,8 @@ Neon AI chat is not an official Neon Support channel.
 
 You can reach the ticketing flow in these ways:
 
-1. **AI assistant**: Open the Help menu (`?`) in the top right corner and select **Technical Support**. This opens the **AI assistant**. When your account is allowed to file a ticket, use **Open Support Ticket** in the assistant. **Launch** plan: use this only for **billing-related** problems (for invoice-specific requests, **Request billing support** on the Billing page is usually simpler). **Scale** and above: you can use **Open Support Ticket** for any eligible issue.
-2. **Billing page (paid plans)**: On the **Billing** page, select **Request billing support** in the page header (next to **View past invoices**). In the form, select a related invoice if you have one and describe your issue. You can also select **View past invoices**, open an invoice’s actions menu, and select **Request support** to open the same form with that invoice pre-selected. If you have no invoices yet, the header button may be disabled; open **Technical Support** from the Help menu (`?`) to reach the AI assistant for billing-related help. Step-by-step detail is in [Manage billing](/docs/introduction/manage-billing#request-billing-support).
+1. **Neon AI Assistant**: Open the Help menu (`?`) in the top right corner and select **Support**. This opens the **Neon AI Assistant**. When your account is allowed to file a ticket, use **Open Support Ticket** in the assistant. **Launch** plan: use this only for **billing-related** problems (for invoice-specific requests, **Request billing support** on the Billing page is usually simpler). **Scale** and above: you can use **Open Support Ticket** for any eligible issue.
+2. **Billing page (paid plans)**: On the **Billing** page, select **Request billing support** in the page header (next to **View past invoices**). In the form, select a related invoice if you have one and describe your issue. You can also select **View past invoices**, open an invoice’s actions menu, and select **Request support** to open the same form with that invoice pre-selected. If you have no invoices yet, the header button may be disabled; open **Support** from the Help menu (`?`) to reach the Neon AI Assistant for billing-related help. Step-by-step detail is in [Manage billing](/docs/introduction/manage-billing#request-billing-support).
 
 <Admonition type="tip">
 To ensure you receive responses from our support team, please whitelist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
