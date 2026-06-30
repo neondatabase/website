@@ -126,10 +126,9 @@ const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
 
       <ApiCodeBlock label="REST API" descriptor="curl" code={restCode} />
 
-      {operation.examples?.representative && (
+      {emptyBodyAllowed && (
         <p className="mt-3 text-sm leading-relaxed text-gray-new-50 dark:text-gray-new-60">
-          A representative request with common fields prefilled.
-          {emptyBodyAllowed ? ' An empty body works too; every field below is optional.' : ''}
+          Every field below is optional. An empty body works too.
         </p>
       )}
 
