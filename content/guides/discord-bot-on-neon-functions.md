@@ -1,10 +1,10 @@
 ---
-title: 'Build a Discord Bot with Neon Functions and AI Gateway'
+title: 'Build a Discord Bot with Neon Functions and Neon AI Gateway'
 subtitle: 'Learn how to build a Discord bot with AI chat and image generation using Neon Functions and the Neon AI Gateway.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-06-29T18:24:34.526Z'
+updatedOn: '2026-06-30T06:20:45.708Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -30,7 +30,7 @@ Before you begin, ensure you have:
 
 ## Create the Discord Application
 
-You'll need to create a Discord application and bot to get the credentials required to connect your Neon Function to Discord.
+You'll need to create a Discord application to get the credentials required to connect your Neon Function to Discord.
 
 1. Go to the [Discord Developer Portal](https://discord.com/developers/applications) and click **New Application**. Name it "Neon Bot" and accept the terms.
 2. Under the **General Information** tab, copy the **Application ID** and **Public Key**. You will need these later.
@@ -76,7 +76,7 @@ $ neonctl init --preview
   │  ○ MCP server
   │  ○ Realtime chat
   │  ○ Realtime counter
-  │  ● No thanks — continue without scaffolding
+  │  ● No thanks - continue without scaffolding
 
   Neon editor extension already installed ✓
   │
@@ -127,63 +127,61 @@ Discord requires HTTP bots to cryptographically verify all incoming requests. If
 
 ```ts shouldWrap
 import { Hono } from 'hono';
-
-import { type APIInteraction, InteractionType, InteractionResponseType, ApplicationCommandType, ApplicationCommandOptionType } from 'discord-api-types/v10';
-import { verifyKey } from 'discord-interactions';
+import { verifyKey, InteractionType, InteractionResponseType } from 'discord-interactions';
 
 const app = new Hono();
 
 app.post('/', async (c) => {
-  // Verify the Discord signature
-  const signature = c.req.header('X-Signature-Ed25519');
-  const timestamp = c.req.header('X-Signature-Timestamp');
-  const body = await c.req.text();
+    const signature = c.req.header('X-Signature-Ed25519');
+    const timestamp = c.req.header('X-Signature-Timestamp');
+    const rawBody = await c.req.text();
 
-  if (!signature || !timestamp) return c.text('Missing headers', 401);
+    if (!signature || !timestamp) return c.text('Missing headers', 401);
 
-  const isValid = await verifyKey(body, signature, timestamp, process.env.DISCORD_PUBLIC_KEY!);
-  if (!isValid) return c.text('Invalid request signature', 401);
+    const isValid = await verifyKey(rawBody, signature, timestamp, process.env.DISCORD_PUBLIC_KEY!);
+    if (!isValid) return c.text('Invalid request signature', 401);
 
-  const interaction = JSON.parse(body) as APIInteraction;
-
-  // Handle PING and Application Commands
-  if (interaction.type === InteractionType.Ping) {
-    return c.json({ type: InteractionResponseType.Pong });
-  }
-
-  if (interaction.type === InteractionType.ApplicationCommand) {
-    const commandName = interaction.data.name;
-
-    if (commandName === 'reverse' && interaction.data.type === ApplicationCommandType.ChatInput) {
-      const option = interaction.data.options?.[0];
-      if (option?.type !== ApplicationCommandOptionType.String) return c.text('Missing text option', 400);
-      const text = option.value;
-      const reversed = text.split('').reverse().join('');
-
-      // Respond with the reversed text
-      return c.json({
-        type: InteractionResponseType.ChannelMessageWithSource,
-        data: {
-          content: `🔄 **Reversed:** ${reversed}`,
-        },
-      });
+    const interaction = JSON.parse(rawBody) as {
+        type: number
+        data?: {
+            name: string
+            options?: { name: string; value: string }[]
+        }
+        token?: string
+        application_id?: string
     }
-  }
 
-  return c.text('Unknown interaction', 400);
+    if (interaction.type === InteractionType.PING) return c.json({ type: InteractionResponseType.PONG });
+
+    if (interaction.type === InteractionType.APPLICATION_COMMAND) {
+        const commandName = interaction.data?.name;
+        if (!commandName) return c.text('Missing command name', 400);
+
+        if (commandName === 'reverse') {
+            const text = interaction.data?.options?.[0]?.value || '';
+            return c.json({
+                type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+                data: { content: `🔄 **Reversed:** ${text.split('').reverse().join('')}` },
+            });
+        }
+    }
+
+    return c.text('Unknown interaction', 400);
 });
 
 export default app;
 ```
 
-The above code handles two types of interactions:
+The above code does the following:
 
-1. **PING (Type 1)**: Discord sends a PING request to verify that your bot is reachable. The bot responds with a PONG.
-2. **Application Command (Type 2)**: When a user invokes a slash command, the bot checks if the command is `/reverse`. If so, it reverses the provided text and responds with the reversed string.
+- Verifies incoming requests from Discord using the `verifyKey` function.
+- Handles the `PING` interaction type by responding with a `PONG`, which is required for Discord to confirm that your bot is reachable.
+- Handles the `APPLICATION_COMMAND` interaction type, specifically the `/reverse` command. When a user invokes this command, the bot reverses the input text and responds with the reversed string.
+- Returns a 400 error for any unknown interactions.
 
 ## Create neon.ts
 
-Create a `neon.ts` file in the root of your project to define your Neon Functions configuration. This file tells Neon how to deploy your function and which environment variables to include.
+Create a [`neon.ts`](/docs/reference/neon-ts) file in the root of your project to define your Neon Functions configuration. This file tells Neon how to deploy your function and which environment variables to include.
 
 ```ts
 import { defineConfig } from "@neondatabase/config/v1";
@@ -210,13 +208,13 @@ export default defineConfig({
 With the initial code written, deploy your bot to Neon Functions:
 
 ```bash
-neonctl deploy --env .env
+neonctl deploy --env .env.local
 ```
 
 The CLI will output something like this:
 
 ```bash
-neonctl deploy --env .env
+neonctl deploy --env .env.local
 INFO: → Applying to branch main (br-damp-voice-ajjys6qp)
 Applied changes
 ┌────────┬─────────┬──────────────┐
@@ -226,10 +224,9 @@ Applied changes
 └────────┴─────────┴──────────────┘
 
 Function URLs
-  • bot: https://br-damp-voice-ajjys6qp-bot.compute.c-3.us-east-2.aws.neon.tech/
+  • bot: https://br-damp-voice-xxx-bot.compute.c-3.us-east-2.aws.neon.tech
 
 Utilized services: Postgres, Functions
-INFO: Pulled 3 Neon variables into /workspaces/codespaces-blank/neon-discord-bot/.env: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
 ```
 
 Your bot is now live. Copy the function URL from the output (the `https://...neon.tech/` line). If you need to retrieve it later, run `neonctl functions get bot`.
@@ -290,7 +287,7 @@ for (const command of commands) {
 Run it using Node (ensure your `.env` variables are loaded):
 
 ```bash
-export $(cat .env | xargs)
+export $(cat .env.local | xargs)
 node register.js
 ```
 
@@ -302,8 +299,7 @@ Generate an invite link to add the bot to your Discord server:
 2. Under **OAuth2 URL Generator**, check `bot` and `applications.commands`.
 3. Copy the generated URL at the bottom, paste it into your browser, and invite the bot to your server.
 4. Alternatively, you can use the following URL template, replacing `YOUR_APP_ID` with your Discord Application ID:
-   `     https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&scope=bot%20applications.commands&permissions=2147483648
- `
+   `    https://discord.com/oauth2/authorize?client_id=YOUR_APP_ID&scope=bot%20applications.commands&permissions=2147483648`
    ![Add discord bot to server](/docs/guides/discord-bot-add-to-server.png)
    You will be prompted to select a server where you have permission to add bots. After authorizing, your bot will appear in the server's member list.
 
@@ -330,7 +326,7 @@ Because large language models and image generation can take several seconds, whi
 
 Update `index.ts` to include the Neon AI SDK and handle the `/chat` and `/imagine` commands:
 
-```ts
+```ts {3-4,8-28,30-71,97-98,108-118}
 import { Hono } from 'hono';
 import { verifyKey, InteractionType, InteractionResponseType } from 'discord-interactions';
 import { neon } from '@neondatabase/ai-sdk-provider';
@@ -457,17 +453,20 @@ app.post('/', async (c) => {
 export default app;
 ```
 
-The above code adds two new commands:
+The above code does the following:
 
-- **/chat**: When invoked, the bot defers the response and calls `sendChatResponse`, which uses the Neon AI Gateway to generate a text response using the `gpt-5-mini` model. Once the response is generated, it updates the original message in Discord.
-- **/imagine**: Similar to `/chat`, this command defers the response and calls `sendImagineResponse`, which generates an image based on the prompt using `gpt-5-mini` with the image generation tool. The generated image is then uploaded to Discord.
+- Imports the Neon AI SDK and the `generateText` function to interact with LLMs and image generation tools.
+- Implements `sendChatResponse` and `sendImagineResponse` functions that handle the AI generation and update the original Discord message with the generated content.
+- Defers the response for `/chat` and `/imagine` commands, allowing the bot to take longer than 3 seconds to generate a response without timing out.
+
+The [Neon AI SDK provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider) abstracts away the complexity of interacting with different AI models and tools, providing a unified interface for generating text and images.
 
 ## Deploy the updated bot
 
 Redeploy your bot to Neon Functions with the updated code:
 
 ```bash
-neonctl deploy --env .env
+neonctl deploy --env .env.local
 ```
 
 The CLI will output the same deployment details as before. Your bot is now running the updated code with AI support.
@@ -476,13 +475,16 @@ The CLI will output the same deployment details as before. Your bot is now runni
 
 Go to your Discord server and try the new commands:
 
-- `/chat Who are you?` — The bot will defer the message, generate a text response using the AI Gateway, and update the original message with the generated text.
-- `/imagine An astronaut in a bustling cafe, sipping coffee` — The bot will defer the message, generate an image using the AI Gateway, and upload it directly to Discord.
+- `/chat Who are you?`: The bot will defer the message, generate a response using the AI Gateway, and reply with the generated text.
+  ![Discord bot responding with generated text](/docs/guides/discord-bot-chat-response.png)
+- `/imagine An astronaut in a bustling cafe, sipping coffee`: Similarly, the bot will defer the message, generate an image using the AI Gateway, and reply with the generated image.
 
   ![Discord bot responding with generated text and image](/docs/guides/discord-bot-astronaut-cafe.png)
   ![Discord bot responding with generated text and image 2](/docs/guides/discord-bot-living-room.png)
 
 Your Discord bot is now fully functional with AI chat and image generation capabilities, all powered by Neon Functions and the Neon AI Gateway.
+
+You can now start charging users for generating images :)
 
 </Steps>
 
@@ -494,16 +496,25 @@ The bot you built is a starting point. Because Neon Functions can connect to [Ne
 - **Paid access with Stripe:** Gate premium commands like `/chat` and `/imagine` behind a payment wall. When a user invokes a paid command, look up their `user_id` in your database. If they haven't paid, reply with a Stripe Checkout link. Use [Stripe webhooks](https://docs.stripe.com/webhooks) to update your database when a payment succeeds.
 - **Credits system:** Instead of (or in addition to) subscriptions, implement a credits model. Give each user a monthly allowance of free AI calls, tracked in a `credits_remaining` column. Decrement on each `/chat` or `/imagine` invocation and prompt them to purchase more when they run out.
 - **Conversation history:** Store chat history per user in Postgres so `/chat` can maintain context across multiple messages, enabling multi-turn conversations.
-- **Admin dashboard:** Build a simple web page that queries your Postgres database to show total users, active subscriptions, credits consumed, and command usage over time.
+- **Persistent image storage:** Images generated by `/imagine` are ephemeral. They live only in the Discord message. Use [Neon Storage](/docs/storage/overview) to persist them. Save each generated image to a branch-scoped S3 bucket and return a presigned URL instead of uploading the raw image to Discord. This gives you a permanent gallery users can browse later and keeps your bot's responses fast since Discord message size limits won't be a concern.
 
 ## Moving to WebSockets
 
-For most standard bots, Discord's HTTP webhook interaction model is ideal. It's entirely serverless, scales instantly, and costs nothing when idle.
+Discord [recommends](https://docs.discord.com/developers/events/gateway) using the HTTP API for most apps: "In _most_ cases, performing REST operations on Discord resources can be done using the HTTP API rather than the Gateway API." For low-traffic bots like the one in this guide, the HTTP webhook interaction model used throughout this guide is the right choice: it's entirely serverless, scales instantly, and costs nothing when idle.
 
 However, if your bot needs to listen to _every_ message in a server (not just slash commands), track voice channel states, or handle extremely high traffic, you might need to use Discord's Gateway API via WebSockets.
 
-Because Neon Functions are long-running and stay alive as long as they have active connections, they are uniquely suited for WebSocket servers. You can use the exported `upgrade` method alongside `fetch` to hold a permanent WebSocket connection to Discord's Gateway, while using Postgres `LISTEN/NOTIFY` to broadcast events across different function isolates.
+Because Neon Functions are long-running and stay alive as long as they have active connections, they are uniquely suited for WebSocket servers. You can use the exported `upgrade` method alongside `fetch` to hold a permanent WebSocket connection to Discord's Gateway. This allows your bot to receive events in real-time, such as messages, reactions, and voice state changes, without relying on HTTP webhooks.
 
-Check out our [WebSocket Servers documentation](/docs/compute/functions/websockets) to learn how to transition this HTTP bot into a persistent WebSocket application.
+Check out [WebSockets and SSE on Neon Functions](/docs/compute/functions/websockets) to learn how to hold long-lived connections open for real-time apps.
+
+## Resources
+
+- [Neon Functions Overview](/docs/compute/functions/overview)
+- [Neon AI Gateway](/docs/ai-gateway/overview)
+- [Neon AI SDK Provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider)
+- [WebSockets and SSE on Neon Functions](/docs/compute/functions/websockets)
+- [Discord Interactions Library](https://github.com/discord/discord-interactions-js)
+- [Hono Framework](https://hono.dev/)
 
 <NeedHelp/>
