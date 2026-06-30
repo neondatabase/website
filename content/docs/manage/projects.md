@@ -49,7 +49,7 @@ After creating a project, you are directed to the **Project Dashboard**.
 
 <TabItem>
 
-Install the CLI with `npm i -g neonctl` and run `neon auth` to log in. Then create a project with `neon projects create`:
+Install the CLI with `npm i -g neon` and run `neon auth` to log in. Then create a project with `neon projects create`:
 
 ```bash
 neon projects create --name myproject --region-id aws-us-east-2

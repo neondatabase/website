@@ -17,7 +17,7 @@ The examples below show both the [Files SDK](https://files-sdk.dev) and the AWS 
 
 ## Upload
 
-<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
@@ -29,8 +29,8 @@ await files.upload('images/photo.jpg', fileBuffer, {
 ```
 
 ```bash
-neonctl bucket object put my-bucket/images/photo.jpg --file ./photo.jpg
-neonctl bucket object put my-bucket/images/photo.jpg --file ./photo.jpg --content-type image/jpeg
+neon bucket object put my-bucket/images/photo.jpg --file ./photo.jpg
+neon bucket object put my-bucket/images/photo.jpg --file ./photo.jpg --content-type image/jpeg
 ```
 
 ```typescript shouldWrap
@@ -67,7 +67,7 @@ aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
 </CodeTabs>
 
 <Admonition type="note">
-`neonctl bucket object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
+`neon bucket object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
 </Admonition>
 
 ## Multipart upload
@@ -113,7 +113,7 @@ client.upload_file(
 
 ## Download
 
-<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
@@ -124,8 +124,8 @@ const buffer = await result.arrayBuffer();
 
 ```bash
 # Downloads to ./photo.jpg by default; use --file to specify a different path
-neonctl bucket object get my-bucket/images/photo.jpg
-neonctl bucket object get my-bucket/images/photo.jpg --file ./downloads/photo.jpg
+neon bucket object get my-bucket/images/photo.jpg
+neon bucket object get my-bucket/images/photo.jpg --file ./downloads/photo.jpg
 ```
 
 ```typescript shouldWrap
@@ -169,7 +169,7 @@ const response = await client.send(new GetObjectCommand({
 
 Use a prefix to filter results. The Files SDK returns a flat array of items; the S3 client supports a delimiter to simulate folder structure.
 
-<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
@@ -182,13 +182,13 @@ for (const item of items) {
 
 ```bash
 # Folder-collapsed view by default (same as aws s3 ls)
-neonctl bucket object list my-bucket
+neon bucket object list my-bucket
 
 # List objects under a prefix
-neonctl bucket object list my-bucket/images/
+neon bucket object list my-bucket/images/
 
 # Flat listing of every key, no folder collapsing
-neonctl bucket object list my-bucket --recursive
+neon bucket object list my-bucket --recursive
 ```
 
 ```typescript shouldWrap
@@ -249,7 +249,7 @@ do {
 
 **Single object:**
 
-<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
@@ -258,7 +258,7 @@ await files.delete('images/photo.jpg');
 ```
 
 ```bash
-neonctl bucket object delete my-bucket/images/photo.jpg
+neon bucket object delete my-bucket/images/photo.jpg
 ```
 
 ```typescript shouldWrap
@@ -321,11 +321,11 @@ client.delete_objects(
 
 **Delete a folder (all objects under a prefix):**
 
-<CodeTabs labels={["neonctl", "Neon API"]}>
+<CodeTabs labels={["neon", "Neon API"]}>
 
 ```bash
 # The prefix must end with /
-neonctl bucket object delete my-bucket/images/ --recursive
+neon bucket object delete my-bucket/images/ --recursive
 ```
 
 ```bash shouldWrap

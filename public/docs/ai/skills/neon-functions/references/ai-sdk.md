@@ -8,7 +8,7 @@ The pattern below is a complete agent: it streams chat and, when asked, generate
 
 ## 1. Declare the gateway and the function
 
-The agent needs the AI Gateway (and, for the image example, an Object Storage bucket). Declare both in `neon.ts` alongside the function — `neonctl deploy` provisions them and injects the credentials at runtime (see the `neon-ai-gateway` and `neon-object-storage` skills):
+The agent needs the AI Gateway (and, for the image example, an Object Storage bucket). Declare both in `neon.ts` alongside the function — `neon deploy` provisions them and injects the credentials at runtime (see the `neon-ai-gateway` and `neon-object-storage` skills):
 
 ```typescript
 // neon.ts
@@ -122,12 +122,12 @@ So the long stream isn't cut off by your web host's serverless limits, have the 
 ## 5. Run and deploy
 
 ```bash
-neonctl dev      # injects DATABASE_URL + the gateway/storage creds; hot reload
-neonctl deploy   # provisions the gateway + bucket and deploys the function
+neon dev      # injects DATABASE_URL + the gateway/storage creds; hot reload
+neon deploy   # provisions the gateway + bucket and deploys the function
 ```
 
 ```bash
-curl -N -X POST "$(neonctl functions get agent -o json | jq -r .invocation_url)" \
+curl -N -X POST "$(neon functions get agent -o json | jq -r .invocation_url)" \
   -H "content-type: application/json" \
   -d '{"messages":[{"role":"user","content":"How many open todos do I have?"}]}'
 ```

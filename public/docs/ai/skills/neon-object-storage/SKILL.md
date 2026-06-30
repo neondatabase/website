@@ -58,7 +58,7 @@ export default defineConfig({
 Provision the declared buckets on the linked branch:
 
 ```bash
-neonctl deploy   # alias for `neonctl config apply`
+neon deploy   # alias for `neon config apply`
 ```
 
 ## Neon Infrastructure as Code (`neon.ts`)
@@ -66,12 +66,12 @@ neonctl deploy   # alias for `neonctl config apply`
 The `preview.buckets` block above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares your buckets alongside every other service the branch should have (see the `neon` skill for the full reference). Reconcile the declaration against a branch the Terraform way:
 
 ```bash
-neonctl config status   # print the branch's live config (which buckets exist)
-neonctl config plan     # dry-run diff of what apply would change
-neonctl config apply    # create the declared buckets  (neonctl deploy is an alias)
+neon config status   # print the branch's live config (which buckets exist)
+neon config plan     # dry-run diff of what apply would change
+neon config apply    # create the declared buckets  (neon deploy is an alias)
 ```
 
-Buckets are **branch-scoped**: when a `neon.ts` is present, `neonctl checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with its buckets already provisioned (and copy-on-write objects inherited from the parent). Checking out an _existing_ branch doesn't reconcile it — run `neonctl deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's S3 credentials into your local `.env.local`, so the same `env pull` step shown below happens for you on those commands.
+Buckets are **branch-scoped**: when a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with its buckets already provisioned (and copy-on-write objects inherited from the parent). Checking out an _existing_ branch doesn't reconcile it — run `neon deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's S3 credentials into your local `.env.local`, so the same `env pull` step shown below happens for you on those commands.
 
 For typed, validated access to the injected S3 credentials, pass the same config object to `parseEnv` from `@neon/env` — it returns an `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts`.
 
@@ -80,7 +80,7 @@ For typed, validated access to the injected S3 credentials, pass the same config
 When `preview.buckets` is declared, Neon injects **AWS-standard** S3 env vars so the AWS SDKs work from the environment with zero extra config. Inside a deployed Neon Function these are injected automatically; locally, pull them onto disk (or inject them at runtime) via the CLI:
 
 ```bash
-neonctl env pull            # writes the branch's vars into .env (or .env.local)
+neon env pull            # writes the branch's vars into .env (or .env.local)
 # or, without writing a file, inject at runtime:
 neon-env run -- <your dev command>
 ```
@@ -175,7 +175,7 @@ const url = await getSignedUrl(
 
 The canonical pattern for pairing storage with the database on a branch: an agent generates an image → `PutObject` into the `images` bucket → a row is inserted in Postgres → a presigned URL is returned on read. Store the bucket **key** (not the bytes) in a Postgres column, and presign on read. Because both the row and the object live on the same branch, they branch together and never drift.
 
-`neonctl` also has first-class bucket/object commands (`neonctl bucket create|list|delete`, `neonctl bucket object put|get|list|delete`) for scripting and one-off operations.
+`neon` also has first-class bucket/object commands (`neon bucket create|list|delete`, `neon bucket object put|get|list|delete`) for scripting and one-off operations.
 
 ## Availability
 

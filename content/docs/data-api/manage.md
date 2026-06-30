@@ -266,7 +266,7 @@ For the full Data API specification, see the [Neon API reference](https://api-do
 
 ## Manage via the Neon CLI
 
-You can also manage the Data API from the terminal using the [Neon CLI](/docs/cli). The `data-api` command requires **neonctl 2.22.2** or later.
+You can also manage the Data API from the terminal using the [Neon CLI](/docs/cli). The `data-api` command requires **neon 2.22.2** or later.
 
 ### Enable via the CLI
 

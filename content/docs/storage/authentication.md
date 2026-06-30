@@ -122,18 +122,18 @@ export AWS_REGION=us-east-2
 `forcePathStyle: true` is required for the AWS SDK for JavaScript when using a custom S3 endpoint.
 </Admonition>
 
-## Pull credentials with neonctl
+## Pull credentials with neon
 
-For local development, `neonctl env pull` writes storage credentials to your `.env` file automatically. No manual copy-paste from the API response:
+For local development, `neon env pull` writes storage credentials to your `.env` file automatically. No manual copy-paste from the API response:
 
 ```bash
-neonctl env pull --file .env.local
+neon env pull --file .env.local
 ```
 
 This populates `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION` for the current branch alongside your database connection string. To check the current credential status:
 
 ```bash
-neonctl config status
+neon config status
 ```
 
 For production deployments, use the [API-based workflow](#creating-a-credential) to create named, scoped credentials with optional expiry.

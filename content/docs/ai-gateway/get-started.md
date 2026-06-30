@@ -31,7 +31,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
 ```
 
 <Callout title="Using neon.ts?">
-If your project has a `neon.ts` file, declare `preview: { aiGateway: true }` and run `neonctl deploy`. Credentials are provisioned and pulled into your local `.env` automatically — no manual creation needed. See [Authentication](/docs/ai-gateway/authentication) for details.
+If your project has a `neon.ts` file, declare `preview: { aiGateway: true }` and run `neon deploy`. Credentials are provisioned and pulled into your local `.env` automatically — no manual creation needed. See [Authentication](/docs/ai-gateway/authentication) for details.
 </Callout>
 
 Store the credential as an environment variable:

@@ -6,7 +6,7 @@ This reference walks through wiring up Sentry for error and performance monitori
 
 ## Sentry (error & performance monitoring)
 
-Because the runtime is a normal Node process, use the Node SDK `@sentry/node` — not an edge/serverless wrapper. It bundles cleanly through `neonctl deploy`'s esbuild with no extra build config.
+Because the runtime is a normal Node process, use the Node SDK `@sentry/node` — not an edge/serverless wrapper. It bundles cleanly through `neon deploy`'s esbuild with no extra build config.
 
 There are three layers worth instrumenting, and errors from all of them flow into a single Sentry project:
 
@@ -46,15 +46,15 @@ import { Hono } from "hono";
 // ... rest of the function
 ```
 
-- **Gate `enabled` on the DSN.** Local dev (`neonctl dev`) and any branch where you haven't configured the secret then become a no-op — no init, no noise — without changing code.
-- **Tag the environment off the injected branch name.** Each Neon branch runs its own copy of the function and the runtime injects `NEON_BRANCH` (the branch **name**, e.g. `main` or `preview/add-auth`) into every one of them — including the default branch. The same value is written into local dev by `neonctl env pull` / `neon-env run` / `neonctl dev`, so local and deployed runs agree. Because it's always present, don't use it as a boolean flag (that tags every branch the same). Instead compare it against your default branch name (pass it in as e.g. `PRODUCTION_BRANCH` via `neon.ts` `env`) so the default branch reads as `production` and feature/preview branches are tagged by name — keeping them separable in the Sentry dashboard.
+- **Gate `enabled` on the DSN.** Local dev (`neon dev`) and any branch where you haven't configured the secret then become a no-op — no init, no noise — without changing code.
+- **Tag the environment off the injected branch name.** Each Neon branch runs its own copy of the function and the runtime injects `NEON_BRANCH` (the branch **name**, e.g. `main` or `preview/add-auth`) into every one of them — including the default branch. The same value is written into local dev by `neon env pull` / `neon-env run` / `neon dev`, so local and deployed runs agree. Because it's always present, don't use it as a boolean flag (that tags every branch the same). Instead compare it against your default branch name (pass it in as e.g. `PRODUCTION_BRANCH` via `neon.ts` `env`) so the default branch reads as `production` and feature/preview branches are tagged by name — keeping them separable in the Sentry dashboard.
 
 ### 2. Provide the DSN as a deploy-time secret
 
 The DSN is your own secret, so set it per-deployment (see "Environment variables" in `SKILL.md`). Either pass it on deploy:
 
 ```bash
-neonctl functions deploy <slug> --src src/index.ts \
+neon functions deploy <slug> --src src/index.ts \
   --env "SENTRY_DSN=https://…@…ingest.us.sentry.io/…"
 ```
 
@@ -128,4 +128,4 @@ The same pattern generalizes to any Node integration (OpenTelemetry, structured 
 2. Gate it on an env var so local dev and unconfigured branches are a no-op.
 3. Pass secrets via `--env KEY=VALUE` on deploy or the function's `env` in `neon.ts`.
 
-Standard Node SDKs bundle through `neonctl deploy`'s esbuild without changes.
+Standard Node SDKs bundle through `neon deploy`'s esbuild without changes.

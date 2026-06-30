@@ -74,7 +74,7 @@ Key points:
 
 - **Module scope.** Build the `McpServer`, register its tools, create the `StreamableHTTPTransport`, and open the `pg` pool once at module load — they're reused across every request the isolate serves (see [runtime limits](../SKILL.md#timeouts-and-runtime-limits)). Connect the transport lazily with the `isConnected()` guard so it happens once.
 - **State in Postgres.** Module memory doesn't survive isolate eviction, and several isolates run in parallel — so the source of truth for anything a tool reads or writes belongs in Postgres, not an in-memory structure.
-- **The URL.** After `neonctl deploy`, the server lives at `https://<branch_id>-<slug>.compute.…neon.tech/mcp`. Point any streamable-HTTP MCP client at that `/mcp` path.
+- **The URL.** After `neon deploy`, the server lives at `https://<branch_id>-<slug>.compute.…neon.tech/mcp`. Point any streamable-HTTP MCP client at that `/mcp` path.
 
 ## Authenticating the server
 
@@ -134,4 +134,4 @@ This keeps the secret server-side, costs nothing to operate, and is trivial to r
 
 ## Testing
 
-Drive the server with any MCP client. [`mcporter`](https://github.com/instructa/mcporter) is a quick CLI for it — `mcporter list <url>/mcp --schema` lists the tools and `mcporter call "<url>/mcp.<tool>" key=value` invokes one (`--allow-http` for a local `neonctl dev` URL). To wire it into a client interactively, `npx add-mcp <url>/mcp -a <agent>` writes the client config for you.
+Drive the server with any MCP client. [`mcporter`](https://github.com/instructa/mcporter) is a quick CLI for it — `mcporter list <url>/mcp --schema` lists the tools and `mcporter call "<url>/mcp.<tool>" key=value` invokes one (`--allow-http` for a local `neon dev` URL). To wire it into a client interactively, `npx add-mcp <url>/mcp -a <agent>` writes the client config for you.
