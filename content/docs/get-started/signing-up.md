@@ -176,7 +176,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
    - For macOS using Homebrew:
 
      ```bash
-     brew install neon
+     brew install neonctl
      ```
 
    - Using NPM (applicable for all platforms that support Node.js):

@@ -92,7 +92,7 @@ To make this seamless, we can use a Git `post-checkout` hook. This script trigge
 ### Prerequisites
 
 - A [Neon account](https://console.neon.tech)
-- The [Neon CLI](/docs/cli) installed (`npm i -g neon` or `brew install neon`)
+- The [Neon CLI](/docs/cli) installed (`npm i -g neon` or `brew install neonctl`)
 - Your project configured with a `.env` file containing:
 
   ```env
@@ -175,7 +175,7 @@ if [ ! -f "$ENV_FILE" ]; then
 fi
 
 if ! command -v neon &>/dev/null; then
-  echo "❌ Neon CLI not found. Install it with: brew install neon  OR  npm i -g neon"
+  echo "❌ Neon CLI not found. Install it with: brew install neonctl  OR  npm i -g neon"
   exit 1
 fi
 

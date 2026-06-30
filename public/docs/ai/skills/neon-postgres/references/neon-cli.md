@@ -7,7 +7,7 @@ The Neon CLI is a command-line interface for managing Neon Serverless Postgres d
 **macOS (Homebrew):**
 
 ```bash
-brew install neon
+brew install neonctl
 ```
 
 **npm (cross-platform):**

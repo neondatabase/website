@@ -16,7 +16,7 @@ Install once:
 ```bash
 npm i -g neon
 # or
-brew install neon
+brew install neonctl
 ```
 
 Authenticate with `neon auth` (opens a browser once), or set `NEON_API_KEY` for headless use.
