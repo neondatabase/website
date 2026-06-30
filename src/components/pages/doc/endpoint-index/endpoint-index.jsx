@@ -12,17 +12,10 @@ import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import ExternalIcon from 'icons/external.inline.svg';
+import { METHOD_TEXT_FALLBACK_STYLE, METHOD_TEXT_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
 const NEVER_AUTO_EXPAND = new Set(['auth-legacy']);
-
-const METHOD_COLOR = {
-  GET: 'text-[#00B87B] dark:text-green-45',
-  POST: 'text-[#426CE0] dark:text-blue-70',
-  PUT: 'text-[#BE8A3C] dark:text-brown-70',
-  PATCH: 'text-[#E9943E] dark:text-yellow-70',
-  DELETE: 'text-[#E2301D] dark:text-[#FF5645]',
-};
 
 function collectProps(props, names = []) {
   if (!props) return names;
@@ -55,27 +48,24 @@ const MATCH_LABELS = {
 };
 
 const TagSection = ({ tag, display, operations, open, onToggle }) => (
-  <div className="rounded-[10px] border border-gray-new-90 dark:border-gray-new-20">
+  <div className="overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
     <button
       type="button"
       onClick={onToggle}
-      className="flex w-full items-center gap-2 px-4 py-3 text-left"
+      className="flex w-full items-center gap-2 px-4 py-3 text-left transition-colors duration-200 hover:bg-gray-new-98 dark:hover:bg-gray-new-10"
     >
       <span
-        className={cn(
-          'text-[11px] transition-transform duration-200',
-          open ? 'rotate-90' : 'rotate-0'
-        )}
+        className={cn('text-xs transition-transform duration-200', open ? 'rotate-90' : 'rotate-0')}
       >
         ▶
       </span>
-      <span className="flex-1 text-[13px] font-semibold text-black-pure dark:text-white">
+      <span className="flex-1 text-sm font-semibold text-black-pure dark:text-white">
         {display}
       </span>
-      <span className="font-mono text-[11px] text-gray-new-50 dark:text-gray-new-60">
+      <span className="font-mono text-xs text-gray-new-50 dark:text-gray-new-60">
         {operations.length}
       </span>
-      <span className="text-[11px] text-gray-new-50 dark:text-gray-new-60">
+      <span className="text-xs text-gray-new-50 dark:text-gray-new-60">
         {open ? 'Hide' : 'Show'}
       </span>
     </button>
@@ -102,16 +92,16 @@ const TagSection = ({ tag, display, operations, open, onToggle }) => (
               >
                 <span
                   className={cn(
-                    'w-[46px] shrink-0 font-mono text-[11px] font-semibold uppercase',
-                    METHOD_COLOR[method] ?? 'text-gray-new-50 dark:text-gray-new-60'
+                    'w-12 shrink-0 font-mono text-xs font-semibold uppercase',
+                    METHOD_TEXT_STYLES[method] ?? METHOD_TEXT_FALLBACK_STYLE
                   )}
                 >
                   {method}
                 </span>
-                <code className="flex-1 overflow-hidden font-mono text-[12px] text-ellipsis whitespace-nowrap text-gray-new-30 dark:text-gray-new-70">
+                <code className="flex-1 overflow-hidden font-mono text-xs text-ellipsis whitespace-nowrap text-gray-new-30 dark:text-gray-new-70">
                   {op.path}
                 </code>
-                <span className="shrink-0 text-right text-[12px] text-gray-new-50 group-hover:text-gray-new-40 dark:text-gray-new-60 dark:group-hover:text-gray-new-50">
+                <span className="shrink-0 text-right text-xs text-gray-new-50 group-hover:text-gray-new-40 dark:text-gray-new-60 dark:group-hover:text-gray-new-50 md:hidden">
                   {op.summary}
                 </span>
               </a>
@@ -225,7 +215,7 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
   const results = trimmed.length >= 2 ? fuse.search(trimmed) : null;
 
   return (
-    <div className="min-w-0 flex-1 pb-32 lg:pb-24 md:pb-20">
+    <div className="max-w-208 min-w-0 flex-1 pb-32 lg:max-w-none lg:pb-24 md:pb-20">
       {breadcrumbs?.length > 0 && (
         <Breadcrumbs className="mb-7!" breadcrumbs={breadcrumbs} baseUrl={DOCS_BASE_PATH} />
       )}
@@ -251,7 +241,7 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search endpoints, fields, parameters..."
-          className="w-full rounded-lg border border-gray-new-90 bg-white px-4 py-2.5 font-mono text-sm text-gray-new-20 placeholder-gray-new-50 transition-colors duration-100 outline-none focus:border-gray-new-50 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-80 dark:placeholder-gray-new-60 dark:focus:border-gray-new-50"
+          className="h-9 w-full border border-gray-new-90 bg-white px-4 text-sm text-gray-new-20 placeholder-gray-new-50 transition-colors duration-200 outline-none focus:border-gray-new-50 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-80 dark:placeholder-gray-new-60 dark:focus:border-gray-new-50 md:text-base"
         />
         {query && (
           <button
@@ -267,7 +257,7 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
 
       {results !== null ? (
         <div className="mt-4">
-          <p className="mb-3 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          <p className="mb-3 text-sm text-gray-new-50 dark:text-gray-new-60">
             {results.length === 0
               ? `No results for "${trimmed}"`
               : `${results.length} result${results.length === 1 ? '' : 's'} for "${trimmed}"`}
@@ -281,29 +271,29 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
                 <a
                   key={item.id}
                   href={`${DOCS_BASE_PATH}reference/api/${item.tag}/${item.id}`}
-                  className="group flex flex-col gap-1 rounded-[10px] border border-gray-new-90 px-4 py-3 transition-colors duration-100 hover:bg-gray-new-98 dark:border-gray-new-20 dark:hover:bg-gray-new-10"
+                  className="group flex flex-col gap-1 border border-gray-new-90 px-4 py-3 transition-colors duration-200 hover:bg-gray-new-98 dark:border-gray-new-20 dark:hover:bg-gray-new-10"
                 >
                   <div className="flex items-center gap-3">
                     <span
                       className={cn(
-                        'w-[46px] shrink-0 font-mono text-[11px] font-semibold uppercase',
-                        METHOD_COLOR[method] ?? 'text-gray-new-50 dark:text-gray-new-60'
+                        'w-12 shrink-0 text-sm font-semibold uppercase',
+                        METHOD_TEXT_STYLES[method] ?? METHOD_TEXT_FALLBACK_STYLE
                       )}
                     >
                       {method}
                     </span>
-                    <code className="flex-1 overflow-hidden font-mono text-[12px] text-ellipsis whitespace-nowrap text-gray-new-30 dark:text-gray-new-70">
+                    <code className="flex-1 overflow-hidden text-sm text-ellipsis whitespace-nowrap text-gray-new-30 dark:text-gray-new-70">
                       {item.path}
                     </code>
-                    <span className="shrink-0 rounded bg-gray-new-95 px-1.5 py-0.5 font-mono text-[10px] text-gray-new-50 dark:bg-gray-new-15 dark:text-gray-new-60">
+                    <span className="shrink-0 rounded-sm bg-gray-new-95 px-1.5 py-0.5 text-sm text-gray-new-50 dark:bg-gray-new-15 dark:text-gray-new-60">
                       {item.tagDisplay}
                     </span>
                   </div>
-                  <p className="pl-[58px] text-[13px] text-gray-new-40 group-hover:text-gray-new-30 dark:text-gray-new-60 dark:group-hover:text-gray-new-50">
+                  <p className="pl-14 text-sm text-gray-new-40 group-hover:text-gray-new-30 dark:text-gray-new-60 dark:group-hover:text-gray-new-50 sm:pl-0">
                     {item.summary}
                   </p>
                   {contextMatch && matchedWord && (
-                    <p className="pl-[58px] text-[11px] text-gray-new-50 dark:text-gray-new-60">
+                    <p className="pl-14 text-xs text-gray-new-50 dark:text-gray-new-60 sm:pl-0">
                       Matched: {MATCH_LABELS[contextMatch.key]}{' '}
                       <code className="font-mono">{matchedWord}</code>
                     </p>
@@ -315,14 +305,14 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
         </div>
       ) : (
         <>
-          <div className="mt-1 flex items-center justify-between">
-            <p className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          <div className="mt-3 flex items-center justify-between">
+            <p className="text-sm text-gray-new-50 dark:text-gray-new-60">
               All {total} Neon API endpoints
             </p>
             <button
               type="button"
               onClick={toggleAll}
-              className="text-[12px] text-gray-new-50 transition-colors duration-100 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-50"
+              className="text-sm text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-50"
             >
               {allExpanded ? 'Collapse all' : 'Expand all'}
             </button>

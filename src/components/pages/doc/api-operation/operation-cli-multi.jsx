@@ -37,17 +37,17 @@ const MultiCmdSection = ({ operation, state, paramValues, copy, copiedId }) => {
             <button
               type="button"
               onClick={state.reset}
-              className="rounded border border-gray-new-90 px-1.5 py-0.5 text-[10px] text-gray-new-50 transition-all hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60"
+              className="border border-gray-new-90 px-1.5 py-0.5 text-sm text-gray-new-50 transition-all hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60"
             >
               Reset
             </button>
           )
         }
       />
-      <p className="mb-1 text-[13px] text-gray-new-50 dark:text-gray-new-60">
+      <p className="mb-1 text-sm text-gray-new-50 dark:text-gray-new-60">
         This operation maps to separate CLI commands depending on what you want to update.
       </p>
-      <p className="mb-4 text-[11px] text-gray-new-60 italic dark:text-gray-new-50">
+      <p className="mb-4 text-sm text-gray-new-60 italic dark:text-gray-new-50">
         Click values to edit · ☑ to include in command
       </p>
       {cliCommands.map((cmd, cmdIdx) => {
@@ -77,11 +77,11 @@ const MultiCmdSection = ({ operation, state, paramValues, copy, copiedId }) => {
             }
           >
             <div className="mb-2 flex items-center gap-1.5">
-              <span className="text-[11px] text-gray-new-50 dark:text-gray-new-60">Covers</span>
+              <span className="text-sm text-gray-new-50 dark:text-gray-new-60">Covers</span>
               {cmd.covers.map((c) => (
                 <code
                   key={c}
-                  className="rounded bg-gray-new-94 px-1.5 py-0.5 font-mono text-[11px] text-gray-new-20 dark:bg-gray-new-15 dark:text-gray-new-80"
+                  className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm text-gray-new-20 dark:border-gray-new-30 dark:text-gray-new-80"
                 >
                   {c}
                 </code>

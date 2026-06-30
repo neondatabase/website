@@ -1,11 +1,12 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useMemo, useState, useCallback, useEffect, useRef } from 'react';
+import { useMemo } from 'react';
 
-import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import CodeTabs from 'components/pages/doc/code-tabs';
 import { buildCliCommand } from 'utils/api-ref.mjs';
-import { cn } from 'utils/cn';
+
+import ApiCodeBlock from './api-code-block';
 
 const LABELS = {
   cli: 'CLI',
@@ -102,78 +103,15 @@ function availableExamples(operation) {
   return examples;
 }
 
-function CodeCard({ label, descriptor, code, copied, onCopy }) {
-  const title = descriptor ? `${label} · ${descriptor}` : label;
-  return (
-    <div className="overflow-hidden rounded-xl border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10">
-      <div className="flex items-center justify-between border-b border-gray-new-90 px-4 py-2.5 dark:border-gray-new-20">
-        <span className="font-mono text-[12px] text-gray-new-50 dark:text-gray-new-60">
-          {title}
-        </span>
-        <button
-          type="button"
-          onClick={onCopy}
-          className={cn(
-            'rounded border px-2 py-0.5 font-mono text-[11px] transition-all',
-            copied
-              ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
-              : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60'
-          )}
-        >
-          {copied ? 'Copied' : 'Copy'}
-        </button>
-      </div>
-      <pre className="overflow-x-auto p-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-gray-new-20 dark:text-gray-new-80">
-        {code}
-      </pre>
-    </div>
-  );
-}
-
-CodeCard.propTypes = {
-  label: PropTypes.string.isRequired,
-  descriptor: PropTypes.string,
-  code: PropTypes.string.isRequired,
-  copied: PropTypes.bool,
-  onCopy: PropTypes.func.isRequired,
-};
-
 const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
   const examples = useMemo(() => availableExamples(operation), [operation]);
-  const [selectedId, setSelectedId] = useState(null);
-  const { handleCopy } = useCopyToClipboard(1800);
-  const [copiedId, setCopiedId] = useState(null);
-  const clearCopiedTimer = useRef(null);
-
-  useEffect(() => {
-    if (examples.length === 0) {
-      setSelectedId(null);
-      return;
-    }
-    if (selectedId && !examples.some((example) => example.id === selectedId)) {
-      setSelectedId(null);
-    }
-  }, [examples, selectedId]);
-
-  useEffect(
-    () => () => {
-      if (clearCopiedTimer.current) clearTimeout(clearCopiedTimer.current);
-    },
-    []
-  );
-
-  const copy = useCallback(
-    (id, text) => {
-      handleCopy(text);
-      setCopiedId(id);
-      if (clearCopiedTimer.current) clearTimeout(clearCopiedTimer.current);
-      clearCopiedTimer.current = setTimeout(() => setCopiedId(null), 1800);
-    },
-    [handleCopy]
+  const exampleLabels = examples.map((example) =>
+    example.descriptor
+      ? `${LABELS[example.id] ?? example.label} ${example.descriptor}`
+      : (LABELS[example.id] ?? example.label)
   );
 
   const restCode = operation.examples?.representative?.curl ?? operation.examples?.curl ?? '';
-  const selected = examples.find((example) => example.id === selectedId) ?? null;
   const noRequired =
     requiredLeafCount === null
       ? (operation.requestBody?.requiredFields ?? []).length === 0
@@ -186,65 +124,30 @@ const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
         Quick start
       </h2>
 
-      <CodeCard
-        label="REST API"
-        descriptor="curl"
-        code={restCode}
-        copied={copiedId === 'rest'}
-        onCopy={() => copy('rest', restCode)}
-      />
+      <ApiCodeBlock label="REST API" descriptor="curl" code={restCode} />
 
       {emptyBodyAllowed && (
-        <p className="mt-3 text-[12px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">
+        <p className="mt-3 text-sm leading-relaxed text-gray-new-50 dark:text-gray-new-60">
           Every field below is optional. An empty body works too.
         </p>
       )}
 
       {examples.length > 0 && (
         <div className="mt-6">
-          <div className="mb-3 flex flex-wrap items-center gap-2">
-            <span className="mr-1 text-[13px] text-gray-new-50 dark:text-gray-new-60">
-              Also available in
-            </span>
-            {examples.map((example) => {
-              const selectedPill = selected?.id === example.id;
-              return (
-                <button
-                  key={example.id}
-                  type="button"
-                  onClick={() =>
-                    setSelectedId((currentId) => (currentId === example.id ? null : example.id))
-                  }
-                  aria-pressed={selectedPill}
-                  aria-label={
-                    example.descriptor ? `${example.label} ${example.descriptor}` : example.label
-                  }
-                  className={cn(
-                    'flex items-center gap-1 rounded-full border px-4 py-1.5 text-[13px] font-medium transition-colors',
-                    selectedPill
-                      ? 'border-[#00B87B]/30 bg-[#00B87B]/10 text-[#00B87B] dark:text-white'
-                      : 'border-gray-new-90 text-gray-new-40 hover:border-gray-new-70 dark:border-gray-new-20 dark:text-gray-new-70'
-                  )}
-                >
-                  <span>{LABELS[example.id] ?? example.label}</span>
-                  {example.descriptor && (
-                    <span className="font-mono text-[10px] text-gray-new-50 dark:text-gray-new-60">
-                      {example.descriptor}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-          {selected && (
-            <CodeCard
-              label={selected.label}
-              descriptor={selected.descriptor}
-              code={selected.code}
-              copied={copiedId === selected.id}
-              onCopy={() => copy(selected.id, selected.code)}
-            />
-          )}
+          <span className="mb-4 block scroll-mt-20 text-base leading-tight font-semibold tracking-tight">
+            Also available in
+          </span>
+          <CodeTabs labels={exampleLabels}>
+            {examples.map((example) => (
+              <ApiCodeBlock
+                key={example.id}
+                label={LABELS[example.id] ?? example.label}
+                descriptor={example.descriptor}
+                code={example.code}
+                showFilename={false}
+              />
+            ))}
+          </CodeTabs>
         </div>
       )}
     </section>

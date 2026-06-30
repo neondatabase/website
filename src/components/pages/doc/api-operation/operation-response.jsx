@@ -5,8 +5,12 @@ import { useState, useCallback } from 'react';
 
 import { AnnotatedField } from 'components/pages/doc/annotated-field';
 import DepthControl from 'components/pages/doc/depth-control';
+import CheckIcon from 'components/shared/code-block-wrapper/images/check.inline.svg';
+import CopyIcon from 'components/shared/code-block-wrapper/images/copy.inline.svg';
+import { INLINE_CODE_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
+import ApiCodeBlock from './api-code-block';
 import { SectionHeader, JsonHighlightValue } from './operation-shared';
 
 // Response section — handles API/SDK Schema vs Example tabs, plus the CLI
@@ -65,7 +69,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
 
     {/* MCP response hints — plain paragraph, no tabs */}
     {current === 'mcp' && (
-      <p className="text-[13px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">
+      <p className="text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70">
         The MCP client receives the same JSON structure as the REST API response.
       </p>
     )}
@@ -74,28 +78,25 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
     {current === 'cli' && (
       <>
         {operation.cli?.tableOutput ? (
-          <div className="overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
-            <div className="border-b border-gray-new-90 bg-gray-new-98 px-3.5 py-2 dark:border-gray-new-20 dark:bg-gray-new-10">
-              <span className="text-[12px] text-gray-new-50 dark:text-gray-new-60">
-                table (default)
-              </span>
-            </div>
-            <pre className="overflow-x-auto bg-gray-new-98 p-4 font-mono text-[12px] leading-relaxed whitespace-pre text-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-70">
-              {operation.cli.tableOutput}
-            </pre>
-          </div>
+          <ApiCodeBlock
+            label="table (default)"
+            code={operation.cli.tableOutput}
+            language="text"
+            preClassName="text-sm"
+            wrap={false}
+          />
         ) : (
-          <p className="text-[13px] text-gray-new-50 dark:text-gray-new-60">
+          <p className="text-sm text-gray-new-50 dark:text-gray-new-60">
             Run{' '}
-            <code className="rounded bg-gray-new-95 px-1.5 py-0.5 font-mono text-[12px] dark:bg-gray-new-15">
+            <code className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm text-black-pure dark:border-gray-new-30 dark:text-white">
               neon --help
             </code>{' '}
             to see output format.
           </p>
         )}
-        <p className="mt-3 text-[13px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">
+        <p className="mt-3 text-sm leading-relaxed text-gray-new-50 dark:text-gray-new-60">
           For the full response, use{' '}
-          <code className="rounded bg-gray-new-95 px-1.5 py-0.5 font-mono text-[12px] dark:bg-gray-new-15">
+          <code className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm text-black-pure dark:border-gray-new-30 dark:text-white">
             --output json
           </code>
           . The JSON output matches the REST API response.
@@ -108,19 +109,20 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
       <>
         {operation.response?.descriptionHtml && (
           <div
-            className="mb-4 text-[13px] leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_code]:rounded [&_code]:bg-gray-new-95 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm [&_code]:dark:bg-gray-new-15 [&_p+p]:mt-3"
+            className={cn(
+              'mb-4 text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_p+p]:mt-3',
+              INLINE_CODE_STYLES
+            )}
             dangerouslySetInnerHTML={{ __html: operation.response.descriptionHtml }}
           />
         )}
         {respTree.length === 0 && operation.response?.example == null ? (
-          <p className="text-[13px] text-gray-new-50 dark:text-gray-new-60">
-            No example available.
-          </p>
+          <p className="text-sm text-gray-new-50 dark:text-gray-new-60">No example available.</p>
         ) : (
-          <div className="overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
+          <div className="max-w-full overflow-hidden border border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure">
             {/* Header bar: tabs left, controls right */}
-            <div className="flex items-stretch justify-between border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10">
-              <div className="flex">
+            <div className="relative flex min-h-11 w-full items-stretch justify-between bg-gray-new-98 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:bg-gray-new-80 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
+              <div className="relative z-10 no-scrollbars flex flex-nowrap gap-5 overflow-auto pl-5">
                 {['schema', ...(operation.response?.example != null ? ['example'] : [])].map(
                   (v) => (
                     <button
@@ -128,10 +130,10 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
                       type="button"
                       onClick={() => state.setView(v)}
                       className={cn(
-                        'px-4 py-2 text-[11px] font-medium capitalize transition-colors',
+                        'relative z-10 cursor-pointer border-b pt-2.5 pb-3.5 text-sm leading-none font-medium tracking-extra-tight whitespace-nowrap capitalize transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
                         state.view === v
-                          ? 'border-b-2 border-b-[#00B87B] bg-[rgba(0,229,153,0.04)] text-[#00B87B] dark:bg-[rgba(0,229,153,0.05)] dark:text-green-45'
-                          : 'border-b-2 border-b-transparent text-gray-new-50 hover:bg-gray-new-95 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:bg-gray-new-15'
+                          ? 'border-black-pure text-black-pure after:opacity-100 dark:border-white dark:text-white'
+                          : 'border-transparent text-gray-new-40 dark:text-gray-new-60'
                       )}
                     >
                       {v}
@@ -139,35 +141,40 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
                   )
                 )}
               </div>
-              <div className="flex items-center gap-2.5 px-3.5">
+              <div className="relative z-10 flex items-center gap-2.5 px-3.5">
                 {state.view === 'schema' && (
-                  <>
-                    <DepthControl value={state.depth} onChange={state.setDepth} />
-                    <span className="h-4 w-px bg-gray-new-90 dark:bg-gray-new-20" />
-                  </>
+                  <DepthControl value={state.depth} onChange={state.setDepth} />
                 )}
                 {operation.response?.example != null && (
-                  <button
-                    type="button"
-                    onClick={() =>
-                      copy('resp', JSON.stringify(operation.response.example, null, 2))
-                    }
-                    className={cn(
-                      'rounded border px-2 py-0.5 font-mono text-[11px] transition-all',
-                      copiedId === 'resp'
-                        ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
-                        : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 dark:border-gray-new-20 dark:text-gray-new-60'
-                    )}
-                  >
-                    {copiedId === 'resp' ? '✓ Copied' : 'Copy JSON'}
-                  </button>
+                  <>
+                    <span className="h-4 w-px bg-gray-new-90 dark:bg-gray-new-20" />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        copy('resp', JSON.stringify(operation.response.example, null, 2))
+                      }
+                      className={cn(
+                        'border border-gray-new-80 bg-white p-1.5 text-gray-new-40 transition-[background-color,color] duration-200 hover:bg-gray-new-90 hover:text-gray-new-30 dark:border-gray-new-20 dark:bg-black-pure dark:text-gray-new-60 dark:hover:bg-gray-new-8 dark:hover:text-gray-new-80',
+                        copiedId === 'resp'
+                          ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
+                          : ''
+                      )}
+                      aria-label={copiedId === 'resp' ? 'Copied JSON' : 'Copy JSON'}
+                    >
+                      {copiedId === 'resp' ? (
+                        <CheckIcon className="h-3.5 w-3.5 text-current" />
+                      ) : (
+                        <CopyIcon className="h-3.5 w-3.5 text-current" />
+                      )}
+                    </button>
+                  </>
                 )}
               </div>
             </div>
 
             {/* Schema tab */}
             {state.view === 'schema' && (
-              <div className="py-1.5">
+              <div className="py-3">
                 {respTree.length > 0 ? (
                   respTree.map((node) => (
                     <AnnotatedField
@@ -180,7 +187,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
                     />
                   ))
                 ) : (
-                  <p className="px-4 py-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
+                  <p className="px-4 py-3 text-sm text-gray-new-50 dark:text-gray-new-60">
                     No schema available.
                   </p>
                 )}
@@ -189,7 +196,7 @@ export const ResponseSection = ({ operation, respTree, current, state, copy, cop
 
             {/* Example tab — only rendered when example exists */}
             {state.view === 'example' && operation.response?.example != null && (
-              <pre className="max-h-[600px] overflow-auto bg-gray-new-98 p-4 font-mono text-[11px] leading-relaxed dark:bg-gray-new-10">
+              <pre className="max-h-[600px] overflow-auto bg-white p-4 font-mono text-sm leading-relaxed dark:bg-black-pure">
                 <JsonHighlightValue value={operation.response.example} indent={0} />
               </pre>
             )}

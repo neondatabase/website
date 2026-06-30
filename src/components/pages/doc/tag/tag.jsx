@@ -4,10 +4,10 @@ import { cn } from 'utils/cn';
 
 const themes = {
   new: 'text-[#00B87B] dark:text-green-45 bg-[#00B87B]/10 dark:bg-green-45/10',
-  beta: 'text-[#E9943E] dark:text-yellow-70 bg-[#E9943E]/10 dark:bg-yellow-70/10',
+  beta: 'text-blue-70 bg-blue-70/14 dark:text-[#94B5F7] dark:bg-[#94B5F7]/14',
   'coming soon':
     'text-[#92400E] dark:text-[#FCD34D] bg-[#FEF3C7] dark:bg-[#78350F]/30 border border-[#FDE68A] dark:border-[#92400E]/50',
-  deprecated: 'text-[#1897DF] dark:text-blue-80 bg-[#1897DF]/10 dark:bg-blue-80/10',
+  deprecated: 'text-[#EC6F09] bg-[#EC6F09]/14 dark:text-[#F99D51] dark:bg-[#F99D51]/14',
   'private preview':
     'text-gray-new-30 bg-gray-new-90 font-mono dark:text-gray-new-70 dark:bg-gray-new-15',
   default: 'text-gray-new-50 dark:text-gray-new-80 bg-gray-new-50/10 dark:bg-gray-new-80/10',

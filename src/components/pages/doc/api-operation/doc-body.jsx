@@ -3,6 +3,8 @@
 import PropTypes from 'prop-types';
 import { useId, useState } from 'react';
 
+import Chevron from 'icons/chevron-right-lg.inline.svg';
+import { INLINE_CODE_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
 import { fieldDefaultLabel, fieldTitle } from './field-label';
@@ -27,29 +29,41 @@ function descriptionText(node) {
   return node?.details?.description ?? node?.description ?? '';
 }
 
-function TypeBadge({ type }) {
-  if (!type) return null;
+function TypeBadge({ label, variant }) {
+  if (!label) return null;
   return (
-    <span className="rounded bg-gray-new-90 px-1.5 py-0.5 font-mono text-[10px] leading-normal font-medium text-gray-new-40 dark:bg-gray-new-20 dark:text-gray-new-70">
-      {type}
+    <span
+      className={cn(
+        'rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white',
+        variant === 'value' &&
+          'bg-gray-new-98 px-1.5 py-0.5 text-gray-new-40 dark:border-gray-new-20 dark:bg-white/10 dark:text-gray-new-70'
+      )}
+    >
+      {label}
     </span>
   );
 }
 
 TypeBadge.propTypes = {
-  type: PropTypes.string,
+  label: PropTypes.string,
+  variant: PropTypes.oneOf(['type', 'value']),
 };
 
 function MetadataBadges({ node, row }) {
   return (
     <>
+      {row?.common && (
+        <span className="border border-[#00B87B]/40 bg-transparent px-1.5 py-0.5 text-sm font-semibold text-[#00B87B] dark:border-green-45/40 dark:text-green-45">
+          common
+        </span>
+      )}
       {row?.outOfObject && (
-        <span className="rounded bg-gray-new-90 px-1.5 py-0.5 text-[10px] font-medium text-gray-new-50 dark:bg-gray-new-20 dark:text-gray-new-60">
+        <span className="border border-gray-new-70 bg-transparent px-1.5 py-0.5 text-sm font-medium text-gray-new-50 dark:border-gray-new-30 dark:text-gray-new-60">
           top-level field
         </span>
       )}
       {node?.deprecated && (
-        <span className="rounded bg-[#E2301D]/10 px-1.5 py-0.5 text-[10px] font-medium text-[#E2301D] dark:bg-[#FF5645]/10 dark:text-[#FF5645]">
+        <span className="rounded border border-[#E2301D]/40 bg-transparent px-1.5 py-0.5 text-sm font-medium text-[#E2301D] dark:border-[#FF5645]/40 dark:text-[#FF5645]">
           deprecated
         </span>
       )}
@@ -60,6 +74,7 @@ function MetadataBadges({ node, row }) {
 MetadataBadges.propTypes = {
   node: PropTypes.object,
   row: PropTypes.shape({
+    common: PropTypes.bool,
     outOfObject: PropTypes.bool,
   }),
 };
@@ -76,10 +91,10 @@ function EnumPills({ node }) {
           <span
             key={String(value)}
             className={cn(
-              'rounded px-1.5 py-0.5 font-mono text-[11px]',
+              'rounded-sm px-1.5 py-0.5 font-mono text-sm',
               isActive
-                ? 'bg-green-45/15 font-semibold text-[#00B87B] dark:text-green-45'
-                : 'bg-gray-new-90/70 text-gray-new-50 dark:bg-gray-new-20 dark:text-gray-new-60'
+                ? 'border border-[#00B87B]/40 bg-transparent font-semibold text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
+                : 'border border-gray-new-70 bg-transparent text-gray-new-50 dark:border-gray-new-30 dark:text-gray-new-60'
             )}
           >
             {String(value)}
@@ -103,7 +118,7 @@ EnumPills.propTypes = {
 function ConstraintText({ node }) {
   if (!node?.constraints) return null;
   return (
-    <p className="mt-2 font-mono text-[11px] text-gray-new-50 dark:text-gray-new-60">
+    <p className="mt-2 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
       {node.constraints}
     </p>
   );
@@ -135,37 +150,33 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
                 aria-label={`Toggle ${title} field`}
                 aria-expanded={open}
                 aria-controls={childrenId}
-                className="mr-0.5 flex size-6 items-center justify-center text-[11px] text-gray-new-50 transition-transform dark:text-gray-new-60"
-                style={{ transform: open ? 'rotate(90deg)' : 'none' }}
+                className="mr-0.5 flex size-6 items-center justify-center text-gray-new-50 dark:text-gray-new-60"
               >
-                {'>'}
+                <Chevron className={cn('w-1.5', open && 'rotate-90')} />
               </button>
             )}
-            <span className="text-[13px] font-semibold text-black-pure dark:text-white">
-              {title}
-            </span>
+            <span className="text-sm font-semibold text-black-pure dark:text-white">{title}</span>
             <MetadataBadges node={node} row={row} />
           </div>
-          <code className="mt-1 block font-mono text-[12px] text-gray-new-50 dark:text-gray-new-60">
+          <code className="mt-1 block font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
             {node.key}
           </code>
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
-            <TypeBadge type={node.type} />
-            {defaultLabel && (
-              <span className="bg-gray-new-96 rounded px-1.5 py-0.5 font-mono text-[10px] text-gray-new-50 dark:bg-gray-new-15 dark:text-gray-new-60">
-                default {defaultLabel}
-              </span>
-            )}
+            <TypeBadge label={node.type} />
+            {defaultLabel && <TypeBadge label={`default: ${defaultLabel}`} variant="value" />}
           </div>
         </div>
         <div>
           {descriptionHtml(node) ? (
             <div
-              className="text-[12px] leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_a]:underline [&_code]:rounded [&_code]:bg-gray-new-94 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[11px] dark:[&_code]:bg-gray-new-15 [&_p+p]:mt-2"
+              className={cn(
+                'text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_a]:underline [&_p+p]:mt-2',
+                INLINE_CODE_STYLES
+              )}
               dangerouslySetInnerHTML={{ __html: descriptionHtml(node) }}
             />
           ) : (
-            <p className="text-[12px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">
+            <p className="text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70">
               {descriptionText(node)}
             </p>
           )}
@@ -217,6 +228,7 @@ DocField.propTypes = {
   path: PropTypes.string.isRequired,
   labels: PropTypes.object,
   row: PropTypes.shape({
+    common: PropTypes.bool,
     outOfObject: PropTypes.bool,
   }),
   depth: PropTypes.number,
@@ -234,7 +246,7 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
     .filter(Boolean);
 
   return (
-    <section className="overflow-hidden rounded-xl border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-10">
+    <section className="overflow-hidden border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-10">
       <div className="flex items-start gap-3 px-4 py-3 transition-colors hover:bg-gray-new-98 dark:hover:bg-gray-new-15">
         <button
           type="button"
@@ -242,39 +254,49 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
           aria-label={`Toggle ${section.label} section`}
           aria-expanded={open}
           aria-controls={fieldsId}
-          className="mt-0.5 flex size-7 shrink-0 items-center justify-center text-[11px] text-gray-new-50 transition-transform dark:text-gray-new-60"
-          style={{ transform: open ? 'rotate(90deg)' : 'none' }}
+          className="mt-0.5 flex size-7 shrink-0 items-center justify-center text-gray-new-50 dark:text-gray-new-60"
         >
-          {'>'}
+          <Chevron className={cn('w-1.5', open && 'rotate-90')} />
         </button>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
             <h3
               id={`body-${section.id}`}
-              className="scroll-mt-20 text-[14px] leading-tight font-semibold text-black-pure dark:text-white"
+              className="scroll-mt-20 text-sm leading-tight font-semibold text-black-pure dark:text-white"
             >
               {section.label}
             </h3>
+            {section.common && (
+              <span className="border border-[#00B87B]/40 bg-transparent px-1.5 py-0.5 text-sm font-semibold text-[#00B87B] dark:border-green-45/40 dark:text-green-45">
+                commonly set
+              </span>
+            )}
             {section.schemaPath && (
-              <code className="font-mono text-[11px] text-gray-new-50 dark:text-gray-new-60">
+              <code className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
                 {section.schemaPath}
               </code>
             )}
           </div>
           {section.blurb && (
-            <p className="mt-1 text-[12px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">
+            <p className="mt-1 text-sm leading-relaxed text-gray-new-50 dark:text-gray-new-60">
               {section.blurb}
             </p>
           )}
         </div>
-        <span className="shrink-0 font-mono text-[11px] text-gray-new-50 dark:text-gray-new-60">
+        <span className="shrink-0 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
           {rows.length} {rows.length === 1 ? 'field' : 'fields'}
         </span>
       </div>
       {open && (
         <div id={fieldsId} className="border-t border-gray-new-90 px-4 dark:border-gray-new-20">
-          {rows.map(({ path, node, outOfObject }) => (
-            <DocField key={path} node={node} path={path} labels={labels} row={{ outOfObject }} />
+          {rows.map(({ path, node, common, outOfObject }) => (
+            <DocField
+              key={path}
+              node={node}
+              path={path}
+              labels={labels}
+              row={{ common, outOfObject }}
+            />
           ))}
         </div>
       )}
@@ -286,12 +308,14 @@ SectionCard.propTypes = {
   section: PropTypes.shape({
     id: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    common: PropTypes.bool,
     blurb: PropTypes.string,
     collapsed: PropTypes.bool,
     schemaPath: PropTypes.string,
     rows: PropTypes.arrayOf(
       PropTypes.shape({
         path: PropTypes.string.isRequired,
+        common: PropTypes.bool,
         outOfObject: PropTypes.bool,
       })
     ).isRequired,
@@ -318,9 +342,8 @@ export function getRequiredLeafPaths(nodes, prefix = '', ancestorsRequired = tru
 function RequiredSummary({ requiredFields, bodyRequired }) {
   const count = requiredFields.length;
   return (
-    <div className="mb-4 rounded-lg border-l-2 border-[#00B87B] bg-[#00B87B]/5 px-4 py-3 dark:bg-green-45/5">
-      <p className="text-[13px] leading-relaxed text-gray-new-40 dark:text-gray-new-70">
-        <strong className="font-semibold text-black-pure dark:text-white">{count} required</strong>{' '}
+    <div className="mb-4 border-l-2 border-[#00B87B] bg-[#00B87B]/5 px-4 py-3 dark:bg-green-45/5">
+      <p className="text-sm leading-relaxed text-gray-new-40 dark:text-gray-new-70">
         {count === 0 ? (
           <>
             No field is required.
@@ -328,10 +351,13 @@ function RequiredSummary({ requiredFields, bodyRequired }) {
           </>
         ) : (
           <>
+            <strong className="font-semibold text-black-pure dark:text-white">
+              {count} required
+            </strong>{' '}
             Required:{' '}
             {requiredFields.map((field, index) => (
               <span key={field}>
-                <code className="rounded bg-gray-new-95 px-1 py-0.5 font-mono text-[12px] dark:bg-gray-new-15">
+                <code className="rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white">
                   {field}
                 </code>
                 {index < requiredFields.length - 1 ? ', ' : ''}
@@ -383,7 +409,7 @@ export function DocBodySection({ bodyTree, requestBody }) {
           ))}
         </div>
       ) : (
-        <div className="rounded-xl border border-gray-new-90 px-4 dark:border-gray-new-20">
+        <div className="border border-gray-new-90 px-4 dark:border-gray-new-20">
           {bodyTree.map((node) => (
             <DocField
               key={node.key}

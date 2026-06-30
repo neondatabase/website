@@ -3,7 +3,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
-import { TYPE_STYLES, getTypeColor } from 'utils/api-style';
+import { INLINE_CODE_STYLES, TYPE_STYLES, getTypeColor } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
 // ── Field validation ─────────────────────────────────────────────────────────
@@ -45,7 +45,7 @@ const TypeBadge = ({ type }) => {
   return (
     <span
       className={cn(
-        'rounded px-1.5 py-0.5 font-mono text-[10px] leading-normal font-medium',
+        'rounded px-1.5 py-0.5 font-mono text-sm leading-normal font-medium',
         TYPE_STYLES[type] ?? TYPE_STYLES.string
       )}
     >
@@ -62,54 +62,56 @@ const DetailCard = ({ node, onClose }) => {
   const d = node.details;
   if (!d) return null;
   return (
-    <div className="relative my-1 mr-3 ml-8 rounded-lg border border-gray-new-90 bg-gray-new-98 p-3.5 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-10">
+    <div className="relative my-1 mr-5 ml-8 border border-gray-new-80 bg-white p-5 dark:border-gray-new-20 dark:bg-gray-new-8">
       <button
         type="button"
         onClick={onClose}
-        className="absolute top-2 right-2 rounded px-1.5 py-0.5 text-sm text-gray-new-50 hover:text-gray-new-20 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+        className="absolute top-3 right-3 px-1.5 py-0.5 text-xl leading-none text-gray-new-50 transition-colors hover:text-gray-new-20 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+        aria-label="Close field details"
       >
         ×
       </button>
-      <div className="mb-2 flex flex-wrap items-baseline gap-2">
-        <code className="font-mono text-[13px] font-semibold text-[#426CE0]">{node.key}</code>
+      <div className="flex flex-wrap items-baseline gap-2 pr-8">
+        <code className="font-mono text-sm leading-relaxed font-semibold text-[var(--shiki-token-string-expression)]">
+          {node.key}
+        </code>
         <TypeBadge type={node.type} />
         {node.required && (
-          <span className="text-red-600 text-[9px] font-semibold dark:text-[#FF5645]">
-            required
-          </span>
+          <span className="text-red-600 text-sm font-semibold dark:text-[#FF5645]">required</span>
         )}
         {node.constraints && (
-          <span className="text-[10px] text-gray-new-50 dark:text-gray-new-60">
-            {node.constraints}
-          </span>
+          <span className="text-sm text-gray-new-50 dark:text-gray-new-60">{node.constraints}</span>
         )}
       </div>
       {(d.descriptionHtml || d.description) &&
         (() => {
           const descClass =
-            'mb-2 text-[13px] leading-relaxed text-gray-new-20 dark:text-gray-new-80 [&_a]:underline [&_code]:rounded [&_code]:bg-gray-new-94 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[11px] dark:[&_code]:bg-gray-new-15';
+            'mt-3 text-sm leading-normal text-gray-new-20 dark:text-gray-new-80 [&_a]:underline';
           return d.descriptionHtml ? (
-            <p className={descClass} dangerouslySetInnerHTML={{ __html: d.descriptionHtml }} />
+            <p
+              className={cn(descClass, INLINE_CODE_STYLES)}
+              dangerouslySetInnerHTML={{ __html: d.descriptionHtml }}
+            />
           ) : (
             <p className={descClass}>{d.description}</p>
           );
         })()}
       {d.example && (
-        <div className="mb-2">
-          <span className="mb-1 block text-[10px] font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
+        <div className="mt-3">
+          <span className="mb-1 block text-sm font-semibold tracking-wide text-gray-new-50 uppercase dark:text-gray-new-60">
             Example
           </span>
-          <code className="block rounded border border-gray-new-90 bg-gray-new-95 px-2.5 py-1.5 font-mono text-[12px] text-[#EC6F09] dark:border-gray-new-20 dark:bg-gray-new-15">
+          <code className="block border border-gray-new-70 bg-transparent px-2.5 py-1.5 font-mono text-sm text-[var(--shiki-token-string)] dark:border-gray-new-30">
             {d.example}
           </code>
         </div>
       )}
       {d.values && d.values.length > 0 && (
-        <div className="mb-2">
-          <span className="mb-1 block text-[10px] font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
+        <div className="mt-3">
+          <span className="mb-1 block text-sm font-semibold tracking-wide text-gray-new-50 uppercase dark:text-gray-new-60">
             Valid values
           </span>
-          <ul className="space-y-0.5 text-[12px] text-gray-new-30 dark:text-gray-new-70">
+          <ul className="space-y-0.5 text-sm text-gray-new-30 dark:text-gray-new-70">
             {d.values.map((v) => (
               <li key={v}>
                 <code className="font-mono">{v}</code>
@@ -119,7 +121,7 @@ const DetailCard = ({ node, onClose }) => {
         </div>
       )}
       {d.link && (
-        <a href={d.link.href} className="mt-1 text-[12px] text-green-45 hover:underline">
+        <a href={d.link.href} className="mt-1 text-sm text-green-45 hover:underline">
           {d.link.text} →
         </a>
       )}
@@ -146,12 +148,14 @@ DetailCard.propTypes = {
 
 // ── Shared row wrapper ──────────────────────────────────────────────────────
 
-const FieldRow = ({ indent, isHovered, children }) => (
+const FieldRow = ({ indent, isHovered, onMouseEnter, onMouseLeave, children }) => (
   <div
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
     className={cn(
-      'flex items-baseline justify-between gap-4 border-l-2 px-5 py-1 transition-all duration-100',
+      'flex items-baseline justify-between gap-4 border-l-2 px-5 py-1.5 transition-all duration-100',
       isHovered
-        ? 'border-l-green-45/50 bg-[rgba(0,229,153,0.04)] dark:bg-[rgba(0,229,153,0.03)]'
+        ? 'border-l-green-45/70 bg-[rgba(0,229,153,0.04)] dark:bg-[rgba(0,229,153,0.03)]'
         : 'border-l-transparent'
     )}
     style={{ paddingLeft: `${20 + indent * 18}px` }}
@@ -163,6 +167,8 @@ const FieldRow = ({ indent, isHovered, children }) => (
 FieldRow.propTypes = {
   indent: PropTypes.number.isRequired,
   isHovered: PropTypes.bool,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
   children: PropTypes.node.isRequired,
 };
 
@@ -207,15 +213,15 @@ const EnumDropdown = ({ options, selected, isEdited, onChange }) => {
         type="button"
         onClick={handleOpen}
         className={cn(
-          'inline-flex items-center gap-1 rounded px-0.5 font-mono text-[12px] transition-colors',
-          isEdited ? 'text-[#EC6F09]' : getTypeColor(typeGuess),
+          'inline-flex items-center gap-1 rounded px-0.5 font-mono text-sm transition-colors',
+          isEdited ? 'text-[var(--shiki-token-string)]' : getTypeColor(typeGuess),
           'hover:opacity-80'
         )}
       >
         {selected !== null && selected !== undefined && selected !== ''
           ? String(selected)
           : '(select)'}
-        <span className="text-[9px] text-gray-new-50 dark:text-gray-new-60">▼</span>
+        <span className="text-sm text-gray-new-50 dark:text-gray-new-60">▼</span>
       </button>
 
       {open && (
@@ -234,14 +240,14 @@ const EnumDropdown = ({ options, selected, isEdited, onChange }) => {
                   setOpen(false);
                 }}
                 className={cn(
-                  'flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-mono text-[13px] transition-colors',
+                  'flex w-full items-center justify-between gap-3 px-3 py-1.5 text-left font-mono text-sm transition-colors',
                   isSelected
-                    ? 'bg-[#d8d8d8] text-[#00B87B] dark:bg-[#242427]'
+                    ? 'bg-transparent text-[#00B87B] dark:text-green-45'
                     : 'text-gray-new-50 hover:bg-gray-new-20/40 hover:text-gray-new-20 dark:text-gray-new-60 dark:hover:text-gray-new-80'
                 )}
               >
                 {String(opt)}
-                {isSelected && <span className="text-[11px] text-[#00B87B]">✓</span>}
+                {isSelected && <span className="text-sm text-[#00B87B]">✓</span>}
               </button>
             );
           })}
@@ -269,116 +275,113 @@ export const AnnotatedField = ({ node, indent = 0, parentPath = '', isOpen, onTo
   const open = isOpen(path);
   const bracket = hasKids ? (node.type === 'array' ? '[' : '{') : null;
   const closeBracket = node.type === 'array' ? ']' : '}';
+  const hasDetails = Boolean(node.details);
+  const leftContentClassName = cn(
+    'flex min-w-0 flex-wrap items-baseline gap-0 text-left',
+    hasKids && 'cursor-pointer',
+    node.deprecated && 'opacity-50'
+  );
+  const fieldContent = (
+    <>
+      {hasKids && (
+        <span
+          className="mr-1 p-0 text-sm text-gray-new-50 transition-transform duration-150 dark:text-gray-new-60"
+          style={{ transform: open ? 'rotate(90deg)' : 'none' }}
+          aria-hidden="true"
+        >
+          ▶
+        </span>
+      )}
+      <span
+        className={cn(
+          'font-mono text-sm',
+          node.deprecated
+            ? 'text-gray-new-50 line-through dark:text-gray-new-60'
+            : 'text-[var(--shiki-token-string-expression)]'
+        )}
+      >
+        &quot;{node.key}&quot;
+      </span>
+      <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">: </span>
+      {bracket && !open ? (
+        <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          {bracket}…{closeBracket}
+          <span className="ml-1.5 text-sm">
+            {node.children.length} {node.type === 'array' ? 'items' : 'fields'}
+          </span>
+        </span>
+      ) : bracket ? (
+        <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">{bracket}</span>
+      ) : (
+        <>
+          <span className={cn('font-mono text-sm', getTypeColor(node.type))}>
+            {node.value ?? `(${node.type})`}
+          </span>
+          <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">,</span>
+        </>
+      )}
+      {node.required && (
+        <span className="text-red-600 ml-1.5 font-mono text-sm font-semibold tracking-wider dark:text-[#FF5645]">
+          req
+        </span>
+      )}
+      {node.deprecated && (
+        <span className="ml-1.5 rounded border border-[#F0B375]/40 bg-transparent px-1 py-0.5 text-sm font-semibold text-[#F0B375]">
+          deprecated{node.sunset ? ` · sunset ${node.sunset}` : ''}
+        </span>
+      )}
+      {node.enum && (
+        <span className="ml-1.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          {node.enum.join(' | ')}
+        </span>
+      )}
+      {node.format && (
+        <span className="ml-1.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          {node.format}
+        </span>
+      )}
+      {node.constraints && (
+        <span className="ml-1.5 text-sm text-gray-new-50 dark:text-gray-new-60">
+          {node.constraints}
+        </span>
+      )}
+    </>
+  );
 
   return (
     <>
-      <FieldRow indent={indent} isHovered={hovered}>
-        <div
-          className={cn(
-            'flex min-w-0 flex-wrap items-baseline gap-0',
-            node.deprecated && 'opacity-50'
-          )}
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-        >
-          {hasKids && (
-            <button
-              type="button"
-              onClick={() => onToggle(path)}
-              className="mr-1 p-0 text-[9px] text-gray-new-50 transition-transform duration-150 dark:text-gray-new-60"
-              style={{ transform: open ? 'rotate(90deg)' : 'none' }}
-            >
-              ▶
-            </button>
-          )}
-          <span
-            className={cn(
-              'font-mono text-[13px]',
-              node.deprecated
-                ? 'text-gray-new-50 line-through dark:text-gray-new-60'
-                : 'text-[#426CE0]'
-            )}
-          >
-            &quot;{node.key}&quot;
-          </span>
-          <span className="font-mono text-[13px] text-gray-new-50 dark:text-gray-new-60">: </span>
-          {bracket && !open ? (
-            <span className="font-mono text-[12px] text-gray-new-50 dark:text-gray-new-60">
-              {bracket}…{closeBracket}
-              <span className="ml-1.5 text-[10px]">
-                {node.children.length} {node.type === 'array' ? 'items' : 'fields'}
-              </span>
-            </span>
-          ) : bracket ? (
-            <span className="font-mono text-[13px] text-gray-new-50 dark:text-gray-new-60">
-              {bracket}
-            </span>
-          ) : (
-            <>
-              <span className={cn('font-mono text-[13px]', getTypeColor(node.type))}>
-                {node.value ?? `(${node.type})`}
-              </span>
-              <span className="font-mono text-[13px] text-gray-new-50 dark:text-gray-new-60">
-                ,
-              </span>
-            </>
-          )}
-          {node.required && (
-            <span className="text-red-600 ml-1.5 font-mono text-[9px] font-semibold tracking-wider dark:text-[#FF5645]">
-              req
-            </span>
-          )}
-          {node.deprecated && (
-            <span className="ml-1.5 rounded bg-[#F0B375]/10 px-1 py-0.5 text-[9px] font-semibold text-[#F0B375]">
-              deprecated{node.sunset ? ` · sunset ${node.sunset}` : ''}
-            </span>
-          )}
-          {node.enum && (
-            <span className="ml-1.5 font-mono text-[10px] text-gray-new-50 dark:text-gray-new-60">
-              {node.enum.join(' | ')}
-            </span>
-          )}
-          {node.format && (
-            <span className="ml-1.5 font-mono text-[10px] text-gray-new-50 dark:text-gray-new-60">
-              {node.format}
-            </span>
-          )}
-          {node.constraints && (
-            <span className="ml-1.5 text-[10px] text-gray-new-50 dark:text-gray-new-60">
-              {node.constraints}
-            </span>
-          )}
-        </div>
-
-        {/* Annotation — click to pin if details exist */}
-        {node.annotation && (
+      <FieldRow
+        indent={indent}
+        isHovered={hovered || pinned}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        {hasKids ? (
           <button
             type="button"
-            onClick={() => node.details && setPinned((p) => !p)}
+            onClick={() => onToggle(path)}
+            aria-expanded={open}
+            aria-label={`${open ? 'Collapse' : 'Expand'} ${node.key}`}
+            className={leftContentClassName}
+          >
+            {fieldContent}
+          </button>
+        ) : (
+          <div className={leftContentClassName}>{fieldContent}</div>
+        )}
+
+        {hasDetails && (
+          <button
+            type="button"
+            onClick={() => setPinned((p) => !p)}
+            aria-label={`${pinned ? 'Hide' : 'Show'} ${node.key} details`}
             className={cn(
-              'flex max-w-[280px] shrink-0 items-baseline text-right text-[12px] transition-colors duration-100',
-              node.details
-                ? 'cursor-pointer underline-offset-2 hover:text-gray-new-20 dark:hover:text-gray-new-80'
-                : 'cursor-default',
-              hovered || pinned
-                ? 'text-gray-new-30 dark:text-gray-new-70'
-                : 'text-gray-new-60 dark:text-gray-new-50',
-              node.details && (hovered || pinned) && 'underline decoration-dashed'
+              'ml-auto shrink-0 cursor-pointer text-sm leading-none transition-colors',
+              pinned ? 'text-green-44' : 'text-gray-new-50 dark:text-gray-new-60',
+              hovered && !pinned && 'text-gray-new-30 dark:text-gray-new-80'
             )}
           >
-            <span className="overflow-hidden text-ellipsis whitespace-nowrap">
-              {node.annotation}
-            </span>
-            {node.details && (
-              <span
-                className={cn(
-                  'ml-1 shrink-0 text-[10px]',
-                  pinned ? 'text-green-45' : 'text-gray-new-50'
-                )}
-              >
-                ⓘ
-              </span>
-            )}
+            ⓘ
           </button>
         )}
       </FieldRow>
@@ -398,7 +401,7 @@ export const AnnotatedField = ({ node, indent = 0, parentPath = '', isOpen, onTo
             />
           ))}
           <div
-            className="px-5 py-0.5 font-mono text-[13px] text-gray-new-50 dark:text-gray-new-60"
+            className="px-5 py-0.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60"
             style={{ paddingLeft: `${20 + indent * 18}px` }}
           >
             {closeBracket},
@@ -474,7 +477,7 @@ export const EditableField = ({
   const renderValue = () => {
     if (node.deprecated) {
       return (
-        <span className={cn('font-mono text-[13px]', getTypeColor(node.type))}>
+        <span className={cn('font-mono text-sm', getTypeColor(node.type))}>
           {node.value ?? `(${node.type})`}
         </span>
       );
@@ -487,8 +490,10 @@ export const EditableField = ({
           type="button"
           onClick={() => handleEdit(active ? 'false' : 'true')}
           className={cn(
-            'font-mono text-[12px] transition-colors',
-            edited ? 'text-[#2D8665]' : 'text-[#426CE0]'
+            'font-mono text-sm transition-colors',
+            edited
+              ? 'text-[var(--shiki-token-keyword)]'
+              : 'text-[var(--shiki-token-string-expression)]'
           )}
         >
           {active ? 'true' : 'false'}
@@ -535,7 +540,7 @@ export const EditableField = ({
             }
           }}
           aria-label={`Edit ${node.key} value`}
-          className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#CE9178] outline-none"
+          className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-sm text-[var(--shiki-token-string)] outline-none"
           style={{ width: `${Math.max(80, String(currentVal).length * 7.5)}px`, maxWidth: '200px' }}
         />
       );
@@ -559,9 +564,9 @@ export const EditableField = ({
         aria-label={`Edit ${node.key} value`}
         aria-disabled={node.deprecated || undefined}
         className={cn(
-          'cursor-text rounded border-b border-dashed border-transparent px-0.5 font-mono text-[12px] transition-all outline-none',
+          'cursor-text rounded border-b border-dashed border-transparent px-0.5 font-mono text-sm transition-all outline-none',
           edited
-            ? 'border-[#00B87B] bg-green-45/5 text-[#EC6F09]'
+            ? 'border-[#00B87B] bg-green-45/5 text-[var(--shiki-token-string)]'
             : 'text-gray-new-50 hover:border-gray-new-50 dark:text-gray-new-60',
           node.deprecated && 'cursor-default'
         )}
@@ -623,7 +628,7 @@ export const EditableField = ({
             <button
               type="button"
               onClick={() => onToggle(path)}
-              className="mr-1 p-0 text-[9px] text-gray-new-50 transition-transform duration-150 dark:text-gray-new-60"
+              className="mr-1 p-0 text-sm text-gray-new-50 transition-transform duration-150 dark:text-gray-new-60"
               style={{ transform: open ? 'rotate(90deg)' : 'none' }}
             >
               ▶
@@ -632,44 +637,42 @@ export const EditableField = ({
 
           <span
             className={cn(
-              'font-mono text-[13px]',
+              'font-mono text-sm',
               node.deprecated
                 ? 'text-gray-new-50 line-through dark:text-gray-new-60'
-                : 'text-[#426CE0]'
+                : 'text-[var(--shiki-token-string-expression)]'
             )}
           >
             &quot;{node.key}&quot;
           </span>
-          <span className="font-mono text-[13px] text-gray-new-50 dark:text-gray-new-60">: </span>
+          <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">: </span>
 
           {bracket && !open ? (
-            <span className="font-mono text-[12px] text-gray-new-50 dark:text-gray-new-60">
+            <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
               {bracket}…{closeBracket}
-              <span className="ml-1.5 text-[10px]">
+              <span className="ml-1.5 text-sm">
                 {node.children.length} {node.type === 'array' ? 'items' : 'fields'}
               </span>
             </span>
           ) : bracket ? (
-            <span className="font-mono text-[13px] text-gray-new-50 dark:text-gray-new-60">
+            <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
               {bracket}
             </span>
           ) : (
             <>
               {renderValue()}
-              <span className="font-mono text-[13px] text-gray-new-50 dark:text-gray-new-60">
-                ,
-              </span>
+              <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">,</span>
             </>
           )}
 
           {node.deprecated && (
-            <span className="ml-1.5 rounded bg-[#F0B375]/10 px-1 py-0.5 text-[9px] font-semibold text-[#F0B375]">
+            <span className="ml-1.5 border border-[#F0B375]/40 bg-transparent px-1 py-0.5 text-sm font-semibold text-[#F0B375]">
               deprecated{node.sunset ? ` · sunset ${node.sunset}` : ''}
             </span>
           )}
 
           {node.constraints && !node.enum && (
-            <span className="ml-1.5 text-[10px] text-gray-new-50 dark:text-gray-new-60">
+            <span className="ml-1.5 text-sm text-gray-new-50 dark:text-gray-new-60">
               {node.constraints}
             </span>
           )}
@@ -677,16 +680,14 @@ export const EditableField = ({
 
         {/* Annotation — show validation error or click-to-pin annotation */}
         {error ? (
-          <span className="text-amber-400 shrink-0 text-right text-[11px] font-medium">
-            ⚠ {error}
-          </span>
+          <span className="text-amber-400 shrink-0 text-right text-sm font-medium">⚠ {error}</span>
         ) : (
           node.annotation && (
             <button
               type="button"
               onClick={() => node.details && onPin(isPinned ? null : path)}
               className={cn(
-                'flex max-w-[260px] shrink-0 items-baseline text-right text-[12px] transition-colors duration-100',
+                'flex max-w-[260px] shrink-0 items-baseline text-right text-sm transition-colors duration-100',
                 node.details ? 'cursor-pointer' : 'cursor-default',
                 hovered || isPinned
                   ? 'text-gray-new-30 dark:text-gray-new-70'
@@ -702,7 +703,7 @@ export const EditableField = ({
               {node.details && (
                 <span
                   className={cn(
-                    'ml-1 shrink-0 text-[10px]',
+                    'ml-1 shrink-0 text-sm',
                     isPinned
                       ? 'text-gray-new-30 dark:text-gray-new-70'
                       : 'text-gray-new-60 dark:text-gray-new-50'
@@ -739,7 +740,7 @@ export const EditableField = ({
             />
           ))}
           <div
-            className="px-5 py-0.5 font-mono text-[13px] text-gray-new-50 dark:text-gray-new-60"
+            className="px-5 py-0.5 font-mono text-sm text-gray-new-50 dark:text-gray-new-60"
             style={{ paddingLeft: `${20 + indent * 18}px` }}
           >
             {closeBracket},

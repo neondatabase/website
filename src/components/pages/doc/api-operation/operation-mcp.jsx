@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import { cn } from 'utils/cn';
 
+import ApiCodeBlock from './api-code-block';
+
 // MCP description rendering — parses the XML-like blocks Neon's MCP server
 // emits (workflow, important_notes, returns, etc.) and renders each as a
 // labeled section. Falls back to plain text when no recognized blocks are
@@ -143,7 +145,7 @@ export const McpDescription = ({ description }) => {
 
   if (!segments) {
     return (
-      <p className="mt-2 text-[13px] leading-relaxed text-gray-new-30 dark:text-gray-new-70">
+      <p className="mt-2 text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70">
         {description}
       </p>
     );
@@ -154,10 +156,7 @@ export const McpDescription = ({ description }) => {
       {segments.map((seg, i) => {
         if (seg.type === 'text') {
           return (
-            <p
-              key={i}
-              className="text-[13px] leading-relaxed text-gray-new-30 dark:text-gray-new-70"
-            >
+            <p key={i} className="text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70">
               {seg.content}
             </p>
           );
@@ -169,7 +168,7 @@ export const McpDescription = ({ description }) => {
             className={cn(seg.label && 'border-t border-gray-new-90 pt-3 dark:border-gray-new-20')}
           >
             {seg.label && (
-              <p className="mb-1.5 text-[10px] font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
+              <p className="mb-1.5 text-sm font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
                 {seg.label}
               </p>
             )}
@@ -177,8 +176,8 @@ export const McpDescription = ({ description }) => {
               {seg.items.map((item, j) => {
                 if (item.type === 'numbered') {
                   return (
-                    <div key={j} className="flex gap-2 py-0.5 text-[13px] leading-relaxed">
-                      <span className="mt-0.5 w-5 flex-none text-right font-mono text-[11px] font-semibold text-green-45">
+                    <div key={j} className="flex gap-2 py-0.5 text-sm leading-relaxed">
+                      <span className="mt-0.5 w-5 flex-none text-right font-mono text-sm font-semibold text-green-45">
                         {item.n}.
                       </span>
                       <span className="text-gray-new-30 dark:text-gray-new-70">{item.text}</span>
@@ -190,7 +189,7 @@ export const McpDescription = ({ description }) => {
                     <div
                       key={j}
                       className={cn(
-                        'flex items-baseline gap-2 py-0.5 text-[13px] leading-relaxed',
+                        'flex items-baseline gap-2 py-0.5 text-sm leading-relaxed',
                         item.type === 'sub' && 'ml-7'
                       )}
                     >
@@ -202,7 +201,7 @@ export const McpDescription = ({ description }) => {
                 return (
                   <p
                     key={j}
-                    className="py-0.5 text-[13px] leading-relaxed text-gray-new-30 dark:text-gray-new-70"
+                    className="py-0.5 text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70"
                   >
                     {item.text}
                   </p>
@@ -210,9 +209,12 @@ export const McpDescription = ({ description }) => {
               })}
             </div>
             {seg.code && (
-              <pre className="mt-2 overflow-x-auto rounded-lg bg-gray-new-94 p-3 font-mono text-[11px] leading-relaxed text-gray-new-50 dark:bg-gray-new-15 dark:text-gray-new-60">
-                {seg.code}
-              </pre>
+              <ApiCodeBlock
+                label="Example"
+                code={seg.code}
+                className="mt-2"
+                preClassName="text-sm"
+              />
             )}
           </div>
         );

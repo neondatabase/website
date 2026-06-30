@@ -386,7 +386,7 @@ export const BodySection = ({ operation, bodyTree, state, copy, copiedId }) => (
               type="button"
               onClick={() => copy('body', JSON.stringify(state.json, null, 2))}
               className={cn(
-                'rounded border px-2 py-0.5 font-mono text-[11px] transition-all',
+                'rounded border px-2 py-0.5 font-mono text-sm transition-all',
                 copiedId === 'body'
                   ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
                   : Object.keys(state.errors).length > 0
@@ -410,14 +410,14 @@ export const BodySection = ({ operation, bodyTree, state, copy, copiedId }) => (
       <div className="overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
         <div className="border-b border-gray-new-90 bg-gray-new-98 px-3.5 py-2 dark:border-gray-new-20 dark:bg-gray-new-10">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] text-gray-new-60 italic dark:text-gray-new-50">
+            <span className="text-sm text-gray-new-60 italic dark:text-gray-new-50">
               Click values to edit · ☑ to include
             </span>
             {state.editCount > 0 && (
               <button
                 type="button"
                 onClick={state.reset}
-                className="rounded border border-gray-new-90 px-1.5 py-0.5 text-[10px] text-gray-new-50 transition-all hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60"
+                className="border border-gray-new-90 px-1.5 py-0.5 text-sm text-gray-new-50 transition-all hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60"
               >
                 Reset
               </button>

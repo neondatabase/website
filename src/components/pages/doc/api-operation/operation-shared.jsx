@@ -2,10 +2,12 @@
 
 import PropTypes from 'prop-types';
 
-import { JSON_SYNTAX_COLORS } from 'utils/api-style';
+import { INLINE_CODE_STYLES, JSON_SYNTAX_COLORS } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
 import cliGlobalFlagsList from '../../../../../scripts/data/cli-global-flags.json';
+
+import ApiCodeBlock from './api-code-block';
 
 // Rendering primitives + constants shared across the operation-* section
 // components. Anything imported by 2+ sibling modules lives here.
@@ -26,7 +28,7 @@ export const SectionHeader = ({ title, badge, right, id }) => (
       {title}
     </h2>
     {badge && (
-      <span className="text-red-600 bg-red-600/10 rounded px-1.5 py-0.5 font-mono text-[10px] font-semibold dark:bg-[#FF5645]/10 dark:text-[#FF5645]">
+      <span className="rounded border border-green-44/40 bg-transparent px-1.5 py-0.5 font-mono text-sm font-semibold text-green-44 dark:border-green-44/40">
         {badge}
       </span>
     )}
@@ -43,52 +45,26 @@ SectionHeader.propTypes = {
 
 // ── Live code block ─────────────────────────────────────────────────────────
 
-export const LiveCodeBlock = ({ label, code, editCount, onCopy, copied }) => (
-  <div
+export const LiveCodeBlock = ({ label, code, editCount }) => (
+  <ApiCodeBlock
+    label={editCount > 0 ? `${label} - live from your edits` : label}
+    code={code}
     className={cn(
-      'overflow-hidden border transition-colors duration-200',
-      editCount > 0
-        ? 'border-[#00B87B]/20 dark:border-green-45/20'
-        : 'border-gray-new-90 dark:border-gray-new-20'
+      'transition-colors duration-200',
+      editCount > 0 && 'border-[#00B87B]/30 dark:border-green-45/30'
     )}
-  >
-    <div className="flex items-center justify-between border-b border-gray-new-90 bg-gray-new-98 px-3.5 py-2 dark:border-gray-new-20 dark:bg-gray-new-10">
-      <div className="flex items-center gap-2">
-        <span className="text-[12px] text-gray-new-50 dark:text-gray-new-60">{label}</span>
-        {editCount > 0 && (
-          <span className="text-[10px] text-[#00B87B] italic dark:text-green-45">
-            Live from your edits
-          </span>
-        )}
-      </div>
-      <button
-        type="button"
-        onClick={() => onCopy(code)}
-        className={cn(
-          'rounded border px-2 py-0.5 font-mono text-[11px] transition-all duration-150',
-          copied
-            ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
-            : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60 dark:hover:border-gray-new-50 dark:hover:text-gray-new-80'
-        )}
-      >
-        {copied ? '✓ Copied' : 'Copy'}
-      </button>
-    </div>
-    <pre className="overflow-x-auto bg-gray-new-98 p-5 text-[13px] leading-relaxed whitespace-pre-wrap text-gray-new-30 dark:bg-gray-new-10 dark:text-gray-new-70">
-      {code}
-    </pre>
-  </div>
+  />
 );
 
 LiveCodeBlock.propTypes = {
   label: PropTypes.string.isRequired,
   code: PropTypes.string.isRequired,
   editCount: PropTypes.number,
-  onCopy: PropTypes.func.isRequired,
-  copied: PropTypes.bool,
 };
 
 // ── CLI positional row ──────────────────────────────────────────────────────
+const codeClassName =
+  'rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white';
 
 export const CliPositionalRow = ({
   pos,
@@ -115,13 +91,13 @@ export const CliPositionalRow = ({
       style={{ gridTemplateColumns: '14px 1fr 1fr' }}
     >
       <div className="flex items-center justify-center pt-0.5">
-        <span className="font-mono text-[10px] leading-none font-bold text-[#E2301D] dark:text-[#FF5645]">
+        <span className="font-mono text-sm leading-none font-bold text-[#E2301D] dark:text-[#FF5645]">
           *
         </span>
       </div>
 
       <div className="flex flex-wrap items-baseline gap-1.5">
-        <code className="font-mono text-[13px] font-semibold text-black-pure dark:text-white">
+        <code className="font-mono text-sm font-semibold text-black-pure dark:text-white">
           {pos.display}
         </code>
         {isEditing ? (
@@ -134,7 +110,7 @@ export const CliPositionalRow = ({
               if (e.key === 'Enter' || e.key === 'Escape') onSetEditing(null);
             }}
             aria-label={ariaLabel}
-            className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#EC6F09] outline-none"
+            className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-sm text-[var(--shiki-token-string)] outline-none"
             style={{ width: `${Math.max(80, currentVal.length * 7.5)}px`, maxWidth: '200px' }}
           />
         ) : (
@@ -150,28 +126,29 @@ export const CliPositionalRow = ({
             }}
             aria-label={ariaLabel}
             className={cn(
-              'cursor-text rounded px-0.5 font-mono text-[12px] transition-all',
+              'cursor-text rounded px-0.5 font-mono text-sm transition-all',
               currentVal
-                ? 'border-b border-dashed border-[#00B87B]/20 bg-green-45/5 text-[#EC6F09]'
+                ? 'border-b border-dashed border-[#00B87B]/20 bg-green-45/5 text-[var(--shiki-token-string)]'
                 : 'text-gray-new-50 hover:border-b hover:border-dashed hover:border-gray-new-50 dark:text-gray-new-60'
             )}
           >
             {currentVal || '(string)'}
           </span>
         )}
-        <span className="rounded bg-[#E2301D]/10 px-1.5 py-0.5 font-mono text-[10px] leading-normal font-medium text-[#E2301D] dark:bg-[#FF5645]/10 dark:text-[#FF5645]">
-          required
-        </span>
+        <span className={codeClassName}>required</span>
       </div>
 
       <div>
         {(() => {
           const descClass =
-            'text-[12px] leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_a]:underline [&_code]:rounded [&_code]:bg-gray-new-94 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[11px] dark:[&_code]:bg-gray-new-15';
+            'text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_a]:underline';
           // Plain-text fallback: don't pipe unsanitized `description` through
           // dangerouslySetInnerHTML if the generator failed to produce HTML.
           return descriptionHtml ? (
-            <span className={descClass} dangerouslySetInnerHTML={{ __html: descriptionHtml }} />
+            <span
+              className={cn(descClass, INLINE_CODE_STYLES)}
+              dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+            />
           ) : (
             <span className={descClass}>{description ?? ''}</span>
           );
@@ -224,7 +201,7 @@ export const CliFlagRow = ({
   >
     <div className="flex items-center justify-center pt-0.5">
       {flag.required ? (
-        <span className="font-mono text-[10px] leading-none font-bold text-[#E2301D] dark:text-[#FF5645]">
+        <span className="font-mono text-sm leading-none font-bold text-[#E2301D] dark:text-[#FF5645]">
           *
         </span>
       ) : (
@@ -255,26 +232,15 @@ export const CliFlagRow = ({
     </div>
 
     <div className="flex flex-wrap items-baseline gap-1.5">
-      <code className="font-mono text-[13px] font-semibold text-black-pure dark:text-white">
+      <code className="font-mono text-sm font-semibold text-black-pure dark:text-white">
         {flag.name}
       </code>
       {flag.alias && (
-        <span className="font-mono text-[11px] text-gray-new-50 dark:text-gray-new-60">
+        <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
           {flag.alias}
         </span>
       )}
-      <span
-        className={cn(
-          'rounded px-1.5 py-0.5 font-mono text-[10px] leading-normal font-medium',
-          flag.type === 'string'
-            ? 'bg-[#426CE0]/10 text-[#426CE0] dark:bg-blue-70/10 dark:text-blue-70'
-            : flag.type === 'boolean'
-              ? 'bg-[#BE8A3C]/10 text-[#BE8A3C] dark:bg-brown-70/10 dark:text-brown-70'
-              : 'bg-[#8458D0]/10 text-[#8458D0] dark:bg-purple-70/10 dark:text-purple-70'
-        )}
-      >
-        {flag.type}
-      </span>
+      <span className={codeClassName}>{flag.type}</span>
 
       {flag.enum ? (
         <span className="flex gap-0.5">
@@ -284,10 +250,10 @@ export const CliFlagRow = ({
               type="button"
               onClick={() => onEdit(opt)}
               className={cn(
-                'rounded px-1.5 py-0 font-mono text-[11px] transition-all',
+                'px-1.5 py-0 font-mono text-sm transition-all',
                 currentVal === String(opt)
-                  ? 'bg-green-45/20 font-semibold text-[#00B87B] dark:text-green-45'
-                  : 'bg-gray-new-90/50 text-gray-new-50 dark:bg-gray-new-20/50 dark:text-gray-new-60'
+                  ? 'border border-[#00B87B]/40 bg-transparent font-semibold text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
+                  : 'border border-gray-new-70 bg-transparent text-gray-new-50 dark:border-gray-new-30 dark:text-gray-new-60'
               )}
             >
               {opt}
@@ -298,7 +264,7 @@ export const CliFlagRow = ({
         <button
           type="button"
           onClick={() => (isIncluded ? onToggleInclude() : onEdit('true'))}
-          className="font-mono text-[12px] text-[#426CE0]"
+          className="font-mono text-sm text-[var(--shiki-token-keyword)]"
         >
           {isIncluded ? 'true' : 'false'}
         </button>
@@ -312,7 +278,7 @@ export const CliFlagRow = ({
             if (e.key === 'Enter' || e.key === 'Escape') onSetEditing(null);
           }}
           aria-label={`Edit ${labelPrefix} ${flag.name}`}
-          className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-[12px] text-[#EC6F09] outline-none"
+          className="rounded border border-green-45/40 bg-green-45/5 px-1 font-mono text-sm text-[var(--shiki-token-string)] outline-none"
           style={{ width: `${Math.max(80, currentVal.length * 7.5)}px`, maxWidth: '200px' }}
         />
       ) : (
@@ -328,9 +294,9 @@ export const CliFlagRow = ({
           }}
           aria-label={`Edit ${labelPrefix} ${flag.name}`}
           className={cn(
-            'cursor-text rounded px-0.5 font-mono text-[12px] transition-all',
+            'cursor-text rounded px-0.5 font-mono text-sm transition-all',
             isIncluded && currentVal
-              ? 'border-b border-dashed border-green-45/60 bg-green-45/5 text-[#EC6F09]'
+              ? 'border-b border-dashed border-green-45/60 bg-green-45/5 text-[var(--shiki-token-string)]'
               : 'text-gray-new-50 hover:border-b hover:border-dashed hover:border-gray-new-50 dark:text-gray-new-60'
           )}
         >
@@ -344,13 +310,9 @@ export const CliFlagRow = ({
         </span>
       )}
 
-      {flag.required && (
-        <span className="rounded bg-[#E2301D]/10 px-1.5 py-0.5 font-mono text-[10px] leading-normal font-medium text-[#E2301D] dark:bg-[#FF5645]/10 dark:text-[#FF5645]">
-          required
-        </span>
-      )}
+      {flag.required && <span className={codeClassName}>required</span>}
       {flag.default !== undefined && !flag.enum && (
-        <span className="font-mono text-[10px] text-gray-new-60 dark:text-gray-new-50">
+        <span className="font-mono text-sm text-gray-new-60 dark:text-gray-new-50">
           default: {String(flag.default)}
         </span>
       )}
@@ -359,20 +321,23 @@ export const CliFlagRow = ({
     <div>
       {(() => {
         const descClass =
-          'text-[12px] leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_a]:underline [&_code]:rounded [&_code]:bg-gray-new-94 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[11px] dark:[&_code]:bg-gray-new-15';
+          'text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_a]:underline';
         return flag.descriptionHtml ? (
-          <span className={descClass} dangerouslySetInnerHTML={{ __html: flag.descriptionHtml }} />
+          <span
+            className={cn(descClass, INLINE_CODE_STYLES)}
+            dangerouslySetInnerHTML={{ __html: flag.descriptionHtml }}
+          />
         ) : (
           <span className={descClass}>{flag.description ?? ''}</span>
         );
       })()}
       {flag.apiEquiv && isHovered && (
-        <div className="mt-0.5 font-mono text-[10px] text-gray-new-60 dark:text-gray-new-50">
+        <div className="mt-0.5 font-mono text-sm text-gray-new-60 dark:text-gray-new-50">
           API: {flag.apiEquiv}
         </div>
       )}
       {flag.cliOnly && isHovered && (
-        <div className="mt-0.5 text-[10px] text-[#E9943E] dark:text-yellow-70">CLI only</div>
+        <div className="mt-0.5 text-sm text-[#E9943E] dark:text-yellow-70">CLI only</div>
       )}
     </div>
   </div>
@@ -506,7 +471,7 @@ export function sortCliFlags(flags) {
 // the REST API or SDK for that field.
 export const UncoveredList = ({ uncovered, operation, findBodyProp }) => (
   <div className="mt-6 border-t border-gray-new-90 pt-5 dark:border-gray-new-20">
-    <p className="mb-3 text-[11px] font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
+    <p className="mb-3 text-sm font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
       No CLI equivalent
     </p>
     <div>
@@ -522,16 +487,14 @@ export const UncoveredList = ({ uncovered, operation, findBodyProp }) => (
             }`}
           >
             <div className="flex items-center gap-2">
-              <code className="font-mono text-[12px] text-gray-new-20 dark:text-gray-new-80">
-                {f}
-              </code>
+              <code className="font-mono text-sm text-gray-new-20 dark:text-gray-new-80">{f}</code>
               {prop?.type && (
-                <span className="font-mono text-[10px] text-gray-new-50 dark:text-gray-new-60">
+                <span className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
                   {prop.type}
                 </span>
               )}
             </div>
-            <p className="text-[12px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">
+            <p className="text-sm leading-relaxed text-gray-new-50 dark:text-gray-new-60">
               {prop?.description?.split('\n')[0] ??
                 'Not configurable via CLI. Use the REST API or SDK.'}
             </p>
@@ -561,16 +524,16 @@ export const GlobalFlagsCollapsible = ({ flags, state, headerKeyPrefix }) => (
       className="flex w-full items-center gap-2 px-4 py-2.5 text-left transition-colors hover:bg-gray-new-98 dark:hover:bg-gray-new-10"
     >
       <span
-        className="text-[9px] text-gray-new-50 transition-transform duration-150 dark:text-gray-new-60"
+        className="text-sm text-gray-new-50 transition-transform duration-150 dark:text-gray-new-60"
         style={{ transform: state.globalFlagsOpen ? 'rotate(90deg)' : 'none' }}
       >
         ▶
       </span>
-      <span className="text-[11px] text-gray-new-50 dark:text-gray-new-60">
+      <span className="text-sm text-gray-new-50 dark:text-gray-new-60">
         {state.globalFlagsOpen ? 'global options' : `+ ${flags.length} global options`}
       </span>
       {!state.globalFlagsOpen && (
-        <span className="truncate font-mono text-[10px] text-gray-new-70 dark:text-gray-new-50">
+        <span className="truncate font-mono text-sm text-gray-new-70 dark:text-gray-new-50">
           {flags.map((f) => `--${f.name}`).join('  ')}
         </span>
       )}

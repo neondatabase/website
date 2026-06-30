@@ -12,6 +12,7 @@ import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 import { buildCurl, buildCliCommand, buildTs } from 'utils/api-ref.mjs';
 import { cn } from 'utils/cn';
 
+import ApiCodeBlock from './api-code-block';
 import { useBodyState, BodySection } from './operation-body';
 import { useCliState, CliSection } from './operation-cli';
 import { McpDescription } from './operation-mcp';
@@ -172,10 +173,10 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
       {/* ── Unavailable fallback card ── */}
       {!currentAvailable && (
         <div className="mt-8 rounded-xl border border-gray-new-90 bg-gray-new-98 p-6 dark:border-gray-new-20 dark:bg-gray-new-10">
-          <p className="text-[13px] font-semibold text-black-pure dark:text-white">
+          <p className="text-sm font-semibold text-black-pure dark:text-white">
             Not available via {LABELS[current] ?? current}
           </p>
-          <p className="mt-2 text-[13px] leading-relaxed text-gray-new-40 dark:text-gray-new-60">
+          <p className="mt-2 text-sm leading-relaxed text-gray-new-40 dark:text-gray-new-60">
             {current === 'mcp'
               ? "The Neon MCP server doesn't expose a tool for this operation. You can call it directly from your agent using the REST API:"
               : current === 'console'
@@ -183,14 +184,12 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
                 : `This operation is not available via ${LABELS[current] ?? current}.`}
           </p>
           {current !== 'console' && (
-            <div className="mt-4 overflow-hidden rounded-lg border border-gray-new-90 dark:border-gray-new-20">
-              <div className="border-b border-gray-new-90 bg-gray-new-94 px-3.5 py-2 text-[12px] text-gray-new-50 dark:border-gray-new-20 dark:bg-gray-new-15 dark:text-gray-new-60">
-                {current === 'mcp' ? 'curl — use from agent via shell tool' : 'curl equivalent'}
-              </div>
-              <pre className="overflow-x-auto bg-gray-new-98 p-4 font-mono text-[12px] leading-relaxed whitespace-pre-wrap text-gray-new-50 dark:bg-gray-new-10 dark:text-gray-new-60">
-                {curlCode}
-              </pre>
-            </div>
+            <ApiCodeBlock
+              className="mt-4"
+              label={current === 'mcp' ? 'curl - use from agent via shell tool' : 'curl equivalent'}
+              code={curlCode}
+              preClassName="text-sm"
+            />
           )}
           <div className="mt-4 flex flex-wrap items-center gap-4">
             {availableIds
@@ -200,7 +199,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
                   key={id}
                   type="button"
                   onClick={() => setActiveIface(id)}
-                  className="text-[13px] text-[#00B87B] hover:underline dark:text-green-45"
+                  className="text-sm text-[#00B87B] hover:underline dark:text-green-45"
                 >
                   Use {LABELS[id] ?? id} →
                 </button>
@@ -210,7 +209,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
                 href="https://github.com/neondatabase/neon/issues"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto text-[12px] text-gray-new-50 hover:underline dark:text-gray-new-60"
+                className="ml-auto text-sm text-gray-new-50 hover:underline dark:text-gray-new-60"
               >
                 Request {LABELS[current] ?? current} support →
               </a>
@@ -233,7 +232,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
             href="https://console.neon.tech"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-2.5 inline-block text-[13px] text-[#00B87B] hover:underline dark:text-green-45"
+            className="mt-2.5 inline-block text-sm text-[#00B87B] hover:underline dark:text-green-45"
           >
             Open Neon Console →
           </a>
@@ -244,14 +243,14 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
       {current === 'mcp' && operation.mcp?.tool && (
         <div className="mt-8 overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
           <div className="flex items-center justify-between border-b border-gray-new-90 bg-gray-new-98 px-3.5 py-2.5 dark:border-gray-new-20 dark:bg-gray-new-10">
-            <span className="text-[10px] font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
+            <span className="text-sm font-semibold tracking-wider text-gray-new-50 uppercase dark:text-gray-new-60">
               MCP Tool
             </span>
             <button
               type="button"
               onClick={() => copy('mcp-tool', operation.mcp.tool)}
               className={cn(
-                'rounded border px-2 py-0.5 font-mono text-[11px] transition-all',
+                'rounded border px-2 py-0.5 font-mono text-sm transition-all',
                 copiedId === 'mcp-tool'
                   ? 'border-green-45/40 text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
                   : 'border-gray-new-90 text-gray-new-50 hover:border-gray-new-60 hover:text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-60'
@@ -261,7 +260,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
             </button>
           </div>
           <div className="bg-gray-new-98 px-4.5 py-4 dark:bg-gray-new-10">
-            <code className="font-mono text-lg font-semibold text-black-pure dark:text-white">
+            <code className="font-mono text-sm font-semibold text-black-pure dark:text-white">
               {operation.mcp.tool}
             </code>
             {operation.mcp.description && (
@@ -328,7 +327,7 @@ const OperationClient = ({ operation, interfaces, bodyTree, respTree }) => {
               </ApiParam>
             ))}
           </div>
-          <p className="mt-3 text-[12px] leading-relaxed text-gray-new-50 dark:text-gray-new-60">
+          <p className="mt-3 text-sm leading-relaxed text-gray-new-50 dark:text-gray-new-60">
             Works with Cursor, Claude Desktop, Windsurf, and any MCP client.{' '}
             <Link
               href="/docs/ai/neon-mcp-server"
