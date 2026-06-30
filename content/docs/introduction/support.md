@@ -8,7 +8,7 @@ summary: >-
   understand how tickets are prioritized by severity, and review the general
   support policy.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-30T15:58:53.991Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -70,6 +70,8 @@ Neon AI chat is not an official Neon Support channel.
 **Launch** plan (**Billing support**): you can get help with **billing and invoices** (for example through [Request billing support](/docs/introduction/manage-billing#request-billing-support) on the Billing page). Support tickets tied to the console are limited to **billing-related** issues on this plan.
 
 **Scale** plan (**Standard support**) and plans with **Business** or **Production** support: you can open support tickets for **any** Neon issue. **Business** and **Production** add SLA response times on top of that.
+
+**Vercel-managed Neon integration**: if you use Neon through the Vercel-managed Neon integration and are on Neon's Scale plan, you can also open support tickets for any Neon issue.
 
 You can reach the ticketing flow in these ways:
 
