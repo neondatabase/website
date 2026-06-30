@@ -20,7 +20,7 @@ In this guide, you will build a simple application that uses `neon.ts` to provis
 
 - Define Neon services in code.
 - Enforce branch-level compute limits for feature branches.
-- Use `@neondatabase/env` to access type-safe environment variables.
+- Use `@neon/env` to access type-safe environment variables.
 - Automatically provision isolated database environments for each branch.
 
 ## Prerequisites
@@ -45,7 +45,7 @@ cd neon-ts-demo
 Install the Neon config and env packages:
 
 ```bash
-npm install @neondatabase/config @neondatabase/env
+npm install @neon/config @neon/env
 ```
 
 Link your local project to a Neon project using the Neon CLI:
@@ -63,7 +63,7 @@ After linking, you will see a `.neon` file in your project root. This file conta
 Create a file named `neon.ts` in the root of your project directory. This file acts as the blueprint for your Neon services and branching logic:
 
 ```typescript
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
 
@@ -220,7 +220,7 @@ Traditional `.env` files are just strings, making it easy to make a typo or forg
 Create a new file `env.ts` at the root of your project to parse the environment variables from `.env.local`:
 
 ```typescript
-import { parseEnv } from "@neondatabase/env/v1";
+import { parseEnv } from "@neon/env/v1";
 import config from "./neon";
 
 export const env = parseEnv(config);
@@ -282,7 +282,7 @@ The example above renders connection strings directly on the frontend for demons
 Not every process needs every environment variable. If you only need the database connection string, pass an array of keys to `parseEnv` to validate and return just those:
 
 ```typescript
-import { parseEnv } from "@neondatabase/env/v1";
+import { parseEnv } from "@neon/env/v1";
 import config from "./neon";
 
 const { postgres } = parseEnv(config, ["DATABASE_URL"]);

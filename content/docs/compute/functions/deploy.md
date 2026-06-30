@@ -82,10 +82,10 @@ zip -j function.zip dist/index.mjs
 
 The archive's entry file must be named `index.mjs` or `index.js`; the runtime looks for those names.
 
-From Node.js, `buildFunctionBundle` from [`@neondatabase/config-runtime`](https://www.npmjs.com/package/@neondatabase/config-runtime) does both steps in one call and produces exactly the archive the deploy endpoint expects:
+From Node.js, `buildFunctionBundle` from [`@neon/config-runtime`](https://www.npmjs.com/package/@neon/config-runtime) does both steps in one call and produces exactly the archive the deploy endpoint expects:
 
 ```ts
-import { buildFunctionBundle } from "@neondatabase/config-runtime/v1";
+import { buildFunctionBundle } from "@neon/config-runtime/v1";
 
 const zip = await buildFunctionBundle({
   slug: "hello",

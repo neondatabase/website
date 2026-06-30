@@ -22,7 +22,7 @@ Specifically:
 Services and branch policy are independent. Use one, the other, or both.
 
 ```bash
-npm install @neondatabase/config
+npm install @neon/config
 ```
 
 The package source is on [GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/config).
@@ -36,7 +36,7 @@ neonctl link
 ## Config structure
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   // Services: what exists on every branch
@@ -68,7 +68,7 @@ export default defineConfig({
 The `branch` closure works on any Neon project. The examples below configure the default branch and apply TTL and compute to new branches at creation. Returning `{}` for existing branches is deliberate: it avoids overwriting settings on branches already in use:
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   branch: (branch) => {
@@ -97,7 +97,7 @@ export default defineConfig({
 On paid plans, you can also protect the default branch and control suspend timeouts:
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   branch: (branch) => {
@@ -188,14 +188,14 @@ dataApi: {
 
 ## Type-safe environment variables
 
-`@neondatabase/env` gives you type-safe access to your branch's injected variables. It reads `process.env` at runtime and validates each variable against the services declared in your `neon.ts` config. Missing or empty variables throw with a clear error.
+`@neon/env` gives you type-safe access to your branch's injected variables. It reads `process.env` at runtime and validates each variable against the services declared in your `neon.ts` config. Missing or empty variables throw with a clear error.
 
 ```bash
-npm install @neondatabase/env
+npm install @neon/env
 ```
 
 ```ts
-import { parseEnv } from '@neondatabase/env';
+import { parseEnv } from '@neon/env';
 import config from './neon';
 
 const env = parseEnv(config);
@@ -307,7 +307,7 @@ Bucket names follow S3 naming rules. `public_read` makes objects accessible with
 All services combined. `neonctl deploy` provisions everything and writes credentials to `.env.local`.
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   auth: true,

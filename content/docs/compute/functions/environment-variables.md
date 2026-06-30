@@ -35,17 +35,17 @@ Each variable is present only when its service is enabled on the branch. `DATABA
 These variables are branch-scoped: each branch injects its own values. A function deployed to a preview branch connects to that branch's database, not the default branch's.
 
 <Admonition type="note" title="Two AI Gateway endpoints">
-`OPENAI_BASE_URL` targets the gateway's OpenAI **Responses API** (`/ai-gateway/openai/v1`). The **Chat Completions** endpoint is at a different path: point the SDK's base URL at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` (see [Chat completions](/docs/ai-gateway/chat-completions)). The [`@neondatabase/ai-sdk-provider`](/docs/compute/functions/agents) handles this routing for you.
+`OPENAI_BASE_URL` targets the gateway's OpenAI **Responses API** (`/ai-gateway/openai/v1`). The **Chat Completions** endpoint is at a different path: point the SDK's base URL at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` (see [Chat completions](/docs/ai-gateway/chat-completions)). The [`@neon/ai-sdk-provider`](/docs/compute/functions/agents) handles this routing for you.
 </Admonition>
 
 <Admonition type="note" title="Local pull vs. deployed runtime">
 A deployed function gets credentials injected automatically for every service enabled on its branch, so you don't ship a `.env`. For local development, `neonctl env pull` writes credentials for the services you **declare in `neon.ts`**, which can be a subset. Declare a service (`auth: true`, `dataApi: true`, `aiGateway: true`, `buckets: { ... }`) to pull its credentials locally and to get type-safe access.
 </Admonition>
 
-For type-safe access, the [`@neondatabase/env`](https://www.npmjs.com/package/@neondatabase/env) package ships `parseEnv`. It takes your `neon.ts` config and returns a typed env object validated against the services the config declares:
+For type-safe access, the [`@neon/env`](https://www.npmjs.com/package/@neon/env) package ships `parseEnv`. It takes your `neon.ts` config and returns a typed env object validated against the services the config declares:
 
 ```ts
-import { parseEnv } from '@neondatabase/env';
+import { parseEnv } from '@neon/env';
 import config from './neon';
 
 const env = parseEnv(config);
@@ -82,7 +82,7 @@ A deploy doesn't wipe variables set by earlier deploys. The `--env` flags you pa
 Declare variables under the function's `env` field. Values are resolved when `neonctl deploy` runs, so you can read from `process.env` to avoid hardcoding secrets:
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   preview: {

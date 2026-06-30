@@ -43,7 +43,7 @@ Object storage is part of the `neon.ts` infrastructure-as-code config (see the `
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   preview: {
@@ -73,7 +73,7 @@ neonctl config apply    # create the declared buckets  (neonctl deploy is an ali
 
 Buckets are **branch-scoped**: when a `neon.ts` is present, `neonctl checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with its buckets already provisioned (and copy-on-write objects inherited from the parent). Checking out an _existing_ branch doesn't reconcile it — run `neonctl deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's S3 credentials into your local `.env.local`, so the same `env pull` step shown below happens for you on those commands.
 
-For typed, validated access to the injected S3 credentials, pass the same config object to `parseEnv` from `@neondatabase/env` — it returns an `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts`.
+For typed, validated access to the injected S3 credentials, pass the same config object to `parseEnv` from `@neon/env` — it returns an `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts`.
 
 ## Environment variables
 
@@ -139,7 +139,7 @@ const s3 = new S3Client({
 });
 ```
 
-If you prefer typed access instead of reading `process.env` directly, `parseEnv` (from `@neondatabase/env`) returns a validated `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts` — see the `neon` skill.
+If you prefer typed access instead of reading `process.env` directly, `parseEnv` (from `@neon/env`) returns a validated `env.storage` namespace (`accessKeyId`, `secretAccessKey`, `endpoint`, `region`) derived from your `neon.ts` — see the `neon` skill.
 
 Then upload, download, and presign with the raw command objects:
 
