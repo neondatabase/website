@@ -715,7 +715,6 @@ function buildSchema({ src } = {}) {
   return applyOverrides({
     schemaVersion: 2,
     neonctlVersion: pkg.version,
-    generatedAt: new Date().toISOString(),
     // The published binary names; `neon` is an alias of `neonctl`.
     binaries: ['neonctl', 'neon'],
     docsUrl: 'https://neon.com/docs/cli',
@@ -733,6 +732,30 @@ const USAGE = [
   '  --out <file>   Where to write the schema JSON. Defaults to the committed',
   '                 schema.json next to this script.',
 ].join('\n');
+
+// Sorts a map object's keys alphabetically, returning a new object. Used to
+// keep schema.json order stable regardless of the CLI's command-registration
+// (import) order — otherwise an upstream reshuffle of src/commands/index.ts
+// produces a huge, all-noise diff. Arrays (aliases, choices, positionals) are
+// left as-is: their order can be meaningful.
+function sortKeys(map) {
+  const out = {};
+  for (const key of Object.keys(map).sort()) out[key] = map[key];
+  return out;
+}
+
+// Recursively sorts the command tree: every `commands` and `options` map is
+// alphabetized, but each command entry keeps its authored key order
+// (aliases, positionals, options, commands, describe, ...).
+function sortCommandTree(commands) {
+  const sorted = sortKeys(commands);
+  for (const name of Object.keys(sorted)) {
+    const entry = sorted[name];
+    if (entry.options) entry.options = sortKeys(entry.options);
+    if (entry.commands) entry.commands = sortCommandTree(entry.commands);
+  }
+  return sorted;
+}
 
 function main() {
   const args = process.argv.slice(2);
@@ -765,6 +788,8 @@ function main() {
     process.exit(2);
   }
   const schema = buildSchema({ src: resolvedSrc });
+  schema.commands = sortCommandTree(schema.commands);
+  schema.globalOptions = sortKeys(schema.globalOptions);
   fs.writeFileSync(out, `${JSON.stringify(schema, null, 2)}\n`);
   const nCmds = Object.keys(schema.commands).length;
   const nLeafs = countLeaves(schema.commands);

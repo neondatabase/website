@@ -80,7 +80,7 @@ describe('generate-docs rendering', () => {
       expect(index).toContain(`### ${name}`);
     }
     // Nested subtrees are flattened into full invocations.
-    expect(index).toContain('neon bucket object list');
+    expect(index).toContain('neon buckets object list');
   });
 
   it('escapes MDX-hostile characters outside inline code in table cells', () => {
