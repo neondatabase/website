@@ -5,8 +5,8 @@ import { cn } from 'utils/cn';
 
 const TemplatesList = ({ className, templates }) => (
   <ul className={cn('divide-y divide-gray-new-80/80 dark:divide-gray-new-15/80', className)}>
-    {templates.map(({ name, description, slug, gitHubUrl }) => (
-      <li className="pt-6 pb-6 first:pt-0 last:pb-0" key={gitHubUrl}>
+    {templates.map(({ name, description, slug, githubUrl }) => (
+      <li className="pt-6 pb-6 first:pt-0 last:pb-0" key={githubUrl}>
         <Link
           className="group flex items-center justify-between md:flex-col md:items-start md:gap-y-3"
           to={`/templates/${slug}`}
