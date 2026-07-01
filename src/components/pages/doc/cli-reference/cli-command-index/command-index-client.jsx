@@ -49,7 +49,7 @@ const scoreValue = (value, token, weight) => {
   if (normalizedValue.startsWith(token)) return 90 * weight;
   if (words.some((word) => word === token)) return 70 * weight;
   if (words.some((word) => word.startsWith(token))) return 55 * weight;
-  if (normalizedValue.includes(token)) return 35 * weight;
+  if (token.length > 2 && normalizedValue.includes(token)) return 35 * weight;
   if (
     weight >= 6 &&
     token.length > 3 &&
@@ -65,9 +65,9 @@ const scoreValue = (value, token, weight) => {
 
 const getSearchFields = (command, groupTitle) => [
   { value: command.name, weight: 10 },
+  ...(command.aliases || []).map((value) => ({ value, weight: 9 })),
   { value: command.sig, weight: 6 },
   { value: command.desc, weight: 4 },
-  { value: command.href, weight: 3 },
   { value: groupTitle, weight: 3 },
   ...(command.opts || []).map((value) => ({ value, weight: 5 })),
   ...(command.subs || []).map((value) => ({ value, weight: 5 })),
@@ -211,6 +211,7 @@ const Row = ({ command, isOpen, onToggle }) => (
 Row.propTypes = {
   command: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    aliases: PropTypes.arrayOf(PropTypes.string),
     desc: PropTypes.string,
     sig: PropTypes.string,
     opts: PropTypes.arrayOf(PropTypes.string),
