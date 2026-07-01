@@ -10,7 +10,7 @@ summary: >-
   cannot be reset, and branches with their own children must have those children
   deleted first.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-01T19:45:33.907Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -143,3 +143,4 @@ This ensures staging accurately reflects the current production state for reliab
 ## Limitations
 
 - **Reset from parent is unavailable for up to 24 hours after a parent is restored from a snapshot.** If a parent branch is restored from a snapshot, its child branches cannot be reset from that parent for up to 24 hours. If you need to update a child branch during this period, consider using [Instant restore](/docs/introduction/branch-restore) to restore the child branch from the parent directly.
+- **Soft-deleted children still block reset.** Since branches are [soft-deleted by default](/docs/manage/branches#recover-a-deleted-branch), a deleted child branch still counts until permanently removed. Permanently delete children (`hard_delete=true`), or pass [`preserve_under_name`](/docs/introduction/branch-restore#how-to-use-instant-restore) on the restore request to reset without deleting them.
