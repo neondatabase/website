@@ -63,6 +63,10 @@ If none of these fit, [export your data in Postgres-compatible form](/docs/guide
 
 ## Frequently asked questions
 
+### Why are these regions being deprecated?
+
+We're focusing our infrastructure investment where our customers want to run Neon. Most Neon projects run in AWS regions, so concentrating there lets us ship features and reliability improvements faster, rather than splitting effort to maintain Azure in parallel. For teams that need Azure, Databricks Lakebase runs the same Postgres technology as Neon and supports Azure regions.
+
 ### How do I find out which region a project is in?
 
 You can check from the Console, the CLI, or the API:
