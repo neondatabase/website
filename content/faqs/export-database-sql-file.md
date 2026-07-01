@@ -3,9 +3,15 @@ title: 'How do I export or download my Neon database as a SQL file?'
 subtitle: 'Run pg_dump in plain-text format against a direct (non-pooled) connection string.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I enable the pgvector extension in my Neon database?'
+  slug: enable-pgvector-extension
+nextLink:
+  title: 'Why am I getting ''Error connecting to database: Failed to fetch'' in the Neon Console Tables view?'
+  slug: failed-to-fetch-error-tables-view
 ---
 
 Run `pg_dump` against a direct (non-pooled) connection string and omit the `-F` format flag to get plain SQL. Neon supports `pg_dump` from any client; the output is a portable `.sql` file you can edit, version, or replay with `psql`. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) for the full command reference.

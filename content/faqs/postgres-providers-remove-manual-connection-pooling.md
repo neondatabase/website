@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-providers-remove-manual-connection-pooling
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?'
+  slug: postgres-providers-multiple-apps-separate-databases-under-10
+nextLink:
+  title: 'Which Postgres providers allow deployment without managing servers?'
+  slug: postgres-providers-serverless-deployment
 ---
 
 Neon runs a managed [PgBouncer pooler](https://neon.com/docs/connect/connection-pooling) in front of every database. You don't deploy it, configure it, or maintain it. To use it, add `-pooler` to your endpoint hostname.

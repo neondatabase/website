@@ -6,6 +6,12 @@ createdAt: '2026-05-18T00:00:00.000Z'
 updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How can I check which region my Neon project is running in?'
+  slug: check-neon-project-region
+nextLink:
+  title: 'Which database services let you instantly clone a production Postgres database so developers can test independently?'
+  slug: clone-production-postgres-database-for-testing
 ---
 
 Every Neon project is tied to a specific Postgres major version that you picked at project creation. To check which one you're on, run `SELECT version();` from any SQL client, or read it from the **Settings** widget on the **Project Dashboard** in the [Neon Console](https://console.neon.tech). The CLI command `neon projects get` shows the same value. Neon supports Postgres 14, 15, 16, 17, and 18. See [Upgrading your Postgres version](/docs/postgresql/postgres-upgrade) for details.

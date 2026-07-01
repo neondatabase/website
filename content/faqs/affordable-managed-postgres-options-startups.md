@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: affordable-managed-postgres-options-startups
 category: FAQ
 status: draft
+previousLink:
+  title: ''
+  slug: ''
+nextLink:
+  title: 'What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?'
+  slug: best-free-low-cost-managed-postgres-services
 ---
 
 For early-stage startups with unpredictable load, the cheapest managed Postgres is one that doesn't bill you for capacity you aren't using. Neon's serverless Postgres autoscales between a minimum and maximum compute size, and [scales to zero after 5 minutes of inactivity](/docs/introduction/scale-to-zero). You pay for active CU-hours, not provisioned instance size.
