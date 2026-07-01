@@ -1,0 +1,477 @@
+{
+  "tags": [
+    {
+      "slug": "projects",
+      "specName": "project",
+      "display": "Projects",
+      "description": "Create, manage, and delete Neon projects",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "list-projects",
+            "create-project",
+            "list-shared-projects",
+            "get-project",
+            "update-project",
+            "delete-project",
+            "recover-project"
+          ]
+        },
+        {
+          "label": "Access & Permissions",
+          "slugs": [
+            "list-project-permissions",
+            "grant-permission-to-project",
+            "revoke-permission-from-project"
+          ]
+        },
+        {
+          "label": "Security (JWKS)",
+          "slugs": [
+            "get-project-jwks",
+            "add-project-jwks",
+            "delete-project-jwks"
+          ]
+        },
+        {
+          "label": "Connection",
+          "slugs": [
+            "get-connection-uri",
+            "get-available-preload-libraries"
+          ]
+        },
+        {
+          "label": "Transfer",
+          "slugs": [
+            "create-project-transfer-request",
+            "accept-project-transfer-request"
+          ]
+        },
+        {
+          "label": "VPC Endpoints",
+          "slugs": [
+            "list-project-vpc-endpoints",
+            "assign-project-vpc-endpoint",
+            "delete-project-vpc-endpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "branches",
+      "specName": "branch",
+      "display": "Branches",
+      "description": "Copy-on-write database clones for dev, test, and CI/CD",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "list-project-branches",
+            "count-project-branches",
+            "create-project-branch",
+            "get-project-branch",
+            "update-project-branch",
+            "set-default-project-branch",
+            "delete-project-branch",
+            "recover-project-branch"
+          ]
+        },
+        {
+          "label": "Databases",
+          "slugs": [
+            "list-project-branch-databases",
+            "create-project-branch-database",
+            "get-project-branch-database",
+            "update-project-branch-database",
+            "delete-project-branch-database"
+          ]
+        },
+        {
+          "label": "Roles",
+          "slugs": [
+            "list-project-branch-roles",
+            "create-project-branch-role",
+            "get-project-branch-role",
+            "delete-project-branch-role",
+            "get-project-branch-role-password",
+            "reset-project-branch-role-password"
+          ]
+        },
+        {
+          "label": "Schema",
+          "slugs": [
+            "get-project-branch-schema",
+            "get-project-branch-schema-comparison"
+          ]
+        },
+        {
+          "label": "Computes",
+          "slugs": [
+            "list-project-branch-endpoints"
+          ]
+        },
+        {
+          "label": "Restore & Backup",
+          "slugs": [
+            "restore-project-branch",
+            "finalize-restore-branch"
+          ]
+        },
+        {
+          "label": "Data Masking",
+          "slugs": [
+            "create-project-branch-anonymized",
+            "get-anonymized-branch-status",
+            "start-anonymization",
+            "get-masking-rules",
+            "update-masking-rules"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "endpoints",
+      "specName": "endpoint",
+      "display": "Endpoints",
+      "description": "Compute instances that run your Postgres workload",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "list-project-endpoints",
+            "create-project-endpoint",
+            "get-project-endpoint",
+            "update-project-endpoint",
+            "delete-project-endpoint"
+          ]
+        },
+        {
+          "label": "State",
+          "slugs": [
+            "start-project-endpoint",
+            "suspend-project-endpoint",
+            "restart-project-endpoint"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "auth",
+      "specName": "auth",
+      "display": "Authentication",
+      "description": "Neon Auth configuration and user management",
+      "groups": [
+        {
+          "label": "Setup",
+          "slugs": [
+            "create-neon-auth",
+            "get-neon-auth",
+            "disable-neon-auth",
+            "update-neon-auth-config"
+          ]
+        },
+        {
+          "label": "OAuth Providers",
+          "slugs": [
+            "list-branch-neon-auth-oauth-providers",
+            "add-branch-neon-auth-oauth-provider",
+            "update-branch-neon-auth-oauth-provider",
+            "delete-branch-neon-auth-oauth-provider"
+          ]
+        },
+        {
+          "label": "Users",
+          "slugs": [
+            "create-branch-neon-auth-new-user",
+            "delete-branch-neon-auth-user",
+            "update-neon-auth-user-role"
+          ]
+        },
+        {
+          "label": "Trusted Domains",
+          "slugs": [
+            "list-branch-neon-auth-trusted-domains",
+            "add-branch-neon-auth-trusted-domain",
+            "delete-branch-neon-auth-trusted-domain"
+          ]
+        },
+        {
+          "label": "Email",
+          "slugs": [
+            "get-neon-auth-email-and-password-config",
+            "update-neon-auth-email-and-password-config",
+            "get-neon-auth-email-provider",
+            "update-neon-auth-email-provider",
+            "send-neon-auth-test-email"
+          ]
+        },
+        {
+          "label": "Plugins",
+          "slugs": [
+            "get-neon-auth-plugin-configs",
+            "update-neon-auth-magic-link-plugin",
+            "update-neon-auth-organization-plugin",
+            "get-neon-auth-phone-number-plugin",
+            "update-neon-auth-phone-number-plugin"
+          ]
+        },
+        {
+          "label": "Configuration",
+          "slugs": [
+            "get-neon-auth-allow-localhost",
+            "update-neon-auth-allow-localhost",
+            "get-neon-auth-webhook-config",
+            "update-neon-auth-webhook-config"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "organizations",
+      "specName": "organizations",
+      "bareId": "org_id",
+      "display": "Organizations",
+      "description": "Manage org members, API keys, VPC endpoints, and spending",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "get-organization"
+          ]
+        },
+        {
+          "label": "API Keys",
+          "slugs": [
+            "list-org-api-keys",
+            "create-org-api-key",
+            "revoke-org-api-key"
+          ]
+        },
+        {
+          "label": "Members",
+          "slugs": [
+            "get-organization-members",
+            "get-organization-member",
+            "update-organization-member",
+            "remove-organization-member",
+            "get-organization-invitations",
+            "create-organization-invitations"
+          ]
+        },
+        {
+          "label": "Spending",
+          "slugs": [
+            "get-organization-spending-limit",
+            "set-organization-spending-limit",
+            "delete-organization-spending-limit"
+          ]
+        },
+        {
+          "label": "VPC Endpoints",
+          "slugs": [
+            "list-organization-vpc-endpoints-all-regions",
+            "list-organization-vpc-endpoints",
+            "get-organization-vpc-endpoint-details",
+            "assign-organization-vpc-endpoint",
+            "delete-organization-vpc-endpoint"
+          ]
+        },
+        {
+          "label": "Transfer",
+          "slugs": [
+            "transfer-projects-from-org-to-org"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "api-keys",
+      "specName": "api-key",
+      "display": "API Keys",
+      "description": "Create and revoke API keys",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "list-api-keys",
+            "create-api-key",
+            "revoke-api-key"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "users",
+      "specName": "users",
+      "display": "Users",
+      "description": "Current user details and org membership",
+      "groups": [
+        {
+          "label": "Account",
+          "slugs": [
+            "get-current-user-info",
+            "get-current-user-organizations",
+            "get-auth-details"
+          ]
+        },
+        {
+          "label": "Transfer",
+          "slugs": [
+            "transfer-projects-from-user-to-org"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "regions",
+      "specName": "region",
+      "display": "Regions",
+      "description": "List supported deployment regions",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "get-active-regions"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "consumption",
+      "specName": "consumption",
+      "display": "Consumption",
+      "description": "Query billing and usage metrics",
+      "groups": [
+        {
+          "label": "History",
+          "slugs": [
+            "get-consumption-history-per-account",
+            "get-consumption-history-per-project",
+            "get-consumption-history-per-project-v2"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "operations",
+      "specName": "operation",
+      "display": "Operations",
+      "description": "Track async operation status",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "list-project-operations",
+            "get-project-operation"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "snapshots",
+      "specName": "snapshot",
+      "display": "Snapshots",
+      "description": "Point-in-time backup and restore",
+      "groups": [
+        {
+          "label": "Core",
+          "slugs": [
+            "list-snapshots",
+            "create-snapshot",
+            "restore-snapshot",
+            "delete-snapshot"
+          ]
+        },
+        {
+          "label": "Schedule",
+          "slugs": [
+            "get-snapshot-schedule",
+            "set-snapshot-schedule",
+            "update-snapshot"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "dataapi",
+      "specName": "dataapi",
+      "display": "Data API",
+      "description": "RESTful access to your database",
+      "groups": [
+        {
+          "label": "Data API",
+          "slugs": [
+            "create-project-branch-data-api",
+            "get-project-branch-data-api",
+            "update-project-branch-data-api",
+            "delete-project-branch-data-api"
+          ]
+        },
+        {
+          "label": "Security Advisor",
+          "slugs": [
+            "get-project-advisor-security-issues"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "auth-legacy",
+      "specName": "auth-legacy",
+      "display": "Legacy Auth",
+      "description": null,
+      "groups": [
+        {
+          "label": "Integrations",
+          "slugs": [
+            "list-neon-auth-integrations",
+            "create-neon-auth-integration",
+            "delete-neon-auth-integration"
+          ]
+        },
+        {
+          "label": "OAuth Providers",
+          "slugs": [
+            "list-neon-auth-oauth-providers",
+            "add-neon-auth-oauth-provider",
+            "update-neon-auth-oauth-provider",
+            "delete-neon-auth-oauth-provider"
+          ]
+        },
+        {
+          "label": "Users",
+          "slugs": [
+            "create-neon-auth-new-user",
+            "delete-neon-auth-user"
+          ]
+        },
+        {
+          "label": "SDK Keys & Provider",
+          "slugs": [
+            "create-neon-auth-provider-sdk-keys",
+            "transfer-neon-auth-provider-project"
+          ]
+        },
+        {
+          "label": "Email",
+          "slugs": [
+            "get-neon-auth-email-server",
+            "update-neon-auth-email-server"
+          ]
+        },
+        {
+          "label": "Redirect URIs",
+          "slugs": [
+            "list-neon-auth-redirect-uri-whitelist-domains",
+            "add-neon-auth-domain-to-redirect-uri-whitelist",
+            "delete-neon-auth-domain-from-redirect-uri-whitelist"
+          ]
+        }
+      ]
+    }
+  ],
+  "operationOverrides": {
+    "getProjectAdvisorSecurityIssues": "dataapi"
+  }
+}

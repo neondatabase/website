@@ -307,15 +307,16 @@ describe('buildAgent404Response', () => {
     expect(result).toContain('`/docs/manage/nonexistent-page`');
   });
 
-  it('should include links to llms.txt and llms-full.txt', () => {
+  it('should include links to llms.txt, api.md, and cli.md', () => {
     const result = buildAgent404Response('/docs/some-page');
     expect(result).toContain('/docs/llms.txt');
-    expect(result).toContain('/docs/llms-full.txt');
+    expect(result).toContain('/docs/reference/api.md');
+    expect(result).toContain('/docs/cli.md');
   });
 
   it('should include a link to the API reference', () => {
     const result = buildAgent404Response('/docs/some-page');
-    expect(result).toContain('/docs/reference/api-reference.md');
+    expect(result).toContain('/docs/reference/api.md');
   });
 
   it('should work with deeply nested paths', () => {

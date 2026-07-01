@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.26.6",
-  "generatedAt": "2026-06-16T12:27:53.002Z",
+  "neonctlVersion": "2.27.0",
+  "generatedAt": "2026-06-23T13:36:37.371Z",
   "binaries": [
     "neonctl",
     "neon"

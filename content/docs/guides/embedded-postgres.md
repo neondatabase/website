@@ -11,7 +11,7 @@ summary: >-
   quota enforcement, and usage monitoring via the metrics endpoint.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
@@ -249,7 +249,7 @@ We're here to help you build your integration:
 
 <DetailIconCards>
 
-<a href="/docs/reference/api-reference" description="Explore all available API endpoints" icon="transactions">Neon API Reference</a>
+<a href="/docs/reference/api" description="Explore all available API endpoints" icon="transactions">Neon API Reference</a>
 
 <a href="/contact-sales" description="Discuss your integration with our team" icon="todo">Talk to Sales</a>
 

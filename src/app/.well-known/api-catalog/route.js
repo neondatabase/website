@@ -7,7 +7,7 @@ const catalog = {
       'service-desc': [
         { href: 'https://neon.com/api_spec/release/v2.json', type: 'application/json' },
       ],
-      'service-doc': [{ href: 'https://neon.com/docs/reference/api-reference' }],
+      'service-doc': [{ href: 'https://neon.com/docs/reference/api' }],
     },
   ],
 };

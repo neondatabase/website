@@ -38,20 +38,22 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
                 ? 'border-black-pure text-black-pure after:opacity-100 dark:border-white dark:text-white'
                 : 'border-transparent text-gray-new-40 dark:text-gray-new-60'
             )}
-            key={`lb-${index}`}
+            key={label}
             type="button"
             onClick={() => handleTabClick(index)}
-            onKeyDown={() => handleTabClick(index)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') handleTabClick(index);
+            }}
           >
             {label}
           </button>
         ))}
       </div>
       {/* Code block container */}
-      <div className="overflow-hidden bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
+      <div className="overflow-x-auto bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
         {displayedChildren.map((child, index) => {
           if (index !== currentIndex) return null;
-          return <Fragment key={index}>{child}</Fragment>;
+          return <Fragment key={displayedLabels[index]}>{child}</Fragment>;
         })}
       </div>
     </div>

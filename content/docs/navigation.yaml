@@ -725,103 +725,112 @@
               slug: ai/lakebase-search-get-started
     - section: Tools & Workflows
       items:
-        - title: API, CLI & SDKs
-          slug: reference/api-reference
+        - title: API reference
+          slug: reference/api
+          icon: api
+          items:
+            - title: Overview
+              slug: reference/api
+            - title: Get started
+              slug: reference/api/get-started
+            - title: Key concepts
+              slug: reference/api/key-concepts
+            - section: API Reference
+              title: Endpoint index
+              slug: reference/api/reference
+              items: []
+        - title: CLI
+          slug: cli
           icon: cli
           items:
-            - section: API
-              icon: api
+            - title: Overview
+              slug: cli
+            - title: Install and connect
+              slug: cli/install
+            - title: Quickstart
+              slug: cli/quickstart
+            - section: Setup & context
               items:
-                - title: Neon API
-                  slug: reference/api-reference
-            - section: CLI
-              icon: cli
+                - title: auth
+                  slug: cli/auth
+                - title: init
+                  slug: cli/init
+                - title: bootstrap
+                  slug: cli/bootstrap
+                - title: link
+                  slug: cli/link
+                - title: checkout
+                  slug: cli/checkout
+                - title: env
+                  slug: cli/env
+                - title: set-context
+                  slug: cli/set-context
+                - title: me
+                  slug: cli/me
+                - title: completion
+                  slug: cli/completion
+            - section: Projects & branches
               items:
-                - title: Overview
-                  slug: cli
-                - title: Install and connect
-                  slug: cli/install
-                - title: Quickstart
-                  slug: cli/quickstart
-                - section: Setup & context
-                  items:
-                    - title: auth
-                      slug: cli/auth
-                    - title: init
-                      slug: cli/init
-                    - title: bootstrap
-                      slug: cli/bootstrap
-                    - title: link
-                      slug: cli/link
-                    - title: checkout
-                      slug: cli/checkout
-                    - title: env
-                      slug: cli/env
-                    - title: set-context
-                      slug: cli/set-context
-                    - title: me
-                      slug: cli/me
-                    - title: completion
-                      slug: cli/completion
-                - section: Projects & branches
-                  items:
-                    - title: projects
-                      slug: cli/projects
-                    - title: branches
-                      slug: cli/branches
-                    - title: databases
-                      slug: cli/databases
-                    - title: roles
-                      slug: cli/roles
-                    - title: operations
-                      slug: cli/operations
-                - section: Connect to Postgres
-                  items:
-                    - title: connection-string
-                      slug: cli/connection-string
-                    - title: psql
-                      slug: cli/psql
-                - section: Config as code
-                  items:
-                    - title: config
-                      slug: cli/config
-                    - title: dev
-                      slug: cli/dev
-                - section: Functions, storage & data
-                  items:
-                    - title: functions
-                      slug: cli/functions
-                    - title: bucket
-                      slug: cli/bucket
-                    - title: data-api
-                      slug: cli/data-api
-                    - title: neon-auth
-                      slug: cli/neon-auth
-                - section: Org & network
-                  items:
-                    - title: orgs
-                      slug: cli/orgs
-                    - title: ip-allow
-                      slug: cli/ip-allow
-                    - title: vpc
-                      slug: cli/vpc
-            - section: SDKs
-              icon: sdk
+                - title: projects
+                  slug: cli/projects
+                - title: branches
+                  slug: cli/branches
+                - title: databases
+                  slug: cli/databases
+                - title: roles
+                  slug: cli/roles
+                - title: operations
+                  slug: cli/operations
+            - section: Connect to Postgres
               items:
-                - title: Overview
-                  slug: reference/sdk
-                - title: Neon TypeScript SDK
-                  slug: reference/javascript-sdk
-                - title: Neon API TypeScript SDK
-                  slug: reference/typescript-sdk
-                - title: Python SDK (Neon API)
-                  slug: reference/python-sdk
-                - title: Go SDK (Neon API)
-                  slug: https://github.com/kislerdm/neon-sdk-go
-                  tag: community
-                - title: Node.js / Deno SDK (Neon API)
-                  slug: https://github.com/paambaati/neon-js-sdk
-                  tag: community
+                - title: connection-string
+                  slug: cli/connection-string
+                - title: psql
+                  slug: cli/psql
+            - section: Config as code
+              items:
+                - title: config
+                  slug: cli/config
+                - title: dev
+                  slug: cli/dev
+            - section: Functions, storage & data
+              items:
+                - title: functions
+                  slug: cli/functions
+                - title: bucket
+                  slug: cli/bucket
+                - title: data-api
+                  slug: cli/data-api
+                - title: neon-auth
+                  slug: cli/neon-auth
+            - section: Org & network
+              items:
+                - title: orgs
+                  slug: cli/orgs
+                - title: ip-allow
+                  slug: cli/ip-allow
+                - title: vpc
+                  slug: cli/vpc
+        - title: SDKs
+          slug: reference/sdk
+          icon: sdk
+          items:
+            - title: Overview
+              slug: reference/sdk
+            - title: Neon TypeScript SDK
+              slug: reference/javascript-sdk
+            - title: Neon API TypeScript SDK
+              slug: reference/typescript-sdk
+            - title: Python SDK (Neon API)
+              slug: reference/python-sdk
+            - title: The @neondatabase/toolkit
+              slug: reference/neondatabase-toolkit
+            - title: Go SDK (Neon API)
+              slug: https://github.com/kislerdm/neon-sdk-go
+              tag: community
+            - title: Node.js / Deno SDK (Neon API)
+              slug: https://github.com/paambaati/neon-js-sdk
+              tag: community
 
         - title: Local development
           icon: container

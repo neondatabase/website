@@ -1,0 +1,183 @@
+import PropTypes from 'prop-types';
+
+import ApiEndpointsTable from 'components/pages/doc/api-endpoints-table/api-endpoints-table';
+import Breadcrumbs from 'components/pages/doc/breadcrumbs';
+import DropdownMenu from 'components/pages/doc/dropdown-menu';
+import Tag from 'components/pages/doc/tag';
+import Content from 'components/shared/content';
+import DocFooter from 'components/shared/doc-footer';
+import Link from 'components/shared/link';
+import NavigationLinks from 'components/shared/navigation-links';
+import { DOCS_BASE_PATH } from 'constants/docs';
+import ExternalIcon from 'icons/external.inline.svg';
+import { cn } from 'utils/cn';
+
+import tagConfig from '../../../../../scripts/data/tag-config.json';
+
+// Lookup: tag slug → { groups } (the shape buildGroupedOps expects).
+// Pre-Phase-3a this came from a separate tag-groups.json file; consolidated.
+const tagGroupsBySlug = Object.fromEntries(
+  tagConfig.tags.filter((t) => t.groups).map((t) => [t.slug, { groups: t.groups }])
+);
+
+function buildGroupedOps(operations, tagConfig) {
+  if (!tagConfig?.groups) return null;
+
+  const opsBySlug = new Map(operations.map((op) => [op.id, op]));
+  const assigned = new Set();
+
+  const groups = tagConfig.groups
+    .map((group) => {
+      const ops = group.slugs.map((slug) => opsBySlug.get(slug)).filter(Boolean);
+      ops.forEach((op) => assigned.add(op.id));
+      return { label: group.label, ops };
+    })
+    .filter((g) => g.ops.length > 0);
+
+  const other = operations.filter((op) => !assigned.has(op.id));
+  if (other.length > 0) {
+    groups.push({ label: 'Other', ops: other });
+  }
+
+  return groups;
+}
+
+const ApiTagPage = async ({
+  tagDisplay,
+  operations,
+  intro,
+  breadcrumbs,
+  navigationLinks,
+  currentSlug,
+}) => {
+  const { previousLink, nextLink } = navigationLinks;
+  const gitHubPath = `content/docs/${currentSlug}.md`;
+  const tag = operations[0]?.tag;
+  const groups = buildGroupedOps(operations, tag ? tagGroupsBySlug[tag] : null);
+
+  return (
+    <div className="min-w-0 pb-32 lg:pb-24 md:pb-20">
+      {breadcrumbs?.length > 0 && (
+        <Breadcrumbs className="mb-7!" breadcrumbs={breadcrumbs} baseUrl={DOCS_BASE_PATH} />
+      )}
+
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]">
+            {tagDisplay}
+          </h1>
+          <p className="mt-1 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+            {operations.length} endpoint{operations.length !== 1 ? 's' : ''}
+          </p>
+        </div>
+        <DropdownMenu className="shrink-0" gitHubPath={gitHubPath} />
+      </div>
+
+      <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
+        <Link
+          className="inline-flex items-center gap-1 text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+          to={`/docs/${currentSlug}.md`}
+        >
+          Markdown for AI context
+          <ExternalIcon className="size-3" />
+        </Link>
+        {` (${tagDisplay}): all ${operations.length} endpoints with parameters and examples.`}
+      </p>
+
+      {intro && (
+        <div className="mt-6">
+          <Content content={intro} withoutAnchorHeading />
+        </div>
+      )}
+
+      {groups ? (
+        <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-1">
+          {groups.map((group) => (
+            <div
+              key={group.label}
+              className="rounded-[10px] border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <h3 className="text-[13px] font-semibold text-black-pure dark:text-white">
+                  {group.label}
+                </h3>
+                <span className="font-mono text-[10px] text-gray-new-50 dark:text-gray-new-60">
+                  {group.ops.length}
+                </span>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                {group.ops.map((op) => (
+                  <a
+                    key={op.id}
+                    href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
+                    className={cn(
+                      'flex items-center gap-2 text-[13px] transition-colors duration-100 hover:text-green-45 dark:hover:text-green-45',
+                      op.deprecated
+                        ? 'text-gray-new-60 dark:text-gray-new-50'
+                        : 'text-gray-new-40 dark:text-gray-new-60'
+                    )}
+                  >
+                    {op.summary}
+                    {op.deprecated && <Tag label="deprecated" size="sm" />}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-7 rounded-[10px] border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
+          <div className="flex flex-col gap-1.5">
+            {operations.map((op) => (
+              <a
+                key={op.id}
+                href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
+                className={cn(
+                  'flex items-center gap-2 text-[13px] transition-colors duration-100 hover:text-green-45 dark:hover:text-green-45',
+                  op.deprecated
+                    ? 'text-gray-new-60 dark:text-gray-new-50'
+                    : 'text-gray-new-40 dark:text-gray-new-60'
+                )}
+              >
+                {op.summary}
+                {op.deprecated && <Tag label="deprecated" size="sm" />}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <ApiEndpointsTable operations={operations} tagDisplay={tagDisplay} />
+
+      <DocFooter slug={currentSlug} gitHubPath={null} />
+
+      <NavigationLinks
+        className="mt-6"
+        previousLink={previousLink}
+        nextLink={nextLink}
+        basePath={DOCS_BASE_PATH}
+      />
+    </div>
+  );
+};
+
+ApiTagPage.propTypes = {
+  tagDisplay: PropTypes.string.isRequired,
+  operations: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      tag: PropTypes.string,
+      summary: PropTypes.string,
+      deprecated: PropTypes.bool,
+    })
+  ).isRequired,
+  intro: PropTypes.string,
+  breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),
+  navigationLinks: PropTypes.shape({
+    previousLink: PropTypes.shape({}),
+    nextLink: PropTypes.shape({}),
+  }).isRequired,
+  currentSlug: PropTypes.string.isRequired,
+};
+
+export default ApiTagPage;

@@ -24,7 +24,7 @@ The last command prints a Postgres connection string you can pass to any driver.
 
 ## Or call the API directly
 
-For automated provisioning, the [Neon API](https://neon.com/docs/reference/api-reference) creates a project, branch, and compute in one call. This is how platforms like Vercel and Replit spin up a per-user database the moment someone signs up.
+For automated provisioning, the [Neon API](https://neon.com/docs/reference/api) creates a project, branch, and compute in one call. This is how platforms like Vercel and Replit spin up a per-user database the moment someone signs up.
 
 If you don't want to sign up at all, [Claimable Postgres](https://neon.new) gives you a working database in seconds without an account. Run `npx neon-new --yes` and you get a connection string that's valid for 72 hours. Claim it to a Neon account before it expires to keep it.
 

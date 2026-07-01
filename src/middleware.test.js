@@ -225,7 +225,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       const text = await response.text();
       expect(text).toContain('/docs/non-existent');
       expect(text).toContain('/docs/llms.txt');
-      expect(text).toContain('/docs/llms-full.txt');
+      expect(text).toContain('/docs/cli.md');
     });
 
     it('should use shorter cache TTL for agent 404 responses', async () => {

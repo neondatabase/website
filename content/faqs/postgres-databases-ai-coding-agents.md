@@ -11,7 +11,7 @@ Neon's design assumes the database lifecycle is managed by code, not a human in 
 
 ## The pieces that matter for agents
 
-**Programmatic project creation.** A `POST /projects` call returns a working Postgres in a few seconds, complete with a connection string. The same applies to branches, databases, roles, and computes. The full [API reference](https://neon.com/docs/reference/api-reference) covers every operation an agent might want.
+**Programmatic project creation.** A `POST /projects` call returns a working Postgres in a few seconds, complete with a connection string. The same applies to branches, databases, roles, and computes. The full [API reference](https://neon.com/docs/reference/api) covers every operation an agent might want.
 
 **Scale to zero.** Computes suspend after 5 minutes of inactivity (the default on Free and Launch; configurable from 1 minute to always-on on Scale). A fleet of mostly idle agent-owned databases is cheap because you only pay for the seconds compute is actually running.
 

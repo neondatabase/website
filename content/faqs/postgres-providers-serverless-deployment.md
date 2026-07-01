@@ -27,7 +27,7 @@ neon projects create --name my-app
 neon connection-string
 ```
 
-That prints a Postgres connection string you can paste into `DATABASE_URL`. The same flow works through the [Neon API](https://neon.com/docs/reference/api-reference) or the Console.
+That prints a Postgres connection string you can paste into `DATABASE_URL`. The same flow works through the [Neon API](https://neon.com/docs/reference/api) or the Console.
 
 ## What you don't manage
 
