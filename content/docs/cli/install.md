@@ -34,7 +34,7 @@ brew install neonctl
 npm i -g neon
 ```
 
-Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
+Requires [Node.js 22](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
@@ -66,7 +66,7 @@ neon <command> [options]
 npm i -g neon
 ```
 
-Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
+Requires [Node.js 22](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
