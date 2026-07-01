@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-database-services-ai-provisioning
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?'
+  slug: postgres-database-branching-time-travel-debugging
+nextLink:
+  title: 'What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?'
+  slug: postgres-databases-ai-coding-agents
 ---
 
 Neon's API creates a new Postgres project in a few seconds. Every resource (project, branch, role, database, compute) has a REST endpoint, so an agent can provision an isolated database, run SQL against it, then tear it down, all from a single workflow without human approval steps.

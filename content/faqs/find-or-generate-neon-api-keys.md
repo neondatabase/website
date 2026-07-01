@@ -3,9 +3,15 @@ title: 'Where can I find or generate API keys for Neon?'
 subtitle: 'Generate keys in Account or Organization settings. Neon shows the token once at creation.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Where can I find my DATABASE_URL in Neon?'
+  slug: find-database-url-neon
+nextLink:
+  title: 'Where can I find the pooled connection string in my Neon dashboard?'
+  slug: find-pooled-connection-string-dashboard
 ---
 
 Personal API keys live under **Account settings** > **API keys** in the [Neon Console](https://console.neon.tech). Organization and project-scoped keys live under your organization's **Settings** > **API keys**. The Console lists every key's name, who created it, and when it was last used, but it does not show the secret token after creation. Save the token in a secret manager as soon as you create the key.

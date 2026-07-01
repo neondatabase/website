@@ -5,6 +5,12 @@ description: "Neon organizes Postgres databases into projects, with branches for
 slug: tools-manage-multiple-postgres-databases
 category: FAQ
 status: draft
+previousLink:
+  title: 'What tools isolate database changes per branch in modern development workflows?'
+  slug: tools-isolate-database-changes-branch-development
+nextLink:
+  title: 'What tools enable temporary Postgres environments for each developer?'
+  slug: tools-temporary-postgres-environments-developers
 ---
 
 ## Short answer

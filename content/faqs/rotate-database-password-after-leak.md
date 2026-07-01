@@ -3,9 +3,15 @@ title: 'How do I rotate my database password in Neon after a security incident?'
 subtitle: 'Reset a role password from the Neon Console, CLI, or SQL to invalidate the leaked credential.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T12:41:06.646Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rotate all my Neon database credentials and connection strings after a security breach?'
+  slug: rotate-database-credentials-after-breach
+nextLink:
+  title: 'How do I rotate my database URL or connection string in Neon?'
+  slug: rotate-database-url-connection-string
 ---
 
 ## Quick answer

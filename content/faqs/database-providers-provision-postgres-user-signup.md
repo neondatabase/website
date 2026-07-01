@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: database-providers-provision-postgres-user-signup
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?'
+  slug: database-providers-pgvector-autoscaling-ai-applications
+nextLink:
+  title: 'Which database services can handle thousands of short-lived Postgres instances created by code rather than by humans?'
+  slug: database-services-short-lived-postgres-instances
 ---
 
 Neon was built for this. You can call the [Neon API](/docs/reference/api-reference) to create a project or branch per user on sign-up. Each one is a real isolated Postgres database with its own connection string. Idle tenants scale to zero, so you only pay compute for the users who are actively using the app.

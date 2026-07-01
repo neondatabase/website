@@ -6,6 +6,12 @@ createdAt: '2026-05-18T00:00:00.000Z'
 updatedOn: '2026-06-15T17:19:53.989Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'
+  slug: best-ways-separate-postgres-database-development
+nextLink:
+  title: 'How do I migrate an existing Neon project to a different AWS region?'
+  slug: change-region-existing-neon-project
 ---
 
 ## Quick answer
