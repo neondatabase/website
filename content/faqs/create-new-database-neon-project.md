@@ -30,7 +30,7 @@ The owner role you pick becomes the database owner and has full privileges on it
 
 <TabItem>
 
-Install the CLI with `npm i -g neonctl` and authenticate with `neon auth`. Then:
+Install the CLI with `npm i -g neon` and authenticate with `neon auth`. Then:
 
 ```bash
 neon databases create \

@@ -22,6 +22,7 @@ describe('cli-command-index meta', () => {
       const tokens = example
         .replace(/^npx neonctl@latest\s+/, '')
         .replace(/^neonctl\s+/, '')
+        .replace(/^neon\s+/, '')
         .split(/\s+/);
 
       // Walk the command path, collecting option pools along the way.

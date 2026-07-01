@@ -19,9 +19,9 @@ Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-bui
 - Web Fetch API handler interface (`fetch(request)` export)
 - Long-running compute: WebSocket servers, SSE endpoints, AI agents
 - Postgres, [AI Gateway](/docs/ai-gateway/overview), and [Object Storage](/docs/storage/overview) credentials injected automatically when the service is enabled
-- `neonctl dev` for local development with hot reload
-- `neon.ts` config with `neonctl deploy` for declarative branch setup
-- `neonctl functions deploy` for direct CLI deployment
+- `neon dev` for local development with hot reload
+- `neon.ts` config with `neon deploy` for declarative branch setup
+- `neon functions deploy` for direct CLI deployment
 - Neon API for programmatic deployment
 - Branch-scoped functions: each branch runs its own version at its own URL
 
@@ -37,9 +37,9 @@ Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-bui
 
 ## Known limitations
 
-- `neonctl` ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary.
+- `neon` ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary.
 - Slug names are restricted to `^[a-z0-9]{1,20}$`. No hyphens, no uppercase. Use the `name` field for a human-readable label.
-- Logs from deployed functions can't be retrieved yet. Use `neonctl dev` to see output during development; deployed functions must record diagnostics themselves (in Postgres, or in the response).
+- Logs from deployed functions can't be retrieved yet. Use `neon dev` to see output during development; deployed functions must record diagnostics themselves (in Postgres, or in the response).
 
 ## Feedback
 

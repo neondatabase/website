@@ -8,11 +8,11 @@ The pattern below is a complete agent: it streams chat and, when asked, generate
 
 ## 1. Declare the gateway and the function
 
-The agent needs the AI Gateway (and, for the image example, an Object Storage bucket). Declare both in `neon.ts` alongside the function — `neonctl deploy` provisions them and injects the credentials at runtime (see the `neon-ai-gateway` and `neon-object-storage` skills):
+The agent needs the AI Gateway (and, for the image example, an Object Storage bucket). Declare both in `neon.ts` alongside the function — `neon deploy` provisions them and injects the credentials at runtime (see the `neon-ai-gateway` and `neon-object-storage` skills):
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   preview: {
@@ -27,11 +27,11 @@ export default defineConfig({
 
 ## 2. The handler: stream a tool-calling agent
 
-The function's default export is a web-standard `{ fetch }` handler. The `@neondatabase/ai-sdk-provider` reads the injected gateway credentials automatically, so `neon("<model>")` is all the model config you need — it routes each model to the right dialect (Anthropic → Messages, OpenAI/Codex → Responses, everything else → MLflow). Return `result.toUIMessageStreamResponse()` so the AI SDK's `useChat` hooks can consume the stream:
+The function's default export is a web-standard `{ fetch }` handler. The `@neon/ai-sdk-provider` reads the injected gateway credentials automatically, so `neon("<model>")` is all the model config you need — it routes each model to the right dialect (Anthropic → Messages, OpenAI/Codex → Responses, everything else → MLflow). Return `result.toUIMessageStreamResponse()` so the AI SDK's `useChat` hooks can consume the stream:
 
 ```typescript
 // src/index.ts
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 import { streamText, tool, stepCountIs, type ModelMessage } from "ai";
 import { z } from "zod";
 import { drizzle } from "drizzle-orm/node-postgres";
@@ -81,7 +81,7 @@ export default {
 The gateway exposes the OpenAI Responses **`image_generation`** built-in tool (GPT-5 models only; the image comes back inline as base64). Persist generated assets to Object Storage and index them in Postgres so they branch together — the **recommended** storage client is the Files SDK `neon` adapter (see the `neon-object-storage` skill):
 
 ```typescript
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 import { streamText } from "ai";
 import { Files } from "files-sdk";
 import { neon as neonFiles } from "files-sdk/neon";
@@ -122,18 +122,18 @@ So the long stream isn't cut off by your web host's serverless limits, have the 
 ## 5. Run and deploy
 
 ```bash
-neonctl dev      # injects DATABASE_URL + the gateway/storage creds; hot reload
-neonctl deploy   # provisions the gateway + bucket and deploys the function
+neon dev      # injects DATABASE_URL + the gateway/storage creds; hot reload
+neon deploy   # provisions the gateway + bucket and deploys the function
 ```
 
 ```bash
-curl -N -X POST "$(neonctl functions get agent -o json | jq -r .invocation_url)" \
+curl -N -X POST "$(neon functions get agent -o json | jq -r .invocation_url)" \
   -H "content-type: application/json" \
   -d '{"messages":[{"role":"user","content":"How many open todos do I have?"}]}'
 ```
 
 ## Further reading
 
-- Neon AI Gateway dialects, models, and the `@neondatabase/ai-sdk-provider`: the `neon-ai-gateway` skill
+- Neon AI Gateway dialects, models, and the `@neon/ai-sdk-provider`: the `neon-ai-gateway` skill
 - Storing generated assets that branch with the database: the `neon-object-storage` skill
 - AI SDK agents/tools: https://ai-sdk.dev/docs/foundations/agents

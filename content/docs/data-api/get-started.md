@@ -248,7 +248,7 @@ npm install @neondatabase/neon-js
 import { createClient } from '@neondatabase/neon-js';
 
 // Initialize with Neon Auth
-// Get your URLs from the Neon Console or run: neonctl data-api get
+// Get your URLs from the Neon Console or run: neon data-api get
 const client = createClient({
   auth: {
     url: import.meta.env.VITE_NEON_AUTH_URL,
@@ -296,7 +296,7 @@ const getTokenFromAuthSystem = async (): Promise<string> => {
   return 'your-jwt-token';
 };
 
-// Get your URL from the Neon Console or run: neonctl data-api get
+// Get your URL from the Neon Console or run: neon data-api get
 const client = new NeonPostgrestClient({
   dataApiUrl: import.meta.env.VITE_NEON_DATA_API_URL,
   options: {

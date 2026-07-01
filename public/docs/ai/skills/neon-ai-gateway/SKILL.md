@@ -44,7 +44,7 @@ The gateway is part of `neon.ts` (see the `neon` skill for the branch-first work
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   preview: {
@@ -54,7 +54,7 @@ export default defineConfig({
 ```
 
 ```bash
-neonctl deploy   # provisions the gateway on the linked branch
+neon deploy   # provisions the gateway on the linked branch
 ```
 
 ## Neon Infrastructure as Code (`neon.ts`)
@@ -62,18 +62,18 @@ neonctl deploy   # provisions the gateway on the linked branch
 The `preview.aiGateway` toggle above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares the gateway alongside every other branch service, in version control (see the `neon` skill for the full reference). Reconcile it against a branch the Terraform way:
 
 ```bash
-neonctl config status   # print the branch's live config (is the gateway on?)
-neonctl config plan     # dry-run diff of what apply would change
-neonctl config apply    # enable the gateway on the branch  (neonctl deploy is an alias)
+neon config status   # print the branch's live config (is the gateway on?)
+neon config plan     # dry-run diff of what apply would change
+neon config apply    # enable the gateway on the branch  (neon deploy is an alias)
 ```
 
-The gateway is **branch-scoped**: each branch gets its own gateway host. When a `neon.ts` is present, `neonctl checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with the gateway already enabled. Checking out an _existing_ branch doesn't reconcile it — run `neonctl deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's gateway credentials into your local `.env.local`, so local runs hit the same branch gateway as the deployed function (no manual `env pull` needed).
+The gateway is **branch-scoped**: each branch gets its own gateway host. When a `neon.ts` is present, `neon checkout` applies the policy as it _creates_ a branch, so a fresh preview/CI branch comes up with the gateway already enabled. Checking out an _existing_ branch doesn't reconcile it — run `neon deploy` to apply changes. Provisioning (`config apply` / `deploy`), `link`, and `checkout` also pull the branch's gateway credentials into your local `.env.local`, so local runs hit the same branch gateway as the deployed function (no manual `env pull` needed).
 
-For typed, validated access to the injected credentials, pass the same config object to `parseEnv` from `@neondatabase/env` — it returns an `env.aiGateway` namespace (`apiKey`, `baseUrl`) derived from your `neon.ts`.
+For typed, validated access to the injected credentials, pass the same config object to `parseEnv` from `@neon/env` — it returns an `env.aiGateway` namespace (`apiKey`, `baseUrl`) derived from your `neon.ts`.
 
 ## Environment variables
 
-When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **OpenAI-standard** env vars (so the OpenAI SDK and AI SDK work from the environment with no config), plus `NEON_`-branded aliases. Inside a deployed Neon Function these are injected automatically; locally, `neonctl env pull` writes them to `.env`/`.env.local` (or use `neon-env run -- <cmd>` to inject at runtime without a file):
+When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **OpenAI-standard** env vars (so the OpenAI SDK and AI SDK work from the environment with no config), plus `NEON_`-branded aliases. Inside a deployed Neon Function these are injected automatically; locally, `neon env pull` writes them to `.env`/`.env.local` (or use `neon-env run -- <cmd>` to inject at runtime without a file):
 
 | Variable                   | Meaning                                                                                                                                    |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -82,7 +82,7 @@ When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **O
 | `NEON_AI_GATEWAY_TOKEN`    | Same bearer as `OPENAI_API_KEY` (survives a user overriding `OPENAI_*` with their own keys)                                                |
 | `NEON_AI_GATEWAY_BASE_URL` | **Bare branch gateway host** (`scheme://host`, **no path** — no `/ai-gateway`): `https://<branch-id>-api.ai.<region>.aws.neon.tech`        |
 
-The two base URLs are **different**: `OPENAI_BASE_URL` already includes the full `/ai-gateway/openai/v1` (Responses) route, while `NEON_AI_GATEWAY_BASE_URL` is just the bare host, so you append `/ai-gateway/<dialect>` yourself (this is also what the `@neondatabase/ai-sdk-provider` does for you). The routes under the host are:
+The two base URLs are **different**: `OPENAI_BASE_URL` already includes the full `/ai-gateway/openai/v1` (Responses) route, while `NEON_AI_GATEWAY_BASE_URL` is just the bare host, so you append `/ai-gateway/<dialect>` yourself (this is also what the `@neon/ai-sdk-provider` does for you). The routes under the host are:
 
 - `/ai-gateway/mlflow/v1` — unified, OpenAI **Chat Completions**-compatible; recommended default, works with every provider.
 - `/ai-gateway/openai/v1` — OpenAI **Responses** API (required for `gpt-5-…-codex` variants and `gpt-5-5-pro`). This is the route `OPENAI_BASE_URL` already points at, because the `@ai-sdk/openai` provider uses the Responses API by default.
@@ -91,7 +91,7 @@ The two base URLs are **different**: `OPENAI_BASE_URL` already includes the full
 
 So `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` is the chat-completions endpoint, `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1` equals `OPENAI_BASE_URL`, and so on. If you only have `OPENAI_BASE_URL` and need chat completions, swap the dialect: `baseUrl.replace("/openai/v1", "/mlflow/v1")` (this is what the Mastra example does).
 
-For typed access, `parseEnv` (from `@neondatabase/env`) returns `env.aiGateway` (`apiKey`, `baseUrl`) derived from your `neon.ts`.
+For typed access, `parseEnv` (from `@neon/env`) returns `env.aiGateway` (`apiKey`, `baseUrl`) derived from your `neon.ts`.
 
 ## Build agents with the Vercel AI SDK (recommended)
 
@@ -116,10 +116,10 @@ const result = streamText({
 return result.toUIMessageStreamResponse();
 ```
 
-For multi-provider routing from a single call, the dedicated `@neondatabase/ai-sdk-provider` reads `NEON_AI_GATEWAY_BASE_URL` + `NEON_AI_GATEWAY_TOKEN` and routes each model to the best endpoint (Anthropic → Messages, OpenAI/Codex → Responses, everything else → MLflow):
+For multi-provider routing from a single call, the dedicated `@neon/ai-sdk-provider` reads `NEON_AI_GATEWAY_BASE_URL` + `NEON_AI_GATEWAY_TOKEN` and routes each model to the best endpoint (Anthropic → Messages, OpenAI/Codex → Responses, everything else → MLflow):
 
 ```typescript
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 import { generateText } from "ai";
 
 const { text } = await generateText({
@@ -131,7 +131,7 @@ const { text } = await generateText({
 To build an **agent** — a model that calls tools in a loop and then answers — add `tools` and a `stopWhen` budget. The loop runs in-process, so on a Neon Function it isn't cut off by lambda-style timeouts:
 
 ```typescript
-import { neon } from "@neondatabase/ai-sdk-provider";
+import { neon } from "@neon/ai-sdk-provider";
 import { generateText, tool, stepCountIs } from "ai";
 import { z } from "zod";
 
@@ -157,7 +157,7 @@ For a full AI SDK agent deployed as a Neon Function (streaming, tool calling, im
 
 ```typescript
 import { Agent } from "@mastra/core/agent";
-import { parseEnv } from "@neondatabase/env";
+import { parseEnv } from "@neon/env";
 import config from "../neon";
 
 const env = parseEnv(config);

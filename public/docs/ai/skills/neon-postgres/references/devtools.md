@@ -7,7 +7,7 @@ Neon provides developer tools to enhance your local development workflow, includ
 The fastest way to set up all Neon developer tools:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 This command:
@@ -62,7 +62,7 @@ The MCP server provides AI assistants with:
 **Option 1: Via neon init (Recommended)**
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 **Option 2: Manual Configuration**

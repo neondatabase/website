@@ -31,7 +31,7 @@ You'll land on the **Project Dashboard** with the connection string ready in the
 
 <TabItem>
 
-Install the CLI with `npm i -g neonctl` and run `neon auth` to log in. Then:
+Install the CLI with `npm i -g neon` and run `neon auth` to log in. Then:
 
 ```bash
 neon projects create \

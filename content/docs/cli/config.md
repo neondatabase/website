@@ -2,10 +2,10 @@
 title: 'Neon CLI command: config'
 subtitle: 'Manage a branch with a neon.ts policy: status, plan, and apply'
 summary: >-
-  The Neon CLI `neonctl config` command manages a branch declaratively with a
-  neon.ts policy file. Use `neonctl config status` to show the branch's live
-  Neon state, `neonctl config plan` for a dry run of what an apply would
-  change, and `neonctl config apply` (or its top-level alias `neonctl deploy`)
+  The Neon CLI `neon config` command manages a branch declaratively with a
+  neon.ts policy file. Use `neon config status` to show the branch's live
+  Neon state, `neon config plan` for a dry run of what an apply would
+  change, and `neon config apply` (or its top-level alias `neon deploy`)
   to apply the policy to the branch. Supports --config to point at a neon.ts
   file, --env to load environment variables before evaluating it, and
   --allow-protected and --update-existing confirmation flags for
@@ -17,9 +17,21 @@ The `config` command manages a branch declaratively with a `neon.ts` policy file
 
 <CliSubcommands command="config" />
 
-The top-level [`neonctl deploy`](#deploy) command is an alias for `config apply`.
+The top-level [`neon deploy`](/docs/cli/deploy) command is an alias for `config apply`, and [`neon status`](/docs/cli/status) is an alias for `config status`.
 
-## neonctl config status (#status)
+## neon config init (#init)
+
+Scaffolds a `neon.ts` policy and installs the Neon config packages.
+
+<CliUsage command="config init" />
+
+<CliOptions command="config init" />
+
+```bash
+neon config init
+```
+
+## neon config status (#status)
 
 Shows the branch's live Neon state.
 
@@ -28,10 +40,10 @@ Shows the branch's live Neon state.
 <CliOptions command="config status" />
 
 ```bash
-neonctl config status
+neon config status
 ```
 
-## neonctl config plan (#plan)
+## neon config plan (#plan)
 
 Shows what `config apply` would change, as a dry run. Nothing is modified.
 
@@ -40,10 +52,10 @@ Shows what `config apply` would change, as a dry run. Nothing is modified.
 <CliOptions command="config plan" />
 
 ```bash
-neonctl config plan --config ./neon.ts --env .env.local
+neon config plan --config ./neon.ts --env .env.local
 ```
 
-## neonctl config apply (#apply)
+## neon config apply (#apply)
 
 Applies a `neon.ts` policy to the branch.
 
@@ -54,17 +66,5 @@ Applies a `neon.ts` policy to the branch.
 For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts.
 
 ```bash
-neonctl config apply --branch feature/auth --update-existing
-```
-
-## neonctl deploy (#deploy)
-
-Top-level alias for [`config apply`](#apply), with the same options.
-
-<CliUsage command="deploy" />
-
-<CliOptions command="deploy" />
-
-```bash
-neonctl deploy --branch feature/auth
+neon config apply --branch feature/auth --update-existing
 ```

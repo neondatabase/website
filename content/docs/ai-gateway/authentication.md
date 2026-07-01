@@ -46,18 +46,18 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 </TabItem>
 </Tabs>
 
-## Pull credentials with neonctl
+## Pull credentials with neon
 
-For local development, `neonctl env pull` writes your AI Gateway credentials to your `.env` file automatically, with no manual copy-paste from the API response:
+For local development, `neon env pull` writes your AI Gateway credentials to your `.env` file automatically, with no manual copy-paste from the API response:
 
 ```bash
-neonctl env pull .env
+neon env pull .env
 ```
 
-This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the current branch alongside your database connection string. Running `neonctl config apply` or `neonctl deploy` also auto-pulls credentials after a successful apply. To check current credential status:
+This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the current branch alongside your database connection string. Running `neon config apply` or `neon deploy` also auto-pulls credentials after a successful apply. To check current credential status:
 
 ```bash
-neonctl config status
+neon config status
 ```
 
 For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials with optional expiry.

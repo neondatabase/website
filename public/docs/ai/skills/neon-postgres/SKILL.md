@@ -6,7 +6,7 @@ description: >-
   read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server,
   REST API, TypeScript SDK, and Python SDK.
   Use when users ask about "Neon setup", "connect to Neon", "Neon project",
-  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neonctl", "Neon MCP",
+  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
   "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
   "scale to zero", "Neon autoscaling", "Neon read replica", or
   "Neon connection pooling".
@@ -65,7 +65,7 @@ Before starting setup, inspect the user's codebase and environment:
 Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
 
 ```bash
-npx -y neonctl@latest init --agent <agent-name>
+npx -y neon@latest init --agent <agent-name>
 ```
 
 Supported `--agent` values: `cursor`, `copilot`, `claude`, `claude-desktop`, `codex`, `opencode`, `cline`, `gemini-cli`, `goose`, `zed`.
@@ -177,7 +177,7 @@ Link: https://neon.com/docs/reference/javascript-sdk.md
 
 ## Developer Tools
 
-Use this for local development enablement with `npx -y neonctl@latest init --agent <agent-name>`, VSCode extension setup, and Neon MCP server configuration.
+Use this for local development enablement with `npx -y neon@latest init --agent <agent-name>`, VSCode extension setup, and Neon MCP server configuration.
 
 | Tool             | URL                                             |
 | ---------------- | ----------------------------------------------- |
@@ -188,7 +188,7 @@ Use this for local development enablement with `npx -y neonctl@latest init --age
 
 ### Neon CLI
 
-Use this for terminal-first workflows, scripts, and CI/CD automation with `neonctl`.
+Use this for terminal-first workflows, scripts, and CI/CD automation with `neon`.
 
 Link: https://neon.com/docs/reference/neon-cli.md
 
@@ -226,15 +226,15 @@ Neon Auth is also embedded in the Neon JS SDK. Depending on your use case, you m
 
 `neon.ts` is Neon's branch config and infrastructure-as-code file: declare which services your branches have, get type-safe env vars, and program per-branch compute — all in TypeScript (see the `neon` skill for the full reference). Postgres always exists on every branch, so you never declare the database itself; what you codify here is the Postgres-adjacent surface — Neon Auth, the Data API, and per-branch compute settings (autoscaling and scale-to-zero).
 
-Add it with `@neondatabase/config`:
+Add it with `@neon/config`:
 
 ```bash
-npm i @neondatabase/config
+npm i @neon/config
 ```
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   auth: true, // Neon Auth (adds NEON_AUTH_* env vars)
@@ -260,20 +260,20 @@ export default defineConfig({
 Reconcile the declaration from the CLI — the Neon equivalent of `terraform plan` / `apply`:
 
 ```bash
-neonctl config status   # print the branch's live config
-neonctl config plan     # dry-run diff of what apply would change
-neonctl config apply    # provision the declared services / settings
-neonctl deploy          # alias for `neonctl config apply`
+neon config status   # print the branch's live config
+neon config plan     # dry-run diff of what apply would change
+neon config apply    # provision the declared services / settings
+neon deploy          # alias for `neon config apply`
 ```
 
-Because `neonctl checkout` applies the policy as it **creates** a branch, a fresh branch comes up with these compute settings (and Auth / Data API) already in place. Checking out an _existing_ branch never reconciles it — run `neonctl deploy` to apply changes.
+Because `neon checkout` applies the policy as it **creates** a branch, a fresh branch comes up with these compute settings (and Auth / Data API) already in place. Checking out an _existing_ branch never reconciles it — run `neon deploy` to apply changes.
 
 Since `neon.ts` is TypeScript, invalid combinations fail to compile with an actionable message: the Data API verifies requests with Neon Auth by default, so `dataApi: true` without `auth: true` is a type error (the fix — `auth: true`, or `authProvider: 'external'` with a `jwksUrl` — is in the message). See the `neon` skill's type-safe config note.
 
-Read the resulting env back, typed and validated against the policy, with `parseEnv` from `@neondatabase/env`:
+Read the resulting env back, typed and validated against the policy, with `parseEnv` from `@neon/env`:
 
 ```typescript
-import { parseEnv } from "@neondatabase/env/v1";
+import { parseEnv } from "@neon/env/v1";
 import config from "./neon";
 
 const env = parseEnv(config);
@@ -288,7 +288,7 @@ Key points:
 
 - Branches are instant, copy-on-write clones (no full data copy).
 - Each branch has its own compute endpoint.
-- Use the neonctl CLI or MCP server to create, inspect, and compare branches.
+- Use the neon CLI or MCP server to create, inspect, and compare branches.
 
 Link: https://neon.com/docs/introduction/branching.md
 

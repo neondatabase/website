@@ -39,7 +39,7 @@ There are three ways to get started. Pick the one that fits how you work.
 Open Cursor or Claude Code in any directory (an existing project or a new empty folder) and paste this prompt:
 
 ```text
-I'm part of the Neon private preview. Please run and follow `npx neonctl@latest init --preview`
+I'm part of the Neon private preview. Please run and follow `npx neon@latest init --preview`
 ```
 
 Your agent will install the CLI, walk you through project setup, install agent skills, and pull your environment variables. You'll need to complete a browser OAuth step when prompted.
@@ -49,7 +49,7 @@ Your agent will install the CLI, walk you through project setup, install agent s
 In an empty folder, run:
 
 ```bash
-neonctl bootstrap
+neon bootstrap
 ```
 
 Pick a template from the interactive selector, or pass `--template <id>` to skip it:
@@ -82,7 +82,7 @@ bunx skills add neondatabase/agent-skills -a cursor
 **2. Install the CLI**
 
 ```bash
-npm install -g neonctl@latest
+npm install -g neon@latest
 ```
 
 **3. Link your project**
@@ -90,7 +90,7 @@ npm install -g neonctl@latest
 In your project directory:
 
 ```bash
-neonctl link
+neon link
 ```
 
 Similar to `vercel link`, this connects the directory to a Neon project and creates a `.neon` state file that tracks your project and current branch. All CLI commands in this directory will automatically point to the linked project and branch.
@@ -100,13 +100,13 @@ Similar to `vercel link`, this connects the directory to a Neon project and crea
 `neon.ts` is the infrastructure-as-code config for your Neon project. Install the config package first:
 
 ```bash
-npm install @neondatabase/config
+npm install @neon/config
 ```
 
 Then create `neon.ts` in your project root. This example enables the AI Gateway, creates a storage bucket, and declares a function:
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   preview: {
@@ -131,32 +131,32 @@ See the [neon.ts reference](/docs/reference/neon-ts) for the full config API.
 Preview what will change:
 
 ```bash
-neonctl config plan
+neon config plan
 ```
 
 Apply it:
 
 ```bash
-neonctl config apply
+neon config apply
 ```
 
 Once applied, environment variables for all your services are written to `.env.local` automatically: database URL, storage credentials, AI Gateway key, and more.
 
 ## Key CLI commands
 
-The Neon CLI supports a full local development workflow for the platform. You link a directory to a project, declare your infrastructure in `neon.ts`, develop functions locally with hot reload, and deploy when you're ready. Branching is built into the workflow: `neonctl checkout` creates an isolated branch with its own database, storage, and functions, so you can develop and test without touching your main branch. Here are the commands that make up that workflow, each with a link to its full reference.
+The Neon CLI supports a full local development workflow for the platform. You link a directory to a project, declare your infrastructure in `neon.ts`, develop functions locally with hot reload, and deploy when you're ready. Branching is built into the workflow: `neon checkout` creates an isolated branch with its own database, storage, and functions, so you can develop and test without touching your main branch. Here are the commands that make up that workflow, each with a link to its full reference.
 
-| Command                                           | What it does                                                                                                                                                   |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`neonctl link`](/docs/cli/link)                  | Bind the current directory to a Neon project. Writes a `.neon` context file so all subsequent commands target the right project and branch automatically.      |
-| [`neonctl checkout <branch>`](/docs/cli/checkout) | Switch the active branch in your local context. Creates the branch if it doesn't exist. Pulls updated env vars into `.env.local` after switching.              |
-| [`neonctl config plan`](/docs/cli/config)         | Dry run your `neon.ts` changes. Shows what will be created, updated, or removed without applying anything.                                                     |
-| [`neonctl config apply`](/docs/cli/config)        | Apply your `neon.ts` to the current branch and refresh env vars in `.env.local`.                                                                               |
-| [`neonctl deploy`](/docs/cli/deploy)              | Apply `neon.ts` and deploy your functions in one step. Use this instead of `config apply` when functions are in play.                                          |
-| [`neonctl dev`](/docs/cli/dev)                    | Run your functions locally with hot reload. Serves every function declared in `neon.ts`, each on its own dev server. Essential for local function development. |
-| [`neonctl env pull`](/docs/cli/env)               | Pull the current branch's environment variables into `.env.local`. Run this after switching branches if you skipped the automatic pull.                        |
+| Command                                        | What it does                                                                                                                                                   |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`neon link`](/docs/cli/link)                  | Bind the current directory to a Neon project. Writes a `.neon` context file so all subsequent commands target the right project and branch automatically.      |
+| [`neon checkout <branch>`](/docs/cli/checkout) | Switch the active branch in your local context. Creates the branch if it doesn't exist. Pulls updated env vars into `.env.local` after switching.              |
+| [`neon config plan`](/docs/cli/config)         | Dry run your `neon.ts` changes. Shows what will be created, updated, or removed without applying anything.                                                     |
+| [`neon config apply`](/docs/cli/config)        | Apply your `neon.ts` to the current branch and refresh env vars in `.env.local`.                                                                               |
+| [`neon deploy`](/docs/cli/deploy)              | Apply `neon.ts` and deploy your functions in one step. Use this instead of `config apply` when functions are in play.                                          |
+| [`neon dev`](/docs/cli/dev)                    | Run your functions locally with hot reload. Serves every function declared in `neon.ts`, each on its own dev server. Essential for local function development. |
+| [`neon env pull`](/docs/cli/env)               | Pull the current branch's environment variables into `.env.local`. Run this after switching branches if you skipped the automatic pull.                        |
 
-Keep the CLI up to date: run `npm i -g neonctl@latest` before each session and before reporting a bug. The preview CLI updates frequently.
+Keep the CLI up to date: run `npm i -g neon@latest` before each session and before reporting a bug. The preview CLI updates frequently.
 
 ## Docs
 
@@ -173,7 +173,7 @@ For inspiration, see [Build on Neon](https://build-on-neon.vercel.app/): an inde
 
 - New projects in AWS us-east-2 only. Existing projects don't work.
 - Functions: memory is fixed at 2048 MiB.
-- Logs from deployed functions can't be retrieved yet. Use `neonctl dev` during development, and have deployed functions write diagnostics to Postgres. Error trackers work today: `@sentry/node` bundles and runs fine; set `SENTRY_DSN` as a deploy-time env var.
+- Logs from deployed functions can't be retrieved yet. Use `neon dev` during development, and have deployed functions write diagnostics to Postgres. Error trackers work today: `@sentry/node` bundles and runs fine; set `SENTRY_DSN` as a deploy-time env var.
 
 ## Feedback
 

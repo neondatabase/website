@@ -40,8 +40,8 @@ In the Neon Console, click **New Project**, name it `my-backend`, and create it.
 <TabItem>
 
 ```bash filename="Terminal"
-npx neonctl@latest auth
-npx neonctl@latest projects create --name my-backend
+npx neon@latest auth
+npx neon@latest projects create --name my-backend
 ```
 
 The connection string appears in the output.

@@ -108,7 +108,7 @@ export default {
 ```
 
 ```bash
-neonctl functions deploy secure --src functions/secure.ts --env API_KEY=your-secret
+neon functions deploy secure --src functions/secure.ts --env API_KEY=your-secret
 ```
 
 The secret stays server-side, and rotating it is a redeploy with a new value. It's a solid default until you need real per-user identity, at which point use JWTs.

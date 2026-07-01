@@ -42,7 +42,7 @@ The first number is the major version. The second is the minor version, which Ne
 
 <TabItem>
 
-With [neonctl](/docs/cli) installed and authenticated:
+With [neon](/docs/cli) installed and authenticated:
 
 ```bash
 neon projects get <project_id>

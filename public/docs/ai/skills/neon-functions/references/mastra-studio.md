@@ -2,7 +2,7 @@
 
 A Neon Function is a long-lived Node.js 24 process, which makes it a natural host for a [Mastra](https://mastra.ai) agent: the agent keeps running for the life of the request, and you point its model at the Neon AI Gateway so there are no extra provider keys. You can keep **running the agent on Neon Functions** while shipping its traces to a **Mastra Studio (Mastra Cloud) project** for observability — the agent runs on Neon, the traces are viewable in Mastra.
 
-The shape mirrors any other Node integration (see `references/sentry.md`): instantiate at module load, gate on env vars so local dev and unconfigured branches stay a no-op, and pass secrets at deploy time via `neon.ts`. `@mastra/core` and `@mastra/observability` bundle cleanly through `neonctl deploy`'s esbuild with no extra config.
+The shape mirrors any other Node integration (see `references/sentry.md`): instantiate at module load, gate on env vars so local dev and unconfigured branches stay a no-op, and pass secrets at deploy time via `neon.ts`. `@mastra/core` and `@mastra/observability` bundle cleanly through `neon deploy`'s esbuild with no extra config.
 
 ## 1. Define the agent against the Neon AI Gateway
 
@@ -11,7 +11,7 @@ Use the gateway's **MLflow (chat-completions) dialect**, which serves every prov
 ```typescript
 // src/mastra/agents/pricing.ts
 import { Agent } from "@mastra/core/agent";
-import { parseEnv } from "@neondatabase/env";
+import { parseEnv } from "@neon/env";
 import config from "../../../neon";
 
 const env = parseEnv(config);
@@ -117,7 +117,7 @@ functions: {
 Load the values from a git-ignored file at deploy time:
 
 ```bash
-neonctl deploy --env .env.deploy
+neon deploy --env .env.deploy
 ```
 
 ## 6. Verify

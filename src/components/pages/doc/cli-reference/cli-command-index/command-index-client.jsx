@@ -106,7 +106,7 @@ const CommandIndexClient = ({ groups }) => {
     <div className="not-prose my-6 overflow-hidden rounded-lg border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-15 dark:bg-black-new">
       <div className="flex items-center justify-between border-b border-gray-new-90 bg-white px-4 py-2 dark:border-white/10 dark:bg-white/[0.03]">
         <span className="font-mono text-xs text-gray-new-40 dark:text-gray-new-60">
-          neonctl — commands
+          neon commands
         </span>
         <button
           className="rounded border border-secondary-8/40 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-secondary-8 hover:border-secondary-8 dark:border-green-45/60 dark:text-green-45 dark:hover:border-green-45"

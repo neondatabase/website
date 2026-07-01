@@ -2,7 +2,7 @@
 title: 'Neon CLI command: projects'
 subtitle: 'List, create, update, delete, recover, and get Neon projects'
 summary: >-
-  The Neon CLI `neonctl projects` command provides subcommands to list, create,
+  The Neon CLI `neon projects` command provides subcommands to list, create,
   update, delete, recover, and retrieve Neon projects from the terminal,
   including support for region selection (AWS and Azure), blocking public or VPC
   connections, and filtering shared projects. Use this page when you need CLI
@@ -11,16 +11,17 @@ summary: >-
   18; use the Neon Console or API to create projects on earlier Postgres
   versions.
 enableTableOfContents: true
-updatedOn: '2026-06-18T16:36:42.941Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-projects
+  - /docs/cli/project
 ---
 
 The `projects` command lists, creates, updates, deletes, recovers, and retrieves Neon projects from the terminal. For information about projects in Neon, see [Projects](/docs/manage/projects). Subcommands that show no options table accept only the [global options](/docs/cli#global-options). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise.
 
 <CliSubcommands command="projects" />
 
-## neonctl projects list (#list)
+## neon projects list (#list)
 
 Lists projects that belong to your Neon account, as well as any projects that were shared with you.
 
@@ -31,7 +32,7 @@ Lists projects that belong to your Neon account, as well as any projects that we
 - List projects in your [default organization](/docs/reference/glossary#default-organization). If no organization context is set, the CLI prompts you to select one.
 
   ```bash
-  neonctl projects list
+  neon projects list
   ```
 
   ```text
@@ -56,13 +57,13 @@ Lists projects that belong to your Neon account, as well as any projects that we
 List all projects belonging to a specific organization:
 
 ```bash
-neonctl projects list --org-id org-xxxx-xxxx
+neon projects list --org-id org-xxxx-xxxx
 ```
 
 List projects that can be recovered (deleted within the last 7 days):
 
 ```bash
-neonctl projects list --recoverable-only
+neon projects list --recoverable-only
 ```
 
 ```text filename="Output"
@@ -74,7 +75,7 @@ Projects
 └─────────────────────┴───────────┴───────────────┴──────────────────────┴──────────────────────┴──────────────────────┘
 ```
 
-## neonctl projects create (#create)
+## neon projects create (#create)
 
 Creates a Neon project.
 
@@ -91,7 +92,7 @@ Neon projects created using the CLI use the default Postgres version, which is P
 Create a project with a user-defined name in a specific region:
 
 ```bash
-neonctl projects create --name mynewproject --region-id aws-us-west-2
+neon projects create --name mynewproject --region-id aws-us-west-2
 ```
 
 ```text filename="Output"
@@ -109,13 +110,13 @@ neonctl projects create --name mynewproject --region-id aws-us-west-2
 ```
 
 <Admonition type="tip">
-The Neon CLI provides a `neonctl connection-string` command you can use to extract a connection URI programmatically. See [the connection-string command](/docs/cli/connection-string).
+The Neon CLI provides a `neon connection-string` command you can use to extract a connection URI programmatically. See [the connection-string command](/docs/cli/connection-string).
 </Admonition>
 
 - Create a project with `--output json`, which returns the full project response data and is the recommended format for scripts and agents. The output below was captured on an earlier CLI version; new projects report `"pg_version": 18`.
 
   ```bash
-  neonctl projects create --output json
+  neon projects create --output json
   ```
 
   <details>
@@ -145,7 +146,7 @@ The Neon CLI provides a `neonctl connection-string` command you can use to extra
       "branch_logical_size_limit": 204800,
       "branch_logical_size_limit_bytes": 214748364800,
       "store_passwords": true,
-      "creation_source": "neonctl",
+      "creation_source": "neon",
       "history_retention_seconds": 604800,
       "created_at": "2023-08-04T16:16:45Z",
       "updated_at": "2023-08-04T16:16:45Z",
@@ -173,18 +174,18 @@ The Neon CLI provides a `neonctl connection-string` command you can use to extra
 Create a project and connect to it with `psql` immediately. Arguments after `--` are passed through to psql, so you can run an `.sql` file or a query on creation:
 
 ```bash
-neonctl projects create --psql
-neonctl projects create --psql -- -f dump.sql
-neonctl projects create --psql -- -c "SELECT version()"
+neon projects create --psql
+neon projects create --psql -- -f dump.sql
+neon projects create --psql -- -c "SELECT version()"
 ```
 
 Create a project and set the Neon CLI project context to it:
 
 ```bash
-neonctl projects create --set-context
+neon projects create --set-context
 ```
 
-## neonctl projects update (#update)
+## neon projects update (#update)
 
 Updates a Neon project. The `<id>` is the project ID, which you can obtain by listing your projects or from the **Settings** page in the Neon Console.
 
@@ -197,7 +198,7 @@ Updates a Neon project. The `<id>` is the project ID, which you can obtain by li
 Update the project name:
 
 ```bash
-neonctl projects update muddy-wood-859533 --name dev_project_1
+neon projects update muddy-wood-859533 --name dev_project_1
 ```
 
 ```text filename="Output"
@@ -211,10 +212,10 @@ neonctl projects update muddy-wood-859533 --name dev_project_1
 Block connections from the public internet (see [restrict public internet access](/docs/guides/neon-private-networking#restrict-public-internet-access)):
 
 ```bash
-neonctl projects update orange-credit-12345678 --block-public-connections=true
+neon projects update orange-credit-12345678 --block-public-connections=true
 ```
 
-## neonctl projects delete (#delete)
+## neon projects delete (#delete)
 
 Deletes a Neon project. The `<id>` is the project ID.
 
@@ -223,7 +224,7 @@ Deletes a Neon project. The `<id>` is the project ID.
 <CliOptions command="projects delete" />
 
 ```bash
-neonctl projects delete muddy-wood-859533
+neon projects delete muddy-wood-859533
 ```
 
 ```text filename="Output"
@@ -234,20 +235,20 @@ neonctl projects delete muddy-wood-859533
 └───────────────────┴───────────────┴───────────────┴──────────────────────┘
 ```
 
-Verify the deletion with `neonctl projects list`.
+Verify the deletion with `neon projects list`.
 
 Projects are soft-deleted by default, and enter a 7-day [deletion recovery period](/docs/manage/projects#recover-a-deleted-project) before being permanently removed.
 
-## neonctl projects recover (#recover)
+## neon projects recover (#recover)
 
-Recovers a deleted project within the deletion recovery period. The `<id>` is the project ID, which you can obtain by listing recoverable projects with `neonctl projects list --recoverable-only`.
+Recovers a deleted project within the deletion recovery period. The `<id>` is the project ID, which you can obtain by listing recoverable projects with `neon projects list --recoverable-only`.
 
 <CliUsage command="projects recover" />
 
 <CliOptions command="projects recover" />
 
 ```bash
-neonctl projects recover crimson-voice-12345678
+neon projects recover crimson-voice-12345678
 ```
 
 ```text filename="Output"
@@ -260,7 +261,7 @@ neonctl projects recover crimson-voice-12345678
 
 For details on what's recovered and what requires reconfiguration after recovery, see [Recover a deleted project](/docs/manage/projects#recover-a-deleted-project).
 
-## neonctl projects get (#get)
+## neon projects get (#get)
 
 Retrieves details about a Neon project. The `<id>` is the project ID.
 
@@ -269,7 +270,7 @@ Retrieves details about a Neon project. The `<id>` is the project ID.
 <CliOptions command="projects get" />
 
 ```bash
-neonctl projects get muddy-wood-859533
+neon projects get muddy-wood-859533
 ```
 
 ```text filename="Output"
