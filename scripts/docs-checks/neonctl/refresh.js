@@ -37,9 +37,7 @@ const SCHEMA_PATH = path.join(__dirname, 'schema.json');
 //   value = what the docs expect (old primary, now an alias in schema)
 // The refresh script will swap these so docs-facing tooling stays stable.
 // Remove an entry once docs are updated to match the CLI's new name.
-const PREFER_ALIAS = {
-  function: 'functions', // neonctl 2.26.5 renamed functions→function; revert when docs catch up
-};
+const PREFER_ALIAS = {};
 
 // The monorepo publishes releases for many packages, so `/releases/latest`
 // is not necessarily the CLI. List releases and pick the highest-versioned

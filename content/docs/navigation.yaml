@@ -785,14 +785,18 @@
                   items:
                     - title: config
                       slug: cli/config
+                    - title: deploy
+                      slug: cli/deploy
+                    - title: status
+                      slug: cli/status
                     - title: dev
                       slug: cli/dev
                 - section: Functions, storage & data
                   items:
                     - title: functions
                       slug: cli/functions
-                    - title: bucket
-                      slug: cli/bucket
+                    - title: buckets
+                      slug: cli/buckets
                     - title: data-api
                       slug: cli/data-api
                     - title: neon-auth
