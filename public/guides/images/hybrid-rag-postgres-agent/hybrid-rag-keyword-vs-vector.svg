@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ah4" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="298" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Two retrievers cover each other's blind spots</text>
+
+  <!-- query -->
+  <rect x="40" y="120" width="150" height="56" rx="10" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="115" y="144" font-size="12" font-weight="600" fill="#3730a3" text-anchor="middle">user query</text>
+  <text x="115" y="162" font-size="11" fill="#4338ca" text-anchor="middle">“refund window ERR_4042”</text>
+
+  <line x1="190" y1="135" x2="250" y2="92" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah4)"/>
+  <line x1="190" y1="160" x2="250" y2="206" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah4)"/>
+
+  <!-- semantic path -->
+  <rect x="256" y="58" width="240" height="74" rx="10" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="272" y="80" font-size="12.5" font-weight="700" fill="#1e40af">Semantic · vector(1536)</text>
+  <text x="272" y="100" font-size="11" fill="#1e3a8a">matches meaning and paraphrase</text>
+  <text x="272" y="118" font-size="11" fill="#1e3a8a">“refund window” ≈ “return period”</text>
+
+  <!-- keyword path -->
+  <rect x="256" y="170" width="240" height="74" rx="10" fill="#fffbeb" stroke="#fbbf24"/>
+  <text x="272" y="192" font-size="12.5" font-weight="700" fill="#92400e">Keyword · tsvector + BM25</text>
+  <text x="272" y="212" font-size="11" fill="#92400e">matches the literal token</text>
+  <text x="272" y="230" font-size="11" fill="#92400e">finds the exact “ERR_4042” chunk</text>
+
+  <line x1="496" y1="95" x2="556" y2="138" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah4)"/>
+  <line x1="496" y1="207" x2="556" y2="164" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah4)"/>
+
+  <!-- fused -->
+  <rect x="562" y="118" width="170" height="66" rx="10" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="647" y="142" font-size="12.5" font-weight="700" fill="#065f46" text-anchor="middle">fused result</text>
+  <text x="647" y="162" font-size="11" fill="#047857" text-anchor="middle">meaning + exact</text>
+  <text x="647" y="177" font-size="11" fill="#047857" text-anchor="middle">match, together</text>
+
+  <text x="24" y="282" font-size="11" fill="#6b7280">Vectors handle paraphrase; keyword search handles codes, SKUs, and proper nouns. Hybrid runs both in parallel.</text>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 280" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ig" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="278" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">The write path: chunk, embed once, upsert</text>
+
+  <!-- row 1 -->
+  <rect x="28" y="58" width="150" height="52" rx="9" fill="#f3f4f6" stroke="#d1d5db"/>
+  <text x="103" y="82" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">source document</text>
+  <text x="103" y="99" font-size="10.5" fill="#6b7280" text-anchor="middle">one record per source</text>
+
+  <rect x="212" y="58" width="160" height="52" rx="9" fill="#f3f4f6" stroke="#d1d5db"/>
+  <text x="292" y="82" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">split into chunks</text>
+  <text x="292" y="99" font-size="10.5" fill="#6b7280" text-anchor="middle">structure + overlap</text>
+
+  <rect x="406" y="58" width="170" height="52" rx="9" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="491" y="82" font-size="12" font-weight="600" fill="#1e40af" text-anchor="middle">embedMany()</text>
+  <text x="491" y="99" font-size="10.5" fill="#1e3a8a" text-anchor="middle">one batched call</text>
+
+  <line x1="178" y1="84" x2="208" y2="84" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ig)"/>
+  <line x1="372" y1="84" x2="402" y2="84" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ig)"/>
+
+  <!-- down connector -->
+  <path d="M491 110 L491 134 L113 134 L113 158" fill="none" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ig)"/>
+
+  <!-- row 2 -->
+  <rect x="28" y="160" width="170" height="52" rx="9" fill="#f3f4f6" stroke="#d1d5db"/>
+  <text x="113" y="184" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">sha256 per chunk</text>
+  <text x="113" y="201" font-size="10.5" fill="#6b7280" text-anchor="middle">content_hash</text>
+
+  <rect x="232" y="160" width="232" height="52" rx="9" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="348" y="184" font-size="12" font-weight="600" fill="#065f46" text-anchor="middle">upsert ON CONFLICT</text>
+  <text x="348" y="201" font-size="10.5" fill="#047857" text-anchor="middle">(document_id, chunk_index)</text>
+
+  <line x1="198" y1="186" x2="228" y2="186" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ig)"/>
+
+  <rect x="498" y="158" width="234" height="26" rx="7" fill="#ecfdf5" stroke="#34d399"/>
+  <text x="510" y="175" font-size="11" fill="#065f46">hash changed → write the row</text>
+  <rect x="498" y="190" width="234" height="26" rx="7" fill="#f3f4f6" stroke="#d1d5db"/>
+  <text x="510" y="207" font-size="11" fill="#6b7280">hash unchanged → skip, no re-embed</text>
+
+  <line x1="464" y1="180" x2="494" y2="171" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ig)"/>
+  <line x1="464" y1="192" x2="494" y2="201" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ig)"/>
+
+  <text x="28" y="252" font-size="11" fill="#6b7280">Re-ingesting a lightly edited document only touches the chunks that actually moved. The searchable tsvector updates itself.</text>
+</svg>

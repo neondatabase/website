@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 250" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ah7" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="248" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">One request, end to end</text>
+
+  <!-- step boxes row 1 -->
+  <rect x="28" y="58" width="150" height="58" rx="9" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="103" y="82" font-size="12" font-weight="600" fill="#3730a3" text-anchor="middle">POST /chat</text>
+  <text x="103" y="100" font-size="10.5" fill="#4338ca" text-anchor="middle">message, sessionId</text>
+
+  <rect x="206" y="58" width="150" height="58" rx="9" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="281" y="82" font-size="12" font-weight="600" fill="#9a3412" text-anchor="middle">fetch recent turns</text>
+  <text x="281" y="100" font-size="10.5" fill="#9a3412" text-anchor="middle">+ build query string</text>
+
+  <rect x="384" y="58" width="150" height="58" rx="9" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="459" y="82" font-size="12" font-weight="600" fill="#1e40af" text-anchor="middle">embed query</text>
+  <text x="459" y="100" font-size="10.5" fill="#1e3a8a" text-anchor="middle">text-embedding model</text>
+
+  <rect x="562" y="58" width="170" height="58" rx="9" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="647" y="82" font-size="12" font-weight="600" fill="#065f46" text-anchor="middle">retrieve_hybrid()</text>
+  <text x="647" y="100" font-size="10.5" fill="#047857" text-anchor="middle">RRF, top 8 chunks</text>
+
+  <line x1="178" y1="87" x2="202" y2="87" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah7)"/>
+  <line x1="356" y1="87" x2="380" y2="87" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah7)"/>
+  <line x1="534" y1="87" x2="558" y2="87" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah7)"/>
+
+  <!-- down connector -->
+  <path d="M647 116 L647 140 L103 140 L103 156" fill="none" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah7)"/>
+
+  <!-- step boxes row 2 -->
+  <rect x="28" y="158" width="180" height="58" rx="9" fill="#f3f4f6" stroke="#d1d5db"/>
+  <text x="118" y="182" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">format chunks as context</text>
+  <text x="118" y="200" font-size="10.5" fill="#6b7280" text-anchor="middle">cap token budget, keep top scores</text>
+
+  <rect x="236" y="158" width="170" height="58" rx="9" fill="#f3f4f6" stroke="#d1d5db"/>
+  <text x="321" y="182" font-size="12" font-weight="600" fill="#111827" text-anchor="middle">stream LLM tokens</text>
+  <text x="321" y="200" font-size="10.5" fill="#6b7280" text-anchor="middle">Vercel AI SDK</text>
+
+  <rect x="434" y="158" width="298" height="58" rx="9" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="583" y="182" font-size="12" font-weight="600" fill="#9a3412" text-anchor="middle">persist assistant message</text>
+  <text x="583" y="200" font-size="10.5" fill="#9a3412" text-anchor="middle">with cited chunk_ids in metadata, for the next turn</text>
+
+  <line x1="208" y1="187" x2="232" y2="187" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah7)"/>
+  <line x1="406" y1="187" x2="430" y2="187" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah7)"/>
+</svg>
