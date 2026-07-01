@@ -5,7 +5,7 @@ author: anthony-giuliano
 enableTableOfContents: true
 excludeFromBlog: true
 createdAt: '2026-05-12T00:00:00.000Z'
-updatedOn: '2026-05-14T00:00:00.000Z'
+updatedOn: '2026-07-01T20:38:51.906Z'
 ---
 
 <YoutubeIframe embedId="NN251KTjAo8" />
@@ -34,8 +34,8 @@ There are three ways to add the Neon skill to your project, depending on which t
 [skills.sh](https://skills.sh) is a registry of agent skills for popular tools and platforms, including the Neon skill.
 
 1. Go to the [neon-postgres skill page](https://skills.sh/neon-postgres) on skills.sh.
-3. Copy the install command and run it in your project's terminal.
-4. Follow the prompts to complete Neon skill setup.
+2. Copy the install command and run it in your project's terminal.
+3. Follow the prompts to complete Neon skill setup.
 
 **Cursor plugin**
 
@@ -69,24 +69,25 @@ const sql = neon(process.env.DATABASE_URL!);
 export const db = drizzle(sql);
 ```
 
-This uses the [Neon serverless driver](/docs/serverless/serverless-driver), which connects to Neon over HTTP. It will run without errors — but it's no longer the most performant option for Vercel deployments.
+This uses the [Neon serverless driver](/docs/serverless/serverless-driver), which connects to Neon over HTTP. It will run without errors, but it's no longer the most performant option for Vercel deployments.
 
 **With the Neon skill**, the agent produces:
 
 ```typescript
 import { Pool } from 'pg';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { attachDatabase } from '@vercel/postgres-pool';
+import { attachDatabasePool } from '@vercel/functions';
 
-const pool = attachDatabase(new Pool({ connectionString: process.env.DATABASE_URL }));
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+attachDatabasePool(pool);
 export const db = drizzle(pool);
 ```
 
-This uses the standard **Node Postgres driver** with a connection pool and Vercel's `attachDatabase` function, which lets Vercel manage the Neon connection pool correctly in its serverless runtime.
+This uses the standard **Node Postgres driver** with a connection pool and Vercel's `attachDatabasePool` function, which closes idle connections before Vercel suspends the function so the Neon connection pool stays healthy in its serverless runtime.
 
 ### Why does my agent write suboptimal Neon code without the Neon skill?
 
-As of 2026, Vercel supports **connection pooling with Fluid Compute**, which makes a standard `pg` pool with `attachDatabase` the most performant way to connect to Neon from a Next.js app on Vercel — not the HTTP-based Neon serverless driver.
+As of 2026, Vercel supports **connection pooling with Fluid Compute**, which makes a standard `pg` pool with `attachDatabasePool` the most performant way to connect to Neon from a Next.js app on Vercel, not the HTTP-based Neon serverless driver.
 
 The problem is that most AI models have training data that predates this change. They've seen thousands of examples of the Neon serverless driver being used for Vercel deployments, so that's what they reach for by default.
 
@@ -107,4 +108,3 @@ The Neon skill is a one-minute setup that pays off across the full lifetime of y
 ### Where can I find the Neon skill?
 
 The Neon skill is available on [skills.sh](https://skills.sh) (search for **neon-postgres**) and in the plugin marketplace for Cursor and Claude Code.
-
