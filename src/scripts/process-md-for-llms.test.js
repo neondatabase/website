@@ -985,7 +985,7 @@ describe('CLI reference components', () => {
         '',
         '<CliSubcommands command="projects" />',
         '',
-        '### neonctl projects create (#create)',
+        '### neon projects create (#create)',
         '',
         '<CliUsage command="projects create" />',
         '',
@@ -1002,10 +1002,10 @@ describe('CLI reference components', () => {
     expect(result).toContain('`--name`');
     expect(result).toMatch(/\|\s+No\s+\|/);
     // Custom anchor IDs are stripped from heading text in the mirror
-    expect(result).toContain('### neonctl projects create');
+    expect(result).toContain('### neon projects create');
     expect(result).not.toContain('(#create)');
     // Synopsis
-    expect(result).toContain('neonctl projects create [options]');
+    expect(result).toContain('neon projects create [options]');
     // Subcommand table links
     expect(result).toContain('#create');
     // Inherited options appear in leaf tables; only-global commands render nothing
@@ -1030,7 +1030,7 @@ describe('CLI reference components', () => {
       expect(result).toContain(`### ${name}`);
     }
     // Nested subtrees flatten to full invocations
-    expect(result).toContain('neonctl bucket object list');
+    expect(result).toContain('neon bucket object list');
     expect(result).not.toContain('<CliCommandIndex');
   });
 });

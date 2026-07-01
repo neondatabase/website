@@ -15,12 +15,12 @@
     },
     "api-key": {
       "type": "string",
-      "describe": "Neon API key, authenticates without `neonctl auth`",
+      "describe": "Neon API key, authenticates without `neon auth`",
       "defaultText": "NEON_API_KEY environment variable"
     },
     "context-file": {
       "type": "string",
-      "describe": "Context file with default org, project, and branch IDs, created by `neonctl link`",
+      "describe": "Context file with default org, project, and branch IDs, created by `neon link`",
       "defaultText": "nearest .neon file, searching upward from the current directory"
     },
     "color": {
@@ -1114,7 +1114,7 @@
         },
         "env-pull": {
           "type": "boolean",
-          "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neonctl dev`.",
+          "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`.",
           "default": true
         }
       },
@@ -1188,7 +1188,7 @@
         },
         "env-pull": {
           "type": "boolean",
-          "describe": "Pull the linked branch's Neon env vars (DATABASE_URL, ...) into a local .env after linking. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neonctl dev`.",
+          "describe": "Pull the linked branch's Neon env vars (DATABASE_URL, ...) into a local .env after linking. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`.",
           "default": true
         }
       },

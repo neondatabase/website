@@ -7,17 +7,20 @@
 // parent's help; `vpc endpoint list --help` does the same). The source
 // code is canonical.
 //
-// The source path is required — there is no default. Clone neonctl and
-// pass it explicitly so this script is reproducible across machines:
+// The source path is required — there is no default. The CLI lives in the
+// neon-pkgs monorepo under packages/cli; clone it and point --src at that
+// subdirectory (it must contain the CLI's package.json and src/commands):
 //
-//   git clone https://github.com/neondatabase/neonctl ~/src/neonctl
-//   node scripts/docs-checks/neonctl/generate-schema.js --src ~/src/neonctl
+//   git clone https://github.com/neondatabase/neon-pkgs ~/src/neon-pkgs
+//   node scripts/docs-checks/neonctl/generate-schema.js --src ~/src/neon-pkgs/packages/cli
 //
 // Or via environment variable:
 //
-//   NEONCTL_SRC=~/src/neonctl node scripts/docs-checks/neonctl/generate-schema.js
+//   NEONCTL_SRC=~/src/neon-pkgs/packages/cli node scripts/docs-checks/neonctl/generate-schema.js
 //
 // Run this whenever you upgrade the neonctl pin. Commit `schema.json`.
+// (`npm run refresh:cli-docs` automates the clone/extract and points --src
+// at packages/cli for you.)
 
 const fs = require('fs');
 const path = require('path');
@@ -724,7 +727,8 @@ function buildSchema({ src } = {}) {
 const USAGE = [
   'Usage: node scripts/docs-checks/neonctl/generate-schema.js --src <path> [--out <file>]',
   '',
-  '  --src <path>   Path to a local clone of https://github.com/neondatabase/neonctl',
+  '  --src <path>   Path to the CLI package in a neon-pkgs clone,',
+  '                 e.g. ~/src/neon-pkgs/packages/cli',
   '                 (or set the NEONCTL_SRC environment variable).',
   '  --out <file>   Where to write the schema JSON. Defaults to the committed',
   '                 schema.json next to this script.',
@@ -748,7 +752,7 @@ function main() {
   }
   if (!src) {
     console.error(
-      'Missing --src (or NEONCTL_SRC env var). Point it at a local clone of https://github.com/neondatabase/neonctl.\n'
+      'Missing --src (or NEONCTL_SRC env var). Point it at packages/cli in a clone of https://github.com/neondatabase/neon-pkgs.\n'
     );
     console.error(USAGE);
     process.exit(2);
@@ -756,7 +760,7 @@ function main() {
   const resolvedSrc = path.resolve(src);
   if (!fs.existsSync(path.join(resolvedSrc, 'src', 'commands'))) {
     console.error(
-      `No neonctl source found at ${resolvedSrc}. Expected a clone of https://github.com/neondatabase/neonctl with a \`src/commands\` directory.`
+      `No neonctl source found at ${resolvedSrc}. Expected the CLI package (packages/cli in a https://github.com/neondatabase/neon-pkgs clone) with a \`src/commands\` directory.`
     );
     process.exit(2);
   }
