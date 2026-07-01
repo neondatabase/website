@@ -211,6 +211,7 @@ const DetailIconCards = ({
   children = null,
   withNumbers = false,
   compact = false,
+  forceGreenIcon = false,
   cols = 2,
   theme = 'green-dotted',
 }) => {
@@ -291,7 +292,13 @@ const DetailIconCards = ({
                   Step {index + 1}
                 </span>
               ) : (
-                <Icon className={cn('mb-8 size-7', cardTheme.icon)} />
+                <Icon
+                  className={cn(
+                    'mb-8 size-7',
+                    cardTheme.icon,
+                    forceGreenIcon && 'mb-8 size-7 text-green-44 dark:text-green-44'
+                  )}
+                />
               )}
               <div className="flex flex-col gap-1.5">
                 <h3
@@ -325,6 +332,7 @@ DetailIconCards.propTypes = {
   children: PropTypes.node,
   withNumbers: PropTypes.bool,
   compact: PropTypes.bool,
+  forceGreenIcon: PropTypes.bool,
   cols: PropTypes.oneOf([2, 3, 4]),
   theme: PropTypes.oneOf(['green-flat', 'grey', 'green-dotted']),
   highlightIndex: PropTypes.number,
