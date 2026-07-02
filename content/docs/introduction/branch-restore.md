@@ -30,7 +30,6 @@ updatedOn: '2026-06-11T23:50:21.258Z'
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/introduction/history-window">History window for instant restore</a>
-  <a href="/docs/manage/branches#recover-a-deleted-branch">Recover a deleted branch</a>
 </DocsList>
 </InfoBlock>
 

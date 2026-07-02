@@ -220,11 +220,11 @@ The key list autocompletes from your config, so selecting a variable from a serv
 
 ## CLI commands
 
-| Command                                  | What it does                                                                                              |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Command                                     | What it does                                                                                              |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | [`neon link`](/docs/cli/link)            | Connect the current directory to a Neon project. Required to use linked branch defaults in other commands |
-| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                      |
-| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                                 |
+| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                   |
+| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                              |
 | [`neon config status`](/docs/cli/config) | Show the current live state of the branch as a `neon.ts`-shaped config                                    |
 | [`neon env pull`](/docs/cli/env)         | Write the branch's Neon-managed variables to `.env.local` (or `.env` if it already exists)                |
 | [`neon checkout`](/docs/cli/checkout)    | Switch to or create a branch; new branches are created from the `neon.ts` policy (TTL, compute, services) |

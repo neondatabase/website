@@ -12,7 +12,7 @@ summary: >-
   Stale branches count toward plan branch limits and incur storage costs even
   after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-06-30T18:18:03.819Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <InfoBlock>
@@ -54,12 +54,12 @@ If you're using the **Vercel-Managed integration**, you might expect preview bra
 
 1. **Vercel retains preview deployments for 6 months by default.** As of [October 2025](https://vercel.com/changelog/updated-defaults-for-deployment-retention), Vercel's default retention for pre-production deployments is 180 days. The clock starts when the deployment is created, not when the PR is closed.
 2. **Vercel's cleanup job runs asynchronously.** After the retention period expires, Vercel deletes the deployment in a batch process. This typically happens within hours to days of the expiration date, not instantly. Vercel offers a [30-day recovery window](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) to restore deleted deployments, but this does not delay cleanup for connected integrations.
-3. **Neon deletes the branch when Vercel deletes the deployment.** Neon receives a cleanup webhook and removes the corresponding preview branch. The branch enters a **7-day recovery period** before permanent deletion. See [Recover a deleted branch](/docs/manage/branches#recover-a-deleted-branch).
+3. **Neon deletes the branch when Vercel deletes the deployment.** Neon receives a cleanup webhook and removes the corresponding preview branch immediately.
 
 In the worst case (a deployment created moments before the PR is closed), this means up to **~6 months** before the Neon branch is automatically deleted.
 
 <Admonition type="warning" title="Restoring deleted deployments">
-Vercel lets you [restore deleted deployments](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) within a 30-day recovery window. Restoring a Vercel deployment does **not** restore the associated Neon branch. The restored deployment will have no database behind it. If the Neon branch was deleted recently, you may be able to [recover the branch](/docs/manage/branches#recover-a-deleted-branch) within 7 days. After that, recreate it manually or push a new commit to trigger the integration.
+Vercel lets you [restore deleted deployments](https://vercel.com/docs/deployment-retention#restoring-a-deleted-deployment) within a 30-day recovery window. However, restoring a Vercel deployment does **not** restore the associated Neon branch. The restored deployment will have no database behind it. To recover, you would need to recreate the Neon branch manually or push a new commit to trigger the integration.
 </Admonition>
 
 ### Retention exceptions
@@ -163,8 +163,6 @@ To remove stale branches:
 - **Neon Console**: Go to the **Branches** page and delete branches individually
 - **Neon CLI**: Use `neon branches delete <branch-id-or-name>` to remove specific branches. See [CLI branches reference](/docs/cli/branches#delete).
 - **Neon API**: Use `DELETE /projects/{project_id}/branches/{branch_id}`. See [Delete a branch with the API](/docs/manage/branches#delete-a-branch-with-the-api).
-
-Branches deleted this way enter a 7-day recovery period before being permanently removed. See [Recover a deleted branch](/docs/manage/branches#recover-a-deleted-branch).
 
 ---
 

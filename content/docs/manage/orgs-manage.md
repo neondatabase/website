@@ -102,8 +102,6 @@ All Members can create new projects from the Organization's **Projects** page; h
 - Any Member can create a project under the organization's ownership.
 - Only Admins can delete projects owned by the organization.
 
-Projects are soft-deleted by default, and enter a 7-day [deletion recovery period](/docs/manage/projects#recover-a-deleted-project) before being permanently removed.
-
 ## Manage billing
 
 When you create a new organization, you'll choose a plan for that organization. Each organization manages its own billing and plan.
