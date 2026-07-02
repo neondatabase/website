@@ -723,6 +723,8 @@
               slug: ai/lakebase-search
             - title: Get started
               slug: ai/lakebase-search-get-started
+            - title: Migrate from pg_search
+              slug: extensions/migrate-pg-search-to-lakebase-text
     - section: Tools & Workflows
       items:
         - title: API, CLI & SDKs
