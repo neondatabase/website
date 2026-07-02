@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/reference/cli-create-app
   - /docs/neonctl
   - /docs/get-started/neonctl
-updatedOn: '2026-07-02T10:16:52.161Z'
+updatedOn: '2026-07-02T10:49:30.556Z'
 ---
 
 One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data API, and Neon Auth from the terminal, with branch-scoped workflows built in.
@@ -41,6 +41,18 @@ Every command supports `--output json` for machine-readable results, and setting
 ## Commands reference
 
 Browse every Neon CLI command, organized by category.
+
+### Setup & context [toc-only]
+
+### Projects & branches [toc-only]
+
+### Connect to Postgres [toc-only]
+
+### Config as code [toc-only]
+
+### Functions, storage & data [toc-only]
+
+### Org & network [toc-only]
 
 <CliCommandIndex />
 

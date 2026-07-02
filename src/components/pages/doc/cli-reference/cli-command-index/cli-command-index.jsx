@@ -5,9 +5,9 @@
 // The llms .md mirror renders the static command tree instead (see
 // process-md-for-llms.js).
 //
-// Pass `group` to render one editorial group's panel; the overview page
-// uses one instance per group under a markdown heading so the right-rail
-// ToC picks the groups up (it only sees markdown headings).
+// Pass `group` to render one editorial group's panel. The overview page keeps
+// a single searchable index and uses `[toc-only]` markdown headings so the
+// right-rail ToC can link to the runtime group anchors.
 import PropTypes from 'prop-types';
 
 import { schema } from '../renderers';
