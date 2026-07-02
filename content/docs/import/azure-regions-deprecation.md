@@ -12,42 +12,45 @@ summary: >-
 enableTableOfContents: true
 ---
 
-Neon Azure regions are deprecated, and you can no longer create new projects in these regions.
+<Admonition type="warning">
+Neon Azure regions were deprecated on April 7, 2026.
 
-If you have active or paid projects in Azure regions, they will go through the deprecation process outlined below and may not receive new Neon features going forward.
+We recommend [migrating projects in Azure regions to another region](#what-to-do-next) by **October 5, 2026**.
+</Admonition>
 
-Inactive projects in Free organizations will be subject to deletion as of **October 5, 2026.**
+As of April 7, 2026, Neon's Azure regions are deprecated, and you can no longer create new projects in those regions.
 
-You should receive personalized email about your specific projects and next steps. This guide explains what's changing and what to do.
+On **October 5, 2026**, these regions enter maintenance mode and may not receive new Neon feature updates. Also on October 5, projects on Free plans that have been inactive for 90 days or more are subject to deletion.
+
+You should receive a personalized email about your specific projects and next steps. This guide explains what's changing and what to do.
 
 ## Affected regions
 
 Only projects in these Azure regions are affected:
 
-- azure-eastus2 (Virginia)
-- azure-westus3 (Phoenix)
-- azure-gwc (Frankfurt)
+- 🇺🇸 Azure East US 2 (Virginia) - `azure-eastus2`
+- 🇺🇸 Azure West US 3 (Phoenix) - `azure-westus3`
+- 🇩🇪 Azure Germany West Central (Frankfurt) - `azure-gwc`
 
 Projects in AWS regions are not affected.
 
 ## Deprecation timeline
 
-| Date                  | What happens                                                                                                                                                           |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| April 7, 2026         | Azure regions deprecated. New projects cannot be created in Azure regions. Existing projects keep running.                                                             |
-| July 6, 2026          | Migration window begins.                                                                                                                                               |
-| October 5, 2026       | Migration window ends. Projects in Free organizations that have been inactive for 90 days or more are subject to deletion.                                             |
-| After October 5, 2026 | Azure regions remain in maintenance mode, and projects in these regions may not receive new Neon features. A full end-of-support date will be announced in the future. |
+| Date                      | What happens                                                                                                                                                                    |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **April 7, 2026**         | Azure regions deprecated. New projects cannot be created in Azure regions. Existing projects keep running.                                                                      |
+| **October 5, 2026**       | Azure regions enter maintenance mode and may not receive new Neon features. Projects in Free organizations that have been inactive for 90 days or more are subject to deletion. |
+| **After October 5, 2026** | A full end-of-support date will be announced in the future.                                                                                                                     |
 
 ## What this means for existing projects in Azure regions
 
 Projects in Azure regions should be migrated to alternate regions before October 5, 2026. Migrating now keeps your project on actively developed infrastructure and lets you act on your own schedule rather than a future deadline.
 
-Existing projects will continue to run, though they may not receive new Neon features or capabilities.
+Existing projects will continue to run, but after October 5, 2026 they may not receive new Neon features or capabilities.
 
 ## What happens on October 5, 2026
 
-Projects on the Free plan with no compute activity for 90 days or more will start to be deleted on October 5, 2026. Deletion is permanent; a deleted project and its data cannot be recovered. Active projects and projects on paid plans will not be deleted.
+Projects on the Free plan with no compute activity for 90 days or more are subject to deletion as of October 5, 2026. Deletion is permanent; a deleted project and its data cannot be recovered. Active projects and projects on paid plans will not be deleted.
 
 To keep an inactive Free project beyond October 5, 2026, connect to its database and run any SQL query. Any compute activity resets the 90-day inactivity timer. Organization administrators will be notified before any project is deleted.
 
@@ -65,7 +68,7 @@ If none of these fit, [export your data in Postgres-compatible form](/docs/guide
 
 ### Why are these regions being deprecated?
 
-We're focusing our infrastructure investment where our customers want to run Neon. Most Neon projects run in AWS regions, so concentrating there lets us ship features and reliability improvements faster, rather than splitting effort to maintain Azure in parallel. For teams that need Azure, Databricks Lakebase runs the same Postgres technology as Neon and supports Azure regions.
+We're focusing our infrastructure investment where our customers want to run Neon. Most Neon projects run in AWS regions, so concentrating there lets us ship features and reliability improvements faster, rather than splitting effort to maintain Azure in parallel. For teams that need Azure, [Databricks Lakebase](/docs/guides/migrate-neon-to-lakebase) runs the same Postgres technology as Neon and supports Azure regions.
 
 ### How do I find out which region a project is in?
 
@@ -76,6 +79,18 @@ You can check from the Console, the CLI, or the API:
 - **API.** Call `GET /projects` and check the `region_id` field on each project.
 
 ![Project settings widget showing the project region](/docs/import/azure-regions-deprecation/project-settings-region.png)
+
+### Which AWS region should I migrate to?
+
+To keep latency similar, choose the AWS region closest to your current Azure region. For the deprecated Azure regions, the nearest AWS equivalents are:
+
+| Azure region                                            | Nearest AWS region                             |
+| ------------------------------------------------------- | ---------------------------------------------- |
+| 🇺🇸 Azure East US 2 (Virginia) - `azure-eastus2`         | 🇺🇸 AWS US East (N. Virginia) - `aws-us-east-1` |
+| 🇺🇸 Azure West US 3 (Phoenix) - `azure-westus3`          | 🇺🇸 AWS US West (Oregon) - `aws-us-west-2`      |
+| 🇩🇪 Azure Germany West Central (Frankfurt) - `azure-gwc` | 🇩🇪 AWS Europe (Frankfurt) - `aws-eu-central-1` |
+
+If your workload has specific latency or data residency requirements, pick the region closest to your users.
 
 ### What changes about my project when I migrate to a new region?
 
