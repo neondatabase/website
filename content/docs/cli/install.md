@@ -9,7 +9,7 @@ summary: >-
   Vercel-Managed Integration users must use an API key because web auth requires
   a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-02T13:13:39.256Z'
 redirectFrom:
   - /docs/reference/cli-install
 ---
@@ -22,7 +22,7 @@ The CLI is invoked as `neon`, and `neonctl` is an alias for `neon`. The Homebrew
 
 <TabItem>
 
-**Install with [Homebrew](https://formulae.brew.sh/formula/neon)**
+**Install with [Homebrew](https://formulae.brew.sh/formula/neonctl)**
 
 ```bash
 brew install neonctl
