@@ -24,7 +24,7 @@ There is no migration involved. `lakebase_vector` inherits all `pgvector` data t
 
 ## Enable the lakebase_vector extension
 
-[Lakebase Search](/docs/ai/lakebase-search) must be enabled on your Neon project before you can install this extension. Once it's enabled, run the following statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
+`lakebase_vector` is preloaded by default on Neon, so you can install it directly. Run the following statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
