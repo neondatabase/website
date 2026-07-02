@@ -81,7 +81,7 @@ curl -sS -X POST \
   "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$ENDPOINT_ID/restart"
 ```
 
-Once the compute restarts, run the `CREATE EXTENSION` statements again. For more on preloaded libraries, see [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries).
+Once the compute restarts, run the `CREATE EXTENSION` statements; they'll succeed now that the libraries are loaded. For more on preloaded libraries, see [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries).
 
 </details>
 

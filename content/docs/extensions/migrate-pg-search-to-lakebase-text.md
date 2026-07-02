@@ -28,19 +28,13 @@ The main difference: `pg_search` indexes your columns directly, while `lakebase_
 
 ## Enable lakebase_text
 
-Before you migrate, `lakebase_text` needs to be enabled on your project. Check what's loaded:
-
-```sql
-SHOW shared_preload_libraries;
-```
-
-If `lakebase_text` is in the list, create the extension and you're ready:
+`lakebase_text` is preloaded by default on Neon, so you can create the extension directly:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS lakebase_text;
 ```
 
-If `lakebase_text` isn't listed, enabling it is a one-time setup: add it to your project's preloaded libraries with the Neon API, restart the compute, then create the extension. The [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) guide has the full steps. For this migration you need only `lakebase_text`, not `lakebase_vector`. Leave `pg_search` enabled while you migrate.
+If this returns `ERROR: lakebase_text must be loaded via shared_preload_libraries`, your compute predates the default. Add `lakebase_text` to your preloaded libraries and restart the compute, then run the statement again; it'll succeed now that the library is loaded. See [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started#enable-the-extensions) for the full steps. For this migration you need only `lakebase_text`, not `lakebase_vector`. Leave `pg_search` enabled while you migrate.
 
 ## Migrate the index
 
