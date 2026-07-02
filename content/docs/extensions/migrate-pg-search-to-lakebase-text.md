@@ -34,7 +34,7 @@ The main difference: `pg_search` indexes your columns directly, while `lakebase_
 CREATE EXTENSION IF NOT EXISTS lakebase_text;
 ```
 
-If this returns `ERROR: lakebase_text must be loaded via shared_preload_libraries`, your compute predates the default. Add `lakebase_text` to your preloaded libraries and restart the compute, then run the statement again; it'll succeed now that the library is loaded. See [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started#enable-the-extensions) for the full steps. For this migration you need only `lakebase_text`, not `lakebase_vector`. Leave `pg_search` enabled while you migrate.
+If this returns `ERROR: lakebase_text must be loaded via shared_preload_libraries`, your compute predates the default. See [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries) to add `lakebase_text` to your preloaded libraries and restart the compute, then run the statement again. For this migration you need only `lakebase_text`, not `lakebase_vector`. Leave `pg_search` enabled while you migrate.
 
 ## Migrate the index
 
