@@ -73,7 +73,7 @@ When you set an expiration timestamp on a branch:
 3. If you reset a branch from its parent, the TTL countdown restarts using the original interval
 
 <Admonition type="important">
-Branches are soft-deleted by default, and enter a 7-day [deletion recovery period](/docs/manage/branches#recover-a-deleted-branch) before being permanently removed. All associated data and compute endpoints are also deleted. Verify expiration times carefully before setting them.
+Branch deletion is permanent and cannot be recovered. All associated data and compute endpoints are also deleted. Verify expiration times carefully before setting them.
 </Admonition>
 
 ## Setting branch expiration

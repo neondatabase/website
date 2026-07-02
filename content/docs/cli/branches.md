@@ -532,8 +532,6 @@ neon branches delete br-rough-sky-158193
 └─────────────────────┴─────────────────┴──────────────────────┴──────────────────────┘
 ```
 
-Branches are soft-deleted by default, and enter a 7-day [deletion recovery period](/docs/manage/branches#recover-a-deleted-branch) before being permanently removed.
-
 ## neon branches get (#get)
 
 Retrieves details about a branch.

@@ -42,13 +42,13 @@ neon functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wa
 
 The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
 
-| Flag              | Default       | Description                                                                                                                                   |
-| ----------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                   |
+| Flag              | Default       | Description                                                                                                                                      |
+| ----------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                      |
 | `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env` |
-| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                          |
-| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                              |
-| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                          |
+| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                             |
+| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                 |
+| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                             |
 
 **Examples:**
 

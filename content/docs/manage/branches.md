@@ -198,7 +198,7 @@ You can use the Neon Console, CLI, or API. For more details, see [Instant restor
 
 ## Delete a branch
 
-Deleting a branch removes the branch along with its databases, roles, and associated compute. You cannot delete a branch that has child branches. The child branches must be deleted first.
+Deleting a branch is a permanent action. Deleting a branch also deletes the databases and roles that belong to the branch as well as the compute associated with the branch. You cannot delete a branch that has child branches. The child branches must be deleted first.
 
 To delete a branch:
 
@@ -211,65 +211,6 @@ To delete a branch:
 <Admonition type="tip">
 For temporary branches, consider setting an expiration date when creating them to automate cleanup and reduce manual deletion overhead.
 </Admonition>
-
-## Recover a deleted branch
-
-Branches are soft-deleted by default, and enter a 7-day deletion recovery period before being permanently removed. To bypass the recovery period and delete immediately, use `hard_delete=true`.
-
-<Admonition type="note">
-This is different from [instant restore](/docs/introduction/branch-restore), which rolls back a branch to an earlier point in time.
-
-To recover a deleted project, see [Recover a deleted project](/docs/manage/projects#recover-a-deleted-project).
-</Admonition>
-
-### What's recovered
-
-When you recover a deleted branch:
-
-- Branch data and configuration are restored
-- Endpoints return to an idle state
-- Connection strings remain valid
-
-### Recovery API
-
-To list deleted branches that can be recovered, use `include_deleted=true`:
-
-```http
-GET /projects/{project_id}/branches?include_deleted=true
-```
-
-**Example:**
-
-```bash
-curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches?include_deleted=true' \
-  -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-Each deleted branch includes a `recovery` object with `deleted_at`, `recoverable_until`, and `deletion_method` fields.
-
-To recover a deleted branch:
-
-```http
-POST /projects/{project_id}/branches/{branch_id}/recover
-```
-
-**Example:**
-
-```bash
-curl -X POST \
-  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-curly-wave-af4i4oeu/recover' \
-  -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" | jq
-```
-
-The API returns a `200` status code with the restored branch object.
-
-To skip the recovery window, add `hard_delete=true` to the delete request:
-
-```http
-DELETE /projects/{project_id}/branches/{branch_id}?hard_delete=true
-```
 
 ## Check the data size
 
