@@ -10,7 +10,7 @@ summary: >-
   middleware, and deployment to Vercel, Netlify, or self-hosted Node.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-01T09:13:26.713Z'
+updatedOn: '2026-07-01T09:21:53.862Z'
 ---
 
 ## Before you start
@@ -769,6 +769,7 @@ You now have a Next.js app where:
 ## Next steps
 
 - **Write data with Server Actions or API routes** ([Drizzle insert reference](https://orm.drizzle.team/docs/insert)): wire up post creation through a server action that uses the auth session for `user_id` using `auth.getSession()`.
+- **Deploy long-running tasks with Neon Functions:** Next.js serverless routes time out quickly. If you need to run [streaming AI agents](/docs/compute/functions/agents) or hold open [WebSockets and SSE](/docs/compute/functions/websockets), you can deploy a [Neon Function](/docs/compute/functions/overview) directly onto your database branch to run compute right next to your data.
 - **Branch for previews**: [branching authentication](/docs/auth/branching-authentication) gives every preview environment its own user state
 - **Optimize for the edge**: on Vercel or Cloudflare, configure [connection pooling](/docs/connect/connection-pooling) for production
 - **Generated migrations**: switch from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations) for tracked schema changes
