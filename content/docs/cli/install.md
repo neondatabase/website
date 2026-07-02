@@ -9,7 +9,7 @@ summary: >-
   Vercel-Managed Integration users must use an API key because web auth requires
   a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-07-02T13:13:39.256Z'
+updatedOn: '2026-07-02T22:08:19.260Z'
 redirectFrom:
   - /docs/reference/cli-install
 ---
@@ -34,7 +34,7 @@ brew install neonctl
 npm i -g neon
 ```
 
-Requires [Node.js 22](https://nodejs.org/en/download/) or higher.
+Requires [Node.js 20](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
@@ -66,7 +66,7 @@ neon <command> [options]
 npm i -g neon
 ```
 
-Requires [Node.js 22](https://nodejs.org/en/download/) or higher.
+Requires [Node.js 20](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
