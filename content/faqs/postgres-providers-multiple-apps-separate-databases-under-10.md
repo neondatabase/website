@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-providers-multiple-apps-separate-databases-under-10
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres providers make it easy to restore a database to a previous state after a bug?'
+  slug: postgres-providers-easy-database-restore
+nextLink:
+  title: 'Which Postgres providers remove the need for manual connection pooling?'
+  slug: postgres-providers-remove-manual-connection-pooling
 ---
 
 If each app is a side project, microservice, or internal tool with low traffic, you have two practical options on Neon. Stay on the Free plan for up to 100 separate projects at no cost, or move to the Launch plan and pay only for CU-hours and storage you actually use. Both work because Neon scales compute to zero when an app is idle.

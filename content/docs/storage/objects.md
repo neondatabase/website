@@ -6,7 +6,7 @@ summary: >-
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-25T15:31:37.545Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -29,8 +29,8 @@ await files.upload('images/photo.jpg', fileBuffer, {
 ```
 
 ```bash
-neon bucket object put my-bucket/images/photo.jpg --file ./photo.jpg
-neon bucket object put my-bucket/images/photo.jpg --file ./photo.jpg --content-type image/jpeg
+neon buckets object put my-bucket/images/photo.jpg --file ./photo.jpg
+neon buckets object put my-bucket/images/photo.jpg --file ./photo.jpg --content-type image/jpeg
 ```
 
 ```typescript shouldWrap
@@ -67,7 +67,7 @@ aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
 </CodeTabs>
 
 <Admonition type="note">
-`neon bucket object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
+`neon buckets object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
 </Admonition>
 
 ## Multipart upload
@@ -124,8 +124,8 @@ const buffer = await result.arrayBuffer();
 
 ```bash
 # Downloads to ./photo.jpg by default; use --file to specify a different path
-neon bucket object get my-bucket/images/photo.jpg
-neon bucket object get my-bucket/images/photo.jpg --file ./downloads/photo.jpg
+neon buckets object get my-bucket/images/photo.jpg
+neon buckets object get my-bucket/images/photo.jpg --file ./downloads/photo.jpg
 ```
 
 ```typescript shouldWrap
@@ -182,13 +182,13 @@ for (const item of items) {
 
 ```bash
 # Folder-collapsed view by default (same as aws s3 ls)
-neon bucket object list my-bucket
+neon buckets object list my-bucket
 
 # List objects under a prefix
-neon bucket object list my-bucket/images/
+neon buckets object list my-bucket/images/
 
 # Flat listing of every key, no folder collapsing
-neon bucket object list my-bucket --recursive
+neon buckets object list my-bucket --recursive
 ```
 
 ```typescript shouldWrap
@@ -258,7 +258,7 @@ await files.delete('images/photo.jpg');
 ```
 
 ```bash
-neon bucket object delete my-bucket/images/photo.jpg
+neon buckets object delete my-bucket/images/photo.jpg
 ```
 
 ```typescript shouldWrap
@@ -325,7 +325,7 @@ client.delete_objects(
 
 ```bash
 # The prefix must end with /
-neon bucket object delete my-bucket/images/ --recursive
+neon buckets object delete my-bucket/images/ --recursive
 ```
 
 ```bash shouldWrap

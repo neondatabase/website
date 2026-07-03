@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-15T20:35:44.700Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -24,7 +24,7 @@ In the Neon Console, navigate to your project, select a branch, and open the **S
 <CodeTabs labels={["neon", "Neon API", "TypeScript", "Python", "AWS CLI"]}>
 
 ```bash
-neon bucket create my-bucket
+neon buckets create my-bucket
 ```
 
 ```bash shouldWrap
@@ -76,7 +76,7 @@ aws s3api create-bucket \
 To create a `public_read` bucket with neon:
 
 ```bash
-neon bucket create my-public-bucket --access-level public_read
+neon buckets create my-public-bucket --access-level public_read
 ```
 
 <Admonition type="note">
@@ -111,7 +111,7 @@ https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech/my-public-bucket/<obje
 <CodeTabs labels={["neon", "TypeScript", "Python", "AWS CLI"]}>
 
 ```bash
-neon bucket list
+neon buckets list
 ```
 
 ```typescript shouldWrap
@@ -139,7 +139,7 @@ Buckets must be empty before deletion. [Delete all objects](/docs/storage/object
 <CodeTabs labels={["neon", "TypeScript", "Python", "AWS CLI"]}>
 
 ```bash
-neon bucket delete my-bucket
+neon buckets delete my-bucket
 ```
 
 ```typescript shouldWrap

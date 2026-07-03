@@ -23,6 +23,8 @@ One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data AP
 npm i -g neon
 ```
 
+The CLI is invoked as `neon`. `neonctl` is an alias for `neon`, so any command works with either name.
+
 ## Get started
 
 <DetailIconCards forceGreenIcon>

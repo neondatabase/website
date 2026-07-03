@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: databases-recover-accidental-data-deletion
 category: FAQ
 status: draft
+previousLink:
+  title: 'What databases help isolate bugs without downtime?'
+  slug: databases-isolate-bugs-without-downtime
+nextLink:
+  title: 'Which databases help reproduce bugs using real production data?'
+  slug: databases-reproduce-bugs-production-data
 ---
 
 Postgres supports point-in-time recovery, but most managed offerings make you restore from a backup, which takes time and produces a new instance. Neon's instant restore rolls a branch back to a point in time in place, in seconds, without a separate restore job.

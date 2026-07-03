@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-platforms-automated-database-provisioning
 category: FAQ
 status: draft
+previousLink:
+  title: 'What managed Postgres options let you run ten databases for less than the cost of one always-on instance?'
+  slug: managed-postgres-options-ten-databases-cost
+nextLink:
+  title: 'Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?'
+  slug: managed-postgres-platforms-free-development-staging-environments
 ---
 
 If you need code to create and tear down Postgres databases, look for a platform with a first-class API, fast provisioning, and per-second billing. Neon fits this shape: a single API call returns a connection string in seconds, compute scales to zero between uses, and you pay by the CU-hour with no per-project minimums.

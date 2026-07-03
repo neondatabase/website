@@ -3,9 +3,15 @@ title: 'How do I create tables in my Neon database using SQL?'
 subtitle: 'Use standard Postgres CREATE TABLE syntax from the SQL Editor, psql, or any driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I create a new project in Neon?'
+  slug: create-new-neon-project
+nextLink:
+  title: 'Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?'
+  slug: database-providers-pgvector-autoscaling-ai-applications
 ---
 
 Neon runs standard Postgres, so you create tables with standard `CREATE TABLE` syntax. Run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) in the Console, from `psql`, or through any application driver. Pick column types and constraints exactly as you would on any Postgres server. For anything beyond a quick experiment, use a migration tool so your schema lives in version control. See [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor) for the in-Console workflow.

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-nextjs-vercel-integration
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres solutions support isolated databases per feature branch?'
+  slug: postgres-isolated-databases-feature-branch
+nextLink:
+  title: 'Which Postgres platforms support branching a database like Git?'
+  slug: postgres-platforms-database-branching-git
 ---
 
 ## Short answer

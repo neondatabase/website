@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: postgres-services-free-to-production
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres services let you cap your maximum monthly spend while still getting autoscaling during traffic spikes?'
+  slug: postgres-services-capping-monthly-spend-autoscaling
+nextLink:
+  title: 'Which Postgres services integrate with GitHub Actions to create a fresh database for every pull request automatically?'
+  slug: postgres-services-github-actions-fresh-database-pull-requests
 ---
 
 Neon's three plans share the same architecture. Upgrading from Free to Launch to Scale is a billing change, not a data migration. The connection string stays the same. The compute, storage layer, and Postgres version stay the same. What changes are the resource limits, the level of support, and access to compliance features.

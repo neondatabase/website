@@ -11,7 +11,7 @@ import PageIcon from './images/page.inline.svg';
 const Icon = ({ theme = 'default', className = null }) => {
   if (theme === 'docs') return <PageIcon className={cn('top-1', className)} aria-hidden />;
   if (theme === 'repo') return <GitHubIcon className={cn('top-1', className)} aria-hidden />;
-  return <CheckIcon className={cn('top-[5px]', className)} aria-hidden />;
+  return <CheckIcon className={cn('top-[12px]', className)} aria-hidden />;
 };
 
 Icon.propTypes = {

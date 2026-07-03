@@ -16,7 +16,7 @@ import CommandIndexClient from './command-index-client';
 import { GROUPS, GROUP_OF, HREF_OVERRIDES } from './groups';
 import META from './meta';
 
-const BINARY = 'neonctl';
+const BINARY = 'neon';
 
 // CLI-authored .example() strings from the command's subtree (depth first,
 // up to three) — the automatic example source. Curated meta examples

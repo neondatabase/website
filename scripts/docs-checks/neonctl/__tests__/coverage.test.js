@@ -72,4 +72,51 @@ describe('cli command coverage invariants', () => {
     expect(missingPages).toEqual([]);
     expect(missingNav).toEqual([]);
   });
+
+  // Every <CliSubcommands> table links each subcommand to a #anchor; the page
+  // must define a matching heading anchor, or the link dangles. A new
+  // subcommand in the schema (e.g. `config init` in 2.29.2) fails here until
+  // its section is added — refresh.js only warns, so this is the CI guard.
+  it('every <CliSubcommands> link resolves to a heading anchor in the page', () => {
+    // Mirrors renderSubcommands() in generate-docs.js.
+    const toAnchor = (parts) =>
+      parts
+        .join('-')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-');
+
+    const resolve = (parts) => {
+      let pool = schema.commands;
+      let node = null;
+      for (const p of parts) {
+        node = pool && pool[p];
+        if (!node) return null;
+        pool = node.commands;
+      }
+      return node;
+    };
+
+    const dangling = [];
+    const cliDir = path.join(repoRoot, 'content/docs/cli');
+    for (const file of fs.readdirSync(cliDir).filter((f) => f.endsWith('.md'))) {
+      const md = fs.readFileSync(path.join(cliDir, file), 'utf8');
+      const anchors = new Set([...md.matchAll(/\(#([\w-]+)\)/g)].map((m) => m[1]));
+      const tags = [
+        ...md.matchAll(/<CliSubcommands\s+command="([^"]+)"(?:\s+anchorParts="([^"]*)")?\s*\/>/g),
+      ];
+      for (const [, command, anchorPartsAttr] of tags) {
+        const node = resolve(command.split(/\s+/));
+        if (!node || !node.commands) continue;
+        const anchorParts = anchorPartsAttr ? anchorPartsAttr.split(/\s+/) : [];
+        for (const sub of Object.keys(node.commands)) {
+          const anchor = toAnchor([...anchorParts, sub]);
+          if (!anchors.has(anchor))
+            dangling.push(
+              `${file}: <CliSubcommands command="${command}"> links #${anchor} but no heading defines it`
+            );
+        }
+      }
+    }
+    expect(dangling).toEqual([]);
+  });
 });

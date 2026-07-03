@@ -62,7 +62,7 @@ Output:
 (1 row)
 ```
 
-The following statement uses the `MOD()` function to get the remainder of 15 and \-5:
+The following statement uses the `MOD()` function to get the remainder of 15 and \-4:
 
 ```sql
 SELECT MOD(15,-4);

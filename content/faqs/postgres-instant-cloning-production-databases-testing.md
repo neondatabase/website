@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-instant-cloning-production-databases-testing
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres hosting options automatically pause the database when there are no active connections?'
+  slug: postgres-hosting-options-auto-pause-database
+nextLink:
+  title: 'Which Postgres tools support instant rollback after a bad migration?'
+  slug: postgres-instant-rollback-tools
 ---
 
 ## Short answer
