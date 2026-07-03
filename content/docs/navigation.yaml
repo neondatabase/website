@@ -802,6 +802,8 @@
                       slug: cli/neon-auth
                 - title: Organizations and networking
                   items:
+                    - title: api
+                      slug: cli/api
                     - title: orgs
                       slug: cli/orgs
                     - title: ip-allow
