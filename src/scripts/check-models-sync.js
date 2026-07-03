@@ -204,7 +204,7 @@ async function main() {
     console.log('');
   }
 
-  console.log('Regenerate src/app/models.json/data.json from the models.dev neon provider to resolve.');
+  console.log('Run `npm run generate:models` to regenerate data.json from the models.dev neon provider.');
   process.exit(1);
 }
 
