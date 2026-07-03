@@ -51,7 +51,7 @@ Let’s explore some examples of using the `jsonb_populate_recordset()` function
 
 ### 1\) Basic jsonb_populate_recordset() function example
 
-First, [create a new type](../postgresql-tutorial/postgresql-user-defined-data-types) called `address`:
+First, [create a new type](../postgresql-tutorial/postgresql-user-defined-data-types) called `address_type`:
 
 ```sql
 CREATE TYPE address_type AS (
@@ -113,7 +113,7 @@ SELECT
     json_agg(jsonb_build_object(
       'id', id, 'name', name, 'age', age, 'salary',
       salary
-    ))
+    ))::jsonb
   ) AS employees
 FROM
   employees;
