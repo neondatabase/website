@@ -2,13 +2,11 @@
  * Create a logical snapshot on the default branch (same pattern as many agent hosts).
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
-
-import { createLogicalSnapshot } from "./utils.js";
+import { getProductionBranchId, neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
-const snapshotName = process.env.NEON_SNAPSHOT_NAME;
+const snapshotName = process.env.NEON_SNAPSHOT_NAME?.trim();
 const expiresAt = process.env.NEON_SNAPSHOT_EXPIRES_AT?.trim();
 const lsn = process.env.NEON_SNAPSHOT_LSN?.trim();
 
@@ -22,10 +20,14 @@ if (!projectId) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
-const snapshotId = await createLogicalSnapshot(api, projectId, {
-  name: snapshotName || undefined,
+const neon = neonClient(apiKey);
+const branchId = await getProductionBranchId(neon, projectId);
+
+const snapshot = await neon.snapshots.create(projectId, branchId, {
+  ...(snapshotName ? { name: snapshotName } : {}),
   ...(expiresAt ? { expiresAt } : {}),
-  ...(lsn ? { lsn } : {}),
+  // A snapshot is taken at an `lsn` or a `timestamp`; default to "now".
+  ...(lsn ? { lsn } : { timestamp: new Date().toISOString() }),
 });
-console.log(JSON.stringify({ snapshotId, projectId }, null, 2));
+
+console.log(JSON.stringify({ snapshotId: snapshot.id, projectId }, null, 2));

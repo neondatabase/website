@@ -3,7 +3,7 @@
  * @see https://neon.com/docs/ai/ai-database-versioning#update-snapshot-name
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
+import { neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
@@ -17,8 +17,6 @@ if (!apiKey || !projectId || !snapshotId || !name) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
-await api.updateSnapshot(projectId, snapshotId, {
-  snapshot: { name },
-});
+const neon = neonClient(apiKey);
+await neon.snapshots.update(projectId, snapshotId, { name });
 console.log(JSON.stringify({ ok: true, projectId, snapshotId, name }, null, 2));

@@ -4,9 +4,7 @@
  * @see https://neon.com/docs/ai/ai-database-versioning
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
-
-import { applySnapshotToBranch } from "./utils.js";
+import { neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
@@ -20,8 +18,17 @@ if (!apiKey || !projectId || !snapshotId || !targetBranchId) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
-await applySnapshotToBranch(api, projectId, snapshotId, targetBranchId);
+const neon = neonClient(apiKey);
+
+// Restore onto an existing branch and finalize immediately (swap computes onto
+// the restored data). Pass a `preview` callback instead of `finalize` to inspect
+// the restored branch before committing.
+await neon.snapshots.restore(projectId, snapshotId, {
+  targetBranchId,
+  finalize: true,
+  name: `before_restore_${Date.now()}`,
+});
+
 console.log(
   JSON.stringify(
     {

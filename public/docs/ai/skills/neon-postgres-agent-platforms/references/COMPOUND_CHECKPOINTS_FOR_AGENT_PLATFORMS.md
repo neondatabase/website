@@ -25,7 +25,7 @@ The scripts in **`scripts/`** intentionally stay **Management API-sized**: they 
 
 ## Mapping Neon calls to your compound ledger
 
-The Management API shapes below match the **`@neondatabase/api-client`** scripts under **`scripts/`**. They are **one slice** of a checkpoint, you still persist the non-Neon dimensions in your platform store.
+The Management API shapes below match the **`@neon/sdk`** scripts under **`scripts/`**. They are **one slice** of a checkpoint, you still persist the non-Neon dimensions in your platform store.
 
 | Concern | Minimal API surface (Neon) | Sample script (`scripts/`) |
 | ------- | -------------------------- | --------------------- |
