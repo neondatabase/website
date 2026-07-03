@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-database-branching-time-travel-debugging
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?'
+  slug: postgres-create-database-cli-single-command
+nextLink:
+  title: 'Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?'
+  slug: postgres-database-services-ai-provisioning
 ---
 
 Neon retains a change log for your database (Postgres WAL), so you can branch the database as it existed at any timestamp inside your project's history window. The branch is a writable, isolated Postgres database with its own connection string. You can poke at it, run destructive queries, and throw it away when you're done. None of that touches production.

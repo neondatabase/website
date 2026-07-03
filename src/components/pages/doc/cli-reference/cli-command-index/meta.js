@@ -66,6 +66,10 @@ const META = {
     desc: 'Alias for config apply; reconciles the policy.',
     examples: ['neon deploy'],
   },
+  status: {
+    desc: "Show the branch's live Neon state (alias of config status).",
+    examples: ['neon status'],
+  },
   dev: {
     desc: 'Run Neon Functions locally with hot reload + branch env.',
     examples: ['neon dev'],
@@ -74,9 +78,9 @@ const META = {
     desc: 'Deploy and manage Neon Functions on a branch.',
     examples: ['neon functions deploy api --src ./api.ts'],
   },
-  bucket: {
+  buckets: {
     desc: 'Branch-scoped object storage and its objects.',
-    examples: ['neon bucket create my-assets'],
+    examples: ['neon buckets create my-assets'],
   },
   'data-api': {
     desc: 'Manage the Neon Data API for a database.',

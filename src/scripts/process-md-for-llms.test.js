@@ -1026,11 +1026,11 @@ describe('CLI reference components', () => {
     const { content: result } = await processFile(file, 'https://neon.com/docs/cli');
 
     // Every top-level command appears as a heading in the tree
-    for (const name of ['projects', 'branches', 'functions', 'bucket', 'neon-auth']) {
+    for (const name of ['projects', 'branches', 'functions', 'buckets', 'neon-auth']) {
       expect(result).toContain(`### ${name}`);
     }
     // Nested subtrees flatten to full invocations
-    expect(result).toContain('neon bucket object list');
+    expect(result).toContain('neon buckets object list');
     expect(result).not.toContain('<CliCommandIndex');
   });
 });

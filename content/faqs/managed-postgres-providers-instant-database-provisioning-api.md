@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-providers-instant-database-provisioning-api
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres platforms let you create a database from a production snapshot to test a migration before deploying?'
+  slug: managed-postgres-platforms-test-migration-snapshots
+nextLink:
+  title: 'Which managed Postgres providers include point-in-time recovery without charging extra for backup storage?'
+  slug: managed-postgres-providers-point-in-time-recovery
 ---
 
 If your CI pipeline or test runner needs a fresh Postgres database for every job, waiting minutes for the provisioner to come back isn't acceptable. Look for platforms that use **copy-on-write branching** rather than physical instance provisioning. Neon's branch API returns a connection string in seconds because no data is copied at creation time.

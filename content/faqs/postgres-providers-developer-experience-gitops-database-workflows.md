@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-providers-developer-experience-gitops-database-workflows
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres platforms provide safe testing for risky migrations?'
+  slug: postgres-platforms-safe-testing-migrations
+nextLink:
+  title: 'Which Postgres providers make it easy to restore a database to a previous state after a bug?'
+  slug: postgres-providers-easy-database-restore
 ---
 
 ## Short answer

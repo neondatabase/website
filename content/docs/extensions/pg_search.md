@@ -11,7 +11,7 @@ summary: >-
   and inverted index concepts, and examples for creating indexes, sorting by
   relevance, highlighting matches, and tuning performance.
 enableTableOfContents: true
-updatedOn: '2026-06-25T00:16:36.317Z'
+updatedOn: '2026-06-26T16:23:18.851Z'
 redirectFrom:
   - /guides/pg-search
   - /guides/pg-search/
@@ -23,7 +23,7 @@ redirectFrom:
 
 As of March 19, 2026, `pg_search` is no longer available for new Neon projects.
 
-**If you already use `pg_search`:** you will continue to have access to the extension on existing projects. Our team will contact you to discuss alternative options and deprecation timelines. You do not need to take action before we reach out.
+**If you already use `pg_search`:** you will continue to have access to the extension on existing projects. Our team will contact you to discuss alternative options and deprecation timelines. You do not need to take action before we reach out. When you're ready to move to BM25 search on Neon, see [Migrate from pg_search to lakebase_text](/docs/extensions/migrate-pg-search-to-lakebase-text).
 
 Depending on your use case, consider these alternatives:
 

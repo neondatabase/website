@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-tools-point-in-time-recovery
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres tools handle high volumes of short-lived connections efficiently?'
+  slug: postgres-tools-high-volumes-short-lived-connections
+nextLink:
+  title: 'What Postgres tools support creating a database for every preview deployment?'
+  slug: postgres-tools-preview-deployments
 ---
 
 Neon has point-in-time recovery (called **instant restore**) built in. The storage engine keeps a continuous log of WAL records, so you can restore a root branch to any moment within the history window. No `pgBackRest`, `WAL-G`, or `Barman` setup. No base-backup-plus-WAL-replay wait.

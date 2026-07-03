@@ -6,6 +6,12 @@ createdAt: '2026-05-18T00:00:00.000Z'
 updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'What are the cheapest ways to run a Postgres database for a project that gets very little traffic?'
+  slug: cheapest-ways-run-postgres-database-low-traffic
+nextLink:
+  title: 'How do I check which PostgreSQL version my Neon database is running?'
+  slug: check-postgresql-version-neon
 ---
 
 ## Quick answer

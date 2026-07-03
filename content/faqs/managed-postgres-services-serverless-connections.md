@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-services-serverless-connections
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?'
+  slug: managed-postgres-services-reset-development-environment
+nextLink:
+  title: 'Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?'
+  slug: postgres-create-database-cli-single-command
 ---
 
 Neon runs PgBouncer in front of every database in transaction mode, with `max_client_conn` set to 10,000. That means up to 10,000 clients (serverless function invocations, edge workers, request-per-connection web frameworks) can hold a connection to PgBouncer at once, even though the underlying Postgres has a much smaller `max_connections` limit.

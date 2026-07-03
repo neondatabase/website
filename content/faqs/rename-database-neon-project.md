@@ -3,9 +3,15 @@ title: 'How do I rename a database in my Neon project?'
 subtitle: 'Connect to a different database on the same branch, then run ALTER DATABASE ... RENAME TO.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'What Postgres tools support creating a database for every preview deployment?'
+  slug: postgres-tools-preview-deployments
+nextLink:
+  title: 'How do I reset or change my database password in Neon?'
+  slug: reset-database-password
 ---
 
 To rename a database in Neon, connect to a different database on the same branch (for example, the default `neondb`), terminate any active connections to the database you want to rename, then run `ALTER DATABASE <old_name> RENAME TO <new_name>;`. You can also rename a database via the Neon API. After renaming, update any connection strings that referenced the old name. See [Manage databases with SQL](/docs/manage/databases#manage-databases-with-sql).

@@ -7,7 +7,7 @@ summary: >-
   neon deploy. The function gets a public HTTPS URL with DATABASE_URL
   injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-02T22:08:19.260Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -20,7 +20,7 @@ A function takes a request and returns a web response, running on long-lived Nod
 
 - A Neon account with Functions preview access. See [Preview access](/docs/compute/functions/preview-access).
 - The latest `neon`, installed and authenticated. Functions commands are new and change often during the preview, so upgrade before you start (`npm install -g neon@latest`).
-- Node.js 18 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
+- Node.js 20 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
 
 Functions are available on new projects in AWS us-east-2 only, created on or after June 15, 2026.
 
