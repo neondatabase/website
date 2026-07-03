@@ -35,7 +35,9 @@ const OUT_PATH = path.resolve(__dirname, '../app/models.json/data.json');
 const DOC_URL = 'https://neon.com/docs/ai-gateway/models';
 
 // Fields dropped from each model (not part of the /models.json capability catalog).
-const STRIP = new Set(['description', 'benchmarks', 'weights', 'links']);
+// `experimental` and `provider` are models.dev request-shaping/pricing internals;
+// `provider` is also re-added below as the underlying model provider string.
+const STRIP = new Set(['description', 'benchmarks', 'weights', 'links', 'experimental', 'provider']);
 
 // Stable, human-friendly key order per model.
 const KEY_ORDER = [
