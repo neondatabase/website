@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/reference/cli-create-app
   - /docs/neonctl
   - /docs/get-started/neonctl
-updatedOn: '2026-07-02T10:49:30.556Z'
+updatedOn: '2026-07-03T12:14:18.887Z'
 ---
 
 One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data API, and Neon Auth from the terminal, with branch-scoped workflows built in.
@@ -22,8 +22,6 @@ One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data AP
 ```bash filename="Install"
 npm i -g neon
 ```
-
-The CLI is invoked as `neon`. `neonctl` is an alias for `neon`, so any command works with either name.
 
 ## Get started
 
@@ -42,7 +40,7 @@ Every command supports `--output json` for machine-readable results, and setting
 
 ## Commands reference
 
-Browse every Neon CLI command, organized by category.
+Browse every Neon CLI command, organized by category. The CLI is invoked as `neon`. `neonctl` is an alias for `neon`, so any command works with either name.
 
 ### Setup & context [toc-only]
 
