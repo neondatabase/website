@@ -30,6 +30,7 @@
     "update:skills": "npm run sync:skills && npm run generate:skills",
     "check:broken-links": "linkinator --config linkinator.config.json",
     "check:pricing-sync": "node src/scripts/check-pricing-sync.js",
+    "check:models-sync": "node src/scripts/check-models-sync.js",
     "check:content-data": "node scripts/validate-content-data.js",
     "prepare": "husky install",
     "test": "npx cypress open",
