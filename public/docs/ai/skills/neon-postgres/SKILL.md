@@ -204,7 +204,7 @@ Link: https://neon.com/docs/reference/api-reference.md
 
 ### Neon TypeScript SDK
 
-Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neondatabase/api-client`.
+Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`).
 
 Link: https://neon.com/docs/reference/typescript-sdk.md
 
@@ -273,7 +273,7 @@ Since `neon.ts` is TypeScript, invalid combinations fail to compile with an acti
 Read the resulting env back, typed and validated against the policy, with `parseEnv` from `@neon/env`:
 
 ```typescript
-import { parseEnv } from "@neon/env/v1";
+import { parseEnv } from "@neon/env";
 import config from "./neon";
 
 const env = parseEnv(config);

@@ -332,7 +332,8 @@ Runnable Management API automation from
 - **Doc index:**
 [SCRIPT-OVERVIEW.md](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/references/SCRIPT-OVERVIEW.md)
 
-All scripts use `@neondatabase/api-client` only. Shared
+All scripts use `@neon/sdk` only. Shared
 [utils.ts](https://github.com/neondatabase/neon-for-agent-platforms/blob/main/skills/neon-postgres-agent-platforms/scripts/utils.ts)
-polls async operations. For SQL access from app code (drivers, pooling, ORMs),
+builds the client and resolves the default branch; the SDK polls async
+operations (readiness) for you. For SQL access from app code (drivers, pooling, ORMs),
 use `**neon-postgres`**.

@@ -5,9 +5,7 @@
  * @see https://neon.com/docs/ai/ai-database-versioning#cleanup-strategy
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
-
-import { deleteBranchWithWait } from "./utils.js";
+import { neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
@@ -22,6 +20,6 @@ console.error(
   "[delete-branch] Deleting branch; irreversible for that branch environment.",
 );
 
-const api = createApiClient({ apiKey });
-await deleteBranchWithWait(api, projectId, branchId);
+const neon = neonClient(apiKey);
+await neon.branches.delete(projectId, branchId);
 console.log(JSON.stringify({ ok: true, projectId, branchId }, null, 2));
