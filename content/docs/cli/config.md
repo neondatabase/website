@@ -23,7 +23,7 @@ The top-level [`neon deploy`](/docs/cli/deploy) command is an alias for `config 
 
 ## neon config init (#init)
 
-Scaffolds a starter `neon.ts` policy file in the current project and installs the `@neondatabase/config` and `@neondatabase/env` packages, so you can start managing a branch declaratively. If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, it is left untouched.
+Scaffolds a starter `neon.ts` policy file in the current project and installs the `@neon/config` and `@neon/env` packages, so you can start managing a branch declaratively. If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, it is left untouched.
 
 `config init` runs entirely locally and does not call the Neon API. It detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Pass `--no-install` to skip installation and just print the command to run.
 
