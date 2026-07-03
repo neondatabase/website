@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.29.2",
+  "neonctlVersion": "2.30.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -55,6 +55,87 @@
     }
   },
   "commands": {
+    "api": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "path",
+          "describe": "API path beginning with \"/\" (e.g. /projects or /projects/{project_id}/branches). Use `list` to list endpoints.",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "data": {
+          "type": "string",
+          "describe": "Raw request body: a JSON string, @file, or - for stdin. Overrides --field.",
+          "alias": "d"
+        },
+        "field": {
+          "type": "array",
+          "describe": "Body field key=value (repeatable). Dot-notation nests objects (e.g. -F branch.name=dev); values are typed (numbers, booleans, null, JSON).",
+          "alias": "F"
+        },
+        "header": {
+          "type": "array",
+          "describe": "Extra request header key:value (repeatable).",
+          "alias": "H"
+        },
+        "include": {
+          "type": "boolean",
+          "describe": "Print the response status and headers before the body.",
+          "default": false,
+          "alias": "i"
+        },
+        "list": {
+          "type": "boolean",
+          "describe": "List available API endpoints from the OpenAPI spec.",
+          "default": false
+        },
+        "method": {
+          "type": "string",
+          "describe": "HTTP method (GET, POST, PUT, PATCH, DELETE). Defaults to GET, or POST when a body is provided.",
+          "alias": "X"
+        },
+        "query": {
+          "type": "array",
+          "describe": "Query parameter key=value (repeatable).",
+          "alias": "Q"
+        },
+        "raw-field": {
+          "type": "array",
+          "describe": "Body field key=value with the value kept as a raw string.",
+          "alias": "f"
+        },
+        "refresh": {
+          "type": "boolean",
+          "describe": "Refresh the cached OpenAPI spec (used with --list).",
+          "default": false
+        },
+        "spec-url": {
+          "type": "string",
+          "describe": "OpenAPI spec URL used by --list.",
+          "defaultText": "process.env.NEON_API_SPEC_URL ?? DEFAULT_SPEC_URL",
+          "hidden": true
+        }
+      },
+      "commands": {},
+      "describe": "Call any Neon API route directly (authenticated passthrough)",
+      "usage": "$0 api <path> [options]",
+      "examples": [
+        {
+          "command": "$0 api /projects",
+          "description": "List your projects"
+        },
+        {
+          "command": "$0 api /projects/{id}/branches -X POST -F branch.name=dev",
+          "description": "Create a branch"
+        },
+        {
+          "command": "$0 api --list",
+          "description": "List every available API route"
+        }
+      ]
+    },
     "auth": {
       "aliases": [
         "login"
