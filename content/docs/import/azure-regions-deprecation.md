@@ -2,13 +2,13 @@
 title: Azure regions deprecation
 subtitle: What's changing, what to do, and answers to common questions
 summary: >-
-  Neon Azure regions (azure-eastus2, azure-westus3, azure-gwc) are deprecated:
-  new project creation is blocked, and existing projects enter maintenance mode.
-  On October 5, 2026, projects in Free organizations that have been inactive for
-  90 days or more are subject to deletion; active and paid projects keep running.
-  This guide covers the timeline, what to do (migrate to a Neon AWS region,
-  migrate to Databricks Lakebase, delete, or export), and how to confirm which
-  region a project is in.
+  Neon Azure regions (azure-eastus2, azure-westus3, azure-gwc) were deprecated on
+  April 7, 2026: new project creation is blocked. After October 5, 2026, these
+  regions stop receiving Neon feature updates, and projects in Free organizations
+  inactive for 90 days or more are subject to deletion; active and paid projects
+  keep running. This guide covers the timeline, what to do (migrate to a Neon AWS
+  region, migrate to Databricks Lakebase, delete, or export), and how to confirm
+  which region a project is in.
 enableTableOfContents: true
 ---
 
@@ -20,9 +20,9 @@ We recommend [migrating projects in Azure regions to another region](#what-to-do
 
 As of April 7, 2026, Neon's Azure regions are deprecated, and you can no longer create new projects in those regions.
 
-On **October 5, 2026**, these regions enter maintenance mode and may not receive new Neon feature updates. Also on October 5, projects on Free plans that have been inactive for 90 days or more are subject to deletion.
+After **October 5, 2026**, these regions will not receive Neon feature updates. Also on October 5, projects on Free plans that have been inactive for 90 days or more are subject to deletion.
 
-You should receive a personalized email about your specific projects and next steps. This guide explains what's changing and what to do.
+Users with projects in Neon Azure regions will receive a personalized email about specific projects and next steps. This guide explains what's changing and what to do.
 
 ## Affected regions
 
@@ -36,29 +36,19 @@ Projects in AWS regions are not affected.
 
 ## Deprecation timeline
 
-| Date                      | What happens                                                                                                                                                                    |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **April 7, 2026**         | Azure regions deprecated. New projects cannot be created in Azure regions. Existing projects keep running.                                                                      |
-| **October 5, 2026**       | Azure regions enter maintenance mode and may not receive new Neon features. Projects in Free organizations that have been inactive for 90 days or more are subject to deletion. |
-| **After October 5, 2026** | A full end-of-support date will be announced in the future.                                                                                                                     |
-
-## What this means for existing projects in Azure regions
-
-Projects in Azure regions should be migrated to alternate regions before October 5, 2026. Migrating now keeps your project on actively developed infrastructure and lets you act on your own schedule rather than a future deadline.
-
-Existing projects will continue to run, but after October 5, 2026 they may not receive new Neon features or capabilities.
-
-## What happens on October 5, 2026
-
-Projects on the Free plan with no compute activity for 90 days or more are subject to deletion as of October 5, 2026. Deletion is permanent; a deleted project and its data cannot be recovered. Active projects and projects on paid plans will not be deleted.
-
-To keep an inactive Free project beyond October 5, 2026, connect to its database and run any SQL query. Any compute activity resets the 90-day inactivity timer. Organization administrators will be notified before any project is deleted.
+| Date                      | What happens                                                                                                                                          |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **April 7, 2026**         | Azure regions deprecated. New projects cannot be created in Azure regions. Existing projects keep running.                                            |
+| **October 5, 2026**       | Azure regions will not receive new Neon features. Projects in Free organizations that have been inactive for 90 days or more are subject to deletion. |
+| **After October 5, 2026** | A final end-of-service date will be announced.                                                                                                        |
 
 ## What to do next
 
-There are three options for moving your Neon projects off of Azure regions.
+**Migrate any projects you want to keep to an alternate region before October 5, 2026.** Migrating now keeps your project on actively developed infrastructure and lets you act on your own schedule.
 
-1. **Migrate to a Neon AWS region.** Best if you don't need Azure residency, and an AWS region in a nearby city will suffice. See [Migrate to another Neon region](/docs/import/migrate-neon-to-another-region).
+There are three options for moving your Neon projects off of Azure regions:
+
+1. **Migrate to a Neon AWS region.** Best if you don't need Azure data residency, and an AWS region in a similar location will suffice. See [Migrate to another Neon region](/docs/import/migrate-neon-to-another-region).
 2. **Migrate to Databricks Lakebase.** Best if you need to keep your Postgres data in Azure. Lakebase is powered by the same serverless Postgres technology as Neon, under the Databricks product line, and supports the deprecated Azure regions. See [Migrate Neon to Lakebase](/docs/guides/migrate-neon-to-lakebase).
 3. **Delete the project** if you no longer need it. This stops storage costs from accruing. See [Delete a project](/docs/manage/projects#delete-a-project).
 
