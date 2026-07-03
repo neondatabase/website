@@ -1,7 +1,7 @@
 // One-command maintenance for the neonctl docs pipeline. Run when a new
 // neonctl version ships:
 //
-//   npm run refresh:cli-docs
+//   npm run cli-docs -- refresh
 //
 // The CLI source lives in the neon-pkgs monorepo (packages/cli); its
 // releases are tagged `neonctl@<version>`. The published npm package and
@@ -206,7 +206,7 @@ async function main() {
     }
 
     console.log('\nRunning validation...');
-    execSync('npm run check:docs:neonctl', {
+    execSync('npm run cli-docs -- check', {
       stdio: 'inherit',
       cwd: path.join(__dirname, '..', '..', '..'),
     });

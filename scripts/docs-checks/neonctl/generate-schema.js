@@ -19,7 +19,7 @@
 //   NEONCTL_SRC=~/src/neon-pkgs/packages/cli node scripts/docs-checks/neonctl/generate-schema.js
 //
 // Run this whenever you upgrade the neonctl pin. Commit `schema.json`.
-// (`npm run refresh:cli-docs` automates the clone/extract and points --src
+// (`npm run cli-docs -- refresh` automates the clone/extract and points --src
 // at packages/cli for you.)
 
 const fs = require('fs');
