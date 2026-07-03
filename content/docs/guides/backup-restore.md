@@ -11,7 +11,7 @@ summary: >-
   limit.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-03T10:03:13.108Z'
 ---
 
 <Admonition type="note" title="Snapshots">
@@ -175,6 +175,21 @@ The parameters used in the example above:
 - `timestamp`: A point in time to create the snapshot from (RFC 3339 format).
 - `name`: A user-defined name for the snapshot.
 - `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format).
+
+#### Update a snapshot's expiration
+
+You can change a snapshot's expiration after it is created using the [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot) endpoint. Set `expires_at` to a future timestamp to extend or change the retention deadline, or send `null` to clear it so the snapshot never expires. Omit the field to leave the expiration unchanged.
+
+```bash
+curl -X PATCH "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id" \
+  -H "Content-Type: application/json" \
+  -H 'authorization: Bearer $NEON_API_KEY' \
+  -d '{
+    "snapshot": {
+      "expires_at": "2026-12-31T00:00:00Z"
+    }
+  }' |jq
+```
 
 ### Snapshot size fields in API responses
 
