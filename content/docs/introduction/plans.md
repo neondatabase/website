@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-06-19T14:28:23.449Z'
+updatedOn: '2026-06-26T16:05:44.229Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -57,6 +57,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                 | 100 manual snapshots                                                                              |
 | [Auth](#auth) (Beta)                                  | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
+| [AI Gateway](#ai-gateway) (Private Preview)           | —                                          | Free during preview                  | Free during preview                                                                               |
 | [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                          | —                                    | ✅                                                                                                |
@@ -318,6 +319,14 @@ Monthly Active User (MAU) limits per plan:
 > An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
 
 See [Neon Auth](/docs/auth/overview) for more information.
+
+### AI Gateway
+
+Neon AI Gateway provides access to foundation models from Anthropic, OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It is available on paid plans during the private preview.
+
+Inference is free during the preview. When billing begins, prices will match each provider's published list prices.
+
+See [AI Gateway models](/docs/ai-gateway/models#pricing) for details.
 
 ### Private network transfer
 
