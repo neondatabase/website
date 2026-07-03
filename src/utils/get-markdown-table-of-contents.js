@@ -1,6 +1,7 @@
 import slugify from 'slugify';
 
 const CUSTOM_ID_PATTERN = /\s*(?:\(#([^)]+)\)|\{#([^}]+)\})$/;
+const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
 
 const extractCustomId = (text) => {
   const match = text.match(CUSTOM_ID_PATTERN);
@@ -8,6 +9,7 @@ const extractCustomId = (text) => {
 };
 
 const stripCustomId = (text) => text.replace(CUSTOM_ID_PATTERN, '').trim();
+const stripTocOnlyMarker = (text) => text.replace(TOC_ONLY_PATTERN, '').trim();
 
 const getMarkdownTableOfContents = (markdown) => {
   const headings = [];
@@ -45,7 +47,7 @@ const getMarkdownTableOfContents = (markdown) => {
     }
 
     const level = headingMatch[1].length - 1; // ## → 1, ### → 2
-    const rawText = headingMatch[2].trim();
+    const rawText = stripTocOnlyMarker(headingMatch[2].trim());
 
     // Support explicit custom IDs in both `(#custom-id)` and `{#custom-id}` forms.
     const customId = extractCustomId(rawText);

@@ -1021,10 +1021,23 @@ describe('CLI reference components', () => {
 
   it('expands CliCommandIndex to the full static command tree', async () => {
     const file = await writeFixture(
-      ['---', 'title: Overview fixture', '---', '', '<CliCommandIndex />', ''].join('\n')
+      [
+        '---',
+        'title: Overview fixture',
+        '---',
+        '',
+        '## Commands reference',
+        '',
+        '### Setup & context [toc-only]',
+        '',
+        '<CliCommandIndex />',
+        '',
+      ].join('\n')
     );
     const { content: result } = await processFile(file, 'https://neon.com/docs/cli');
 
+    expect(result).toContain('## Commands reference');
+    expect(result).not.toContain('Setup & context [toc-only]');
     // Every top-level command appears as a heading in the tree
     for (const name of ['projects', 'branches', 'functions', 'buckets', 'neon-auth']) {
       expect(result).toContain(`### ${name}`);

@@ -3,13 +3,17 @@
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 import { cn } from 'utils/cn';
 
 import Tag from '../../tag';
+
+const containsActiveSlug = (item, currentSlug) =>
+  item.slug === currentSlug ||
+  item.items?.some((childItem) => containsActiveSlug(childItem, currentSlug));
 
 const Item = ({
   basePath,
@@ -27,8 +31,14 @@ const Item = ({
   const currentSlug = pathname.replace(basePath, '');
 
   const isActive = slug === currentSlug;
-  const isActiveMenu = isActive || items?.some((item) => item.slug === currentSlug);
+  const isActiveMenu = isActive || items?.some((item) => containsActiveSlug(item, currentSlug));
   const [isCollapsed, setIsCollapsed] = useState(!isActiveMenu);
+
+  useEffect(() => {
+    if (isActiveMenu) {
+      setIsCollapsed(false);
+    }
+  }, [isActiveMenu]);
 
   // Nested `section:` entries render as non-collapsible group labels with
   // their children inline — the same construct Menu supports at the top
@@ -91,12 +101,19 @@ const Item = ({
         target={externalSlug ? '_blank' : '_self'}
         icon={externalSlug && 'external'}
         tabIndex={isHidden ? -1 : undefined}
+        aria-expanded={items?.length ? !isCollapsed : undefined}
         onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
-        <span className="text-pretty" aria-hidden={!!ariaLabel}>
+        <span className="text-balance" aria-hidden={!!ariaLabel}>
           {title}&nbsp;
-          {tag && <Tag className="relative -top-px ml-1 inline-block" label={tag} size="sm" />}
+          {tag && (
+            <Tag
+              className="inline-flex py-0.75 text-[0.6875rem] font-normal -tracking-tight tabular-nums"
+              label={tag}
+              size="sm"
+            />
+          )}
         </span>
         {items?.length && <Chevron className={cn('ml-auto w-1.5', !isCollapsed && 'rotate-90')} />}
       </LinkTag>
