@@ -940,15 +940,20 @@
           "cache_read": 0.25,
           "tiers": [
             {
+              "input": 5,
+              "output": 22.5,
+              "cache_read": 0.5,
               "tier": {
                 "type": "context",
                 "size": 272000
-              },
-              "input": 5,
-              "output": 22.5,
-              "cache_read": 0.5
+              }
             }
-          ]
+          ],
+          "context_over_200k": {
+            "input": 5,
+            "output": 22.5,
+            "cache_read": 0.5
+          }
         }
       },
       "gpt-5-4-mini": {
@@ -1133,15 +1138,20 @@
           "cache_read": 0.125,
           "tiers": [
             {
+              "input": 2.5,
+              "output": 15,
+              "cache_read": 0.25,
               "tier": {
                 "type": "context",
                 "size": 200000
-              },
-              "input": 2.5,
-              "output": 15,
-              "cache_read": 0.25
+              }
             }
-          ]
+          ],
+          "context_over_200k": {
+            "input": 2.5,
+            "output": 15,
+            "cache_read": 0.25
+          }
         }
       },
       "gemini-3-flash": {
@@ -1237,15 +1247,20 @@
           "cache_read": 0.2,
           "tiers": [
             {
+              "input": 4,
+              "output": 18,
+              "cache_read": 0.4,
               "tier": {
                 "type": "context",
                 "size": 200000
-              },
-              "input": 4,
-              "output": 18,
-              "cache_read": 0.4
+              }
             }
-          ]
+          ],
+          "context_over_200k": {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4
+          }
         }
       },
       "gemini-3-1-flash-lite": {
@@ -1341,15 +1356,20 @@
           "cache_read": 0.2,
           "tiers": [
             {
+              "input": 4,
+              "output": 18,
+              "cache_read": 0.4,
               "tier": {
                 "type": "context",
                 "size": 200000
-              },
-              "input": 4,
-              "output": 18,
-              "cache_read": 0.4
+              }
             }
-          ]
+          ],
+          "context_over_200k": {
+            "input": 4,
+            "output": 18,
+            "cache_read": 0.4
+          }
         }
       },
       "gemini-3-5-flash": {
