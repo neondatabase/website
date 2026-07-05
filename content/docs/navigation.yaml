@@ -1153,6 +1153,8 @@
           items:
             - title: Overview
               slug: introduction/monitoring
+            - title: Performance troubleshooting
+              slug: introduction/performance-troubleshooting
             - title: Monitoring dashboard
               slug: introduction/monitoring-page
             - title: System operations
