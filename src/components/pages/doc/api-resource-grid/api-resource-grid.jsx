@@ -9,36 +9,56 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import tagConfig from '../../../../../scripts/data/tag-config.json';
 
 const API_DATA_DIR = resolve(process.cwd(), 'src/data/api-ref');
-const TAG_ORDER = tagConfig.tags.map((tag) => tag.slug);
-const TAG_DESCRIPTIONS = Object.fromEntries(
-  tagConfig.tags.filter((tag) => tag.description).map((tag) => [tag.slug, tag.description])
-);
+const TAGS = tagConfig.tags;
+
+function fallbackDescription(display) {
+  return `Generated API endpoints for ${display}.`;
+}
+
+export function buildApiResourceList({ configuredTags = TAGS, discoveredResources }) {
+  const tagOrder = configuredTags.map((tag) => tag.slug);
+  const tagMetadata = Object.fromEntries(configuredTags.map((tag) => [tag.slug, tag]));
+  const orderedTags = [
+    ...tagOrder.filter((tag) => discoveredResources[tag]),
+    ...Object.keys(discoveredResources)
+      .filter((tag) => !tagMetadata[tag])
+      .sort((a, b) => a.localeCompare(b)),
+  ];
+
+  return orderedTags.map((tag) => {
+    const discovered = discoveredResources[tag];
+    const metadata = tagMetadata[tag] ?? {};
+    const display = discovered.display ?? metadata.display ?? tag;
+
+    return {
+      tag,
+      display,
+      count: discovered.count,
+      description: metadata.description ?? fallbackDescription(display),
+      href: `${DOCS_BASE_PATH}reference/api/${tag}`,
+    };
+  });
+}
 
 function loadResources() {
   if (!existsSync(API_DATA_DIR)) return [];
 
-  const tagCounts = {};
-  const tagDisplays = {};
+  const discoveredResources = {};
 
   for (const entry of readdirSync(API_DATA_DIR, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
     const tag = entry.name;
     const files = readdirSync(join(API_DATA_DIR, tag)).filter((file) => file.endsWith('.json'));
-    tagCounts[tag] = files.length;
+    if (files.length === 0) continue;
 
-    if (files.length > 0) {
-      const operation = JSON.parse(readFileSync(join(API_DATA_DIR, tag, files[0]), 'utf8'));
-      tagDisplays[tag] = operation.tagDisplay ?? tag;
-    }
+    const operation = JSON.parse(readFileSync(join(API_DATA_DIR, tag, files[0]), 'utf8'));
+    discoveredResources[tag] = {
+      count: files.length,
+      display: operation.tagDisplay ?? tag,
+    };
   }
 
-  return TAG_ORDER.filter((tag) => TAG_DESCRIPTIONS[tag] && tagCounts[tag] != null).map((tag) => ({
-    tag,
-    display: tagDisplays[tag] ?? tag,
-    count: tagCounts[tag],
-    description: TAG_DESCRIPTIONS[tag],
-    href: `${DOCS_BASE_PATH}reference/api/${tag}`,
-  }));
+  return buildApiResourceList({ discoveredResources });
 }
 
 const ApiResourceGrid = () => {
