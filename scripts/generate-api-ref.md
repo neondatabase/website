@@ -52,7 +52,9 @@ postbuild → copy generated md to /public + build llms.txt index + sitemaps
 
 Vercel runs `npm run build`, which triggers `prebuild` first. The generator fetches `https://neon.com/api_spec/release/v2.json` over the network; Vercel allows outbound HTTPS by default, so no env vars or build-image tweaks are required.
 
-If the spec fetch fails, the generator throws and the build fails fast. The last good `content/docs/api-navigation.yaml` stays in the repo so a transient outage doesn't ship broken navigation — but the JSON/Markdown data for operations is missing on that build until the next successful run.
+The generator writes the last successful spec to `.next/cache/api-reference/openapi-v2.json`. If the live fetch fails, it uses that cache only when it is fresh (default: 7 days). If the cache is missing or stale, the generator throws and the build fails fast. Override the cache path with `API_REF_SPEC_CACHE_PATH` and the TTL with `API_REF_SPEC_CACHE_TTL_MS` when needed.
+
+`prebuild` also runs `npm run check:api-ref-nav` after generation. If the regenerated `content/docs/api-navigation.yaml` differs from the committed file, the build fails with a diff. Run `npm run generate:api-ref`, review the nav change, and commit it.
 
 **Recovery:** check the Vercel build log for the HTTP error code, verify `https://neon.com/api_spec/release/v2.json` is reachable (open in a browser or `curl -I`), then trigger a redeploy. No code changes are needed for a transient outage.
 
@@ -156,16 +158,13 @@ npm run test:unit:run -- scripts/generate-api-ref.test.js src/components/pages/d
 npm run check:docs:neonctl
 npm run audit:field-groups
 npm run generate:api-ref
-git diff content/docs/api-navigation.yaml
+npm run check:api-ref-nav
 ```
 
 Review generated `content/docs/api-navigation.yaml` separately from UI changes.
 It is the only committed generator output and can drift when the upstream spec
-changes. **There is no automated CI check for nav drift** — before merging any PR
-that touches the API reference, run `npm run generate:api-ref` and check
-`git diff content/docs/api-navigation.yaml`. If the diff is non-empty, commit the
-updated nav. A stale nav ships silently (the build does not fail; only the sidebar
-is wrong).
+changes. `prebuild` fails if the regenerated nav differs from `HEAD`; commit the
+updated nav when the diff is expected.
 
 For UI changes, walk [`SMOKE-CHECKLIST.md`](../src/components/pages/doc/api-operation/SMOKE-CHECKLIST.md) against a local `npm run dev`.
 
