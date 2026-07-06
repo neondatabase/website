@@ -25,6 +25,11 @@ import {
   writeRunSummary,
   writeTagMarkdownFiles,
 } from './lib/api-ref-output.mjs';
+import {
+  DEFAULT_SPEC_CACHE_TTL_MS,
+  defaultSpecCachePath,
+  loadOpenApiSpec,
+} from './lib/openapi-spec-source.mjs';
 import { validateFieldGroups } from './validate-field-groups.mjs';
 import {
   mergeParams,
@@ -70,6 +75,13 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PATHS = createApiRefPaths(ROOT);
 
 const SPEC_URL = process.argv[2] || 'https://neon.com/api_spec/release/v2.json';
+const SPEC_CACHE_PATH = process.env.API_REF_SPEC_CACHE_PATH || defaultSpecCachePath(ROOT);
+const SPEC_CACHE_TTL_MS = Number(
+  process.env.API_REF_SPEC_CACHE_TTL_MS || DEFAULT_SPEC_CACHE_TTL_MS
+);
+if (!Number.isFinite(SPEC_CACHE_TTL_MS) || SPEC_CACHE_TTL_MS < 0) {
+  throw new Error('API_REF_SPEC_CACHE_TTL_MS must be a non-negative number');
+}
 const METHODS = ['get', 'post', 'put', 'patch', 'delete'];
 
 // ---------------------------------------------------------------------------
@@ -1115,10 +1127,11 @@ function buildOperationData(
 // ---------------------------------------------------------------------------
 
 async function main() {
-  process.stderr.write(`Fetching spec from ${SPEC_URL}...\n`);
-  const specRes = await fetch(SPEC_URL);
-  if (!specRes.ok) throw new Error(`Spec fetch failed: ${specRes.status} ${specRes.statusText}`);
-  const specRaw = await specRes.json();
+  const specRaw = await loadOpenApiSpec({
+    specUrl: SPEC_URL,
+    cachePath: SPEC_CACHE_PATH,
+    ttlMs: SPEC_CACHE_TTL_MS,
+  });
 
   process.stderr.write('Dereferencing...\n');
   const { schema } = await dereference(specRaw);
