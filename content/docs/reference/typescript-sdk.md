@@ -10,7 +10,7 @@ summary: >-
   IDE autocompletion, and structured Axios error handling. Install via npm,
   yarn, or pnpm and authenticate with a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-06-23T22:05:54.707Z'
+updatedOn: '2026-07-06T16:27:57.937Z'
 ---
 
 <InfoBlock>
@@ -32,7 +32,7 @@ updatedOn: '2026-06-23T22:05:54.707Z'
 
 ## About the SDK
 
-Neon supports the [@neondatabase/api-client](https://www.npmjs.com/package/@neondatabase/api-client) library, which is a wrapper for the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The SDK provides a convenient way to interact with the Neon API using TypeScript.
+Neon supports the [@neondatabase/api-client](https://www.npmjs.com/package/@neondatabase/api-client) library, which is a wrapper for the [Neon API](/docs/reference/api). The SDK provides a convenient way to interact with the Neon API using TypeScript.
 
 You can use the Neon TypeScript SDK to manage your Neon projects, branches, databases, compute endpoints, roles, and more programmatically. The SDK abstracts the underlying API requests, authentication, and error handling, allowing you to focus on building applications that interact with Neon resources.
 
@@ -412,7 +412,7 @@ By using TypeScript types, you ensure that your code interacts with the Neon API
 
 ## Key SDK Method Signatures
 
-To give you a better overview of the SDK, here are some of the key methods available, categorized by their resource. For complete details and parameters for each method, please refer to the full [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+To give you a better overview of the SDK, here are some of the key methods available, categorized by their resource. For complete details and parameters for each method, please refer to the full [Neon API Reference](/docs/reference/api).
 
 ### Manage API keys
 
@@ -535,10 +535,10 @@ When an error occurs during an API request, the SDK throws an `AxiosError` objec
 - **Invalid API Key (401 Unauthorized):** Ensure your `NEON_API_KEY` environment variable is correctly set with a valid API key from the Neon Console.
 - **Project or Branch Not Found (404 Not Found):** Verify that the `projectId` and `branchId` values you are using are correct and that the resources exist in your Neon account. Double-check IDs in the Neon Console.
 - **Rate Limiting (429 Too Many Requests):** If you are making requests too frequently, the API might rate-limit you. Implement retry mechanisms with exponential backoff or reduce the frequency of your API calls.
-- **Request Body Validation Errors (400 Bad Request):** If you receive 400 errors, carefully review the request body you are sending, ensuring it conforms to the expected schema for the API endpoint. Refer to the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for request body structures.
+- **Request Body Validation Errors (400 Bad Request):** If you receive 400 errors, carefully review the request body you are sending, ensuring it conforms to the expected schema for the API endpoint. Refer to the [Neon API Reference](/docs/reference/api) for request body structures.
 
 ## References
 
-- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api): Comprehensive documentation for the Neon API, including detailed descriptions of resources, endpoints, request/response structures, and error codes.
+- [Neon API Reference](/docs/reference/api): Comprehensive documentation for the Neon API, including detailed descriptions of resources, endpoints, request/response structures, and error codes.
 
 <NeedHelp />

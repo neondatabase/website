@@ -667,7 +667,7 @@
                 - title: Database versioning
                   slug: ai/ai-database-versioning
                 - title: Neon API reference
-                  slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+                  slug: reference/api
             - section: Agent frameworks
               icon: frameworks
               items:
