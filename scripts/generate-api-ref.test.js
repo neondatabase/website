@@ -1,8 +1,8 @@
-import { readFileSync, rmSync } from 'node:fs';
+import { existsSync, readFileSync, rmSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import {
   toSlug,
@@ -1493,6 +1493,9 @@ describe('main() — empty spec safety', () => {
   const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
   const DATA_TMP = resolve(ROOT, 'src/data/api-ref.next');
   const MD_TMP = resolve(ROOT, 'public/md/docs/reference/api.next');
+  const CACHE_TMP = resolve(ROOT, '.next/cache/api-reference-test/openapi-v2.json');
+  const CACHE_TMP_DIR = dirname(CACHE_TMP);
+  const originalCachePath = process.env.API_REF_SPEC_CACHE_PATH;
 
   const stubSpec = (paths) =>
     vi.stubGlobal(
@@ -1509,15 +1512,26 @@ describe('main() — empty spec safety', () => {
       })
     );
 
+  beforeEach(() => {
+    process.env.API_REF_SPEC_CACHE_PATH = CACHE_TMP;
+  });
+
   afterEach(() => {
     vi.unstubAllGlobals();
     rmSync(DATA_TMP, { recursive: true, force: true });
     rmSync(MD_TMP, { recursive: true, force: true });
+    rmSync(CACHE_TMP_DIR, { recursive: true, force: true });
+    if (originalCachePath === undefined) {
+      delete process.env.API_REF_SPEC_CACHE_PATH;
+    } else {
+      process.env.API_REF_SPEC_CACHE_PATH = originalCachePath;
+    }
   });
 
   it('throws when spec has no operations, never touches DATA_ROOT/MD_ROOT', async () => {
     stubSpec({});
     await expect(main()).rejects.toThrow(/refusing to publish empty API reference/);
+    expect(existsSync(CACHE_TMP)).toBe(false);
   });
 
   it('skips paths whose operation has no operationId (counts as 0, throws)', async () => {
@@ -1525,5 +1539,6 @@ describe('main() — empty spec safety', () => {
       '/foo': { get: { tags: ['x'], responses: { 200: { description: 'OK' } } } },
     });
     await expect(main()).rejects.toThrow(/refusing to publish empty API reference/);
+    expect(existsSync(CACHE_TMP)).toBe(false);
   });
 });

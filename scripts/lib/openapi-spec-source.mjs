@@ -21,7 +21,7 @@ function isFresh(cache, nowMs, ttlMs) {
   return Number.isFinite(fetchedAt) && nowMs - fetchedAt <= ttlMs;
 }
 
-function writeCache(cachePath, { specUrl, spec, nowMs }) {
+export function writeOpenApiSpecCache({ cachePath, specUrl, spec, nowMs = Date.now() }) {
   mkdirSync(dirname(cachePath), { recursive: true });
   writeFileSync(
     cachePath,
@@ -58,8 +58,10 @@ export async function loadOpenApiSpec({
       throw new Error(`Spec fetch failed: ${specRes.status} ${specRes.statusText}`);
     }
     const spec = await specRes.json();
-    writeCache(cachePath, { specUrl, spec, nowMs });
-    return spec;
+    return {
+      spec,
+      cacheCandidate: { cachePath, specUrl, spec, nowMs },
+    };
   } catch (error) {
     let cache = null;
     try {
@@ -75,7 +77,7 @@ export async function loadOpenApiSpec({
         `[api-ref] Spec fetch failed (${fetchErrorMessage(error)}). ` +
           `Using cached spec from ${cache.fetchedAt}.\n`
       );
-      return cache.spec;
+      return { spec: cache.spec, cacheCandidate: null };
     }
 
     if (cache) {

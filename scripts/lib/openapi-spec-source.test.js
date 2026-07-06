@@ -1,10 +1,14 @@
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { DEFAULT_SPEC_CACHE_TTL_MS, loadOpenApiSpec } from './openapi-spec-source.mjs';
+import {
+  DEFAULT_SPEC_CACHE_TTL_MS,
+  loadOpenApiSpec,
+  writeOpenApiSpecCache,
+} from './openapi-spec-source.mjs';
 
 const NOW = Date.parse('2026-07-06T10:00:00.000Z');
 
@@ -42,12 +46,12 @@ describe('loadOpenApiSpec', () => {
     }
   });
 
-  it('fetches the live spec and writes a cache entry', async () => {
+  it('fetches the live spec and returns an explicit cache candidate', async () => {
     const { dir, cachePath } = createTempCachePath();
     tempDirs.push(dir);
     const spec = { openapi: '3.0.0', paths: { live: {} } };
 
-    const result = await loadOpenApiSpec({
+    const { spec: result, cacheCandidate } = await loadOpenApiSpec({
       specUrl: 'https://example.com/spec.json',
       cachePath,
       fetchImpl: okFetch(spec),
@@ -56,6 +60,27 @@ describe('loadOpenApiSpec', () => {
     });
 
     expect(result).toBe(spec);
+    expect(existsSync(cachePath)).toBe(false);
+    expect(cacheCandidate).toEqual({
+      cachePath,
+      specUrl: 'https://example.com/spec.json',
+      spec,
+      nowMs: NOW,
+    });
+  });
+
+  it('writes a cache entry only when explicitly committed', async () => {
+    const { dir, cachePath } = createTempCachePath();
+    tempDirs.push(dir);
+    const spec = { openapi: '3.0.0', paths: { live: {} } };
+
+    writeOpenApiSpecCache({
+      cachePath,
+      specUrl: 'https://example.com/spec.json',
+      spec,
+      nowMs: NOW,
+    });
+
     const cache = JSON.parse(readFileSync(cachePath, 'utf8'));
     expect(cache.specUrl).toBe('https://example.com/spec.json');
     expect(cache.fetchedAt).toBe('2026-07-06T10:00:00.000Z');
@@ -67,7 +92,7 @@ describe('loadOpenApiSpec', () => {
     tempDirs.push(dir);
     writeCache(cachePath, new Date(NOW - 60000).toISOString());
 
-    const result = await loadOpenApiSpec({
+    const { spec: result, cacheCandidate } = await loadOpenApiSpec({
       specUrl: 'https://example.com/spec.json',
       cachePath,
       fetchImpl: failingFetch(),
@@ -76,6 +101,7 @@ describe('loadOpenApiSpec', () => {
     });
 
     expect(result).toEqual({ openapi: '3.0.0', paths: { cached: {} } });
+    expect(cacheCandidate).toBeNull();
   });
 
   it('fails when the live fetch fails and the cache is stale', async () => {

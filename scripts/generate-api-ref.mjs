@@ -29,6 +29,7 @@ import {
   DEFAULT_SPEC_CACHE_TTL_MS,
   defaultSpecCachePath,
   loadOpenApiSpec,
+  writeOpenApiSpecCache,
 } from './lib/openapi-spec-source.mjs';
 import { validateFieldGroups } from './validate-field-groups.mjs';
 import {
@@ -75,14 +76,16 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const PATHS = createApiRefPaths(ROOT);
 
 const SPEC_URL = process.argv[2] || 'https://neon.com/api_spec/release/v2.json';
-const SPEC_CACHE_PATH = process.env.API_REF_SPEC_CACHE_PATH || defaultSpecCachePath(ROOT);
-const SPEC_CACHE_TTL_MS = Number(
-  process.env.API_REF_SPEC_CACHE_TTL_MS || DEFAULT_SPEC_CACHE_TTL_MS
-);
-if (!Number.isFinite(SPEC_CACHE_TTL_MS) || SPEC_CACHE_TTL_MS < 0) {
-  throw new Error('API_REF_SPEC_CACHE_TTL_MS must be a non-negative number');
-}
 const METHODS = ['get', 'post', 'put', 'patch', 'delete'];
+
+function getSpecCacheConfig() {
+  const cachePath = process.env.API_REF_SPEC_CACHE_PATH || defaultSpecCachePath(ROOT);
+  const ttlMs = Number(process.env.API_REF_SPEC_CACHE_TTL_MS || DEFAULT_SPEC_CACHE_TTL_MS);
+  if (!Number.isFinite(ttlMs) || ttlMs < 0) {
+    throw new Error('API_REF_SPEC_CACHE_TTL_MS must be a non-negative number');
+  }
+  return { cachePath, ttlMs };
+}
 
 // ---------------------------------------------------------------------------
 // Pure transformation functions — exported for testing
@@ -1127,10 +1130,11 @@ function buildOperationData(
 // ---------------------------------------------------------------------------
 
 async function main() {
-  const specRaw = await loadOpenApiSpec({
+  const { cachePath, ttlMs } = getSpecCacheConfig();
+  const { spec: specRaw, cacheCandidate } = await loadOpenApiSpec({
     specUrl: SPEC_URL,
-    cachePath: SPEC_CACHE_PATH,
-    ttlMs: SPEC_CACHE_TTL_MS,
+    cachePath,
+    ttlMs,
   });
 
   process.stderr.write('Dereferencing...\n');
@@ -1255,6 +1259,10 @@ async function main() {
     tagCount: Object.keys(tagOps).length,
     extraDocCount,
   });
+
+  if (cacheCandidate) {
+    writeOpenApiSpecCache(cacheCandidate);
+  }
 }
 
 export { main, buildOperationData };
