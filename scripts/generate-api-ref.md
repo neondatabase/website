@@ -5,6 +5,7 @@ Build pipeline and UI for the [Neon Management API reference](https://neon.com/d
 ## Quick links
 
 - **Generator entry point:** [`scripts/generate-api-ref.mjs`](generate-api-ref.mjs)
+- **Output/filesystem helpers:** [`scripts/lib/api-ref-output.mjs`](lib/api-ref-output.mjs)
 - **Coverage builder:** [`scripts/build-coverage-data.mjs`](build-coverage-data.mjs) (run on upstream releases)
 - **Spec audit:** [`scripts/audit-api-spec.mjs`](audit-api-spec.mjs) — run manually with `npm run audit:api-ref`
 - **Request-body grouping:** [`scripts/field-group-config.md`](field-group-config.md) — editorial sections for the request body (`npm run audit:field-groups`)
@@ -70,6 +71,10 @@ OpenAPI spec (neon.com/api_spec/release/v2.json)
        ├─ MD files    → toAgentMarkdown() → public/md/...
        ├─ llms.txt    → toLlmsTxtLine()
        └─ nav YAML    → toNavYaml() → content/docs/api-navigation.yaml
+
+File reads, temp directories, atomic swaps, and final writes live in
+[`api-ref-output.mjs`](lib/api-ref-output.mjs). Keep the entry point focused on
+spec parsing and operation transformation.
 ```
 
 The React UI in [`src/components/pages/doc/api-operation/`](../src/components/pages/doc/api-operation/) reads the per-op JSON and renders a read-only, API-first operation page:
