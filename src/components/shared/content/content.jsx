@@ -12,7 +12,6 @@ import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
-import CliCommandTable from 'components/pages/doc/cli-command-table/cli-command-table';
 import {
   CliCommandIndex,
   CliUsage,
@@ -180,7 +179,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   },
   ApiMethodBadge,
   ApiResourceGrid,
-  CliCommandTable,
   ApiParam,
   ApiResponse,
   AutoscalingChart,

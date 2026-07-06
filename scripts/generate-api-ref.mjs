@@ -39,7 +39,10 @@ import { buildTs, toSdkMethodName } from '../src/utils/api-ref.mjs';
 // Single source of truth for the neonctl global flag list.
 // operation-shared.jsx imports the same JSON.
 const CLI_GLOBAL_FLAGS_LIST = JSON.parse(
-  readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), 'data/cli-global-flags.json'), 'utf8')
+  readFileSync(
+    resolve(dirname(fileURLToPath(import.meta.url)), 'data/cli-global-flags.json'),
+    'utf8'
+  )
 );
 
 // Re-export the same names so consumers (notably tests) can pull them from
@@ -119,7 +122,10 @@ export function enrichSchemaProperties(properties, depth = 0) {
       enrichedProp.properties = enrichSchemaProperties(flat.properties, depth + 1);
     }
     if (flat.type === 'array' && flat.items?.properties) {
-      enrichedProp.items = { ...flat.items, properties: enrichSchemaProperties(flat.items.properties, depth + 1) };
+      enrichedProp.items = {
+        ...flat.items,
+        properties: enrichSchemaProperties(flat.items.properties, depth + 1),
+      };
     }
     enriched[name] = enrichedProp;
   }
@@ -133,10 +139,7 @@ export function toCurlExample(method, path, parameters, requestBody) {
   const requiredQuery = parameters.filter((p) => p.in === 'query' && p.required);
   const queryString =
     requiredQuery.length > 0
-      ? '?' +
-        requiredQuery
-          .map((p) => `${p.name}=${requiredQueryValueForCurl(p)}`)
-          .join('&')
+      ? '?' + requiredQuery.map((p) => `${p.name}=${requiredQueryValueForCurl(p)}`).join('&')
       : '';
 
   const url = `https://console.neon.tech/api/v2${urlPath}${queryString}`;
@@ -165,7 +168,9 @@ export function toTypescriptExample(operationId, parameters, requestBody = null)
 
 function setDotted(target, path, value) {
   const parts = path.split('.');
-  if (parts.some((part) => part === '__proto__' || part === 'prototype' || part === 'constructor')) {
+  if (
+    parts.some((part) => part === '__proto__' || part === 'prototype' || part === 'constructor')
+  ) {
     return;
   }
   let cursor = target;
@@ -187,7 +192,8 @@ function normalizeConnectionString(value) {
     const url = new URL(value);
     if (!['postgres:', 'postgresql:'].includes(url.protocol)) return value;
     if (!url.searchParams.has('sslmode')) url.searchParams.set('sslmode', 'require');
-    if (!url.searchParams.has('channel_binding')) url.searchParams.set('channel_binding', 'require');
+    if (!url.searchParams.has('channel_binding'))
+      url.searchParams.set('channel_binding', 'require');
     const query = url.searchParams.toString();
     return `${url.protocol}//[user]:[password]@${url.host}${url.pathname}${query ? `?${query}` : ''}`;
   } catch {
@@ -199,7 +205,10 @@ export function sanitizeExample(value, key = '') {
   if (Array.isArray(value)) return value.map((item) => sanitizeExample(item, key));
   if (value && typeof value === 'object') {
     return Object.fromEntries(
-      Object.entries(value).map(([childKey, childValue]) => [childKey, sanitizeExample(childValue, childKey)])
+      Object.entries(value).map(([childKey, childValue]) => [
+        childKey,
+        sanitizeExample(childValue, childKey),
+      ])
     );
   }
   if (typeof value !== 'string') return value;
@@ -243,10 +252,7 @@ function toCurlFromBody(operation, bodyJson) {
   const requiredQuery = (operation.parameters ?? []).filter((p) => p.in === 'query' && p.required);
   const queryString =
     requiredQuery.length > 0
-      ? '?' +
-        requiredQuery
-          .map((p) => `${p.name}=${requiredQueryValueForCurl(p)}`)
-          .join('&')
+      ? '?' + requiredQuery.map((p) => `${p.name}=${requiredQueryValueForCurl(p)}`).join('&')
       : '';
 
   const parts = [`curl "https://console.neon.tech/api/v2${urlPath}${queryString}"`];
@@ -292,8 +298,7 @@ function renderPropsMarkdown(lines, props, requiredFields, depth) {
           ? prop.items.properties
           : null;
     if (childProps) {
-      const childRequired =
-        type === 'array' ? (prop.items?.required ?? []) : (prop.required ?? []);
+      const childRequired = type === 'array' ? (prop.items?.required ?? []) : (prop.required ?? []);
       renderPropsMarkdown(lines, childProps, childRequired, depth + 1);
     }
   }
@@ -331,7 +336,12 @@ export function toAgentMarkdown(op) {
   if (op.requestBody) {
     lines.push('### Request body');
     lines.push('');
-    renderPropsMarkdown(lines, op.requestBody.properties || {}, op.requestBody.requiredFields || [], 0);
+    renderPropsMarkdown(
+      lines,
+      op.requestBody.properties || {},
+      op.requestBody.requiredFields || [],
+      0
+    );
     const requestExample = op.examples?.representative?.body ?? op.examples?.bodyExample;
     if (requestExample) {
       lines.push('');
@@ -467,7 +477,12 @@ export function toFullMarkdownEntry(op) {
   if (op.requestBody) {
     lines.push('### Request body');
     lines.push('');
-    renderPropsMarkdown(lines, op.requestBody.properties || {}, op.requestBody.requiredFields || [], 0);
+    renderPropsMarkdown(
+      lines,
+      op.requestBody.properties || {},
+      op.requestBody.requiredFields || [],
+      0
+    );
     const requestExample = op.examples?.representative?.body ?? op.examples?.bodyExample;
     if (requestExample) {
       lines.push('');
@@ -596,54 +611,6 @@ function generateLlmsTxt(tagOps) {
   return lines.join('\n').trimEnd() + '\n';
 }
 
-
-function generateCliTxt(tagOps) {
-  const lines = [
-    '# Neon CLI',
-    '',
-    'Install: `npm install -g neon`',
-    'Auth: `neon auth login`',
-    '',
-  ];
-
-  for (const tag of orderedTagList(tagOps)) {
-    const ops = tagOps[tag].filter((op) => op.cli?.command);
-    if (!ops.length) continue;
-    lines.push(`## ${TAG_CONFIG.display[tag] || tag}`);
-    lines.push('');
-    for (const op of ops) {
-      lines.push(`- [${op.summary}](${opMdUrl(op)}) \`${op.cli.command}\``);
-    }
-    lines.push('');
-  }
-
-  return lines.join('\n').trimEnd() + '\n';
-}
-
-function generateMcpTxt(tagOps) {
-  const lines = [
-    '# Neon MCP Tools',
-    '',
-    'Server: `@neondatabase/mcp-server-neon`',
-    '',
-  ];
-
-  for (const tag of orderedTagList(tagOps)) {
-    const ops = tagOps[tag].filter((op) => op.mcp?.tool);
-    if (!ops.length) continue;
-    lines.push(`## ${TAG_CONFIG.display[tag] || tag}`);
-    lines.push('');
-    for (const op of ops) {
-      const reqArgs = op.mcp.arguments?.filter((a) => a.required).map((a) => a.name) ?? [];
-      const argHint = reqArgs.length ? ` (${reqArgs.join(', ')})` : '';
-      lines.push(`- \`${op.mcp.tool}\`${argHint} — ${op.summary} [→](${opMdUrl(op)})`);
-    }
-    lines.push('');
-  }
-
-  return lines.join('\n').trimEnd() + '\n';
-}
-
 // Top-level api.md — served at /docs/reference/api.md via rewrite → /md/docs/reference/api.md
 // Richer than llms.txt: each section links to its per-tag full .md file before listing individual ops.
 function generateApiMd(tagOps) {
@@ -676,74 +643,6 @@ function generateApiMd(tagOps) {
   return lines.join('\n').trimEnd() + '\n';
 }
 
-function generateSdkTxt(tagOps) {
-  const lines = [
-    '# Neon TypeScript SDK',
-    '',
-    'Package: `@neondatabase/api-client`',
-    '',
-    '```typescript',
-    "import { createApiClient } from '@neondatabase/api-client';",
-    'const api = createApiClient({ apiKey: process.env.NEON_API_KEY });',
-    '```',
-    '',
-  ];
-
-  for (const tag of orderedTagList(tagOps)) {
-    lines.push(`## ${TAG_CONFIG.display[tag] || tag}`);
-    lines.push('');
-    for (const op of tagOps[tag]) {
-      const sdkMethod = toSdkMethodName(op.operationId);
-      lines.push(`- \`api.${sdkMethod}()\` — ${op.summary} [→](${opMdUrl(op)})`);
-    }
-    lines.push('');
-  }
-
-  return lines.join('\n').trimEnd() + '\n';
-}
-
-// Known outer-tag names in MCP tool descriptions. KEEP IN SYNC with
-// MCP_BLOCK_LABELS in src/components/pages/doc/api-operation/operation-mcp.jsx.
-// `example` is special-cased in the renderer (extracted as a code block,
-// not a labeled section) and so doesn't need a label entry but DOES need
-// to be in this allow-set.
-const KNOWN_MCP_TAGS = new Set([
-  'workflow',
-  'key_features',
-  'interactive_behavior',
-  'returns',
-  'important_notes',
-  'supported_operations',
-  'security',
-  'instructions',
-  'error_handling',
-  'next_steps',
-  'use_case',
-  'do_not_include',
-  'hint',
-  'hints',
-  'response_instructions',
-  'example',
-]);
-
-// Return distinct outer-tag names from all MCP tool descriptions that are
-// NOT in KNOWN_MCP_TAGS. Same regex as parseMcpDescription so we catch
-// whatever the renderer would surface. Build fails when this is non-empty
-// so new upstream tags become a deliberate (small) decision: add to the
-// allow-set + give a label, or update the renderer to special-case.
-export function findUnknownMcpTags(mcpToolDefs) {
-  const outerRe = /<([a-z_]+)>/g;
-  const seen = new Set();
-  for (const def of Object.values(mcpToolDefs)) {
-    if (!def?.description) continue;
-    let m;
-    while ((m = outerRe.exec(def.description)) !== null) {
-      if (!KNOWN_MCP_TAGS.has(m[1])) seen.add(m[1]);
-    }
-  }
-  return [...seen].sort();
-}
-
 // Global CLI flags carried by every neonctl command (--help, --api-key,
 // etc.). Single source of truth lives in scripts/data/cli-global-flags.json;
 // operation-shared.jsx imports the same file so the generator + UI can't
@@ -768,57 +667,6 @@ export function findOpsWithNoFlagMappings(allOps) {
     if (mapped.length === 0) unmapped.push(op.operationId);
   }
   return unmapped;
-}
-
-// Derive the set of param names that are session-identity globals — IDs
-// that semantically refer to the same resource across operations (project_id,
-// org_id, etc.) and should share a single sessionStorage value on the client.
-// Rule: name ends in `_id` or `_name` AND appears as a parameter on ≥2
-// distinct operations. The ≥2 threshold filters out one-off param names that
-// have nothing to "cross-page" to.
-//
-// Hand-curating this list rotted: it had `api_key_id` and `jwks_id` (each
-// appears on only 1 op, so the cross-page label did nothing) and missed
-// `oauth_provider_id`, `auth_user_id`, `member_id`, `key_id`, `db_name`.
-
-// Spec-side walker. Used at main() start so the set is available during the
-// op-build loop (buildCliFlags + the bodyGlobals walker both need it).
-export function computeCrossPageParamSet(schema) {
-  const opsPerParam = new Map();
-  for (const [, pathItem] of Object.entries(schema.paths ?? {})) {
-    for (const method of METHODS) {
-      const op = pathItem[method];
-      if (!op?.operationId) continue;
-      const allParams = mergeParams(pathItem.parameters, op.parameters);
-      for (const p of allParams) {
-        if (!p.name) continue;
-        if (!opsPerParam.has(p.name)) opsPerParam.set(p.name, new Set());
-        opsPerParam.get(p.name).add(op.operationId);
-      }
-    }
-  }
-  return new Set(
-    [...opsPerParam.entries()]
-      .filter(([name, ops]) => /(_id|_name)$/.test(name) && ops.size >= 2)
-      .map(([name]) => name)
-  );
-}
-
-// Backward-compat wrapper — kept so the existing test + JSON write don't
-// drift. New code should use computeCrossPageParamSet(schema) directly so
-// the result is available before the op loop.
-export function deriveCrossPageParams(allOps) {
-  const opsPerParam = new Map();
-  for (const op of allOps) {
-    for (const p of op.parameters ?? []) {
-      if (!opsPerParam.has(p.name)) opsPerParam.set(p.name, new Set());
-      opsPerParam.get(p.name).add(op.operationId);
-    }
-  }
-  return [...opsPerParam.entries()]
-    .filter(([name, ops]) => /(_id|_name)$/.test(name) && ops.size >= 2)
-    .map(([name]) => name)
-    .sort();
 }
 
 export function toNavYaml(allOps) {
@@ -860,7 +708,10 @@ export function toNavYaml(allOps) {
 // inherited by subcommands that don't redeclare them (e.g. `branches list`).
 function collectCliPathOptions(commandStr, cliSchema) {
   if (!cliSchema) return {};
-  const parts = commandStr.replace(/^neon\s+/, '').split(/\s+/).filter((p) => !/^[<[-]/.test(p));
+  const parts = commandStr
+    .replace(/^neon\s+/, '')
+    .split(/\s+/)
+    .filter((p) => !/^[<[-]/.test(p));
   let node = cliSchema;
   const accumulated = {};
   for (const part of parts) {
@@ -871,55 +722,11 @@ function collectCliPathOptions(commandStr, cliSchema) {
   return accumulated;
 }
 
-// Walks the enriched body `properties` and collects { path, global } entries
-// for every leaf whose name matches a session-identity global.
-// Paths containing `[]` (arrays of objects) are excluded — typing in row 0
-// of an array should not auto-fill row 1, so they stay per-op. Depth-capped
-// at 10 to mirror the existing enrichSchemaProperties guard.
-export function collectBodyGlobals(properties, crossPageParams, prefix = '', depth = 0) {
-  if (!properties || depth > 10) return [];
-  const out = [];
-  for (const [name, prop] of Object.entries(properties)) {
-    const path = prefix ? `${prefix}.${name}` : name;
-    if (prop.type === 'object' && prop.properties) {
-      out.push(...collectBodyGlobals(prop.properties, crossPageParams, path, depth + 1));
-    } else if (prop.type === 'array' && prop.items?.properties) {
-      out.push(
-        ...collectBodyGlobals(prop.items.properties, crossPageParams, `${path}[]`, depth + 1)
-      );
-    } else if (!path.includes('[]') && crossPageParams?.has(name)) {
-      out.push({ path, global: name });
-    }
-  }
-  return out;
-}
-
-// Derive tag-slug → bare-id resolution (idMeaning) from tag-config.json +
-// the live crossPageParams set rather than hand-curating.
-// Candidate = `bareId` override when set, else `${specName}_id`.
-// The crossPageParams membership check is the safety net: if a candidate
-// isn't a real global (e.g. spec rename), the mapping silently drops
-// instead of producing dead annotations.
-//
-// Called once from main() after crossPageParams is computed.
-function buildTagToBareId(crossPageParams) {
-  const map = {};
-  for (const t of TAG_CONFIG.raw.tags) {
-    const candidate = t.bareId ?? `${t.specName}_id`;
-    if (crossPageParams.has(candidate)) map[t.slug] = candidate;
-  }
-  return map;
-}
-
 // Build the flags array for an operation by merging command-level options
-// with global options, excluding hidden flags. Two heuristic mappings:
+// with global options, excluding hidden flags. Heuristic mapping:
 //   - apiEquiv: kebab-case flag name maps to a snake_case OP PARAMETER name
 //     (path or query). Drives the API↔CLI hover hint today.
-//   - globalEquiv: kebab-case flag name maps to a snake_case session-global ID
-//     Independent of apiEquiv — e.g. createProject's --org-id has
-//     no apiEquiv (org_id is a body field there) but has globalEquiv: 'org_id'
-//     so the runtime can route flag edits through the shared paramStore.
-export function buildCliFlags(operationId, commandStr, cliSchema, paramProps, crossPageParams) {
+export function buildCliFlags(commandStr, cliSchema, paramProps) {
   if (!cliSchema) return [];
   const globalOpts = cliSchema.globalOptions ?? {};
   const cmdOpts = collectCliPathOptions(commandStr, cliSchema);
@@ -933,7 +740,6 @@ export function buildCliFlags(operationId, commandStr, cliSchema, paramProps, cr
     .map(([name, spec]) => {
       const snake = kebabToSnake(name);
       const apiEquiv = paramNames.has(snake) ? snake : null;
-      const globalEquiv = crossPageParams?.has(snake) ? snake : null;
       const flag = {
         name,
         type: spec.type === 'unknown' ? 'string' : (spec.type ?? 'string'),
@@ -947,7 +753,6 @@ export function buildCliFlags(operationId, commandStr, cliSchema, paramProps, cr
       if (spec.choices) flag.enum = spec.choices;
       if (spec.default !== undefined) flag.default = spec.default;
       if (apiEquiv) flag.apiEquiv = apiEquiv;
-      if (globalEquiv) flag.globalEquiv = globalEquiv;
       return flag;
     });
 }
@@ -1020,9 +825,7 @@ export function resolveCliPositionals(commandStr, cliSchema, paramProps) {
     const coveredByFlags = new Set(
       Object.keys({ ...globalOpts, ...cmdOpts }).map((k) => k.replace(/-/g, '_'))
     );
-    uncoveredPathParams = paramProps.filter(
-      (p) => p.in === 'path' && !coveredByFlags.has(p.name)
-    );
+    uncoveredPathParams = paramProps.filter((p) => p.in === 'path' && !coveredByFlags.has(p.name));
   }
 
   const positionals = standaloneTokens.map((token, i) => ({
@@ -1043,18 +846,57 @@ function annotateSchemaOrder(operationId, properties, requiredFields, pathKey, d
   for (const [name, schema] of Object.entries(properties)) {
     const childPath = `${pathKey}.${name}`;
     if (schema.type === 'object' && schema.properties) {
-      schema.displayOrder = computeDisplayOrder(operationId, schema.properties, schema.required ?? [], childPath);
-      annotateSchemaOrder(operationId, schema.properties, schema.required ?? [], childPath, depth + 1);
-    } else if (schema.type === 'array' && schema.items?.type === 'object' && schema.items.properties) {
-      schema.items.displayOrder = computeDisplayOrder(operationId, schema.items.properties, schema.items.required ?? [], childPath);
-      annotateSchemaOrder(operationId, schema.items.properties, schema.items.required ?? [], childPath, depth + 1);
+      schema.displayOrder = computeDisplayOrder(
+        operationId,
+        schema.properties,
+        schema.required ?? [],
+        childPath
+      );
+      annotateSchemaOrder(
+        operationId,
+        schema.properties,
+        schema.required ?? [],
+        childPath,
+        depth + 1
+      );
+    } else if (
+      schema.type === 'array' &&
+      schema.items?.type === 'object' &&
+      schema.items.properties
+    ) {
+      schema.items.displayOrder = computeDisplayOrder(
+        operationId,
+        schema.items.properties,
+        schema.items.required ?? [],
+        childPath
+      );
+      annotateSchemaOrder(
+        operationId,
+        schema.items.properties,
+        schema.items.required ?? [],
+        childPath,
+        depth + 1
+      );
     }
   }
   // Return the computed order so callers can use it
   return order;
 }
 
-function buildOperationData(pathStr, pathItem, op, method, cliCoverage, mcpCoverage, consoleBreadcrumbs, cliSchema, mcpToolDefs, cliTableOutput, responseExamples, specRaw, crossPageParams, tagToBareId) {
+function buildOperationData(
+  pathStr,
+  pathItem,
+  op,
+  method,
+  cliCoverage,
+  mcpCoverage,
+  consoleBreadcrumbs,
+  cliSchema,
+  mcpToolDefs,
+  cliTableOutput,
+  responseExamples,
+  specRaw
+) {
   const tag = op.tags?.[0] || 'Other';
   const tagSlugRaw = toTagSlug(tag);
   const tagSlug =
@@ -1111,14 +953,10 @@ function buildOperationData(pathStr, pathItem, op, method, cliCoverage, mcpCover
       sections: bodySections,
       seed: bodySeed,
       labels: bodyLabels,
-    } = computeFieldGroups(
-      op.operationId,
-      enrichedProps,
-      {
-        displayOrder: bodyDisplayOrder,
-        requiredFields: bodyRequiredFields,
-      }
-    );
+    } = computeFieldGroups(op.operationId, enrichedProps, {
+      displayOrder: bodyDisplayOrder,
+      requiredFields: bodyRequiredFields,
+    });
     requestBodyData = {
       required: op.requestBody.required ?? false,
       properties: enrichedProps,
@@ -1157,7 +995,9 @@ function buildOperationData(pathStr, pathItem, op, method, cliCoverage, mcpCover
     // it's annotating rather than at the top of the page.
     const baseDescription = resp.description ?? null;
     const respDescription = responseOneOfNote
-      ? (baseDescription ? `${baseDescription}\n\n${responseOneOfNote}` : responseOneOfNote)
+      ? baseDescription
+        ? `${baseDescription}\n\n${responseOneOfNote}`
+        : responseOneOfNote
       : baseDescription;
     const respProperties = enrichSchemaProperties(schema?.properties ?? null);
     const respRequiredFields = schema?.required ?? [];
@@ -1169,7 +1009,12 @@ function buildOperationData(pathStr, pathItem, op, method, cliCoverage, mcpCover
       example: sanitizeExample(responseExamples[op.operationId] ?? example ?? null),
       properties: respProperties,
       requiredFields: respRequiredFields,
-      displayOrder: computeDisplayOrder(op.operationId, respProperties, respRequiredFields, 'response'),
+      displayOrder: computeDisplayOrder(
+        op.operationId,
+        respProperties,
+        respRequiredFields,
+        'response'
+      ),
     };
   }
 
@@ -1207,13 +1052,21 @@ function buildOperationData(pathStr, pathItem, op, method, cliCoverage, mcpCover
   const cliCoverageEntry = cliCoverage[op.operationId] ?? null;
   let cliData = null;
   if (typeof cliCoverageEntry === 'string') {
-    const { command: enrichedCommand, positionals } = resolveCliPositionals(cliCoverageEntry, cliSchema, paramProps);
-    const flags = buildCliFlags(op.operationId, enrichedCommand, cliSchema, paramProps, crossPageParams);
+    const { command: enrichedCommand, positionals } = resolveCliPositionals(
+      cliCoverageEntry,
+      cliSchema,
+      paramProps
+    );
+    const flags = buildCliFlags(enrichedCommand, cliSchema, paramProps);
     cliData = { command: enrichedCommand, flags, positionals };
   } else if (cliCoverageEntry?.commands) {
     const commands = cliCoverageEntry.commands.map(({ cmd, covers }) => {
-      const { command: enrichedCommand, positionals } = resolveCliPositionals(cmd, cliSchema, paramProps);
-      const flags = buildCliFlags(op.operationId, enrichedCommand, cliSchema, paramProps, crossPageParams);
+      const { command: enrichedCommand, positionals } = resolveCliPositionals(
+        cmd,
+        cliSchema,
+        paramProps
+      );
+      const flags = buildCliFlags(enrichedCommand, cliSchema, paramProps);
       return { command: enrichedCommand, covers, flags, positionals };
     });
     cliData = { commands, uncovered: cliCoverageEntry.uncovered ?? [] };
@@ -1229,14 +1082,6 @@ function buildOperationData(pathStr, pathItem, op, method, cliCoverage, mcpCover
     const def = mcpToolDefs[mcpTool];
     mcpData = { tool: mcpTool, description: def.description, arguments: def.arguments };
   }
-
-  // Session-identity annotations consumed by the client at render time.
-  // bodyGlobals: leaf body paths that map to a shared global ID.
-  // idMeaning: per-op resolution for the bare `id` body field (e.g. branches
-  // op → branch_id) — set even when no body field is `id` today, since the
-  // client checks at runtime per-leaf and only applies the mapping then.
-  const bodyGlobals = collectBodyGlobals(requestBodyData?.properties, crossPageParams);
-  const idMeaning = tagToBareId?.[tagSlug] ?? null;
 
   return {
     id: slug,
@@ -1265,8 +1110,6 @@ function buildOperationData(pathStr, pathItem, op, method, cliCoverage, mcpCover
     cli: cliData,
     mcp: mcpData,
     console: { breadcrumb },
-    bodyGlobals,
-    idMeaning,
   };
 }
 
@@ -1287,13 +1130,6 @@ async function main() {
   // any new upstream tags and warns. Static validation already ran at module
   // load; this adds the cross-spec check and updates TAG_CONFIG in place.
   TAG_CONFIG = loadTagConfig(schema);
-
-  // Compute session-identity globals from the spec before the
-  // op-build loop so buildCliFlags + the bodyGlobals walker both see it.
-  const crossPageParams = computeCrossPageParamSet(schema);
-  // Derive tag-slug → bare-id map from tag-config + the live
-  // crossPageParams set.
-  const tagToBareId = buildTagToBareId(crossPageParams);
 
   // Write into sibling temp dirs; if anything throws or opCount === 0 we never
   // touch the real DATA_ROOT/MD_ROOT, so stale-but-valid output survives a
@@ -1318,28 +1154,19 @@ async function main() {
 
   // neonctl schema — for structured CLI flag data
   const cliSchemaPath = resolve(ROOT, 'scripts/docs-checks/neonctl/schema.json');
-  const cliSchema = existsSync(cliSchemaPath) ? JSON.parse(readFileSync(cliSchemaPath, 'utf8')) : null;
+  const cliSchema = existsSync(cliSchemaPath)
+    ? JSON.parse(readFileSync(cliSchemaPath, 'utf8'))
+    : null;
 
   process.stderr.write(`CLI coverage: ${Object.keys(cliCoverage).length} ops\n`);
   process.stderr.write(`MCP coverage: ${Object.keys(mcpCoverage).length} ops\n`);
   process.stderr.write(`MCP tool definitions: ${Object.keys(mcpToolDefs).length} tools\n`);
-  process.stderr.write(`neonctl schema: ${cliSchema ? `v${cliSchema.neonctlVersion}` : 'not found'}\n`);
+  process.stderr.write(
+    `neonctl schema: ${cliSchema ? `v${cliSchema.neonctlVersion}` : 'not found'}\n`
+  );
   process.stderr.write(`Console breadcrumbs: ${Object.keys(consoleBreadcrumbs).length} ops\n`);
   process.stderr.write(`CLI table output examples: ${Object.keys(cliTableOutput).length} ops\n`);
   process.stderr.write(`Response examples override: ${Object.keys(responseExamples).length} ops\n`);
-
-  // Tripwire: any new outer-tag in upstream MCP descriptions must be
-  // explicitly registered in both KNOWN_MCP_TAGS (here) AND MCP_BLOCK_LABELS
-  // (operation-mcp.jsx). Otherwise the docs site renders the block with a
-  // generated fallback label (defensive) but the maintainer never learns.
-  const unknownMcpTags = findUnknownMcpTags(mcpToolDefs);
-  if (unknownMcpTags.length > 0) {
-    throw new Error(
-      `[mcp-tags] new MCP description tag(s) upstream: ${unknownMcpTags.join(', ')}. ` +
-        `Add to KNOWN_MCP_TAGS in scripts/generate-api-ref.mjs AND give each a label ` +
-        `in MCP_BLOCK_LABELS in src/components/pages/doc/api-operation/operation-mcp.jsx.`
-    );
-  }
 
   const allOps = [];
   const tagOps = {};
@@ -1362,19 +1189,14 @@ async function main() {
         mcpToolDefs,
         cliTableOutput,
         responseExamples,
-        specRaw,
-        crossPageParams,
-        tagToBareId,
+        specRaw
       );
 
       opData.specIndex = opCount;
 
       const jsonDir = resolve(DATA_TMP, opData.tag);
       mkdirSync(jsonDir, { recursive: true });
-      writeFileSync(
-        resolve(jsonDir, `${opData.id}.json`),
-        JSON.stringify(opData, null, 2) + '\n'
-      );
+      writeFileSync(resolve(jsonDir, `${opData.id}.json`), JSON.stringify(opData, null, 2) + '\n');
 
       const mdDir = resolve(MD_TMP, opData.tag);
       mkdirSync(mdDir, { recursive: true });
@@ -1411,9 +1233,7 @@ async function main() {
   // (e.g. generatePythonSdkTxt) plus one entry in this registry — no other
   // call sites to update.
   mkdirSync(LLMS_ROOT, { recursive: true });
-  const LLMS_GENERATORS = [
-    ['llms.txt', generateLlmsTxt],
-  ];
+  const LLMS_GENERATORS = [['llms.txt', generateLlmsTxt]];
   for (const [file, gen] of LLMS_GENERATORS) {
     writeFileSync(resolve(LLMS_ROOT, file), gen(tagOps));
   }
@@ -1446,14 +1266,6 @@ async function main() {
     extraDocCount++;
   }
 
-  // cross-page-params.json — derived session-identity globals consumed by
-  // the client-side store (src/components/pages/doc/api-operation/store.js).
-  // Written to DATA_TMP so it survives the atomic swap below.
-  writeFileSync(
-    resolve(DATA_TMP, 'cross-page-params.json'),
-    JSON.stringify(deriveCrossPageParams(allOps), null, 2) + '\n'
-  );
-
   // Request-body grouping audit — WARN-ONLY here so a spec republish never
   // breaks the build (new fields render in "Other"; renamed/removed configured
   // refs still surface via "Other"). `npm run audit:field-groups` runs the same
@@ -1475,7 +1287,8 @@ async function main() {
   process.stderr.write(`  public/md/docs/reference/api.md\n`);
   process.stderr.write(`  ${LLMS_ROOT}/llms.txt\n`);
   process.stderr.write(`  ${MD_ROOT}/{tag}.md (${Object.keys(tagOps).length} files)\n`);
-  if (extraDocCount > 0) process.stderr.write(`  ${MD_ROOT}/[extra docs] (${extraDocCount} files)\n`);
+  if (extraDocCount > 0)
+    process.stderr.write(`  ${MD_ROOT}/[extra docs] (${extraDocCount} files)\n`);
   process.stderr.write(`  ${NAV_YAML_PATH}\n`);
 }
 

@@ -158,7 +158,6 @@ const OperationDoc = ({ operation, bodyTree, respTree }) => {
         <ResponseSection
           operation={operation}
           respTree={respTree}
-          current="api"
           state={resp}
           copy={copy}
           copiedId={copiedId}

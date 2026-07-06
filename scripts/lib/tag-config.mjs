@@ -54,16 +54,6 @@ function validateStatic(cfg) {
     }
     if (slugSet.has(tag.slug)) dupes.push(tag.slug);
     slugSet.add(tag.slug);
-    // When bareId is set it acts as an override for the `${specName}_id`
-    // derivation that maps a tag to its session-identity global. Must be
-    // a plain snake_case identifier.
-    if (tag.bareId !== undefined) {
-      if (typeof tag.bareId !== 'string' || !/^[a-z_]+$/.test(tag.bareId)) {
-        throw new Error(
-          `[tag-config] tag "${tag.slug}" has invalid bareId "${tag.bareId}" (must be snake_case)`
-        );
-      }
-    }
   }
   if (dupes.length > 0) {
     throw new Error(`[tag-config] duplicate slug(s): ${dupes.join(', ')}`);
@@ -90,7 +80,9 @@ function validateStatic(cfg) {
   }
   const duped = [...groupSlugCount.entries()].filter(([, n]) => n > 1).map(([s]) => s);
   if (duped.length > 0) {
-    throw new Error(`[tag-config] operation slug(s) listed in multiple groups: ${duped.join(', ')}`);
+    throw new Error(
+      `[tag-config] operation slug(s) listed in multiple groups: ${duped.join(', ')}`
+    );
   }
 }
 
