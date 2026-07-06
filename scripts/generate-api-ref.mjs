@@ -4,15 +4,7 @@
 //
 // Usage: node scripts/generate-api-ref.mjs [spec-url]
 
-import {
-  writeFileSync,
-  mkdirSync,
-  readFileSync,
-  readdirSync,
-  existsSync,
-  rmSync,
-  renameSync,
-} from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -20,6 +12,19 @@ import { dereference } from '@scalar/openapi-parser';
 
 import { computeDisplayOrder } from './lib/field-order-config.mjs';
 import { computeFieldGroups } from './lib/field-group-config.mjs';
+import {
+  commitApiRefOutput,
+  createApiRefPaths,
+  loadApiRefSidecars,
+  prepareApiRefOutput,
+  writeApiIndexMarkdown,
+  writeExtraApiDocs,
+  writeLlmsIndex,
+  writeNavigationYaml,
+  writeOperationOutput,
+  writeRunSummary,
+  writeTagMarkdownFiles,
+} from './lib/api-ref-output.mjs';
 import { validateFieldGroups } from './validate-field-groups.mjs';
 import {
   mergeParams,
@@ -36,8 +41,8 @@ import {
 import { loadTagConfig } from './lib/tag-config.mjs';
 import { buildTs, toSdkMethodName } from '../src/utils/api-ref.mjs';
 
-// Single source of truth for the neonctl global flag list.
-// operation-shared.jsx imports the same JSON.
+// Single source of truth for neonctl global flags that should not count as
+// API-specific flag mappings.
 const CLI_GLOBAL_FLAGS_LIST = JSON.parse(
   readFileSync(
     resolve(dirname(fileURLToPath(import.meta.url)), 'data/cli-global-flags.json'),
@@ -62,15 +67,7 @@ export {
 };
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const DATA_ROOT = resolve(ROOT, 'src/data/api-ref');
-const MD_ROOT = resolve(ROOT, 'public/md/docs/reference/api');
-// Sibling temp dirs for atomic-swap: we write here, then renameSync onto the
-// real paths only after the run validates. Same filesystem ensures rename is atomic.
-const DATA_TMP = DATA_ROOT + '.next';
-const MD_TMP = MD_ROOT + '.next';
-const LLMS_ROOT = resolve(ROOT, 'public/docs/reference/api');
-const NAV_YAML_PATH = resolve(ROOT, 'content/docs/api-navigation.yaml');
-const API_DOCS_DIR = resolve(ROOT, 'content/api-docs');
+const PATHS = createApiRefPaths(ROOT);
 
 const SPEC_URL = process.argv[2] || 'https://neon.com/api_spec/release/v2.json';
 const METHODS = ['get', 'post', 'put', 'patch', 'delete'];
@@ -1132,31 +1129,19 @@ async function main() {
   TAG_CONFIG = loadTagConfig(schema);
 
   // Write into sibling temp dirs; if anything throws or opCount === 0 we never
-  // touch the real DATA_ROOT/MD_ROOT, so stale-but-valid output survives a
+  // touch the real output dirs, so stale-but-valid output survives a
   // broken run instead of being replaced by nothing.
-  rmSync(DATA_TMP, { recursive: true, force: true });
-  rmSync(MD_TMP, { recursive: true, force: true });
-  mkdirSync(DATA_TMP, { recursive: true });
-  mkdirSync(MD_TMP, { recursive: true });
+  prepareApiRefOutput(PATHS);
 
-  // Load coverage and enrichment data
-  const dataDir = resolve(ROOT, 'scripts/data');
-  const loadJson = (name) => {
-    const p = resolve(dataDir, name);
-    return existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : {};
-  };
-  const cliCoverage = loadJson('cli-coverage.json');
-  const mcpCoverage = loadJson('mcp-coverage.json');
-  const consoleBreadcrumbs = loadJson('console-breadcrumbs.json');
-  const mcpToolDefs = loadJson('mcp-tool-definitions.json');
-  const cliTableOutput = loadJson('cli-table-output.json');
-  const responseExamples = loadJson('response-examples.json');
-
-  // neonctl schema — for structured CLI flag data
-  const cliSchemaPath = resolve(ROOT, 'scripts/docs-checks/neonctl/schema.json');
-  const cliSchema = existsSync(cliSchemaPath)
-    ? JSON.parse(readFileSync(cliSchemaPath, 'utf8'))
-    : null;
+  const {
+    cliCoverage,
+    mcpCoverage,
+    consoleBreadcrumbs,
+    mcpToolDefs,
+    cliTableOutput,
+    responseExamples,
+    cliSchema,
+  } = loadApiRefSidecars(PATHS);
 
   process.stderr.write(`CLI coverage: ${Object.keys(cliCoverage).length} ops\n`);
   process.stderr.write(`MCP coverage: ${Object.keys(mcpCoverage).length} ops\n`);
@@ -1194,13 +1179,7 @@ async function main() {
 
       opData.specIndex = opCount;
 
-      const jsonDir = resolve(DATA_TMP, opData.tag);
-      mkdirSync(jsonDir, { recursive: true });
-      writeFileSync(resolve(jsonDir, `${opData.id}.json`), JSON.stringify(opData, null, 2) + '\n');
-
-      const mdDir = resolve(MD_TMP, opData.tag);
-      mkdirSync(mdDir, { recursive: true });
-      writeFileSync(resolve(mdDir, `${opData.id}.md`), toPerOpMarkdown(opData));
+      writeOperationOutput(PATHS, opData, toPerOpMarkdown(opData));
 
       allOps.push(opData);
       if (!tagOps[opData.tag]) tagOps[opData.tag] = [];
@@ -1232,39 +1211,19 @@ async function main() {
   // llms index files. Adding a new interface means one new generator function
   // (e.g. generatePythonSdkTxt) plus one entry in this registry — no other
   // call sites to update.
-  mkdirSync(LLMS_ROOT, { recursive: true });
   const LLMS_GENERATORS = [['llms.txt', generateLlmsTxt]];
   for (const [file, gen] of LLMS_GENERATORS) {
-    writeFileSync(resolve(LLMS_ROOT, file), gen(tagOps));
+    writeLlmsIndex(PATHS, file, gen(tagOps));
   }
 
   // api.md — top-level index served at /docs/reference/api.md
-  writeFileSync(resolve(ROOT, 'public/md/docs/reference/api.md'), generateApiMd(tagOps));
+  writeApiIndexMarkdown(PATHS, generateApiMd(tagOps));
 
   // Per-tag {tag}.md (served via /docs/reference/api/{tag}.md → rewrite → /md/...)
-  for (const [tag, ops] of Object.entries(tagOps)) {
-    const tagTitle = TAG_CONFIG.display[tag] || ops[0]?.tagDisplay || tag;
-    const introPath = resolve(API_DOCS_DIR, `${tag}.md`);
-    const intro = existsSync(introPath) ? readFileSync(introPath, 'utf-8').trim() : null;
-    const header = intro
-      ? `# ${tagTitle}\n\n${intro}\n`
-      : `# ${tagTitle}\n\nNeon Management API — ${tagTitle} endpoints.\n`;
-    writeFileSync(
-      resolve(MD_TMP, `${tag}.md`),
-      header + '\n---\n\n' + ops.map((op) => toAgentMarkdown(op)).join('\n---\n\n')
-    );
-  }
+  writeTagMarkdownFiles(PATHS, tagOps, TAG_CONFIG.display, toAgentMarkdown);
 
   // Non-tag docs in content/api-docs/ (e.g. getting-started.md) — copy with title header
-  let extraDocCount = 0;
-  for (const file of readdirSync(API_DOCS_DIR).filter((f) => f.endsWith('.md'))) {
-    const base = file.slice(0, -3);
-    if (tagOps[base]) continue;
-    const title = base.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-    const content = readFileSync(resolve(API_DOCS_DIR, file), 'utf-8').trim();
-    writeFileSync(resolve(MD_TMP, file), `# ${title}\n\n${content}\n`);
-    extraDocCount++;
-  }
+  const extraDocCount = writeExtraApiDocs(PATHS, tagOps);
 
   // Request-body grouping audit — WARN-ONLY here so a spec republish never
   // breaks the build (new fields render in "Other"; renamed/removed configured
@@ -1272,24 +1231,17 @@ async function main() {
   // check strictly for CI / the maintenance agent.
   validateFieldGroups(allOps);
 
-  // Atomic swap — only now do we touch the real DATA_ROOT/MD_ROOT.
-  rmSync(DATA_ROOT, { recursive: true, force: true });
-  rmSync(MD_ROOT, { recursive: true, force: true });
-  renameSync(DATA_TMP, DATA_ROOT);
-  renameSync(MD_TMP, MD_ROOT);
+  // Atomic swap — only now do we touch the real output dirs.
+  commitApiRefOutput(PATHS);
 
   // Navigation YAML (committed — drives sidebar structure)
-  writeFileSync(NAV_YAML_PATH, toNavYaml(allOps));
+  writeNavigationYaml(PATHS, toNavYaml(allOps));
 
-  process.stderr.write(`Written:\n`);
-  process.stderr.write(`  ${DATA_ROOT}/{tag}/{slug}.json (${opCount} files)\n`);
-  process.stderr.write(`  ${MD_ROOT}/{tag}/{slug}.md (${opCount} files)\n`);
-  process.stderr.write(`  public/md/docs/reference/api.md\n`);
-  process.stderr.write(`  ${LLMS_ROOT}/llms.txt\n`);
-  process.stderr.write(`  ${MD_ROOT}/{tag}.md (${Object.keys(tagOps).length} files)\n`);
-  if (extraDocCount > 0)
-    process.stderr.write(`  ${MD_ROOT}/[extra docs] (${extraDocCount} files)\n`);
-  process.stderr.write(`  ${NAV_YAML_PATH}\n`);
+  writeRunSummary(PATHS, {
+    opCount,
+    tagCount: Object.keys(tagOps).length,
+    extraDocCount,
+  });
 }
 
 export { main, buildOperationData };
