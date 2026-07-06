@@ -213,6 +213,16 @@ describe('getMarkdownPath', () => {
       expect(result).toBe('/md/docs/changelog.md');
     });
 
+    it('should resolve the API endpoint index route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api/reference');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
+    it('should resolve the API endpoint index .md route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api/reference.md');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
     it('should resolve individual changelog entries to changelog content path', () => {
       const result = getMarkdownPath('/docs/changelog/2026-03-13');
       expect(result).toBe('/md/changelog/2026-03-13.md');
