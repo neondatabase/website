@@ -230,7 +230,6 @@
     {
       "slug": "organizations",
       "specName": "organizations",
-      "bareId": "org_id",
       "display": "Organizations",
       "description": "Manage org members, API keys, VPC endpoints, and spending",
       "groups": [

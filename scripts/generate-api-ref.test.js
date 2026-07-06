@@ -29,8 +29,6 @@ import {
   resolveLocalRef,
   discriminatorLabelsFromRaw,
   getRawSchemaAt,
-  collectBodyGlobals,
-  computeCrossPageParamSet,
   buildRepresentativeExamples,
 } from './generate-api-ref.mjs';
 import { FIELD_ORDER, computeDisplayOrder } from './lib/field-order-config.mjs';
@@ -1041,12 +1039,6 @@ describe('toNavYaml', () => {
 // buildCliFlags
 // ---------------------------------------------------------------------------
 //
-// Pin the contract that globalEquiv is set INDEPENDENTLY of apiEquiv.
-// The createProject case (--org-id has no API parameter twin because
-// org_id lives in the body, but still must route through the shared
-// paramStore) is what motivated the split — a refactor that
-// accidentally tied globalEquiv to apiEquiv would re-break session globals.
-
 describe('buildCliFlags', () => {
   const cliSchema = {
     globalOptions: {},
@@ -1073,48 +1065,25 @@ describe('buildCliFlags', () => {
     },
   };
 
-  const crossPageParams = new Set(['org_id', 'project_id']);
-
-  it('sets both apiEquiv and globalEquiv when flag is in cross-page set AND in op.parameters', () => {
+  it('sets apiEquiv when a CLI flag maps to an API parameter', () => {
     const paramProps = [{ name: 'org_id', in: 'query' }];
-    const flags = buildCliFlags(
-      'listProjects',
-      'neon projects list',
-      cliSchema,
-      paramProps,
-      crossPageParams
-    );
+    const flags = buildCliFlags('neon projects list', cliSchema, paramProps);
     const orgFlag = flags.find((f) => f.name === 'org-id');
     expect(orgFlag.apiEquiv).toBe('org_id');
-    expect(orgFlag.globalEquiv).toBe('org_id');
   });
 
-  it('sets globalEquiv but NOT apiEquiv when flag is cross-page but NOT in op.parameters (createProject case)', () => {
+  it('does not set apiEquiv when a CLI flag is only a request-body field', () => {
     const paramProps = [];
-    const flags = buildCliFlags(
-      'createProject',
-      'neon projects create',
-      cliSchema,
-      paramProps,
-      crossPageParams
-    );
+    const flags = buildCliFlags('neon projects create', cliSchema, paramProps);
     const orgFlag = flags.find((f) => f.name === 'org-id');
     expect(orgFlag.apiEquiv).toBeUndefined();
-    expect(orgFlag.globalEquiv).toBe('org_id');
   });
 
-  it('sets neither when flag is neither in cross-page set nor in op.parameters', () => {
+  it('sets no mapping when the flag has no API parameter twin', () => {
     const paramProps = [];
-    const flags = buildCliFlags(
-      'createProject',
-      'neon projects create',
-      cliSchema,
-      paramProps,
-      crossPageParams
-    );
+    const flags = buildCliFlags('neon projects create', cliSchema, paramProps);
     const nameFlag = flags.find((f) => f.name === 'name');
     expect(nameFlag.apiEquiv).toBeUndefined();
-    expect(nameFlag.globalEquiv).toBeUndefined();
   });
 });
 
@@ -1513,106 +1482,6 @@ describe('buildOperationData', () => {
     expect(data.response.description).toContain('variant2');
     expect(data.response.descriptionHtml).toContain('variant2');
     expect(data.response.descriptionHtml).toContain('<strong>Alternative shape:</strong>');
-  });
-});
-
-// ---------------------------------------------------------------------------
-// Session-identity annotations
-// ---------------------------------------------------------------------------
-
-describe('computeCrossPageParamSet', () => {
-  it('returns names ending in _id/_name appearing in ≥2 ops', () => {
-    const schema = {
-      paths: {
-        '/projects/{project_id}': {
-          get: { operationId: 'getProject', parameters: [{ name: 'project_id', in: 'path' }] },
-        },
-        '/projects/{project_id}/branches': {
-          post: {
-            operationId: 'createProjectBranch',
-            parameters: [{ name: 'project_id', in: 'path' }],
-          },
-        },
-        '/foo/{id}': {
-          get: { operationId: 'getFoo', parameters: [{ name: 'id', in: 'path' }] },
-        },
-      },
-    };
-    const set = computeCrossPageParamSet(schema);
-    expect(set.has('project_id')).toBe(true);
-    expect(set.has('id')).toBe(false); // doesn't match the _id/_name suffix
-  });
-
-  it('excludes names appearing in only 1 op (no cross-page partner)', () => {
-    const schema = {
-      paths: {
-        '/foo/{rare_id}': {
-          get: { operationId: 'getFoo', parameters: [{ name: 'rare_id', in: 'path' }] },
-        },
-      },
-    };
-    expect(computeCrossPageParamSet(schema).has('rare_id')).toBe(false);
-  });
-});
-
-describe('collectBodyGlobals', () => {
-  const crossPage = new Set(['org_id', 'project_id', 'region_id']);
-
-  it('matches leaf names against the cross-page set, returning {path, global}', () => {
-    const props = {
-      project: {
-        type: 'object',
-        properties: {
-          name: { type: 'string' },
-          org_id: { type: 'string' },
-          region_id: { type: 'string' },
-        },
-      },
-    };
-    expect(collectBodyGlobals(props, crossPage)).toEqual([
-      { path: 'project.org_id', global: 'org_id' },
-      { path: 'project.region_id', global: 'region_id' },
-    ]);
-  });
-
-  it('excludes paths under arrays (array carveout via `[]` segment)', () => {
-    const props = {
-      branches: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            project_id: { type: 'string' },
-            org_id: { type: 'string' },
-          },
-        },
-      },
-    };
-    // Paths under `[]` are intentionally excluded — typing in array row 0
-    // shouldn't auto-fill row 1.
-    expect(collectBodyGlobals(props, crossPage)).toEqual([]);
-  });
-
-  it('returns [] for empty/missing properties', () => {
-    expect(collectBodyGlobals(null, crossPage)).toEqual([]);
-    expect(collectBodyGlobals({}, crossPage)).toEqual([]);
-  });
-
-  it('returns [] when the cross-page set is empty', () => {
-    const props = { org_id: { type: 'string' } };
-    expect(collectBodyGlobals(props, new Set())).toEqual([]);
-  });
-
-  it('respects the 10-deep recursion cap', () => {
-    let leaf = { type: 'string' };
-    let nested = leaf;
-    for (let i = 0; i < 15; i++) {
-      nested = { type: 'object', properties: { child: nested, org_id: { type: 'string' } } };
-    }
-    const result = collectBodyGlobals({ root: nested }, crossPage);
-    // Caps at depth 10; deeper org_id entries don't appear. We just assert
-    // the function doesn't infinite-loop or throw.
-    expect(Array.isArray(result)).toBe(true);
   });
 });
 

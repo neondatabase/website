@@ -131,8 +131,7 @@
     "unique-username-generator": "^1.4.0",
     "unist-util-visit": "^5.0.0",
     "vaul": "^1.1.2",
-    "yup": "^1.4.0",
-    "zustand": "^5.0.13"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

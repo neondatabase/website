@@ -22,7 +22,6 @@ Build pipeline and UI for the [Neon Management API reference](https://neon.com/d
 | `llms.txt` index                   | `public/docs/reference/api/llms.txt`              | No (gitignored) |
 | `llms-full.txt` (all ops)          | `public/docs/reference/api/llms-full.txt`         | No (gitignored) |
 | Navigation YAML (sidebar)          | `content/docs/api-navigation.yaml`                | **Yes**         |
-| Cross-page-params list             | `src/data/api-ref/cross-page-params.json`         | No (gitignored) |
 
 Navigation YAML is committed because it drives the sidebar and must be in the repo before `next build` reads it. Everything else is regenerated on every build.
 
@@ -67,7 +66,6 @@ OpenAPI spec (neon.com/api_spec/release/v2.json)
             ├─ toCurlExample()           — generates curl snippet
             ├─ toTypescriptExample()     — generates SDK snippet
             ├─ buildCliFlags()           — maps neonctl flags ↔ API params
-            └─ collectBodyGlobals()      — tags shared-identity body leaves
        ├─ JSON files  → src/data/api-ref/{tag}/{slug}.json
        ├─ MD files    → toAgentMarkdown() → public/md/...
        ├─ llms.txt    → toLlmsTxtLine()
@@ -144,8 +142,7 @@ Edit `scripts/data/console-breadcrumbs.json` by hand. Keys are operationIds; val
 ### When a new resource type ships (e.g. `clusters`)
 
 1. Add a tag entry in `tag-config.json` (see [Adding a new tag](#adding-a-new-tag)).
-2. If the resource has a session-identity global (e.g. `cluster_id`), no extra wiring is needed — the generator picks it up from the spec automatically via `computeCrossPageParamSet()`.
-3. If the global name doesn't follow `${specName}_id` (e.g. `organizations` → `org_id`), add a `bareId` field to the tag entry.
+2. Add or update field grouping only if the request body needs editorial sections instead of the generated flat tree.
 
 ### Validating changes
 
@@ -202,11 +199,10 @@ Single source of truth: [`scripts/data/tag-config.json`](data/tag-config.json), 
 - **`display`** — human-readable sidebar label
 - **`description`** — short description for the API overview grid; omit to hide the tag from that grid
 - **`groups`** — optional editorial grouping for the tag's operations on the tag landing page
-- **`bareId`** — optional override for the session-identity global a bare `id` body field resolves to. Defaults to `${specName}_id`; set this when the spec naming differs from the global (e.g. `organizations` → `"org_id"`).
 
 Plus a top-level `operationOverrides` map for moving specific operations to a different tag than the spec assigns.
 
-The loader fail-hard validates: duplicate slugs, overrides pointing at unknown slugs, operation slugs listed in multiple groups, malformed `bareId` values, and (when called with the spec) any spec tag not mapped in the config.
+The loader fail-hard validates duplicate slugs, overrides pointing at unknown slugs, operation slugs listed in multiple groups, and (when called with the spec) any spec tag not mapped in the config.
 
 ## Tag intro pages
 
@@ -243,33 +239,8 @@ that middleware and rewrites fetch to serve markdown variants.
 
 1. Add an entry to [`scripts/data/tag-config.json`](data/tag-config.json) — at minimum `{ slug, display }`. Add `specName` if the spec uses a different singular form.
 2. Run `npm run generate:api-ref`. If a spec tag has no config entry the loader throws with the missing names.
-3. Optionally add a `description` (shows on the overview grid), `groups` (editorial grouping on the tag landing page), a `bareId` (when the auto-derivation doesn't match), and `content/api-docs/{tag}.md` (intro paragraph).
+3. Optionally add a `description` (shows on the overview grid), `groups` (editorial grouping on the tag landing page), and `content/api-docs/{tag}.md` (intro paragraph).
 4. Commit the updated `content/docs/api-navigation.yaml`.
-
-## Dormant interactive stack
-
-The shipped operation page (described above) is read-only. An older interactive editor stack is kept in the tree for possible future reuse but is **not** imported by the page entry ([`index.js`](../src/components/pages/doc/api-operation/index.js) → `api-operation.jsx`). It is exercised only by unit tests, so removing it would not change anything that renders.
-
-Dormant files under [`src/components/pages/doc/api-operation/`](../src/components/pages/doc/api-operation/):
-
-| File                                       | Was                                  |
-| ------------------------------------------ | ------------------------------------ |
-| `operation-client.jsx`                     | Interactive page orchestrator        |
-| `operation-body.jsx`, `operation-params.jsx` | Editable body and parameter renderers |
-| `operation-cli.jsx`, `operation-cli-multi.jsx` | Interactive CLI builders          |
-| `operation-mcp.jsx`                        | Interactive MCP panel                |
-| `store.js`, `store-hydrator.jsx`           | Zustand state and hydration          |
-
-Related dormant assets:
-
-- `src/data/api-ref/cross-page-params.json` is consumed only by `store.js`.
-- `CliCommandTable` ([`src/components/pages/doc/cli-command-table/`](../src/components/pages/doc/cli-command-table/)) is still registered in the MDX component map but is no longer referenced by any page (its only consumer, `reference/cli-guide.md`, was removed in favor of `/docs/cli`).
-
-### Session-identity globals (dormant behavior)
-
-In the interactive editor, identifiers that appear on multiple operations (`project_id`, `org_id`, `branch_id`, `database_name`, `role_name`, ...) share one session value, so typing `org_id` once pre-fills it on every operation that uses it, the matching body field, and the CLI `--org-id` flag. The read-only page does not use this.
-
-The set is computed at build time by [`computeCrossPageParamSet()`](generate-api-ref.mjs): any param name ending in `_id` or `_name` that appears in two or more operations qualifies (so it can include names like `database_name`, not only resource IDs). It is emitted to `src/data/api-ref/cross-page-params.json` and imported by `store.js`. The generator still produces this file so the stack stays runnable if revived; re-run the generator to refresh it.
 
 ## Tests
 
@@ -278,4 +249,4 @@ npx vitest run
 npx vitest run scripts/generate-api-ref.test.js   # generator only
 ```
 
-Pure transformation helpers (slug generation, param merging, schema flattening, curl/TypeScript example generation, markdown rendering, navigation YAML structure, CLI flag mapping) are covered as unit tests. React hook integration tests live in [`__tests__/hooks.test.jsx`](../src/components/pages/doc/api-operation/__tests__/hooks.test.jsx) and exercise hydration, cross-section state coordination, and reset cascades.
+Pure transformation helpers (slug generation, param merging, schema flattening, curl/TypeScript example generation, markdown rendering, navigation YAML structure, CLI flag mapping) are covered as unit tests. React component tests under [`src/components/pages/doc/api-operation/__tests__/`](../src/components/pages/doc/api-operation/__tests__/) cover the shipped read-only operation page.

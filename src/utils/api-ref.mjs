@@ -16,12 +16,10 @@ export function toSdkMethodName(operationId) {
 }
 
 export function buildCurl(operation, paramValues, paramIncluded, bodyJson) {
-  let urlPath = operation.path.replace(
-    /\{([^}]+)\}/g,
-    (_, name) =>
-      paramValues[name] != null && paramValues[name] !== ''
-        ? encodeURIComponent(paramValues[name])
-        : `{${name}}`
+  let urlPath = operation.path.replace(/\{([^}]+)\}/g, (_, name) =>
+    paramValues[name] != null && paramValues[name] !== ''
+      ? encodeURIComponent(paramValues[name])
+      : `{${name}}`
   );
 
   const queryParts = (operation.parameters ?? [])
@@ -34,7 +32,8 @@ export function buildCurl(operation, paramValues, paramIncluded, bodyJson) {
           : p.default !== null && p.default !== undefined
             ? String(p.default)
             : `$${p.name.toUpperCase()}`;
-      const encoded = typeof val === 'string' && val.startsWith('$') ? val : encodeURIComponent(val);
+      const encoded =
+        typeof val === 'string' && val.startsWith('$') ? val : encodeURIComponent(val);
       return `${p.name}=${encoded}`;
     });
 
@@ -88,10 +87,7 @@ export function buildTs(operation, paramValues, paramIncluded, bodyJson) {
 
   const activeQueryParams = [];
   for (const p of queryParams) {
-    const active =
-      p.required ||
-      paramIncluded.has(p.name) ||
-      paramValues[p.name] !== undefined;
+    const active = p.required || paramIncluded.has(p.name) || paramValues[p.name] !== undefined;
     if (active) activeQueryParams.push(p);
   }
 
@@ -114,7 +110,11 @@ export function buildTs(operation, paramValues, paramIncluded, bodyJson) {
   } else {
     for (const p of pathParams) {
       const value = paramValue(p, paramValues[p.name]);
-      args.push(typeof value === 'string' && value.startsWith('process.env.') ? value : JSON.stringify(value));
+      args.push(
+        typeof value === 'string' && value.startsWith('process.env.')
+          ? value
+          : JSON.stringify(value)
+      );
     }
   }
 
@@ -129,7 +129,14 @@ export function buildTs(operation, paramValues, paramIncluded, bodyJson) {
   ].join('\n');
 }
 
-export function buildCliCommand(baseCommand, positionals, flags, cliEdits, cliIncluded, paramValues) {
+export function buildCliCommand(
+  baseCommand,
+  positionals,
+  flags,
+  cliEdits,
+  cliIncluded,
+  paramValues
+) {
   let resolvedBase = baseCommand;
   for (const pos of positionals ?? []) {
     const key = pos.apiEquiv ?? pos.display;
@@ -140,21 +147,10 @@ export function buildCliCommand(baseCommand, positionals, flags, cliEdits, cliIn
   const parts = [];
   for (const flag of flags) {
     const name = flag.name;
-    // A flag with globalEquiv is "included" when the global has a
-    // non-empty value, even if the user never typed in this op's CLI tab.
-    const globalVal = flag.globalEquiv ? paramValues?.[flag.globalEquiv] : undefined;
-    const included =
-      flag.required ||
-      cliIncluded.has(name) ||
-      cliEdits[name] !== undefined ||
-      globalVal !== undefined;
+    const included = flag.required || cliIncluded.has(name) || cliEdits[name] !== undefined;
     if (!included) continue;
     const val =
-      cliEdits[name] ??
-      globalVal ??
-      flag.placeholder ??
-      flag.default ??
-      (flag.required ? `<${name}>` : '');
+      cliEdits[name] ?? flag.placeholder ?? flag.default ?? (flag.required ? `<${name}>` : '');
     if (flag.type === 'boolean') {
       parts.push(`--${name}`);
     } else if (val !== '' && val != null) {
