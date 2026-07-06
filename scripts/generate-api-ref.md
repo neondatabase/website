@@ -16,6 +16,7 @@ Build pipeline and UI for the [Neon Management API reference](https://neon.com/d
 | Output                             | Path                                              | Committed       |
 | ---------------------------------- | ------------------------------------------------- | --------------- |
 | Per-operation JSON (React data)    | `src/data/api-ref/{tag}/{slug}.json`              | No (gitignored) |
+| API index Markdown                 | `public/md/docs/reference/api.md`                 | No (gitignored) |
 | Per-operation Markdown (agent/LLM) | `public/md/docs/reference/api/{tag}/{slug}.md`    | No (gitignored) |
 | Per-tag Markdown (tag overview)    | `public/md/docs/reference/api/{tag}.md`           | No (gitignored) |
 | `llms.txt` index                   | `public/docs/reference/api/llms.txt`              | No (gitignored) |
@@ -219,10 +220,20 @@ If no intro file exists, the tag overview page shows only the operation list.
 
 ## URL structure
 
+Public docs URLs are the contract. The `/md/...` paths are internal static files
+that middleware and rewrites fetch to serve markdown variants.
+
 | URL                                          | Content                                      |
 | -------------------------------------------- | -------------------------------------------- |
+| `/docs/reference/api`                        | Human-facing API overview                    |
+| `/docs/reference/api.md`                     | Agent/LLM markdown for the full API          |
+| `/docs/reference/api/reference`              | Human-facing searchable endpoint index       |
+| `/docs/reference/api/reference.md`           | Alias to `/docs/reference/api.md`            |
 | `/docs/reference/api/{tag}`                  | Tag overview — all operations for the tag    |
+| `/docs/reference/api/{tag}.md`               | Agent/LLM markdown for entire tag            |
 | `/docs/reference/api/{tag}/{slug}`           | Single operation detail page                 |
+| `/docs/reference/api/{tag}/{slug}.md`        | Agent/LLM markdown for one operation         |
+| `/md/docs/reference/api.md`                  | Internal static file behind `api.md` routes  |
 | `/md/docs/reference/api/{tag}/{slug}.md`     | Agent/LLM markdown for one operation         |
 | `/md/docs/reference/api/{tag}.md`            | Agent/LLM markdown for entire tag            |
 | `/docs/reference/api/llms.txt`               | One-line index of all operations             |

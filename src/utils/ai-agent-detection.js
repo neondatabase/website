@@ -56,6 +56,9 @@ const CUSTOM_MARKDOWN_PATHS = {
   //   2. next.config.js beforeFiles rewrite: /blog.md → /blog/llms.txt (static/browser)
   blog: '/blog/llms.txt',
   'docs/changelog': '/md/docs/changelog.md',
+  // Human-facing endpoint index. The HTML route is a searchable UI, but its
+  // agent-facing content should resolve to the canonical generated API index.
+  'docs/reference/api/reference': '/md/docs/reference/api.md',
   'docs/skill.md': '/docs/ai/skills/neon-postgres/SKILL.md', // primary skill alias — update alongside next.config.js if primary changes (see config/skills.json)
 };
 
