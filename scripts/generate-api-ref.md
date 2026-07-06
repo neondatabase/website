@@ -52,7 +52,7 @@ postbuild → copy generated md to /public + build llms.txt index + sitemaps
 
 Vercel runs `npm run build`, which triggers `prebuild` first. The generator fetches `https://neon.com/api_spec/release/v2.json` over the network; Vercel allows outbound HTTPS by default, so no env vars or build-image tweaks are required.
 
-The generator writes the last successful spec to `.next/cache/api-reference/openapi-v2.json`. If the live fetch fails, it uses that cache only when it is fresh (default: 7 days). If the cache is missing or stale, the generator throws and the build fails fast. Override the cache path with `API_REF_SPEC_CACHE_PATH` and the TTL with `API_REF_SPEC_CACHE_TTL_MS` when needed.
+After a successful generation run, the generator writes the validated spec to `.next/cache/api-reference/openapi-v2.json`. If the live fetch fails, it uses that cache only when it is fresh (default: 7 days). If the cache is missing or stale, the generator throws and the build fails fast. Override the cache path with `API_REF_SPEC_CACHE_PATH` and the TTL with `API_REF_SPEC_CACHE_TTL_MS` when needed.
 
 `prebuild` also runs `npm run check:api-ref-nav` after generation. If the regenerated `content/docs/api-navigation.yaml` differs from the committed file, the build fails with a diff. Run `npm run generate:api-ref`, review the nav change, and commit it.
 
@@ -86,7 +86,7 @@ The React UI in [`src/components/pages/doc/api-operation/`](../src/components/pa
 - `ResponseSection` and the errors block render documentation-style response details.
 - `operation-toc.js` builds the right-rail TOC from sections that actually render.
 
-The older interactive editor stack is preserved for possible future reuse, but it is not the shipped operation-page path. See [Dormant interactive stack](#dormant-interactive-stack) for the full file list.
+The shipped operation-page UI is read-only and API-first. It does not include the earlier interactive request editor prototype.
 
 ## Committed inputs (under `scripts/data/`)
 
@@ -227,6 +227,7 @@ that middleware and rewrites fetch to serve markdown variants.
 | -------------------------------------------- | -------------------------------------------- |
 | `/docs/reference/api`                        | Human-facing API overview                    |
 | `/docs/reference/api.md`                     | Agent/LLM markdown for the full API          |
+| `/docs/reference/api-reference.md`           | Legacy alias to `/docs/reference/api.md`     |
 | `/docs/reference/api/reference`              | Human-facing searchable endpoint index       |
 | `/docs/reference/api/reference.md`           | Alias to `/docs/reference/api.md`            |
 | `/docs/reference/api/{tag}`                  | Tag overview — all operations for the tag    |
@@ -242,8 +243,8 @@ that middleware and rewrites fetch to serve markdown variants.
 ## Adding a new tag
 
 1. Add an entry to [`scripts/data/tag-config.json`](data/tag-config.json) — at minimum `{ slug, display }`. Add `specName` if the spec uses a different singular form.
-2. Run `npm run generate:api-ref`. If a spec tag has no config entry the loader throws with the missing names.
-3. Optionally add a `description` (shows on the overview grid), `groups` (editorial grouping on the tag landing page), and `content/api-docs/{tag}.md` (intro paragraph).
+2. Run `npm run generate:api-ref`. If a spec tag has no config entry, the loader warns and auto-generates a minimal entry for that run so the build can continue.
+3. Optionally add a `description` (replaces the generated fallback text on the overview grid), `groups` (editorial grouping on the tag landing page), and `content/api-docs/{tag}.md` (intro paragraph).
 4. Commit the updated `content/docs/api-navigation.yaml`.
 
 ## Tests
