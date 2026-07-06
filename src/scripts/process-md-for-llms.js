@@ -2401,7 +2401,10 @@ function stripNavigationContext(content) {
   stripped = stripped.replace(/\n---\n\n## Related docs \([^)]*\)\n[\s\S]*$/, '\n');
 
   // Strip feedback footer (added at bottom by addNavigationContext)
-  stripped = stripped.replace(/\n---\n\nIf this page contains inaccurate[\s\S]*$/, '\n');
+  stripped = stripped.replace(
+    /\n---\n\n(?:Note for AI assistants:|If this page contains inaccurate)[\s\S]*$/,
+    '\n'
+  );
 
   return stripped;
 }
