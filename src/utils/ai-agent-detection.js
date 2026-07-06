@@ -59,6 +59,9 @@ const CUSTOM_MARKDOWN_PATHS = {
   // Human-facing endpoint index. The HTML route is a searchable UI, but its
   // agent-facing content should resolve to the canonical generated API index.
   'docs/reference/api/reference': '/md/docs/reference/api.md',
+  // Legacy hand-maintained API reference path now resolves to the generated
+  // canonical API reference markdown.
+  'docs/reference/api-reference': '/md/docs/reference/api.md',
   'docs/skill.md': '/docs/ai/skills/neon-postgres/SKILL.md', // primary skill alias — update alongside next.config.js if primary changes (see config/skills.json)
 };
 

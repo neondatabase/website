@@ -606,6 +606,21 @@ function buildTests() {
   );
 
   add(
+    'Legacy API reference alias (.md)',
+    '/docs/reference/api-reference.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 200),
+      (r) => expectContentType(r.contentType, 'text/markdown'),
+      (r) => expectBodyNotEmpty(r.body),
+    ],
+    {
+      spotCheck: (r) => expectBodyContains(r.body, 'Base URL', true),
+      note: 'legacy hand-maintained API reference path aliases to the generated API markdown',
+    }
+  );
+
+  add(
     'CLI reference (.md)',
     '/docs/cli.md',
     'browser',

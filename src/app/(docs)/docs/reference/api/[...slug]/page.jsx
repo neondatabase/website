@@ -27,6 +27,8 @@ const API_SLUG_PREFIX = 'reference/api';
 const SAFE_SLUG = /^[a-z0-9][a-z0-9-]*$/;
 const STATIC_PAGES = new Set(['get-started', 'key-concepts']);
 
+const getPublicApiMarkdownPath = (slug) => `/docs/${API_SLUG_PREFIX}/${slug}.md`;
+
 // Only serve pre-generated slugs — no dynamic fallback to filesystem
 export const dynamicParams = false;
 
@@ -91,6 +93,7 @@ export async function generateMetadata(props) {
       description: 'All Neon API endpoints grouped by resource',
       pathname: `${LINKS.docs}/${API_SLUG_PREFIX}/reference`,
       type: 'article',
+      markdownPath: `/docs/${API_SLUG_PREFIX}.md`,
     });
   }
 
@@ -125,6 +128,7 @@ export async function generateMetadata(props) {
       imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
       pathname: `${LINKS.docs}/${currentSlug}`,
       type: 'article',
+      markdownPath: getPublicApiMarkdownPath(tag),
     });
   }
 
@@ -143,7 +147,7 @@ export async function generateMetadata(props) {
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     type: 'article',
-    markdownPath: `/md/docs/reference/api/${tag}/${id}.md`,
+    markdownPath: getPublicApiMarkdownPath(`${tag}/${id}`),
   });
 }
 
