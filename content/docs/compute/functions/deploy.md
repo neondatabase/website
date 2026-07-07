@@ -48,7 +48,7 @@ The CLI bundles with esbuild, zips the output, and uploads it. The first deploy 
 | `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env` |
 | `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                          |
 | `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                              |
-| `--wait`          | `true`        | Poll until `completed` or `failed`; deploy builds fail if they don't finish within 2 minutes                                                  |
+| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                          |
 
 **Examples:**
 
@@ -133,6 +133,8 @@ import { createNeonClient } from '@neon/sdk';
 import { readFile } from 'node:fs/promises';
 
 const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY! });
+const projectId = process.env.NEON_PROJECT_ID!;
+const branchId = process.env.NEON_BRANCH_ID!;
 const zipBytes = await readFile('function.zip');
 
 const { data: deployment } = await neon.functions.deploy(projectId, branchId, 'hello', {
