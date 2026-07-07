@@ -31,6 +31,11 @@ Each variable is present only when its service is enabled on the branch. `DATABA
 | `NEON_AI_GATEWAY_BASE_URL`                   | AI Gateway         | Gateway host root. Append a dialect route, e.g. `/ai-gateway/mlflow/v1` for Chat Completions.                                                      |
 | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | Object Storage     | S3-compatible credentials for the branch's buckets.                                                                                                |
 | `AWS_ENDPOINT_URL_S3`, `AWS_REGION`          | Object Storage     | S3 endpoint and region. The `AWS_*` names mean the AWS SDKs work with no setup.                                                                    |
+| `NEON_STORAGE_ACCESS_KEY_ID`                 | Object Storage     | Branch-scoped S3-compatible access key for Functions.                                                                                              |
+| `NEON_STORAGE_SECRET_ACCESS_KEY`             | Object Storage     | Branch-scoped S3-compatible secret key for Functions.                                                                                              |
+| `NEON_STORAGE_ENDPOINT`                      | Object Storage     | Branch-scoped S3 endpoint for Functions.                                                                                                           |
+| `NEON_STORAGE_REGION`                        | Object Storage     | Region for branch-scoped Object Storage requests from Functions.                                                                                   |
+| `NEON_STORAGE_FORCE_PATH_STYLE`              | Object Storage     | Indicates whether S3 clients should use path-style addressing for branch-scoped Object Storage from Functions.                                     |
 
 These variables are branch-scoped: each branch injects its own values. A function deployed to a preview branch connects to that branch's database, not the default branch's.
 
@@ -123,7 +128,7 @@ neon env pull --file .env.preview
 
 To pull from a different branch, switch with `neon checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Managed BetterAuth URLs, the Neon Data API URL, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the Object Storage credentials (`AWS_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names, so the OpenAI SDKs pick it up from the environment.
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Managed BetterAuth URLs, the Neon Data API URL, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the Object Storage credentials (`AWS_*` and `NEON_STORAGE_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names, so the OpenAI SDKs pick it up from the environment.
 
 ## Constraints
 
