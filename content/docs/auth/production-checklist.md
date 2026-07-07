@@ -44,7 +44,7 @@ Complete these steps before taking your application to production with Managed B
 </CheckItem>
 
 <CheckItem title="7. Use write-scoped API keys for Auth automation" href="/docs/auth/guides/manage-auth-api#permissions-for-auth-api-keys">
-  Make sure CI, deployment scripts, and AI agents that update Neon Auth settings use an API key with project write permissions. Auth config writes and secret reads return `403 Forbidden` for read-only project keys.
+  Make sure CI, deployment scripts, and AI agents that update Neon Auth settings use an API key with project write permissions. Auth config writes return `403 Forbidden` for read-only project keys, and secret-bearing reads return redacted or blanked secret values.
 </CheckItem>
 
 </CheckList>

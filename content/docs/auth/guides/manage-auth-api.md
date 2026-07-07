@@ -35,11 +35,11 @@ All requests use the base URL `https://console.neon.tech/api/v2` and require the
 
 ## Permissions for Auth API keys
 
-<Admonition type="important" title="Project write access is required for writes and secrets">
-API keys used to create, update, or delete Neon Auth configuration need project write permissions for the target project. Reading secret-bearing Auth fields, such as OAuth client secrets, SMTP passwords, and aggregate plugin secrets, also requires project write permissions. API keys that only have read access can receive `403 Forbidden` responses for requests that previously succeeded.
+<Admonition type="important" title="Project write access is required for writes">
+API keys used to create, update, or delete Neon Auth configuration need project write permissions for the target project. API keys that only have read access can receive `403 Forbidden` responses for write requests that previously succeeded.
 </Admonition>
 
-This requirement applies to Auth configuration endpoints, including enable or disable Auth, update project info, manage OAuth providers, configure SMTP, manage plugins, manage webhooks, and read secret-bearing configuration. Non-secret reads, such as fetching the Auth base URL or JWKS URL, do not require write access.
+This requirement applies to Auth configuration writes, including enable or disable Auth, update project info, manage OAuth providers, configure SMTP, manage plugins, and manage webhooks. Reads of secret-bearing fields still succeed, but values such as OAuth client secrets, SMTP passwords, and aggregate plugin secrets are redacted or blanked unless the API key has project write permissions. Non-secret reads, such as fetching the Auth base URL or JWKS URL, do not require write access.
 
 ## Enable Managed BetterAuth
 
