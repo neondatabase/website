@@ -248,15 +248,9 @@ npm install @neondatabase/neon-js
 import { createClient } from '@neondatabase/neon-js';
 
 // Initialize with Managed BetterAuth
-// Get your URLs from the Neon Console or run: neon data-api get
-const client = createClient({
-  auth: {
-    url: import.meta.env.VITE_NEON_AUTH_URL,
-  },
-  dataApi: {
-    url: import.meta.env.VITE_NEON_DATA_API_URL,
-  },
-});
+// Use your Neon database URL without credentials or query parameters.
+// Example: https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
+const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL);
 
 // Query - the JWT token is injected automatically when the user is signed in
 const { data, error } = await client
@@ -269,7 +263,7 @@ console.log(data);
 ```
 
 <Admonition type="note">
-This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js.
+This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js. The `VITE_NEON_DATABASE_URL` value is not your Postgres connection string; use the HTTPS Neon database URL shown in the example above. If you already have a Neon Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The SDK derives the Neon Auth URL and Data API URL from it.
 </Admonition>
 
 </TabItem>

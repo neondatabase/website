@@ -55,13 +55,9 @@ Anonymous access still uses a JWT, but no user sign-in is required. How you obta
 ```js
 import { createClient } from '@neondatabase/neon-js';
 
-const client = createClient({
+const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
   auth: {
-    url: import.meta.env.VITE_NEON_AUTH_URL,
     allowAnonymous: true,
-  },
-  dataApi: {
-    url: import.meta.env.VITE_NEON_DATA_API_URL,
   },
 });
 

@@ -59,13 +59,9 @@ bun install
 Create a `.env` file in the project root:
 
 ```env
-# Neon Data API URL
-# Find this in Neon Console → Data API page → "Data API URL"
-VITE_NEON_DATA_API_URL=https://your-project-id.data-api.neon.tech
-
-# Managed BetterAuth Base URL
-# Find this in Neon Console → Auth page → "Auth Base URL"
-VITE_NEON_AUTH_URL=https://your-project-id.auth.neon.tech
+# Neon database URL for the client (no username, password, or query parameters)
+# The SDK derives the Neon Auth and Data API URLs from this value.
+VITE_NEON_DATABASE_URL=https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
 
 # Database Connection String (for migrations)
 # Find this in Neon Console → Dashboard → Connection string (select "Pooled connection")
@@ -106,13 +102,9 @@ import { createClient } from '@neondatabase/neon-js';
 import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 import type { Database } from '../../types/database';
 
-export const client = createClient<Database>({
+export const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL, {
   auth: {
     adapter: BetterAuthReactAdapter(),
-    url: import.meta.env.VITE_NEON_AUTH_URL,
-  },
-  dataApi: {
-    url: import.meta.env.VITE_NEON_DATA_API_URL,
   },
 });
 ```

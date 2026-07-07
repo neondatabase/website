@@ -59,10 +59,7 @@ import type { Database } from '@/types/database';
 import { createClient } from '@neondatabase/neon-js';
 
 // Pass the generic to the client
-const client = createClient<Database>({
-  auth: { url: process.env.NEON_AUTH_URL },
-  dataApi: { url: process.env.NEON_DATA_API_URL },
-});
+const client = createClient<Database>(process.env.NEON_DATABASE_URL!);
 
 // 3. Enjoy full type safety
 const { data, error } = await client
@@ -70,6 +67,8 @@ const { data, error } = await client
   .select('id, content') // Autocomplete: only columns in 'posts'
   .eq('is_published', true); // Type check: ensures 'is_published' expects a boolean
 ```
+
+Use the HTTPS Neon database URL without credentials or query parameters for `NEON_DATABASE_URL`, for example `https://ep-example.c-2.us-east-1.aws.neon.tech/neondb`. If you already have a Neon Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The SDK derives the Neon Auth and Data API URLs from this value.
 
 ### Response types
 
