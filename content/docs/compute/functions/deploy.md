@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-07T20:15:20.694Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -42,13 +42,13 @@ neon functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wa
 
 The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
 
-| Flag              | Default       | Description                                                                                                                                      |
-| ----------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                      |
+| Flag              | Default       | Description                                                                                                                                   |
+| ----------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                   |
 | `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env` |
-| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                             |
-| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                 |
-| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                             |
+| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                          |
+| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                              |
+| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                          |
 
 **Examples:**
 
@@ -82,7 +82,7 @@ zip -j function.zip dist/index.mjs
 
 The archive's entry file must be named `index.mjs` or `index.js`; the runtime looks for those names.
 
-From Node.js, `buildFunctionBundle` from [`@neon/config-runtime`](https://www.npmjs.com/package/@neon/config-runtime) does both steps in one call and produces exactly the archive the deploy endpoint expects:
+From Node.js, `buildFunctionBundle` from [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling) does both steps in one call and produces exactly the archive the deploy endpoint expects. See the [`@neon/config-runtime` reference](/docs/reference/config-runtime) for the rest of that package's programmatic API (`inspect`, `plan`, `apply`), useful for calling a deploy from a custom CI step instead of the CLI:
 
 ```ts
 import { buildFunctionBundle } from "@neon/config-runtime/v1";

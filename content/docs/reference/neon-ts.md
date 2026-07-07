@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-06-22T21:05:22.619Z'
+updatedOn: '2026-07-07T20:15:20.694Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -26,6 +26,8 @@ npm install @neon/config
 ```
 
 The package source is on [GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/config).
+
+`neon.ts` itself is declarative: it only describes the policy. `neon config` / `neon deploy` (below) are how the CLI runs it. To call the same `inspect` / `plan` / `apply` logic from your own script or CI job instead of the CLI, see [`@neon/config-runtime`](/docs/reference/config-runtime).
 
 Link your working directory to a Neon project before using `neon.ts` commands:
 
@@ -202,12 +204,13 @@ const env = parseEnv(config);
 
 env.postgres.databaseUrl;         // DATABASE_URL
 env.postgres.databaseUrlUnpooled; // DATABASE_URL_UNPOOLED
+env.branch?.name;                 // NEON_BRANCH          (present when NEON_BRANCH is set in the environment)
 env.auth.baseUrl;                 // NEON_AUTH_BASE_URL  (env.auth only present when auth: true)
 env.auth.jwksUrl;                 // NEON_AUTH_JWKS_URL
 env.dataApi.url;                  // NEON_DATA_API_URL   (env.dataApi only present when dataApi is enabled)
 ```
 
-`env.auth` only exists when `auth: true`, `env.dataApi` only when `dataApi` is enabled. If you access a namespace your config doesn't declare, TypeScript will catch it.
+`env.auth` only exists when `auth: true`, `env.dataApi` only when `dataApi` is enabled. If you access a namespace your config doesn't declare, TypeScript will catch it. `env.branch` is different: it's not gated by your config at all, just by whether `NEON_BRANCH` happens to be set in `process.env` (it is by default in deployed functions, `neon dev`, and after `neon env pull`), so it's typed as optional rather than tied to a declared service.
 
 Pass an array of keys to validate and return only a subset. Useful when a process needs just one or two variables:
 
@@ -220,11 +223,11 @@ The key list autocompletes from your config, so selecting a variable from a serv
 
 ## CLI commands
 
-| Command                                     | What it does                                                                                              |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Command                                  | What it does                                                                                              |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | [`neon link`](/docs/cli/link)            | Connect the current directory to a Neon project. Required to use linked branch defaults in other commands |
-| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                   |
-| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                              |
+| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                      |
+| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                                 |
 | [`neon config status`](/docs/cli/config) | Show the current live state of the branch as a `neon.ts`-shaped config                                    |
 | [`neon env pull`](/docs/cli/env)         | Write the branch's Neon-managed variables to `.env.local` (or `.env` if it already exists)                |
 | [`neon checkout`](/docs/cli/checkout)    | Switch to or create a branch; new branches are created from the `neon.ts` policy (TTL, compute, services) |

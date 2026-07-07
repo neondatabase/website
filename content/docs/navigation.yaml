@@ -407,6 +407,9 @@
         - title: neon.ts
           icon: sdk
           slug: reference/neon-ts
+          items:
+            - title: '@neon/config-runtime'
+              slug: reference/config-runtime
         - title: Data API
           icon: api
           slug: data-api/overview
