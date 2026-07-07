@@ -28,7 +28,7 @@ Existing password-based users cannot migrate due to different hashing algorithms
 - Data API enabled (Managed BetterAuth is enabled by default when you enable Data API):
   - Go to **Data API** in the Neon Console and enable it
   - In **Data API → Configuration**, verify it's configured with **Managed BetterAuth**
-  - Copy your Data API base URL and Auth URL from the Console - you'll need both
+  - Copy your Neon connection host and database name from **Connect** in the Console - the SDK derives both the Auth and Data API URLs from this single base URL. See [Initialize the client](/docs/reference/javascript-sdk#initializing) for the derivation rules, or use the separate Auth and Data API base URLs instead if you'd rather configure them explicitly
 
 <Steps>
 
@@ -43,25 +43,27 @@ npm install @neondatabase/neon-js@latest
 
 ## Update environment variables
 
-Replace your Supabase credentials with your Managed BetterAuth and Data API URLs:
+Replace your Supabase credentials with a single Neon base URL. `createClient()` derives both the Auth and Data API URLs from it automatically:
 
 ```env filename=".env"
 # Remove these:
 # VITE_SUPABASE_URL=https://your-project.supabase.co
 # VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
-# Add these:
-VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
-VITE_NEON_DATA_API_URL=https://ep-xxx.us-east-2.aws.neon.build/neondb/rest/v1
+# Add this:
+VITE_NEON_URL=https://ep-xxx.c-2.us-east-2.aws.neon.build/dbname
 ```
 
-**Get your URLs:**
+**Get your URL:**
 
-1. **Auth URL**: Go to **Auth → Configuration** in the Neon Console
-2. **Data API URL**: Go to **Data API** in the Neon Console
+Your Neon base URL is the host and database name from your Neon connection string, served over `https://`. Find these values under **Connect** in the Neon Console.
 
 <Admonition type="note">
 The `VITE_` prefix is for Vite. Use `NEXT_PUBLIC_` for Next.js, or no prefix for Node.js.
+</Admonition>
+
+<Admonition type="tip">
+If you already copied separate Auth and Data API base URLs from the Console (for example, from an earlier setup), you can still pass them explicitly with the object form. See [Initialize the client](/docs/reference/javascript-sdk#initializing) for both forms.
 </Admonition>
 
 ## Update client initialization
@@ -84,14 +86,8 @@ export const supabase = createClient(
 ```typescript filename="src/auth.ts"
 import { createClient, SupabaseAuthAdapter } from '@neondatabase/neon-js';
 
-export const client = createClient({
-  auth: {
-    url: import.meta.env.VITE_NEON_AUTH_URL,
-    adapter: SupabaseAuthAdapter(),
-  },
-  dataApi: {
-    url: import.meta.env.VITE_NEON_DATA_API_URL,
-  },
+export const client = createClient(import.meta.env.VITE_NEON_URL, {
+  auth: { adapter: SupabaseAuthAdapter() },
 });
 ```
 
@@ -186,10 +182,10 @@ ORDER BY "createdAt" DESC;
 
 | Feature                   | Supabase                            | Neon                                 |
 | ------------------------- | ----------------------------------- | ------------------------------------ |
-| **User ID type**          | `UUID`                              | `UUID`                               |
-| **Client config**         | URL + anon key                      | Auth URL + Data API URL              |
-| **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_AUTH_URL`, `NEON_DATA_API_URL` |
-| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js`              |
+| **User ID type**          | `UUID`                              | `UUID`                                               |
+| **Client config**         | URL + anon key                      | Single base URL (auto-derives Auth + Data API URLs)  |
+| **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_URL`                                           |
+| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js`                              |
 
 ## API compatibility
 

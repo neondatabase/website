@@ -404,11 +404,11 @@ Server components now call `auth.getSession()` and read the user from the return
 
 ### Install packages (#react-install-packages)
 
-Uninstall Stack Auth packages and install `@neondatabase/auth`
+Uninstall Stack Auth packages and install `@neondatabase/neon-js`
 
 ```bash filename="Terminal"
 npm uninstall @stackframe/stack
-npm install @neondatabase/auth@latest @neondatabase/auth-ui
+npm install @neondatabase/neon-js@latest @neondatabase/auth-ui
 ```
 
 **What changed**  
@@ -432,7 +432,7 @@ export const stackClientApp = new StackClientApp({
 
 ```tsx
 // src/auth.ts
-import { createAuthClient } from '@neondatabase/auth';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 const { useSession } = authClient;
@@ -445,7 +445,7 @@ You replace the Stack Auth client app with a Managed BetterAuth `authClient` wir
 
 ### Replace components (#react-replace-components)
 
-Components are the same as Next.js. Use `<AuthView>`, `<UserButton>`, `<SignedIn>`, and `<SignedOut>` from `@neondatabase/neon-auth-ui`.
+Components are the same as Next.js. Use `<AuthView>`, `<UserButton>`, `<SignedIn>`, and `<SignedOut>` from `@neondatabase/auth-ui`.
 
 **What changed**  
 The UI building blocks are shared across frameworks, so you can reuse the same auth components in SPAs.

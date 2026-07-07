@@ -27,7 +27,9 @@ This guide shows you how to integrate Managed BetterAuth into a [Next.js](https:
 <TwoColumnLayout.Step title="Enable Auth in your Neon project">
 <TwoColumnLayout.Block>
 
-Enable Auth in your [Neon project](https://console.neon.tech) and copy your Auth URL from Configuration.
+If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
+
+Go to the **Auth** page in your project dashboard and click **Enable Auth**, then copy your Auth URL from the Configuration tab.
 
 **Console path:** Project → Branch → Auth → Configuration
 
