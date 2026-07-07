@@ -3,8 +3,8 @@ title: 'Production RAG in Postgres: a blueprint for coding agents'
 subtitle: Ship hybrid keyword and vector retrieval, reciprocal rank fusion, and session-aware context on Neon Postgres with copy-paste SQL and TypeScript patterns.
 author: rishi-raj-jain
 enableTableOfContents: true
-createdAt: '2026-06-08T00:00:00.000Z'
-updatedOn: '2026-06-08T18:11:11.348Z'
+createdAt: '2026-07-07T00:00:00.000Z'
+updatedOn: '2026-07-07T00:00:00.000Z'
 ---
 
 When you start building retrieval-augmented generation (RAG), the typical first step is to choose an embedding model, turn on [pgvector](/docs/extensions/pgvector), add some chunks, and query with `ORDER BY embedding <=> query_vector LIMIT 5`. This vector search works for paraphrased questions, but has two main limitations as your project grows.
