@@ -65,7 +65,7 @@ None of the functions on this page take a Neon session or browser login. They au
 2. The `NEON_API_KEY` environment variable.
 3. `~/.config/neonctl/credentials.json`, written after running `neon auth` (or `npx neonctl auth`): the same file the CLI itself uses.
 
-If none of these resolve, every function throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY` and a message pointing you to [console.neon.tech/app/settings/api-keys](https://console.neon.tech/app/settings/api-keys) to generate a key. `apiHost` follows the same pattern, falling back to `NEON_API_HOST` and then Neon's production API.
+If none of these resolve, every function throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY` and a message pointing you to [console.neon.tech/app/settings/api-keys](https://console.neon.tech/app/settings/api-keys) to generate a key. `apiHost` follows the same pattern for `inspect`, `plan`, `apply`, `pullConfig`, and `pushConfig`: pass it explicitly, or let it fall back to `NEON_API_HOST` and then Neon's production API. `createBranch` is the exception: `CreateBranchOptions` has no `apiHost` field, so you can't override the host per call there. It still honors `NEON_API_HOST` from the environment if you set it.
 
 Pass `api` instead to inject your own `NeonApi` adapter (used internally for tests; most callers don't need this).
 
@@ -119,7 +119,7 @@ Applies a `neon.ts` policy to an existing branch. Never creates a project or bra
 | Field                  | Type               | Default | Description                                                                                                                                                          |
 | ---------------------- | ------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `updateExisting`       | `boolean`          | `false` | Auto-confirm overriding existing remote settings (TTL, `protected`, compute settings). Without it, drift from the branch's current state throws `PushConflictError`. |
-| `allowProtectedBranch` | `boolean`          | `false` | Auto-confirm applying to a branch marked protected on Neon.                                                                                                          |
+| `allowProtectedBranch` | `boolean`          | `false` | Auto-confirm applying to a branch marked protected on Neon (see the note below the table).                                                                           |
 | `bundleFunction`       | `FunctionBundler?` | esbuild | Custom bundler for function source. See [Function bundling](#function-bundling).                                                                                     |
 
 `apply` doesn't accept an interactive confirmation callback (that's only on the lower-level [`pushConfig`](#pushconfig)), so it's either non-interactive (pass `updateExisting`/`allowProtectedBranch` up front) or it fails closed: unresolved drift throws `PushConflictError` (see [Error handling](#error-handling)). Note that a protected branch with **no** other drift is not itself blocked by `allowProtectedBranch: false`; that flag only matters together with the interactive `confirm` callback on `pushConfig`.
@@ -130,7 +130,7 @@ Applies a `neon.ts` policy to an existing branch. Never creates a project or bra
 function createBranch(config: Config, options: CreateBranchOptions): Promise<CreateBranchResult>;
 ```
 
-Creates a branch **from** a `neon.ts` policy and brings it up with its declared settings in one step: the operation `neon checkout <new-name>` runs internally. It evaluates the policy with `branch.exists: false` (so creation-time tuning gated on `!branch.exists` actually resolves), creates the branch from the policy's `parent` (falling back to the project's default branch), then applies the rest of the policy to it.
+Creates a branch **from** a `neon.ts` policy and brings it up with its declared settings in one step: it calls the Neon API directly to create the branch, then applies the rest of the policy to it with `pushConfig`. This is the flow `neon checkout <new-name>` needs when it creates a new branch, and the CLI calls this function to get it (not the other way around). Concretely, `createBranch` evaluates the policy with `branch.exists: false` (so creation-time tuning gated on `!branch.exists` actually resolves), creates the branch from the policy's `parent` (falling back to the project's default branch), then reconciles the rest of the policy onto it.
 
 | `CreateBranchOptions` field | Type               | Description                                                  |
 | --------------------------- | ------------------ | ------------------------------------------------------------ |
@@ -144,7 +144,9 @@ Returns `{ branchId, branchName, result: PushResult }`. Throws a `PlatformError`
 
 ## Lower-level: `pullConfig` and `pushConfig`
 
-`inspect`, `plan`, and `apply` are thin, intent-revealing wrappers over two lower-level primitives. Reach for these directly when you need control they don't expose: most commonly, an interactive confirmation prompt, or evaluating a policy as a branch creation without actually creating a branch.
+`inspect`, `plan`, and `apply` are thin, intent-revealing wrappers over two lower-level primitives. Reach for these directly when you need control they don't expose: most commonly, an interactive confirmation prompt, or evaluating the `branch` closure as a creation (`branchExists: false`) so creation-time tuning resolves.
+
+`pushConfig` always requires a `branchId` that already exists on the project; `branchExists: false` only changes how the policy is evaluated, not whether the branch has to exist. `pushConfig` never creates a branch, on `dryRun` or otherwise. If the branch doesn't exist yet, use [`createBranch`](#createbranch) instead.
 
 ### `pullConfig`
 
@@ -152,7 +154,7 @@ Returns `{ branchId, branchName, result: PushResult }`. Throws a `PlatformError`
 function pullConfig(options: PullConfigOptions): Promise<PulledBranchConfig>;
 ```
 
-Identical to [`inspect`](#inspect): `inspect` calls this directly with no changes to its options or return value. The two names exist so call sites can read naturally (`inspect` next to `plan`/`apply`) while the engine module stays named after what it does.
+Functionally identical to [`inspect`](#inspect): `inspect` forwards its options (`projectId`, `branchId`, `api`, `apiKey`, `apiHost`) to `pullConfig` unchanged and returns its result directly, with no other logic in between. The two names exist so call sites can read naturally (`inspect` next to `plan`/`apply`) while the engine module stays named after what it does.
 
 ### `pushConfig`
 
@@ -162,11 +164,11 @@ function pushConfig(config: Config, options: PushConfigOptions): Promise<PushRes
 
 The engine behind `plan` and `apply`. `PushConfigOptions` is `ApplyOptions` plus:
 
-| Field          | Type                                                           | Default | Description                                                                                                                                                                                                                                                                                                                      |
-| -------------- | -------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `branchExists` | `boolean`                                                      | `true`  | Evaluate the policy's `branch` closure as if the target branch doesn't exist yet (`branch.exists: false`), without changing whether it physically exists on Neon. `createBranch` uses this internally so creation-time tuning (TTL, compute, `parent`) resolves right after provisioning.                                        |
-| `confirm`      | `(context: PushConfirmContext) => boolean \| Promise<boolean>` | none    | Invoked once, before any mutation, when the push needs confirmation: either the branch is protected (and `allowProtectedBranch` isn't `true`) or applying would override existing settings (and `updateExisting` isn't `true`). Return `true` to proceed; a `false` return throws `PushAbortedError`. Never invoked on `dryRun`. |
-| `dryRun`       | `boolean`                                                      | `false` | Compute the full plan against live remote state without executing any mutations. `plan(config, target)` is exactly `pushConfig(config, { ...target, dryRun: true, updateExisting: true })`.                                                                                                                                      |
+| Field          | Type                                                           | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| -------------- | -------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `branchExists` | `boolean`                                                      | `true`  | Evaluate the policy's `branch` closure as if the target branch doesn't exist yet (`branch.exists: false`), without changing whether it physically exists on Neon. `createBranch` uses this internally so creation-time tuning (TTL, compute, `parent`) resolves right after provisioning.                                                                                                                                                                                                                                                                   |
+| `confirm`      | `(context: PushConfirmContext) => boolean \| Promise<boolean>` | none    | Invoked once, before any mutation, when the push needs confirmation: either the branch is protected (and `allowProtectedBranch` isn't `true`) or applying would override existing settings (and `updateExisting` isn't `true`). Return `true` to proceed; a `false` return throws `PushAbortedError`. Not invoked, and no mutation runs, when the plan has unresolvable conflicts (immutable fields, such as region or Postgres version, that can never be reconciled): those throw `PushConflictError` regardless of `confirm`. Never invoked on `dryRun`. |
+| `dryRun`       | `boolean`                                                      | `false` | Compute the full plan against live remote state without executing any mutations. `plan(config, target)` is exactly `pushConfig(config, { ...target, dryRun: true, updateExisting: true })`.                                                                                                                                                                                                                                                                                                                                                                 |
 
 `PushConfirmContext` passed to `confirm`:
 
