@@ -33,6 +33,14 @@ Managed BetterAuth operates at the **branch level**. Each branch can have its ow
 
 All requests use the base URL `https://console.neon.tech/api/v2` and require the `Authorization: Bearer $NEON_API_KEY` header. The `project_id` and `branch_id` values are returned when you [create a project](/docs/manage/projects#create-a-project-with-the-api) or [list branches](/docs/manage/branches#list-branches-with-the-api) via the API.
 
+## Permissions for Auth API keys
+
+<Admonition type="important" title="Project write access is required for writes and secrets">
+API keys used to create, update, or delete Neon Auth configuration need project write permissions for the target project. Reading secret-bearing Auth fields, such as OAuth client secrets, SMTP passwords, and aggregate plugin secrets, also requires project write permissions. API keys that only have read access can receive `403 Forbidden` responses for requests that previously succeeded.
+</Admonition>
+
+This requirement applies to Auth configuration endpoints, including enable or disable Auth, update project info, manage OAuth providers, configure SMTP, manage plugins, manage webhooks, and read secret-bearing configuration. Non-secret reads, such as fetching the Auth base URL or JWKS URL, do not require write access.
+
 ## Enable Managed BetterAuth
 
 Send a `POST` request to enable Managed BetterAuth on a branch:
@@ -73,7 +81,7 @@ The response includes:
 | `base_url`                 | Base URL of the auth service, used for SDK configuration and the interactive API reference (`/reference`) |
 
 <Admonition type="important">
-The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields.
+The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields. For client initialization examples that combine Neon Auth and the Data API from a single Neon URL, see [`createClient()` in the JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
 </Admonition>
 
 If Managed BetterAuth is already enabled on the branch, this call returns an error.

@@ -109,6 +109,10 @@ See [UI Component Styles](/docs/auth/reference/ui-components#styling) for altern
 
 Create a `src/auth.ts` file to initialize the auth client:
 
+<Admonition type="tip" title="Using Auth and Data API together?">
+This quick start uses the standalone Auth client. For one `createClient()` instance that derives both Auth and Data API URLs from a single Neon URL, see [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
+</Admonition>
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
