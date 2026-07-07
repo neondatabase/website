@@ -263,7 +263,7 @@ console.log(data);
 ```
 
 <Admonition type="note">
-This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js. The `VITE_NEON_DATABASE_URL` value is not your Postgres connection string; use the HTTPS Neon database URL shown in the example above. If you already have a Neon Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The SDK derives the Neon Auth URL and Data API URL from it.
+This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js. The `VITE_NEON_DATABASE_URL` value is not your Postgres connection string; use the HTTPS Neon database URL shown in the example above. You can find the matching Data API URL on the **Data API** page in the Neon Console or with `neon data-api get`; to get the single database URL, remove the `.apirest` hostname label and trailing `/rest/v1` path. If you start from a Neon Auth URL instead, remove the `.neonauth` hostname label and trailing `/auth` path. The `.c-2` cell label, region, and database path stay the same. Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
 </Admonition>
 
 </TabItem>

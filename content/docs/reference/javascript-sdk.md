@@ -65,7 +65,7 @@ Use this when you only need authentication (no database queries). You get:
 
 The auth methods are identical; only the access path differs. `client.auth.signIn.email()` and `auth.signIn.email()` do the same thing.
 
-For the full client, pass a single HTTPS Neon database URL without credentials or query parameters. The SDK derives the Neon Auth URL and Data API URL automatically. If you already have a Neon Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. If you need to override either derived URL, the object form is still supported.
+For the full client, pass a single HTTPS Neon database URL without credentials or query parameters. The SDK derives the Neon Auth URL and Data API URL automatically. If you already have a Neon Auth URL or Data API URL, use the same URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The `.c-2` cell label, region, and database path stay the same. If you need to override either derived URL, the object form is still supported.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>

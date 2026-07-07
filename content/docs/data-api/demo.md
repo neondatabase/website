@@ -60,6 +60,8 @@ Create a `.env` file in the project root:
 
 ```env
 # Neon database URL for the client (no username, password, or query parameters)
+# Start from the Data API URL in Neon Console → Data API or `neon data-api get`;
+# remove the `.apirest` hostname label and trailing `/rest/v1` path.
 # The SDK derives the Neon Auth and Data API URLs from this value.
 VITE_NEON_DATABASE_URL=https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
 
@@ -67,6 +69,8 @@ VITE_NEON_DATABASE_URL=https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
 # Find this in Neon Console → Dashboard → Connection string (select "Pooled connection")
 DATABASE_URL=postgresql://user:password@your-project-id.pooler.region.neon.tech/neondb?sslmode=require
 ```
+
+Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
 
 ### Set up the database
 

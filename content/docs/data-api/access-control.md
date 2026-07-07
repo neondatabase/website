@@ -65,6 +65,8 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 const { data, error } = await client.from('public_items').select('*');
 ```
 
+Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
+
 **With a third-party provider:** Check whether your provider supports issuing anonymous or guest tokens. If it does, obtain the token using your provider's method and include it in the `Authorization: Bearer <token>` header on each request.
 
 - By default, this role has **no permissions**.
