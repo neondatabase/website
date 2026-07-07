@@ -17,7 +17,12 @@ To set up Neon Storage with an AI coding assistant, install the Neon Platform (`
 npx skills add neondatabase/agent-skills -s neon -s neon-object-storage
 ```
 
-To follow this guide, you need a new project in the AWS us-east-2 region.
+To follow this guide, you need:
+
+- Early access to the Neon Storage private preview
+- A new Neon project in the AWS `us-east-2` region
+- The Neon CLI installed and authenticated if you use the recommended `neon.ts` flow
+- A Neon API key in `NEON_API_KEY` if you use the manual API flow
 
 ## Recommended: enable storage with neon.ts
 
@@ -50,7 +55,7 @@ neon env pull
 
 ---
 
-If you prefer to manage credentials manually (for example, for CI or production deployments), follow the steps below.
+If you prefer to manage credentials manually (for example, for CI or production deployments), follow the steps below. Replace `{project_id}` and `{branch_id}` in the API examples with your own IDs. You can find them in the Neon Console URL, or with `neon projects list` and `neon branches list`.
 
 <Steps>
 
@@ -81,8 +86,6 @@ Set these as environment variables:
 export AWS_ACCESS_KEY_ID=nak_live_...   # token_id
 export AWS_SECRET_ACCESS_KEY=nsk_live_...   # s3_secret_access_key
 ```
-
-Your project ID and branch ID are available in the Neon Console URL or via `neon projects list` and `neon branches list`.
 
 ## Find your branch endpoint
 
