@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-07-07T20:11:36.426Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -20,6 +20,17 @@ The Gemini endpoint exposes the [Google Gemini API](https://ai.google.dev/api/ge
 <Admonition type="note">
 Only `generateContent` and `streamGenerateContent` are supported. Requests to other actions (such as `countTokens`) return `404 unsupported gemini action`.
 </Admonition>
+
+This endpoint is also reachable at the shorter `/v1/gemini/v1beta/models/{model}:{action}` path (no `/ai-gateway` prefix). Both behave identically. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+
+## Setup
+
+Set these environment variables. See [Get started](/docs/ai-gateway/get-started) for how to obtain them.
+
+```bash
+NEON_AI_GATEWAY_TOKEN=nt_live_...
+NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
+```
 
 ## Supported models
 

@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-06-17T11:29:14.727Z'
+updatedOn: '2026-07-07T20:11:36.426Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -94,7 +94,7 @@ The request host does not match the expected format or region.
 - The host has no parseable AWS region label. Returns 400.
 - The region in the host has no configured workspace. Returns 404.
 
-**Fix:** Verify that you are using the correct AI Gateway host from the Neon Console or API. The host format for production is `<branch-id>-api.<cell>.<region>.aws.neon.tech`. Do not construct the host manually.
+**Fix:** Verify that you are using the correct AI Gateway host from the Neon Console or API. The host format for production is `<branch-id>-api.ai.<cell>.<region>.aws.neon.tech`. Do not construct the host manually.
 
 ---
 
@@ -108,7 +108,7 @@ The request hit the upstream Databricks/provider rate limit.
 
 ### `429`: account quota exceeded
 
-Your account's AI Gateway quota is blocked. The response body is:
+Your account's AI Gateway quota is blocked. This can happen if you exceed the token-per-minute limits in [Rate limits](/docs/ai-gateway/models#rate-limits), or if your account exceeds its daily spend cap — a separate, account-level limit that can block requests even while inference is free during the preview. See [Pricing](/docs/ai-gateway/models#pricing). The response body looks like this:
 
 ```json
 {
@@ -117,7 +117,7 @@ Your account's AI Gateway quota is blocked. The response body is:
 }
 ```
 
-**Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current quota values.
+**Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current per-minute quota values.
 
 ---
 

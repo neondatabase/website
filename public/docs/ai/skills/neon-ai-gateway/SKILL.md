@@ -4,7 +4,7 @@ description: >-
   One API and one credential for frontier and open-source LLMs, built into your
   Neon branch and powered by Databricks. Use when a user wants to call an LLM,
   add AI/chat/an agent to their app, route between model providers (OpenAI,
-  Anthropic, Google/Gemini, Meta, Alibaba, DeepSeek), or avoid juggling
+  Anthropic, Google/Gemini, Meta, Alibaba), or avoid juggling
   separate provider API keys and accounts — especially when they already use
   Neon and want AI requests to branch with their project. Works with the OpenAI
   SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing
@@ -16,7 +16,7 @@ description: >-
 
 # Neon AI Gateway
 
-This is a preview feature and only available in `us-east-2`. The Neon AI Gateway is the LLM inference layer built into your Neon branch: one API and one Neon credential give you access to frontier and open-source models from Anthropic, OpenAI, Google, Meta, Alibaba, DeepSeek, and Databricks — powered by Databricks. Your existing OpenAI/Anthropic/Gemini SDK works by changing only the base URL.
+This is a preview feature and only available in `us-east-2`. The Neon AI Gateway is the LLM inference layer built into your Neon branch: one API and one Neon credential give you access to frontier and open-source models from Anthropic, OpenAI, Google, Meta, Alibaba, and Databricks — powered by Databricks. Your existing OpenAI/Anthropic/Gemini SDK works by changing only the base URL.
 
 Use this skill to help the user send model calls through the gateway, wire it into the AI SDK or Mastra, and switch providers without rewiring code. Deliver a working inference request, a configured agent, or a precise answer from the official Neon docs.
 
@@ -24,7 +24,7 @@ Use this skill to help the user send model calls through the gateway, wire it in
 
 Reach for the AI Gateway whenever an app or agent needs to call an LLM and the user would rather not manage model providers themselves:
 
-- **One credential instead of many provider accounts.** A single Neon credential reaches the entire model catalog across seven providers. No separate OpenAI / Anthropic / Google billing, keys, or signups to provision and rotate.
+- **One credential instead of many provider accounts.** A single Neon credential reaches the entire model catalog across six providers. No separate OpenAI / Anthropic / Google billing, keys, or signups to provision and rotate.
 - **Switch models without rewiring.** The unified endpoint is OpenAI-compatible and works with every model in the catalog — change one `model` field to move between Claude, GPT, and Gemini. Standard SDKs (OpenAI, Anthropic, google-genai) work with just a base-URL change.
 - **AI follows your branches.** Each branch has its own gateway endpoint, scoped with the same lineage as your database. AI requests from a preview/feature branch are isolated to that branch — the same isolation your data already gets — which makes preview, CI, and agent environments self-contained.
 - **No extra infrastructure, and it's already next to your data.** The gateway lives inside your Neon project (and is injected into Neon Functions automatically), runs on the same Databricks infrastructure that serves trillions of tokens a month, and supports streaming (SSE) out of the box.
@@ -57,6 +57,8 @@ export default defineConfig({
 neon deploy   # provisions the gateway on the linked branch
 ```
 
+No `neon.ts` yet, or not using the CLI? Create a credential directly with the `ai_gateway:invoke` scope from the Console or the API — see [Get started](https://neon.com/docs/ai-gateway/get-started.md) — and set `NEON_AI_GATEWAY_TOKEN` / `NEON_AI_GATEWAY_BASE_URL` yourself. Everything below about routes and dialects applies either way.
+
 ## Neon Infrastructure as Code (`neon.ts`)
 
 The `preview.aiGateway` toggle above is part of `neon.ts`, Neon's infrastructure-as-code file — one TypeScript file declares the gateway alongside every other branch service, in version control (see the `neon` skill for the full reference). Reconcile it against a branch the Terraform way:
@@ -78,18 +80,20 @@ When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **O
 | Variable                   | Meaning                                                                                                                                    |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | `OPENAI_API_KEY`           | Gateway bearer token (a Neon credential, `nt_live_...`)                                                                                    |
-| `OPENAI_BASE_URL`          | Full OpenAI-dialect route, **including** `/ai-gateway/openai/v1`: `https://<branch-id>-api.ai.<region>.aws.neon.tech/ai-gateway/openai/v1` |
+| `OPENAI_BASE_URL`          | Full OpenAI-dialect route, **including** `/ai-gateway/openai/v1`: `https://<branch-id>-api.ai.<cell>.<region>.aws.neon.tech/ai-gateway/openai/v1` |
 | `NEON_AI_GATEWAY_TOKEN`    | Same bearer as `OPENAI_API_KEY` (survives a user overriding `OPENAI_*` with their own keys)                                                |
-| `NEON_AI_GATEWAY_BASE_URL` | **Bare branch gateway host** (`scheme://host`, **no path** — no `/ai-gateway`): `https://<branch-id>-api.ai.<region>.aws.neon.tech`        |
+| `NEON_AI_GATEWAY_BASE_URL` | **Bare branch gateway host** (`scheme://host`, **no path** — no `/ai-gateway`): `https://<branch-id>-api.ai.<cell>.<region>.aws.neon.tech`        |
 
 The two base URLs are **different**: `OPENAI_BASE_URL` already includes the full `/ai-gateway/openai/v1` (Responses) route, while `NEON_AI_GATEWAY_BASE_URL` is just the bare host, so you append `/ai-gateway/<dialect>` yourself (this is also what the `@neon/ai-sdk-provider` does for you). The routes under the host are:
 
 - `/ai-gateway/mlflow/v1` — unified, OpenAI **Chat Completions**-compatible; recommended default, works with every provider.
-- `/ai-gateway/openai/v1` — OpenAI **Responses** API (required for `gpt-5-…-codex` variants and `gpt-5-5-pro`). This is the route `OPENAI_BASE_URL` already points at, because the `@ai-sdk/openai` provider uses the Responses API by default.
+- `/ai-gateway/openai/v1` — OpenAI **Responses** API (required for `gpt-5-…-codex` variants). This is the route `OPENAI_BASE_URL` already points at, because the `@ai-sdk/openai` provider uses the Responses API by default.
 - `/ai-gateway/anthropic/v1` — native Anthropic Messages (extended thinking, prompt caching).
 - `/ai-gateway/gemini/v1beta/...` — native Gemini `generateContent`.
 
 So `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` is the chat-completions endpoint, `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1` equals `OPENAI_BASE_URL`, and so on. If you only have `OPENAI_BASE_URL` and need chat completions, swap the dialect: `baseUrl.replace("/openai/v1", "/mlflow/v1")` (this is what the Mastra example does).
+
+Every dialect is also reachable at a shorter top-level `/v1/...` path with no `/ai-gateway/<dialect>` prefix (e.g. `${NEON_AI_GATEWAY_BASE_URL}/v1/chat/completions`, `/v1/responses`, `/v1/anthropic/v1/messages`, `/v1/gemini/v1beta/models/{model}:{action}`) — same branch host, bearer token, request/response shape, model routing, rate limits, and quota behavior. `GET ${NEON_AI_GATEWAY_BASE_URL}/v1/models` lists the catalog in an OpenRouter-shaped response. See [Shorter /v1 paths](https://neon.com/docs/ai-gateway/models.md#shorter-v1-paths) for the full mapping. Prefer `/v1/...` when adapting OpenAI/OpenRouter-compatible clients; keep `/ai-gateway/...` when following Neon examples that expect dialect-specific routes.
 
 For typed access, `parseEnv` (from `@neon/env`) returns `env.aiGateway` (`apiKey`, `baseUrl`) derived from your `neon.ts`.
 
@@ -127,6 +131,24 @@ const { text } = await generateText({
   prompt: "Summarize Postgres for me.",
 });
 ```
+
+`@neon/ai-sdk-provider` also re-exports the OpenAI provider's image generation tool as `neon.tools.imageGeneration()`. It only works for OpenAI-routed models (the request goes out over the native Responses endpoint) and requires `streamText`, not `generateText` — the gateway caps non-streaming response size, and a full base64 image reliably exceeds it:
+
+```typescript
+import { neon } from "@neon/ai-sdk-provider";
+import { streamText } from "ai";
+
+const result = streamText({
+  model: neon("gpt-5-mini"),
+  messages,
+  tools: {
+    image: neon.tools.imageGeneration({ partialImages: 3 }),
+  },
+});
+return result.toUIMessageStreamResponse();
+```
+
+There's no `neon.imageModel(...)` / `generateImage()` equivalent — image generation is only available as this tool.
 
 To build an **agent** — a model that calls tools in a loop and then answers — add `tools` and a `stopWhen` budget. The loop runs in-process, so on a Neon Function it isn't cut off by lambda-style timeouts:
 
@@ -216,7 +238,7 @@ Use a model's catalog ID directly in the `model` field — e.g. `claude-sonnet-4
 
 ## Availability
 
-The AI Gateway is a preview (early access) feature available only on new projects in the `us-east-2` region; it can't be enabled on existing projects. Foundation model access requires a paid Neon plan. Confirm the user's project is a new project in `us-east-2`. If the user does not yet have access, point them to the private beta sign-up: https://neon.com/blog/were-building-backends#access
+The AI Gateway is a preview (early access) feature available only on new projects in the `us-east-2` region; it can't be enabled on existing projects. Foundation model access requires a paid Neon plan. Inference is free during the private preview, but Neon still enforces an account-level daily spend cap that can return `429 REQUEST_LIMIT_EXCEEDED`; no fixed public cap is documented. Confirm the user's project is a new project in `us-east-2`. If the user does not yet have access, point them to the private beta sign-up: https://neon.com/blog/were-building-backends#access
 
 ## Neon Documentation
 

@@ -23,6 +23,7 @@ Participation in this Private Preview is subject to our Private Preview Terms. A
 - **Standard SDKs, one URL change.** OpenAI SDK, Anthropic SDK, and google-genai all work out of the box.
 - **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
 - **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
+- **Shorter, OpenRouter-style paths.** Every dialect is also reachable at a shorter top-level `/v1/...` path, plus `GET /v1/models` to list the catalog. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths).
 
 ## Pricing
 

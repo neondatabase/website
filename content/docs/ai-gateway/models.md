@@ -56,6 +56,8 @@ Once billing begins, usage will also be capped by your prepaid credit balance. S
 
 Inference is free during the private preview. See [Pricing](/docs/ai-gateway/overview#pricing) for what to expect when billing begins.
 
+Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. This can happen even though inference itself isn't billed yet. Neon hasn't published a fixed cap value; it isn't a flat number and can vary by account. See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
+
 ## Available models
 
 Browse the full catalog below. Switch between the **Text** and **Image** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart (AI SDK, Mastra, Python, TypeScript, or cURL). The endpoint each snippet targets is baked into its base URL — `/v1` for chat completions, `/openai/v1` for the Responses API (image generation).
@@ -78,6 +80,46 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | Google Gemini             | `/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
 | Google Gemma 3 12B        | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
 | Meta, Databricks, Alibaba | `/v1/chat/completions` | Chat completions only                                                                    |
+
+## Shorter /v1 paths
+
+Most dialects above are also reachable at a shorter, top-level `/v1/...` path with no `/ai-gateway/<dialect>` prefix. These are additive aliases: the `/ai-gateway/...` paths documented throughout this page keep working and aren't deprecated. Both forms use the same branch host, bearer token, request body, response body, model routing, rate limits, and quota behavior. Gemini is the exception: its native endpoint has no shorter alias, so keep using `/ai-gateway/gemini/v1beta/models/{model}:generateContent` (or `streamGenerateContent`) as shown in [Which endpoint to use](#which-endpoint-to-use).
+
+Use the `/v1/...` paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-gateway/...` paths when a framework or existing Neon example expects the older dialect-specific route.
+
+| Shorter path                       | Equivalent to                            |
+| ----------------------------------- | ----------------------------------------- |
+| `POST /v1/chat/completions`        | `/ai-gateway/mlflow/v1/chat/completions` |
+| `POST /v1/openai/chat/completions` | `/ai-gateway/mlflow/v1/chat/completions` |
+| `POST /v1/responses`               | `/ai-gateway/openai/v1/responses`        |
+| `POST /v1/openai/responses`        | `/ai-gateway/openai/v1/responses`        |
+| `POST /v1/anthropic/v1/messages`   | `/ai-gateway/anthropic/v1/messages`      |
+
+### List available models
+
+`GET /v1/models` lists the model catalog in an OpenRouter-shaped response, authenticated the same way as the endpoints above:
+
+```bash shouldWrap
+curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN"
+```
+
+```json
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "claude-sonnet-4-6",
+      "canonical_slug": "claude-sonnet-4-6",
+      "pricing": null,
+      "per_request_limits": null,
+      "context_length": null
+    }
+  ]
+}
+```
+
+`canonical_slug`, `pricing`, `per_request_limits`, and `context_length` are reserved OpenRouter-compatible fields. `pricing`, `per_request_limits`, and `context_length` are currently always `null`; use the tables earlier on this page for context window and model details in the meantime.
 
 ## Provider terms
 

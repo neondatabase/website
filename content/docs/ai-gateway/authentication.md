@@ -104,12 +104,13 @@ Neon provides four gateway env vars. Two follow OpenAI's standard naming so exis
 | `OPENAI_API_KEY`           | Bearer token (`nt_live_...`)                                                                            |
 | `OPENAI_BASE_URL`          | Full OpenAI Responses dialect URL: `https://<branch-host>/ai-gateway/openai/v1` — **includes the path** |
 | `NEON_AI_GATEWAY_TOKEN`    | Same bearer token as `OPENAI_API_KEY`                                                                   |
-| `NEON_AI_GATEWAY_BASE_URL` | Bare branch host: `https://<branch-host>` — **no path**; append `/ai-gateway/<dialect>/v1` yourself     |
+| `NEON_AI_GATEWAY_BASE_URL` | Bare branch host: `https://<branch-host>` — **no path**; append an AI Gateway route yourself            |
 
 `OPENAI_BASE_URL` and `NEON_AI_GATEWAY_BASE_URL` point at different URLs. `OPENAI_BASE_URL` already includes `/ai-gateway/openai/v1`, so `new OpenAI()` picks it up with zero config and calls the Responses API. `NEON_AI_GATEWAY_BASE_URL` is the bare host — append the dialect path yourself:
 
 ```
 NEON_AI_GATEWAY_BASE_URL + /ai-gateway/mlflow/v1   → chat completions (all providers)
+NEON_AI_GATEWAY_BASE_URL + /v1                      → shorter OpenAI/OpenRouter-style aliases
 NEON_AI_GATEWAY_BASE_URL + /ai-gateway/openai/v1   → OpenAI Responses API (= OPENAI_BASE_URL)
 NEON_AI_GATEWAY_BASE_URL + /ai-gateway/anthropic   → Anthropic Messages API
 NEON_AI_GATEWAY_BASE_URL + /ai-gateway/gemini      → Gemini generateContent API

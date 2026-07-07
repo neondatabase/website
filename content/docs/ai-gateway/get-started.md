@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-07-07T20:11:36.426Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -45,13 +45,13 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 Your branch's AI Gateway host is available in the Neon Console on the AI Gateway page, or via the Neon API. It follows this format:
 
 ```
-br-<name>-api.<cell>.<region>.aws.neon.tech
+br-<name>-api.ai.<cell>.<region>.aws.neon.tech
 ```
 
 For example:
 
 ```bash
-export NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
+export NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
 ```
 
 This is different from your database connection string.
