@@ -114,7 +114,7 @@ neon dev      # serves every function in neon.ts with hot reload; injects DATABA
 neon deploy   # bundles with esbuild, uploads, and applies neon.ts to the linked branch
 ```
 
-To deploy a single function without `neon.ts`: `neon functions deploy <slug> --path . --entry src/index.ts`. Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.c-1.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
+To deploy a single function without `neon.ts`: `neon functions deploy <slug> --src src/index.ts`. Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.c-1.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
 
 When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically — deploying the function to the fresh branch. Checking out an existing branch does not re-deploy; run `neon deploy` explicitly.
 
@@ -457,6 +457,9 @@ The Neon documentation is the source of truth and Functions is evolving rapidly,
 - https://neon.com/docs/compute/functions/get-started.md
 - https://neon.com/docs/compute/functions/deploy.md
 - https://neon.com/docs/compute/functions/environment-variables.md
-- https://neon.com/docs/compute/functions/reference/neon-ts.md
+- https://neon.com/docs/compute/functions/agents.md
+- https://neon.com/docs/compute/functions/websockets.md
+- https://neon.com/docs/compute/functions/authentication.md
+- https://neon.com/docs/reference/neon-ts.md
 - https://neon.com/docs/compute/functions/reference/runtime-limits.md
 - https://neon.com/docs/compute/functions/preview-access.md
