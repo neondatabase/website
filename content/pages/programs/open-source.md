@@ -10,21 +10,17 @@ image: '/images/social-previews/programs/open-source.jpg'
 
 <QuoteBlock quote="With Neon's serverless Postgres and the support from the Open Source Program, integrating a scalable database into Medusa was straightforward and fast. The developer experience has been outstanding, and it's helped us deliver a frictionless experience to our users." author="oli-juhl" role="CTO MedusaJS" />
 
-If you're building open source tools that use Postgres, we want to help you scale. Selected projects receive up to $5,000 yearly in platform credits, enrollment in a cash referral program, and marketing support to expand your project's visibility.
+If you're building open source tools that use Postgres, we want to help you scale. Selected projects receive up to $5,000 yearly in platform credits and marketing support to expand your project's visibility.
 
 ## What You'll Get
 
 The Neon Open Source Program provides financial support, promotional opportunities, and partnership benefits to help your project grow.
 
-<FeatureList icons={['dollar', 'users', 'megaphone']}>
+<FeatureList icons={['dollar', 'megaphone']}>
 
 ### Neon Credits
 
 Neon will grant eligible open-source software up to $5,000 in platform credits yearly.
-
-### Cash Payments
-
-Every time a developer discovers Neon through your work and becomes a customer, we'll give you $20 via GitHub Sponsorships.
 
 ### Promotion Support
 
@@ -66,12 +62,5 @@ No, you don't need to be using Neon yet. However, we prioritize projects that ha
 <summary>**What happens after the first year?**</summary>
 
 After the first year, we'll review your project's progress and impact. If your project continues to meet the program criteria and has been actively using the credits and promoting Neon, we can renew your benefits for another year. Our goal is to support projects throughout their growth journey.
-
-</details>
-<br/>
-<details>
-<summary>**How does the referral program work?**</summary>
-
-Once accepted into the program, you'll receive a unique referral link. When users sign up for Neon through your link and spend $20 or more, you'll receive $20. There's no cap on referral earnings, and payouts are processed monthly through GitHub Sponsors.
 
 </details>
