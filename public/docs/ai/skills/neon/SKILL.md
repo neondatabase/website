@@ -114,7 +114,7 @@ Before starting setup, inspect the user's codebase and environment:
 
 ### Self-Driving Setup With Neon's CLI or MCP Server
 
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run `npx -y neon init`. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
+Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run `npx -y neon@latest init`. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
 
 ```bash
 npx -y neon@latest init
@@ -149,8 +149,8 @@ Remind users to use environment variables for credentials, never commit connecti
 
 Default to a branch-first loop that mirrors `git`: one isolated Neon branch per feature, so nothing leaks between features and there are no shared connection strings to copy around. Two commands drive it — `link` once per project, then `checkout` per feature — and a third, `env pull`, runs automatically under the hood so the branch you pin is immediately usable:
 
-- `neon link` — Interactively links the workspace to a Neon org, project, and branch, writing the IDs to a git-ignored `.neon` file. Run once per project. Once linked, project- and branch-scoped commands no longer need `--project-id` or `--branch` (for example, `neon branch list`).
-- `neon checkout <branch-name>` — Creates the branch if it doesn't exist, or checks out the existing one, by updating only the branch pointer in `.neon`. Run without a name for an interactive picker. It does not touch code or local Postgres.
+- `neon link` — Interactively links the workspace to a Neon org, project, and branch, writing the IDs to a git-ignored `.neon` file. Run once per project. Once linked, project- and branch-scoped commands no longer need `--project-id` or `--branch` (for example, `neon branches list`).
+- `neon checkout <branch-name>` — Checks out an existing branch by updating only the branch pointer in `.neon`. Run without a name for an interactive picker. In an interactive terminal, a missing branch name prompts to create it. In a non-interactive shell, a missing branch name errors instead; create it first with `neon branches create --name <branch-name>`, then run `neon checkout <branch-name>`. It does not touch code or local Postgres.
 - `neon env pull` — Fetches the current branch's Neon environment variables (`DATABASE_URL`, …) into your existing `.env`, or `.env.local` if you don't have one (override the target with `--file`). No branch ID needed; it reads `.neon`. **`link` and `checkout` run this for you by default**, so you rarely call it directly.
 
 Run `link` once when starting on a project, then `checkout` per feature:
@@ -160,7 +160,7 @@ neon link                     # once; also pulls the linked branch's env
 neon checkout dev-add-search  # per feature; also pulls the branch's env
 ```
 
-Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local `.env` automatically — build against it, then `checkout` the next branch and repeat. As the agent, drive this loop yourself: run `checkout` between tasks to get a fresh, isolated database per feature with no shared state to corrupt.
+Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local `.env` automatically — build against it, then `checkout` the next branch and repeat. As the agent, drive this loop yourself: create a branch when needed, then run `checkout` between tasks to get a fresh, isolated database per feature with no shared state to corrupt.
 
 ### Updating `.neon` without interactive prompts
 

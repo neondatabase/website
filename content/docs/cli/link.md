@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/reference/cli-link
 ---
 
-The `link` command binds the current directory to a Neon project. It picks (or creates) an organization and project, resolves the project's default branch, and writes a `.neon` file with `orgId`, `projectId`, and `branchId`. Subsequent commands run in this directory (or any subdirectory) automatically pick up that context.
+The `link` command binds the current directory to a Neon project. It picks (or creates) an organization and project, writes `orgId` and `projectId` to a `.neon` file, and also writes `branchId` when you pass `--branch` or `--branch-id`. Subsequent commands run in this directory (or any subdirectory) automatically pick up that context; branch-scoped commands can use it once a branch is pinned by `link --branch` or [`checkout`](/docs/cli/checkout).
 
 Requires neon 2.22.2 or later. Check your version with `neon --version`.
 
