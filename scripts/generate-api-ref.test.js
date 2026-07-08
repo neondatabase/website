@@ -18,6 +18,7 @@ import {
   toLlmsTxtLine,
   toAgentMarkdown,
   toFullMarkdownEntry,
+  generateLlmsFull,
   toNavYaml,
   stripMarkdownLinks,
   descriptionToHtml,
@@ -974,6 +975,34 @@ describe('toFullMarkdownEntry', () => {
 
     expect(md).toContain('Large response example omitted from the aggregate LLM file');
     expect(md).not.toContain('x'.repeat(9000));
+  });
+});
+
+describe('generateLlmsFull', () => {
+  it('builds the aggregate API reference file', () => {
+    const md = generateLlmsFull({
+      projects: [
+        {
+          operationId: 'listProjects',
+          summary: 'List projects',
+          method: 'GET',
+          path: '/projects',
+          description: 'Retrieves projects.',
+          parameters: [],
+          examples: {
+            curl: 'curl "https://console.neon.tech/api/v2/projects"',
+            typescript: 'const { data } = await api.listProjects({});',
+          },
+          response: { status: '200', description: 'OK', example: null, properties: null },
+        },
+      ],
+    });
+
+    expect(md).toContain('# Neon Management API - Full Reference');
+    expect(md).toContain('https://neon.com/docs/reference/api/llms.txt');
+    expect(md).toContain('# Projects');
+    expect(md).toContain('## List projects · GET /projects');
+    expect(md).toContain('const { data } = await api.listProjects({});');
   });
 });
 
