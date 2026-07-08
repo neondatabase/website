@@ -127,6 +127,41 @@ describe('DocBodySection', () => {
     expect(screen.getByText('Hipaa')).toBeInTheDocument();
   });
 
+  it('renders expandable object fields with indented third-level children', () => {
+    render(
+      <DocBodySection
+        bodyTree={BODY_TREE}
+        requestBody={{
+          requiredFields: [],
+          labels: {},
+          sections: [
+            {
+              id: 'settings',
+              label: 'Project settings',
+              collapsed: false,
+              schemaPath: 'project.settings.*',
+              rows: [{ path: 'project.settings', common: false, outOfObject: false }],
+            },
+          ],
+        }}
+      />
+    );
+
+    const settingsToggle = screen.getByRole('button', { name: 'Toggle Settings field' });
+    expect(settingsToggle).toHaveAttribute('aria-expanded', 'true');
+
+    const settingsGrid = screen.getByText('settings').closest('.grid');
+    expect(settingsGrid).toHaveClass('pl-3.5', 'gap-x-5');
+    expect(screen.getAllByText('project.settings.*')).toHaveLength(1);
+
+    const childGrid = screen.getByText('hipaa').closest('.grid');
+    expect(childGrid).toHaveClass('pl-14', 'gap-x-5');
+
+    fireEvent.click(settingsToggle);
+    expect(settingsToggle).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByText('hipaa')).not.toBeInTheDocument();
+  });
+
   it('falls back to a flat read-only tree when sections are absent', () => {
     render(
       <DocBodySection bodyTree={BODY_TREE} requestBody={{ requiredFields: [], sections: null }} />
