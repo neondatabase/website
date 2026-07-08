@@ -107,7 +107,13 @@ describe('DocBodySection', () => {
     expect(screen.getByText('commonly set')).toBeInTheDocument();
     expect(screen.getByText('Project name')).toBeInTheDocument();
     expect(screen.getByText('default: auto-generated')).toBeInTheDocument();
-    expect(screen.getByText('17')).toHaveClass('text-[#00B87B]');
+    expect(screen.getByRole('heading', { name: 'Basics' }).closest('section')).toHaveClass(
+      'mb-[-1px]',
+      'dark:bg-black-pure'
+    );
+    expect(screen.getByText('commonly set')).toHaveClass('text-green-44', 'dark:text-green-52');
+    expect(screen.getAllByText('project.*')[0]).toHaveClass('text-[16px]', 'dark:text-gray-new-80');
+    expect(screen.getByText('17')).toHaveClass('text-green-44', 'dark:text-green-52');
 
     // Only the first section is open by default.
     expect(screen.queryByText('Hipaa')).not.toBeInTheDocument();

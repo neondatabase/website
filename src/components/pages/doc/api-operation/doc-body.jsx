@@ -35,9 +35,9 @@ function TypeBadge({ label, variant }) {
   return (
     <span
       className={cn(
-        'rounded border border-gray-new-70 bg-transparent px-1.5 py-0.5 font-mono text-sm leading-normal font-medium text-black-pure dark:border-gray-new-30 dark:text-white',
+        'rounded border border-gray-new-70 bg-gray-new-98 px-1 py-[3px] font-mono text-[14px] leading-[1.25] font-normal tracking-normal text-black-pure dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-90',
         variant === 'value' &&
-          'bg-gray-new-98 px-1.5 py-0.5 text-gray-new-40 dark:border-gray-new-20 dark:bg-white/10 dark:text-gray-new-70'
+          'border-gray-new-70 bg-gray-new-94 text-gray-new-50 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-70'
       )}
     >
       {label}
@@ -54,18 +54,23 @@ function MetadataBadges({ node, row }) {
   return (
     <>
       {row?.common && (
-        <span className="border border-[#00B87B]/40 bg-transparent px-1.5 py-0.5 text-sm font-semibold text-[#00B87B] dark:border-green-45/40 dark:text-green-45">
+        <span className="rounded border border-green-52/40 bg-green-52/5 px-1 py-[3px] font-mono text-[14px] leading-[1.25] font-normal tracking-normal text-green-44 dark:bg-black-new dark:text-green-52">
           common
         </span>
       )}
       {row?.outOfObject && (
-        <span className="border border-gray-new-70 bg-transparent px-1.5 py-0.5 text-sm font-medium text-gray-new-50 dark:border-gray-new-30 dark:text-gray-new-60">
+        <span className="rounded border border-gray-new-70 bg-gray-new-98 px-1 py-[3px] text-[14px] leading-[1.25] font-normal tracking-normal text-gray-new-50 dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-60">
           top-level field
         </span>
       )}
       {node?.deprecated && (
-        <span className="rounded border border-[#E2301D]/40 bg-transparent px-1.5 py-0.5 text-sm font-medium text-[#E2301D] dark:border-[#FF5645]/40 dark:text-[#FF5645]">
+        <span className="rounded border border-[#E2301D]/40 bg-transparent px-1 py-[3px] text-[14px] leading-[1.25] font-normal tracking-normal text-[#E2301D] dark:border-[#FF5645]/40 dark:text-[#FF5645]">
           deprecated
+        </span>
+      )}
+      {row?.schemaPath && (
+        <span className="text-[16px] leading-[1.5] font-normal tracking-normal text-gray-new-50 dark:text-gray-new-80">
+          {row.schemaPath}
         </span>
       )}
     </>
@@ -77,6 +82,7 @@ MetadataBadges.propTypes = {
   row: PropTypes.shape({
     common: PropTypes.bool,
     outOfObject: PropTypes.bool,
+    schemaPath: PropTypes.string,
   }),
 };
 
@@ -92,10 +98,10 @@ function EnumPills({ node }) {
           <span
             key={String(value)}
             className={cn(
-              'rounded-sm px-1.5 py-0.5 font-mono text-sm',
+              'rounded px-1 py-[3px] font-mono text-[14px] leading-[1.25] font-normal tracking-normal',
               isActive
-                ? 'border border-[#00B87B]/40 bg-transparent font-semibold text-[#00B87B] dark:border-green-45/40 dark:text-green-45'
-                : 'border border-gray-new-70 bg-transparent text-gray-new-50 dark:border-gray-new-30 dark:text-gray-new-60'
+                ? 'border border-green-52/40 bg-green-52/5 text-green-44 dark:bg-black-new dark:text-green-52'
+                : 'border border-gray-new-70 bg-gray-new-98 text-gray-new-50 dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-60'
             )}
           >
             {String(value)}
@@ -119,7 +125,7 @@ EnumPills.propTypes = {
 function ConstraintText({ node }) {
   if (!node?.constraints) return null;
   return (
-    <p className="mt-2 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+    <p className="mt-2.5 font-mono text-[15px] leading-[1.5] tracking-normal text-gray-new-50 dark:text-gray-new-70">
       {node.constraints}
     </p>
   );
@@ -137,13 +143,17 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
   const defaultLabel = fieldDefaultLabel(path, node, labels);
 
   return (
-    <div className={cn('border-b border-gray-new-90 py-4 last:border-b-0 dark:border-gray-new-20')}>
+    <div
+      className={cn(
+        'border-b border-gray-new-90 px-1 py-4 last:border-b-0 dark:border-gray-new-20'
+      )}
+    >
       <div
-        className="grid gap-4 md:grid-cols-1"
-        style={{ gridTemplateColumns: 'minmax(180px, 0.85fr) minmax(0, 1.35fr)' }}
+        className="grid gap-x-2.5 gap-y-3 md:grid-cols-1"
+        style={{ gridTemplateColumns: 'minmax(220px, 314px) minmax(0, 1fr)' }}
       >
         <div>
-          <div className="flex flex-wrap items-center gap-1.5">
+          <div className="flex flex-wrap items-start gap-1.5">
             {hasChildren && (
               <button
                 type="button"
@@ -151,18 +161,20 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
                 aria-label={`Toggle ${title} field`}
                 aria-expanded={open}
                 aria-controls={childrenId}
-                className="mr-0.5 flex size-6 items-center justify-center text-gray-new-50 dark:text-gray-new-60"
+                className="mt-1 flex size-3.5 items-center justify-center text-gray-new-50 dark:text-white"
               >
-                <Chevron className={cn('w-1.5', open && 'rotate-90')} />
+                <Chevron className={cn('h-3.5 w-2 transition-transform', open && 'rotate-90')} />
               </button>
             )}
-            <span className="text-sm font-semibold text-black-pure dark:text-white">{title}</span>
+            <span className="text-[16px] leading-[1.5] font-medium tracking-normal text-black-pure dark:text-white">
+              {title}
+            </span>
             <MetadataBadges node={node} row={row} />
           </div>
-          <code className="mt-1 block font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
+          <code className="mt-1.5 block font-mono text-[15px] leading-[1.5] tracking-normal text-gray-new-50 dark:text-gray-new-70">
             {node.key}
           </code>
-          <div className="mt-2 flex flex-wrap items-center gap-1.5">
+          <div className="mt-2.5 flex flex-wrap items-start gap-2">
             <TypeBadge label={node.type} />
             {defaultLabel && <TypeBadge label={`default: ${defaultLabel}`} variant="value" />}
           </div>
@@ -171,13 +183,13 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
           {descriptionHtml(node) ? (
             <div
               className={cn(
-                'text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_a]:underline [&_p+p]:mt-2',
+                'text-[16px] leading-[1.5] tracking-normal text-gray-new-30 dark:text-gray-new-85 [&_a]:underline [&_p+p]:mt-2',
                 INLINE_CODE_STYLES
               )}
               dangerouslySetInnerHTML={{ __html: descriptionHtml(node) }}
             />
           ) : (
-            <p className="text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70">
+            <p className="text-[16px] leading-[1.5] tracking-normal text-gray-new-30 dark:text-gray-new-85">
               {descriptionText(node)}
             </p>
           )}
@@ -188,7 +200,7 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
       {hasChildren && open && (
         <div
           id={childrenId}
-          className="mt-3 border-l border-gray-new-90 pl-4 dark:border-gray-new-20"
+          className="mt-4 border-l border-gray-new-90 pl-4 dark:border-gray-new-20"
         >
           {node.children.map((child) => {
             const childPath = `${path}.${child.key}`;
@@ -231,6 +243,7 @@ DocField.propTypes = {
   row: PropTypes.shape({
     common: PropTypes.bool,
     outOfObject: PropTypes.bool,
+    schemaPath: PropTypes.string,
   }),
   depth: PropTypes.number,
   defaultOpen: PropTypes.bool,
@@ -247,56 +260,58 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
     .filter(Boolean);
 
   return (
-    <section className="overflow-hidden border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-10">
-      <div className="flex items-start gap-3 px-4 py-3 transition-colors hover:bg-gray-new-98 dark:hover:bg-gray-new-15">
+    <section className="mb-[-1px] overflow-hidden border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure">
+      <div className="flex items-center gap-4 p-4">
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
           aria-label={`Toggle ${section.label} section`}
           aria-expanded={open}
           aria-controls={fieldsId}
-          className="mt-0.5 flex size-7 shrink-0 items-center justify-center text-gray-new-50 dark:text-gray-new-60"
+          className="flex size-3.5 shrink-0 items-center justify-center text-gray-new-50 dark:text-white"
         >
-          <Chevron className={cn('w-1.5', open && 'rotate-90')} />
+          <Chevron className={cn('h-3.5 w-2 transition-transform', open && 'rotate-90')} />
         </button>
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3
-              id={`body-${section.id}`}
-              className="scroll-mt-20 text-sm leading-tight font-semibold text-black-pure dark:text-white"
-            >
-              {section.label}
-            </h3>
-            {section.common && (
-              <span className="border border-[#00B87B]/40 bg-transparent px-1.5 py-0.5 text-sm font-semibold text-[#00B87B] dark:border-green-45/40 dark:text-green-45">
-                commonly set
-              </span>
-            )}
-            {section.schemaPath && (
-              <code className="font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
-                {section.schemaPath}
-              </code>
-            )}
+        <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+          <div className="flex w-full items-start justify-between gap-4">
+            <div className="flex min-w-0 flex-wrap items-start gap-1.5">
+              <h3
+                id={`body-${section.id}`}
+                className="scroll-mt-20 text-[16px] leading-[1.5] font-medium tracking-normal text-black-pure dark:text-white"
+              >
+                {section.label}
+              </h3>
+              {section.common && (
+                <span className="rounded border border-green-52/40 bg-green-52/5 px-1 py-[3px] font-mono text-[14px] leading-[1.25] font-normal tracking-normal text-green-44 dark:bg-black-new dark:text-green-52">
+                  commonly set
+                </span>
+              )}
+              {section.schemaPath && (
+                <span className="text-[16px] leading-[1.5] font-normal tracking-normal text-gray-new-50 dark:text-gray-new-80">
+                  {section.schemaPath}
+                </span>
+              )}
+            </div>
+            <span className="shrink-0 text-[14px] leading-[1.5] font-normal tracking-normal text-gray-new-50 dark:text-gray-new-60">
+              {rows.length} {rows.length === 1 ? 'field' : 'fields'}
+            </span>
           </div>
           {section.blurb && (
-            <p className="mt-1 text-sm leading-relaxed text-gray-new-50 dark:text-gray-new-60">
+            <p className="text-[15px] leading-[1.5] font-normal tracking-normal text-gray-new-50 dark:text-gray-new-70">
               {section.blurb}
             </p>
           )}
         </div>
-        <span className="shrink-0 font-mono text-sm text-gray-new-50 dark:text-gray-new-60">
-          {rows.length} {rows.length === 1 ? 'field' : 'fields'}
-        </span>
       </div>
       {open && (
-        <div id={fieldsId} className="border-t border-gray-new-90 px-4 dark:border-gray-new-20">
+        <div id={fieldsId} className="mx-4 border-t border-gray-new-90 dark:border-gray-new-20">
           {rows.map(({ path, node, common, outOfObject }) => (
             <DocField
               key={path}
               node={node}
               path={path}
               labels={labels}
-              row={{ common, outOfObject }}
+              row={{ common, outOfObject, schemaPath: section.schemaPath }}
             />
           ))}
         </div>
@@ -395,7 +410,7 @@ export function DocBodySection({ bodyTree, requestBody }) {
       />
 
       {sections?.length ? (
-        <div className="space-y-3">
+        <div className="py-2">
           {sections.map((section, index) => (
             <SectionCard
               key={section.id}
@@ -407,7 +422,7 @@ export function DocBodySection({ bodyTree, requestBody }) {
           ))}
         </div>
       ) : (
-        <div className="border border-gray-new-90 px-4 dark:border-gray-new-20">
+        <div className="border border-gray-new-90 bg-white px-4 dark:border-gray-new-20 dark:bg-black-pure">
           {bodyTree.map((node) => (
             <DocField
               key={node.key}
