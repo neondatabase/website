@@ -67,6 +67,8 @@ None of the functions on this page take a Neon session or browser login. They au
 
 If none of these resolve, every function throws a `PlatformError` with code `PLATFORM_MISSING_API_KEY` and a message pointing you to [console.neon.tech/app/settings/api-keys](https://console.neon.tech/app/settings/api-keys) to generate a key. `apiHost` follows the same pattern for `inspect`, `plan`, `apply`, `pullConfig`, and `pushConfig`: pass it explicitly, or let it fall back to `NEON_API_HOST` and then Neon's production API. `createBranch` is the exception: `CreateBranchOptions` has no `apiHost` field, so you can't override the host per call there. It still honors `NEON_API_HOST` from the environment if you set it.
 
+For CI, don't rely on the local CLI credentials fallback. A script that works on a developer machine because `neon auth` wrote `~/.config/neonctl/credentials.json` will fail in a clean CI runner. Pass `apiKey` explicitly or set `NEON_API_KEY` in the job environment.
+
 Pass `api` instead to inject your own `NeonApi` adapter (used internally for tests; most callers don't need this).
 
 ## Operations
@@ -108,6 +110,8 @@ function plan(config: Config, options: ConfigOperationOptions): Promise<PushResu
 
 Computes what `apply` would do, without mutating anything (the equivalent of `terraform plan`). Takes the same options as `inspect`.
 
+Returns a `PushResult` with the same shape as [`apply`](#apply). On a dry run, `applied` describes the changes that would be applied; no remote state is modified.
+
 ### `apply`
 
 ```ts
@@ -123,6 +127,18 @@ Applies a `neon.ts` policy to an existing branch. Never creates a project or bra
 | `bundleFunction`       | `FunctionBundler?` | esbuild | Custom bundler for function source. See [Function bundling](#function-bundling).                                                                                     |
 
 `apply` doesn't accept an interactive confirmation callback (that's only on the lower-level [`pushConfig`](#pushconfig)), so it's either non-interactive (pass `updateExisting`/`allowProtectedBranch` up front) or it fails closed: unresolved drift throws `PushConflictError` (see [Error handling](#error-handling)). Note that a protected branch with **no** other drift is not itself blocked by `allowProtectedBranch: false`; that flag only matters together with the interactive `confirm` callback on `pushConfig`.
+
+Returns a `PushResult`:
+
+| Field        | Type               | Description                                                                                                                               |
+| ------------ | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `projectId`  | `string`           | Target project id.                                                                                                                        |
+| `orgId`      | `string?`          | Organization id for the target project, when the API returns one.                                                                         |
+| `branchId`   | `string`           | Target branch id.                                                                                                                         |
+| `branchName` | `string`           | Target branch name.                                                                                                                       |
+| `dryRun`     | `boolean`          | `true` for `plan` / `pushConfig({ dryRun: true })`; `applied` then records planned changes only.                                          |
+| `applied`    | `AppliedChange[]`  | Ordered list of policy changes that were applied or, on dry runs, would be applied. Each entry identifies the changed resource and field. |
+| `conflicts`  | `ConflictReport[]` | Conflicts found while comparing local policy with remote state. Empty when the push can proceed.                                          |
 
 ### `createBranch`
 
@@ -161,6 +177,8 @@ Functionally identical to [`inspect`](#inspect): `inspect` forwards its options 
 ```ts
 function pushConfig(config: Config, options: PushConfigOptions): Promise<PushResult>;
 ```
+
+Returns the same `PushResult` shape as [`apply`](#apply). With `dryRun: true`, `applied` is the ordered list of changes that would be applied, and the function does not mutate remote state.
 
 The engine behind `plan` and `apply`. `PushConfigOptions` is `ApplyOptions` plus:
 
@@ -219,22 +237,33 @@ Without `path`, it walks up from `cwd` looking for `neon.ts` / `neon.mts` / `neo
 Putting the pieces together: a script that plans and applies a policy against a specific branch, suitable as its own CI job:
 
 ```ts filename="scripts/deploy-branch.ts"
-import { loadConfigFromFile, apply } from "@neon/config-runtime/v1";
+import { loadConfigFromFile, plan, apply } from "@neon/config-runtime/v1";
 
 // Resolve these yourself: from CI variables you set, `neon branches list --output json`,
 // or the Neon API. This package never reads `.neon` or `NEON_*` (besides NEON_API_KEY / NEON_API_HOST).
 const projectId = process.env.NEON_PROJECT_ID!;
 const branchId = process.env.NEON_BRANCH_ID!;
+const shouldApply = process.env.NEON_APPLY === "true";
 
 const { config } = await loadConfigFromFile();
 
 // NEON_API_KEY in the environment is picked up automatically, so there's no need to pass apiKey.
-const result = await apply(config, {
+const target = {
   projectId,
   branchId,
   updateExisting: true,
   allowProtectedBranch: true,
-});
+};
+
+const planned = await plan(config, target);
+console.log(`Plan: ${planned.applied.length} change(s) for ${planned.branchName}`);
+
+if (!shouldApply) {
+  console.log("Dry run only. Set NEON_APPLY=true to apply this plan.");
+  process.exit(0);
+}
+
+const result = await apply(config, target);
 
 console.log(`Applied ${result.applied.length} change(s) to ${result.branchName}`);
 ```
