@@ -1,9 +1,9 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useId, useState } from 'react';
+import { Fragment, useId, useState } from 'react';
 
-import Chevron from 'icons/chevron-right-lg.inline.svg';
+import Chevron from 'icons/chevron.inline.svg';
 import { INLINE_CODE_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
@@ -135,6 +135,10 @@ ConstraintText.propTypes = {
   node: PropTypes.shape({ constraints: PropTypes.string }),
 };
 
+function Divider() {
+  return <div className="h-px w-full shrink-0 bg-gray-new-90 dark:bg-gray-new-20" />;
+}
+
 export function DocField({ node, path, labels, row, depth = 0, defaultOpen = depth === 0 }) {
   const [open, setOpen] = useState(defaultOpen);
   const childrenId = useId();
@@ -143,13 +147,9 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
   const defaultLabel = fieldDefaultLabel(path, node, labels);
 
   return (
-    <div
-      className={cn(
-        'border-b border-gray-new-90 px-1 py-4 last:border-b-0 dark:border-gray-new-20'
-      )}
-    >
+    <div className="px-1">
       <div
-        className="grid gap-x-2.5 gap-y-3 md:grid-cols-1"
+        className="grid gap-x-2.5 gap-y-3 md:block"
         style={{ gridTemplateColumns: 'minmax(220px, 314px) minmax(0, 1fr)' }}
       >
         <div>
@@ -163,7 +163,12 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
                 aria-controls={childrenId}
                 className="mt-1 flex size-3.5 items-center justify-center text-gray-new-50 dark:text-white"
               >
-                <Chevron className={cn('h-3.5 w-2 transition-transform', open && 'rotate-90')} />
+                <Chevron
+                  className={cn(
+                    'size-3.5 transition-transform [&_path]:fill-current',
+                    open && 'rotate-90'
+                  )}
+                />
               </button>
             )}
             <span className="text-[16px] leading-[1.5] font-medium tracking-normal text-black-pure dark:text-white">
@@ -202,20 +207,24 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
           id={childrenId}
           className="mt-4 border-l border-gray-new-90 pl-4 dark:border-gray-new-20"
         >
-          {node.children.map((child) => {
-            const childPath = `${path}.${child.key}`;
-            return (
-              <DocField
-                key={childPath}
-                node={child}
-                path={childPath}
-                labels={labels}
-                row={row}
-                depth={depth + 1}
-                defaultOpen={false}
-              />
-            );
-          })}
+          <div className="flex flex-col gap-4">
+            {node.children.map((child, index) => {
+              const childPath = `${path}.${child.key}`;
+              return (
+                <Fragment key={childPath}>
+                  <DocField
+                    node={child}
+                    path={childPath}
+                    labels={labels}
+                    row={row}
+                    depth={depth + 1}
+                    defaultOpen={false}
+                  />
+                  {index < node.children.length - 1 && <Divider />}
+                </Fragment>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
@@ -260,8 +269,8 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
     .filter(Boolean);
 
   return (
-    <section className="mb-[-1px] overflow-hidden border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure">
-      <div className="flex items-center gap-4 p-4">
+    <section className="mb-[-1px] flex flex-col overflow-hidden border border-gray-new-90 bg-white p-4 dark:border-gray-new-20 dark:bg-black-pure">
+      <div className="flex items-center gap-4">
         <button
           type="button"
           onClick={() => setOpen((value) => !value)}
@@ -270,7 +279,12 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
           aria-controls={fieldsId}
           className="flex size-3.5 shrink-0 items-center justify-center text-gray-new-50 dark:text-white"
         >
-          <Chevron className={cn('h-3.5 w-2 transition-transform', open && 'rotate-90')} />
+          <Chevron
+            className={cn(
+              'size-3.5 transition-transform [&_path]:fill-current',
+              open && 'rotate-90'
+            )}
+          />
         </button>
         <div className="flex min-w-0 flex-1 flex-col gap-1.5">
           <div className="flex w-full items-start justify-between gap-4">
@@ -304,15 +318,18 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
         </div>
       </div>
       {open && (
-        <div id={fieldsId} className="mx-4 border-t border-gray-new-90 dark:border-gray-new-20">
-          {rows.map(({ path, node, common, outOfObject }) => (
-            <DocField
-              key={path}
-              node={node}
-              path={path}
-              labels={labels}
-              row={{ common, outOfObject, schemaPath: section.schemaPath }}
-            />
+        <div id={fieldsId} className="mt-4 flex flex-col gap-4">
+          <Divider />
+          {rows.map(({ path, node, common, outOfObject }, index) => (
+            <Fragment key={path}>
+              <DocField
+                node={node}
+                path={path}
+                labels={labels}
+                row={{ common, outOfObject, schemaPath: section.schemaPath }}
+              />
+              {index < rows.length - 1 && <Divider />}
+            </Fragment>
           ))}
         </div>
       )}
@@ -398,18 +415,21 @@ export function DocBodySection({ bodyTree, requestBody }) {
   const sections = requestBody?.sections ?? null;
   const labels = requestBody?.labels ?? null;
   const requiredLeafFields = getRequiredLeafPaths(bodyTree);
+  const hasSections = sections?.length > 0;
 
   return (
     <section className="mt-9">
       <h2 id="request-body" className={API_OPERATION_H2_WITH_MARGIN_CLASS_NAME}>
         Request body
       </h2>
-      <RequiredSummary
-        requiredFields={requiredLeafFields}
-        bodyRequired={requestBody?.required ?? false}
-      />
+      {!hasSections && (
+        <RequiredSummary
+          requiredFields={requiredLeafFields}
+          bodyRequired={requestBody?.required ?? false}
+        />
+      )}
 
-      {sections?.length ? (
+      {hasSections ? (
         <div className="py-2">
           {sections.map((section, index) => (
             <SectionCard
@@ -422,15 +442,12 @@ export function DocBodySection({ bodyTree, requestBody }) {
           ))}
         </div>
       ) : (
-        <div className="border border-gray-new-90 bg-white px-4 dark:border-gray-new-20 dark:bg-black-pure">
-          {bodyTree.map((node) => (
-            <DocField
-              key={node.key}
-              node={node}
-              path={node.key}
-              labels={labels}
-              defaultOpen={false}
-            />
+        <div className="flex flex-col gap-4 border border-gray-new-90 bg-white p-4 dark:border-gray-new-20 dark:bg-black-pure">
+          {bodyTree.map((node, index) => (
+            <Fragment key={node.key}>
+              <DocField node={node} path={node.key} labels={labels} defaultOpen={false} />
+              {index < bodyTree.length - 1 && <Divider />}
+            </Fragment>
           ))}
         </div>
       )}
