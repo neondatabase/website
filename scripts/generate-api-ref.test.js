@@ -54,7 +54,7 @@ function resolveCoverageCommand(schema, command) {
   const path = [];
   for (const token of tokens) {
     if (token.startsWith('-') || token.startsWith('<') || token.startsWith('[')) break;
-    if (!commands?.[token]) break;
+    if (!commands?.[token]) return { node: null, path, unresolved: token };
     node = commands[token];
     path.push(token);
     commands = node.commands;
@@ -1143,6 +1143,18 @@ describe('CLI coverage fixtures', () => {
     expect(
       resolveCoverageCommand(neonctlSchema, 'neon neon-auth domain allow-localhost enable').path
     ).toEqual(['neon-auth', 'domain', 'allow-localhost', 'enable']);
+  });
+
+  it('uses schema-valid VPC CLI commands', () => {
+    expect(cliCoverage.listProjectVPCEndpoints).toBe('neon vpc project list --project-id <id>');
+    expect(cliCoverage.assignProjectVPCEndpoint).toBe(
+      'neon vpc project restrict <vpc_endpoint_id> --project-id <id>'
+    );
+    expect(cliCoverage.deleteProjectVPCEndpoint).toBe(
+      'neon vpc project remove <vpc_endpoint_id> --project-id <id>'
+    );
+    expect(cliCoverage.deleteOrganizationVPCEndpoint).toContain('neon vpc endpoint remove');
+    expect(cliCoverage.getOrganizationVPCEndpointDetails).toContain('neon vpc endpoint status');
   });
 
   it('all cli-coverage commands resolve to a schema command', () => {

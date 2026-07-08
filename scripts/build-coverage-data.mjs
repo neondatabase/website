@@ -92,7 +92,6 @@ const CLI_MANUAL = {
   getProjectBranchSchema: { cmd: 'neon branches schema-diff [base] [compare]' },
   // listProjectBranchEndpoints: used internally as a helper in connection-string, no direct command
   // Roles
-  getProjectBranchRolePassword: { cmd: 'neon roles get <role> --project-id <id>' },
   // Connection string
   getConnectionURI: { cmd: 'neon connection-string [branch]' },
   // Neon Auth
@@ -136,14 +135,26 @@ const CLI_MANUAL = {
   getCurrentUserOrganizations: { cmd: 'neon orgs list' },
   // getAuthDetails: called internally by analytics.ts for API key metadata, not a user-facing command
   // VPC endpoints — correct operationId casing from live spec
-  listOrganizationVPCEndpoints: { cmd: 'neon vpc endpoint list --org-id <id>' },
-  assignOrganizationVPCEndpoint: { cmd: 'neon vpc endpoint assign --org-id <id>' },
-  deleteOrganizationVPCEndpoint: { cmd: 'neon vpc endpoint delete --org-id <id>' },
-  getOrganizationVPCEndpointDetails: { cmd: 'neon vpc endpoint get --org-id <id>' },
-  listProjectVPCEndpoints: { cmd: 'neon vpc endpoint list --project-id <id>' },
-  listProjectVpcEndpoints: { cmd: 'neon vpc endpoint list --project-id <id>' }, // neonctl API client uses Vpc (not VPC)
-  assignProjectVPCEndpoint: { cmd: 'neon vpc endpoint assign --project-id <id>' },
-  deleteProjectVPCEndpoint: { cmd: 'neon vpc endpoint delete --project-id <id>' },
+  listOrganizationVPCEndpoints: {
+    cmd: 'neon vpc endpoint list --org-id <id> --region-id <region_id>',
+  },
+  assignOrganizationVPCEndpoint: {
+    cmd: 'neon vpc endpoint assign <vpc_endpoint_id> --org-id <id> --region-id <region_id>',
+  },
+  deleteOrganizationVPCEndpoint: {
+    cmd: 'neon vpc endpoint remove <vpc_endpoint_id> --org-id <id> --region-id <region_id>',
+  },
+  getOrganizationVPCEndpointDetails: {
+    cmd: 'neon vpc endpoint status <vpc_endpoint_id> --org-id <id> --region-id <region_id>',
+  },
+  listProjectVPCEndpoints: { cmd: 'neon vpc project list --project-id <id>' },
+  listProjectVpcEndpoints: { cmd: 'neon vpc project list --project-id <id>' }, // neonctl API client uses Vpc (not VPC)
+  assignProjectVPCEndpoint: {
+    cmd: 'neon vpc project restrict <vpc_endpoint_id> --project-id <id>',
+  },
+  deleteProjectVPCEndpoint: {
+    cmd: 'neon vpc project remove <vpc_endpoint_id> --project-id <id>',
+  },
 };
 
 // Maps action word from operationId prefix → subcommand name in neonctl
@@ -197,7 +208,8 @@ function extractCmdToFn(src) {
       !ts.isPropertyAccessExpression(node.expression) ||
       !ts.isIdentifier(node.expression.name) ||
       node.expression.name.text !== 'command'
-    ) return;
+    )
+      return;
 
     const firstArg = node.arguments[0];
     const cmdName = readStringLike(firstArg);
@@ -382,7 +394,7 @@ function resolveOps(fnName, fnToApi, fnToFns, visited = new Set()) {
   if (visited.has(fnName)) return new Set();
   visited.add(fnName);
   const ops = new Set(fnToApi[fnName] ?? []);
-  for (const calledFn of (fnToFns[fnName] ?? [])) {
+  for (const calledFn of fnToFns[fnName] ?? []) {
     for (const op of resolveOps(calledFn, fnToApi, fnToFns, new Set(visited))) {
       ops.add(op);
     }
@@ -437,12 +449,20 @@ function parseNeonHandlers(src, knownFns) {
 // SQL tools, search/fetch, docs, and multi-step workflow tools (whose constituent
 // ops are already covered by the focused management tools they delegate to).
 const MCP_COVERAGE_EXCLUDE = new Set([
-  'run_sql', 'run_sql_transaction', 'describe_table_schema', 'get_database_tables',
-  'explain_sql_statement', 'list_slow_queries',
-  'search', 'fetch',
-  'list_docs_resources', 'get_doc_resource',
-  'prepare_database_migration', 'complete_database_migration',
-  'prepare_query_tuning', 'complete_query_tuning',
+  'run_sql',
+  'run_sql_transaction',
+  'describe_table_schema',
+  'get_database_tables',
+  'explain_sql_statement',
+  'list_slow_queries',
+  'search',
+  'fetch',
+  'list_docs_resources',
+  'get_doc_resource',
+  'prepare_database_migration',
+  'complete_database_migration',
+  'prepare_query_tuning',
+  'complete_query_tuning',
 ]);
 
 const MCP_TOOLS_ROOT = 'landing/mcp-src/tools';
@@ -476,7 +496,7 @@ async function buildMcpCoverage() {
 
   // Registered tool names — gate the final output to only known tools
   const currentTools = new Set(
-    [...defsSrc.matchAll(/name:\s*['"]([a-z_]+)['"]/g)].map((m) => m[1]),
+    [...defsSrc.matchAll(/name:\s*['"]([a-z_]+)['"]/g)].map((m) => m[1])
   );
 
   // Build function-level call graphs
@@ -495,7 +515,7 @@ async function buildMcpCoverage() {
   for (const [tool, { apiCalls, fnCalls }] of Object.entries(toolHandlers)) {
     const level1 = new Set(apiCalls);
     for (const fn of fnCalls) {
-      for (const op of (fnToApi[fn] ?? [])) level1.add(op);
+      for (const op of fnToApi[fn] ?? []) level1.add(op);
     }
     const total = new Set(level1);
     for (const fn of fnCalls) {
@@ -529,7 +549,7 @@ async function buildMcpCoverage() {
         (toolToLevel1[a]?.has(op) ? 0 : 1) - (toolToLevel1[b]?.has(op) ? 0 : 1) ||
         (toolToLevel1[a]?.size ?? 99) - (toolToLevel1[b]?.size ?? 99) ||
         (toolToOps[a]?.size ?? 99) - (toolToOps[b]?.size ?? 99) ||
-        a.localeCompare(b),
+        a.localeCompare(b)
     );
     coverage[op] = tools[0];
   }
@@ -684,10 +704,13 @@ function describeZodField(name, initializer) {
   // enum is treated as 'string' to match the legacy parser's fallback.
   const baseMethod = chain[0].method;
   const type =
-    baseMethod === 'boolean' ? 'boolean'
-    : baseMethod === 'number' ? 'number'
-    : baseMethod === 'enum' ? 'enum'
-    : 'string';
+    baseMethod === 'boolean'
+      ? 'boolean'
+      : baseMethod === 'number'
+        ? 'number'
+        : baseMethod === 'enum'
+          ? 'enum'
+          : 'string';
 
   let optional = false;
   let description = null;
