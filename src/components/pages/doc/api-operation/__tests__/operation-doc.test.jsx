@@ -78,5 +78,14 @@ describe('OperationDoc', () => {
     const responseHeading = screen.getByRole('heading', { name: 'Response' });
     expect(responseHeading).toHaveClass('text-[28px]', 'lg:text-[24px]', 'md:text-[20px]');
     expect(responseHeading.parentElement).toHaveClass('mb-4.5');
+
+    const parametersSection = screen
+      .getByRole('heading', { name: 'Parameters' })
+      .closest('section');
+    expect(parametersSection.querySelector('h2 + div > div')).toHaveClass(
+      'border-b',
+      'py-4',
+      'last:border-b-0'
+    );
   });
 });
