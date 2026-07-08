@@ -40,7 +40,8 @@ describe('Middleware - AI Agent Integration Tests', () => {
     middleware = middlewareModule.proxy;
   });
   beforeEach(() => {
-    vi.clearAllMocks();
+    global.fetch.mockReset();
+    global.fetch.mockImplementation(() => Promise.resolve({ ok: true }));
   });
 
   const createMockRequest = (pathname, userAgent = '', accept = '') => ({
@@ -209,11 +210,12 @@ describe('Middleware - AI Agent Integration Tests', () => {
   });
 
   describe('Error handling', () => {
-    it('should return agent-friendly 404 markdown when markdown fetch returns 404', async () => {
+    it('should return agent-friendly 404 markdown when markdown fetch returns 404 without a redirect', async () => {
       const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
 
       global.fetch
         .mockResolvedValueOnce({ ok: false, status: 404 }) // markdown 404
+        .mockResolvedValueOnce({ ok: false, status: 404, headers: new Headers() }) // redirect lookup
         .mockResolvedValueOnce({ ok: true }); // analytics
 
       const response = await middleware(req);
@@ -228,11 +230,42 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(text).toContain('/docs/llms-full.txt');
     });
 
+    it('should serve target markdown for redirectFrom docs URLs requested by AI agents', async () => {
+      const req = createMockRequest('/docs/cli/login', 'Claude/1.0', 'text/html');
+
+      global.fetch
+        .mockResolvedValueOnce({ ok: false, status: 404 })
+        .mockResolvedValueOnce({
+          ok: false,
+          status: 308,
+          headers: new Headers({ location: '/docs/cli/auth' }),
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          status: 200,
+          text: () => Promise.resolve('# Neon CLI command: auth'),
+        })
+        .mockResolvedValueOnce({ ok: true });
+
+      const response = await middleware(req);
+
+      expect(global.fetch).toHaveBeenNthCalledWith(1, 'https://neon.com/md/docs/cli/login.md');
+      expect(global.fetch).toHaveBeenNthCalledWith(2, 'https://neon.com/docs/cli/login', {
+        headers: { Accept: 'text/html' },
+        redirect: 'manual',
+      });
+      expect(global.fetch).toHaveBeenNthCalledWith(3, 'https://neon.com/md/docs/cli/auth.md');
+      expect(response.status).toBe(200);
+      expect(response.headers.get('X-Content-Source')).toBe('markdown');
+      expect(await response.text()).toContain('# Neon CLI command: auth');
+    });
+
     it('should use shorter cache TTL for agent 404 responses', async () => {
       const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
 
       global.fetch
         .mockResolvedValueOnce({ ok: false, status: 404 })
+        .mockResolvedValueOnce({ ok: false, status: 404, headers: new Headers() })
         .mockResolvedValueOnce({ ok: true });
 
       const response = await middleware(req);
@@ -280,14 +313,16 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(global.fetch).toHaveBeenCalledTimes(1);
     });
 
-    it('should return markdown 404 page for non-agent .md URLs that do not exist', async () => {
+    it('should return markdown 404 page for non-agent .md URLs that do not exist without a redirect', async () => {
       const req = createMockRequest(
         '/docs/introduction/foobar.md',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'text/html'
       );
 
-      global.fetch.mockResolvedValueOnce({ ok: false, status: 404 });
+      global.fetch
+        .mockResolvedValueOnce({ ok: false, status: 404 })
+        .mockResolvedValueOnce({ ok: false, status: 404, headers: new Headers() });
 
       const response = await middleware(req);
 
@@ -296,7 +331,40 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
       expect(response.headers.get('X-Content-Source')).toBe('md-404');
       expect(await response.text()).toContain('/docs/introduction/foobar.md');
-      expect(global.fetch).toHaveBeenCalledTimes(1);
+      expect(global.fetch).toHaveBeenCalledTimes(2);
+    });
+
+    it('should serve target markdown for redirectFrom docs URLs requested with .md suffix', async () => {
+      const req = createMockRequest(
+        '/docs/cli/function.md',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'text/html'
+      );
+
+      global.fetch
+        .mockResolvedValueOnce({ ok: false, status: 404 })
+        .mockResolvedValueOnce({
+          ok: false,
+          status: 308,
+          headers: new Headers({ location: '/docs/cli/functions' }),
+        })
+        .mockResolvedValueOnce({
+          ok: true,
+          status: 200,
+          text: () => Promise.resolve('# Neon CLI command: functions'),
+        });
+
+      const response = await middleware(req);
+
+      expect(global.fetch).toHaveBeenNthCalledWith(1, 'https://neon.com/md/docs/cli/function.md');
+      expect(global.fetch).toHaveBeenNthCalledWith(2, 'https://neon.com/docs/cli/function', {
+        headers: { Accept: 'text/html' },
+        redirect: 'manual',
+      });
+      expect(global.fetch).toHaveBeenNthCalledWith(3, 'https://neon.com/md/docs/cli/functions.md');
+      expect(response.status).toBe(200);
+      expect(response.headers.get('X-Content-Source')).toBe('markdown');
+      expect(await response.text()).toContain('# Neon CLI command: functions');
     });
 
     it('should pass through static .md files under docs/ai/ without rewriting', async () => {

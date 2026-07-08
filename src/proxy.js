@@ -63,6 +63,54 @@ function trackLLMPageview(req, { is404 = false } = {}) {
 
 const BLOG_CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
 
+async function fetchMarkdown(pathname, origin) {
+  const markdownPath = getMarkdownPath(pathname);
+
+  if (!markdownPath) return null;
+
+  const response = await fetch(`${origin}${markdownPath}`);
+  return { markdownPath, response };
+}
+
+async function resolveRedirectDestination(pathname, origin) {
+  const htmlPathname = pathname.endsWith('.md') ? pathname.slice(0, -3) : pathname;
+
+  try {
+    const response = await fetch(`${origin}${htmlPathname}`, {
+      headers: { Accept: 'text/html' },
+      redirect: 'manual',
+    });
+
+    if (response.status < 300 || response.status >= 400) return null;
+
+    const location = response.headers.get('location');
+    if (!location) return null;
+
+    return new URL(location, origin).pathname;
+  } catch (error) {
+    console.error('[.md] Error resolving markdown redirect', { pathname, error: error.message });
+    return null;
+  }
+}
+
+async function fetchMarkdownOrRedirectTarget(pathname, origin) {
+  let markdownFetch;
+
+  try {
+    markdownFetch = await fetchMarkdown(pathname, origin);
+  } catch (error) {
+    console.error('[.md] Error fetching markdown', { pathname, error: error.message });
+    return null;
+  }
+
+  if (!markdownFetch || markdownFetch.response.status !== 404) return markdownFetch;
+
+  const redirectDestination = await resolveRedirectDestination(pathname, origin);
+  if (!redirectDestination) return markdownFetch;
+
+  return fetchMarkdown(redirectDestination, origin);
+}
+
 export async function proxy(req) {
   try {
     const { pathname } = req.nextUrl;
@@ -121,12 +169,11 @@ export async function proxy(req) {
 
     if (isAIAgentRequest(req)) {
       let agentHit404 = false;
-      const markdownPath = getMarkdownPath(pathname);
+      const markdownFetch = await fetchMarkdownOrRedirectTarget(pathname, req.nextUrl.origin);
 
-      if (markdownPath) {
+      if (markdownFetch) {
         try {
-          const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
-          const response = await fetch(markdownUrl);
+          const { markdownPath, response } = markdownFetch;
 
           if (response.ok) {
             trackLLMPageview(req);
@@ -191,12 +238,11 @@ export async function proxy(req) {
     // Vary: Accept is only set on markdown-negotiated responses (applyDocHeaders above).
     if (isContentRoute(pathname)) {
       if (pathname.endsWith('.md')) {
-        const markdownPath = getMarkdownPath(pathname);
+        const markdownFetch = await fetchMarkdownOrRedirectTarget(pathname, req.nextUrl.origin);
 
-        if (markdownPath) {
+        if (markdownFetch) {
           try {
-            const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
-            const response = await fetch(markdownUrl);
+            const { response } = markdownFetch;
 
             if (response.ok) {
               const markdown = await response.text();
