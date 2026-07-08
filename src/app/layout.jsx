@@ -6,7 +6,6 @@ import Script from 'next/script';
 import RiveWasm from 'components/shared/rive-wasm';
 import LINKS from 'constants/links';
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
-import { InterfaceTabsProvider } from 'contexts/interface-tabs-context';
 import { TabsProvider } from 'contexts/tabs-context';
 import { TopbarProvider } from 'contexts/topbar-context';
 
@@ -42,9 +41,7 @@ const RootLayout = ({ children }) => (
         <HomepageVisitProvider>
           <TopbarProvider>
             <TabsProvider>
-              <CodeTabsProvider>
-                <InterfaceTabsProvider>{children}</InterfaceTabsProvider>
-              </CodeTabsProvider>
+              <CodeTabsProvider>{children}</CodeTabsProvider>
             </TabsProvider>
           </TopbarProvider>
         </HomepageVisitProvider>
