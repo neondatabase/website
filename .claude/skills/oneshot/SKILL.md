@@ -91,7 +91,30 @@ the Supported guides table, and aggregate into a single report.
 Confirm the Neon MCP tools are available (`mcp__Neon__create_project`,
 `mcp__Neon__get_connection_string`, `mcp__Neon__run_sql`,
 `mcp__Neon__delete_project`). If not, stop and tell the user the Neon MCP
-server needs to be connected.
+server needs to be connected — this skill has no credentials of its own; it
+only ever acts through whichever Neon account the *runner's own* MCP server
+is authenticated as. Provisioning always happens in the runner's own Neon
+account, never a shared or hardcoded one.
+
+**Resolve the organization.** `create_project` requires an `org_id` whenever
+the account belongs to more than one organization, and fails outright
+without it — this is not an edge case, it's the default for any Neon account
+that's part of a team. Resolve it once, up front, before asking for the
+provisioning confirmation below:
+
+```
+mcp__Neon__list_organizations()
+```
+
+- **Zero or one organization returned** — use it automatically (or the
+  account's personal default if the tool returns none). No need to ask.
+- **More than one** — ask the user once which org to use for this whole run:
+
+  > This Neon account belongs to multiple organizations: <list names/ids>.
+  > Which one should the throwaway test project(s) go in?
+
+  Cache the answer for every guide in this run (including `--all-with-prompts`
+  batches) — never ask per guide.
 
 **Network reachability check.** Before running any guide that requires package
 installation (`pip`, `go get`/`go mod`, etc.), check whether the relevant
@@ -125,11 +148,12 @@ behavior.
 
 `create_project` and `delete_project` are marked destructive by the MCP
 server itself and must never be called without explicit confirmation. Ask
-**once**, up front, for the whole run (not once per guide in a batch):
+**once**, up front, for the whole run (not once per guide in a batch),
+naming the resolved org:
 
-> This will create N throwaway Neon project(s) — one per guide under test
-> (`oneshot-<slug>-<timestamp>`) — and delete all of them at the end, once
-> results are captured. Proceed?
+> This will create N throwaway Neon project(s) in **<org name>** — one per
+> guide under test (`oneshot-<slug>-<timestamp>`) — and delete all of them at
+> the end, once results are captured. Proceed?
 
 Do not continue until confirmed.
 
@@ -137,10 +161,10 @@ Do not continue until confirmed.
 
 ## Step 3 — Provision
 
-Per guide:
+Per guide, passing the `org_id` resolved in Step 2:
 
 ```
-mcp__Neon__create_project(name="oneshot-<slug>-<epoch>")
+mcp__Neon__create_project(name="oneshot-<slug>-<epoch>", org_id="<resolved org_id>")
 mcp__Neon__get_connection_string(projectId=<id from above>)
 ```
 
@@ -404,7 +428,15 @@ Full report: ~/oneshot-tests/nextjs-1751980800/README.md
    the fix is just a one-time `pip3 config set` / `go env -w`. Only mark a
    run `INCONCLUSIVE (test-infrastructure)` if the registry is unreachable
    even through its approved proxy.
-6. **CopyPrompt files are a live signal, not a workaround.** Guides that
+6. **This skill has no credentials of its own — every run acts as whoever's
+   Neon MCP server is connected.** There's nothing to configure to "give the
+   skill access" beyond the runner having their own Neon MCP server
+   authenticated. The one thing that *will* trip up a first-time runner:
+   `create_project` fails outright if their account belongs to more than one
+   org and no `org_id` is given — resolve this explicitly in Step 2
+   (`list_organizations`, ask once if there's more than one) rather than
+   letting a teammate hit a raw API error on their first run.
+7. **CopyPrompt files are a live signal, not a workaround.** Guides that
    already ship a `public/prompts/*.md` companion are guides the docs team
    already suspected weren't self-sufficient for agents. Use that file as a
    diff target, not as something to feed the subject — feeding it to the
