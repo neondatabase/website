@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-08T18:21:32.749Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
@@ -104,6 +104,18 @@ Neon places computes into an idle state and closes connections after 5 minutes o
 </Admonition>
 
 You can find all of the connection details listed above by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+
+Add a `.env` file to your project's root directory with the individual connection parameters (not a single `DATABASE_URL`, since Django's `DATABASES` setting expects separate fields):
+
+```shell shouldWrap
+PGHOST="<endpoint_hostname>.neon.tech"
+PGDATABASE="<dbname>"
+PGUSER="<user>"
+PGPASSWORD="<password>"
+PGPORT=5432
+```
+
+> Replace `<endpoint_hostname>`, `<dbname>`, `<user>`, and `<password>` with your actual database credentials.
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
 

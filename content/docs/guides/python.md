@@ -10,7 +10,7 @@ summary: >-
   the SQLAlchemy or Django guides when you need raw SQL driver code rather than
   an ORM.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-08T18:21:32.749Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 
@@ -73,7 +73,7 @@ For your Python project, create a project directory, set up a virtual environmen
     </CodeTabs>
 
 3.  Install the required libraries using `pip`.
-    - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3).
+    - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3). **Recommended** for new projects.
     - `psycopg2-binary`: An older, widely-used synchronous database adapter.
     - `asyncpg`: The asynchronous database adapter for connecting to Postgres.
     - `python-dotenv`: A helper library to manage environment variables.
@@ -82,7 +82,7 @@ For your Python project, create a project directory, set up a virtual environmen
     pip install "psycopg[binary]" psycopg2-binary asyncpg python-dotenv
     ```
 
-    > Install the library that best fits your project needs. This guide provides examples for all three.
+    > If you're not sure which driver to use, use `psycopg` (v3). It's the actively maintained successor to `psycopg2`. This guide provides examples for all three in case your project already depends on one of the others.
 
 ## Store your Neon connection string
 
