@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-07-07T20:11:36.426Z'
+updatedOn: '2026-07-08T19:08:38.015Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -211,6 +211,10 @@ model: 'gemini-2-5-flash'
 ```
 
 See [Models](/docs/ai-gateway/models) for the full list of available model IDs.
+
+<Callout title="Using the AI SDK?">
+For TypeScript apps and agents, use [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) with the Vercel AI SDK. It reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN`, then routes each catalog model to the best AI Gateway endpoint for that provider.
+</Callout>
 
 </Steps>
 

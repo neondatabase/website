@@ -209,7 +209,7 @@ import OpenAI from "openai";
 const client = new OpenAI(); // reads OPENAI_API_KEY + OPENAI_BASE_URL from the env
 
 const res = await client.responses.create({
-  model: "gpt-5-mini", // swap to claude-sonnet-4-6, gemini-2-5-flash, ...
+  model: "gpt-5-mini", // Responses only accepts OpenAI models
   input: "What is Neon?",
 });
 ```
