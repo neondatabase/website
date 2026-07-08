@@ -139,15 +139,29 @@ function Divider() {
   return <div className="h-px w-full shrink-0 bg-gray-new-90 dark:bg-gray-new-20" />;
 }
 
-export function DocField({ node, path, labels, row, depth = 0, defaultOpen = depth === 0 }) {
+export function DocField({
+  node,
+  path,
+  labels,
+  row,
+  depth = 0,
+  defaultOpen = depth === 0,
+  variant = 'bordered',
+}) {
   const [open, setOpen] = useState(defaultOpen);
   const childrenId = useId();
   const hasChildren = node.children?.length > 0;
   const title = fieldTitle(path, node, labels);
   const defaultLabel = fieldDefaultLabel(path, node, labels);
+  const isBare = variant === 'bare';
 
   return (
-    <div className="px-1">
+    <div
+      className={cn(
+        'px-1',
+        !isBare && 'border-b border-gray-new-90 py-4 last:border-b-0 dark:border-gray-new-20'
+      )}
+    >
       <div
         className="grid gap-x-2.5 gap-y-3 md:block"
         style={{ gridTemplateColumns: 'minmax(220px, 314px) minmax(0, 1fr)' }}
@@ -219,6 +233,7 @@ export function DocField({ node, path, labels, row, depth = 0, defaultOpen = dep
                     row={row}
                     depth={depth + 1}
                     defaultOpen={false}
+                    variant={variant}
                   />
                   {index < node.children.length - 1 && <Divider />}
                 </Fragment>
@@ -256,6 +271,7 @@ DocField.propTypes = {
   }),
   depth: PropTypes.number,
   defaultOpen: PropTypes.bool,
+  variant: PropTypes.oneOf(['bordered', 'bare']),
 };
 
 function SectionCard({ section, bodyTree, labels, isFirst }) {
@@ -327,6 +343,7 @@ function SectionCard({ section, bodyTree, labels, isFirst }) {
                 path={path}
                 labels={labels}
                 row={{ common, outOfObject, schemaPath: section.schemaPath }}
+                variant="bare"
               />
               {index < rows.length - 1 && <Divider />}
             </Fragment>
@@ -445,7 +462,13 @@ export function DocBodySection({ bodyTree, requestBody }) {
         <div className="flex flex-col gap-4 border border-gray-new-90 bg-white p-4 dark:border-gray-new-20 dark:bg-black-pure">
           {bodyTree.map((node, index) => (
             <Fragment key={node.key}>
-              <DocField node={node} path={node.key} labels={labels} defaultOpen={false} />
+              <DocField
+                node={node}
+                path={node.key}
+                labels={labels}
+                defaultOpen={false}
+                variant="bare"
+              />
               {index < bodyTree.length - 1 && <Divider />}
             </Fragment>
           ))}
