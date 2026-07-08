@@ -23,6 +23,10 @@ How you authenticate depends on who calls the function:
 
 When [Managed BetterAuth](/docs/auth/overview) is enabled on the branch, the function gets `NEON_AUTH_JWKS_URL` and `NEON_AUTH_BASE_URL` injected at runtime. Verify incoming tokens against the JWKS with [`jose`](https://github.com/panva/jose), and check that the token's issuer matches your Managed BetterAuth URL. Build the remote key set once at module scope, then verify on each request:
 
+```bash
+npm install jose
+```
+
 ```ts filename="functions/secure.ts"
 import { createRemoteJWKSet, jwtVerify } from 'jose';
 

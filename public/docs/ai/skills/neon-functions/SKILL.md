@@ -166,7 +166,7 @@ functions: {
   todos: {
     name: "todo api",
     source: "src/index.ts",
-    env: { OPENAI_API_KEY: process.env.OPENAI_API_KEY! },
+    env: { MY_SECRET_KEY: process.env.MY_SECRET_KEY! },
   },
 }
 ```
