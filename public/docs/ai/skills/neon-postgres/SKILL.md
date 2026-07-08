@@ -62,9 +62,10 @@ Before starting setup, inspect the user's codebase and environment:
 
 ### Self-Driving Setup With Neon's CLI or MCP Server
 
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
+Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. For a truly headless flow, require `NEON_API_KEY` first; without it, `init` falls back to browser OAuth and waits for the user to complete authentication.
 
 ```bash
+export NEON_API_KEY=<user-provided-api-key>
 npx -y neon@latest init --agent <agent-name>
 ```
 

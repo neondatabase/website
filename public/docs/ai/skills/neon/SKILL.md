@@ -114,11 +114,14 @@ Before starting setup, inspect the user's codebase and environment:
 
 ### Self-Driving Setup With Neon's CLI or MCP Server
 
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run `npx -y neon@latest init`. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
+Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run `npx -y neon@latest init --agent <agent-name>`. Use `npx -y` to skip the package install prompt. For a truly headless flow, require `NEON_API_KEY` first; without it, `init` falls back to browser OAuth and waits for the user to complete authentication.
 
 ```bash
-npx -y neon@latest init
+export NEON_API_KEY=<user-provided-api-key>
+npx -y neon@latest init --agent <agent-name>
 ```
+
+Supported `--agent` values include `cursor`, `copilot`, `claude`, `claude-desktop`, `codex`, `opencode`, `cline`, `gemini-cli`, `goose`, and `zed`.
 
 This installs the Neon CLI and MCP server globally, installs the VSCode extension (for Cursor/VS Code), and adds the `neon` and `neon-postgres` agent skills to the project.
 
@@ -133,7 +136,7 @@ Prefer the CLI over the MCP server unless the user instructs otherwise, since it
 
 ### Setup Flow
 
-Once the CLI, MCP server, and agent skills are installed, ensure the local workspace is linked to a Neon project through the `neon init` flow. If it isn't, run `npx -y neon link` to let the user interactively link a project. This produces a `.neon` file pointing to the organization, project, and branch the user wants to work with.
+Once the CLI, MCP server, and agent skills are installed, ensure the local workspace is linked to a Neon project through the `neon init` flow. If it isn't, use `npx -y neon link --agent` for an agent-driven JSON linking flow, or ask the user to run plain `npx -y neon link` themselves if they prefer the interactive picker. This produces a `.neon` file pointing to the organization, project, and branch the user wants to work with.
 
 For each Neon service, consult that component's agent skill for service-specific setup instructions (Functions, Postgres, Object Storage, Gateway, and so on).
 
@@ -153,14 +156,16 @@ Default to a branch-first loop that mirrors `git`: one isolated Neon branch per 
 - `neon checkout <branch-name>` — Checks out an existing branch by updating only the branch pointer in `.neon`. Run without a name for an interactive picker. In an interactive terminal, a missing branch name prompts to create it. In a non-interactive shell, a missing branch name errors instead; create it first with `neon branches create --name <branch-name>`, then run `neon checkout <branch-name>`. It does not touch code or local Postgres.
 - `neon env pull` — Fetches the current branch's Neon environment variables (`DATABASE_URL`, …) into your existing `.env`, or `.env.local` if you don't have one (override the target with `--file`). No branch ID needed; it reads `.neon`. **`link` and `checkout` run this for you by default**, so you rarely call it directly.
 
-Run `link` once when starting on a project, then `checkout` per feature:
+Run `link` once when starting on a project, then create and check out one branch per feature:
 
 ```bash
-neon link                     # once; also pulls the linked branch's env
-neon checkout dev-add-search  # per feature; also pulls the branch's env
+export NEON_API_KEY=<user-provided-api-key>
+neon link --agent
+neon branches create --name dev-add-search
+neon checkout dev-add-search
 ```
 
-Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local `.env` automatically — build against it, then `checkout` the next branch and repeat. As the agent, drive this loop yourself: create a branch when needed, then run `checkout` between tasks to get a fresh, isolated database per feature with no shared state to corrupt.
+Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local `.env` automatically — build against it, then create and `checkout` the next branch and repeat. As the agent, drive this loop yourself: create a branch when needed, then run `checkout` between tasks to get a fresh, isolated database per feature with no shared state to corrupt.
 
 ### Updating `.neon` without interactive prompts
 
@@ -168,8 +173,9 @@ Plain `neon link` / `neon checkout` prompt interactively, which an agent can't a
 
 - **`neon link --agent`** — a JSON state machine for agents. Each call returns a single JSON object with a `status` (`needs_org` → `needs_project` → `needs_project_details` → `linked`, or `error`), the available `options`, and the exact `next_command_template` to run next. Drive it step by step until `status: "linked"`. (Errors also come back as JSON with exit code 1, so you can always parse the result.)
 - **`neon set-context --project-id <id> --org-id <id> --branch-id <id>`** — when you already know the IDs, write all three into `.neon` in one shot. This is a **destructive write**: it replaces the file's contents entirely with exactly these fields, so it's the most direct way to point `.neon` at a specific org / project / branch.
+- **`neon branches create --name <branch-name>` then `neon checkout <branch-name>`** — the non-interactive-safe branch creation path. Do not rely on `checkout` to create a missing branch in headless shells; it only offers creation from an interactive prompt.
 
-Both avoid prompts entirely; reach for `set-context` when you have the IDs and `link --agent` when you need to discover them.
+These avoid prompts entirely; reach for `set-context` when you have the IDs, `link --agent` when you need to discover them, and explicit `branches create` before `checkout` when starting a new feature branch.
 
 ### Opting out of local env vars
 
