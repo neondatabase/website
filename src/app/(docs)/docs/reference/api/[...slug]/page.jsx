@@ -6,9 +6,9 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 import ApiOperation from 'components/pages/doc/api-operation';
+import InterfaceQueryParamSync from 'components/pages/doc/api-operation/interface-query-param-sync';
 import ApiTagPage from 'components/pages/doc/api-tag-page';
 import EndpointIndexPage from 'components/pages/doc/endpoint-index/endpoint-index';
-import InterfaceTabActivator from 'components/pages/doc/interface-tabs/interface-tab-activator';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH } from 'constants/content';
@@ -177,9 +177,9 @@ const ApiRefPage = async (props) => {
 
   // Hoisted so Next.js sees a guaranteed Suspense boundary for useSearchParams
   // on every code path in this route, preventing prerender bail-out.
-  const tabActivator = (
+  const interfaceQueryParamSync = (
     <Suspense>
-      <InterfaceTabActivator />
+      <InterfaceQueryParamSync />
     </Suspense>
   );
 
@@ -193,7 +193,7 @@ const ApiRefPage = async (props) => {
     const tableOfContents = getTableOfContents(content);
     return (
       <>
-        {tabActivator}
+        {interfaceQueryParamSync}
         <Post
           content={content}
           data={data}
@@ -218,7 +218,7 @@ const ApiRefPage = async (props) => {
 
     return (
       <>
-        {tabActivator}
+        {interfaceQueryParamSync}
         <ApiTagPage
           tag={tag}
           tagDisplay={tagDisplay}
@@ -241,7 +241,7 @@ const ApiRefPage = async (props) => {
 
   return (
     <>
-      {tabActivator}
+      {interfaceQueryParamSync}
       <ApiOperation
         operation={operation}
         breadcrumbs={breadcrumbs}

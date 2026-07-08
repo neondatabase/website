@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
-import { Suspense } from 'react';
 import remarkGfm from 'remark-gfm';
 
 import ApiMethodBadge from 'components/pages/doc/api-method-badge';
@@ -28,9 +27,6 @@ import DocsLink from 'components/pages/doc/docs-link';
 import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
-import InterfaceStrip from 'components/pages/doc/interface-strip';
-import InterfaceTabActivator from 'components/pages/doc/interface-tabs/interface-tab-activator';
-import InterfaceTabPanel from 'components/pages/doc/interface-tabs/interface-tab-panel';
 import LinkPreview from 'components/pages/doc/link-preview';
 import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
 import Steps from 'components/pages/doc/steps';
@@ -202,13 +198,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   QuoteBlock,
   Tabs,
   TabItem,
-  InterfaceStrip,
-  InterfaceTabActivator: (props) => (
-    <Suspense>
-      <InterfaceTabActivator {...props} />
-    </Suspense>
-  ),
-  InterfaceTabPanel,
   InfoBlock,
   LinkPreview,
   DocsList,
