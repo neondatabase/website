@@ -75,7 +75,7 @@ For typed, validated access to the injected credentials, pass the same config ob
 
 ## Environment variables
 
-When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **OpenAI-standard** env vars (so the OpenAI SDK and AI SDK work from the environment with no config), plus `NEON_`-branded aliases. Inside a deployed Neon Function these are injected automatically; locally, `neon env pull` writes them to `.env`/`.env.local` (or use `neon-env run -- <cmd>` to inject at runtime without a file):
+When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **OpenAI-standard** env vars (so the OpenAI SDK and AI SDK work from the environment with no config), plus `NEON_`-branded aliases. Inside a deployed Neon Function these are injected automatically; locally, `neon env pull` writes them to `.env`/`.env.local`:
 
 | Variable                   | Meaning                                                                                                                                    |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -89,7 +89,7 @@ The two base URLs are **different**: `OPENAI_BASE_URL` already includes the full
 - `/ai-gateway/mlflow/v1` — unified, OpenAI **Chat Completions**-compatible; recommended default, works with every provider.
 - `/ai-gateway/openai/v1` — OpenAI **Responses** API (required for `gpt-5-…-codex` variants). This is the route `OPENAI_BASE_URL` already points at, because the `@ai-sdk/openai` provider uses the Responses API by default.
 - `/ai-gateway/anthropic/v1` — native Anthropic Messages (extended thinking, prompt caching).
-- `/ai-gateway/gemini/v1beta/...` — native Gemini `generateContent`.
+- `/ai-gateway/gemini/v1beta/...` — native Gemini `generateContent` / `streamGenerateContent`.
 
 So `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` is the chat-completions endpoint, `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1` equals `OPENAI_BASE_URL`, and so on. If you only have `OPENAI_BASE_URL` and need chat completions, swap the dialect: `baseUrl.replace("/openai/v1", "/mlflow/v1")` (this is what the Mastra example does).
 

@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-07T20:11:36.426Z'
+updatedOn: '2026-07-08T18:57:57.577Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -70,9 +70,9 @@ The request body does not contain a valid `model` field.
 
 ### `404 unsupported gemini action`
 
-The action in the Gemini endpoint URL is not `generateContent`.
+The action in the Gemini endpoint URL is not `generateContent` or `streamGenerateContent`.
 
-**Fix:** Only `generateContent` is supported. The URL must end with `:<model-id>:generateContent`. Other actions (`countTokens`, `streamGenerateContent`, etc.) are not available.
+**Fix:** Use either `:<model-id>:generateContent` or `:<model-id>:streamGenerateContent`. Other actions (`countTokens`, etc.) are not available.
 
 ### `404 invalid gemini model path`
 
