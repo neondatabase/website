@@ -102,13 +102,15 @@ describe('DocBodySection', () => {
     );
 
     expect(screen.getByRole('heading', { name: 'Request body' })).toBeInTheDocument();
-    expect(screen.getByText(/No field is required/)).toBeInTheDocument();
+    expect(screen.queryByText(/No field is required/)).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Basics' })).toBeInTheDocument();
     expect(screen.getByText('commonly set')).toBeInTheDocument();
     expect(screen.getByText('Project name')).toBeInTheDocument();
     expect(screen.getByText('default: auto-generated')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Basics' }).closest('section')).toHaveClass(
       'mb-[-1px]',
+      'flex',
+      'p-4',
       'dark:bg-black-pure'
     );
     expect(screen.getByText('commonly set')).toHaveClass('text-green-44', 'dark:text-green-52');
