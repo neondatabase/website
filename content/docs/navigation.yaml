@@ -1034,6 +1034,8 @@
 
             - title: Serverless
               items:
+                - title: Best Practices for Serverless Connection Pooling
+                  slug: guides/serverless-connection-pooling
                 - title: AWS Lambda
                   slug: guides/aws-lambda
                 - title: Azure Functions
