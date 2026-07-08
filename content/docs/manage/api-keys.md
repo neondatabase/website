@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-07-08T18:50:11.212Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -24,6 +24,8 @@ Neon supports three types of API keys:
 | Personal API Key       | Any user                    | All organization projects where the user is a member | Valid until revoked; org project access ends if user leaves organization |
 | Organization API Key   | Organization administrators | All projects within the organization                 | Valid until revoked                                                      |
 | Project-scoped API Key | Organization administrators | Single specified project                             | Valid until revoked or project leaves organization                       |
+
+Only organization **Admins** can create organization or project-scoped keys. If you're an Editor, Viewer, or Collaborator, create a personal API key instead; it's scoped to your own access. See [User permissions](/docs/manage/user-permissions) for what each role can do.
 
 While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
 
@@ -127,7 +129,7 @@ curl --request POST \
 
 ### Create project-scoped organization API keys
 
-Project-scoped API keys have [member-level access](/docs/manage/organizations#user-roles-and-permissions), meaning they **cannot** delete the project they are associated with. These keys:
+Project-scoped API keys have [**Can edit** access](/docs/manage/user-permissions#per-project-permissions) on their project, meaning they can read and modify project resources but **cannot** delete the project or manage who can access it. These keys:
 
 - Can only access and manage the specified project
 - Cannot perform organization-related actions or create new projects

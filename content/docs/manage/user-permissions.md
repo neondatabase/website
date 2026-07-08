@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-07T18:44:31.469Z'
+updatedOn: '2026-07-08T18:50:11.212Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -88,14 +88,17 @@ Every member of an organization has one of four roles. Each role sets a baseline
 
 The following table shows what each role can do at the organization level:
 
-| Action                                   | Admin | Editor | Viewer | Collaborator |
-| ---------------------------------------- | :---: | :----: | :----: | :----------: |
-| Manage organization members and roles    |  ✅   |   ❌   |   ❌   |      ❌      |
-| Manage organization billing              |  ✅   |   ❌   |   ❌   |      ❌      |
-| Rename or delete the organization        |  ✅   |   ❌   |   ❌   |      ❌      |
-| Transfer projects into or out of the org |  ✅   |   ❌   |   ❌   |      ❌      |
-| See all organization projects            |  ✅   |   ✅   |   ✅   |      ❌      |
-| Create projects                          |  ✅   |   ✅   |   ✅   |      ❌      |
+| Action                                         | Admin | Editor | Viewer | Collaborator |
+| ---------------------------------------------- | :---: | :----: | :----: | :----------: |
+| Manage organization members and roles          |  ✅   |   ❌   |   ❌   |      ❌      |
+| Manage organization billing                    |  ✅   |   ❌   |   ❌   |      ❌      |
+| Rename or delete the organization              |  ✅   |   ❌   |   ❌   |      ❌      |
+| Transfer projects into or out of the org       |  ✅   |   ❌   |   ❌   |      ❌      |
+| Create organization or project-scoped API keys |  ✅   |   ❌   |   ❌   |      ❌      |
+| See all organization projects                  |  ✅   |   ✅   |   ✅   |      ❌      |
+| Create projects                                |  ✅   |   ✅   |   ✅   |      ❌      |
+
+Personal API keys are available to any member and are scoped to that member's own access. Only Admins can create organization or project-scoped API keys. See [Manage API keys](/docs/manage/api-keys).
 
 ## Per-project permissions
 
