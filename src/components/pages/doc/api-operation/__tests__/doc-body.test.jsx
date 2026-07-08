@@ -57,6 +57,32 @@ const SECTIONS = [
   },
 ];
 
+const DEEP_BODY_TREE = [
+  {
+    key: 'project',
+    type: 'object',
+    children: [
+      {
+        key: 'settings',
+        type: 'object',
+        children: [
+          {
+            key: 'maintenance_window',
+            type: 'object',
+            children: [
+              {
+                key: 'schedule',
+                type: 'object',
+                children: [{ key: 'weekdays', type: 'array' }],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
 describe('humanizeFieldName', () => {
   it('applies acronym and product-name overrides', () => {
     expect(humanizeFieldName('pg_version')).toBe('Postgres version');
@@ -160,6 +186,35 @@ describe('DocBodySection', () => {
     fireEvent.click(settingsToggle);
     expect(settingsToggle).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryByText('hipaa')).not.toBeInTheDocument();
+  });
+
+  it('keeps deeper nested object fields aligned with third-level children', () => {
+    const { container } = render(
+      <DocBodySection
+        bodyTree={DEEP_BODY_TREE}
+        requestBody={{
+          requiredFields: [],
+          labels: {},
+          sections: [
+            {
+              id: 'settings',
+              label: 'Project settings',
+              collapsed: false,
+              schemaPath: 'project.settings.*',
+              rows: [{ path: 'project.settings', common: false, outOfObject: false }],
+            },
+          ],
+        }}
+      />
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle Maintenance window field' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle Schedule field' }));
+
+    for (const key of ['maintenance_window', 'schedule', 'weekdays']) {
+      expect(screen.getByText(key).closest('.grid')).toHaveClass('pl-14', 'gap-x-5');
+    }
+    expect(container.querySelectorAll('[class*="left-[37px]"]')).toHaveLength(3);
   });
 
   it('falls back to a flat read-only tree when sections are absent', () => {
