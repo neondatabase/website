@@ -4,7 +4,7 @@ subtitle: Manage connection lifecycles and prevent connection exhaustion in high
 summary: >-
    Learn how to manage database connection lifecycles and prevent connection exhaustion when using Neon from highly elastic serverless platforms such as AWS Fargate, Google Cloud Run, Modal, and Vercel.
 enableTableOfContents: true
-updatedOn: '2026-07-08T11:47:12.663Z'
+updatedOn: '2026-07-08T13:03:28.664Z'
 ---
 
 Highly elastic serverless platforms such as AWS Fargate, Google Cloud Run, Modal, and Vercel can scale compute from zero to hundreds of concurrent instances within seconds. While Neon’s [lakebase architecture](/docs/introduction/architecture-overview) is designed for dynamic workloads, rapidly scaling out hundreds of workers can overwhelm your database unless connection lifecycles and local pool sizes are carefully managed.
@@ -125,7 +125,7 @@ Checkout the [Connection pooling](/docs/connect/connection-pooling) guide for a 
 
 On a traditional fixed server, a pool size of `max: 20` is standard. In serverless, the number of containers is dynamic, if 200 containers each hold 10 connections, that's 2,000 simultaneous connections before you've processed a single query.
 
-Set your local pool's maximum to **1 or 2 per container**. Let Neon's PgBouncer handle the multiplexing to Postgres. If your functions execute sequentially one query at a time, a pool size of `1` is optimal.
+Set your local pool's maximum to **1 or 2 per container**. Let Neon's PgBouncer handle the multiplexing to Postgres.
 
 ### Initialize your pool globally
 
@@ -201,7 +201,7 @@ import { attachDatabasePool } from '@vercel/functions';
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   max: 2,
-  idleTimeoutMillis: 10000,
+  idleTimeoutMillis: 5000,
 });
 attachDatabasePool(pool);
 ```
@@ -209,7 +209,9 @@ attachDatabasePool(pool);
 </TabItem>
 <TabItem>
 
-Modal provides the `@modal.exit()` lifecycle hook, which runs when a container is about to exit (including preemption). It gives the handler a 30-second grace period to close resources cleanly. Open the pool with `@modal.enter()` and close it with `@modal.exit()`:
+Modal provides lifecycle hooks for container startup and shutdown. Use `@modal.enter()` to open your pool when the container starts and `@modal.exit()` to close it before the container exits (including preemption, with a 30-second grace period). These hooks run once per container regardless of how many concurrent inputs it processes.
+
+When using Modal's input concurrency, match your pool's `max_size` to number of concurrent inputs per container.
 
 ```python
 import os
@@ -218,16 +220,19 @@ from psycopg_pool import ConnectionPool
 
 app = modal.App("neon-resilient-worker")
 
+CONCURRENCY = 10
+
 @app.cls(
     secrets=[modal.Secret.from_name("neon-db-secrets")],
 )
+@modal.concurrent(max_inputs=CONCURRENCY)
 class DatabaseWorker:
     @modal.enter()
     def open_pool(self):
         self.pool = ConnectionPool(
             conninfo=os.environ["DATABASE_URL"],
             min_size=1,
-            max_size=2,
+            max_size=CONCURRENCY,
             open=True,
         )
 
@@ -242,7 +247,7 @@ class DatabaseWorker:
         self.pool.close()
 ```
 
-See the [Modal lifecycle hooks guide](https://modal.com/docs/guide/lifecycle-functions#modalexit) for more on `@modal.exit()`.
+See the [Modal lifecycle hooks guide](https://modal.com/docs/guide/lifecycle-functions#modalexit) and [concurrent inputs guide](https://modal.com/docs/guide/concurrent-inputs) for details.
 
 </TabItem>
 <TabItem>
