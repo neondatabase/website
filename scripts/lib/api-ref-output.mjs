@@ -115,6 +115,7 @@ export function writeRunSummary(paths, { opCount, tagCount, extraDocCount }) {
   process.stderr.write(`  ${paths.markdownRoot}/{tag}/{slug}.md (${opCount} files)\n`);
   process.stderr.write(`  public/md/docs/reference/api.md\n`);
   process.stderr.write(`  ${paths.llmsRoot}/llms.txt\n`);
+  process.stderr.write(`  ${paths.llmsRoot}/llms-full.txt\n`);
   process.stderr.write(`  ${paths.markdownRoot}/{tag}.md (${tagCount} files)\n`);
   if (extraDocCount > 0)
     process.stderr.write(`  ${paths.markdownRoot}/[extra docs] (${extraDocCount} files)\n`);

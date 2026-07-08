@@ -259,6 +259,14 @@ describe('getMarkdownPath', () => {
       const result = getMarkdownPath('/docs/rss.xml');
       expect(result).toBeNull();
     });
+
+    it.each(['/docs/reference/api/llms.txt', '/docs/reference/api/llms-full.txt'])(
+      'should pass through static API reference index files: %s',
+      (path) => {
+        const result = getMarkdownPath(path);
+        expect(result).toBeNull();
+      }
+    );
   });
 
   describe('Invalid routes (should return null)', () => {

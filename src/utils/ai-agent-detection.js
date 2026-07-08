@@ -71,6 +71,10 @@ const CUSTOM_MARKDOWN_PATHS = {
 // - Route handlers that accept non-GET requests (docs/mcp), where the middleware
 //   would otherwise detect the non-HTML Accept header, try to serve /md/docs/mcp.md,
 //   fail with 404, and return a markdown error before the route handler fires.
+const STATIC_DOC_FILES = new Set([
+  'docs/reference/api/llms.txt',
+  'docs/reference/api/llms-full.txt',
+]);
 const STATIC_DOC_PREFIXES = ['docs/ai/skills/', 'docs/.well-known/', 'docs/mcp'];
 
 // Convert URL path to markdown file path
@@ -85,7 +89,8 @@ export function getMarkdownPath(pathname) {
 
   if (isExcluded) return null;
 
-  if (STATIC_DOC_PREFIXES.some((prefix) => path.startsWith(prefix))) return null;
+  if (STATIC_DOC_FILES.has(path) || STATIC_DOC_PREFIXES.some((prefix) => path.startsWith(prefix)))
+    return null;
 
   // Normalize .md suffix so /branching.md matches the branching route
   const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
