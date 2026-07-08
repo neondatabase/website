@@ -433,8 +433,11 @@ export const stackClientApp = new StackClientApp({
 ```tsx
 // src/auth.ts
 import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
+  adapter: BetterAuthReactAdapter(),
+});
 const { useSession } = authClient;
 ```
 
@@ -467,7 +470,7 @@ export function MyComponent() {
 import { useSession } from './auth';
 
 export function MyComponent() {
-  const { data: session } = useSession();
+  const { data } = useSession();
   const user = data?.user;
 
   return <div>{user ? `Hello, ${user.name || user.email}` : 'Not logged in'}</div>;
@@ -477,7 +480,7 @@ export function MyComponent() {
 </CodeTabs>
 
 **What changed**  
-Instead of a React hook from Stack Auth, you call `authClient.getSession()` and manage the session in your own component state.
+Instead of a React hook from Stack Auth, you call the `useSession()` hook from `authClient` and read the user from its response.
 
 ### Update provider setup (#react-update-provider)
 
