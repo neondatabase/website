@@ -49,7 +49,7 @@ describe('MDX to Markdown Conversion', () => {
       // Should have converted CodeTabs to bold labels
       expect(result).toContain('**node-postgres**');
       expect(result).toContain('**postgres.js**');
-      expect(result).toContain('**Neon serverless driver**');
+      expect(result).toContain('**Neon serverless driver (Recommended)**');
 
       // Should NOT have raw CodeTabs
       expect(result).not.toContain('<CodeTabs');
