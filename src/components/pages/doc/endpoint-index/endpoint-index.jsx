@@ -6,12 +6,11 @@ import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
+import ApiAiContextLink from 'components/pages/doc/api-ai-context-link';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DocFooter from 'components/shared/doc-footer';
-import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ExternalIcon from 'icons/external.inline.svg';
 import { METHOD_TEXT_FALLBACK_STYLE, METHOD_TEXT_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
@@ -225,14 +224,11 @@ const EndpointIndexPage = ({ tagGroups, total, breadcrumbs, navigationLinks, cur
       </h1>
 
       <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
-        <Link
-          className="inline-flex items-center gap-1 text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+        <ApiAiContextLink
           to="/docs/reference/api.md"
-        >
-          Markdown for AI context
-          <ExternalIcon className="size-3" />
-        </Link>
-        : API overview and all endpoints.
+          tooltipId="api-ai-context-endpoint-index"
+          tooltipDescription="API overview and all endpoints."
+        />
       </p>
 
       <div className="relative mt-4">

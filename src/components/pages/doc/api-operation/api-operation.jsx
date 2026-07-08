@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
 
+import ApiAiContextLink from 'components/pages/doc/api-ai-context-link';
 import ApiMethodBadge from 'components/pages/doc/api-method-badge';
 import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DropdownMenu from 'components/pages/doc/dropdown-menu';
 import Tag from 'components/pages/doc/tag';
 import DocFooter from 'components/shared/doc-footer';
-import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ExternalIcon from 'icons/external.inline.svg';
 import { INLINE_CODE_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
@@ -202,18 +201,13 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
           )}
 
           <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
-            <Link
-              className="inline-flex items-center gap-1 text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+            <ApiAiContextLink
               to={`/docs/${currentSlug}.md`}
-            >
-              Markdown for AI context
-              <ExternalIcon className="size-3" />
-            </Link>
-            {` (`}
-            <code className="text-[11px]">
-              {operation.method.toUpperCase()} {operation.path}
-            </code>
-            {`): parameters, examples, and available interfaces.`}
+              tooltipId={`api-ai-context-${operation.id}`}
+              tooltipLabel={operation.path}
+              tooltipLabelVariant="mono"
+              tooltipDescription="parameters, examples, and available interfaces."
+            />
           </p>
 
           <OperationDoc operation={operation} bodyTree={bodyTree} respTree={respTree} />
