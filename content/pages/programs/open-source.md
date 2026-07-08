@@ -1,6 +1,6 @@
 ---
 title: 'Neon Open Source Program'
-subtitle: Eligible projects receive up to $5,000 yearly in credits, referral payouts, and promotional support.
+subtitle: Eligible projects receive up to $5,000 yearly in credits and promotional support.
 enableTableOfContents: true
 updatedOn: '2025-10-16T09:00:00.000Z'
 image: '/images/social-previews/programs/open-source.jpg'
