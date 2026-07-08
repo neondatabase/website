@@ -50,15 +50,15 @@ TypeBadge.propTypes = {
   variant: PropTypes.oneOf(['type', 'value']),
 };
 
-function MetadataBadges({ node, row }) {
+function MetadataBadges({ node, row, includeRowMetadata = true }) {
   return (
     <>
-      {row?.common && (
+      {includeRowMetadata && row?.common && (
         <span className="rounded border border-green-52/40 bg-green-52/5 px-1 py-[3px] font-mono text-[14px] leading-[1.25] font-normal tracking-normal text-green-44 dark:bg-black-new dark:text-green-52">
           common
         </span>
       )}
-      {row?.outOfObject && (
+      {includeRowMetadata && row?.outOfObject && (
         <span className="rounded border border-gray-new-70 bg-gray-new-98 px-1 py-[3px] text-[14px] leading-[1.25] font-normal tracking-normal text-gray-new-50 dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-60">
           top-level field
         </span>
@@ -68,7 +68,7 @@ function MetadataBadges({ node, row }) {
           deprecated
         </span>
       )}
-      {row?.schemaPath && (
+      {includeRowMetadata && row?.schemaPath && (
         <span className="text-[16px] leading-[1.5] font-normal tracking-normal text-gray-new-50 dark:text-gray-new-80">
           {row.schemaPath}
         </span>
@@ -84,6 +84,7 @@ MetadataBadges.propTypes = {
     outOfObject: PropTypes.bool,
     schemaPath: PropTypes.string,
   }),
+  includeRowMetadata: PropTypes.bool,
 };
 
 function EnumPills({ node }) {
@@ -139,6 +140,12 @@ function Divider() {
   return <div className="h-px w-full shrink-0 bg-gray-new-90 dark:bg-gray-new-20" />;
 }
 
+function NestedDivider() {
+  return (
+    <div className="ml-14 h-px w-[calc(100%-3.5rem)] shrink-0 bg-gray-new-90 dark:bg-gray-new-20 md:ml-6 md:w-[calc(100%-1.5rem)]" />
+  );
+}
+
 export function DocField({
   node,
   path,
@@ -154,6 +161,9 @@ export function DocField({
   const title = fieldTitle(path, node, labels);
   const defaultLabel = fieldDefaultLabel(path, node, labels);
   const isBare = variant === 'bare';
+  const isNestedBare = isBare && depth > 0;
+  const isExpandableBare = isBare && hasChildren;
+  const columnWidth = isNestedBare ? 286 : isExpandableBare ? 304 : isBare ? 302 : 314;
 
   return (
     <div
@@ -163,42 +173,89 @@ export function DocField({
       )}
     >
       <div
-        className="grid gap-x-2.5 gap-y-3 md:block"
-        style={{ gridTemplateColumns: 'minmax(220px, 314px) minmax(0, 1fr)' }}
+        className={cn(
+          'grid gap-y-3 md:block',
+          isBare ? 'gap-x-5' : 'gap-x-2.5',
+          isNestedBare
+            ? 'pr-1 pl-14 md:pl-6'
+            : isExpandableBare
+              ? 'pr-1 pl-3.5 md:pl-0'
+              : isBare && 'pr-1 pl-4 md:pl-0'
+        )}
+        style={{ gridTemplateColumns: `minmax(220px, ${columnWidth}px) minmax(0, 1fr)` }}
       >
         <div>
-          <div className="flex flex-wrap items-start gap-1.5">
-            {hasChildren && (
-              <button
-                type="button"
-                onClick={() => setOpen((value) => !value)}
-                aria-label={`Toggle ${title} field`}
-                aria-expanded={open}
-                aria-controls={childrenId}
-                className="mt-1 flex size-3.5 items-center justify-center text-gray-new-50 dark:text-white"
-              >
-                <Chevron
-                  className={cn(
-                    'size-3.5 transition-transform [&_path]:fill-current',
-                    open && 'rotate-90'
-                  )}
-                />
-              </button>
-            )}
-            <span className="text-[16px] leading-[1.5] font-medium tracking-normal text-black-pure dark:text-white">
-              {title}
-            </span>
-            <MetadataBadges node={node} row={row} />
-          </div>
-          <code className="mt-1.5 block font-mono text-[15px] leading-[1.5] tracking-normal text-gray-new-50 dark:text-gray-new-70">
-            {node.key}
-          </code>
-          <div className="mt-2.5 flex flex-wrap items-start gap-2">
-            <TypeBadge label={node.type} />
-            {defaultLabel && <TypeBadge label={`default: ${defaultLabel}`} variant="value" />}
-          </div>
+          {isExpandableBare ? (
+            <>
+              <div className="flex items-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={() => setOpen((value) => !value)}
+                  aria-label={`Toggle ${title} field`}
+                  aria-expanded={open}
+                  aria-controls={childrenId}
+                  className="flex size-3.5 shrink-0 items-center justify-center text-gray-new-50 dark:text-white"
+                >
+                  <Chevron
+                    className={cn(
+                      'size-3.5 transition-transform [&_path]:fill-current',
+                      open && 'rotate-90'
+                    )}
+                  />
+                </button>
+                <div className="flex min-w-0 flex-1 flex-wrap items-start gap-1.5">
+                  <span className="text-[16px] leading-[1.5] font-medium tracking-normal text-black-pure dark:text-white">
+                    {title}
+                  </span>
+                  <MetadataBadges node={node} row={row} includeRowMetadata={false} />
+                </div>
+              </div>
+              <div className="mt-1.5 flex flex-col items-start gap-2.5 pl-6">
+                <code className="block font-mono text-[15px] leading-[1.5] tracking-normal text-gray-new-50 dark:text-gray-new-70">
+                  {node.key}
+                </code>
+                <div className="flex flex-wrap items-start gap-2">
+                  <TypeBadge label={node.type} />
+                  {defaultLabel && <TypeBadge label={`default: ${defaultLabel}`} variant="value" />}
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex flex-wrap items-start gap-1.5">
+                {hasChildren && (
+                  <button
+                    type="button"
+                    onClick={() => setOpen((value) => !value)}
+                    aria-label={`Toggle ${title} field`}
+                    aria-expanded={open}
+                    aria-controls={childrenId}
+                    className="mt-1 flex size-3.5 items-center justify-center text-gray-new-50 dark:text-white"
+                  >
+                    <Chevron
+                      className={cn(
+                        'size-3.5 transition-transform [&_path]:fill-current',
+                        open && 'rotate-90'
+                      )}
+                    />
+                  </button>
+                )}
+                <span className="text-[16px] leading-[1.5] font-medium tracking-normal text-black-pure dark:text-white">
+                  {title}
+                </span>
+                <MetadataBadges node={node} row={row} includeRowMetadata={!isNestedBare} />
+              </div>
+              <code className="mt-1.5 block font-mono text-[15px] leading-[1.5] tracking-normal text-gray-new-50 dark:text-gray-new-70">
+                {node.key}
+              </code>
+              <div className="mt-2.5 flex flex-wrap items-start gap-2">
+                <TypeBadge label={node.type} />
+                {defaultLabel && <TypeBadge label={`default: ${defaultLabel}`} variant="value" />}
+              </div>
+            </>
+          )}
         </div>
-        <div>
+        <div className={cn(isBare && 'md:mt-3')}>
           {descriptionHtml(node) ? (
             <div
               className={cn(
@@ -216,12 +273,11 @@ export function DocField({
           <ConstraintText node={node} />
         </div>
       </div>
-      {hasChildren && open && (
-        <div
-          id={childrenId}
-          className="mt-4 border-l border-gray-new-90 pl-4 dark:border-gray-new-20"
-        >
-          <div className="flex flex-col gap-4">
+      {hasChildren &&
+        open &&
+        (isBare ? (
+          <div id={childrenId} className="relative mt-6 flex flex-col gap-4">
+            <div className="pointer-events-none absolute top-0 bottom-0 left-[37px] w-px bg-gray-new-90 dark:bg-gray-new-20 md:left-3" />
             {node.children.map((child, index) => {
               const childPath = `${path}.${child.key}`;
               return (
@@ -235,13 +291,37 @@ export function DocField({
                     defaultOpen={false}
                     variant={variant}
                   />
-                  {index < node.children.length - 1 && <Divider />}
+                  {index < node.children.length - 1 && <NestedDivider />}
                 </Fragment>
               );
             })}
           </div>
-        </div>
-      )}
+        ) : (
+          <div
+            id={childrenId}
+            className="mt-4 border-l border-gray-new-90 pl-4 dark:border-gray-new-20"
+          >
+            <div className="flex flex-col gap-4">
+              {node.children.map((child, index) => {
+                const childPath = `${path}.${child.key}`;
+                return (
+                  <Fragment key={childPath}>
+                    <DocField
+                      node={child}
+                      path={childPath}
+                      labels={labels}
+                      row={row}
+                      depth={depth + 1}
+                      defaultOpen={false}
+                      variant={variant}
+                    />
+                    {index < node.children.length - 1 && <Divider />}
+                  </Fragment>
+                );
+              })}
+            </div>
+          </div>
+        ))}
     </div>
   );
 }
