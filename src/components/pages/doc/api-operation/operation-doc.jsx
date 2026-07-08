@@ -5,11 +5,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import ApiResponse from 'components/pages/doc/api-response';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
-import cn from 'utils/cn';
+import { cn } from 'utils/cn';
 
 import { DocBodySection, DocField, getRequiredLeafPaths } from './doc-body';
 import DocQuickStart from './doc-quick-start';
 import { useRespState, ResponseSection } from './operation-response';
+import { API_OPERATION_H2_WITH_MARGIN_CLASS_NAME } from './operation-shared';
 
 function parameterToNode(param) {
   return {
@@ -30,10 +31,7 @@ function parameterToNode(param) {
 
 const ParametersSection = ({ parameters }) => (
   <section className="mt-9">
-    <h2
-      id="parameters"
-      className="mb-4 scroll-mt-20 text-base leading-tight font-semibold tracking-tight"
-    >
+    <h2 id="parameters" className={API_OPERATION_H2_WITH_MARGIN_CLASS_NAME}>
       Parameters
     </h2>
     <div className="border border-gray-new-90 px-4 dark:border-gray-new-20">
@@ -166,10 +164,7 @@ const OperationDoc = ({ operation, bodyTree, respTree }) => {
 
       {operation.errors?.length > 0 && (
         <section className="mt-8">
-          <h2
-            id="errors"
-            className="mb-3 scroll-mt-20 text-base leading-tight font-semibold tracking-tight"
-          >
+          <h2 id="errors" className={API_OPERATION_H2_WITH_MARGIN_CLASS_NAME}>
             Errors
           </h2>
           <div>

@@ -8,6 +8,7 @@ import { INLINE_CODE_STYLES } from 'utils/api-style';
 import { cn } from 'utils/cn';
 
 import { fieldDefaultLabel, fieldTitle } from './field-label';
+import { API_OPERATION_H2_WITH_MARGIN_CLASS_NAME } from './operation-shared';
 
 export function findNodeByPath(nodes, path) {
   const segs = path.split('.');
@@ -385,10 +386,7 @@ export function DocBodySection({ bodyTree, requestBody }) {
 
   return (
     <section className="mt-9">
-      <h2
-        id="request-body"
-        className="mb-4 scroll-mt-20 text-base leading-tight font-semibold tracking-tight"
-      >
+      <h2 id="request-body" className={API_OPERATION_H2_WITH_MARGIN_CLASS_NAME}>
         Request body
       </h2>
       <RequiredSummary

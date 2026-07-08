@@ -4,9 +4,14 @@ import PropTypes from 'prop-types';
 
 import { JSON_SYNTAX_COLORS } from 'utils/api-style';
 
+export const API_OPERATION_H2_CLASS_NAME =
+  'scroll-mt-20 text-[28px] leading-tight font-semibold tracking-tight lg:text-[24px] md:text-[20px]';
+
+export const API_OPERATION_H2_WITH_MARGIN_CLASS_NAME = `mb-4.5 ${API_OPERATION_H2_CLASS_NAME}`;
+
 export const SectionHeader = ({ title, badge, right, id }) => (
-  <div className="mb-4 flex min-h-6 items-center gap-2.5">
-    <h2 id={id} className="scroll-mt-20 text-base leading-tight font-semibold tracking-tight">
+  <div className="mb-4.5 flex min-h-6 items-center gap-2.5">
+    <h2 id={id} className={API_OPERATION_H2_CLASS_NAME}>
       {title}
     </h2>
     {badge && (

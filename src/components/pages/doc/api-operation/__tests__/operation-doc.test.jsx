@@ -65,5 +65,18 @@ describe('OperationDoc', () => {
     ).toBeInTheDocument();
     expect(screen.getByText(/resource is temporarily locked/)).toBeInTheDocument();
     expect(screen.queryByText('REST API', { selector: 'button *' })).not.toBeInTheDocument();
+
+    for (const headingName of ['Parameters', 'Request body', 'Errors']) {
+      expect(screen.getByRole('heading', { name: headingName })).toHaveClass(
+        'mb-4.5',
+        'text-[28px]',
+        'lg:text-[24px]',
+        'md:text-[20px]'
+      );
+    }
+
+    const responseHeading = screen.getByRole('heading', { name: 'Response' });
+    expect(responseHeading).toHaveClass('text-[28px]', 'lg:text-[24px]', 'md:text-[20px]');
+    expect(responseHeading.parentElement).toHaveClass('mb-4.5');
   });
 });
