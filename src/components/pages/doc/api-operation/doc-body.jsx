@@ -276,7 +276,13 @@ export function DocField({
       {hasChildren &&
         open &&
         (isBare ? (
-          <div id={childrenId} className="relative mt-6 flex flex-col gap-4">
+          <div
+            id={childrenId}
+            className={cn(
+              'relative mt-6 flex flex-col gap-4',
+              isNestedBare && '-ml-1 w-[calc(100%+0.25rem)]'
+            )}
+          >
             <div className="pointer-events-none absolute top-0 bottom-0 left-[37px] w-px bg-gray-new-90 dark:bg-gray-new-20 md:left-3" />
             {node.children.map((child, index) => {
               const childPath = `${path}.${child.key}`;

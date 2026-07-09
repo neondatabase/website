@@ -208,8 +208,26 @@ describe('DocBodySection', () => {
       />
     );
 
-    fireEvent.click(screen.getByRole('button', { name: 'Toggle Maintenance window field' }));
-    fireEvent.click(screen.getByRole('button', { name: 'Toggle Schedule field' }));
+    const settingsToggle = screen.getByRole('button', { name: 'Toggle Settings field' });
+    const maintenanceToggle = screen.getByRole('button', {
+      name: 'Toggle Maintenance window field',
+    });
+
+    const settingsChildren = document.getElementById(settingsToggle.getAttribute('aria-controls'));
+    expect(settingsChildren).not.toHaveClass('-ml-1');
+
+    fireEvent.click(maintenanceToggle);
+
+    const maintenanceChildren = document.getElementById(
+      maintenanceToggle.getAttribute('aria-controls')
+    );
+    expect(maintenanceChildren).toHaveClass('-ml-1', 'w-[calc(100%+0.25rem)]');
+
+    const scheduleToggle = screen.getByRole('button', { name: 'Toggle Schedule field' });
+    fireEvent.click(scheduleToggle);
+
+    const scheduleChildren = document.getElementById(scheduleToggle.getAttribute('aria-controls'));
+    expect(scheduleChildren).toHaveClass('-ml-1', 'w-[calc(100%+0.25rem)]');
 
     for (const key of ['maintenance_window', 'schedule', 'weekdays']) {
       expect(screen.getByText(key).closest('.grid')).toHaveClass('pl-14', 'gap-x-5');
