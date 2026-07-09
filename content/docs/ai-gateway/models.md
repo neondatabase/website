@@ -48,7 +48,7 @@ During the private preview, the following limits apply:
 
 If you hit a limit, you'll receive a `429 Too Many Requests` response. Requests resume when the rate limit window resets.
 
-These limits apply to input tokens. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the input limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
+These limits are counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
 Once billing begins, usage will also be capped by your prepaid credit balance. See [Pricing](#pricing) below.
 

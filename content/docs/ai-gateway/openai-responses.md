@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-07T20:11:36.426Z'
+updatedOn: '2026-07-09T23:06:44.844Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -51,7 +51,7 @@ This endpoint accepts OpenAI models only:
 | `gpt-5-mini`         |                        |
 | `gpt-5-nano`         |                        |
 
-Sending a non-OpenAI model ID returns `400 model is not available on this endpoint`.
+Sending a non-OpenAI model ID returns `400 model "claude-sonnet-4-6" is not available on the openai_responses endpoint`.
 
 ## Basic request
 
@@ -172,10 +172,10 @@ AI SDK `generateImage()` is not supported by AI Gateway; image generation is ava
 
 ## Error handling
 
-| Status            | Message                                   | Cause                                  |
-| ----------------- | ----------------------------------------- | -------------------------------------- |
-| `400 Bad Request` | `unknown model`                           | Model ID not in the catalog            |
-| `400 Bad Request` | `model is not available on this endpoint` | Non-OpenAI model sent to this endpoint |
+| Status            | Message                                                                       | Cause                                  |
+| ----------------- | ----------------------------------------------------------------------------- | -------------------------------------- |
+| `400 Bad Request` | `unknown model "<model-id>"`                                                  | Model ID not in the catalog            |
+| `400 Bad Request` | `model "claude-sonnet-4-6" is not available on the openai_responses endpoint` | Non-OpenAI model sent to this endpoint |
 
 For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 

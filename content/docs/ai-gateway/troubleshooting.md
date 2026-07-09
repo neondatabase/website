@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-08T19:08:38.015Z'
+updatedOn: '2026-07-09T23:06:44.844Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -40,15 +40,15 @@ The credential store or branch resolver is temporarily unavailable.
 
 ## Model errors
 
-### `400 unknown model`
+### `400 unknown model "<model-id>"`
 
-The `model` field in the request body does not match any entry in the AI Gateway catalog.
+The `model` field in the request body does not match any entry in the AI Gateway catalog. The error message includes the model ID you sent.
 
 **Fix:** Check the model ID against the [full model catalog](/docs/ai-gateway/models). Use the short form (e.g., `claude-sonnet-4-6`) or the `databricks-` prefixed form (`databricks-claude-sonnet-4-6`) — both are accepted.
 
-### `400 model is not available on this endpoint`
+### `400 model "<model-id>" is not available on the <endpoint> endpoint`
 
-The model exists in the catalog but doesn't work with the endpoint you're calling.
+The model exists in the catalog but doesn't work with the endpoint you're calling. The error message names both the model and the endpoint dialect it was sent to (for example, `anthropic_messages`, `openai_responses`, `gemini`, or `chat_completions`).
 
 **Fix:** Check which endpoint the model requires:
 
@@ -113,9 +113,11 @@ Your account's AI Gateway quota is blocked. This can happen if you exceed the to
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway quota exceeded"
+  "message": "ai gateway daily token limit exceeded"
 }
 ```
+
+If the block is due to the per-minute token limit specifically rather than the daily cap, the message reads `ai gateway per-minute token limit exceeded...` instead.
 
 **Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current per-minute quota values.
 
@@ -148,7 +150,7 @@ The quota block error uses a different shape:
 ```json
 {
   "error_code": "REQUEST_LIMIT_EXCEEDED",
-  "message": "ai gateway quota exceeded"
+  "message": "ai gateway daily token limit exceeded"
 }
 ```
 

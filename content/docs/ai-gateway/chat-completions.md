@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-07-07T20:11:36.426Z'
+updatedOn: '2026-07-09T23:06:44.844Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -202,7 +202,7 @@ Error responses use the standard OpenAI error format:
 ```json
 {
   "error": {
-    "message": "unknown model",
+    "message": "unknown model \"<model-id>\"",
     "type": "invalid_request_error",
     "code": "invalid_model"
   }
