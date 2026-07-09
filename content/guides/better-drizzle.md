@@ -4,7 +4,7 @@ subtitle: Add type-safe repositories, pagination, nested relation filters, plugi
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-09T00:00:00.000Z'
-updatedOn: '2026-07-09T16:10:14.097Z'
+updatedOn: '2026-07-09T17:20:13.285Z'
 ---
 
 [better-drizzle](https://better-drizzle.com) is a thin wrapper around [Drizzle ORM](https://orm.drizzle.team) that gives every table a consistent, type-safe API without replacing Drizzle itself. If you are already using Drizzle with Neon, better-drizzle removes the repetitive query glue you would otherwise rewrite in every service while staying close to the metal.
@@ -27,31 +27,43 @@ better-drizzle wraps your existing Drizzle client and generates one delegate per
 
 All of this compiles down to Drizzle queries. You still define your schema in Drizzle, choose your driver, and drop to raw SQL whenever you need to.
 
-## Steps
-
-- Install better-drizzle and set up the Neon client
-- Define the schema and seed sample data
-- Query with relations, pagination, and filters
-- Add plugins for timestamps and soft delete
-- Use lifecycle hooks for cross-cutting concerns
-- Work with transactions and savepoints
-
 ## Prerequisites
 
 - A [Neon account](https://console.neon.tech/signup) and a project with a running Postgres database
 - [Node.js](https://nodejs.org/) installed on your machine
-- An existing project using Drizzle ORM, or a new project ready to add Drizzle
 
-## Install better-drizzle
+## Create a new project
 
-better-drizzle sits on top of Drizzle. Install both, along with the Neon serverless driver:
+```bash
+mkdir better-drizzle-demo
+cd better-drizzle-demo
+npm init -y
+```
+
+Install the dependencies:
 
 ```bash
 npm install better-drizzle drizzle-orm @neondatabase/serverless
 npm install -D drizzle-kit dotenv
 ```
 
-better-drizzle requires Drizzle `^0.30` and TypeScript `^5` as peer dependencies.
+## Configure Drizzle Kit
+
+Drizzle Kit uses a configuration file to manage schema and migrations. Create a `drizzle.config.ts` file in your project root:
+
+```typescript filename="drizzle.config.ts"
+import 'dotenv/config';
+import { defineConfig } from 'drizzle-kit';
+
+export default defineConfig({
+  schema: './src/schema.ts',
+  out: './drizzle',
+  dialect: 'postgresql',
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
+});
+```
 
 ## Define your schema and relations
 
