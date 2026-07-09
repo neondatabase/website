@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 384" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="758" height="382" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Two ways to test a change before production</text>
+  <line x1="380" y1="54" x2="380" y2="360" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- LEFT: shared staging -->
+  <text x="40" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#b45309">SHARED STAGING DB</text>
+
+  <rect x="40" y="88" width="120" height="34" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="100" y="109" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">PR #1201</text>
+  <rect x="40" y="134" width="120" height="34" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="100" y="155" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">PR #1202</text>
+  <rect x="40" y="180" width="120" height="34" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="100" y="201" font-size="12" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">PR #1203</text>
+
+  <line x1="162" y1="105" x2="242" y2="178" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="162" y1="151" x2="242" y2="184" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="162" y1="197" x2="242" y2="190" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <!-- shared staging cylinder -->
+  <path d="M248,150 L248,222 A54,7 0 0 0 356,222 L356,150 Z" fill="#fffbeb" stroke="#f59e0b"/>
+  <ellipse cx="302" cy="150" rx="54" ry="7" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="302" y="190" font-size="12.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#92400e" text-anchor="middle">staging</text>
+  <text x="302" y="208" font-size="10.5" fill="#b45309" text-anchor="middle">one shared copy</text>
+
+  <text x="40" y="272" font-size="11.5" font-weight="600" fill="#374151">One database for everyone.</text>
+  <text x="40" y="290" font-size="11" fill="#6b7280">A migration or stale data on it hits every</text>
+  <text x="40" y="306" font-size="11" fill="#6b7280">open PR at the same time.</text>
+
+  <!-- RIGHT: branch-per-PR -->
+  <text x="410" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#047857">BRANCH-PER-PR</text>
+
+  <!-- production (parent) cylinder -->
+  <path d="M414,150 L414,206 A46,7 0 0 0 506,206 L506,150 Z" fill="#1f2937" stroke="#111827"/>
+  <ellipse cx="460" cy="150" rx="46" ry="7" fill="#374151" stroke="#111827"/>
+  <text x="460" y="182" font-size="11.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#ffffff" text-anchor="middle">production</text>
+  <text x="460" y="197" font-size="10" fill="#9ca3af" text-anchor="middle">parent</text>
+
+  <line x1="508" y1="172" x2="616" y2="118" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="508" y1="180" x2="616" y2="188" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="508" y1="188" x2="616" y2="258" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <!-- branch cylinders -->
+  <path d="M620,96 L620,132 A42,6 0 0 0 704,132 L704,96 Z" fill="#ecfdf5" stroke="#10b981"/>
+  <ellipse cx="662" cy="96" rx="42" ry="6" fill="#d1fae5" stroke="#10b981"/>
+  <text x="662" y="120" font-size="11" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#047857" text-anchor="middle">pr-1201</text>
+
+  <path d="M620,166 L620,202 A42,6 0 0 0 704,202 L704,166 Z" fill="#ecfdf5" stroke="#10b981"/>
+  <ellipse cx="662" cy="166" rx="42" ry="6" fill="#d1fae5" stroke="#10b981"/>
+  <text x="662" y="190" font-size="11" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#047857" text-anchor="middle">pr-1202</text>
+
+  <path d="M620,236 L620,272 A42,6 0 0 0 704,272 L704,236 Z" fill="#ecfdf5" stroke="#10b981"/>
+  <ellipse cx="662" cy="236" rx="42" ry="6" fill="#d1fae5" stroke="#10b981"/>
+  <text x="662" y="260" font-size="11" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#047857" text-anchor="middle">pr-1203</text>
+
+  <text x="410" y="306" font-size="11.5" font-weight="600" fill="#374151">Each PR forks its own copy.</text>
+  <text x="410" y="324" font-size="11" fill="#6b7280">Isolated from the others, deleted when the PR closes.</text>
+</svg>
