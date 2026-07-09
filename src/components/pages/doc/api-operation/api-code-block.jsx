@@ -56,7 +56,7 @@ const ApiCodeBlock = ({
   return (
     <CodeBlockWrapper
       className={cn(
-        'rounded-none border border-gray-new-80 dark:border-gray-new-20 [&_.line]:text-sm [&_code]:text-sm [&_pre]:text-sm [&_pre]:leading-relaxed [&>pre]:my-0 [&>pre]:rounded-none [&>pre]:bg-white! [&>pre]:py-4 [&>pre]:dark:bg-black-pure!',
+        'max-w-full min-w-0 overflow-hidden rounded-none border border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure [&_.line]:text-sm [&_code]:text-sm [&_pre]:text-sm [&_pre]:leading-relaxed [&>pre]:my-0 [&>pre]:max-w-full [&>pre]:overflow-x-auto [&>pre]:rounded-none [&>pre]:bg-white! [&>pre]:py-4 [&>pre]:dark:bg-black-pure!',
         className
       )}
       filename={showFilename ? filename : null}

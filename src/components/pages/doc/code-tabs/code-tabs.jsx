@@ -7,7 +7,7 @@ import { CodeTabsContext } from 'contexts/code-tabs-context';
 import { cn } from 'utils/cn';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-const CodeTabs = ({ labels = [], reverse = false, children }) => {
+const CodeTabs = ({ labels = [], reverse = false, children, bodyClassName = '' }) => {
   const { activeTab, setActiveTab } = useContext(CodeTabsContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -50,7 +50,12 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
         ))}
       </div>
       {/* Code block container */}
-      <div className="overflow-x-auto bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
+      <div
+        className={cn(
+          'overflow-x-auto bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0',
+          bodyClassName
+        )}
+      >
         {displayedChildren.map((child, index) => {
           if (index !== currentIndex) return null;
           return <Fragment key={displayedLabels[index]}>{child}</Fragment>;
@@ -64,6 +69,7 @@ CodeTabs.propTypes = {
   labels: PropTypes.arrayOf(PropTypes.string),
   reverse: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  bodyClassName: PropTypes.string,
 };
 
 export default CodeTabs;
