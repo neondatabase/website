@@ -1,0 +1,3474 @@
+# Neon AI Gateway — published model metadata
+# Source of truth for docs, the filterable models page, and models.json.
+# Generated/refreshed by the /update-ai-models command. Do not hand-edit
+# generated fields (codeSamples) directly -- re-run the command instead.
+
+anthropic:
+  claude-haiku-4-5:
+    displayName: Claude Haiku 4.5
+    openWeights: false
+    description: Anthropic's fastest and most cost-effective model, delivering near-frontier coding quality
+      with exceptional speed and efficiency.
+    recommendedFor:
+    - Real-time, low-latency chat and customer service agents
+    - Rapid prototyping and pair programming
+    - Cost-conscious production deployments
+    contextWindow: 200000
+    maxOutputTokens: 64000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    reasoning:
+      control: 'thinking.type: enabled, thinking.budget_tokens'
+    pricing:
+      input: 1.0
+      output: 5.0
+      cacheRead: 0.1
+      cacheWrite: 1.25
+      status: free_preview
+    releaseDate: '2025-10-15'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-haiku-4-5'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-haiku-4-5',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-haiku-4-5",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-haiku-4-5",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-haiku-4-5",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  claude-opus-4-1:
+    displayName: Claude Opus 4.1
+    openWeights: false
+    description: A hybrid reasoning model designed for both complex reasoning and real-world applications
+      at enterprise scale.
+    recommendedFor:
+    - Complex multi-file refactoring and code generation
+    - Research and content creation
+    - Multi-step agentic workflows
+    contextWindow: 200000
+    maxOutputTokens: 32000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    reasoning:
+      control: 'thinking.type: enabled, thinking.budget_tokens'
+    pricing:
+      input: 15.0
+      output: 75.0
+      cacheRead: 1.5
+      cacheWrite: 18.75
+      status: free_preview
+    releaseDate: '2025-08-05'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-opus-4-1'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-opus-4-1',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-opus-4-1",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-opus-4-1",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-opus-4-1",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  claude-opus-4-5:
+    displayName: Claude Opus 4.5
+    openWeights: false
+    description: Anthropic's most capable model for coding, agents, and computer use, with meaningful
+      gains on everyday tasks like deep research and working with slides and spreadsheets.
+    recommendedFor:
+    - State-of-the-art coding and agentic tasks
+    - Computer-use and browser-automation workflows
+    - Deep research and document analysis
+    contextWindow: 200000
+    maxOutputTokens: 64000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - computer_use
+    reasoning:
+      control: 'thinking.type: enabled, thinking.budget_tokens'
+    pricing:
+      input: 5.0
+      output: 25.0
+      cacheRead: 0.5
+      cacheWrite: 6.25
+      status: free_preview
+    releaseDate: '2025-11-24'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-opus-4-5'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-opus-4-5',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-opus-4-5",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-opus-4-5",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-opus-4-5",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  claude-opus-4-6:
+    displayName: Claude Opus 4.6
+    openWeights: false
+    description: Anthropic's most capable hybrid reasoning model with adaptive thinking and a 1 million
+      token context window, built for the most demanding reasoning, coding, and research tasks.
+    recommendedFor:
+    - Complex reasoning, deep analysis, and code generation
+    - Enterprise applications needing extensive context and comprehensive outputs
+    contextWindow: 1000000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    reasoning:
+      control: 'thinking.type: enabled, thinking.budget_tokens'
+    pricing:
+      input: 5.0
+      output: 25.0
+      cacheRead: 0.5
+      cacheWrite: 6.25
+      status: free_preview
+    releaseDate: '2026-02-05'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-opus-4-6'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-opus-4-6',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-opus-4-6",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-opus-4-6",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-opus-4-6",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  claude-opus-4-7:
+    displayName: Claude Opus 4.7
+    openWeights: false
+    description: A notable improvement on Opus 4.6 in advanced software engineering, with particular gains
+      on the most difficult tasks, and higher-resolution vision.
+    recommendedFor:
+    - Complex, long-running software engineering tasks
+    - Enterprise document and diagram analysis requiring high-resolution vision
+    contextWindow: 1000000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    reasoning:
+      control: 'thinking.type: adaptive, output_config.effort'
+    pricing:
+      input: 5.0
+      output: 25.0
+      cacheRead: 0.5
+      cacheWrite: 6.25
+      status: free_preview
+    releaseDate: '2026-04-16'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-opus-4-7'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-opus-4-7',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-opus-4-7",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-opus-4-7",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-opus-4-7",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  claude-opus-4-8:
+    displayName: Claude Opus 4.8
+    openWeights: false
+    description: Anthropic's most capable model, built for long-horizon agentic execution, complex multi-step
+      coding, and knowledge-work writing.
+    recommendedFor:
+    - Long-horizon agentic execution
+    - Complex multi-step coding, including mid-task refactors
+    - Knowledge-work writing requiring clear, direct prose
+    alternatives:
+    - claude-sonnet-4-6 for cost-sensitive traffic
+    - claude-haiku-4-5 for latency-critical workloads
+    contextWindow: 1000000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    reasoning:
+      control: 'thinking.type: adaptive, output_config.effort'
+      effortLevels:
+      - low
+      - medium
+      - high
+      - xhigh
+      - max
+    pricing:
+      input: 5.0
+      output: 25.0
+      cacheRead: 0.5
+      cacheWrite: 6.25
+      status: free_preview
+    releaseDate: '2026-05-28'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-opus-4-8'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-opus-4-8',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-opus-4-8",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-opus-4-8",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-opus-4-8",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  claude-sonnet-4:
+    displayName: Claude Sonnet 4
+    openWeights: false
+    description: A hybrid reasoning model offering near-instant responses and extended thinking for deeper
+      reasoning based on task complexity.
+    recommendedFor:
+    - Code development and large-scale content analysis
+    - Agent application development
+    contextWindow: 200000
+    maxOutputTokens: 64000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    reasoning:
+      control: 'thinking.type: enabled, thinking.budget_tokens'
+    pricing:
+      input: 3.0
+      output: 15.0
+      cacheRead: 0.3
+      cacheWrite: 3.75
+      status: free_preview
+    releaseDate: '2025-05-22'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-sonnet-4'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-sonnet-4',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-sonnet-4",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-sonnet-4",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-sonnet-4",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  claude-sonnet-4-5:
+    displayName: Claude Sonnet 4.5
+    openWeights: false
+    description: Anthropic's strongest coding model and its strongest model for building complex agents,
+      with sustained focus on long-running tasks.
+    recommendedFor:
+    - Complex agent-building
+    - Production coding workflows
+    - Long-running, multi-hour agent sessions
+    contextWindow: 200000
+    maxOutputTokens: 64000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - computer_use
+    reasoning:
+      control: 'thinking.type: enabled, thinking.budget_tokens'
+    pricing:
+      input: 3.0
+      output: 15.0
+      cacheRead: 0.3
+      cacheWrite: 3.75
+      status: free_preview
+    releaseDate: '2025-09-29'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-sonnet-4-5'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-sonnet-4-5',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-sonnet-4-5",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-sonnet-4-5",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-sonnet-4-5",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  claude-sonnet-4-6:
+    displayName: Claude Sonnet 4.6
+    openWeights: false
+    description: Anthropic's most capable Sonnet model, with upgrades across coding, computer use, long-context
+      reasoning, agent planning, and design, at a more practical price point than Opus.
+    recommendedFor:
+    - Customer-facing agents
+    - Production coding workflows
+    - Content generation at scale
+    contextWindow: 1000000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - computer_use
+    reasoning:
+      control: 'thinking.type: enabled, thinking.budget_tokens'
+    pricing:
+      input: 3.0
+      output: 15.0
+      cacheRead: 0.3
+      cacheWrite: 3.75
+      status: free_preview
+    releaseDate: '2026-02-17'
+    status: active
+    dialects:
+    - chat_completions
+    - anthropic_messages
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('claude-sonnet-4-6'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/claude-sonnet-4-6',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="claude-sonnet-4-6",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "claude-sonnet-4-6",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "claude-sonnet-4-6",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+google:
+  gemini-2-5-flash:
+    displayName: Gemini 2.5 Flash
+    openWeights: false
+    description: Google's best model in terms of price-performance, offering well-rounded capabilities
+      for large-scale, low-latency, high-volume tasks that require thinking and agentic use.
+    recommendedFor:
+    - Large-scale, high-volume processing
+    - Low-latency agentic use cases
+    contextWindow: 1048576
+    maxOutputTokens: 65536
+    modalities:
+      input:
+      - text
+      - image
+      - video
+      - audio
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - web_search
+    pricing:
+      input: 0.3
+      output: 2.5
+      status: free_preview
+    releaseDate: '2025-06-17'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gemini-2-5-flash'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gemini-2-5-flash',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gemini-2-5-flash",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gemini-2-5-flash",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gemini-2-5-flash",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gemini-2-5-pro:
+    displayName: Gemini 2.5 Pro
+    openWeights: false
+    description: A state-of-the-art thinking model, capable of reasoning over complex problems in code,
+      math, and STEM, and analyzing large datasets and codebases using long context.
+    recommendedFor:
+    - Complex reasoning in code, math, and STEM
+    - Analyzing large codebases and documents
+    contextWindow: 1048576
+    maxOutputTokens: 65536
+    modalities:
+      input:
+      - text
+      - image
+      - video
+      - audio
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - web_search
+    pricing:
+      input: 1.25
+      output: 10.0
+      status: free_preview
+    releaseDate: '2025-06-17'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gemini-2-5-pro'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gemini-2-5-pro',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gemini-2-5-pro",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gemini-2-5-pro",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gemini-2-5-pro",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gemini-3-1-flash-lite:
+    displayName: Gemini 3.1 Flash Lite
+    openWeights: false
+    description: The fastest and most cost-efficient model in the Gemini 3 series, optimized for high-volume,
+      latency-sensitive tasks like translation and classification.
+    recommendedFor:
+    - High-throughput, cost-sensitive deployments
+    - Translation and classification
+    contextWindow: 1048576
+    maxOutputTokens: 65536
+    modalities:
+      input:
+      - text
+      - image
+      - video
+      - audio
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - web_search
+    pricing:
+      input: 0.25
+      output: 1.5
+      status: free_preview
+    releaseDate: '2026-05-01'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gemini-3-1-flash-lite'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gemini-3-1-flash-lite',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gemini-3-1-flash-lite",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gemini-3-1-flash-lite",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gemini-3-1-flash-lite",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gemini-3-1-pro:
+    displayName: Gemini 3.1 Pro
+    openWeights: false
+    description: A smarter model for the most complex tasks, with more than double the reasoning performance
+      of Gemini 3 Pro on hard benchmarks.
+    recommendedFor:
+    - Complex reasoning, deep analysis, and multimodal understanding
+    contextWindow: 1048576
+    maxOutputTokens: 65536
+    modalities:
+      input:
+      - text
+      - image
+      - video
+      - audio
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - web_search
+    pricing:
+      input: 2.0
+      output: 12.0
+      status: free_preview
+    releaseDate: '2026-02-19'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gemini-3-1-pro'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gemini-3-1-pro',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gemini-3-1-pro",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gemini-3-1-pro",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gemini-3-1-pro",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gemini-3-5-flash:
+    displayName: Gemini 3.5 Flash
+    openWeights: false
+    description: Google's most intelligent model for sustained frontier performance on agentic and coding
+      tasks, at higher speed and lower cost.
+    recommendedFor:
+    - Frontier-level agentic and coding workloads at scale
+    contextWindow: 1048576
+    maxOutputTokens: 65536
+    modalities:
+      input:
+      - text
+      - image
+      - video
+      - audio
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - web_search
+    pricing:
+      input: 1.5
+      output: 9.0
+      status: free_preview
+    releaseDate: '2026-05-01'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gemini-3-5-flash'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gemini-3-5-flash',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gemini-3-5-flash",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gemini-3-5-flash",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gemini-3-5-flash",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gemini-3-flash:
+    displayName: Gemini 3 Flash
+    openWeights: false
+    description: A high-speed, cost-efficient multimodal model with advanced capabilities for complex
+      video analysis, data extraction, and visual question answering in near real-time.
+    recommendedFor:
+    - Real-time video analysis and data extraction
+    - High-volume visual Q&A
+    contextWindow: 1048576
+    maxOutputTokens: 65536
+    modalities:
+      input:
+      - text
+      - image
+      - video
+      - audio
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - web_search
+    pricing:
+      input: 0.5
+      output: 3.0
+      status: free_preview
+    releaseDate: '2025-12-17'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gemini-3-flash'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gemini-3-flash',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gemini-3-flash",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gemini-3-flash",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gemini-3-flash",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gemini-3-pro:
+    displayName: Gemini 3 Pro
+    openWeights: false
+    description: A hybrid reasoning model with a 1-million-token context window, excelling at complex
+      reasoning, deep analysis, and multimodal understanding.
+    recommendedFor:
+    - Complex reasoning and multimodal understanding
+    contextWindow: 1048576
+    maxOutputTokens: 65536
+    modalities:
+      input:
+      - text
+      - image
+      - video
+      - audio
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - prompt_caching
+    - web_search
+    pricing:
+      input: 2.0
+      output: 12.0
+      status: free_preview
+    releaseDate: '2025-11-18'
+    status: active
+    statusNote: Requests to this model are served by a newer Gemini 3.1 Pro model version. No action needed.
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gemini-3-pro'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gemini-3-pro',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gemini-3-pro",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gemini-3-pro",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gemini-3-pro",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gemma-3-12b:
+    displayName: Gemma 3 12B
+    openWeights: true
+    description: A lightweight, open-weight multimodal model from Google, part of the Gemma 3 family built
+      from the same research as the Gemini models.
+    recommendedFor:
+    - Cost-sensitive text and image understanding tasks
+    contextWindow: 128000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    pricing:
+      status: free_preview
+    releaseDate: '2025-03-12'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gemma-3-12b'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gemma-3-12b',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gemma-3-12b",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gemma-3-12b",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gemma-3-12b",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+openai:
+  gpt-5:
+    displayName: GPT-5
+    openWeights: false
+    description: A general purpose large language model and reasoning model built by OpenAI, for coding,
+      chat, reasoning, and agent-driven tasks.
+    recommendedFor:
+    - General-purpose reasoning and coding
+    - Agent-driven tasks
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 1.25
+      output: 10.0
+      status: free_preview
+    releaseDate: '2025-08-07'
+    status: active
+    dialects:
+    - chat_completions
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-5",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-5",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-1:
+    displayName: GPT-5.1
+    openWeights: false
+    description: OpenAI's model for coding and agentic tasks, with configurable reasoning effort and both
+      Instant and Thinking modes.
+    recommendedFor:
+    - Coding and agentic tasks
+    - Content creation, tutoring, and technical support
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    reasoning:
+      effortLevels:
+      - none
+      - low
+      - medium
+      - high
+    pricing:
+      input: 1.25
+      output: 10.0
+      status: free_preview
+    releaseDate: '2025-11-12'
+    status: active
+    dialects:
+    - chat_completions
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-1'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-1',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-5-1",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-5-1",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-1",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-1-codex-max:
+    displayName: GPT-5.1 Codex Max
+    openWeights: false
+    description: OpenAI's high-performance code-specialized model, optimized for long-running tasks, complex
+      code generation, and large-scale refactoring.
+    recommendedFor:
+    - Complex code generation and large-scale refactoring
+    - Long-running enterprise software engineering tasks
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 1.25
+      output: 10.0
+      status: free_preview
+    releaseDate: '2025-11-19'
+    status: active
+    dialects:
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-1-codex-max'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-1-codex-max',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1",
+        )
+
+        resp = client.responses.create(
+            model="gpt-5-1-codex-max",
+            input="Explain Serverless Postgres.",
+        )
+        print(resp.output_text)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1",
+        });
+
+        const resp = await client.responses.create({
+          model: "gpt-5-1-codex-max",
+          input: "Explain Serverless Postgres.",
+        });
+        console.log(resp.output_text);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1/responses \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-1-codex-max",
+            "input": "Explain Serverless Postgres."
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-1-codex-mini:
+    displayName: GPT-5.1 Codex Mini
+    openWeights: false
+    description: OpenAI's cost-optimized code-specialized model, for code completion, simple refactoring,
+      and everyday coding tasks.
+    recommendedFor:
+    - Code completion and simple refactoring
+    - Everyday coding tasks
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 0.25
+      output: 2.0
+      status: free_preview
+    releaseDate: '2025-11-12'
+    status: active
+    dialects:
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-1-codex-mini'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-1-codex-mini',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1",
+        )
+
+        resp = client.responses.create(
+            model="gpt-5-1-codex-mini",
+            input="Explain Serverless Postgres.",
+        )
+        print(resp.output_text)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1",
+        });
+
+        const resp = await client.responses.create({
+          model: "gpt-5-1-codex-mini",
+          input: "Explain Serverless Postgres.",
+        });
+        console.log(resp.output_text);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1/responses \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-1-codex-mini",
+            "input": "Explain Serverless Postgres."
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-2:
+    displayName: GPT-5.2
+    openWeights: false
+    description: A general purpose reasoning model offering higher accuracy and more deliberate scaffolded
+      reasoning than GPT-5.1, excelling at structured extraction and multi-step workflows.
+    recommendedFor:
+    - Structured extraction and multi-step workflows
+    - Multimodal professional tasks
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    reasoning:
+      effortLevels:
+      - none
+      - low
+      - medium
+      - high
+      - xhigh
+    pricing:
+      input: 1.75
+      output: 14.0
+      status: free_preview
+    releaseDate: '2025-12-11'
+    status: active
+    dialects:
+    - chat_completions
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-2'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-2',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-5-2",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-5-2",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-2",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-2-codex:
+    displayName: GPT-5.2 Codex
+    openWeights: false
+    description: A code-specialized model built on the GPT-5.2 architecture with enhanced coding capabilities,
+      excelling at code generation, refactoring, and debugging.
+    recommendedFor:
+    - Code generation, refactoring, and debugging
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 1.75
+      output: 14.0
+      status: free_preview
+    releaseDate: '2025-12-31'
+    status: active
+    dialects:
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-2-codex'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-2-codex',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1",
+        )
+
+        resp = client.responses.create(
+            model="gpt-5-2-codex",
+            input="Explain Serverless Postgres.",
+        )
+        print(resp.output_text)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1",
+        });
+
+        const resp = await client.responses.create({
+          model: "gpt-5-2-codex",
+          input: "Explain Serverless Postgres.",
+        });
+        console.log(resp.output_text);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1/responses \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-2-codex",
+            "input": "Explain Serverless Postgres."
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-3-codex:
+    displayName: GPT-5.3 Codex
+    openWeights: false
+    description: OpenAI's most advanced agentic coding model at the time of release, combining frontier
+      coding performance with professional-knowledge reasoning, ~25% faster than its predecessor.
+    recommendedFor:
+    - Advanced agentic coding, research, and tool-using workflows
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 1.75
+      output: 14.0
+      status: free_preview
+    releaseDate: '2026-02-05'
+    status: active
+    dialects:
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-3-codex'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-3-codex',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1",
+        )
+
+        resp = client.responses.create(
+            model="gpt-5-3-codex",
+            input="Explain Serverless Postgres.",
+        )
+        print(resp.output_text)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1",
+        });
+
+        const resp = await client.responses.create({
+          model: "gpt-5-3-codex",
+          input: "Explain Serverless Postgres.",
+        });
+        console.log(resp.output_text);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/openai/v1/responses \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-3-codex",
+            "input": "Explain Serverless Postgres."
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-4:
+    displayName: GPT-5.4
+    openWeights: false
+    description: OpenAI's most capable and efficient frontier model for professional work, with state-of-the-art
+      coding, computer use, tool search, and a 1M-token context window.
+    recommendedFor:
+    - Frontier coding and computer-use workflows
+    - Professional work requiring very long context
+    contextWindow: 1050000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    - computer_use
+    reasoning:
+      effortLevels:
+      - none
+      - low
+      - medium
+      - high
+      - xhigh
+    pricing:
+      input: 2.5
+      output: 15.0
+      status: free_preview
+    releaseDate: '2026-03-05'
+    status: active
+    dialects:
+    - chat_completions
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-4'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-4',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-5-4",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-5-4",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-4",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-4-mini:
+    displayName: GPT-5.4 Mini
+    openWeights: false
+    description: OpenAI's strongest mini model yet for coding, computer use, and subagents.
+    recommendedFor:
+    - Cost-optimized coding and subagent workflows
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 0.75
+      output: 4.5
+      status: free_preview
+    releaseDate: '2026-03-17'
+    status: active
+    dialects:
+    - chat_completions
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-4-mini'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-4-mini',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-5-4-mini",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-5-4-mini",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-4-mini",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-4-nano:
+    displayName: GPT-5.4 Nano
+    openWeights: false
+    description: OpenAI's cheapest GPT-5.4-class model, for simple, high-volume tasks like classification,
+      extraction, and ranking.
+    recommendedFor:
+    - High-throughput classification, extraction, and ranking
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 0.2
+      output: 1.25
+      status: free_preview
+    releaseDate: '2026-03-17'
+    status: active
+    dialects:
+    - chat_completions
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-4-nano'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-4-nano',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-5-4-nano",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-5-4-nano",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-4-nano",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-mini:
+    displayName: GPT-5 Mini
+    openWeights: false
+    description: A cost-optimized general purpose reasoning model, excelling at well-defined tasks that
+      require reliable reasoning, precise language, and rapid output.
+    recommendedFor:
+    - Cost-sensitive reasoning and chat workloads
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 0.25
+      output: 2.0
+      status: free_preview
+    releaseDate: '2025-08-07'
+    status: active
+    dialects:
+    - chat_completions
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-mini'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-mini',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-5-mini",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-5-mini",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-mini",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gpt-5-nano:
+    displayName: GPT-5 Nano
+    openWeights: false
+    description: The fastest, most cost-efficient version of GPT-5, for high-throughput tasks like simple
+      instruction-following and classification.
+    recommendedFor:
+    - High-throughput instruction-following and classification
+    contextWindow: 400000
+    maxOutputTokens: 128000
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    - web_search
+    pricing:
+      input: 0.05
+      output: 0.4
+      status: free_preview
+    releaseDate: '2025-08-07'
+    status: active
+    dialects:
+    - chat_completions
+    - openai_responses
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-5-nano'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-5-nano',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-5-nano",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-5-nano",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-5-nano",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+databricks:
+  gpt-oss-120b:
+    displayName: GPT OSS 120B
+    openWeights: true
+    description: OpenAI's flagship open-weight reasoning model, with chain-of-thought and adjustable reasoning
+      effort, designed for production, general-purpose, high-reasoning use cases.
+    recommendedFor:
+    - High-reasoning production workloads at open-weight economics
+    contextWindow: 131072
+    maxOutputTokens: 25000
+    modalities:
+      input:
+      - text
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    reasoning:
+      effortLevels:
+      - low
+      - medium
+      - high
+    pricing:
+      status: free_preview
+    releaseDate: '2025-08-05'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-oss-120b'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-oss-120b',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-oss-120b",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-oss-120b",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-oss-120b",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  gpt-oss-20b:
+    displayName: GPT OSS 20B
+    openWeights: true
+    description: A smaller, open-weight sibling of GPT OSS 120B, optimized for lower latency and local
+      or specialized use cases while retaining strong reasoning and tool-use performance.
+    recommendedFor:
+    - Lower-latency reasoning workloads and local/specialized deployments
+    contextWindow: 131072
+    maxOutputTokens: 25000
+    modalities:
+      input:
+      - text
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    reasoning:
+      effortLevels:
+      - low
+      - medium
+      - high
+    pricing:
+      status: free_preview
+    releaseDate: '2025-08-05'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('gpt-oss-20b'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/gpt-oss-20b',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-oss-20b",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "gpt-oss-20b",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "gpt-oss-20b",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+meta:
+  llama-4-maverick:
+    displayName: Llama 4 Maverick
+    openWeights: true
+    description: Meta's natively multimodal model using a mixture-of-experts architecture, optimized for
+      precise image and text understanding across multiple languages.
+    recommendedFor:
+    - Multimodal (image and text) understanding tasks
+    - Multilingual applications
+    contextWindow: 1048576
+    maxOutputTokens: 8192
+    modalities:
+      input:
+      - text
+      - image
+      output:
+      - text
+    capabilities:
+    - tool_use
+    pricing:
+      status: free_preview
+    releaseDate: '2025-04-05'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('llama-4-maverick'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/llama-4-maverick',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="llama-4-maverick",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "llama-4-maverick",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "llama-4-maverick",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  meta-llama-3-1-8b-instruct:
+    displayName: Meta Llama 3.1 8B Instruct
+    openWeights: true
+    description: A state-of-the-art open-weight model optimized for multilingual dialogue use cases.
+    recommendedFor:
+    - Multilingual dialogue and instruction-following at open-weight economics
+    contextWindow: 131072
+    maxOutputTokens: 8192
+    modalities:
+      input:
+      - text
+      output:
+      - text
+    capabilities:
+    - tool_use
+    pricing:
+      status: free_preview
+    releaseDate: '2024-07-23'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('meta-llama-3-1-8b-instruct'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/meta-llama-3-1-8b-instruct',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="meta-llama-3-1-8b-instruct",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "meta-llama-3-1-8b-instruct",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "meta-llama-3-1-8b-instruct",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  meta-llama-3-3-70b-instruct:
+    displayName: Meta Llama 3.3 70B Instruct
+    openWeights: true
+    description: A state-of-the-art open-weight model with a 128K token context, optimized for multilingual
+      dialogue use cases.
+    recommendedFor:
+    - Multilingual dialogue at open-weight economics
+    contextWindow: 131072
+    maxOutputTokens: 8192
+    modalities:
+      input:
+      - text
+      output:
+      - text
+    capabilities:
+    - tool_use
+    pricing:
+      status: free_preview
+    releaseDate: '2024-12-06'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('meta-llama-3-3-70b-instruct'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/meta-llama-3-3-70b-instruct',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="meta-llama-3-3-70b-instruct",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "meta-llama-3-3-70b-instruct",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "meta-llama-3-3-70b-instruct",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+alibaba:
+  qwen3-next-80b-a3b-instruct:
+    displayName: Qwen3-Next 80B A3B Instruct
+    openWeights: true
+    description: A highly efficient mixture-of-experts model optimized for instruction-following, designed
+      to handle ultra-long contexts and excel at multi-step workflows and retrieval-augmented generation.
+    recommendedFor:
+    - Ultra-long-context, multi-step, and RAG workloads at open-weight economics
+    contextWindow: 262144
+    maxOutputTokens: 10000
+    modalities:
+      input:
+      - text
+      output:
+      - text
+    capabilities:
+    - tool_use
+    pricing:
+      status: free_preview
+    releaseDate: '2025-09-11'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('qwen3-next-80b-a3b-instruct'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/qwen3-next-80b-a3b-instruct',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="qwen3-next-80b-a3b-instruct",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "qwen3-next-80b-a3b-instruct",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "qwen3-next-80b-a3b-instruct",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
+  qwen35-122b-a10b:
+    displayName: Qwen3.5 122B A10B
+    openWeights: true
+    description: A hybrid Mixture-of-Experts reasoning model delivering strong performance on reasoning,
+      coding, and agentic tasks. On Neon's gateway this model is served text-only, and reasoning is always
+      on.
+    recommendedFor:
+    - Reasoning, coding, and agentic tasks at open-weight economics
+    contextWindow: 262144
+    maxOutputTokens: 8000
+    modalities:
+      input:
+      - text
+      output:
+      - text
+    capabilities:
+    - tool_use
+    - reasoning
+    reasoning:
+      control: reasoning_effort parameter
+      effortLevels:
+      - none
+      - low
+      - medium
+      - high
+    pricing:
+      status: free_preview
+    releaseDate: '2026-02-01'
+    status: active
+    dialects:
+    - chat_completions
+    codeSamples:
+      aisdk: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { generateText } from 'ai';
+        import { neon } from '@neondatabase/ai-sdk-provider';
+
+        const { text } = await generateText({
+          model: neon('qwen35-122b-a10b'),
+          prompt: 'Explain Serverless Postgres.',
+        });
+
+        console.log(text);
+      mastra: |
+        // .env
+        // NEON_AI_GATEWAY_BASE_URL=https://<your-branch-ai-gateway-endpoint>
+        // NEON_AI_GATEWAY_TOKEN=<your token>
+
+        import { Agent } from '@mastra/core/agent';
+
+        const agent = new Agent({
+          name: 'neon-demo',
+          instructions: 'You are a helpful assistant.',
+          model: 'neon/qwen35-122b-a10b',
+        });
+
+        const { text } = await agent.generate('Explain Serverless Postgres.');
+        console.log(text);
+      python: |
+        from openai import OpenAI
+        import os
+
+        client = OpenAI(
+            api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
+            base_url="https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        )
+
+        resp = client.chat.completions.create(
+            model="qwen35-122b-a10b",
+            messages=[{"role": "user", "content": "Explain Serverless Postgres."}],
+        )
+        print(resp.choices[0].message.content)
+      typescript: |
+        import OpenAI from "openai";
+
+        const client = new OpenAI({
+          apiKey: process.env.NEON_AI_GATEWAY_TOKEN!,
+          baseURL: "https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1",
+        });
+
+        const resp = await client.chat.completions.create({
+          model: "qwen35-122b-a10b",
+          messages: [{ role: "user", content: "Explain Serverless Postgres." }],
+        });
+        console.log(resp.choices[0].message.content);
+      curl: |
+        curl https://<your-branch-ai-gateway-endpoint>/ai-gateway/mlflow/v1/chat/completions \
+          -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "model": "qwen35-122b-a10b",
+            "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
+          }'
+    lastVerified: '2026-07-09'
