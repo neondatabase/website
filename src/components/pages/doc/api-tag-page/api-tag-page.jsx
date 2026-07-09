@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import ApiAiContextLink from 'components/pages/doc/api-ai-context-link';
 import ApiEndpointsTable from 'components/pages/doc/api-endpoints-table/api-endpoints-table';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DropdownMenu from 'components/pages/doc/dropdown-menu';
@@ -9,7 +10,6 @@ import DocFooter from 'components/shared/doc-footer';
 import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ExternalIcon from 'icons/external.inline.svg';
 import { cn } from 'utils/cn';
 
 import tagConfig from '../../../../../scripts/data/tag-config.json';
@@ -56,7 +56,7 @@ const ApiTagPage = async ({
   const groups = buildGroupedOps(operations, tag ? tagGroupsBySlug[tag] : null);
 
   return (
-    <div className="min-w-0 pb-32 lg:pb-24 md:pb-20">
+    <div className="max-w-208 min-w-0 pb-32 lg:max-w-none lg:pb-24 md:pb-20">
       {breadcrumbs?.length > 0 && (
         <Breadcrumbs className="mb-7!" breadcrumbs={breadcrumbs} baseUrl={DOCS_BASE_PATH} />
       )}
@@ -74,14 +74,12 @@ const ApiTagPage = async ({
       </div>
 
       <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
-        <Link
-          className="inline-flex items-center gap-1 text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+        <ApiAiContextLink
           to={`/docs/${currentSlug}.md`}
-        >
-          Markdown for AI context
-          <ExternalIcon className="size-3" />
-        </Link>
-        {` (${tagDisplay}): all ${operations.length} endpoints with parameters and examples.`}
+          tooltipId={`api-ai-context-${tag}`}
+          tooltipLabel={tagDisplay}
+          tooltipDescription={`all ${operations.length} endpoints with parameters and examples.`}
+        />
       </p>
 
       {intro && (
@@ -91,57 +89,73 @@ const ApiTagPage = async ({
       )}
 
       {groups ? (
-        <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-1">
+        <div className="mt-7 grid grid-cols-2 gap-3 md:grid-cols-1">
           {groups.map((group) => (
             <div
               key={group.label}
-              className="rounded-[10px] border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10"
+              className="border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10"
             >
               <div className="mb-3 flex items-center justify-between">
-                <h3 className="text-[13px] font-semibold text-black-pure dark:text-white">
+                <h3 className="text-sm font-semibold text-black-pure dark:text-white">
                   {group.label}
                 </h3>
-                <span className="font-mono text-[10px] text-gray-new-50 dark:text-gray-new-60">
+                <span className="font-mono text-xs text-gray-new-50 dark:text-gray-new-60">
                   {group.ops.length}
                 </span>
               </div>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-2">
                 {group.ops.map((op) => (
-                  <a
+                  <Link
                     key={op.id}
                     href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
                     className={cn(
-                      'flex items-center gap-2 text-[13px] transition-colors duration-100 hover:text-green-45 dark:hover:text-green-45',
+                      'inline-flex w-fit items-center gap-2 text-sm leading-tight text-balance transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
                       op.deprecated
                         ? 'text-gray-new-60 dark:text-gray-new-50'
                         : 'text-gray-new-40 dark:text-gray-new-60'
                     )}
                   >
-                    {op.summary}
-                    {op.deprecated && <Tag label="deprecated" size="sm" />}
-                  </a>
+                    <span className="text-balance">
+                      {op.summary}
+                      {op.deprecated && (
+                        <Tag
+                          className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
+                          label="deprecated"
+                          size="sm"
+                        />
+                      )}
+                    </span>
+                  </Link>
                 ))}
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="mt-7 rounded-[10px] border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
-          <div className="flex flex-col gap-1.5">
+        <div className="mt-7 border border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-10">
+          <div className="flex flex-col gap-2">
             {operations.map((op) => (
-              <a
+              <Link
                 key={op.id}
                 href={`${DOCS_BASE_PATH}reference/api/${op.tag}/${op.id}`}
                 className={cn(
-                  'flex items-center gap-2 text-[13px] transition-colors duration-100 hover:text-green-45 dark:hover:text-green-45',
+                  'inline-flex w-fit items-center gap-2 text-sm leading-tight transition-colors duration-200 hover:text-black-pure dark:hover:text-white',
                   op.deprecated
                     ? 'text-gray-new-60 dark:text-gray-new-50'
                     : 'text-gray-new-40 dark:text-gray-new-60'
                 )}
               >
-                {op.summary}
-                {op.deprecated && <Tag label="deprecated" size="sm" />}
-              </a>
+                <span className="text-balance">
+                  {op.summary}
+                  {op.deprecated && (
+                    <Tag
+                      className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
+                      label="deprecated"
+                      size="sm"
+                    />
+                  )}
+                </span>
+              </Link>
             ))}
           </div>
         </div>

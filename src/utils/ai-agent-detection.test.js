@@ -213,6 +213,26 @@ describe('getMarkdownPath', () => {
       expect(result).toBe('/md/docs/changelog.md');
     });
 
+    it('should resolve the API endpoint index route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api/reference');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
+    it('should resolve the API endpoint index .md route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api/reference.md');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
+    it('should resolve the legacy API reference route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api-reference');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
+    it('should resolve the legacy API reference .md route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api-reference.md');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
     it('should resolve individual changelog entries to changelog content path', () => {
       const result = getMarkdownPath('/docs/changelog/2026-03-13');
       expect(result).toBe('/md/changelog/2026-03-13.md');
@@ -239,6 +259,14 @@ describe('getMarkdownPath', () => {
       const result = getMarkdownPath('/docs/rss.xml');
       expect(result).toBeNull();
     });
+
+    it.each(['/docs/reference/api/llms.txt', '/docs/reference/api/llms-full.txt'])(
+      'should pass through static API reference index files: %s',
+      (path) => {
+        const result = getMarkdownPath(path);
+        expect(result).toBeNull();
+      }
+    );
   });
 
   describe('Invalid routes (should return null)', () => {

@@ -13,7 +13,7 @@ summary: >-
   resource replacements and data loss during `terraform init -upgrade`.
 enableTableOfContents: true
 tag: community
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-06T16:27:57.937Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
@@ -44,7 +44,7 @@ This provider is not maintained or officially supported by Neon. Use at your own
   - Explicitly define all critical resource parameters in your Terraform configurations, even if they had defaults previously.
   - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
 
-- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
+- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](/docs/reference/api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
 
 ## Prerequisites
 

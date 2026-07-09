@@ -7,7 +7,7 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node scripts/generate-api-ref.mjs && node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
+    "prebuild": "node scripts/generate-api-ref.mjs && npm run check:api-ref-nav && node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
     "predev": "node scripts/generate-api-ref.mjs && node scripts/blog-content-cli.js bootstrap && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
     "dev": "next dev",
     "build": "next build",
@@ -29,6 +29,7 @@
     "generate:skills": "node src/scripts/generate-skills-index.js",
     "update:skills": "npm run sync:skills && npm run generate:skills",
     "generate:api-ref": "node scripts/generate-api-ref.mjs",
+    "check:api-ref-nav": "node scripts/check-api-ref-nav.mjs",
     "audit:api-ref": "node scripts/audit-api-spec.mjs",
     "audit:field-groups": "node scripts/validate-field-groups.mjs",
     "check:broken-links": "linkinator --config linkinator.config.json",
@@ -131,8 +132,7 @@
     "unique-username-generator": "^1.4.0",
     "unist-util-visit": "^5.0.0",
     "vaul": "^1.1.2",
-    "yup": "^1.4.0",
-    "zustand": "^5.0.13"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

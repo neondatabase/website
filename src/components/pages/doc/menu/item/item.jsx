@@ -135,8 +135,14 @@ const Item = ({
           >
             {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
             <span className="text-pretty" aria-hidden={!!ariaLabel}>
-              {title}&nbsp;
-              {tag && <Tag className="relative -top-px ml-1 inline-block" label={tag} size="sm" />}
+              {title}
+              {tag && (
+                <Tag
+                  className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
+                  label={tag}
+                  size="sm"
+                />
+              )}
             </span>
           </Link>
           <button
@@ -169,9 +175,15 @@ const Item = ({
         >
           {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
           {method && <MethodDot method={method} />}
-          <span className="text-pretty" aria-hidden={!!ariaLabel}>
-            {title}&nbsp;
-            {tag && <Tag className="relative -top-px ml-1 inline-block" label={tag} size="sm" />}
+          <span className="text-balance" aria-hidden={!!ariaLabel}>
+            {title}
+            {tag && (
+              <Tag
+                className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
+                label={tag}
+                size="sm"
+              />
+            )}
           </span>
           {items?.length && (
             <Chevron className={cn('ml-auto w-1.5', !isCollapsed && 'rotate-90')} />

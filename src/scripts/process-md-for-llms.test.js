@@ -7,6 +7,8 @@ import {
   buildNavigationMap,
   buildNavigationFooter,
   buildPageHeader,
+  addNavigationContext,
+  stripNavigationContext,
 } from './process-md-for-llms.js';
 
 // Test actual file conversion - the important stuff
@@ -767,6 +769,42 @@ See [CONN_MAX_AGE](https://example.com).
       expect(authEntry).toBeDefined();
       expect(authEntry.breadcrumbs).not.toContain('Start with Neon');
       expect(authEntry.breadcrumbs).toContain('Neon Auth');
+    });
+  });
+
+  describe('Navigation context stripping', () => {
+    it('should strip the feedback footer when a page has no related docs footer', () => {
+      const content = '# Test page\n\nBody text.';
+      const withContext = addNavigationContext(content, 'docs/unknown-page.md', new Map());
+
+      expect(withContext).toContain('Note for AI assistants');
+
+      const stripped = stripNavigationContext(withContext);
+
+      expect(stripped.trim()).toBe(content);
+      expect(stripped).not.toContain('Note for AI assistants');
+      expect(stripped).not.toContain('/api/docs-feedback');
+    });
+
+    it('should strip related docs and feedback footers together', () => {
+      const content = '# Connect to Neon\n\nBody text.';
+      const navMap = new Map();
+      navMap.set('get-started/connect-neon', {
+        sectionName: 'Start with Neon',
+        urlPrefix: 'docs',
+        siblings: [{ title: 'Sign up', slug: 'get-started/signing-up' }],
+      });
+
+      const withContext = addNavigationContext(content, 'docs/get-started/connect-neon.md', navMap);
+
+      expect(withContext).toContain('## Related docs (Start with Neon)');
+      expect(withContext).toContain('Note for AI assistants');
+
+      const stripped = stripNavigationContext(withContext);
+
+      expect(stripped.trim()).toBe(content);
+      expect(stripped).not.toContain('## Related docs');
+      expect(stripped).not.toContain('Note for AI assistants');
     });
   });
 

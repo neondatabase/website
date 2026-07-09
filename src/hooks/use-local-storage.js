@@ -25,8 +25,7 @@ function useLocalStorage(key, initialValue) {
 
   // Stable setter: uses functional setState so storedValue is never captured in
   // the closure. Without useCallback, a new reference is created every render,
-  // which causes effects that list setValue as a dep (e.g. InterfaceTabActivator)
-  // to re-run and override user tab selections.
+  // which causes effects that list setValue as a dep to re-run and override user tab selections.
   const setValue = useCallback(
     (value) => {
       try {

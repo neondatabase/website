@@ -227,7 +227,7 @@ function renderReport(results, localExamples = new Set()) {
     `These optional enum properties have no \`default\` in the spec. ` +
     `Without a default, the UI shows "(select)" and the generated curl/SDK examples ` +
     `omit the field entirely. Adding a \`default\` value to the spec improves ` +
-    `discoverability and pre-fills the interactive editor to the most common value.\n`
+    `discoverability and lets examples choose the most common value.\n`
   );
   lines.push(`**Example:** \`createNeonAuth.auth_provider\` — enum \`["mock","stack","stack_v2","better_auth"]\`, no default. Should be \`"better_auth"\`.\n`);
   if (enumGapOps.length === 0) {

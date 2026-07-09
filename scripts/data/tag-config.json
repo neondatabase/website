@@ -230,7 +230,6 @@
     {
       "slug": "organizations",
       "specName": "organizations",
-      "bareId": "org_id",
       "display": "Organizations",
       "description": "Manage org members, API keys, VPC endpoints, and spending",
       "groups": [
@@ -469,6 +468,31 @@
           ]
         }
       ]
+    },
+    {
+      "slug": "buckets",
+      "display": "Buckets",
+      "description": "Manage branch buckets and objects"
+    },
+    {
+      "slug": "storage",
+      "display": "Storage",
+      "description": "Inspect branch storage state"
+    },
+    {
+      "slug": "ai-gateway",
+      "display": "AI Gateway",
+      "description": "Retrieve branch AI Gateway endpoints"
+    },
+    {
+      "slug": "credentials",
+      "display": "Credentials",
+      "description": "Issue and revoke scoped branch credentials"
+    },
+    {
+      "slug": "functions",
+      "display": "Functions",
+      "description": "Manage branch functions and deployments"
     }
   ],
   "operationOverrides": {

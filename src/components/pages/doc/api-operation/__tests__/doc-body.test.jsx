@@ -57,6 +57,32 @@ const SECTIONS = [
   },
 ];
 
+const DEEP_BODY_TREE = [
+  {
+    key: 'project',
+    type: 'object',
+    children: [
+      {
+        key: 'settings',
+        type: 'object',
+        children: [
+          {
+            key: 'maintenance_window',
+            type: 'object',
+            children: [
+              {
+                key: 'schedule',
+                type: 'object',
+                children: [{ key: 'weekdays', type: 'array' }],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
 describe('humanizeFieldName', () => {
   it('applies acronym and product-name overrides', () => {
     expect(humanizeFieldName('pg_version')).toBe('Postgres version');
@@ -102,12 +128,20 @@ describe('DocBodySection', () => {
     );
 
     expect(screen.getByRole('heading', { name: 'Request body' })).toBeInTheDocument();
-    expect(screen.getByText('0 required')).toBeInTheDocument();
-    expect(screen.getByText(/No field is required/)).toBeInTheDocument();
+    expect(screen.queryByText(/No field is required/)).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Basics' })).toBeInTheDocument();
+    expect(screen.getByText('commonly set')).toBeInTheDocument();
     expect(screen.getByText('Project name')).toBeInTheDocument();
-    expect(screen.getByText('default auto-generated')).toBeInTheDocument();
-    expect(screen.getByText('17')).toHaveClass('text-[#00B87B]');
+    expect(screen.getByText('default: auto-generated')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Basics' }).closest('section')).toHaveClass(
+      'mb-[-1px]',
+      'flex',
+      'p-4',
+      'dark:bg-black-pure'
+    );
+    expect(screen.getByText('commonly set')).toHaveClass('text-green-44', 'dark:text-green-52');
+    expect(screen.getAllByText('project.*')[0]).toHaveClass('text-[16px]', 'dark:text-gray-new-80');
+    expect(screen.getByText('17')).toHaveClass('text-green-44', 'dark:text-green-52');
 
     // Only the first section is open by default.
     expect(screen.queryByText('Hipaa')).not.toBeInTheDocument();
@@ -117,6 +151,88 @@ describe('DocBodySection', () => {
     fireEvent.click(settingsToggle);
     expect(settingsToggle).toHaveAttribute('aria-expanded', 'true');
     expect(screen.getByText('Hipaa')).toBeInTheDocument();
+  });
+
+  it('renders expandable object fields with indented third-level children', () => {
+    render(
+      <DocBodySection
+        bodyTree={BODY_TREE}
+        requestBody={{
+          requiredFields: [],
+          labels: {},
+          sections: [
+            {
+              id: 'settings',
+              label: 'Project settings',
+              collapsed: false,
+              schemaPath: 'project.settings.*',
+              rows: [{ path: 'project.settings', common: false, outOfObject: false }],
+            },
+          ],
+        }}
+      />
+    );
+
+    const settingsToggle = screen.getByRole('button', { name: 'Toggle Settings field' });
+    expect(settingsToggle).toHaveAttribute('aria-expanded', 'true');
+
+    const settingsGrid = screen.getByText('settings').closest('.grid');
+    expect(settingsGrid).toHaveClass('pl-3.5', 'gap-x-5');
+    expect(screen.getAllByText('project.settings.*')).toHaveLength(1);
+
+    const childGrid = screen.getByText('hipaa').closest('.grid');
+    expect(childGrid).toHaveClass('pl-14', 'gap-x-5');
+
+    fireEvent.click(settingsToggle);
+    expect(settingsToggle).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByText('hipaa')).not.toBeInTheDocument();
+  });
+
+  it('keeps deeper nested object fields aligned with third-level children', () => {
+    const { container } = render(
+      <DocBodySection
+        bodyTree={DEEP_BODY_TREE}
+        requestBody={{
+          requiredFields: [],
+          labels: {},
+          sections: [
+            {
+              id: 'settings',
+              label: 'Project settings',
+              collapsed: false,
+              schemaPath: 'project.settings.*',
+              rows: [{ path: 'project.settings', common: false, outOfObject: false }],
+            },
+          ],
+        }}
+      />
+    );
+
+    const settingsToggle = screen.getByRole('button', { name: 'Toggle Settings field' });
+    const maintenanceToggle = screen.getByRole('button', {
+      name: 'Toggle Maintenance window field',
+    });
+
+    const settingsChildren = document.getElementById(settingsToggle.getAttribute('aria-controls'));
+    expect(settingsChildren).not.toHaveClass('ml-5');
+
+    fireEvent.click(maintenanceToggle);
+
+    const maintenanceChildren = document.getElementById(
+      maintenanceToggle.getAttribute('aria-controls')
+    );
+    expect(maintenanceChildren).toHaveClass('ml-5', 'w-[calc(100%-1.25rem)]');
+
+    const scheduleToggle = screen.getByRole('button', { name: 'Toggle Schedule field' });
+    fireEvent.click(scheduleToggle);
+
+    const scheduleChildren = document.getElementById(scheduleToggle.getAttribute('aria-controls'));
+    expect(scheduleChildren).toHaveClass('ml-5', 'w-[calc(100%-1.25rem)]');
+
+    for (const key of ['maintenance_window', 'schedule', 'weekdays']) {
+      expect(screen.getByText(key).closest('.grid')).toHaveClass('pl-14', 'gap-x-5');
+    }
+    expect(container.querySelectorAll('[class*="left-[37px]"]')).toHaveLength(3);
   });
 
   it('falls back to a flat read-only tree when sections are absent', () => {

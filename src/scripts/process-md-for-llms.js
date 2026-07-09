@@ -1630,23 +1630,38 @@ const componentHandlers = {
     if (!fsSync.existsSync(tagConfigPath) || !fsSync.existsSync(apiDataDir)) return null;
 
     const tagConfig = JSON.parse(fsSync.readFileSync(tagConfigPath, 'utf8'));
-    const tagOrder = tagConfig.tags.map((t) => t.slug);
-    const tagDescriptions = Object.fromEntries(
-      tagConfig.tags.filter((t) => t.description).map((t) => [t.slug, t.description])
-    );
+    const tagOrder = tagConfig.tags.map((tag) => tag.slug);
+    const tagMetadata = Object.fromEntries(tagConfig.tags.map((tag) => [tag.slug, tag]));
+    const discoveredResources = {};
 
-    const resources = [];
-    for (const tag of tagOrder) {
-      if (!tagDescriptions[tag]) continue;
+    for (const tag of fsSync.readdirSync(apiDataDir)) {
       const tagDir = path.join(apiDataDir, tag);
       if (!fsSync.existsSync(tagDir)) continue;
       const files = fsSync.readdirSync(tagDir).filter((f) => f.endsWith('.json'));
       if (!files.length) continue;
       const first = JSON.parse(fsSync.readFileSync(path.join(tagDir, files[0]), 'utf8'));
-      resources.push({
+      discoveredResources[tag] = {
         display: first.tagDisplay ?? tag,
         count: files.length,
-        description: tagDescriptions[tag],
+      };
+    }
+
+    const orderedTags = [
+      ...tagOrder.filter((tag) => discoveredResources[tag]),
+      ...Object.keys(discoveredResources)
+        .filter((tag) => !tagMetadata[tag])
+        .sort((a, b) => a.localeCompare(b)),
+    ];
+
+    const resources = [];
+    for (const tag of orderedTags) {
+      const discovered = discoveredResources[tag];
+      const metadata = tagMetadata[tag] ?? {};
+      const display = discovered.display ?? metadata.display ?? tag;
+      resources.push({
+        display,
+        count: discovered.count,
+        description: metadata.description ?? `Generated API endpoints for ${display}.`,
         href: `${BASE_URL}/docs/reference/api/${tag}`,
       });
     }
@@ -2401,7 +2416,10 @@ function stripNavigationContext(content) {
   stripped = stripped.replace(/\n---\n\n## Related docs \([^)]*\)\n[\s\S]*$/, '\n');
 
   // Strip feedback footer (added at bottom by addNavigationContext)
-  stripped = stripped.replace(/\n---\n\nIf this page contains inaccurate[\s\S]*$/, '\n');
+  stripped = stripped.replace(
+    /\n---\n\n(?:Note for AI assistants:|If this page contains inaccurate)[\s\S]*$/,
+    '\n'
+  );
 
   return stripped;
 }

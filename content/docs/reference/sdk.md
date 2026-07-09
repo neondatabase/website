@@ -11,13 +11,13 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neondatabase-toolkit
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-06T16:27:57.937Z'
 ---
 
 Neon provides two categories of SDKs to support different use cases:
 
 - **Client SDKs**: For application developers building apps with the [Data API](/docs/data-api/overview) and optionally [Neon Auth](/docs/auth/overview). These SDKs handle database queries and user authentication from your application.
-- **Management SDKs**: For programmatically managing Neon platform resources like projects, branches, databases, endpoints, and roles. These are wrappers around the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+- **Management SDKs**: For programmatically managing Neon platform resources like projects, branches, databases, endpoints, and roles. These are wrappers around the [Neon API](/docs/reference/api).
 
 ## Client SDKs
 

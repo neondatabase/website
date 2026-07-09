@@ -9,11 +9,6 @@ The shipped operation page is read-only documentation. There are no editable
 fields, no live-updating command block, and no interface tabs. Examples are
 prebuilt by the generator and copyable.
 
-> The older interactive editor stack (`operation-client.jsx`, `operation-body.jsx`,
-> `operation-params.jsx`, the depth/reset controls, and the `store.js` state surface)
-> is preserved in the tree but is **not** rendered on operation pages. If you revive
-> it, derive a separate checklist for that path. The items below do not cover it.
-
 ## Pages under test
 
 Each page exercises a distinct shape. Together they cover the behavior surface of

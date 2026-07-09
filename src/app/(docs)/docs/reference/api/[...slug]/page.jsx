@@ -6,9 +6,9 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 import ApiOperation from 'components/pages/doc/api-operation';
+import InterfaceQueryParamSync from 'components/pages/doc/api-operation/interface-query-param-sync';
 import ApiTagPage from 'components/pages/doc/api-tag-page';
 import EndpointIndexPage from 'components/pages/doc/endpoint-index/endpoint-index';
-import InterfaceTabActivator from 'components/pages/doc/interface-tabs/interface-tab-activator';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH } from 'constants/content';
@@ -26,6 +26,8 @@ const API_DOCS_DIR = resolve(process.cwd(), 'content/api-docs');
 const API_SLUG_PREFIX = 'reference/api';
 const SAFE_SLUG = /^[a-z0-9][a-z0-9-]*$/;
 const STATIC_PAGES = new Set(['get-started', 'key-concepts']);
+
+const getPublicApiMarkdownPath = (slug) => `/docs/${API_SLUG_PREFIX}/${slug}.md`;
 
 // Only serve pre-generated slugs — no dynamic fallback to filesystem
 export const dynamicParams = false;
@@ -91,6 +93,7 @@ export async function generateMetadata(props) {
       description: 'All Neon API endpoints grouped by resource',
       pathname: `${LINKS.docs}/${API_SLUG_PREFIX}/reference`,
       type: 'article',
+      markdownPath: `/docs/${API_SLUG_PREFIX}.md`,
     });
   }
 
@@ -125,6 +128,7 @@ export async function generateMetadata(props) {
       imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
       pathname: `${LINKS.docs}/${currentSlug}`,
       type: 'article',
+      markdownPath: getPublicApiMarkdownPath(tag),
     });
   }
 
@@ -143,7 +147,7 @@ export async function generateMetadata(props) {
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     type: 'article',
-    markdownPath: `/md/docs/reference/api/${tag}/${id}.md`,
+    markdownPath: getPublicApiMarkdownPath(`${tag}/${id}`),
   });
 }
 
@@ -173,9 +177,9 @@ const ApiRefPage = async (props) => {
 
   // Hoisted so Next.js sees a guaranteed Suspense boundary for useSearchParams
   // on every code path in this route, preventing prerender bail-out.
-  const tabActivator = (
+  const interfaceQueryParamSync = (
     <Suspense>
-      <InterfaceTabActivator />
+      <InterfaceQueryParamSync />
     </Suspense>
   );
 
@@ -189,7 +193,7 @@ const ApiRefPage = async (props) => {
     const tableOfContents = getTableOfContents(content);
     return (
       <>
-        {tabActivator}
+        {interfaceQueryParamSync}
         <Post
           content={content}
           data={data}
@@ -214,7 +218,7 @@ const ApiRefPage = async (props) => {
 
     return (
       <>
-        {tabActivator}
+        {interfaceQueryParamSync}
         <ApiTagPage
           tag={tag}
           tagDisplay={tagDisplay}
@@ -237,7 +241,7 @@ const ApiRefPage = async (props) => {
 
   return (
     <>
-      {tabActivator}
+      {interfaceQueryParamSync}
       <ApiOperation
         operation={operation}
         breadcrumbs={breadcrumbs}

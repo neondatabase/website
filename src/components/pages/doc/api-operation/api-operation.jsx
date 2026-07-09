@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
 
+import ApiAiContextLink from 'components/pages/doc/api-ai-context-link';
 import ApiMethodBadge from 'components/pages/doc/api-method-badge';
 import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import DropdownMenu from 'components/pages/doc/dropdown-menu';
 import Tag from 'components/pages/doc/tag';
 import DocFooter from 'components/shared/doc-footer';
-import Link from 'components/shared/link';
 import NavigationLinks from 'components/shared/navigation-links';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import ExternalIcon from 'icons/external.inline.svg';
+import { INLINE_CODE_STYLES } from 'utils/api-style';
+import { cn } from 'utils/cn';
 
 import OperationDoc from './operation-doc';
 import { buildOperationToc } from './operation-toc';
@@ -146,19 +147,33 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
 
   return (
     <>
-      <div className="min-w-0 flex-1 pb-32 lg:pb-24 md:pb-20">
+      <div className="max-w-208 min-w-0 flex-1 pb-32 lg:max-w-none lg:pb-24 md:pb-20">
         {breadcrumbs?.length > 0 && (
           <Breadcrumbs className="mb-7!" breadcrumbs={breadcrumbs} baseUrl={DOCS_BASE_PATH} />
         )}
 
         <article>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex min-w-0 flex-wrap items-center gap-2">
             <ApiMethodBadge method={operation.method} />
-            <code className="font-mono text-base font-medium text-gray-new-20 dark:text-gray-new-80">
-              {operation.path}
-            </code>
-            {operation.stability && <Tag label={operation.stability} size="sm" className="ml-1" />}
-            {operation.deprecated && <Tag label="deprecated" size="sm" className="ml-1" />}
+            <span className="text-pretty">
+              <code className="max-w-full min-w-0 font-mono text-sm font-medium text-wrap wrap-anywhere text-gray-new-20 dark:text-gray-new-80">
+                {operation.path}
+              </code>
+              {operation.stability && (
+                <Tag
+                  label={operation.stability}
+                  size="sm"
+                  className="ml-2 inline-flex px-2 py-1 text-[0.6875rem]/none font-normal -tracking-tight tabular-nums"
+                />
+              )}
+              {operation.deprecated && (
+                <Tag
+                  label="deprecated"
+                  size="sm"
+                  className="ml-2 inline-flex px-2 py-1 text-[0.6875rem]/none font-normal -tracking-tight tabular-nums"
+                />
+              )}
+            </span>
           </div>
 
           {operation.deprecated && (
@@ -168,7 +183,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
             </p>
           )}
 
-          <div className="mt-4 flex items-start justify-between gap-4">
+          <div className="mt-4 mb-4.5 flex items-start justify-between gap-x-4 gap-y-3 sm:flex-col">
             <h1 className="text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]">
               {operation.summary}
             </h1>
@@ -177,24 +192,22 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
 
           {operation.descriptionHtml && (
             <div
-              className="mt-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_code]:rounded [&_code]:bg-gray-new-95 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm [&_code]:dark:bg-gray-new-15 [&_p+p]:mt-3"
+              className={cn(
+                'text-[20px] leading-snug text-gray-new-30 dark:text-gray-new-70 [&_p+p]:mt-3',
+                INLINE_CODE_STYLES
+              )}
               dangerouslySetInnerHTML={{ __html: operation.descriptionHtml }}
             />
           )}
 
-          <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
-            <Link
-              className="inline-flex items-center gap-1 text-gray-new-50 transition-colors duration-200 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80"
+          <p className="mt-4.5 text-[13px] text-gray-new-50 dark:text-gray-new-60">
+            <ApiAiContextLink
               to={`/docs/${currentSlug}.md`}
-            >
-              Markdown for AI context
-              <ExternalIcon className="size-3" />
-            </Link>
-            {` (`}
-            <code className="text-[11px]">
-              {operation.method.toUpperCase()} {operation.path}
-            </code>
-            {`): parameters, examples, and available interfaces.`}
+              tooltipId={`api-ai-context-${operation.id}`}
+              tooltipLabel={operation.path}
+              tooltipLabelVariant="mono"
+              tooltipDescription="parameters, examples, and available interfaces."
+            />
           </p>
 
           <OperationDoc operation={operation} bodyTree={bodyTree} respTree={respTree} />
@@ -210,7 +223,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
         />
       </div>
       <Aside
-        className="-left-20 ml-0! w-[312px] shrink-0 3xl:left-auto xl:hidden"
+        className="ml-0! w-78 shrink-0 xl:hidden"
         enableTableOfContents
         tableOfContents={tableOfContents}
         gitHubPath={gitHubPath}

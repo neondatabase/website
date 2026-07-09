@@ -1,8 +1,8 @@
-import { readFileSync, rmSync } from 'node:fs';
+import { existsSync, readFileSync, rmSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import {
   toSlug,
@@ -18,6 +18,7 @@ import {
   toLlmsTxtLine,
   toAgentMarkdown,
   toFullMarkdownEntry,
+  generateLlmsFull,
   toNavYaml,
   stripMarkdownLinks,
   descriptionToHtml,
@@ -29,8 +30,6 @@ import {
   resolveLocalRef,
   discriminatorLabelsFromRaw,
   getRawSchemaAt,
-  collectBodyGlobals,
-  computeCrossPageParamSet,
   buildRepresentativeExamples,
 } from './generate-api-ref.mjs';
 import { FIELD_ORDER, computeDisplayOrder } from './lib/field-order-config.mjs';
@@ -55,7 +54,7 @@ function resolveCoverageCommand(schema, command) {
   const path = [];
   for (const token of tokens) {
     if (token.startsWith('-') || token.startsWith('<') || token.startsWith('[')) break;
-    if (!commands?.[token]) break;
+    if (!commands?.[token]) return { node: null, path, unresolved: token };
     node = commands[token];
     path.push(token);
     commands = node.commands;
@@ -979,6 +978,34 @@ describe('toFullMarkdownEntry', () => {
   });
 });
 
+describe('generateLlmsFull', () => {
+  it('builds the aggregate API reference file', () => {
+    const md = generateLlmsFull({
+      projects: [
+        {
+          operationId: 'listProjects',
+          summary: 'List projects',
+          method: 'GET',
+          path: '/projects',
+          description: 'Retrieves projects.',
+          parameters: [],
+          examples: {
+            curl: 'curl "https://console.neon.tech/api/v2/projects"',
+            typescript: 'const { data } = await api.listProjects({});',
+          },
+          response: { status: '200', description: 'OK', example: null, properties: null },
+        },
+      ],
+    });
+
+    expect(md).toContain('# Neon Management API - Full Reference');
+    expect(md).toContain('https://neon.com/docs/reference/api/llms.txt');
+    expect(md).toContain('# Projects');
+    expect(md).toContain('## List projects · GET /projects');
+    expect(md).toContain('const { data } = await api.listProjects({});');
+  });
+});
+
 // ---------------------------------------------------------------------------
 // toNavYaml
 // ---------------------------------------------------------------------------
@@ -1041,12 +1068,6 @@ describe('toNavYaml', () => {
 // buildCliFlags
 // ---------------------------------------------------------------------------
 //
-// Pin the contract that globalEquiv is set INDEPENDENTLY of apiEquiv.
-// The createProject case (--org-id has no API parameter twin because
-// org_id lives in the body, but still must route through the shared
-// paramStore) is what motivated the split — a refactor that
-// accidentally tied globalEquiv to apiEquiv would re-break session globals.
-
 describe('buildCliFlags', () => {
   const cliSchema = {
     globalOptions: {},
@@ -1073,48 +1094,25 @@ describe('buildCliFlags', () => {
     },
   };
 
-  const crossPageParams = new Set(['org_id', 'project_id']);
-
-  it('sets both apiEquiv and globalEquiv when flag is in cross-page set AND in op.parameters', () => {
+  it('sets apiEquiv when a CLI flag maps to an API parameter', () => {
     const paramProps = [{ name: 'org_id', in: 'query' }];
-    const flags = buildCliFlags(
-      'listProjects',
-      'neon projects list',
-      cliSchema,
-      paramProps,
-      crossPageParams
-    );
+    const flags = buildCliFlags('neon projects list', cliSchema, paramProps);
     const orgFlag = flags.find((f) => f.name === 'org-id');
     expect(orgFlag.apiEquiv).toBe('org_id');
-    expect(orgFlag.globalEquiv).toBe('org_id');
   });
 
-  it('sets globalEquiv but NOT apiEquiv when flag is cross-page but NOT in op.parameters (createProject case)', () => {
+  it('does not set apiEquiv when a CLI flag is only a request-body field', () => {
     const paramProps = [];
-    const flags = buildCliFlags(
-      'createProject',
-      'neon projects create',
-      cliSchema,
-      paramProps,
-      crossPageParams
-    );
+    const flags = buildCliFlags('neon projects create', cliSchema, paramProps);
     const orgFlag = flags.find((f) => f.name === 'org-id');
     expect(orgFlag.apiEquiv).toBeUndefined();
-    expect(orgFlag.globalEquiv).toBe('org_id');
   });
 
-  it('sets neither when flag is neither in cross-page set nor in op.parameters', () => {
+  it('sets no mapping when the flag has no API parameter twin', () => {
     const paramProps = [];
-    const flags = buildCliFlags(
-      'createProject',
-      'neon projects create',
-      cliSchema,
-      paramProps,
-      crossPageParams
-    );
+    const flags = buildCliFlags('neon projects create', cliSchema, paramProps);
     const nameFlag = flags.find((f) => f.name === 'name');
     expect(nameFlag.apiEquiv).toBeUndefined();
-    expect(nameFlag.globalEquiv).toBeUndefined();
   });
 });
 
@@ -1145,6 +1143,18 @@ describe('CLI coverage fixtures', () => {
     expect(
       resolveCoverageCommand(neonctlSchema, 'neon neon-auth domain allow-localhost enable').path
     ).toEqual(['neon-auth', 'domain', 'allow-localhost', 'enable']);
+  });
+
+  it('uses schema-valid VPC CLI commands', () => {
+    expect(cliCoverage.listProjectVPCEndpoints).toBe('neon vpc project list --project-id <id>');
+    expect(cliCoverage.assignProjectVPCEndpoint).toBe(
+      'neon vpc project restrict <vpc_endpoint_id> --project-id <id>'
+    );
+    expect(cliCoverage.deleteProjectVPCEndpoint).toBe(
+      'neon vpc project remove <vpc_endpoint_id> --project-id <id>'
+    );
+    expect(cliCoverage.deleteOrganizationVPCEndpoint).toContain('neon vpc endpoint remove');
+    expect(cliCoverage.getOrganizationVPCEndpointDetails).toContain('neon vpc endpoint status');
   });
 
   it('all cli-coverage commands resolve to a schema command', () => {
@@ -1517,106 +1527,6 @@ describe('buildOperationData', () => {
 });
 
 // ---------------------------------------------------------------------------
-// Session-identity annotations
-// ---------------------------------------------------------------------------
-
-describe('computeCrossPageParamSet', () => {
-  it('returns names ending in _id/_name appearing in ≥2 ops', () => {
-    const schema = {
-      paths: {
-        '/projects/{project_id}': {
-          get: { operationId: 'getProject', parameters: [{ name: 'project_id', in: 'path' }] },
-        },
-        '/projects/{project_id}/branches': {
-          post: {
-            operationId: 'createProjectBranch',
-            parameters: [{ name: 'project_id', in: 'path' }],
-          },
-        },
-        '/foo/{id}': {
-          get: { operationId: 'getFoo', parameters: [{ name: 'id', in: 'path' }] },
-        },
-      },
-    };
-    const set = computeCrossPageParamSet(schema);
-    expect(set.has('project_id')).toBe(true);
-    expect(set.has('id')).toBe(false); // doesn't match the _id/_name suffix
-  });
-
-  it('excludes names appearing in only 1 op (no cross-page partner)', () => {
-    const schema = {
-      paths: {
-        '/foo/{rare_id}': {
-          get: { operationId: 'getFoo', parameters: [{ name: 'rare_id', in: 'path' }] },
-        },
-      },
-    };
-    expect(computeCrossPageParamSet(schema).has('rare_id')).toBe(false);
-  });
-});
-
-describe('collectBodyGlobals', () => {
-  const crossPage = new Set(['org_id', 'project_id', 'region_id']);
-
-  it('matches leaf names against the cross-page set, returning {path, global}', () => {
-    const props = {
-      project: {
-        type: 'object',
-        properties: {
-          name: { type: 'string' },
-          org_id: { type: 'string' },
-          region_id: { type: 'string' },
-        },
-      },
-    };
-    expect(collectBodyGlobals(props, crossPage)).toEqual([
-      { path: 'project.org_id', global: 'org_id' },
-      { path: 'project.region_id', global: 'region_id' },
-    ]);
-  });
-
-  it('excludes paths under arrays (array carveout via `[]` segment)', () => {
-    const props = {
-      branches: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            project_id: { type: 'string' },
-            org_id: { type: 'string' },
-          },
-        },
-      },
-    };
-    // Paths under `[]` are intentionally excluded — typing in array row 0
-    // shouldn't auto-fill row 1.
-    expect(collectBodyGlobals(props, crossPage)).toEqual([]);
-  });
-
-  it('returns [] for empty/missing properties', () => {
-    expect(collectBodyGlobals(null, crossPage)).toEqual([]);
-    expect(collectBodyGlobals({}, crossPage)).toEqual([]);
-  });
-
-  it('returns [] when the cross-page set is empty', () => {
-    const props = { org_id: { type: 'string' } };
-    expect(collectBodyGlobals(props, new Set())).toEqual([]);
-  });
-
-  it('respects the 10-deep recursion cap', () => {
-    let leaf = { type: 'string' };
-    let nested = leaf;
-    for (let i = 0; i < 15; i++) {
-      nested = { type: 'object', properties: { child: nested, org_id: { type: 'string' } } };
-    }
-    const result = collectBodyGlobals({ root: nested }, crossPage);
-    // Caps at depth 10; deeper org_id entries don't appear. We just assert
-    // the function doesn't infinite-loop or throw.
-    expect(Array.isArray(result)).toBe(true);
-  });
-});
-
-// ---------------------------------------------------------------------------
 // main() — empty spec safety (C1 + C2)
 // ---------------------------------------------------------------------------
 
@@ -1624,6 +1534,9 @@ describe('main() — empty spec safety', () => {
   const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
   const DATA_TMP = resolve(ROOT, 'src/data/api-ref.next');
   const MD_TMP = resolve(ROOT, 'public/md/docs/reference/api.next');
+  const CACHE_TMP = resolve(ROOT, '.next/cache/api-reference-test/openapi-v2.json');
+  const CACHE_TMP_DIR = dirname(CACHE_TMP);
+  const originalCachePath = process.env.API_REF_SPEC_CACHE_PATH;
 
   const stubSpec = (paths) =>
     vi.stubGlobal(
@@ -1640,15 +1553,26 @@ describe('main() — empty spec safety', () => {
       })
     );
 
+  beforeEach(() => {
+    process.env.API_REF_SPEC_CACHE_PATH = CACHE_TMP;
+  });
+
   afterEach(() => {
     vi.unstubAllGlobals();
     rmSync(DATA_TMP, { recursive: true, force: true });
     rmSync(MD_TMP, { recursive: true, force: true });
+    rmSync(CACHE_TMP_DIR, { recursive: true, force: true });
+    if (originalCachePath === undefined) {
+      delete process.env.API_REF_SPEC_CACHE_PATH;
+    } else {
+      process.env.API_REF_SPEC_CACHE_PATH = originalCachePath;
+    }
   });
 
   it('throws when spec has no operations, never touches DATA_ROOT/MD_ROOT', async () => {
     stubSpec({});
     await expect(main()).rejects.toThrow(/refusing to publish empty API reference/);
+    expect(existsSync(CACHE_TMP)).toBe(false);
   });
 
   it('skips paths whose operation has no operationId (counts as 0, throws)', async () => {
@@ -1656,5 +1580,6 @@ describe('main() — empty spec safety', () => {
       '/foo': { get: { tags: ['x'], responses: { 200: { description: 'OK' } } } },
     });
     await expect(main()).rejects.toThrow(/refusing to publish empty API reference/);
+    expect(existsSync(CACHE_TMP)).toBe(false);
   });
 });

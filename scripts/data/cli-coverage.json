@@ -15,15 +15,11 @@
     "commands": [
       {
         "cmd": "neon neon-auth domain allow-localhost enable",
-        "covers": [
-          "allow_localhost"
-        ]
+        "covers": ["allow_localhost"]
       },
       {
         "cmd": "neon neon-auth domain allow-localhost disable",
-        "covers": [
-          "allow_localhost"
-        ]
+        "covers": ["allow_localhost"]
       }
     ],
     "uncovered": []
@@ -64,31 +60,25 @@
   "updateProject": "neon projects update",
   "recoverProject": "neon projects recover",
   "getProject": "neon projects get",
-  "listOrganizationVPCEndpoints": "neon vpc endpoint list --org-id <id>",
-  "deleteOrganizationVPCEndpoint": "neon vpc endpoint delete --org-id <id>",
-  "getOrganizationVPCEndpointDetails": "neon vpc endpoint get --org-id <id>",
-  "listProjectVPCEndpoints": "neon vpc endpoint list --project-id <id>",
-  "deleteProjectVPCEndpoint": "neon vpc endpoint delete --project-id <id>",
+  "listOrganizationVPCEndpoints": "neon vpc endpoint list --org-id <id> --region-id <region_id>",
+  "deleteOrganizationVPCEndpoint": "neon vpc endpoint remove <vpc_endpoint_id> --org-id <id> --region-id <region_id>",
+  "getOrganizationVPCEndpointDetails": "neon vpc endpoint status <vpc_endpoint_id> --org-id <id> --region-id <region_id>",
+  "listProjectVPCEndpoints": "neon vpc project list --project-id <id>",
+  "deleteProjectVPCEndpoint": "neon vpc project remove <vpc_endpoint_id> --project-id <id>",
   "listProjectBranches": "neon branches list",
   "createProjectBranch": "neon branches create",
   "updateProjectBranch": {
     "commands": [
       {
         "cmd": "neon branches rename <id|name> <new-name>",
-        "covers": [
-          "name"
-        ]
+        "covers": ["name"]
       },
       {
         "cmd": "neon branches set-expiration <id|name>",
-        "covers": [
-          "expires_at"
-        ]
+        "covers": ["expires_at"]
       }
     ],
-    "uncovered": [
-      "protected"
-    ]
+    "uncovered": ["protected"]
   },
   "setDefaultProjectBranch": "neon branches set-default <id|name>",
   "deleteProjectBranch": "neon branches delete",
@@ -102,9 +92,8 @@
   "createProjectBranchRole": "neon roles create",
   "deleteProjectBranchRole": "neon roles delete",
   "listProjectOperations": "neon operations list",
-  "getProjectBranchRolePassword": "neon roles get <role> --project-id <id>",
   "getProjectBranchSchema": "neon branches schema-diff [base] [compare]",
   "getConnectionURI": "neon connection-string [branch]",
-  "assignOrganizationVPCEndpoint": "neon vpc endpoint assign --org-id <id>",
-  "assignProjectVPCEndpoint": "neon vpc endpoint assign --project-id <id>"
+  "assignOrganizationVPCEndpoint": "neon vpc endpoint assign <vpc_endpoint_id> --org-id <id> --region-id <region_id>",
+  "assignProjectVPCEndpoint": "neon vpc project restrict <vpc_endpoint_id> --project-id <id>"
 }
