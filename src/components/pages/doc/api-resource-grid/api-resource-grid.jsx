@@ -75,7 +75,7 @@ const ApiResourceGrid = () => {
             {total} endpoints across {resources.length} resources
           </p>
           <Button
-            href={`${DOCS_BASE_PATH}reference/api/reference`}
+            to={`${DOCS_BASE_PATH}reference/api/reference`}
             theme="outlined-new"
             className="shrink-0 px-3 py-1.5 text-sm font-medium"
           >

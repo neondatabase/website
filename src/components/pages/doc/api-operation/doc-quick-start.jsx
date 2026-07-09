@@ -137,7 +137,7 @@ const DocQuickStart = ({ operation, requiredLeafCount = null }) => {
           <span className="mb-4 block scroll-mt-20 text-base leading-tight font-semibold tracking-tight">
             Also available in
           </span>
-          <CodeTabs labels={exampleLabels}>
+          <CodeTabs labels={exampleLabels} bodyClassName="bg-white dark:bg-black-pure">
             {examples.map((example) => (
               <ApiCodeBlock
                 key={example.id}
