@@ -827,11 +827,11 @@
               slug: reference/sdk
             - title: Neon TypeScript SDK
               slug: reference/javascript-sdk
-                - title: Neon API TypeScript SDK
-                  slug: reference/typescript-sdk
-                - title: Migrate to @neon/sdk
-                  slug: reference/migrate-api-client-to-sdk
-                - title: Python SDK (Neon API)
+            - title: Neon API TypeScript SDK
+              slug: reference/typescript-sdk
+            - title: Migrate to @neon/sdk
+              slug: reference/migrate-api-client-to-sdk
+            - title: Python SDK (Neon API)
               slug: reference/python-sdk
             - title: Go SDK (Neon API)
               slug: https://github.com/kislerdm/neon-sdk-go
