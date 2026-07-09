@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'components/shared/link';
 import { cn } from 'utils/cn';
 
-const VIDEO_VERSION = '20260619';
+const VIDEO_VERSION = '20260709';
 const SLIDER_VIEWPORT_QUERY = '(max-width: 63.9375rem)';
 const COMPACT_SLIDER_VIEWPORT_QUERY = '(max-width: 33.6875rem)';
 const VIDEO_SWITCH_DELAY_MS = 20;
