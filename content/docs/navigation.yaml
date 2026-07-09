@@ -1502,11 +1502,6 @@
         - title: Branching with CircleCI
           slug: guides/branching-circleci
 
-- nav: Tutorials
-  slug: https://neon.com/postgresql/tutorial
-  title: Tutorials
-  icon: tutorial
-
 - nav: Resources
   title: Resources
   subnav:
@@ -1554,3 +1549,8 @@
     - title: RSS feeds
       slug: reference/feeds
       icon: feeds
+
+- nav: Tutorials
+  slug: https://neon.com/postgresql/tutorial
+  title: Tutorials
+  icon: tutorial
