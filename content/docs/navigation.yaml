@@ -553,6 +553,8 @@
               slug: compute/functions/get-started
             - title: Deploy and manage
               slug: compute/functions/deploy
+            - title: Logs
+              slug: compute/functions/logs
             - title: Environment variables
               slug: compute/functions/environment-variables
             - title: Authentication

@@ -6,7 +6,7 @@ summary: >-
   region. Learn how to request access, what's included, and the current
   limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-09T20:16:51.709Z'
 ---
 
 ## Request access
@@ -24,6 +24,7 @@ Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-bui
 - `neon functions deploy` for direct CLI deployment
 - Neon API for programmatic deployment
 - Branch-scoped functions: each branch runs its own version at its own URL
+- Logs for deployed functions, viewable in the Console: level filtering, search, and download. See [Logs](/docs/compute/functions/logs)
 
 ## What's not included
 
@@ -39,7 +40,7 @@ Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-bui
 
 - `neon` ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary.
 - Slug names are restricted to `^[a-z0-9]{1,20}$`. No hyphens, no uppercase. Use the `name` field for a human-readable label.
-- Logs from deployed functions can't be retrieved yet. Use `neon dev` to see output during development; deployed functions must record diagnostics themselves (in Postgres, or in the response).
+- Logs are retained for 3 days. See [Logs](/docs/compute/functions/logs).
 
 ## Feedback
 

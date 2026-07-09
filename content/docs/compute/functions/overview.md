@@ -6,7 +6,7 @@ summary: >-
   API, AI agent, real-time server, or webhook handler that runs next to your
   Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-09T20:16:51.709Z'
 ---
 
 Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -78,6 +78,8 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 <a href="/docs/compute/functions/environment-variables" description="Neon-injected variables and how to add your own secrets." icon="gear">Environment variables</a>
 
 <a href="/docs/compute/functions/deploy" description="CLI and API reference for deploying and managing functions." icon="cli">Deploy and manage</a>
+
+<a href="/docs/compute/functions/logs" description="View, search, and download a function's logs in the Console." icon="search">Logs</a>
 
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
 
