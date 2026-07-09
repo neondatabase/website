@@ -29,9 +29,9 @@
  * Dependencies: unified, remark-parse, remark-gfm, unist-util-visit, gray-matter, js-yaml (direct); remark-mdx and mdast-util-* (transitive). We pin the direct ones so version conflicts (e.g. remark-gfm v4 needing unified v11 while another dep had v10) don’t break the build.
  */
 
+const { fork } = require('child_process');
 const fs = require('fs').promises;
 const fsSync = require('fs');
-const { fork } = require('child_process');
 const os = require('os');
 const path = require('path');
 
@@ -45,6 +45,8 @@ const jsYaml = require('js-yaml');
 const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
 const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
 const { isUnusedOrSharedContent } = require('../constants/content');
+
+const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
 
 // Project root for shared content loading (set during processing)
 let projectRoot = null;
@@ -1740,6 +1742,10 @@ for (const component of IGNORED_COMPONENTS) {
  * Recursively transform a node and its children
  */
 function transformNode(node) {
+  if (node.type === 'heading' && TOC_ONLY_PATTERN.test(childrenToMarkdown(node.children))) {
+    return null;
+  }
+
   // Handle MDX JSX elements
   if (node.type === 'mdxJsxFlowElement' || node.type === 'mdxJsxTextElement') {
     const componentName = node.name;

@@ -40,7 +40,7 @@ Neon Storage is S3-compatible object storage built into the Neon backend for app
 Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). The `ai-sdk` template uses Neon Storage: an image-generation agent that stores uploaded photos and AI-generated images in branch-scoped buckets, served via presigned URLs from a Neon Function:
 
 ```bash
-neonctl bootstrap --template ai-sdk
+neon bootstrap --template ai-sdk
 ```
 
 The [with-files-sdk](https://github.com/neondatabase/examples/tree/main/with-files-sdk) example shows a minimal script that uploads local files to a branch-scoped bucket using the Files SDK and its `neon` adapter.

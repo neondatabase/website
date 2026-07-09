@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-30T15:58:53.991Z'
 ---
 
 <InfoBlock>
@@ -163,6 +163,8 @@ Because your database is managed by Vercel, you can only perform these actions *
 - Update connection-string environment variables (prefix changes, etc.)
 
 Everything else (querying data, branching, monitoring usage) works exactly the same in the Neon Console.
+
+If you're on Neon's Scale plan, you can open support tickets for any Neon issue directly from the Neon Console. See [Support tickets](/docs/introduction/support#support-tickets) for details.
 
 ### Team member synchronization
 

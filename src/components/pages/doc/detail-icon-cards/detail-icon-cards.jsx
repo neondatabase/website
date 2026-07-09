@@ -68,6 +68,7 @@ import Queries from './images/queries.inline.svg';
 import Refresh from './images/refresh.inline.svg';
 import Research from './images/research.inline.svg';
 import RespondArrow from './images/respond-arrow.inline.svg';
+import Rocket from './images/rocket.inline.svg';
 import RowTable from './images/row-table.inline.svg';
 import ScaleUp from './images/scale-up.inline.svg';
 import Screen from './images/screen.inline.svg';
@@ -146,6 +147,7 @@ const icons = {
   refresh: Refresh,
   research: Research,
   'respond-arrow': RespondArrow,
+  rocket: Rocket,
   'scale-up': ScaleUp,
   screen: Screen,
   search: SearchContent,
@@ -211,6 +213,7 @@ const DetailIconCards = ({
   children = null,
   withNumbers = false,
   compact = false,
+  forceGreenIcon = false,
   cols = 2,
   theme = 'green-dotted',
 }) => {
@@ -291,7 +294,13 @@ const DetailIconCards = ({
                   Step {index + 1}
                 </span>
               ) : (
-                <Icon className={cn('mb-8 size-7', cardTheme.icon)} />
+                <Icon
+                  className={cn(
+                    'mb-8 size-7',
+                    cardTheme.icon,
+                    forceGreenIcon && 'mb-8 size-7 text-green-44 dark:text-green-44'
+                  )}
+                />
               )}
               <div className="flex flex-col gap-1.5">
                 <h3
@@ -325,6 +334,7 @@ DetailIconCards.propTypes = {
   children: PropTypes.node,
   withNumbers: PropTypes.bool,
   compact: PropTypes.bool,
+  forceGreenIcon: PropTypes.bool,
   cols: PropTypes.oneOf([2, 3, 4]),
   theme: PropTypes.oneOf(['green-flat', 'grey', 'green-dotted']),
   highlightIndex: PropTypes.number,

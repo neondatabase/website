@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-services-connection-pooling
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?'
+  slug: best-postgres-services-ai-agent-platforms
+nextLink:
+  title: 'What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?'
+  slug: best-postgres-services-eliminate-shared-staging-database
 ---
 
 Neon runs a managed PgBouncer in front of every compute. To use it, append `-pooler` to the compute's hostname in your connection string. No proxy to deploy, no `pgbouncer.ini` to tune, no extra cost.

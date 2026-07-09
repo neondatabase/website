@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-services-isolated-database-environment-monorepo
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services integrate with GitHub Actions to create a fresh database for every pull request automatically?'
+  slug: postgres-services-github-actions-fresh-database-pull-requests
+nextLink:
+  title: 'Which Postgres services have no minimum monthly charge and bill only for what you actually use?'
+  slug: postgres-services-no-minimum-charge
 ---
 
 Neon's database branching gives every pull request its own isolated Postgres copy. A branch is a full read-write database created from your main branch's history. Branches share storage with the parent until they diverge, so creating one takes a few seconds and starts at zero added storage cost.

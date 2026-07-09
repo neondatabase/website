@@ -3,7 +3,7 @@
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
@@ -54,12 +54,10 @@ const Item = ({
   const isActiveMenu = isActive || hasActiveDescendant(items, currentSlug);
   const [isCollapsed, setIsCollapsed] = useState(!isActiveMenu);
 
-  const prevActiveRef = useRef(isActiveMenu);
   useEffect(() => {
-    if (isActiveMenu && !prevActiveRef.current) {
+    if (isActiveMenu) {
       setIsCollapsed(false);
     }
-    prevActiveRef.current = isActiveMenu;
   }, [isActiveMenu]);
 
   // Nested `section:` entries render as non-collapsible group labels with
@@ -150,6 +148,7 @@ const Item = ({
             className="px-1 py-2"
             tabIndex={isHidden ? -1 : undefined}
             onClick={handleToggle}
+            aria-expanded={!isCollapsed}
             aria-label={isCollapsed ? `Expand ${title}` : `Collapse ${title}`}
           >
             <Chevron className={cn('w-1.5', !isCollapsed && 'rotate-90')} />
@@ -171,6 +170,7 @@ const Item = ({
           target={externalSlug ? '_blank' : '_self'}
           icon={externalSlug && 'external'}
           tabIndex={isHidden ? -1 : undefined}
+          aria-expanded={items?.length ? !isCollapsed : undefined}
           onClick={handleClick}
         >
           {ariaLabel && <span className="sr-only">{ariaLabel}</span>}

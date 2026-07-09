@@ -137,7 +137,7 @@ const ContactForm = () => {
     } catch (error) {
       if (error.name !== 'AbortError') {
         doNowOrAfterSomeTime(() => {
-          setFormState(FORM_STATES.BROKEN);
+          setFormState(FORM_STATES.ERROR);
           setIsBroken(true);
         }, 2000);
       }

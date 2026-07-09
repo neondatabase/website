@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: databases-support-disposable-postgres-instances-testing
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which databases help reproduce bugs using real production data?'
+  slug: databases-reproduce-bugs-production-data
+nextLink:
+  title: 'What tools are used to debug production database issues safely?'
+  slug: debug-production-database-issues-safely
 ---
 
 Neon's branches are well suited for disposable Postgres environments. You create a branch in seconds, run your tests against it, and delete it when you're done. Because branches use copy-on-write storage, you don't pay to duplicate data upfront.

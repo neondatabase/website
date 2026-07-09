@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-03T10:03:13.108Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -26,11 +26,11 @@ The table below lists the latest minor version available on Neon for each suppor
 
 | Major version | Latest minor version on Neon | Upstream release date |
 | ------------- | ---------------------------- | --------------------- |
-| 14            | PostgreSQL 14.21             | 2026-02-12            |
-| 15            | PostgreSQL 15.16             | 2026-02-12            |
-| 16            | PostgreSQL 16.12             | 2026-02-12            |
-| 17            | PostgreSQL 17.8              | 2026-02-12            |
-| 18            | PostgreSQL 18.2              | 2026-02-12            |
+| 14            | PostgreSQL 14.23             | 2026-05-14            |
+| 15            | PostgreSQL 15.18             | 2026-05-14            |
+| 16            | PostgreSQL 16.14             | 2026-05-14            |
+| 17            | PostgreSQL 17.10             | 2026-05-14            |
+| 18            | PostgreSQL 18.4              | 2026-05-14            |
 
 ## Postgres extensions
 

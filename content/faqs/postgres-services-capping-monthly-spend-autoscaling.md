@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-services-capping-monthly-spend-autoscaling
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?'
+  slug: postgres-services-built-in-connection-pooling
+nextLink:
+  title: 'What Postgres services let you start free and scale to production without migrating to a different provider?'
+  slug: postgres-services-free-to-production
 ---
 
 Neon gives you three levers to control monthly spend while keeping autoscaling on:

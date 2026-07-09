@@ -3,9 +3,15 @@ title: 'How do I create and download a backup of my Neon database to my local ma
 subtitle: 'Run pg_dump in custom format against a direct connection string and save the archive to disk.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I delete a database in Neon?'
+  slug: delete-database-neon
+nextLink:
+  title: 'How do I enable or disable connection pooling for my Neon database?'
+  slug: enable-disable-connection-pooling-neon
 ---
 
 Use `pg_dump` against a direct (non-pooled) Neon connection string. The custom format (`-Fc`) gives you a single compressed archive that `pg_restore` can read selectively and in parallel. The output file lives on your local machine, so it's an off-platform copy independent of Neon. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) for the full reference.

@@ -2,26 +2,36 @@
 title: Lakebase Search
 subtitle: Scalable vector and full-text search for Postgres
 summary: >-
-  Lakebase Search is two Postgres extensions (lakebase_vector and lakebase_text)
-  that bring scalable vector and BM25 full-text search to Neon. Use this page
-  to understand the architecture advantages (scale from 0 to 1B vectors, 10x
-  faster index builds, branching without rebuilds, scale-to-zero compatibility),
-  learn what each extension provides, and navigate to the extension reference
-  pages.
+  Lakebase Search adds vector, keyword, and hybrid search to Neon through the
+  lakebase_vector and lakebase_text Postgres extensions. Use this page to
+  understand the search types, how the extensions work, the scale-to-zero
+  architecture advantages, and where to get started.
 enableTableOfContents: true
-updatedOn: '2026-06-09T20:13:02.957Z'
+updatedOn: '2026-06-26T12:58:36.951Z'
 ---
-
-<RequestForm type="lakebase-search" />
 
 <Callout title="About Lakebase">
 Lakebase Search is developed by Databricks. These extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.
 </Callout>
 
-Lakebase Search is two Postgres extensions, `lakebase_vector` and `lakebase_text`, that bring scalable vector and BM25 full-text search to Neon, designed for backends that need both semantic and keyword search in a single database.
+Lakebase Search adds vector, keyword, and hybrid search to your Neon project. Enable it once, then install the `lakebase_vector` and `lakebase_text` Postgres extensions to start building search features.
+
+## Vector, keyword, and hybrid search
+
+Lakebase Search gives you two complementary ways to search. Use either on its own, or combine them:
+
+- **Vector (semantic) search** finds rows whose meaning is closest to your query, even when they share no words. You search with an embedding (a numeric vector from a model), and the `lakebase_ann` index returns the nearest vectors by distance. Use it for natural-language questions, recommendations, and retrieval-augmented generation (RAG).
+- **Keyword (full-text) search** ranks rows by how well they match the exact terms in your query, using BM25 relevance scoring from the `lakebase_bm25` index. Use it for names, codes, and exact-term lookups where wording matters.
+- **Hybrid search** runs both and merges the results into one ranking, so you get semantic and exact-term matches together. Use it when queries mix intent with specific terms, which covers most real-world search. The [Get started guide](/docs/ai/lakebase-search-get-started#combine-results-with-hybrid-search) shows a worked hybrid query.
+
+![Keyword search matches only documents that contain the typed words and misses synonyms like "quick automobile" for "fast sports car." Vector search places the query and documents in the same embedding space and returns the nearest neighbors by meaning, including those synonyms.](/docs/ai/lakebase-search-keyword-vs-vector.png)
+
+## How it works
+
+Lakebase Search is two Postgres extensions:
 
 - **[`lakebase_vector`](/docs/extensions/lakebase-vector)**: adds the `lakebase_ann` index type for vector similarity search. No migration from `pgvector` required. The same `vector` types, distance operators, and query syntax work unchanged. Scales to over 1 billion vectors on a single index.
-- **[`lakebase_text`](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from PostgreSQL FTS required. Standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
+- **[`lakebase_text`](/docs/extensions/lakebase-text)**: adds the `lakebase_bm25` index type for BM25 keyword search. No migration from Postgres full-text search required. Standard `tsvector` types and query operators work unchanged. Adds BM25 ranking and top-K pushdown that native GIN lacks.
 
 ## How `lakebase_ann` scales
 

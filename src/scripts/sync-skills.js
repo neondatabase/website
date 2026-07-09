@@ -15,14 +15,16 @@
  *   Without a token, syncing 2-3 skills (~5 API calls each) is well within limits.
  *
  * Config: config/skills.json controls which skills are synced and at what ref.
+ * Each entry may set an optional "repo" (owner/name) and "path" to source a
+ * skill from a different repository than the default neondatabase/agent-skills
+ * (e.g. neon-postgres-agent-platforms lives in neondatabase/neon-for-agent-platforms).
  */
 
 const fs = require('fs').promises;
 const path = require('path');
 
-const REPO_OWNER = 'neondatabase';
-const REPO_NAME = 'agent-skills';
-const REPO_SKILLS_PATH = 'skills';
+const DEFAULT_REPO = 'neondatabase/agent-skills';
+const DEFAULT_SKILLS_PATH = 'skills';
 const LOCAL_SKILLS_DIR = path.resolve(__dirname, '../../public/docs/ai/skills');
 const CONFIG_PATH = path.resolve(__dirname, '../../config/skills.json');
 
@@ -65,15 +67,15 @@ async function listFilesRecursive(apiUrl) {
 /**
  * Download and write a single file from GitHub to the local skills directory.
  */
-async function downloadFile(downloadUrl, relativePath, skillName) {
+async function downloadFile(downloadUrl, relativePath, skillName, skillsPath) {
   const res = await fetch(downloadUrl, { headers: githubHeaders() });
   if (!res.ok) {
     throw new Error(`Failed to download ${relativePath}: ${res.status}`);
   }
   const content = await res.text();
 
-  // relativePath is like "skills/neon-postgres/SKILL.md" — strip the "skills/{name}/" prefix
-  const localRelative = relativePath.replace(`${REPO_SKILLS_PATH}/${skillName}/`, '');
+  // relativePath is like "skills/neon-postgres/SKILL.md" — strip the "{skillsPath}/{name}/" prefix
+  const localRelative = relativePath.replace(`${skillsPath}/${skillName}/`, '');
   const localPath = path.join(LOCAL_SKILLS_DIR, skillName, localRelative);
 
   await fs.mkdir(path.dirname(localPath), { recursive: true });
@@ -81,9 +83,9 @@ async function downloadFile(downloadUrl, relativePath, skillName) {
   console.log(`  ✓ ${localRelative}`);
 }
 
-async function syncSkill(name, ref) {
-  const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${REPO_SKILLS_PATH}/${name}?ref=${ref}`;
-  console.log(`\nSyncing ${name} @ ${ref}...`);
+async function syncSkill({ name, ref, repo = DEFAULT_REPO, path: skillsPath = DEFAULT_SKILLS_PATH }) {
+  const apiUrl = `https://api.github.com/repos/${repo}/contents/${skillsPath}/${name}?ref=${ref}`;
+  console.log(`\nSyncing ${name} @ ${ref} from ${repo}...`);
 
   let files;
   try {
@@ -98,7 +100,7 @@ async function syncSkill(name, ref) {
   }
 
   for (const file of files) {
-    await downloadFile(file.downloadUrl, file.path, name);
+    await downloadFile(file.downloadUrl, file.path, name, skillsPath);
   }
 
   console.log(`  Done. ${files.length} file(s) synced.`);
@@ -127,10 +129,10 @@ async function main() {
     }
   }
 
-  console.log(`Syncing ${skillsToSync.length} skill(s) from ${REPO_OWNER}/${REPO_NAME}...`);
+  console.log(`Syncing ${skillsToSync.length} skill(s)...`);
 
-  for (const { name, ref } of skillsToSync) {
-    await syncSkill(name, ref);
+  for (const skill of skillsToSync) {
+    await syncSkill(skill);
   }
 
   console.log(`\nSync complete. Run "npm run generate:skills" to regenerate index files.`);

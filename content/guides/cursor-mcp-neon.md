@@ -31,10 +31,10 @@ Make sure you have:
 
 ### Quick Setup (Recommended)
 
-The fastest way to get started is with the [`neonctl init`](/docs/cli/init) command, which automates OAuth authentication, API key creation, and Cursor configuration:
+The fastest way to get started is with the [`neon init`](/docs/cli/init) command, which automates OAuth authentication, API key creation, and Cursor configuration:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 This command authenticates via OAuth, creates an API key, and configures Cursor to connect to Neon's remote MCP server. API key authentication means **fewer approval prompts** when using MCP tools. Once complete, ask your AI assistant **"Get started with Neon"**.

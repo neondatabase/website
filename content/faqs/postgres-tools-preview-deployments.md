@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-tools-preview-deployments
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres tools support point-in-time recovery for production databases?'
+  slug: postgres-tools-point-in-time-recovery
+nextLink:
+  title: 'How do I rename a database in my Neon project?'
+  slug: rename-database-neon-project
 ---
 
 ## Short answer

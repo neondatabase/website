@@ -6,14 +6,14 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-24T13:43:35.494Z'
+updatedOn: '2026-06-26T16:05:44.229Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
 
 Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from Anthropic, OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI or Anthropic SDK works without code changes. Just point it at your branch endpoint.
 
-> During the private preview, AI Gateway is available for **new projects** in the **AWS us-east-2** region only, and foundation model access requires a paid Neon plan.
+> During the private preview, AI Gateway is available for **new projects** in the **AWS us-east-2** region only, and requires a paid Neon plan. Inference is free during the preview. When billing begins, prices will match each provider's published list prices.
 
 <Admonition type="important">
 Participation in this Private Preview is subject to our Private Preview Terms. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
@@ -45,13 +45,13 @@ Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.verc
 **`ai-sdk`**: An image-generation agent that routes model calls through AI Gateway, stores results in Neon Storage, and writes metadata to Postgres on a Neon Function.
 
 ```bash
-neonctl bootstrap --template ai-sdk
+neon bootstrap --template ai-sdk
 ```
 
 **`mastra`**: A personal assistant that uses AI Gateway for LLM calls with Postgres-backed memory on a Neon Function.
 
 ```bash
-neonctl bootstrap --template mastra
+neon bootstrap --template mastra
 ```
 
 <NeedHelp/>

@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-06-18T22:47:28.438Z'
+updatedOn: '2026-06-26T22:43:01.125Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -248,12 +248,13 @@ npm install @neondatabase/neon-js
 import { createClient } from '@neondatabase/neon-js';
 
 // Initialize with Neon Auth
+// Get your URLs from the Neon Console or run: neon data-api get
 const client = createClient({
   auth: {
-    url: process.env.NEON_AUTH_URL, // Your Neon Auth endpoint (from the Neon Console)
+    url: import.meta.env.VITE_NEON_AUTH_URL,
   },
   dataApi: {
-    url: process.env.NEON_DATA_API_URL, // Your Data API endpoint (from the Neon Console)
+    url: import.meta.env.VITE_NEON_DATA_API_URL,
   },
 });
 
@@ -266,6 +267,10 @@ const { data, error } = await client
 
 console.log(data);
 ```
+
+<Admonition type="note">
+This client runs in the browser. Environment variable syntax depends on your framework: `import.meta.env.VITE_*` for Vite-based projects (Vite, SvelteKit, Astro), `process.env.NEXT_PUBLIC_*` for Next.js.
+</Admonition>
 
 </TabItem>
 
@@ -291,9 +296,9 @@ const getTokenFromAuthSystem = async (): Promise<string> => {
   return 'your-jwt-token';
 };
 
-// Initialize the client
+// Get your URL from the Neon Console or run: neon data-api get
 const client = new NeonPostgrestClient({
-  dataApiUrl: process.env.NEON_DATA_API_URL!, // Your Data API endpoint (from the Neon Console)
+  dataApiUrl: import.meta.env.VITE_NEON_DATA_API_URL,
   options: {
     global: {
       fetch: fetchWithToken(getTokenFromAuthSystem),

@@ -43,16 +43,16 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 2. **Connect your account**
 
    ```bash
-   neonctl auth
+   neon auth
    ```
 
 3. **Create your branch**
 
    ```bash
-   neonctl branches create --name dev/your-name
+   neon branches create --name dev/your-name
 
    # Get your connection details
-   neonctl connection-string dev/your-name
+   neon connection-string dev/your-name
    ```
 
    <Admonition type="note">

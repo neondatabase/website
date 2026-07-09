@@ -22,7 +22,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
 <TwinPaths>
   <QuickPath
     title="One-command setup"
-    command="npx neonctl@latest init"
+    command="npx neon@latest init"
     description="AI-guided setup. Creates a project, applies your schema, and writes a .env in one step. Copy the prompt below and get started."
   />
   <GuidedPath

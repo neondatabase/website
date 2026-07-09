@@ -211,12 +211,12 @@ After applying fixes:
 The fixes above cut **egress** (data transferred out of Postgres). The other big non-prod cost lever is **compute**, and you can codify it durably in `neon.ts` — Neon's infrastructure-as-code file (see the `neon` skill for the full reference) — so dev, preview, and CI branches stay cheap by default instead of relying on per-branch flags:
 
 ```bash
-npm i @neondatabase/config
+npm i @neon/config
 ```
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   branch: (branch) => {
@@ -236,10 +236,10 @@ export default defineConfig({
 ```
 
 ```bash
-neonctl config apply   # apply to the current branch (neonctl deploy is an alias)
+neon config apply   # apply to the current branch (neon deploy is an alias)
 ```
 
-This is complementary, not a substitute: query-pattern fixes are what actually reduce egress charges, while these settings keep non-production compute and storage from quietly inflating the same bill. Because `neonctl checkout` applies the policy when it creates a branch, new dev/preview branches inherit the cheap profile automatically.
+This is complementary, not a substitute: query-pattern fixes are what actually reduce egress charges, while these settings keep non-production compute and storage from quietly inflating the same bill. Because `neon checkout` applies the policy when it creates a branch, new dev/preview branches inherit the cheap profile automatically.
 
 ## Further reading
 

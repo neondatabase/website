@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-services-auto-resize-compute
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?'
+  slug: managed-postgres-providers-rest-api-database-automation
+nextLink:
+  title: 'Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?'
+  slug: managed-postgres-services-feature-branch-database-copies
 ---
 
 Neon's [Autoscaling](/docs/introduction/autoscaling) adjusts compute up and down inside a range you set, with no restarts and no plan changes. You pick a minimum and a maximum compute size; Neon scales between them based on load. Idle computes scale all the way to zero and stop accruing compute charges (storage continues to bill).

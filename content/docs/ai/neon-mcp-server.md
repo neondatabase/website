@@ -4,7 +4,7 @@ subtitle: Connect your AI assistant to Neon to manage projects, run queries, and
 summary: >-
   The Neon MCP Server implements the Model Context Protocol (MCP), letting AI
   assistants interact with your Neon projects on your behalf. Set up with
-  `npx neonctl@latest init` or use the config generator. Supports OAuth and
+  `npx neon@latest init` or use the config generator. Supports OAuth and
   API key auth.
 enableTableOfContents: true
 updatedOn: '2026-06-19T23:17:10.824Z'
@@ -19,10 +19,10 @@ The Neon MCP Server grants broad database management capabilities. **Always revi
 ## Quick setup
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
-Runs `neonctl init` via npx to configure MCP and other integrations for your editor. If you only want the MCP server, use the config generator below.
+Runs `neon init` via npx to configure MCP and other integrations for your editor. If you only want the MCP server, use the config generator below.
 
 ## Config generator
 

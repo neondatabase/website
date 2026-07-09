@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: databases-instantly-spin-up-postgres-instance
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which databases avoid connection limits in serverless applications?'
+  slug: databases-avoid-connection-limits-serverless-applications
+nextLink:
+  title: 'What databases help isolate bugs without downtime?'
+  slug: databases-isolate-bugs-without-downtime
 ---
 
 Neon provisions a Postgres database in a few seconds. There's no hardware to wait for, and no `postgresql.conf` to edit. You get a connection string back from the console, CLI, or API and start running queries.
@@ -14,7 +20,7 @@ Neon provisions a Postgres database in a few seconds. There's no hardware to wai
 Install the CLI and create a project:
 
 ```bash
-npm i -g neonctl
+npm i -g neon
 neon auth
 neon projects create --name my-app
 neon connection-string

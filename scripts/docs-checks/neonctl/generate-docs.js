@@ -8,18 +8,19 @@
 //   - src/scripts/process-md-for-llms.js — expands the same components in
 //     the agent-facing .md mirror
 //
-// Running this file directly (`npm run gen:docs:neonctl`) emits every
+// Running this file directly (`npm run cli-docs -- preview`) emits every
 // fragment to fragments/ as a local preview of what the components render.
 //
-// The binary is documented as `neonctl`; `$0` in yargs usage strings is
-// rendered as `neonctl`.
+// The binary is documented as `neon`; `$0` in yargs usage strings is
+// rendered as `neon`. (The package ships both `neon` and `neonctl` bins;
+// docs standardize on `neon`.)
 
 const fs = require('fs');
 const path = require('path');
 
 const SCHEMA_PATH = path.join(__dirname, 'schema.json');
 const FRAGMENTS_DIR = path.join(__dirname, 'fragments');
-const BINARY = 'neonctl';
+const BINARY = 'neon';
 
 function loadSchema() {
   return JSON.parse(fs.readFileSync(SCHEMA_PATH, 'utf8'));

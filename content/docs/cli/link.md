@@ -6,17 +6,17 @@ summary: >-
   directory to a Neon project, including interactive, non-interactive, and
   agent-oriented workflows.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:33:31.980Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-link
 ---
 
 The `link` command binds the current directory to a Neon project. It picks (or creates) an organization and project, resolves the project's default branch, and writes a `.neon` file with `orgId`, `projectId`, and `branchId`. Subsequent commands run in this directory (or any subdirectory) automatically pick up that context.
 
-Requires neonctl 2.22.2 or later. Check your version with `neonctl --version`.
+Requires neon 2.22.2 or later. Check your version with `neon --version`.
 
 <Admonition type="tip" title="Prefer link over set-context">
-For most workflows, use `neonctl link` instead of manually running `neonctl set-context --project-id ...`. The `link` command guides you through organization and project selection and ensures the context file is complete.
+For most workflows, use `neon link` instead of manually running `neon set-context --project-id ...`. The `link` command guides you through organization and project selection and ensures the context file is complete.
 </Admonition>
 
 ## Usage
@@ -31,10 +31,10 @@ By default, linking pulls the linked branch's environment variables (such as `DA
 
 ## Interactive mode (default)
 
-Run `neonctl link` with no flags for guided prompts:
+Run `neon link` with no flags for guided prompts:
 
 ```bash
-neonctl link
+neon link
 ```
 
 ```text filename="Output"
@@ -55,13 +55,13 @@ Use flags or a `--params` JSON blob for scripts and CI:
 
 ```bash
 # Link to an existing project
-neonctl link --org-id org-abc123 --project-id polished-snowflake-12345678
+neon link --org-id org-abc123 --project-id polished-snowflake-12345678
 
 # Create a new project and link
-neonctl link --org-id org-abc123 --project-name my-app --region-id aws-us-east-2
+neon link --org-id org-abc123 --project-name my-app --region-id aws-us-east-2
 
 # Same payload, one JSON blob
-neonctl link --params '{"orgId":"org-abc123","projectName":"my-app","regionId":"aws-us-east-2"}'
+neon link --params '{"orgId":"org-abc123","projectName":"my-app","regionId":"aws-us-east-2"}'
 ```
 
 Flags take precedence over fields in `--params`.
@@ -71,7 +71,7 @@ Flags take precedence over fields in `--params`.
 Use `--agent` for a JSON state machine designed for AI coding assistants. Each invocation returns a single JSON object with a `status` discriminator describing the next step, the available options, and the exact follow-up command to run.
 
 ```bash
-neonctl link --agent
+neon link --agent
 ```
 
 Example response when an organization must be selected:
@@ -84,7 +84,7 @@ Example response when an organization must be selected:
     { "id": "org-abc123", "name": "Personal Org" },
     { "id": "org-team", "name": "Team Org" }
   ],
-  "next_command_template": "neonctl link --agent --org-id <org_id>"
+  "next_command_template": "neon link --agent --org-id <org_id>"
 }
 ```
 

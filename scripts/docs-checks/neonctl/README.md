@@ -19,10 +19,16 @@ for values the parser can't resolve.
 
 ## Run
 
+All commands run through a single `cli-docs` dispatcher. Run it with no
+subcommand for the full help listing:
+
 ```bash
-npm run check:docs:neonctl    # validation + renderer contract tests
-npm run gen:docs:neonctl      # emit all fragments to fragments/ (local preview)
-npm run refresh:cli-docs      # full refresh from the latest GitHub release
+npm run cli-docs                          # print help
+npm run cli-docs -- check                 # validation + renderer contract tests
+npm run cli-docs -- refresh               # full refresh from the latest GitHub release
+npm run cli-docs -- schema --src <path>   # regenerate schema.json from a CLI checkout
+npm run cli-docs -- scaffold <name> --group <group-id>   # wire a new command
+npm run cli-docs -- preview               # emit fragments to fragments/ (local preview)
 ```
 
 For a local Markdown validation report:
@@ -34,7 +40,7 @@ node scripts/docs-checks/neonctl/validate.js --out /tmp/report.md
 ## Maintenance: when neonctl releases
 
 ```bash
-npm run refresh:cli-docs
+npm run cli-docs -- refresh
 ```
 
 That downloads the latest release tarball, regenerates `schema.json`,
@@ -43,8 +49,16 @@ the diff and commit `schema.json` — pages and the mirror pick it up at the
 next build with no page edits. New top-level commands additionally need a
 doc page (`content/docs/cli/<name>.md`), a `navigation.yaml` entry, and a
 group mapping in
-`src/components/pages/doc/cli-reference/cli-command-index/groups.js` —
-all three are enforced by tests (`cli-command-index/meta.test.js`).
+`src/components/pages/doc/cli-reference/cli-command-index/groups.js` — all
+three are enforced by the coverage tests. Scaffold them in one step:
+
+```bash
+npm run cli-docs -- scaffold <name> --group <group-id>
+```
+
+That adds the group mapping, creates the doc page from a template (seeded
+with the command's `describe` text), and inserts the nav entry. Fill in the
+page's TODOs, then run `npm run cli-docs -- check`.
 Optionally add curated overview copy (description, examples)
 in `cli-command-index/meta.js`; without an entry the row falls back to the
 schema's describe text and signature. meta.js examples are themselves
@@ -83,8 +97,10 @@ override deletes a stale key.
 | `generate-schema.js`              | Parses neonctl's TS source → `schema.json`.                   |
 | `overrides.json`                  | Hand-maintained patches for parser-unresolvable values.       |
 | `generate-docs.js`                | Markdown renderers shared by components + llms mirror; `--fragments` preview. |
-| `fragments/`                      | Local-only preview dump from `npm run gen:docs:neonctl` (gitignored). |
-| `refresh.js`                      | `npm run refresh:cli-docs` implementation.                    |
+| `cli.js`                          | The `npm run cli-docs` dispatcher; routes to the scripts below. |
+| `fragments/`                      | Local-only preview dump from `npm run cli-docs -- preview` (gitignored). |
+| `refresh.js`                      | `npm run cli-docs -- refresh` implementation.                 |
+| `scaffold-command.js`             | `npm run cli-docs -- scaffold` implementation.                |
 | `check-staleness.js`              | predev/prebuild version nudge.                                |
 | `schema.js`                       | Loads schema; resolves argv to command node + valid options.  |
 | `extract-examples.js`             | Scans Markdown for fenced bash blocks and inline backticks.   |

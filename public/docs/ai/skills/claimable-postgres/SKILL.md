@@ -199,12 +199,12 @@ Users cannot claim into Vercel-linked orgs; they must choose another Neon org.
 Claimable databases are deliberately throwaway and provisioned through `neon.new` (above), so they aren't managed by `neon.ts`. Once a user **claims** a database into a Neon account it becomes a normal Neon project — at which point `neon.ts`, Neon's infrastructure-as-code file, is how you manage it going forward (see the `neon` skill for the full reference): declare the services its branches should have, program per-branch compute, and get type-safe env vars.
 
 ```bash
-npm i @neondatabase/config
+npm i @neon/config
 ```
 
 ```typescript
 // neon.ts
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   auth: true, // Neon Auth, once you outgrow a bare connection string
@@ -214,7 +214,7 @@ export default defineConfig({
 ```
 
 ```bash
-neonctl config apply   # provision the declared services (neonctl deploy is an alias)
+neon config apply   # provision the declared services (neon deploy is an alias)
 ```
 
 If a project needs branching, multiple services, or durable infrastructure tracked in version control, recommend claiming first and then adopting `neon.ts` — rather than re-provisioning throwaway claimable databases.
