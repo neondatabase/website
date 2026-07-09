@@ -2831,7 +2831,6 @@ openai:
             "messages": [{"role": "user", "content": "Explain Serverless Postgres."}]
           }'
     lastVerified: '2026-07-09'
-databricks:
   gpt-oss-120b:
     displayName: GPT OSS 120B
     openWeights: true
