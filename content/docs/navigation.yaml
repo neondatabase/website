@@ -513,9 +513,6 @@
                   slug: guides/rls-drizzle
                 - title: Run RLS queries with Drizzle ORM
                   slug: guides/rls-query-execution
-        - title: Compatibility
-          slug: reference/compatibility
-          icon: info
         - title: Version support
           slug: postgresql/postgres-version-policy
           icon: version
@@ -842,6 +839,25 @@
     - title: Branch your backend
       slug: platform/branch-your-backend
       icon: branching
+      items:
+        - title: Branching with the CLI
+          slug: guides/branching-neon-cli
+        - title: Branching with the API
+          slug: guides/branching-neon-api
+        - title: Neon Twin
+          slug: guides/neon-twin-intro
+          items:
+            - title: pg_dump / pg_restore — Full Twin
+              slug: guides/neon-twin-full-pg-dump-restore
+            - title: pg_dump / pg_restore — Partial Twin
+              slug: guides/neon-twin-partial-pg-dump-restore
+        - title: Data anonymization
+          slug: workflows/data-anonymization
+          items:
+            - title: API reference
+              slug: workflows/data-anonymization-api
+            - title: GitHub Actions
+              slug: workflows/data-anonymization-github-actions
     - title: Resilience & architecture
       slug: introduction/architecture-overview
       icon: architecture
@@ -1076,6 +1092,11 @@
               slug: guides/consumption-metrics
             - title: Query consumption metrics (legacy)
               slug: guides/consumption-metrics-legacy
+        - section: Claimable Postgres
+          icon: rocket
+          items:
+            - title: Claimable Postgres
+              slug: reference/claimable-postgres
         - section: Guides
           icon: book
           items:
@@ -1250,6 +1271,25 @@
             - title: Node.js / Deno SDK (Neon API)
               slug: https://github.com/paambaati/neon-js-sdk
               tag: community
+        - section: Config as code
+          icon: settings
+          items:
+            - title: neon.ts
+              slug: reference/neon-ts
+    - title: Compatibility
+      slug: reference/compatibility
+      icon: info
+    - title: Metrics & logs
+      slug: reference/metrics-logs
+      icon: report
+    - title: Glossary
+      slug: reference/glossary
+      icon: glossary
+
+- nav: Integrations
+  title: Integrations
+  icon: integrations
+  subnav:
     - title: Local development
       icon: container
       slug: local/neon-local
@@ -1450,59 +1490,22 @@
               slug: serverless/serverless-driver
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
-    - title: Workflows & CI/CD
-      icon: branching
-      slug: reference/claimable-postgres
+    - title: Terraform
+      slug: reference/terraform
+      icon: terraform
+    - title: CI/CD
+      icon: workflows
+      slug: guides/branching-github-actions
       items:
-        - title: Branching with the CLI
-          slug: guides/branching-neon-cli
-        - title: Branching with the API
-          slug: guides/branching-neon-api
         - title: Branching with GitHub Actions
           slug: guides/branching-github-actions
         - title: Branching with CircleCI
           slug: guides/branching-circleci
-        - title: Claimable Postgres
-          slug: reference/claimable-postgres
-        - title: Terraform
-          slug: reference/terraform
-        - title: Neon Twin
-          slug: guides/neon-twin-intro
-          items:
-            - title: pg_dump / pg_restore — Full Twin
-              slug: guides/neon-twin-full-pg-dump-restore
-            - title: pg_dump / pg_restore — Partial Twin
-              slug: guides/neon-twin-partial-pg-dump-restore
-        - title: Data anonymization
-          slug: workflows/data-anonymization
-          items:
-            - title: API reference
-              slug: workflows/data-anonymization-api
-            - title: GitHub Actions
-              slug: workflows/data-anonymization-github-actions
-    - title: Templates
-      slug: https://neon.com/templates
-      icon: template
-    - title: Examples repo
-      slug: https://github.com/neondatabase/examples
-      icon: github
-    - title: neon.ts
-      icon: sdk
-      slug: reference/neon-ts
-    - title: Glossary
-      slug: reference/glossary
-      icon: glossary
-    - title: Metrics & logs
-      slug: reference/metrics-logs
-      icon: report
 
 - nav: Tutorials
+  slug: https://neon.com/postgresql/tutorial
   title: Tutorials
-  icon: docs
-  subnav:
-    - title: Learn Postgres
-      slug: https://neon.com/postgresql/tutorial
-      icon: book
+  icon: tutorial
 
 - nav: Resources
   title: Resources
@@ -1542,6 +1545,12 @@
           slug: community/ai-tools
         - title: Using docs as Markdown (LLMs)
           slug: community/llms-markdown-guide
+    - title: Templates
+      slug: https://neon.com/templates
+      icon: template
+    - title: Examples repo
+      slug: https://github.com/neondatabase/examples
+      icon: github
     - title: RSS feeds
       slug: reference/feeds
       icon: feeds
