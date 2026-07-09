@@ -1219,7 +1219,7 @@
                   slug: cli/connection-string
                 - title: psql
                   slug: cli/psql
-            - title: Config as code
+            - title: Configuration commands
               items:
                 - title: config
                   slug: cli/config
