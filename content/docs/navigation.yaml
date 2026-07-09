@@ -1496,16 +1496,13 @@
       slug: reference/metrics-logs
       icon: report
 
-- nav: Tutorials/Learn
-  title: Tutorials/Learn
+- nav: Tutorials
+  title: Tutorials
   icon: docs
   subnav:
     - title: Learn Postgres
       slug: https://neon.com/postgresql/tutorial
       icon: book
-    - title: Community & tutorials
-      slug: tutorials/community-tutorials
-      icon: community
 
 - nav: Resources
   title: Resources
