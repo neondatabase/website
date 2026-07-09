@@ -937,6 +937,8 @@ google:
     - reasoning
     - prompt_caching
     - web_search
+    reasoning:
+      control: 'generationConfig.thinkingConfig.thinkingBudget parameter (integer token budget)'
     pricing:
       input: 0.3
       output: 2.5
@@ -1034,6 +1036,8 @@ google:
     - reasoning
     - prompt_caching
     - web_search
+    reasoning:
+      control: 'generationConfig.thinkingConfig.thinkingBudget parameter (integer token budget)'
     pricing:
       input: 1.25
       output: 10.0
@@ -1131,6 +1135,12 @@ google:
     - reasoning
     - prompt_caching
     - web_search
+    reasoning:
+      control: 'generationConfig.thinkingConfig.thinkingLevel parameter'
+      effortLevels:
+      - LOW
+      - MEDIUM
+      - HIGH
     pricing:
       input: 0.25
       output: 1.5
@@ -1227,6 +1237,12 @@ google:
     - reasoning
     - prompt_caching
     - web_search
+    reasoning:
+      control: 'generationConfig.thinkingConfig.thinkingLevel parameter'
+      effortLevels:
+      - LOW
+      - MEDIUM
+      - HIGH
     pricing:
       input: 2.0
       output: 12.0
@@ -1323,6 +1339,12 @@ google:
     - reasoning
     - prompt_caching
     - web_search
+    reasoning:
+      control: 'generationConfig.thinkingConfig.thinkingLevel parameter'
+      effortLevels:
+      - LOW
+      - MEDIUM
+      - HIGH
     pricing:
       input: 1.5
       output: 9.0
@@ -1420,6 +1442,12 @@ google:
     - reasoning
     - prompt_caching
     - web_search
+    reasoning:
+      control: 'generationConfig.thinkingConfig.thinkingLevel parameter'
+      effortLevels:
+      - LOW
+      - MEDIUM
+      - HIGH
     pricing:
       input: 0.5
       output: 3.0
@@ -1516,6 +1544,12 @@ google:
     - reasoning
     - prompt_caching
     - web_search
+    reasoning:
+      control: 'generationConfig.thinkingConfig.thinkingLevel parameter'
+      effortLevels:
+      - LOW
+      - MEDIUM
+      - HIGH
     pricing:
       input: 2.0
       output: 12.0
@@ -1701,6 +1735,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning_effort parameter (chat_completions, minimal/low/medium/high); reasoning.effort parameter (openai_responses, none/minimal/low/medium/high/xhigh)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 1.25
       output: 10.0
@@ -1797,11 +1840,14 @@ openai:
     - reasoning
     - web_search
     reasoning:
+      control: 'reasoning_effort parameter (chat_completions, minimal/low/medium/high); reasoning.effort parameter (openai_responses, none/minimal/low/medium/high/xhigh)'
       effortLevels:
       - none
+      - minimal
       - low
       - medium
       - high
+      - xhigh
     pricing:
       input: 1.25
       output: 10.0
@@ -1897,6 +1943,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning.effort parameter (openai_responses)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 1.25
       output: 10.0
@@ -1991,6 +2046,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning.effort parameter (openai_responses)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 0.25
       output: 2.0
@@ -2086,8 +2150,10 @@ openai:
     - reasoning
     - web_search
     reasoning:
+      control: 'reasoning_effort parameter (chat_completions, minimal/low/medium/high); reasoning.effort parameter (openai_responses, none/minimal/low/medium/high/xhigh)'
       effortLevels:
       - none
+      - minimal
       - low
       - medium
       - high
@@ -2186,6 +2252,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning.effort parameter (openai_responses)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 1.75
       output: 14.0
@@ -2279,6 +2354,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning.effort parameter (openai_responses)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 1.75
       output: 14.0
@@ -2375,8 +2459,10 @@ openai:
     - web_search
     - computer_use
     reasoning:
+      control: 'reasoning_effort parameter (chat_completions, minimal/low/medium/high); reasoning.effort parameter (openai_responses, none/minimal/low/medium/high/xhigh)'
       effortLevels:
       - none
+      - minimal
       - low
       - medium
       - high
@@ -2474,6 +2560,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning_effort parameter (chat_completions, minimal/low/medium/high); reasoning.effort parameter (openai_responses, none/minimal/low/medium/high/xhigh)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 0.75
       output: 4.5
@@ -2568,6 +2663,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning_effort parameter (chat_completions, minimal/low/medium/high); reasoning.effort parameter (openai_responses, none/minimal/low/medium/high/xhigh)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 0.2
       output: 1.25
@@ -2662,6 +2766,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning_effort parameter (chat_completions, minimal/low/medium/high); reasoning.effort parameter (openai_responses, none/minimal/low/medium/high/xhigh)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 0.25
       output: 2.0
@@ -2756,6 +2869,15 @@ openai:
     - tool_use
     - reasoning
     - web_search
+    reasoning:
+      control: 'reasoning_effort parameter (chat_completions, minimal/low/medium/high); reasoning.effort parameter (openai_responses, none/minimal/low/medium/high/xhigh)'
+      effortLevels:
+      - none
+      - minimal
+      - low
+      - medium
+      - high
+      - xhigh
     pricing:
       input: 0.05
       output: 0.4
@@ -2849,7 +2971,9 @@ openai:
     - tool_use
     - reasoning
     reasoning:
+      control: 'reasoning_effort parameter (chat_completions)'
       effortLevels:
+      - none
       - low
       - medium
       - high
@@ -2943,7 +3067,9 @@ openai:
     - tool_use
     - reasoning
     reasoning:
+      control: 'reasoning_effort parameter (chat_completions)'
       effortLevels:
+      - none
       - low
       - medium
       - high
