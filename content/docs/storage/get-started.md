@@ -21,10 +21,10 @@ To follow this guide, you need a new project in the AWS us-east-2 region.
 
 ## Recommended: enable storage with neon.ts
 
-The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Declare buckets under `preview.buckets`, then run `neonctl deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
+The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Declare buckets under `preview.buckets`, then run `neon deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
 
 ```typescript filename="neon.ts"
-import { defineConfig } from '@neondatabase/config/v1';
+import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   preview: {
@@ -37,7 +37,7 @@ export default defineConfig({
 ```
 
 ```bash
-neonctl deploy          # provisions buckets and writes AWS_* vars to .env.local
+neon deploy          # provisions buckets and writes AWS_* vars to .env.local
 ```
 
 After deploy, your `.env.local` contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION`. Skip to [Configure your client](#configure-your-client) below.
@@ -45,7 +45,7 @@ After deploy, your `.env.local` contains `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS
 Already deployed? Pull the vars again with:
 
 ```bash
-neonctl env pull
+neon env pull
 ```
 
 ---
@@ -82,7 +82,7 @@ export AWS_ACCESS_KEY_ID=nak_live_...   # token_id
 export AWS_SECRET_ACCESS_KEY=nsk_live_...   # s3_secret_access_key
 ```
 
-Your project ID and branch ID are available in the Neon Console URL or via `neonctl projects list` and `neonctl branches list`.
+Your project ID and branch ID are available in the Neon Console URL or via `neon projects list` and `neon branches list`.
 
 ## Find your branch endpoint
 
@@ -188,7 +188,7 @@ If you're using [Neon Functions](/docs/compute/functions/overview), the `AWS_*` 
 
 ## Upload a file
 
-You need an existing bucket before uploading. [Create one](/docs/storage/buckets#create-a-bucket), or declare it in `neon.ts` and run `neonctl deploy`.
+You need an existing bucket before uploading. [Create one](/docs/storage/buckets#create-a-bucket), or declare it in `neon.ts` and run `neon deploy`.
 
 <CodeTabs labels={["Files SDK", "S3 Client", "Python", "AWS CLI"]}>
 

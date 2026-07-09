@@ -6,6 +6,8 @@ const sharedMdxComponents = require('../../content/docs/shared-content');
 
 const parseMDXHeading = require('./parse-mdx-heading');
 
+const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
+
 const extractCustomId = (text) => {
   const match = text.match(/\(#([^)]+)\)$/);
   if (match) {
@@ -13,6 +15,8 @@ const extractCustomId = (text) => {
   }
   return null;
 };
+
+const stripTocOnlyMarker = (text) => text.replace(TOC_ONLY_PATTERN, '').trim();
 
 const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   const toc = [];
@@ -27,7 +31,7 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
     const { isNumbered, stepsIndex } = currentHeading;
     const depthMatch = currentHeading.title.match(/^#+/);
     const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
-    const title = currentHeading.title.replace(/(#+)\s/, '');
+    const title = stripTocOnlyMarker(currentHeading.title.replace(/(#+)\s/, ''));
     const customId = extractCustomId(title);
     const cleanedTitle = title.replace(/\(#[^)]+\)$/, '').trim();
     // CLI reference pages use full-path headings ("### neonctl branches

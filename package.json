@@ -34,6 +34,8 @@
     "audit:field-groups": "node scripts/validate-field-groups.mjs",
     "check:broken-links": "linkinator --config linkinator.config.json",
     "check:pricing-sync": "node src/scripts/check-pricing-sync.js",
+    "check:models-sync": "node src/scripts/check-models-sync.js",
+    "generate:models": "node src/scripts/generate-models-json.js",
     "check:content-data": "node scripts/validate-content-data.js",
     "prepare": "husky install",
     "test": "npx cypress open",
@@ -42,10 +44,7 @@
     "test:unit:run": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
     "check:docs": "vitest run scripts/docs-checks/**/__tests__/*.test.js",
-    "check:docs:neonctl": "vitest run scripts/docs-checks/neonctl/__tests__/",
-    "gen:schema:neonctl": "node scripts/docs-checks/neonctl/generate-schema.js",
-    "gen:docs:neonctl": "node scripts/docs-checks/neonctl/generate-docs.js",
-    "refresh:cli-docs": "node scripts/docs-checks/neonctl/refresh.js"
+    "cli-docs": "node scripts/docs-checks/neonctl/cli.js"
   },
   "dependencies": {
     "@codemirror/lang-sql": "^6.9.1",

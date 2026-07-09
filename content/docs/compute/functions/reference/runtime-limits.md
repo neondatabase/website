@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-06-26T10:41:58.102Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -29,7 +29,7 @@ When the platform stops a function, it sends `SIGINT`. If the process is still r
 
 ```ts
 import { Hono } from 'hono';
-import { waitUntil } from '@neondatabase/functions';
+import { waitUntil } from '@neon/functions';
 
 const app = new Hono();
 
@@ -41,7 +41,7 @@ app.post('/event', async (c) => {
 export default app;
 ```
 
-Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API follows the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and other serverless platforms. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs but isn't tracked, so the same code is safe to call in `neonctl dev`.
+Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API follows the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and other serverless platforms. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs but isn't tracked, so the same code is safe to call in `neon dev`.
 
 ## Concurrency
 

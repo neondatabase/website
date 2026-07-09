@@ -135,8 +135,8 @@ As a reference implementation, we've made specific choices to keep the codebase 
 ## Contributing
 
 - Repositories:
-  - [github.com/appdotbuild/agent](https://github.com/appdotbuild/agent) (agent logic and generation)
-  - [github.com/appdotbuild/platform](https://github.com/appdotbuild/platform) (backend infrastructure)
+  - [github.com/neondatabase/appdotbuild-agent](https://github.com/neondatabase/appdotbuild-agent) (agent logic and generation)
+  - [github.com/neondatabase/appdotbuild-agent](https://github.com/neondatabase/appdotbuild-agent) (backend infrastructure)
 - Issues: Bug reports, feature requests, and discussions
 - PRs: Code contributions, documentation, templates
 

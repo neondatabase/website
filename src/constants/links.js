@@ -20,6 +20,7 @@ export default {
   partners: '/docs/guides/platform-integration-overview',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
+  programs: '/programs',
   programsAgents: '/programs/agents',
   scaleTrial: '/scale-trial',
   security: '/security',

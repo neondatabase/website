@@ -4,6 +4,12 @@ date: 2026-04-25
 slug: best-ways-separate-postgres-database-development
 category: FAQ
 status: draft
+previousLink:
+  title: 'What is the best Postgres setup for serverless APIs?'
+  slug: best-postgres-setup-serverless-apis
+nextLink:
+  title: 'Can I change the region of my existing Neon project after creation?'
+  slug: change-project-region
 ---
 
 Give each developer a branch. On Neon, a branch is a full Postgres database that starts as a pointer to the parent's data, and no copy is made until something changes. Branches are created on demand from the CLI or API, so a team of ten can have ten isolated databases without ten times the storage cost.

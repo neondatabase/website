@@ -2,21 +2,21 @@
 title: Neon CLI quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
 summary: >-
-  The Neon CLI quickstart installs neonctl on macOS, Windows, or Linux via
-  Homebrew, npm, or bun, then authenticates using browser-based `neonctl auth` or
+  The Neon CLI quickstart installs neon on macOS, Windows, or Linux via
+  Homebrew, npm, or bun, then authenticates using browser-based `neon auth` or
   a personal API key. Use this page when setting up terminal access to Neon for
   the first time, before working through the full CLI reference. It also covers
-  the `.neon` context file (`neonctl set-context`) to avoid repeating
+  the `.neon` context file (`neon set-context`) to avoid repeating
   `--project-id` and `--org-id` flags, shell tab completion, and first commands
-  like `neonctl projects list`, `neonctl branches create`, and
-  `neonctl connection-string`.
+  like `neon projects list`, `neon branches create`, and
+  `neon connection-string`.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-quickstart
 ---
 
-The Neon CLI lets you manage Neon directly from the terminal. This guide helps you set up and start using it.
+The Neon CLI lets you manage Neon directly from the terminal. This guide helps you set up and start using it. The CLI is invoked as `neon`; `neonctl` is an alias for `neon`, so commands work with either name.
 
 <Steps>
 
@@ -37,13 +37,13 @@ brew install neonctl
 **Install via npm**
 
 ```shell
-npm i -g neonctl
+npm i -g neon
 ```
 
 **Install with bun**
 
 ```bash
-bun install -g neonctl
+bun install -g neon
 ```
 
 </TabItem>
@@ -53,13 +53,13 @@ bun install -g neonctl
 **Install via npm**
 
 ```shell
-npm i -g neonctl
+npm i -g neon
 ```
 
 **Install with bun**
 
 ```bash
-bun install -g neonctl
+bun install -g neon
 ```
 
 </TabItem>
@@ -69,13 +69,13 @@ bun install -g neonctl
 **Install via npm**
 
 ```shell
-npm i -g neonctl
+npm i -g neon
 ```
 
 **Install with bun**
 
 ```bash
-bun install -g neonctl
+bun install -g neon
 ```
 
 </TabItem>
@@ -85,7 +85,7 @@ bun install -g neonctl
 Verify the installation by checking the CLI version:
 
 ```bash
-neonctl --version
+neon --version
 ```
 
 For the latest version, refer to the [Neon CLI GitHub repository](https://github.com/neondatabase/neon-pkgs/tree/main/packages/cli).
@@ -99,7 +99,7 @@ Authenticate with your Neon account using one of these methods:
 Run the command below to authenticate through your browser:
 
 ```bash
-neonctl auth
+neon auth
 ```
 
 This opens a browser window where you can authorize the CLI to access your Neon account.
@@ -109,7 +109,7 @@ This opens a browser window where you can authorize the CLI to access your Neon 
 Alternatively, use a personal Neon API key, which you can create in the Neon Console. See [Create a personal API key](/docs/manage/api-keys#create-a-personal-api-key).
 
 ```bash
-neonctl projects list --api-key <your-api-key>
+neon projects list --api-key <your-api-key>
 ```
 
 To avoid entering your API key with each command, set it as an environment variable:
@@ -122,16 +122,16 @@ For more about authenticating, see [Neon CLI commands: auth](/docs/cli/auth).
 
 ## Link your project
 
-The easiest way to set up CLI context is with [`neonctl link`](/docs/cli/link). It guides you through organization and project selection and writes a `.neon` context file in your project directory. Requires **neonctl 2.22.2** or later.
+The easiest way to set up CLI context is with [`neon link`](/docs/cli/link). It guides you through organization and project selection and writes a `.neon` context file in your project directory. Requires **neon 2.22.2** or later.
 
 ```bash
-neonctl link
+neon link
 ```
 
 You can also link non-interactively for scripts and CI:
 
 ```bash
-neonctl link --org-id <your-org-id> --project-id <your-project-id>
+neon link --org-id <your-org-id> --project-id <your-project-id>
 ```
 
 <Admonition type="tip">
@@ -142,10 +142,10 @@ If you run a CLI command without an organization context, the CLI prompts you to
 Once linked, you can run CLI commands from any subdirectory of your project; the CLI walks up parent folders to find the `.neon` file. The file is also automatically added to `.gitignore` so it's not committed by accident.
 </Admonition>
 
-Alternatively, set context manually with [`neonctl set-context`](/docs/cli/set-context):
+Alternatively, set context manually with [`neon set-context`](/docs/cli/set-context):
 
 ```bash
-neonctl set-context --org-id <your-org-id> --project-id <your-project-id>
+neon set-context --org-id <your-org-id> --project-id <your-project-id>
 ```
 
 <Admonition type="info">
@@ -168,13 +168,13 @@ cat .neon
 You can also create named context files for different organization and project contexts:
 
 ```bash
-neonctl set-context --org-id <your-org-id> --project-id <your-project-id> --context-file dev_project
+neon set-context --org-id <your-org-id> --project-id <your-project-id> --context-file dev_project
 ```
 
 To switch contexts, add the `--context-file` option to any command:
 
 ```bash
-neonctl branches list --context-file Documents/dev_project
+neon branches list --context-file Documents/dev_project
 ```
 
 For more about the `set-context` command, see [Neon CLI commands: set-context](/docs/cli/set-context).
@@ -188,7 +188,7 @@ Set up autocompletion to make using the CLI faster:
 <TabItem>
 
 ```bash
-neonctl completion >> ~/.bashrc
+neon completion >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -197,7 +197,7 @@ source ~/.bashrc
 <TabItem>
 
 ```bash
-neonctl completion >> ~/.zshrc
+neon completion >> ~/.zshrc
 source ~/.zshrc
 ```
 
@@ -212,7 +212,7 @@ Now you can press **Tab** to complete Neon CLI commands and options. For further
 ### List your projects
 
 ```bash
-neonctl projects list
+neon projects list
 ```
 
 If no organization context is set, the CLI prompts you to select an organization.
@@ -222,15 +222,15 @@ For more about the `projects` command, see [Neon CLI commands: projects](/docs/c
 ### Create a branch
 
 ```bash
-neonctl branches create --name <branch-name>
+neon branches create --name <branch-name>
 ```
 
 Set your project context or specify `--project-id <your-project-id>` if you have more than one Neon project.
 
-To switch the active branch in your context file, use [`neonctl checkout`](/docs/cli/checkout):
+To switch the active branch in your context file, use [`neon checkout`](/docs/cli/checkout):
 
 ```bash
-neonctl checkout <branch>
+neon checkout <branch>
 ```
 
 For more about the `branches` command, see [Neon CLI commands: branches](/docs/cli/branches).
@@ -240,19 +240,19 @@ For more about the `branches` command, see [Neon CLI commands: branches](/docs/c
 Get the connection string for the default branch in your project:
 
 ```bash
-neonctl connection-string
+neon connection-string
 ```
 
 For a specific branch, specify the branch name:
 
 ```bash
-neonctl connection-string <branch-name>
+neon connection-string <branch-name>
 ```
 
-To connect with `psql` directly, use the dedicated [`neonctl psql`](/docs/cli/psql) command:
+To connect with `psql` directly, use the dedicated [`neon psql`](/docs/cli/psql) command:
 
 ```bash
-neonctl psql
+neon psql
 ```
 
 For more about the `connection-string` command, see [Neon CLI commands: connection-string](/docs/cli/connection-string).
@@ -261,11 +261,11 @@ For more about the `connection-string` command, see [Neon CLI commands: connecti
 
 Now that you're set up with the Neon CLI, you can:
 
-- Create more Neon projects with `neonctl projects create`
-- Manage your branches with various `neonctl branches` commands such as `reset`, `restore`, `rename`, `schema-diff`, and more
-- Create and manage databases with `neonctl databases` commands
-- Create and manage roles with `neonctl roles` commands
-- View the full set of Neon CLI commands available to you with `neonctl --help`
+- Create more Neon projects with `neon projects create`
+- Manage your branches with various `neon branches` commands such as `reset`, `restore`, `rename`, `schema-diff`, and more
+- Create and manage databases with `neon databases` commands
+- Create and manage roles with `neon roles` commands
+- View the full set of Neon CLI commands available to you with `neon --help`
 
 For more details on all available commands, see the [CLI Reference](/docs/cli).
 

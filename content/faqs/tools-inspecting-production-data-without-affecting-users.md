@@ -5,6 +5,12 @@ description: "Neon branches and read replicas let you query a copy of production
 slug: tools-inspecting-production-data-without-affecting-users
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which tools allow using Postgres without managing infrastructure?'
+  slug: tools-for-serverless-postgres-infrastructure
+nextLink:
+  title: 'What tools isolate database changes per branch in modern development workflows?'
+  slug: tools-isolate-database-changes-branch-development
 ---
 
 ## Short answer

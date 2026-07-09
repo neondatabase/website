@@ -1,4 +1,4 @@
-text: 'New in Neon: Refer a friend and earn credits, Neon backend private preview, and more. Read the changelog.'
+text: 'Autoscaling Report: Production databases on Neon use 2.4x less compute and 50% less cost than if they were running on a provisioned platform.'
 link:
-  url: 'https://neon.com/docs/changelog/2026-06-19'
+  url: 'https://neon.com/autoscaling-report'
   target: '_blank'

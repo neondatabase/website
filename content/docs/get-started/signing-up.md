@@ -182,7 +182,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
    - Using NPM (applicable for all platforms that support Node.js):
 
      ```bash
-     npm install -g neonctl
+     npm install -g neon
      ```
 
 3. **Authenticate with Neon**

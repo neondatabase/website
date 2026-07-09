@@ -48,7 +48,7 @@ Set up the Neon MCP server to allow Cursor to create branches, run SQL commands,
 The simplest way to connect to Neon is using the Neon CLI. Open your terminal in the root of your project and run:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 You’ll be prompted to authenticate with Neon and choose the editor you want to integrate with. Select Cursor (or your preferred IDE). This command handles authentication, configures your local MCP connection to Neon’s remote server, and installs [Neon agent skills](https://github.com/neondatabase/agent-skills) for best-practice workflows.

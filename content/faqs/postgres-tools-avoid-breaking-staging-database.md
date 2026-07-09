@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-tools-avoid-breaking-staging-database
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?'
+  slug: postgres-services-wire-protocol-compatible
+nextLink:
+  title: 'What Postgres tools support both Edge functions and Node backends?'
+  slug: postgres-tools-edge-functions-node-backends
 ---
 
 Give every developer their own branch instead of sharing one staging database. A Neon branch is a full Postgres copy of staging (or production), created in seconds. If a developer drops a table, runs a bad migration, or seeds garbage data, only their branch breaks.

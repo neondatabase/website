@@ -171,6 +171,7 @@ const Item = ({
           target={externalSlug ? '_blank' : '_self'}
           icon={externalSlug && 'external'}
           tabIndex={isHidden ? -1 : undefined}
+          aria-expanded={items?.length ? !isCollapsed : undefined}
           onClick={handleClick}
         >
           {ariaLabel && <span className="sr-only">{ariaLabel}</span>}

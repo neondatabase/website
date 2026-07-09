@@ -2,23 +2,24 @@
 title: 'Neon CLI command: roles'
 subtitle: 'List, create, and delete database roles in a Neon project'
 summary: >-
-  The `neonctl roles` CLI command lists, creates, and deletes database roles in
+  The `neon roles` CLI command lists, creates, and deletes database roles in
   a Neon project, with subcommands scoped to a specific branch or the project
   default. Use it when you need to add a login role, create a passwordless role
   with `--no-login`, or remove an existing role from the command line. Role
   names are capped at 63 bytes; commands require the Neon CLI and either
   browser-based auth or an API key.
 enableTableOfContents: true
-updatedOn: '2026-06-12T01:42:37.157Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-roles
+  - /docs/cli/role
 ---
 
 The `roles` command lists, creates, and deletes roles in a Neon project from the terminal. For information about roles in Neon, see [Manage roles](/docs/manage/roles). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise.
 
 <CliSubcommands command="roles" />
 
-## neonctl roles list (#list)
+## neon roles list (#list)
 
 Lists roles. If you don't specify a branch ID or name with `--branch`, the command targets the project's default branch. This applies to all `roles` subcommands.
 
@@ -29,7 +30,7 @@ Lists roles. If you don't specify a branch ID or name with `--branch`, the comma
 List roles with the default `table` output format:
 
 ```bash
-neonctl roles list
+neon roles list
 ```
 
 ```text filename="Output"
@@ -43,7 +44,7 @@ neonctl roles list
 List roles with the `--output` format set to `json`:
 
 ```bash
-neonctl roles list --output json
+neon roles list --output json
 ```
 
 <details>
@@ -63,7 +64,7 @@ neonctl roles list --output json
 
 </details>
 
-## neonctl roles create (#create)
+## neon roles create (#create)
 
 Creates a role. The role name cannot exceed 63 bytes.
 
@@ -72,7 +73,7 @@ Creates a role. The role name cannot exceed 63 bytes.
 <CliOptions command="roles create" />
 
 ```bash
-neonctl roles create --name sally
+neon roles create --name sally
 ```
 
 ```text filename="Output"
@@ -83,7 +84,7 @@ neonctl roles create --name sally
 └───────┴──────────────────────┘
 ```
 
-## neonctl roles delete (#delete)
+## neon roles delete (#delete)
 
 Deletes a role. The `<role>` is the role name.
 
@@ -92,7 +93,7 @@ Deletes a role. The `<role>` is the role name.
 <CliOptions command="roles delete" />
 
 ```bash
-neonctl roles delete sally
+neon roles delete sally
 ```
 
 ```text filename="Output"

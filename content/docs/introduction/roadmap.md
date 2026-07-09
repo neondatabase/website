@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-06-22T16:36:18.455Z'
+updatedOn: '2026-06-27T13:07:31.581Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -79,6 +79,10 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **Lakebase Search**: Vector and BM25 full-text search are now available to all users on Postgres 16+ through the `lakebase_vector` and `lakebase_text` extensions, so you can run semantic, keyword, and hybrid search in Postgres without a separate search stack. [Learn more](/docs/ai/lakebase-search)
+- **neon.ts**: A TypeScript config file you commit to your repo to declare branch policies, compute settings, and Neon services as code. Apply changes with `neon deploy` and preview them with `neon config plan`. [Learn more](/docs/reference/neon-ts)
+- **Branch-first development workflow**: New CLI commands (`neon link`, `neon checkout`, `neon env pull`, `neon psql`, `neon data-api`) bring project linking and branch switching to the terminal. Your `DATABASE_URL` updates automatically when you check out a branch. [Learn more](/docs/cli)
+- **More network transfer on paid plans**: The public network transfer allowance on all paid plans increased from 100 GB to 500 GB per month. [Learn more](/docs/introduction/network-transfer)
 - **Schema Diff for larger schemas**: The schema comparison line limit has been raised from 8,000 to 20,000 lines, unblocking diffs on larger production schemas. [Learn more](/docs/guides/schema-diff).
 - **Per-branch consumption metrics**: A new API endpoint returns compute, storage, and transfer usage broken down by branch, making it easier to attribute costs in multi-branch workflows. [Learn more](/docs/guides/consumption-metrics).
 - **Neon MCP Server branch forking**: The `create_branch` MCP tool now accepts a `parentId` parameter so agents can fork any branch, not only the project default. [Learn more](/docs/ai/neon-mcp-server).
@@ -106,13 +110,13 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Neon MCP Server documentation tools**: The MCP Server now includes `list_docs_resources` and `get_doc_resource` so your agent can fetch Neon docs on demand. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
 - **Compute autoscaling report**: A published report compares Neon autoscaling to provisioned compute using real production workloads, with methodology and key findings. [Learn more](https://neon.com/autoscaling-report).
 - **Consumption history API**: The consumption history API is now available on all paid plans. You can use it with Neon's usage-based pricing plans to track usage programmatically: query compute, storage, and data transfer at hourly, daily, or monthly granularity for custom dashboards and alerts. [Learn more](/docs/guides/consumption-metrics).
-- **Simpler MCP Server setup**: Configure the Neon MCP Server for all detected AI agents and editors with a single command: `npx add-mcp https://mcp.neon.tech/mcp`. OAuth opens in your browser to authorize access. For full setup (MCP plus agent skills and VS Code extension), use `npx neonctl@latest init`. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
+- **Simpler MCP Server setup**: Configure the Neon MCP Server for all detected AI agents and editors with a single command: `npx add-mcp https://mcp.neon.tech/mcp`. OAuth opens in your browser to authorize access. For full setup (MCP plus agent skills and VS Code extension), use `npx neon@latest init`. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
 - **Claimable Postgres REST API**: Claimable Postgres now offers a REST API for programmatic database provisioning, making it easy to integrate Postgres into platforms, CI/CD, and automation. [Learn more](/docs/reference/claimable-postgres).
 - **Neon Auth SDK simplified**: The server-side Neon Auth SDK for Next.js now uses a unified `createNeonAuth()` API, explicit configuration, and session caching that reduces Auth Server API calls by 95–99%. [Learn more](/docs/auth/migrate/from-auth-v0.1).
 - **Agent Skills**: Install [Agent Skills](https://github.com/neondatabase/agent-skills) to teach your AI assistant about Neon best practices. The Neon MCP Server can also provision the Data API with optional Neon Auth or external auth. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
 - **Neon Auth on Vercel previews**: Both Vercel-managed and Neon-managed integrations now automatically provision Neon Auth on preview branches when enabled on production, so preview deployments get the right auth environment variables. [Learn more](/docs/auth/overview).
-- **One-command setup for MCP and VS Code extension**: `npx neonctl@latest init` now configures both the Neon MCP Server and the Neon VS Code Extension in one step for Cursor or VS Code. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
-- **Expanded `neonctl init`**: The **init** wizard configures MCP and agent skills for many more coding assistants (for example Claude Desktop, Codex, Zed, Gemini CLI, and GitHub Copilot CLI), not only Cursor, VS Code, and Claude Code. [Learn more](/docs/cli/init).
+- **One-command setup for MCP and VS Code extension**: `npx neon@latest init` now configures both the Neon MCP Server and the Neon VS Code Extension in one step for Cursor or VS Code. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
+- **Expanded `neon init`**: The **init** wizard configures MCP and agent skills for many more coding assistants (for example Claude Desktop, Codex, Zed, Gemini CLI, and GitHub Copilot CLI), not only Cursor, VS Code, and Claude Code. [Learn more](/docs/cli/init).
 - **New Neon VS Code extension**: A revamped extension that replaces the previous Neon Local extension. It uses direct Neon connection strings and brings schema browsing, SQL editing, and table data into your IDE, plus automatic MCP Server configuration. Available for VS Code, Cursor, Windsurf, and other compatible editors. [Learn more](/docs/local/vscode-extension).
 - **Connection pooling metrics**: Pooler client and server connection graphs are now available in the Neon Console and via OpenTelemetry and Datadog integrations, so you can monitor PgBouncer usage and tune pool size. [Learn more](/docs/introduction/monitoring-page).
 - **GitHub Action support for Neon Auth and Data API**: The Neon Create Branch GitHub Action now supports `get_auth_url` and `get_data_api_url` outputs, so you can run integration tests against isolated branch environments with the same auth and data access patterns as production. [Learn more](https://github.com/marketplace/actions/neon-create-branch-github-action).
@@ -125,7 +129,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **100 Free plan projects**: The Neon Free plan now includes 100 projects, giving you plenty of room to experiment, prototype, and build. [Learn more](/docs/introduction/plans).
 - **Neon Auth rebuilt with Better Auth**: Neon Auth now uses [Better Auth](https://www.better-auth.com/) as the foundation. All authentication data lives directly in your Neon database, so when you branch, your entire auth state branches with it. Users, sessions, organizations, and configuration are stored in a dedicated `neon_auth` schema. [Read the announcement](/blog/neon-auth-branchable-identity-in-your-database).
 - **Purely usage-based billing**: We've removed the $5 monthly minimum from our paid plans. Neon is now purely usage-based: if you use $3 one month, that's the bill you'll receive. [Learn more](/docs/introduction/plans).
-- **One-command MCP setup**: Connecting AI editors to the Neon MCP Server is now a single command: `npx neonctl@latest init`. This command authenticates via OAuth, automatically creates a Neon API key, and configures Cursor, VS Code, or Claude Code CLI to connect to Neon. [Learn more](/docs/ai/connect-mcp-clients-to-neon#cursor).
+- **One-command MCP setup**: Connecting AI editors to the Neon MCP Server is now a single command: `npx neon@latest init`. This command authenticates via OAuth, automatically creates a Neon API key, and configures Cursor, VS Code, or Claude Code CLI to connect to Neon. [Learn more](/docs/ai/connect-mcp-clients-to-neon#cursor).
 - **Data masking with console support**: Create anonymized branches with data masking directly from the Neon Console. [Learn more](/docs/workflows/data-anonymization).
 - **Neon is now a Kiro Power**: Manage your Postgres databases directly from the Kiro IDE. Deploy instantly, branch for safe testing, and time-travel to restore from any past state. [Read the announcement](/blog/just-launched-neon-is-now-a-kiro-power).
 - **Custom Neon agents for GitHub Copilot**: We've built two specialized agents that bring Neon's branching workflow directly into your IDE: the Neon Migration Specialist for safe Postgres migrations and the Neon Performance Analyzer for identifying and fixing slow queries. [Learn more](/docs/ai/ai-github-copilot-agents).

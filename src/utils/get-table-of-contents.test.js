@@ -17,6 +17,12 @@ describe('getTableOfContents', () => {
     expect(toc[0].title).toBe('Long heading title');
   });
 
+  it('keeps toc-only headings in the toc without rendering the marker', () => {
+    const toc = getTableOfContents('## Commands reference\n\n### Setup & context [toc-only]\n');
+    expect(toc[0].items[0].title).toBe('Setup & context');
+    expect(toc[0].items[0].id).toBe('setup-and-context');
+  });
+
   it('shortens full-path CLI headings with custom ids to the trailing segments', () => {
     const content = [
       '## Subcommands',

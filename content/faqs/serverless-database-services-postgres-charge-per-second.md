@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: serverless-database-services-postgres-charge-per-second
 category: FAQ
 status: draft
+previousLink:
+  title: 'How do I rotate my Neon API keys after they''ve been exposed?'
+  slug: rotate-neon-api-keys
+nextLink:
+  title: 'What is the simplest Postgres setup for startups?'
+  slug: simplest-postgres-setup-for-startups
 ---
 
 ## Short answer

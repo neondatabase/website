@@ -24,7 +24,7 @@ The EXP() function works the same across any standard PostgreSQL deployment, so 
 
 ## Introduction to the PostgreSQL EXP() function
 
-An exponential of a number is the number e, approximately equal to `2.71`, raised to a given power (en).
+An exponential of a number is the number e, approximately equal to `2.71`, raised to a given power (n).
 
 In PostgreSQL, you can use the `EXP()` function to calculate the exponential of a number.
 

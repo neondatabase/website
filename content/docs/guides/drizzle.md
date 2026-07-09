@@ -10,7 +10,7 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-02T16:34:30.445Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -144,6 +144,24 @@ export default defineConfig({
   },
 });
 ```
+
+<Admonition type="tip" title="Loading a .env.local file">
+`import 'dotenv/config'` loads variables from a `.env` file. If you keep your connection string in `.env.local` (a common convention in Next.js and other frameworks), point dotenv at it explicitly instead:
+
+```typescript
+import { config } from 'dotenv';
+config({ path: '.env.local' });
+
+import { defineConfig } from 'drizzle-kit';
+
+if (!process.env.DATABASE_URL) {
+  throw new Error('DATABASE_URL is not set in .env.local');
+}
+
+// ...rest of config unchanged
+```
+
+</Admonition>
 
 ## Initialize the Drizzle client
 
@@ -357,7 +375,7 @@ const sql = neon(getBranchUrl()!);
 export const db = drizzle({ client: sql });
 ```
 
-Each branch has its own connection string, available in the Neon Console or via the CLI (`neonctl connection-string <branch-id-or-name> --project-id <project-id>`).
+Each branch has its own connection string, available in the Neon Console or via the CLI (`neon connection-string <branch-id-or-name> --project-id <project-id>`).
 
 ## Resources
 

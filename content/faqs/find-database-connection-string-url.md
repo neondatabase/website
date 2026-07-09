@@ -3,9 +3,15 @@ title: 'Where can I find my database connection string or URL in Neon?'
 subtitle: 'The Connect widget builds it for you. The URL is fixed per role and branch, but you can reset the password.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Where can I find my database connection details in the Neon Console?'
+  slug: find-connection-details-neon-console
+nextLink:
+  title: 'Where can I find my database connection string in Neon?'
+  slug: find-database-connection-string
 ---
 
 Click **Connect** on your **Project Dashboard** in the [Neon Console](https://console.neon.tech). The **Connect to your database** modal builds the full Postgres URL for the branch, compute, database, and role you select. The hostname and username come from your compute endpoint and the chosen role, so you can't edit them freely. You can rotate the role's password (which changes the URL) and switch the branch, compute, or database the URL points to.

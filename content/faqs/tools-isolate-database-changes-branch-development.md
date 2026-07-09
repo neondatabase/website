@@ -5,6 +5,12 @@ description: "Neon's database branching gives each Git branch its own isolated c
 slug: tools-isolate-database-changes-branch-development
 category: FAQ
 status: draft
+previousLink:
+  title: 'What tools allow inspecting production data without affecting users?'
+  slug: tools-inspecting-production-data-without-affecting-users
+nextLink:
+  title: 'What tools help manage multiple Postgres databases across different projects and environments from a single account?'
+  slug: tools-manage-multiple-postgres-databases
 ---
 
 ## Short answer
