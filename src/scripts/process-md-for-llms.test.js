@@ -730,10 +730,9 @@ See [CONN_MAX_AGE](https://example.com).
       const rootDir = process.cwd();
       const navMap = buildNavigationMap(rootDir);
 
-      // auth/guides/password-reset is under: Backend > Neon Auth > Guides
+      // auth/guides/password-reset is under: Neon Auth > Guides
       const entry = navMap.get('auth/guides/password-reset');
       expect(entry).toBeDefined();
-      expect(entry.breadcrumbs).toContain('Backend');
       expect(entry.breadcrumbs).toContain('Neon Auth');
       expect(entry.breadcrumbs).toContain('Guides');
     });
@@ -859,7 +858,7 @@ See [CONN_MAX_AGE](https://example.com).
 
       const header = buildPageHeader('auth/guides/password-reset', navMap);
       expect(header).toBe(
-        '> This page location: Backend > Neon Auth > Guides > Password reset\n' +
+        '> This page location: Neon Auth > Guides > Password reset\n' +
           '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
       );
     });
