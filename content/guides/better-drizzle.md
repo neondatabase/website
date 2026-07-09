@@ -4,7 +4,7 @@ subtitle: Add type-safe repositories, pagination, nested relation filters, plugi
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-09T00:00:00.000Z'
-updatedOn: '2026-07-09T17:20:13.285Z'
+updatedOn: '2026-07-09T18:32:05.503Z'
 ---
 
 [better-drizzle](https://better-drizzle.com) is a thin wrapper around [Drizzle ORM](https://orm.drizzle.team) that gives every table a consistent, type-safe API without replacing Drizzle itself. If you are already using Drizzle with Neon, better-drizzle removes the repetitive query glue you would otherwise rewrite in every service while staying close to the metal.
@@ -40,12 +40,21 @@ cd better-drizzle-demo
 npm init -y
 ```
 
-Install the dependencies:
+Install the dependencies depending on your driver of choice. If you are using `node-postgres`, install `pg`. If you are using Neon serverless, install `@neondatabase/serverless` instead.
+
+<CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
+
+```bash
+npm install better-drizzle drizzle-orm pg
+npm install -D drizzle-kit dotenv @types/pg
+```
 
 ```bash
 npm install better-drizzle drizzle-orm @neondatabase/serverless
 npm install -D drizzle-kit dotenv
 ```
+
+</CodeTabs>
 
 ## Configure Drizzle Kit
 
@@ -71,7 +80,7 @@ better-drizzle reads your Drizzle schema (including relations) to generate each 
 
 Here is a small `users → posts` schema using `drizzle-orm/pg-core`:
 
-```typescript filename="schema.ts"
+```typescript filename="src/schema.ts"
 import { relations } from 'drizzle-orm';
 import { boolean, integer, pgTable, serial, text } from 'drizzle-orm/pg-core';
 
@@ -114,7 +123,21 @@ export const schema = {
 
 Create a normal Drizzle client first, then wrap it once with `better()`:
 
-```typescript filename="db.ts"
+<CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
+
+```typescript filename="src/db.ts"
+import { better } from 'better-drizzle';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Pool } from 'pg';
+import { schema } from './schema';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
+const db = drizzle(pool, { schema });
+
+export const client = better(db, { schema });
+```
+
+```typescript filename="src/db.ts"
 import { better } from 'better-drizzle';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
@@ -126,15 +149,15 @@ const db = drizzle(sql, { schema });
 export const client = better(db, { schema });
 ```
 
+</CodeTabs>
+
 <Admonition type="note" title="Any driver works">
 better-drizzle detects the dialect from your Drizzle instance. The same `client` API works whether you use `neon-http`, `neon-serverless`, `node-postgres`, or `postgres-js`. See the [Neon Drizzle guide](/docs/guides/drizzle) for setup details for each driver.
 </Admonition>
 
 ## Seed the database
 
-Before running queries, seed the `users` and `posts` tables with sample data. This gives every example in the guide a consistent starting point.
-
-Create a seed script at `src/seed.ts`:
+Before running queries, seed the `users` and `posts` tables with sample data. Create a seed script at `src/seed.ts`:
 
 ```typescript filename="src/seed.ts"
 import { client } from './db';
@@ -147,7 +170,7 @@ async function seed() {
       { email: 'charlie@example.com', name: 'Charlie', active: true },
     ],
     target: ['email'],
-    update: ['name', 'active'],
+    update: ['name'],
   });
 
   const alice = await client.users.findUnique({
@@ -158,12 +181,14 @@ async function seed() {
     where: { email: 'bob@example.com' },
   });
 
-  await client.posts.insert([
-    { authorId: alice!.id, title: 'Hello World', published: true },
-    { authorId: alice!.id, title: 'better-drizzle is great', published: true },
-    { authorId: alice!.id, title: 'Neon Postgres rocks', published: true },
-    { authorId: bob!.id, title: 'Secret draft', published: false },
-  ]);
+  await client.posts.createMany({
+    data: [
+      { authorId: alice!.id, title: 'Hello World', published: true },
+      { authorId: alice!.id, title: 'better-drizzle is great', published: true },
+      { authorId: alice!.id, title: 'Neon Postgres rocks', published: true },
+      { authorId: bob!.id, title: 'Secret draft', published: false },
+    ],
+  });
 
   console.log('Seeded 3 users and 4 posts.');
 }
@@ -177,11 +202,11 @@ Run the seed script:
 npx tsx src/seed.ts
 ```
 
-```text title="Output"
+```json title="Output"
 Seeded 3 users and 4 posts.
 ```
 
-Now you have three users — Alice (active, 3 published posts), Bob (inactive, 1 draft post), and Charlie (active, no posts) — ready for the queries below.
+Now your database has three users (Alice, Bob, Charlie) and four posts (three by Alice, one draft by Bob).
 
 ## Query with better-drizzle
 
@@ -209,24 +234,24 @@ const users = await client.users.findMany({
 
 The query returns active users with their published posts nested under each user:
 
-```text title="Output"
+```json title="Output"
 [
   {
-    id: 3,
-    email: 'charlie@example.com',
-    name: 'Charlie',
-    active: true,
-    posts: []
+    "id": 3,
+    "email": "charlie@example.com",
+    "name": "Charlie",
+    "active": true,
+    "posts": []
   },
   {
-    id: 1,
-    email: 'alice@example.com',
-    name: 'Alice',
-    active: true,
-    posts: [
-      { id: 3, title: 'Neon Postgres rocks' },
-      { id: 2, title: 'better-drizzle is great' },
-      { id: 1, title: 'Hello World' }
+    "id": 1,
+    "email": "alice@example.com",
+    "name": "Alice",
+    "active": true,
+    "posts": [
+      { "id": 3, "title": "Neon Postgres rocks" },
+      { "id": 2, "title": "better-drizzle is great" },
+      { "id": 1, "title": "Hello World" }
     ]
   }
 ]
@@ -240,12 +265,12 @@ const alice = await client.users.findUnique({
 });
 ```
 
-```text title="Output"
+```json title="Output"
 {
-  id: 1,
-  email: 'alice@example.com',
-  name: 'Alice',
-  active: true
+  "id": 1,
+  "email": "alice@example.com",
+  "name": "Alice",
+  "active": true
 }
 ```
 
@@ -269,22 +294,22 @@ const posts = await client.posts.findMany({
 
 The `author: { is: { active: true } }` filter keeps only posts where the author is active, excluding Bob's posts since he is inactive:
 
-```text title="Output"
+```json title="Output"
 [
   {
-    id: 3,
-    title: 'Neon Postgres rocks',
-    author: { id: 1, name: 'Alice' }
+    "id": 3,
+    "title": "Neon Postgres rocks",
+    "author": { "id": 1, "name": "Alice" }
   },
   {
-    id: 2,
-    title: 'better-drizzle is great',
-    author: { id: 1, name: 'Alice' }
+    "id": 2,
+    "title": "better-drizzle is great",
+    "author": { "id": 1, "name": "Alice" }
   },
   {
-    id: 1,
-    title: 'Hello World',
-    author: { id: 1, name: 'Alice' }
+    "id": 1,
+    "title": "Hello World",
+    "author": { "id": 1, "name": "Alice" }
   }
 ]
 ```
@@ -307,20 +332,7 @@ if (!maybeCreated) {
 }
 ```
 
-The first run creates the user. A second run with the same email returns `null`:
-
-```text title="Output (first run)"
-{
-  id: 4,
-  email: 'better@example.com',
-  name: 'better',
-  active: true
-}
-```
-
-```text title="Output (second run)"
-null
-```
+The first run creates the user. A second run with the same email returns `null` and logs "User already existed".
 
 Bulk upsert multiple users in a single batch operation:
 
@@ -338,11 +350,14 @@ await client.users.upsertMany({
 
 The query matches Alice and Bob by email, updates their `name` and `active` columns, and returns the updated rows:
 
-```text title="Output"
-[
-  { id: 1, name: 'Alice Updated' },
-  { id: 2, name: 'Bob Updated' }
-]
+```json title="Output"
+{
+  "count": 2,
+  "data": [
+    { "id": 1, "name": "Alice Updated" },
+    { "id": 2, "name": "Bob Updated" }
+  ]
+}
 ```
 
 ### Pagination: one shape for offset and cursor
@@ -363,13 +378,13 @@ const page1 = await client.users.paginate({
 
 Both offset and cursor pagination return the same `{ data, pagination }` shape:
 
-```text title="Output"
+```json title="Output"
 {
-  data: [
-    { id: 3, name: 'Charlie' },
-    { id: 1, name: 'Alice' }
+  "data": [
+    { "id": 3, "name": "Charlie" },
+    { "id": 1, "name": "Alice" }
   ],
-  pagination: { count: 2, hasNext: false, hasPrevious: false }
+  "pagination": { "count": 2, "hasNext": false, "hasPrevious": false }
 }
 ```
 
@@ -386,12 +401,12 @@ const page2 = await client.users.paginate({
 });
 ```
 
-```text title="Output"
+```json title="Output"
 {
-  data: [
-    { id: 1, name: 'Alice' }
+  "data": [
+    { "id": 1, "name": "Alice" }
   ],
-  pagination: { count: 1, hasNext: false, hasPrevious: false }
+  "pagination": { "count": 1, "hasNext": false, "hasPrevious": false }
 }
 ```
 
@@ -403,7 +418,7 @@ const activeCount = await client.users.count({
 });
 ```
 
-```text title="Output"
+```json title="Output"
 2
 ```
 
@@ -413,7 +428,7 @@ const exists = await client.users.exists({
 });
 ```
 
-```text title="Output"
+```json title="Output"
 true
 ```
 
@@ -506,7 +521,7 @@ const client = better(db, {
 
 With these hooks in place, each operation logs before and after it runs:
 
-```text title="Output (example)"
+```json title="Output (example)"
 Querying users findMany { active: true }
 Query result [
   { id: 3, name: 'Charlie', active: true },
@@ -604,6 +619,20 @@ await client.transaction(
 
 Import the Better client from a shared server module and use it in route handlers, server actions, and React Server Components:
 
+<CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
+
+```typescript filename="lib/db.ts"
+import { better } from 'better-drizzle';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { Pool } from 'pg';
+import { schema } from './schema';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
+const db = drizzle(pool, { schema });
+
+export const client = better(db, { schema });
+```
+
 ```typescript filename="lib/db.ts"
 import { better } from 'better-drizzle';
 import { drizzle } from 'drizzle-orm/neon-http';
@@ -615,6 +644,8 @@ const db = drizzle(sql, { schema });
 
 export const client = better(db, { schema });
 ```
+
+</CodeTabs>
 
 ```typescript filename="app/api/posts/route.ts"
 import { client } from '@/lib/db';
