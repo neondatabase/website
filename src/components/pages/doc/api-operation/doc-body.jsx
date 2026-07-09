@@ -280,7 +280,7 @@ export function DocField({
             id={childrenId}
             className={cn(
               'relative mt-6 flex flex-col gap-4',
-              isNestedBare && '-ml-1 w-[calc(100%+0.25rem)]'
+              isNestedBare && 'ml-5 w-[calc(100%-1.25rem)] md:ml-3 md:w-[calc(100%-0.75rem)]'
             )}
           >
             <div className="pointer-events-none absolute top-0 bottom-0 left-[37px] w-px bg-gray-new-90 dark:bg-gray-new-20 md:left-3" />
