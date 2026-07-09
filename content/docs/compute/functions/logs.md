@@ -35,6 +35,24 @@ A function's log level comes from the `console` method used to emit it:
 
 `NOTICE` and `FATAL` also appear as filters in the log viewer but aren't currently emitted by Functions; they're part of the console's shared log-level set.
 
+## Common log entries
+
+Most of what shows up in your logs is your own `console.log`/`console.error` output. A few entries look like something's wrong when it isn't, or point you somewhere other than the log itself. Here's what to do when you see them.
+
+**Seeing this SSL warning on cold start? Ignore it, or set `sslmode=verify-full` to silence it.**
+
+```text
+(node:95) Warning: SECURITY WARNING: The SSL modes 'prefer', 'require', and 'verify-ca' are treated as aliases for 'verify-full'.
+```
+
+It's a `pg` (node-postgres) deprecation warning, not a connection problem: the injected `DATABASE_URL` uses `sslmode=require`, and `pg` warns on that mode regardless of whether anything is wrong. It logs at `ERROR` because Functions maps all `stderr` output to `ERROR`, not because the severity was assessed. If you'd rather not see it, connect with `sslmode=verify-full` explicitly instead of relying on the default.
+
+**Seeing an `ERROR` `invoke end` with no other detail? It's not your code, don't debug your handler for it.** The platform never puts internal failure detail (no execution node reachable, a launch or scheduler failure) into customer-facing logs, so this line won't tell you more than "the platform failed to complete this request." Retry; if it keeps happening, contact support rather than searching your own code for the cause. (Your own handler returning an error response is a different case and logs as `INFO`, since the platform still successfully invoked your function.)
+
+**Requests not showing up in your logs at all? Check the invocation URL and branch, not the logs.** A wrong branch, a typo'd slug, or a momentary control-plane hiccup returns a 404 or 503 straight to the caller and never reaches your function's log stream, because the platform hasn't resolved which function to attribute logs to yet. If you expect traffic and see nothing, the request likely never reached your function.
+
+**Function not starting after a deploy? Read the response body, not the logs.** A missing entry point, an import that throws at load time, or a default export of the wrong shape returns a `function_load_failed` error with your actual error message in the response body of the failed request, not as a log line. Check the response you got back from calling the function, not the Logs tab.
+
 ## Filter and search
 
 Use the level chips to show only the levels you care about, and the search box to match a literal, case-insensitive substring in the log body. Use the time-range chips (`5m`, `15m`, `1h`, `6h`, `24h`, `7d`) to change the query window. Logs are currently retained for only 3 days (see [Retention](#retention)), so the `7d` option is selectable but can't return anything older than 3 days back.
