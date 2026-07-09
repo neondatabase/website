@@ -183,7 +183,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
             </p>
           )}
 
-          <div className="mt-4 mb-8 flex items-start justify-between gap-x-4 gap-y-3 sm:flex-col">
+          <div className="mt-4 mb-4.5 flex items-start justify-between gap-x-4 gap-y-3 sm:flex-col">
             <h1 className="text-[36px] leading-tight font-medium tracking-tighter text-balance md:text-[28px]">
               {operation.summary}
             </h1>
@@ -193,14 +193,14 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
           {operation.descriptionHtml && (
             <div
               className={cn(
-                'mt-3 text-[15px] leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_p+p]:mt-3',
+                'text-[20px] leading-snug text-gray-new-30 dark:text-gray-new-70 [&_p+p]:mt-3',
                 INLINE_CODE_STYLES
               )}
               dangerouslySetInnerHTML={{ __html: operation.descriptionHtml }}
             />
           )}
 
-          <p className="mt-3 text-[13px] text-gray-new-50 dark:text-gray-new-60">
+          <p className="mt-4.5 text-[13px] text-gray-new-50 dark:text-gray-new-60">
             <ApiAiContextLink
               to={`/docs/${currentSlug}.md`}
               tooltipId={`api-ai-context-${operation.id}`}
