@@ -12,7 +12,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-06T16:27:57.937Z'
 ---
 
 Our developer experience is anchored by four core pillars:
@@ -28,7 +28,7 @@ Our developer experience is anchored by four core pillars:
 
 Traditional OLTP databases force you to provision compute upfront (i.e., choose an instance size), plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
 
-You can build your database branching workflows using the [Neon CLI](/docs/cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
+You can build your database branching workflows using the [Neon CLI](/docs/cli), [Neon API](/docs/reference/api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
 **How it works**
 
@@ -129,7 +129,7 @@ Neon is built with an API-first mindset. Every core operation is exposed program
 
 Neon powers [platforms](https://neon.com/platforms) where thousands of databases are provisioned, scaled, and deleted automatically every day. This includes developer platforms embedding Postgres into their product experience, as well as [AI agents](https://neon.com/use-cases/ai-agents) that provision databases dynamically while building and running applications on behalf of users.
 
-The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) has been shaped by real-world requirements, and it’s able to
+The [Neon API](/docs/reference/api) has been shaped by real-world requirements, and it’s able to
 
 - Manage hundreds of thousands of projects
 - Automate database lifecycles with minimal human intervention

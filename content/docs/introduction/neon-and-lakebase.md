@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-06-24T01:50:22.272Z'
+updatedOn: '2026-07-06T16:27:57.937Z'
 ---
 
 In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres product that runs natively in the Databricks Data Intelligence Platform. This section explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) and how to determine whether Neon or Lakebase is a better fit for your workload.
@@ -79,7 +79,7 @@ Neon and Lakebase share the same Postgres engine and serverless storage architec
 | **Cross-cloud disaster recovery (DR)**               | Not available                                                                      | Private preview                                                                                                                            |
 | **Connection pooling**                               | Yes ([Connection pooling](/docs/connect/connection-pooling))                       | Yes, built-in PgBouncer ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect))                                              |
 | **Data API (REST)**                                  | Yes ([Data API](/docs/data-api/overview))                                          | Yes ([Lakebase Data API](https://docs.databricks.com/aws/en/oltp/projects/data-api))                                                       |
-| **Management API**                                   | Yes ([Neon API](/docs/reference/api-reference))                                    | Yes ([Lakebase API guide](https://docs.databricks.com/aws/en/oltp/projects/api-usage))                                                     |
+| **Management API**                                   | Yes ([Neon API](/docs/reference/api))                                              | Yes ([Lakebase API guide](https://docs.databricks.com/aws/en/oltp/projects/api-usage))                                                     |
 | **CLI**                                              | Yes ([Neon CLI](/docs/cli/install))                                                | Yes ([Databricks CLI for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/cli))                                                  |
 | **Terraform**                                        | Yes ([Terraform provider](/docs/reference/terraform))                              | Yes ([Terraform for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/automate-with-terraform))                                   |
 | **MCP server**                                       | Yes ([Neon MCP Server](/docs/ai/neon-mcp-server))                                  | Yes, Databricks managed MCP ([MCP on Databricks](https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp))                        |

@@ -667,7 +667,7 @@
                 - title: Database versioning
                   slug: ai/ai-database-versioning
                 - title: Neon API reference
-                  slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+                  slug: reference/api
             - section: Agent frameworks
               icon: frameworks
               items:
@@ -727,111 +727,116 @@
               slug: extensions/migrate-pg-search-to-lakebase-text
     - section: Tools & Workflows
       items:
-        - title: API, CLI & SDKs
-          slug: reference/api-reference
+        - title: API reference
+          slug: reference/api
+          icon: api
+          items:
+            - title: Overview
+              slug: reference/api
+            - title: Get started
+              slug: reference/api/get-started
+            - title: Key concepts
+              slug: reference/api/key-concepts
+            - section: API Reference
+              title: Endpoint index
+              slug: reference/api/reference
+              items: []
+        - title: CLI
+          slug: cli
           icon: cli
           items:
-            - section: CLI
-              icon: cli
+            - title: Overview
+              slug: cli
+            - title: Install and connect
+              slug: cli/install
+            - title: Quickstart
+              slug: cli/quickstart
+            - section: Setup & context
               items:
-                - title: Overview
-                  slug: cli
-                - title: Getting started
-                  items:
-                    - title: Install and connect
-                      slug: cli/install
-                    - title: Quickstart
-                      slug: cli/quickstart
-                - title: Setup and context
-                  items:
-                    - title: auth
-                      slug: cli/auth
-                    - title: init
-                      slug: cli/init
-                    - title: bootstrap
-                      slug: cli/bootstrap
-                    - title: link
-                      slug: cli/link
-                    - title: checkout
-                      slug: cli/checkout
-                    - title: env
-                      slug: cli/env
-                    - title: set-context
-                      slug: cli/set-context
-                    - title: me
-                      slug: cli/me
-                    - title: completion
-                      slug: cli/completion
-                - title: Projects and branches
-                  items:
-                    - title: projects
-                      slug: cli/projects
-                    - title: branches
-                      slug: cli/branches
-                    - title: databases
-                      slug: cli/databases
-                    - title: roles
-                      slug: cli/roles
-                    - title: operations
-                      slug: cli/operations
-                - title: Connect to Postgres
-                  items:
-                    - title: connection-string
-                      slug: cli/connection-string
-                    - title: psql
-                      slug: cli/psql
-                - title: Config as code
-                  items:
-                    - title: config
-                      slug: cli/config
-                    - title: deploy
-                      slug: cli/deploy
-                    - title: status
-                      slug: cli/status
-                    - title: dev
-                      slug: cli/dev
-                - title: Functions, storage and data
-                  items:
-                    - title: functions
-                      slug: cli/functions
-                    - title: buckets
-                      slug: cli/buckets
-                    - title: data-api
-                      slug: cli/data-api
-                    - title: neon-auth
-                      slug: cli/neon-auth
-                - title: Organizations and networking
-                  items:
-                    - title: api
-                      slug: cli/api
-                    - title: orgs
-                      slug: cli/orgs
-                    - title: ip-allow
-                      slug: cli/ip-allow
-                    - title: vpc
-                      slug: cli/vpc
-            - section: API
-              icon: api
+                - title: auth
+                  slug: cli/auth
+                - title: init
+                  slug: cli/init
+                - title: bootstrap
+                  slug: cli/bootstrap
+                - title: link
+                  slug: cli/link
+                - title: checkout
+                  slug: cli/checkout
+                - title: env
+                  slug: cli/env
+                - title: set-context
+                  slug: cli/set-context
+                - title: me
+                  slug: cli/me
+                - title: completion
+                  slug: cli/completion
+            - section: Projects & branches
               items:
-                - title: Neon API
-                  slug: reference/api-reference
-            - section: SDKs
-              icon: sdk
+                - title: projects
+                  slug: cli/projects
+                - title: branches
+                  slug: cli/branches
+                - title: databases
+                  slug: cli/databases
+                - title: roles
+                  slug: cli/roles
+                - title: operations
+                  slug: cli/operations
+            - section: Connect to Postgres
               items:
-                - title: Overview
-                  slug: reference/sdk
-                - title: Neon TypeScript SDK
-                  slug: reference/javascript-sdk
-                - title: Neon API TypeScript SDK
-                  slug: reference/typescript-sdk
-                - title: Python SDK (Neon API)
-                  slug: reference/python-sdk
-                - title: Go SDK (Neon API)
-                  slug: https://github.com/kislerdm/neon-sdk-go
-                  tag: community
-                - title: Node.js / Deno SDK (Neon API)
-                  slug: https://github.com/paambaati/neon-js-sdk
-                  tag: community
+                - title: connection-string
+                  slug: cli/connection-string
+                - title: psql
+                  slug: cli/psql
+            - section: Config as code
+              items:
+                - title: config
+                  slug: cli/config
+                - title: deploy
+                  slug: cli/deploy
+                - title: status
+                  slug: cli/status
+                - title: dev
+                  slug: cli/dev
+            - section: Functions, storage & data
+              items:
+                - title: functions
+                  slug: cli/functions
+                - title: buckets
+                  slug: cli/buckets
+                - title: data-api
+                  slug: cli/data-api
+                - title: neon-auth
+                  slug: cli/neon-auth
+            - section: Org & network
+              items:
+                - title: api
+                  slug: cli/api
+                - title: orgs
+                  slug: cli/orgs
+                - title: ip-allow
+                  slug: cli/ip-allow
+                - title: vpc
+                  slug: cli/vpc
+        - title: SDKs
+          slug: reference/sdk
+          icon: sdk
+          items:
+            - title: Overview
+              slug: reference/sdk
+            - title: Neon TypeScript SDK
+              slug: reference/javascript-sdk
+            - title: Neon API TypeScript SDK
+              slug: reference/typescript-sdk
+            - title: Python SDK (Neon API)
+              slug: reference/python-sdk
+            - title: Go SDK (Neon API)
+              slug: https://github.com/kislerdm/neon-sdk-go
+              tag: community
+            - title: Node.js / Deno SDK (Neon API)
+              slug: https://github.com/paambaati/neon-js-sdk
+              tag: community
 
         - title: Local development
           icon: container

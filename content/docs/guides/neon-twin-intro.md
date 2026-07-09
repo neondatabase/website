@@ -12,7 +12,7 @@ summary: >-
   production fidelity your workflow requires.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 <CTA title="Explore our dev/test use case" description="Move development and testing to Neon; keep production right where it is.<br/><br/>Read more about our dev/test use case <a href='/use-cases/dev-test'>here</a>."></CTA>
@@ -35,7 +35,7 @@ The workflows in this section enable automatic synchronization between your prod
 
 With a Neon Twin created, [branches](/docs/introduction/branching) can be quickly spun up or torn down, enabling developers to build new features or debug issues, all within their own isolated environments with a dedicated compute resource.
 
-Branches can be created and managed through the [Neon console](https://console.neon.tech/) or programmatically via the [API](/docs/reference/api-reference).
+Branches can be created and managed through the [Neon console](https://console.neon.tech/) or programmatically via the [API](/docs/reference/api).
 
 ## Get started
 
