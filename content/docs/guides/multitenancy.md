@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-09T23:30:29.056Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -235,12 +235,13 @@ Our example creates new Neon projects via the command line, using the following 
 // src/scripts/create.js
 
 import { Command } from 'commander';
-import { createApiClient } from '@neondatabase/api-client';
+import { createNeonClient } from '@neon/sdk';
 import 'dotenv/config';
 
 const program = new Command();
-const neonApi = createApiClient({
+const neon = createNeonClient({
   apiKey: process.env.NEON_API_KEY,
+  throwOnError: true,
 });
 
 program.option('-n, --name <name>', 'Name of the company').parse(process.argv);
@@ -252,16 +253,13 @@ if (options.name) {
 
   (async () => {
     try {
-      const response = await neonApi.createProject({
-        project: {
-          name: options.name,
-          pg_version: 16,
-          region_id: 'aws-us-east-1',
-        },
+      const project = await neon.projects.create({
+        name: options.name,
+        pg_version: 16,
+        region_id: 'aws-us-east-1',
       });
 
-      const { data } = response;
-      console.log(data);
+      console.log(project);
     } catch (error) {
       console.error('Error creating project:', error);
     }
@@ -295,7 +293,7 @@ To interact with the Neon API, you'll need to generate an API key. For more info
 
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { execSync } from 'child_process';
-import { createApiClient } from '@neondatabase/api-client';
+import { createNeonClient } from '@neon/sdk';
 import { Octokit } from 'octokit';
 import 'dotenv/config';
 
@@ -304,7 +302,10 @@ import { drizzleConfig } from '../templates/drizzle-config.js';
 import { githubWorkflow } from '../templates/github-workflow.js';
 
 const octokit = new Octokit({ auth: process.env.PERSONAL_ACCESS_TOKEN });
-const neonApi = createApiClient({ apiKey: process.env.NEON_API_KEY });
+const neon = createNeonClient({
+  apiKey: process.env.NEON_API_KEY,
+  throwOnError: true,
+});
 
 const repoOwner = 'neondatabase-labs';
 const repoName = 'neon-database-per-tenant-drizzle';
@@ -323,18 +324,15 @@ let secrets = [];
 
   try {
     // Get all projects
-    const response = await neonApi.listProjects();
-    const { projects } = response.data;
+    const { projects } = await neon.projects.list().all();
 
     // Loop through each project
     for (const project of projects) {
       // Get connection details for the project
-      const connectionDetails = await neonApi.getConnectionDetails({
+      const connection_string = await neon.postgres.connectionString({
         projectId: project.id,
         branchId: project.default_branch_id,
       });
-
-      const { connection_string } = connectionDetails.data;
 
       // Create a drizzle config file for each project
       const configFileName = `${project.name.toLowerCase().replace(/\s+/g, '-')}.config.ts`;

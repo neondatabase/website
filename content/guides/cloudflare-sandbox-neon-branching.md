@@ -4,7 +4,7 @@ subtitle: 'Learn how to build Full-Stack Cloud Agents using Cloudflare Sandboxes
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-16T00:00:00.000Z'
-updatedOn: '2026-03-17T18:42:23.000Z'
+updatedOn: '2026-07-09T23:30:29.056Z'
 ---
 
 ![Cloudflare Sandbox and Neon Branching architecture](/docs/guides/cloudflare_sandbox_neon_branching.png)
@@ -94,7 +94,7 @@ npx wrangler types
 To interact with the Neon API from the Worker, install the [Neon Typescript SDK](/docs/reference/typescript-sdk):
 
 ```bash
-npm install @neondatabase/api-client
+npm install @neon/sdk
 ```
 
 ## Step 5: Update the Dockerfile to install GitHub CLI
@@ -130,7 +130,7 @@ Replace the contents of `src/index.ts` with the following code:
 
 ```typescript
 import { getSandbox } from '@cloudflare/sandbox'
-import { createApiClient, EndpointType } from '@neondatabase/api-client'
+import { createNeonClient } from '@neon/sdk'
 
 const EXTRA_SYSTEM = `
 You are a **senior full-stack developer** working in an **isolated development environment**.
@@ -180,17 +180,15 @@ async function createNeonBranch(
   branchName: string,
   env: Env
 ): Promise<string> {
-  const api = createApiClient({ apiKey: env.NEON_API_KEY! })
+  const neon = createNeonClient({ apiKey: env.NEON_API_KEY!, throwOnError: true })
 
-  const res = await api.createProjectBranch(projectId, {
-    branch: { name: branchName },
-    endpoints: [{ type: EndpointType.ReadWrite }]
+  const { connectionString } = await neon.branches.createWithCompute(projectId, {
+    name: branchName,
   })
 
-  const uri = res.data.connection_uris?.[0]?.connection_uri
-  if (!uri) throw new Error('No DB connection URI returned')
+  if (!connectionString) throw new Error('No DB connection URI returned')
 
-  return uri
+  return connectionString
 }
 
 async function run(sandbox: ReturnType<typeof getSandbox>, cmd: string) {
