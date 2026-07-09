@@ -1,544 +1,345 @@
 ---
 title: Neon API TypeScript SDK
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
-  resources
+  resources with @neon/sdk
 summary: >-
-  The Neon TypeScript SDK (`@neondatabase/api-client` on npm) is a typed
-  wrapper around the Neon REST API. It lets you programmatically create,
-  update, and delete projects, branches, databases, endpoints, roles,
-  organizations, and consumption metrics. It provides TypeScript type safety,
-  IDE autocompletion, and structured Axios error handling. Install via npm,
-  yarn, or pnpm and authenticate with a Neon API key.
+  The official Neon Platform API TypeScript SDK (@neon/sdk) is a fetch-based,
+  zero-dependency client for creating and managing projects, branches, databases,
+  endpoints, roles, organizations, and consumption metrics. Use createNeonClient
+  for ergonomic namespaces and typed { data, error } results, or raw for every
+  OpenAPI endpoint. Requires Node.js 20.19+ and a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-07-06T16:27:57.937Z'
+updatedOn: '2026-07-09T23:24:30.287Z'
 ---
 
 <InfoBlock>
 
 <DocsList title="What you will learn:">
-<p>What is the Neon TypeScript SDK</p>
-<p>How to get started</p>
+<p>Install and configure <code>@neon/sdk</code></p>
+<p>Call the Neon Platform API with typed results and errors</p>
+<p>When to use the ergonomic client vs the raw layer</p>
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/reference/api">Neon API Reference</a>
+<a href="/docs/reference/api-reference">Neon API Reference</a>
+<a href="/docs/reference/migrate-api-client-to-sdk">Migrate from @neondatabase/api-client</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
-  <a href="https://www.npmjs.com/package/@neondatabase/api-client">@neondatabase/api-client on npm</a>
+<a href="https://www.npmjs.com/package/@neon/sdk">@neon/sdk on npm</a>
+<a href="https://github.com/neondatabase/neon-pkgs/tree/main/packages/sdk">@neon/sdk on GitHub</a>
 </DocsList>
 
 </InfoBlock>
 
+<Admonition type="note" title="Migrating from @neondatabase/api-client?">
+Neon’s legacy Axios-based client [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client) is superseded by [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk). See the [migration guide](/docs/reference/migrate-api-client-to-sdk) for method mapping and error-handling changes.
+</Admonition>
+
 ## About the SDK
 
-Neon supports the [@neondatabase/api-client](https://www.npmjs.com/package/@neondatabase/api-client) library, which is a wrapper for the [Neon API](/docs/reference/api). The SDK provides a convenient way to interact with the Neon API using TypeScript.
+[`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk) is the official TypeScript SDK for the [Neon Platform API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). It is generated from Neon’s [OpenAPI specification](https://neon.com/api_spec/release/v2.json) and provides two layers in one package:
 
-You can use the Neon TypeScript SDK to manage your Neon projects, branches, databases, compute endpoints, roles, and more programmatically. The SDK abstracts the underlying API requests, authentication, and error handling, allowing you to focus on building applications that interact with Neon resources.
+- **`createNeonClient`** — ergonomic resource namespaces, `{ data, error }` results, typed errors, retries, readiness polling, auto-pagination, and multi-step workflows.
+- **`raw`** — every Platform API endpoint as a standalone, tree-shakeable function (also exported from `@neon/sdk/raw`).
 
-The Neon TypeScript SDK allows you to manage:
+Use this SDK to automate projects, branches, Postgres resources, snapshots, consumption metrics, organizations, and beta platform features (storage, functions, credentials, AI gateway).
 
-- [**API Keys:**](/docs/manage/api-keys) Create, list, and revoke API keys for secure access to the Neon API.
-- [**Projects:**](/docs/manage/projects) Create, list, update, and delete Neon projects.
-- [**Branches:**](/docs/manage/branches) Manage branches, including creation, deletion, restoration, and schema management.
-- [**Databases:**](/docs/manage/databases) Create, list, update, and delete databases within your branches.
-- [**Compute Endpoints:**](/docs/manage/computes) Manage compute endpoints, including creation, scaling, suspension, and restart.
-- [**Roles:**](/docs/manage/roles) Create, list, update, and delete Postgres roles within your branches.
-- [**Operations:**](/docs/manage/operations) Monitor and track the status of asynchronous operations performed on your Neon resources.
-- [**Organizations:**](/docs/manage/orgs-api) Manage organization settings, API keys, and members (for Neon organizational accounts).
-- [**Consumption Metrics:**](/docs/guides/consumption-metrics) Retrieve usage metrics for your account and projects to monitor resource consumption.
+<AgentSkillsTip skill_topic="the Neon TypeScript SDK (@neon/sdk) for managing resources programmatically" />
 
-<AgentSkillsTip skill_topic="the Neon TypeScript SDK for managing resources programmatically" />
-
-## Quick Start
-
-This guide walks you through installing the SDK, setting up authentication, and executing your first API call to retrieve a list of your Neon projects.
+## Quick start
 
 ### Installation
 
-Install the `@neondatabase/api-client` package into your project using your preferred package manager:
+Requires **Node.js ≥ 20.19** (or any runtime with a global `fetch` — Bun, Deno, edge, browser).
 
 <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
 ```bash
-npm install @neondatabase/api-client
+npm install @neon/sdk
 ```
 
 ```bash
-yarn add @neondatabase/api-client
+yarn add @neon/sdk
 ```
 
 ```bash
-pnpm add @neondatabase/api-client
+pnpm add @neon/sdk
 ```
 
 </CodeTabs>
 
-### Authentication Setup
+### Authentication
 
-Authentication with the Neon API is handled through API keys. Follow these steps to obtain and configure your API key:
-
-- Log in to the [Neon Console](https://console.neon.tech/)
-- Navigate to [Account settings > API keys](https://console.neon.tech/app/settings/api-keys).
-- Click Generate new API key.
-- Enter a descriptive Name (for example, "neon-typescript-sdk-demo") for your key and click Create.
-
-For this quick start, we'll set the API key as an environment variable:
+Create a [Neon API key](/docs/manage/api-keys) in the console, then pass it to the client:
 
 ```bash
-export NEON_API_KEY="YOUR_API_KEY_FROM_NEON_CONSOLE"
+export NEON_API_KEY="your-api-key"
 ```
 
-Replace `YOUR_API_KEY_FROM_NEON_CONSOLE` with the API key you copied from the Neon Console.
+```typescript
+import { createNeonClient } from '@neon/sdk';
+
+const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY! });
+
+const { data, error } = await neon.projects.createAndConnect({ name: 'my-app' });
+if (error) throw error;
+
+const { project, connectionString } = data;
+console.log(project.id, connectionString);
+```
+
+`createAndConnect` creates a project, waits for provisioning operations to finish, and returns a pooled connection string in one call.
+
+## Client configuration
+
+`createNeonClient(config)` accepts:
+
+| Option             | Default                            | Description                                                                        |
+| ------------------ | ---------------------------------- | ---------------------------------------------------------------------------------- |
+| `apiKey`           | — (required)                       | API key string, or a sync/async function returning one                             |
+| `throwOnError`     | `false`                            | When `true`, methods return the resource directly and throw `NeonError` on failure |
+| `waitForReadiness` | `false`                            | When `true`, mutations block until related `operations` complete                   |
+| `wait`             | `1000` / `300000` ms               | Poll interval and timeout for readiness                                            |
+| `retries`          | `2`                                | Retries on `423`, `429`, and `503` with backoff                                    |
+| `orgId`            | —                                  | Default org for project create/list and transfers                                  |
+| `baseUrl`          | `https://console.neon.tech/api/v2` | API base URL override                                                              |
+| `fetch`            | global `fetch`                     | Custom fetch (tests, proxies)                                                      |
+
+Every option except `apiKey` can also be set **per call** via a trailing `options` argument (`{ throwOnError?, waitForReadiness?, signal? }`).
+
+## The result model
+
+By default, methods resolve to `{ data, error }` — no `try/catch` required:
+
+```typescript
+const { data: project, error } = await neon.projects.get('late-frost-12345');
+if (error) {
+  if (error.kind === 'not_found') return;
+  throw error;
+}
+// project is narrowed to Project
+```
+
+Set `throwOnError` on the client or per call to get the bare resource:
+
+```typescript
+const neon = createNeonClient({ apiKey, throwOnError: true });
+const project = await neon.projects.get('late-frost-12345');
+```
+
+## Errors
+
+The `error` channel (and thrown value when `throwOnError` is set) uses a typed hierarchy:
+
+| Class                | `kind`         | When                        |
+| -------------------- | -------------- | --------------------------- |
+| `NeonApiError`       | `"api"`        | HTTP error responses        |
+| `NeonNotFoundError`  | `"not_found"`  | 404                         |
+| `NeonAuthError`      | `"auth"`       | 401 / 403                   |
+| `NeonRateLimitError` | `"rate_limit"` | 429 (after retries)         |
+| `NeonOperationError` | `"operation"`  | Awaited operation failed    |
+| `NeonTimeoutError`   | `"timeout"`    | Readiness deadline exceeded |
+| `NeonNetworkError`   | `"network"`    | Transport failure           |
+
+```typescript
+const { error } = await neon.branches.get(projectId, 'missing-branch');
+if (error?.kind === 'not_found') {
+  // branch does not exist
+}
+```
 
 ## Examples
 
-Let's create a simple TypeScript file to list your Neon projects using the SDK.
+### List projects
 
-### List Projects
-
-All Neon accounts are organization-based. To list projects, first retrieve the user's organization, then pass `org_id`:
+All Neon accounts are organization-based. List organizations, then pass `org_id`:
 
 ```typescript
-import { createApiClient } from '@neondatabase/api-client';
+import { createNeonClient } from '@neon/sdk';
 
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
-});
+const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY! });
 
 async function listNeonProjects() {
-  try {
-    // Get the user's organizations
-    const orgsResponse = await apiClient.getCurrentUserOrganizations();
-    const orgId = orgsResponse.data.organizations[0].id;
+  const { data: orgs, error: orgsError } = await neon.user.organizations();
+  if (orgsError) throw orgsError;
 
-    // List projects within the org
-    const response = await apiClient.listProjects({ org_id: orgId });
-    console.log(response.data.projects);
-  } catch (error) {
-    console.error('Error listing projects:', error);
-  }
+  const { data: page, error } = await neon.projects.list({ org_id: orgs[0].id });
+  if (error) throw error;
+
+  console.log(page.projects);
 }
 
 listNeonProjects();
 ```
 
-Execute the TypeScript file using [`tsx`](https://tsx.is) (or compile to JavaScript and run with `node`)
+Run with [`tsx`](https://tsx.is): `tsx list-projects.ts`
 
-```bash
-tsx list-projects.ts
-```
+### Create a branch with compute
 
-If your API key is correctly configured, you should see a list of your Neon projects printed to your console, similar to this:
-
-```json
-[
-  {
-    "id": "wandering-heart-70814840",
-    "platform_id": "aws",
-    "region_id": "aws-sa-east-1",
-    "name": "test-project",
-    "provisioner": "k8s-neonvm",
-    "default_endpoint_settings": {
-      "autoscaling_limit_min_cu": 0.25,
-      "autoscaling_limit_max_cu": 0.25,
-      "suspend_timeout_seconds": 0
-    },
-    "settings": {
-      "allowed_ips": [Object],
-      "enable_logical_replication": false,
-      "maintenance_window": [Object],
-      "block_public_connections": false,
-      "block_vpc_connections": false
-    },
-    "pg_version": 16,
-    "proxy_host": "sa-east-1.aws.neon.tech",
-    "branch_logical_size_limit": 512,
-    "branch_logical_size_limit_bytes": 536870912,
-    "store_passwords": true,
-    "active_time": 304,
-    "cpu_used_sec": 78,
-    "creation_source": "console",
-    "created_at": "2025-02-28T07:14:35Z",
-    "updated_at": "2025-02-28T07:54:53Z",
-    "synthetic_storage_size": 34149464,
-    "quota_reset_at": "2025-03-01T00:00:00Z",
-    "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
-    "compute_last_active_at": "2025-02-28T07:54:49Z"
-  }, ..
-]
-```
-
-### Create a Project
-
-You can use the SDK to create a new Neon project. Here's an example of how to create a project and retrieve the connection string:
+`createWithCompute` creates a branch, provisions a read-write endpoint, waits for readiness, and returns a connection string:
 
 ```typescript
-import { createApiClient } from '@neondatabase/api-client';
+const { data: prod, error: prodError } = await neon.branches.getDefault(projectId);
+if (prodError) throw prodError;
 
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
+const { data, error } = await neon.branches.createWithCompute(projectId, {
+  name: 'preview/pr-123',
+  parentId: prod.id,
+  compute: { minCu: 0.25, maxCu: 2 },
 });
+if (error) throw error;
 
-async function createNeonProject(projectName: string) {
-  try {
-    const response = await apiClient.createProject({
-      project: {
-        name: projectName,
-        region_id: 'aws-us-east-1',
-        pg_version: 17,
-      },
-    });
-    console.log('Project created:', response.data.project);
-    console.log('Project ID:', response.data.project.id);
-    console.log('Database connection string:', response.data.connection_uris[0].connection_uri);
-  } catch (error) {
-    console.error('Error creating project:', error);
-    throw error;
-  }
-}
-
-// Example usage: Create a project named "test-project"
-createNeonProject('test-project').catch((error) => {
-  console.error('Error creating project:', error.message);
-});
+console.log(data.branch.id, data.connectionString);
 ```
 
-#### Key points:
+To set [branch expiration](/docs/guides/branch-expiration), pass `expires_at` in `neon.branches.create` or `neon.branches.update`.
 
-- The `region_id` parameter specifies the cloud region where the project will be hosted. You can find the list of supported regions at [Neon Regions](/docs/introduction/regions).
-- The `pg_version` parameter specifies the major supported version of Postgres to use in the project.
-
-### Create a Branch
-
-You can use the SDK to create a new branch within a Neon project. Here's an example of how to create a branch:
+### List branches
 
 ```typescript
-import { createApiClient, EndpointType } from '@neondatabase/api-client';
-
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
-});
-
-async function createNeonBranch(projectId: string, branchName: string, parentBranchId?: string) {
-  try {
-    const response = await apiClient.createProjectBranch(projectId, {
-      branch: {
-        name: branchName,
-        parent_id: parentBranchId, // Optional: Specify a source branch. If omitted, the default branch will be used
-      },
-      endpoints: [
-        {
-          type: EndpointType.ReadWrite, // If you need read-only access, use EndpointType.ReadOnly,
-          // Optional: Specify the number of compute units (CU) for the endpoint. If omitted, the default value is 0.25 for both min and max.
-          // autoscaling_limit_min_cu: 0.25,
-          // autoscaling_limit_max_cu: 1,
-        },
-      ],
-    });
-    console.log('Branch created:', response.data.branch);
-  } catch (error) {
-    console.error('Error creating branch:', error);
-    throw error;
-  }
-}
-
-// Example usage: Create a branch named "dev-1" in the project with ID "your-project-id"
-createNeonBranch('your-project-id', 'dev-1').catch((error) => {
-  console.error('Error creating branch:', error.message);
-});
+const { data: page, error } = await neon.branches.list(projectId);
+if (error) throw error;
+console.log(page.branches);
 ```
 
-#### Key points:
+For all pages: `const { data: branches } = await neon.branches.list(projectId).all();`
 
-- `name` (optional): The branch name. If not provided, defaults to the branch ID. If specified, must be unique within the project and can be up to 256 characters. Cannot be empty or consist only of whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements) for details.
-- `parent_id` (optional): Specifies the branch to branch from. If omitted, the project's default branch is used.
-- `EndpointType`: Enum to define endpoint type (`ReadWrite` or `ReadOnly`).
-- Compute Unit (CU) customization (optional): Control compute size using `autoscaling_limit_min_cu` and `autoscaling_limit_max_cu`. Refer to [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration) for available options.
-
-### List Branches
-
-You can use the SDK to list branches within a Neon project. Here's an example of how to list branches:
+### Create a database
 
 ```typescript
-import { createApiClient } from '@neondatabase/api-client';
-
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
-});
-
-async function listNeonBranches(projectId: string) {
-  try {
-    const response = await apiClient.listProjectBranches({ projectId });
-    console.log('Branches:', response.data.branches);
-  } catch (error) {
-    console.error('Error listing branches:', error);
-    throw error;
-  }
-}
-
-// Example usage: List branches in the project with ID "your-project-id"
-listNeonBranches('your-project-id').catch((error) => {
-  console.error('Error listing branches:', error.message);
-});
-```
-
-#### Key points:
-
-- The `projectId` parameter specifies the ID of the project for which you want to list branches.
-- The `listProjectBranches` method returns a list of branches within the specified project. Each branch object contains details like `id`, `name`, `created_at`, and more.
-
-### Create a Database
-
-You can use the SDK to create a new database within a Neon branch. Here's an example of how to create a database:
-
-```typescript
-import { createApiClient } from '@neondatabase/api-client';
-
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
-});
-
-async function createNeonDatabase(
-  projectId: string,
-  branchId: string,
-  databaseName: string,
-  databaseOwner: string
-) {
-  try {
-    const response = await apiClient.createProjectBranchDatabase(projectId, branchId, {
-      database: {
-        name: databaseName,
-        owner_name: databaseOwner,
-      },
-    });
-    console.log('Database created:', response.data.database);
-  } catch (error) {
-    console.error('Error creating database:', error);
-    throw error;
-  }
-}
-
-// Example usage: In the project with ID "your-project-id", create a database named "mydatabase" in the branch with ID "your-branch-id" and owner "neondb_owner"
-createNeonDatabase('your-project-id', 'your-branch-id', 'mydatabase', 'neondb_owner').catch(
-  (error) => {
-    console.error('Error creating database:', error.message);
-  }
+const { data: database, error } = await neon.postgres.databases.create(
+  projectId,
+  branchId,
+  { name: 'mydatabase', owner_name: 'neondb_owner' }
 );
+if (error) throw error;
+console.log(database);
 ```
 
-- The `owner_name` parameter specifies the owner of the database. Ensure this role exists in the branch beforehand.
-- Branch & Project IDs: You can obtain these IDs from the [Neon Console](/docs/manage/branches#view-branches) or using SDK methods (for example, [listProjectBranches](#list-branches), [listProjects](#list-projects)).
-
-### Create a Role
-
-You can use the SDK to create a new Postgres role within a Neon branch. Here's an example of how to create a role:
+### Create a role
 
 ```typescript
-import { createApiClient } from '@neondatabase/api-client';
-
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
+const { data: role, error } = await neon.postgres.roles.create(projectId, branchId, {
+  name: 'app_user',
 });
-
-async function createNeonRole(projectId: string, branchId: string, roleName: string) {
-  try {
-    const response = await apiClient.createProjectBranchRole(projectId, branchId, {
-      role: { name: roleName },
-    });
-    console.log('Role created:', response.data.role);
-  } catch (error) {
-    console.error('Error creating role:', error);
-    throw error;
-  }
-}
-
-// Example usage: In the project with ID "your-project-id", create a role named "new_user_role" in the branch with ID "your-branch-id"
-createNeonRole('your-project-id', 'your-branch-id', 'new_user_role').catch((error) => {
-  console.error('Error creating role:', error.message);
-});
+if (error) throw error;
+console.log(role);
 ```
 
-#### Key points:
+### Connection strings
 
-- `role.name`: Specifies the name of the Postgres role to be created.
-- Branch & Project IDs: You can obtain these IDs from the [Neon Console](/docs/manage/branches#view-branches) or using SDK methods (for example, [listProjectBranches](#list-branches), [listProjects](#list-projects))
-
-## TypeScript Types
-
-The Neon TypeScript SDK provides comprehensive type definitions for all request and response objects, enums, and interfaces. Leveraging these types enhances your development experience by enabling:
-
-- **Type Safety**: TypeScript types ensure that you are using the SDK methods and data structures correctly, catching type-related errors during development rather than at runtime.
-- **Improved Code Completion**: Modern IDEs and code editors use TypeScript types to provide intelligent code completion and suggestions, making it easier to discover and use SDK features.
-
-### Using SDK Types
-
-The `@neondatabase/api-client` package exports all the TypeScript types you need to interact with the Neon API in a type-safe manner. You can import these types directly into your TypeScript files.
-
-For example, when listing projects, you can use the `ProjectsResponse` type to explicitly define the structure of the API response:
+`neon.postgres.connectionString` resolves a URI and auto-selects the default branch, role, and database when omitted:
 
 ```typescript
-import { createApiClient, ProjectsResponse } from '@neondatabase/api-client';
-import { AxiosResponse } from 'axios';
-
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
+const { data: uri, error } = await neon.postgres.connectionString({
+  projectId,
+  pooled: true,
 });
-
-async function listNeonProjects(): Promise<void> {
-  try {
-    const orgsResponse = await apiClient.getCurrentUserOrganizations();
-    const orgId = orgsResponse.data.organizations[0].id;
-
-    const response: AxiosResponse<ProjectsResponse> = await apiClient.listProjects({ org_id: orgId });
-    const projects = response.data.projects;
-    console.log('Projects:', projects);
-  } catch (error) {
-    console.error('Error listing projects:', error);
-  }
-}
-
-listNeonProjects();
+if (error) throw error;
+console.log(uri);
 ```
 
-In this example:
+## Namespace overview
 
-- We import `ProjectsResponse` type from `@neondatabase/api-client`.
-- We explicitly type the `response` variable as `AxiosResponse<ProjectsResponse>`. This tells TypeScript that we expect the `apiClient.listProjects()` method to return a response from Axios, where the `data` property conforms to the structure defined by `ProjectsResponse`.
+The ergonomic client is organized into namespaces. **[P]** = cursor-paginated list; **[W]** = multi-step workflow.
 
-Similarly, when creating a project, you can use types like `ProjectCreateRequest` for the request body and `ProjectResponse` for the expected response:
+| Namespace          | Highlights                                                                                                              |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `neon.projects`    | `list`, `get`, `create`, `createAndConnect` **[W]**, `update`, `delete`, `transfer`, `permissions`, `recover`           |
+| `neon.branches`    | `list` **[P]**, `get`, `create`, `createWithCompute` **[W]**, `update`, `delete`, `getDefault`, `setDefault`, `recover` |
+| `neon.postgres`    | `connectionString`; nested `endpoints`, `roles`, `databases`, `dataApi`                                                 |
+| `neon.snapshots`   | `list`, `create`, `restore`, `getSchedule`, `setSchedule`                                                               |
+| `neon.storage`     | Branch object storage (beta): `get`, `buckets`, `objects`                                                               |
+| `neon.functions`   | Branch Neon Functions (beta): `list`, `deploy`, `get`, `update`, `delete`                                               |
+| `neon.credentials` | Scoped credentials (beta): `list`, `create`, `revoke`                                                                   |
+| `neon.aiGateway`   | AI Gateway metadata (beta): `get`                                                                                       |
+| `neon.auth`        | Branch-scoped Neon Auth: `get`, `create`, `disable`, `updateConfig`, `oauthProviders`, `trustedDomains`, `users`        |
+| `neon.operations`  | `list`, `get`, `waitFor`                                                                                                |
+| `neon.consumption` | `perProject`, `perProjectV2`, `perBranchV2` (paginated)                                                                 |
+| `neon.apiKeys`     | `list`, `create`, `revoke`                                                                                              |
+| `neon.regions`     | `list`                                                                                                                  |
+| `neon.user`        | `me`, `organizations`                                                                                                   |
 
-By using TypeScript types, you ensure that your code interacts with the Neon API in a predictable and type-safe manner, reducing potential errors and improving code quality. You can explore all available types in the `@neondatabase/api-client` package to get the full benefits of TypeScript in your Neon SDK integrations.
+For the complete method tables (parameters, return types, and notes), see the [`@neon/sdk` README on GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/sdk#api-reference).
 
-## Key SDK Method Signatures
+## Raw layer
 
-To give you a better overview of the SDK, here are some of the key methods available, categorized by their resource. For complete details and parameters for each method, please refer to the full [Neon API Reference](/docs/reference/api).
+Use `raw` when an endpoint is not wrapped in an ergonomic namespace, or when you need maximum tree-shaking:
 
-### Manage API keys
+```typescript
+import { createNeonClient, raw } from '@neon/sdk';
 
-- `listApiKeys()`: Retrieves a list of API keys for your account.
-- `createApiKey(data: ApiKeyCreateRequest)`: Creates a new API key.
-- `revokeApiKey(keyId: number)`: Revokes an existing API key.
+const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY! });
 
-### Manage projects
+const { data, error } = await raw.getProjectBranchSchema({
+  client: neon.client,
+  path: { project_id: projectId, branch_id: branchId },
+});
 
-- `listProjects(query?: ListProjectsParams)`: Retrieves a list of projects in your Neon account.
-- `listSharedProjects(query?: ListSharedProjectsParams)`: Retrieves a list of projects shared with your account.
-- `createProject(data: ProjectCreateRequest)`: Creates a new Neon project.
-- `getProject(projectId: string)`: Retrieves details for a specific project.
-- `updateProject(projectId: string, data: ProjectUpdateRequest)`: Updates settings for a specific project.
-- `deleteProject(projectId: string)`: Deletes a Neon project.
-- `listProjectOperations(projectId: string, query?: ListProjectOperationsParams)`: Retrieves operations for a project.
-- `getProjectOperation(projectId: string, operationId: string)`: Retrieves details for a specific operation.
-- `getConnectionUri(projectId: string, query: GetConnectionUriParams)`: Retrieves a connection URI for a project.
-- `listProjectPermissions(projectId: string)`: Retrieves project access permissions.
-- `grantPermissionToProject(projectId: string, data: GrantPermissionToProjectRequest)`: Grants project access to a user.
-- `revokePermissionFromProject(projectId: string, permissionId: string)`: Revokes project access from a user.
-- `getProjectJwks(projectId: string)`: Retrieves JWKS URLs for a project.
-- `addProjectJwks(projectId: string, data: AddProjectJWKSRequest)`: Adds a JWKS URL to a project.
-- `deleteProjectJwks(projectId: string, jwksId: string)`: Deletes a JWKS URL from a project.
+// Or throw on error:
+const schema = await raw.getProjectBranchSchema({
+  client: neon.client,
+  path: { project_id: projectId, branch_id: branchId },
+  throwOnError: true,
+});
+```
 
-### Manage branches
+In **1.0**, every `raw.*` call uses the same `{ data, error }` contract as `createNeonClient`. The `responseStyle` switch from 0.x is removed. See [raw layer migration](/docs/reference/migrate-api-client-to-sdk#raw-layer-changes-in-10) if you adopted an earlier preview.
 
-- `listProjectBranches(projectId: string, query?: ListProjectBranchesParams)`: Retrieves a list of branches within a project.
-- `countProjectBranches(projectId: string, query?: CountProjectBranchesParams)`: Retrieves the number of branches in a project.
-- `createProjectBranch(projectId: string, data?: BranchCreateRequest)`: Creates a new branch within a project.
-- `getProjectBranch(projectId: string, branchId: string)`: Retrieves details for a specific branch.
-- `updateProjectBranch(projectId: string, branchId: string, data: BranchUpdateRequest)`: Updates settings for a specific branch.
-- `deleteProjectBranch(projectId: string, branchId: string)`: Deletes a branch from a project.
-- `restoreProjectBranch(projectId: string, branchId: string, data: BranchRestoreRequest)`: Restores a branch to a point in time.
-- `setDefaultProjectBranch(projectId: string, branchId: string)`: Sets a branch as the default for the project.
-- `getProjectBranchSchema(projectId: string, branchId: string, query?: GetProjectBranchSchemaParams)`: Retrieves the schema for a branch database.
-- `getProjectBranchSchemaComparison(projectId: string, branchId: string, query?: GetProjectBranchSchemaComparisonParams)`: Compares branch schemas.
-- `listProjectBranchEndpoints(projectId: string, branchId: string)`: Retrieves endpoints for a branch.
-- `listProjectBranchDatabases(projectId: string, branchId: string)`: Retrieves databases for a branch.
-- `createProjectBranchDatabase(projectId: string, branchId: string, data: DatabaseCreateRequest)`: Creates a database in a branch.
-- `getProjectBranchDatabase(projectId: string, branchId: string, databaseName: string)`: Retrieves details for a branch database.
-- `updateProjectBranchDatabase(projectId: string, branchId: string, databaseName: string, data: DatabaseUpdateRequest)`: Updates a branch database.
-- `deleteProjectBranchDatabase(projectId: string, branchId: string, databaseName: string)`: Deletes a database from a branch.
-- `listProjectBranchRoles(projectId: string, branchId: string)`: Retrieves roles for a branch.
-- `createProjectBranchRole(projectId: string, branchId: string, data: RoleCreateRequest)`: Creates a role in a branch.
-- `getProjectBranchRole(projectId: string, branchId: string, roleName: string)`: Retrieves details for a branch role.
-- `deleteProjectBranchRole(projectId: string, branchId: string, roleName: string)`: Deletes a role from a branch.
-- `resetProjectBranchRolePassword(projectId: string, branchId: string, roleName: string)`: Resets a branch role password.
+Import types flat from the package:
 
-### Manage Compute Endpoints
+```typescript
+import type { Project, Branch, Endpoint } from '@neon/sdk';
+```
 
-- `listProjectEndpoints(projectId: string)`: Retrieves a list of endpoints within a project.
-- `createProjectEndpoint(projectId: string, data: EndpointCreateRequest)`: Creates a new endpoint within a project.
-- `getProjectEndpoint(projectId: string, endpointId: string)`: Retrieves details for a specific endpoint.
-- `updateProjectEndpoint(projectId: string, endpointId: string, data: EndpointUpdateRequest)`: Updates settings for a specific endpoint.
-- `deleteProjectEndpoint(projectId: string, endpointId: string)`: Deletes an endpoint from a project.
-- `startProjectEndpoint(projectId: string, endpointId: string)`: Starts an endpoint.
-- `suspendProjectEndpoint(projectId: string, endpointId: string)`: Suspends an endpoint.
-- `restartProjectEndpoint(projectId: string, endpointId: string)`: Restarts an endpoint.
+## Pagination
 
-### Retrieve Consumption Metrics
+Cursor-paginated `list()` methods return a lazy `Paginated<T>`:
 
-- `getConsumptionHistoryPerProject(query: GetConsumptionHistoryPerProjectParams)`: Retrieves project consumption metrics.
+```typescript
+const { data: allProjects, error } = await neon.projects.list().all();
+const { data: onePage } = await neon.projects.list().page();
 
-### Manage Organizations
+for await (const project of neon.projects.list()) {
+  console.log(project.name);
+}
+```
 
-- `getOrganization(orgId: string)`: Retrieves organization details.
-- `getOrganizationMembers(orgId: string)`: Retrieves members of an organization.
-- `getOrganizationMember(orgId: string, memberId: string)`: Retrieves details for a specific organization member.
-- `getOrganizationInvitations(orgId: string)`: Retrieves invitations for an organization.
-- `listOrgApiKeys(orgId: string)`: Lists API keys for an organization.
-- `createOrgApiKey(orgId: string, data: OrgApiKeyCreateRequest)`: Creates an API key for an organization.
-- `revokeOrgApiKey(orgId: string, keyId: number)`: Revokes an organization API key.
-- `createOrganizationInvitations(orgId: string, data: OrganizationInvitesCreateRequest)`: Creates organization invitations.
-- `updateOrganizationMember(orgId: string, memberId: string, data: OrganizationMemberUpdateRequest)`: Updates an organization member's role.
-- `removeOrganizationMember(orgId: string, memberId: string)`: Removes a member from an organization.
-- `transferProjectsFromOrgToOrg(sourceOrgId: string, data: TransferProjectsToOrganizationRequest)`: Transfers projects between organizations.
-- `listOrganizationVpcEndpoints(orgId: string, regionId: string)`: Lists VPC endpoints for an organization.
-- `getOrganizationVpcEndpointDetails(orgId: string, regionId: string, vpcEndpointId: string)`: Retrieves VPC endpoint details for an organization.
-- `assignOrganizationVpcEndpoint(orgId: string, regionId: string, vpcEndpointId: string, data: VPCEndpointAssignment)`: Assigns/updates a VPC endpoint for an organization.
-- `deleteOrganizationVpcEndpoint(orgId: string, regionId: string, vpcEndpointId: string)`: Deletes a VPC endpoint from an organization.
+## Readiness and operations
 
-### Manage Users
+Neon mutations return `operations` that provision resources asynchronously. Enable `waitForReadiness` on the client or use workflow methods (`createAndConnect`, `createWithCompute`) that wait by default.
 
-- `getCurrentUserInfo()`: Retrieves details for the current user.
-- `getCurrentUserOrganizations()`: Retrieves organizations for the current user.
-- `transferProjectsFromUserToOrg(data: TransferProjectsToOrganizationRequest)`: Transfers projects from a user to an organization.
+To wait manually:
 
-### Regions
+```typescript
+const { data, error } = await neon.branches.create(projectId, { name: 'wip' });
+if (error) throw error;
 
-- `getActiveRegions()`: Retrieves a list of active Neon regions.
+const waitError = await neon.operations.waitFor(data.operations, { timeoutMs: 120_000 });
+if (waitError.error) throw waitError.error;
+```
 
-### Manage Auth Integrations
+## TypeScript types
 
-- `createProjectIdentityIntegration(data: IdentityCreateIntegrationRequest)`: Creates Neon Auth integration.
-- `createProjectIdentityAuthProviderSdkKeys(data: IdentityCreateAuthProviderSDKKeysRequest)`: Creates Auth Provider SDK keys.
-- `transferProjectIdentityAuthProviderProject(data: IdentityTransferAuthProviderProjectRequest)`: Transfers Neon-managed Auth project ownership.
-- `listProjectIdentityIntegrations(projectId: string)`: Lists Auth Provider integrations for a project.
-- `deleteProjectIdentityIntegration(projectId: string, authProvider: IdentitySupportedAuthProvider)`: Deletes an Auth Provider integration.
+`@neon/sdk` re-exports generated request and response types for every Platform API resource. Import them alongside the client for type-safe automation:
 
-### General
+```typescript
+import { createNeonClient, type Project } from '@neon/sdk';
 
-- `getProjectOperation(projectId: string, operationId: string)`: Retrieves details for a specific operation.
+const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY!, throwOnError: true });
 
-## Error Handling
-
-When working with APIs, handling errors gracefully is crucial for building robust applications. The Neon TypeScript SDK provides mechanisms to capture and inspect errors that may occur during API requests.
-
-### General Error Structure
-
-When an error occurs during an API request, the SDK throws an `AxiosError` object, which extends the standard JavaScript `Error` object. The `AxiosError` object contains additional properties that provide details about the error, including:
-
-**`error.response`**: This property (if present) is an Axios response object containing details from the API error response.
-
-- **`error.response.status`**: The HTTP status code of the error response (for example, 400, 401, 404, 500).
-- **`error.response.data`**: The response body, which, for Neon API errors, often follows a consistent structure, including an `error` object with `code` and `message` properties.
-
-### Common Error Scenarios and Debugging
-
-- **Invalid API Key (401 Unauthorized):** Ensure your `NEON_API_KEY` environment variable is correctly set with a valid API key from the Neon Console.
-- **Project or Branch Not Found (404 Not Found):** Verify that the `projectId` and `branchId` values you are using are correct and that the resources exist in your Neon account. Double-check IDs in the Neon Console.
-- **Rate Limiting (429 Too Many Requests):** If you are making requests too frequently, the API might rate-limit you. Implement retry mechanisms with exponential backoff or reduce the frequency of your API calls.
-- **Request Body Validation Errors (400 Bad Request):** If you receive 400 errors, carefully review the request body you are sending, ensuring it conforms to the expected schema for the API endpoint. Refer to the [Neon API Reference](/docs/reference/api) for request body structures.
+async function getProjectName(id: string): Promise<string> {
+  const project: Project = await neon.projects.get(id);
+  return project.name;
+}
+```
 
 ## References
 
-- [Neon API Reference](/docs/reference/api): Comprehensive documentation for the Neon API, including detailed descriptions of resources, endpoints, request/response structures, and error codes.
+- [Migrate from @neondatabase/api-client](/docs/reference/migrate-api-client-to-sdk)
+- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [`@neon/sdk` README](https://github.com/neondatabase/neon-pkgs/tree/main/packages/sdk) — full API tables and regeneration workflow
+- [Neon API keys](/docs/manage/api-keys)
 
 <NeedHelp />
