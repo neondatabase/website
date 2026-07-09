@@ -71,7 +71,7 @@ Output:
 
 In the example, we extract a substring that has a length of 8, starting at the first character of the `PostgreSQL` string. The result is `PostgreS` as illustrated in the following picture:
 
-![PostgreSQL substring function example](/postgresqltutorial/PostgreSQL-substring-function-example.jpg)The following example uses the `SUBSTRING()` function to extract the first 8 characters from the PostgreSQL string:
+![PostgreSQL substring function example](/postgresqltutorial/PostgreSQL-substring-function-example.jpg)The following example uses the `SUBSTRING()` function to extract the whole `PostgreSQL` string started at position 8:
 
 ```sql
 SELECT
