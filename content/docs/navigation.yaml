@@ -844,20 +844,28 @@
           slug: guides/branching-neon-cli
         - title: Branching with the API
           slug: guides/branching-neon-api
-        - title: Neon Twin
-          slug: guides/neon-twin-intro
+        - title: Branching with GitHub Actions
+          slug: guides/branching-github-actions
+        - title: Branching with CircleCI
+          slug: guides/branching-circleci
+        - title: Branching Authentication
+          slug: auth/branching-authentication
+        - section: Related workflows
           items:
-            - title: pg_dump / pg_restore — Full Twin
-              slug: guides/neon-twin-full-pg-dump-restore
-            - title: pg_dump / pg_restore — Partial Twin
-              slug: guides/neon-twin-partial-pg-dump-restore
-        - title: Data anonymization
-          slug: workflows/data-anonymization
-          items:
-            - title: API reference
-              slug: workflows/data-anonymization-api
-            - title: GitHub Actions
-              slug: workflows/data-anonymization-github-actions
+            - title: Neon Twin
+              slug: guides/neon-twin-intro
+              items:
+                - title: pg_dump / pg_restore — Full Twin
+                  slug: guides/neon-twin-full-pg-dump-restore
+                - title: pg_dump / pg_restore — Partial Twin
+                  slug: guides/neon-twin-partial-pg-dump-restore
+            - title: Data anonymization
+              slug: workflows/data-anonymization
+              items:
+                - title: API reference
+                  slug: workflows/data-anonymization-api
+                - title: GitHub Actions
+                  slug: workflows/data-anonymization-github-actions
     - title: Resilience & architecture
       slug: introduction/architecture-overview
       icon: architecture
