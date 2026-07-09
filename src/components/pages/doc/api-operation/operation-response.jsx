@@ -64,7 +64,7 @@ export const ResponseSection = ({ operation, respTree, state, copy, copiedId }) 
     {operation.response?.descriptionHtml && (
       <div
         className={cn(
-          'mb-4 text-sm leading-relaxed text-gray-new-30 dark:text-gray-new-70 [&_p+p]:mt-3',
+          'mb-4.5 text-[1.125rem] leading-normal text-gray-new-30 dark:text-gray-new-85 [&_p+p]:mt-3',
           INLINE_CODE_STYLES
         )}
         dangerouslySetInnerHTML={{ __html: operation.response.descriptionHtml }}
