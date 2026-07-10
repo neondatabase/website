@@ -70,7 +70,7 @@ Pass `--env KEY=VALUE` to `neon functions deploy`. The flag is repeatable:
 neon functions deploy hello --src functions/hello.ts --env RESEND_API_KEY=re_...
 ```
 
-Don't define variables under the names Neon injects (`DATABASE_URL`, `OPENAI_*`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`). Those are provided by the platform when the matching service is enabled on the branch, and setting your own collides with the injected values. The `NEON_` prefix is reserved (see [Constraints](#constraints)).
+Neon injects variables like `DATABASE_URL`, `OPENAI_*`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION` when the matching service is enabled on the branch. These are defaults, not reserved names: if you define a variable with the same name, your value overrides the injected one.
 
 A deploy doesn't wipe variables set by earlier deploys. The `--env` flags you pass are merged into the existing set:
 
@@ -128,10 +128,9 @@ To pull from a different branch, switch with `neon checkout`; it pulls the new b
 
 ## Constraints
 
-| Constraint                   | Value                                                               |
-| ---------------------------- | ------------------------------------------------------------------- |
-| Max variables per deployment | 1,000                                                               |
-| Max total size               | 64 KiB                                                              |
-| Reserved prefix              | `NEON_` (reserved for platform use, can't be set by user functions) |
+| Constraint                   | Value  |
+| ---------------------------- | ------ |
+| Max variables per deployment | 1,000  |
+| Max total size               | 64 KiB |
 
 <NeedHelp/>

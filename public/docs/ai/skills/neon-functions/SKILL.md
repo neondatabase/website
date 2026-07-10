@@ -171,7 +171,7 @@ functions: {
 }
 ```
 
-Load a `.env` before deploy with `neon deploy --env .env.production`. Pull the branch's Neon-managed vars onto disk for local dev with `neon env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total, and the `NEON_` prefix is reserved.
+Load a `.env` before deploy with `neon deploy --env .env.production`. Pull the branch's Neon-managed vars onto disk for local dev with `neon env pull` (`link`/`checkout` do this automatically; pass `--no-env-pull` to skip and use `neon-env run -- <cmd>` for runtime injection). Limits: ≤1,000 vars, ≤64 KiB total.
 
 ## Connecting to Postgres
 
