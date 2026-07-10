@@ -2578,6 +2578,7 @@ const defaultConfig = {
       // docs/[...slug] catch-all intercepts them
       beforeFiles: [
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
+        { source: '/docs/:path*/llms-full.txt', destination: '/docs/:path*/llms-full.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
         // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
         // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.

@@ -101,7 +101,7 @@ All of these workflows are designed to be automated from day one:
 - Branches can be [created automatically for PRs](https://neon.com/docs/guides/neon-github-integration)
 - [Preview deployments connect to their own Neon branches](https://neon.com/docs/guides/vercel-overview) so application code and database state stay aligned throughout the review process
 - [Branches are deleted automatically](https://neon.com/docs/guides/branch-expiration) when they are no longer needed
-- Everything is [fully programmable via API](https://neon.com/docs/reference/api-reference)
+- Everything is [fully programmable via API](https://neon.com/docs/reference/api)
 - Neon works with AI IDEs and coding agents with tools like [MCP](https://neon.com/docs/ai/neon-mcp-server), [neon init](https://neon.com/docs/cli/init), and Neon [skills](https://neon.com/docs/ai/ai-rules)
 
 <QuoteBlock quote="Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away" author="alex-co" role="Head of Platform Engineering at Mindvalley" />

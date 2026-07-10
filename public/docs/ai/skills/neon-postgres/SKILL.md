@@ -200,7 +200,7 @@ The Neon Admin API can be used to manage Neon resources programmatically. It is 
 
 Use this for direct HTTP automation, endpoint-level control, API key auth, rate-limit handling, and operation polling.
 
-Link: https://neon.com/docs/reference/api-reference.md
+Link: https://neon.com/docs/reference/api.md
 
 ### Neon TypeScript SDK
 

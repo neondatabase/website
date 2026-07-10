@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
@@ -41,7 +41,7 @@ As a project becomes a product, small teams need to ship quickly and support rea
 - [Autoscaling](https://neon.com/docs/introduction/autoscaling) adapts automatically to unpredictable workloads: you don’t have to plan capacity in advance
 - [Branching](https://neon.com/branching) lets you spin up development, preview, and test environments instantly, matching the latest production state, without manual work
 - [Out-of-the-box integrations](https://neon.com/docs/guides/integrations) with platforms like Vercel further simplify previews and deployments
-- [API-first workflows](https://neon.com/docs/reference/api-reference) make it easy to automate almost all database operations
+- [API-first workflows](https://neon.com/docs/reference/api) make it easy to automate almost all database operations
 - AI-coding support via [MCP](https://neon.com/docs/ai/neon-mcp-server) and [Agent Skills](https://neon.com/docs/ai/agent-skills) allows tools like Cursor and Claude to fully interact with Neon
 - [Instant restores](https://neon.com/docs/guides/backup-restore) lower the stakes for mistakes and accidents
 - [Built-in connection pooling](https://neon.com/docs/connect/connection-pooling) takes care of growing connections in your serverless apps

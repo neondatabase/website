@@ -38,7 +38,7 @@ Use [schema-only branches](https://neon.com/docs/guides/branching-schema-only) t
 
 ## Wire it into your pipeline
 
-For Vercel projects, the [Neon-managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates a branch for every preview deployment and tears it down when the preview is removed. For other CI providers, the same workflow runs from the [Neon CLI](https://neon.com/docs/cli) or [API](https://neon.com/docs/reference/api-reference): create a branch on PR open, run tests against its connection string, delete (or let it expire) on PR close.
+For Vercel projects, the [Neon-managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates a branch for every preview deployment and tears it down when the preview is removed. For other CI providers, the same workflow runs from the [Neon CLI](https://neon.com/docs/cli) or [API](https://neon.com/docs/reference/api): create a branch on PR open, run tests against its connection string, delete (or let it expire) on PR close.
 
 ## How other managed Postgres services compare
 
