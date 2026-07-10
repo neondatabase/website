@@ -216,14 +216,11 @@
         - section: Connect to Postgres
           icon: connect
           items:
-            - section: Getting started
+            - title: Connect to Neon
+              slug: connect/connect-intro
+            - title: Connection methods
+              slug: connect/choose-connection
               items:
-                - title: Connect to Neon
-                  slug: connect/connect-intro
-            - section: Connection methods
-              items:
-                - title: Choosing your connection method
-                  slug: connect/choose-connection
                 - title: Connect from any app
                   slug: connect/connect-from-any-app
                 - title: Neon serverless driver
@@ -238,7 +235,7 @@
                   slug: connect/connect-postgres-gui
                 - title: Looker Studio
                   slug: connect/connect-looker-studio
-            - section: Security & performance
+            - title: Security & performance
               items:
                 - title: Passwordless auth
                   slug: connect/passwordless-connect
@@ -248,7 +245,7 @@
                   slug: connect/connection-pooling
                 - title: Latency benchmarks
                   slug: guides/benchmarking-latency
-            - section: Troubleshooting
+            - title: Troubleshooting
               items:
                 - title: Connection errors
                   slug: connect/connection-errors
@@ -306,13 +303,11 @@
         - section: Branching
           icon: branching
           items:
-            - section: Concepts
-              items:
-                - title: About branching
-                  slug: introduction/branching
-                - title: Branching workflow primer
-                  slug: get-started/workflow-primer
-            - section: Manage branches
+            - title: About branching
+              slug: introduction/branching
+            - title: Branching workflow primer
+              slug: get-started/workflow-primer
+            - title: Manage branches
               items:
                 - title: Branch archiving
                   slug: guides/branch-archiving
@@ -322,7 +317,7 @@
                   slug: guides/branching-schema-only
                 - title: Reset from parent
                   slug: guides/reset-from-parent
-            - section: Automate & workflows
+            - title: Automate & workflows
               items:
                 - title: Get started with branching
                   slug: guides/branching-intro
@@ -334,7 +329,7 @@
                   slug: guides/branching-neon-api
             - title: Branching Authentication
               slug: auth/branching-authentication
-            - section: Related workflows
+            - title: Related workflows
               items:
                 - title: Neon Twin
                   slug: guides/neon-twin-intro
