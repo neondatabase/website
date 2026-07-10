@@ -213,8 +213,7 @@
       slug: postgres/overview
       icon: book
       items:
-        - title: Connect
-          slug: connect/connect-intro
+        - section: Connect to Postgres
           icon: connect
           items:
             - section: Getting started
@@ -1551,7 +1550,7 @@
       slug: reference/feeds
       icon: feeds
 
-- nav: Tutorials
+- nav: Learn PostgreSQL
   slug: https://neon.com/postgresql/tutorial
   title: Learn PostgreSQL
   icon: tutorial
