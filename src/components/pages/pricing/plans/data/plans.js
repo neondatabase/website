@@ -66,7 +66,7 @@ export default {
       scale: '$0.222 per CU-hour',
     },
     {
-      rows: '1-2',
+      rows: '2',
       feature: {
         title: 'Compute sizes',
       },
