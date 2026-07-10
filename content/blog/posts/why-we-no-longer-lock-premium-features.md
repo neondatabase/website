@@ -25,13 +25,15 @@ seo:
   title: Why We No Longer Lock Premium Features - Neon
   description: >-
     With our recent repricing, we stopped gating security and compliance
-    features behind flat monthly fees - they're now available from $5/month.
+    features behind flat monthly fees - they're now available with usage-based
+    pricing and no monthly minimum.
   keywords: []
   noindex: false
   ogTitle: Why We No Longer Lock Premium Features - Neon
   ogDescription: >-
     With our recent repricing, we stopped gating security and compliance
-    features behind flat monthly fees - they're now available from $5/month.
+    features behind flat monthly fees - they're now available with usage-based
+    pricing and no monthly minimum.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/why-we-no-longer-lock-premium-features/social.png
 ---
@@ -66,7 +68,7 @@ Charging the same for vastly different workloads makes little sense – paying t
 
 ### Moving away from flat fees
 
-[With our recent repricing](https://neon.com/blog/new-usage-based-pricing), we moved away from the classic _good-better-best_ approach. We now have two plans with the same monthly minimum. We know this looks odd at first, but our reasoning was this: the most elegant way to cover the extra costs of premium features while keeping the model fair is to bill in proportion to usage, not to rely on arbitrary plan gating.
+[With our recent repricing](https://neon.com/blog/new-usage-based-pricing), we moved away from the classic _good-better-best_ approach. We now have two plans that are both fully usage-based with no monthly minimum. We know this looks odd at first, but our reasoning was this: the most elegant way to cover the extra costs of premium features while keeping the model fair is to bill in proportion to usage, not to rely on arbitrary plan gating.
 
 ### Usage-based access to enterprise features
 
@@ -78,7 +80,7 @@ When a higher compute price alone isn’t enough to cover the costs of especiall
 
 Take HIPAA as an example. Supporting HIPAA involves real infrastructure costs, which is why some providers charge flat fees in the thousands per month. HIPAA requires audit logging (via pgaudit), longer log retention, and several compliance controls.
 
-The reality is that these costs are far higher for large workloads than for small ones. In the traditional model, both pay the same flat add-on fee. In Neon, everyone on Scale ($5/month minimum) can access HIPAA. If you need it for a project, we cover our costs with a usage-based surcharge. A small healthcare startup might see an incremental cost under $50, while an enterprise with a much larger workload might see $500 or more, which makes sense.
+The reality is that these costs are far higher for large workloads than for small ones. In the traditional model, both pay the same flat add-on fee. In Neon, everyone on Scale (usage-based, no minimum) can access HIPAA. If you need it for a project, we cover our costs with a usage-based surcharge. A small healthcare startup might see an incremental cost under $50, while an enterprise with a much larger workload might see $500 or more, which makes sense.
 
 <Admonition type="info" title="Inspired by Databricks model">
 We mirrored this model from Databricks’ serverless pricing, which successfully proved that large-scale infrastructure features can be aligned directly with resource consumption.
@@ -94,13 +96,13 @@ In other Postgres providers, these are locked behind expensive plans. Not in Neo
 
 | “Premium” feature | Competition | Neon |
 | --- | --- | --- |
-| SOC 2 | $599/mo plan | Available in Scale: $5 minimum |
-| **SSO** | $599/mo plan | Available in Scale: $5 minimum |
-| **PrivateLink** | Enterprise only | Available in Scale: $5 minimum |
-| **SLA** | Enterprise only | Available in Scale: $5 minimum |
-| **HIPAA** | $599/mo plan, plus additional monthly flat fee | Available in Scale: $5 minimum + usage-based surcharge |
-| **Log export** | $599/mo plan, plus $60/drain/mo + usage fees | Available in Scale: $5 minimum |
-| **PITR** | $25/mo plan, plus $100 extra/month | Available in Scale: $5 minimum +<br />$0.20/GB-month of data changes |
+| SOC 2 | $599/mo plan | Available in Scale: usage-based, no minimum |
+| **SSO** | $599/mo plan | Available in Scale: usage-based, no minimum |
+| **PrivateLink** | Enterprise only | Available in Scale: usage-based, no minimum |
+| **SLA** | Enterprise only | Available in Scale: usage-based, no minimum |
+| **HIPAA** | $599/mo plan, plus additional monthly flat fee | Available in Scale: usage-based, no minimum + usage-based surcharge |
+| **Log export** | $599/mo plan, plus $60/drain/mo + usage fees | Available in Scale: usage-based, no minimum |
+| **PITR** | $25/mo plan, plus $100 extra/month | Available in Scale: usage-based, no minimum +<br />$0.20/GB-month of data changes |
 
 ## Sign up and try it
 

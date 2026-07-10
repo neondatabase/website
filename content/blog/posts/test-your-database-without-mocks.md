@@ -168,7 +168,7 @@ You can maintain a “Neon Twin,” a main branch that’s regularly synchronize
 
 ```bash
 # Create a branch from when a bug was reported
-neonctl branches create --name bug-investigation --timestamp "2024-01-10T14:30:00Z"
+neonctl branches create --name bug-investigation --parent "2024-01-10T14:30:00Z"
 ```
 
 ### Continuous Integration and Testing

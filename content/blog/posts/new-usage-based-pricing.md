@@ -1,5 +1,5 @@
 ---
-title: 'Neon’s New Pricing, Explained: Usage-Based With a $5 Minimum'
+title: 'Neon’s New Pricing, Explained: Usage-Based, No Minimum'
 description: 'No quotas, no overages, just pay for what you use'
 excerpt: >-
   We’ve just rolled out a major update to Neon’s pricing. Starting today, our
@@ -19,16 +19,18 @@ cover:
   alt: null
 isFeatured: true
 seo:
-  title: 'Neon’s New Pricing, Explained: Usage-Based With a $5 Minimum - Neon'
+  title: 'Neon’s New Pricing, Explained: Usage-Based, No Minimum - Neon'
   description: >-
     We just rolled out a major pricing update, including two of our most
-    requested changes: more storage for Free users, and a $5 /month plan.
+    requested changes: more storage for Free users, and a fully usage-based paid
+    plan with no minimum.
   keywords: []
   noindex: false
-  ogTitle: 'Neon’s New Pricing, Explained: Usage-Based With a $5 Minimum - Neon'
+  ogTitle: 'Neon’s New Pricing, Explained: Usage-Based, No Minimum - Neon'
   ogDescription: >-
     We just rolled out a major pricing update, including two of our most
-    requested changes: more storage for Free users, and a $5 /month plan.
+    requested changes: more storage for Free users, and a fully usage-based paid
+    plan with no minimum.
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/new-usage-based-pricing/social.png
 ---
@@ -39,7 +41,7 @@ seo:
 We are no longer enforcing the $5 minimum in our paid plans - if you consume $3, that's what you'll be charged. [Check our pricing page for the up to date pricing information.](https://neon.com/pricing)
 </Admonition>
 
-We’ve just rolled out a major update to [Neon’s pricing](https://neon.com/pricing). **Starting today, our paid plans are fully usage-based.** That means you only pay for what you use, with no quotas to manage, no overages to worry about, and no need to guess how much capacity you’ll need upfront. **We’re only enforcing a $5/month minimum spend** to cover the costs of maintaining your account and keeping your databases ready to go.
+We’ve just rolled out a major update to [Neon’s pricing](https://neon.com/pricing). **Starting today, our paid plans are fully usage-based.** That means you only pay for what you use, with no quotas to manage, no overages to worry about, no monthly minimum, and no need to guess how much capacity you’ll need upfront.
 
 And yes – the Free plan stays. Not only that, but we’ve added a much-requested change: more storage. **Instead of 0.5 GB total, you now get 0.5 GB of storage per project in the Free Plan**, up to 5 GB across 10 projects.
 
@@ -121,16 +123,6 @@ Any time your database writes new data or modifies existing data, that activity 
 
 You can reduce this cost by shortening your restore window, or eliminate it entirely if you don’t need PITR.
 
-## Explaining the $5 Minimum Spend
-
-On paid plans, Neon enforces a $5/month minimum spend. This isn’t a flat fee or prepayment, it’s just the minimum amount you’ll be billed in any given month. If your usage-based charges (compute, storage, branches, etc.) add up to less than $5, we’ll round your invoice up to $5; if your usage exceeds $5, you’ll pay exactly what you used.
-
-<Admonition type="tip" title="TL;DR">
-Your monthly invoice will be $5 or your actual usage, whichever is higher.
-</Admonition>
-
-This minimum helps us cover the base cost of keeping your projects online and ready to scale while still keeping our pricing accessible.
-
 ## Meet the New Plans
 
 We now offer three plans: Free, Launch, and Scale, with usage-based pricing across the board. This is a summary of how they break down – check out [our pricing page](https://neon.com/pricing) for details.
@@ -154,13 +146,13 @@ As part of this pricing update, we’ve also adjusted how compute is allocated. 
 To give some perspective: **50 CU-hours is enough to run a 0.25 vCPU app for 200 hours/month, enough to stay online during business hours, Monday to Friday.** Since Neon suspends databases after 5 minutes of inactivity, most development and preview branches will consume far less than that.
 </Admonition>
 
-And the good news is, if you do need more compute, the Launch plan starts at just $5/month minimum, making it easy to scale up without overcommitting.
+And the good news is, if you do need more compute, the Launch plan is fully usage-based with no minimum, making it easy to scale up without overcommitting.
 
 ### Launch: For teams that need room to grow
 
 Launch is an ideal paid plan for growing projects and early startups that care more about keeping costs low than meeting compliance requirements or production-grade reliability standards.
 
-There’s a $5/month minimum spend, but everything else is fully usage-based:
+It’s fully usage-based with no monthly minimum:
 
 - Pay-as-you-go compute at $0.14 per CU-hour.
 - Pay-as-you-go storage at $0.35 per GB-month
@@ -195,7 +187,7 @@ Rather than bundling these features into a flat monthly fee, we continue to tie 
 
 We built Neon fully serverless because we believe in the power and convenience of this architecture. Our infrastructure is dynamic by design, and we thought our pricing had to reflect that.
 
-With this update, we’ve moved away from fixed quotas and pre-packaged plans toward something more flexible and developer-friendly. Instead of choosing a bundle of resources up front, you can now grow usage organically, with a lower barrier to entry ($5/month vs $19).
+With this update, we’ve moved away from fixed quotas and pre-packaged plans toward something more flexible and developer-friendly. Instead of choosing a bundle of resources up front, you can now grow usage organically, with a lower barrier to entry (usage-based with no minimum vs $19).
 
 This makes Neon more accessible at every stage, from hacking on the Free tier to scaling production workloads, with as little friction as possible.
 

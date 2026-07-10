@@ -150,7 +150,7 @@ neonctl auth
 neonctl databases create --name='whisper-api'
 
 # save our connection string to a .env file
-neonctl connection-string --database-name='whisper-api' --branch=main > .env
+neonctl connection-string main --database-name='whisper-api' > .env
 ```
 
 Let’s access our database and create the required table:

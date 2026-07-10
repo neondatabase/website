@@ -29,8 +29,8 @@
   },
   "andre-landgraf": {
     "name": "Andre Landgraf",
-    "role": "Senior Developer Advocate",
-    "url": null,
+    "role": "Staff Developer Advocate",
+    "url": "https://x.com/andrelandgraf",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/andre-landgraf.jpg",
     "photoAlt": "Andre Landgraf"
   },
@@ -75,6 +75,13 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/anna-stepanyan.jpg",
     "photoAlt": "Anna Stepanyan"
+  },
+  "anthony-giuliano": {
+    "name": "Anthony Giuliano",
+    "role": "Developer Advocate",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/anthony-giuliano.jpg",
+    "photoAlt": "Anthony Giuliano"
   },
   "arjun-rajeswaran": {
     "name": "Arjun Rajeswaran",
@@ -370,6 +377,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/jacob-prall.jpg",
     "photoAlt": "Jacob Prall"
   },
+  "jasraj-dange": {
+    "name": "Jasraj Dange",
+    "role": "Databricks Engineering",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/jasraj-dange.jpeg",
+    "photoAlt": "Jasraj Dange"
+  },
   "jeff-christoffersen": {
     "name": "Jeffrey Christoffersen",
     "role": "Staff Product Designer",
@@ -566,6 +580,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/phil-sheffield.jpg",
     "photoAlt": "Phil Sheffield"
   },
+  "pranav-aurora": {
+    "name": "Pranav Aurora",
+    "role": "Product Manager",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/pranav-aurora.jpg",
+    "photoAlt": "Pranav Aurora"
+  },
   "ran-sheinberg": {
     "name": "Ran Sheinberg",
     "role": "Co-Founder and CPO of xpander.ai",
@@ -666,7 +687,7 @@
   },
   "savannah-longoria": {
     "name": "Savannah Longoria",
-    "role": "Developer Advocate",
+    "role": "Senior Developer Advocate",
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/savannah-longoria.jpg",
     "photoAlt": "Savannah Longoria"
@@ -741,6 +762,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/tyler-rockwood.jpg",
     "photoAlt": "Tyler Rockwood"
   },
+  "vadim-kharitonov": {
+    "name": "Vadim Kharitonov",
+    "role": "Engineering Manager",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/vadim-kharitonov.jpg",
+    "photoAlt": "Vadim Kharitonov"
+  },
   "victor-ditadi": {
     "name": "Victor Ditadi",
     "role": "Senior Software Engineer",
@@ -782,5 +810,12 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/philip-olson.jpg",
     "photoAlt": "Philip Olson"
+  },
+  "zhou-sun": {
+    "name": "Zhou Sun",
+    "role": "Founder, Mooncake",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/zhou-sun.jpg",
+    "photoAlt": "Zhou Sun"
   }
 }
