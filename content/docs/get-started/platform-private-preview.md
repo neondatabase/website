@@ -1,6 +1,6 @@
 ---
 title: Neon Platform private preview guide
-subtitle: Get started with Neon Functions, Storage, and AI Gateway
+subtitle: Get started with Neon Functions, Object Storage, and AI Gateway
 enableTableOfContents: true
 ---
 
@@ -17,7 +17,7 @@ This is not for production workloads. Expect rough edges and frequent updates. B
 Three new services join Postgres and Neon Auth, all scoped to your branches:
 
 - **Neon Functions**: long-running Node.js compute next to your database. WebSocket servers, SSE streams, AI agents.
-- **Neon Storage**: S3-compatible object storage that branches with your data.
+- **Neon Object Storage**: S3-compatible object storage that branches with your data.
 - **Neon AI Gateway**: one credential for frontier and open-source models (Claude, GPT, Gemini, and more).
 
 You declare all of it in one `neon.ts` file, and it branches together: fork a branch and you get an isolated copy of your database, files, storage, functions, and gateway.
@@ -57,7 +57,7 @@ Pick a template from the interactive selector, or pass `--template <id>` to skip
 | Template        | What it builds                                                                                                                                                                                                     |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `hono`          | A todo CRUD API using Hono and Drizzle ORM, deployed as a Neon Function. Includes pre-configured schema and migrations. A good starting point for any HTTP API on Neon Functions.                                  |
-| `ai-sdk`        | A streaming AI chat agent on Neon Functions that generates images on demand, stores them in Neon Storage, and indexes metadata in Postgres via Drizzle. Uses Neon AI Gateway for model access.                     |
+| `ai-sdk`        | A streaming AI chat agent on Neon Functions that generates images on demand, stores them in Neon Object Storage, and indexes metadata in Postgres via Drizzle. Uses Neon AI Gateway for model access.              |
 | `mastra`        | A personal-assistant chatbot on Neon Functions that remembers you across conversations. Streams responses through Neon AI Gateway and persists context across threads using Mastra Memory backed by Neon Postgres. |
 | `mcp`           | An MCP server on Neon Functions that exposes contact management tools (create, update, delete, search) to AI agents via streamable HTTP. Compatible with Cursor, Claude Desktop, and other MCP clients.            |
 | `realtime-chat` | A full-stack realtime chat app: Next.js frontend with Neon Auth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                          |
@@ -163,7 +163,7 @@ Keep the CLI up to date: run `npm i -g neon@latest` before each session and befo
 Docs are evolving daily during the preview. Use the Neon agent skills as your primary reference.
 
 - [Neon Functions](/docs/compute/functions/overview): overview, get started, neon.ts reference, runtime limits
-- [Neon Storage](/docs/storage/overview): buckets, objects, S3 compatibility
+- [Neon Object Storage](/docs/storage/overview): buckets, objects, S3 compatibility
 - [Neon AI Gateway](/docs/ai-gateway/overview): get started, model catalog, SDK dialects
 - [Model catalog on models.dev](https://models.dev/providers/neon): every model ID the gateway serves
 

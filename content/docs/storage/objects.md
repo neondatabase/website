@@ -2,16 +2,16 @@
 title: Objects
 subtitle: Upload, download, list, and delete files
 summary: >-
-  Work with objects in Neon Storage using the Files SDK, any S3-compatible SDK,
+  Work with objects in Neon Object Storage using the Files SDK, any S3-compatible SDK,
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
+Objects in Neon Object Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
 
 The examples below show both the [Files SDK](https://files-sdk.dev) and the AWS S3 client. See [Get started](/docs/storage/get-started) to configure either client, or [Authentication](/docs/storage/authentication) if you need to create a credential.
 

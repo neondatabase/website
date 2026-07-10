@@ -1,12 +1,12 @@
 ---
-title: Storage troubleshooting
+title: Object storage troubleshooting
 subtitle: Common errors and how to fix them
 summary: >-
-  Solutions for common errors when using Neon Storage, including authentication
+  Solutions for common errors when using Neon Object Storage, including authentication
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-17T11:08:12.470Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -65,12 +65,12 @@ Without `forcePathStyle: true`, the SDK treats the bucket name as a subdomain in
 
 ```typescript
 const client = new S3Client({
-  forcePathStyle: true, // required for Neon Storage
+  forcePathStyle: true, // required for Neon Object Storage
   // ...
 });
 ```
 
-Without this, the AWS SDK for JavaScript uses virtual-hosted-style addressing (`my-bucket.storage.example.com/key`) which Neon Storage doesn't support.
+Without this, the AWS SDK for JavaScript uses virtual-hosted-style addressing (`my-bucket.storage.example.com/key`) which Neon Object Storage doesn't support.
 
 ### SigV2 errors
 
@@ -94,7 +94,7 @@ You cannot change access level via the S3 API. `PutBucketAcl` returns `501 Not I
 
 ### `501 Not Implemented`
 
-You are calling an S3 operation that Neon Storage does not support.
+You are calling an S3 operation that Neon Object Storage does not support.
 
 **Common causes:**
 

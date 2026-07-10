@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-06-22T21:05:22.619Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -252,7 +252,7 @@ Preview services are declared under the `preview` block. All three are optional 
 | Field               | Type                                 | What it enables                                                                                                   |
 | ------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
 | `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                                                        |
-| `preview.buckets`   | Record of name → bucket def          | Neon Storage. S3-compatible object storage, branched with your database                                           |
+| `preview.buckets`   | Record of name → bucket def          | Neon Object Storage. S3-compatible object storage, branched with your database                                    |
 | `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL` |
 
 ### `preview.functions`

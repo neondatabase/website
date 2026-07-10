@@ -4,7 +4,7 @@ subtitle: Neon is the backend for apps and agents.
 summary: >-
   Neon documentation root covers the full Neon backend platform: serverless
   Postgres with branching and autoscaling, Neon Auth, Data API, and upcoming
-  Storage and AI Gateway services. Use this page to reach quickstarts, framework
+  Object Storage and AI Gateway services. Use this page to reach quickstarts, framework
   connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
   editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
 redirectFrom:
@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-22T13:48:28.109Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 ## Getting started
@@ -34,7 +34,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
 
 ## Products
 
-Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. <br />
+Build backends for web apps and agents with Neon Postgres, Auth, Object Storage, and AI Gateway. <br />
 Every service is agent-ready: instant, branchable, and serverless.
 
 <DetailIconCards className="my-7!" cols={3} theme="green-flat">
@@ -45,7 +45,7 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
 
-<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview">Storage</a>
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview">Object Storage</a>
 
 <a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview">Functions</a>
 

@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-06-12T01:28:52.381Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 ## access token
@@ -590,7 +590,7 @@ A Neon Control Plane operation that starts a compute when there is an event or a
 
 ## Storage
 
-Where data is recorded and stored. Neon storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
+Where data is recorded and stored. Neon's database storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
 
 Also, a usage metric that tracks the total volume of data and [history](#history) stored in Neon. For more information, see [Storage](#storage).
 

@@ -1,17 +1,17 @@
 ---
-title: Get started with Neon Storage
+title: Get started with Neon Object Storage
 subtitle: Upload your first file in minutes
 summary: >-
   This quickstart walks you through creating a storage credential, configuring
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-25T17:41:39.717Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 <PrivatePreviewEnquire/>
 
-To set up Neon Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Storage skills:
+To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills:
 
 ```bash
 npx skills add neondatabase/agent-skills -s neon -s neon-object-storage
@@ -109,7 +109,7 @@ export AWS_ENDPOINT_URL_S3=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2
 export AWS_REGION=us-east-2
 ```
 
-A `404` response means Storage is not yet enabled for that branch. Make sure you're using a project in the AWS us-east-2 region.
+A `404` response means object storage is not yet enabled for that branch. Make sure you're using a project in the AWS us-east-2 region.
 
 ## Install dependencies
 
@@ -195,7 +195,7 @@ You need an existing bucket before uploading. [Create one](/docs/storage/buckets
 ```typescript shouldWrap
 import { files } from './client';
 
-await files.upload('hello.txt', 'Hello from Neon Storage!', {
+await files.upload('hello.txt', 'Hello from Neon Object Storage!', {
   contentType: 'text/plain',
 });
 
@@ -209,7 +209,7 @@ import { client } from './client';
 await client.send(new PutObjectCommand({
   Bucket: 'my-bucket',
   Key: 'hello.txt',
-  Body: 'Hello from Neon Storage!',
+  Body: 'Hello from Neon Object Storage!',
   ContentType: 'text/plain',
 }));
 
@@ -220,7 +220,7 @@ console.log('Uploaded!');
 client.put_object(
     Bucket='my-bucket',
     Key='hello.txt',
-    Body='Hello from Neon Storage!',
+    Body='Hello from Neon Object Storage!',
     ContentType='text/plain',
 )
 
@@ -243,7 +243,7 @@ import { files } from './client';
 
 const result = await files.download('hello.txt');
 const text = await result.text();
-console.log(text); // Hello from Neon Storage!
+console.log(text); // Hello from Neon Object Storage!
 ```
 
 ```typescript shouldWrap
@@ -256,12 +256,12 @@ const response = await client.send(new GetObjectCommand({
 }));
 
 const text = await response.Body?.transformToString();
-console.log(text); // Hello from Neon Storage!
+console.log(text); // Hello from Neon Object Storage!
 ```
 
 ```python
 response = client.get_object(Bucket='my-bucket', Key='hello.txt')
-print(response['Body'].read().decode('utf-8'))  # Hello from Neon Storage!
+print(response['Body'].read().decode('utf-8'))  # Hello from Neon Object Storage!
 ```
 
 ```bash shouldWrap
