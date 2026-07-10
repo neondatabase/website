@@ -1536,8 +1536,7 @@
               slug: community/ai-tools
             - title: Using docs as Markdown (LLMs)
               slug: community/llms-markdown-guide
-    - title: Product updates
-      slug: changelog
+    - section: Product updates
       icon: changelog
       items:
         - title: Changelog
@@ -1550,8 +1549,7 @@
         - title: RSS feeds
           slug: reference/feeds
           icon: feeds
-    - title: Starter code
-      slug: https://neon.com/templates
+    - section: Starter code
       icon: template
       items:
         - title: Templates
