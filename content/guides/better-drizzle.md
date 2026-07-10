@@ -4,7 +4,7 @@ subtitle: Add type-safe repositories, pagination, nested relation filters, plugi
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-09T00:00:00.000Z'
-updatedOn: '2026-07-09T18:32:05.503Z'
+updatedOn: '2026-07-10T13:29:45.724Z'
 ---
 
 [better-drizzle](https://better-drizzle.com) is a thin wrapper around [Drizzle ORM](https://orm.drizzle.team) that gives every table a consistent, type-safe API without replacing Drizzle itself. If you are already using Drizzle with Neon, better-drizzle removes the repetitive query glue you would otherwise rewrite in every service while staying close to the metal.
@@ -17,22 +17,24 @@ This guide walks you through setting up better-drizzle with Neon Postgres and sh
 
 better-drizzle wraps your existing Drizzle client and generates one delegate per table. You get:
 
-- **Consistent CRUD**. `findMany`, `findFirst`, `findUnique`, `create`, `update`, `delete`, `upsert`, and `upsertMany` on every table
-- **Typed relation loading**. `include` and `select` with full type inference from your Drizzle schema
-- **Nested relation filters**. `some`, `every`, `none`, and `is` for filtering by related rows
-- **Unified pagination**. Offset and cursor pagination returning the same `{ data, pagination }` shape
-- **Lifecycle hooks**. Cross-cutting concerns like audit trails, tracing, and metrics without sprinkling them through every call
-- **First-class plugins**. Timestamps, soft delete, and custom behavior packaged as reusable plugins
-- **Transactions with savepoints**. Nested transactions, rollback, `afterCommit` callbacks, and automatic retries
+- **Consistent CRUD**: `findMany`, `findFirst`, `findUnique`, `create`, `update`, `delete`, `upsert`, and `upsertMany` on every table
+- **Typed relation loading**: `include` and `select` with full type inference from your Drizzle schema
+- **Nested relation filters**: `some`, `every`, `none`, and `is` for filtering by related rows
+- **Unified pagination**: Offset and cursor pagination returning the same `{ data, pagination }` shape
+- **Lifecycle hooks**: Cross-cutting concerns like audit trails, tracing, and metrics without sprinkling them through every call
+- **First-class plugins**: Timestamps, soft delete, and custom behavior packaged as reusable plugins
+- **Transactions with savepoints**: Nested transactions, rollback, `afterCommit` callbacks, and automatic retries
 
 All of this compiles down to Drizzle queries. You still define your schema in Drizzle, choose your driver, and drop to raw SQL whenever you need to.
 
 ## Prerequisites
 
-- A [Neon account](https://console.neon.tech/signup) and a project with a running Postgres database
+- A [Neon account](https://console.neon.tech/signup) and a project.
 - [Node.js](https://nodejs.org/) installed on your machine
 
 ## Create a new project
+
+Create a new directory for your project and initialize it with npm:
 
 ```bash
 mkdir better-drizzle-demo
@@ -45,16 +47,18 @@ Install the dependencies depending on your driver of choice. If you are using `n
 <CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
 
 ```bash
-npm install better-drizzle drizzle-orm pg
-npm install -D drizzle-kit dotenv @types/pg
+npm install better-drizzle pg drizzle-orm
+npm install -D drizzle-kit@0.21.4 dotenv @types/pg @types/node
 ```
 
 ```bash
-npm install better-drizzle drizzle-orm @neondatabase/serverless
-npm install -D drizzle-kit dotenv
+npm install better-drizzle @neondatabase/serverless drizzle-orm
+npm install -D drizzle-kit@0.21.4 dotenv @types/node
 ```
 
 </CodeTabs>
+
+> better-drizzle uses ^0.30.0 version of Drizzle orm. For compatibility, install `drizzle-kit@0.21.4`
 
 ## Configure Drizzle Kit
 
@@ -78,7 +82,7 @@ export default defineConfig({
 
 better-drizzle reads your Drizzle schema (including relations) to generate each table's typed API. The relations you define are what power `include`, `select`, and nested relation filters.
 
-Here is a small `users → posts` schema using `drizzle-orm/pg-core`:
+Create a `src/schema.ts` file with two tables: `users` and `posts`. Each user can have many posts, and each post belongs to one user.
 
 ```typescript filename="src/schema.ts"
 import { relations } from 'drizzle-orm';
@@ -119,9 +123,19 @@ export const schema = {
 };
 ```
 
-## Create the Better client
+## Add your database URL
 
-Create a normal Drizzle client first, then wrap it once with `better()`:
+Create a `.env` file in your project root and add your Neon Postgres connection string:
+
+```bash
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
+```
+
+![Neon connection string](/docs/connect/connection_details.png)
+
+## Create the Better Drizzle client
+
+Create a normal Drizzle client and wrap it with `better()` to get the Better client:
 
 <CodeTabs labels={["node-postgres", "Neon serverless driver"]}>
 
@@ -130,6 +144,7 @@ import { better } from 'better-drizzle';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { Pool } from 'pg';
 import { schema } from './schema';
+import 'dotenv/config';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
 const db = drizzle(pool, { schema });
@@ -142,6 +157,7 @@ import { better } from 'better-drizzle';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { neon } from '@neondatabase/serverless';
 import { schema } from './schema';
+import 'dotenv/config';
 
 const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql, { schema });
@@ -157,7 +173,14 @@ better-drizzle detects the dialect from your Drizzle instance. The same `client`
 
 ## Seed the database
 
-Before running queries, seed the `users` and `posts` tables with sample data. Create a seed script at `src/seed.ts`:
+Apply the schema to your database with Drizzle Kit:
+
+```bash
+npx drizzle-kit generate
+npx drizzle-kit migrate
+```
+
+Now create a `src/seed.ts` file to populate the database with some users and posts:
 
 ```typescript filename="src/seed.ts"
 import { client } from './db';
@@ -403,10 +426,8 @@ const page2 = await client.users.paginate({
 
 ```json title="Output"
 {
-  "data": [
-    { "id": 1, "name": "Alice" }
-  ],
-  "pagination": { "count": 1, "hasNext": false, "hasPrevious": false }
+  "data": [],
+  "pagination": { "count": 2, "hasNext": false, "hasPrevious": true }
 }
 ```
 
@@ -444,7 +465,7 @@ Auto-manage `createdAt` and `updatedAt` columns on every write:
 npm install @better-drizzle/timestamps
 ```
 
-```typescript filename="db.ts"
+```typescript filename="src/db.ts"
 import { timestamps } from '@better-drizzle/timestamps';
 
 const client = better(db, {
@@ -462,33 +483,51 @@ Now every `create`, `update`, and `upsert` automatically fills timestamp columns
 
 ### Soft delete
 
-Turn `delete()` into a recoverable state change. Rows are hidden by default and restorable:
+better-drizzle ships with a soft-delete plugin that makes `delete()` a recoverable state change. Rows are hidden by default and restorable. To use it, you need to have a `deletedAt` column in your tables. For example, add a `deleted_at` column to your `posts` table:
+
+```typescript filename="src/schema.ts"
+// other tables ...
+
+export const posts = pgTable('posts', {
+  id: serial('id').primaryKey(),
+  authorId: integer('author_id')
+    .notNull()
+    .references(() => users.id),
+  title: text('title').notNull(),
+  published: boolean('published').notNull().default(false),
+  deletedAt: timestamp('deleted_at', { mode: 'date' }), // [!code ++]
+});
+```
+
+Install the soft-delete plugin:
 
 ```bash
 npm install @better-drizzle/soft-delete
 ```
 
-```typescript filename="db.ts"
+Use the plugin to soft-delete rows, query by deleted state, and restore them:
+
+```typescript filename="src/db.ts"
 import { softDelete } from '@better-drizzle/soft-delete';
 
 const client = better(db, {
   schema,
   plugins: [
     softDelete({
-      column: 'deleted_at',
+      column: 'deletedAt',
       defaults: { mode: 'soft', visibility: 'without' },
     }),
   ],
 });
 
 // Soft-deletes the row (sets deleted_at) instead of removing it
-await client.users.delete({ where: { id: 1 } });
+await client.posts.delete({ where: { id: 1 } });
 
-// Query with plugin-added typed args
-await client.users.findMany({ deleted: 'only' });
+// Query with plugin-added typed args: Get all deleted posts
+await client.posts.findMany({ deleted: 'only' });
 
 // Restore a soft-deleted row
-await client.users.restore({ where: { id: 1 } });
+await client.posts.restore({ where: { id: 1 } });
 ```
 
 <Admonition type="note">
@@ -501,50 +540,27 @@ Hooks let you observe operations for auditing, tracing, metrics, and authorizati
 
 ```typescript filename="db.ts"
 const client = better(db, {
-  schema,
-  hooks: {
-    beforeCreate(ctx) {
-      console.log(`Creating ${ctx.table}`, ctx.args.data);
-    },
-    afterCreate(ctx) {
-      console.log(`Created ${ctx.table}`, ctx.row);
-    },
-    beforeQuery(ctx) {
-      console.log(`Querying ${ctx.table}`, ctx.action, ctx.args.where);
-    },
-    afterQuery(ctx) {
-      console.log(`Query result`, ctx.result);
-    },
-  },
+	schema,
+	hooks: {
+		beforeCreate(ctx) {
+			console.log('beforeCreate', ctx.action, ctx.table);
+		},
+		afterCreate(ctx) {
+			console.log('afterCreate', ctx.row);
+		},
+		beforeQuery(ctx) {
+			console.log('beforeQuery', ctx.action, ctx.args.where);
+		},
+		afterQuery(ctx) {
+			console.log('afterQuery', ctx.action, ctx.result);
+		},
+	},
 });
 ```
 
-With these hooks in place, each operation logs before and after it runs:
-
-```json title="Output (example)"
-Querying users findMany { active: true }
-Query result [
-  { id: 3, name: 'Charlie', active: true },
-  { id: 1, name: 'Alice', active: true }
-]
-Creating users { email: 'new@example.com', name: 'New User', active: true }
-Created users { id: 4, email: 'new@example.com', name: 'New User', active: true }
-```
-
-Thread request-scoped metadata through every call:
-
-```typescript
-await client.users.findMany({
-  where: { active: true },
-  meta: { requestId: 'req_123', userId: 'admin_7' },
-});
-```
+The example above shows create and query hooks, but Better Drizzle also supports `beforeUpdate` / `afterUpdate`, `beforeDelete` / `afterDelete`, transaction hooks (`beforeTransaction`, `afterTransactionCommit`, `afterTransactionRollback`, `onTransactionError`), raw SQL hooks (`beforeRaw`, `afterRaw`, `onRawError`), and a catch-all `onError`. See the [hooks docs](https://better-drizzle.com/docs/advanced/hooks) for details.
 
 Hook callbacks receive `ctx.meta`, ideal for logging request IDs, tenant IDs, or user context in a server environment.
-
-<Admonition type="tip" title="Hooks vs plugins">
-Use **hooks** to observe and coordinate (logging, tracing, metrics). Use **plugins** to change behavior (rewrite `where`, inject fields, add delegate methods). Keep hooks narrow; plugins do the heavy lifting for behavior changes.
-</Admonition>
 
 ## Transactions with savepoints
 
@@ -681,10 +697,6 @@ export async function createUserAndPost(input: {
 }
 ```
 
-<Admonition type="note">
-Instantiate the Better client once in a shared module and import it everywhere. This keeps connection pooling sane and gives you one place to add hooks and plugins. The pattern works identically for Bun, Express, Fastify, and other frameworks. See the [framework integration guide](https://better-drizzle.com/docs/guides/frameworks).
-</Admonition>
-
 ## Performance
 
 better-drizzle is measured against raw Drizzle at the API-parity level, same work and same return shape. Reads land within 0–18% of raw Drizzle, with fast paths making point lookups and offset pagination faster. Writes are within ~4%. The wrapper uses materially less heap for reads and writes.
@@ -728,7 +740,7 @@ await client.transaction(async (tx) => {
 
 ## Conclusion
 
-better-drizzle removes the repetitive query patterns that accumulate across a Drizzle codebase without abstracting away the SQL-level control you chose Drizzle for. With Neon Postgres as the backing database, you get type-safe repositories, built-in pagination, nested relation filters, plugins for timestamps and soft deletes, lifecycle hooks, and full transaction support, all on top of your existing Drizzle schema.
+better-drizzle removes the repetitive query patterns that accumulate across a Drizzle codebase without abstracting away the SQL-level control you chose Drizzle for. You get type-safe repositories, built-in pagination, nested relation filters, plugins for timestamps and soft deletes, lifecycle hooks, and full transaction support, all on top of your existing Drizzle schema.
 
 ## Resources
 
