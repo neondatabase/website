@@ -28,13 +28,15 @@ PostgreSQL's built-in full-text search uses GIN indexes with `tsvector`. GIN wor
 
 ## Enable the lakebase_text extension
 
-`lakebase_text` is preloaded by default on Neon, so you can install it directly. Run the following statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
+Install the extension in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS lakebase_text;
 ```
 
 `lakebase_text` requires Postgres 16 or later. It has no extension dependencies; unlike `lakebase_vector`, it does not require `pgvector`.
+
+`lakebase_text` relies on a preloaded library that Neon enables by default. If you've customized your project's [preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries), make sure `lakebase_text` is in the list.
 
 ## Quick start
 
