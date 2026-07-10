@@ -7,7 +7,7 @@ summary: >-
   plugins are not installed or configured directly. Use this page to check which
   plugins are fully supported versus partially supported, and how to configure
   them via the Neon Console or Neon API. The Organization plugin has partial
-  support while JWT token claims are still under development.
+  support.
 enableTableOfContents: true
 updatedOn: '2026-07-10T15:48:27.200Z'
 ---
