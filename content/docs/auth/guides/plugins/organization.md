@@ -19,7 +19,7 @@ updatedOn: '2026-07-10T15:48:27.200Z'
 Managed BetterAuth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
 
 <Admonition type="note" title="Preview Feature">
-The Organization plugin is currently in **Beta**. Support for JWT token claims is under development.
+The Organization plugin is currently in **Beta**. Support for JWT token claims is available.
 </Admonition>
 
 ## Why use this plugin?
