@@ -1504,50 +1504,62 @@
 - nav: Resources
   title: Resources
   subnav:
-    - title: Status
-      slug: introduction/status
-      icon: status
-    - title: Support
+    - title: Get help & connect
       slug: introduction/support
       icon: support
-    - title: Changelog
+      items:
+        - title: Support
+          slug: introduction/support
+          icon: support
+        - title: Status
+          slug: introduction/status
+          icon: status
+        - title: Community
+          slug: community/community-intro
+          icon: community
+          items:
+            - title: Community hub
+              slug: community/community-intro
+            - title: Docs contribution guide
+              slug: community/contribution-guide
+            - title: Using Mermaid diagrams
+              slug: community/mermaid-diagrams
+            - title: Component guide
+              slug: community/component-guide
+            - title: Component specialized guide
+              slug: community/component-specialized
+            - title: Component icon guide
+              slug: community/component-icon-guide
+            - title: Component architecture
+              slug: community/component-architecture
+            - title: AI tools for documentation
+              slug: community/ai-tools
+            - title: Using docs as Markdown (LLMs)
+              slug: community/llms-markdown-guide
+    - title: Product updates
       slug: changelog
       icon: changelog
-    - title: Roadmap
-      slug: introduction/roadmap
-      icon: roadmap
-      tag: updated
-    - title: Community
-      slug: community/community-intro
-      icon: community
       items:
-        - title: Community hub
-          slug: community/community-intro
-        - title: Docs contribution guide
-          slug: community/contribution-guide
-        - title: Using Mermaid diagrams
-          slug: community/mermaid-diagrams
-        - title: Component guide
-          slug: community/component-guide
-        - title: Component specialized guide
-          slug: community/component-specialized
-        - title: Component icon guide
-          slug: community/component-icon-guide
-        - title: Component architecture
-          slug: community/component-architecture
-        - title: AI tools for documentation
-          slug: community/ai-tools
-        - title: Using docs as Markdown (LLMs)
-          slug: community/llms-markdown-guide
-    - title: Templates
+        - title: Changelog
+          slug: changelog
+          icon: changelog
+        - title: Roadmap
+          slug: introduction/roadmap
+          icon: roadmap
+          tag: updated
+        - title: RSS feeds
+          slug: reference/feeds
+          icon: feeds
+    - title: Starter code
       slug: https://neon.com/templates
       icon: template
-    - title: Examples repo
-      slug: https://github.com/neondatabase/examples
-      icon: github
-    - title: RSS feeds
-      slug: reference/feeds
-      icon: feeds
+      items:
+        - title: Templates
+          slug: https://neon.com/templates
+          icon: template
+        - title: Examples repo
+          slug: https://github.com/neondatabase/examples
+          icon: github
 
 - nav: Learn PostgreSQL
   slug: https://neon.com/postgresql/tutorial
