@@ -213,143 +213,144 @@
       slug: postgres/overview
       icon: book
       items:
-        - title: Extensions
-          slug: extensions/pg-extensions
-          icon: extension
+        - title: Connect
+          slug: connect/connect-intro
+          icon: connect
           items:
-            - title: Extension explorer
-              slug: extensions/extension-explorer
-            - title: anon
-              slug: extensions/postgresql-anonymizer
-            - title: btree_gin
-              slug: extensions/btree_gin
-            - title: btree_gist
-              slug: extensions/btree_gist
-            - title: citext
-              slug: extensions/citext
-            - title: cube
-              slug: extensions/cube
-            - title: dblink
-              slug: extensions/dblink
-            - title: dict_int
-              slug: extensions/dict_int
-            - title: earthdistance
-              slug: extensions/earthdistance
-            - title: fuzzystrmatch
-              slug: extensions/fuzzystrmatch
-            - title: hstore
-              slug: extensions/hstore
-            - title: intarray
-              slug: extensions/intarray
-            - title: lakebase_text
-              slug: extensions/lakebase-text
-            - title: lakebase_vector
-              slug: extensions/lakebase-vector
-            - title: ltree
-              slug: extensions/ltree
-            - title: neon
-              slug: extensions/neon
-            - title: neon_utils
-              slug: extensions/neon-utils
-            - title: online_advisor
-              slug: extensions/online_advisor
-            - title: pgcrypto
-              slug: extensions/pgcrypto
-            - title: pgvector
-              slug: extensions/pgvector
-            - title: pgrag
-              slug: extensions/pgrag
-            - title: pg_cron
-              slug: extensions/pg_cron
-            - title: pg_graphql
-              slug: extensions/pg_graphql
-            - title: pg_mooncake
-              slug: extensions/pg_mooncake
-            - title: pg_partman
-              slug: extensions/pg_partman
-            - title: pg_prewarm
-              slug: extensions/pg_prewarm
-            - title: pg_session_jwt
-              slug: extensions/pg_session_jwt
-            - title: pg_stat_statements
-              slug: extensions/pg_stat_statements
-            - title: pg_repack
-              slug: extensions/pg_repack
-            - title: pg_search
-              slug: extensions/pg_search
-            - title: pg_tiktoken
-              slug: extensions/pg_tiktoken
-            - title: pg_trgm
-              slug: extensions/pg_trgm
-            - title: pg_uuidv7
-              slug: extensions/pg_uuidv7
-            - title: pgrowlocks
-              slug: extensions/pgrowlocks
-            - title: pgstattuple
-              slug: extensions/pgstattuple
-            - title: plv8
-              slug: extensions/plv8
-            - title: postgis
-              slug: extensions/postgis
-            - title: postgis-related
-              slug: extensions/postgis-related-extensions
-            - title: postgres_fdw
-              slug: extensions/postgres_fdw
-            - title: tablefunc
-              slug: extensions/tablefunc
-            - title: timescaledb
-              slug: extensions/timescaledb
-            - title: unaccent
-              slug: extensions/unaccent
-            - title: uuid-ossp
-              slug: extensions/uuid-ossp
-            - title: wal2json
-              slug: extensions/wal2json
-            - title: xml2
-              slug: extensions/xml2
-            - title: AI App Starter Kit
-              icon: sparks
-              slug: ai/ai-intro
+            - section: Getting started
               items:
-                - section: Core concepts
-                  icon: info
-                  items:
-                    - title: Introduction
-                      slug: ai/ai-intro
-                    - title: Embeddings
-                      slug: ai/ai-concepts
-                    - title: Pgvector
-                      slug: extensions/pgvector
-                - section: AI frameworks
-                  icon: frameworks
-                  items:
-                    - title: LangChain
-                      slug: ai/langchain
-                    - title: LlamaIndex
-                      slug: ai/llamaindex
-                    - title: Semantic Kernel
-                      slug: ai/semantic-kernel
-                    - title: Inngest
-                      slug: ai/inngest
-                - section: Optimize & scale
-                  icon: features
-                  items:
-                    - title: Optimize vector search
-                      slug: ai/ai-vector-search-optimization
-                    - title: Scale with Neon
-                      slug: ai/ai-scale-with-neon
-                - title: Google Colab
-                  slug: ai/ai-google-colab
-            - title: Lakebase Search
-              icon: sparks
-              slug: ai/lakebase-search
+                - title: Connect to Neon
+                  slug: connect/connect-intro
+            - section: Connection methods
               items:
-                - title: Overview
-                  slug: ai/lakebase-search
-                - title: Get started
-                  slug: ai/lakebase-search-get-started
-                - title: Migrate from pg_search
-                  slug: extensions/migrate-pg-search-to-lakebase-text
+                - title: Choosing your connection method
+                  slug: connect/choose-connection
+                - title: Connect from any app
+                  slug: connect/connect-from-any-app
+                - title: Neon serverless driver
+                  slug: serverless/serverless-driver
+                - title: Neon SQL Editor
+                  slug: get-started/query-with-neon-sql-editor
+                - title: psql
+                  slug: connect/query-with-psql-editor
+                - title: pgcli
+                  slug: connect/connect-pgcli
+                - title: GUI applications
+                  slug: connect/connect-postgres-gui
+                - title: Looker Studio
+                  slug: connect/connect-looker-studio
+            - section: Security & performance
+              items:
+                - title: Passwordless auth
+                  slug: connect/passwordless-connect
+                - title: Securing connections
+                  slug: connect/connect-securely
+                - title: Connection pooling
+                  slug: connect/connection-pooling
+                - title: Latency benchmarks
+                  slug: guides/benchmarking-latency
+            - section: Troubleshooting
+              items:
+                - title: Connection errors
+                  slug: connect/connection-errors
+                - title: Latency and timeouts
+                  slug: connect/connection-latency
+        - section: Compute & scaling
+          icon: features
+          items:
+            - title: Autoscaling
+              slug: introduction/autoscaling
+              items:
+                - title: Autoscaling architecture
+                  slug: introduction/autoscaling-architecture
+                - title: Autoscaling algorithm
+                  slug: guides/autoscaling-algorithm
+                - title: Configure autoscaling
+                  slug: guides/autoscaling-guide
+            - title: Scale to zero
+              slug: introduction/scale-to-zero
+              items:
+                - title: Scale to zero guide
+                  slug: guides/scale-to-zero-guide
+            - title: Read replicas
+              slug: introduction/read-replicas
+              items:
+                - title: Create and manage
+                  slug: guides/read-replica-guide
+                - title: Use cases
+                  items:
+                    - title: Read-only access
+                      slug: guides/read-only-access-read-replicas
+                    - title: Ad-hoc queries
+                      slug: guides/read-replica-adhoc-queries
+                    - title: Analytics queries
+                      slug: guides/read-replica-data-analysis
+                    - title: Scale applications
+                      slug: guides/read-replica-integrations
+                - title: With ORMs
+                  items:
+                    - title: Prisma
+                      slug: guides/read-replica-prisma
+            - title: Logical replication
+              slug: guides/logical-replication-guide
+              items:
+                - title: Concepts
+                  slug: guides/logical-replication-concepts
+                - title: In Neon
+                  slug: guides/logical-replication-neon
+                - title: Commands
+                  slug: guides/logical-replication-manage
+                - title: Schema changes
+                  slug: guides/logical-replication-schema-changes
+                - title: Tips
+                  slug: guides/logical-replication-tips
+        - section: Branching
+          icon: branching
+          items:
+            - section: Concepts
+              items:
+                - title: About branching
+                  slug: introduction/branching
+                - title: Branching workflow primer
+                  slug: get-started/workflow-primer
+            - section: Manage branches
+              items:
+                - title: Branch archiving
+                  slug: guides/branch-archiving
+                - title: Branch expiration
+                  slug: guides/branch-expiration
+                - title: Schema-only branches
+                  slug: guides/branching-schema-only
+                - title: Reset from parent
+                  slug: guides/reset-from-parent
+            - section: Automate & workflows
+              items:
+                - title: Get started with branching
+                  slug: guides/branching-intro
+                - title: Branching workflows
+                  slug: guides/branching-test-queries
+                - title: Branching with the CLI
+                  slug: guides/branching-neon-cli
+                - title: Branching with the API
+                  slug: guides/branching-neon-api
+            - title: Branching Authentication
+              slug: auth/branching-authentication
+            - section: Related workflows
+              items:
+                - title: Neon Twin
+                  slug: guides/neon-twin-intro
+                  items:
+                    - title: pg_dump / pg_restore — Full Twin
+                      slug: guides/neon-twin-full-pg-dump-restore
+                    - title: pg_dump / pg_restore — Partial Twin
+                      slug: guides/neon-twin-partial-pg-dump-restore
+                - title: Data anonymization
+                  slug: workflows/data-anonymization
+                  items:
+                    - title: API reference
+                      slug: workflows/data-anonymization-api
+                    - title: GitHub Actions
+                      slug: workflows/data-anonymization-github-actions
         - title: Postgres guides
           slug: postgresql/introduction
           icon: book
@@ -513,146 +514,151 @@
                   slug: guides/rls-drizzle
                 - title: Run RLS queries with Drizzle ORM
                   slug: guides/rls-query-execution
-        - title: Version support
-          slug: postgresql/postgres-version-policy
-          icon: version
-        - title: Upgrade
-          slug: postgresql/postgres-upgrade
-          icon: upgrade
-        - title: Connect to Neon
-          slug: connect/connect-intro
-          icon: connect
+            - title: Version support
+              slug: postgresql/postgres-version-policy
+              icon: version
+            - title: Upgrade
+              slug: postgresql/postgres-upgrade
+              icon: upgrade
+        - title: Extensions
+          slug: extensions/pg-extensions
+          icon: extension
           items:
-            - title: Connect to Neon
-              slug: connect/connect-intro
-            - title: Choosing your connection method
-              slug: connect/choose-connection
-            - title: Connect from any app
-              slug: connect/connect-from-any-app
-            - title: Neon serverless driver
-              slug: serverless/serverless-driver
-            - title: Neon SQL Editor
-              slug: get-started/query-with-neon-sql-editor
-            - title: Passwordless auth
-              slug: connect/passwordless-connect
-            - title: Securing connections
-              slug: connect/connect-securely
-            - title: Connection pooling
-              slug: connect/connection-pooling
-            - title: Latency benchmarks
-              slug: guides/benchmarking-latency
-        - title: Clients & tools
-          slug: connect/query-with-psql-editor
-          icon: settings
-          items:
-            - title: psql
-              slug: connect/query-with-psql-editor
-            - title: pgcli
-              slug: connect/connect-pgcli
-            - title: GUI applications
-              slug: connect/connect-postgres-gui
-            - title: Looker Studio
-              slug: connect/connect-looker-studio
-        - title: Troubleshooting
-          slug: connect/connection-errors
-          icon: support
-          items:
-            - title: Connection errors
-              slug: connect/connection-errors
-            - title: Latency and timeouts
-              slug: connect/connection-latency
-        - section: Compute & scaling
-          icon: features
-          items:
-            - title: Neon Postgres
-              slug: postgres/overview
-            - title: Autoscaling
-              slug: introduction/autoscaling
+            - title: Extension explorer
+              slug: extensions/extension-explorer
+            - title: anon
+              slug: extensions/postgresql-anonymizer
+            - title: btree_gin
+              slug: extensions/btree_gin
+            - title: btree_gist
+              slug: extensions/btree_gist
+            - title: citext
+              slug: extensions/citext
+            - title: cube
+              slug: extensions/cube
+            - title: dblink
+              slug: extensions/dblink
+            - title: dict_int
+              slug: extensions/dict_int
+            - title: earthdistance
+              slug: extensions/earthdistance
+            - title: fuzzystrmatch
+              slug: extensions/fuzzystrmatch
+            - title: hstore
+              slug: extensions/hstore
+            - title: intarray
+              slug: extensions/intarray
+            - title: lakebase_text
+              slug: extensions/lakebase-text
+            - title: lakebase_vector
+              slug: extensions/lakebase-vector
+            - title: ltree
+              slug: extensions/ltree
+            - title: neon
+              slug: extensions/neon
+            - title: neon_utils
+              slug: extensions/neon-utils
+            - title: online_advisor
+              slug: extensions/online_advisor
+            - title: pgcrypto
+              slug: extensions/pgcrypto
+            - title: pgvector
+              slug: extensions/pgvector
+            - title: pgrag
+              slug: extensions/pgrag
+            - title: pg_cron
+              slug: extensions/pg_cron
+            - title: pg_graphql
+              slug: extensions/pg_graphql
+            - title: pg_mooncake
+              slug: extensions/pg_mooncake
+            - title: pg_partman
+              slug: extensions/pg_partman
+            - title: pg_prewarm
+              slug: extensions/pg_prewarm
+            - title: pg_session_jwt
+              slug: extensions/pg_session_jwt
+            - title: pg_stat_statements
+              slug: extensions/pg_stat_statements
+            - title: pg_repack
+              slug: extensions/pg_repack
+            - title: pg_search
+              slug: extensions/pg_search
+            - title: pg_tiktoken
+              slug: extensions/pg_tiktoken
+            - title: pg_trgm
+              slug: extensions/pg_trgm
+            - title: pg_uuidv7
+              slug: extensions/pg_uuidv7
+            - title: pgrowlocks
+              slug: extensions/pgrowlocks
+            - title: pgstattuple
+              slug: extensions/pgstattuple
+            - title: plv8
+              slug: extensions/plv8
+            - title: postgis
+              slug: extensions/postgis
+            - title: postgis-related
+              slug: extensions/postgis-related-extensions
+            - title: postgres_fdw
+              slug: extensions/postgres_fdw
+            - title: tablefunc
+              slug: extensions/tablefunc
+            - title: timescaledb
+              slug: extensions/timescaledb
+            - title: unaccent
+              slug: extensions/unaccent
+            - title: uuid-ossp
+              slug: extensions/uuid-ossp
+            - title: wal2json
+              slug: extensions/wal2json
+            - title: xml2
+              slug: extensions/xml2
+            - section: AI & Search
               items:
-                - title: Autoscaling architecture
-                  slug: introduction/autoscaling-architecture
-                - title: Autoscaling algorithm
-                  slug: guides/autoscaling-algorithm
-                - title: Configure autoscaling
-                  slug: guides/autoscaling-guide
-            - title: Scale to zero
-              slug: introduction/scale-to-zero
-              items:
-                - title: Scale to zero guide
-                  slug: guides/scale-to-zero-guide
-            - title: Read replicas
-              slug: introduction/read-replicas
-              items:
-                - title: Create and manage
-                  slug: guides/read-replica-guide
-                - title: Use cases
+                - title: AI App Starter Kit
+                  icon: sparks
+                  slug: ai/ai-intro
                   items:
-                    - title: Read-only access
-                      slug: guides/read-only-access-read-replicas
-                    - title: Ad-hoc queries
-                      slug: guides/read-replica-adhoc-queries
-                    - title: Analytics queries
-                      slug: guides/read-replica-data-analysis
-                    - title: Scale applications
-                      slug: guides/read-replica-integrations
-                - title: With ORMs
+                    - section: Core concepts
+                      icon: info
+                      items:
+                        - title: Introduction
+                          slug: ai/ai-intro
+                        - title: Embeddings
+                          slug: ai/ai-concepts
+                        - title: Pgvector
+                          slug: extensions/pgvector
+                    - section: AI frameworks
+                      icon: frameworks
+                      items:
+                        - title: LangChain
+                          slug: ai/langchain
+                        - title: LlamaIndex
+                          slug: ai/llamaindex
+                        - title: Semantic Kernel
+                          slug: ai/semantic-kernel
+                        - title: Inngest
+                          slug: ai/inngest
+                    - section: Optimize & scale
+                      icon: features
+                      items:
+                        - title: Optimize vector search
+                          slug: ai/ai-vector-search-optimization
+                        - title: Scale with Neon
+                          slug: ai/ai-scale-with-neon
+                    - title: Google Colab
+                      slug: ai/ai-google-colab
+                - title: Lakebase Search
+                  icon: sparks
+                  slug: ai/lakebase-search
                   items:
-                    - title: Prisma
-                      slug: guides/read-replica-prisma
-            - title: Logical replication
-              slug: guides/logical-replication-guide
-              items:
-                - title: Concepts
-                  slug: guides/logical-replication-concepts
-                - title: In Neon
-                  slug: guides/logical-replication-neon
-                - title: Commands
-                  slug: guides/logical-replication-manage
-                - title: Schema changes
-                  slug: guides/logical-replication-schema-changes
-                - title: Tips
-                  slug: guides/logical-replication-tips
-        - section: Branching
-          icon: branching
-          items:
-            - title: Get started with branching
-              slug: guides/branching-intro
-            - title: About branching
-              slug: introduction/branching
-            - title: Branching workflow primer
-              slug: get-started/workflow-primer
-            - title: Branching workflows
-              slug: guides/branching-test-queries
-            - title: Branch archiving
-              slug: guides/branch-archiving
-            - title: Branch expiration
-              slug: guides/branch-expiration
-            - title: Schema-only branches
-              slug: guides/branching-schema-only
-            - title: Reset from parent
-              slug: guides/reset-from-parent
-            - title: Branching with the CLI
-              slug: guides/branching-neon-cli
-            - title: Branching with the API
-              slug: guides/branching-neon-api
-            - title: Branching Authentication
-              slug: auth/branching-authentication
-            - section: Related workflows
-              items:
-                - title: Neon Twin
-                  slug: guides/neon-twin-intro
-                  items:
-                    - title: pg_dump / pg_restore — Full Twin
-                      slug: guides/neon-twin-full-pg-dump-restore
-                    - title: pg_dump / pg_restore — Partial Twin
-                      slug: guides/neon-twin-partial-pg-dump-restore
-                - title: Data anonymization
-                  slug: workflows/data-anonymization
-                  items:
-                    - title: API reference
-                      slug: workflows/data-anonymization-api
-                    - title: GitHub Actions
-                      slug: workflows/data-anonymization-github-actions
+                    - title: Overview
+                      slug: ai/lakebase-search
+                    - title: Get started
+                      slug: ai/lakebase-search-get-started
+                    - title: Migrate from pg_search
+                      slug: extensions/migrate-pg-search-to-lakebase-text
     - title: Neon Auth
       icon: auth
       slug: auth/overview
@@ -1547,5 +1553,5 @@
 
 - nav: Tutorials
   slug: https://neon.com/postgresql/tutorial
-  title: Tutorials
+  title: Learn PostgreSQL
   icon: tutorial

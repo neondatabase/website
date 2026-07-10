@@ -1,6 +1,6 @@
 ---
 title: neon.ts
-subtitle: Infrastructure-as-code config for your Neon project.
+subtitle: Configuration as code for your Neon project.
 summary: >-
   neon.ts declares which Neon services exist on a project and how each branch is
   configured. Use it for branch policy alone, or add preview services like
@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-06-22T21:05:22.619Z'
+updatedOn: '2026-07-10T13:40:50.458Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -220,11 +220,11 @@ The key list autocompletes from your config, so selecting a variable from a serv
 
 ## CLI commands
 
-| Command                                     | What it does                                                                                              |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Command                                  | What it does                                                                                              |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | [`neon link`](/docs/cli/link)            | Connect the current directory to a Neon project. Required to use linked branch defaults in other commands |
-| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                   |
-| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                              |
+| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                      |
+| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                                 |
 | [`neon config status`](/docs/cli/config) | Show the current live state of the branch as a `neon.ts`-shaped config                                    |
 | [`neon env pull`](/docs/cli/env)         | Write the branch's Neon-managed variables to `.env.local` (or `.env` if it already exists)                |
 | [`neon checkout`](/docs/cli/checkout)    | Switch to or create a branch; new branches are created from the `neon.ts` policy (TTL, compute, services) |
