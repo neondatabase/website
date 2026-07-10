@@ -858,52 +858,6 @@
   title: Platform
   icon: architecture
   subnav:
-    - title: Resilience & architecture
-      slug: introduction/architecture-overview
-      icon: architecture
-      items:
-        - section: Architecture
-          icon: architecture
-          items:
-            - title: Architecture overview
-              slug: introduction/architecture-overview
-            - title: Compute lifecycle
-              slug: introduction/compute-lifecycle
-            - title: Serverless
-              slug: introduction/serverless
-        - section: Data protection
-          icon: security
-          items:
-            - title: IP Allow
-              slug: introduction/ip-allow
-            - title: Private Networking
-              slug: guides/neon-private-networking
-            - title: Protected branches
-              slug: guides/protected-branches
-        - section: High availability
-          icon: status
-          items:
-            - title: High availability
-              slug: introduction/high-availability
-        - section: Data recovery
-          icon: report
-          items:
-            - title: Backup & restore
-              slug: guides/backup-restore
-            - title: History window
-              slug: introduction/history-window
-            - title: Instant restore
-              slug: introduction/branch-restore
-            - title: Time Travel
-              slug: guides/time-travel-assist
-              items:
-                - title: Time Travel tutorial
-                  slug: guides/time-travel-tutorial
-            - title: Schema diff
-              slug: guides/schema-diff
-              items:
-                - title: Schema diff tutorial
-                  slug: guides/schema-diff-tutorial
     - title: Manage & operate
       slug: manage/platform
       icon: settings
@@ -1026,6 +980,52 @@
                   slug: manage/updates
             - title: Regions
               slug: introduction/regions
+    - title: Resilience & architecture
+      slug: introduction/architecture-overview
+      icon: architecture
+      items:
+        - section: Architecture
+          icon: architecture
+          items:
+            - title: Architecture overview
+              slug: introduction/architecture-overview
+            - title: Compute lifecycle
+              slug: introduction/compute-lifecycle
+            - title: Serverless
+              slug: introduction/serverless
+        - section: Data protection
+          icon: security
+          items:
+            - title: IP Allow
+              slug: introduction/ip-allow
+            - title: Private Networking
+              slug: guides/neon-private-networking
+            - title: Protected branches
+              slug: guides/protected-branches
+        - section: High availability
+          icon: status
+          items:
+            - title: High availability
+              slug: introduction/high-availability
+        - section: Data recovery
+          icon: report
+          items:
+            - title: Backup & restore
+              slug: guides/backup-restore
+            - title: History window
+              slug: introduction/history-window
+            - title: Instant restore
+              slug: introduction/branch-restore
+            - title: Time Travel
+              slug: guides/time-travel-assist
+              items:
+                - title: Time Travel tutorial
+                  slug: guides/time-travel-tutorial
+            - title: Schema diff
+              slug: guides/schema-diff
+              items:
+                - title: Schema diff tutorial
+                  slug: guides/schema-diff-tutorial
     - title: Security & compliance
       icon: security
       slug: security/security-overview
