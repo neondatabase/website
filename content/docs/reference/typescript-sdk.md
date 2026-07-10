@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-07-09T23:12:37.869Z'
+updatedOn: '2026-07-10T10:36:04.593Z'
 ---
 
 <InfoBlock>
@@ -22,6 +22,7 @@ updatedOn: '2026-07-09T23:12:37.869Z'
 
 <DocsList title="Related resources" theme="docs">
 <a href="/docs/reference/api">Neon API reference</a>
+<a href="/docs/reference/migrate-api-client-to-sdk">Migrate from @neondatabase/api-client</a>
 <a href="/docs/cli">Neon CLI</a>
 </DocsList>
 
@@ -33,7 +34,11 @@ updatedOn: '2026-07-09T23:12:37.869Z'
 
 `@neon/sdk` wraps the entire Neon API in one typed, fetch-based client. You authenticate once, then reach every resource through a namespace on `neon.*`: projects, branches, the Postgres data plane, object storage, functions, and Neon Auth. Retries, readiness polling, auto-pagination, and typed errors are built in.
 
-It replaces [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client), the deprecated Axios-based SDK. New projects should use `@neon/sdk`.
+It replaces [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client), the deprecated Axios-based SDK. New projects should use `@neon/sdk`. See the [migration guide](/docs/reference/migrate-api-client-to-sdk) for method mapping and error-handling changes.
+
+<Admonition type="note" title="Not every endpoint has an ergonomic wrapper">
+`createNeonClient` namespaces cover common workflows (projects, branches, Postgres resources, snapshots, and more). They do **not** wrap every Platform API operation. For endpoints without a namespace method, use the [`raw` layer](#raw-layer) below or the [Neon API reference](/docs/reference/api).
+</Admonition>
 
 ```bash
 npm install @neon/sdk
