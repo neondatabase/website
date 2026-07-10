@@ -9,7 +9,7 @@ summary: >-
   for ergonomic namespaces and typed { data, error } results, or raw for every
   OpenAPI endpoint. Requires Node.js 20.19+ and a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-07-09T23:24:30.287Z'
+updatedOn: '2026-07-10T09:32:29.657Z'
 ---
 
 <InfoBlock>
@@ -164,10 +164,10 @@ async function listNeonProjects() {
   const { data: orgs, error: orgsError } = await neon.user.organizations();
   if (orgsError) throw orgsError;
 
-  const { data: page, error } = await neon.projects.list({ org_id: orgs[0].id });
+  const { data: page, error } = await neon.projects.list({ org_id: orgs[0].id }).page();
   if (error) throw error;
 
-  console.log(page.projects);
+  console.log(page.items);
 }
 
 listNeonProjects();
@@ -198,12 +198,12 @@ To set [branch expiration](/docs/guides/branch-expiration), pass `expires_at` in
 ### List branches
 
 ```typescript
-const { data: page, error } = await neon.branches.list(projectId);
+const { data: page, error } = await neon.branches.list(projectId).page();
 if (error) throw error;
-console.log(page.branches);
+console.log(page.items);
 ```
 
-For all pages: `const { data: branches } = await neon.branches.list(projectId).all();`
+For all pages: `const { data: branches, error } = await neon.branches.list(projectId).all();`
 
 ### Create a database
 
@@ -295,11 +295,11 @@ import type { Project, Branch, Endpoint } from '@neon/sdk';
 
 ## Pagination
 
-Cursor-paginated `list()` methods return a lazy `Paginated<T>`:
+Cursor-paginated `list()` methods return a lazy `Paginated<T>`. Call `.page()` or `.all()` for results; both always return the `{ data, error }` envelope, even when the client uses `throwOnError: true`.
 
 ```typescript
 const { data: allProjects, error } = await neon.projects.list().all();
-const { data: onePage } = await neon.projects.list().page();
+const { data: onePage, error: pageError } = await neon.projects.list().page();
 
 for await (const project of neon.projects.list()) {
   console.log(project.name);

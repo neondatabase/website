@@ -7,7 +7,7 @@ summary: >-
   layer 1.0 breaking changes. Use this page when updating scripts, CI jobs, or
   apps that call the Neon Platform API with TypeScript.
 enableTableOfContents: true
-updatedOn: '2026-07-09T23:24:30.287Z'
+updatedOn: '2026-07-10T09:32:29.657Z'
 ---
 
 <Admonition type="note" title="@neondatabase/api-client still works">
@@ -75,11 +75,11 @@ Common Platform API calls and their `@neon/sdk` equivalents:
 | -------------------------------------- | -------------------------------------------------------------------------------- |
 | `getCurrentUserOrganizations()`        | `neon.user.organizations()`                                                      |
 | `getCurrentUserInfo()`                 | `neon.user.me()`                                                                 |
-| `listProjects({ org_id })`             | `neon.projects.list({ org_id })`                                                 |
+| `listProjects({ org_id })`             | `neon.projects.list({ org_id }).page()` or `.all()`                              |
 | `createProject({ project })`           | `neon.projects.create({ name, region_id, … })`                                   |
 | `getProject(projectId)`                | `neon.projects.get(projectId)`                                                   |
 | `deleteProject(projectId)`             | `neon.projects.delete(projectId)`                                                |
-| `listProjectBranches({ projectId })`   | `neon.branches.list(projectId)`                                                  |
+| `listProjectBranches({ projectId })`   | `neon.branches.list(projectId).page()` or `.all()`                               |
 | `createProjectBranch(projectId, body)` | `neon.branches.create(projectId, input)` or `neon.branches.createWithCompute(…)` |
 | `getConnectionUri(projectId, query)`   | `neon.postgres.connectionString({ projectId, … })`                               |
 | `listProjectBranchDatabases(…)`        | `neon.postgres.databases.list(…)`                                                |
@@ -140,9 +140,9 @@ console.log(response.data.projects);
 const { data: orgs, error: orgsError } = await neon.user.organizations();
 if (orgsError) throw orgsError;
 
-const { data: page, error } = await neon.projects.list({ org_id: orgs[0].id });
+const { data: page, error } = await neon.projects.list({ org_id: orgs[0].id }).page();
 if (error) throw error;
-console.log(page.projects);
+console.log(page.items);
 ```
 
 ### Create a project with a connection string

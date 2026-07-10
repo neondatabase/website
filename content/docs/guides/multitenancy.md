@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user
-updatedOn: '2026-07-09T23:30:29.056Z'
+updatedOn: '2026-07-10T09:32:29.657Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -324,7 +324,8 @@ let secrets = [];
 
   try {
     // Get all projects
-    const { projects } = await neon.projects.list().all();
+    const { data: projects, error: listError } = await neon.projects.list().all();
+    if (listError) throw listError;
 
     // Loop through each project
     for (const project of projects) {
