@@ -1,10 +1,10 @@
 ---
 title: "Better Drizzle: Type-safe repositories, pagination, nested filters, plugins, and hooks for Drizzle ORM"
-subtitle: Add type-safe repositories, pagination, nested relation filters, plugins, and hooks to your Drizzle ORM codebase with better-drizzle.
+subtitle: Learn how to use better-drizzle with Neon Postgres for type-safe repositories, pagination, nested relation filters, plugins, and hooks on top of Drizzle ORM.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-09T00:00:00.000Z'
-updatedOn: '2026-07-10T13:29:45.724Z'
+updatedOn: '2026-07-10T13:59:58.982Z'
 ---
 
 [better-drizzle](https://better-drizzle.com) is a thin wrapper around [Drizzle ORM](https://orm.drizzle.team) that gives every table a consistent, type-safe API without replacing Drizzle itself. If you are already using Drizzle with Neon, better-drizzle removes the repetitive query glue you would otherwise rewrite in every service while staying close to the metal.
@@ -29,10 +29,22 @@ All of this compiles down to Drizzle queries. You still define your schema in Dr
 
 ## Prerequisites
 
-- A [Neon account](https://console.neon.tech/signup) and a project.
+- A [Neon account](https://console.neon.tech/signup)
 - [Node.js](https://nodejs.org/) installed on your machine
 
-## Create a new project
+## Create a Neon project
+
+If you don't have one already, create a Neon project:
+
+1. Navigate to the [Neon Console](https://console.neon.tech/app/projects)
+2. Click **New Project**
+3. Specify your project settings and click **Create Project**
+
+Save your connection details. You'll need the connection string when configuring your application.
+
+![Neon connection string](/docs/connect/connection_details.png)
+
+## Set up your project
 
 Create a new directory for your project and initialize it with npm:
 
@@ -130,8 +142,6 @@ Create a `.env` file in your project root and add your Neon Postgres connection 
 ```bash
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
-
-![Neon connection string](/docs/connect/connection_details.png)
 
 ## Create the Better Drizzle client
 
@@ -738,9 +748,11 @@ await client.transaction(async (tx) => {
 });
 ```
 
-## Conclusion
+## Summary
 
 better-drizzle removes the repetitive query patterns that accumulate across a Drizzle codebase without abstracting away the SQL-level control you chose Drizzle for. You get type-safe repositories, built-in pagination, nested relation filters, plugins for timestamps and soft deletes, lifecycle hooks, and full transaction support, all on top of your existing Drizzle schema.
+
+Pick up better-drizzle for the data access ergonomics, and lean on Neon for the database infrastructure that scales with you.
 
 ## Resources
 
