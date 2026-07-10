@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-08T18:21:32.749Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 
@@ -541,6 +541,11 @@ go run transaction_example.go
 ```
 
 </Steps>
+
+## Connection issues
+
+- If you see an `endpoint ID is not specified` error, the TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. This is uncommon with `pgx/v5`, which uses Go's standard `crypto/tls` package and supports SNI by default, but can occur with an older driver or an outdated TLS implementation.
+- If you encounter an `SSL SYSCALL error: EOF detected` (or a similar connection-reset error), this typically happens when an application tries to reuse a connection after the Neon compute has been suspended due to inactivity. The examples in this guide open a fresh connection with `pgx.Connect` each time they run, so this mainly affects long-running servers that keep a connection or pool open across requests. For production use, consider [pgxpool](https://pkg.go.dev/github.com/jackc/pgx/v5/pgxpool) with health checks, or reconnecting on error.
 
 <details>
 <summary>**Notes for AI-assisted setup**</summary>

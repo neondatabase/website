@@ -14,7 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-08T18:21:32.749Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
@@ -44,9 +44,9 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 1. Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/docs/app/getting-started/installation), in the Vercel documentation.
 
-2. Add project dependencies using one of the following commands:
+2. Add project dependencies using one of the following commands. If you're not sure which to use, use `@neondatabase/serverless`: it connects over HTTP instead of TCP, which works in Next.js Edge Functions and other environments without TCP support, and needs no extra SSL configuration.
 
-   <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+   <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver (Recommended)"]}>
 
    ```shell
    npm install pg
@@ -64,7 +64,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find your Neon database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env.local` file to your project directory and add your Neon connection string to it. You can find your Neon database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
@@ -85,7 +85,7 @@ There are two methods for fetching and mutating data using server-side requests 
 
 In your server components using the App Router, add the following code snippet to connect to your Neon database:
 
-<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver (Recommended)"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -159,7 +159,7 @@ For other scenarios like periodic updates, see [Time-based Revalidation](https:/
 
 In your server actions using the App Router, add the following code snippet to connect to your Neon database:
 
-<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver (Recommended)"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -239,7 +239,7 @@ There are two methods for fetching data using server-side requests in Next.js Pa
 
 From `getServerSideProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
-<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver (Recommended)"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -298,7 +298,7 @@ export default function Page({ data }) {
 
 From `getStaticProps` using the Pages Router, add the following code snippet to connect to your Neon database:
 
-<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver (Recommended)"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -357,7 +357,7 @@ export default function Page({ data }) {
 
 From your Serverless Functions, add the following code snippet to connect to your Neon database:
 
-<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver (Recommended)"]}>
 
 ```javascript
 import { Pool } from 'pg';
@@ -434,6 +434,11 @@ PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+
 ```
 
 </Steps>
+
+## Connection issues
+
+- If you see an `endpoint ID is not specified` error, the TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. For `pg` (node-postgres), this means an outdated `libpq`-compatible TLS stack; upgrading `pg` usually resolves it.
+- If you encounter an `SSL SYSCALL error: EOF detected` (or a similar connection-reset error), this typically happens when an application tries to reuse a connection after the Neon compute has been suspended due to inactivity. This mainly affects the `pg` and `postgres.js` examples above when used outside a serverless request lifecycle, since they can hold a connection open; reconnecting on error resolves it. `@neondatabase/serverless` isn't affected, since it opens a new HTTP connection per query.
 
 ### Where to upload and serve files?
 
