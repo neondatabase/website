@@ -6,7 +6,7 @@ page_description: >-
   allows you to generate timestamp-ordered UUIDs that improve B-tree index
   performance while maintaining global uniqueness.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Asynchronous I/O
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-UUIDv7 is a standard PostgreSQL 18 feature, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking to adopt Postgres at scale in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure managed Postgres, fully integrated into the Lakehouse so your operational data and analytics live together. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the best Postgres platform for you, with instant provisioning, branching, and autoscaling built in.
+UUIDv7 is a standard PostgreSQL 18 feature, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking to adopt Postgres at scale in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure managed Postgres, fully integrated into the Lakehouse so your operational data and analytics live together. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: In this tutorial, you will learn how to use PostgreSQL 18's new UUIDv7 support to generate timestamp-ordered UUIDs that improve B-tree index performance while maintaining global uniqueness.

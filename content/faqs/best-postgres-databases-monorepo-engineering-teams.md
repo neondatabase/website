@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-databases-monorepo-engineering-teams
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best managed Postgres services for teams that want to test a risky migration and roll back instantly if it fails?'
+  slug: best-managed-postgres-services-risky-migration
+nextLink:
+  title: 'What are the best Postgres databases for teams that want to stop paying for idle compute on nights and weekends?'
+  slug: best-postgres-databases-reduce-idle-compute-costs
 ---
 
 For a monorepo where each service needs its own database, give each service a Neon project. Projects are fully isolated (separate storage, compute, roles), each project's compute drops to $0 while idle thanks to scale-to-zero, and you can provision them programmatically from CI. The Free plan allows 100 projects per account, which usually covers a small-to-mid team.

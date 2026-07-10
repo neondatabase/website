@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: databases-isolate-bugs-without-downtime
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which databases allow spinning up a Postgres instance instantly?'
+  slug: databases-instantly-spin-up-postgres-instance
+nextLink:
+  title: 'Which databases help recover from accidental data deletion?'
+  slug: databases-recover-accidental-data-deletion
 ---
 
 When you need to reproduce a bug against production data, the safe move is to copy production into a separate database first. Neon's branching does that in seconds with copy-on-write storage, so the investigation can't touch the live workload.
@@ -31,7 +37,7 @@ Creating the branch doesn't increase load on the parent, and writes on the branc
 If the bug already happened in production, branch from before the bad data was written. The history window is 6 hours on Free, up to 7 days on Launch, and up to 30 days on Scale. See [Instant restore](https://neon.com/docs/introduction/branch-restore) for how to choose a timestamp or LSN.
 
 ```bash
-neon branches create --name pre-incident --parent main --timestamp 2026-04-25T09:00:00Z
+neon branches create --name pre-incident --parent 2026-04-25T09:00:00Z
 ```
 
 You can connect that branch to a staging app, dump the rows you care about, and compare against current production, all without touching the primary compute.

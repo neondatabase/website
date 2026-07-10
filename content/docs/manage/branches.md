@@ -1,14 +1,17 @@
 ---
 title: Manage branches
 summary: >-
-  Covers the management of branches within Neon projects, including creation,
-  naming requirements, and the implications of branch usage on storage and data
-  modification.
+  Neon branches are copy-on-write clones of a parent branch that isolate schema
+  and data changes without affecting the parent. Each project starts with a root
+  branch; you can create child branches from it or any existing branch. Use this
+  page to create, rename, protect, restore, or delete branches via the Console,
+  CLI, or API. Unused branches accumulate storage costs as they age past the
+  history window.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -16,7 +19,7 @@ Data resides in a branch. Each Neon project is created with a [root branch](#roo
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
 
-You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can create and manage branches using the Neon Console, [Neon CLI](/docs/cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [history window](/docs/introduction/history-window).
@@ -289,7 +292,7 @@ A branch with an expiration timestamp is automatically deleted when the expirati
 
 ## Branching with the Neon CLI
 
-The Neon CLI supports creating and managing branches. For instructions, see [Neon CLI commands — branches](/docs/reference/cli-branches). For a Neon CLI branching guide, see [Branching with the Neon CLI](/docs/reference/cli-branches).
+The Neon CLI supports creating and managing branches. For instructions, see [Neon CLI commands — branches](/docs/cli/branches). For a Neon CLI branching guide, see [Branching with the Neon CLI](/docs/cli/branches).
 
 ## Branching with the Neon API
 

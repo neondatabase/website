@@ -7,7 +7,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/products_product_groups_tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DENSE_RANK Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The FIRST_VALUE() window function works the same on any PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere it runs. For enterprises building on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the best Postgres platform to build on.
+The FIRST_VALUE() window function works the same on any PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere it runs. For enterprises building on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FIRST_VALUE()` function to return the first value in a sorted partition of a result set.
@@ -55,7 +55,7 @@ The `expression` can be an expression, column, or subquery evaluated against the
 
 The `PARTITION BY` clause divides rows in a result set into partitions to which the `FIRST_VALUE()` function is applied.
 
-When you the `PARTITION BY` clause, the `FIRST_VALUE()` function treats the whole result set as a single partition.
+When you omit the `PARTITION BY` clause, the `FIRST_VALUE()` function treats the whole result set as a single partition.
 
 ### ORDER BY clause
 

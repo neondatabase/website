@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-seed-test-environment-production-data
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres providers allow testing schema changes without affecting production data?'
+  slug: postgres-providers-test-schema-changes
+nextLink:
+  title: 'What Postgres works best for serverless functions without connection issues?'
+  slug: postgres-serverless-functions-connection-issues
 ---
 
 Neon's branching is the answer. A branch is a copy-on-write clone of your database. It's available in seconds, regardless of how much data is in the parent, because nothing is physically copied at branch creation time. Storage only diverges as the branch and parent change.
@@ -29,7 +35,7 @@ Through the CLI:
 
 ```bash
 neon branches create --name test --parent main
-neon connection-string --branch test
+neon connection-string test
 ```
 
 Through the API or a [GitHub Action](https://neon.com/docs/guides/branching-github-actions), the equivalent call is one HTTP request. Branch creation imposes no load on the parent. See the [branching foundational concepts](https://neon.com/branching/foundational-concepts) for the storage model.

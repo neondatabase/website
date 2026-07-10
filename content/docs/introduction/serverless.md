@@ -3,14 +3,17 @@ title: Serverless
 subtitle: Postgres with instant provisioning, no server management, and pay-per-usage
   billing
 summary: >-
-  Covers the setup of serverless Postgres on Neon, detailing features like
-  instant provisioning, automatic scaling, and usage-based billing, enabling
-  efficient management of multiple databases without server maintenance.
+  Neon serverless Postgres decouples storage and compute so databases provision
+  in seconds, autoscale under load, and drop to zero when idle. No manual server
+  sizing is required. Use this page to understand Neon's serverless model:
+  elastic autoscaling, usage-based billing, and full PostgreSQL compatibility.
+  Billing is compute- and storage-based; autoscaling enforces a user-set maximum
+  to prevent unexpected costs.
 enableTableOfContents: true
-updatedOn: '2026-04-18T11:47:20.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
-Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.
+Neon takes the world's most loved database, Postgres, and makes it serverless. As part of the Neon backend, Neon Postgres helps teams ship reliable and scalable applications faster.
 
 Enabling serverless Postgres begins with Neon's [lakebase architecture](/docs/introduction/architecture-overview), which natively decouples storage and compute. By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
 

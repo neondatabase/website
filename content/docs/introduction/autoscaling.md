@@ -2,11 +2,14 @@
 title: Autoscaling
 subtitle: An introduction to Neon's autoscaling
 summary: >-
-  Covers the setup of Neon's autoscaling feature, which automatically adjusts
-  compute resources based on demand, optimizing performance and cost without
-  manual intervention.
+  Neon Autoscaling dynamically scales compute resources (measured in CUs) up
+  and down in response to live database load, with no restarts or manual
+  intervention required. Configure autoscaling by setting a min/max CU range on
+  any primary compute or read replica; the maximum permitted autoscaling range
+  is 8 CU. Use this page to understand how autoscaling works and to find the
+  configuration steps before reading the full enablement guide.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.084Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention or restarts.

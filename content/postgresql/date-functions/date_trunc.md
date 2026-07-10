@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_trunc/
 ogImage: /postgresqltutorial/rental-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL AT TIME ZONE Operator
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DATE_TRUNC() function works the same way on any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The DATE_TRUNC() function works the same way on any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: This tutorial shows you how to use the PostgreSQL `DATE_TRUNC()` function to truncate a timestamp or interval to a specified precision.
@@ -41,7 +41,7 @@ In this syntax:
 
 ### field
 
-`field` specifies the to which precision to truncate the `source`.
+`field` specifies the precision to which to truncate the `source`.
 
 Here are the valid values for the `field`:
 
@@ -61,7 +61,7 @@ Here are the valid values for the `field`:
 
 ### time_zone
 
-`time_zone` specifies the time zone in which the function will perform the truncation. The `time_zone` argument is the default.
+`time_zone` specifies the time zone in which the function will perform the truncation. The `time_zone` argument is optional.
 
 If you omit the `time_zone`, the function will truncate the `source` based on the current time zone setting.
 

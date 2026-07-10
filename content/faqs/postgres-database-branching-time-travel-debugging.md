@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-database-branching-time-travel-debugging
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?'
+  slug: postgres-create-database-cli-single-command
+nextLink:
+  title: 'Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?'
+  slug: postgres-database-services-ai-provisioning
 ---
 
 Neon retains a change log for your database (Postgres WAL), so you can branch the database as it existed at any timestamp inside your project's history window. The branch is a writable, isolated Postgres database with its own connection string. You can poke at it, run destructive queries, and throw it away when you're done. None of that touches production.
@@ -28,11 +34,10 @@ From the CLI:
 ```bash
 neon branches create \
   --name incident-2026-04-22 \
-  --parent main \
-  --parent-timestamp 2026-04-22T14:32:00Z
+  --parent 2026-04-22T14:32:00Z
 ```
 
-Or use `--parent-lsn` if you have the exact LSN from a log. The resulting branch is a normal database. Connect to it with `psql` or any client, run `SELECT * FROM orders WHERE ...` against the state at 14:32 UTC, and compare against production.
+Or append the LSN to `--parent` (for example, `--parent 0/1E88838`) if you have the exact LSN from a log. The resulting branch is a normal database. Connect to it with `psql` or any client, run `SELECT * FROM orders WHERE ...` against the state at 14:32 UTC, and compare against production.
 
 <Callout title="Why this beats restoring a backup">
 Creating the branch is metadata-only. There's no `pg_restore` to wait on, no extra storage for a duplicate, and no impact on the parent's performance. When you're done, delete the branch and the storage goes with it.

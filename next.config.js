@@ -30,6 +30,18 @@ const defaultConfig = {
     ],
   },
   async headers() {
+    // Serve top-level index URLs (e.g. /faqs.md, /programs.md, /docs.md) as inline markdown.
+    // Only non-nested routes have an index file; /docs.md is aliased to /docs/llms.txt via rewrite.
+    const mdIndexHeaders = Object.keys(CONTENT_ROUTES)
+      .filter((route) => !route.includes('/'))
+      .map((route) => ({
+        source: `/${route}.md`,
+        headers: [
+          { key: 'Content-Disposition', value: 'inline' },
+          { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+        ],
+      }));
+
     return [
       {
         source: '/',
@@ -45,6 +57,7 @@ const defaultConfig = {
               '</docs/llms.txt>; rel="llms-txt"',
               '</.well-known/agent-skills/index.json>; rel="profile"',
               '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+              '</.well-known/ai-catalog.json>; rel="ai-catalog"',
             ].join(', '),
           },
         ],
@@ -63,6 +76,7 @@ const defaultConfig = {
               '</docs/llms.txt>; rel="llms-txt"',
               '</.well-known/agent-skills/index.json>; rel="profile"',
               '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+              '</.well-known/ai-catalog.json>; rel="ai-catalog"',
             ].join(', '),
           },
         ],
@@ -136,7 +150,9 @@ const defaultConfig = {
         ],
       },
       {
-        source: '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*.md',
+        source: `/(${Object.keys(CONTENT_ROUTES)
+          .filter((r) => !r.includes('/'))
+          .join('|')})/:path*.md`,
         headers: [
           {
             key: 'Content-Disposition',
@@ -148,6 +164,7 @@ const defaultConfig = {
           },
         ],
       },
+      ...mdIndexHeaders,
     ];
   },
   async redirects() {
@@ -184,6 +201,21 @@ const defaultConfig = {
 
     return [
       {
+        source: '/guides/neondatabase-toolkit',
+        destination: '/docs/reference/sdk',
+        permanent: true,
+      },
+      {
+        source: '/backend',
+        destination: '/docs/introduction#products',
+        permanent: false,
+      },
+      {
+        source: '/cookie-policy',
+        destination: 'https://www.databricks.com/legal/cookienotice',
+        permanent: true,
+      },
+      {
         source: '/docs/use-cases/:path*',
         destination: '/use-cases',
         permanent: true,
@@ -201,6 +233,62 @@ const defaultConfig = {
       {
         source: '/burningmonk',
         destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      // Branching page redirects — old slugs deleted in PR #4374 (Jan 2026)
+      {
+        source: '/branching/identifying-use-case',
+        destination: '/branching/introduction',
+        permanent: true,
+      },
+      {
+        source: '/branching/production-on-neon',
+        destination: '/branching/production-staging-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-developer',
+        destination: '/branching/branching-workflows-for-development',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-preview',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-test-run',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branches',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/hierarchies',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/projects',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/ephemeral-environments',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/neon-for-dev-test',
+        destination: '/branching/branching-workflows-for-development',
+        permanent: true,
+      },
+      {
+        source: '/branching/resources-and-next-steps',
+        destination: '/branching/introduction',
         permanent: true,
       },
       {
@@ -2053,11 +2141,10 @@ const defaultConfig = {
         destination: '/docs/connect/connection-errors',
         permanent: true,
       },
-      {
-        source: '/docs',
-        destination: '/docs/introduction',
-        permanent: true,
-      },
+      // NOTE: bare `/docs` is intentionally NOT redirected here. The middleware
+      // (src/proxy.js) owns it: agents / Accept: markdown get /docs/llms.txt, and
+      // browsers are redirected to /docs/introduction. A next.config redirect would
+      // run before middleware and intercept the markdown case.
       {
         source: '/docs/postgres',
         destination: '/docs/postgres/index',
@@ -2066,6 +2153,11 @@ const defaultConfig = {
       {
         source: '/early-access',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/docs/introduction/early-access',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
@@ -2176,7 +2268,7 @@ const defaultConfig = {
       },
       {
         source: '/early-access-program',
-        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
@@ -2472,8 +2564,10 @@ const defaultConfig = {
 
     // /:path*.md above requires at least one segment after the route name,
     // so /branching.md (no separator) doesn't match. Add explicit index rewrites.
+    // /docs.md is excluded here: it's aliased to the canonical /docs/llms.txt index
+    // below rather than a generated page-listing (see process-md-for-llms.js).
     const indexRewrites = Object.keys(CONTENT_ROUTES)
-      .filter((route) => !route.includes('/'))
+      .filter((route) => !route.includes('/') && route !== 'docs')
       .map((route) => ({
         source: `/${route}.md`,
         destination: `/md/${route}.md`,
@@ -2484,6 +2578,7 @@ const defaultConfig = {
       // docs/[...slug] catch-all intercepts them
       beforeFiles: [
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
+        { source: '/docs/:path*/llms-full.txt', destination: '/docs/:path*/llms-full.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
         // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
         // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.
@@ -2498,6 +2593,13 @@ const defaultConfig = {
           source: '/docs/.well-known/skills/:name/SKILL.md',
           destination: '/docs/ai/skills/:name/SKILL.md',
         },
+        // /docs.md serves the canonical, curated docs index (llms.txt) instead of a
+        // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
+        { source: '/docs.md', destination: '/docs/llms.txt' },
+        { source: '/blog.md', destination: '/blog/llms.txt' },
+        // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
+        // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
+        ...indexRewrites,
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
@@ -2518,7 +2620,6 @@ const defaultConfig = {
         },
         { source: '/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
-        ...indexRewrites,
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services

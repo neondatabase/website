@@ -3,13 +3,17 @@ title: Database branching workflow primer
 subtitle: An introduction to integrating Postgres branching into your development
   workflow
 summary: >-
-  Covers the setup of Neon's database branching feature, enabling developers to
-  create isolated data branches quickly for integration into their workflows
-  using the Neon CLI or GitHub actions.
+  Neon database branching creates isolated Postgres branches in ~1 second, each
+  with its own connection string and a full copy of the parent's schema and
+  data. Use this page when setting up per-developer, per-PR preview, or CI/CD
+  test database environments via the Neon CLI or GitHub Actions. Available
+  GitHub Actions include create-branch, delete-branch, reset-branch, and
+  schema-diff; schema-only branching and automatic branch expiration are also
+  covered.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/workflow-primer
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
@@ -40,7 +44,7 @@ You can use either the Neon CLI or GitHub actions to incorporate branching into 
 
 ### Neon CLI
 
-Using the [Neon CLI](/docs/reference/neon-cli), you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
+Using the [Neon CLI](/docs/cli), you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
 
 And here are the key CLI actions you can use:
 
@@ -61,7 +65,7 @@ For more information, see:
 
 <a href="/docs/guides/branching-neon-cli" description="Learn about branching with the Neon CLI" icon="github">Branching with the Neon CLI</a>
 
-<a href="/docs/reference/neon-cli" description="Reference for all commands in the Neon CLI" icon="github">Neon CLI Reference</a>
+<a href="/docs/cli" description="Reference for all commands in the Neon CLI" icon="github">Neon CLI Reference</a>
 
 </DetailIconCards>
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/load-postgresql-sample-database/
 ogImage: /postgresqltutorial/PostgreSQL-create-database-pgadmin4.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: Connect to a PostgreSQL Database Server
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Loading the dvdrental sample database with psql and pg_restore works the same way on any PostgreSQL server, so you can follow along wherever you run Postgres. If you're an enterprise team standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to keep analytics and operational data in sync. If you're a developer or startup who wants to spin up a database in seconds and scale without babysitting infrastructure, [Neon](https://neon.com) is the fastest way to ship on Postgres.
+Loading the dvdrental sample database with psql and pg_restore works the same way on any PostgreSQL server, so you can follow along wherever you run Postgres. If you're an enterprise team standardizing on a managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to keep analytics and operational data in sync. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to load the **PostgreSQL sample database** into the PostgreSQL database server.
@@ -99,7 +99,7 @@ Output:
 (4 rows)
 ```
 
-The output shows that `dvdrental` on the list, meaning that you have created the `dvdrental` database successfully.
+The output shows that `dvdrental` is on the list, meaning that you have created the `dvdrental` database successfully.
 
 Note that other databases such as `postgres`, `template0`, and `template1` are the system databases.
 

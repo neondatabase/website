@@ -1,11 +1,17 @@
 ---
 title: 'How do I enable or disable connection pooling for my Neon database?'
-subtitle: 'Toggle pooled connections from the Connect widget, or set pooler_enabled on the endpoint via the API.'
+subtitle: 'Toggle pooled connections from the Connect widget, or append -pooler to the endpoint hostname in your connection string.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-06-15T17:19:53.989Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I create and download a backup of my Neon database to my local machine?'
+  slug: download-database-backup-locally
+nextLink:
+  title: 'How do I enable the pgvector extension in my Neon database?'
+  slug: enable-pgvector-extension
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech) and click **Connect** on the **Project Dashboard**. In the **Connect to your database** widget, toggle **Connection pooling** on or off. The displayed connection string switches between the pooled hostname (with a `-pooler` suffix) and the direct hostname. Pooled connections support up to 10,000 client connections through PgBouncer in transaction mode. See [Connection pooling](/docs/connect/connection-pooling) for the full reference.
@@ -29,21 +35,17 @@ A direct connection string has no `-pooler` segment:
 postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-The toggle does not turn the pooler off at the compute. It selects which hostname your app uses. Both endpoints are available as long as `pooler_enabled` is set on the compute.
+The toggle does not turn the pooler off at the compute. It selects which hostname your app uses. The pooled endpoint is always available — use the `-pooler` hostname to reach it.
 
-## Set `pooler_enabled` via the API
+## Enable pooling via the connection string
 
-To make the pooled hostname available (or remove it) for a compute, patch the endpoint:
+The recommended way to use pooled connections is to append `-pooler` to the endpoint ID in your connection string hostname:
 
-```bash
-curl -X PATCH \
-  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$ENDPOINT_ID" \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{ "endpoint": { "pooler_enabled": true } }'
+```text
+postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
-Set `"pooler_enabled": false` to disable it. See [Manage computes with the Neon API](/docs/manage/computes#manage-computes-with-the-neon-api) and the [Update compute](https://api-docs.neon.tech/reference/updateprojectendpoint) reference.
+The `pooler_enabled` endpoint API property is deprecated. Use the `-pooler` hostname suffix instead. See [Connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling) for details.
 
 ## When to use pooled vs direct
 

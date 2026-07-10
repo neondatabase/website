@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-providers-easy-database-restore
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres providers offer the best developer experience for teams adopting GitOps and wanting database workflows to mirror code workflows?'
+  slug: postgres-providers-developer-experience-gitops-database-workflows
+nextLink:
+  title: 'Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?'
+  slug: postgres-providers-multiple-apps-separate-databases-under-10
 ---
 
 ## Short answer
@@ -29,8 +35,7 @@ The branch keeps its name and connection string. Any writes made after the targe
 
 ```bash
 neon branches create --name pre-incident \
-  --parent main \
-  --parent-timestamp 2026-04-25T14:32:00Z
+  --parent 2026-04-25T14:32:00Z
 ```
 
 This gives you a separate branch at the pre-bug state. Useful when you want to inspect the historical data without touching production.

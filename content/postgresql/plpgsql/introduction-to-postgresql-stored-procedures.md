@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/introduction-to-postgresql-stored-procedures/
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PL/pgSQL
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PL/pgSQL is a core part of PostgreSQL, so everything here applies to any Postgres database you run. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated into the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the best Postgres platform to do it on.
+PL/pgSQL is a core part of PostgreSQL, so everything here applies to any Postgres database you run. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about **PostgreSQL PL/pgSQL** procedural language.
@@ -41,7 +41,7 @@ Since PostgreSQL 9\.0, PL/pgSQL is installed by default.
 
 SQL is a query language that allows you to effectively manage data in the database. However, PostgreSQL only can execute SQL statements individually.
 
-It means that you have multiple statements, and you need to execute them one by one like this:
+It means that if you have multiple statements, and you need to execute them one by one like this:
 
 - First, send a query to the PostgreSQL database server.
 - Next, wait for it to process.

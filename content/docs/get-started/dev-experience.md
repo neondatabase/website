@@ -2,13 +2,17 @@
 title: Our DX Principles
 subtitle: 'Neon adapts to your workflow, not the other way around.'
 summary: >-
-  Covers the core principles of Neon's developer experience, focusing on
-  invisible infrastructure, instant deployments, modern workflows, and a
-  composable stack to enhance database management and adaptability.
+  Neon replaces traditional Postgres ops with continuous autoscaling,
+  copy-on-write branching, sub-second provisioning, and on-demand storage.
+  Read this page to understand why Neon behaves differently from fixed-instance
+  Postgres and which architectural decisions drive scale-to-zero, instant
+  restore, and branch-per-PR workflows. It also covers MCP and AI agent
+  integration, Neon Auth as a composable authentication primitive, and CLI and
+  GitHub Actions support for database lifecycle automation.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-07-06T16:27:57.937Z'
 ---
 
 Our developer experience is anchored by four core pillars:
@@ -24,7 +28,7 @@ Our developer experience is anchored by four core pillars:
 
 Traditional OLTP databases force you to provision compute upfront (i.e., choose an instance size), plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
 
-You can build your database branching workflows using the [Neon CLI](/docs/reference/neon-cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
+You can build your database branching workflows using the [Neon CLI](/docs/cli), [Neon API](/docs/reference/api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
 **How it works**
 
@@ -52,7 +56,7 @@ For production workloads where cold starts are not acceptable, paid plan users c
 
 Scale to zero is a foundational capability for the Neon experience, allowing us to offer:
 
-- **A free plan developers can actually use**. Neon can offer a generous free tier without subsidizing large amounts of idle infrastructure, something made possible by it's architecture and scale-to-zero capabilities. [We want every Postgres developer building on Neon](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), and this starts with hosting their side projects and experiments.
+- **A free plan developers can actually use**. Neon can offer a generous free tier without subsidizing large amounts of idle infrastructure, something made possible by its architecture and scale-to-zero capabilities. [We want every Postgres developer building on Neon](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), and this starts with hosting their side projects and experiments.
 
 - **Many short-lived, non-production environments**. Scale to zero makes it practical to run [large numbers of ephemeral databases](https://neon.com/use-cases/dev-test) for previews, CI runs, experiments, and testing. Teams can create and discard environments freely, without cost pressure forcing them to share databases or cut corners.
 
@@ -125,7 +129,7 @@ Neon is built with an API-first mindset. Every core operation is exposed program
 
 Neon powers [platforms](https://neon.com/platforms) where thousands of databases are provisioned, scaled, and deleted automatically every day. This includes developer platforms embedding Postgres into their product experience, as well as [AI agents](https://neon.com/use-cases/ai-agents) that provision databases dynamically while building and running applications on behalf of users.
 
-The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) has been shaped by real-world requirements, and it’s able to
+The [Neon API](/docs/reference/api) has been shaped by real-world requirements, and it’s able to
 
 - Manage hundreds of thousands of projects
 - Automate database lifecycles with minimal human intervention
@@ -133,7 +137,7 @@ The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-ap
 
 **CLI and native integrations**
 
-For local development and CI pipelines, the [Neon CLI](/docs/reference/neon-cli) provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
+For local development and CI pipelines, the [Neon CLI](/docs/cli) provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
 
 - GitHub Actions for CI-driven branching and cleanup
 - Vercel for automatic database branches per preview deployment

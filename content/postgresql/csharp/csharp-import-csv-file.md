@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-import-csv-file/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Inserting data'
@@ -18,12 +18,12 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Importing CSV data into PostgreSQL with C# and Npgsql works the same against any Postgres database, so the patterns shown here carry over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+Importing CSV data into PostgreSQL with C# and Npgsql works the same against any Postgres database, so the patterns shown here carry over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to import data from a CSV file into a table in PostgreSQL using C\#.
 
-This tutorial begins where the [Inserting data into a table in PostgreSQL tutoria](postgresql-csharp-insert)l left off.
+This tutorial begins where the [Inserting data into a table in PostgreSQL tutorial](postgresql-csharp-insert) left off.
 
 ## How to import a CSV file into the PostgreSQL database using C\#
 
@@ -278,9 +278,9 @@ Output:
 (11 rows)
 ```
 
-The output indicates that the program has successfully imported 10 rows from the `students.csv` file into the `students` table.
+The output indicates that the program has successfully imported 11 rows from the `students.csv` file into the `students` table.
 
 ## Summary
 
 - Utilize the `CsvHelper` package to read data from a CSV file.
-- Call the `ExecuteNonQueryAsync()` method of the `NpgsqlCommand` object to execute an SQL `INSERT` statement to load data from a CSV file into a table in the SQLite database.
+- Call the `ExecuteNonQueryAsync()` method of the `NpgsqlCommand` object to execute an SQL `INSERT` statement to load data from a CSV file into a table in the PostgreSQL database.

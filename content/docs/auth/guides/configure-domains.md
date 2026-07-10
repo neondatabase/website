@@ -2,10 +2,13 @@
 title: Configure trusted domains
 subtitle: Add your application domains to enable secure authentication redirects
 summary: >-
-  Covers trusted domains for Neon Auth: exact origins, wildcard preview domains,
-  and enabling secure OAuth and email verification redirects.
+  Neon Auth's trusted domain allowlist restricts OAuth and email verification
+  redirects to domains you explicitly approve, blocking unauthorized redirects.
+  Add exact production origins (https://myapp.com) or wildcard patterns
+  (https://*.preview.vercel.app) in Console > Auth > Configuration > Domains.
+  Localhost ports are pre-approved and need no entry.
 enableTableOfContents: true
-updatedOn: '2026-05-15T15:00:29.570Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

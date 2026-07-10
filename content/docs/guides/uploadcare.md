@@ -2,13 +2,24 @@
 title: Media storage with Uploadcare
 subtitle: Store files via Uploadcare and track metadata in Neon
 summary: >-
-  How to integrate Uploadcare with Neon for storing file metadata while
-  utilizing Uploadcare's cloud platform for file uploads and storage management.
+  Uploadcare and Neon integration pattern stores uploaded files on Uploadcare's
+  CDN while persisting each file's UUID, CDN URL, and user ID as metadata rows
+  in a Neon Postgres table. Use this guide when you need a dedicated CDN for
+  images, videos, and documents but want queryable, structured metadata in
+  Postgres rather than in Uploadcare alone. Code examples cover a Node.js/Hono
+  server and a Python Flask server, both writing to an uploadcare_files table
+  with optional Row Level Security.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.013Z'
+updatedOn: '2026-06-19T20:06:14.133Z'
 ---
 
-[Uploadcare](https://uploadcare.com/) provides an cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
+[Uploadcare](https://uploadcare.com/) provides a cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
+
+<Callout title="Neon now offers native storage">
+Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+
+For more information, see [Neon Storage](/docs/storage/overview).
+</Callout>
 
 This guide demonstrates how to integrate Uploadcare with Neon by storing file metadata in your Neon database while using Uploadcare for file uploads and storage.
 

@@ -2,10 +2,15 @@
 title: The plv8 extension (deprecated)
 subtitle: JavaScript procedural language for Postgres — no longer available on Neon
 summary: >-
-  plv8 is deprecated on Neon due to security concerns. New installations are
-  blocked; use plpgsql or application-side logic instead.
+  plv8, the Postgres extension for writing stored procedures and functions in
+  JavaScript via the V8 engine, is deprecated on Neon and blocked from new
+  installs due to security risks from embedding V8 inside Postgres. Use this
+  page to understand what is blocked (CREATE EXTENSION plv8 returns a
+  deprecation error) and what migration paths exist. Recommended alternatives
+  include rewriting JavaScript-in-SQL logic in plpgsql or moving it to
+  application or worker code outside the database.
 enableTableOfContents: false
-updatedOn: '2026-05-01T11:17:30.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="warning" title="The plv8 extension is deprecated on Neon.">

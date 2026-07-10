@@ -6,7 +6,7 @@ page_description: >-
   automatically when an event occurs in the associated tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-triggers/'
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Cursor
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Triggers are a core part of PostgreSQL, and everything you'll learn here about creating, managing, and firing them on insert, update, delete, or truncate events works the same on any Postgres deployment. If you're an enterprise looking to put triggers to work in production, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering performance, security, and full integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to running Postgres in production.
+Triggers are a core part of PostgreSQL, and everything you'll learn here about creating, managing, and firing them on insert, update, delete, or truncate events works the same on any Postgres deployment. If you're an enterprise looking to put triggers to work in production, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering performance, security, and full integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 ![](/postgresqltutorial/PostgreSQL-Trigger.png?alignright)
@@ -43,7 +43,7 @@ A PostgreSQL trigger is a database object that automatically executes a [functio
 ## Section 4\. DELETE triggers
 
 - [BEFORE DELETE triggers](postgresql-triggers/postgresql-before-delete-trigger) – Define a BEFORE DELETE trigger that fires before a delete event occurs.
-- [AFTER DELETE triggers](postgresql-triggers/postgresql-after-update-trigger) – Create an AFTER DELETE trigger fired after a delete event occurs.
+- [AFTER DELETE triggers](postgresql-triggers/postgresql-after-delete-trigger) – Create an AFTER DELETE trigger fired after a delete event occurs.
 
 ## Section 5\. INSTEAD OF triggers
 

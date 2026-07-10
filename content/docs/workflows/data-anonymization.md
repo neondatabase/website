@@ -2,14 +2,18 @@
 title: Data anonymization
 subtitle: Mask sensitive data in development branches using PostgreSQL Anonymizer
 summary: >-
-  Covers the setup of anonymized branches in Neon to mask sensitive data using
-  PostgreSQL Anonymizer, enabling realistic testing without exposing personally
-  identifiable information (PII).
+  Anonymized branches permanently replace PII in a branch copy using static
+  masking via the PostgreSQL Anonymizer extension. The parent branch data
+  remains unchanged. Use this when you need production-realistic test data
+  without exposing sensitive information in development or CI/CD pipelines.
+  Masking rules are configured per branch through the Console, REST API, or
+  SQL SECURITY LABEL commands. Foreign key columns cannot be masked directly,
+  and the branch is unavailable while anonymization runs.
 redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-03-23T18:26:17.517Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBeta />

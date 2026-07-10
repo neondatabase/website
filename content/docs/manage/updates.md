@@ -1,12 +1,17 @@
 ---
 title: Updates
 summary: >-
-  Covers the process for applying updates to Neon computes and Postgres
-  instances, including cache prewarming, scheduling options, types of updates,
-  and handling brief connection drops during the update process.
+  Neon compute updates deliver Postgres minor version upgrades, security
+  patches, and OS changes by restarting the compute, typically in seconds,
+  with automatic cache prewarming to avoid cold-cache performance loss after
+  restart. Paid plan users can schedule a preferred update window via the
+  console or API. Free plan updates are scheduled by Neon with advance notice.
+  Computes above the 8 CU autoscale ceiling are excluded from automatic
+  updates and must be restarted manually. Configure connection retry logic
+  to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-17T11:58:10.000Z'
+updatedOn: '2026-07-03T14:39:39.995Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -82,9 +87,9 @@ In the Neon Console:
 
    ![Paid plan updates UI](/docs/manage/paid_plan_updates.png)
 
-You can check your project's settings for upcoming updates. We'll post a notice there at least **7 days** ahead of a planned update, letting you know when it's coming.
+You can check your project's settings for upcoming updates. On all paid plans, we post a notice there at least **3 days** ahead of a planned update, letting you know when it's coming.
 
-> If you're a Scale plan customer, you will also receive an **email notification** 7 days in advance of a planned update.
+> On the **Scale** and **Enterprise** plans, you also receive an **email notification** 3 days in advance of a planned update, in addition to the in-console notice. On the **Launch** plan, advance notice is provided in the console only, with no email.
 
 </TabItem>
 

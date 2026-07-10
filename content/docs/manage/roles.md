@@ -1,13 +1,17 @@
 ---
 title: Manage roles
 summary: >-
-  Covers the management of Postgres roles in Neon, including role creation,
-  permissions, and the relationship between roles and project branches.
+  Postgres roles in Neon are branch-scoped, with a limit of 500 roles per
+  branch. Roles created via the Console, CLI, or API automatically receive
+  neon_superuser membership (CREATEDB, CREATEROLE, BYPASSRLS, REPLICATION).
+  Roles created with SQL receive only basic public schema privileges and must
+  be granted permissions explicitly. Use this page to create, delete, list,
+  and reset passwords for roles using the Console, CLI, API, or SQL.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -108,9 +112,13 @@ ALTER USER user_name WITH PASSWORD 'new_password';
 For password requirements, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
 </Admonition>
 
+A password reset takes effect immediately. The old password stops working on the next connection, so copy the new connection string from the **Connect** modal and update it wherever it is stored (deployment environment variables, secret managers, and `.env` files). Resets are branch-scoped, so reset the role on each branch where it is used.
+
+Resetting a password is also how you rotate the credential behind a connection string. To rotate after a leak or as routine security practice, see [Rotate credentials](/docs/security/security-overview#rotate-credentials).
+
 ## Manage roles with the Neon CLI
 
-The Neon CLI supports creating and deleting roles. For instructions, see [Neon CLI commands — roles](/docs/reference/cli-roles). Roles created with the Neon CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
+The Neon CLI supports creating and deleting roles. For instructions, see [Neon CLI commands — roles](/docs/cli/roles). Roles created with the Neon CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
 
 ## Manage roles with the Neon API
 
@@ -388,7 +396,7 @@ Roles with `NOLOGIN` are commonly used for permission management. For an example
 The Neon API and CLI also support creating `NOLOGIN` roles:
 
 - The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
-- The Neon CLI [`neon roles create`](/docs/reference/cli-roles#create) command supports a `--no-login` option.
+- The Neon CLI [`neon roles create`](/docs/cli/roles#create) command supports a `--no-login` option.
 
 ## Reserved role names
 

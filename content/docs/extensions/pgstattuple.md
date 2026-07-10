@@ -2,11 +2,17 @@
 title: The pgstattuple extension
 subtitle: 'Analyze table, index bloat, and fragmentation in Postgres'
 summary: >-
-  Covers the setup and functionality of the `pgstattuple` extension for
-  analyzing table and index bloat, fragmentation, and space utilization in
-  Postgres, aiding in performance tuning and storage management.
+  The `pgstattuple` extension inspects Postgres physical storage at the tuple
+  level, reporting dead tuple counts, dead tuple percentages, free space, and
+  B-tree leaf density needed to measure table and index bloat. Use it when you
+  need to quantify bloat caused by unvacuumed DELETE or UPDATE operations and
+  decide whether to run VACUUM, VACUUM FULL, or REINDEX. Functions include
+  `pgstattuple()` for exact full-scan stats, `pgstattuple_approx()` for
+  faster visibility-map-based estimates on large tables, and `pgstatindex()`
+  for B-tree fragmentation metrics. GIN and hash index stats are covered by
+  `pgstatginindex()` and `pgstathashindex()`.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `pgstattuple` extension provides a suite of functions to inspect the physical storage of Postgres tables and indexes at a detailed, tuple (row) level. It offers insights into issues like table and index bloat, fragmentation, and overall space utilization, which are crucial for performance tuning and storage management.

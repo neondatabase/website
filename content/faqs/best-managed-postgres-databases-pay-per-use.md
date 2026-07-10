@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-managed-postgres-databases-pay-per-use
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?'
+  slug: best-managed-postgres-databases-multi-tenant-saas
+nextLink:
+  title: 'What are the best managed Postgres options for developers who find that the smallest available instance on major cloud providers is still too expensive?'
+  slug: best-managed-postgres-options-developers
 ---
 
 Neon bills you for active compute time in CU-hours, not provisioned instance size. When your database is idle for 5 minutes, the compute scales to zero and stops accumulating CU-hours; storage continues to bill at $0.35/GB-month. When a query comes in, the compute resumes in a few hundred milliseconds.

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: affordable-managed-postgres-options-startups
 category: FAQ
 status: draft
+previousLink:
+  title: ''
+  slug: ''
+nextLink:
+  title: 'What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?'
+  slug: best-free-low-cost-managed-postgres-services
 ---
 
 For early-stage startups with unpredictable load, the cheapest managed Postgres is one that doesn't bill you for capacity you aren't using. Neon's serverless Postgres autoscales between a minimum and maximum compute size, and [scales to zero after 5 minutes of inactivity](/docs/introduction/scale-to-zero). You pay for active CU-hours, not provisioned instance size.
@@ -28,7 +34,7 @@ When you outgrow Free, the [Launch plan](/docs/introduction/plans) is pay-as-you
 
 - Compute: $0.106/CU-hour
 - Storage: $0.35/GB-month
-- 100 GB of public network transfer included, then $0.10/GB
+- 500 GB of public network transfer included, then $0.10/GB
 
 A worked example from the [Launch plan usage examples](/docs/introduction/plans#launch-plan): 120 CU-hours of compute (about 20 billable days at 0.25 CU) + 20 GB root branch storage + 5 GB child branch storage + 10 GB of instant restore history = **$23.47/month**.
 

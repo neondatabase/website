@@ -2,11 +2,14 @@
 title: The pg_stat_statements extension
 subtitle: Track planning and execution statistics for all SQL statements
 summary: >-
-  Covers the setup and usage of the `pg_stat_statements` extension in Postgres
-  to track SQL statement execution statistics, enabling performance analysis and
-  optimization for Neon projects.
+  The `pg_stat_statements` extension records per-query execution counts, total
+  and mean execution times, and row counts in a queryable view. Use it to
+  identify slow queries, high-frequency queries, and cache inefficiency without
+  external tooling. On Neon, statistics reset whenever the compute suspends or
+  scales to zero. Only `neon_superuser` roles can call
+  `pg_stat_statements_reset()` to clear accumulated stats manually.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a Postgres database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.

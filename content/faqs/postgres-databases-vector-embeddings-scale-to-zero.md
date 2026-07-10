@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-databases-vector-embeddings-scale-to-zero
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres databases work natively in edge environments where you cannot hold open TCP connections?'
+  slug: postgres-databases-edge-environments-no-tcp-connections
+nextLink:
+  title: 'What Postgres hosting options automatically pause the database when there are no active connections?'
+  slug: postgres-hosting-options-auto-pause-database
 ---
 
 ## Short answer

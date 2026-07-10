@@ -2,11 +2,16 @@
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
 summary: >-
-  How to enable the `pg_search` extension on Neon for efficient full-text search
-  and analytics in Postgres, utilizing BM25 indexing for high-relevance results
-  and advanced text search capabilities.
+  The `pg_search` extension by ParadeDB adds BM25 full-text search to Postgres
+  using inverted indexes, supporting keyword, phrase, fuzzy, hybrid
+  BM25+pgvector, and faceted search via standard SQL and a JSON query DSL.
+  As of March 19, 2026, `pg_search` is deprecated for new Neon projects;
+  existing projects retain access. Recommended alternatives include tsvector,
+  pg_trgm, and pgvector. The page covers enabling the extension, BM25 scoring
+  and inverted index concepts, and examples for creating indexes, sorting by
+  relevance, highlighting matches, and tuning performance.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-26T16:23:18.851Z'
 redirectFrom:
   - /guides/pg-search
   - /guides/pg-search/
@@ -18,14 +23,14 @@ redirectFrom:
 
 As of March 19, 2026, `pg_search` is no longer available for new Neon projects.
 
-**If you already use `pg_search`:** you will continue to have access to the extension on existing projects. Our team will contact you to discuss alternative options and deprecation timelines. You do not need to take action before we reach out.
+**If you already use `pg_search`:** you will continue to have access to the extension on existing projects. Our team will contact you to discuss alternative options and deprecation timelines. You do not need to take action before we reach out. When you're ready to move to BM25 search on Neon, see [Migrate from pg_search to lakebase_text](/docs/extensions/migrate-pg-search-to-lakebase-text).
 
 Depending on your use case, consider these alternatives:
 
 - **Full-text search**: PostgreSQL's built-in [`tsvector`/`tsquery`](https://www.postgresql.org/docs/current/textsearch.html)
 - **Fuzzy search**: [`pg_trgm`](https://www.postgresql.org/docs/current/pgtrgm.html) for similarity and pattern matching
 - **Semantic/vector search**: [`pgvector`](/docs/extensions/pgvector) for embedding-based search
-- **BM25 search**: [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
+- **BM25 search**: [`lakebase_text`](/docs/extensions/lakebase-text), a BM25 index for Neon, fully compatible with `tsvector`; or [ParadeDB](https://www.paradedb.com/) for continued `pg_search` functionality
 
 </Admonition>
 

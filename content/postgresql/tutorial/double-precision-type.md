@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-double-precision-type/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NUMERIC Type
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DOUBLE PRECISION type behaves the same across any PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse so your analytical and operational data live side by side. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform around, with instant provisioning, branching, and autoscaling built in.
+The DOUBLE PRECISION type behaves the same across any PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse so your analytical and operational data live side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `DOUBLE PRECISION` data type and its features.
@@ -152,7 +152,7 @@ Output:
 
 The output indicates that the sum of `0.1`, `0.1`, and `0.1` is not `0.3` but `0.30000000000000004`. This indicates that PostgreSQL cannot store the exact number `0.1` using the `DOUBLE PRECISION` type.
 
-### 2\) Inserting too small numbers
+### 3\) Inserting too small numbers
 
 The following statement attempts to [insert](postgresql-insert) a very small number into the `c` column of the `t` table:
 

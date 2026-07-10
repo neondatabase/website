@@ -2,11 +2,15 @@
 title: Authentication flow
 subtitle: Understanding the complete sign-in and sign-up process
 summary: >-
-  Covers the authentication flow for sign-in and sign-up processes using Neon
-  Auth, detailing the SDK integration, session creation, and database
-  interactions.
+  Neon Auth (Better Auth) authentication flow traces every step from SDK
+  call to HTTP-only session cookie, JWT issuance, and writes to the neon_auth
+  schema, covering email sign-in, sign-up, and OAuth providers such as Google
+  and GitHub. Use this page to understand what happens under the hood during
+  login, debug session or token problems, or wire auth.uid() into Row-Level
+  Security policies via the Data API. All auth state lands directly in your
+  Neon database with no sync delay, and each branch holds isolated auth data.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.805Z'
+updatedOn: '2026-06-18T22:47:28.438Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -166,14 +170,19 @@ ORDER BY "createdAt" DESC;
 
 ## Data API integration
 
-When you enable the [Data API](/docs/data-api/get-started), JWT tokens from Neon Auth are validated automatically. The user ID is available via the `auth.uid()` function, enabling Row-Level Security policies to grant data access based on the authenticated user. The Data API also works with [other authentication providers](/docs/data-api/custom-authentication-providers) that issue JWTs, such as Auth0, Clerk, and Firebase.
+When you enable the [Data API](/docs/data-api/get-started), JWT tokens from Neon Auth are validated automatically. Two helper functions make the user ID available to RLS policies. Use the one that matches your column type:
+
+- `auth.user_id()`: returns `sub` as `text`
+- `auth.uid()`: returns `sub` as `uuid` (returns `NULL` if `sub` isn't a valid UUID)
+
+The Data API also works with [other authentication providers](/docs/data-api/custom-authentication-providers) that issue JWTs, such as Auth0, Clerk, and Firebase.
 
 **Example RLS policy:**
 
 ```sql
 CREATE POLICY "Users can view own posts"
 ON posts FOR SELECT TO authenticated
-USING (user_id = auth.uid());
+USING (user_id = auth.user_id());
 ```
 
 **Learn more about securing your data:**

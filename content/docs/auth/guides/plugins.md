@@ -2,11 +2,14 @@
 title: Plugins
 subtitle: Supported Better Auth plugins in Neon Auth
 summary: >-
-  Covers the supported Better Auth plugins in Neon Auth, detailing their status
-  and management through the Neon SDK without direct installation or
-  configuration by users.
+  Neon Auth exposes a managed subset of Better Auth plugins (Admin, Email OTP,
+  JWT, Magic Link, Organization, Open API, Phone Number) through the Neon SDK;
+  plugins are not installed or configured directly. Use this page to check which
+  plugins are fully supported versus partially supported, and how to configure
+  them via the Neon Console or Neon API. The Organization plugin has partial
+  support while JWT token claims are still under development.
 enableTableOfContents: true
-updatedOn: '2026-05-12T23:02:23.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

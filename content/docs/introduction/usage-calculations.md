@@ -2,11 +2,13 @@
 title: Usage and cost calculations
 subtitle: Convert raw API metrics into billing units and calculate your costs
 summary: >-
-  How to fetch consumption data from the Neon API, convert raw metrics like
-  byte-hours and CU-seconds into human-readable billing units, and calculate
-  costs using plan rates and allowances.
+  Neon's consumption history API returns raw metrics that you convert to billing
+  units before multiplying by plan rates to calculate cost. Use this page over
+  the Console when you need to reconcile an invoice programmatically or build
+  cost-tracking tooling. Plan-specific rates, transfer allowances, and
+  granularity lookback limits are documented here.
 enableTableOfContents: true
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-18T20:28:34.156Z'
 ---
 
 This guide helps you use the Neon API to fetch your consumption data, convert raw metrics into human-readable numbers, and understand how your bill is calculated. To monitor usage in the Neon Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -31,22 +33,22 @@ Calling this endpoint does not wake suspended computes, so it is safe to poll wi
 
 Required parameters: `org_id`, `from`, `to`, `granularity`, `metrics`. Optional: `project_ids`, `limit`, `cursor`. For the complete API reference including pagination, polling, rate limits, and error handling, see [Querying consumption metrics](/docs/guides/consumption-metrics).
 
-<Admonition type="note" title="Legacy endpoints">
-Older endpoints (`/consumption_history/account` and `/consumption_history/projects`) return different metrics (active time, compute time, written data, and synthetic storage) that do not match your invoice on usage-based plans (Launch, Scale, Agent, or Enterprise). Use the v2 endpoint shown above unless you are on a [legacy plan](/docs/guides/consumption-metrics-legacy).
+<Admonition type="note" title="Legacy endpoint">
+The older `/consumption_history/projects` endpoint returns different metrics (active time, compute time, written data, and synthetic storage) that do not match your invoice on usage-based plans (Launch, Scale, Agent, or Enterprise). Use the v2 endpoint shown above unless you are on a [legacy plan](/docs/guides/consumption-metrics-legacy).
 </Admonition>
 
 ## Billable metrics
 
-| API metric name                  | What it measures                                                                   | Raw unit     | Billing unit  |
-| -------------------------------- | ---------------------------------------------------------------------------------- | ------------ | ------------- |
-| `compute_unit_seconds`           | CPU time weighted by compute size                                                  | CU-seconds   | CU-hours      |
-| `root_branch_bytes_month`        | Storage on root branches                                                           | byte-hours   | GB-months     |
-| `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                      | byte-hours   | GB-months     |
-| `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                            | byte-hours   | GB-months     |
+| API metric name                  | What it measures                                                                                                                                                                           | Raw unit     | Billing unit  |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------------- |
+| `compute_unit_seconds`           | CPU time weighted by compute size                                                                                                                                                          | CU-seconds   | CU-hours      |
+| `root_branch_bytes_month`        | Storage on root branches                                                                                                                                                                   | byte-hours   | GB-months     |
+| `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                                                                                                                              | byte-hours   | GB-months     |
+| `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                                                                                                                                    | byte-hours   | GB-months     |
 | `snapshot_storage_bytes_month`   | Storage for branch snapshots. Manual snapshots are full snapshots; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in that schedule | byte-hours   | GB-months     |
-| `public_network_transfer_bytes`  | Outbound (egress) data over the public network                                     | bytes        | GB            |
-| `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+)   | bytes        | GB            |
-| `extra_branches_month`           | All child branches per hour (subtract plan allowance before billing)               | branch-hours | branch-months |
+| `public_network_transfer_bytes`  | Outbound (egress) data over the public network                                                                                                                                             | bytes        | GB            |
+| `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+)                                                                                                           | bytes        | GB            |
+| `extra_branches_month`           | All child branches per hour (subtract plan allowance before billing)                                                                                                                       | branch-hours | branch-months |
 
 A Compute Unit (CU) corresponds to 1 CPU with 4 GB RAM. A 2 CU endpoint accumulates 2 CU-seconds for every wall-clock second it runs.
 
@@ -75,11 +77,11 @@ Sum each metric's cost to get the total. Rates differ by plan (see [Plans](/docs
 | Child storage    | GB-months x rate                  | $0.35/GB-mo  | $0.35/GB-mo  |
 | Instant restore  | GB-months x rate                  | $0.20/GB-mo  | $0.20/GB-mo  |
 | Snapshots        | GB-months x rate                  | $0.09/GB-mo  | $0.09/GB-mo  |
-| Public transfer  | max(0, org_total_GB - 100) x rate | $0.10/GB     | $0.10/GB     |
+| Public transfer  | max(0, org_total_GB - 500) x rate | $0.10/GB     | $0.10/GB     |
 | Private transfer | GB x rate                         | n/a          | $0.01/GB     |
 | Extra branches   | branch-months x rate              | $1.50/mo     | $1.50/mo     |
 
-Agent and Enterprise rates match Scale. Enterprise plans may include custom negotiated pricing.
+Agent plan rates match Scale except compute, which is billed at $0.106/CU-hr (the Launch rate). Enterprise rates match Scale, and Enterprise plans may include custom negotiated pricing.
 
 ### Example: compute
 
@@ -129,10 +131,10 @@ Repeat for each day in the billing period and sum the billable branch-hours acro
 
 ### Public transfer allowance
 
-On paid plans, the 100 GB free allowance applies **org-wide**, not per project. Sum public transfer across all projects before subtracting the allowance:
+On paid plans, the 500 GB free allowance applies **org-wide**, not per project. Sum public transfer across all projects before subtracting the allowance:
 
 ```
-billable GB = max(0, total_org_GB - 100)
+billable GB = max(0, total_org_GB - 500)
 cost = billable_GB x $0.10
 ```
 
@@ -157,7 +159,7 @@ To reconcile the numbers yourself:
 1. Fetch consumption history for the billing month (`from` = month start, `to` = month end or current date).
 2. Sum each metric across all projects.
 3. Convert to billing units using the formulas above.
-4. Apply allowances (100 GB public transfer, branch allowance per project).
+4. Apply allowances (500 GB public transfer, branch allowance per project).
 5. Multiply by your plan's rates.
 
 The result should closely match the costs in your weekly email. Small differences can occur due to:

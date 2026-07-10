@@ -6,7 +6,7 @@ page_description: >-
   grouping sets.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cube/'
 ogImage: /postgresqltutorial/sales-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GROUPING SETS
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The CUBE subclause is standard PostgreSQL, so everything you learn here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse so multidimensional aggregates sit right next to the rest of your data. If you're a developer or startup who needs to ship and scale fast, Neon gives you the most productive Postgres platform, with instant provisioning, branching, and serverless scale.
+The CUBE subclause is standard PostgreSQL, so everything you learn here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise running analytics at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse so multidimensional aggregates sit right next to the rest of your data. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CUBE` to generate multiple grouping sets.
@@ -26,7 +26,7 @@ The CUBE subclause is standard PostgreSQL, so everything you learn here works on
 
 PostgreSQL `CUBE` is a subclause of the [`GROUP BY`](postgresql-group-by) clause. The `CUBE` allows you to generate multiple grouping sets.
 
-A grouping set is a set of columns to which you want to group. For more information on the grouping sets, check it out the [`GROUPING SETS`](postgresql-grouping-sets) tutorial.
+A grouping set is a set of columns to which you want to group. For more information on the grouping sets, check out the [`GROUPING SETS`](postgresql-grouping-sets) tutorial.
 
 The following illustrates the syntax of the `CUBE` subclause:
 

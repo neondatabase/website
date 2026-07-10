@@ -2,9 +2,17 @@
 title: Replicate data to Databricks with Lakeflow Connect
 subtitle: Learn how to replicate data from Neon to Databricks Lakehouse using the
   Lakeflow Connect PostgreSQL connector
+summary: >-
+  Replicate data from Neon Postgres to Databricks Lakehouse Delta tables using
+  Lakeflow Connect's PostgreSQL connector and logical replication with the
+  pgoutput plugin. Use this guide for continuous, low-latency ingestion from
+  Neon into Unity Catalog, covering publication setup, replication slot
+  creation, Unity Catalog connection, and pipeline configuration. The connector
+  requires PostgreSQL 13 or later on the Neon primary; read replicas are not
+  supported.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-20T18:41:23.218Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature lets you stream changes from your Neon Postgres database into external systems. This guide shows how to use Databricks Lakeflow Connect's PostgreSQL connector to replicate data from Neon Postgres into Databricks Lakehouse using PostgreSQL logical replication.

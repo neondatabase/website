@@ -169,9 +169,9 @@ export default {
         title: 'MFA',
         subtitle: 'Multi-Factor Authentication',
       },
-      free: false,
-      launch: 'Coming soon',
-      scale: 'Coming soon',
+      free: true,
+      launch: true,
+      scale: true,
     },
     {
       rows: '1',
@@ -203,8 +203,8 @@ export default {
         subtitle: 'Egress',
       },
       free: '5 GB included',
-      launch: '100 GB included<span>then $0.10 per GB</span>',
-      scale: '100 GB included<span>then $0.10 per GB</span>',
+      launch: '500 GB included<span>then $0.10 per GB</span>',
+      scale: '500 GB included<span>then $0.10 per GB</span>',
     },
     {
       rows: '2',

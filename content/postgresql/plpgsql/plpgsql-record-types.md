@@ -3,10 +3,10 @@ title: PL/pgSQL Record Types
 page_title: PL/pgSQL Record Types Explained Clearly By Examples
 page_description: >-
   You will learn about the PL/pgSQL record types that allow you to define
-  variables that can hold a sinle row of a result set.
+  variables that can hold a single row of a result set.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-record-types/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PL/pgSQL Row Types
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PL/pgSQL record types work the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to a production-ready Postgres platform.
+PL/pgSQL record types work the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PL/pgSQL record types, which enables you to define variables that can hold a single row from a result set.
@@ -76,7 +76,7 @@ language plpgsql;
 How it works.
 
 - First, declare a record variable called `rec` in the declaration section.
-- Second use the `select into` statement to select a row whose `film_id` is 200 into the `rec` variable
+- Second, use the `select into` statement to select a row whose `film_id` is 200 into the `rec` variable
 - Third, print out the information of the film via the record variable.
 
 ### 2\) Using record variables in the for loop statement
@@ -115,7 +115,7 @@ Note that you will learn more about the [`for loop`](plpgsql-for-loop) statement
 
 How it works:
 
-- First, declare a variable named r with the type `record`.
+- First, declare a variable named rec with the type `record`.
 - Second, use the `for loop` statement to fetch rows from the `film` table (in the [sample database](../postgresql-getting-started/postgresql-sample-database)). The `for loop` statement assigns the row that consists of `title` and `length` to the `rec` variable in each iteration.
 - Third, show the contents of the fields of the record variable by using the dot notation (`rec.title` and `rec.length`)
 

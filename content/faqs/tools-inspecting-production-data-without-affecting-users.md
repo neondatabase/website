@@ -5,6 +5,12 @@ description: "Neon branches and read replicas let you query a copy of production
 slug: tools-inspecting-production-data-without-affecting-users
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which tools allow using Postgres without managing infrastructure?'
+  slug: tools-for-serverless-postgres-infrastructure
+nextLink:
+  title: 'What tools isolate database changes per branch in modern development workflows?'
+  slug: tools-isolate-database-changes-branch-development
 ---
 
 ## Short answer
@@ -34,7 +40,7 @@ Branches are included on all plans: 10/project on Free and Launch, 25 on Scale. 
 If you want the live state of production rather than a point-in-time fork, add a read replica. The replica reads from the same storage as your primary, but runs on its own compute, so analytics queries and BI dashboards don't compete with application traffic.
 
 ```bash
-neon endpoints create --branch main --type read_only
+neon branches add-compute main --type read_only
 ```
 
 Use the read-only endpoint's connection string for read traffic. Replicas count toward CU-hour usage like any other compute.

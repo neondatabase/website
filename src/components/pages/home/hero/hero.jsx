@@ -10,6 +10,8 @@ import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 import { cn } from 'utils/cn';
 
+import HeroServices from './hero-services';
+
 const logos = [
   'replit',
   'outfront',
@@ -22,21 +24,65 @@ const logos = [
   'framer',
 ];
 
+export const heroServiceItems = [
+  {
+    title: 'Postgres Database',
+    description: 'Serverless Postgres that scales and branches with your app.',
+    videoBase: 'postgres-database',
+    aspectRatio: 'aspect-square',
+    width: 512,
+    height: 512,
+  },
+  {
+    title: 'Authentication',
+    description: 'Managed auth with users and sessions stored in Postgres.',
+    videoBase: 'authentication',
+    aspectRatio: 'aspect-512/390',
+    width: 512,
+    height: 390,
+  },
+  {
+    title: 'Compute',
+    description: 'Functions without timeouts running close to your database.',
+    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
+    videoBase: 'compute',
+    aspectRatio: 'aspect-512/308',
+    width: 512,
+    height: 308,
+  },
+  {
+    title: 'Storage',
+    description: 'S3-compatible object storage that branches with your projects.',
+    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
+    videoBase: 'storage',
+    aspectRatio: 'aspect-512/696',
+    width: 512,
+    height: 696,
+  },
+  {
+    title: 'AI Gateway',
+    description: 'One API for all frontier & open-source models, powered by Databricks.',
+    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
+    videoBase: 'ai-gateway',
+    aspectRatio: 'aspect-512/226',
+    width: 512,
+    height: 226,
+  },
+];
+
 const Hero = () => (
   <section className="hero relative mt-16 safe-paddings lg:mt-14">
-    <Container
-      className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:px-5! md:pt-[212px]"
-      size="1600"
-    >
+    <Container className="relative z-30 pt-96 pb-2 xl:pt-54 lg:pt-52 md:px-5! md:pt-53" size="1600">
       <Link href="#backed-by-giants">
         <SectionLabel theme="white" icon="databricks">
           A DATABRICKS COMPANY
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Fast Postgres Databases <br />
-        for Teams and Agents
+      <h1 className="mt-5 max-w-280 text-[72px] leading-dense tracking-tighter xl:max-w-215 xl:text-[64px] lg:max-w-180 lg:text-[52px] md:mt-4 md:text-[42px] sm:text-[32px]">
+        Neon is the Postgres backend
+        <br />
+        designed for apps and agents.
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
@@ -48,7 +94,11 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="relative mt-16 border-t border-gray-new-20 pt-10 select-none lg:mt-14 lg:pt-7 sm:mt-12">
+      <div className="relative mt-16 md:mt-14 sm:mt-12">
+        <HeroServices items={heroServiceItems} />
+      </div>
+
+      <div className="relative mt-16 border-t border-gray-new-20 pt-10 select-none lg:mt-14 md:mt-12 sm:mt-10 sm:pt-8">
         <Logos className="max-w-full p-0!" logos={logos} size="md" />
       </div>
     </Container>
@@ -62,8 +112,8 @@ const Hero = () => (
       */}
       <PauseableVideo
         className={cn(
-          'relative left-1/2 w-[1920px] -translate-x-1/2',
-          'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
+          'relative -top-16 left-1/2 w-480 -translate-x-1/2',
+          'xl:-top-12.5 xl:w-326 lg:-top-2 lg:w-254 sm:hidden'
         )}
         width={1920}
         height={832}
@@ -77,7 +127,7 @@ const Hero = () => (
         <source src={`${LINKS.cdn}/public/pages/home/hero/hero.webm`} type="video/webm" />
       </PauseableVideo>
       <Image
-        className="relative left-[40%] hidden w-[752px] max-w-none -translate-x-1/2 sm:block"
+        className="relative left-[40%] hidden w-188 max-w-none -translate-x-1/2 sm:block"
         src={mobileBgIllustration}
         width={752}
         height={326}
@@ -87,7 +137,7 @@ const Hero = () => (
       />
     </div>
 
-    <div className="absolute bottom-0 z-20 h-[88px] w-full bg-[linear-gradient(0deg,#000_0%,rgba(0,0,0,0.00)_100%)] xl:h-[165px] lg:h-[156px] sm:h-[258px]" />
+    <div className="absolute bottom-0 z-20 h-22 w-full bg-[linear-gradient(0deg,#000_0%,rgba(0,0,0,0.00)_100%)] xl:h-41 lg:h-39 sm:h-64.5" />
   </section>
 );
 

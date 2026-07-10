@@ -2,13 +2,18 @@
 title: Build dashboards on Neon Postgres with Draxlr
 subtitle: Create live Neon dashboards and reports directly from your Postgres data
 summary: >-
-  Step-by-step guide for connecting Draxlr to a Neon Postgres database, enabling
-  users to build dashboards and reports using SQL, visual queries, or AI for
-  data analysis and insights.
+  Draxlr is a no-code analytics tool that connects to a Neon Postgres database
+  and lets you build dashboards and reports using a visual query builder, raw
+  SQL, or an AI chat interface that translates natural-language questions into
+  Postgres queries. Use this guide when you need product analytics, real-time
+  metric monitoring with email or Slack alerts, or embeddable customer-facing
+  dashboards on top of Neon without writing application code. Connection uses a
+  Neon connection string or manual host, port, database, username, and password
+  values from the Neon Console.
 redirectFrom:
   - /docs/integrations/draxlr
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.955Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Draxlr](https://www.draxlr.com) is a no code analytics tool for Neon Postgres that lets you build dashboards, reports, and insights using SQL, visual queries, or AI. It is commonly used for product analytics, reporting, and embedded dashboards.
@@ -69,7 +74,7 @@ Draxlr translates these questions into database queries, runs them on your Neon 
 
 ## What's next?
 
-With Draxlr and Neon, you can go beyond one off queries and build reliable Neon analytics workflows.
+With Draxlr and Neon, you can go beyond one-off queries and build reliable Neon analytics workflows.
 
 You can:
 

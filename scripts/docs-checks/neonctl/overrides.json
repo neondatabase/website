@@ -1,0 +1,135 @@
+{
+  "_comment": "Hand-maintained patches merged into schema.json by generate-schema.js. Use only for values the static parser cannot resolve (enum-derived choices and defaults, descriptions missing upstream, source-expression defaultText made human-readable). Keep entries minimal and verify against neonctl source when refreshing the schema pin.",
+  "globalOptions": {
+    "help": {
+      "describe": "Show help for a command or subcommand"
+    },
+    "api-key": {
+      "describe": "Neon API key, authenticates without `neon auth`",
+      "defaultText": "NEON_API_KEY environment variable"
+    },
+    "config-dir": {
+      "defaultText": "~/.config/neonctl (or $XDG_CONFIG_HOME/neonctl)"
+    },
+    "context-file": {
+      "describe": "Context file with default org, project, and branch IDs, created by `neon link`",
+      "defaultText": "nearest .neon file, searching upward from the current directory"
+    }
+  },
+  "commands": {
+    "checkout": {
+      "options": {
+        "env-pull": {
+          "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`."
+        }
+      }
+    },
+    "link": {
+      "options": {
+        "env-pull": {
+          "describe": "Pull the linked branch's Neon env vars (DATABASE_URL, ...) into a local .env after linking. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`."
+        }
+      }
+    },
+    "branches": {
+      "commands": {
+        "create": {
+          "options": {
+            "type": {
+              "default": "read_write",
+              "defaultText": null
+            },
+            "name": {
+              "defaultText": "branch id"
+            },
+            "cu": {
+              "defaultText": "project default"
+            },
+            "expires-at": {
+              "defaultText": "never expires"
+            }
+          }
+        },
+        "add-compute": {
+          "options": {
+            "type": {
+              "default": "read_only",
+              "defaultText": null
+            }
+          }
+        }
+      }
+    },
+    "projects": {
+      "commands": {
+        "create": {
+          "options": {
+            "name": {
+              "defaultText": "project ID"
+            },
+            "database": {
+              "defaultText": "neondb"
+            },
+            "role": {
+              "defaultText": "{database}_owner"
+            },
+            "hipaa": {
+              "describe": "Enable HIPAA compliance for the project."
+            }
+          }
+        },
+        "update": {
+          "options": {
+            "hipaa": {
+              "describe": "Enable HIPAA compliance for the project."
+            }
+          }
+        }
+      }
+    },
+    "neon-auth": {
+      "commands": {
+        "oauth-provider": {
+          "commands": {
+            "add": {
+              "options": {
+                "provider-id": {
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
+                }
+              }
+            },
+            "update": {
+              "options": {
+                "provider-id": {
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
+                }
+              }
+            },
+            "delete": {
+              "options": {
+                "provider-id": {
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

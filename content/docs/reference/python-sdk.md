@@ -3,11 +3,13 @@ title: Python SDK (Neon API)
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
 summary: >-
-  Covers the setup and usage of the Neon Python SDK, enabling programmatic
-  management of Neon projects, branches, databases, and other platform resources
-  through the Neon API.
+  The Neon Python SDK (neon-api, installable via pip) wraps the Neon REST API
+  and exposes methods for creating, updating, and deleting projects, branches,
+  databases, endpoints, roles, API keys, and organizations from Python code.
+  Use it when you need to automate Neon platform operations in Python scripts or
+  applications without constructing raw HTTP requests against the Neon API.
 enableTableOfContents: true
-updatedOn: '2026-03-25T00:15:20.000Z'
+updatedOn: '2026-07-06T16:27:57.937Z'
 ---
 
 <InfoBlock>
@@ -20,7 +22,7 @@ updatedOn: '2026-03-25T00:15:20.000Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/reference/api-reference">Neon API Reference</a>
+  <a href="/docs/reference/api">Neon API Reference</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
@@ -32,7 +34,7 @@ updatedOn: '2026-03-25T00:15:20.000Z'
 
 ## About the SDK
 
-Neon supports the [neon-api - Python client for the Neon API](https://pypi.org/project/neon-api/), a wrapper for the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This SDK simplifies integration of Python applications with the Neon platform, providing methods to programmatically manage API keys, Neon projects, branches, databases, endpoints, roles, and operations.
+Neon supports the [neon-api - Python client for the Neon API](https://pypi.org/project/neon-api/), a wrapper for the [Neon API](/docs/reference/api). This SDK simplifies integration of Python applications with the Neon platform, providing methods to programmatically manage API keys, Neon projects, branches, databases, endpoints, roles, and operations.
 
 <AgentSkillsTip skill_topic="the Neon Python SDK for managing resources programmatically" />
 
@@ -136,4 +138,4 @@ projects = neon.projects(org_id=org_id)
 
 - `consumption()`: Returns a list of project consumption metrics.
 
-_View the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) documentation for more information on the available endpoints and their parameters._
+_View the [Neon API](/docs/reference/api) documentation for more information on the available endpoints and their parameters._

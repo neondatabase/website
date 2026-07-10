@@ -3,9 +3,15 @@ title: "How do I rotate my Neon API keys after they've been exposed?"
 subtitle: 'Revoke the compromised key, create a new one, and update every system that uses it.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rotate my database URL or connection string in Neon?'
+  slug: rotate-database-url-connection-string
+nextLink:
+  title: 'Which serverless database services charge per second instead of per month for Postgres?'
+  slug: serverless-database-services-postgres-charge-per-second
 ---
 
 ## Quick answer
@@ -94,5 +100,3 @@ Neon does not currently rotate API keys on a schedule. Build rotation into your 
 </Admonition>
 
 For broader credential rotation (Postgres passwords plus API keys), see [How do I rotate all my Neon database credentials?](/faqs/rotate-database-credentials-after-breach).
-
-<CTA title="Engage Support after a confirmed exposure" description="If an API key was used by a third party, contact Neon Support so we can help audit recent activity." buttonText="Contact Support" buttonUrl="https://neon.com/docs/introduction/support" />

@@ -2,11 +2,16 @@
 title: Phone Number
 subtitle: Sign in existing users with phone OTP codes delivered via your SMS provider
 summary: >-
-  Covers the setup of the Phone Number plugin in Neon Auth, enabling existing
-  users to sign in with a one-time password delivered over SMS through a
-  webhook-connected SMS provider that you control.
+  The Phone Number plugin for Neon Auth adds SMS OTP sign-in for existing
+  users: when a user submits their E.164 phone number, Neon Auth fires a
+  `send.otp` webhook carrying a numeric code that your handler forwards to your
+  SMS provider (Twilio, Vonage, MessageBird, etc.). Use this page when you need
+  phone OTP sign-in for users who already have a verified phone number linked to
+  their account; phone-first sign-up is not supported. OTP expiry is
+  configurable, requests are rate-limited per IP, and an OTP is invalidated
+  after too many incorrect attempts.
 enableTableOfContents: true
-updatedOn: '2026-05-12T23:02:23.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

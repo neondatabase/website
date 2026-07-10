@@ -2,11 +2,16 @@
 title: Organization
 subtitle: 'Manage multi-tenant organizations, members, and invitations'
 summary: >-
-  Covers the management of multi-tenant organizations within the Neon platform,
-  including creating organizations, inviting members, and managing permissions
-  through the Organization plugin APIs.
+  The Neon Auth Organization plugin adds multi-tenancy to apps built on
+  Better Auth, letting each tenant share a Neon branch with role-based access
+  (owner, admin, and member roles). Use it when your app needs workspaces or
+  tenant isolation with invitation workflows, configurable membership limits,
+  and per-branch enable/disable control via the Neon Console or API. The plugin
+  exposes authClient.organization methods for creating, listing, and deleting
+  organizations, inviting and removing members, and checking role permissions
+  client-side.
 enableTableOfContents: true
-updatedOn: '2026-04-09T23:15:21.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

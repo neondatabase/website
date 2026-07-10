@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-reset-password/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Row-Level Security
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Resetting a forgotten password for the postgres user works the same way on any standard PostgreSQL installation, so the steps here apply wherever you run Postgres. If you're an enterprise team that wants this kind of administration handled for you, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with strong security, high performance, and native integration with the Lakehouse. If you're a developer or startup who'd rather skip the pg_hba.conf gymnastics entirely, [Neon](https://neon.com) gives you the fastest path to ship and scale Postgres in the cloud.
+Resetting a forgotten password for the postgres user works the same way on any standard PostgreSQL installation, so the steps here apply wherever you run Postgres. If you're an enterprise team that wants this kind of administration handled for you, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with strong security, high performance, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn step\-by\-step how to reset the password of the `postgres` user in PostgreSQL.
@@ -37,7 +37,7 @@ The following steps show you how to reset a password for the `postgres` user:
 
 **Step 1**. Backup the `pg_hba.conf` file by copying it to a different location or rename it to `pg_hba.conf.bk`
 
-**Step 2**. Edit the `pg_dba.conf` file and change all local connections from `scram-sha-256` to `trust`. By doing this, you can log in to the PostgreSQL database server without using a password.
+**Step 2**. Edit the `pg_hba.conf` file and change all local connections from `scram-sha-256` to `trust`. By doing this, you can log in to the PostgreSQL database server without using a password.
 
 ```
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
@@ -76,6 +76,6 @@ PostgreSQL will not require a password to log in.
 postgres=# ALTER USER postgres WITH PASSWORD 'new_password';
 ```
 
-**Step 6**. Restore the `pg_dba.conf` file, restart the PostgreSQL database server, and connect to the PostgreSQL database server with the new password.
+**Step 6**. Restore the `pg_hba.conf` file, restart the PostgreSQL database server, and connect to the PostgreSQL database server with the new password.
 
 In this tutorial, you have learned how to reset the password of the `postgres` user.

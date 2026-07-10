@@ -2,16 +2,18 @@
 title: Integrating with Neon
 subtitle: Choose the right integration path for your platform or application
 summary: >-
-  Covers the integration options for incorporating Postgres into platforms and
-  applications, focusing on AI agent workflows and instant database provisioning
-  without user signup.
+  Neon platform integration overview compares four embedding and partnership
+  paths: AI Agents, Claimable Database, Embedded Postgres, and OAuth. Use this
+  page to decide which approach fits your product before reading the individual
+  integration guides. Real-world implementations include TanStack Vite plugin,
+  Netlify DB, and Hasura Cloud.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-03-09T15:58:12.488Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
@@ -115,7 +117,7 @@ Use the embedded Postgres approach when you want to provision and manage Postgre
 
 <a href="/docs/guides/embedded-postgres" description="Learn how to embed Postgres in your platform" icon="import">Embedded Postgres guide</a>
 
-<a href="/docs/reference/api-reference" description="Explore the Neon API" icon="transactions">Neon API reference</a>
+<a href="/docs/reference/api" description="Explore the Neon API" icon="transactions">Neon API reference</a>
 
 </DetailIconCards>
 

@@ -2,11 +2,13 @@
 title: AI tools for documentation
 subtitle: Claude commands available when working on Neon docs
 summary: >-
-  Lists the Claude commands available in the website repo for documentation
-  work, including writing, reviewing, quality checks, changelog management,
-  and issue tracking.
+  Claude slash commands in the Neon website repo automate common documentation
+  tasks. Includes writing and rewriting pages, quality checks, MDX validation,
+  PR descriptions, changelog generation, and glossary audits. Use this reference
+  to choose the right command for each task. Commands are stored in
+  .claude/commands/ and their sub-agents in .claude/agents/.
 enableTableOfContents: true
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Neon website repo includes Claude commands for common documentation tasks. All changes are reviewed by humans via pull requests.

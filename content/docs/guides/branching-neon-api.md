@@ -2,10 +2,15 @@
 title: Branching with the Neon API
 subtitle: Learn how to create and delete branches with the Neon API
 summary: >-
-  Covers the creation and deletion of branches using the Neon API, including
-  example requests and prerequisites for making API calls.
+  Neon API branch management lets you create, list, delete, restore,
+  schema-only clone, and auto-expire branches programmatically using REST
+  endpoints authenticated with a Neon API key. Use this page when you need to
+  script branch workflows or integrate branch lifecycle into CI/CD pipelines,
+  as opposed to using the Neon Console or CLI. Branch expiration accepts an
+  RFC 3339 timestamp up to 30 days in the future. Schema-only branch creation
+  via init_source=schema-only is available as a preview feature.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.930Z'
+updatedOn: '2026-06-18T16:36:42.941Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
@@ -273,8 +278,6 @@ curl --request POST \
 ```
 
 ## Creating a branch with expiration using the API
-
-<ComingSoon />
 
 To create a branch with an automatic expiration timestamp using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `expires_at` option. When a branch reaches its expiration time, it is automatically deleted. Required values include:
 

@@ -4,7 +4,11 @@ import { describe, it, expect } from 'vitest';
 
 // Use createRequire so we can load the CJS script in an ESM test file
 const require = createRequire(import.meta.url);
-const { buildAgentSkillsIndex, buildLegacySkillsIndex } = require('./generate-skills-index.js');
+const {
+  buildAgentSkillsIndex,
+  buildLegacySkillsIndex,
+  buildAiCatalog,
+} = require('./generate-skills-index.js');
 
 const SKILLS = [
   {
@@ -85,5 +89,49 @@ describe('buildLegacySkillsIndex', () => {
     const root = buildLegacySkillsIndex(SKILLS);
     const docs = buildLegacySkillsIndex(SKILLS);
     expect(root).toEqual(docs);
+  });
+});
+
+describe('buildAiCatalog', () => {
+  it('includes the spec version and host block', () => {
+    const catalog = buildAiCatalog(SKILLS);
+    expect(catalog.specVersion).toBe('1.0');
+    expect(catalog.host.identifier).toBe('neon.com');
+    expect(catalog.host.displayName).toBe('Neon');
+  });
+
+  it('leads with the static MCP server entry', () => {
+    const catalog = buildAiCatalog(SKILLS);
+    expect(catalog.entries[0]).toMatchObject({
+      identifier: 'urn:air:neon.com:mcp:neon',
+      type: 'application/mcp-server-card+json',
+    });
+  });
+
+  it('generates one entry per skill after the MCP entry', () => {
+    const catalog = buildAiCatalog(SKILLS);
+    expect(catalog.entries).toHaveLength(SKILLS.length + 1);
+  });
+
+  it('derives each skill entry from the skill name and description', () => {
+    const catalog = buildAiCatalog(SKILLS);
+    const skillEntries = catalog.entries.slice(1);
+    skillEntries.forEach((entry, i) => {
+      expect(entry.identifier).toBe(`urn:air:neon.com:skill:${SKILLS[i].name}`);
+      expect(entry.type).toBe('application/agent-skills+md');
+      expect(entry.url).toBe(
+        `https://neon.com/.well-known/agent-skills/${SKILLS[i].name}/SKILL.md`
+      );
+      expect(entry.description).toBe(SKILLS[i].description);
+    });
+  });
+
+  it('every entry has exactly one of url/data (Level 1 conformance)', () => {
+    const catalog = buildAiCatalog(SKILLS);
+    for (const entry of catalog.entries) {
+      const hasUrl = typeof entry.url === 'string';
+      const hasData = entry.data !== undefined;
+      expect(hasUrl !== hasData).toBe(true);
+    }
   });
 });

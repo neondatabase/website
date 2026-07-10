@@ -2,11 +2,13 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 summary: >-
-  Covers the setup and integration of Neon's branching feature into development
-  workflows, including automation with APIs, CLI, and CI/CD tools for efficient
-  branch management and preview deployments.
+  Neon branching lets you instantly create copy-on-write database branches for
+  development, testing, preview deployments, and point-in-time data recovery.
+  Use this hub to find guides for automating branches with the Neon API, CLI,
+  GitHub Actions, or Githooks, and for connecting branches to Vercel preview
+  deployments or restoring data with Time Travel.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -41,7 +43,7 @@ Integrate branching into your CI/CD pipelines and workflows with the Neon API, C
 
 <a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="filter">Branching with GitHub Actions</a>
 
-<a href="/blog/automating-neon-branch-creation-with-githooks" description="Blog: Learn how to automating branch creation with Githooks" icon="hook">Branching with Githooks</a>
+<a href="/blog/automating-neon-branch-creation-with-githooks" description="Blog: Learn how to automate branch creation with Githooks" icon="hook">Branching with Githooks</a>
 
 </DetailIconCards>
 

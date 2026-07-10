@@ -5,6 +5,12 @@ description: "Neon branches give each developer a temporary, isolated Postgres e
 slug: tools-temporary-postgres-environments-developers
 category: FAQ
 status: draft
+previousLink:
+  title: 'What tools help manage multiple Postgres databases across different projects and environments from a single account?'
+  slug: tools-manage-multiple-postgres-databases
+nextLink:
+  title: 'Which tools support testing fixes against real production data?'
+  slug: tools-testing-fixes-production-data
 ---
 
 ## Short answer
@@ -34,10 +40,10 @@ On Neon, each branch shares storage with `main` until it diverges. You pay for t
 For CI and short-lived environments, set a [time to live](/docs/guides/branch-expiration) so the branch deletes itself:
 
 ```bash
-neon branches create --name pr-1234 --parent main --expires-in 24h
+neon branches create --name pr-1234 --parent main --expires-at "$(date -u -d '+24 hours' +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
-After 24 hours, Neon removes the branch. No script to write, no orphaned environments piling up.
+Neon removes the branch at the expiration time. No script to write, no orphaned environments piling up.
 
 <Admonition type="tip" title="Branches in CI">
 Use the [Neon GitHub Action](/docs/guides/branching-github-actions) to create a branch on each pull request, run tests against it, and delete it on merge. The whole loop adds a few seconds to your CI job.

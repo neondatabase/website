@@ -2,12 +2,16 @@
 title: Embedded Postgres
 subtitle: 'Offer instant, managed Postgres databases to your users with Neon'
 summary: >-
-  Covers the setup of embedding Neon's managed Postgres databases into
-  platforms, enabling instant provisioning, autoscaling, and user-specific
-  isolation without requiring user sign-up or setup.
+  Embedded Postgres on Neon lets SaaS platforms and developer tools provision an
+  isolated Postgres database per user in under 1 second via API, with
+  autoscaling, scale-to-zero, and per-project quotas for compute time, storage,
+  and data transfer. Use this page when building a database-per-tenant
+  integration with no Neon sign-up required from end users. It covers the
+  project-per-user model, API key setup, autoscaling parameters, consumption
+  quota enforcement, and usage monitoring via the metrics endpoint.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-14T03:21:15.121Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
@@ -69,7 +73,6 @@ Alternatively, use our official SDKs for easier integration:
 
 - [TypeScript SDK](/docs/reference/typescript-sdk)
 - [Python SDK](/docs/reference/python-sdk)
-- [@neondatabase/toolkit](/docs/reference/neondatabase-toolkit) (supports the Neon API for platform operations and the [Neon serverless driver](/docs/serverless/serverless-driver) for connecting and running SQL queries)
 
 ## Create projects for your users
 
@@ -174,20 +177,14 @@ For real-world examples, see how [Koyeb defines their database instance types an
 
 Query consumption metrics to track usage across your projects and implement billing:
 
-```bash
+```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/projects?limit=100&from=2024-11-01T00:00:00Z&to=2024-11-30T23:59:59Z&granularity=daily' \
+     --url 'https://console.neon.tech/api/v2/consumption_history/v2/projects?org_id=$ORG_ID&from=2024-11-01T00:00:00Z&to=2024-11-30T23:59:59Z&granularity=daily&metrics=compute_unit_seconds,root_branch_bytes_month,child_branch_bytes_month,public_network_transfer_bytes' \
      --header 'accept: application/json' \
      --header "authorization: Bearer $NEON_API_KEY"
 ```
 
-The API provides metrics for:
-
-- `active_time_seconds`: Time computes were active
-- `compute_time_seconds`: CPU seconds consumed
-- `written_data_bytes`: Data written to storage
-- `data_transfer_bytes`: Data transferred out (egress)
-- `synthetic_storage_size_bytes`: Total storage used
+The v2 project metrics endpoint returns billing-aligned metrics including compute, storage, and data transfer. To break usage down by branch within a project, use the [branch metrics endpoint](/docs/guides/consumption-metrics#branch-metrics) (`GET /consumption_history/v2/branches`).
 
 For details on querying metrics, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
@@ -252,7 +249,7 @@ We're here to help you build your integration:
 
 <DetailIconCards>
 
-<a href="/docs/reference/api-reference" description="Explore all available API endpoints" icon="transactions">Neon API Reference</a>
+<a href="/docs/reference/api" description="Explore all available API endpoints" icon="transactions">Neon API Reference</a>
 
 <a href="/contact-sales" description="Discuss your integration with our team" icon="todo">Talk to Sales</a>
 

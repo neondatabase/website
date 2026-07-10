@@ -2,12 +2,17 @@
 title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 summary: >-
-  Step-by-step guide for configuring a Postgres source connector in Decodable to
-  replicate data from a Neon Postgres database, including enabling logical
-  replication and creating a dedicated Postgres role for the process.
+  Logical replication from Neon Postgres to Decodable uses a Postgres CDC
+  connector (Apache Flink and Debezium) to stream row-level changes into
+  Decodable streams for routing to sinks such as Snowflake, Kafka, Amazon S3,
+  or Elasticsearch. Use this guide when you need continuous, low-latency change
+  capture from Neon with optional SQL or Flink transformations before data
+  reaches its destination. Setup requires enabling wal_level=logical on the Neon
+  project (irreversible) and setting replica identity to FULL on each source
+  table. Connect Decodable using a direct non-pooled connection string.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

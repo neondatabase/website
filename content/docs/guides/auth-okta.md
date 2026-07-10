@@ -3,11 +3,15 @@ title: Authenticate Neon Postgres application users with Okta
 subtitle: Learn how to add authentication to a Neon Postgres database application with
   Okta
 summary: >-
-  Step-by-step guide for adding user authentication to a Neon Postgres
-  application using Okta, including project setup, database connection, schema
-  definition, and user data management.
+  Okta Workforce Identity Cloud SSO integration for a Next.js app backed by Neon
+  Postgres, wiring Auth.js (next-auth v5) with the built-in Okta OIDC provider
+  and Drizzle ORM migrations to store per-user data keyed by the Okta sub claim.
+  Choose this guide for organization-internal SSO login rather than Auth0 or
+  Neon Auth. The tutorial covers creating an Okta OIDC web application, setting
+  issuer URI and client credentials, defining a user_messages schema, and
+  running drizzle-kit push:pg migrations against a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -161,7 +165,7 @@ export const UserMessages = pgTable('user_messages', {
 });
 ```
 
-This schema defines a table `user_messages` to store a message for each user, with the `user_id` provided by Auth0 as the primary key.
+This schema defines a table `user_messages` to store a message for each user, with the `user_id` provided by Okta as the primary key.
 
 ### Generate and run migrations
 

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: isolated-postgres-databases-preview-deployments-vercel-netlify
 category: FAQ
 status: draft
+previousLink:
+  title: 'How do I import data from a CSV file into my Neon database?'
+  slug: import-csv-into-database
+nextLink:
+  title: 'Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?'
+  slug: managed-postgres-databases-free-tier
 ---
 
 The pattern that works: branch the production database per preview deployment, point the preview's `DATABASE_URL` at the branch, and clean up the branch when the PR closes. Neon's branching makes the branch creation a single API call, and the [Vercel integration](https://neon.com/docs/guides/vercel-overview) automates the whole flow.

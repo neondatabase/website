@@ -2,11 +2,13 @@
 title: Grafana Cloud integration
 subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
 summary: >-
-  Covers the setup of Grafana Cloud integration for Neon Postgres, detailing
-  configuration for log forwarding and the transmission of metrics related to
-  database performance and resource utilization.
+  Grafana Cloud integration for Neon Postgres sends metrics and logs via the
+  OTLP endpoint, routing metrics to Mimir and Postgres logs to Loki. Use this
+  page to connect Neon to Grafana Cloud for dashboards, alerts, and LogQL
+  queries covering connection counts, CPU, memory, cache hit rate, replication
+  delay, and PgBouncer pooling metrics. Requires the Neon Scale plan.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.161Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>
@@ -46,7 +48,7 @@ The integration exports [a comprehensive set of metrics](#available-metrics) inc
 
 <FeatureBetaProps feature_name="Postgres logs export" />
 
-With the the Grafana Cloud integration, you can forward Postgres logs to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Grafana Cloud](#export-postgres-logs-to-grafana-cloud) for details.
+With the Grafana Cloud integration, you can forward Postgres logs to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Grafana Cloud](#export-postgres-logs-to-grafana-cloud) for details.
 
 ## Prerequisites
 
@@ -698,7 +700,7 @@ You can export your Postgres logs from your Neon compute to your Grafana Cloud s
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, which is billed after 100 GB on paid plans
+- Additional network egress for log transmission, which is billed after 500 GB on paid plans
 - Associated costs based on log volume in Grafana Cloud
 
 ### Querying logs in Grafana Cloud

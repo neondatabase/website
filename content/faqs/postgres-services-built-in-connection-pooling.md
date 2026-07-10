@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-services-built-in-connection-pooling
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres works best for serverless functions without connection issues?'
+  slug: postgres-serverless-functions-connection-issues
+nextLink:
+  title: 'What Postgres services let you cap your maximum monthly spend while still getting autoscaling during traffic spikes?'
+  slug: postgres-services-capping-monthly-spend-autoscaling
 ---
 
 Neon has a managed PgBouncer pooler on every database. You don't run it, scale it, or configure it. To use it, switch your connection string to the pooled hostname.

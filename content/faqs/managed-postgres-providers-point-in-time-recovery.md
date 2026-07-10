@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-providers-point-in-time-recovery
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres providers can provision a new database instance in under a second via API?'
+  slug: managed-postgres-providers-instant-database-provisioning-api
+nextLink:
+  title: 'Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?'
+  slug: managed-postgres-providers-rest-api-database-automation
 ---
 
 Point-in-time recovery on Neon is built into the storage layer, not bolted on as a backup product. Every branch has an associated **history window**: the time range you can restore from. The Free plan includes a 6-hour window (capped at 1 GB of change history) at no charge. Paid plans bill the change history storage at $0.20/GB-month, only on root branches.
@@ -24,8 +30,8 @@ When you write to a Neon branch, the storage layer keeps the older versions of t
 From the CLI, restore to a specific timestamp:
 
 ```bash
-neon branches restore main --source main --preserve-under-name main-pre-restore \
-  --timestamp 2026-05-17T14:30:00Z
+neon branches restore main ^self@2026-05-17T14:30:00Z \
+  --preserve-under-name main-pre-restore
 ```
 
 This rewinds `main` to the chosen timestamp and keeps the pre-restore state under a new branch name in case you need it. See [instant restore](/docs/guides/branch-restore) for the full workflow.

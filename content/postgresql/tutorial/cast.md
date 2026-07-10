@@ -6,7 +6,7 @@ page_description: >-
   (::) to cast a value of one type to another.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cast/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NULLIF
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The CAST function and the :: operator behave the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production on Postgres.
+The CAST function and the :: operator behave the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `CAST()` function and operator to convert a value of one type to another.
@@ -240,7 +240,7 @@ Output:
 (1 row)
 ```
 
-### 10\) Cast a JSON to a JSONB
+### 9\) Cast a JSON to a JSONB
 
 The following example uses the `CAST()` function to convert JSON to JSONB:
 
@@ -339,7 +339,7 @@ VALUES
   (3);
 ```
 
-Consequentially, the `ratings` table stores both alphabets \& numbers.
+Consequently, the `ratings` table stores both alphabets \& numbers.
 
 ```sql
 SELECT * FROM ratings;
@@ -387,7 +387,7 @@ Output:
 
 In this example:
 
-- `rating ~ E'^\\d+$'`: This expression matches the values in the rating column with a regular expression `E'^\\d+$'`. The pattern checks if a value contains only digits (`\d+`) from the beginning (`^`) to the end (`$`). The letter `E` before the string indicates is an escape string.
+- `rating ~ E'^\\d+$'`: This expression matches the values in the rating column with a regular expression `E'^\\d+$'`. The pattern checks if a value contains only digits (`\d+`) from the beginning (`^`) to the end (`$`). The letter `E` before the string indicates it is an escape string.
 - If the value contains only digits, the `CAST()` function converts it to an integer. Otherwise, it returns zero.
 
 In this tutorial, you have learned how to use PostgreSQL `CAST` to convert a value of one type to another.

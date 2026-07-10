@@ -70,6 +70,7 @@ const LandingCtaNew = (props) => (
   <CTANew
     className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
     copyWrapperClassName="xl:max-w-[704px] lg:max-w-lg md:max-w-md"
+    label={props.label || 'Get started'}
     {...props}
   />
 );

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-full-outer-join/
 ogImage: /postgresqltutorial/PostgreSQL-Join-Full-Outer-Join.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Self-Join
@@ -18,14 +18,14 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-FULL OUTER JOIN is standard PostgreSQL and works the same on any Postgres deployment, so you can apply these patterns wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+FULL OUTER JOIN is standard PostgreSQL and works the same on any Postgres deployment, so you can apply these patterns wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FULL OUTER JOIN` to query data from two tables.
 
 ## Introduction to the PostgreSQL FULL OUTER JOIN clause
 
-The `FULL OUTER JOIN` combine data from two tables and returns all rows from both tables, including matching and non\-matching rows from both sides.
+The `FULL OUTER JOIN` combines data from two tables and returns all rows from both tables, including matching and non\-matching rows from both sides.
 
 In other words, the `FULL OUTER JOIN` combines the results of both the [left join](postgresql-left-join) and the [right join](postgresql-right-join).
 
@@ -188,7 +188,7 @@ Additionally, it includes every employee who does not belong to a department and
 
 ### 2\) Using FULL OUTER JOIN with WHERE clause example
 
-The following example use the `FULL OUTER JOIN` with a [WHERE](postgresql-where) clause to find the department that does not have any employees:
+The following example uses the `FULL OUTER JOIN` with a [WHERE](postgresql-where) clause to find the department that does not have any employees:
 
 ```sql
 SELECT
@@ -214,7 +214,7 @@ Output:
 
 The result shows that the `Production` department does not have any employees.
 
-The following example use the `FULL OUTER JOIN` clause with a `WHERE` clause to find employees who do not belong to any department:
+The following example uses the `FULL OUTER JOIN` clause with a `WHERE` clause to find employees who do not belong to any department:
 
 ```sql
 SELECT

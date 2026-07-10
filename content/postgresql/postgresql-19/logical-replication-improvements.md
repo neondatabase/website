@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Logical Replication Improvements'
 page_title: 'PostgreSQL 19 Logical Replication - Sequence Sync, EXCEPT TABLE, and More'
 page_description: 'Learn about PostgreSQL 19 logical replication improvements including sequence synchronization, EXCEPT TABLE for publications, and dynamic WAL level configuration.'
 ogImage: ''
-updatedOn: '2026-05-01T20:19:36.000Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 REPACK Command'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 JSON COPY TO'
   slug: 'postgresql-19/json-copy-to'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try the logical replication improvements for yourself ahead of the final release expected later in 2026. Beta 1 adds sequence value synchronization, an `EXCEPT` clause to exclude tables from publications, and automatic enablement of logical replication when `wal_level` is `replica`.
+</Admonition>
 
 **Summary**: PostgreSQL 19 brings several improvements to logical replication, including sequence synchronization between publisher and subscriber, the ability to exclude specific tables from `FOR ALL TABLES` publications, and dynamic WAL level adjustment.
 

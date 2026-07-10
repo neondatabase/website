@@ -87,7 +87,7 @@ const DocCta = ({
       'cta-on-doc doc-cta not-prose relative overflow-hidden',
       'my-9 p-5 pr-7 md:my-8',
       'border border-gray-new-80 bg-[rgba(228,241,235)]/40',
-      'dark:border-gray-new-30 dark:bg-gray-new-10'
+      'dark:border-gray-new-20 dark:bg-gray-new-8'
     )}
   >
     {isTemplate && (

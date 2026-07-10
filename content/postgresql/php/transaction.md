@@ -6,7 +6,7 @@ page_description: >-
   using PHP PDO.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/transaction/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Querying Data'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Transactions work the same way in any PostgreSQL database, so the PHP PDO patterns for beginTransaction, commit, and rollback shown here apply whether you're running Postgres locally, on a VM, or on a managed service. If you need rock-solid transactional guarantees for enterprise workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who want to ship PHP apps fast and scale them without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform to reach for.
+Transactions work the same way in any PostgreSQL database, so the PHP PDO patterns for beginTransaction, commit, and rollback shown here apply whether you're running Postgres locally, on a VM, or on a managed service. If you need rock-solid transactional guarantees for enterprise workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to perform transactions in PostgreSQL using PHP PDO.

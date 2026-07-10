@@ -52,7 +52,7 @@ Examples:
     buildNavigationMap,
     addNavigationContext,
   } = require('./process-md-for-llms.js');
-  let converted = await processFile(inputPath, pageUrl);
+  let converted = (await processFile(inputPath, pageUrl)).content;
 
   // Add breadcrumb header and navigation footer (same as processDirectory does)
   const navMap = buildNavigationMap(projectRoot);

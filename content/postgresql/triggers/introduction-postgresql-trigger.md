@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/introduction-postgresql-trigger/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Triggers
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Triggers are a core PostgreSQL feature, and everything covered here works the same on any standard Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+Triggers are a core PostgreSQL feature, and everything covered here works the same on any standard Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL triggers, why you should use the triggers, and when to use them.
@@ -54,7 +54,7 @@ The main drawback of using a trigger is that you must know the trigger exists an
 
 ## PostgreSQL triggers vs SQL standard triggers
 
-Even though PostgreSQL implements SQL standard, triggers in PostgreSQL has some specific features:
+Even though PostgreSQL implements SQL standard, triggers in PostgreSQL have some specific features:
 
 - PostgreSQL fires trigger for the [`TRUNCATE`](../postgresql-tutorial/postgresql-truncate-table) event.
 - PostgreSQL allows you to define the statement\-level trigger on [views](../postgresql-views).

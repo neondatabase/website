@@ -4,12 +4,12 @@ subtitle: Learn how to automate database operations and processes by connecting 
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-26T00:00:00.000Z'
-updatedOn: '2025-03-02T17:52:17.000Z'
+updatedOn: '2026-06-03T18:28:10.050Z'
 ---
 
 Azure Logic Apps provides a way to build automated workflows that integrate apps, data, services, and systems.
 
-When you combine it with Neon's serverless Postgres, you can create automation solutions that handle database operations based on various triggers and events.
+When you combine it with Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, you can create automation solutions that handle database operations based on various triggers and events.
 
 In this guide, you'll learn how to create Logic Apps workflows that interact with Neon Postgres to automate common processes and database operations.
 

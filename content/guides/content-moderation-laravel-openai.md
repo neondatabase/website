@@ -4,12 +4,12 @@ subtitle: Build an automated content moderation system for your application usin
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-22T00:00:00.000Z'
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-06-03T18:28:10.050Z'
 ---
 
 Content moderation is essential for maintaining healthy online communities and platforms. In this guide, we'll create a content moderation system that uses OpenAI's moderation API to automatically analyze and flag potentially problematic content before it reaches your users.
 
-We will use Laravel, OpenAI's moderation API, and Neon's serverless Postgres database and build a system that can handle content moderation for comments, forum posts, product reviews, or any user-generated content.
+We will use Laravel, OpenAI's moderation API, and Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, and build a system that can handle content moderation for comments, forum posts, product reviews, or any user-generated content.
 
 ## What You'll Build
 

@@ -1,13 +1,14 @@
 ---
 title: Postgres functions
 summary: >-
-  Step-by-step guide for using commonly-used Postgres functions in Neon,
-  including aggregate, array, date/time, and JSON functions to enhance database
-  operations.
+  Postgres functions index for Neon, linking to individual guides for aggregate
+  (array_agg, avg, count, max, sum), array, date/time, JSON and JSONB, math,
+  string, and window functions. Use this page as the entry point to find the
+  right built-in function guide rather than searching individual function pages.
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/functions-intro
-updatedOn: '2026-02-06T22:07:32.859Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.

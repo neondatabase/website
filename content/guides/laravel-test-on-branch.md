@@ -4,7 +4,7 @@ subtitle: Leveraging Realistic Production Data for Robust Testing with Laravel a
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-05-26T00:00:00.000Z'
-updatedOn: '2025-06-27T09:33:41.000Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 [Laravel](https://laravel.com) is a popular PHP framework widely used for building web applications. It includes powerful tools for automated testing, with [PEST](https://pestphp.com/) being a preferred option due to its simplicity and effectiveness.
@@ -175,7 +175,7 @@ To set up your testing environment with Neon and Laravel, follow these steps:
 
 This setup provides a simple API endpoint to retrieve all questions from the database.
 
-To, verify the setup, you can run the Laravel development server:
+To verify the setup, you can run the Laravel development server:
 
 ```
 php artisan serve
@@ -278,68 +278,68 @@ Go back to your Laravel project and integrate the Neon branch into your testing 
 
    - Examine the output from PEST to ensure your application behaves as expected against the testing branch. This approach allows you to test changes in a controlled environment that mirrors your production setup.
 
-## 5. Managing Neon Branches with `neonctl` CLI
+## 5. Managing Neon Branches with `neon` CLI
 
 Automated testing is an essential aspect of software development, ensuring that new code contributions don't break existing functionality. Neon's database branching feature enables you to create isolated environments for testing changes without affecting your production database.
 
-With the `neonctl` CLI tool, managing these branches becomes straightforward and seamless.
+With the `neon` CLI tool, managing these branches becomes straightforward and seamless.
 
-### Installing `neonctl`
+### Installing `neon`
 
-Before you can start using `neonctl`, you need to install it on your local machine. Follow the installation instructions provided in the [Neon CLI documentation](/docs/reference/cli-install) to set up `neonctl` on your system.
+Before you can start using `neon`, you need to install it on your local machine. Follow the installation instructions provided in the [Neon CLI documentation](/docs/cli/install) to set up `neon` on your system.
 
-### Using `neonctl` to Manage Branches
+### Using `neon` to Manage Branches
 
-Once `neonctl` is installed, you can use it to interact with your Neon database branches. Here are the basic commands for managing branches:
+Once `neon` is installed, you can use it to interact with your Neon database branches. Here are the basic commands for managing branches:
 
-#### 1. [Creating a Branch](/docs/reference/cli-branches#create)
+#### 1. [Creating a Branch](/docs/cli/branches#create)
 
-To create a new branch, use the `neonctl branches create` command:
+To create a new branch, use the `neon branches create` command:
 
 ```bash
-neonctl branches create --project-id PROJECT_ID --parent PARENT_BRANCH_ID --name BRANCH_NAME
+neon branches create --project-id PROJECT_ID --parent PARENT_BRANCH_ID --name BRANCH_NAME
 ```
 
 Replace `PROJECT_ID`, `PARENT_BRANCH_ID`, and `BRANCH_NAME` with the appropriate values for your Neon project. This command will create a new branch based on the specified parent branch.
 
-#### 2. [Listing Branches](/docs/reference/cli-branches#list)
+#### 2. [Listing Branches](/docs/cli/branches#list)
 
-To list all branches in your Neon project, use the `neonctl branches list` command:
+To list all branches in your Neon project, use the `neon branches list` command:
 
 ```bash
-neonctl branches list --project-id PROJECT_ID
+neon branches list --project-id PROJECT_ID
 ```
 
 Replace `PROJECT_ID` with your Neon project ID. This command will display a list of all branches along with their IDs, names, and other relevant information.
 
-#### 3. [Obtaining Connection String](/docs/reference/cli-connection-string)
+#### 3. [Obtaining Connection String](/docs/cli/connection-string)
 
-Once you've created a branch, you'll need to obtain the connection string to configure your Laravel application. Use the `neonctl connection-string` command:
+Once you've created a branch, you'll need to obtain the connection string to configure your Laravel application. Use the `neon connection-string` command:
 
 ```bash
-neonctl connection-string BRANCH_ID
+neon connection-string BRANCH_ID
 ```
 
 Replace `BRANCH_ID` with the ID of the branch you want to connect to. This command will output the connection string that you can use to configure your Laravel `.env` file.
 
-#### 4. [Deleting a Branch](/docs/reference/cli-branches#delete)
+#### 4. [Deleting a Branch](/docs/cli/branches#delete)
 
-After you've finished testing with a branch, you can delete it using the `neonctl branches delete` command:
+After you've finished testing with a branch, you can delete it using the `neon branches delete` command:
 
 ```bash
-neonctl branches delete BRANCH_ID
+neon branches delete BRANCH_ID
 ```
 
 Replace `BRANCH_ID` with the ID of the branch you want to delete. This command will remove the branch from your Neon project, ensuring that resources are not left unused.
 
 ### Integrating Neon Branches with Laravel Testing
 
-Once you've created a Neon branch using `neonctl`, you can integrate it into your Laravel testing workflow:
+Once you've created a Neon branch using `neon`, you can integrate it into your Laravel testing workflow:
 
-1. **Obtain Connection Details:** Use `neonctl connection-string` to get the connection details for the branch.
-2. **Update `.env.testing` File:** Update your Laravel `.env.testing` file with the connection details obtained from `neonctl`.
+1. **Obtain Connection Details:** Use `neon connection-string` to get the connection details for the branch.
+2. **Update `.env.testing` File:** Update your Laravel `.env.testing` file with the connection details obtained from `neon`.
 3. **Run Tests:** Execute your Laravel tests as usual, ensuring that they interact with the Neon branch database.
-4. **Clean Up:** After testing is complete, use `neonctl branches delete` to delete the branch and clean up resources.
+4. **Clean Up:** After testing is complete, use `neon branches delete` to delete the branch and clean up resources.
 
 ## Conclusion
 

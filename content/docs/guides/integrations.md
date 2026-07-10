@@ -3,13 +3,14 @@ title: Neon integration guides
 subtitle: Find detailed instructions for integration across various platforms and
   services.
 summary: >-
-  Covers the integration of Neon with various authentication services and
-  deployment platforms, providing detailed instructions for developers to
-  connect and use Neon Postgres in their applications.
+  Index of Neon integration guides organized by category: authentication,
+  deployment, schema migration, replication, monitoring, and serverless.
+  Use this page to find setup instructions for connecting Neon Postgres to a
+  specific platform or tool.
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Authentication
@@ -155,6 +156,8 @@ updatedOn: '2026-05-03T13:21:51.000Z'
 <a href="/docs/guides/sequin" title="Sequin" description="Stream changes and rows from your database to anywhere with Sequin" icon="sequin"></a>
 
 <a href="/docs/guides/logical-replication-airbyte-snowflake" title="Snowflake" description="Replicate data from Neon to Snowflake with Airbyte" icon="snowflake"></a>
+
+<a href="/docs/guides/logical-replication-stacksync" title="Stacksync" description="Replicate data from Neon with Stacksync" icon="stacksync"></a>
 
 </TechCards>
 

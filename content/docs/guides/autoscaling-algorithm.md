@@ -2,11 +2,15 @@
 title: Understanding Neon’s autoscaling algorithm
 subtitle: How Neon’s algorithm scales resources to match your workload
 summary: >-
-  Covers the mechanics of Neon's autoscaling algorithm, detailing how it
-  monitors key metrics like CPU load and memory usage to automatically adjust
-  compute resources for optimal performance and efficiency.
+  Neon's autoscaling algorithm scales compute by evaluating CPU load average,
+  RAM usage, and Local File Cache working set size against fixed thresholds,
+  then applying the formula goalCU = max(cpuGoalCU, memGoalCU, lfcGoalCU). The
+  autoscaler-agent polls CPU, memory, and LFC on a regular schedule, while the
+  vm-monitor checks Postgres memory every 100 milliseconds. Use this page to
+  understand the internal decision logic, not the configuration steps covered
+  in the enablement guide.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.123Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

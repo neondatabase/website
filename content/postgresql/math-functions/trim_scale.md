@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-trim_scale/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRUNC() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The TRIM_SCALE() function works the same in any PostgreSQL environment, so everything here applies whether you run Postgres yourself or on a managed platform. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's fully integrated with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres.
+The TRIM_SCALE() function works the same in any PostgreSQL environment, so everything here applies whether you run Postgres yourself or on a managed platform. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's fully integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TRIM_SCALE()` function to reduce the value’s scale by removing trailing zeroes.
@@ -130,4 +130,4 @@ Output:
 
 ## Summary
 
-- Use the `TRIM_SCALE()` function to reduce the scale of a number scale by removing trailing zeroes.
+- Use the `TRIM_SCALE()` function to reduce the scale of a number by removing trailing zeroes.

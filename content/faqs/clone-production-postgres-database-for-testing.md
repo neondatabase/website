@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: clone-production-postgres-database-for-testing
 category: FAQ
 status: draft
+previousLink:
+  title: 'How do I check which PostgreSQL version my Neon database is running?'
+  slug: check-postgresql-version-neon
+nextLink:
+  title: 'Which cloud Postgres services scale down to zero automatically without losing any data?'
+  slug: cloud-postgres-services-scale-zero-data
 ---
 
 Neon does this with branching. A branch is a full Postgres database that starts as a pointer to the parent's data. No bytes are copied at branch time, so cloning a 50 GB production database takes a second or two regardless of size. Each developer can have their own branch and write to it without affecting production.
@@ -27,8 +33,7 @@ You can also branch from a specific point in time, which is useful for reproduci
 ```bash
 neon branches create \
   --name repro-bug-1234 \
-  --parent main \
-  --parent-timestamp 2026-04-24T15:00:00Z
+  --parent 2026-04-24T15:00:00Z
 ```
 
 ## Keep dev branches short-lived

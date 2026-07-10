@@ -124,9 +124,9 @@ const AiPage = () => (
     />
     <GridFeatures
       className="mt-[199px] xl:mt-[191px] lg:mt-[153px] md:mt-[107px]"
-      title="Add Postgres to your agent"
+      title="Add a backend to your agent"
       titleClassName="md:text-pretty"
-      description="Neon is purpose-built to support AI agents at the infrastructure level, with native, API-first Postgres that doesn’t require end-user signups or manual provisioning."
+      description="Neon is purpose-built to support AI agents at the infrastructure level, with a native, API-first backend that doesn’t require end-user signups or manual provisioning."
       items={AGENT_FEATURES}
       link={LINKS.useCasesAI}
       linkText="Read more"
@@ -170,7 +170,7 @@ const AiPage = () => (
       link={LINKS.docsAi}
       linkText="Learn more"
     />
-    <CTANew title="The Postgres of tomorrow,<br /> available today" />
+    <CTANew title="The Postgres of tomorrow,<br /> available today" label="Get started" />
   </Layout>
 );
 

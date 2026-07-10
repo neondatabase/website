@@ -2,16 +2,20 @@
 title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 summary: >-
-  Covers the process of using the Backup & Restore feature in Neon to instantly
-  restore branches to previous states, create and manage snapshots, and schedule
-  automated backups for data recovery.
+  Neon's Backup & Restore feature combines instant point-in-time restore (PITR)
+  and snapshots to recover a branch from accidental changes, schema issues, or
+  data loss. Use it when you need to roll back a root branch to a specific
+  timestamp or LSN, create manual snapshots before risky changes, or schedule
+  automated daily, weekly, or monthly backups. Snapshot storage is billed at
+  $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
+  limit.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-07-03T10:03:13.108Z'
 ---
 
-<Admonition type="note" title="Snapshots in Beta">
-The **Snapshots** feature is in Beta and available to all users. Manual snapshot limits: 1 on the Free plan and 100 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+<Admonition type="note" title="Snapshots">
+The **Snapshots** feature is available to all users. Manual snapshot limits: 1 on the Free plan and 100 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
 **Pricing:** Snapshot storage is billed at $0.09/GB-month.
 
@@ -93,7 +97,7 @@ neon branches restore development ^self@2025-01-01T00:00:00Z --preserve-under-na
 
 This command resets the target branch `development` to its state at the start of 2025. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
-For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
+For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
 
 </TabItem>
 
@@ -171,6 +175,21 @@ The parameters used in the example above:
 - `timestamp`: A point in time to create the snapshot from (RFC 3339 format).
 - `name`: A user-defined name for the snapshot.
 - `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format).
+
+#### Update a snapshot's expiration
+
+You can change a snapshot's expiration after it is created using the [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot) endpoint. Set `expires_at` to a future timestamp to extend or change the retention deadline, or send `null` to clear it so the snapshot never expires. Omit the field to leave the expiration unchanged.
+
+```bash
+curl -X PATCH "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id" \
+  -H "Content-Type: application/json" \
+  -H 'authorization: Bearer $NEON_API_KEY' \
+  -d '{
+    "snapshot": {
+      "expires_at": "2026-12-31T00:00:00Z"
+    }
+  }' |jq
+```
 
 ### Snapshot size fields in API responses
 

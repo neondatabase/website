@@ -3,11 +3,16 @@ title: Migrate from Microsoft SQL Server to Neon Postgres
 subtitle: Learn how to migrate a Microsoft SQL Server database to Neon Postgres using
   pgloader
 summary: >-
-  Covers the migration of a Microsoft SQL Server database to Neon Postgres using
-  pgloader, detailing prerequisites, setup steps, and configuration requirements
-  for a successful data transfer.
+  Migrating from Microsoft SQL Server (MSSQL) or Azure SQL to Neon Postgres
+  uses pgloader, which streams data through the Postgres COPY protocol and
+  automatically detects schemas, indexes, and constraints. Use this page when
+  you need end-to-end steps covering credentials, firewall rules, pgloader
+  configuration, running the migration, and post-migration verification. Neon's
+  Free plan supports up to 0.5 GB; larger datasets require a paid plan. Azure
+  SQL users may need FreeTDS driver configuration to resolve pgloader
+  connection errors.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.209Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -57,7 +62,7 @@ If you are using Azure SQL, you need to allow inbound traffic from your local ma
 
 3. Click on the `Add your Client IPv4 address` option, which will automatically create a new rule with the IP address of your local machine. If you are running `pgloader` elsewhere, replace both the `Start IP` and `End IP` fields with the IP address of that machine.
 
-4. CLick `Save` at the bottom to make sure all changes are saved.
+4. Click `Save` at the bottom to make sure all changes are saved.
 
 ## Prepare your Neon destination database
 

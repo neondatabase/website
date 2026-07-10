@@ -2,11 +2,11 @@
 title: PostgreSQL Math Functions
 page_title: PostgreSQL Math Functions
 page_description: >-
-  Provide the most commonly used PostgreSQL Match functions that help you
+  Provide the most commonly used PostgreSQL Math functions that help you
   perform various math operations quickly and effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/math-functions.png'
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TO_NUMBER() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL's math functions work the same across any Postgres deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres inside the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for speed.
+PostgreSQL's math functions work the same across any Postgres deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres inside the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 This page provides the most commonly used PostgreSQL Math functions that help you perform various math operations quickly and effectively.
@@ -36,7 +36,7 @@ This page provides the most commonly used PostgreSQL Math functions that help yo
 | [GCD](postgresql-math-functions/postgresql-gcd)                   | Calculate the greatest common divisor of two numbers.                                           | GCD(8,12\)              | 4        |
 | [LCM](postgresql-math-functions/postgresql-lcm)                   | Calculate the least common multiples of two numbers.                                            | LCM(8,12\)              | 24       |
 | [LN](postgresql-math-functions/postgresql-ln)                     | Return the natural logarithm of a numeric value.                                                | LN(3\)                  | 1\.0986  |
-| [LOG](postgresql-math-functions/postgresql-log)                   | Return the base 10 logarithms of a numeric value.                                               | LOG(1000\)              | 3        |
+| [LOG](postgresql-math-functions/postgresql-log)                   | Return the base 10 logarithm of a numeric value.                                                | LOG(1000\)              | 3        |
 | [LOG](postgresql-math-functions/postgresql-log)                   | Return the logarithm of a numeric value to a specified base.                                    | LOG(2, 64\)             | 6        |
 | [MIN_SCALE](postgresql-math-functions/postgresql-min_scale)       | Return the minimum scale of a number.                                                           | MIN_SCALE(12\.300\)     | 1        |
 | [MOD](postgresql-math-functions/postgresql-mod)                   | Divide the first parameter by the second one and return the remainder.                          | MOD(10,4\)              | 2        |

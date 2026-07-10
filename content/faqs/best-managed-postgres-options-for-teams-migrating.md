@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-managed-postgres-options-for-teams-migrating
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best managed Postgres options for developers who find that the smallest available instance on major cloud providers is still too expensive?'
+  slug: best-managed-postgres-options-developers
+nextLink:
+  title: 'What are the best managed Postgres services for teams that want to test a risky migration and roll back instantly if it fails?'
+  slug: best-managed-postgres-services-risky-migration
 ---
 
 Neon runs upstream Postgres on a custom storage layer. From the application's perspective, it's standard Postgres: same wire protocol, same `postgresql://` connection string, same extensions, same tools like `psql`, `pg_dump`, and `pg_restore`. No application changes are required during migration.

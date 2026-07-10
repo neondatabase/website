@@ -6,7 +6,7 @@ page_description: >-
   time-related functions to handle time values effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-time/'
 ogImage: /postgresqltutorial/PostgreSQL-TIME-example.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Interval Data Type
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The TIME data type works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The TIME data type works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `TIME` data types and some handy functions to handle time values.
@@ -223,7 +223,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Extracting hours, minutes, and seconds from a time value
+### 3\) Extracting hours, minutes, and seconds from a time value
 
 To extract hours, minutes, and seconds from a time value, you use the [`EXTRACT`](../postgresql-date-functions/postgresql-extract) function as follows:
 

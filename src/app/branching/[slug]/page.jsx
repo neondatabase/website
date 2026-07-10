@@ -16,6 +16,8 @@ import { getAllPosts, getNavigationLinks } from 'utils/api-branching';
 import { getPostBySlug } from 'utils/api-content';
 import getMetadata from 'utils/get-metadata';
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const posts = await getAllPosts();
   if (!posts) return notFound();

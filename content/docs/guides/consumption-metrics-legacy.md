@@ -1,22 +1,23 @@
 ---
 title: Query consumption metrics (legacy)
-subtitle: Legacy account and project consumption APIs for Scale, Business, and
-  Enterprise plans
+subtitle: Legacy project consumption API for Scale, Business, and Enterprise plans
 summary: >-
-  How to query account and project consumption metrics using the legacy Neon API
-  (active time, compute time, written data, synthetic storage). For usage-based
-  plans, use Query consumption metrics instead.
+  The legacy Neon consumption API provides the `/consumption_history/projects`
+  endpoint that returns active_time_seconds, compute_time_seconds,
+  written_data_bytes, and synthetic_storage_size_bytes for accounts on Scale
+  plans and above (legacy Scale, Business, Enterprise, and usage-based Scale+),
+  with history available from March 1, 2024. This endpoint is not available on
+  Launch and does not return invoice-aligned metrics on usage-based plans. For
+  metrics that match your invoice or for Launch plan access, use the Query
+  consumption metrics page instead.
 enableTableOfContents: true
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-18T20:28:34.156Z'
 ---
 
-<ConsumptionAccountApiDeprecation/>
-
-Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. The Management API only allows these paths for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). They are **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, these endpoints return **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
+Using the Neon API, you can query project-level consumption metrics with the legacy endpoint. The Management API only allows this path for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). It is **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, this endpoint returns **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
 
 | API                 | Endpoint                        | Description                               | Available on                                                          |
 | ------------------- | ------------------------------- | ----------------------------------------- | --------------------------------------------------------------------- |
-| **Account metrics** | `/consumption_history/account`  | Aggregated metrics across all projects    | Scale, Business, Enterprise (legacy); usage-based Scale+ (not Launch) |
 | **Project metrics** | `/consumption_history/projects` | Per-project metrics at chosen granularity | Scale, Business, Enterprise (legacy); usage-based Scale+ (not Launch) |
 
 Issuing calls to these APIs does not wake a project's compute endpoints.
@@ -42,29 +43,6 @@ Both endpoints return metrics that align with legacy billing. Default metrics ar
 | `data_storage_bytes_hour`      | Bytes-Hour | Storage consumed hourly (optional)                                                                  |
 | `logical_size_bytes`           | Bytes      | Logical size consumed (optional)                                                                    |
 | `logical_size_bytes_hour`      | Bytes-Hour | Logical size consumed hourly (optional)                                                             |
-
-### Account-level endpoint
-
-**Endpoint:**
-
-```bash
-GET https://console.neon.tech/api/v2/consumption_history/account
-```
-
-Retrieves consumption metrics for Scale and Enterprise plan accounts, and for legacy Scale, Business, and Enterprise plan accounts. Returns total usage across all projects in the organization. Consumption history begins at the time the account was upgraded to a supported plan.
-
-#### Required parameters
-
-- **`from`** (date-time, required): Start of the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. Consumption history is available from March 1, 2024, at 00:00:00 UTC. The range must respect the granularity limits (hourly: last 168 hours; daily: last 60 days; monthly: past year).
-- **`to`** (date-time, required): End of the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. The range must respect the same granularity limits as `from`.
-- **`granularity`** (string, required): Granularity of consumption metrics. `hourly` (last 168 hours), `daily` (last 60 days), or `monthly` (past year).
-
-#### Optional parameters
-
-- **`org_id`** (string): Organization for which to return consumption metrics. If not provided, returns metrics for the authenticated user's account.
-- **`metrics`** (array of strings): Metrics to include. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned. Possible values: `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes`, `data_storage_bytes_hour`. Can be an array of parameter values or a comma-separated list in a single parameter value.
-
-The **`include_v1_metrics`** parameter is deprecated; use **`metrics`** instead. If `metrics` is specified, `include_v1_metrics` is ignored.
 
 ### Project-level endpoint
 
@@ -109,52 +87,7 @@ The **`include_v1_metrics`** parameter is deprecated; use **`metrics`** instead.
 
 ## Example request and response
 
-Replace `$NEON_API_KEY` with your API key and, for the project endpoint, include `org_id` if needed.
-
-### Account-level
-
-```bash shouldWrap
-curl --request GET \
-  --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T00:00:00Z&to=2024-07-02T00:00:00Z&granularity=daily&org_id=org-ocean-art-12345678' \
-  --header 'accept: application/json' \
-  --header 'authorization: Bearer $NEON_API_KEY'
-```
-
-<details>
-<summary>Response body (account)</summary>
-
-```json
-{
-  "periods": [
-    {
-      "period_id": "random-period-abcdef",
-      "period_plan": "scale",
-      "period_start": "2024-06-01T00:00:00Z",
-      "period_end": "2024-07-01T00:00:00Z",
-      "consumption": [
-        {
-          "timeframe_start": "2024-06-30T00:00:00Z",
-          "timeframe_end": "2024-07-01T00:00:00Z",
-          "active_time_seconds": 147452,
-          "compute_time_seconds": 43215,
-          "written_data_bytes": 111777920,
-          "synthetic_storage_size_bytes": 41371988928
-        },
-        {
-          "timeframe_start": "2024-07-01T00:00:00Z",
-          "timeframe_end": "2024-07-02T00:00:00Z",
-          "active_time_seconds": 147468,
-          "compute_time_seconds": 43223,
-          "written_data_bytes": 110483584,
-          "synthetic_storage_size_bytes": 41467955616
-        }
-      ]
-    }
-  ]
-}
-```
-
-</details>
+Replace `$NEON_API_KEY` with your API key and include `org_id` if needed.
 
 ### Project-level
 
@@ -213,7 +146,7 @@ curl --request GET \
 You can request specific metrics with the `metrics` parameter (for example, `metrics=active_time_seconds,compute_time_seconds`).
 </Admonition>
 
-For full parameter and response details, see [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) and [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) in the Neon API Reference.
+For full parameter and response details, see [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) in the Neon API Reference.
 
 The following sections cover paging (project endpoint), polling behavior, and handling errors.
 

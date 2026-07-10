@@ -3,11 +3,14 @@ title: Connect a Micronaut Kotlin application to Neon Postgres
 subtitle: Learn how to make server-side queries to Postgres from a Micronaut Kotlin
   application
 summary: >-
-  Step-by-step guide for connecting a Micronaut Kotlin application to a Neon
-  Postgres database, including project creation, database configuration, and
-  implementing CRUD operations through REST endpoints.
+  Connect a Kotlin-based Micronaut microservice to Neon Postgres using Hikari
+  connection pooling, Flyway schema migrations, and Micronaut Data JDBC to
+  expose CRUD REST endpoints. Use this guide when building a Micronaut app that
+  needs a production-ready Postgres connection with automatic schema management.
+  The setup uses the micronaut-data-jdbc, jdbc-hikari, and flyway Micronaut
+  features alongside the org.postgresql JDBC driver.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.019Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/micronaut-kotlin-prompt.md"

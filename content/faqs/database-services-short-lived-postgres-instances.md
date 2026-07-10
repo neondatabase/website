@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: database-services-short-lived-postgres-instances
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?'
+  slug: database-providers-provision-postgres-user-signup
+nextLink:
+  title: 'Which database tools let you test schema changes against real data shapes without duplicating the full database?'
+  slug: database-tools-test-schema-changes-real-data
 ---
 
 Neon. Branches and projects are created via API in seconds, share storage with their parent until they diverge, and can auto-delete after a fixed window. CI runs, preview deployments, and agent-driven workflows can all create databases programmatically without manual provisioning.
@@ -17,10 +23,10 @@ A branch is the cheapest unit of isolation. It's a full Postgres database that s
 neon branches create \
   --name ci-pr-${PR_NUMBER} \
   --project-id $NEON_PROJECT_ID \
-  --expiration 1h
+  --expires-at "$(date -u -d '+1 hour' +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
-The `--expiration 1h` flag auto-deletes the branch after one hour. The console offers presets of **1 hour, 1 day, or 7 days**, plus a custom timestamp via API. See [Branch expiration](/docs/guides/branch-expiration).
+The `--expires-at` flag sets a deletion timestamp. The branch auto-deletes when that time is reached. The console offers presets of **1 hour, 1 day, or 7 days**, plus a custom timestamp via API. See [Branch expiration](/docs/guides/branch-expiration).
 
 For the API equivalent:
 

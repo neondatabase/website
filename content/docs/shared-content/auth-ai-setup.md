@@ -2,10 +2,10 @@
 updatedOn: '2026-05-17T10:06:14.681Z'
 ---
 
-The fastest way to connect your editor to Neon Auth is to run `npx neonctl@latest init` from your project root:
+The fastest way to connect your editor to Neon Auth is to run `npx neon@latest init` from your project root:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 This command configures the [Neon MCP server](/docs/ai/neon-mcp-server) and installs **[Agent Skills](/docs/ai/agent-skills)** (`neon-postgres`) in your project. Together they help you set up Neon Auth in two ways:

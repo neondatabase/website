@@ -71,6 +71,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/cedalio.svg',
     darkIconPath: '/images/technology-logos/cedalio-dark.svg',
   },
+  'claude-code': {
+    name: 'claude-code',
+    lightIconPath: '/images/technology-logos/claude-code.svg',
+    darkIconPath: '/images/technology-logos/claude-code-dark.svg',
+  },
   clerk: {
     name: 'clerk',
     lightIconPath: '/images/technology-logos/clerk.svg',
@@ -91,6 +96,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/cloudinary.svg',
     darkIconPath: null,
   },
+  codex: {
+    name: 'codex',
+    lightIconPath: '/images/technology-logos/codex.svg',
+    darkIconPath: '/images/technology-logos/codex-dark.svg',
+  },
   confluent: {
     name: 'confluent',
     lightIconPath: '/images/technology-logos/confluent.svg',
@@ -100,6 +110,16 @@ const ICONS_CONFIG = {
     name: 'convex',
     lightIconPath: '/images/technology-logos/convex.svg',
     darkIconPath: null,
+  },
+  copilot: {
+    name: 'copilot',
+    lightIconPath: '/images/technology-logos/copilot.svg',
+    darkIconPath: '/images/technology-logos/copilot-dark.svg',
+  },
+  cursor: {
+    name: 'cursor',
+    lightIconPath: '/images/technology-logos/cursor.svg',
+    darkIconPath: '/images/technology-logos/cursor-dark.svg',
   },
   database: {
     name: 'database',
@@ -455,6 +475,11 @@ const ICONS_CONFIG = {
     name: 'sqlalchemy',
     lightIconPath: '/images/technology-logos/sqlalchemy.svg',
     darkIconPath: '/images/technology-logos/sqlalchemy-dark.svg',
+  },
+  stacksync: {
+    name: 'stacksync',
+    lightIconPath: '/images/technology-logos/stacksync.svg',
+    darkIconPath: null,
   },
   stepzen: {
     name: 'stepzen',

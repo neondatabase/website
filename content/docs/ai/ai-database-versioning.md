@@ -3,16 +3,19 @@ title: Database versioning with snapshots
 subtitle: How AI agents and codegen platforms implement database version control using
   snapshots and preview branches
 summary: >-
-  Covers the implementation of database versioning using Neon's snapshot APIs,
-  enabling the creation of point-in-time database versions, instant rollbacks,
-  and stable connection strings for applications in AI agent and code generation
-  contexts.
+  Database versioning with Neon snapshots is a pattern for AI agents and codegen
+  platforms that captures point-in-time database states and restores them without
+  changing the connection string, by transferring compute endpoints to a new
+  branch via the `finalize_restore: true` flag. Use this pattern when you need
+  instant rollbacks to a previous version while keeping the active branch
+  connection string stable, or when you need temporary preview branches from any
+  saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-07-03T10:03:13.108Z'
 ---
 
-<Admonition type="note" title="Beta">
-Snapshots are available in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
+<Admonition type="note">
+Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
 
 **Limits and pricing:** The Free plan includes 1 manual snapshot, and paid plans (including the [Agent plan](https://neon.com/use-cases/ai-agents)) include 100 manual snapshots. On paid plans, snapshots created by backup schedules do not count toward this limit. Snapshot storage is billed at $0.09/GB-month. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 </Admonition>
@@ -262,9 +265,9 @@ DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
 
-#### Update snapshot name
+#### Update a snapshot
 
-Rename a snapshot using the [update endpoint](https://api-docs.neon.tech/reference/updatesnapshot):
+Rename a snapshot or change its expiration using the [update endpoint](https://api-docs.neon.tech/reference/updatesnapshot):
 
 ```bash
 PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}
@@ -275,12 +278,37 @@ PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
 
-**Body:**
+**Body fields (all optional):**
+
+- `name` (string): A new name for the snapshot
+- `expires_at` (string or `null`): The auto-deletion time in [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6) format. Set a future timestamp to change the retention deadline, or send `null` to clear the expiration so the snapshot never expires. Omit the field to leave the current expiration unchanged. A past timestamp is rejected.
+
+Rename a snapshot:
 
 ```json
 {
   "snapshot": {
     "name": "important-milestone"
+  }
+}
+```
+
+Extend a snapshot's expiration:
+
+```json
+{
+  "snapshot": {
+    "expires_at": "2026-12-31T00:00:00Z"
+  }
+}
+```
+
+Remove the expiration so the snapshot never expires:
+
+```json
+{
+  "snapshot": {
+    "expires_at": null
   }
 }
 ```
@@ -322,7 +350,7 @@ Proper cleanup reduces costs and keeps your project manageable:
 | [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)                | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` | Restore database to a previous version       |
 | [List snapshots](https://api-docs.neon.tech/reference/listsnapshots)                    | `GET /api/v2/projects/{project_id}/snapshots`                        | Get all available versions                   |
 | [Delete snapshot](https://api-docs.neon.tech/reference/deletesnapshot)                  | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       | Remove a saved version                       |
-| [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot)                  | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        | Rename a version                             |
+| [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot)                  | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        | Rename a version or change its expiration    |
 | [Poll operation](https://api-docs.neon.tech/reference/getprojectoperation)              | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        | Check restore status                         |
 | [List branches](https://api-docs.neon.tech/reference/listprojectbranches) (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                         | Find orphaned branches to clean up           |
 

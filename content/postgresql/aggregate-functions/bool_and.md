@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_and/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ARRAY_AGG Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The BOOL_AND() function is standard PostgreSQL and works the same way on any Postgres deployment, so everything here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for you.
+The BOOL_AND() function is standard PostgreSQL and works the same way on any Postgres deployment, so everything here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `BOOL_AND()` function to aggregate boolean values across rows within a group.
@@ -47,7 +47,7 @@ Let’s explore some examples of using the `BOOL_AND()` function.
 
 ### 1\) Setting up sample tables
 
-First, [create tables](../postgresql-tutorial/postgresql-create-table) called `teams` and `members`:
+First, [create tables](../postgresql-tutorial/postgresql-create-table) called `teams` and `projects`:
 
 ```sql
 CREATE TABLE teams (
@@ -95,7 +95,7 @@ The `teams` table:
 (3 rows)
 ```
 
-The `members` table:
+The `projects` table:
 
 ```text
  project_id |      name      | active | team_id
@@ -130,9 +130,9 @@ Output:
 
 ```
 
-The `BOOL_AND()` function returns true indicating that there are inactive projects in the `projects` table.
+The `BOOL_AND()` function returns false indicating that there are inactive projects in the `projects` table.
 
-### 2\) Using BOOL_AND() function with GROUP BY clause
+### 3\) Using BOOL_AND() function with GROUP BY clause
 
 The following example uses the `BOOL_AND()` function with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause to check if there are active projects in each team:
 
@@ -158,7 +158,7 @@ Output:
 (3 rows)
 ```
 
-The output indicates that teams B and C have projects that are active (or NULL) whereas team C has inactive projects.
+The output indicates that teams B and C have projects that are active (or NULL) whereas team A has inactive projects.
 
 ### 3\) Using BOOL_AND() function in HAVING clause
 

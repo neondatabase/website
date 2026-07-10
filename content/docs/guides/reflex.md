@@ -2,11 +2,14 @@
 title: Build a Python App with Reflex and Neon
 subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
 summary: >-
-  Step-by-step guide for building a full-stack Python application using the
-  Reflex framework and connecting it to a Neon Postgres database, including
-  project setup and dependency management.
+  Connecting a Reflex Python web app to Neon Postgres requires setting a
+  DATABASE_URL in rxconfig.py via python-dotenv, defining sqlmodel ORM models,
+  and running Alembic migrations. Use this page when building a Python
+  full-stack application with Reflex that needs a serverless Postgres backend,
+  covering virtual environment setup, psycopg2-binary installation, schema
+  migrations, and a working CRUD example.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.041Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <CopyPrompt src="/prompts/reflex-prompt.md"

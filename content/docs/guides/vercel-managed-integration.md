@@ -2,14 +2,20 @@
 title: Connecting with the Vercel-Managed Integration
 subtitle: Create and manage Neon databases directly from your Vercel dashboard
 summary: >-
-  Covers the setup of the Vercel-Managed Integration for adding and managing
-  Neon Postgres databases within the Vercel dashboard, including installation,
-  billing management, and enabling automated Preview Branching.
+  The Vercel-Managed Integration (also called Neon Postgres Native Integration)
+  provisions a Neon Postgres database from the Vercel Marketplace and routes all
+  billing through your Vercel invoice, injecting DATABASE_URL and related
+  environment variables automatically. Choose this path over the Neon-Managed
+  Integration when you have no existing Neon account or want a single Vercel
+  bill; it does not support the neon auth CLI command. Automated Preview
+  Branching creates an isolated copy-on-write Neon branch for every Vercel
+  Preview Deployment, with branches cleaned up according to Vercel's 6-month
+  default deployment retention policy.
 redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-06-30T15:58:53.991Z'
 ---
 
 <InfoBlock>
@@ -158,6 +164,8 @@ Because your database is managed by Vercel, you can only perform these actions *
 
 Everything else (querying data, branching, monitoring usage) works exactly the same in the Neon Console.
 
+If you're on Neon's Scale plan, you can open support tickets for any Neon issue directly from the Neon Console. See [Support tickets](/docs/introduction/support#support-tickets) for details.
+
 ### Team member synchronization
 
 Team membership changes in Vercel automatically sync to your Neon organization:
@@ -216,7 +224,7 @@ This removes database environment variables from your Vercel project but keeps t
 
 ### Manage branches created by the integration
 
-You can manually delete preview branches at any time via the [Neon Console](/docs/manage/branches#delete-a-branch), [Neon CLI](/docs/reference/cli-branches#delete), or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api). For automated cleanup options, including GitHub Actions, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
+You can manually delete preview branches at any time via the [Neon Console](/docs/manage/branches#delete-a-branch), [Neon CLI](/docs/cli/branches#delete), or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api). For automated cleanup options, including GitHub Actions, see [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup).
 
 <Admonition type="note" title="Unused branches are archived">
 Branches you don't delete are eventually [archived](/docs/guides/branch-archiving), reducing storage costs but still consuming archive storage space.

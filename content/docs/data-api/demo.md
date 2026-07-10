@@ -2,11 +2,15 @@
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
 summary: >-
-  Step-by-step guide for setting up a note-taking app using Neon's Data API with
-  Row-Level Security (RLS) and authentication, demonstrating how to write
-  queries from frontend code securely.
+  Neon Data API tutorial using a React/Vite note-taking app. The app runs
+  PostgREST-compatible SELECT, INSERT, UPDATE, and DELETE queries from the
+  frontend via the @neondatabase/neon-js client. Row-Level Security policies
+  written with Drizzle ORM enforce per-user data isolation, with
+  `auth.user_id()` extracting the caller's identity from JWTs. Use this page
+  for a working end-to-end example of Data API query patterns, RLS setup, and
+  ON DELETE CASCADE.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This tutorial uses a note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with authentication and Row-Level Security (RLS) policies keeping your data secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.

@@ -11,7 +11,7 @@ const Bento = ({ cards }) => (
       size="1152"
     >
       <h2 className="mx-auto text-center font-title text-[48px] leading-none font-medium tracking-extra-tight xl:text-[44px] lg:text-[36px] md:text-[32px]">
-        Add Postgres to your platform or AI Agent
+        Add a complete backend to your platform or AI Agent
       </h2>
       <ul className="mx-auto mt-10 grid grid-cols-7 grid-rows-[384px_384px] gap-5 xl:mt-11 xl:grid-rows-[318px_318px] lg:mt-9 lg:grid-rows-[318px_318px_318px] sm:grid-cols-1 sm:grid-rows-[repeat(6,minmax(298px,1fr))] sm:gap-y-[18px]">
         {cards.map(({ title, description, image, imageLg, imageMd, className }, index) => (

@@ -2,11 +2,14 @@
 title: Managing your data and schemas in the Neon Console
 subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
 summary: >-
-  Covers the management of data and schemas in the Neon Console's Tables page,
-  including adding, editing, and deleting records, filtering data, and modifying
-  table structures.
+  The Tables page in the Neon Console is a visual, interactive editor powered
+  by Drizzle Studio. It supports reading, inserting, updating, deleting,
+  filtering, and exporting Postgres table data, plus managing schemas, views,
+  enums, roles, and RLS policies without writing SQL. Choose this page over the
+  SQL Editor when you want point-and-click record editing, column filtering,
+  bulk deletion, or JSON/CSV export.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.200Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.

@@ -6,7 +6,7 @@ page_description: >-
   calculate the exponential of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-exp/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DEGREES() Function
@@ -17,14 +17,14 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The EXP() function works the same across any standard PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or on a managed platform. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The EXP() function works the same across any standard PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or on a managed platform. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `EXP()` function to calculate the exponential of a number.
 
 ## Introduction to the PostgreSQL EXP() function
 
-An exponential of a number is the number e, approximately equal to `2.71`, raised to a given power (en).
+An exponential of a number is the number e, approximately equal to `2.71`, raised to a given power (n).
 
 In PostgreSQL, you can use the `EXP()` function to calculate the exponential of a number.
 

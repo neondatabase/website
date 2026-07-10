@@ -1,14 +1,7 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_27232_10379)">
-<path d="M8 5.5V9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M4.95117 11.439L7.99917 9L11.0482 11.439" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M8 5.5C9.38071 5.5 10.5 4.38071 10.5 3C10.5 1.61929 9.38071 0.5 8 0.5C6.61929 0.5 5.5 1.61929 5.5 3C5.5 4.38071 6.61929 5.5 8 5.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M3 15.5C4.38071 15.5 5.5 14.3807 5.5 13C5.5 11.6193 4.38071 10.5 3 10.5C1.61929 10.5 0.5 11.6193 0.5 13C0.5 14.3807 1.61929 15.5 3 15.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M13 15.5C14.3807 15.5 15.5 14.3807 15.5 13C15.5 11.6193 14.3807 10.5 13 10.5C11.6193 10.5 10.5 11.6193 10.5 13C10.5 14.3807 11.6193 15.5 13 15.5Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
-</g>
-<defs>
-<clipPath id="clip0_27232_10379">
-<rect width="16" height="16" fill="white"/>
-</clipPath>
-</defs>
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.0002 9.625V15.75L8.88672 19.7269" stroke="currentColor" stroke-width="1.4" stroke-miterlimit="10"/>
+<path d="M14 15.75L19.1135 19.7269" stroke="currentColor" stroke-width="1.4" stroke-miterlimit="10"/>
+<path d="M14 9.625C15.933 9.625 17.5 8.058 17.5 6.125C17.5 4.192 15.933 2.625 14 2.625C12.067 2.625 10.5 4.192 10.5 6.125C10.5 8.058 12.067 9.625 14 9.625Z" stroke="currentColor" stroke-width="1.4" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M6.125 25.375C8.058 25.375 9.625 23.808 9.625 21.875C9.625 19.942 8.058 18.375 6.125 18.375C4.192 18.375 2.625 19.942 2.625 21.875C2.625 23.808 4.192 25.375 6.125 25.375Z" stroke="currentColor" stroke-width="1.4" stroke-miterlimit="10" stroke-linecap="square"/>
+<path d="M21.875 25.375C23.808 25.375 25.375 23.808 25.375 21.875C25.375 19.942 23.808 18.375 21.875 18.375C19.942 18.375 18.375 19.942 18.375 21.875C18.375 23.808 19.942 25.375 21.875 25.375Z" stroke="currentColor" stroke-width="1.4" stroke-miterlimit="10" stroke-linecap="square"/>
 </svg>

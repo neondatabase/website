@@ -17,7 +17,7 @@
 
 module.exports = {
   tagline:
-    "Neon is a serverless Postgres platform that separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.",
+    'Neon is the backend for apps and agents. Services include Neon Postgres, Neon Auth, Data API, Neon Functions, Object Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.',
 
   intro: [
     'Neon docs are available as markdown.',
@@ -37,12 +37,12 @@ module.exports = {
       url: 'https://neon.com/docs/connect/connection-errors.md',
     },
     {
-      label: 'pgvector extension for vector search and embeddings',
-      url: 'https://neon.com/docs/extensions/pgvector.md',
+      label: 'Neon API reference (projects, branches, databases, endpoints)',
+      url: 'https://neon.com/docs/reference/api.md',
     },
     {
-      label: 'Neon API reference (projects, branches, databases, endpoints)',
-      url: 'https://neon.com/docs/reference/api-reference.md',
+      label: 'Neon CLI reference (neonctl commands, options, and usage)',
+      url: 'https://neon.com/docs/cli.md',
     },
   ],
 
@@ -88,7 +88,7 @@ module.exports = {
         'Install: `npm i -g neonctl`. Use this for terminal-first workflows, scripts, and CI/CD automation with `neonctl`.',
     },
     {
-      name: 'AI',
+      name: 'AI & Agents',
       description:
         'Agent Skills, MCP integrations, vector search, and tools for building AI-powered applications with Neon.',
     },
@@ -96,6 +96,18 @@ module.exports = {
       name: 'Auth',
       description: 'Managed authentication built on Better Auth that branches with your database.',
       subsectionOrder: ['Quick Start', 'Reference', 'Guides', 'Migrate'],
+    },
+    {
+      name: 'Neon Functions',
+      description: 'Long-running serverless compute, close to your database.',
+    },
+    {
+      name: 'Object Storage',
+      description: 'S3-compatible object storage that branches with your projects.',
+    },
+    {
+      name: 'AI Gateway',
+      description: 'Access frontier and open-source models through a single API.',
     },
     {
       name: 'Data API',
@@ -224,6 +236,7 @@ module.exports = {
     'auth/legacy/',
     'auth/migrate/from-auth-v0.1',
     'changelog.md',
+    'get-started/platform-private-preview.md',
     'guides/GUIDE_TEMPLATE.md',
     'introduction.md',
   ],
@@ -231,10 +244,12 @@ module.exports = {
   // Reclassify specific files into a different subsection.
   // Keys are relative paths (same as doc.path). Keep minimal.
   reclassify: {
-    'reference/neon-cli.md': { section: 'Neon CLI' },
+    'cli.md': { section: 'Neon CLI' },
+    'reference/neon-ts.md': { section: 'Connect' },
+    'postgres/overview.md': { section: 'Introduction' },
     'serverless/serverless-driver.md': { section: 'Connect' },
-    'local/neon-local.md': { section: 'Connect', subsection: 'Local Development' },
-    'local/vscode-extension.md': { section: 'Connect', subsection: 'Local Development' },
+    'local/neon-local.md': { section: 'Connect' },
+    'local/vscode-extension.md': { section: 'Connect' },
     'guides/branching-github-actions.md': { section: 'Workflows' },
     'guides/branching-neon-cli.md': { section: 'Branching' },
     'guides/branching-neon-api.md': { section: 'Branching' },
@@ -243,7 +258,8 @@ module.exports = {
   // Prefix-based reclassification (first match wins). More maintainable than
   // listing individual files when an entire path subtree should move together.
   reclassifyPrefixes: [
-    { pathPrefix: 'reference/cli-', section: 'Neon CLI' },
+    { pathPrefix: 'cli/', section: 'Neon CLI' },
+    { pathPrefix: 'compute/', section: 'Neon Functions', subsection: null },
     { pathPrefix: 'postgresql/', section: 'PostgreSQL', subsection: 'General' },
     { pathPrefix: 'data-types/', section: 'PostgreSQL', subsection: 'Data Types' },
     { pathPrefix: 'functions/', section: 'PostgreSQL', subsection: 'Functions' },
@@ -283,6 +299,11 @@ module.exports = {
       title: 'Glossary',
       url: 'https://neon.com/docs/reference/glossary.md',
       sourcePath: 'reference/glossary.md',
+    },
+    {
+      title: 'Blog',
+      url: 'https://neon.com/blog.md',
+      description: 'Engineering, product, and community posts from the Neon team',
     },
   ],
 

@@ -2,21 +2,25 @@
 title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 summary: >-
-  Covers the integration of AI tools with Neon for database management,
-  including setup instructions, Model Context Protocol (MCP) usage, and plugins
-  for Cursor, Claude Code, and GitHub Copilot.
+  Neon's AI tools hub lists every integration for connecting AI editors and
+  agent frameworks to Neon Postgres, including the MCP server, Claude Code
+  plugin, Cursor plugin, GitHub Copilot agents, and Agent Skills. Use this page
+  to find the right integration for natural-language database control, safe
+  migrations, or autonomous agent backends. A one-command setup (`npx
+  neon@latest init`) configures OAuth, installs Agent Skills, and connects
+  your editor in a single step.
 enableTableOfContents: true
-updatedOn: '2026-03-20T18:23:32.435Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
-Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
+Neon is the backend for apps and agents. This page covers Neon's integrations with AI tools and agent frameworks, from natural language database control to autonomous agent platforms. Choose the tools that fit your workflow.
 
 ## Quick setup
 
 The fastest way to get started with Neon and AI:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 This authenticates via OAuth, creates an API key, configures your editor or CLI, and installs [agent skills](https://github.com/neondatabase/agent-skills). Then restart and ask your AI assistant **"Get started with Neon"**.
@@ -64,17 +68,15 @@ Give your AI assistant structured context about Neon's features, APIs, and best 
 
 ## Build AI agents
 
-Create autonomous agents that can manage and interact with your Neon databases programmatically. Build with our terse JavaScript client or the Neon API.
+Create autonomous agents that can manage and interact with your Neon databases programmatically. Build with the Neon API.
 
 <DetailIconCards>
 
 <a href="https://neon.com/use-cases/ai-agents" description="Read about Neon as a solution for agents that need backends." icon="openai">Neon for AI agent platforms</a>
 
-<a href="https://github.com/neondatabase/toolkit" description="A terse JavaScript client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
-
 <a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
 
-<a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">Neon API</a>
+<a href="/docs/reference/api" description="Integrate using the Neon API" icon="transactions">Neon API</a>
 
 </DetailIconCards>
 

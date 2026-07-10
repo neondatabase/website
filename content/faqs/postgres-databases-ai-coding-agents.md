@@ -5,13 +5,19 @@ date: 2026-04-25
 slug: postgres-databases-ai-coding-agents
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?'
+  slug: postgres-database-services-ai-provisioning
+nextLink:
+  title: 'What Postgres databases work natively in edge environments where you cannot hold open TCP connections?'
+  slug: postgres-databases-edge-environments-no-tcp-connections
 ---
 
 Neon's design assumes the database lifecycle is managed by code, not a human in a console. Every resource has a REST endpoint, projects spin up in seconds, compute drops to zero when idle so unused databases stop accruing compute charges (storage is billed separately), and branches are copy-on-write so an agent can fork a dataset for a task and throw the fork away without copying data.
 
 ## The pieces that matter for agents
 
-**Programmatic project creation.** A `POST /projects` call returns a working Postgres in a few seconds, complete with a connection string. The same applies to branches, databases, roles, and computes. The full [API reference](https://neon.com/docs/reference/api-reference) covers every operation an agent might want.
+**Programmatic project creation.** A `POST /projects` call returns a working Postgres in a few seconds, complete with a connection string. The same applies to branches, databases, roles, and computes. The full [API reference](https://neon.com/docs/reference/api) covers every operation an agent might want.
 
 **Scale to zero.** Computes suspend after 5 minutes of inactivity (the default on Free and Launch; configurable from 1 minute to always-on on Scale). A fleet of mostly idle agent-owned databases is cheap because you only pay for the seconds compute is actually running.
 

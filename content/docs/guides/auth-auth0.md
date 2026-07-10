@@ -3,11 +3,15 @@ title: Authenticate Neon Postgres application users with Auth0
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Auth0
 summary: >-
-  Step-by-step guide for integrating Auth0 authentication into a Next.js
-  application using a Neon Postgres database, including setup, schema
-  definition, and user data management.
+  Auth0 integration guide for Next.js apps using Neon Postgres, walking through
+  the full setup of the @auth0/nextjs-auth0 SDK, Drizzle ORM schema and
+  migrations, and storing per-user rows in a Postgres table keyed by Auth0 user
+  IDs. Choose this guide when you need social login, multi-factor
+  authentication, or Auth0-managed users in a Neon database. The tutorial
+  covers Auth0 application configuration, callback URLs, session handling with
+  UserProvider, and Next.js server actions for inserting and deleting user data.
 enableTableOfContents: true
-updatedOn: '2026-05-17T10:06:14.681Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">

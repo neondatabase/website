@@ -1,11 +1,13 @@
 ---
 title: Neon Postgres Version Support Policy
 summary: >-
-  Covers the support policy for PostgreSQL versions used by Neon, detailing
-  major and minor release schedules, end-of-life timelines, and version
-  numbering conventions.
+  Neon's Postgres version support policy tracks the latest major versions,
+  applies minor releases automatically at the next compute restart, and
+  aligns end-of-life with the official PostgreSQL five-year support window.
+  Minor release downgrades and version skipping are not supported. Upgrading
+  to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
-updatedOn: '2026-04-29T21:38:32.000Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -39,13 +41,17 @@ Neon is committed to providing stability and hassle-free maintenance. You select
 
 Minor release updates are announced in the [Neon Changelog](/docs/changelog).
 
-To check your current Postgres major and minor version, you can run the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connection to your database:
+### How to check which Postgres version you're running
+
+To check your current Postgres major and minor version, run the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connection to your database:
 
 ```sql
 SELECT version();
 ```
 
-Your Postgres major version is also displayed in the **Project settings** widget on your Neon **Project Dashboard**.
+The first number is the major version. The second is the minor version, which Neon updates automatically.
+
+Your Postgres major version is also displayed in the **Project settings** widget on your Neon **Project Dashboard**. With the [Neon CLI](/docs/cli) installed and authenticated, `neon projects get <project_id> --output json` returns the same value in its `pg_version` field.
 
 ### Minor releases
 

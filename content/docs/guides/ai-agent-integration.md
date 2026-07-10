@@ -2,12 +2,16 @@
 title: AI Agent integration guide
 subtitle: Implement database provisioning and versioning for your AI agent platform
 summary: >-
-  Covers the technical implementation of database provisioning, versioning, user
-  upgrades, and usage monitoring for AI agent platforms using the Neon agent
-  plan.
+  The Neon Agent Plan integration guide explains how to provision per-tenant
+  Postgres databases, transfer projects between free and paid organizations, and
+  implement snapshot-based database versioning using the Neon API. AI agent
+  platform builders use this guide when embedding Neon as database
+  infrastructure for their users, covering the full lifecycle from free-tier
+  project creation through paid upgrades and PITR/snapshot undo workflows.
+  Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-07-09T23:12:37.869Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -67,13 +71,13 @@ The two-organization structure enables you to:
 
 Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations.
 
-| Limit                    | Free Organization | Paid Organization | Notes                                                                                                            |
-| ------------------------ | ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Max branches**         | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots)                                                       |
-| **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
-| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                                                                             |
-| **History window**       | 1 day             | Up to 7 days      | Point-in-time recovery window                                                                                    |
-| **Min auto-suspend**     | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                                             |
+| Limit                    | Free Organization | Paid Organization       | Notes                                                                                                            |
+| ------------------------ | ----------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **Max branches**         | 10 per project    | Custom limits available | Includes all branches (production, development, snapshots)                                                       |
+| **Max manual snapshots** | 1 per project     | 100 per project         | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
+| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU            | CU = Compute Units (~4GB RAM per CU)                                                                             |
+| **History window**       | 1 day             | Up to 7 days            | Point-in-time recovery window                                                                                    |
+| **Min auto-suspend**     | 5 minutes         | 1 minute                | Minimum time before compute suspends                                                                             |
 
 **Key constraints to consider:**
 
@@ -425,7 +429,7 @@ Development branches are:
 - **Easy to reset**: Restore development branch to match production anytime
 
 <Admonition type="note">
-**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects support up to **1,000 branches**. Implement branch cleanup for temporary development branches to stay within limits.
+**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects have **custom limits available** (see [Agent plan pricing](/docs/introduction/agent-plan#pricing)). Implement branch cleanup for temporary development branches to stay within limits.
 </Admonition>
 
 Example creating a development branch using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API:
@@ -466,14 +470,7 @@ This workflow prevents common issues like development data contaminating product
 
 ### Track usage per project
 
-<ConsumptionAccountApiDeprecation/>
-
-You can use the Neon API to retrieve consumption metrics for your organizations and projects using these endpoints:
-
-| Endpoint                                                                                                         | Description                                                                                                           |
-| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                |
-| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) |
+You can use the Neon API to retrieve consumption metrics for your organizations and projects using the [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint, which provides detailed metrics per project at hourly, daily, or monthly granularity.
 
 Available metrics:
 
@@ -481,6 +478,10 @@ Available metrics:
 - `compute_time_seconds`: CPU seconds consumed
 - `written_data_bytes`: Data written to all branches
 - `synthetic_storage_size_bytes`: Total storage used
+
+<Admonition type="tip">
+On usage-based plans (Launch, Scale, Agent, Enterprise), you can also use the v2 endpoints, which return invoice-aligned metrics. The [project metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) (`GET /consumption_history/v2/projects`) returns billing-aligned totals per project. The [branch metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperbranchv2) (`GET /consumption_history/v2/branches`) breaks those metrics down by branch — useful for attributing usage to individual CI or development branches. See [Query consumption metrics](/docs/guides/consumption-metrics).
+</Admonition>
 
 For complete details on parameters, pagination, response formats, and metric definitions, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
@@ -526,8 +527,7 @@ See [Configure consumption limits](/docs/guides/consumption-limits) for details.
 All platform integrations use the Neon API. You can call it directly or use language-specific SDKs:
 
 - **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)**: All operations (projects, branches, databases, monitoring) are API-driven; language-agnostic REST interface. Agent plan participants receive higher rate limits optimized for high-volume operations.
-- **[Neon Toolkit](/docs/reference/neondatabase-toolkit)** (TypeScript): API client for management + serverless driver for queries; optimized for edge/serverless runtimes.
-- **Other SDKs**: [Python SDK](/docs/reference/python-sdk), [Go SDK](https://github.com/kislerdm/neon-sdk-go), [Node.js/Deno SDK](https://github.com/paambaati/neon-js-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
+- **SDKs**: [Neon Management SDK](/docs/reference/typescript-sdk), [Python SDK](/docs/reference/python-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
 
 ## Cost management
 

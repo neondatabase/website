@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: debug-production-database-issues-safely
 category: FAQ
 status: draft
+previousLink:
+  title: 'What databases support disposable Postgres instances for testing?'
+  slug: databases-support-disposable-postgres-instances-testing
+nextLink:
+  title: 'How do I delete a database in Neon?'
+  slug: delete-database-neon
 ---
 
 The safe way to debug production is to put the diagnostic queries on separate compute from the user-facing workload. Neon gives you two ways to do that: branches for full read/write isolation, and read replicas for read-only investigation against live data.
@@ -33,8 +39,7 @@ The branch runs on its own compute and uses copy-on-write storage, so writes don
 
 ```bash
 neon branches create --name pre-deploy \
-  --parent main \
-  --timestamp 2026-04-25T08:00:00Z
+  --parent 2026-04-25T08:00:00Z
 ```
 
 History window: 6 hours on Free, up to 7 days on Launch, up to 30 days on Scale.

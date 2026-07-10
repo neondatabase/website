@@ -1,14 +1,21 @@
 ---
 title: Import data from CSV
 summary: >-
-  How to import data into a Neon database table from a CSV file using the `psql`
-  command-line client, including steps for connecting to the database, creating
-  the target table, and preparing the CSV file.
+  Loading CSV data into a Neon Postgres table uses the psql `\copy` meta-command
+  to stream rows directly from a local file into an existing table. Use this page
+  when you need to bulk-load tabular data without application code, using only a
+  psql connection string from the Neon Console. The target table must exist in
+  advance with columns that match the CSV header; `\copy` returns the row count
+  on success.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.207Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 ---
 
-This topic shows how to import data into a Neon database table from a CSV file using a simple example.
+To import data from a CSV file into your Neon database, create the target table first, then run the psql `\copy` meta-command from a session connected to your database. `\copy` streams the CSV from your local machine over the existing connection, so it works without any special server-side file access. This topic walks through the process with a simple example.
+
+<Admonition type="note" title="Use psql, not the SQL Editor, for \copy">
+`\copy` is a psql client-side meta-command, so it runs in psql rather than on the Postgres server. The Neon SQL Editor doesn't support it, and the server-side `COPY ... FROM '/path/to/file.csv'` form can't read from Neon's server filesystem. Run `\copy` from psql or a Postgres GUI such as DBeaver or pgAdmin. For a large or messy CSV that needs encoding fixes, type casts, or parallel loading, [pgloader](https://pgloader.readthedocs.io/) is a good alternative.
+</Admonition>
 
 The instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres. For installation instructions, see [How to install psql](/docs/connect/query-with-psql-editor#how-to-install-psql).
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-timeofday/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ISFINITE() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The TIMEOFDAY() function works the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise team building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration you need. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) gives you the fastest path from idea to production on Postgres.
+The TIMEOFDAY() function works the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise team building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres with the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `TIMEOFDAY()` function to retrieve the current date and time as a formatted string.
@@ -44,6 +44,12 @@ Let’s take some examples of using the `TIMEOFDAY()` function.
 ### 1\) Basic TIMEOFDAY() function example
 
 The following example uses the `TIMEOFDAY()` function to retrieve the current date and time as a string:
+
+```sql
+SELECT TIMEOFDAY();
+```
+
+Output:
 
 ```text
               timeofday

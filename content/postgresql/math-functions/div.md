@@ -6,7 +6,7 @@ page_description: >-
   perform integer division and apply it effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-div/'
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CBRT() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DIV() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup that wants to ship fast and scale without friction, Neon is the Postgres platform built for you.
+The DIV() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DIV()` function to perform integer division.
@@ -35,7 +35,7 @@ DIV(dividend, divisor)
 In this syntax:
 
 - `dividend` is the number that you want to divide.
-- `divisor` is the number to which to divide the dividend.
+- `divisor` is the number by which to divide the dividend.
 
 The `DIV()` function returns the integer quotient of the division.
 

@@ -3,12 +3,17 @@ title: Manage Neon with Terraform
 subtitle: Use Terraform to provision and manage your Neon projects, branches, endpoints,
   roles, databases, and other resources as code.
 summary: >-
-  How to use Terraform to provision and manage Neon projects, including
-  branches, databases, and compute endpoints, enabling automated and consistent
-  infrastructure management.
+  The community-maintained Terraform provider for Neon (`kislerdm/neon`) lets
+  you define Neon projects, branches, compute endpoints, roles, databases, API
+  keys, and VPC endpoints as infrastructure-as-code in declarative HCL. Choose
+  this page when you want to provision new Neon resources or bring existing
+  Console-created resources under Terraform management using `terraform import`
+  or the declarative import-block syntax. The provider is not officially
+  supported by Neon; the guide covers upgrade practices to prevent unintended
+  resource replacements and data loss during `terraform init -upgrade`.
 enableTableOfContents: true
 tag: community
-updatedOn: '2026-02-15T20:51:54.266Z'
+updatedOn: '2026-07-06T16:27:57.937Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
@@ -39,7 +44,7 @@ This provider is not maintained or officially supported by Neon. Use at your own
   - Explicitly define all critical resource parameters in your Terraform configurations, even if they had defaults previously.
   - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
 
-- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
+- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](/docs/reference/api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
 
 ## Prerequisites
 

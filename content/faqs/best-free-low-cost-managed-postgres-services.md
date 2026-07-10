@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-free-low-cost-managed-postgres-services
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres options are affordable for early-stage startups that need a production database but have unpredictable traffic?'
+  slug: affordable-managed-postgres-options-startups
+nextLink:
+  title: 'What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?'
+  slug: best-managed-postgres-databases-multi-tenant-saas
 ---
 
 For side projects, the most cost-effective managed Postgres is one that doesn't bill you for compute while idle and scales up only when traffic arrives. Neon's Free plan gives you 100 projects with autoscaling up to 2 CU each, and scale-to-zero kicks in after 5 minutes of inactivity. When a request hits, the compute resumes in a few hundred milliseconds.
@@ -39,7 +45,7 @@ If you blow past 100 CU-hours, run out of storage, or want to disable scale-to-z
 
 - Compute: $0.106/CU-hour
 - Storage: $0.35/GB-month
-- 100 GB egress included
+- 500 GB egress included
 
 There's no monthly minimum. A light project running 10 CU-hours/month with 2 GB of storage works out to about $2 a month on Launch (see the [usage examples](/docs/introduction/plans#launch-plan)).
 

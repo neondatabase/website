@@ -6,7 +6,7 @@ page_description: >-
   by step how to develop anonymous blocks.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-block-structure/'
 ogImage: /postgresqltutorial/plpgSQL-block-Structure.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: Dollar-Quoted String Constants
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PL/pgSQL's block structure works the same across every Postgres distribution, so the syntax and examples here apply whether you're running Postgres locally, on a managed service, or anywhere else. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres in the cloud, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the best Postgres platform to build on.
+PL/pgSQL's block structure works the same across every Postgres distribution, so the syntax and examples here apply whether you're running Postgres locally, on a managed service, or anywhere else. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres in the cloud, fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the block structure of PL/pgSQL and how to write and execute your first PL/pgSQL block.
@@ -177,7 +177,7 @@ begin
 	   raise notice 'x=% y=%', x, y;
    end inner;
 end outer;
-$$
+$$;
 ```
 
 Output:
@@ -196,12 +196,12 @@ In the outer block:
 
 In the inner block (subblock or nested block):
 
-- Declare a variable y and initialize its value to zero.
+- Declare a variable y and initialize its value to two.
 - Increase the value of y by x.
 - Display the values of the variables x and y using the raise notice.
 
 ## Summary
 
-- PL/pgSQL is a blocked\-structure language that organizes a program into blocks.
+- PL/pgSQL is a block-structured language that organizes a program into blocks.
 - A block contains two parts: declaration and body. The declaration part is optional whereas the body part is mandatory.
 - Blocks can be nested. A nested block is a block placed inside the body of another block.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lpad/
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RIGHT() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The LPAD() function is standard PostgreSQL and works the same way on any Postgres deployment, so the techniques here carry over wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. If you're a developer or startup who wants to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The LPAD() function is standard PostgreSQL and works the same way on any Postgres deployment, so the techniques here carry over wherever you run your database. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LPAD()` function to pad a string on the left to a specified length with a sequence of characters.
@@ -41,7 +41,7 @@ is a string that should be padded on the left
 
 **2\) `length`**
 
-is an positive integer that specifies the length of the result string after padding.
+is a positive integer that specifies the length of the result string after padding.
 
 Note that if the string is longer than the length argument, the string will be truncated on the right.
 

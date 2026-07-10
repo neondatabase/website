@@ -1,11 +1,15 @@
 ---
 title: Set up a GitHub Action to perform nightly Postgres backups
 summary: >-
-  How to configure a GitHub Action for nightly Postgres backups using `pg_dump`
-  and AWS S3, ensuring automated database backups are securely stored in the
-  cloud.
+  Part 2 of a 2-part guide: a scheduled GitHub Actions workflow that runs
+  `pg_dump` nightly, compresses the output as a gzip file, and uploads it to
+  S3 using IAM role-based authentication via GitHub Secrets. Complete the IAM
+  and S3 bucket setup in part 1 before using this page. Includes a
+  configurable retention step that auto-deletes backups older than a set
+  number of days. Set `PG_VERSION` and `AWS_REGION` to target any Postgres
+  version or AWS region.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide shows you how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.

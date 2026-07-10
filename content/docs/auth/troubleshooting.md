@@ -2,11 +2,14 @@
 title: Auth troubleshooting
 subtitle: Common issues when implementing Neon Auth and how to fix them
 summary: >-
-  Troubleshooting guide for common Neon Auth implementation issues, including
-  OAuth redirect URIs, trusted domains, environment configuration, adapter
-  setup, CSS imports, and framework-specific requirements.
+  Troubleshooting for common Neon Auth errors in `@neondatabase/auth` (Next.js)
+  and `@neondatabase/neon-js` (React SPA). Covers missing `NEON_AUTH_COOKIE_SECRET`,
+  missing `force-dynamic` on server components, `NETWORK_DNS` / `NETWORK_TIMEOUT`
+  upstream errors, and OAuth `redirect_uri_mismatch` from misconfigured callback
+  URIs. Use this page when Neon Auth fails at startup, sessions do not persist,
+  or OAuth logins loop back to the provider instead of the app.
 enableTableOfContents: true
-updatedOn: '2026-05-17T20:19:55.872Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This page covers common issues when integrating [Neon Auth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).

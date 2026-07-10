@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 JSON Format for COPY TO'
 page_title: 'PostgreSQL 19 JSON COPY TO - Native JSON Data Export'
 page_description: 'Learn how to use PostgreSQL 19 COPY TO with FORMAT JSON to export data as NDJSON or JSON arrays, replacing workarounds with native streaming JSON output.'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Logical Replication Improvements'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 Query Improvements'
   slug: 'postgresql-19/query-improvements'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try native JSON export for yourself ahead of the final release expected later in 2026. Beta 1 lets `COPY TO` output JSON, including the option to emit results as a single JSON array.
+</Admonition>
 
 **Summary**: PostgreSQL 19 adds native JSON output support to the `COPY TO` command. You can export table data as NDJSON (one JSON object per line) or as a JSON array, with streaming output that handles large datasets without loading everything into memory.
 

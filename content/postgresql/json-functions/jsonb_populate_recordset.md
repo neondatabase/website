@@ -2,12 +2,12 @@
 title: PostgreSQL jsonb_populate_recordset() Function
 page_title: PostgreSQL jsonb_populate_recordset() Function
 page_description: >-
-  How to se the PostgreSQL jsonb_popuplate_recordset() function to populate the
+  How to use the PostgreSQL jsonb_populate_recordset() function to populate the
   fields of a record type from a JSON object.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_populate_recordset/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_populate_record() Function
@@ -18,16 +18,16 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The jsonb_populate_recordset() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale quickly, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The jsonb_populate_recordset() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_populate_recordset()` function to populate the fields of a record type from a JSON array of objects.
 
-## Introduction to the PostgreSQL jsonb_popuplate_recordset() function
+## Introduction to the PostgreSQL jsonb_populate_recordset() function
 
 The `jsonb_populate_recordset()` function allows you to populate the fields of a record type from a JSON array of objects.
 
-In other words, the `jsonb_popuplate_recordset()` function converts a JSON array of objects with the JSONB type into a set of records of a specified type.
+In other words, the `jsonb_populate_recordset()` function converts a JSON array of objects with the JSONB type into a set of records of a specified type.
 
 Here’s the syntax of the `jsonb_populate_recordset()` function:
 
@@ -41,17 +41,17 @@ jsonb_populate_recordset(
 In this syntax:
 
 - `target` represents the target record type to which the JSONB data will be mapped.
-- `json_object` is a JSON array of objects from which the records will be populated. The jsonb_array has the type of JSONB.
+- `json_array` is a JSON array of objects from which the records will be populated. The json_array has the type of JSONB.
 
 The `jsonb_populate_recordset()` function returns a set of records of a specified type, with each record’s fields populated using the corresponding key\-value pairs from the JSONB objects in the array.
 
-## PostgreSQL jsonb_popuplate_recordset() function examples
+## PostgreSQL jsonb_populate_recordset() function examples
 
 Let’s explore some examples of using the `jsonb_populate_recordset()` function.
 
 ### 1\) Basic jsonb_populate_recordset() function example
 
-First, [create a new type](../postgresql-tutorial/postgresql-user-defined-data-types) called `address`:
+First, [create a new type](../postgresql-tutorial/postgresql-user-defined-data-types) called `address_type`:
 
 ```sql
 CREATE TYPE address_type AS (
@@ -113,7 +113,7 @@ SELECT
     json_agg(jsonb_build_object(
       'id', id, 'name', name, 'age', age, 'salary',
       salary
-    ))
+    ))::jsonb
   ) AS employees
 FROM
   employees;
@@ -131,4 +131,4 @@ Output:
 
 ## Summary
 
-- Use the `jsonb_popuplate_recordset()` function to populate the fields of a record type or a custom composite type from a JSON object.
+- Use the `jsonb_populate_recordset()` function to populate the fields of a record type or a custom composite type from a JSON array of objects.

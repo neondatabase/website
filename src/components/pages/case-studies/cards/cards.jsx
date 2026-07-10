@@ -88,8 +88,12 @@ const Cards = ({ items, categories }) => {
 
     applyHash();
     window.addEventListener('hashchange', applyHash);
+    window.addEventListener('popstate', applyHash);
 
-    return () => window.removeEventListener('hashchange', applyHash);
+    return () => {
+      window.removeEventListener('hashchange', applyHash);
+      window.removeEventListener('popstate', applyHash);
+    };
   }, [categories]);
 
   const filteredByCategory = useMemo(
@@ -108,8 +112,15 @@ const Cards = ({ items, categories }) => {
     return filteredByCategory.filter((item) => item.title?.toLowerCase().includes(q));
   }, [filteredByCategory, searchQuery]);
 
-  const handleCategoryClick = useCallback((slug, featuredCaseStudy) => {
+  const handleCategoryClick = useCallback((event, slug, featuredCaseStudy) => {
+    event.preventDefault();
     setActiveCategory({ slug, featuredCaseStudy });
+
+    if (typeof window !== 'undefined') {
+      const baseUrl = window.location.pathname + window.location.search;
+      const hash = slug === 'all' ? '' : `#${slug}`;
+      window.history.replaceState(null, '', `${baseUrl}${hash}`);
+    }
   }, []);
 
   return (
@@ -173,7 +184,7 @@ const Cards = ({ items, categories }) => {
                         ? 'text-white lg:border-green-45'
                         : 'text-gray-new-60 lg:border-transparent'
                     )}
-                    onClick={() => handleCategoryClick(slug, featuredCaseStudy)}
+                    onClick={(event) => handleCategoryClick(event, slug, featuredCaseStudy)}
                   >
                     <span>{label}</span>
                     {isActive && (

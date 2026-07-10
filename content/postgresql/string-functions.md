@@ -6,7 +6,7 @@ page_description: >-
   that help you manipulate strings effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-string-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/string-functions.png'
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PG_SLEEP() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL string functions work the same across any Postgres deployment, so you can use these techniques anywhere you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+PostgreSQL string functions work the same across any Postgres deployment, so you can use these techniques anywhere you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 This page provides the most commonly used PostgreSQL string functions that allow you to manipulate string data effectively.
@@ -37,11 +37,11 @@ This page provides the most commonly used PostgreSQL string functions that allow
 | [LTRIM](postgresql-string-functions/postgresql-ltrim)                   | Remove the longest string that contains specified characters from the left of the input string           | LTRIM(‘00123’)                                       | ‘123’              |
 | [MD5](postgresql-string-functions/postgresql-md5)                       | Return MD5 hash of a string in hexadecimal                                                               | MD5(‘ABC’)                                           |                    |
 | [POSITION](postgresql-string-functions/postgresql-position)             | Return the location of a substring in a string                                                           | POSITION(‘B’ in ‘A B C’)                             | 3                  |
-| [REGEXP_MATCHES](postgresql-string-functions/postgresql-regexp_matches) | Replace substrings that match a POSIX regular expression with a new substring                            | SELECT REGEXP_MATCHES(‘ABC’, ‘^(A)(..)$’, ‘g’);      | \{A,BC\}           |
+| [REGEXP_MATCHES](postgresql-string-functions/postgresql-regexp_matches) | Return substrings that match a POSIX regular expression                                                  | SELECT REGEXP_MATCHES(‘ABC’, ‘^(A)(..)$’, ‘g’);      | \{A,BC\}           |
 | [REGEXP_REPLACE](postgresql-string-functions/regexp_replace)            | Replace a substring using regular expressions.                                                           | REGEXP_REPLACE(‘John Doe’,'(.\*) (.\*)’,’\\2, \\1′); | ‘Doe, John’        |
 | [REPEAT](postgresql-string-functions/postgresql-repeat)                 | Repeat a string the specified number of times.                                                           | REPEAT(‘\*’, 5\)                                     | ‘\*\*\*\*\*’       |
 | [REPLACE](postgresql-string-functions/postgresql-replace)               | Replace a substring within a string with a new one.                                                      | REPLACE(‘ABC’,’B’,’A’)                               | ‘AAC’              |
-| [REVERSE](postgresql-string-functions/postgresql-reverse)               | Replace a substring within a string with a new one                                                       | REVERSE(‘ABC’)                                       | ‘CBA’              |
+| [REVERSE](postgresql-string-functions/postgresql-reverse)               | Reverse a string                                                                                         | REVERSE(‘ABC’)                                       | ‘CBA’              |
 | [RIGHT](postgresql-string-functions/postgresql-right)                   | Return the last n characters in the string. When n is negative, return all but the first \\n characters. | RIGHT(‘ABC’, 2\)                                     | ‘BC’               |
 | [RPAD](postgresql-string-functions/postgresql-rpad)                     | Extend a string to a length by appending specified characters.                                           | RPAD(‘ABC’, 6, ‘xo’)                                 | ‘ABCxox’           |
 | [RTRIM](postgresql-string-functions/postgresql-rtrim)                   | Remove the longest string that contains specified characters from the right of the input string          | RTRIM(‘abcxxzx’, ‘xyz’)                              | ‘abc’              |

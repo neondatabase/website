@@ -6,7 +6,7 @@ page_description: >-
   how to use it in designing the database tables.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-boolean/'
 ogImage: /postgresqltutorial/PostgreSQL-Boolean-300x146.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DEFAULT Value
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The BOOLEAN type works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up.
+The BOOLEAN type works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, security, and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL Boolean data type and how to use it in designing database tables.

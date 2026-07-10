@@ -1,9 +1,12 @@
 ---
 title: Neon plans
 summary: >-
-  Covers the comparison of Neon's Free, Launch, and Scale plans, detailing
-  features, pricing, and target users to support projects from prototypes to
-  production at scale.
+  Neon's Free, Launch, and Scale plans differ in compute rates, branch counts,
+  storage pricing, and autoscaling limits. Compare per-unit pricing, feature
+  availability, and billing examples to choose a plan or estimate monthly costs.
+  Scale adds compliance certifications, uptime SLAs, private networking, and
+  configurable scale-to-zero. Launch and Free plans share pay-only-for-what-you-use
+  pricing with no monthly minimum.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -19,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-05-20T14:13:43.586Z'
+updatedOn: '2026-06-26T16:05:44.229Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -47,13 +50,14 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                      | Up to 16 CU (64 GB RAM)              | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                                | After 5 min, can be disabled         | Configurable (1 minute to always on)                                                              |
 | [Storage](#storage)                                   | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                                                    |
-| [Public network transfer](#public-network-transfer)   | 5 GB included                              | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                                    |
+| [Public network transfer](#public-network-transfer)   | 5 GB included                              | 500 GB included, then $0.10/GB       | 500 GB included, then $0.10/GB                                                                    |
 | [Monitoring](#monitoring)                             | 1 day                                      | 3 days                               | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | —                                          | —                                    | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                 | 100 manual snapshots                                                                              |
-| [Auth](#auth)                                         | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
+| [Auth](#auth) (Beta)                                  | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
+| [AI Gateway](#ai-gateway) (Private Preview)           | —                                          | Free during preview                  | Free during preview                                                                               |
 | [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                          | —                                    | ✅                                                                                                |
@@ -79,7 +83,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### Who it's for
 
-- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per project, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch**: Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale**: Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
@@ -181,7 +185,7 @@ average compute size × hours running = CU-hours
 
 #### Compute with scale to zero
 
-Scale to zero suspends computes after inactivity to compute usage and cost.
+Scale to zero suspends computes after inactivity to reduce compute usage and cost.
 
 ### Autoscaling
 
@@ -238,8 +242,8 @@ Public network transfer (egress) is the total volume of data sent from your data
 Allowances per plan:
 
 - **Free**: 5 GB/month
-- **Launch**: 100 GB/month, then $0.10/GB
-- **Scale**: 100 GB/month, then $0.10/GB
+- **Launch**: 500 GB/month, then $0.10/GB
+- **Scale**: 500 GB/month, then $0.10/GB
 
 ### Monitoring
 
@@ -315,6 +319,14 @@ Monthly Active User (MAU) limits per plan:
 > An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
 
 See [Neon Auth](/docs/auth/overview) for more information.
+
+### AI Gateway
+
+Neon AI Gateway provides access to foundation models from Anthropic, OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It is available on paid plans during the private preview.
+
+Inference is free during the preview. When billing begins, prices will match each provider's published list prices.
+
+See [AI Gateway models](/docs/ai-gateway/models#pricing) for details.
 
 ### Private network transfer
 
@@ -505,19 +517,22 @@ Can I disable scale-to-zero?
  Scale: Yes, fully configurable (1 minute to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
 
 What is autoscaling and how does it work?
-: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
+: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
 
 How are read replicas billed?
 : Each read replica is its own compute and contributes to CU-hours.
 
 Do public network transfer limits reset each month?
-: Yes. Free plan includes 5 GB/month, Launch and Scale include 100 GB/month. Beyond that, it's $0.10/GB.
+: Yes. Free plan includes 5 GB/month, Launch and Scale include 500 GB/month. Beyond that, it's $0.10/GB.
 
 How is private network transfer billed?
 : Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
 
+What are the limits and quotas for the Free plan?
+: The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Neon Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+
 What happens if I exceed my Free plan limits?
-: On the Free plan, compute will suspend when limits are reached (for example, CU-hours or public network transfer). To continue, upgrade to a paid plan.
+: On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 0.5 GB storage cap causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
 
 Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.

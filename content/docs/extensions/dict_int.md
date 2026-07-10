@@ -3,11 +3,16 @@ title: The dict_int extension
 subtitle: Control how integers are indexed in Postgres Full-Text Search to improve
   performance and relevance.
 summary: >-
-  Covers the setup of the `dict_int` extension to optimize integer indexing in
-  Postgres Full-Text Search, enhancing search performance and relevance by
-  controlling how integers are tokenized and indexed.
+  The `dict_int` Postgres extension provides a dictionary template
+  (`intdict_template`) for controlling how integers are tokenized and indexed
+  in Full-Text Search. Configurable parameters `maxlen`, `rejectlong`, and
+  `absval` let you truncate, reject, or normalize numeric tokens. Use it when
+  integer-heavy data such as product IDs or serial numbers bloats your FTS
+  index or returns irrelevant results. On Neon, the default `intdict`
+  dictionary is superuser-owned; create a custom dictionary from
+  `intdict_template` and bind it to a copied text search configuration.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.077Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Postgres Full-Text Search (FTS)](/postgresql/postgresql-indexes/postgresql-full-text-search) is a powerful tool for searching through textual data. However, when this data includes a significant number of integers like product IDs, serial numbers, or document codes, default FTS behavior can sometimes lead to inefficient indexes and slower search performance.

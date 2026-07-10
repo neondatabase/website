@@ -6,7 +6,7 @@ page_description: >-
   perform practical and useful operations on PostgreSQL hstore columns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-hstore/'
 ogImage: /postgresqltutorial/postgresql-hstore-query.jpg
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Working with hstore key-value data applies to PostgreSQL everywhere, not just [Neon](https://neon.com). If you're an enterprise storing semi-structured attributes alongside AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you managed Postgres that's performant, secure, and fully integrated into the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+Working with hstore key-value data applies to PostgreSQL everywhere, not just [Neon](https://neon.com). If you're an enterprise storing semi-structured attributes alongside AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you managed Postgres that's performant, secure, and fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
 **Summary**: in this tutorial, you’ll learn how to work with **PostgreSQL hstore** data type.
@@ -41,7 +41,7 @@ CREATE EXTENSION hstore;
 We create a table named `books` that has three columns:
 
 - `id` is the primary key that identifies the book.
-- `title` is the title of the products
+- `title` is the title of the book
 - `attr` stores attributes of the book such as ISBN, weight, and paperback. The data type of the `attr` column is hstore.
 
 We use the [CREATE TABLE statement](postgresql-create-table) to create the `books` table as follows:

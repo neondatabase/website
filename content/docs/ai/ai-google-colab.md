@@ -2,17 +2,21 @@
 title: Google Colab
 subtitle: Use Google Colab with Neon for vector similarity search
 summary: >-
-  Step-by-step guide for using Google Colab with Neon to create a notebook,
-  connect to a Neon database, install the `pgvector` extension, and execute
-  vector similarity search queries.
+  Google Colab integration with Neon lets you run Python notebooks in a
+  browser-based Jupyter environment that connects to Neon Postgres and uses the
+  pgvector extension to store and query vector embeddings. Use this guide when
+  you want to prototype vector similarity search without local setup, using
+  psycopg2 to connect, CREATE EXTENSION vector to enable pgvector, and the <->
+  distance operator to run nearest-neighbor queries. A pre-built Colab notebook
+  is available for one-click setup.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.720Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
 You can use Google Colab to run python code through the browser.
 
-This guide shows how to create a notebook in Colab, connect to a Neon database, install the `pgvector` extension to enabled Neon as a vector store, and run a vector search query.
+This guide shows how to create a notebook in Colab, connect to a Neon database, install the `pgvector` extension to enable Neon as a vector store, and run a vector search query.
 
 ## Prerequisites
 

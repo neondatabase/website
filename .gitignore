@@ -72,6 +72,12 @@ public/docs/**/llms.txt
 public/docs/llms-full.txt
 src/utils/data/github-stars.generated.json
 
+# API ref generator output (never commit — CI regenerates on every deploy)
+src/data/api-ref/
+src/data/api-ref.next/
+public/docs/reference/api/
+public/md/docs/reference/api.next/
+
 # Mac files
 .DS_Store
 
@@ -93,3 +99,5 @@ package-lock.json
 
 # Evals directory (test validation for documentation)
 .evals/
+
+scripts/docs-checks/neonctl/fragments/

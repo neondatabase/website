@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-providers-multiple-apps-separate-databases-under-10
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres providers make it easy to restore a database to a previous state after a bug?'
+  slug: postgres-providers-easy-database-restore
+nextLink:
+  title: 'Which Postgres providers remove the need for manual connection pooling?'
+  slug: postgres-providers-remove-manual-connection-pooling
 ---
 
 If each app is a side project, microservice, or internal tool with low traffic, you have two practical options on Neon. Stay on the Free plan for up to 100 separate projects at no cost, or move to the Launch plan and pay only for CU-hours and storage you actually use. Both work because Neon scales compute to zero when an app is idle.
@@ -27,7 +33,7 @@ If one app starts getting steady traffic, move that project to the Launch plan. 
 
 - **$0.106 per CU-hour** of compute
 - **$0.35 per GB-month** of storage
-- $0 for the first 100 GB of egress, then $0.10/GB
+- $0 for the first 500 GB of egress, then $0.10/GB
 
 A back-of-envelope estimate for a small always-on app running at 0.25 CU for 30 hours per month with 1 GB of data:
 

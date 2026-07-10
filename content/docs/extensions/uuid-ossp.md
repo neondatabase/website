@@ -2,11 +2,14 @@
 title: The uuid-ossp extension
 subtitle: Generate Universally Unique Identifiers (UUIDs) in your Postgres database
 summary: >-
-  Covers the setup of the `uuid-ossp` extension in Postgres on Neon, detailing
-  how to enable it and use various functions for generating different types
-  of UUIDs for unique data identification.
+  The `uuid-ossp` Postgres extension provides UUID generation functions for
+  time-based, multicast, MD5 name-based, random, and SHA-1 name-based variants,
+  plus nil and namespace constants. Use it over the built-in `gen_random_uuid()`
+  when you need deterministic name-based UUIDs or time-ordered primary keys for
+  distributed systems. Privacy trade-offs for v1 MAC-address embedding, index
+  fragmentation from random v4 UUIDs, and storage costs are also covered.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `uuid-ossp` extension provides a suite of functions for generating Universally Unique Identifiers (UUIDs) directly within your Postgres database. UUIDs are essential for ensuring data uniqueness across distributed systems and are widely used as primary keys and for various other applications requiring unique IDs. This extension offers a variety of UUID generation methods, including time-based, random, and name-based UUIDs, providing flexibility for different use cases.
