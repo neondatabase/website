@@ -9,7 +9,7 @@ export default [
     price: 0,
     features: {
       database: {
-        title: 'Database',
+        title: 'Postgres database',
         features: [
           {
             title: '100 projects',
@@ -27,15 +27,17 @@ export default [
           {
             title: 'Sizes up to 2 CU (8 GB RAM)',
           },
+          {
+            title: 'Unlimited team members',
+          },        
         ],
       },
       other: {
-        title: 'Features',
+        title: 'Backend',
         features: [
-          { title: 'Neon Auth: 60K MAUs' },
-          { title: '6-hr time travel/restores' },
-          { title: 'Access to Autoscaling, Branching, Read Replicas' },
-          { title: 'Unlimited team members' },
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs'  },
+          { title: 'Object Storage [BETA]', info: 'No charges applied during beta, with usage limits applied' },
+          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits applied' },
         ],
       },
     },
@@ -55,7 +57,7 @@ export default [
     storageRate: 0.35,
     features: {
       database: {
-        title: 'Database',
+        title: 'Postgres database',
         features: [
           {
             title: '100 projects',
@@ -71,14 +73,16 @@ export default [
             title: '$0.35 per GB-month',
           },
           { title: 'Sizes up to 16 CU (64 GB RAM)' },
+          { title: '3-day metrics/logs in UI' },
         ],
       },
       other: {
-        title: 'All features in free, plus...',
+        title: 'Backend',
         features: [
-          { title: 'Neon Auth: 1M MAUs' },
-          { title: '7-day time travel/restores' },
-          { title: '3-day metrics/logs in UI' },
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs'  },
+          { title: 'Object Storage [BETA]', info: 'No charges applied during beta, with usage limits applied' },
+          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits applied' },
+          { title: 'AI Gateway [BETA]', info: 'Pricing matches model provider list prices' },        
         ],
       },
     },
@@ -98,7 +102,7 @@ export default [
     storageRate: 0.35,
     features: {
       database: {
-        title: 'Database',
+        title: 'Postgres database',
         features: [
           {
             title: '1,000+ projects',
@@ -114,20 +118,16 @@ export default [
             title: '$0.35 per GB-month',
           },
           { title: 'Sizes up to 56 CU (224 GB RAM)' },
+          { title: 'SLAs, HIPAA, private network' },
         ],
       },
       other: {
-        title: 'All features in launch, plus...',
+        title: 'Backend',
         features: [
-          { title: '30-day time travel/restores' },
-          { title: '14-day metrics/logs in UI' },
-          { title: 'Metrics/logs export (Otel, Datadog)' },
-          { title: 'Private network, IP Allow rules' },
-          {
-            title: 'SLAs, SOC2, HIPAA',
-            info: '<p>HIPAA incurs additional costs.</p>',
-            moreLink: { text: 'Read more', href: '/docs/security/hipaa' },
-          },
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs'  },
+          { title: 'Object Storage [BETA]', info: 'No charges applied during beta, with usage limits applied' },
+          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits applied' },
+          { title: 'AI Gateway [BETA]', info: 'Pricing matches model provider list prices' },           
         ],
       },
     },
