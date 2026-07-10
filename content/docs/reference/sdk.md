@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neondatabase-toolkit
-updatedOn: '2026-07-09T23:12:37.869Z'
+updatedOn: '2026-07-10T10:36:04.593Z'
 ---
 
 Neon provides two categories of SDKs to support different use cases:
@@ -35,6 +35,8 @@ Use these SDKs to programmatically manage your Neon infrastructure (projects, br
 <DetailIconCards>
 
 <a href="/docs/reference/typescript-sdk" description="The official TypeScript SDK for the Neon API. Manage projects, branches, Postgres, storage, functions, and auth from one typed client" icon="neon">Neon Management SDK</a>
+
+<a href="/docs/reference/migrate-api-client-to-sdk" description="Migrate from @neondatabase/api-client to @neon/sdk" icon="neon">Migrate to @neon/sdk</a>
 
 <a href="/docs/reference/python-sdk" description="Programmatically manage Neon projects, branches, databases, and other platform resources" icon="neon">Python SDK (Neon API)</a>
 
