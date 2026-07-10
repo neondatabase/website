@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-07-07T20:15:20.694Z'
+updatedOn: '2026-07-10T14:30:02.440Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -239,6 +239,7 @@ The key list autocompletes from your config, so selecting a variable from a serv
 | ------------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
 | `--config`          | (auto)         | Path to the `neon.ts` file. When omitted, the CLI walks up from cwd stopping at `.git`               |
 | `--env`             | (none)         | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`         | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch  | Target branch ID or name                                                                             |
 | `--project-id`      | linked project | Project ID                                                                                           |
 | `--update-existing` | `false`        | Auto-confirm overriding existing remote settings                                                     |

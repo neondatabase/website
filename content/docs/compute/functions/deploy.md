@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-07-07T20:15:20.694Z'
+updatedOn: '2026-07-10T14:30:02.440Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -23,6 +23,7 @@ neon deploy
 | ------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
 | `--config`          | walks up from cwd | Path to the `neon.ts` policy                                                                         |
 | `--env`             | (none)            | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`            | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch     | Target branch ID or name                                                                             |
 | `--project-id`      | linked project    | Project ID                                                                                           |
 | `--update-existing` | `false`           | Auto-confirm overriding existing remote settings on the branch                                       |
