@@ -43,11 +43,13 @@ npx @neondatabase/neon-js gen-types \
 
 ### Options
 
-| Flag        | Alias | Description                                    | Default               |
-| :---------- | :---- | :--------------------------------------------- | :-------------------- |
-| `--db-url`  | `-c`  | The PostgreSQL connection string (Required).   | -                     |
-| `--output`  | `-o`  | The path where the file will be saved.         | `./types/database.ts` |
-| `--schemas` | `-s`  | Comma-separated list of schemas to introspect. | `public`              |
+| Flag                    | Alias | Description                                                                                    | Default             |
+| :---------------------- | :---- | :--------------------------------------------------------------------------------------------- | :------------------ |
+| `--db-url`              | -     | The PostgreSQL connection string (Required).                                                   | -                   |
+| `--output`              | `-o`  | The path where the file will be saved.                                                         | `database.types.ts` |
+| `--schema`              | `-s`  | Schema to introspect. Repeatable to include multiple schemas, for example `-s public -s auth`. | `public`            |
+| `--postgrest-v9-compat` | -     | Disables one-to-one relationship detection.                                                    | `false`             |
+| `--query-timeout`       | -     | The timeout for the schema introspection query, for example `30s` or `1m`.                     | `15s`               |
 
 ## Use generated types
 
