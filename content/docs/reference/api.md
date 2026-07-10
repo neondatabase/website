@@ -13,7 +13,7 @@ redirectFrom:
 
 The Neon API lets you manage Neon programmatically. You can create and manage projects, branches, databases, roles, compute endpoints, API keys, and more. Everything you can do in the Neon Console, you can do with the API.
 
-Browse endpoints below, start with [Get started](/docs/reference/api/get-started), download the [OpenAPI spec](/api_spec/release/v2.json), or load [api.md](/docs/reference/api.md) as AI context.
+Browse endpoints below, start with [Get started](/docs/reference/api/get-started), download the [OpenAPI spec](/api_spec/release/v2.json), or load [api.md](/docs/reference/api.md) as AI context. For a guide on skills, Markdown URLs, and MCP, see [Agent context for the Platform API](/docs/ai/platform-api-agent-context).
 
 ## Search and browse all endpoints
 

@@ -666,6 +666,8 @@
                   slug: https://neon.com/use-cases/ai-agents
                 - title: Database versioning
                   slug: ai/ai-database-versioning
+                - title: Agent context for the Platform API
+                  slug: ai/platform-api-agent-context
                 - title: Neon API reference
                   slug: reference/api
             - section: Agent frameworks

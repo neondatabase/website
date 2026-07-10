@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-06-26T10:41:58.102Z'
+updatedOn: '2026-07-10T09:41:23.024Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -153,7 +153,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 - **Connections**, including the serverless driver, connection pooling, and connection strings
 - **Authentication** with Neon Auth
 - **Data API** via `@neondatabase/neon-js`
-- **Platform APIs and SDKs**, including the REST API, TypeScript SDK, and Python SDK
+- **Platform APIs and SDKs**, including the REST API, TypeScript SDK, and Python SDK. See [Agent context for the Platform API](/docs/ai/platform-api-agent-context) for how to feed API and SDK docs to an assistant.
 - **Developer tools**, including the CLI, VS Code extension, and MCP server
 
 **Database workflows**

@@ -9,7 +9,7 @@ summary: >-
   for ergonomic namespaces and typed { data, error } results, or raw for every
   OpenAPI endpoint. Requires Node.js 20.19+ and a Neon API key.
 enableTableOfContents: true
-updatedOn: '2026-07-10T09:32:29.657Z'
+updatedOn: '2026-07-10T09:41:23.024Z'
 ---
 
 <InfoBlock>
@@ -21,8 +21,9 @@ updatedOn: '2026-07-10T09:32:29.657Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-<a href="/docs/reference/api-reference">Neon API Reference</a>
+<a href="/docs/reference/api">Neon Platform API</a>
 <a href="/docs/reference/migrate-api-client-to-sdk">Migrate from @neondatabase/api-client</a>
+<a href="/docs/ai/platform-api-agent-context">Agent context for the Platform API</a>
 </DocsList>
 
 <DocsList title="Source code" theme="repo">
@@ -31,6 +32,10 @@ updatedOn: '2026-07-10T09:32:29.657Z'
 </DocsList>
 
 </InfoBlock>
+
+<Admonition type="tip" title="Building with an AI assistant?">
+Run `npx neon@latest init` to install [Agent Skills](/docs/ai/agent-skills) and the [Neon MCP server](/docs/ai/neon-mcp-server). For **context** (how the Platform API and `@neon/sdk` work), point your agent at this page as Markdown ([typescript-sdk.md](/docs/reference/typescript-sdk.md)) and the [Platform API reference](/docs/reference/api.md). For **actions** on your Neon account from chat, use MCP, not pasted API docs. See [Agent context for the Platform API](/docs/ai/platform-api-agent-context) for a full guide.
+</Admonition>
 
 <Admonition type="note" title="Migrating from @neondatabase/api-client?">
 Neon’s legacy Axios-based client [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client) is superseded by [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk). See the [migration guide](/docs/reference/migrate-api-client-to-sdk) for method mapping and error-handling changes.

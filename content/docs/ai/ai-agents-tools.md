@@ -10,7 +10,7 @@ summary: >-
   neon@latest init`) configures OAuth, installs Agent Skills, and connects
   your editor in a single step.
 enableTableOfContents: true
-updatedOn: '2026-06-23T22:05:54.707Z'
+updatedOn: '2026-07-10T09:41:23.024Z'
 ---
 
 Neon is the backend for apps and agents. This page covers Neon's integrations with AI tools and agent frameworks, from natural language database control to autonomous agent platforms. Choose the tools that fit your workflow.
@@ -75,6 +75,8 @@ Create autonomous agents that can manage and interact with your Neon databases p
 <a href="https://neon.com/use-cases/ai-agents" description="Read about Neon as a solution for agents that need backends." icon="openai">Neon for AI agent platforms</a>
 
 <a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
+
+<a href="/docs/ai/platform-api-agent-context" description="Give agents context for the Platform API, @neon/sdk, OpenAPI, and MCP" icon="transactions">Agent context for the Platform API</a>
 
 <a href="/docs/reference/api" description="Integrate using the Neon API" icon="transactions">Neon API</a>
 
