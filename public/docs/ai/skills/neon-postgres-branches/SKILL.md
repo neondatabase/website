@@ -32,7 +32,7 @@ If the request is ambiguous, ask one clarifying question:
 Always support both Neon CLI and Neon MCP server. Prefer the tool the user already has installed and authenticated.
 
 MCP link: https://neon.com/docs/ai/neon-mcp-server.md
-CLI link: https://neon.com/docs/reference/cli-quickstart
+CLI link: https://neon.com/docs/cli/quickstart.md
 
 ### Selection order
 

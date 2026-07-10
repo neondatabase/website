@@ -129,7 +129,7 @@ If `init` is not suitable, the individual steps can be run non-interactively, us
 - **MCP server:** `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>`
 - **Agent skill:** `npx skills add neondatabase/agent-skills --skill neon-postgres --skill neon --agent <agent-name> -y`
 
-Prefer the CLI over the MCP server unless the user instructs otherwise, since it provides more capabilities, including deploying Neon Functions. For full CLI installation options, see https://neon.com/docs/reference/cli-install.md
+Prefer the CLI over the MCP server unless the user instructs otherwise, since it provides more capabilities, including deploying Neon Functions. For full CLI installation options, see https://neon.com/docs/cli/install.md
 
 ### Setup Flow
 
