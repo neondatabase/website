@@ -14,7 +14,7 @@ This is not for production workloads. Expect rough edges and frequent updates. B
 
 ## What's in the preview
 
-Three new services join Postgres and Neon Auth, all scoped to your branches:
+Three new services join Postgres and Managed BetterAuth, all scoped to your branches:
 
 - **Neon Functions**: long-running Node.js compute next to your database. WebSocket servers, SSE streams, AI agents.
 - **Neon Storage**: S3-compatible object storage that branches with your data.
@@ -60,7 +60,7 @@ Pick a template from the interactive selector, or pass `--template <id>` to skip
 | `ai-sdk`        | A streaming AI chat agent on Neon Functions that generates images on demand, stores them in Neon Storage, and indexes metadata in Postgres via Drizzle. Uses Neon AI Gateway for model access.                     |
 | `mastra`        | A personal-assistant chatbot on Neon Functions that remembers you across conversations. Streams responses through Neon AI Gateway and persists context across threads using Mastra Memory backed by Neon Postgres. |
 | `mcp`           | An MCP server on Neon Functions that exposes contact management tools (create, update, delete, search) to AI agents via streamable HTTP. Compatible with Cursor, Claude Desktop, and other MCP clients.            |
-| `realtime-chat` | A full-stack realtime chat app: Next.js frontend with Neon Auth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                          |
+| `realtime-chat` | A full-stack realtime chat app: Next.js frontend with Managed BetterAuth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                 |
 | `realtime-sse`  | A realtime shared counter: TanStack Router SPA connected to a Hono server on Neon Functions via server-sent events. State persists in Postgres and broadcasts across isolates with LISTEN/NOTIFY.                  |
 
 Each template includes agent skills and a README. Follow the README steps, or tell your agent to follow them.

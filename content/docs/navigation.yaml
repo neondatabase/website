@@ -431,7 +431,7 @@
 
             - section: Tools
               items:
-                - title: Neon Auth and Data API SDK
+                - title: Auth and Data API SDK
                   slug: reference/javascript-sdk
                 - title: SQL to REST API Translator
                   slug: data-api/sql-to-rest
@@ -446,7 +446,7 @@
                   slug: data-api/manage
                 - title: Troubleshooting
                   slug: data-api/troubleshooting
-        - title: Neon Auth
+        - title: Auth
           icon: auth
           slug: auth/overview
           items:
@@ -515,7 +515,7 @@
 
             - section: Reference
               items:
-                - title: Neon Auth and Data API SDK
+                - title: Auth and Data API SDK
                   slug: reference/javascript-sdk
                 - title: Next.js Server SDK
                   slug: auth/reference/nextjs-server
@@ -524,7 +524,7 @@
 
             - section: Migration Guides
               items:
-                - title: From Neon Auth SDK v0.1
+                - title: From Auth SDK v0.1
                   slug: auth/migrate/from-auth-v0.1
                 - title: From Stack Auth (legacy)
                   slug: auth/migrate/from-legacy-auth
@@ -825,7 +825,7 @@
           items:
             - title: Overview
               slug: reference/sdk
-            - title: Neon Auth and Data API SDK
+            - title: Auth and Data API SDK
               slug: reference/javascript-sdk
             - title: Neon Management SDK
               slug: reference/typescript-sdk

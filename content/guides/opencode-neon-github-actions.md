@@ -4,7 +4,7 @@ subtitle: 'A step‑by‑step guide to using GitHub Actions with OpenCode and Ne
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-09T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 Coding assistants are rapidly evolving from simple code generators into autonomous collaborators that can implement features and open pull requests directly in your repository. To handle full-stack tasks safely, they need a production-like environment where they can test application code and validate database changes without touching production.
@@ -37,7 +37,7 @@ To follow along with this guide, you will need:
 To demonstrate this workflow, you'll use an example app called **SnippetHub**. It’s a simple tool for saving and organizing code snippets. Each snippet includes a title, description, code content, and is tied to a user. Currently, users can create, edit, and delete snippets, but all snippets remain private visible only to their creator.
 
 <DetailIconCards>
-    <a href="https://github.com/dhanushreddy291/code-snippet" description="Example app repository used in this guide. It’s a simple snippet management tool built with Next.js, Drizzle ORM, and Neon Auth." icon="github">Example repository (SnippetHub)</a>
+    <a href="https://github.com/dhanushreddy291/code-snippet" description="Example app repository used in this guide. It’s a simple snippet management tool built with Next.js, Drizzle ORM, and Managed BetterAuth." icon="github">Example repository (SnippetHub)</a>
 </DetailIconCards>
 
 Now you want to add a **"Share Snippet"** feature. This will let users make a snippet public, generating a shareable link that anyone can view without authentication.

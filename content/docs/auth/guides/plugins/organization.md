@@ -2,7 +2,7 @@
 title: Organization
 subtitle: 'Manage multi-tenant organizations, members, and invitations'
 summary: >-
-  The Neon Auth Organization plugin adds multi-tenancy to apps built on
+  The Managed BetterAuth Organization plugin adds multi-tenancy to apps built on
   Better Auth, letting each tenant share a Neon branch with role-based access
   (owner, admin, and member roles). Use it when your app needs workspaces or
   tenant isolation with invitation workflows, configurable membership limits,
@@ -11,12 +11,12 @@ summary: >-
   organizations, inviting and removing members, and checking role permissions
   client-side.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
+Managed BetterAuth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
 
 <Admonition type="note" title="Preview Feature">
 The Organization plugin is currently in **Beta**. Support for JWT token claims is under development.
@@ -31,7 +31,7 @@ Use the Organization plugin when you need multi-tenancy in your app. It supports
 - Inviting users and assigning roles: owner, admin, or member
 - Role-based access: owners and admins can manage the org; the member role has read-only access
 
-Better Auth also has a **Teams** feature (sub-groups within an org); that feature is not currently enabled in Neon Auth.
+Better Auth also has a **Teams** feature (sub-groups within an org); that feature is not currently enabled in Managed BetterAuth.
 
 ## Prerequisites
 
@@ -40,7 +40,7 @@ Better Auth also has a **Teams** feature (sub-groups within an org); that featur
 
 ## Example application
 
-**[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** is a multi-tenant sample that uses the Organization plugin with **Drizzle** and **`@neondatabase/auth`** (see that folder’s README for **bun** setup from the monorepo root). For other runnable Neon Auth apps, see [Example applications](/docs/auth/overview#example-applications).
+**[neon-auth-orgs-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-orgs-example)** is a multi-tenant sample that uses the Organization plugin with **Drizzle** and **`@neondatabase/auth`** (see that folder’s README for **bun** setup from the monorepo root). For other runnable Managed BetterAuth apps, see [Example applications](/docs/auth/overview#example-applications).
 
 ## Configure the organization plugin
 
@@ -50,7 +50,7 @@ The Organization plugin is enabled by default for each branch; you can disable i
 
 <TabItem>
 
-Open your project in the Neon Console, then go to **Auth** > **Plugins** (beta) and use the **Organizations** section (per branch). This tab is available when your project uses Neon Auth with **Better Auth**; other Auth settings, including your **Auth URL**, stay on the **Configuration** tab. From there you can customize:
+Open your project in the Neon Console, then go to **Auth** > **Plugins** (beta) and use the **Organizations** section (per branch). This tab is available when your project uses Managed BetterAuth with **Better Auth**; other Auth settings, including your **Auth URL**, stay on the **Configuration** tab. From there you can customize:
 
 ![Neon Console Auth Plugins tab with Organizations settings](/docs/changelog/neon_auth_plugins_organizations.png)
 
@@ -629,13 +629,13 @@ const canDelete = authClient.organization.checkRolePermission({
 
 ## Limitations
 
-Because Neon Auth is a managed service, some Better Auth features are not currently supported:
+Because Managed BetterAuth is a managed service, some Better Auth features are not currently supported:
 
 - **Teams:** The Teams sub-feature is not currently enabled.
 - **Hooks:** Server-side hooks (for example, `beforeCreateOrganization`) are not supported.
 - **Custom Permissions:** You cannot currently define custom roles or modify default permissions.
 - **Dynamic Access Control:** Dynamic creation of roles via API is not enabled.
 
-Check the [Neon Auth roadmap](/docs/auth/roadmap) for updates on these features.
+Check the [Managed BetterAuth roadmap](/docs/auth/roadmap) for updates on these features.
 
 <NeedHelp/>

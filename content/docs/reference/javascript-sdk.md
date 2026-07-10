@@ -1,8 +1,8 @@
 ---
-title: Neon Auth and Data API SDK
+title: Managed BetterAuth and Data API SDK
 subtitle: Reference documentation for @neondatabase/neon-js (authentication and Data API database queries)
 summary: >-
-  The `@neondatabase/neon-js` TypeScript SDK combines Neon Auth and the Neon
+  The `@neondatabase/neon-js` TypeScript SDK combines Managed BetterAuth and the Neon
   Data API in one client, covering auth methods (email/password, OAuth, OTP,
   password reset) alongside a PostgREST-style query builder (select, insert,
   update, delete, rpc, filters) with automatic JWT forwarding. Choose this page
@@ -13,13 +13,13 @@ summary: >-
   (Supabase-compatible migration path).
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-06-18T22:47:28.438Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-This page documents `@neondatabase/neon-js`, which combines Neon Auth and the Data API in a single client. Neon also publishes standalone packages:
+This page documents `@neondatabase/neon-js`, which combines Managed BetterAuth and the Data API in a single client. Neon also publishes standalone packages:
 
 - [`@neondatabase/postgrest-js`](/docs/data-api/get-started#any-authentication-provider): Data API with any authentication provider
-- [`@neondatabase/auth`](https://www.npmjs.com/package/@neondatabase/auth): Neon Auth without the Data API
+- [`@neondatabase/auth`](https://www.npmjs.com/package/@neondatabase/auth): Managed BetterAuth without the Data API
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 

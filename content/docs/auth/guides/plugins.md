@@ -1,28 +1,28 @@
 ---
 title: Plugins
-subtitle: Supported Better Auth plugins in Neon Auth
+subtitle: Supported Better Auth plugins in Managed BetterAuth
 summary: >-
-  Neon Auth exposes a managed subset of Better Auth plugins (Admin, Email OTP,
+  Managed BetterAuth exposes a managed subset of Better Auth plugins (Admin, Email OTP,
   JWT, Magic Link, Organization, Open API, Phone Number) through the Neon SDK;
   plugins are not installed or configured directly. Use this page to check which
   plugins are fully supported versus partially supported, and how to configure
   them via the Neon Console or Neon API. The Organization plugin has partial
   support while JWT token claims are still under development.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/), which supports a variety of plugins to extend authentication functionality.
+Managed BetterAuth is built on [Better Auth](https://www.better-auth.com/), which supports a variety of plugins to extend authentication functionality.
 
-<Admonition type="info" title="Plugins are managed by Neon Auth">
-Neon Auth is a **managed** Better Auth service. You **don’t install or configure Better Auth plugins directly** - instead, Neon Auth exposes a supported subset of plugins through the Neon SDK.
+<Admonition type="info" title="Plugins are managed by Managed BetterAuth">
+Managed BetterAuth is a **managed** Better Auth service. You **don’t install or configure Better Auth plugins directly** - instead, Managed BetterAuth exposes a supported subset of plugins through the Neon SDK.
 
-For plugins that have Console settings (for example [Organization](/docs/auth/guides/plugins/organization)), open **Auth** > **Plugins** (beta) in the Neon Console, or use the Neon API. Additional plugin options may still arrive over time; see the [Neon Auth roadmap](/docs/auth/roadmap).
+For plugins that have Console settings (for example [Organization](/docs/auth/guides/plugins/organization)), open **Auth** > **Plugins** (beta) in the Neon Console, or use the Neon API. Additional plugin options may still arrive over time; see the [Managed BetterAuth roadmap](/docs/auth/roadmap).
 </Admonition>
 
-The following Better Auth plugins are currently supported in Neon Auth:
+The following Better Auth plugins are currently supported in Managed BetterAuth:
 
 ## Supported plugins
 
@@ -36,7 +36,7 @@ The following Better Auth plugins are currently supported in Neon Auth:
 | [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported                                    |
 | [Phone Number](/docs/auth/guides/plugins/phone-number) | ✅ Supported                                    |
 
-For more runnable Neon Auth samples, see the [neondatabase/neon-js](https://github.com/neondatabase/neon-js/tree/main/examples) examples repository:
+For more runnable Managed BetterAuth samples, see the [neondatabase/neon-js](https://github.com/neondatabase/neon-js/tree/main/examples) examples repository:
 
 | Plugin       | Demo                                                                                                                    |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------- |
@@ -44,6 +44,6 @@ For more runnable Neon Auth samples, see the [neondatabase/neon-js](https://gith
 | Magic Link   | [neon-auth-magic-link-example](https://github.com/neondatabase/neon-js/tree/main/examples/neon-auth-magic-link-example) |
 | Phone Number | [nextjs-phone-login](https://github.com/neondatabase/neon-js/tree/main/examples/nextjs-phone-login)                     |
 
-For the latest status (including what’s coming next), see the [Neon Auth roadmap](/docs/auth/roadmap).
+For the latest status (including what’s coming next), see the [Managed BetterAuth roadmap](/docs/auth/roadmap).
 
 <NeedHelp/>

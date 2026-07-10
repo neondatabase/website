@@ -1,17 +1,17 @@
 ---
-title: Choosing Between NextAuth.js, Neon Auth and Better Auth for Postgres
-subtitle: Understand how NextAuth.js, Neon Auth, and Better Auth differ in session management, migrations, and handling authentication data across Postgres branches.
+title: Choosing Between NextAuth.js, Managed BetterAuth and Better Auth for Postgres
+subtitle: Understand how NextAuth.js, Managed BetterAuth, and Better Auth differ in session management, migrations, and handling authentication data across Postgres branches.
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-04-21T02:00:00.000Z'
-updatedOn: '2026-04-21T12:11:06.000Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-If you are adding authentication to a Next.js application that already uses Postgres, you will run into three options that sound similar but behave very differently in practice: [Auth.js (NextAuth.js)](https://authjs.dev/), [Neon Auth](https://neon.com/docs/auth/overview), and [Better Auth](https://www.better-auth.com/).
+If you are adding authentication to a Next.js application that already uses Postgres, you will run into three options that sound similar but behave very differently in practice: [Auth.js (NextAuth.js)](https://authjs.dev/), [Managed BetterAuth](https://neon.com/docs/auth/overview), and [Better Auth](https://www.better-auth.com/).
 
 They are not interchangeable implementations of the same idea. Two of them are libraries you run inside your app. One is a managed service that is tightly integrated with a specific Postgres platform. The right choice usually comes down to how you want identity data to live in Postgres, how you want sessions to be managed, and how much infrastructure you want to own.
 
-This article compares Auth.js (NextAuth.js), Neon Auth, and Better Auth by examining their approach to data storage, session strategy, and operational workflow. It concludes with situations where each is particularly well-suited, without claiming that any single option is the universal “best” choice.
+This article compares Auth.js (NextAuth.js), Managed BetterAuth, and Better Auth by examining their approach to data storage, session strategy, and operational workflow. It concludes with situations where each is particularly well-suited, without claiming that any single option is the universal “best” choice.
 
 ## The Common Ground
 
@@ -60,15 +60,15 @@ Another nuance appears when you want to branch your database. Auth.js stores all
 
 Because the authentication schema lives in your application’s database, you have full control to customize and extend it. However, you’re also responsible for **applying migrations and ensuring schema drift does not occur across environments (production, staging, previews)**. This can add a subtle but important layer of operational complexity as your application and team grow.
 
-## Neon Auth - Managed auth that stores identity in your Neon Postgres and branches with the database
+## Managed BetterAuth - Managed auth that stores identity in your Neon Postgres and branches with the database
 
-Neon Auth is a **managed authentication service** that stores users, sessions, and configuration **directly in your Neon Postgres database**. The core design goal is database-centric auth where identity becomes ordinary Postgres state.
+Managed BetterAuth is a **managed authentication service** that stores users, sessions, and configuration **directly in your Neon Postgres database**. The core design goal is database-centric auth where identity becomes ordinary Postgres state.
 
-When you use Neon Auth, your authentication data is stored in your Neon Postgres database under [the `neon_auth` schema](https://neon.com/docs/auth/overview#why-neon-auth). This makes all auth state accessible with standard SQL queries, and fully compatible with patterns like [Row Level Security](https://neon.com/docs/guides/row-level-security). Because the auth data lives alongside your application data, branching a Neon database [also branches the auth state](https://neon.com/docs/auth/branching-authentication). Preview environments and end-to-end authentication tests behave just like your production setup.
+When you use Managed BetterAuth, your authentication data is stored in your Neon Postgres database under [the `neon_auth` schema](https://neon.com/docs/auth/overview#why-neon-auth). This makes all auth state accessible with standard SQL queries, and fully compatible with patterns like [Row Level Security](https://neon.com/docs/guides/row-level-security). Because the auth data lives alongside your application data, branching a Neon database [also branches the auth state](https://neon.com/docs/auth/branching-authentication). Preview environments and end-to-end authentication tests behave just like your production setup.
 
-Neon Auth builds on Better Auth, so if you’ve worked with Better Auth before, many of the APIs and overall concepts will feel familiar. Unlike running your own instance of Better Auth, [Neon Auth is a managed service](https://neon.com/docs/auth/overview#when-to-use-neon-auth-vs-self-hosting-better-auth). Your app communicates with it using SDKs provided by Neon, so you don’t have to host or operate your own authentication service.
+Managed BetterAuth builds on Better Auth, so if you’ve worked with Better Auth before, many of the APIs and overall concepts will feel familiar. Unlike running your own instance of Better Auth, [Managed BetterAuth is a managed service](https://neon.com/docs/auth/overview#when-to-use-neon-auth-vs-self-hosting-better-auth). Your app communicates with it using SDKs provided by Neon, so you don’t have to host or operate your own authentication service.
 
-Below is a basic example of how you might set up Neon Auth in a Next.js application using the [Neon Auth SDK](https://neon.com/docs/reference/javascript-sdk):
+Below is a basic example of how you might set up Managed BetterAuth in a Next.js application using the [Managed BetterAuth SDK](https://neon.com/docs/reference/javascript-sdk):
 
 ```ts title="lib/auth/server.ts"
 import { createNeonAuth } from '@neondatabase/auth/next/server';
@@ -101,11 +101,11 @@ export const config = {
 };
 ```
 
-With Neon Auth, your authentication state (users, sessions, etc.) lives right in your Neon-managed Postgres under the `neon_auth` schema. You can inspect and query them directly with SQL, and when you branch your database in Neon, both app and auth state branch together making previews and integration environments seamless.
+With Managed BetterAuth, your authentication state (users, sessions, etc.) lives right in your Neon-managed Postgres under the `neon_auth` schema. You can inspect and query them directly with SQL, and when you branch your database in Neon, both app and auth state branch together making previews and integration environments seamless.
 
-Neon Auth works best when you want authentication state to follow your database lifecycle, including branching, previews, and continuous integration. It’s a good fit if you prefer a managed authentication API, want to keep your application logic slim, and if SQL-level access to identity and Postgres-native authorization (like RLS) is important to you.
+Managed BetterAuth works best when you want authentication state to follow your database lifecycle, including branching, previews, and continuous integration. It’s a good fit if you prefer a managed authentication API, want to keep your application logic slim, and if SQL-level access to identity and Postgres-native authorization (like RLS) is important to you.
 
-Keep in mind that Neon Auth is designed specifically for the Neon platform, so if you ever want to switch Postgres providers, this could matter. Like with any managed service, it’s good to check that its features and plans fit where you want your project to go.
+Keep in mind that Managed BetterAuth is designed specifically for the Neon platform, so if you ever want to switch Postgres providers, this could matter. Like with any managed service, it’s good to check that its features and plans fit where you want your project to go.
 
 ## Better Auth - App-owned auth with a first-class Postgres adapter and explicit database workflow
 
@@ -143,11 +143,11 @@ If you want the simplest mental model, ask these questions:
 Common scenarios:
 
 - If you are building a Next.js app and want an auth solution that feels native, Auth.js is often the fastest path, and you can decide later whether sessions live in Postgres.
-- If your workflow depends on database branching and you want auth state to follow branches automatically, Neon Auth is designed for that.
+- If your workflow depends on database branching and you want auth state to follow branches automatically, Managed BetterAuth is designed for that.
 - If you want a database-centric auth system you can run anywhere and you are comfortable owning the runtime, Better Auth is a strong fit.
 
 ## Neon's Role in Database-Centric Authentication
 
 Database-centric auth works best when you treat identity like first-class Postgres state: tables you can query, policies you can apply, and environments you can reproduce.
 
-On Neon specifically, that framing lines up with features like branching and preview databases. If auth state lives in Postgres, your “auth environment” can become just another branch, which is hard to replicate with cookie-only or external auth systems. If you want that benefit but still want to keep auth app-owned, Auth.js with a Postgres adapter or Better Auth with a Postgres adapter can get you close. If you want it built in and managed, Neon Auth leans into that model directly.
+On Neon specifically, that framing lines up with features like branching and preview databases. If auth state lives in Postgres, your “auth environment” can become just another branch, which is hard to replicate with cookie-only or external auth systems. If you want that benefit but still want to keep auth app-owned, Auth.js with a Postgres adapter or Better Auth with a Postgres adapter can get you close. If you want it built in and managed, Managed BetterAuth leans into that model directly.
