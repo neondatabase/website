@@ -9,7 +9,7 @@ summary: >-
   Use this page to add autocomplete, query-result type inference, and
   compile-time error checking to `@neondatabase/neon-js` or
   `@neondatabase/postgrest-js` clients. The tool accepts `--db-url`,
-  `--output`, and `--schemas` flags and can run as a package.json script to
+  `--output`, and `--schema` flags and can run as a package.json script to
   keep generated types in sync after schema changes.
 enableTableOfContents: true
 updatedOn: '2026-07-10T15:48:27.200Z'
