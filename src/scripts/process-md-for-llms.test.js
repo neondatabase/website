@@ -732,11 +732,11 @@ See [CONN_MAX_AGE](https://example.com).
       const rootDir = process.cwd();
       const navMap = buildNavigationMap(rootDir);
 
-      // auth/guides/password-reset is under: Backend > Neon Auth > Guides
+      // auth/guides/password-reset is under: Backend > Auth > Guides
       const entry = navMap.get('auth/guides/password-reset');
       expect(entry).toBeDefined();
       expect(entry.breadcrumbs).toContain('Backend');
-      expect(entry.breadcrumbs).toContain('Neon Auth');
+      expect(entry.breadcrumbs).toContain('Auth');
       expect(entry.breadcrumbs).toContain('Guides');
     });
 
@@ -768,7 +768,7 @@ See [CONN_MAX_AGE](https://example.com).
       const authEntry = navMap.get('auth/overview');
       expect(authEntry).toBeDefined();
       expect(authEntry.breadcrumbs).not.toContain('Start with Neon');
-      expect(authEntry.breadcrumbs).toContain('Neon Auth');
+      expect(authEntry.breadcrumbs).toContain('Auth');
     });
   });
 
@@ -815,7 +815,7 @@ See [CONN_MAX_AGE](https://example.com).
         sectionName: 'Guides',
         urlPrefix: 'docs',
         siblings: [],
-        breadcrumbs: ['Neon Auth', 'Guides'],
+        breadcrumbs: ['Auth', 'Guides'],
         pageTitle: 'Password reset',
       });
 
@@ -825,7 +825,7 @@ See [CONN_MAX_AGE](https://example.com).
         'docs/auth/guides/password-reset.md'
       );
       expect(header).toBe(
-        '> This page location: Neon Auth > Guides > Password reset\n' +
+        '> This page location: Auth > Guides > Password reset\n' +
           '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
       );
     });
@@ -902,9 +902,7 @@ See [CONN_MAX_AGE](https://example.com).
       const navMap = buildNavigationMap(rootDir);
 
       const header = buildPageHeader('auth/guides/password-reset', navMap);
-      expect(header).toContain(
-        '> This page location: Backend > Neon Auth > Guides > Password reset\n'
-      );
+      expect(header).toContain('> This page location: Backend > Auth > Guides > Password reset\n');
       expect(header).toContain('> Full Neon documentation index: https://neon.com/docs/llms.txt\n');
       expect(header).not.toContain('Note for AI assistants');
     });
