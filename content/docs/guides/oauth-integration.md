@@ -10,7 +10,7 @@ summary: >-
   partners. The page covers the consent screen, authorization URL construction,
   code-for-token exchange, and refresh token scopes.
 enableTableOfContents: true
-updatedOn: '2026-07-11T12:02:01.369Z'
+updatedOn: '2026-07-11T12:13:35.837Z'
 ---
 
 The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
@@ -99,12 +99,18 @@ const configuration = await client.discovery(
   client.None()
 );
 
-// After the user authenticates in the browser and the CLI's local
-// callback server receives the redirect:
-const tokenSet = await client.authorizationCodeGrant(configuration, callbackUrl, {
-  pkceCodeVerifier: codeVerifier,
-  expectedState: state,
-});
+// After the user authenticates in the browser, the CLI's local
+// callback server receives the redirect as `request`. The full
+// callback URL is built from that request plus the server's own
+// port (`listen_port`):
+const tokenSet = await client.authorizationCodeGrant(
+  configuration,
+  new URL(request.url, `http://127.0.0.1:${listen_port}`),
+  {
+    pkceCodeVerifier: codeVerifier,
+    expectedState: state,
+  }
+);
 // tokenSet.access_token and tokenSet.refresh_token are now available
 ```
 
