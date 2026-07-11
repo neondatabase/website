@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-11T13:26:09.521Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -64,13 +64,9 @@ neon functions deploy hello --src . --env RESEND_API_KEY=re_...
 neon functions deploy hello --src functions/hello.ts --branch feat/my-feature
 ```
 
-To update only configuration on an existing function, omit `--src` and pass the setting you want to change. The deploy reuses the latest bundle and applies the config change:
+The CLI doesn't support a config-only deploy. Every `neon functions deploy` call bundles and uploads source, whether you pass `--src` or let it default to the current directory, so there's no way to change just an environment variable without also pointing at valid source, as in the example above.
 
-```bash
-neon functions deploy hello --env RESEND_API_KEY=re_...
-```
-
-The first deploy for a function still needs source code.
+For a deploy that skips bundling and updates only the environment or runtime, use [the API](#deploy-with-the-api), which accepts config-only updates.
 
 ## Deploy with the API
 

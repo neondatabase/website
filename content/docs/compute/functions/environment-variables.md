@@ -6,7 +6,7 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T12:26:05.075Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -18,7 +18,7 @@ Neon injects connection strings, credentials, and service URLs automatically at 
 Each variable is present only when its service is enabled on the branch. `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, for example, are undefined on a functions-only branch with no Postgres database.
 
 | Variable                                     | Service            | Description                                                                                                                                                                             |
-| -------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -------------------------------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DATABASE_URL`                               | Postgres           | Pooled connection string. Use this for most queries.                                                                                                                                    |
 | `DATABASE_URL_UNPOOLED`                      | Postgres           | Direct connection string. Use for migrations, `LISTEN`/`NOTIFY`, and multi-round-trip transactions.                                                                                     |
 | `NEON_BRANCH`                                | Core               | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                                                                                      |
