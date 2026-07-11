@@ -11,7 +11,7 @@ summary: >-
   OAuth-only apps. Managed BetterAuth does not support phone authentication (SMS/WhatsApp),
   SAML SSO, or Web3 wallet sign-in.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-11T12:07:28.894Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -28,7 +28,7 @@ Existing password-based users cannot migrate due to different hashing algorithms
 - Data API enabled (Managed BetterAuth is enabled by default when you enable Data API):
   - Go to **Data API** in the Neon Console and enable it
   - In **Data API → Configuration**, verify it's configured with **Managed BetterAuth**
-  - Copy your Neon connection host and database name from **Connect** in the Console - the SDK derives both the Auth and Data API URLs from this single base URL. See [Initialize the client](/docs/reference/javascript-sdk#initializing) for the derivation rules, or use the separate Auth and Data API base URLs instead if you'd rather configure them explicitly
+  - Copy your Neon connection host and database name from **Connect** in the Console. The SDK derives both the Auth and Data API URLs from this single base URL. See [Initialize the client](/docs/reference/javascript-sdk#initializing) for the derivation rules, or use the separate Auth and Data API base URLs instead if you'd rather configure them explicitly
 
 <Steps>
 
@@ -180,12 +180,12 @@ ORDER BY "createdAt" DESC;
 
 ## What changed?
 
-| Feature                   | Supabase                            | Neon                                 |
-| ------------------------- | ----------------------------------- | ------------------------------------ |
-| **User ID type**          | `UUID`                              | `UUID`                                               |
-| **Client config**         | URL + anon key                      | Single base URL (auto-derives Auth + Data API URLs)  |
-| **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_URL`                                           |
-| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js`                              |
+| Feature                   | Supabase                            | Neon                                                |
+| ------------------------- | ----------------------------------- | --------------------------------------------------- |
+| **User ID type**          | `UUID`                              | `UUID`                                              |
+| **Client config**         | URL + anon key                      | Single base URL (auto-derives Auth + Data API URLs) |
+| **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_URL`                                          |
+| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js`                             |
 
 ## API compatibility
 
