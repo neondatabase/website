@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-07-11T12:19:20.945Z'
+updatedOn: '2026-07-11T13:41:14.778Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -38,7 +38,7 @@ This endpoint accepts Anthropic models only. See the [AI Gateway catalog](/docs/
 - `claude-sonnet-4-6`, `claude-sonnet-4-5`, `claude-sonnet-4`
 - `claude-haiku-4-5`
 
-Sending a non-Anthropic model ID returns `400 model is not available on this endpoint`. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you need to call multiple providers from the same code.
+Sending a non-Anthropic model ID returns `400 model "<model-id>" is not available on the anthropic_messages endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you need to call multiple providers from the same code.
 
 ## Basic request
 
@@ -200,10 +200,10 @@ All other headers are stripped. The `Authorization` header is replaced with the 
 
 ## Error handling
 
-| Status            | Message                                   | Cause                                     |
-| ----------------- | ----------------------------------------- | ----------------------------------------- |
-| `400 Bad Request` | `unknown model "<model-id>"`              | Model ID not in the catalog               |
-| `400 Bad Request` | `model is not available on this endpoint` | Non-Anthropic model sent to this endpoint |
+| Status            | Message                                                                  | Cause                                     |
+| ----------------- | ------------------------------------------------------------------------ | ----------------------------------------- |
+| `400 Bad Request` | `unknown model "<model-id>"`                                             | Model ID not in the catalog               |
+| `400 Bad Request` | `model "<model-id>" is not available on the anthropic_messages endpoint` | Non-Anthropic model sent to this endpoint |
 
 For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 
