@@ -1286,14 +1286,6 @@
       slug: guides/integrations
       icon: integrations
       items:
-        - title: Local development
-          icon: container
-          slug: local/neon-local
-          items:
-            - title: Neon VS Code Extension
-              slug: local/vscode-extension
-            - title: Neon Local
-              slug: local/neon-local
         - title: Integrations (3rd party)
           icon: integrations
           slug: guides/integrations
@@ -1486,6 +1478,14 @@
                   slug: serverless/serverless-driver
                 - title: Trigger serverless functions with Inngest
                   slug: guides/trigger-serverless-functions
+        - title: Local development
+          icon: container
+          slug: local/neon-local
+          items:
+            - title: Neon VS Code Extension
+              slug: local/vscode-extension
+            - title: Neon Local
+              slug: local/neon-local
         - title: Terraform
           slug: reference/terraform
           icon: terraform
