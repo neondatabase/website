@@ -10,7 +10,7 @@ summary: >-
   partners. The page covers the consent screen, authorization URL construction,
   code-for-token exchange, and refresh token scopes.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-11T12:02:01.369Z'
 ---
 
 The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
@@ -89,7 +89,26 @@ Here is an example response:
 You must add `offline` and `offline_access` scopes to your request to receive the `refresh_token`.
 </Admonition>
 
-Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](/docs/cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. For an example, refer to this part of the Neon CLI [source code](https://github.com/neondatabase/neon-pkgs/blob/main/packages/cli/src/auth.ts#L143-L187). In this example, the `oauthHost` is `https://oauth2.neon.tech`.
+Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](/docs/cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. Here's a simplified example of how the Neon CLI performs the token exchange using the `openid-client` library:
+
+```typescript
+const configuration = await client.discovery(
+  new URL(oauthHost),
+  clientId,
+  { token_endpoint_auth_method: 'none' },
+  client.None()
+);
+
+// After the user authenticates in the browser and the CLI's local
+// callback server receives the redirect:
+const tokenSet = await client.authorizationCodeGrant(configuration, callbackUrl, {
+  pkceCodeVerifier: codeVerifier,
+  expectedState: state,
+});
+// tokenSet.access_token and tokenSet.refresh_token are now available
+```
+
+In this example, the `oauthHost` is `https://oauth2.neon.tech`.
 
 ## Supported OAuth Scopes
 
