@@ -1510,9 +1510,6 @@
         - title: Support
           slug: introduction/support
           icon: support
-        - title: Status
-          slug: introduction/status
-          icon: status
         - title: Community
           slug: community/community-intro
           icon: community
@@ -1538,6 +1535,9 @@
     - section: Product updates
       icon: changelog
       items:
+        - title: Status
+          slug: introduction/status
+          icon: status
         - title: Changelog
           slug: changelog
           icon: changelog
