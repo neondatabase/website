@@ -1504,8 +1504,7 @@
 - nav: Resources
   title: Resources
   subnav:
-    - title: Get help & connect
-      slug: introduction/support
+    - section: Support & Community
       icon: support
       items:
         - title: Support
