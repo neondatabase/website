@@ -11,7 +11,7 @@ summary: >-
   configure GRANT statements, enable RLS, and write per-row policies with
   `auth.user_id()`, which extracts the `sub` claim from the request JWT.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-11T13:39:13.071Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -65,7 +65,9 @@ const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
 const { data, error } = await client.from('public_items').select('*');
 ```
 
-Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
+<Admonition type="warning" title="Not yet on npm">
+The single-URL form shown above, `createClient(url)`, requires a version of `@neondatabase/neon-js` that has not been published to npm as of this writing. The latest published version, `0.6.2-beta`, only accepts the two-URL object form. If `npm install @neondatabase/neon-js` installs `0.6.2-beta` or earlier for you, use the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference instead.
+</Admonition>
 
 **With a third-party provider:** Check whether your provider supports issuing anonymous or guest tokens. If it does, obtain the token using your provider's method and include it in the `Authorization: Bearer <token>` header on each request.
 

@@ -91,6 +91,8 @@ const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL);
 export const authClient = client.auth;
 ```
 
+> **Warning:** The single-URL form shown above, `createClient(url)`, requires a version of `@neondatabase/neon-js` that has not been published to npm as of this writing. The latest published version, `0.6.2-beta`, only accepts the two-URL object form below. If `npm install @neondatabase/neon-js` installs `0.6.2-beta` or earlier for you, use the object form instead.
+
 Pass a single HTTPS Neon database URL without credentials or query parameters. The SDK derives the Neon Auth URL and Data API URL automatically. If you need to override either derived URL, the object form is still supported for custom endpoint layouts or local development setups.
 
 Object-form alternative for custom endpoint layouts:
