@@ -2,7 +2,7 @@
 
 import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
-import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
 
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import CheckIcon from 'components/shared/code-block-wrapper/images/check.inline.svg';
@@ -95,6 +95,116 @@ const SortArrow = ({ active, dir }) => (
 SortArrow.propTypes = {
   active: PropTypes.bool.isRequired,
   dir: PropTypes.string.isRequired,
+};
+
+const CheckMark = () => (
+  <svg viewBox="0 0 10 10" className="size-2.5" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M2 5 L4 7 L8 3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+// Provider filter as a compact multi-select dropdown — stays a single control
+// no matter how many providers the catalog grows to.
+const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
+  const [open, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onDocMouseDown = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) setOpen(false);
+    };
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('mousedown', onDocMouseDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onDocMouseDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [open]);
+
+  const label = selected.size === 0 ? 'All providers' : `Providers (${selected.size})`;
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        className={cn(
+          'flex h-10 items-center gap-2 rounded-md border bg-white px-3 text-sm transition-colors dark:bg-gray-new-8',
+          selected.size > 0
+            ? 'border-secondary-8/50 text-secondary-8 dark:border-primary-1/50 dark:text-primary-1'
+            : 'border-gray-new-80 text-gray-new-40 hover:border-gray-new-60 dark:border-gray-new-20 dark:text-gray-new-60'
+        )}
+        onClick={() => setOpen((value) => !value)}
+      >
+        {label}
+        <svg
+          viewBox="0 0 12 12"
+          className={cn('size-3 shrink-0 transition-transform', open && 'rotate-180')}
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden
+        >
+          <path d="M3 4.5 L6 7.5 L9 4.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+
+      {open && (
+        <div
+          role="listbox"
+          aria-multiselectable="true"
+          className="absolute left-0 z-20 mt-1 min-w-[190px] rounded-md border border-gray-new-80 bg-white p-1 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-10"
+        >
+          {providers.map((providerId) => {
+            const checked = selected.has(providerId);
+            return (
+              <button
+                key={providerId}
+                type="button"
+                role="option"
+                aria-selected={checked}
+                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm text-gray-new-30 transition-colors hover:bg-gray-new-98 dark:text-gray-new-80 dark:hover:bg-gray-new-8"
+                onClick={() => onToggle(providerId)}
+              >
+                <span
+                  className={cn(
+                    'flex size-4 shrink-0 items-center justify-center rounded border transition-colors',
+                    checked
+                      ? 'border-secondary-8 bg-secondary-8 text-white dark:border-primary-1 dark:bg-primary-1'
+                      : 'border-gray-new-70 dark:border-gray-new-30'
+                  )}
+                >
+                  {checked && <CheckMark />}
+                </span>
+                {providerLabel(providerId)}
+              </button>
+            );
+          })}
+          {selected.size > 0 && (
+            <button
+              type="button"
+              className="mt-1 w-full border-t border-gray-new-90 px-2 pt-2 pb-1 text-left text-xs font-medium text-secondary-8 dark:border-gray-new-20 dark:text-primary-1"
+              onClick={onClear}
+            >
+              Clear selection
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+ProviderMultiSelect.propTypes = {
+  providers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.instanceOf(Set).isRequired,
+  onToggle: PropTypes.func.isRequired,
+  onClear: PropTypes.func.isRequired,
 };
 
 // Click-to-copy model id. Stops propagation so copying doesn't also toggle the
@@ -346,27 +456,12 @@ const ModelIndexClient = ({ rows, snippets }) => {
 
         {mode === 'text' && (
           <>
-            <div className="flex flex-wrap items-center gap-1.5">
-              {providers.map((providerId) => {
-                const active = providerFilter.has(providerId);
-                return (
-                  <button
-                    key={providerId}
-                    type="button"
-                    className={cn(
-                      'rounded-md border px-2.5 py-1.5 text-[13px] font-medium transition-colors',
-                      active
-                        ? 'border-secondary-8/50 bg-secondary-8/5 text-secondary-8 dark:border-primary-1/50 dark:bg-primary-1/10 dark:text-primary-1'
-                        : 'border-gray-new-80 bg-white text-gray-new-40 hover:border-gray-new-60 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-60'
-                    )}
-                    aria-pressed={active}
-                    onClick={() => toggleProvider(providerId)}
-                  >
-                    {providerLabel(providerId)}
-                  </button>
-                );
-              })}
-            </div>
+            <ProviderMultiSelect
+              providers={providers}
+              selected={providerFilter}
+              onToggle={toggleProvider}
+              onClear={() => setProviderFilter(new Set())}
+            />
             <label className="flex cursor-pointer items-center gap-2 text-[13px] text-gray-new-40 dark:text-gray-new-60">
               <input
                 type="checkbox"
