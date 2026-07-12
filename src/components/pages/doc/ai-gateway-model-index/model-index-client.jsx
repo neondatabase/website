@@ -369,12 +369,14 @@ const ModelIndexClient = ({ rows, snippets }) => {
         <table className="my-0! w-full min-w-[860px] border-collapse text-sm">
           <thead>
             <tr className="border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
-              {COLUMNS.map((column) => (
+              {COLUMNS.map((column, index) => (
                 <th
                   key={column.key}
                   scope="col"
                   className={cn(
                     'px-3 py-2.5 font-medium text-gray-new-40 dark:text-gray-new-60',
+                    index === 0 && 'pl-5',
+                    index === COLUMNS.length - 1 && 'pr-5',
                     column.align === 'right' ? 'text-right' : 'text-left'
                   )}
                 >
@@ -409,7 +411,7 @@ const ModelIndexClient = ({ rows, snippets }) => {
                     )}
                     onClick={() => setExpandedId(expanded ? null : row.id)}
                   >
-                    <td className="px-3 py-2.5 font-medium text-gray-new-10 dark:text-white">
+                    <td className="py-2.5 pr-3 pl-5 font-medium text-gray-new-10 dark:text-white">
                       <span className="inline-flex items-center gap-1.5">
                         <span
                           className={cn(
@@ -446,7 +448,7 @@ const ModelIndexClient = ({ rows, snippets }) => {
                     <td className="px-3 py-2.5 text-right font-mono text-[13px] text-gray-new-30 dark:text-gray-new-80">
                       {row.costOutputLabel}
                     </td>
-                    <td className="px-3 py-2.5">
+                    <td className="py-2.5 pr-5 pl-3">
                       {row.openWeights ? <Badge tone="open">Open weights</Badge> : <Badge>—</Badge>}
                     </td>
                   </tr>
