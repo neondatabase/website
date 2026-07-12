@@ -97,24 +97,6 @@ SortArrow.propTypes = {
   dir: PropTypes.string.isRequired,
 };
 
-const Badge = ({ children, tone = 'neutral' }) => (
-  <span
-    className={cn(
-      'inline-flex items-center rounded border px-1.5 py-0.5 text-[11px] leading-none font-medium',
-      tone === 'open'
-        ? 'border-gray-new-80 bg-gray-new-98 text-gray-new-40 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-70'
-        : 'border-transparent text-gray-new-50 dark:text-gray-new-60'
-    )}
-  >
-    {children}
-  </span>
-);
-
-Badge.propTypes = {
-  children: PropTypes.node.isRequired,
-  tone: PropTypes.string,
-};
-
 // Click-to-copy model id. Stops propagation so copying doesn't also toggle the
 // row's expand/collapse.
 const CopyableModelId = ({ id }) => {
@@ -480,8 +462,8 @@ const ModelIndexClient = ({ rows, snippets }) => {
                     <td className="px-3 py-2.5 text-right font-mono text-[13px] text-gray-new-30 dark:text-gray-new-80">
                       {row.costOutputLabel}
                     </td>
-                    <td className="py-2.5 pr-5 pl-3">
-                      {row.openWeights ? <Badge tone="open">Open weights</Badge> : <Badge>—</Badge>}
+                    <td className="py-2.5 pr-5 pl-3 whitespace-nowrap text-gray-new-40 dark:text-gray-new-60">
+                      {row.openWeights ? 'Open weights' : '—'}
                     </td>
                   </tr>
                   {expanded && (
