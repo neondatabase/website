@@ -44,7 +44,44 @@ const jsYaml = require('js-yaml');
 // web page and this llms mirror can never disagree on the generated tables.
 const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
 const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
+const aiGatewayModelsData = require('../app/models.json/data.json');
+const aiGatewayModelRows = require('../components/pages/doc/ai-gateway-model-index/model-rows');
 const { isUnusedOrSharedContent } = require('../constants/content');
+
+// AI Gateway model catalog: <AiGatewayModelIndex/> renders an interactive table
+// on the web page; here it degrades to static per-provider markdown tables built
+// from the SAME committed /models.json data + derivation helpers, so the two can
+// never disagree.
+
+function renderAiGatewayModelIndex() {
+  const rows = aiGatewayModelRows.buildRows(aiGatewayModelsData.neon);
+  const groups = aiGatewayModelRows.groupByProvider(rows);
+  const header =
+    '| Model | Model ID | Inputs | Context | Reasoning | Input /M | Output /M | Endpoints | License |\n' +
+    '| --- | --- | --- | --- | --- | --- | --- | --- | --- |';
+  const sections = groups.map((group) => {
+    const body = group.rows
+      .map((row) =>
+        [
+          '',
+          row.name,
+          `\`${row.id}\``,
+          row.inputsLabel,
+          row.contextLabel,
+          row.reasoning ? 'Yes' : '—',
+          row.costInputLabel,
+          row.costOutputLabel,
+          row.endpoints.join(' · '),
+          row.license,
+          '',
+        ].join(' | ')
+      )
+      .map((line) => line.replace(/^ \| /, '| ').replace(/ \| $/, ' |'))
+      .join('\n');
+    return `### ${group.label}\n\n${header}\n${body}`;
+  });
+  return sections.join('\n\n');
+}
 
 const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
 
@@ -564,6 +601,12 @@ const componentHandlers = {
     // The interactive index on the web page degrades to the full static
     // command tree for agents reading the .md mirror.
     return parseMarkdownToNodes(cliDocs.renderCommandIndex(cliSchema));
+  },
+
+  AiGatewayModelIndex() {
+    // The interactive model table degrades to static per-provider tables built
+    // from the same /models.json data for agents reading the .md mirror.
+    return parseMarkdownToNodes(renderAiGatewayModelIndex());
   },
 
   /**
