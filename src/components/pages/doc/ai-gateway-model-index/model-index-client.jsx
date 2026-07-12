@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { Fragment, useEffect, useMemo, useState } from 'react';
 
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
+import CheckIcon from 'components/shared/code-block-wrapper/images/check.inline.svg';
+import CopyIcon from 'components/shared/code-block-wrapper/images/copy.inline.svg';
+import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 import highlight from 'lib/shiki';
 import { cn } from 'utils/cn';
 
@@ -110,6 +113,37 @@ const Badge = ({ children, tone = 'neutral' }) => (
 Badge.propTypes = {
   children: PropTypes.node.isRequired,
   tone: PropTypes.string,
+};
+
+// Click-to-copy model id. Stops propagation so copying doesn't also toggle the
+// row's expand/collapse.
+const CopyableModelId = ({ id }) => {
+  const { isCopied, handleCopy } = useCopyToClipboard(2000);
+  return (
+    <button
+      type="button"
+      className="group/copy inline-flex items-center gap-1.5 rounded text-left transition-colors"
+      aria-label={isCopied ? 'Copied' : `Copy ${id}`}
+      title={isCopied ? 'Copied' : 'Copy model ID'}
+      onClick={(event) => {
+        event.stopPropagation();
+        handleCopy(id);
+      }}
+    >
+      <code className="font-mono text-[13px] whitespace-nowrap text-gray-new-30 group-hover/copy:text-gray-new-10 dark:text-gray-new-80 dark:group-hover/copy:text-white">
+        {id}
+      </code>
+      {isCopied ? (
+        <CheckIcon className="size-3 shrink-0 text-green-45" />
+      ) : (
+        <CopyIcon className="size-3 shrink-0 text-gray-new-50 opacity-0 transition-opacity group-hover/copy:opacity-100 dark:text-gray-new-60" />
+      )}
+    </button>
+  );
+};
+
+CopyableModelId.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 // The expanded quickstart panel under a selected row.
@@ -426,9 +460,7 @@ const ModelIndexClient = ({ rows, snippets }) => {
                       </span>
                     </td>
                     <td className="px-3 py-2.5">
-                      <code className="font-mono text-[13px] whitespace-nowrap text-gray-new-30 dark:text-gray-new-80">
-                        {row.id}
-                      </code>
+                      <CopyableModelId id={row.id} />
                     </td>
                     <td className="px-3 py-2.5 text-gray-new-30 dark:text-gray-new-80">
                       {row.providerName}
