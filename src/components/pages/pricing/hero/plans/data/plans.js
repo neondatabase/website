@@ -29,15 +29,18 @@ export default [
           },
           {
             title: 'Unlimited team members',
-          },        
+          },
         ],
       },
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs'  },
-          { title: 'Object Storage [BETA]', info: 'No charges applied during beta, with usage limits applied' },
-          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits applied' },
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          {
+            title: 'Object Storage [BETA]',
+            info: 'No charges applied during beta, with usage limits',
+          },
+          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits' },
         ],
       },
     },
@@ -79,10 +82,13 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs'  },
-          { title: 'Object Storage [BETA]', info: 'No charges applied during beta, with usage limits applied' },
-          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits applied' },
-          { title: 'AI Gateway [BETA]', info: 'Pricing matches model provider list prices' },        
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          {
+            title: 'Object Storage [BETA]',
+            info: 'No charges applied during beta, with usage limits',
+          },
+          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits' },
+          { title: 'AI Gateway [BETA]', info: 'Pricing matches model provider list prices' },
         ],
       },
     },
@@ -124,10 +130,13 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs'  },
-          { title: 'Object Storage [BETA]', info: 'No charges applied during beta, with usage limits applied' },
-          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits applied' },
-          { title: 'AI Gateway [BETA]', info: 'Pricing matches model provider list prices' },           
+          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          {
+            title: 'Object Storage [BETA]',
+            info: 'No charges applied during beta, with usage limits',
+          },
+          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits' },
+          { title: 'AI Gateway [BETA]', info: 'Pricing matches model provider list prices' },
         ],
       },
     },
