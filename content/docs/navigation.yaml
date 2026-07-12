@@ -402,6 +402,8 @@
               slug: guides/tortoise-orm
             - title: TypeORM
               slug: guides/typeorm
+            - title: Better Drizzle
+              slug: guides/better-drizzle
     - section: Backend
       items:
         - title: neon.ts
