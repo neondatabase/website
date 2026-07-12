@@ -68,14 +68,16 @@ For full request paths and when to prefer each endpoint, see [Which endpoint to 
 
 Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) endpoint. It is the recommended starting point and works with all providers. Use a provider-specific endpoint when required:
 
-| Provider                  | Recommended endpoint                     | Notes                                                                                    |
-| ------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Anthropic                 | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
-| OpenAI (most models)      | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
-| OpenAI (codex variants)   | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and don't work with chat/completions              |
-| Google Gemini             | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Google Gemma 3 12B        | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
-| Meta, Databricks, Alibaba | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
+All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GATEWAY_BASE_URL`).
+
+| Provider                  | Recommended endpoint   | Notes                                                                                    |
+| ------------------------- | ---------------------- | ---------------------------------------------------------------------------------------- |
+| Anthropic                 | `/v1/chat/completions` | Use `/anthropic/v1/messages` for extended thinking and prompt caching                    |
+| OpenAI (most models)      | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                                    |
+| OpenAI (codex variants)   | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions              |
+| Google Gemini             | `/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
+| Google Gemma 3 12B        | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
+| Meta, Databricks, Alibaba | `/v1/chat/completions` | Chat completions only                                                                    |
 
 ## Provider terms
 
