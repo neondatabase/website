@@ -477,7 +477,7 @@ const ModelIndexClient = ({ rows, snippets }) => {
 
       {/* Table */}
       <div className="overflow-x-auto rounded-lg border border-gray-new-90 dark:border-gray-new-20">
-        <table className="my-0! w-full min-w-[860px] border-collapse text-sm">
+        <table className="ai-gateway-model-table my-0! w-full min-w-[860px] border-collapse text-sm">
           <thead>
             <tr className="border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
               {COLUMNS.map((column, index) => (
