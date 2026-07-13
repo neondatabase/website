@@ -1,6 +1,6 @@
 ---
 title: neon.ts
-subtitle: Infrastructure-as-code config for your Neon project.
+subtitle: Configuration as code for your Neon project.
 summary: >-
   neon.ts declares which Neon services exist on a project and how each branch is
   configured. Use it for branch policy alone, or add preview services like
@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-06-22T21:05:22.619Z'
+updatedOn: '2026-07-10T13:40:50.458Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
