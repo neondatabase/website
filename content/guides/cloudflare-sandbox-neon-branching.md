@@ -4,7 +4,7 @@ subtitle: 'Learn how to build Full-Stack Cloud Agents using Cloudflare Sandboxes
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-16T00:00:00.000Z'
-updatedOn: '2026-07-13T00:30:56.577Z'
+updatedOn: '2026-07-13T02:23:57.749Z'
 ---
 
 ![Cloudflare Sandbox and Neon Branching architecture](/docs/guides/cloudflare_sandbox_neon_branching.png)
@@ -130,7 +130,7 @@ Replace the contents of `src/index.ts` with the following code:
 
 ```typescript
 import { getSandbox } from '@cloudflare/sandbox'
-import { createNeonClient, raw } from '@neon/sdk'
+import { createNeonClient } from '@neon/sdk'
 
 const EXTRA_SYSTEM = `
 You are a **senior full-stack developer** working in an **isolated development environment**.
@@ -180,22 +180,16 @@ async function createNeonBranch(
   branchName: string,
   env: Env
 ): Promise<string> {
-  const neon = createNeonClient({ apiKey: env.NEON_API_KEY! })
-
-  const { data, error } = await raw.createProjectBranch({
-    client: neon.client,
-    path: { project_id: projectId },
-    body: {
-      branch: { name: branchName },
-      endpoints: [{ type: 'read_write' }]
-    }
+  const neon = createNeonClient({
+    apiKey: env.NEON_API_KEY!,
+    throwOnError: true
   })
-  if (error) throw error
 
-  const uri = data.connection_uris?.[0]?.connection_uri
-  if (!uri) throw new Error('No DB connection URI returned')
+  const branch = await neon.branches.createWithCompute(projectId, {
+    name: branchName
+  })
 
-  return uri
+  return branch.connectionString
 }
 
 async function run(sandbox: ReturnType<typeof getSandbox>, cmd: string) {

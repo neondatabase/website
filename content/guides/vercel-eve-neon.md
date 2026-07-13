@@ -4,7 +4,7 @@ subtitle: "Learn how to build a Slack-based database assistant with Eve that pro
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: "2026-06-23T00:00:00.000Z"
-updatedOn: '2026-07-13T00:30:56.577Z'
+updatedOn: '2026-07-13T02:23:57.749Z'
 ---
 
 [Eve](https://eve.dev) by [Vercel](https://vercel.com) is a filesystem‑first framework for building durable backend agents. You define an agent as files (its instructions, tools, skills, channels, and schedules), and Eve takes care of the rest: stable HTTP routes, reconnectable session streams, durable state, and native human‑in‑the‑loop approvals. Agents built with Eve can run for days, pause for human review, and resume exactly where they left off.
@@ -186,9 +186,13 @@ Your Eve agent needs a way to create and delete database branches programmatical
 Create `agent/lib/neon.ts`:
 
 ```typescript
-import { createNeonClient, raw } from "@neon/sdk";
+import { createNeonClient } from "@neon/sdk";
 
-const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY! });
+const neon = createNeonClient({
+  apiKey: process.env.NEON_API_KEY!,
+  throwOnError: true,
+  waitForReadiness: true,
+});
 const projectId = process.env.NEON_PROJECT_ID!;
 
 export interface Branch {
@@ -200,24 +204,22 @@ export interface Branch {
 export async function createBranch(name: string): Promise<Branch> {
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
 
-  const { data, error } = await raw.createProjectBranch({
-    client: neon.client,
-    path: { project_id: projectId },
-    body: {
-      branch: { name, expires_at: expiresAt },
-      endpoints: [{ type: "read_write" }],
-    },
+  const branch = await neon.branches.create(projectId, {
+    name,
+    expires_at: expiresAt,
   });
-  if (error) throw error;
 
-  const id = data.branch?.id;
-  const connectionUri = data.connection_uris?.[0]?.connection_uri;
+  await neon.postgres.endpoints.create(projectId, {
+    branch_id: branch.id,
+    type: "read_write",
+  });
 
-  if (!id || !connectionUri) {
-    throw new Error("Failed to create branch or retrieve connection URI");
-  }
+  const connectionUri = await neon.postgres.connectionString({
+    projectId,
+    branchId: branch.id,
+  });
 
-  return { id, name, connectionUri };
+  return { id: branch.id, name, connectionUri };
 }
 ```
 
