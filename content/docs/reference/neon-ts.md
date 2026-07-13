@@ -252,7 +252,7 @@ Preview services are declared under the `preview` block. All three are optional 
 | Field               | Type                                 | What it enables                                                                                                   |
 | ------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
 | `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                                                        |
-| `preview.buckets`   | Record of name → bucket def          | Neon Storage. S3-compatible object storage, branched with your database                                           |
+| `preview.buckets`   | Record of name → bucket def          | Neon Object Storage. S3-compatible object storage, branched with your database                                    |
 | `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL` |
 
 ### `preview.functions`

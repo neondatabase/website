@@ -10,7 +10,7 @@ summary: >-
   this page to understand archiving thresholds, blocking conditions, and how to
   monitor archive and unarchive operations via the Console, CLI, or API.
 enableTableOfContents: true
-updatedOn: '2026-07-09T23:22:00.344Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 <InfoBlock>
@@ -58,7 +58,7 @@ For projects on paid Neon plans, there is a limit of **100 unarchived branches p
 When a branch is unarchived, its parent branches, all the way up to the root branch, are also unarchived.
 </Admonition>
 
-The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
+The following actions will automatically unarchive a branch, transferring the branch's data back to regular database storage:
 
 - [Connecting to or querying the branch from a client or application](/docs/connect/connect-from-any-app)
 - [Querying the branch from the Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor)
