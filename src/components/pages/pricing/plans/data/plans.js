@@ -161,7 +161,8 @@ export default {
     {
       rows: '2',
       feature: {
-        title: 'Object Storage [BETA]',
+        title: 'Object Storage',
+        tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: 'No charges applied during beta, with usage limits',
       launch: 'No charges applied during beta, with usage limits',
@@ -170,7 +171,8 @@ export default {
     {
       rows: '2',
       feature: {
-        title: 'Functions [BETA]',
+        title: 'Functions',
+        tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: 'No charges applied during beta, with usage limits',
       launch: 'No charges applied during beta, with usage limits',
@@ -179,7 +181,8 @@ export default {
     {
       rows: '2',
       feature: {
-        title: 'AI Gateway [BETA]',
+        title: 'AI Gateway',
+        tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: false,
       launch: 'Pricing matches model provider list prices',
