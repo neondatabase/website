@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-13T13:21:37.393Z'
+updatedOn: '2026-07-13T15:15:20.992Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
@@ -29,7 +29,7 @@ Participation in this Private Preview is subject to our Private Preview Terms. A
 AI Gateway pricing isn't finalized. Here's what to expect once it moves out of private preview:
 
 - **Paid plans only.** AI Gateway will be available on Neon's Launch and Scale plans. There's no difference in AI Gateway pricing or model access between the two plans.
-- **No markup.** Neon charges the same per-token rate as the model provider. We don't add a margin on top of published provider prices for supported models.
+- **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
 - **Free for now.** Inference remains free through the end of the private preview. Billing starts when AI Gateway reaches GA.
 
 We'll publish exact per-model rates on the [Neon pricing page](https://neon.com/pricing) and update this page before billing begins.
