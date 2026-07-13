@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-06-26T16:05:44.229Z'
+updatedOn: '2026-07-13T13:21:37.393Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -50,7 +50,7 @@ These limits apply to input tokens. Upstream output token limits (20,000 OTPM fo
 
 ## Pricing
 
-Inference is free during the private preview. When billing begins, prices will match each provider's published list prices.
+Inference is free during the private preview. See [Pricing](/docs/ai-gateway/overview#pricing) for what to expect when billing begins.
 
 ## Available models
 
