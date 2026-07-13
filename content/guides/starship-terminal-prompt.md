@@ -1,13 +1,15 @@
 ---
 title: 'Customize your terminal prompt with Starship and Neon'
-subtitle: 'Learn how to set up Starship, the Rust-based cross-shell prompt, and configure it to dynamically display your active Neon database branch.'
+subtitle: 'Learn how to set up Starship, a cross-shell prompt, and add a custom module to display your active Neon database branch.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-12T00:00:00.000Z'
-updatedOn: '2026-07-13T09:34:45.523Z'
+updatedOn: '2026-07-13T09:46:56.488Z'
 ---
 
-[Starship](https://starship.rs) is a cross-shell prompt written in Rust. It runs on most shells and operating systems (Zsh, Bash, Fish, PowerShell, and more) and is configured entirely through a single TOML file. Instead of a fixed prompt, Starship is built from small, independent modules: each module displays a piece of context only when it's relevant to the current directory. For example, the Git module shows your branch when you're inside a repository, and language modules show runtime versions when they detect matching project files like `package.json` or `requirements.txt`. You can enable, disable, reorder, and restyle these modules to build a prompt that fits your workflow.
+Traditional shell prompt customization means wrestling with complex, shell-specific syntax: Zsh has its own prompt expansion rules, Bash uses the cryptic `PS1` escape sequences, and PowerShell relies on a completely different `prompt` function. Each shell requires a different approach, and moving between them often means rewriting everything from scratch.
+
+[Starship](https://starship.rs) solves this by standardizing prompt configuration across every shell through a single, friendly TOML file. Written in Rust, it runs on Zsh, Bash, Fish, PowerShell, and more, using the same config everywhere. Instead of a fixed prompt, Starship is built from small, independent modules: each module displays a piece of context only when it's relevant to the current directory. For example, the Git module shows your branch when you're inside a repository, and language modules show runtime versions when they detect matching project files like `package.json` or `requirements.txt`. You can enable, disable, reorder, and restyle these modules to build a prompt that fits your workflow.
 
 Beyond the built-in modules, Starship lets you define custom modules that run an arbitrary command and render its output. That makes it straightforward to surface information that isn't covered by default. When you work with Git branches and Neon database branches in the same terminal, it helps to see at a glance which Neon branch your local development is connected to, so you don't accidentally run commands against the wrong environment. By configuring a custom Starship module, you can query the Neon CLI to show the active database branch alongside the Git branch.
 
@@ -168,7 +170,7 @@ mkdir -p ~/.config && touch ~/.config/starship.toml
 
 Starship uses **modules** (like `git_branch`, `nodejs`, `python`) that only appear when their context is detected. For example, language modules only render when corresponding project files (like `package.json` or `requirements.txt`) exist in the current directory.
 
-Add the following configuration to your `~/.config/starship.toml` to customize the prompt layout, symbols, and colors:
+The following example configuration shows how to customize the prompt symbol, directory display, Git branch and status indicators, and command execution time. You can copy this into your `~/.config/starship.toml` file and modify it to your liking.
 
 ```toml
 "$schema" = 'https://starship.rs/config-schema.json'
@@ -303,7 +305,7 @@ To verify the integration, navigate to a project linked to a Neon database.
 
 If your custom Neon prompt isn't rendering correctly, check these common troubleshooting steps:
 
-- **Symbols display as boxes or `?`**: Your terminal font is missing the required glyphs. Make sure you have installed a [Nerd Font](https://www.nerdfonts.com/) and enabled it in your terminal settings. Alternatively, use the `no-nerd-font` preset:
+- **Symbols display as boxes or `?`**: Your terminal font is missing the required glyphs. Make sure you have installed a [Nerd Font](https://www.nerdfonts.com/) **and** updated your terminal emulator's font setting to use it. Open the settings for your specific terminal (VS Code: `terminal.integrated.fontFamily`, iTerm2: Profiles > Text > Font, Windows Terminal: `fontFace` in your profile) and set it to the Nerd Font you installed. Alternatively, use the `no-nerd-font` preset:
   ```bash
   starship preset no-nerd-font -o ~/.config/starship.toml
   ```
