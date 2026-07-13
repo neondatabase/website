@@ -1,6 +1,6 @@
 ---
 title: neon.ts
-subtitle: Infrastructure-as-code config for your Neon project.
+subtitle: Configuration as code for your Neon project.
 summary: >-
   neon.ts declares which Neon services exist on a project and how each branch is
   configured. Use it for branch policy alone, or add preview services like

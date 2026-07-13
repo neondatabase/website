@@ -23,9 +23,10 @@ const operation = {
     representative: {
       curl: 'curl "https://console.neon.tech/api/v2/projects" \\\n  -X POST \\\n  -H "Authorization: Bearer $NEON_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  -d \'{"project":{"name":"my-production-db","region_id":"aws-us-east-2","pg_version":17}}\'',
       typescript:
-        'const { data } = await api.createProject({\n  "project": {\n    "name": "my-production-db"\n  }\n});',
+        "import { createNeonClient, raw } from '@neon/sdk';\n\nconst neon = createNeonClient({ apiKey: process.env.NEON_API_KEY });\nconst { data } = await raw.createProject({\n  client: neon.client,\n  body: {\n    project: {\n      name: 'my-production-db'\n    }\n  }\n});",
     },
-    typescript: 'const { data } = await api.createProject({});',
+    typescript:
+      "import { createNeonClient, raw } from '@neon/sdk';\n\nconst neon = createNeonClient({ apiKey: process.env.NEON_API_KEY });\nconst { data } = await raw.createProject({\n  client: neon.client\n});",
   },
   cli: {
     command: 'neon projects create',
@@ -74,7 +75,8 @@ describe('DocQuickStart', () => {
 
     fireEvent.click(screen.getByRole('button', { name: 'SDK' }));
 
-    expect(screen.getByText(/api.createProject/)).toBeInTheDocument();
+    expect(screen.getByText(/raw.createProject/)).toBeInTheDocument();
+    expect(screen.queryByText(/createApiClient/)).not.toBeInTheDocument();
     expect(screen.getByText(/REST API/)).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'MCP' }));

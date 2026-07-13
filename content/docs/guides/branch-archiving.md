@@ -10,7 +10,7 @@ summary: >-
   this page to understand archiving thresholds, blocking conditions, and how to
   monitor archive and unarchive operations via the Console, CLI, or API.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-09T23:22:00.344Z'
 ---
 
 <InfoBlock>
@@ -21,7 +21,7 @@ updatedOn: '2026-06-11T23:50:21.258Z'
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/introduction/architecture-overview#archive-storage">Archive storage</a>
+  <a href="/docs/reference/glossary#archive-storage">Archive storage</a>
   <a href="/docs/cli/branches#list">Branches list command (Neon CLI)</a>
   <a href="https://api-docs.neon.tech/reference/getprojectbranch">Get branch details (Neon API)</a>
 </DocsList>
@@ -85,7 +85,7 @@ Archive and unarchive operations can also be monitored in the Neon Console or us
 
 ## About archive storage
 
-For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage. For more information about how archive storage works in Neon, refer to [Archive storage](/docs/introduction/architecture-overview#archive-storage) in our architecture documentation.
+For Neon projects created in AWS regions, inactive branches are archived in Amazon S3 storage. For Neon projects created in Azure regions, branches are archived in Azure Blob storage. For more information about how archive storage works in Neon, refer to [Archive storage](/docs/reference/glossary#archive-storage) in our architecture documentation.
 
 ## Is branch archiving configurable?
 

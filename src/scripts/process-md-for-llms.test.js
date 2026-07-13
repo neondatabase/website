@@ -115,6 +115,35 @@ describe('MDX to Markdown Conversion', () => {
       // Should NOT have raw TwoColumnLayout
       expect(result).not.toContain('<TwoColumnLayout');
     });
+
+    it('should render both AI Gateway tabs and quickstart snippets', async () => {
+      const inputPath = 'content/docs/ai-gateway/models.md';
+      const pageUrl = 'https://neon.com/docs/ai-gateway/models';
+      const projectRoot = process.cwd();
+
+      const { content: result } = await processFile(inputPath, pageUrl, projectRoot);
+
+      // Both tabs are served as static sections (not just the interactive widget)
+      expect(result).toContain('### Text models');
+      expect(result).toContain('### Image models');
+      expect(result).not.toContain('<AiGatewayModelIndex');
+
+      // Per-provider tables render under each tab
+      expect(result).toContain('#### Anthropic');
+      expect(result).toContain('| `claude-sonnet-4-6` |');
+
+      // Quickstart snippets are served, once per language, with the model-id
+      // placeholder rather than duplicated per model
+      expect(result).toContain('**Quickstart (text).**');
+      expect(result).toContain('**Quickstart (image).**');
+      expect(result).toContain('__MODEL_ID__');
+      expect(result).toContain('import { generateText } from "ai";');
+      expect(result).toContain('image_generation');
+
+      // Each language snippet appears exactly once per tab (no per-model repeat)
+      const aiSdkImportCount = result.split('import { generateText } from "ai";').length - 1;
+      expect(aiSdkImportCount).toBe(1);
+    });
   });
 
   // Test specific component conversions with inline MDX
@@ -732,10 +761,9 @@ See [CONN_MAX_AGE](https://example.com).
       const rootDir = process.cwd();
       const navMap = buildNavigationMap(rootDir);
 
-      // auth/guides/password-reset is under: Backend > Auth > Guides
+      // auth/guides/password-reset is under: Auth > Guides
       const entry = navMap.get('auth/guides/password-reset');
       expect(entry).toBeDefined();
-      expect(entry.breadcrumbs).toContain('Backend');
       expect(entry.breadcrumbs).toContain('Auth');
       expect(entry.breadcrumbs).toContain('Guides');
     });
@@ -902,7 +930,7 @@ See [CONN_MAX_AGE](https://example.com).
       const navMap = buildNavigationMap(rootDir);
 
       const header = buildPageHeader('auth/guides/password-reset', navMap);
-      expect(header).toContain('> This page location: Backend > Auth > Guides > Password reset\n');
+      expect(header).toContain('> This page location: Auth > Guides > Password reset\n');
       expect(header).toContain('> Full Neon documentation index: https://neon.com/docs/llms.txt\n');
       expect(header).not.toContain('Note for AI assistants');
     });
