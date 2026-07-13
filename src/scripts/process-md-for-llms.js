@@ -1602,7 +1602,7 @@ const componentHandlers = {
 
   /**
    * Tag -> inline badge, emit the label text
-   * <Tag label="beta" size="sm" />
+   * <Tag label="Beta" size="sm" theme="blue" />
    */
   Tag(node) {
     const label = getAttr(node, 'label');

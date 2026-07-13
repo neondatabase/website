@@ -12,8 +12,9 @@ summary: >-
   project to manage OAuth providers and production settings.
 enableTableOfContents: true
 tag: archived
+tagTheme: gray
 noindex: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-13T14:20:27.525Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
