@@ -1,6 +1,6 @@
 This is a reference for the `ApiKey` type in the {sdkName} SDK.
 
-Represents an API key for a user or project in Neon Auth.
+Represents an API key for a user or project in Managed BetterAuth.
 
 On this page:
 

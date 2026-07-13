@@ -6,7 +6,7 @@ summary: >-
   API, AI agent, real-time server, or webhook handler that runs next to your
   Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -93,7 +93,7 @@ Each example is a complete, runnable build. Read the source on GitHub, or scaffo
 | Image-generation agent   | `ai-sdk`        | [with-ai-sdk](https://github.com/neondatabase/examples/tree/main/with-ai-sdk)               | Functions, Postgres, AI Gateway, Object Storage | AI SDK, Drizzle       |
 | Personal-assistant agent | `mastra`        | [with-mastra](https://github.com/neondatabase/examples/tree/main/with-mastra)               | Functions, Postgres, AI Gateway                 | Mastra                |
 | MCP server               | `mcp`           | [with-mcp](https://github.com/neondatabase/examples/tree/main/with-mcp)                     | Functions, Postgres                             | Hono, Drizzle         |
-| Realtime chat            | `realtime-chat` | [with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat) | Functions, Postgres, Neon Auth                  | Next.js, Hono         |
+| Realtime chat            | `realtime-chat` | [with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat) | Functions, Postgres, Managed BetterAuth         | Next.js, Hono         |
 | Realtime counter         | `realtime-sse`  | [with-realtime-sse](https://github.com/neondatabase/examples/tree/main/with-realtime-sse)   | Functions, Postgres                             | TanStack Router, Hono |
 
 <NeedHelp/>

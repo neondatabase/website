@@ -109,7 +109,8 @@ function readExample({ file, tab, key, lang }) {
   // Label: the annotation @label with any " — Image" suffix removed (the tab
   // already separates text vs image).
   const label = (annotations.label || key).replace(/\s*[—-]\s*Image\s*$/i, '').trim();
-  const install = annotations.install && annotations.install !== 'none (uses curl)' ? annotations.install : null;
+  const install =
+    annotations.install && annotations.install !== 'none (uses curl)' ? annotations.install : null;
   const env = (annotations.env || '')
     .split(',')
     .map((v) => v.trim())

@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/workflow-primer
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
@@ -171,8 +171,8 @@ Example:
 preview/pr-123-feat/new-login-screen
 ```
 
-<Admonition type="tip" title="Using Neon Auth?">
-[Neon Auth](/docs/auth/overview) is provisioned on preview branches when enabled on production. Each preview gets isolated users, sessions, and auth configuration that branches with the database. Vercel integrations set `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` automatically. See [Branching authentication](/docs/auth/branching-authentication) and [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration).
+<Admonition type="tip" title="Using Managed BetterAuth?">
+[Managed BetterAuth](/docs/auth/overview) is provisioned on preview branches when enabled on production. Each preview gets isolated users, sessions, and auth configuration that branches with the database. Vercel integrations set `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` automatically. See [Branching authentication](/docs/auth/branching-authentication) and [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration).
 </Admonition>
 
 You can also automate branch creation for every preview. These example applications show how to create Neon branches with GitHub Actions for every preview environment.

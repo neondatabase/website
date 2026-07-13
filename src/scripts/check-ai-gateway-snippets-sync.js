@@ -86,8 +86,10 @@ function checkSelfConsistency(data) {
   }
 
   const env = data.envExample || '';
-  if (!env.includes('NEON_AI_GATEWAY_BASE_URL')) problems.push('envExample missing NEON_AI_GATEWAY_BASE_URL');
-  if (!env.includes('NEON_AI_GATEWAY_TOKEN')) problems.push('envExample missing NEON_AI_GATEWAY_TOKEN');
+  if (!env.includes('NEON_AI_GATEWAY_BASE_URL'))
+    problems.push('envExample missing NEON_AI_GATEWAY_BASE_URL');
+  if (!env.includes('NEON_AI_GATEWAY_TOKEN'))
+    problems.push('envExample missing NEON_AI_GATEWAY_TOKEN');
 
   if (problems.length) {
     fail(`Committed snippets failed self-consistency:\n       - ${problems.join('\n       - ')}`);

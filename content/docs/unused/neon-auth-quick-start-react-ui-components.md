@@ -1,16 +1,16 @@
 ---
-title: React with Neon Auth UI (UI Components)
+title: React with Managed BetterAuth UI (UI Components)
 subtitle: Build authentication with pre-built UI components
 summary: >-
   Covers the setup of authentication in a React application using Neon's
-  pre-built UI components, including enabling Neon Auth, creating a React app,
+  pre-built UI components, including enabling Managed BetterAuth, creating a React app,
   and configuring the necessary environment variables.
 enableTableOfContents: true
-updatedOn: '2026-03-23T12:18:17.921Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 layout: wide
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
 <Admonition type="note" title="Archived copy">
 This quick start is kept in the repo for reference but is not published on [neon.com/docs](https://neon.com/docs). Use the [React quick start (API methods)](/docs/auth/quick-start/react), the [UI components reference](/docs/auth/reference/ui-components), and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples) instead.
@@ -23,14 +23,14 @@ This quick start is kept in the repo for reference but is not published on [neon
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
-Go to the **Auth** page in your project dashboard and click **Enable Neon Auth**.
+Go to the **Auth** page in your project dashboard and click **Enable Managed BetterAuth**.
 
 You can then find your Auth URL on the Configuration tab. Copy this URL - you'll need it in the next step.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Console">
 
-![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
+![Managed BetterAuth Base URL](/docs/auth/neon-auth-base-url.png)
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
@@ -105,7 +105,7 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 <TwoColumnLayout.Step title="Wrap your app with the provider">
 <TwoColumnLayout.Block>
 
-Replace the contents of `src/main.tsx` to wrap your app with React Router and the auth provider. Import the Neon Auth UI CSS - no additional setup needed:
+Replace the contents of `src/main.tsx` to wrap your app with React Router and the auth provider. Import the Managed BetterAuth UI CSS - no additional setup needed:
 
 Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `authClient` prop is required.
 
