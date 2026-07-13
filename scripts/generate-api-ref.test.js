@@ -850,7 +850,8 @@ describe('toAgentMarkdown', () => {
     errors: [{ status: 'default', description: 'Error' }],
     examples: {
       curl: 'curl "https://console.neon.tech/api/v2/projects" \\\n  -H "Authorization: Bearer $NEON_API_KEY"',
-      typescript: 'const { data } = await api.listProjects({});',
+      typescript:
+        "import { createNeonClient, raw } from '@neon/sdk';\n\nconst neon = createNeonClient({ apiKey: process.env.NEON_API_KEY });\nconst { data } = await raw.listProjects({\n  client: neon.client\n});",
       bodyExample: null,
     },
     cli: { command: 'neon projects list' },
@@ -922,14 +923,14 @@ describe('toAgentMarkdown', () => {
           body: { project: { name: 'my-production-db' } },
           curl: 'curl "https://console.neon.tech/api/v2/projects" -d \'{"project":{"name":"my-production-db"}}\'',
           typescript:
-            'const { data } = await api.createProject({ project: { name: "my-production-db" } });',
+            "import { createNeonClient, raw } from '@neon/sdk';\n\nconst neon = createNeonClient({ apiKey: process.env.NEON_API_KEY });\nconst { data } = await raw.createProject({\n  client: neon.client,\n  body: {\n    project: { name: 'my-production-db' }\n  }\n});",
         },
       },
     });
 
     expect(md).toContain('"name": "my-production-db"');
-    expect(md).toContain('api.createProject');
-    expect(md).not.toContain('api.listProjects({})');
+    expect(md).toContain('raw.createProject');
+    expect(md).not.toContain('raw.listProjects');
   });
 
   it('includes CLI block when cli is set', () => {
@@ -974,7 +975,8 @@ describe('toFullMarkdownEntry', () => {
       parameters: [],
       examples: {
         curl: 'curl "https://console.neon.tech/api/v2/large"',
-        typescript: 'const { data } = await api.getLargeThing({});',
+        typescript:
+          "import { createNeonClient, raw } from '@neon/sdk';\n\nconst neon = createNeonClient({ apiKey: process.env.NEON_API_KEY });\nconst { data } = await raw.getLargeThing({\n  client: neon.client\n});",
       },
       response: {
         status: '200',
@@ -1000,7 +1002,8 @@ describe('generateLlmsFull', () => {
           parameters: [],
           examples: {
             curl: 'curl "https://console.neon.tech/api/v2/projects"',
-            typescript: 'const { data } = await api.listProjects({});',
+            typescript:
+              "import { createNeonClient, raw } from '@neon/sdk';\n\nconst neon = createNeonClient({ apiKey: process.env.NEON_API_KEY });\nconst { data } = await raw.listProjects({\n  client: neon.client\n});",
           },
           response: { status: '200', description: 'OK', example: null, properties: null },
         },
@@ -1011,7 +1014,7 @@ describe('generateLlmsFull', () => {
     expect(md).toContain('https://neon.com/docs/reference/api/llms.txt');
     expect(md).toContain('# Projects');
     expect(md).toContain('## List projects · GET /projects');
-    expect(md).toContain('const { data } = await api.listProjects({});');
+    expect(md).toContain('const { data } = await raw.listProjects({');
   });
 });
 
