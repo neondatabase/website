@@ -2628,6 +2628,12 @@ const defaultConfig = {
           source: '/api_spec/release/v2.json',
           destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
         },
+        // Canonical OpenAPI path probed by agent-discovery tooling (e.g. integrations.sh).
+        // Aliases the published Neon API spec so /openapi.json resolves as application/json.
+        {
+          source: '/openapi.json',
+          destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+        },
         {
           source: '/demos/ping-thing',
           destination: 'https://ping-thing.vercel.app/demos/ping-thing',
