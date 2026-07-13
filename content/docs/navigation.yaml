@@ -721,7 +721,7 @@
                   slug: auth/guides/plugins/phone-number
         - section: Reference
           items:
-            - title: Neon TypeScript SDK
+            - title: Neon Auth and Data API SDK
               slug: reference/javascript-sdk
             - title: Next.js Server SDK
               slug: auth/reference/nextjs-server
@@ -766,7 +766,7 @@
               slug: data-api/database-advisor
         - section: Tools
           items:
-            - title: Neon TypeScript SDK
+            - title: Neon Auth and Data API SDK
               slug: reference/javascript-sdk
             - title: SQL to REST API Translator
               slug: data-api/sql-to-rest
@@ -1153,7 +1153,7 @@
                 - title: Database versioning
                   slug: ai/ai-database-versioning
                 - title: Neon API reference
-                  slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
+                  slug: reference/api
             - section: Agent frameworks
               icon: frameworks
               items:
@@ -1173,7 +1173,7 @@
   icon: cli
   subnav:
     - title: APIs & SDKs
-      slug: reference/api-reference
+      slug: reference/api
       icon: cli
       items:
         - section: CLI
@@ -1258,17 +1258,27 @@
         - section: API
           icon: api
           items:
-            - title: Neon API
-              slug: reference/api-reference
+            - title: Overview
+              slug: reference/api
+            - title: Get started
+              slug: reference/api/get-started
+            - title: Key concepts
+              slug: reference/api/key-concepts
+            - section: API Reference
+              title: Endpoint index
+              slug: reference/api/reference
+              items: []
         - section: SDKs
           icon: sdk
           items:
             - title: Overview
               slug: reference/sdk
-            - title: Neon TypeScript SDK
+            - title: Neon Auth and Data API SDK
               slug: reference/javascript-sdk
-            - title: Neon API TypeScript SDK
+            - title: Neon Management SDK
               slug: reference/typescript-sdk
+            - title: Migrate to @neon/sdk
+              slug: reference/migrate-api-client-to-sdk
             - title: Python SDK (Neon API)
               slug: reference/python-sdk
             - title: Go SDK (Neon API)

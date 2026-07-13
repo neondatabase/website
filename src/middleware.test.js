@@ -225,7 +225,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
       const text = await response.text();
       expect(text).toContain('/docs/non-existent');
       expect(text).toContain('/docs/llms.txt');
-      expect(text).toContain('/docs/llms-full.txt');
+      expect(text).toContain('/docs/cli.md');
     });
 
     it('should use shorter cache TTL for agent 404 responses', async () => {
@@ -330,6 +330,21 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(markdownFetchCalls).toHaveLength(0);
       expect(response.type).toBe('next');
     });
+
+    it.each(['/docs/reference/api/llms.txt', '/docs/reference/api/llms-full.txt'])(
+      'should pass through static API reference indexes for AI agents: %s',
+      async (path) => {
+        const req = createMockRequest(path, 'curl/8.0', '*/*');
+
+        const response = await middleware(req);
+
+        const markdownFetchCalls = global.fetch.mock.calls.filter(
+          ([url]) => url !== 'https://neonapi.io/t.js'
+        );
+        expect(markdownFetchCalls).toHaveLength(0);
+        expect(response.type).toBe('next');
+      }
+    );
   });
 
   describe('Response headers validation', () => {

@@ -10,7 +10,7 @@ summary: >-
   creation. The feature is in private preview and does not support
   transferring projects into Vercel-managed Neon organizations.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 ## Overview
@@ -260,7 +260,7 @@ For a working implementation of claimable databases, try [Claimable Postgres by 
 - [Create project API reference](https://api-docs.neon.tech/reference/createproject)
 - [Create project transfer request API reference](https://api-docs.neon.tech/reference/createprojecttransferrequest)
 - [Accept project transfer request API reference](https://api-docs.neon.tech/reference/acceptprojecttransferrequest)
-- [Neon API documentation](/docs/reference/api-reference)
+- [Neon API documentation](/docs/reference/api)
 - [Managing projects](/docs/manage/projects)
 - [Managing API keys](/docs/manage/api-keys)
 - [Managing organizations](/docs/manage/organizations)

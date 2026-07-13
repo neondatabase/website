@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 ## Our mission
@@ -83,7 +83,7 @@ Startups want to ship product fast and avoid cloud infrastructure complexity. Th
 - Its serverless architecture removes most management
 - Autoscaling handles unpredictable traffic without overprovisioning or planning compute sizes
 - Branching speeds up building - teams can ship safely and quickly
-- Neon's straightforward and feature-complete [API](/docs/reference/api-reference)
+- Neon's straightforward and feature-complete [API](/docs/reference/api)
 - Usage-based pricing means no upfront commitments
 - Neon delivers on reliability, performance, and compliance
 

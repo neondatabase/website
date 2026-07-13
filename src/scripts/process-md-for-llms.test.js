@@ -7,6 +7,8 @@ import {
   buildNavigationMap,
   buildNavigationFooter,
   buildPageHeader,
+  addNavigationContext,
+  stripNavigationContext,
 } from './process-md-for-llms.js';
 
 // Test actual file conversion - the important stuff
@@ -769,6 +771,42 @@ See [CONN_MAX_AGE](https://example.com).
     });
   });
 
+  describe('Navigation context stripping', () => {
+    it('should strip the feedback footer when a page has no related docs footer', () => {
+      const content = '# Test page\n\nBody text.';
+      const withContext = addNavigationContext(content, 'docs/unknown-page.md', new Map());
+
+      expect(withContext).toContain('Note for AI assistants');
+
+      const stripped = stripNavigationContext(withContext);
+
+      expect(stripped.trim()).toBe(content);
+      expect(stripped).not.toContain('Note for AI assistants');
+      expect(stripped).not.toContain('/api/docs-feedback');
+    });
+
+    it('should strip related docs and feedback footers together', () => {
+      const content = '# Connect to Neon\n\nBody text.';
+      const navMap = new Map();
+      navMap.set('get-started/connect-neon', {
+        sectionName: 'Start with Neon',
+        urlPrefix: 'docs',
+        siblings: [{ title: 'Sign up', slug: 'get-started/signing-up' }],
+      });
+
+      const withContext = addNavigationContext(content, 'docs/get-started/connect-neon.md', navMap);
+
+      expect(withContext).toContain('## Related docs (Start with Neon)');
+      expect(withContext).toContain('Note for AI assistants');
+
+      const stripped = stripNavigationContext(withContext);
+
+      expect(stripped.trim()).toBe(content);
+      expect(stripped).not.toContain('## Related docs');
+      expect(stripped).not.toContain('Note for AI assistants');
+    });
+  });
+
   describe('Page header', () => {
     it('should include location and index for pages in nav map', () => {
       const navMap = new Map();
@@ -791,13 +829,13 @@ See [CONN_MAX_AGE](https://example.com).
       );
     });
 
-    it('should include only index line for pages not in map', () => {
+    it('should include index line for pages not in map', () => {
       const navMap = new Map();
       const header = buildPageHeader('nonexistent/page', navMap);
       expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
-    it('should include only index line for pages with empty breadcrumbs', () => {
+    it('should include index line for pages with empty breadcrumbs', () => {
       const navMap = new Map();
       navMap.set('top-level/page', {
         sectionName: 'Section',
@@ -810,14 +848,20 @@ See [CONN_MAX_AGE](https://example.com).
       expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
-    it('should include only index line when navMap is null', () => {
+    it('should include index line when navMap is null', () => {
       const header = buildPageHeader('any/page', null);
       expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
-    it('should include only index line when slug is null', () => {
+    it('should include index line when slug is null', () => {
       const navMap = new Map();
       const header = buildPageHeader(null, navMap);
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+    });
+
+    it('should not include feedback in header (feedback is added at bottom by addNavigationContext)', () => {
+      const navMap = new Map();
+      const header = buildPageHeader(null, navMap, 'changelog/2026-01-01.md');
       expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
     });
 
@@ -857,10 +901,9 @@ See [CONN_MAX_AGE](https://example.com).
       const navMap = buildNavigationMap(rootDir);
 
       const header = buildPageHeader('auth/guides/password-reset', navMap);
-      expect(header).toBe(
-        '> This page location: Neon Auth > Guides > Password reset\n' +
-          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
-      );
+      expect(header).toContain('> This page location: Neon Auth > Guides > Password reset\n');
+      expect(header).toContain('> Full Neon documentation index: https://neon.com/docs/llms.txt\n');
+      expect(header).not.toContain('Note for AI assistants');
     });
 
     it('should not produce redundant breadcrumbs for real nav entries', () => {

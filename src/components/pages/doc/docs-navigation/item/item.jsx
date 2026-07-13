@@ -143,7 +143,7 @@ const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, se
                 {item.section ? (
                   <>
                     <span className="mb-3.5 block text-xs leading-none tracking-tight text-gray-new-50 uppercase">
-                      {item.section}
+                      {item.title || item.section}
                     </span>
                     <ul className="flex flex-col gap-4">
                       {item.items.map((item, index) => (

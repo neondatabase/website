@@ -13,7 +13,7 @@ nextLink:
   slug: database-services-short-lived-postgres-instances
 ---
 
-Neon was built for this. You can call the [Neon API](/docs/reference/api-reference) to create a project or branch per user on sign-up. Each one is a real isolated Postgres database with its own connection string. Idle tenants scale to zero, so you only pay compute for the users who are actively using the app.
+Neon was built for this. You can call the [Neon API](/docs/reference/api) to create a project or branch per user on sign-up. Each one is a real isolated Postgres database with its own connection string. Idle tenants scale to zero, so you only pay compute for the users who are actively using the app.
 
 ## Provision a database in a single API call
 

@@ -1,6 +1,6 @@
 'use client';
 
-const { useState, useEffect } = require('react');
+const { useState, useEffect, useCallback } = require('react');
 
 function useLocalStorage(key, initialValue) {
   // Always start with `initialValue` so server HTML matches the client's first
@@ -22,23 +22,27 @@ function useLocalStorage(key, initialValue) {
     }
     return undefined;
   }, [key]);
-  // Return a wrapped version of useState's setter function that ...
-  // ... persists the new value to localStorage.
-  const setValue = (value) => {
-    try {
-      // Allow value to be a function so we have same API as useState
-      const valueToStore = value instanceof Function ? value(storedValue) : value;
-      // Save state
-      setStoredValue(valueToStore);
-      // Save to local storage
-      if (typeof window !== 'undefined') {
-        window.localStorage.setItem(key, JSON.stringify(valueToStore));
+
+  // Stable setter: uses functional setState so storedValue is never captured in
+  // the closure. Without useCallback, a new reference is created every render,
+  // which causes effects that list setValue as a dep to re-run and override user tab selections.
+  const setValue = useCallback(
+    (value) => {
+      try {
+        setStoredValue((prev) => {
+          const valueToStore = value instanceof Function ? value(prev) : value;
+          if (typeof window !== 'undefined') {
+            window.localStorage.setItem(key, JSON.stringify(valueToStore));
+          }
+          return valueToStore;
+        });
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      // A more advanced implementation would handle the error case
-      console.log(error);
-    }
-  };
+    },
+    [key]
+  );
+
   return [storedValue, setValue];
 }
 
