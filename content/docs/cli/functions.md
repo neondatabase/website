@@ -26,7 +26,7 @@ Deploys a function from a local directory or entry file. The `<slug>` is the per
 
 <CliOptions command="functions deploy" />
 
-Use `--wait` to block until the deployment finishes building, which is the predictable path for scripts and CI.
+By default, `deploy` waits until the deployment finishes building (`--wait=true`), which is the predictable path for scripts and CI. Use `--no-wait` to return immediately after triggering the deployment.
 
 Deploy a function from an entry file:
 

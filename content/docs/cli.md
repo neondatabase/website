@@ -26,7 +26,7 @@ npm i -g neon
 ## Get started
 
 <DetailIconCards forceGreenIcon>
-<a href="/docs/cli/install" description="Install the Neon, authenticate, and connect your first Neon project in minutes." theme="grey" icon="network">Install and connect</a>
+<a href="/docs/cli/install" description="Install the Neon CLI, authenticate, and connect your first Neon project in minutes." theme="grey" icon="network">Install and connect</a>
 <a href="/docs/cli/quickstart" description="Create a project, manage branches, and run your first Neon CLI commands." theme="grey" icon="rocket">Quickstart</a>
 </DetailIconCards>
 
