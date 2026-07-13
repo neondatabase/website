@@ -1,0 +1,51 @@
+name: SDK Docs Check
+
+# Blocks a PR when docs that reference @neon/sdk contain a broken reference:
+# a fenced TypeScript example that calls a raw operation, ergonomic method, or
+# imports a symbol that the installed @neon/sdk does not provide. Non-blocking
+# drift (inline references, api-ref/SDK operation-set skew) is reported but does
+# not fail the PR — the scheduled "SDK Docs Drift" watchdog escalates those.
+
+on:
+  pull_request:
+    paths:
+      - 'content/**/*.md'
+      - 'content/**/*.mdx'
+      - 'public/docs/**/*.md'
+      - 'src/data/api-ref/**/*.json'
+      - 'scripts/check-sdk-docs.mjs'
+      - 'src/utils/api-ref.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/sdk-docs-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: 'Check docs vs installed @neon/sdk'
+    runs-on:
+      group: neondatabase-protected-runner-group
+      labels: linux-ubuntu-latest
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check SDK docs
+        run: npm run check:sdk-docs
