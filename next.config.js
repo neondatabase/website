@@ -2629,10 +2629,12 @@ const defaultConfig = {
           destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
         },
         // Canonical OpenAPI path probed by agent-discovery tooling (e.g. integrations.sh).
-        // Aliases the published Neon API spec so /openapi.json resolves as application/json.
+        // Aliases the published Neon API spec (the same document served at
+        // /api_spec/release/v2.json — the canonical public URL referenced by
+        // @neon/sdk and the docs) so /openapi.json resolves as application/json.
         {
           source: '/openapi.json',
-          destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+          destination: 'https://neon.com/api_spec/release/v2.json',
         },
         {
           source: '/demos/ping-thing',
