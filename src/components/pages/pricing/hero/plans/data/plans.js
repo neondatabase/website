@@ -82,7 +82,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
           {
             title: 'Object Storage [BETA]',
             info: 'No charges applied during beta, with usage limits',
@@ -130,7 +130,7 @@ export default [
       other: {
         title: 'Backend',
         features: [
-          { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
+          { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
           {
             title: 'Object Storage [BETA]',
             info: 'No charges applied during beta, with usage limits',
