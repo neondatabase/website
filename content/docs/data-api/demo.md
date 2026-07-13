@@ -10,7 +10,7 @@ summary: >-
   for a working end-to-end example of Data API query patterns, RLS setup, and
   ON DELETE CASCADE.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-13T19:46:02.920Z'
 ---
 
 This tutorial uses a note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with authentication and Row-Level Security (RLS) policies keeping your data secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
@@ -67,6 +67,7 @@ VITE_NEON_DATABASE_URL=https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
 
 # Database Connection String (for migrations)
 # Find this in Neon Console → Dashboard → Connection string (select "Pooled connection")
+# This is a Postgres connection string, not the HTTPS URL used by VITE_NEON_DATABASE_URL above
 DATABASE_URL=postgresql://user:password@your-project-id.pooler.region.neon.tech/neondb?sslmode=require
 ```
 

@@ -12,7 +12,7 @@ summary: >-
   `--output`, and `--schema` flags and can run as a package.json script to
   keep generated types in sync after schema changes.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-13T19:46:02.920Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -70,7 +70,7 @@ const { data, error } = await client
   .eq('is_published', true); // Type check: ensures 'is_published' expects a boolean
 ```
 
-Use the HTTPS Neon database URL without credentials or query parameters for `NEON_DATABASE_URL`, for example `https://ep-example.c-2.us-east-1.aws.neon.tech/neondb`. You can find the matching Data API URL on the **Data API** page in the Neon Console or with `neon data-api get`; to get the single database URL, remove the `.apirest` hostname label and trailing `/rest/v1` path. If you start from a Neon Auth URL instead, remove the `.neonauth` hostname label and trailing `/auth` path. The `.c-2` cell label, region, and database path stay the same. Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
+Use the HTTPS Neon database URL without credentials or query parameters for `NEON_DATABASE_URL`, for example `https://ep-example.c-2.us-east-1.aws.neon.tech/neondb`. You can find the matching Data API URL on the **Data API** page in the Neon Console or with `neon data-api get`; to get the single database URL, remove the `.apirest` hostname label and trailing `/rest/v1` path. If you start from a Neon Auth URL instead, remove the `.neonauth` hostname label and trailing `/auth` path. The cell label (if present), region, and database path stay the same. Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
 
 ### Response types
 
