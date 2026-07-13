@@ -30,6 +30,8 @@ import crypto from 'crypto';
 import Ajv from 'ajv';
 import { load as loadYaml } from 'js-yaml';
 
+import { computeCoverage, operationIdsFromSpec, sdkRawOperationNames } from './lib/api-coverage.mjs';
+
 const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -212,6 +214,14 @@ const SCHEMAS = {
       info: { type: 'object', required: ['title'], properties: { title: { type: 'string' } } },
     },
   },
+  apiDocsCoverage: {
+    type: 'object',
+    required: ['operationIds'],
+    properties: {
+      operationIds: { type: 'array', minItems: 1, items: { type: 'string' } },
+      count: { type: 'number' },
+    },
+  },
 };
 
 const VALIDATORS = {
@@ -339,11 +349,77 @@ const VALIDATORS = {
     if (!liveJson) return [fail(`schema (${entry.spec.name})`, 'response was not valid JSON')];
     return [schemaCheck(entry.spec.name, SCHEMAS.openapi, liveJson)];
   },
+
+  // Coverage across spec ↔ docs ↔ @neon/sdk. `payload` is the committed docs
+  // manifest (content/docs/api-operation-ids.json). Offline: manifest vs the
+  // installed @neon/sdk/raw exports. Live: also diff the fetched spec's
+  // operationIds so an externally published endpoint can't ship undocumented.
+  'api-docs-coverage'(payload, entry, sot, ctx) {
+    const checks = [schemaCheck(entry.spec.name, SCHEMAS.apiDocsCoverage, payload)];
+    const documentedOps = payload.operationIds || [];
+
+    const coverage = ctx.coverage || {};
+    if (!coverage.rawOps) {
+      checks.push(fail('@neon/sdk raw layer loaded', coverage.error || '@neon/sdk not installed'));
+      return checks;
+    }
+
+    const specOps = ctx.live && ctx.liveJson ? [...operationIdsFromSpec(ctx.liveJson)] : null;
+    const { sdkNotDocumented, documentedNotInSdk, specNotDocumented, specNotInSdk } =
+      computeCoverage({ documentedOps, rawOps: coverage.rawOps, specOps });
+
+    checks.push(
+      sdkNotDocumented.length === 0
+        ? ok('every @neon/sdk raw method is documented')
+        : fail(
+            'every @neon/sdk raw method is documented',
+            `${sdkNotDocumented.length} raw method(s) missing from the docs — run \`npm run generate:api-ref\` (or the docs lag the SDK): ${sdkNotDocumented.join(', ')}`
+          )
+    );
+    checks.push(
+      documentedNotInSdk.length === 0
+        ? ok('every documented operation exists in @neon/sdk')
+        : fail(
+            'every documented operation exists in @neon/sdk',
+            `${documentedNotInSdk.length} documented op(s) missing from @neon/sdk raw — bump @neon/sdk: ${documentedNotInSdk.join(', ')}`
+          )
+    );
+
+    if (specOps) {
+      checks.push(
+        specNotDocumented.length === 0
+          ? ok('every OpenAPI endpoint is documented')
+          : fail(
+              'every OpenAPI endpoint is documented',
+              `${specNotDocumented.length} spec endpoint(s) absent from the docs manifest — run \`npm run generate:api-ref\` and commit: ${specNotDocumented.join(', ')}`
+            )
+      );
+      checks.push(
+        specNotInSdk.length === 0
+          ? ok('every OpenAPI endpoint exists in @neon/sdk')
+          : fail(
+              'every OpenAPI endpoint exists in @neon/sdk',
+              `${specNotInSdk.length} spec endpoint(s) missing from @neon/sdk raw — bump @neon/sdk: ${specNotInSdk.join(', ')}`
+            )
+      );
+    }
+    return checks;
+  },
 };
 
 // ── run one entry ─────────────────────────────────────────────────────────────
 
-async function runEntry(entry, sot) {
+// Load the @neon/sdk raw surface once per run (used by the coverage validator).
+async function loadCoverageContext() {
+  try {
+    const raw = await import('@neon/sdk/raw');
+    return { rawOps: sdkRawOperationNames(raw), error: null };
+  } catch (err) {
+    return { rawOps: null, error: `failed to import @neon/sdk/raw: ${err.message}` };
+  }
+}
+
+async function runEntry(entry, sot, coverage) {
   const checks = [];
 
   // For builder-backed routes, assert the route actually delegates to the builder
@@ -358,7 +434,7 @@ async function runEntry(entry, sot) {
   }
 
   // Live fetch context (used by several validators + content-type check).
-  let live = { live: LIVE, liveBody: null, liveJson: null };
+  let live = { live: LIVE, liveBody: null, liveJson: null, coverage };
   if (LIVE) {
     try {
       const served = await fetchServed(entry.servedPath);
@@ -406,10 +482,11 @@ async function runEntry(entry, sot) {
 async function main() {
   const catalog = loadYaml(fs.readFileSync(CATALOG_PATH, 'utf-8'));
   const sot = require(SOT_PATH);
+  const coverage = await loadCoverageContext();
 
   const results = [];
   for (const entry of catalog.endpoints) {
-    const checks = await runEntry(entry, sot);
+    const checks = await runEntry(entry, sot, coverage);
     results.push({ entry, checks, ok: checks.every((c) => c.ok) });
   }
 

@@ -2,7 +2,12 @@
 
 import { spawnSync } from 'node:child_process';
 
-const NAV_FILE = 'content/docs/api-navigation.yaml';
+// Committed artifacts produced by scripts/generate-api-ref.mjs. If regeneration
+// changes either, the committed copy is stale and must be re-committed.
+const GENERATED_FILES = [
+  'content/docs/api-navigation.yaml',
+  'content/docs/api-operation-ids.json',
+];
 
 function git(args, options = {}) {
   return spawnSync('git', args, {
@@ -11,22 +16,27 @@ function git(args, options = {}) {
   });
 }
 
-const diffCheck = git(['diff', '--quiet', 'HEAD', '--', NAV_FILE]);
+let stale = false;
 
-if (diffCheck.status === 0) {
-  process.stderr.write(`[api-ref-nav] ${NAV_FILE} is up to date.\n`);
-  process.exit(0);
+for (const file of GENERATED_FILES) {
+  const diffCheck = git(['diff', '--quiet', 'HEAD', '--', file]);
+
+  if (diffCheck.status === 0) {
+    process.stderr.write(`[api-ref-nav] ${file} is up to date.\n`);
+    continue;
+  }
+
+  if (diffCheck.status !== 1) {
+    process.stderr.write(diffCheck.stderr || `[api-ref-nav] git diff failed for ${file}\n`);
+    process.exit(diffCheck.status ?? 1);
+  }
+
+  stale = true;
+  process.stderr.write(
+    `[api-ref-nav] ${file} changed after API reference generation.\n` +
+      `Run \`npm run generate:api-ref\`, review the diff, and commit the regenerated file.\n\n`
+  );
+  git(['diff', '--', file], { stdio: 'inherit' });
 }
 
-if (diffCheck.status !== 1) {
-  process.stderr.write(diffCheck.stderr || `[api-ref-nav] git diff failed for ${NAV_FILE}\n`);
-  process.exit(diffCheck.status ?? 1);
-}
-
-process.stderr.write(
-  `[api-ref-nav] ${NAV_FILE} changed after API reference generation.\n` +
-    `Run \`npm run generate:api-ref\`, review the diff, and commit the regenerated navigation file.\n\n`
-);
-
-git(['diff', '--', NAV_FILE], { stdio: 'inherit' });
-process.exit(1);
+process.exit(stale ? 1 : 0);

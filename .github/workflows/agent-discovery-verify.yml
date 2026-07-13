@@ -18,11 +18,16 @@ on:
       - 'config/agent-endpoints.yaml'
       - 'src/constants/agent-discovery.js'
       - 'scripts/verify-agent-endpoints.mjs'
+      - 'scripts/lib/api-coverage.mjs'
+      - 'src/utils/api-ref.mjs'
+      - 'content/docs/api-operation-ids.json'
       - 'src/app/.well-known/**'
       - 'src/app/models.json/**'
       - 'src/scripts/generate-skills-index.js'
       - 'src/scripts/check-models-sync.js'
       - 'next.config.js'
+      - 'package.json'
+      - 'package-lock.json'
   schedule:
     # Every day at 8:00 AM UTC (matches the old AI Gateway Models Sync cadence)
     - cron: '0 8 * * *'
