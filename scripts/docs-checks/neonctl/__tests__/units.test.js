@@ -1,9 +1,13 @@
 import { createRequire } from 'module';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
 const require = createRequire(import.meta.url);
 const {
+  extract,
   tokenize,
   stripFrontmatter,
   joinBackslashContinuations,
@@ -128,6 +132,42 @@ describe('buildTopLevelCommands', () => {
     expect(set.has('branch')).toBe(true);
     expect(set.has('projects')).toBe(true);
     expect(set.has('completion')).toBe(true);
+  });
+});
+
+describe('extract', () => {
+  it('skips generated blog content by default', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-extract-'));
+    try {
+      fs.mkdirSync(path.join(root, 'blog'), { recursive: true });
+      fs.mkdirSync(path.join(root, 'docs'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'blog', 'post.md'), '```bash\nneonctl projects list\n```\n');
+      fs.writeFileSync(path.join(root, 'docs', 'page.md'), '```bash\nneonctl branches list\n```\n');
+
+      const invocations = extract({ root });
+
+      expect(invocations.map((invocation) => path.relative(root, invocation.file))).toEqual([
+        path.join('docs', 'page.md'),
+      ]);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it('can include blog content when ignore is explicitly disabled', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-extract-'));
+    try {
+      fs.mkdirSync(path.join(root, 'blog'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'blog', 'post.md'), '```bash\nneonctl projects list\n```\n');
+
+      const invocations = extract({ root, ignore: [] });
+
+      expect(invocations.map((invocation) => path.relative(root, invocation.file))).toEqual([
+        path.join('blog', 'post.md'),
+      ]);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
   });
 });
 

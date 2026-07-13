@@ -3,6 +3,11 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
 import remarkGfm from 'remark-gfm';
 
+import AiGatewayModelIndex from 'components/pages/doc/ai-gateway-model-index';
+import ApiMethodBadge from 'components/pages/doc/api-method-badge';
+import ApiParam from 'components/pages/doc/api-param';
+import ApiResourceGrid from 'components/pages/doc/api-resource-grid/api-resource-grid';
+import ApiResponse from 'components/pages/doc/api-response';
 import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
@@ -169,6 +174,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       />
     );
   },
+  ApiMethodBadge,
+  ApiResourceGrid,
+  ApiParam,
+  ApiResponse,
   AutoscalingChart,
   AutoscalingViz,
   Button,
@@ -222,6 +231,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CopyPrompt,
   McpSetupConfigurator,
   SqlToRestConverter,
+  AiGatewayModelIndex,
   ...sharedComponents,
 });
 

@@ -14,7 +14,7 @@ This is not for production workloads. Expect rough edges and frequent updates. B
 
 ## What's in the preview
 
-Three new services join Postgres and Neon Auth, all scoped to your branches:
+Three new services join Postgres and Managed BetterAuth, all scoped to your branches:
 
 - **Neon Functions**: long-running Node.js compute next to your database. WebSocket servers, SSE streams, AI agents.
 - **Neon Storage**: S3-compatible object storage that branches with your data.
@@ -24,7 +24,7 @@ You declare all of it in one `neon.ts` file, and it branches together: fork a br
 
 ## Check your access
 
-Access is a flag on your Neon account. If you received the invite email, your flag should already be set. Preview services work on **new projects** in **AWS us-east-2** only. They can't be enabled on existing projects. All usage during the preview is free, subject to fair usage.
+Access is a flag on your Neon account. If you received the invite email, your flag should already be set. Preview services work on **new projects** in **AWS us-east-2** only. They can't be enabled on existing projects. All usage during the preview is free, subject to fair usage. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for what to expect once billing begins.
 
 To confirm your access, go to [console.neon.tech](https://console.neon.tech), create a new project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Storage**, **Credentials**, **AI Gateway**, and **Functions**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
 
@@ -60,7 +60,7 @@ Pick a template from the interactive selector, or pass `--template <id>` to skip
 | `ai-sdk`        | A streaming AI chat agent on Neon Functions that generates images on demand, stores them in Neon Storage, and indexes metadata in Postgres via Drizzle. Uses Neon AI Gateway for model access.                     |
 | `mastra`        | A personal-assistant chatbot on Neon Functions that remembers you across conversations. Streams responses through Neon AI Gateway and persists context across threads using Mastra Memory backed by Neon Postgres. |
 | `mcp`           | An MCP server on Neon Functions that exposes contact management tools (create, update, delete, search) to AI agents via streamable HTTP. Compatible with Cursor, Claude Desktop, and other MCP clients.            |
-| `realtime-chat` | A full-stack realtime chat app: Next.js frontend with Neon Auth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                          |
+| `realtime-chat` | A full-stack realtime chat app: Next.js frontend with Managed BetterAuth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                 |
 | `realtime-sse`  | A realtime shared counter: TanStack Router SPA connected to a Hono server on Neon Functions via server-sent events. State persists in Postgres and broadcasts across isolates with LISTEN/NOTIFY.                  |
 
 Each template includes agent skills and a README. Follow the README steps, or tell your agent to follow them.
@@ -146,8 +146,8 @@ Once applied, environment variables for all your services are written to `.env.l
 
 The Neon CLI supports a full local development workflow for the platform. You link a directory to a project, declare your infrastructure in `neon.ts`, develop functions locally with hot reload, and deploy when you're ready. Branching is built into the workflow: `neon checkout` creates an isolated branch with its own database, storage, and functions, so you can develop and test without touching your main branch. Here are the commands that make up that workflow, each with a link to its full reference.
 
-| Command                                           | What it does                                                                                                                                                   |
-| ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Command                                        | What it does                                                                                                                                                   |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`neon link`](/docs/cli/link)                  | Bind the current directory to a Neon project. Writes a `.neon` context file so all subsequent commands target the right project and branch automatically.      |
 | [`neon checkout <branch>`](/docs/cli/checkout) | Switch the active branch in your local context. Creates the branch if it doesn't exist. Pulls updated env vars into `.env.local` after switching.              |
 | [`neon config plan`](/docs/cli/config)         | Dry run your `neon.ts` changes. Shows what will be created, updated, or removed without applying anything.                                                     |

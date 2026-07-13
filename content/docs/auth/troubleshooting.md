@@ -1,18 +1,18 @@
 ---
 title: Auth troubleshooting
-subtitle: Common issues when implementing Neon Auth and how to fix them
+subtitle: Common issues when implementing Managed BetterAuth and how to fix them
 summary: >-
-  Troubleshooting for common Neon Auth errors in `@neondatabase/auth` (Next.js)
+  Troubleshooting for common Managed BetterAuth errors in `@neondatabase/auth` (Next.js)
   and `@neondatabase/neon-js` (React SPA). Covers missing `NEON_AUTH_COOKIE_SECRET`,
   missing `force-dynamic` on server components, `NETWORK_DNS` / `NETWORK_TIMEOUT`
   upstream errors, and OAuth `redirect_uri_mismatch` from misconfigured callback
-  URIs. Use this page when Neon Auth fails at startup, sessions do not persist,
+  URIs. Use this page when Managed BetterAuth fails at startup, sessions do not persist,
   or OAuth logins loop back to the provider instead of the app.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-This page covers common issues when integrating [Neon Auth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).
+This page covers common issues when integrating [Managed BetterAuth](/docs/auth/overview) with `@neondatabase/auth` (Next.js) or `@neondatabase/neon-js` (React SPAs).
 
 ## Missing NEON_AUTH_COOKIE_SECRET
 
@@ -39,11 +39,11 @@ export default async function Page() {
 
 This is required because `getSession()` reads cookies, which are only available at request time. See [getSession](/docs/auth/reference/nextjs-server#get-session) in the Next.js Server SDK reference.
 
-## Neon Auth server logging in the terminal
+## Managed BetterAuth server logging in the terminal
 
-You may see structured **`warn`** or **`error`** lines in the Next.js server console when the auth proxy cannot reach Neon Auth or when session cookies fail validation. This is expected: the SDK defaults to **`logLevel: 'warn'`** (opt-out).
+You may see structured **`warn`** or **`error`** lines in the Next.js server console when the auth proxy cannot reach Managed BetterAuth or when session cookies fail validation. This is expected: the SDK defaults to **`logLevel: 'warn'`** (opt-out).
 
-To mute Neon Auth console output:
+To mute Managed BetterAuth console output:
 
 ```typescript
 export const auth = createNeonAuth({
@@ -67,7 +67,7 @@ See [Upstream fetch errors](/docs/auth/reference/nextjs-server#upstream-fetch-er
 
 ## Cookies blocked in iframe or cross-site embeds
 
-Neon Auth cookies default to **`SameSite=Strict`**. If your app runs inside another site's **iframe**, or needs cookies on top-level cross-site navigations, sessions may not persist.
+Managed BetterAuth cookies default to **`SameSite=Strict`**. If your app runs inside another site's **iframe**, or needs cookies on top-level cross-site navigations, sessions may not persist.
 
 Set an explicit SameSite mode when creating the auth instance:
 
@@ -149,7 +149,7 @@ See the [Next.js quick start](/docs/auth/quick-start/nextjs-api-only) and the [R
 
 **`redirect_uri_mismatch` from Google (or another provider)**
 
-The authorized redirect URI in the provider's dashboard must match Neon Auth's callback route exactly: **`{NEON_AUTH_BASE_URL}/callback/{provider}`** (for example `.../callback/google`). See [Production setup](/docs/auth/guides/setup-oauth#production-setup).
+The authorized redirect URI in the provider's dashboard must match Managed BetterAuth's callback route exactly: **`{NEON_AUTH_BASE_URL}/callback/{provider}`** (for example `.../callback/google`). See [Production setup](/docs/auth/guides/setup-oauth#production-setup).
 
 Common mistakes:
 
@@ -158,11 +158,11 @@ Common mistakes:
 
 **OAuth succeeds but the user never reaches your app**
 
-Neon Auth only redirects to [trusted domains](/docs/auth/guides/configure-domains). Add every origin you use in **`callbackURL`** (including `https://www.example.com` separately if you use www).
+Managed BetterAuth only redirects to [trusted domains](/docs/auth/guides/configure-domains). Add every origin you use in **`callbackURL`** (including `https://www.example.com` separately if you use www).
 
 **Google consent screen shows an unexpected hostname**
 
-That hostname comes from the OAuth redirect URI (your app vs Neon Auth). See [Google OAuth branding](/docs/auth/guides/setup-oauth#google-oauth-branding).
+That hostname comes from the OAuth redirect URI (your app vs Managed BetterAuth). See [Google OAuth branding](/docs/auth/guides/setup-oauth#google-oauth-branding).
 
 **Google says the app is in Testing / users outside test accounts cannot sign in**
 

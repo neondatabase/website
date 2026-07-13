@@ -3,7 +3,7 @@ title: Neon documentation
 subtitle: Neon is the backend for apps and agents.
 summary: >-
   Neon documentation root covers the full Neon backend platform: serverless
-  Postgres with branching and autoscaling, Neon Auth, Data API, and upcoming
+  Postgres with branching and autoscaling, Managed BetterAuth, Data API, and upcoming
   Storage and AI Gateway services. Use this page to reach quickstarts, framework
   connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
   editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-22T13:48:28.109Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 ## Getting started
@@ -27,7 +27,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
   />
   <GuidedPath
     title="Build a full backend"
-    description="Next.js + Postgres + Neon Auth + Drizzle. The full Neon stack, end-to-end, from create-next-app to deployed."
+    description="Next.js + Postgres + Managed BetterAuth + Drizzle. The full Neon stack, end-to-end, from create-next-app to deployed."
     href="/docs/get-started/full-backend-quickstart"
   />
 </TwinPaths>
@@ -41,7 +41,7 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
-<a href="/docs/auth/overview" description="Managed auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Neon Auth</a>
+<a href="/docs/auth/overview" description="Managed BetterAuth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Auth</a>
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
 

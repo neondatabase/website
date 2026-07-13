@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
@@ -273,6 +273,6 @@ You can find the source code for the applications described in this guide on Git
 
 ## Next steps
 
-- [Set up Neon Auth](/docs/auth/quick-start/tanstack-router): Add managed authentication that branches with your database
+- [Set up Managed BetterAuth](/docs/auth/quick-start/tanstack-router): Add managed authentication that branches with your database
 
 <NeedHelp/>

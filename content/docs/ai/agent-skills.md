@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-06-26T10:41:58.102Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -151,7 +151,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 
 - **Getting started** with Neon, including project setup and key features (branching, autoscaling, scale-to-zero, instant restore, read replicas)
 - **Connections**, including the serverless driver, connection pooling, and connection strings
-- **Authentication** with Neon Auth
+- **Authentication** with Managed BetterAuth
 - **Data API** via `@neondatabase/neon-js`
 - **Platform APIs and SDKs**, including the REST API, TypeScript SDK, and Python SDK
 - **Developer tools**, including the CLI, VS Code extension, and MCP server
@@ -168,7 +168,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 - **Object Storage**: S3-compatible storage that branches with your data
 - **AI Gateway**: model routing, logging, and cost controls with a single Neon credential
 
-For example, ask your assistant to "set up Neon Auth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow platform preview constraints and the right SDK patterns.
+For example, ask your assistant to "set up Managed BetterAuth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow platform preview constraints and the right SDK patterns.
 
 ## Example prompts
 
@@ -185,7 +185,7 @@ Set up Drizzle ORM with Neon
 ```
 
 ```
-Set up Neon Auth for my Next.js app
+Set up Managed BetterAuth for my Next.js app
 ```
 
 ```

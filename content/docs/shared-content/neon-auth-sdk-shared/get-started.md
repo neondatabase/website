@@ -1,24 +1,24 @@
 ---
-updatedOn: '2026-04-18T11:47:20.000Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
-Neon Auth lets you add authentication to your app in seconds. User data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
+Managed BetterAuth lets you add authentication to your app in seconds. User data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
 
 <Steps>
 
-## Add Neon Auth to a project
+## Add Managed BetterAuth to a project
 
 Go to the [Neon Console](https://console.neon.tech) to create a new Neon project.
 
-Once your project is ready, open your project's **Auth** page and click **Enable Neon Auth** to get started.
+Once your project is ready, open your project's **Auth** page and click **Enable Managed BetterAuth** to get started.
 
-![Neon Auth Console - Ready for users](/docs/neon-auth/enable-neon-auth.png)
+![Managed BetterAuth Console - Ready for users](/docs/neon-auth/enable-neon-auth.png)
 
-## Get your Neon Auth keys
+## Get your Managed BetterAuth keys
 
-On the **Configuration** tab, select your framework to get the **Environment variables** you need to integrate Neon Auth and connect to your database.
+On the **Configuration** tab, select your framework to get the **Environment variables** you need to integrate Managed BetterAuth and connect to your database.
 
 You can use these keys right away to get started, or [skip ahead](#create-users-in-the-console-optional) to try out **user creation** in the Neon Console.
 
@@ -32,13 +32,13 @@ If you're using the [Vercel-Managed Integration](https://vercel.com/marketplace/
 
 ## Set up your app
 
-**Clone our template** for the fastest way to see Neon Auth in action.
+**Clone our template** for the fastest way to see Managed BetterAuth in action.
 
 ```bash shouldWrap
 git clone https://github.com/neondatabase-labs/{templateRepo}.git
 ```
 
-Or **add Neon Auth** to an existing project.
+Or **add Managed BetterAuth** to an existing project.
 
 {setupSteps}
 
@@ -70,7 +70,7 @@ SELECT * FROM neon_auth.users_sync;
 
 Want to learn more or go deeper?
 
-- [How Neon Auth works](/docs/guides/neon-auth-how-it-works): See a before and after showing the benefits of having your user data right in your database
-- [Neon Auth tutorial](/docs/guides/neon-auth-demo): Walk through our demo app for more examples of how Neon Auth can simplify your code
+- [How Managed BetterAuth works](/docs/guides/neon-auth-how-it-works): See a before and after showing the benefits of having your user data right in your database
+- [Managed BetterAuth tutorial](/docs/guides/neon-auth-demo): Walk through our demo app for more examples of how Managed BetterAuth can simplify your code
 - [Best Practices & FAQ](/docs/guides/neon-auth-best-practices): Tips, patterns, and troubleshooting
-- [Manage Neon Auth via the API](/docs/auth/guides/manage-auth-api): Automate and manage Neon Auth via the API
+- [Manage Managed BetterAuth via the API](/docs/auth/guides/manage-auth-api): Automate and manage Managed BetterAuth via the API

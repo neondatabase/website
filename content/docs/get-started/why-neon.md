@@ -7,19 +7,19 @@ summary: >-
   point-in-time restore intrinsic rather than add-ons. Choose Neon when you need
   a fully managed, usage-based Postgres backend that scales from zero to
   production without capacity planning. A Databricks company since May 2025,
-  Neon also offers Neon Auth and an HTTP Data API alongside full standard
+  Neon also offers Managed BetterAuth and an HTTP Data API alongside full standard
   Postgres compatibility.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 ## Our mission
 
-**Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Designed to help developers build scalable, dependable applications faster than ever.**
+**Neon is the backend for apps and agents. Neon Postgres, Managed BetterAuth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Designed to help developers build scalable, dependable applications faster than ever.**
 
 We aim to deliver Postgres as a cloud service that feels effortless, from your first side project to millions of users in production. We believe Postgres should be as universal and accessible as object storage, something every developer can rely on without thinking about infrastructure.
 
@@ -83,7 +83,7 @@ Startups want to ship product fast and avoid cloud infrastructure complexity. Th
 - Its serverless architecture removes most management
 - Autoscaling handles unpredictable traffic without overprovisioning or planning compute sizes
 - Branching speeds up building - teams can ship safely and quickly
-- Neon's straightforward and feature-complete [API](/docs/reference/api-reference)
+- Neon's straightforward and feature-complete [API](/docs/reference/api)
 - Usage-based pricing means no upfront commitments
 - Neon delivers on reliability, performance, and compliance
 
@@ -102,7 +102,7 @@ Full-stack codegen platforms need to spin up thousands of independent applicatio
 - Thousands of short-lived, low-usage databases can be deployed programmatically
 - Scale-to-zero makes per-app databases economically viable, even at scale
 - Branching allows for agent-friendly workflows: versioning, snapshots, rollbacks, checkpoints
-- Neon Auth + Data API form a backend layer that works directly with the database
+- Managed BetterAuth + Data API form a backend layer that works directly with the database
 
 <Admonition type="tip" title="Join the Agent Program">
   Building a full-stack agent that needs databases? Apply to our [Agent Program](https://neon.com/programs/agents#agent-plan-pricing) and get access to special pricing, resource limits, and features.

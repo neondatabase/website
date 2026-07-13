@@ -1,15 +1,15 @@
 ---
-title: Building an Admin dashboard with Neon Auth
-subtitle: Learn how to create an internal admin dashboard for user management using Neon Auth's Admin APIs.
+title: Building an Admin dashboard with Managed BetterAuth
+subtitle: Learn how to create an internal admin dashboard for user management using Managed BetterAuth's Admin APIs.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-31T00:00:00.000Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-In a production application, internal tooling is often critical for operations and support teams. The Neon Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes powerful user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.
+In a production application, internal tooling is often critical for operations and support teams. The Managed BetterAuth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes powerful user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.
 
-This guide demonstrates how to build an **internal admin dashboard** using Neon Auth. You will create a React application that allows support staff to view registered users, ban abusive accounts, and securely impersonate users to reproduce bugs. It will cover the following features:
+This guide demonstrates how to build an **internal admin dashboard** using Managed BetterAuth. You will create a React application that allows support staff to view registered users, ban abusive accounts, and securely impersonate users to reproduce bugs. It will cover the following features:
 
 1.  **A user table:** To list all registered users in your application.
 2.  **Moderation controls:** To ban and unban users instantly.
@@ -24,19 +24,19 @@ Before you begin, ensure you have the following:
 
 <Steps>
 
-## Create a Neon project with Neon Auth
+## Create a Neon project with Managed BetterAuth
 
-You'll need to create a Neon project and enable Neon Auth.
+You'll need to create a Neon project and enable Managed BetterAuth.
 
 1.  **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `admin-dashboard-demo`.
-2.  **Enable Neon Auth:**
-    - In your project's dashboard, go to the **Neon Auth** tab.
-    - Click on the **Enable Neon Auth** button to set up authentication for your project.
+2.  **Enable Managed BetterAuth:**
+    - In your project's dashboard, go to the **Managed BetterAuth** tab.
+    - Click on the **Enable Managed BetterAuth** button to set up authentication for your project.
 
 3.  **Copy your Auth URL:**
 
     Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
-    ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
+    ![Managed BetterAuth URL](/docs/auth/neon-auth-base-url.png)
 
 ## Create an Admin user
 
@@ -91,7 +91,7 @@ $ npm create vite@latest react-neon-todo -- --template react-ts
 
 You will need the following packages for this project:
 
-- **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Neon Auth and the Data API.
+- **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Managed BetterAuth and the Data API.
 - **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
 
 ```bash
@@ -129,11 +129,11 @@ Create a `.env` file in the root of your project and add the credentials you cop
 VITE_NEON_AUTH_URL="https://ep-xxx.neon.tech/neondb/auth"
 ```
 
-## Configure Neon Auth client
+## Configure Managed BetterAuth client
 
 ### Initialize the Auth client
 
-Create a client instance to interact with Neon Auth.
+Create a client instance to interact with Managed BetterAuth.
 
 Create a file `src/auth.ts`. This file will export the `authClient` instance to be used throughout the app.
 
@@ -174,7 +174,7 @@ createRoot(document.getElementById('root')!).render(
 
 ### Create Auth and Account pages
 
-Neon Auth provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
+Managed BetterAuth provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
 
 As outlined in the [UI components reference](/docs/auth/reference/ui-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
 
@@ -212,7 +212,7 @@ export default function AccountPage() {
 
 ### Update styles
 
-Update `src/index.css` to include the Neon Auth Tailwind styles and set the minimal global styles.
+Update `src/index.css` to include the Managed BetterAuth Tailwind styles and set the minimal global styles.
 
 ```css
 @import 'tailwindcss';
@@ -760,9 +760,9 @@ The complete source code for this example is available on GitHub.
 
 ## Resources
 
-- [Neon Auth Admin API Reference](/docs/auth/guides/plugins/admin)
-- [Neon Auth Overview](/docs/neon-auth/overview)
-- [Neon Auth UI components](/docs/auth/reference/ui-components)
+- [Managed BetterAuth Admin API Reference](/docs/auth/guides/plugins/admin)
+- [Managed BetterAuth Overview](/docs/neon-auth/overview)
+- [Managed BetterAuth UI components](/docs/auth/reference/ui-components)
 - [UI components reference](/docs/auth/reference/ui-components)
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk)
 

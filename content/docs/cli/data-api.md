@@ -5,7 +5,7 @@ summary: >-
   Covers the usage of the `data-api` command in the Neon CLI to create, inspect,
   update, refresh, and delete the Neon Data API for a database.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 redirectFrom:
   - /docs/reference/cli-data-api
 ---
@@ -45,7 +45,7 @@ Provisions the Neon Data API for a database.
 
 `create` also accepts [settings flags](#settings-flags) to configure the Data API at provision time.
 
-Provision the Data API with Neon Auth:
+Provision the Data API with Managed BetterAuth:
 
 ```bash
 neon data-api create --database neondb --auth-provider neon_auth
