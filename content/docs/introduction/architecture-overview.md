@@ -95,7 +95,7 @@ Safekeepers are responsible for one thing: **durable replication of WAL**. When 
 This is a fundamental difference from how traditional Postgres works:
 
 - Correctness in Neon is enforced through replication and consensus
-- Commit latency depends on network RTT, not disk fsync
+- Commit latency is primarily quorum/network-bound, with safekeepers batching WAL flushes rather than relying on compute-local fsync
 - No single machine defines the durable state of the database
 
 ### Pageserver: WAL ⇄ pages

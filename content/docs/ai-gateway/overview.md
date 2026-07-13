@@ -6,14 +6,14 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-13T15:15:20.992Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
 
 Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from Anthropic, OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI or Anthropic SDK works without code changes. Just point it at your branch endpoint.
 
-> During the private preview, AI Gateway is available for **new projects** in the **AWS us-east-2** region only, and requires a paid Neon plan. Inference is free during the preview. When billing begins, prices will match each provider's published list prices.
+> During the private preview, AI Gateway is available for **new projects** in the **AWS us-east-2** region only, and requires a paid Neon plan. Inference is free during the preview. See [Pricing](#pricing) for what to expect when billing begins.
 
 <Admonition type="important">
 Participation in this Private Preview is subject to our Private Preview Terms. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
@@ -23,6 +23,16 @@ Participation in this Private Preview is subject to our Private Preview Terms. A
 - **Standard SDKs, one URL change.** OpenAI SDK, Anthropic SDK, and google-genai all work out of the box.
 - **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
 - **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
+
+## Pricing
+
+AI Gateway pricing isn't finalized. Here's what to expect once it moves out of private preview:
+
+- **Paid plans only.** AI Gateway will be available on Neon's Launch and Scale plans. There's no difference in AI Gateway pricing or model access between the two plans.
+- **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
+- **Free for now.** Inference remains free through the end of the private preview. Billing starts when AI Gateway reaches GA.
+
+We'll publish exact per-model rates on the [Neon pricing page](https://neon.com/pricing) and update this page before billing begins.
 
 ## Quickstart
 

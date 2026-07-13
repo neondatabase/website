@@ -14,7 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
@@ -441,6 +441,6 @@ Neon does not provide a built-in file storage service. For managing binary file 
 
 ## Next steps
 
-- [Set up Neon Auth](/docs/auth/quick-start/nextjs-api-only): Add managed authentication that branches with your database
+- [Set up Managed BetterAuth](/docs/auth/quick-start/nextjs-api-only): Add managed authentication that branches with your database
 
 <NeedHelp/>

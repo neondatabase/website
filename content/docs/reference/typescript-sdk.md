@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-07-10T10:36:04.593Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 <InfoBlock>
@@ -32,7 +32,7 @@ updatedOn: '2026-07-10T10:36:04.593Z'
 </DocsList>
 </InfoBlock>
 
-`@neon/sdk` wraps the entire Neon API in one typed, fetch-based client. You authenticate once, then reach every resource through a namespace on `neon.*`: projects, branches, the Postgres data plane, object storage, functions, and Neon Auth. Retries, readiness polling, auto-pagination, and typed errors are built in.
+`@neon/sdk` wraps the entire Neon API in one typed, fetch-based client. You authenticate once, then reach every resource through a namespace on `neon.*`: projects, branches, the Postgres data plane, object storage, functions, and Managed BetterAuth. Retries, readiness polling, auto-pagination, and typed errors are built in.
 
 It replaces [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client), the deprecated Axios-based SDK. New projects should use `@neon/sdk`. See the [migration guide](/docs/reference/migrate-api-client-to-sdk) for method mapping and error-handling changes.
 
@@ -143,11 +143,25 @@ for await (const project of neon.projects.list()) {
 
 Neon mutations return operations that complete in the background. A few convenience methods, noted as "creates, then polls until ready" in the reference below (`projects.createAndConnect`, `branches.createWithCompute`), do this polling for you and hand back a ready-to-use result, such as a connection string, in a single call. The primitive underneath is `neon.operations.waitFor(operations)`.
 
+On any namespaced mutation, pass `{ waitForReadiness: true }` as the trailing options argument to poll before the call resolves:
+
+```ts
+const { data, error } = await neon.branches.create(
+  projectId,
+  { name: "preview" },
+  { waitForReadiness: true }
+);
+if (error) throw error;
+data; // Branch — provisioning finished
+```
+
+For raw API calls that return an `operations` array, use [`neon.operations.waitFor`](#neonoperations) instead.
+
 ## Namespaces
 
 The client groups the API into resource namespaces. Projects and branches are the core surfaces: [`projects`](#neonprojects) create, manage, and share projects, and [`branches`](#neonbranches) branch a project's data and schema. The Postgres data plane lives under [`postgres`](#neonpostgres): compute endpoints, roles, databases, the Data API, and connection strings.
 
-Branch-scoped platform services include [`storage`](#neonstorage) (S3-compatible object storage), [`functions`](#neonfunctions), [`credentials`](#neoncredentials), [`aiGateway`](#neonaigateway), and [`auth`](#neonauth) (Neon Auth, OAuth providers, and users). For data lifecycle and async work, use [`snapshots`](#neonsnapshots) for point-in-time snapshots and restore, and [`operations`](#neonoperations) to poll asynchronous operations.
+Branch-scoped platform services include [`storage`](#neonstorage) (S3-compatible object storage), [`functions`](#neonfunctions), [`credentials`](#neoncredentials), [`aiGateway`](#neonaigateway), and [`auth`](#neonauth) (Managed BetterAuth, OAuth providers, and users). For data lifecycle and async work, use [`snapshots`](#neonsnapshots) for point-in-time snapshots and restore, and [`operations`](#neonoperations) to poll asynchronous operations.
 
 Account-level surfaces round out the client: [`consumption`](#neonconsumption) for billing metrics, [`apiKeys`](#neonapikeys), and [`regions` / `user`](#neonregions--user).
 
@@ -168,7 +182,7 @@ Create, manage, and share Neon projects. One API call per method; `list` is pagi
 | `transferFromUser(input)`         | `void`                                                       | `input`: `{ toOrgId, projectIds }`                                                                                      |
 
 ```ts
-// Provision a project and get a pooled connection string in one call
+// Provision a project, poll until ready, return a pooled connection string
 const { data } = await neon.projects.createAndConnect(
   { name: "tenant-42", region_id: "aws-us-east-1" },
   { pooled: true }
@@ -415,7 +429,7 @@ const { error } = await neon.operations.waitFor(data!.operations, { timeoutMs: 1
 
 ## neon.auth
 
-Branch-scoped Neon Auth. The legacy project-scoped endpoints are deprecated and remain raw-only. <small>REST: [Authentication API](/docs/reference/api/auth)</small>
+Branch-scoped Managed BetterAuth. The legacy project-scoped endpoints are deprecated and remain raw-only. <small>REST: [Authentication API](/docs/reference/api/auth)</small>
 
 | Method                                     | Returns                             | Arguments                  |
 | ------------------------------------------ | ----------------------------------- | -------------------------- |
