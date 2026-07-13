@@ -175,11 +175,11 @@ feed `examples.representative.body`, curl, and TypeScript SDK snippets. The
 generator redacts password-shaped values and normalizes Postgres connection
 strings before examples reach JSON, Markdown, or LLM output.
 
-`toTypescriptExample()` and `buildTs()` mirror the generated
-`@neondatabase/api-client` signatures: operations with query params receive one
-params object, while path-only operations use positional path params before the
-optional request body. Keep this locked with generator tests when upgrading the
-SDK or changing example generation.
+`toTypescriptExample()` and `buildTs()` generate `@neon/sdk/raw` snippets. Raw
+SDK calls map 1:1 to OpenAPI operations, so path parameters go under `path`,
+query parameters under `query`, and request bodies under `body`. Keep this
+locked with generator tests when upgrading the SDK or changing example
+generation.
 
 Per-operation Markdown includes complete response examples. The aggregate
 `llms-full.txt` is size-aware and omits oversized response examples with a

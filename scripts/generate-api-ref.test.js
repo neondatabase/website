@@ -600,25 +600,29 @@ describe('toCurlExample', () => {
 describe('toTypescriptExample', () => {
   it('generates call with no path params', () => {
     const result = toTypescriptExample('listProjects', []);
-    expect(result).toContain('api.listProjects({})');
-    expect(result).toContain('createApiClient');
+    expect(result).toContain("import { createNeonClient, raw } from '@neon/sdk';");
+    expect(result).toContain('raw.listProjects({');
+    expect(result).toContain('client: neon.client');
   });
 
   it('generates call with path params', () => {
     const params = [{ name: 'project_id', in: 'path', required: true }];
     const result = toTypescriptExample('getProject', params);
-    expect(result).toContain('api.getProject(process.env.PROJECT_ID)');
+    expect(result).toContain('raw.getProject({');
+    expect(result).toContain('path: {');
+    expect(result).toContain('project_id: process.env.PROJECT_ID');
   });
 
   it('applies SDK method name transformation', () => {
     const result = toTypescriptExample('getProjectJWKS', []);
-    expect(result).toContain('api.getProjectJwks({})');
+    expect(result).toContain('raw.getProjectJwks({');
   });
 
   it('skips optional query params in the call args', () => {
     const params = [{ name: 'limit', in: 'query', required: false, example: null }];
     const result = toTypescriptExample('listProjects', params);
-    expect(result).toContain('api.listProjects({})');
+    expect(result).toContain('raw.listProjects({');
+    expect(result).not.toContain('query:');
   });
 
   it('includes required query params with example value', () => {
@@ -628,8 +632,9 @@ describe('toTypescriptExample', () => {
       { name: 'role_name', in: 'query', required: true, example: 'neondb_owner' },
     ];
     const result = toTypescriptExample('getConnectionUri', params);
-    expect(result).toContain('api.getConnectionUri({');
-    expect(result).toContain('projectId: process.env.PROJECT_ID');
+    expect(result).toContain('raw.getConnectionUri({');
+    expect(result).toContain('project_id: process.env.PROJECT_ID');
+    expect(result).toContain('query: {');
     expect(result).toContain('database_name: "neondb"');
     expect(result).toContain('role_name: "neondb_owner"');
   });
@@ -645,7 +650,9 @@ describe('toTypescriptExample', () => {
       },
     });
 
-    expect(result).toContain('api.updateProject(process.env.PROJECT_ID, {\n  "project"');
+    expect(result).toContain('raw.updateProject({');
+    expect(result).toContain('project_id: process.env.PROJECT_ID');
+    expect(result).toContain('body: {\n    project: {');
   });
 
   it('preserves boolean query examples', () => {
@@ -672,8 +679,9 @@ describe('toTypescriptExample', () => {
       },
     });
 
-    expect(result).toContain('api.createProject({\n  "project"');
-    expect(result).not.toContain('api.createProject({},');
+    expect(result).toContain('raw.createProject({');
+    expect(result).toContain('body: {\n    project: {');
+    expect(result).not.toContain('path:');
   });
 });
 
@@ -706,8 +714,8 @@ describe('buildRepresentativeExamples', () => {
     });
     expect(examples.curl).toContain('-d \'{"project":{"name":"my-production-db"');
     expect(examples.curl).toContain('"pg_version":17');
-    expect(examples.typescript).toContain('api.createProject({');
-    expect(examples.typescript).toContain('"name": "my-production-db"');
+    expect(examples.typescript).toContain('raw.createProject({');
+    expect(examples.typescript).toContain('name: "my-production-db"');
   });
 
   it('falls back to the existing body example when seed is absent', () => {
@@ -735,7 +743,8 @@ describe('buildRepresentativeExamples', () => {
     expect(examples.curl).toContain('/projects/$PROJECT_ID"');
     expect(examples.curl).not.toContain('/projects/{project_id}');
     expect(examples.curl).not.toContain('/projects/%24PROJECT_ID');
-    expect(examples.typescript).toContain('api.updateProject(process.env.PROJECT_ID, {');
+    expect(examples.typescript).toContain('raw.updateProject({');
+    expect(examples.typescript).toContain('project_id: process.env.PROJECT_ID');
   });
 
   it('ignores prototype-affecting seed paths', () => {

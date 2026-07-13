@@ -84,7 +84,7 @@ Neon is the backend for apps and agents. Use the API key from Part 1 for all Neo
 | Developer Tools | `npx neonctl@latest init`, VSCode, Neon MCP server | [devtools.md](https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md) |
 | Neon CLI | Terminal/scripts/CI with `neonctl` | [neon-cli.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-cli.md) |
 | Neon REST API | Direct HTTP automation, API key auth, rate limits, polling | [neon-rest-api.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-rest-api.md) |
-| Neon TypeScript SDK | Typed Neon control in TypeScript (`@neondatabase/api-client`) | [neon-typescript-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-typescript-sdk.md) |
+| Neon TypeScript SDK | Typed Neon control in TypeScript (`@neon/sdk`) | [neon-typescript-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-typescript-sdk.md) |
 | Neon Python SDK | Programmatic Neon management in Python (`neon-api`) | [neon-python-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-python-sdk.md) |
 | Neon Auth | Managed auth, UI components, methods, Next.js/React integration | [neon-auth.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-auth.md) (see also Neon JS SDK) |
 | Branching | Isolated environments, preview deployments, branch lifecycle | [branching.md](https://neon.com/docs/ai/skills/neon-postgres/references/branching.md) |
