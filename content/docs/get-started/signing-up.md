@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-06-24T19:58:18.610Z'
 ---
 
 <InfoBlock>
@@ -33,6 +33,8 @@ updatedOn: '2026-06-11T23:50:21.258Z'
 </InfoBlock>
 
 This tutorial walks you through your first steps using Neon as your Postgres database. You'll explore the Neon object hierarchy and learn how database branching can simplify your development workflow.
+
+<YoutubeIframe embedId="XtMiMnX0hDg" />
 
 ## About branching
 

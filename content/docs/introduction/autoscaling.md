@@ -9,7 +9,7 @@ summary: >-
   is 8 CU. Use this page to understand how autoscaling works and to find the
   configuration steps before reading the full enablement guide.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-24T19:58:18.610Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention or restarts.
@@ -19,6 +19,8 @@ The following visualization shows how Neon’s autoscaling works throughout a ty
 ![visualization for autoscaling](/docs/introduction/autoscaling_intro.png)
 
 To dive deeper into how Neon's autoscaling algorithm operates, visit [Understanding Neon’s autoscaling algorithm](/docs/guides/autoscaling-algorithm).
+
+<YoutubeIframe embedId="dE0E7wALg8M" />
 
 ## Autoscaling benefits
 
