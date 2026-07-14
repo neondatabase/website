@@ -107,11 +107,11 @@ const faqItems = [
     question: 'How are the workload cost estimates calculated?',
     id: 'workload-cost-estimates',
     answer: `
-      <p><strong>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types. These estimates cover Postgres compute and storage only - they don't factor in Object Storage, Functions, or AI Gateway usage, which are billed separately and currently free of charge during beta (see below).</strong></p>
+      <p><strong>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types. These estimates cover Postgres compute and storage only - they don't factor in Object Storage, Functions, or AI Gateway usage, which are billed separately and currently free of charge during beta.</strong></p>
       <p>Each estimate combines two components:</p>
       <ul>
-        <li><strong>Compute cost:</strong> Based on the specified CU-hours per month. </li>
-        <li><strong>Storage cost:</strong> Based on the specified amount of database storage in GB. </li>
+        <li><strong>Database compute cost:</strong> Based on the specified CU-hours per month. </li>
+        <li><strong>Database storage cost:</strong> Based on the specified amount of database storage in GB. </li>
       </ul>
       <p>These estimates help you compare typical workloads across plans.</p>
       <p>Here's a detailed breakdown of each of the workload sizes and what they represent:</p>
