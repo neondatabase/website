@@ -51,7 +51,7 @@ const AI = () => (
             <p className="sm::text-[15px] ml-3 text-[20px] leading-snug tracking-tight text-white lg:text-[18px] sm:ml-0">
               Try for yourself, start building <br className="hidden md:block" /> with Neon now.
             </p>
-            <CopyCodeButton code="npx neonctl init" copyText="npx neonctl@latest init" />
+            <CopyCodeButton code="npx neon init" copyText="npx neon@latest init" />
           </div>
         </div>
 
