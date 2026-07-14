@@ -6,12 +6,16 @@ summary: >-
   Auth JWT against the injected JWKS, check an API key, and add CORS when the
   browser calls the function directly.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T20:35:24.380Z'
 ---
 
 <PrivatePreviewEnquire/>
 
 A Neon Function has a public HTTPS URL, so anyone who knows it can reach it. There's no platform gate in front of your handler. Authenticate the caller yourself, at the top of the handler, and reject anything that doesn't check out.
+
+<Callout title="Looking for credentials to call Neon services?">
+This page covers verifying inbound requests to your function. For the credentials Neon injects into a function to call Object Storage or AI Gateway, see [Environment variables](/docs/compute/functions/environment-variables), [Object Storage authentication](/docs/storage/authentication#credentials-in-neon-functions), or [AI Gateway authentication](/docs/ai-gateway/authentication#credentials-in-neon-functions).
+</Callout>
 
 How you authenticate depends on who calls the function:
 

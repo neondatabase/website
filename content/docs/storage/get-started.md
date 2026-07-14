@@ -1,12 +1,12 @@
 ---
-title: Get started with Neon Object Storage
+title: Get started with Object Storage
 subtitle: Upload your first file in minutes
 summary: >-
   This quickstart walks you through creating a storage credential, configuring
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-14T20:35:24.380Z'
 ---
 
 <PrivatePreviewEnquire/>

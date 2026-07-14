@@ -6,7 +6,7 @@ summary: >-
   API, AI agent, real-time server, or webhook handler that runs next to your
   Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:13:13.774Z'
+updatedOn: '2026-07-14T20:35:24.380Z'
 ---
 
 Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -83,7 +83,7 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 
 </DetailIconCards>
 
-## Examples and templates
+## Starter templates
 
 Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
 
