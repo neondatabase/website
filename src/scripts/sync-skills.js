@@ -83,7 +83,12 @@ async function downloadFile(downloadUrl, relativePath, skillName, skillsPath) {
   console.log(`  ✓ ${localRelative}`);
 }
 
-async function syncSkill({ name, ref, repo = DEFAULT_REPO, path: skillsPath = DEFAULT_SKILLS_PATH }) {
+async function syncSkill({
+  name,
+  ref,
+  repo = DEFAULT_REPO,
+  path: skillsPath = DEFAULT_SKILLS_PATH,
+}) {
   const apiUrl = `https://api.github.com/repos/${repo}/contents/${skillsPath}/${name}?ref=${ref}`;
   console.log(`\nSyncing ${name} @ ${ref} from ${repo}...`);
 

@@ -1,24 +1,24 @@
 ---
-title: Neon Auth roadmap
+title: Managed BetterAuth roadmap
 subtitle: What's supported today and what's coming next
 summary: >-
-  Neon Auth roadmap showing supported frameworks (Next.js, Vite+React, TanStack
+  Managed BetterAuth roadmap showing supported frameworks (Next.js, Vite+React, TanStack
   Router) and Better Auth plugins (email OTP, magic link, JWT, organization)
   alongside features still in progress. Check here to confirm whether MFA, admin
   plugin customization, or standalone frontend/backend architectures are available
   yet. Migration guides from Supabase and legacy Stack Auth, plus SDK references
   for the TypeScript client and Next.js server SDK, are also indexed here.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
-Neon Auth is in active development. This page shows what's currently supported and what we're working on next.
+Managed BetterAuth is in active development. This page shows what's currently supported and what we're working on next.
 
 ## General availability
 
-Neon Auth is targeting general availability this quarter. We're actively working on additional plugins and features to bring Neon Auth out of beta.
+Managed BetterAuth is targeting general availability this quarter. We're actively working on additional plugins and features to bring Managed BetterAuth out of beta.
 
 ## Frameworks
 
@@ -31,7 +31,7 @@ Neon Auth is targeting general availability this quarter. We're actively working
 | React + React Router    | ✅ Supported | [Get started](/docs/auth/quick-start/react)           |
 | React + TanStack Router | ✅ Supported | [Get started](/docs/auth/quick-start/tanstack-router) |
 
-The [React quick start](/docs/auth/quick-start/react) steps through a **Vite** + React app. If you use **React Router** for URLs and layouts, use the same Neon Auth URL, `@neondatabase/neon-js` client, and SDK calls from that guide, then integrate them into your router and route components. For file-based routing with TanStack, use the TanStack Router quick start instead.
+The [React quick start](/docs/auth/quick-start/react) steps through a **Vite** + React app. If you use **React Router** for URLs and layouts, use the same Managed BetterAuth URL, `@neondatabase/neon-js` client, and SDK calls from that guide, then integrate them into your router and route components. For file-based routing with TanStack, use the TanStack Router quick start instead.
 
 ### On the roadmap
 
@@ -41,12 +41,12 @@ The [React quick start](/docs/auth/quick-start/react) steps through a **Vite** +
 | Other frameworks              | Based on demand |
 
 <Admonition type="note" title="Standalone architectures">
-Architectures where frontend and backend are separate deployments (for example, Create-React-App with a separate Node/Express backend) are not yet supported. Neon Auth uses HTTP-only cookies for secure session management, and these cookies cannot be securely shared between frontend and backend applications on different domains. We're actively working on this.
+Architectures where frontend and backend are separate deployments (for example, Create-React-App with a separate Node/Express backend) are not yet supported. Managed BetterAuth uses HTTP-only cookies for secure session management, and these cookies cannot be securely shared between frontend and backend applications on different domains. We're actively working on this.
 </Admonition>
 
 ## Better Auth plugins
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Better Auth plugins are currently supported.
+Managed BetterAuth is built on [Better Auth](https://www.better-auth.com/). Not all Better Auth plugins are currently supported.
 
 ### Supported
 
@@ -66,7 +66,7 @@ See [Set up OAuth](/docs/auth/guides/setup-oauth) for Neon-specific OAuth config
 
 ### Platform (Console, API, webhooks)
 
-These capabilities are documented in Neon Auth guides but are not Better Auth plugins you enable through the SDK.
+These capabilities are documented in Managed BetterAuth guides but are not Better Auth plugins you enable through the SDK.
 
 | Capability                           | Status    | Documentation                                                                |
 | ------------------------------------ | --------- | ---------------------------------------------------------------------------- |
@@ -95,7 +95,7 @@ Branch-aware auth (separate auth state per Neon branch) is supported; see [Branc
 
 ## Migration guides
 
-- [From Neon Auth SDK v0.1](/docs/auth/migrate/from-auth-v0.1)
+- [From Managed BetterAuth SDK v0.1](/docs/auth/migrate/from-auth-v0.1)
 - [From Stack Auth (legacy)](/docs/auth/migrate/from-legacy-auth)
 - [From Supabase](/docs/auth/migrate/from-supabase)
 

@@ -2,7 +2,7 @@
 title: Authentication flow
 subtitle: Understanding the complete sign-in and sign-up process
 summary: >-
-  Neon Auth (Better Auth) authentication flow traces every step from SDK
+  Managed BetterAuth authentication flow traces every step from SDK
   call to HTTP-only session cookie, JWT issuance, and writes to the neon_auth
   schema, covering email sign-in, sign-up, and OAuth providers such as Google
   and GitHub. Use this page to understand what happens under the hood during
@@ -10,10 +10,10 @@ summary: >-
   Security policies via the Data API. All auth state lands directly in your
   Neon database with no sync delay, and each branch holds isolated auth data.
 enableTableOfContents: true
-updatedOn: '2026-06-18T22:47:28.438Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
 This guide explains the authentication flow: how sign-in works from SDK call to session creation.
 
@@ -23,12 +23,12 @@ Anyone can sign up for your application by default. Support for restricted signu
 
 ## Architecture overview
 
-Neon Auth is a managed REST API service built on Better Auth that connects directly to your Neon database. You use the SDK in your application and configure settings in the Console; no servers to manage.
+Managed BetterAuth is a managed REST API service built on Better Auth that connects directly to your Neon database. You use the SDK in your application and configure settings in the Console; no servers to manage.
 
 ```
 Your App (SDK)
     ↓ HTTP requests
-Neon Auth Service (REST API)
+Managed BetterAuth Service (REST API)
     ↓ connects to database
 Your Neon Database (neon_auth schema)
 ```
@@ -155,7 +155,7 @@ The SDK redirects to the OAuth provider. After the user authenticates, the provi
 
 ## Database as source of truth
 
-Neon Auth stores all data in your database's `neon_auth` schema:
+Managed BetterAuth stores all data in your database's `neon_auth` schema:
 
 - Changes are immediate (no sync delays)
 - Query auth data directly with SQL
@@ -170,7 +170,7 @@ ORDER BY "createdAt" DESC;
 
 ## Data API integration
 
-When you enable the [Data API](/docs/data-api/get-started), JWT tokens from Neon Auth are validated automatically. Two helper functions make the user ID available to RLS policies. Use the one that matches your column type:
+When you enable the [Data API](/docs/data-api/get-started), JWT tokens from Managed BetterAuth are validated automatically. Two helper functions make the user ID available to RLS policies. Use the one that matches your column type:
 
 - `auth.user_id()`: returns `sub` as `text`
 - `auth.uid()`: returns `sub` as `uuid` (returns `NULL` if `sub` isn't a valid UUID)

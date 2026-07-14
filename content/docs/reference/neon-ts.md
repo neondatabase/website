@@ -1,6 +1,6 @@
 ---
 title: neon.ts
-subtitle: Infrastructure-as-code config for your Neon project.
+subtitle: Configuration as code for your Neon project.
 summary: >-
   neon.ts declares which Neon services exist on a project and how each branch is
   configured. Use it for branch policy alone, or add preview services like
@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-06-22T21:05:22.619Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -161,19 +161,19 @@ Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closu
 
 `auth` and `dataApi` declare which Neon services exist on every branch. After `neon deploy`, running `neon env pull` writes their URLs to your local `.env` file automatically.
 
-| Field     | Values                               | Default | What it enables                                               |
-| --------- | ------------------------------------ | ------- | ------------------------------------------------------------- |
-| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Neon Auth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
-| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                    |
+| Field     | Values                               | Default | What it enables                                                        |
+| --------- | ------------------------------------ | ------- | ---------------------------------------------------------------------- |
+| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Managed BetterAuth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
+| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                             |
 
 ### `dataApi` config
 
-`dataApi: true` uses Neon Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
+`dataApi: true` uses Managed BetterAuth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
 
 ```text
-Type 'true' is not assignable to type '"`dataApi` with Neon Auth (the default
-`authProvider: 'neon'`) requires Neon Auth, so add `auth: true`. To enable the
-Data API WITHOUT Neon Auth, verify a third-party IdP instead: `dataApi: {
+Type 'true' is not assignable to type '"`dataApi` with Managed BetterAuth (the default
+`authProvider: 'neon'`) requires Managed BetterAuth, so add `auth: true`. To enable the
+Data API WITHOUT Managed BetterAuth, verify a third-party IdP instead: `dataApi: {
 authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`"'
 ```
 
@@ -220,11 +220,11 @@ The key list autocompletes from your config, so selecting a variable from a serv
 
 ## CLI commands
 
-| Command                                     | What it does                                                                                              |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Command                                  | What it does                                                                                              |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | [`neon link`](/docs/cli/link)            | Connect the current directory to a Neon project. Required to use linked branch defaults in other commands |
-| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                   |
-| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                              |
+| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                      |
+| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                                 |
 | [`neon config status`](/docs/cli/config) | Show the current live state of the branch as a `neon.ts`-shaped config                                    |
 | [`neon env pull`](/docs/cli/env)         | Write the branch's Neon-managed variables to `.env.local` (or `.env` if it already exists)                |
 | [`neon checkout`](/docs/cli/checkout)    | Switch to or create a branch; new branches are created from the `neon.ts` policy (TTL, compute, services) |
@@ -252,7 +252,7 @@ Preview services are declared under the `preview` block. All three are optional 
 | Field               | Type                                 | What it enables                                                                                                   |
 | ------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
 | `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                                                        |
-| `preview.buckets`   | Record of name → bucket def          | Neon Storage. S3-compatible object storage, branched with your database                                           |
+| `preview.buckets`   | Record of name → bucket def          | Neon Object Storage. S3-compatible object storage, branched with your database                                    |
 | `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL` |
 
 ### `preview.functions`

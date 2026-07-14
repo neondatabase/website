@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-26T13:04:31.464Z'
+updatedOn: '2026-07-09T23:12:37.869Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -527,7 +527,7 @@ See [Configure consumption limits](/docs/guides/consumption-limits) for details.
 All platform integrations use the Neon API. You can call it directly or use language-specific SDKs:
 
 - **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)**: All operations (projects, branches, databases, monitoring) are API-driven; language-agnostic REST interface. Agent plan participants receive higher rate limits optimized for high-volume operations.
-- **SDKs**: [TypeScript SDK](/docs/reference/typescript-sdk), [Python SDK](/docs/reference/python-sdk), [Go SDK](https://github.com/kislerdm/neon-sdk-go), [Node.js/Deno SDK](https://github.com/paambaati/neon-js-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
+- **SDKs**: [Neon Management SDK](/docs/reference/typescript-sdk), [Python SDK](/docs/reference/python-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
 
 ## Cost management
 
