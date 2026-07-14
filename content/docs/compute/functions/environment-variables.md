@@ -6,7 +6,7 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T19:00:15.411Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -51,7 +51,6 @@ import config from './neon';
 const env = parseEnv(config);
 env.postgres.databaseUrl;          // DATABASE_URL
 env.postgres.databaseUrlUnpooled;  // DATABASE_URL_UNPOOLED
-env.branch?.name;                  // NEON_BRANCH (present when NEON_BRANCH is set)
 env.auth.baseUrl;                  // NEON_AUTH_BASE_URL (only when auth: true)
 env.auth.jwksUrl;                  // NEON_AUTH_JWKS_URL (only when auth: true)
 ```

@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T19:00:15.411Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -204,13 +204,12 @@ const env = parseEnv(config);
 
 env.postgres.databaseUrl;         // DATABASE_URL
 env.postgres.databaseUrlUnpooled; // DATABASE_URL_UNPOOLED
-env.branch?.name;                 // NEON_BRANCH          (present when NEON_BRANCH is set in the environment)
 env.auth.baseUrl;                 // NEON_AUTH_BASE_URL  (env.auth only present when auth: true)
 env.auth.jwksUrl;                 // NEON_AUTH_JWKS_URL
 env.dataApi.url;                  // NEON_DATA_API_URL   (env.dataApi only present when dataApi is enabled)
 ```
 
-`env.auth` only exists when `auth: true`, `env.dataApi` only when `dataApi` is enabled. If you access a namespace your config doesn't declare, TypeScript will catch it. `env.branch` is different: it's not gated by your config at all, just by whether `NEON_BRANCH` happens to be set in `process.env` (it is by default in deployed functions, `neon dev`, and after `neon env pull`), so it's typed as optional rather than tied to a declared service.
+`env.auth` only exists when `auth: true`, `env.dataApi` only when `dataApi` is enabled. If you access a namespace your config doesn't declare, TypeScript will catch it.
 
 Pass an array of keys to validate and return only a subset. Useful when a process needs just one or two variables:
 
