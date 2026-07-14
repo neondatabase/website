@@ -2,7 +2,7 @@
 title: Branching authentication
 subtitle: How authentication works with Neon database branches
 summary: >-
-  Neon Auth stores users, sessions, and configuration in the database's
+  Managed BetterAuth stores users, sessions, and configuration in the database's
   neon_auth schema, so authentication data is automatically cloned when you
   create a branch, giving each branch its own fully isolated auth environment.
   Use this page when you need to safely test OAuth providers, RBAC policy
@@ -10,19 +10,19 @@ summary: >-
   production users. Each branch gets a unique Auth API URL, and sessions and
   tokens do not cross between branches.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
 Authentication is often one of the hardest parts of the application stack to test. In traditional architectures, identity data lives in a separate third-party service, while your business data lives in your database. This separation makes it difficult to create realistic staging environments or test changes to permissions without affecting production users.
 
-One of Neon Auth's unique features is native support for [database branching](/docs/introduction/branching). Because authentication data (users, sessions, and configuration) lives directly in your database's `neon_auth` schema, it is cloned along with your business data when you create a branch.
+One of Managed BetterAuth's unique features is native support for [database branching](/docs/introduction/branching). Because authentication data (users, sessions, and configuration) lives directly in your database's `neon_auth` schema, it is cloned along with your business data when you create a branch.
 
 This gives each branch its own isolated authentication environment, enabling safe testing of permission changes, new OAuth providers, or full application refactors.
 
 <Admonition type="info">
-Neon Auth branching is also supported via API. See the [Neon Auth API reference](https://api-docs.neon.tech/reference/getneonauth) for a full set of REST API endpoints.
+Managed BetterAuth branching is also supported via API. See the [Managed BetterAuth API reference](https://api-docs.neon.tech/reference/getneonauth) for a full set of REST API endpoints.
 </Admonition>
 
 ## How it works
@@ -55,7 +55,7 @@ Production Branch              Preview Branch
 ```
 
 <Admonition type="note">
-Neon Auth works with your branch's **default** database (typically `neondb`) and read-write endpoint only. You cannot use Neon Auth with other databases in the same branch. This aligns with our recommended pattern of one database per branch.
+Managed BetterAuth works with your branch's **default** database (typically `neondb`) and read-write endpoint only. You cannot use Managed BetterAuth with other databases in the same branch. This aligns with our recommended pattern of one database per branch.
 </Admonition>
 
 ## Session management details
@@ -85,7 +85,7 @@ neon branches create --name dev-bob
 - **Alice** works on a "Delete Account" flow. She can delete users and test the full flow without worrying about affecting others.
 - **Bob** works on the "User Dashboard". His user list remains intact, even though Alice is deleting users in her environment.
 
-Because Neon Auth is part of the database, Alice and Bob don't need to set up separate auth providers or mock data. They can work in parallel without conflicts.
+Because Managed BetterAuth is part of the database, Alice and Bob don't need to set up separate auth providers or mock data. They can work in parallel without conflicts.
 
 ### 2. Testing auth configuration safely
 
@@ -142,7 +142,7 @@ For applications with complex Role-Based Access Control (RBAC) or multi-tenant a
 
 When rebuilding your application from scratch or launching a major "v2" update, you often need to validate the new system with real user data before the official switch-over. Traditionally, this required complex data dumps or asking users to re-register on a beta site.
 
-With Neon Auth, you can spin up a complete parallel environment for your new version instantly.
+With Managed BetterAuth, you can spin up a complete parallel environment for your new version instantly.
 
 **The workflow:**
 
@@ -160,7 +160,7 @@ Remember that once branched, the environments are separate. If a user changes th
 
 AI Agents, particularly those designed for coding or QA, require safe, isolated environments to generate code, run migrations, and validate features. Traditionally, giving an agent access to a full authentication stack was complex - you had to mock auth tokens or risk exposing production user pools.
 
-With Neon, an agent can programmatically provision its own "sandbox." Because Neon Auth moves with the data, this branch instantly creates a working Authentication service isolated from production, complete with its own user tables, sessions, and configuration. **The branch provides a full production-like environment without touching real user data.**
+With Neon, an agent can programmatically provision its own "sandbox." Because Managed BetterAuth moves with the data, this branch instantly creates a working Authentication service isolated from production, complete with its own user tables, sessions, and configuration. **The branch provides a full production-like environment without touching real user data.**
 
 **The workflow:**
 

@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-07-09T14:41:19.380Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 ## Top level overview
@@ -82,7 +82,7 @@ For reads, **the compute node always prefers local access.** It first looks in m
 
 If the compute layer is responsible for execution, the storage layer is responsible for correctness, durability, and history. **This layer exists independently of any single compute node and continues to operate even when computes come and go.**
 
-Rather than exposing a traditional filesystem, the Neon storage layer is built around three distinct components, each with a well-defined role:
+Rather than exposing a traditional filesystem, the database storage layer is built around three distinct components, each with a well-defined role:
 
 - Safekeepers: define correctness by replicating WAL
 - The pageserver: turns WAL into queryable data pages

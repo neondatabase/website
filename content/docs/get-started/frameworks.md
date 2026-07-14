@@ -5,22 +5,22 @@ summary: >-
   Framework integration index for Neon serverless Postgres, linking
   per-framework connection guides for Node.js, Next.js, Django, Laravel, Ruby on
   Rails, SvelteKit, Remix, and many others. Several frameworks (Next.js, React,
-  TanStack Router) also support Neon Auth, managed authentication that branches
+  TanStack Router) also support Managed BetterAuth, managed authentication that branches
   with your database. Use this page to find the right framework-specific guide
   rather than a generic Postgres connection walkthrough.
 enableTableOfContents: false
 redirectFrom:
   - /docs/get-started-with-neon/frameworks
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-Several frameworks support [Neon Auth](/docs/auth/overview), managed authentication stored in your database that **branches with your data**. Quick starts are available for [Next.js](/docs/auth/quick-start/nextjs-api-only), [React](/docs/auth/quick-start/react), and [TanStack Router](/docs/auth/quick-start/tanstack-router).
+Several frameworks support [Managed BetterAuth](/docs/auth/overview), managed authentication stored in your database that **branches with your data**. Quick starts are available for [Next.js](/docs/auth/quick-start/nextjs-api-only), [React](/docs/auth/quick-start/react), and [TanStack Router](/docs/auth/quick-start/tanstack-router).
 
 <TechCards>
 
 <a href="/docs/guides/node" title="Node.js" description="Connect a Node.js application to Neon" icon="node-js"></a>
 
-<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon. Neon Auth supported." icon="next-js"></a>
+<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon. Managed BetterAuth supported." icon="next-js"></a>
 
 <a href="/docs/guides/nestjs" title="NestJS" description="Connect a NestJS application to Neon" icon="nest-js"></a>
 
@@ -70,7 +70,7 @@ Several frameworks support [Neon Auth](/docs/auth/overview), managed authenticat
 
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
 
-<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start application to Neon. Neon Auth supported." icon="tanstack"></a>
+<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start application to Neon. Managed BetterAuth supported." icon="tanstack"></a>
 
 <a href="/docs/guides/vue" title="Vue" description="Connect a Vue.js application to Neon" icon="vue"></a>
 

@@ -21,6 +21,8 @@ Models are hosted by Databricks and served through Neon AI Gateway. By using the
 Model availability may vary by region. The catalog expands over time, so check back for new additions.
 </Admonition>
 
+The full catalog is published as the [`neon` provider on models.dev](https://models.dev/providers/neon) — the machine-readable source of truth — and served as JSON at [`neon.com/models.json`](https://neon.com/models.json).
+
 ## Quick picks
 
 Not sure which model to use? Start here.
@@ -56,92 +58,26 @@ Inference is free during the private preview. See [Pricing](/docs/ai-gateway/ove
 
 ## Available models
 
-Endpoints are shown in short form. See [Which endpoint to use](#which-endpoint-to-use) for full paths and when to prefer each one.
+Browse the full catalog below. Switch between the **Text** and **Image** tabs, filter by provider or open weights, sort any column, and click a model for a copy-paste quickstart (AI SDK, Mastra, Python, TypeScript, or cURL). The endpoint each snippet targets is baked into its base URL — `/v1` for chat completions, `/openai/v1` for the Responses API (image generation).
 
-### Anthropic
+<AiGatewayModelIndex/>
 
-| Model ID            | Inputs      | Context | Endpoints                                 | Notes                                    |
-| ------------------- | ----------- | ------- | ----------------------------------------- | ---------------------------------------- |
-| `claude-opus-4-8`   | text, image | —       | `chat/completions` · `anthropic/messages` | Most capable Claude model                |
-| `claude-opus-4-7`   | text, image | 1M      | `chat/completions` · `anthropic/messages` | Extended thinking available              |
-| `claude-opus-4-6`   | text, image | 1M      | `chat/completions` · `anthropic/messages` | Adaptive thinking with max effort level  |
-| `claude-opus-4-5`   | text, image | 200K    | `chat/completions` · `anthropic/messages` | Extended thinking available              |
-| `claude-opus-4-1`   | text, image | 200K    | `chat/completions` · `anthropic/messages` |                                          |
-| `claude-sonnet-4-6` | text, image | —       | `chat/completions` · `anthropic/messages` | Recommended. Instant + extended thinking |
-| `claude-sonnet-4-5` | text, image | —       | `chat/completions` · `anthropic/messages` | Instant + extended thinking              |
-| `claude-sonnet-4`   | text, image | —       | `chat/completions` · `anthropic/messages` | Instant + extended thinking              |
-| `claude-haiku-4-5`  | text, image | —       | `chat/completions` · `anthropic/messages` | Fast and cost-effective                  |
-
-### Google
-
-| Model ID                | Inputs                    | Context | Endpoints                     | Notes                 |
-| ----------------------- | ------------------------- | ------- | ----------------------------- | --------------------- |
-| `gemini-3-5-flash`      | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
-| `gemini-3-1-pro`        | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
-| `gemini-3-1-flash-lite` | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
-| `gemini-3-pro`          | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
-| `gemini-3-flash`        | text, image, video, audio | —       | `chat/completions` · `gemini` |                       |
-| `gemini-2-5-pro`        | text, image, video, audio | 1M      | `chat/completions` · `gemini` | Deep Think Mode       |
-| `gemini-2-5-flash`      | text, image, video, audio | 1M      | `chat/completions` · `gemini` |                       |
-| `gemma-3-12b`           | text, image               | 128K    | `chat/completions`            | Chat completions only |
-
-### Databricks
-
-Open-weight models hosted by Databricks. Text input only. Chat completions only.
-
-| Model ID                  | Context | Endpoints          | Notes                                    |
-| ------------------------- | ------- | ------------------ | ---------------------------------------- |
-| `databricks-gpt-oss-120b` | 128K    | `chat/completions` | Recommended. Adjustable reasoning effort |
-| `databricks-gpt-oss-20b`  | 128K    | `chat/completions` |                                          |
-
-### Meta
-
-| Model ID                                 | Inputs      | Context | Endpoints          | Notes                                                                                                                                                                                                              |
-| ---------------------------------------- | ----------- | ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `databricks-llama-4-maverick`            | text, image | —       | `chat/completions` | Recommended. [Llama 4 Community License](https://www.llama.com/llama4/license) · [Acceptable Use](https://www.llama.com/llama4/use-policy)                                                                         |
-| `databricks-meta-llama-3-3-70b-instruct` | text        | 128K    | `chat/completions` | [Llama 3.3 Community License](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/LICENSE) · [Acceptable Use](https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/USE_POLICY.md) |
-| `databricks-meta-llama-3-1-8b-instruct`  | text        | 128K    | `chat/completions` | [Llama 3.1 Community License](https://www.llama.com/llama3_1/license/) · [Acceptable Use](https://www.llama.com/llama3_1/use-policy/)                                                                              |
-
-### Alibaba
-
-Text input only. Chat completions only.
-
-| Model ID                                 | Context | Endpoints          | Notes                            |
-| ---------------------------------------- | ------- | ------------------ | -------------------------------- |
-| `databricks-qwen3-next-80b-a3b-instruct` | —       | `chat/completions` |                                  |
-| `databricks-qwen35-122b-a10b`            | 256K    | `chat/completions` | Always reasons before responding |
-
-### OpenAI
-
-All OpenAI models have a 400K token context window and accept text and image inputs.
-
-| Model ID             | Endpoints                               | Notes                                                              |
-| -------------------- | --------------------------------------- | ------------------------------------------------------------------ |
-| `gpt-5-4`            | `chat/completions` · `openai/responses` |                                                                    |
-| `gpt-5-4-mini`       | `chat/completions` · `openai/responses` |                                                                    |
-| `gpt-5-4-nano`       | `chat/completions` · `openai/responses` |                                                                    |
-| `gpt-5-3-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `gpt-5-2-codex`      | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `gpt-5-2`            | `chat/completions` · `openai/responses` |                                                                    |
-| `gpt-5-1-codex-max`  | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `gpt-5-1-codex-mini` | `openai/responses`                      | Requires [OpenAI Responses API](/docs/ai-gateway/openai-responses) |
-| `gpt-5-1`            | `chat/completions` · `openai/responses` | Instant + Thinking modes                                           |
-| `gpt-5`              | `chat/completions` · `openai/responses` |                                                                    |
-| `gpt-5-mini`         | `chat/completions` · `openai/responses` |                                                                    |
-| `gpt-5-nano`         | `chat/completions` · `openai/responses` |                                                                    |
+For full request paths and when to prefer each endpoint, see [Which endpoint to use](#which-endpoint-to-use).
 
 ## Which endpoint to use
 
 Most models work with the [Chat completions](/docs/ai-gateway/chat-completions) endpoint. It is the recommended starting point and works with all providers. Use a provider-specific endpoint when required:
 
-| Provider                  | Recommended endpoint                     | Notes                                                                                    |
-| ------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Anthropic                 | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/anthropic/v1/messages` for extended thinking and prompt caching         |
-| OpenAI (most models)      | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/openai/v1/responses` for Responses API features                         |
-| OpenAI (codex variants)   | `/ai-gateway/openai/v1/responses`        | These models require the Responses API and don't work with chat/completions              |
-| Google Gemini             | `/ai-gateway/mlflow/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
-| Google Gemma 3 12B        | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
-| Meta, Databricks, Alibaba | `/ai-gateway/mlflow/v1/chat/completions` | Chat completions only                                                                    |
+All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GATEWAY_BASE_URL`).
+
+| Provider                  | Recommended endpoint   | Notes                                                                                    |
+| ------------------------- | ---------------------- | ---------------------------------------------------------------------------------------- |
+| Anthropic                 | `/v1/chat/completions` | Use `/anthropic/v1/messages` for extended thinking and prompt caching                    |
+| OpenAI (most models)      | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                                    |
+| OpenAI (codex variants)   | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions              |
+| Google Gemini             | `/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
+| Google Gemma 3 12B        | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
+| Meta, Databricks, Alibaba | `/v1/chat/completions` | Chat completions only                                                                    |
 
 ## Provider terms
 

@@ -1,6 +1,6 @@
 This is a reference for the `Team` type in the {sdkName} SDK.
 
-Represents a team in Neon Auth.
+Represents a team in Managed BetterAuth.
 
 On this page:
 

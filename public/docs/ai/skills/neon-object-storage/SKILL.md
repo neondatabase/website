@@ -10,7 +10,7 @@ description: >-
   Supabase Storage. Triggers include "object storage", "bucket", "blob
   storage", "file storage", "store uploads/images/files", "S3-compatible
   storage", "presigned URL", "where do I put files", "Neon Object Storage",
-  "Neon Storage", and "storage that branches with my database".
+  "Neon Object Storage", and "storage that branches with my database".
 ---
 
 # Neon Object Storage
