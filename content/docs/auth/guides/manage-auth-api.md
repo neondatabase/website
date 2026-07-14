@@ -15,7 +15,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T17:09:59.366Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -32,14 +32,6 @@ Managed BetterAuth operates at the **branch level**. Each branch can have its ow
 - A Neon project with at least one branch
 
 All requests use the base URL `https://console.neon.tech/api/v2` and require the `Authorization: Bearer $NEON_API_KEY` header. The `project_id` and `branch_id` values are returned when you [create a project](/docs/manage/projects#create-a-project-with-the-api) or [list branches](/docs/manage/branches#list-branches-with-the-api) via the API.
-
-## Permissions for Auth API keys
-
-<Admonition type="important" title="Project write access is required for writes">
-API keys used to create, update, or delete Neon Auth configuration need project write permissions for the target project. API keys that only have read access can receive `403 Forbidden` responses for write requests that previously succeeded.
-</Admonition>
-
-This requirement applies to Auth configuration writes, including enable or disable Auth, update project info, manage OAuth providers, configure SMTP, manage plugins, and manage webhooks. Reads of secret-bearing fields still succeed, but values such as OAuth client secrets, SMTP passwords, and aggregate plugin secrets are redacted or blanked unless the API key has project write permissions. Non-secret reads, such as fetching the Auth base URL or JWKS URL, do not require write access.
 
 ## Enable Managed BetterAuth
 

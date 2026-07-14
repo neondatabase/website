@@ -12,7 +12,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T17:09:59.366Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -41,7 +41,7 @@ When you subscribe to `send.otp` or `send.magic_link`, Managed BetterAuth skips 
 
 ## Configure webhooks
 
-Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS protocol. The API key you use to configure webhooks needs [project write permissions](/docs/auth/guides/manage-auth-api#permissions-for-auth-api-keys). See the API reference for [Get webhook configuration](https://api-docs.neon.tech/reference/getneonauthwebhookconfig) and [Update webhook configuration](https://api-docs.neon.tech/reference/updateneonauthwebhookconfig).
+Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS protocol. See the API reference for [Get webhook configuration](https://api-docs.neon.tech/reference/getneonauthwebhookconfig) and [Update webhook configuration](https://api-docs.neon.tech/reference/updateneonauthwebhookconfig).
 
 ```bash
 PUT /projects/{project_id}/branches/{branch_id}/auth/webhooks
