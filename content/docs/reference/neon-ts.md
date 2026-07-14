@@ -27,6 +27,8 @@ npm install @neon/config
 
 The package source is on [GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/config).
 
+`neon.ts` itself is declarative: it only describes the policy. `neon config` / `neon deploy` (below) are how the CLI runs it. To call the same `inspect` / `plan` / `apply` logic from your own script or CI job instead of the CLI, see [`@neon/config-runtime`](/docs/reference/config-runtime).
+
 Link your working directory to a Neon project before using `neon.ts` commands:
 
 ```bash
@@ -236,6 +238,7 @@ The key list autocompletes from your config, so selecting a variable from a serv
 | ------------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
 | `--config`          | (auto)         | Path to the `neon.ts` file. When omitted, the CLI walks up from cwd stopping at `.git`               |
 | `--env`             | (none)         | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`         | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch  | Target branch ID or name                                                                             |
 | `--project-id`      | linked project | Project ID                                                                                           |
 | `--update-existing` | `false`        | Auto-confirm overriding existing remote settings                                                     |
