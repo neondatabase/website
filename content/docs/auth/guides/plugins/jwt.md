@@ -11,7 +11,7 @@ summary: >-
   for session management in browser-based apps, and custom JWT claims are not
   supported.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T23:56:19.781Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -54,6 +54,16 @@ export async function getJwtToken() {
   return data.token;
 }
 ```
+
+If your app is served from a different origin than your Managed Better Auth URL (for example a Vite or SPA dev server on `localhost` talking to auth on `*.neon.tech`), configure the auth client to send the session cookie on cross-origin requests. Otherwise `authClient.token()` returns `data.token` as `undefined` and calls to your API fail with 401.
+
+```ts filename="src/auth.ts"
+export const authClient = createAuthClient(NEON_AUTH_URL, {
+  fetchOptions: { credentials: 'include' },
+});
+```
+
+Cross-domain setups have further limitations, notably Safari ITP blocking third-party cookies, with reverse-proxy or shared-parent-domain workarounds. See [Better Auth: Safari, ITP, and Cross-Domain Setups](https://www.better-auth.com/docs/concepts/cookies#safari-itp-and-cross-domain-setups).
 
 ### Using the session header
 
