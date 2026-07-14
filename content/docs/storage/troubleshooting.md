@@ -6,10 +6,12 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-14T12:12:52.695Z'
 ---
 
 <PrivatePreviewEnquire/>
+
+Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
 
 ## Authentication errors
 

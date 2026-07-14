@@ -2,25 +2,27 @@
 title: Neon Functions logs
 subtitle: View, search, and download logs for a deployed function.
 summary: >-
-  View a deployed function's logs in the Neon Console: filter by level
-  (DEBUG, INFO, NOTICE, WARN, ERROR, FATAL), search log bodies, poll for new
-  lines with Go live, and download the current view as a .log file. Logs are
-  retained for 3 days.
+  View a deployed function's logs in the Neon Console: standard output and
+  standard error from your handler, plus a platform-emitted invoke begin /
+  invoke end line around each request. Covers the console-method-to-level
+  mapping and common log entries that look like a problem but aren't.
 enableTableOfContents: true
 ---
 
 <PrivatePreviewEnquire/>
 
-Every deployed function streams its logs to the Neon Console: standard output and standard error from your handler, plus a platform-emitted `invoke begin` / `invoke end` line around each request.
+Every deployed function streams its logs to the Neon Console: standard output and standard error from your handler, plus a platform-emitted `invoke begin` / `invoke end` line around each request:
+
+```text
+2026-07-09T19:31:43.902476000Z    INFO    invoke end
+2026-07-09T19:31:43.831541000Z    INFO    invoke begin
+```
 
 ## View logs
 
-Function logs live on your branch's **Monitoring** page, in a **Logs** tab shared across every service on the branch. To get there:
+Function logs live on the branch's [Monitoring page, in the Logs tab](/docs/introduction/monitor-logs), the same shared viewer used for every service on the branch. To jump straight to one function's logs, open the **Functions** list, open that function's menu, and select **View logs**. Or go to **Monitoring** > **Logs** and click the **Functions** chip to see every function's logs together.
 
-- Open **Monitoring** for your branch, go to the **Logs** tab, and click the **Functions** chip to scope the view to function logs. (**All** shows every service's logs together; **Storage** shows bucket logs.)
-- Or, from the **Functions** list, open a function's menu and select **View logs** to jump straight to that function's logs.
-
-Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`.
+Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`.
 
 `scope_name` distinguishes platform-emitted lines from your own output:
 
@@ -58,33 +60,8 @@ It's a `pg` (node-postgres) deprecation warning, not a connection problem: the i
 
 **Function not starting after a deploy? Read the response body, not the logs.** A missing entry point, an import that throws at load time, or a default export of the wrong shape returns a `function_load_failed` error with your actual error message in the response body of the failed request, not as a log line. Check the response you got back from calling the function, not the Logs tab.
 
-## Filter and search
+## Filter, search, and retention
 
-Use the level chips to show only the levels you care about, and the search box to match a literal, case-insensitive substring in the log body. Use the time-range chips (`5m`, `15m`, `1h`, `6h`, `24h`, `7d`) to change the query window. Logs are currently retained for only 3 days (see [Retention](#retention)), so the `7d` option is selectable but can't return anything older than 3 days back.
-
-Use the service name field to scope the view to one function. It matches a substring by default; click the `~`/`=` toggle next to it to switch to an exact match on the full function name.
-
-If a query matches more than 1,000 lines, the view shows only the most recent 1,000 and displays a banner telling you to narrow the time range or add a search to see the rest.
-
-If no logs match the current filters, the empty state offers a **Widen time range** button that expands the query window in one click.
-
-## Go live
-
-**Go live** polls for new log lines every 5 seconds; it isn't a push-based live tail. Toggle it off to stop polling and inspect a static view.
-
-## Download
-
-**Download** saves the log lines currently loaded in the view, exactly as filtered, to a plain-text `.log` file, newest first:
-
-```text
-2026-07-09T19:31:43.902476000Z    INFO    invoke end
-2026-07-09T19:31:43.831541000Z    INFO    invoke begin
-```
-
-Downloading doesn't re-run the query against the full retention window. It's a snapshot of what's on screen, so narrow your search, levels, and time range first if you want a smaller or more targeted file.
-
-## Retention
-
-Function logs are retained for **3 days**. Once a log line falls outside that window, it's no longer queryable in the Console.
+For details on filtering by level or service name, searching log bodies, live tail, downloading logs, and the 3-day retention window, see [Monitor logs](/docs/introduction/monitor-logs).
 
 <NeedHelp/>

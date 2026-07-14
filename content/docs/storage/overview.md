@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-14T12:12:52.695Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon Object Storage" description="Neon Object Storage is in private preview. Drop your email and we'll reach out with access." />
@@ -32,6 +32,8 @@ Neon Object Storage is S3-compatible object storage built into the Neon backend 
 <a href="/docs/storage/objects" description="Upload, download, list, delete, and generate presigned URLs for objects." icon="data">Objects</a>
 
 <a href="/docs/storage/authentication" description="Understand how Neon credentials map to S3 access keys." icon="lock-landscape">Authentication</a>
+
+<a href="/docs/storage/logs" description="View, search, and download a bucket's logs in the Console." icon="search">Logs</a>
 
 </DetailIconCards>
 
