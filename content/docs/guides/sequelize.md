@@ -11,7 +11,7 @@ summary: >-
   connection string is required for migrations, as pooled connections via
   PgBouncer cause migration errors.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Neon Postgres database in a JavaScript project.
@@ -362,5 +362,12 @@ For more information on the tools used in this guide, refer to the following res
 
 - [Sequelize](https://sequelize.org/)
 - [Express.js](https://expressjs.com/)
+
+## Next steps
+
+- [Set up Managed BetterAuth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

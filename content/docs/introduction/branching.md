@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -38,6 +38,10 @@ Each Neon project is created with a [root branch](/docs/reference/glossary#root-
 
 <Admonition type="tip" title="Using Managed BetterAuth?">
 Users, sessions, and auth configuration in the `neon_auth` schema branch with your data, so preview and test environments get isolated authentication state. See [Managed BetterAuth](/docs/auth/overview) and [Branching authentication](/docs/auth/branching-authentication).
+</Admonition>
+
+<Admonition type="tip" title="Using Neon backend services?">
+Object Storage, Functions, and AI Gateway all branch with your data too: each branch gets its own storage namespace, function deployment, and gateway endpoint, isolated from its parent. See [Neon Object Storage](/docs/storage/overview), [Neon Functions](/docs/compute/functions/overview), and [Neon AI Gateway](/docs/ai-gateway/overview).
 </Admonition>
 
 ## Branching workflows

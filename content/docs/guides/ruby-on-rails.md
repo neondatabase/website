@@ -8,7 +8,7 @@ summary: >-
   page when setting up a new or existing Rails project against Neon. A separate
   sibling page covers Rails schema migrations.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 
@@ -134,6 +134,7 @@ For schema migration with Ruby on Rails, see our guide:
 
 ## Next steps
 
-- [Set up Managed BetterAuth](/docs/auth/overview): Add managed authentication that branches with your database.
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database.
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential.
 
 <NeedHelp/>

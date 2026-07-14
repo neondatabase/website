@@ -8,7 +8,7 @@ summary: >-
   meta-framework, since Neon must be accessed server-side in React apps. Neon
   Auth quick starts for Next.js and TanStack Router are also linked here.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.
@@ -44,5 +44,11 @@ After you connect your database, add managed authentication with [Managed Better
 </TechCards>
 
 For React Router, follow the [React Auth quick start](/docs/auth/quick-start/react).
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

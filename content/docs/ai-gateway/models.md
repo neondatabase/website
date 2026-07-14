@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-13T13:28:24.776Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -22,6 +22,12 @@ Model availability may vary by region. The catalog expands over time, so check b
 </Admonition>
 
 The full catalog is published as the [`neon` provider on models.dev](https://models.dev/providers/neon) — the machine-readable source of truth — and served as JSON at [`neon.com/models.json`](https://neon.com/models.json).
+
+## Model access
+
+Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](#available-models) to see the full list.
+
+Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity. Request access from the **AI Gateway** page in the Neon Console.
 
 ## Quick picks
 
@@ -90,5 +96,7 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 | Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
 | Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                              |
+
+> AI Gateway doesn't currently log or store the prompts, completions, or other request content you send through it, though this isn't a formal guarantee and is subject to change during the private preview. Neon doesn't yet offer a zero-data-retention agreement, an opt-out from provider training on your requests, or regional data residency; all requests are routed through AWS us-east-2 regardless of your project's region.
 
 <NeedHelp/>

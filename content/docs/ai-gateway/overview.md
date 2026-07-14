@@ -6,14 +6,14 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-13T15:15:20.992Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
 
 Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from Anthropic, OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI or Anthropic SDK works without code changes. Just point it at your branch endpoint.
 
-> During the private preview, AI Gateway is available for **new projects** in the **AWS us-east-2** region only, and requires a paid Neon plan. Inference is free during the preview. See [Pricing](#pricing) for what to expect when billing begins.
+> During the private preview, AI Gateway is available in the **AWS us-east-2** region only, and requires a paid Neon plan. Inference is free during the preview. See [Pricing](#pricing) for what to expect when billing begins.
 
 <Admonition type="important">
 Participation in this Private Preview is subject to our Private Preview Terms. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.

@@ -24,9 +24,9 @@ You declare all of it in one `neon.ts` file, and it branches together: fork a br
 
 ## Check your access
 
-Access is a flag on your Neon account. If you received the invite email, your flag should already be set. Preview services work on **new projects** in **AWS us-east-2** only. They can't be enabled on existing projects. All usage during the preview is free, subject to fair usage. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for what to expect once billing begins.
+Access is a flag on your Neon account. If you received the invite email, your flag should already be set. Preview services work in **AWS us-east-2** only. All usage during the preview is free, subject to fair usage. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for what to expect once billing begins.
 
-To confirm your access, go to [console.neon.tech](https://console.neon.tech), create a new project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Storage**, **Credentials**, **AI Gateway**, and **Functions**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
+To confirm your access, go to [console.neon.tech](https://console.neon.tech), open a project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Storage**, **Credentials**, **AI Gateway**, and **Functions**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
 
 ![Neon app backend navigation](/docs/get-started/neon_app_backend.png)
 
@@ -171,7 +171,7 @@ For inspiration, see [Build on Neon](https://build-on-neon.vercel.app/): an inde
 
 ## Known limitations
 
-- New projects in AWS us-east-2 only. Existing projects don't work.
+- AWS us-east-2 only.
 - Functions: memory is fixed at 2048 MiB.
 - Logs from deployed functions can't be retrieved yet. Use `neon dev` during development, and have deployed functions write diagnostics to Postgres. Error trackers work today: `@sentry/node` bundles and runs fine; set `SENTRY_DSN` as a deploy-time env var.
 

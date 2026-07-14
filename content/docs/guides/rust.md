@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
@@ -674,5 +674,10 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 - [rust-postgres crate documentation](https://docs.rs/postgres/latest/postgres/)
 - [tokio-postgres crate documentation](https://docs.rs/tokio-postgres/latest/tokio_postgres/)
 - [Tokio async runtime](https://tokio.rs/)
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

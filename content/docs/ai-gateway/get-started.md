@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -15,7 +15,7 @@ updatedOn: '2026-06-15T19:57:08.490Z'
 
 ## Get access
 
-You need a new project in the AWS us-east-2 region, and foundation model access requires a paid Neon plan. When your account is enabled, you'll receive an email and a Discord invite.
+You need a project in the AWS us-east-2 region, and foundation model access requires a paid Neon plan. When your account is enabled, you'll receive an email and a Discord invite.
 
 ## Create a credential
 

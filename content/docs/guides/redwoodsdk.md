@@ -10,7 +10,7 @@ summary: >-
   TypeScript to query Postgres on Neon. Use this page when building a RedwoodSDK
   app on Cloudflare that needs a serverless Postgres backend.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"
@@ -135,5 +135,12 @@ PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 
 
 - [RedwoodSDK Documentation](https://docs.rwsdk.com/)
 - [Connect to a PostgreSQL database with Cloudflare Workers](https://developers.cloudflare.com/workers/tutorials/postgres/)
+
+## Next steps
+
+- [Set up Managed BetterAuth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>
