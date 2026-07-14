@@ -8,7 +8,7 @@ summary: >-
   UI. Admins control deletions, billing changes, 2FA enforcement, and project
   deletion; all members can create projects and view billing.
 enableTableOfContents: true
-updatedOn: '2026-06-12T01:28:52.381Z'
+updatedOn: '2026-07-14T14:03:39.757Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
@@ -59,12 +59,12 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Require 2FA for organization members
 
-Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**.
+Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**. A passkey satisfies this requirement too, so members can enroll in either 2FA or a passkey to comply.
 
-- You can only enable this if your own account already has 2FA enabled.
-- When required 2FA is on, members who are not enrolled are prompted to set up 2FA when they access the organization.
+- You can only enable this if your own account already has 2FA or a passkey set up.
+- When required 2FA is on, members who don't have 2FA or a passkey enrolled are prompted to set one up when they access the organization.
 
-See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps.
+See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps, or [Passkeys](/docs/manage/accounts#passkeys) for passkey setup steps.
 
 ## Invite Collaborators
 
