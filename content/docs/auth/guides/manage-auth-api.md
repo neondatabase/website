@@ -1,8 +1,8 @@
 ---
-title: Manage Neon Auth via the API
-subtitle: 'Enable, configure, and disable Neon Auth using the Neon API'
+title: Manage Managed BetterAuth via the API
+subtitle: 'Enable, configure, and disable Managed BetterAuth using the Neon API'
 summary: >-
-  Neon Auth REST API operations for enabling (POST), retrieving (GET),
+  Managed BetterAuth REST API operations for enabling (POST), retrieving (GET),
   updating (PATCH), and disabling (DELETE) auth on a per-branch basis, with
   curl examples and a full response field reference. Use this page when
   automating auth provisioning or teardown: the enable response is the only
@@ -15,15 +15,15 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T17:09:59.366Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
-You can manage Neon Auth programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started). You can also enable and configure Neon Auth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_auth`, `configure_neon_auth`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor).
+You can manage Managed BetterAuth programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started). You can also enable and configure Managed BetterAuth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_auth`, `configure_neon_auth`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor).
 
 <Admonition type="note">
-Neon Auth operates at the **branch level**. Each branch can have its own independent auth configuration, which means preview and development branches can have separate auth state from your production branch.
+Managed BetterAuth operates at the **branch level**. Each branch can have its own independent auth configuration, which means preview and development branches can have separate auth state from your production branch.
 </Admonition>
 
 ## Prerequisites
@@ -33,9 +33,9 @@ Neon Auth operates at the **branch level**. Each branch can have its own indepen
 
 All requests use the base URL `https://console.neon.tech/api/v2` and require the `Authorization: Bearer $NEON_API_KEY` header. The `project_id` and `branch_id` values are returned when you [create a project](/docs/manage/projects#create-a-project-with-the-api) or [list branches](/docs/manage/branches#list-branches-with-the-api) via the API.
 
-## Enable Neon Auth
+## Enable Managed BetterAuth
 
-Send a `POST` request to enable Neon Auth on a branch:
+Send a `POST` request to enable Managed BetterAuth on a branch:
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
@@ -73,18 +73,18 @@ The response includes:
 | `base_url`                 | Base URL of the auth service, used for SDK configuration and the interactive API reference (`/reference`) |
 
 <Admonition type="important">
-The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields.
+The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields. For client initialization examples that combine Neon Auth and the Data API from a single Neon URL, see [`createClient()` in the JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
 </Admonition>
 
-If Neon Auth is already enabled on the branch, this call returns an error.
+If Managed BetterAuth is already enabled on the branch, this call returns an error.
 
 <Admonition type="tip" title="Using a non-default database">
-By default, Neon Auth uses the branch's default database. To target a different database, add `database_name` to the request body: `{"auth_provider": "better_auth", "database_name": "my_other_db"}`
+By default, Managed BetterAuth uses the branch's default database. To target a different database, add `database_name` to the request body: `{"auth_provider": "better_auth", "database_name": "my_other_db"}`
 </Admonition>
 
 ## Get Auth configuration
 
-Retrieve the current Neon Auth configuration for a branch:
+Retrieve the current Managed BetterAuth configuration for a branch:
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
@@ -109,7 +109,7 @@ Response (200 OK):
 
 ## Update auth configuration
 
-Update auth settings for a branch. Currently supports changing the application name shown in user-facing auth messages. Applies to Neon Auth (Better Auth) integrations only. Defaults to the Neon project name.
+Update auth settings for a branch. Currently supports changing the application name shown in user-facing auth messages. Applies to Managed BetterAuth integrations only. Defaults to the Neon project name.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/config' \
@@ -132,9 +132,9 @@ Response (200 OK):
 
 Each branch manages its own application name independently. You can also update this from the **Auth** page > **Configuration** tab > **Project Info** panel in the Neon Console.
 
-## Disable Neon Auth
+## Disable Managed BetterAuth
 
-Send a `DELETE` request to disable Neon Auth on a branch:
+Send a `DELETE` request to disable Managed BetterAuth on a branch:
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
@@ -176,5 +176,5 @@ The Neon API also provides endpoints for managing auth configuration at the bran
 For full request/response details on these endpoints, see the [interactive API reference](https://api-docs.neon.tech/reference/getting-started).
 
 <Admonition type="tip" title="TypeScript SDK">
-You can also manage Neon Auth using the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
+You can also manage Managed BetterAuth using the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
 </Admonition>

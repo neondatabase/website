@@ -16,7 +16,7 @@ This command:
 - Configures the Neon MCP server for AI assistants
 - Sets up your local environment for Neon development
 
-See the [full CLI init reference](https://neon.com/docs/reference/cli-init.md) for all options.
+See the [full CLI init reference](https://neon.com/docs/cli/init.md) for all options.
 
 ## VSCode Extension
 
@@ -30,13 +30,13 @@ The Neon VSCode extension provides:
 **Install from VSCode:**
 
 1. Open Extensions (Cmd/Ctrl+Shift+X)
-2. Search "Neon"
-3. Install "Neon" by Neon
+2. Search "Neon - Serverless Postgres"
+3. Install "Neon - Serverless Postgres" by Databricks
 
 **Or via command line:**
 
 ```bash
-code --install-extension neon.neon-vscode
+code --install-extension databricks.neon-local-connect
 ```
 
 See the [full VSCode extension docs](https://neon.com/docs/local/vscode-extension.md) for all features.
@@ -103,7 +103,7 @@ See the [full MCP server docs](https://neon.com/docs/ai/neon-mcp-server.md) for 
 
 | Topic              | URL                                             |
 | ------------------ | ----------------------------------------------- |
-| CLI Init Command   | https://neon.com/docs/reference/cli-init.md     |
+| CLI Init Command   | https://neon.com/docs/cli/init.md               |
 | VSCode Extension   | https://neon.com/docs/local/vscode-extension.md |
 | MCP Server         | https://neon.com/docs/ai/neon-mcp-server.md     |
-| Neon CLI Reference | https://neon.com/docs/reference/neon-cli.md     |
+| Neon CLI Reference | https://neon.com/docs/cli.md                    |

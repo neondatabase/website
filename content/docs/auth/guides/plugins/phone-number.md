@@ -2,8 +2,8 @@
 title: Phone Number
 subtitle: Sign in existing users with phone OTP codes delivered via your SMS provider
 summary: >-
-  The Phone Number plugin for Neon Auth adds SMS OTP sign-in for existing
-  users: when a user submits their E.164 phone number, Neon Auth fires a
+  The Phone Number plugin for Managed BetterAuth adds SMS OTP sign-in for existing
+  users: when a user submits their E.164 phone number, Managed BetterAuth fires a
   `send.otp` webhook carrying a numeric code that your handler forwards to your
   SMS provider (Twilio, Vonage, MessageBird, etc.). Use this page when you need
   phone OTP sign-in for users who already have a verified phone number linked to
@@ -11,23 +11,23 @@ summary: >-
   configurable, requests are rate-limited per IP, and an OTP is invalidated
   after too many incorrect attempts.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/) and supports the [Phone Number](https://www.better-auth.com/docs/plugins/phone-number) plugin through the Neon SDK.
+Managed BetterAuth is built on [Better Auth](https://www.better-auth.com/) and supports the [Phone Number](https://www.better-auth.com/docs/plugins/phone-number) plugin through the Neon SDK.
 
 Phone Number lets an existing user sign in with a one-time password (OTP) delivered to their phone. The flow works like this:
 
 1. The user enters their phone number in E.164 format (for example, `+15551234567`).
-2. Neon Auth generates a 6-digit OTP and fires the `send.otp` webhook with `delivery_preference: "sms"`. Your webhook handler delivers the code via your SMS provider.
-3. The user enters the code. Neon Auth verifies it, creates a session, and signs them in.
+2. Managed BetterAuth generates a 6-digit OTP and fires the `send.otp` webhook with `delivery_preference: "sms"`. Your webhook handler delivers the code via your SMS provider.
+3. The user enters the code. Managed BetterAuth verifies it, creates a session, and signs them in.
 
 <Admonition type="important">
 The Phone Number plugin is **sign-in only**. Users must already exist in your project with a phone number linked to their account. There is no phone-first sign-up path.
 
-Neon Auth does **not** deliver SMS for you. The plugin requires a `send.otp` webhook that forwards codes to your SMS provider (Twilio, MessageBird, Vonage, etc.).
+Managed BetterAuth does **not** deliver SMS for you. The plugin requires a `send.otp` webhook that forwards codes to your SMS provider (Twilio, MessageBird, Vonage, etc.).
 </Admonition>
 
 ## Prerequisites
@@ -87,7 +87,7 @@ Both `PATCH` and `GET` return the configuration:
 
 ## Deliver OTPs via your SMS provider
 
-Neon Auth fires the `send.otp` webhook with `delivery_preference: "sms"` when an OTP needs delivery. Your handler must deliver the code through your SMS provider (Twilio, MessageBird, Vonage, etc.). Without a `send.otp` webhook, `authClient.phoneNumber.sendOtp()` fails.
+Managed BetterAuth fires the `send.otp` webhook with `delivery_preference: "sms"` when an OTP needs delivery. Your handler must deliver the code through your SMS provider (Twilio, MessageBird, Vonage, etc.). Without a `send.otp` webhook, `authClient.phoneNumber.sendOtp()` fails.
 
 Configure a webhook subscribed to `send.otp` (see the [Webhooks guide](/docs/auth/guides/webhooks) for full setup and signature verification), then branch on `delivery_preference` in your handler:
 
@@ -179,7 +179,7 @@ For a complete working form with resend, error handling, and attempt-budget awar
 
 ## Use Phone Number alongside UI components
 
-Unlike Email OTP, `NeonAuthUIProvider` does not expose a `phoneNumber` prop, and the pre-built `AuthView` does not render a phone sign-in UI. If you're using Neon Auth UI components, render your own phone sign-in form next to `AuthView` on the sign-in route:
+Unlike Email OTP, `NeonAuthUIProvider` does not expose a `phoneNumber` prop, and the pre-built `AuthView` does not render a phone sign-in UI. If you're using Managed BetterAuth UI components, render your own phone sign-in form next to `AuthView` on the sign-in route:
 
 ```tsx shouldWrap filename="app/auth/[path]/page.tsx"
 import { AuthView } from '@neondatabase/auth-ui';
@@ -202,7 +202,7 @@ export default async function AuthPage({ params }: { params: Promise<{ path: str
 `PhoneSignInSection` is a component you write that wraps your phone sign-in form. See the [nextjs-phone-login example](https://github.com/neondatabase/neon-js/tree/main/examples/nextjs-phone-login) for a complete implementation.
 
 <Admonition type="info">
-If you haven't set up Neon Auth UI components yet, see the [UI components reference](/docs/auth/reference/ui-components) for setup, or the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start for building custom forms instead.
+If you haven't set up Managed BetterAuth UI components yet, see the [UI components reference](/docs/auth/reference/ui-components) for setup, or the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start for building custom forms instead.
 </Admonition>
 
 ## Webhook events
@@ -220,7 +220,7 @@ See the [Webhooks guide](/docs/auth/guides/webhooks) for payload structure, sign
 - **Bring your own SMS provider.** No built-in SMS delivery. Requires a `send.otp` webhook forwarding to your SMS provider.
 - **E.164 format required.** Phone numbers must match `^\+[1-9]\d{1,14}$` (for example, `+15551234567`). Numbers with spaces, dashes, or parentheses are rejected.
 - **OTP length is fixed at 6 digits.** Not configurable.
-- **Rate limit.** Calls to `/phone-number/*` endpoints are limited to 10 requests per 60 seconds per IP, in addition to Neon Auth's global rate limits.
+- **Rate limit.** Calls to `/phone-number/*` endpoints are limited to 10 requests per 60 seconds per IP, in addition to Managed BetterAuth's global rate limits.
 - **Attempt lockout.** After 3 incorrect codes, the OTP is invalidated. Request a new one to try again.
 
 <NeedHelp/>

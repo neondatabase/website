@@ -9,10 +9,10 @@ summary: >-
   Use this page to add autocomplete, query-result type inference, and
   compile-time error checking to `@neondatabase/neon-js` or
   `@neondatabase/postgrest-js` clients. The tool accepts `--db-url`,
-  `--output`, and `--schemas` flags and can run as a package.json script to
+  `--output`, and `--schema` flags and can run as a package.json script to
   keep generated types in sync after schema changes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-13T19:46:02.920Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -43,11 +43,13 @@ npx @neondatabase/neon-js gen-types \
 
 ### Options
 
-| Flag        | Alias | Description                                    | Default               |
-| :---------- | :---- | :--------------------------------------------- | :-------------------- |
-| `--db-url`  | `-c`  | The PostgreSQL connection string (Required).   | -                     |
-| `--output`  | `-o`  | The path where the file will be saved.         | `./types/database.ts` |
-| `--schemas` | `-s`  | Comma-separated list of schemas to introspect. | `public`              |
+| Flag                    | Alias | Description                                                                                    | Default             |
+| :---------------------- | :---- | :--------------------------------------------------------------------------------------------- | :------------------ |
+| `--db-url`              | -     | The PostgreSQL connection string (Required).                                                   | -                   |
+| `--output`              | `-o`  | The path where the file will be saved.                                                         | `database.types.ts` |
+| `--schema`              | `-s`  | Schema to introspect. Repeatable to include multiple schemas, for example `-s public -s auth`. | `public`            |
+| `--postgrest-v9-compat` | -     | Disables one-to-one relationship detection.                                                    | `false`             |
+| `--query-timeout`       | -     | The timeout for the schema introspection query, for example `30s` or `1m`.                     | `15s`               |
 
 ## Use generated types
 
@@ -59,10 +61,7 @@ import type { Database } from '@/types/database';
 import { createClient } from '@neondatabase/neon-js';
 
 // Pass the generic to the client
-const client = createClient<Database>({
-  auth: { url: process.env.NEON_AUTH_URL },
-  dataApi: { url: process.env.NEON_DATA_API_URL },
-});
+const client = createClient<Database>(process.env.NEON_DATABASE_URL!);
 
 // 3. Enjoy full type safety
 const { data, error } = await client
@@ -70,6 +69,8 @@ const { data, error } = await client
   .select('id, content') // Autocomplete: only columns in 'posts'
   .eq('is_published', true); // Type check: ensures 'is_published' expects a boolean
 ```
+
+Use the HTTPS Neon database URL without credentials or query parameters for `NEON_DATABASE_URL`, for example `https://ep-example.c-2.us-east-1.aws.neon.tech/neondb`. You can find the matching Data API URL on the **Data API** page in the Neon Console or with `neon data-api get`; to get the single database URL, remove the `.apirest` hostname label and trailing `/rest/v1` path. If you start from a Neon Auth URL instead, remove the `.neonauth` hostname label and trailing `/auth` path. The cell label (if present), region, and database path stay the same. Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
 
 ### Response types
 
@@ -118,7 +119,7 @@ You can now run `npm run generate-types` whenever you make schema changes (like 
 
 ## Using with the Neon PostgREST Client
 
-If you are using `@neondatabase/postgrest-js` (without Neon Auth), the types work exactly the same way:
+If you are using `@neondatabase/postgrest-js` (without Managed BetterAuth), the types work exactly the same way:
 
 ```typescript
 import type { Database } from '@/types/database';

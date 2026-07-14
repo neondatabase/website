@@ -1,8 +1,8 @@
 ---
-title: Neon Storage
+title: Neon Object Storage
 subtitle: S3-compatible object storage that branches with your database
 summary: >-
-  Neon Storage is S3-compatible object storage built into the Neon backend.
+  Neon Object Storage is S3-compatible object storage built into the Neon backend.
   Every branch gets its own isolated storage namespace. Use any AWS S3 SDK
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
@@ -10,9 +10,9 @@ enableTableOfContents: true
 updatedOn: '2026-07-13T15:03:24.073Z'
 ---
 
-Neon Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
+Neon Object Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
 
-> During the private preview, Storage is available for **new projects** in the **AWS us-east-2** region only.
+> During the private preview, object storage is available for **new projects** in the **AWS us-east-2** region only.
 
 - **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data.
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, the [Files SDK](https://files-sdk.dev), and any other S3-compatible tool works out of the box.
@@ -35,7 +35,7 @@ Neon Storage is S3-compatible object storage built into the Neon backend for app
 
 ## Starter templates
 
-Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). The `ai-sdk` template uses Neon Storage: an image-generation agent that stores uploaded photos and AI-generated images in branch-scoped buckets, served via presigned URLs from a Neon Function:
+Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). The `ai-sdk` template uses Neon Object Storage: an image-generation agent that stores uploaded photos and AI-generated images in branch-scoped buckets, served via presigned URLs from a Neon Function:
 
 ```bash
 neon bootstrap --template ai-sdk

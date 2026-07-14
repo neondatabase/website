@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-07-06T16:27:57.937Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres product that runs natively in the Databricks Data Intelligence Platform. This section explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) and how to determine whether Neon or Lakebase is a better fit for your workload.
@@ -85,7 +85,7 @@ Neon and Lakebase share the same Postgres engine and serverless storage architec
 | **MCP server**                                       | Yes ([Neon MCP Server](/docs/ai/neon-mcp-server))                                  | Yes, Databricks managed MCP ([MCP on Databricks](https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp))                        |
 | **GitHub integration**                               | Yes ([GitHub integration](/docs/guides/neon-github-integration))                   | Via GitHub Actions ([GitHub Actions](https://docs.databricks.com/aws/en/dev-tools/ci-cd/github))                                           |
 | **Private networking (Private Link)**                | Yes ([Private Networking](/docs/guides/neon-private-networking))                   | Yes ([Data protection](https://docs.databricks.com/aws/en/oltp/projects/private-link))                                                     |
-| **Managed user authentication**                      | Yes ([Neon Auth](/docs/auth/overview))                                             | Not yet; database access uses Databricks identity and Postgres roles ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect)) |
+| **Managed user authentication**                      | Yes ([Managed BetterAuth](/docs/auth/overview))                                    | Not yet; database access uses Databricks identity and Postgres roles ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect)) |
 | **Metrics and logs export (Datadog, OpenTelemetry)** | Yes ([Datadog](/docs/guides/datadog), [OpenTelemetry](/docs/guides/opentelemetry)) | Via the Databricks platform                                                                                                                |
 | **HIPAA compliance**                                 | Yes ([HIPAA](/docs/security/hipaa))                                                | Yes, via Databricks ([HIPAA](https://docs.databricks.com/aws/en/security/privacy/hipaa))                                                   |
 | **SOC 2**                                            | Yes ([Compliance](/docs/security/compliance))                                      | Yes, via Databricks ([SOC](https://www.databricks.com/trust/compliance/soc))                                                               |

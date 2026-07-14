@@ -1,21 +1,21 @@
 ---
 title: Auth production checklist
-subtitle: Required configuration before launching with Neon Auth
+subtitle: Required configuration before launching with Managed BetterAuth
 summary: >-
-  Required steps before going live with Neon Auth: trusted domains, custom SMTP
+  Required steps before going live with Managed BetterAuth: trusted domains, custom SMTP
   provider, application name, OAuth credentials, email verification, and
-  disabling localhost access. Use this page when Neon Auth is already configured
+  disabling localhost access. Use this page when Managed BetterAuth is already configured
   for development and you need to confirm every production-blocking setting
   before launch. The default shared SMTP provider (`auth@mail.myneon.app`) is
   rate-limited and does not support verification links. A custom SMTP provider
   is required for both.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T17:09:59.366Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed BetterAuth" />
 
-Complete these steps before taking your application to production with Neon Auth.
+Complete these steps before taking your application to production with Managed BetterAuth.
 
 <CheckList title="Auth production checklist">
 
@@ -28,7 +28,7 @@ Complete these steps before taking your application to production with Neon Auth
 </CheckItem>
 
 <CheckItem title="3. Customize application name" href="/docs/auth/production-checklist#application-name">
-  Set the name your users see in user-facing auth messages. Applies to Neon Auth (Better Auth) integrations. Defaults to the Neon project name.
+  Set the name your users see in user-facing auth messages. Applies to Managed BetterAuth integrations. Defaults to the Neon project name.
 </CheckItem>
 
 <CheckItem title="4. Configure OAuth credentials (if using OAuth)" href="/docs/auth/guides/setup-oauth#production-setup">
@@ -47,7 +47,7 @@ Complete these steps before taking your application to production with Neon Auth
 
 ## Email provider (#email-provider)
 
-Neon Auth uses a shared SMTP provider (`auth@mail.myneon.app`) by default for development and testing. For production, configure your own email provider for better deliverability and higher sending limits.
+Managed BetterAuth uses a shared SMTP provider (`auth@mail.myneon.app`) by default for development and testing. For production, configure your own email provider for better deliverability and higher sending limits.
 
 A custom SMTP provider uses your sender address but still sends Neon's default email templates. For full control over email branding, content, and HTML templates, use webhooks to intercept email events and send through your own email service. See [Customize emails](/docs/auth/guides/customize-emails).
 
@@ -77,7 +77,7 @@ The shared email provider (`auth@mail.myneon.app`) is suitable for development a
 
 ## Application name (#application-name)
 
-Neon Auth uses the application name in user-facing auth messages, such as verification emails and password resets. By default, this is set to the Neon project name. This setting is available for Neon Auth (Better Auth) integrations only.
+Managed BetterAuth uses the application name in user-facing auth messages, such as verification emails and password resets. By default, this is set to the Neon project name. This setting is available for Managed BetterAuth integrations only.
 
 To set a custom application name:
 

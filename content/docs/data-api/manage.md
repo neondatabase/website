@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -26,7 +26,7 @@ This page covers managing the Data API after it is enabled. To enable via the Co
 
 ## Manage authentication providers
 
-You can configure which authentication provider validates JWT tokens for your Data API requests. Only one provider can be configured at a time. If you enabled the Data API with [Neon Auth](/docs/auth/overview), it is already set as the default provider.
+You can configure which authentication provider validates JWT tokens for your Data API requests. Only one provider can be configured at a time. If you enabled the Data API with [Managed BetterAuth](/docs/auth/overview), it is already set as the default provider.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -84,7 +84,7 @@ Removing an authentication provider invalidates all tokens issued by that provid
 </Admonition>
 
 <Admonition type="tip" title="Auth API reference">
-If you're using Neon Auth, there's an interactive API reference for authentication endpoints at your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). See [Testing with Neon Auth](/docs/data-api/get-started#testing-with-neon-auth) for details.
+If you're using Managed BetterAuth, there's an interactive API reference for authentication endpoints at your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). See [Testing with Managed BetterAuth](/docs/data-api/get-started#testing-with-neon-auth) for details.
 </Admonition>
 
 ## Advanced settings
@@ -100,6 +100,12 @@ Defines which PostgreSQL schemas are exposed as REST API endpoints. By default, 
 <Admonition type="note">
 **Permissions apply:** Adding a schema here exposes the *endpoints*, but the database role used by the API must still have `USAGE` privileges on the schema and `SELECT` privileges on the tables. Refer to [Access control for Data API](/docs/data-api/access-control) for more details.
 </Admonition>
+
+### Extra search path schemas
+
+**Default:** `Empty`
+
+Adds extra PostgreSQL schemas to the search path used for every Data API request. These schemas aren't exposed as REST API endpoints themselves; they're only available for database objects inside your [exposed schemas](#exposed-schemas) to reference, which is useful for schemas that hold PostgreSQL extensions. Corresponds to the `db_extra_search_path` field in the API settings object.
 
 ### Anonymous role
 
@@ -118,6 +124,12 @@ Enforces a hard limit on the number of rows returned in a single API response. T
 **Default:** `.role`
 
 Specifies the path within the JWT token that contains the database role name. The Data API uses this role to execute queries on behalf of the authenticated user. For example, `.role` extracts the value of the top-level `role` claim from the token. Corresponds to the `jwt_role_claim_key` field in the API settings object. This field is required when updating settings via the API.
+
+### JWT cache max lifetime
+
+**Default:** `Empty`
+
+Sets the maximum lifetime, in seconds, that a validated JWT is kept in the Data API's cache. Caching validated tokens reduces the number of times the Data API needs to fetch and verify keys from your authentication provider's JWKS URL. Corresponds to the `jwt_cache_max_lifetime` field in the API settings object.
 
 ### CORS allowed origins
 
@@ -185,9 +197,9 @@ Response (201 Created):
 
 The empty body enables the Data API without an authentication provider. To configure authentication at enable time, change the request body:
 
-- **Neon Auth:** `-d '{"auth_provider": "neon_auth", "add_default_grants": true}'`
+- **Managed BetterAuth:** `-d '{"auth_provider": "neon_auth", "add_default_grants": true}'`
 
-  If Neon Auth is not already enabled on the branch, this automatically provisions it. The optional `add_default_grants` option grants authenticated users permissions on tables in the `public` schema, matching the default Console behavior. See [Neon Auth](/docs/auth/overview) to learn more.
+  If Managed BetterAuth is not already enabled on the branch, this automatically provisions it. The optional `add_default_grants` option grants authenticated users permissions on tables in the `public` schema, matching the default Console behavior. See [Managed BetterAuth](/docs/auth/overview) to learn more.
 
 - **External provider:** `-d '{"auth_provider": "external", "jwks_url": "https://your-provider/.well-known/jwks.json"}'`
 
