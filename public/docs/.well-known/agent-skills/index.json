@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Guides and best practices for working with Neon Serverless Postgres. Covers setup, connection methods, branching, autoscaling, scale-to-zero, read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server, REST API, TypeScript SDK, and Python SDK. Use when users ask about \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neon\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", or \"Neon connection pooling\".",
       "url": "/docs/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:5de1ac137bf7ca595d39575ba6f8822e2fb7a3a25405eec1125375f615359dbe"
+      "digest": "sha256:953d63eb0d75b1933abd6c8519e162c38c7e4080e38f0c43713b9be68d86ac61"
     },
     {
       "name": "claimable-postgres",
@@ -34,7 +34,7 @@
       "type": "skill-md",
       "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use whenever \"Neon\" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: \"object storage\" or \"S3-compatible storage\", \"serverless functions\", \"background jobs\", or \"run code near my database\", \"AI gateway\", \"LLM proxy\", \"model routing\", or \"call an LLM\" → AI Gateway; \"database\", \"Postgres\", or \"authentication\" → Postgres and Auth.",
       "url": "/docs/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:22ebfb6c356f4b909aa7f24653cef06a489104c75f65baa79ff3d0578d594f59"
+      "digest": "sha256:7fa994aa607e9da89f226ad32366f446d2f0efc02d603275f6a2d93f86c6cd79"
     },
     {
       "name": "neon-postgres-agent-platforms",
@@ -46,9 +46,9 @@
     {
       "name": "neon-object-storage",
       "type": "skill-md",
-      "description": "S3-compatible object storage that branches with your Neon project, so files and the database stay in sync across every branch. Use when a user wants object storage, a bucket, blob/file storage, or somewhere to put uploads, images, documents, avatars, or user-generated files for their app or agent — especially when they already use (or are setting up) Neon Postgres and don't want to add a separate storage provider like AWS S3, Cloudflare R2, or Supabase Storage. Triggers include \"object storage\", \"bucket\", \"blob storage\", \"file storage\", \"store uploads/images/files\", \"S3-compatible storage\", \"presigned URL\", \"where do I put files\", \"Neon Object Storage\", \"Neon Storage\", and \"storage that branches with my database\".",
+      "description": "S3-compatible object storage that branches with your Neon project, so files and the database stay in sync across every branch. Use when a user wants object storage, a bucket, blob/file storage, or somewhere to put uploads, images, documents, avatars, or user-generated files for their app or agent — especially when they already use (or are setting up) Neon Postgres and don't want to add a separate storage provider like AWS S3, Cloudflare R2, or Supabase Storage. Triggers include \"object storage\", \"bucket\", \"blob storage\", \"file storage\", \"store uploads/images/files\", \"S3-compatible storage\", \"presigned URL\", \"where do I put files\", \"Neon Object Storage\", \"Neon Object Storage\", and \"storage that branches with my database\".",
       "url": "/docs/.well-known/agent-skills/neon-object-storage/SKILL.md",
-      "digest": "sha256:8375fb6a2b7a9716f1f0da81d25b10aaae27eb170c7fbd063faa4232c6e60b00"
+      "digest": "sha256:08cea2a6876b0292e63e3a9dccc2c1e69b1895487b90667a9ce358e8a52ffda5"
     },
     {
       "name": "neon-ai-gateway",
