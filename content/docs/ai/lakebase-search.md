@@ -14,7 +14,7 @@ updatedOn: '2026-06-26T12:58:36.951Z'
 Lakebase Search is developed by Databricks. These extensions are part of the shared technology foundation between Neon and the Databricks Lakebase platform.
 </Callout>
 
-Lakebase Search adds vector, keyword, and hybrid search to your Neon project. Enable it once, then install the `lakebase_vector` and `lakebase_text` Postgres extensions to start building search features.
+Lakebase Search adds vector, keyword, and hybrid search to your Neon project. Install the `lakebase_vector` and `lakebase_text` Postgres extensions to start building search features.
 
 ## Vector, keyword, and hybrid search
 
