@@ -10,7 +10,7 @@ summary: >-
   rate-limited and does not support verification links. A custom SMTP provider
   is required for both.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T17:09:59.366Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />

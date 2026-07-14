@@ -10,7 +10,7 @@ summary: >-
   for a working end-to-end example of Data API query patterns, RLS setup, and
   ON DELETE CASCADE.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-13T19:46:02.920Z'
 ---
 
 This tutorial uses a note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with authentication and Row-Level Security (RLS) policies keeping your data secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
@@ -59,18 +59,19 @@ bun install
 Create a `.env` file in the project root:
 
 ```env
-# Neon Data API URL
-# Find this in Neon Console → Data API page → "Data API URL"
-VITE_NEON_DATA_API_URL=https://your-project-id.data-api.neon.tech
-
-# Managed BetterAuth Base URL
-# Find this in Neon Console → Auth page → "Auth Base URL"
-VITE_NEON_AUTH_URL=https://your-project-id.auth.neon.tech
+# Neon database URL for the client (no username, password, or query parameters)
+# Start from the Data API URL in Neon Console → Data API or `neon data-api get`;
+# remove the `.apirest` hostname label and trailing `/rest/v1` path.
+# The SDK derives the Neon Auth and Data API URLs from this value.
+VITE_NEON_DATABASE_URL=https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
 
 # Database Connection String (for migrations)
 # Find this in Neon Console → Dashboard → Connection string (select "Pooled connection")
+# This is a Postgres connection string, not the HTTPS URL used by VITE_NEON_DATABASE_URL above
 DATABASE_URL=postgresql://user:password@your-project-id.pooler.region.neon.tech/neondb?sslmode=require
 ```
+
+Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
 
 ### Set up the database
 
@@ -106,13 +107,9 @@ import { createClient } from '@neondatabase/neon-js';
 import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 import type { Database } from '../../types/database';
 
-export const client = createClient<Database>({
+export const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL, {
   auth: {
     adapter: BetterAuthReactAdapter(),
-    url: import.meta.env.VITE_NEON_AUTH_URL,
-  },
-  dataApi: {
-    url: import.meta.env.VITE_NEON_DATA_API_URL,
   },
 });
 ```

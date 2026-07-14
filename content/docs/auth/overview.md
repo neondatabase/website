@@ -106,7 +106,7 @@ export const { GET, POST } = auth.handler();
 
 **For React/Vite (client-side):**
 
-See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation.
+See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation. If you want one client for both Neon Auth and the Data API, initialize `createClient()` from a single Neon URL as shown in [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
 
 ```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';

@@ -94,6 +94,10 @@ VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 
 Create a `src/auth.js` file to configure your auth client:
 
+<Admonition type="tip" title="Using Auth and Data API together?">
+This quick start uses the standalone Auth client. For one `createClient()` instance that derives both Auth and Data API URLs from a single Neon URL, see [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
+</Admonition>
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 

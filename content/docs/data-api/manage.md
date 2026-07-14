@@ -101,6 +101,12 @@ Defines which PostgreSQL schemas are exposed as REST API endpoints. By default, 
 **Permissions apply:** Adding a schema here exposes the *endpoints*, but the database role used by the API must still have `USAGE` privileges on the schema and `SELECT` privileges on the tables. Refer to [Access control for Data API](/docs/data-api/access-control) for more details.
 </Admonition>
 
+### Extra search path schemas
+
+**Default:** `Empty`
+
+Adds extra PostgreSQL schemas to the search path used for every Data API request. These schemas aren't exposed as REST API endpoints themselves; they're only available for database objects inside your [exposed schemas](#exposed-schemas) to reference, which is useful for schemas that hold PostgreSQL extensions. Corresponds to the `db_extra_search_path` field in the API settings object.
+
 ### Anonymous role
 
 **Default:** `anonymous`
@@ -118,6 +124,12 @@ Enforces a hard limit on the number of rows returned in a single API response. T
 **Default:** `.role`
 
 Specifies the path within the JWT token that contains the database role name. The Data API uses this role to execute queries on behalf of the authenticated user. For example, `.role` extracts the value of the top-level `role` claim from the token. Corresponds to the `jwt_role_claim_key` field in the API settings object. This field is required when updating settings via the API.
+
+### JWT cache max lifetime
+
+**Default:** `Empty`
+
+Sets the maximum lifetime, in seconds, that a validated JWT is kept in the Data API's cache. Caching validated tokens reduces the number of times the Data API needs to fetch and verify keys from your authentication provider's JWKS URL. Corresponds to the `jwt_cache_max_lifetime` field in the API settings object.
 
 ### CORS allowed origins
 

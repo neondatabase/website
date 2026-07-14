@@ -93,7 +93,7 @@ In a React SPA, `createAuthClient(url)` without an adapter returns a vanilla cli
 
 ```typescript
 import { createAuthClient } from '@neondatabase/neon-js/auth';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 
 const authClient = createAuthClient(url, {
   adapter: BetterAuthReactAdapter(),
@@ -111,7 +111,7 @@ The adapter must be imported from a subpath and called as a function:
 import { BetterAuthReactAdapter } from '@neondatabase/neon-js';
 
 // Correct
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 const client = createAuthClient(url, { adapter: BetterAuthReactAdapter() });
 ```
 
