@@ -8,10 +8,10 @@ summary: >-
   config, and installing agent skills. It supports Cursor, VS Code, Claude
   Code, and any editor supported by add-mcp. Use this page when starting a
   new project with `npx neon@latest init` or when you need to know which
-  files get created and where. The `--agent` flag targets a specific editor
-  without the interactive prompt.
+  files get created and where. The `--agent` flag enables agent/JSON mode and
+  auto-detects the editor, skipping the interactive selection prompt.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-14T19:02:46.207Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -40,7 +40,7 @@ Skills are installed at the project level in the current working directory. Run 
 
 <CliOptions command="init" />
 
-Use `--agent` to configure a specific editor, skipping the interactive selection prompt. Without `--agent`, `init` runs an interactive wizard that detects installed tools and lets you choose which to configure; if nothing is detected, you go straight to that list.
+Use `--agent` to enable agent/JSON mode: the editor is auto-detected and the interactive selection prompt is skipped. Without `--agent`, `init` runs an interactive wizard that detects installed tools and lets you choose which to configure; if nothing is detected, you go straight to that list.
 
 ## Coding assistant support
 

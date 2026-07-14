@@ -15,6 +15,8 @@ enableTableOfContents: true
 
 On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, and managed **Auth**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend forks with your data.
 
+<CopyPrompt src="/prompts/neon-backend.md" description="Hand this to your AI assistant to set up Neon: skills, project, and all capabilities. Then tell it what to build." buttonText="Copy prompt" />
+
 ## What you'll build
 
 The running example is a **notes app you can chat with**. Signed-in users write notes, attach files to them, and ask an AI questions about their own notes. That one app touches all five capabilities:
@@ -88,10 +90,6 @@ export default defineConfig({
 
 This creates `neon.ts` and installs the `@neon/config` and `@neon/env` packages. Each section below adds one capability to it.
 
-<Admonition type="note" title="Two shortcuts">
-Prefer not to build by hand? [Put it together](#put-it-together) covers two shortcuts: [`neon init`](/docs/cli/init) to build with an AI editor, or [`neon bootstrap`](/docs/cli/bootstrap) to scaffold from a template.
-</Admonition>
-
 ## How it works
 
 Every capability follows the same three steps: **enable it in `neon.ts`, [`neon deploy`](/docs/cli/deploy), then read the injected environment variables.** The same steps apply to all five.
@@ -100,12 +98,12 @@ Every capability follows the same three steps: **enable it in `neon.ts`, [`neon 
 - **`neon deploy` reconciles that file** against your branch, provisions each service, and writes its credentials to your env file.
 - **Branching forks the whole backend together.** A new branch gets its own database, bucket, and function, copy-on-write from the parent. See [Branch your whole backend](#branch-your-whole-backend).
 
-| Capability         | Enable in `neon.ts`  | Injected env vars                                                                 | You use it with                                   |
-| ------------------ | -------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------- |
-| **Postgres**       | on by default        | `DATABASE_URL`                                                                    | `@neondatabase/serverless`, or `pg` in a Function |
-| **Object Storage** | `buckets: { ... }`   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION` | `files-sdk` (or any S3 client)                    |
-| **Functions**      | `functions: { ... }` | `DATABASE_URL` and more, inside the function                                      | Hono (any web framework)                          |
-| **AI Gateway**     | `aiGateway: true`    | `NEON_AI_GATEWAY_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`                               | `@neon/ai-sdk-provider`                           |
+| Capability             | Enable in `neon.ts`  | Injected env vars                                                                 | You use it with                                   |
+| ---------------------- | -------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------- |
+| **Postgres**           | on by default        | `DATABASE_URL`                                                                    | `@neondatabase/serverless`, or `pg` in a Function |
+| **Object Storage**     | `buckets: { ... }`   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION` | `files-sdk` (or any S3 client)                    |
+| **Functions**          | `functions: { ... }` | `DATABASE_URL` and more, inside the function                                      | Hono (any web framework)                          |
+| **AI Gateway**         | `aiGateway: true`    | `NEON_AI_GATEWAY_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`                               | `@neon/ai-sdk-provider`                           |
 | **Managed BetterAuth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neondatabase/auth`                              |
 
 <Admonition type="note" title="Reading the snippets">
@@ -214,11 +212,13 @@ const result = streamText({
 return result.toTextStreamResponse();
 ```
 
+Output isn't only text. The same credential reaches other modalities through model-specific options; for example, OpenAI models can generate images via the `image_generation` tool on the Responses API. See the [model catalog](/docs/ai-gateway/models) for which models support what.
+
 <Admonition type="note" title="First call after a deploy">
 Right after `neon deploy` on a new branch, the first gateway call can return a `403` (`credential not authorized for this branch`) while the credential propagates. It clears within a few seconds, so retry.
 </Admonition>
 
-**Reference:** [AI Gateway get-started](/docs/ai-gateway/get-started) (streaming, model catalog, troubleshooting) · [Overview](/docs/ai-gateway/overview)
+**Reference:** [AI Gateway get-started](/docs/ai-gateway/get-started) (streaming, troubleshooting) · [Model catalog](/docs/ai-gateway/models) (per-modality snippets) · [Overview](/docs/ai-gateway/overview)
 
 ## Managed BetterAuth: per-user access
 
@@ -248,7 +248,7 @@ const userId = String(payload.sub);
 // now: select ... from notes where user_id = $1
 ```
 
-**Reference:** [Auth quickstart](/docs/auth/quick-start/nextjs-api-only) (SDK wiring, prebuilt UI) · [Overview](/docs/auth/overview)
+**Reference:** [Authentication flow](/docs/auth/authentication-flow) (JWT, JWKS, verifying the caller) · [Auth quickstart](/docs/auth/quick-start/nextjs-api-only) (SDK wiring, prebuilt UI) · [Overview](/docs/auth/overview)
 
 ## Branch your whole backend
 
@@ -302,7 +302,7 @@ The beta services live under `preview` while they're in beta; that key goes away
 
 To get the whole notes app running rather than assembling the snippets by hand, use one of two starting points:
 
-**Let your AI editor build it.** From an empty folder, `neon init` installs the agent skills and configures the MCP server. `neon init --preview` targets a new `aws-us-east-2` project and installs the beta skills (Object Storage, Functions, AI Gateway) on top of the core `neon-postgres` skill. Then describe the app, for example: "Build a notes app where signed-in users write notes, attach files, and chat with an AI about their own notes, using Postgres, Object Storage, a Function, the AI Gateway, and Auth, managed with `neon.ts`."
+**Let your AI editor build it.** Copy the prompt at the top of this page and hand it to your assistant. It runs `neon init` to configure the MCP server and install the core skill, adds the Object Storage, Functions, and AI Gateway skills with `npx skills add neondatabase/agent-skills`, then builds against each capability's current API.
 
 **Start from a template.** `neon bootstrap` scaffolds a ready-to-run starter, installs dependencies, and links a project:
 
