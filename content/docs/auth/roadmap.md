@@ -50,17 +50,17 @@ Managed BetterAuth is built on [Better Auth](https://www.better-auth.com/). Not 
 
 ### Supported
 
-| Plugin                                                                             | Status                                          |
-| ---------------------------------------------------------------------------------- | ----------------------------------------------- |
-| [Email & password](https://www.better-auth.com/docs/authentication/email-password) | ✅ Supported                                    |
-| Social OAuth (Google, GitHub, Vercel)                                              | ✅ Supported                                    |
-| [Email OTP](/docs/auth/guides/plugins/email-otp)                                   | ✅ Supported                                    |
-| [Admin](/docs/auth/guides/plugins/admin)                                           | ✅ Supported                                    |
-| [Organization](/docs/auth/guides/plugins/organization)                             | ⚠️ Partial (JWT token claims under development) |
-| [JWT](/docs/auth/guides/plugins/jwt)                                               | ✅ Supported                                    |
-| [Magic Link](/docs/auth/guides/plugins/magic-link)                                 | ✅ Supported                                    |
-| [Open API](/docs/auth/guides/plugins/openapi)                                      | ✅ Supported                                    |
-| [Phone Number](/docs/auth/guides/plugins/phone-number)                             | ✅ Supported                                    |
+| Plugin                                                                             | Status       |
+| ---------------------------------------------------------------------------------- | ------------ |
+| [Email & password](https://www.better-auth.com/docs/authentication/email-password) | ✅ Supported |
+| Social OAuth (Google, GitHub, Vercel)                                              | ✅ Supported |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)                                   | ✅ Supported |
+| [Admin](/docs/auth/guides/plugins/admin)                                           | ✅ Supported |
+| [Organization](/docs/auth/guides/plugins/organization)                             | ⚠️ Partial   |
+| [JWT](/docs/auth/guides/plugins/jwt)                                               | ✅ Supported |
+| [Magic Link](/docs/auth/guides/plugins/magic-link)                                 | ✅ Supported |
+| [Open API](/docs/auth/guides/plugins/openapi)                                      | ✅ Supported |
+| [Phone Number](/docs/auth/guides/plugins/phone-number)                             | ✅ Supported |
 
 See [Set up OAuth](/docs/auth/guides/setup-oauth) for Neon-specific OAuth configuration (including Vercel). Email flows such as verification and password reset are covered in [Email verification](/docs/auth/guides/email-verification), [Password reset](/docs/auth/guides/password-reset), and [User management](/docs/auth/guides/user-management).
 
