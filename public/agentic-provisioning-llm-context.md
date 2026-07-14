@@ -81,8 +81,8 @@ Neon is the backend for apps and agents. Use the API key from Part 1 for all Neo
 | Connection Methods & Drivers | Choosing transport/driver (TCP, HTTP, WebSocket, edge, serverless) | [connection-methods.md](https://neon.com/docs/ai/skills/neon-postgres/references/connection-methods.md) |
 | Serverless Driver | `@neondatabase/serverless`, HTTP/WebSocket, runtime optimizations | [neon-serverless.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-serverless.md) |
 | Neon JS SDK | Neon Auth + Data API, PostgREST-style queries, typed client | [neon-js.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-js.md) |
-| Developer Tools | `npx neonctl@latest init`, VSCode, Neon MCP server | [devtools.md](https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md) |
-| Neon CLI | Terminal/scripts/CI with `neonctl` | [neon-cli.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-cli.md) |
+| Developer Tools | `npx neon@latest init`, VSCode, Neon MCP server | [devtools.md](https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md) |
+| Neon CLI | Terminal/scripts/CI with `neon` | [neon-cli.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-cli.md) |
 | Neon REST API | Direct HTTP automation, API key auth, rate limits, polling | [neon-rest-api.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-rest-api.md) |
 | Neon TypeScript SDK | Typed Neon control in TypeScript (`@neon/sdk`) | [neon-typescript-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-typescript-sdk.md) |
 | Neon Python SDK | Programmatic Neon management in Python (`neon-api`) | [neon-python-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-python-sdk.md) |

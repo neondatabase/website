@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-07-14T20:34:24.495Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -19,15 +19,26 @@ The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://doc
 The Anthropic SDK appends `/v1/messages` to the base URL automatically. Set the base URL to `/ai-gateway/anthropic` (without `/v1`).
 </Admonition>
 
+This endpoint is also reachable at the shorter `/anthropic/v1/messages` path (no `/ai-gateway` prefix). Both behave identically. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+
+## Setup
+
+Set these environment variables. See [Get started](/docs/ai-gateway/get-started) for how to obtain them.
+
+```bash
+NEON_AI_GATEWAY_TOKEN=nt_live_...
+NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
+```
+
 ## Supported models
 
 This endpoint accepts Anthropic models only. See the [AI Gateway catalog](/docs/ai-gateway/models) for the full list. Supported models:
 
-- `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5`
-- `claude-sonnet-4-6`
+- `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5`, `claude-opus-4-1`
+- `claude-sonnet-4-6`, `claude-sonnet-4-5`, `claude-sonnet-4`
 - `claude-haiku-4-5`
 
-Sending a non-Anthropic model ID returns `400 model is not available on this endpoint`. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you need to call multiple providers from the same code.
+Sending a non-Anthropic model ID returns `400 model "<model-id>" is not available on the anthropic_messages endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you need to call multiple providers from the same code.
 
 ## Basic request
 
@@ -189,10 +200,10 @@ All other headers are stripped. The `Authorization` header is replaced with the 
 
 ## Error handling
 
-| Status            | Message                                   | Cause                                     |
-| ----------------- | ----------------------------------------- | ----------------------------------------- |
-| `400 Bad Request` | `unknown model`                           | Model ID not in the catalog               |
-| `400 Bad Request` | `model is not available on this endpoint` | Non-Anthropic model sent to this endpoint |
+| Status            | Message                                                                  | Cause                                     |
+| ----------------- | ------------------------------------------------------------------------ | ----------------------------------------- |
+| `400 Bad Request` | `unknown model "<model-id>"`                                             | Model ID not in the catalog               |
+| `400 Bad Request` | `model "<model-id>" is not available on the anthropic_messages endpoint` | Non-Anthropic model sent to this endpoint |
 
 For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 

@@ -1286,6 +1286,9 @@
           items:
             - title: neon.ts
               slug: reference/neon-ts
+              items:
+                - title: '@neon/config-runtime'
+                  slug: reference/config-runtime
     - title: Integrations & tooling
       slug: guides/integrations
       icon: integrations

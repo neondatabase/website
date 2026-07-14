@@ -23,6 +23,7 @@ neon deploy
 | ------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
 | `--config`          | walks up from cwd | Path to the `neon.ts` policy                                                                         |
 | `--env`             | (none)            | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`            | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch     | Target branch ID or name                                                                             |
 | `--project-id`      | linked project    | Project ID                                                                                           |
 | `--update-existing` | `false`           | Auto-confirm overriding existing remote settings on the branch                                       |
@@ -86,7 +87,7 @@ zip -j function.zip dist/index.mjs
 
 The archive's entry file must be named `index.mjs` or `index.js`; the runtime looks for those names.
 
-From Node.js, `buildFunctionBundle` from [`@neon/config-runtime`](https://www.npmjs.com/package/@neon/config-runtime) does both steps in one call and produces exactly the archive the deploy endpoint expects:
+From Node.js, `buildFunctionBundle` from [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling) does both steps in one call and produces exactly the archive the deploy endpoint expects. See the [`@neon/config-runtime` reference](/docs/reference/config-runtime) for the rest of that package's programmatic API (`inspect`, `plan`, `apply`), useful for calling a deploy from a custom CI step instead of the CLI:
 
 ```ts
 import { buildFunctionBundle } from "@neon/config-runtime/v1";

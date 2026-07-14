@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-13T15:15:20.992Z'
+updatedOn: '2026-07-14T20:34:24.495Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
@@ -23,6 +23,7 @@ Participation in this Private Preview is subject to our Private Preview Terms. A
 - **Standard SDKs, one URL change.** OpenAI SDK, Anthropic SDK, and google-genai all work out of the box.
 - **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
 - **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
+- **Shorter, OpenRouter-style paths.** Chat completions and Gemini are reachable at a shorter top-level `/v1/...` path; OpenAI Responses and Anthropic Messages have their own shorter aliases (`/openai/v1/...`, `/anthropic/v1/...`). `GET /v1/models` lists the catalog. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths).
 
 ## Pricing
 

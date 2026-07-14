@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-07-14T20:34:24.495Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -20,6 +20,17 @@ The Gemini endpoint exposes the [Google Gemini API](https://ai.google.dev/api/ge
 <Admonition type="note">
 Only `generateContent` and `streamGenerateContent` are supported. Requests to other actions (such as `countTokens`) return `404 unsupported gemini action`.
 </Admonition>
+
+This endpoint also has a shorter alias with no `/ai-gateway` prefix: `https://<branch-host>/v1/gemini/v1beta/models/<model>:<action>`. Both behave identically. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+
+## Setup
+
+Set these environment variables. See [Get started](/docs/ai-gateway/get-started) for how to obtain them.
+
+```bash
+NEON_AI_GATEWAY_TOKEN=nt_live_...
+NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
+```
 
 ## Supported models
 
@@ -35,7 +46,7 @@ This endpoint accepts Google models only:
 | `gemini-2-5-pro`        |       |
 | `gemini-2-5-flash`      |       |
 
-Sending a non-Google model ID returns `400 model is not available on this endpoint`. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you want to call Gemini models alongside other providers from the same code.
+Sending a non-Google model ID returns `400 model "<model-id>" is not available on the gemini_generate_content endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you want to call Gemini models alongside other providers from the same code.
 
 ## Basic request
 
@@ -133,13 +144,12 @@ When calling the REST API directly, the model ID and action must appear in the p
 
 ## Error handling
 
-| Status            | Message                                   | Cause                                                                 |
-| ----------------- | ----------------------------------------- | --------------------------------------------------------------------- |
-| `400 Bad Request` | `unknown model`                           | Model ID not in the catalog                                           |
-| `400 Bad Request` | `model is not available on this endpoint` | Non-Google model sent to this endpoint                                |
-| `400 Bad Request` | `missing or invalid model`                | No model field in request body                                        |
-| `404 Not Found`   | `unsupported gemini action`               | Action other than `generateContent` or `streamGenerateContent` in URL |
-| `404 Not Found`   | `invalid gemini model path`               | Malformed `model:action` segment in URL                               |
+| Status            | Message                                                                       | Cause                                                                 |
+| ----------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `400 Bad Request` | `unknown model "<model-id>"`                                                  | Model ID not in the catalog                                           |
+| `400 Bad Request` | `model "<model-id>" is not available on the gemini_generate_content endpoint` | Non-Google model sent to this endpoint                                |
+| `404 Not Found`   | `unsupported gemini action`                                                   | Action other than `generateContent` or `streamGenerateContent` in URL |
+| `404 Not Found`   | `invalid gemini model path`                                                   | Malformed `model:action` segment in URL                               |
 
 For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 
