@@ -21,6 +21,10 @@ Functions run on Neon's own compute platform, the same infrastructure that runs 
 
 > During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only, created on or after June 15, 2026. See [Preview access](/docs/compute/functions/preview-access) for what's included.
 
+<Admonition type="important" title="JavaScript and TypeScript only">
+Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't supported in the private preview.
+</Admonition>
+
 ## Request/response, not background jobs
 
 A function is always requested (by a `fetch`, a browser, an agent) and always returns a web response: JSON, an HTTP stream, an SSE feed, or a WebSocket upgrade.
