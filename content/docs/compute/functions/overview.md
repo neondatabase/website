@@ -6,7 +6,7 @@ summary: >-
   API, AI agent, real-time server, or webhook handler that runs next to your
   Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-14T19:13:13.774Z'
 ---
 
 Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -47,7 +47,7 @@ A [Hono](https://hono.dev) app exports the object shape, so `export default app`
 
 ## When to use Neon Functions
 
-- **REST APIs and CRUD backends**: request in, JSON out, queries running next to Postgres. See [Get started](/docs/compute/functions/get-started).
+- **REST APIs and CRUD backends**: request in, JSON out, queries running next to Postgres. See [Quickstart](/docs/compute/functions/get-started).
 - **AI agents**: stream tokens back across multiple model calls and tool invocations without a short execution limit cutting the run off. See [AI agents](/docs/compute/functions/agents).
 - **Real-time apps**: WebSocket servers for chat and presence, or SSE for live updates. See [WebSockets and SSE](/docs/compute/functions/websockets).
 - **MCP servers**: expose database-backed tools to AI clients over a single `fetch` endpoint. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp).
@@ -61,13 +61,13 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 - **Add a function to a full-stack app.** Your Next.js or TanStack Start app owns the UI, auth, and most routes. When one workload outgrows the host's short serverless limit (a WebSocket or SSE server, or a long-running agent), move only that piece onto a function and call it directly from the client. See [Authentication](/docs/compute/functions/authentication) for the direct-call pattern.
 - **Run the backend on functions.** When the frontend is client-only (a React or TanStack SPA), the client calls functions directly: REST APIs, request/response agents, MCP servers, and anything stateful that belongs close to Postgres and Object Storage.
 
-## Get started
+## Quickstart
 
 <DetailIconCards>
 
 <a href="/docs/compute/functions/preview-access" description="Request access and learn what's included in the private preview." icon="screen">Preview access</a>
 
-<a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Get started</a>
+<a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Quickstart</a>
 
 <a href="/docs/compute/functions/agents" description="Run streaming, tool-calling AI agents next to your data." icon="openai">AI agents</a>
 
