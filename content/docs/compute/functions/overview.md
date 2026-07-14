@@ -6,7 +6,9 @@ summary: >-
   API, AI agent, real-time server, or webhook handler that runs next to your
   Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+redirectFrom:
+  - /docs/compute/functions/preview-access
+updatedOn: '2026-07-14T20:38:27.829Z'
 ---
 
 Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -19,7 +21,7 @@ What makes Neon Functions different from lambda-style serverless?
 
 Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres, so they sit in the same region as your data.
 
-> During the private preview, Functions are available for **new projects** in the **AWS us-east-2** region only, created on or after June 15, 2026. See [Preview access](/docs/compute/functions/preview-access) for what's included.
+> Functions are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use them. Functions are free to use during beta, subject to usage limits, on any plan.
 
 ## Request/response, not background jobs
 
@@ -64,8 +66,6 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 ## Get started
 
 <DetailIconCards>
-
-<a href="/docs/compute/functions/preview-access" description="Request access and learn what's included in the private preview." icon="screen">Preview access</a>
 
 <a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Get started</a>
 

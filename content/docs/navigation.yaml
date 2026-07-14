@@ -786,8 +786,6 @@
       items:
         - title: Overview
           slug: compute/functions/overview
-        - title: Preview access
-          slug: compute/functions/preview-access
         - title: Get started
           slug: compute/functions/get-started
         - title: Deploy and manage

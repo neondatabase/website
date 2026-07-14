@@ -6,10 +6,8 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-26T10:41:58.102Z'
+updatedOn: '2026-07-14T20:38:27.829Z'
 ---
-
-<PrivatePreviewEnquire/>
 
 Neon Functions run on Node.js 24.
 
@@ -64,7 +62,7 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 | Runtime     | Node.js 24                                                                                                                                      |
 | Isolation   | microVM per isolate                                                                                                                             |
 | Concurrency | Multiple requests in flight per isolate (interleaved on the event loop), scaling out with additional isolates. See [Concurrency](#concurrency). |
-| Memory      | 2048 MiB (fixed during the private preview, not configurable)                                                                                   |
+| Memory      | 2048 MiB (fixed during beta, not configurable)                                                                                                  |
 
 ## Environment variables
 

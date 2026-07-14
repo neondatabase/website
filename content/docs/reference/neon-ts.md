@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-07-14T19:22:11.599Z'
+updatedOn: '2026-07-14T20:38:27.829Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -246,8 +246,8 @@ The key list autocompletes from your config, so selecting a variable from a serv
 
 ## Preview services
 
-<Admonition type="info" title="Private preview">
-Functions, Storage, and AI Gateway are in private preview. They require a new project in AWS us-east-2. See [Preview access](/docs/compute/functions/preview-access) to request access.
+<Admonition type="info" title="Beta">
+Functions, Storage, and AI Gateway are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`), so create your project there to use them.
 </Admonition>
 
 Preview services are declared under the `preview` block. All three are optional and independent:
