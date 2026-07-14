@@ -9,7 +9,7 @@ summary: >-
   index, configure build_mode, tune search with the lakebase_ann.probes and
   lakebase_ann.epsilon GUCs, and reference all operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-06-26T12:58:36.951Z'
+updatedOn: '2026-07-14T23:16:53.813Z'
 ---
 
 The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.
@@ -69,6 +69,10 @@ CREATE INDEX ON items USING lakebase_ann (embedding vector_l2_ops) WITH (build_m
 
 Before tuning search, call `lakebase_ann_index_info(index_name)` to get the index's `lists`, `default_probes`, and `default_epsilon` values.
 
+<Admonition type="note">
+The `probes` and `epsilon` GUCs apply only once the index has built IVF lists, which happens above a corpus-size threshold. On a small dataset, `lakebase_ann` uses exact (flat) search instead: `lakebase_ann_index_info` returns empty `lists` and `default_probes`, `SET lakebase_ann.probes` fails with `usage: need 0 probes, but N provided`, and `epsilon` has no effect. This is expected, since the index is already returning exact results, so there is nothing to tune. These GUCs become relevant as your data grows and the index switches to IVF partitioning.
+</Admonition>
+
 Use the `lakebase_ann.probes` GUC to control how many IVF partitions are searched at query time. Higher values improve recall at the cost of speed.
 
 ```sql
@@ -81,6 +85,8 @@ SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 10;
 ```sql
 SET lakebase_ann.epsilon TO '1.5';
 ```
+
+When you set these GUCs from application code, the `SET` and the query must run on the same session. With a connection pool or the [Neon serverless driver](/docs/serverless/serverless-driver), where each statement can use a different connection, issue both in a single transaction so the `SET` applies to the query.
 
 ### Concurrent index updates
 
@@ -97,22 +103,37 @@ REINDEX INDEX CONCURRENTLY items_embedding_ann;
 
 ### Operator classes
 
-`lakebase_ann` supports the following operator classes. The `<->`, `<#>`, and `<=>` operators are defined by `pgvector`. The `<<->>`, `<<#>>`, and `<<=>>` operators are defined by `lakebase_vector` for similarity filtering.
+`lakebase_ann` supports the following operator classes. Each class provides two operators:
 
-| Operator class       | Operator 1              | Operator 2                |
-| :------------------- | :---------------------- | :------------------------ |
-| `vector_l2_ops`      | `<->(vector, vector)`   | `<<->>(vector, vector)`   |
-| `vector_ip_ops`      | `<#>(vector, vector)`   | `<<#>>(vector, vector)`   |
-| `vector_cosine_ops`  | `<=>(vector, vector)`   | `<<=>>(vector, vector)`   |
-| `halfvec_l2_ops`     | `<->(halfvec, halfvec)` | `<<->>(halfvec, halfvec)` |
-| `halfvec_ip_ops`     | `<#>(halfvec, halfvec)` | `<<#>>(halfvec, halfvec)` |
-| `halfvec_cosine_ops` | `<=>(halfvec, halfvec)` | `<<=>>(halfvec, halfvec)` |
-| `rabitq8_l2_ops`     | `<->(rabitq8, rabitq8)` | `<<->>(rabitq8, rabitq8)` |
-| `rabitq8_ip_ops`     | `<#>(rabitq8, rabitq8)` | `<<#>>(rabitq8, rabitq8)` |
-| `rabitq8_cosine_ops` | `<=>(rabitq8, rabitq8)` | `<<=>>(rabitq8, rabitq8)` |
-| `rabitq4_l2_ops`     | `<->(rabitq4, rabitq4)` | `<<->>(rabitq4, rabitq4)` |
-| `rabitq4_ip_ops`     | `<#>(rabitq4, rabitq4)` | `<<#>>(rabitq4, rabitq4)` |
-| `rabitq4_cosine_ops` | `<=>(rabitq4, rabitq4)` | `<<=>>(rabitq4, rabitq4)` |
+- A **pgvector distance operator** (`<->`, `<#>`, `<=>`) that returns a distance and is used in `ORDER BY` for nearest-neighbor search.
+- A **`lakebase_vector` range operator** (`<<->>`, `<<#>>`, `<<=>>`) that takes a `sphere_*` value on its right side and returns a `boolean`: true when the vector falls within the sphere's radius. Use it in a `WHERE` clause to filter by similarity. Build the sphere with the `sphere(vector, radius)` function.
+
+| Operator class       | Distance operator (`ORDER BY`) | Range operator (`WHERE`)         |
+| :------------------- | :----------------------------- | :------------------------------- |
+| `vector_l2_ops`      | `<->(vector, vector)`          | `<<->>(vector, sphere_vector)`   |
+| `vector_ip_ops`      | `<#>(vector, vector)`          | `<<#>>(vector, sphere_vector)`   |
+| `vector_cosine_ops`  | `<=>(vector, vector)`          | `<<=>>(vector, sphere_vector)`   |
+| `halfvec_l2_ops`     | `<->(halfvec, halfvec)`        | `<<->>(halfvec, sphere_halfvec)` |
+| `halfvec_ip_ops`     | `<#>(halfvec, halfvec)`        | `<<#>>(halfvec, sphere_halfvec)` |
+| `halfvec_cosine_ops` | `<=>(halfvec, halfvec)`        | `<<=>>(halfvec, sphere_halfvec)` |
+| `rabitq8_l2_ops`     | `<->(rabitq8, rabitq8)`        | `<<->>(rabitq8, sphere_rabitq8)` |
+| `rabitq8_ip_ops`     | `<#>(rabitq8, rabitq8)`        | `<<#>>(rabitq8, sphere_rabitq8)` |
+| `rabitq8_cosine_ops` | `<=>(rabitq8, rabitq8)`        | `<<=>>(rabitq8, sphere_rabitq8)` |
+| `rabitq4_l2_ops`     | `<->(rabitq4, rabitq4)`        | `<<->>(rabitq4, sphere_rabitq4)` |
+| `rabitq4_ip_ops`     | `<#>(rabitq4, rabitq4)`        | `<<#>>(rabitq4, sphere_rabitq4)` |
+| `rabitq4_cosine_ops` | `<=>(rabitq4, rabitq4)`        | `<<=>>(rabitq4, sphere_rabitq4)` |
+
+To filter by similarity, wrap the query vector in `sphere(vector, radius)` and use the range operator in a `WHERE` clause. Rank the matches with the corresponding distance operator:
+
+```sql
+-- Rows within cosine radius 0.5 of the query vector, closest first
+SELECT * FROM items
+WHERE embedding <<=>> sphere('[3,1,2]'::vector, 0.5)
+ORDER BY embedding <=> '[3,1,2]'
+LIMIT 5;
+```
+
+The range operator returns a `boolean`, so it belongs in `WHERE`, not `ORDER BY`. Use the distance operator (`<=>` here) to order results.
 
 The `rabitq8` and `rabitq4` types are quantization types defined by `lakebase_vector`. They offer reduced memory footprint at the cost of some precision.
 
