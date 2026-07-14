@@ -15,7 +15,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T17:09:59.366Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -73,7 +73,7 @@ The response includes:
 | `base_url`                 | Base URL of the auth service, used for SDK configuration and the interactive API reference (`/reference`) |
 
 <Admonition type="important">
-The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields.
+The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields. For client initialization examples that combine Neon Auth and the Data API from a single Neon URL, see [`createClient()` in the JavaScript SDK reference](/docs/reference/javascript-sdk#initializing).
 </Admonition>
 
 If Managed BetterAuth is already enabled on the branch, this call returns an error.

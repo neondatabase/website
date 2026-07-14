@@ -5,7 +5,7 @@ import {
   extractCallRefs,
   extractImports,
   chainResolvesTo,
-} from './check-sdk-docs.mjs';
+} from './check-docs-api-consistency.mjs';
 
 describe('splitMarkdown', () => {
   it('separates fenced code blocks (with lang) from prose', () => {

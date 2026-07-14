@@ -1281,12 +1281,6 @@
               slug: reference/migrate-api-client-to-sdk
             - title: Python SDK (Neon API)
               slug: reference/python-sdk
-            - title: Go SDK (Neon API)
-              slug: https://github.com/kislerdm/neon-sdk-go
-              tag: community
-            - title: Node.js / Deno SDK (Neon API)
-              slug: https://github.com/paambaati/neon-js-sdk
-              tag: community
         - section: Config as code
           icon: settings
           items:

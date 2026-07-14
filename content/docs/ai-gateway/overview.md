@@ -52,7 +52,7 @@ We'll publish exact per-model rates on the [Neon pricing page](https://neon.com/
 
 Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). Two templates use AI Gateway:
 
-**`ai-sdk`**: An image-generation agent that routes model calls through AI Gateway, stores results in Neon Storage, and writes metadata to Postgres on a Neon Function.
+**`ai-sdk`**: An image-generation agent that routes model calls through AI Gateway, stores results in Neon Object Storage, and writes metadata to Postgres on a Neon Function.
 
 ```bash
 neon bootstrap --template ai-sdk

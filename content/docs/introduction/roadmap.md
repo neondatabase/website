@@ -19,11 +19,11 @@ This roadmap describes what's in flight, what we delivered recently, and what's 
 
 ## New backend primitives for apps and agents
 
-We're expanding the platform with [a branchable stack of backend primitives](https://neon.com/blog/were-building-backends): Neon Postgres, Managed BetterAuth, Functions, Storage, and AI Gateway.
+We're expanding the platform with [a branchable stack of backend primitives](https://neon.com/blog/were-building-backends): Neon Postgres, Managed BetterAuth, Functions, Object Storage, and AI Gateway.
 
 - **Managed BetterAuth general availability**: Managed BetterAuth is moving toward general availability with additional plugins and features on the way. Check the [Managed BetterAuth roadmap](/docs/auth/roadmap) for details.
 - **Functions**: Node.js functions deployed alongside your database.
-- **Storage**: S3-compatible object storage that branches with your projects.
+- **Object Storage**: S3-compatible object storage that branches with your projects.
 - **AI Gateway**: One API for all frontier & open-source models, powered by Databricks.
 
 <RequestForm type="backend-platform" />

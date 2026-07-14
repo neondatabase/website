@@ -42,9 +42,9 @@ function printMeta(): void {
             "Database roles (connection users, privileges) are separate; use SQL or Console (Manage roles), not this REST API.",
         },
         docs: [
-          "https://neon.com/docs/neon-auth/api",
+          "https://neon.com/docs/auth/guides/manage-auth-api",
           "https://neon.com/docs/auth/guides/user-management",
-          "https://neon.com/docs/manage/users",
+          "https://neon.com/docs/manage/roles",
           "https://api-docs.neon.tech/reference/createbranchneonauthnewuser",
         ],
         envForThisScript: {

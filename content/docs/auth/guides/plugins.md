@@ -7,7 +7,7 @@ summary: >-
   plugins are not installed or configured directly. Use this page to check which
   plugins are fully supported versus partially supported, and how to configure
   them via the Neon Console or Neon API. The Organization plugin has partial
-  support while JWT token claims are still under development.
+  support.
 enableTableOfContents: true
 updatedOn: '2026-07-10T15:48:27.200Z'
 ---
@@ -26,15 +26,15 @@ The following Better Auth plugins are currently supported in Managed BetterAuth:
 
 ## Supported plugins
 
-| Plugin                                                 | Status                                          |
-| ------------------------------------------------------ | ----------------------------------------------- |
-| [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported                                    |
-| [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported                                    |
-| [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                    |
-| [Magic Link](/docs/auth/guides/plugins/magic-link)     | ✅ Supported                                    |
-| [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial (JWT token claims under development) |
-| [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported                                    |
-| [Phone Number](/docs/auth/guides/plugins/phone-number) | ✅ Supported                                    |
+| Plugin                                                 | Status       |
+| ------------------------------------------------------ | ------------ |
+| [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported |
+| [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported |
+| [Magic Link](/docs/auth/guides/plugins/magic-link)     | ✅ Supported |
+| [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial   |
+| [Open API](/docs/auth/guides/plugins/openapi)          | ✅ Supported |
+| [Phone Number](/docs/auth/guides/plugins/phone-number) | ✅ Supported |
 
 For more runnable Managed BetterAuth samples, see the [neondatabase/neon-js](https://github.com/neondatabase/neon-js/tree/main/examples) examples repository:
 
