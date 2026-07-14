@@ -15,7 +15,12 @@ Every deployed function streams its logs to the Neon Console: standard output an
 
 ## View logs
 
-In the Neon Console, open **Functions**, select a function, and go to the **Logs** tab. Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`.
+Function logs live on your branch's **Monitoring** page, in a **Logs** tab shared across every service on the branch. To get there:
+
+- Open **Monitoring** for your branch, go to the **Logs** tab, and click the **Functions** chip to scope the view to function logs. (**All** shows every service's logs together; **Storage** shows bucket logs.)
+- Or, from the **Functions** list, open a function's menu and select **View logs** to jump straight to that function's logs.
+
+Each row shows a timestamp, a level, and the log message. Expand a row to see its full context: `timestamp`, `severity`, `entity_type`, `scope_name`, and `service_name`.
 
 `scope_name` distinguishes platform-emitted lines from your own output:
 
@@ -60,6 +65,8 @@ Use the level chips to show only the levels you care about, and the search box t
 Use the service name field to scope the view to one function. It matches a substring by default; click the `~`/`=` toggle next to it to switch to an exact match on the full function name.
 
 If a query matches more than 1,000 lines, the view shows only the most recent 1,000 and displays a banner telling you to narrow the time range or add a search to see the rest.
+
+If no logs match the current filters, the empty state offers a **Widen time range** button that expands the query window in one click.
 
 ## Go live
 
