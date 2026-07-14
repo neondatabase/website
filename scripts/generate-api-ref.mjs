@@ -21,6 +21,7 @@ import {
   writeExtraApiDocs,
   writeLlmsIndex,
   writeNavigationYaml,
+  writeOperationIdsManifest,
   writeOperationOutput,
   writeRunSummary,
   writeTagMarkdownFiles,
@@ -1280,6 +1281,13 @@ async function main() {
 
   // Navigation YAML (committed — drives sidebar structure)
   writeNavigationYaml(PATHS, toNavYaml(allOps));
+
+  // Operation-id manifest (committed — docs-side source of truth for API
+  // reference coverage; see scripts/lib/api-coverage.mjs)
+  writeOperationIdsManifest(
+    PATHS,
+    allOps.map((op) => op.operationId)
+  );
 
   writeRunSummary(PATHS, {
     opCount,

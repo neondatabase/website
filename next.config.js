@@ -2600,6 +2600,18 @@ const defaultConfig = {
         // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
         // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
         ...indexRewrites,
+        // Canonical OpenAPI path probed by agent-discovery tooling (e.g. integrations.sh).
+        // Aliases the published Neon API spec (the same document served at
+        // /api_spec/release/v2.json) so /openapi.json resolves as application/json.
+        // Must be beforeFiles for the same reason as the index .md rewrites above: as a
+        // single top-level segment, /openapi.json is otherwise intercepted by the [slug]
+        // catch-all (a fallback rewrite never fires → 404). Point straight at the
+        // CloudFront origin the /api_spec/release/v2.json rewrite targets, since Next.js
+        // does not chain rewrites (a relative /api_spec/... destination wouldn't resolve).
+        {
+          source: '/openapi.json',
+          destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+        },
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/

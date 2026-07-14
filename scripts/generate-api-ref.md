@@ -54,7 +54,7 @@ Vercel runs `npm run build`, which triggers `prebuild` first. The generator fetc
 
 After a successful generation run, the generator writes the validated spec to `.next/cache/api-reference/openapi-v2.json`. If the live fetch fails, it uses that cache only when it is fresh (default: 7 days). If the cache is missing or stale, the generator throws and the build fails fast. Override the cache path with `API_REF_SPEC_CACHE_PATH` and the TTL with `API_REF_SPEC_CACHE_TTL_MS` when needed.
 
-`prebuild` also runs `npm run check:api-ref-nav` after generation. If the regenerated `content/docs/api-navigation.yaml` differs from the committed file, the build fails with a diff. Run `npm run generate:api-ref`, review the nav change, and commit it.
+`prebuild` also runs `npm run check:api-ref-generated` after generation. If either regenerated committed file (`content/docs/api-navigation.yaml` or `content/docs/api-operation-ids.json`) differs from the committed copy, the build fails with a diff. Run `npm run generate:api-ref`, review the change, and commit it.
 
 **Recovery:** check the Vercel build log for the HTTP error code, verify `https://neon.com/api_spec/release/v2.json` is reachable (open in a browser or `curl -I`), then trigger a redeploy. No code changes are needed for a transient outage.
 
@@ -158,13 +158,14 @@ npm run test:unit:run -- scripts/generate-api-ref.test.js src/components/pages/d
 npm run check:docs:neonctl
 npm run audit:field-groups
 npm run generate:api-ref
-npm run check:api-ref-nav
+npm run check:api-ref-generated
 ```
 
-Review generated `content/docs/api-navigation.yaml` separately from UI changes.
-It is the only committed generator output and can drift when the upstream spec
-changes. `prebuild` fails if the regenerated nav differs from `HEAD`; commit the
-updated nav when the diff is expected.
+Review the generated committed files — `content/docs/api-navigation.yaml` (sidebar)
+and `content/docs/api-operation-ids.json` (operation manifest) — separately from UI
+changes. They can drift when the upstream spec changes. `prebuild` runs
+`check:api-ref-generated`, which fails if either regenerated file differs from
+`HEAD`; commit them when the diff is expected.
 
 For UI changes, walk [`SMOKE-CHECKLIST.md`](../src/components/pages/doc/api-operation/SMOKE-CHECKLIST.md) against a local `npm run dev`.
 
@@ -186,27 +187,34 @@ Per-operation Markdown includes complete response examples. The aggregate
 pointer back to the per-operation Markdown so one operation cannot dominate the
 full corpus.
 
-### SDK docs drift check
+### Docs ↔ API consistency check
 
-`npm run check:sdk-docs` ([`scripts/check-sdk-docs.mjs`](check-sdk-docs.mjs)) keeps every
-doc that references `@neon/sdk` honest against the **installed** SDK. It treats the package
-as the source of truth: `@neon/sdk/raw` exports are the valid raw operations, and a live
-`createNeonClient()` instance is the valid ergonomic surface.
+`npm run check:docs-api-consistency`
+([`scripts/check-docs-api-consistency.mjs`](check-docs-api-consistency.mjs)) keeps the docs
+both **faithful to** and **complete against** the API surface. The installed `@neon/sdk` is
+the source of truth for the SDK surface (`@neon/sdk/raw` exports are the valid raw operations;
+a live `createNeonClient()` instance is the valid ergonomic surface), and the committed
+`content/docs/api-operation-ids.json` manifest is the docs-side source of truth for which
+operations are documented. Coverage logic lives in the pure
+[`scripts/lib/api-coverage.mjs`](lib/api-coverage.mjs) (unit tested).
 
-- **Blocks** when a fenced `ts`/`js` example calls a `raw.*` operation, a `neon.*` ergonomic
-  method, or imports a symbol that the SDK does not provide (readers copy these).
-- **Notifies** (non-blocking) on inline-code references that do not resolve, and on
-  operation-set skew between the generated `src/data/api-ref` and the SDK's raw layer.
+- **Snippet correctness (blocks)** when a fenced `ts`/`js` example calls a `raw.*` operation,
+  a `neon.*` ergonomic method, or imports a symbol that the SDK does not provide — readers
+  copy these.
+- **Operation coverage (notifies; fails under `--strict`)** — skew between the documented ops,
+  the `@neon/sdk` raw layer, and (in `--strict`) the live OpenAPI spec. Either side being ahead
+  usually means "run `npm run generate:api-ref`" or "bump `@neon/sdk`".
 
-CI wiring:
+CI wiring — one workflow, `.github/workflows/docs-api-consistency.yml`:
 
-- `.github/workflows/sdk-docs-check.yml` runs it on PRs that touch docs, api-ref data, or the
-  SDK example generator — blocking mode.
-- `.github/workflows/sdk-docs-drift.yml` runs weekly against `@neon/sdk@latest` with
-  `--strict` (skew becomes a failure) and opens/updates a tracking issue on drift.
+- **PRs** touching docs, the operation manifest, or the checker → offline, blocking on broken
+  code samples; coverage skew is advisory.
+- **Weekly schedule / dispatch** → `--strict` against `@neon/sdk@latest` and the live spec, so
+  coverage skew becomes a failure and opens/updates a tracking issue on drift.
 
-When this fails after a spec bump, run `npm run generate:api-ref`; when it fails after a new
-`@neon/sdk` release, update the affected docs (or bump the pinned devDependency).
+When this fails after a spec bump, run `npm run generate:api-ref` and commit the regenerated
+manifest; when it fails after a new `@neon/sdk` release, update the affected docs (or bump the
+pinned devDependency).
 
 ### Spec audit
 
