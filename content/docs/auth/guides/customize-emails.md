@@ -134,7 +134,7 @@ async function verifyWebhook(rawBody: string, headers: Headers) {
   }
 
   // 1. Fetch JWKS and find the matching key
-  const res = await fetch(`${process.env.NEON_AUTH_BASE_URL}/.well-known/jks.json`);
+  const res = await fetch(`${process.env.NEON_AUTH_BASE_URL}/.well-known/jwks.json`);
   const jwks = await res.json();
   const jwk = jwks.keys.find((k: { kid: string }) => k.kid === kid);
   if (!jwk) throw new Error(`Key ${kid} not found in JWKS`);

@@ -12,7 +12,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-14T17:09:59.366Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -64,8 +64,14 @@ Managed BetterAuth validates `webhook_url` when you configure webhooks to reduce
 - **HTTPS only** — HTTP URLs are rejected.
 - **Hostname required** — Use a domain name (for example `https://your-app.com/webhooks/neon-auth`). Raw IP addresses (for example `https://93.184.216.34/webhook`) are rejected, including public IPs.
 - **No internal targets** — Localhost, private IP addresses, link-local addresses (including cloud metadata endpoints), and encoded IP bypass formats (octal, decimal, hex) are blocked.
+- **No redirects** — Webhook delivery does not follow HTTP `3xx` redirects. Configure the final HTTPS endpoint directly.
+- **DNS pinning during delivery** — Neon Auth validates the hostname's resolved IP addresses and only connects to that validated set. If DNS later resolves the same hostname to a different IP during delivery, the delivery is blocked as a DNS rebinding attempt.
 
 Digit-prefixed domains such as `1password.com` are allowed. If configuration fails validation, the API returns an error with code `INVALID_WEBHOOK_URL_FORMAT`.
+
+<Admonition type="warning" title="Internal webhook targets are not supported">
+Webhook endpoints that point at private networks, localhost, cloud metadata services, raw IP literals, or endpoints reached only after a redirect are rejected or blocked during delivery. If an existing webhook depended on an internal target, move it behind a public HTTPS hostname before enabling Neon Auth webhooks.
+</Admonition>
 
 ### Set or update configuration
 
@@ -148,7 +154,7 @@ All events share a common JSON envelope:
 }
 ```
 
-The `user` object fields are all optional and vary by event. Available fields: `id`, `email`, `name`, `phone_number`, `image`, `email_verified`, `phone_number_verified`, `created_at`.
+The `user` object uses a fixed allowlist. Fields are optional and vary by event; fields that are not present are omitted. Available fields: `id`, `name`, `email`, `image`, `role`, `banned`, `email_verified`, `phone_number`, `phone_number_verified`, `created_at`, `updated_at`, `ban_reason`, `ban_expires`, `two_factor_enabled`, `is_anonymous`. Neon Auth drops any user fields outside this allowlist, including new Better Auth or plugin fields that have not been explicitly added to the webhook contract.
 
 ### `send.otp` event data
 
@@ -185,6 +191,8 @@ These events fire only when a new user record is created in the database. They d
 | `auth_provider` | string | `"credential"`, `"google"`, `"github"`, or `"vercel"` |
 | `ip_address`    | string | Requester's IP address                                |
 | `user_agent`    | string | Requester's user agent                                |
+
+If sign-up metadata is present and passes validation, it is included as `event_data.signup_metadata`. To limit payload size and prevent oversized egress, Neon Auth only includes `signup_metadata` when it is a plain object, serializes to at most 10 KiB of UTF-8 JSON, and is nested no more than 5 levels deep. Oversized, too-deep, array, or primitive metadata is dropped from the webhook payload.
 
 ### `phone_number.verified` event data
 

@@ -109,12 +109,16 @@ See [UI Component Styles](/docs/auth/reference/ui-components#styling) for altern
 
 Create a `src/auth.ts` file to initialize the auth client:
 
+<Admonition type="tip" title="Using Auth and Data API together?">
+This quick start uses the standalone Auth client. For one `createClient()` instance that derives both Auth and Data API URLs from a single Neon URL, see [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
+</Admonition>
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, { adapter: BetterAuthReactAdapter() });
 ```
