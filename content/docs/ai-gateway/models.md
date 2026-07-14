@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-14T12:55:30.475Z'
+updatedOn: '2026-07-14T20:34:24.495Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -83,17 +83,16 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 
 ## Shorter /v1 paths
 
-Most dialects above are also reachable at a shorter, top-level `/v1/...` path with no `/ai-gateway/<dialect>` prefix. These are additive aliases: the `/ai-gateway/...` paths documented throughout this page keep working and aren't deprecated. Both forms use the same branch host, bearer token, request body, response body, model routing, rate limits, and quota behavior. Gemini is the exception: its native endpoint has no shorter alias, so keep using `/ai-gateway/gemini/v1beta/models/{model}:generateContent` (or `streamGenerateContent`) as shown in [Which endpoint to use](#which-endpoint-to-use).
+Most dialects above are also reachable at a shorter path with no `/ai-gateway/<dialect>` prefix. These are additive aliases: the `/ai-gateway/...` paths documented throughout this page keep working and aren't deprecated. Both forms use the same branch host, bearer token, request body, response body, model routing, rate limits, and quota behavior. Only chat completions and Gemini use a top-level `/v1/...` prefix; OpenAI Responses and Anthropic Messages have their own shorter prefixes instead of a bare `/v1/`.
 
-Use the `/v1/...` paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-gateway/...` paths when a framework or existing Neon example expects the older dialect-specific route.
+Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-gateway/...` paths when a framework or existing Neon example expects the older dialect-specific route.
 
-| Shorter path                       | Equivalent to                            |
-| ---------------------------------- | ---------------------------------------- |
-| `POST /v1/chat/completions`        | `/ai-gateway/mlflow/v1/chat/completions` |
-| `POST /v1/openai/chat/completions` | `/ai-gateway/mlflow/v1/chat/completions` |
-| `POST /v1/responses`               | `/ai-gateway/openai/v1/responses`        |
-| `POST /v1/openai/responses`        | `/ai-gateway/openai/v1/responses`        |
-| `POST /v1/anthropic/v1/messages`   | `/ai-gateway/anthropic/v1/messages`      |
+| Shorter path                                            | Equivalent to                                              |
+| ------------------------------------------------------- | ---------------------------------------------------------- |
+| `POST /v1/chat/completions`                             | `/ai-gateway/mlflow/v1/chat/completions`                   |
+| `POST /openai/v1/responses`                             | `/ai-gateway/openai/v1/responses`                          |
+| `POST /anthropic/v1/messages`                           | `/ai-gateway/anthropic/v1/messages`                        |
+| `POST /v1/gemini/v1beta/models/{model}:generateContent` | `/ai-gateway/gemini/v1beta/models/{model}:generateContent` |
 
 ### List available models
 

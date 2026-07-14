@@ -91,7 +91,7 @@ When `preview.aiGateway` is enabled, Neon injects two gateway credentials as env
 
 So `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` is the chat-completions endpoint, and `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1` is the Responses endpoint. Swap the dialect segment to switch between them: `baseUrl.replace("/openai/v1", "/mlflow/v1")` (this is what the Mastra example does).
 
-Most dialects are also reachable at a shorter top-level `/v1/...` path with no `/ai-gateway/<dialect>` prefix (e.g. `${NEON_AI_GATEWAY_BASE_URL}/v1/chat/completions`, `/v1/responses`, `/v1/anthropic/v1/messages`) — same branch host, bearer token, request/response shape, model routing, rate limits, and quota behavior. Gemini is the exception: it has no shorter alias, so keep using `/ai-gateway/gemini/v1beta/...`. `GET ${NEON_AI_GATEWAY_BASE_URL}/v1/models` lists the catalog in an OpenRouter-shaped response. See [Shorter /v1 paths](https://neon.com/docs/ai-gateway/models.md#shorter-v1-paths) for the full mapping. Prefer `/v1/...` when adapting OpenAI/OpenRouter-compatible clients; keep `/ai-gateway/...` when following Neon examples that expect dialect-specific routes.
+Most dialects are also reachable at a shorter path with no `/ai-gateway/<dialect>` prefix — same branch host, bearer token, request/response shape, model routing, rate limits, and quota behavior. Only chat completions and Gemini use a top-level `/v1/...` prefix (`${NEON_AI_GATEWAY_BASE_URL}/v1/chat/completions`, `/v1/gemini/v1beta/...`); OpenAI Responses and Anthropic Messages have their own shorter prefixes instead (`/openai/v1/responses`, `/anthropic/v1/messages`). `GET ${NEON_AI_GATEWAY_BASE_URL}/v1/models` lists the catalog in an OpenRouter-shaped response. See [Shorter paths](https://neon.com/docs/ai-gateway/models.md#shorter-v1-paths) for the full mapping. Prefer the shorter paths when adapting OpenAI/OpenRouter-compatible clients; keep `/ai-gateway/...` when following Neon examples that expect dialect-specific routes.
 
 For typed access, `parseEnv` (from `@neon/env`) returns `env.aiGateway` (`apiKey`, `baseUrl`) derived from your `neon.ts`.
 
@@ -135,7 +135,7 @@ const { text } = await generateText({
 });
 ```
 
-`@neon/ai-sdk-provider` also re-exports the OpenAI provider's image generation tool as `neon.tools.imageGeneration()`. It only works for OpenAI-routed models (the request goes out over the native Responses endpoint) and requires `streamText`, not `generateText` — the gateway caps non-streaming response size, and a full base64 image reliably exceeds it:
+`@neon/ai-sdk-provider` also re-exports the OpenAI provider's image generation tool as `neon.tools.imageGeneration()`. It only works for OpenAI-routed models (the request goes out over the native Responses endpoint) and requires `streamText`, not `generateText` — a full base64 image reliably runs into size limits on a non-streaming response:
 
 ```typescript
 import { neon } from "@neon/ai-sdk-provider";

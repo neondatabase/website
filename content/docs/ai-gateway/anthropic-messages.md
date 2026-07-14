@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-07-11T13:41:14.778Z'
+updatedOn: '2026-07-14T20:34:24.495Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -19,7 +19,7 @@ The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://doc
 The Anthropic SDK appends `/v1/messages` to the base URL automatically. Set the base URL to `/ai-gateway/anthropic` (without `/v1`).
 </Admonition>
 
-This endpoint is also reachable at the shorter `/v1/anthropic/v1/messages` path (no `/ai-gateway` prefix). Both behave identically. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+This endpoint is also reachable at the shorter `/anthropic/v1/messages` path (no `/ai-gateway` prefix). Both behave identically. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
 
 ## Setup
 

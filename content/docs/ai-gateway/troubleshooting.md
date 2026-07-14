@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-13T19:43:27.832Z'
+updatedOn: '2026-07-14T20:34:24.495Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -48,7 +48,7 @@ The `model` field in the request body does not match any entry in the AI Gateway
 
 ### `400 model "<model-id>" is not available on the <endpoint> endpoint`
 
-The model exists in the catalog but doesn't work with the endpoint you're calling. The error message names both the model and the endpoint dialect it was sent to (for example, `anthropic_messages`, `openai_responses`, `gemini`, or `chat_completions`).
+The model exists in the catalog but doesn't work with the endpoint you're calling. The error message names both the model and the endpoint dialect it was sent to (for example, `anthropic_messages`, `openai_responses`, `gemini_generate_content`, or `chat_completions`).
 
 **Fix:** Check which endpoint the model requires:
 
@@ -140,7 +140,7 @@ Most AI Gateway errors use the standard OpenAI error envelope:
 ```json
 {
   "error": {
-    "message": "unknown model"
+    "message": "unknown model \"<model-id>\""
   }
 }
 ```

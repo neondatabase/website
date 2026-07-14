@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-09T23:06:44.844Z'
+updatedOn: '2026-07-14T20:34:24.495Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -15,9 +15,9 @@ The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platfor
 
 **Base URL:** `https://<branch-host>/ai-gateway/openai/v1`
 
-This endpoint is also reachable at the shorter `/v1/responses` path (no `/ai-gateway/openai` prefix). Both behave identically. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+This endpoint is also reachable at the shorter `/openai/v1/responses` path (no `/ai-gateway` prefix). Both behave identically. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
 
-If you're using an OpenAI-compatible client that accepts a base URL, set it to either `https://<branch-host>/ai-gateway/openai/v1` or `https://<branch-host>/v1`. The request and response shapes are the standard OpenAI Responses API shape.
+If you're using an OpenAI-compatible client that accepts a base URL, set it to either `https://<branch-host>/ai-gateway/openai/v1` or `https://<branch-host>/openai/v1`. The request and response shapes are the standard OpenAI Responses API shape.
 
 <Admonition type="warning">
 All codex model variants (`gpt-5-3-codex`, `gpt-5-2-codex`, `gpt-5-1-codex-max`, `gpt-5-1-codex-mini`) **require this endpoint**. They do not work with the [chat completions endpoint](/docs/ai-gateway/chat-completions).
@@ -51,7 +51,7 @@ This endpoint accepts OpenAI models only:
 | `gpt-5-mini`         |                        |
 | `gpt-5-nano`         |                        |
 
-Sending a non-OpenAI model ID returns `400 model "claude-sonnet-4-6" is not available on the openai_responses endpoint`.
+Sending a non-OpenAI model ID returns `400 model "<model-id>" is not available on the openai_responses endpoint`.
 
 ## Basic request
 
@@ -147,7 +147,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
 
 The `@neon/ai-sdk-provider` package re-exports the OpenAI provider's Responses image-generation tool as `neon.tools.imageGeneration()`. Use it with OpenAI-routed models such as `gpt-5-mini`.
 
-Use `streamText`, not `generateText`: image results are returned as tool-result parts, and streaming avoids the gateway's non-streaming response-size cap for base64 image data.
+Use `streamText`, not `generateText`: image results are returned as tool-result parts, and a full base64 image reliably runs into size limits on a non-streaming response.
 
 ```typescript shouldWrap
 import { neon } from '@neon/ai-sdk-provider';
@@ -172,10 +172,10 @@ AI SDK `generateImage()` is not supported by AI Gateway; image generation is ava
 
 ## Error handling
 
-| Status            | Message                                                                       | Cause                                  |
-| ----------------- | ----------------------------------------------------------------------------- | -------------------------------------- |
-| `400 Bad Request` | `unknown model "<model-id>"`                                                  | Model ID not in the catalog            |
-| `400 Bad Request` | `model "claude-sonnet-4-6" is not available on the openai_responses endpoint` | Non-OpenAI model sent to this endpoint |
+| Status            | Message                                                                | Cause                                  |
+| ----------------- | ---------------------------------------------------------------------- | -------------------------------------- |
+| `400 Bad Request` | `unknown model "<model-id>"`                                           | Model ID not in the catalog            |
+| `400 Bad Request` | `model "<model-id>" is not available on the openai_responses endpoint` | Non-OpenAI model sent to this endpoint |
 
 For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 
