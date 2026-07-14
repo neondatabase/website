@@ -143,24 +143,3 @@ endpoints:
     validator: openapi
     check: live
     rewriteFile: next.config.js
-
-  - id: api-docs-coverage
-    name: API reference coverage
-    description: >-
-      Ensures every Neon REST API operation is reflected across all three
-      surfaces: the OpenAPI spec, the docs API reference, and the @neon/sdk raw
-      layer. Offline it checks the docs manifest against the installed
-      @neon/sdk/raw exports (no endpoint documented-but-missing-from-SDK or
-      exposed-by-SDK-but-undocumented). Live it additionally diffs the published
-      spec's operationIds so a newly published endpoint can't ship undocumented
-      or unreachable from the SDK.
-    servedPath: /openapi.json
-    contentType: application/json
-    spec:
-      name: OpenAPI operation coverage (spec ↔ docs ↔ @neon/sdk)
-      url: https://neon.com/api_spec/release/v2.json
-      standard: false
-    validator: api-docs-coverage
-    check: file
-    file: content/docs/api-operation-ids.json
-    generator: scripts/generate-api-ref.mjs

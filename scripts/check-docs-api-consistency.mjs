@@ -1,46 +1,57 @@
 #!/usr/bin/env node
 /**
- * Neon SDK docs drift check
+ * Neon docs ↔ API consistency check
  *
- * Keeps the docs that reference `@neon/sdk` honest as the SDK evolves. The
- * installed `@neon/sdk` package is the source of truth: its `/raw` named
- * exports are the valid raw operations, and a live `createNeonClient()`
- * instance is the valid ergonomic surface (namespaces + methods).
+ * Keeps the docs faithful to, and complete against, the Neon REST API surface
+ * and the `@neon/sdk` package as both evolve. The installed `@neon/sdk` is the
+ * source of truth for the SDK surface (its `/raw` named exports are the valid
+ * raw operations; a live `createNeonClient()` instance is the valid ergonomic
+ * surface), and the committed operation manifest
+ * (content/docs/api-operation-ids.json, produced by generate-api-ref.mjs) is the
+ * docs-side source of truth for which operations are documented.
  *
- * Two classes of finding:
+ * Two concerns, two classes of finding:
  *
- *   BLOCK (exit 1) — a broken reference that a reader would copy and hit:
- *     - a fenced ```ts/```typescript code block in the docs calls `raw.X(...)`
- *       where `X` is not an `@neon/sdk/raw` export
- *     - a fenced block calls `neon.a.b(...)` where that namespace/method does
- *       not exist on a real client instance
- *     - a fenced block imports a value from `@neon/sdk` / `@neon/sdk/raw`
- *       that the package does not export
+ *   1. Snippet correctness — do the @neon/sdk code samples in the docs actually
+ *      resolve against the package?
+ *   2. Operation coverage — is every operation reflected across the three
+ *      surfaces (OpenAPI spec ↔ docs API reference ↔ @neon/sdk raw)?
  *
- *   NOTIFY (exit 0, or exit 1 with --strict) — drift worth a look, not a bug:
+ *   BLOCK (exit 1) — a broken reference a reader would copy and hit:
+ *     - a fenced ```ts/```typescript block calls `raw.X(...)` where `X` is not an
+ *       `@neon/sdk/raw` export
+ *     - a fenced block calls `neon.a.b(...)` where that namespace/method does not
+ *       exist on a real client instance
+ *     - a fenced block imports a value from `@neon/sdk` / `@neon/sdk/raw` that the
+ *       package does not export
+ *
+ *   NOTIFY (exit 0, or exit 1 with --strict) — drift worth a look, not a reader-
+ *   facing bug:
  *     - inline-code references (prose/tables) to `raw.X` / `neon.a.b()` that do
  *       not resolve (kept non-blocking to avoid false positives on hand-written
  *       reference tables)
- *     - operation-set drift between the generated API reference
- *       (`src/data/api-ref`) and the installed SDK's raw layer (either side
- *       being ahead usually means "regenerate api-ref" or "bump @neon/sdk")
+ *     - operation-set coverage skew: documented ops ↔ @neon/sdk raw methods, and
+ *       (in --strict) the live OpenAPI spec ↔ documented ops / @neon/sdk raw.
+ *       Either side being ahead usually means "run npm run generate:api-ref" or
+ *       "bump @neon/sdk".
  *
- * The scheduled watchdog runs this against `@neon/sdk@latest` with --strict so
- * a newly published SDK that drifts from the docs turns the run red (and opens
- * an issue) instead of silently rotting.
+ * The scheduled watchdog runs this against `@neon/sdk@latest` with --strict (and
+ * fetches the live spec) so a newly published SDK or endpoint that drifts from
+ * the docs turns the run red (and opens an issue) instead of silently rotting.
  *
  * Usage:
- *   node scripts/check-sdk-docs.mjs            # PR mode: block on broken authored refs
- *   node scripts/check-sdk-docs.mjs --strict   # also fail on NOTIFY drift (watchdog)
- *   node scripts/check-sdk-docs.mjs --json      # machine-readable report
- *   node scripts/check-sdk-docs.mjs --ci        # terse output
+ *   node scripts/check-docs-api-consistency.mjs           # PR mode: block on broken refs
+ *   node scripts/check-docs-api-consistency.mjs --strict  # + fail on coverage drift, fetch live spec
+ *   node scripts/check-docs-api-consistency.mjs --json     # machine-readable report
+ *   node scripts/check-docs-api-consistency.mjs --ci       # terse output
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { toSdkMethodName } from '../src/utils/api-ref.mjs';
+import { computeCoverage, operationIdsFromSpec, sdkRawOperationNames } from './lib/api-coverage.mjs';
+import { defaultSpecCachePath, loadOpenApiSpec } from './lib/openapi-spec-source.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -51,15 +62,10 @@ const JSON_MODE = args.includes('--json');
 const CI = args.includes('--ci');
 
 const DOC_DIRS = [path.join(ROOT, 'content'), path.join(ROOT, 'public', 'docs')];
-const API_REF_DATA_DIR = path.join(ROOT, 'src', 'data', 'api-ref');
+const MANIFEST_PATH = path.join(ROOT, 'content', 'docs', 'api-operation-ids.json');
+const SPEC_URL = 'https://neon.com/api_spec/release/v2.json';
 
 const TS_FENCE_LANGS = new Set(['ts', 'tsx', 'typescript', 'js', 'jsx', 'javascript']);
-
-// `@neon/sdk/raw` re-exports client/config helpers alongside the generated
-// operation functions. These are infrastructure, not OpenAPI operations, so
-// they are excluded from the api-ref coverage comparison (but remain valid
-// targets for reference validation, since they are real exports).
-const NON_OPERATION_RAW_EXPORTS = new Set(['createClient', 'createConfig', 'wrapRaw', 'client']);
 
 // ---------------------------------------------------------------------------
 // Filesystem walk (no glob dependency, keeps the check self-contained)
@@ -93,12 +99,15 @@ async function loadSdkSurface() {
 
   const version = readInstalledSdkVersion();
   const topExports = new Set(Object.keys(sdk));
-  const rawOps = new Set(Object.keys(rawMod).filter((k) => typeof rawMod[k] === 'function'));
+  // All function exports — used to validate `raw.X()` and import references.
+  const rawExports = new Set(Object.keys(rawMod).filter((k) => typeof rawMod[k] === 'function'));
+  // Operation exports only (infrastructure removed) — used for coverage.
+  const rawOperations = sdkRawOperationNames(rawMod);
 
   // A throwaway client instance — never makes a request, just introspected.
-  const neon = sdk.createNeonClient({ apiKey: 'docs-drift-check' });
+  const neon = sdk.createNeonClient({ apiKey: 'docs-consistency-check' });
 
-  return { version, topExports, rawOps, neon };
+  return { version, topExports, rawExports, rawOperations, neon };
 }
 
 function readInstalledSdkVersion() {
@@ -107,6 +116,15 @@ function readInstalledSdkVersion() {
     return JSON.parse(fs.readFileSync(pkgPath, 'utf8')).version ?? 'unknown';
   } catch {
     return 'unknown';
+  }
+}
+
+function loadDocumentedOps() {
+  try {
+    const parsed = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
+    return Array.isArray(parsed.operationIds) ? parsed.operationIds : [];
+  } catch {
+    return [];
   }
 }
 
@@ -197,7 +215,7 @@ export function splitMarkdown(content) {
 // ---------------------------------------------------------------------------
 
 async function main() {
-  const { version, topExports, rawOps, neon } = await loadSdkSurface();
+  const { version, topExports, rawExports, rawOperations, neon } = await loadSdkSurface();
 
   const blocking = [];
   const notices = [];
@@ -205,7 +223,7 @@ async function main() {
   const relative = (p) => path.relative(ROOT, p);
 
   const validateRawRef = (name, where, sink) => {
-    if (!rawOps.has(name)) sink.push(`${where}: raw.${name}() is not an @neon/sdk/raw export`);
+    if (!rawExports.has(name)) sink.push(`${where}: raw.${name}() is not an @neon/sdk/raw export`);
   };
   const validateNeonChain = (chain, where, sink) => {
     const segments = chain.split('.');
@@ -219,7 +237,7 @@ async function main() {
     for (const { name, isType } of imp.names) {
       if (isType) continue;
       if (isRaw) {
-        if (!rawOps.has(name)) {
+        if (!rawExports.has(name)) {
           blocking.push(`${where}: '${name}' is not an @neon/sdk/raw export`);
         }
       } else if (!topExports.has(name) && !/^[A-Z]/.test(name)) {
@@ -229,7 +247,7 @@ async function main() {
     }
   };
 
-  // --- Docs: authored markdown that mentions @neon/sdk --------------------
+  // --- Snippet correctness: authored markdown that mentions @neon/sdk -------
   const docFiles = DOC_DIRS.flatMap((dir) =>
     walk(
       dir,
@@ -259,33 +277,54 @@ async function main() {
     for (const chain of neonChains) validateNeonChain(chain, where, notices);
   }
 
-  // --- Operation-set coverage: generated API reference vs SDK raw ---------
-  const dataFiles = walk(API_REF_DATA_DIR, (p) => p.endsWith('.json'));
-  const apiRefOps = new Set();
-  for (const file of dataFiles) {
+  // --- Operation coverage: spec ↔ docs ↔ @neon/sdk raw ---------------------
+  // Offline (PR): committed manifest vs the installed @neon/sdk raw layer.
+  // Strict (watchdog): also fetch the live spec and diff its operationIds.
+  const documentedOps = loadDocumentedOps();
+  let specVersionNote = '';
+  let specOps = null;
+  if (STRICT) {
     try {
-      const { operationId } = JSON.parse(fs.readFileSync(file, 'utf8'));
-      if (operationId) apiRefOps.add(operationId);
-    } catch {
-      // Ignore non-operation JSON files.
+      const { spec } = await loadOpenApiSpec({
+        specUrl: SPEC_URL,
+        cachePath: defaultSpecCachePath(ROOT),
+        log: () => {},
+      });
+      specOps = [...operationIdsFromSpec(spec)];
+      specVersionNote = ` (live spec: ${specOps.length} operations)`;
+    } catch (err) {
+      notices.push(`Could not fetch the live OpenAPI spec for coverage: ${err.message}`);
     }
   }
 
-  const apiRefRawNames = new Set([...apiRefOps].map((op) => toSdkMethodName(op)));
-  const operationRawOps = [...rawOps].filter((n) => !NON_OPERATION_RAW_EXPORTS.has(n));
-  const docsAheadOfSdk = [...apiRefRawNames].filter((n) => !rawOps.has(n)).sort();
-  const sdkAheadOfDocs = operationRawOps.filter((n) => !apiRefRawNames.has(n)).sort();
+  const { sdkNotDocumented, documentedNotInSdk, specNotDocumented, specNotInSdk } = computeCoverage({
+    documentedOps,
+    rawOps: rawOperations,
+    specOps,
+  });
 
-  if (docsAheadOfSdk.length) {
+  if (sdkNotDocumented.length) {
     notices.push(
-      `API reference documents ${docsAheadOfSdk.length} operation(s) missing from @neon/sdk@${version} raw layer ` +
-        `(SDK behind spec — bump @neon/sdk): ${docsAheadOfSdk.join(', ')}`
+      `@neon/sdk@${version} raw layer exposes ${sdkNotDocumented.length} operation(s) the docs do not document ` +
+        `(docs behind — run npm run generate:api-ref): ${sdkNotDocumented.join(', ')}`
     );
   }
-  if (sdkAheadOfDocs.length) {
+  if (documentedNotInSdk.length) {
     notices.push(
-      `@neon/sdk@${version} raw layer exposes ${sdkAheadOfDocs.length} operation(s) the API reference does not document ` +
-        `(docs behind — run npm run generate:api-ref): ${sdkAheadOfDocs.join(', ')}`
+      `docs document ${documentedNotInSdk.length} operation(s) missing from @neon/sdk@${version} raw layer ` +
+        `(SDK behind spec — bump @neon/sdk): ${documentedNotInSdk.join(', ')}`
+    );
+  }
+  if (specNotDocumented?.length) {
+    notices.push(
+      `OpenAPI spec exposes ${specNotDocumented.length} endpoint(s) the docs do not document ` +
+        `(docs behind — run npm run generate:api-ref and commit): ${specNotDocumented.join(', ')}`
+    );
+  }
+  if (specNotInSdk?.length) {
+    notices.push(
+      `OpenAPI spec exposes ${specNotInSdk.length} endpoint(s) missing from @neon/sdk@${version} raw layer ` +
+        `(SDK behind spec — bump @neon/sdk): ${specNotInSdk.join(', ')}`
     );
   }
 
@@ -298,7 +337,9 @@ async function main() {
       JSON.stringify(
         {
           sdkVersion: version,
-          rawOps: rawOps.size,
+          rawOperations: rawOperations.size,
+          documentedOps: documentedOps.length,
+          specOps: specOps ? specOps.length : null,
           docFiles: docFiles.length,
           ok,
           blocking,
@@ -311,10 +352,10 @@ async function main() {
     process.exit(ok ? 0 : 1);
   }
 
-  console.log(`Neon SDK docs drift check`);
-  console.log(`  @neon/sdk version: ${version} (${rawOps.size} raw operations)`);
+  console.log(`Neon docs ↔ API consistency check`);
+  console.log(`  @neon/sdk version: ${version} (${rawOperations.size} raw operations)`);
   console.log(`  docs scanned:      ${docFiles.length} file(s) referencing @neon/sdk`);
-  console.log(`  api-ref ops:       ${apiRefOps.size}\n`);
+  console.log(`  documented ops:    ${documentedOps.length}${specVersionNote}\n`);
 
   if (blocking.length) {
     console.log(`[FAIL] ${blocking.length} broken @neon/sdk reference(s) in docs:\n`);
@@ -324,7 +365,7 @@ async function main() {
 
   if (notices.length) {
     const label = STRICT ? 'FAIL (strict)' : 'NOTICE';
-    console.log(`[${label}] ${notices.length} drift notice(s):\n`);
+    console.log(`[${label}] ${notices.length} coverage/drift notice(s):\n`);
     for (const msg of notices) console.log(`  • ${msg}`);
     console.log('');
   }
@@ -343,7 +384,7 @@ async function main() {
       'Fix broken references above, or run `npm run generate:api-ref` if the API reference is stale.'
     );
     if (strictFail)
-      console.log('Strict mode: drift notices are treated as failures (scheduled watchdog).');
+      console.log('Strict mode: coverage/drift notices are treated as failures (scheduled watchdog).');
   }
   process.exit(1);
 }
