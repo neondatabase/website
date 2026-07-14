@@ -57,6 +57,10 @@ It's a `pg` (node-postgres) deprecation warning, not a connection problem: the i
 
 Use the level chips to show only the levels you care about, and the search box to match a literal, case-insensitive substring in the log body. Use the time-range chips (`5m`, `15m`, `1h`, `6h`, `24h`, `7d`) to change the query window. Logs are currently retained for only 3 days (see [Retention](#retention)), so the `7d` option is selectable but can't return anything older than 3 days back.
 
+Use the service name field to scope the view to one function. It matches a substring by default; click the `~`/`=` toggle next to it to switch to an exact match on the full function name.
+
+If a query matches more than 1,000 lines, the view shows only the most recent 1,000 and displays a banner telling you to narrow the time range or add a search to see the rest.
+
 ## Go live
 
 **Go live** polls for new log lines every 5 seconds; it isn't a push-based live tail. Toggle it off to stop polling and inspect a static view.
