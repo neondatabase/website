@@ -4,19 +4,19 @@ subtitle: 'Learn how to set up a CRUD backend using Fastify and Neon Postgres wi
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-13T00:00:00.000Z'
-updatedOn: '2026-07-14T10:05:22.201Z'
+updatedOn: '2026-07-14T11:36:29.631Z'
 ---
 
 Ensuring end-to-end type safety between your backend and frontend is one of the most common challenges in modern web development.
 
-Traditionally, developers define a database schema, duplicate those constraints in their backend validation schemas, write matching TypeScript interfaces on the frontend, and reconstruct validation schemas for client-side forms. This repetitive process is highly prone to code drift as soon as an API endpoint changes, frontend types or schemas can fall out of sync, leading to runtime failures.
+Traditionally, developers define a database schema, duplicate those constraints in their backend validation schemas, write matching TypeScript interfaces on the frontend, and reconstruct validation schemas for client-side forms. This repetitive process is highly prone to code drift, and as soon as an API endpoint changes, frontend types or schemas can fall out of sync, leading to runtime failures.
 
 In this guide, you will build a unified, type-safe pipeline that automatically solves this problem using:
 
-1. **Backend database**: [Neon Postgres](/docs/introduction/about) for scalable, zero-config relational storage.
-2. **Backend API**: A Fastify server using `fastify-type-provider-zod` to bind Zod validation directly to request payloads and responses.
+1. **Backend database**: Neon Postgres for scalable, zero-config relational storage.
+2. **Backend API**: A [Fastify](https://fastify.dev/) server using `fastify-type-provider-zod` to bind Zod validation directly to request payloads and responses.
 3. **OpenAPI generation**: `@fastify/swagger` to automatically translate backend Zod schemas into an OpenAPI schema (`openapi.json`).
-4. **Code generation**: [Hey API](/docs/openapi/typescript/get-started) to parse the exported OpenAPI schema and generate a completely typed client SDK alongside matching **Zod validation schemas** for client-side forms.
+4. **Code generation**: [Hey API](https://heyapi.dev/) to parse the exported OpenAPI schema and generate a completely typed client SDK alongside matching **Zod validation schemas** for client-side forms.
 
 By deriving the client-side validation schemas directly from the backend's Zod schemas, you establish a single source of truth for validations across the entire application stack.
 
@@ -71,21 +71,19 @@ cd backend
 npm init -y
 ```
 
-Install the required packages. This includes `fastify` for the server, `@fastify/postgres` and `pg` for Postgres queries, `zod` and `fastify-type-provider-zod` for request type-safety, and `@fastify/swagger` to output the OpenAPI specification:
+Install the required packages. This includes `fastify` for the server, `@fastify/postgres` and `pg` for Postgres queries, `@fastify/cors` for CORS support, `zod` and `fastify-type-provider-zod` for request type-safety, and `@fastify/swagger` to output the OpenAPI specification:
 
 ```bash
-npm install fastify zod fastify-type-provider-zod @fastify/swagger @fastify/swagger-ui @fastify/postgres pg dotenv
-npm install -D typescript @types/node ts-node
+npm install fastify zod fastify-type-provider-zod @fastify/cors @fastify/swagger @fastify/swagger-ui @fastify/postgres pg dotenv
+npm install -D typescript @types/node @types/pg tsx
 ```
 
 Create a `tsconfig.json` in the `/backend` folder:
 
-```json title="backend/tsconfig.json"
+```json filename="backend/tsconfig.json"
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
@@ -97,11 +95,23 @@ Create a `tsconfig.json` in the `/backend` folder:
 }
 ```
 
+Update the `package.json` to use ES modules by updating the `"type"` field from `"commonjs"` to `"module"`:
+
+```json filename="backend/package.json"
+{
+  // other fields...
+  "type": "commonjs", // [!code --]
+  "type": "module" // [!code ++]
+}
+```
+
 Create a `.env` file in `/backend` to store your connection string:
 
-```env title="backend/.env"
-DATABASE_URL="your_neon_connection_string_here"
+```env filename="backend/.env"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 ```
+
+> Replace the `DATABASE_URL` value with your actual Neon connection string you copied in [Create a Neon project](#create-a-neon-project).
 
 ## Configure the database connection
 
@@ -109,7 +119,7 @@ Create a file to manage database connections and initialize the schema. This wil
 
 Create `backend/db.ts`:
 
-```typescript title="backend/db.ts"
+```typescript filename="backend/db.ts"
 import fastifyPostgres from '@fastify/postgres';
 import fp from 'fastify-plugin';
 import type { FastifyInstance } from 'fastify';
@@ -138,7 +148,7 @@ export default fp(async function dbPlugin(app: FastifyInstance) {
 });
 ```
 
-The above code exports a Fastify plugin that registers the Postgres connection and ensures the `tasks` table exists. It uses the `DATABASE_URL` from the `.env` file to connect to your Neon database. Learn more [Fastify Postgres Plugin](https://github.com/fastify/fastify-postgres).
+The above code exports a Fastify plugin that registers the Postgres connection and ensures the `tasks` table exists. It uses the `DATABASE_URL` from the `.env` file to connect to your Neon database. Learn more about the [Fastify Postgres Plugin](https://github.com/fastify/fastify-postgres).
 
 ## Build the Fastify server with Zod Type Provider
 
@@ -148,7 +158,7 @@ The core logic is four CRUD routes (`GET /tasks`, `POST /tasks`, `PUT /tasks/:id
 
 Create `backend/server.ts`:
 
-```typescript title="backend/server.ts"
+```typescript filename="backend/server.ts"
 import Fastify from 'fastify';
 import {
   serializerCompiler,
@@ -160,7 +170,7 @@ import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import fastifyCors from '@fastify/cors';
 import { z } from 'zod';
-import dbPlugin from './db.ts';
+import dbPlugin from './db';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -357,7 +367,7 @@ cd frontend && npm install
 
 When prompted:
 
-- Select "No" for "Use rolldown-vite (Experimental)?"
+- Select "Oxlint" for "Which linter to use?"
 - Select "No" for "Install with npm and start now?"
 
 You should see output similar to:
@@ -369,8 +379,8 @@ $ npm create vite@latest frontend -- --template react-ts
 > "create-vite" frontend --template react-ts
 
 │
-◇  Use rolldown-vite (Experimental)?:
-│  No
+◇  Which linter to use?
+│  Oxlint
 │
 ◇  Install with npm and start now?
 │  No
@@ -389,42 +399,11 @@ npm install @hey-api/client-fetch zod react-hook-form @hookform/resolvers
 npm install -D @hey-api/openapi-ts typescript @types/node
 ```
 
-### Setup Tailwind CSS
-
-Install Tailwind CSS and the Vite plugin:
-
-```bash
-npm install tailwindcss @tailwindcss/vite
-```
-
-Add the `@tailwindcss/vite` plugin to your Vite configuration (`vite.config.ts`):
-
-```javascript title="frontend/vite.config.ts"
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite'; // [!code ++]
-
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(), // [!code ++]
-  ],
-});
-```
-
-### Update styles
-
-Replace the contents of `src/index.css` with Tailwind's imports:
-
-```css title="frontend/src/index.css"
-@import 'tailwindcss';
-```
-
 ### Configure Hey API
 
 Create the Hey API configuration file. This points to the `openapi.json` produced by Fastify and tells the generator to output the client-side Zod validation schemas:
 
-```typescript title="frontend/openapi-ts.config.ts"
+```typescript filename="frontend/openapi-ts.config.ts"
 import { defineConfig } from '@hey-api/openapi-ts';
 
 export default defineConfig({
@@ -469,7 +448,7 @@ Instead of manually duplicating schema parameters inside your frontend applicati
 
 For example, you can create a `TaskForm` component that uses the generated `zPostTasksBody` schema for validation:
 
-```tsx title="frontend/src/TaskForm.tsx"
+```tsx filename="frontend/src/TaskForm.tsx"
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -510,42 +489,24 @@ export function TaskForm({ onCreated }: { onCreated?: () => void }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 max-w-md p-4">
-      <div>
-        <label className="block text-sm font-medium">Task Title</label>
-        <input
-          {...register('title')}
-          type="text"
-          className="mt-1 block w-full rounded border border-gray-300 p-2 shadow-sm"
-        />
-        {errors.title && (
-          <p className="text-red-500 text-xs mt-1">{errors.title.message}</p>
-        )}
+    <form onSubmit={handleSubmit(onSubmit)} style={{ marginBottom: '2rem' }}>
+      <div style={{ marginBottom: '1rem' }}>
+        <label>Task Title</label>
+        <input {...register('title')} type="text" style={{ display: 'block', width: '100%', padding: '0.5rem' }} />
+        {errors.title && <p style={{ color: 'red' }}>{errors.title.message}</p>}
       </div>
 
-      <div>
-        <label className="block text-sm font-medium">Description</label>
-        <textarea
-          {...register('description')}
-          className="mt-1 block w-full rounded border border-gray-300 p-2 shadow-sm"
-        />
+      <div style={{ marginBottom: '1rem' }}>
+        <label>Description</label>
+        <textarea {...register('description')} style={{ display: 'block', width: '100%', padding: '0.5rem' }} />
       </div>
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="px-4 py-2 bg-blue-600 text-white rounded disabled:opacity-50"
-      >
+      <button type="submit" disabled={isSubmitting} style={{ padding: '0.5rem 1rem' }}>
         {isSubmitting ? 'Saving...' : 'Add Task'}
       </button>
 
       {status.type !== 'idle' && (
-        <p
-          className={`text-sm mt-3 ${
-            status.type === 'success' ? 'text-green-600' : 'text-red-600'
-          }`}
-          role="status"
-        >
+        <p style={{ color: status.type === 'success' ? 'green' : 'red' }} role="status">
           {status.message}
         </p>
       )}
@@ -558,13 +519,12 @@ export function TaskForm({ onCreated }: { onCreated?: () => void }) {
 
 Update `src/main.tsx` to render the `TaskForm` component alongside a button to fetch and display all tasks:
 
-```tsx title="frontend/src/main.tsx"
+```tsx filename="frontend/src/main.tsx"
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { TaskForm } from './TaskForm';
 import { getTasks } from './client/sdk.gen';
 import type { GetTasksResponse } from './client/types.gen';
-import './index.css';
 
 function App() {
   const [tasks, setTasks] = useState<GetTasksResponse>([]);
@@ -586,53 +546,24 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="flex items-center justify-between mb-4">
-        <h1 className="text-2xl font-bold">Tasks</h1>
-        <button
-          type="button"
-          onClick={loadTasks}
-          disabled={loading}
-          className="px-4 py-2 bg-gray-800 text-white rounded disabled:opacity-50"
-        >
-          {loading ? 'Loading...' : 'Get all tasks'}
-        </button>
-      </div>
+    <div style={{ padding: '2rem' }}>
+      <h1>Tasks</h1>
+      <button type="button" onClick={loadTasks} disabled={loading} style={{ padding: '0.5rem 1rem', marginBottom: '1rem' }}>
+        {loading ? 'Loading...' : 'Get all tasks'}
+      </button>
 
       <TaskForm onCreated={loadTasks} />
 
-      {error && <p className="text-red-600 text-sm mt-4">{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <div className="mt-8 max-w-md">
-        {tasks.length === 0 ? (
-          <p className="text-gray-500 text-sm">No tasks loaded yet.</p>
-        ) : (
-          <ul className="space-y-2">
-            {tasks.map((task) => (
-              <li
-                key={task.id}
-                className="border border-gray-200 rounded p-3 bg-white shadow-sm"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">{task.title}</span>
-                  <span
-                    className={`text-xs px-2 py-0.5 rounded ${
-                      task.completed
-                        ? 'bg-green-100 text-green-700'
-                        : 'bg-yellow-100 text-yellow-700'
-                    }`}
-                  >
-                    {task.completed ? 'Done' : 'Pending'}
-                  </span>
-                </div>
-                {task.description && (
-                  <p className="text-sm text-gray-600 mt-1">{task.description}</p>
-                )}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id} style={{ marginBottom: '0.5rem' }}>
+            <strong>{task.title}</strong> - {task.completed ? 'Done' : 'Pending'}
+            {task.description && <p>{task.description}</p>}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
@@ -647,6 +578,21 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 The `TaskForm` component accepts an optional `onCreated` callback. When a task is created successfully, the app automatically refreshes the task list. The "Get all tasks" button calls the auto-generated `getTasks()` SDK function to fetch and display all tasks from the backend.
 
 By binding your form validation directly to `zPostTasksBody` generated from your schema, you guarantee that any change to the database constraints instantly trickles down to the UI upon code regeneration.
+
+You can now run the frontend application:
+
+```bash
+npm run dev
+```
+
+In other terminal, ensure the backend server is running.
+
+```bash
+cd backend
+npx tsx server.ts
+```
+
+Open your browser to `http://localhost:5173` to see the application in action. You can create tasks, view them, and see that the validation rules are enforced according to the backend Zod schemas.
 
 </Steps>
 
@@ -663,11 +609,19 @@ Implementing this automated pipeline provides critical improvements to full-stac
 - **Single source of truth**: Backend Zod definitions govern the database, API route inputs, and client inputs leaving no room for manual definition errors or stale typing.
 - **Immediate structural alignment**: If you add, delete, or modify a field in Fastify (e.g. changing the minimum description length from optional to required), rebuilding simply involves re-spinning Fastify and regenerating the Hey API client. The frontend code will immediately reflect validation changes.
 
+## Extending this guide
+
+In the current workflow, you define your database tables in SQL and then manually write matching Zod schemas. This works, but as your schema grows, keeping the two in sync becomes a maintenance burden and defeats the purpose of having a single source of truth. A better solution is to adopt a modern ORM that integrates seamlessly with both TypeScript and Zod, eliminating duplication and ensuring a single source of truth. For example, [Drizzle ORM](https://orm.drizzle.team/) is a TypeScript-first ORM that supports Postgres and provides built-in Zod schema generation.
+
+With Drizzle, you define your schema once in TypeScript using its `pgTable` API. The [`drizzle-zod`](https://orm.drizzle.team/docs/zod) package then generates Zod schemas directly from those table definitions, so your validation logic is always derived from a single source of truth. Feed these generated Zod schemas into `fastify-type-provider-zod` and the rest of the pipeline (OpenAPI export via Swagger, client SDK and Zod schema generation via Hey API) carries on as before. The result is an unbroken chain of type safety from the database column all the way to the frontend form, with no hand-written schemas to maintain in between.
+
 ## Resources
 
 - [Fastify Type Provider Zod GitHub](https://github.com/fastify/fastify-type-provider-zod)
 - [Fastify Postgres Plugin GitHub](https://github.com/fastify/fastify-postgres)
-- [Hey API OpenAPI TS Client Reference](/docs/openapi/typescript/get-started)
+- [Hey API Documentation](https://heyapi.dev/docs/openapi/typescript/get-started)
+- [Drizzle ORM Documentation](https://orm.drizzle.team/)
+- [Drizzle Zod Integration](https://orm.drizzle.team/docs/zod)
 - [Neon TypeScript SDK (`@neon/sdk`) - built with Hey API](https://github.com/neondatabase/neon-pkgs/tree/main/packages/sdk)
 - [Zod Official Documentation](https://zod.dev/)
 
