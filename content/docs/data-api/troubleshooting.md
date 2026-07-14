@@ -89,11 +89,11 @@ The `sub` claim in this example: `41a5f680-89d2-474d-ae59-e27bfbbbd293` represen
 
 If you're using Managed BetterAuth, you can use the Auth API reference UI to create test users and obtain JWT tokens for testing with tools like Postman or cURL.
 
-Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console. From there, you can:
+Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your **Auth URL** on the **Auth** page, **Configuration** tab in the Neon Console. From there, you can:
 
-1. Create a test user with `POST /api/auth/sign-up/email`.
-2. Sign in with `POST /api/auth/sign-in/email`.
-3. Call `GET /api/auth/get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
+1. Create a test user with `POST /sign-up/email`.
+2. Sign in with `POST /sign-in/email`.
+3. Call `GET /get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
 4. Use that JWT in your Data API requests.
 
 For step-by-step instructions, see [Testing with Managed BetterAuth](/docs/data-api/get-started#testing-with-neon-auth).
@@ -196,7 +196,7 @@ The OpenAPI schema feature is disabled in your Data API configuration.
 ### Fix
 
 1. Go to the **Data API** page in the Neon Console
-2. Open the **Configuration** panel
+2. Open the **Settings** tab
 3. Enable the **OpenAPI schema** toggle
 4. Try your request again
 
@@ -248,6 +248,6 @@ JWT tokens have a limited lifespan (typically around 15 minutes). Once expired, 
 
 ### Fix
 
-Sign in again to get a fresh token. If you're using Managed BetterAuth, call `POST /api/auth/sign-in/email` in the Auth API reference UI, then call `GET /api/auth/get-session` and copy the new JWT from the `Set-Auth-Jwt` response header.
+Sign in again to get a fresh token. If you're using Managed BetterAuth, call `POST /sign-in/email` in the Auth API reference UI, then call `GET /get-session` and copy the new JWT from the `Set-Auth-Jwt` response header.
 
 For programmatic token refresh, see your authentication provider's documentation on token renewal.
