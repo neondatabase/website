@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-07-10T10:36:04.593Z'
+updatedOn: '2026-07-13T15:03:24.073Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -25,8 +25,6 @@ We're expanding the platform with [a branchable stack of backend primitives](htt
 - **Functions**: Node.js functions deployed alongside your database.
 - **Storage**: S3-compatible object storage that branches with your projects.
 - **AI Gateway**: One API for all frontier & open-source models, powered by Databricks.
-
-<RequestForm type="backend-platform" />
 
 ## Core Postgres database features and improvements
 

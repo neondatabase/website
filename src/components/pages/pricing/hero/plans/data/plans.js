@@ -37,10 +37,15 @@ export default [
         features: [
           { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
           {
-            title: 'Object Storage [BETA]',
+            title: 'Object Storage',
+            tag: { label: 'Beta', theme: 'orange-muted' },
             info: 'No charges applied during beta, with usage limits',
           },
-          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits' },
+          {
+            title: 'Functions',
+            tag: { label: 'Beta', theme: 'orange-muted' },
+            info: 'No charges applied during beta, with usage limits',
+          },
         ],
       },
     },
@@ -84,11 +89,20 @@ export default [
         features: [
           { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
           {
-            title: 'Object Storage [BETA]',
+            title: 'Object Storage',
+            tag: { label: 'Beta', theme: 'orange-muted' },
             info: 'No charges applied during beta, with usage limits',
           },
-          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits' },
-          { title: 'AI Gateway [BETA]', info: 'Pricing matches model provider list prices (no markup)' },
+          {
+            title: 'Functions',
+            tag: { label: 'Beta', theme: 'orange-muted' },
+            info: 'No charges applied during beta, with usage limits',
+          },
+          {
+            title: 'AI Gateway',
+            tag: { label: 'Beta', theme: 'orange-muted' },
+            info: 'Pricing matches model provider list prices (no markup)',
+          },
         ],
       },
     },
@@ -132,11 +146,20 @@ export default [
         features: [
           { title: 'Managed Better Auth', info: 'Up to 1M MAUs' },
           {
-            title: 'Object Storage [BETA]',
+            title: 'Object Storage',
+            tag: { label: 'Beta', theme: 'orange-muted' },
             info: 'No charges applied during beta, with usage limits',
           },
-          { title: 'Functions [BETA]', info: 'No charges applied during beta, with usage limits' },
-          { title: 'AI Gateway [BETA]', info: 'Pricing matches model provider list prices (no markup)' },
+          {
+            title: 'Functions',
+            tag: { label: 'Beta', theme: 'orange-muted' },
+            info: 'No charges applied during beta, with usage limits',
+          },
+          {
+            title: 'AI Gateway',
+            tag: { label: 'Beta', theme: 'orange-muted' },
+            info: 'Pricing matches model provider list prices (no markup)',
+          },
         ],
       },
     },

@@ -10,8 +10,9 @@ summary: >-
   $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
   limit.
 tag: new
+tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-07-03T10:03:13.108Z'
+updatedOn: '2026-07-13T14:20:27.525Z'
 ---
 
 <Admonition type="note" title="Snapshots">

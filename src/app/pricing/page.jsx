@@ -200,10 +200,10 @@ const faqItems = [
     `,
   },
   {
-    question: 'How is Neon Auth billed?',
+    question: 'How is Managed Better Auth billed?',
     answer: `
-      <p>Neon Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU). If you surpass that threshold, a member of our team will reach out to discuss pricing.</p>
-      <p>On the Free plan, Neon Auth is included for up to 60,000 MAU.</p>
+      <p>Managed Better Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU). If you surpass that threshold, a member of our team will reach out to discuss pricing.</p>
+      <p>On the Free plan, Managed Better Auth is included for up to 60,000 MAU.</p>
     `,
   },
   {

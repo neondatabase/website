@@ -10,7 +10,7 @@ summary: >-
   middleware, and deployment to Vercel, Netlify, or self-hosted Node.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-13T14:20:27.525Z'
 ---
 
 ## Before you start
@@ -73,7 +73,7 @@ The connection string is in the response under `connection_uris[0].connection_ur
 <TwoColumnLayout.Step title="Enable Neon Auth">
 <TwoColumnLayout.Block>
 
-<Tag label="beta" size="sm" /> Neon Auth with Better Auth is in beta. [Share feedback on Discord](https://discord.gg/92vNTzKDGp).
+<Tag label="beta" size="sm" theme="blue" /> Neon Auth with Better Auth is in beta. [Share feedback on Discord](https://discord.gg/92vNTzKDGp).
 
 Enable Auth on your project's default branch and copy the **Auth URL**. You'll add it to your environment in step 4.
 

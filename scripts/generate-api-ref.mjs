@@ -729,7 +729,10 @@ export function toNavYaml(allOps) {
       lines.push(`    - title: ${JSON.stringify(op.summary)}`);
       lines.push(`      slug: reference/api/${op.tag}/${op.id}`);
       lines.push(`      method: ${op.method}`);
-      if (op.deprecated) lines.push(`      tag: deprecated`);
+      if (op.deprecated) {
+        lines.push(`      tag: deprecated`);
+        lines.push(`      tagTheme: orange`);
+      }
     }
   }
   return lines.join('\n') + '\n';
