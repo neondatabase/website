@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-13T13:28:24.776Z'
+updatedOn: '2026-07-14T12:55:30.475Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -88,7 +88,7 @@ Most dialects above are also reachable at a shorter, top-level `/v1/...` path wi
 Use the `/v1/...` paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-gateway/...` paths when a framework or existing Neon example expects the older dialect-specific route.
 
 | Shorter path                       | Equivalent to                            |
-| ----------------------------------- | ----------------------------------------- |
+| ---------------------------------- | ---------------------------------------- |
 | `POST /v1/chat/completions`        | `/ai-gateway/mlflow/v1/chat/completions` |
 | `POST /v1/openai/chat/completions` | `/ai-gateway/mlflow/v1/chat/completions` |
 | `POST /v1/responses`               | `/ai-gateway/openai/v1/responses`        |
