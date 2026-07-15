@@ -2,7 +2,7 @@ This is a reference for the `TeamPermission` type in the {sdkName} SDK.
 
 ## TeamPermission
 
-The `TeamPermission` object represents a permission that a user has within a team in Managed BetterAuth. Currently, it contains only an `id` to specify the permission.
+The `TeamPermission` object represents a permission that a user has within a team in Managed Better Auth. Currently, it contains only an `id` to specify the permission.
 
 You can get `TeamPermission` objects by calling functions such as `user.getPermission(...)` or `user.listPermissions()`.
 

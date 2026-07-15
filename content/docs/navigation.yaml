@@ -788,7 +788,7 @@
           slug: compute/functions/overview
         - title: Preview access
           slug: compute/functions/preview-access
-        - title: Get started
+        - title: Quickstart
           slug: compute/functions/get-started
         - title: Deploy and manage
           slug: compute/functions/deploy
@@ -1210,6 +1210,8 @@
                   slug: cli/completion
             - title: Projects and branches
               items:
+                - title: diff
+                  slug: cli/diff
                 - title: projects
                   slug: cli/projects
                 - title: branches
@@ -1287,6 +1289,9 @@
           items:
             - title: neon.ts
               slug: reference/neon-ts
+              items:
+                - title: '@neon/config-runtime'
+                  slug: reference/config-runtime
     - title: Integrations & tooling
       slug: guides/integrations
       icon: integrations

@@ -14,13 +14,13 @@ enableTableOfContents: true
 tag: archived
 tagTheme: gray
 noindex: true
-updatedOn: '2026-07-13T14:20:27.525Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
 **This is the documentation for the previous Neon Auth implementation built with Stack Auth.** It is no longer available for new projects but remains supported for existing users.
 
-**For the current Managed BetterAuth**, see [Managed BetterAuth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
+**For the current Managed Better Auth**, see [Managed Better Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
 </Admonition>
 
 This guide covers how to work with the `neon_auth.users_sync` table, authenticate backend requests, and implement Row-Level Security (RLS) with Legacy Neon Auth.
@@ -274,7 +274,7 @@ print('User is not authenticated', response.status_code, response.text)
 ### Legacy Neon Auth
 
 - [Legacy Overview](/docs/auth/legacy/overview) - What is Legacy Neon Auth, claiming projects, environment variables
-- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Managed BetterAuth
+- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Managed Better Auth
 
 ### Stack Auth documentation
 
@@ -286,6 +286,6 @@ For SDK components, hooks, and OAuth configuration:
 
 - [Secure your app with RLS](/docs/guides/rls-tutorial) - RLS tutorial
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle) - RLS with Drizzle ORM
-- [Neon Auth](/docs/auth/overview) - Current Managed BetterAuth
+- [Neon Auth](/docs/auth/overview) - Current Managed Better Auth
 
 <NeedHelp/>

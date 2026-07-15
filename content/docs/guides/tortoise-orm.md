@@ -12,7 +12,7 @@ summary: >-
   python-dotenv, and avoiding hanging processes by calling
   Tortoise.close_connections() or using run_async().
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 
@@ -214,5 +214,10 @@ The `in_transaction()` block ensures an all-or-nothing execution. Because the si
 
 - [Tortoise ORM documentation](https://tortoise.github.io/)
 - [asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

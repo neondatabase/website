@@ -3,14 +3,14 @@ title: Build a full backend with Next.js and Neon
 subtitle: Connect Postgres with Drizzle, add managed authentication, and ship a typed server-side backend
 summary: >-
   End-to-end Next.js App Router tutorial that wires Neon Postgres, Drizzle ORM,
-  and Managed BetterAuth into a working server-side backend. Choose this page when
+  and Managed Better Auth into a working server-side backend. Choose this page when
   building a Next.js project that needs a type-safe Postgres data layer and
   managed email authentication without a third-party auth service. Walks through
   schema push with drizzle-kit, session-aware Server Components, route
   middleware, and deployment to Vercel, Netlify, or self-hosted Node.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-13T14:20:27.525Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 ## Before you start
@@ -70,10 +70,10 @@ The connection string is in the response under `connection_uris[0].connection_ur
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Enable Managed BetterAuth">
+<TwoColumnLayout.Step title="Enable Managed Better Auth">
 <TwoColumnLayout.Block>
 
-<Tag label="beta" size="sm" theme="blue" /> Managed BetterAuth is in beta. [Share feedback on Discord](https://discord.gg/92vNTzKDGp).
+<Tag label="beta" size="sm" /> Managed Better Auth is in beta. [Share feedback on Discord](https://discord.gg/92vNTzKDGp).
 
 Enable Auth on your project's default branch and copy the **Auth URL**. You'll add it to your environment in step 4.
 
@@ -86,7 +86,7 @@ Enable Auth on your project's default branch and copy the **Auth URL**. You'll a
 
 In the project sidebar, go to **Auth** and click **Enable Auth**. On the **Configuration** tab, copy your **Auth URL**.
 
-![Managed BetterAuth Base URL](/docs/auth/neon-auth-base-url.png)
+![Managed Better Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
 </TabItem>
 
@@ -498,7 +498,7 @@ npm run dev
 
 You now have a Next.js app where:
 
-- Sign-up and sign-in are handled by Managed BetterAuth via server actions that call `auth.signUp.email()` and `auth.signIn.email()`
+- Sign-up and sign-in are handled by Managed Better Auth via server actions that call `auth.signUp.email()` and `auth.signIn.email()`
 - The `/posts` route is protected by middleware
 - The signed-in user's name is read from cookies via `auth.getSession()` on the same page
 - Published posts are queried server-side via Drizzle with full TypeScript types

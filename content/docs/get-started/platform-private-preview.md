@@ -14,7 +14,7 @@ This is not for production workloads. Expect rough edges and frequent updates. B
 
 ## What's in the preview
 
-Three new services join Postgres and Managed BetterAuth, all scoped to your branches:
+Three new services join Postgres and Managed Better Auth, all scoped to your branches:
 
 - **Neon Functions**: long-running Node.js compute next to your database. WebSocket servers, SSE streams, AI agents.
 - **Neon Object Storage**: S3-compatible object storage that branches with your data.
@@ -24,9 +24,9 @@ You declare all of it in one `neon.ts` file, and it branches together: fork a br
 
 ## Check your access
 
-Access is a flag on your Neon account. If you received the invite email, your flag should already be set. Preview services work on **new projects** in **AWS us-east-2** only. They can't be enabled on existing projects. All usage during the preview is free, subject to fair usage. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for what to expect once billing begins.
+Access is a flag on your Neon account. If you received the invite email, your flag should already be set. Preview services work in **AWS us-east-2** only. All usage during the preview is free, subject to fair usage. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for what to expect once billing begins.
 
-To confirm your access, go to [console.neon.tech](https://console.neon.tech), create a new project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Storage**, **Credentials**, **AI Gateway**, and **Functions**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
+To confirm your access, go to [console.neon.tech](https://console.neon.tech), open a project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Storage**, **Credentials**, **AI Gateway**, and **Functions**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
 
 ![Neon app backend navigation](/docs/get-started/neon_app_backend.png)
 
@@ -60,7 +60,7 @@ Pick a template from the interactive selector, or pass `--template <id>` to skip
 | `ai-sdk`        | A streaming AI chat agent on Neon Functions that generates images on demand, stores them in Neon Object Storage, and indexes metadata in Postgres via Drizzle. Uses Neon AI Gateway for model access.              |
 | `mastra`        | A personal-assistant chatbot on Neon Functions that remembers you across conversations. Streams responses through Neon AI Gateway and persists context across threads using Mastra Memory backed by Neon Postgres. |
 | `mcp`           | An MCP server on Neon Functions that exposes contact management tools (create, update, delete, search) to AI agents via streamable HTTP. Compatible with Cursor, Claude Desktop, and other MCP clients.            |
-| `realtime-chat` | A full-stack realtime chat app: Next.js frontend with Managed BetterAuth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                 |
+| `realtime-chat` | A full-stack realtime chat app: Next.js frontend with Managed Better Auth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                |
 | `realtime-sse`  | A realtime shared counter: TanStack Router SPA connected to a Hono server on Neon Functions via server-sent events. State persists in Postgres and broadcasts across isolates with LISTEN/NOTIFY.                  |
 
 Each template includes agent skills and a README. Follow the README steps, or tell your agent to follow them.
@@ -171,7 +171,7 @@ For inspiration, see [Build on Neon](https://build-on-neon.vercel.app/): an inde
 
 ## Known limitations
 
-- New projects in AWS us-east-2 only. Existing projects don't work.
+- AWS us-east-2 only.
 - Functions: memory is fixed at 2048 MiB.
 - Logs from deployed functions can't be retrieved yet. Use `neon dev` during development, and have deployed functions write diagnostics to Postgres. Error trackers work today: `@sentry/node` bundles and runs fine; set `SENTRY_DSN` as a deploy-time env var.
 

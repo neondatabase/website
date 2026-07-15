@@ -1,15 +1,15 @@
 ---
-title: Getting started with Managed BetterAuth and Neon Data API using React
-subtitle: Build a Todo app using React, Managed BetterAuth, and the Neon Data API
+title: Getting started with Managed Better Auth and Neon Data API using React
+subtitle: Build a Todo app using React, Managed Better Auth, and the Neon Data API
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-24T00:00:00.000Z'
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-This guide will walk you through building a secure Todo application using **React**, [Managed BetterAuth](/docs/auth/overview), and the [Neon Data API](/docs/data-api/overview).
+This guide will walk you through building a secure Todo application using **React**, [Managed Better Auth](/docs/auth/overview), and the [Neon Data API](/docs/data-api/overview).
 
-By the end of this tutorial, you’ll have a fully functional Todo app that allows users to sign up, log in, and manage their todos. Authentication is handled through Managed BetterAuth, while secure data access is powered by the Neon Data API. The app does not require any backend server; all interactions happen directly between the React frontend and the Neon database.
+By the end of this tutorial, you’ll have a fully functional Todo app that allows users to sign up, log in, and manage their todos. Authentication is handled through Managed Better Auth, while secure data access is powered by the Neon Data API. The app does not require any backend server; all interactions happen directly between the React frontend and the Neon database.
 
 This architecture keeps things simple yet secure, with all the complexities of authentication and data access managed by Neon.
 
@@ -26,16 +26,16 @@ Before you begin, ensure you have the following:
 
 <Steps>
 
-## Create a Neon project with Managed BetterAuth and Data API
+## Create a Neon project with Managed Better Auth and Data API
 
-You'll need to create a Neon project and enable both Managed BetterAuth and the Data API.
+You'll need to create a Neon project and enable both Managed Better Auth and the Data API.
 
 1.  **Create a Neon project:** Navigate to [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `react-neon-todo`.
-2.  **Enable Neon Data API with Managed BetterAuth:**
+2.  **Enable Neon Data API with Managed Better Auth:**
     - In your project's dashboard, go to the **Data API** page from the sidebar.
-    - Ensure **Use Managed BetterAuth** is selected.
+    - Ensure **Use Managed Better Auth** is selected.
     - Ensure **Grant public schema access** is enabled.
-    - Finally, click on the **Enable Data API** button to activate the Data API with Managed BetterAuth.
+    - Finally, click on the **Enable Data API** button to activate the Data API with Managed Better Auth.
 
     ![Data API page with enable button](/docs/data-api/data_api_sidebar_with_public_schema.png)
 
@@ -43,7 +43,7 @@ You'll need to create a Neon project and enable both Managed BetterAuth and the 
     - **Data API URL:** Found on the Data API page (e.g., `https://ep-xxx.neon.tech/neondb/rest/v1`).
       ![Data API enabled view](/docs/data-api/data-api-enabled.png)
     - **Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
-      ![Managed BetterAuth URL](/docs/auth/neon-auth-base-url.png)
+      ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
 
       > The database connection string is used exclusively for Drizzle ORM migrations and should not be exposed in the frontend application.
@@ -90,7 +90,7 @@ $ npm create vite@latest react-neon-todo -- --template react-ts
 
 You will need the following packages for this project:
 
-- **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Managed BetterAuth and the Data API.
+- **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Managed Better Auth and the Data API.
 - **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
 - **Drizzle ORM:** [`drizzle-orm`](https://www.npmjs.com/package/drizzle-orm) and [`drizzle-kit`](https://www.npmjs.com/package/drizzle-kit) for database schema management and migrations.
 
@@ -143,7 +143,7 @@ This guide uses Drizzle ORM to define **Row-Level Security (RLS)** policies decl
 Drizzle is used only for **managing the database** (migrations). The React application itself uses the **Neon JS SDK** to query data via the Data API.
 </Admonition>
 
-Drizzle ORM helps manage your database schema and migrations. It will be used to define the schema for the `todos` table and to interact with the Managed BetterAuth tables. In addition, you will configure [Row‑Level Security (RLS)](/postgresql/postgresql-administration/postgresql-row-level-security) policies to ensure that users can only access their own data.
+Drizzle ORM helps manage your database schema and migrations. It will be used to define the schema for the `todos` table and to interact with the Managed Better Auth tables. In addition, you will configure [Row‑Level Security (RLS)](/postgresql/postgresql-administration/postgresql-row-level-security) policies to ensure that users can only access their own data.
 
 ### Create Drizzle config
 
@@ -164,15 +164,15 @@ export default {
 } satisfies Config;
 ```
 
-This config tells Drizzle Kit where to find your database schema and where to output migration files. The `schemaFilter` is configured to look at both the `public` and `neon_auth` schemas. The `neon_auth` schema is where Managed BetterAuth stores its user data.
+This config tells Drizzle Kit where to find your database schema and where to output migration files. The `schemaFilter` is configured to look at both the `public` and `neon_auth` schemas. The `neon_auth` schema is where Managed Better Auth stores its user data.
 
-### Pull Managed BetterAuth schema
+### Pull Managed Better Auth schema
 
-A key feature of Managed BetterAuth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
+A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
 
-To integrate Managed BetterAuth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
+To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
-This step is crucial because it makes Drizzle aware of the Managed BetterAuth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed BetterAuth.
+This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
@@ -181,7 +181,7 @@ This step is crucial because it makes Drizzle aware of the Managed BetterAuth ta
     npx drizzle-kit pull
     ```
 
-    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed BetterAuth tables.
+    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
 
 2.  **Organize schema files:**
     Create a new directory `src/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `src/db/schema.ts` and `src/db/relations.ts` respectively.
@@ -226,7 +226,7 @@ This step is crucial because it makes Drizzle aware of the Managed BetterAuth ta
 
     export const neonAuth = pgSchema('neon_auth');
 
-    // .. other Managed BetterAuth table definitions ..
+    // .. other Managed Better Auth table definitions ..
 
     export const userInNeonAuth = neonAuth.table(
       'user',
@@ -313,7 +313,7 @@ Your `todos` table now exists in your Neon database. You can verify this in the 
 
 Now that the database schema is set up, you can proceed to build the React application.
 
-## Configure Managed BetterAuth and Data API
+## Configure Managed Better Auth and Data API
 
 ### Initialize the Neon client
 
@@ -359,14 +359,14 @@ createRoot(document.getElementById('root')!).render(
 ```
 
 <Admonition type="tip" title="Setting up OAuth providers">
-In this example, Google OAuth is enabled for social login using the shared credentials provided by Managed BetterAuth. You can customize the setup by adding your own OAuth credentials in the Managed BetterAuth settings. Additional providers such as GitHub, Vercel can also be configured.
+In this example, Google OAuth is enabled for social login using the shared credentials provided by Managed Better Auth. You can customize the setup by adding your own OAuth credentials in the Managed Better Auth settings. Additional providers such as GitHub, Vercel can also be configured.
 
 For more details, see [Set up OAuth](/docs/auth/guides/setup-oauth).
 </Admonition>
 
 ### Auth and Account Pages
 
-Managed BetterAuth provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
+Managed Better Auth provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
 
 As outlined in the [UI components reference](/docs/auth/reference/ui-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
 
@@ -404,7 +404,7 @@ export default function AccountPage() {
 
 ### Update CSS
 
-Update `src/index.css` to include the Managed BetterAuth Tailwind styles and set the minimal global styles.
+Update `src/index.css` to include the Managed Better Auth Tailwind styles and set the minimal global styles.
 
 ```css
 @import 'tailwindcss';
@@ -437,7 +437,7 @@ Create the main components and pages for the Todo application:
 
 ### Header Component
 
-Create `src/components/Header.tsx`. You'll use the `UserButton` component from [Managed BetterAuth UI components](/docs/auth/reference/ui-components) to display the user's profile and sign-out option.
+Create `src/components/Header.tsx`. You'll use the `UserButton` component from [Managed Better Auth UI components](/docs/auth/reference/ui-components) to display the user's profile and sign-out option.
 
 ```tsx
 import { UserButton } from '@neondatabase/auth-ui';
@@ -720,29 +720,29 @@ For example, if you’re deploying to Vercel, add a `vercel.json` file to the ro
 }
 ```
 
-After deploying your application, add the production URLs to the **Your trusted domains** section in the Managed BetterAuth settings to ensure authentication works correctly.
+After deploying your application, add the production URLs to the **Your trusted domains** section in the Managed Better Auth settings to ensure authentication works correctly.
 
 ## Conclusion
 
-In this guide, you built a secure Todo application using React, Managed BetterAuth, and the Neon Data API. You learned how to configure Managed BetterAuth for user authentication, define your database schema with Drizzle ORM, and enforce Row‑Level Security (RLS) policies to safeguard user data.
+In this guide, you built a secure Todo application using React, Managed Better Auth, and the Neon Data API. You learned how to configure Managed Better Auth for user authentication, define your database schema with Drizzle ORM, and enforce Row‑Level Security (RLS) policies to safeguard user data.
 
-With this foundation, you can create applications that require secure authentication and controlled data access - all without a dedicated backend server. To take your projects further, explore additional features of Managed BetterAuth and the Data API.
+With this foundation, you can create applications that require secure authentication and controlled data access - all without a dedicated backend server. To take your projects further, explore additional features of Managed Better Auth and the Data API.
 
-Before deploying to production, be sure to review the [Managed BetterAuth production checklist](/docs/auth/production-checklist).
+Before deploying to production, be sure to review the [Managed Better Auth production checklist](/docs/auth/production-checklist).
 
 ## Source code
 
 The complete source code for this example is available on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/dhanushreddy291/react-neon-todo" description="Complete source code for the React Todo example built with Managed BetterAuth and the Neon Data API." icon="github">React Neon Todo Example</a>
+<a href="https://github.com/dhanushreddy291/react-neon-todo" description="Complete source code for the React Todo example built with Managed Better Auth and the Neon Data API." icon="github">React Neon Todo Example</a>
 </DetailIconCards>
 
 ## Resources
 
-- [Managed BetterAuth Overview](/docs/neon-auth/overview)
+- [Managed Better Auth Overview](/docs/neon-auth/overview)
 - [UI components reference](/docs/auth/reference/ui-components)
-- [Use Managed BetterAuth with React (API methods)](/docs/auth/quick-start/react)
+- [Use Managed Better Auth with React (API methods)](/docs/auth/quick-start/react)
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk)
 - [Getting started with Neon Data API](/docs/data-api/get-started)
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)

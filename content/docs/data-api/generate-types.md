@@ -12,7 +12,7 @@ summary: >-
   `--output`, and `--schema` flags and can run as a package.json script to
   keep generated types in sync after schema changes.
 enableTableOfContents: true
-updatedOn: '2026-07-13T19:46:02.920Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -119,7 +119,7 @@ You can now run `npm run generate-types` whenever you make schema changes (like 
 
 ## Using with the Neon PostgREST Client
 
-If you are using `@neondatabase/postgrest-js` (without Managed BetterAuth), the types work exactly the same way:
+If you are using `@neondatabase/postgrest-js` (without Managed Better Auth), the types work exactly the same way:
 
 ```typescript
 import type { Database } from '@/types/database';
