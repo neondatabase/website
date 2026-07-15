@@ -2,17 +2,15 @@
 name: neon
 description: >-
   Overview of the Neon platform for apps and agents, spanning Postgres, Auth,
-  Data API, and the new services: Object Storage, Compute Functions, and AI
-  Gateway. Use whenever "Neon" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: "object storage" or "S3-compatible
-  storage", "serverless functions", "background jobs", or
-  "run code near my database", "AI gateway", "LLM proxy",
-  "model routing", or "call an LLM" → AI Gateway; "database", "Postgres", or
-  "authentication" → Postgres and Auth.
+  the Data API, and the new services: Object Storage, Compute Functions, and AI
+  Gateway. Use when "Neon" is mentioned, or when any of its individual
+  capabilities are the trigger: "object storage" or "S3", "buckets", "serverless
+  functions", "AI gateway", "call an LLM", "postgres", "database", or "backend".
 ---
 
 # Neon
 
-Important: Neon is no longer just a Serverless Postgres provider. Neon is the backend for apps and agents with Serverless Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.
+Important: Neon is no longer just a Serverless Postgres provider. Neon is the backend for apps and agents with Serverless Postgres, Auth, Functions, Object Storage, and an AI Gateway: instant, branchable, serverless.
 
 Use this skill as the starting point for anything Neon: get an overview of its capabilities, find your way around the Neon agent skills and documentation, and follow best practices for getting started and for branch-first development workflows.
 
@@ -23,14 +21,14 @@ Neon bundles several backend primitives for building apps and agents that all br
 - **Postgres** — Serverless Postgres that scales and branches with your app. _Generally available._
 - **Auth** — Managed authentication with users and sessions stored in Postgres. _Generally available._
 - **Object Storage** — S3-compatible object storage that branches with your projects. _Preview / early access._
-- **Compute Functions** — Long-running serverless functions running close to your database — for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. _Preview / early access._
+- **Functions** — Long-running serverless functions - Neon's compute offering - running close to your database — for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. _Preview / early access._
 - **AI Gateway** — One API for all frontier and open-source models, with routing, logging, and cost controls, powered by Databricks. _Preview / early access._
 
 ### Preview Service Availability
 
-Object Storage, Compute Functions, and AI Gateway are preview (early access) features.
+Object Storage, Functions, and AI Gateway are in public beta.
 
-Early access features are only available on net-new projects created in the `us-east-2` region; they cannot be enabled on existing projects for now. Before guiding a user through any of these services, confirm they are working with a new project in `us-east-2`. If not, they will need to create a new project in that region. Then confirm the user already has early access; otherwise, point them to the private beta sign-up: https://neon.com/blog/were-building-backends#access.
+Beta access features are only available on net-new projects created in the `us-east-2` region; they cannot be enabled on existing projects for now. Before guiding a user through any of these services, confirm they are working with a new project in `us-east-2`. If not, they will need to create a new project in that region.
 
 ## Architecture: how Neon fits
 
@@ -74,7 +72,7 @@ Common doc URLs are organized in the topic links below. If you need a page not l
 - Choosing or creating the right branch type for dev, preview, test, or CI workflows → `neon-postgres-branches`.
 - Storing and serving files (uploads, images, blobs) that branch with the database → `neon-object-storage`.
 - Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers — next to the database → `neon-functions`.
-- Calling an LLM or routing across model providers with one credential → `neon-ai-gateway`.
+- Calling an LLM or routing across model providers with one credential — including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint → `neon-ai-gateway`.
 - Provisioning instant, claimable temporary Postgres databases (for example, one per end user or demo) → `claimable-postgres`.
 - Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase → `neon-postgres-egress-optimizer`.
 
@@ -98,6 +96,8 @@ For example, to install the object storage skill globally for a specific agent w
 npx skills add neondatabase/agent-skills -s neon-object-storage -g -y -a <agent-name>
 ```
 
+You should also make sure the skills are up to date. You can run the same command or replace `add` with `update` to update all Neon skills.
+
 ## Getting Started with Neon
 
 Use this section when guiding a user through first-time Neon setup, or when adding a new Neon service (Auth, object storage, functions, and so on) to a project that is already onboarded (for example, one already using Neon Postgres).
@@ -114,14 +114,11 @@ Before starting setup, inspect the user's codebase and environment:
 
 ### Self-Driving Setup With Neon's CLI or MCP Server
 
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run `npx -y neon@latest init --agent <agent-name>`. Use `npx -y` to skip the package install prompt. For a truly headless flow, require `NEON_API_KEY` first; without it, `init` falls back to browser OAuth and waits for the user to complete authentication.
+Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run `npx -y neon init`. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
 
 ```bash
-export NEON_API_KEY=<user-provided-api-key>
-npx -y neon@latest init --agent <agent-name>
+npx -y neon@latest init
 ```
-
-Supported `--agent` values include `cursor`, `copilot`, `claude`, `claude-desktop`, `codex`, `opencode`, `cline`, `gemini-cli`, `goose`, and `zed`.
 
 This installs the Neon CLI and MCP server globally, installs the VSCode extension (for Cursor/VS Code), and adds the `neon` and `neon-postgres` agent skills to the project.
 
@@ -136,7 +133,7 @@ Prefer the CLI over the MCP server unless the user instructs otherwise, since it
 
 ### Setup Flow
 
-Once the CLI, MCP server, and agent skills are installed, ensure the local workspace is linked to a Neon project through the `neon init` flow. If it isn't, use `npx -y neon link --agent` for an agent-driven JSON linking flow, or ask the user to run plain `npx -y neon link` themselves if they prefer the interactive picker. This produces a `.neon` file pointing to the organization, project, and branch the user wants to work with.
+Once the CLI, MCP server, and agent skills are installed, ensure the local workspace is linked to a Neon project through the `neon init` flow. If it isn't, run `npx -y neon link` to let the user interactively link a project. This produces a `.neon` file pointing to the organization, project, and branch the user wants to work with.
 
 For each Neon service, consult that component's agent skill for service-specific setup instructions (Functions, Postgres, Object Storage, Gateway, and so on).
 
@@ -152,20 +149,18 @@ Remind users to use environment variables for credentials, never commit connecti
 
 Default to a branch-first loop that mirrors `git`: one isolated Neon branch per feature, so nothing leaks between features and there are no shared connection strings to copy around. Two commands drive it — `link` once per project, then `checkout` per feature — and a third, `env pull`, runs automatically under the hood so the branch you pin is immediately usable:
 
-- `neon link` — Interactively links the workspace to a Neon org, project, and branch, writing the IDs to a git-ignored `.neon` file. Run once per project. Once linked, project- and branch-scoped commands no longer need `--project-id` or `--branch` (for example, `neon branches list`).
-- `neon checkout <branch-name>` — Checks out an existing branch by updating only the branch pointer in `.neon`. Run without a name for an interactive picker. In an interactive terminal, a missing branch name prompts to create it. In a non-interactive shell, a missing branch name errors instead; create it first with `neon branches create --name <branch-name>`, then run `neon checkout <branch-name>`. It does not touch code or local Postgres.
+- `neon link` — Interactively links the workspace to a Neon org, project, and branch, writing the IDs to a git-ignored `.neon` file. Run once per project. Once linked, project- and branch-scoped commands no longer need `--project-id` or `--branch` (for example, `neon branch list`).
+- `neon checkout <branch-name>` — Creates the branch if it doesn't exist, or checks out the existing one, by updating only the branch pointer in `.neon`. Run without a name for an interactive picker. It does not touch code or local Postgres.
 - `neon env pull` — Fetches the current branch's Neon environment variables (`DATABASE_URL`, …) into your existing `.env`, or `.env.local` if you don't have one (override the target with `--file`). No branch ID needed; it reads `.neon`. **`link` and `checkout` run this for you by default**, so you rarely call it directly.
 
-Run `link` once when starting on a project, then create and check out one branch per feature:
+Run `link` once when starting on a project, then `checkout` per feature:
 
 ```bash
-export NEON_API_KEY=<user-provided-api-key>
-neon link --agent
-neon branches create --name dev-add-search
-neon checkout dev-add-search
+neon link                     # once; also pulls the linked branch's env
+neon checkout dev-add-search  # per feature; also pulls the branch's env
 ```
 
-Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local `.env` automatically — build against it, then create and `checkout` the next branch and repeat. As the agent, drive this loop yourself: create a branch when needed, then run `checkout` between tasks to get a fresh, isolated database per feature with no shared state to corrupt.
+Because `link` and `checkout` pull env by default, the branch's `DATABASE_URL` lands in your local `.env` automatically — build against it, then `checkout` the next branch and repeat. As the agent, drive this loop yourself: run `checkout` between tasks to get a fresh, isolated database per feature with no shared state to corrupt.
 
 ### Updating `.neon` without interactive prompts
 
@@ -173,9 +168,8 @@ Plain `neon link` / `neon checkout` prompt interactively, which an agent can't a
 
 - **`neon link --agent`** — a JSON state machine for agents. Each call returns a single JSON object with a `status` (`needs_org` → `needs_project` → `needs_project_details` → `linked`, or `error`), the available `options`, and the exact `next_command_template` to run next. Drive it step by step until `status: "linked"`. (Errors also come back as JSON with exit code 1, so you can always parse the result.)
 - **`neon set-context --project-id <id> --org-id <id> --branch-id <id>`** — when you already know the IDs, write all three into `.neon` in one shot. This is a **destructive write**: it replaces the file's contents entirely with exactly these fields, so it's the most direct way to point `.neon` at a specific org / project / branch.
-- **`neon branches create --name <branch-name>` then `neon checkout <branch-name>`** — the non-interactive-safe branch creation path. Do not rely on `checkout` to create a missing branch in headless shells; it only offers creation from an interactive prompt.
 
-These avoid prompts entirely; reach for `set-context` when you have the IDs, `link --agent` when you need to discover them, and explicit `branches create` before `checkout` when starting a new feature branch.
+Both avoid prompts entirely; reach for `set-context` when you have the IDs and `link --agent` when you need to discover them.
 
 ### Opting out of local env vars
 
@@ -218,9 +212,13 @@ export default defineConfig({
   auth: true,
   dataApi: true,
   preview: {
-    functions: { /* ... */ }, // see the neon-functions skill
-    buckets: { /* ... */ },    // see the neon-object-storage skill
-    aiGateway: true,           // see the neon-ai-gateway skill
+    functions: {
+      /* ... */
+    }, // see the neon-functions skill
+    buckets: {
+      /* ... */
+    }, // see the neon-object-storage skill
+    aiGateway: true, // see the neon-ai-gateway skill
   },
 });
 ```
@@ -245,7 +243,7 @@ npm i @neon/env
 ```
 
 ```typescript
-import { parseEnv } from "@neon/env/v1";
+import { parseEnv } from "@neon/env";
 import config from "./neon";
 
 const env = parseEnv(config);
@@ -257,7 +255,7 @@ console.log(env.auth.baseUrl);
 By default `parseEnv` requires _every_ variable your config implies. When a process only uses a subset — a common case in frameworks like Next.js, where you might read `DATABASE_URL` but never the unpooled URL — pass an array of env-var keys to require and return only those. The keys are typesafe: autocomplete only offers variables your config enables, and the returned shape is narrowed to exactly what you selected (so unselected variables are neither enforced nor present).
 
 ```typescript
-import { parseEnv } from "@neon/env/v1";
+import { parseEnv } from "@neon/env";
 import config from "./neon";
 
 // Only DATABASE_URL is required and returned; DATABASE_URL_UNPOOLED is not enforced.
@@ -326,7 +324,10 @@ export default defineConfig({ auth: true, dataApi: true });
 
 // 2. Or verify a third-party IdP instead of Neon Auth:
 export default defineConfig({
-  dataApi: { authProvider: "external", jwksUrl: "https://your-idp/.well-known/jwks.json" },
+  dataApi: {
+    authProvider: "external",
+    jwksUrl: "https://your-idp/.well-known/jwks.json",
+  },
 });
 ```
 

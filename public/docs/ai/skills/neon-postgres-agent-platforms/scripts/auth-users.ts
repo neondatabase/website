@@ -45,7 +45,7 @@ function printMeta(): void {
           "https://neon.com/docs/auth/guides/manage-auth-api",
           "https://neon.com/docs/auth/guides/user-management",
           "https://neon.com/docs/manage/roles",
-          "https://api-docs.neon.tech/reference/createbranchneonauthnewuser",
+          "https://neon.com/docs/reference/api/auth/create-branch-neon-auth-new-user",
         ],
         envForThisScript: {
           create: [

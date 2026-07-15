@@ -73,7 +73,7 @@ export default app;
 
 ## Push to every client, across isolates
 
-The fan-out rule is identical to WebSockets ([Fan-out across isolates](../SKILL.md#fan-out-across-isolates-do-not-skip-this)): each isolate keeps its **own** set of open streams, so broadcasting in-process only reaches the clients on that isolate. Hold a `Set` of stream controllers, and fan out across isolates with Postgres `LISTEN`/`NOTIFY`. Keep the source-of-truth state in Postgres — module state doesn't survive eviction.
+The fan-out rule is identical to WebSockets ([Keeping clients in sync across isolates](../SKILL.md#keeping-clients-in-sync-across-isolates-do-not-skip-this)): each isolate keeps its **own** set of open streams, so broadcasting in-process only reaches the clients on that isolate. Hold a `Set` of stream controllers and pick a strategy there — **poll Postgres** by default (keeps Scale to Zero), or `LISTEN`/`NOTIFY` (shown below) for lowest latency on always-on compute. Keep the source-of-truth state in Postgres — module state doesn't survive eviction.
 
 ```typescript
 import { Pool, Client } from "pg";
@@ -140,4 +140,4 @@ source.onerror = () => {/* EventSource auto-reconnects; nothing to do */};
 - **CORS.** A SPA hits the function cross-origin, so set `Access-Control-Allow-Origin`. `EventSource` sends no credentials by default, so `*` is fine for public streams.
 - **One-way only.** SSE is server → client. For client → server, the browser makes normal `fetch`/`POST` calls (often to the same function); reach for [WebSockets](../SKILL.md#websocket-servers) only when you need bidirectional, low-latency frames.
 
-Together — a Hono `fetch` SSE endpoint, `LISTEN`/`NOTIFY` fan-out, heartbeat, a counter persisted in Postgres, and a client-only TanStack Router SPA consuming it with `EventSource` — these compose into a complete realtime backend on a single function.
+Together — a Hono `fetch` SSE endpoint, cross-isolate fan-out, heartbeat, a counter persisted in Postgres, and a client-only TanStack Router SPA consuming it with `EventSource` — these compose into a complete realtime backend on a single function.
