@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T23:16:18.282Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -50,15 +50,22 @@ Sending a non-Google model ID returns `400 model "<model-id>" is not available o
 
 ## Basic request
 
+<Admonition type="note">
+The `google-genai` SDK's `apiKey` option sends an `x-goog-api-key` header, but Neon AI Gateway expects `Authorization: Bearer <token>`. Set your credential as an explicit header instead, and pass any non-empty string as `apiKey` since the SDK requires the field even though the gateway ignores it.
+</Admonition>
+
 <CodeTabs labels={["TypeScript (google-genai)", "Python (google-genai)", "cURL"]}>
 
 ```typescript shouldWrap
 import { GoogleGenAI } from '@google/genai';
 
 const client = new GoogleGenAI({
-  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  apiKey: 'placeholder',
   httpOptions: {
     baseUrl: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini`,
+    headers: {
+      Authorization: `Bearer ${process.env.NEON_AI_GATEWAY_TOKEN}`,
+    },
   },
 });
 
@@ -76,9 +83,10 @@ from google.genai import types
 import os
 
 client = genai.Client(
-    api_key=os.environ['NEON_AI_GATEWAY_TOKEN'],
+    api_key='placeholder',
     http_options=types.HttpOptions(
         base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/gemini",
+        headers={'Authorization': f"Bearer {os.environ['NEON_AI_GATEWAY_TOKEN']}"},
     ),
 )
 
