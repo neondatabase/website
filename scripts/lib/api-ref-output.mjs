@@ -20,6 +20,7 @@ export function createApiRefPaths(root) {
     markdownTmp: `${markdownRoot}.next`,
     llmsRoot: resolve(root, 'public/docs/reference/api'),
     navYamlPath: resolve(root, 'content/docs/api-navigation.yaml'),
+    operationIdsPath: resolve(root, 'content/docs/api-operation-ids.json'),
     apiDocsDir: resolve(root, 'content/api-docs'),
     sidecarDataDir: resolve(root, 'scripts/data'),
     cliSchemaPath: resolve(root, 'scripts/docs-checks/neonctl/schema.json'),
@@ -109,6 +110,20 @@ export function writeNavigationYaml(paths, content) {
   writeFileSync(paths.navYamlPath, content);
 }
 
+// Committed manifest of every documented operationId. It is the docs-side source
+// of truth for API reference coverage (scripts/lib/api-coverage.mjs), letting the
+// agent-discovery verifier check spec ↔ docs ↔ @neon/sdk coverage offline (no
+// need to regenerate the gitignored src/data/api-ref during CI).
+export function writeOperationIdsManifest(paths, operationIds) {
+  const sorted = [...new Set(operationIds)].sort();
+  const payload = {
+    _generatedBy: 'scripts/generate-api-ref.mjs — do not edit by hand',
+    count: sorted.length,
+    operationIds: sorted,
+  };
+  writeFileSync(paths.operationIdsPath, `${JSON.stringify(payload, null, 2)}\n`);
+}
+
 export function writeRunSummary(paths, { opCount, tagCount, extraDocCount }) {
   process.stderr.write(`Written:\n`);
   process.stderr.write(`  ${paths.dataRoot}/{tag}/{slug}.json (${opCount} files)\n`);
@@ -120,4 +135,5 @@ export function writeRunSummary(paths, { opCount, tagCount, extraDocCount }) {
   if (extraDocCount > 0)
     process.stderr.write(`  ${paths.markdownRoot}/[extra docs] (${extraDocCount} files)\n`);
   process.stderr.write(`  ${paths.navYamlPath}\n`);
+  process.stderr.write(`  ${paths.operationIdsPath}\n`);
 }

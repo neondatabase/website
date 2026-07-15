@@ -7,7 +7,7 @@ summary: >-
   layer 1.0 breaking changes. Use this page when updating scripts, CI jobs, or
   apps that call the Neon Platform API with TypeScript.
 enableTableOfContents: true
-updatedOn: '2026-07-10T10:36:04.593Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <Admonition type="note" title="@neondatabase/api-client still works">
@@ -244,7 +244,7 @@ Some generated type names changed (for example, `DataAPI*` → `DataApi*`). Endp
 - **Workflow helpers** such as `projects.createAndConnect` and `branches.createWithCompute` that poll operations and return connection strings
 - **Readiness polling** via `waitForReadiness` and `neon.operations.waitFor`
 - **Automatic retries** on safe statuses (`423`, `429`, `503`)
-- **Ergonomic beta APIs** for storage, functions, credentials, AI gateway, snapshots, and branch-scoped Neon Auth (`neon.auth`, `neon.storage`, …)
+- **Ergonomic beta APIs** for storage, functions, credentials, AI gateway, snapshots, and branch-scoped Managed Better Auth (`neon.auth`, `neon.storage`, …)
 - **Tree-shakeable raw imports** from `@neon/sdk/raw`
 
 ## Next steps

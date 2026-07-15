@@ -6,10 +6,10 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 ## Deploy with `neon.ts`
 
@@ -23,6 +23,7 @@ neon deploy
 | ------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
 | `--config`          | walks up from cwd | Path to the `neon.ts` policy                                                                         |
 | `--env`             | (none)            | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`            | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch     | Target branch ID or name                                                                             |
 | `--project-id`      | linked project    | Project ID                                                                                           |
 | `--update-existing` | `false`           | Auto-confirm overriding existing remote settings on the branch                                       |
@@ -41,6 +42,10 @@ neon functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wa
 ```
 
 The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
+
+<Admonition type="note" title="esbuild not found">
+The `neon` CLI ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary. `NEON_ESBUILD_PATH` is read by the CLI's own bundler, not by `buildFunctionBundle` in [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling); when calling that package directly, pass a custom `bundleFunction` instead.
+</Admonition>
 
 | Flag              | Default       | Description                                                                                                                                   |
 | ----------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -64,6 +69,10 @@ neon functions deploy hello --src . --env RESEND_API_KEY=re_...
 neon functions deploy hello --src functions/hello.ts --branch feat/my-feature
 ```
 
+The CLI doesn't support a config-only deploy. Every `neon functions deploy` call bundles and uploads source, whether you pass `--src` or let it default to the current directory, so there's no way to change just an environment variable without also pointing at valid source, as in the example above.
+
+For a deploy that skips bundling and updates only the environment or runtime, use [the API](#deploy-with-the-api), which accepts config-only updates.
+
 ## Deploy with the API
 
 Bundle with esbuild, zip the output, then POST to the deploy endpoint.
@@ -82,7 +91,7 @@ zip -j function.zip dist/index.mjs
 
 The archive's entry file must be named `index.mjs` or `index.js`; the runtime looks for those names.
 
-From Node.js, `buildFunctionBundle` from [`@neon/config-runtime`](https://www.npmjs.com/package/@neon/config-runtime) does both steps in one call and produces exactly the archive the deploy endpoint expects:
+From Node.js, `buildFunctionBundle` from [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling) does both steps in one call and produces exactly the archive the deploy endpoint expects. See the [`@neon/config-runtime` reference](/docs/reference/config-runtime) for the rest of that package's programmatic API (`inspect`, `plan`, `apply`), useful for calling a deploy from a custom CI step instead of the CLI:
 
 ```ts
 import { buildFunctionBundle } from "@neon/config-runtime/v1";
@@ -112,7 +121,31 @@ curl -X POST \
 | `runtime`     | string | No                | `nodejs24` is the only valid value                                                                    |
 | `environment` | string | No                | JSON-encoded string-to-string map                                                                     |
 
-The API returns immediately. Poll the get endpoint (see [Check status](#check-status)) until the deployment completes.
+The deploy endpoint accepts `multipart/form-data`. Use a `zip` part for code deploys and a single `environment` part containing the JSON-encoded map; don't send bracketed fields such as `environment[KEY]=value`. The first deployment for a function must include `zip`; later deployments can omit it for config-only changes.
+
+The API returns immediately for code deploys. Poll the get endpoint (see [Check status](#check-status)) until the deployment completes. Config-only deployments can complete synchronously because they reuse the latest bundle. Builds have an absolute 2-minute budget from the time the deploy is accepted; if the build can't complete within that window, the deployment fails.
+
+### Deploy with `@neon/sdk`
+
+The beta [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk) client includes a `neon.functions` namespace for branch-scoped function management:
+
+```ts
+import { createNeonClient } from '@neon/sdk';
+import { readFile } from 'node:fs/promises';
+
+const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY! });
+const projectId = process.env.NEON_PROJECT_ID!;
+const branchId = process.env.NEON_BRANCH_ID!;
+const zipBytes = await readFile('function.zip');
+
+const { data: deployment } = await neon.functions.deploy(projectId, branchId, 'hello', {
+  zip: new File([zipBytes], 'function.zip', { type: 'application/zip' }),
+  runtime: 'nodejs24',
+  environment: JSON.stringify({ MY_SECRET: 'value' }),
+});
+```
+
+`neon.functions.deploy` uses the same multipart API fields as the raw endpoint. `list`, `get`, `update`, and `delete` are also available under `neon.functions`.
 
 ## Slugs
 

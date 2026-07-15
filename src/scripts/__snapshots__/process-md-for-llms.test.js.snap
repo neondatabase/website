@@ -24,15 +24,15 @@ exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) 
 
 Tools are grouped into categories. Use the \`?category=\` URL parameter to restrict which categories are active. You can pass it more than once to enable multiple categories.
 
-| Category                        | What it enables                                                                     |
-| ------------------------------- | ----------------------------------------------------------------------------------- |
-| Project management (\`projects\`) | List, create, describe, and delete projects and organizations                       |
-| Branch management (\`branches\`)  | Create branches, compare schemas, reset branches to parent state                    |
-| Schema (\`schema\`)               | Inspect tables and columns; run schema changes via a safe temporary branch workflow |
-| SQL (\`querying\`)                | Execute queries and transactions; inspect database structure                        |
-| Neon Auth (\`neon_auth\`)         | Set up and configure app authentication for a branch                                |
-| Neon Data API (\`data_api\`)      | Enable HTTP-based Data API access for a branch                                      |
-| Documentation (\`docs\`)          | Look up Neon documentation from within your assistant (no OAuth required)           |
+| Category                          | What it enables                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------------------- |
+| Project management (\`projects\`)   | List, create, describe, and delete projects and organizations                       |
+| Branch management (\`branches\`)    | Create branches, compare schemas, reset branches to parent state                    |
+| Schema (\`schema\`)                 | Inspect tables and columns; run schema changes via a safe temporary branch workflow |
+| SQL (\`querying\`)                  | Execute queries and transactions; inspect database structure                        |
+| Managed Better Auth (\`neon_auth\`) | Set up and configure app authentication for a branch                                |
+| Neon Data API (\`data_api\`)        | Enable HTTP-based Data API access for a branch                                      |
+| Documentation (\`docs\`)            | Look up Neon documentation from within your assistant (no OAuth required)           |
 
 Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](https://neon.com/docs/ai/neon-mcp-server#project-scoped-mode).
 
@@ -304,7 +304,7 @@ exports[`MDX to Markdown Conversion > Component conversion test page (snapshot) 
 - [Import data into your database](https://neon.com/docs/import/migrate-intro)
 - [Integrate database branching into your dev workflow](https://neon.com/docs/get-started/workflow-primer)
 - [Secure your app with the Neon Data API](https://neon.com/docs/data-api/get-started)
-- [Set up Neon Auth for your app](https://neon.com/docs/auth/overview)
+- [Set up Managed Better Auth for your app](https://neon.com/docs/auth/overview)
 
 ### NewPricing
 

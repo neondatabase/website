@@ -21,6 +21,7 @@ import {
   writeExtraApiDocs,
   writeLlmsIndex,
   writeNavigationYaml,
+  writeOperationIdsManifest,
   writeOperationOutput,
   writeRunSummary,
   writeTagMarkdownFiles,
@@ -729,7 +730,10 @@ export function toNavYaml(allOps) {
       lines.push(`    - title: ${JSON.stringify(op.summary)}`);
       lines.push(`      slug: reference/api/${op.tag}/${op.id}`);
       lines.push(`      method: ${op.method}`);
-      if (op.deprecated) lines.push(`      tag: deprecated`);
+      if (op.deprecated) {
+        lines.push(`      tag: deprecated`);
+        lines.push(`      tagTheme: orange`);
+      }
     }
   }
   return lines.join('\n') + '\n';
@@ -1280,6 +1284,13 @@ async function main() {
 
   // Navigation YAML (committed — drives sidebar structure)
   writeNavigationYaml(PATHS, toNavYaml(allOps));
+
+  // Operation-id manifest (committed — docs-side source of truth for API
+  // reference coverage; see scripts/lib/api-coverage.mjs)
+  writeOperationIdsManifest(
+    PATHS,
+    allOps.map((op) => op.operationId)
+  );
 
   writeRunSummary(PATHS, {
     opCount,

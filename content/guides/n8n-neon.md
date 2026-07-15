@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to creating an AI-powered knowledge base chatbot 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-27T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 This guide demonstrates how to build a powerful **AI-powered internal knowledge base chatbot** using **n8n** and **Neon**. n8n is a low-code platform that allows you to connect various applications and services, enabling you to automate complex processes through a visual workflow editor. In this guide, we'll use n8n to orchestrate the integration between **Google Drive**, **Neon Postgres**, and **Google Gemini** to create a chatbot that can answer questions based on your documents stored in Google Drive. Neon will be used as a vector store to index and retrieve document chunks, while Google Drive will serve as the source of your documents.
@@ -254,11 +254,11 @@ After all these configurations, your Workflow should look like this:
 
 3. This will allow users to ask questions and receive answers based on the indexed documents in your Google Drive. At any point you can add more documents to the Google Drive folder you specified in the Google Drive Trigger node, and the indexing workflow will automatically process them, updating the knowledge base (vector store on Neon) and making them available for the retrieval in the chat workflow.
 
-4. For example here we add a new PDF document about "Neon Auth" to the Google Drive folder. The indexing workflow will automatically pick it up, process it, and update the knowledge base.
+4. For example here we add a new PDF document about "Managed Better Auth" to the Google Drive folder. The indexing workflow will automatically pick it up, process it, and update the knowledge base.
 
    ![Adding a new document to Google Drive](/docs/guides/n8n/n8n-add-new-document-to-gdrive.png)
 
-   We then ask the chatbot about "Neon Auth" and it provides an answer based on the newly indexed document.
+   We then ask the chatbot about "Managed Better Auth" and it provides an answer based on the newly indexed document.
 
    ![Asking the chatbot about the newly indexed document](/docs/guides/n8n/n8n-ask-chatbot-about-new-document.png)
 

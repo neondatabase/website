@@ -6,12 +6,12 @@ summary: >-
   cross-user data leaks using Postgres Row-Level Security on Neon, with
   JWT-based `auth.user_id()` and Drizzle's `crudPolicy`. Choose this page when
   you need to verify that database-level RLS policies hold even after removing
-  application-layer `owner_id` filters, or when integrating Neon Auth, Auth0,
+  application-layer `owner_id` filters, or when integrating Managed Better Auth, Auth0,
   or Clerk as a JWT provider. The tutorial uses `ALTER TABLE ... DISABLE ROW
   LEVEL SECURITY` to expose the leak, then shows how `crudPolicy` restores
   isolation without touching application code.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
@@ -20,7 +20,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/neon-data-api-neon-auth">Neon Data API + Neon Auth</a>
+  <a href="https://github.com/neondatabase-labs/neon-data-api-neon-auth">Neon Data API + Managed Better Auth</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -30,22 +30,22 @@ redirectFrom:
 
 In this tutorial, you'll clone and modify up a sample React.js note-taking app to demonstrate how Postgres Row-Level Security (RLS) provides an additional security layer beyond application logic. The app integrates with a Neon database via the Neon Data API.
 
-For authentication, **Neon Auth** issues a unique `userId` in a JSON Web Token (JWT) for each user. This `userId` is passed to Postgres, where RLS policies enforce access control directly at the database level. This setup ensures each user can only interact with their own **notes**, even if application-side logic fails. While this example uses Neon Auth, any JWT-issuing provider like Auth0 or Clerk can be used.
+For authentication, **Managed Better Auth** issues a unique `userId` in a JSON Web Token (JWT) for each user. This `userId` is passed to Postgres, where RLS policies enforce access control directly at the database level. This setup ensures each user can only interact with their own **notes**, even if application-side logic fails. While this example uses Managed Better Auth, any JWT-issuing provider like Auth0 or Clerk can be used.
 
 ## Prerequisites
 
 To get started, you'll need:
 
 - **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: Azure regions are not currently supported).
-- **Neon Data API + Neon Auth example application**: Clone the sample [Neon Data API + Neon Auth repository](https://github.com/neondatabase-labs/neon-data-api-neon-auth):
+- **Neon Data API + Managed Better Auth example application**: Clone the sample [Neon Data API + Managed Better Auth repository](https://github.com/neondatabase-labs/neon-data-api-neon-auth):
 
   ```bash
   git clone https://github.com/neondatabase-labs/neon-data-api-neon-auth.git
   ```
 
-  Follow the instructions in the README to set up Neon Data API with Neon Auth, configure environment variables, and run database migrations.
+  Follow the instructions in the README to set up Neon Data API with Managed Better Auth, configure environment variables, and run database migrations.
 
-  > This sample app uses Neon Auth, so select **Neon Auth** when enabling the Data API. If you're using a different auth provider, see [Custom authentication providers](/docs/data-api/custom-authentication-providers).
+  > This sample app uses Managed Better Auth, so select **Managed Better Auth** when enabling the Data API. If you're using a different auth provider, see [Custom authentication providers](/docs/data-api/custom-authentication-providers).
 
 <Steps>
 
@@ -129,7 +129,7 @@ function useNotes() {
 }
 ```
 
-The `eq` clause is technically enough to make sure data is properly isolated. Neon gets the user id from the Neon Auth JWT (`session.data.user.id`) and matches that to the `owner_id` column in the `notes` tables, so each user can only see their own notes.
+The `eq` clause is technically enough to make sure data is properly isolated. Neon gets the user id from the Managed Better Auth JWT (`session.data.user.id`) and matches that to the `owner_id` column in the `notes` tables, so each user can only see their own notes.
 
 Even though isolation is backed by our RLS policies, we include it here for performance reasons: it helps Postgres build a better query plan and use indexes where possible.
 

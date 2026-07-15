@@ -1,27 +1,37 @@
 ---
-title: Get started with Neon Storage
+title: Get started with Object Storage
 subtitle: Upload your first file in minutes
 summary: >-
   This quickstart walks you through creating a storage credential, configuring
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-25T17:41:39.717Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
 
-To set up Neon Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Storage skills:
+To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills:
 
 ```bash
 npx skills add neondatabase/agent-skills -s neon -s neon-object-storage
 ```
 
-To follow this guide, you need a new project in the AWS us-east-2 region.
+To follow this guide, you need:
+
+- A Neon project in the AWS `us-east-2` region
+- The Neon CLI installed and authenticated if you use the recommended `neon.ts` flow
+- A Neon API key in `NEON_API_KEY` if you use the manual API flow
 
 ## Recommended: enable storage with neon.ts
 
-The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Declare buckets under `preview.buckets`, then run `neon deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
+The recommended way to enable storage and get credentials is via `neon.ts`, Neon's infrastructure-as-code config file. Install the config package, link your local app to the Neon project and branch you want to target, declare buckets under `preview.buckets`, then run `neon deploy` to provision them on the linked branch and pull credentials into `.env.local` automatically:
+
+```bash
+npm install @neon/config
+neon link           # choose the project and branch for this app
+neon branches list  # confirm the linked target branch before deploy
+```
 
 ```typescript filename="neon.ts"
 import { defineConfig } from '@neon/config/v1';
@@ -50,9 +60,38 @@ neon env pull
 
 ---
 
-If you prefer to manage credentials manually (for example, for CI or production deployments), follow the steps below.
+If you prefer to manage credentials manually (for example, for CI or production deployments), follow the steps below. Replace `{project_id}` and `{branch_id}` in the API examples with your own IDs. You can find them in the Neon Console URL, or with `neon projects list` and `neon branches list`.
+
+If you need a new branch, [create it first](/docs/manage/branches#create-a-branch), then wait until the branch is ready before calling object storage APIs. Branch creation is asynchronous, so a freshly-created branch can still be initializing even after the create request returns.
 
 <Steps>
+
+## Find your branch endpoint
+
+Fetch your branch's storage state from the Neon API. Do this before creating credentials so you know the branch is ready for Storage calls. The response includes the full S3 endpoint URL, the region, and whether path-style addressing is required:
+
+```bash shouldWrap
+curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/storage" \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+```json
+{
+  "enabled": true,
+  "s3_endpoint": "https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech",
+  "region": "us-east-2",
+  "force_path_style": true
+}
+```
+
+Set these as environment variables:
+
+```bash
+export AWS_ENDPOINT_URL_S3=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech
+export AWS_REGION=us-east-2
+```
+
+A `404` response means object storage is not available for that branch. There is no separate manual enable API call: use the recommended `neon.ts` flow above, or make sure your project is in the AWS `us-east-2` region.
 
 ## Create a credential
 
@@ -81,35 +120,6 @@ Set these as environment variables:
 export AWS_ACCESS_KEY_ID=nak_live_...   # token_id
 export AWS_SECRET_ACCESS_KEY=nsk_live_...   # s3_secret_access_key
 ```
-
-Your project ID and branch ID are available in the Neon Console URL or via `neon projects list` and `neon branches list`.
-
-## Find your branch endpoint
-
-Fetch your branch's storage state from the Neon API. The response includes the full S3 endpoint URL, the region, and whether path-style addressing is required:
-
-```bash shouldWrap
-curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/storage" \
-  -H "Authorization: Bearer $NEON_API_KEY"
-```
-
-```json
-{
-  "enabled": true,
-  "s3_endpoint": "https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech",
-  "region": "us-east-2",
-  "force_path_style": true
-}
-```
-
-Set these as environment variables:
-
-```bash
-export AWS_ENDPOINT_URL_S3=https://br-winter-pond-aptw82ef.storage.c-2.us-east-2.aws.neon.tech
-export AWS_REGION=us-east-2
-```
-
-A `404` response means Storage is not yet enabled for that branch. Make sure you're using a project in the AWS us-east-2 region.
 
 ## Install dependencies
 
@@ -186,16 +196,24 @@ aws configure set endpoint_url "$AWS_ENDPOINT_URL_S3"
 If you're using [Neon Functions](/docs/compute/functions/overview), the `AWS_*` credentials are injected automatically when a bucket is declared in `neon.ts`. No `.env` setup is needed inside a function.
 </Admonition>
 
-## Upload a file
+## Create a bucket
 
-You need an existing bucket before uploading. [Create one](/docs/storage/buckets#create-a-bucket), or declare it in `neon.ts` and run `neon deploy`.
+Create the bucket before uploading, or declare it in `neon.ts` and run `neon deploy`:
+
+```bash
+neon buckets create my-bucket
+```
+
+See [Buckets](/docs/storage/buckets#create-a-bucket) for Neon API, S3 SDK, Python, and AWS CLI examples.
+
+## Upload a file
 
 <CodeTabs labels={["Files SDK", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
 
-await files.upload('hello.txt', 'Hello from Neon Storage!', {
+await files.upload('hello.txt', 'Hello from Neon Object Storage!', {
   contentType: 'text/plain',
 });
 
@@ -209,7 +227,7 @@ import { client } from './client';
 await client.send(new PutObjectCommand({
   Bucket: 'my-bucket',
   Key: 'hello.txt',
-  Body: 'Hello from Neon Storage!',
+  Body: 'Hello from Neon Object Storage!',
   ContentType: 'text/plain',
 }));
 
@@ -220,7 +238,7 @@ console.log('Uploaded!');
 client.put_object(
     Bucket='my-bucket',
     Key='hello.txt',
-    Body='Hello from Neon Storage!',
+    Body='Hello from Neon Object Storage!',
     ContentType='text/plain',
 )
 
@@ -243,7 +261,7 @@ import { files } from './client';
 
 const result = await files.download('hello.txt');
 const text = await result.text();
-console.log(text); // Hello from Neon Storage!
+console.log(text); // Hello from Neon Object Storage!
 ```
 
 ```typescript shouldWrap
@@ -256,12 +274,12 @@ const response = await client.send(new GetObjectCommand({
 }));
 
 const text = await response.Body?.transformToString();
-console.log(text); // Hello from Neon Storage!
+console.log(text); // Hello from Neon Object Storage!
 ```
 
 ```python
 response = client.get_object(Bucket='my-bucket', Key='hello.txt')
-print(response['Body'].read().decode('utf-8'))  # Hello from Neon Storage!
+print(response['Body'].read().decode('utf-8'))  # Hello from Neon Object Storage!
 ```
 
 ```bash shouldWrap

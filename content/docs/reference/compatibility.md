@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-07-03T10:03:13.108Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -64,7 +64,7 @@ If you are a Neon [Scale plan](/docs/introduction/plans) user and require a diff
 | `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                                                                                                                                |
 | `effective_io_concurrency`            | 20            |                                                                                                                                                                                                                                                                                |
 | `effective_cache_size`                |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                    |
-| `fsync`                               | off           | Neon syncs data to the Neon Storage Engine to store your data safely and reliably                                                                                                                                                                                              |
+| `fsync`                               | off           | Neon syncs data to the Neon database storage engine to store your data safely and reliably                                                                                                                                                                                     |
 | `hot_standby`                         | off           |                                                                                                                                                                                                                                                                                |
 | `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                                                                                                                                |
 | `listen_addresses`                    | '\*'          |                                                                                                                                                                                                                                                                                |
