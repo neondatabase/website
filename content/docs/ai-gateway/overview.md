@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-15T20:15:36.026Z'
+updatedOn: '2026-07-15T20:16:13.789Z'
 ---
 
 <RequestForm type="backend-platform" title="Request early access to additional foundation models" description="Foundation models are being rolled out gradually as we expand capacity. Drop your email and we'll reach out as access opens up." buttonText="Request Early Access" confirmation="You're on the list. We'll be in touch as access opens up." />
@@ -27,7 +27,7 @@ Participation in this Beta is subject to our Terms of Service. Access is not ava
 
 ## Foundation model access
 
-Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](/docs/ai-gateway/models#available-models) to see the full list. Foundation model access is rolling out gradually — see the request form above.
+Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](/docs/ai-gateway/models#available-models) to see the full list. Foundation model access is rolling out gradually. See the request form above to apply.
 
 ## Pricing
 
