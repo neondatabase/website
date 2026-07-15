@@ -31,7 +31,7 @@
     "update:skills": "npm run sync:skills && npm run generate:skills",
     "generate:api-ref": "node scripts/generate-api-ref.mjs",
     "check:api-ref-generated": "node scripts/check-api-ref-generated.mjs",
-    "check:docs-api-consistency": "node scripts/ensure-neon-sdk-installed.mjs && node scripts/check-docs-api-consistency.mjs",
+    "check:docs-api-consistency": "node scripts/check-docs-api-consistency.mjs",
     "audit:api-ref": "node scripts/audit-api-spec.mjs",
     "audit:field-groups": "node scripts/validate-field-groups.mjs",
     "check:broken-links": "linkinator --config linkinator.config.json",
