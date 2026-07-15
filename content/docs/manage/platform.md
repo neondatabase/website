@@ -14,7 +14,23 @@ updatedOn: '2026-07-15T17:37:06.000Z'
 
 ## The Neon platform, in brief
 
-Neon is a full backend platform for apps and agents, not just a database. It spans [Postgres](/docs/postgres/overview), [Neon Auth](/docs/auth/overview), the [Data API](/docs/data-api/overview), [Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), and the [AI Gateway](/docs/ai-gateway/overview). For an overview of every product, start at the [Neon documentation home](/docs/introduction).
+Neon is a full backend platform for apps and agents, not just a database. For an overview of every product, start at the [Neon documentation home](/docs/introduction).
+
+<DetailIconCards>
+
+<a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
+
+<a href="/docs/auth/overview" description="Managed auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Neon Auth</a>
+
+<a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
+
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview">Storage</a>
+
+<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview">Functions</a>
+
+<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Private Preview">AI Gateway</a>
+
+</DetailIconCards>
 
 This page covers the platform's management and operations side: the account, project, and infrastructure tasks you use to run your Neon projects day to day.
 
