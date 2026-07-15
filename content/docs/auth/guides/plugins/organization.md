@@ -11,7 +11,7 @@ summary: >-
   organizations, inviting and removing members, and checking role permissions
   client-side.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -64,7 +64,7 @@ Open your project in the Neon Console, then go to **Auth** > **Plugins** (beta) 
 
 <TabItem>
 
-You can also configure the plugin via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Use your API key in the `Authorization` header.
+You can also configure the plugin via the [Neon API](/docs/reference/api). Use your API key in the `Authorization` header.
 
 **Get current plugin config (including organization):**
 
@@ -134,8 +134,8 @@ Example response:
 
 ### API Documentation
 
-- [Get all plugin configurations](https://api-docs.neon.tech/reference/getneonauthpluginconfigs)
-- [Update organization plugin configuration](https://api-docs.neon.tech/reference/updateneonauthorganizationplugin)
+- [Get all plugin configurations](/docs/reference/api/auth/get-neon-auth-plugin-configs)
+- [Update organization plugin configuration](/docs/reference/api/auth/update-neon-auth-organization-plugin)
 
 </TabItem>
 

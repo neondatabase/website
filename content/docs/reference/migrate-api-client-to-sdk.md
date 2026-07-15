@@ -7,7 +7,7 @@ summary: >-
   layer 1.0 breaking changes. Use this page when updating scripts, CI jobs, or
   apps that call the Neon Platform API with TypeScript.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <Admonition type="note" title="@neondatabase/api-client still works">
@@ -250,7 +250,7 @@ Some generated type names changed (for example, `DataAPI*` → `DataApi*`). Endp
 ## Next steps
 
 - [Neon Management SDK](/docs/reference/typescript-sdk) — install, configuration, examples, and namespace reference
-- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) — REST endpoint details
+- [Neon API Reference](/docs/reference/api) — REST endpoint details
 - [`@neon/sdk` on GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/sdk) — full method tables and regeneration notes
 
 <NeedHelp />

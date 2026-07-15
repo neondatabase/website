@@ -10,7 +10,7 @@ summary: >-
   partners. The page covers the consent screen, authorization URL construction,
   code-for-token exchange, and refresh token scopes.
 enableTableOfContents: true
-updatedOn: '2026-07-11T12:13:35.837Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
@@ -173,7 +173,7 @@ After being redirected to the authorization URL, the user is presented with Neon
 ![Neon OAuth consent screen](/docs/oauth/consent.png)
 
 <Admonition type="note">
-The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) provides a [Get current user details](https://api-docs.neon.tech/reference/getcurrentuserinfo) endpoint for retrieving information about the currently authorized Neon user.
+The [Neon API](/docs/reference/api) provides a [Get current user details](/docs/reference/api/users/get-current-user-info) endpoint for retrieving information about the currently authorized Neon user.
 </Admonition>
 
 ## Authorization code is returned to your callback URL
@@ -194,7 +194,7 @@ You can now exchange the authorization code returned from the previous step for 
 - `grant_type`: set this to `authorization_code` to indicate that you are using the [Authorization Code grant type](https://oauth.net/2/grant-types/authorization-code/)
 - `code`: the authorization code returned from the previous step
 
-The response object includes an `access_token` value, required for making requests to the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
+The response object includes an `access_token` value, required for making requests to the [Neon API](/docs/reference/api) on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
 
 ## Example OAuth application
 

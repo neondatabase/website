@@ -11,7 +11,7 @@ summary: >-
   limit.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-07-03T10:03:13.108Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <Admonition type="note" title="Snapshots">
@@ -157,7 +157,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/introduction/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](/docs/reference/api/snapshots/create-snapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/introduction/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -178,7 +178,7 @@ The parameters used in the example above:
 
 #### Update a snapshot's expiration
 
-You can change a snapshot's expiration after it is created using the [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot) endpoint. Set `expires_at` to a future timestamp to extend or change the retention deadline, or send `null` to clear it so the snapshot never expires. Omit the field to leave the expiration unchanged.
+You can change a snapshot's expiration after it is created using the [Update snapshot](/docs/reference/api/snapshots/update-snapshot) endpoint. Set `expires_at` to a future timestamp to extend or change the retention deadline, or send `null` to clear it so the snapshot never expires. Omit the field to leave the expiration unchanged.
 
 ```bash
 curl -X PATCH "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id" \
@@ -193,7 +193,7 @@ curl -X PATCH "https://console.neon.tech/api/v2/projects/project_id/snapshots/sn
 
 ### Snapshot size fields in API responses
 
-Responses from the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot), [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots), and [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot) endpoints include a `snapshot` object that may contain optional **`full_size`** and **`diff_size`** (both **`int64`**, size in bytes).
+Responses from the [Create snapshot](/docs/reference/api/snapshots/create-snapshot), [List project snapshots](/docs/reference/api/snapshots/list-snapshots), and [Update snapshot](/docs/reference/api/snapshots/update-snapshot) endpoints include a `snapshot` object that may contain optional **`full_size`** and **`diff_size`** (both **`int64`**, size in bytes).
 
 #### Manual and scheduled snapshots
 
@@ -208,14 +208,14 @@ Full logical size of the snapshot in bytes at the time it was taken. When the fi
 
 Incremental storage size in bytes since the **previous scheduled snapshot**, when the snapshot is billed on **incremental (diff)** usage. When **absent**, either the incremental size has not been calculated yet and the snapshot is **not** being charged, or the snapshot is charged at **full logical size** (in that case **`full_size`** is set).
 
-Depending on billing mode and whether sizes have finished calculating, either field may be omitted. For parameter-level definitions, see each endpoint in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Depending on billing mode and whether sizes have finished calculating, either field may be omitted. For parameter-level definitions, see each endpoint in the [Neon API Reference](/docs/reference/api).
 
 **Related API references:**
 
-- [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot)
-- [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots)
-- [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot)
-- [Delete snapshot](https://api-docs.neon.tech/reference/deletesnapshot)
+- [Create snapshot](/docs/reference/api/snapshots/create-snapshot)
+- [List project snapshots](/docs/reference/api/snapshots/list-snapshots)
+- [Update snapshot](/docs/reference/api/snapshots/update-snapshot)
+- [Delete snapshot](/docs/reference/api/snapshots/delete-snapshot)
 
 </TabItem>
 
@@ -257,11 +257,11 @@ Once configured, snapshots created by the backup schedule will appear on the **B
 
 <TabItem>
 
-You can view and set backup schedules for branches using the Neon API. For complete API documentation, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can view and set backup schedules for branches using the Neon API. For complete API documentation, refer to the [Neon API Reference](/docs/reference/api).
 
 **View backup schedule**
 
-Retrieves the current backup schedule configuration for a branch using the [View backup schedule](https://api-docs.neon.tech/reference/getsnapshotschedule) endpoint.
+Retrieves the current backup schedule configuration for a branch using the [View backup schedule](/docs/reference/api/snapshots/get-snapshot-schedule) endpoint.
 
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/backup_schedule
@@ -288,7 +288,7 @@ curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id
 
 **Set backup schedule**
 
-Set the backup schedule for a branch using the [Update backup schedule](https://api-docs.neon.tech/reference/setsnapshotschedule) endpoint.
+Set the backup schedule for a branch using the [Update backup schedule](/docs/reference/api/snapshots/set-snapshot-schedule) endpoint.
 
 ```bash
 PUT /projects/{project_id}/branches/{branch_id}/backup_schedule
@@ -405,7 +405,7 @@ Use this option if you want to restore the snapshot data immediately without ins
 
 <TabItem>
 
-A one-step restore operation is performed using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
+A one-step restore operation is performed using the [Restore snapshot](/docs/reference/api/snapshots/restore-snapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore?name=restored_branch" \
@@ -429,8 +429,8 @@ If you plan to apply multiple snapshots in succession, always supply `target_bra
 
 **Related API references:**
 
-- [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)
-- [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots)
+- [Restore snapshot](/docs/reference/api/snapshots/restore-snapshot)
+- [List project snapshots](/docs/reference/api/snapshots/list-snapshots)
 
 </TabItem>
 
@@ -465,7 +465,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 1.  **Restore the snapshot to a new branch**
 
-    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint:
+    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](/docs/reference/api/snapshots/restore-snapshot) endpoint:
 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore" \
@@ -483,7 +483,7 @@ Use this option if you need to inspect the restored data before you switch over 
     - `target_branch_id`: (Optional but recommended) Specify the branch ID you intend to replace when you later finalize the restore (typically your production branch). Providing this avoids subsequent operations defaulting to the `<branch_name> (old)` branch created by an earlier restore.
 
        <Admonition type="note">
-          You can find the `snapshot_id` using the [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots) endpoint.
+          You can find the `snapshot_id` using the [List project snapshots](/docs/reference/api/snapshots/list-snapshots) endpoint.
 
              ```bash
              curl -X GET "https://console.neon.tech/api/v2/projects/project_id/snapshots" \
@@ -499,7 +499,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 2.  **Inspect the new branch**
 
-    After restoring the snapshot, you can connect to the new branch and run queries to inspect the data. You can get the branch connection string from the Neon Console or using the [Retrieve connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint.
+    After restoring the snapshot, you can connect to the new branch and run queries to inspect the data. You can get the branch connection string from the Neon Console or using the [Retrieve connection URI](/docs/reference/api/projects/get-connection-uri) endpoint.
 
     ```bash
     curl --request GET \
@@ -510,7 +510,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 3.  **Finalize the restore**
 
-    If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalizerestorebranch) endpoint. This step performs the following actions:
+    If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](/docs/reference/api/branches/finalize-restore-branch) endpoint. This step performs the following actions:
     - Moves your original branch's computes to the new branch and restarts the computes.
     - Renames the new branch to original branch's name.
     - Renames the original branch to `<branch_name> (old)`. Other snapshots you may have taken remain attached to this branch.

@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 ## access token
@@ -132,7 +132,7 @@ Neon creates a primary read-write compute for the project's default branch. Neon
 
 The network access point for connecting to a [Neon compute](#compute).
 
-In Neon, a compute endpoint is represented by a hostname, such as `ep-aged-math-668285.us-east-2.aws.neon.tech`, which directs traffic to the appropriate Neon compute. Additional attributes further define a compute endpoint, including `project_id`, `region_id`, `branch_id`, and `type`. These attributes specify the associated Neon project, branch, cloud service region, and whether the endpoint is read-write or read-only. For additional endpoint attributes, refer to the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
+In Neon, a compute endpoint is represented by a hostname, such as `ep-aged-math-668285.us-east-2.aws.neon.tech`, which directs traffic to the appropriate Neon compute. Additional attributes further define a compute endpoint, including `project_id`, `region_id`, `branch_id`, and `type`. These attributes specify the associated Neon project, branch, cloud service region, and whether the endpoint is read-write or read-only. For additional endpoint attributes, refer to the [Neon API](/docs/reference/api/endpoints/create-project-endpoint).
 
 ## compute size
 

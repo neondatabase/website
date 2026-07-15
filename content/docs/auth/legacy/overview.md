@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
@@ -117,7 +117,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthprovidersdkkeys)
+[Try in API Reference ↗](/docs/reference/api/auth-legacy/create-neon-auth-provider-sdk-keys)
 
 ## Claiming your Stack Auth project
 
@@ -160,7 +160,7 @@ curl --request POST \
 ```
 
 Open the returned URL in your browser to complete the claim process.
-See [Neon Auth API Reference](https://api-docs.neon.tech/reference/transferneonauthownership) for more details.
+See [Neon Auth API Reference](/docs/reference/api/auth-legacy/transfer-neon-auth-provider-project) for more details.
 
 <Admonition type="note">
 After claiming, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.

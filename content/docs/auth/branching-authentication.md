@@ -10,7 +10,7 @@ summary: >-
   production users. Each branch gets a unique Auth API URL, and sessions and
   tokens do not cross between branches.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -22,7 +22,7 @@ One of Managed BetterAuth's unique features is native support for [database bran
 This gives each branch its own isolated authentication environment, enabling safe testing of permission changes, new OAuth providers, or full application refactors.
 
 <Admonition type="info">
-Managed BetterAuth branching is also supported via API. See the [Managed BetterAuth API reference](https://api-docs.neon.tech/reference/getneonauth) for a full set of REST API endpoints.
+Managed BetterAuth branching is also supported via API. See the [Managed BetterAuth API reference](/docs/reference/api/auth/get-neon-auth) for a full set of REST API endpoints.
 </Admonition>
 
 ## How it works
@@ -116,7 +116,7 @@ You can automate this using GitHub Actions. When a PR is opened:
 1.  Create a Neon branch.
 2.  Deploy your frontend/backend to a preview URL.
 3.  Inject the **Branch Auth URL** into the preview deployment's environment variables.
-4.  Set the Redirect URLs in the branch's Auth configuration to point to the preview URL using the [Neon API](https://api-docs.neon.tech/reference/addbranchneonauthtrusteddomain).
+4.  Set the Redirect URLs in the branch's Auth configuration to point to the preview URL using the [Neon API](/docs/reference/api/auth/add-branch-neon-auth-trusted-domain).
 
 Because the branch contains a snapshot of production data, the preview environment is fully functional immediately. You can log in with real test accounts that exist in production, but any actions taken (changing passwords, updating profiles) happen in isolation.
 

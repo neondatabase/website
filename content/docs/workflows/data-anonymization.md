@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <FeatureBeta />
@@ -55,7 +55,7 @@ After creation, the Console loads the [Data Masking](#manage-masking-rules) page
 
 <TabItem>
 
-Use the [Create anonymized branch](https://api-docs.neon.tech/reference/createprojectbranchanonymized) endpoint, for example:
+Use the [Create anonymized branch](/docs/reference/api/branches/create-project-branch-anonymized) endpoint, for example:
 
 ```bash
 curl -X POST \
@@ -219,7 +219,7 @@ From the **Data Masking** page, all defined masking rules are displayed for each
 
 <TabItem>
 
-Use the [Get masking rules](https://api-docs.neon.tech/reference/getmaskingrules) endpoint:
+Use the [Get masking rules](/docs/reference/api/branches/get-masking-rules) endpoint:
 
 ```bash
 curl -X GET \
@@ -310,4 +310,4 @@ This query returns all rules regardless of how they were created (Console, API, 
 - [Data Anonymization with GitHub Actions](/docs/workflows/data-anonymization-github-actions) - Automate anonymized branch creation in CI/CD
 - [PostgreSQL Anonymizer documentation](https://postgresql-anonymizer.readthedocs.io/)
 - [Neon branching overview](/docs/introduction/branching)
-- [Neon API reference](https://api-docs.neon.tech/reference/)
+- [Neon API Reference](/docs/reference/api)

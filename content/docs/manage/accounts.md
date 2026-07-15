@@ -9,7 +9,7 @@ summary: >-
   Deleted accounts can be reactivated within 30 days, after which all data is
   permanently removed.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.
@@ -89,7 +89,7 @@ Recovery codes are not currently supported. Keep your authenticator app backed u
 
 ## Create personal API keys
 
-Personal API keys let you securely interact with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), including through command-line tools, scripts, or third-party integrations that use the API. Your personal API key works for any organization you belong to, so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
+Personal API keys let you securely interact with the [Neon API](/docs/reference/api), including through command-line tools, scripts, or third-party integrations that use the API. Your personal API key works for any organization you belong to, so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
 
 [Learn more about API keys](/docs/manage/api-keys)
 

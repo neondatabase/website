@@ -1,7 +1,7 @@
 ---
 title: 'Blog posts, docs, guides, and more'
 subtitle: 'A collection of tools and resources to implement branching workflows, snapshot-based promotion, automation via APIs, and integrations with GitHub, Vercel, and agents'
-updatedOn: '2026-05-12T14:01:17.544Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 ## Conceptual blog posts
@@ -15,11 +15,11 @@ updatedOn: '2026-05-12T14:01:17.544Z'
 
 - [Branching overview](https://neon.com/docs/introduction/branching?utm_source=chatgpt.com) \- on branching, time travel, and instant restore.
 - [Get started with branching](https://neon.com/docs/guides/branching-intro?utm_source=chatgpt.com) \- how to build branching workflows via the API, CLI, GitHub Actions, and Vercel integrations.
-- [Anonymized branches](https://api-docs.neon.tech/reference/createprojectbranchanonymized?utm_source=chatgpt.com) \- If you have PII, use this API endpoint for creating anonymized branches with masking rules.
+- [Anonymized branches](/docs/reference/api/branches/create-project-branch-anonymized) \- If you have PII, use this API endpoint for creating anonymized branches with masking rules.
 
 ## Automation & integration
 
-- [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) \- use the API to automate branching, snapshots, restores, credentials, and more.
+- [Neon API Reference](/docs/reference/api) \- use the API to automate branching, snapshots, restores, credentials, and more.
 - [Vercel integration](https://neon.com/docs/guides/vercel-overview) \- create Neon branches for every Vercel preview environment.
 - [Github integration](https://neon.com/docs/guides/neon-github-integration) \- Link your Neon project to a repository and create branches via Github Actions
 

@@ -12,7 +12,7 @@ summary: >-
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
@@ -174,7 +174,7 @@ Managed BetterAuth will use your configured credentials for that branch.
 
 Each branch has its own **`NEON_AUTH_BASE_URL`**. Register **`{NEON_AUTH_BASE_URL}/callback/google`** (and other providers you use) for every branch you test against (for example preview databases).
 
-For preview deployments, trusted domains support **wildcard patterns** (for example `https://*.my-app-preview.vercel.app`), so you can cover many preview hosts without listing each one. See [Configure trusted domains](/docs/auth/guides/configure-domains), [Branching authentication](/docs/auth/branching-authentication), and the API for [trusted domains](https://api-docs.neon.tech/reference/addbranchneonauthtrusteddomain).
+For preview deployments, trusted domains support **wildcard patterns** (for example `https://*.my-app-preview.vercel.app`), so you can cover many preview hosts without listing each one. See [Configure trusted domains](/docs/auth/guides/configure-domains), [Branching authentication](/docs/auth/branching-authentication), and the API for [trusted domains](/docs/reference/api/auth/add-branch-neon-auth-trusted-domain).
 
 ## Google OAuth branding
 

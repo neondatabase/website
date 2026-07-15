@@ -8,6 +8,7 @@ redirectFrom:
   - /docs/reference
   - /docs/reference/api-reference
   - /docs/reference/about
+  - /docs/api
   - /docs/api/about
 ---
 

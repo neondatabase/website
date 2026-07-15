@@ -56,4 +56,4 @@ A few specifics worth knowing if you're comparing:
 - **Aurora Serverless v2** clusters can be created via the AWS API or Terraform, but new cluster creation takes minutes, not seconds. Once running, it can scale to 0 ACU with auto-pause for idle workloads.
 - **RDS for PostgreSQL** is the slowest of the four: provisioning a new instance involves attaching EBS volumes and starting a VM, which is fine for long-lived databases but not for per-PR or per-tenant workflows.
 
-<CTA title="Browse the Neon API reference" description="See every endpoint for managing projects, branches, and computes programmatically." buttonText="Read the docs" buttonUrl="/docs/reference/api" />
+<CTA title="Browse the Neon API Reference" description="See every endpoint for managing projects, branches, and computes programmatically." buttonText="Read the docs" buttonUrl="/docs/reference/api" />

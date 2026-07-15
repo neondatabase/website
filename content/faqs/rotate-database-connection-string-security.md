@@ -3,7 +3,7 @@ title: 'How do I rotate my Neon database connection string for security purposes
 subtitle: 'The connection string is derived from the role password, so rotating one rotates the other.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -53,7 +53,7 @@ curl -X POST \
   -H "Accept: application/json" | jq
 ```
 
-The response contains the new `password`. Construct the connection string with the hostname from your project, or call the [get_connection_uri endpoint](https://api-docs.neon.tech/reference/getconnectionuri) to get a ready-made URI.
+The response contains the new `password`. Construct the connection string with the hostname from your project, or call the [get_connection_uri endpoint](/docs/reference/api/projects/get-connection-uri) to get a ready-made URI.
 
 </TabItem>
 
@@ -77,4 +77,4 @@ Existing open sessions stay connected, but any new connection attempt with the o
 
 If you can't change every consumer at once, create a second Postgres role with its own password, point new consumers at it, and drop the old role only after you've confirmed nothing still uses it. See the alternative approach in [How do I rotate my database URL or connection string?](/faqs/rotate-database-url-connection-string).
 
-<CTA title="Build connection-string rotation into your workflow" description="The Neon API and CLI make it easy to automate password rotation on a schedule." buttonText="API reference" buttonUrl="https://api-docs.neon.tech/reference/resetprojectbranchrolepassword" />
+<CTA title="Build connection-string rotation into your workflow" description="The Neon API and CLI make it easy to automate password rotation on a schedule." buttonText="API reference" buttonUrl="/docs/reference/api/branches/reset-project-branch-role-password" />

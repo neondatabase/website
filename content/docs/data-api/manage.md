@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -73,7 +73,7 @@ curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/jwks/{jwk
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-For the full JWKS specification, see the [Neon API reference](https://api-docs.neon.tech/reference/createprojectjwks).
+For the full JWKS specification, see the [Neon API Reference](/docs/reference/api/projects/add-project-jwks).
 
 </TabItem>
 
@@ -168,7 +168,7 @@ When enabled, the Data API includes `Server-Timing` headers in each response. Th
 
 ## Manage via the Neon API
 
-You can manage the Data API programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). All Data API endpoints use the following base path:
+You can manage the Data API programmatically using the [Neon API](/docs/reference/api). All Data API endpoints use the following base path:
 
 ```
 /projects/{project_id}/branches/{branch_id}/data-api/{database_name}
@@ -178,7 +178,7 @@ You can find your `project_id` and `branch_id` on the [Project settings](/docs/m
 
 ### Enable
 
-Send a POST request to [enable the Data API](https://api-docs.neon.tech/reference/createprojectbranchdataapi) for a database on a branch. If the Data API is already enabled, this call returns an error.
+Send a POST request to [enable the Data API](/docs/reference/api/dataapi/create-project-branch-data-api) for a database on a branch. If the Data API is already enabled, this call returns an error.
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -212,7 +212,7 @@ Optional fields in the enable request body:
 
 ### Get Data API details
 
-[Retrieve the current status and configuration](https://api-docs.neon.tech/reference/getprojectbranchdataapi) of the Data API for a branch.
+[Retrieve the current status and configuration](/docs/reference/api/dataapi/get-project-branch-data-api) of the Data API for a branch.
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -244,7 +244,7 @@ The `settings` object reflects the current configuration (see [Advanced settings
 
 ### Update configuration
 
-Send a PATCH request to [update the configuration](https://api-docs.neon.tech/reference/updateprojectbranchdataapi). This also refreshes the schema cache. The response is always an empty object (`{}`), with status 201.
+Send a PATCH request to [update the configuration](/docs/reference/api/dataapi/update-project-branch-data-api). This also refreshes the schema cache. The response is always an empty object (`{}`), with status 201.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -263,7 +263,7 @@ The `settings` object replaces the existing settings entirely. It is not merged.
 
 ### Disable
 
-[Remove the Data API](https://api-docs.neon.tech/reference/deleteprojectbranchdataapi) from a branch. The response is an empty object (`{}`), with status 200.
+[Remove the Data API](/docs/reference/api/dataapi/delete-project-branch-data-api) from a branch. The response is an empty object (`{}`), with status 200.
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -274,7 +274,7 @@ curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/
 Disabling the Data API immediately terminates all active connections and blocks all incoming HTTP requests. Any applications, edge functions, or websites relying on the API will stop working instantly. Re-enabling the Data API creates a fresh instance with default settings; the previous configuration is not restored.
 </Admonition>
 
-For the full Data API specification, see the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdataapi).
+For the full Data API specification, see the [Neon API Reference](/docs/reference/api/dataapi/create-project-branch-data-api).
 
 ## Manage via the Neon CLI
 

@@ -2197,12 +2197,12 @@ const defaultConfig = {
       },
       {
         source: '/api-reference',
-        destination: 'https://api-docs.neon.tech',
+        destination: '/docs/reference/api',
         permanent: true,
       },
       {
         source: '/api-reference/v2',
-        destination: 'https://api-docs.neon.tech/v2',
+        destination: '/docs/reference/api',
         permanent: true,
       },
       {

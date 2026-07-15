@@ -15,12 +15,12 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
-updatedOn: '2026-07-14T17:09:59.366Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <FeatureBetaProps feature_name="Managed BetterAuth" />
 
-You can manage Managed BetterAuth programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started). You can also enable and configure Managed BetterAuth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_auth`, `configure_neon_auth`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor).
+You can manage Managed BetterAuth programmatically using the [Neon API](/docs/reference/api). You can also enable and configure Managed BetterAuth from an AI editor using the [Neon MCP server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_auth`, `configure_neon_auth`, `get_neon_auth_config`). See [Set up with your AI editor](/docs/auth/overview#set-up-with-your-ai-editor).
 
 <Admonition type="note">
 Managed BetterAuth operates at the **branch level**. Each branch can have its own independent auth configuration, which means preview and development branches can have separate auth state from your production branch.
@@ -173,7 +173,7 @@ The Neon API also provides endpoints for managing auth configuration at the bran
 | `/config`               | PATCH                    | Update auth configuration (application name)                                |
 | `/send_test_email`      | POST                     | Send a test email to verify email configuration                             |
 
-For full request/response details on these endpoints, see the [interactive API reference](https://api-docs.neon.tech/reference/getting-started).
+For full request/response details on these endpoints, see the [interactive API Reference](/docs/reference/api).
 
 <Admonition type="tip" title="TypeScript SDK">
 You can also manage Managed BetterAuth using the [Neon TypeScript SDK](/docs/reference/typescript-sdk).

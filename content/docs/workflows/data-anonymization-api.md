@@ -11,7 +11,7 @@ summary: >-
   one. Anonymized branches cannot be restored or have their read-write
   endpoint deleted.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 This page provides detailed API documentation for data anonymization. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).
@@ -20,7 +20,7 @@ The Neon API provides comprehensive control over anonymized branches, including 
 
 ## Create anonymized branch
 
-[→ API Reference](https://api-docs.neon.tech/reference/createprojectbranchanonymized)
+[→ API Reference](/docs/reference/api/branches/create-project-branch-anonymized)
 
 ```
 POST /projects/{project_id}/branch_anonymized
@@ -200,7 +200,7 @@ Returns the created branch object with `restricted_actions` indicating operation
 
 ## Get anonymization status
 
-[→ API Reference](https://api-docs.neon.tech/reference/getanonymizedbranchstatus)
+[→ API Reference](/docs/reference/api/branches/get-anonymized-branch-status)
 
 ```
 GET /projects/{project_id}/branches/{branch_id}/anonymized_status
@@ -237,7 +237,7 @@ curl -X GET \
 
 ## Start anonymization
 
-[→ API Reference](https://api-docs.neon.tech/reference/startanonymization)
+[→ API Reference](/docs/reference/api/branches/start-anonymization)
 
 ```
 POST /projects/{project_id}/branches/{branch_id}/anonymize
@@ -272,7 +272,7 @@ curl -X POST \
 
 ## Get masking rules
 
-[→ API Reference](https://api-docs.neon.tech/reference/getmaskingrules)
+[→ API Reference](/docs/reference/api/branches/get-masking-rules)
 
 ```
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
@@ -317,7 +317,7 @@ curl -X GET \
 
 ## Update masking rules
 
-[→ API Reference](https://api-docs.neon.tech/reference/updatemaskingrules)
+[→ API Reference](/docs/reference/api/branches/update-masking-rules)
 
 ```
 PATCH /projects/{project_id}/branches/{branch_id}/masking_rules

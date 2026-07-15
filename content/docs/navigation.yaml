@@ -1152,7 +1152,7 @@
                   slug: https://neon.com/use-cases/ai-agents
                 - title: Database versioning
                   slug: ai/ai-database-versioning
-                - title: Neon API reference
+                - title: Neon API Reference
                   slug: reference/api
             - section: Agent frameworks
               icon: frameworks
