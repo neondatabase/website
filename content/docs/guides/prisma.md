@@ -270,7 +270,7 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 
 ## Next steps: Neon backend services
 
-- [Set up Managed BetterAuth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
 - [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
 - [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
 - [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential

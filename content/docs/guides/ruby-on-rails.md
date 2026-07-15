@@ -8,7 +8,7 @@ summary: >-
   page when setting up a new or existing Rails project against Neon. A separate
   sibling page covers Rails schema migrations.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 

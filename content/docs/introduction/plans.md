@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -310,7 +310,7 @@ Automated backup schedules are available on paid plans except for the Agent plan
 
 ### Auth
 
-Managed BetterAuth is a managed authentication service built on [Better Auth](https://www.better-auth.com/), fully integrated into the Neon platform.
+Managed Better Auth is a managed authentication service built on [Better Auth](https://www.better-auth.com/), fully integrated into the Neon platform.
 
 Monthly Active User (MAU) limits per plan:
 
@@ -320,7 +320,7 @@ Monthly Active User (MAU) limits per plan:
 
 > An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
 
-See [Managed BetterAuth](/docs/auth/overview) for more information.
+See [Managed Better Auth](/docs/auth/overview) for more information.
 
 ### Object Storage
 
@@ -547,7 +547,7 @@ How is private network transfer billed?
 : Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
 
 What are the limits and quotas for the Free plan?
-: The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed BetterAuth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+: The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
 
 What happens if I exceed my Free plan limits?
 : On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 0.5 GB storage cap causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.

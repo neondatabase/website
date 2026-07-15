@@ -6,7 +6,7 @@ summary: >-
   backends. Use WebSockets for two-way connections via an upgrade export, or
   server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
   broadcast across isolates.
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -279,7 +279,7 @@ async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
 },
 ```
 
-For a complete example with JWT verification, Managed BetterAuth integration, and client-side reconnection, see the [realtime chat example](https://github.com/neondatabase/examples/tree/main/with-realtime-chat).
+For a complete example with JWT verification, Managed Better Auth integration, and client-side reconnection, see the [realtime chat example](https://github.com/neondatabase/examples/tree/main/with-realtime-chat).
 
 ## Eviction and shutdown
 

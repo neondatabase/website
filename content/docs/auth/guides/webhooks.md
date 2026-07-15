@@ -2,7 +2,7 @@
 title: Webhooks
 subtitle: Handle authentication events with custom server logic
 summary: >-
-  Managed BetterAuth webhooks send HTTP POST requests to your server when authentication
+  Managed Better Auth webhooks send HTTP POST requests to your server when authentication
   events occur, letting you replace the built-in email provider with custom
   delivery channels (SMS, WhatsApp, custom email) and intercept user signups
   before they are written to the database. Use this page when you need to
@@ -12,18 +12,18 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-07-14T17:09:59.366Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Managed BetterAuth webhooks send HTTP POST requests to your server when authentication events occur.
+Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
 
-By default, Managed BetterAuth handles OTP and magic link delivery through its built-in email provider. Webhooks let you replace this with your own delivery channels (SMS, custom email templates, WhatsApp) so you control how verification messages reach your users. Webhooks also let you hook into the user creation lifecycle to validate signups before they happen or sync new user data to external systems like CRMs and analytics platforms.
+By default, Managed Better Auth handles OTP and magic link delivery through its built-in email provider. Webhooks let you replace this with your own delivery channels (SMS, custom email templates, WhatsApp) so you control how verification messages reach your users. Webhooks also let you hook into the user creation lifecycle to validate signups before they happen or sync new user data to external systems like CRMs and analytics platforms.
 
 For a quick overview of available email customization options, check out [Customize emails](/docs/auth/guides/customize-emails).
 
-For a step-by-step Next.js walkthrough that implements signature verification, custom OTP and magic link emails with Resend, blocking signups by email domain, optional SMS delivery, and local testing with ngrok, see [Customizing Managed BetterAuth with Webhooks](https://neon.com/guides/neon-auth-webhooks-nextjs).
+For a step-by-step Next.js walkthrough that implements signature verification, custom OTP and magic link emails with Resend, blocking signups by email domain, optional SMS delivery, and local testing with ngrok, see [Customizing Managed Better Auth with Webhooks](https://neon.com/guides/neon-auth-webhooks-nextjs).
 
 ## Supported events
 
@@ -37,7 +37,7 @@ For a step-by-step Next.js walkthrough that implements signature verification, c
 
 **Blocking** events pause the auth flow until your server responds (or the timeout expires). **Non-blocking** events are fire-and-forget; failures do not affect the user.
 
-When you subscribe to `send.otp` or `send.magic_link`, Managed BetterAuth skips its built-in email delivery for that event. Your webhook handler is responsible for delivering the code or link.
+When you subscribe to `send.otp` or `send.magic_link`, Managed Better Auth skips its built-in email delivery for that event. Your webhook handler is responsible for delivering the code or link.
 
 ## Configure webhooks
 
@@ -59,7 +59,7 @@ Both endpoints use the following fields:
 
 ### Webhook URL requirements
 
-Managed BetterAuth validates `webhook_url` when you configure webhooks to reduce SSRF risk. Your URL must meet these rules:
+Managed Better Auth validates `webhook_url` when you configure webhooks to reduce SSRF risk. Your URL must meet these rules:
 
 - **HTTPS only** — HTTP URLs are rejected.
 - **Hostname required** — Use a domain name (for example `https://your-app.com/webhooks/neon-auth`). Raw IP addresses (for example `https://93.184.216.34/webhook`) are rejected, including public IPs.
@@ -113,7 +113,7 @@ Both endpoints return the configuration in the same format:
 
 ### Delete a webhook
 
-To delete a webhook and stop receiving authentication events, update your configuration by setting the `enabled` field to `false` using the update endpoint. This disables the webhook and resumes Managed BetterAuth's default delivery behavior for all events.
+To delete a webhook and stop receiving authentication events, update your configuration by setting the `enabled` field to `false` using the update endpoint. This disables the webhook and resumes Managed Better Auth's default delivery behavior for all events.
 
 ```bash
 curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/webhooks" \
@@ -167,7 +167,7 @@ The `user` object uses a fixed allowlist. Fields are optional and vary by event;
 | `ip_address`          | string            | Requester's IP address                                      |
 | `user_agent`          | string            | Requester's user agent                                      |
 
-When `delivery_preference` is `"sms"`, the event is fired by the [Phone Number plugin](/docs/auth/guides/plugins/phone-number). Your handler is responsible for delivering the OTP through your SMS provider. Because Managed BetterAuth does not deliver SMS, a subscribed `send.otp` webhook is a hard requirement for the Phone Number plugin.
+When `delivery_preference` is `"sms"`, the event is fired by the [Phone Number plugin](/docs/auth/guides/plugins/phone-number). Your handler is responsible for delivering the OTP through your SMS provider. Because Managed Better Auth does not deliver SMS, a subscribed `send.otp` webhook is a hard requirement for the Phone Number plugin.
 
 ### `send.magic_link` event data
 
@@ -207,7 +207,7 @@ Fires non-blocking after a user successfully verifies a phone number via the [Ph
 
 ## Signature verification
 
-Managed BetterAuth uses asymmetric EdDSA (Ed25519) signatures with detached JWS, so key rotation does not require reconfiguring your endpoint. Verify signatures before processing webhooks.
+Managed Better Auth uses asymmetric EdDSA (Ed25519) signatures with detached JWS, so key rotation does not require reconfiguring your endpoint. Verify signatures before processing webhooks.
 
 ### Request headers
 
@@ -391,6 +391,6 @@ The 15-second global timeout runs from the start of the first attempt. Each atte
 
 ## Testing and debugging
 
-Managed BetterAuth does not currently support test events, event logs, or redelivery. To test webhooks during development, expose a local server using a tunneling tool (for example, ngrok) and configure the tunnel's **HTTPS hostname** as your webhook URL. Managed BetterAuth rejects localhost, private IP addresses, and raw IP literals. See [Webhook URL requirements](#webhook-url-requirements).
+Managed Better Auth does not currently support test events, event logs, or redelivery. To test webhooks during development, expose a local server using a tunneling tool (for example, ngrok) and configure the tunnel's **HTTPS hostname** as your webhook URL. Managed Better Auth rejects localhost, private IP addresses, and raw IP literals. See [Webhook URL requirements](#webhook-url-requirements).
 
 <NeedHelp/>
