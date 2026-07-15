@@ -55,6 +55,16 @@ export async function getJwtToken() {
 }
 ```
 
+If your app is served from a different origin than your Managed Better Auth URL (for example a Vite or SPA dev server on `localhost` talking to auth on `*.neon.tech`), configure the auth client to send the session cookie on cross-origin requests. Otherwise `authClient.token()` returns `data.token` as `undefined` and calls to your API fail with 401.
+
+```ts filename="src/auth.ts"
+export const authClient = createAuthClient(NEON_AUTH_URL, {
+  fetchOptions: { credentials: 'include' },
+});
+```
+
+Cross-domain setups have further limitations, notably Safari ITP blocking third-party cookies, with reverse-proxy or shared-parent-domain workarounds. See [Better Auth: Safari, ITP, and Cross-Domain Setups](https://www.better-auth.com/docs/concepts/cookies#safari-itp-and-cross-domain-setups).
+
 ### Using the session header
 
 When you call `authClient.getSession()`, Managed Better Auth automatically includes a JWT in the response headers. If you are using a custom fetcher or need to intercept the token immediately after a session check:
