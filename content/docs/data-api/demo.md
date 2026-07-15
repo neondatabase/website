@@ -10,18 +10,18 @@ summary: >-
   for a working end-to-end example of Data API query patterns, RLS setup, and
   ON DELETE CASCADE.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 This tutorial uses a note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with authentication and Row-Level Security (RLS) policies keeping your data secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
 
 <Admonition type="tip" title="Data API works with any auth provider">
-This tutorial uses [Managed BetterAuth](/docs/auth/overview) for convenience, but the Data API works with any authentication provider that issues JWTs. The query patterns, RLS policies, and `auth.user_id()` function shown here apply regardless of your auth provider. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup details with Auth0, Clerk, Firebase, and others.
+This tutorial uses [Managed Better Auth](/docs/auth/overview) for convenience, but the Data API works with any authentication provider that issues JWTs. The query patterns, RLS policies, and `auth.user_id()` function shown here apply regardless of your auth provider. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup details with Auth0, Clerk, Firebase, and others.
 </Admonition>
 
 ## About the sample application
 
-This note-taking app is built with React and Vite. It uses Managed BetterAuth for authentication, the Data API for direct database access, and Drizzle ORM for handling the schema.
+This note-taking app is built with React and Vite. It uses Managed Better Auth for authentication, the Data API for direct database access, and Drizzle ORM for handling the schema.
 
 ![Notes app UI](/docs/data-api/all_notes.png)
 
@@ -42,9 +42,9 @@ Before you begin, ensure you have:
 
 1. Go to the [Neon Console](https://console.neon.tech) to create a new Neon project
 2. In the Neon Console, navigate to your project and go to the **Data API** page in the left sidebar
-3. Select **Managed BetterAuth** as your authentication option (the default), then click **Enable**
+3. Select **Managed Better Auth** as your authentication option (the default), then click **Enable**
 
-This enables both the Data API and Managed BetterAuth in one step. For detailed instructions, see [Getting started with Data API](/docs/data-api/get-started).
+This enables both the Data API and Managed Better Auth in one step. For detailed instructions, see [Getting started with Data API](/docs/data-api/get-started).
 
 ### Clone and install
 
@@ -59,18 +59,19 @@ bun install
 Create a `.env` file in the project root:
 
 ```env
-# Neon Data API URL
-# Find this in Neon Console → Data API page → "Data API URL"
-VITE_NEON_DATA_API_URL=https://your-project-id.data-api.neon.tech
-
-# Managed BetterAuth Base URL
-# Find this in Neon Console → Auth page → "Auth Base URL"
-VITE_NEON_AUTH_URL=https://your-project-id.auth.neon.tech
+# Neon database URL for the client (no username, password, or query parameters)
+# Start from the Data API URL in Neon Console → Data API or `neon data-api get`;
+# remove the `.apirest` hostname label and trailing `/rest/v1` path.
+# The SDK derives the Neon Auth and Data API URLs from this value.
+VITE_NEON_DATABASE_URL=https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
 
 # Database Connection String (for migrations)
 # Find this in Neon Console → Dashboard → Connection string (select "Pooled connection")
+# This is a Postgres connection string, not the HTTPS URL used by VITE_NEON_DATABASE_URL above
 DATABASE_URL=postgresql://user:password@your-project-id.pooler.region.neon.tech/neondb?sslmode=require
 ```
+
+Prefer the older two-URL setup? See the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference.
 
 ### Set up the database
 
@@ -99,20 +100,16 @@ Now that you have the app running, let's explore how it uses the Data API. The f
 
 ### Initialize the client
 
-The demo app uses `@neondatabase/neon-js` to connect to both the Data API and Managed BetterAuth. Here's how the client is configured in `src/lib/auth.ts`:
+The demo app uses `@neondatabase/neon-js` to connect to both the Data API and Managed Better Auth. Here's how the client is configured in `src/lib/auth.ts`:
 
 ```typescript
 import { createClient } from '@neondatabase/neon-js';
 import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 import type { Database } from '../../types/database';
 
-export const client = createClient<Database>({
+export const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL, {
   auth: {
     adapter: BetterAuthReactAdapter(),
-    url: import.meta.env.VITE_NEON_AUTH_URL,
-  },
-  dataApi: {
-    url: import.meta.env.VITE_NEON_DATA_API_URL,
   },
 });
 ```
@@ -221,7 +218,7 @@ pgPolicy("shared_policy", {
 ```
 
 <Admonition type="info" title="About auth.user_id()">
-Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/auth/overview">Managed BetterAuth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access.
+Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/auth/overview">Managed Better Auth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access.
 
 For more details on RLS with Data API, see our [Row-Level Security with Neon guide](/docs/guides/row-level-security).
 </Admonition>
@@ -436,7 +433,7 @@ Now test deleting a note that has paragraphs; both the note and its paragraphs s
 - [Getting started with Data API](/docs/data-api/get-started)
 - [Generate TypeScript types](/docs/data-api/generate-types)
 - [SQL to REST Converter](/docs/data-api/sql-to-rest)
-- [Managed BetterAuth documentation](/docs/auth/overview)
+- [Managed Better Auth documentation](/docs/auth/overview)
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk)
 - [PostgREST documentation](https://docs.postgrest.org/en/v13/)
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)

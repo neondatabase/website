@@ -1,5 +1,5 @@
 ---
-title: Migrate to Managed BetterAuth
+title: Migrate to Managed Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
 summary: >-
   Migration guide for upgrading from legacy Neon Auth (Stack Auth) to Managed
@@ -9,7 +9,7 @@ summary: >-
   SPA project off Stack Auth, or when ejecting to a self-managed Stack Auth
   project.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
@@ -21,15 +21,15 @@ redirectFrom:
   - /docs/guides/neon-auth-demo
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-This guide shows you the code differences between legacy Neon Auth (Stack Auth) and Managed BetterAuth. Use it as a reference to understand what changes if you decide to upgrade.
+This guide shows you the code differences between legacy Neon Auth (Stack Auth) and Managed Better Auth. Use it as a reference to understand what changes if you decide to upgrade.
 
 <Admonition type="important" title="Legacy Neon Auth (Stack Auth) is no longer accepting new users">
-If you're using legacy Neon Auth with Stack Auth, you can continue using it. We'll keep supporting it for existing users. But we encourage you to try Managed BetterAuth instead.
+If you're using legacy Neon Auth with Stack Auth, you can continue using it. We'll keep supporting it for existing users. But we encourage you to try Managed Better Auth instead.
 </Admonition>
 
-## Why Managed BetterAuth?
+## Why Managed Better Auth?
 
 - **Native Branching Support**
 
@@ -83,7 +83,7 @@ npm install @neondatabase/auth@latest @neondatabase/auth-ui
 ```
 
 **What changed**  
-Your app now depends on Managed BetterAuth's Next.js SDK and UI package instead of the Stack Auth SDK.
+Your app now depends on Managed Better Auth's Next.js SDK and UI package instead of the Stack Auth SDK.
 
 ### Update SDK initialization (#nextjs-sdk-initialization)
 
@@ -121,7 +121,7 @@ export const auth = createNeonAuth({
 </CodeTabs>
 
 **What changed**  
-You initialize the Managed BetterAuth client with `createAuthClient` for client components and with `createNeonAuth()` for server-side auth. The unified `auth` instance provides `.handler()`, `.middleware()`, `.getSession()`, and all Better Auth server methods.
+You initialize the Managed Better Auth client with `createAuthClient` for client components and with `createNeonAuth()` for server-side auth. The unified `auth` instance provides `.handler()`, `.middleware()`, `.getSession()`, and all Better Auth server methods.
 
 ### Replace components (#nextjs-replace-components)
 
@@ -148,7 +148,7 @@ export default function SignInPage() {
 </CodeTabs>
 
 **What changed**  
-You render Managed BetterAuth's `AuthView` client component and tell it which flow to show using the `pathname` prop.
+You render Managed Better Auth's `AuthView` client component and tell it which flow to show using the `pathname` prop.
 
 #### Sign up page
 
@@ -198,7 +198,7 @@ export function Header() {
 </CodeTabs>
 
 **What changed**  
-You keep the same `UserButton` API but import it from the Managed BetterAuth UI package and mark the component as client-side.
+You keep the same `UserButton` API but import it from the Managed Better Auth UI package and mark the component as client-side.
 
 ### Replace hooks (#nextjs-replace-hooks)
 
@@ -276,7 +276,7 @@ export default function RootLayout({ children }) {
 </CodeTabs>
 
 **What changed**  
-You wrap your app in `NeonAuthUIProvider`, pass it the `authClient`, and import the Managed BetterAuth UI styles.
+You wrap your app in `NeonAuthUIProvider`, pass it the `authClient`, and import the Managed Better Auth UI styles.
 
 <Admonition type="tip" title="Styling options">
 To learn more about applying styles to the Auth UI components, including plain CSS and Tailwind CSS v4 options, see [UI Component Styles](/docs/auth/reference/ui-components#styling).
@@ -306,7 +306,7 @@ export const { GET, POST } = auth.handler();
 </CodeTabs>
 
 **What changed**  
-You proxy Managed BetterAuth APIs from your Next.js application. The `auth.handler()` method forwards all API requests to the Managed BetterAuth server.
+You proxy Managed Better Auth APIs from your Next.js application. The `auth.handler()` method forwards all API requests to the Managed Better Auth server.
 
 ### Protect routes
 
@@ -404,11 +404,11 @@ Server components now call `auth.getSession()` and read the user from the return
 
 ### Install packages (#react-install-packages)
 
-Uninstall Stack Auth packages and install `@neondatabase/auth`
+Uninstall Stack Auth packages and install `@neondatabase/neon-js`
 
 ```bash filename="Terminal"
 npm uninstall @stackframe/stack
-npm install @neondatabase/auth@latest @neondatabase/auth-ui
+npm install @neondatabase/neon-js@latest @neondatabase/auth-ui
 ```
 
 **What changed**  
@@ -432,20 +432,23 @@ export const stackClientApp = new StackClientApp({
 
 ```tsx
 // src/auth.ts
-import { createAuthClient } from '@neondatabase/auth';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
+  adapter: BetterAuthReactAdapter(),
+});
 const { useSession } = authClient;
 ```
 
 </CodeTabs>
 
 **What changed**  
-You replace the Stack Auth client app with a Managed BetterAuth `authClient` wired to your Managed BetterAuth URL.
+You replace the Stack Auth client app with a Managed Better Auth `authClient` wired to your Managed Better Auth URL.
 
 ### Replace components (#react-replace-components)
 
-Components are the same as Next.js. Use `<AuthView>`, `<UserButton>`, `<SignedIn>`, and `<SignedOut>` from `@neondatabase/neon-auth-ui`.
+Components are the same as Next.js. Use `<AuthView>`, `<UserButton>`, `<SignedIn>`, and `<SignedOut>` from `@neondatabase/auth-ui`.
 
 **What changed**  
 The UI building blocks are shared across frameworks, so you can reuse the same auth components in SPAs.
@@ -467,7 +470,7 @@ export function MyComponent() {
 import { useSession } from './auth';
 
 export function MyComponent() {
-  const { data: session } = useSession();
+  const { data } = useSession();
   const user = data?.user;
 
   return <div>{user ? `Hello, ${user.name || user.email}` : 'Not logged in'}</div>;
@@ -477,7 +480,7 @@ export function MyComponent() {
 </CodeTabs>
 
 **What changed**  
-Instead of a React hook from Stack Auth, you call `authClient.getSession()` and manage the session in your own component state.
+Instead of a React hook from Stack Auth, you call the `useSession()` hook from `authClient` and read the user from its response.
 
 ### Update provider setup (#react-update-provider)
 
@@ -509,7 +512,7 @@ function App() {
 </CodeTabs>
 
 **What changed**  
-You drop the Stack Auth provider/theme and wrap your app in `NeonAuthUIProvider` with the Managed BetterAuth UI styles.
+You drop the Stack Auth provider/theme and wrap your app in `NeonAuthUIProvider` with the Managed Better Auth UI styles.
 
 <Admonition type="tip" title="Styling options">
 To learn more about applying styles to the Auth UI components, including plain CSS and Tailwind CSS v4 options, see [UI Component Styles](/docs/auth/reference/ui-components#styling).

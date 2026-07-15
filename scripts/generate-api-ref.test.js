@@ -1063,6 +1063,22 @@ describe('toNavYaml', () => {
     expect(toNavYaml(tricky)).toContain('\\"hello\\"');
   });
 
+  it('emits a color theme separately from a deprecated tag label', () => {
+    const deprecated = [
+      {
+        tag: 'projects',
+        tagDisplay: 'Project',
+        summary: 'Legacy endpoint',
+        id: 'legacy-endpoint',
+        deprecated: true,
+      },
+    ];
+
+    const yaml = toNavYaml(deprecated);
+    expect(yaml).toContain('tag: deprecated');
+    expect(yaml).toContain('tagTheme: orange');
+  });
+
   it('handles unknown tags by appending after the configured tag order', () => {
     const withUnknown = [
       ...ops,

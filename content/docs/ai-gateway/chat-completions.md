@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-06-17T11:08:12.470Z'
+updatedOn: '2026-07-09T23:06:44.844Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -15,13 +15,17 @@ The chat completions endpoint is the recommended way to use Neon AI Gateway. It'
 
 **Base URL:** `https://<branch-host>/ai-gateway/mlflow/v1`
 
+This endpoint is also reachable at the shorter `/v1/chat/completions` path (no `/ai-gateway/mlflow` prefix). Both behave identically. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+
+If you're using an OpenRouter-compatible client that asks for a base URL, set it to `https://<branch-host>/v1` and call `/chat/completions`.
+
 ## Setup
 
 Set these environment variables. See [Get started](/docs/ai-gateway/get-started) for how to obtain them.
 
 ```bash
 NEON_AI_GATEWAY_TOKEN=nt_live_...
-NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
+NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
 ```
 
 ## Basic request
@@ -198,7 +202,7 @@ Error responses use the standard OpenAI error format:
 ```json
 {
   "error": {
-    "message": "unknown model",
+    "message": "unknown model \"<model-id>\"",
     "type": "invalid_request_error",
     "code": "invalid_model"
   }

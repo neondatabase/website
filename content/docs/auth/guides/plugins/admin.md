@@ -2,7 +2,7 @@
 title: Admin
 subtitle: 'Manage users, roles, bans, sessions, and impersonation'
 summary: >-
-  The Managed BetterAuth Admin plugin exposes Better Auth admin APIs through the
+  The Managed Better Auth Admin plugin exposes Better Auth admin APIs through the
   Neon SDK without manual plugin configuration, letting server-side code create
   users, assign roles, ban accounts, list or revoke sessions, and impersonate
   users for support and debugging. Use this page when building admin dashboards
@@ -10,12 +10,12 @@ summary: >-
   Admin operations require an authenticated session with HTTP-only cookies, and
   impersonation sessions are capped at 1 hour.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Managed BetterAuth is built on [Better Auth](https://www.better-auth.com/) and provides support for Admin plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Admin plugin.
+Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for Admin plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Admin plugin.
 
 The Admin plugin provides APIs to manage your users and their authentication state. It’s commonly used to build internal tooling (admin dashboards, support tools) that can:
 
@@ -38,7 +38,7 @@ The Admin plugin provides APIs to manage your users and their authentication sta
 
 You can call Admin plugin methods using the Neon SDK auth client.
 
-> If you haven’t set up Managed BetterAuth yet, follow the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start to create an `authClient`.
+> If you haven’t set up Managed Better Auth yet, follow the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start to create an `authClient`.
 
 ### Create a user
 
@@ -304,7 +304,7 @@ const { error } = await authClient.admin.stopImpersonating();
 
 ## Limitations
 
-- Admin operations require an authenticated session (HTTP-only cookies). This means your admin tooling must run on the same site that can send those cookies to the Managed BetterAuth API.
+- Admin operations require an authenticated session (HTTP-only cookies). This means your admin tooling must run on the same site that can send those cookies to the Managed Better Auth API.
 - Impersonation sessions are intentionally time‑limited, lasting for the duration of the active browser session or up to 1 hour. This design helps minimize security risks associated with long‑lived impersonation.
 
 <NeedHelp/>

@@ -245,6 +245,15 @@ Some important information.
       expect(result).not.toContain('<InfoBlock');
     });
 
+    it('should convert Tag label independently from its theme', async () => {
+      const result = await processInlineMdx(`
+<Tag label="Public beta" theme="blue" />
+`);
+
+      expect(result).toContain('`Public beta`');
+      expect(result).not.toContain('<Tag');
+    });
+
     it('should convert DocsList to title and bullet list', async () => {
       const result = await processInlineMdx(`
 <DocsList title="What you will learn:">

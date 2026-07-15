@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
+import Tag from 'components/pages/doc/tag';
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 import { cn } from 'utils/cn';
@@ -36,6 +37,14 @@ const Feature = ({ title, info, type, highlighted, index, subtitle, moreLink, ta
         )}
         {subtitle ? <span className="ml-1 text-gray-new-50">{subtitle}</span> : ''}
       </span>
+      {tag && (
+        <Tag
+          className="relative -top-px ml-1.5 inline-flex h-5 items-center px-2 py-0 font-mono text-[13px] font-medium"
+          label={tag.label}
+          size="xs"
+          theme={tag.theme}
+        />
+      )}
       {info && (
         <InfoIcon
           className="relative top-0.5 ml-1.5 inline-block"
@@ -44,11 +53,6 @@ const Feature = ({ title, info, type, highlighted, index, subtitle, moreLink, ta
           link={moreLink}
           clickable
         />
-      )}
-      {tag && (
-        <span className="ml-1.5 inline-flex h-5 items-center border border-green-52/20 bg-green-52/[0.08] px-2 font-mono text-[13px] leading-none font-medium text-green-52 uppercase">
-          {tag}
-        </span>
       )}
     </p>
   </li>
@@ -65,7 +69,10 @@ Feature.propTypes = {
     text: PropTypes.string.isRequired,
     href: PropTypes.string.isRequired,
   }),
-  tag: PropTypes.string,
+  tag: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    theme: PropTypes.string.isRequired,
+  }),
 };
 
 const Features = ({ title, features, type, highlighted }) => (

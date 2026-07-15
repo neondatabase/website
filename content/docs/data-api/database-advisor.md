@@ -5,13 +5,13 @@ summary: >-
   Data API Advisors scan your Neon database schema and configuration for
   security and performance issues specific to objects exposed by the Data API
   over HTTP. Security checks catch exploitable misconfigurations such as missing
-  RLS, security definer views, and Managed BetterAuth exposure. Performance checks flag
+  RLS, security definer views, and Managed Better Auth exposure. Performance checks flag
   unindexed foreign keys, duplicate indexes, and table bloat before they reach
   production. Checks are categorized as SECURITY or PERFORMANCE with severity
   levels INFO, WARN, or ERROR, and are accessible via the Neon Console or the
   REST API.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 The Data API Advisors analyze your database schema and configuration to detect security and performance issues for tables and objects exposed by the [Data API](/docs/data-api/overview) feature. They run a set of checks against your database and report issues with severity levels and recommended fixes.
@@ -77,23 +77,23 @@ Optional query parameters:
 
 ## Security checks
 
-| Check                                                                            | Severity | Description                                                                            |
-| -------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------- |
-| [RLS disabled in public](#rls-disabled-in-public)                                | ERROR    | Tables exposed via the Data API without row-level security                             |
-| [Policy exists RLS disabled](#policy-exists-rls-disabled)                        | ERROR    | RLS policies exist but RLS is not enabled on the table                                 |
-| [Sensitive columns exposed](#sensitive-columns-exposed)                          | ERROR    | API-exposed tables without RLS that contain potentially sensitive columns              |
-| [Security definer view](#security-definer-view)                                  | ERROR    | Views using SECURITY DEFINER, bypassing the querying user's permissions                |
-| [Managed BetterAuth users exposed](#neon-auth-users-exposed)                     | ERROR    | Views exposing `neon_auth.user` data to API roles                                      |
-| [RLS references Managed BetterAuth metadata](#rls-references-neon-auth-metadata) | ERROR    | RLS policies referencing user-editable Managed BetterAuth fields                       |
-| [FK to Managed BetterAuth unique constraint](#fk-to-neon-auth-unique-constraint) | ERROR    | Foreign keys referencing Managed BetterAuth unique constraints instead of primary keys |
-| [RLS policy always true](#rls-policy-always-true)                                | WARN     | RLS policies with always-true expressions that bypass access control                   |
-| [Function search path mutable](#function-search-path-mutable)                    | WARN     | Functions without an explicit `search_path` setting                                    |
-| [Extension in public](#extension-in-public)                                      | WARN     | Extensions installed in the `public` schema, exposing their objects via the Data API   |
-| [Extension versions outdated](#extension-versions-outdated)                      | WARN     | Extensions not using the recommended default version                                   |
-| [Materialized view in API](#materialized-view-in-api)                            | WARN     | Materialized views accessible to API roles, bypassing RLS                              |
-| [Foreign table in API](#foreign-table-in-api)                                    | WARN     | Foreign tables accessible over the Data API, which cannot use RLS                      |
-| [Unsupported reg types](#unsupported-reg-types)                                  | WARN     | Columns using `reg*` types that prevent `pg_upgrade`                                   |
-| [RLS enabled no policy](#rls-enabled-no-policy)                                  | INFO     | RLS is enabled but no policies have been created                                       |
+| Check                                                                             | Severity | Description                                                                             |
+| --------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------- |
+| [RLS disabled in public](#rls-disabled-in-public)                                 | ERROR    | Tables exposed via the Data API without row-level security                              |
+| [Policy exists RLS disabled](#policy-exists-rls-disabled)                         | ERROR    | RLS policies exist but RLS is not enabled on the table                                  |
+| [Sensitive columns exposed](#sensitive-columns-exposed)                           | ERROR    | API-exposed tables without RLS that contain potentially sensitive columns               |
+| [Security definer view](#security-definer-view)                                   | ERROR    | Views using SECURITY DEFINER, bypassing the querying user's permissions                 |
+| [Managed Better Auth users exposed](#neon-auth-users-exposed)                     | ERROR    | Views exposing `neon_auth.user` data to API roles                                       |
+| [RLS references Managed Better Auth metadata](#rls-references-neon-auth-metadata) | ERROR    | RLS policies referencing user-editable Managed Better Auth fields                       |
+| [FK to Managed Better Auth unique constraint](#fk-to-neon-auth-unique-constraint) | ERROR    | Foreign keys referencing Managed Better Auth unique constraints instead of primary keys |
+| [RLS policy always true](#rls-policy-always-true)                                 | WARN     | RLS policies with always-true expressions that bypass access control                    |
+| [Function search path mutable](#function-search-path-mutable)                     | WARN     | Functions without an explicit `search_path` setting                                     |
+| [Extension in public](#extension-in-public)                                       | WARN     | Extensions installed in the `public` schema, exposing their objects via the Data API    |
+| [Extension versions outdated](#extension-versions-outdated)                       | WARN     | Extensions not using the recommended default version                                    |
+| [Materialized view in API](#materialized-view-in-api)                             | WARN     | Materialized views accessible to API roles, bypassing RLS                               |
+| [Foreign table in API](#foreign-table-in-api)                                     | WARN     | Foreign tables accessible over the Data API, which cannot use RLS                       |
+| [Unsupported reg types](#unsupported-reg-types)                                   | WARN     | Columns using `reg*` types that prevent `pg_upgrade`                                    |
+| [RLS enabled no policy](#rls-enabled-no-policy)                                   | INFO     | RLS is enabled but no policies have been created                                        |
 
 ## Performance checks
 
@@ -216,13 +216,13 @@ Note: The `security_invoker` option requires PostgreSQL 15 or later. This check 
 
 ---
 
-### Managed BetterAuth users exposed
+### Managed Better Auth users exposed
 
 **Severity:** ERROR
 
 Views or materialized views that reference `neon_auth.user` can expose sensitive user data to API roles. Views in PostgreSQL default to SECURITY DEFINER mode, which means they bypass [row-level security](/postgresql/postgresql-administration/postgresql-row-level-security) policies on the underlying tables.
 
-See [Managed BetterAuth overview](/docs/auth/overview) and [Data API access control](/docs/data-api/access-control) for background.
+See [Managed Better Auth overview](/docs/auth/overview) and [Data API access control](/docs/data-api/access-control) for background.
 
 <details>
 <summary>Show resolution</summary>
@@ -275,18 +275,18 @@ Note: For this approach to work, RLS must also be enabled on the `neon_auth.user
 
 ---
 
-### RLS references Managed BetterAuth metadata
+### RLS references Managed Better Auth metadata
 
 **Severity:** ERROR
 
-RLS policies that reference user-editable fields from Managed BetterAuth (such as `user.role` or `organization.metadata`) are insecure. Users can modify these fields, allowing them to bypass security checks.
+RLS policies that reference user-editable fields from Managed Better Auth (such as `user.role` or `organization.metadata`) are insecure. Users can modify these fields, allowing them to bypass security checks.
 
-See [Managed BetterAuth overview](/docs/auth/overview).
+See [Managed Better Auth overview](/docs/auth/overview).
 
 <details>
 <summary>Show resolution</summary>
 
-Remove references to user-editable Managed BetterAuth fields from your RLS policies. The specific fields detected by this check are:
+Remove references to user-editable Managed Better Auth fields from your RLS policies. The specific fields detected by this check are:
 
 - `neon_auth.user.role` -- users can change their own role
 - `neon_auth.organization.metadata` -- organization metadata can be modified
@@ -316,7 +316,7 @@ CREATE POLICY owner_access ON public.documents
 
 ---
 
-### FK to Managed BetterAuth unique constraint
+### FK to Managed Better Auth unique constraint
 
 **Severity:** ERROR
 

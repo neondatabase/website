@@ -26,6 +26,7 @@ const API_DOCS_DIR = resolve(process.cwd(), 'content/api-docs');
 const API_SLUG_PREFIX = 'reference/api';
 const SAFE_SLUG = /^[a-z0-9][a-z0-9-]*$/;
 const STATIC_PAGES = new Set(['get-started', 'key-concepts']);
+const STABILITY_THEMES = { beta: 'blue' };
 
 const getPublicApiMarkdownPath = (slug) => `/docs/${API_SLUG_PREFIX}/${slug}.md`;
 
@@ -53,7 +54,11 @@ function loadOperation(tag, id) {
   if (!SAFE_SLUG.test(tag) || !SAFE_SLUG.test(id)) return null;
   const path = join(API_DATA_DIR, tag, `${id}.json`);
   if (!existsSync(path)) return null;
-  return JSON.parse(readFileSync(path, 'utf8'));
+  const operation = JSON.parse(readFileSync(path, 'utf8'));
+  return {
+    ...operation,
+    stabilityTheme: STABILITY_THEMES[operation.stability] || 'gray',
+  };
 }
 
 function loadTagOperations(tag) {

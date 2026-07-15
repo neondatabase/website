@@ -23,7 +23,7 @@ If the MCP server and CLI aren't set up yet, ask the user for permission to run:
 npx neon@latest init
 ```
 
-This will install the Neon VSCode extension (if applicable) and the Neon MCP server and `neon-postgres` agent skill. Alternatively, you can offer to install the Neon CLI. Install instructions here: https://neon.com/docs/reference/cli-install.md
+This will install the Neon VSCode extension (if applicable) and the Neon MCP server and `neon-postgres` agent skill. Alternatively, you can offer to install the Neon CLI. Install instructions here: https://neon.com/docs/cli/install.md
 
 Either CLI or MCP server can be used to manage Neon projects and databases on the user's behalf. If the user prefers to manually get started with Neon, then you can guide them through the setup process instead of using the CLI or MCP server directly. See `https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md` for details.
 

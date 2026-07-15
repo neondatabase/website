@@ -19,6 +19,7 @@
     "postbuild": "node src/scripts/copy-md-content.js && node src/scripts/generate-llms-index.js && node src/scripts/generate-llms-full.js && next-sitemap --config next-sitemap.config.js && next-sitemap --config next-sitemap-postgres.config.js",
     "start": "next start",
     "fix:md": "prettier --write --log-level warn \"content/**/*.{md,mdx}\"",
+    "check:md": "prettier --check --log-level warn \"content/**/*.md\" --ignore-path .prettierignore",
     "fix:js": "eslint --fix --quiet --cache . && prettier --write --log-level warn --cache \"**/*.{js,jsx,css,html}\"",
     "fix:all": "eslint --fix --quiet --cache . && prettier --write --log-level warn --cache .",
     "format:all": "prettier --write --log-level warn --cache .",
