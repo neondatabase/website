@@ -174,10 +174,20 @@ const BACKEND_PLATFORM = {
   eventName: 'Backend Platform Access Requested',
 };
 
+const FOUNDATION_MODELS = {
+  title: 'Request early access to foundation models',
+  description:
+    "Foundation models are being rolled out gradually as we expand capacity. Drop your email and we'll reach out as access opens up.",
+  buttonText: 'Request Early Access',
+  confirmation: "You're on the list. We'll be in touch as access opens up.",
+  eventName: 'Foundation Model Access Requested',
+};
+
 const DATA = {
   region: REGIONS,
   extension: EXTENSIONS,
   'backend-platform': BACKEND_PLATFORM,
+  'foundation-models': FOUNDATION_MODELS,
 };
 
 export default DATA;
