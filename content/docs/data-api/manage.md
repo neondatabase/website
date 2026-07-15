@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -26,7 +26,7 @@ This page covers managing the Data API after it is enabled. To enable via the Co
 
 ## Manage authentication providers
 
-You can configure which authentication provider validates JWT tokens for your Data API requests. Only one provider can be configured at a time. If you enabled the Data API with [Managed BetterAuth](/docs/auth/overview), it is already set as the default provider.
+You can configure which authentication provider validates JWT tokens for your Data API requests. Only one provider can be configured at a time. If you enabled the Data API with [Managed Better Auth](/docs/auth/overview), it is already set as the default provider.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -84,7 +84,7 @@ Removing an authentication provider invalidates all tokens issued by that provid
 </Admonition>
 
 <Admonition type="tip" title="Auth API reference">
-If you're using Managed BetterAuth, there's an interactive API reference for authentication endpoints at your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). See [Testing with Managed BetterAuth](/docs/data-api/get-started#testing-with-neon-auth) for details.
+If you're using Managed Better Auth, there's an interactive API reference for authentication endpoints at your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). See [Testing with Managed Better Auth](/docs/data-api/get-started#testing-with-neon-auth) for details.
 </Admonition>
 
 ## Advanced settings
@@ -197,9 +197,9 @@ Response (201 Created):
 
 The empty body enables the Data API without an authentication provider. To configure authentication at enable time, change the request body:
 
-- **Managed BetterAuth:** `-d '{"auth_provider": "neon_auth", "add_default_grants": true}'`
+- **Managed Better Auth:** `-d '{"auth_provider": "neon_auth", "add_default_grants": true}'`
 
-  If Managed BetterAuth is not already enabled on the branch, this automatically provisions it. The optional `add_default_grants` option grants authenticated users permissions on tables in the `public` schema, matching the default Console behavior. See [Managed BetterAuth](/docs/auth/overview) to learn more.
+  If Managed Better Auth is not already enabled on the branch, this automatically provisions it. The optional `add_default_grants` option grants authenticated users permissions on tables in the `public` schema, matching the default Console behavior. See [Managed Better Auth](/docs/auth/overview) to learn more.
 
 - **External provider:** `-d '{"auth_provider": "external", "jwks_url": "https://your-provider/.well-known/jwks.json"}'`
 

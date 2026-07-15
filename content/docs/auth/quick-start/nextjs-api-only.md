@@ -1,26 +1,26 @@
 ---
-title: Use Managed BetterAuth with Next.js (API methods)
+title: Use Managed Better Auth with Next.js (API methods)
 subtitle: Build your own auth UI using SDK methods
 summary: >-
-  Managed BetterAuth SDK integration for Next.js App Router using raw API methods. Call
+  Managed Better Auth SDK integration for Next.js App Router using raw API methods. Call
   `createNeonAuth`, `auth.signUp.email()`, `auth.signIn.email()`, and
   `auth.middleware()` directly from the `@neondatabase/auth` package for full
   control over your auth UI. Use this guide instead of the UI components
   reference when you need custom sign-up and sign-in forms. Requires Next.js
   App Router.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/nextjs
   - /docs/auth/quick-start/nextjs/
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <AuthAISetupTip />
 
-This guide shows you how to integrate Managed BetterAuth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. For pre-built UI components, see the [UI components reference](/docs/auth/reference/ui-components) and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples). Upgrading from v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1).
+This guide shows you how to integrate Managed Better Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. For pre-built UI components, see the [UI components reference](/docs/auth/reference/ui-components) and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples). Upgrading from v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1).
 
 <TwoColumnLayout>
 
@@ -36,7 +36,7 @@ Go to the **Auth** page in your project dashboard and click **Enable Auth**, the
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Console">
 
-![Managed BetterAuth Base URL](/docs/auth/neon-auth-base-url.png)
+![Managed Better Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
@@ -96,7 +96,7 @@ Create a unified auth instance in `lib/auth/server.ts`. This single instance pro
 See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation (logging, cookies, upstream errors).
 
 <Admonition type="note" title="Server logging">
-The SDK logs structured **`error`** and **`warn`** messages to **`console`** by default (`logLevel: 'warn'`). This helps when the auth proxy or upstream Auth URL is misconfigured. Set **`logLevel: 'silent'`** to disable Managed BetterAuth logging, or **`logLevel: 'debug'`** for more detail. See [Server logging](/docs/auth/reference/nextjs-server#server-logging) in the reference.
+The SDK logs structured **`error`** and **`warn`** messages to **`console`** by default (`logLevel: 'warn'`). This helps when the auth proxy or upstream Auth URL is misconfigured. Set **`logLevel: 'silent'`** to disable Managed Better Auth logging, or **`logLevel: 'debug'`** for more detail. See [Server logging](/docs/auth/reference/nextjs-server#server-logging) in the reference.
 </Admonition>
 
 </TwoColumnLayout.Block>
@@ -111,7 +111,7 @@ export const auth = createNeonAuth({
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
     // sessionDataTtl: 300, // optional session_data cache TTL in seconds (default: 300)
   },
-  // logLevel: 'silent', // disable Managed BetterAuth logging
+  // logLevel: 'silent', // disable Managed Better Auth logging
   // logLevel: 'debug',  // verbose proxy/upstream logging
 });
 ```
@@ -122,7 +122,7 @@ export const auth = createNeonAuth({
 <TwoColumnLayout.Step title="Set up auth API routes">
 <TwoColumnLayout.Block>
 
-Create an API route handler that proxies auth requests. All Managed BetterAuth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory:
+Create an API route handler that proxies auth requests. All Managed Better Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory:
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="app/api/auth/[...path]/route.ts">
@@ -165,7 +165,7 @@ export const config = {
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Footer>
 <Admonition type="note">
-Your Next.js project is now fully configured to use Managed BetterAuth. Now, lets proceed with setting up the auth clients.
+Your Next.js project is now fully configured to use Managed Better Auth. Now, lets proceed with setting up the auth clients.
 </Admonition>
 </TwoColumnLayout.Footer>
 </TwoColumnLayout.Step>

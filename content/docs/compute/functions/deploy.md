@@ -6,10 +6,10 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-07-11T13:26:09.521Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 ## Deploy with `neon.ts`
 
@@ -42,6 +42,10 @@ neon functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wa
 ```
 
 The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
+
+<Admonition type="note" title="esbuild not found">
+The `neon` CLI ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary. `NEON_ESBUILD_PATH` is read by the CLI's own bundler, not by `buildFunctionBundle` in [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling); when calling that package directly, pass a custom `bundleFunction` instead.
+</Admonition>
 
 | Flag              | Default       | Description                                                                                                                                   |
 | ----------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -1,20 +1,20 @@
 ---
-title: Neon Platform private preview guide
+title: Neon backend beta guide
 subtitle: Get started with Neon Functions, Object Storage, and AI Gateway
 enableTableOfContents: true
+redirectFrom:
+  - /docs/get-started/platform-private-preview/
 ---
 
-You're in the private preview of the Neon platform.
+The Neon backend for apps and agents is in beta.
 
-<Admonition type="info" title="Private preview">
-This is not for production workloads. Expect rough edges and frequent updates. Build something and share your feedback in Discord.
+<Admonition type="info" title="Beta">
+Functions, Object Storage, and AI Gateway are not yet recommended for production workloads. Build something and help us refine them by sharing your feedback in Discord.
 </Admonition>
 
-<YoutubeIframe embedId="xvBlIwoqwuo" />
+## What's in the beta
 
-## What's in the preview
-
-Three new services join Postgres and Managed BetterAuth, all scoped to your branches:
+Three new services join Postgres and Managed Better Auth, all scoped to your branches:
 
 - **Neon Functions**: long-running Node.js compute next to your database. WebSocket servers, SSE streams, AI agents.
 - **Neon Object Storage**: S3-compatible object storage that branches with your data.
@@ -24,9 +24,9 @@ You declare all of it in one `neon.ts` file, and it branches together: fork a br
 
 ## Check your access
 
-Access is a flag on your Neon account. If you received the invite email, your flag should already be set. Preview services work on **new projects** in **AWS us-east-2** only. They can't be enabled on existing projects. All usage during the preview is free, subject to fair usage. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for what to expect once billing begins.
+Beta access is open to every Neon account, no invite required. Services work in **AWS us-east-2** only, on new or existing projects in that region. Functions and Object Storage are free to use during the beta on any plan, subject to usage limits. AI Gateway requires a paid plan (Launch or Scale); inference is free for paid plans during the beta. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for what to expect once billing begins.
 
-To confirm your access, go to [console.neon.tech](https://console.neon.tech), create a new project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Storage**, **Credentials**, **AI Gateway**, and **Functions**. If those don't appear, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord and we'll fix your flag.
+To confirm access, go to [console.neon.tech](https://console.neon.tech), open a project in **US East (Ohio)** (`us-east-2`), and check the left navigation for **Storage**, **Credentials**, **AI Gateway**, and **Functions**. If a service is missing, post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord.
 
 ![Neon app backend navigation](/docs/get-started/neon_app_backend.png)
 
@@ -39,7 +39,7 @@ There are three ways to get started. Pick the one that fits how you work.
 Open Cursor or Claude Code in any directory (an existing project or a new empty folder) and paste this prompt:
 
 ```text
-I'm part of the Neon private preview. Please run and follow `npx neon@latest init --preview`
+I'm using the Neon backend beta (Functions, Object Storage, AI Gateway). Please run and follow `npx neon@latest init --preview`
 ```
 
 Your agent will install the CLI, walk you through project setup, install agent skills, and pull your environment variables. You'll need to complete a browser OAuth step when prompted.
@@ -54,14 +54,17 @@ neon bootstrap
 
 Pick a template from the interactive selector, or pass `--template <id>` to skip it:
 
-| Template        | What it builds                                                                                                                                                                                                     |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `hono`          | A todo CRUD API using Hono and Drizzle ORM, deployed as a Neon Function. Includes pre-configured schema and migrations. A good starting point for any HTTP API on Neon Functions.                                  |
-| `ai-sdk`        | A streaming AI chat agent on Neon Functions that generates images on demand, stores them in Neon Object Storage, and indexes metadata in Postgres via Drizzle. Uses Neon AI Gateway for model access.              |
-| `mastra`        | A personal-assistant chatbot on Neon Functions that remembers you across conversations. Streams responses through Neon AI Gateway and persists context across threads using Mastra Memory backed by Neon Postgres. |
-| `mcp`           | An MCP server on Neon Functions that exposes contact management tools (create, update, delete, search) to AI agents via streamable HTTP. Compatible with Cursor, Claude Desktop, and other MCP clients.            |
-| `realtime-chat` | A full-stack realtime chat app: Next.js frontend with Managed BetterAuth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                 |
-| `realtime-sse`  | A realtime shared counter: TanStack Router SPA connected to a Hono server on Neon Functions via server-sent events. State persists in Postgres and broadcasts across isolates with LISTEN/NOTIFY.                  |
+| Template            | What it builds                                                                                                                                                                                                     |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `hono`              | A todo CRUD API using Hono and Drizzle ORM, deployed as a Neon Function. Includes pre-configured schema and migrations. A good starting point for any HTTP API on Neon Functions.                                  |
+| `ai-sdk`            | A streaming AI chat agent on Neon Functions that generates images on demand, stores them in Neon Object Storage, and indexes metadata in Postgres via Drizzle. Uses Neon AI Gateway for model access.              |
+| `mastra`            | A personal-assistant chatbot on Neon Functions that remembers you across conversations. Streams responses through Neon AI Gateway and persists context across threads using Mastra Memory backed by Neon Postgres. |
+| `mcp`               | An MCP server on Neon Functions that exposes contact management tools (create, update, delete, search) to AI agents via streamable HTTP. Compatible with Cursor, Claude Desktop, and other MCP clients.            |
+| `realtime-chat`     | A full-stack realtime chat app: Next.js frontend with Managed Better Auth, a WebSocket server on Neon Functions, and messages persisted and fanned out across isolates with Postgres LISTEN/NOTIFY.                |
+| `realtime-sse`      | A realtime shared counter: TanStack Router SPA connected to a Hono server on Neon Functions via server-sent events. State persists in Postgres and broadcasts across isolates with LISTEN/NOTIFY.                  |
+| `discord-bot-http`  | A Discord interactions bot on Neon Functions: slash commands, embeds, Components v2 buttons, and user profiles with command usage tracked in Postgres.                                                             |
+| `telegram-bot-http` | A Telegram webhook bot on Neon Functions: bot commands, inline keyboard buttons, and user profiles with command usage tracked in Postgres.                                                                         |
+| `whatsapp-bot-http` | A WhatsApp Cloud API webhook bot on Neon Functions: bot commands, interactive reply buttons, and user profiles with command usage tracked in Postgres.                                                             |
 
 Each template includes agent skills and a README. Follow the README steps, or tell your agent to follow them.
 
@@ -156,11 +159,11 @@ The Neon CLI supports a full local development workflow for the platform. You li
 | [`neon dev`](/docs/cli/dev)                    | Run your functions locally with hot reload. Serves every function declared in `neon.ts`, each on its own dev server. Essential for local function development. |
 | [`neon env pull`](/docs/cli/env)               | Pull the current branch's environment variables into `.env.local`. Run this after switching branches if you skipped the automatic pull.                        |
 
-Keep the CLI up to date: run `npm i -g neon@latest` before each session and before reporting a bug. The preview CLI updates frequently.
+Keep the CLI up to date: run `npm i -g neon@latest` before each session and before reporting a bug. The beta CLI updates frequently.
 
 ## Docs
 
-Docs are evolving daily during the preview. Use the Neon agent skills as your primary reference.
+Docs are evolving daily during the beta. Use the Neon agent skills as your primary reference.
 
 - [Neon Functions](/docs/compute/functions/overview): overview, get started, neon.ts reference, runtime limits
 - [Neon Object Storage](/docs/storage/overview): buckets, objects, S3 compatibility
@@ -171,13 +174,13 @@ For inspiration, see [Build on Neon](https://build-on-neon.vercel.app/): an inde
 
 ## Known limitations
 
-- New projects in AWS us-east-2 only. Existing projects don't work.
-- Functions: memory is fixed at 2048 MiB.
-- Logs from deployed functions can't be retrieved yet. Use `neon dev` during development, and have deployed functions write diagnostics to Postgres. Error trackers work today: `@sentry/node` bundles and runs fine; set `SENTRY_DSN` as a deploy-time env var.
+- AWS us-east-2 only.
+- Functions: memory is fixed at 2048 MiB, not configurable during the beta.
+- AI Gateway requires a paid plan (Launch or Scale). Functions and Object Storage work on any plan.
 
 ## Feedback
 
-Post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord: bugs, confusion, docs gaps, feature requests, and what you build. We run office hours and user interviews throughout the preview. Details in the channel.
+Post in [#neon-platform-private-preview](https://discord.com/channels/1176467419317940276/1514002115024916643) on Discord: bugs, confusion, docs gaps, feature requests, and what you build. We run office hours and user interviews throughout the beta. Details in the channel.
 
 Tell us what you build. We'd love to feature it.
 

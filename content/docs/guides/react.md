@@ -8,7 +8,7 @@ summary: >-
   meta-framework, since Neon must be accessed server-side in React apps. Neon
   Auth quick starts for Next.js and TanStack Router are also linked here.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.
@@ -31,18 +31,24 @@ Find detailed instructions for connecting to Neon from various React meta-framew
 
 </TechCards>
 
-## Managed BetterAuth
+## Managed Better Auth
 
-After you connect your database, add managed authentication with [Managed BetterAuth](/docs/auth/overview). Quick starts are available for supported React meta-frameworks:
+After you connect your database, add managed authentication with [Managed Better Auth](/docs/auth/overview). Quick starts are available for supported React meta-frameworks:
 
 <TechCards>
 
-<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js" description="Set up Managed BetterAuth with Next.js" icon="next-js"></a>
+<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js" description="Set up Managed Better Auth with Next.js" icon="next-js"></a>
 
-<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="Set up Managed BetterAuth with TanStack Router" icon="tanstack"></a>
+<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="Set up Managed Better Auth with TanStack Router" icon="tanstack"></a>
 
 </TechCards>
 
 For React Router, follow the [React Auth quick start](/docs/auth/quick-start/react).
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

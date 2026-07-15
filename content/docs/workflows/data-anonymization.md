@@ -12,8 +12,9 @@ summary: >-
 redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
+tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-13T14:20:27.525Z'
 ---
 
 <FeatureBeta />

@@ -6,10 +6,12 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
+
+Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
 
 ## Authentication errors
 
@@ -108,15 +110,15 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 `PutBucketLifecycle` succeeds and the configuration is stored, but expiration and transition rules do not execute.
 
-**Status:** Lifecycle enforcement isn't available in Private Preview. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
+**Status:** Lifecycle enforcement isn't available in beta. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
 
 ## Connection and performance errors
 
 ### `503 Service Unavailable` (SlowDown)
 
-The request exceeded the per-IP or per-tenant rate limit. The S3 error code is `SlowDown`. This is a rate limit signal, not a server error. The storage service is healthy.
+The request exceeded a rate limit. The S3 error code is `SlowDown`. This is a rate limit signal, not a server error. The storage service is healthy.
 
-**Fix:** Implement exponential backoff and retry. Don't treat `SlowDown` as a fatal error. The response may include a `Retry-After` header indicating how long to wait. AWS SDKs handle this automatically when retry logic is enabled.
+**Fix:** Implement exponential backoff and retry. Don't treat `SlowDown` as a fatal error. The response may include a `Retry-After` header indicating how long to wait. AWS SDKs handle this automatically when retry logic is enabled. If you're hitting this consistently, [let us know](/docs/introduction/support) and we can look into raising your limit.
 
 ### Large downloads timing out mid-stream
 

@@ -1,22 +1,22 @@
 ---
-title: Use Managed BetterAuth with React (API methods)
+title: Use Managed Better Auth with React (API methods)
 subtitle: Build your own auth UI
 summary: >-
-  Managed BetterAuth with React for Vite apps, using the `@neondatabase/neon-js` SDK's
+  Managed Better Auth with React for Vite apps, using the `@neondatabase/neon-js` SDK's
   programmatic API methods (`signUp()`, `signIn.email()`, `getSession()`) instead
   of pre-built UI components. Use this page when you need full control over your
   own auth UI rather than dropping in ready-made components. Registered users are
   automatically synced to the `neon_auth.user` table in your Neon Postgres
   database.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/react-router-components
   - /docs/auth/quick-start/react-router-components/
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <AuthAISetupTip />
 
@@ -34,7 +34,7 @@ You can then find your Auth **Base URL** on the Configuration tab. Copy this URL
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Console">
 
-![Managed BetterAuth Base URL](/docs/auth/neon-auth-base-url.png)
+![Managed Better Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
@@ -271,7 +271,7 @@ SELECT * FROM neon_auth.user;
 
 ## Next steps
 
-- [Learn about Managed BetterAuth concepts](/docs/auth/overview)
+- [Learn about Managed Better Auth concepts](/docs/auth/overview)
 - [More example apps](/docs/auth/overview#example-applications) in the **neon-js** `examples/` directory
 - [Explore the Neon Data API](/docs/data-api/get-started) to build a REST API for your data
 - [View complete SDK reference](/docs/reference/javascript-sdk)

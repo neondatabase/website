@@ -12,7 +12,7 @@ summary: >-
   default, or parent branches, and deletion is permanent and also removes
   associated compute endpoints.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 ## Overview
@@ -127,7 +127,7 @@ Branch expiration is not supported with these Neon features:
 
 - **Data API**
 
-Branch expiration is supported with [Managed BetterAuth](/docs/auth/overview).
+Branch expiration is supported with [Managed Better Auth](/docs/auth/overview).
 
 <Admonition type="note">
 When a branch expires and is deleted, all associated compute endpoints are also deleted. Ensure any critical workloads are migrated before expiration.

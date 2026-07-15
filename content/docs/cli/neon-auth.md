@@ -1,10 +1,10 @@
 ---
 title: 'Neon CLI command: neon-auth'
-subtitle: Manage Managed BetterAuth from the CLI
+subtitle: Manage Managed Better Auth from the CLI
 summary: >-
-  The Neon CLI `neon neon-auth` command manages Managed BetterAuth on a database
+  The Neon CLI `neon neon-auth` command manages Managed Better Auth on a database
   branch from the terminal. Use `enable`, `status`, and `disable` to provision,
-  inspect, or remove Managed BetterAuth, and the `oauth-provider` subcommands to add,
+  inspect, or remove Managed Better Auth, and the `oauth-provider` subcommands to add,
   update, or delete Google, GitHub, and Vercel OAuth providers. The `domain`
   subcommands manage trusted redirect domains, including `allow-localhost`
   settings for local development. The `config` subcommands cover email and
@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/reference/cli-neon-auth
 ---
 
-The `neon-auth` command manages [Managed BetterAuth](/docs/auth/overview) on a database branch from the terminal. You can enable or disable Managed BetterAuth, configure OAuth providers, trusted domains, email settings, and webhooks, and manage auth users.
+The `neon-auth` command manages [Managed Better Auth](/docs/auth/overview) on a database branch from the terminal. You can enable or disable Managed Better Auth, configure OAuth providers, trusted domains, email settings, and webhooks, and manage auth users.
 
 Requires neon 2.23.0 or later. Check your version with `neon --version`.
 
@@ -28,7 +28,7 @@ If `--project-id` or `--branch` are omitted, the CLI resolves them from your [co
 
 ### neon neon-auth enable (#enable)
 
-Provisions Managed BetterAuth on the current branch.
+Provisions Managed Better Auth on the current branch.
 
 <CliUsage command="neon-auth enable" />
 
@@ -40,7 +40,7 @@ neon neon-auth enable
 
 ### neon neon-auth status (#status)
 
-Shows whether Managed BetterAuth is configured on the branch and displays the current connection details.
+Shows whether Managed Better Auth is configured on the branch and displays the current connection details.
 
 <CliUsage command="neon-auth status" />
 
@@ -52,17 +52,17 @@ neon neon-auth status
 
 ### neon neon-auth disable (#disable)
 
-Removes Managed BetterAuth from the branch.
+Removes Managed Better Auth from the branch.
 
 <CliUsage command="neon-auth disable" />
 
 <CliOptions command="neon-auth disable" />
 
 <Admonition type="important">
-The `--delete-data` option permanently deletes all Managed BetterAuth data and schema from the database. This can't be undone.
+The `--delete-data` option permanently deletes all Managed Better Auth data and schema from the database. This can't be undone.
 </Admonition>
 
-Remove Managed BetterAuth from the branch and delete its data:
+Remove Managed Better Auth from the branch and delete its data:
 
 ```bash
 neon neon-auth disable --delete-data
@@ -126,7 +126,7 @@ neon neon-auth oauth-provider delete --provider-id vercel
 
 ## Domains (#domain)
 
-The `domain` subcommands manage the trusted domains that Managed BetterAuth accepts as redirect URIs for the branch.
+The `domain` subcommands manage the trusted domains that Managed Better Auth accepts as redirect URIs for the branch.
 
 <CliSubcommands command="neon-auth domain" anchorParts="domain" />
 
@@ -350,7 +350,7 @@ neon neon-auth config webhook update --enabled --url https://example.com/webhook
 
 ## Plugins (#plugins)
 
-The `plugins` subcommands show the Managed BetterAuth plugin configurations for the branch.
+The `plugins` subcommands show the Managed Better Auth plugin configurations for the branch.
 
 <CliSubcommands command="neon-auth plugins" anchorParts="plugins" />
 
@@ -380,7 +380,7 @@ neon neon-auth plugins get organization
 
 ## Users (#user)
 
-The `user` subcommands manage Managed BetterAuth users on the branch.
+The `user` subcommands manage Managed Better Auth users on the branch.
 
 <CliSubcommands command="neon-auth user" anchorParts="user" />
 

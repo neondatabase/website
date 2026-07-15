@@ -17,10 +17,12 @@
       items:
         - title: One-command setup
           slug: get-started/with-an-agent
+        - title: Full backend quickstart
+          slug: get-started/full-backend-quickstart
+        - title: Tour the Neon backend
+          slug: get-started/backend-overview
         - title: Tour the Neon Console
           slug: get-started/signing-up
-        - title: Build a full backend
-          slug: get-started/full-backend-quickstart
     - section: Frontend & Frameworks
       items:
         - title: Frameworks
@@ -786,12 +788,12 @@
       items:
         - title: Overview
           slug: compute/functions/overview
-        - title: Preview access
-          slug: compute/functions/preview-access
         - title: Get started
           slug: compute/functions/get-started
         - title: Deploy and manage
           slug: compute/functions/deploy
+        - title: Logs
+          slug: compute/functions/logs
         - title: Environment variables
           slug: compute/functions/environment-variables
         - title: Authentication
@@ -822,6 +824,8 @@
               slug: storage/objects
             - title: Authentication
               slug: storage/authentication
+            - title: Logs
+              slug: storage/logs
         - section: Reference
           items:
             - title: S3 compatibility
@@ -938,6 +942,8 @@
               slug: introduction/monitor-active-queries
             - title: Query performance
               slug: introduction/monitor-query-performance
+            - title: Logs
+              slug: introduction/monitor-logs
             - title: Third-party monitoring
               items:
                 - title: Datadog
@@ -1063,6 +1069,7 @@
         - title: Spending limit
           slug: introduction/spending-limit
           tag: new
+          tagTheme: green
         - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Usage and cost calculations
@@ -1554,6 +1561,7 @@
           slug: introduction/roadmap
           icon: roadmap
           tag: updated
+          tagTheme: gray
         - title: RSS feeds
           slug: reference/feeds
           icon: feeds

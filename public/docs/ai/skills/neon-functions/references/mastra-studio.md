@@ -6,22 +6,17 @@ The shape mirrors any other Node integration (see `references/sentry.md`): insta
 
 ## 1. Define the agent against the Neon AI Gateway
 
-Use the gateway's **MLflow (chat-completions) dialect**, which serves every provider (OpenAI, Anthropic, …) — derive it from the injected `aiGateway.baseUrl` (see the `neon-ai-gateway` skill). `parseEnv` reads the injected gateway credentials from your `neon.ts`.
+With `@mastra/core` 1.47+, use a `neon/<model>` magic string — Mastra reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from the environment (injected by `neon deploy` / `neon env pull` when `preview.aiGateway` is enabled in `neon.ts`). No manual `url`/`apiKey` or MLflow dialect swap is needed; Mastra routes each model to the correct gateway endpoint.
 
 ```typescript
 // src/mastra/agents/pricing.ts
 import { Agent } from "@mastra/core/agent";
-import { parseEnv } from "@neon/env";
-import config from "../../../neon";
-
-const env = parseEnv(config);
-const gatewayUrl = env.aiGateway.baseUrl.replace("/openai/v1", "/mlflow/v1");
 
 export const pricingAgent = new Agent({
   id: "pricing-analyst",
   name: "pricing-analyst",
   instructions: "You are a meticulous pricing analyst. …",
-  model: { id: "neon/gpt-5-mini", url: gatewayUrl, apiKey: env.aiGateway.apiKey },
+  model: "neon/gpt-5-mini",
 });
 ```
 
@@ -70,7 +65,7 @@ const result = await agent.generate(prompt, {
 const data = result.object; // validated against myZodSchema
 ```
 
-For resilience, register a second agent on a different model (e.g. `neon/claude-haiku-4-5`) and fall back to it if the primary attempt throws — the same provider-fallback pattern works because both are reachable on the MLflow dialect.
+For resilience, register a second agent on a different model (e.g. `neon/claude-haiku-4-5`) and fall back to it if the primary attempt throws — both models are reachable on the gateway via the same env vars.
 
 ## 4. Create the Mastra project + token with the CLI
 
@@ -98,7 +93,7 @@ Two gotchas:
 
 ## 5. Pass the creds via `neon.ts` (third-party env)
 
-Neon-injected vars (`DATABASE_URL`, `OPENAI_*`, AI Gateway) are automatic. Declare only third-party vars under the function's `env`, resolved from `process.env` at deploy time:
+Neon-injected vars (`DATABASE_URL`, AI Gateway `NEON_AI_GATEWAY_*`) are automatic. Declare only third-party vars under the function's `env`, resolved from `process.env` at deploy time:
 
 ```typescript
 // neon.ts

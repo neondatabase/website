@@ -6,10 +6,10 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
 
 Neon Object Storage uses the same credential system as AI Gateway and Functions. You create a scoped credential via the Neon API, and it maps directly to the S3 Access Key ID and Secret Access Key your SDK expects. No AWS account or IAM configuration required.
 
@@ -158,6 +158,8 @@ When your code runs inside Neon Functions, Neon injects storage credentials auto
 | `AWS_SECRET_ACCESS_KEY` | S3 Secret Access Key                     |
 | `AWS_ENDPOINT_URL_S3`   | Branch S3 endpoint URL                   |
 | `AWS_REGION`            | Object storage region (e.g. `us-east-2`) |
+
+See [Environment variables](/docs/compute/functions/environment-variables) for the full list of variables Neon injects into a function.
 
 Credentials are branch-scoped and tied to the function's serving branch. User-supplied environment variables with the same name can't override the injected values (the injected secret access key always wins). Because the credentials use AWS-standard names, the AWS SDK picks them up automatically. Only `forcePathStyle` needs explicit configuration:
 

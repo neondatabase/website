@@ -4,7 +4,7 @@ subtitle: 'Learn how to use Google Jules and the Neon MCP server to spin up isol
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-26T00:00:00.000Z'
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 AI coding agents are increasingly capable of implementing multi-step changes across an application. However, full-stack features often require updates to stateful infrastructure such as databases.
@@ -31,7 +31,7 @@ Before you begin, ensure you have the following:
 Use the following example repository if you want to follow along with the SnippetHub app.
 
 <DetailIconCards>
-    <a href="https://github.com/dhanushreddy291/code-snippet" description="Example app repository used in this guide. It’s a simple snippet management tool built with Next.js, Drizzle ORM, and Managed BetterAuth. Jules will add a new feature to this app as part of the demo." icon="github">Example repository (SnippetHub)</a>
+    <a href="https://github.com/dhanushreddy291/code-snippet" description="Example app repository used in this guide. It’s a simple snippet management tool built with Next.js, Drizzle ORM, and Managed Better Auth. Jules will add a new feature to this app as part of the demo." icon="github">Example repository (SnippetHub)</a>
 </DetailIconCards>
 
 <Steps>
@@ -185,7 +185,7 @@ By combining **Google Jules** with **Neon's branchable database**, you eliminate
 
 - [Neon Database Branching](/branching)
 - [Google Jules Documentation](https://jules.google/docs/)
-- [Branching Authentication with Managed BetterAuth](/docs/auth/branching-authentication)
+- [Branching Authentication with Managed Better Auth](/docs/auth/branching-authentication)
 - [Neon MCP Server](/docs/ai/neon-mcp-server)
 - [Integrating Neon with Vercel](/docs/guides/vercel-overview)
 

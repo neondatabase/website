@@ -6,17 +6,23 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-14T20:34:24.495Z'
+updatedOn: '2026-07-15T20:21:37.104Z'
 ---
 
-<RequestForm type="backend-platform" title="Get early access to Neon AI Gateway" description="Neon AI Gateway is in private preview. Drop your email and we'll reach out with access." />
+## Foundation model access
+
+Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](/docs/ai-gateway/models#available-models) to see the full list. Foundation model access is rolling out gradually as we expand capacity.
+
+<RequestForm type="backend-platform" title="Request early access to additional foundation models" description="Drop your email and we'll reach out as access opens up." buttonText="Request Early Access" confirmation="You're on the list. We'll be in touch as access opens up." />
+
+## Overview
 
 Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from Anthropic, OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI or Anthropic SDK works without code changes. Just point it at your branch endpoint.
 
-> During the private preview, AI Gateway is available for **new projects** in the **AWS us-east-2** region only, and requires a paid Neon plan. Inference is free during the preview. See [Pricing](#pricing) for what to expect when billing begins.
+> AI Gateway is in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use it. It requires a paid Neon plan. Inference is free for paid plans during beta. See [Pricing](#pricing) for what to expect when billing begins.
 
 <Admonition type="important">
-Participation in this Private Preview is subject to our Private Preview Terms. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
+Participation in this Beta is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
 </Admonition>
 
 - **One credential for all providers.** A single Neon credential gives you access to models from Anthropic, OpenAI, Google, Meta, Databricks, and Alibaba. No separate provider accounts needed.
@@ -27,11 +33,11 @@ Participation in this Private Preview is subject to our Private Preview Terms. A
 
 ## Pricing
 
-AI Gateway pricing isn't finalized. Here's what to expect once it moves out of private preview:
+AI Gateway pricing isn't finalized. Here's what to expect once it moves out of beta:
 
 - **Paid plans only.** AI Gateway will be available on Neon's Launch and Scale plans. There's no difference in AI Gateway pricing or model access between the two plans.
 - **No markup.** Neon charges the same per-token rate as the model provider. Published provider prices are passed on to users with no additional markup.
-- **Free for now.** Inference remains free through the end of the private preview. Billing starts when AI Gateway reaches GA.
+- **Free for now.** Inference remains free through the end of the beta. Billing starts when AI Gateway reaches GA.
 
 We'll publish exact per-model rates on the [Neon pricing page](https://neon.com/pricing) and update this page before billing begins.
 

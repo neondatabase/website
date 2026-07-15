@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <InfoBlock>
@@ -220,7 +220,7 @@ The environment variables listed below are set in your Vercel project by the Neo
 - `DATABASE_URL_UNPOOLED` is an direct connection string for your database, often required by schema migration tools. For more, see [Connection pooling with schema migration tools](/docs/connect/connection-pooling#connection-pooling-with-schema-migration-tools).
 - There are several variables provided for constructing your own connection settings.
 - The integration sets variables that were previously used by Vercel Postgres.
-- Managed BetterAuth environment variables allow you to easily add authentication to your Vercel project. The Managed BetterAuth feature automatically syncs user profiles to your Neon database, making them available in the `neon_auth.users_sync` table for querying. To try Managed BetterAuth, you can quickly deploy the [Next.js template for Managed BetterAuth](https://github.com/neondatabase-labs/neon-auth-nextjs-template), which is preconfigured to use these variables. Learn more in the [Managed BetterAuth guide](/docs/guides/neon-auth).
+- Managed Better Auth environment variables allow you to easily add authentication to your Vercel project. The Managed Better Auth feature automatically syncs user profiles to your Neon database, making them available in the `neon_auth.users_sync` table for querying. To try Managed Better Auth, you can quickly deploy the [Next.js template for Managed Better Auth](https://github.com/neondatabase-labs/neon-auth-nextjs-template), which is preconfigured to use these variables. Learn more in the [Managed Better Auth guide](/docs/guides/neon-auth).
 
 ```bash
 # Recommended for most uses
@@ -246,7 +246,7 @@ POSTGRES_DATABASE
 POSTGRES_URL_NO_SSL
 POSTGRES_PRISMA_URL
 
-# Managed BetterAuth environment variables for Next.js
+# Managed Better Auth environment variables for Next.js
 NEXT_PUBLIC_STACK_PROJECT_ID
 NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY
 STACK_SECRET_SERVER_KEY
