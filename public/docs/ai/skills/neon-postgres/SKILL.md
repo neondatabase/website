@@ -68,13 +68,6 @@ Offer to inspect existing connected Neon projects or create new ones using the N
 npx -y neon@latest init --agent
 ```
 
-Alternatively you can inquire a `NEON_API_KEY` first; without it, `init` falls back to browser OAuth and waits for the user to complete authentication. This should be based on the execution environment (is OAUTH feasible and user preference).
-
-```bash
-export NEON_API_KEY=<user-provided-api-key>
-npx -y neon@latest init --agent
-```
-
 This installs the Neon extension (for Cursor/VS Code) or MCP server (for other agents), creates an API key, and adds the `neon-postgres` agent skill to the project.
 
 If `init` is not suitable, the individual steps can be run non-interactively:

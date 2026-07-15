@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Guides and best practices for working with Neon Serverless Postgres. Covers setup, connection methods, branching, autoscaling, scale-to-zero, read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server, REST API, TypeScript SDK, and Python SDK. Use when users ask about \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neon\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", or \"Neon connection pooling\".",
       "url": "/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:ee5a7117921e79bed2591142c1e3d0f72aff245c3cfdcfaeb4ff734e6b4c9fc7"
+      "digest": "sha256:0f3a324b48c2f17f31d6fce69c6d28db046701a905b70de9f2f211d5ca96254a"
     },
     {
       "name": "claimable-postgres",
@@ -34,7 +34,7 @@
       "type": "skill-md",
       "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use whenever \"Neon\" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: \"object storage\" or \"S3-compatible storage\", \"serverless functions\", \"background jobs\", or \"run code near my database\", \"AI gateway\", \"LLM proxy\", \"model routing\", or \"call an LLM\" → AI Gateway; \"database\", \"Postgres\", or \"authentication\" → Postgres and Auth.",
       "url": "/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:7f52f3f39ba8a0542f184583565ae41edccc74662b6b5b22e99b43e6de940eb6"
+      "digest": "sha256:88ef4c3a5b8519bbeff666f840924ef7ca94de183eb0ed716240c93092d3622d"
     },
     {
       "name": "neon-postgres-agent-platforms",
