@@ -11,6 +11,8 @@ updatedOn: '2026-07-15T15:03:54.666Z'
 
 <PrivatePreviewEnquire/>
 
+Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
+
 ## Authentication errors
 
 ### `403 InvalidAccessKeyId`

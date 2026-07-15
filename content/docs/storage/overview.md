@@ -31,6 +31,8 @@ Neon Object Storage is S3-compatible object storage built into the Neon backend 
 
 <a href="/docs/storage/authentication" description="Understand how Neon credentials map to S3 access keys." icon="lock-landscape">Authentication</a>
 
+<a href="/docs/storage/logs" description="View, search, and download a bucket's logs in the Console." icon="search">Logs</a>
+
 </DetailIconCards>
 
 ## Starter templates

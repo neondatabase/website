@@ -790,6 +790,8 @@
           slug: compute/functions/get-started
         - title: Deploy and manage
           slug: compute/functions/deploy
+        - title: Logs
+          slug: compute/functions/logs
         - title: Environment variables
           slug: compute/functions/environment-variables
         - title: Authentication
@@ -820,6 +822,8 @@
               slug: storage/objects
             - title: Authentication
               slug: storage/authentication
+            - title: Logs
+              slug: storage/logs
         - section: Reference
           items:
             - title: S3 compatibility
@@ -936,6 +940,8 @@
               slug: introduction/monitor-active-queries
             - title: Query performance
               slug: introduction/monitor-query-performance
+            - title: Logs
+              slug: introduction/monitor-logs
             - title: Third-party monitoring
               items:
                 - title: Datadog
