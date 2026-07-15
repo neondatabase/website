@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T23:49:33.621Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -46,7 +46,11 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["storage:read", "storage:write"], "principal_type": "user", "name": "my-app-credential"}'
 ```
 
-The `name` and `expires_at` fields are optional. Set `expires_at` to an ISO 8601 timestamp to create a short-lived credential.
+The `name` and `expires_at` fields are optional.
+
+<Admonition type="warning">
+`expires_at` is not currently enforced during the beta. A credential created with an `expires_at` value in the past still authenticates successfully. Don't rely on it for access control yet; revoke credentials explicitly instead. See [Revoking credentials](#revoking-credentials).
+</Admonition>
 
 The response includes these fields. Both secrets are returned once only, so store them immediately:
 

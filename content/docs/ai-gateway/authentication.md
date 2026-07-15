@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:21:12.950Z'
+updatedOn: '2026-07-15T23:49:33.621Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -60,7 +60,7 @@ This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the cu
 neon config status
 ```
 
-For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials with optional expiry.
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced during the beta -- revoke credentials explicitly instead of relying on expiry.
 
 ## Using your credential
 
