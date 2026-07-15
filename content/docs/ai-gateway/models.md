@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T20:12:47.241Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -27,7 +27,7 @@ The full catalog is published as the [`neon` provider on models.dev](https://mod
 
 Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](#available-models) to see the full list.
 
-Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity. Request access from the **AI Gateway** page in the Neon Console.
+Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity. Request access from the **AI Gateway** page in the Neon Console, or see [Foundation model access](/docs/ai-gateway/overview#foundation-model-access).
 
 ## Quick picks
 
