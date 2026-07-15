@@ -27,7 +27,7 @@ The full catalog is published as the [`neon` provider on models.dev](https://mod
 
 Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](#available-models) to see the full list.
 
-Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity. Request access from the **AI Gateway** page in the Neon Console, or see [Foundation model access](/docs/ai-gateway/overview#foundation-model-access).
+Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity.  [Request access](/docs/ai-gateway/overview#foundation-model-access).
 
 ## Quick picks
 
