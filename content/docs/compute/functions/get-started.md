@@ -7,10 +7,10 @@ summary: >-
   neon deploy. The function gets a public HTTPS URL with DATABASE_URL
   injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-07-14T20:38:27.829Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. This guide builds one by hand: define it in `neon.ts`, run it locally, deploy it, and call it over HTTP.
 
