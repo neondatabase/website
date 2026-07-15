@@ -113,13 +113,7 @@ QuickPath.propTypes = {
   eta: PropTypes.string,
 };
 
-const GuidedPath = ({
-  title,
-  description,
-  href,
-  cta = 'Start the quickstart',
-  eta = '~15 min',
-}) => (
+const GuidedPath = ({ title, description, href, cta = 'Open quickstart', eta = '~15 min' }) => (
   <article
     className={cn(
       'flex min-h-[282px] w-full flex-col border border-gray-new-80 bg-gray-new-98 p-5 md:min-h-[260px]',
@@ -160,8 +154,8 @@ const TourCallout = ({ title, description, href, cta = 'Start the tour', eta = '
   <div
     className={cn(
       'tour-callout not-prose my-5 flex items-center justify-between gap-7 border p-6 sm:flex-col sm:items-start sm:gap-5',
-      'border-green-52/30 bg-[#EAF7F1] shadow-[0_0_48px_-14px_rgba(52,213,154,0.35)]',
-      'dark:border-green-52/30 dark:bg-[#0D1611] dark:shadow-[0_0_48px_-14px_rgba(52,213,154,0.5)]'
+      'border-green-52/30 bg-[#EAF7F1]',
+      'dark:border-green-52/30 dark:bg-[#0D1611]'
     )}
   >
     <div>
