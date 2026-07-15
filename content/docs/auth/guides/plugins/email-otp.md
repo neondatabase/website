@@ -2,7 +2,7 @@
 title: Email OTP
 subtitle: Sign in and verify email addresses with one-time passwords
 summary: >-
-  Managed BetterAuth Email OTP delivers one-time passwords by email for passwordless
+  Managed Better Auth Email OTP delivers one-time passwords by email for passwordless
   sign-in, password reset, and email verification without requiring manual
   installation of the Better Auth plugin. Use this page to implement these
   flows via Neon SDK methods or by passing the `emailOTP` prop to
@@ -10,12 +10,12 @@ summary: >-
   and rate-limited (exceeding attempts returns `TOO_MANY_ATTEMPTS`), and
   production deployments require a dedicated SMTP provider.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Managed BetterAuth is built on [Better Auth](https://www.better-auth.com/) and provides full support for Email OTP plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Email OTP plugin.
+Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for Email OTP plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Email OTP plugin.
 
 Email OTP lets users receive a one-time password (OTP) by email and use it to:
 
@@ -23,7 +23,7 @@ Email OTP lets users receive a one-time password (OTP) by email and use it to:
 - Perform password resets
 - Verify their email address (verification codes)
 
-Managed BetterAuth UI and Neon SDK are client-side SDKs, so you only invoke their methods. OTP generation and delivery are handled automatically - you do not have direct control over the codes sent to users.
+Managed Better Auth UI and Neon SDK are client-side SDKs, so you only invoke their methods. OTP generation and delivery are handled automatically - you do not have direct control over the codes sent to users.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Managed BetterAuth UI and Neon SDK are client-side SDKs, so you only invoke thei
 
 ## Use Email OTP with UI components
 
-If you're using Managed BetterAuth UI components, enable Email OTP by passing the `emailOTP` prop to `NeonAuthUIProvider`. This enables OTP flows in the pre-built auth UI.
+If you're using Managed Better Auth UI components, enable Email OTP by passing the `emailOTP` prop to `NeonAuthUIProvider`. This enables OTP flows in the pre-built auth UI.
 
 ```tsx shouldWrap filename="app/layout.tsx"
 import { authClient } from '@/lib/auth/client';
@@ -64,7 +64,7 @@ Users can now sign in with Email OTP by selecting the option on the sign-in scre
 
 ![Email OTP verification](/docs/auth/email-otp-verification.png)
 
-> If you haven't set up Managed BetterAuth UI components yet, see the [UI components reference](/docs/auth/reference/ui-components) and the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start.
+> If you haven't set up Managed Better Auth UI components yet, see the [UI components reference](/docs/auth/reference/ui-components) and the [Next.js](/docs/auth/quick-start/nextjs-api-only) or [React](/docs/auth/quick-start/react) quick start.
 
 ## Use Email OTP with SDK methods
 
@@ -108,7 +108,7 @@ export async function signInWithOtp(email: string, otp: string) {
 
 ### Verify email with OTP
 
-If your project has email verification enabled with **verification codes**, Managed BetterAuth sends an OTP during sign-up.
+If your project has email verification enabled with **verification codes**, Managed Better Auth sends an OTP during sign-up.
 
 Once the user enters the code, verify the email address using `emailOtp.verifyEmail()`:
 

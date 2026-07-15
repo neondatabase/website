@@ -6,7 +6,7 @@ summary: >-
   Vercel-Managed (new users, billing through Vercel), Neon-Managed (existing
   Neon account, billing through Neon), and Manual (custom CI/CD via env vars).
   Both managed integrations auto-provision Neon database branches for Vercel
-  preview deployments and support Managed BetterAuth; they differ in branch cleanup
+  preview deployments and support Managed Better Auth; they differ in branch cleanup
   timing, where Vercel-Managed follows deployment retention policy and
   Neon-Managed triggers on Git branch deletion. Choose this page to select the
   right integration before following the path-specific setup guide.
@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/guides/vercel-postgres
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 ## Overview
@@ -29,16 +29,16 @@ Choose the **Neon-Managed Integration** if you already have a Neon account or pr
 
 ## Compare the options at a glance
 
-| Feature / Attribute            | [Vercel-Managed Integration](/docs/guides/vercel-managed-integration)                                 | [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)                                     | [Manual Connection](/docs/guides/vercel-manual) |
-| :----------------------------- | :---------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
-| **Ideal for**                  | New users, teams wanting a single Vercel bill                                                         | Existing Neon users, direct Neon billing                                                                     | Integration not required or custom              |
-| **Neon account**               | Created automatically via Vercel                                                                      | Pre-existing Neon account                                                                                    | Pre-existing Neon account                       |
-| **Billing**                    | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
-| **Setup method**               | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
-| **Preview Branching**          | ✅                                                                                                    | ✅                                                                                                           | ✖️                                              |
-| **Managed BetterAuth support** | ✅ Auto-provisioned on preview branches                                                               | ✅ Auto-provisioned on preview branches                                                                      | Manual setup required                           |
-| **Branch cleanup**             | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
-| **Implementation type**        | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
+| Feature / Attribute             | [Vercel-Managed Integration](/docs/guides/vercel-managed-integration)                                 | [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration)                                     | [Manual Connection](/docs/guides/vercel-manual) |
+| :------------------------------ | :---------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| **Ideal for**                   | New users, teams wanting a single Vercel bill                                                         | Existing Neon users, direct Neon billing                                                                     | Integration not required or custom              |
+| **Neon account**                | Created automatically via Vercel                                                                      | Pre-existing Neon account                                                                                    | Pre-existing Neon account                       |
+| **Billing**                     | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
+| **Setup method**                | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
+| **Preview Branching**           | ✅                                                                                                    | ✅                                                                                                           | ✖️                                              |
+| **Managed Better Auth support** | ✅ Auto-provisioned on preview branches                                                               | ✅ Auto-provisioned on preview branches                                                                      | Manual setup required                           |
+| **Branch cleanup**              | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
+| **Implementation type**         | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 
 <Admonition type="note" title="Branch cleanup timing">
 Branch cleanup behavior differs between the two integrations. Vercel-Managed cleanup depends on Vercel's deployment retention policy, which can delay branch deletion by months. Neon-Managed cleanup is triggered by Git branch deletion. See [Managing Vercel preview branch cleanup](/docs/guides/vercel-branch-cleanup) for details, workarounds, and recommendations.

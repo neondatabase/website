@@ -1,23 +1,23 @@
 ---
-title: Use Managed BetterAuth with Next.js (UI Components)
+title: Use Managed Better Auth with Next.js (UI Components)
 subtitle: Set up authentication in Next.js using pre-built UI components
 summary: >-
-  Covers the setup of Managed BetterAuth in a Next.js application using pre-built UI
+  Covers the setup of Managed Better Auth in a Next.js application using pre-built UI
   components, including enabling authentication, installing the SDK, configuring
   environment variables, and creating an auth server instance.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 layout: wide
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
 <Admonition type="note" title="Archived copy">
 This quick start is kept in the repo for reference but is not published on [neon.com/docs](https://neon.com/docs). Use the [Next.js quick start (API methods)](/docs/auth/quick-start/nextjs-api-only) and the [UI components reference](/docs/auth/reference/ui-components) instead.
 </Admonition>
 
 <Admonition type="note">
-Upgrading from Managed BetterAuth SDK v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
+Upgrading from Managed Better Auth SDK v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
 </Admonition>
 
 <TwoColumnLayout>
@@ -32,12 +32,12 @@ Enable Auth in your [Neon project](https://console.neon.tech) and copy your Auth
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Console">
 
-![Managed BetterAuth Base URL](/docs/auth/neon-auth-base-url.png)
+![Managed Better Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Install the Managed BetterAuth SDK">
+<TwoColumnLayout.Step title="Install the Managed Better Auth SDK">
 <TwoColumnLayout.Block>
 
 Install the Neon SDK into your Next.js app.
@@ -111,7 +111,7 @@ export const auth = createNeonAuth({
 <TwoColumnLayout.Step title="Set up auth API routes">
 <TwoColumnLayout.Block>
 
-Create an API route handler that proxies auth requests. All Managed BetterAuth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory:
+Create an API route handler that proxies auth requests. All Managed Better Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory:
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -153,7 +153,7 @@ export const config = {
 
 <TwoColumnLayout.Footer>
 <Admonition type="note">
-Your Next.js project is now fully configured to use Managed BetterAuth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context.
+Your Next.js project is now fully configured to use Managed Better Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context.
 </Admonition>
 </TwoColumnLayout.Footer>
 
@@ -241,7 +241,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'My Neon App',
-  description: 'A Next.js application with Managed BetterAuth',
+  description: 'A Next.js application with Managed Better Auth',
 };
 
 export default function RootLayout({
@@ -272,10 +272,10 @@ export default function RootLayout({
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
-<TwoColumnLayout.Step title="Add Managed BetterAuth styles">
+<TwoColumnLayout.Step title="Add Managed Better Auth styles">
 <TwoColumnLayout.Block>
 
-Import the Managed BetterAuth UI styles in your `app/globals.css` file. Add this line at the top of the file:
+Import the Managed Better Auth UI styles in your `app/globals.css` file. Add this line at the top of the file:
 
 <Admonition type="tip" title="Not using Tailwind?">
 See [UI Component Styles](/docs/auth/reference/ui-components#styling) for alternative setup options.

@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
@@ -207,6 +207,6 @@ Learn how to use Django with Neon Postgres with this blog post and the accompany
 
 ## Next steps
 
-- [Set up Managed BetterAuth](/docs/auth/overview): Add managed authentication that branches with your database.
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database.
 
 <NeedHelp/>
