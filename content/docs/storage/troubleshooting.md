@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T23:52:09.670Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -130,15 +130,19 @@ The connection drops during a large object download.
 // Download in 10 MiB chunks
 const chunkSize = 10 * 1024 * 1024;
 let start = 0;
+let totalSize: number | undefined;
 
-while (true) {
+// ContentLength is the size of each chunk, not the whole object, so parse
+// the object's total size from Content-Range ("bytes start-end/total")
+// instead and stop once start reaches it.
+while (totalSize === undefined || start < totalSize) {
   const response = await client.send(new GetObjectCommand({
     Bucket: 'my-bucket',
     Key: 'large-file.zip',
     Range: `bytes=${start}-${start + chunkSize - 1}`,
   }));
   // process response.Body
-  if (response.ContentRange?.endsWith(response.ContentLength?.toString() ?? '')) break;
+  totalSize = Number(response.ContentRange?.split('/')[1]);
   start += chunkSize;
 }
 ```
