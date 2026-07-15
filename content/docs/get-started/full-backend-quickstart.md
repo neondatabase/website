@@ -10,7 +10,7 @@ summary: >-
   middleware, and deployment to Vercel, Netlify, or self-hosted Node.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-15T18:59:31.091Z'
 ---
 
 ## Before you start
@@ -209,7 +209,7 @@ export default defineConfig({
 
 `drizzle-kit push` creates the table directly from your schema. In production, you'd typically use `drizzle-kit generate` and `drizzle-kit migrate` for tracked migrations, but push is faster for a tutorial.
 
-Then seed three sample posts in the [Neon Console SQL Editor](https://console.neon.tech) — two published and one draft, so step 9's `where(eq(posts.isPublished, true))` filter has something visible to do.
+Then seed three sample posts in the [Neon Console SQL Editor](https://console.neon.tech): two published and one draft, so step 9's `where(eq(posts.isPublished, true))` filter has something visible to do.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -224,7 +224,7 @@ Open your project in the Neon Console, go to **SQL Editor**, and run:
 INSERT INTO posts (user_id, content, is_published) VALUES
   ('00000000-0000-0000-0000-000000000000', 'Hello from Neon', true),
   ('00000000-0000-0000-0000-000000000000', 'Welcome to your new backend', true),
-  ('00000000-0000-0000-0000-000000000000', 'This draft is hidden — flip is_published to true in the SQL editor to see it appear', false);
+  ('00000000-0000-0000-0000-000000000000', 'This draft is hidden. Flip is_published to true in the SQL editor to see it appear', false);
 ```
 
 </TwoColumnLayout.Block>
@@ -482,12 +482,272 @@ Start the dev server, then open [http://localhost:3000/auth/sign-up](http://loca
 
 If you visit `/posts` without signing in, the middleware redirects you to `/auth/sign-in`.
 
+You now have a working backend with Neon Postgres, Drizzle ORM, and Managed Better Auth. The next optional steps add [Neon AI Gateway](/docs/ai-gateway/overview) and [Neon Storage](/docs/storage/overview) to the same backend.
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
 npm run dev
 ```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Provision AI Gateway and Object Storage">
+<TwoColumnLayout.Block>
+
+Enable AI Gateway and create an `images` storage bucket. The required credentials and endpoint URLs will be added to your `.env.local` for the next steps.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+<Tabs labels={["Console", "Neon CLI", "API"]}>
+
+<TabItem>
+
+**AI Gateway**
+
+In the Neon Console, select your project branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, check **ai_gateway:invoke**, and create it. Copy the snippet, which includes `OPENAI_API_KEY` and `OPENAI_BASE_URL`.
+
+**Storage bucket**
+
+Go to the **Storage** tab, click **Create your first bucket**.
+Name it `images`, set visibility to **Public** and create it.
+
+**Storage credential**
+
+Back in **Credentials**, create another credential checking **storage:read** and **storage:write**. Copy the snippet, which includes `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION`.
+
+Paste all the snippets into your `.env.local` file.
+
+</TabItem>
+
+<TabItem>
+
+Create `neon.ts` at the root of your project to provision AI Gateway and a storage bucket. Then install the config package, link your project, and run `neon deploy` to apply the changes and inject credentials into `.env.local` automatically.
+
+```typescript filename="neon.ts"
+import { defineConfig } from '@neon/config/v1';
+
+export default defineConfig({
+  auth: true,
+  preview: {
+    aiGateway: true,
+    buckets: {
+      images: { access: 'public_read' }
+    }
+  }
+});
+```
+
+```bash filename="Terminal"
+npm install -D @neon/config
+neon link
+neon deploy
+```
+
+</TabItem>
+
+<TabItem>
+
+You'll need your [API key](https://console.neon.tech/app/settings/api-keys), project ID, and branch ID. Find the IDs on the **Project settings** page or via `neon projects list`.
+
+**AI Gateway credential**
+
+```bash
+curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"scopes": ["ai_gateway:invoke"], "principal_type": "user"}'
+```
+
+Save the `api_token` as `OPENAI_API_KEY`.
+
+**Gateway host**
+
+```bash
+curl --request GET \
+     --url https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/ai_gateway \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+Save the `OPENAI_BASE_URL` as `https://{host}/ai-gateway/mlflow/v1` (i.e., append `/ai-gateway/mlflow/v1` to the returned `host`).
+
+**Storage bucket**
+
+```bash
+curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/buckets" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "images", "access_level": "public_read"}'
+```
+
+**Storage credential**
+
+```bash
+curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/credentials" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"scopes": ["storage:read", "storage:write"], "principal_type": "user"}'
+```
+
+Save `token_id` as `AWS_ACCESS_KEY_ID` and `s3_secret_access_key` as `AWS_SECRET_ACCESS_KEY`.
+
+**Storage endpoint**
+
+```bash
+curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/storage" \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+Save `s3_endpoint` as `AWS_ENDPOINT_URL_S3` and `region` as `AWS_REGION`. Add all the vars to `.env.local`.
+
+</TabItem>
+
+</Tabs>
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Generate posts with Neon AI Gateway">
+<TwoColumnLayout.Block>
+
+Create an API route that accepts a prompt, generates a post with Claude via the AI Gateway, and saves it to Postgres. The AI Gateway provides an OpenAI-compatible endpoint, so use the OpenAI SDK.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```bash filename="Terminal"
+npm install openai
+```
+
+```typescript filename="app/api/generate-post/route.ts"
+import { db } from '@/lib/db/client';
+import { posts } from '@/lib/db/schema';
+import OpenAI from 'openai';
+
+const openai = new OpenAI();
+
+export async function POST(req: Request) {
+  const { topic, userId } = await req.json();
+
+  const response = await openai.chat.completions.create({
+    model: 'claude-sonnet-4-6',
+    messages: [{ role: 'user', content: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}` }],
+  });
+
+  const content = response.choices[0].message.content;
+
+  const [newPost] = await db.insert(posts).values({
+    userId,
+    content: content || 'Failed to generate content',
+    isPublished: true,
+  }).returning();
+
+  return Response.json(newPost);
+}
+```
+
+Run the following `curl` command to generate a post about WAL in Postgres. The API route returns the new post as JSON.
+
+```bash filename="Terminal"
+curl -X POST http://localhost:3000/api/generate-post \
+  -H "Content-Type: application/json" \
+  -d '{"topic": "WAL in Postgres", "userId": "00000000-0000-0000-0000-000000000000"}'
+```
+
+Refresh your `/posts` page to see the AI-generated post appear.
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Upload images with Neon Storage">
+<TwoColumnLayout.Block>
+
+Add a client-side upload page. It submits the file to a Server Action that uploads it directly to the S3-compatible bucket.
+
+<Admonition type="note">
+Neon Storage uses an S3-compatible API. The AWS SDK works, but you must set `forcePathStyle: true` because virtual-hosted style URLs are not supported.
+</Admonition>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```bash filename="Terminal"
+npm install @aws-sdk/client-s3
+```
+
+```typescript filename="app/upload/actions.ts"
+'use server';
+
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+
+const s3 = new S3Client({ forcePathStyle: true });
+
+export async function uploadImage(
+  _prev: { error?: string; publicUrl?: string } | null,
+  formData: FormData,
+) {
+  const file = formData.get('file') as File | null;
+  if (!file) return { error: 'No file selected' };
+
+  const bytes = await file.arrayBuffer();
+  const buffer = new Uint8Array(bytes);
+
+  const key = `${Date.now()}-${file.name}`;
+
+  await s3.send(new PutObjectCommand({
+    Bucket: 'images',
+    Key: key,
+    Body: buffer,
+    ContentType: file.type,
+  }));
+
+  const publicUrl = `${process.env.AWS_ENDPOINT_URL_S3}/images/${key}`;
+
+  return { publicUrl };
+}
+```
+
+```tsx filename="app/upload/page.tsx"
+'use client';
+
+import { useActionState } from 'react';
+import { uploadImage } from './actions';
+
+export default function UploadPage() {
+  const [state, formAction, isPending] = useActionState(uploadImage, null);
+
+  return (
+    <main className="p-8">
+      <h1 className="mb-1 text-2xl font-bold">Upload an image</h1>
+      <p className="mb-4 text-sm text-gray-600">Select and upload an image</p>
+      <form action={formAction} className="mb-4">
+        <input name="file" type="file" accept="image/*" required />
+
+        <button
+          type="submit"
+          disabled={isPending}
+          className="mt-3 rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white hover:bg-indigo-400 disabled:opacity-50"
+        >
+          {isPending ? 'Uploading...' : 'Upload'}
+        </button>
+      </form>
+
+      {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
+      {state?.publicUrl && (
+        <p className="text-sm text-gray-500 break-all">
+          Upload complete! Public URL: {state.publicUrl}
+        </p>
+      )}
+    </main>
+  );
+}
+```
+
+Visit [http://localhost:3000/upload](http://localhost:3000/upload) to upload an image directly to your bucket.
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
@@ -502,11 +762,14 @@ You now have a Next.js app where:
 - The `/posts` route is protected by middleware
 - The signed-in user's name is read from cookies via `auth.getSession()` on the same page
 - Published posts are queried server-side via Drizzle with full TypeScript types
+- Posts can be generated with the Neon AI Gateway
+- Users can upload images to a Neon Storage bucket via server actions
 - The application can be deployed to any Next.js App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node
 
 ## Next steps
 
-- **Write data with Server Actions** ([Drizzle insert reference](https://orm.drizzle.team/docs/insert)): wire up post creation through a server action that uses the auth session for `user_id`
+- **Write data with Server Actions or API routes** ([Drizzle insert reference](https://orm.drizzle.team/docs/insert)): wire up post creation through a server action that uses the auth session for `user_id` using `auth.getSession()`.
+- **Deploy long-running tasks with Neon Functions:** Next.js serverless routes time out quickly. If you need to run [streaming AI agents](/docs/compute/functions/agents) or hold open [WebSockets and SSE](/docs/compute/functions/websockets), you can deploy a [Neon Function](/docs/compute/functions/overview) directly onto your database branch to run compute right next to your data.
 - **Branch for previews**: [branching authentication](/docs/auth/branching-authentication) gives every preview environment its own user state
 - **Optimize for the edge**: on Vercel or Cloudflare, configure [connection pooling](/docs/connect/connection-pooling) for production
 - **Generated migrations**: switch from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations) for tracked schema changes
