@@ -62,10 +62,9 @@ Before starting setup, inspect the user's codebase and environment:
 
 ### Self-Driving Setup With Neon's CLI or MCP Server
 
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. For a truly headless flow, require `NEON_API_KEY` first; without it, `init` falls back to browser OAuth and waits for the user to complete authentication.
+Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
 
 ```bash
-export NEON_API_KEY=<user-provided-api-key>
 npx -y neon@latest init --agent <agent-name>
 ```
 
@@ -201,11 +200,11 @@ The Neon Admin API can be used to manage Neon resources programmatically. It is 
 
 Use this for direct HTTP automation, endpoint-level control, API key auth, rate-limit handling, and operation polling.
 
-Link: https://neon.com/docs/reference/api.md
+Link: https://neon.com/docs/reference/api-reference.md
 
 ### Neon TypeScript SDK
 
-Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`).
+Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`). For the full API surface — client config, the `{ data, error }` result model, typed errors, readiness/workflow helpers (`createAndConnect`, `createWithCompute`), pagination, every resource namespace, and the raw layer — see [references/neon-sdk.md](references/neon-sdk.md).
 
 Link: https://neon.com/docs/reference/typescript-sdk.md
 
