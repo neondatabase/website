@@ -33,6 +33,7 @@ on:
 permissions:
   contents: read
   issues: write
+  id-token: write # mint the JFrog OIDC token for the Databricks npm mirror
 
 jobs:
   check:
@@ -49,26 +50,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
+      # The protected runner group has no egress to the public npm registry — it
+      # can only reach the Databricks JFrog mirror. Mint a short-lived token via
+      # OIDC and point npm at the mirror before anything fetches packages.
+      # Mirrors neondatabase/neon-pkgs and neondatabase/neonctl.
+      - name: Setup JFrog CLI with OIDC
+        id: setup-jfrog
+        uses: jfrog/setup-jfrog-cli@279b1f629f43dd5bc658d8361ac4802a7ef8d2d5 # v4.9.1
+        env:
+          JF_URL: https://databricks.jfrog.io
+        with:
+          oidc-provider-name: github-actions
+      - name: Configure npm registry (Databricks JFrog mirror)
+        run: |
+          cat > ~/.npmrc <<EOF
+          registry=https://databricks.jfrog.io/artifactory/api/npm/db-npm/
+          //databricks.jfrog.io/artifactory/api/npm/db-npm/:_authToken=${{ steps.setup-jfrog.outputs.oidc-token }}
+          always-auth=true
+          EOF
+
       - name: Setup Node.js
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
           node-version: '20'
+          cache: 'npm'
 
-      # This check's only third-party dependency is @neon/sdk — everything else
-      # imported by scripts/check-docs-api-consistency.mjs (and its lib/ helpers)
-      # is a Node builtin or a local file. A plain `npm install @neon/sdk` in the
-      # repo would still reconcile all of package.json (~1.9k packages), so install
-      # the lockfile-pinned SDK in an isolated dir (no manifest to reconcile) and
-      # drop it into node_modules. The tiny single-package install avoids the flaky
-      # large-tree `npm ci` installs on the protected runners.
-      - name: Install @neon/sdk (the only dependency this check needs)
-        run: |
-          set -euo pipefail
-          version="$(node -p "require('./package-lock.json').packages['node_modules/@neon/sdk'].version")"
-          install_dir="$(mktemp -d)"
-          npm install --prefix "$install_dir" --no-save --no-audit --no-fund "@neon/sdk@${version}"
-          mkdir -p node_modules
-          cp -R "$install_dir/node_modules/." node_modules/
+      - name: Install dependencies
+        run: npm ci
 
       # PRs: offline. Block on broken code samples; coverage skew is advisory.
       - name: Check docs vs installed @neon/sdk (offline)
