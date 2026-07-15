@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T23:21:12.950Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -51,7 +51,7 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 For local development, `neon env pull` writes your AI Gateway credentials to your `.env` file automatically, with no manual copy-paste from the API response:
 
 ```bash
-neon env pull .env
+neon env pull --file .env
 ```
 
 This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the current branch alongside your database connection string. Running `neon config apply` or `neon deploy` also auto-pulls credentials after a successful apply. To check current credential status:

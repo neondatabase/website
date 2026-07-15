@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-15T20:12:47.241Z'
+updatedOn: '2026-07-15T23:21:12.950Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -27,7 +27,7 @@ The full catalog is published as the [`neon` provider on models.dev](https://mod
 
 Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](#available-models) to see the full list.
 
-Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity.  [Request access](/docs/ai-gateway/overview#foundation-model-access).
+Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity. [Request access](/docs/ai-gateway/overview#foundation-model-access).
 
 ## Quick picks
 
@@ -85,6 +85,18 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 | Google Gemini             | `/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
 | Google Gemma 3 12B        | `/v1/chat/completions` | Chat completions only. Doesn't support the Gemini SDK endpoint                           |
 | Meta, Databricks, Alibaba | `/v1/chat/completions` | Chat completions only                                                                    |
+
+<Admonition type="warning" title="Content shape varies by model">
+For most models, `message.content` in a chat completions response is a plain string. For some models — confirmed on Gemini 3.x (`gemini-3-5-flash`, `gemini-3-1-pro`), `gpt-oss-120b`, and `qwen35-122b-a10b` — it's an array of typed content blocks instead (`{ type: 'reasoning', ... }`, `{ type: 'text', text: ... }`), matching how those models represent output natively. A low `max_tokens` value can also cut a response off before the `text` block appears, leaving only a `reasoning` block. Handle both shapes:
+
+```typescript
+const { content } = response.choices[0].message;
+const text = typeof content === 'string'
+  ? content
+  : content.find((block) => block.type === 'text')?.text ?? '';
+```
+
+</Admonition>
 
 ## Shorter /v1 paths
 

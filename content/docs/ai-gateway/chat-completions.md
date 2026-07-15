@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:09:37.043Z'
+updatedOn: '2026-07-15T23:21:12.950Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -162,6 +162,8 @@ model: 'gemini-2-5-flash'
 // Alibaba
 model: 'qwen3-next-80b-a3b-instruct'
 ```
+
+For a few models, `message.content` comes back as an array of content blocks instead of a plain string. See [Content shape varies by model](/docs/ai-gateway/models#which-endpoint-to-use) before swapping in a model you haven't used yet.
 
 See [Models](/docs/ai-gateway/models) for the full list.
 
