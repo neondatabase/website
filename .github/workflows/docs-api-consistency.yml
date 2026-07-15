@@ -64,6 +64,10 @@ jobs:
         run: npm run check:docs-api-consistency
 
       # Schedule / manual: strict against @neon/sdk@latest + the live spec.
+      # NOTE: `@neon/sdk@latest` is intentionally unpinned here — the whole point
+      # of this job is to detect drift against the newest published SDK. It only
+      # runs on schedule/workflow_dispatch (never on pull_request), so untrusted
+      # fork input never reaches this unpinned install.
       - name: Check docs vs @neon/sdk@latest + live spec (strict)
         if: github.event_name != 'pull_request'
         run: |
