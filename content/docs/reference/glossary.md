@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
 ## access token
@@ -337,7 +337,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-The backend for apps and agents. Includes Neon Postgres, Managed Better Auth, Data API, and [AI Gateway](/docs/ai-gateway/overview) (in private preview) today, with Storage and Compute coming soon. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Neon Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview), with the last three in beta. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 

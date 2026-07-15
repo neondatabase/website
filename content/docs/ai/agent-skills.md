@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -91,7 +91,7 @@ The `neon init` command sets up your project to use Neon with your AI coding ass
 npx neon@latest init
 ```
 
-If you're in the **platform private preview** (Functions, Storage, AI Gateway), use `neon init --preview` instead. See the [Platform private preview guide](/docs/get-started/platform-private-preview) for access and setup.
+To use Neon Functions, Object Storage, or AI Gateway (all in beta), use `neon init --preview` instead. See the [Platform private preview guide](/docs/get-started/platform-private-preview) for setup.
 
 After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neon init` reference](/docs/cli/init) for details.
 
@@ -120,7 +120,7 @@ Provision, branch, and optimize Postgres projects.
 
 ### Neon Platform
 
-Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in private preview. See [Who has access](/docs/get-started/platform-private-preview#who-has-access) before using these skills in production workflows.
+Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in beta. See [Who has access](/docs/get-started/platform-private-preview#who-has-access) before using these skills in production workflows.
 
 | Skill                                                                                    | Description                                                                                                     | Docs                                               |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -162,7 +162,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 - **Branch types and workflows** for migrations, schema-only branches, and reset-from-parent
 - **Egress optimization** for high transfer costs and query anti-patterns
 
-**Platform services (private preview)**
+**Platform services (beta)**
 
 - **Neon Functions**: declare, deploy, and connect long-running compute next to your database
 - **Object Storage**: S3-compatible storage that branches with your data

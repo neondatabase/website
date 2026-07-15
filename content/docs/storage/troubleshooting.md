@@ -6,10 +6,10 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-07-15T15:03:54.666Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
 
 Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
 
@@ -110,7 +110,7 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 `PutBucketLifecycle` succeeds and the configuration is stored, but expiration and transition rules do not execute.
 
-**Status:** Lifecycle enforcement isn't available in Private Preview. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
+**Status:** Lifecycle enforcement isn't available in beta. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
 
 ## Connection and performance errors
 
