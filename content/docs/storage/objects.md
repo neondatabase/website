@@ -6,7 +6,7 @@ summary: >-
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T23:47:24.799Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -429,9 +429,9 @@ print(url)
 
 ## Object branching
 
-Objects branch with your database. When you fork a branch, the child immediately inherits the parent's buckets and objects at that point in time. No data is copied. From that point:
+Objects branch with your database. When you fork a branch, the child can immediately read every object that existed in the parent's buckets at that point in time, using the same copy-on-write model Neon uses for branching Postgres data, so nothing is duplicated upfront. From that point:
 
-- Uploading a new object to a child branch is only visible on that branch and its descendants.
+- Uploading a new object to a child branch, or overwriting or deleting one that existed at fork time, is only visible on that branch and its descendants.
 - Deleting an object on a child branch does not affect the parent.
 - The parent's objects remain unchanged regardless of what happens on child branches.
 
