@@ -62,14 +62,18 @@ Before starting setup, inspect the user's codebase and environment:
 
 ### Self-Driving Setup With Neon's CLI or MCP Server
 
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. For a truly headless flow, require `NEON_API_KEY` first; without it, `init` falls back to browser OAuth and waits for the user to complete authentication.
+Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
+
+```bash
+npx -y neon@latest init --agent
+```
+
+Alternatively you can inquire a `NEON_API_KEY` first; without it, `init` falls back to browser OAuth and waits for the user to complete authentication. This should be based on the execution environment (is OAUTH feasible and user preference).
 
 ```bash
 export NEON_API_KEY=<user-provided-api-key>
-npx -y neon@latest init --agent <agent-name>
+npx -y neon@latest init --agent
 ```
-
-Supported `--agent` values: `cursor`, `copilot`, `claude`, `claude-desktop`, `codex`, `opencode`, `cline`, `gemini-cli`, `goose`, `zed`.
 
 This installs the Neon extension (for Cursor/VS Code) or MCP server (for other agents), creates an API key, and adds the `neon-postgres` agent skill to the project.
 

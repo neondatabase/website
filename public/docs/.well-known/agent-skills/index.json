@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Guides and best practices for working with Neon Serverless Postgres. Covers setup, connection methods, branching, autoscaling, scale-to-zero, read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server, REST API, TypeScript SDK, and Python SDK. Use when users ask about \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neon\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", or \"Neon connection pooling\".",
       "url": "/docs/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:953d63eb0d75b1933abd6c8519e162c38c7e4080e38f0c43713b9be68d86ac61"
+      "digest": "sha256:ee5a7117921e79bed2591142c1e3d0f72aff245c3cfdcfaeb4ff734e6b4c9fc7"
     },
     {
       "name": "claimable-postgres",
@@ -27,21 +27,21 @@
       "type": "skill-md",
       "description": "Choose and create the right Neon branch type for testing and development. Use when users ask about Neon branching, migration testing with real data, isolated test environments, schema-only branch workflows for sensitive data, or branch creation via Neon CLI or Neon MCP. Triggers include \"Neon branch\", \"test migrations safely\", \"branch production data\", \"schema-only branch\", \"reset branch\" and \"sensitive data testing\".",
       "url": "/docs/.well-known/agent-skills/neon-postgres-branches/SKILL.md",
-      "digest": "sha256:e5067c64c3312b7a1b5c29c57e55a123aede7750424dc5c00a1a55639ede1c4e"
+      "digest": "sha256:cba26a7c0acb2d0d9162577247a12a5c33f7c1e5f095661c8b13fcb37a6a3dd4"
     },
     {
       "name": "neon",
       "type": "skill-md",
       "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use whenever \"Neon\" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: \"object storage\" or \"S3-compatible storage\", \"serverless functions\", \"background jobs\", or \"run code near my database\", \"AI gateway\", \"LLM proxy\", \"model routing\", or \"call an LLM\" → AI Gateway; \"database\", \"Postgres\", or \"authentication\" → Postgres and Auth.",
       "url": "/docs/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:7fa994aa607e9da89f226ad32366f446d2f0efc02d603275f6a2d93f86c6cd79"
+      "digest": "sha256:7f52f3f39ba8a0542f184583565ae41edccc74662b6b5b22e99b43e6de940eb6"
     },
     {
       "name": "neon-postgres-agent-platforms",
       "type": "skill-md",
       "description": "Build and operate multi-tenant AI agent platforms on Neon. Use this skill whenever the user is designing an agent/app builder, provisioning a Neon project or database per user/app/agent run, managing thousands of tenant projects, separating sponsored free users from paid customers, moving projects between orgs, choosing personal vs organization vs project-scoped API keys, tracking fleet consumption or Agent Plan costs, creating compound checkpoints that combine DB snapshots with source revisions/secrets/deploy metadata, or orchestrating snapshot/restore flows for generated apps. Also use it for Neon Agent Program, Agent Plan, org/project limits, HIPAA, co-marketing, support, or neondatabase/neon-for-agent-platforms examples.",
       "url": "/docs/.well-known/agent-skills/neon-postgres-agent-platforms/SKILL.md",
-      "digest": "sha256:425808169958410fd1a0e7e4aaad9be02828f20c3d9a0e39ef384206b60cc083"
+      "digest": "sha256:21ebbbf8f15e50f39f5f65de9c9459ed83993b5752d8f238aff9ffccb5c25061"
     },
     {
       "name": "neon-object-storage",
@@ -53,16 +53,16 @@
     {
       "name": "neon-ai-gateway",
       "type": "skill-md",
-      "description": "One API and one credential for frontier and open-source LLMs, built into your Neon branch and powered by Databricks. Use when a user wants to call an LLM, add AI/chat/an agent to their app, route between model providers (OpenAI, Anthropic, Google/Gemini, Meta, Alibaba, DeepSeek), or avoid juggling separate provider API keys and accounts — especially when they already use Neon and want AI requests to branch with their project. Works with the OpenAI SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing only the base URL. Triggers include \"call an LLM\", \"add AI to my app\", \"chat completion\", \"model routing\", \"LLM proxy/gateway\", \"one API for all models\", \"use Claude/GPT/Gemini\", \"AI SDK\", \"Mastra agent\", \"Neon AI Gateway\", and \"log/rate-limit AI calls\".",
+      "description": "One API and one credential for frontier and open-source LLMs, built into your Neon branch and powered by Databricks. Use when a user wants to call an LLM, add AI/chat/an agent to their app, route between model providers (OpenAI, Anthropic, Google/Gemini, Meta, Alibaba), or avoid juggling separate provider API keys and accounts — especially when they already use Neon and want AI requests to branch with their project. Works with the OpenAI SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing only the base URL. Triggers include \"call an LLM\", \"add AI to my app\", \"chat completion\", \"model routing\", \"LLM proxy/gateway\", \"one API for all models\", \"use Claude/GPT/Gemini\", \"AI SDK\", \"Mastra agent\", \"Neon AI Gateway\", and \"log/rate-limit AI calls\".",
       "url": "/docs/.well-known/agent-skills/neon-ai-gateway/SKILL.md",
-      "digest": "sha256:e8cc82012fd2c42817641402b1b2ae4bf83c9c1e86f0fdd0b44edfaadf64d64c"
+      "digest": "sha256:8ba1bf544369e448e8e3b01abac3537af99eacd18f068f1498ed3ed4cfd02df2"
     },
     {
       "name": "neon-functions",
       "type": "skill-md",
       "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"run code next to my database\", \"function that won't time out\", \"Neon Functions\", and \"Neon Compute\".",
       "url": "/docs/.well-known/agent-skills/neon-functions/SKILL.md",
-      "digest": "sha256:dbf4344fc6828d2b611c5905a61bb57d788931bd7bd28ef19530d1f2d8ca59b6"
+      "digest": "sha256:a873c98db6f6aa98c0ee175ab9f908346fb71ad3346fa0fe9b6abcbb5eaff6ce"
     }
   ]
 }
