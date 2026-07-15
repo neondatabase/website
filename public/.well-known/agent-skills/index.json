@@ -34,7 +34,7 @@
       "type": "skill-md",
       "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use whenever \"Neon\" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: \"object storage\" or \"S3-compatible storage\", \"serverless functions\", \"background jobs\", or \"run code near my database\", \"AI gateway\", \"LLM proxy\", \"model routing\", or \"call an LLM\" → AI Gateway; \"database\", \"Postgres\", or \"authentication\" → Postgres and Auth.",
       "url": "/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:88ef4c3a5b8519bbeff666f840924ef7ca94de183eb0ed716240c93092d3622d"
+      "digest": "sha256:f6a162651b6556585840136a0a41a9dbc7fcc87e049f164b5c180804f4f82a6a"
     },
     {
       "name": "neon-postgres-agent-platforms",

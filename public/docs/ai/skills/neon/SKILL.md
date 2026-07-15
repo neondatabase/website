@@ -156,7 +156,6 @@ Default to a branch-first loop that mirrors `git`: one isolated Neon branch per 
 Run `link` once when starting on a project, then create and check out one branch per feature:
 
 ```bash
-export NEON_API_KEY=<user-provided-api-key>
 neon link --agent
 neon branches create --name dev-add-search
 neon checkout dev-add-search
