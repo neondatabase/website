@@ -15,6 +15,10 @@ enableTableOfContents: true
 
 On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, and managed **Auth**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend forks with your data.
 
+<Admonition type="note" title="This is an orientation page">
+This page shows how the pieces fit, not how to build step by step, so the snippets are illustrative. To build now, copy the prompt below or jump to [Where to build it](#where-to-build-it). For one capability's full setup, follow its Reference link.
+</Admonition>
+
 <CopyPrompt src="/prompts/neon-backend.md" description="Hand this to your AI assistant to set up Neon: skills, project, and all capabilities. Then tell it what to build." buttonText="Copy prompt" />
 
 ## What you'll build
@@ -33,13 +37,13 @@ Function  ──streams the answer──▶  Browser
 
 So when you see a `notes` table, an `attachments` bucket, or a `chat` function below, they're all parts of this same app. Postgres is the system of record for notes; Storage holds the files that are too big for a row; the Function is the long-running piece that handles a chat request; the AI Gateway is the single credential for the model call; and Auth decides whose notes a request may read.
 
-The snippets in each section are illustrative, not a copy-paste-the-whole-app tutorial. To run the app end to end, use one of the starting points in [Put it together](#put-it-together); for the full, multi-language setup of a single capability, follow its **Reference** link.
-
 <Admonition type="info" title="Region and access requirements">
 Object Storage, Functions, and the AI Gateway are in beta and available only on **new projects in AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use them. Postgres and Managed BetterAuth work in any region. The three new beta services are free to use during beta, subject to usage limits. The AI Gateway is only available on paid plans; the other two are on any plan.
 </Admonition>
 
-## Set up a project
+## The shape of a Neon backend
+
+The setup is a few commands; the [CLI quickstart](/docs/cli/quickstart) is the full how-to. Install the CLI, link a project, scaffold one `neon.ts`.
 
 Install the [`neon` CLI](/docs/cli/install) (requires **Node.js 20.19 or higher**) and sign in with [`neon auth`](/docs/cli/auth):
 
@@ -107,7 +111,7 @@ Every capability follows the same three steps: **enable it in `neon.ts`, [`neon 
 | **Managed BetterAuth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neondatabase/auth`                              |
 
 <Admonition type="note" title="Reading the snippets">
-The `neon.ts` fragments below show only the key being added. `auth` goes at the top level of `defineConfig({ ... })`; the beta features marked `// inside preview` all go inside a single `preview` block. The [complete file](#put-it-together) shows them assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
+The `neon.ts` fragments below show only the key being added. `auth` goes at the top level of `defineConfig({ ... })`; the beta features marked `// inside preview` all go inside a single `preview` block. The [complete file](#where-to-build-it) shows them assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
 </Admonition>
 
 ## Postgres: the notes
@@ -273,7 +277,7 @@ branch: (branch) => {
 
 **Reference:** [Branching](/docs/introduction/branching)
 
-## Put it together
+## Where to build it
 
 Here is the complete `neon.ts` for the notes app, every capability the sections above added, in one file:
 
@@ -300,7 +304,7 @@ export default defineConfig({
 
 The beta services live under `preview` while they're in beta; that key goes away as they reach GA. `auth` is already top-level.
 
-To get the whole notes app running rather than assembling the snippets by hand, use one of two starting points:
+Two ways to get it running:
 
 **Let your AI editor build it.** Copy the prompt at the top of this page and hand it to your assistant. It runs `neon init` to configure the MCP server and install the core skill, adds the Object Storage, Functions, and AI Gateway skills with `npx skills add neondatabase/agent-skills`, then builds against each capability's current API.
 
@@ -314,7 +318,7 @@ Run `neon bootstrap --list-templates` for the full list, or browse them in the [
 
 ## Verify
 
-After a `neon deploy`, run a quick check per capability. Each service's own get-started has the detailed version:
+A fast sanity check after deploy; each capability's get-started has the real testing guidance. Run one check per capability:
 
 | Capability     | Quick check                                                                                                                                          |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
