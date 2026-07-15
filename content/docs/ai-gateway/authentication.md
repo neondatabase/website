@@ -113,6 +113,8 @@ NEON_AI_GATEWAY_BASE_URL + /ai-gateway/anthropic   → Anthropic Messages API
 NEON_AI_GATEWAY_BASE_URL + /ai-gateway/gemini      → Gemini generateContent API
 ```
 
+Most dialects are also reachable at a shorter top-level path with no `/ai-gateway/<dialect>` prefix: `/v1/chat/completions` for chat completions, `/openai/v1/responses` for OpenAI Responses, and `/anthropic/v1/messages` for Anthropic Messages. Gemini's shorter alias keeps the `gemini` segment: `/v1/gemini/v1beta/models/{model}:generateContent`. `GET /v1/models` lists the catalog in an OpenRouter-shaped response. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full mapping.
+
 To use an OpenAI SDK, set its `apiKey` and `baseURL` from these variables (see the examples below).
 
 ## Credentials in Neon Functions

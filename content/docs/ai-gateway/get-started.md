@@ -51,13 +51,13 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 Your branch's AI Gateway host is available in the Neon Console on the AI Gateway page, or via the Neon API. It follows this format:
 
 ```
-br-<name>-api.<cell>.<region>.aws.neon.tech
+br-<name>-api.ai.<cell>.<region>.aws.neon.tech
 ```
 
 For example:
 
 ```bash
-export NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
+export NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
 ```
 
 This is different from your database connection string.
@@ -217,6 +217,10 @@ model: 'gemini-2-5-flash'
 ```
 
 See [Models](/docs/ai-gateway/models) for the full list of available model IDs.
+
+<Callout title="Using the AI SDK?">
+For TypeScript apps and agents, use [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) with the Vercel AI SDK. It reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN`, then routes each catalog model to the best AI Gateway endpoint for that provider.
+</Callout>
 
 </Steps>
 

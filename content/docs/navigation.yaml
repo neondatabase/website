@@ -1209,6 +1209,8 @@
                   slug: cli/completion
             - title: Projects and branches
               items:
+                - title: diff
+                  slug: cli/diff
                 - title: projects
                   slug: cli/projects
                 - title: branches
