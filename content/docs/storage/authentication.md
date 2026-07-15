@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:49:33.621Z'
+updatedOn: '2026-07-15T23:49:46.697Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -140,7 +140,7 @@ This populates `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KE
 neon config status
 ```
 
-For production deployments, use the [API-based workflow](#creating-a-credential) to create named, scoped credentials with optional expiry.
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named, scoped credentials.
 
 ## Read vs write scopes
 
