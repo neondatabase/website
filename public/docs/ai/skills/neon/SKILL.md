@@ -245,7 +245,7 @@ npm i @neon/env
 ```
 
 ```typescript
-import { parseEnv } from "@neon/env/v1";
+import { parseEnv } from "@neon/env";
 import config from "./neon";
 
 const env = parseEnv(config);
@@ -257,7 +257,7 @@ console.log(env.auth.baseUrl);
 By default `parseEnv` requires _every_ variable your config implies. When a process only uses a subset — a common case in frameworks like Next.js, where you might read `DATABASE_URL` but never the unpooled URL — pass an array of env-var keys to require and return only those. The keys are typesafe: autocomplete only offers variables your config enables, and the returned shape is narrowed to exactly what you selected (so unselected variables are neither enforced nor present).
 
 ```typescript
-import { parseEnv } from "@neon/env/v1";
+import { parseEnv } from "@neon/env";
 import config from "./neon";
 
 // Only DATABASE_URL is required and returned; DATABASE_URL_UNPOOLED is not enforced.
