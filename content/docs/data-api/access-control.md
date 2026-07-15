@@ -11,7 +11,7 @@ summary: >-
   configure GRANT statements, enable RLS, and write per-row policies with
   `auth.user_id()`, which extracts the `sub` claim from the request JWT.
 enableTableOfContents: true
-updatedOn: '2026-07-11T13:39:13.071Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -50,7 +50,7 @@ When a client sends a valid Bearer token, the API switches to the `authenticated
 
 Anonymous access still uses a JWT, but no user sign-in is required. How you obtain that token depends on your auth setup:
 
-**With Managed BetterAuth:** Set `allowAnonymous: true` in the client config. The SDK fetches a short-lived anonymous token (`GET /token/anonymous`) on the first request, caches it, and sends it as `Authorization: Bearer <jwt>` on every query.
+**With Managed Better Auth:** Set `allowAnonymous: true` in the client config. The SDK fetches a short-lived anonymous token (`GET /token/anonymous`) on the first request, caches it, and sends it as `Authorization: Bearer <jwt>` on every query.
 
 ```js
 import { createClient } from '@neondatabase/neon-js';

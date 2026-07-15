@@ -2,21 +2,21 @@
 title: Migrate from Supabase to Neon
 subtitle: Switch from Supabase Auth and Database to Neon in a few steps
 summary: >-
-  Step-by-step migration from Supabase Auth and Supabase database to Managed BetterAuth
+  Step-by-step migration from Supabase Auth and Supabase database to Managed Better Auth
   and Neon Data API. Replace `@supabase/supabase-js` with `@neondatabase/neon-js`,
   swap environment variables, and update client initialization while keeping
   existing auth method calls and `from()` database queries code-compatible.
   Existing password-based users cannot transfer due to incompatible password
   hashing algorithms, so this guide targets new projects, early development, or
-  OAuth-only apps. Managed BetterAuth does not support phone authentication (SMS/WhatsApp),
+  OAuth-only apps. Managed Better Auth does not support phone authentication (SMS/WhatsApp),
   SAML SSO, or Web3 wallet sign-in.
 enableTableOfContents: true
-updatedOn: '2026-07-11T12:07:28.894Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Managed BetterAuth provides a Supabase-compatible API, and Neon Data API provides PostgreSQL database access. This guide shows how to migrate from Supabase to Neon.
+Managed Better Auth provides a Supabase-compatible API, and Neon Data API provides PostgreSQL database access. This guide shows how to migrate from Supabase to Neon.
 
 <Admonition type="About user migration">
 Existing password-based users cannot migrate due to different hashing algorithms. They'll need to create new accounts or re-authenticate via OAuth. This guide works best for new projects, early development, or rebuilding your app.
@@ -25,9 +25,9 @@ Existing password-based users cannot migrate due to different hashing algorithms
 ## Prerequisites
 
 - A Neon project ([create one here](https://console.neon.tech))
-- Data API enabled (Managed BetterAuth is enabled by default when you enable Data API):
+- Data API enabled (Managed Better Auth is enabled by default when you enable Data API):
   - Go to **Data API** in the Neon Console and enable it
-  - In **Data API → Configuration**, verify it's configured with **Managed BetterAuth**
+  - In **Data API → Configuration**, verify it's configured with **Managed Better Auth**
   - Copy your Neon connection host and database name from **Connect** in the Console. The SDK derives both the Auth and Data API URLs from this single base URL. See [Initialize the client](/docs/reference/javascript-sdk#initializing) for the derivation rules, or use the separate Auth and Data API base URLs instead if you'd rather configure them explicitly
 
 <Steps>
@@ -189,7 +189,7 @@ ORDER BY "createdAt" DESC;
 
 ## API compatibility
 
-Managed BetterAuth supports most Supabase Auth methods including sign up, sign in (password and OAuth), session management, user updates, and email verification. See the [Neon TypeScript SDK](/docs/reference/javascript-sdk) for the complete API.
+Managed Better Auth supports most Supabase Auth methods including sign up, sign in (password and OAuth), session management, user updates, and email verification. See the [Neon TypeScript SDK](/docs/reference/javascript-sdk) for the complete API.
 
 **Not supported:**
 
@@ -201,10 +201,10 @@ Managed BetterAuth supports most Supabase Auth methods including sign up, sign i
 
 **Different behavior:**
 
-| Method             | Notes                                                                                                                                                                                                               |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `updateUser()`     | Does not support `password` or `email` parameters                                                                                                                                                                   |
-| Email verification | Unlike Supabase's automatic verification flow, Managed BetterAuth requires you to build the verification UI in your app. See [Email Verification](/docs/auth/guides/email-verification) for implementation details. |
+| Method             | Notes                                                                                                                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `updateUser()`     | Does not support `password` or `email` parameters                                                                                                                                                                    |
+| Email verification | Unlike Supabase's automatic verification flow, Managed Better Auth requires you to build the verification UI in your app. See [Email Verification](/docs/auth/guides/email-verification) for implementation details. |
 
 If you're using any unsupported methods or verification flows, you'll need to adjust your implementation.
 

@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
@@ -72,6 +72,6 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
 - A mature API exposes [fleet management and cost-control capabilities](https://neon.com/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
 - You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](https://neon.com/blog/promoting-postgres-changes-safely-production)
-- Built-in app platform services such as [Managed BetterAuth](https://neon.com/docs/auth/overview) and our PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started) make it easy to hook full-stack applications out of the box
+- Built-in app platform services such as [Managed Better Auth](https://neon.com/docs/auth/overview) and our PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started) make it easy to hook full-stack applications out of the box
 
 <CTA title="Agent Plan" description="If you’re building a full-stack agent platform, apply to our Agent Plan for special pricing, resource limits, and assistance. " buttonText="Check it out" buttonUrl="/programs/agents" />

@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-07-13T19:46:02.920Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -38,7 +38,7 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 The Data API uses JWTs for access control. Configure a provider now or later from the **Settings** tab. For public data that doesn't require login, use the [`anonymous` role](/docs/data-api/access-control#2-the-anonymous-role) instead.
 
-- **Managed BetterAuth**: Check the **Use Managed BetterAuth** checkbox to enable [Managed BetterAuth](/docs/auth/overview) as your provider. Managed BetterAuth manages sign-up, login, and account access, issuing the JWTs required for API requests.
+- **Managed Better Auth**: Check the **Use Managed Better Auth** checkbox to enable [Managed Better Auth](/docs/auth/overview) as your provider. Managed Better Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
 - **Other providers**: Leave the checkbox unchecked and configure your provider (such as Auth0, Clerk, or Firebase Auth) later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for setup instructions.
 
 ### 3. Configure schema access (optional)
@@ -230,11 +230,11 @@ You can connect to the Data API using a client library or direct HTTP requests.
 
 Install a client library and run your first query. Choose the option that matches your authentication provider:
 
-<Tabs labels={["Managed BetterAuth", "Any authentication provider"]}>
+<Tabs labels={["Managed Better Auth", "Any authentication provider"]}>
 
 <TabItem>
 
-Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using [Managed BetterAuth](/docs/auth/overview). This library handles token management automatically.
+Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using [Managed Better Auth](/docs/auth/overview). This library handles token management automatically.
 
 **1. Install**
 
@@ -247,7 +247,7 @@ npm install @neondatabase/neon-js
 ```typescript shouldWrap
 import { createClient } from '@neondatabase/neon-js';
 
-// Initialize with Managed BetterAuth
+// Initialize with Managed Better Auth
 // Use your Neon database URL without credentials or query parameters.
 // Example: https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
 const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL);
@@ -327,7 +327,7 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 **Where to get the JWT token:**
 
 - **Your auth provider's SDK**: Retrieve the token using your provider's API (for example, `getAccessToken()` in Auth0, `getToken()` in Clerk).
-- **Managed BetterAuth**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library (see [Get current session](/docs/reference/javascript-sdk#auth-getsession)), or use the Auth API reference UI for manual testing (see [Testing with Managed BetterAuth](#testing-with-neon-auth) below).
+- **Managed Better Auth**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library (see [Get current session](/docs/reference/javascript-sdk#auth-getsession)), or use the Auth API reference UI for manual testing (see [Testing with Managed Better Auth](#testing-with-neon-auth) below).
 
 **About the `sub` claim:**
 
@@ -358,15 +358,15 @@ curl -X POST 'https://your-data-api-endpoint/rest/v1/posts' \
 
 </Steps>
 
-## Testing with Managed BetterAuth
+## Testing with Managed Better Auth
 
-If you're using [Managed BetterAuth](/docs/auth/overview) and want to test the Data API without building an application first, you can obtain a JWT token using the interactive Auth API reference UI or any HTTP client (the examples below use cURL). If you're using a different provider, obtain JWT tokens through your provider's authentication flow and use them in the `Authorization: Bearer` header as shown in the [HTTP examples above](#option-2-direct-http-requests).
+If you're using [Managed Better Auth](/docs/auth/overview) and want to test the Data API without building an application first, you can obtain a JWT token using the interactive Auth API reference UI or any HTTP client (the examples below use cURL). If you're using a different provider, obtain JWT tokens through your provider's authentication flow and use them in the `Authorization: Bearer` header as shown in the [HTTP examples above](#option-2-direct-http-requests).
 
 <Tabs labels={["Auth API reference UI", "cURL"]}>
 
 <TabItem>
 
-The Auth API reference UI is an interactive browser-based tool for exploring and testing all Managed BetterAuth endpoints. It is powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage).
+The Auth API reference UI is an interactive browser-based tool for exploring and testing all Managed Better Auth endpoints. It is powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage).
 
 1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`. You can find your **Auth URL** on the **Auth** page, **Configuration** tab in the Neon Console.
 
@@ -407,7 +407,7 @@ The following steps walk through signing up, obtaining a JWT, and querying the D
 
 **1. Sign up (or sign in)**
 
-Create a test user. The `-c` flag saves the session cookie returned by Managed BetterAuth:
+Create a test user. The `-c` flag saves the session cookie returned by Managed Better Auth:
 
 ```bash shouldWrap
 curl -X POST 'https://ep-example-auth.neonauth.us-east-1.aws.neon.tech/neondb/auth/sign-up/email' \
@@ -496,7 +496,7 @@ For the complete list of methods and detailed examples, see the [Neon TypeScript
 
 ## Next steps
 
-- [Set up Managed BetterAuth](/docs/auth/overview): Managed authentication with JWTs that work natively with the Data API and Row Level Security
+- [Set up Managed Better Auth](/docs/auth/overview): Managed authentication with JWTs that work natively with the Data API and Row Level Security
 - [Build a note-taking app](/docs/data-api/demo): Hands-on tutorial with Data API queries
 - [Neon TypeScript SDK](/docs/reference/javascript-sdk): All database methods: select, insert, update, delete, filters, and more
 - [Generate TypeScript types](/docs/data-api/generate-types): Get autocomplete for table names and columns

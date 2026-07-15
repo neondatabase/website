@@ -14,10 +14,10 @@ redirectFrom:
   - /docs/reference/cli-create-app
   - /docs/neonctl
   - /docs/get-started/neonctl
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data API, and Managed BetterAuth from the terminal, with branch-scoped workflows built in.
+One CLI for every Neon surface: manage Postgres, Functions, Storage, the Data API, and Managed Better Auth from the terminal, with branch-scoped workflows built in.
 
 ```bash filename="Install"
 npm i -g neon

@@ -1,14 +1,14 @@
 ---
-title: Managed BetterAuth
+title: Managed Better Auth
 subtitle: Managed authentication that branches with your database
 summary: >-
-  Managed BetterAuth is a managed authentication service built on Better Auth. It stores
+  Managed Better Auth is a managed authentication service built on Better Auth. It stores
   users, sessions, and OAuth configuration in your Neon Postgres database under
   the neon_auth schema, compatible with Row Level Security. Every database branch
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -24,9 +24,9 @@ redirectFrom:
   - /docs/guides/neon-auth-best-practices
 ---
 
-<FeatureBetaProps feature_name="Managed BetterAuth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Managed BetterAuth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
+Managed Better Auth is the managed authentication service in the Neon backend for apps and agents. It stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it, so you can test real authentication workflows in preview environments.
 
 ## Quick start guides
 
@@ -46,40 +46,40 @@ Choose your framework to get started:
 
 <AuthAISetup />
 
-## Why Managed BetterAuth?
+## Why Managed Better Auth?
 
 - **Identity lives in your database**  
   All authentication data is stored in the `neon_auth` schema. It's queryable with SQL and compatible with Row Level Security (RLS) policies.
 
 - **Zero server management**  
-  Managed BetterAuth runs as a managed REST API service. Configure settings in the Console; use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app. No infrastructure to maintain.
+  Managed Better Auth runs as a managed REST API service. Configure settings in the Console; use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app. No infrastructure to maintain.
 
 - **Auth that branches with your data**  
   Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
 
 ## Built on Better Auth
 
-Managed BetterAuth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
+Managed Better Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Managed BetterAuth currently supports Better Auth version **1.4.18**.
+Managed Better Auth currently supports Better Auth version **1.4.18**.
 
-### When to use Managed BetterAuth vs. self-hosting Better Auth
+### When to use Managed Better Auth vs. self-hosting Better Auth
 
-Managed BetterAuth is a managed authentication service built into Neon's architecture:
+Managed Better Auth is a managed authentication service built into Neon's architecture:
 
 - **Branch-aware authentication**: Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
-- **Built-in Data API integration**: JWT token validation for the Data API has native support for Managed BetterAuth.
-- **No infrastructure to manage**: Managed BetterAuth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure.
+- **Built-in Data API integration**: JWT token validation for the Data API has native support for Managed Better Auth.
+- **No infrastructure to manage**: Managed Better Auth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure.
 - **Shared OAuth credentials for testing**: Get started quickly with out-of-the-box Google OAuth credentials, eliminating the setup complexity for testing and prototyping.
 
 Self-hosting Better Auth makes sense if you need:
 
-- Flexibility in auth configuration: custom plugins, hooks, and options not yet supported by Managed BetterAuth.
+- Flexibility in auth configuration: custom plugins, hooks, and options not yet supported by Managed Better Auth.
 - Full control over your auth code and the ability to run it inside your own infrastructure.
 
 For more details on the SDK differences between `@neondatabase/auth` and `better-auth/client`, see [Why use @neondatabase/auth over better-auth/client](https://github.com/neondatabase/neon-js/blob/main/packages/auth/neon-auth_vs_better-auth.md).
 
-As Managed BetterAuth evolves, more Better Auth integrations and features will be added. Check the [roadmap](/docs/auth/roadmap) to see what's currently supported and what's coming next.
+As Managed Better Auth evolves, more Better Auth integrations and features will be added. Check the [roadmap](/docs/auth/roadmap) to see what's currently supported and what's coming next.
 
 ## Basic usage
 
@@ -130,7 +130,7 @@ export default function App() {
 ## Use cases
 
 - **Production authentication**  
-  Use Managed BetterAuth as the identity system for your app. Store users, sessions, and OAuth configuration directly in Postgres, and pair with RLS for secure, database-centric access control.
+  Use Managed Better Auth as the identity system for your app. Store users, sessions, and OAuth configuration directly in Postgres, and pair with RLS for secure, database-centric access control.
 
 - **Preview environments**  
   Test full authentication flows in Vercel previews with real users and sessions
@@ -148,17 +148,17 @@ See [Branching authentication](/docs/auth/branching-authentication) for details 
 
 ## Example applications
 
-Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Managed BetterAuth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples), including plugin demos (see [Plugins](/docs/auth/guides/plugins#example-applications)), Next.js and React apps, cross-subdomain setups, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
+Beyond the quick starts on this site, the [neondatabase/neon-js](https://github.com/neondatabase/neon-js) monorepo ships **more runnable Managed Better Auth and `neon-js` samples** under [`examples/`](https://github.com/neondatabase/neon-js/tree/main/examples), including plugin demos (see [Plugins](/docs/auth/guides/plugins#example-applications)), Next.js and React apps, cross-subdomain setups, alternative UI stacks, and Data API patterns. Each folder includes its own README (many workflows use **bun** from the repository root). Browse there when you want a full project to clone next to the guides here.
 
 ## Availability
 
-Managed BetterAuth is currently available for AWS regions only. Azure support is not yet available.
+Managed Better Auth is currently available for AWS regions only. Azure support is not yet available.
 
-Managed BetterAuth does not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
+Managed Better Auth does not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
 
 ## Pricing
 
-Managed BetterAuth is included in all Neon plans based on Monthly Active Users (MAU):
+Managed Better Auth is included in all Neon plans based on Monthly Active Users (MAU):
 
 - **Free**: Up to 60,000 MAU
 - **Launch**: Up to 1M MAU
