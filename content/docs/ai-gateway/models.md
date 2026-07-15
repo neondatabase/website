@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-14T20:34:24.495Z'
+updatedOn: '2026-07-15T11:08:18.153Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -45,16 +45,15 @@ Not sure which model to use? Start here.
 
 ## Rate limits
 
-During the private preview, the following limits apply:
+During the private preview, the following limit applies per account:
 
-| Limit                                   | Value         |
-| --------------------------------------- | ------------- |
-| Per model (tokens per minute)           | 200,000 TPM   |
-| All models combined (tokens per minute) | 1,100,000 TPM |
+| Limit                   | Value   |
+| ----------------------- | ------- |
+| Tokens per minute (TPM) | 200,000 |
 
-If you hit a limit, you'll receive a `429 Too Many Requests` response. Requests resume when the rate limit window resets.
+If you hit the limit, you'll receive a `429 Too Many Requests` response with a message like `ai gateway TPM limit exceeded for model "<model-id>"`. Requests resume when the rate limit window resets.
 
-These limits are counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
+The TPM limit is counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
 Once billing begins, usage will also be capped by your prepaid credit balance. See [Pricing](#pricing) below.
 
@@ -137,7 +136,5 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 | Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |
 | Meta          | Terms differ by Llama version. See the Notes column in the [Meta models table](#meta).                                                                                              |
-
-> AI Gateway doesn't currently log or store the prompts, completions, or other request content you send through it, though this isn't a formal guarantee and is subject to change during the private preview. Neon doesn't yet offer a zero-data-retention agreement, an opt-out from provider training on your requests, or regional data residency; all requests are routed through AWS us-east-2 regardless of your project's region.
 
 <NeedHelp/>
