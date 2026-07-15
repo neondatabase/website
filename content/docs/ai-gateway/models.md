@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-15T11:08:18.153Z'
+updatedOn: '2026-07-15T15:43:20.389Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -45,7 +45,7 @@ Not sure which model to use? Start here.
 
 ## Rate limits
 
-During the private preview, the following limit applies per account:
+During the beta, the following limit applies per account:
 
 | Limit                   | Value   |
 | ----------------------- | ------- |
@@ -59,7 +59,7 @@ Once billing begins, usage will also be capped by your prepaid credit balance. S
 
 ## Pricing
 
-Inference is free during the private preview. See [Pricing](/docs/ai-gateway/overview#pricing) for what to expect when billing begins.
+Inference is free during the beta. See [Pricing](/docs/ai-gateway/overview#pricing) for what to expect when billing begins.
 
 Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. This can happen even though inference itself isn't billed yet. Neon hasn't published a fixed cap value; it isn't a flat number and can vary by account. See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
 
