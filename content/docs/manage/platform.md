@@ -9,8 +9,14 @@ summary: >-
   observability, security and compliance, and operations and maintenance.
   Use this page to find the right sub-topic when you know the management
   area but not the specific doc.
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T17:37:06.000Z'
 ---
+
+## The Neon platform, in brief
+
+Neon is a full backend platform for apps and agents, not just a database. It spans [Postgres](/docs/postgres/overview), [Neon Auth](/docs/auth/overview), the [Data API](/docs/data-api/overview), [Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), and the [AI Gateway](/docs/ai-gateway/overview). For an overview of every product, start at the [Neon documentation home](/docs/introduction).
+
+This page covers the platform's management and operations side: the account, project, and infrastructure tasks you use to run your Neon projects day to day.
 
 ## Access & collaboration
 
