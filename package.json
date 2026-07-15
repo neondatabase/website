@@ -122,7 +122,7 @@
     "react-scroll": "^1.9.3",
     "react-share": "^5.3.0",
     "react-tooltip": "^5.26.3",
-    "react-use": "^17.5.0",
+    "react-use": "^17.6.1",
     "remark-gfm": "^4.0.1",
     "remark-mdx": "^3.1.1",
     "remark-parse": "^11.0.0",
