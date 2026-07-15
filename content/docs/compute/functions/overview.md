@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-07-15T18:30:46.285Z'
+updatedOn: '2026-07-15T19:50:24.946Z'
 ---
 
 Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -71,7 +71,7 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 
 <DetailIconCards>
 
-<a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Get started</a>
+<a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Quickstart</a>
 
 <a href="/docs/compute/functions/agents" description="Run streaming, tool-calling AI agents next to your data." icon="openai">AI agents</a>
 
