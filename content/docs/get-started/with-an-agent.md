@@ -5,12 +5,12 @@ summary: >-
   `npx neon@latest init` connects an AI coding assistant to Neon,
   installing agent skills and configuring the MCP server in one command.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-15T17:55:02.301Z'
 ---
 
 `npx neon@latest init` gives your agent two things: Neon-specific context from agent skills, and tools to act on your Neon account through the MCP server. The result is an agent that can connect your app to Neon and help you use Neon features as you build. For Cursor and VS Code, it also installs the Neon Local Connect extension for in-editor schema browsing.
 
-For a full app walkthrough, see [Build a full backend](/docs/get-started/full-backend-quickstart).
+New to the platform? The [backend overview](/docs/get-started/backend-overview) shows how Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway fit together. For a hands-on walkthrough, see [Build a full backend](/docs/get-started/full-backend-quickstart).
 
 ## Before you start
 
