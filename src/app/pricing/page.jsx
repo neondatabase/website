@@ -97,7 +97,8 @@ const faqItems = [
     `,
   },
   {
-    question: 'Is Object Storage, Functions, or AI Gateway usage included in my Free plan CU-hours?',
+    question:
+      'Is Object Storage, Functions, or AI Gateway usage included in my Free plan CU-hours?',
     id: 'backend-free-plan-cu-hours',
     answer: `
       <p>No. CU-hours are specific to Postgres database compute. Object Storage, Functions, and AI Gateway will have their own usage limits that will be published before GA. During the beta phase, they are free to use within the guardrails we've set to prevent abuse.</p>

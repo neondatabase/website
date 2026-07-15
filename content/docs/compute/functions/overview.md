@@ -6,6 +6,8 @@ summary: >-
   API, AI agent, real-time server, or webhook handler that runs next to your
   Postgres data, with DATABASE_URL injected automatically.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/compute/functions/preview-access
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
@@ -19,10 +21,10 @@ What makes Neon Functions different from lambda-style serverless?
 
 Functions run on Neon's own compute platform, the same infrastructure that runs your Postgres, so they sit in the same region as your data.
 
-> During the private preview, Functions are available in the **AWS us-east-2** region only. See [Preview access](/docs/compute/functions/preview-access) for what's included.
+> Functions are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use them. Functions are free to use during beta, subject to usage limits, on any plan.
 
 <Admonition type="important" title="JavaScript and TypeScript only">
-Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't supported in the private preview.
+Neon Functions currently run JavaScript or TypeScript on the Node.js runtime. Deploy JS/TS handlers, or code that bundles to JS for Node.js 24. Other runtimes and language targets aren't supported during beta.
 </Admonition>
 
 ## Request/response, not background jobs
@@ -69,9 +71,7 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 
 <DetailIconCards>
 
-<a href="/docs/compute/functions/preview-access" description="Request access and learn what's included in the private preview." icon="screen">Preview access</a>
-
-<a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Quickstart</a>
+<a href="/docs/compute/functions/get-started" description="Deploy your first function and call it over HTTP in under 5 minutes." icon="code">Get started</a>
 
 <a href="/docs/compute/functions/agents" description="Run streaming, tool-calling AI agents next to your data." icon="openai">AI agents</a>
 

@@ -359,7 +359,7 @@ preview: {
 
 Running `neon deploy` will provision the buckets and deploy the functions, and `parseEnv` will automatically type your `env.aiGateway` and `env.preview.buckets` variables. For local development, you can run `neon dev` to hot-reload your functions against your linked branch.
 
-_To request access to Neon Functions and Storage, see [Preview access](/docs/compute/functions/preview-access)._
+_Neon Functions and Storage are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`), so create your project there to use them._
 
 ## Conclusion
 

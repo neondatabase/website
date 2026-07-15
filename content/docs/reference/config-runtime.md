@@ -213,7 +213,7 @@ function buildFunctionBundle(fn: ResolvedFunctionConfig): Promise<Uint8Array>;
 `ResolvedFunctionConfig` (what your bundler receives) has all deploy defaults already applied: `slug`, `name`, `source` (path to the entry file), `env` (resolved key/value pairs), `runtime`, and an optional `dev` block used only by `neon dev`.
 
 <Admonition type="note">
-The `neon` CLI has its own separate `NEON_ESBUILD_PATH` escape hatch for "esbuild not found" errors (see [Preview access](/docs/compute/functions/preview-access#known-limitations)). That variable is read by the CLI's own bundler, not by `buildFunctionBundle` in this package, so it has no effect when you call `@neon/config-runtime` directly. Pass `bundleFunction` instead.
+The `neon` CLI has its own separate `NEON_ESBUILD_PATH` escape hatch for "esbuild not found" errors (see [Deploy and manage Neon Functions](/docs/compute/functions/deploy#deploy-with-neon-functions-deploy)). That variable is read by the CLI's own bundler, not by `buildFunctionBundle` in this package, so it has no effect when you call `@neon/config-runtime` directly. Pass `bundleFunction` instead.
 </Admonition>
 
 ## Load a `neon.ts` file

@@ -9,8 +9,6 @@ enableTableOfContents: true
 updatedOn: '2026-07-15T11:08:18.153Z'
 ---
 
-<PrivatePreviewEnquire/>
-
 Neon Functions run on Node.js 24.
 
 ## Lifecycle
@@ -67,7 +65,7 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 | Isolation         | microVM per isolate                                                                                                                             |
 | Concurrency       | Multiple requests in flight per isolate (interleaved on the event loop), scaling out with additional isolates. See [Concurrency](#concurrency). |
 | Concurrency limit | 100 concurrent invocations per account (default). See [Concurrency](#concurrency).                                                              |
-| Memory            | 2048 MiB (fixed during the private preview, not configurable)                                                                                   |
+| Memory            | 2048 MiB (fixed during beta, not configurable)                                                                                                  |
 
 ## Environment variables
 

@@ -336,7 +336,7 @@ Neon Functions are serverless Node.js compute you deploy onto a Neon branch, so 
 
 There's no charge for Functions during the beta, but usage limits apply.
 
-See [Neon Functions](/docs/compute/functions/overview) and [Preview access](/docs/compute/functions/preview-access) for what's included and current limitations.
+See [Neon Functions](/docs/compute/functions/overview) for what's included and current limitations.
 
 ### AI Gateway
 
