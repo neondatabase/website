@@ -9,9 +9,9 @@ summary: >-
   eliminate repetitive flag passing across a CLI session. Context is stored in a
   `.neon` file (or a named `--context-file`) found by walking up the directory
   tree to the project root, supports multiple independent named files, and
-  persists until reset with `neonctl set-context` or deleted manually.
+  persists until reset with `neon set-context` or deleted manually.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:33:31.980Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-set-context
 ---
@@ -19,7 +19,7 @@ redirectFrom:
 The `set-context` command sets a background context for your CLI sessions, so you don't have to specify the project ID in every command. The context is saved to a default `.neon` file in the current directory, or to a [named context file](#using-a-named-context-file) of your choice, and stays in place until you reset it or remove the file.
 
 <Admonition type="tip" title="Prefer link or checkout">
-For most workflows, use [`neonctl link`](/docs/cli/link) to bind a directory to a project or [`neonctl checkout`](/docs/cli/checkout) to switch branches. Use `set-context` when you need to set context values directly (for example, in scripts).
+For most workflows, use [`neon link`](/docs/cli/link) to bind a directory to a project or [`neon checkout`](/docs/cli/checkout) to switch branches. Use `set-context` when you need to set context values directly (for example, in scripts).
 </Admonition>
 
 <Admonition type="tip" title="How the CLI finds your `.neon` file">
@@ -45,13 +45,13 @@ Set at least one of these options.
 Set the context to the default `.neon` file:
 
 ```bash
-neonctl set-context --project-id patient-frost-50125040 --org-id org-bright-sky-12345678
+neon set-context --project-id patient-frost-50125040 --org-id org-bright-sky-12345678
 ```
 
 List all branches for this project with `branches list`, without including `--project-id` or `--org-id`, even if you belong to multiple organizations or have multiple projects:
 
 ```bash
-neonctl branches list
+neon branches list
 ```
 
 ```text filename="Output"
@@ -69,13 +69,13 @@ neonctl branches list
 Set the context to the context file of your choice:
 
 ```bash
-neonctl set-context --project-id plain-waterfall-84865553 --context-file Documents/MyContext
+neon set-context --project-id plain-waterfall-84865553 --context-file Documents/MyContext
 ```
 
 List all branches with `branches list`. The context file provides the project:
 
 ```bash
-neonctl branches list --context-file Documents/MyContext
+neon branches list --context-file Documents/MyContext
 ```
 
 ```text filename="Output"
@@ -99,7 +99,7 @@ These two `branches list` commands use independent contexts in the same account:
 Use `--set-context` to set the project context at creation time:
 
 ```bash
-neonctl projects create --name MyLatest --set-context
+neon projects create --name MyLatest --set-context
 ```
 
 This creates a hidden `.neon` file by default with the following context:
@@ -119,7 +119,7 @@ To clear the current context, either:
 1. Run the `set-context` command with no options:
 
    ```bash
-   neonctl set-context
+   neon set-context
    ```
 
 2. Delete the `.neon` file (or your custom `--context-file`):

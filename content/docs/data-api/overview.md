@@ -11,7 +11,7 @@ summary: >-
   request is stateless, so the API scales to thousands of concurrent users
   without connection pool exhaustion.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -28,7 +28,7 @@ The Neon Data API is the HTTP query service in the Neon backend for apps and age
 
 - **Secure by default**
 
-  The API validates JWTs from any authentication provider and respects PostgreSQL [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, ensuring users only access the data they are explicitly permitted to see. Use [Neon Auth](/docs/auth/overview), or bring your own provider like [Auth0, Clerk, Firebase, and others](/docs/data-api/custom-authentication-providers).
+  The API validates JWTs from any authentication provider and respects PostgreSQL [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, ensuring users only access the data they are explicitly permitted to see. Use [Managed Better Auth](/docs/auth/overview), or bring your own provider like [Auth0, Clerk, Firebase, and others](/docs/data-api/custom-authentication-providers).
 
 - **CI/CD integration**
 

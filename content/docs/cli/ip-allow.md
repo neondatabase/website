@@ -9,7 +9,7 @@ summary: >-
   through the Neon console. The `add` subcommand accepts a `--protected-only`
   flag to scope the allowlist to protected branches only.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:40:08.097Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-ip-allow
 ---
@@ -20,7 +20,7 @@ The `ip-allow` command lists, adds, removes, and resets the IP allowlist for you
 
 The `--project-id` option is required only if your Neon account has more than one project and no project is set in your [context file](/docs/cli/set-context).
 
-## neonctl ip-allow list (#list)
+## neon ip-allow list (#list)
 
 Lists the addresses in the IP allowlist.
 
@@ -31,16 +31,16 @@ Lists the addresses in the IP allowlist.
 List the IP allowlist:
 
 ```bash
-neonctl ip-allow list --project-id cold-grass-40154007
+neon ip-allow list --project-id cold-grass-40154007
 ```
 
 List the IP allowlist with the `--output` format set to `json`:
 
 ```bash
-neonctl ip-allow list --project-id cold-grass-40154007 --output json
+neon ip-allow list --project-id cold-grass-40154007 --output json
 ```
 
-## neonctl ip-allow add (#add)
+## neon ip-allow add (#add)
 
 Adds IP addresses to the IP allowlist for your Neon project.
 
@@ -51,10 +51,10 @@ Adds IP addresses to the IP allowlist for your Neon project.
 Use `--protected-only` to apply the allowlist to [protected branches](/docs/guides/protected-branches) only. Use `--protected-only false` to remove this setting.
 
 ```bash
-neonctl ip-allow add 192.0.2.3 --project-id cold-grass-40154007
+neon ip-allow add 192.0.2.3 --project-id cold-grass-40154007
 ```
 
-## neonctl ip-allow remove (#remove)
+## neon ip-allow remove (#remove)
 
 Removes IP addresses from the IP allowlist for your project.
 
@@ -63,10 +63,10 @@ Removes IP addresses from the IP allowlist for your project.
 <CliOptions command="ip-allow remove" />
 
 ```bash
-neonctl ip-allow remove 192.0.2.3 --project-id cold-grass-40154007
+neon ip-allow remove 192.0.2.3 --project-id cold-grass-40154007
 ```
 
-## neonctl ip-allow reset (#reset)
+## neon ip-allow reset (#reset)
 
 Resets the allowlist to the IP addresses you specify. If you specify no addresses, the currently defined IP addresses are removed.
 
@@ -75,5 +75,5 @@ Resets the allowlist to the IP addresses you specify. If you specify no addresse
 <CliOptions command="ip-allow reset" />
 
 ```bash
-neonctl ip-allow reset 192.0.2.1 --project-id cold-grass-40154007
+neon ip-allow reset 192.0.2.1 --project-id cold-grass-40154007
 ```

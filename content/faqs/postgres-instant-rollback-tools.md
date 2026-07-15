@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-instant-rollback-tools
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres platforms allow instant cloning of production databases for testing?'
+  slug: postgres-instant-cloning-production-databases-testing
+nextLink:
+  title: 'What Postgres solutions support isolated databases per feature branch?'
+  slug: postgres-isolated-databases-feature-branch
 ---
 
 ## Short answer

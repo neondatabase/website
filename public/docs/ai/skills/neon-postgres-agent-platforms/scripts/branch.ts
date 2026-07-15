@@ -1,5 +1,5 @@
 /**
- * List branches or create a dev branch from production (main / production).
+ * List branches or create a dev branch from production (the default branch).
  *
  * Usage (from `scripts/` after `npm run build`):
  *   NEON_API_KEY=... NEON_PROJECT_ID=... node dist/scripts/branch.js list
@@ -7,9 +7,7 @@
  * Or: npm run branch -- list | create <branch-name>
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
-
-import { createBranchWithOperations, getProductionBranchId } from "./utils.js";
+import { getProductionBranchId, neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
@@ -25,17 +23,24 @@ if (!projectId) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
+const neon = neonClient(apiKey);
 
 if (cmd === "list") {
-  const { data } = await api.listProjectBranches({ projectId });
-  const branches = (data.branches ?? []).map((b) => ({
-    id: b.id,
-    name: b.name,
-    created_at: b.created_at,
-    parent_id: b.parent_id,
-  }));
-  console.log(JSON.stringify(branches, null, 2));
+  // `list()` is cursor-paginated; `.all()` concatenates every page.
+  const { data: branches, error } = await neon.branches.list(projectId).all();
+  if (error) throw error;
+  console.log(
+    JSON.stringify(
+      branches.map((b) => ({
+        id: b.id,
+        name: b.name,
+        created_at: b.created_at,
+        parent_id: b.parent_id,
+      })),
+      null,
+      2,
+    ),
+  );
   process.exit(0);
 }
 
@@ -44,19 +49,15 @@ if (cmd === "create") {
     console.error("Usage: npm run branch -- create <branch-name>");
     process.exit(1);
   }
-  const prodId =
+  const parentId =
     process.env.NEON_PARENT_BRANCH_ID?.trim() ||
-    (await getProductionBranchId(api, projectId));
-  if (!prodId) {
-    console.error("Could not resolve production branch (main or production).");
-    process.exit(1);
-  }
-  const { id } = await createBranchWithOperations(api, projectId, {
+    (await getProductionBranchId(neon, projectId));
+  const branch = await neon.branches.create(projectId, {
     name: branchName,
-    parentId: prodId,
+    parent_id: parentId,
   });
   console.log(
-    JSON.stringify({ branchId: id, parentBranchId: prodId }, null, 2),
+    JSON.stringify({ branchId: branch.id, parentBranchId: parentId }, null, 2),
   );
   process.exit(0);
 }

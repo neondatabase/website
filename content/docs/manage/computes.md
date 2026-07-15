@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -193,7 +193,7 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 #### Sizing your compute based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from database storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
 
 As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. You can monitor the Local File Cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
 

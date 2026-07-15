@@ -1,8 +1,8 @@
 # Management API samples (`scripts/`)
 
-Small **Node.js + TypeScript** scripts that call Neon’s official **[Management API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk.md)** ([`@neondatabase/api-client`](https://registry.npmjs.org/@neondatabase/api-client)) via **`createApiClient`**, **no other Neon npm packages**. Sources live in **[`scripts/`](../scripts/)**; **`npm run build`** runs **`tsc`** and emits **`dist/scripts/*.js`** per **[`tsconfig.json`](../scripts/tsconfig.json)**. **`npm run typecheck`** runs **`tsc --noEmit`** (no emit). Scripts **`import "dotenv/config"`** so variables from **`.env`** load automatically; run with **`node dist/scripts/<name>.js`** or **`npm run …`** (each npm script runs **`build`** then **`node dist/scripts/...`**).
+Small **Node.js + TypeScript** scripts that call Neon’s official **[Management API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk.md)** ([`@neon/sdk`](https://registry.npmjs.org/@neon/sdk)) via **`createNeonClient`**, **no other Neon npm packages**. Sources live in **[`scripts/`](../scripts/)**; **`npm run build`** runs **`tsc`** and emits **`dist/scripts/*.js`** per **[`tsconfig.json`](../scripts/tsconfig.json)**. **`npm run typecheck`** runs **`tsc --noEmit`** (no emit). Scripts **`import "dotenv/config"`** so variables from **`.env`** load automatically; run with **`node dist/scripts/<name>.js`** or **`npm run …`** (each npm script runs **`build`** then **`node dist/scripts/...`**).
 
-**When we say “Neon TypeScript SDK” here, we mean [`@neondatabase/api-client`](https://registry.npmjs.org/@neondatabase/api-client) and nothing else**, not `@neondatabase/serverless`, `@neondatabase/neon-js`, `@neondatabase/toolkit`, or any other `@neondatabase/*` package.
+**When we say “Neon TypeScript SDK” here, we mean [`@neon/sdk`](https://registry.npmjs.org/@neon/sdk) and nothing else**, not `@neondatabase/serverless`, `@neondatabase/neon-js`, `@neondatabase/toolkit`, or any other Neon package.
 
 Use these to prototype **per-tenant provisioning**, **fleet branching/snapshot orchestration**, **database versioning** (snapshots + restore), **org transfer** (free ↔ paid org), **consumption** polling, and **Neon Auth management** endpoints, not introductory app connectivity (that is **`neon-postgres`** + app docs).
 
@@ -14,7 +14,7 @@ For the full mapping (keys, patterns, which script covers which fleet operation)
 
 ### Application REST API vs Neon Management API
 
-Scripts in **`scripts/`** call Neon’s **Management API** (`console.neon.tech`, `@neondatabase/api-client`), provisioning, branches, snapshots, org transfer, consumption, Neon Auth management endpoints.
+Scripts in **`scripts/`** call Neon’s **Management API** (`console.neon.tech`, `@neon/sdk`), provisioning, branches, snapshots, org transfer, consumption, Neon Auth management endpoints.
 
 For **`curl`** examples aimed at **your product’s own REST API** (checkpoints, versions, etc.), see **[application-rest-api/CURL_REFERENCE.md](application-rest-api/CURL_REFERENCE.md)**. Those routes are **not** Neon control-plane calls. **Compound checkpoints** are described in **[COMPOUND_CHECKPOINTS_FOR_AGENT_PLATFORMS.md](COMPOUND_CHECKPOINTS_FOR_AGENT_PLATFORMS.md)**.
 
@@ -143,7 +143,7 @@ Projects linked to **GitHub** or **Vercel** in Neon cannot be transferred; the t
 | `CONSUMPTION_PROJECT_IDS` | Optional comma-separated Neon project ids to include (this script does **not** read `NEON_PROJECT_ID`) |
 | `CONSUMPTION_LIMIT`, `CONSUMPTION_CURSOR` | Pagination |
 
-**Legacy account endpoint:** `GET /api/v2/consumption_history/account` is **deprecated** with a planned sunset of **2026-06-01**. Prefer this repo’s **`consumption-query.ts`** (`GET /consumption_history/v2/projects`) for invoice-aligned, per-project metrics. If you still need legacy metric shapes, see [Query consumption metrics (legacy)](https://neon.com/docs/guides/consumption-metrics-legacy.md).
+**Legacy account endpoint:** the legacy `GET /api/v2/consumption_history/account` endpoint has been retired. Use this repo’s **`consumption-query.ts`** (`GET /consumption_history/v2/projects`) for invoice-aligned, per-project metrics instead. If you still need legacy metric shapes, see [Query consumption metrics (legacy)](https://neon.com/docs/guides/consumption-metrics-legacy.md).
 
 **`metrics` values (v2):** pass a subset or all of: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. These are the strings accepted in `CONSUMPTION_METRICS` and by the API `metrics` parameter ([consumption metrics guide](https://neon.com/docs/guides/consumption-metrics.md#required-parameters)).
 
@@ -225,7 +225,7 @@ node --env-file=.env dist/scripts/auth-users.js meta
 
 ## Shared helpers
 
-[`scripts/utils.ts`](../scripts/utils.ts) holds **shared helpers** on top of the same **`@neondatabase/api-client`** surface: **operation polling** (`waitForOperationsToSettle`), **error formatting**, and small **compose** helpers around **`createApiClient`** calls so scripts stay readable. There is no second Neon client package.
+[`scripts/utils.ts`](../scripts/utils.ts) holds **shared helpers** on top of the same **`@neon/sdk`** surface: a configured client factory (`neonClient` — `throwOnError` + `waitForReadiness`) and default-branch resolution (`getProductionBranchId`). The SDK itself handles **readiness polling**, retries, and typed errors, so the scripts no longer hand-roll an operation poller. There is no second Neon client package.
 
 ---
 

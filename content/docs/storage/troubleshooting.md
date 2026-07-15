@@ -1,15 +1,17 @@
 ---
-title: Storage troubleshooting
+title: Object storage troubleshooting
 subtitle: Common errors and how to fix them
 summary: >-
-  Solutions for common errors when using Neon Storage, including authentication
+  Solutions for common errors when using Neon Object Storage, including authentication
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-17T11:08:12.470Z'
+updatedOn: '2026-07-15T15:03:54.666Z'
 ---
 
 <PrivatePreviewEnquire/>
+
+Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
 
 ## Authentication errors
 
@@ -65,12 +67,12 @@ Without `forcePathStyle: true`, the SDK treats the bucket name as a subdomain in
 
 ```typescript
 const client = new S3Client({
-  forcePathStyle: true, // required for Neon Storage
+  forcePathStyle: true, // required for Neon Object Storage
   // ...
 });
 ```
 
-Without this, the AWS SDK for JavaScript uses virtual-hosted-style addressing (`my-bucket.storage.example.com/key`) which Neon Storage doesn't support.
+Without this, the AWS SDK for JavaScript uses virtual-hosted-style addressing (`my-bucket.storage.example.com/key`) which Neon Object Storage doesn't support.
 
 ### SigV2 errors
 
@@ -94,7 +96,7 @@ You cannot change access level via the S3 API. `PutBucketAcl` returns `501 Not I
 
 ### `501 Not Implemented`
 
-You are calling an S3 operation that Neon Storage does not support.
+You are calling an S3 operation that Neon Object Storage does not support.
 
 **Common causes:**
 
@@ -114,9 +116,9 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 ### `503 Service Unavailable` (SlowDown)
 
-The request exceeded the per-IP or per-tenant rate limit. The S3 error code is `SlowDown`. This is a rate limit signal, not a server error. The storage service is healthy.
+The request exceeded a rate limit. The S3 error code is `SlowDown`. This is a rate limit signal, not a server error. The storage service is healthy.
 
-**Fix:** Implement exponential backoff and retry. Don't treat `SlowDown` as a fatal error. The response may include a `Retry-After` header indicating how long to wait. AWS SDKs handle this automatically when retry logic is enabled.
+**Fix:** Implement exponential backoff and retry. Don't treat `SlowDown` as a fatal error. The response may include a `Retry-After` header indicating how long to wait. AWS SDKs handle this automatically when retry logic is enabled. If you're hitting this consistently, [let us know](/docs/introduction/support) and we can look into raising your limit.
 
 ### Large downloads timing out mid-stream
 

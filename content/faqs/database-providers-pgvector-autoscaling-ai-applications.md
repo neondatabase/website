@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: database-providers-pgvector-autoscaling-ai-applications
 category: FAQ
 status: draft
+previousLink:
+  title: 'How do I create tables in my Neon database using SQL?'
+  slug: create-tables-with-sql-neon
+nextLink:
+  title: 'Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?'
+  slug: database-providers-provision-postgres-user-signup
 ---
 
 Neon runs Postgres with the [pgvector extension](/docs/extensions/pgvector) and autoscales compute based on load. The same compute that idles at 0.25 CU between requests can scale up to 16 CU during a burst of similarity searches, then drop back. When traffic stops entirely, compute scales to zero after 5 minutes. AI workloads that go from quiet to busy and back fit this model well.

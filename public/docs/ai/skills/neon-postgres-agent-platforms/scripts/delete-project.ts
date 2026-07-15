@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
+import { neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
@@ -14,6 +14,6 @@ if (!projectId) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
-await api.deleteProject(projectId);
+const neon = neonClient(apiKey);
+await neon.projects.delete(projectId);
 console.log(`Deleted project ${projectId}`);

@@ -1,0 +1,91 @@
+name: Docs ↔ API Consistency
+
+# Keeps the docs faithful to and complete against the Neon REST API surface and
+# @neon/sdk. One flow, two modes (scripts/check-docs-api-consistency.mjs):
+#
+#   - Pull requests touching docs, the operation manifest, or the checker ->
+#     offline verification: blocks on broken @neon/sdk code samples; reports
+#     (non-blocking) operation-coverage skew between the docs and the installed
+#     @neon/sdk raw layer.
+#   - Weekly schedule / manual dispatch -> --strict against @neon/sdk@latest and
+#     the live OpenAPI spec, so coverage skew (spec ↔ docs ↔ @neon/sdk) becomes a
+#     failure. Opens/updates a tracking issue on drift so it can't rot silently.
+
+on:
+  pull_request:
+    paths:
+      - 'content/**/*.md'
+      - 'content/**/*.mdx'
+      - 'public/docs/**/*.md'
+      - 'content/docs/api-operation-ids.json'
+      - 'scripts/check-docs-api-consistency.mjs'
+      - 'scripts/lib/api-coverage.mjs'
+      - 'scripts/lib/openapi-spec-source.mjs'
+      - 'src/utils/api-ref.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/docs-api-consistency.yml'
+  schedule:
+    # Every Monday at 9:15 AM UTC (just after the weekly unit-test run)
+    - cron: '15 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: 'Check docs vs @neon/sdk + OpenAPI spec'
+    runs-on:
+      group: neondatabase-protected-runner-group
+      labels: linux-ubuntu-latest
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # PRs: offline. Block on broken code samples; coverage skew is advisory.
+      - name: Check docs vs installed @neon/sdk (offline)
+        if: github.event_name == 'pull_request'
+        run: npm run check:docs-api-consistency
+
+      # Schedule / manual: strict against @neon/sdk@latest + the live spec.
+      # NOTE: `@neon/sdk@latest` is intentionally unpinned here — the whole point
+      # of this job is to detect drift against the newest published SDK. It only
+      # runs on schedule/workflow_dispatch (never on pull_request), so untrusted
+      # fork input never reaches this unpinned install.
+      - name: Check docs vs @neon/sdk@latest + live spec (strict)
+        if: github.event_name != 'pull_request'
+        run: |
+          set -o pipefail
+          npm install @neon/sdk@latest --no-save
+          node scripts/check-docs-api-consistency.mjs --strict --ci | tee drift-report.txt
+
+      - name: Open or update drift issue
+        if: failure() && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          title="Docs ↔ API consistency drift detected"
+          body="$(cat drift-report.txt 2>/dev/null || echo 'The docs ↔ API consistency check failed. See the workflow run for details.')"
+          body="${body}"$'\n\n'"— Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          existing="$(gh issue list --state open --search "${title} in:title" --json number --jq '.[0].number' 2>/dev/null || echo '')"
+          if [ -n "${existing}" ]; then
+            gh issue comment "${existing}" --body "${body}"
+          else
+            gh issue create --title "${title}" --body "${body}"
+          fi

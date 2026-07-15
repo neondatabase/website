@@ -3,9 +3,15 @@ title: 'Where can I find my database connection string in Neon?'
 subtitle: 'Copy it from the Connect widget on your Project Dashboard, with options for pooled or direct.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Where can I find my database connection string or URL in Neon?'
+  slug: find-database-connection-string-url
+nextLink:
+  title: 'Where can I find my DATABASE_URL in Neon?'
+  slug: find-database-url-neon
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech), then click **Connect** on the **Project Dashboard**. The **Connect to your database** widget opens with a ready-made connection string for the branch, compute, database, and role you select. Toggle **Connection pooling** to switch between a pooled and a direct connection string. See [Connect from any app](/docs/connect/connect-from-any-app) for the full reference.

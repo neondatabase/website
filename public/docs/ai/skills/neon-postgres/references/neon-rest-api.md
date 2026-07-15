@@ -2,7 +2,7 @@
 
 Essentials for making direct HTTP requests to the Neon Platform API.
 
-See the [official API reference](https://neon.com/docs/reference/api-reference.md) for complete details.
+See the [official API reference](https://neon.com/docs/reference/api.md) for complete details.
 
 ## OpenAPI Specification
 

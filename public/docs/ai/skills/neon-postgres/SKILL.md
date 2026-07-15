@@ -62,9 +62,10 @@ Before starting setup, inspect the user's codebase and environment:
 
 ### Self-Driving Setup With Neon's CLI or MCP Server
 
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
+Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. For a truly headless flow, require `NEON_API_KEY` first; without it, `init` falls back to browser OAuth and waits for the user to complete authentication.
 
 ```bash
+export NEON_API_KEY=<user-provided-api-key>
 npx -y neon@latest init --agent <agent-name>
 ```
 
@@ -78,7 +79,7 @@ If `init` is not suitable, the individual steps can be run non-interactively:
 - **MCP server:** `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>`
 - **Agent skill:** `npx skills add neondatabase/agent-skills --skill neon-postgres --agent <agent-name> -y`
 
-For full CLI installation options, see https://neon.com/docs/reference/cli-install.md
+For full CLI installation options, see https://neon.com/docs/cli/install.md
 
 ### Setup Flow
 
@@ -181,16 +182,16 @@ Use this for local development enablement with `npx -y neon@latest init --agent 
 
 | Tool             | URL                                             |
 | ---------------- | ----------------------------------------------- |
-| CLI Init Command | https://neon.com/docs/reference/cli-init.md     |
+| CLI Init Command | https://neon.com/docs/cli/init.md               |
 | VSCode Extension | https://neon.com/docs/local/vscode-extension.md |
 | MCP Server       | https://neon.com/docs/ai/neon-mcp-server.md     |
-| Neon CLI         | https://neon.com/docs/reference/neon-cli.md     |
+| Neon CLI         | https://neon.com/docs/cli.md                    |
 
 ### Neon CLI
 
 Use this for terminal-first workflows, scripts, and CI/CD automation with `neon`.
 
-Link: https://neon.com/docs/reference/neon-cli.md
+Link: https://neon.com/docs/cli.md
 
 ## Neon Admin API
 
@@ -200,11 +201,11 @@ The Neon Admin API can be used to manage Neon resources programmatically. It is 
 
 Use this for direct HTTP automation, endpoint-level control, API key auth, rate-limit handling, and operation polling.
 
-Link: https://neon.com/docs/reference/api-reference.md
+Link: https://neon.com/docs/reference/api.md
 
 ### Neon TypeScript SDK
 
-Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neondatabase/api-client`.
+Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`).
 
 Link: https://neon.com/docs/reference/typescript-sdk.md
 
@@ -273,7 +274,7 @@ Since `neon.ts` is TypeScript, invalid combinations fail to compile with an acti
 Read the resulting env back, typed and validated against the policy, with `parseEnv` from `@neon/env`:
 
 ```typescript
-import { parseEnv } from "@neon/env/v1";
+import { parseEnv } from "@neon/env";
 import config from "./neon";
 
 const env = parseEnv(config);

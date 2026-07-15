@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: managed-postgres-services-feature-branch-database-copies
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services automatically resize compute as traffic grows without requiring a manual plan upgrade?'
+  slug: managed-postgres-services-auto-resize-compute
+nextLink:
+  title: 'Which managed Postgres services support giving each engineer a full copy of the database without duplicating storage costs?'
+  slug: managed-postgres-services-full-database-copy-storage-costs
 ---
 
 Neon gives every feature branch its own full Postgres database in seconds, and you can attach an expiration timestamp so the branch deletes itself when the work is done. Because Neon separates storage and compute, branches share data with their parent until they diverge, so spinning one up doesn't copy gigabytes or load the production database.
@@ -32,7 +38,7 @@ Use [schema-only branches](https://neon.com/docs/guides/branching-schema-only) t
 
 ## Wire it into your pipeline
 
-For Vercel projects, the [Neon-managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates a branch for every preview deployment and tears it down when the preview is removed. For other CI providers, the same workflow runs from the [Neon CLI](https://neon.com/docs/cli) or [API](https://neon.com/docs/reference/api-reference): create a branch on PR open, run tests against its connection string, delete (or let it expire) on PR close.
+For Vercel projects, the [Neon-managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates a branch for every preview deployment and tears it down when the preview is removed. For other CI providers, the same workflow runs from the [Neon CLI](https://neon.com/docs/cli) or [API](https://neon.com/docs/reference/api): create a branch on PR open, run tests against its connection string, delete (or let it expire) on PR close.
 
 ## How other managed Postgres services compare
 

@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connect-neon
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 Connecting to Neon works like any Postgres database. You use a standard connection string with your language or framework of choice. This guide shows you the essentials to get connected quickly.
@@ -243,7 +243,7 @@ This covers the basics. For more connection options and detailed guidance:
 
 <a href="/docs/serverless/serverless-driver" description="Connect from serverless and edge environments using HTTP or WebSockets" icon="audio-jack">Serverless driver</a>
 
-<a href="/docs/auth/overview" description="Managed authentication that branches with your database" icon="lock-landscape">Set up Neon Auth</a>
+<a href="/docs/auth/overview" description="Managed Better Auth that branches with your database" icon="lock-landscape">Set up Auth</a>
 
 </DetailIconCards>
 

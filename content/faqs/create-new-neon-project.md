@@ -6,6 +6,12 @@ createdAt: '2026-05-18T00:00:00.000Z'
 updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I create a new database in my Neon project?'
+  slug: create-new-database-neon-project
+nextLink:
+  title: 'How do I create tables in my Neon database using SQL?'
+  slug: create-tables-with-sql-neon
 ---
 
 A Neon project is your top-level workspace. Each project has its own root branch, default database, default role, and primary compute. To create one, click **New Project** in the [Neon Console](https://console.neon.tech) and pick a name, Postgres version, and region. Or use the Neon CLI with `neon projects create`. Project limits depend on your plan: Free and Launch get 100 projects, Scale gets 1,000.

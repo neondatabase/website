@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-06-12T01:28:52.381Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 ## access token
@@ -337,7 +337,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-The backend for apps and agents. Includes Neon Postgres, Neon Auth, and Data API today, with Storage, Compute, and AI Gateway coming soon. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Neon Postgres, Managed Better Auth, Data API, and [AI Gateway](/docs/ai-gateway/overview) (in private preview) today, with Storage and Compute coming soon. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
@@ -590,7 +590,7 @@ A Neon Control Plane operation that starts a compute when there is an event or a
 
 ## Storage
 
-Where data is recorded and stored. Neon storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
+Where data is recorded and stored. Neon's database storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
 
 Also, a usage metric that tracks the total volume of data and [history](#history) stored in Neon. For more information, see [Storage](#storage).
 

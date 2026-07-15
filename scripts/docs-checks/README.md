@@ -7,7 +7,7 @@ defs, OpenAPI specs, etc.). Each check is self-contained in its own subfolder.
 
 ```bash
 npm run check:docs              # all checks
-npm run check:docs:neonctl      # one check
+npm run cli-docs -- check       # just the neonctl CLI checks (see neonctl/README.md)
 ```
 
 Exits non-zero on any validation error.

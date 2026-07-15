@@ -6,12 +6,16 @@ summary: >-
   Auth JWT against the injected JWKS, check an API key, and add CORS when the
   browser calls the function directly.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <PrivatePreviewEnquire/>
 
 A Neon Function has a public HTTPS URL, so anyone who knows it can reach it. There's no platform gate in front of your handler. Authenticate the caller yourself, at the top of the handler, and reject anything that doesn't check out.
+
+<Callout title="Looking for credentials to call Neon services?">
+This page covers verifying inbound requests to your function. For the credentials Neon injects into a function to call Object Storage or AI Gateway, see [Environment variables](/docs/compute/functions/environment-variables), [Object Storage authentication](/docs/storage/authentication#credentials-in-neon-functions), or [AI Gateway authentication](/docs/ai-gateway/authentication#credentials-in-neon-functions).
+</Callout>
 
 How you authenticate depends on who calls the function:
 
@@ -21,7 +25,11 @@ How you authenticate depends on who calls the function:
 
 ## Verify a JWT
 
-When [Neon Auth](/docs/auth/overview) is enabled on the branch, the function gets `NEON_AUTH_JWKS_URL` and `NEON_AUTH_BASE_URL` injected at runtime. Verify incoming tokens against the JWKS with [`jose`](https://github.com/panva/jose), and check that the token's issuer matches your Neon Auth URL. Build the remote key set once at module scope, then verify on each request:
+When [Managed Better Auth](/docs/auth/overview) is enabled on the branch, the function gets `NEON_AUTH_JWKS_URL` and `NEON_AUTH_BASE_URL` injected at runtime. Verify incoming tokens against the JWKS with [`jose`](https://github.com/panva/jose), and check that the token's issuer matches your Managed Better Auth URL. Build the remote key set once at module scope, then verify on each request:
+
+```bash
+npm install jose
+```
 
 ```ts filename="functions/secure.ts"
 import { createRemoteJWKSet, jwtVerify } from 'jose';
@@ -47,7 +55,7 @@ export default {
 };
 ```
 
-Neon Auth issues these tokens for your signed-in users; they're EdDSA-signed and short-lived (15 minutes), so see the [JWT plugin](/docs/auth/guides/plugins/jwt) for retrieving and refreshing them. The function only verifies. If you sign your own tokens instead (with a signer like NextAuth or [Better Auth](https://better-auth.com)'s `jwt` plugin), verify against your app's JWKS and issuer rather than the Neon Auth ones.
+Managed Better Auth issues these tokens for your signed-in users; they're EdDSA-signed and short-lived (15 minutes), so see the [JWT plugin](/docs/auth/guides/plugins/jwt) for retrieving and refreshing them. The function only verifies. If you sign your own tokens instead (with a signer like NextAuth or [Better Auth](https://better-auth.com)'s `jwt` plugin), verify against your app's JWKS and issuer rather than the Managed Better Auth ones.
 
 ## Call a function directly from the client
 
@@ -55,7 +63,7 @@ A long stream (an agent, an SSE feed) stays long only if nothing in front of it 
 
 Two things make the direct call work:
 
-- **A short-lived token.** With Neon Auth, the signed-in client gets one from the Neon Auth SDK (`authClient.token()`). With a custom signer, mint it on your app backend (a fast call, well within host limits). Either way, the client sends it as `Authorization: Bearer <token>`.
+- **A short-lived token.** With Managed Better Auth, the signed-in client gets one from the Managed Better Auth SDK (`authClient.token()`). With a custom signer, mint it on your app backend (a fast call, well within host limits). Either way, the client sends it as `Authorization: Bearer <token>`.
 - **CORS.** The browser calls the function cross-origin, so handle the preflight and set the headers:
 
 ```ts filename="functions/cors.ts"
@@ -119,10 +127,10 @@ Browsers can't set request headers on a WebSocket or an `EventSource`, so the `A
 
 ## OAuth and MCP clients
 
-Neon Auth handles user sign-in and issues JWTs you verify as above. A different case is a third-party client like an MCP client (Cursor or Claude) self-authorizing against your server through the OAuth flow in the MCP spec. That's a larger setup: run your own OAuth provider (such as [Better Auth](https://better-auth.com)) alongside your app and have the function verify the access tokens it issues. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp) for a working server.
+Managed Better Auth handles user sign-in and issues JWTs you verify as above. A different case is a third-party client like an MCP client (Cursor or Claude) self-authorizing against your server through the OAuth flow in the MCP spec. That's a larger setup: run your own OAuth provider (such as [Better Auth](https://better-auth.com)) alongside your app and have the function verify the access tokens it issues. See the [with-mcp example](https://github.com/neondatabase/examples/tree/main/with-mcp) for a working server.
 
 ## Example
 
-[with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat) authenticates a WebSocket connection with a Neon Auth JWT end to end.
+[with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat) authenticates a WebSocket connection with a Managed Better Auth JWT end to end.
 
 <NeedHelp/>
