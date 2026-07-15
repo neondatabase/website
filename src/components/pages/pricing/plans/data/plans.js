@@ -185,8 +185,10 @@ export default {
         tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: false,
-      launch: 'No charges applied during beta. After beta, pricing will match model provider (no markup)',
-      scale: 'No charges applied during beta. After beta, pricing will match model provider (no markup)',
+      launch:
+        'No charges applied during beta. After beta, pricing will match model provider (no markup)',
+      scale:
+        'No charges applied during beta. After beta, pricing will match model provider (no markup)',
     },
     {
       rows: '1',

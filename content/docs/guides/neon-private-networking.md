@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -134,7 +134,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VPC endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, and a [Neon API key](/docs/manage/api-keys).
+    You can use the [Assign or update a VPC endpoint](/docs/reference/api/organizations/assign-organization-vpc-endpoint) API to assign a VPC endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, and a [Neon API key](/docs/manage/api-keys).
 
     ```bash
     curl --request POST \
@@ -199,7 +199,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    To block access via the Neon API, use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint with the `block_public_connections` settings object attribute.
+    To block access via the Neon API, use the [Update project](/docs/reference/api/projects/update-project) endpoint with the `block_public_connections` settings object attribute.
 
     ```bash
     curl --request PATCH \
@@ -255,7 +255,7 @@ neon vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --o
 
 <TabItem>
 
-The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
+The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](/docs/reference/api/projects/assign-project-vpc-endpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
 
 ```bash
 curl --request POST \
@@ -266,7 +266,7 @@ curl --request POST \
      --data '{"label":"my_vpc"}'
 ```
 
-After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [Retrieve VPC endpoint details](https://api-docs.neon.tech/reference/getorganizationvpcendpointdetails) API. You will need to provide your VPC endpoint ID, region ID, Neon organization ID, and a Neon API key.
+After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [Retrieve VPC endpoint details](/docs/reference/api/organizations/get-organization-vpc-endpoint-details) API. You will need to provide your VPC endpoint ID, region ID, Neon organization ID, and a Neon API key.
 
 ```bash
 curl --request GET \
@@ -296,16 +296,16 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 
 ### APIs for managing VPC endpoints
 
-- [List VPC endpoints](https://api-docs.neon.tech/reference/listorganizationvpcendpoints)
-- [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint)
-- [Retrieve VPC endpoint configuration details](https://api-docs.neon.tech/reference/getorganizationvpcendpointdetails)
-- [Delete a VPC endpoint](https://api-docs.neon.tech/reference/deleteorganizationvpcendpoint)
+- [List VPC endpoints](/docs/reference/api/organizations/list-organization-vpc-endpoints)
+- [Assign or update a VPC endpoint](/docs/reference/api/organizations/assign-organization-vpc-endpoint)
+- [Retrieve VPC endpoint configuration details](/docs/reference/api/organizations/get-organization-vpc-endpoint-details)
+- [Delete a VPC endpoint](/docs/reference/api/organizations/delete-organization-vpc-endpoint)
 
 ### APIs for managing VPC endpoint restrictions
 
-- [Get VPC endpoint restrictions](https://api-docs.neon.tech/reference/listprojectvpcendpoints)
-- [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint)
-- [Delete a VPC endpoint restriction](https://api-docs.neon.tech/reference/deleteprojectvpcendpoint)
+- [Get VPC endpoint restrictions](/docs/reference/api/projects/list-project-vpc-endpoints)
+- [Assign or update a VPC endpoint restriction](/docs/reference/api/projects/assign-project-vpc-endpoint)
+- [Delete a VPC endpoint restriction](/docs/reference/api/projects/delete-project-vpc-endpoint)
 
 ## Private Networking limits
 

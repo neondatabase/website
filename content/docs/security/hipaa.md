@@ -92,7 +92,7 @@ curl --request POST \
 '
 ```
 
-To enable HIPAA for an existing project, set `hipaa` to `true` in the `project settings` object using the [Update project API](https://api-docs.neon.tech/reference/updateproject):
+To enable HIPAA for an existing project, set `hipaa` to `true` in the `project settings` object using the [Update project API](/docs/reference/api/projects/update-project):
 
 ```bash
 curl --request PATCH \

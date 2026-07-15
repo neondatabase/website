@@ -4,10 +4,10 @@ subtitle: Learn how to track and visualize your Neon usage programmatically usin
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-15T00:00:00.000Z'
-updatedOn: '2026-05-29T10:41:30.007Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
-Neon's usage-based pricing plans (**Launch, Scale, Agent, and Enterprise**) ensure you only pay for the resources you actually consume. To help you monitor these costs programmatically, Neon provides the [Project Consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2). This API allows you to query detailed usage data for your projects, including compute time, storage, and data transfer.
+Neon's usage-based pricing plans (**Launch, Scale, Agent, and Enterprise**) ensure you only pay for the resources you actually consume. To help you monitor these costs programmatically, Neon provides the [Project Consumption metrics API](/docs/reference/api/consumption/get-consumption-history-per-project-v2). This API allows you to query detailed usage data for your projects, including compute time, storage, and data transfer.
 
 In this guide, you'll learn how to build an internal usage dashboard using Next.js and the Neon Consumption API. By the end, you'll have a dashboard that visualizes your compute usage trends and provides insights into your resource consumption.
 
@@ -356,7 +356,7 @@ export async function getNeonUsage(orgId: string, projectIds?: string[]): Promis
 
 The code above exports two functions:
 
-- **`getProjects`** fetches the list of projects in your organization using the [Neon Projects API](https://api-docs.neon.tech/reference/listprojects). This allows you to display project names in the UI and filter usage data by project.
+- **`getProjects`** fetches the list of projects in your organization using the [Neon Projects API](/docs/reference/api/projects/list-projects). This allows you to display project names in the UI and filter usage data by project.
 - **`getNeonUsage`** fetches usage data from the Consumption API, transforms the nested response into a flat structure, and aggregates the metrics by day. When `projectIds` are provided, only consumption data for those projects is returned - the API's `project_ids` query parameter handles this server-side.
 
 ## Create a server action for filtering
@@ -706,8 +706,8 @@ The complete source code for this example is available on GitHub.
 
 ## Resources
 
-- [Neon API Reference: project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2)
-- [Neon API Reference: branch consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperbranchv2) — extends the project endpoint with per-branch breakdowns, useful for attributing usage to individual CI or development branches
+- [Neon API Reference: project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project-v2)
+- [Neon API Reference: branch consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-branch-v2) — extends the project endpoint with per-branch breakdowns, useful for attributing usage to individual CI or development branches
 - [Query consumption metrics](/docs/guides/consumption-metrics)
 - [Recharts Documentation](https://recharts.org/)
 - [Shadcn/ui Components](https://ui.shadcn.com/)

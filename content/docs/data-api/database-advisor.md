@@ -37,7 +37,7 @@ Each issue includes a severity level, a description, and a recommended fix. Clic
 
 ### API
 
-You can also retrieve advisor issues via the [Neon API](https://api-docs.neon.tech/reference/getprojectadvisorsecurityissues):
+You can also retrieve advisor issues via the [Neon API](/docs/reference/api/dataapi/get-project-advisor-security-issues):
 
 ```
 GET /projects/{project_id}/advisors

@@ -4,7 +4,7 @@ subtitle: "Learn how to build a Slack-based database assistant with Eve that pro
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: "2026-06-23T00:00:00.000Z"
-updatedOn: '2026-07-13T02:23:57.749Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 [Eve](https://eve.dev) by [Vercel](https://vercel.com) is a filesystem‑first framework for building durable backend agents. You define an agent as files (its instructions, tools, skills, channels, and schedules), and Eve takes care of the rest: stable HTTP routes, reconnectable session streams, durable state, and native human‑in‑the‑loop approvals. Agents built with Eve can run for days, pause for human review, and resume exactly where they left off.
@@ -614,7 +614,7 @@ By pairing Vercel Eve's durable workflows and HITL approvals with Neon's instant
 - [Neon Database Branching](/docs/introduction/branching)
 - [Neon MCP Server](/docs/ai/neon-mcp-server)
 - [Neon Agent Skills](/docs/ai/agent-skills)
-- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [Neon API Reference](/docs/reference/api)
 - [Vercel Connect for Slack](https://vercel.com/docs/connect)
 
 <NeedHelp />
