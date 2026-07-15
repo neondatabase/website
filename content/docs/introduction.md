@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-15T18:19:19.522Z'
+updatedOn: '2026-07-15T18:41:17.114Z'
 ---
 
 ## Getting started
@@ -35,7 +35,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
 <TourCallout
   title="Tour the Neon backend"
   description="See how the pieces fit together from the code side: how Postgres, Auth, the Data API, storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
-  href="/docs/get-started/tour-the-neon-backend"
+  href="/docs/get-started/backend-overview"
 />
 
 ## Products
@@ -51,13 +51,15 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
 
-<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview" tagTheme="gray-filled">Object Storage</a>
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Beta" tagTheme="orange-muted">Object Storage</a>
 
-<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview" tagTheme="gray-filled">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Beta" tagTheme="orange-muted">Functions</a>
 
-<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Private Preview" tagTheme="gray-filled">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Beta" tagTheme="orange-muted">AI Gateway</a>
 
 </DetailIconCards>
+
+New to Object Storage, Functions, or AI Gateway? Start with the [Neon backend beta guide](/docs/get-started/backend-beta).
 
 ## Connect your framework
 

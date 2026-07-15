@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/preview-access
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-15T18:30:46.285Z'
 ---
 
 Neon Functions are serverless compute you deploy onto a Neon branch, so your backend code runs right next to your database. Use them to host an API, an AI agent, a real-time server, or a webhook handler without standing up separate infrastructure.
@@ -83,6 +83,8 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 
 <a href="/docs/compute/functions/deploy" description="CLI and API reference for deploying and managing functions." icon="cli">Deploy and manage</a>
 
+<a href="/docs/compute/functions/logs" description="View, search, and download a function's logs in the Console." icon="search">Logs</a>
+
 <a href="/docs/compute/functions/reference/runtime-limits" description="Timeouts, slug constraints, memory, and other hard limits." icon="sparkle">Runtime limits</a>
 
 </DetailIconCards>
@@ -91,13 +93,16 @@ Functions are backend primitives, not full-stack app hosting. Host your app on V
 
 Each example is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <id>` (it copies the files, links a Neon project, and pulls env vars). You can also browse them at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
 
-| Example                  | `--template`    | Source                                                                                      | Neon services                                   | Stack                 |
-| ------------------------ | --------------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------- |
-| REST API                 | `hono`          | [with-hono](https://github.com/neondatabase/examples/tree/main/with-hono)                   | Functions, Postgres                             | Hono, Drizzle         |
-| Image-generation agent   | `ai-sdk`        | [with-ai-sdk](https://github.com/neondatabase/examples/tree/main/with-ai-sdk)               | Functions, Postgres, AI Gateway, Object Storage | AI SDK, Drizzle       |
-| Personal-assistant agent | `mastra`        | [with-mastra](https://github.com/neondatabase/examples/tree/main/with-mastra)               | Functions, Postgres, AI Gateway                 | Mastra                |
-| MCP server               | `mcp`           | [with-mcp](https://github.com/neondatabase/examples/tree/main/with-mcp)                     | Functions, Postgres                             | Hono, Drizzle         |
-| Realtime chat            | `realtime-chat` | [with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat) | Functions, Postgres, Managed Better Auth        | Next.js, Hono         |
-| Realtime counter         | `realtime-sse`  | [with-realtime-sse](https://github.com/neondatabase/examples/tree/main/with-realtime-sse)   | Functions, Postgres                             | TanStack Router, Hono |
+| Example                  | `--template`        | Source                                                                                              | Neon services                                   | Stack                 |
+| ------------------------ | ------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------- | --------------------- |
+| REST API                 | `hono`              | [with-hono](https://github.com/neondatabase/examples/tree/main/with-hono)                           | Functions, Postgres                             | Hono, Drizzle         |
+| Image-generation agent   | `ai-sdk`            | [with-ai-sdk](https://github.com/neondatabase/examples/tree/main/with-ai-sdk)                       | Functions, Postgres, AI Gateway, Object Storage | AI SDK, Drizzle       |
+| Personal-assistant agent | `mastra`            | [with-mastra](https://github.com/neondatabase/examples/tree/main/with-mastra)                       | Functions, Postgres, AI Gateway                 | Mastra                |
+| MCP server               | `mcp`               | [with-mcp](https://github.com/neondatabase/examples/tree/main/with-mcp)                             | Functions, Postgres                             | Hono, Drizzle         |
+| Realtime chat            | `realtime-chat`     | [with-realtime-chat](https://github.com/neondatabase/examples/tree/main/with-realtime-chat)         | Functions, Postgres, Managed Better Auth        | Next.js, Hono         |
+| Realtime counter         | `realtime-sse`      | [with-realtime-sse](https://github.com/neondatabase/examples/tree/main/with-realtime-sse)           | Functions, Postgres                             | TanStack Router, Hono |
+| Discord bot              | `discord-bot-http`  | [bots/discord-bot-http](https://github.com/neondatabase/examples/tree/main/bots/discord-bot-http)   | Functions, Postgres                             | Drizzle               |
+| Telegram bot             | `telegram-bot-http` | [bots/telegram-bot-http](https://github.com/neondatabase/examples/tree/main/bots/telegram-bot-http) | Functions, Postgres                             | Drizzle               |
+| WhatsApp bot             | `whatsapp-bot-http` | [bots/whatsapp-bot-http](https://github.com/neondatabase/examples/tree/main/bots/whatsapp-bot-http) | Functions, Postgres                             | Drizzle               |
 
 <NeedHelp/>

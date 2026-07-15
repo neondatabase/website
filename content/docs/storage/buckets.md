@@ -6,10 +6,10 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
 
 A bucket is a named container for objects in Neon Object Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
 

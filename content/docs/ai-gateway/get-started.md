@@ -6,10 +6,10 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:10:20.806Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills:
 

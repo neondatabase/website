@@ -11,13 +11,13 @@ summary: >-
   a relational store for querying and filtering metadata without building a
   native file store.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
 Applications often need to handle file uploads and storage, from user avatars and documents to images and other media.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in private preview.
+Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in beta.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>

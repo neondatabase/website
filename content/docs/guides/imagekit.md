@@ -9,13 +9,13 @@ summary: >-
   (Hono) and Python (Flask), a curl test workflow, and SQL patterns for
   per-user metadata retrieval.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
 
 <Callout title="Neon now offers native storage">
-Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in private preview.
+Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in beta.
 
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>

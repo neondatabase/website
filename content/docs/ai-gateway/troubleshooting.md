@@ -5,10 +5,10 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-15T11:08:18.153Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 ## Authentication errors
 
@@ -108,7 +108,7 @@ The request hit the upstream Databricks/provider rate limit.
 
 ### `429`: account quota exceeded
 
-Your account's AI Gateway quota is blocked. This can happen if you exceed the token-per-minute limits in [Rate limits](/docs/ai-gateway/models#rate-limits), or if your account exceeds its daily spend cap, which is a separate, account-level limit that can block requests even while inference is free during the preview. See [Pricing](/docs/ai-gateway/models#pricing). The response body looks like this:
+Your account's AI Gateway quota is blocked. This can happen if you exceed the token-per-minute limits in [Rate limits](/docs/ai-gateway/models#rate-limits), or if your account exceeds its daily spend cap, which is a separate, account-level limit that can block requests even while inference is free during beta. See [Pricing](/docs/ai-gateway/models#pricing). The response body looks like this:
 
 ```json
 {

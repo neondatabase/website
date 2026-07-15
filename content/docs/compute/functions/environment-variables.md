@@ -6,10 +6,10 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 ## Neon-injected variables
 
