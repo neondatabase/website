@@ -130,7 +130,7 @@
     "slugify": "^1.6.6",
     "swiper": "^12.1.2",
     "tailwind-merge": "^3.5.0",
-    "tailwindcss-safe-area": "^0.5.1",
+    "tailwindcss-safe-area": "^1.3.0",
     "tar": "^7.5.16",
     "unified": "^11.0.5",
     "unique-username-generator": "^1.4.0",
