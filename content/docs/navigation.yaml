@@ -21,6 +21,8 @@
           slug: get-started/signing-up
         - title: Build a full backend
           slug: get-started/full-backend-quickstart
+        - title: Backend overview
+          slug: get-started/backend-overview
     - section: Frontend & Frameworks
       items:
         - title: Frameworks
