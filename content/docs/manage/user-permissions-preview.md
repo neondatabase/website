@@ -25,8 +25,6 @@ For an overview of organizations, see the [Organizations](/docs/manage/organizat
 
 A short walkthrough video for this page is coming soon.
 
-{/* Dev: replace the line above with <YoutubeIframe embedId="VIDEO_ID" /> once the walkthrough is recorded. */}
-
 ## How permissions work
 
 Your organization role and any per-project permissions combine, and they're **additive**: your effective access on a project is the higher of the two. A per-project permission can only raise your access, never lower it. (Restricting access on a single project isn't supported yet. See [Notes and limitations](#notes-and-limitations).)
