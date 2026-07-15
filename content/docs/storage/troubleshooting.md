@@ -6,7 +6,7 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T14:53:00.836Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -114,7 +114,7 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 ### `503 Service Unavailable` (SlowDown)
 
-The request exceeded the per-IP or per-tenant rate limit. The S3 error code is `SlowDown`. This is a rate limit signal, not a server error. The storage service is healthy.
+The request exceeded the per-IP or per-tenant rate limit. The S3 error code is `SlowDown`. This is a rate limit signal, not a server error. The storage service is healthy. See [Rate limits](/docs/storage/overview#rate-limits) for the current limit values.
 
 **Fix:** Implement exponential backoff and retry. Don't treat `SlowDown` as a fatal error. The response may include a `Retry-After` header indicating how long to wait. AWS SDKs handle this automatically when retry logic is enabled.
 

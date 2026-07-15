@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-15T14:53:00.836Z'
 ---
 
 <RequestForm type="backend-platform" title="Get early access to Neon Object Storage" description="Neon Object Storage is in private preview. Drop your email and we'll reach out with access." />
@@ -20,6 +20,19 @@ Neon Object Storage is S3-compatible object storage built into the Neon backend 
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, the [Files SDK](https://files-sdk.dev), and any other S3-compatible tool works out of the box.
 - **Two access modes.** `private` buckets require authentication for all operations. `public_read` buckets allow anonymous reads with authenticated writes.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
+
+## Rate limits
+
+Neon Object Storage rate-limits S3 API requests at two tiers: **pre-auth**, before Neon checks your credential (limited by source IP), and **post-auth**, after your credential is verified (limited by API key or project):
+
+| Tier                               | Limit                                       |
+| ---------------------------------- | ------------------------------------------- |
+| Per source IP (pre-auth)           | 500 requests/second, 20,000 requests/minute |
+| Per API key or project (post-auth) | 100 requests/second, 3,000 requests/minute  |
+
+These limits are enforced independently by each running instance of the storage service, not globally. Neon runs multiple instances behind a load balancer for availability and capacity; each instance tracks its own request counts. Since your requests are typically spread across more than one instance, your practical ceiling is somewhat higher than the per-instance numbers above.
+
+If you exceed a limit, you'll get an `HTTP 503` response with the S3 error code `SlowDown` and a `Retry-After` header. `OPTIONS`/CORS preflight requests are never rate-limited. See [Troubleshooting](/docs/storage/troubleshooting#503-service-unavailable-slowdown) for how to handle it.
 
 ## Quickstart
 
