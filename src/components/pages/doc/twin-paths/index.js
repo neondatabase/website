@@ -1,4 +1,4 @@
-import TwinPaths, { QuickPath, GuidedPath } from './twin-paths';
+import TwinPaths, { QuickPath, GuidedPath, TourCallout } from './twin-paths';
 
-export { QuickPath, GuidedPath };
+export { QuickPath, GuidedPath, TourCallout };
 export default TwinPaths;

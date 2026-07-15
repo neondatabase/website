@@ -17,12 +17,12 @@
       items:
         - title: One-command setup
           slug: get-started/with-an-agent
+        - title: Full backend quickstart
+          slug: get-started/full-backend-quickstart
+        - title: Tour the Neon backend
+          slug: get-started/backend-overview
         - title: Tour the Neon Console
           slug: get-started/signing-up
-        - title: Build a full backend
-          slug: get-started/full-backend-quickstart
-        - title: Backend overview
-          slug: get-started/backend-overview
     - section: Frontend & Frameworks
       items:
         - title: Frameworks

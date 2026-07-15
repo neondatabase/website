@@ -1833,6 +1833,33 @@ const componentHandlers = {
       ? { type: 'list', ordered: false, spread: false, children: items }
       : null;
   },
+
+  /**
+   * TourCallout -> link banner pointing to the full guided tour
+   */
+  TourCallout(node) {
+    const title = getAttr(node, 'title') || '';
+    const description = getAttr(node, 'description') || '';
+    const href = getAttr(node, 'href') || '';
+
+    const paraChildren = [];
+
+    if (href) {
+      paraChildren.push({
+        type: 'link',
+        url: toAbsoluteUrl(href),
+        children: [{ type: 'text', value: title }],
+      });
+    } else {
+      paraChildren.push({ type: 'strong', children: [{ type: 'text', value: title }] });
+    }
+
+    if (description) {
+      paraChildren.push({ type: 'text', value: `: ${description}` });
+    }
+
+    return { type: 'paragraph', children: paraChildren };
+  },
 };
 
 // Register data-driven handlers (definitions are at the top of the file)

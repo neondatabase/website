@@ -36,7 +36,7 @@ import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import Tag from 'components/pages/doc/tag';
 import TechCards from 'components/pages/doc/tech-cards';
-import TwinPaths, { QuickPath, GuidedPath } from 'components/pages/doc/twin-paths';
+import TwinPaths, { QuickPath, GuidedPath, TourCallout } from 'components/pages/doc/twin-paths';
 import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
@@ -194,6 +194,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   TwinPaths,
   QuickPath,
   GuidedPath,
+  TourCallout,
   CommunityBanner,
   QuickLinks,
   QuoteBlock,
