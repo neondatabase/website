@@ -6,7 +6,7 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T20:03:25.514Z'
 ---
 
 Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from Anthropic, OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI or Anthropic SDK works without code changes. Just point it at your branch endpoint.
@@ -22,6 +22,12 @@ Participation in this Beta is subject to our Terms of Service. Access is not ava
 - **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
 - **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
 - **Shorter, OpenRouter-style paths.** Chat completions and Gemini are reachable at a shorter top-level `/v1/...` path; OpenAI Responses and Anthropic Messages have their own shorter aliases (`/openai/v1/...`, `/anthropic/v1/...`). `GET /v1/models` lists the catalog. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths).
+
+## Foundation model access
+
+Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity.
+
+<RequestForm type="foundation-models" />
 
 ## Pricing
 
