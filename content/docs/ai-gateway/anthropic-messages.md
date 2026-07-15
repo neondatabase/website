@@ -6,7 +6,7 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T23:09:37.043Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -48,7 +48,7 @@ Sending a non-Anthropic model ID returns `400 model "<model-id>" is not availabl
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  authToken: process.env.NEON_AI_GATEWAY_TOKEN,
   baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/anthropic`,
 });
 
@@ -66,7 +66,7 @@ import anthropic
 import os
 
 client = anthropic.Anthropic(
-    api_key=os.environ['NEON_AI_GATEWAY_TOKEN'],
+    auth_token=os.environ['NEON_AI_GATEWAY_TOKEN'],
     base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/anthropic",
 )
 
