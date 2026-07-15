@@ -19,6 +19,8 @@
           slug: get-started/with-an-agent
         - title: Tour the Neon Console
           slug: get-started/signing-up
+        - title: Backend beta guide
+          slug: get-started/backend-beta
         - title: Build a full backend
           slug: get-started/full-backend-quickstart
         - title: Backend overview
