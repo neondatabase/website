@@ -1,2 +1,6 @@
 /content/ @danieltprice
 /src/ @saimonkat @americano98
+
+# CI / GitHub Actions changes require maintainer review (supply-chain surface).
+# Adjust the owners here if a dedicated security/infra team should gate these.
+/.github/ @saimonkat @americano98
