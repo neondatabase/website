@@ -1,2 +1,2 @@
-/content/ @danieltprice
-/src/ @saimonkat @americano98
+# Code owners for the repository (includes CI / .github supply-chain surface).
+* @philip @andrelandgraf @danieltprice @ruf-io

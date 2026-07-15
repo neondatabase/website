@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-07-14T20:38:27.829Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -163,19 +163,19 @@ Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closu
 
 `auth` and `dataApi` declare which Neon services exist on every branch. After `neon deploy`, running `neon env pull` writes their URLs to your local `.env` file automatically.
 
-| Field     | Values                               | Default | What it enables                                                        |
-| --------- | ------------------------------------ | ------- | ---------------------------------------------------------------------- |
-| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Managed BetterAuth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
-| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                             |
+| Field     | Values                               | Default | What it enables                                                         |
+| --------- | ------------------------------------ | ------- | ----------------------------------------------------------------------- |
+| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Managed Better Auth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
+| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                              |
 
 ### `dataApi` config
 
-`dataApi: true` uses Managed BetterAuth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
+`dataApi: true` uses Managed Better Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
 
 ```text
-Type 'true' is not assignable to type '"`dataApi` with Managed BetterAuth (the default
-`authProvider: 'neon'`) requires Managed BetterAuth, so add `auth: true`. To enable the
-Data API WITHOUT Managed BetterAuth, verify a third-party IdP instead: `dataApi: {
+Type 'true' is not assignable to type '"`dataApi` with Managed Better Auth (the default
+`authProvider: 'neon'`) requires Managed Better Auth, so add `auth: true`. To enable the
+Data API WITHOUT Managed Better Auth, verify a third-party IdP instead: `dataApi: {
 authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`"'
 ```
 

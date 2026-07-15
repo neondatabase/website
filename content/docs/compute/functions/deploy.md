@@ -69,6 +69,10 @@ neon functions deploy hello --src . --env RESEND_API_KEY=re_...
 neon functions deploy hello --src functions/hello.ts --branch feat/my-feature
 ```
 
+The CLI doesn't support a config-only deploy. Every `neon functions deploy` call bundles and uploads source, whether you pass `--src` or let it default to the current directory, so there's no way to change just an environment variable without also pointing at valid source, as in the example above.
+
+For a deploy that skips bundling and updates only the environment or runtime, use [the API](#deploy-with-the-api), which accepts config-only updates.
+
 ## Deploy with the API
 
 Bundle with esbuild, zip the output, then POST to the deploy endpoint.
@@ -117,7 +121,31 @@ curl -X POST \
 | `runtime`     | string | No                | `nodejs24` is the only valid value                                                                    |
 | `environment` | string | No                | JSON-encoded string-to-string map                                                                     |
 
-The API returns immediately. Poll the get endpoint (see [Check status](#check-status)) until the deployment completes.
+The deploy endpoint accepts `multipart/form-data`. Use a `zip` part for code deploys and a single `environment` part containing the JSON-encoded map; don't send bracketed fields such as `environment[KEY]=value`. The first deployment for a function must include `zip`; later deployments can omit it for config-only changes.
+
+The API returns immediately for code deploys. Poll the get endpoint (see [Check status](#check-status)) until the deployment completes. Config-only deployments can complete synchronously because they reuse the latest bundle. Builds have an absolute 2-minute budget from the time the deploy is accepted; if the build can't complete within that window, the deployment fails.
+
+### Deploy with `@neon/sdk`
+
+The beta [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk) client includes a `neon.functions` namespace for branch-scoped function management:
+
+```ts
+import { createNeonClient } from '@neon/sdk';
+import { readFile } from 'node:fs/promises';
+
+const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY! });
+const projectId = process.env.NEON_PROJECT_ID!;
+const branchId = process.env.NEON_BRANCH_ID!;
+const zipBytes = await readFile('function.zip');
+
+const { data: deployment } = await neon.functions.deploy(projectId, branchId, 'hello', {
+  zip: new File([zipBytes], 'function.zip', { type: 'application/zip' }),
+  runtime: 'nodejs24',
+  environment: JSON.stringify({ MY_SECRET: 'value' }),
+});
+```
+
+`neon.functions.deploy` uses the same multipart API fields as the raw endpoint. `list`, `get`, `update`, and `delete` are also available under `neon.functions`.
 
 ## Slugs
 

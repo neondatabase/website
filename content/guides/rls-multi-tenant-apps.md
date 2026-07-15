@@ -4,7 +4,7 @@ subtitle: How to use row-level security for multi-tenant apps, understand its ch
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-05-02T00:00:00.000Z'
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 If you are building a multi-tenant app on Postgres, [row level security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) sounds like a clean promise, i.e. define access rules once in the database, and every query becomes safe by default. It is a compelling idea, especially when you have many tables, many endpoints, and many ways the same data can be accessed. But RLS is not "turn it on and forget it". It changes how your application authenticates, how your queries are shaped, how you debug production issues, and how confident you can be that a new feature did not pass through your data boundary.
@@ -171,7 +171,7 @@ Neon cannot write correct policies for you. What it can do is give you a **produ
 
 [Neon Branching](/docs/introduction/branching) lets you create an isolated copy of your current Postgres database quickly, including all schema, data, and system tables, without affecting production. Each [branch](/docs/manage/branches) is a fully functional database endpoint that you can connect to independently, making it practical to test schema changes, migrations, or RLS policy updates in a safe, production-like environment.
 
-[Managed BetterAuth](/docs/auth/overview) is a managed auth layer built on Better Auth. Users, sessions, and related config live in your Neon Postgres (including the `neon_auth` schema). When you create a database branch, that identity data is copied along with your application tables, so policies that join to users, org membership, or tenant rows behave like production instead of hand-written mocks.
+[Managed Better Auth](/docs/auth/overview) is a managed auth layer built on Better Auth. Users, sessions, and related config live in your Neon Postgres (including the `neon_auth` schema). When you create a database branch, that identity data is copied along with your application tables, so policies that join to users, org membership, or tenant rows behave like production instead of hand-written mocks.
 
 Here’s how you can use branching and auth to safely test RLS before pushing changes to production:
 
@@ -187,7 +187,7 @@ From the [Neon Console](https://neon.com), open the new branch and copy its **co
 
 ### Step 2: Point your app preview environment at the branch
 
-Each Neon branch has its own Postgres endpoint. If you use Managed BetterAuth, each branch also gets [its own Auth Base URL](/docs/auth/branching-authentication). Preview and CI environments must use that branch’s URL (not the production branch’s URL), because sessions and tokens are scoped to the [Auth endpoint](/docs/auth/guides/manage-auth-api) for that branch.
+Each Neon branch has its own Postgres endpoint. If you use Managed Better Auth, each branch also gets [its own Auth Base URL](/docs/auth/branching-authentication). Preview and CI environments must use that branch’s URL (not the production branch’s URL), because sessions and tokens are scoped to the [Auth endpoint](/docs/auth/guides/manage-auth-api) for that branch.
 
 Here's an example of environment variables for a preview deployment (or local run) against the branch:
 
@@ -197,7 +197,7 @@ NEON_AUTH_BASE_URL="https://ep-preview-abc123.neonauth.us-east-2.aws.neon.tech/n
 NEON_AUTH_COOKIE_SECRET="your-secret-at-least-32-characters-long"
 ```
 
-The server-side setup with the [Managed BetterAuth SDK](/docs/reference/javascript-sdk) would follow the same pattern as a production app and only the URLs would change:
+The server-side setup with the [Managed Better Auth SDK](/docs/reference/javascript-sdk) would follow the same pattern as a production app and only the URLs would change:
 
 ```ts title="lib/auth/server.ts"
 import { createNeonAuth } from '@neondatabase/auth/next/server';
@@ -225,7 +225,7 @@ SELECT * FROM projects;
 RESET ROLE;
 ```
 
-In your application code, **the important part is unchanged** i.e. resolve the user with Managed BetterAuth, set tenant or user context for RLS (for example via `set_config` or your pool’s `SET` hook), and run the queries your routes and jobs actually use. Because the branch contains cloned users and membership rows, joins inside policies and "wrong role" mistakes **show up here before production**.
+In your application code, **the important part is unchanged** i.e. resolve the user with Managed Better Auth, set tenant or user context for RLS (for example via `set_config` or your pool’s `SET` hook), and run the queries your routes and jobs actually use. Because the branch contains cloned users and membership rows, joins inside policies and "wrong role" mistakes **show up here before production**.
 
 ### Step 4: Run end-to-end tests and delete the branch when done
 

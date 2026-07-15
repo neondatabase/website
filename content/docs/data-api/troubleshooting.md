@@ -9,7 +9,7 @@ summary: >-
   rows, stale schema cache hiding new tables, and OpenAPI spec "Entry not
   found" errors.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <InfoBlock>
@@ -87,7 +87,7 @@ The `sub` claim in this example: `41a5f680-89d2-474d-ae59-e27bfbbbd293` represen
 
 ## How do I test the Data API without building an app?
 
-If you're using Managed BetterAuth, you can use the Auth API reference UI to create test users and obtain JWT tokens for testing with tools like Postman or cURL.
+If you're using Managed Better Auth, you can use the Auth API reference UI to create test users and obtain JWT tokens for testing with tools like Postman or cURL.
 
 Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your **Auth URL** on the **Auth** page, **Configuration** tab in the Neon Console. From there, you can:
 
@@ -96,7 +96,7 @@ Navigate to your Auth URL with `/reference` appended (for example, `https://ep-e
 3. Call `GET /get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
 4. Use that JWT in your Data API requests.
 
-For step-by-step instructions, see [Testing with Managed BetterAuth](/docs/data-api/get-started#testing-with-neon-auth).
+For step-by-step instructions, see [Testing with Managed Better Auth](/docs/data-api/get-started#testing-with-neon-auth).
 
 ## Permission denied for table
 
@@ -213,7 +213,7 @@ curl -X GET 'https://your-data-api-endpoint/rest/v1/openapi.json' \
   -H 'Authorization: Bearer YOUR_JWT_TOKEN'
 ```
 
-To get a JWT token for testing, see [Testing with Managed BetterAuth](/docs/data-api/get-started#testing-with-neon-auth).
+To get a JWT token for testing, see [Testing with Managed Better Auth](/docs/data-api/get-started#testing-with-neon-auth).
 
 ## New table not found or returns empty schema
 
@@ -248,6 +248,6 @@ JWT tokens have a limited lifespan (typically around 15 minutes). Once expired, 
 
 ### Fix
 
-Sign in again to get a fresh token. If you're using Managed BetterAuth, call `POST /sign-in/email` in the Auth API reference UI, then call `GET /get-session` and copy the new JWT from the `Set-Auth-Jwt` response header.
+Sign in again to get a fresh token. If you're using Managed Better Auth, call `POST /sign-in/email` in the Auth API reference UI, then call `GET /get-session` and copy the new JWT from the `Set-Auth-Jwt` response header.
 
 For programmatic token refresh, see your authentication provider's documentation on token renewal.

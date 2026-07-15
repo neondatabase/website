@@ -1061,6 +1061,7 @@
         - title: Spending limit
           slug: introduction/spending-limit
           tag: new
+          tagTheme: green
         - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Usage and cost calculations
@@ -1207,6 +1208,8 @@
                   slug: cli/completion
             - title: Projects and branches
               items:
+                - title: diff
+                  slug: cli/diff
                 - title: projects
                   slug: cli/projects
                 - title: branches
@@ -1550,6 +1553,7 @@
           slug: introduction/roadmap
           icon: roadmap
           tag: updated
+          tagTheme: gray
         - title: RSS feeds
           slug: reference/feeds
           icon: feeds
