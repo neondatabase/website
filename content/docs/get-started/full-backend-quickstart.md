@@ -1,6 +1,6 @@
 ---
 title: Build a full backend with Next.js and Neon
-subtitle: Connect Postgres with Drizzle, add managed authentication, and ship a typed server-side backend
+subtitle: Connect to Postgres, add managed authentication, and ship a typed server-side backend
 summary: >-
   End-to-end Next.js App Router tutorial that wires Neon Postgres, Drizzle ORM,
   and Managed Better Auth into a working server-side backend. Choose this page when
@@ -10,7 +10,7 @@ summary: >-
   middleware, and deployment to Vercel, Netlify, or self-hosted Node.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-15T19:54:51.677Z'
+updatedOn: '2026-07-15T21:36:22.627Z'
 ---
 
 ## Before you start
@@ -180,10 +180,10 @@ NEON_AUTH_COOKIE_SECRET=replace-with-32-char-random-secret
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Define the Drizzle schema">
+<TwoColumnLayout.Step title="Define your schema">
 <TwoColumnLayout.Block>
 
-Create a TypeScript schema for a `posts` table. Drizzle uses this for both the migration and your type-safe queries.
+Create a TypeScript schema for a `posts` table. This example uses Drizzle for schema management, but you can use any ORM or migration tool. Drizzle uses this schema for both the migration and your type-safe queries.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -227,7 +227,7 @@ export default defineConfig({
 <TwoColumnLayout.Step title="Push the schema and seed sample data">
 <TwoColumnLayout.Block>
 
-`drizzle-kit push` creates the table directly from your schema. In production, you'd typically use `drizzle-kit generate` and `drizzle-kit migrate` for tracked migrations, but push is faster for a tutorial.
+This example uses Drizzle's CLI to apply the schema, but you can use your ORM or migration tool's equivalent command. `drizzle-kit push` creates the table directly from your schema. In production, you'd typically use `drizzle-kit generate` and `drizzle-kit migrate` for tracked migrations, but push is faster for a tutorial.
 
 Then seed three sample posts in the [Neon Console SQL Editor](https://console.neon.tech): two published and one draft, so step 9's `where(eq(posts.isPublished, true))` filter has something visible to do.
 
@@ -784,10 +784,10 @@ You now have a Next.js app where:
 
 ## Next steps
 
-- **Write data with Server Actions or API routes** ([Drizzle insert reference](https://orm.drizzle.team/docs/insert)): wire up post creation through a server action that uses the auth session for `user_id` using `auth.getSession()`.
+- **Write data with Server Actions or API routes**: wire up post creation through a server action that uses the auth session for `user_id` using `auth.getSession()`. See the [Drizzle insert reference](https://orm.drizzle.team/docs/insert) if you're using Drizzle, or your ORM's equivalent.
 - **Deploy long-running tasks with Neon Functions:** Next.js serverless routes time out quickly. If you need to run [streaming AI agents](/docs/compute/functions/agents) or hold open [WebSockets and SSE](/docs/compute/functions/websockets), you can deploy a [Neon Function](/docs/compute/functions/overview) directly onto your database branch to run compute right next to your data.
 - **Branch for previews**: [branching authentication](/docs/auth/branching-authentication) gives every preview environment its own user state
 - **Optimize for the edge**: on Vercel or Cloudflare, configure [connection pooling](/docs/connect/connection-pooling) for production
-- **Generated migrations**: switch from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations) for tracked schema changes
+- **Generated migrations**: for tracked schema changes, switch from a direct push to generated migrations. If you're using Drizzle, that means moving from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations); other ORMs and migration tools offer an equivalent.
 
 <NeedHelp/>
