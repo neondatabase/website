@@ -10,12 +10,16 @@ summary: >-
   middleware, and deployment to Vercel, Netlify, or self-hosted Node.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-15T18:59:31.091Z'
+updatedOn: '2026-07-15T19:54:51.677Z'
 ---
 
 ## Before you start
 
 You'll need [Node.js 20+](https://nodejs.org/) installed.
+
+<Admonition type="important" title="Create your project in AWS US East (Ohio)">
+The optional AI Gateway and Object Storage steps at the end are in beta and available only on **new projects in AWS US East (Ohio) (`aws-us-east-2`)**. If you plan to follow those steps, create your project in that region now, since they require a fresh project in the right region.
+</Admonition>
 
 <TwoColumnLayout>
 
@@ -29,19 +33,13 @@ Pick a path to create the project, then copy the **connection string**. You'll a
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
-<Tabs labels={["Console", "Neon CLI", "API"]}>
-
-<TabItem>
-
-In the Neon Console, click **New Project**, name it `my-backend`, and create it. From the project dashboard, click **Connect** and copy the connection string.
-
-</TabItem>
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
 <TabItem>
 
 ```bash filename="Terminal"
 npx neon@latest auth
-npx neon@latest projects create --name my-backend
+npx neon@latest projects create --name my-backend --region-id aws-us-east-2
 ```
 
 The connection string appears in the output.
@@ -58,10 +56,16 @@ export NEON_API_KEY=neon_...
 curl -X POST https://console.neon.tech/api/v2/projects \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"project": {"name": "my-backend"}}'
+  -d '{"project": {"name": "my-backend", "region_id": "aws-us-east-2"}}'
 ```
 
 The connection string is in the response under `connection_uris[0].connection_uri`.
+
+</TabItem>
+
+<TabItem>
+
+In the Neon Console, click **New Project**, name it `my-backend`, select the **AWS US East (Ohio)** region, and create it. From the project dashboard, click **Connect** and copy the connection string.
 
 </TabItem>
 
@@ -80,13 +84,21 @@ Enable Auth on your project's default branch and copy the **Auth URL**. You'll a
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
 <TabItem>
 
-In the project sidebar, go to **Auth** and click **Enable Auth**. On the **Configuration** tab, copy your **Auth URL**.
+Enable Managed Better Auth on the linked branch (requires `neon` 2.23.0 or later):
 
-![Managed Better Auth Base URL](/docs/auth/neon-auth-base-url.png)
+```bash filename="Terminal"
+neon neon-auth enable
+```
+
+Then show the connection details, including your Auth URL, with:
+
+```bash filename="Terminal"
+neon neon-auth status
+```
 
 </TabItem>
 
@@ -110,6 +122,14 @@ curl -X POST \
 ```
 
 The Auth URL is in the response under `jwks_url` (strip the `/.well-known/jwks.json` suffix).
+
+</TabItem>
+
+<TabItem>
+
+In the project sidebar, go to **Auth** and click **Enable Auth**. On the **Configuration** tab, copy your **Auth URL**.
+
+![Managed Better Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
 </TabItem>
 
@@ -153,7 +173,7 @@ npm install -D drizzle-kit
 
 ```bash filename=".env.local"
 DATABASE_URL=postgresql://...
-NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.c-7.us-east-1.aws.neon.tech/neondb/auth
+NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.c-3.us-east-2.aws.neon.tech/neondb/auth
 NEON_AUTH_COOKIE_SECRET=replace-with-32-char-random-secret
 ```
 
@@ -497,35 +517,22 @@ npm run dev
 <TwoColumnLayout.Step title="Provision AI Gateway and Object Storage">
 <TwoColumnLayout.Block>
 
-Enable AI Gateway and create an `images` storage bucket. The required credentials and endpoint URLs will be added to your `.env.local` for the next steps.
+Enable the AI Gateway and create an `images` storage bucket. The recommended path declares both in `neon.ts` and lets `neon deploy` provision them and inject credentials into your env file automatically.
+
+<Admonition type="important" title="Beta and region requirements">
+The AI Gateway and Object Storage are in beta and available only on **new projects in AWS US East (Ohio) (`aws-us-east-2`)**. The AI Gateway also requires a paid plan. Create your project in that region to follow these steps.
+</Admonition>
+
+The AI Gateway injects `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL`; Object Storage injects `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION`.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
-<Tabs labels={["Console", "Neon CLI", "API"]}>
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
 <TabItem>
 
-**AI Gateway**
-
-In the Neon Console, select your project branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, check **ai_gateway:invoke**, and create it. Copy the snippet, which includes `OPENAI_API_KEY` and `OPENAI_BASE_URL`.
-
-**Storage bucket**
-
-Go to the **Storage** tab, click **Create your first bucket**.
-Name it `images`, set visibility to **Public** and create it.
-
-**Storage credential**
-
-Back in **Credentials**, create another credential checking **storage:read** and **storage:write**. Copy the snippet, which includes `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION`.
-
-Paste all the snippets into your `.env.local` file.
-
-</TabItem>
-
-<TabItem>
-
-Create `neon.ts` at the root of your project to provision AI Gateway and a storage bucket. Then install the config package, link your project, and run `neon deploy` to apply the changes and inject credentials into `.env.local` automatically.
+Create `neon.ts` at the root of your project to declare the AI Gateway and a storage bucket. Then install the config package, link your project, and run `neon deploy` to apply the changes and inject credentials into your env file automatically.
 
 ```typescript filename="neon.ts"
 import { defineConfig } from '@neon/config/v1';
@@ -535,9 +542,9 @@ export default defineConfig({
   preview: {
     aiGateway: true,
     buckets: {
-      images: { access: 'public_read' }
-    }
-  }
+      images: { access: 'public_read' },
+    },
+  },
 });
 ```
 
@@ -546,6 +553,8 @@ npm install -D @neon/config
 neon link
 neon deploy
 ```
+
+`neon deploy` merges the new credentials into your existing `.env.local`, so the `NEON_AUTH_COOKIE_SECRET` you generated earlier is preserved.
 
 </TabItem>
 
@@ -562,18 +571,18 @@ curl -X POST "https://console.neon.tech/api/v2/projects/{project_id}/branches/{b
   -d '{"scopes": ["ai_gateway:invoke"], "principal_type": "user"}'
 ```
 
-Save the `api_token` as `OPENAI_API_KEY`.
+Save the `api_token` as `NEON_AI_GATEWAY_TOKEN`.
 
 **Gateway host**
 
 ```bash
 curl --request GET \
-     --url https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/ai_gateway \
+     --url https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/ai_gateway \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-Save the `OPENAI_BASE_URL` as `https://{host}/ai-gateway/mlflow/v1` (i.e., append `/ai-gateway/mlflow/v1` to the returned `host`).
+Save the returned `host` (with the `https://` prefix, no path) as `NEON_AI_GATEWAY_BASE_URL`. You append the dialect path in code.
 
 **Storage bucket**
 
@@ -606,6 +615,25 @@ Save `s3_endpoint` as `AWS_ENDPOINT_URL_S3` and `region` as `AWS_REGION`. Add al
 
 </TabItem>
 
+<TabItem>
+
+**AI Gateway**
+
+In the Neon Console, select your project branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, check **ai_gateway:invoke**, and create it. Copy the token (shown only once) and save it as `NEON_AI_GATEWAY_TOKEN`. On the **AI Gateway** page, copy your branch host and save it as `NEON_AI_GATEWAY_BASE_URL`.
+
+**Storage bucket**
+
+Go to the **Storage** tab, click **Create your first bucket**.
+Name it `images`, set visibility to **Public** and create it.
+
+**Storage credential**
+
+Back in **Credentials**, create another credential checking **storage:read** and **storage:write**. Copy the snippet, which includes `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION`.
+
+Paste all the values into your `.env.local` file.
+
+</TabItem>
+
 </Tabs>
 
 </TwoColumnLayout.Block>
@@ -614,35 +642,32 @@ Save `s3_endpoint` as `AWS_ENDPOINT_URL_S3` and `region` as `AWS_REGION`. Add al
 <TwoColumnLayout.Step title="Generate posts with Neon AI Gateway">
 <TwoColumnLayout.Block>
 
-Create an API route that accepts a prompt, generates a post with Claude via the AI Gateway, and saves it to Postgres. The AI Gateway provides an OpenAI-compatible endpoint, so use the OpenAI SDK.
+Create an API route that accepts a prompt, generates a post with Claude via the AI Gateway, and saves it to Postgres. For TypeScript apps, use [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) with the Vercel AI SDK. It reads `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` from your environment and routes each model to the right upstream, so `neon(model)` needs no base URL or key.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-npm install openai
+npm install ai @neon/ai-sdk-provider
 ```
 
 ```typescript filename="app/api/generate-post/route.ts"
 import { db } from '@/lib/db/client';
 import { posts } from '@/lib/db/schema';
-import OpenAI from 'openai';
-
-const openai = new OpenAI();
+import { neon } from '@neon/ai-sdk-provider';
+import { generateText } from 'ai';
 
 export async function POST(req: Request) {
   const { topic, userId } = await req.json();
 
-  const response = await openai.chat.completions.create({
-    model: 'claude-sonnet-4-6',
-    messages: [{ role: 'user', content: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}` }],
+  const { text } = await generateText({
+    model: neon('claude-sonnet-4-6'),
+    prompt: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}`,
   });
-
-  const content = response.choices[0].message.content;
 
   const [newPost] = await db.insert(posts).values({
     userId,
-    content: content || 'Failed to generate content',
+    content: text || 'Failed to generate content',
     isPublished: true,
   }).returning();
 
@@ -666,25 +691,22 @@ Refresh your `/posts` page to see the AI-generated post appear.
 <TwoColumnLayout.Step title="Upload images with Neon Storage">
 <TwoColumnLayout.Block>
 
-Add a client-side upload page. It submits the file to a Server Action that uploads it directly to the S3-compatible bucket.
-
-<Admonition type="note">
-Neon Storage uses an S3-compatible API. The AWS SDK works, but you must set `forcePathStyle: true` because virtual-hosted style URLs are not supported.
-</Admonition>
+Add a client-side upload page. It submits the file to a Server Action that uploads it to your bucket with the [Files SDK](https://files-sdk.dev). Its `neon` adapter reads the injected `AWS_*` variables and configures the S3-compatible endpoint for you, so there's no client setup.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-npm install @aws-sdk/client-s3
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post
 ```
 
 ```typescript filename="app/upload/actions.ts"
 'use server';
 
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { Files } from 'files-sdk';
+import { neon } from 'files-sdk/neon';
 
-const s3 = new S3Client({ forcePathStyle: true });
+const files = new Files({ adapter: neon({ bucket: 'images' }) });
 
 export async function uploadImage(
   _prev: { error?: string; publicUrl?: string } | null,
@@ -693,18 +715,12 @@ export async function uploadImage(
   const file = formData.get('file') as File | null;
   if (!file) return { error: 'No file selected' };
 
-  const bytes = await file.arrayBuffer();
-  const buffer = new Uint8Array(bytes);
-
+  const bytes = new Uint8Array(await file.arrayBuffer());
   const key = `${Date.now()}-${file.name}`;
 
-  await s3.send(new PutObjectCommand({
-    Bucket: 'images',
-    Key: key,
-    Body: buffer,
-    ContentType: file.type,
-  }));
+  await files.upload(key, bytes, { contentType: file.type });
 
+  // The images bucket is public_read, so the object is served directly.
   const publicUrl = `${process.env.AWS_ENDPOINT_URL_S3}/images/${key}`;
 
   return { publicUrl };
