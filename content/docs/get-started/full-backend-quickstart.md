@@ -10,7 +10,7 @@ summary: >-
   middleware, and deployment to Vercel, Netlify, or self-hosted Node.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-15T18:59:31.091Z'
 ---
 
 ## Before you start
@@ -209,7 +209,7 @@ export default defineConfig({
 
 `drizzle-kit push` creates the table directly from your schema. In production, you'd typically use `drizzle-kit generate` and `drizzle-kit migrate` for tracked migrations, but push is faster for a tutorial.
 
-Then seed three sample posts in the [Neon Console SQL Editor](https://console.neon.tech) — two published and one draft, so step 9's `where(eq(posts.isPublished, true))` filter has something visible to do.
+Then seed three sample posts in the [Neon Console SQL Editor](https://console.neon.tech): two published and one draft, so step 9's `where(eq(posts.isPublished, true))` filter has something visible to do.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -224,7 +224,7 @@ Open your project in the Neon Console, go to **SQL Editor**, and run:
 INSERT INTO posts (user_id, content, is_published) VALUES
   ('00000000-0000-0000-0000-000000000000', 'Hello from Neon', true),
   ('00000000-0000-0000-0000-000000000000', 'Welcome to your new backend', true),
-  ('00000000-0000-0000-0000-000000000000', 'This draft is hidden — flip is_published to true in the SQL editor to see it appear', false);
+  ('00000000-0000-0000-0000-000000000000', 'This draft is hidden. Flip is_published to true in the SQL editor to see it appear', false);
 ```
 
 </TwoColumnLayout.Block>
@@ -482,7 +482,7 @@ Start the dev server, then open [http://localhost:3000/auth/sign-up](http://loca
 
 If you visit `/posts` without signing in, the middleware redirects you to `/auth/sign-in`.
 
-You now have a working backend with Neon Postgres, Drizzle ORM, and Neon Auth. The next optional steps add [Neon AI Gateway](/docs/ai-gateway/overview) and [Neon Storage](/docs/storage/overview) to the same backend.
+You now have a working backend with Neon Postgres, Drizzle ORM, and Managed Better Auth. The next optional steps add [Neon AI Gateway](/docs/ai-gateway/overview) and [Neon Storage](/docs/storage/overview) to the same backend.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -508,7 +508,7 @@ Enable AI Gateway and create an `images` storage bucket. The required credential
 
 **AI Gateway**
 
-In the Neon Console, select your project branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, check **ai_gateway:invoke**, and create it. Copy the snippet - it includes `OPENAI_API_KEY` and `OPENAI_BASE_URL`.
+In the Neon Console, select your project branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, check **ai_gateway:invoke**, and create it. Copy the snippet, which includes `OPENAI_API_KEY` and `OPENAI_BASE_URL`.
 
 **Storage bucket**
 
@@ -517,7 +517,7 @@ Name it `images`, set visibility to **Public** and create it.
 
 **Storage credential**
 
-Back in **Credentials**, create another credential checking **storage:read** and **storage:write**. Copy the snippet - it includes `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION`.
+Back in **Credentials**, create another credential checking **storage:read** and **storage:write**. Copy the snippet, which includes `AWS_ENDPOINT_URL_S3`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and `AWS_REGION`.
 
 Paste all the snippets into your `.env.local` file.
 
@@ -525,10 +525,10 @@ Paste all the snippets into your `.env.local` file.
 
 <TabItem>
 
-Create `neon.ts` at the root of your project to provision AI Gateway and a storage bucket. Then install the config package, link your project, and run `neonctl deploy` to apply the changes and inject credentials into `.env.local` automatically.
+Create `neon.ts` at the root of your project to provision AI Gateway and a storage bucket. Then install the config package, link your project, and run `neon deploy` to apply the changes and inject credentials into `.env.local` automatically.
 
 ```typescript filename="neon.ts"
-import { defineConfig } from '@neondatabase/config/v1';
+import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   auth: true,
@@ -542,16 +542,16 @@ export default defineConfig({
 ```
 
 ```bash filename="Terminal"
-npm install -D @neondatabase/config
-npx neonctl link
-npx neonctl deploy
+npm install -D @neon/config
+neon link
+neon deploy
 ```
 
 </TabItem>
 
 <TabItem>
 
-You'll need your [API key](https://console.neon.tech/app/settings/api-keys), project ID, and branch ID. Find the IDs on the **Project settings** page or via `neonctl projects list`.
+You'll need your [API key](https://console.neon.tech/app/settings/api-keys), project ID, and branch ID. Find the IDs on the **Project settings** page or via `neon projects list`.
 
 **AI Gateway credential**
 
@@ -669,7 +669,7 @@ Refresh your `/posts` page to see the AI-generated post appear.
 Add a client-side upload page. It submits the file to a Server Action that uploads it directly to the S3-compatible bucket.
 
 <Admonition type="note">
-Neon Storage uses an S3‑compatible API. The AWS SDK works, but you must set `forcePathStyle: true` because virtual‑hosted style URLs are not supported.
+Neon Storage uses an S3-compatible API. The AWS SDK works, but you must set `forcePathStyle: true` because virtual-hosted style URLs are not supported.
 </Admonition>
 
 </TwoColumnLayout.Block>
