@@ -12,6 +12,7 @@ summary: >-
   Better Auth.
 enableTableOfContents: true
 tag: archived
+tagTheme: gray
 noindex: true
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---

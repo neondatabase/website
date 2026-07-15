@@ -13,7 +13,8 @@ summary: >-
   resource replacements and data loss during `terraform init -upgrade`.
 enableTableOfContents: true
 tag: community
-updatedOn: '2026-07-06T16:27:57.937Z'
+tagTheme: gray
+updatedOn: '2026-07-13T14:20:27.525Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.

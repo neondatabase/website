@@ -9,6 +9,7 @@ summary: >-
   set, edit, or disable the limit in the Neon Console or via the Management API.
 enableTableOfContents: true
 tag: new
+tagTheme: green
 ---
 
 <InfoBlock>

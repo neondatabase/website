@@ -45,17 +45,13 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
 
-<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview">Object Storage</a>
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview" tagTheme="gray-filled">Object Storage</a>
 
-<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview" tagTheme="gray-filled">Functions</a>
 
-<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Private Preview">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Private Preview" tagTheme="gray-filled">AI Gateway</a>
 
 </DetailIconCards>
-
-## Early access to the Neon backend platform
-
-<RequestForm type="backend-platform" title="Join the waitlist" buttonText="Notify me" />
 
 ## Connect your framework
 

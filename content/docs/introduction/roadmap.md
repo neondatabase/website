@@ -26,8 +26,6 @@ We're expanding the platform with [a branchable stack of backend primitives](htt
 - **Object Storage**: S3-compatible object storage that branches with your projects.
 - **AI Gateway**: One API for all frontier & open-source models, powered by Databricks.
 
-<RequestForm type="backend-platform" />
-
 ## Core Postgres database features and improvements
 
 We're accelerating work on improving and scaling the core database on Neon as well. Here is what is on the roadmap.
