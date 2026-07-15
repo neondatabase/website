@@ -207,6 +207,7 @@ Learn how to use Django with Neon Postgres with this blog post and the accompany
 
 ## Next steps
 
-- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database.
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database.
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential.
 
 <NeedHelp/>

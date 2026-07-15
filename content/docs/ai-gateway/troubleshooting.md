@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-14T20:34:24.495Z'
+updatedOn: '2026-07-15T11:08:18.153Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -117,7 +117,7 @@ Your account's AI Gateway quota is blocked. This can happen if you exceed the to
 }
 ```
 
-If the block is due to the per-minute token limit specifically rather than the daily cap, the message reads `ai gateway per-minute token limit exceeded...` instead.
+If the block is due to the per-minute token limit specifically rather than the daily cap, the message reads `ai gateway TPM limit exceeded for model "<model-id>"` instead.
 
 **Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current per-minute quota values.
 

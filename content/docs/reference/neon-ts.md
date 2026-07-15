@@ -247,7 +247,7 @@ The key list autocompletes from your config, so selecting a variable from a serv
 ## Preview services
 
 <Admonition type="info" title="Private preview">
-Functions, Storage, and AI Gateway are in private preview. They require a new project in AWS us-east-2. See [Preview access](/docs/compute/functions/preview-access) to request access.
+Functions, Storage, and AI Gateway are in private preview. They require a project in AWS us-east-2. See [Preview access](/docs/compute/functions/preview-access) to request access.
 </Admonition>
 
 Preview services are declared under the `preview` block. All three are optional and independent:

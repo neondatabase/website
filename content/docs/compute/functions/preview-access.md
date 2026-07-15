@@ -2,28 +2,27 @@
 title: Neon Functions preview access
 subtitle: What's included in the Neon Functions private preview.
 summary: >-
-  Neon Functions is in private preview for new projects in the AWS us-east-2
-  region. Learn how to request access, what's included, and the current
-  limitations.
+  Neon Functions is in private preview in the AWS us-east-2 region. Learn how
+  to request access, what's included, and the current limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-14T20:35:24.380Z'
 ---
 
 ## Request access
 
-Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends#access). The team will reach out with access details. Functions are available on new projects in AWS us-east-2 only, created on or after June 15, 2026.
+Sign up at [neon.com/blog/were-building-backends](https://neon.com/blog/were-building-backends#access). The team will reach out with access details. Functions are available in AWS us-east-2 only.
 
 ## What's included
 
-- Deploy Node.js 24 HTTP handlers to Neon branches
-- Web Fetch API handler interface (`fetch(request)` export)
-- Long-running compute: WebSocket servers, SSE endpoints, AI agents
+- [Deploy Node.js 24 HTTP handlers](/docs/compute/functions/get-started) to Neon branches
+- [Web Fetch API handler interface](/docs/compute/functions/overview#request-response-not-background-jobs) (`fetch(request)` export)
+- Long-running compute: [WebSocket servers, SSE endpoints](/docs/compute/functions/websockets), [AI agents](/docs/compute/functions/agents)
 - Postgres, [AI Gateway](/docs/ai-gateway/overview), and [Object Storage](/docs/storage/overview) credentials injected automatically when the service is enabled
-- `neon dev` for local development with hot reload
-- `neon.ts` config with `neon deploy` for declarative branch setup
-- `neon functions deploy` for direct CLI deployment
-- Neon API for programmatic deployment
-- Branch-scoped functions: each branch runs its own version at its own URL
+- [`neon dev`](/docs/cli/dev) for local development with hot reload
+- [`neon.ts`](/docs/reference/neon-ts) config with [`neon deploy`](/docs/cli/deploy) for declarative branch setup
+- [`neon functions deploy`](/docs/cli/functions#deploy) for direct CLI deployment
+- [Neon API](/docs/compute/functions/deploy#deploy-with-the-api) for programmatic deployment
+- [Branch-scoped functions](/docs/compute/functions/overview): each branch runs its own version at its own URL
 
 ## What's not included
 

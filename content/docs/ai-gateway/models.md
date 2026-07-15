@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-14T20:34:24.495Z'
+updatedOn: '2026-07-15T15:43:20.389Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -22,6 +22,12 @@ Model availability may vary by region. The catalog expands over time, so check b
 </Admonition>
 
 The full catalog is published as the [`neon` provider on models.dev](https://models.dev/providers/neon) — the machine-readable source of truth — and served as JSON at [`neon.com/models.json`](https://neon.com/models.json).
+
+## Model access
+
+Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](#available-models) to see the full list.
+
+Foundation models from Anthropic, OpenAI, and Google are being rolled out gradually as we expand capacity. Request access from the **AI Gateway** page in the Neon Console.
 
 ## Quick picks
 
@@ -39,22 +45,21 @@ Not sure which model to use? Start here.
 
 ## Rate limits
 
-During the private preview, the following limits apply:
+During the beta, the following limit applies per account:
 
-| Limit                                   | Value         |
-| --------------------------------------- | ------------- |
-| Per model (tokens per minute)           | 200,000 TPM   |
-| All models combined (tokens per minute) | 1,100,000 TPM |
+| Limit                   | Value   |
+| ----------------------- | ------- |
+| Tokens per minute (TPM) | 200,000 |
 
-If you hit a limit, you'll receive a `429 Too Many Requests` response. Requests resume when the rate limit window resets.
+If you hit the limit, you'll receive a `429 Too Many Requests` response with a message like `ai gateway TPM limit exceeded for model "<model-id>"`. Requests resume when the rate limit window resets.
 
-These limits are counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
+The TPM limit is counted against total tokens (input and output combined), not input alone. Upstream output token limits (20,000 OTPM for most models) apply independently, so you can hit a `429` on output tokens without reaching the gateway's TPM limit. See [Databricks Foundation Model API limits](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/limits) for details.
 
 Once billing begins, usage will also be capped by your prepaid credit balance. See [Pricing](#pricing) below.
 
 ## Pricing
 
-Inference is free during the private preview. See [Pricing](/docs/ai-gateway/overview#pricing) for what to expect when billing begins.
+Inference is free during the beta. See [Pricing](/docs/ai-gateway/overview#pricing) for what to expect when billing begins.
 
 Independent of billing, Neon enforces an account-level daily spend cap on AI Gateway usage, separate from the per-minute rate limits above. If your account exceeds it, every AI Gateway endpoint returns `429 Too Many Requests` with error code `REQUEST_LIMIT_EXCEEDED` until the cap resets or the block is lifted. This can happen even though inference itself isn't billed yet. Neon hasn't published a fixed cap value; it isn't a flat number and can vary by account. See [Troubleshooting](/docs/ai-gateway/troubleshooting#429-account-quota-exceeded) if you hit this.
 

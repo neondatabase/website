@@ -40,6 +40,10 @@ Each Neon project is created with a [root branch](/docs/reference/glossary#root-
 Users, sessions, and auth configuration in the `neon_auth` schema branch with your data, so preview and test environments get isolated authentication state. See [Managed Better Auth](/docs/auth/overview) and [Branching authentication](/docs/auth/branching-authentication).
 </Admonition>
 
+<Admonition type="tip" title="Using Neon backend services?">
+Object Storage, Functions, and AI Gateway all branch with your data too: each branch gets its own storage namespace, function deployment, and gateway endpoint, isolated from its parent. See [Neon Object Storage](/docs/storage/overview), [Neon Functions](/docs/compute/functions/overview), and [Neon AI Gateway](/docs/ai-gateway/overview).
+</Admonition>
+
 ## Branching workflows
 
 You can use Neon's branching feature in a variety of workflows.

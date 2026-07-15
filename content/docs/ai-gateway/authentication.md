@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-07-14T20:34:24.495Z'
+updatedOn: '2026-07-14T20:35:24.380Z'
 ---
 
 <PrivatePreviewEnquire/>
@@ -125,6 +125,8 @@ When your code runs inside Neon Functions, both gateway env vars are injected au
 | -------------------------- | --------------------------------------------------- |
 | `NEON_AI_GATEWAY_TOKEN`    | Bearer token for the AI Gateway                     |
 | `NEON_AI_GATEWAY_BASE_URL` | Branch gateway host with `https://` prefix, no path |
+
+See [Environment variables](/docs/compute/functions/environment-variables) for the full list of variables Neon injects into a function.
 
 Configure an OpenAI SDK by setting `apiKey` and `baseURL` from these variables. Use the OpenAI Responses dialect for `responses.create()`:
 

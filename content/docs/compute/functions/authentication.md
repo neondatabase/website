@@ -13,6 +13,10 @@ updatedOn: '2026-07-15T00:08:00.682Z'
 
 A Neon Function has a public HTTPS URL, so anyone who knows it can reach it. There's no platform gate in front of your handler. Authenticate the caller yourself, at the top of the handler, and reject anything that doesn't check out.
 
+<Callout title="Looking for credentials to call Neon services?">
+This page covers verifying inbound requests to your function. For the credentials Neon injects into a function to call Object Storage or AI Gateway, see [Environment variables](/docs/compute/functions/environment-variables), [Object Storage authentication](/docs/storage/authentication#credentials-in-neon-functions), or [AI Gateway authentication](/docs/ai-gateway/authentication#credentials-in-neon-functions).
+</Callout>
+
 How you authenticate depends on who calls the function:
 
 - A browser or another service holding a **JWT**: verify the token (see [Verify a JWT](#verify-a-jwt)).
