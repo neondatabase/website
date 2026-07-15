@@ -113,7 +113,7 @@ QuickPath.propTypes = {
   eta: PropTypes.string,
 };
 
-const GuidedPath = ({ title, description, href, cta = 'Open quickstart', eta = '~15 min' }) => (
+const GuidedPath = ({ title, description, href, cta = 'Open quickstart', eta = '~10 min' }) => (
   <article
     className={cn(
       'flex min-h-[282px] w-full flex-col border border-gray-new-80 bg-gray-new-98 p-5 md:min-h-[260px]',

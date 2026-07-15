@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-15T19:56:50.774Z'
+updatedOn: '2026-07-15T20:18:29.618Z'
 ---
 
 ## Getting started
@@ -27,7 +27,7 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
   />
   <GuidedPath
     title="Build a full backend"
-    description="Next.js + Postgres + Managed Better Auth. The full Neon stack, end-to-end, from create-next-app to deployed."
+    description="Next.js + Postgres + Managed Better Auth. Your app's entire backend runs on Neon, not just the database, from create-next-app to deployed."
     href="/docs/get-started/full-backend-quickstart"
   />
 </TwinPaths>
