@@ -4,6 +4,8 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
+import Button from 'components/shared/button';
+import LabelArrowGreen from 'icons/arrow-label-green.inline.svg';
 import LabelArrow from 'icons/arrow-label.inline.svg';
 import CheckIcon from 'icons/check.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
@@ -14,6 +16,9 @@ import sendGtagEvent from 'utils/send-gtag-event';
 // Left card ("Quick"): copy-command interaction with a dark command strip.
 // Right card ("Guided"): link with a secondary CTA button.
 // Children are <QuickPath> and <GuidedPath> (any order; QuickPath rendered first).
+//
+// TourCallout is a separate, full-width banner meant to sit below <TwinPaths>
+// (not inside its 2-col grid) pointing to a broader guided tour of the stack.
 
 const TwinPaths = ({ children }) => (
   <div className="twin-paths not-prose my-7 grid w-full grid-cols-2 gap-6 md:grid-cols-1 md:gap-4">
@@ -145,8 +150,54 @@ GuidedPath.propTypes = {
   eta: PropTypes.string,
 };
 
+const TourCallout = ({ title, description, href, cta = 'Start the tour', eta = '~15 min' }) => (
+  <div
+    className={cn(
+      'tour-callout not-prose my-5 flex items-center justify-between gap-7 border p-6 sm:flex-col sm:items-start sm:gap-5',
+      'border-green-52/30 bg-[#EAF7F1] shadow-[0_0_48px_-14px_rgba(52,213,154,0.35)]',
+      'dark:border-green-52/30 dark:bg-[#0D1611] dark:shadow-[0_0_48px_-14px_rgba(52,213,154,0.5)]'
+    )}
+  >
+    <div>
+      <p className="flex items-center gap-2 font-mono text-sm leading-none font-medium tracking-normal uppercase">
+        <LabelArrowGreen
+          className="block h-3.5 w-3 flex-none md:size-2.5"
+          aria-hidden="true"
+          focusable="false"
+        />
+        <span className="text-green-52">Tutorial</span>
+        <span className="text-black-pure/40 dark:text-white/40">{eta}</span>
+      </p>
+      <h3 className="mt-2.5 text-xl leading-snug font-medium text-black-pure dark:text-white">
+        {title}
+      </h3>
+      <p className="mt-1.5 max-w-[620px] text-base leading-snug text-gray-new-40 dark:text-gray-new-60">
+        {description}
+      </p>
+    </div>
+    <Button
+      className="w-fit shrink-0 border border-gray-new-60 bg-black-pure/2 px-7 py-3.5 text-base leading-none font-medium text-black-pure hover:border-black-pure dark:border-gray-new-40 dark:bg-white/2 dark:text-white dark:hover:border-gray-new-50"
+      to={href}
+      theme="transparent"
+      withArrow
+      tagName="TourCallout"
+    >
+      {cta}
+    </Button>
+  </div>
+);
+
+TourCallout.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.node.isRequired,
+  href: PropTypes.string.isRequired,
+  cta: PropTypes.string,
+  eta: PropTypes.string,
+};
+
 TwinPaths.QuickPath = QuickPath;
 TwinPaths.GuidedPath = GuidedPath;
+TwinPaths.TourCallout = TourCallout;
 
-export { QuickPath, GuidedPath };
+export { QuickPath, GuidedPath, TourCallout };
 export default TwinPaths;

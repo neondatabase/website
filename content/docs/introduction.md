@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-15T18:19:19.522Z'
 ---
 
 ## Getting started
@@ -31,6 +31,12 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
     href="/docs/get-started/full-backend-quickstart"
   />
 </TwinPaths>
+
+<TourCallout
+  title="Tour the Neon backend"
+  description="See how the pieces fit together from the code side: how Postgres, Auth, the Data API, storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
+  href="/docs/get-started/tour-the-neon-backend"
+/>
 
 ## Products
 

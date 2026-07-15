@@ -21,6 +21,8 @@
           slug: get-started/signing-up
         - title: Build a full backend
           slug: get-started/full-backend-quickstart
+        - title: Tour the Neon backend
+          slug: get-started/tour-the-neon-backend
     - section: Frontend & Frameworks
       items:
         - title: Frameworks
