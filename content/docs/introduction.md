@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-15T18:37:23.024Z'
+updatedOn: '2026-07-15T18:41:17.114Z'
 ---
 
 ## Getting started
@@ -52,6 +52,8 @@ Every service is agent-ready: instant, branchable, and serverless.
 <a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Beta" tagTheme="orange-muted">AI Gateway</a>
 
 </DetailIconCards>
+
+New to Object Storage, Functions, or AI Gateway? Start with the [Neon backend beta guide](/docs/get-started/backend-beta).
 
 ## Connect your framework
 
