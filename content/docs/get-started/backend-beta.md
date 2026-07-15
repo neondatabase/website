@@ -9,7 +9,7 @@ redirectFrom:
 The Neon backend for apps and agents is in beta.
 
 <Admonition type="info" title="Beta">
-Functions, Object Storage, and AI Gateway are not yet recommended for production workloads. Build something and help us refine them by sharing your feedback in Discord.
+Functions, Object Storage, and AI Gateway are not yet recommended for production workloads. Build something and help us refine them by sharing your feedback in [Discord](https://discord.gg/92vNTzKDGp).
 </Admonition>
 
 ## What's in the beta
