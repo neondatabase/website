@@ -20,11 +20,11 @@ Neon bundles several backend primitives for building apps and agents that all br
 
 - **Postgres** — Serverless Postgres that scales and branches with your app. _Generally available._
 - **Auth** — Managed authentication with users and sessions stored in Postgres. _Generally available._
-- **Object Storage** — S3-compatible object storage that branches with your projects. _Preview / early access._
-- **Functions** — Long-running serverless functions - Neon's compute offering - running close to your database — for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. _Preview / early access._
-- **AI Gateway** — One API for all frontier and open-source models, with routing, logging, and cost controls, powered by Databricks. _Preview / early access._
+- **Object Storage** — S3-compatible object storage that branches with your projects. _Public beta._
+- **Functions** — Long-running serverless functions - Neon's compute offering - running close to your database — for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. _Public beta._
+- **AI Gateway** — One API for all frontier and open-source models, with routing, logging, and cost controls, powered by Databricks. _Public beta._
 
-### Preview Service Availability
+### Public Beta Service Availability
 
 Object Storage, Functions, and AI Gateway are in public beta.
 
@@ -178,7 +178,7 @@ If env vars are injected at runtime instead of written to disk — or you simply
 - `neon-env run -- <your dev command>` (from `@neon/env`) fetches the branch's vars from your `neon.ts` and injects them into the child process at runtime — no `.env` file needed. This is the runtime counterpart to the on-disk `env pull`.
 - `neon-env export` (from `@neon/env`) prints the branch's env to stdout as dotenv lines or, with `--format json`, JSON — for piping into another env manager rather than running a command. For example, [varlock](https://varlock.dev) can bulk-load it from a `.env.schema` with `@setValuesBulk(exec("neon-env export --format json"), format=json)`.
 - `fetchEnv` from `@neon/env` is the programmatic version of the same thing: resolve the branch's env in code at runtime instead of shelling out to `neon-env run`.
-- `neon dev` injects the same vars into your local dev server — it's part of Neon Functions local development (a private preview feature).
+- `neon dev` injects the same vars into your local dev server — it's part of Neon Functions local development (a public beta feature).
 
 When an agent should not write a local `.env`, instruct it (for example in your `AGENTS.md`) to run `neon checkout <branch> --no-env-pull` and rely on runtime injection.
 
