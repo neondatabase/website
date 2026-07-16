@@ -72,15 +72,18 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af`
        - **us-east-2**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac`
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3`
        - **eu-central-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
-       - **eu-west-2**:
+       - **eu-west-2**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
@@ -88,6 +91,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d`
        - **ap-southeast-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7`
+         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
        - **ap-southeast-2**:
          - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
