@@ -209,72 +209,13 @@
         - title: Sample data
           slug: import/import-sample-data
 
-        - title: Object Storage
-          icon: import
-          slug: storage/overview
-          items:
-            - section: Get started
-              items:
-                - title: Overview
-                  slug: storage/overview
-                - title: Quickstart
-                  slug: storage/get-started
-            - section: Guides
-              items:
-                - title: Buckets
-                  slug: storage/buckets
-                - title: Objects
-                  slug: storage/objects
-                - title: Authentication
-                  slug: storage/authentication
-            - section: Reference
-              items:
-                - title: S3 compatibility
-                  slug: storage/s3-compatibility
-                - title: Troubleshooting
-                  slug: storage/troubleshooting
-
-        - title: AI Gateway
-          icon: sparks
-          slug: ai-gateway/overview
-          items:
-            - section: Get started
-              items:
-                - title: Overview
-                  slug: ai-gateway/overview
-                - title: Why AI Gateway
-                  slug: ai-gateway/why-ai-gateway
-                - title: Quickstart
-                  slug: ai-gateway/get-started
-                - title: Models
-                  slug: ai-gateway/models
-            - section: APIs
-              items:
-                - title: Chat completions
-                  slug: ai-gateway/chat-completions
-                - title: Anthropic Messages API
-                  slug: ai-gateway/anthropic-messages
-                - title: OpenAI Responses API
-                  slug: ai-gateway/openai-responses
-                - title: Gemini API
-                  slug: ai-gateway/gemini
-            - section: Reference
-              items:
-                - title: Authentication
-                  slug: ai-gateway/authentication
-                - title: Troubleshooting
-                  slug: ai-gateway/troubleshooting
-
-        - title: Postgres RLS
-          icon: lock
-          slug: guides/row-level-security
-          items:
-            - title: RLS in Neon
-              slug: guides/row-level-security
-            - title: Simplify RLS with Drizzle
-              slug: guides/rls-drizzle
-            - title: Run RLS queries with Drizzle ORM
-              slug: guides/rls-query-execution
+- nav: Products
+  title: Products
+  icon: features
+  subnav:
+    - title: Postgres
+      slug: postgres/overview
+      icon: book
       items:
         - section: Connect to Postgres
           icon: connect
@@ -901,6 +842,8 @@
           items:
             - title: Overview
               slug: ai-gateway/overview
+            - title: Why AI Gateway
+              slug: ai-gateway/why-ai-gateway
             - title: Quickstart
               slug: ai-gateway/get-started
             - title: Models
