@@ -372,7 +372,6 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwindcss-safe-area'),
     require('@tailwindcss/typography'),
     require('@headlessui/tailwindcss'),
     require('tailwindcss/plugin')(({ addVariant }) => {
