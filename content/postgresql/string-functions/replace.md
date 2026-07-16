@@ -70,7 +70,7 @@ If you want to search and replace a substring in a table column, you use the fol
 UPDATE
   table_name
 SET
-  column_name = REPLACE(column, old_text, new_text)
+  column_name = REPLACE(column_name, old_text, new_text)
 WHERE
   condition;
 ```
@@ -125,7 +125,7 @@ UPDATE 3
 
 The output indicates that three rows were updated.
 
-Third, verify the update by retrieving data from the `customer` table:
+Third, verify the update by retrieving data from the `posts` table:
 
 ```sql
 SELECT * FROM posts;
