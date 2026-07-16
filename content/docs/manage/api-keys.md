@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-07-08T18:50:11.212Z'
+updatedOn: '2026-07-16T18:26:44.857Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -129,7 +129,7 @@ curl --request POST \
 
 ### Create project-scoped organization API keys
 
-Project-scoped API keys have [**Can edit** access](/docs/manage/user-permissions#per-project-permissions) on their project, meaning they can read and modify project resources but **cannot** delete the project or manage who can access it. These keys:
+Project-scoped API keys have [**Editor** access](/docs/manage/user-permissions#per-project-permissions) on their project, meaning they can read and modify project resources but **cannot** delete the project or manage who can access it. These keys:
 
 - Can only access and manage the specified project
 - Cannot perform organization-related actions or create new projects
