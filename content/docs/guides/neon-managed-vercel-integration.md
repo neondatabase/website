@@ -17,7 +17,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-07-16T22:48:27.791Z'
+updatedOn: '2026-07-16T22:52:03.150Z'
 ---
 
 <InfoBlock>
@@ -138,7 +138,7 @@ By default, Neon uses your project's **default branch** for Vercel's Production 
 
 Only Production credentials come from your chosen branch. Preview and Development environments are unchanged. Neon resolves that branch's read-write compute endpoint and the password for the role you selected on that branch (role passwords can differ across branches).
 
-If [Managed BetterAuth](/docs/auth/overview) is enabled on your production branch, Production deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` from that branch. Preview deployments still get isolated auth on their own preview branches.
+If [Managed Better Auth](/docs/auth/overview) is enabled on your production branch, Production deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` from that branch. Preview deployments still get isolated auth on their own preview branches.
 
 ### What happens after installation
 
@@ -163,8 +163,8 @@ Once connected successfully, you'll see:
 
 The integration automatically creates isolated database environments for each preview deployment:
 
-<Admonition type="tip" title="Managed BetterAuth support for preview deployments">
-If you've enabled [Managed BetterAuth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions. Preview branches are always parented from your project's **default branch**, even when Production uses a different branch.
+<Admonition type="tip" title="Managed Better Auth support for preview deployments">
+If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions. Preview branches are always parented from your project's **default branch**, even when Production uses a different branch.
 </Admonition>
 
 <Steps>
@@ -211,7 +211,7 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 
 - `DATABASE_URL`: Pooled connection (recommended for most applications). For Production, sourced from the [production branch you chose at connect](#choose-a-production-branch).
 - `DATABASE_URL_UNPOOLED`: Direct connection (for tools requiring direct database access)
-- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed BetterAuth endpoints (automatically set when Managed BetterAuth is enabled on the production branch)
+- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed Better Auth endpoints (automatically set when Managed Better Auth is enabled on the production branch)
 
 **To customize which variables are used:**
 
