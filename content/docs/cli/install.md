@@ -9,7 +9,7 @@ summary: >-
   Vercel-Managed Integration users must use an API key because web auth requires
   a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-07-02T13:13:39.256Z'
+updatedOn: '2026-07-03T14:03:07.441Z'
 redirectFrom:
   - /docs/reference/cli-install
 ---
@@ -34,7 +34,7 @@ brew install neonctl
 npm i -g neon
 ```
 
-Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
+Requires [Node.js 20.19.0](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
@@ -66,7 +66,7 @@ neon <command> [options]
 npm i -g neon
 ```
 
-Requires [Node.js 18.0](https://nodejs.org/en/download/) or higher.
+Requires [Node.js 20.19.0](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
@@ -97,6 +97,8 @@ neonctl-win-x64.exe <command> [options]
 ```shell
 npm i -g neon
 ```
+
+Requires [Node.js 20.19.0](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
@@ -150,6 +152,10 @@ Upgrade using the method that matches how you installed the CLI. To check for th
 ```bash
 neon --version
 ```
+
+<Admonition type="note" title="Node.js 20.19.0 is required to upgrade">
+The current CLI requires Node.js 20.19.0 or higher. An existing installation keeps working on your current Node.js version, but upgrading to the latest CLI on an older version (such as Node.js 18) fails. If you're on an older version, [upgrade Node.js](https://nodejs.org/en/download/) before you upgrade the CLI.
+</Admonition>
 
 <Tabs labels={["npm", "Homebrew", "Binary"]}>
 

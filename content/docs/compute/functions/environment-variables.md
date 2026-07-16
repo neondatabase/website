@@ -6,10 +6,10 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 ## Neon-injected variables
 
@@ -17,25 +17,23 @@ Neon injects connection strings, credentials, and service URLs automatically at 
 
 Each variable is present only when its service is enabled on the branch. `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, for example, are undefined on a functions-only branch with no Postgres database.
 
-| Variable                                     | Service        | Description                                                                                                                                        |
-| -------------------------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`                               | Postgres       | Pooled connection string. Use this for most queries.                                                                                               |
-| `DATABASE_URL_UNPOOLED`                      | Postgres       | Direct connection string. Use for migrations, `LISTEN`/`NOTIFY`, and multi-round-trip transactions.                                                |
-| `NEON_BRANCH`                                | Core           | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                                                 |
-| `NEON_AUTH_BASE_URL`                         | Neon Auth      | Base URL for Neon Auth.                                                                                                                            |
-| `NEON_AUTH_JWKS_URL`                         | Neon Auth      | JWKS endpoint for verifying Neon Auth JWTs. See [Authentication](/docs/compute/functions/authentication).                                          |
-| `NEON_DATA_API_URL`                          | Data API       | Base URL for the Neon Data API (PostgREST). Present when the Data API is provisioned on the branch.                                                |
-| `OPENAI_API_KEY`                             | AI Gateway     | Gateway key, under the OpenAI-standard name so the OpenAI SDKs pick it up automatically.                                                           |
-| `OPENAI_BASE_URL`                            | AI Gateway     | OpenAI **Responses API** endpoint (`/ai-gateway/openai/v1`). An OpenAI SDK reading these two variables reaches `responses.create()` with no setup. |
-| `NEON_AI_GATEWAY_TOKEN`                      | AI Gateway     | Gateway token. Same value as `OPENAI_API_KEY`.                                                                                                     |
-| `NEON_AI_GATEWAY_BASE_URL`                   | AI Gateway     | Gateway host root. Append a dialect route, e.g. `/ai-gateway/mlflow/v1` for Chat Completions.                                                      |
-| `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | Object Storage | S3-compatible credentials for the branch's buckets.                                                                                                |
-| `AWS_ENDPOINT_URL_S3`, `AWS_REGION`          | Object Storage | S3 endpoint and region. The `AWS_*` names mean the AWS SDKs work with no setup.                                                                    |
+| Variable                                     | Service             | Description                                                                                                                                           |
+| -------------------------------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URL`                               | Postgres            | Pooled connection string. Use this for most queries.                                                                                                  |
+| `DATABASE_URL_UNPOOLED`                      | Postgres            | Direct connection string. Use for migrations, `LISTEN`/`NOTIFY`, and multi-round-trip transactions.                                                   |
+| `NEON_BRANCH`                                | Core                | Branch name (e.g. `main`, `preview/foo`). Present on all branches.                                                                                    |
+| `NEON_AUTH_BASE_URL`                         | Managed Better Auth | Base URL for Managed Better Auth.                                                                                                                     |
+| `NEON_AUTH_JWKS_URL`                         | Managed Better Auth | JWKS endpoint for verifying Managed Better Auth JWTs. See [Authentication](/docs/compute/functions/authentication).                                   |
+| `NEON_DATA_API_URL`                          | Data API            | Base URL for the Neon Data API (PostgREST). Present when the Data API is provisioned on the branch.                                                   |
+| `NEON_AI_GATEWAY_TOKEN`                      | AI Gateway          | Gateway bearer token.                                                                                                                                 |
+| `NEON_AI_GATEWAY_BASE_URL`                   | AI Gateway          | Gateway host root. Append a dialect route, e.g. `/ai-gateway/mlflow/v1` for Chat Completions or `/ai-gateway/openai/v1` for the OpenAI Responses API. |
+| `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` | Object Storage      | S3-compatible credentials for the branch's buckets.                                                                                                   |
+| `AWS_ENDPOINT_URL_S3`, `AWS_REGION`          | Object Storage      | S3 endpoint and region. The `AWS_*` names mean the AWS SDKs work with no setup.                                                                       |
 
 These variables are branch-scoped: each branch injects its own values. A function deployed to a preview branch connects to that branch's database, not the default branch's.
 
 <Admonition type="note" title="Two AI Gateway endpoints">
-`OPENAI_BASE_URL` targets the gateway's OpenAI **Responses API** (`/ai-gateway/openai/v1`). The **Chat Completions** endpoint is at a different path: point the SDK's base URL at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1` (see [Chat completions](/docs/ai-gateway/chat-completions)). The [`@neon/ai-sdk-provider`](/docs/compute/functions/agents) handles this routing for you.
+`NEON_AI_GATEWAY_BASE_URL` is the bare gateway host: append a dialect path yourself. Use `/ai-gateway/openai/v1` for the OpenAI **Responses API** and `/ai-gateway/mlflow/v1` for **Chat Completions** (see [Chat completions](/docs/ai-gateway/chat-completions)). The [`@neon/ai-sdk-provider`](/docs/compute/functions/agents) handles this routing for you.
 </Admonition>
 
 <Admonition type="note" title="Local pull vs. deployed runtime">
@@ -69,7 +67,7 @@ Pass `--env KEY=VALUE` to `neon functions deploy`. The flag is repeatable:
 neon functions deploy hello --src functions/hello.ts --env RESEND_API_KEY=re_...
 ```
 
-Don't define variables under the names Neon injects (`DATABASE_URL`, `OPENAI_*`, `AWS_*`). Those are provided by the platform when the matching service is enabled on the branch, and setting your own collides with the injected values. The `NEON_` prefix is reserved (see [Constraints](#constraints)).
+Neon injects variables like `DATABASE_URL`, `NEON_AI_GATEWAY_*`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, and `AWS_REGION` when the matching service is enabled on the branch. These are defaults, not reserved names: if you define a variable with the same name, your value overrides the injected one.
 
 A deploy doesn't wipe variables set by earlier deploys. The `--env` flags you pass are merged into the existing set:
 
@@ -123,14 +121,13 @@ neon env pull --file .env.preview
 
 To pull from a different branch, switch with `neon checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Neon Auth URLs, the Neon Data API URL, the AI Gateway credentials (`OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_*`), and the Object Storage credentials (`AWS_*`). Neon mints the AI Gateway key itself and uses the OpenAI-standard names, so the OpenAI SDKs pick it up from the environment.
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`).
 
 ## Constraints
 
-| Constraint                   | Value                                                               |
-| ---------------------------- | ------------------------------------------------------------------- |
-| Max variables per deployment | 1,000                                                               |
-| Max total size               | 64 KiB                                                              |
-| Reserved prefix              | `NEON_` (reserved for platform use, can't be set by user functions) |
+| Constraint                   | Value  |
+| ---------------------------- | ------ |
+| Max variables per deployment | 1,000  |
+| Max total size               | 64 KiB |
 
 <NeedHelp/>

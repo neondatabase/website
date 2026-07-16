@@ -12,7 +12,7 @@ This skill’s **`scripts/*.ts`** files stay **API-sized**: they cover the Neon 
 
 | Layer | Responsibility |
 | ----- | ---------------- |
-| **Neon integration** | Wrap `@neondatabase/api-client`: projects, branches, logical snapshots, restore, connection URIs, operation polling (patterns align with [`utils.ts`](../scripts/utils.ts) and the sample scripts). |
+| **Neon integration** | Wrap `@neon/sdk`: projects, branches, logical snapshots, restore, connection URIs, readiness polling (patterns align with [`utils.ts`](../scripts/utils.ts) and the sample scripts). |
 | **Meta database** | Version rows that bind `neon_snapshot_id` (and related Neon ids) to `git_commit_hash` / artifact id / timestamps / optional assistant or run ids. Often separate tables for tenant secrets or env snapshots. |
 | **Checkpoint workflow** | When the user or agent creates a checkpoint: resolve **latest source revision** and **create a Neon snapshot** (often in parallel), then insert one **version** row so code and DB state stay aligned. |
 | **HTTP or queue entry** | User-facing `POST …/checkpoint` or internal job that starts the workflow (workflow engine is product-specific). |

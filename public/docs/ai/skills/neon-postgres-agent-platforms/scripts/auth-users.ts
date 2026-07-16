@@ -1,13 +1,18 @@
 /**
  * Neon Auth: application users (REST) and how they show up in Postgres.
  *
+ * The auth-user endpoints aren't wrapped by an ergonomic namespace yet, so this
+ * drops to the raw layer (`raw.createBranchNeonAuthNewUser` /
+ * `raw.deleteBranchNeonAuthUser`) and reuses the client's auth via `neon.client`.
+ *
  * Subcommands:
  *   meta     print [meta] map: REST vs Postgres, doc links
  *   create   POST .../auth/users (needs USER_EMAIL, optional USER_NAME)
  *   delete   DELETE .../auth/users/{id} (needs AUTH_USER_ID)
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
+import { raw } from "@neon/sdk";
+import { neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
@@ -37,10 +42,10 @@ function printMeta(): void {
             "Database roles (connection users, privileges) are separate; use SQL or Console (Manage roles), not this REST API.",
         },
         docs: [
-          "https://neon.com/docs/neon-auth/api",
+          "https://neon.com/docs/auth/guides/manage-auth-api",
           "https://neon.com/docs/auth/guides/user-management",
-          "https://neon.com/docs/manage/users",
-          "https://api-docs.neon.tech/reference/createbranchneonauthnewuser",
+          "https://neon.com/docs/manage/roles",
+          "https://neon.com/docs/reference/api/auth/create-branch-neon-auth-new-user",
         ],
         envForThisScript: {
           create: [
@@ -89,7 +94,7 @@ if (!projectId || !branchId) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
+const neon = neonClient(apiKey);
 
 if (cmd === "create") {
   const email = process.env.USER_EMAIL;
@@ -98,9 +103,11 @@ if (cmd === "create") {
     console.error("Set USER_EMAIL for create.");
     process.exit(1);
   }
-  const { data } = await api.createBranchNeonAuthNewUser(projectId, branchId, {
-    email,
-    ...(name ? { name } : {}),
+  const { data } = await raw.createBranchNeonAuthNewUser({
+    client: neon.client,
+    path: { project_id: projectId, branch_id: branchId },
+    body: { email, ...(name ? { name } : {}) },
+    throwOnError: true,
   });
   console.log(JSON.stringify(data, null, 2));
   process.exit(0);
@@ -112,7 +119,15 @@ if (cmd === "delete") {
     console.error("Set AUTH_USER_ID for delete.");
     process.exit(1);
   }
-  await api.deleteBranchNeonAuthUser(projectId, branchId, authUserId);
+  await raw.deleteBranchNeonAuthUser({
+    client: neon.client,
+    path: {
+      project_id: projectId,
+      branch_id: branchId,
+      auth_user_id: authUserId,
+    },
+    throwOnError: true,
+  });
   console.log(JSON.stringify({ ok: true, deleted: authUserId }, null, 2));
   process.exit(0);
 }

@@ -13,7 +13,7 @@ redirectFrom:
 updatedOn: '2026-07-16T18:26:44.857Z'
 ---
 
-Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
+Most actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
 
 ## Types of API keys
 
@@ -79,7 +79,7 @@ curl https://console.neon.tech/api/v2/api_keys
 }
 ```
 
-To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createapikey).
+To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/api-keys/create-api-key).
 
 </TabItem>
 </Tabs>
@@ -198,7 +198,7 @@ where:
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Retrieve project details](https://api-docs.neon.tech/reference/getproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Retrieve project details](/docs/reference/api/projects/get-project) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -223,7 +223,7 @@ For attribute definitions, find the [Retrieve project details](https://api-docs.
 
 </details>
 
-Refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for other supported Neon API methods.
+Refer to the [Neon API Reference](/docs/reference/api) for other supported Neon API methods.
 
 ## List API keys
 
@@ -289,7 +289,7 @@ curl -X DELETE \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Revoke API key](https://api-docs.neon.tech/reference/revokeapikey) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Revoke API key](/docs/reference/api/api-keys/revoke-api-key) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -317,4 +317,4 @@ If you're rotating because a key was exposed, revoke the compromised key first, 
 
 <NeedHelp/>
 
-To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createapikey).
+To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/api-keys/create-api-key).

@@ -82,10 +82,10 @@ neon connection-string --project-id <project-id> --pooled
 
 ```bash
 # Run SQL query
-neon sql "SELECT * FROM users LIMIT 10" --project-id <project-id>
+neon psql <branch> -- -c "SELECT * FROM users LIMIT 10"
 
 # Run SQL from file
-neon sql --file schema.sql --project-id <project-id>
+neon psql <branch> -- -f schema.sql
 ```
 
 ### Database Management
@@ -142,13 +142,13 @@ Example GitHub Actions workflow:
 
 ## Documentation Resources
 
-| Topic          | URL                                                      |
-| -------------- | -------------------------------------------------------- |
-| CLI Reference  | https://neon.com/docs/reference/neon-cli.md              |
-| CLI Install    | https://neon.com/docs/reference/cli-install.md           |
-| CLI Auth       | https://neon.com/docs/reference/cli-auth.md              |
-| CLI Projects   | https://neon.com/docs/reference/cli-projects.md          |
-| CLI Branches   | https://neon.com/docs/reference/cli-branches.md          |
-| CLI Connection | https://neon.com/docs/reference/cli-connection-string.md |
+| Topic          | URL                                             |
+| -------------- | ----------------------------------------------- |
+| CLI Reference  | https://neon.com/docs/cli.md                     |
+| CLI Install    | https://neon.com/docs/cli/install.md             |
+| CLI Auth       | https://neon.com/docs/cli/auth.md                |
+| CLI Projects   | https://neon.com/docs/cli/projects.md            |
+| CLI Branches   | https://neon.com/docs/cli/branches.md            |
+| CLI Connection | https://neon.com/docs/cli/connection-string.md   |
 
-See the [full CLI docs](https://neon.com/docs/reference/neon-cli.md) for the complete command reference.
+See the [full CLI docs](https://neon.com/docs/cli.md) for the complete command reference.

@@ -4,7 +4,7 @@ subtitle: Recreate a similar Google Docs style version history flow on Postgres 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-05-04T00:00:00.000Z'
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 If you have ever used Google Docs version history, you know how easily you can jump to an older version, compare it to what you have now, and roll back without losing the thread of what changed. Relational databases usually give you one live schema and one head revision, unless you add your own audit tables or event sourcing.
@@ -31,9 +31,9 @@ For a single rich text field, a column on the production branch is often enough 
 
 Neon's branching is a good fit because:
 
-- [Creating a branch](https://api-docs.neon.tech/reference/createprojectbranch) is fast and does not require copying all data up front.
+- [Creating a branch](/docs/reference/api/branches/create-project-branch) is fast and does not require copying all data up front.
 - You can connect to a historical branch with its own connection string when you need to run queries against that snapshot.
-- The [Restore API](https://api-docs.neon.tech/reference/restoreprojectbranch) can repoint your primary branch at a snapshot when you want a true rollback of database state.
+- The [Restore API](/docs/reference/api/branches/restore-project-branch) can repoint your primary branch at a snapshot when you want a true rollback of database state.
 
 As we move forward, you will learn how to combine **a catalog on production** with **per version branches** to build a product that feels like Google Docs without building your own storage engine.
 
@@ -159,7 +159,7 @@ The [reference demo](#demo) uses a line based diff in the UI (baseline versus cu
 
 ## Restore production to a snapshot
 
-Restore is where Neon branching shines compared to hand rolled revision tables. Neon's [branch restore API](https://api-docs.neon.tech/reference/restoreprojectbranch) updates a **target** branch (typically your default branch) so its state reflects a **source** snapshot branch, with an optional `preserve_under_name` so the previous head survives as a new branch for safety.
+Restore is where Neon branching shines compared to hand rolled revision tables. Neon's [branch restore API](/docs/reference/api/branches/restore-project-branch) updates a **target** branch (typically your default branch) so its state reflects a **source** snapshot branch, with an optional `preserve_under_name` so the previous head survives as a new branch for safety.
 
 <div align="center">
 

@@ -11,7 +11,7 @@ summary: >-
   allowlisting for Estuary's egress addresses.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -60,7 +60,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
 
 ```bash
 neon roles create --name cdc_role
@@ -85,7 +85,7 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \

@@ -15,7 +15,7 @@ import schema from '../schema.json';
 // Invariants the overview index relies on: every schema command must have a
 // group mapping (buildRows throws at build otherwise), a doc page, and a
 // navigation entry. This lives with the schema checks (not next to the
-// component) so `npm run check:docs:neonctl` (which refresh.js runs after
+// component) so `npm run cli-docs -- check` (which refresh.js runs after
 // regenerating schema.json) fails here with a clear message instead of
 // failing mid-build or shipping an orphan page.
 describe('cli command coverage invariants', () => {
@@ -24,7 +24,15 @@ describe('cli command coverage invariants', () => {
 
   it('every schema command has a group mapping', () => {
     const unmapped = Object.keys(schema.commands).filter((name) => !GROUP_OF[name]);
-    expect(unmapped).toEqual([]);
+    expect(
+      unmapped,
+      unmapped.length
+        ? `Unmapped CLI command(s): ${unmapped.join(', ')}.\n` +
+            `Scaffold each with: npm run cli-docs -- scaffold <name> --group <group-id>\n` +
+            `(or add a GROUP_OF entry by hand in ` +
+            `src/components/pages/doc/cli-reference/cli-command-index/groups.js).`
+        : undefined
+    ).toEqual([]);
   });
 
   it('sidebar grouping matches the overview index grouping', () => {
@@ -38,7 +46,7 @@ describe('cli command coverage invariants', () => {
     const findCli = (node) => {
       if (Array.isArray(node)) return node.forEach(findCli);
       if (node && typeof node === 'object') {
-        if (node.section === 'CLI') cliSection = node;
+        if (node.section === 'CLI' || node.title === 'CLI') cliSection = node;
         return Object.values(node).forEach(findCli);
       }
     };
@@ -69,8 +77,23 @@ describe('cli command coverage invariants', () => {
       if (!fs.existsSync(page)) missingPages.push(name);
       if (!nav.includes(`slug: ${slug}`)) missingNav.push(name);
     }
-    expect(missingPages).toEqual([]);
-    expect(missingNav).toEqual([]);
+    expect(
+      missingPages,
+      missingPages.length
+        ? `CLI command(s) missing a doc page: ${missingPages.join(', ')}.\n` +
+            `Scaffold each with: npm run cli-docs -- scaffold <name> --group <group-id>\n` +
+            `(or create content/docs/cli/<name>.md by hand).`
+        : undefined
+    ).toEqual([]);
+    expect(
+      missingNav,
+      missingNav.length
+        ? `CLI command(s) missing a navigation entry: ${missingNav.join(', ')}.\n` +
+            `Scaffold each with: npm run cli-docs -- scaffold <name> --group <group-id>\n` +
+            `(or add "slug: cli/<name>" under the matching CLI section in ` +
+            `content/docs/navigation.yaml).`
+        : undefined
+    ).toEqual([]);
   });
 
   // Every <CliSubcommands> table links each subcommand to a #anchor; the page

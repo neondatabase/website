@@ -6,7 +6,7 @@
  * @see https://neon.com/docs/manage/orgs-project-transfer
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
+import { neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const sourceOrgId = process.env.NEON_SOURCE_ORG_ID;
@@ -23,14 +23,16 @@ if (!apiKey || !sourceOrgId || !destinationOrgId || !rawIds.trim()) {
 
 const projectIds = rawIds
   .split(",")
-  .map((s: string) => s.trim())
+  .map((s) => s.trim())
   .filter(Boolean);
 
-const api = createApiClient({ apiKey });
-await api.transferProjectsFromOrgToOrg(sourceOrgId, {
-  destination_org_id: destinationOrgId,
-  project_ids: projectIds,
+const neon = neonClient(apiKey);
+await neon.projects.transfer({
+  fromOrgId: sourceOrgId,
+  toOrgId: destinationOrgId,
+  projectIds,
 });
+
 console.log(
   JSON.stringify(
     {

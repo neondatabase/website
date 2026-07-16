@@ -39,6 +39,8 @@ const GROUP_OF = {
   orgs: 'network',
   'ip-allow': 'network',
   vpc: 'network',
+  api: 'network',
+  diff: 'core',
 };
 
 // Commands documented as a section of another command's page instead of a

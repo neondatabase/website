@@ -1,4 +1,3 @@
-/* global fetch, process, setTimeout */
 /* eslint-disable import/no-unresolved */
 import fs from 'fs/promises';
 import os from 'os';

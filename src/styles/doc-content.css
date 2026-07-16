@@ -138,7 +138,7 @@
     }
 
     .anchor-heading {
-      @apply scroll-mt-24 lg:scroll-mt-5;
+      @apply scroll-mt-32 lg:scroll-mt-12;
     }
 
     p img {
@@ -265,6 +265,19 @@
        flags mid-word; forbid internal breaks inside these tables only.
        The surrounding .table-wrapper scrolls horizontally if ever needed. */
     .cli-options-table {
+      td code,
+      th code {
+        overflow-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
+      }
+    }
+
+    /* AI Gateway model table (AiGatewayModelIndex): the model-id chips are long
+       hyphenated slugs (e.g. qwen3-next-80b-a3b-instruct). The global inline-code
+       rule's `overflow-wrap: anywhere` would break them across many lines; keep
+       each id on one line (the table wrapper scrolls horizontally if needed). */
+    .ai-gateway-model-table {
       td code,
       th code {
         overflow-wrap: normal;

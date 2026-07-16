@@ -7,14 +7,7 @@
  *   node dist/scripts/promote-safe-production.js <subcommand>
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
-
-import {
-  applySnapshotToBranch,
-  createLogicalSnapshot,
-  getProductionBranchId,
-  restoreSnapshotAsNewBranch,
-} from "./utils.js";
+import { getProductionBranchId, neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectIdEnv = process.env.NEON_PROJECT_ID;
@@ -40,18 +33,12 @@ if (!sub) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
+const neon = neonClient(apiKey);
 
 async function prodBranchId(): Promise<string> {
   const id = process.env.NEON_PROD_BRANCH_ID?.trim();
   if (id) return id;
-  const prod = await getProductionBranchId(api, projectId);
-  if (!prod) {
-    throw new Error(
-      "No production branch (main/production) and NEON_PROD_BRANCH_ID unset",
-    );
-  }
-  return prod;
+  return getProductionBranchId(neon, projectId);
 }
 
 const runId = Date.now();
@@ -62,26 +49,22 @@ if (sub === "bootstrap-dev") {
   console.error(
     `[bootstrap-dev] Snapshot production branch, restore as new branch "${newName}"...`,
   );
-  const snapId = await createLogicalSnapshot(api, projectId, {
-    branchId: pre,
+  const snapshot = await neon.snapshots.create(projectId, pre, {
     name:
       process.env.NEON_SNAPSHOT_BOOTSTRAP_NAME?.trim() ??
       `bootstrap-from-prod-${runId}`,
   });
-  const branchId = await restoreSnapshotAsNewBranch(
-    api,
-    projectId,
-    snapId,
-    newName,
-    false,
-  );
+  // No `targetBranchId` → restore as a new branch.
+  const branch = await neon.snapshots.restore(projectId, snapshot.id, {
+    name: newName,
+  });
   console.log(
     JSON.stringify(
       {
         phase: "bootstrap-dev",
         prodBranchId: pre,
-        snapshotFromProdId: snapId,
-        newDevBranchId: branchId,
+        snapshotFromProdId: snapshot.id,
+        newDevBranchId: branch.id,
         newDevBranchName: newName,
         note: "Point dev workloads at newDevBranchId; cleanup orphaned branches in Console if needed.",
       },
@@ -109,23 +92,22 @@ if (sub === "promote") {
     `dev_snap_${runId}_candidate`;
 
   console.error("[promote] 1/3 Snapshot prod (rollback point)...");
-  const rollbackSnapId = await createLogicalSnapshot(api, projectId, {
-    branchId: prodId,
+  const rollback = await neon.snapshots.create(projectId, prodId, {
     name: preName,
   });
 
   console.error("[promote] 2/3 Snapshot dev (candidate to publish)...");
-  const candidateSnapId = await createLogicalSnapshot(api, projectId, {
-    branchId: devBranchId,
+  const candidate = await neon.snapshots.create(projectId, devBranchId, {
     name: candName,
   });
 
   console.error(
     "[promote] 3/3 Restore dev snapshot onto prod (finalize); brief connection drop on prod...",
   );
-  await applySnapshotToBranch(api, projectId, candidateSnapId, prodId, {
-    finalizeRestore: true,
-    restoreBranchName:
+  await neon.snapshots.restore(projectId, candidate.id, {
+    targetBranchId: prodId,
+    finalize: true,
+    name:
       process.env.NEON_RESTORE_BACKUP_BRANCH_NAME ?? `before_promote_${runId}`,
   });
 
@@ -137,8 +119,8 @@ if (sub === "promote") {
       {
         phase: "promote",
         prodBranchIdBeforeNote: prodId,
-        rollbackSnapshotId: rollbackSnapId,
-        promotedSnapshotId: candidateSnapId,
+        rollbackSnapshotId: rollback.id,
+        promotedSnapshotId: candidate.id,
         warning:
           "Production writes after rollbackSnapId was taken are not included. Delete orphaned backup branches when ready.",
       },
@@ -163,15 +145,15 @@ if (sub === "refresh-dev") {
     `prod_snap_${runId}_refresh_dev`;
 
   console.error("[refresh-dev] 1/2 Snapshot prod...");
-  const prodSnapId = await createLogicalSnapshot(api, projectId, {
-    branchId: prodId,
+  const prodSnap = await neon.snapshots.create(projectId, prodId, {
     name: snapName,
   });
 
   console.error("[refresh-dev] 2/2 Restore prod snapshot onto dev...");
-  await applySnapshotToBranch(api, projectId, prodSnapId, devBranchId, {
-    finalizeRestore: true,
-    restoreBranchName:
+  await neon.snapshots.restore(projectId, prodSnap.id, {
+    targetBranchId: devBranchId,
+    finalize: true,
+    name:
       process.env.NEON_RESTORE_BACKUP_BRANCH_NAME ??
       `before_refresh_dev_${runId}`,
   });
@@ -182,7 +164,7 @@ if (sub === "refresh-dev") {
         phase: "refresh-dev",
         prodBranchId: prodId,
         devBranchId,
-        prodSnapshotId: prodSnapId,
+        prodSnapshotId: prodSnap.id,
       },
       null,
       2,
@@ -202,9 +184,10 @@ if (sub === "rollback-prod") {
   const prodId = await prodBranchId();
 
   console.error("[rollback-prod] Restore snapshot onto prod...");
-  await applySnapshotToBranch(api, projectId, snap, prodId, {
-    finalizeRestore: true,
-    restoreBranchName:
+  await neon.snapshots.restore(projectId, snap, {
+    targetBranchId: prodId,
+    finalize: true,
+    name:
       process.env.NEON_RESTORE_BACKUP_BRANCH_NAME ?? `before_rollback_${runId}`,
   });
 

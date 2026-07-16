@@ -3,21 +3,14 @@
  *
  * 1. Snapshot the production branch (baseline).
  * 2. Create a child branch from production (sandbox).
- * 3. SQL mutation step removed; this package uses only @neondatabase/api-client (no DB query client).
+ * 3. SQL mutation step omitted; this package uses only @neon/sdk (no DB query client).
  * 4. Logical snapshots are **root-branch only** in the Neon API for non-root branches.
  * 5. Restore the baseline snapshot onto the child branch (undo / rewind).
  *
  * @see https://neon.com/docs/ai/ai-database-versioning
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
-
-import {
-  applySnapshotToBranch,
-  createBranchWithOperations,
-  createLogicalSnapshot,
-  getProductionBranchId,
-} from "./utils.js";
+import { getProductionBranchId, neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
@@ -27,13 +20,9 @@ if (!apiKey || !projectId) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
+const neon = neonClient(apiKey);
 
-const prodBranchId = await getProductionBranchId(api, projectId);
-if (!prodBranchId) {
-  console.error("No production branch (main or production).");
-  process.exit(1);
-}
+const prodBranchId = await getProductionBranchId(neon, projectId);
 
 const runId = Date.now();
 const baselineName =
@@ -42,15 +31,14 @@ const demoBranchName =
   process.env.VERSION_DEMO_BRANCH_NAME ?? `versioning-demo-${runId}`;
 
 console.error("[versioning-flow] 1/5 Snapshot production branch (baseline)...");
-const baselineSnapshotId = await createLogicalSnapshot(api, projectId, {
-  branchId: prodBranchId,
+const baseline = await neon.snapshots.create(projectId, prodBranchId, {
   name: baselineName,
 });
 
 console.error("[versioning-flow] 2/5 Create child branch from production...");
-const { id: demoBranchId } = await createBranchWithOperations(api, projectId, {
+const demoBranch = await neon.branches.create(projectId, {
   name: demoBranchName,
-  parentId: prodBranchId,
+  parent_id: prodBranchId,
 });
 
 const sqlNote =
@@ -64,15 +52,19 @@ console.error(
 console.error(
   "[versioning-flow] 5/5 Restore baseline snapshot onto demo branch (rewind)...",
 );
-await applySnapshotToBranch(api, projectId, baselineSnapshotId, demoBranchId);
+await neon.snapshots.restore(projectId, baseline.id, {
+  targetBranchId: demoBranch.id,
+  finalize: true,
+  name: `before_restore_${runId}`,
+});
 
 console.log(
   JSON.stringify(
     {
       projectId,
       productionBranchId: prodBranchId,
-      baselineSnapshotId,
-      demoBranchId,
+      baselineSnapshotId: baseline.id,
+      demoBranchId: demoBranch.id,
       demoBranchName,
       afterSnapshotId: null,
       afterSnapshotNote:

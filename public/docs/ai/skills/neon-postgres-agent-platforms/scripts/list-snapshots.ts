@@ -3,7 +3,7 @@
  * @see https://neon.com/docs/ai/ai-database-versioning#list-available-snapshots
  */
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
+import { neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 const projectId = process.env.NEON_PROJECT_ID;
@@ -13,7 +13,6 @@ if (!apiKey || !projectId) {
   process.exit(1);
 }
 
-const api = createApiClient({ apiKey });
-const { data } = await api.listSnapshots(projectId);
-const snapshots = data.snapshots ?? [];
+const neon = neonClient(apiKey);
+const snapshots = await neon.snapshots.list(projectId);
 console.log(JSON.stringify({ projectId, snapshots }, null, 2));

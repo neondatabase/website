@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { createApiClient } from "@neondatabase/api-client";
+import { neonClient } from "./utils.js";
 
 const apiKey = process.env.NEON_API_KEY?.trim();
 if (!apiKey) {
@@ -8,14 +8,11 @@ if (!apiKey) {
   );
 }
 
-const api = createApiClient({ apiKey });
+const neon = neonClient(apiKey);
 
-const { data } = await api.listProjects({ limit: 400 });
-const projects = data.projects ?? [];
-
-for (const p of projects) {
-  const id = p.id;
-  const name = p.name ?? "";
-  if (!id) continue;
-  console.log(`${id}\t${name}`);
+// `list()` is cursor-paginated; the async iterator streams every page for you
+// (and throws on a page error).
+for await (const project of neon.projects.list()) {
+  if (!project.id) continue;
+  console.log(`${project.id}\t${project.name ?? ""}`);
 }

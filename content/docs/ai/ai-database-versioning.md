@@ -11,7 +11,7 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <Admonition type="note">
@@ -78,7 +78,7 @@ Every agent project maps to one Neon project with a designated [root branch](/do
 
 ### Creating snapshots
 
-Create a snapshot to capture the current database version using the [snapshot endpoint](https://api-docs.neon.tech/reference/createsnapshot):
+Create a snapshot to capture the current database version using the [snapshot endpoint](/docs/reference/api/snapshots/create-snapshot):
 
 ```bash
 POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot
@@ -105,7 +105,7 @@ curl --request POST \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-**Response:** The JSON body includes a `snapshot` object. It may include optional **`full_size`** and **`diff_size`** (bytes) for storage size; the same fields appear when you [list](https://api-docs.neon.tech/reference/listsnapshots) or [update](https://api-docs.neon.tech/reference/updatesnapshot) snapshots. See [Snapshot size fields in API responses](/docs/guides/backup-restore#snapshot-size-fields-in-api-responses).
+**Response:** The JSON body includes a `snapshot` object. It may include optional **`full_size`** and **`diff_size`** (bytes) for storage size; the same fields appear when you [list](/docs/reference/api/snapshots/list-snapshots) or [update](/docs/reference/api/snapshots/update-snapshot) snapshots. See [Snapshot size fields in API responses](/docs/guides/backup-restore#snapshot-size-fields-in-api-responses).
 
 **When to create snapshots:**
 
@@ -120,7 +120,7 @@ Learn how our Developer Advocate approaches snapshot-based workflows in [Promoti
 
 ### Rolling back to (restoring) a snapshot
 
-Restore any snapshot to recover a previous version using the [restore endpoint](https://api-docs.neon.tech/reference/restoresnapshot):
+Restore any snapshot to recover a previous version using the [restore endpoint](/docs/reference/api/snapshots/restore-snapshot):
 
 ```bash
 POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore
@@ -242,7 +242,7 @@ This creates a new branch with its own connection string for preview. The active
 
 #### List available snapshots
 
-Get all snapshots with IDs, names, and timestamps using the [list snapshots endpoint](https://api-docs.neon.tech/reference/listsnapshots):
+Get all snapshots with IDs, names, and timestamps using the [list snapshots endpoint](/docs/reference/api/snapshots/list-snapshots):
 
 ```bash
 GET /api/v2/projects/{project_id}/snapshots
@@ -254,7 +254,7 @@ GET /api/v2/projects/{project_id}/snapshots
 
 #### Delete snapshot
 
-Remove a snapshot using the [delete endpoint](https://api-docs.neon.tech/reference/deletesnapshot):
+Remove a snapshot using the [delete endpoint](/docs/reference/api/snapshots/delete-snapshot):
 
 ```bash
 DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}
@@ -265,9 +265,9 @@ DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
 
-#### Update snapshot name
+#### Update a snapshot
 
-Rename a snapshot using the [update endpoint](https://api-docs.neon.tech/reference/updatesnapshot):
+Rename a snapshot or change its expiration using the [update endpoint](/docs/reference/api/snapshots/update-snapshot):
 
 ```bash
 PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}
@@ -278,12 +278,37 @@ PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
 
-**Body:**
+**Body fields (all optional):**
+
+- `name` (string): A new name for the snapshot
+- `expires_at` (string or `null`): The auto-deletion time in [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6) format. Set a future timestamp to change the retention deadline, or send `null` to clear the expiration so the snapshot never expires. Omit the field to leave the current expiration unchanged. A past timestamp is rejected.
+
+Rename a snapshot:
 
 ```json
 {
   "snapshot": {
     "name": "important-milestone"
+  }
+}
+```
+
+Extend a snapshot's expiration:
+
+```json
+{
+  "snapshot": {
+    "expires_at": "2026-12-31T00:00:00Z"
+  }
+}
+```
+
+Remove the expiration so the snapshot never expires:
+
+```json
+{
+  "snapshot": {
+    "expires_at": null
   }
 }
 ```
@@ -319,15 +344,15 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 ## API quick reference
 
-| Operation                                                                               | Endpoint                                                             | Description                                  |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------- |
-| [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot)                  | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   | Save current database state as a new version |
-| [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)                | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` | Restore database to a previous version       |
-| [List snapshots](https://api-docs.neon.tech/reference/listsnapshots)                    | `GET /api/v2/projects/{project_id}/snapshots`                        | Get all available versions                   |
-| [Delete snapshot](https://api-docs.neon.tech/reference/deletesnapshot)                  | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       | Remove a saved version                       |
-| [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot)                  | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        | Rename a version                             |
-| [Poll operation](https://api-docs.neon.tech/reference/getprojectoperation)              | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        | Check restore status                         |
-| [List branches](https://api-docs.neon.tech/reference/listprojectbranches) (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                         | Find orphaned branches to clean up           |
+| Operation                                                                         | Endpoint                                                             | Description                                  |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------- |
+| [Create snapshot](/docs/reference/api/snapshots/create-snapshot)                  | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   | Save current database state as a new version |
+| [Restore snapshot](/docs/reference/api/snapshots/restore-snapshot)                | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` | Restore database to a previous version       |
+| [List snapshots](/docs/reference/api/snapshots/list-snapshots)                    | `GET /api/v2/projects/{project_id}/snapshots`                        | Get all available versions                   |
+| [Delete snapshot](/docs/reference/api/snapshots/delete-snapshot)                  | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       | Remove a saved version                       |
+| [Update snapshot](/docs/reference/api/snapshots/update-snapshot)                  | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        | Rename a version or change its expiration    |
+| [Poll operation](/docs/reference/api/operations/get-project-operation)            | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        | Check restore status                         |
+| [List branches](/docs/reference/api/branches/list-project-branches) (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                         | Find orphaned branches to clean up           |
 
 ## Implementation checklist
 

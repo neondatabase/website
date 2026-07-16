@@ -7,10 +7,10 @@ summary: >-
   neon deploy. The function gets a public HTTPS URL with DATABASE_URL
   injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. This guide builds one by hand: define it in `neon.ts`, run it locally, deploy it, and call it over HTTP.
 
@@ -18,11 +18,9 @@ A function takes a request and returns a web response, running on long-lived Nod
 
 ## Prerequisites
 
-- A Neon account with Functions preview access. See [Preview access](/docs/compute/functions/preview-access).
-- The latest `neon`, installed and authenticated. Functions commands are new and change often during the preview, so upgrade before you start (`npm install -g neon@latest`).
-- Node.js 18 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
-
-Functions are available on new projects in AWS us-east-2 only, created on or after June 15, 2026.
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), the only region where Functions are available during beta.
+- The latest `neon`, installed and authenticated. Functions commands are new and change often, so upgrade before you start (`npm install -g neon@latest`).
+- Node.js 20 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
 
 `neon init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install the Neon Platform (`neon`) and Neon Functions skills separately:
 

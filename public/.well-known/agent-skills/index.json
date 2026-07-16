@@ -4,65 +4,65 @@
     {
       "name": "neon-postgres",
       "type": "skill-md",
-      "description": "Guides and best practices for working with Neon Serverless Postgres. Covers setup, connection methods, branching, autoscaling, scale-to-zero, read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server, REST API, TypeScript SDK, and Python SDK. Use when users ask about \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neonctl\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", or \"Neon connection pooling\".",
+      "description": "Guides and best practices for working with Neon Serverless Postgres. Covers setup, connection methods, branching, autoscaling, scale-to-zero, read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server, REST API, TypeScript SDK, and Python SDK. Use when users ask about \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neon\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", or \"Neon connection pooling\".",
       "url": "/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:e86b39e63798b79736645bbc5d3925ac52f8dbe7c0c9cc0b106a592771dbc338"
+      "digest": "sha256:09dc734a195975150369e7846da5fdd533a095304655024cb969b1835cc098ea"
     },
     {
       "name": "claimable-postgres",
       "type": "skill-md",
       "description": "Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK. Use when users ask for a quick Postgres environment, a throwaway DATABASE_URL for prototyping/tests, or \"just give me a DB now\". Triggers include: \"quick postgres\", \"temporary postgres\", \"no signup database\", \"no credit card database\", \"instant DATABASE_URL\", \"npx neon-new\", \"neon.new\", \"neon.new API\", \"claimable postgres API\".",
       "url": "/.well-known/agent-skills/claimable-postgres/SKILL.md",
-      "digest": "sha256:d05a1a6618d517f985b79bc7a627f4dc6d7f0d19acd81be7febaeb1e506db056"
+      "digest": "sha256:2fac20cc7ff291c78f8d98977bf12b321128f15caf171ce0a52829acf451526f"
     },
     {
       "name": "neon-postgres-egress-optimizer",
       "type": "skill-md",
       "description": "Diagnose and fix excessive Postgres egress (network data transfer) in a codebase. Use when a user mentions high database bills, unexpected data transfer costs, network transfer charges, egress spikes, \"why is my Neon bill so high\", \"database costs jumped\", SELECT * optimization, query overfetching, reduce Neon costs, optimize database usage, or wants to reduce data sent from their database to their application. Also use when reviewing query patterns for cost efficiency, even if the user doesn't explicitly mention egress or data transfer.",
       "url": "/.well-known/agent-skills/neon-postgres-egress-optimizer/SKILL.md",
-      "digest": "sha256:cb86cc3fce7d5c5ecd1cd581683292478c6cfa6104fff229a9e52feeec957e00"
+      "digest": "sha256:1348b9196d06d3e3e66f31c2f2977897277b7c2731b22c83fce372b6f04af4f5"
     },
     {
       "name": "neon-postgres-branches",
       "type": "skill-md",
       "description": "Choose and create the right Neon branch type for testing and development. Use when users ask about Neon branching, migration testing with real data, isolated test environments, schema-only branch workflows for sensitive data, or branch creation via Neon CLI or Neon MCP. Triggers include \"Neon branch\", \"test migrations safely\", \"branch production data\", \"schema-only branch\", \"reset branch\" and \"sensitive data testing\".",
       "url": "/.well-known/agent-skills/neon-postgres-branches/SKILL.md",
-      "digest": "sha256:14ec4806726465de30bb6dd309025d380e25de0036465479dc2169453d6d1b32"
+      "digest": "sha256:cba26a7c0acb2d0d9162577247a12a5c33f7c1e5f095661c8b13fcb37a6a3dd4"
     },
     {
       "name": "neon",
       "type": "skill-md",
-      "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use whenever \"Neon\" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: \"object storage\" or \"S3-compatible storage\", \"serverless functions\", \"background jobs\", or \"run code near my database\", \"AI gateway\", \"LLM proxy\", \"model routing\", or \"call an LLM\" → AI Gateway; \"database\", \"Postgres\", or \"authentication\" → Postgres and Auth.",
+      "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, the Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use when \"Neon\" is mentioned, or when any of its individual capabilities are the trigger: \"object storage\" or \"S3\", \"buckets\", \"serverless functions\", \"AI gateway\", \"call an LLM\", \"postgres\", \"database\", or \"backend\".",
       "url": "/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:76e46a0b9ec7fac1491ea6a36fb5afb98ebcc2de856943409fb34b9fb1f41211"
+      "digest": "sha256:37c81de636bd05e901517784d10dbcd36a4fe781d850a2c532dcd0526a61ed4c"
     },
     {
       "name": "neon-postgres-agent-platforms",
       "type": "skill-md",
       "description": "Build and operate multi-tenant AI agent platforms on Neon. Use this skill whenever the user is designing an agent/app builder, provisioning a Neon project or database per user/app/agent run, managing thousands of tenant projects, separating sponsored free users from paid customers, moving projects between orgs, choosing personal vs organization vs project-scoped API keys, tracking fleet consumption or Agent Plan costs, creating compound checkpoints that combine DB snapshots with source revisions/secrets/deploy metadata, or orchestrating snapshot/restore flows for generated apps. Also use it for Neon Agent Program, Agent Plan, org/project limits, HIPAA, co-marketing, support, or neondatabase/neon-for-agent-platforms examples.",
       "url": "/.well-known/agent-skills/neon-postgres-agent-platforms/SKILL.md",
-      "digest": "sha256:4d72d322ab52b97669a9fd1cf91bc9577f365c427345b5365f01799236d35c44"
+      "digest": "sha256:21ebbbf8f15e50f39f5f65de9c9459ed83993b5752d8f238aff9ffccb5c25061"
     },
     {
       "name": "neon-object-storage",
       "type": "skill-md",
       "description": "S3-compatible object storage that branches with your Neon project, so files and the database stay in sync across every branch. Use when a user wants object storage, a bucket, blob/file storage, or somewhere to put uploads, images, documents, avatars, or user-generated files for their app or agent — especially when they already use (or are setting up) Neon Postgres and don't want to add a separate storage provider like AWS S3, Cloudflare R2, or Supabase Storage. Triggers include \"object storage\", \"bucket\", \"blob storage\", \"file storage\", \"store uploads/images/files\", \"S3-compatible storage\", \"presigned URL\", \"where do I put files\", \"Neon Object Storage\", \"Neon Storage\", and \"storage that branches with my database\".",
       "url": "/.well-known/agent-skills/neon-object-storage/SKILL.md",
-      "digest": "sha256:ed70709e80d09b3e33030f9b1b42d48c5eec21668d20d9cd7c9cb48d7bb3009a"
+      "digest": "sha256:6c51eaf29275db379eb964cc34c5836df09d4672206a7d2a7d9d071ac906723c"
     },
     {
       "name": "neon-ai-gateway",
       "type": "skill-md",
       "description": "One API and one credential for frontier and open-source LLMs, built into your Neon branch and powered by Databricks. Use when a user wants to call an LLM, add AI/chat/an agent to their app, route between model providers (OpenAI, Anthropic, Google/Gemini, Meta, Alibaba, DeepSeek), or avoid juggling separate provider API keys and accounts — especially when they already use Neon and want AI requests to branch with their project. Works with the OpenAI SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing only the base URL. Triggers include \"call an LLM\", \"add AI to my app\", \"chat completion\", \"model routing\", \"LLM proxy/gateway\", \"one API for all models\", \"use Claude/GPT/Gemini\", \"AI SDK\", \"Mastra agent\", \"Neon AI Gateway\", and \"log/rate-limit AI calls\".",
       "url": "/.well-known/agent-skills/neon-ai-gateway/SKILL.md",
-      "digest": "sha256:a32bb5f9f5aae67a45d19f6a9600b30429a0c4c75b911b5156b7705b17cefc7b"
+      "digest": "sha256:3d3f360a82c5c6f67dccd4a8226dda16ed70b9d0303263822562f5301c7eca61"
     },
     {
       "name": "neon-functions",
       "type": "skill-md",
       "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"run code next to my database\", \"function that won't time out\", \"Neon Functions\", and \"Neon Compute\".",
       "url": "/.well-known/agent-skills/neon-functions/SKILL.md",
-      "digest": "sha256:5ca4e8453578e9bd3947971f1f516aabb468aa48b37912ca24238696e2193501"
+      "digest": "sha256:3d6b91ee3d5d1bc45a717cf1eba899b1a35ac7f5d6a690059e5553e53efbdaae"
     }
   ]
 }

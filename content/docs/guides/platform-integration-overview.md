@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
@@ -117,7 +117,7 @@ Use the embedded Postgres approach when you want to provision and manage Postgre
 
 <a href="/docs/guides/embedded-postgres" description="Learn how to embed Postgres in your platform" icon="import">Embedded Postgres guide</a>
 
-<a href="/docs/reference/api-reference" description="Explore the Neon API" icon="transactions">Neon API reference</a>
+<a href="/docs/reference/api" description="Explore the Neon API" icon="transactions">Neon API Reference</a>
 
 </DetailIconCards>
 

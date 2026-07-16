@@ -8,7 +8,7 @@
 //   - src/scripts/process-md-for-llms.js — expands the same components in
 //     the agent-facing .md mirror
 //
-// Running this file directly (`npm run gen:docs:neonctl`) emits every
+// Running this file directly (`npm run cli-docs -- preview`) emits every
 // fragment to fragments/ as a local preview of what the components render.
 //
 // The binary is documented as `neon`; `$0` in yargs usage strings is
