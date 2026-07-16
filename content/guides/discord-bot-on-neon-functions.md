@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-06-30T06:20:45.708Z'
+updatedOn: '2026-07-16T10:58:03.001Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -91,13 +91,15 @@ $ neonctl init --preview
 Next, install the required dependencies:
 
 ```bash
-npm install hono discord-interactions @neondatabase/ai-sdk-provider @neondatabase/functions @neondatabase/config
+npm install hono discord-interactions ai @neondatabase/ai-sdk-provider @neondatabase/functions @neondatabase/config
 npm install --save-dev esbuild @types/node typescript
 ```
 
 - `hono`: A lightweight TypeScript-first web framework for building REST APIs.
 - `discord-interactions`: Discord's official library for implementing slash commands and verifying webhook signatures.
+- `ai`: The Vercel AI SDK, which provides `generateText` and the tooling used to call the AI Gateway.
 - `@neondatabase/ai-sdk-provider`: Neon's AI SDK Provider, which allows you to access LLMs and image generation tools.
+- `@neondatabase/functions` and `@neondatabase/config`: The Neon Functions runtime and configuration helpers used to define and deploy your function.
 
 ## Link your Neon project
 
@@ -484,13 +486,13 @@ Go to your Discord server and try the new commands:
 
 Your Discord bot is now fully functional with AI chat and image generation capabilities, all powered by Neon Functions and the Neon AI Gateway.
 
-You can now start charging users for generating images :)
+You can now start charging users for generating images.
 
 </Steps>
 
 ## Extending this workflow
 
-The bot you built is a starting point. Because Neon Functions can connect to [Neon Postgres](/docs/introduction/neon), you can turn this into a full SaaS product with user management, billing, and usage tracking. Here are some ideas:
+The bot you built is a starting point. Because Neon Functions can connect to [Neon Postgres](/docs/introduction), you can turn this into a full SaaS product with user management, billing, and usage tracking. Here are some ideas:
 
 - **User tracking:** Store Discord `user_id` in a Postgres table to track who is using your bot, how often, and what commands they invoke. This gives you per-user analytics and a foundation for billing.
 - **Paid access with Stripe:** Gate premium commands like `/chat` and `/imagine` behind a payment wall. When a user invokes a paid command, look up their `user_id` in your database. If they haven't paid, reply with a Stripe Checkout link. Use [Stripe webhooks](https://docs.stripe.com/webhooks) to update your database when a payment succeeds.
