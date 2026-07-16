@@ -65,7 +65,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Using the PostgreSQL RTRIM() function to remove leading spaces
+### 2\) Using the PostgreSQL RTRIM() function to remove the trailing spaces
 
 The following example uses the `RTRIM()` function to remove all the spaces from the end of the string `'PostgreSQL '`:
 
