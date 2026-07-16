@@ -842,6 +842,8 @@
           items:
             - title: Overview
               slug: ai-gateway/overview
+            - title: Why AI Gateway
+              slug: ai-gateway/why-ai-gateway
             - title: Quickstart
               slug: ai-gateway/get-started
             - title: Models

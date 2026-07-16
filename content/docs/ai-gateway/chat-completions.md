@@ -6,18 +6,14 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:21:12.950Z'
+updatedOn: '2026-06-29T11:52:45.649Z'
 ---
 
-<FeatureBetaProps feature_name="Neon AI Gateway" />
+<PrivatePreviewEnquire/>
 
-The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). Switch models by changing a single field.
+The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). This means you can switch between Claude, GPT, Gemini, and open-weight models by changing a single field, with no SDK changes, no new provider accounts, and no refactored error handling.
 
 **Base URL:** `https://<branch-host>/ai-gateway/mlflow/v1`
-
-This endpoint is also reachable at the shorter `/v1/chat/completions` path (no `/ai-gateway/mlflow` prefix). Both behave identically. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
-
-If you're using an OpenRouter-compatible client that asks for a base URL, set it to `https://<branch-host>/v1` and call `/chat/completions`.
 
 ## Setup
 
@@ -25,7 +21,7 @@ Set these environment variables. See [Get started](/docs/ai-gateway/get-started)
 
 ```bash
 NEON_AI_GATEWAY_TOKEN=nt_live_...
-NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
+NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
 ```
 
 ## Basic request
@@ -160,10 +156,8 @@ model: 'gpt-5-4'
 model: 'gemini-2-5-flash'
 
 // Alibaba
-model: 'qwen3-next-80b-a3b-instruct'
+model: 'databricks-qwen35-122b-a10b'
 ```
-
-For a few models, `message.content` comes back as an array of content blocks instead of a plain string. See [Content shape varies by model](/docs/ai-gateway/models#which-endpoint-to-use) before swapping in a model you haven't used yet.
 
 See [Models](/docs/ai-gateway/models) for the full list.
 
@@ -199,12 +193,14 @@ When the upstream provider rate-limits a request, AI Gateway forwards the releva
 | `429 Too Many Requests`        | Upstream rate limited  | Upstream provider rate limit. Check the `Retry-After` and `X-Ratelimit-*` headers.                                                           |
 | `502 Bad Gateway`              | Upstream error         | Temporary issue with the upstream workspace. Retry the request.                                                                              |
 
-Error responses are a JSON object with an `error.message` field:
+Error responses use the standard OpenAI error format:
 
 ```json
 {
   "error": {
-    "message": "unknown model \"<model-id>\""
+    "message": "unknown model",
+    "type": "invalid_request_error",
+    "code": "invalid_model"
   }
 }
 ```
