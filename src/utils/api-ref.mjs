@@ -61,10 +61,6 @@ export function formatParamsArg(params) {
   return `{ ${parts.join(', ')} }`;
 }
 
-function toSdkParamName(name) {
-  return name.replace(/_([a-z0-9])/g, (_, char) => char.toUpperCase());
-}
-
 function paramValue(p, val) {
   const type = p.type ?? p.schema?.type;
   if (val !== undefined) {
@@ -77,6 +73,38 @@ function paramValue(p, val) {
         : val;
   }
   return `process.env.${p.name.toUpperCase()}`;
+}
+
+function formatRawPropertyName(name) {
+  return /^[A-Za-z_$][A-Za-z0-9_$]*$/.test(name) ? name : JSON.stringify(name);
+}
+
+function formatRawValue(value, depth = 0) {
+  if (
+    typeof value === 'string' &&
+    (value.startsWith('process.env.') || value === 'neon.client')
+  ) {
+    return value;
+  }
+  if (value === null || typeof value !== 'object') return JSON.stringify(value);
+  if (Array.isArray(value)) {
+    if (value.length === 0) return '[]';
+    const indent = '  '.repeat(depth);
+    const nextIndent = '  '.repeat(depth + 1);
+    return `[\n${value.map((item) => `${nextIndent}${formatRawValue(item, depth + 1)}`).join(',\n')}\n${indent}]`;
+  }
+
+  const entries = Object.entries(value);
+  if (entries.length === 0) return '{}';
+
+  const indent = '  '.repeat(depth);
+  const nextIndent = '  '.repeat(depth + 1);
+  return `{\n${entries
+    .map(
+      ([key, entryValue]) =>
+        `${nextIndent}${formatRawPropertyName(key)}: ${formatRawValue(entryValue, depth + 1)}`
+    )
+    .join(',\n')}\n${indent}}`;
 }
 
 export function buildTs(operation, paramValues, paramIncluded, bodyJson) {
@@ -93,39 +121,26 @@ export function buildTs(operation, paramValues, paramIncluded, bodyJson) {
 
   const bodyStr = hasBody ? JSON.stringify(bodyJson, null, 2) : null;
 
-  const args = [];
-  // Mirrors @neondatabase/api-client generated signatures: operations with
-  // query params receive one params object, while path-only operations use
-  // positional path params before the optional request body.
-  const needsQueryObject = queryParams.length > 0;
-  if (needsQueryObject) {
-    const queryObject = {};
+  const rawOptions = { client: 'neon.client' };
+  if (pathParams.length > 0) {
+    rawOptions.path = {};
     for (const p of pathParams) {
-      queryObject[toSdkParamName(p.name)] = paramValue(p, paramValues[p.name]);
-    }
-    for (const p of activeQueryParams) {
-      queryObject[p.name] = paramValue(p, paramValues[p.name]);
-    }
-    args.push(formatParamsArg(queryObject));
-  } else {
-    for (const p of pathParams) {
-      const value = paramValue(p, paramValues[p.name]);
-      args.push(
-        typeof value === 'string' && value.startsWith('process.env.')
-          ? value
-          : JSON.stringify(value)
-      );
+      rawOptions.path[p.name] = paramValue(p, paramValues[p.name]);
     }
   }
-
-  if (bodyStr) args.push(bodyStr);
-  if (args.length === 0) args.push('{}');
+  if (activeQueryParams.length > 0) {
+    rawOptions.query = {};
+    for (const p of activeQueryParams) {
+      rawOptions.query[p.name] = paramValue(p, paramValues[p.name]);
+    }
+  }
+  if (bodyStr) rawOptions.body = bodyJson;
 
   return [
-    `import { createApiClient } from '@neondatabase/api-client';`,
+    `import { createNeonClient, raw } from '@neon/sdk';`,
     ``,
-    `const api = createApiClient({ apiKey: process.env.NEON_API_KEY });`,
-    `const { data } = await api.${sdkMethod}(${args.join(', ')});`,
+    `const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY });`,
+    `const { data } = await raw.${sdkMethod}(${formatRawValue(rawOptions)});`,
   ].join('\n');
 }
 

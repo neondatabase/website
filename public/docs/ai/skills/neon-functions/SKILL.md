@@ -15,7 +15,7 @@ description: >-
 
 # Neon Functions
 
-This is a preview feature and only available in `us-east-2`. Neon Functions are long-running Node.js HTTP handlers deployed onto a Neon branch. Each function gets a public HTTPS URL, runs in the same region as your database, and — if the branch has Postgres — gets `DATABASE_URL` injected automatically. You deploy and manage them through the same Neon CLI, `neon.ts`, and API you already use.
+This is a public beta feature and only available in `us-east-2`. Neon Functions are long-running Node.js HTTP handlers deployed onto a Neon branch. Each function gets a public HTTPS URL, runs in the same region as your database, and — if the branch has Postgres — gets `DATABASE_URL` injected automatically. You deploy and manage them through the same Neon CLI, `neon.ts`, and API you already use.
 
 Use this skill to help the user define, run locally, deploy, and manage functions next to their database. Deliver a deployed function with its invocation URL, a working local `neon dev` loop, or a precise answer from the official Neon docs.
 
@@ -155,7 +155,7 @@ Neon injects branch-scoped connection strings and service URLs at runtime — yo
 | `NEON_AUTH_BASE_URL`    | Present when Neon Auth is enabled on the branch.                                         |
 | `NEON_DATA_API_URL`     | Present when the Data API is enabled on the branch.                                      |
 
-Object storage (`AWS_*`) and AI Gateway (`OPENAI_*`, `NEON_AI_GATEWAY_*`) vars are also injected when those services are declared — see the `neon-object-storage` and `neon-ai-gateway` skills.
+Object storage (`AWS_*`) and AI Gateway (`NEON_AI_GATEWAY_*`) vars are also injected when those services are declared — see the `neon-object-storage` and `neon-ai-gateway` skills.
 
 `neon env pull` / `neon-env run` / `neon dev` emit `NEON_BRANCH` (and the connection strings) into your local dev environment too, so local runs mirror the deployed runtime.
 
@@ -166,7 +166,7 @@ functions: {
   todos: {
     name: "todo api",
     source: "src/index.ts",
-    env: { OPENAI_API_KEY: process.env.OPENAI_API_KEY! },
+    env: { RESEND_API_KEY: process.env.RESEND_API_KEY! },
   },
 }
 ```
@@ -239,7 +239,7 @@ export default {
     wss.handleUpgrade(req, socket, head, (ws) => {
       clients.add(ws);
       ws.on("close", () => clients.delete(ws));
-      ws.on("message", (data) => broadcast(data.toString())); // see fan-out below
+      ws.on("message", (data) => persist(data.toString())); // persist; fan out to every isolate — see below
     });
   },
 };
@@ -273,7 +273,7 @@ app.get(
 export default handler; // Neon's { fetch, upgrade } contract
 ```
 
-> Don't put header-modifying middleware (e.g. CORS) on an `upgradeWebSocket` route — the helper rewrites headers internally and will throw. The [fan-out](#fan-out-across-isolates-do-not-skip-this) and [reconnect](#client-must-reconnect) guidance below applies unchanged.
+> Don't put header-modifying middleware (e.g. CORS) on an `upgradeWebSocket` route — the helper rewrites headers internally and will throw. The [sync](#keeping-clients-in-sync-across-isolates-do-not-skip-this) and [reconnect](#client-must-reconnect) guidance below applies unchanged.
 
 ### Heartbeat (keep the socket alive)
 
@@ -290,11 +290,35 @@ beat.unref?.();
 
 (With the Hono `upgradeWebSocket` helper you don't hold the raw socket, so send an application-level keepalive instead — e.g. `ws.send("ping")` on the same interval, ignored by the client.)
 
-### Fan-out across isolates (do not skip this)
+### Keeping clients in sync across isolates (do not skip this)
 
-Under load the runtime runs **several isolates in parallel, each with its own copy of module state** — so each isolate has its own `clients` set. Broadcasting only to the local set means a client connected to isolate A never sees a message sent by a client on isolate B. The chat would silently fracture.
+Under load the runtime runs **several isolates in parallel, each with its own copy of module state** — so each isolate has its own `clients` set. Broadcasting only to that local set means a client on isolate A never sees an event produced on isolate B, and the feed silently fractures. It's easy to miss: `neon dev` runs a single process (one isolate), so in-process broadcast always *looks* fine locally but breaks in production, where concurrent connections spread across many isolates.
 
-Fan out across every isolate with **Postgres `LISTEN`/`NOTIFY`**: each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection, and broadcasting means `NOTIFY` (so every isolate, including the sender's, re-broadcasts to its own sockets). This is also why message state must live in Postgres, not module memory — module state doesn't survive eviction.
+Module state doesn't survive eviction anyway, so **Postgres is the shared source of truth**. Pick a fan-out strategy. In every snippet below, `pool` is a pooled `pg` client and `clients` is this isolate's `Set` of live connections.
+
+**1. Poll Postgres — the default, and the only option that keeps Scale to Zero.** Each isolate re-reads the shared state (or rows past a cursor) on a short interval and pushes changes to its own clients. One query per isolate per tick (not per client), and none when the isolate has no clients — so an idle compute still suspends.
+
+```typescript
+let lastId = 0;
+const poller = setInterval(async () => {
+  if (clients.size === 0) return; // no clients here → no query → compute can scale to zero
+  const { rows } = await pool.query(
+    "SELECT id, payload FROM events WHERE id > $1 ORDER BY id",
+    [lastId],
+  );
+  for (const { id, payload } of rows) {
+    lastId = id;
+    for (const ws of clients) if (ws.readyState === ws.OPEN) ws.send(payload);
+  }
+}, 1000);
+poller.unref?.();
+```
+
+- **Latency:** up to the interval (~1s) — fine for counters, chat, and dashboards.
+- **Scaling:** database load grows with the number of live isolates, not clients. Keep the cursor on an indexed `serial`/`bigserial` PK and the interval sane.
+- **Scale to Zero:** ✅ preserved — polling stops when no clients are connected, so the compute suspends on its normal timer.
+
+**2. `LISTEN`/`NOTIFY` — lowest latency, but requires disabling Scale to Zero.** Each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection; broadcasting is `NOTIFY`, so every isolate (including the sender's) re-pushes to its sockets. Near-instant — but the listener holds an idle connection that **does not count as active**, so [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) suspends the compute and drops it, silently killing the feed. Only use it on an **always-on** compute (Scale to Zero disabled — a paid-plan setting).
 
 ```typescript
 import { Pool, Client } from "pg";
@@ -317,6 +341,10 @@ function broadcast(event: unknown) {
 }
 ```
 
+**3. External pub/sub (e.g. [Upstash](https://upstash.com) Redis) — best at scale.** For high fan-out, sub-second latency at large connection counts, or multi-region, publish/subscribe through a dedicated broker. Highest throughput, and it doesn't touch Postgres or block Scale to Zero — at the cost of another service to run.
+
+**Rule of thumb:** start with **polling** (works with Scale to Zero, no extra infra); switch to `LISTEN`/`NOTIFY` only on always-on compute that needs sub-second latency; move to Redis when fan-out outgrows Postgres.
+
 ### Client must reconnect
 
 Idle functions are evicted (and isolates restart for operational reasons), so a client's socket **will** drop — treat reconnection as normal, not exceptional. Reconnect with exponential backoff, capped, and **re-mint a fresh token on every attempt** (tokens are short-lived, so a stale one fails the `upgrade` auth check):
@@ -338,7 +366,7 @@ async function connect() {
 connect();
 ```
 
-Together — Hono `fetch` + `ws` `upgrade`, JWT auth over `?token=`, `LISTEN`/`NOTIFY` fan-out, and client backoff — these compose into a complete realtime chat backend on a single function.
+Together — Hono `fetch` + `ws` `upgrade`, JWT auth over `?token=`, cross-isolate fan-out, and client backoff — these compose into a complete realtime chat backend on a single function.
 
 ## Server-sent events (SSE)
 
@@ -362,7 +390,7 @@ export default {
 };
 ```
 
-The same rules as WebSockets apply. **Heartbeat:** a stream stays open only while bytes flow — Neon's window is 15 minutes ([Timeouts and runtime limits](#timeouts-and-runtime-limits)) but proxies are usually far stricter, so emit a `: ping\n\n` comment every ~25–30s (shown above) to keep idle streams from being dropped. Keep state in Postgres, and fan out across isolates with [`LISTEN`/`NOTIFY`](#fan-out-across-isolates-do-not-skip-this) (hold a `Set` of stream controllers and `enqueue` to each). `EventSource` is GET-only and can't set headers, so authenticate with a `?token=` query param or cookie, exactly like the WebSocket case. [references/sse.md](references/sse.md) has the full pattern — Hono variant, cross-isolate fan-out, wire format, client, and caveats.
+The same rules as WebSockets apply. **Heartbeat:** a stream stays open only while bytes flow — Neon's window is 15 minutes ([Timeouts and runtime limits](#timeouts-and-runtime-limits)) but proxies are usually far stricter, so emit a `: ping\n\n` comment every ~25–30s (shown above) to keep idle streams from being dropped. Keep state in Postgres, and fan out across isolates using one of the [sync strategies](#keeping-clients-in-sync-across-isolates-do-not-skip-this) (hold a `Set` of stream controllers and `enqueue` to each). `EventSource` is GET-only and can't set headers, so authenticate with a `?token=` query param or cookie, exactly like the WebSocket case. [references/sse.md](references/sse.md) has the full pattern — Hono variant, cross-isolate fan-out, wire format, client, and caveats.
 
 ## MCP servers
 
@@ -445,7 +473,7 @@ Pass the JWKS/issuer URL to the function via its `env` (see Environment variable
 
 ## Availability
 
-Neon Functions is a preview (early access) feature available only on new projects in the `us-east-2` region. Confirm the user's Neon project is a new project in `us-east-2`; it can't be enabled on existing projects. Functions usage isn't billed during the private preview. If the user does not yet have access, point them to the private beta sign-up: https://neon.com/blog/were-building-backends#access
+Neon Functions is a public beta feature available only on new projects in the `us-east-2` region. Confirm the user's Neon project is a new project in `us-east-2`; it can't be enabled on existing projects. Functions usage isn't billed during the public beta.
 
 ## Neon Documentation
 

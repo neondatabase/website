@@ -11,7 +11,7 @@ summary: >-
   Schema Diff to see exactly which tables, sequences, and constraints differ
   before merging or restoring.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
@@ -100,7 +100,7 @@ First, create a new database called `people` on the `production` branch and add 
 
 <TabItem>
 
-1. Use the [Create database](https://api-docs.neon.tech/reference/createprojectbranchdatabase) API to create the `people` database, specifying the `project_id`, `branch_id`, database `name`, and database `owner_name` in the API call.
+1. Use the [Create database](/docs/reference/api/branches/create-project-branch-database) API to create the `people` database, specifying the `project_id`, `branch_id`, database `name`, and database `owner_name` in the API call.
 
    ```bash
    curl --request POST \
@@ -116,7 +116,7 @@ First, create a new database called `people` on the `production` branch and add 
    }'
    ```
 
-2. Retrieve your database connection string using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint, specifying the required `project_id`, `branch_id`, `database_name`, and `role_name` parameters.
+2. Retrieve your database connection string using [Get connection URI](/docs/reference/api/projects/get-connection-uri) endpoint, specifying the required `project_id`, `branch_id`, `database_name`, and `role_name` parameters.
 
    ```bash
    curl --request GET \
@@ -236,7 +236,7 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 
 <TabItem>
 
-Using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API, create a development branch named `feature/address`. You'll need to specify the `project_id`, `parent_id`, branch `name`, and add a `read_write` compute (you need a compute to connect to the branch).
+Using the [Create branch](/docs/reference/api/branches/create-project-branch) API, create a development branch named `feature/address`. You'll need to specify the `project_id`, `parent_id`, branch `name`, and add a `read_write` compute (you need a compute to connect to the branch).
 
 ```bash
 curl --request POST \
@@ -325,7 +325,7 @@ CREATE TABLE address (
 
 <TabItem>
 
-1. Retrieve the database connection string for the `feature/address` branch using [Get connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint:
+1. Retrieve the database connection string for the `feature/address` branch using [Get connection URI](/docs/reference/api/projects/get-connection-uri) endpoint:
 
    ```bash
    curl --request GET \

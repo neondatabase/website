@@ -15,7 +15,7 @@ description: >-
 
 # Neon Object Storage
 
-This is a preview feature and only available in `us-east-2`. Neon Object Storage is S3-compatible object storage that branches with your projects: every branch gets its own isolated storage state, so files and database rows stay in sync across dev, preview, staging, and production.
+This is a public beta feature and only available in `us-east-2`. Neon Object Storage is S3-compatible object storage that branches with your projects: every branch gets its own isolated storage state, so files and database rows stay in sync across dev, preview, staging, and production.
 
 Use this skill to help the user store and serve files that branch alongside their database. Deliver a working bucket and upload/download flow, a branch-aware S3 client wired to the injected env vars, or a precise answer from the official Neon docs.
 
@@ -179,7 +179,7 @@ The canonical pattern for pairing storage with the database on a branch: an agen
 
 ## Availability
 
-Neon Object Storage is a preview (early access) feature available only on new projects in the `us-east-2` region. Confirm the user's Neon project is a new project in `us-east-2` before proceeding; it can't be enabled on existing projects. If the user does not yet have access, point them to the private beta sign-up: https://neon.com/blog/were-building-backends#access
+Neon Object Storage is a public beta feature available only on new projects in the `us-east-2` region. Confirm the user's Neon project is a new project in `us-east-2` before proceeding; it can't be enabled on existing projects.
 
 ## Neon Documentation
 

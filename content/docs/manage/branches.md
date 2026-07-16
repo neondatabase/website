@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -19,7 +19,7 @@ Data resides in a branch. Each Neon project is created with a [root branch](#roo
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](/docs/introduction/branching).
 
-You can create and manage branches using the Neon Console, [Neon CLI](/docs/cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can create and manage branches using the Neon Console, [Neon CLI](/docs/cli), or [Neon API](/docs/reference/api).
 
 <Admonition type="important">
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [history window](/docs/introduction/history-window).
@@ -117,7 +117,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch (named `production` in the Console, `main` via API/CLI), but you can designate any branch as your project's default branch. When creating a new branch without specifying the parent, a new branch is created from your project's default branch. Default branch is automatically selected in the UI when creating the new branch, and it's used in the [create branch API call](https://api-docs.neon.tech/reference/createprojectbranch). The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) also creates preview deployment branches from your project's default branch.
+Each Neon project is created with a default branch (named `production` in the Console, `main` via API/CLI), but you can designate any branch as your project's default branch. When creating a new branch without specifying the parent, a new branch is created from your project's default branch. Default branch is automatically selected in the UI when creating the new branch, and it's used in the [create branch API call](/docs/reference/api/branches/create-project-branch). The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) also creates preview deployment branches from your project's default branch.
 
 For more information, see [Default branch](#default-branch).
 
@@ -296,10 +296,10 @@ The Neon CLI supports creating and managing branches. For instructions, see [Neo
 
 ## Branching with the Neon API
 
-Branch actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Branch actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete branches using the Neon API. For other branch-related API methods, refer to the [Neon API Reference](/docs/reference/api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all of the attributes for a particular method, refer to the method's request body schema in the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -311,7 +311,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 <LinkAPIKey />
 ### Create a branch with the API
 
-The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
+The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch).
 
 ```http
 POST /projects/{project_id}/branches
@@ -348,7 +348,7 @@ The response body includes information about the branch, the branch's compute, a
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -466,7 +466,7 @@ For attribute definitions, find the [Create branch](https://api-docs.neon.tech/r
 
 ### List branches with the API
 
-The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranches).
+The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/list-project-branches).
 
 ```http
 GET /projects/{project_id}/branches
@@ -487,7 +487,7 @@ The response body lists the project's default branch and any child branches. The
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List branches](/docs/reference/api/branches/list-project-branches) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -555,7 +555,7 @@ For attribute definitions, find the [List branches](https://api-docs.neon.tech/r
 
 ### Delete a branch with the API
 
-The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranch).
+The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/delete-project-branch).
 
 ```http
 DELETE /projects/{project_id}/branches/{branch_id}
@@ -578,7 +578,7 @@ The response body shows information about the branch being deleted and the `susp
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Delete branches](https://api-docs.neon.tech/reference/deleteprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete branches](/docs/reference/api/branches/delete-project-branch) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {

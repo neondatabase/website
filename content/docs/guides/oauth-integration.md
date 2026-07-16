@@ -10,7 +10,7 @@ summary: >-
   partners. The page covers the consent screen, authorization URL construction,
   code-for-token exchange, and refresh token scopes.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
@@ -89,7 +89,32 @@ Here is an example response:
 You must add `offline` and `offline_access` scopes to your request to receive the `refresh_token`.
 </Admonition>
 
-Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](/docs/cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. For an example, refer to this part of the Neon CLI [source code](https://github.com/neondatabase/neonctl/blob/3764c5d5675197ef9bc7ed78d5531bd318f7f13b/src/auth.ts#L63-L81). In this example, the `oauthHost` is `https://oauth2.neon.tech`.
+Depending on the OpenID client you’re using, you might not need to explicitly interact with the API endpoints listed below. OAuth 2.0 clients typically handle this interaction automatically. For example, the [Neon CLI](/docs/cli), written in Typescript, interacts with the API endpoints automatically to retrieve the `refresh_token` and `access_token`. Here's a simplified example of how the Neon CLI performs the token exchange using the `openid-client` library:
+
+```typescript
+const configuration = await client.discovery(
+  new URL(oauthHost),
+  clientId,
+  { token_endpoint_auth_method: 'none' },
+  client.None()
+);
+
+// After the user authenticates in the browser, the CLI's local
+// callback server receives the redirect as `request`. The full
+// callback URL is built from that request plus the server's own
+// port (`listen_port`):
+const tokenSet = await client.authorizationCodeGrant(
+  configuration,
+  new URL(request.url, `http://127.0.0.1:${listen_port}`),
+  {
+    pkceCodeVerifier: codeVerifier,
+    expectedState: state,
+  }
+);
+// tokenSet.access_token and tokenSet.refresh_token are now available
+```
+
+In this example, the `oauthHost` is `https://oauth2.neon.tech`.
 
 ## Supported OAuth Scopes
 
@@ -148,7 +173,7 @@ After being redirected to the authorization URL, the user is presented with Neon
 ![Neon OAuth consent screen](/docs/oauth/consent.png)
 
 <Admonition type="note">
-The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) provides a [Get current user details](https://api-docs.neon.tech/reference/getcurrentuserinfo) endpoint for retrieving information about the currently authorized Neon user.
+The [Neon API](/docs/reference/api) provides a [Get current user details](/docs/reference/api/users/get-current-user-info) endpoint for retrieving information about the currently authorized Neon user.
 </Admonition>
 
 ## Authorization code is returned to your callback URL
@@ -169,7 +194,7 @@ You can now exchange the authorization code returned from the previous step for 
 - `grant_type`: set this to `authorization_code` to indicate that you are using the [Authorization Code grant type](https://oauth.net/2/grant-types/authorization-code/)
 - `code`: the authorization code returned from the previous step
 
-The response object includes an `access_token` value, required for making requests to the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
+The response object includes an `access_token` value, required for making requests to the [Neon API](/docs/reference/api) on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
 
 ## Example OAuth application
 

@@ -7,7 +7,7 @@ summary: >-
   `npx neon@latest init` or use the config generator. Supports OAuth and
   API key auth.
 enableTableOfContents: true
-updatedOn: '2026-06-19T23:17:10.824Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/reference/neon-cli) commands directly.
@@ -108,7 +108,7 @@ For clients that don't support Streamable HTTP, you can use the deprecated SSE e
 ## Resources
 
 - [MCP Protocol](https://modelcontextprotocol.org)
-- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [Neon API Reference](/docs/reference/api)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)
 

@@ -41,7 +41,7 @@ module.exports = {
       url: 'https://neon.com/docs/reference/api.md',
     },
     {
-      label: 'Neon CLI reference (neonctl commands, options, and usage)',
+      label: 'Neon CLI reference (neon commands, options, and usage)',
       url: 'https://neon.com/docs/cli.md',
     },
   ],
@@ -85,7 +85,7 @@ module.exports = {
     {
       name: 'Neon CLI',
       description:
-        'Install: `npm i -g neonctl`. Use this for terminal-first workflows, scripts, and CI/CD automation with `neonctl`.',
+        'Install: `npm i -g neon`. Use this for terminal-first workflows, scripts, and CI/CD automation with `neon`.',
     },
     {
       name: 'AI & Agents',

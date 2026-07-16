@@ -30,7 +30,7 @@
     },
     {
       "name": "neon",
-      "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use whenever \"Neon\" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: \"object storage\" or \"S3-compatible storage\", \"serverless functions\", \"background jobs\", or \"run code near my database\", \"AI gateway\", \"LLM proxy\", \"model routing\", or \"call an LLM\" → AI Gateway; \"database\", \"Postgres\", or \"authentication\" → Postgres and Auth.",
+      "description": "Overview of the Neon platform for apps and agents, spanning Postgres, Auth, the Data API, and the new services: Object Storage, Compute Functions, and AI Gateway. Use when \"Neon\" is mentioned, or when any of its individual capabilities are the trigger: \"object storage\" or \"S3\", \"buckets\", \"serverless functions\", \"AI gateway\", \"call an LLM\", \"postgres\", \"database\", or \"backend\".",
       "files": [
         "SKILL.md"
       ]

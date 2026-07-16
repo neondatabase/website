@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.30.0",
+  "neonctlVersion": "2.32.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -1292,6 +1292,53 @@
         {
           "command": "$0 dev --source ./functions/hello.ts --port 3000",
           "description": "Serve one function on an explicit port (fails if the port is taken)"
+        }
+      ]
+    },
+    "diff": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "compare-branch",
+          "describe": "Branch name or id to compare against (the reference / '---' side). Defaults to the current branch's parent.",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "The branch to review (the '+++' side). Defaults to the branch pinned in the local context (.neon).",
+          "alias": "b"
+        },
+        "database": {
+          "type": "string",
+          "describe": "Limit the diff to a single database. Defaults to every database on the current branch.",
+          "alias": "db"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Show a git-style schema diff between the current branch and another branch",
+      "usage": "$0 diff [compare-branch] [options]",
+      "examples": [
+        {
+          "command": "$0 diff main --db neondb",
+          "description": "Diff only the neondb database against main"
+        },
+        {
+          "command": "$0 diff main --branch feature/checkout",
+          "description": "Diff an explicit branch against main (ignoring the .neon context)"
+        },
+        {
+          "command": "$0 diff",
+          "description": "Diff the current branch's schema against its parent branch"
+        },
+        {
+          "command": "$0 diff main",
+          "description": "Diff the current branch's schema against the main branch"
         }
       ]
     },

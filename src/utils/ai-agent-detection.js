@@ -131,7 +131,7 @@ const DEFAULT_404_LINKS = [
   {
     label: 'Neon CLI',
     href: '/docs/cli.md',
-    description: 'neonctl commands, options, and usage',
+    description: 'neon commands, options, and usage',
   },
 ];
 

@@ -11,7 +11,7 @@ summary: >-
   18; use the Neon Console or API to create projects on earlier Postgres
   versions.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -86,7 +86,7 @@ Creates a Neon project.
 The `--region-id` value defaults to `aws-us-east-2` if not specified. `--block-public-connections` and `--block-vpc-connections` are part of [Private Networking](/docs/guides/neon-private-networking); `--hipaa` enables [HIPAA compliance](/docs/security/hipaa) for the project.
 
 <Admonition type="note">
-Neon projects created using the CLI use the default Postgres version, which is Postgres 18. To create a project with a different Postgres version, you can use the [Neon Console](/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject).
+Neon projects created using the CLI use the default Postgres version, which is Postgres 18. To create a project with a different Postgres version, you can use the [Neon Console](/docs/manage/projects#create-a-project) or [Neon API](/docs/reference/api/projects/create-project).
 </Admonition>
 
 Create a project with a user-defined name in a specific region:
