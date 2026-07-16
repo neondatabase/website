@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -26,7 +26,7 @@ This page covers managing the Data API after it is enabled. To enable via the Co
 
 ## Manage authentication providers
 
-You can configure which authentication provider validates JWT tokens for your Data API requests. Only one provider can be configured at a time. If you enabled the Data API with [Neon Auth](/docs/auth/overview), it is already set as the default provider.
+You can configure which authentication provider validates JWT tokens for your Data API requests. Only one provider can be configured at a time. If you enabled the Data API with [Managed Better Auth](/docs/auth/overview), it is already set as the default provider.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -73,7 +73,7 @@ curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/jwks/{jwk
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-For the full JWKS specification, see the [Neon API reference](https://api-docs.neon.tech/reference/createprojectjwks).
+For the full JWKS specification, see the [Neon API Reference](/docs/reference/api/projects/add-project-jwks).
 
 </TabItem>
 
@@ -84,7 +84,7 @@ Removing an authentication provider invalidates all tokens issued by that provid
 </Admonition>
 
 <Admonition type="tip" title="Auth API reference">
-If you're using Neon Auth, there's an interactive API reference for authentication endpoints at your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). See [Testing with Neon Auth](/docs/data-api/get-started#testing-with-neon-auth) for details.
+If you're using Managed Better Auth, there's an interactive API reference for authentication endpoints at your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). See [Testing with Managed Better Auth](/docs/data-api/get-started#testing-with-neon-auth) for details.
 </Admonition>
 
 ## Advanced settings
@@ -100,6 +100,12 @@ Defines which PostgreSQL schemas are exposed as REST API endpoints. By default, 
 <Admonition type="note">
 **Permissions apply:** Adding a schema here exposes the *endpoints*, but the database role used by the API must still have `USAGE` privileges on the schema and `SELECT` privileges on the tables. Refer to [Access control for Data API](/docs/data-api/access-control) for more details.
 </Admonition>
+
+### Extra search path schemas
+
+**Default:** `Empty`
+
+Adds extra PostgreSQL schemas to the search path used for every Data API request. These schemas aren't exposed as REST API endpoints themselves; they're only available for database objects inside your [exposed schemas](#exposed-schemas) to reference, which is useful for schemas that hold PostgreSQL extensions. Corresponds to the `db_extra_search_path` field in the API settings object.
 
 ### Anonymous role
 
@@ -118,6 +124,12 @@ Enforces a hard limit on the number of rows returned in a single API response. T
 **Default:** `.role`
 
 Specifies the path within the JWT token that contains the database role name. The Data API uses this role to execute queries on behalf of the authenticated user. For example, `.role` extracts the value of the top-level `role` claim from the token. Corresponds to the `jwt_role_claim_key` field in the API settings object. This field is required when updating settings via the API.
+
+### JWT cache max lifetime
+
+**Default:** `Empty`
+
+Sets the maximum lifetime, in seconds, that a validated JWT is kept in the Data API's cache. Caching validated tokens reduces the number of times the Data API needs to fetch and verify keys from your authentication provider's JWKS URL. Corresponds to the `jwt_cache_max_lifetime` field in the API settings object.
 
 ### CORS allowed origins
 
@@ -156,7 +168,7 @@ When enabled, the Data API includes `Server-Timing` headers in each response. Th
 
 ## Manage via the Neon API
 
-You can manage the Data API programmatically using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). All Data API endpoints use the following base path:
+You can manage the Data API programmatically using the [Neon API](/docs/reference/api). All Data API endpoints use the following base path:
 
 ```
 /projects/{project_id}/branches/{branch_id}/data-api/{database_name}
@@ -166,7 +178,7 @@ You can find your `project_id` and `branch_id` on the [Project settings](/docs/m
 
 ### Enable
 
-Send a POST request to [enable the Data API](https://api-docs.neon.tech/reference/createprojectbranchdataapi) for a database on a branch. If the Data API is already enabled, this call returns an error.
+Send a POST request to [enable the Data API](/docs/reference/api/dataapi/create-project-branch-data-api) for a database on a branch. If the Data API is already enabled, this call returns an error.
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -185,9 +197,9 @@ Response (201 Created):
 
 The empty body enables the Data API without an authentication provider. To configure authentication at enable time, change the request body:
 
-- **Neon Auth:** `-d '{"auth_provider": "neon_auth", "add_default_grants": true}'`
+- **Managed Better Auth:** `-d '{"auth_provider": "neon_auth", "add_default_grants": true}'`
 
-  If Neon Auth is not already enabled on the branch, this automatically provisions it. The optional `add_default_grants` option grants authenticated users permissions on tables in the `public` schema, matching the default Console behavior. See [Neon Auth](/docs/auth/overview) to learn more.
+  If Managed Better Auth is not already enabled on the branch, this automatically provisions it. The optional `add_default_grants` option grants authenticated users permissions on tables in the `public` schema, matching the default Console behavior. See [Managed Better Auth](/docs/auth/overview) to learn more.
 
 - **External provider:** `-d '{"auth_provider": "external", "jwks_url": "https://your-provider/.well-known/jwks.json"}'`
 
@@ -200,7 +212,7 @@ Optional fields in the enable request body:
 
 ### Get Data API details
 
-[Retrieve the current status and configuration](https://api-docs.neon.tech/reference/getprojectbranchdataapi) of the Data API for a branch.
+[Retrieve the current status and configuration](/docs/reference/api/dataapi/get-project-branch-data-api) of the Data API for a branch.
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -232,7 +244,7 @@ The `settings` object reflects the current configuration (see [Advanced settings
 
 ### Update configuration
 
-Send a PATCH request to [update the configuration](https://api-docs.neon.tech/reference/updateprojectbranchdataapi). This also refreshes the schema cache. The response is always an empty object (`{}`), with status 201.
+Send a PATCH request to [update the configuration](/docs/reference/api/dataapi/update-project-branch-data-api). This also refreshes the schema cache. The response is always an empty object (`{}`), with status 201.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -251,7 +263,7 @@ The `settings` object replaces the existing settings entirely. It is not merged.
 
 ### Disable
 
-[Remove the Data API](https://api-docs.neon.tech/reference/deleteprojectbranchdataapi) from a branch. The response is an empty object (`{}`), with status 200.
+[Remove the Data API](/docs/reference/api/dataapi/delete-project-branch-data-api) from a branch. The response is an empty object (`{}`), with status 200.
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -262,11 +274,11 @@ curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/
 Disabling the Data API immediately terminates all active connections and blocks all incoming HTTP requests. Any applications, edge functions, or websites relying on the API will stop working instantly. Re-enabling the Data API creates a fresh instance with default settings; the previous configuration is not restored.
 </Admonition>
 
-For the full Data API specification, see the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdataapi).
+For the full Data API specification, see the [Neon API Reference](/docs/reference/api/dataapi/create-project-branch-data-api).
 
 ## Manage via the Neon CLI
 
-You can also manage the Data API from the terminal using the [Neon CLI](/docs/cli). The `data-api` command requires **neonctl 2.22.2** or later.
+You can also manage the Data API from the terminal using the [Neon CLI](/docs/cli). The `data-api` command requires **neon 2.22.2** or later.
 
 ### Enable via the CLI
 

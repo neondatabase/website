@@ -57,6 +57,7 @@ const defaultConfig = {
               '</docs/llms.txt>; rel="llms-txt"',
               '</.well-known/agent-skills/index.json>; rel="profile"',
               '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+              '</.well-known/ai-catalog.json>; rel="ai-catalog"',
             ].join(', '),
           },
         ],
@@ -75,6 +76,7 @@ const defaultConfig = {
               '</docs/llms.txt>; rel="llms-txt"',
               '</.well-known/agent-skills/index.json>; rel="profile"',
               '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+              '</.well-known/ai-catalog.json>; rel="ai-catalog"',
             ].join(', '),
           },
         ],
@@ -231,6 +233,62 @@ const defaultConfig = {
       {
         source: '/burningmonk',
         destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      // Branching page redirects — old slugs deleted in PR #4374 (Jan 2026)
+      {
+        source: '/branching/identifying-use-case',
+        destination: '/branching/introduction',
+        permanent: true,
+      },
+      {
+        source: '/branching/production-on-neon',
+        destination: '/branching/production-staging-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-developer',
+        destination: '/branching/branching-workflows-for-development',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-preview',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-test-run',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branches',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/hierarchies',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/projects',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/ephemeral-environments',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/neon-for-dev-test',
+        destination: '/branching/branching-workflows-for-development',
+        permanent: true,
+      },
+      {
+        source: '/branching/resources-and-next-steps',
+        destination: '/branching/introduction',
         permanent: true,
       },
       {
@@ -2139,12 +2197,12 @@ const defaultConfig = {
       },
       {
         source: '/api-reference',
-        destination: 'https://api-docs.neon.tech',
+        destination: '/docs/reference/api',
         permanent: true,
       },
       {
         source: '/api-reference/v2',
-        destination: 'https://api-docs.neon.tech/v2',
+        destination: '/docs/reference/api',
         permanent: true,
       },
       {
@@ -2492,6 +2550,23 @@ const defaultConfig = {
         destination: '/platform-terms',
         permanent: true,
       },
+      // /demos index and /templates gallery removed (outdated marketing pages).
+      // /demos/* sub-routes (regional-latency, ping-thing) remain as external rewrites below.
+      {
+        source: '/demos',
+        destination: '/use-cases',
+        permanent: true,
+      },
+      {
+        source: '/templates',
+        destination: 'https://github.com/neondatabase/examples',
+        permanent: true,
+      },
+      {
+        source: '/templates/:slug*',
+        destination: 'https://github.com/neondatabase/examples',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -2520,6 +2595,7 @@ const defaultConfig = {
       // docs/[...slug] catch-all intercepts them
       beforeFiles: [
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
+        { source: '/docs/:path*/llms-full.txt', destination: '/docs/:path*/llms-full.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
         // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
         // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.
@@ -2541,6 +2617,18 @@ const defaultConfig = {
         // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
         // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
         ...indexRewrites,
+        // Canonical OpenAPI path probed by agent-discovery tooling (e.g. integrations.sh).
+        // Aliases the published Neon API spec (the same document served at
+        // /api_spec/release/v2.json) so /openapi.json resolves as application/json.
+        // Must be beforeFiles for the same reason as the index .md rewrites above: as a
+        // single top-level segment, /openapi.json is otherwise intercepted by the [slug]
+        // catch-all (a fallback rewrite never fires → 404). Point straight at the
+        // CloudFront origin the /api_spec/release/v2.json rewrite targets, since Next.js
+        // does not chain rewrites (a relative /api_spec/... destination wouldn't resolve).
+        {
+          source: '/openapi.json',
+          destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+        },
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/

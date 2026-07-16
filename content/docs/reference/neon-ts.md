@@ -1,15 +1,15 @@
 ---
 title: neon.ts
-subtitle: Infrastructure-as-code config for your Neon project.
+subtitle: Configuration as code for your Neon project.
 summary: >-
   neon.ts declares which Neon services exist on a project and how each branch is
   configured. Use it for branch policy alone, or add preview services like
-  Functions, Storage, and AI Gateway. Works with neonctl deploy, neonctl dev,
-  and neonctl checkout.
+  Functions, Storage, and AI Gateway. Works with neon deploy, neon dev,
+  and neon checkout.
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-06-22T21:05:22.619Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -22,21 +22,23 @@ Specifically:
 Services and branch policy are independent. Use one, the other, or both.
 
 ```bash
-npm install @neondatabase/config
+npm install @neon/config
 ```
 
 The package source is on [GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/config).
 
+`neon.ts` itself is declarative: it only describes the policy. `neon config` / `neon deploy` (below) are how the CLI runs it. To call the same `inspect` / `plan` / `apply` logic from your own script or CI job instead of the CLI, see [`@neon/config-runtime`](/docs/reference/config-runtime).
+
 Link your working directory to a Neon project before using `neon.ts` commands:
 
 ```bash
-neonctl link
+neon link
 ```
 
 ## Config structure
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   // Services: what exists on every branch
@@ -68,7 +70,7 @@ export default defineConfig({
 The `branch` closure works on any Neon project. The examples below configure the default branch and apply TTL and compute to new branches at creation. Returning `{}` for existing branches is deliberate: it avoids overwriting settings on branches already in use:
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   branch: (branch) => {
@@ -97,7 +99,7 @@ export default defineConfig({
 On paid plans, you can also protect the default branch and control suspend timeouts:
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   branch: (branch) => {
@@ -132,7 +134,7 @@ export default defineConfig({
 });
 ```
 
-Run `neonctl deploy` to apply. When `neonctl checkout` creates a new branch, the closure runs with `branch.exists === false`, so TTL, compute settings, and services take effect at creation. Checking out an existing branch doesn't apply or reconcile the policy.
+Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closure runs with `branch.exists === false`, so TTL, compute settings, and services take effect at creation. Checking out an existing branch doesn't apply or reconcile the policy.
 
 ### BranchTarget fields
 
@@ -159,21 +161,21 @@ Run `neonctl deploy` to apply. When `neonctl checkout` creates a new branch, the
 
 ## Services
 
-`auth` and `dataApi` declare which Neon services exist on every branch. After `neonctl deploy`, running `neonctl env pull` writes their URLs to your local `.env` file automatically.
+`auth` and `dataApi` declare which Neon services exist on every branch. After `neon deploy`, running `neon env pull` writes their URLs to your local `.env` file automatically.
 
-| Field     | Values                               | Default | What it enables                                               |
-| --------- | ------------------------------------ | ------- | ------------------------------------------------------------- |
-| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Neon Auth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
-| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                    |
+| Field     | Values                               | Default | What it enables                                                         |
+| --------- | ------------------------------------ | ------- | ----------------------------------------------------------------------- |
+| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Managed Better Auth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
+| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                              |
 
 ### `dataApi` config
 
-`dataApi: true` uses Neon Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
+`dataApi: true` uses Managed Better Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
 
 ```text
-Type 'true' is not assignable to type '"`dataApi` with Neon Auth (the default
-`authProvider: 'neon'`) requires Neon Auth, so add `auth: true`. To enable the
-Data API WITHOUT Neon Auth, verify a third-party IdP instead: `dataApi: {
+Type 'true' is not assignable to type '"`dataApi` with Managed Better Auth (the default
+`authProvider: 'neon'`) requires Managed Better Auth, so add `auth: true`. To enable the
+Data API WITHOUT Managed Better Auth, verify a third-party IdP instead: `dataApi: {
 authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`"'
 ```
 
@@ -188,14 +190,14 @@ dataApi: {
 
 ## Type-safe environment variables
 
-`@neondatabase/env` gives you type-safe access to your branch's injected variables. It reads `process.env` at runtime and validates each variable against the services declared in your `neon.ts` config. Missing or empty variables throw with a clear error.
+`@neon/env` gives you type-safe access to your branch's injected variables. It reads `process.env` at runtime and validates each variable against the services declared in your `neon.ts` config. Missing or empty variables throw with a clear error.
 
 ```bash
-npm install @neondatabase/env
+npm install @neon/env
 ```
 
 ```ts
-import { parseEnv } from '@neondatabase/env';
+import { parseEnv } from '@neon/env';
 import config from './neon';
 
 const env = parseEnv(config);
@@ -220,22 +222,23 @@ The key list autocompletes from your config, so selecting a variable from a serv
 
 ## CLI commands
 
-| Command                                     | What it does                                                                                              |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| [`neonctl link`](/docs/cli/link)            | Connect the current directory to a Neon project. Required to use linked branch defaults in other commands |
-| [`neonctl deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neonctl config apply`)                                   |
-| [`neonctl config plan`](/docs/cli/config)   | Preview what `neonctl deploy` would change, without applying                                              |
-| [`neonctl config status`](/docs/cli/config) | Show the current live state of the branch as a `neon.ts`-shaped config                                    |
-| [`neonctl env pull`](/docs/cli/env)         | Write the branch's Neon-managed variables to `.env.local` (or `.env` if it already exists)                |
-| [`neonctl checkout`](/docs/cli/checkout)    | Switch to or create a branch; new branches are created from the `neon.ts` policy (TTL, compute, services) |
-| [`neonctl dev`](/docs/cli/dev)              | Run functions locally against the linked branch; watches for changes and hot-reloads                      |
+| Command                                  | What it does                                                                                              |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| [`neon link`](/docs/cli/link)            | Connect the current directory to a Neon project. Required to use linked branch defaults in other commands |
+| [`neon deploy`](/docs/cli/config)        | Apply `neon.ts` to the linked branch (alias for `neon config apply`)                                      |
+| [`neon config plan`](/docs/cli/config)   | Preview what `neon deploy` would change, without applying                                                 |
+| [`neon config status`](/docs/cli/config) | Show the current live state of the branch as a `neon.ts`-shaped config                                    |
+| [`neon env pull`](/docs/cli/env)         | Write the branch's Neon-managed variables to `.env.local` (or `.env` if it already exists)                |
+| [`neon checkout`](/docs/cli/checkout)    | Switch to or create a branch; new branches are created from the `neon.ts` policy (TTL, compute, services) |
+| [`neon dev`](/docs/cli/dev)              | Run functions locally against the linked branch; watches for changes and hot-reloads                      |
 
-## Flags for `neonctl deploy`
+## Flags for `neon deploy`
 
 | Flag                | Default        | Description                                                                                          |
 | ------------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
 | `--config`          | (auto)         | Path to the `neon.ts` file. When omitted, the CLI walks up from cwd stopping at `.git`               |
 | `--env`             | (none)         | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`         | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch  | Target branch ID or name                                                                             |
 | `--project-id`      | linked project | Project ID                                                                                           |
 | `--update-existing` | `false`        | Auto-confirm overriding existing remote settings                                                     |
@@ -243,17 +246,17 @@ The key list autocompletes from your config, so selecting a variable from a serv
 
 ## Preview services
 
-<Admonition type="info" title="Private preview">
-Functions, Storage, and AI Gateway are in private preview. They require a new project in AWS us-east-2. See [Preview access](/docs/compute/functions/preview-access) to request access.
+<Admonition type="info" title="Beta">
+Functions, Storage, and AI Gateway are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`), so create your project there to use them.
 </Admonition>
 
 Preview services are declared under the `preview` block. All three are optional and independent:
 
-| Field               | Type                                 | What it enables                                                                                                   |
-| ------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                                                        |
-| `preview.buckets`   | Record of name → bucket def          | Neon Storage. S3-compatible object storage, branched with your database                                           |
-| `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL` |
+| Field               | Type                                 | What it enables                                                                |
+| ------------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
+| `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                     |
+| `preview.buckets`   | Record of name → bucket def          | Neon Object Storage. S3-compatible object storage, branched with your database |
+| `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`   |
 
 ### `preview.functions`
 
@@ -263,11 +266,11 @@ Each key is the function's slug, the permanent identifier used in CLI commands a
 preview: {
   functions: {
     "<slug>": {
-      name: string,       // display name shown in neonctl functions list and the console
+      name: string,       // display name shown in neon functions list and the console
       source: string,     // path to entry file, relative to neon.ts
       env?: Record<string, string>,
       dev?: {
-        port?: number,    // local port for neonctl dev; fails if taken; auto-assigned if omitted
+        port?: number,    // local port for neon dev; fails if taken; auto-assigned if omitted
       },
     },
   },
@@ -276,7 +279,7 @@ preview: {
 
 Slugs must match `^[a-z0-9]{1,20}$` and are immutable after first deployment. Because slugs can't use separators, use `name` for a human-readable label. For example, `slug: "myrestapi"` with `name: "My REST API"`. See [Deploy and manage functions](/docs/compute/functions/deploy#slugs).
 
-`env` values are resolved at deploy time when `neonctl deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string; use a fallback to avoid a type error:
+`env` values are resolved at deploy time when `neon deploy` runs. Reading `process.env.X` here captures the value in your shell at deploy time, not at function runtime. Every value must be a defined string; use a fallback to avoid a type error:
 
 ```ts
 env: {
@@ -284,9 +287,9 @@ env: {
 }
 ```
 
-Use `neonctl deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
+Use `neon deploy --env .env.production` to load a `.env` file before evaluation. For typed access to these variables inside your function at runtime, see [Environment variables](/docs/compute/functions/environment-variables).
 
-`dev` settings apply only to `neonctl dev` and never affect deploy.
+`dev` settings apply only to `neon dev` and never affect deploy.
 
 ### `preview.buckets`
 
@@ -304,10 +307,10 @@ Bucket names follow S3 naming rules. `public_read` makes objects accessible with
 
 ### Full stack example
 
-All services combined. `neonctl deploy` provisions everything and writes credentials to `.env.local`.
+All services combined. `neon deploy` provisions everything and writes credentials to `.env.local`.
 
 ```ts filename="neon.ts"
-import { defineConfig } from "@neondatabase/config/v1";
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
   auth: true,

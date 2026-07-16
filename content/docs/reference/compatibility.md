@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -26,11 +26,11 @@ The table below lists the latest minor version available on Neon for each suppor
 
 | Major version | Latest minor version on Neon | Upstream release date |
 | ------------- | ---------------------------- | --------------------- |
-| 14            | PostgreSQL 14.21             | 2026-02-12            |
-| 15            | PostgreSQL 15.16             | 2026-02-12            |
-| 16            | PostgreSQL 16.12             | 2026-02-12            |
-| 17            | PostgreSQL 17.8              | 2026-02-12            |
-| 18            | PostgreSQL 18.2              | 2026-02-12            |
+| 14            | PostgreSQL 14.23             | 2026-05-14            |
+| 15            | PostgreSQL 15.18             | 2026-05-14            |
+| 16            | PostgreSQL 16.14             | 2026-05-14            |
+| 17            | PostgreSQL 17.10             | 2026-05-14            |
+| 18            | PostgreSQL 18.4              | 2026-05-14            |
 
 ## Postgres extensions
 
@@ -64,7 +64,7 @@ If you are a Neon [Scale plan](/docs/introduction/plans) user and require a diff
 | `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                                                                                                                                |
 | `effective_io_concurrency`            | 20            |                                                                                                                                                                                                                                                                                |
 | `effective_cache_size`                |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                    |
-| `fsync`                               | off           | Neon syncs data to the Neon Storage Engine to store your data safely and reliably                                                                                                                                                                                              |
+| `fsync`                               | off           | Neon syncs data to the Neon database storage engine to store your data safely and reliably                                                                                                                                                                                     |
 | `hot_standby`                         | off           |                                                                                                                                                                                                                                                                                |
 | `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                                                                                                                                |
 | `listen_addresses`                    | '\*'          |                                                                                                                                                                                                                                                                                |

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-services-reset-development-environment
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?'
+  slug: managed-postgres-services-pay-active-compute
+nextLink:
+  title: 'Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?'
+  slug: managed-postgres-services-serverless-connections
 ---
 
 Neon has two features that get you back to a clean state quickly. **Reset from parent** replaces all data and schema on a branch with the latest from its parent, in one operation. **Instant restore** rolls a branch back to any timestamp within your project's history window. Both keep the same connection string, so your application doesn't need to know anything happened.
@@ -32,7 +38,7 @@ For more precise rollbacks, use [instant restore](https://neon.com/docs/guides/b
 Restore creates a backup branch at the previous state so the rollback is reversible.
 
 <Callout title="CI integration">
-Both operations work from the [Neon CLI](https://neon.com/docs/cli/branches) and [API](https://api-docs.neon.tech/reference/restoreprojectbranch). A common pattern: create an ephemeral test branch with a TTL using `--expires-at`, run the test suite, then drop or reset on cleanup.
+Both operations work from the [Neon CLI](https://neon.com/docs/cli/branches) and [API](/docs/reference/api/branches/restore-project-branch). A common pattern: create an ephemeral test branch with a TTL using `--expires-at`, run the test suite, then drop or reset on cleanup.
 </Callout>
 
 The Free plan includes 10 branches per project and 0.5 GB of storage per project, which is enough to wire reset-from-parent into a CI pipeline before paying anything.

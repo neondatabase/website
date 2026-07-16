@@ -8,9 +8,9 @@ summary: >-
   Agent Skills-compatible tool. Skills cover Postgres, Auth, Neon Functions,
   Object Storage, AI Gateway, branching workflows, and more. Install all skills
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
-  `neonctl init`, or editor plugins at project level or globally.
+  `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-06-26T10:41:58.102Z'
+updatedOn: '2026-07-15T18:30:46.285Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -83,17 +83,17 @@ If you're using OpenAI Codex, install the **Neon Postgres** plugin from the [Cod
 
 See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
 
-### neonctl init
+### neon init
 
-The `neonctl init` command sets up your project to use Neon with your AI coding assistant. It authenticates via OAuth, creates an API key, configures the MCP server, installs the Neon extension for Cursor and VS Code where applicable, and installs agent skills at the project level:
+The `neon init` command sets up your project to use Neon with your AI coding assistant. It authenticates via OAuth, creates an API key, configures the MCP server, installs the Neon extension for Cursor and VS Code where applicable, and installs agent skills at the project level:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
-If you're in the **platform private preview** (Functions, Storage, AI Gateway), use `neonctl init --preview` instead. See the [Platform private preview guide](/docs/get-started/platform-private-preview) for access and setup.
+If you're using the **Neon backend beta** (Functions, Storage, AI Gateway), use `neon init --preview` instead. See the [Neon backend beta guide](/docs/get-started/backend-beta) for access and setup.
 
-After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neonctl init` reference](/docs/cli/init) for details.
+After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neon init` reference](/docs/cli/init) for details.
 
 ## Available skills
 
@@ -120,7 +120,7 @@ Provision, branch, and optimize Postgres projects.
 
 ### Neon Platform
 
-Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in private preview. See [Who has access](/docs/get-started/platform-private-preview#who-has-access) before using these skills in production workflows.
+Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in beta. See [Check your access](/docs/get-started/backend-beta#check-your-access) before using these skills in production workflows.
 
 | Skill                                                                                    | Description                                                                                                     | Docs                                               |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -136,7 +136,7 @@ For codegen tools and multi-tenant products that provision Neon for their users,
 
 Skills can be installed at two levels:
 
-- **Project level** (default): Skills are installed in your project directory, for example via `neonctl init` or `npx skills add`. Your AI assistant picks them up when working in that project. This is best for team workflows since the configuration can be committed with the project.
+- **Project level** (default): Skills are installed in your project directory, for example via `neon init` or `npx skills add`. Your AI assistant picks them up when working in that project. This is best for team workflows since the configuration can be committed with the project.
 - **Global**: Skills are installed at the user or system level and available across all projects. Useful for personal development environments where you want Neon context everywhere. Pass the `-g` flag to install globally:
 
   ```bash
@@ -151,7 +151,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 
 - **Getting started** with Neon, including project setup and key features (branching, autoscaling, scale-to-zero, instant restore, read replicas)
 - **Connections**, including the serverless driver, connection pooling, and connection strings
-- **Authentication** with Neon Auth
+- **Authentication** with Managed Better Auth
 - **Data API** via `@neondatabase/neon-js`
 - **Platform APIs and SDKs**, including the REST API, TypeScript SDK, and Python SDK
 - **Developer tools**, including the CLI, VS Code extension, and MCP server
@@ -162,13 +162,13 @@ With the full skill set installed, your assistant can guide you across the Neon 
 - **Branch types and workflows** for migrations, schema-only branches, and reset-from-parent
 - **Egress optimization** for high transfer costs and query anti-patterns
 
-**Platform services (private preview)**
+**Platform services (beta)**
 
 - **Neon Functions**: declare, deploy, and connect long-running compute next to your database
 - **Object Storage**: S3-compatible storage that branches with your data
 - **AI Gateway**: model routing, logging, and cost controls with a single Neon credential
 
-For example, ask your assistant to "set up Neon Auth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow platform preview constraints and the right SDK patterns.
+For example, ask your assistant to "set up Managed Better Auth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow beta constraints and the right SDK patterns.
 
 ## Example prompts
 
@@ -185,7 +185,7 @@ Set up Drizzle ORM with Neon
 ```
 
 ```
-Set up Neon Auth for my Next.js app
+Set up Managed Better Auth for my Next.js app
 ```
 
 ```

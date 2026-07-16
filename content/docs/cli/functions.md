@@ -2,21 +2,23 @@
 title: 'Neon CLI command: functions'
 subtitle: 'Deploy, list, inspect, and delete Neon Functions'
 summary: >-
-  The Neon CLI `neonctl functions` command manages Neon Functions on a branch:
-  `neonctl functions deploy <slug>` bundles and deploys a function from a local
+  The Neon CLI `neon functions` command manages Neon Functions on a branch:
+  `neon functions deploy <slug>` bundles and deploys a function from a local
   directory or entry file (with --src, --runtime, --env, and --wait), and the list,
   get, and delete subcommands manage deployed functions. The slug is the
   permanent function identifier: 1 to 20 lowercase letters and digits.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/cli/function
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
-The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neonctl dev`](/docs/cli/dev).
+The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev).
 
 <CliSubcommands command="functions" />
 
-## neonctl functions deploy (#deploy)
+## neon functions deploy (#deploy)
 
 Deploys a function from a local directory or entry file. The `<slug>` is the permanent function identifier: 1 to 20 lowercase letters and digits (`^[a-z0-9]{1,20}$`).
 
@@ -24,12 +26,12 @@ Deploys a function from a local directory or entry file. The `<slug>` is the per
 
 <CliOptions command="functions deploy" />
 
-Use `--wait` to block until the deployment finishes building, which is the predictable path for scripts and CI.
+By default, `deploy` waits until the deployment finishes building (`--wait=true`), which is the predictable path for scripts and CI. Use `--no-wait` to return immediately after triggering the deployment.
 
 Deploy a function from an entry file:
 
 ```bash
-neonctl functions deploy hello --src functions/hello.ts
+neon functions deploy hello --src functions/hello.ts
 ```
 
 ```text filename="Output"
@@ -45,10 +47,10 @@ INFO: Function deployment hello/1 completed.
 Deploy with environment variables and wait for the build:
 
 ```bash
-neonctl functions deploy hello --src functions/hello.ts --env LOG_LEVEL=info --wait
+neon functions deploy hello --src functions/hello.ts --env LOG_LEVEL=info --wait
 ```
 
-## neonctl functions list (#list)
+## neon functions list (#list)
 
 Lists the functions on the branch.
 
@@ -57,7 +59,7 @@ Lists the functions on the branch.
 <CliOptions command="functions list" />
 
 ```bash
-neonctl functions list
+neon functions list
 ```
 
 ```text filename="Output"
@@ -71,7 +73,7 @@ neonctl functions list
 List with full deployment details for scripts and agents:
 
 ```bash
-neonctl functions list --output json
+neon functions list --output json
 ```
 
 <details>
@@ -105,7 +107,7 @@ neonctl functions list --output json
 
 </details>
 
-## neonctl functions get (#get)
+## neon functions get (#get)
 
 Shows a function's details.
 
@@ -114,7 +116,7 @@ Shows a function's details.
 <CliOptions command="functions get" />
 
 ```bash
-neonctl functions get hello
+neon functions get hello
 ```
 
 ```text filename="Output"
@@ -132,7 +134,7 @@ active deployment
 └────┴───────────┴──────────┴────────────┴─────────────────────────────┘
 ```
 
-## neonctl functions delete (#delete)
+## neon functions delete (#delete)
 
 Deletes a function on the branch.
 
@@ -141,7 +143,7 @@ Deletes a function on the branch.
 <CliOptions command="functions delete" />
 
 ```bash
-neonctl functions delete hello
+neon functions delete hello
 ```
 
 ```text filename="Output"

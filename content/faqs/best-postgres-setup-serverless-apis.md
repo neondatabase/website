@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-setup-serverless-apis
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?'
+  slug: best-postgres-services-retrieval-augmented-generation
+nextLink:
+  title: 'What are the best ways to give every developer on a team their own separate Postgres database for development?'
+  slug: best-ways-separate-postgres-database-development
 ---
 
 Serverless APIs open many short-lived database connections. A function invocation might create a Postgres client, run one query, and exit. Without pooling, you exhaust `max_connections` quickly. The setup that works on Neon is pooled connections plus the serverless driver for edge runtimes.

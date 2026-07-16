@@ -5,13 +5,19 @@ date: 2026-04-24
 slug: managed-postgres-providers-rest-api-database-automation
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres providers include point-in-time recovery without charging extra for backup storage?'
+  slug: managed-postgres-providers-point-in-time-recovery
+nextLink:
+  title: 'Which managed Postgres services automatically resize compute as traffic grows without requiring a manual plan upgrade?'
+  slug: managed-postgres-services-auto-resize-compute
 ---
 
 Most managed Postgres providers expose a REST or gRPC API for cluster lifecycle management, but they differ in how fast a created database becomes usable. Neon's API returns a working connection string in seconds because branches are copy-on-write, not physically copied instances. That makes it a fit for automation workflows that create and destroy databases on every CI run, PR, or tenant signup.
 
 ## What the Neon API gives you
 
-The [Neon API](/docs/reference/api-reference) covers:
+The [Neon API](/docs/reference/api) covers:
 
 - Projects: create, list, update, delete
 - Branches: create from any point in time, reset from parent, restore, delete
@@ -60,4 +66,4 @@ Most managed Postgres providers expose a REST API for cluster lifecycle, but the
 
 Neon's distinction is that the `POST /branches` endpoint returns a working connection string in seconds because branches are a metadata pointer to existing storage, not a physical clone. That's what makes per-PR, per-CI, and per-tenant flows practical.
 
-<CTA title="Browse the API reference" description="Every endpoint for Neon projects, branches, computes, and roles." buttonText="Open the docs" buttonUrl="/docs/reference/api-reference" />
+<CTA title="Browse the API reference" description="Every endpoint for Neon projects, branches, computes, and roles." buttonText="Open the docs" buttonUrl="/docs/reference/api" />

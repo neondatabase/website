@@ -102,7 +102,7 @@ In a production environment, you would rarely apply database migrations manually
 
 ### Create a CI-Only Role
 
-Here, we'll create a dedicated `ci_user` role to run migrations in GitHub Actions. We'll grant this role the minimum permissions necessary, which includes creating objects in the public and audit schemas, referencing users in the Neon Auth schema (if you’re using auth for your project), and inserting records into the log table. This also makes it easy to spot any manual changes made outside of the CI process, since the `database_user` would be something other than `ci_user`, and the application user fields would be empty.
+Here, we'll create a dedicated `ci_user` role to run migrations in GitHub Actions. We'll grant this role the minimum permissions necessary, which includes creating objects in the public and audit schemas, referencing users in the Managed Better Auth schema (if you’re using auth for your project), and inserting records into the log table. This also makes it easy to spot any manual changes made outside of the CI process, since the `database_user` would be something other than `ci_user`, and the application user fields would be empty.
 
 ```sql
 CREATE ROLE ci_user WITH LOGIN PASSWORD '<some-strong-password>';

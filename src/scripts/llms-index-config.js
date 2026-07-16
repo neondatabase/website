@@ -37,12 +37,12 @@ module.exports = {
       url: 'https://neon.com/docs/connect/connection-errors.md',
     },
     {
-      label: 'pgvector extension for vector search and embeddings',
-      url: 'https://neon.com/docs/extensions/pgvector.md',
+      label: 'Neon API reference (projects, branches, databases, endpoints)',
+      url: 'https://neon.com/docs/reference/api.md',
     },
     {
-      label: 'Neon API reference (projects, branches, databases, endpoints)',
-      url: 'https://neon.com/docs/reference/api-reference.md',
+      label: 'Neon CLI reference (neon commands, options, and usage)',
+      url: 'https://neon.com/docs/cli.md',
     },
   ],
 
@@ -85,7 +85,7 @@ module.exports = {
     {
       name: 'Neon CLI',
       description:
-        'Install: `npm i -g neonctl`. Use this for terminal-first workflows, scripts, and CI/CD automation with `neonctl`.',
+        'Install: `npm i -g neon`. Use this for terminal-first workflows, scripts, and CI/CD automation with `neon`.',
     },
     {
       name: 'AI & Agents',

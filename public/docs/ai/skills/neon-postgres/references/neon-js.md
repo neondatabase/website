@@ -64,10 +64,7 @@ export const authClient = createAuthClient();
 import { createClient } from "@neondatabase/neon-js";
 import type { Database } from "./database.types";
 
-export const dbClient = createClient<Database>({
-  auth: { url: process.env.NEON_AUTH_BASE_URL! },
-  dataApi: { url: process.env.NEON_DATA_API_URL! },
-});
+export const dbClient = createClient<Database>(process.env.NEON_DATABASE_URL!);
 ```
 
 **5. Middleware + UI setup** — See [Neon Auth reference](neon-auth.md) for middleware configuration, `NeonAuthUIProvider`, CSS imports, and `AuthView`/`AccountView` page components.
@@ -89,12 +86,22 @@ const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```typescript
 import { createClient } from "@neondatabase/neon-js";
 
-const client = createClient<Database>({
+const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL);
+
+export const authClient = client.auth;
+```
+
+> **Warning:** The single-URL form shown above, `createClient(url)`, requires a version of `@neondatabase/neon-js` that has not been published to npm as of this writing. The latest published version, `0.6.2-beta`, only accepts the two-URL object form below. If `npm install @neondatabase/neon-js` installs `0.6.2-beta` or earlier for you, use the object form instead.
+
+Pass a single HTTPS Neon database URL without credentials or query parameters. The SDK derives the Neon Auth URL and Data API URL automatically. If you need to override either derived URL, the object form is still supported for custom endpoint layouts or local development setups.
+
+Object-form alternative for custom endpoint layouts:
+
+```typescript
+const client = createClient({
   auth: { url: import.meta.env.VITE_NEON_AUTH_URL },
   dataApi: { url: import.meta.env.VITE_NEON_DATA_API_URL },
 });
-
-export const authClient = client.auth;
 ```
 
 ## Environment Variables
@@ -103,20 +110,20 @@ export const authClient = client.auth;
 # Next.js (.env)
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
-NEON_DATA_API_URL=https://ep-xxx.apirest.us-east-1.aws.neon.tech/neondb/rest/v1
+NEON_DATABASE_URL=https://ep-xxx.us-east-1.aws.neon.tech/neondb
 
 # Vite/React (.env)
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
-VITE_NEON_DATA_API_URL=https://ep-xxx.apirest.us-east-1.aws.neon.tech/neondb/rest/v1
+VITE_NEON_DATABASE_URL=https://ep-xxx.us-east-1.aws.neon.tech/neondb
 ```
 
-Get your Auth URL from the Neon Console: Project -> Branch -> Auth -> Configuration.
+Get your Auth URL from the Neon Console: Project -> Branch -> Auth -> Configuration. For full Data API clients, use the matching HTTPS Neon database URL without the `.neonauth` or `.apirest` hostname label and without the trailing `/auth` or `/rest/v1` path. The region and database path stay the same.
 
 Generate a cookie secret: `openssl rand -base64 32`
 
 ## Database Queries (PostgREST / Data API)
 
-> **Prerequisite:** The Data API must be enabled per branch before making queries. Enable it via the Neon Console (Project → Data API), the MCP server's `provision_neon_data_api` tool, or the [REST API](https://api-docs.neon.tech/reference/createprojectbranchdataapi) (`POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}`). Without it, requests will return 404.
+> **Prerequisite:** The Data API must be enabled per branch before making queries. Enable it via the Neon Console (Project → Data API), the MCP server's `provision_neon_data_api` tool, or the [REST API](/docs/reference/api/dataapi/create-project-branch-data-api) (`POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}`). Without it, requests will return 404.
 
 All query methods follow PostgREST syntax (same as Supabase).
 
@@ -307,9 +314,8 @@ await client.auth.signIn.social({
 ```typescript
 import { createClient, SupabaseAuthAdapter } from "@neondatabase/neon-js";
 
-const client = createClient({
-  auth: { adapter: SupabaseAuthAdapter(), url },
-  dataApi: { url },
+const client = createClient(url, {
+  auth: { adapter: SupabaseAuthAdapter() },
 });
 
 await client.auth.signInWithPassword({ email, password });
@@ -367,7 +373,7 @@ Use types in the client for autocomplete and compile-time checking:
 
 ```typescript
 import type { Database } from "./database.types";
-const client = createClient<Database>({ ... });
+const client = createClient<Database>(import.meta.env.VITE_NEON_DATABASE_URL);
 ```
 
 ## Supabase Migration
@@ -381,9 +387,8 @@ const client = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // After (Neon)
 import { createClient, SupabaseAuthAdapter } from "@neondatabase/neon-js";
-const client = createClient({
-  auth: { adapter: SupabaseAuthAdapter(), url: NEON_AUTH_URL },
-  dataApi: { url: NEON_DATA_API_URL },
+const client = createClient(NEON_DATABASE_URL, {
+  auth: { adapter: SupabaseAuthAdapter() },
 });
 
 // Queries work the same

@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/partner-get-started
-updatedOn: '2026-02-16T13:09:07.973Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 This guide outlines the steps to integrate Neon into your platform, enabling you to offer managed Postgres databases to your users. Whether you’re developing a SaaS product, AI agent, enterprise platform, or something else entirely, this guide walks you through what's involved in setting up, configuring, and managing your Neon integration.
@@ -22,7 +22,7 @@ Neon provides flexible options for integrating Postgres into your platform. We s
 
 - **OAuth**: Allows your application to interact with user accounts and perform authorized actions on their behalf. With OAuth, there’s no need for direct access to user login credentials, and users can grant permissions on a variety of supported OAuth scopes. For details, see the [Neon OAuth Integration Guide](/docs/guides/oauth-integration), and check out the [OAuth sample app](https://github.com/neondatabase/neon-branches-visualizer) to see how its done.
 
-- **Neon API**: Use our API to interact with the Neon platform directly. It enables `POST`, `GET`, `PATCH`, and `DELETE` operations on Neon objects such as projects, branches, databases, roles, and more. To explore available endpoints and try them from your browser, visit our [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+- **Neon API**: Use our API to interact with the Neon platform directly. It enables `POST`, `GET`, `PATCH`, and `DELETE` operations on Neon objects such as projects, branches, databases, roles, and more. To explore available endpoints and try them from your browser, visit our [Neon API Reference](/docs/reference/api).
 
 - **@neondatabase/toolkit for AI Agents**: If you're building an AI agent, the [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API Client](https://www.npmjs.com/package/@neondatabase/api-client) and the [Neon serverless driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to set up an SQL database quickly. [Learn more](/blog/why-neondatabase-toolkit).
 
@@ -74,7 +74,7 @@ To learn how, see [Querying consumption metrics with the API](/docs/guides/consu
 - **Autoscaling and Scale to Zero**: Consider [autoscaling](/docs/introduction/autoscaling) limits and [sale to zero](/docs/introduction/scale-to-zero) settings for the compute instances you create for customers. Do you want to allow compute resources to scale on demand? How quickly should computes scale to zero when inactive? For more details, see [Other consumption-related settings](/docs/guides/consumption-limits#other-consumption-related-settings).
 - **Connection limits**: Be aware of the connection limits associated with each Neon compute size, and remember that connection pooling allows for more concurrent connections. For more information, see [Connection limits](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
 - **Polling consumption data for usage reporting and billing**: Refer to [Consumption polling](/docs/guides/consumption-metrics#consumption-polling).
-- **Custom names for roles and databases**: When creating projects using the [Create project API](https://api-docs.neon.tech/reference/createproject), you can customize the default role and database names.
+- **Custom names for roles and databases**: When creating projects using the [Create project API](/docs/reference/api/projects/create-project), you can customize the default role and database names.
 - **Reserved names for roles and databases**: Neon reserves certain names for Postgres roles and databases. Users will not be able to use these reserved names when creating roles and databases. For more information, see [Reserved role names](/docs/manage/roles#reserved-role-names) and [Reserved database names](/docs/manage/databases#reserved-database-names).
 - **Postgres extension support**: We frequently receive questions about the Postgres extensions supported by Neon. See the list of [Supported Postgres extensions](/docs/extensions/pg-extensions) that Neon currently supports.
 - **Staying up to date with changes to the Neon platform**: We make every effort to proactively and directly inform integrators of Neon about updates and changes that could impact their business. In addition, you can monitor the following sources for information about the latest updates from Neon:

@@ -10,13 +10,13 @@ summary: >-
   RFC 3339 timestamp up to 30 days in the future. Schema-only branch creation
   via init_source=schema-only is available as a preview feature.
 enableTableOfContents: true
-updatedOn: '2026-06-18T16:36:42.941Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
-The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API Reference](/docs/reference/api).
 
 <Admonition type="note">
-The API examples that follow may only show some of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may only show some of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to the method's request body schema in the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 The `jq` program specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -27,7 +27,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ## Create a branch with the API
 
-The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranch).
+The following Neon API method creates a branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch).
 
 ```http
 POST /projects/{project_id}/branches
@@ -129,7 +129,7 @@ The response includes information about the branch, the branch's compute, and th
 
 ## List branches with the API
 
-The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranches).
+The following Neon API method lists branches for the specified project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/list-project-branches).
 
 ```http
 GET /projects/{project_id}/branches
@@ -179,7 +179,7 @@ Response:
 
 ## Delete a branch with the API
 
-The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranch).
+The following Neon API method deletes the specified branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/delete-project-branch).
 
 ```http
 DELETE /projects/{project_id}/branches/{branch_id}
@@ -255,7 +255,7 @@ For details on how to use this endpoint to restore a branch to its own or anothe
 The API is in Beta and subject to change.
 </Admonition>
 
-To create a schema-only branch using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
+To create a schema-only branch using the Neon API, use the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
 
 - Your Neon `project_id`
 - The `parent_id`, which is the branch ID of the branch containing the schema you want to copy
@@ -279,7 +279,7 @@ curl --request POST \
 
 ## Creating a branch with expiration using the API
 
-To create a branch with an automatic expiration timestamp using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `expires_at` option. When a branch reaches its expiration time, it is automatically deleted. Required values include:
+To create a branch with an automatic expiration timestamp using the Neon API, use the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint with the `expires_at` option. When a branch reaches its expiration time, it is automatically deleted. Required values include:
 
 - Your Neon `project_id`
 - The `parent_id`, which is the branch ID of the branch you want to branch from

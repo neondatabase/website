@@ -1,0 +1,99 @@
+{
+  "getCurrentUserInfo": "neon me",
+  "createNeonAuth": "neon neon-auth enable",
+  "getNeonAuth": "neon neon-auth status",
+  "disableNeonAuth": "neon neon-auth disable",
+  "listBranchNeonAuthOauthProviders": "neon neon-auth oauth-provider list",
+  "addBranchNeonAuthOauthProvider": "neon neon-auth oauth-provider add",
+  "updateBranchNeonAuthOauthProvider": "neon neon-auth oauth-provider update",
+  "deleteBranchNeonAuthOauthProvider": "neon neon-auth oauth-provider delete",
+  "listBranchNeonAuthTrustedDomains": "neon neon-auth domain list",
+  "addBranchNeonAuthTrustedDomain": "neon neon-auth domain add <domain>",
+  "deleteBranchNeonAuthTrustedDomain": "neon neon-auth domain delete <domain>",
+  "getNeonAuthAllowLocalhost": "neon neon-auth domain allow-localhost get",
+  "updateNeonAuthAllowLocalhost": {
+    "commands": [
+      {
+        "cmd": "neon neon-auth domain allow-localhost enable",
+        "covers": ["allow_localhost"]
+      },
+      {
+        "cmd": "neon neon-auth domain allow-localhost disable",
+        "covers": ["allow_localhost"]
+      }
+    ],
+    "uncovered": []
+  },
+  "getNeonAuthEmailAndPasswordConfig": "neon neon-auth config email-password get",
+  "updateNeonAuthEmailAndPasswordConfig": "neon neon-auth config email-password update",
+  "getNeonAuthEmailProvider": "neon neon-auth config email-provider get",
+  "updateNeonAuthEmailProvider": "neon neon-auth config email-provider update",
+  "sendNeonAuthTestEmail": "neon neon-auth config email-provider test",
+  "getNeonAuthPluginConfigs": {
+    "commands": [
+      {
+        "cmd": "neon neon-auth plugins list",
+        "covers": []
+      },
+      {
+        "cmd": "neon neon-auth plugins get <plugin-name>",
+        "covers": []
+      },
+      {
+        "cmd": "neon neon-auth config organization get",
+        "covers": []
+      }
+    ],
+    "uncovered": []
+  },
+  "updateNeonAuthOrganizationPlugin": "neon neon-auth config organization update",
+  "getNeonAuthWebhookConfig": "neon neon-auth config webhook get",
+  "updateNeonAuthWebhookConfig": "neon neon-auth config webhook update",
+  "createBranchNeonAuthNewUser": "neon neon-auth user create",
+  "deleteBranchNeonAuthUser": "neon neon-auth user delete <user-id>",
+  "updateNeonAuthUserRole": "neon neon-auth user set-role <user-id>",
+  "getCurrentUserOrganizations": "neon orgs list",
+  "listProjects": "neon projects list",
+  "listSharedProjects": "neon projects list",
+  "createProject": "neon projects create",
+  "deleteProject": "neon projects delete",
+  "updateProject": "neon projects update",
+  "recoverProject": "neon projects recover",
+  "getProject": "neon projects get",
+  "listOrganizationVPCEndpoints": "neon vpc endpoint list --org-id <id> --region-id <region_id>",
+  "deleteOrganizationVPCEndpoint": "neon vpc endpoint remove <vpc_endpoint_id> --org-id <id> --region-id <region_id>",
+  "getOrganizationVPCEndpointDetails": "neon vpc endpoint status <vpc_endpoint_id> --org-id <id> --region-id <region_id>",
+  "listProjectVPCEndpoints": "neon vpc project list --project-id <id>",
+  "deleteProjectVPCEndpoint": "neon vpc project remove <vpc_endpoint_id> --project-id <id>",
+  "listProjectBranches": "neon branches list",
+  "createProjectBranch": "neon branches create",
+  "updateProjectBranch": {
+    "commands": [
+      {
+        "cmd": "neon branches rename <id|name> <new-name>",
+        "covers": ["name"]
+      },
+      {
+        "cmd": "neon branches set-expiration <id|name>",
+        "covers": ["expires_at"]
+      }
+    ],
+    "uncovered": ["protected"]
+  },
+  "setDefaultProjectBranch": "neon branches set-default <id|name>",
+  "deleteProjectBranch": "neon branches delete",
+  "getProjectBranch": "neon branches get <id|name>",
+  "createProjectEndpoint": "neon branches add-compute <id|name>",
+  "restoreProjectBranch": "neon branches restore <id|name>",
+  "listProjectBranchDatabases": "neon connection-string [branch] list",
+  "listProjectBranchRoles": "neon connection-string [branch] list",
+  "createProjectBranchDatabase": "neon databases create",
+  "deleteProjectBranchDatabase": "neon databases delete",
+  "createProjectBranchRole": "neon roles create",
+  "deleteProjectBranchRole": "neon roles delete",
+  "listProjectOperations": "neon operations list",
+  "getProjectBranchSchema": "neon branches schema-diff [base] [compare]",
+  "getConnectionURI": "neon connection-string [branch]",
+  "assignOrganizationVPCEndpoint": "neon vpc endpoint assign <vpc_endpoint_id> --org-id <id> --region-id <region_id>",
+  "assignProjectVPCEndpoint": "neon vpc project restrict <vpc_endpoint_id> --project-id <id>"
+}

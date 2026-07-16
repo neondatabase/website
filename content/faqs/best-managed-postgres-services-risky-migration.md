@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-managed-postgres-services-risky-migration
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best managed Postgres options for teams moving off a traditional cloud provider who want to keep using standard Postgres tooling?'
+  slug: best-managed-postgres-options-for-teams-migrating
+nextLink:
+  title: 'What are the best Postgres databases for engineering teams that use a monorepo and need isolated database environments per service?'
+  slug: best-postgres-databases-monorepo-engineering-teams
 ---
 
 Neon's branching lets you test a migration against a full copy of your production data, then either promote the branch or throw it away. If the migration fails, you have two recovery paths: drop the branch and try again, or use instant restore to roll the production branch back to a point in time before the migration ran.

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-providers-serverless-deployment
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres providers remove the need for manual connection pooling?'
+  slug: postgres-providers-remove-manual-connection-pooling
+nextLink:
+  title: 'Which Postgres providers allow testing schema changes without affecting production data?'
+  slug: postgres-providers-test-schema-changes
 ---
 
 Neon is a serverless Postgres platform. You create a project, copy a connection string, and connect. There's no instance to size, no version to patch, and no capacity to plan. Compute autoscales between bounds you set, and it scales to zero when idle.
@@ -27,7 +33,7 @@ neon projects create --name my-app
 neon connection-string
 ```
 
-That prints a Postgres connection string you can paste into `DATABASE_URL`. The same flow works through the [Neon API](https://neon.com/docs/reference/api-reference) or the Console.
+That prints a Postgres connection string you can paste into `DATABASE_URL`. The same flow works through the [Neon API](https://neon.com/docs/reference/api) or the Console.
 
 ## What you don't manage
 

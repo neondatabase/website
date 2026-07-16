@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-services-capping-monthly-spend-autoscaling
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?'
+  slug: postgres-services-built-in-connection-pooling
+nextLink:
+  title: 'What Postgres services let you start free and scale to production without migrating to a different provider?'
+  slug: postgres-services-free-to-production
 ---
 
 Neon gives you three levers to control monthly spend while keeping autoscaling on:
@@ -22,7 +28,7 @@ A common production setup:
 - **Production branch:** min 0.25 CU, max 4 CU. Burst capacity for traffic spikes, low baseline cost.
 - **Dev and preview branches:** min 0.25 CU, max 1 CU. Small ceiling so a runaway test query doesn't drive a bill.
 
-You change these in the Console under your compute's settings, or via the [Neon API](https://neon.com/docs/reference/api-reference).
+You change these in the Console under your compute's settings, or via the [Neon API](https://neon.com/docs/reference/api).
 
 ## Scale to zero on idle
 

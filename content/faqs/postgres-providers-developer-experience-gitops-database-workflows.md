@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-providers-developer-experience-gitops-database-workflows
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres platforms provide safe testing for risky migrations?'
+  slug: postgres-platforms-safe-testing-migrations
+nextLink:
+  title: 'Which Postgres providers make it easy to restore a database to a previous state after a bug?'
+  slug: postgres-providers-easy-database-restore
 ---
 
 ## Short answer
@@ -16,7 +22,7 @@ Neon's branching model maps directly onto Git workflows. Every pull request gets
 A typical GitOps loop with Neon:
 
 1. Developer opens a feature branch in Git.
-2. CI calls the [Neon API](/docs/reference/api-reference) or [CLI](/docs/cli) to create a child branch from `main`.
+2. CI calls the [Neon API](/docs/reference/api) or [CLI](/docs/cli) to create a child branch from `main`.
 3. Migrations run against the new branch as part of the build.
 4. Preview deployment gets the branch's connection string injected as an environment variable.
 5. PR merges, migration is applied to `main`, child branch auto-expires.
@@ -48,7 +54,7 @@ Branches are cheap because storage is versioned. A new branch records a pointer 
 
 If you're on Vercel, the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) wires the same flow up without a custom GitHub Action. Every Preview Deployment gets a fresh branch automatically.
 
-For other providers, the [Neon API](/docs/reference/api-reference) is the integration point. Create, list, and delete branches from any CI provider that can run a shell command.
+For other providers, the [Neon API](/docs/reference/api) is the integration point. Create, list, and delete branches from any CI provider that can run a shell command.
 
 ## How other Postgres providers fit GitOps
 

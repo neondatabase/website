@@ -8,7 +8,7 @@ summary: >-
   projects, require a personal admin key and reject organization API keys. A
   permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -75,7 +75,7 @@ The key token is only displayed once at creation time. Copy it immediately and s
 
 Organization API key creation (`POST /organizations/{org_id}/api_keys`) is rate limited to 10 requests per second. If you create keys in bulk, throttle your requests or use retries with backoff.
 
-[Try in API Reference](https://api-docs.neon.tech/reference/createorgapikey)
+[Try in API Reference](/docs/reference/api/organizations/create-org-api-key)
 
 ## List API keys
 
@@ -106,7 +106,7 @@ Example response:
 ]
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/listorgapikeys)
+[Try in API Reference](/docs/reference/api/organizations/list-org-api-keys)
 
 ## Revoke an API key
 
@@ -133,7 +133,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/revokeorgapikey)
+[Try in API Reference](/docs/reference/api/organizations/revoke-org-api-key)
 
 ## Get organization details
 
@@ -159,7 +159,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/getorganization)
+[Try in API Reference](/docs/reference/api/organizations/get-organization)
 
 ## List members
 
@@ -216,7 +216,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmembers)
+[Try in API Reference](/docs/reference/api/organizations/get-organization-members)
 
 <Admonition type="note">The member ID (`id`) from this response is needed for operations like updating roles or removing members.</Admonition>
 
@@ -243,7 +243,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmember)
+[Try in API Reference](/docs/reference/api/organizations/get-organization-member)
 
 ## Update member role
 
@@ -270,7 +270,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/updateorganizationmember)
+[Try in API Reference](/docs/reference/api/organizations/update-organization-member)
 
 ## Remove member
 
@@ -283,7 +283,7 @@ curl --request DELETE \
      --header 'authorization: Bearer $PERSONAL_API_KEY'
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/removeorganizationmember)
+[Try in API Reference](/docs/reference/api/organizations/remove-organization-member)
 
 ## List invitations
 
@@ -313,7 +313,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationinvitations)
+[Try in API Reference](/docs/reference/api/organizations/get-organization-invitations)
 
 ## Create invitations
 
@@ -341,7 +341,7 @@ curl --request POST \
      }' | jq
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/createorganizationinvitations)
+[Try in API Reference](/docs/reference/api/organizations/create-organization-invitations)
 
 ## Transfer projects between organizations
 
@@ -352,4 +352,4 @@ Key requirements:
 - Must use a personal API key
 - Requires admin permissions in the source organization and at least member permissions in the target
 
-[Try in API Reference](https://api-docs.neon.tech/reference/transferproject)
+[Try in API Reference](/docs/reference/api/organizations/transfer-projects-from-org-to-org)

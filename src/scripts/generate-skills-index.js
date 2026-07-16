@@ -28,11 +28,37 @@ const path = require('path');
 
 const matter = require('gray-matter');
 
+const ROOT_DIR = path.resolve(__dirname, '../../');
 const SKILLS_DIR = path.resolve(__dirname, '../../public/docs/ai/skills');
 const CONFIG_PATH = path.resolve(__dirname, '../../config/skills.json');
 const PUBLIC_DIR = path.resolve(__dirname, '../../public');
+// The AI Catalog is served by a force-static route handler (so it can set the
+// application/ai-catalog+json media type). That handler imports this generated
+// JSON, so the catalog's skill entries stay in sync with the published skills.
+const AI_CATALOG_PATH = path.resolve(__dirname, '../app/.well-known/ai-catalog.json/catalog.json');
 
 const SCHEMA_0_2_0 = 'https://schemas.agentskills.io/discovery/0.2.0/schema.json';
+
+// AI Catalog (https://ai-catalog.io/) static scaffolding. The host block and the
+// non-skill MCP server entry are stable; the skill entries are generated from the
+// same SKILL.md frontmatter as the agent-skills index, so descriptions match.
+const AI_CATALOG_HOST = {
+  displayName: 'Neon',
+  identifier: 'neon.com',
+  documentationUrl: 'https://neon.com/docs',
+  logoUrl: 'https://neon.com/brand/neon-logomark-dark-color.svg',
+};
+
+const AI_CATALOG_MCP_ENTRY = {
+  identifier: 'urn:air:neon.com:mcp:neon',
+  type: 'application/mcp-server-card+json',
+  url: 'https://neon.com/.well-known/mcp/server-card.json',
+  description:
+    'Neon MCP server for managing Neon Postgres projects, branches, databases, and running SQL from AI agents and MCP clients.',
+  tags: ['postgres', 'database', 'mcp', 'neon'],
+};
+
+const AI_CATALOG_SKILL_BASE_URL = 'https://neon.com/.well-known/agent-skills/';
 
 async function loadConfig() {
   try {
@@ -120,11 +146,27 @@ function buildLegacySkillsIndex(skills) {
   };
 }
 
+function buildAiCatalog(skills) {
+  return {
+    specVersion: '1.0',
+    host: AI_CATALOG_HOST,
+    entries: [
+      AI_CATALOG_MCP_ENTRY,
+      ...skills.map(({ name, description }) => ({
+        identifier: `urn:air:neon.com:skill:${name}`,
+        type: 'application/agent-skills+md',
+        url: `${AI_CATALOG_SKILL_BASE_URL}${name}/SKILL.md`,
+        description,
+      })),
+    ],
+  };
+}
+
 async function writeJson(outputPath, data) {
   await fs.mkdir(path.dirname(outputPath), { recursive: true });
   await fs.writeFile(outputPath, JSON.stringify(data, null, 2) + '\n', 'utf-8');
-  const rel = path.relative(PUBLIC_DIR, outputPath).replace(/\\/g, '/');
-  console.log(`  ✓ public/${rel}`);
+  const rel = path.relative(ROOT_DIR, outputPath).replace(/\\/g, '/');
+  console.log(`  ✓ ${rel}`);
 }
 
 async function main() {
@@ -166,6 +208,9 @@ async function main() {
     buildLegacySkillsIndex(skills)
   );
 
+  // AI Catalog (ai-catalog.io) — consumed by the force-static route handler
+  await writeJson(AI_CATALOG_PATH, buildAiCatalog(skills));
+
   if (config.primary) {
     const primaryExists = skills.some((s) => s.name === config.primary);
     if (!primaryExists) {
@@ -183,6 +228,10 @@ async function main() {
   console.log('\nDone.');
 }
 
+// Only run main() when invoked directly. Without this gate, importing the
+// module (e.g. from generate-skills-index.test.js to grab the exported
+// helpers) re-triggers main(), which races the test worker shutdown and can
+// truncate one of the 4 output files to 0 bytes.
 if (require.main === module) {
   main().catch((err) => {
     console.error('Error:', err.message);
@@ -191,4 +240,4 @@ if (require.main === module) {
 }
 
 // Export pure helpers for testing
-module.exports = { buildAgentSkillsIndex, buildLegacySkillsIndex };
+module.exports = { buildAgentSkillsIndex, buildLegacySkillsIndex, buildAiCatalog };

@@ -7,12 +7,12 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-07-15T23:49:33.621Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon AI Gateway" />
 
-AI Gateway uses Neon bearer credentials, the same credential system as [Neon Storage](/docs/introduction). No provider API keys are needed.
+AI Gateway uses Neon bearer credentials, the same credential system as [Neon Object Storage](/docs/introduction). No provider API keys are needed.
 
 ## Creating a credential
 
@@ -46,21 +46,21 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 </TabItem>
 </Tabs>
 
-## Pull credentials with neonctl
+## Pull credentials with neon
 
-For local development, `neonctl env pull` writes your AI Gateway credentials to your `.env` file automatically, with no manual copy-paste from the API response:
-
-```bash
-neonctl env pull .env
-```
-
-This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the current branch alongside your database connection string. Running `neonctl config apply` or `neonctl deploy` also auto-pulls credentials after a successful apply. To check current credential status:
+For local development, `neon env pull` writes your AI Gateway credentials to your `.env` file automatically, with no manual copy-paste from the API response:
 
 ```bash
-neonctl config status
+neon env pull --file .env
 ```
 
-For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials with optional expiry.
+This populates `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the current branch alongside your database connection string. Running `neon config apply` or `neon deploy` also auto-pulls credentials after a successful apply. To check current credential status:
+
+```bash
+neon config status
+```
+
+For production deployments, use the [API-based workflow](#creating-a-credential) to create named credentials. `expires_at` is accepted but not currently enforced during the beta -- revoke credentials explicitly instead of relying on expiry.
 
 ## Using your credential
 
@@ -97,42 +97,46 @@ client = OpenAI(
 
 ## Environment variables
 
-Neon provides four gateway env vars. Two follow OpenAI's standard naming so existing SDKs pick them up automatically. Two use `NEON_`-prefixed names that survive a user overriding the `OPENAI_*` variables with their own provider keys.
+Neon provides two gateway env vars. `NEON_AI_GATEWAY_BASE_URL` is the bare branch host, so you append the dialect path yourself when configuring an SDK.
 
-| Variable                   | Value                                                                                                   |
-| -------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `OPENAI_API_KEY`           | Bearer token (`nt_live_...`)                                                                            |
-| `OPENAI_BASE_URL`          | Full OpenAI Responses dialect URL: `https://<branch-host>/ai-gateway/openai/v1` — **includes the path** |
-| `NEON_AI_GATEWAY_TOKEN`    | Same bearer token as `OPENAI_API_KEY`                                                                   |
-| `NEON_AI_GATEWAY_BASE_URL` | Bare branch host: `https://<branch-host>` — **no path**; append `/ai-gateway/<dialect>/v1` yourself     |
+| Variable                   | Value                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------- |
+| `NEON_AI_GATEWAY_TOKEN`    | Bearer token (`nt_live_...`)                                                                        |
+| `NEON_AI_GATEWAY_BASE_URL` | Bare branch host: `https://<branch-host>`, with no path. Append `/ai-gateway/<dialect>/v1` yourself |
 
-`OPENAI_BASE_URL` and `NEON_AI_GATEWAY_BASE_URL` point at different URLs. `OPENAI_BASE_URL` already includes `/ai-gateway/openai/v1`, so `new OpenAI()` picks it up with zero config and calls the Responses API. `NEON_AI_GATEWAY_BASE_URL` is the bare host — append the dialect path yourself:
+Append the dialect path for the endpoint you need:
 
 ```
 NEON_AI_GATEWAY_BASE_URL + /ai-gateway/mlflow/v1   → chat completions (all providers)
-NEON_AI_GATEWAY_BASE_URL + /ai-gateway/openai/v1   → OpenAI Responses API (= OPENAI_BASE_URL)
+NEON_AI_GATEWAY_BASE_URL + /ai-gateway/openai/v1   → OpenAI Responses API
 NEON_AI_GATEWAY_BASE_URL + /ai-gateway/anthropic   → Anthropic Messages API
 NEON_AI_GATEWAY_BASE_URL + /ai-gateway/gemini      → Gemini generateContent API
 ```
 
+Most dialects are also reachable at a shorter top-level path with no `/ai-gateway/<dialect>` prefix: `/v1/chat/completions` for chat completions, `/openai/v1/responses` for OpenAI Responses, and `/anthropic/v1/messages` for Anthropic Messages. Gemini's shorter alias keeps the `gemini` segment: `/v1/gemini/v1beta/models/{model}:generateContent`. `GET /v1/models` lists the catalog in an OpenRouter-shaped response. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full mapping.
+
+To use an OpenAI SDK, set its `apiKey` and `baseURL` from these variables (see the examples below).
+
 ## Credentials in Neon Functions
 
-When your code runs inside Neon Functions, all four env vars are injected automatically. No credential creation step required:
+When your code runs inside Neon Functions, both gateway env vars are injected automatically. No credential creation step required:
 
-| Variable                   | Value                                                   |
-| -------------------------- | ------------------------------------------------------- |
-| `NEON_AI_GATEWAY_TOKEN`    | Bearer token for the AI Gateway                         |
-| `NEON_AI_GATEWAY_BASE_URL` | Branch gateway host with `https://` prefix, no path     |
-| `OPENAI_API_KEY`           | Same value as `NEON_AI_GATEWAY_TOKEN`                   |
-| `OPENAI_BASE_URL`          | Branch gateway host including the OpenAI Responses path |
+| Variable                   | Value                                               |
+| -------------------------- | --------------------------------------------------- |
+| `NEON_AI_GATEWAY_TOKEN`    | Bearer token for the AI Gateway                     |
+| `NEON_AI_GATEWAY_BASE_URL` | Branch gateway host with `https://` prefix, no path |
 
-`new OpenAI()` works with zero configuration because `OPENAI_API_KEY` and `OPENAI_BASE_URL` are already set:
+See [Environment variables](/docs/compute/functions/environment-variables) for the full list of variables Neon injects into a function.
+
+Configure an OpenAI SDK by setting `apiKey` and `baseURL` from these variables. Use the OpenAI Responses dialect for `responses.create()`:
 
 ```typescript
 import OpenAI from 'openai';
 
-// Reads OPENAI_API_KEY + OPENAI_BASE_URL from the environment automatically.
-const client = new OpenAI();
+const client = new OpenAI({
+  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1`,
+});
 
 const response = await client.responses.create({
   model: 'gpt-5-mini',
@@ -140,7 +144,7 @@ const response = await client.responses.create({
 });
 ```
 
-For the chat completions endpoint or when you need credentials that survive a user overriding `OPENAI_*` with their own keys, use the `NEON_AI_GATEWAY_*` vars:
+For the chat completions endpoint, point the base URL at the `mlflow` dialect instead:
 
 ```typescript
 import OpenAI from 'openai';

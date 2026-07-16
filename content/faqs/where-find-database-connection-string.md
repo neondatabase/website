@@ -6,6 +6,12 @@ createdAt: '2026-05-18T00:00:00.000Z'
 updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Which tools support testing fixes against real production data?'
+  slug: tools-testing-fixes-production-data
+nextLink:
+  title: ''
+  slug: ''
 ---
 
 ## Quick answer

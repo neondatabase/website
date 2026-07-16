@@ -57,13 +57,13 @@ describe('generate-docs rendering', () => {
     expect(renderSubcommands(node)).toContain('[add](#add)');
   });
 
-  it('renders usage with positional brackets and the neonctl binary', () => {
+  it('renders usage with positional brackets and the neon binary', () => {
     expect(
       renderUsage(resolveCommand(schema, ['functions', 'deploy']), ['functions', 'deploy'])
-    ).toContain('neonctl functions deploy <slug>');
+    ).toContain('neon functions deploy <slug>');
     expect(
       renderUsage(resolveCommand(schema, ['connection-string']), ['connection-string'])
-    ).toContain('neonctl connection-string [branch]');
+    ).toContain('neon connection-string [branch]');
   });
 
   it('renders the global options table with defaults, aliases, and builtins', () => {
@@ -80,7 +80,7 @@ describe('generate-docs rendering', () => {
       expect(index).toContain(`### ${name}`);
     }
     // Nested subtrees are flattened into full invocations.
-    expect(index).toContain('neonctl bucket object list');
+    expect(index).toContain('neon buckets object list');
   });
 
   it('escapes MDX-hostile characters outside inline code in table cells', () => {

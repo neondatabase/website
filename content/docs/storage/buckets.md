@@ -2,16 +2,16 @@
 title: Buckets
 subtitle: Create and manage storage buckets
 summary: >-
-  Neon Storage buckets hold your objects and branch with your database. Create
+  Neon Object Storage buckets hold your objects and branch with your database. Create
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-06-15T20:35:44.700Z'
+updatedOn: '2026-07-15T23:27:36.554Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
 
-A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
+A bucket is a named container for objects in Neon Object Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
 
 ## Create a bucket
 
@@ -21,10 +21,10 @@ You can create a bucket from the Neon Console, the Neon CLI, the Neon API, or di
 
 In the Neon Console, navigate to your project, select a branch, and open the **Storage** tab. Click **New bucket**, enter a name, choose an access level, and click **Create**.
 
-<CodeTabs labels={["neonctl", "Neon API", "TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neon", "Neon API", "TypeScript", "Python", "AWS CLI"]}>
 
 ```bash
-neonctl bucket create my-bucket
+neon buckets create my-bucket
 ```
 
 ```bash shouldWrap
@@ -73,10 +73,10 @@ aws s3api create-bucket \
 
 </CodeTabs>
 
-To create a `public_read` bucket with neonctl:
+To create a `public_read` bucket with neon:
 
 ```bash
-neonctl bucket create my-public-bucket --access-level public_read
+neon buckets create my-public-bucket --access-level public_read
 ```
 
 <Admonition type="note">
@@ -108,10 +108,10 @@ https://<branch-id>.storage.c-<N>.us-east-2.aws.neon.tech/my-public-bucket/<obje
 
 ## List buckets
 
-<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neon", "TypeScript", "Python", "AWS CLI"]}>
 
 ```bash
-neonctl bucket list
+neon buckets list
 ```
 
 ```typescript shouldWrap
@@ -136,10 +136,10 @@ aws s3api list-buckets --endpoint-url "$AWS_ENDPOINT_URL_S3"
 
 Buckets must be empty before deletion. [Delete all objects](/docs/storage/objects#delete-objects) first, then delete the bucket.
 
-<CodeTabs labels={["neonctl", "TypeScript", "Python", "AWS CLI"]}>
+<CodeTabs labels={["neon", "TypeScript", "Python", "AWS CLI"]}>
 
 ```bash
-neonctl bucket delete my-bucket
+neon buckets delete my-bucket
 ```
 
 ```typescript shouldWrap
@@ -162,10 +162,10 @@ aws s3api delete-bucket \
 
 ## Bucket branching
 
-When you create a new branch, it inherits all buckets from its parent at the point of forking. No data is copied. From that point on:
+When you create a new branch, it inherits all buckets from its parent, including the objects already in them at the moment of forking — the same copy-on-write model Neon uses for branching Postgres data, so nothing is duplicated upfront. From that point on:
 
 - Creating or deleting a bucket on a child branch does not affect the parent.
-- Objects uploaded to a child branch are only visible on that branch and its descendants.
+- New uploads, overwrites, and deletes on a child branch are only visible on that branch and its descendants, even for objects that existed at fork time.
 - The parent branch continues to see its own state unchanged.
 
 This makes it safe to test bucket changes in a preview branch without affecting production.

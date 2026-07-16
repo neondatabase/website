@@ -6,10 +6,8 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-06-26T10:41:58.102Z'
+updatedOn: '2026-07-15T11:08:18.153Z'
 ---
-
-<PrivatePreviewEnquire/>
 
 Neon Functions run on Node.js 24.
 
@@ -29,7 +27,7 @@ When the platform stops a function, it sends `SIGINT`. If the process is still r
 
 ```ts
 import { Hono } from 'hono';
-import { waitUntil } from '@neondatabase/functions';
+import { waitUntil } from '@neon/functions';
 
 const app = new Hono();
 
@@ -41,7 +39,7 @@ app.post('/event', async (c) => {
 export default app;
 ```
 
-Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API follows the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and other serverless platforms. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs but isn't tracked, so the same code is safe to call in `neonctl dev`.
+Pass `waitUntil` a promise and the invocation stays alive until the promise settles, up to the 15-minute cap. The API follows the same shape as `waitUntil` on [Vercel](https://vercel.com/docs/functions/functions-api-reference/vercel-functions-package#waituntil) and other serverless platforms. Off the Neon runtime (local dev, tests) it's a no-op: the promise still runs but isn't tracked, so the same code is safe to call in `neon dev`.
 
 ## Concurrency
 
@@ -53,18 +51,21 @@ Because each isolate is its own process and handles concurrent requests, module-
 - **Not shared across isolates**: every isolate holds its own module state. Keep `max` small on `pg` pools (for example, 5). The effective connection count is `max` × the number of live isolates. Any module-scope setup (seeding, migrations) runs once per isolate, so make it safe to repeat or guard it with a Postgres advisory lock.
 - **Lost on eviction**: in-memory state disappears when an isolate is evicted. Persist anything that matters in Postgres.
 
+To prevent abusive use, Neon also enforces an account-wide limit of **100 concurrent invocations** across all your functions. This is a default, not a hard ceiling tied to your plan; due to internal load balancing, the effective ceiling can run modestly higher. Exceeding it returns a `429 Too Many Requests` with the plain-text body `per-account concurrency limit reached` and a `Retry-After` header (in seconds). A slot frees up as soon as one of your in-flight requests completes, so a near-term retry is usually enough.
+
 ## Slug constraints
 
 Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment. See [Slugs](/docs/compute/functions/deploy#slugs) for the full rules.
 
 ## Runtime
 
-| Property    | Value                                                                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| Runtime     | Node.js 24                                                                                                                                      |
-| Isolation   | microVM per isolate                                                                                                                             |
-| Concurrency | Multiple requests in flight per isolate (interleaved on the event loop), scaling out with additional isolates. See [Concurrency](#concurrency). |
-| Memory      | 2048 MiB (fixed during the private preview, not configurable)                                                                                   |
+| Property          | Value                                                                                                                                           |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| Runtime           | Node.js 24                                                                                                                                      |
+| Isolation         | microVM per isolate                                                                                                                             |
+| Concurrency       | Multiple requests in flight per isolate (interleaved on the event loop), scaling out with additional isolates. See [Concurrency](#concurrency). |
+| Concurrency limit | 100 concurrent invocations per account (default). See [Concurrency](#concurrency).                                                              |
+| Memory            | 2048 MiB (fixed during beta, not configurable)                                                                                                  |
 
 ## Environment variables
 

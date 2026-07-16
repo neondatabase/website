@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-06-25T00:16:36.317Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -46,9 +46,9 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [intarray](/docs/extensions/intarray)                                                            |     1.5 |     1.5 |       1.5 |       1.5 |       1.5 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [ip4r](https://github.com/RhodiumToad/ip4r)                                                      |     2.4 |     2.4 |       2.4 |       2.4 |       2.4 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [isn](https://www.postgresql.org/docs/16/isn.html)                                               |     1.2 |     1.2 |       1.2 |       1.2 |       1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [lakebase_text](/docs/extensions/lakebase-text)                                                  |       - |       - | 0.1.0-dev | 0.1.0-dev | 0.1.0-dev | Requires enablement. PG16+. See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                            |
+| [lakebase_text](/docs/extensions/lakebase-text)                                                  |       - |       - | 0.1.0-dev | 0.1.0-dev | 0.1.0-dev | Requires enablement. PG16+. See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                  |
 | [lakebase_tokenizer](/docs/ai/lakebase-search)                                                   |       - |       - |     0.1.0 |     0.1.0 |     0.1.0 | PG16+. See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                                       |
-| [lakebase_vector](/docs/extensions/lakebase-vector)                                              |       - |       - | 1.0.0-dev | 1.0.0-dev | 1.0.0-dev | Requires enablement. PG16+. See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                            |
+| [lakebase_vector](/docs/extensions/lakebase-vector)                                              |       - |       - | 1.0.0-dev | 1.0.0-dev | 1.0.0-dev | Requires enablement. PG16+. See [Lakebase Search](/docs/ai/lakebase-search).                                                                                                                                                                                                                                                                                                                                                                                  |
 | [lo](https://www.postgresql.org/docs/16/lo.html)                                                 |     1.1 |     1.1 |       1.1 |       1.1 |       1.2 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [ltree](/docs/extensions/ltree)                                                                  |     1.2 |     1.2 |       1.2 |       1.3 |       1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [moddatetime (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)                    |     1.0 |     1.0 |       1.0 |       1.0 |       1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -136,7 +136,7 @@ ALTER EXTENSION vector UPDATE TO '0.7.0';
 ```
 
 <Admonition type="important">
-When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
+When Neon releases a new extension or new extension version, a compute restart is required to make the new extension or extension version available for installation or update. A compute restart may occur on its own due to Neon's default [scale to zero](/docs/introduction/scale-to-zero) behavior. However, if your compute never restarts because you disabled scale to zero or because your compute is constantly active, you may need to force a restart. To force a restart, you can issue [Restart endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API call. Please be aware that restarting a compute temporarily interrupts any connections currently using the compute.
 
 Extensions installations and updates are automatically applied to any read replica computes on the same branch as your primary compute the next time the read replica compute restarts.  
 </Admonition>
@@ -191,7 +191,7 @@ neon,pg_stat_statements,timescaledb,pg_cron,pg_partman_bgw,rag_bge_small_en_v15,
 
 ### Viewing available libraries
 
-You can view **available** libraries by running [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) API:
+You can view **available** libraries by running [List preloaded libraries](/docs/reference/api/projects/get-available-preload-libraries) API:
 
 ```bash
 curl --request GET \
@@ -211,7 +211,7 @@ The response body lists available libraries and whether the libraries are enable
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List preloaded libraries](/docs/reference/api/projects/get-available-preload-libraries) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -285,7 +285,7 @@ Important notes about libraries for Postgres extensions:
 
 ### Enabling preloaded libraries
 
-You can enable available libraries using the `preloaded_libraries` object in a [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API call. For example, this `Update project` call enables the specified libraries for the Neon project. When running this call, you have to provide a [Neon project ID](/docs/reference/glossary#project-id) and a [Neon API key](/docs/manage/api-keys).
+You can enable available libraries using the `preloaded_libraries` object in a [Create project](/docs/reference/api/projects/create-project) or [Update project](/docs/reference/api/projects/update-project) API call. For example, this `Update project` call enables the specified libraries for the Neon project. When running this call, you have to provide a [Neon project ID](/docs/reference/glossary#project-id) and a [Neon API key](/docs/manage/api-keys).
 
 ```bash
 curl --request PATCH \

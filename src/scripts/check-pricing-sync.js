@@ -343,7 +343,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'compute-rate-free',
     label: 'Compute rate (Free)',
-    comp: 'Rates',
+    comp: 'Compute rates',
     docs: 'Compute',
     plan: 'free',
     norm: extractCore(/(\d+)\s*CU/i, '$1 CU-hours'),
@@ -352,7 +352,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'compute-rate-launch',
     label: 'Compute rate (Launch)',
-    comp: 'Rates',
+    comp: 'Compute rates',
     docs: 'Compute',
     plan: 'launch',
     norm: extractRate,
@@ -361,7 +361,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'compute-rate-scale',
     label: 'Compute rate (Scale)',
-    comp: 'Rates',
+    comp: 'Compute rates',
     docs: 'Compute',
     plan: 'scale',
     norm: extractRate,
@@ -370,7 +370,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'autoscaling-free',
     label: 'Autoscaling / Sizes (Free)',
-    comp: 'Sizes',
+    comp: 'Compute sizes',
     docs: 'Autoscaling',
     plan: 'free',
     norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
@@ -379,7 +379,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'autoscaling-launch',
     label: 'Autoscaling / Sizes (Launch)',
-    comp: 'Sizes',
+    comp: 'Compute sizes',
     docs: 'Autoscaling',
     plan: 'launch',
     norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
@@ -422,7 +422,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'storage-free',
     label: 'Storage (Free)',
-    comp: 'Database',
+    comp: 'Database storage',
     docs: 'Storage',
     plan: 'free',
     norm: extractCore(/([\d.]+\s*GB)/i),
@@ -431,7 +431,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'storage-rate-launch',
     label: 'Storage rate (Launch)',
-    comp: 'Database',
+    comp: 'Database storage',
     docs: 'Storage',
     plan: 'launch',
     norm: extractRate,
@@ -440,7 +440,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'storage-rate-scale',
     label: 'Storage rate (Scale)',
-    comp: 'Database',
+    comp: 'Database storage',
     docs: 'Storage',
     plan: 'scale',
     norm: extractRate,
@@ -740,16 +740,34 @@ const CROSS_SOURCE_CHECKS = [
 
 // Hero numeric rates vs component table string rates
 const HERO_RATE_CHECKS = [
-  ['hero-compute-launch', 'Hero vs Table: Compute rate (Launch)', 'launch', 'computeRate', 'Rates'],
-  ['hero-compute-scale', 'Hero vs Table: Compute rate (Scale)', 'scale', 'computeRate', 'Rates'],
+  [
+    'hero-compute-launch',
+    'Hero vs Table: Compute rate (Launch)',
+    'launch',
+    'computeRate',
+    'Compute rates',
+  ],
+  [
+    'hero-compute-scale',
+    'Hero vs Table: Compute rate (Scale)',
+    'scale',
+    'computeRate',
+    'Compute rates',
+  ],
   [
     'hero-storage-launch',
     'Hero vs Table: Storage rate (Launch)',
     'launch',
     'storageRate',
-    'Database',
+    'Database storage',
   ],
-  ['hero-storage-scale', 'Hero vs Table: Storage rate (Scale)', 'scale', 'storageRate', 'Database'],
+  [
+    'hero-storage-scale',
+    'Hero vs Table: Storage rate (Scale)',
+    'scale',
+    'storageRate',
+    'Database storage',
+  ],
 ];
 
 // ---------------------------------------------------------------------------

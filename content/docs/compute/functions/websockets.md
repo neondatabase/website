@@ -6,10 +6,10 @@ summary: >-
   backends. Use WebSockets for two-way connections via an upgrade export, or
   server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
   broadcast across isolates.
-updatedOn: '2026-06-26T10:41:58.102Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 Real-time backends on Neon Functions still follow the request/response model: one request opens a connection, and the handler keeps a streamed response open while data keeps moving. Because the function keeps running for the life of that connection, it can host a real-time backend on the same branch as your Postgres database, with Postgres `LISTEN/NOTIFY` handling cross-isolate messaging instead of a separate broker like Redis.
 
@@ -38,7 +38,7 @@ export default {
 ```
 
 <Admonition type="note">
-`neonctl dev` returns `200 OK` instead of `101 Switching Protocols` for WebSocket upgrade requests during the preview. Test WebSocket behavior against a deployed function (`neonctl deploy`).
+`neon dev` returns `200 OK` instead of `101 Switching Protocols` for WebSocket upgrade requests during beta. Test WebSocket behavior against a deployed function (`neon deploy`).
 </Admonition>
 
 ## Simple echo server
@@ -279,7 +279,7 @@ async upgrade(req: IncomingMessage, socket: Duplex, head: Buffer) {
 },
 ```
 
-For a complete example with JWT verification, Neon Auth integration, and client-side reconnection, see the [realtime chat example](https://github.com/neondatabase/examples/tree/main/with-realtime-chat).
+For a complete example with JWT verification, Managed Better Auth integration, and client-side reconnection, see the [realtime chat example](https://github.com/neondatabase/examples/tree/main/with-realtime-chat).
 
 ## Eviction and shutdown
 

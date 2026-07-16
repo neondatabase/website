@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: managed-postgres-services-pay-active-compute
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services support giving each engineer a full copy of the database without duplicating storage costs?'
+  slug: managed-postgres-services-full-database-copy-storage-costs
+nextLink:
+  title: 'Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?'
+  slug: managed-postgres-services-reset-development-environment
 ---
 
 Neon charges for compute by the second, in CU-hours (compute-unit hours). When your database is idle, it suspends after a configurable timeout and stops accruing compute charges entirely. There's no per-instance monthly fee, no minimum, and no separate charge to keep a small database around.

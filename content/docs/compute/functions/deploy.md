@@ -2,67 +2,76 @@
 title: Deploy and manage Neon Functions
 subtitle: CLI and API reference for deploying and managing Neon Functions.
 summary: >-
-  Reference for deploying Neon Functions with neonctl deploy, neonctl functions
+  Reference for deploying Neon Functions with neon deploy, neon functions
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-06-24T23:12:20.545Z'
+updatedOn: '2026-07-16T00:24:48.901Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 ## Deploy with `neon.ts`
 
-If your project has a [`neon.ts`](/docs/reference/neon-ts) config, this is the recommended way to deploy. `neonctl deploy` reads the config and applies the entire branch policy in one step: services, per-branch tuning, and every function it declares:
+If your project has a [`neon.ts`](/docs/reference/neon-ts) config, this is the recommended way to deploy. `neon deploy` reads the config and applies the entire branch policy in one step: services, per-branch tuning, and every function it declares:
 
 ```bash
-neonctl deploy
+neon deploy
 ```
 
 | Flag                | Default           | Description                                                                                          |
 | ------------------- | ----------------- | ---------------------------------------------------------------------------------------------------- |
 | `--config`          | walks up from cwd | Path to the `neon.ts` policy                                                                         |
 | `--env`             | (none)            | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`            | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch     | Target branch ID or name                                                                             |
 | `--project-id`      | linked project    | Project ID                                                                                           |
 | `--update-existing` | `false`           | Auto-confirm overriding existing remote settings on the branch                                       |
 | `--allow-protected` | `false`           | Auto-confirm applying to a branch marked protected on Neon                                           |
 
-`neonctl deploy` is an alias for `neonctl config apply`. To preview what a deploy would change without applying it, run `neonctl config plan`.
+`neon deploy` is an alias for `neon config apply`. To preview what a deploy would change without applying it, run `neon config plan`.
 
-Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neonctl functions deploy` below takes `KEY=VALUE` pairs instead.
+Note that `--env` here takes a path to a `.env` file. The `--env` flag on `neon functions deploy` below takes `KEY=VALUE` pairs instead.
 
-## Deploy with `neonctl functions deploy`
+## Deploy with `neon functions deploy`
 
 To deploy one function directly, without a `neon.ts` config:
 
 ```bash shouldWrap
-neonctl functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wait]
+neon functions deploy <slug> [--src <dir-or-entry-file>] [--env KEY=VALUE] [--wait]
 ```
 
-The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neonctl functions reference](/docs/cli/functions) for the full command surface.
+The CLI bundles with esbuild, zips the output, and uploads it. The first deploy creates the function; subsequent deploys update it. See the [neon functions reference](/docs/cli/functions) for the full command surface.
 
-| Flag              | Default       | Description                                                                                                                                      |
-| ----------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                      |
-| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neonctl deploy --env` |
-| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                             |
-| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                                 |
-| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                             |
+<Admonition type="note" title="esbuild not found">
+The `neon` CLI ships `esbuild` for most platforms. If bundling fails with an `esbuild not found` error, install it (`npm install -g esbuild`) or set `NEON_ESBUILD_PATH` to an esbuild binary. `NEON_ESBUILD_PATH` is read by the CLI's own bundler, not by `buildFunctionBundle` in [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling); when calling that package directly, pass a custom `bundleFunction` instead.
+</Admonition>
+
+| Flag              | Default       | Description                                                                                                                                   |
+| ----------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--src`           | (none)        | Function source: a directory containing `index.ts`, `index.mjs`, or `index.js`, or a path to the entry file                                   |
+| `--env KEY=VALUE` | (none)        | Set an environment variable. Repeatable. Stored with the deployment. Takes `KEY=VALUE` pairs, not a `.env` file path like `neon deploy --env` |
+| `--runtime`       | `nodejs24`    | Function runtime. `nodejs24` is the only valid value                                                                                          |
+| `--branch`        | linked branch | Target branch. Defaults to the branch in `.neon`                                                                                              |
+| `--wait`          | `true`        | Poll until `completed` or `failed`, up to 10 minutes                                                                                          |
 
 **Examples:**
 
 ```bash
-neonctl functions deploy hello --src functions/hello.ts
+neon functions deploy hello --src functions/hello.ts
 ```
 
 ```bash
-neonctl functions deploy hello --src . --env RESEND_API_KEY=re_...
+neon functions deploy hello --src . --env RESEND_API_KEY=re_...
 ```
 
 ```bash
-neonctl functions deploy hello --src functions/hello.ts --branch feat/my-feature
+neon functions deploy hello --src functions/hello.ts --branch feat/my-feature
 ```
+
+The CLI doesn't support a config-only deploy. Every `neon functions deploy` call bundles and uploads source, whether you pass `--src` or let it default to the current directory, so there's no way to change just an environment variable without also pointing at valid source, as in the example above.
+
+For a deploy that skips bundling and updates only the environment or runtime, use [the API](#deploy-with-the-api), which accepts config-only updates.
 
 ## Deploy with the API
 
@@ -70,9 +79,15 @@ Bundle with esbuild, zip the output, then POST to the deploy endpoint.
 
 **1. Bundle:**
 
-```bash
-esbuild functions/hello.ts --bundle --platform=node --target=node24 --outfile=dist/index.mjs
+```bash shouldWrap
+esbuild functions/hello.ts --bundle --platform=node --target=node24 --format=esm \
+  --banner:js="import{createRequire as ___cr}from'module';import{fileURLToPath as ___f}from'url';import{dirname as ___d}from'path';const require=___cr(import.meta.url);const __filename=___f(import.meta.url);const __dirname=___d(__filename);" \
+  --outfile=dist/index.mjs
 ```
+
+<Admonition type="note">
+`--format=esm` is required: esbuild doesn't infer ESM output from the `.mjs` extension alone, and without it the runtime fails with `module is not defined in ES module scope`. The `--banner` line restores `require`, `__filename`, and `__dirname` for bundled CommonJS dependencies that reference them internally (as `pg` does); without it, the runtime fails with `Dynamic require of "<module>" is not supported`. `buildFunctionBundle` below applies the same banner automatically.
+</Admonition>
 
 **2. Zip:**
 
@@ -82,10 +97,10 @@ zip -j function.zip dist/index.mjs
 
 The archive's entry file must be named `index.mjs` or `index.js`; the runtime looks for those names.
 
-From Node.js, `buildFunctionBundle` from [`@neondatabase/config-runtime`](https://www.npmjs.com/package/@neondatabase/config-runtime) does both steps in one call and produces exactly the archive the deploy endpoint expects:
+From Node.js, `buildFunctionBundle` from [`@neon/config-runtime`](/docs/reference/config-runtime#function-bundling) does both steps in one call and produces exactly the archive the deploy endpoint expects. See the [`@neon/config-runtime` reference](/docs/reference/config-runtime) for the rest of that package's programmatic API (`inspect`, `plan`, `apply`), useful for calling a deploy from a custom CI step instead of the CLI:
 
 ```ts
-import { buildFunctionBundle } from "@neondatabase/config-runtime/v1";
+import { buildFunctionBundle } from "@neon/config-runtime/v1";
 
 const zip = await buildFunctionBundle({
   slug: "hello",
@@ -112,11 +127,35 @@ curl -X POST \
 | `runtime`     | string | No                | `nodejs24` is the only valid value                                                                    |
 | `environment` | string | No                | JSON-encoded string-to-string map                                                                     |
 
-The API returns immediately. Poll the get endpoint (see [Check status](#check-status)) until the deployment completes.
+The deploy endpoint accepts `multipart/form-data`. Use a `zip` part for code deploys and a single `environment` part containing the JSON-encoded map; don't send bracketed fields such as `environment[KEY]=value`. The first deployment for a function must include `zip`; later deployments can omit it for config-only changes.
+
+The API returns immediately for code deploys. Poll the get endpoint (see [Check status](#check-status)) until the deployment completes. Config-only deployments can complete synchronously because they reuse the latest bundle. Builds have an absolute 2-minute budget from the time the deploy is accepted; if the build can't complete within that window, the deployment fails.
+
+### Deploy with `@neon/sdk`
+
+The beta [`@neon/sdk`](https://www.npmjs.com/package/@neon/sdk) client includes a `neon.functions` namespace for branch-scoped function management:
+
+```ts
+import { createNeonClient } from '@neon/sdk';
+import { readFile } from 'node:fs/promises';
+
+const neon = createNeonClient({ apiKey: process.env.NEON_API_KEY! });
+const projectId = process.env.NEON_PROJECT_ID!;
+const branchId = process.env.NEON_BRANCH_ID!;
+const zipBytes = await readFile('function.zip');
+
+const { data: deployment } = await neon.functions.deploy(projectId, branchId, 'hello', {
+  zip: new File([zipBytes], 'function.zip', { type: 'application/zip' }),
+  runtime: 'nodejs24',
+  environment: JSON.stringify({ MY_SECRET: 'value' }),
+});
+```
+
+`neon.functions.deploy` uses the same multipart API fields as the raw endpoint. `list`, `get`, `update`, and `delete` are also available under `neon.functions`.
 
 ## Slugs
 
-The slug is assigned at first deploy: either the key in `neon.ts` or the positional argument to `neonctl functions deploy`. It becomes part of the invocation URL and can't be changed afterward. Slugs must match `^[a-z0-9]{1,20}$`: lowercase letters and digits only, 1 to 20 characters, no hyphens.
+The slug is assigned at first deploy: either the key in `neon.ts` or the positional argument to `neon functions deploy`. It becomes part of the invocation URL and can't be changed afterward. Slugs must match `^[a-z0-9]{1,20}$`: lowercase letters and digits only, 1 to 20 characters, no hyphens.
 
 ## Deployment states
 
@@ -135,7 +174,7 @@ The slug is assigned at first deploy: either the key in `neon.ts` or the positio
 <TabItem>
 
 ```bash
-neonctl functions get hello
+neon functions get hello
 ```
 
 </TabItem>
@@ -160,7 +199,7 @@ https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech
 <TabItem>
 
 ```bash
-neonctl functions list
+neon functions list
 ```
 
 </TabItem>
@@ -179,7 +218,7 @@ GET /projects/{project_id}/branches/{branch_id}/functions
 <TabItem>
 
 ```bash
-neonctl functions delete hello
+neon functions delete hello
 ```
 
 </TabItem>

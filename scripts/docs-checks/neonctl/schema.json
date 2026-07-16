@@ -1,42 +1,41 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.26.6",
-  "generatedAt": "2026-06-16T12:27:53.002Z",
+  "neonctlVersion": "2.32.0",
   "binaries": [
     "neonctl",
     "neon"
   ],
   "docsUrl": "https://neon.com/docs/cli",
   "globalOptions": {
-    "help": {
+    "analytics": {
       "type": "boolean",
-      "describe": "Show help for a command or subcommand",
-      "alias": "h"
+      "describe": "Manage analytics. Example: --no-analytics, --analytics false",
+      "default": true
     },
     "api-key": {
       "type": "string",
-      "describe": "Neon API key, authenticates without `neonctl auth`",
+      "describe": "Neon API key, authenticates without `neon auth`",
       "defaultText": "NEON_API_KEY environment variable"
-    },
-    "context-file": {
-      "type": "string",
-      "describe": "Context file with default org, project, and branch IDs, created by `neonctl link`",
-      "defaultText": "nearest .neon file, searching upward from the current directory"
     },
     "color": {
       "type": "boolean",
       "describe": "Colorize the output. Example: --no-color, --color false",
       "default": true
     },
-    "analytics": {
-      "type": "boolean",
-      "describe": "Manage analytics. Example: --no-analytics, --analytics false",
-      "default": true
-    },
     "config-dir": {
       "type": "string",
       "describe": "Path to config directory",
       "defaultText": "~/.config/neonctl (or $XDG_CONFIG_HOME/neonctl)"
+    },
+    "context-file": {
+      "type": "string",
+      "describe": "Context file with default org, project, and branch IDs, created by `neon link`",
+      "defaultText": "nearest .neon file, searching upward from the current directory"
+    },
+    "help": {
+      "type": "boolean",
+      "describe": "Show help for a command or subcommand",
+      "alias": "h"
     },
     "output": {
       "type": "string",
@@ -56,6 +55,87 @@
     }
   },
   "commands": {
+    "api": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "path",
+          "describe": "API path beginning with \"/\" (e.g. /projects or /projects/{project_id}/branches). Use `list` to list endpoints.",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "data": {
+          "type": "string",
+          "describe": "Raw request body: a JSON string, @file, or - for stdin. Overrides --field.",
+          "alias": "d"
+        },
+        "field": {
+          "type": "array",
+          "describe": "Body field key=value (repeatable). Dot-notation nests objects (e.g. -F branch.name=dev); values are typed (numbers, booleans, null, JSON).",
+          "alias": "F"
+        },
+        "header": {
+          "type": "array",
+          "describe": "Extra request header key:value (repeatable).",
+          "alias": "H"
+        },
+        "include": {
+          "type": "boolean",
+          "describe": "Print the response status and headers before the body.",
+          "default": false,
+          "alias": "i"
+        },
+        "list": {
+          "type": "boolean",
+          "describe": "List available API endpoints from the OpenAPI spec.",
+          "default": false
+        },
+        "method": {
+          "type": "string",
+          "describe": "HTTP method (GET, POST, PUT, PATCH, DELETE). Defaults to GET, or POST when a body is provided.",
+          "alias": "X"
+        },
+        "query": {
+          "type": "array",
+          "describe": "Query parameter key=value (repeatable).",
+          "alias": "Q"
+        },
+        "raw-field": {
+          "type": "array",
+          "describe": "Body field key=value with the value kept as a raw string.",
+          "alias": "f"
+        },
+        "refresh": {
+          "type": "boolean",
+          "describe": "Refresh the cached OpenAPI spec (used with --list).",
+          "default": false
+        },
+        "spec-url": {
+          "type": "string",
+          "describe": "OpenAPI spec URL used by --list.",
+          "defaultText": "process.env.NEON_API_SPEC_URL ?? DEFAULT_SPEC_URL",
+          "hidden": true
+        }
+      },
+      "commands": {},
+      "describe": "Call any Neon API route directly (authenticated passthrough)",
+      "usage": "$0 api <path> [options]",
+      "examples": [
+        {
+          "command": "$0 api /projects",
+          "description": "List your projects"
+        },
+        {
+          "command": "$0 api /projects/{id}/branches -X POST -F branch.name=dev",
+          "description": "Create a branch"
+        },
+        {
+          "command": "$0 api --list",
+          "description": "List every available API route"
+        }
+      ]
+    },
     "auth": {
       "aliases": [
         "login"
@@ -70,417 +150,82 @@
       "commands": {},
       "describe": "Authenticate"
     },
-    "projects": {
-      "aliases": [
-        "project"
+    "bootstrap": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "directory",
+          "describe": "Directory to scaffold into. Use \".\" for the current directory. Omit to be prompted.",
+          "type": "string"
+        }
       ],
-      "positionals": [],
-      "options": {},
-      "commands": {
-        "list": {
-          "name": "list",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "org-id": {
-              "type": "string",
-              "describe": "List projects of a given organization"
-            },
-            "recoverable-only": {
-              "type": "boolean",
-              "describe": "List only deleted projects within their deletion grace period"
-            }
-          },
-          "commands": {},
-          "describe": "List projects"
-        },
-        "create": {
-          "name": "create",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "block-public-connections": {
-              "type": "boolean",
-              "describe": "When set, connections from the public internet\nare disallowed. This supersedes the AllowedIPs list.\nThis parameter is under active development and its semantics may change in the future."
-            },
-            "block-vpc-connections": {
-              "type": "boolean",
-              "describe": "When set, connections using VPC endpoints are disallowed.\nThis parameter is under active development and its semantics may change in the future."
-            },
-            "hipaa": {
-              "type": "boolean",
-              "describe": "Enable HIPAA compliance for the project."
-            },
-            "name": {
-              "type": "string",
-              "describe": "The project name. If not specified, the name will be identical to the generated project ID",
-              "defaultText": "project ID"
-            },
-            "region-id": {
-              "type": "string",
-              "describe": "The region ID. Possible values: aws-us-west-2, aws-ap-southeast-1, aws-ap-southeast-2, aws-eu-central-1, aws-us-east-2, aws-us-east-1, azure-eastus2"
-            },
-            "org-id": {
-              "type": "string",
-              "describe": "The project's organization ID"
-            },
-            "psql": {
-              "type": "boolean",
-              "describe": "Connect to a new project via psql",
-              "default": false
-            },
-            "fallback": {
-              "type": "boolean",
-              "describe": "Force the embedded TypeScript psql fallback (for testing)",
-              "default": false,
-              "hidden": true
-            },
-            "database": {
-              "type": "string",
-              "describe": "The database name. If not specified, the default database name, `neondb`, will be used.",
-              "defaultText": "neondb"
-            },
-            "role": {
-              "type": "string",
-              "describe": "The role name. If not specified, the default role name, `{database_name}_owner`, will be used.",
-              "defaultText": "{database}_owner"
-            },
-            "set-context": {
-              "type": "boolean",
-              "describe": "Set the current context to the new project",
-              "default": false
-            },
-            "cu": {
-              "type": "string",
-              "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
-            }
-          },
-          "commands": {},
-          "describe": "Create a project"
-        },
-        "update": {
-          "name": "update",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id",
-              "required": true
-            }
-          ],
-          "options": {
-            "block-vpc-connections": {
-              "type": "boolean",
-              "describe": "When set, connections using VPC endpoints are disallowed.\nThis parameter is under active development and its semantics may change in the future.\n Use --block-vpc-connections=false to set the value to false."
-            },
-            "block-public-connections": {
-              "type": "boolean",
-              "describe": "When set, connections from the public internet\nare disallowed. This supersedes the AllowedIPs list.\nThis parameter is under active development and its semantics may change in the future.\n Use --block-public-connections=false to set the value to false."
-            },
-            "hipaa": {
-              "type": "boolean",
-              "describe": "Enable HIPAA compliance for the project."
-            },
-            "cu": {
-              "type": "string",
-              "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
-            },
-            "name": {
-              "type": "string",
-              "describe": "The project name"
-            }
-          },
-          "commands": {},
-          "describe": "Update a project"
-        },
-        "delete": {
-          "name": "delete",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id",
-              "required": true
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Delete a project"
-        },
-        "recover": {
-          "name": "recover",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id",
-              "required": true
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Recovers a deleted project during the deletion grace period"
-        },
-        "get": {
-          "name": "get",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id",
-              "required": true
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Get a project"
-        }
-      },
-      "describe": "Manage projects",
-      "usage": "$0 projects <sub-command> [options]"
-    },
-    "ip-allow": {
-      "aliases": [],
-      "positionals": [],
       "options": {
-        "project-id": {
+        "agent": {
+          "type": "boolean",
+          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
+          "default": false
+        },
+        "default": {
+          "type": "boolean",
+          "describe": "Quick start: scaffold the default template (or --template) and run the usual setup (install dependencies, git init) without prompting. Linking is left to you since it needs a project choice.",
+          "default": false,
+          "alias": "y"
+        },
+        "force": {
+          "type": "boolean",
+          "describe": "Scaffold into the target directory even if it is not empty (colliding files are overwritten).",
+          "default": false
+        },
+        "git": {
+          "type": "boolean",
+          "describe": "Initialize a git repository after scaffolding. In interactive mode this is offered as a prompt; use --no-git to skip without being asked.",
+          "default": true
+        },
+        "install": {
+          "type": "boolean",
+          "describe": "Install dependencies after scaffolding. In interactive mode this is offered as a prompt; use --no-install to skip without being asked.",
+          "default": true
+        },
+        "link": {
+          "type": "boolean",
+          "describe": "Run `neon link` in the scaffolded directory after installing. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
+          "default": true
+        },
+        "list-templates": {
+          "type": "boolean",
+          "describe": "List available templates and exit.",
+          "default": false,
+          "alias": [
+            "list",
+            "ls"
+          ]
+        },
+        "template": {
           "type": "string",
-          "describe": "Project ID"
-        }
-      },
-      "commands": {
-        "list": {
-          "name": "list",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "List the IP allowlist"
-        },
-        "add": {
-          "name": "add",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "ips",
-              "variadic": true,
-              "describe": "The list of IP addresses to add",
-              "type": "string",
-              "default": []
-            }
-          ],
-          "options": {
-            "protected-only": {
-              "type": "boolean",
-              "describe": "If true, the list will be applied only to protected branches."
-            }
-          },
-          "commands": {},
-          "describe": "Add IP addresses to the IP allowlist",
-          "usage": "$0 ip-allow add [ips...]"
-        },
-        "remove": {
-          "name": "remove",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "ips",
-              "variadic": true,
-              "describe": "The list of IP addresses to remove",
-              "type": "string",
-              "default": []
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Remove IP addresses from the IP allowlist",
-          "usage": "$0 ip-allow remove [ips...]"
-        },
-        "reset": {
-          "name": "reset",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "ips",
-              "variadic": true,
-              "describe": "The list of IP addresses to reset",
-              "type": "string",
-              "default": []
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Reset the IP allowlist",
-          "usage": "$0 ip-allow reset [ips...]"
-        }
-      },
-      "describe": "Manage IP Allow",
-      "usage": "$0 ip-allow <sub-command> [options]"
-    },
-    "vpc": {
-      "aliases": [],
-      "positionals": [],
-      "options": {},
-      "commands": {
-        "endpoint": {
-          "name": "endpoint",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "org-id": {
-              "type": "string",
-              "describe": "Organization ID"
-            },
-            "region-id": {
-              "type": "string",
-              "describe": "The region ID. Possible values: aws-us-west-2, aws-ap-southeast-1, aws-ap-southeast-2, aws-eu-central-1, aws-us-east-2, aws-us-east-1, azure-eastus2",
-              "required": true
-            }
-          },
-          "commands": {
-            "list": {
-              "name": "list",
-              "aliases": [],
-              "positionals": [],
-              "options": {},
-              "commands": {},
-              "describe": "List configured VPC endpoints for this organization."
-            },
-            "assign": {
-              "name": "assign",
-              "aliases": [
-                "update",
-                "add"
-              ],
-              "positionals": [
-                {
-                  "name": "id",
-                  "required": true
-                }
-              ],
-              "options": {
-                "label": {
-                  "type": "string",
-                  "describe": "An optional descriptive label for the VPC endpoint"
-                }
-              },
-              "commands": {},
-              "describe": "Add or update a VPC endpoint for this organization.\nNote: Azure regions are not yet supported."
-            },
-            "remove": {
-              "name": "remove",
-              "aliases": [],
-              "positionals": [
-                {
-                  "name": "id",
-                  "required": true
-                }
-              ],
-              "options": {},
-              "commands": {},
-              "describe": "Remove a VPC endpoint from this organization."
-            },
-            "status": {
-              "name": "status",
-              "aliases": [],
-              "positionals": [
-                {
-                  "name": "id",
-                  "required": true
-                }
-              ],
-              "options": {},
-              "commands": {},
-              "describe": "Get the status of a VPC endpoint for this organization."
-            }
-          },
-          "describe": "Manage VPC endpoints.\nSee: https://neon.tech/docs/guides/neon-private-networking\nAfter adding an endpoint to an organization, client connections will be accepted\nfrom the corresponding VPC for all projects in the organization, unless overridden\nby a project-level VPC endpoint restriction."
-        },
-        "project": {
-          "name": "project",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "project-id": {
-              "type": "string",
-              "describe": "Project ID"
-            }
-          },
-          "commands": {
-            "list": {
-              "name": "list",
-              "aliases": [],
-              "positionals": [],
-              "options": {},
-              "commands": {},
-              "describe": "List VPC endpoint restrictions for this project."
-            },
-            "restrict": {
-              "name": "restrict",
-              "aliases": [
-                "update"
-              ],
-              "positionals": [
-                {
-                  "name": "id",
-                  "required": true
-                }
-              ],
-              "options": {
-                "label": {
-                  "type": "string",
-                  "describe": "An optional descriptive label for the VPC endpoint restriction"
-                }
-              },
-              "commands": {},
-              "describe": "Configure or update a VPC endpoint restriction for this project."
-            },
-            "remove": {
-              "name": "remove",
-              "aliases": [],
-              "positionals": [
-                {
-                  "name": "id",
-                  "required": true
-                }
-              ],
-              "options": {},
-              "commands": {},
-              "describe": "Remove a VPC endpoint restriction from this project."
-            }
-          },
-          "describe": "Manage project-level VPC endpoint restrictions.\nBy default, connections are accepted from any VPC configured at the organization level.\nA project-level VPC endpoint restriction can be used to restrict connections to a specific VPC."
-        }
-      },
-      "describe": "Manage VPC endpoints and project VPC restrictions",
-      "usage": "$0 vpc <sub-command> [options]"
-    },
-    "me": {
-      "aliases": [],
-      "positionals": [],
-      "options": {
-        "context-file": {
-          "type": "unknown",
-          "hidden": true
+          "describe": "Template to use (skips the interactive picker). Run with --list-templates to see available templates."
         }
       },
       "commands": {},
-      "describe": "Show current user"
-    },
-    "orgs": {
-      "aliases": [
-        "org"
-      ],
-      "positionals": [],
-      "options": {},
-      "commands": {
-        "list": {
-          "name": "list",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "List organizations"
+      "describe": "Scaffold a new project from a Neon starter template",
+      "usage": "$0 bootstrap [directory] [options]",
+      "examples": [
+        {
+          "command": "$0 bootstrap my-app",
+          "description": "Create ./my-app from an interactively chosen template"
+        },
+        {
+          "command": "$0 bootstrap . --template hono",
+          "description": "Scaffold the Hono template into the current directory"
+        },
+        {
+          "command": "$0 bootstrap my-app --default",
+          "description": "Quick start: scaffold the default template and run setup without prompting"
+        },
+        {
+          "command": "$0 bootstrap my-app --template hono --agent",
+          "description": "Scaffold without prompting and emit the JSON state machine for AI agents"
         }
-      },
-      "describe": "Manage organizations",
-      "usage": "$0 orgs <sub-command> [options]"
+      ]
     },
     "branches": {
       "aliases": [
@@ -494,19 +239,64 @@
         }
       },
       "commands": {
-        "list": {
-          "name": "list",
+        "add-compute": {
+          "name": "add-compute",
           "aliases": [],
-          "positionals": [],
-          "options": {},
+          "positionals": [
+            {
+              "name": "id|name",
+              "required": true
+            }
+          ],
+          "options": {
+            "cu": {
+              "type": "string",
+              "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
+            },
+            "name": {
+              "type": "string",
+              "describe": "Optional name of the compute"
+            },
+            "type": {
+              "type": "string",
+              "describe": "Type of compute to add",
+              "default": "read_only"
+            }
+          },
           "commands": {},
-          "describe": "List branches"
+          "describe": "Add a compute to a branch"
         },
         "create": {
           "name": "create",
           "aliases": [],
           "positionals": [],
           "options": {
+            "annotation": {
+              "type": "string",
+              "default": "{}",
+              "hidden": true
+            },
+            "compute": {
+              "type": "boolean",
+              "describe": "Create a branch with or without a compute. By default branch is created with a read-write compute. To create a branch without compute use --no-compute",
+              "default": true
+            },
+            "cu": {
+              "type": "string",
+              "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\").",
+              "defaultText": "project default"
+            },
+            "expires-at": {
+              "type": "string",
+              "describe": "Set an expiration date for the branch. Accepts a date string (e.g., 2024-12-31T23:59:59Z).",
+              "defaultText": "never expires"
+            },
+            "fallback": {
+              "type": "boolean",
+              "describe": "Force the embedded TypeScript psql fallback (for testing)",
+              "default": false,
+              "hidden": true
+            },
             "name": {
               "type": "string",
               "describe": "The branch name",
@@ -516,55 +306,80 @@
               "type": "string",
               "describe": "Parent branch name or id or timestamp or LSN. Defaults to the default branch"
             },
-            "compute": {
-              "type": "boolean",
-              "describe": "Create a branch with or without a compute. By default branch is created with a read-write compute. To create a branch without compute use --no-compute",
-              "default": true
-            },
-            "type": {
-              "type": "string",
-              "describe": "Type of compute to add",
-              "default": "read_write"
-            },
-            "suspend-timeout": {
-              "type": "number",
-              "describe": "Duration of inactivity in seconds after which the compute endpoint is\nautomatically suspended. The value `0` means use the global default.\nThe value `-1` means never suspend. The default value is `300` seconds (5 minutes).\nThe maximum value is `604800` seconds (1 week).",
-              "default": 0
-            },
-            "cu": {
-              "type": "string",
-              "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\").",
-              "defaultText": "project default"
-            },
             "psql": {
               "type": "boolean",
               "describe": "Connect to a new branch via psql",
               "default": false
-            },
-            "fallback": {
-              "type": "boolean",
-              "describe": "Force the embedded TypeScript psql fallback (for testing)",
-              "default": false,
-              "hidden": true
-            },
-            "annotation": {
-              "type": "string",
-              "default": "{}",
-              "hidden": true
             },
             "schema-only": {
               "type": "boolean",
               "describe": "Create a schema-only branch. Requires exactly one read-write compute.",
               "default": false
             },
-            "expires-at": {
+            "suspend-timeout": {
+              "type": "number",
+              "describe": "Duration of inactivity in seconds after which the compute endpoint is\nautomatically suspended. The value `0` means use the global default.\nThe value `-1` means never suspend. The default value is `300` seconds (5 minutes).\nThe maximum value is `604800` seconds (1 week).",
+              "default": 0
+            },
+            "type": {
               "type": "string",
-              "describe": "Set an expiration date for the branch. Accepts a date string (e.g., 2024-12-31T23:59:59Z).",
-              "defaultText": "never expires"
+              "describe": "Type of compute to add",
+              "default": "read_write"
             }
           },
           "commands": {},
           "describe": "Create a branch"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id|name",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a branch"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id|name",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Get a branch"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List branches"
+        },
+        "rename": {
+          "name": "rename",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id|name",
+              "required": true
+            },
+            {
+              "name": "new-name",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Rename a branch"
         },
         "reset": {
           "name": "reset",
@@ -630,107 +445,6 @@
           ],
           "usage": "$0 branches restore <target-id|name> <source>[@(timestamp|lsn)]"
         },
-        "rename": {
-          "name": "rename",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id|name",
-              "required": true
-            },
-            {
-              "name": "new-name",
-              "required": true
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Rename a branch"
-        },
-        "set-default": {
-          "name": "set-default",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id|name",
-              "required": true
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Set a branch as default"
-        },
-        "set-expiration": {
-          "name": "set-expiration",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id|name",
-              "required": true
-            }
-          ],
-          "options": {
-            "expires-at": {
-              "type": "string",
-              "describe": "Set a expiration date for the branch. If omitted, expiration will be removed. Format [RFC3339]: 2024-12-31T23:59:59Z"
-            }
-          },
-          "commands": {},
-          "describe": "Set an expiration date for the branch"
-        },
-        "add-compute": {
-          "name": "add-compute",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id|name",
-              "required": true
-            }
-          ],
-          "options": {
-            "type": {
-              "type": "string",
-              "describe": "Type of compute to add",
-              "default": "read_only"
-            },
-            "cu": {
-              "type": "string",
-              "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
-            },
-            "name": {
-              "type": "string",
-              "describe": "Optional name of the compute"
-            }
-          },
-          "commands": {},
-          "describe": "Add a compute to a branch"
-        },
-        "delete": {
-          "name": "delete",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id|name",
-              "required": true
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Delete a branch"
-        },
-        "get": {
-          "name": "get",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "id|name",
-              "required": true
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Get a branch"
-        },
         "schema-diff": {
           "name": "schema-diff",
           "aliases": [
@@ -775,153 +489,412 @@
               "description": "Compares the main branch to the head of the branch with ID br-compare-branch-123456"
             }
           ]
+        },
+        "set-default": {
+          "name": "set-default",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id|name",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Set a branch as default"
+        },
+        "set-expiration": {
+          "name": "set-expiration",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id|name",
+              "required": true
+            }
+          ],
+          "options": {
+            "expires-at": {
+              "type": "string",
+              "describe": "Set a expiration date for the branch. If omitted, expiration will be removed. Format [RFC3339]: 2024-12-31T23:59:59Z"
+            }
+          },
+          "commands": {},
+          "describe": "Set an expiration date for the branch"
         }
       },
       "describe": "Manage branches",
       "usage": "$0 branches <sub-command> [options]"
     },
-    "databases": {
+    "buckets": {
       "aliases": [
-        "database",
-        "db"
+        "bucket"
       ],
       "positionals": [],
       "options": {
         "project-id": {
           "type": "string",
           "describe": "Project ID"
-        },
-        "branch": {
-          "type": "string",
-          "describe": "Branch ID or name"
         }
       },
       "commands": {
-        "list": {
-          "name": "list",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "List databases"
-        },
         "create": {
           "name": "create",
           "aliases": [],
-          "positionals": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "The bucket name to create",
+              "type": "string"
+            }
+          ],
           "options": {
-            "name": {
+            "access-level": {
               "type": "string",
-              "describe": "Database name",
-              "required": true
+              "describe": "The visibility of the bucket",
+              "default": "private",
+              "choices": [
+                "private",
+                "public_read"
+              ]
             },
-            "owner-name": {
+            "branch": {
               "type": "string",
-              "describe": "Owner name"
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
             }
           },
           "commands": {},
-          "describe": "Create a database"
+          "describe": "Create a bucket on a branch",
+          "usage": "$0 bucket create <name> [options]"
         },
         "delete": {
           "name": "delete",
-          "aliases": [],
+          "aliases": [
+            "rm"
+          ],
           "positionals": [
             {
-              "name": "database",
-              "required": true
+              "name": "name",
+              "required": true,
+              "describe": "The bucket name to delete",
+              "type": "string"
             }
           ],
           "options": {},
           "commands": {},
-          "describe": "Delete a database"
-        }
-      },
-      "describe": "Manage databases",
-      "usage": "$0 databases <sub-command> [options]"
-    },
-    "roles": {
-      "aliases": [
-        "role"
-      ],
-      "positionals": [],
-      "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
+          "describe": "Delete a bucket from a branch",
+          "usage": "$0 bucket delete <name> [options]"
         },
-        "branch": {
-          "type": "string",
-          "describe": "Branch ID or name"
-        }
-      },
-      "commands": {
         "list": {
           "name": "list",
-          "aliases": [],
+          "aliases": [
+            "ls"
+          ],
           "positionals": [],
           "options": {},
           "commands": {},
-          "describe": "List roles"
+          "describe": "List the buckets on a branch",
+          "usage": "$0 bucket list [options]"
         },
-        "create": {
-          "name": "create",
+        "object": {
+          "name": "object",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "sub-command",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {
+            "delete": {
+              "name": "delete",
+              "aliases": [
+                "rm"
+              ],
+              "positionals": [
+                {
+                  "name": "target",
+                  "required": true,
+                  "describe": "The object to delete: <bucket>/<key>, or <bucket>/<prefix>/ with --recursive",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch ID or name"
+                },
+                "project-id": {
+                  "type": "string",
+                  "describe": "Project ID"
+                },
+                "recursive": {
+                  "type": "boolean",
+                  "describe": "Delete every object under the given prefix. The prefix must end with \"/\"",
+                  "default": false
+                }
+              },
+              "commands": {},
+              "describe": "Delete an object, or every object under a prefix",
+              "usage": "$0 bucket object delete <bucket>/<key> [options]"
+            },
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "target",
+                  "required": true,
+                  "describe": "The object to download: <bucket>/<key>",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch ID or name"
+                },
+                "file": {
+                  "type": "string",
+                  "describe": "Path to write the downloaded object to (defaults to the object filename in the current directory)"
+                },
+                "project-id": {
+                  "type": "string",
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "Download an object from a bucket to a local file",
+              "usage": "$0 bucket object get <bucket>/<key> [options]"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [
+                "ls"
+              ],
+              "positionals": [
+                {
+                  "name": "target",
+                  "required": true,
+                  "describe": "The bucket to list, optionally with a key prefix: <bucket>[/<prefix>]",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch ID or name"
+                },
+                "cursor": {
+                  "type": "string",
+                  "describe": "Pagination cursor returned as next_cursor by a previous call"
+                },
+                "delimiter": {
+                  "type": "string",
+                  "describe": "Collapse keys sharing this prefix separator into folders. Defaults to \"/\" (folder view); ignored when --recursive is set"
+                },
+                "limit": {
+                  "type": "number",
+                  "describe": "Maximum number of items (objects + folders) to return"
+                },
+                "project-id": {
+                  "type": "string",
+                  "describe": "Project ID"
+                },
+                "recursive": {
+                  "type": "boolean",
+                  "describe": "List every key flat, descending into nested folders (no delimiter). Mutually exclusive with --delimiter. Mirrors \"aws s3 ls --recursive\"",
+                  "default": false
+                }
+              },
+              "commands": {},
+              "describe": "List objects in a bucket. By default folders are collapsed (like \"aws s3 ls\"); pass --recursive for a flat listing of every key",
+              "usage": "$0 bucket object list <bucket>[/<prefix>] [options]"
+            },
+            "put": {
+              "name": "put",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "target",
+                  "required": true,
+                  "describe": "The object to upload to: <bucket>/<key>",
+                  "type": "string"
+                }
+              ],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch ID or name"
+                },
+                "content-type": {
+                  "type": "string",
+                  "describe": "Content-Type to store the object with (e.g. text/plain)"
+                },
+                "file": {
+                  "type": "string",
+                  "describe": "Path to the local file to upload",
+                  "required": true
+                },
+                "project-id": {
+                  "type": "string",
+                  "describe": "Project ID"
+                }
+              },
+              "commands": {},
+              "describe": "Upload a local file to a bucket as an object",
+              "usage": "$0 bucket object put <bucket>/<key> [options]"
+            }
+          },
+          "describe": "List, download, upload or delete objects in a bucket",
+          "usage": "$0 bucket object <sub-command> [options]"
+        }
+      },
+      "describe": "Manage branch object-storage buckets and their objects",
+      "usage": "$0 bucket <sub-command> [options]"
+    },
+    "checkout": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "id|name",
+          "describe": "Branch name or id to check out. Omit to pick interactively from the list of branches.",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "env-pull": {
+          "type": "boolean",
+          "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`.",
+          "default": true
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Pin a branch in the local context (.neon) so subsequent commands target it",
+      "usage": "$0 checkout [id|name] [options]",
+      "examples": [
+        {
+          "command": "$0 checkout br-cool-snow-12345678 --project-id project-id-123",
+          "description": "Pin a branch by id for an explicit project"
+        },
+        {
+          "command": "$0 checkout main",
+          "description": "Pin the branch named \"main\" in the closest .neon file"
+        },
+        {
+          "command": "$0 checkout",
+          "description": "Pick a branch interactively from the project in the closest .neon file"
+        }
+      ]
+    },
+    "config": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "apply": {
+          "name": "apply",
           "aliases": [],
           "positionals": [],
           "options": {
-            "name": {
-              "type": "string",
-              "describe": "Role name",
-              "required": true
-            },
-            "no-login": {
+            "allow-protected": {
               "type": "boolean",
-              "describe": "Create a passwordless role that cannot login"
+              "describe": "Auto-confirm applying to a branch marked protected on Neon",
+              "default": false
+            },
+            "config": {
+              "type": "string",
+              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+            },
+            "env": {
+              "type": "string",
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+            },
+            "env-pull": {
+              "type": "boolean",
+              "describe": "Pull the branch's Neon env vars (DATABASE_URL, …) into a local .env after a successful apply. On by default; use --no-env-pull to skip (e.g. when injecting env at runtime with `neon-env run` / `neon dev`).",
+              "default": true
+            },
+            "update-existing": {
+              "type": "boolean",
+              "describe": "Auto-confirm overriding existing remote settings on the branch",
+              "default": false
             }
           },
           "commands": {},
-          "describe": "Create a role"
+          "describe": "Apply a neon.ts policy to the branch"
         },
-        "delete": {
-          "name": "delete",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "role",
-              "required": true
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Delete a role"
-        }
-      },
-      "describe": "Manage roles",
-      "usage": "$0 roles <sub-command> [options]"
-    },
-    "operations": {
-      "aliases": [
-        "operation"
-      ],
-      "positionals": [],
-      "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        }
-      },
-      "commands": {
-        "list": {
-          "name": "list",
+        "init": {
+          "name": "init",
           "aliases": [],
           "positionals": [],
-          "options": {},
+          "options": {
+            "install": {
+              "type": "boolean",
+              "describe": "Install @neon/config and @neon/env if they're missing. On by default; use --no-install to just print the command.",
+              "default": true
+            }
+          },
           "commands": {},
-          "describe": "List operations"
+          "describe": "Scaffold a neon.ts policy and install the Neon config packages"
+        },
+        "plan": {
+          "name": "plan",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "config": {
+              "type": "string",
+              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+            },
+            "env": {
+              "type": "string",
+              "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+            }
+          },
+          "commands": {},
+          "describe": "Show what `config apply` would change (dry run)"
+        },
+        "status": {
+          "name": "status",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "config-json": {
+              "type": "boolean",
+              "describe": "Print only the branch's live config as neon.ts-shaped JSON (services + branch tuning + preview), to stdout. Useful for scripting or copying into a neon.ts.",
+              "default": false
+            },
+            "current-branch": {
+              "type": "boolean",
+              "describe": "Print only the linked branch name from the local .neon file (no network). Exits non-zero when no branch is pinned.",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Show the branch's live Neon state"
         }
       },
-      "describe": "Manage operations",
-      "usage": "$0 operations <sub-command> [options]"
+      "describe": "Manage a branch with a neon.ts policy",
+      "usage": "$0 config <sub-command> [options]"
     },
     "connection-string": {
       "aliases": [
@@ -935,17 +908,23 @@
         }
       ],
       "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        },
-        "role-name": {
-          "type": "string",
-          "describe": "Role name"
-        },
         "database-name": {
           "type": "string",
           "describe": "Database name"
+        },
+        "endpoint-type": {
+          "type": "string",
+          "describe": "Endpoint type"
+        },
+        "extended": {
+          "type": "boolean",
+          "describe": "Show extended information"
+        },
+        "fallback": {
+          "type": "boolean",
+          "describe": "Force the embedded TypeScript psql fallback (for testing)",
+          "default": false,
+          "hidden": true
         },
         "pooled": {
           "type": "boolean",
@@ -957,24 +936,18 @@
           "describe": "Use connection string for Prisma setup",
           "default": false
         },
-        "endpoint-type": {
+        "project-id": {
           "type": "string",
-          "describe": "Endpoint type"
-        },
-        "extended": {
-          "type": "boolean",
-          "describe": "Show extended information"
+          "describe": "Project ID"
         },
         "psql": {
           "type": "boolean",
           "describe": "Connect to a database via psql using connection string",
           "default": false
         },
-        "fallback": {
-          "type": "boolean",
-          "describe": "Force the embedded TypeScript psql fallback (for testing)",
-          "default": false,
-          "hidden": true
+        "role-name": {
+          "type": "string",
+          "describe": "Role name"
         },
         "ssl": {
           "type": "string",
@@ -1006,143 +979,666 @@
         }
       ]
     },
-    "psql": {
+    "data-api": {
       "aliases": [],
-      "positionals": [
-        {
-          "name": "branch",
-          "describe": "Branch name or id. Defaults to the default branch if omitted. Can be written in the point-in-time format: \"branch@timestamp\" or \"branch@lsn\"",
-          "type": "string"
-        }
-      ],
+      "positionals": [],
       "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "database": {
+          "type": "string",
+          "describe": "Database name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "add-default-grants": {
+              "type": "boolean",
+              "describe": "Grant all permissions on tables in the public schema to authenticated users"
+            },
+            "auth-provider": {
+              "type": "string",
+              "describe": "Authentication provider",
+              "choices": [
+                "neon_auth",
+                "external"
+              ]
+            },
+            "db-aggregates-enabled": {
+              "type": "boolean",
+              "describe": "Enable aggregate functions in queries"
+            },
+            "db-anon-role": {
+              "type": "string",
+              "describe": "Database role used for anonymous (unauthenticated) requests"
+            },
+            "db-extra-search-path": {
+              "type": "string",
+              "describe": "Extra schemas appended to the search path"
+            },
+            "db-max-rows": {
+              "type": "number",
+              "describe": "Maximum number of rows returned by a single request"
+            },
+            "db-schemas": {
+              "type": "string",
+              "describe": "Comma-separated list of schemas exposed via the Data API"
+            },
+            "jwks-url": {
+              "type": "string",
+              "describe": "URL that lists the JWKS (used with external auth)"
+            },
+            "jwt-audience": {
+              "type": "string",
+              "describe": "Expected JWT audience claim"
+            },
+            "jwt-cache-max-lifetime": {
+              "type": "number",
+              "describe": "Maximum JWT cache lifetime in seconds"
+            },
+            "jwt-role-claim-key": {
+              "type": "string",
+              "describe": "JWT claim path used to extract the role"
+            },
+            "openapi-mode": {
+              "type": "string",
+              "describe": "OpenAPI mode",
+              "choices": [
+                "ignore-privileges",
+                "disabled"
+              ]
+            },
+            "provider-name": {
+              "type": "string",
+              "describe": "Name of the auth provider (e.g. Clerk, Stytch, Auth0)"
+            },
+            "server-cors-allowed-origins": {
+              "type": "string",
+              "describe": "CORS allowed origins"
+            },
+            "server-timing-enabled": {
+              "type": "boolean",
+              "describe": "Enable Server-Timing response headers"
+            },
+            "skip-auth-schema": {
+              "type": "boolean",
+              "describe": "Skip creating the auth schema and RLS functions"
+            }
+          },
+          "commands": {},
+          "describe": "Provision the Neon Data API for a database"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Tear down the Neon Data API for a database"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Show the Neon Data API status and settings"
+        },
+        "refresh-schema": {
+          "name": "refresh-schema",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Refresh the Data API schema cache without changing settings"
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "db-aggregates-enabled": {
+              "type": "boolean",
+              "describe": "Enable aggregate functions in queries"
+            },
+            "db-anon-role": {
+              "type": "string",
+              "describe": "Database role used for anonymous (unauthenticated) requests"
+            },
+            "db-extra-search-path": {
+              "type": "string",
+              "describe": "Extra schemas appended to the search path"
+            },
+            "db-max-rows": {
+              "type": "number",
+              "describe": "Maximum number of rows returned by a single request"
+            },
+            "db-schemas": {
+              "type": "string",
+              "describe": "Comma-separated list of schemas exposed via the Data API"
+            },
+            "jwt-cache-max-lifetime": {
+              "type": "number",
+              "describe": "Maximum JWT cache lifetime in seconds"
+            },
+            "jwt-role-claim-key": {
+              "type": "string",
+              "describe": "JWT claim path used to extract the role"
+            },
+            "openapi-mode": {
+              "type": "string",
+              "describe": "OpenAPI mode",
+              "choices": [
+                "ignore-privileges",
+                "disabled"
+              ]
+            },
+            "replace": {
+              "type": "boolean",
+              "describe": "Replace settings with only the flags provided. Omitted settings revert to server defaults.",
+              "default": false
+            },
+            "server-cors-allowed-origins": {
+              "type": "string",
+              "describe": "CORS allowed origins"
+            },
+            "server-timing-enabled": {
+              "type": "boolean",
+              "describe": "Enable Server-Timing response headers"
+            }
+          },
+          "commands": {},
+          "describe": "Update Neon Data API settings (merges with current settings by default)"
+        }
+      },
+      "describe": "Manage the Neon Data API for a database",
+      "usage": "$0 data-api <sub-command> [options]"
+    },
+    "databases": {
+      "aliases": [
+        "database",
+        "db"
+      ],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "Database name",
+              "required": true
+            },
+            "owner-name": {
+              "type": "string",
+              "describe": "Owner name"
+            }
+          },
+          "commands": {},
+          "describe": "Create a database"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "database",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a database"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List databases"
+        }
+      },
+      "describe": "Manage databases",
+      "usage": "$0 databases <sub-command> [options]"
+    },
+    "deploy": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "allow-protected": {
+          "type": "boolean",
+          "describe": "Auto-confirm applying to a branch marked protected on Neon",
+          "default": false
+        },
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "config": {
+          "type": "string",
+          "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
+        },
+        "env": {
+          "type": "string",
+          "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
+        },
+        "env-pull": {
+          "type": "boolean",
+          "describe": "Pull the branch's Neon env vars (DATABASE_URL, …) into a local .env after a successful apply. On by default; use --no-env-pull to skip (e.g. when injecting env at runtime with `neon-env run` / `neon dev`).",
+          "default": true
+        },
         "project-id": {
           "type": "string",
           "describe": "Project ID"
         },
-        "role-name": {
-          "type": "string",
-          "describe": "Role name"
-        },
-        "database-name": {
-          "type": "string",
-          "describe": "Database name"
-        },
-        "pooled": {
+        "update-existing": {
           "type": "boolean",
-          "describe": "Use pooled connection",
+          "describe": "Auto-confirm overriding existing remote settings on the branch",
           "default": false
-        },
-        "endpoint-type": {
-          "type": "string",
-          "describe": "Endpoint type"
-        },
-        "ssl": {
-          "type": "string",
-          "describe": "SSL mode",
-          "default": "require",
-          "choices": [
-            "require",
-            "verify-ca",
-            "verify-full",
-            "omit"
-          ]
-        },
-        "fallback": {
-          "type": "boolean",
-          "describe": "Force the embedded TypeScript psql fallback (for testing)",
-          "default": false,
-          "hidden": true
         }
       },
       "commands": {},
-      "describe": "Connect to a database via psql",
-      "usage": "$0 psql [branch] [options] [-- psql-args]",
+      "describe": "Apply a neon.ts policy to a branch (alias for `config apply`)",
+      "usage": "$0 deploy [options]"
+    },
+    "dev": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "port": {
+          "type": "number",
+          "describe": "Port to listen on (single-function mode only, with --source). Fails if taken. Without it (and without a PORT env var) a free port is chosen automatically."
+        },
+        "source": {
+          "type": "string",
+          "describe": "Path to a single function entry module. Omit to serve every function declared in neon.ts."
+        }
+      },
+      "commands": {},
+      "describe": "Run Neon Functions locally with a dev server",
+      "usage": "$0 dev [--source <path>] [options]",
       "examples": [
         {
-          "command": "$0 psql",
-          "description": "Connect to the default branch via psql"
+          "command": "$0 dev --source ./functions/hello.ts",
+          "description": "Serve one function on a free port with hot reload"
         },
         {
-          "command": "$0 psql main",
-          "description": "Connect to the main branch via psql"
+          "command": "$0 dev",
+          "description": "Serve every function declared in neon.ts (one dev server each)"
         },
         {
-          "command": "$0 psql main -- -c \"SELECT 1\"",
-          "description": "Run a single query against the main branch"
-        },
-        {
-          "command": "$0 psql main@2024-01-01T00:00:00Z",
-          "description": "Connect to the main branch at a specific point in time"
+          "command": "$0 dev --source ./functions/hello.ts --port 3000",
+          "description": "Serve one function on an explicit port (fails if the port is taken)"
         }
       ]
     },
-    "set-context": {
+    "diff": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "compare-branch",
+          "describe": "Branch name or id to compare against (the reference / '---' side). Defaults to the current branch's parent.",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "The branch to review (the '+++' side). Defaults to the branch pinned in the local context (.neon).",
+          "alias": "b"
+        },
+        "database": {
+          "type": "string",
+          "describe": "Limit the diff to a single database. Defaults to every database on the current branch.",
+          "alias": "db"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Show a git-style schema diff between the current branch and another branch",
+      "usage": "$0 diff [compare-branch] [options]",
+      "examples": [
+        {
+          "command": "$0 diff main --db neondb",
+          "description": "Diff only the neondb database against main"
+        },
+        {
+          "command": "$0 diff main --branch feature/checkout",
+          "description": "Diff an explicit branch against main (ignoring the .neon context)"
+        },
+        {
+          "command": "$0 diff",
+          "description": "Diff the current branch's schema against its parent branch"
+        },
+        {
+          "command": "$0 diff main",
+          "description": "Diff the current branch's schema against the main branch"
+        }
+      ]
+    },
+    "env": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "pull": {
+          "name": "pull",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "file": {
+              "type": "string",
+              "describe": "Target .env file to write. Defaults to an existing .env, otherwise .env.local. Only Neon variables are updated; other lines are preserved."
+            }
+          },
+          "commands": {},
+          "describe": "Write the branch's Neon env variables to a local .env file",
+          "examples": [
+            {
+              "command": "$0 env pull",
+              "description": "Write the linked branch's Neon vars into .env.local (or .env if present)"
+            },
+            {
+              "command": "$0 env pull --branch preview --file .env.preview",
+              "description": "Pull a specific branch into a specific file"
+            }
+          ],
+          "usage": "$0 env pull [options]"
+        }
+      },
+      "describe": "Manage a branch's Neon env variables locally",
+      "usage": "$0 env <sub-command> [options]"
+    },
+    "functions": {
+      "aliases": [
+        "function"
+      ],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "slug",
+              "required": true,
+              "describe": "Function slug",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a function on the branch"
+        },
+        "deploy": {
+          "name": "deploy",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "slug",
+              "required": true,
+              "describe": "Function slug (1-20 lowercase letters and digits)",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "entry": {
+              "type": "string",
+              "hidden": true
+            },
+            "env": {
+              "type": "string",
+              "describe": "Environment variable as KEY=VALUE (repeatable)"
+            },
+            "path": {
+              "type": "string",
+              "hidden": true
+            },
+            "runtime": {
+              "type": "string",
+              "describe": "Function runtime",
+              "choices": [
+                "nodejs24"
+              ]
+            },
+            "src": {
+              "type": "string",
+              "describe": "Function source: a directory containing index.ts, index.mjs, or index.js, or a path to the entry file"
+            },
+            "wait": {
+              "type": "boolean",
+              "describe": "Wait for the deployment to finish building",
+              "default": true
+            }
+          },
+          "commands": {},
+          "describe": "Deploy a function from a local directory"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "slug",
+              "required": true,
+              "describe": "Function slug",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "list-env-variables": {
+              "type": "boolean",
+              "describe": "List the environment variable names of the active deployment",
+              "default": false,
+              "alias": "E"
+            }
+          },
+          "commands": {},
+          "describe": "Show a function's details"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List functions on the branch"
+        }
+      },
+      "describe": "Manage Neon Functions",
+      "usage": "$0 function <sub-command> [options]"
+    },
+    "init": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "boolean",
+          "describe": "Enable agent/JSON mode (agent type is auto-detected).",
+          "default": false,
+          "alias": "a"
+        },
+        "context-file": {
+          "type": "unknown",
+          "hidden": true
+        },
+        "data": {
+          "type": "string",
+          "describe": "JSON object with a \"step\" field to route to a specific phase and phase-specific options."
+        },
+        "preview": {
+          "type": "boolean",
+          "describe": "Enable preview features (e.g. project bootstrapping from templates).",
+          "default": false
+        },
+        "skip-migrations": {
+          "type": "boolean",
+          "describe": "Skip the migrations phase.",
+          "default": false
+        }
+      },
+      "commands": {},
+      "describe": "Initialize a project with Neon using your AI coding assistant"
+    },
+    "ip-allow": {
       "aliases": [],
       "positionals": [],
       "options": {
         "project-id": {
           "type": "string",
           "describe": "Project ID"
-        },
-        "org-id": {
-          "type": "string",
-          "describe": "Organization ID"
-        },
-        "branch-id": {
-          "type": "string",
-          "describe": "Branch ID"
         }
       },
-      "commands": {},
-      "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
-      "usage": "$0 set-context [options]"
-    },
-    "checkout": {
-      "aliases": [],
-      "positionals": [
-        {
-          "name": "id|name",
-          "describe": "Branch name or id to check out. Omit to pick interactively from the list of branches.",
-          "type": "string"
-        }
-      ],
-      "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
+      "commands": {
+        "add": {
+          "name": "add",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "ips",
+              "variadic": true,
+              "describe": "The list of IP addresses to add",
+              "type": "string",
+              "default": []
+            }
+          ],
+          "options": {
+            "protected-only": {
+              "type": "boolean",
+              "describe": "If true, the list will be applied only to protected branches."
+            }
+          },
+          "commands": {},
+          "describe": "Add IP addresses to the IP allowlist",
+          "usage": "$0 ip-allow add [ips...]"
         },
-        "env-pull": {
-          "type": "boolean",
-          "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neondatabase/env`) or `neonctl dev`.",
-          "default": true
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List the IP allowlist"
+        },
+        "remove": {
+          "name": "remove",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "ips",
+              "variadic": true,
+              "describe": "The list of IP addresses to remove",
+              "type": "string",
+              "default": []
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Remove IP addresses from the IP allowlist",
+          "usage": "$0 ip-allow remove [ips...]"
+        },
+        "reset": {
+          "name": "reset",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "ips",
+              "variadic": true,
+              "describe": "The list of IP addresses to reset",
+              "type": "string",
+              "default": []
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Reset the IP allowlist",
+          "usage": "$0 ip-allow reset [ips...]"
         }
       },
-      "commands": {},
-      "describe": "Pin a branch in the local context (.neon) so subsequent commands target it",
-      "usage": "$0 checkout [id|name] [options]",
-      "examples": [
-        {
-          "command": "$0 checkout br-cool-snow-12345678 --project-id project-id-123",
-          "description": "Pin a branch by id for an explicit project"
-        },
-        {
-          "command": "$0 checkout main",
-          "description": "Pin the branch named \"main\" in the closest .neon file"
-        },
-        {
-          "command": "$0 checkout",
-          "description": "Pick a branch interactively from the project in the closest .neon file"
-        }
-      ]
+      "describe": "Manage IP Allow",
+      "usage": "$0 ip-allow <sub-command> [options]"
     },
     "link": {
       "aliases": [],
       "positionals": [],
       "options": {
+        "agent": {
+          "type": "boolean",
+          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
+          "default": false
+        },
+        "branch": {
+          "type": "string",
+          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neonctl checkout <branch>` (link never guesses a default).",
+          "alias": "branch-id"
+        },
+        "checks": {
+          "type": "boolean",
+          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id and --project-id (--branch optional) and skips env pull.",
+          "default": true
+        },
+        "clear": {
+          "type": "boolean",
+          "describe": "Remove the org/project/branch context (writes an empty context file) instead of linking.",
+          "default": false
+        },
+        "env-pull": {
+          "type": "boolean",
+          "describe": "Pull the linked branch's Neon env vars (DATABASE_URL, ...) into a local .env after linking. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`.",
+          "default": true
+        },
         "org-id": {
           "type": "string",
           "describe": "Organization ID to link to"
+        },
+        "params": {
+          "type": "string",
+          "describe": "JSON object with link parameters, e.g. '{\"orgId\":\"...\",\"projectId\":\"...\"}' or '{\"orgId\":\"...\",\"projectName\":\"...\",\"regionId\":\"...\"}'. Flags take precedence over fields in --params."
         },
         "project-id": {
           "type": "string",
@@ -1156,40 +1652,11 @@
           "type": "string",
           "describe": "Region ID for a new project (e.g. aws-us-east-2). Required with --project-name."
         },
-        "branch": {
-          "type": "string",
-          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neonctl checkout <branch>` (link never guesses a default).",
-          "alias": "branch-id"
-        },
-        "params": {
-          "type": "string",
-          "describe": "JSON object with link parameters, e.g. '{\"orgId\":\"...\",\"projectId\":\"...\"}' or '{\"orgId\":\"...\",\"projectName\":\"...\",\"regionId\":\"...\"}'. Flags take precedence over fields in --params."
-        },
-        "agent": {
-          "type": "boolean",
-          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
-          "default": false
-        },
         "yes": {
           "type": "boolean",
           "describe": "Skip the \"already linked\" confirmation in interactive mode and re-link anyway.",
           "default": false,
           "alias": "y"
-        },
-        "clear": {
-          "type": "boolean",
-          "describe": "Remove the org/project/branch context (writes an empty context file) instead of linking.",
-          "default": false
-        },
-        "checks": {
-          "type": "boolean",
-          "describe": "Verify the org/project/branch exist (and resolve the org from the project) before writing. On by default; use --no-checks to write the context offline with no API calls — it then requires --org-id and --project-id (--branch optional) and skips env pull.",
-          "default": true
-        },
-        "env-pull": {
-          "type": "boolean",
-          "describe": "Pull the linked branch's Neon env vars (DATABASE_URL, ...) into a local .env after linking. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neondatabase/env`) or `neonctl dev`.",
-          "default": true
         }
       },
       "commands": {},
@@ -1218,447 +1685,32 @@
         }
       ]
     },
-    "init": {
+    "me": {
       "aliases": [],
       "positionals": [],
       "options": {
-        "preview": {
-          "type": "boolean",
-          "describe": "Enable preview features (e.g. project bootstrapping from templates).",
-          "default": false
-        },
-        "skip-migrations": {
-          "type": "boolean",
-          "describe": "Skip the migrations phase.",
-          "default": false
-        },
-        "data": {
-          "type": "string",
-          "describe": "JSON object with a \"step\" field to route to a specific phase and phase-specific options."
-        },
-        "agent": {
-          "type": "boolean",
-          "describe": "Enable agent/JSON mode (agent type is auto-detected).",
-          "default": false,
-          "alias": "a"
-        },
         "context-file": {
           "type": "unknown",
           "hidden": true
         }
       },
       "commands": {},
-      "describe": "Initialize a project with Neon using your AI coding assistant"
-    },
-    "data-api": {
-      "aliases": [],
-      "positionals": [],
-      "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        },
-        "branch": {
-          "type": "string",
-          "describe": "Branch ID or name"
-        },
-        "database": {
-          "type": "string",
-          "describe": "Database name"
-        }
-      },
-      "commands": {
-        "create": {
-          "name": "create",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "auth-provider": {
-              "type": "string",
-              "describe": "Authentication provider",
-              "choices": [
-                "neon_auth",
-                "external"
-              ]
-            },
-            "jwks-url": {
-              "type": "string",
-              "describe": "URL that lists the JWKS (used with external auth)"
-            },
-            "provider-name": {
-              "type": "string",
-              "describe": "Name of the auth provider (e.g. Clerk, Stytch, Auth0)"
-            },
-            "jwt-audience": {
-              "type": "string",
-              "describe": "Expected JWT audience claim"
-            },
-            "add-default-grants": {
-              "type": "boolean",
-              "describe": "Grant all permissions on tables in the public schema to authenticated users"
-            },
-            "skip-auth-schema": {
-              "type": "boolean",
-              "describe": "Skip creating the auth schema and RLS functions"
-            },
-            "db-aggregates-enabled": {
-              "type": "boolean",
-              "describe": "Enable aggregate functions in queries"
-            },
-            "db-anon-role": {
-              "type": "string",
-              "describe": "Database role used for anonymous (unauthenticated) requests"
-            },
-            "db-extra-search-path": {
-              "type": "string",
-              "describe": "Extra schemas appended to the search path"
-            },
-            "db-max-rows": {
-              "type": "number",
-              "describe": "Maximum number of rows returned by a single request"
-            },
-            "db-schemas": {
-              "type": "string",
-              "describe": "Comma-separated list of schemas exposed via the Data API"
-            },
-            "jwt-role-claim-key": {
-              "type": "string",
-              "describe": "JWT claim path used to extract the role"
-            },
-            "jwt-cache-max-lifetime": {
-              "type": "number",
-              "describe": "Maximum JWT cache lifetime in seconds"
-            },
-            "openapi-mode": {
-              "type": "string",
-              "describe": "OpenAPI mode",
-              "choices": [
-                "ignore-privileges",
-                "disabled"
-              ]
-            },
-            "server-cors-allowed-origins": {
-              "type": "string",
-              "describe": "CORS allowed origins"
-            },
-            "server-timing-enabled": {
-              "type": "boolean",
-              "describe": "Enable Server-Timing response headers"
-            }
-          },
-          "commands": {},
-          "describe": "Provision the Neon Data API for a database"
-        },
-        "get": {
-          "name": "get",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "Show the Neon Data API status and settings"
-        },
-        "update": {
-          "name": "update",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "replace": {
-              "type": "boolean",
-              "describe": "Replace settings with only the flags provided. Omitted settings revert to server defaults.",
-              "default": false
-            },
-            "db-aggregates-enabled": {
-              "type": "boolean",
-              "describe": "Enable aggregate functions in queries"
-            },
-            "db-anon-role": {
-              "type": "string",
-              "describe": "Database role used for anonymous (unauthenticated) requests"
-            },
-            "db-extra-search-path": {
-              "type": "string",
-              "describe": "Extra schemas appended to the search path"
-            },
-            "db-max-rows": {
-              "type": "number",
-              "describe": "Maximum number of rows returned by a single request"
-            },
-            "db-schemas": {
-              "type": "string",
-              "describe": "Comma-separated list of schemas exposed via the Data API"
-            },
-            "jwt-role-claim-key": {
-              "type": "string",
-              "describe": "JWT claim path used to extract the role"
-            },
-            "jwt-cache-max-lifetime": {
-              "type": "number",
-              "describe": "Maximum JWT cache lifetime in seconds"
-            },
-            "openapi-mode": {
-              "type": "string",
-              "describe": "OpenAPI mode",
-              "choices": [
-                "ignore-privileges",
-                "disabled"
-              ]
-            },
-            "server-cors-allowed-origins": {
-              "type": "string",
-              "describe": "CORS allowed origins"
-            },
-            "server-timing-enabled": {
-              "type": "boolean",
-              "describe": "Enable Server-Timing response headers"
-            }
-          },
-          "commands": {},
-          "describe": "Update Neon Data API settings (merges with current settings by default)"
-        },
-        "refresh-schema": {
-          "name": "refresh-schema",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "Refresh the Data API schema cache without changing settings"
-        },
-        "delete": {
-          "name": "delete",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "Tear down the Neon Data API for a database"
-        }
-      },
-      "describe": "Manage the Neon Data API for a database",
-      "usage": "$0 data-api <sub-command> [options]"
+      "describe": "Show current user"
     },
     "neon-auth": {
       "aliases": [],
       "positionals": [],
       "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        },
         "branch": {
           "type": "string",
           "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
         }
       },
       "commands": {
-        "enable": {
-          "name": "enable",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "database-name": {
-              "type": "string",
-              "describe": "Database name to use for auth data"
-            }
-          },
-          "commands": {},
-          "describe": "Enable Neon Auth on a branch"
-        },
-        "status": {
-          "name": "status",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "Get Neon Auth status for a branch"
-        },
-        "disable": {
-          "name": "disable",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "delete-data": {
-              "type": "boolean",
-              "describe": "Permanently delete all Neon Auth data and schema from the database",
-              "default": false
-            }
-          },
-          "commands": {},
-          "describe": "Disable Neon Auth on a branch"
-        },
-        "oauth-provider": {
-          "name": "oauth-provider",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {
-            "list": {
-              "name": "list",
-              "aliases": [],
-              "positionals": [],
-              "options": {},
-              "commands": {},
-              "describe": "List OAuth providers"
-            },
-            "add": {
-              "name": "add",
-              "aliases": [],
-              "positionals": [],
-              "options": {
-                "provider-id": {
-                  "type": "string",
-                  "required": true,
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": [
-                    "google",
-                    "github",
-                    "vercel"
-                  ]
-                },
-                "oauth-client-id": {
-                  "type": "string",
-                  "describe": "OAuth client ID from your provider app. Omit to use Neon's shared OAuth app."
-                },
-                "oauth-client-secret": {
-                  "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app."
-                }
-              },
-              "commands": {},
-              "describe": "Add an OAuth provider"
-            },
-            "update": {
-              "name": "update",
-              "aliases": [],
-              "positionals": [],
-              "options": {
-                "provider-id": {
-                  "type": "string",
-                  "required": true,
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": [
-                    "google",
-                    "github",
-                    "vercel"
-                  ]
-                },
-                "oauth-client-id": {
-                  "type": "string",
-                  "describe": "OAuth client ID from your provider app. Omit to use Neon's shared OAuth app."
-                },
-                "oauth-client-secret": {
-                  "type": "string",
-                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app."
-                }
-              },
-              "commands": {},
-              "describe": "Update an OAuth provider"
-            },
-            "delete": {
-              "name": "delete",
-              "aliases": [],
-              "positionals": [],
-              "options": {
-                "provider-id": {
-                  "type": "string",
-                  "required": true,
-                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
-                  "choices": [
-                    "google",
-                    "github",
-                    "vercel"
-                  ]
-                }
-              },
-              "commands": {},
-              "describe": "Delete an OAuth provider"
-            }
-          },
-          "describe": "Manage OAuth providers",
-          "usage": "$0 neon-auth oauth-provider <sub-command> [options]"
-        },
-        "domain": {
-          "name": "domain",
-          "aliases": [],
-          "positionals": [],
-          "options": {},
-          "commands": {
-            "list": {
-              "name": "list",
-              "aliases": [],
-              "positionals": [],
-              "options": {},
-              "commands": {},
-              "describe": "List trusted domains"
-            },
-            "add": {
-              "name": "add",
-              "aliases": [],
-              "positionals": [
-                {
-                  "name": "domain",
-                  "required": true,
-                  "describe": "Domain to add",
-                  "type": "string"
-                }
-              ],
-              "options": {},
-              "commands": {},
-              "describe": "Add a trusted domain",
-              "usage": "$0 neon-auth domain add <domain> [options]"
-            },
-            "delete": {
-              "name": "delete",
-              "aliases": [],
-              "positionals": [
-                {
-                  "name": "domain",
-                  "required": true,
-                  "describe": "Domain to delete",
-                  "type": "string"
-                }
-              ],
-              "options": {},
-              "commands": {},
-              "describe": "Delete a trusted domain",
-              "usage": "$0 neon-auth domain delete <domain> [options]"
-            },
-            "allow-localhost": {
-              "name": "allow-localhost",
-              "aliases": [],
-              "positionals": [],
-              "options": {},
-              "commands": {
-                "get": {
-                  "name": "get",
-                  "aliases": [],
-                  "positionals": [],
-                  "options": {},
-                  "commands": {},
-                  "describe": "Get localhost connection setting"
-                },
-                "enable": {
-                  "name": "enable",
-                  "aliases": [],
-                  "positionals": [],
-                  "options": {},
-                  "commands": {},
-                  "describe": "Allow localhost connections"
-                },
-                "disable": {
-                  "name": "disable",
-                  "aliases": [],
-                  "positionals": [],
-                  "options": {},
-                  "commands": {},
-                  "describe": "Restrict localhost connections"
-                }
-              },
-              "describe": "Manage localhost connection settings",
-              "usage": "$0 neon-auth domain allow-localhost <sub-command> [options]"
-            }
-          },
-          "describe": "Manage redirect URI trusted domains",
-          "usage": "$0 neon-auth domain <sub-command> [options]"
-        },
         "config": {
           "name": "config",
           "aliases": [],
@@ -1684,33 +1736,33 @@
                   "aliases": [],
                   "positionals": [],
                   "options": {
-                    "enabled": {
+                    "auto-sign-in-after-verification": {
                       "type": "boolean",
-                      "describe": "Enable email and password authentication"
+                      "describe": "Auto sign in users after verifying their email"
+                    },
+                    "disable-sign-up": {
+                      "type": "boolean",
+                      "describe": "Disable new user sign ups"
                     },
                     "email-verification-method": {
                       "type": "string",
                       "describe": "Email verification method"
                     },
+                    "enabled": {
+                      "type": "boolean",
+                      "describe": "Enable email and password authentication"
+                    },
                     "require-email-verification": {
                       "type": "boolean",
                       "describe": "Require email verification before users can sign in"
-                    },
-                    "auto-sign-in-after-verification": {
-                      "type": "boolean",
-                      "describe": "Auto sign in users after verifying their email"
-                    },
-                    "send-verification-email-on-sign-up": {
-                      "type": "boolean",
-                      "describe": "Send verification email on sign up"
                     },
                     "send-verification-email-on-sign-in": {
                       "type": "boolean",
                       "describe": "Send verification email on sign in"
                     },
-                    "disable-sign-up": {
+                    "send-verification-email-on-sign-up": {
                       "type": "boolean",
-                      "describe": "Disable new user sign ups"
+                      "describe": "Send verification email on sign up"
                     }
                   },
                   "commands": {},
@@ -1734,61 +1786,19 @@
                   "commands": {},
                   "describe": "Get email provider config"
                 },
-                "update": {
-                  "name": "update",
-                  "aliases": [],
-                  "positionals": [],
-                  "options": {
-                    "type": {
-                      "type": "string",
-                      "describe": "Email provider type",
-                      "required": true,
-                      "choices": [
-                        "standard",
-                        "shared"
-                      ]
-                    },
-                    "host": {
-                      "type": "string",
-                      "describe": "SMTP host (required for standard)"
-                    },
-                    "port": {
-                      "type": "number",
-                      "describe": "SMTP port (required for standard)"
-                    },
-                    "username": {
-                      "type": "string",
-                      "describe": "SMTP username (required for standard)"
-                    },
-                    "password": {
-                      "type": "string",
-                      "describe": "SMTP password (required for standard)"
-                    },
-                    "sender-email": {
-                      "type": "string",
-                      "describe": "Sender email address"
-                    },
-                    "sender-name": {
-                      "type": "string",
-                      "describe": "Sender display name"
-                    }
-                  },
-                  "commands": {},
-                  "describe": "Update email provider config"
-                },
                 "test": {
                   "name": "test",
                   "aliases": [],
                   "positionals": [],
                   "options": {
-                    "recipient-email": {
-                      "type": "string",
-                      "describe": "Email address to send test email to",
-                      "required": true
-                    },
                     "host": {
                       "type": "string",
                       "describe": "SMTP host",
+                      "required": true
+                    },
+                    "password": {
+                      "type": "string",
+                      "describe": "SMTP password",
                       "required": true
                     },
                     "port": {
@@ -1796,14 +1806,9 @@
                       "describe": "SMTP port",
                       "required": true
                     },
-                    "username": {
+                    "recipient-email": {
                       "type": "string",
-                      "describe": "SMTP username",
-                      "required": true
-                    },
-                    "password": {
-                      "type": "string",
-                      "describe": "SMTP password",
+                      "describe": "Email address to send test email to",
                       "required": true
                     },
                     "sender-email": {
@@ -1815,10 +1820,57 @@
                       "type": "string",
                       "describe": "Sender display name",
                       "required": true
+                    },
+                    "username": {
+                      "type": "string",
+                      "describe": "SMTP username",
+                      "required": true
                     }
                   },
                   "commands": {},
                   "describe": "Send a test email"
+                },
+                "update": {
+                  "name": "update",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {
+                    "host": {
+                      "type": "string",
+                      "describe": "SMTP host (required for standard)"
+                    },
+                    "password": {
+                      "type": "string",
+                      "describe": "SMTP password (required for standard)"
+                    },
+                    "port": {
+                      "type": "number",
+                      "describe": "SMTP port (required for standard)"
+                    },
+                    "sender-email": {
+                      "type": "string",
+                      "describe": "Sender email address"
+                    },
+                    "sender-name": {
+                      "type": "string",
+                      "describe": "Sender display name"
+                    },
+                    "type": {
+                      "type": "string",
+                      "describe": "Email provider type",
+                      "required": true,
+                      "choices": [
+                        "standard",
+                        "shared"
+                      ]
+                    },
+                    "username": {
+                      "type": "string",
+                      "describe": "SMTP username (required for standard)"
+                    }
+                  },
+                  "commands": {},
+                  "describe": "Update email provider config"
                 }
               },
               "describe": "Manage email provider configuration",
@@ -1843,14 +1895,6 @@
                   "aliases": [],
                   "positionals": [],
                   "options": {
-                    "enabled": {
-                      "type": "boolean",
-                      "describe": "Enable the organization plugin"
-                    },
-                    "limit": {
-                      "type": "number",
-                      "describe": "Maximum number of organizations a user can create"
-                    },
                     "creator-role": {
                       "type": "string",
                       "describe": "Role assigned to organization creator",
@@ -1858,6 +1902,14 @@
                         "admin",
                         "owner"
                       ]
+                    },
+                    "enabled": {
+                      "type": "boolean",
+                      "describe": "Enable the organization plugin"
+                    },
+                    "limit": {
+                      "type": "number",
+                      "describe": "Maximum number of organizations a user can create"
                     }
                   },
                   "commands": {},
@@ -1891,10 +1943,6 @@
                       "describe": "Enable webhooks",
                       "required": true
                     },
-                    "url": {
-                      "type": "string",
-                      "describe": "Webhook endpoint URL"
-                    },
                     "enabled-events": {
                       "type": "string",
                       "describe": "Events to enable",
@@ -1908,6 +1956,10 @@
                     "timeout": {
                       "type": "number",
                       "describe": "Webhook timeout in seconds (1-10)"
+                    },
+                    "url": {
+                      "type": "string",
+                      "describe": "Webhook endpoint URL"
                     }
                   },
                   "commands": {},
@@ -1921,20 +1973,214 @@
           "describe": "Manage Neon Auth configuration",
           "usage": "$0 neon-auth config <sub-command> [options]"
         },
-        "plugins": {
-          "name": "plugins",
+        "disable": {
+          "name": "disable",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "delete-data": {
+              "type": "boolean",
+              "describe": "Permanently delete all Neon Auth data and schema from the database",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Disable Neon Auth on a branch"
+        },
+        "domain": {
+          "name": "domain",
           "aliases": [],
           "positionals": [],
           "options": {},
           "commands": {
+            "add": {
+              "name": "add",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Domain to add",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Add a trusted domain",
+              "usage": "$0 neon-auth domain add <domain> [options]"
+            },
+            "allow-localhost": {
+              "name": "allow-localhost",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {
+                "disable": {
+                  "name": "disable",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {},
+                  "commands": {},
+                  "describe": "Restrict localhost connections"
+                },
+                "enable": {
+                  "name": "enable",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {},
+                  "commands": {},
+                  "describe": "Allow localhost connections"
+                },
+                "get": {
+                  "name": "get",
+                  "aliases": [],
+                  "positionals": [],
+                  "options": {},
+                  "commands": {},
+                  "describe": "Get localhost connection setting"
+                }
+              },
+              "describe": "Manage localhost connection settings",
+              "usage": "$0 neon-auth domain allow-localhost <sub-command> [options]"
+            },
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "domain",
+                  "required": true,
+                  "describe": "Domain to delete",
+                  "type": "string"
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Delete a trusted domain",
+              "usage": "$0 neon-auth domain delete <domain> [options]"
+            },
             "list": {
               "name": "list",
               "aliases": [],
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "List all plugin configurations"
+              "describe": "List trusted domains"
+            }
+          },
+          "describe": "Manage redirect URI trusted domains",
+          "usage": "$0 neon-auth domain <sub-command> [options]"
+        },
+        "enable": {
+          "name": "enable",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "database-name": {
+              "type": "string",
+              "describe": "Database name to use for auth data"
+            }
+          },
+          "commands": {},
+          "describe": "Enable Neon Auth on a branch"
+        },
+        "oauth-provider": {
+          "name": "oauth-provider",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "add": {
+              "name": "add",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "oauth-client-id": {
+                  "type": "string",
+                  "describe": "OAuth client ID from your provider app. Omit to use Neon's shared OAuth app."
+                },
+                "oauth-client-secret": {
+                  "type": "string",
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app."
+                },
+                "provider-id": {
+                  "type": "string",
+                  "required": true,
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
+                }
+              },
+              "commands": {},
+              "describe": "Add an OAuth provider"
             },
+            "delete": {
+              "name": "delete",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "provider-id": {
+                  "type": "string",
+                  "required": true,
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
+                }
+              },
+              "commands": {},
+              "describe": "Delete an OAuth provider"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List OAuth providers"
+            },
+            "update": {
+              "name": "update",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "oauth-client-id": {
+                  "type": "string",
+                  "describe": "OAuth client ID from your provider app. Omit to use Neon's shared OAuth app."
+                },
+                "oauth-client-secret": {
+                  "type": "string",
+                  "describe": "OAuth client secret from your provider app. Omit to use Neon's shared OAuth app."
+                },
+                "provider-id": {
+                  "type": "string",
+                  "required": true,
+                  "describe": "OAuth provider ID. Supported values: google, github, vercel",
+                  "choices": [
+                    "google",
+                    "github",
+                    "vercel"
+                  ]
+                }
+              },
+              "commands": {},
+              "describe": "Update an OAuth provider"
+            }
+          },
+          "describe": "Manage OAuth providers",
+          "usage": "$0 neon-auth oauth-provider <sub-command> [options]"
+        },
+        "plugins": {
+          "name": "plugins",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
             "get": {
               "name": "get",
               "aliases": [],
@@ -1950,10 +2196,26 @@
               "commands": {},
               "describe": "Get a specific plugin configuration",
               "usage": "$0 neon-auth plugins get <plugin-name> [options]"
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List all plugin configurations"
             }
           },
           "describe": "View Neon Auth plugin configurations",
           "usage": "$0 neon-auth plugins <sub-command> [options]"
+        },
+        "status": {
+          "name": "status",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Get Neon Auth status for a branch"
         },
         "user": {
           "name": "user",
@@ -2025,204 +2287,295 @@
       "describe": "Manage Neon Auth",
       "usage": "$0 neon-auth <sub-command> [options]"
     },
-    "dev": {
-      "aliases": [],
+    "operations": {
+      "aliases": [
+        "operation"
+      ],
       "positionals": [],
       "options": {
-        "source": {
+        "project-id": {
           "type": "string",
-          "describe": "Path to a single function entry module. Omit to serve every function declared in neon.ts."
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List operations"
+        }
+      },
+      "describe": "Manage operations",
+      "usage": "$0 operations <sub-command> [options]"
+    },
+    "orgs": {
+      "aliases": [
+        "org"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List organizations"
+        }
+      },
+      "describe": "Manage organizations",
+      "usage": "$0 orgs <sub-command> [options]"
+    },
+    "projects": {
+      "aliases": [
+        "project"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "block-public-connections": {
+              "type": "boolean",
+              "describe": "When set, connections from the public internet\nare disallowed. This supersedes the AllowedIPs list.\nThis parameter is under active development and its semantics may change in the future."
+            },
+            "block-vpc-connections": {
+              "type": "boolean",
+              "describe": "When set, connections using VPC endpoints are disallowed.\nThis parameter is under active development and its semantics may change in the future."
+            },
+            "cu": {
+              "type": "string",
+              "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
+            },
+            "database": {
+              "type": "string",
+              "describe": "The database name. If not specified, the default database name, `neondb`, will be used.",
+              "defaultText": "neondb"
+            },
+            "fallback": {
+              "type": "boolean",
+              "describe": "Force the embedded TypeScript psql fallback (for testing)",
+              "default": false,
+              "hidden": true
+            },
+            "hipaa": {
+              "type": "boolean",
+              "describe": "Enable HIPAA compliance for the project."
+            },
+            "name": {
+              "type": "string",
+              "describe": "The project name. If not specified, the name will be identical to the generated project ID",
+              "defaultText": "project ID"
+            },
+            "org-id": {
+              "type": "string",
+              "describe": "The project's organization ID"
+            },
+            "psql": {
+              "type": "boolean",
+              "describe": "Connect to a new project via psql",
+              "default": false
+            },
+            "region-id": {
+              "type": "string",
+              "describe": "The region ID. Possible values: aws-us-west-2, aws-ap-southeast-1, aws-ap-southeast-2, aws-eu-central-1, aws-us-east-2, aws-us-east-1, azure-eastus2"
+            },
+            "role": {
+              "type": "string",
+              "describe": "The role name. If not specified, the default role name, `{database_name}_owner`, will be used.",
+              "defaultText": "{database}_owner"
+            },
+            "set-context": {
+              "type": "boolean",
+              "describe": "Set the current context to the new project",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Create a project"
         },
-        "port": {
-          "type": "number",
-          "describe": "Port to listen on (single-function mode only, with --source). Fails if taken. Without it (and without a PORT env var) a free port is chosen automatically."
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a project"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Get a project"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "List projects of a given organization"
+            },
+            "recoverable-only": {
+              "type": "boolean",
+              "describe": "List only deleted projects within their deletion grace period"
+            }
+          },
+          "commands": {},
+          "describe": "List projects"
+        },
+        "recover": {
+          "name": "recover",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Recovers a deleted project during the deletion grace period"
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {
+            "block-public-connections": {
+              "type": "boolean",
+              "describe": "When set, connections from the public internet\nare disallowed. This supersedes the AllowedIPs list.\nThis parameter is under active development and its semantics may change in the future.\n Use --block-public-connections=false to set the value to false."
+            },
+            "block-vpc-connections": {
+              "type": "boolean",
+              "describe": "When set, connections using VPC endpoints are disallowed.\nThis parameter is under active development and its semantics may change in the future.\n Use --block-vpc-connections=false to set the value to false."
+            },
+            "cu": {
+              "type": "string",
+              "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
+            },
+            "hipaa": {
+              "type": "boolean",
+              "describe": "Enable HIPAA compliance for the project."
+            },
+            "name": {
+              "type": "string",
+              "describe": "The project name"
+            }
+          },
+          "commands": {},
+          "describe": "Update a project"
+        }
+      },
+      "describe": "Manage projects",
+      "usage": "$0 projects <sub-command> [options]"
+    },
+    "psql": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "branch",
+          "describe": "Branch name or id. Defaults to the default branch if omitted. Can be written in the point-in-time format: \"branch@timestamp\" or \"branch@lsn\"",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "database-name": {
+          "type": "string",
+          "describe": "Database name"
+        },
+        "endpoint-type": {
+          "type": "string",
+          "describe": "Endpoint type"
+        },
+        "fallback": {
+          "type": "boolean",
+          "describe": "Force the embedded TypeScript psql fallback (for testing)",
+          "default": false,
+          "hidden": true
+        },
+        "pooled": {
+          "type": "boolean",
+          "describe": "Use pooled connection",
+          "default": false
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        },
+        "role-name": {
+          "type": "string",
+          "describe": "Role name"
+        },
+        "ssl": {
+          "type": "string",
+          "describe": "SSL mode",
+          "default": "require",
+          "choices": [
+            "require",
+            "verify-ca",
+            "verify-full",
+            "omit"
+          ]
         }
       },
       "commands": {},
-      "describe": "Run Neon Functions locally with a dev server",
-      "usage": "$0 dev [--source <path>] [options]",
+      "describe": "Connect to a database via psql",
+      "usage": "$0 psql [branch] [options] [-- psql-args]",
       "examples": [
         {
-          "command": "$0 dev --source ./functions/hello.ts",
-          "description": "Serve one function on a free port with hot reload"
+          "command": "$0 psql",
+          "description": "Connect to the default branch via psql"
         },
         {
-          "command": "$0 dev",
-          "description": "Serve every function declared in neon.ts (one dev server each)"
+          "command": "$0 psql main",
+          "description": "Connect to the main branch via psql"
         },
         {
-          "command": "$0 dev --source ./functions/hello.ts --port 3000",
-          "description": "Serve one function on an explicit port (fails if the port is taken)"
+          "command": "$0 psql main -- -c \"SELECT 1\"",
+          "description": "Run a single query against the main branch"
+        },
+        {
+          "command": "$0 psql main@2024-01-01T00:00:00Z",
+          "description": "Connect to the main branch at a specific point in time"
         }
       ]
     },
-    "config": {
-      "aliases": [],
+    "roles": {
+      "aliases": [
+        "role"
+      ],
       "positionals": [],
       "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        },
-        "branch": {
-          "type": "string",
-          "describe": "Branch ID or name"
-        }
-      },
-      "commands": {
-        "status": {
-          "name": "status",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "config-json": {
-              "type": "boolean",
-              "describe": "Print only the branch's live config as neon.ts-shaped JSON (services + branch tuning + preview), to stdout. Useful for scripting or copying into a neon.ts.",
-              "default": false
-            }
-          },
-          "commands": {},
-          "describe": "Show the branch's live Neon state"
-        },
-        "plan": {
-          "name": "plan",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "config": {
-              "type": "string",
-              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
-            },
-            "env": {
-              "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
-            }
-          },
-          "commands": {},
-          "describe": "Show what `config apply` would change (dry run)"
-        },
-        "apply": {
-          "name": "apply",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "config": {
-              "type": "string",
-              "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
-            },
-            "env": {
-              "type": "string",
-              "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
-            },
-            "update-existing": {
-              "type": "boolean",
-              "describe": "Auto-confirm overriding existing remote settings on the branch",
-              "default": false
-            },
-            "allow-protected": {
-              "type": "boolean",
-              "describe": "Auto-confirm applying to a branch marked protected on Neon",
-              "default": false
-            },
-            "env-pull": {
-              "type": "boolean",
-              "describe": "Pull the branch's Neon env vars (DATABASE_URL, …) into a local .env after a successful apply. On by default; use --no-env-pull to skip (e.g. when injecting env at runtime with `neon-env run` / `neon dev`).",
-              "default": true
-            }
-          },
-          "commands": {},
-          "describe": "Apply a neon.ts policy to the branch"
-        }
-      },
-      "describe": "Manage a branch with a neon.ts policy",
-      "usage": "$0 config <sub-command> [options]"
-    },
-    "deploy": {
-      "aliases": [],
-      "positionals": [],
-      "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        },
         "branch": {
           "type": "string",
           "describe": "Branch ID or name"
         },
-        "config": {
-          "type": "string",
-          "describe": "Path to a neon.ts policy (defaults to walking up from cwd)"
-        },
-        "env": {
-          "type": "string",
-          "describe": "Path to a .env file to load into the environment before evaluating neon.ts (so function env values resolve from it). Existing env vars are not overridden."
-        },
-        "update-existing": {
-          "type": "boolean",
-          "describe": "Auto-confirm overriding existing remote settings on the branch",
-          "default": false
-        },
-        "allow-protected": {
-          "type": "boolean",
-          "describe": "Auto-confirm applying to a branch marked protected on Neon",
-          "default": false
-        },
-        "env-pull": {
-          "type": "boolean",
-          "describe": "Pull the branch's Neon env vars (DATABASE_URL, …) into a local .env after a successful apply. On by default; use --no-env-pull to skip (e.g. when injecting env at runtime with `neon-env run` / `neon dev`).",
-          "default": true
-        }
-      },
-      "commands": {},
-      "describe": "Apply a neon.ts policy to a branch (alias for `config apply`)",
-      "usage": "$0 deploy [options]"
-    },
-    "env": {
-      "aliases": [],
-      "positionals": [],
-      "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        },
-        "branch": {
-          "type": "string",
-          "describe": "Branch ID or name"
-        }
-      },
-      "commands": {
-        "pull": {
-          "name": "pull",
-          "aliases": [],
-          "positionals": [],
-          "options": {
-            "file": {
-              "type": "string",
-              "describe": "Target .env file to write. Defaults to an existing .env, otherwise .env.local. Only Neon variables are updated; other lines are preserved."
-            }
-          },
-          "commands": {},
-          "describe": "Write the branch's Neon env variables to a local .env file",
-          "examples": [
-            {
-              "command": "$0 env pull",
-              "description": "Write the linked branch's Neon vars into .env.local (or .env if present)"
-            },
-            {
-              "command": "$0 env pull --branch preview --file .env.preview",
-              "description": "Pull a specific branch into a specific file"
-            }
-          ],
-          "usage": "$0 env pull [options]"
-        }
-      },
-      "describe": "Manage a branch's Neon env variables locally",
-      "usage": "$0 env <sub-command> [options]"
-    },
-    "bucket": {
-      "aliases": [],
-      "positionals": [],
-      "options": {
         "project-id": {
           "type": "string",
           "describe": "Project ID"
@@ -2232,360 +2585,33 @@
         "create": {
           "name": "create",
           "aliases": [],
-          "positionals": [
-            {
-              "name": "name",
-              "required": true,
-              "describe": "The bucket name to create",
-              "type": "string"
-            }
-          ],
+          "positionals": [],
           "options": {
-            "project-id": {
+            "name": {
               "type": "string",
-              "describe": "Project ID"
+              "describe": "Role name",
+              "required": true
             },
-            "branch": {
-              "type": "string",
-              "describe": "Branch ID or name"
-            },
-            "access-level": {
-              "type": "string",
-              "describe": "The visibility of the bucket",
-              "default": "private",
-              "choices": [
-                "private",
-                "public_read"
-              ]
+            "no-login": {
+              "type": "boolean",
+              "describe": "Create a passwordless role that cannot login"
             }
           },
           "commands": {},
-          "describe": "Create a bucket on a branch",
-          "usage": "$0 bucket create <name> [options]"
-        },
-        "list": {
-          "name": "list",
-          "aliases": [
-            "ls"
-          ],
-          "positionals": [],
-          "options": {},
-          "commands": {},
-          "describe": "List the buckets on a branch",
-          "usage": "$0 bucket list [options]"
+          "describe": "Create a role"
         },
         "delete": {
           "name": "delete",
-          "aliases": [
-            "rm"
-          ],
-          "positionals": [
-            {
-              "name": "name",
-              "required": true,
-              "describe": "The bucket name to delete",
-              "type": "string"
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Delete a bucket from a branch",
-          "usage": "$0 bucket delete <name> [options]"
-        },
-        "object": {
-          "name": "object",
           "aliases": [],
           "positionals": [
             {
-              "name": "sub-command",
+              "name": "role",
               "required": true
             }
           ],
           "options": {},
-          "commands": {
-            "list": {
-              "name": "list",
-              "aliases": [
-                "ls"
-              ],
-              "positionals": [
-                {
-                  "name": "target",
-                  "required": true,
-                  "describe": "The bucket to list, optionally with a key prefix: <bucket>[/<prefix>]",
-                  "type": "string"
-                }
-              ],
-              "options": {
-                "project-id": {
-                  "type": "string",
-                  "describe": "Project ID"
-                },
-                "branch": {
-                  "type": "string",
-                  "describe": "Branch ID or name"
-                },
-                "recursive": {
-                  "type": "boolean",
-                  "describe": "List every key flat, descending into nested folders (no delimiter). Mutually exclusive with --delimiter. Mirrors \"aws s3 ls --recursive\"",
-                  "default": false
-                },
-                "delimiter": {
-                  "type": "string",
-                  "describe": "Collapse keys sharing this prefix separator into folders. Defaults to \"/\" (folder view); ignored when --recursive is set"
-                },
-                "cursor": {
-                  "type": "string",
-                  "describe": "Pagination cursor returned as next_cursor by a previous call"
-                },
-                "limit": {
-                  "type": "number",
-                  "describe": "Maximum number of items (objects + folders) to return"
-                }
-              },
-              "commands": {},
-              "describe": "List objects in a bucket. By default folders are collapsed (like \"aws s3 ls\"); pass --recursive for a flat listing of every key",
-              "usage": "$0 bucket object list <bucket>[/<prefix>] [options]"
-            },
-            "get": {
-              "name": "get",
-              "aliases": [],
-              "positionals": [
-                {
-                  "name": "target",
-                  "required": true,
-                  "describe": "The object to download: <bucket>/<key>",
-                  "type": "string"
-                }
-              ],
-              "options": {
-                "project-id": {
-                  "type": "string",
-                  "describe": "Project ID"
-                },
-                "branch": {
-                  "type": "string",
-                  "describe": "Branch ID or name"
-                },
-                "file": {
-                  "type": "string",
-                  "describe": "Path to write the downloaded object to (defaults to the object filename in the current directory)"
-                }
-              },
-              "commands": {},
-              "describe": "Download an object from a bucket to a local file",
-              "usage": "$0 bucket object get <bucket>/<key> [options]"
-            },
-            "put": {
-              "name": "put",
-              "aliases": [],
-              "positionals": [
-                {
-                  "name": "target",
-                  "required": true,
-                  "describe": "The object to upload to: <bucket>/<key>",
-                  "type": "string"
-                }
-              ],
-              "options": {
-                "project-id": {
-                  "type": "string",
-                  "describe": "Project ID"
-                },
-                "branch": {
-                  "type": "string",
-                  "describe": "Branch ID or name"
-                },
-                "file": {
-                  "type": "string",
-                  "describe": "Path to the local file to upload",
-                  "required": true
-                },
-                "content-type": {
-                  "type": "string",
-                  "describe": "Content-Type to store the object with (e.g. text/plain)"
-                }
-              },
-              "commands": {},
-              "describe": "Upload a local file to a bucket as an object",
-              "usage": "$0 bucket object put <bucket>/<key> [options]"
-            },
-            "delete": {
-              "name": "delete",
-              "aliases": [
-                "rm"
-              ],
-              "positionals": [
-                {
-                  "name": "target",
-                  "required": true,
-                  "describe": "The object to delete: <bucket>/<key>, or <bucket>/<prefix>/ with --recursive",
-                  "type": "string"
-                }
-              ],
-              "options": {
-                "project-id": {
-                  "type": "string",
-                  "describe": "Project ID"
-                },
-                "branch": {
-                  "type": "string",
-                  "describe": "Branch ID or name"
-                },
-                "recursive": {
-                  "type": "boolean",
-                  "describe": "Delete every object under the given prefix. The prefix must end with \"/\"",
-                  "default": false
-                }
-              },
-              "commands": {},
-              "describe": "Delete an object, or every object under a prefix",
-              "usage": "$0 bucket object delete <bucket>/<key> [options]"
-            }
-          },
-          "describe": "List, download, upload or delete objects in a bucket",
-          "usage": "$0 bucket object <sub-command> [options]"
-        }
-      },
-      "describe": "Manage branch object-storage buckets and their objects",
-      "usage": "$0 bucket <sub-command> [options]"
-    },
-    "bootstrap": {
-      "aliases": [],
-      "positionals": [
-        {
-          "name": "directory",
-          "describe": "Directory to scaffold into. Use \".\" for the current directory. Omit to be prompted.",
-          "type": "string"
-        }
-      ],
-      "options": {
-        "template": {
-          "type": "string",
-          "describe": "Template to use (skips the interactive picker). Run with --list-templates to see available templates."
-        },
-        "list-templates": {
-          "type": "boolean",
-          "describe": "List available templates and exit.",
-          "default": false,
-          "alias": [
-            "list",
-            "ls"
-          ]
-        },
-        "force": {
-          "type": "boolean",
-          "describe": "Scaffold into the target directory even if it is not empty (colliding files are overwritten).",
-          "default": false
-        },
-        "agent": {
-          "type": "boolean",
-          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
-          "default": false
-        },
-        "default": {
-          "type": "boolean",
-          "describe": "Quick start: scaffold the default template (or --template) and run the usual setup (install dependencies, git init) without prompting. Linking is left to you since it needs a project choice.",
-          "default": false,
-          "alias": "y"
-        },
-        "install": {
-          "type": "boolean",
-          "describe": "Install dependencies after scaffolding. In interactive mode this is offered as a prompt; use --no-install to skip without being asked.",
-          "default": true
-        },
-        "git": {
-          "type": "boolean",
-          "describe": "Initialize a git repository after scaffolding. In interactive mode this is offered as a prompt; use --no-git to skip without being asked.",
-          "default": true
-        },
-        "link": {
-          "type": "boolean",
-          "describe": "Run `neon link` in the scaffolded directory after installing. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
-          "default": true
-        }
-      },
-      "commands": {},
-      "describe": "Scaffold a new project from a Neon starter template",
-      "usage": "$0 bootstrap [directory] [options]",
-      "examples": [
-        {
-          "command": "$0 bootstrap my-app",
-          "description": "Create ./my-app from an interactively chosen template"
-        },
-        {
-          "command": "$0 bootstrap . --template hono",
-          "description": "Scaffold the Hono template into the current directory"
-        },
-        {
-          "command": "$0 bootstrap my-app --default",
-          "description": "Quick start: scaffold the default template and run setup without prompting"
-        },
-        {
-          "command": "$0 bootstrap my-app --template hono --agent",
-          "description": "Scaffold without prompting and emit the JSON state machine for AI agents"
-        }
-      ]
-    },
-    "functions": {
-      "aliases": [
-        "function"
-      ],
-      "positionals": [],
-      "options": {
-        "project-id": {
-          "type": "string",
-          "describe": "Project ID"
-        },
-        "branch": {
-          "type": "string",
-          "describe": "Branch ID or name"
-        }
-      },
-      "commands": {
-        "deploy": {
-          "name": "deploy",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "slug",
-              "required": true,
-              "describe": "Function slug (1-20 lowercase letters and digits)",
-              "type": "string"
-            }
-          ],
-          "options": {
-            "src": {
-              "type": "string",
-              "describe": "Function source: a directory containing index.ts, index.mjs, or index.js, or a path to the entry file"
-            },
-            "path": {
-              "type": "string",
-              "hidden": true
-            },
-            "entry": {
-              "type": "string",
-              "hidden": true
-            },
-            "runtime": {
-              "type": "string",
-              "describe": "Function runtime",
-              "choices": [
-                "nodejs24"
-              ]
-            },
-            "env": {
-              "type": "string",
-              "describe": "Environment variable as KEY=VALUE (repeatable)"
-            },
-            "wait": {
-              "type": "boolean",
-              "describe": "Wait for the deployment to finish building",
-              "default": true
-            }
-          },
           "commands": {},
-          "describe": "Deploy a function from a local directory"
+          "describe": "Delete a role"
         },
         "list": {
           "name": "list",
@@ -2593,48 +2619,197 @@
           "positionals": [],
           "options": {},
           "commands": {},
-          "describe": "List functions on the branch"
-        },
-        "get": {
-          "name": "get",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "slug",
-              "required": true,
-              "describe": "Function slug",
-              "type": "string"
-            }
-          ],
-          "options": {
-            "list-env-variables": {
-              "type": "boolean",
-              "describe": "List the environment variable names of the active deployment",
-              "default": false,
-              "alias": "E"
-            }
-          },
-          "commands": {},
-          "describe": "Show a function's details"
-        },
-        "delete": {
-          "name": "delete",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "slug",
-              "required": true,
-              "describe": "Function slug",
-              "type": "string"
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Delete a function on the branch"
+          "describe": "List roles"
         }
       },
-      "describe": "Manage Neon Functions",
-      "usage": "$0 function <sub-command> [options]"
+      "describe": "Manage roles",
+      "usage": "$0 roles <sub-command> [options]"
+    },
+    "set-context": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch-id": {
+          "type": "string",
+          "describe": "Branch ID"
+        },
+        "org-id": {
+          "type": "string",
+          "describe": "Organization ID"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
+      "usage": "$0 set-context [options]"
+    },
+    "status": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "config-json": {
+          "type": "boolean",
+          "describe": "Print only the branch's live config as neon.ts-shaped JSON (services + branch tuning + preview), to stdout. Useful for scripting or copying into a neon.ts.",
+          "default": false
+        },
+        "current-branch": {
+          "type": "boolean",
+          "describe": "Print only the linked branch name from the local .neon file (no network). Exits non-zero when no branch is pinned.",
+          "default": false
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Show the branch's live Neon state (alias of `config status`)",
+      "usage": "$0 status [options]"
+    },
+    "vpc": {
+      "aliases": [],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "endpoint": {
+          "name": "endpoint",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "Organization ID"
+            },
+            "region-id": {
+              "type": "string",
+              "describe": "The region ID. Possible values: aws-us-west-2, aws-ap-southeast-1, aws-ap-southeast-2, aws-eu-central-1, aws-us-east-2, aws-us-east-1, azure-eastus2",
+              "required": true
+            }
+          },
+          "commands": {
+            "assign": {
+              "name": "assign",
+              "aliases": [
+                "update",
+                "add"
+              ],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {
+                "label": {
+                  "type": "string",
+                  "describe": "An optional descriptive label for the VPC endpoint"
+                }
+              },
+              "commands": {},
+              "describe": "Add or update a VPC endpoint for this organization.\nNote: Azure regions are not yet supported."
+            },
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List configured VPC endpoints for this organization."
+            },
+            "remove": {
+              "name": "remove",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Remove a VPC endpoint from this organization."
+            },
+            "status": {
+              "name": "status",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Get the status of a VPC endpoint for this organization."
+            }
+          },
+          "describe": "Manage VPC endpoints.\nSee: https://neon.tech/docs/guides/neon-private-networking\nAfter adding an endpoint to an organization, client connections will be accepted\nfrom the corresponding VPC for all projects in the organization, unless overridden\nby a project-level VPC endpoint restriction."
+        },
+        "project": {
+          "name": "project",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
+          "commands": {
+            "list": {
+              "name": "list",
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "List VPC endpoint restrictions for this project."
+            },
+            "remove": {
+              "name": "remove",
+              "aliases": [],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {},
+              "commands": {},
+              "describe": "Remove a VPC endpoint restriction from this project."
+            },
+            "restrict": {
+              "name": "restrict",
+              "aliases": [
+                "update"
+              ],
+              "positionals": [
+                {
+                  "name": "id",
+                  "required": true
+                }
+              ],
+              "options": {
+                "label": {
+                  "type": "string",
+                  "describe": "An optional descriptive label for the VPC endpoint restriction"
+                }
+              },
+              "commands": {},
+              "describe": "Configure or update a VPC endpoint restriction for this project."
+            }
+          },
+          "describe": "Manage project-level VPC endpoint restrictions.\nBy default, connections are accepted from any VPC configured at the organization level.\nA project-level VPC endpoint restriction can be used to restrict connections to a specific VPC."
+        }
+      },
+      "describe": "Manage VPC endpoints and project VPC restrictions",
+      "usage": "$0 vpc <sub-command> [options]"
     }
   }
 }
