@@ -49,7 +49,7 @@ If 10 parallel requests arrive, the platform instantly spins up 10 separate inst
 
 If you are deploying to strictly ephemeral or single-request environments like AWS Lambda, traditional client-side connection pooling can cause "zombie" connections when instances are abruptly frozen or destroyed.
 
-The workaround is to use HTTP-based drivers like [`@neondatabase/serverless`](https://www.google.com/search?q=/docs/serverless/serverless-driver). These skip the heavy TCP/TLS handshake entirely, reducing connection setup from ~8 network roundtrips to ~3, making it safe to open and close connections on every single invocation without overloading the database.
+The workaround is to use HTTP-based drivers like [`@neondatabase/serverless`](/docs/serverless/serverless-driver). These skip the heavy TCP/TLS handshake entirely, reducing connection setup from ~8 network roundtrips to ~3, making it safe to open and close connections on every single invocation without overloading the database.
 
 #### The safe pooling strategy (For multi request concurrency)
 
