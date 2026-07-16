@@ -6,7 +6,7 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-15T23:47:24.799Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -165,6 +165,12 @@ export const client = new S3Client({
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
   },
   forcePathStyle: true,
+  // Recent SDK versions default to embedding a checksum in presigned PUT
+  // URLs computed from an empty body (since no body exists at presign
+  // time), which rejects any upload with real content. This restores the
+  // upload/download behavior below and the presigned PUT URL in
+  // Objects (/docs/storage/objects#presigned-urls).
+  requestChecksumCalculation: 'WHEN_REQUIRED',
 });
 ```
 
@@ -186,8 +192,10 @@ client = boto3.client(
 
 ```bash shouldWrap
 # The AWS CLI reads AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, and AWS_REGION
-# from the environment automatically. Set the endpoint explicitly:
-aws configure set endpoint_url "$AWS_ENDPOINT_URL_S3"
+# from the environment automatically. Pass --endpoint-url on each command
+# (shown below) rather than running `aws configure set endpoint_url`, which
+# would overwrite your default profile's endpoint for all AWS CLI usage,
+# not just Neon.
 ```
 
 </CodeTabs>

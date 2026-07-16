@@ -6,7 +6,7 @@ summary: >-
   deploy, or the Neon API, including flags, deployment states, and slug rules.
   Also covers checking status, listing functions, and deleting them.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-16T00:24:48.901Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -79,9 +79,15 @@ Bundle with esbuild, zip the output, then POST to the deploy endpoint.
 
 **1. Bundle:**
 
-```bash
-esbuild functions/hello.ts --bundle --platform=node --target=node24 --outfile=dist/index.mjs
+```bash shouldWrap
+esbuild functions/hello.ts --bundle --platform=node --target=node24 --format=esm \
+  --banner:js="import{createRequire as ___cr}from'module';import{fileURLToPath as ___f}from'url';import{dirname as ___d}from'path';const require=___cr(import.meta.url);const __filename=___f(import.meta.url);const __dirname=___d(__filename);" \
+  --outfile=dist/index.mjs
 ```
+
+<Admonition type="note">
+`--format=esm` is required: esbuild doesn't infer ESM output from the `.mjs` extension alone, and without it the runtime fails with `module is not defined in ES module scope`. The `--banner` line restores `require`, `__filename`, and `__dirname` for bundled CommonJS dependencies that reference them internally (as `pg` does); without it, the runtime fails with `Dynamic require of "<module>" is not supported`. `buildFunctionBundle` below applies the same banner automatically.
+</Admonition>
 
 **2. Zip:**
 
