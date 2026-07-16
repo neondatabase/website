@@ -6,12 +6,12 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-16T13:04:21.569Z'
+updatedOn: '2026-07-16T13:13:27.388Z'
 ---
 
 ## Foundation model access
 
-Neon AI Gateway serves frontier models like Claude (`claude-sonnet-4-6`), GPT (`gpt-5`), and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss. Browse the full [model catalog](/docs/ai-gateway/models#available-models) or start from the [Quick picks](/docs/ai-gateway/models#quick-picks) table.
+Neon AI Gateway serves frontier models like Claude (`claude-sonnet-4-6`), GPT (`gpt-5`), and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss. Browse the full [model catalog](/docs/ai-gateway/models#available-models).
 
 Open-weight models are available to every project right away. Frontier models from Anthropic, OpenAI, and Google are rolling out gradually as we expand capacity.
 

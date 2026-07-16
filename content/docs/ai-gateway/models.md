@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-16T13:04:21.569Z'
+updatedOn: '2026-07-16T13:13:27.388Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -25,23 +25,9 @@ The full catalog is published as the [`neon` provider on models.dev](https://mod
 
 ## Model access
 
-Neon AI Gateway serves frontier models like Claude (`claude-sonnet-4-6`), GPT (`gpt-5`), and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss. See the full list in the [catalog](#available-models) below, or start from [Quick picks](#quick-picks).
+Neon AI Gateway serves frontier models like Claude (`claude-sonnet-4-6`), GPT (`gpt-5`), and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss. See the full list in the [catalog](#available-models) below.
 
 Open-weight models are available to every project right away. Frontier models from Anthropic, OpenAI, and Google are rolling out gradually as we expand capacity. [Request access](/docs/ai-gateway/overview#foundation-model-access).
-
-## Quick picks
-
-Not sure which model to use? Start here.
-
-| I want to...                            | Recommended model                         | Open-weight alternative       |
-| --------------------------------------- | ----------------------------------------- | ----------------------------- |
-| Build a general chat or reasoning app   | `claude-sonnet-4-6`                       | `llama-4-maverick`            |
-| Understand images                       | `claude-sonnet-4-6` or `gemini-2-5-flash` | `llama-4-maverick`            |
-| Process audio or video                  | `gemini-3-5-flash`                        | —                             |
-| Generate or review code                 | `gpt-5-3-codex`                           | `gpt-oss-120b`                |
-| Run extended or deep reasoning          | `claude-opus-4-7` or `gpt-5-1`            | `qwen3-next-80b-a3b-instruct` |
-| Handle very long documents (1M+ tokens) | `gemini-3-1-pro` or `claude-opus-4-7`     | `qwen35-122b-a10b`            |
-| Keep costs low for lightweight tasks    | `claude-haiku-4-5` or `gpt-5-4-nano`      | `meta-llama-3-1-8b-instruct`  |
 
 ## Rate limits
 
