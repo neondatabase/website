@@ -34,14 +34,6 @@ FIRST_VALUE ( expression )
 OVER (
     [PARTITION BY partition_expression, ... ]
     ORDER BY sort_expression [ASC | DESC], ...
-
-```
-
-```sql
-FIRST_VALUE ( expression )
-OVER (
-    [PARTITION BY partition_expression, ... ]
-    ORDER BY sort_expression [ASC | DESC], ...
 )
 ```
 
