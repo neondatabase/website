@@ -22,7 +22,7 @@ npm i -g neon
 ```
 
 <Admonition type="important" title="Create your project in AWS US East (Ohio)">
-Object Storage, Functions, and the AI Gateway are in beta and available only on **new projects in AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to follow this guide. Postgres works in any region. The three beta services are free to use during beta, subject to usage limits. The AI Gateway requires a paid plan; Object Storage and Functions work on any plan.
+Object Storage, Functions, and the AI Gateway are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, on new or existing projects in that region, so use a project there to follow this guide. Postgres works in any region. The three beta services are free to use during beta, subject to usage limits. The AI Gateway requires a paid plan; Object Storage and Functions work on any plan.
 </Admonition>
 
 <TwoColumnLayout>

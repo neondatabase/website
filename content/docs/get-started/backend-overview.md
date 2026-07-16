@@ -38,7 +38,7 @@ Function  ──streams the answer──▶  Browser
 So when you see a `notes` table, an `attachments` bucket, or a `chat` function below, they're all parts of this same app. Postgres is the system of record for notes; Storage holds the files that are too big for a row; the Function is the long-running piece that handles a chat request; the AI Gateway is the single credential for the model call; and Auth decides whose notes a request may read.
 
 <Admonition type="info" title="Region and access requirements">
-Object Storage, Functions, and the AI Gateway are in beta and available only on **new projects in AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use them. Postgres and Managed BetterAuth work in any region. The three new beta services are free to use during beta, subject to usage limits. The AI Gateway is only available on paid plans; the other two are on any plan.
+Object Storage, Functions, and the AI Gateway are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, on new or existing projects in that region, so use a project there to try them. Postgres and Managed Better Auth work in any region. The three new beta services are free to use during beta, subject to usage limits. The AI Gateway is only available on paid plans; the other two are on any plan.
 </Admonition>
 
 ## The shape of a Neon backend
@@ -102,13 +102,13 @@ Every capability follows the same three steps: **enable it in `neon.ts`, [`neon 
 - **`neon deploy` reconciles that file** against your branch, provisions each service, and writes its credentials to your env file.
 - **Branching forks the whole backend together.** A new branch gets its own database, bucket, and function, copy-on-write from the parent. See [Branch your whole backend](#branch-your-whole-backend).
 
-| Capability             | Enable in `neon.ts`  | Injected env vars                                                                 | You use it with                                   |
-| ---------------------- | -------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------- |
-| **Postgres**           | on by default        | `DATABASE_URL`                                                                    | `@neondatabase/serverless`, or `pg` in a Function |
-| **Object Storage**     | `buckets: { ... }`   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION` | `files-sdk` (or any S3 client)                    |
-| **Functions**          | `functions: { ... }` | `DATABASE_URL` and more, inside the function                                      | Hono (any web framework)                          |
-| **AI Gateway**         | `aiGateway: true`    | `NEON_AI_GATEWAY_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`                               | `@neon/ai-sdk-provider`                           |
-| **Managed BetterAuth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neondatabase/auth`                              |
+| Capability              | Enable in `neon.ts`  | Injected env vars                                                                 | You use it with                                   |
+| ----------------------- | -------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------- |
+| **Postgres**            | on by default        | `DATABASE_URL`                                                                    | `@neondatabase/serverless`, or `pg` in a Function |
+| **Object Storage**      | `buckets: { ... }`   | `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION` | `files-sdk` (or any S3 client)                    |
+| **Functions**           | `functions: { ... }` | `DATABASE_URL` and more, inside the function                                      | Hono (any web framework)                          |
+| **AI Gateway**          | `aiGateway: true`    | `NEON_AI_GATEWAY_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`                               | `@neon/ai-sdk-provider`                           |
+| **Managed Better Auth** | `auth: true`         | `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL`                                        | `@neondatabase/auth`                              |
 
 <Admonition type="note" title="Reading the snippets">
 The `neon.ts` fragments below show only the key being added. `auth` goes at the top level of `defineConfig({ ... })`; the beta features marked `// inside preview` all go inside a single `preview` block. The [complete file](#where-to-build-it) shows them assembled. Credentials are written to `.env` if you have one, otherwise `.env.local`; this page writes `.env` for whichever is yours.
@@ -224,7 +224,7 @@ Right after `neon deploy` on a new branch, the first gateway call can return a `
 
 **Reference:** [AI Gateway get-started](/docs/ai-gateway/get-started) (streaming, troubleshooting) · [Model catalog](/docs/ai-gateway/models) (per-modality snippets) · [Overview](/docs/ai-gateway/overview)
 
-## Managed BetterAuth: per-user access
+## Managed Better Auth: per-user access
 
 **What it is:** authentication with per-user data, plus a way to secure your functions by verifying tokens in your own code. In the notes app, it makes notes private, so each user chats only with their own. **When to use it:** making the app multi-user. **When not:** a single-user tool or internal script, where you can skip the toggle and the per-row `user_id`.
 
@@ -234,7 +234,7 @@ Enable it and deploy; `neon deploy` injects the auth base URL and JWKS URL:
 auth: true,
 ```
 
-Managed BetterAuth needs a session cookie secret that you provide; it isn't injected. Generate one and add it as `NEON_AUTH_COOKIE_SECRET` in the same env file as your other credentials:
+Managed Better Auth needs a session cookie secret that you provide; it isn't injected. Generate one and add it as `NEON_AUTH_COOKIE_SECRET` in the same env file as your other credentials:
 
 ```bash
 openssl rand -base64 32   # paste the output as NEON_AUTH_COOKIE_SECRET
