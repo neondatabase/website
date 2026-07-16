@@ -121,6 +121,8 @@
               slug: guides/tortoise-orm
             - title: TypeORM
               slug: guides/typeorm
+            - title: Better Drizzle
+              slug: guides/better-drizzle
     - section: Migrate to Neon
       icon: import
       items:
