@@ -6,14 +6,32 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-15T20:21:37.104Z'
+updatedOn: '2026-07-16T13:37:43.975Z'
 ---
 
 ## Foundation model access
 
-Every project with AI Gateway access can call open-weight models (Llama, Qwen, gpt-oss, and others) right away. Check **Open weights only** in the [model catalog](/docs/ai-gateway/models#available-models) to see the full list. Foundation model access is rolling out gradually as we expand capacity.
+Neon AI Gateway serves frontier models like Claude (`claude-sonnet-4-6`), GPT (`gpt-5`), and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss.
+
+**See every supported model in the [model catalog](/docs/ai-gateway/models#available-models).**
+
+Open-weight models are available to every project right away. Frontier models from Anthropic, OpenAI, and Google are rolling out gradually. Don't see them in your project yet? Request early access below.
 
 <RequestForm type="backend-platform" title="Request early access to additional foundation models" description="Drop your email and we'll reach out as access opens up." buttonText="Request Early Access" confirmation="You're on the list. We'll be in touch as access opens up." />
+
+## Get started
+
+<DetailIconCards>
+
+<a href="/docs/ai-gateway/get-started" description="Get a credential and make your first inference request in minutes." icon="todo">Quickstart</a>
+
+<a href="/docs/ai-gateway/models" description="Browse the full model catalog and learn how to specify models in requests." icon="database">Models</a>
+
+<a href="/docs/ai-gateway/chat-completions" description="Use the OpenAI-compatible endpoint with any model in the catalog." icon="code">Chat completions</a>
+
+<a href="/docs/ai-gateway/authentication" description="Understand how Neon credentials work with AI Gateway." icon="lock-landscape">Authentication</a>
+
+</DetailIconCards>
 
 ## Overview
 
@@ -40,20 +58,6 @@ AI Gateway pricing isn't finalized. Here's what to expect once it moves out of b
 - **Free for now.** Inference remains free through the end of the beta. Billing starts when AI Gateway reaches GA.
 
 We'll publish exact per-model rates on the [Neon pricing page](https://neon.com/pricing) and update this page before billing begins.
-
-## Quickstart
-
-<DetailIconCards>
-
-<a href="/docs/ai-gateway/get-started" description="Get a credential and make your first inference request in minutes." icon="todo">Quickstart</a>
-
-<a href="/docs/ai-gateway/models" description="Browse the full model catalog and learn how to specify models in requests." icon="database">Models</a>
-
-<a href="/docs/ai-gateway/chat-completions" description="Use the OpenAI-compatible endpoint with any model in the catalog." icon="code">Chat completions</a>
-
-<a href="/docs/ai-gateway/authentication" description="Understand how Neon credentials work with AI Gateway." icon="lock-landscape">Authentication</a>
-
-</DetailIconCards>
 
 ## Starter templates
 
