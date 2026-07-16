@@ -1568,9 +1568,6 @@
     - section: Starter code
       icon: template
       items:
-        - title: Templates
-          slug: https://neon.com/templates
-          icon: template
         - title: Examples repo
           slug: https://github.com/neondatabase/examples
           icon: github
