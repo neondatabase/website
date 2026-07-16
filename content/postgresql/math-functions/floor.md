@@ -6,7 +6,7 @@ page_description: >-
   the nearest integer, which is less than or equal to the number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-floor/'
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FACTORIAL() Function
@@ -80,6 +80,6 @@ The following picture illustrates the result:
 
 ## Remarks
 
-To round a number up to the nearest whole number, you use the [`CEIL()`](postgresql-floor) function.
+To round a number up to the nearest whole number, you use the [`CEIL()`](postgresql-ceil) function.
 
 In this tutorial, you have learned how to use the PostgreSQL `FLOOR()` function to round a number down to the nearest integer, which is less than or equal to the number.

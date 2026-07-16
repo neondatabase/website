@@ -62,12 +62,6 @@ export default {
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
   },
-  demos: {
-    title: 'Serverless showcase: unleashing the power of Neon',
-    description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
-    pathname: LINKS.demos,
-    imagePath: '/images/social-previews/demos.jpg',
-  },
   enterprise: {
     title: 'Neon for Enterprise - Neon',
     description:
@@ -159,9 +153,9 @@ export default {
     pathname: LINKS.security,
   },
   startups: {
-    title: 'Neon Startup Program',
+    title: 'Neon Credits for Startups',
     description:
-      'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
+      'Apply to the Databricks Startup Program and get up to $200K in Neon and Databricks credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
   },
   autoscalingReport: {

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-databases-startups-autoscaling
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres databases for teams that want to stop paying for idle compute on nights and weekends?'
+  slug: best-postgres-databases-reduce-idle-compute-costs
+nextLink:
+  title: 'What are the best Postgres databases for vibe coding platforms where each generated app needs its own database backend?'
+  slug: best-postgres-databases-vibe-coding-platforms
 ---
 
 Neon is built for this. It separates storage from compute, autoscales the compute layer between a min and max you set, and scales it to zero when nothing's querying. You only pay for the time the compute is awake.

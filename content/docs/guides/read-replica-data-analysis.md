@@ -10,7 +10,7 @@ summary: >-
   seconds via the Console, CLI, or API, and scales to zero automatically after
   5 minutes of inactivity.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.
@@ -74,7 +74,7 @@ You can add a read replica compute to any branch in your Neon project by followi
 
 Your read replica is provisioned and appears on the **Computes** tab of the **Branches** page. The following section describes how to connect to your read replica.
 
-Alternatively, you can create read replicas using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint), providing the flexibility required to integrate read replicas into your workflows or CI/CD processes.
+Alternatively, you can create read replicas using the [Neon CLI](/docs/cli/branches#create) or [Neon API](/docs/reference/api/endpoints/create-project-endpoint), providing the flexibility required to integrate read replicas into your workflows or CI/CD processes.
 
 <CodeTabs labels={["CLI", "API"]}>
 

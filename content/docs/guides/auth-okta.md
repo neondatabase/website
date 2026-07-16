@@ -7,15 +7,15 @@ summary: >-
   Postgres, wiring Auth.js (next-auth v5) with the built-in Okta OIDC provider
   and Drizzle ORM migrations to store per-user data keyed by the Okta sub claim.
   Choose this guide for organization-internal SSO login rather than Auth0 or
-  Neon Auth. The tutorial covers creating an Okta OIDC web application, setting
+  Managed Better Auth. The tutorial covers creating an Okta OIDC web application, setting
   issuer URI and client credentials, defining a user_messages schema, and
   running drizzle-kit push:pg migrations against a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
-Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
+Neon provides [Managed Better Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
 </Admonition>
 
 User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Identity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.

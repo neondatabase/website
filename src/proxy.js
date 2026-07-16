@@ -61,9 +61,63 @@ function trackLLMPageview(req, { is404 = false } = {}) {
   }).catch(() => {});
 }
 
+const BLOG_CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
+
 export async function proxy(req) {
   try {
     const { pathname } = req.nextUrl;
+
+    // /blog/[slug].md — serve raw markdown from CDN for any requester
+    if (pathname.startsWith('/blog/') && pathname.endsWith('.md')) {
+      const slug = pathname.slice('/blog/'.length, -'.md'.length);
+      try {
+        const res = await fetch(`${BLOG_CDN_BASE}/posts/${slug}.md`);
+        if (res.ok) {
+          trackLLMPageview(req);
+          const markdown = await res.text();
+          return new NextResponse(markdown, {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/markdown; charset=utf-8',
+              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+              'X-Content-Source': 'markdown',
+              'X-Robots-Tag': 'noindex',
+              'X-LLMs-Txt': '/blog/llms.txt',
+            },
+          });
+        }
+        if (res.status === 404) {
+          return new NextResponse(
+            buildAgent404Response(pathname, {
+              context: 'Neon Blog',
+              extraLinks: [
+                { label: 'Blog index', href: '/blog/llms.txt', description: 'All Neon blog posts' },
+              ],
+            }),
+            {
+              status: 404,
+              headers: {
+                'Content-Type': 'text/markdown; charset=utf-8',
+                'Cache-Control': 'public, max-age=60, s-maxage=300',
+                'X-Content-Source': 'agent-404',
+                'X-LLMs-Txt': '/blog/llms.txt',
+              },
+            }
+          );
+        }
+        // Non-200/404 from CDN (5xx, etc.) — fall through to 502
+        return new NextResponse(`# Service Unavailable\n\nCould not fetch /blog/${slug}.md.\n`, {
+          status: 502,
+          headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+        });
+      } catch (error) {
+        console.error('[blog .md] Error fetching from CDN', { slug, error: error.message });
+        return new NextResponse(`# Service Unavailable\n\nCould not fetch /blog/${slug}.md.\n`, {
+          status: 502,
+          headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+        });
+      }
+    }
 
     if (isAIAgentRequest(req)) {
       let agentHit404 = false;
@@ -117,6 +171,20 @@ export async function proxy(req) {
           })
         );
       }
+    }
+
+    // Bare /docs has no page of its own. Agents / Accept: markdown are handled above
+    // (served /docs/llms.txt); everyone else (browsers) is redirected to the intro.
+    // This redirect lives here, not in next.config, so it runs after the markdown check.
+    // Note: trailing slash (/docs/) intentionally not handled here — Next.js
+    // normalizes trailing slashes before middleware on most paths, and the matcher
+    // pattern '/docs' does not match '/docs/', so it falls through harmlessly.
+    if (pathname === '/docs') {
+      const res = NextResponse.redirect(new URL('/docs/introduction', req.url), 308);
+      // The /docs response is content-negotiated (agents/markdown get llms.txt above),
+      // so the redirect must vary on Accept to stay correct in shared caches.
+      res.headers.set('Vary', 'Accept');
+      return res;
     }
 
     // Apply doc headers to all content route responses (.md URLs and HTML pages).
@@ -214,6 +282,9 @@ export const config = {
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
     '/pricing', // Agent-friendly pricing page
+    '/docs', // Bare docs root: serve llms.txt for agents; browsers fall through to the /docs→/docs/introduction redirect
+    '/blog', // Bare blog root: serve blog/llms.txt for agents; browsers fall through normally
+    '/blog/:slug.md', // Individual blog post markdown
     '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*', // All markdown routes
     '/:path(docs|postgresql|guides|branching|programs|use-cases).md', // Top-level .md index URLs
   ],

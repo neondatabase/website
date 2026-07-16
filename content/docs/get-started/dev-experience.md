@@ -7,12 +7,12 @@ summary: >-
   Read this page to understand why Neon behaves differently from fixed-instance
   Postgres and which architectural decisions drive scale-to-zero, instant
   restore, and branch-per-PR workflows. It also covers MCP and AI agent
-  integration, Neon Auth as a composable authentication primitive, and CLI and
+  integration, Managed Better Auth as a composable authentication primitive, and CLI and
   GitHub Actions support for database lifecycle automation.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 Our developer experience is anchored by four core pillars:
@@ -28,7 +28,7 @@ Our developer experience is anchored by four core pillars:
 
 Traditional OLTP databases force you to provision compute upfront (i.e., choose an instance size), plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
 
-You can build your database branching workflows using the [Neon CLI](/docs/reference/neon-cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
+You can build your database branching workflows using the [Neon CLI](/docs/cli), [Neon API](/docs/reference/api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
 **How it works**
 
@@ -129,7 +129,7 @@ Neon is built with an API-first mindset. Every core operation is exposed program
 
 Neon powers [platforms](https://neon.com/platforms) where thousands of databases are provisioned, scaled, and deleted automatically every day. This includes developer platforms embedding Postgres into their product experience, as well as [AI agents](https://neon.com/use-cases/ai-agents) that provision databases dynamically while building and running applications on behalf of users.
 
-The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) has been shaped by real-world requirements, and it’s able to
+The [Neon API](/docs/reference/api) has been shaped by real-world requirements, and it’s able to
 
 - Manage hundreds of thousands of projects
 - Automate database lifecycles with minimal human intervention
@@ -137,7 +137,7 @@ The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-ap
 
 **CLI and native integrations**
 
-For local development and CI pipelines, the [Neon CLI](/docs/reference/neon-cli) provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
+For local development and CI pipelines, the [Neon CLI](/docs/cli) provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
 
 - GitHub Actions for CI-driven branching and cleanup
 - Vercel for automatic database branches per preview deployment
@@ -167,7 +167,7 @@ Developers can safely delegate database-related tasks to AI assistants in their 
 
 Modern application stacks are increasingly modular. Developers mix and match databases, frameworks, hosting platforms, authentication providers, and AI tools based on their needs and expect each component to integrate cleanly without imposing rigid boundaries. Neon is built around this principle of composability - nothing in Neon requires you to adopt a specific framework or vendor-specific workflow. At its core, Neon is Postgres: you can connect with any driver, ORM, or tool in the ecosystem, deploy it anywhere, and integrate it into existing stacks without changing how you build.
 
-At the same time, Neon provides optional building blocks that make common patterns easier, without locking you in, like authentication. [Neon Auth](https://neon.com/docs/auth/overview) provides authentication primitives that live directly alongside your data in Postgres. Users, sessions, organizations, and permissions are stored in your database and follow the same lifecycle as the rest of your application state. Because Neon Auth is integrated into the platform,
+At the same time, Neon provides optional building blocks that make common patterns easier, without locking you in, like authentication. [Managed Better Auth](https://neon.com/docs/auth/overview) provides authentication primitives that live directly alongside your data in Postgres. Users, sessions, organizations, and permissions are stored in your database and follow the same lifecycle as the rest of your application state. Because Managed Better Auth is integrated into the platform,
 
 - Auth data branches with your database, making it easy to test real authentication flows in preview and development environments
 - Auth state is versioned and reversible, benefiting from the same restore and snapshot capabilities

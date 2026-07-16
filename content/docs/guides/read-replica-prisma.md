@@ -10,7 +10,7 @@ summary: >-
   to be a separate PrismaClient instance with a PrismaNeon adapter. Multiple
   replicas are selected randomly per query.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -47,7 +47,7 @@ You can add a read replica by following these steps:
 
    Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.
 
-Alternatively, you can create read replicas using the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint) or [Neon CLI](/docs/reference/cli-branches#create).
+Alternatively, you can create read replicas using the [Neon API](/docs/reference/api/endpoints/create-project-endpoint) or [Neon CLI](/docs/cli/branches#create).
 
 <CodeTabs labels={["API", "CLI"]}>
 

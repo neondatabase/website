@@ -6,7 +6,7 @@ page_description: >-
   manipulate interval values using arithmetic operators and functions.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-interval/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Timestamp Data Types
@@ -47,7 +47,7 @@ interval '3 hours 20 minutes';
 
 Internally, PostgreSQL stores interval values as months, days, and seconds. The months and days values are integers while the seconds field can have fractions.
 
-The interval values are very useful when doing [date](postgresql-date) or time arithmetic. For example, if you want to know the time of 3 hours 2 minutes ago at the current time of last year, you can use the following statement:
+The interval values are very useful when doing [date](postgresql-date) or time arithmetic. For example, if you want to know the time of 3 hours 20 minutes ago at the current time of last year, you can use the following statement:
 
 ```sql
 SELECT
@@ -238,7 +238,7 @@ SELECT
 In this example, we extracted the minute from the interval of `5 hours 21 minutes` and it returned `21` as expected:
 
 ```text
- date_part
+ extract
 -----------
         21
 (1 row)
@@ -246,7 +246,7 @@ In this example, we extracted the minute from the interval of `5 hours 21 minute
 
 ### Adjusting interval values
 
-PostgreSQL provides two functions `justifydays` and `justifyhours` that allows you to adjust the interval of 30\-day as one month and the interval of 24 hours as one day:
+PostgreSQL provides two functions `justify_days` and `justify_hours` that allow you to adjust the interval of 30 days as one month and the interval of 24 hours as one day:
 
 ```sql
 SELECT
@@ -261,7 +261,7 @@ SELECT
 (1 row)
 ```
 
-In addition, the `justify_interval` function adjusts interval using `justifydays` and  `justifyhours` with additional sign adjustments:
+In addition, the `justify_interval` function adjusts interval using `justify_days` and `justify_hours` with additional sign adjustments:
 
 ```sql
 SELECT
@@ -310,7 +310,7 @@ Output:
 INSERT 0 2
 ```
 
-Third, extract components (days, hours, minutes) from values in the `interval` column:
+Third, extract components (days, hours, minutes) from values in the `duration` column:
 
 ```sql
 SELECT

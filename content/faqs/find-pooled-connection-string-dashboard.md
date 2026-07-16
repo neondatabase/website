@@ -3,9 +3,15 @@ title: 'Where can I find the pooled connection string in my Neon dashboard?'
 subtitle: 'Open the Connect widget on the Project Dashboard and toggle Connection pooling on.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Where can I find or generate API keys for Neon?'
+  slug: find-or-generate-neon-api-keys
+nextLink:
+  title: 'What are the limits and quotas for Neon''s Free plan?'
+  slug: free-plan-limits-and-quotas
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech), click **Connect** on the **Project Dashboard**, and turn the **Connection pooling** toggle on. The hostname in the connection string gains a `-pooler` suffix, which routes traffic through Neon's PgBouncer pool. The toggle is on by default for new projects.

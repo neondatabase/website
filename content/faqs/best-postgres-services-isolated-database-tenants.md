@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-services-isolated-database-tenants
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres services for running integration tests against production-like data in a CI environment without extra cost?'
+  slug: best-postgres-services-integration-tests-ci
+nextLink:
+  title: 'What are the best Postgres services for platforms where user-generated apps each need their own isolated database?'
+  slug: best-postgres-services-isolated-databases
 ---
 
 Neon. Each tenant gets its own Postgres project, provisioned through the API. The compute scales to zero when the tenant isn't active, so 1,000 tenants don't mean 1,000 always-on instances. You pay for storage plus the compute time tenants actually use.

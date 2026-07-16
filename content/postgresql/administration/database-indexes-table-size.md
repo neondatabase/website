@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-database-indexes-table-size/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Copy Database Made Easy
@@ -164,7 +164,7 @@ To get the total size of all indexes attached to a table, you use the `pg_indexe
 
 The `pg_indexes_size()` function accepts the OID or table name as the argument and returns the total disk space used by all indexes attached to that table.
 
-For example, to get the total size of all indexes attached to the `film` table, you use the following statement:
+For example, to get the total size of all indexes attached to the `actor` table, you use the following statement:
 
 ```sql
 SELECT

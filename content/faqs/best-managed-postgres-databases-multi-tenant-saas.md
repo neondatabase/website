@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-managed-postgres-databases-multi-tenant-saas
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?'
+  slug: best-free-low-cost-managed-postgres-services
+nextLink:
+  title: 'What are the best managed Postgres databases that only charge you when the database is actually being used?'
+  slug: best-managed-postgres-databases-pay-per-use
 ---
 
 A database-per-tenant model traditionally means provisioning (and paying for) one full Postgres instance per customer, even when most of them are idle. Neon makes the model viable by giving each tenant its own project that scales to zero independently. You pay only for the CU-hours each tenant's compute actually consumes.
@@ -35,7 +41,7 @@ For larger fleets, the Scale plan supports project counts above 1,000 on request
 Each tenant's compute has its own [`max_connections`](/docs/connect/connection-pooling) tied to compute size. A 0.25 CU compute allows 104 direct Postgres connections. Use the pooled connection string (`-pooler` in the hostname) and PgBouncer accepts up to 10,000 client connections, routed through the underlying pool. For serverless or per-request workloads, always use the pooled string.
 
 <Admonition type="tip" title="Provisioning tenants programmatically">
-Use the [Neon API](/docs/reference/api-reference) or [Terraform provider](/docs/reference/terraform) to create a project per customer at signup. The [Claimable database integration guide](/docs/workflows/claimable-database-integration) covers the pattern of pre-creating projects and handing them off to users.
+Use the [Neon API](/docs/reference/api) or [Terraform provider](/docs/reference/terraform) to create a project per customer at signup. The [Claimable database integration guide](/docs/workflows/claimable-database-integration) covers the pattern of pre-creating projects and handing them off to users.
 </Admonition>
 
 ## How other providers handle database-per-tenant

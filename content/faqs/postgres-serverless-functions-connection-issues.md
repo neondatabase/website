@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-serverless-functions-connection-issues
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres databases let you seed a test environment with production data without copying the full database to a new instance?'
+  slug: postgres-seed-test-environment-production-data
+nextLink:
+  title: 'Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?'
+  slug: postgres-services-built-in-connection-pooling
 ---
 
 Serverless functions are hostile to traditional Postgres connections. Each invocation may open a fresh TCP connection. Without pooling, you exhaust `max_connections` quickly, especially at burst traffic. Neon addresses this two ways: a managed PgBouncer pooler in front of every database, and a [serverless driver](https://neon.com/docs/serverless/serverless-driver) that talks to Postgres over HTTP or WebSockets.

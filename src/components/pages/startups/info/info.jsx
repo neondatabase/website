@@ -1,93 +1,101 @@
-import Button from 'components/shared/button';
+import PropTypes from 'prop-types';
+
 import Container from 'components/shared/container/container';
-import GradientBorder from 'components/shared/gradient-border/index';
+import SelfFundedIcon from 'icons/startups/self-funded.inline.svg';
+import VentureBackedIcon from 'icons/startups/venture-backed.inline.svg';
 import { cn } from 'utils/cn';
 
 const CARDS = [
   {
-    title: 'Who can apply?',
-    description: 'Early-stage, venture-backed startups with at least $1M in funding.',
-    features: [
-      'You’ve raised at least $1M in total funding.',
-      'You’re building an early-stage product or MVP.',
-      'You’re backed by venture capital, and your funding is verifiable.',
+    icon: SelfFundedIcon,
+    title: 'Self-Funded',
+    description:
+      'Building on your own? No investors, no problem. If you’re a founder shipping fast, you qualify.',
+    apply: [
+      'Early-stage, self-funded startups.',
+      'Less than $1M in funding.',
+      'Building an early-stage product or MVP.',
     ],
-    className: 'bg-startups-info-card-1',
+    perks: [
+      'Up to $1,000 in Neon credits.',
+      'Onboarding support from the Neon product team.',
+      'Early access to new Neon features.',
+    ],
   },
   {
-    title: 'What do you get?',
+    icon: VentureBackedIcon,
+    title: 'Venture-Backed',
     description:
-      'Credits, expert support, and visibility to help your startup grow faster with Neon.',
-    features: [
-      'Up to $100K in Neon credits to grow your usage over time.',
-      'Support from Neon engineers during onboarding and beyond.',
-      'Early product access and co-marketing opportunities with Neon.',
+      'Backed by a VC or accelerator? If you’re part of a recognized accelerator or have investor backing, start here.',
+    apply: [
+      'VC-backed startups with at least $1M in funding.',
+      'Participants in recognized accelerators (e.g. Y Combinator).',
+      'Building an early-stage product or MVP.',
     ],
-    className: 'bg-startups-info-card-2',
-  },
-  {
-    title: 'How to apply?',
-    description:
-      'Just fill out a short form. We review applications on a rolling basis and typically respond within a few business days.',
-    button: {
-      text: 'Apply now',
-      href: '#contact-form',
-    },
-    isWide: true,
-    className: 'bg-startups-info-card-3',
+    perks: [
+      'Up to $200K in Neon and Databricks credits.',
+      'Onboarding support from the Neon product team.',
+      'Early access to new Neon features.',
+      'Speaking opportunities at Neon developer events.',
+      'Co-marketing opportunities and visibility with Neon.',
+    ],
   },
 ];
 
+const BulletList = ({ label, items }) => (
+  <div className="flex flex-col gap-6">
+    <span className="font-mono text-[15px] leading-none font-medium tracking-wide text-gray-new-70 uppercase">
+      {label}
+    </span>
+    <ul className="flex flex-col gap-4.5">
+      {items.map((item, index) => (
+        <li className="flex items-start gap-3" key={index}>
+          <span className="mt-[8px] ml-[2px] size-2 shrink-0 bg-green-52" aria-hidden />
+          <span className="text-lg leading-snug tracking-extra-tight md:text-base">{item}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+BulletList.propTypes = {
+  label: PropTypes.string.isRequired,
+  items: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
 const Info = () => (
-  <section className="info mt-[200px] xl:mt-[184px] lg:mt-36 md:mt-24">
-    <Container className="flex max-w-[896px] flex-col items-center gap-12 px-8 md:px-5">
-      <h2 className="text-center font-title text-5xl leading-none font-medium tracking-extra-tight xl:text-[44px] lg:text-[36px] md:text-[32px]">
-        Who’s the Neon
-        <br />
-        Startup Program for?
+  <section className="info mt-53 xl:mt-[184px] lg:mt-36 md:mt-24">
+    <Container className="flex flex-col gap-12 lg:gap-10 md:gap-8" size="1280">
+      <h2 className="text-5xl leading-dense tracking-tighter text-white xl:text-[44px] lg:text-[40px] md:text-[32px]">
+        Who’s the Databricks Startup Program for?
       </h2>
-      <ul className="grid grid-cols-2 gap-5 lg:gap-6 md:gap-5 sm:grid-cols-1">
-        {CARDS.map(({ title, description, features, button, isWide, className }, index) => (
-          <li
+      <div className="grid grid-cols-2 grid-rows-[auto_1fr] border border-gray-new-20 sm:flex sm:flex-col">
+        {CARDS.map(({ icon: Icon, title, description, apply, perks }, index) => (
+          <div
             className={cn(
-              'relative rounded-xl bg-black-fog px-6 py-7 lg:p-6 md:p-5',
-              isWide && 'col-span-full flex items-center justify-between gap-5 sm:flex-col',
-              className
+              'row-span-2 grid grid-rows-subgrid sm:flex sm:flex-col',
+              index > 0 && 'border-l border-gray-new-20 sm:border-t sm:border-l-0'
             )}
             key={index}
           >
-            <div className="flex flex-col gap-6">
-              <div>
-                <h3 className="text-2xl leading-none font-medium tracking-tighter">{title}</h3>
-                <p className="mt-2.5 max-w-[464px] tracking-extra-tight text-gray-new-50">
+            <div className="flex flex-col gap-7 bg-gray-new-8 px-9 pt-8 pb-9 lg:px-7 lg:pt-7 lg:pb-8 md:px-6 md:pt-6 md:pb-7">
+              <Icon className="size-14 shrink-0 text-white md:size-12" aria-hidden />
+              <div className="flex flex-col gap-4">
+                <h3 className="text-[32px] leading-tight tracking-tighter xl:text-[28px] md:text-xl">
+                  {title}
+                </h3>
+                <p className="text-lg leading-snug tracking-extra-tight text-gray-new-70 md:text-base">
                   {description}
                 </p>
               </div>
-              {features && (
-                <>
-                  <span className="h-px w-full bg-white mix-blend-overlay" />
-                  <ul className="space-y-4">
-                    {features.map((feature, index) => (
-                      <li className="flex gap-2.5" key={index}>
-                        <span className="check-new-icon mt-1 size-4 shrink-0 bg-green-45" />
-                        <span className="text-lg leading-snug font-medium tracking-extra-tight">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
             </div>
-            {button && (
-              <Button className="px-7 py-3 sm:w-full" theme="primary" to={button.href}>
-                {button.text}
-              </Button>
-            )}
-            <GradientBorder withBlend />
-          </li>
+            <div className="flex flex-1 flex-col gap-y-13 border-t border-gray-new-20 px-9 pt-9 pb-10 lg:gap-10 lg:px-7 lg:pt-7 lg:pb-8 md:px-6 md:pt-6 md:pb-7">
+              <BulletList label="Who can apply?" items={apply} />
+              <BulletList label="What you get:" items={perks} />
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </Container>
   </section>
 );

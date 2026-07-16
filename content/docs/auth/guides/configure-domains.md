@@ -2,22 +2,22 @@
 title: Configure trusted domains
 subtitle: Add your application domains to enable secure authentication redirects
 summary: >-
-  Neon Auth's trusted domain allowlist restricts OAuth and email verification
+  Managed Better Auth's trusted domain allowlist restricts OAuth and email verification
   redirects to domains you explicitly approve, blocking unauthorized redirects.
   Add exact production origins (https://myapp.com) or wildcard patterns
   (https://*.preview.vercel.app) in Console > Auth > Configuration > Domains.
   Localhost ports are pre-approved and need no entry.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Add your application domains to Neon Auth's allowlist to enable OAuth and email verification redirects in production.
+Add your application domains to Managed Better Auth's allowlist to enable OAuth and email verification redirects in production.
 
 ## Why domains are required
 
-Neon Auth only redirects to domains in your allowlist. This prevents phishing attacks and unauthorized redirects by ensuring users are only sent to your legitimate application URLs.
+Managed Better Auth only redirects to domains in your allowlist. This prevents phishing attacks and unauthorized redirects by ensuring users are only sent to your legitimate application URLs.
 
 Without adding your production domain, OAuth sign-in and verification links will fail when users try to access your application.
 

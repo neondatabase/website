@@ -6,7 +6,7 @@ page_description: >-
   a table during the query execution.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alias/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Joins
@@ -162,7 +162,7 @@ Output:
 ...
 ```
 
-Note that you’ll learn about [self\-join](postgresql-inner-join) in the upcoming tutorial.
+Note that you’ll learn about [self\-join](postgresql-self-join) in the upcoming tutorial.
 
 ## Summary
 

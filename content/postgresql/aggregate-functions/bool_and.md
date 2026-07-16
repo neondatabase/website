@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_and/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ARRAY_AGG Function
@@ -47,7 +47,7 @@ Let’s explore some examples of using the `BOOL_AND()` function.
 
 ### 1\) Setting up sample tables
 
-First, [create tables](../postgresql-tutorial/postgresql-create-table) called `teams` and `members`:
+First, [create tables](../postgresql-tutorial/postgresql-create-table) called `teams` and `projects`:
 
 ```sql
 CREATE TABLE teams (
@@ -95,7 +95,7 @@ The `teams` table:
 (3 rows)
 ```
 
-The `members` table:
+The `projects` table:
 
 ```text
  project_id |      name      | active | team_id
@@ -130,9 +130,9 @@ Output:
 
 ```
 
-The `BOOL_AND()` function returns true indicating that there are inactive projects in the `projects` table.
+The `BOOL_AND()` function returns false indicating that there are inactive projects in the `projects` table.
 
-### 2\) Using BOOL_AND() function with GROUP BY clause
+### 3\) Using BOOL_AND() function with GROUP BY clause
 
 The following example uses the `BOOL_AND()` function with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause to check if there are active projects in each team:
 
@@ -158,7 +158,7 @@ Output:
 (3 rows)
 ```
 
-The output indicates that teams B and C have projects that are active (or NULL) whereas team C has inactive projects.
+The output indicates that teams B and C have projects that are active (or NULL) whereas team A has inactive projects.
 
 ### 3\) Using BOOL_AND() function in HAVING clause
 

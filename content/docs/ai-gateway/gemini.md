@@ -1,0 +1,170 @@
+---
+title: Gemini API
+subtitle: Use the Google Gemini API with Neon AI Gateway
+summary: >-
+  The Gemini endpoint exposes the Google Gemini generateContent and
+  streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
+  with a custom base URL.
+enableTableOfContents: true
+updatedOn: '2026-07-15T23:16:18.282Z'
+---
+
+<FeatureBetaProps feature_name="Neon AI Gateway" />
+
+The Gemini endpoint exposes the [Google Gemini API](https://ai.google.dev/api/generate-content) through Neon AI Gateway. Use it when you're already working with the `google-genai` SDK and want to keep your existing code. For most use cases, the [chat completions](/docs/ai-gateway/chat-completions) endpoint is simpler to set up and works with Gemini models via the OpenAI SDK.
+
+**Supported actions:** `:generateContent` and `:streamGenerateContent`
+
+**Endpoint pattern:** `https://<branch-host>/ai-gateway/gemini/v1beta/models/<model>:<action>`
+
+<Admonition type="note">
+Only `generateContent` and `streamGenerateContent` are supported. Requests to other actions (such as `countTokens`) return `404 unsupported gemini action`.
+</Admonition>
+
+This endpoint also has a shorter alias with no `/ai-gateway` prefix: `https://<branch-host>/v1/gemini/v1beta/models/<model>:<action>`. Both behave identically. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+
+## Setup
+
+Set these environment variables. See [Get started](/docs/ai-gateway/get-started) for how to obtain them.
+
+```bash
+NEON_AI_GATEWAY_TOKEN=nt_live_...
+NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
+```
+
+## Supported models
+
+This endpoint accepts Google models only:
+
+| Model ID                | Notes |
+| ----------------------- | ----- |
+| `gemini-3-5-flash`      |       |
+| `gemini-3-1-pro`        |       |
+| `gemini-3-1-flash-lite` |       |
+| `gemini-3-pro`          |       |
+| `gemini-3-flash`        |       |
+| `gemini-2-5-pro`        |       |
+| `gemini-2-5-flash`      |       |
+
+Sending a non-Google model ID returns `400 model "<model-id>" is not available on the gemini_generate_content endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you want to call Gemini models alongside other providers from the same code.
+
+## Basic request
+
+<Admonition type="note">
+The `google-genai` SDK's `apiKey` option sends an `x-goog-api-key` header, but Neon AI Gateway expects `Authorization: Bearer <token>`. Set your credential as an explicit header instead, and pass any non-empty string as `apiKey` since the SDK requires the field even though the gateway ignores it.
+</Admonition>
+
+<CodeTabs labels={["TypeScript (google-genai)", "Python (google-genai)", "cURL"]}>
+
+```typescript shouldWrap
+import { GoogleGenAI } from '@google/genai';
+
+const client = new GoogleGenAI({
+  apiKey: 'placeholder',
+  httpOptions: {
+    baseUrl: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini`,
+    headers: {
+      Authorization: `Bearer ${process.env.NEON_AI_GATEWAY_TOKEN}`,
+    },
+  },
+});
+
+const response = await client.models.generateContent({
+  model: 'gemini-2-5-flash',
+  contents: [{ role: 'user', parts: [{ text: 'What is Neon?' }] }],
+});
+
+console.log(response.text);
+```
+
+```python shouldWrap
+from google import genai
+from google.genai import types
+import os
+
+client = genai.Client(
+    api_key='placeholder',
+    http_options=types.HttpOptions(
+        base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/gemini",
+        headers={'Authorization': f"Bearer {os.environ['NEON_AI_GATEWAY_TOKEN']}"},
+    ),
+)
+
+response = client.models.generate_content(
+    model='gemini-2-5-flash',
+    contents='What is Neon?',
+)
+
+print(response.text)
+```
+
+```bash shouldWrap
+curl -X POST \
+  "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/gemini/v1beta/models/gemini-2-5-flash:generateContent" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "contents": [{"role": "user", "parts": [{"text": "What is Neon?"}]}]
+  }'
+```
+
+</CodeTabs>
+
+## Streaming
+
+<CodeTabs labels={["TypeScript (google-genai)", "Python (google-genai)"]}>
+
+```typescript shouldWrap
+const stream = await client.models.generateContentStream({
+  model: 'gemini-2-5-flash',
+  contents: [{ role: 'user', parts: [{ text: 'Explain database branching.' }] }],
+});
+
+for await (const chunk of stream) {
+  process.stdout.write(chunk.text ?? '');
+}
+```
+
+```python shouldWrap
+for chunk in client.models.generate_content_stream(
+    model='gemini-2-5-flash',
+    contents='Explain database branching.',
+):
+    print(chunk.text, end='', flush=True)
+```
+
+</CodeTabs>
+
+## URL structure
+
+The gateway uses the model ID and action directly in the URL path. The `google-genai` SDK constructs this automatically from the base URL and model parameter:
+
+```
+base_url: https://<branch-host>/ai-gateway/gemini
+model:    gemini-2-5-flash
+action:   generateContent or streamGenerateContent
+
+→ https://<branch-host>/ai-gateway/gemini/v1beta/models/gemini-2-5-flash:generateContent
+→ https://<branch-host>/ai-gateway/gemini/v1beta/models/gemini-2-5-flash:streamGenerateContent
+```
+
+When calling the REST API directly, the model ID and action must appear in the path as shown above.
+
+## Error handling
+
+| Status            | Message                                                                       | Cause                                                                 |
+| ----------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `400 Bad Request` | `unknown model "<model-id>"`                                                  | Model ID not in the catalog                                           |
+| `400 Bad Request` | `model "<model-id>" is not available on the gemini_generate_content endpoint` | Non-Google model sent to this endpoint                                |
+| `404 Not Found`   | `unsupported gemini action`                                                   | Action other than `generateContent` or `streamGenerateContent` in URL |
+| `404 Not Found`   | `invalid gemini model path`                                                   | Malformed `model:action` segment in URL                               |
+
+For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
+
+## Next steps
+
+- [Models](/docs/ai-gateway/models): full model catalog
+- [Chat completions](/docs/ai-gateway/chat-completions): use Gemini models via the unified OpenAI-compatible endpoint
+- [Authentication](/docs/ai-gateway/authentication): credential scopes and branch binding
+
+<NeedHelp/>

@@ -6,7 +6,7 @@ page_description: >-
   perform integer division and apply it effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-div/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CBRT() Function
@@ -35,7 +35,7 @@ DIV(dividend, divisor)
 In this syntax:
 
 - `dividend` is the number that you want to divide.
-- `divisor` is the number to which to divide the dividend.
+- `divisor` is the number by which to divide the dividend.
 
 The `DIV()` function returns the integer quotient of the division.
 

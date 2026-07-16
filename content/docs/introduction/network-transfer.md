@@ -9,7 +9,7 @@ summary: >-
   replication syncs, and to monitor usage via the Console or Consumption API.
   Reduction strategies include scoping SELECT columns, using Neon snapshots,
   adding replication filters, and routing traffic over Private Link.
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
@@ -67,7 +67,7 @@ Navigate to **Organization > Billing** to see **Public network transfer** and **
 On the Free plan? Skip to [Project and branch detail APIs](#project-and-branch-detail-apis) for an API option available on all plans.
 </Admonition>
 
-The [`/consumption_history/v2/projects`](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) endpoint provides programmatic access to network transfer metrics on paid plans.
+The [`/consumption_history/v2/projects`](/docs/reference/api/consumption/get-consumption-history-per-project-v2) endpoint provides programmatic access to network transfer metrics on paid plans.
 
 It supports three granularity levels:
 
@@ -145,7 +145,7 @@ For full details on parameters, pagination, and polling, see [Querying consumpti
 
 ### Project and branch detail APIs
 
-The `data_transfer_bytes` field on the [Get project details](https://api-docs.neon.tech/reference/getproject) and [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) endpoints returns a running total of network transfer for the current billing period. Unlike the [Consumption API](#consumption-api-for-paid-plans), which provides time-windowed breakdowns, this value resets at the start of each billing cycle and is not broken down by hour or day. These endpoints are available on all plans.
+The `data_transfer_bytes` field on the [Get project details](/docs/reference/api/projects/get-project) and [Get branch details](/docs/reference/api/branches/get-project-branch) endpoints returns a running total of network transfer for the current billing period. Unlike the [Consumption API](#consumption-api-for-paid-plans), which provides time-windowed breakdowns, this value resets at the start of each billing cycle and is not broken down by hour or day. These endpoints are available on all plans.
 
 **Get project details:**
 

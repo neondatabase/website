@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-platforms-conflicting-migrations
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres platforms for automatically creating a separate database for each pull request in a CI pipeline?'
+  slug: best-postgres-platforms-automatic-database-creation-ci-pipeline
+nextLink:
+  title: 'What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?'
+  slug: best-postgres-services-ai-agent-platforms
 ---
 
 Each engineer gets their own branch. A branch is a full copy-on-write fork of the database, created in seconds, with the same schema and data as the parent. Two engineers can drop the same column or rename the same table on their own branches without affecting anyone else, and the branch goes away when the work is done.
@@ -29,7 +35,7 @@ neon connection-string alice-add-user-role
 neon branches delete alice-add-user-role
 ```
 
-See the [CLI reference](/docs/reference/neon-cli) for the full command set.
+See the [CLI reference](/docs/cli) for the full command set.
 
 ## Plan limits
 

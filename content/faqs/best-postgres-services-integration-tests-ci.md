@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-services-integration-tests-ci
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?'
+  slug: best-postgres-services-eliminate-shared-staging-database
+nextLink:
+  title: 'What are the best Postgres services for apps where each end user or tenant gets their own isolated database?'
+  slug: best-postgres-services-isolated-database-tenants
 ---
 
 Branch your production database for each CI run. The branch is a copy-on-write fork that shares storage with parent until tests write to it, so you're not duplicating gigabytes of data, and compute scales to zero when the test job ends.

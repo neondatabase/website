@@ -52,6 +52,29 @@ function validateInvocation(invocation, { schema }) {
     return errors;
   }
 
+  // A command-shaped token left over under a node that has subcommands but
+  // takes no positionals can only be a typo'd subcommand (`projects
+  // listsss`). Nodes WITH positionals (connection-string [branch]) keep
+  // the lenient treatment: their leftovers are legitimate values.
+  const hasSubcommands = node.commands && Object.keys(node.commands).length > 0;
+  const takesPositionals = (node.positionals || []).length > 0;
+  const firstLeftover = remaining[0];
+  if (
+    hasSubcommands &&
+    !takesPositionals &&
+    firstLeftover &&
+    /^[a-z][a-z-]*$/.test(firstLeftover)
+  ) {
+    errors.push({
+      kind: 'unknown-subcommand',
+      file,
+      line,
+      raw,
+      message: `Unknown subcommand \`${firstLeftover}\` for \`neonctl ${cmdPath.join(' ')}\``,
+    });
+    return errors;
+  }
+
   const validForms = resolveValidOptions(schema, cmdPath);
   errors.push(...checkOptions(remaining, { validForms, cmdPath, file, line, raw }));
   return errors;
@@ -110,10 +133,11 @@ function validate({ root = DEFAULT_ROOT, schema } = {}) {
 function formatReport({ invocations, errors, schema }) {
   const grouped = {
     'missing-command': [],
+    'unknown-subcommand': [],
     'unknown-option': [],
     'bad-choice': [],
   };
-  for (const err of errors) grouped[err.kind].push(err);
+  for (const err of errors) (grouped[err.kind] || (grouped[err.kind] = [])).push(err);
 
   const lines = [];
   lines.push('# neonctl docs validation report');

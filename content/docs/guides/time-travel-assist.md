@@ -11,7 +11,7 @@ summary: >-
   & Restore page, or the Neon CLI using RFC 3339 timestamps or Log Sequence
   Numbers (LSN).
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time still covered by your project's **history window** (the retention configured for **instant restore**) and then run queries against that connection. Time Travel is part of Neon's **instant restore** feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
@@ -178,7 +178,7 @@ Alternatively, you can set a durable project context that remains active until y
 neon set-context --project-id <project id>
 ```
 
-Read more about getting connection strings from the CLI in [Neon CLI commands — connection-string](/docs/reference/cli-connection-string), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
+Read more about getting connection strings from the CLI in [Neon CLI commands — connection-string](/docs/cli/connection-string), and more about setting contexts in [CLI - set-context](/docs/cli/set-context).
 
 </TabItem>
 

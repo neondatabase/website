@@ -7,6 +7,7 @@ import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
+import selectModal from 'components/pages/doc/modal/select-modal';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
@@ -36,6 +37,7 @@ const Post = ({
     eyebrow = null,
     enableTableOfContents = false,
     tag = null,
+    tagTheme = 'gray',
     layout = null,
     contentLayout = null,
   },
@@ -56,11 +58,8 @@ const Post = ({
   isFaq = false,
   className = 'max-w-208 lg:max-w-none',
 }) => {
-  const modal = MODALS.find(
-    (modal) =>
-      breadcrumbs?.some((breadcrumb) => modal.pagesToShow.includes(breadcrumb.title)) ||
-      (isDocsIndex && modal.pagesToShow.includes('Neon Docs'))
-  );
+  const pagePath = `${navigationLinksBasePath}${currentSlug ?? ''}`;
+  const modal = selectModal(MODALS, pagePath);
 
   // Check if wide layout is enabled (hides right sidebar/TOC)
   const isWideLayout = layout === 'wide';
@@ -72,7 +71,8 @@ const Post = ({
     <>
       <div
         className={cn(
-          'mx-auto min-w-0 pb-32 lg:pb-24 md:pb-20',
+          'min-w-0 pb-32 lg:pb-24 md:pb-20',
+          isChangelog && 'mx-auto',
           className,
           isWideLayout && 'max-w-none'
         )}
@@ -103,7 +103,9 @@ const Post = ({
                   >
                     {title}
                   </h1>
-                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                  {tag && (
+                    <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
+                  )}
                   {subtitle && (
                     <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
                       {subtitle}
@@ -135,7 +137,9 @@ const Post = ({
                   >
                     {title}
                   </h1>
-                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                  {tag && (
+                    <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
+                  )}
                   {subtitle && (
                     <p
                       className={cn(
@@ -171,10 +175,10 @@ const Post = ({
         )}
       </div>
 
-      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
-      {!isWideLayout && !isChangelog && (
+      {/* Regular pages: Show standard right sidebar (hide for docs index, wide layout, and changelog) */}
+      {!isDocsIndex && !isWideLayout && !isChangelog && (
         <Aside
-          className="-left-20 ml-0! w-[312px] shrink-0 3xl:left-auto xl:hidden"
+          className="ml-0! w-78 shrink-0 xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}
@@ -195,6 +199,7 @@ Post.propTypes = {
     eyebrow: PropTypes.string,
     enableTableOfContents: PropTypes.bool,
     tag: PropTypes.string,
+    tagTheme: PropTypes.string,
     updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
     contentLayout: PropTypes.oneOf(['split', null]),

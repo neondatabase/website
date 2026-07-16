@@ -1,0 +1,10 @@
+{
+  "name": "docs-fact-conflicts-lib",
+  "private": true,
+  "type": "module",
+  "description": "Isolated deps for the semantic search index. NOT part of the website build.",
+  "dependencies": {
+    "@xenova/transformers": "^2.17.2",
+    "sqlite-vec": "^0.1.9"
+  }
+}

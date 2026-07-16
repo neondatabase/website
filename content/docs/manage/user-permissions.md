@@ -6,10 +6,10 @@ summary: >-
   each user can take across organization settings, project operations,
   integrations, and snapshots. Only Admins can delete projects, transfer
   projects out of an org, manage billing, and install integrations like GitHub
-  or Neon Auth. Collaborators have no organization-level access and are limited
+  or Managed Better Auth. Collaborators have no organization-level access and are limited
   to the specific projects they have been invited to.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.
@@ -28,14 +28,13 @@ For an overview of organizations, see the [Organizations](/docs/manage/organizat
 
 The following table shows what each role can do at the organization level:
 
-| Action                                   | Admin | Member | Collaborator |
-| ---------------------------------------- | :---: | :----: | :----------: |
-| Invite organization members              |  ✅   |   ❌   |      ❌      |
-| Set organization permissions             |  ✅   |   ❌   |      ❌      |
-| Manage organization billing              |  ✅   |   ❌   |      ❌      |
-| Rename organization                      |  ✅   |   ❌   |      ❌      |
-| Delete organization                      |  ✅   |   ❌   |      ❌      |
-| Enable organization Early Access Program |  ✅   |   ❌   |      ❌      |
+| Action                       | Admin | Member | Collaborator |
+| ---------------------------- | :---: | :----: | :----------: |
+| Invite organization members  |  ✅   |   ❌   |      ❌      |
+| Set organization permissions |  ✅   |   ❌   |      ❌      |
+| Manage organization billing  |  ✅   |   ❌   |      ❌      |
+| Rename organization          |  ✅   |   ❌   |      ❌      |
+| Delete organization          |  ✅   |   ❌   |      ❌      |
 
 ## Project management
 
@@ -60,7 +59,7 @@ The following table shows what each role can do regarding integrations:
 | Action                                               | Admin | Member | Collaborator |
 | ---------------------------------------------------- | :---: | :----: | :----------: |
 | Install GitHub integration                           |  ✅   |   ❌   |      ❌      |
-| Install Neon Auth                                    |  ✅   |   ❌   |      ❌      |
+| Install Managed Better Auth                          |  ✅   |   ❌   |      ❌      |
 | Install the Vercel-managed Neon integration\*        |  ✅   |   ❌   |      ❌      |
 | Connect project to GitHub integration                |  ✅   |   ✅   |      ❌      |
 | Connect project to Neon-managed Vercel integration\* |  ✅   |   ✅   |      ❌      |

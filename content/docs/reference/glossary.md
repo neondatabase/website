@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
 ## access token
@@ -132,7 +132,7 @@ Neon creates a primary read-write compute for the project's default branch. Neon
 
 The network access point for connecting to a [Neon compute](#compute).
 
-In Neon, a compute endpoint is represented by a hostname, such as `ep-aged-math-668285.us-east-2.aws.neon.tech`, which directs traffic to the appropriate Neon compute. Additional attributes further define a compute endpoint, including `project_id`, `region_id`, `branch_id`, and `type`. These attributes specify the associated Neon project, branch, cloud service region, and whether the endpoint is read-write or read-only. For additional endpoint attributes, refer to the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint).
+In Neon, a compute endpoint is represented by a hostname, such as `ep-aged-math-668285.us-east-2.aws.neon.tech`, which directs traffic to the appropriate Neon compute. Additional attributes further define a compute endpoint, including `project_id`, `region_id`, `branch_id`, and `type`. These attributes specify the associated Neon project, branch, cloud service region, and whether the endpoint is read-write or read-only. For additional endpoint attributes, refer to the [Neon API](/docs/reference/api/endpoints/create-project-endpoint).
 
 ## compute size
 
@@ -193,7 +193,7 @@ Example context file contents:
 }
 ```
 
-For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+For more information, see [Neon CLI commands — set-context](/docs/cli/set-context).
 
 ## copy-on-write
 
@@ -337,7 +337,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-The backend for apps and agents. Includes Neon Postgres, Neon Auth, and Data API today, with Storage, Compute, and AI Gateway coming soon. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Neon Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview), with the last three in beta. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 
@@ -377,7 +377,7 @@ A feature in Neon that enables teams to collaborate on projects under a shared a
 
 Admins oversee all aspects of the organization, including managing members, permissions, billing, and projects. Members have access to all organizational projects but cannot manage billing or members. Collaborators have limited access to specific projects shared with them and do not have access to the organization dashboard.
 
-You get one Org with a Free plan account. Additional organizations are available on paid plans and can be created from scratch or by converting a personal account into an organization. For more, see [Organizations](/docs/manage/organizations).
+Neon organizations can be free or paid. You can create new organizations at any time. For more, see [Organizations](/docs/manage/organizations).
 
 ## Page
 
@@ -451,7 +451,7 @@ When you run a Neon CLI command without specifying an organization (via `--org-i
 
 Since the CLI walks up the directory tree to find context files, a `.neon` file in your project root serves as the default organization for that project and all its subdirectories. You can also set it explicitly using `neon set-context --org-id <org-id>`.
 
-For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+For more information, see [Neon CLI commands — set-context](/docs/cli/set-context).
 
 ## Project
 
@@ -590,7 +590,7 @@ A Neon Control Plane operation that starts a compute when there is an event or a
 
 ## Storage
 
-Where data is recorded and stored. Neon storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
+Where data is recorded and stored. Neon's database storage consists of Pageservers, which store hot data, and a cloud object store, such as Amazon S3, that stores cold data for cost optimization and durability.
 
 Also, a usage metric that tracks the total volume of data and [history](#history) stored in Neon. For more information, see [Storage](#storage).
 

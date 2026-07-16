@@ -10,7 +10,7 @@ summary: >-
   cannot be reset, and branches with their own children must have those children
   deleted first.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -90,12 +90,12 @@ Alternatively, you can set the `project-id` as a background context for your CLI
 neon set-context --project-id <project id>
 ```
 
-Read more about performing branching actions from the CLI in [CLI - branches](/docs/reference/cli-branches), and more about setting contexts in [CLI - set-context](/docs/reference/cli-set-context).
+Read more about performing branching actions from the CLI in [CLI - branches](/docs/cli/branches), and more about setting contexts in [CLI - set-context](/docs/cli/set-context).
 
 </TabItem>
 
 <TabItem>
-To reset a branch to its parent using the API, use the [Restore branch](https://api-docs.neon.tech/reference/restoreprojectbranch) endpoint, specifying the parent branch ID as the `source_branch_id`:
+To reset a branch to its parent using the API, use the [Restore branch](/docs/reference/api/branches/restore-project-branch) endpoint, specifying the parent branch ID as the `source_branch_id`:
 
 ```bash
 curl --request POST \

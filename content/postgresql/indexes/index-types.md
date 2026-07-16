@@ -6,7 +6,7 @@ page_description: >-
   to use them properly.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL List Indexes
@@ -43,7 +43,7 @@ IS NULL
 IS NOT NULL
 ```
 
-In addition, the query planner can use a B\-tree index for queries that involve a pattern\-matching operator [`LIKE`](../postgresql-tutorial/postgresql-like) and `~` if the pattern is a constant and is anchor at the beginning of the pattern, for example:
+In addition, the query planner can use a B\-tree index for queries that involve a pattern\-matching operator [`LIKE`](../postgresql-tutorial/postgresql-like) and `~` if the pattern is a constant and is anchored at the beginning of the pattern, for example:
 
 ```sql
 column_name LIKE 'foo%'

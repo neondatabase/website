@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL using the PostgreSQL JSON and JSONB data types.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-json/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: UUID
@@ -144,8 +144,8 @@ Output:
 ```text
  id |        name         |                    properties
 ----+---------------------+---------------------------------------------------
-  2 | ThreadVerse T-Shirt | {"size": ["S", "M", "L", "XL"], "color": "white"}
-  3 | Design Dynamo       | {"size": ["S", "M", "L", "XL"], "color": "blue"}
+  2 | ThreadVerse T-Shirt | {"size": ["S", "M", "L", "XL"], "color": "black"}
+  3 | Design Dynamo T-Shirt | {"size": ["S", "M", "L", "XL"], "color": "blue"}
 (2 rows)
 ```
 
@@ -189,7 +189,7 @@ Output:
 (3 rows)
 ```
 
-The `->` operator extracts a JSON object field by a key. In this example, we use the \-\> operator `->` to extract the color of the properties object:
+The `->` operator extracts a JSON object field by a key. In this example, we use the operator `->` to extract the color of the properties object:
 
 ```sql
 properties -> 'color'
@@ -296,7 +296,7 @@ Output:
 (2 rows)
 ```
 
-The `->> index` extract the index element in an array. In this example, we use the `->> 0` to extract the first elements in the `phones` array as text.
+The `->> index` extracts the index element in an array. In this example, we use the `->> 0` to extract the first elements in the `phones` array as text.
 
 [Check JSON functions to process JSON data](../postgresql-json-functions).
 

@@ -6,7 +6,7 @@ page_description: >-
   calculate the least common multiple (LCM) of two or more integers.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-lcm/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL GCD() Function
@@ -153,7 +153,7 @@ CREATE AGGREGATE lcm_agg(bigint) (
 );
 ```
 
-You can use the `lcm_gg()` function as follows:
+You can use the `lcm_agg()` function as follows:
 
 ```sql
 SELECT lcm_agg(value)

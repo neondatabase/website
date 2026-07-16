@@ -1,22 +1,22 @@
 ---
 name: neon-postgres
 description: >-
-  Guides and best practices for working with Neon, the backend for apps and agents.
+  Guides and best practices for working with Neon Serverless Postgres.
   Covers setup, connection methods, branching, autoscaling, scale-to-zero,
   read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server,
   REST API, TypeScript SDK, and Python SDK.
   Use when users ask about "Neon setup", "connect to Neon", "Neon project",
-  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neonctl", "Neon MCP",
+  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
   "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
   "scale to zero", "Neon autoscaling", "Neon read replica", or
   "Neon connection pooling".
 ---
 
-# Neon: the backend for apps and agents
+# Neon Serverless Postgres
 
 Guide the user through any Neon-related task: setup, connections, branching, and advanced features. Deliver a working Neon connection, a completed feature configuration, or a specific answer from the official Neon docs.
 
-Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.
+Neon is a serverless Postgres platform that separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.
 
 ## Neon Documentation
 
@@ -65,7 +65,7 @@ Before starting setup, inspect the user's codebase and environment:
 Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
 
 ```bash
-npx -y neonctl@latest init --agent <agent-name>
+npx -y neon@latest init --agent <agent-name>
 ```
 
 Supported `--agent` values: `cursor`, `copilot`, `claude`, `claude-desktop`, `codex`, `opencode`, `cline`, `gemini-cli`, `goose`, `zed`.
@@ -78,7 +78,7 @@ If `init` is not suitable, the individual steps can be run non-interactively:
 - **MCP server:** `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>`
 - **Agent skill:** `npx skills add neondatabase/agent-skills --skill neon-postgres --agent <agent-name> -y`
 
-For full CLI installation options, see https://neon.com/docs/reference/cli-install.md
+For full CLI installation options, see https://neon.com/docs/cli/install.md
 
 ### Setup Flow
 
@@ -121,6 +121,48 @@ Use this when you need to pick the correct transport and driver based on runtime
 
 Link: https://neon.com/docs/connect/choose-connection.md
 
+### Recommended: Drizzle + the right driver for your runtime
+
+Always pair Neon with an ORM such as **Drizzle** for easy schema management and migrations. Pick the driver based on how the runtime treats your code:
+
+- **Long-running or shared-runtime environments → node-postgres (`pg`).** Neon Functions, and any host where the function runtime is shared across requests / runs on fluid compute (e.g. **Vercel** with Fluid compute), keep a module-scope process alive across many requests. Open a `pg` pool **once at module scope** and reuse it across requests.
+- **Fully isolated serverless (Lambda-style) → Neon's serverless driver (`@neondatabase/serverless`).** Hosts like **Netlify** spin up a fresh, isolated instance per request, so a persistent TCP pool can't be reused; the serverless driver queries over HTTP and is built for this.
+
+**Neon Functions / Vercel / fluid compute — Drizzle + node-postgres:**
+
+```typescript
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import * as schema from "./schema";
+
+// Created once at module scope; reused by every request the instance handles.
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+const db = drizzle({ client: pool, schema });
+```
+
+On **Vercel** (Fluid compute) also attach the pool with `attachDatabasePool` from `@vercel/functions`, so the function runtime drains idle connections before an instance suspends:
+
+```typescript
+import { drizzle } from "drizzle-orm/node-postgres";
+import { Pool } from "pg";
+import { attachDatabasePool } from "@vercel/functions";
+import * as schema from "./schema";
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+attachDatabasePool(pool); // let the Vercel runtime manage the pooled connections
+const db = drizzle({ client: pool, schema });
+```
+
+**Netlify and other fully-isolated serverless — Drizzle + Neon serverless driver:**
+
+```typescript
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+
+const sql = neon(process.env.DATABASE_URL!);
+const db = drizzle({ client: sql });
+```
+
 ### Serverless Driver
 
 Use this for `@neondatabase/serverless` patterns, including HTTP queries, WebSocket transactions, and runtime-specific optimizations.
@@ -135,20 +177,20 @@ Link: https://neon.com/docs/reference/javascript-sdk.md
 
 ## Developer Tools
 
-Use this for local development enablement with `npx -y neonctl@latest init --agent <agent-name>`, VSCode extension setup, and Neon MCP server configuration.
+Use this for local development enablement with `npx -y neon@latest init --agent <agent-name>`, VSCode extension setup, and Neon MCP server configuration.
 
 | Tool             | URL                                             |
 | ---------------- | ----------------------------------------------- |
-| CLI Init Command | https://neon.com/docs/reference/cli-init.md     |
+| CLI Init Command | https://neon.com/docs/cli/init.md               |
 | VSCode Extension | https://neon.com/docs/local/vscode-extension.md |
 | MCP Server       | https://neon.com/docs/ai/neon-mcp-server.md     |
-| Neon CLI         | https://neon.com/docs/reference/neon-cli.md     |
+| Neon CLI         | https://neon.com/docs/cli.md                    |
 
 ### Neon CLI
 
-Use this for terminal-first workflows, scripts, and CI/CD automation with `neonctl`.
+Use this for terminal-first workflows, scripts, and CI/CD automation with `neon`.
 
-Link: https://neon.com/docs/reference/neon-cli.md
+Link: https://neon.com/docs/cli.md
 
 ## Neon Admin API
 
@@ -162,7 +204,7 @@ Link: https://neon.com/docs/reference/api-reference.md
 
 ### Neon TypeScript SDK
 
-Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neondatabase/api-client`.
+Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`). For the full API surface — client config, the `{ data, error }` result model, typed errors, readiness/workflow helpers (`createAndConnect`, `createWithCompute`), pagination, every resource namespace, and the raw layer — see [references/neon-sdk.md](references/neon-sdk.md).
 
 Link: https://neon.com/docs/reference/typescript-sdk.md
 
@@ -180,6 +222,64 @@ Link: https://neon.com/docs/auth/overview.md
 
 Neon Auth is also embedded in the Neon JS SDK. Depending on your use case, you may want to use the Neon JS SDK instead of Neon Auth alone. See https://neon.com/docs/connect/choose-connection.md for more details.
 
+## Neon Infrastructure as Code (`neon.ts`)
+
+`neon.ts` is Neon's branch config and infrastructure-as-code file: declare which services your branches have, get type-safe env vars, and program per-branch compute — all in TypeScript (see the `neon` skill for the full reference). Postgres always exists on every branch, so you never declare the database itself; what you codify here is the Postgres-adjacent surface — Neon Auth, the Data API, and per-branch compute settings (autoscaling and scale-to-zero).
+
+Add it with `@neon/config`:
+
+```bash
+npm i @neon/config
+```
+
+```typescript
+// neon.ts
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true, // Neon Auth (adds NEON_AUTH_* env vars)
+  dataApi: true, // Data API (adds NEON_DATA_API_URL); requires auth: true (or an external IdP)
+  // Postgres exists on every branch; tune its compute per branch:
+  branch: (branch) => {
+    if (branch.exists) return {}; // leave existing branches untouched
+    if (branch.isDefault) return { protected: true }; // prod keeps default compute
+    return {
+      ttl: "7d", // non-prod branches auto-expire (max 30d)
+      postgres: {
+        computeSettings: {
+          autoscalingLimitMinCu: 0.25, // scale to zero
+          autoscalingLimitMaxCu: 1, // keep dev/preview cheap
+          suspendTimeout: "5m",
+        },
+      },
+    };
+  },
+});
+```
+
+Reconcile the declaration from the CLI — the Neon equivalent of `terraform plan` / `apply`:
+
+```bash
+neon config status   # print the branch's live config
+neon config plan     # dry-run diff of what apply would change
+neon config apply    # provision the declared services / settings
+neon deploy          # alias for `neon config apply`
+```
+
+Because `neon checkout` applies the policy as it **creates** a branch, a fresh branch comes up with these compute settings (and Auth / Data API) already in place. Checking out an _existing_ branch never reconciles it — run `neon deploy` to apply changes.
+
+Since `neon.ts` is TypeScript, invalid combinations fail to compile with an actionable message: the Data API verifies requests with Neon Auth by default, so `dataApi: true` without `auth: true` is a type error (the fix — `auth: true`, or `authProvider: 'external'` with a `jwksUrl` — is in the message). See the `neon` skill's type-safe config note.
+
+Read the resulting env back, typed and validated against the policy, with `parseEnv` from `@neon/env`:
+
+```typescript
+import { parseEnv } from "@neon/env";
+import config from "./neon";
+
+const env = parseEnv(config);
+env.postgres.databaseUrl; // typed; enabling auth / dataApi above surfaces env.auth / env.dataApi
+```
+
 ## Branching
 
 Use this when the user is planning isolated environments, schema migration testing, preview deployments, or branch lifecycle automation.
@@ -188,9 +288,21 @@ Key points:
 
 - Branches are instant, copy-on-write clones (no full data copy).
 - Each branch has its own compute endpoint.
-- Use the neonctl CLI or MCP server to create, inspect, and compare branches.
+- Use the neon CLI or MCP server to create, inspect, and compare branches.
 
 Link: https://neon.com/docs/introduction/branching.md
+
+For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection), use the `neon-postgres-branches` skill if available
+
+Or fetch the full branching skill from the following URL:
+
+https://neon.com/docs/ai/skills/neon-postgres-branches/SKILL.md
+
+If this skill is not installed you can use the following command to install it:
+
+```bash
+npx skills add neondatabase/agent-skills --skill neon-postgres-branches
+```
 
 ## Autoscaling
 

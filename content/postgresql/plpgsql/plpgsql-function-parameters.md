@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-parameters/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Create Function Statement
@@ -60,12 +60,12 @@ begin
 
   return film_title;
 
-end;$$
+end;$$;
 ```
 
 Because we don’t specify the mode for `p_film_id` parameter, it takes the `in` mode by default.
 
-The following shows how to call the find_film_by_id() function to find the title of the film with the id 100:
+The following shows how to call the find_film_by_id() function to find the title of the film with the id 1:
 
 ```plsql
 select * from find_film_by_id(1);
@@ -111,7 +111,7 @@ begin
   into min_len, max_len, avg_len
   from film;
 
-end;$$
+end;$$;
 ```
 
 In the `get_film_stat` function, we select the min, max, and average film length from the `film` table using the `min`, `max`, and `avg` aggregate functions and assign the results to the corresponding `out` parameters.
@@ -148,7 +148,7 @@ Output:
 
 ## The INOUT mode
 
-The `inout` mode is the combination `in` and `out` modes.
+The `inout` mode is the combination of `in` and `out` modes.
 
 It means that the caller can pass an argument to a function. The function changes the argument and returns the updated value.
 

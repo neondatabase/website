@@ -15,7 +15,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <InfoBlock>
@@ -138,8 +138,8 @@ Once connected successfully, you'll see:
 
 The integration automatically creates isolated database environments for each preview deployment:
 
-<Admonition type="tip" title="Neon Auth support for preview deployments">
-If you've enabled [Neon Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
+<Admonition type="tip" title="Managed Better Auth support for preview deployments">
+If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
 </Admonition>
 
 <Steps>
@@ -186,7 +186,7 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 
 - `DATABASE_URL`: Pooled connection (recommended for most applications)
 - `DATABASE_URL_UNPOOLED`: Direct connection (for tools requiring direct database access)
-- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Neon Auth endpoints (automatically set when Neon Auth is enabled on production branch)
+- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed Better Auth endpoints (automatically set when Managed Better Auth is enabled on production branch)
 
 **To customize which variables are used:**
 
@@ -195,6 +195,12 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 3. Click **Save changes**
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)
+
+### Password rotation behavior
+
+When you rotate the selected role password in Neon, the integration automatically syncs updated credentials to Vercel environment variables for connected projects.
+
+If deployments still use older credentials, open **Neon Console → Integrations → Manage → Settings** and click **Save changes** to force a resync.
 
 ### Branch cleanup
 

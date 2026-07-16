@@ -8,7 +8,7 @@ summary: >-
   UI. Admins control deletions, billing changes, 2FA enforcement, and project
   deletion; all members can create projects and view billing.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T14:03:39.757Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
@@ -17,11 +17,11 @@ Learn how to manage your organization's projects, invite Members, revise permiss
 
 ## Create an organization
 
-To create a new org, use the **Create organization** button in the org switcher in the top navbar. Select a plan and enter billing details.
+To create a new org, use the **Create organization** button in the org switcher in the top navbar.
 
 ![create organization button](/docs/manage/orgs_create_button.png)
 
-Other than the free org you signed up with, organizations are always on paid plans. When creating a new organization, you'll need to select a paid plan and enter billing details.
+Select a plan for your new organization. Organizations can be free or paid; if you choose a paid plan, you'll enter billing details.
 
 ![create organization with billing](/docs/manage/orgs_create_with_billing.png)
 
@@ -59,12 +59,12 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Require 2FA for organization members
 
-Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**.
+Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**. A passkey satisfies this requirement too, so members can enroll in either 2FA or a passkey to comply.
 
-- You can only enable this if your own account already has 2FA enabled.
-- When required 2FA is on, members who are not enrolled are prompted to set up 2FA when they access the organization.
+- You can only enable this if your own account already has 2FA or a passkey set up.
+- When required 2FA is on, members who don't have 2FA or a passkey enrolled are prompted to set one up when they access the organization.
 
-See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps.
+See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps, or [Passkeys](/docs/manage/accounts#passkeys) for passkey setup steps.
 
 ## Invite Collaborators
 
@@ -104,7 +104,7 @@ All Members can create new projects from the Organization's **Projects** page; h
 
 ## Manage billing
 
-When you create a new organization, you'll choose a plan (Launch, Scale, or Scale) for that organization. Each organization manages its own billing and plan.
+When you create a new organization, you'll choose a plan for that organization. Each organization manages its own billing and plan.
 
 As the Admin for the organization account:
 
@@ -116,7 +116,7 @@ For detailed information on pricing and plans, refer to [Neon plans](/docs/intro
 
 ### Downgrade to Free plan
 
-You can only have one Free organization per account. If you already have a Free org, you can't downgrade another org to Free; you'll see an error if you try.
+If downgrading to the Free plan isn't available for your organization, you'll see an error when you try.
 
 To downgrade, your org must:
 

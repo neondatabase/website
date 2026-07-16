@@ -2,7 +2,7 @@
 title: app.build
 subtitle: Open-source AI agent for full-stack application generation
 enableTableOfContents: true
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 [app.build](https://www.app.build/) is our exploration of what AI agents can do with a complete backend stack. We built it after working with partners like Replit and other agent-driven platforms, learning what it takes to automate not just code generation, but the entire development workflow. This open-source project creates and deploys full-stack applications from scratch. It handles everything: database provisioning, authentication, testing, CI/CD, and deployment. The agent breaks down app creation into discrete tasks, validates each piece, and assembles them into working applications. Think of it as a blueprint you can use, fork, or extend to build your own agent infrastructure.
@@ -27,7 +27,7 @@ Simply go to https://www.app.build/ and authenticate, start chatting to build!
 - Backend: Fastify server with Drizzle ORM
 - Frontend: React application built with Vite
 - Database: Postgres instance (Neon by default)
-- Authentication: An auth integration (Neon Auth by default)
+- Authentication: An auth integration (Managed Better Auth by default)
 - Tests: Playwright end-to-end tests
 - CI/CD: GitHub Actions configuration
 
@@ -135,8 +135,8 @@ As a reference implementation, we've made specific choices to keep the codebase 
 ## Contributing
 
 - Repositories:
-  - [github.com/appdotbuild/agent](https://github.com/appdotbuild/agent) (agent logic and generation)
-  - [github.com/appdotbuild/platform](https://github.com/appdotbuild/platform) (backend infrastructure)
+  - [github.com/neondatabase/appdotbuild-agent](https://github.com/neondatabase/appdotbuild-agent) (agent logic and generation)
+  - [github.com/neondatabase/appdotbuild-agent](https://github.com/neondatabase/appdotbuild-agent) (backend infrastructure)
 - Issues: Bug reports, feature requests, and discussions
 - PRs: Code contributions, documentation, templates
 

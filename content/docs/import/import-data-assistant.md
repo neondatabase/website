@@ -10,7 +10,8 @@ summary: >-
   over 10 GB, use pg_dump and pg_restore instead.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-06-05T17:20:32.620Z'
+tagTheme: blue
+updatedOn: '2026-07-13T14:20:27.525Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---

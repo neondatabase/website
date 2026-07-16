@@ -1,4 +1,15 @@
+const { execSync } = require('child_process');
 const fs = require('fs');
+
+// Skip updatedOn stamping during a merge commit. Files staged by the incoming
+// merge were not authored in this branch; any genuinely edited files will be
+// stamped on the next regular commit.
+try {
+  execSync('git rev-parse --verify MERGE_HEAD', { stdio: 'pipe' });
+  process.exit(0);
+} catch {
+  // Not a merge; proceed.
+}
 
 const filePaths = process.argv.slice(2).filter(Boolean);
 const updatedOn = new Date().toISOString();

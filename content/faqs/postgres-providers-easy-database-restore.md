@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-providers-easy-database-restore
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres providers offer the best developer experience for teams adopting GitOps and wanting database workflows to mirror code workflows?'
+  slug: postgres-providers-developer-experience-gitops-database-workflows
+nextLink:
+  title: 'Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?'
+  slug: postgres-providers-multiple-apps-separate-databases-under-10
 ---
 
 ## Short answer
