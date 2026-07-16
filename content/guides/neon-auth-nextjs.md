@@ -1,17 +1,17 @@
 ---
-title: Getting started with Managed BetterAuth and Next.js
-subtitle: Learn how to setup Managed BetterAuth in a Next.js application
+title: Getting started with Managed Better Auth and Next.js
+subtitle: Learn how to setup Managed Better Auth in a Next.js application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-26T00:00:00.000Z'
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-This guide walks you through building a demo todo application with **Next.js**, [Managed BetterAuth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Managed BetterAuth into your Next.js projects and manage database interactions with Drizzle ORM.
+This guide walks you through building a demo todo application with **Next.js**, [Managed Better Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Managed Better Auth into your Next.js projects and manage database interactions with Drizzle ORM.
 
 The guide primarily focuses on using **Server actions** to securely handle authentication and database operations. [Optional steps](#optional-accessing-user-data-elsewhere) are included at the end of the guide to demonstrate additional ways of retrieving user information in a Next.js app (e.g., server components, client components, API routes).
 
-By the end, you’ll have a fully functional todo application where users can sign up, log in, and manage their todos. Authentication and session management are powered by Managed BetterAuth, while Drizzle ORM handles database interactions.
+By the end, you’ll have a fully functional todo application where users can sign up, log in, and manage their todos. Authentication and session management are powered by Managed Better Auth, while Drizzle ORM handles database interactions.
 
 ## Prerequisites
 
@@ -22,18 +22,18 @@ Before you begin, ensure you have the following:
 
 <Steps>
 
-## Create a Neon project with Managed BetterAuth
+## Create a Neon project with Managed Better Auth
 
-You'll need to create a Neon project and enable Managed BetterAuth.
+You'll need to create a Neon project and enable Managed Better Auth.
 
 1.  **Create a Neon project:** Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `next-neon-todo`.
-2.  **Enable Managed BetterAuth:**
-    - In your project's dashboard, go to the **Managed BetterAuth** tab.
-    - Click on the **Enable Managed BetterAuth** button to set up authentication for your project.
+2.  **Enable Managed Better Auth:**
+    - In your project's dashboard, go to the **Managed Better Auth** tab.
+    - Click on the **Enable Managed Better Auth** button to set up authentication for your project.
 
 3.  **Copy your credentials:**
     - **Auth URL:** Found on the **Auth** page under Configuration (e.g., `https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth`).
-      ![Managed BetterAuth URL](/docs/auth/neon-auth-base-url.png)
+      ![Managed Better Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
       ![Connection modal](/docs/connect/connection_details.png)
 
@@ -73,7 +73,7 @@ NEON_AUTH_COOKIE_SECRET="your-secret-at-least-32-characters-long"
 
 Drizzle ORM helps manage your database schema and queries. Alternatively, you can use any Postgres client of your choice.
 
-The core logic is to filter data based on the authenticated user provided by Managed BetterAuth while performing database operations.
+The core logic is to filter data based on the authenticated user provided by Managed Better Auth while performing database operations.
 
 ### Create Drizzle config
 
@@ -94,15 +94,15 @@ export default {
 } satisfies Config;
 ```
 
-This config tells Drizzle Kit where to find your database schema and where to output migration files. The `schemaFilter` is configured to look at both the `public` and `neon_auth` schemas. The `neon_auth` schema is where Managed BetterAuth stores its user data.
+This config tells Drizzle Kit where to find your database schema and where to output migration files. The `schemaFilter` is configured to look at both the `public` and `neon_auth` schemas. The `neon_auth` schema is where Managed Better Auth stores its user data.
 
-### Pull Managed BetterAuth schema
+### Pull Managed Better Auth schema
 
-A key feature of Managed BetterAuth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
+A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
 
-To integrate Managed BetterAuth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
+To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
-This step is crucial because it makes Drizzle aware of the Managed BetterAuth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed BetterAuth.
+This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
     Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
@@ -111,7 +111,7 @@ This step is crucial because it makes Drizzle aware of the Managed BetterAuth ta
     npx drizzle-kit pull
     ```
 
-    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed BetterAuth tables.
+    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
 
 2.  **Organize schema files:**
     Create a new directory `app/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `app/db/schema.ts` and `app/db/relations.ts` respectively.
@@ -149,7 +149,7 @@ This step is crucial because it makes Drizzle aware of the Managed BetterAuth ta
 
     export const neonAuth = pgSchema('neon_auth');
 
-    // .. other Managed BetterAuth table definitions ..
+    // .. other Managed Better Auth table definitions ..
 
     export const userInNeonAuth = neonAuth.table(
       'user',
@@ -222,11 +222,11 @@ const sql = neon(process.env.DATABASE_URL!);
 export const db = drizzle(sql);
 ```
 
-Now you have Drizzle ORM set up with Managed BetterAuth and a `todos` table ready for use in your Next.js application.
+Now you have Drizzle ORM set up with Managed Better Auth and a `todos` table ready for use in your Next.js application.
 
-## Set up Managed BetterAuth
+## Set up Managed Better Auth
 
-Integrate Managed BetterAuth into your Next.js application for authentication and session management.
+Integrate Managed Better Auth into your Next.js application for authentication and session management.
 
 ### Create auth server instance
 
@@ -245,7 +245,7 @@ export const auth = createNeonAuth({
 
 ### Create Auth client
 
-Create a file `lib/auth/client.ts` at the root of your project to initialize the Managed BetterAuth client for browser-side auth operations.
+Create a file `lib/auth/client.ts` at the root of your project to initialize the Managed Better Auth client for browser-side auth operations.
 
 ```typescript
 'use client';
@@ -264,11 +264,11 @@ import { auth } from '@/lib/auth/server';
 export const { GET, POST } = auth.handler();
 ```
 
-### Add Managed BetterAuth UI provider
+### Add Managed Better Auth UI provider
 
 Update `app/layout.tsx` to wrap your application with the `NeonAuthUIProvider`, which supplies authentication context and UI components.
 
-This setup also adds a global header containing a `UserButton` from [Managed BetterAuth UI components](/docs/auth/reference/ui-components) for account management, ensuring the header is visible across all pages.
+This setup also adds a global header containing a `UserButton` from [Managed Better Auth UI components](/docs/auth/reference/ui-components) for account management, ensuring the header is visible across all pages.
 
 ```tsx shouldWrap
 import { authClient } from '@/lib/auth/client';
@@ -292,11 +292,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-### Add Managed BetterAuth styles
+### Add Managed Better Auth styles
 
 In `app/globals.css`, add the following import statement directly below the `@import 'tailwindcss';` line.
 
-This ensures that the required Tailwind styles for Managed BetterAuth UI components are included.
+This ensures that the required Tailwind styles for Managed Better Auth UI components are included.
 
 ```css {2}
 @import 'tailwindcss';
@@ -311,7 +311,7 @@ Create the specific pages for signing in and managing accounts using Neon's pre-
 
 1.  **Auth page:**
 
-    Create `app/auth/[path]/page.tsx`. This page will render the Managed BetterAuth sign-in/sign-up UI.
+    Create `app/auth/[path]/page.tsx`. This page will render the Managed Better Auth sign-in/sign-up UI.
 
     ```tsx shouldWrap
     import { AuthView } from '@neondatabase/auth-ui';
@@ -331,7 +331,7 @@ Create the specific pages for signing in and managing accounts using Neon's pre-
 
 2.  **Account page:**
 
-    Create `app/account/[path]/page.tsx`. This page renders the Managed BetterAuth account management UI, including features such as profile settings, password updates, and more.
+    Create `app/account/[path]/page.tsx`. This page renders the Managed Better Auth account management UI, including features such as profile settings, password updates, and more.
 
     ```tsx shouldWrap
     import { AccountView } from '@neondatabase/auth-ui';
@@ -693,28 +693,28 @@ export async function GET() {
 
 When you’re ready to deploy your Next.js application, you can use any platform that supports Next.js, such as Vercel, Netlify or VPS providers. Be sure to configure the required environment variables (`DATABASE_URL`, `NEON_AUTH_BASE_URL`, and `NEON_AUTH_COOKIE_SECRET`) in your deployment settings.
 
-After deployment, add your production URLs to the **Your trusted domains** section in the Managed BetterAuth settings to ensure authentication functions correctly.
+After deployment, add your production URLs to the **Your trusted domains** section in the Managed Better Auth settings to ensure authentication functions correctly.
 
 ## Conclusion
 
-In this guide, you built a secure Todo application using Next.js, Managed BetterAuth, and Drizzle ORM. You learned how to configure Managed BetterAuth for user authentication, define your database schema with Drizzle ORM, and use Server Actions to securely handle authentication and database operations.
+In this guide, you built a secure Todo application using Next.js, Managed Better Auth, and Drizzle ORM. You learned how to configure Managed Better Auth for user authentication, define your database schema with Drizzle ORM, and use Server Actions to securely handle authentication and database operations.
 
-With this foundation, you can create applications that require secure user authentication and data management using Managed BetterAuth and Next.js.
+With this foundation, you can create applications that require secure user authentication and data management using Managed Better Auth and Next.js.
 
-Before deploying to production, be sure to review the [Managed BetterAuth production checklist](/docs/auth/production-checklist).
+Before deploying to production, be sure to review the [Managed Better Auth production checklist](/docs/auth/production-checklist).
 
 ## Source code
 
 The complete source code for this example is available on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/dhanushreddy291/next-neon-todo" description="Complete source code for the Next.js Todo example built with Managed BetterAuth and Drizzle ORM." icon="github">Next.js Neon Todo Example</a>
+<a href="https://github.com/dhanushreddy291/next-neon-todo" description="Complete source code for the Next.js Todo example built with Managed Better Auth and Drizzle ORM." icon="github">Next.js Neon Todo Example</a>
 </DetailIconCards>
 
 ## Resources
 
-- [Managed BetterAuth Overview](/docs/neon-auth/overview)
-- [Use Managed BetterAuth with Next.js (API methods)](/docs/auth/quick-start/nextjs-api-only)
-- [Managed BetterAuth UI components](/docs/auth/reference/ui-components)
+- [Managed Better Auth Overview](/docs/neon-auth/overview)
+- [Use Managed Better Auth with Next.js (API methods)](/docs/auth/quick-start/nextjs-api-only)
+- [Managed Better Auth UI components](/docs/auth/reference/ui-components)
 
 <NeedHelp />

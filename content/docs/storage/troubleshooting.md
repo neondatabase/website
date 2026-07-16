@@ -6,10 +6,12 @@ summary: >-
   failures, access denied errors, SDK configuration issues, and S3
   compatibility limitations.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T23:52:09.670Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
+
+Every error described below also appears as a log line in the Console. See [Object storage logs](/docs/storage/logs) for how to view, filter, and search them.
 
 ## Authentication errors
 
@@ -108,15 +110,15 @@ See [S3 compatibility](/docs/storage/s3-compatibility#not-supported) for the ful
 
 `PutBucketLifecycle` succeeds and the configuration is stored, but expiration and transition rules do not execute.
 
-**Status:** Lifecycle enforcement isn't available in Private Preview. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
+**Status:** Lifecycle enforcement isn't available in beta. The API accepts and echoes the configuration so tools that read lifecycle rules will work, but the rules have no effect.
 
 ## Connection and performance errors
 
 ### `503 Service Unavailable` (SlowDown)
 
-The request exceeded the per-IP or per-tenant rate limit. The S3 error code is `SlowDown`. This is a rate limit signal, not a server error. The storage service is healthy.
+The request exceeded a rate limit. The S3 error code is `SlowDown`. This is a rate limit signal, not a server error. The storage service is healthy.
 
-**Fix:** Implement exponential backoff and retry. Don't treat `SlowDown` as a fatal error. The response may include a `Retry-After` header indicating how long to wait. AWS SDKs handle this automatically when retry logic is enabled.
+**Fix:** Implement exponential backoff and retry. Don't treat `SlowDown` as a fatal error. The response may include a `Retry-After` header indicating how long to wait. AWS SDKs handle this automatically when retry logic is enabled. If you're hitting this consistently, [let us know](/docs/introduction/support) and we can look into raising your limit.
 
 ### Large downloads timing out mid-stream
 
@@ -128,15 +130,19 @@ The connection drops during a large object download.
 // Download in 10 MiB chunks
 const chunkSize = 10 * 1024 * 1024;
 let start = 0;
+let totalSize: number | undefined;
 
-while (true) {
+// ContentLength is the size of each chunk, not the whole object, so parse
+// the object's total size from Content-Range ("bytes start-end/total")
+// instead and stop once start reaches it.
+while (totalSize === undefined || start < totalSize) {
   const response = await client.send(new GetObjectCommand({
     Bucket: 'my-bucket',
     Key: 'large-file.zip',
     Range: `bytes=${start}-${start + chunkSize - 1}`,
   }));
   // process response.Body
-  if (response.ContentRange?.endsWith(response.ContentLength?.toString() ?? '')) break;
+  totalSize = Number(response.ContentRange?.split('/')[1]);
   start += chunkSize;
 }
 ```

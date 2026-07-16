@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -26,6 +26,8 @@ npm install @neon/config
 ```
 
 The package source is on [GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/config).
+
+`neon.ts` itself is declarative: it only describes the policy. `neon config` / `neon deploy` (below) are how the CLI runs it. To call the same `inspect` / `plan` / `apply` logic from your own script or CI job instead of the CLI, see [`@neon/config-runtime`](/docs/reference/config-runtime).
 
 Link your working directory to a Neon project before using `neon.ts` commands:
 
@@ -161,19 +163,19 @@ Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closu
 
 `auth` and `dataApi` declare which Neon services exist on every branch. After `neon deploy`, running `neon env pull` writes their URLs to your local `.env` file automatically.
 
-| Field     | Values                               | Default | What it enables                                                        |
-| --------- | ------------------------------------ | ------- | ---------------------------------------------------------------------- |
-| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Managed BetterAuth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
-| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                             |
+| Field     | Values                               | Default | What it enables                                                         |
+| --------- | ------------------------------------ | ------- | ----------------------------------------------------------------------- |
+| `auth`    | `true`, `false`, `{ enabled: bool }` | `false` | Managed Better Auth. Injects `NEON_AUTH_BASE_URL`, `NEON_AUTH_JWKS_URL` |
+| `dataApi` | `true`, `false`, `DataApiConfig`     | `false` | Neon Data API. Injects `NEON_DATA_API_URL`                              |
 
 ### `dataApi` config
 
-`dataApi: true` uses Managed BetterAuth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
+`dataApi: true` uses Managed Better Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
 
 ```text
-Type 'true' is not assignable to type '"`dataApi` with Managed BetterAuth (the default
-`authProvider: 'neon'`) requires Managed BetterAuth, so add `auth: true`. To enable the
-Data API WITHOUT Managed BetterAuth, verify a third-party IdP instead: `dataApi: {
+Type 'true' is not assignable to type '"`dataApi` with Managed Better Auth (the default
+`authProvider: 'neon'`) requires Managed Better Auth, so add `auth: true`. To enable the
+Data API WITHOUT Managed Better Auth, verify a third-party IdP instead: `dataApi: {
 authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`"'
 ```
 
@@ -236,6 +238,7 @@ The key list autocompletes from your config, so selecting a variable from a serv
 | ------------------- | -------------- | ---------------------------------------------------------------------------------------------------- |
 | `--config`          | (auto)         | Path to the `neon.ts` file. When omitted, the CLI walks up from cwd stopping at `.git`               |
 | `--env`             | (none)         | Path to a `.env` file loaded before `neon.ts` is evaluated, so function `env` values resolve from it |
+| `--env-pull`        | `true`         | Pull the branch's env vars into a local `.env` after a successful apply (`--no-env-pull` to skip)    |
 | `--branch`          | linked branch  | Target branch ID or name                                                                             |
 | `--project-id`      | linked project | Project ID                                                                                           |
 | `--update-existing` | `false`        | Auto-confirm overriding existing remote settings                                                     |
@@ -243,17 +246,17 @@ The key list autocompletes from your config, so selecting a variable from a serv
 
 ## Preview services
 
-<Admonition type="info" title="Private preview">
-Functions, Storage, and AI Gateway are in private preview. They require a new project in AWS us-east-2. See [Preview access](/docs/compute/functions/preview-access) to request access.
+<Admonition type="info" title="Beta">
+Functions, Storage, and AI Gateway are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`), so create your project there to use them.
 </Admonition>
 
 Preview services are declared under the `preview` block. All three are optional and independent:
 
-| Field               | Type                                 | What it enables                                                                                                   |
-| ------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
-| `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                                                        |
-| `preview.buckets`   | Record of name → bucket def          | Neon Object Storage. S3-compatible object storage, branched with your database                                    |
-| `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL` |
+| Field               | Type                                 | What it enables                                                                |
+| ------------------- | ------------------------------------ | ------------------------------------------------------------------------------ |
+| `preview.functions` | Record of slug → function def        | Neon Functions. Long-running Node.js compute on the branch                     |
+| `preview.buckets`   | Record of name → bucket def          | Neon Object Storage. S3-compatible object storage, branched with your database |
+| `preview.aiGateway` | `true`, `false`, `{ enabled: bool }` | Neon AI Gateway. Injects `NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`   |
 
 ### `preview.functions`
 

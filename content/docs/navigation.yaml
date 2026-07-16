@@ -17,10 +17,12 @@
       items:
         - title: One-command setup
           slug: get-started/with-an-agent
+        - title: Full backend quickstart
+          slug: get-started/full-backend-quickstart
+        - title: Tour the Neon backend
+          slug: get-started/backend-overview
         - title: Tour the Neon Console
           slug: get-started/signing-up
-        - title: Build a full backend
-          slug: get-started/full-backend-quickstart
     - section: Frontend & Frameworks
       items:
         - title: Frameworks
@@ -119,6 +121,8 @@
               slug: guides/tortoise-orm
             - title: TypeORM
               slug: guides/typeorm
+            - title: Better Drizzle
+              slug: guides/better-drizzle
     - section: Migrate to Neon
       icon: import
       items:
@@ -786,12 +790,12 @@
       items:
         - title: Overview
           slug: compute/functions/overview
-        - title: Preview access
-          slug: compute/functions/preview-access
         - title: Get started
           slug: compute/functions/get-started
         - title: Deploy and manage
           slug: compute/functions/deploy
+        - title: Logs
+          slug: compute/functions/logs
         - title: Environment variables
           slug: compute/functions/environment-variables
         - title: Authentication
@@ -822,6 +826,8 @@
               slug: storage/objects
             - title: Authentication
               slug: storage/authentication
+            - title: Logs
+              slug: storage/logs
         - section: Reference
           items:
             - title: S3 compatibility
@@ -938,6 +944,8 @@
               slug: introduction/monitor-active-queries
             - title: Query performance
               slug: introduction/monitor-query-performance
+            - title: Logs
+              slug: introduction/monitor-logs
             - title: Third-party monitoring
               items:
                 - title: Datadog
@@ -1063,6 +1071,7 @@
         - title: Spending limit
           slug: introduction/spending-limit
           tag: new
+          tagTheme: green
         - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Usage and cost calculations
@@ -1152,7 +1161,7 @@
                   slug: https://neon.com/use-cases/ai-agents
                 - title: Database versioning
                   slug: ai/ai-database-versioning
-                - title: Neon API reference
+                - title: Neon API Reference
                   slug: reference/api
             - section: Agent frameworks
               icon: frameworks
@@ -1209,6 +1218,8 @@
                   slug: cli/completion
             - title: Projects and branches
               items:
+                - title: diff
+                  slug: cli/diff
                 - title: projects
                   slug: cli/projects
                 - title: branches
@@ -1286,6 +1297,9 @@
           items:
             - title: neon.ts
               slug: reference/neon-ts
+              items:
+                - title: '@neon/config-runtime'
+                  slug: reference/config-runtime
     - title: Integrations & tooling
       slug: guides/integrations
       icon: integrations
@@ -1549,15 +1563,13 @@
           slug: introduction/roadmap
           icon: roadmap
           tag: updated
+          tagTheme: gray
         - title: RSS feeds
           slug: reference/feeds
           icon: feeds
     - section: Starter code
       icon: template
       items:
-        - title: Templates
-          slug: https://neon.com/templates
-          icon: template
         - title: Examples repo
           slug: https://github.com/neondatabase/examples
           icon: github

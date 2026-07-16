@@ -10,7 +10,7 @@ summary: >-
   automatic retries, readiness polling, and auto-pagination built in. A raw
   1:1 layer exposes every endpoint and is generated from the Neon OpenAPI spec.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <InfoBlock>
@@ -21,7 +21,7 @@ updatedOn: '2026-07-10T15:48:27.200Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-<a href="/docs/reference/api">Neon API reference</a>
+<a href="/docs/reference/api">Neon API Reference</a>
 <a href="/docs/reference/migrate-api-client-to-sdk">Migrate from @neondatabase/api-client</a>
 <a href="/docs/cli">Neon CLI</a>
 </DocsList>
@@ -32,12 +32,12 @@ updatedOn: '2026-07-10T15:48:27.200Z'
 </DocsList>
 </InfoBlock>
 
-`@neon/sdk` wraps the entire Neon API in one typed, fetch-based client. You authenticate once, then reach every resource through a namespace on `neon.*`: projects, branches, the Postgres data plane, object storage, functions, and Managed BetterAuth. Retries, readiness polling, auto-pagination, and typed errors are built in.
+`@neon/sdk` wraps the entire Neon API in one typed, fetch-based client. You authenticate once, then reach every resource through a namespace on `neon.*`: projects, branches, the Postgres data plane, object storage, functions, and Managed Better Auth. Retries, readiness polling, auto-pagination, and typed errors are built in.
 
 It replaces [`@neondatabase/api-client`](https://www.npmjs.com/package/@neondatabase/api-client), the deprecated Axios-based SDK. New projects should use `@neon/sdk`. See the [migration guide](/docs/reference/migrate-api-client-to-sdk) for method mapping and error-handling changes.
 
 <Admonition type="note" title="Not every endpoint has an ergonomic wrapper">
-`createNeonClient` namespaces cover common workflows (projects, branches, Postgres resources, snapshots, and more). They do **not** wrap every Platform API operation. For endpoints without a namespace method, use the [`raw` layer](#raw-layer) below or the [Neon API reference](/docs/reference/api).
+`createNeonClient` namespaces cover common workflows (projects, branches, Postgres resources, snapshots, and more). They do **not** wrap every Platform API operation. For endpoints without a namespace method, use the [`raw` layer](#raw-layer) below or the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 ```bash
@@ -161,7 +161,7 @@ For raw API calls that return an `operations` array, use [`neon.operations.waitF
 
 The client groups the API into resource namespaces. Projects and branches are the core surfaces: [`projects`](#neonprojects) create, manage, and share projects, and [`branches`](#neonbranches) branch a project's data and schema. The Postgres data plane lives under [`postgres`](#neonpostgres): compute endpoints, roles, databases, the Data API, and connection strings.
 
-Branch-scoped platform services include [`storage`](#neonstorage) (S3-compatible object storage), [`functions`](#neonfunctions), [`credentials`](#neoncredentials), [`aiGateway`](#neonaigateway), and [`auth`](#neonauth) (Managed BetterAuth, OAuth providers, and users). For data lifecycle and async work, use [`snapshots`](#neonsnapshots) for point-in-time snapshots and restore, and [`operations`](#neonoperations) to poll asynchronous operations.
+Branch-scoped platform services include [`storage`](#neonstorage) (S3-compatible object storage), [`functions`](#neonfunctions), [`credentials`](#neoncredentials), [`aiGateway`](#neonaigateway), and [`auth`](#neonauth) (Managed Better Auth, OAuth providers, and users). For data lifecycle and async work, use [`snapshots`](#neonsnapshots) for point-in-time snapshots and restore, and [`operations`](#neonoperations) to poll asynchronous operations.
 
 Account-level surfaces round out the client: [`consumption`](#neonconsumption) for billing metrics, [`apiKeys`](#neonapikeys), and [`regions` / `user`](#neonregions--user).
 
@@ -429,7 +429,7 @@ const { error } = await neon.operations.waitFor(data!.operations, { timeoutMs: 1
 
 ## neon.auth
 
-Branch-scoped Managed BetterAuth. The legacy project-scoped endpoints are deprecated and remain raw-only. <small>REST: [Authentication API](/docs/reference/api/auth)</small>
+Branch-scoped Managed Better Auth. The legacy project-scoped endpoints are deprecated and remain raw-only. <small>REST: [Authentication API](/docs/reference/api/auth)</small>
 
 | Method                                     | Returns                             | Arguments                  |
 | ------------------------------------------ | ----------------------------------- | -------------------------- |

@@ -2197,12 +2197,12 @@ const defaultConfig = {
       },
       {
         source: '/api-reference',
-        destination: 'https://api-docs.neon.tech',
+        destination: '/docs/reference/api',
         permanent: true,
       },
       {
         source: '/api-reference/v2',
-        destination: 'https://api-docs.neon.tech/v2',
+        destination: '/docs/reference/api',
         permanent: true,
       },
       {
@@ -2548,6 +2548,23 @@ const defaultConfig = {
       {
         source: '/msa',
         destination: '/platform-terms',
+        permanent: true,
+      },
+      // /demos index and /templates gallery removed (outdated marketing pages).
+      // /demos/* sub-routes (regional-latency, ping-thing) remain as external rewrites below.
+      {
+        source: '/demos',
+        destination: '/use-cases',
+        permanent: true,
+      },
+      {
+        source: '/templates',
+        destination: 'https://github.com/neondatabase/examples',
+        permanent: true,
+      },
+      {
+        source: '/templates/:slug*',
+        destination: 'https://github.com/neondatabase/examples',
         permanent: true,
       },
       ...docsRedirects,

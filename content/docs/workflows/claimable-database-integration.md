@@ -10,7 +10,7 @@ summary: >-
   creation. The feature is in private preview and does not support
   transferring projects into Vercel-managed Neon organizations.
 enableTableOfContents: true
-updatedOn: '2026-06-23T22:05:54.707Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 ## Overview
@@ -39,7 +39,7 @@ The project transfer functionality enables you to provision fully-configured Pos
 
 ## Create a Neon project
 
-Use the Neon [create project API](https://api-docs.neon.tech/reference/createproject) to create a new project that you intend to transfer to your user.
+Use the Neon [create project API](/docs/reference/api/projects/create-project) to create a new project that you intend to transfer to your user.
 
 The minimum request body is `project: {}` as all settings are optional.
 
@@ -77,7 +77,7 @@ This creates a new project with:
 
 ### Example response
 
-Below is an abbreviated example of the response. For brevity, this documentation shows only key fields. For the complete response structure and all possible fields, see the [API documentation](https://api-docs.neon.tech/reference/createproject).
+Below is an abbreviated example of the response. For brevity, this documentation shows only key fields. For the complete response structure and all possible fields, see the [API documentation](/docs/reference/api/projects/create-project).
 
 ```json
 {
@@ -104,7 +104,7 @@ Your user will need the connection string from the response (`connection_uri`) t
 
 ## Create a transfer request
 
-With your project created, use the Neon [project transfer request API](https://api-docs.neon.tech/reference/createprojecttransferrequest) to generate a transfer request. You can create this request immediately or at a later time when you're ready to transfer the project. Each transfer request has a configurable expiration period, specified by the `ttl_seconds` parameter.
+With your project created, use the Neon [project transfer request API](/docs/reference/api/projects/create-project-transfer-request) to generate a transfer request. You can create this request immediately or at a later time when you're ready to transfer the project. Each transfer request has a configurable expiration period, specified by the `ttl_seconds` parameter.
 
 ### API endpoint
 
@@ -188,7 +188,7 @@ When your user clicks the claim URL:
 
 ### Via API
 
-Alternatively, users can accept the transfer request programmatically using the [accept project transfer request API](https://api-docs.neon.tech/reference/acceptprojecttransferrequest).
+Alternatively, users can accept the transfer request programmatically using the [accept project transfer request API](/docs/reference/api/projects/accept-project-transfer-request).
 
 #### API endpoint
 
@@ -257,9 +257,9 @@ For a working implementation of claimable databases, try [Claimable Postgres by 
 
 ## Further resources
 
-- [Create project API reference](https://api-docs.neon.tech/reference/createproject)
-- [Create project transfer request API reference](https://api-docs.neon.tech/reference/createprojecttransferrequest)
-- [Accept project transfer request API reference](https://api-docs.neon.tech/reference/acceptprojecttransferrequest)
+- [Create project API reference](/docs/reference/api/projects/create-project)
+- [Create project transfer request API reference](/docs/reference/api/projects/create-project-transfer-request)
+- [Accept project transfer request API reference](/docs/reference/api/projects/accept-project-transfer-request)
 - [Neon API documentation](/docs/reference/api)
 - [Managing projects](/docs/manage/projects)
 - [Managing API keys](/docs/manage/api-keys)

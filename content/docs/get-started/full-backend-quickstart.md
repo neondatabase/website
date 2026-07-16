@@ -1,21 +1,29 @@
 ---
 title: Build a full backend with Next.js and Neon
-subtitle: Connect Postgres with Drizzle, add managed authentication, and ship a typed server-side backend
+subtitle: Postgres, Object Storage, and a Neon Function for AI, declared in one neon.ts
 summary: >-
   End-to-end Next.js App Router tutorial that wires Neon Postgres, Drizzle ORM,
-  and Managed BetterAuth into a working server-side backend. Choose this page when
-  building a Next.js project that needs a type-safe Postgres data layer and
-  managed email authentication without a third-party auth service. Walks through
-  schema push with drizzle-kit, session-aware Server Components, route
-  middleware, and deployment to Vercel, Netlify, or self-hosted Node.
+  Object Storage, and a Neon Function into a working backend, all declared in one
+  neon.ts and provisioned with neon deploy. The function runs a streaming,
+  tool-calling AI assistant on compute next to your database. Choose this page
+  when building a Next.js project that needs a type-safe Postgres data layer plus
+  serverless storage and long-running AI, without stitching together separate
+  providers.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-07-10T15:48:27.200Z'
 ---
 
 ## Before you start
 
-You'll need [Node.js 20+](https://nodejs.org/) installed.
+You'll need [Node.js 20.19+](https://nodejs.org/) and the [Neon CLI](/docs/cli/install) installed:
+
+```bash
+npm i -g neon
+```
+
+<Admonition type="important" title="Create your project in AWS US East (Ohio)">
+Object Storage, Functions, and the AI Gateway are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, on new or existing projects in that region, so use a project there to follow this guide. Postgres works in any region. The three beta services are free to use during beta, subject to usage limits. The AI Gateway requires a paid plan; Object Storage and Functions work on any plan.
+</Admonition>
 
 <TwoColumnLayout>
 
@@ -24,27 +32,21 @@ You'll need [Node.js 20+](https://nodejs.org/) installed.
 
 If you don't have a Neon account, sign up at [console.neon.tech](https://console.neon.tech/signup).
 
-Pick a path to create the project, then copy the **connection string**. You'll add it to your environment in step 4.
+Create your project in **AWS US East (Ohio)**. Any path below works; the rest of this guide uses the Neon CLI, which you'll also use in step 3 to link the project and pull its credentials automatically.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
-<Tabs labels={["Console", "Neon CLI", "API"]}>
+<Tabs labels={["Neon CLI", "API", "Console"]}>
 
 <TabItem>
 
-In the Neon Console, click **New Project**, name it `my-backend`, and create it. From the project dashboard, click **Connect** and copy the connection string.
-
-</TabItem>
-
-<TabItem>
+Sign in and create the project:
 
 ```bash filename="Terminal"
-npx neon@latest auth
-npx neon@latest projects create --name my-backend
+neon auth
+neon projects create --name my-backend --region-id aws-us-east-2
 ```
-
-The connection string appears in the output.
 
 </TabItem>
 
@@ -58,58 +60,14 @@ export NEON_API_KEY=neon_...
 curl -X POST https://console.neon.tech/api/v2/projects \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"project": {"name": "my-backend"}}'
+  -d '{"project": {"name": "my-backend", "region_id": "aws-us-east-2"}}'
 ```
-
-The connection string is in the response under `connection_uris[0].connection_uri`.
-
-</TabItem>
-
-</Tabs>
-
-</TwoColumnLayout.Block>
-</TwoColumnLayout.Step>
-
-<TwoColumnLayout.Step title="Enable Managed BetterAuth">
-<TwoColumnLayout.Block>
-
-<Tag label="beta" size="sm" /> Managed BetterAuth is in beta. [Share feedback on Discord](https://discord.gg/92vNTzKDGp).
-
-Enable Auth on your project's default branch and copy the **Auth URL**. You'll add it to your environment in step 4.
-
-</TwoColumnLayout.Block>
-<TwoColumnLayout.Block>
-
-<Tabs labels={["Console", "API"]}>
-
-<TabItem>
-
-In the project sidebar, go to **Auth** and click **Enable Auth**. On the **Configuration** tab, copy your **Auth URL**.
-
-![Managed BetterAuth Base URL](/docs/auth/neon-auth-base-url.png)
 
 </TabItem>
 
 <TabItem>
 
-You'll need your project ID and default branch ID. If you used the API in step 1, the response contains both. Otherwise list projects to find them:
-
-```bash filename="Terminal"
-curl https://console.neon.tech/api/v2/projects \
-  -H "Authorization: Bearer $NEON_API_KEY"
-```
-
-Enable Auth on the default branch:
-
-```bash filename="Terminal"
-curl -X POST \
-  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches/$BRANCH_ID/auth" \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{"auth_provider": "better_auth"}'
-```
-
-The Auth URL is in the response under `jwks_url` (strip the `/.well-known/jwks.json` suffix).
+In the Neon Console, click **New Project**, name it `my-backend`, and select the **AWS US East (Ohio)** region.
 
 </TabItem>
 
@@ -134,36 +92,50 @@ cd my-backend
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Install dependencies and add environment variables">
+<TwoColumnLayout.Step title="Declare your backend in neon.ts">
 <TwoColumnLayout.Block>
 
-Install three packages: `@neondatabase/neon-js` for auth, `drizzle-orm` for typed queries, and `@neondatabase/serverless` for the HTTP driver (works in Node, edge, and serverless runtimes). Add `drizzle-kit` as a dev dependency for the schema migration.
+A single [`neon.ts`](/docs/reference/neon-ts) file declares your backend as code. You enable a capability there, run [`neon deploy`](/docs/cli/deploy), and Neon provisions it and writes its credentials into `.env.local`. You'll grow this file as you add capabilities.
 
-Then create `.env.local` with your connection string, Auth URL, and a generated cookie secret.
+Work through the commands on the right:
 
-Generate the cookie secret with `openssl rand -base64 32`. It must be at least 32 characters.
+1. `neon link` and `neon checkout` pull the branch's `DATABASE_URL` into `.env.local`. If you created the project through the API or Console, run `neon auth` first to sign in the CLI.
+2. `neon config init` scaffolds `neon.ts` and installs `@neon/config`. The generated file includes a branch policy; leave it in place and add the `preview` block shown in later steps alongside it. The `neon.ts` snippets below omit the branch policy for brevity.
+
+Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local` and you can build the data layer before adding any beta services.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-npm install @neondatabase/neon-js drizzle-orm @neondatabase/serverless
-npm install -D drizzle-kit
-```
-
-```bash filename=".env.local"
-DATABASE_URL=postgresql://...
-NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.c-7.us-east-1.aws.neon.tech/neondb/auth
-NEON_AUTH_COOKIE_SECRET=replace-with-32-char-random-secret
+neon link            # select the my-backend project
+neon checkout main   # pull DATABASE_URL into .env.local
+neon config init     # scaffold neon.ts, install @neon/config
 ```
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Define the Drizzle schema">
+<TwoColumnLayout.Step title="Install dependencies">
 <TwoColumnLayout.Block>
 
-Create a TypeScript schema for a `posts` table. Drizzle uses this for both the migration and your type-safe queries.
+Install `drizzle-orm` for typed queries and `@neondatabase/serverless` for the HTTP driver (works in Node, edge, and serverless runtimes). Add `drizzle-kit` as a dev dependency for the schema migration.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```bash filename="Terminal"
+npm install drizzle-orm @neondatabase/serverless
+npm install -D drizzle-kit
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Define your schema">
+<TwoColumnLayout.Block>
+
+Create a TypeScript schema for a `posts` table. This example uses Drizzle for schema management, but you can use any ORM or migration tool. Drizzle uses this schema for both the migration and your type-safe queries. Each post has an `author` so you can tell them apart; this app is single-user, so the author defaults to `anonymous`.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -175,7 +147,7 @@ export const posts = pgTable('posts', {
   id: bigint('id', { mode: 'number' })
     .primaryKey()
     .generatedByDefaultAsIdentity(),
-  userId: text('user_id').notNull(),
+  author: text('author').notNull().default('anonymous'),
   content: text('content').notNull(),
   isPublished: boolean('is_published').notNull().default(false),
   createdAt: timestamp('created_at', { withTimezone: true })
@@ -207,9 +179,9 @@ export default defineConfig({
 <TwoColumnLayout.Step title="Push the schema and seed sample data">
 <TwoColumnLayout.Block>
 
-`drizzle-kit push` creates the table directly from your schema. In production, you'd typically use `drizzle-kit generate` and `drizzle-kit migrate` for tracked migrations, but push is faster for a tutorial.
+This example uses Drizzle's CLI to apply the schema, but you can use your ORM or migration tool's equivalent command. `drizzle-kit push` creates the table directly from your schema. In production, you'd typically use `drizzle-kit generate` and `drizzle-kit migrate` for tracked migrations, but push is faster for a tutorial.
 
-Then seed three sample posts in the [Neon Console SQL Editor](https://console.neon.tech) — two published and one draft, so step 9's `where(eq(posts.isPublished, true))` filter has something visible to do.
+Then seed three sample posts in the [Neon Console SQL Editor](https://console.neon.tech): two published and one draft, so the `where(eq(posts.isPublished, true))` filter on the posts page has something visible to do.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -221,206 +193,19 @@ npx drizzle-kit push
 Open your project in the Neon Console, go to **SQL Editor**, and run:
 
 ```sql
-INSERT INTO posts (user_id, content, is_published) VALUES
-  ('00000000-0000-0000-0000-000000000000', 'Hello from Neon', true),
-  ('00000000-0000-0000-0000-000000000000', 'Welcome to your new backend', true),
-  ('00000000-0000-0000-0000-000000000000', 'This draft is hidden — flip is_published to true in the SQL editor to see it appear', false);
+INSERT INTO posts (author, content, is_published) VALUES
+  ('Dana Smith', 'Postgres branching lets you copy your whole database in seconds.', true),
+  ('Alex Lopez', 'Serverless compute scales to zero when idle, so you only pay for what you use.', true),
+  ('anonymous', 'This draft is hidden. Flip is_published to true in the SQL editor to see it appear.', false);
 ```
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Wire up auth">
+<TwoColumnLayout.Step title="List posts in a Server Component">
 <TwoColumnLayout.Block>
 
-Add four files. The server instance handles auth on the server side. The client exposes auth methods to the browser. The API route proxies sign-up, sign-in, and OAuth callbacks. The middleware redirects unauthenticated users to the sign-in page.
-
-</TwoColumnLayout.Block>
-<TwoColumnLayout.Block>
-
-```typescript filename="lib/auth/server.ts"
-import { createNeonAuth } from '@neondatabase/neon-js/auth/next/server';
-
-export const auth = createNeonAuth({
-  baseUrl: process.env.NEON_AUTH_BASE_URL!,
-  cookies: {
-    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-  },
-});
-```
-
-```typescript filename="lib/auth/client.ts"
-'use client';
-
-import { createAuthClient } from '@neondatabase/neon-js/auth/next';
-
-export const authClient = createAuthClient();
-```
-
-```typescript filename="app/api/auth/[...path]/route.ts"
-import { auth } from '@/lib/auth/server';
-
-export const { GET, POST } = auth.handler();
-```
-
-```typescript filename="proxy.ts"
-import { auth } from '@/lib/auth/server';
-
-export default auth.middleware({
-  loginUrl: '/auth/sign-in',
-});
-
-export const config = {
-  matcher: ['/posts/:path*'],
-};
-```
-
-<NextjsProxyNote/>
-
-</TwoColumnLayout.Block>
-</TwoColumnLayout.Step>
-
-<TwoColumnLayout.Step title="Build the sign-in and sign-up pages">
-<TwoColumnLayout.Block>
-
-Each page is a client form that posts to a server action. The action calls `auth.signUp.email()` or `auth.signIn.email()` on the server, then redirects to `/posts` on success or returns an error string for the form to display.
-
-No layout or provider component is needed. The scaffold's default `app/layout.tsx` is all the wrapper you need.
-
-</TwoColumnLayout.Block>
-<TwoColumnLayout.Block>
-
-```tsx filename="app/auth/sign-up/page.tsx"
-'use client';
-
-import { useActionState } from 'react';
-import { signUpWithEmail } from './actions';
-
-export default function SignUpForm() {
-  const [state, formAction, isPending] = useActionState(signUpWithEmail, null);
-
-  return (
-    <form
-      action={formAction}
-      className="flex min-h-screen flex-col items-center justify-center gap-5 bg-gray-900"
-    >
-      <h1 className="text-2xl font-bold text-white">Create new account</h1>
-
-      <label className="flex w-sm flex-col gap-1.5">
-        <span className="text-sm font-medium text-gray-100">Name</span>
-        <input name="name" type="text" required
-          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
-      </label>
-      <label className="flex w-sm flex-col gap-1.5">
-        <span className="text-sm font-medium text-gray-100">Email</span>
-        <input name="email" type="email" required
-          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
-      </label>
-      <label className="flex w-sm flex-col gap-1.5">
-        <span className="text-sm font-medium text-gray-100">Password</span>
-        <input name="password" type="password" required
-          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
-      </label>
-
-      {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
-
-      <button type="submit" disabled={isPending}
-        className="w-sm rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white hover:bg-indigo-400">
-        {isPending ? 'Creating account...' : 'Create account'}
-      </button>
-    </form>
-  );
-}
-```
-
-```typescript filename="app/auth/sign-up/actions.ts"
-'use server';
-
-import { auth } from '@/lib/auth/server';
-import { redirect } from 'next/navigation';
-
-export async function signUpWithEmail(
-  _prev: { error: string } | null,
-  formData: FormData,
-) {
-  const { error } = await auth.signUp.email({
-    name: formData.get('name') as string,
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  });
-
-  if (error) return { error: error.message || 'Failed to create account' };
-
-  redirect('/posts');
-}
-```
-
-```tsx filename="app/auth/sign-in/page.tsx"
-'use client';
-
-import { useActionState } from 'react';
-import { signInWithEmail } from './actions';
-
-export default function SignInForm() {
-  const [state, formAction, isPending] = useActionState(signInWithEmail, null);
-
-  return (
-    <form
-      action={formAction}
-      className="flex min-h-screen flex-col items-center justify-center gap-5 bg-gray-900"
-    >
-      <h1 className="text-2xl font-bold text-white">Sign in to your account</h1>
-
-      <label className="flex w-sm flex-col gap-1.5">
-        <span className="text-sm font-medium text-gray-100">Email</span>
-        <input name="email" type="email" required
-          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
-      </label>
-      <label className="flex w-sm flex-col gap-1.5">
-        <span className="text-sm font-medium text-gray-100">Password</span>
-        <input name="password" type="password" required
-          className="rounded-md bg-white/5 px-2 py-1.5 text-white outline-1 outline-white/10" />
-      </label>
-
-      {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
-
-      <button type="submit" disabled={isPending}
-        className="w-sm rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white hover:bg-indigo-400">
-        {isPending ? 'Signing in...' : 'Sign in'}
-      </button>
-    </form>
-  );
-}
-```
-
-```typescript filename="app/auth/sign-in/actions.ts"
-'use server';
-
-import { auth } from '@/lib/auth/server';
-import { redirect } from 'next/navigation';
-
-export async function signInWithEmail(
-  _prev: { error: string } | null,
-  formData: FormData,
-) {
-  const { error } = await auth.signIn.email({
-    email: formData.get('email') as string,
-    password: formData.get('password') as string,
-  });
-
-  if (error) return { error: error.message || 'Failed to sign in' };
-
-  redirect('/posts');
-}
-```
-
-</TwoColumnLayout.Block>
-</TwoColumnLayout.Step>
-
-<TwoColumnLayout.Step title="Query Postgres from a Server Component">
-<TwoColumnLayout.Block>
-
-Create the Drizzle client and a protected `/posts` page. The page is a Server Component, so both the session lookup and the Drizzle query run on the server at request time. `auth.getSession()` reads the signed-in user from cookies, Drizzle returns typed query results, and `dynamic = 'force-dynamic'` keeps the data fresh on every request.
+Create the Drizzle client and a `/posts` page. The page is a Server Component, so the Drizzle query runs on the server at request time. `dynamic = 'force-dynamic'` keeps the data fresh on every request.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -435,7 +220,6 @@ export const db = drizzle(sql, { schema });
 ```
 
 ```tsx filename="app/posts/page.tsx"
-import { auth } from '@/lib/auth/server';
 import { db } from '@/lib/db/client';
 import { posts } from '@/lib/db/schema';
 import { desc, eq } from 'drizzle-orm';
@@ -443,8 +227,6 @@ import { desc, eq } from 'drizzle-orm';
 export const dynamic = 'force-dynamic';
 
 export default async function PostsPage() {
-  const { data: session } = await auth.getSession();
-
   const allPosts = await db
     .select()
     .from(posts)
@@ -454,16 +236,12 @@ export default async function PostsPage() {
 
   return (
     <main className="p-8">
-      <h1 className="mb-1 text-2xl font-bold">Published posts</h1>
-      {session?.user && (
-        <p className="mb-4 text-sm text-gray-600">
-          Signed in as <span className="font-medium">{session.user.name}</span>
-        </p>
-      )}
+      <h1 className="mb-4 text-2xl font-bold">Published posts</h1>
       <ul className="space-y-2">
         {allPosts.map((post) => (
           <li key={post.id} className="rounded border p-3">
-            {post.content}
+            <p>{post.content}</p>
+            <p className="mt-1 text-xs text-gray-500">by {post.author}</p>
           </li>
         ))}
       </ul>
@@ -475,12 +253,378 @@ export default async function PostsPage() {
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
+<TwoColumnLayout.Step title="Add Object Storage and upload images">
+<TwoColumnLayout.Block>
+
+Add an `images` bucket to your `neon.ts` and run `neon deploy`. Neon provisions the bucket and injects the S3-compatible credentials (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_ENDPOINT_URL_S3`, `AWS_REGION`) into `.env.local`.
+
+Then add a client upload page that submits the file to a Server Action. The [Files SDK](https://files-sdk.dev) `neon` adapter reads the injected `AWS_*` variables and configures the endpoint for you, so there's no client setup.
+
+The action returns the object's public URL. In a real app you'd store that URL on a row, for example an `image_url` column on `posts`, so a record can reference its file. This step keeps the upload standalone to focus on the storage flow.
+
+<Admonition type="note">
+`neon deploy` merges credentials into `.env.local` without discarding your own entries.
+</Admonition>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript filename="neon.ts"
+import { defineConfig } from '@neon/config/v1';
+
+export default defineConfig({
+  preview: {
+    buckets: {
+      images: { access: 'public_read' },
+    },
+  },
+});
+```
+
+```bash filename="Terminal"
+neon deploy
+npm install files-sdk @aws-sdk/client-s3 @aws-sdk/s3-request-presigner @aws-sdk/s3-presigned-post
+```
+
+```typescript filename="app/upload/actions.ts"
+'use server';
+
+import { Files } from 'files-sdk';
+import { neon } from 'files-sdk/neon';
+
+const files = new Files({ adapter: neon({ bucket: 'images' }) });
+
+export async function uploadImage(
+  _prev: { error?: string; publicUrl?: string } | null,
+  formData: FormData,
+) {
+  const file = formData.get('file') as File | null;
+  if (!file) return { error: 'No file selected' };
+
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const key = `${Date.now()}-${file.name}`;
+
+  await files.upload(key, bytes, { contentType: file.type });
+
+  // The images bucket is public_read, so the object is served directly.
+  const publicUrl = `${process.env.AWS_ENDPOINT_URL_S3}/images/${key}`;
+  return { publicUrl };
+}
+```
+
+```tsx filename="app/upload/page.tsx"
+'use client';
+
+import { useActionState } from 'react';
+import { uploadImage } from './actions';
+
+export default function UploadPage() {
+  const [state, formAction, isPending] = useActionState(uploadImage, null);
+
+  return (
+    <main className="p-8">
+      <h1 className="mb-4 text-2xl font-bold">Upload an image</h1>
+      <form action={formAction} className="mb-4">
+        <input name="file" type="file" accept="image/*" required />
+        <button
+          type="submit"
+          disabled={isPending}
+          className="mt-3 rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white disabled:opacity-50"
+        >
+          {isPending ? 'Uploading...' : 'Upload'}
+        </button>
+      </form>
+      {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
+      {state?.publicUrl && (
+        <p className="text-sm text-gray-500 break-all">Uploaded: {state.publicUrl}</p>
+      )}
+    </main>
+  );
+}
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Write the Neon Function">
+<TwoColumnLayout.Block>
+
+Now add the piece that makes this a full backend: a [Neon Function](/docs/compute/functions/overview) that runs AI on long-lived compute next to your database. It's a normal [Hono](https://hono.dev) app with two routes:
+
+- `POST /generate` writes a post from a topic with the [AI Gateway](/docs/ai-gateway/overview).
+- `POST /assistant` streams a tool-calling assistant that answers questions about your posts. The tool loop queries Postgres and runs in-process, so it isn't cut off by a serverless request limit.
+
+Install the function's dependencies, then create `functions/posts.ts`.
+
+<Admonition type="note" title="Connect with a pooled `pg` client">
+A function keeps running across requests, so open a `pg` `Pool` once at module scope and reuse it. Don't use `@neondatabase/serverless` inside a function; it's built for short-lived, per-request invocations. See [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres).
+</Admonition>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```bash filename="Terminal"
+npm install hono pg ai @neon/ai-sdk-provider zod
+npm install -D @types/pg
+```
+
+```typescript filename="functions/posts.ts"
+import { Hono } from 'hono';
+import { cors } from 'hono/cors';
+import { Pool } from 'pg';
+import { neon } from '@neon/ai-sdk-provider';
+import { streamText, generateText, convertToModelMessages, tool, stepCountIs } from 'ai';
+import { z } from 'zod';
+
+// Reused across requests. Use a pooled pg client, not the serverless driver.
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+
+const app = new Hono();
+
+// The assistant is called from the browser, so allow cross-origin requests.
+app.use('/*', cors());
+
+// One-shot generation: create a post from a topic and save it.
+app.post('/generate', async (c) => {
+  const { topic, author = 'anonymous' } = await c.req.json();
+
+  const { text } = await generateText({
+    model: neon('claude-sonnet-4-6'),
+    prompt: `Write a 2 sentence post about the following topic. Just send the post content without any additional text: ${topic}`,
+  });
+
+  const { rows } = await pool.query(
+    'insert into posts (author, content, is_published) values ($1, $2, true) returning *',
+    [author, text],
+  );
+
+  return c.json(rows[0]);
+});
+
+// Streaming assistant: answers questions about the posts, using a tool that
+// queries Postgres. The tool loop runs in-process on Neon compute.
+app.post('/assistant', async (c) => {
+  const { messages } = await c.req.json();
+
+  const result = streamText({
+    model: neon('claude-sonnet-4-6'),
+    system:
+      "You are a helpful assistant that answers questions about the user's blog posts. Use the queryPosts tool to look them up.",
+    messages: await convertToModelMessages(messages),
+    tools: {
+      queryPosts: tool({
+        description: 'Fetch the most recent published posts from the database.',
+        inputSchema: z.object({
+          limit: z.number().default(10).describe('How many posts to fetch.'),
+        }),
+        execute: async ({ limit }) => {
+          const { rows } = await pool.query(
+            'select author, content, created_at from posts where is_published = true order by created_at desc limit $1',
+            [limit],
+          );
+          return rows;
+        },
+      }),
+    },
+    stopWhen: stepCountIs(5),
+    // Disable telemetry: the function runtime's tracing conflicts with the
+    // AI SDK's streaming spans.
+    experimental_telemetry: { isEnabled: false },
+  });
+
+  return result.toUIMessageStreamResponse();
+});
+
+export default app;
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Deploy the function">
+<TwoColumnLayout.Block>
+
+Declare the function and the AI Gateway in `neon.ts`, then `neon deploy`. Neon builds the function, gives it a public URL, and injects the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`) so the `@neon/ai-sdk-provider` inside the function needs no configuration.
+
+Retrieve the function's URL and add it to `.env.local` as `NEXT_PUBLIC_POSTS_FN_URL` (the `NEXT_PUBLIC_` prefix exposes it to the browser, which calls the assistant directly).
+
+A Neon Function has its own URL, so the browser calls it directly. That keeps a long stream off your host's serverless timeout.
+
+<Admonition type="note" title="First call after a deploy">
+The first AI Gateway call on a new branch can return a `403` while the credential propagates. It clears within a few seconds, so retry.
+</Admonition>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript filename="neon.ts"
+import { defineConfig } from '@neon/config/v1';
+
+export default defineConfig({
+  preview: {
+    aiGateway: true,
+    buckets: {
+      images: { access: 'public_read' },
+    },
+    functions: {
+      posts: { name: 'posts assistant', source: './functions/posts.ts' },
+    },
+  },
+});
+```
+
+```bash filename="Terminal"
+neon deploy
+
+# print the function's details, then copy its invocation_url
+neon functions get posts
+```
+
+```bash filename=".env.local"
+NEXT_PUBLIC_POSTS_FN_URL=https://<branch_id>-posts.compute.<cell>.us-east-2.aws.neon.tech/
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Call the function from your app">
+<TwoColumnLayout.Block>
+
+Wire two pages to the function:
+
+- `/generate` calls `POST /generate` from a Server Action (server-to-server, so no CORS). Good for a short, one-shot generation.
+- `/assistant` streams from `POST /assistant` directly in the browser with the AI SDK's `useChat` hook. Calling the function directly keeps the stream off any serverless host that would time it out.
+
+```bash filename="Terminal"
+npm install @ai-sdk/react
+```
+
+<Admonition type="note" title="Authenticate the function in production">
+The function has a public URL and no auth check, which is fine for this tutorial. Before shipping, gate it with an API key or a JWT. See [Neon Functions authentication](/docs/compute/functions/authentication).
+</Admonition>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript filename="app/generate/actions.ts"
+'use server';
+
+export async function generatePost(
+  _prev: { error?: string; content?: string } | null,
+  formData: FormData,
+) {
+  const topic = formData.get('topic') as string;
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_POSTS_FN_URL}generate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ topic, author: 'anonymous' }),
+  });
+
+  if (!res.ok) return { error: 'Generation failed' };
+  const post = await res.json();
+  return { content: post.content as string };
+}
+```
+
+```tsx filename="app/generate/page.tsx"
+'use client';
+
+import { useActionState } from 'react';
+import { generatePost } from './actions';
+
+export default function GeneratePage() {
+  const [state, formAction, isPending] = useActionState(generatePost, null);
+
+  return (
+    <main className="p-8">
+      <h1 className="mb-4 text-2xl font-bold">Generate a post</h1>
+      <form action={formAction} className="mb-4 flex gap-2">
+        <input name="topic" placeholder="Topic" required className="rounded border px-2 py-1" />
+        <button
+          type="submit"
+          disabled={isPending}
+          className="rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white"
+        >
+          {isPending ? 'Generating...' : 'Generate'}
+        </button>
+      </form>
+      {state?.error && <p className="text-sm text-red-500">{state.error}</p>}
+      {state?.content && <p className="rounded border p-3">{state.content}</p>}
+    </main>
+  );
+}
+```
+
+```tsx filename="app/assistant/page.tsx"
+'use client';
+
+import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
+import { useState } from 'react';
+
+export default function AssistantPage() {
+  const [input, setInput] = useState('');
+  const { messages, sendMessage, status } = useChat({
+    transport: new DefaultChatTransport({
+      api: `${process.env.NEXT_PUBLIC_POSTS_FN_URL}assistant`,
+    }),
+  });
+
+  return (
+    <main className="p-8">
+      <h1 className="mb-4 text-2xl font-bold">Ask about your posts</h1>
+      <div className="mb-4 space-y-2">
+        {messages.map((m) => (
+          <div key={m.id} className="rounded border p-3">
+            <span className="font-medium">{m.role}: </span>
+            {m.parts.map((p, i) => (p.type === 'text' ? <span key={i}>{p.text}</span> : null))}
+          </div>
+        ))}
+      </div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (input.trim()) {
+            sendMessage({ text: input });
+            setInput('');
+          }
+        }}
+        className="flex gap-2"
+      >
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Ask about your posts"
+          className="flex-1 rounded border px-2 py-1"
+        />
+        <button
+          type="submit"
+          disabled={status !== 'ready'}
+          className="rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white"
+        >
+          Send
+        </button>
+      </form>
+    </main>
+  );
+}
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
 <TwoColumnLayout.Step title="Run the app">
 <TwoColumnLayout.Block>
 
-Start the dev server, then open [http://localhost:3000/auth/sign-up](http://localhost:3000/auth/sign-up). Create a test user, and you'll be redirected to `/posts` where the two published posts appear above your signed-in name.
+Start the dev server, then open the URL it prints. Try each page:
 
-If you visit `/posts` without signing in, the middleware redirects you to `/auth/sign-in`.
+- `/posts` lists the seeded posts.
+- `/generate` generates a post and saves it.
+- `/assistant` chats about your posts, streaming from the function.
+- `/upload` uploads an image to your bucket.
+
+To iterate on the function locally, run [`neon dev`](/docs/cli/dev), which serves it with the same injected Neon variables it gets in production.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -498,17 +642,17 @@ npm run dev
 
 You now have a Next.js app where:
 
-- Sign-up and sign-in are handled by Managed BetterAuth via server actions that call `auth.signUp.email()` and `auth.signIn.email()`
-- The `/posts` route is protected by middleware
-- The signed-in user's name is read from cookies via `auth.getSession()` on the same page
 - Published posts are queried server-side via Drizzle with full TypeScript types
-- The application can be deployed to any Next.js App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node
+- Images upload to a Neon Storage bucket through a Server Action and the Files SDK
+- A Neon Function generates posts and runs a streaming, tool-calling AI assistant on compute next to your database
+- The whole backend is declared in one `neon.ts` and provisioned with `neon deploy`, which injects every credential into `.env.local`
+- The Next.js app deploys to any App Router host that supports server actions, including Vercel, Netlify, and self-hosted Node, while the long-running AI lives on the Neon Function
 
 ## Next steps
 
-- **Write data with Server Actions** ([Drizzle insert reference](https://orm.drizzle.team/docs/insert)): wire up post creation through a server action that uses the auth session for `user_id`
-- **Branch for previews**: [branching authentication](/docs/auth/branching-authentication) gives every preview environment its own user state
-- **Optimize for the edge**: on Vercel or Cloudflare, configure [connection pooling](/docs/connect/connection-pooling) for production
-- **Generated migrations**: switch from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations) for tracked schema changes
+- **Make it multi-user with Managed Better Auth:** add [`auth: true`](/docs/reference/neon-ts) to `neon.ts` for [Managed Better Auth](/docs/auth/overview), gate the pages with a session, and verify the caller's JWT inside the function ([Neon Functions authentication](/docs/compute/functions/authentication)). See the [Auth quickstart](/docs/auth/quick-start/nextjs-api-only).
+- **Go deeper on Functions:** hold open [WebSockets and SSE](/docs/compute/functions/websockets) or build a fuller [AI agent](/docs/compute/functions/agents) on the same function.
+- **Branch your whole backend:** [`neon checkout`](/docs/cli/checkout) forks the database, buckets, and function together for preview environments. See [Branching](/docs/introduction/branching).
+- **Generated migrations:** for tracked schema changes, switch from a direct push to generated migrations. If you're using Drizzle, that means moving from `drizzle-kit push` to [`drizzle-kit generate`](https://orm.drizzle.team/docs/migrations); other ORMs and migration tools offer an equivalent.
 
 <NeedHelp/>

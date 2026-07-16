@@ -8,7 +8,7 @@ summary: >-
   guide when you want Encore to create and manage your Neon database, including
   per-pull-request Neon branch preview environments for safe schema testing.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 [Encore](https://encore.dev) is a backend development framework that uses static analysis and type-safe primitives to provide automatic infrastructure provisioning, distributed tracing, and API documentation. This guide shows you how to use Neon with Encore for production deployments.
@@ -221,5 +221,12 @@ You can find a complete Encore + Neon example application on GitHub:
 - [Encore SQL Databases](https://encore.dev/docs/ts/primitives/databases)
 - [Encore Cloud + Neon Integration](https://encore.dev/docs/platform/infrastructure/neon)
 - [Blog post: Building Production API Services with Encore and Neon](https://neon.tech/blog/building-production-api-services-with-encore-typescript-and-neon-serverless-postgres)
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

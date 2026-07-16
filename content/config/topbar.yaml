@@ -1,4 +1,4 @@
-text: 'Autoscaling Report: Production databases on Neon use 2.4x less compute and 50% less cost than if they were running on a provisioned platform.'
+text: 'Neon is expanding into a backend: Object Storage, Functions, and AI Gateway now in beta'
 link:
-  url: 'https://neon.com/autoscaling-report'
+  url: 'https://neon.com/blog/neon-backend-is-beta'
   target: '_blank'

@@ -45,7 +45,7 @@ const FEATURES = [
   },
   {
     icon: authIcon,
-    title: 'Auth.',
+    title: 'Managed Better Auth.',
     description: `Neon comes with <a href="${LINKS.auth}">built-in authentication</a> based on Better Auth, with a one-click install.`,
   },
   {

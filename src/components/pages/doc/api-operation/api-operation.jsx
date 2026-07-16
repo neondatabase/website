@@ -163,6 +163,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
                 <Tag
                   label={operation.stability}
                   size="sm"
+                  theme={operation.stabilityTheme || 'gray'}
                   className="ml-2 inline-flex px-2 py-1 text-[0.6875rem]/none font-normal -tracking-tight tabular-nums"
                 />
               )}
@@ -170,6 +171,7 @@ const ApiOperation = ({ operation, breadcrumbs, navigationLinks, currentSlug }) 
                 <Tag
                   label="deprecated"
                   size="sm"
+                  theme="orange"
                   className="ml-2 inline-flex px-2 py-1 text-[0.6875rem]/none font-normal -tracking-tight tabular-nums"
                 />
               )}
@@ -243,6 +245,7 @@ ApiOperation.propTypes = {
     description: PropTypes.string,
     descriptionHtml: PropTypes.string,
     stability: PropTypes.string,
+    stabilityTheme: PropTypes.string,
     deprecated: PropTypes.bool,
     sunset: PropTypes.string,
     parameters: PropTypes.arrayOf(PropTypes.shape({})),

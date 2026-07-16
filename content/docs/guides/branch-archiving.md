@@ -10,7 +10,7 @@ summary: >-
   this page to understand archiving thresholds, blocking conditions, and how to
   monitor archive and unarchive operations via the Console, CLI, or API.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <InfoBlock>
@@ -23,7 +23,7 @@ updatedOn: '2026-07-10T13:57:31.917Z'
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/reference/glossary#archive-storage">Archive storage</a>
   <a href="/docs/cli/branches#list">Branches list command (Neon CLI)</a>
-  <a href="https://api-docs.neon.tech/reference/getprojectbranch">Get branch details (Neon API)</a>
+  <a href="/docs/reference/api/branches/get-project-branch">Get branch details (Neon API)</a>
 </DocsList>
 
 </InfoBlock>
@@ -69,7 +69,7 @@ The following actions will automatically unarchive a branch, transferring the br
 - [Reset the branch from its parent](/docs/manage/branches#reset-a-branch-from-parent)
 - [Performing a restore operation on a branch](/docs/guides/branch-restore)
 - [Setting the branch as protected](/docs/guides/protected-branches)
-- Running [Neon CLI](/docs/cli) commands or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) calls that access the branch
+- Running [Neon CLI](/docs/cli) commands or [Neon API](/docs/reference/api) calls that access the branch
 
 ## Identifying archived branches
 
@@ -129,7 +129,7 @@ The Neon CLI [branches list](/docs/cli/branches#list) command shows a branch's `
 </TabItem>
 
 <TabItem>
-The Neon API's [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) endpoint can retrieve a branch's state:
+The Neon API's [Get branch details](/docs/reference/api/branches/get-project-branch) endpoint can retrieve a branch's state:
 
 ```bash
 curl --request GET \

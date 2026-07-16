@@ -27,9 +27,9 @@ describe('getTableOfContents', () => {
     const content = [
       '## Subcommands',
       '',
-      '### neonctl branches restore (#restore)',
+      '### neon branches restore (#restore)',
       '',
-      '### neonctl neon-auth oauth-provider add (#oauth-provider-add)',
+      '### neon neon-auth oauth-provider add (#oauth-provider-add)',
       '',
     ].join('\n');
     const toc = getTableOfContents(content);
@@ -40,14 +40,20 @@ describe('getTableOfContents', () => {
     expect(subItems[1].id).toBe('oauth-provider-add');
   });
 
+  it('still shortens legacy neonctl full-path headings with custom ids', () => {
+    const toc = getTableOfContents('## Subcommands\n\n### neonctl branches restore (#restore)\n');
+    expect(toc[0].items[0].title).toBe('restore');
+    expect(toc[0].items[0].id).toBe('restore');
+  });
+
   it('falls back to dropping only the binary for single-command headings', () => {
-    const toc = getTableOfContents('## neonctl connection-string (#connection-string)\n');
+    const toc = getTableOfContents('## neon connection-string (#connection-string)\n');
     expect(toc[0].title).toBe('connection-string');
   });
 
-  it('leaves neonctl headings without custom ids untouched', () => {
-    const toc = getTableOfContents('## neonctl init\n');
-    expect(toc[0].title).toBe('neonctl init');
+  it('leaves CLI headings without custom ids untouched', () => {
+    const toc = getTableOfContents('## neon init\n');
+    expect(toc[0].title).toBe('neon init');
   });
 
   it('ignores headings inside code blocks', () => {

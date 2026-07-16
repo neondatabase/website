@@ -10,7 +10,7 @@ summary: >-
   schema to wire up the runtime connection layer, whether from a frontend using
   the Data API or a backend using the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <InfoBlock>
@@ -193,7 +193,7 @@ When requests go through the Data API, your database enforces RLS policies autom
 
 For complete examples of using Drizzle and RLS with the Data API, see:
 
-- [Data API tutorial](/docs/data-api/demo) - Full note-taking app example built with Managed BetterAuth, Drizzle RLS, and the Data API
+- [Data API tutorial](/docs/data-api/demo) - Full note-taking app example built with Managed Better Auth, Drizzle RLS, and the Data API
 - [Data API getting started](/docs/data-api/get-started) - Setup and basic queries
 
 ### Backend: Use Drizzle with the serverless driver

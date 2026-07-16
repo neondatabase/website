@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -243,7 +243,7 @@ You can restart a compute using these methods:
 
 - Use the **Restart compute** option in the Neon console. Navigate to the **Branches** page from your project dashboard, and select a branch. On the Computes tab, select **Restart compute** from the menu.
   ![Restart a compute in the console](/docs/manage/restart_compute.png)
-- Issue a [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
+- Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
 
   ```bash
   curl --request POST \
@@ -253,7 +253,7 @@ You can restart a compute using these methods:
   ```
 
   <Admonition type="note">
-  The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. 
+  The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API. 
   </Admonition>
 
 - Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
@@ -271,10 +271,10 @@ To delete a compute:
 
 ## Manage computes with the Neon API
 
-Compute actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The following examples demonstrate how to create, view, update, and delete computes using the Neon API. For other compute-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Compute actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). The following examples demonstrate how to create, view, update, and delete computes using the Neon API. For other compute-related API methods, refer to the [Neon API Reference](/docs/reference/api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -311,7 +311,7 @@ curl -X 'POST' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Create compute](https://api-docs.neon.tech/reference/createprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -359,7 +359,7 @@ For attribute definitions, find the [Create compute](https://api-docs.neon.tech/
 
 ### List computes with the API
 
-The following Neon API method lists computes for the specified project. A compute belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectendpoints).
+The following Neon API method lists computes for the specified project. A compute belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/list-project-endpoints).
 
 ```http
 GET /projects/{project_id}/endpoints
@@ -377,7 +377,7 @@ curl -X 'GET' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [List computes](https://api-docs.neon.tech/reference/listprojectendpoints) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List computes](/docs/reference/api/endpoints/list-project-endpoints) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -438,7 +438,7 @@ For attribute definitions, find the [List computes](https://api-docs.neon.tech/r
 
 ### Update a compute with the API
 
-The following Neon API method updates the specified compute. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectendpoint).
+The following Neon API method updates the specified compute. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/update-project-endpoint).
 
 ```http
 PATCH /projects/{project_id}/endpoints/{endpoint_id}
@@ -462,7 +462,7 @@ curl -X 'PATCH' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Update compute](https://api-docs.neon.tech/reference/updateprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Update compute](/docs/reference/api/endpoints/update-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -498,7 +498,7 @@ For attribute definitions, find the [Update compute](https://api-docs.neon.tech/
 
 ### Delete a compute with the API
 
-The following Neon API method deletes the specified compute. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
+The following Neon API method deletes the specified compute. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/delete-project-endpoint).
 
 ```http
 DELETE /projects/{project_id}/endpoints/{endpoint_id}
@@ -516,7 +516,7 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Delete compute](https://api-docs.neon.tech/reference/deleteprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete compute](/docs/reference/api/endpoints/delete-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {

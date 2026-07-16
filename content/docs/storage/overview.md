@@ -7,21 +7,19 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-16T13:37:43.975Z'
 ---
-
-<RequestForm type="backend-platform" title="Get early access to Neon Object Storage" description="Neon Object Storage is in private preview. Drop your email and we'll reach out with access." />
 
 Neon Object Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
 
-> During the private preview, object storage is available for **new projects** in the **AWS us-east-2** region only.
+> During the beta, object storage is available in the **AWS us-east-2** region only.
 
 - **Branches with your database.** Each branch has its own view of storage. Test file uploads and deletions in preview branches without touching production data.
 - **Standard S3 SDKs.** The AWS SDK for JavaScript, boto3, the AWS CLI, the [Files SDK](https://files-sdk.dev), and any other S3-compatible tool works out of the box.
 - **Two access modes.** `private` buckets require authentication for all operations. `public_read` buckets allow anonymous reads with authenticated writes.
 - **One credential system.** The same Neon credential system used by AI Gateway and Functions.
 
-## Quickstart
+## Get started
 
 <DetailIconCards>
 
@@ -32,6 +30,8 @@ Neon Object Storage is S3-compatible object storage built into the Neon backend 
 <a href="/docs/storage/objects" description="Upload, download, list, delete, and generate presigned URLs for objects." icon="data">Objects</a>
 
 <a href="/docs/storage/authentication" description="Understand how Neon credentials map to S3 access keys." icon="lock-landscape">Authentication</a>
+
+<a href="/docs/storage/logs" description="View, search, and download a bucket's logs in the Console." icon="search">Logs</a>
 
 </DetailIconCards>
 

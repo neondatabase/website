@@ -7,7 +7,7 @@ summary: >-
   CLI. Enabling HIPAA on a project is irreversible and triggers a compute
   restart. Breach notifications are issued within five business days.
 enableTableOfContents: true
-updatedOn: '2026-07-10T15:48:27.200Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -92,7 +92,7 @@ curl --request POST \
 '
 ```
 
-To enable HIPAA for an existing project, set `hipaa` to `true` in the `project settings` object using the [Update project API](https://api-docs.neon.tech/reference/updateproject):
+To enable HIPAA for an existing project, set `hipaa` to `true` in the `project settings` object using the [Update project API](/docs/reference/api/projects/update-project):
 
 ```bash
 curl --request PATCH \
@@ -344,7 +344,7 @@ The `pgaudit` extension is preloaded on HIPAA-enabled Neon projects. For extensi
 
 The following features are not currently HIPAA-compliant and should not be used in projects containing HIPAA-protected data:
 
-- [Managed BetterAuth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
+- [Managed Better Auth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
 - [Data API](/docs/data-api/get-started) – Hosted outside Neon’s HIPAA-compliant infrastructure.
 
 ## Security incidents
