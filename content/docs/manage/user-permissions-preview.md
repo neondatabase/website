@@ -4,7 +4,7 @@ subtitle: How organization roles and per-project permissions work in Neon
 summary: >-
   Neon access has two layers. Organization roles (Admin, Editor, Viewer,
   Collaborator) set a baseline across every project, and per-project permissions
-  (Can view, Can edit, Can manage) grant extra access on individual projects. The
+  (Viewer, Editor, Admin) grant extra access on individual projects. The
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
@@ -35,18 +35,18 @@ Access is **closed by default** for Collaborators. Without an explicit per-proje
 
 These examples show how an organization role and per-project grants combine:
 
-| Person         | Organization role | Per-project grant          | Effective access                                         |
-| -------------- | ----------------- | -------------------------- | -------------------------------------------------------- |
-| Team lead      | Admin             | None                       | Full control of the organization and every project       |
-| Staff engineer | Editor            | None                       | Edit every project, but can't delete or transfer them    |
-| Designer       | Viewer            | Can edit on one project    | Read-only across the org, plus full edit on that project |
-| Contractor     | Collaborator      | Can edit on their projects | Access to only the granted projects, nothing else        |
-| Support        | Collaborator      | Can view (temporary)       | Read-only on a single project, removed when done         |
+| Person         | Organization role | Per-project grant        | Effective access                                         |
+| -------------- | ----------------- | ------------------------ | -------------------------------------------------------- |
+| Team lead      | Admin             | None                     | Full control of the organization and every project       |
+| Staff engineer | Editor            | None                     | Edit every project, but can't delete or transfer them    |
+| Designer       | Viewer            | Editor on one project    | Read-only across the org, plus full edit on that project |
+| Contractor     | Collaborator      | Editor on their projects | Access to only the granted projects, nothing else        |
+| Support        | Collaborator      | Viewer (temporary)       | Read-only on a single project, removed when done         |
 
 A couple of behaviors are worth calling out:
 
-- **Viewers can still create their own projects.** The read-only limit applies to projects a Viewer didn't create. Any organization member except a Collaborator can create a project, and whoever creates a project becomes **Can manage** on it.
-- **Deleting a project is a Can manage action**, not an Admin-only one. Anyone with **Can manage** on a project, along with organization Admins, can delete it after typing the project name to confirm.
+- **Viewers can still create their own projects.** The read-only limit applies to projects a Viewer didn't create. Any organization member except a Collaborator can create a project, and whoever creates a project becomes **Admin** on it.
+- **Deleting a project takes Admin access on that project**, not the Admin organization role. Anyone granted **Admin** on a project, along with any organization Admin, can delete it after typing the project name to confirm.
 
 ## Assign project access
 
@@ -65,11 +65,11 @@ Start with the organization role, which sets a person's baseline access across e
 
 ## Grant per-project permissions
 
-To give someone more than their baseline on a particular project, open that project's **Project permissions** page and grant one of three levels to one or more members at once:
+To give someone more than their baseline on a particular project, open that project's **Project permissions** page and grant one of three permission levels to one or more members at once:
 
-- **Can view**: read-only project access
-- **Can edit**: connect, query, and edit project resources
-- **Can manage**: manage access, settings, and the project lifecycle
+- **Viewer**: read-only project access
+- **Editor**: connect, query, and edit project resources
+- **Admin**: manage access, settings, and the project lifecycle
 
 Their access on that project becomes the higher of their organization role and the permission you grant, so a grant only ever adds access.
 
@@ -87,9 +87,9 @@ Every member of an organization has one of four roles. Each role sets a baseline
 
 | Role         | What it can do                                                                                 | Default project access |
 | ------------ | ---------------------------------------------------------------------------------------------- | ---------------------- |
-| Admin        | Full control of the organization and all projects, including billing, members, and settings    | Can manage             |
-| Editor       | Everything except transferring or deleting projects                                            | Can edit               |
-| Viewer       | Read-only access to organization and project metadata. Can't see connection strings or run SQL | Can view               |
+| Admin        | Full control of the organization and all projects, including billing, members, and settings    | Admin                  |
+| Editor       | Everything except transferring or deleting projects                                            | Editor                 |
+| Viewer       | Read-only access to organization and project metadata. Can't see connection strings or run SQL | Viewer                 |
 | Collaborator | No default access. Sees only projects they're explicitly granted                               | None                   |
 
 The following table shows what each role can do at the organization level:
@@ -108,31 +108,31 @@ Personal API keys are available to any member and are scoped to that member's ow
 
 ## Per-project permissions
 
-On top of your organization baseline, an admin can grant you one of three permissions on a specific project. Grant them from the project's **Settings** &rarr; **Project permissions** page, using **Grant permission**:
+On top of your organization baseline, an admin can grant you one of three permission levels on a specific project. These are the same **Viewer**, **Editor**, and **Admin** levels an organization role grants by default. Grant them from the project's **Settings** &rarr; **Project permissions** page, using **Grant permission**:
 
-- **Can view**: Read-only project access.
-- **Can edit**: Connect, query, and edit project resources.
-- **Can manage**: Manage access, settings, and the project lifecycle.
+- **Viewer**: Read-only project access.
+- **Editor**: Connect, query, and edit project resources.
+- **Admin**: Manage access, settings, and the project lifecycle.
 
-The following table shows what each permission allows:
+The following table shows what each level allows:
 
-| Action                                                                                    | Can view | Can edit | Can manage |
-| ----------------------------------------------------------------------------------------- | :------: | :------: | :--------: |
-| See the project and read its metadata, branches, endpoints, databases, and Postgres roles |    ✅    |    ✅    |     ✅     |
-| List snapshots and view the snapshot schedule                                             |    ✅    |    ✅    |     ✅     |
-| Get connection strings and run SQL in the SQL Editor                                      |    ❌    |    ✅    |     ✅     |
-| Create, edit, or delete branches, endpoints, databases, and Postgres roles                |    ❌    |    ✅    |     ✅     |
-| Create, restore, delete, or reschedule snapshots                                          |    ❌    |    ✅    |     ✅     |
-| Configure integrations (GitHub, Vercel, Neon Auth)                                        |    ❌    |    ✅    |     ✅     |
-| Change project settings                                                                   |    ❌    |    ✅    |     ✅     |
-| Manage who can access the project                                                         |    ❌    |    ❌    |     ✅     |
-| Delete the project                                                                        |    ❌    |    ❌    |     ✅     |
+| Action                                                                                    | Viewer | Editor | Admin |
+| ----------------------------------------------------------------------------------------- | :----: | :----: | :---: |
+| See the project and read its metadata, branches, endpoints, databases, and Postgres roles |   ✅   |   ✅   |  ✅   |
+| List snapshots and view the snapshot schedule                                             |   ✅   |   ✅   |  ✅   |
+| Get connection strings and run SQL in the SQL Editor                                      |   ❌   |   ✅   |  ✅   |
+| Create, edit, or delete branches, endpoints, databases, and Postgres roles                |   ❌   |   ✅   |  ✅   |
+| Create, restore, delete, or reschedule snapshots                                          |   ❌   |   ✅   |  ✅   |
+| Configure integrations (GitHub, Vercel, Neon Auth)                                        |   ❌   |   ✅   |  ✅   |
+| Change project settings                                                                   |   ❌   |   ✅   |  ✅   |
+| Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |
+| Delete the project                                                                        |   ❌   |   ❌   |  ✅   |
 
 ### Inherited and explicit access (#inherited-and-explicit-access)
 
 On a project's **Project permissions** page, access shows up in one of two ways:
 
-- **Inherited**: Access comes from the user's organization role, not from a grant on this project. Organization Admins always appear as **Can manage** with an **Inherited** tag, because they can manage every project.
+- **Inherited**: Access comes from the user's organization role, not from a grant on this project. Organization Admins always appear as **Admin** with an **Inherited** tag, because they can manage every project.
 - **Explicit**: The user was granted a permission directly on this project.
 
 When a user has both an organization-role default and an explicit grant, the higher of the two applies.
@@ -143,10 +143,10 @@ When your organization moves to the new model, everyone keeps the access they ha
 
 - **Admins** stay **Admins**.
 - **Members** become **Editors**, with the same access under the new name.
-- **Project creators** become **Can manage** on the projects they created.
-- **Existing shared-project access keeps working.** The older [project sharing](/docs/guides/project-collaboration-guide) feature isn't removed at launch.
+- **Project creators** become **Admin** on the projects they created.
+- **Existing project-share access becomes Editor access.** People who had a project shared with them are migrated to **Editor** on that project, so their access is preserved.
 
-The new **Collaborator** organization role is different from the older project-sharing collaborator, even though they share a name. Project sharing is being deprecated: the new Collaborator role, combined with per-project permissions, replaces it, and existing shared-project access keeps working until that transition completes. For new access, use the **Collaborator** role plus per-project permissions instead of project sharing.
+The new **Collaborator** organization role is different from the older project-sharing collaborator, even though they share a name. Project sharing is being deprecated: the new Collaborator role plus per-project permissions replaces it. For new access, use the **Collaborator** role plus per-project permissions instead of project sharing.
 
 ## Notes and limitations (#notes-and-limitations)
 
