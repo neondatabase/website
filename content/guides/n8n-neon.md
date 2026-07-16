@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to creating an AI-powered knowledge base chatbot 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-27T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-16T01:03:00.406Z'
 ---
 
 This guide demonstrates how to build a powerful **AI-powered internal knowledge base chatbot** using **n8n** and **Neon**. n8n is a low-code platform that allows you to connect various applications and services, enabling you to automate complex processes through a visual workflow editor. In this guide, we'll use n8n to orchestrate the integration between **Google Drive**, **Neon Postgres**, and **Google Gemini** to create a chatbot that can answer questions based on your documents stored in Google Drive. Neon will be used as a vector store to index and retrieve document chunks, while Google Drive will serve as the source of your documents.
@@ -287,6 +287,5 @@ Here, you can see the input message, the AI Agent's response, and the tool (**Po
 - [Neon Documentation](/docs)
 - [`pgvector` extension documentation](/docs/extensions/pgvector)
 - [Build a RAG chatbot with Astro, Postgres, and LlamaIndex](/guides/chatbot-astro-postgres-llamaindex)
-- [RAG Chatbot (OpenAI + LangChain)](/templates/rag-chatbot-langchain)
 
 <NeedHelp/>

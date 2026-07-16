@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-16T01:03:00.406Z'
 ---
 
 ## Our mission
@@ -71,7 +71,7 @@ Independent developers want to build without friction. They don’t want to crea
 - The experience feels lightweight, fast, and developer-first, not enterprise-heavy
 
   <Admonition type="tip" title="Useful links to get started">
-    Check out our [framework guides](/docs/get-started/frameworks), [templates](https://neon.com/templates), [code examples](https://github.com/neondatabase/examples), and join our [community Discord](https://discord.gg/92vNTzKDGp).
+    Check out our [framework guides](/docs/get-started/frameworks), [code examples](https://github.com/neondatabase/examples), and join our [community Discord](https://discord.gg/92vNTzKDGp).
   </Admonition>
 
 ### Startups: From dev to scale

@@ -2550,6 +2550,23 @@ const defaultConfig = {
         destination: '/platform-terms',
         permanent: true,
       },
+      // /demos index and /templates gallery removed (outdated marketing pages).
+      // /demos/* sub-routes (regional-latency, ping-thing) remain as external rewrites below.
+      {
+        source: '/demos',
+        destination: '/use-cases',
+        permanent: true,
+      },
+      {
+        source: '/templates',
+        destination: 'https://github.com/neondatabase/examples',
+        permanent: true,
+      },
+      {
+        source: '/templates/:slug*',
+        destination: 'https://github.com/neondatabase/examples',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
