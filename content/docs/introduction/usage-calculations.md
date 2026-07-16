@@ -8,7 +8,7 @@ summary: >-
   cost-tracking tooling. Plan-specific rates, transfer allowances, and
   granularity lookback limits are documented here.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 This guide helps you use the Neon API to fetch your consumption data, convert raw metrics into human-readable numbers, and understand how your bill is calculated. To monitor usage in the Neon Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -17,7 +17,7 @@ It applies to **Launch**, **Scale**, **Agent**, and **Enterprise** plans. Consum
 
 ## Fetch your usage
 
-The [consumption history endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) returns per-project, per-day (or per-hour, or per-month) usage for every billable metric.
+The [consumption history endpoint](/docs/reference/api/consumption/get-consumption-history-per-project-v2) returns per-project, per-day (or per-hour, or per-month) usage for every billable metric.
 
 ```sh
 curl "https://console.neon.tech/api/v2/consumption_history/v2/projects?\

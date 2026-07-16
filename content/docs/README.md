@@ -788,9 +788,9 @@ Another term for smoke test
 ```md
 <DetailIconCards>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
+<a href="/docs/reference/api/get-started" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
+<a href="/docs/reference/api/get-started" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
 
 </DetailIconCards>
 ```

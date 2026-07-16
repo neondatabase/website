@@ -4,7 +4,7 @@ subtitle: 'Learn how to build Full-Stack Cloud Agents using Cloudflare Sandboxes
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-16T00:00:00.000Z'
-updatedOn: '2026-07-13T02:23:57.749Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 ![Cloudflare Sandbox and Neon Branching architecture](/docs/guides/cloudflare_sandbox_neon_branching.png)
@@ -426,7 +426,7 @@ Because the runner is a standard Cloudflare Worker, you can easily extend it to 
 - **Resource cleanup:** Automatically delete branches when a PR merges using webhooks, or configure [auto-expiring branches](/docs/guides/branch-expiration).
 - **Fallback and recovery:** If an agent breaks its environment, [reset the branch](/docs/guides/reset-from-parent) or use Time Travel before instructing the agent to retry.
 
-For more details on programmatic database management, explore the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) and the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
+For more details on programmatic database management, explore the [Neon API Reference](/docs/reference/api) and the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
 
 ## Conclusion
 
@@ -440,6 +440,6 @@ You have successfully built a custom execution layer that empowers AI agents to 
 - [Neon for AI Agent Platforms](/use-cases/ai-agents)
 - [Cloudflare Sandbox SDK Documentation](https://developers.cloudflare.com/sandbox/)
 - [Anthropic Claude Code](https://code.claude.com/docs/en/overview)
-- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [Neon API Reference](/docs/reference/api)
 
 <NeedHelp />

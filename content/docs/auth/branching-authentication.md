@@ -22,7 +22,7 @@ One of Managed Better Auth's unique features is native support for [database bra
 This gives each branch its own isolated authentication environment, enabling safe testing of permission changes, new OAuth providers, or full application refactors.
 
 <Admonition type="info">
-Managed Better Auth branching is also supported via API. See the [Managed Better Auth API reference](https://api-docs.neon.tech/reference/getneonauth) for a full set of REST API endpoints.
+Managed Better Auth branching is also supported via API. See the [Managed Better Auth API reference](/docs/reference/api/auth/get-neon-auth) for a full set of REST API endpoints.
 </Admonition>
 
 ## How it works
@@ -116,7 +116,7 @@ You can automate this using GitHub Actions. When a PR is opened:
 1.  Create a Neon branch.
 2.  Deploy your frontend/backend to a preview URL.
 3.  Inject the **Branch Auth URL** into the preview deployment's environment variables.
-4.  Set the Redirect URLs in the branch's Auth configuration to point to the preview URL using the [Neon API](https://api-docs.neon.tech/reference/addbranchneonauthtrusteddomain).
+4.  Set the Redirect URLs in the branch's Auth configuration to point to the preview URL using the [Neon API](/docs/reference/api/auth/add-branch-neon-auth-trusted-domain).
 
 Because the branch contains a snapshot of production data, the preview environment is fully functional immediately. You can log in with real test accounts that exist in production, but any actions taken (changing passwords, updating profiles) happen in isolation.
 

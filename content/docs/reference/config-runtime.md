@@ -37,7 +37,7 @@ This package pulls in `esbuild` (a native binary) to bundle Neon Functions for d
 Every function on this page takes `projectId` and a Neon branch id (`br-…`), not a branch name. Look these up yourself before calling in:
 
 - `neon projects list --output json` and `neon branches list --output json` (the [Neon CLI](/docs/cli))
-- The Neon API's [list branches](https://api-docs.neon.tech/reference/listprojectbranches) endpoint
+- The Neon API's [list branches](/docs/reference/api/branches/list-project-branches) endpoint
 - The `.neon` context file written by `neon link` (the CLI's own resolution mechanism, if your script runs alongside it)
 
 Passing a branch name where an id is expected fails with a `PLATFORM_BRANCH_NOT_FOUND` error (see [Error handling](#error-handling)).

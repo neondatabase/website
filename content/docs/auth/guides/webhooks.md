@@ -41,7 +41,7 @@ When you subscribe to `send.otp` or `send.magic_link`, Managed Better Auth skips
 
 ## Configure webhooks
 
-Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS protocol. See the API reference for [Get webhook configuration](https://api-docs.neon.tech/reference/getneonauthwebhookconfig) and [Update webhook configuration](https://api-docs.neon.tech/reference/updateneonauthwebhookconfig).
+Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS protocol. See the API reference for [Get webhook configuration](/docs/reference/api/auth/get-neon-auth-webhook-config) and [Update webhook configuration](/docs/reference/api/auth/update-neon-auth-webhook-config).
 
 ```bash
 PUT /projects/{project_id}/branches/{branch_id}/auth/webhooks

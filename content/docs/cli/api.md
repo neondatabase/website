@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-The `api` command sends an authenticated request to any [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) route and prints the response. Pass an API path as the first argument. The method defaults to `GET`, or `POST` when you supply a body.
+The `api` command sends an authenticated request to any [Neon API](/docs/reference/api) route and prints the response. Pass an API path as the first argument. The method defaults to `GET`, or `POST` when you supply a body.
 
 By default the request uses your [`neon auth`](/docs/cli/auth) credentials. To use a specific key, pass `--api-key` or set `NEON_API_KEY`. The [key's permissions](/docs/manage/api-keys#types-of-api-keys) determine what the request can do.
 
@@ -35,7 +35,7 @@ Pass required parameters with `--query` (`-Q`); add `--include` (`-i`) to print 
 neon api /projects -Q org_id=org-cool-darkness-12345678 -i
 ```
 
-The response is the route's raw JSON. For the fields each route returns, see the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The response is the route's raw JSON. For the fields each route returns, see the [Neon API Reference](/docs/reference/api).
 
 ### Request body
 

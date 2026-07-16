@@ -250,7 +250,7 @@ Some generated type names changed (for example, `DataAPI*` → `DataApi*`). Endp
 ## Next steps
 
 - [Neon Management SDK](/docs/reference/typescript-sdk) — install, configuration, examples, and namespace reference
-- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) — REST endpoint details
+- [Neon API Reference](/docs/reference/api) — REST endpoint details
 - [`@neon/sdk` on GitHub](https://github.com/neondatabase/neon-pkgs/tree/main/packages/sdk) — full method tables and regeneration notes
 
 <NeedHelp />

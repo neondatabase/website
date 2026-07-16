@@ -123,7 +123,7 @@ Generate a cookie secret: `openssl rand -base64 32`
 
 ## Database Queries (PostgREST / Data API)
 
-> **Prerequisite:** The Data API must be enabled per branch before making queries. Enable it via the Neon Console (Project → Data API), the MCP server's `provision_neon_data_api` tool, or the [REST API](https://api-docs.neon.tech/reference/createprojectbranchdataapi) (`POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}`). Without it, requests will return 404.
+> **Prerequisite:** The Data API must be enabled per branch before making queries. Enable it via the Neon Console (Project → Data API), the MCP server's `provision_neon_data_api` tool, or the [REST API](/docs/reference/api/dataapi/create-project-branch-data-api) (`POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}`). Without it, requests will return 404.
 
 All query methods follow PostgREST syntax (same as Supabase).
 
