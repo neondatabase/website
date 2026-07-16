@@ -8,12 +8,20 @@
  * It must not be hand-edited in this repo: the only supported way to change it is
  * to re-sync from upstream (`npm run update:skills`).
  *
- * This check fetches each skill's file tree from its upstream repo at the ref
- * pinned in config/skills.json (currently `main`, i.e. latest) and fails if the
- * vendored copy has drifted:
- *   - a file's content differs from upstream,
- *   - a file exists upstream but is missing locally, or
- *   - a file exists locally but not upstream (hand-added).
+ * This check does two things and fails on either:
+ *
+ *   1. Upstream sync — fetches each skill's file tree from its upstream repo at
+ *      the ref pinned in config/skills.json (currently `main`, i.e. latest) and
+ *      fails if a file that exists upstream is missing locally or its content
+ *      differs. Local-only files (e.g. the neon-postgres reference corpus the
+ *      website maintains itself) have no upstream counterpart and are reported
+ *      as a non-failing note.
+ *
+ *   2. Link integrity — every relative on-disk link in each SKILL.md must resolve
+ *      to a file that exists, so a SKILL.md can never point at a reference file
+ *      that isn't vendored here. External URLs, in-page anchors, and site-absolute
+ *      (/…) links are left to linkinator; reference files' own repo-relative links
+ *      (e.g. ../../README.md) are upstream artifacts and out of scope.
  *
  * How it compares: the GitHub contents API returns a git blob `sha` for every
  * file in a directory listing. We compute the same git blob SHA-1 for each local
@@ -97,6 +105,28 @@ function walkLocalFiles(dir) {
   return out;
 }
 
+// Markdown inline link / image targets: [text](target) and ![alt](target).
+const MD_LINK_RE = /!?\[[^\]]*\]\(\s*(<[^>]+>|[^)\s]+)(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)/g;
+
+/**
+ * Relative on-disk link targets in a markdown string. Skips external URLs
+ * (http/https/mailto/etc.), in-page anchors (#…), and site-absolute paths (/…)
+ * — those are validated elsewhere (linkinator). Returns paths with any #anchor
+ * or ?query stripped, so they can be resolved against the file on disk.
+ */
+function extractRelativeLinks(markdown) {
+  const links = [];
+  for (const match of markdown.matchAll(MD_LINK_RE)) {
+    let target = match[1].trim().replace(/^<|>$/g, '');
+    if (!target) continue;
+    if (/^[a-z][a-z0-9+.-]*:/i.test(target)) continue; // scheme: http:, mailto:, …
+    if (target.startsWith('#') || target.startsWith('/')) continue; // anchor / site-absolute
+    target = target.split('#')[0].split('?')[0].trim();
+    if (target) links.push(target);
+  }
+  return links;
+}
+
 async function checkSkill(skill) {
   const {
     name,
@@ -151,6 +181,20 @@ async function checkSkill(skill) {
     }
   }
 
+  // Link integrity: every relative on-disk link in SKILL.md must resolve to a
+  // file that exists — so a SKILL.md can never point at a reference file that
+  // isn't vendored here. (Only SKILL.md is checked: reference files often carry
+  // repo-relative links like ../../README.md that are upstream-repo artifacts,
+  // not links into the hosted skill; those are out of scope.)
+  const skillMdPath = path.join(localSkillDir, 'SKILL.md');
+  if (fs.existsSync(skillMdPath)) {
+    for (const link of extractRelativeLinks(fs.readFileSync(skillMdPath, 'utf8'))) {
+      if (!fs.existsSync(path.resolve(localSkillDir, link))) {
+        problems.push(`SKILL.md links to missing file: ${link}`);
+      }
+    }
+  }
+
   return { name, source, upstreamCount: upstreamFiles.length, problems, extras };
 }
 
@@ -197,12 +241,13 @@ async function main() {
 
   if (drifted.length > 0) {
     console.error(
-      `\n[FAIL] ${drifted.length} skill(s) drifted from upstream.\n` +
-        `Skill content under public/docs/ai/skills/ is vendored and read-only — do not hand-edit it.\n` +
-        `Re-sync from upstream instead:\n` +
-        `  npm run update:skills\n` +
-        `then commit the regenerated files. To change a skill's content, edit its source repo\n` +
-        `(neondatabase/agent-skills or the per-skill "repo" in config/skills.json) first.`
+      `\n[FAIL] ${drifted.length} skill(s) have problems (see above).\n` +
+        `- content differs / missing upstream: skill content under public/docs/ai/skills/ is\n` +
+        `  vendored and read-only — do not hand-edit it. Re-sync instead: npm run update:skills\n` +
+        `  (to change a skill, edit its source repo — neondatabase/agent-skills or the per-skill\n` +
+        `  "repo" in config/skills.json — first).\n` +
+        `- SKILL.md links to missing file: a SKILL.md points at a reference file that isn't\n` +
+        `  vendored here; add the referenced file upstream and re-sync, or fix the link.`
     );
     process.exit(1);
   }
