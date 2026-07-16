@@ -11,7 +11,7 @@ summary: >-
   `pgoutput` and `wal2json`.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
@@ -37,7 +37,7 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 
 <TabItem>
 
-Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+Use the [Update project](/docs/reference/api/projects/update-project) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/$PROJECT_ID' \

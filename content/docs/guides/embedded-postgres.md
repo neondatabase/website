@@ -11,7 +11,7 @@ summary: >-
   quota enforcement, and usage monitoring via the metrics endpoint.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
@@ -67,7 +67,7 @@ To interact with the Neon platform, you'll need an API key:
 2. Store the key securely in your environment variables.
 3. Use the API key to authenticate requests to the Neon API.
 
-For detailed API documentation, refer to the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api), which includes links to [Neon API examples](https://api-docs.neon.tech/reference/getting-started-with-neon-api#neon-api-examples).
+For detailed API documentation, refer to the [Neon API Reference](/docs/reference/api), which includes links to [Neon API examples](/docs/reference/api/get-started).
 
 Alternatively, use our official SDKs for easier integration:
 
@@ -76,7 +76,7 @@ Alternatively, use our official SDKs for easier integration:
 
 ## Create projects for your users
 
-Use the [Create project API](https://api-docs.neon.tech/reference/createproject) to provision a new Postgres database for each user:
+Use the [Create project API](/docs/reference/api/projects/create-project) to provision a new Postgres database for each user:
 
 ```bash
 curl --request POST \
@@ -96,7 +96,7 @@ curl --request POST \
 The response includes connection details you can provide to your user. Projects are created in under 1 second.
 
 <Admonition type="tip" title="Custom names">
-You can customize the default database and role names when creating a project. See the [Create project API docs](https://api-docs.neon.tech/reference/createproject) for details.
+You can customize the default database and role names when creating a project. See the [Create project API docs](/docs/reference/api/projects/create-project) for details.
 </Admonition>
 
 ## Set compute and scaling behavior
@@ -232,7 +232,7 @@ Each user can:
 - Reset branches to production state
 - Delete branches when done
 
-This is particularly valuable for platforms where users need to test schema changes or experiment with data safely. Branching is fully supported by the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). For examples, see [Branching with the Neon API](/docs/manage/branches#branching-with-the-neon-api).
+This is particularly valuable for platforms where users need to test schema changes or experiment with data safely. Branching is fully supported by the [Neon API](/docs/reference/api). For examples, see [Branching with the Neon API](/docs/manage/branches#branching-with-the-neon-api).
 
 ### Schema migrations
 
@@ -249,7 +249,7 @@ We're here to help you build your integration:
 
 <DetailIconCards>
 
-<a href="/docs/reference/api-reference" description="Explore all available API endpoints" icon="transactions">Neon API Reference</a>
+<a href="/docs/reference/api" description="Explore all available API endpoints" icon="transactions">Neon API Reference</a>
 
 <a href="/contact-sales" description="Discuss your integration with our team" icon="todo">Talk to Sales</a>
 

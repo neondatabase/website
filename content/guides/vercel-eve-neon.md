@@ -4,7 +4,7 @@ subtitle: "Learn how to build a Slack-based database assistant with Eve that pro
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: "2026-06-23T00:00:00.000Z"
-updatedOn: '2026-06-25T09:43:55.873Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 [Eve](https://eve.dev) by [Vercel](https://vercel.com) is a filesystem‑first framework for building durable backend agents. You define an agent as files (its instructions, tools, skills, channels, and schedules), and Eve takes care of the rest: stable HTTP routes, reconnectable session streams, durable state, and native human‑in‑the‑loop approvals. Agents built with Eve can run for days, pause for human review, and resume exactly where they left off.
@@ -161,7 +161,7 @@ code .
 Install the [Neon API TypeScript SDK](/docs/reference/typescript-sdk) for branch management and the [serverless driver](/docs/serverless/serverless-driver) for querying branches:
 
 ```bash
-npm install @neondatabase/api-client @neondatabase/serverless
+npm install @neon/sdk @neondatabase/serverless
 ```
 
 Now configure the environment variables your agent needs. Your `.env.local` file should already contain a `VERCEL_OIDC_TOKEN` from the Vercel link step. Add your Neon credentials to the same file:
@@ -186,9 +186,13 @@ Your Eve agent needs a way to create and delete database branches programmatical
 Create `agent/lib/neon.ts`:
 
 ```typescript
-import { createApiClient, EndpointType } from "@neondatabase/api-client";
+import { createNeonClient } from "@neon/sdk";
 
-const api = createApiClient({ apiKey: process.env.NEON_API_KEY! });
+const neon = createNeonClient({
+  apiKey: process.env.NEON_API_KEY!,
+  throwOnError: true,
+  waitForReadiness: true,
+});
 const projectId = process.env.NEON_PROJECT_ID!;
 
 export interface Branch {
@@ -200,19 +204,22 @@ export interface Branch {
 export async function createBranch(name: string): Promise<Branch> {
   const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
 
-  const res = await api.createProjectBranch(projectId, {
-    branch: { name, expires_at: expiresAt },
-    endpoints: [{ type: EndpointType.ReadWrite }],
+  const branch = await neon.branches.create(projectId, {
+    name,
+    expires_at: expiresAt,
   });
 
-  const id = res.data.branch?.id;
-  const connectionUri = res.data.connection_uris?.[0]?.connection_uri;
+  await neon.postgres.endpoints.create(projectId, {
+    branch_id: branch.id,
+    type: "read_write",
+  });
 
-  if (!id || !connectionUri) {
-    throw new Error("Failed to create branch or retrieve connection URI");
-  }
+  const connectionUri = await neon.postgres.connectionString({
+    projectId,
+    branchId: branch.id,
+  });
 
-  return { id, name, connectionUri };
+  return { id: branch.id, name, connectionUri };
 }
 ```
 
@@ -607,7 +614,7 @@ By pairing Vercel Eve's durable workflows and HITL approvals with Neon's instant
 - [Neon Database Branching](/docs/introduction/branching)
 - [Neon MCP Server](/docs/ai/neon-mcp-server)
 - [Neon Agent Skills](/docs/ai/agent-skills)
-- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [Neon API Reference](/docs/reference/api)
 - [Vercel Connect for Slack](https://vercel.com/docs/connect)
 
 <NeedHelp />

@@ -134,7 +134,7 @@ DROP EXTENSION pg_search CASCADE;
 SELECT extname FROM pg_extension WHERE extname = 'pg_search';   -- returns no rows
 ```
 
-Finally, restart the compute to complete the migration. In the [Neon Console](https://console.neon.tech), open the compute's **⋯** menu and select **Restart compute**, or call the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API.
+Finally, restart the compute to complete the migration. In the [Neon Console](https://console.neon.tech), open the compute's **⋯** menu and select **Restart compute**, or call the [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API.
 
 Your search now runs entirely on `lakebase_text`.
 

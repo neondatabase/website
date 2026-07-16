@@ -62,12 +62,6 @@ export default {
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
   },
-  demos: {
-    title: 'Serverless showcase: unleashing the power of Neon',
-    description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
-    pathname: LINKS.demos,
-    imagePath: '/images/social-previews/demos.jpg',
-  },
   enterprise: {
     title: 'Neon for Enterprise - Neon',
     description:

@@ -8,7 +8,7 @@ summary: >-
   GitHub Actions, or Githooks, and for connecting branches to Vercel preview
   deployments or restoring data with Time Travel.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -28,6 +28,12 @@ Learn about branching and how you can apply it in your development workflows.
 <a href="/docs/guides/branching-schema-only" description="Learn how you can protect sensitive data with schema-only branches" icon="split-branch">Schema-only branches</a>
 
 <a href="/docs/auth/branching-authentication" description="Test sign-in, OAuth, and permissions in isolated branches without touching production" icon="lock-landscape">Branching authentication</a>
+
+<a href="/docs/storage/overview" description="Each branch gets its own isolated Object Storage namespace" icon="data">Neon Object Storage</a>
+
+<a href="/docs/compute/functions/overview" description="Each branch runs its own Neon Functions deployment at its own URL" icon="code">Neon Functions</a>
+
+<a href="/docs/ai-gateway/overview" description="Each branch gets its own Neon AI Gateway endpoint" icon="sparkle">Neon AI Gateway</a>
 
 </DetailIconCards>
 

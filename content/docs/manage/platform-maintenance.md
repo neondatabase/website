@@ -9,7 +9,7 @@ summary: >-
   timeouts, and pooling strategies for strict SLOs.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon occasionally performs essential **platform maintenance** outside of [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.
@@ -43,6 +43,6 @@ If your application has strict SLOs (Service Level Objectives) or availability r
 - [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres)
 - [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application)
 
-If you use the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap it, apply the same retry logic to those calls.
+If you use the [Neon API](/docs/reference/api) or [SDKs](/docs/reference/sdk) that wrap it, apply the same retry logic to those calls.
 
 <NeedHelp/>

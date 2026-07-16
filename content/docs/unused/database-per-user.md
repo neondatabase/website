@@ -2,7 +2,7 @@
 title: Neon for Database-per-user
 subtitle: How to configure Neon for multi-tenancy - plus a few design tips
 enableTableOfContents: true
-updatedOn: '2026-03-09T15:00:58.543Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -275,7 +275,7 @@ In this example, the same approach was used to create the following projects:
 - Finance Co
 - Talent Biz
 
-To interact with the Neon API, you'll need to generate an API key. For more information, refer to the Neon documentation on [creating an API key](https://api-docs.neon.tech/reference/createapikey).
+To interact with the Neon API, you'll need to generate an API key. For more information, refer to the Neon documentation on [creating an API key](/docs/reference/api/api-keys/create-api-key).
 
 #### Generating a workflow to prepare for migrations
 

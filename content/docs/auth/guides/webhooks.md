@@ -2,7 +2,7 @@
 title: Webhooks
 subtitle: Handle authentication events with custom server logic
 summary: >-
-  Neon Auth webhooks send HTTP POST requests to your server when authentication
+  Managed Better Auth webhooks send HTTP POST requests to your server when authentication
   events occur, letting you replace the built-in email provider with custom
   delivery channels (SMS, WhatsApp, custom email) and intercept user signups
   before they are written to the database. Use this page when you need to
@@ -12,18 +12,18 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Neon Auth webhooks send HTTP POST requests to your server when authentication events occur.
+Managed Better Auth webhooks send HTTP POST requests to your server when authentication events occur.
 
-By default, Neon Auth handles OTP and magic link delivery through its built-in email provider. Webhooks let you replace this with your own delivery channels (SMS, custom email templates, WhatsApp) so you control how verification messages reach your users. Webhooks also let you hook into the user creation lifecycle to validate signups before they happen or sync new user data to external systems like CRMs and analytics platforms.
+By default, Managed Better Auth handles OTP and magic link delivery through its built-in email provider. Webhooks let you replace this with your own delivery channels (SMS, custom email templates, WhatsApp) so you control how verification messages reach your users. Webhooks also let you hook into the user creation lifecycle to validate signups before they happen or sync new user data to external systems like CRMs and analytics platforms.
 
 For a quick overview of available email customization options, check out [Customize emails](/docs/auth/guides/customize-emails).
 
-For a step-by-step Next.js walkthrough that implements signature verification, custom OTP and magic link emails with Resend, blocking signups by email domain, optional SMS delivery, and local testing with ngrok, see [Customizing Neon Auth with Webhooks](https://neon.com/guides/neon-auth-webhooks-nextjs).
+For a step-by-step Next.js walkthrough that implements signature verification, custom OTP and magic link emails with Resend, blocking signups by email domain, optional SMS delivery, and local testing with ngrok, see [Customizing Managed Better Auth with Webhooks](https://neon.com/guides/neon-auth-webhooks-nextjs).
 
 ## Supported events
 
@@ -37,11 +37,11 @@ For a step-by-step Next.js walkthrough that implements signature verification, c
 
 **Blocking** events pause the auth flow until your server responds (or the timeout expires). **Non-blocking** events are fire-and-forget; failures do not affect the user.
 
-When you subscribe to `send.otp` or `send.magic_link`, Neon Auth skips its built-in email delivery for that event. Your webhook handler is responsible for delivering the code or link.
+When you subscribe to `send.otp` or `send.magic_link`, Managed Better Auth skips its built-in email delivery for that event. Your webhook handler is responsible for delivering the code or link.
 
 ## Configure webhooks
 
-Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS protocol. See the API reference for [Get webhook configuration](https://api-docs.neon.tech/reference/getneonauthwebhookconfig) and [Update webhook configuration](https://api-docs.neon.tech/reference/updateneonauthwebhookconfig).
+Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS protocol. See the API reference for [Get webhook configuration](/docs/reference/api/auth/get-neon-auth-webhook-config) and [Update webhook configuration](/docs/reference/api/auth/update-neon-auth-webhook-config).
 
 ```bash
 PUT /projects/{project_id}/branches/{branch_id}/auth/webhooks
@@ -59,13 +59,19 @@ Both endpoints use the following fields:
 
 ### Webhook URL requirements
 
-Neon Auth validates `webhook_url` when you configure webhooks to reduce SSRF risk. Your URL must meet these rules:
+Managed Better Auth validates `webhook_url` when you configure webhooks to reduce SSRF risk. Your URL must meet these rules:
 
 - **HTTPS only** — HTTP URLs are rejected.
 - **Hostname required** — Use a domain name (for example `https://your-app.com/webhooks/neon-auth`). Raw IP addresses (for example `https://93.184.216.34/webhook`) are rejected, including public IPs.
 - **No internal targets** — Localhost, private IP addresses, link-local addresses (including cloud metadata endpoints), and encoded IP bypass formats (octal, decimal, hex) are blocked.
+- **No redirects** — Webhook delivery does not follow HTTP `3xx` redirects. Configure the final HTTPS endpoint directly.
+- **DNS pinning during delivery** — Neon Auth validates the hostname's resolved IP addresses and only connects to that validated set. If DNS later resolves the same hostname to a different IP during delivery, the delivery is blocked as a DNS rebinding attempt.
 
 Digit-prefixed domains such as `1password.com` are allowed. If configuration fails validation, the API returns an error with code `INVALID_WEBHOOK_URL_FORMAT`.
+
+<Admonition type="warning" title="Internal webhook targets are not supported">
+Webhook endpoints that point at private networks, localhost, cloud metadata services, raw IP literals, or endpoints reached only after a redirect are rejected or blocked during delivery. If an existing webhook depended on an internal target, move it behind a public HTTPS hostname before enabling Neon Auth webhooks.
+</Admonition>
 
 ### Set or update configuration
 
@@ -107,7 +113,7 @@ Both endpoints return the configuration in the same format:
 
 ### Delete a webhook
 
-To delete a webhook and stop receiving authentication events, update your configuration by setting the `enabled` field to `false` using the update endpoint. This disables the webhook and resumes Neon Auth's default delivery behavior for all events.
+To delete a webhook and stop receiving authentication events, update your configuration by setting the `enabled` field to `false` using the update endpoint. This disables the webhook and resumes Managed Better Auth's default delivery behavior for all events.
 
 ```bash
 curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/webhooks" \
@@ -148,7 +154,7 @@ All events share a common JSON envelope:
 }
 ```
 
-The `user` object fields are all optional and vary by event. Available fields: `id`, `email`, `name`, `phone_number`, `image`, `email_verified`, `phone_number_verified`, `created_at`.
+The `user` object uses a fixed allowlist. Fields are optional and vary by event; fields that are not present are omitted. Available fields: `id`, `name`, `email`, `image`, `role`, `banned`, `email_verified`, `phone_number`, `phone_number_verified`, `created_at`, `updated_at`, `ban_reason`, `ban_expires`, `two_factor_enabled`, `is_anonymous`. Neon Auth drops any user fields outside this allowlist, including new Better Auth or plugin fields that have not been explicitly added to the webhook contract.
 
 ### `send.otp` event data
 
@@ -161,7 +167,7 @@ The `user` object fields are all optional and vary by event. Available fields: `
 | `ip_address`          | string            | Requester's IP address                                      |
 | `user_agent`          | string            | Requester's user agent                                      |
 
-When `delivery_preference` is `"sms"`, the event is fired by the [Phone Number plugin](/docs/auth/guides/plugins/phone-number). Your handler is responsible for delivering the OTP through your SMS provider. Because Neon Auth does not deliver SMS, a subscribed `send.otp` webhook is a hard requirement for the Phone Number plugin.
+When `delivery_preference` is `"sms"`, the event is fired by the [Phone Number plugin](/docs/auth/guides/plugins/phone-number). Your handler is responsible for delivering the OTP through your SMS provider. Because Managed Better Auth does not deliver SMS, a subscribed `send.otp` webhook is a hard requirement for the Phone Number plugin.
 
 ### `send.magic_link` event data
 
@@ -186,6 +192,8 @@ These events fire only when a new user record is created in the database. They d
 | `ip_address`    | string | Requester's IP address                                |
 | `user_agent`    | string | Requester's user agent                                |
 
+If sign-up metadata is present and passes validation, it is included as `event_data.signup_metadata`. To limit payload size and prevent oversized egress, Neon Auth only includes `signup_metadata` when it is a plain object, serializes to at most 10 KiB of UTF-8 JSON, and is nested no more than 5 levels deep. Oversized, too-deep, array, or primitive metadata is dropped from the webhook payload.
+
 ### `phone_number.verified` event data
 
 Fires non-blocking after a user successfully verifies a phone number via the [Phone Number plugin](/docs/auth/guides/plugins/phone-number). The `user` object includes the full user context, including `phone_number` and `phone_number_verified`.
@@ -199,7 +207,7 @@ Fires non-blocking after a user successfully verifies a phone number via the [Ph
 
 ## Signature verification
 
-Neon Auth uses asymmetric EdDSA (Ed25519) signatures with detached JWS, so key rotation does not require reconfiguring your endpoint. Verify signatures before processing webhooks.
+Managed Better Auth uses asymmetric EdDSA (Ed25519) signatures with detached JWS, so key rotation does not require reconfiguring your endpoint. Verify signatures before processing webhooks.
 
 ### Request headers
 
@@ -383,6 +391,6 @@ The 15-second global timeout runs from the start of the first attempt. Each atte
 
 ## Testing and debugging
 
-Neon Auth does not currently support test events, event logs, or redelivery. To test webhooks during development, expose a local server using a tunneling tool (for example, ngrok) and configure the tunnel's **HTTPS hostname** as your webhook URL. Neon Auth rejects localhost, private IP addresses, and raw IP literals. See [Webhook URL requirements](#webhook-url-requirements).
+Managed Better Auth does not currently support test events, event logs, or redelivery. To test webhooks during development, expose a local server using a tunneling tool (for example, ngrok) and configure the tunnel's **HTTPS hostname** as your webhook URL. Managed Better Auth rejects localhost, private IP addresses, and raw IP literals. See [Webhook URL requirements](#webhook-url-requirements).
 
 <NeedHelp/>

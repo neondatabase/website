@@ -15,7 +15,7 @@ nextLink:
 
 ## Short answer
 
-Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/cli), or the [API](/docs/reference/api-reference). Free accounts include 100 projects.
+Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/cli), or the [API](/docs/reference/api). Free accounts include 100 projects.
 
 ## How the hierarchy works
 
@@ -54,7 +54,7 @@ neon projects create --name acme-corp --region-id aws-us-east-1
 neon connection-string --project-id quiet-frost-12345
 ```
 
-For programmatic provisioning (for example, a new database per signed-up customer), use the [API](/docs/reference/api-reference) or the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
+For programmatic provisioning (for example, a new database per signed-up customer), use the [API](/docs/reference/api) or the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
 
 ## Organizations and access control
 

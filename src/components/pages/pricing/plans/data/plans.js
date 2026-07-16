@@ -54,21 +54,21 @@ export default {
     },
     {
       rows: '1',
-      feature: 'Compute',
+      feature: 'Postgres database',
     },
     {
       rows: '2',
       feature: {
-        title: 'Rates',
+        title: 'Compute rates',
       },
       free: '100 CU-hours<span>Per Project</span>',
       launch: '$0.106 per CU-hour',
       scale: '$0.222 per CU-hour',
     },
     {
-      rows: '1-2',
+      rows: '2',
       feature: {
-        title: 'Sizes',
+        title: 'Compute sizes',
       },
       free: 'Up to 2 CU (8 GB RAM)',
       launch: 'Up to 16 CU (64 GB RAM)',
@@ -94,13 +94,9 @@ export default {
       scale: 'Configurable',
     },
     {
-      rows: '1',
-      feature: 'Storage',
-    },
-    {
       rows: '2',
       feature: {
-        title: 'Database',
+        title: 'Database storage',
         subtitle: 'Root and child branches',
       },
       free: 'Free<span>0.5 GB per Project</span>',
@@ -149,29 +145,50 @@ export default {
     },
     {
       rows: '1',
-      feature: 'Auth',
+      feature: 'Backend',
     },
     {
       rows: '3',
       feature: {
-        title: 'MAU',
-        subtitle: 'Monthly Active Users',
+        title: 'Managed Better Auth',
       },
-      free: 'Up to 60k',
+      free: 'Up to 60k MAUs',
       launch:
-        "Up to 1M <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
       scale:
-        "Up to 1M <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
     },
     {
       rows: '2',
       feature: {
-        title: 'MFA',
-        subtitle: 'Multi-Factor Authentication',
+        title: 'Object Storage',
+        tag: { label: 'Beta', theme: 'orange-muted' },
       },
-      free: true,
-      launch: true,
-      scale: true,
+      free: 'No charges applied during beta, with usage limits',
+      launch: 'No charges applied during beta, with usage limits',
+      scale: 'No charges applied during beta, with usage limits',
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Functions',
+        tag: { label: 'Beta', theme: 'orange-muted' },
+      },
+      free: 'No charges applied during beta, with usage limits',
+      launch: 'No charges applied during beta, with usage limits',
+      scale: 'No charges applied during beta, with usage limits',
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'AI Gateway',
+        tag: { label: 'Beta', theme: 'orange-muted' },
+      },
+      free: false,
+      launch:
+        'No charges applied during beta. After beta, pricing will match model provider (no markup)',
+      scale:
+        'No charges applied during beta. After beta, pricing will match model provider (no markup)',
     },
     {
       rows: '1',

@@ -3,7 +3,7 @@
     "id": "neon",
     "name": "Neon",
     "npm": "@ai-sdk/openai-compatible",
-    "api": "${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1",
+    "api": "${NEON_AI_GATEWAY_BASE_URL}/v1",
     "env": [
       "NEON_AI_GATEWAY_BASE_URL",
       "NEON_AI_GATEWAY_TOKEN"
@@ -118,7 +118,7 @@
         "tool_call": true,
         "temperature": true,
         "open_weights": false,
-        "knowledge": "2025-03-31",
+        "knowledge": "2025-05",
         "release_date": "2025-11-24",
         "last_updated": "2025-11-24",
         "modalities": {
@@ -198,9 +198,14 @@
             "type": "toggle"
           },
           {
-            "type": "budget_tokens",
-            "min": 1024,
-            "max": 127999
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
           }
         ],
         "tool_call": true,
@@ -242,14 +247,20 @@
             "type": "toggle"
           },
           {
-            "type": "budget_tokens",
-            "min": 1024,
-            "max": 127999
+            "type": "effort",
+            "values": [
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ]
           }
         ],
         "tool_call": true,
         "temperature": false,
         "open_weights": false,
+        "knowledge": "2026-01",
         "release_date": "2026-05-28",
         "last_updated": "2026-05-28",
         "modalities": {
@@ -516,7 +527,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -561,7 +573,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -606,7 +619,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -651,7 +665,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -696,7 +711,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -740,7 +756,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -786,7 +803,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -832,7 +850,8 @@
             "pdf"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -879,7 +898,8 @@
             "pdf"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -926,7 +946,8 @@
             "pdf"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -988,7 +1009,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -1034,7 +1056,8 @@
             "image"
           ],
           "output": [
-            "text"
+            "text",
+            "image"
           ]
         },
         "limit": {
@@ -1583,10 +1606,13 @@
         "reasoning": true,
         "reasoning_options": [
           {
-            "type": "toggle"
-          },
-          {
-            "type": "budget_tokens"
+            "type": "effort",
+            "values": [
+              "none",
+              "low",
+              "medium",
+              "high"
+            ]
           }
         ],
         "tool_call": true,

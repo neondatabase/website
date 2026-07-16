@@ -12,7 +12,7 @@ summary: >-
   ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query LFC
   and prefetch metrics without requiring the extension.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -26,9 +26,9 @@ The `neon_stat_file_cache` view provides insights into how effectively your Neon
 
 ## What is the Local File Cache?
 
-Neon computes have a Local File Cache (LFC), which is a layer of caching that stores frequently accessed data in the local memory of the Neon compute. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), the LFC reduces latency and improves query performance by minimizing the need to fetch data from Neon storage. The LFC acts as an add-on or extension of Postgres shared buffers. In Neon computes, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends the cache memory to approximately 75% of your compute's RAM. To view the LFC size for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+Neon computes have a Local File Cache (LFC), which is a layer of caching that stores frequently accessed data in the local memory of the Neon compute. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), the LFC reduces latency and improves query performance by minimizing the need to fetch data from database storage. The LFC acts as an add-on or extension of Postgres shared buffers. In Neon computes, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends the cache memory to approximately 75% of your compute's RAM. To view the LFC size for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
-When data is requested, Postgres checks shared buffers first, then the LFC. If the requested data is not found in the LFC, it is read from Neon storage. Shared buffers and the LFC both cache your most recently accessed data, but they may not cache exactly the same data due to different cache eviction patterns. The LFC is also much larger than shared buffers, so it stores significantly more data.
+When data is requested, Postgres checks shared buffers first, then the LFC. If the requested data is not found in the LFC, it is read from database storage. Shared buffers and the LFC both cache your most recently accessed data, but they may not cache exactly the same data due to different cache eviction patterns. The LFC is also much larger than shared buffers, so it stores significantly more data.
 
 ## Monitoring Local File Cache usage
 
@@ -38,11 +38,11 @@ You can monitor Local File Cache (LFC) usage by installing the `neon` extension 
 
 The `neon_stat_file_cache` view includes the following metrics:
 
-- `file_cache_misses`: The number of times the requested page block is not found in Postgres shared buffers or the LFC. In this case, the page block is retrieved from Neon storage.
+- `file_cache_misses`: The number of times the requested page block is not found in Postgres shared buffers or the LFC. In this case, the page block is retrieved from database storage.
 - `file_cache_hits`: The number of times the requested page block was not found in Postgres shared buffers but was found in the LFC.
 - `file_cache_used`: The number of times the LFC was accessed.
-- `file_cache_writes`: The number of writes to the LFC. A write occurs when a requested page block is not found in Postgres shared buffers or the LFC. In this case, the data is retrieved from Neon storage and then written to shared buffers and the LFC.
-- `file_cache_hit_ratio`: The percentage of database requests that are served from the LFC rather than Neon storage. This is a measure of cache efficiency, indicating how often requested data is found in the cache. A higher cache hit ratio suggests better performance, as accessing data from memory is faster than accessing data from storage. The ratio is calculated using the following formula:
+- `file_cache_writes`: The number of writes to the LFC. A write occurs when a requested page block is not found in Postgres shared buffers or the LFC. In this case, the data is retrieved from database storage and then written to shared buffers and the LFC.
+- `file_cache_hit_ratio`: The percentage of database requests that are served from the LFC rather than database storage. This is a measure of cache efficiency, indicating how often requested data is found in the cache. A higher cache hit ratio suggests better performance, as accessing data from memory is faster than accessing data from storage. The ratio is calculated using the following formula:
 
   ```
   file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100

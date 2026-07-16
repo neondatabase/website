@@ -2,16 +2,16 @@
 title: Buckets
 subtitle: Create and manage storage buckets
 summary: >-
-  Neon Storage buckets hold your objects and branch with your database. Create
+  Neon Object Storage buckets hold your objects and branch with your database. Create
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-15T23:27:36.554Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
 
-A bucket is a named container for objects in Neon Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
+A bucket is a named container for objects in Neon Object Storage. Buckets are scoped to a branch and inherit from parent branches when a new branch is created. No data is copied on fork.
 
 ## Create a bucket
 
@@ -162,10 +162,10 @@ aws s3api delete-bucket \
 
 ## Bucket branching
 
-When you create a new branch, it inherits all buckets from its parent at the point of forking. No data is copied. From that point on:
+When you create a new branch, it inherits all buckets from its parent, including the objects already in them at the moment of forking — the same copy-on-write model Neon uses for branching Postgres data, so nothing is duplicated upfront. From that point on:
 
 - Creating or deleting a bucket on a child branch does not affect the parent.
-- Objects uploaded to a child branch are only visible on that branch and its descendants.
+- New uploads, overwrites, and deletes on a child branch are only visible on that branch and its descendants, even for objects that existed at fork time.
 - The parent branch continues to see its own state unchanged.
 
 This makes it safe to test bucket changes in a preview branch without affecting production.
