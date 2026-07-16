@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-16T18:26:44.857Z'
+updatedOn: '2026-07-16T19:38:01.848Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -117,7 +117,7 @@ The following table shows what each level allows:
 | Get connection strings and run SQL in the SQL Editor                                      |   ❌   |   ✅   |  ✅   |
 | Create, edit, or delete branches, endpoints, databases, and Postgres roles                |   ❌   |   ✅   |  ✅   |
 | Create, restore, delete, or reschedule snapshots                                          |   ❌   |   ✅   |  ✅   |
-| Configure integrations (GitHub, Vercel, Neon Auth)                                        |   ❌   |   ✅   |  ✅   |
+| Configure integrations (GitHub, Vercel, Managed Better Auth)                              |   ❌   |   ✅   |  ✅   |
 | Change project settings                                                                   |   ❌   |   ✅   |  ✅   |
 | Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |
 | Delete the project                                                                        |   ❌   |   ❌   |  ✅   |
