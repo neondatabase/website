@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:49:46.697Z'
+updatedOn: '2026-07-16T00:28:25.139Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -165,7 +165,7 @@ When your code runs inside Neon Functions, Neon injects storage credentials auto
 
 See [Environment variables](/docs/compute/functions/environment-variables) for the full list of variables Neon injects into a function.
 
-Credentials are branch-scoped and tied to the function's serving branch. User-supplied environment variables with the same name can't override the injected values (the injected secret access key always wins). Because the credentials use AWS-standard names, the AWS SDK picks them up automatically. Only `forcePathStyle` needs explicit configuration:
+Credentials are branch-scoped and tied to the function's serving branch. Injected values are defaults, not reserved names: a user-supplied environment variable with the same name (set via `--env` or in `neon.ts`) overrides the injected credential, same as any other Neon-injected variable. See [Environment variables](/docs/compute/functions/environment-variables#user-defined-variables). Because the credentials use AWS-standard names, the AWS SDK picks them up automatically when you don't override them. Only `forcePathStyle` needs explicit configuration:
 
 ```typescript
 import { S3Client } from '@aws-sdk/client-s3';
