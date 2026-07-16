@@ -2558,11 +2558,6 @@ const defaultConfig = {
         permanent: true,
       },
       {
-        source: '/demos.md',
-        destination: '/use-cases',
-        permanent: true,
-      },
-      {
         source: '/templates',
         destination: 'https://github.com/neondatabase/examples',
         permanent: true,
