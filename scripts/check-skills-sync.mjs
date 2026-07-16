@@ -10,18 +10,19 @@
  *
  * This check does two things and fails on either:
  *
- *   1. Upstream sync — fetches each skill's file tree from its upstream repo at
- *      the ref pinned in config/skills.json (currently `main`, i.e. latest) and
- *      fails if a file that exists upstream is missing locally or its content
- *      differs. Local-only files (e.g. the neon-postgres reference corpus the
- *      website maintains itself) have no upstream counterpart and are reported
- *      as a non-failing note.
+ *   1. Upstream sync (1:1) — fetches each skill's file tree from its upstream repo
+ *      at the ref pinned in config/skills.json (currently `main`, i.e. latest) and
+ *      fails if a file that exists upstream is missing locally, its content
+ *      differs, or a local file has no upstream counterpart. The vendored copy
+ *      must mirror the source repo exactly.
  *
- *   2. Link integrity — every relative on-disk link in each SKILL.md must resolve
- *      to a file that exists, so a SKILL.md can never point at a reference file
- *      that isn't vendored here. External URLs, in-page anchors, and site-absolute
- *      (/…) links are left to linkinator; reference files' own repo-relative links
- *      (e.g. ../../README.md) are upstream artifacts and out of scope.
+ *   2. Link integrity — every SKILL.md link that points at a vendored skill file —
+ *      a full https://neon.com/docs/ai/skills/… URL or a relative reference link —
+ *      must resolve to a file that exists, so a SKILL.md can never point at a
+ *      reference file that isn't here. Other external URLs, in-page anchors, and
+ *      site-absolute (/…) links are left to linkinator; reference files' own
+ *      repo-relative links (e.g. ../../README.md) are upstream artifacts and out
+ *      of scope.
  *
  * How it compares: the GitHub contents API returns a git blob `sha` for every
  * file in a directory listing. We compute the same git blob SHA-1 for each local
@@ -108,23 +109,38 @@ function walkLocalFiles(dir) {
 // Markdown inline link / image targets: [text](target) and ![alt](target).
 const MD_LINK_RE = /!?\[[^\]]*\]\(\s*(<[^>]+>|[^)\s]+)(?:\s+(?:"[^"]*"|'[^']*'))?\s*\)/g;
 
-/**
- * Relative on-disk link targets in a markdown string. Skips external URLs
- * (http/https/mailto/etc.), in-page anchors (#…), and site-absolute paths (/…)
- * — those are validated elsewhere (linkinator). Returns paths with any #anchor
- * or ?query stripped, so they can be resolved against the file on disk.
- */
-function extractRelativeLinks(markdown) {
+// Skills are served under this base on neon.com, so a full skills URL maps
+// directly back to a file in LOCAL_SKILLS_DIR.
+const NEON_SKILLS_URL_PREFIX = 'https://neon.com/docs/ai/skills/';
+
+/** All markdown link/image targets in a string (raw, angle-brackets stripped). */
+function extractLinks(markdown) {
   const links = [];
   for (const match of markdown.matchAll(MD_LINK_RE)) {
-    let target = match[1].trim().replace(/^<|>$/g, '');
-    if (!target) continue;
-    if (/^[a-z][a-z0-9+.-]*:/i.test(target)) continue; // scheme: http:, mailto:, …
-    if (target.startsWith('#') || target.startsWith('/')) continue; // anchor / site-absolute
-    target = target.split('#')[0].split('?')[0].trim();
+    const target = match[1].trim().replace(/^<|>$/g, '');
     if (target) links.push(target);
   }
   return links;
+}
+
+/**
+ * The local file a SKILL.md link should resolve to, or null if the link isn't
+ * locally verifiable. We verify two kinds "as good as we can":
+ *   - full neon.com skills URLs (https://neon.com/docs/ai/skills/…) → the vendored
+ *     file under LOCAL_SKILLS_DIR, and
+ *   - relative on-disk links (references/…) → resolved against the skill dir.
+ * Other external URLs, site-absolute (/…) paths, and #anchors are left to
+ * linkinator and return null.
+ */
+function localTargetForLink(rawLink, skillDir) {
+  const link = rawLink.split('#')[0].split('?')[0].trim();
+  if (!link) return null;
+  if (link.startsWith(NEON_SKILLS_URL_PREFIX)) {
+    return path.join(LOCAL_SKILLS_DIR, link.slice(NEON_SKILLS_URL_PREFIX.length));
+  }
+  if (/^[a-z][a-z0-9+.-]*:/i.test(link)) return null; // other scheme: http:, mailto:, …
+  if (link.startsWith('#') || link.startsWith('/')) return null; // anchor / site-absolute
+  return path.resolve(skillDir, link); // relative on-disk
 }
 
 async function checkSkill(skill) {
@@ -147,12 +163,10 @@ async function checkSkill(skill) {
     return { name, source, problems: [`could not list upstream files: ${err.message}`] };
   }
 
-  // `problems` fail the check (drift of vendored content). `extras` are local
-  // files with no upstream counterpart — for some skills (e.g. neon-postgres) the
-  // website intentionally maintains its own reference corpus alongside the synced
-  // files, so extras are reported as a non-failing note, not drift.
+  // Any divergence from upstream fails the check: a file whose content differs,
+  // a file present upstream but missing locally, or a local file with no upstream
+  // counterpart. The vendored copy must mirror the source repo 1:1.
   const problems = [];
-  const extras = [];
   const upstreamPrefix = `${skillsPath}/${name}/`;
   const localSkillDir = path.join(LOCAL_SKILLS_DIR, name);
   const matchedLocal = new Set();
@@ -177,25 +191,26 @@ async function checkSkill(skill) {
 
   for (const localFile of walkLocalFiles(localSkillDir)) {
     if (!matchedLocal.has(path.resolve(localFile))) {
-      extras.push(path.relative(localSkillDir, localFile));
+      problems.push(`extra local file not in upstream: ${path.relative(localSkillDir, localFile)}`);
     }
   }
 
-  // Link integrity: every relative on-disk link in SKILL.md must resolve to a
-  // file that exists — so a SKILL.md can never point at a reference file that
-  // isn't vendored here. (Only SKILL.md is checked: reference files often carry
-  // repo-relative links like ../../README.md that are upstream-repo artifacts,
-  // not links into the hosted skill; those are out of scope.)
+  // Link integrity: every SKILL.md link that points at a vendored skill file — a
+  // full https://neon.com/docs/ai/skills/… URL or a relative reference link —
+  // must resolve to a file that exists, so a SKILL.md can never point at a
+  // reference file that isn't here. (Only SKILL.md is checked; reference files
+  // carry repo-relative links like ../../README.md that are upstream artifacts.)
   const skillMdPath = path.join(localSkillDir, 'SKILL.md');
   if (fs.existsSync(skillMdPath)) {
-    for (const link of extractRelativeLinks(fs.readFileSync(skillMdPath, 'utf8'))) {
-      if (!fs.existsSync(path.resolve(localSkillDir, link))) {
+    for (const link of extractLinks(fs.readFileSync(skillMdPath, 'utf8'))) {
+      const target = localTargetForLink(link, localSkillDir);
+      if (target && !fs.existsSync(target)) {
         problems.push(`SKILL.md links to missing file: ${link}`);
       }
     }
   }
 
-  return { name, source, upstreamCount: upstreamFiles.length, problems, extras };
+  return { name, source, upstreamCount: upstreamFiles.length, problems };
 }
 
 async function main() {
@@ -231,8 +246,7 @@ async function main() {
 
   for (const r of results) {
     if (r.problems.length === 0) {
-      const extraNote = r.extras.length > 0 ? `, ${r.extras.length} website-only file(s)` : '';
-      console.log(`  [OK]   ${r.name}  (${r.upstreamCount} upstream file(s)${extraNote}, ${r.source})`);
+      console.log(`  [OK]   ${r.name}  (${r.upstreamCount} file(s), ${r.source})`);
     } else {
       console.log(`  [FAIL] ${r.name}  (${r.source})`);
       for (const p of r.problems) console.log(`           - ${p}`);
@@ -242,10 +256,10 @@ async function main() {
   if (drifted.length > 0) {
     console.error(
       `\n[FAIL] ${drifted.length} skill(s) have problems (see above).\n` +
-        `- content differs / missing upstream: skill content under public/docs/ai/skills/ is\n` +
-        `  vendored and read-only — do not hand-edit it. Re-sync instead: npm run update:skills\n` +
-        `  (to change a skill, edit its source repo — neondatabase/agent-skills or the per-skill\n` +
-        `  "repo" in config/skills.json — first).\n` +
+        `- content differs / missing / extra file: the vendored copy under public/docs/ai/skills/\n` +
+        `  must mirror the source repo 1:1 and is read-only — do not hand-edit it. Re-sync instead:\n` +
+        `  npm run update:skills  (to change a skill, edit its source repo — neondatabase/agent-skills\n` +
+        `  or the per-skill "repo" in config/skills.json — first).\n` +
         `- SKILL.md links to missing file: a SKILL.md points at a reference file that isn't\n` +
         `  vendored here; add the referenced file upstream and re-sync, or fix the link.`
     );
