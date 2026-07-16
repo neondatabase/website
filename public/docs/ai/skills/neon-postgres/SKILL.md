@@ -78,7 +78,7 @@ If `init` is not suitable, the individual steps can be run non-interactively:
 - **MCP server:** `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>`
 - **Agent skill:** `npx skills add neondatabase/agent-skills --skill neon-postgres --agent <agent-name> -y`
 
-For full CLI installation options, see https://neon.com/docs/reference/cli-install.md
+For full CLI installation options, see https://neon.com/docs/cli/install.md
 
 ### Setup Flow
 
@@ -181,16 +181,16 @@ Use this for local development enablement with `npx -y neon@latest init --agent 
 
 | Tool             | URL                                             |
 | ---------------- | ----------------------------------------------- |
-| CLI Init Command | https://neon.com/docs/reference/cli-init.md     |
+| CLI Init Command | https://neon.com/docs/cli/init.md               |
 | VSCode Extension | https://neon.com/docs/local/vscode-extension.md |
 | MCP Server       | https://neon.com/docs/ai/neon-mcp-server.md     |
-| Neon CLI         | https://neon.com/docs/reference/neon-cli.md     |
+| Neon CLI         | https://neon.com/docs/cli.md                    |
 
 ### Neon CLI
 
 Use this for terminal-first workflows, scripts, and CI/CD automation with `neon`.
 
-Link: https://neon.com/docs/reference/neon-cli.md
+Link: https://neon.com/docs/cli.md
 
 ## Neon Admin API
 
@@ -204,7 +204,7 @@ Link: https://neon.com/docs/reference/api-reference.md
 
 ### Neon TypeScript SDK
 
-Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`).
+Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`). For the full API surface — client config, the `{ data, error }` result model, typed errors, readiness/workflow helpers (`createAndConnect`, `createWithCompute`), pagination, every resource namespace, and the raw layer — see [references/neon-sdk.md](references/neon-sdk.md).
 
 Link: https://neon.com/docs/reference/typescript-sdk.md
 

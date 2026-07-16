@@ -9,7 +9,6 @@ export default {
   caseStudies: '/case-studies',
   cli: '/cli',
   contactSales: '/contact-sales',
-  demos: '/demos',
   enterprise: '/enterprise',
   flow: '/flow',
   faster: '/faster',
@@ -27,7 +26,6 @@ export default {
   startups: '/startups',
   storage: '/storage',
   subprocessorsSubscribe: '/subscribe-to-subprocessors',
-  templates: '/templates',
   platforms: '/platforms',
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
@@ -36,7 +34,7 @@ export default {
   // Docs
   docs: '/docs',
   docsHome: '/docs/introduction',
-  api: '/docs/reference/api-reference',
+  api: '/docs/reference/api',
   architecture: '/docs/introduction/architecture-overview',
   auth: '/docs/neon-auth/overview',
   autoscaling: '/docs/introduction/autoscaling',
@@ -113,7 +111,7 @@ export default {
   // Other
   status: 'https://neonstatus.com',
   cdn: 'https://cdn.neonapi.io',
-  apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
+  apiReference: '/docs/reference/api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
   claimablePostgres: 'https://neon.new/',

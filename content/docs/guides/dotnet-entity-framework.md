@@ -12,7 +12,7 @@ summary: >-
   `Microsoft.EntityFrameworkCore.Design`, and `dotnet-ef`, then applying the
   initial schema with `dotnet ef database update`.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-ef-prompt.md"
@@ -207,5 +207,10 @@ If you do not have one already, create a Neon project.
 
 - [.NET Documentation](https://learn.microsoft.com/en-us/dotnet/)
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/)
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

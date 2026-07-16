@@ -36,7 +36,7 @@ Use when a partner asks about **pricing**, **cost optimization**, or **consumpti
 
 ### Consumption tracking
 
-- On **usage-based plans** (Launch, Scale, Agent, Enterprise), use `GET /api/v2/consumption_history/v2/projects` for metrics that match billing. **`GET /api/v2/consumption_history/account`** is deprecated with a planned sunset of **2026-06-01**; migrate to v2 per-project metrics ([consumption metrics](https://neon.com/docs/guides/consumption-metrics.md), [legacy notice](https://neon.com/docs/guides/consumption-metrics-legacy.md)). Legacy endpoints return different fields; see Neon’s consumption docs.
+- On **usage-based plans** (Launch, Scale, Agent, Enterprise), use `GET /api/v2/consumption_history/v2/projects` for metrics that match billing. The legacy account-level endpoint has been retired; use v2 per-project metrics instead ([consumption metrics](https://neon.com/docs/guides/consumption-metrics.md), [legacy notice](https://neon.com/docs/guides/consumption-metrics-legacy.md)). Legacy endpoints return different fields; see Neon’s consumption docs.
 - **V2 `metrics` values** (exact strings for the API and for `CONSUMPTION_METRICS` in samples): `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`.
 - Poll about every **15 minutes** (Neon’s update cadence). Polling does **not** wake suspended computes.
 - Alert users at **80%** and **95%** of their quota to prevent unexpected suspension.

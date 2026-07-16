@@ -2,17 +2,15 @@
 name: neon
 description: >-
   Overview of the Neon platform for apps and agents, spanning Postgres, Auth,
-  Data API, and the new services: Object Storage, Compute Functions, and AI
-  Gateway. Use whenever "Neon" is mentioned for an overview of how to work with Neon and how to get started. Otherwise, the individual capabilities are the triggers: "object storage" or "S3-compatible
-  storage", "serverless functions", "background jobs", or
-  "run code near my database", "AI gateway", "LLM proxy",
-  "model routing", or "call an LLM" → AI Gateway; "database", "Postgres", or
-  "authentication" → Postgres and Auth.
+  the Data API, and the new services: Object Storage, Compute Functions, and AI
+  Gateway. Use when "Neon" is mentioned, or when any of its individual
+  capabilities are the trigger: "object storage" or "S3", "buckets", "serverless
+  functions", "AI gateway", "call an LLM", "postgres", "database", or "backend".
 ---
 
 # Neon
 
-Important: Neon is no longer just a Serverless Postgres provider. Neon is the backend for apps and agents with Serverless Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.
+Important: Neon is no longer just a Serverless Postgres provider. Neon is the backend for apps and agents with Serverless Postgres, Auth, Functions, Object Storage, and an AI Gateway: instant, branchable, serverless.
 
 Use this skill as the starting point for anything Neon: get an overview of its capabilities, find your way around the Neon agent skills and documentation, and follow best practices for getting started and for branch-first development workflows.
 
@@ -22,15 +20,15 @@ Neon bundles several backend primitives for building apps and agents that all br
 
 - **Postgres** — Serverless Postgres that scales and branches with your app. _Generally available._
 - **Auth** — Managed authentication with users and sessions stored in Postgres. _Generally available._
-- **Object Storage** — S3-compatible object storage that branches with your projects. _Preview / early access._
-- **Compute Functions** — Long-running serverless functions running close to your database — for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. _Preview / early access._
-- **AI Gateway** — One API for all frontier and open-source models, with routing, logging, and cost controls, powered by Databricks. _Preview / early access._
+- **Object Storage** — S3-compatible object storage that branches with your projects. _Public beta._
+- **Functions** — Long-running serverless functions - Neon's compute offering - running close to your database — for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. _Public beta._
+- **AI Gateway** — One API for all frontier and open-source models, with routing, logging, and cost controls, powered by Databricks. _Public beta._
 
-### Preview Service Availability
+### Public Beta Service Availability
 
-Object Storage, Compute Functions, and AI Gateway are preview (early access) features.
+Object Storage, Functions, and AI Gateway are in public beta.
 
-Early access features are only available on net-new projects created in the `us-east-2` region; they cannot be enabled on existing projects for now. Before guiding a user through any of these services, confirm they are working with a new project in `us-east-2`. If not, they will need to create a new project in that region. Then confirm the user already has early access; otherwise, point them to the private beta sign-up: https://neon.com/blog/were-building-backends#access.
+Beta access features are only available on net-new projects created in the `us-east-2` region; they cannot be enabled on existing projects for now. Before guiding a user through any of these services, confirm they are working with a new project in `us-east-2`. If not, they will need to create a new project in that region.
 
 ## Architecture: how Neon fits
 
@@ -74,7 +72,7 @@ Common doc URLs are organized in the topic links below. If you need a page not l
 - Choosing or creating the right branch type for dev, preview, test, or CI workflows → `neon-postgres-branches`.
 - Storing and serving files (uploads, images, blobs) that branch with the database → `neon-object-storage`.
 - Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers — next to the database → `neon-functions`.
-- Calling an LLM or routing across model providers with one credential → `neon-ai-gateway`.
+- Calling an LLM or routing across model providers with one credential — including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint → `neon-ai-gateway`.
 - Provisioning instant, claimable temporary Postgres databases (for example, one per end user or demo) → `claimable-postgres`.
 - Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase → `neon-postgres-egress-optimizer`.
 
@@ -97,6 +95,8 @@ For example, to install the object storage skill globally for a specific agent w
 ```bash
 npx skills add neondatabase/agent-skills -s neon-object-storage -g -y -a <agent-name>
 ```
+
+You should also make sure the skills are up to date. You can run the same command or replace `add` with `update` to update all Neon skills.
 
 ## Getting Started with Neon
 
@@ -129,7 +129,7 @@ If `init` is not suitable, the individual steps can be run non-interactively, us
 - **MCP server:** `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>`
 - **Agent skill:** `npx skills add neondatabase/agent-skills --skill neon-postgres --skill neon --agent <agent-name> -y`
 
-Prefer the CLI over the MCP server unless the user instructs otherwise, since it provides more capabilities, including deploying Neon Functions. For full CLI installation options, see https://neon.com/docs/reference/cli-install.md
+Prefer the CLI over the MCP server unless the user instructs otherwise, since it provides more capabilities, including deploying Neon Functions. For full CLI installation options, see https://neon.com/docs/cli/install.md
 
 ### Setup Flow
 
@@ -178,7 +178,7 @@ If env vars are injected at runtime instead of written to disk — or you simply
 - `neon-env run -- <your dev command>` (from `@neon/env`) fetches the branch's vars from your `neon.ts` and injects them into the child process at runtime — no `.env` file needed. This is the runtime counterpart to the on-disk `env pull`.
 - `neon-env export` (from `@neon/env`) prints the branch's env to stdout as dotenv lines or, with `--format json`, JSON — for piping into another env manager rather than running a command. For example, [varlock](https://varlock.dev) can bulk-load it from a `.env.schema` with `@setValuesBulk(exec("neon-env export --format json"), format=json)`.
 - `fetchEnv` from `@neon/env` is the programmatic version of the same thing: resolve the branch's env in code at runtime instead of shelling out to `neon-env run`.
-- `neon dev` injects the same vars into your local dev server — it's part of Neon Functions local development (a private preview feature).
+- `neon dev` injects the same vars into your local dev server — it's part of Neon Functions local development (a public beta feature).
 
 When an agent should not write a local `.env`, instruct it (for example in your `AGENTS.md`) to run `neon checkout <branch> --no-env-pull` and rely on runtime injection.
 
@@ -212,9 +212,13 @@ export default defineConfig({
   auth: true,
   dataApi: true,
   preview: {
-    functions: { /* ... */ }, // see the neon-functions skill
-    buckets: { /* ... */ },    // see the neon-object-storage skill
-    aiGateway: true,           // see the neon-ai-gateway skill
+    functions: {
+      /* ... */
+    }, // see the neon-functions skill
+    buckets: {
+      /* ... */
+    }, // see the neon-object-storage skill
+    aiGateway: true, // see the neon-ai-gateway skill
   },
 });
 ```
@@ -239,7 +243,7 @@ npm i @neon/env
 ```
 
 ```typescript
-import { parseEnv } from "@neon/env/v1";
+import { parseEnv } from "@neon/env";
 import config from "./neon";
 
 const env = parseEnv(config);
@@ -251,7 +255,7 @@ console.log(env.auth.baseUrl);
 By default `parseEnv` requires _every_ variable your config implies. When a process only uses a subset — a common case in frameworks like Next.js, where you might read `DATABASE_URL` but never the unpooled URL — pass an array of env-var keys to require and return only those. The keys are typesafe: autocomplete only offers variables your config enables, and the returned shape is narrowed to exactly what you selected (so unselected variables are neither enforced nor present).
 
 ```typescript
-import { parseEnv } from "@neon/env/v1";
+import { parseEnv } from "@neon/env";
 import config from "./neon";
 
 // Only DATABASE_URL is required and returned; DATABASE_URL_UNPOOLED is not enforced.
@@ -320,7 +324,10 @@ export default defineConfig({ auth: true, dataApi: true });
 
 // 2. Or verify a third-party IdP instead of Neon Auth:
 export default defineConfig({
-  dataApi: { authProvider: "external", jwksUrl: "https://your-idp/.well-known/jwks.json" },
+  dataApi: {
+    authProvider: "external",
+    jwksUrl: "https://your-idp/.well-known/jwks.json",
+  },
 });
 ```
 

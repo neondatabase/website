@@ -80,14 +80,23 @@ function extractNeonModels(apiJson, source) {
 
 async function loadNeon() {
   if (NEON_MODELS_URL) {
-    return { source: NEON_MODELS_URL, models: extractNeonModels(await fetchJson(NEON_MODELS_URL), NEON_MODELS_URL) };
+    return {
+      source: NEON_MODELS_URL,
+      models: extractNeonModels(await fetchJson(NEON_MODELS_URL), NEON_MODELS_URL),
+    };
   }
   const raw = fs.readFileSync(LOCAL_DATA_PATH, 'utf-8');
-  return { source: path.relative(process.cwd(), LOCAL_DATA_PATH), models: extractNeonModels(JSON.parse(raw), LOCAL_DATA_PATH) };
+  return {
+    source: path.relative(process.cwd(), LOCAL_DATA_PATH),
+    models: extractNeonModels(JSON.parse(raw), LOCAL_DATA_PATH),
+  };
 }
 
 async function loadUpstream() {
-  return { source: MODELS_DEV_URL, models: extractNeonModels(await fetchJson(MODELS_DEV_URL), MODELS_DEV_URL) };
+  return {
+    source: MODELS_DEV_URL,
+    models: extractNeonModels(await fetchJson(MODELS_DEV_URL), MODELS_DEV_URL),
+  };
 }
 
 // ---------------------------------------------------------------------------
@@ -147,7 +156,11 @@ function diffModels(upstream, neon) {
 async function main() {
   const args = process.argv.slice(2);
   const jsonMode = args.includes('--json');
-  const verbose = args.includes('--verbose') ? true : args.includes('--ci') ? false : !process.env.CI;
+  const verbose = args.includes('--verbose')
+    ? true
+    : args.includes('--ci')
+      ? false
+      : !process.env.CI;
 
   let upstream, neon;
   try {
@@ -159,16 +172,24 @@ async function main() {
 
   const diff = diffModels(upstream.models, neon.models);
   const inSync =
-    diff.missingFromNeon.length === 0 && diff.extraInNeon.length === 0 && diff.fieldDiffs.length === 0;
+    diff.missingFromNeon.length === 0 &&
+    diff.extraInNeon.length === 0 &&
+    diff.fieldDiffs.length === 0;
 
   if (jsonMode) {
-    console.log(JSON.stringify({ upstream: upstream.source, neon: neon.source, inSync, ...diff }, null, 2));
+    console.log(
+      JSON.stringify({ upstream: upstream.source, neon: neon.source, inSync, ...diff }, null, 2)
+    );
     process.exit(inSync ? 0 : 1);
   }
 
   console.log(`AI Gateway model catalog sync check`);
-  console.log(`  upstream (models.dev): ${upstream.source} — ${Object.keys(upstream.models).length} models`);
-  console.log(`  neon (/models.json):   ${neon.source} — ${Object.keys(neon.models).length} models\n`);
+  console.log(
+    `  upstream (models.dev): ${upstream.source} — ${Object.keys(upstream.models).length} models`
+  );
+  console.log(
+    `  neon (/models.json):   ${neon.source} — ${Object.keys(neon.models).length} models\n`
+  );
 
   if (inSync) {
     console.log(`[OK] In sync — ${Object.keys(neon.models).length} models match.`);
@@ -188,7 +209,9 @@ async function main() {
     console.log('');
   }
   if (diff.fieldDiffs.length) {
-    console.log(`Field drift (${diff.fieldDiffs.length} model${diff.fieldDiffs.length === 1 ? '' : 's'}):`);
+    console.log(
+      `Field drift (${diff.fieldDiffs.length} model${diff.fieldDiffs.length === 1 ? '' : 's'}):`
+    );
     for (const { id, fields } of diff.fieldDiffs) {
       console.log(`  ${id}:`);
       for (const f of fields) {
@@ -204,7 +227,9 @@ async function main() {
     console.log('');
   }
 
-  console.log('Run `npm run generate:models` to regenerate data.json from the models.dev neon provider.');
+  console.log(
+    'Run `npm run generate:models` to regenerate data.json from the models.dev neon provider.'
+  );
   process.exit(1);
 }
 
