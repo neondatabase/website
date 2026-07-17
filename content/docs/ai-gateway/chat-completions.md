@@ -6,7 +6,9 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:21:12.950Z'
+redirectFrom:
+  - /docs/ai-gateway/anthropic-messages/
+updatedOn: '2026-07-17T11:46:46.418Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -212,7 +214,6 @@ Error responses are a JSON object with an `error.message` field:
 ## Next steps
 
 - [Models](/docs/ai-gateway/models): full model catalog
-- [Anthropic Messages API](/docs/ai-gateway/anthropic-messages): native Anthropic features
 - [OpenAI Responses API](/docs/ai-gateway/openai-responses): Responses API endpoint
 - [Authentication](/docs/ai-gateway/authentication): credential scopes and branch binding
 

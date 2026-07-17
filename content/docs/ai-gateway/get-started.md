@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-07-15T19:50:24.946Z'
+updatedOn: '2026-07-17T11:46:46.418Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -228,7 +228,6 @@ For TypeScript apps and agents, use [`@neon/ai-sdk-provider`](https://www.npmjs.
 
 - [Models](/docs/ai-gateway/models): full model catalog and which endpoint to use per provider
 - [Chat completions](/docs/ai-gateway/chat-completions): detailed reference for the unified endpoint
-- [Anthropic Messages API](/docs/ai-gateway/anthropic-messages): native Anthropic features including extended thinking and prompt caching
 - [Authentication](/docs/ai-gateway/authentication): credential scopes, branch binding, and rotation
 
 <NeedHelp/>
