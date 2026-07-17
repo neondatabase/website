@@ -186,9 +186,9 @@ export default {
       },
       free: false,
       launch:
-        'No charges applied during beta. After beta, pricing will match model provider (no markup)',
+        'No charges applied during beta. <span>After beta, pricing will match model provider (no markup)</span>',
       scale:
-        'No charges applied during beta. After beta, pricing will match model provider (no markup)',
+        'No charges applied during beta. <span>After beta, pricing will match model provider (no markup)</span>',
     },
     {
       rows: '1',
