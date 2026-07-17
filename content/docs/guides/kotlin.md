@@ -9,7 +9,7 @@ summary: >-
   and rollback. Also covers dotenv-kotlin for credential management. Focuses on
   raw JDBC without an ORM, unlike Micronaut or Hibernate guides.
 enableTableOfContents: true
-updatedOn: '2026-07-17T21:01:34.506Z'
+updatedOn: '2026-07-17T21:07:05.131Z'
 ---
 
 <CopyPrompt src="/prompts/kotlin-prompt.md"

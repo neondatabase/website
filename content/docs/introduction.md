@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-17T21:01:34.506Z'
+updatedOn: '2026-07-17T21:07:05.131Z'
 ---
 
 ## Getting started
