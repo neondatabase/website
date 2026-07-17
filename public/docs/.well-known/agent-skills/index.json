@@ -6,7 +6,7 @@
       "type": "skill-md",
       "description": "Guides and best practices for working with Neon Serverless Postgres. Covers setup, connection methods, branching, autoscaling, scale-to-zero, read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server, REST API, TypeScript SDK, and Python SDK. Use when users ask about \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neon\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", or \"Neon connection pooling\".",
       "url": "/docs/.well-known/agent-skills/neon-postgres/SKILL.md",
-      "digest": "sha256:09dc734a195975150369e7846da5fdd533a095304655024cb969b1835cc098ea"
+      "digest": "sha256:20b78f4e744c25aed6b61fca8053b6e961771040db512285da4a481d84da06ea"
     },
     {
       "name": "claimable-postgres",
@@ -62,7 +62,7 @@
       "type": "skill-md",
       "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"run code next to my database\", \"function that won't time out\", \"Neon Functions\", and \"Neon Compute\".",
       "url": "/docs/.well-known/agent-skills/neon-functions/SKILL.md",
-      "digest": "sha256:3d6b91ee3d5d1bc45a717cf1eba899b1a35ac7f5d6a690059e5553e53efbdaae"
+      "digest": "sha256:71a99ab4420472b3c8e110750c749193f48fc219029a7fbf78ffbe18f84d7029"
     }
   ]
 }
