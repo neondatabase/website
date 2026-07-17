@@ -9,10 +9,10 @@ summary: >-
   and rollback. Also covers dotenv-kotlin for credential management. Focuses on
   raw JDBC without an ORM, unlike Micronaut or Hibernate guides.
 enableTableOfContents: true
-updatedOn: '2026-07-17T20:51:43.784Z'
+updatedOn: '2026-07-17T21:01:34.506Z'
 ---
 
-<CopyPrompt src="/prompts/kotlin-prompt.md" 
+<CopyPrompt src="/prompts/kotlin-prompt.md"
 description="Pre-built prompt for connecting Kotlin applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Kotlin application using **Java Database Connectivity (JDBC)**, the standard API for interacting with relational databases on the JVM.
