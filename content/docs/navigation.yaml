@@ -17,6 +17,8 @@
       items:
         - title: One-command setup
           slug: get-started/with-an-agent
+        - title: One-shot your backend
+          slug: get-started/one-shots
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
         - title: Tour the Neon backend
