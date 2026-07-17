@@ -9,22 +9,19 @@ summary: >-
   integration instead of the Vercel-Managed Integration when you already have a
   Neon account or need direct billing control. The two integrations cannot
   coexist in the same Vercel project, and each Neon project maps to exactly one
-  Vercel project. When connecting, you can choose which Neon branch feeds
-  Vercel's Production environment variables. The integration injects
-  `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and legacy `PG*` variables per
-  deployment, with optional automatic branch cleanup when Git branches are
-  deleted.
+  Vercel project. The integration injects `DATABASE_URL`, `DATABASE_URL_UNPOOLED`,
+  and legacy `PG*` variables per deployment, with optional automatic branch
+  cleanup when Git branches are deleted.
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-07-16T22:52:03.150Z'
+updatedOn: '2026-07-17T10:14:24.892Z'
 ---
 
 <InfoBlock>
 <DocsList title="What you will learn:">
 <a href="#about-this-integration">The purpose of the Neon-Managed Integration</a>
 <a href="#installation-steps">How to install it from Connectable Accounts</a>
-<a href="#choose-a-production-branch">How to choose which branch feeds Vercel Production</a>
 <a href="#how-preview-branching-works">How automated Preview Branching works</a>
 <a href="#managing-the-integration">How to manage environment variables and branch cleanup</a>
 </DocsList>
@@ -101,17 +98,9 @@ In the **Integrate Neon** dialog:
 
    ![Select a Vercel project](/docs/guides/vercel_select_project.png)
 
-2. **Choose your Neon project, database, role, and production branch**
+2. **Choose your Neon project, database, and role**
 
    ![Connect to Neon](/docs/guides/vercel_connect_neon.png)
-
-   Under **Production branch**, pick the Neon branch whose credentials Vercel should use for **Production** deployments. If you leave the default selection, Production uses your project's default branch (the same behavior as before this option existed).
-
-   The branch you select must:
-   - Belong to the chosen Neon project
-   - Include the database and role you selected
-   - Not be a Vercel preview branch (for example, `preview/<git-branch>`)
-   - Not have branch expiration (TTL) enabled
 
 3. **Configure optional settings:**
    - Enable **Create a branch for your development environment** to create a persistent `vercel-dev` branch
@@ -125,20 +114,6 @@ In the **Integrate Neon** dialog:
 ![Vercel integration success](/docs/guides/vercel_success.png)
 
 </Steps>
-
-### Choose a production branch
-
-By default, Neon uses your project's **default branch** for Vercel's Production environment variables. When your live application data lives on a different branch (for example, a protected `production` branch while `main` remains the default), select that branch during setup instead.
-
-| Vercel environment | Neon branch used                                                                                 |
-| ------------------ | ------------------------------------------------------------------------------------------------ |
-| **Production**     | The branch you choose at connect (or the project default if unchanged)                           |
-| **Preview**        | A new `preview/<git-branch>` branch per deployment, parented from the project **default** branch |
-| **Development**    | The optional `vercel-dev` branch, created as a clone of the project **default** branch           |
-
-Only Production credentials come from your chosen branch. Preview and Development environments are unchanged. Neon resolves that branch's read-write compute endpoint and the password for the role you selected on that branch (role passwords can differ across branches).
-
-If [Managed Better Auth](/docs/auth/overview) is enabled on your production branch, Production deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` from that branch. Preview deployments still get isolated auth on their own preview branches.
 
 ### What happens after installation
 
@@ -164,7 +139,7 @@ Once connected successfully, you'll see:
 The integration automatically creates isolated database environments for each preview deployment:
 
 <Admonition type="tip" title="Managed Better Auth support for preview deployments">
-If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions. Preview branches are always parented from your project's **default branch**, even when Production uses a different branch.
+If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
 </Admonition>
 
 <Steps>
@@ -209,9 +184,9 @@ This ensures schema changes in your commits are applied to each preview deployme
 
 The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and legacy PostgreSQL variables (`POSTGRES_URL`, `PGHOST`, etc.) for Production and Development environments. Preview variables are injected dynamically per deployment.
 
-- `DATABASE_URL`: Pooled connection (recommended for most applications). For Production, sourced from the [production branch you chose at connect](#choose-a-production-branch).
+- `DATABASE_URL`: Pooled connection (recommended for most applications)
 - `DATABASE_URL_UNPOOLED`: Direct connection (for tools requiring direct database access)
-- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed Better Auth endpoints (automatically set when Managed Better Auth is enabled on the production branch)
+- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Managed Better Auth endpoints (automatically set when Managed Better Auth is enabled on production branch)
 
 **To customize which variables are used:**
 
