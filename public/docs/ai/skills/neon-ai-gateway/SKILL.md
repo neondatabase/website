@@ -7,7 +7,7 @@ description: >-
   Anthropic, Google/Gemini, Meta, Alibaba, DeepSeek), or avoid juggling
   separate provider API keys and accounts — especially when they already use
   Neon and want AI requests to branch with their project. Works with the OpenAI
-  SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing
+  SDK, google-genai, the Vercel AI SDK, and Mastra by changing
   only the base URL. Triggers include "call an LLM", "add AI to my app",
   "chat completion", "model routing", "LLM proxy/gateway", "one API for all
   models", "use Claude/GPT/Gemini", "AI SDK", "Mastra agent", "Neon AI
@@ -34,7 +34,7 @@ If the user already has a deep, single-provider integration and no interest in N
 ## What It Does
 
 - **One API for all models** — Frontier and open-source models behind a single endpoint, addressed by their catalog ID (e.g. `claude-sonnet-4-6`, `gpt-5-mini`, `gemini-2-5-flash`).
-- **Standard SDKs, one URL change** — OpenAI SDK and AI SDK (OpenAI-compatible MLflow/Responses routes), Anthropic SDK (native Messages), google-genai (native Gemini).
+- **Standard SDKs, one URL change** — OpenAI SDK and AI SDK (OpenAI-compatible MLflow/Responses routes), google-genai (native Gemini).
 - **Branch-scoped** — Each branch gets its own gateway host; the Neon credential authorizes requests for that branch and its descendants.
 - **Streaming** — Server-sent events work on all endpoints with no extra configuration.
 
@@ -86,7 +86,6 @@ When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **N
 
 - `/v1` — unified, OpenAI **Chat Completions**-compatible; recommended default, works with every provider (`/v1/chat/completions`).
 - `/openai/v1` — OpenAI **Responses** API (required for `gpt-5-…-codex` variants and `gpt-5-5-pro`); the `@ai-sdk/openai` provider uses the Responses API by default (`/openai/v1/responses`).
-- `/anthropic/v1` — native Anthropic Messages (extended thinking, prompt caching); mirrors the real Anthropic API path (`/anthropic/v1/messages`).
 - `/ai-gateway/gemini/v1beta/...` — native Gemini `generateContent` (this dialect is still served under the legacy `/ai-gateway/` prefix).
 
 So `${NEON_AI_GATEWAY_BASE_URL}/v1` is the chat-completions endpoint, `${NEON_AI_GATEWAY_BASE_URL}/openai/v1` the OpenAI Responses endpoint, and so on.
@@ -206,7 +205,7 @@ const res = await client.chat.completions.create({
 });
 ```
 
-The Anthropic SDK and google-genai work the same way for native provider features — point the Anthropic SDK at `${NEON_AI_GATEWAY_BASE_URL}/anthropic/v1` (mirrors the real Anthropic API path, so `/anthropic/v1/messages`) and google-genai at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini` (Gemini is still served under the legacy `/ai-gateway/` prefix).
+google-genai works the same way for native provider features — point it at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini` (Gemini is still served under the legacy `/ai-gateway/` prefix).
 
 ## Model identifiers
 
@@ -295,7 +294,6 @@ The Neon documentation is the source of truth and the AI Gateway is evolving rap
 - https://neon.com/docs/ai-gateway/get-started.md
 - https://neon.com/docs/ai-gateway/models.md
 - https://neon.com/docs/ai-gateway/chat-completions.md
-- https://neon.com/docs/ai-gateway/anthropic-messages.md
 - https://neon.com/docs/ai-gateway/openai-responses.md
 - https://neon.com/docs/ai-gateway/gemini.md
 - https://neon.com/docs/ai-gateway/authentication.md
