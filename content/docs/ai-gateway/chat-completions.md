@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai-gateway/anthropic-messages/
-updatedOn: '2026-07-17T11:46:46.418Z'
+updatedOn: '2026-07-17T14:41:09.083Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -43,7 +43,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: 'claude-sonnet-4-6',
+  model: 'gpt-5-mini',
   messages: [
     { role: 'system', content: 'You are a helpful assistant.' },
     { role: 'user', content: 'What is Neon?' },
@@ -64,7 +64,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="claude-sonnet-4-6",
+    model="gpt-5-mini",
     messages=[
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": "What is Neon?"},
@@ -80,7 +80,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-6",
+    "model": "gpt-5-mini",
     "messages": [
       {"role": "system", "content": "You are a helpful assistant."},
       {"role": "user", "content": "What is Neon?"}
@@ -106,7 +106,7 @@ const client = new OpenAI({
 });
 
 const stream = await client.chat.completions.create({
-  model: 'claude-sonnet-4-6',
+  model: 'gpt-5-mini',
   messages: [{ role: 'user', content: 'Explain branching in Postgres.' }],
   stream: true,
 });
@@ -126,7 +126,7 @@ client = OpenAI(
 )
 
 with client.chat.completions.create(
-    model="claude-sonnet-4-6",
+    model="gpt-5-mini",
     messages=[{"role": "user", "content": "Explain branching in Postgres."}],
     stream=True,
 ) as stream:
@@ -139,7 +139,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-6",
+    "model": "gpt-5-mini",
     "messages": [{"role": "user", "content": "Explain branching in Postgres."}],
     "stream": true
   }'
@@ -152,9 +152,6 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
 Change the `model` field to use a different provider. Everything else stays the same.
 
 ```typescript
-// Anthropic
-model: 'claude-sonnet-4-6'
-
 // OpenAI
 model: 'gpt-5-4'
 
@@ -187,7 +184,6 @@ When the upstream provider rate-limits a request, AI Gateway forwards the releva
 | `X-Ratelimit-Limit-Tokens`       | Token limit                                |
 | `X-Ratelimit-Remaining-Tokens`   | Remaining tokens                           |
 | `X-Ratelimit-Reset-Tokens`       | Time until token limit resets              |
-| `Anthropic-Ratelimit-*`          | Anthropic-specific rate limit headers      |
 
 ## Error handling
 
