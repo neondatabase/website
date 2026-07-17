@@ -10,7 +10,7 @@ summary: >-
   double-pooling or WebSocket lifecycle errors in serverless request handlers.
   ORM compatibility for Drizzle, Prisma, Kysely, and TypeORM is also covered.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-17T20:51:43.784Z'
 ---
 
 Your connection method depends on where your code runs. Use the table below for a quick lookup, or read the scenario sections for detailed guidance.
@@ -45,6 +45,7 @@ Use a standard TCP-based Postgres driver with a [pooled connection](/docs/connec
 | Go                  | [Go](/docs/guides/go)                       |
 | Rust                | [Rust](/docs/guides/rust)                   |
 | Java                | [Java](/docs/guides/java)                   |
+| Kotlin              | [Kotlin](/docs/guides/kotlin)               |
 
 For the full list, see [Language quickstarts](/docs/get-started/languages).
 

@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-15T20:33:08.022Z'
+updatedOn: '2026-07-17T20:51:43.784Z'
 ---
 
 ## Getting started
@@ -96,6 +96,8 @@ Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-start
 <a href="/docs/guides/go" title="Go" icon="go"></a>
 
 <a href="/docs/guides/java" title="Java" icon="java"></a>
+
+<a href="/docs/guides/kotlin" title="Kotlin" icon="kotlin"></a>
 
 <a href="/docs/guides/rust" title="Rust" icon="rust"></a>
 
