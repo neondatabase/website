@@ -1216,6 +1216,8 @@
                   slug: cli/completion
             - title: Projects and branches
               items:
+                - title: snapshots
+                  slug: cli/snapshots
                 - title: diff
                   slug: cli/diff
                 - title: projects

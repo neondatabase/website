@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.32.0",
+  "neonctlVersion": "2.34.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -2645,6 +2645,266 @@
       "commands": {},
       "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
       "usage": "$0 set-context [options]"
+    },
+    "snapshots": {
+      "aliases": [
+        "snapshot"
+      ],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch id or name to snapshot. Defaults to the branch in your context, or the project's default branch.",
+              "alias": "b"
+            },
+            "expires-at": {
+              "type": "string",
+              "describe": "When the snapshot is automatically deleted (RFC 3339, e.g. 2025-12-31T23:59:59Z). Omit to keep it indefinitely."
+            },
+            "lsn": {
+              "type": "string",
+              "describe": "Take the snapshot at this LSN (e.g. 0/1F3C8A0). Must fall within the branch's restore window. Mutually exclusive with --timestamp."
+            },
+            "name": {
+              "type": "string",
+              "describe": "A name for the snapshot"
+            },
+            "timestamp": {
+              "type": "string",
+              "describe": "Take the snapshot at this point in time (RFC 3339, e.g. 2025-01-01T00:00:00Z). Must fall within the branch's restore window. Mutually exclusive with --lsn."
+            }
+          },
+          "commands": {},
+          "describe": "Create a snapshot from a branch",
+          "examples": [
+            {
+              "command": "$0 snapshots create --branch main --lsn 0/1F3C8A0 --expires-at 2025-12-31T23:59:59Z",
+              "description": "Snapshot main at an LSN, auto-deleting at the given time"
+            },
+            {
+              "command": "$0 snapshots create --branch main --timestamp 2025-01-01T00:00:00Z",
+              "description": "Snapshot main at a point in time"
+            },
+            {
+              "command": "$0 snapshots create --branch main --name pre-migration",
+              "description": "Snapshot the head of main with a name"
+            },
+            {
+              "command": "$0 snapshots create",
+              "description": "Snapshot the head of the context/default branch"
+            }
+          ]
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a snapshot by id or name"
+        },
+        "finalize": {
+          "name": "finalize",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "branch",
+              "required": true
+            }
+          ],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "Name to give the replaced (old) branch. Auto-generated when omitted."
+            }
+          },
+          "commands": {},
+          "describe": "Finalize a previewed snapshot restore (swap the restored branch in)"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Get a snapshot by id or name"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List snapshots in the project"
+        },
+        "restore": {
+          "name": "restore",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {
+            "finalize": {
+              "type": "boolean",
+              "describe": "Finalize the restore immediately: move computes onto the restored branch and swap it in for the target. Without this, the restore is left un-finalized so you can inspect it first, then run `snapshots finalize <branch>`.",
+              "default": false
+            },
+            "name": {
+              "type": "string",
+              "describe": "Name for the newly restored branch. Auto-generated when omitted."
+            },
+            "target-branch": {
+              "type": "string",
+              "describe": "Branch id or name to restore the snapshot onto. Defaults to the snapshot's source branch. Recommended when you intend to finalize (replace an existing branch)."
+            }
+          },
+          "commands": {},
+          "describe": "Restore a snapshot into a branch",
+          "examples": [
+            {
+              "command": "$0 snapshots restore snap-1234 --target-branch main",
+              "description": "Restore onto main un-finalized to preview, then run `snapshots finalize`"
+            },
+            {
+              "command": "$0 snapshots restore snap-1234 --target-branch main --finalize",
+              "description": "Restore onto main and swap it in immediately"
+            },
+            {
+              "command": "$0 snapshots restore snap-1234 --name recovered",
+              "description": "Restore a snapshot to a new branch named 'recovered'"
+            }
+          ]
+        },
+        "schedule": {
+          "name": "schedule",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch id or name. Defaults to the branch in your context, or the project's default branch.",
+                  "alias": "b"
+                }
+              },
+              "commands": {},
+              "describe": "Get a branch's automatic snapshot schedule"
+            },
+            "set": {
+              "name": "set",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch id or name. Defaults to the branch in your context, or the project's default branch.",
+                  "alias": "b"
+                },
+                "day": {
+                  "type": "number",
+                  "describe": "Day of the week/month (1-31) to take the snapshot (used with --frequency)."
+                },
+                "frequency": {
+                  "type": "string",
+                  "describe": "How often to take snapshots. Combine with --hour, --day, and --retention to build a single-entry schedule.",
+                  "choices": [
+                    "daily",
+                    "weekly",
+                    "monthly"
+                  ]
+                },
+                "hour": {
+                  "type": "number",
+                  "describe": "Hour of the day (0-23) to take the snapshot (used with --frequency)."
+                },
+                "month": {
+                  "type": "number",
+                  "describe": "Month of the year (1-12) to take the snapshot (used with --frequency)."
+                },
+                "retention": {
+                  "type": "number",
+                  "describe": "How long to keep each snapshot, in seconds (min 3600). Omit to keep indefinitely."
+                },
+                "schedule": {
+                  "type": "string",
+                  "describe": "Full schedule as JSON, for multi-entry schedules, e.g. '[{\"frequency\":\"daily\",\"hour\":3,\"retention_seconds\":604800}]'. Overrides the single-entry flags."
+                }
+              },
+              "commands": {},
+              "describe": "Set a branch's automatic snapshot schedule",
+              "examples": [
+                {
+                  "command": "$0 snapshots schedule set --branch main --schedule '[{\"frequency\":\"hourly\"},{\"frequency\":\"daily\",\"hour\":3}]'",
+                  "description": "A multi-entry schedule via JSON"
+                },
+                {
+                  "command": "$0 snapshots schedule set --branch main --frequency daily --hour 3 --retention 604800",
+                  "description": "A daily 03:00 snapshot kept for 7 days"
+                }
+              ]
+            }
+          },
+          "describe": "Manage the automatic snapshot (backup) schedule of a branch",
+          "usage": "$0 snapshots schedule <sub-command> [options]"
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {
+            "clear-expiration": {
+              "type": "boolean",
+              "describe": "Clear the expiration so the snapshot is kept indefinitely."
+            },
+            "expires-at": {
+              "type": "string",
+              "describe": "Set when the snapshot expires (RFC 3339). Mutually exclusive with --clear-expiration."
+            },
+            "name": {
+              "type": "string",
+              "describe": "Rename the snapshot"
+            }
+          },
+          "commands": {},
+          "describe": "Update a snapshot's name or expiration"
+        }
+      },
+      "describe": "Manage snapshots",
+      "usage": "$0 snapshots <sub-command> [options]"
     },
     "status": {
       "aliases": [],
