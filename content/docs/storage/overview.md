@@ -7,7 +7,7 @@ summary: >-
   or tool. Point it at your branch endpoint and authenticate with your Neon
   credential.
 enableTableOfContents: true
-updatedOn: '2026-07-16T13:37:43.975Z'
+updatedOn: '2026-07-17T01:50:06.158Z'
 ---
 
 Neon Object Storage is S3-compatible object storage built into the Neon backend for apps and agents. Every branch gets its own isolated storage namespace. Use any AWS S3-compatible SDK or tool. Point it at your branch endpoint and authenticate with your Neon credential. No separate storage account or cloud credentials required.
@@ -37,12 +37,18 @@ Neon Object Storage is S3-compatible object storage built into the Neon backend 
 
 ## Starter templates
 
-Browse working examples at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). The `ai-sdk` template uses Neon Object Storage: an image-generation agent that stores uploaded photos and AI-generated images in branch-scoped buckets, served via presigned URLs from a Neon Function:
+The [examples repository](https://github.com/neondatabase/examples) includes templates that use Neon Object Storage. Each declares its bucket in `neon.ts` and provisions it with `neon deploy`, which also injects the S3 credentials, so there are no secrets to copy. A couple to start with:
+
+[files-sdk](https://github.com/neondatabase/examples/tree/main/with-files-sdk) is a standalone script that uploads local files to a `public_read` bucket with the [Files SDK](https://files-sdk.dev) and its `neon` adapter, then prints presigned URLs. A minimal example of the storage API on its own:
+
+```bash
+neon bootstrap --template files-sdk
+```
+
+[ai-sdk](https://github.com/neondatabase/examples/tree/main/with-ai-sdk) is a chat agent on a Neon Function that generates images, stores each one in a private bucket with the AWS S3 SDK, records its key and metadata in Postgres, and serves it back through a presigned URL. Shows object storage and the database branching together:
 
 ```bash
 neon bootstrap --template ai-sdk
 ```
-
-The [with-files-sdk](https://github.com/neondatabase/examples/tree/main/with-files-sdk) example shows a minimal script that uploads local files to a branch-scoped bucket using the Files SDK and its `neon` adapter.
 
 <NeedHelp/>
