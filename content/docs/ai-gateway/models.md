@@ -2,16 +2,16 @@
 title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
-  Neon AI Gateway serves Databricks-hosted foundation models from Anthropic,
+  Neon AI Gateway serves Databricks-hosted foundation models from
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
-  like claude-sonnet-4-6 or gpt-5-mini. The databricks- prefix is also accepted.
+  like gpt-5-mini or gemini-2-5-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-17T11:46:46.418Z'
+updatedOn: '2026-07-17T14:41:09.083Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
 
-Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `claude-sonnet-4-6`, `gpt-5-mini`, or `gemini-2-5-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
+Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-2-5-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
 <Admonition type="important">
 Models are hosted by Databricks and served through Neon AI Gateway. By using these models, you are responsible for complying with each provider's applicable terms of use. See [Provider terms](#provider-terms) below.
@@ -23,9 +23,9 @@ The full catalog is published as the [`neon` provider on models.dev](https://mod
 
 ## Model access
 
-Neon AI Gateway serves frontier models like Claude (`claude-sonnet-4-6`), GPT (`gpt-5`), and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss. See the full list in the [catalog](#available-models) below.
+Neon AI Gateway serves frontier models like GPT (`gpt-5`) and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss. See the full list in the [catalog](#available-models) below.
 
-Open-weight models are available to every project right away. Frontier models from Anthropic, OpenAI, and Google are rolling out gradually. Don't see them in your project yet? [Request early access](/docs/ai-gateway/overview#foundation-model-access).
+Open-weight models are available to every project right away. Frontier models from OpenAI and Google are rolling out gradually. Don't see them in your project yet? [Request early access](/docs/ai-gateway/overview#foundation-model-access).
 
 ## Available models
 
@@ -63,7 +63,6 @@ All paths below are appended to your branch's bare AI Gateway host (`NEON_AI_GAT
 
 | Provider                  | Recommended endpoint   | Notes                                                                                    |
 | ------------------------- | ---------------------- | ---------------------------------------------------------------------------------------- |
-| Anthropic                 | `/v1/chat/completions` | Chat completions only                                                                    |
 | OpenAI (most models)      | `/v1/chat/completions` | Use `/openai/v1/responses` for Responses API features                                    |
 | OpenAI (codex variants)   | `/openai/v1/responses` | These models require the Responses API and don't work with chat/completions              |
 | Google Gemini             | `/v1/chat/completions` | Use `/ai-gateway/gemini/v1beta/models/{model}:generateContent` with the google-genai SDK |
@@ -108,8 +107,8 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
   "object": "list",
   "data": [
     {
-      "id": "claude-sonnet-4-6",
-      "canonical_slug": "claude-sonnet-4-6",
+      "id": "gpt-5-mini",
+      "canonical_slug": "gpt-5-mini",
       "pricing": null,
       "per_request_limits": null,
       "context_length": null
@@ -126,7 +125,6 @@ Models are hosted by Databricks and served through Neon AI Gateway. You are resp
 
 | Provider      | Terms                                                                                                                                                                               |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Anthropic     | [Anthropic Usage Policy](https://www.anthropic.com/legal/aup)                                                                                                                       |
 | OpenAI        | [OpenAI Usage Policies](https://openai.com/policies/usage-policies)                                                                                                                 |
 | Google Gemini | [Google Cloud Acceptable Use Policy](https://cloud.google.com/terms/aup) · [Google Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy) |
 | Google Gemma  | [Gemma Terms of Use](https://ai.google.dev/gemma/terms) · [Gemma Prohibited Use Policy](https://ai.google.dev/gemma/prohibited_use_policy)                                          |

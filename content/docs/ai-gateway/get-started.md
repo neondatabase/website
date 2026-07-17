@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-07-17T11:46:46.418Z'
+updatedOn: '2026-07-17T14:41:09.083Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -64,7 +64,7 @@ This is different from your database connection string.
 
 ## Install dependencies
 
-The quickstart uses the OpenAI SDK because the chat completions endpoint is OpenAI-compatible. It works with any model in the catalog, including Claude and Gemini.
+The quickstart uses the OpenAI SDK because the chat completions endpoint is OpenAI-compatible. It works with any model in the catalog, including GPT and Gemini.
 
 <CodeTabs labels={["npm", "yarn", "pnpm", "pip"]}>
 
@@ -102,7 +102,7 @@ const client = new OpenAI({
 });
 
 const response = await client.chat.completions.create({
-  model: 'claude-sonnet-4-6',
+  model: 'gpt-5-mini',
   messages: [{ role: 'user', content: 'Hello!' }],
 });
 
@@ -122,7 +122,7 @@ client = OpenAI(
 )
 
 response = client.chat.completions.create(
-    model="claude-sonnet-4-6",
+    model="gpt-5-mini",
     messages=[{"role": "user", "content": "Hello!"}],
 )
 
@@ -134,7 +134,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-6",
+    "model": "gpt-5-mini",
     "messages": [{"role": "user", "content": "Hello!"}]
   }'
 ```
@@ -157,7 +157,7 @@ const client = new OpenAI({
 });
 
 const stream = await client.chat.completions.create({
-  model: 'claude-sonnet-4-6',
+  model: 'gpt-5-mini',
   messages: [{ role: 'user', content: 'Write a haiku about serverless databases.' }],
   stream: true,
 });
@@ -180,7 +180,7 @@ client = OpenAI(
 )
 
 with client.chat.completions.create(
-    model="claude-sonnet-4-6",
+    model="gpt-5-mini",
     messages=[{"role": "user", "content": "Write a haiku about serverless databases."}],
     stream=True,
 ) as stream:
@@ -193,7 +193,7 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-6",
+    "model": "gpt-5-mini",
     "messages": [{"role": "user", "content": "Write a haiku about serverless databases."}],
     "stream": true
   }'
@@ -206,14 +206,14 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
 Change the `model` field to use a different provider. No other code changes required.
 
 ```typescript
-// Anthropic
-model: 'claude-sonnet-4-6'
-
 // OpenAI
-model: 'gpt-5-4'
+model: 'gpt-5-mini'
 
 // Google
 model: 'gemini-2-5-flash'
+
+// Alibaba
+model: 'qwen3-next-80b-a3b-instruct'
 ```
 
 See [Models](/docs/ai-gateway/models) for the full list of available model IDs.

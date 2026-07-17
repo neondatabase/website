@@ -1,21 +1,21 @@
 ---
 title: Neon AI Gateway
-subtitle: One API for frontier and open-source models from Anthropic, OpenAI, Google, and more. Built into your Neon project.
+subtitle: One API for frontier and open-source models from OpenAI, Google, and more. Built into your Neon project.
 summary: >-
   Neon AI Gateway is the LLM gateway built into the Neon backend. One
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-17T11:46:46.418Z'
+updatedOn: '2026-07-17T14:41:09.083Z'
 ---
 
 ## Foundation model access
 
-Neon AI Gateway serves frontier models like Claude (`claude-sonnet-4-6`), GPT (`gpt-5`), and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss.
+Neon AI Gateway serves frontier models like GPT (`gpt-5`) and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss.
 
 **See every supported model in the [model catalog](/docs/ai-gateway/models#available-models).**
 
-Open-weight models are available to every project right away. Frontier models from Anthropic, OpenAI, and Google are rolling out gradually. Don't see them in your project yet? Request early access below.
+Open-weight models are available to every project right away. Frontier models from OpenAI and Google are rolling out gradually. Don't see them in your project yet? Request early access below.
 
 <RequestForm type="backend-platform" title="Request early access to additional foundation models" description="Drop your email and we'll reach out as access opens up." buttonText="Request Early Access" confirmation="You're on the list. We'll be in touch as access opens up." />
 
@@ -35,7 +35,7 @@ Open-weight models are available to every project right away. Frontier models fr
 
 ## Overview
 
-Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from Anthropic, OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI SDK works without code changes. Just point it at your branch endpoint.
+Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets you call models from OpenAI, Google, and other providers using your Neon credential, without setting up separate provider accounts. Your existing OpenAI SDK works without code changes. Just point it at your branch endpoint.
 
 > AI Gateway is in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use it. It requires a paid Neon plan. Inference is free for paid plans during beta. See [Pricing](#pricing) for what to expect when billing begins.
 
@@ -43,7 +43,7 @@ Neon AI Gateway is the LLM inference layer built into the Neon backend. It lets 
 Participation in this Beta is subject to our Terms of Service. Access is not available to users, organizations, or entities located in or operating from regions restricted by Anthropic's [Supported Regions Policy](https://www.anthropic.com/supported-countries). This restriction also applies to entities that are majority owned, directly or indirectly, by companies headquartered in unsupported regions.
 </Admonition>
 
-- **One credential for all providers.** A single Neon credential gives you access to models from Anthropic, OpenAI, Google, Meta, Databricks, and Alibaba. No separate provider accounts needed.
+- **One credential for all providers.** A single Neon credential gives you access to models from OpenAI, Google, Meta, Databricks, and Alibaba. No separate provider accounts needed.
 - **Standard SDKs, one URL change.** OpenAI SDK and google-genai both work out of the box.
 - **AI follows your branches.** Each branch has its own gateway endpoint. If you use Neon branches for preview deployments, AI requests from a feature branch are scoped to that branch. It's the same isolation your database already gets.
 - **Streaming support.** Server-sent events work on all endpoints with no extra configuration.
