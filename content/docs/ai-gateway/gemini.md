@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:16:18.282Z'
+updatedOn: '2026-07-20T17:20:48.939Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -43,8 +43,6 @@ This endpoint accepts Google models only:
 | `gemini-3-1-flash-lite` |       |
 | `gemini-3-pro`          |       |
 | `gemini-3-flash`        |       |
-| `gemini-2-5-pro`        |       |
-| `gemini-2-5-flash`      |       |
 
 Sending a non-Google model ID returns `400 model "<model-id>" is not available on the gemini_generate_content endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you want to call Gemini models alongside other providers from the same code.
 
@@ -70,7 +68,7 @@ const client = new GoogleGenAI({
 });
 
 const response = await client.models.generateContent({
-  model: 'gemini-2-5-flash',
+  model: 'gemini-3-flash',
   contents: [{ role: 'user', parts: [{ text: 'What is Neon?' }] }],
 });
 
@@ -91,7 +89,7 @@ client = genai.Client(
 )
 
 response = client.models.generate_content(
-    model='gemini-2-5-flash',
+    model='gemini-3-flash',
     contents='What is Neon?',
 )
 
@@ -100,7 +98,7 @@ print(response.text)
 
 ```bash shouldWrap
 curl -X POST \
-  "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/gemini/v1beta/models/gemini-2-5-flash:generateContent" \
+  "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/gemini/v1beta/models/gemini-3-flash:generateContent" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -116,7 +114,7 @@ curl -X POST \
 
 ```typescript shouldWrap
 const stream = await client.models.generateContentStream({
-  model: 'gemini-2-5-flash',
+  model: 'gemini-3-flash',
   contents: [{ role: 'user', parts: [{ text: 'Explain database branching.' }] }],
 });
 
@@ -127,7 +125,7 @@ for await (const chunk of stream) {
 
 ```python shouldWrap
 for chunk in client.models.generate_content_stream(
-    model='gemini-2-5-flash',
+    model='gemini-3-flash',
     contents='Explain database branching.',
 ):
     print(chunk.text, end='', flush=True)
@@ -141,11 +139,11 @@ The gateway uses the model ID and action directly in the URL path. The `google-g
 
 ```
 base_url: https://<branch-host>/ai-gateway/gemini
-model:    gemini-2-5-flash
+model:    gemini-3-flash
 action:   generateContent or streamGenerateContent
 
-→ https://<branch-host>/ai-gateway/gemini/v1beta/models/gemini-2-5-flash:generateContent
-→ https://<branch-host>/ai-gateway/gemini/v1beta/models/gemini-2-5-flash:streamGenerateContent
+→ https://<branch-host>/ai-gateway/gemini/v1beta/models/gemini-3-flash:generateContent
+→ https://<branch-host>/ai-gateway/gemini/v1beta/models/gemini-3-flash:streamGenerateContent
 ```
 
 When calling the REST API directly, the model ID and action must appear in the path as shown above.

@@ -4,14 +4,14 @@ subtitle: Available models and how to specify them
 summary: >-
   Neon AI Gateway serves Databricks-hosted foundation models from
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
-  like gpt-5-mini or gemini-2-5-flash. The databricks- prefix is also accepted.
+  like gpt-5-mini or gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-17T14:41:09.083Z'
+updatedOn: '2026-07-20T17:20:48.939Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
 
-Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-2-5-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
+Neon AI Gateway serves models hosted by Databricks. Use short model IDs in the `model` field, for example `gpt-5-mini` or `gemini-3-flash`. The `databricks-` prefixed form is also accepted. The Neon Console and most examples use the short form.
 
 <Admonition type="important">
 Models are hosted by Databricks and served through Neon AI Gateway. By using these models, you are responsible for complying with each provider's applicable terms of use. See [Provider terms](#provider-terms) below.
@@ -23,7 +23,7 @@ The full catalog is published as the [`neon` provider on models.dev](https://mod
 
 ## Model access
 
-Neon AI Gateway serves frontier models like GPT (`gpt-5`) and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss. See the full list in the [catalog](#available-models) below.
+Neon AI Gateway serves frontier models like GPT (`gpt-5`) and Gemini (`gemini-3-flash`) alongside open-weight models like Qwen and gpt-oss. See the full list in the [catalog](#available-models) below.
 
 Open-weight models are available to every project right away. Frontier models from OpenAI and Google are rolling out gradually. Don't see them in your project yet? [Request early access](/docs/ai-gateway/overview#foundation-model-access).
 

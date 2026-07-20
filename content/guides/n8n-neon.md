@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to creating an AI-powered knowledge base chatbot 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-27T00:00:00.000Z'
-updatedOn: '2026-07-16T01:03:00.406Z'
+updatedOn: '2026-07-20T17:20:48.939Z'
 ---
 
 This guide demonstrates how to build a powerful **AI-powered internal knowledge base chatbot** using **n8n** and **Neon**. n8n is a low-code platform that allows you to connect various applications and services, enabling you to automate complex processes through a visual workflow editor. In this guide, we'll use n8n to orchestrate the integration between **Google Drive**, **Neon Postgres**, and **Google Gemini** to create a chatbot that can answer questions based on your documents stored in Google Drive. Neon will be used as a vector store to index and retrieve document chunks, while Google Drive will serve as the source of your documents.
@@ -196,7 +196,7 @@ This workflow will provide the user interface to interact with your AI knowledge
 1. Click on the "Chat Model" input anchor of the AI Agent node.
 2. Search for and select "Google Gemini Chat Model".
 3. Select your existing "Gemini" API account for the credential.
-4. Choose a chat model that suits your needs. In this guide, we use `models/gemini-2.5-flash-preview-05-20`, which is a good balance of performance and cost for most use cases.
+4. Choose a chat model that suits your needs. In this guide, we use a Gemini Flash model, which offers a good balance of performance and cost for most use cases.
 
 ![Configuring Google Gemini Chat Model node](/docs/guides/n8n/n8n-gemini-chat-model-node.gif)
 

@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-07-17T14:41:09.083Z'
+updatedOn: '2026-07-20T17:20:48.939Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -210,7 +210,7 @@ Change the `model` field to use a different provider. No other code changes requ
 model: 'gpt-5-mini'
 
 // Google
-model: 'gemini-2-5-flash'
+model: 'gemini-3-flash'
 
 // Alibaba
 model: 'qwen3-next-80b-a3b-instruct'
