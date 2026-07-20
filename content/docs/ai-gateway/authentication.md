@@ -23,7 +23,7 @@ A credential must include the `ai_gateway:invoke` scope.
 
 In the Neon Console, select your branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, give it a name, and check **ai_gateway:invoke**.
 
-After creation, the credential is shown once. Copy the snippet or click **Download .env** before closing. The snippet includes all four gateway env vars (see [Environment variables](#environment-variables) below).
+After creation, the credential is shown once. Copy the snippet or click **Download .env** before closing. The snippet includes both gateway env vars (see [Environment variables](#environment-variables) below).
 
 To view or revoke credentials later, return to the **Credentials** page and use the action menu (⋮) next to the credential.
 
