@@ -173,9 +173,9 @@ Run `neon deploy` to apply. When `neon checkout` creates a new branch, the closu
 `dataApi: true` uses Managed Better Auth as the JWT verifier (the default). When using this form, `auth: true` must also be set. Omitting it raises a TypeScript error at the `dataApi` field that includes the fix:
 
 ```text
-Type 'true' is not assignable to type '"`dataApi` with Managed Better Auth (the default
-`authProvider: 'neon'`) requires Managed Better Auth, so add `auth: true`. To enable the
-Data API WITHOUT Managed Better Auth, verify a third-party IdP instead: `dataApi: {
+Type 'true' is not assignable to type '"`dataApi` with Neon Auth (the default
+`authProvider: 'neon'`) requires Neon Auth, so add `auth: true`. To enable the
+Data API WITHOUT Neon Auth, verify a third-party IdP instead: `dataApi: {
 authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`"'
 ```
 
