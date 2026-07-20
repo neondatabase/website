@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai-gateway/anthropic-messages/
-updatedOn: '2026-07-17T14:41:09.083Z'
+updatedOn: '2026-07-20T17:20:48.939Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -156,7 +156,7 @@ Change the `model` field to use a different provider. Everything else stays the 
 model: 'gpt-5-4'
 
 // Google
-model: 'gemini-2-5-flash'
+model: 'gemini-3-flash'
 
 // Alibaba
 model: 'qwen3-next-80b-a3b-instruct'
