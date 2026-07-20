@@ -8,7 +8,7 @@ summary: >-
   Use this page when choosing between similar components or looking up correct
   prop names and MDX syntax.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.
@@ -564,7 +564,7 @@ npm install @neondatabase/neon-js
 | `TwoColumnLayout.Block`  | `label` (optional)      | Content block within a step or item        |
 | `TwoColumnLayout.Footer` | —                       | Full-width content at the bottom of a step |
 
-See [Neon Auth with Next.js](/docs/auth/quick-start/nextjs-api-only) for a live example.
+See [Managed Better Auth with Next.js](/docs/auth/quick-start/nextjs-api-only) for a live example.
 
 ---
 

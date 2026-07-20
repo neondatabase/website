@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 # Docs
@@ -561,7 +561,7 @@ The `TwoColumnLayout` component creates a two-column layout for tutorial pages a
 
 > **Note:** Pages using `TwoColumnLayout` should include `layout: wide` prop to hide the right sidebar (Table of Contents) and provide more space for the two-column layout.
 
-Check [Neon Auth with Next.js](https://neon.com/docs/auth/quick-start/nextjs-api-only) and [Neon TypeScript SDK](https://neon.com/docs/reference/javascript-sdk) for usage examples.
+Check [Managed Better Auth with Next.js](https://neon.com/docs/auth/quick-start/nextjs-api-only) and [Neon TypeScript SDK](https://neon.com/docs/reference/javascript-sdk) for usage examples.
 
 ````md
 <TwoColumnLayout>
@@ -790,9 +790,9 @@ Another term for smoke test
 ```md
 <DetailIconCards>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
+<a href="/docs/reference/api/get-started" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
 
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
+<a href="/docs/reference/api/get-started" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
 
 </DetailIconCards>
 ```

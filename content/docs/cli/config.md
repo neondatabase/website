@@ -23,7 +23,32 @@ The top-level [`neon deploy`](/docs/cli/deploy) command is an alias for `config 
 
 ## neon config init (#init)
 
-Scaffolds a starter `neon.ts` policy file in the current project and installs the `@neon/config` and `@neon/env` packages, so you can start managing a branch declaratively. If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, it is left untouched.
+Scaffolds a starter `neon.ts` policy file in the current project and installs the `@neon/config` and `@neon/env` packages, so you can start managing a branch declaratively. The generated file uses the standard named `defineConfig` import from `@neon/config/v1` and exports the result as the module default, for example:
+
+```ts filename="neon.ts"
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  // Declare your Neon services here
+  auth: false,
+  // Branch policy: per-branch tuning
+  branch: (branch) => {
+    if (branch.isDefault) {
+      // Default branch: no overrides, uses project defaults
+      return {};
+    }
+    if (!branch.exists) {
+      // New non-default branches: auto-expire
+      // Run `neon checkout <name>` to create a new branch with these settings
+      return { ttl: "7d" };
+    }
+    // Existing branch: no changes
+    return {};
+  },
+});
+```
+
+If a `neon.ts`, `neon.mts`, `neon.js`, or `neon.mjs` file already exists, `config init` is idempotent: it leaves that file untouched instead of overwriting hand-written policy.
 
 `config init` runs entirely locally and does not call the Neon API. It detects your package manager (npm, pnpm, yarn, or bun) from how the command was invoked. Pass `--no-install` to skip installation and just print the command to run.
 
@@ -34,6 +59,15 @@ Scaffolds a starter `neon.ts` policy file in the current project and installs th
 ```bash
 neon config init
 ```
+
+For non-interactive setup, run it with package installation disabled, then install the printed dependencies yourself (or add them to your lockfile in a separate step):
+
+```bash
+neon config init --no-install
+npm install @neon/config @neon/env
+```
+
+Use `config init` when you want a trusted starter artifact and package list. Hand-write `neon.ts` instead when you need a different filename/module format or want to avoid modifying files in the current directory.
 
 <Admonition type="tip">
 After running an interactive [`neon link`](/docs/cli/link), the CLI offers to run `config init` as its final step, unless the project already has a `neon.ts` file.
@@ -121,5 +155,5 @@ Applies a `neon.ts` policy to the branch.
 For non-interactive use (scripts, CI, agents), pass `--update-existing` and `--allow-protected` to auto-confirm the corresponding prompts.
 
 ```bash
-neon config apply --branch feature/auth --update-existing
+neon config apply --branch feature/auth --update-existing --allow-protected
 ```

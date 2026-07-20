@@ -3,6 +3,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
 import remarkGfm from 'remark-gfm';
 
+import AiGatewayModelIndex from 'components/pages/doc/ai-gateway-model-index';
 import ApiMethodBadge from 'components/pages/doc/api-method-badge';
 import ApiParam from 'components/pages/doc/api-param';
 import ApiResourceGrid from 'components/pages/doc/api-resource-grid/api-resource-grid';
@@ -35,7 +36,7 @@ import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import Tag from 'components/pages/doc/tag';
 import TechCards from 'components/pages/doc/tech-cards';
-import TwinPaths, { QuickPath, GuidedPath } from 'components/pages/doc/twin-paths';
+import TwinPaths, { QuickPath, GuidedPath, TourCallout } from 'components/pages/doc/twin-paths';
 import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
@@ -193,6 +194,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   TwinPaths,
   QuickPath,
   GuidedPath,
+  TourCallout,
   CommunityBanner,
   QuickLinks,
   QuoteBlock,
@@ -230,6 +232,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CopyPrompt,
   McpSetupConfigurator,
   SqlToRestConverter,
+  AiGatewayModelIndex,
   ...sharedComponents,
 });
 

@@ -8,6 +8,7 @@ redirectFrom:
   - /docs/reference
   - /docs/reference/api-reference
   - /docs/reference/about
+  - /docs/api
   - /docs/api/about
 ---
 
@@ -39,7 +40,7 @@ If you don't need to call the REST API directly, use one of these interfaces ins
 
 <DetailIconCards>
 
-<a href="/docs/cli" description="Use neonctl for terminal, CI/CD, and agent workflows." icon="cli">CLI</a>
+<a href="/docs/cli" description="Use the neon CLI for terminal, CI/CD, and agent workflows." icon="cli">CLI</a>
 
 <a href="/docs/ai/neon-mcp-server" description="Connect AI assistants to Neon with MCP." icon="sparkle">MCP server</a>
 

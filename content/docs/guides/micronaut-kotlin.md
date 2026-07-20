@@ -10,7 +10,7 @@ summary: >-
   The setup uses the micronaut-data-jdbc, jdbc-hikari, and flyway Micronaut
   features alongside the org.postgresql JDBC driver.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/micronaut-kotlin-prompt.md"
@@ -271,5 +271,10 @@ You have successfully connected a Micronaut Kotlin application to your Neon Post
 - [Micronaut Data JDBC documentation](https://micronaut-projects.github.io/micronaut-data/latest/guide/index.html#jdbc)
 - [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
 - [Flyway](https://www.red-gate.com/products/flyway/community/)
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

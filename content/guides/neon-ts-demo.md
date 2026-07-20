@@ -4,14 +4,14 @@ subtitle: Use Neon's native TypeScript configuration to provision services, mana
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-06-25T04:44:21.969Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
 
 With `neon.ts`, you can:
 
-- **Provision Neon services** like Postgres, [Neon Auth](/docs/auth/overview), and the [Data API](/docs/data-api/overview) directly from your codebase.
+- **Provision Neon services** like Postgres, [Managed Better Auth](/docs/auth/overview), and the [Data API](/docs/data-api/overview) directly from your codebase.
 - **Configure branch policies** programmatically, for example, auto-suspending preview branches or applying cost-saving TTLs.
 - **Generate type-safe environment variables** so your application knows exactly which services are available, complete with IDE autocomplete.
 - **Skip state files entirely**, since `neon` reads live state directly from your Neon project.
@@ -120,7 +120,7 @@ export default defineConfig({
 
 The `neon.ts` file defines the Neon services and branch policies for your project:
 
-- **Services**: Enables Postgres, Neon Auth and the Neon Data API for your project.
+- **Services**: Enables Postgres, Managed Better Auth and the Neon Data API for your project.
 - **Production**: Allows scaling up to 2 Compute Units (CU). You can additionally mark the main branch as `protected` to prevent accidental deletion by uncommenting the `protected: true` line. Protected branches require a paid plan. Learn more about [protected branches](/docs/guides/protected-branches).
 - **Development branches** (`dev*`): Applies strict resource controls to new branches whose name starts with `dev`: capped at 1 CU, and scheduled for deletion after 7 days to prevent unnecessary costs.
 - **Other new branches**: Gets an even more minimal profile with a 2-day TTL and a fixed 0.25 CU compute ceiling.
@@ -132,13 +132,13 @@ The config above is just a starting point. Every field shown is configurable: co
 If you remove `auth: true` while keeping `dataApi: true`, your IDE will instantly throw a TypeScript error on the `dataApi` field:
 
 ```text
-Type 'true' is not assignable to type '`dataApi` with Neon Auth (the default
-`authProvider: 'neon'`) requires Neon Auth, so add `auth: true`. To enable the
-Data API WITHOUT Neon Auth, verify a third-party IdP instead: `dataApi: {
+Type 'true' is not assignable to type '`dataApi` with Managed Better Auth (the default
+`authProvider: 'neon'`) requires Managed Better Auth, so add `auth: true`. To enable the
+Data API WITHOUT Managed Better Auth, verify a third-party IdP instead: `dataApi: {
 authProvider: 'external', jwksUrl: 'https://your-idp/.well-known/jwks.json' }`'
 ```
 
-Instead of the usual unhelpful `Type 'true' is not assignable to type 'never'`, `neon.ts` encodes the actual dependency rule and its fixes directly into the expected type. This means your IDE immediately tells you that the Data API requires Neon Auth unless you specify a different `authProvider`, and how to fix it either way.
+Instead of the usual unhelpful `Type 'true' is not assignable to type 'never'`, `neon.ts` encodes the actual dependency rule and its fixes directly into the expected type. This means your IDE immediately tells you that the Data API requires Managed Better Auth unless you specify a different `authProvider`, and how to fix it either way.
 </Admonition>
 
 ## Deploy and sync environment variables
@@ -164,7 +164,7 @@ $ neon config plan
   │ create │ service │ dataApi    │
   └────────┴─────────┴────────────┘
 
-  Utilized services: Postgres, Neon Auth, Data API
+  Utilized services: Postgres, Managed Better Auth, Data API
 ```
 
 When you are ready, apply the changes:
@@ -207,7 +207,7 @@ $ neon deploy
   │ create │ service │ dataApi    │
   └────────┴─────────┴────────────┘
 
-  Utilized services: Postgres, Neon Auth, Data API
+  Utilized services: Postgres, Managed Better Auth, Data API
   INFO: Pulled 6 Neon variables into /home/neon-ts-demo/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_AUTH_BASE_URL, NEON_AUTH_JWKS_URL, NEON_DATA_API_URL
 ```
 
@@ -247,7 +247,7 @@ export default function Home() {
         </div>
 
         <div className="p-4 border rounded bg-gray-50 dark:bg-gray-900">
-          <h2 className="font-semibold text-green-600">Neon Auth</h2>
+          <h2 className="font-semibold text-green-600">Managed Better Auth</h2>
           <p className="text-sm font-mono mt-2">
             JWKS URL: {env.auth.jwksUrl}
           </p>
@@ -359,7 +359,7 @@ preview: {
 
 Running `neon deploy` will provision the buckets and deploy the functions, and `parseEnv` will automatically type your `env.aiGateway` and `env.preview.buckets` variables. For local development, you can run `neon dev` to hot-reload your functions against your linked branch.
 
-_To request access to Neon Functions and Storage, see [Preview access](/docs/compute/functions/preview-access)._
+_Neon Functions and Storage are in beta and available only in AWS US East (Ohio) (`aws-us-east-2`), so create your project there to use them._
 
 ## Conclusion
 
@@ -375,6 +375,6 @@ By using `neon.ts`, you bridge the gap between infrastructure and application co
 - [neon CLI Reference](/docs/cli)
 - [neon config/deploy Reference](/docs/cli/config)
 - [Branching Overview](/docs/manage/branches)
-- [Neon Auth](/docs/auth/overview)
+- [Managed Better Auth](/docs/auth/overview)
 
 <NeedHelp/>
