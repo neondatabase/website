@@ -6,7 +6,7 @@ summary: >-
   functions automatically. Set your own variables with --env at deploy time or
   in neon.ts, and pull branch variables locally with neon env pull.
 enableTableOfContents: true
-updatedOn: '2026-07-20T20:13:30.657Z'
+updatedOn: '2026-07-20T22:48:16.134Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -37,7 +37,7 @@ These variables are branch-scoped: each branch injects its own values. A functio
 </Admonition>
 
 <Admonition type="note" title="Local pull vs. deployed runtime">
-A deployed function gets credentials injected automatically for every service enabled on its branch, so you don't ship a `.env`. For local development, `neon env pull` writes credentials for the services you **declare in `neon.ts`**, which can be a subset. Declare a service (`auth: true`, `dataApi: true`, `aiGateway: true`, `buckets: { ... }`) to pull its credentials locally and to get type-safe access.
+A deployed function gets credentials injected automatically for every service enabled on its branch, so you don't ship a `.env`. For local development, `neon env pull` writes the branch's core variables plus credentials for any services you **declare in `neon.ts`**, which can be a subset. Declare a service (`auth: true`, `dataApi: true`, `aiGateway: true`, `buckets: { ... }`) to pull its credentials locally and to get type-safe access. (Outside a `neon.ts` workflow, `neon env pull` still writes the branch's core variables — see the [`env` command](/docs/cli/env).)
 </Admonition>
 
 For type-safe access, the [`@neon/env`](https://www.npmjs.com/package/@neon/env) package ships `parseEnv`. It takes your `neon.ts` config and returns a typed env object validated against the services the config declares:
@@ -121,7 +121,7 @@ neon env pull --file .env.preview
 
 To pull from a different branch, switch with `neon checkout`; it pulls the new branch's variables as part of the switch.
 
-`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's `DATABASE_URL` and `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`, plus the variables for each service **declared in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`).
+`env pull` writes only the Neon-managed variables and preserves every other line in the file. That's the core variables `DATABASE_URL`, `DATABASE_URL_UNPOOLED`, and `NEON_BRANCH`, plus the variables for any service you **declare in `neon.ts`**: the Managed Better Auth URLs, the Neon Data API URL, the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`), and the Object Storage credentials (`AWS_*`).
 
 ## Constraints
 
