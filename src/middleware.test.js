@@ -68,6 +68,18 @@ describe('Middleware - AI Agent Integration Tests', () => {
       .mockResolvedValueOnce({ ok: true }); // analytics (trackLLMPageview, second call)
   };
 
+  // Route fetches by URL instead of by call order, so tests don't depend on the
+  // exact sequence of markdown fetch / analytics / redirect probe. `md` is the
+  // response for the /md/... static fetch; `probe` is the response for the HTML
+  // sibling redirect probe. Analytics (/t.js) always resolves ok.
+  const mockFetchByUrl = ({ md, probe }) => {
+    global.fetch.mockImplementation((url, opts) => {
+      if (url === 'https://neonapi.io/t.js') return Promise.resolve({ ok: true });
+      if (opts?.redirect === 'manual') return Promise.resolve(probe);
+      return Promise.resolve(md);
+    });
+  };
+
   describe('Content routes - AI Agents should get markdown', () => {
     const testCases = [
       { name: 'Docs', path: '/docs/introduction' },
@@ -212,9 +224,9 @@ describe('Middleware - AI Agent Integration Tests', () => {
     it('should return agent-friendly 404 markdown when markdown fetch returns 404', async () => {
       const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
 
-      global.fetch
-        .mockResolvedValueOnce({ ok: false, status: 404 }) // markdown 404
-        .mockResolvedValueOnce({ ok: true }); // analytics
+      // Non-.md path: markdown 404, no redirect probe (bare moved paths are
+      // handled by next.config before middleware).
+      mockFetchByUrl({ md: { ok: false, status: 404 } });
 
       const response = await middleware(req);
 
@@ -231,14 +243,112 @@ describe('Middleware - AI Agent Integration Tests', () => {
     it('should use shorter cache TTL for agent 404 responses', async () => {
       const req = createMockRequest('/docs/non-existent', 'Claude/1.0', 'text/html');
 
-      global.fetch
-        .mockResolvedValueOnce({ ok: false, status: 404 })
-        .mockResolvedValueOnce({ ok: true });
+      // Non-.md path: no redirect probe (bare moved paths are handled by
+      // next.config before middleware).
+      mockFetchByUrl({ md: { ok: false, status: 404 } });
 
       const response = await middleware(req);
 
       expect(response.status).toBe(404);
       expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
+    });
+
+    it('should track an agent .md request only once when the backend errors (5xx)', async () => {
+      const req = createMockRequest('/docs/cli/login.md', 'Claude/1.0', 'text/html');
+
+      // Markdown backend returns 500: the agent branch tracks once and falls
+      // through to the .md content branch, which must NOT track again.
+      mockFetchByUrl({ md: { ok: false, status: 500 } });
+
+      await middleware(req);
+
+      const analyticsCalls = global.fetch.mock.calls.filter(
+        ([url]) => url === 'https://neonapi.io/t.js'
+      );
+      expect(analyticsCalls).toHaveLength(1);
+    });
+
+    it('should redirect agents to the target .md when a moved page 404s', async () => {
+      const req = createMockRequest('/docs/cli/login.md', 'Claude/1.0', 'text/html');
+
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { ok: false, status: 308, headers: new Headers({ location: '/docs/cli/auth' }) },
+      });
+
+      const response = await middleware(req);
+
+      expect(response.type).toBe('redirect');
+      expect(response.url.toString()).toBe('https://neon.com/docs/cli/auth.md');
+      expect(response.headers.get('Cache-Control')).toBe('public, max-age=3600, s-maxage=86400');
+      // The agent hit is still tracked before the redirect returns.
+      expect(global.fetch).toHaveBeenCalledWith(
+        'https://neonapi.io/t.js',
+        expect.objectContaining({ method: 'POST' })
+      );
+    });
+
+    it('should not redirect when the moved page targets an off-origin URL', async () => {
+      const req = createMockRequest('/docs/legacy.md', 'Claude/1.0', 'text/html');
+
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: {
+          ok: false,
+          status: 308,
+          headers: new Headers({ location: 'https://example.com/somewhere' }),
+        },
+      });
+
+      const response = await middleware(req);
+
+      // Off-origin has no .md equivalent, so fall through to the agent 404.
+      expect(response.status).toBe(404);
+      expect(response.headers.get('X-Content-Source')).toBe('agent-404');
+    });
+
+    it('should not mirror a temporary (307) redirect as a permanent .md redirect', async () => {
+      const req = createMockRequest('/docs/temporary.md', 'Claude/1.0', 'text/html');
+
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { ok: false, status: 307, headers: new Headers({ location: '/docs/elsewhere' }) },
+      });
+
+      const response = await middleware(req);
+
+      // Temporary redirects must not become a hard-cached 308, so fall through.
+      expect(response.status).toBe(404);
+      expect(response.headers.get('X-Content-Source')).toBe('agent-404');
+    });
+
+    it('should mirror a permanent 301 redirect (not just 308)', async () => {
+      const req = createMockRequest('/docs/cli/login.md', 'Claude/1.0', 'text/html');
+
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { ok: false, status: 301, headers: new Headers({ location: '/docs/cli/auth' }) },
+      });
+
+      const response = await middleware(req);
+
+      expect(response.type).toBe('redirect');
+      expect(response.url.toString()).toBe('https://neon.com/docs/cli/auth.md');
+    });
+
+    it('should not redirect when the moved page targets the site root', async () => {
+      const req = createMockRequest('/docs/legacy.md', 'Claude/1.0', 'text/html');
+
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { ok: false, status: 308, headers: new Headers({ location: '/' }) },
+      });
+
+      const response = await middleware(req);
+
+      // Root has no .md equivalent, so fall through to the agent 404.
+      expect(response.status).toBe(404);
+      expect(response.headers.get('X-Content-Source')).toBe('agent-404');
     });
 
     it('should fallback to next() when markdown fetch throws error', async () => {
@@ -257,7 +367,9 @@ describe('Middleware - AI Agent Integration Tests', () => {
     });
   });
 
-  describe('Direct .md URL handling for non-agent requests', () => {
+  // Direct .md URL requests (any UA). .md is agent-shaped traffic, so these are
+  // served as markdown and tracked as LLM pageviews regardless of User-Agent.
+  describe('Direct .md URL handling', () => {
     it('should serve markdown directly for existing .md URLs', async () => {
       const req = createMockRequest(
         '/docs/introduction/existing-doc.md',
@@ -265,9 +377,8 @@ describe('Middleware - AI Agent Integration Tests', () => {
         'text/html'
       );
 
-      global.fetch.mockResolvedValueOnce({
-        ok: true,
-        text: () => Promise.resolve('# Existing doc'),
+      mockFetchByUrl({
+        md: { ok: true, text: () => Promise.resolve('# Existing doc') },
       });
 
       const response = await middleware(req);
@@ -277,17 +388,24 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
       expect(response.headers.get('X-Content-Source')).toBe('markdown');
       expect(await response.text()).toContain('# Existing doc');
-      expect(global.fetch).toHaveBeenCalledTimes(1);
+      // .md requests are treated as agent traffic, so a pageview is tracked.
+      expect(global.fetch).toHaveBeenCalledWith(
+        'https://neonapi.io/t.js',
+        expect.objectContaining({ method: 'POST' })
+      );
     });
 
-    it('should return markdown 404 page for non-agent .md URLs that do not exist', async () => {
+    it('should return markdown 404 page for .md URLs that do not exist', async () => {
       const req = createMockRequest(
         '/docs/introduction/foobar.md',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'text/html'
       );
 
-      global.fetch.mockResolvedValueOnce({ ok: false, status: 404 });
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { ok: false, status: 404, headers: new Headers() }, // no location → no redirect
+      });
 
       const response = await middleware(req);
 
@@ -296,12 +414,58 @@ describe('Middleware - AI Agent Integration Tests', () => {
       expect(response.headers.get('Content-Type')).toBe('text/markdown; charset=utf-8');
       expect(response.headers.get('X-Content-Source')).toBe('md-404');
       expect(await response.text()).toContain('/docs/introduction/foobar.md');
-      expect(global.fetch).toHaveBeenCalledTimes(1);
+      // .md 404s are also tracked as agent traffic.
+      expect(global.fetch).toHaveBeenCalledWith(
+        'https://neonapi.io/t.js',
+        expect.objectContaining({ method: 'POST' })
+      );
+    });
+
+    it('should redirect to the target .md when a moved .md page 404s', async () => {
+      const req = createMockRequest(
+        '/docs/cli/login.md',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'text/html'
+      );
+
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { ok: false, status: 308, headers: new Headers({ location: '/docs/cli/auth' }) },
+      });
+
+      const response = await middleware(req);
+
+      // Probe fired against the HTML sibling with a neutral (non-agent) UA.
+      expect(global.fetch).toHaveBeenCalledWith('https://neon.com/docs/cli/login', {
+        headers: { Accept: 'text/html', 'User-Agent': 'neon-md-redirect-probe' },
+        redirect: 'manual',
+      });
+      expect(response.type).toBe('redirect');
+      expect(response.url.toString()).toBe('https://neon.com/docs/cli/auth.md');
+    });
+
+    it('should append .md to a collapsing subpath redirect target', async () => {
+      // e.g. next.config: /docs/use-cases/:path* → /use-cases
+      const req = createMockRequest(
+        '/docs/use-cases/ai-agents.md',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'text/html'
+      );
+
+      mockFetchByUrl({
+        md: { ok: false, status: 404 },
+        probe: { ok: false, status: 308, headers: new Headers({ location: '/use-cases' }) },
+      });
+
+      const response = await middleware(req);
+
+      expect(response.type).toBe('redirect');
+      expect(response.url.toString()).toBe('https://neon.com/use-cases.md');
     });
 
     it('should pass through static .md files under docs/ai/ without rewriting', async () => {
       const req = createMockRequest(
-        '/docs/ai/skills/neon-postgres/references/neon-serverless.md',
+        '/docs/ai/skills/neon-postgres/references/neon-sdk.md',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'text/html'
       );
@@ -317,7 +481,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it('should pass through static .md files under docs/ai/ for AI agents too', async () => {
       const req = createMockRequest(
-        '/docs/ai/skills/neon-postgres/references/neon-serverless.md',
+        '/docs/ai/skills/neon-postgres/references/neon-sdk.md',
         'Claude/1.0',
         'text/html'
       );

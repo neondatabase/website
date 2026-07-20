@@ -490,7 +490,7 @@ function buildTests() {
 
   // ── 4. Static doc prefixes (pass-through) ─────────────────────────────
 
-  const staticMdPath = '/docs/ai/skills/neon-postgres/references/neon-serverless.md';
+  const staticMdPath = '/docs/ai/skills/neon-postgres/references/neon-sdk.md';
 
   add(
     'Static .md',
@@ -1123,6 +1123,34 @@ function buildTests() {
     'browser',
     [(r) => expectHeader(r.headers, 'x-llms-txt', '/docs/llms.txt')],
     { note: 'HTML content routes should still have X-LLMs-Txt' }
+  );
+
+  // ── 11. redirectFrom for .md URLs ─────────────────────────────────────
+  // A moved doc's .md URL must 308 to the target .md, matching the HTML redirect
+  // (see src/proxy.js). /docs/cli/login is a redirectFrom of content/docs/cli/auth.md.
+
+  add(
+    'redirectFrom .md',
+    '/docs/cli/login.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 308),
+      (r) => expectHeader(r.headers, 'location', '/docs/cli/auth.md'),
+    ],
+    { note: 'redirectFrom source .md → 308 to target .md' }
+  );
+
+  // The HTML counterpart should still redirect (sanity check that the .md
+  // variant did not displace the original redirect).
+  add(
+    'redirectFrom HTML',
+    '/docs/cli/login',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 308),
+      (r) => expectHeader(r.headers, 'location', '/docs/cli/auth'),
+    ],
+    { note: 'redirectFrom source → 308 to target' }
   );
 
   return tests;

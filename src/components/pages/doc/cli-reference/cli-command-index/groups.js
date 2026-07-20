@@ -41,6 +41,7 @@ const GROUP_OF = {
   vpc: 'network',
   api: 'network',
   diff: 'core',
+  snapshots: 'core',
 };
 
 // Commands documented as a section of another command's page instead of a

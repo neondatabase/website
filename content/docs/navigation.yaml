@@ -850,8 +850,6 @@
           items:
             - title: Chat completions
               slug: ai-gateway/chat-completions
-            - title: Anthropic Messages API
-              slug: ai-gateway/anthropic-messages
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
             - title: Gemini API
@@ -1218,6 +1216,8 @@
                   slug: cli/completion
             - title: Projects and branches
               items:
+                - title: snapshots
+                  slug: cli/snapshots
                 - title: diff
                   slug: cli/diff
                 - title: projects

@@ -55,6 +55,9 @@ module.exports = {
     // Legacy docs
     '/docs/auth/legacy/*',
 
+    // Early-access preview (noindex; predates the `unlisted` flag)
+    '/docs/manage/user-permissions-preview',
+
     // Unlisted docs pages (frontmatter `unlisted: true`)
     ...unlistedDocs,
   ],

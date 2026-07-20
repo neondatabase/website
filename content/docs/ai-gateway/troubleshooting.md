@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-17T14:41:09.083Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -44,17 +44,16 @@ The credential store or branch resolver is temporarily unavailable.
 
 The `model` field in the request body does not match any entry in the AI Gateway catalog. The error message includes the model ID you sent.
 
-**Fix:** Check the model ID against the [full model catalog](/docs/ai-gateway/models). Use the short form (e.g., `claude-sonnet-4-6`) or the `databricks-` prefixed form (`databricks-claude-sonnet-4-6`) — both are accepted.
+**Fix:** Check the model ID against the [full model catalog](/docs/ai-gateway/models). Use the short form (e.g., `gpt-5-mini`) or the `databricks-` prefixed form (`databricks-gpt-5-mini`) — both are accepted.
 
 ### `400 model "<model-id>" is not available on the <endpoint> endpoint`
 
-The model exists in the catalog but doesn't work with the endpoint you're calling. The error message names both the model and the endpoint dialect it was sent to (for example, `anthropic_messages`, `openai_responses`, `gemini_generate_content`, or `chat_completions`).
+The model exists in the catalog but doesn't work with the endpoint you're calling. The error message names both the model and the endpoint dialect it was sent to (for example, `openai_responses`, `gemini_generate_content`, or `chat_completions`).
 
 **Fix:** Check which endpoint the model requires:
 
-- Anthropic models (`claude-*`) on `/openai/v1/responses` → use `/anthropic/v1/messages` or `/mlflow/v1/chat/completions`
 - OpenAI codex models on `/mlflow/v1/chat/completions` → use `/openai/v1/responses`
-- Google models on `/anthropic/v1/messages` → use `/ai-gateway/gemini/v1beta/...` or `/mlflow/v1/chat/completions`
+- Google models on `/openai/v1/responses` → use `/ai-gateway/gemini/v1beta/...` or `/mlflow/v1/chat/completions`
 
 See [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use).
 
@@ -104,7 +103,7 @@ The request host does not match the expected format or region.
 
 The request hit the upstream Databricks/provider rate limit.
 
-**Fix:** Implement exponential backoff. The response includes a `Retry-After` header and provider-specific rate limit headers (`X-Ratelimit-*`, `Anthropic-Ratelimit-*`). See [Rate limiting](/docs/ai-gateway/chat-completions#rate-limiting).
+**Fix:** Implement exponential backoff. The response includes a `Retry-After` header and provider-specific rate limit headers (`X-Ratelimit-*`). See [Rate limiting](/docs/ai-gateway/chat-completions#rate-limiting).
 
 ### `429`: account quota exceeded
 

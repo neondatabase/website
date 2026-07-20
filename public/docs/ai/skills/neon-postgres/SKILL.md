@@ -204,7 +204,7 @@ Link: https://neon.com/docs/reference/api-reference.md
 
 ### Neon TypeScript SDK
 
-Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`). For the full API surface — client config, the `{ data, error }` result model, typed errors, readiness/workflow helpers (`createAndConnect`, `createWithCompute`), pagination, every resource namespace, and the raw layer — see [references/neon-sdk.md](references/neon-sdk.md).
+Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neon/sdk` (the fetch-based, zero-dependency successor to `@neondatabase/api-client`). For the full API surface — client config, the `{ data, error }` result model, typed errors, readiness/workflow helpers (`createAndConnect`, `createWithCompute`), pagination, every resource namespace, and the raw layer — see [references/neon-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-sdk.md).
 
 Link: https://neon.com/docs/reference/typescript-sdk.md
 
