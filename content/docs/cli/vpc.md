@@ -34,7 +34,7 @@ Lists the VPC endpoints configured for a Neon organization.
 <CliOptions command="vpc endpoint list" />
 
 ```bash
-neon vpc endpoint list --org-id org-bold-bonus-12345678
+neon vpc endpoint list --org-id org-bold-bonus-12345678 --region-id aws-us-east-1
 ```
 
 ### neon vpc endpoint assign (#endpoint-assign)
@@ -62,7 +62,7 @@ Removes a VPC endpoint from a Neon organization.
 <CliOptions command="vpc endpoint remove" />
 
 ```bash
-neon vpc endpoint remove vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678
+neon vpc endpoint remove vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-1
 ```
 
 <Admonition type="note">
@@ -78,7 +78,7 @@ Gets the status of a VPC endpoint in a Neon organization.
 <CliOptions command="vpc endpoint status" />
 
 ```bash
-neon vpc endpoint status vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678
+neon vpc endpoint status vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-1
 ```
 
 ## Project VPC restrictions (#project)
