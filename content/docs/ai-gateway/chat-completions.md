@@ -8,16 +8,16 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai-gateway/anthropic-messages/
-updatedOn: '2026-07-20T17:20:48.939Z'
+updatedOn: '2026-07-20T19:53:53.968Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
 
 The chat completions endpoint is the recommended way to use Neon AI Gateway. It's fully compatible with the [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat) and works with every model in the [AI Gateway catalog](/docs/ai-gateway/models). Switch models by changing a single field.
 
-**Base URL:** `https://<branch-host>/ai-gateway/mlflow/v1`
+**Base URL:** `https://<branch-host>/v1`
 
-This endpoint is also reachable at the shorter `/v1/chat/completions` path (no `/ai-gateway/mlflow` prefix). Both behave identically. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+This endpoint is also reachable at the longer `/ai-gateway/mlflow/v1/chat/completions` path. Both behave identically and neither is deprecated. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
 
 If you're using an OpenRouter-compatible client that asks for a base URL, set it to `https://<branch-host>/v1` and call `/chat/completions`.
 
@@ -39,7 +39,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
 });
 
 const response = await client.chat.completions.create({
@@ -60,7 +60,7 @@ import os
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1",
 )
 
 response = client.chat.completions.create(
@@ -76,7 +76,7 @@ print(response.choices[0].message.content)
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -102,7 +102,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
 });
 
 const stream = await client.chat.completions.create({
@@ -122,7 +122,7 @@ import os
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1",
 )
 
 with client.chat.completions.create(
@@ -135,7 +135,7 @@ with client.chat.completions.create(
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

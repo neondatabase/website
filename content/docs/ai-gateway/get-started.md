@@ -6,7 +6,7 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-07-20T17:20:48.939Z'
+updatedOn: '2026-07-20T19:53:53.968Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -98,7 +98,7 @@ import 'dotenv/config';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
 });
 
 const response = await client.chat.completions.create({
@@ -118,7 +118,7 @@ load_dotenv()
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1",
 )
 
 response = client.chat.completions.create(
@@ -130,7 +130,7 @@ print(response.choices[0].message.content)
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -153,7 +153,7 @@ import 'dotenv/config';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
 });
 
 const stream = await client.chat.completions.create({
@@ -176,7 +176,7 @@ load_dotenv()
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1",
 )
 
 with client.chat.completions.create(
@@ -189,7 +189,7 @@ with client.chat.completions.create(
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{

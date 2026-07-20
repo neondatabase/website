@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-20T17:20:48.939Z'
+updatedOn: '2026-07-20T19:53:53.968Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -52,8 +52,8 @@ The model exists in the catalog but doesn't work with the endpoint you're callin
 
 **Fix:** Check which endpoint the model requires:
 
-- OpenAI codex models on `/mlflow/v1/chat/completions` → use `/openai/v1/responses`
-- Google models on `/openai/v1/responses` → use `/ai-gateway/gemini/v1beta/...` or `/mlflow/v1/chat/completions`
+- OpenAI codex models on `/v1/chat/completions` → use `/openai/v1/responses`
+- Google models on `/openai/v1/responses` → use `/v1/gemini/v1beta/...` or `/v1/chat/completions`
 
 See [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use).
 

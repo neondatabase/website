@@ -7,12 +7,12 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-07-17T11:46:46.418Z'
+updatedOn: '2026-07-20T20:13:30.657Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
 
-AI Gateway uses Neon bearer credentials, the same credential system as [Neon Object Storage](/docs/introduction). No provider API keys are needed.
+AI Gateway uses Neon bearer credentials, the same scoped-credential system as [Object Storage](/docs/storage/authentication): one credential API mints branch-scoped tokens that differ by scope (AI Gateway uses `ai_gateway:invoke`). No provider API keys are needed.
 
 ## Creating a credential
 
@@ -23,7 +23,7 @@ A credential must include the `ai_gateway:invoke` scope.
 
 In the Neon Console, select your branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, give it a name, and check **ai_gateway:invoke**.
 
-After creation, the credential is shown once. Copy the snippet or click **Download .env** before closing. The snippet includes all four gateway env vars (see [Environment variables](#environment-variables) below).
+After creation, the credential is shown once. Copy the snippet or click **Download .env** before closing. The snippet includes the gateway env vars (see [Environment variables](#environment-variables) below).
 
 To view or revoke credentials later, return to the **Credentials** page and use the action menu (⋮) next to the credential.
 
@@ -79,7 +79,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
 });
 ```
 
@@ -89,7 +89,7 @@ import os
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1",
 )
 ```
 
@@ -99,20 +99,20 @@ client = OpenAI(
 
 Neon provides two gateway env vars. `NEON_AI_GATEWAY_BASE_URL` is the bare branch host, so you append the dialect path yourself when configuring an SDK.
 
-| Variable                   | Value                                                                                               |
-| -------------------------- | --------------------------------------------------------------------------------------------------- |
-| `NEON_AI_GATEWAY_TOKEN`    | Bearer token (`nt_live_...`)                                                                        |
-| `NEON_AI_GATEWAY_BASE_URL` | Bare branch host: `https://<branch-host>`, with no path. Append `/ai-gateway/<dialect>/v1` yourself |
+| Variable                   | Value                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| `NEON_AI_GATEWAY_TOKEN`    | Bearer token (`nt_live_...`)                                                              |
+| `NEON_AI_GATEWAY_BASE_URL` | Bare branch host: `https://<branch-host>`, with no path. Append the dialect path yourself |
 
 Append the dialect path for the endpoint you need:
 
 ```
-NEON_AI_GATEWAY_BASE_URL + /ai-gateway/mlflow/v1   → chat completions (all providers)
-NEON_AI_GATEWAY_BASE_URL + /ai-gateway/openai/v1   → OpenAI Responses API
-NEON_AI_GATEWAY_BASE_URL + /ai-gateway/gemini      → Gemini generateContent API
+NEON_AI_GATEWAY_BASE_URL + /v1            → chat completions (all providers)
+NEON_AI_GATEWAY_BASE_URL + /openai/v1     → OpenAI Responses API
+NEON_AI_GATEWAY_BASE_URL + /v1/gemini     → Gemini generateContent API
 ```
 
-Most dialects are also reachable at a shorter top-level path with no `/ai-gateway/<dialect>` prefix: `/v1/chat/completions` for chat completions and `/openai/v1/responses` for OpenAI Responses. Gemini's shorter alias keeps the `gemini` segment: `/v1/gemini/v1beta/models/{model}:generateContent`. `GET /v1/models` lists the catalog in an OpenRouter-shaped response. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full mapping.
+Each inference dialect is also reachable at a longer `/ai-gateway/<dialect>/v1` path (e.g. `/ai-gateway/mlflow/v1` for chat completions, `/ai-gateway/openai/v1` for Responses, `/ai-gateway/gemini` for Gemini). Both forms behave identically and neither is deprecated. The model list is the exception: it has only `GET /v1/models`, with no `/ai-gateway/...` form. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full mapping.
 
 To use an OpenAI SDK, set its `apiKey` and `baseURL` from these variables (see the examples below).
 
@@ -134,7 +134,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/openai/v1`,
 });
 
 const response = await client.responses.create({
@@ -143,14 +143,14 @@ const response = await client.responses.create({
 });
 ```
 
-For the chat completions endpoint, point the base URL at the `mlflow` dialect instead:
+For the chat completions endpoint, point the base URL at `/v1` instead:
 
 ```typescript
 import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
 });
 ```
 
