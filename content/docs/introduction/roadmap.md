@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-21T12:07:59.860Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -56,6 +56,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ### Postgres compute
 
+- **Postgres 19 support**: We support Postgres 14 through 18 today, with Postgres 19 support on the way.
 - **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
 - Fixed compute sizes up to 128 CUs
 - Autoscaling up to 60 CUs
@@ -77,6 +78,13 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **Neon backend services in beta**: Object Storage, Functions, and AI Gateway have graduated from private preview to beta and are available to everyone in AWS US East (Ohio). Declare your whole backend in one `neon.ts` file and it branches with your data. [Read the announcement](https://neon.com/blog/neon-backend-is-beta).
+- **New TypeScript SDK for the Neon API**: `@neon/sdk` is a fetch-based, zero-dependency client that covers the full Neon Platform API, including the new backend services, and replaces `@neondatabase/api-client` as the recommended client. [Learn more](/docs/reference/typescript-sdk).
+- **Passkey support**: Sign in to Neon with a passkey using device biometrics or a security key. Passkeys satisfy organization-level 2FA requirements. [Learn more](/docs/manage/accounts#passkeys).
+- **Git-style diffs in the Neon CLI**: The new `neon diff` command shows schema changes between your current branch and any other branch, and the config commands now report their changes as a git diff. [Learn more](/docs/cli).
+- **New `neon api` command**: Call any Neon Platform API route from the terminal using your existing CLI login, without hand-building `curl` requests or handing agents raw API keys. [Learn more](/docs/cli/api).
+- **Cmd+K in the Neon Console**: Press `Cmd+K` (or `Ctrl+K`) anywhere in the Console to open a searchable command bar with actions scoped to your current branch and project.
+- **Neon CLI is now `neon`**: Install the CLI as `neon` (`npm i -g neon`) instead of `neonctl`, scaffold a `neon.ts` config with `neon config init`, and print your current branch with no network call using `neon status`. [Learn more](/docs/cli/install).
 - **Lakebase Search**: Vector and BM25 full-text search are now available to all users on Postgres 16+ through the `lakebase_vector` and `lakebase_text` extensions, so you can run semantic, keyword, and hybrid search in Postgres without a separate search stack. [Learn more](/docs/ai/lakebase-search)
 - **neon.ts**: A TypeScript config file you commit to your repo to declare branch policies, compute settings, and Neon services as code. Apply changes with `neon deploy` and preview them with `neon config plan`. [Learn more](/docs/reference/neon-ts)
 - **Branch-first development workflow**: New CLI commands (`neon link`, `neon checkout`, `neon env pull`, `neon psql`, `neon data-api`) bring project linking and branch switching to the terminal. Your `DATABASE_URL` updates automatically when you check out a branch. [Learn more](/docs/cli)
