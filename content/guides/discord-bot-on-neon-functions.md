@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-07-16T10:58:03.001Z'
+updatedOn: '2026-07-21T03:34:44.052Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -24,7 +24,7 @@ Before you begin, ensure you have:
 1. **Node.js**: Version 24. Download from [nodejs.org](https://nodejs.org/en/download/).
 2. **Neon Account**: Sign up for a free Neon account at [console.neon.tech](https://console.neon.tech/signup).
 3. **Discord Account**: Sign up for a free Discord account at [discord.com](https://discord.com/register).
-4. **Neon CLI**: Installed globally (`npm i -g neonctl`) and authenticated (`neonctl auth`). Checkout [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
+4. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). Checkout [Neon CLI Quickstart](/docs/cli/quickstart) for more details.
 
 <Steps>
 
@@ -48,13 +48,13 @@ mkdir neon-discord-bot && cd neon-discord-bot
 Run the Neon CLI initialization command. This will prompt you to authenticate and link the directory to a Neon project:
 
 ```bash
-neonctl init --preview
+neon init
 ```
 
 When asked to choose a template, select **No thanks - continue without scaffolding**, since you'll be writing the code from scratch. During setup, install the Neon MCP server and extensions when prompted. The Neon agent skill will be automatically added to your project, enabling AI agents to assist with development tasks such as code generation, testing, and deployment.
 
 ```bash
-$ neonctl init --preview
+$ neon init
 
   ██╗  ██╗██████╗  ██████╗ ██╗  ██╗
   ███╗ ██║██╔═══╝ ██╔═══██╗███╗ ██║
@@ -69,14 +69,8 @@ $ neonctl init --preview
   │
   ◇  Configuration checked ✓
   │
-  ◆  No application detected. Would you like to scaffold a new project from a template?
-  │  ○ REST API
-  │  ○ Image-generation agent
-  │  ○ Personal-assistant agent
-  │  ○ MCP server
-  │  ○ Realtime chat
-  │  ○ Realtime counter
-  │  ● No thanks - continue without scaffolding
+  ◆  Which Neon features would you like to enable for this project?
+  │  Database
 
   Neon editor extension already installed ✓
   │
@@ -91,25 +85,56 @@ $ neonctl init --preview
 Next, install the required dependencies:
 
 ```bash
-npm install hono discord-interactions ai @neondatabase/ai-sdk-provider @neondatabase/functions @neondatabase/config
+npm install hono discord-interactions @neon/ai-sdk-provider @neon/functions
 npm install --save-dev esbuild @types/node typescript
 ```
 
 - `hono`: A lightweight TypeScript-first web framework for building REST APIs.
 - `discord-interactions`: Discord's official library for implementing slash commands and verifying webhook signatures.
-- `ai`: The Vercel AI SDK, which provides `generateText` and the tooling used to call the AI Gateway.
-- `@neondatabase/ai-sdk-provider`: Neon's AI SDK Provider, which allows you to access LLMs and image generation tools.
-- `@neondatabase/functions` and `@neondatabase/config`: The Neon Functions runtime and configuration helpers used to define and deploy your function.
+- `@neon/ai-sdk-provider`: Neon's AI SDK Provider, which allows you to access LLMs and image generation tools.
+- `@neon/functions`: Neon's Functions SDK, which provides utilities for building serverless functions.
 
 ## Link your Neon project
 
 Link your local project to a Neon project using the Neon CLI:
 
 ```bash
-neonctl link
+neon link
 ```
 
-Follow the prompts to select an existing Neon project or create a new one. This command establishes the connection between your local environment and your Neon Project, so that subsequent `neonctl deploy` commands know where to deploy.
+Follow the prompts to select your organization and create a new project:
+
+<Admonition type="note">
+Ensure you select the **AWS US East 2 (Ohio)** region when creating your Neon project, as Neon Functions are currently only available in this region during Beta. After linking, choose “yes” when prompted to manage the setup as code to automatically generate a `neon.ts` file for your project.
+</Admonition>
+
+```bash
+$ neon link
+
+✔ Which organization would you like to link? › YOUR_ORG_NAME
+✔ Which project would you like to link? › ＋ Create new project…
+✔ Name for the new project: … neon-functions-discord
+✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
+Created project quiet-fog-09491284 ("neon-functions-discord") in aws-us-east-2.
+Linked /home/neon-discord-bot/.neon:
+  orgId:     org-round-waterfall-61562384
+  projectId: quiet-fog-09491284
+  branch:    main
+
+INFO: Pulled 3 Neon variables into /home/neon-discord-bot/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
+INFO: Created neon.ts with a starter policy.
+INFO: Installing @neon/config, @neon/env with npm…
+
+added 15 packages, and audited 42 packages in 3s
+
+7 packages are looking for funding
+  `npm run fund` for details
+
+found 0 vulnerabilities
+INFO: Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
+INFO: Pulled 3 Neon variables into /home/neon-discord-bot/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+```
 
 ## Configure environment variables
 
@@ -181,14 +206,20 @@ The above code does the following:
 - Handles the `APPLICATION_COMMAND` interaction type, specifically the `/reverse` command. When a user invokes this command, the bot reverses the input text and responds with the reversed string.
 - Returns a 400 error for any unknown interactions.
 
-## Create neon.ts
+## Update neon.ts
 
-Create a [`neon.ts`](/docs/reference/neon-ts) file in the root of your project to define your Neon Functions configuration. This file tells Neon how to deploy your function and which environment variables to include.
+The `neon link` command created a `neon.ts` file in your project root. Update it to add the Discord bot function and configure the environment variables:
 
-```ts
-import { defineConfig } from "@neondatabase/config/v1";
+```ts {10-22}
+import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
+  auth: false,
+  branch: (branch) => {
+    if (branch.isDefault) { return {}; }
+    if (!branch.exists) { return { ttl: "7d" }; }
+    return {};
+  },
   preview: {
     functions: {
       bot: {
@@ -203,6 +234,7 @@ export default defineConfig({
     },
   },
 });
+
 ```
 
 ## Deploy your bot
@@ -210,13 +242,13 @@ export default defineConfig({
 With the initial code written, deploy your bot to Neon Functions:
 
 ```bash
-neonctl deploy --env .env.local
+neon deploy --env .env.local
 ```
 
 The CLI will output something like this:
 
 ```bash
-neonctl deploy --env .env.local
+neon deploy --env .env.local
 INFO: → Applying to branch main (br-damp-voice-ajjys6qp)
 Applied changes
 ┌────────┬─────────┬──────────────┐
@@ -231,7 +263,7 @@ Function URLs
 Utilized services: Postgres, Functions
 ```
 
-Your bot is now live. Copy the function URL from the output (the `https://...neon.tech/` line). If you need to retrieve it later, run `neonctl functions get bot`.
+Your bot is now live. Copy the function URL from the output (the `https://...neon.tech/` line). If you need to retrieve it later, run `neon functions get bot`.
 
 ## Connect your bot to Discord
 
@@ -331,7 +363,7 @@ Update `index.ts` to include the Neon AI SDK and handle the `/chat` and `/imagin
 ```ts {3-4,8-28,30-71,97-98,108-118}
 import { Hono } from 'hono';
 import { verifyKey, InteractionType, InteractionResponseType } from 'discord-interactions';
-import { neon } from '@neondatabase/ai-sdk-provider';
+import { neon } from '@neon/ai-sdk-provider';
 import { generateText } from 'ai';
 
 const app = new Hono();
@@ -468,7 +500,7 @@ The [Neon AI SDK provider](https://github.com/neondatabase/neon-pkgs/tree/main/p
 Redeploy your bot to Neon Functions with the updated code:
 
 ```bash
-neonctl deploy --env .env.local
+neon deploy --env .env.local
 ```
 
 The CLI will output the same deployment details as before. Your bot is now running the updated code with AI support.
