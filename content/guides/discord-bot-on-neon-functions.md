@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-07-21T03:31:03.715Z'
+updatedOn: '2026-07-21T03:34:44.052Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -38,10 +38,6 @@ You'll need to create a Discord application to get the credentials required to c
 4. Keep the Developer Portal open. You will need to enter the bot's endpoint URL later, which will be generated when you deploy your Neon Function.
 
 ## Initialize your Neon Project
-
-<Admonition type="note">
-Neon Functions are currently available only in the AWS US East (Ohio) (`aws-us-east-2`) region. Make sure to select this region when creating your project.
-</Admonition>
 
 Create a new directory for your bot and initialize a Neon Functions project.
 
