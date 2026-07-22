@@ -1266,6 +1266,10 @@
                   slug: cli/ip-allow
                 - title: vpc
                   slug: cli/vpc
+            - title: Debugging
+              items:
+                - title: inspect
+                  slug: cli/inspect
         - section: API
           icon: api
           items:

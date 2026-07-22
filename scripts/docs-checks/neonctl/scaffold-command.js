@@ -40,6 +40,7 @@ const NAV_TITLE_BY_GROUP = {
   config: 'Config as code',
   surfaces: 'Functions, storage and data',
   network: 'Organizations and networking',
+  debugging: 'Debugging',
 };
 
 // Extract group ids from the GROUPS array literal in groups.js, so the list of

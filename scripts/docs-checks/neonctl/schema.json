@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.35.2",
+  "neonctlVersion": "2.36.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -1528,6 +1528,146 @@
       },
       "commands": {},
       "describe": "Initialize a project with Neon using your AI coding assistant"
+    },
+    "inspect": {
+      "aliases": [
+        "inspection"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "db": {
+          "name": "db",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "database-name": {
+              "type": "string",
+              "describe": "Database name"
+            },
+            "db-url": {
+              "type": "string",
+              "describe": "Inspect any Postgres via a connection string, bypassing the Neon API (project/branch resolution is skipped)"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            },
+            "role-name": {
+              "type": "string",
+              "describe": "Role name"
+            }
+          },
+          "commands": {
+            "bloat": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Estimated table/index bloat (statistical estimate, no extension needed)"
+            },
+            "calls": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Most frequently called queries (needs pg_stat_statements)"
+            },
+            "index-sizes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Size of each index, largest first (pg_relation_size)"
+            },
+            "lfc-hit-rate": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Local File Cache hit rate (needs neon extension)"
+            },
+            "locks": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Locks held with the acquiring query and its age (pg_locks + pg_stat_activity)"
+            },
+            "long-running-queries": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Queries running longer than 5 minutes (pg_stat_activity)"
+            },
+            "outliers": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Queries taking the most cumulative execution time (needs pg_stat_statements)"
+            },
+            "replication-slots": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Replication slots: kind, status, client, restart/confirmed-flush LSNs, and lag (pg_replication_slots + pg_stat_replication)"
+            },
+            "seq-scans": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Number of sequential scans recorded against each table (pg_stat_user_tables)"
+            },
+            "subscriptions": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Per-table logical replication progress on this subscriber (pg_subscription_rel)"
+            },
+            "table-sizes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Size of each table (including TOAST), largest first (pg_table_size)"
+            },
+            "unused-indexes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Non-unique indexes with few scans — candidates for removal (pg_stat_user_indexes)"
+            },
+            "vacuum-stats": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Autovacuum status per table: last (auto)vacuum, dead tuples, threshold"
+            },
+            "working-set": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Estimated working set vs LFC size (needs neon extension)"
+            }
+          },
+          "describe": "Run a diagnostic query against a branch's Postgres",
+          "usage": "$0 inspect db <sub-command> [options]"
+        }
+      },
+      "describe": "Inspect a database's health and configuration",
+      "usage": "$0 inspect <sub-command> [options]"
     },
     "ip-allow": {
       "aliases": [],

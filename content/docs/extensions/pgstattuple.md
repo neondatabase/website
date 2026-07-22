@@ -12,7 +12,7 @@ summary: >-
   for B-tree fragmentation metrics. GIN and hash index stats are covered by
   `pgstatginindex()` and `pgstathashindex()`.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 ---
 
 The `pgstattuple` extension provides a suite of functions to inspect the physical storage of Postgres tables and indexes at a detailed, tuple (row) level. It offers insights into issues like table and index bloat, fragmentation, and overall space utilization, which are crucial for performance tuning and storage management.
@@ -279,6 +279,8 @@ LIMIT 10;
 <Admonition type="warning" title="Resource Intensive Query">
 Running `pgstattuple()` for every table can be very resource-intensive. For larger databases, consider using `pgstattuple_approx()` in the `CROSS JOIN LATERAL` subquery or filtering tables by size first (for example, adding `AND pg_total_relation_size(c.oid) > '1GB'` to the `WHERE` clause).
 </Admonition>
+
+For a lighter-weight estimate that needs no extension, [`neon inspect db bloat`](/docs/cli/inspect#db-bloat) reports the top bloated tables from the Neon CLI.
 
 ### Diagnosing and resolving index bloat and fragmentation
 

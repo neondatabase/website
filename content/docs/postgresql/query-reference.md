@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-reference
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 ---
 
 <CTA />
@@ -661,6 +661,8 @@ Functions are typically used to perform computations. For additional information
 ## Performance tuning
 
 To analyze query performance in Postgres, you can use a combination of built-in views, extensions, and commands that help identify performance bottlenecks and optimize query execution. Here are some examples:
+
+Many of the checks below are also available as one-line commands under [`neon inspect db`](/docs/cli/inspect) in the Neon CLI.
 
 ### Use pg_stat_statements
 
