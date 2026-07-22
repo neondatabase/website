@@ -1,0 +1,10 @@
+{
+  "_comment": "Declares subcommands that neonctl registers dynamically (in a loop over a const map) rather than as literal `.command('name', ...)` chains the static parser can read. For each entry, generate-schema.js reads the named const from the given source file, treats each top-level key as a leaf subcommand, and uses the key's `describeProp` as its description. `inspect db` is the only such command today. Verify with `npm run cli-docs -- verify-dynamic` (compares against a matching-version `neon <path> --help`). See README.md.",
+  "commands": {
+    "inspect.db": {
+      "sourceFile": "src/utils/inspect_queries.ts",
+      "enumerateConst": "INSPECT_QUERIES",
+      "describeProp": "describe"
+    }
+  }
+}

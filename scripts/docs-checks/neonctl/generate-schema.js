@@ -122,6 +122,26 @@ function collectModuleConsts(sf) {
   return consts;
 }
 
+// Builds a map of module-level `const name = (argv) => ...` / `const name =
+// function (argv) {...}` builder functions, so a `.command('db', 'desc',
+// dbBuilder)` that passes its builder as a bare identifier (rather than an
+// inline arrow) can still be walked. `inspect db` is the only command that
+// does this today, but the resolution is general.
+function collectFunctionConsts(sf) {
+  const fns = new Map();
+  sf.forEachChild((node) => {
+    if (!ts.isVariableStatement(node)) return;
+    for (const decl of node.declarationList.declarations) {
+      if (!ts.isIdentifier(decl.name) || !decl.initializer) continue;
+      const init = unwrapExpression(decl.initializer);
+      if (init && (ts.isArrowFunction(init) || ts.isFunctionExpression(init))) {
+        fns.set(decl.name.text, init);
+      }
+    }
+  });
+  return fns;
+}
+
 // Resolves an expression to an option-spec ObjectLiteralExpression, if
 // possible. Handles inline object literals and external references like
 // `projectCreateRequest['project.name']` where the referenced const (e.g.
@@ -401,11 +421,21 @@ function parseCommandCall(callArgs, consts) {
 // Walks an arrow-function / function builder body, collecting
 // `.options(...)` and `.command(...)` calls into the `node` accumulator.
 function walkBuilder(builderNode, node, consts) {
+  // A builder passed as a bare identifier (`.command('db', 'desc', dbBuilder)`)
+  // resolves to its module-level function const, whose body we then walk. Only
+  // `inspect db` does this today; the resolution is general.
+  let resolvedBuilder = builderNode;
+  if (builderNode && ts.isIdentifier(builderNode) && consts && consts.has(builderNode.text)) {
+    const target = consts.get(builderNode.text);
+    if (target && (ts.isArrowFunction(target) || ts.isFunctionExpression(target))) {
+      resolvedBuilder = target;
+    }
+  }
   let body;
-  if (ts.isArrowFunction(builderNode) || ts.isFunctionExpression(builderNode)) {
-    body = builderNode.body;
+  if (ts.isArrowFunction(resolvedBuilder) || ts.isFunctionExpression(resolvedBuilder)) {
+    body = resolvedBuilder.body;
   } else {
-    body = builderNode;
+    body = resolvedBuilder;
   }
   // The body is either a block (with a return and/or expression
   // statements) or a single expression. Collect every candidate so we
@@ -535,8 +565,14 @@ function walkBuilder(builderNode, node, consts) {
 
 function parseCommandFile(srcFile, externalConsts) {
   const sf = readSource(srcFile);
-  // File-local consts shadow external ones (parameters.gen.ts).
-  const consts = new Map([...(externalConsts || new Map()), ...collectModuleConsts(sf)]);
+  // File-local consts shadow external ones (parameters.gen.ts). Function
+  // consts (builder functions passed by identifier) live in the same map so
+  // walkBuilder can resolve `.command('db', 'desc', dbBuilder)`.
+  const consts = new Map([
+    ...(externalConsts || new Map()),
+    ...collectModuleConsts(sf),
+    ...collectFunctionConsts(sf),
+  ]);
   const result = {
     name: null,
     aliases: [],
@@ -631,6 +667,84 @@ function parseGlobalOptions(cliSrc) {
   return filtered;
 }
 
+// Reads the top-level keys (and their `describeProp` values) of a const
+// object literal declared in a source file. Used to enumerate subcommands
+// neonctl registers dynamically (see applyDynamicCommands). Returns an
+// ordered array of `{ name, describe }`, or null if the const can't be
+// resolved (source moved, const renamed) so the caller can fail loudly.
+function enumerateConstEntries(srcFile, constName, describeProp) {
+  if (!fs.existsSync(srcFile)) return null;
+  const sf = readSource(srcFile);
+  const consts = collectModuleConsts(sf);
+  const obj = consts.get(constName);
+  if (!obj || !ts.isObjectLiteralExpression(obj)) return null;
+  const entries = [];
+  for (const p of obj.properties) {
+    if (!ts.isPropertyAssignment(p)) continue;
+    let key;
+    if (ts.isIdentifier(p.name)) key = p.name.text;
+    else if (ts.isStringLiteral(p.name)) key = p.name.text;
+    if (!key) continue;
+    const entry = { name: key };
+    const spec = resolveSpecObject(p.initializer, consts);
+    if (spec) {
+      const descProp = getProp(spec, describeProp);
+      if (descProp && ts.isPropertyAssignment(descProp)) {
+        const d = resolveStringValue(descProp.initializer, consts);
+        if (d !== undefined) entry.describe = d.trim();
+      }
+    }
+    entries.push(entry);
+  }
+  return entries;
+}
+
+// Injects subcommands that neonctl registers dynamically (in a loop over a
+// const map) into the command tree. These are invisible to the static parser
+// — `dynamic-commands.json` names the const and source file to enumerate. The
+// parent node (e.g. `inspect db`) must already exist from the static walk;
+// its options and usage came through Gap-1 identifier-builder resolution.
+//
+// A configured parent that isn't in this CLI version is skipped (the config is
+// forward-compatible: it lies dormant until the command ships upstream). But a
+// parent that IS present with a const that can't be enumerated throws — that's
+// real drift (renamed/moved const) and must fail the refresh loudly rather
+// than silently emit an empty leaf list.
+function applyDynamicCommands(schema, src) {
+  const configPath = path.join(__dirname, 'dynamic-commands.json');
+  if (!fs.existsSync(configPath)) return schema;
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  for (const [cmdPath, spec] of Object.entries(config.commands || {})) {
+    const parts = cmdPath.split('.');
+    let node = { commands: schema.commands };
+    let missing = false;
+    for (const part of parts) {
+      node = node.commands && node.commands[part];
+      if (!node) {
+        missing = true;
+        break;
+      }
+    }
+    // Parent absent: this CLI version doesn't have the command yet. Skip.
+    if (missing) continue;
+    const srcFile = path.join(src, spec.sourceFile);
+    const entries = enumerateConstEntries(srcFile, spec.enumerateConst, spec.describeProp);
+    if (!entries || entries.length === 0) {
+      throw new Error(
+        `dynamic-commands.json: could not enumerate "${spec.enumerateConst}" in ${spec.sourceFile} ` +
+          `for "${cmdPath}". The const may have been renamed or moved upstream — update the config.`
+      );
+    }
+    node.commands = node.commands || {};
+    for (const entry of entries) {
+      const leaf = { aliases: [], positionals: [], options: {}, commands: {} };
+      if (entry.describe) leaf.describe = entry.describe;
+      node.commands[entry.name] = leaf;
+    }
+  }
+  return schema;
+}
+
 // Deep-merges `overrides.json` (if present) into the schema. Overrides are
 // the escape hatch for terse or missing upstream descriptions — same shape
 // as the schema itself, merged key-by-key with overrides winning.
@@ -712,15 +826,19 @@ function buildSchema({ src } = {}) {
     commands[parsed.name] = entry;
   }
 
-  return applyOverrides({
-    schemaVersion: 2,
-    neonctlVersion: pkg.version,
-    // The published binary names; `neon` is an alias of `neonctl`.
-    binaries: ['neonctl', 'neon'],
-    docsUrl: 'https://neon.com/docs/cli',
-    globalOptions,
-    commands,
-  });
+  const schema = applyDynamicCommands(
+    {
+      schemaVersion: 2,
+      neonctlVersion: pkg.version,
+      // The published binary names; `neon` is an alias of `neonctl`.
+      binaries: ['neonctl', 'neon'],
+      docsUrl: 'https://neon.com/docs/cli',
+      globalOptions,
+      commands,
+    },
+    src
+  );
+  return applyOverrides(schema);
 }
 
 const USAGE = [
@@ -815,6 +933,7 @@ module.exports = {
   parseGlobalOptions,
   parseOptionsObject,
   parseCommandCall,
+  enumerateConstEntries,
 };
 
 if (require.main === module) main();
