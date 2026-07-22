@@ -15,7 +15,7 @@ const Auth = () => (
       <div className="min-w-0 border-t border-gray-new-20 pt-9 lg:pt-7">
         <Heading
           icon="auth"
-          title="<strong>Managed Better Auth included.</strong> Simplify your application with user authentication and management built into the database."
+          title="<strong>Managed authentication, powered by Better Auth.</strong> Add user sign-up, login, and management to your application with authentication built into the database."
         />
         <RiveAnimation
           className="aspect-[1184/580] w-full"
