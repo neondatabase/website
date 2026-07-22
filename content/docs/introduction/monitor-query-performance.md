@@ -10,7 +10,7 @@ summary: >-
   system-managed database. Query history resets whenever the Neon compute
   suspends or restarts, including after scaling to zero due to inactivity.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 redirectFrom:
   - /docs/introduction/monitor-query-history
 ---
@@ -34,3 +34,5 @@ In Neon, data collected by the `pg_stat_statements` extension is not retained wh
 ## Running your own queries
 
 To run your own queries on `pg_stat_statements` data, you can install the `pg_stat_statements` extension to your database and run your queries from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client, such as [psql](/docs/connect/query-with-psql-editor). For details on `pg_stat_statements`, including how to install it, what data it collects, and queries you can run, refer to our [pg_stat_statements](/docs/extensions/pg_stat_statements) extension guide.
+
+You can also get this data from the terminal with [`neon inspect db outliers`](/docs/cli/inspect#db-outliers) and [`neon inspect db calls`](/docs/cli/inspect#db-calls).

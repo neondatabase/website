@@ -7,7 +7,7 @@ summary: >-
   connection saturation, cache misses, or replication lag, and decide whether
   to scale up or enable pooling. Historical data retention depends on your plan.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -220,3 +220,5 @@ The **Working set size** graph visualizes the amount of data accessed (calculate
   If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
 
 If your workload pattern doesn't change much over time it is recommended to compare the 1h time interval working set size with the LFC size and make sure that working set size is smaller than LFC size.
+
+To read these values from the terminal, see [`neon inspect db working-set`](/docs/cli/inspect#db-working-set) and [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate).
