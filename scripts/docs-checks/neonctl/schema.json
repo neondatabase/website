@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.34.0",
+  "neonctlVersion": "2.35.2",
   "binaries": [
     "neonctl",
     "neon"
@@ -305,6 +305,10 @@
             "parent": {
               "type": "string",
               "describe": "Parent branch name or id or timestamp or LSN. Defaults to the default branch"
+            },
+            "protected": {
+              "type": "boolean",
+              "describe": "Whether the branch is protected"
             },
             "psql": {
               "type": "boolean",
@@ -2378,6 +2382,10 @@
               "type": "string",
               "describe": "The project's organization ID"
             },
+            "pg-version": {
+              "type": "number",
+              "describe": "Major PostgreSQL version (14–19). Version 19 is available only in regions where it has been enabled."
+            },
             "psql": {
               "type": "boolean",
               "describe": "Connect to a new project via psql",
@@ -2479,6 +2487,10 @@
               "type": "string",
               "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
             },
+            "enable-logical-replication": {
+              "type": "boolean",
+              "describe": "Enable logical replication for all project endpoints. This suspends active endpoints and cannot be disabled."
+            },
             "hipaa": {
               "type": "boolean",
               "describe": "Enable HIPAA compliance for the project."
@@ -2486,6 +2498,11 @@
             "name": {
               "type": "string",
               "describe": "The project name"
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt when enabling logical replication.",
+              "default": false
             }
           },
           "commands": {},

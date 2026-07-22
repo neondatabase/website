@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-07-14T22:23:35.340Z'
+updatedOn: '2026-07-22T13:42:19.210Z'
 redirectFrom:
   - /docs/reference/cli-branches
   - /docs/cli/branch
@@ -262,6 +262,12 @@ Create a schema-only branch:
 
 ```bash
 neon branches create --schema-only
+```
+
+Create a [protected branch](/docs/guides/protected-branches):
+
+```bash
+neon branches create --name production --protected
 ```
 
 ## neon branches reset (#reset)
