@@ -1,4 +1,4 @@
-text: 'Neon is expanding into a backend: Object Storage, Functions, and AI Gateway now in beta'
+text: 'Just shipped: Use neon inspect db to debug your Neon database from your agent/CLI'
 link:
-  url: 'https://neon.com/blog/neon-backend-is-beta'
+  url: 'https://neon.com/blog/neon-inspect-db'
   target: '_blank'
