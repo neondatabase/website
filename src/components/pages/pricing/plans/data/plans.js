@@ -220,8 +220,8 @@ export default {
         subtitle: 'Egress',
       },
       free: '5 GB included',
-      launch: '500 GB per project included<span>then $0.10 per GB</span>',
-      scale: '500 GB per project included<span>then $0.10 per GB</span>',
+      launch: '500 GB per project included<span>then $0.10/GB</span>',
+      scale: '500 GB per project included<span>then $0.10/GB</span>',
     },
     {
       rows: '2',
