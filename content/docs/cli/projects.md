@@ -8,10 +8,9 @@ summary: >-
   connections, and filtering shared projects. Use this page when you need CLI
   automation for project lifecycle tasks or to recover a deleted project within
   its 7-day recovery window. Projects created via the CLI default to Postgres
-  18; use the Neon Console or API to create projects on earlier Postgres
-  versions.
+  18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-07-22T13:42:19.210Z'
+updatedOn: '2026-07-22T13:52:43.579Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
