@@ -3,22 +3,26 @@ import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import HasuraLogo from 'components/shared/logos/images/hasura.inline.svg';
-import VercelLogo from 'components/shared/logos/images/vercel.inline.svg';
 import LINKS from 'constants/links';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 import triangleIcon from 'icons/triangle.svg';
 import patternSvg1 from 'images/pages/case-studies/hero/pattern-1.svg';
 import patternSvg2 from 'images/pages/case-studies/hero/pattern-2.svg';
+import { cn } from 'utils/cn';
 
 const CARDS = [
   {
-    logo: VercelLogo,
+    logo: {
+      src: '/images/case-studies/replit.svg',
+      width: 120,
+      height: 32,
+    },
     category: 'AI & Agents',
     title:
-      '99.99% uptime without over-provisioning. <span>How Vercel uses autoscaling to keep Postgres stable.</span>',
+      '<span>“The combination of </span>flexible resource limits and nearly instant provisioning<span> made Neon a no-brainer.”</span>',
+    author: 'Lincoln Bergeson, Engineer',
     linkText: 'Read case study',
-    linkUrl: `${LINKS.blog}/neon-postgres-on-vercel`,
+    linkUrl: `${LINKS.blog}/neon-replit-integration`,
     background: {
       src: patternSvg1,
       width: 303,
@@ -26,12 +30,17 @@ const CARDS = [
     },
   },
   {
-    logo: HasuraLogo,
-    category: 'fast-moving teams',
-    title:
-      'Database operations, made repeatable. <span>How Hasura standardizes provisioning across environments with Neon.</span>',
+    logo: {
+      src: '/images/case-studies/vapi.svg',
+      width: 99,
+      height: 32,
+    },
+    category: 'AI & Agents',
+    title: '<span>“Neon’s serverless model is a </span>perfect fit for us.”',
+    titleTheme: 'large',
+    author: 'Tejas Siripurapu, Founding Engineer',
     linkText: 'Read case study',
-    linkUrl: `${LINKS.blog}/neon-hasura-integration`,
+    linkUrl: `${LINKS.blog}/vapi-voice-agents-neon`,
     background: {
       src: patternSvg2,
       width: 285,
@@ -40,8 +49,17 @@ const CARDS = [
   },
 ];
 
-const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, background }) => (
-  <Link className="group" to={linkUrl}>
+const FeaturedCard = ({
+  logo,
+  category,
+  title,
+  titleTheme,
+  author,
+  linkText,
+  linkUrl,
+  background,
+}) => (
+  <Link className="group leading-none" to={linkUrl}>
     <article className="relative flex h-[408px] w-full flex-col overflow-hidden border border-gray-new-30 sm:h-[340px] xs:h-[320px]">
       <Image
         className="absolute top-0 right-0 lt:h-auto lt:max-w-[55%] lg:max-w-[50%] sm:max-w-[40%]"
@@ -51,24 +69,40 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
         alt=""
         priority
       />
-      <div className="relative z-10 flex flex-1 flex-col justify-between p-8 sm:p-6 xs:p-5">
-        <Logo className="h-8 w-auto max-w-[119px] fill-white object-contain object-left text-white sm:h-6 sm:max-w-[89px]" />
-        <div className="mt-auto flex flex-col gap-6">
+      <div className="relative z-10 flex flex-1 flex-col justify-between p-8 2xl:pr-16 sm:p-6 xs:p-5">
+        <Image
+          className="h-8 w-auto max-w-[120px] object-contain object-left sm:h-6 sm:max-w-[90px]"
+          src={logo.src}
+          alt=""
+          width={logo.width}
+          height={logo.height}
+          style={{ width: 'auto' }}
+          priority
+        />
+        <div className="mt-auto flex flex-col gap-8 lg:gap-6">
           <div className="flex flex-col gap-4">
             <span className="font-mono text-[13px] leading-none font-medium text-green-52 uppercase sm:text-[10px]">
               {category}
             </span>
 
             <h2
-              className="text-[28px] leading-tight font-normal tracking-tighter text-white lg:text-2xl md:text-[28px] sm:text-2xl xs:text-[20px] [&_span]:text-gray-new-60"
+              className={cn(
+                'font-normal tracking-tighter text-white lg:text-2xl/tight md:text-[28px] sm:text-2xl/tight xs:text-[20px] [&_span]:text-gray-new-60',
+                titleTheme === 'large' ? 'text-[36px] leading-tight' : 'text-[28px] leading-tight'
+              )}
               dangerouslySetInnerHTML={{ __html: title }}
             />
           </div>
 
-          <span className="inline-flex w-fit items-center gap-2 text-base leading-none font-medium tracking-tighter text-white sm:text-[15px]">
-            {linkText}
-            <ArrowRightIcon className="size-4 shrink-0 text-gray-new-70 transition-[translate,color] duration-200 group-hover:translate-x-[3px] group-hover:text-white" />
-          </span>
+          <div className="flex items-center justify-between gap-6 lg:flex-col lg:items-start lg:gap-4">
+            <span className="text-base leading-none font-normal -tracking-wide text-gray-new-90 lg:text-[.9375rem]">
+              {author}
+            </span>
+            <span className="inline-flex shrink-0 items-center gap-2 text-base leading-none font-medium tracking-tighter text-white sm:text-[15px]">
+              {linkText}
+              <ArrowRightIcon className="size-4 shrink-0 text-gray-new-70 transition-[translate,color] duration-200 group-hover:translate-x-[3px] group-hover:text-white" />
+            </span>
+          </div>
         </div>
       </div>
     </article>
@@ -76,9 +110,15 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
 );
 
 FeaturedCard.propTypes = {
-  logo: PropTypes.elementType.isRequired,
+  logo: PropTypes.shape({
+    src: PropTypes.string.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+  }).isRequired,
   category: PropTypes.string,
   title: PropTypes.string.isRequired,
+  titleTheme: PropTypes.oneOf(['large']),
+  author: PropTypes.string.isRequired,
   linkText: PropTypes.string.isRequired,
   linkUrl: PropTypes.string.isRequired,
   background: PropTypes.shape({
@@ -111,17 +151,21 @@ const Hero = () => (
       </div>
 
       <div className="grid grid-cols-2 gap-8 lg:gap-6 md:grid-cols-1 md:gap-6">
-        {CARDS.map(({ logo, category, title, linkText, linkUrl, background }, index) => (
-          <FeaturedCard
-            key={index}
-            logo={logo}
-            category={category}
-            title={title}
-            linkText={linkText}
-            linkUrl={linkUrl}
-            background={background}
-          />
-        ))}
+        {CARDS.map(
+          ({ logo, category, title, titleTheme, author, linkText, linkUrl, background }, index) => (
+            <FeaturedCard
+              key={index}
+              logo={logo}
+              category={category}
+              title={title}
+              titleTheme={titleTheme}
+              author={author}
+              linkText={linkText}
+              linkUrl={linkUrl}
+              background={background}
+            />
+          )
+        )}
       </div>
     </Container>
   </section>
