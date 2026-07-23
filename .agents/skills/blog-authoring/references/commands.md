@@ -34,7 +34,7 @@ BLOG_PREVIEW_SECRET=...
 
 Notes:
 
-- `BLOG_GITHUB_TOKEN` is currently used for both branch fetches and `blog:publish-branch`, so it needs write access to the configured remote content repo.
+- `BLOG_GITHUB_TOKEN` is used for both branch fetches and `blog:publish-branch`, so it needs write access to the configured remote content repository.
 - Without the repo credentials, local editing still works, but publishing and branch-aware remote fetches do not.
 
 ## Useful git checks
