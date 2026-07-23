@@ -9,7 +9,7 @@ summary: >-
   injection, and credential storage in appsettings.json. For ORM-based
   alternatives, see the Entity Framework guide.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-prompt.md" 
@@ -442,6 +442,11 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect an Entity Framework application to Neon](/docs/guides/dotnet-entity-framework)
+
+## Next steps: Neon backend services
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 

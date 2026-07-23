@@ -14,15 +14,15 @@ Build pipeline and UI for the [Neon Management API reference](https://neon.com/d
 
 ## What it produces
 
-| Output                             | Path                                              | Committed       |
-| ---------------------------------- | ------------------------------------------------- | --------------- |
-| Per-operation JSON (React data)    | `src/data/api-ref/{tag}/{slug}.json`              | No (gitignored) |
-| API index Markdown                 | `public/md/docs/reference/api.md`                 | No (gitignored) |
-| Per-operation Markdown (agent/LLM) | `public/md/docs/reference/api/{tag}/{slug}.md`    | No (gitignored) |
-| Per-tag Markdown (tag overview)    | `public/md/docs/reference/api/{tag}.md`           | No (gitignored) |
-| `llms.txt` index                   | `public/docs/reference/api/llms.txt`              | No (gitignored) |
-| `llms-full.txt` (all ops)          | `public/docs/reference/api/llms-full.txt`         | No (gitignored) |
-| Navigation YAML (sidebar)          | `content/docs/api-navigation.yaml`                | **Yes**         |
+| Output                             | Path                                           | Committed       |
+| ---------------------------------- | ---------------------------------------------- | --------------- |
+| Per-operation JSON (React data)    | `src/data/api-ref/{tag}/{slug}.json`           | No (gitignored) |
+| API index Markdown                 | `public/md/docs/reference/api.md`              | No (gitignored) |
+| Per-operation Markdown (agent/LLM) | `public/md/docs/reference/api/{tag}/{slug}.md` | No (gitignored) |
+| Per-tag Markdown (tag overview)    | `public/md/docs/reference/api/{tag}.md`        | No (gitignored) |
+| `llms.txt` index                   | `public/docs/reference/api/llms.txt`           | No (gitignored) |
+| `llms-full.txt` (all ops)          | `public/docs/reference/api/llms-full.txt`      | No (gitignored) |
+| Navigation YAML (sidebar)          | `content/docs/api-navigation.yaml`             | **Yes**         |
 
 Navigation YAML is committed because it drives the sidebar and must be in the repo before `next build` reads it. Everything else is regenerated on every build.
 
@@ -54,7 +54,7 @@ Vercel runs `npm run build`, which triggers `prebuild` first. The generator fetc
 
 After a successful generation run, the generator writes the validated spec to `.next/cache/api-reference/openapi-v2.json`. If the live fetch fails, it uses that cache only when it is fresh (default: 7 days). If the cache is missing or stale, the generator throws and the build fails fast. Override the cache path with `API_REF_SPEC_CACHE_PATH` and the TTL with `API_REF_SPEC_CACHE_TTL_MS` when needed.
 
-`prebuild` also runs `npm run check:api-ref-nav` after generation. If the regenerated `content/docs/api-navigation.yaml` differs from the committed file, the build fails with a diff. Run `npm run generate:api-ref`, review the nav change, and commit it.
+`prebuild` also runs `npm run check:api-ref-generated` after generation. If either regenerated committed file (`content/docs/api-navigation.yaml` or `content/docs/api-operation-ids.json`) differs from the committed copy, the build fails with a diff. Run `npm run generate:api-ref`, review the change, and commit it.
 
 **Recovery:** check the Vercel build log for the HTTP error code, verify `https://neon.com/api_spec/release/v2.json` is reachable (open in a browser or `curl -I`), then trigger a redeploy. No code changes are needed for a transient outage.
 
@@ -92,17 +92,17 @@ The shipped operation-page UI is read-only and API-first. It does not include th
 
 These files are read by the generator and must be in the repo. Some are hand-curated; some are produced by `build-coverage-data.mjs` and reviewed before commit.
 
-| File                       | Maintained by                  | Purpose                                                        |
-| -------------------------- | ------------------------------ | -------------------------------------------------------------- |
-| `tag-config.json`          | Humans                         | Tag order, display names, descriptions, groupings, overrides   |
-| `console-breadcrumbs.json` | Humans                         | `operationId` → Neon Console UI path (e.g. "Project > Branches") |
-| `response-examples.json`   | Humans                         | Per-op response example overrides when the spec example is poor |
-| `cli-table-output.json`    | Humans                         | Captured `neonctl ... list` table snippets for the CLI tab. **Entirely manual — no automated capture.** Re-run the relevant `neonctl ... list` commands after each neonctl release and update this file by hand. Each entry should include a comment noting the neonctl version it was captured from so staleness is detectable. |
-| `cli-coverage.json`        | `build-coverage-data.mjs`      | `operationId` → `neonctl` command (parsed from neonctl source) |
-| `mcp-coverage.json`        | `build-coverage-data.mjs`      | `operationId` → MCP tool name (parsed from mcp-server-neon)    |
-| `mcp-tool-definitions.json`| `build-coverage-data.mjs`      | MCP tool descriptions + argument schemas                       |
-| `cli-global-flags.json`    | Humans (rare)                  | Global neonctl flags (`--help`, `--api-key`, ...); imported by both the generator and the UI |
-| `neonctl-command-files.json` | Humans (rare)                | Shared neonctl command source list used by CLI coverage and schema generation |
+| File                         | Maintained by             | Purpose                                                                                                                                                                                                                                                                                                                          |
+| ---------------------------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tag-config.json`            | Humans                    | Tag order, display names, descriptions, groupings, overrides                                                                                                                                                                                                                                                                     |
+| `console-breadcrumbs.json`   | Humans                    | `operationId` → Neon Console UI path (e.g. "Project > Branches")                                                                                                                                                                                                                                                                 |
+| `response-examples.json`     | Humans                    | Per-op response example overrides when the spec example is poor                                                                                                                                                                                                                                                                  |
+| `cli-table-output.json`      | Humans                    | Captured `neonctl ... list` table snippets for the CLI tab. **Entirely manual — no automated capture.** Re-run the relevant `neonctl ... list` commands after each neonctl release and update this file by hand. Each entry should include a comment noting the neonctl version it was captured from so staleness is detectable. |
+| `cli-coverage.json`          | `build-coverage-data.mjs` | `operationId` → `neonctl` command (parsed from neonctl source)                                                                                                                                                                                                                                                                   |
+| `mcp-coverage.json`          | `build-coverage-data.mjs` | `operationId` → MCP tool name (parsed from mcp-server-neon)                                                                                                                                                                                                                                                                      |
+| `mcp-tool-definitions.json`  | `build-coverage-data.mjs` | MCP tool descriptions + argument schemas                                                                                                                                                                                                                                                                                         |
+| `cli-global-flags.json`      | Humans (rare)             | Global neonctl flags (`--help`, `--api-key`, ...); imported by both the generator and the UI                                                                                                                                                                                                                                     |
+| `neonctl-command-files.json` | Humans (rare)             | Shared neonctl command source list used by CLI coverage and schema generation                                                                                                                                                                                                                                                    |
 
 Additional manual exception lists (small, inline) live near the top of `build-coverage-data.mjs` (`CLI_MANUAL`) and `generate-api-ref.mjs` for cases where the heuristics need a nudge.
 
@@ -114,12 +114,12 @@ The generator fetches the spec fresh on every build, so most spec changes ship o
 
 What happens for the common kinds of spec drift:
 
-| Spec change | Ships automatically? | Human action |
-| --- | --- | --- |
-| New endpoint | Yes. Generates its own page, markdown, llms entry, and nav entry. Request body renders as the flat read-only tree (no editorial section cards) with generated curl + SDK examples. | Commit the regenerated `api-navigation.yaml`. Optional polish: add a `FIELD_GROUPS` entry for grouped cards + a representative `seed`, a `console-breadcrumbs.json` entry, and re-run `build-coverage-data.mjs` so the CLI/MCP pills appear. |
-| Endpoint description changed | Yes. Flows into the page, per-op markdown, and llms files. | None. |
-| Default value, type, enum, or required-ness changed | Yes. The rendered field rows, type badges, enum pills, and the "N required" summary update from the schema. | Only if a curated example now conflicts: `seed` values in `field-group-config.mjs` and `response-examples.json` overrides do not auto-track the spec. `npm run audit:api-ref` flags schema-invalid examples. |
-| New tag (set of endpoints) | Yes, warn-only. `loadTagConfig(schema)` auto-injects a minimal entry (slug/display derived from the raw spec tag name) and the operations appear in nav. The build does not fail. | Add a proper entry to `scripts/data/tag-config.json` for display name, order, description, and groups (see [Adding a new tag](#adding-a-new-tag)), optionally a `content/api-docs/{tag}.md` intro, then commit `api-navigation.yaml`. |
+| Spec change                                         | Ships automatically?                                                                                                                                                               | Human action                                                                                                                                                                                                                                 |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| New endpoint                                        | Yes. Generates its own page, markdown, llms entry, and nav entry. Request body renders as the flat read-only tree (no editorial section cards) with generated curl + SDK examples. | Commit the regenerated `api-navigation.yaml`. Optional polish: add a `FIELD_GROUPS` entry for grouped cards + a representative `seed`, a `console-breadcrumbs.json` entry, and re-run `build-coverage-data.mjs` so the CLI/MCP pills appear. |
+| Endpoint description changed                        | Yes. Flows into the page, per-op markdown, and llms files.                                                                                                                         | None.                                                                                                                                                                                                                                        |
+| Default value, type, enum, or required-ness changed | Yes. The rendered field rows, type badges, enum pills, and the "N required" summary update from the schema.                                                                        | Only if a curated example now conflicts: `seed` values in `field-group-config.mjs` and `response-examples.json` overrides do not auto-track the spec. `npm run audit:api-ref` flags schema-invalid examples.                                 |
+| New tag (set of endpoints)                          | Yes, warn-only. `loadTagConfig(schema)` auto-injects a minimal entry (slug/display derived from the raw spec tag name) and the operations appear in nav. The build does not fail.  | Add a proper entry to `scripts/data/tag-config.json` for display name, order, description, and groups (see [Adding a new tag](#adding-a-new-tag)), optionally a `content/api-docs/{tag}.md` intro, then commit `api-navigation.yaml`.        |
 
 For request-body grouping drift specifically (new/renamed/removed fields on a configured operation), see the table in [`field-group-config.md`](field-group-config.md#spec-drift-what-happens-the-site-build-never-breaks).
 
@@ -158,13 +158,14 @@ npm run test:unit:run -- scripts/generate-api-ref.test.js src/components/pages/d
 npm run check:docs:neonctl
 npm run audit:field-groups
 npm run generate:api-ref
-npm run check:api-ref-nav
+npm run check:api-ref-generated
 ```
 
-Review generated `content/docs/api-navigation.yaml` separately from UI changes.
-It is the only committed generator output and can drift when the upstream spec
-changes. `prebuild` fails if the regenerated nav differs from `HEAD`; commit the
-updated nav when the diff is expected.
+Review the generated committed files — `content/docs/api-navigation.yaml` (sidebar)
+and `content/docs/api-operation-ids.json` (operation manifest) — separately from UI
+changes. They can drift when the upstream spec changes. `prebuild` runs
+`check:api-ref-generated`, which fails if either regenerated file differs from
+`HEAD`; commit them when the diff is expected.
 
 For UI changes, walk [`SMOKE-CHECKLIST.md`](../src/components/pages/doc/api-operation/SMOKE-CHECKLIST.md) against a local `npm run dev`.
 
@@ -175,16 +176,45 @@ feed `examples.representative.body`, curl, and TypeScript SDK snippets. The
 generator redacts password-shaped values and normalizes Postgres connection
 strings before examples reach JSON, Markdown, or LLM output.
 
-`toTypescriptExample()` and `buildTs()` mirror the generated
-`@neondatabase/api-client` signatures: operations with query params receive one
-params object, while path-only operations use positional path params before the
-optional request body. Keep this locked with generator tests when upgrading the
-SDK or changing example generation.
+`toTypescriptExample()` and `buildTs()` generate `@neon/sdk/raw` snippets. Raw
+SDK calls map 1:1 to OpenAPI operations, so path parameters go under `path`,
+query parameters under `query`, and request bodies under `body`. Keep this
+locked with generator tests when upgrading the SDK or changing example
+generation.
 
 Per-operation Markdown includes complete response examples. The aggregate
 `llms-full.txt` is size-aware and omits oversized response examples with a
 pointer back to the per-operation Markdown so one operation cannot dominate the
 full corpus.
+
+### Docs ↔ API consistency check
+
+`npm run check:docs-api-consistency`
+([`scripts/check-docs-api-consistency.mjs`](check-docs-api-consistency.mjs)) keeps the docs
+both **faithful to** and **complete against** the API surface. The installed `@neon/sdk` is
+the source of truth for the SDK surface (`@neon/sdk/raw` exports are the valid raw operations;
+a live `createNeonClient()` instance is the valid ergonomic surface), and the committed
+`content/docs/api-operation-ids.json` manifest is the docs-side source of truth for which
+operations are documented. Coverage logic lives in the pure
+[`scripts/lib/api-coverage.mjs`](lib/api-coverage.mjs) (unit tested).
+
+- **Snippet correctness (blocks)** when a fenced `ts`/`js` example calls a `raw.*` operation,
+  a `neon.*` ergonomic method, or imports a symbol that the SDK does not provide — readers
+  copy these.
+- **Operation coverage (notifies; fails under `--strict`)** — skew between the documented ops,
+  the `@neon/sdk` raw layer, and (in `--strict`) the live OpenAPI spec. Either side being ahead
+  usually means "run `npm run generate:api-ref`" or "bump `@neon/sdk`".
+
+CI wiring — one workflow, `.github/workflows/docs-api-consistency.yml`:
+
+- **PRs** touching docs, the operation manifest, or the checker → offline, blocking on broken
+  code samples; coverage skew is advisory.
+- **Weekly schedule / dispatch** → `--strict` against `@neon/sdk@latest` and the live spec, so
+  coverage skew becomes a failure and opens/updates a tracking issue on drift.
+
+When this fails after a spec bump, run `npm run generate:api-ref` and commit the regenerated
+manifest; when it fails after a new `@neon/sdk` release, update the affected docs (or bump the
+pinned devDependency).
 
 ### Spec audit
 
@@ -223,22 +253,22 @@ If no intro file exists, the tag overview page shows only the operation list.
 Public docs URLs are the contract. The `/md/...` paths are internal static files
 that middleware and rewrites fetch to serve markdown variants.
 
-| URL                                          | Content                                      |
-| -------------------------------------------- | -------------------------------------------- |
-| `/docs/reference/api`                        | Human-facing API overview                    |
-| `/docs/reference/api.md`                     | Agent/LLM markdown for the full API          |
-| `/docs/reference/api-reference.md`           | Legacy alias to `/docs/reference/api.md`     |
-| `/docs/reference/api/reference`              | Human-facing searchable endpoint index       |
-| `/docs/reference/api/reference.md`           | Alias to `/docs/reference/api.md`            |
-| `/docs/reference/api/{tag}`                  | Tag overview — all operations for the tag    |
-| `/docs/reference/api/{tag}.md`               | Agent/LLM markdown for entire tag            |
-| `/docs/reference/api/{tag}/{slug}`           | Single operation detail page                 |
-| `/docs/reference/api/{tag}/{slug}.md`        | Agent/LLM markdown for one operation         |
-| `/md/docs/reference/api.md`                  | Internal static file behind `api.md` routes  |
-| `/md/docs/reference/api/{tag}/{slug}.md`     | Agent/LLM markdown for one operation         |
-| `/md/docs/reference/api/{tag}.md`            | Agent/LLM markdown for entire tag            |
-| `/docs/reference/api/llms.txt`               | One-line index of all operations             |
-| `/docs/reference/api/llms-full.txt`          | Full markdown for all operations             |
+| URL                                      | Content                                     |
+| ---------------------------------------- | ------------------------------------------- |
+| `/docs/reference/api`                    | Human-facing API overview                   |
+| `/docs/reference/api.md`                 | Agent/LLM markdown for the full API         |
+| `/docs/reference/api-reference.md`       | Legacy alias to `/docs/reference/api.md`    |
+| `/docs/reference/api/reference`          | Human-facing searchable endpoint index      |
+| `/docs/reference/api/reference.md`       | Alias to `/docs/reference/api.md`           |
+| `/docs/reference/api/{tag}`              | Tag overview — all operations for the tag   |
+| `/docs/reference/api/{tag}.md`           | Agent/LLM markdown for entire tag           |
+| `/docs/reference/api/{tag}/{slug}`       | Single operation detail page                |
+| `/docs/reference/api/{tag}/{slug}.md`    | Agent/LLM markdown for one operation        |
+| `/md/docs/reference/api.md`              | Internal static file behind `api.md` routes |
+| `/md/docs/reference/api/{tag}/{slug}.md` | Agent/LLM markdown for one operation        |
+| `/md/docs/reference/api/{tag}.md`        | Agent/LLM markdown for entire tag           |
+| `/docs/reference/api/llms.txt`           | One-line index of all operations            |
+| `/docs/reference/api/llms-full.txt`      | Full markdown for all operations            |
 
 ## Adding a new tag
 

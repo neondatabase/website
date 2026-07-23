@@ -40,6 +40,7 @@ const Item = ({
   section = null,
   slug = null,
   tag = null,
+  tagTheme = 'gray',
   method = null,
   ariaLabel = null,
   items = null,
@@ -141,6 +142,7 @@ const Item = ({
                   className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
                   label={tag}
                   size="sm"
+                  theme={tagTheme}
                 />
               )}
             </span>
@@ -183,6 +185,7 @@ const Item = ({
                 className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
                 label={tag}
                 size="sm"
+                theme={tagTheme}
               />
             )}
           </span>
@@ -204,10 +207,10 @@ const Item = ({
             transition={{ duration: 0.2 }}
           >
             <ul className="border-l border-gray-new-80 pl-3 dark:border-gray-new-20">
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <Item
                   {...item}
-                  key={item.slug ?? item.title}
+                  key={item.slug ?? item.title ?? item.section ?? index}
                   basePath={basePath}
                   closeMobileMenu={closeMobileMenu}
                   isHidden={isCollapsed}
@@ -230,6 +233,7 @@ Item.propTypes = {
   section: PropTypes.string,
   slug: PropTypes.string,
   tag: PropTypes.string,
+  tagTheme: PropTypes.string,
   method: PropTypes.string,
   ariaLabel: PropTypes.string,
   items: PropTypes.arrayOf(
@@ -238,6 +242,7 @@ Item.propTypes = {
       section: PropTypes.string,
       slug: PropTypes.string,
       tag: PropTypes.string,
+      tagTheme: PropTypes.string,
       method: PropTypes.string,
       items: PropTypes.arrayOf(PropTypes.any),
       ariaLabel: PropTypes.string,

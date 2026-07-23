@@ -9,7 +9,7 @@ summary: >-
   connections. To prevent timeouts from Neon's idle-compute cold start (default
   5 minutes), add `connect_timeout=10` to the connection string.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/typeorm-prompt.md" 
@@ -89,5 +89,12 @@ DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=re
 <Admonition type="note">
 A `connect_timeout` setting of 0 means no timeout.
 </Admonition>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

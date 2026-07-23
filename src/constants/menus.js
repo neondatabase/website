@@ -6,12 +6,42 @@ export default {
       text: 'Product',
       sections: [
         {
-          title: 'Core Database',
+          title: 'Core Primitives',
           items: [
             {
-              title: "Neon's lakebase architecture",
+              title: 'Database',
+              to: LINKS.postgresOverview,
+              description: 'Serverless Postgres',
+            },
+            {
+              title: 'Auth',
+              to: LINKS.auth,
+              description: 'Authentication built into your database',
+            },
+            {
+              title: 'Functions',
+              to: LINKS.functionsOverview,
+              description: 'Serverless compute next to your data',
+            },
+            {
+              title: 'Object Storage',
+              to: LINKS.objectStorageOverview,
+              description: 'S3-compatible storage that branches',
+            },
+            {
+              title: 'AI Gateway',
+              to: LINKS.aiGatewayOverview,
+              description: 'One API for frontier and open-source models',
+            },
+          ],
+        },
+        {
+          title: 'Features',
+          items: [
+            {
+              title: 'Lakebase Architecture',
               to: LINKS.architecture,
-              description: 'Storage-compute separation.',
+              description: 'Storage-compute separation',
             },
             {
               title: 'Autoscaling',
@@ -19,39 +49,14 @@ export default {
               description: 'Automatic instance sizing',
             },
             {
-              title: 'Read Replicas',
-              to: LINKS.readReplicas,
-              description: 'Instant, autoscaling replicas',
+              title: 'Branching',
+              to: LINKS.branching,
+              description: 'Faster Postgres workflows',
             },
             {
               title: 'Instant Restore',
               to: LINKS.instantRestore,
               description: 'Instant recovery when mistakes happen',
-            },
-          ],
-        },
-        {
-          title: 'Built-In Features',
-          items: [
-            {
-              title: 'Database Branches',
-              to: LINKS.branching,
-              description: 'Faster Postgres workflows',
-            },
-            {
-              title: 'Authentication',
-              to: LINKS.auth,
-              description: 'Auth for your App, built in to your DB',
-            },
-            {
-              title: 'Data API',
-              to: LINKS.dataApi,
-              description: 'REST HTTP API for your database',
-            },
-            {
-              title: 'Connection Pooling',
-              to: LINKS.connectionPooling,
-              description: 'Efficiently manage database connections',
             },
           ],
         },

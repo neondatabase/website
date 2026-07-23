@@ -8,10 +8,9 @@ summary: >-
   connections, and filtering shared projects. Use this page when you need CLI
   automation for project lifecycle tasks or to recover a deleted project within
   its 7-day recovery window. Projects created via the CLI default to Postgres
-  18; use the Neon Console or API to create projects on earlier Postgres
-  versions.
+  18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-22T13:52:43.579Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -86,7 +85,7 @@ Creates a Neon project.
 The `--region-id` value defaults to `aws-us-east-2` if not specified. `--block-public-connections` and `--block-vpc-connections` are part of [Private Networking](/docs/guides/neon-private-networking); `--hipaa` enables [HIPAA compliance](/docs/security/hipaa) for the project.
 
 <Admonition type="note">
-Neon projects created using the CLI use the default Postgres version, which is Postgres 18. To create a project with a different Postgres version, you can use the [Neon Console](/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject).
+Projects created using the CLI use the default Postgres version (Postgres 18) unless you specify `--pg-version`.
 </Admonition>
 
 Create a project with a user-defined name in a specific region:
@@ -112,6 +111,12 @@ neon projects create --name mynewproject --region-id aws-us-west-2
 <Admonition type="tip">
 The Neon CLI provides a `neon connection-string` command you can use to extract a connection URI programmatically. See [the connection-string command](/docs/cli/connection-string).
 </Admonition>
+
+Create a project with a specific Postgres major version:
+
+```bash
+neon projects create --name mynewproject --pg-version 17
+```
 
 - Create a project with `--output json`, which returns the full project response data and is the recommended format for scripts and agents. The output below was captured on an earlier CLI version; new projects report `"pg_version": 18`.
 
@@ -213,6 +218,12 @@ Block connections from the public internet (see [restrict public internet access
 
 ```bash
 neon projects update orange-credit-12345678 --block-public-connections=true
+```
+
+Enable [logical replication](/docs/guides/logical-replication-neon) for the project. This suspends active endpoints and cannot be disabled, so `--yes` skips the confirmation prompt:
+
+```bash
+neon projects update orange-credit-12345678 --enable-logical-replication --yes
 ```
 
 ## neon projects delete (#delete)

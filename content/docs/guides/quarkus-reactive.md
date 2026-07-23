@@ -9,7 +9,7 @@ summary: >-
   configuring QUARKUS_DATASOURCE_REACTIVE_URL with sslmode=require, and
   exposing a REST endpoint that queries Neon asynchronously using Mutiny.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-reactive-prompt.md"
@@ -108,5 +108,10 @@ PostgreSQL 17.5 (6bc9ef8) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0
 ```
 
 </Steps>
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

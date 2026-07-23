@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.30.0",
+  "neonctlVersion": "2.36.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -305,6 +305,10 @@
             "parent": {
               "type": "string",
               "describe": "Parent branch name or id or timestamp or LSN. Defaults to the default branch"
+            },
+            "protected": {
+              "type": "boolean",
+              "describe": "Whether the branch is protected"
             },
             "psql": {
               "type": "boolean",
@@ -1295,6 +1299,53 @@
         }
       ]
     },
+    "diff": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "compare-branch",
+          "describe": "Branch name or id to compare against (the reference / '---' side). Defaults to the current branch's parent.",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "The branch to review (the '+++' side). Defaults to the branch pinned in the local context (.neon).",
+          "alias": "b"
+        },
+        "database": {
+          "type": "string",
+          "describe": "Limit the diff to a single database. Defaults to every database on the current branch.",
+          "alias": "db"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Show a git-style schema diff between the current branch and another branch",
+      "usage": "$0 diff [compare-branch] [options]",
+      "examples": [
+        {
+          "command": "$0 diff main --db neondb",
+          "description": "Diff only the neondb database against main"
+        },
+        {
+          "command": "$0 diff main --branch feature/checkout",
+          "description": "Diff an explicit branch against main (ignoring the .neon context)"
+        },
+        {
+          "command": "$0 diff",
+          "description": "Diff the current branch's schema against its parent branch"
+        },
+        {
+          "command": "$0 diff main",
+          "description": "Diff the current branch's schema against the main branch"
+        }
+      ]
+    },
     "env": {
       "aliases": [],
       "positionals": [],
@@ -1477,6 +1528,146 @@
       },
       "commands": {},
       "describe": "Initialize a project with Neon using your AI coding assistant"
+    },
+    "inspect": {
+      "aliases": [
+        "inspection"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "db": {
+          "name": "db",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "database-name": {
+              "type": "string",
+              "describe": "Database name"
+            },
+            "db-url": {
+              "type": "string",
+              "describe": "Inspect any Postgres via a connection string, bypassing the Neon API (project/branch resolution is skipped)"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            },
+            "role-name": {
+              "type": "string",
+              "describe": "Role name"
+            }
+          },
+          "commands": {
+            "bloat": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Estimated table/index bloat (statistical estimate, no extension needed)"
+            },
+            "calls": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Most frequently called queries (needs pg_stat_statements)"
+            },
+            "index-sizes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Size of each index, largest first (pg_relation_size)"
+            },
+            "lfc-hit-rate": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Local File Cache hit rate (needs neon extension)"
+            },
+            "locks": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Locks held with the acquiring query and its age (pg_locks + pg_stat_activity)"
+            },
+            "long-running-queries": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Queries running longer than 5 minutes (pg_stat_activity)"
+            },
+            "outliers": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Queries taking the most cumulative execution time (needs pg_stat_statements)"
+            },
+            "replication-slots": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Replication slots: kind, status, client, restart/confirmed-flush LSNs, and lag (pg_replication_slots + pg_stat_replication)"
+            },
+            "seq-scans": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Number of sequential scans recorded against each table (pg_stat_user_tables)"
+            },
+            "subscriptions": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Per-table logical replication progress on this subscriber (pg_subscription_rel)"
+            },
+            "table-sizes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Size of each table (including TOAST), largest first (pg_table_size)"
+            },
+            "unused-indexes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Non-unique indexes with few scans — candidates for removal (pg_stat_user_indexes)"
+            },
+            "vacuum-stats": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Autovacuum status per table: last (auto)vacuum, dead tuples, threshold"
+            },
+            "working-set": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Estimated working set vs LFC size (needs neon extension)"
+            }
+          },
+          "describe": "Run a diagnostic query against a branch's Postgres",
+          "usage": "$0 inspect db <sub-command> [options]"
+        }
+      },
+      "describe": "Inspect a database's health and configuration",
+      "usage": "$0 inspect <sub-command> [options]"
     },
     "ip-allow": {
       "aliases": [],
@@ -2331,6 +2522,10 @@
               "type": "string",
               "describe": "The project's organization ID"
             },
+            "pg-version": {
+              "type": "number",
+              "describe": "Major PostgreSQL version (14–19). Version 19 is available only in regions where it has been enabled."
+            },
             "psql": {
               "type": "boolean",
               "describe": "Connect to a new project via psql",
@@ -2432,6 +2627,10 @@
               "type": "string",
               "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
             },
+            "enable-logical-replication": {
+              "type": "boolean",
+              "describe": "Enable logical replication for all project endpoints. This suspends active endpoints and cannot be disabled."
+            },
             "hipaa": {
               "type": "boolean",
               "describe": "Enable HIPAA compliance for the project."
@@ -2439,6 +2638,11 @@
             "name": {
               "type": "string",
               "describe": "The project name"
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt when enabling logical replication.",
+              "default": false
             }
           },
           "commands": {},
@@ -2598,6 +2802,266 @@
       "commands": {},
       "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
       "usage": "$0 set-context [options]"
+    },
+    "snapshots": {
+      "aliases": [
+        "snapshot"
+      ],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch id or name to snapshot. Defaults to the branch in your context, or the project's default branch.",
+              "alias": "b"
+            },
+            "expires-at": {
+              "type": "string",
+              "describe": "When the snapshot is automatically deleted (RFC 3339, e.g. 2025-12-31T23:59:59Z). Omit to keep it indefinitely."
+            },
+            "lsn": {
+              "type": "string",
+              "describe": "Take the snapshot at this LSN (e.g. 0/1F3C8A0). Must fall within the branch's restore window. Mutually exclusive with --timestamp."
+            },
+            "name": {
+              "type": "string",
+              "describe": "A name for the snapshot"
+            },
+            "timestamp": {
+              "type": "string",
+              "describe": "Take the snapshot at this point in time (RFC 3339, e.g. 2025-01-01T00:00:00Z). Must fall within the branch's restore window. Mutually exclusive with --lsn."
+            }
+          },
+          "commands": {},
+          "describe": "Create a snapshot from a branch",
+          "examples": [
+            {
+              "command": "$0 snapshots create --branch main --lsn 0/1F3C8A0 --expires-at 2025-12-31T23:59:59Z",
+              "description": "Snapshot main at an LSN, auto-deleting at the given time"
+            },
+            {
+              "command": "$0 snapshots create --branch main --timestamp 2025-01-01T00:00:00Z",
+              "description": "Snapshot main at a point in time"
+            },
+            {
+              "command": "$0 snapshots create --branch main --name pre-migration",
+              "description": "Snapshot the head of main with a name"
+            },
+            {
+              "command": "$0 snapshots create",
+              "description": "Snapshot the head of the context/default branch"
+            }
+          ]
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a snapshot by id or name"
+        },
+        "finalize": {
+          "name": "finalize",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "branch",
+              "required": true
+            }
+          ],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "Name to give the replaced (old) branch. Auto-generated when omitted."
+            }
+          },
+          "commands": {},
+          "describe": "Finalize a previewed snapshot restore (swap the restored branch in)"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Get a snapshot by id or name"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List snapshots in the project"
+        },
+        "restore": {
+          "name": "restore",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {
+            "finalize": {
+              "type": "boolean",
+              "describe": "Finalize the restore immediately: move computes onto the restored branch and swap it in for the target. Without this, the restore is left un-finalized so you can inspect it first, then run `snapshots finalize <branch>`.",
+              "default": false
+            },
+            "name": {
+              "type": "string",
+              "describe": "Name for the newly restored branch. Auto-generated when omitted."
+            },
+            "target-branch": {
+              "type": "string",
+              "describe": "Branch id or name to restore the snapshot onto. Defaults to the snapshot's source branch. Recommended when you intend to finalize (replace an existing branch)."
+            }
+          },
+          "commands": {},
+          "describe": "Restore a snapshot into a branch",
+          "examples": [
+            {
+              "command": "$0 snapshots restore snap-1234 --target-branch main",
+              "description": "Restore onto main un-finalized to preview, then run `snapshots finalize`"
+            },
+            {
+              "command": "$0 snapshots restore snap-1234 --target-branch main --finalize",
+              "description": "Restore onto main and swap it in immediately"
+            },
+            {
+              "command": "$0 snapshots restore snap-1234 --name recovered",
+              "description": "Restore a snapshot to a new branch named 'recovered'"
+            }
+          ]
+        },
+        "schedule": {
+          "name": "schedule",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch id or name. Defaults to the branch in your context, or the project's default branch.",
+                  "alias": "b"
+                }
+              },
+              "commands": {},
+              "describe": "Get a branch's automatic snapshot schedule"
+            },
+            "set": {
+              "name": "set",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch id or name. Defaults to the branch in your context, or the project's default branch.",
+                  "alias": "b"
+                },
+                "day": {
+                  "type": "number",
+                  "describe": "Day of the week/month (1-31) to take the snapshot (used with --frequency)."
+                },
+                "frequency": {
+                  "type": "string",
+                  "describe": "How often to take snapshots. Combine with --hour, --day, and --retention to build a single-entry schedule.",
+                  "choices": [
+                    "daily",
+                    "weekly",
+                    "monthly"
+                  ]
+                },
+                "hour": {
+                  "type": "number",
+                  "describe": "Hour of the day (0-23) to take the snapshot (used with --frequency)."
+                },
+                "month": {
+                  "type": "number",
+                  "describe": "Month of the year (1-12) to take the snapshot (used with --frequency)."
+                },
+                "retention": {
+                  "type": "number",
+                  "describe": "How long to keep each snapshot, in seconds (min 3600). Omit to keep indefinitely."
+                },
+                "schedule": {
+                  "type": "string",
+                  "describe": "Full schedule as JSON, for multi-entry schedules, e.g. '[{\"frequency\":\"daily\",\"hour\":3,\"retention_seconds\":604800}]'. Overrides the single-entry flags."
+                }
+              },
+              "commands": {},
+              "describe": "Set a branch's automatic snapshot schedule",
+              "examples": [
+                {
+                  "command": "$0 snapshots schedule set --branch main --schedule '[{\"frequency\":\"hourly\"},{\"frequency\":\"daily\",\"hour\":3}]'",
+                  "description": "A multi-entry schedule via JSON"
+                },
+                {
+                  "command": "$0 snapshots schedule set --branch main --frequency daily --hour 3 --retention 604800",
+                  "description": "A daily 03:00 snapshot kept for 7 days"
+                }
+              ]
+            }
+          },
+          "describe": "Manage the automatic snapshot (backup) schedule of a branch",
+          "usage": "$0 snapshots schedule <sub-command> [options]"
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {
+            "clear-expiration": {
+              "type": "boolean",
+              "describe": "Clear the expiration so the snapshot is kept indefinitely."
+            },
+            "expires-at": {
+              "type": "string",
+              "describe": "Set when the snapshot expires (RFC 3339). Mutually exclusive with --clear-expiration."
+            },
+            "name": {
+              "type": "string",
+              "describe": "Rename the snapshot"
+            }
+          },
+          "commands": {},
+          "describe": "Update a snapshot's name or expiration"
+        }
+      },
+      "describe": "Manage snapshots",
+      "usage": "$0 snapshots <sub-command> [options]"
     },
     "status": {
       "aliases": [],

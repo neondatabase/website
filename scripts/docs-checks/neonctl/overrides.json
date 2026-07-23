@@ -130,6 +130,26 @@
           }
         }
       }
+    },
+    "snapshots": {
+      "commands": {
+        "schedule": {
+          "commands": {
+            "set": {
+              "options": {
+                "frequency": {
+                  "describe": "How often to take snapshots. Combine with --hour, --day, and --retention to build a single-entry schedule.",
+                  "choices": [
+                    "daily",
+                    "weekly",
+                    "monthly"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

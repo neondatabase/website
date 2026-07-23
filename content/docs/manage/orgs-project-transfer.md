@@ -1,71 +1,64 @@
 ---
 title: Transfer projects
 summary: >-
-  Project transfer moves Neon projects from one organization to another without
-  changing credentials or connection strings, so connected applications keep
-  working. You can transfer in bulk via the Console or the API. Admin rights
-  in the source org and at least Member rights in the destination are required.
-  Projects with GitHub or Vercel integrations cannot be transferred, and
-  Vercel-managed organizations are not supported.
+  Move Neon projects between organizations without changing credentials or
+  connection strings, via the Console or API. The destination organization's
+  plan must be the same tier or higher than the source.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-21T16:33:46.856Z'
 ---
 
-You can transfer your projects to any organization you are a member of. You can do this individually from project **Settings**, in bulk from organization **Settings**, or via the Neon API.
+Move projects between organizations you belong to in the Neon Console or via the Neon API. You can also hand a project to a different Neon account with a claim link.
 
-<Admonition type="note">
-Transferring a project does not affect its credentials or connection string. Your connected applications will continue to work without any disruption.
-</Admonition>
+Transferring a project does not change its credentials or connection string, so connected applications keep working. Billing and usage move to the destination organization, and project limits follow the destination organization's [plan](/docs/introduction/plans).
 
-## Limits & requirements
+Before you transfer, review [Limits and requirements](#limits-and-requirements). In particular, disconnect any project integrations first, and make sure the destination organization's plan is the same tier or higher than the source organization's.
 
-- Transfer up to **200** projects at a time in the Console, or **400** via the API.
-- Limited by the destination org’s plan.
-- Requires **Admin** rights in the source org and at least **Member** rights in the destination org.
-- Projects with GitHub or Vercel integrations cannot be transferred.
-- Vercel-managed orgs are not supported.
-- Projects can only be transferred to organizations you belong to, not to personal Neon accounts.
+## Ways to transfer
 
-<Steps>
-## Transfer a single project
+<Tabs labels={["Console (single)", "Console (multiple)", "API"]}>
 
-Navigate to the **Settings** page of the project you want to transfer, and select **Transfer** from the sidebar. Then use the dialog to select the organization you want to transfer this project into.
+<TabItem>
 
-Since this removes the project from your current org, you need **Admin** rights in this org to move the project (like if you wanted to delete the project). You only need **Member** access in the destination org.
+1. Open the project's **Settings** page.
+2. Select **Transfer** from the sidebar.
+3. Choose the destination organization.
 
 ![transfer single project to another org](/docs/manage/transfer_project.png)
 
-## Transfer multiple projects at once
+**Alternative: create a claim link**
 
-Use the org switcher in the top navbar to select the Organization that owns the projects you want to move. From Organization **Settings**, select **Transfer projects** from the sidebar and use the dialog to:
+The steps above transfer a project to one of your own organizations. As an alternative, you can hand a project to a **different Neon account**. On the same **Transfer** page, select **Create claim link** and share the generated link with the recipient. When they sign in and open it, they choose which of their organizations to transfer the project into. The link expires after 24 hours by default.
 
-- Choose the **projects** you want to move
-- Choose the **org** you want to move them to
+To automate this flow, see [Claimable database integration](/docs/workflows/claimable-database-integration).
 
-You'll need **Admin** rights in the source org, and at least **Member** rights in the destination.
+</TabItem>
 
-![transfer multiple projects from org settings](/docs/manage/transfer_multiple.png)
+<TabItem>
 
-## Via API (for automation or large numbers of projects)
+1. Use the organization switcher to select the source organization.
+2. Open **Settings** > **Transfer projects**.
+3. Select the projects to transfer, then click **Next**.
 
-You can also transfer projects from one org to another using the Neon API:
+   <img src="/docs/manage/transfer_multiple.png" alt="transfer multiple projects from org settings" width="480" />
+
+4. Choose the destination organization, then click **Transfer**.
+
+   <img src="/docs/manage/transfer_multiple_org.png" alt="choose the destination organization" width="480" />
+
+</TabItem>
+
+<TabItem>
+
+Transfer projects with a [personal API key](/docs/manage/api-keys#create-a-personal-api-key) that has access to both organizations. Organization API keys are not supported.
 
 `POST /organizations/{source_org_id}/projects/transfer`
-
-**You'll need:**
-
-- ✅ [Personal API key (with access to both orgs)](/docs/manage/api-keys#create-a-personal-api-key)
-- ✅ Admin rights in the source org
-- ✅ At least Member rights in the destination org
-- ✅ Compatible billing plans between orgs (for example, projects can move from Scale to Launch but not the other way around)
-
-**Example request**
 
 ```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/organizations/{source_org_id}/projects/transfer' \
      --header 'accept: application/json' \
-     --header 'authorization: Bearer $API_KEY' \
+     --header 'authorization: Bearer $PERSONAL_API_KEY' \
      --header 'content-type: application/json' \
      --data '{
   "project_ids": [
@@ -82,23 +75,29 @@ Where:
 - `destination_org_id` is the organization receiving the projects
 - `project_ids` is an array of up to 400 project IDs to transfer
 
-### Response behavior
+A `200` response with an empty object (`{}`) means the transfer succeeded. A `406` (plan or capacity) or `422` (active integrations) means it failed; see [Limits and requirements](#limits-and-requirements) to resolve.
 
-A successful transfer returns a 200 status code with an empty JSON object:
+For the full request and response schema, see the [API reference](/docs/reference/api/organizations/transfer-projects-from-org-to-org).
 
-```json
-{}
-```
+As an alternative, to hand a project to a different Neon account, create a claim link. See [Claimable database integration](/docs/workflows/claimable-database-integration).
 
-You can verify the transfer in the Neon Console or by listing the projects in the destination organization via API.
+</TabItem>
 
-### Error responses
+</Tabs>
 
-The API may return these errors:
+## Limits and requirements
 
-- **`406`** – Transfer failed - the target organization has too many projects or its plan is incompatible with the source organization. Reduce projects or upgrade the organization.
-- **`422`** – One or more of the provided project IDs have GitHub or Vercel integrations installed. Transferring integration projects is currently not supported.
+- Transfer up to **200** projects at a time in the Console, or **400** via the API.
+- Destination organization must have capacity for the projects under its [plan](/docs/introduction/plans) (for example, project count limits).
+- Destination organization plan must be the **same tier or higher** than the source organization plan (for example, Launch to Scale works; Scale to Launch does not). This is a plan-level check, independent of the project's settings.
+- Requires **Admin** in the source organization and at least **Member** in the destination organization. See [User Permissions](/docs/manage/user-permissions).
+- Disconnect project integrations before you transfer. Open the project's **Integrations** page and remove any added integrations (for example, GitHub or Vercel). See [Manage integrations](/docs/manage/integrations).
+- [Vercel-managed organizations](/docs/guides/vercel-managed-integration) are not supported as source or destination.
+- HIPAA projects can only move to a HIPAA-enabled organization.
 
-</Steps>
+If a transfer fails:
+
+- **Plan or capacity** (API `406`): the destination organization has a lower plan than the source, no free project slots, or doesn't allow a project's region. Upgrade the destination organization, free up slots, or choose a different organization.
+- **Integrations** (API `422`): one or more projects still have active integrations (for example, GitHub or Vercel). Remove them and retry.
 
 <NeedHelp/>

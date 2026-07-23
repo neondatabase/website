@@ -2,22 +2,22 @@
 title: Set up OAuth
 subtitle: Add Google, GitHub, or Vercel sign-in to your application
 summary: >-
-  Neon Auth OAuth setup adds Google, GitHub, and Vercel social sign-in to
+  Managed Better Auth OAuth setup adds Google, GitHub, and Vercel social sign-in to
   an application using `signIn.social()`, with Google enabled in development via
   shared credentials and GitHub and Vercel requiring custom OAuth app credentials.
   For production, register the provider's authorized redirect URI as
   `{NEON_AUTH_BASE_URL}/callback/{provider}` in each provider's console (not the
-  app's callbackURL), and add every callbackURL origin to Neon Auth's trusted
+  app's callbackURL), and add every callbackURL origin to Managed Better Auth's trusted
   domains allowlist. Because each Neon branch has its own Auth base URL, OAuth
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-OAuth lets users sign in with their Google, GitHub, or Vercel account. Neon Auth handles the OAuth flow and creates a session after authorization.
+OAuth lets users sign in with their Google, GitHub, or Vercel account. Managed Better Auth handles the OAuth flow and creates a session after authorization.
 
 ## Development mode
 
@@ -31,7 +31,7 @@ For production, configure your own OAuth app credentials for each provider you u
 
 ## Sign in with OAuth
 
-Call `signIn.social()` with your provider (`"google"`, `"github"`, or `"vercel"`). The SDK sends the user to the provider's sign-in page. After the user authorizes, the provider redirects to Neon Auth's OAuth callback route (see [Production setup](#production-setup)), then Neon Auth redirects the browser to your **`callbackURL`** (must use a [trusted domain](/docs/auth/guides/configure-domains) in production).
+Call `signIn.social()` with your provider (`"google"`, `"github"`, or `"vercel"`). The SDK sends the user to the provider's sign-in page. After the user authorizes, the provider redirects to Managed Better Auth's OAuth callback route (see [Production setup](#production-setup)), then Managed Better Auth redirects the browser to your **`callbackURL`** (must use a [trusted domain](/docs/auth/guides/configure-domains) in production).
 
 <CodeTabs labels={["Google","GitHub","Vercel"]}>
 
@@ -84,7 +84,7 @@ const handleVercelSignIn = async () => {
 
 ## Handle the callback
 
-After the OAuth exchange completes, Neon Auth redirects the browser to your **`callbackURL`**. Then load or refresh session state in your client:
+After the OAuth exchange completes, Managed Better Auth redirects the browser to your **`callbackURL`**. Then load or refresh session state in your client:
 
 ```jsx {4-9} filename="src/App.jsx"
 import { authClient } from './auth';
@@ -118,7 +118,7 @@ For production, configure your own OAuth app credentials. GitHub and Vercel OAut
 
 ### 1. Register redirect URIs with each provider
 
-Neon Auth uses [Better Auth](https://www.better-auth.com/) callback routes. For each OAuth provider you enable, register a redirect URI with this shape:
+Managed Better Auth uses [Better Auth](https://www.better-auth.com/) callback routes. For each OAuth provider you enable, register a redirect URI with this shape:
 
 ```text
 {NEON_AUTH_BASE_URL}/callback/{provider}
@@ -134,10 +134,10 @@ Example authorized redirect URI for Google:
 https://ep-example.neonauth.us-east-2.aws.neon.tech/neondb/auth/callback/google
 ```
 
-Whether you use the [Next.js auth proxy](/docs/auth/reference/nextjs-server#auth-handler) (`app/api/auth/[...path]/route.ts`) or call Neon Auth from the browser, the provider redirects to **`{NEON_AUTH_BASE_URL}/callback/{provider}`** for that branch.
+Whether you use the [Next.js auth proxy](/docs/auth/reference/nextjs-server#auth-handler) (`app/api/auth/[...path]/route.ts`) or call Managed Better Auth from the browser, the provider redirects to **`{NEON_AUTH_BASE_URL}/callback/{provider}`** for that branch.
 
 <Admonition type="important" title="Do not confuse two different URLs">
-The **`callbackURL`** argument in `signIn.social()` is where users land **after** Neon Auth finishes the flow. That URL must live on an origin you add under [trusted domains](/docs/auth/guides/configure-domains).
+The **`callbackURL`** argument in `signIn.social()` is where users land **after** Managed Better Auth finishes the flow. That URL must live on an origin you add under [trusted domains](/docs/auth/guides/configure-domains).
 
 The provider's **authorized redirect URI** is where Google (or GitHub, and so on) sends the browser **during** the OAuth handshake. It must be **`{NEON_AUTH_BASE_URL}/callback/{provider}`**, not your app's homepage or only the `callbackURL`.
 
@@ -146,7 +146,7 @@ Using only your marketing site's URL in Google Cloud Console, or only the `callb
 
 **Google Cloud Console**
 
-Create an OAuth client with application type **Web application**. Under **Authorized redirect URIs**, add **`{NEON_AUTH_BASE_URL}/callback/google`** for each branch or environment (production, local testing against a branch, previews). Under **Authorized JavaScript origins**, include origins where your UI runs (for example `http://localhost:5173`, `https://myapp.com`) when Google asks for them, and include your Neon Auth origin (the scheme and host of `NEON_AUTH_BASE_URL`) if required.
+Create an OAuth client with application type **Web application**. Under **Authorized redirect URIs**, add **`{NEON_AUTH_BASE_URL}/callback/google`** for each branch or environment (production, local testing against a branch, previews). Under **Authorized JavaScript origins**, include origins where your UI runs (for example `http://localhost:5173`, `https://myapp.com`) when Google asks for them, and include your Managed Better Auth origin (the scheme and host of `NEON_AUTH_BASE_URL`) if required.
 
 **GitHub**
 
@@ -158,7 +158,7 @@ Follow [Vercel's OAuth app docs](https://vercel.com/docs/sign-in-with-vercel/man
 
 ### 2. Add trusted domains for your app
 
-Before testing production OAuth, add every origin you pass as **`callbackURL`** (and related URLs) to Neon Auth's allowlist. See [Configure trusted domains](/docs/auth/guides/configure-domains).
+Before testing production OAuth, add every origin you pass as **`callbackURL`** (and related URLs) to Managed Better Auth's allowlist. See [Configure trusted domains](/docs/auth/guides/configure-domains).
 
 ### 3. Create OAuth apps and paste credentials into Neon
 
@@ -168,13 +168,13 @@ Before testing production OAuth, add every origin you pass as **`callbackURL`** 
    - [Vercel OAuth setup](https://vercel.com/docs/sign-in-with-vercel/manage-from-dashboard#create-an-app)
 2. In the Neon Console, open your **project**, select the **branch**, open **Auth**, then enter the **Client ID** and **Client Secret** for each provider.
 
-Neon Auth will use your configured credentials for that branch.
+Managed Better Auth will use your configured credentials for that branch.
 
 ### Branches and preview deployments
 
 Each branch has its own **`NEON_AUTH_BASE_URL`**. Register **`{NEON_AUTH_BASE_URL}/callback/google`** (and other providers you use) for every branch you test against (for example preview databases).
 
-For preview deployments, trusted domains support **wildcard patterns** (for example `https://*.my-app-preview.vercel.app`), so you can cover many preview hosts without listing each one. See [Configure trusted domains](/docs/auth/guides/configure-domains), [Branching authentication](/docs/auth/branching-authentication), and the API for [trusted domains](https://api-docs.neon.tech/reference/addbranchneonauthtrusteddomain).
+For preview deployments, trusted domains support **wildcard patterns** (for example `https://*.my-app-preview.vercel.app`), so you can cover many preview hosts without listing each one. See [Configure trusted domains](/docs/auth/guides/configure-domains), [Branching authentication](/docs/auth/branching-authentication), and the API for [trusted domains](/docs/reference/api/auth/add-branch-neon-auth-trusted-domain).
 
 ## Google OAuth branding
 

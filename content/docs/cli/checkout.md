@@ -6,14 +6,14 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-11T13:23:16.265Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
 
 The `checkout` command pins a branch in the local context so subsequent commands target it. It's a focused helper over [`set-context`](/docs/cli/set-context) for the common "switch the branch I'm working on" case. The `checkout` command requires neon 2.22.2 or later; check your version with `neon --version`.
 
-`checkout` resolves the branch (by name or ID) against the project, then heals the `.neon` file: it always (re)writes `projectId`, `branchId`, and `orgId` (when the project has one), so a `.neon` that was missing fields or drifted ends up complete and consistent.
+`checkout` resolves the branch (by name or ID) against the project, then heals the `.neon` file: it always (re)writes `projectId`, `branch`, and `orgId` (when the project has one), so a `.neon` that was missing fields or drifted ends up complete and consistent.
 
 ## Usage
 
@@ -62,7 +62,7 @@ The updated `.neon` file:
 {
   "orgId": "org-abc123",
   "projectId": "polished-snowflake-12345678",
-  "branchId": "br-steep-math-aiu3vve7"
+  "branch": "br-steep-math-aiu3vve7"
 }
 ```
 

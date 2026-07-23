@@ -11,7 +11,7 @@ summary: >-
   independent root branches with plan-specific storage limits; reset-from-parent
   is not supported.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <FeatureBeta />
@@ -58,7 +58,7 @@ If you have more than one project, you'll need to specify the `--project-id` opt
 The API is in Beta and subject to change.
 </Admonition>
 
-To create a schema-only branch using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
+To create a schema-only branch using the Neon API, use the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
 
 - Your Neon `project_id`
 - The `parent_id`, which is the branch ID of the branch containing the schema you want to copy

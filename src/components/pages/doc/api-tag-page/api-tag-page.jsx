@@ -122,6 +122,7 @@ const ApiTagPage = async ({
                           className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
                           label="deprecated"
                           size="sm"
+                          theme="orange"
                         />
                       )}
                     </span>
@@ -152,6 +153,7 @@ const ApiTagPage = async ({
                       className="ml-2 inline-flex text-[0.6875rem] font-normal -tracking-tight tabular-nums"
                       label="deprecated"
                       size="sm"
+                      theme="orange"
                     />
                   )}
                 </span>

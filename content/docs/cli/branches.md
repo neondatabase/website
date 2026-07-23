@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-22T13:42:19.210Z'
 redirectFrom:
   - /docs/reference/cli-branches
   - /docs/cli/branch
@@ -264,6 +264,12 @@ Create a schema-only branch:
 neon branches create --schema-only
 ```
 
+Create a [protected branch](/docs/guides/protected-branches):
+
+```bash
+neon branches create --name production --protected
+```
+
 ## neon branches reset (#reset)
 
 Resets a child branch to the latest data from its parent. The `<id|name>` is the branch ID or branch name; either works.
@@ -379,6 +385,8 @@ neon branches rename mybranch teambranch
 ## neon branches schema-diff (#schema-diff)
 
 Compares the latest schemas of any two branches, or compares against a specific point in a branch's own or another branch's history.
+
+For a git-style shortcut that defaults to comparing a branch against its parent, see [`neon diff`](/docs/cli/diff).
 
 The `[base-branch]` is the branch to compare against. It's optional; if omitted, the command uses the branch from your `set-context` file, or the project's default branch if no context is configured.
 

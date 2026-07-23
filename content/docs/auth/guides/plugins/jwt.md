@@ -2,7 +2,7 @@
 title: JWT
 subtitle: Authenticate using JSON Web Tokens (JWT) for external services
 summary: >-
-  Neon Auth's JWT plugin lets backend services, CLI tools, and cross-domain API
+  Managed Better Auth's JWT plugin lets backend services, CLI tools, and cross-domain API
   requests retrieve raw JSON Web Tokens via `authClient.token()` or the
   `set-auth-jwt` response header, rather than relying on HTTP-only session
   cookies. Tokens are signed with EdDSA (Ed25519) and expire in 15 minutes;
@@ -11,14 +11,14 @@ summary: >-
   for session management in browser-based apps, and custom JWT claims are not
   supported.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for JWT plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth JWT plugin.
+Managed Better Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for JWT plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth JWT plugin.
 
-While Neon Auth primarily relies on **secure, HTTP‑only cookies** (sessions) for browser‑based authentication, certain scenarios require a raw token. In these cases, the JWT plugin is especially useful:
+While Managed Better Auth primarily relies on **secure, HTTP‑only cookies** (sessions) for browser‑based authentication, certain scenarios require a raw token. In these cases, the JWT plugin is especially useful:
 
 - **Microservices:** Sharing identity between backend services.
 - **Separate frontend and backend domains:** Authenticating API requests from a domain different than your main application.
@@ -55,9 +55,19 @@ export async function getJwtToken() {
 }
 ```
 
+If your app is served from a different origin than your Managed Better Auth URL (for example a Vite or SPA dev server on `localhost` talking to auth on `*.neon.tech`), configure the auth client to send the session cookie on cross-origin requests. Otherwise `authClient.token()` returns `data.token` as `undefined` and calls to your API fail with 401.
+
+```ts filename="src/auth.ts"
+export const authClient = createAuthClient(NEON_AUTH_URL, {
+  fetchOptions: { credentials: 'include' },
+});
+```
+
+Cross-domain setups have further limitations, notably Safari ITP blocking third-party cookies, with reverse-proxy or shared-parent-domain workarounds. See [Better Auth: Safari, ITP, and Cross-Domain Setups](https://www.better-auth.com/docs/concepts/cookies#safari-itp-and-cross-domain-setups).
+
 ### Using the session header
 
-When you call `authClient.getSession()`, Neon Auth automatically includes a JWT in the response headers. If you are using a custom fetcher or need to intercept the token immediately after a session check:
+When you call `authClient.getSession()`, Managed Better Auth automatically includes a JWT in the response headers. If you are using a custom fetcher or need to intercept the token immediately after a session check:
 
 ```ts
 await authClient.getSession({
@@ -99,19 +109,21 @@ A typical decoded JWT payload looks like this:
 
 To verify the authenticity of a JWT, you need to validate its signature using the public keys provided by JWKS (JSON Web Key Set).
 
-Neon Auth exposes a public JWKS endpoint that contains the public keys necessary to verify the signature of your JWTs.
+Managed Better Auth exposes a public JWKS endpoint that contains the public keys necessary to verify the signature of your JWTs.
 
 ### The JWKS endpoint
 
-Your Neon Auth JWKS endpoint is located at:
+Your Managed Better Auth JWKS endpoint is located at:
 
 ```
 <YOUR_NEON_AUTH_URL>/.well-known/jwks.json
 ```
 
+If you verify Neon Auth JWTs inside [Neon Functions](/docs/compute/functions/overview), the platform injects `NEON_AUTH_BASE_URL` and `NEON_AUTH_JWKS_URL` when Neon Auth is provisioned on the branch. Use `NEON_AUTH_JWKS_URL` directly instead of deriving it yourself. See [Functions environment variables](/docs/compute/functions/environment-variables#neon-injected-variables).
+
 ### Verification example
 
-The following examples demonstrate how to verify a Neon Auth JWT in several programming languages. No matter which language you use, the process is the same: fetch the JWKS from the provided endpoint and use it to validate the token’s signature and claims. If your preferred language isn’t included here, you can apply these same principles in your own environment.
+The following examples demonstrate how to verify a Managed Better Auth JWT in several programming languages. No matter which language you use, the process is the same: fetch the JWKS from the provided endpoint and use it to validate the token’s signature and claims. If your preferred language isn’t included here, you can apply these same principles in your own environment.
 
 <Admonition type="info" title="Production Readiness">
 The following examples are provided for reference only and are not guaranteed to be production‑ready. Be sure to implement proper caching, error handling, and security best practices as required for your application.
@@ -314,9 +326,9 @@ The following examples are provided for reference only and are not guaranteed to
 
 ## Limitations
 
-Because Neon Auth is a managed service, certain server-side configurations available in the standalone Better Auth library are pre-configured by Neon and cannot be changed:
+Because Managed Better Auth is a managed service, certain server-side configurations available in the standalone Better Auth library are pre-configured by Neon and cannot be changed:
 
-- **Signing algorithm:** Neon Auth uses **EdDSA (Ed25519)** by default for high security and performance. Ensure your verification libraries support this algorithm.
+- **Signing algorithm:** Managed Better Auth uses **EdDSA (Ed25519)** by default for high security and performance. Ensure your verification libraries support this algorithm.
 - **Expiration:** Tokens expire in **15 minutes** (access tokens). You should implement logic to refresh the token using `authClient.token()` when it expires.
 - **Custom claims:** Currently, the JWT payload contains the default user information. Custom claims are not supported at this time.
 
@@ -326,7 +338,7 @@ Because Neon Auth is a managed service, certain server-side configurations avail
 
 If a token is rejected during verification, check the following:
 
-1. Verify that you are using the correct JWKS endpoint for your Neon Auth instance. The issuer of the token must match the origin of your Neon Auth URL. (for example, if your Neon Auth URL is `https://ep-xx.aws.neon.tech/neondb/auth`, the issuer should be `https://ep-xx.aws.neon.tech`).
+1. Verify that you are using the correct JWKS endpoint for your Managed Better Auth instance. The issuer of the token must match the origin of your Managed Better Auth URL. (for example, if your Managed Better Auth URL is `https://ep-xx.aws.neon.tech/neondb/auth`, the issuer should be `https://ep-xx.aws.neon.tech`).
 2. Confirm that your verification library supports **EdDSA** (Ed25519).
 3. Make sure the token has not expired.
 4. Check that the `kid` in the JWT header matches one of the keys in the JWKS response. If not, fetch the latest keys from the JWKS endpoint.

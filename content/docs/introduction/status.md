@@ -9,14 +9,12 @@ summary: >-
   subscribe to alerts via webhook, RSS, Slack, or Microsoft Teams. Routine
   maintenance and compute updates are not posted here.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T13:21:50.559Z'
 ---
 
-Stay informed about Neon's performance and availability at [https://neonstatus.com/](https://neonstatus.com/).
+Real-time uptime and incident status live on the Neon status page, not on this page. Open it to see current platform status and bookmark it for quick access during incidents.
 
-Bookmark the Neon status page for quick access during incidents.
-
-![Neon status page](/docs/introduction/neon_status_page.png)
+<CTA title="Check live Neon status" description="View real-time uptime and incident status for all Neon platform components." buttonText="Open status page" buttonUrl="https://neonstatus.com/" />
 
 To monitor the status for your specific Neon project, check the region where your project is located. You can find your project's region on the **Project Dashboard** in the Neon Console, in the **Project settings** widget.
 
@@ -36,8 +34,6 @@ Neon performs occasional platform maintenance and applies regular updates to you
 
 ## Subscribe to status updates
 
-To receive status notifications, click **Subscribe** on the Neon status page and choose your preferred method: webhook, RSS, Microsoft Teams, or Slack.
-
-![Neon status page](/docs/introduction/status_subscribe.png)
+To receive status notifications, click **Subscribe** on the [Neon status page](https://neonstatus.com/) and choose your preferred method: webhook, RSS, Microsoft Teams, or Slack.
 
 <NeedHelp/>
