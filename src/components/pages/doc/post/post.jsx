@@ -40,6 +40,8 @@ const Post = ({
     tagTheme = 'gray',
     layout = null,
     contentLayout = null,
+    noindex = false,
+    unlisted = false,
   },
   content,
   breadcrumbs,
@@ -59,7 +61,8 @@ const Post = ({
   className = 'max-w-208 lg:max-w-none',
 }) => {
   const pagePath = `${navigationLinksBasePath}${currentSlug ?? ''}`;
-  const modal = selectModal(MODALS, pagePath);
+  // Unlisted or noindexed pages (e.g. early-access previews) don't show promo video modals.
+  const modal = noindex || unlisted ? null : selectModal(MODALS, pagePath);
 
   // Check if wide layout is enabled (hides right sidebar/TOC)
   const isWideLayout = layout === 'wide';
@@ -203,6 +206,8 @@ Post.propTypes = {
     updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
     contentLayout: PropTypes.oneOf(['split', null]),
+    noindex: PropTypes.bool,
+    unlisted: PropTypes.bool,
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),
