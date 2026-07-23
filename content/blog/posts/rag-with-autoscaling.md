@@ -8,9 +8,9 @@ excerpt: >-
   extension through disk swaps, Neon efficiently handles large...
 date: '2024-08-27T15:17:26'
 updatedOn: '2024-08-27T15:17:29'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - raouf-chebri
 cover:

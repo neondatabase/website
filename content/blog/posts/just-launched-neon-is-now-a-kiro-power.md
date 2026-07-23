@@ -10,9 +10,9 @@ excerpt: >-
   companies like Figma, Stripe, Supabase, Postman,...
 date: '2025-12-03T17:52:39'
 updatedOn: '2025-12-04T17:05:45'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carlota-soto
   - krishna-b-parab

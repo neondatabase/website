@@ -8,9 +8,9 @@ excerpt: >-
   initial request, followed by more and more short (a...
 date: '2025-04-24T16:51:24'
 updatedOn: '2025-06-25T01:54:05'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andrew-tate
 cover:

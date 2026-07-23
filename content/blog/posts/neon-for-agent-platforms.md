@@ -10,9 +10,9 @@ excerpt: >-
   database, they provision and operate fleets of them.
 date: "2026-05-22T09:00:00"
 updatedOn: "2026-05-22T09:00:00"
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - savannah-longoria
 cover:

@@ -8,9 +8,9 @@ excerpt: >-
   simple route works for small databases and not critical...
 date: '2025-12-23T20:42:38'
 updatedOn: '2025-12-23T20:42:40'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

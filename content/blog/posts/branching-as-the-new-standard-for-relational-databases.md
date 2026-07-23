@@ -10,9 +10,9 @@ excerpt: >-
   database. The stack evolved, the database stayed behind...
 date: '2025-07-10T16:51:48'
 updatedOn: '2025-07-10T16:51:50'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

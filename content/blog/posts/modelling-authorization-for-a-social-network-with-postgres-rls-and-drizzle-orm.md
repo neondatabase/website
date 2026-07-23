@@ -11,7 +11,7 @@ updatedOn: '2025-09-11T18:57:06'
 category: postgres
 categories:
   - postgres
-  - workflows
+  - product
 authors:
   - david-gomes
 cover:

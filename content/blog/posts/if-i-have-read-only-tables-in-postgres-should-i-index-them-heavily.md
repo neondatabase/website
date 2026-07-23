@@ -11,7 +11,6 @@ updatedOn: '2024-07-17T14:15:47'
 category: postgres
 categories:
   - postgres
-  - uncategorized
 authors:
   - rishi-raj-jain
 cover:

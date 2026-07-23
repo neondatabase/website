@@ -11,7 +11,7 @@ updatedOn: '2025-02-24T19:24:34'
 category: postgres
 categories:
   - postgres
-  - workflows
+  - product
 authors:
   - jeff-christoffersen
 cover:

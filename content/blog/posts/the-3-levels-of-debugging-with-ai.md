@@ -8,9 +8,9 @@ excerpt: >-
   longer. Now, errors are chucked into Claude to dec...
 date: '2025-05-22T17:40:11'
 updatedOn: '2025-05-22T17:58:09'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andrew-tate
 cover:

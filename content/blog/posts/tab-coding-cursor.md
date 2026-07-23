@@ -8,9 +8,9 @@ excerpt: >-
   life, vibe coding has come to mean all kinds of AI-...
 date: '2025-04-04T00:13:42'
 updatedOn: '2025-04-09T23:48:29'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

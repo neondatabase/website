@@ -8,9 +8,9 @@ excerpt: >-
   still find a few things missing. Our favorite Cursor workflo...
 date: '2025-06-02T16:36:34'
 updatedOn: '2025-07-09T17:49:51'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - david-gomes
   - john-spray

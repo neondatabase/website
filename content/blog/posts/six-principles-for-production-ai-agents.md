@@ -8,9 +8,9 @@ excerpt: >-
   (e.g. by HuggingFace or Berkeley), but not everyone...
 date: '2025-07-28T16:40:21'
 updatedOn: '2025-10-02T00:19:07'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - arseni-kravchenko
 cover:

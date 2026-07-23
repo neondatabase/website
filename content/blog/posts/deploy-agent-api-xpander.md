@@ -13,7 +13,7 @@ updatedOn: '2025-10-27T16:14:30'
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - ran-sheinberg
 cover:

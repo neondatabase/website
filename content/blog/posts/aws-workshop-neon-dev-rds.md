@@ -8,9 +8,9 @@ excerpt: >-
   development environment while keeping production workload...
 date: "2025-01-29T18:01:36"
 updatedOn: "2025-03-16T19:49:28"
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - savannah-longoria
 cover:

@@ -11,7 +11,7 @@ updatedOn: '2025-11-04T18:48:38'
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - marcus-lowe
 cover:

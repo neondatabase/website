@@ -4,9 +4,9 @@ description: Improving our SQL editor with (you guessed it) AI features
 excerpt: "Despite the fact that Postgres has been around for almost 30 years, Neon has always been an innovative company supporting experimental ideas. So, obviously, we couldn’t miss the AI fever. \U0001F642 We started our first experiments with AI a little more than a year ago, but only recently..."
 date: '2024-11-04T16:48:02'
 updatedOn: '2024-11-04T16:48:05'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - eduard-dyckman
 cover:

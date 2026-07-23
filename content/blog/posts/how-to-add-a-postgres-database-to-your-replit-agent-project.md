@@ -11,7 +11,7 @@ updatedOn: "2025-01-21T15:37:56"
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - matt-palmer
 cover:

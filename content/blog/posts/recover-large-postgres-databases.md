@@ -8,9 +8,9 @@ excerpt: >-
   production capability? Production failure modes Pr...
 date: '2025-02-04T01:22:52'
 updatedOn: '2025-03-12T18:49:35'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

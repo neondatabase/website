@@ -11,7 +11,6 @@ updatedOn: '2025-10-01T16:45:09'
 category: product
 categories:
   - product
-  - ai
 authors:
   - david-gomes
   - victor-ditadi

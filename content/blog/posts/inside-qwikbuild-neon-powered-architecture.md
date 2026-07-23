@@ -10,9 +10,9 @@ excerpt: >-
   wide range of scale and complexity without compromise....
 date: '2026-02-26T17:49:06'
 updatedOn: '2026-03-18T19:44:54'
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - case-study
 authors:
   - carlota-soto

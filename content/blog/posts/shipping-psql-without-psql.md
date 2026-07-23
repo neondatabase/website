@@ -15,7 +15,7 @@ date: '2026-06-12T10:30:00'
 category: engineering
 categories:
   - engineering
-  - ai
+  - product
 authors:
   - vadim-kharitonov
 cover:

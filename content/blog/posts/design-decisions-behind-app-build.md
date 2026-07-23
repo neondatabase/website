@@ -10,9 +10,9 @@ excerpt: >-
   an error analysis feedback loop. These architectural...
 date: '2025-06-26T14:36:49'
 updatedOn: '2025-10-01T16:46:04'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - arseni-kravchenko
   - igor-rekun

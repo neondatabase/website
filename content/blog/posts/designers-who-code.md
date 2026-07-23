@@ -10,9 +10,9 @@ excerpt: >-
   vibe coding can empower designers to break this cycle....
 date: '2025-04-28T22:56:13'
 updatedOn: '2025-06-25T01:55:09'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carl-thomas
   - lachezar-petkov

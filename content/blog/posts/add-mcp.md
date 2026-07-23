@@ -11,7 +11,6 @@ updatedOn: "2026-02-10T19:56:02"
 category: product
 categories:
   - product
-  - ai
 authors:
   - andre-landgraf
 cover:

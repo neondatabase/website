@@ -11,7 +11,7 @@ updatedOn: '2025-04-02T00:32:35'
 category: engineering
 categories:
   - engineering
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

@@ -321,6 +321,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/george-mackerron.jpg",
     "photoAlt": "George MacKerron"
   },
+  "gleb-borisov": {
+    "name": "Gleb Borisov",
+    "role": "Senior Staff Engineer, Databricks",
+    "url": null,
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/brad-van-vugt.jpg",
+    "photoAlt": "Gleb Borisov"
+  },
   "guillaume-rivals": {
     "name": "Guillaume Rivals",
     "role": "Lead Engineer, Growth",

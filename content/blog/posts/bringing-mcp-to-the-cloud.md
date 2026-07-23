@@ -8,9 +8,9 @@ excerpt: >-
   authentication. So let’s dive in. Note: If you’d rather watc...
 date: '2025-04-11T18:01:05'
 updatedOn: '2025-04-16T19:12:50'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - shridhar-deshmukh
   - raouf-chebri

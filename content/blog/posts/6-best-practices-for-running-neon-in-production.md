@@ -8,9 +8,9 @@ excerpt: >-
   scale to zero, you can optimize Neon for many diffe...
 date: '2025-08-18T17:26:31'
 updatedOn: '2025-08-19T18:16:51'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - russ-dias
 cover:

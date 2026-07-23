@@ -8,9 +8,9 @@ excerpt: >-
   coding is the future of software engineering. That said, we...
 date: "2026-01-08T16:26:24"
 updatedOn: "2026-01-10T00:41:34"
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andre-landgraf
 cover:

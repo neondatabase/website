@@ -8,9 +8,9 @@ excerpt: >-
   development is smoother with branching, and scale to...
 date: '2024-07-24T15:53:45'
 updatedOn: '2025-05-06T09:42:48'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - brad-van-vugt
 cover:

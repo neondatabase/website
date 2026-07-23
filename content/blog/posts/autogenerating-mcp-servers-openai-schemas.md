@@ -11,7 +11,7 @@ updatedOn: '2025-10-17T17:03:50'
 category: engineering
 categories:
   - engineering
-  - ai
+  - product
 authors:
   - david-gomes
 cover:

@@ -17,7 +17,7 @@ updatedOn: '2023-12-20T21:00:54'
 category: community
 categories:
   - community
-  - workflows
+  - product
 authors:
   - raouf-chebri
   - daniel-price

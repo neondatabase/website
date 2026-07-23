@@ -8,9 +8,9 @@ excerpt: >-
   Tables page, powered by Drizzle Studio. You can now...
 date: '2024-06-14T15:53:39'
 updatedOn: '2024-06-14T15:53:42'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - lachezar-petkov
 cover:

@@ -10,9 +10,9 @@ excerpt: >-
   small startup, this will hit home: This is the pain...
 date: '2026-01-29T17:31:27'
 updatedOn: '2026-02-02T17:13:07'
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - case-study
 authors:
   - carlota-soto

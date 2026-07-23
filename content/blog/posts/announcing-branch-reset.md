@@ -8,9 +8,9 @@ excerpt: >-
   data (a child branch) that you can modify withou...
 date: '2023-12-14T12:35:03'
 updatedOn: '2024-03-27T11:26:53'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - raouf-chebri
 cover:

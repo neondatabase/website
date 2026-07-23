@@ -8,9 +8,9 @@ excerpt: >-
   wide disparity between different languages. Whi...
 date: '2025-08-15T17:34:04'
 updatedOn: '2025-10-01T16:44:17'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andre-landgraf
 cover:

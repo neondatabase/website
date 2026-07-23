@@ -10,9 +10,9 @@ excerpt: >-
   you’re ready, you can claim the database to link it to y...
 date: "2025-06-05T21:02:53"
 updatedOn: "2025-06-05T21:26:29"
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - company
 authors:
   - carlota-soto

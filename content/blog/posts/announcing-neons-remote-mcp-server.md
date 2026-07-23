@@ -8,9 +8,9 @@ excerpt: >-
   capabilities ever since. You can read more about ou...
 date: '2025-04-04T13:08:34'
 updatedOn: '2025-05-01T00:15:55'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - david-gomes
   - shridhar-deshmukh

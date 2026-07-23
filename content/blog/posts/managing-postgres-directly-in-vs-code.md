@@ -11,7 +11,7 @@ updatedOn: '2025-07-22T01:53:15'
 category: postgres
 categories:
   - postgres
-  - workflows
+  - product
 authors:
   - sam-harrison
 cover:

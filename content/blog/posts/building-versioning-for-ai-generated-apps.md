@@ -8,11 +8,10 @@ excerpt: >-
   experience. From the start, Dyad made it easy to...
 date: '2025-11-12T16:43:33'
 updatedOn: '2026-01-02T17:40:17'
-category: app-platform
+category: product
 categories:
-  - app-platform
+  - product
   - community
-  - ai
 authors:
   - will-chen
 cover:

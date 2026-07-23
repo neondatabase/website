@@ -8,9 +8,9 @@ excerpt: >-
   (Rick Blalock, Co-founder at Agentuity) Existing...
 date: '2026-02-02T17:10:46'
 updatedOn: '2026-02-02T17:40:12'
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - case-study
 authors:
   - carlota-soto

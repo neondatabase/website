@@ -8,9 +8,9 @@ excerpt: >-
   an AI-native CMS built specifically for real websi...
 date: "2026-01-21T18:38:58"
 updatedOn: "2026-01-21T18:39:31"
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - case-study
 authors:
   - carlota-soto

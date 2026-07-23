@@ -8,9 +8,9 @@ excerpt: >-
   Neon database directly using a comprehensive set of to...
 date: '2025-07-24T20:44:35'
 updatedOn: '2025-07-24T20:44:37'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - sam-harrison
 cover:

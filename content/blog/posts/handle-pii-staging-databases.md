@@ -8,9 +8,9 @@ excerpt: >-
   and transaction histories. In healthtech, medical reco...
 date: '2025-11-17T19:18:17'
 updatedOn: '2025-11-17T19:18:18'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

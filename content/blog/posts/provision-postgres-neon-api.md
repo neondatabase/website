@@ -10,9 +10,9 @@ excerpt: >-
   AI agents (like Replit), Neon gives you the to...
 date: '2025-04-16T17:28:11'
 updatedOn: '2025-05-16T22:53:03'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

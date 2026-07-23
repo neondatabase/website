@@ -11,7 +11,7 @@ updatedOn: '2024-09-29T01:29:21'
 category: community
 categories:
   - community
-  - workflows
+  - product
 authors:
   - rishi-raj-jain
 cover:

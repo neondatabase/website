@@ -10,9 +10,9 @@ excerpt: >-
   Marketplace to give Cursor live access to your Neon organi...
 date: '2026-02-17T18:58:33'
 updatedOn: '2026-02-26T17:49:56'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carlota-soto
 cover:

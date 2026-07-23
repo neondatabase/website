@@ -8,9 +8,9 @@ excerpt: >-
   everything from scaffolding the project to writing te...
 date: '2025-07-29T21:22:52'
 updatedOn: '2025-07-31T18:17:27'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andre-landgraf
 cover:

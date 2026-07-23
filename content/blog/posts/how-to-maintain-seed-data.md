@@ -8,9 +8,9 @@ excerpt: >-
   scripts that populate your database with initial da...
 date: '2025-02-05T15:17:47'
 updatedOn: '2025-02-05T15:23:16'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - paul-scanlon
 cover:

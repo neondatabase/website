@@ -4,9 +4,9 @@ description: Trying out the latest model by Meta
 excerpt: "The AI wars have begun. Not the one where the machines enslave us and use our body heat to power their compute–that’s at least 18 months off. \U0001F642 No, this AI war is between the tech giants and between closed, proprietary models and open source. In one corner, we have OpenAI, suppo..."
 date: '2024-07-30T16:58:41'
 updatedOn: '2024-07-30T17:03:35'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andrew-tate
 cover:

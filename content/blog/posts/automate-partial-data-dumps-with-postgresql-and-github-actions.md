@@ -10,9 +10,9 @@ excerpt: >-
   partial copy of your production database so you...
 date: '2025-02-10T16:31:46'
 updatedOn: '2025-02-17T18:50:28'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - paul-scanlon
 cover:

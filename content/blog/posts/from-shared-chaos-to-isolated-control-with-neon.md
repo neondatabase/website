@@ -8,9 +8,9 @@ excerpt: >-
   multiple developers colliding on the same dev or test instance...
 date: '2025-03-11T14:30:00'
 updatedOn: '2025-03-20T08:57:10'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - paul-scanlon
 cover:

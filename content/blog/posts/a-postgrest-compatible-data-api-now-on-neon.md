@@ -10,9 +10,8 @@ excerpt: >-
   identical, and migration is as simple as pointing yo...
 date: '2025-10-02T15:34:34'
 updatedOn: '2026-01-02T17:40:31'
-category: app-platform
+category: product
 categories:
-  - app-platform
   - product
 authors:
   - ruslan-talpa

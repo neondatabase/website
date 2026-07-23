@@ -8,9 +8,9 @@ excerpt: >-
   these apps. Many systems are now created at runti...
 date: "2025-08-04T15:52:32"
 updatedOn: "2025-10-02T00:20:44"
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carlota-soto
 cover:

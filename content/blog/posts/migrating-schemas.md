@@ -10,9 +10,9 @@ excerpt: >-
   code referenced in this blog post on this repo: ht...
 date: '2024-11-21T18:29:10'
 updatedOn: '2024-11-25T14:56:17'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - paul-scanlon
 cover:

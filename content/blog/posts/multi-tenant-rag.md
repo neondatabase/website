@@ -8,10 +8,9 @@ excerpt: >-
   unpredictable model APIs. This article covers a multi-tenant RA...
 date: '2024-11-19T18:50:22'
 updatedOn: '2024-11-21T19:53:07'
-category: ai
+category: product
 categories:
-  - ai
-  - workflows
+  - product
 authors:
   - tony-holdstock-brown
 cover:

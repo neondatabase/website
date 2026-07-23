@@ -8,9 +8,9 @@ excerpt: >-
   issues caused by shared resources, all while ensur...
 date: '2025-03-18T02:38:30'
 updatedOn: '2025-09-30T13:26:40'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

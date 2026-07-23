@@ -8,9 +8,9 @@ excerpt: >-
   job. So, this was the main aspect we wanted […]
 date: '2025-06-18T17:30:15'
 updatedOn: '2025-06-19T18:29:18'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - david-gomes
   - pedro-figueiredo

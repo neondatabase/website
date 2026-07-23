@@ -8,9 +8,9 @@ excerpt: >-
   environments – it’s only the activities that count. Ho...
 date: '2025-05-05T16:53:04'
 updatedOn: '2025-05-05T16:53:08'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - yan-cui
 cover:

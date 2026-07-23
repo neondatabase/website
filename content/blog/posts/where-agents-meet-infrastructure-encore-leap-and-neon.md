@@ -8,9 +8,9 @@ excerpt: >-
   feel simple without abstracting away control; in Encore, d...
 date: '2026-02-25T19:45:21'
 updatedOn: '2026-02-26T17:49:42'
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - case-study
 authors:
   - carlota-soto

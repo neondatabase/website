@@ -8,9 +8,9 @@ excerpt: >-
   create an app like this—an AI voice assistant we’ve named Puls...
 date: '2024-12-19T02:28:26'
 updatedOn: '2025-01-30T03:34:11'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - rishi-raj-jain
 cover:

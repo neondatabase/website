@@ -13,7 +13,7 @@ updatedOn: '2025-01-30T18:00:04'
 category: engineering
 categories:
   - engineering
-  - ai
+  - product
 authors:
   - george-mackerron
 cover:

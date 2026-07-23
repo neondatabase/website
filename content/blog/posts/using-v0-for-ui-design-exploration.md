@@ -10,9 +10,9 @@ excerpt: >-
   That’s why we’re taking a new approach: levera...
 date: '2025-05-13T02:11:17'
 updatedOn: '2025-06-02T17:42:59'
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - company
 authors:
   - lachezar-petkov

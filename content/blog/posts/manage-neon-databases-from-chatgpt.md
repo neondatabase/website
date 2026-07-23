@@ -13,7 +13,6 @@ updatedOn: "2025-09-16T18:29:08"
 category: product
 categories:
   - product
-  - ai
 authors:
   - ryan-vogel
 cover:

@@ -13,7 +13,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/faster-writes-by-removing-full-page-writes/Disabling%20FPW%20on%20Neon.jpg
   alt: "Everyone gets faster writes: disabling FPW on Neon"
-isFeatured: true
+isFeatured: false
 seo:
   canonical: http://databricks.com/blog/how-lakebase-architecture-delivers-5x-faster-postgres-writes
   image: https://cdn.neonapi.io/public/images/pages/blog/faster-writes-by-removing-full-page-writes/Disabling%20FPW%20on%20Neon.jpg

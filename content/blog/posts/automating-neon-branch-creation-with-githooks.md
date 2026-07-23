@@ -11,7 +11,7 @@ updatedOn: "2023-12-20T21:01:25"
 category: community
 categories:
   - community
-  - workflows
+  - product
 authors:
   - raouf-chebri
 cover:

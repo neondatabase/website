@@ -1,19 +1,7 @@
 [
   {
-    "slug": "ai",
-    "name": "AI"
-  },
-  {
-    "slug": "app-platform",
-    "name": "App Platform"
-  },
-  {
-    "slug": "case-study",
-    "name": "Case Studies"
-  },
-  {
-    "slug": "community",
-    "name": "Community"
+    "slug": "product",
+    "name": "Product"
   },
   {
     "slug": "company",
@@ -24,19 +12,15 @@
     "name": "Engineering"
   },
   {
+    "slug": "case-study",
+    "name": "Case Studies"
+  },
+  {
+    "slug": "community",
+    "name": "Community"
+  },
+  {
     "slug": "postgres",
     "name": "Postgres"
-  },
-  {
-    "slug": "product",
-    "name": "Product"
-  },
-  {
-    "slug": "uncategorized",
-    "name": "Uncategorized"
-  },
-  {
-    "slug": "workflows",
-    "name": "Workflows"
   }
 ]

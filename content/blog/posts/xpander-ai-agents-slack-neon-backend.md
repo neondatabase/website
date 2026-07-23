@@ -8,9 +8,9 @@ excerpt: >-
   developers build and run production-ready AI agents....
 date: "2025-08-07T16:50:28"
 updatedOn: "2025-09-10T01:03:07"
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - case-study
 authors:
   - carlota-soto

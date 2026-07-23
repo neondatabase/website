@@ -11,7 +11,7 @@ updatedOn: '2024-11-14T18:32:17'
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - carlota-soto
 cover:

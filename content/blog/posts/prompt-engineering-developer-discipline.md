@@ -8,9 +8,9 @@ excerpt: >-
   as a developer means two things: The key to the seco...
 date: '2025-04-21T19:19:58'
 updatedOn: '2025-06-03T17:56:59'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andrew-tate
 cover:

@@ -11,7 +11,7 @@ updatedOn: '2024-12-04T17:26:19'
 category: community
 categories:
   - community
-  - workflows
+  - product
 authors:
   - brian-holt
 cover:

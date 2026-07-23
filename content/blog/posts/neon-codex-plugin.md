@@ -8,9 +8,9 @@ excerpt: >-
   installed, Codex can interact with your Neon account, no...
 date: "2026-04-16T22:06:03"
 updatedOn: "2026-04-17T10:44:46"
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andy-hattemer
 cover:

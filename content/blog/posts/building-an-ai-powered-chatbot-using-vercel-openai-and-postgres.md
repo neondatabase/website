@@ -8,9 +8,9 @@ excerpt: >-
   build an app that uses pgvector and the OpenAI API,...
 date: '2023-03-09T18:18:37'
 updatedOn: '2025-10-14T06:23:03'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - raouf-chebri
 cover:

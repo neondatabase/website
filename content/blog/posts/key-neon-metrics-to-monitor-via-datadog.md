@@ -11,7 +11,7 @@ updatedOn: '2025-02-18T01:25:32'
 category: community
 categories:
   - community
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

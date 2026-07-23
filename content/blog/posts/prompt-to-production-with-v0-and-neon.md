@@ -11,7 +11,7 @@ updatedOn: '2025-03-31T18:29:09'
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - ryan-vogel
 cover:

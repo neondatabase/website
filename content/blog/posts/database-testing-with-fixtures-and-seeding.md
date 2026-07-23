@@ -10,9 +10,9 @@ excerpt: >-
   correctly? This is where the twin concepts of seeding and...
 date: '2024-07-02T15:57:39'
 updatedOn: '2024-07-02T15:57:40'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - rishi-raj-jain
 cover:

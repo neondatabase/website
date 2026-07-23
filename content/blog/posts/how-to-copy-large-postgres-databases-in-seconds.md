@@ -11,7 +11,7 @@ updatedOn: '2024-03-04T17:35:20'
 category: postgres
 categories:
   - postgres
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

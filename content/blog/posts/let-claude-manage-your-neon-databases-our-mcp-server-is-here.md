@@ -10,9 +10,9 @@ excerpt: >-
   alike. We’re excited to announce that we’ve already...
 date: "2024-12-03T16:06:15"
 updatedOn: "2025-03-06T21:15:02"
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - david-gomes
   - pedro-figueiredo

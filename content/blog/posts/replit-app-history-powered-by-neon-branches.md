@@ -8,10 +8,9 @@ excerpt: >-
   every version of your app (code and data) is s...
 date: '2025-05-21T18:22:50'
 updatedOn: '2025-06-15T17:53:02'
-category: ai
+category: product
 categories:
-  - ai
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

@@ -8,9 +8,9 @@ excerpt: >-
   free database here. In this blog post, we w...
 date: '2024-07-31T16:47:12'
 updatedOn: '2024-07-31T16:48:20'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - raouf-chebri
 cover:

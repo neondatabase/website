@@ -8,9 +8,9 @@ excerpt: >-
   server at Neon, but we want you to use it safely. Here’s a quick che...
 date: '2025-11-19T19:44:35'
 updatedOn: '2025-11-19T19:44:37'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - ryan-vogel
 cover:

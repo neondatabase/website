@@ -10,9 +10,9 @@ excerpt: >-
   generative media studio building tools that make...
 date: '2025-11-18T19:13:50'
 updatedOn: '2026-01-02T17:39:02'
-category: app-platform
+category: product
 categories:
-  - app-platform
+  - product
   - case-study
 authors:
   - carlota-soto

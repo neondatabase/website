@@ -8,9 +8,9 @@ excerpt: >-
   Skills and an MCP server integration. What’s a Cla...
 date: '2025-10-30T16:43:28'
 updatedOn: '2026-01-16T13:30:00'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - pedro-figueiredo
 cover:

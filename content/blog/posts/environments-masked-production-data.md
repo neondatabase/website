@@ -10,9 +10,9 @@ excerpt: >-
   database” is easier said than done. Replicating...
 date: '2025-05-15T19:18:23'
 updatedOn: '2025-07-09T17:48:12'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

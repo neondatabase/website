@@ -11,7 +11,7 @@ updatedOn: '2025-08-29T21:34:12'
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - ilya-tkachov
 cover:

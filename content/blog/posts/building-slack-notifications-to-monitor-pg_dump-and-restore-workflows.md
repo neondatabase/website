@@ -6,9 +6,9 @@ description: >-
 excerpt: "\U0001F4DA This article is part of a series on setting up Neon for dev, test, and staging environments while keeping your prod database in RDS. Find out what we’re talking about. In a previous blog post, we showed you how to create a Neon Twin using a GitHub Action that automatically run..."
 date: '2024-08-01T16:36:26'
 updatedOn: '2025-05-06T09:53:56'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - rishi-raj-jain
 cover:

@@ -21,7 +21,7 @@ cover:
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/were-building-backends/were-building-backends.jpg
   alt: "We're building the boring backend for apps and agents"
-isFeatured: true
+isFeatured: false
 seo:
   title: We're building the boring backend for apps and agents
   description: >-
@@ -41,6 +41,10 @@ seo:
 
 ![We're building the boring backend for apps and agents](https://cdn.neonapi.io/public/images/pages/blog/were-building-backends/were-building-backends.jpg)
 
+<Admonition type="important" title="Update" >
+Object Storage, Functions, and AI Gateway are now in beta and open for everyone to try. [Read the launch post](https://neon.com/blog/neon-backend-is-beta).
+</Admonition>
+
 Everyone has been talking about throwing it all away and building entirely new magic sci-fi cloud infrastructure for agents.
 
 Amidst all the hype, this [tweet](https://x.com/rtheoryxyz/status/2056012016611905753) stood out to me as a voice of reason:
@@ -51,13 +55,13 @@ Building real infrastructure is hard enough as it is. AI has only raised the sta
 
 ## The Hard Requirements of the AI Era
 
-When we founded Neon four years ago, the core principles laid out in our [*Hello World*](https://neon.com/blog/hello-world) post were aimed at helping human developers move faster. As luck would have it, the AI era has shifted those exact principles into the "hard requirements" column:
+When we founded Neon four years ago, the core principles laid out in our [_Hello World_](https://neon.com/blog/hello-world) post were aimed at helping human developers move faster. As luck would have it, the AI era has shifted those exact principles into the "hard requirements" column:
 
-* **Low entry cost:** When code generation is free and instant, even a $5 upfront infrastructure cost is a non-starter.
-* **Branching:** Code has always had isolated environments, but the data stack lacked them. This created a massive gap in the ability to experiment safely.
-* **Serverless:** Infrastructure should live automatically in the background, scaling instantly to meet shifting usage demands. A backend shouldn't be t-shirt sized; it should precisely match what the application demands of it.
+- **Low entry cost:** When code generation is free and instant, even a $5 upfront infrastructure cost is a non-starter.
+- **Branching:** Code has always had isolated environments, but the data stack lacked them. This created a massive gap in the ability to experiment safely.
+- **Serverless:** Infrastructure should live automatically in the background, scaling instantly to meet shifting usage demands. A backend shouldn't be t-shirt sized; it should precisely match what the application demands of it.
 
-Human developers make mistakes (*cue the Matrix meme: "Only human"*). But AI coding agents make mistakes at a blistering, automated velocity that traditional infrastructure simply wasn't designed to handle. Without strict guardrails, agents will tear down systems just as quickly as they build them.
+Human developers make mistakes (_cue the Matrix meme: "Only human"_). But AI coding agents make mistakes at a blistering, automated velocity that traditional infrastructure simply wasn't designed to handle. Without strict guardrails, agents will tear down systems just as quickly as they build them.
 
 ## An Agentic Stack Built by Systems Engineers
 
@@ -66,18 +70,12 @@ Now, we’re taking the same copy-on-write, instant branching approach and apply
 
 ### The Complete Agent-Native Backend
 
-* **Postgres Database** — ✅ *Available*  
-* [**Authentication**](https://neon.com/docs/auth/overview) — ✅ *Available*  
-* [**Data API**](https://neon.com/docs/data-api/overview) — ✅ *Available*  
-* **Object Storage** — 🔜 *Coming Soon*  
-* **Compute** — 🔜 *Coming Soon*  
-* **AI Gateway** — 🔜 *Coming Soon*
-
-### Access
-
-We are launching a private beta soon. Sign up for updates and access here:
-
-<RequestForm type="backend-platform" />
+- **Postgres Database** — ✅ _Available_
+- [**Authentication**](https://neon.com/docs/auth/overview) — ✅ _Available_
+- [**Data API**](https://neon.com/docs/data-api/overview) — ✅ _Available_
+- **Object Storage** — 🔜 _Coming Soon_
+- **Compute** — 🔜 _Coming Soon_
+- **AI Gateway** — 🔜 _Coming Soon_
 
 ## Scaling with Enterprise Muscle
 
@@ -105,12 +103,11 @@ No. We're focused on the primitives that apps and agents need to function: datab
 
 The lines are starting to blur between applications and agents, but regardless of what we call them, the lifeblood of what everyone is building today is inference - we're bringing reliable/scalable inference directly to you when you build your backend in Neon.
 
-We're not building this from scratch. Databricks already operates an AI gateway that handles trillions of requests a day for everyone from fortune 500 enterprises to popular coding agents, with day-0 coverage of new models, rate limiting, logging, metrics, and cost controls. 
-
+We're not building this from scratch. Databricks already operates an AI gateway that handles trillions of requests a day for everyone from fortune 500 enterprises to popular coding agents, with day-0 coverage of new models, rate limiting, logging, metrics, and cost controls.
 
 ### When will the new primitives be available?
 
-Authentication and the Data API are available today. Object Storage, Compute, and the AI Gateway are coming soon. If you want early access, sign up above and we'll reach out when each one is ready.
+Authentication and the Data API are available today. Object Storage, Compute, and the AI Gateway are coming soon.
 
 ### Will existing Neon projects need to change?
 

@@ -11,7 +11,7 @@ updatedOn: "2025-10-20T16:35:05"
 category: engineering
 categories:
   - engineering
-  - ai
+  - product
 authors:
   - pedro-figueiredo
 cover:

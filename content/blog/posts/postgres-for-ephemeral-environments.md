@@ -8,9 +8,9 @@ excerpt: >-
   The problem with persistent environments To design...
 date: '2025-01-07T19:59:42'
 updatedOn: '2025-01-21T15:37:44'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

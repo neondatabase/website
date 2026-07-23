@@ -13,7 +13,7 @@ updatedOn: '2025-01-21T15:37:49'
 category: postgres
 categories:
   - postgres
-  - workflows
+  - product
 authors:
   - luis-tavares
 cover:

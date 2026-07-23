@@ -8,9 +8,9 @@ excerpt: >-
   spin up Postgres instances dynamically while only payin...
 date: "2026-01-13T17:48:26"
 updatedOn: "2026-01-13T17:58:03"
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - case-study
 authors:
   - carlota-soto

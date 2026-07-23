@@ -11,7 +11,7 @@ updatedOn: '2025-02-12T12:00:53'
 category: postgres
 categories:
   - postgres
-  - workflows
+  - product
 authors:
   - andrew-tate
 cover:

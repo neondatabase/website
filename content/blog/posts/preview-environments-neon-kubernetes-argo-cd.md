@@ -10,9 +10,9 @@ excerpt: >-
   source control management platform like GitHub and...
 date: '2023-11-28T17:47:56'
 updatedOn: '2024-03-01T14:25:12'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - evan-shortiss
 cover:

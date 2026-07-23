@@ -11,7 +11,6 @@ updatedOn: "2026-01-19T18:27:32"
 category: product
 categories:
   - product
-  - workflows
 authors:
   - shridhar-deshmukh
 cover:

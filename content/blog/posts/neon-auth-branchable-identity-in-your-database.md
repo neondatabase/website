@@ -10,9 +10,8 @@ excerpt: >-
   branch-compatible so you can test real authenticatio...
 date: "2025-12-10T18:25:00"
 updatedOn: "2026-01-02T17:38:41"
-category: app-platform
+category: product
 categories:
-  - app-platform
   - product
 authors:
   - brian-holt

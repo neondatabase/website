@@ -8,9 +8,9 @@ excerpt: >-
   most cloud-based tools, Dyad runs locally, supports a...
 date: '2025-08-06T02:26:35'
 updatedOn: '2025-09-10T01:03:55'
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - case-study
 authors:
   - carlota-soto

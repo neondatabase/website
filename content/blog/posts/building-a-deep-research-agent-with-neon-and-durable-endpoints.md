@@ -11,7 +11,7 @@ updatedOn: '2026-02-26T17:50:50'
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - charly-poly
 cover:

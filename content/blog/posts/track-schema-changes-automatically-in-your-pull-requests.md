@@ -8,9 +8,9 @@ excerpt: >-
   Neon branches are great for many things, but test...
 date: '2024-11-28T17:09:53'
 updatedOn: '2024-11-28T17:23:02'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - luis-tavares
 cover:

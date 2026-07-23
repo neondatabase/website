@@ -8,10 +8,9 @@ excerpt: >-
   have the old roles. Someone needs to manually update them...
 date: '2026-01-10T00:39:46'
 updatedOn: '2026-01-10T00:39:48'
-category: app-platform
+category: product
 categories:
-  - app-platform
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

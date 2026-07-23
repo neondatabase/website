@@ -11,7 +11,7 @@ updatedOn: '2025-10-14T06:09:57'
 category: community
 categories:
   - community
-  - workflows
+  - product
 authors:
   - mahmoud-abdelwahab
 cover:

@@ -10,9 +10,9 @@ excerpt: >-
   level. They call it enterprise AppGen. Now, en...
 date: "2025-10-07T16:42:35"
 updatedOn: "2025-10-14T16:00:02"
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carlota-soto
 cover:

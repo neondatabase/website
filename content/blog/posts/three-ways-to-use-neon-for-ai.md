@@ -8,9 +8,9 @@ excerpt: >-
   rely on vector embeddings for semantic search,...
 date: '2025-07-29T16:34:01'
 updatedOn: '2025-10-02T00:22:03'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carlota-soto
 cover:

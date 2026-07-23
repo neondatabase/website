@@ -8,10 +8,9 @@ excerpt: >-
   full Neon project context: connection details, schema,...
 date: '2025-11-05T17:25:23'
 updatedOn: '2025-11-28T21:34:53'
-category: ai
+category: product
 categories:
-  - ai
-  - workflows
+  - product
 authors:
   - rodney-sherwin-shibu
 cover:

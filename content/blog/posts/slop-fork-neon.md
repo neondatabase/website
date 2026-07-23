@@ -10,10 +10,8 @@ excerpt: >-
   too. To illustrate this, I slop forked the Neon console.
 date: "2026-06-03T12:00:00"
 updatedOn: "2026-06-03T12:00:00"
-category: ai
+category: product
 categories:
-  - ai
-  - app-platform
   - product
 authors:
   - andre-landgraf

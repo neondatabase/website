@@ -11,7 +11,7 @@ updatedOn: '2024-04-19T17:42:25'
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - raouf-chebri
 cover:

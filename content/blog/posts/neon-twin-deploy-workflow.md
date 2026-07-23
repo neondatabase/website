@@ -10,9 +10,9 @@ excerpt: >-
   a synchronized Neon Twin of your production database and...
 date: '2024-08-15T17:25:24'
 updatedOn: '2024-12-24T18:22:09'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - rishi-raj-jain
 cover:

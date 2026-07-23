@@ -8,9 +8,9 @@ excerpt: >-
   generating code – it’s about helping teams ship. Wit...
 date: '2026-02-06T20:45:28'
 updatedOn: '2026-02-06T20:45:29'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carlota-soto
 cover:

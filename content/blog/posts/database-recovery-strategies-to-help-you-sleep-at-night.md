@@ -8,9 +8,9 @@ excerpt: >-
   service—sometimes, databases fall over. If you don’t have a...
 date: '2024-06-24T19:32:13'
 updatedOn: '2024-06-24T19:34:38'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

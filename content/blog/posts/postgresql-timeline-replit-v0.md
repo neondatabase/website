@@ -8,9 +8,9 @@ excerpt: >-
   dedicated development and almost 61000 Git commits....
 date: '2025-04-04T23:53:03'
 updatedOn: '2025-05-01T00:19:23'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - sam-harrison
 cover:

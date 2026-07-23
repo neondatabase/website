@@ -10,9 +10,9 @@ excerpt: >-
   – often, exactly the kind of work you wish an AI a...
 date: '2025-06-23T17:10:34'
 updatedOn: '2025-08-19T18:14:55'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - daniel-price
   - barry-grenon

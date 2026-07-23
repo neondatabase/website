@@ -13,7 +13,7 @@ updatedOn: '2024-01-24T22:21:27'
 category: community
 categories:
   - community
-  - ai
+  - product
 authors:
   - mahmoud-abdelwahab
 cover:

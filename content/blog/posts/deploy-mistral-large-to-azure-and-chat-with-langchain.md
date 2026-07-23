@@ -10,9 +10,9 @@ excerpt: >-
   Learn more about Neon and give it a try, and let...
 date: '2024-02-27T01:59:48'
 updatedOn: '2024-02-27T12:34:43'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - raouf-chebri
 cover:

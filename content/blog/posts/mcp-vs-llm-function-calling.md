@@ -8,9 +8,9 @@ excerpt: >-
   capabilities with external tools, services, and data sou...
 date: '2025-03-12T18:16:46'
 updatedOn: '2025-03-12T20:10:28'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andre-landgraf
 cover:

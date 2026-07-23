@@ -8,9 +8,9 @@ excerpt: >-
   specific tasks or answer questions about a given topi...
 date: '2024-01-11T15:56:35'
 updatedOn: '2024-03-01T14:00:10'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - peter-bendel
   - raouf-chebri

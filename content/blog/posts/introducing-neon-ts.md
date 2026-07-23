@@ -15,8 +15,6 @@ updatedOn: "2026-06-15T12:00:00"
 category: product
 categories:
   - product
-  - workflows
-  - ai
 authors:
   - andre-landgraf
 cover:

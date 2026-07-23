@@ -8,9 +8,9 @@ excerpt: >-
   structure. They suck at full-blown software generation,...
 date: '2025-08-25T15:55:20'
 updatedOn: '2025-10-01T16:43:50'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - arseni-kravchenko
   - pedro-figueiredo

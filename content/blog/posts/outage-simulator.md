@@ -8,9 +8,9 @@ excerpt: >-
   would it take to get your Postgres database back onl...
 date: '2025-03-10T19:42:16'
 updatedOn: '2025-03-11T15:53:42'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

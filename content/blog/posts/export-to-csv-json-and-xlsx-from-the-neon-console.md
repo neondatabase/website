@@ -8,9 +8,9 @@ excerpt: >-
   for the results pane, to get a better and less cramped l...
 date: '2024-05-16T18:05:11'
 updatedOn: '2024-05-18T00:51:04'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - george-mackerron
 cover:

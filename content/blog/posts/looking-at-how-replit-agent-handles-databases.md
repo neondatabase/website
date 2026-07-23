@@ -8,9 +8,9 @@ excerpt: >-
   and modify existing features simply by asking for wha...
 date: '2024-11-08T17:59:23'
 updatedOn: '2024-11-08T20:37:33'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - sam-harrison
 cover:

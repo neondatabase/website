@@ -11,9 +11,9 @@ excerpt: >-
   yourself. We calle...
 date: '2025-10-29T18:40:53'
 updatedOn: '2025-10-29T18:46:52'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andre-landgraf
 cover:

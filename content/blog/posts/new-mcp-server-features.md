@@ -8,9 +8,9 @@ excerpt: >-
   tasks like provisioning databases, inspecting query pl...
 date: '2025-07-03T15:49:23'
 updatedOn: '2025-08-19T18:15:52'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carlota-soto
 cover:

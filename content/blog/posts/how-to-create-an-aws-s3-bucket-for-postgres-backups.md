@@ -10,9 +10,9 @@ excerpt: >-
   hundreds or even thousands of Neon projects (e.g. in multi-t...
 date: '2024-10-28T18:26:13'
 updatedOn: '2024-10-29T16:51:32'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - paul-scanlon
 cover:

@@ -10,9 +10,9 @@ excerpt: >-
   one that most resembles what you might think of...
 date: '2024-10-18T15:41:57'
 updatedOn: '2025-02-27T10:09:42'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - dian-m-fay
 cover:

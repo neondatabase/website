@@ -10,9 +10,9 @@ excerpt: >-
   smoothly, even if you’re not a database expert! It’s free t...
 date: '2025-04-29T08:17:39'
 updatedOn: '2025-04-29T14:48:24'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - paul-scanlon
 cover:

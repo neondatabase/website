@@ -8,10 +8,9 @@ excerpt: >-
   context and help it generate better code from...
 date: '2025-09-02T18:00:24'
 updatedOn: '2025-10-17T16:59:13'
-category: ai
+category: product
 categories:
-  - ai
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

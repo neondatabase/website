@@ -15,7 +15,7 @@ updatedOn: '2024-04-13T18:45:01'
 category: community
 categories:
   - community
-  - workflows
+  - product
 authors:
   - stephen-siegert
 cover:

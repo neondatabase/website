@@ -8,9 +8,9 @@ excerpt: >-
   Cloud LLM APIs can become expensive fast during ex...
 date: '2025-08-11T19:41:53'
 updatedOn: '2025-10-02T00:23:37'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - arseni-kravchenko
   - evgenii-kniazev

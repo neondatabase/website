@@ -13,7 +13,7 @@ updatedOn: "2024-07-26T17:30:45"
 category: company
 categories:
   - company
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

@@ -10,21 +10,18 @@ excerpt: >-
   provisioning infrastructure over REST means polling operations until
   resources are ready. @neon/sdk adds an ergonomic, type-safe layer on top so
   platforms and agents don't have to.
-date: "2026-07-09T12:00:00"
-updatedOn: "2026-07-09T12:00:00"
+date: "2026-07-13T12:00:00"
+updatedOn: "2026-07-13T12:00:00"
 category: product
 categories:
   - product
-  - ai
-  - app-platform
 authors:
   - andre-landgraf
 cover:
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/neon-sdk/cover.jpg
   alt: 'Blog cover graphic on a blue dotted background with the Neon logo, the headline "Introducing @neon/sdk: TypeScript client for the Neon API", and a wireframe toolbox illustration labeled "SDK module" and "all-in-one".'
-isFeatured: false
-draft: true
+isFeatured: true
 seo:
   title: "Introducing @neon/sdk, our new TypeScript client for the Neon API - Neon"
   description: >-

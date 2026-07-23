@@ -11,7 +11,6 @@ updatedOn: '2025-10-02T00:17:33'
 category: product
 categories:
   - product
-  - ai
 authors:
   - arseni-kravchenko
   - david-gomes

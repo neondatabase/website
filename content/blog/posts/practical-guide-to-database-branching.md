@@ -11,7 +11,6 @@ updatedOn: '2026-03-16T12:38:21'
 category: product
 categories:
   - product
-  - workflows
 authors:
   - savannah-longoria
 cover:

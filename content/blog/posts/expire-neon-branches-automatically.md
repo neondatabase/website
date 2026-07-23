@@ -11,7 +11,6 @@ updatedOn: '2025-08-14T09:36:01'
 category: product
 categories:
   - product
-  - workflows
 authors:
   - gustavo-salomao
 cover:

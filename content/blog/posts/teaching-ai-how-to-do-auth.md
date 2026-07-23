@@ -8,10 +8,9 @@ excerpt: >-
   AI build a backend for you. Here’s […]
 date: '2025-12-17T17:26:10'
 updatedOn: '2026-01-02T17:38:08'
-category: app-platform
+category: product
 categories:
-  - app-platform
-  - ai
+  - product
 authors:
   - pedro-figueiredo
 cover:

@@ -11,7 +11,7 @@ updatedOn: '2024-09-19T16:52:49'
 category: postgres
 categories:
   - postgres
-  - workflows
+  - product
 authors:
   - dian-m-fay
 cover:

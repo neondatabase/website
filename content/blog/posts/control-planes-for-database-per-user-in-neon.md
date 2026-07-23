@@ -8,9 +8,9 @@ excerpt: >-
   particular focus on the database-per-user architecture and...
 date: '2024-09-11T08:32:29'
 updatedOn: '2024-11-15T17:33:20'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - dian-m-fay
 cover:

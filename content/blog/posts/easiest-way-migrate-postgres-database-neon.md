@@ -13,7 +13,6 @@ updatedOn: '2025-10-02T00:16:29'
 category: product
 categories:
   - product
-  - workflows
 authors:
   - carlota-soto
 cover:

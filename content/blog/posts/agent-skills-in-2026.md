@@ -8,9 +8,9 @@ excerpt: >-
   origins of agent skills The concept of agent sk...
 date: "2026-01-22T18:13:30"
 updatedOn: "2026-01-22T18:50:37"
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - andre-landgraf
 cover:

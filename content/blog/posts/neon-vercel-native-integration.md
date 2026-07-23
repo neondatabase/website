@@ -12,7 +12,6 @@ category: product
 categories:
   - product
   - community
-  - workflows
 authors:
   - gustavo-salomao
 cover:

@@ -10,9 +10,9 @@ excerpt: >-
   responses from developers around the world. Organ...
 date: '2025-04-23T18:48:42'
 updatedOn: '2025-07-01T18:41:12'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - carlota-soto
 cover:

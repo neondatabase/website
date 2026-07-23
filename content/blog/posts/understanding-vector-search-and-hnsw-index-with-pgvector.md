@@ -11,7 +11,7 @@ updatedOn: '2025-10-14T06:28:36'
 category: postgres
 categories:
   - postgres
-  - ai
+  - product
 authors:
   - raouf-chebri
 cover:

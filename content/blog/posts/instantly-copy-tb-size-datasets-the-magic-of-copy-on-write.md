@@ -11,7 +11,7 @@ updatedOn: '2025-01-10T02:48:43'
 category: company
 categories:
   - company
-  - workflows
+  - product
 authors:
   - rishi-raj-jain
   - bryan-clark

@@ -8,9 +8,9 @@ excerpt: >-
   features, and use Anthropic’s Claude model under the hood. I...
 date: '2025-03-20T00:41:40'
 updatedOn: '2025-03-26T19:56:11'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - sam-harrison
 cover:

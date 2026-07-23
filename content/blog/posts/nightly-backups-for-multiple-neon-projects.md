@@ -10,9 +10,9 @@ excerpt: >-
   multiple Neon Postgres databases using GitHub Act...
 date: '2024-10-29T16:47:34'
 updatedOn: '2025-05-06T10:01:02'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - paul-scanlon
 cover:

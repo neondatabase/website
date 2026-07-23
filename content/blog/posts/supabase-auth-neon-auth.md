@@ -8,9 +8,9 @@ excerpt: >-
   you the simplicity of a managed auth solutio...
 date: '2025-03-25T17:16:05'
 updatedOn: '2025-04-15T19:21:04'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - shridhar-deshmukh
 cover:

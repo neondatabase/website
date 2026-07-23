@@ -10,9 +10,9 @@ excerpt: >-
   for managing clinical trials. Whatever your specif...
 date: '2025-06-13T15:36:17'
 updatedOn: '2025-09-30T13:26:44'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - andrew-tate
 cover:

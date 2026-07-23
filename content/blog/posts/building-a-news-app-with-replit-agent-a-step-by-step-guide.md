@@ -8,9 +8,9 @@ excerpt: >-
   deploy Postgres databases powered by Neon. In this tu...
 date: '2024-09-17T14:51:22'
 updatedOn: '2024-11-12T22:59:46'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - mervin-praison
 cover:

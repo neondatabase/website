@@ -8,11 +8,9 @@ excerpt: >-
   versioning (or checkpoints). Neon’s snapshots, built on our...
 date: '2025-09-16T22:52:22'
 updatedOn: '2026-01-02T17:41:04'
-category: app-platform
+category: product
 categories:
-  - app-platform
   - product
-  - ai
 authors:
   - andre-landgraf
   - carlota-soto

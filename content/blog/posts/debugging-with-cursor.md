@@ -8,9 +8,9 @@ excerpt: >-
   used by software engineers for decades, with the offi...
 date: '2025-06-20T16:44:12'
 updatedOn: '2025-07-01T18:39:57'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - sam-harrison
 cover:

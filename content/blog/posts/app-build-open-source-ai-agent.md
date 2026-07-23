@@ -10,9 +10,9 @@ excerpt: >-
   solutions are better suited to create apps....
 date: '2025-06-04T19:40:32'
 updatedOn: '2025-10-01T16:46:35'
-category: ai
+category: product
 categories:
-  - ai
+  - product
   - company
 authors:
   - david-gomes

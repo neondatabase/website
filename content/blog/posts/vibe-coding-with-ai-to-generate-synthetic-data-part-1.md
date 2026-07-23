@@ -8,9 +8,9 @@ excerpt: >-
   the boilerplate and getting straight to the good stuff. I...
 date: '2025-03-13T16:11:50'
 updatedOn: '2025-03-13T16:11:51'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - paul-scanlon
 cover:

@@ -14,7 +14,6 @@ category: product
 categories:
   - product
   - company
-  - workflows
 authors:
   - atila
 cover:

@@ -11,7 +11,7 @@ updatedOn: '2025-08-28T18:36:35'
 category: postgres
 categories:
   - postgres
-  - workflows
+  - product
 authors:
   - ben-hagan
 cover:

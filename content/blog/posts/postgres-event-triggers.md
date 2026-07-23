@@ -12,7 +12,6 @@ category: product
 categories:
   - product
   - company
-  - workflows
 authors:
   - ben-hagan
 cover:

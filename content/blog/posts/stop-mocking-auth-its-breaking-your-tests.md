@@ -8,9 +8,9 @@ excerpt: >-
   commonly mocked components in test suites. The reaso...
 date: '2025-12-29T18:23:12'
 updatedOn: '2026-01-02T17:37:39'
-category: app-platform
+category: product
 categories:
-  - app-platform
+  - product
 authors:
   - shridhar-deshmukh
 cover:

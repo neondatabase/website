@@ -8,9 +8,9 @@ excerpt: >-
   doesn’t support modern developer workflows. We...
 date: '2024-07-16T12:24:14'
 updatedOn: '2024-12-24T18:23:22'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - brad-van-vugt
 cover:

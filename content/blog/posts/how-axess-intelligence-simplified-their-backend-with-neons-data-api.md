@@ -8,9 +8,9 @@ excerpt: >-
   Engineer at Axess Intelligence Axess Intelligence is...
 date: '2025-11-20T17:49:48'
 updatedOn: '2026-01-02T17:39:18'
-category: app-platform
+category: product
 categories:
-  - app-platform
+  - product
   - case-study
 authors:
   - carlota-soto

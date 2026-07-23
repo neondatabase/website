@@ -8,9 +8,9 @@ excerpt: >-
   design. It becomes part of your runtime and part of...
 date: '2025-12-10T18:26:27'
 updatedOn: '2026-01-02T17:38:28'
-category: app-platform
+category: product
 categories:
-  - app-platform
+  - product
   - community
 authors:
   - bereket-engida

@@ -11,7 +11,6 @@ updatedOn: '2025-11-11T17:22:47'
 category: product
 categories:
   - product
-  - workflows
 authors:
   - monica-steinke
 cover:

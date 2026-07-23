@@ -8,9 +8,9 @@ excerpt: >-
   SDK that is easier for AI agents to consume. AI agents do...
 date: '2024-09-27T15:49:18'
 updatedOn: '2024-09-27T15:53:58'
-category: ai
+category: product
 categories:
-  - ai
+  - product
 authors:
   - david-gomes
 cover:

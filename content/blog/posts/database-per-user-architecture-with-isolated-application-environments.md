@@ -8,9 +8,9 @@ excerpt: >-
   contained by minimizing the number of software systems deploy...
 date: '2024-10-21T16:01:08'
 updatedOn: '2024-10-21T16:01:11'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - dian-m-fay
 cover:

@@ -8,9 +8,9 @@ excerpt: >-
   corruptible. And they were/are entirely correct....
 date: "2025-12-12T19:28:15"
 updatedOn: "2025-12-12T19:32:46"
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - carlota-soto
 cover:

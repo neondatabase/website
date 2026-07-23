@@ -10,9 +10,9 @@ excerpt: >-
   Replit, each user may be building multiple versions of t...
 date: '2025-11-25T17:02:45'
 updatedOn: '2026-03-13T16:04:54'
-category: workflows
+category: product
 categories:
-  - workflows
+  - product
 authors:
   - savannah-longoria
 cover:
