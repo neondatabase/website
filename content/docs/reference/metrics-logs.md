@@ -9,7 +9,7 @@ summary: >-
   neon_connection_counts, neon_lfc_hits, and host_cpu_seconds_total when
   building dashboards or alerts. Metrics are not sent while a compute is
   suspended by Scale to Zero, which can cause gaps; log export may also incur
-  network egress charges on paid plans above 500 GB.
+  network egress charges when a project on a paid plan exceeds 500 GB.
 enableTableOfContents: true
 updatedOn: '2026-06-05T17:20:32.620Z'
 ---
@@ -104,7 +104,7 @@ During the beta phase, you may see some Neon-specific system logs included. Thes
 Enabling log export may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, billed on paid plans for usage over 500 GB
+- Additional network egress for log transmission, billed when a project on a paid plan exceeds 500 GB
 - Associated costs based on log volume in your observability platform
 
 <Admonition type="note">
