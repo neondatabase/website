@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-07-24T13:39:44.931Z'
+updatedOn: '2026-07-24T13:45:44.711Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -13,7 +13,7 @@ A common workaround is to hardcode API keys in a backend service, but this intro
 
 This guide explains how to build a secure LLM proxy backend that authenticates requests, enforces per-user rate limits, and streams AI responses back to the client. Using **[Neon Functions](/docs/compute/functions/overview)** for compute, **[Neon AI Gateway](/docs/ai-gateway/overview)** for unified model access, and **[Managed Better Auth](/docs/auth/overview)** for authentication, you’ll create a backend that authenticates every request with a JWT, enforces per-user rate limits backed by Postgres or Redis, and streams model responses back to the client without ever exposing provider keys.
 
-## Architecture Overview
+## Architecture overview
 
 Consider the following architecture for a React frontend that interacts with a LLM proxy backend built with Neon Functions:
 
@@ -49,7 +49,7 @@ Before starting, ensure you have:
 
 <Steps>
 
-## Set up the Backend Proxy (Neon Functions & Hono)
+## Set up the backend proxy (Neon functions & Hono)
 
 Create a directory for your project and set up the Neon Functions backend.
 
@@ -96,7 +96,7 @@ When prompted whether to manage setup as code, select **Yes** to generate a `neo
 
 A `.env.local` file should be created automatically in your project root with your Neon project details
 
-## Implement Rate Limiting
+## Implement rate limiting
 
 ### Install dependencies
 
@@ -129,7 +129,7 @@ npm install --save-dev esbuild @types/node typescript dotenv
 - `jose`: A lightweight module for cryptographic JWT verification using JWKS endpoints.
 - `@upstash/ratelimit` & `@upstash/redis`: (Optional) Redis driver if choosing Redis for rate limiting.
 
-### Implement the Rate Limiting Logic
+### Implement the rate limiting logic
 
 LLM requests cost real money. Unlike typical API endpoints, where rate limiting is mostly about abuse prevention, LLM requests directly affect your bill. Without a per-user cap, a single user could send thousands of requests and drive up your bill. Rate limiting solves this by capping how many requests each user can make within a fixed time window (for example, 5 requests per 60 seconds).
 
@@ -271,7 +271,7 @@ UPSTASH_REDIS_REST_TOKEN=<your-upstash-redis-rest-token>
 </TabItem>
 </Tabs>
 
-## Build the Hono LLM Proxy Route
+## Create the Hono proxy server
 
 Create an `index.ts` file in the root of your project. This is the main server file that wires together three concerns, processed in order for every request:
 
@@ -456,7 +456,7 @@ Function URLs
 
 Copy this function endpoint URL. You will use it in your React frontend. Your `.env.local` file should now also include the `NEON_AUTH_JWKS_URL` and other necessary environment variables for the proxy to verify JWTs and connect to the AI Gateway.
 
-## Build the React Chat Frontend
+## Build the React frontend
 
 Now, create a React frontend that handles user authentication and streams AI chat completions through the proxy you just deployed. The frontend has three main pieces:
 
@@ -466,7 +466,7 @@ Now, create a React frontend that handles user authentication and streams AI cha
 
 You'll build these in a new directory, separate from the backend.
 
-### Initialize Vite React Project
+### Initialize Vite React project
 
 Open a new terminal window and run:
 
@@ -512,7 +512,7 @@ body {
 }
 ```
 
-### Set Environment Variables
+### Set environment variables
 
 Create `.env` in `llm-proxy-frontend/`:
 
@@ -521,9 +521,9 @@ VITE_NEON_AUTH_URL="https://ep-xxx.neon.tech/neondb/auth"
 VITE_PROXY_API_URL="https://br-damp-voice-xxx-proxy.compute.c-3.us-east-2.aws.neon.tech/api/chat"
 ```
 
-Replace `VITE_PROXY_API_URL` with your deployed Neon Function URL and `VITE_NEON_AUTH_URL` with your Managed Better Auth endpoint from your `.env.local` file in the backend. (Optionally, you can link the frontend folder to the same neon project using `neon link` to automatically keep the env variables in sync.)
+Replace `VITE_PROXY_API_URL` with your deployed Neon Function URL and `VITE_NEON_AUTH_URL` with your Managed Better Auth endpoint (`NEON_AUTH_BASE_URL`) from your `.env.local` file in the backend. (Optionally, you can link the frontend folder to the same neon project using `neon link` to automatically keep the env variables in sync.)
 
-### Initialize Auth Client
+### Initialize Auth client
 
 Create `src/neon.ts` to instantiate the authentication client:
 
@@ -533,7 +533,7 @@ import { createAuthClient } from '@neondatabase/neon-js/auth';
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
-### Configure Application Providers
+### Configure application providers
 
 Update `src/main.tsx` to wrap your app in auth and router providers:
 
@@ -557,7 +557,7 @@ createRoot(document.getElementById('root')!).render(
 );
 ```
 
-### Build Pages and Chat Interface
+### Create the authentication page and chat interface
 
 Create `src/pages/Auth.tsx` to host auth components:
 
