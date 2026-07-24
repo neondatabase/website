@@ -50,8 +50,8 @@ Add both connection strings to your `.env` file. Get these from your Neon Consol
 # Pooled connection for your application (note the -pooler suffix)
 DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
 
-# Direct connection for Prisma CLI (migrations, introspection)
-DIRECT_URL="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
+# Direct(Unpooled) connection for Prisma CLI (migrations, introspection)
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
 ```
 
 <Admonition type="important">
@@ -69,7 +69,7 @@ import { defineConfig, env } from 'prisma/config'
 export default defineConfig({
   schema: 'prisma/schema.prisma',
   datasource: {
-    url: env('DIRECT_URL'),
+    url: env('DATABASE_URL_UNPOOLED'),
   },
 })
 ```
