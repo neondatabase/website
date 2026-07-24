@@ -4,16 +4,16 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-07-24T11:35:17.690Z'
+updatedOn: '2026-07-24T16:56:05.334Z'
 ---
 
-If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
+If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
 
 A common workaround is to hardcode API keys in a backend service, but this introduces its own problems. You lose visibility into which user made which request, can’t enforce per-user rate limits, and end up managing model provider credentials across multiple services. As your application scales, these gaps become harder to close.
 
 This guide explains how to build a secure LLM proxy backend that authenticates requests, enforces per-user rate limits, and streams AI responses back to the client. Using **[Neon Functions](/docs/compute/functions/overview)** for compute, **[Neon AI Gateway](/docs/ai-gateway/overview)** for unified model access, and **[Managed Better Auth](/docs/auth/overview)** for authentication, you’ll create a backend that authenticates every request with a JWT, enforces per-user rate limits backed by Postgres or Redis, and streams model responses back to the client without ever exposing provider keys.
 
-## Architecture Overview
+## Architecture overview
 
 Consider the following architecture for a React frontend that interacts with a LLM proxy backend built with Neon Functions:
 
@@ -49,7 +49,7 @@ Before starting, ensure you have:
 
 <Steps>
 
-## Set up the Backend Proxy (Neon Functions & Hono)
+## Set up the backend proxy (Neon functions & Hono)
 
 Create a directory for your project and set up the Neon Functions backend.
 
@@ -78,13 +78,16 @@ Ensure you select the **AWS US East 2 (Ohio)** region when creating your Neon pr
 </Admonition>
 
 ```bash
-➜ neon link
-✔ Which organization would you like to link? › PersonalProjects (org-round-waterfall-61562384)
-✔ Which project would you like to link? › llm-proxy-demo (misty-cell-80209300)
-Linked /home/llm-proxy/llm-proxy-backend/.neon:
-  orgId:     org-round-waterfall-61562384
-  projectId: misty-cell-80209300
-  branch:    production
+$ neon link
+INFO: Linking organization XXX (org-round-sun-33472318).
+✔ Which project would you like to link? › ＋ Create new project…
+✔ Name for the new project: … llm-proxy-demo
+✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
+Created project winter-breeze-65209364 ("llm-proxy-demo") in aws-us-east-2.
+Linked /home/llm-proxy-backend/.neon:
+  orgId:     org-round-sun-33472318
+  projectId: winter-breeze-65209364
+  branch:    main
 
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ```
@@ -93,7 +96,7 @@ When prompted whether to manage setup as code, select **Yes** to generate a `neo
 
 A `.env.local` file should be created automatically in your project root with your Neon project details
 
-## Implement Rate Limiting
+## Implement rate limiting
 
 ### Install dependencies
 
@@ -126,7 +129,7 @@ npm install --save-dev esbuild @types/node typescript dotenv
 - `jose`: A lightweight module for cryptographic JWT verification using JWKS endpoints.
 - `@upstash/ratelimit` & `@upstash/redis`: (Optional) Redis driver if choosing Redis for rate limiting.
 
-### Implement the Rate Limiting Logic
+### Implement the rate limiting logic
 
 LLM requests cost real money. Unlike typical API endpoints, where rate limiting is mostly about abuse prevention, LLM requests directly affect your bill. Without a per-user cap, a single user could send thousands of requests and drive up your bill. Rate limiting solves this by capping how many requests each user can make within a fixed time window (for example, 5 requests per 60 seconds).
 
@@ -162,7 +165,7 @@ async function ensureTable(): Promise<void> {
     CREATE TABLE IF NOT EXISTS rate_limits (
       user_id TEXT NOT NULL,
       window_start BIGINT NOT NULL,
-      tokens INT NOT NULL DEFAULT 0,
+      count INT NOT NULL DEFAULT 0,
       PRIMARY KEY (user_id, window_start)
     )
   `;
@@ -191,33 +194,26 @@ export async function checkRateLimit(userId: string): Promise<{
   const resetAt = windowStart + WINDOW_MS;
 
   const result = await sql`
-    SELECT COALESCE(SUM(tokens), 0)::int AS total
-    FROM rate_limits
-    WHERE user_id = ${userId} AND window_start = ${windowStart}
+    INSERT INTO rate_limits (user_id, window_start, count)
+    VALUES (${userId}, ${windowStart}, 1)
+    ON CONFLICT (user_id, window_start)
+    DO UPDATE SET count = CASE
+      WHEN rate_limits.count < ${MAX_REQUESTS} THEN rate_limits.count + 1
+      ELSE rate_limits.count
+    END
+    RETURNING count
   `;
 
-  const total = result[0]?.total ?? 0;
-  const remaining = MAX_REQUESTS - total;
+  const count = result[0]?.count ?? 0;
+  const remaining = MAX_REQUESTS - count;
+
+  await cleanup();
 
   return {
-    success: remaining > 0,
+    success: count < MAX_REQUESTS,
     remaining: Math.max(0, remaining),
     resetAt,
   };
-}
-
-export async function addUsage(userId: string, count: number = 1): Promise<void> {
-  const now = Date.now();
-  const windowStart = getWindowStart(now);
-
-  await sql`
-    INSERT INTO rate_limits (user_id, window_start, tokens)
-    VALUES (${userId}, ${windowStart}, ${count})
-    ON CONFLICT (user_id, window_start)
-    DO UPDATE SET tokens = rate_limits.tokens + ${count}
-  `;
-
-  await cleanup();
 }
 ```
 
@@ -225,7 +221,7 @@ export async function addUsage(userId: string, count: number = 1): Promise<void>
 
 1. **Fixed-window counters**: Time is divided into 60-second buckets. `getWindowStart()` rounds the current timestamp down to the nearest window boundary, so all requests within the same 60 seconds share one counter. For example, a request at `t=75000ms` and another at `t=95000ms` both map to window `t=60000ms`.
 
-2. **Upsert pattern**: `ON CONFLICT DO UPDATE` is a Postgres upsert. If no row exists for this user and window, it inserts one with `tokens = 1`. If a row already exists, it increments the counter atomically. This means two concurrent requests can't both read "4" and both write "5". Postgres guarantees one writes "5" and the other writes "6".
+2. **Atomic upsert with cap**: `ON CONFLICT DO UPDATE` is a Postgres upsert. If no row exists for this user and window, it inserts one with `count = 1`. If a row already exists, the `CASE` expression increments the counter only when `count < MAX_REQUESTS`, otherwise it leaves the value unchanged. This ensures that once a user hits the limit, further requests do not increment the counter, and the `success` flag will be `false`.
 
 3. **Cleanup**: Old window rows are deleted every 5 minutes (`CLEANUP_INTERVAL_MS`) to prevent the table from growing indefinitely. The cutoff is one full window behind the current time, so rows are only deleted after they can no longer affect any active window.
 
@@ -265,10 +261,17 @@ export async function checkRateLimit(userId: string): Promise<{
 
 The Redis implementation is simpler than the Postgres one because `@upstash/ratelimit` handles all the counter logic internally. `Ratelimit.fixedWindow(5, '60s')` creates a limiter that allows 5 requests per 60-second window, the same algorithm as the Postgres version, but managed by Upstash's Redis infrastructure. The `limit()` call atomically checks and increments the counter in a single HTTP round-trip, returning whether the request is allowed, how many remain, and when the window resets.
 
+Add the following environment variables at the end of your `.env.local` file:
+
+```bash
+UPSTASH_REDIS_REST_URL=<your-upstash-redis-rest-url>
+UPSTASH_REDIS_REST_TOKEN=<your-upstash-redis-rest-token>
+```
+
 </TabItem>
 </Tabs>
 
-## Build the Hono LLM Proxy Route
+## Create the Hono proxy server
 
 Create an `index.ts` file in the root of your project. This is the main server file that wires together three concerns, processed in order for every request:
 
@@ -279,94 +282,6 @@ Create an `index.ts` file in the root of your project. This is the main server f
 Each layer belongs in its own middleware function, so the code is modular and easy to maintain.
 
 JWTs issued by Managed Better Auth are signed with a private key, and the corresponding public keys are published at a JWKS endpoint. The `jose` library's `createRemoteJWKSet` handles this by fetching the JWKS and caching it. When a JWT arrives, `jose` automatically picks the right key to verify the signature based on the key ID embedded in the token.
-
-<CodeTabs labels={['postgres', 'redis']}>
-
-```typescript shouldWrap filename="index.ts"
-import { Hono, type Context, type Next } from 'hono';
-import { cors } from 'hono/cors';
-import { neon as neonAI } from '@neon/ai-sdk-provider';
-import { convertToModelMessages, streamText, toUIMessageStream, createUIMessageStreamResponse } from 'ai';
-import * as jose from 'jose';
-import { checkRateLimit, addUsage } from './src/ratelimit';
-
-type AppVariables = { userId: string };
-
-const app = new Hono<{ Variables: AppVariables }>();
-
-const JWKS = jose.createRemoteJWKSet(new URL(process.env.NEON_AUTH_JWKS_URL!));
-
-const authMiddleware = async (c: Context<{ Variables: AppVariables }>, next: Next) => {
-    const authHeader = c.req.header('Authorization');
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-        return c.json({ error: 'Unauthorized: Missing token' }, 401);
-    }
-    const token = authHeader.split(' ')[1];
-
-    try {
-        const { payload } = await jose.jwtVerify(token, JWKS, {
-            issuer: new URL(process.env.NEON_AUTH_JWKS_URL!).origin,
-        });
-
-        if (!payload.sub) {
-            return c.json({ error: 'Unauthorized: Invalid token subject' }, 401);
-        }
-
-        c.set('userId', payload.sub);
-        await next();
-    } catch (err) {
-        console.error('JWT verification failed:', err);
-        return c.json({ error: 'Unauthorized: Token verification failed' }, 401);
-    }
-};
-
-app.use(
-    '/api/*',
-    cors({
-        origin: '*',
-        allowMethods: ['GET', 'POST', 'OPTIONS'],
-        allowHeaders: ['Content-Type', 'Authorization'],
-    })
-);
-
-app.post('/api/chat', authMiddleware, async (c) => {
-    const userId = c.get('userId');
-
-    const { success, remaining, resetAt } = await checkRateLimit(userId);
-
-    if (!success) {
-        return c.json(
-            { error: 'Rate limit exceeded. Please wait before sending more requests.' },
-            429,
-            {
-                'X-RateLimit-Limit': '5',
-                'X-RateLimit-Remaining': '0',
-                'X-RateLimit-Reset': resetAt.toString(),
-            }
-        );
-    }
-
-    const { messages } = await c.req.json();
-
-    await addUsage(userId, 1);
-
-    const result = streamText({
-        model: neonAI('gpt-oss-120b'),
-        messages: await convertToModelMessages(messages),
-    });
-
-    return createUIMessageStreamResponse({
-        stream: toUIMessageStream({ stream: result.stream }),
-        headers: {
-            'X-RateLimit-Remaining': remaining.toString(),
-            'X-RateLimit-Reset': resetAt.toString(),
-        }
-    });
-});
-
-export default app;
-```
 
 ```typescript shouldWrap filename="index.ts"
 import { Hono, type Context, type Next } from 'hono';
@@ -452,15 +367,13 @@ app.post('/api/chat', authMiddleware, async (c) => {
 export default app;
 ```
 
-</CodeTabs>
-
 Here's what this server code handles:
 
 1. **JWKS setup**: `jose.createRemoteJWKSet` fetches the public keys from Managed Better Auth's JWKS URL and caches them. When a JWT arrives, `jose` automatically picks the right key to verify the signature based on the key ID embedded in the token.
 
 2. **Auth middleware**: Runs before every `/api/*` route. It extracts the Bearer token from the `Authorization` header, verifies it against the cached JWKS, and checks that the `iss` (issuer) claim matches the expected origin. If verification succeeds, the `sub` (subject) claim, which contains the user's ID, is stored in the request context via `c.set('userId', payload.sub)` so downstream handlers can access it without re-parsing the token.
 
-3. **Rate limit check**: Calls `checkRateLimit(userId)` from the module you created earlier. If the user has exceeded their quota, the response includes standard `X-RateLimit-*` headers so the frontend can display a countdown or disable the input until the window resets. The `429` status code follows the HTTP convention for rate limit errors.
+3. **Rate limit check**: Calls `checkRateLimit(userId)` from the module you created earlier. This single call atomically increments the user's counter and returns whether the request is allowed. If the user has exceeded their quota, the response includes standard `X-RateLimit-*` headers so the frontend can display a countdown or disable the input until the window resets. The `429` status code follows the HTTP convention for rate limit errors.
 
 4. **CORS configuration**: The `cors()` middleware allows the React frontend (running on a different origin during development) to make authenticated requests to the proxy. `origin: '*'` is permissive for development; in production, you'd restrict this to your actual frontend domain.
 
@@ -470,7 +383,9 @@ Here's what this server code handles:
 
 Update the `neon.ts` configuration file generated by the Neon CLI. This file tells Neon which services to enable for your project and how to deploy your function.
 
-```typescript {4,10-17} filename="neon.ts"
+<CodeTabs labels={['postgres', 'redis']}>
+
+```typescript {4,10-18} filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
@@ -491,6 +406,34 @@ export default defineConfig({
   }
 });
 ```
+
+```typescript {4,10-22} filename="neon.ts"
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true,
+  branch: (branch) => {
+    if (branch.isDefault) { return {}; }
+    if (!branch.exists) { return { ttl: "7d" }; }
+    return {};
+  },
+  preview: {
+    functions: {
+      proxy: {
+        name: "LLM Proxy Server",
+        source: "./index.ts",
+        env: {
+          UPSTASH_REDIS_REST_URL: process.env.UPSTASH_REDIS_REST_URL!,
+          UPSTASH_REDIS_REST_TOKEN: process.env.UPSTASH_REDIS_REST_TOKEN!,
+        }
+      },
+    },
+    aiGateway: true
+  }
+});
+```
+
+</CodeTabs>
 
 Here's what each property does:
 
@@ -513,7 +456,7 @@ Function URLs
 
 Copy this function endpoint URL. You will use it in your React frontend. Your `.env.local` file should now also include the `NEON_AUTH_JWKS_URL` and other necessary environment variables for the proxy to verify JWTs and connect to the AI Gateway.
 
-## Build the React Chat Frontend
+## Build the React frontend
 
 Now, create a React frontend that handles user authentication and streams AI chat completions through the proxy you just deployed. The frontend has three main pieces:
 
@@ -523,7 +466,7 @@ Now, create a React frontend that handles user authentication and streams AI cha
 
 You'll build these in a new directory, separate from the backend.
 
-### Initialize Vite React Project
+### Initialize Vite React project
 
 Open a new terminal window and run:
 
@@ -569,7 +512,7 @@ body {
 }
 ```
 
-### Set Environment Variables
+### Set environment variables
 
 Create `.env` in `llm-proxy-frontend/`:
 
@@ -578,9 +521,9 @@ VITE_NEON_AUTH_URL="https://ep-xxx.neon.tech/neondb/auth"
 VITE_PROXY_API_URL="https://br-damp-voice-xxx-proxy.compute.c-3.us-east-2.aws.neon.tech/api/chat"
 ```
 
-Replace `VITE_PROXY_API_URL` with your deployed Neon Function URL and `VITE_NEON_AUTH_URL` with your Managed Better Auth endpoint from your `.env.local` file in the backend. (Optionally, you can link the frontend folder to the same neon project using `neon link` to automatically keep the env variables in sync.)
+Replace `VITE_PROXY_API_URL` with your deployed Neon Function URL and `VITE_NEON_AUTH_URL` with your Managed Better Auth endpoint (`NEON_AUTH_BASE_URL`) from your `.env.local` file in the backend. (Optionally, you can link the frontend folder to the same neon project using `neon link` to automatically keep the env variables in sync.)
 
-### Initialize Auth Client
+### Initialize Auth client
 
 Create `src/neon.ts` to instantiate the authentication client:
 
@@ -590,7 +533,7 @@ import { createAuthClient } from '@neondatabase/neon-js/auth';
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
-### Configure Application Providers
+### Configure application providers
 
 Update `src/main.tsx` to wrap your app in auth and router providers:
 
@@ -614,7 +557,7 @@ createRoot(document.getElementById('root')!).render(
 );
 ```
 
-### Build Pages and Chat Interface
+### Create the authentication page and chat interface
 
 Create `src/pages/Auth.tsx` to host auth components:
 
@@ -767,19 +710,19 @@ This code handles several key aspects of the frontend:
 
 Now that you have built a basic LLM Proxy on Neon Functions, consider expanding it into a full production setup:
 
-- **Token-based Rate Limiting**: Instead of counting HTTP requests, track actual token consumption (`prompt_tokens` + `completion_tokens`) returned by the AI SDK. This gives you finer-grained control over costs, since a single request with a long prompt or response can consume far more tokens than a short one. To implement this, change the rate limit unit from request counts to token counts. The `streamText` API exposes a `usage` object in its `onFinish` callback that reports `totalTokens` once the stream completes. Capture this value and write it to your rate limit table after each response.
+- **Token-based Rate Limiting**: The `count` column is generic by design. In the base implementation, it tracks request counts. You can repurpose it to track actual token consumption (`prompt_tokens` + `completion_tokens`) returned by the AI SDK instead. This gives you finer-grained control over costs, since a single request with a long prompt or response can consume far more tokens than a short one. The `streamText` API exposes a `usage` object in its `onFinish` callback that reports `totalTokens` once the stream completes. Capture this value and write it to your rate limit table after each response.
 
   ```typescript shouldWrap
-  // Update addUsage to accept a token count instead of a fixed 1
-  export async function addUsage(userId: string, tokens: number): Promise<void> {
+  // Add a function to record actual token usage after streaming completes
+  export async function addTokenUsage(userId: string, tokens: number): Promise<void> {
     const now = Date.now();
     const windowStart = getWindowStart(now);
 
     await sql`
-      INSERT INTO rate_limits (user_id, window_start, tokens)
+      INSERT INTO rate_limits (user_id, window_start, count)
       VALUES (${userId}, ${windowStart}, ${tokens})
       ON CONFLICT (user_id, window_start)
-      DO UPDATE SET tokens = rate_limits.tokens + ${tokens}
+      DO UPDATE SET count = rate_limits.count + ${tokens}
     `;
   }
   ```
@@ -788,11 +731,11 @@ Now that you have built a basic LLM Proxy on Neon Functions, consider expanding 
 
   ```typescript shouldWrap
     const result = streamText({
-      model: neonAI('gpt-5-mini'),
+      model: neonAI('gpt-oss-120b'),
       messages: await convertToModelMessages(messages),
       onFinish: ({ usage }) => {
         if (usage?.totalTokens) {
-          addUsage(userId, usage.totalTokens);
+          addTokenUsage(userId, usage.totalTokens);
         }
       },
     });
@@ -800,7 +743,7 @@ Now that you have built a basic LLM Proxy on Neon Functions, consider expanding 
 
   Because tokens are recorded after the response finishes, a user can technically start one request even if they are near the limit. To guard against overages, you can add a pre-check that estimates token count from the prompt length before forwarding to the model, or set a max tokens parameter on the model call to cap individual response sizes.
 
-- **Model Tiering**: Inspect user subscription tiers in Postgres (e.g., Free vs. Paid). Direct free-tier users to smaller, cost-effective models (`gpt-5-mini`) and allow paid users access to advanced models (`gpt-5`).
+- **Model Tiering**: Inspect user subscription tiers in Postgres (e.g., Free vs. Paid). Direct free-tier users to smaller, cost-effective models (`gpt-oss-120b`) and allow paid users access to advanced models (`gpt-5`).
 - **Audit Logging & Analytics**: Store all prompts, completion metadata, latency metrics, and user IDs in a Postgres table for compliance and usage tracking.
 
 ## Resources
@@ -811,5 +754,6 @@ Now that you have built a basic LLM Proxy on Neon Functions, consider expanding 
 - [Neon AI SDK Provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider)
 - [Vercel AI SDK Documentation](https://sdk.vercel.ai/docs)
 - [Hono Framework](https://hono.dev/)
+- [Upstash Rate Limit](https://www.npmjs.com/package/@upstash/ratelimit)
 
 <NeedHelp />
