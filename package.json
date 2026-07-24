@@ -168,7 +168,7 @@
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "shiki": "^1.1.1",
-    "svgo-loader": "^4.0.0",
+    "svgo-loader": "^5.0.0",
     "tailwindcss": "^4.2.1",
     "url-loader": "^4.1.1",
     "vitest": "^4.1.0"
