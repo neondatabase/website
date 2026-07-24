@@ -38,7 +38,7 @@ The classic staging setup is one long-lived database that everyone targets betwe
 # the weekly staging refresh, roughly you would do the following:
 pg_dump "$PROD_URL" --no-owner --format=custom -f prod.dump
 psql "$STAGING_URL" -c 'DROP SCHEMA public CASCADE; CREATE SCHEMA public;'
-pg_restore "$STAGING_URL" --no-owner --clean prod.dump
+pg_restore --no-owner --clean -d "$STAGING_URL" prod.dump
 psql "$STAGING_URL" -f sanitize.sql   # scrub PII, reset secrets, mask emails
 ```
 
