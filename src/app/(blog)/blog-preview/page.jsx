@@ -18,8 +18,8 @@ const BlogPreviewIndexPage = async ({ searchParams }) => {
     getBlogSnapshot
   );
   const [categories, posts] = await Promise.all([
-    getAllBlogCategories({ previewBranch: branch, strictBranch: true }),
-    getAllPosts({ previewBranch: branch, strictBranch: true }),
+    getAllBlogCategories({ previewBranch: branch }),
+    getAllPosts({ previewBranch: branch }),
   ]);
   const validPosts = Array.isArray(posts) ? posts.filter(Boolean) : [];
 
@@ -83,5 +83,6 @@ export async function generateMetadata({ searchParams }) {
 
 export const revalidate = 0;
 export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
 
 export default BlogPreviewIndexPage;

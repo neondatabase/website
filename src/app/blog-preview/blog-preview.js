@@ -17,6 +17,10 @@ const normalizeSearchParam = (value) => {
 const validateBlogPreviewAccess = ({ branch, secret }) => {
   const previewSecret = process.env.BLOG_PREVIEW_SECRET;
 
+  if (process.env.BLOG_PREVIEW_ENABLED !== 'true') {
+    notFound();
+  }
+
   if (!previewSecret || secret !== previewSecret) {
     notFound();
   }
@@ -34,11 +38,10 @@ const resolveBlogPreviewRequest = async (searchParamsPromise, resolver) => {
   validateBlogPreviewAccess({ branch, secret });
 
   try {
-    const snapshot = await resolver({ previewBranch: branch, strictBranch: true });
+    const snapshot = await resolver({ previewBranch: branch });
 
     return {
       branch,
-      secret,
       routeConfig: createBlogRouteConfig({ branch, secret }),
       snapshot,
     };
