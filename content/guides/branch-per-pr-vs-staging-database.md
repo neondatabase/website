@@ -82,7 +82,7 @@ A minimal preview workflow with Neon branching looks like this:
 # .github/workflows/preview.yml
 - name: Create a Neon branch for this PR
   id: branch
-  uses: neondatabase/create-branch-action@v5
+  uses: neondatabase/create-branch-action@v6
   with:
     project_id: ${{ vars.NEON_PROJECT_ID }}
     branch_name: pr-${{ github.event.number }}
