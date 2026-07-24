@@ -225,6 +225,10 @@
             - title: Connection methods
               slug: connect/choose-connection
               items:
+                - title: Overview
+                  slug: ai/neon-mcp-server
+                - title: Connect MCP clients
+                  slug: ai/connect-mcp-clients-to-neon
                 - title: Connect from any app
                   slug: connect/connect-from-any-app
                 - title: Neon serverless driver
