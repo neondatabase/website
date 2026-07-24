@@ -185,10 +185,8 @@ export default {
         tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: false,
-      launch:
-        'No charges applied during beta. After beta, pricing will match model provider (no markup)',
-      scale:
-        'No charges applied during beta. After beta, pricing will match model provider (no markup)',
+      launch: 'No charges applied during beta. <span>Pricing will match model provider</span>',
+      scale: 'No charges applied during beta. <span>Pricing will match model provider</span>',
     },
     {
       rows: '1',
@@ -220,8 +218,8 @@ export default {
         subtitle: 'Egress',
       },
       free: '5 GB included',
-      launch: '500 GB included<span>then $0.10 per GB</span>',
-      scale: '500 GB included<span>then $0.10 per GB</span>',
+      launch: '500 GB per project included<span>then $0.10/GB</span>',
+      scale: '500 GB per project included<span>then $0.10/GB</span>',
     },
     {
       rows: '2',

@@ -8,8 +8,7 @@ summary: >-
   connections, and filtering shared projects. Use this page when you need CLI
   automation for project lifecycle tasks or to recover a deleted project within
   its 7-day recovery window. Projects created via the CLI default to Postgres
-  18; use the Neon Console or API to create projects on earlier Postgres
-  versions.
+  18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
 updatedOn: '2026-07-24T11:09:31.723Z'
 redirectFrom:
@@ -119,6 +118,12 @@ neon projects create --name mynewproject --region-id aws-us-west-2
 The Neon CLI provides a `neon connection-string` command you can use to extract a connection URI programmatically. See [the connection-string command](/docs/cli/connection-string).
 </Admonition>
 
+Create a project with a specific Postgres major version:
+
+```bash
+neon projects create --name mynewproject --pg-version 17
+```
+
 - Create a project with `--output json`, which returns the full project response data and is the recommended format for scripts and agents. The output below was captured on an earlier CLI version; new projects report `"pg_version": 18`.
 
   ```bash
@@ -219,6 +224,12 @@ Block connections from the public internet (see [restrict public internet access
 
 ```bash
 neon projects update orange-credit-12345678 --block-public-connections=true
+```
+
+Enable [logical replication](/docs/guides/logical-replication-neon) for the project. This suspends active endpoints and cannot be disabled, so `--yes` skips the confirmation prompt:
+
+```bash
+neon projects update orange-credit-12345678 --enable-logical-replication --yes
 ```
 
 ## neon projects delete (#delete)
