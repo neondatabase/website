@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ev" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="298" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Measure before you add complexity</text>
+
+  <!-- eval set -->
+  <text x="28" y="64" font-size="11" font-weight="700" fill="#6b7280" letter-spacing="0.5">EVAL SET</text>
+  <rect x="28" y="74" width="236" height="34" rx="7" fill="#eff6ff" stroke="#60a5fa"/>
+  <text x="40" y="95" font-size="11" fill="#1e40af">paraphrase · vector should win</text>
+  <rect x="28" y="114" width="236" height="34" rx="7" fill="#fffbeb" stroke="#fbbf24"/>
+  <text x="40" y="135" font-size="11" fill="#92400e">exact code / SKU · keyword should win</text>
+  <rect x="28" y="154" width="236" height="34" rx="7" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="40" y="175" font-size="11" fill="#3730a3">follow-up · needs session context</text>
+
+  <!-- branch -->
+  <line x1="264" y1="131" x2="300" y2="131" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ev)"/>
+  <rect x="304" y="104" width="150" height="54" rx="10" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="379" y="128" font-size="12" font-weight="600" fill="#065f46" text-anchor="middle">run on a Neon branch</text>
+  <text x="379" y="145" font-size="10.5" fill="#047857" text-anchor="middle">production-shaped data</text>
+  <line x1="454" y1="131" x2="490" y2="131" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ev)"/>
+
+  <!-- recall comparison -->
+  <text x="500" y="64" font-size="11" font-weight="700" fill="#6b7280" letter-spacing="0.5">RECALL@8</text>
+  <!-- axis -->
+  <line x1="556" y1="84" x2="556" y2="196" stroke="#e5e7eb" stroke-width="1"/>
+  <line x1="556" y1="196" x2="724" y2="196" stroke="#e5e7eb" stroke-width="1"/>
+  <!-- vector-only bar -->
+  <rect x="572" y="140" width="60" height="56" rx="4" fill="#bfdbfe" stroke="#60a5fa"/>
+  <text x="602" y="132" font-size="11" font-weight="600" fill="#1e40af" text-anchor="middle">0.61</text>
+  <text x="602" y="212" font-size="10.5" fill="#6b7280" text-anchor="middle">vector</text>
+  <!-- hybrid bar -->
+  <rect x="650" y="100" width="60" height="96" rx="4" fill="#6ee7b7" stroke="#10b981"/>
+  <text x="680" y="92" font-size="11" font-weight="600" fill="#065f46" text-anchor="middle">0.93</text>
+  <text x="680" y="212" font-size="10.5" fill="#6b7280" text-anchor="middle">hybrid</text>
+
+  <text x="28" y="244" font-size="11" fill="#6b7280">Score each retriever with the same metric so a change has to prove it helps. Hybrid earns its place on the exact-lookup</text>
+  <text x="28" y="262" font-size="11" fill="#6b7280">and follow-up cases. With only ten rows everything looks close, so load enough chunks to create real distractors.</text>
+</svg>
