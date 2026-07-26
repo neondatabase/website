@@ -68,7 +68,11 @@ The connection string includes the user name, password, hostname, and database n
 Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
 
 ```text shouldWrap
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+# Pooled connection for your application
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
+
+# Unpooled connection for Drizzle Kit
+DIRECT_URL="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
 ```
 
 ## Install Drizzle and a driver
@@ -140,7 +144,7 @@ export default defineConfig({
   out: './drizzle', // Your migrations folder
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: process.env.DIRECT_URL,
   },
 });
 ```
