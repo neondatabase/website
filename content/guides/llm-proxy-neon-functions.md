@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-07-26T18:27:27.669Z'
+updatedOn: '2026-07-26T18:37:15.865Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -763,7 +763,7 @@ With both the backend and frontend running, you can test the full flow:
 
 The proxy you built counts requests per user, which is a good starting point. But LLM costs are driven by tokens, not requests. A single request with a long prompt and a detailed response can consume thousands of tokens, while a short question might use a few hundred. Here's how to evolve the proxy into a production-ready setup:
 
-- **Token-based Rate Limiting**: The `count` column is generic by design. In the base implementation, it tracks request counts. You can repurpose it to track actual token consumption (`prompt_tokens` + `completion_tokens`) returned by the AI SDK instead. This gives you finer-grained control over costs. The `streamText` API exposes a `usage` object in its `onFinish` callback that reports `totalTokens` once the stream completes. Capture this value and write it to your rate limit table after each response. Because tokens are recorded after the response finishes, a user can technically start one request even if they are near the limit. To guard against overages, you can add a pre-check that estimates token count from the prompt length before forwarding to the model, or set a max tokens parameter on the model call to cap individual response sizes.
+- **Token-based rate limiting**: The `count` column is generic by design. In the base implementation, it tracks request counts. You can repurpose it to track actual token consumption (`prompt_tokens` + `completion_tokens`) returned by the AI SDK instead. This gives you finer-grained control over costs. The `streamText` API exposes a `usage` object in its `onFinish` callback that reports `totalTokens` once the stream completes. Capture this value and write it to your rate limit table after each response. Because tokens are recorded after the response finishes, a user can technically start one request even if they are near the limit. To guard against overages, you can add a pre-check that estimates token count from the prompt length before forwarding to the model, or set a max tokens parameter on the model call to cap individual response sizes.
 
   ```typescript shouldWrap
   // Add a function to record actual token usage after streaming completes
@@ -797,8 +797,8 @@ The proxy you built counts requests per user, which is a good starting point. Bu
 
   Update the `MAX_REQUESTS` and `WINDOW_MS` constants to reflect token limits instead of request counts. For example, you might allow 10,000 tokens per minute for free users and 50,000 for paid users.
 
-- **Model Tiering**: Inspect user subscription tiers in Postgres (e.g., Free vs. Paid). Direct free-tier users to smaller, cost-effective models (`gpt-oss-120b`) and allow paid users access to advanced models (`gpt-5`). This lets you control costs while offering premium features to paying users.
-- **Audit Logging & Analytics**: Store all prompts, completion metadata, latency metrics, and user IDs in a Postgres table for compliance and usage tracking.
+- **Model tiering**: Inspect user subscription tiers in Postgres (e.g., Free vs. Paid). Direct free-tier users to smaller, cost-effective models (`gpt-oss-120b`) and allow paid users access to advanced models (`gpt-5`). This lets you control costs while offering premium features to paying users.
+- **Audit logging & analytics**: Store all prompts, completion metadata, latency metrics, and user IDs in a Postgres table for compliance and usage tracking.
 
 ## Resources
 
