@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-07-26T08:06:28.661Z'
+updatedOn: '2026-07-26T18:33:44.965Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -210,7 +210,7 @@ The above code does the following:
 
 The `neon link` command created a `neon.ts` file in your project root. Update it to add the Discord bot function and configure the environment variables:
 
-```ts {10-22}
+```ts {10-23}
 import { defineConfig } from "@neon/config/v1";
 
 export default defineConfig({
@@ -232,10 +232,33 @@ export default defineConfig({
         },
       },
     },
+    aiGateway: true,
   },
 });
 
 ```
+
+Apply the configuration to activate the AI Gateway for your project:
+
+```bash
+neon config apply --env .env.local
+```
+
+## Test locally before deploying
+
+You can run your Neon Function locally using `neon dev` before deploying it to production:
+
+```bash
+neon dev
+```
+
+This starts a local server that lets you test and debug your bot without deploying. To test the full flow end-to-end with Discord, you'll need a public HTTPS URL since Discord requires it for the interactions endpoint. Use [ngrok](https://ngrok.com/) to expose your local server:
+
+```bash
+ngrok http 8787
+```
+
+Copy the `https://*.ngrok-free.app` URL from ngrok's output and paste it into the **Interactions Endpoint URL** field in the Discord Developer Portal. This lets you iterate on your bot code locally while testing against the live Discord API.
 
 ## Deploy your bot
 
