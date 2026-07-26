@@ -84,7 +84,7 @@ If you are a Neon [Scale plan](/docs/introduction/plans) user and require a diff
 | `password_encryption`                 | scram-sha-256 |                                                                                                                                                                                                                                                                                |
 | `restart_after_crash`                 | off           |                                                                                                                                                                                                                                                                                |
 | `shared_buffers`                      | 128MB         | Neon uses a [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) in addition to `shared_buffers` to extend cache memory to 75% of your compute's RAM. The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size). |
-| `superuser_reserved_connections`      | 4             |                                                                                                                                                                                                                                                                                |
+| `superuser_reserved_connections`      | 7             |                                                                                                                                                                                                                                                                                |
 | `synchronous_standby_names`           | 'walproposer' |                                                                                                                                                                                                                                                                                |
 | `wal_level`                           | replica       | Support for `wal_level=logical` is coming soon. See [logical replication](/docs/introduction/logical-replication).                                                                                                                                                             |
 | `wal_log_hints`                       | off           |                                                                                                                                                                                                                                                                                |
@@ -185,10 +185,10 @@ _For most applications, we recommend using connection pooling, which supports up
 - The formula for `max_worker_processes` is:
 
   ```go
-  max_worker_processes := 12 + floor(2 * max_compute_size)
+  max_worker_processes := 13 + floor(2 * max_compute_size)
   ```
 
-  For example, if your `max_compute_size` is 4 CU, your `max_worker_processes` setting would be 20.
+  For example, if your `max_compute_size` is 4 CU, your `max_worker_processes` setting would be 21.
 
 - The formula for `shared_buffers` is:
 
