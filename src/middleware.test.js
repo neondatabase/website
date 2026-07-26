@@ -465,7 +465,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it('should pass through static .md files under docs/ai/ without rewriting', async () => {
       const req = createMockRequest(
-        '/docs/ai/skills/neon-postgres/references/neon-sdk.md',
+        '/docs/ai/skills/neon-functions/references/sentry.md',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'text/html'
       );
@@ -481,7 +481,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it('should pass through static .md files under docs/ai/ for AI agents too', async () => {
       const req = createMockRequest(
-        '/docs/ai/skills/neon-postgres/references/neon-sdk.md',
+        '/docs/ai/skills/neon-functions/references/sentry.md',
         'Claude/1.0',
         'text/html'
       );
