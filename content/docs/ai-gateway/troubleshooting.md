@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-17T14:41:09.083Z'
+updatedOn: '2026-07-20T19:53:53.968Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -52,8 +52,8 @@ The model exists in the catalog but doesn't work with the endpoint you're callin
 
 **Fix:** Check which endpoint the model requires:
 
-- OpenAI codex models on `/mlflow/v1/chat/completions` → use `/openai/v1/responses`
-- Google models on `/openai/v1/responses` → use `/ai-gateway/gemini/v1beta/...` or `/mlflow/v1/chat/completions`
+- OpenAI codex models on `/v1/chat/completions` → use `/openai/v1/responses`
+- Google models on `/openai/v1/responses` → use `/v1/gemini/v1beta/...` or `/v1/chat/completions`
 
 See [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use).
 
@@ -77,7 +77,7 @@ The action in the Gemini endpoint URL is unsupported. The AI Gateway supports Ge
 
 The `{modelAction}` segment in the Gemini URL path is malformed. It must follow the format `<model>:<action>` where both parts are non-empty.
 
-**Fix:** Ensure the URL path contains exactly one colon separating the model ID and action, e.g. `gemini-2-5-flash:generateContent`.
+**Fix:** Ensure the URL path contains exactly one colon separating the model ID and action, e.g. `gemini-3-flash:generateContent`.
 
 ---
 

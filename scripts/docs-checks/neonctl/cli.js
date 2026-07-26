@@ -8,6 +8,7 @@
 //   npm run cli-docs -- scaffold <name> --group <group-id>   # wire a new command
 //   npm run cli-docs -- check        # run the coverage + generation tests
 //   npm run cli-docs -- preview      # emit markdown fragments to fragments/ (dev only)
+//   npm run cli-docs -- verify-dynamic  # cross-check dynamic subcommands vs local `neon --help`
 //
 // Each subcommand forwards its remaining args to the underlying script with
 // stdio inherited, so per-script flags (--src, --group, ...) work unchanged.
@@ -45,6 +46,11 @@ const SUBCOMMANDS = {
   preview: {
     summary: 'Emit every rendered markdown fragment to fragments/ for local preview (dev only).',
     run: (args) => node(path.join(HERE, 'generate-docs.js'), args),
+  },
+  'verify-dynamic': {
+    summary:
+      'Cross-check dynamically-generated subcommands against a matching-version local `neon --help`.',
+    run: (args) => node(path.join(HERE, 'verify-dynamic.js'), args),
   },
 };
 

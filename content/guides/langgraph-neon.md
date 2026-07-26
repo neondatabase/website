@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to building AI agents with LangGraph and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-21T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-20T17:23:33.079Z'
 ---
 
 This guide demonstrates how to integrate LangGraph with Neon. [LangGraph](https://www.langchain.com/langgraph) is a library in the [LangChain](https://www.langchain.com/langchain) ecosystem that simplifies the development of complex, multi-agent LLM applications by using a directed graph structure for efficient coordination and state management.
@@ -22,7 +22,7 @@ Before you begin, make sure you have the following prerequisites:
   - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
 
 - **Google API key:**
-  - This guide utilizes the `gemini-2.0-flash` model from Google. You'll need a Google API key to proceed. If you don't already have one, get an API key from the [Google AI Studio](https://aistudio.google.com/apikey).
+  - This guide utilizes the `gemini-3.5-flash` model from Google. You'll need a Google API key to proceed. If you don't already have one, get an API key from the [Google AI Studio](https://aistudio.google.com/apikey).
   - The free tier is sufficient for the example in this guide.
 
 ## LangGraph basics
@@ -192,7 +192,7 @@ system_prompt = SystemMessage(
     f"You are a helpful AI assistant. You will be assisting users with all of your available tools. You can help users by using the following tools: {', '.join([f"\n{tool.name}: {tool.description}" for tool in available_tools])}."
 )
 
-model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.5-flash")
 agent_graph = create_react_agent(
     model=model,
     tools=available_tools,
@@ -306,7 +306,7 @@ system_prompt = SystemMessage(
     f"You are a helpful AI assistant. You will be assisting users with all of your available tools. You can help users by using the following tools: {', '.join([f"\n{tool.name}: {tool.description}" for tool in available_tools])}."
 )
 
-model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")
+model = ChatGoogleGenerativeAI(model="gemini-3.5-flash")
 agent_graph = create_react_agent(
     model=model,
     tools=available_tools,
@@ -332,9 +332,9 @@ This is the core part of the script where the LangGraph agent is set up and invo
 
 - `available_tools = [create_database, run_sql_query]`: Creates a list of tools that will be made available to the agent. This list includes the `create_database` and `run_sql_query` functions defined earlier.
 - `system_prompt = SystemMessage(...)`: Defines the system message for the AI agent. This message is crucial as it sets the agent's persona and provides instructions on how to use the available tools. It dynamically lists the tools and their descriptions in the prompt, instructing the agent on its capabilities.
-- `model = ChatGoogleGenerativeAI(model="gemini-2.0-flash")`: Initializes the language model that will power the agent. Here, `ChatGoogleGenerativeAI` is used to specify Google's Gemini `gemini-2.0-flash` model.
+- `model = ChatGoogleGenerativeAI(model="gemini-3.5-flash")`: Initializes the language model that will power the agent. Here, `ChatGoogleGenerativeAI` is used to specify Google's Gemini `gemini-3.5-flash` model.
 - `agent_graph = create_react_agent(...)`: This line is where the LangGraph agent is created using the `create_react_agent` function.
-  - `model=model`: Specifies the language model (`gemini-2.0-flash`) to be used by the agent for reasoning and generating responses.
+  - `model=model`: Specifies the language model (`gemini-3.5-flash`) to be used by the agent for reasoning and generating responses.
   - `tools=available_tools`: Passes the list of tools (`create_database`, `run_sql_query`) that the agent can use.
   - `prompt=system_prompt`: Sets the system prompt that defines the agent's behavior and instructions.
 - `inputs = {"messages": [...]}`: Defines the input to the agent. In this case, it's a user message asking the agent to perform a series of database tasks: create a Neon project, create a table named `users`, add 10 sample records, and then print these records as a Markdown table.

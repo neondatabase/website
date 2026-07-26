@@ -6,12 +6,12 @@ summary: >-
   Neon credential gives you access to models across multiple providers. Standard AI
   SDKs work without code changes. Each branch gets its own gateway endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-17T14:41:09.083Z'
+updatedOn: '2026-07-20T17:20:48.939Z'
 ---
 
 ## Foundation model access
 
-Neon AI Gateway serves frontier models like GPT (`gpt-5`) and Gemini (`gemini-2-5-flash`) alongside open-weight models like Qwen and gpt-oss.
+Neon AI Gateway serves frontier models like GPT (`gpt-5`) and Gemini (`gemini-3-flash`) alongside open-weight models like Qwen and gpt-oss.
 
 **See every supported model in the [model catalog](/docs/ai-gateway/models#available-models).**
 
