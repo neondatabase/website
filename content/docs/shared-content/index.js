@@ -21,6 +21,13 @@ const sharedMdxComponents = {
   AzureRegionsDeprecation: 'shared-content/azure-regions-deprecation',
   ConsumptionAccountApiDeprecation: 'shared-content/consumption-account-api-deprecation',
   NextjsProxyNote: 'shared-content/nextjs-proxy-note',
+  // Common Neon Auth content
+  GetStarted: 'shared-content/neon-auth-sdk-shared/get-started',
+  // Types
+  SdkUser: 'shared-content/neon-auth-sdk-shared/types/user',
+  SdkProject: 'shared-content/neon-auth-sdk-shared/types/project',
+  // Hooks
+  SdkUseUser: 'shared-content/neon-auth-sdk-shared/hooks/use-user',
 };
 
 module.exports = sharedMdxComponents;
