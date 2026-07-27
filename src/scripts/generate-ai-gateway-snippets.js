@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Generate the committed AI Gateway quickstart snippets that back the
- * <AiGatewayModelIndex/> component's expandable per-model quickstart.
+ * per-model quickstart pages linked from <AiGatewayModelIndex/>.
  *
  * Source of truth: the tested examples in the (internal) `neondatabase/
  * neon-console-code-examples` repo — the same snippets the Neon Console shows

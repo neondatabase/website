@@ -131,6 +131,7 @@ describe('MDX to Markdown Conversion', () => {
       // Per-provider tables render under each tab
       expect(result).toContain('#### OpenAI');
       expect(result).toContain('`gpt-5`');
+      expect(result).toContain('[GPT-5](https://neon.com/docs/ai-gateway/models/gpt-5.md)');
 
       // Quickstart snippets are served, once per language, with the model-id
       // placeholder rather than duplicated per model

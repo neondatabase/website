@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 import { cn } from 'utils/cn';
+import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
 import Tag from '../../tag';
 
@@ -49,7 +50,7 @@ const Item = ({
   closeMobileMenu = null,
 }) => {
   const pathname = usePathname();
-  const currentSlug = pathname.replace(basePath, '');
+  const currentSlug = normalizeDocNavigationPath(pathname.replace(basePath, ''));
 
   const isActive = slug === currentSlug;
   const isActiveMenu = isActive || hasActiveDescendant(items, currentSlug);

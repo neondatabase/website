@@ -50,7 +50,7 @@ const aiGatewayModelSnippets = require('../components/pages/doc/ai-gateway-model
 const { isUnusedOrSharedContent } = require('../constants/content');
 
 // AI Gateway model catalog: <AiGatewayModelIndex/> renders an interactive table
-// with Text/Image tabs and per-model copy-paste quickstarts on the web page.
+// with Text/Image tabs and links to per-model copy-paste quickstarts on the web page.
 // Here it degrades to static markdown built from the SAME committed /models.json
 // data + the vendored quickstart snippets.json, so the web page and the
 // agent-facing markdown can never disagree. Both tab contents are rendered:
@@ -69,7 +69,7 @@ function renderModelTableRows(rows) {
   return rows
     .map((row) =>
       [
-        row.name,
+        `[${row.name}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(row.id)}.md)`,
         `\`${row.id}\``,
         row.inputsLabel,
         row.contextLabel,
