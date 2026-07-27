@@ -98,9 +98,8 @@ async function resolveMarkdownRedirect(pathname, origin) {
   }
 }
 
-// Cacheable 308 to a moved `.md` page's target, or null if there's no redirect.
-// Doing this here (rather than adding `.md` variants to next.config) keeps the
-// route count under Next's 1000-route performance threshold.
+// 308 to a moved `.md` page's target, or null if there's no redirect. Handled
+// here (not next.config) to keep the route count under Next's 1000-route limit.
 async function markdownRedirectResponse(req, pathname) {
   if (!pathname.endsWith('.md')) return null;
 
@@ -108,7 +107,8 @@ async function markdownRedirectResponse(req, pathname) {
   if (!target) return null;
 
   const response = NextResponse.redirect(new URL(target, req.url), 308);
-  response.headers.set('Cache-Control', 'public, max-age=3600, s-maxage=86400');
+  // Short TTL so cached 308s still re-enter the proxy and get tracked.
+  response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300');
   return response;
 }
 
