@@ -45,26 +45,6 @@ Currently, email alerts are the only available action. Automatic project suspens
 
 Only organization admins can enable, edit, or disable spending notifications. Other members see the notification threshold in read-only form on the **Billing** page.
 
-## Manage spending notifications with the Neon API
-
-The Management API exposes spending limits at:
-
-`https://console.neon.tech/api/v2/organizations/{org_id}/billing/spending_limit`
-
-Replace `{org_id}` with your organization ID (see [Finding your org_id](/docs/manage/orgs-api#finding-your-org_id)). Authenticate with a [personal API key](/docs/manage/api-keys#create-an-api-key) or another allowed credential for the Management API.
-
-| Action                      | Method                                                                                                                  | Who can use it                                               |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Read the current threshold  | [Retrieve the organization's monthly spending limit](/docs/reference/api/organizations/get-organization-spending-limit) | Organization members with **read** access (Launch and Scale) |
-| Set or change the threshold | [Set the organization's monthly spending limit](/docs/reference/api/organizations/set-organization-spending-limit)      | **Organization admins** only (Launch and Scale)              |
-| Remove the threshold        | [Clear the organization's monthly spending limit](/docs/reference/api/organizations/delete-organization-spending-limit) | **Organization admins** only (Launch and Scale)              |
-
-**Request body (`PUT`):** send `spending_limit_cents` as a positive integer (monthly threshold in **cents**; minimum **1**). For example, `$100.00` per month is `10000`. Values **`0`** and **`null`** are rejected; to clear a threshold, call **`DELETE`** on the same path (idempotent when no threshold is configured).
-
-**Response (`GET` / `PUT` 200):** the API returns `spending_limit_cents`, or `null` when no threshold is set. Alerts at 80% and 100% of the threshold behave the same as for Console-managed notifications; computes are not suspended by this feature.
-
-See the linked API reference pages for response codes, schemas, and **Try it** examples.
-
 ## Alert thresholds
 
 When a spending notification is configured, Neon sends email alerts to organization admins at two thresholds:
@@ -113,5 +93,25 @@ Projects continue to run, and charges continue to accumulate, until you raise th
 <Admonition type="note">
 A spending notification threshold applies to the organization's total monthly Neon charges across all projects in that organization. If you belong to multiple organizations, set a separate threshold for each.
 </Admonition>
+
+## Manage spending notifications with the Neon API
+
+The Management API exposes spending limits at:
+
+`https://console.neon.tech/api/v2/organizations/{org_id}/billing/spending_limit`
+
+Replace `{org_id}` with your organization ID (see [Finding your org_id](/docs/manage/orgs-api#finding-your-org_id)). Authenticate with a [personal API key](/docs/manage/api-keys#create-an-api-key) or another allowed credential for the Management API.
+
+| Action                      | Method                                                                                                                  | Who can use it                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Read the current threshold  | [Retrieve the organization's monthly spending limit](/docs/reference/api/organizations/get-organization-spending-limit) | Organization members with **read** access (Launch and Scale) |
+| Set or change the threshold | [Set the organization's monthly spending limit](/docs/reference/api/organizations/set-organization-spending-limit)      | **Organization admins** only (Launch and Scale)              |
+| Remove the threshold        | [Clear the organization's monthly spending limit](/docs/reference/api/organizations/delete-organization-spending-limit) | **Organization admins** only (Launch and Scale)              |
+
+**Request body (`PUT`):** send `spending_limit_cents` as a positive integer (monthly threshold in **cents**; minimum **1**). For example, `$100.00` per month is `10000`. Values **`0`** and **`null`** are rejected; to clear a threshold, call **`DELETE`** on the same path (idempotent when no threshold is configured).
+
+**Response (`GET` / `PUT` 200):** the API returns `spending_limit_cents`, or `null` when no threshold is set. Alerts at 80% and 100% of the threshold behave the same as for Console-managed notifications; computes are not suspended by this feature.
+
+See the linked API reference pages for response codes, schemas, and **Try it** examples.
 
 <NeedHelp/>
