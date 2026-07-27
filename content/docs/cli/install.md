@@ -47,7 +47,7 @@ bun install -g neon
 Download the binary. No installation required.
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-macos-x64 -o neon
+curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neon-macos-x64 -o neon
 ```
 
 Run the CLI from the download directory:
@@ -79,13 +79,13 @@ bun install -g neon
 Download the binary. No installation required.
 
 ```bash shouldWrap
-curl -sL -O https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-win-x64.exe
+curl -sL -O https://github.com/neondatabase/neon-pkgs/releases/latest/download/neon-win-x64.exe
 ```
 
 Run the CLI from the download directory:
 
 ```bash
-neonctl-win-x64.exe <command> [options]
+neon-win-x64.exe <command> [options]
 ```
 
 </TabItem>
@@ -113,13 +113,13 @@ Download the x64 or ARM64 binary, depending on your processor type. No installat
 x64:
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-linux-x64 -o neon
+curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neon-linux-x64 -o neon
 ```
 
 ARM64:
 
 ```bash shouldWrap
-curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-linux-arm64 -o neon
+curl -sL https://github.com/neondatabase/neon-pkgs/releases/latest/download/neon-linux-arm64 -o neon
 ```
 
 Run the CLI from the download directory:
@@ -216,7 +216,7 @@ If you're downloading a binary, reference the latest release from the [Releases 
 ```yaml
 - name: Install Neon CLI
   run: |
-    curl -L https://github.com/neondatabase/neon-pkgs/releases/latest/download/neonctl-linux-x64 -o /usr/local/bin/neon
+    curl -L https://github.com/neondatabase/neon-pkgs/releases/latest/download/neon-linux-x64 -o /usr/local/bin/neon
     chmod +x /usr/local/bin/neon
 ```
 
