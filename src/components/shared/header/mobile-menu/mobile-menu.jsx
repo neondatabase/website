@@ -135,6 +135,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className="relative flex text-black dark:text-white"
+          dataTest="mobile-menu-toggle"
           isToggled={isMobileMenuOpen}
           isNewDesign
           onClick={toggleMobileMenu}
@@ -161,6 +162,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
             >
               <Button
                 className="h-9 border border-gray-new-40 px-[18px]"
+                data-test="mobile-login"
                 to={LINKS.login}
                 theme="transparent"
                 size="xxs"
@@ -170,6 +172,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
               </Button>
               <Button
                 className="h-9 px-[18px]"
+                data-test="mobile-signup"
                 to={LINKS.signup}
                 theme="white-filled-multi"
                 size="xxs"

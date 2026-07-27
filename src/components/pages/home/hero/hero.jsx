@@ -83,10 +83,10 @@ const Hero = () => (
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
-        <Button theme="white-filled" size="new" to={LINKS.signup}>
+        <Button data-test="home-signup" theme="white-filled" size="new" to={LINKS.signup}>
           Get started
         </Button>
-        <Button theme="outlined" size="new" to={LINKS.docsHome}>
+        <Button data-test="home-docs" theme="outlined" size="new" to={LINKS.docsHome}>
           Read the docs
         </Button>
       </div>

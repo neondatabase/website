@@ -1,5 +1,3 @@
-/* global Buffer, process */
-/* eslint-disable import/no-unresolved */
 import fs from 'fs/promises';
 import path from 'path';
 
