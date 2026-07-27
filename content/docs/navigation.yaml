@@ -1070,8 +1070,8 @@
           slug: introduction/agent-plan
         - title: Manage billing
           slug: introduction/manage-billing
-        - title: Spending limit
-          slug: introduction/spending-limit
+        - title: Spending notifications
+          slug: introduction/spending-notifications
           tag: new
           tagTheme: green
         - title: Monitor billing
