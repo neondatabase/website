@@ -10,7 +10,7 @@ summary: >-
   Vercel-Managed Integration users must use an API key because web auth requires
   a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-07-27T17:01:44.761Z'
+updatedOn: '2026-07-27T17:11:36.776Z'
 redirectFrom:
   - /docs/reference/cli-install
 ---
@@ -172,7 +172,7 @@ To upgrade a [binary](https://github.com/neondatabase/neon-pkgs/releases) versio
 
 In CI/CD tools like GitHub Actions, you can safely pin the Neon CLI to `latest`, as we prioritize stability for CI/CD processes.
 
-<Tabs labels={["npm", "Homebrew", "Binary"]}>
+<Tabs labels={["npm (recommended)", "Binary"]}>
 
 <TabItem>
 
@@ -181,17 +181,6 @@ In your GitHub Actions workflow, use the `latest` tag with `npm`:
 ```yaml
 - name: Install Neon CLI
   run: npm install -g neon@latest
-```
-
-</TabItem>
-
-<TabItem>
-
-Homebrew automatically fetches the latest version when running the `install` or `upgrade` command. You can include the following in your workflow:
-
-```yaml
-- name: Install Neon CLI
-  run: brew install neonctl || brew upgrade neonctl
 ```
 
 </TabItem>
