@@ -214,7 +214,7 @@ Fires non-blocking after a user successfully verifies a phone number via the [Ph
 
 Fires non-blocking when an organization invitation is created, via the [Organization plugin](/docs/auth/guides/plugins/organization).
 
-The top-level `user` object contains the **inviter**, not the invitee. Because the inviter isn't the subject of the event, this object is limited to `id`, `name`, and `email` rather than the full user allowlist described above. The invitee's email is available in `event_data.invitee_email`.
+The top-level `user` object contains the **inviter**, not the invitee. Because the inviter isn't the subject of the event, this object is limited to `id`, `name`, and `email` rather than the full user allowlist described above. The same reduced object is repeated at `event_data.inviter` for convenience. The invitee's email is available in `event_data.invitee_email`.
 
 | Field               | Type         | Description                                                   |
 | ------------------- | ------------ | ------------------------------------------------------------- |
@@ -230,7 +230,7 @@ The top-level `user` object contains the **inviter**, not the invitee. Because t
 
 ### `organization.invitation.accepted` event data
 
-Fires non-blocking after a user accepts an organization invitation and becomes a member, via the [Organization plugin](/docs/auth/guides/plugins/organization). The `user` object contains the full user context for the person who accepted the invitation.
+Fires non-blocking after a user accepts an organization invitation and becomes a member, via the [Organization plugin](/docs/auth/guides/plugins/organization). The `user` object contains the full user context for the person who accepted the invitation. `event_data.invitee` repeats the same person as a reduced `id`, `name`, `email` object.
 
 | Field               | Type   | Description                                                       |
 | ------------------- | ------ | ----------------------------------------------------------------- |
