@@ -2,21 +2,33 @@
 title: 'Neon CLI: Install and connect'
 subtitle: Install the Neon CLI and connect with web auth or API key
 summary: >-
-  Install the Neon CLI (neon) on macOS, Windows, or Linux via Homebrew, npm,
-  bun, or standalone binary, with no-install options via npx or bunx. After
-  installing, connect by running `neon auth` for browser-based authentication,
+  Install the Neon CLI (neon) with npm i -g neon@latest, or on macOS, Windows,
+  or Linux via Homebrew, bun, or a standalone binary, with no-install options
+  via npx or bunx. After installing, connect by running `neon auth` for
+  browser-based authentication,
   or set the NEON_API_KEY environment variable or pass --api-key per command.
   Vercel-Managed Integration users must use an API key because web auth requires
   a Neon-registered account.
 enableTableOfContents: true
-updatedOn: '2026-07-03T14:03:07.441Z'
+updatedOn: '2026-07-27T17:01:44.761Z'
 redirectFrom:
   - /docs/reference/cli-install
 ---
 
 ## Install
 
-The CLI is invoked as `neon`, and `neonctl` is an alias for `neon`. The Homebrew formula is named `neonctl`, so install commands use that name even though you run the CLI as `neon`.
+Install the Neon CLI globally with [npm](https://www.npmjs.com/package/neon):
+
+```shell
+npm i -g neon@latest
+```
+
+Requires [Node.js 20.19.0](https://nodejs.org/en/download/) or higher. The CLI is invoked as `neon`, and `neonctl` is an alias for `neon`.
+
+<details>
+<summary>Other install options</summary>
+
+Homebrew, bun, and standalone binaries are also available. The Homebrew formula is named `neonctl`, so install commands use that name even though you run the CLI as `neon`.
 
 <Tabs labels={["macOS", "Windows", "Linux"]}>
 
@@ -27,14 +39,6 @@ The CLI is invoked as `neon`, and `neonctl` is an alias for `neon`. The Homebrew
 ```bash
 brew install neonctl
 ```
-
-**Install via [npm](https://www.npmjs.com/package/neon)**
-
-```shell
-npm i -g neon
-```
-
-Requires [Node.js 20.19.0](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
@@ -60,14 +64,6 @@ neon <command> [options]
 
 <TabItem>
 
-**Install via [npm](https://www.npmjs.com/package/neon)**
-
-```shell
-npm i -g neon
-```
-
-Requires [Node.js 20.19.0](https://nodejs.org/en/download/) or higher.
-
 **Install with bun**
 
 ```bash
@@ -91,14 +87,6 @@ neon-win-x64.exe <command> [options]
 </TabItem>
 
 <TabItem>
-
-**Install via [npm](https://www.npmjs.com/package/neon)**
-
-```shell
-npm i -g neon
-```
-
-Requires [Node.js 20.19.0](https://nodejs.org/en/download/) or higher.
 
 **Install with bun**
 
@@ -132,8 +120,7 @@ neon <command> [options]
 
 </Tabs>
 
-<Admonition title="Use the Neon CLI without installing" type="note">
-You can run the Neon CLI without installing it using **npx** or the `bun` equivalent, **bunx**:
+You can also run the Neon CLI without installing it using **npx** or the `bun` equivalent, **bunx**:
 
 ```shell
 # npx
@@ -143,7 +130,7 @@ npx neon <command>
 bunx neon <command>
 ```
 
-</Admonition>
+</details>
 
 ### Upgrade
 
