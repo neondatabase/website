@@ -142,37 +142,7 @@ Complete any necessary steps. Once cleared, you can go ahead and delete. This ac
 
 </Steps>
 
-## More actions
-
-Here are a couple additional things you can do with your organization: **passwordless authentication** and **renaming an organization**.
-
-### Passwordless authentication
-
-If you want the simplest way to connect to your database from the command line, passwordless authentication using `pg.neon.tech` lets you directly start a `psql` connection with any of your organization's databases. This saves you time versus logging in to the Console and copying your connection string manually.
-
-```bash
-   psql -h pg.neon.tech
-```
-
-In the output, you'll get a URL you can paste into your browser. Log in if you need to. Or if you're already logged in, you'll be asked to select from your personal or organization account, select your project, and then your compute. After that, go back to your terminal and you'll be connected to your selected database.
-
-For example:
-
-```bash
-alexlopez@alex-machine ~ % psql -h pg.neon.tech
-NOTICE:  Welcome to Neon!
-Authenticate by visiting:
-    https://console.neon.tech/psql_session/secure_token
-
-NOTICE:  Connecting to database.
-psql (16.1, server 16.3)
-SSL connection (secure connection details hidden)
-Type "help" for help.
-
-alexlopez=>
-```
-
-### Rename an organization
+## Rename an organization
 
 Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally; the new name will appear for everyone in the organization.
 

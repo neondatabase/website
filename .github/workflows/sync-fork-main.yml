@@ -1,0 +1,29 @@
+name: Sync Main
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-main:
+    if: ${{ vars.ENABLE_FORK_MAIN_SYNC == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      UPSTREAM_REPOSITORY: ${{ vars.FORK_MAIN_SYNC_UPSTREAM_REPOSITORY || 'neondatabase/website' }}
+    steps:
+      - name: Checkout fork
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+
+      - name: Sync main from upstream
+        run: |
+          git remote add upstream "https://github.com/${UPSTREAM_REPOSITORY}.git"
+          git fetch upstream main
+          git checkout main
+          git reset --hard upstream/main
+          git push origin main --force

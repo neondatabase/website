@@ -22,7 +22,7 @@ There are two types of network transfer:
 
 - **Public network transfer**: Data sent over the public internet. [Logical replication](/docs/guides/logical-replication-neon) to any destination counts as public network transfer.
   - **Free plan**: 5 GB/month included. Exceeding this suspends your compute until the next billing cycle or you upgrade.
-  - **Launch / Scale plans**: 500 GB/month included, then $0.10/GB.
+  - **Launch / Scale plans**: 500 GB per project per month included, then $0.10/GB.
 - **Private network transfer**: Traffic routed over AWS PrivateLink. Available on the Scale plan only. Billed at $0.01/GB, bi-directional. Unlike public network transfer, which only counts outbound data, private network transfer counts traffic in both directions: data sent from your database to clients and data sent from clients to your database.
 
 In the Console, these appear as **Public network transfer** and **Private network transfer**. In the Consumption API, the fields are `public_network_transfer_bytes` and `private_network_transfer_bytes`. In project and branch detail API responses, the combined field is `data_transfer_bytes`.

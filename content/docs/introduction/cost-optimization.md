@@ -9,8 +9,8 @@ summary: >-
   enabling scale to zero, running VACUUM FULL to reclaim storage space, and
   trimming the PITR history window. Instant restore storage is billed at
   $0.20/GB-month on paid plans for root branches only. Extra branches cost
-  $1.50/branch-month over the plan allowance. Paid plans include 500 GB/month
-  of public data transfer, then $0.10/GB.
+  $1.50/branch-month over the plan allowance. Paid plans include 500 GB of
+  public data transfer per project per month, then $0.10/GB.
 enableTableOfContents: true
 updatedOn: '2026-06-05T17:20:32.620Z'
 ---
@@ -171,7 +171,7 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 
 ## Public data transfer
 
-Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 500 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
+Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 500 GB per project per month is included, then $0.10/GB. You see no data transfer cost until a project exceeds that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
 
 **Optimization strategies:**
 

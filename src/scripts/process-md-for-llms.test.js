@@ -129,8 +129,8 @@ describe('MDX to Markdown Conversion', () => {
       expect(result).not.toContain('<AiGatewayModelIndex');
 
       // Per-provider tables render under each tab
-      expect(result).toContain('#### Anthropic');
-      expect(result).toContain('| `claude-sonnet-4-6` |');
+      expect(result).toContain('#### OpenAI');
+      expect(result).toContain('`gpt-5`');
 
       // Quickstart snippets are served, once per language, with the model-id
       // placeholder rather than duplicated per model

@@ -12,7 +12,7 @@ summary: >-
   ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query LFC
   and prefetch metrics without requiring the extension.
 enableTableOfContents: true
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -32,7 +32,7 @@ When data is requested, Postgres checks shared buffers first, then the LFC. If t
 
 ## Monitoring Local File Cache usage
 
-You can monitor Local File Cache (LFC) usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neon_stat_file_cache-view) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate) graph on the **Monitoring** page in the Neon console.
+You can monitor Local File Cache (LFC) usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neon_stat_file_cache-view) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate) graph on the **Monitoring** page in the Neon console, or check it from the terminal with [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate) and [`neon inspect db working-set`](/docs/cli/inspect#db-working-set).
 
 ## neon_stat_file_cache view
 

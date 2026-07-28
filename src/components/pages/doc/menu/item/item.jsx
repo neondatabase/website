@@ -207,10 +207,10 @@ const Item = ({
             transition={{ duration: 0.2 }}
           >
             <ul className="border-l border-gray-new-80 pl-3 dark:border-gray-new-20">
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <Item
                   {...item}
-                  key={item.slug ?? item.title}
+                  key={item.slug ?? item.title ?? item.section ?? index}
                   basePath={basePath}
                   closeMobileMenu={closeMobileMenu}
                   isHidden={isCollapsed}

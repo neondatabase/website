@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-24T11:09:31.723Z'
 ---
 
 ## Available tools
@@ -14,6 +14,11 @@ Tools are grouped into categories. Use the `?category=` URL parameter to restric
 | SQL (`querying`)                  | Execute queries and transactions; inspect database structure                        |
 | Managed Better Auth (`neon_auth`) | Set up and configure app authentication for a branch                                |
 | Neon Data API (`data_api`)        | Enable HTTP-based Data API access for a branch                                      |
+| Observability (`observability`)   | Query logs from your serverless functions and storage                               |
 | Documentation (`docs`)            | Look up Neon documentation from within your assistant (no OAuth required)           |
 
 Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](/docs/ai/neon-mcp-server#project-scoped-mode).
+
+<Admonition type="note">
+The `observability` tools query [Neon Functions logs](/docs/compute/functions/logs) and [object storage logs](/docs/storage/logs), which are part of the Neon backend beta, currently available in AWS `us-east-2` only. Log querying returns results only for projects in a supported region.
+</Admonition>

@@ -7,8 +7,8 @@ summary: >-
   to set up monitoring of CPU, memory, connection counts, replication lag,
   database size, deadlocks, and PgBouncer stats, or to forward Postgres logs for
   error and activity visibility. Postgres log export is a preview feature.
-  Log transmission counts toward network egress billed after 500 GB on paid
-  plans.
+  Log transmission counts toward network egress billed after 500 GB per project
+  on paid plans.
 enableTableOfContents: true
 updatedOn: '2026-06-05T17:20:32.620Z'
 ---
@@ -691,7 +691,7 @@ You can export your Postgres logs from your Neon compute to your Datadog account
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, which is billed after 500 GB on paid plans
+- Additional network egress for log transmission, which is billed after 500 GB per project on paid plans
 - Associated costs based on log volume in Datadog
 
 ## Feedback and future improvements

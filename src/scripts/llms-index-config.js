@@ -239,6 +239,7 @@ module.exports = {
     'get-started/platform-private-preview.md',
     'guides/GUIDE_TEMPLATE.md',
     'introduction.md',
+    'manage/user-permissions-preview.md',
   ],
 
   // Reclassify specific files into a different subsection.

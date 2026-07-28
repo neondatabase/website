@@ -1,0 +1,77 @@
+name: Dependencies ↔ Databricks proxy
+
+# CI installs dependencies exclusively through the Databricks JFrog npm mirror,
+# whose curation service quarantines every package version for its first ~7 days
+# ("immature package" cooldown). A lockfile that pins a too-new version fails
+# `npm ci` deep in every build with an opaque 403.
+#
+# This gate runs first and fails fast with a clear message naming the offending
+# dependency, so a contributor who bumps a package before it clears the cooldown
+# learns exactly what to do (pin an older version / refresh the lockfile) instead
+# of chasing a 403 in an unrelated job. See scripts/check-deps-proxy-allowlisted.mjs.
+
+on:
+  pull_request:
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+      - 'scripts/check-deps-proxy-allowlisted.mjs'
+      - 'scripts/deps-proxy-allowlist.json'
+      - '.github/workflows/deps-proxy-allowlist.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write # mint the JFrog OIDC token for the Databricks npm mirror
+
+jobs:
+  check:
+    name: 'Dependencies available on Databricks proxy'
+    runs-on:
+      group: neondatabase-protected-runner-group
+      labels: linux-ubuntu-latest
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      # Only the versions a PR newly introduces are checked, so fetch the base
+      # branch's lockfile to diff against.
+      - name: Fetch base branch for diff
+        if: github.base_ref != ''
+        run: git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
+
+      # The protected runner group has no egress to the public npm registry — it
+      # can only reach the Databricks JFrog mirror. Mint a short-lived token via
+      # OIDC and point npm at the mirror so the packument (with publish dates)
+      # is readable.
+      - name: Setup JFrog CLI with OIDC
+        id: setup-jfrog
+        uses: jfrog/setup-jfrog-cli@279b1f629f43dd5bc658d8361ac4802a7ef8d2d5 # v4.9.1
+        env:
+          JF_URL: https://databricks.jfrog.io
+        with:
+          oidc-provider-name: github-actions
+      - name: Configure npm registry (Databricks JFrog mirror)
+        run: |
+          cat > ~/.npmrc <<EOF
+          registry=https://databricks.jfrog.io/artifactory/api/npm/db-npm/
+          //databricks.jfrog.io/artifactory/api/npm/db-npm/:_authToken=${{ steps.setup-jfrog.outputs.oidc-token }}
+          always-auth=true
+          EOF
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+
+      # No `npm ci` here on purpose: the check only reads registry metadata, and
+      # a too-new dependency is exactly what would make `npm ci` fail with a 403.
+      - name: Check dependencies are available on the Databricks proxy
+        env:
+          BASE_REF: ${{ github.base_ref != '' && format('origin/{0}', github.base_ref) || '' }}
+        run: npm run check:deps-proxy
