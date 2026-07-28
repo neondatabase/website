@@ -8,10 +8,14 @@ summary: >-
   UI. Admins control deletions, billing changes, 2FA enforcement, and project
   deletion; all members can create projects and view billing.
 enableTableOfContents: true
-updatedOn: '2026-07-14T14:03:39.757Z'
+updatedOn: '2026-07-28T15:16:30.383Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
+
+<Admonition type="note">
+This page describes the legacy roles (Admin, Member, Collaborator). New organizations use an updated model with organization roles (Admin, Editor, Viewer, Collaborator) and per-project permissions. See [User permissions](/docs/manage/user-permissions) for the current model and how the two relate.
+</Admonition>
 
 <Steps>
 

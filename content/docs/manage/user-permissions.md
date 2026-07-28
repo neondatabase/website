@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-28T14:35:34.657Z'
+updatedOn: '2026-07-28T15:16:30.383Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -155,7 +155,13 @@ When the new model reaches your organization, everyone keeps the access they hav
 | Project creator       | **Admin** on the projects they created                              |
 | Shared-project access | **Editor** on the projects they were shared, so access is preserved |
 
-The new **Collaborator** organization role is not the same as the legacy project-sharing collaborator, even though they share a name. Project sharing is being deprecated, and the new **Collaborator** role plus per-project permissions replaces it. For new access, use the Collaborator role plus per-project permissions instead of project sharing.
+The new **Collaborator** organization role is not the same as the legacy project-sharing collaborator, even though they share a name:
+
+|                  | Legacy model                                                            | New model                                                                              |
+| ---------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| **Collaborator** | An external user invited to individual projects through project sharing | An organization role that starts with no access, then receives per-project permissions |
+
+Project sharing is being deprecated, and the new **Collaborator** role plus per-project permissions replaces it. For new access, use the Collaborator role plus per-project permissions instead of project sharing.
 
 ## Notes and limitations (#notes-and-limitations)
 
