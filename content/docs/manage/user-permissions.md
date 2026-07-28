@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-28T11:00:37.343Z'
+updatedOn: '2026-07-28T11:16:38.539Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -29,13 +29,13 @@ Access is **closed by default** for Collaborators. Without an explicit per-proje
 
 These examples show how an organization role and per-project grants combine:
 
-| Person         | Organization role | Per-project grant        | Effective access                                         |
-| -------------- | ----------------- | ------------------------ | -------------------------------------------------------- |
-| Team lead      | Admin             | None                     | Full control of the organization and every project       |
-| Staff engineer | Editor            | None                     | Edit every project, but can't delete or transfer them    |
-| Designer       | Viewer            | Editor on one project    | Read-only across the org, plus full edit on that project |
-| Contractor     | Collaborator      | Editor on their projects | Access to only the granted projects, nothing else        |
-| Support        | Collaborator      | Viewer (temporary)       | Read-only on a single project, removed when done         |
+| Person         | Organization role | Per-project grant        | Effective access                                          |
+| -------------- | ----------------- | ------------------------ | --------------------------------------------------------- |
+| Team lead      | Admin             | None                     | Full control of the organization and every project        |
+| Staff engineer | Editor            | None                     | Edit every project, but can't delete or transfer them out |
+| Designer       | Viewer            | Editor on one project    | Read-only across the org, plus full edit on that project  |
+| Contractor     | Collaborator      | Editor on their projects | Access to only the granted projects, nothing else         |
+| Support        | Collaborator      | Viewer (temporary)       | Read-only on a single project, removed when done          |
 
 A couple of behaviors are worth calling out:
 
@@ -53,7 +53,7 @@ Access comes down to two things: a person's organization role sets their baselin
 Start with the organization role, which sets a person's baseline access across every project. You choose it when you invite someone from the **People** page, and you can change it there later. Match the role to how much of the organization they should see:
 
 - **Admin**: full control over the organization and every project
-- **Editor**: work in every project, but can't delete or transfer them
+- **Editor**: work in every project, but can't delete them or transfer them out of the organization
 - **Viewer**: read-only visibility across the organization
 - **Collaborator**: no access until you grant them specific projects
 
@@ -82,7 +82,7 @@ Every member of an organization has one of four roles. Each role sets a baseline
 | Role         | What it can do                                                                                 | Default project access |
 | ------------ | ---------------------------------------------------------------------------------------------- | ---------------------- |
 | Admin        | Full control of the organization and all projects, including billing, members, and settings    | Admin                  |
-| Editor       | Everything except transferring or deleting projects                                            | Editor                 |
+| Editor       | Everything except deleting projects or transferring them out of the organization               | Editor                 |
 | Viewer       | Read-only access to organization and project metadata. Can't see connection strings or run SQL | Viewer                 |
 | Collaborator | No default access. Sees only projects they're explicitly granted                               | None                   |
 
@@ -93,7 +93,8 @@ The following table shows what each role can do at the organization level:
 | Manage organization members and roles          |  ✅   |   ❌   |   ❌   |      ❌      |
 | Manage organization billing                    |  ✅   |   ❌   |   ❌   |      ❌      |
 | Rename or delete the organization              |  ✅   |   ❌   |   ❌   |      ❌      |
-| Transfer projects into or out of the org       |  ✅   |   ❌   |   ❌   |      ❌      |
+| Transfer a project into the org                |  ✅   |   ✅   |   ✅   |      ❌      |
+| Transfer a project out of the org              |  ✅   |   ❌   |   ❌   |      ❌      |
 | Create organization or project-scoped API keys |  ✅   |   ❌   |   ❌   |      ❌      |
 | See all organization projects                  |  ✅   |   ✅   |   ✅   |      ❌      |
 | Create projects                                |  ✅   |   ✅   |   ✅   |      ❌      |
