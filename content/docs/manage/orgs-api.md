@@ -429,6 +429,33 @@ curl --request DELETE \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
+### Preview a role change
+
+Before you change a member's organization role, preview how it would affect their access to each project. Pass the target role as a query parameter. The response lists each project with the member's current and resulting effective permission, and flags any project where the change would reduce their access.
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}/role_change_preview?role=admin' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY' | jq
+```
+
+Example response:
+
+```json
+{
+  "projects": [
+    {
+      "project_id": "example-project-12345678",
+      "project_name": "billing-api",
+      "current_effective_project_role": "editor",
+      "resulting_effective_project_role": "admin",
+      "will_reduce_access": false
+    }
+  ]
+}
+```
+
 <Admonition type="note">
 The Neon CLI doesn't have a dedicated command for these operations yet. You can call the same routes with the [`neon api`](/docs/cli/api) passthrough command, for example `neon api /projects/{project_id}/members/{member_id}/role -X PUT -F role=editor`. See [Manage organizations using the Neon CLI](/docs/manage/orgs-cli#manage-project-access).
 </Admonition>
