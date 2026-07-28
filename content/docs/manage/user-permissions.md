@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-28T19:40:48.888Z'
+updatedOn: '2026-07-28T21:19:08.851Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -52,22 +52,11 @@ Access comes down to two things: a person's organization role sets their baselin
 
 ## Set the organization role
 
-Start with the organization role, which sets a person's baseline access across every project. You choose it when you invite someone from the **People** page, and you can change it there later. Match the role to how much of the organization they should see:
-
-- **Admin**: full control over the organization and every project
-- **Editor**: work in every project, but can't delete them or transfer them out of the organization
-- **Viewer**: read-only visibility across the organization
-- **Collaborator**: no access until you grant them specific projects
+Start with the organization role, which sets a person's baseline access across every project. On the organization's **People** page, select **Invite member** to add someone with a role, or open the more options menu (⋮) next to an existing member and choose **Edit member** to change it. Match the role to how much of the organization they should see; for what each role grants, see [Organization roles](#organization-roles).
 
 ## Grant per-project permissions
 
-To give someone more than their baseline on a particular project, open that project's **Project permissions** page and grant one of three permission levels to one or more members at once:
-
-- **Viewer**: read-only project access
-- **Editor**: connect, query, and edit project resources
-- **Admin**: manage access, settings, and the project lifecycle
-
-Their access on that project becomes the higher of their organization role and the permission you grant, so a grant only ever adds access.
+To give someone more than their baseline on a specific project, open that project's **Settings** → **Project permissions**, select **Grant permission**, choose a level (**Viewer**, **Editor**, or **Admin**), and pick one or more members. A grant only ever raises access: a person's effective permission is the higher of their organization role and the grant. For what each level allows, see [Per-project permissions](#per-project-permissions).
 
 ![Granting a per-project permission in the Neon console](/docs/manage/user-permissions/grant-permission.png)
 
@@ -207,13 +196,13 @@ Personal API keys are available to any member and are scoped to that member's ow
 
 ## Per-project permissions
 
-On top of your organization baseline, an admin can grant you one of three permission levels on a specific project. These are the same **Viewer**, **Editor**, and **Admin** levels an organization role grants by default. Grant them from the project's **Settings** &rarr; **Project permissions** page, using **Grant permission**:
+A per-project permission grants access on a single project, on top of a person's organization role. There are three levels, the same **Viewer**, **Editor**, and **Admin** levels an organization role grants by default:
 
 - **Viewer**: Read-only project access.
 - **Editor**: Connect, query, and edit project resources.
 - **Admin**: Manage access, settings, and the project lifecycle.
 
-The following table shows what each level allows:
+To grant one, see [Assign project access](#assign-project-access). The following table shows what each level allows:
 
 | Action                                                                                    | Viewer | Editor | Admin |
 | ----------------------------------------------------------------------------------------- | :----: | :----: | :---: |
