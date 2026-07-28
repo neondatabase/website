@@ -12,7 +12,6 @@ const BLOG_CATEGORIES_DATA_PATH = `${BLOG_CONTENT_DIRNAME}/categories/data.json`
 const BLOG_POSTS_DIRNAME = `${BLOG_CONTENT_DIRNAME}/posts`;
 const GITHUB_BLOB_FETCH_BATCH_SIZE = 120;
 const GITHUB_BLOB_FETCH_BATCH_CONCURRENCY = 4;
-const LOCAL_POST_READ_CONCURRENCY = 32;
 
 class BlogContentBranchNotFoundError extends Error {
   constructor(branch) {
@@ -74,18 +73,20 @@ const readPostsFromDirectory = async (postsDir) => {
       .filter((fileName) => fileName.endsWith('.md'))
       .sort();
 
-    return mapWithConcurrency(files, LOCAL_POST_READ_CONCURRENCY, async (fileName) => {
-      const raw = await fs.readFile(path.join(postsDir, fileName), 'utf8');
-      const { data, content } = matter(raw);
+    return Promise.all(
+      files.map(async (fileName) => {
+        const raw = await fs.readFile(path.join(postsDir, fileName), 'utf8');
+        const { data, content } = matter(raw);
 
-      return {
-        slug: fileName.replace(/\.md$/u, ''),
-        fileName,
-        raw,
-        data,
-        content,
-      };
-    });
+        return {
+          slug: fileName.replace(/\.md$/u, ''),
+          fileName,
+          raw,
+          data,
+          content,
+        };
+      })
+    );
   } catch (error) {
     void error;
 

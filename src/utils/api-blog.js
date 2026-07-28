@@ -74,35 +74,12 @@ const getBranchSnapshot = async (branch, { postSlug = null } = {}) => {
   );
 };
 
-// Local blog content is baked into the deployment and never changes at runtime,
-// so read it from disk once and reuse the resulting snapshot for the lifetime of
-// the process. This avoids re-reading every post file on each request/category,
-// which was exhausting the open-file limit (EMFILE) on Vercel.
-let localSnapshotPromise = null;
-
-const getLocalSnapshot = () => {
-  // In development, read fresh so edits to blog posts show up without a server
-  // restart. In build/production the content is immutable, so memoize it.
-  if (process.env.NODE_ENV !== 'production') {
-    return readLocalBlogSnapshot();
-  }
-
-  if (!localSnapshotPromise) {
-    localSnapshotPromise = readLocalBlogSnapshot().catch((error) => {
-      localSnapshotPromise = null;
-      throw error;
-    });
-  }
-
-  return localSnapshotPromise;
-};
-
 const getResolvedBlogSnapshot = async ({ previewBranch = null } = {}) => {
   if (previewBranch) {
     return getBranchSnapshot(previewBranch);
   }
 
-  return getLocalSnapshot();
+  return readLocalBlogSnapshot();
 };
 
 const mapAuthor = (slug, authorsData) => {
