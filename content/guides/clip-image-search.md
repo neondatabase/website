@@ -93,23 +93,54 @@ cp .env.example .env
 
 Now, let's provision a serverless Postgres and a Neon Storage bucket so that you can use the keys to remotely manage the images and perform vector & text search, all within Neon infrastructure.
 
-## Provision a serverless Postgres
+## Link the project with the Neon CLI
 
-Create a project in the [Neon console](https://console.neon.tech) in the US East 2. Once your project is created, you will receive a connection string that you can use to connect to your Neon database. The connection string will look like this:
+This flow uses the Neon CLI (2.22.2 or newer). If you don't have it yet, refer to [Install and connect](/docs/cli/install).
+
+First, authenticate with the Neon CLI. This opens a browser window to log in to (or sign up for) your Neon account:
 
 ```bash
-# .env
-DATABASE_URL="postgresql://user:password@ep-xxx.region.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+neon auth
 ```
+
+Now, run `neon link` to create the project and bind the application directory to it:
+
+```bash
+neon link
+```
+
+The CLI flow would prompt you for an organization and a project. Since you don't have one yet, choose **+ Create new project**, give it a name, and pick a region (`us-east-2` for this tutorial). It creates the Postgres with a default branch, writes a `neon.ts` and `.neon` context files, and pulls the new branch's `DATABASE_URL` into your `.env` file.
 
 The app uses this in `src/db/index.ts`, and it opens two kinds of connection:
 
 - `neon()` sends each query as one HTTP `fetch`. It is for a serverless function where every request is a single self-contained statement. The deployed app uses only this.
 - `Client` opens one WebSocket session. The setup scripts need it for transactions, `create index concurrently`, and per-session settings like `set lakebase_ann.probes`.
 
-## Provision a Neon Storage bucket
+## Declare a Storage bucket in neon.ts
 
-The photos in the dataset are remotely stored in the bucket, and the browser loads them over presigned URLs. Create a [Neon Storage](https://neon.com/docs/storage/get-started) bucket and add its keys to the `.env` file:
+The photos in the dataset are stored in a bucket, and the browser loads them over presigned URLs. Declare the bucket in the [`neon.ts`](/docs/reference/neon-ts) file:
+
+```ts filename="neon.ts"
+import { defineConfig } from '@neon/config/v1';
+
+export default defineConfig({
+  // existing code
+  preview: {
+    buckets: {
+      'storage-test': {},
+    },
+  },
+  // existing code
+});
+```
+
+Then, apply the config to the linked branch with the following command:
+
+```bash
+neon config apply
+```
+
+This provisions the `storage-test` bucket and writes the storage credentials, alongside `DATABASE_URL`, into your `.env` file:
 
 ```bash
 # .env
@@ -117,8 +148,9 @@ AWS_ENDPOINT_URL_S3=https://your-bucket-id.storage.region.aws.neon.tech
 AWS_ACCESS_KEY_ID=nak_...
 AWS_SECRET_ACCESS_KEY=nsk_...
 AWS_REGION=us-east-2
-S3_BUCKET=storage-test
 ```
+
+The one value `neon config apply` doesn't set is `S3_BUCKET`, which tells the application which bucket to use. The earlier `cp` step already put `storage-test` in the `.env` file with the `S3_BUCKET` value.
 
 The `src/lib/storage.ts` file in the codebase signs every request with SigV4 over `fetch`. The bucket can stay private, as the app presigns a short-lived public URL for each result, without routing images through the server.
 
