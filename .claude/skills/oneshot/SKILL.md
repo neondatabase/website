@@ -6,9 +6,10 @@ description: >
   developer would when they drop the guide URL into Cursor or Claude Code while
   building an app. Provisions a real throwaway Neon project, runs an isolated
   test-subject agent against the doc content alone, verifies the result against
-  the live database, and produces a report with token cost, friction points tied
-  to doc headings, and a scored rubric. Use when asked to test, evaluate, or
-  audit whether a Neon guide is agent-friendly or "one-shottable".
+  the live database, and produces a report with token cost, a token-efficiency
+  analysis with doc changes that would cut tokens, friction points tied to doc
+  headings, and a scored rubric. Use when asked to test, evaluate, or audit
+  whether a Neon guide is agent-friendly or "one-shottable".
 ---
 
 # OneShot
@@ -241,6 +242,16 @@ its result. Capture the `<usage>` block (`subagent_tokens`, `tool_uses`,
 `duration_ms`) from the result verbatim; this is the token-cost data for the
 report.
 
+Also capture, from the subject's transcript, enough to attribute *where* the
+tokens went (this feeds the token-efficiency analysis in Step 8b):
+
+- The sequence of tool calls and roughly how many turns each doc step consumed.
+- Any **re-reads** — the subject reading the same file or re-running the same
+  command more than once (a signal the doc left something ambiguous).
+- Any **dead-end exploration** — `Glob`/`Grep`/`Read` spelunking or trial-and-error
+  Bash the doc could have made unnecessary by stating a value outright.
+- The single largest token sink (the step or loop that dominated input tokens).
+
 ---
 
 ## Step 6 — A clarifying question is a fail, not a retry
@@ -306,6 +317,51 @@ would have needed the more detailed prompt file to succeed
 
 ---
 
+## Step 8b — Token-efficiency analysis
+
+The rubric scores whether the doc *works*; this step scores whether it works
+*cheaply*. A guide can one-shot successfully but still burn far more tokens
+than it needs to, which matters directly: every developer who pastes it into an
+agent pays that cost, and a bloated doc is a slower, pricier agentic experience
+even when it passes.
+
+Using the token-attribution data captured in Step 5, produce a short analysis
+tying token spend to specific, actionable doc changes. Anchor every suggestion
+to real subject behavior — do not speculate about savings the transcript
+doesn't support.
+
+Look for these recurring token sinks and the doc change that removes each:
+
+| Token sink (observed in transcript) | Doc change that cuts it |
+|---|---|
+| Subject re-read a file or re-ran a command to resolve an ambiguity | State the value/answer inline so no second look is needed |
+| `Glob`/`Grep`/`Read` exploration to discover a path, filename, or existing config | Name the exact path/filename in the step |
+| Trial-and-error Bash (wrong flag, missing dep, retry loop) | Give the exact command with all flags; state prerequisites up front |
+| Options presented with no default → reasoning/branching before acting | State a recommended default (this overlaps `self_containment`; same fix helps both) |
+| Long verbatim doc content the subject never needed to act on | Trim or move to a linked reference; only inline what's needed to complete the setup |
+| Subject re-derived expected output the doc could have shown | Include the expected output block so it can compare instead of infer |
+
+Record, for the report:
+
+- `input_tokens` and `output_tokens` (from Step 5).
+- `largest_token_sink`: the one step/loop that dominated spend, with a
+  one-line quote of the doc heading it maps to.
+- `token_suggestions`: an ordered list (biggest saving first) of concrete doc
+  edits, each with the sink it addresses and a rough `est_token_savings`
+  (`high`/`medium`/`low`, or a token estimate if the transcript supports one).
+- `efficiency_note`: one line stating whether the doc is token-lean, moderately
+  wasteful, or bloated for the task, and why.
+
+On a **batch run** (`--all-with-prompts`), also rank the guides by tokens spent
+so the most expensive doc to one-shot is obvious at a glance.
+
+If the run was `INCONCLUSIVE` (no network) or `FAIL (needed clarification)`
+before doing real work, note that token data is partial and base suggestions on
+the doc analysis plus whatever partial transcript exists, rather than on a full
+successful run.
+
+---
+
 ## Step 9 — Cleanup (always runs)
 
 In order, even if Steps 5–8 failed or errored:
@@ -347,6 +403,27 @@ In order, even if Steps 5–8 failed or errored:
     "cleanup": { "status": "pass" }
   },
   "cost_estimate_usd": 0.31,
+  "token_efficiency": {
+    "input_tokens": 18234,
+    "output_tokens": 1122,
+    "largest_token_sink": {
+      "heading": "## Create a Next.js project and add dependencies",
+      "detail": "Subject re-read package.json twice and grepped for an existing driver before asking which to install — ~6k input tokens on ambiguity resolution."
+    },
+    "token_suggestions": [
+      {
+        "suggestion": "Name a default driver (@neondatabase/serverless) in the install step instead of three equal-weight CodeTabs.",
+        "addresses": "Options with no default → re-reads + branching before acting",
+        "est_token_savings": "high"
+      },
+      {
+        "suggestion": "State the exact .env filename and variable name inline so the subject doesn't grep for existing config.",
+        "addresses": "Glob/Grep exploration to discover filenames",
+        "est_token_savings": "medium"
+      }
+    ],
+    "efficiency_note": "Moderately wasteful: a single missing default drove most of the avoidable input-token spend."
+  },
   "friction_log": [
     {
       "heading": "## Create a Next.js project and add dependencies",
@@ -370,13 +447,17 @@ In order, even if Steps 5–8 failed or errored:
   not other agents)
 - Results table: `Guide | Verdict | Has CopyPrompt | Tokens | Tool calls | Est. cost`
 - Rubric table with evidence quotes
+- **Token-efficiency section**: input/output tokens, the largest token sink
+  tied to its doc heading, and the ordered `token_suggestions` (biggest saving
+  first) as a checklist of doc edits, each labeled with its estimated saving.
 - Friction log grouped by doc heading, each with a concrete rewrite
   suggestion
 - Re-run command (`/oneshot guides/nextjs`)
 
 For `--all-with-prompts`, write one `results.json` array and one combined
 `README.md` with a summary table across all five guides plus per-guide
-detail sections.
+detail sections. Include a **token leaderboard** ranking the guides by tokens
+spent, so the most expensive doc to one-shot is obvious.
 
 ---
 
@@ -393,6 +474,10 @@ Tool calls: 14
 
 Rubric: self_containment 2/5, step_ordering 5/5, placeholder_clarity 4/5,
         currency 5/5, code_block_completeness 4/5, failure_mode_guidance 1/5
+
+Token efficiency: moderately wasteful
+  Biggest sink: driver-install step (~6k tokens on ambiguity resolution)
+  Top fix: name a default driver → est. high token saving
 
 Has CopyPrompt file: yes (public/prompts/nextjs-prompt.md)
 Would the prompt file have closed this gap? yes — it names a default driver
@@ -441,6 +526,21 @@ Full report: ~/oneshot-tests/nextjs-1751980800/README.md
    already suspected weren't self-sufficient for agents. Use that file as a
    diff target, not as something to feed the subject — feeding it to the
    subject would test the prompt file, not the doc page.
+8. **Token cost is scoped to the setup, not the scaffold.** The subject's
+   token count only ever covers the part under test — connecting the scaffolded
+   app to Neon per the doc. Prerequisites the doc assumes (creating the
+   Next.js/Express/etc. project, the Neon project itself) are done *before* the
+   subject runs, in Step 3 (provision) and Step 4 (scaffold), so their cost
+   never lands in the measured total. This keeps the token number comparable
+   across guides — it reflects the doc's own instructions, not the size of the
+   framework's boilerplate. When adding a guide, put anything the doc treats as
+   a precondition into the scaffold command, not the subject's prompt.
+9. **Passing cheaply is a separate goal from passing.** A guide can one-shot and
+   still be token-bloated. Step 8b attributes spend to specific doc lines and
+   proposes edits that cut it. Every avoidable re-read, path-hunt, or
+   trial-and-error loop the subject does is a token the doc could have saved for
+   every developer who ever pastes it into an agent — treat those as real
+   findings, ranked biggest-saving-first.
 
 ## Notes
 
