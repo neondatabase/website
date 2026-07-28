@@ -63,7 +63,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Private network transfer](#private-network-transfer) | —                                          | —                                          | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                         | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                          | —                                          | ✅                                                                                                |
-| [Support](#support)                                   | Community                                  | Billing support                            | Standard, Business, or Production                                                                 |
+| [Support](#support)                                   | Community                                  | Billing support                            | Standard (additional options for higher-volume customers)                                         |
 
 ## Plan features
 
@@ -76,6 +76,8 @@ Learn how to manage your Neon costs effectively with our [cost optimization guid
 ### Price
 
 On **Launch** and **Scale** plans, you pay only for what you use; there's no minimum monthly fee. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
+
+Higher-volume customers may qualify for annual commits. [Contact sales](/contact-sales) to learn more.
 
 <Admonition type="note">
 Invoices under $0.50 are not collected.
@@ -382,7 +384,9 @@ Support level by plan:
 
 - **Free**: Community support
 - **Launch**: Billing support
-- **Scale**: Standard support, with Business or Production support plans available for an additional fee
+- **Scale**: Standard support
+
+Higher-volume customers may qualify for annual commits and additional support options aligned with [Databricks Support](https://www.databricks.com/support). [Contact sales](/contact-sales) to learn more.
 
 See [Support](/docs/introduction/support) for details.
 
