@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-28T15:56:49.349Z'
+updatedOn: '2026-07-28T19:40:48.888Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -77,6 +77,108 @@ The same **Project permissions** page lists everyone who can reach the project, 
 
 </Steps>
 
+## Manage project access with the API
+
+You can manage project access programmatically with the [Neon API](/docs/reference/api). Only organization admins can manage project access. Roles are sent in the request as lowercase values (`viewer`, `editor`, `admin`) and returned in responses as uppercase permission levels (`VIEWER`, `EDITOR`, `ADMIN`).
+
+The Neon CLI doesn't have a dedicated command for these operations yet. You can call the same routes with the [`neon api`](/docs/cli/api) passthrough command, for example `neon api /projects/{project_id}/members/{member_id}/role -X PUT -F role=editor`.
+
+### List project members
+
+Lists the organization members who have access to a project, with each member's organization role, their explicit project role (if any), and their effective permission.
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/members' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY' | jq
+```
+
+Example response:
+
+```json
+{
+  "project_members": [
+    {
+      "member_id": "abc123de-4567-8fab-9012-3cdef4567890",
+      "user_id": "def456gh-7890-1abc-2def-3ghi4567890j",
+      "email": "alex@example.com",
+      "org_role": "admin",
+      "project_role": "admin",
+      "org_default_project_permission": "ADMIN",
+      "effective_project_permission": "ADMIN",
+      "grant_source": "org_role_default"
+    }
+  ]
+}
+```
+
+### Set a member's project role
+
+Grants or updates an organization member's role on a project. Send `viewer`, `editor`, or `admin` in the request body.
+
+```bash shouldWrap
+curl --request PUT \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/members/{member_id}/role' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{"role": "editor"}' | jq
+```
+
+Example response:
+
+```json
+{
+  "project_id": "example-project-12345678",
+  "member_id": "abc123de-4567-8fab-9012-3cdef4567890",
+  "user_id": "def456gh-7890-1abc-2def-3ghi4567890j",
+  "email": "sam@example.com",
+  "org_role": "collaborator",
+  "project_role": "editor",
+  "explicit_project_permission": "EDITOR",
+  "effective_project_permission": "EDITOR"
+}
+```
+
+### Remove a member's project role
+
+Removes a member's explicit role on a project. Their organization role's default access still applies.
+
+```bash shouldWrap
+curl --request DELETE \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/members/{member_id}/role' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY'
+```
+
+### Preview a role change
+
+Before you change a member's organization role, preview how it would affect their access to each project. Pass the target role as a query parameter. The response lists each project with the member's current and resulting effective permission, and flags any project where the change would reduce their access.
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}/role_change_preview?role=admin' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $ORG_API_KEY' | jq
+```
+
+Example response:
+
+```json
+{
+  "projects": [
+    {
+      "project_id": "example-project-12345678",
+      "project_name": "billing-api",
+      "current_effective_project_role": "editor",
+      "resulting_effective_project_role": "admin",
+      "will_reduce_access": false
+    }
+  ]
+}
+```
+
 ## Organization roles
 
 Every member of an organization has one of four roles. Each role sets a baseline level of access on every project in the organization:
@@ -137,12 +239,6 @@ On a project's **Project permissions** page, access shows up in one of two ways:
 - **Explicit**: The user was granted a permission directly on this project.
 
 When a user has both an organization-role default and an explicit grant, the higher of the two applies.
-
-### Manage project access with the API
-
-You can also manage project access programmatically with the [Neon API](/docs/reference/api). List who has access, grant or revoke access, and set an organization member's role on a project (`viewer`, `editor`, or `admin`) through the project members and permissions endpoints. As with the Console, only organization Admins can manage project access.
-
-The Neon CLI doesn't have a dedicated command for this yet, but you can call the same endpoints with the [`neon api`](/docs/cli/api) passthrough command. See [Manage organizations using the Neon CLI](/docs/manage/orgs-cli#manage-project-access) for an example.
 
 ## Legacy permissions
 
