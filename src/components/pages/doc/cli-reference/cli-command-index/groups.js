@@ -9,6 +9,7 @@ const GROUPS = [
   { id: 'config', title: 'Config as code' },
   { id: 'surfaces', title: 'Functions, storage & data' },
   { id: 'network', title: 'Org & network' },
+  { id: 'debugging', title: 'Debugging' },
 ];
 
 const GROUP_OF = {
@@ -40,6 +41,9 @@ const GROUP_OF = {
   'ip-allow': 'network',
   vpc: 'network',
   api: 'network',
+  diff: 'core',
+  snapshots: 'core',
+  inspect: 'debugging',
 };
 
 // Commands documented as a section of another command's page instead of a

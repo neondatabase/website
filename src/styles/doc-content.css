@@ -273,6 +273,19 @@
       }
     }
 
+    /* AI Gateway model table (AiGatewayModelIndex): the model-id chips are long
+       hyphenated slugs (e.g. qwen3-next-80b-a3b-instruct). The global inline-code
+       rule's `overflow-wrap: anywhere` would break them across many lines; keep
+       each id on one line (the table wrapper scrolls horizontally if needed). */
+    .ai-gateway-model-table {
+      td code,
+      th code {
+        overflow-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
+      }
+    }
+
     .sticky-table {
       @apply relative lg:[--docs-header-height:0px];
     }

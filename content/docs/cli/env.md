@@ -18,6 +18,8 @@ The `env` command manages a branch's Neon environment variables locally. [`neon 
 
 Writes the branch's Neon environment variables to a local `.env` file.
 
+`neon env pull` works with or without a [`neon.ts`](/docs/reference/neon-ts) configuration file. Without one, it writes the branch's core variables (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`, `NEON_BRANCH`). With a `neon.ts`, it also writes credentials for each service you declare (Managed Better Auth, Data API, AI Gateway, Object Storage).
+
 <CliUsage command="env pull" />
 
 <CliOptions command="env pull" />

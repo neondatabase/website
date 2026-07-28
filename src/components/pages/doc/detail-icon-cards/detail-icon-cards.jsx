@@ -242,6 +242,7 @@ const DetailIconCards = ({
           icon,
           target,
           tag,
+          tagTheme = 'gray',
           theme: childTheme,
         } = child.props ?? {};
         const Icon = icons[icon];
@@ -280,6 +281,7 @@ const DetailIconCards = ({
                 <Tag
                   label={tag}
                   size="xs"
+                  theme={tagTheme}
                   className={cn(
                     'absolute z-10 h-6',
                     'top-3.5 right-3.5',

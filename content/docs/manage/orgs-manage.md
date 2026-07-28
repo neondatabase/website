@@ -8,7 +8,7 @@ summary: >-
   UI. Admins control deletions, billing changes, 2FA enforcement, and project
   deletion; all members can create projects and view billing.
 enableTableOfContents: true
-updatedOn: '2026-06-12T01:28:52.381Z'
+updatedOn: '2026-07-24T15:46:49.998Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
@@ -59,12 +59,12 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Require 2FA for organization members
 
-Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**.
+Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**. A passkey satisfies this requirement too, so members can enroll in either 2FA or a passkey to comply.
 
-- You can only enable this if your own account already has 2FA enabled.
-- When required 2FA is on, members who are not enrolled are prompted to set up 2FA when they access the organization.
+- You can only enable this if your own account already has 2FA or a passkey set up.
+- When required 2FA is on, members who don't have 2FA or a passkey enrolled are prompted to set one up when they access the organization.
 
-See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps.
+See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps, or [Passkeys](/docs/manage/accounts#passkeys) for passkey setup steps.
 
 ## Invite Collaborators
 
@@ -138,37 +138,7 @@ Complete any necessary steps. Once cleared, you can go ahead and delete. This ac
 
 </Steps>
 
-## More actions
-
-Here are a couple additional things you can do with your organization: **passwordless authentication** and **renaming an organization**.
-
-### Passwordless authentication
-
-If you want the simplest way to connect to your database from the command line, passwordless authentication using `pg.neon.tech` lets you directly start a `psql` connection with any of your organization's databases. This saves you time versus logging in to the Console and copying your connection string manually.
-
-```bash
-   psql -h pg.neon.tech
-```
-
-In the output, you'll get a URL you can paste into your browser. Log in if you need to. Or if you're already logged in, you'll be asked to select from your personal or organization account, select your project, and then your compute. After that, go back to your terminal and you'll be connected to your selected database.
-
-For example:
-
-```bash
-alexlopez@alex-machine ~ % psql -h pg.neon.tech
-NOTICE:  Welcome to Neon!
-Authenticate by visiting:
-    https://console.neon.tech/psql_session/secure_token
-
-NOTICE:  Connecting to database.
-psql (16.1, server 16.3)
-SSL connection (secure connection details hidden)
-Type "help" for help.
-
-alexlopez=>
-```
-
-### Rename an organization
+## Rename an organization
 
 Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally; the new name will appear for everyone in the organization.
 

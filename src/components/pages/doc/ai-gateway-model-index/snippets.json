@@ -1,0 +1,104 @@
+{
+  "$generatedBy": "src/scripts/generate-ai-gateway-snippets.js",
+  "$source": "neondatabase/neon-console-code-examples · examples/connection-dialog/ai-gateway",
+  "modelIdPlaceholder": "__MODEL_ID__",
+  "tabs": {
+    "text": {
+      "languages": [
+        {
+          "key": "aisdk",
+          "label": "AI SDK",
+          "lang": "typescript",
+          "install": "npm i ai @neondatabase/ai-sdk-provider",
+          "env": [
+            "NEON_AI_GATEWAY_BASE_URL",
+            "NEON_AI_GATEWAY_TOKEN"
+          ],
+          "code": "import { generateText } from \"ai\";\nimport { neon } from \"@neondatabase/ai-sdk-provider\";\n\nconst { text } = await generateText({\n  model: neon(\"__MODEL_ID__\"),\n  prompt: \"Explain Serverless Postgres.\",\n});\n\nconsole.log(text);\n"
+        },
+        {
+          "key": "mastra",
+          "label": "Mastra",
+          "lang": "typescript",
+          "install": "npm i @mastra/core",
+          "env": [
+            "NEON_AI_GATEWAY_TOKEN",
+            "NEON_AI_GATEWAY_BASE_URL"
+          ],
+          "code": "import { Agent } from \"@mastra/core/agent\";\n\nconst agent = new Agent({\n  name: \"neon-demo\",\n  instructions: \"You are a helpful assistant.\",\n  model: \"neon/__MODEL_ID__\",\n});\n\nconst { text } = await agent.generate(\"Explain Serverless Postgres.\");\nconsole.log(text);\n"
+        },
+        {
+          "key": "ts",
+          "label": "TypeScript",
+          "lang": "typescript",
+          "install": "npm i openai",
+          "env": [
+            "NEON_AI_GATEWAY_TOKEN",
+            "NEON_AI_GATEWAY_BASE_URL"
+          ],
+          "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI({\n  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,\n  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,\n});\n\nconst resp = await client.chat.completions.create({\n  model: \"__MODEL_ID__\",\n  messages: [{ role: \"user\", content: \"Explain Serverless Postgres.\" }],\n});\nconsole.log(resp.choices[0].message.content);\n"
+        },
+        {
+          "key": "python",
+          "label": "Python",
+          "lang": "python",
+          "install": "pip install openai",
+          "env": [
+            "NEON_AI_GATEWAY_TOKEN",
+            "NEON_AI_GATEWAY_BASE_URL"
+          ],
+          "code": "import os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    api_key=os.environ[\"NEON_AI_GATEWAY_TOKEN\"],\n    base_url=f\"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1\",\n)\n\nresp = client.chat.completions.create(\n    model=\"__MODEL_ID__\",\n    messages=[{\"role\": \"user\", \"content\": \"Explain Serverless Postgres.\"}],\n)\nprint(resp.choices[0].message.content)\n"
+        },
+        {
+          "key": "curl",
+          "label": "curl",
+          "lang": "bash",
+          "install": null,
+          "env": [
+            "NEON_AI_GATEWAY_TOKEN",
+            "NEON_AI_GATEWAY_BASE_URL"
+          ],
+          "code": "# Chat completions live under the unified `/v1` route (every catalog model).\ncurl \"${NEON_AI_GATEWAY_BASE_URL}/v1/chat/completions\" \\\n  -H \"Authorization: Bearer ${NEON_AI_GATEWAY_TOKEN}\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"model\": \"__MODEL_ID__\",\n    \"messages\": [{\"role\": \"user\", \"content\": \"Explain Serverless Postgres.\"}]\n  }'\n"
+        }
+      ]
+    },
+    "image": {
+      "languages": [
+        {
+          "key": "aisdk",
+          "label": "AI SDK",
+          "lang": "typescript",
+          "install": "npm i ai @neondatabase/ai-sdk-provider",
+          "env": [
+            "NEON_AI_GATEWAY_BASE_URL",
+            "NEON_AI_GATEWAY_TOKEN"
+          ],
+          "code": "import { streamText } from \"ai\";\nimport { neon } from \"@neondatabase/ai-sdk-provider\";\n\nconst result = streamText({\n  model: neon(\"__MODEL_ID__\"),\n  prompt: \"A red apple on a wooden table.\",\n  tools: {\n    image_generation: neon.tools.imageGeneration({ outputFormat: \"jpeg\" }),\n  },\n});\n\nfor await (const _ of result.textStream) {}\n\nconst images = (await result.toolResults).filter((r) => r.toolName === \"image_generation\");\nconsole.log(images.length);\n"
+        },
+        {
+          "key": "ts",
+          "label": "TypeScript",
+          "lang": "typescript",
+          "install": "npm i openai",
+          "env": [
+            "NEON_AI_GATEWAY_TOKEN",
+            "NEON_AI_GATEWAY_BASE_URL"
+          ],
+          "code": "import OpenAI from \"openai\";\n\nconst client = new OpenAI({\n  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,\n  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/openai/v1`,\n});\n\nconst stream = client.responses.stream({\n  model: \"__MODEL_ID__\",\n  input: \"A red apple on a wooden table.\",\n  tools: [{ type: \"image_generation\" }],\n});\n\nconst response = await stream.finalResponse();\nconst sizes = response.output.flatMap((item) => {\n  if (item.type !== \"image_generation_call\") return [];\n  if (!(\"result\" in item) || typeof item.result !== \"string\") return [];\n  return [item.result.length];\n});\nconsole.log(sizes);\n"
+        },
+        {
+          "key": "python",
+          "label": "Python",
+          "lang": "python",
+          "install": "pip install openai",
+          "env": [
+            "NEON_AI_GATEWAY_TOKEN",
+            "NEON_AI_GATEWAY_BASE_URL"
+          ],
+          "code": "import os\nfrom openai import OpenAI\n\nclient = OpenAI(\n    api_key=os.environ[\"NEON_AI_GATEWAY_TOKEN\"],\n    base_url=f\"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/openai/v1\",\n)\n\nwith client.responses.stream(\n    model=\"__MODEL_ID__\",\n    input=\"A red apple on a wooden table.\",\n    tools=[{\"type\": \"image_generation\"}],\n) as stream:\n    for _ in stream:\n        pass\n    response = stream.get_final_response()\n\nsizes = [\n    len(item.result)\n    for item in response.output\n    if item.type == \"image_generation_call\" and getattr(item, \"result\", None)\n]\nprint(sizes)\n"
+        }
+      ]
+    }
+  },
+  "envExample": "# Injected by `neon env pull` when AI Gateway is enabled on the branch (neon.ts preview.aiGateway).\n# Neon injects ONLY the NEON_AI_GATEWAY_* vars (not OPENAI_*). Build the OpenAI SDK / curl\n# apiKey + baseURL from them: apiKey = NEON_AI_GATEWAY_TOKEN (the bearer, nt_live_...).\n#\n# NEON_AI_GATEWAY_BASE_URL is the bare gateway host (no path). Append the route you need:\n#   - `/v1`        — unified Chat Completions (every catalog model: claude, gpt, gemini, ...)\n#   - `/openai/v1` — OpenAI Responses API (image generation, gpt-5 / codex)\n# @neondatabase/ai-sdk-provider and Mastra's neon/ provider read the bare host and route themselves.\n\nNEON_AI_GATEWAY_TOKEN=nt_live_...\nNEON_AI_GATEWAY_BASE_URL=https://<branch-id>-api.ai.<cell>.<region>.<cloud>.neon.tech\n"
+}

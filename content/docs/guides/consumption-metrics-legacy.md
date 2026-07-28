@@ -11,7 +11,7 @@ summary: >-
   metrics that match your invoice or for Launch plan access, use the Query
   consumption metrics page instead.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Using the Neon API, you can query project-level consumption metrics with the legacy endpoint. The Management API only allows this path for **Scale plans and above** (legacy **Scale, Business, and Enterprise**, and usage-based **Scale** and higher). It is **not** available on **Launch**; use [`GET /consumption_history/v2/projects`](/docs/guides/consumption-metrics) instead. On every eligible plan, this endpoint returns **legacy metrics** only (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics.
@@ -146,7 +146,7 @@ curl --request GET \
 You can request specific metrics with the `metrics` parameter (for example, `metrics=active_time_seconds,compute_time_seconds`).
 </Admonition>
 
-For full parameter and response details, see [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) in the Neon API Reference.
+For full parameter and response details, see [Retrieve project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project) in the Neon API Reference.
 
 The following sections cover paging (project endpoint), polling behavior, and handling errors.
 

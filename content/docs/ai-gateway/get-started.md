@@ -6,16 +6,22 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-07-20T19:53:53.968Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon AI Gateway" />
+
+To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills:
+
+```bash
+npx skills add neondatabase/agent-skills -s neon -s neon-ai-gateway
+```
 
 <Steps>
 
 ## Get access
 
-You need a new project in the AWS us-east-2 region, and foundation model access requires a paid Neon plan. When your account is enabled, you'll receive an email and a Discord invite.
+You need a project in the AWS us-east-2 region. Foundation model access requires a paid Neon plan, and it's enabled automatically once you're on one, no separate sign-up step needed.
 
 ## Create a credential
 
@@ -45,20 +51,20 @@ export NEON_AI_GATEWAY_TOKEN=nt_live_...
 Your branch's AI Gateway host is available in the Neon Console on the AI Gateway page, or via the Neon API. It follows this format:
 
 ```
-br-<name>-api.<cell>.<region>.aws.neon.tech
+br-<name>-api.ai.<cell>.<region>.aws.neon.tech
 ```
 
 For example:
 
 ```bash
-export NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.c2.us-east-2.aws.neon.tech
+export NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
 ```
 
 This is different from your database connection string.
 
 ## Install dependencies
 
-The quickstart uses the OpenAI SDK because the chat completions endpoint is OpenAI-compatible. It works with any model in the catalog, including Claude and Gemini.
+The quickstart uses the OpenAI SDK because the chat completions endpoint is OpenAI-compatible. It works with any model in the catalog, including GPT and Gemini.
 
 <CodeTabs labels={["npm", "yarn", "pnpm", "pip"]}>
 
@@ -92,11 +98,11 @@ import 'dotenv/config';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
 });
 
 const response = await client.chat.completions.create({
-  model: 'claude-sonnet-4-6',
+  model: 'gpt-5-mini',
   messages: [{ role: 'user', content: 'Hello!' }],
 });
 
@@ -112,11 +118,11 @@ load_dotenv()
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1",
 )
 
 response = client.chat.completions.create(
-    model="claude-sonnet-4-6",
+    model="gpt-5-mini",
     messages=[{"role": "user", "content": "Hello!"}],
 )
 
@@ -124,11 +130,11 @@ print(response.choices[0].message.content)
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-6",
+    "model": "gpt-5-mini",
     "messages": [{"role": "user", "content": "Hello!"}]
   }'
 ```
@@ -147,11 +153,11 @@ import 'dotenv/config';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/mlflow/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/v1`,
 });
 
 const stream = await client.chat.completions.create({
-  model: 'claude-sonnet-4-6',
+  model: 'gpt-5-mini',
   messages: [{ role: 'user', content: 'Write a haiku about serverless databases.' }],
   stream: true,
 });
@@ -170,11 +176,11 @@ load_dotenv()
 
 client = OpenAI(
     api_key=os.environ["NEON_AI_GATEWAY_TOKEN"],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/mlflow/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/v1",
 )
 
 with client.chat.completions.create(
-    model="claude-sonnet-4-6",
+    model="gpt-5-mini",
     messages=[{"role": "user", "content": "Write a haiku about serverless databases."}],
     stream=True,
 ) as stream:
@@ -183,11 +189,11 @@ with client.chat.completions.create(
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/v1/chat/completions" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "claude-sonnet-4-6",
+    "model": "gpt-5-mini",
     "messages": [{"role": "user", "content": "Write a haiku about serverless databases."}],
     "stream": true
   }'
@@ -200,17 +206,21 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/mlflow/v1/chat/completions" \
 Change the `model` field to use a different provider. No other code changes required.
 
 ```typescript
-// Anthropic
-model: 'claude-sonnet-4-6'
-
 // OpenAI
-model: 'gpt-5-4'
+model: 'gpt-5-mini'
 
 // Google
-model: 'gemini-2-5-flash'
+model: 'gemini-3-flash'
+
+// Alibaba
+model: 'qwen3-next-80b-a3b-instruct'
 ```
 
 See [Models](/docs/ai-gateway/models) for the full list of available model IDs.
+
+<Callout title="Using the AI SDK?">
+For TypeScript apps and agents, use [`@neon/ai-sdk-provider`](https://www.npmjs.com/package/@neon/ai-sdk-provider) with the Vercel AI SDK. It reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN`, then routes each catalog model to the best AI Gateway endpoint for that provider.
+</Callout>
 
 </Steps>
 
@@ -218,7 +228,6 @@ See [Models](/docs/ai-gateway/models) for the full list of available model IDs.
 
 - [Models](/docs/ai-gateway/models): full model catalog and which endpoint to use per provider
 - [Chat completions](/docs/ai-gateway/chat-completions): detailed reference for the unified endpoint
-- [Anthropic Messages API](/docs/ai-gateway/anthropic-messages): native Anthropic features including extended thinking and prompt caching
 - [Authentication](/docs/ai-gateway/authentication): credential scopes, branch binding, and rotation
 
 <NeedHelp/>

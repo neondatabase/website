@@ -1,0 +1,72 @@
+name: Skills Read-Only
+
+# The skill content under public/docs/ai/skills/ is vendored from upstream source
+# repos (neondatabase/agent-skills, and per-skill overrides such as
+# neondatabase/neon-for-agent-platforms) via `npm run update:skills`. It must not
+# be hand-edited here. This check re-fetches each skill's file tree from its
+# upstream repo at the ref pinned in config/skills.json (currently `main`) and
+# fails if any vendored file drifts (content differs or a file is missing).
+# Website-only reference files that have no upstream counterpart are allowed.
+#
+#   - Pull requests touching skills / the sync config / the checker -> block on drift.
+#   - Daily schedule / manual dispatch -> catch upstream drift proactively and
+#     open/update a tracking issue so it can't rot silently.
+
+on:
+  pull_request:
+    paths:
+      - 'public/docs/ai/skills/**'
+      - 'config/skills.json'
+      - 'src/scripts/sync-skills.js'
+      - 'scripts/check-skills-sync.mjs'
+      - '.github/workflows/skills-readonly.yml'
+  schedule:
+    # Every day at 8:30 AM UTC (just after the agent-discovery verify cadence)
+    - cron: '30 8 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    name: 'Check skills match upstream'
+    runs-on:
+      group: neondatabase-protected-runner-group
+      labels: linux-ubuntu-latest
+    steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+
+      # Zero-dependency check (Node builtins + global fetch, GitHub contents API
+      # only) — no install needed, so nothing to fetch from the npm registry.
+      - name: Check skills match upstream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/check-skills-sync.mjs | tee skills-drift-report.txt
+
+      - name: Open or update drift issue
+        if: failure() && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          title="Skills drifted from upstream agent-skills"
+          body="$(cat skills-drift-report.txt 2>/dev/null || echo 'The skills read-only check failed. See the workflow run for details.')"
+          body="${body}"$'\n\n'"— Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          existing="$(gh issue list --state open --search "${title} in:title" --json number --jq '.[0].number' 2>/dev/null || echo '')"
+          if [ -n "${existing}" ]; then
+            gh issue comment "${existing}" --body "${body}"
+          else
+            gh issue create --title "${title}" --body "${body}"
+          fi

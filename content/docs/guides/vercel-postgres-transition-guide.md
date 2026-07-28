@@ -13,7 +13,7 @@ summary: >-
   Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <InfoBlock>
@@ -97,7 +97,7 @@ Neon is working with the Vercel team to transition Enterprise customers.
 - **Multiple Postgres roles** - No longer limited to single role
 - **Larger computes** - Up to 2 CU (8 GB RAM) on Free plan, more on paid plans
 - **Multiple Postgres versions** - Upgrade from Postgres 15 to support for Postgres 14, 15, 16, and 17
-- **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)** - Programmatic project and database management
+- **[Neon API](/docs/reference/api)** - Programmatic project and database management
 - **[Organization accounts](/docs/manage/organizations)** - Team and project management
 - **[Monitoring](/docs/introduction/monitoring-page)** - Database monitoring from Neon Console
 

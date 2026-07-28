@@ -14,7 +14,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.
@@ -37,6 +37,8 @@ Strategies in this category include:
 Gathering query statistics can aid in identifying performance issues and opportunities for optimization. Neon supports the [pg_stat_statements](/docs/extensions/pg_stat_statements) extension for monitoring and analyzing SQL query performance.
 
 The [pg_stat_statements](/docs/extensions/pg_stat_statements) extension provides aggregated query statistics for executed SQL statements. The data collected includes the number of query executions, total execution time, rows returned by the query, and more.
+
+As an alternative to writing SQL, run [`neon inspect db outliers`](/docs/cli/inspect#db-outliers) and [`neon inspect db calls`](/docs/cli/inspect#db-calls) from the terminal to see the slowest and most-frequent queries.
 
 This extension isn’t installed by default, so your first step is to install it and then allow some time for statistics collection. To install the extension, run the following `CREATE EXTENSION` statement.
 
@@ -212,6 +214,8 @@ Strategies in this category include:
 ### Use indexes
 
 Indexes are crucial for query performance, especially in applications with large tables. They significantly reduce the time required to access data, which can be the difference between a slow application and a fast one.
+
+To find indexes that are rarely scanned, run [`neon inspect db unused-indexes`](/docs/cli/inspect#db-unused-indexes); to find tables Postgres scans end to end, run [`neon inspect db seq-scans`](/docs/cli/inspect#db-seq-scans).
 
 Suppose that you have a large `users` table like this with millions of rows:
 
@@ -396,6 +400,8 @@ Remember that the local file cache statistics are for the entire compute, not sp
 The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved.
 </Admonition>
 
+For the same numbers from the terminal, run [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate) and [`neon inspect db working-set`](/docs/cli/inspect#db-working-set).
+
 ### Use connection pooling
 
 Connection pooling improves performance by minimizing the overhead associated with creating and tearing down database connections. Neon uses PgBouncer to provide connection pooling support, enabling up to 10,000 concurrent connections.
@@ -434,6 +440,8 @@ There are SQL queries you can run to check for table and index bloat. There are 
 
 - [Show database bloat – PostgreSQL wiki](https://wiki.postgresql.org/wiki/Show_database_bloat)
 - [Index and table bloat check scripts from PostgreSQL Experts](https://github.com/pgexperts/pgx_scripts/tree/master/bloat)
+
+As an alternative to these queries, run [`neon inspect db bloat`](/docs/cli/inspect#db-bloat) from the Neon CLI for a quick estimate.
 
 #### Reducing bloat
 

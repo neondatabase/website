@@ -10,7 +10,7 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -126,7 +126,7 @@ neon ip-allow add 203.0.113.1 --protected-only false
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
+The [Create project](/docs/reference/api/projects/create-project) and [Update project](/docs/reference/api/projects/update-project) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \

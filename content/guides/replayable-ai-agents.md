@@ -4,14 +4,14 @@ subtitle: 'Learn how to build AI agents that can checkpoint execution, replay fa
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-21T00:00:00.000Z'
-updatedOn: '2026-05-22T11:36:40.349Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Most AI agents today are effectively black boxes.
 
 They call tools, mutate state, update databases, and make decisions. But once something goes wrong, there’s often no reliable way to inspect, replay, or recover execution. Logging prompts alone isn’t enough when your agent is actively changing application state. If an agent drops a table, corrupts data, or cascades into an infinite loop of bad tool calls, you cannot simply retry the prompt. You must fix the data first.
 
-In this guide, you'll build a **replayable AI agent** using the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) and Neon’s [Snapshots API](https://api-docs.neon.tech/reference/createsnapshot). You'll implement the core primitives needed for:
+In this guide, you'll build a **replayable AI agent** using the [OpenAI Agents SDK](https://github.com/openai/openai-agents-python) and Neon’s [Snapshots API](/docs/reference/api/snapshots/create-snapshot). You'll implement the core primitives needed for:
 
 - Execution checkpoints
 - Suspend and resume flows
@@ -173,7 +173,7 @@ def _wait_for_operation(operation_id: str):
 ```
 
 <Admonition type="note" title="Branch IDs after restore">
-When `finalize_restore` is `True`, Neon preserves your connection string by moving the compute endpoint to the restored branch. The connection string stays stable, but the active branch ID changes. This simple helper is enough for this demo; in production, store the new active branch ID after restore before creating the next snapshot (using the Restore API response -> Branch -> ID. Checkout the [Neon API Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) for details).
+When `finalize_restore` is `True`, Neon preserves your connection string by moving the compute endpoint to the restored branch. The connection string stays stable, but the active branch ID changes. This simple helper is enough for this demo; in production, store the new active branch ID after restore before creating the next snapshot (using the Restore API response -> Branch -> ID. Checkout the [Neon API Restore snapshot](/docs/reference/api/snapshots/restore-snapshot) for details).
 </Admonition>
 
 ## Define the agent and tools
@@ -550,7 +550,7 @@ You cannot restore your production database in-place to 10 days ago. You would w
 
 This is where Neon's branching capabilities make historical replay safe:
 
-1. **Create an isolated branch:** Instead of an in-place restore, use the Neon API to create a **new branch** from the 10-day-old snapshot. This creates an isolated, ephemeral clone of the database exactly as it was. You can achieve this by calling the [Restore API](https://api-docs.neon.tech/reference/restoresnapshot) with `finalize_restore: False` and a new `target_branch_id` for the isolated branch.
+1. **Create an isolated branch:** Instead of an in-place restore, use the Neon API to create a **new branch** from the 10-day-old snapshot. This creates an isolated, ephemeral clone of the database exactly as it was. You can achieve this by calling the [Restore API](/docs/reference/api/snapshots/restore-snapshot) with `finalize_restore: False` and a new `target_branch_id` for the isolated branch.
 2. **Load the historical agent:** You retrieve the agent's 10-day-old `RunState` JSON from your object store or metadata database and load it into memory.
 3. **Inject the new connection string:** You pass the new, isolated branch's `DATABASE_URL` into the agent's environment.
 4. **Replay and correct:** You reject the historical hallucination, provide the corrected prompt, and let the agent re-run the reconciliation in the isolated branch.
@@ -577,7 +577,7 @@ Whether you are using [LangGraph persistence](https://docs.langchain.com/oss/pyt
 
 ## Resources
 
-- [Neon Snapshots API Reference](https://api-docs.neon.tech/reference/createsnapshot)
+- [Neon Snapshots API Reference](/docs/reference/api/snapshots/create-snapshot)
 - [OpenAI Agents SDK Documentation](https://openai.github.io/openai-agents-python/)
 - [Database versioning with snapshots](/docs/ai/ai-database-versioning)
 - [Build Checkpoints For Your Agent Using Neon Snapshots](/blog/checkpoints-for-agents-with-neon-snapshots)

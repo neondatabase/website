@@ -1,16 +1,30 @@
 import { createRequire } from 'module';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
 const require = createRequire(import.meta.url);
 const {
+  extract,
   tokenize,
   stripFrontmatter,
   joinBackslashContinuations,
   isLikelyCommand,
   buildTopLevelCommands,
 } = require('../extract-examples.js');
+const { parseCommandFile, enumerateConstEntries } = require('../generate-schema.js');
 const { loadSchema, resolvePath, resolveValidOptions } = require('../schema.js');
+
+// Writes `source` to a temp .ts file and returns its path, for exercising the
+// TypeScript-source parser without a full neonctl checkout.
+function writeTempSource(source) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-units-'));
+  const file = path.join(dir, 'sample.ts');
+  fs.writeFileSync(file, source);
+  return file;
+}
 
 describe('tokenize', () => {
   it('splits on whitespace', () => {
@@ -131,6 +145,42 @@ describe('buildTopLevelCommands', () => {
   });
 });
 
+describe('extract', () => {
+  it('skips generated blog content by default', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-extract-'));
+    try {
+      fs.mkdirSync(path.join(root, 'blog'), { recursive: true });
+      fs.mkdirSync(path.join(root, 'docs'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'blog', 'post.md'), '```bash\nneonctl projects list\n```\n');
+      fs.writeFileSync(path.join(root, 'docs', 'page.md'), '```bash\nneonctl branches list\n```\n');
+
+      const invocations = extract({ root });
+
+      expect(invocations.map((invocation) => path.relative(root, invocation.file))).toEqual([
+        path.join('docs', 'page.md'),
+      ]);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+
+  it('can include blog content when ignore is explicitly disabled', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-extract-'));
+    try {
+      fs.mkdirSync(path.join(root, 'blog'), { recursive: true });
+      fs.writeFileSync(path.join(root, 'blog', 'post.md'), '```bash\nneonctl projects list\n```\n');
+
+      const invocations = extract({ root, ignore: [] });
+
+      expect(invocations.map((invocation) => path.relative(root, invocation.file))).toEqual([
+        path.join('blog', 'post.md'),
+      ]);
+    } finally {
+      fs.rmSync(root, { recursive: true, force: true });
+    }
+  });
+});
+
 describe('resolvePath', () => {
   const schema = loadSchema();
 
@@ -191,5 +241,56 @@ describe('resolveValidOptions', () => {
     const opts = resolveValidOptions(schema, []);
     const maybe = [...opts.keys()].find((k) => k.startsWith('--no-'));
     expect(typeof maybe).toBe('string');
+  });
+});
+
+describe('parseCommandFile: builder passed as a bare identifier', () => {
+  it('walks a builder function referenced by name (like inspect db)', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      export const command = "inspect";
+      export const describe = "Inspect things";
+      const dbBuilder = (argv: yargs.Argv) =>
+        argv
+          .usage("$0 inspect db <sub-command> [options]")
+          .options({
+            "project-id": { describe: "Project ID", type: "string" },
+            "db-url": { describe: "Connection string", type: "string" },
+          });
+      export const builder = (argv: yargs.Argv) =>
+        argv.command("db", "Run a diagnostic query", dbBuilder);
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    expect(parsed.name).toBe('inspect');
+    const db = parsed.commands.db;
+    expect(db).toBeDefined();
+    // Options and usage from the identifier-resolved builder are captured.
+    expect(Object.keys(db.options).sort()).toEqual(['db-url', 'project-id']);
+    expect(db.usage).toBe('$0 inspect db <sub-command> [options]');
+  });
+});
+
+describe('enumerateConstEntries', () => {
+  it('reads keys and describe from a const object literal', () => {
+    const file = writeTempSource(`
+      export const INSPECT_QUERIES = {
+        "table-sizes": { describe: "Size of each table", sql: "SELECT 1" },
+        "index-sizes": { describe: "Size of each index", sql: "SELECT 2" },
+      } as const;
+    `);
+    const entries = enumerateConstEntries(file, 'INSPECT_QUERIES', 'describe');
+    expect(entries).toEqual([
+      { name: 'table-sizes', describe: 'Size of each table' },
+      { name: 'index-sizes', describe: 'Size of each index' },
+    ]);
+  });
+
+  it('returns null when the const is missing (so callers fail loudly)', () => {
+    const file = writeTempSource(`export const SOMETHING_ELSE = {};`);
+    expect(enumerateConstEntries(file, 'INSPECT_QUERIES', 'describe')).toBeNull();
+  });
+
+  it('returns null when the source file does not exist', () => {
+    expect(enumerateConstEntries('/no/such/file.ts', 'X', 'describe')).toBeNull();
   });
 });

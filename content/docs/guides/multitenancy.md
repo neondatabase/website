@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -235,12 +235,13 @@ Our example creates new Neon projects via the command line, using the following 
 // src/scripts/create.js
 
 import { Command } from 'commander';
-import { createApiClient } from '@neondatabase/api-client';
+import { createNeonClient } from '@neon/sdk';
 import 'dotenv/config';
 
 const program = new Command();
-const neonApi = createApiClient({
+const neonApi = createNeonClient({
   apiKey: process.env.NEON_API_KEY,
+  throwOnError: true,
 });
 
 program.option('-n, --name <name>', 'Name of the company').parse(process.argv);
@@ -252,16 +253,13 @@ if (options.name) {
 
   (async () => {
     try {
-      const response = await neonApi.createProject({
-        project: {
-          name: options.name,
-          pg_version: 16,
-          region_id: 'aws-us-east-1',
-        },
+      const project = await neonApi.projects.create({
+        name: options.name,
+        pg_version: 16,
+        region_id: 'aws-us-east-1',
       });
 
-      const { data } = response;
-      console.log(data);
+      console.log(project);
     } catch (error) {
       console.error('Error creating project:', error);
     }
@@ -271,7 +269,7 @@ if (options.name) {
 }
 ```
 
-This script uses the `commander` library to create a simple command-line interface (CLI) and the Neon API's `createProject` method to set up a new project. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
+This script uses the `commander` library to create a simple command-line interface (CLI) and the Neon Management SDK's `neonApi.projects.create()` method to set up a new project. Ensure that your Neon API key is stored in an environment variable named `NEON_API_KEY`.
 
 To execute the script and create a new Neon project named "ACME Corp" with PostgreSQL version 16 in the aws-us-east-1 region, run:
 
@@ -286,7 +284,7 @@ In this example, the same approach was used to create the following projects:
 - Finance Co
 - Talent Biz
 
-To interact with the Neon API, you'll need to generate an API key. For more information, refer to the Neon documentation on [creating an API key](https://api-docs.neon.tech/reference/createapikey).
+To interact with the Neon API, you'll need to generate an API key. For more information, refer to the Neon documentation on [creating an API key](/docs/reference/api/api-keys/create-api-key).
 
 #### Generating a workflow to prepare for migrations
 
@@ -295,7 +293,7 @@ To interact with the Neon API, you'll need to generate an API key. For more info
 
 import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { execSync } from 'child_process';
-import { createApiClient } from '@neondatabase/api-client';
+import { createNeonClient } from '@neon/sdk';
 import { Octokit } from 'octokit';
 import 'dotenv/config';
 
@@ -304,7 +302,10 @@ import { drizzleConfig } from '../templates/drizzle-config.js';
 import { githubWorkflow } from '../templates/github-workflow.js';
 
 const octokit = new Octokit({ auth: process.env.PERSONAL_ACCESS_TOKEN });
-const neonApi = createApiClient({ apiKey: process.env.NEON_API_KEY });
+const neonApi = createNeonClient({
+  apiKey: process.env.NEON_API_KEY,
+  throwOnError: true,
+});
 
 const repoOwner = 'neondatabase-labs';
 const repoName = 'neon-database-per-tenant-drizzle';
@@ -323,22 +324,21 @@ let secrets = [];
 
   try {
     // Get all projects
-    const response = await neonApi.listProjects();
-    const { projects } = response.data;
+    const projects = await neonApi.projects.list().all();
 
     // Loop through each project
     for (const project of projects) {
       // Get connection details for the project
-      const connectionDetails = await neonApi.getConnectionDetails({
+      const connectionString = await neonApi.postgres.connectionString({
         projectId: project.id,
         branchId: project.default_branch_id,
+        databaseName: 'neondb',
+        roleName: 'neondb_owner',
       });
-
-      const { connection_string } = connectionDetails.data;
 
       // Create a drizzle config file for each project
       const configFileName = `${project.name.toLowerCase().replace(/\s+/g, '-')}.config.ts`;
-      writeFileSync(`./configs/${configFileName}`, drizzleConfig(connection_string, project.name));
+      writeFileSync(`./configs/${configFileName}`, drizzleConfig(connectionString, project.name));
 
       // Create a GitHub workflow file for each project
       const workflowFileName = `${project.name.toLowerCase().replace(/\s+/g, '-')}.yml`;
@@ -357,7 +357,7 @@ let secrets = [];
       );
 
       const secretName = `${project.name.toUpperCase().replace(/\s+/g, '_')}_CONNECTION_STRING`;
-      const encryptedValue = await encryptSecret(connection_string, publicKey.data.key);
+      const encryptedValue = await encryptSecret(connectionString, publicKey.data.key);
 
       secrets.push({
         secret_name: secretName,

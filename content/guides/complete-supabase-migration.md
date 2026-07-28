@@ -4,7 +4,7 @@ subtitle: A comprehensive guide to migrating your Postgres database, user accoun
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-03T00:00:00.000Z'
-updatedOn: '2026-03-05T04:10:30.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 This guide walks you through migrating your Postgres database, user accounts, and Row-Level Security (RLS) policies from Supabase to Neon. It addresses key differences between the platforms, including the reassignment of `user_id` values during the auth migration, and provides steps to remap IDs, restore data integrity, and update your application code.
@@ -24,7 +24,7 @@ Before you begin, ensure you have the following:
 
 This part covers the migration of your user accounts and public schema data, followed by remapping user IDs to restore data integrity.
 
-### Step 1: Migrate user accounts from Supabase to Neon Auth
+### Step 1: Migrate user accounts from Supabase to Managed Better Auth
 
 If your project does not use Supabase Auth, you can skip this section.
 
@@ -54,19 +54,19 @@ SELECT * FROM ufn_get_user_emails_and_passwords();
 
 After running the query, export the results as a CSV file and save it locally as `user_data.csv`.
 
-#### 1.2: Set up Neon Auth and Data API
+#### 1.2: Set up Managed Better Auth and Data API
 
 In your Neon project dashboard:
 
 1. Navigate to the **Data API** page from the sidebar.
-2. Select **Neon Auth** as the authentication provider.
-3. Follow the on-screen instructions to set up **Neon Auth** with the **Neon Data API**.
-4. Navigate to the **Neon Auth** section from the sidebar.
+2. Select **Managed Better Auth** as the authentication provider.
+3. Follow the on-screen instructions to set up **Managed Better Auth** with the **Neon Data API**.
+4. Navigate to the **Managed Better Auth** section from the sidebar.
 5. In the **Configuration** tab, copy your **Project ID** and **Stack Secret Server Key** from the **Environment Variables** section.
 
-#### 1.3: Import Users into Neon Auth
+#### 1.3: Import Users into Managed Better Auth
 
-Now, we'll use a Node.js script to import the users from your `user_data.csv` file into Neon Auth.
+Now, we'll use a Node.js script to import the users from your `user_data.csv` file into Managed Better Auth.
 
 First, create a new project directory and install the necessary packages:
 
@@ -201,7 +201,7 @@ migrateUsers()
   });
 ```
 
-Before running the script, **update the `CONFIG` section** with your Neon Auth Project ID, Server Key, and the correct path to your `user_data.csv` file.
+Before running the script, **update the `CONFIG` section** with your Managed Better Auth Project ID, Server Key, and the correct path to your `user_data.csv` file.
 
 Execute the script from your terminal:
 
@@ -209,10 +209,10 @@ Execute the script from your terminal:
 npx ts-node migrate_users.ts
 ```
 
-Upon completion, all your users will be migrated into Neon Auth.
+Upon completion, all your users will be migrated into Managed Better Auth.
 
 <Admonition type="important" title="User IDs Have Changed">
-It's important to note that this migration process has assigned **new, unique `user_id`** values to all your users within Neon Auth. In the next steps, we will fix the broken references in your database that result from this change.
+It's important to note that this migration process has assigned **new, unique `user_id`** values to all your users within Managed Better Auth. In the next steps, we will fix the broken references in your database that result from this change.
 </Admonition>
 
 ### Step 2: Export the Supabase Public Schema
@@ -236,7 +236,7 @@ This is a crucial manual step. Open `supabase_dump.sql`, make the following chan
 
 #### 3.1. Update RLS policies
 
-Supabase and Neon Auth use different functions to identify the current user. You must replace all instances of `auth.uid()` with `auth.user_id()`.
+Supabase and Managed Better Auth use different functions to identify the current user. You must replace all instances of `auth.uid()` with `auth.user_id()`.
 
 - **Search for:** `auth.uid()`
 - **Replace with:** `auth.user_id()`
@@ -293,7 +293,7 @@ Refer to your `foreign_keys.sql` file to identify which constraints need to be r
 **Example script for a `todos` table:** (Repeat this process for every relevant table)
 
 ```sql
--- 1. Update the user_id column with the new ID from Neon Auth.
+-- 1. Update the user_id column with the new ID from Managed Better Auth.
 UPDATE
   public.todos AS t
 SET
@@ -306,10 +306,10 @@ JOIN
 WHERE
   t.user_id = tu.id;
 
--- 2. Adjust the column type to match Neon Auth's 'text' user ID type.
+-- 2. Adjust the column type to match Managed Better Auth's 'text' user ID type.
 ALTER TABLE public.todos ALTER COLUMN user_id TYPE text;
 
--- 3. Re-add the foreign key constraint, pointing to the new Neon Auth user table.
+-- 3. Re-add the foreign key constraint, pointing to the new Managed Better Auth user table.
 ALTER TABLE public.todos
 ADD CONSTRAINT todos_user_id_fkey -- Use your original constraint name
 FOREIGN KEY (user_id) REFERENCES neon_auth.users_sync(id) ON DELETE CASCADE;
@@ -390,12 +390,12 @@ psql -d "NEON_CONNECTION_STRING" -f permissions.sql
 
 ## Part 3: Migrating your application code (Next.js example)
 
-After migrating your database and user accounts, the final step is to update your application code to work with Neon Auth and the Neon Data API. This section guides you through refactoring a Next.js application from using Supabase's client libraries (`@supabase/ssr`, `@supabase/supabase-js`) to using Neon Auth's SDK (`@stackframe/stack`) and the standard `postgrest-js` library for data access.
+After migrating your database and user accounts, the final step is to update your application code to work with Managed Better Auth and the Neon Data API. This section guides you through refactoring a Next.js application from using Supabase's client libraries (`@supabase/ssr`, `@supabase/supabase-js`) to using Managed Better Auth's SDK (`@stackframe/stack`) and the standard `postgrest-js` library for data access.
 
 The primary change in this migration is moving from Supabase's single, integrated client library to a composable stack:
 
-1.  **Authentication:** You will replace Supabase Auth functions (`supabase.auth.getUser()`, custom middleware, and callback routes) with Neon Auth's SDK. Neon Auth handles session management and provides simple hooks (`useUser`) and server-side helpers (`stackServerApp.getUser()`) to access user data.
-2.  **Data Access:** You will replace the data access portion of the Supabase client (`supabase.from(...)`) with a dedicated PostgREST client (`postgrest-js`). The Neon Data API is PostgREST-compliant, meaning **your query syntax (e.g., `.select()`, `.insert()`, `.eq()`) will remain almost identical.** The main difference is how you initialize the client and authenticate requests using a JWT from Neon Auth.
+1.  **Authentication:** You will replace Supabase Auth functions (`supabase.auth.getUser()`, custom middleware, and callback routes) with Managed Better Auth's SDK. Managed Better Auth handles session management and provides simple hooks (`useUser`) and server-side helpers (`stackServerApp.getUser()`) to access user data.
+2.  **Data Access:** You will replace the data access portion of the Supabase client (`supabase.from(...)`) with a dedicated PostgREST client (`postgrest-js`). The Neon Data API is PostgREST-compliant, meaning **your query syntax (e.g., `.select()`, `.insert()`, `.eq()`) will remain almost identical.** The main difference is how you initialize the client and authenticate requests using a JWT from Managed Better Auth.
 
 ### Step 1: Update project dependencies
 
@@ -409,9 +409,9 @@ npm uninstall @supabase/ssr @supabase/supabase-js
 npm install @supabase/postgrest-js@1.19.4
 ```
 
-### Step 2: Initialize Neon Auth in your project
+### Step 2: Initialize Managed Better Auth in your project
 
-Neon Auth (powered by [Stack Auth](https://stack-auth.com), an open-source auth solution) provides a setup command to configure your Next.js application automatically. This command will scaffold necessary files, such as auth handlers and provider components.
+Managed Better Auth (powered by [Stack Auth](https://stack-auth.com), an open-source auth solution) provides a setup command to configure your Next.js application automatically. This command will scaffold necessary files, such as auth handlers and provider components.
 
 Run the following command in your project's root directory:
 
@@ -421,13 +421,13 @@ npx @stackframe/init-stack@latest --no-browser
 
 This command will perform the following actions:
 
-- **Create Auth Handlers:** Adds a catch-all route at `app/handler/[...stack]/page.tsx`. This single file handles all authentication UI flows (sign-up, sign-in, password reset, OAuth callbacks) provided by Neon Auth.
+- **Create Auth Handlers:** Adds a catch-all route at `app/handler/[...stack]/page.tsx`. This single file handles all authentication UI flows (sign-up, sign-in, password reset, OAuth callbacks) provided by Managed Better Auth.
 - **Update Layout:** Wraps your root layout (`app/layout.tsx`) in a `<StackProvider>` to make authentication state available throughout your app.
 - **Create Server Configuration:** Adds a `stack.tsx` file for server-side initialization of the auth SDK.
 
 ### Step 3: Configure data access client for Neon Data API
 
-Unlike the integrated Supabase client, you need to configure the PostgREST client to use the access token (JWT) generated by Neon Auth for authenticated requests.
+Unlike the integrated Supabase client, you need to configure the PostgREST client to use the access token (JWT) generated by Managed Better Auth for authenticated requests.
 
 1.  **Create an Access token provider:** This provider uses a React Context to make the current user's access token available to components that perform data fetching.
 
@@ -546,13 +546,13 @@ Unlike the integrated Supabase client, you need to configure the PostgREST clien
 
 ### Step 4: Refactor application code
 
-Now, replace Supabase-specific logic with Neon Auth and PostgREST calls.
+Now, replace Supabase-specific logic with Managed Better Auth and PostgREST calls.
 
 #### 4.1. Protecting routes (Server-Side)
 
 Replace `supabase.auth.getUser()` with `stackServerApp.getUser()` to protect pages and server actions.
 
-<CodeTabs labels={["Before (Supabase)", "After (Neon Auth)"]}>
+<CodeTabs labels={["Before (Supabase)", "After (Managed Better Auth)"]}>
 
 ```typescript shouldWrap
 // File: app/protected/page.tsx (Supabase)
@@ -573,7 +573,7 @@ export default async function PrivatePage() {
 ```
 
 ```typescript shouldWrap
-// File: app/protected/page.tsx (Neon Auth)
+// File: app/protected/page.tsx (Managed Better Auth)
 
 import { redirect } from 'next/navigation'
 import { stackServerApp } from '@/stack/server';
@@ -582,7 +582,7 @@ export default async function PrivatePage() {
     const user = await stackServerApp.getUser();
 
     if (!user || !user.id) {
-        redirect('/handler/login') // Redirect to Neon Auth's built-in login page
+        redirect('/handler/login') // Redirect to Managed Better Auth's built-in login page
     }
 
     return <p>Hello {user.primaryEmail}</p>
@@ -595,7 +595,7 @@ export default async function PrivatePage() {
 
 Replace the `supabase` client instance with the new `usePostgrest()` hook for data operations. Notice how the query syntax remains unchanged.
 
-<CodeTabs labels={["Before (Supabase)", "After (Neon Auth + PostgREST)"]}>
+<CodeTabs labels={["Before (Supabase)", "After (Managed Better Auth + PostgREST)"]}>
 
 ```typescript shouldWrap
 // File: components/TodoApp.tsx (Supabase)
@@ -631,7 +631,7 @@ async function signout() {
 ```
 
 ```typescript shouldWrap
-// File: components/TodoApp.tsx (Neon Auth + PostgREST)
+// File: components/TodoApp.tsx (Managed Better Auth + PostgREST)
 
 import { usePostgrest } from '@/lib/postgrest';
 import type { CurrentUser } from '@stackframe/stack';
@@ -659,7 +659,7 @@ async function addTodo(e: React.FormEvent) {
 }
 
 async function signout() {
-  await user.signOut(); // Use Neon Auth user object method
+  await user.signOut(); // Use Managed Better Auth user object method
 }
 ```
 
@@ -667,9 +667,9 @@ async function signout() {
 
 #### 4.3. Client-side authentication state
 
-Replace Supabase session handling (`getSession`, `onAuthStateChange`) with the `useUser` hook from Neon Auth for a simpler, more modern React approach.
+Replace Supabase session handling (`getSession`, `onAuthStateChange`) with the `useUser` hook from Managed Better Auth for a simpler, more modern React approach.
 
-<CodeTabs labels={["Before (Supabase)", "After (Neon Auth)"]}>
+<CodeTabs labels={["Before (Supabase)", "After (Managed Better Auth)"]}>
 
 ```typescript shouldWrap
 // File: app/page.tsx (Supabase)
@@ -701,7 +701,7 @@ export default function Page() {
 ```
 
 ```typescript shouldWrap
-// File: app/page.tsx (Neon Auth)
+// File: app/page.tsx (Managed Better Auth)
 
 "use-client";
 import { useUser } from '@stackframe/stack';
@@ -721,15 +721,15 @@ export default function Page() {
 
 </CodeTabs>
 
-    <Admonition type="info" title="Neon Auth Hooks">
-      The Neon Auth SDK for Next.js offers a comprehensive set of hooks to manage authentication and user data throughout your application. It provides distinct tools tailored for different rendering environments, such as the `useUser` hook for Client Components and the `stackServerApp` object for server-side logic.
+    <Admonition type="info" title="Managed Better Auth Hooks">
+      The Managed Better Auth SDK for Next.js offers a comprehensive set of hooks to manage authentication and user data throughout your application. It provides distinct tools tailored for different rendering environments, such as the `useUser` hook for Client Components and the `stackServerApp` object for server-side logic.
 
-    To explore the full API, including hooks for more advanced features like handling teams and permissions, refer to the [Neon Auth: Next.js SDK Overview](/docs/neon-auth/sdk/nextjs/overview).
+    To explore the full API, including hooks for more advanced features like handling teams and permissions, refer to the [Managed Better Auth: Next.js SDK Overview](/docs/neon-auth/sdk/nextjs/overview).
     </Admonition>
 
 ### Step 5: Clean up deprecated Supabase files
 
-After refactoring, you can safely remove the Supabase-specific helper files and custom authentication routes, as Neon Auth's SDK handles these functionalities automatically.
+After refactoring, you can safely remove the Supabase-specific helper files and custom authentication routes, as Managed Better Auth's SDK handles these functionalities automatically.
 
 Delete the following files and directories:
 
@@ -740,11 +740,11 @@ Delete the following files and directories:
 - `app/auth/callback/` (directory)
 - `app/auth/confirm/` (directory)
 
-Your application code is now fully migrated to Neon Auth and the Neon Data API.
+Your application code is now fully migrated to Managed Better Auth and the Neon Data API.
 
 For a detailed example of the code migration process, refer to this example pull request: [Supabase to Neon Todo App Migration](https://github.com/neondatabase-labs/supabase-to-neon-todo-app/pull/3/files).
 
-The repository includes two branches: [supabase](https://github.com/neondatabase-labs/supabase-to-neon-todo-app/tree/supabase) and [neon](https://github.com/neondatabase-labs/supabase-to-neon-todo-app/tree/neon) showcasing the before and after states of a sample todo application. This demonstrates the transition from Supabase Auth, Row-Level Security (RLS), and the Supabase Postgres Data API to Neon Auth, RLS, and the Neon PostgREST Data API.
+The repository includes two branches: [supabase](https://github.com/neondatabase-labs/supabase-to-neon-todo-app/tree/supabase) and [neon](https://github.com/neondatabase-labs/supabase-to-neon-todo-app/tree/neon) showcasing the before and after states of a sample todo application. This demonstrates the transition from Supabase Auth, Row-Level Security (RLS), and the Supabase Postgres Data API to Managed Better Auth, RLS, and the Neon PostgREST Data API.
 
 ## Part 4: Upgrading your development workflow with Database Branching
 
@@ -793,7 +793,7 @@ For most developers the primary use case for branching is creating preview envir
 
 Congratulations! You've successfully migrated your Supabase database, users, and Row-Level Security (RLS) policies to Neon. Data integrity is intact, security policies are fully operational, and users can sign in using their original passwords with no resets required.
 
-If your users were authenticated via OAuth providers like GitHub or Google in Supabase, you can seamlessly continue using these in Neon Auth without any issues. Note that Neon Auth currently supports OAuth for Microsoft, Google, and GitHub. For more details on setting up OAuth in production, refer to the [Neon Auth best practices documentation](https://neon.com/docs/neon-auth/best-practices#production-oauth-setup).
+If your users were authenticated via OAuth providers like GitHub or Google in Supabase, you can seamlessly continue using these in Managed Better Auth without any issues. Note that Managed Better Auth currently supports OAuth for Microsoft, Google, and GitHub. For more details on setting up OAuth in production, refer to the [Managed Better Auth best practices documentation](https://neon.com/docs/neon-auth/best-practices#production-oauth-setup).
 
 </Steps>
 
@@ -803,9 +803,9 @@ If your users were authenticated via OAuth providers like GitHub or Google in Su
 - [Migrating data to Neon](/docs/import/migrate-from-postgres)
 - [Migrate from Supabase](/docs/import/migrate-from-supabase)
 - [Getting started with Neon Data API](/docs/data-api/get-started)
-- [Neon Auth](/docs/neon-auth/overview)
-- [Getting started with Neon Auth and Next.js](/guides/neon-auth-nextjs)
-- [A Simple 3-Step Process to Migrate from Supabase Auth to Neon Auth](/blog/supabase-auth-neon-auth)
+- [Managed Better Auth](/docs/neon-auth/overview)
+- [Getting started with Managed Better Auth and Next.js](/guides/neon-auth-nextjs)
+- [A Simple 3-Step Process to Migrate from Supabase Auth to Managed Better Auth](/blog/supabase-auth-neon-auth)
 - [Ship software faster using Neon branches as ephemeral environments](/branching)
 
 <NeedHelp/>

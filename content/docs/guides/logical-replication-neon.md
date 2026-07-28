@@ -11,7 +11,7 @@ summary: >-
   `pgoutput` and `wal2json`.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T13:42:19.210Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
@@ -24,7 +24,7 @@ When replicating data from Neon, enable logical replication on your Neon project
 Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
 </Admonition>
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -37,7 +37,17 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 
 <TabItem>
 
-Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+Use the [Neon CLI](/docs/reference/neon-cli) `projects update` command with `--enable-logical-replication`. Replace `$PROJECT_ID` with your project ID. The `--yes` flag skips the confirmation prompt.
+
+```bash
+neon projects update $PROJECT_ID --enable-logical-replication --yes
+```
+
+</TabItem>
+
+<TabItem>
+
+Use the [Update project](/docs/reference/api/projects/update-project) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/$PROJECT_ID' \

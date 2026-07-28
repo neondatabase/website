@@ -9,7 +9,7 @@ summary: >-
   creation, DATABASE_URL credential storage, and config updates for dev, test,
   and runtime environments.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/phoenix-prompt.md"
@@ -149,5 +149,10 @@ mix phx.server
 ```
 
 </Steps>
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

@@ -61,7 +61,7 @@ Omitting `org_id` on `neon_project` can place resources in the wrong organizatio
 
 ## Pulumi via the REST API
 
-Pulumi doesn't have an official Neon provider yet. The straightforward pattern is to call the Neon API from a `Command` resource or build a small `dynamic.ResourceProvider`. The [Neon API reference](https://api-docs.neon.tech) documents every endpoint.
+Pulumi doesn't have an official Neon provider yet. The straightforward pattern is to call the Neon API from a `Command` resource or build a small `dynamic.ResourceProvider`. The [Neon API Reference](/docs/reference/api) documents every endpoint.
 
 ```typescript
 import * as command from "@pulumi/command";

@@ -11,7 +11,7 @@ summary: >-
   A Schema Diff GitHub Action is available to post diff comments on pull
   requests.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -72,6 +72,8 @@ You can use the Neon CLI to:
 - Compare the latest schemas of any two branches
 - Compare against a specific point in its own or another branch's history
 
+For a git-style unified diff between two branches, you can also use the top-level [`neon diff`](/docs/cli/diff) shortcut.
+
 Use the `schema-diff` subcommand from the `branches` command:
 
 ```bash
@@ -101,7 +103,7 @@ To find out what other comparisons you can make, see [Neon CLI commands — bran
 
 ### Using the Neon API
 
-The [compare_schema](https://api-docs.neon.tech/reference/getprojectbranchschemacomparison) endpoint lets you compare schemas between Neon branches to track schema changes. The response highlights differences in a `diff` format, making it a useful tool for integrating schema checks into CI/CD workflows.
+The [compare_schema](/docs/reference/api/branches/get-project-branch-schema-comparison) endpoint lets you compare schemas between Neon branches to track schema changes. The response highlights differences in a `diff` format, making it a useful tool for integrating schema checks into CI/CD workflows.
 
 Another use case for schema diff via the Neon API is AI agent-driven workflows. The `compare_schema` endpoint allows AI agents to programmatically retrieve schema differences by comparing two branches.
 

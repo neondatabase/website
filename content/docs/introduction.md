@@ -3,8 +3,8 @@ title: Neon documentation
 subtitle: Neon is the backend for apps and agents.
 summary: >-
   Neon documentation root covers the full Neon backend platform: serverless
-  Postgres with branching and autoscaling, Neon Auth, Data API, and upcoming
-  Storage and AI Gateway services. Use this page to reach quickstarts, framework
+  Postgres with branching and autoscaling, Managed Better Auth, Data API, and upcoming
+  Object Storage and AI Gateway services. Use this page to reach quickstarts, framework
   connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
   editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
 redirectFrom:
@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-06-22T13:48:28.109Z'
+updatedOn: '2026-07-15T20:33:08.022Z'
 ---
 
 ## Getting started
@@ -27,35 +27,39 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
   />
   <GuidedPath
     title="Build a full backend"
-    description="Next.js + Postgres + Neon Auth + Drizzle. The full Neon stack, end-to-end, from create-next-app to deployed."
+    description="Next.js on the full Neon backend: Postgres, Auth, Object Storage, and AI Gateway, from create-next-app to deployed."
     href="/docs/get-started/full-backend-quickstart"
   />
 </TwinPaths>
 
+<TourCallout
+  title="Tour the Neon backend"
+  description="Learn how Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
+  href="/docs/get-started/backend-overview"
+/>
+
 ## Products
 
-Build backends for web apps and agents with Neon Postgres, Auth, Storage, and AI Gateway. <br />
+Build backends for web apps and agents with Neon Postgres, Auth, Object Storage, and AI Gateway. <br />
 Every service is agent-ready: instant, branchable, and serverless.
 
 <DetailIconCards className="my-7!" cols={3} theme="green-flat">
 
 <a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
 
-<a href="/docs/auth/overview" description="Managed auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Neon Auth</a>
+<a href="/docs/auth/overview" description="Managed Better Auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Auth</a>
 
 <a href="/docs/data-api/overview" description="HTTPS queries with no backend code. Drop-in compatible with Supabase." icon="network">Data API</a>
 
-<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Private Preview">Storage</a>
+<a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Beta" tagTheme="orange-muted">Object Storage</a>
 
-<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Private Preview">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Beta" tagTheme="orange-muted">Functions</a>
 
-<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Private Preview">AI Gateway</a>
+<a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Beta" tagTheme="orange-muted">AI Gateway</a>
 
 </DetailIconCards>
 
-## Early access to the Neon backend platform
-
-<RequestForm type="backend-platform" title="Join the waitlist" buttonText="Notify me" />
+New to Object Storage, Functions, or AI Gateway? Start with the [Neon backend beta guide](/docs/get-started/backend-beta).
 
 ## Connect your framework
 

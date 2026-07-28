@@ -8,7 +8,7 @@ summary: >-
   cost-tracking tooling. Plan-specific rates, transfer allowances, and
   granularity lookback limits are documented here.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 This guide helps you use the Neon API to fetch your consumption data, convert raw metrics into human-readable numbers, and understand how your bill is calculated. To monitor usage in the Neon Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -17,7 +17,7 @@ It applies to **Launch**, **Scale**, **Agent**, and **Enterprise** plans. Consum
 
 ## Fetch your usage
 
-The [consumption history endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) returns per-project, per-day (or per-hour, or per-month) usage for every billable metric.
+The [consumption history endpoint](/docs/reference/api/consumption/get-consumption-history-per-project-v2) returns per-project, per-day (or per-hour, or per-month) usage for every billable metric.
 
 ```sh
 curl "https://console.neon.tech/api/v2/consumption_history/v2/projects?\
@@ -131,11 +131,11 @@ Repeat for each day in the billing period and sum the billable branch-hours acro
 
 ### Public transfer allowance
 
-On paid plans, the 500 GB free allowance applies **org-wide**, not per project. Sum public transfer across all projects before subtracting the allowance:
+On paid plans, each project receives a 500 GB free allowance. Subtract the allowance from each project's public transfer, then sum the billable usage:
 
 ```
-billable GB = max(0, total_org_GB - 500)
-cost = billable_GB x $0.10
+billable GB per project = max(0, project_GB - 500)
+total cost = sum(billable_GB per project) x $0.10
 ```
 
 ### Granularity and precision
@@ -159,7 +159,7 @@ To reconcile the numbers yourself:
 1. Fetch consumption history for the billing month (`from` = month start, `to` = month end or current date).
 2. Sum each metric across all projects.
 3. Convert to billing units using the formulas above.
-4. Apply allowances (500 GB public transfer, branch allowance per project).
+4. Apply the 500 GB public transfer allowance and branch allowance to each project.
 5. Multiply by your plan's rates.
 
 The result should closely match the costs in your weekly email. Small differences can occur due to:

@@ -17,7 +17,7 @@ Most managed Postgres providers expose a REST or gRPC API for cluster lifecycle 
 
 ## What the Neon API gives you
 
-The [Neon API](/docs/reference/api-reference) covers:
+The [Neon API](/docs/reference/api) covers:
 
 - Projects: create, list, update, delete
 - Branches: create from any point in time, reset from parent, restore, delete
@@ -66,4 +66,4 @@ Most managed Postgres providers expose a REST API for cluster lifecycle, but the
 
 Neon's distinction is that the `POST /branches` endpoint returns a working connection string in seconds because branches are a metadata pointer to existing storage, not a physical clone. That's what makes per-PR, per-CI, and per-tenant flows practical.
 
-<CTA title="Browse the API reference" description="Every endpoint for Neon projects, branches, computes, and roles." buttonText="Open the docs" buttonUrl="/docs/reference/api-reference" />
+<CTA title="Browse the API reference" description="Every endpoint for Neon projects, branches, computes, and roles." buttonText="Open the docs" buttonUrl="/docs/reference/api" />

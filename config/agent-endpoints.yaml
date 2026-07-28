@@ -1,0 +1,145 @@
+# Catalog of Neon's machine-readable agent / discovery endpoints.
+#
+# This is the single inventory of every well-known (and custom) endpoint that
+# documents Neon to agents: skills, MCP, API/OpenAPI, OAuth, the AI-Gateway
+# model catalog, and the llms.txt index. It is spec-AWARE: each entry links the
+# governing spec and describes the surface in human terms.
+#
+# The raw values these files are built from live in the spec-agnostic source of
+# truth src/constants/agent-discovery.js. scripts/verify-agent-endpoints.mjs
+# reads THIS file, and for every entry runs the validator named in `validator`
+# to check that the served payload (a) matches its spec and (b) is up to date
+# with the source of truth. Add a new discovery surface by adding an entry here.
+#
+# Fields:
+#   id            stable identifier (used in the report)
+#   name          display name
+#   description   human-readable purpose
+#   servedPath    path the file is served at on neon.com
+#   contentType   expected Content-Type when served
+#   spec:         governing spec — { name, url, standard: true|false }
+#   validator     which validator in verify-agent-endpoints.mjs handles it
+#   check         how the payload is obtained offline:
+#                   builder -> a function in constants/agent-discovery (routes)
+#                   file    -> a committed file on disk
+#                   live    -> only fetched in --live (generated at build/external)
+#   builder       (check: builder) function name in constants/agent-discovery
+#   routeFile     (check: builder) route handler that wraps the builder
+#   file          (check: file) committed artifact to validate
+#   generator     script that regenerates the artifact (shown in errors)
+#   liveSync      (optional) script run in --live to compare against upstream
+#   rewriteFile   (check: live) file that must declare the serving rewrite
+
+version: 1
+
+endpoints:
+  - id: mcp-server-card
+    name: MCP server card
+    description: >-
+      Advertises Neon's MCP connect endpoint and OAuth self-onboarding to MCP
+      clients and discovery crawlers (e.g. integrations.sh).
+    servedPath: /.well-known/mcp/server-card.json
+    contentType: application/json
+    spec:
+      name: MCP server card
+      url: https://modelcontextprotocol.io
+      standard: true
+    validator: mcp-server-card
+    check: builder
+    builder: buildMcpServerCard
+    routeFile: src/app/.well-known/mcp/server-card.json/route.js
+
+  - id: api-catalog
+    name: API catalog
+    description: >-
+      RFC 9727 linkset pointing agents at the Neon REST API base, its OpenAPI
+      document, and the human API docs.
+    servedPath: /.well-known/api-catalog
+    contentType: application/linkset+json
+    spec:
+      name: RFC 9727 API catalog
+      url: https://www.rfc-editor.org/rfc/rfc9727
+      standard: true
+    validator: api-catalog
+    check: builder
+    builder: buildApiCatalog
+    routeFile: src/app/.well-known/api-catalog/route.js
+
+  - id: agent-skills-index
+    name: Agent skills index
+    description: >-
+      Lists Neon's reusable agent skills (SKILL.md) with content digests so
+      clients can discover and integrity-check them.
+    servedPath: /.well-known/agent-skills/index.json
+    contentType: application/json
+    spec:
+      name: agentskills.io discovery 0.2.0
+      url: https://schemas.agentskills.io/discovery/0.2.0/schema.json
+      standard: true
+    validator: agent-skills-index
+    check: file
+    file: public/.well-known/agent-skills/index.json
+    generator: src/scripts/generate-skills-index.js
+
+  - id: ai-catalog
+    name: AI catalog
+    description: >-
+      ai-catalog.io host manifest listing Neon's MCP server and agent skills as
+      a typed discovery + trust layer.
+    servedPath: /.well-known/ai-catalog.json
+    contentType: application/ai-catalog+json
+    spec:
+      name: ai-catalog.io
+      url: https://ai-catalog.io
+      standard: true
+    validator: ai-catalog
+    check: file
+    file: src/app/.well-known/ai-catalog.json/catalog.json
+    generator: src/scripts/generate-skills-index.js
+
+  - id: models-json
+    name: AI Gateway model catalog (custom)
+    description: >-
+      Neon AI Gateway model catalog served at /models.json. Custom format that
+      mirrors the models.dev `neon` provider; must stay in sync with it.
+    servedPath: /models.json
+    contentType: application/json
+    spec:
+      name: Neon AI Gateway models (custom; mirrors models.dev)
+      url: https://models.dev/api.json
+      standard: false
+    validator: models-json
+    check: file
+    file: src/app/models.json/data.json
+    generator: src/scripts/generate-models-json.js
+    liveSync: src/scripts/check-models-sync.js
+
+  - id: llms-txt
+    name: llms.txt
+    description: >-
+      Plain-language docs index for LLMs. Generated at build time from the docs
+      tree, so it is only validated live.
+    servedPath: /llms.txt
+    contentType: text/plain
+    spec:
+      name: llms.txt
+      url: https://llmstxt.org
+      standard: true
+    validator: llms-txt
+    check: live
+    generator: src/scripts/generate-llms-index.js
+
+  - id: openapi
+    name: OpenAPI document
+    description: >-
+      Canonical Neon REST API OpenAPI spec, aliased to the conventional
+      /openapi.json path via a rewrite.
+    servedPath: /openapi.json
+    contentType: application/json
+    spec:
+      name: OpenAPI
+      url: https://spec.openapis.org/oas/latest.html
+      standard: true
+    validator: openapi
+    check: live
+    rewriteFile: next.config.js

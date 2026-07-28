@@ -6,18 +6,31 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-07-20T19:53:53.968Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platform.openai.com/docs/api-reference/responses) through Neon AI Gateway. Use it with the OpenAI SDK's `responses.create()` method by changing only the `baseURL`.
 
-**Base URL:** `https://<branch-host>/ai-gateway/openai/v1`
+**Base URL:** `https://<branch-host>/openai/v1`
+
+This endpoint is also reachable at the longer `/ai-gateway/openai/v1/responses` path. Both behave identically and neither is deprecated. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+
+If you're using an OpenAI-compatible client that accepts a base URL, set it to either `https://<branch-host>/openai/v1` or `https://<branch-host>/ai-gateway/openai/v1`. The request and response shapes are the standard OpenAI Responses API shape.
 
 <Admonition type="warning">
 All codex model variants (`gpt-5-3-codex`, `gpt-5-2-codex`, `gpt-5-1-codex-max`, `gpt-5-1-codex-mini`) **require this endpoint**. They do not work with the [chat completions endpoint](/docs/ai-gateway/chat-completions).
 </Admonition>
+
+## Setup
+
+Set these environment variables. See [Get started](/docs/ai-gateway/get-started) for how to obtain them.
+
+```bash
+NEON_AI_GATEWAY_TOKEN=nt_live_...
+NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
+```
 
 ## Supported models
 
@@ -34,8 +47,11 @@ This endpoint accepts OpenAI models only:
 | `gpt-5-1-codex-max`  | Requires this endpoint |
 | `gpt-5-1-codex-mini` | Requires this endpoint |
 | `gpt-5-1`            |                        |
+| `gpt-5`              |                        |
+| `gpt-5-mini`         |                        |
+| `gpt-5-nano`         |                        |
 
-Sending a non-OpenAI model ID returns `400 model is not available on this endpoint`.
+Sending a non-OpenAI model ID returns `400 model "<model-id>" is not available on the openai_responses endpoint`.
 
 ## Basic request
 
@@ -46,7 +62,7 @@ import OpenAI from 'openai';
 
 const client = new OpenAI({
   apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/openai/v1`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/openai/v1`,
 });
 
 const response = await client.responses.create({
@@ -63,7 +79,7 @@ import os
 
 client = OpenAI(
     api_key=os.environ['NEON_AI_GATEWAY_TOKEN'],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/openai/v1",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/openai/v1",
 )
 
 response = client.responses.create(
@@ -75,7 +91,7 @@ print(response.output_text)
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/openai/v1/responses" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -115,7 +131,7 @@ with client.responses.stream(
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/openai/v1/responses" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
@@ -127,12 +143,39 @@ curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/openai/v1/responses" \
 
 </CodeTabs>
 
+## Image generation with Vercel AI SDK
+
+The `@neon/ai-sdk-provider` package re-exports the OpenAI provider's Responses image-generation tool as `neon.tools.imageGeneration()`. Use it with OpenAI-routed models such as `gpt-5-mini`.
+
+Use `streamText`, not `generateText`: image results are returned as tool-result parts, and a full base64 image reliably runs into size limits on a non-streaming response.
+
+```typescript shouldWrap
+import { neon } from '@neon/ai-sdk-provider';
+import { streamText } from 'ai';
+
+const result = streamText({
+  model: neon('gpt-5-mini'),
+  messages: [{ role: 'user', content: 'Create a simple Neon database mascot.' }],
+  tools: {
+    image: neon.tools.imageGeneration({
+      outputFormat: 'jpeg',
+      size: '1024x1024',
+      partialImages: 3,
+    }),
+  },
+});
+
+return result.toUIMessageStreamResponse();
+```
+
+AI SDK `generateImage()` is not supported by AI Gateway; image generation is available only through this Responses tool.
+
 ## Error handling
 
-| Status            | Message                                   | Cause                                  |
-| ----------------- | ----------------------------------------- | -------------------------------------- |
-| `400 Bad Request` | `unknown model`                           | Model ID not in the catalog            |
-| `400 Bad Request` | `model is not available on this endpoint` | Non-OpenAI model sent to this endpoint |
+| Status            | Message                                                                | Cause                                  |
+| ----------------- | ---------------------------------------------------------------------- | -------------------------------------- |
+| `400 Bad Request` | `unknown model "<model-id>"`                                           | Model ID not in the catalog            |
+| `400 Bad Request` | `model "<model-id>" is not available on the openai_responses endpoint` | Non-OpenAI model sent to this endpoint |
 
 For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 

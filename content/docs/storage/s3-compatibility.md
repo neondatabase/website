@@ -1,20 +1,20 @@
 ---
 title: S3 compatibility
-subtitle: Which S3 operations Neon Storage supports
+subtitle: Which S3 operations Neon Object Storage supports
 summary: >-
-  Neon Storage implements core S3 operations. It is compatible with the AWS SDK
+  Neon Object Storage implements core S3 operations. It is compatible with the AWS SDK
   for JavaScript, boto3, and the AWS CLI. Not all S3 operations are supported.
   This page lists what works, what returns 501, and known limitations.
 enableTableOfContents: true
-updatedOn: '2026-06-15T14:48:06.925Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
 
-Neon Storage is compatible with the S3 API for core operations. It works with the AWS SDK for JavaScript (`@aws-sdk/client-s3`), boto3, the AWS CLI, and other S3-compatible tools. Not all S3 API operations are available.
+Neon Object Storage is compatible with the S3 API for core operations. It works with the AWS SDK for JavaScript (`@aws-sdk/client-s3`), boto3, the AWS CLI, and other S3-compatible tools. Not all S3 API operations are available.
 
 <Admonition type="note">
-Configure your S3 client with `forcePathStyle: true` (JavaScript) or `endpoint_url` (Python/CLI). Neon Storage uses path-style addressing only. See [Get started](/docs/storage/get-started) for setup details.
+Configure your S3 client with `forcePathStyle: true` (JavaScript) or `endpoint_url` (Python/CLI). Neon Object Storage uses path-style addressing only. See [Get started](/docs/storage/get-started) for setup details.
 </Admonition>
 
 ## Supported operations

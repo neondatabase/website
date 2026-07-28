@@ -4,7 +4,7 @@ subtitle: Learn how Neon's HIPAA architecture, BAA, audit logging, and shared re
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-04T00:00:00.000Z'
-updatedOn: '2026-05-07T07:30:01.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 When building a healthcare application, understanding how your database manages Protected Health Information (PHI) is essential. HIPAA compliance isn’t just a checklist. It demands strict safeguards such as data isolation, encryption, and continuous monitoring. Compliance also follows a shared responsibility model: while infrastructure providers secure the foundational layers, your application code must enforce data minimization and access controls to keep patient data safe.
@@ -19,7 +19,7 @@ When evaluating Neon for healthcare workloads, you likely have a few specific re
 - **Availability & Cost:** HIPAA compliance is currently included at no additional cost on the [Scale plan](/docs/introduction/plans). A 15% surcharge will be applied to your monthly invoice in the future when billing begins. You will be notified well in advance of any billing changes. Free and Launch plan projects are not HIPAA compliant and should not be used for PHI.
 - **Architecture & Isolation:** HIPAA-enabled projects run on specially configured infrastructure. Neon enforces strict tenant isolation at the project level, network controls, and storage-level encryption (AES-256).
 - **Compliant Features:** Core Postgres operations, database branching, read replicas, backups, and Point-in-Time Recovery (PITR) are fully covered under the BAA. [Data anonymization](/docs/workflows/data-anonymization) is also recommended in non-production branches.
-- **Feature Exclusions:** Neon Auth and the Data API reside outside the HIPAA boundary and must not be used for PHI.
+- **Feature Exclusions:** Managed Better Auth and the Data API reside outside the HIPAA boundary and must not be used for PHI.
 - **Shared Responsibility:** If you use logical replication or Change Data Capture (CDC) to stream data out of Neon, you are responsible for the destination's compliance.
 - **Audit Logging:** Audit logs are securely retained for the duration specified in your Business Associate Agreement (BAA). If you need to export logs for audits or investigations, you can [raise a support request](https://console.neon.tech/app/projects?modal=support).
 - **Subprocessors:** Neon uses compliant subprocessors that also sign data processing agreements. See the full list at [neon.com/subprocessors](https://neon.com/subprocessors).

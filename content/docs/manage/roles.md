@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -122,14 +122,14 @@ The Neon CLI supports creating and deleting roles. For instructions, see [Neon C
 
 ## Manage roles with the Neon API
 
-Role actions performed in the Neon Console can also be performed using Neon API role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Role actions performed in the Neon Console can also be performed using Neon API role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API Reference](/docs/reference/api).
 
 Roles created with the Neon API are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
 
 In Neon, roles belong to branches, which means that when you create a role, it is created in a branch. Role-related requests are therefore performed using branch API methods.
 
 <Admonition type="note">
-The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to method's request body schema in the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -142,7 +142,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a role with the API
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
 
 ```http
 POST /projects/{project_id}/branches/{branch_id}/roles
@@ -169,7 +169,7 @@ curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-m
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create role](/docs/reference/api/branches/create-project-branch-role) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -202,7 +202,7 @@ For attribute definitions, find the [Create role](https://api-docs.neon.tech/ref
 
 ### List roles with the API
 
-The following Neon API method lists roles for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchroles).
+The following Neon API method lists roles for the specified branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/list-project-branch-roles).
 
 ```http
 GET /projects/{project_id}/branches/{branch_id}/roles
@@ -219,7 +219,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [List roles](https://api-docs.neon.tech/reference/listprojectbranchroles) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List roles](/docs/reference/api/branches/list-project-branch-roles) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -246,7 +246,7 @@ For attribute definitions, find the [List roles](https://api-docs.neon.tech/refe
 
 ### Reset a password with the API
 
-The following Neon API method resets the password for the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword).
+The following Neon API method resets the password for the specified role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/reset-project-branch-role-password).
 
 ```http
 POST /projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password
@@ -264,7 +264,7 @@ curl -X 'POST' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Reset role password](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Reset role password](/docs/reference/api/branches/reset-project-branch-role-password) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -297,7 +297,7 @@ For attribute definitions, find the [Reset role password](https://api-docs.neon.
 
 ### Delete a role with the API
 
-The following Neon API method deletes the specified role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchrole).
+The following Neon API method deletes the specified role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/delete-project-branch-role).
 
 ```http
 DELETE /projects/{project_id}/branches/{branch_id}/roles/{role_name}
@@ -315,7 +315,7 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Delete role](https://api-docs.neon.tech/reference/deleteprojectbranchrole) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete role](/docs/reference/api/branches/delete-project-branch-role) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -395,7 +395,7 @@ Roles with `NOLOGIN` are commonly used for permission management. For an example
 
 The Neon API and CLI also support creating `NOLOGIN` roles:
 
-- The Neon API [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint supports a `no_login` attribute.
+- The Neon API [Create role](/docs/reference/api/branches/create-project-branch-role) endpoint supports a `no_login` attribute.
 - The Neon CLI [`neon roles create`](/docs/cli/roles#create) command supports a `--no-login` option.
 
 ## Reserved role names

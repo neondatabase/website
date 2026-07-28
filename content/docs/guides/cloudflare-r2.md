@@ -11,15 +11,15 @@ summary: >-
   setup, CORS configuration, metadata schema, and backend endpoints in
   JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask, boto3, psycopg2).
 enableTableOfContents: true
-updatedOn: '2026-06-19T20:06:14.133Z'
+updatedOn: '2026-07-15T17:54:41.160Z'
 ---
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
 
 <Callout title="Neon now offers native storage">
-Neon Storage is S3-compatible object storage built into the Neon backend. Storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Storage is currently in private preview.
+Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in beta.
 
-For more information, see [Neon Storage](/docs/storage/overview).
+For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>
 
 This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file metadata in your Neon database, while using R2 for file storage.

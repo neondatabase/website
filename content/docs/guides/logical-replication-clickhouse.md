@@ -10,7 +10,7 @@ summary: >-
   wal_level=logical for the entire Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -58,7 +58,7 @@ To enable logical replication in Neon:
 
 <TabItem>
 
-Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+Use the [Update project](/docs/reference/api/projects/update-project) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
 
 ```bash
 curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID" \
@@ -112,7 +112,7 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \

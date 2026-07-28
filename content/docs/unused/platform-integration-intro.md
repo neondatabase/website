@@ -6,7 +6,7 @@ isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
 redirectTo: /docs/guides/platform-integration-overview
-updatedOn: '2026-02-19T02:27:13.548Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to integrate your platform or service with Neon, set usage limits for your users, and more.
@@ -31,7 +31,7 @@ Find out how you can integrate with Neon.
 
 <a href="/docs/guides/platform-integration-get-started" description="Learn the essentials for integrating with Neon" icon="import">Get started</a>
 
-<a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">Neon API</a>
+<a href="/docs/reference/api" description="Integrate using the Neon API" icon="transactions">Neon API</a>
 
 <a href="/docs/guides/oauth-integration" description="Integrate with Neon using OAuth" icon="check">OAuth</a>
 

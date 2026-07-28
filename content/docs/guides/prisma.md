@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
@@ -267,6 +267,13 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 
 - [Schema migrations with Prisma](/docs/guides/prisma-migrations): Full tutorial for building an app with migrations
 - [Neon serverless driver](/docs/serverless/serverless-driver): Learn more about the driver powering the adapter
+
+## Next steps: Neon backend services
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 

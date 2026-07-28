@@ -195,7 +195,7 @@ const DropdownMenu = ({ gitHubPath, className }) => {
         </button>
       </div>
       {isOpen && (
-        <div className="absolute top-8.25 right-0 z-10 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0">
+        <div className="absolute top-8.25 right-0 z-50 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0">
           <CopyMarkdownButton markdownPath={markdownPath} description="Copy page as Markdown" />
           {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
             <DropdownItem

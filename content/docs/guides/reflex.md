@@ -9,7 +9,7 @@ summary: >-
   covering virtual environment setup, psycopg2-binary installation, schema
   migrations, and a working CRUD example.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/reflex-prompt.md"
@@ -471,5 +471,10 @@ You should see the Customer Data App interface, where you can add, view, and del
 ![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
 
 </Steps>
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

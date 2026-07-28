@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/sqlalchemy-prompt.md" 
@@ -125,5 +125,10 @@ For schema migration with SQLAlchemy, see our guide:
 <a href="/docs/guides/sqlalchemy-migrations" description="Schema migration with Neon Postgres and SQLAlchemy" icon="app-store" icon="app-store">SQLAlchemy Migrations</a>
 
 </DetailIconCards>
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

@@ -8,14 +8,14 @@ summary: >-
   billing trends. To find your org_id before querying, use GET
   `/users/me/organizations` with a personal API key.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 You can use the Neon API to retrieve project-level consumption metrics for your organization:
 
-| Metric                                                                                           | Description                                                                       | Plan Availability |
-| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ----------------- |
-| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale             |
+| Metric                                                                                          | Description                                                                       | Plan Availability |
+| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------- |
+| [Project-level](/docs/reference/api/consumption/get-consumption-history-per-project) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale             |
 
 ## Finding organizations for consumption queries
 
@@ -71,7 +71,7 @@ curl --request GET \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Retrieve project consumption metrics](/docs/reference/api/consumption/get-consumption-history-per-project) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json shouldWrap
 {
