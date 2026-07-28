@@ -128,6 +128,10 @@ Once `.env` has your database and storage values, `npm run setup` runs the whole
 
 [Lakebase Search](/docs/ai/lakebase-search) is powered by the following two Postgres extensions:
 
+<Admonition type="important" title="Enable the extensions first">
+Both extensions rely on preloaded libraries that aren't on by default. Follow [Get started with Lakebase Search](/docs/ai/lakebase-search-get-started) to enable the libraries.
+</Admonition>
+
 - [`lakebase_vector`](https://docs.databricks.com/aws/en/oltp/projects/lakebase-vector): provides the `lakebase_ann` index for approximate nearest-neighbour search. It reuses pgvector's `vector` type and pgvector's distance operators, so `<->`, `<#>`, and `<=>` can be used as usual, and the opclasses are the same `vector_l2_ops`, `vector_ip_ops`, and `vector_cosine_ops`. Underneath, it uses [IVF partitioning with RaBitQ quantisation](/docs/extensions/lakebase-vector#why-lakebasevector), an architecture built to scale past what HNSW reaches. RaBitQ compresses the vectors 4 to 8 times and builds the index 50 to 100 times faster than HNSW at the same corpus size, and cold starts stay fast.
 
 ```sql
