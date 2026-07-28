@@ -63,7 +63,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Private network transfer](#private-network-transfer) | —                                          | —                                         | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                        | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                          | —                                         | ✅                                                                                                |
-| [Support](#support)                                   | Community                                  | Billing support                           | Standard (enhanced options for higher-volume customers)                                           |
+| [Support](#support)                                   | Community                                  | Billing support                           | Standard (additional options for higher-volume customers)                                         |
 
 ## Plan features
 
@@ -386,7 +386,7 @@ Support level by plan:
 - **Launch**: Billing support
 - **Scale**: Standard support
 
-Higher-volume customers may qualify for annual commits and enhanced support options aligned with [Databricks Support](https://www.databricks.com/support). [Contact sales](/contact-sales) to learn more.
+Higher-volume customers may qualify for annual commits and additional support options aligned with [Databricks Support](https://www.databricks.com/support). [Contact sales](/contact-sales) to learn more.
 
 See [Support](/docs/introduction/support) for details.
 

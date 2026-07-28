@@ -3,7 +3,7 @@ title: Support
 summary: >-
   Neon support plans map to pricing tiers. Free plan users get community
   (Discord) support only. Launch adds billing-only tickets. Scale unlocks
-  Standard support. Higher-volume customers can access enhanced support
+  Standard support. Higher-volume customers can access additional support
   options aligned with Databricks Support. Use this page to find which
   channels your plan includes and review the general support policy.
 enableTableOfContents: true
@@ -24,7 +24,7 @@ Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans
 
 ### Higher-volume customers
 
-Higher-volume Neon customers have access to the same flexibility as other Databricks customers, including annual commits and enhanced support options. Enhanced support follows the [Databricks Support](https://www.databricks.com/support) offerings (Business, Production, and Mission Critical), which include response-time SLAs and additional support channels.
+Higher-volume Neon customers have access to the same flexibility as other Databricks customers, including annual commits and additional support options. These options follow the [Databricks Support](https://www.databricks.com/support) plans (Business, Production, and Mission Critical), which add response-time SLAs and more support channels.
 
 To learn whether you qualify and to discuss options, [contact our sales team](/contact-sales).
 
@@ -42,7 +42,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>\*</sup> Under **Billing support** (Launch plan), you can only use [support tickets](#support-tickets) for **billing-related** issues. **Scale** plan and higher can use support tickets for **any** Neon issue. On paid plans, **Request billing support** on the [Billing](/docs/introduction/manage-billing#view-the-billing-page) page is the dedicated path for invoice and billing questions.</small><br/>
-<small><sup>\*\*</sup> [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) may be available for Standard support customers, and are also included with certain [enhanced support options](#higher-volume-customers) for higher-volume customers. [Contact sales](/contact-sales) to learn more.</small>
+<small><sup>\*\*</sup> [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available for an additional fee, and with some Databricks support plans for [higher-volume customers](#higher-volume-customers). [Contact sales](/contact-sales) to learn more.</small>
 </div>
 
 ### Neon Discord Server
@@ -86,11 +86,11 @@ To ensure you receive responses from our support team, please whitelist the `hel
 
 ### Slack channel
 
-[Slack connect](https://slack.com/intl/en-ie/connect) channels may be available for Standard support customers and are included with certain [enhanced support options](#higher-volume-customers) for higher-volume customers. To learn more, [contact our sales team](/contact-sales).
+[Slack connect](https://slack.com/intl/en-ie/connect) channels are available for an additional fee for Standard support customers, and with some Databricks support plans for [higher-volume customers](#higher-volume-customers). To learn more, [contact our sales team](/contact-sales).
 
 ### Dedicated Support Engineer
 
-A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. This service may be available for Standard support customers and is included with certain [enhanced support options](#higher-volume-customers) for higher-volume customers. To learn more, [contact our sales team](/contact-sales).
+A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. This service is available for an additional fee. To learn more, [contact our sales team](/contact-sales).
 
 ## General support policy
 
