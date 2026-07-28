@@ -4,7 +4,7 @@ subtitle: Compare Neon database branches for every pull request with a classic s
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-10T00:00:00.000Z'
-updatedOn: '2026-07-10T00:00:00.000Z'
+updatedOn: '2026-07-28T15:49:24.320Z'
 ---
 
 Before a database change reaches production, you want to test it in a hosted environment that is neither your local machine nor production itself. You have two ways to set that up: a shared staging database that all team members would use for testing, or a preview database created for each pull request. They may sound like interchangeable flows, but they differ in how long it takes to sync your production database with a preview environment, and how fast each developer can iterate against data (including authentication data) that looks like production.
