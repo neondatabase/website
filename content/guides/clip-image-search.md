@@ -420,7 +420,7 @@ npm run db:stats
 
 ## Deploy to Vercel
 
-<a href="https://vercel.com/new/clone?repository-url=https://github.com/rishi-raj-jain/clip-image-search">
+<a href="https://vercel.com/new/clone?repository-url=https://github.com/rishi-raj-jain/lakebase-search-clip-embeddings">
   <img src="https://vercel.com/button" alt="Deploy with Vercel" />
 </a>
 
