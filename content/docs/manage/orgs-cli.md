@@ -7,7 +7,7 @@ summary: >-
   repeating `--org-id` on every command, set a persistent org context with
   `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-07-28T11:00:37.343Z'
+updatedOn: '2026-07-28T21:59:28.499Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
@@ -81,7 +81,7 @@ To remove a member's explicit role on a project (they keep whatever their organi
 neon api /projects/{project_id}/members/{member_id}/role -X DELETE
 ```
 
-The [API key's permissions](/docs/manage/api-keys#types-of-api-keys) determine what these requests can do: only organization admins can manage project access. For the full list of project-access routes and their fields, see the [Neon API reference](/docs/reference/api).
+The [API key's permissions](/docs/manage/api-keys#types-of-api-keys) determine what these requests can do: only organization Admins can manage project access. For the full list of project-access routes and their fields, see the [Neon API reference](/docs/reference/api).
 
 ## Setting Organization Context
 

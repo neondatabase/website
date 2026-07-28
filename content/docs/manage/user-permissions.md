@@ -8,7 +8,9 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-28T21:19:08.851Z'
+redirectFrom:
+  - /docs/manage/user-permissions-preview
+updatedOn: '2026-07-28T21:59:28.499Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -58,7 +60,7 @@ Start with the organization role, which sets a person's baseline access across e
 
 To give someone more than their baseline on a specific project, open that project's **Settings** → **Project permissions**, select **Grant permission**, choose a level (**Viewer**, **Editor**, or **Admin**), and pick one or more members. A grant only ever raises access: a person's effective permission is the higher of their organization role and the grant. For what each level allows, see [Per-project permissions](#per-project-permissions).
 
-![Granting a per-project permission in the Neon console](/docs/manage/user-permissions/grant-permission.png)
+![Granting a per-project permission in the Neon Console](/docs/manage/user-permissions/grant-permission.png)
 
 ## Review who has access
 
@@ -68,7 +70,7 @@ The same **Project permissions** page lists everyone who can reach the project, 
 
 ## Manage project access with the API
 
-You can manage project access programmatically with the [Neon API](/docs/reference/api). Only organization admins can manage project access. Roles are sent in the request as lowercase values (`viewer`, `editor`, `admin`) and returned in responses as uppercase permission levels (`VIEWER`, `EDITOR`, `ADMIN`).
+You can manage project access programmatically with the [Neon API](/docs/reference/api). These calls require an [organization API key](/docs/manage/api-keys) with the Admin role. Roles are sent in the request as lowercase values (`viewer`, `editor`, `admin`) and returned in responses as uppercase permission levels (`VIEWER`, `EDITOR`, `ADMIN`). Response fields vary by endpoint; get a member's `member_id` from the [List project members](#list-project-members) response.
 
 The Neon CLI doesn't have a dedicated command for these operations yet. You can call the same routes with the [`neon api`](/docs/cli/api) passthrough command, for example `neon api /projects/{project_id}/members/{member_id}/role -X PUT -F role=editor`.
 
@@ -132,7 +134,7 @@ Example response:
 
 ### Remove a member's project role
 
-Removes a member's explicit role on a project. Their organization role's default access still applies.
+Removes a member's explicit role on a project. Their organization role's default access still applies. On success, returns the member's updated access.
 
 ```bash shouldWrap
 curl --request DELETE \
