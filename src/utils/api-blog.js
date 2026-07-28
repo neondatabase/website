@@ -1,44 +1,15 @@
-import { execFileSync } from 'child_process';
-
 import { EXTRA_CATEGORIES } from 'constants/blog';
 import { getAllChangelogs } from 'utils/api-docs';
 import { getAllGuides } from 'utils/api-guides';
 import {
-  BlogContentBranchNotFoundError,
-  BlogContentConfigError,
-  hasLocalBlogContent,
-  readBlogSnapshotFromCdn,
+  readBlogBranchInfoFromGitHub,
   readBlogSnapshotFromGitHubBranch,
   readLocalBlogSnapshot,
 } from 'utils/blog-content-source.mjs';
 import getExcerpt from 'utils/get-excerpt';
 
-const DEFAULT_CDN_BASE = 'https://blog.neonapi.io/blog';
 const REMOTE_BRANCH_CACHE_TTL_MS = 30 * 1000;
-const REMOTE_CDN_CACHE_TTL_MS = 60 * 1000;
 const remoteSnapshotCache = new Map();
-
-const getCurrentWebsiteBranch = async () => {
-  const branchFromEnv =
-    process.env.VERCEL_GIT_COMMIT_REF || process.env.GIT_BRANCH || process.env.GITHUB_HEAD_REF;
-
-  if (branchFromEnv) {
-    return branchFromEnv;
-  }
-
-  try {
-    return execFileSync('git', ['branch', '--show-current'], {
-      cwd: process.cwd(),
-      encoding: 'utf8',
-    }).trim();
-  } catch {
-    return 'main';
-  }
-};
-
-const getCdnBaseUrl = () => process.env.BLOG_CDN_URL || DEFAULT_CDN_BASE;
-
-const isLocalDevelopment = () => process.env.NODE_ENV === 'development';
 
 const isProductionWebsite = () => process.env.VERCEL_ENV === 'production';
 
@@ -63,61 +34,75 @@ const getRemoteSnapshot = async (cacheKey, ttlMs, loader) => {
   return promise;
 };
 
-const getCdnSnapshot = async () =>
-  getRemoteSnapshot(`cdn:${getCdnBaseUrl()}`, REMOTE_CDN_CACHE_TTL_MS, () =>
-    readBlogSnapshotFromCdn(getCdnBaseUrl())
-  );
+const getBlogRepoConfig = () => ({
+  owner: process.env.BLOG_REPO_OWNER,
+  repo: process.env.BLOG_REPO_NAME,
+  token: process.env.BLOG_GITHUB_TOKEN,
+});
 
-const getBranchSnapshot = async (branch) => {
-  const owner = process.env.BLOG_REPO_OWNER;
-  const repo = process.env.BLOG_REPO_NAME;
-  const token = process.env.BLOG_GITHUB_TOKEN;
+const getBranchInfo = async (branch) => {
+  const { owner, repo, token } = getBlogRepoConfig();
 
-  return getRemoteSnapshot(`branch:${owner}:${repo}:${branch}`, REMOTE_BRANCH_CACHE_TTL_MS, () =>
-    readBlogSnapshotFromGitHubBranch({
-      owner,
-      repo,
-      branch,
-      token,
-    })
+  return getRemoteSnapshot(
+    `branch-info:${owner}:${repo}:${branch}`,
+    REMOTE_BRANCH_CACHE_TTL_MS,
+    () =>
+      readBlogBranchInfoFromGitHub({
+        owner,
+        repo,
+        branch,
+        token,
+      })
   );
 };
 
-const getResolvedBlogSnapshot = async ({ previewBranch = null, strictBranch = false } = {}) => {
+const getBranchSnapshot = async (branch, { postSlug = null } = {}) => {
+  const { owner, repo, token } = getBlogRepoConfig();
+  const postCacheSegment = postSlug ? `:post:${postSlug}` : '';
+
+  return getRemoteSnapshot(
+    `branch:${owner}:${repo}:${branch}${postCacheSegment}`,
+    REMOTE_BRANCH_CACHE_TTL_MS,
+    () =>
+      readBlogSnapshotFromGitHubBranch({
+        owner,
+        repo,
+        branch,
+        token,
+        postSlug,
+      })
+  );
+};
+
+// Local blog content is baked into the deployment and never changes at runtime,
+// so read it from disk once and reuse the resulting snapshot for the lifetime of
+// the process. This avoids re-reading every post file on each request/category,
+// which was exhausting the open-file limit (EMFILE) on Vercel.
+let localSnapshotPromise = null;
+
+const getLocalSnapshot = () => {
+  // In development, read fresh so edits to blog posts show up without a server
+  // restart. In build/production the content is immutable, so memoize it.
+  if (process.env.NODE_ENV !== 'production') {
+    return readLocalBlogSnapshot();
+  }
+
+  if (!localSnapshotPromise) {
+    localSnapshotPromise = readLocalBlogSnapshot().catch((error) => {
+      localSnapshotPromise = null;
+      throw error;
+    });
+  }
+
+  return localSnapshotPromise;
+};
+
+const getResolvedBlogSnapshot = async ({ previewBranch = null } = {}) => {
   if (previewBranch) {
     return getBranchSnapshot(previewBranch);
   }
 
-  if (isLocalDevelopment() && (await hasLocalBlogContent())) {
-    return readLocalBlogSnapshot();
-  }
-
-  const websiteBranch = await getCurrentWebsiteBranch();
-
-  if (isProductionWebsite() || websiteBranch === 'main') {
-    return getCdnSnapshot();
-  }
-
-  if (websiteBranch) {
-    try {
-      return await getBranchSnapshot(websiteBranch);
-    } catch (error) {
-      if (
-        error instanceof BlogContentBranchNotFoundError ||
-        error instanceof BlogContentConfigError
-      ) {
-        if (strictBranch) {
-          throw error;
-        }
-
-        return getCdnSnapshot();
-      }
-
-      throw error;
-    }
-  }
-
-  return getCdnSnapshot();
+  return getLocalSnapshot();
 };
 
 const mapAuthor = (slug, authorsData) => {
@@ -194,10 +179,18 @@ const getMappedBlogPostsFromSnapshot = (snapshot) => {
   return posts;
 };
 
-const getMappedBlogPosts = async ({ previewBranch = null, strictBranch = false } = {}) =>
-  getMappedBlogPostsFromSnapshot(await getResolvedBlogSnapshot({ previewBranch, strictBranch }));
+const getMappedBlogPosts = async ({ previewBranch = null } = {}) =>
+  getMappedBlogPostsFromSnapshot(await getResolvedBlogSnapshot({ previewBranch }));
 
 export const getBlogSnapshot = async (options = {}) => getResolvedBlogSnapshot(options);
+
+export const getBlogPreviewBranchInfo = async ({ previewBranch = null } = {}) => {
+  if (!previewBranch) {
+    return readLocalBlogSnapshot();
+  }
+
+  return getBranchInfo(previewBranch);
+};
 
 export const getAllBlogPosts = async (options = {}) => getMappedBlogPosts(options);
 
@@ -279,7 +272,9 @@ export const getAllPosts = async (options = {}) => {
 };
 
 export const getBlogPostBySlug = async (slug, options = {}) => {
-  const snapshot = await getResolvedBlogSnapshot(options);
+  const snapshot = options.previewBranch
+    ? await getBranchSnapshot(options.previewBranch, { postSlug: slug })
+    : await getResolvedBlogSnapshot(options);
   const postEntry = snapshot.posts.find((entry) => entry.slug === slug);
 
   if (!postEntry || (postEntry.data?.draft && isProductionWebsite())) {
@@ -307,9 +302,11 @@ export const getBlogPostBySlug = async (slug, options = {}) => {
     },
   };
 
-  const relatedPosts = getMappedBlogPostsFromSnapshot(snapshot)
-    .filter((relatedPost) => relatedPost.slug !== slug)
-    .slice(0, 3);
+  const relatedPosts = options.previewBranch
+    ? []
+    : getMappedBlogPostsFromSnapshot(snapshot)
+        .filter((relatedPost) => relatedPost.slug !== slug)
+        .slice(0, 3);
 
   return { post, relatedPosts };
 };
