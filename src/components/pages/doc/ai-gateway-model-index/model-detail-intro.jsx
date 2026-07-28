@@ -6,7 +6,7 @@ import ModelDetailClient from './model-detail-client';
 
 const CommandHeading = AnchorHeading('h2');
 
-const ModelDetailIntro = ({ row, snippets }) => (
+const ModelDetailIntro = ({ row, snippets, initialMode }) => (
   <div className="prose-doc post-content prose mt-8 max-w-none dark:prose-invert xs:prose-code:break-words">
     <div id="about" className="anchor-heading scroll-mt-32" aria-hidden />
     <p>
@@ -15,7 +15,7 @@ const ModelDetailIntro = ({ row, snippets }) => (
     </p>
 
     <CommandHeading>Command</CommandHeading>
-    <ModelDetailClient row={row} snippets={snippets} />
+    <ModelDetailClient row={row} snippets={snippets} initialMode={initialMode} />
   </div>
 );
 
@@ -26,6 +26,7 @@ ModelDetailIntro.propTypes = {
     tabs: PropTypes.object.isRequired,
     envExample: PropTypes.string.isRequired,
   }).isRequired,
+  initialMode: PropTypes.oneOf(['text', 'image']).isRequired,
 };
 
 export default ModelDetailIntro;

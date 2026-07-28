@@ -24,7 +24,15 @@ const StickyTableFades = ({ canScrollLeft, canScrollRight }) => (
   </>
 );
 
-const StickyTable = ({ children, className = null }) => {
+const StickyTable = ({
+  children,
+  className = null,
+  headerClassName = null,
+  headerKey = null,
+  interactiveHeader = false,
+  nativeSticky = false,
+  stickyTopOffset = 0,
+}) => {
   const rootRef = useRef(null);
   const geometryRef = useRef({ stickyTop: 0, headerHeight: 0 });
   const [layout, setLayout] = useState(null);
@@ -57,7 +65,8 @@ const StickyTable = ({ children, className = null }) => {
       const tableRect = table.getBoundingClientRect();
       const headerRect = thead.getBoundingClientRect();
       const stickyTop =
-        parseFloat(getComputedStyle(root).getPropertyValue('--docs-header-height')) || 0;
+        (parseFloat(getComputedStyle(root).getPropertyValue('--docs-header-height')) || 0) +
+        stickyTopOffset;
 
       geometryRef.current = { stickyTop, headerHeight: headerRect.height };
 
@@ -70,6 +79,7 @@ const StickyTable = ({ children, className = null }) => {
         fadeHeight: wrapperRect.height,
         headerHtml: thead.innerHTML,
         left: wrapperRect.left,
+        stickyTop,
         tableWidth: tableRect.width,
         width: wrapperRect.width,
       });
@@ -79,7 +89,9 @@ const StickyTable = ({ children, className = null }) => {
       const { stickyTop, headerHeight } = geometryRef.current;
       const tableRect = table.getBoundingClientRect();
       const headerRect = thead.getBoundingClientRect();
-      const active = headerRect.top <= stickyTop && tableRect.bottom > stickyTop + headerHeight;
+      const active =
+        nativeSticky ||
+        (headerRect.top <= stickyTop && tableRect.bottom > stickyTop + headerHeight);
       const scrollLeft = wrapper.scrollLeft;
       const scrollRight = wrapper.scrollWidth - wrapper.clientWidth - scrollLeft;
       const canScrollLeft = scrollLeft >= SCROLL_FADE_THRESHOLD;
@@ -107,7 +119,7 @@ const StickyTable = ({ children, className = null }) => {
     resizeObserver.observe(wrapper);
     resizeObserver.observe(table);
 
-    window.addEventListener('scroll', updateScroll, { passive: true });
+    if (!nativeSticky) window.addEventListener('scroll', updateScroll, { passive: true });
     window.addEventListener('resize', onResize);
     wrapper.addEventListener('scroll', updateScroll, { passive: true });
 
@@ -116,23 +128,40 @@ const StickyTable = ({ children, className = null }) => {
         table.classList.remove(...addedTableClassNames);
       }
       resizeObserver.disconnect();
-      window.removeEventListener('scroll', updateScroll);
+      if (!nativeSticky) window.removeEventListener('scroll', updateScroll);
       window.removeEventListener('resize', onResize);
       wrapper.removeEventListener('scroll', updateScroll);
     };
-  }, [className]);
+  }, [className, headerKey, nativeSticky, stickyTopOffset]);
+
+  const handleHeaderClick = (event) => {
+    if (!interactiveHeader) return;
+
+    const button = event.target.closest('button');
+    if (!button) return;
+
+    const clonedButtons = [...event.currentTarget.querySelectorAll('button')];
+    const buttonIndex = clonedButtons.indexOf(button);
+    const originalButtons = rootRef.current?.querySelectorAll('.table-wrapper thead button');
+    originalButtons?.[buttonIndex]?.click();
+  };
 
   return (
     <LazyMotion features={domAnimation}>
-      <div className="sticky-table" ref={rootRef}>
+      <div
+        className={nativeSticky ? 'sticky-table sticky-table--native' : 'sticky-table'}
+        ref={rootRef}
+      >
         {layout && (
           <div
-            className="sticky-table-header"
-            aria-hidden="true"
+            className={['sticky-table-header', headerClassName].filter(Boolean).join(' ')}
+            aria-hidden={interactiveHeader ? undefined : 'true'}
+            onClick={handleHeaderClick}
             style={{
-              left: layout.left,
+              left: nativeSticky ? undefined : layout.left,
               opacity: scroll.active ? 1 : 0,
-              width: layout.width,
+              top: layout.stickyTop,
+              width: nativeSticky ? undefined : layout.width,
             }}
           >
             <StickyTableFades
@@ -187,6 +216,11 @@ StickyTableFades.propTypes = {
 StickyTable.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  headerClassName: PropTypes.string,
+  headerKey: PropTypes.string,
+  interactiveHeader: PropTypes.bool,
+  nativeSticky: PropTypes.bool,
+  stickyTopOffset: PropTypes.number,
 };
 
 export default StickyTable;

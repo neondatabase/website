@@ -2,6 +2,7 @@
 
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
 import parse from 'html-react-parser';
+import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -98,13 +99,13 @@ LanguageSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-const ModelDetailClient = ({ row, snippets }) => {
-  const [mode, setMode] = useState('text');
+const ModelDetailClient = ({ row, snippets, initialMode }) => {
+  const router = useRouter();
+  const [mode, setMode] = useState(initialMode);
 
   useEffect(() => {
-    const queryMode = new URLSearchParams(window.location.search).get('mode');
-    if (queryMode === 'image' && row.isImageCapable) setMode('image');
-  }, [row.isImageCapable]);
+    setMode(initialMode);
+  }, [initialMode]);
 
   const languages = useMemo(() => {
     const all = snippets.tabs[mode]?.languages ?? [];
@@ -119,7 +120,9 @@ const ModelDetailClient = ({ row, snippets }) => {
   const [langKey, setLangKey] = useState(languages[0]?.key);
 
   useEffect(() => {
-    setLangKey(languages[0]?.key);
+    setLangKey((currentKey) =>
+      languages.some((language) => language.key === currentKey) ? currentKey : languages[0]?.key
+    );
   }, [languages]);
 
   const activeLang = languages.find((language) => language.key === langKey) ?? languages[0];
@@ -130,17 +133,55 @@ const ModelDetailClient = ({ row, snippets }) => {
   const codeFilename =
     { typescript: 'index.ts', python: 'main.py', bash: 'request.sh' }[activeLang.lang] || 'snippet';
 
+  const changeMode = (nextMode) => {
+    setMode(nextMode);
+
+    const url = new URL(window.location.href);
+    if (nextMode === 'image') url.searchParams.set('mode', 'image');
+    else url.searchParams.delete('mode');
+    router.replace(`${url.pathname}${url.search}${url.hash}`, { scroll: false });
+  };
+
   return (
     <div className="not-prose mt-6 flex flex-col gap-5">
-      <div className="flex flex-col gap-2.5">
-        <LanguageSelect languages={languages} value={activeLang.key} onChange={setLangKey} />
-
-        {activeLang.install && (
-          <code className="w-fit bg-gray-new-94 px-2 py-1 text-[12px] text-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-80">
-            {activeLang.install}
-          </code>
+      <div className="flex flex-wrap items-center gap-3">
+        {row.isImageCapable && (
+          <div
+            className="inline-flex h-9 border border-gray-new-80 bg-white p-0.75 dark:border-gray-new-20 dark:bg-black-new"
+            role="group"
+            aria-label="Select model mode"
+          >
+            {['text', 'image'].map((modeKey) => (
+              <button
+                key={modeKey}
+                type="button"
+                aria-pressed={mode === modeKey}
+                className={
+                  mode === modeKey
+                    ? 'bg-gray-new-94 px-2 text-[.8125rem] font-medium text-gray-new-10 dark:bg-[#1D1E20] dark:text-white'
+                    : 'px-2 text-[.8125rem] font-medium text-gray-new-50 transition-colors hover:text-gray-new-30 focus-visible:outline-gray-new-30 dark:text-[#8E9196] dark:hover:text-gray-new-80 dark:focus-visible:outline-gray-new-60'
+                }
+                onClick={() => changeMode(modeKey)}
+              >
+                {modeKey === 'text' ? 'Text' : 'Image'}
+              </button>
+            ))}
+          </div>
         )}
+
+        <LanguageSelect languages={languages} value={activeLang.key} onChange={setLangKey} />
       </div>
+
+      {activeLang.install && (
+        <CodeBlockWrapper
+          className="rounded-none border border-gray-new-80 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:rounded-none [&>pre]:bg-white! [&>pre]:py-4 [&>pre]:dark:bg-black-pure!"
+          as="div"
+          copyCode={activeLang.install}
+          copyButtonClassName="visible! opacity-100!"
+        >
+          <HighlightedCode code={activeLang.install} language="bash" />
+        </CodeBlockWrapper>
+      )}
 
       <CodeTabs labels={[codeFilename, '.env']} bodyClassName="bg-white dark:bg-black-pure">
         <CodeBlockWrapper
@@ -164,6 +205,7 @@ const ModelDetailClient = ({ row, snippets }) => {
 
 ModelDetailClient.propTypes = {
   row: PropTypes.object.isRequired,
+  initialMode: PropTypes.oneOf(['text', 'image']).isRequired,
   snippets: PropTypes.shape({
     modelIdPlaceholder: PropTypes.string.isRequired,
     tabs: PropTypes.object.isRequired,

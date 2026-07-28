@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { SiMeta } from 'react-icons/si';
 
+import StickyTable from 'components/pages/doc/sticky-table';
 import CheckIcon from 'components/shared/code-block-wrapper/images/check.inline.svg';
 import CopyIcon from 'components/shared/code-block-wrapper/images/copy.inline.svg';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
@@ -19,6 +20,12 @@ import OpenAIIcon from './images/openai.inline.svg';
 import { PROVIDER_ORDER, providerLabel } from './model-rows';
 
 const ASIDE_COLLISION_GAP = 24;
+
+const MODEL_TYPES = [
+  { key: 'all', label: 'All' },
+  { key: 'text', label: 'Text' },
+  { key: 'image', label: 'Image' },
+];
 
 const COLUMNS = [
   { key: 'name', label: 'Model', sortable: true },
@@ -56,7 +63,7 @@ const compareRows = (a, b, key) => {
 const SortArrow = ({ active, dir }) => (
   <span
     className={cn(
-      'ml-1 inline-block text-[10px] transition-opacity',
+      'ml-1 inline-block text-[.625rem] transition-opacity',
       active ? 'opacity-100' : 'opacity-0 group-hover:opacity-40'
     )}
     aria-hidden
@@ -95,8 +102,25 @@ ProviderLogo.propTypes = {
 };
 
 const CheckMark = () => (
-  <svg viewBox="0 0 10 10" className="size-2.5" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M2 5 L4 7 L8 3" strokeLinecap="round" strokeLinejoin="round" />
+  <svg viewBox="0 0 10 10" className="size-2.5" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M1.5 5 L4 7.5 L8.5 2.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const ClearIcon = () => (
+  <svg viewBox="0 0 12 12" className="size-3" fill="none" aria-hidden>
+    <path
+      d="M1.5 1.5L10.5 10.5"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10.5 1.5L1.5 10.5"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -131,23 +155,27 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
         aria-haspopup="listbox"
         aria-expanded={open}
         className={cn(
-          'flex h-9 items-center gap-2 border bg-white px-3 text-[13px] text-black-new transition-colors dark:bg-black-new dark:text-white',
-          selected.size > 0
-            ? 'border-gray-new-60 dark:border-gray-new-50'
-            : 'border-gray-new-80 hover:border-gray-new-60 dark:border-gray-new-20'
+          'flex h-9 items-center gap-2 border bg-transparent px-3 text-[.8125rem] text-gray-new-15 transition-colors outline-none hover:border-gray-new-70 focus:border-gray-new-30 dark:text-[#F1F2F4] dark:hover:border-gray-new-30 dark:focus:border-gray-new-60',
+          open
+            ? 'border-gray-new-30 dark:border-gray-new-60'
+            : selected.size > 0
+              ? 'border-gray-new-60 dark:border-gray-new-40'
+              : 'border-gray-new-80 dark:border-gray-new-20'
         )}
         onClick={() => setOpen((value) => !value)}
       >
-        {label}
+        <span className="min-w-19">{label}</span>
         <svg
           viewBox="0 0 12 12"
-          className={cn('size-3 shrink-0 transition-transform', open && 'rotate-180')}
+          className={cn(
+            'size-3 shrink-0 text-gray-new-40 transition-transform',
+            open && 'rotate-180'
+          )}
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.5"
           aria-hidden
         >
-          <path d="M3 4.5 L6 7.5 L9 4.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M1.75 4.25L6 8.5L10.25 4.25" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
@@ -155,7 +183,7 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
         <div
           role="listbox"
           aria-multiselectable="true"
-          className="absolute left-0 z-20 mt-1 min-w-[190px] border border-gray-new-80 bg-white p-1 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-10"
+          className="absolute left-0 z-20 mt-1 min-w-47.5 border border-gray-new-80 bg-white p-1 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-10"
         >
           {providers.map((providerId) => {
             const checked = selected.has(providerId);
@@ -170,10 +198,10 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
               >
                 <span
                   className={cn(
-                    'flex size-4 shrink-0 items-center justify-center border transition-colors',
+                    'flex size-3.5 shrink-0 items-center justify-center border transition-colors',
                     checked
-                      ? 'border-secondary-8 bg-secondary-8 text-white dark:border-primary-1 dark:bg-primary-1'
-                      : 'border-gray-new-70 dark:border-gray-new-30'
+                      ? 'border-[#2D8665] bg-[#2D8665] text-white dark:border-green-52 dark:bg-green-52 dark:text-black-new'
+                      : 'border-gray-new-40'
                   )}
                 >
                   {checked && <CheckMark />}
@@ -218,7 +246,7 @@ const CopyableModelId = ({ id }) => {
         handleCopy(id);
       }}
     >
-      <code className="rounded-sm border border-gray-new-80 bg-gray-new-98 px-1 py-px font-mono text-[13px] leading-none whitespace-nowrap text-gray-new-30 group-hover/copy:text-gray-new-10 dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-85 dark:group-hover/copy:text-white">
+      <code className="rounded-sm border border-gray-new-80 bg-gray-new-98 px-1 py-px font-mono text-[.8125rem] leading-none whitespace-nowrap text-gray-new-30 group-hover/copy:text-gray-new-10 dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-85 dark:group-hover/copy:text-white">
         {id}
       </code>
       {isCopied ? (
@@ -237,11 +265,13 @@ CopyableModelId.propTypes = {
 const ModelIndexClient = ({ rows }) => {
   const router = useRouter();
   const rootRef = useRef(null);
-  const [mode, setMode] = useState('text');
+  const filtersRef = useRef(null);
+  const [mode, setMode] = useState('all');
   const [search, setSearch] = useState('');
   const [providerFilter, setProviderFilter] = useState(() => new Set());
   const [openWeightsOnly, setOpenWeightsOnly] = useState(false);
   const [sort, setSort] = useState({ key: 'releaseDate', dir: 'desc' });
+  const [filtersHeight, setFiltersHeight] = useState(0);
 
   const providers = useMemo(() => {
     const present = new Set(rows.map((row) => row.provider));
@@ -253,11 +283,13 @@ const ModelIndexClient = ({ rows }) => {
 
   const visibleRows = useMemo(() => {
     const query = search.trim().toLowerCase();
-    let list = rows.filter((row) => (mode === 'image' ? row.isImageCapable : true));
-    if (mode === 'text') {
-      if (providerFilter.size > 0) list = list.filter((row) => providerFilter.has(row.provider));
-      if (openWeightsOnly) list = list.filter((row) => row.openWeights);
-    }
+    let list = rows.filter((row) => {
+      if (mode === 'image') return row.isImageCapable;
+      if (mode === 'text') return row.inputs.includes('text');
+      return true;
+    });
+    if (providerFilter.size > 0) list = list.filter((row) => providerFilter.has(row.provider));
+    if (openWeightsOnly) list = list.filter((row) => row.openWeights);
     if (query) {
       list = list.filter(
         (row) =>
@@ -292,6 +324,20 @@ const ModelIndexClient = ({ rows }) => {
 
   const getModelHref = (modelId) =>
     `/docs/ai-gateway/models/${encodeURIComponent(modelId)}${mode === 'image' ? '?mode=image' : ''}`;
+
+  useEffect(() => {
+    const filters = filtersRef.current;
+    if (!filters) return undefined;
+
+    const updateFiltersHeight = () => setFiltersHeight(filters.offsetHeight);
+    const resizeObserver = new ResizeObserver(updateFiltersHeight);
+    resizeObserver.observe(filters);
+    updateFiltersHeight();
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -357,33 +403,51 @@ const ModelIndexClient = ({ rows }) => {
       ref={rootRef}
       className="not-prose relative z-20 my-11 w-[min(1380px,calc(100vw-472px))] bg-white dark:bg-black-pure 2xl:w-[calc(100vw-408px)] xl:w-full md:my-8"
     >
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <label className="relative w-[348px] max-w-full">
-          <span className="sr-only">Search models</span>
-          <SearchIcon className="pointer-events-none absolute top-1/2 left-4 size-3.5 -translate-y-1/2 text-gray-new-50 dark:text-gray-new-60" />
-          <input
-            className="h-9 w-full border border-gray-new-80 bg-white pr-4 pl-9 text-[13px] text-gray-new-15 outline-none placeholder:text-gray-new-50 focus:border-secondary-8 dark:border-gray-new-20 dark:bg-black-new dark:text-white dark:placeholder:text-gray-new-60 dark:focus:border-primary-1 md:text-base"
-            type="search"
-            value={search}
-            placeholder="Search model, ID, or provider..."
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </label>
+      <div
+        ref={filtersRef}
+        className="sticky top-[var(--docs-header-height)] z-50 mb-0 flex flex-wrap items-center justify-between gap-3 bg-white pt-5 pb-5 dark:bg-black-pure lg:top-0"
+      >
+        <div className="flex max-w-full flex-wrap items-center gap-3">
+          <div className="relative w-87 max-w-full">
+            <label className="sr-only" htmlFor="ai-gateway-model-search">
+              Search models
+            </label>
+            <SearchIcon className="pointer-events-none absolute top-1/2 left-4 size-3.5 -translate-y-1/2 text-gray-new-30 dark:text-gray-new-70" />
+            <input
+              id="ai-gateway-model-search"
+              className="h-9 w-full border border-gray-new-80 bg-gray-new-98 pr-10 pl-9 text-[.8125rem] text-black-pure transition-colors outline-none placeholder:text-gray-new-40 hover:border-gray-new-70 focus:border-gray-new-30 dark:border-gray-new-20 dark:bg-black-new dark:text-white dark:placeholder:text-gray-new-60 dark:hover:border-gray-new-30 dark:focus:border-gray-new-60 md:text-base search-cancel:appearance-none"
+              type="search"
+              value={search}
+              placeholder="Search model, ID, or provider..."
+              onChange={(event) => setSearch(event.target.value)}
+            />
+            {search && (
+              <button
+                type="button"
+                className="absolute top-1/2 right-3 flex size-5 -translate-y-1/2 items-center justify-center text-gray-new-60 transition-colors hover:text-gray-new-40 dark:text-gray-new-70 dark:hover:text-gray-new-80"
+                aria-label="Clear search"
+                onClick={() => setSearch('')}
+              >
+                <ClearIcon />
+              </button>
+            )}
+          </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="inline-flex h-9 border border-gray-new-80 bg-white p-1 dark:border-gray-new-20 dark:bg-black-new">
-            {[
-              { key: 'text', label: 'Text' },
-              { key: 'image', label: 'Image' },
-            ].map((tab) => (
+          <div
+            className="inline-flex h-9 border border-gray-new-80 bg-white p-0.75 dark:border-gray-new-20 dark:bg-black-new"
+            role="group"
+            aria-label="Filter models by type"
+          >
+            {MODEL_TYPES.map((tab) => (
               <button
                 key={tab.key}
                 type="button"
+                aria-pressed={mode === tab.key}
                 className={cn(
-                  'px-3 text-[13px] font-medium tracking-normal transition-colors',
+                  'px-2 text-[.8125rem] font-medium tracking-normal transition-colors focus-visible:outline-gray-new-30 focus-visible:dark:outline-gray-new-60',
                   mode === tab.key
-                    ? 'bg-gray-new-94 text-gray-new-10 dark:bg-gray-new-10 dark:text-white'
-                    : 'text-gray-new-50 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80'
+                    ? 'bg-gray-new-94 text-gray-new-10 dark:bg-[#1D1E20] dark:text-white'
+                    : 'text-gray-new-50 hover:text-gray-new-30 dark:text-[#8E9196] dark:hover:text-gray-new-80'
                 )}
                 onClick={() => changeMode(tab.key)}
               >
@@ -391,130 +455,155 @@ const ModelIndexClient = ({ rows }) => {
               </button>
             ))}
           </div>
+        </div>
 
-          {mode === 'text' && (
-            <>
-              <ProviderMultiSelect
-                providers={providers}
-                selected={providerFilter}
-                onToggle={toggleProvider}
-                onClear={() => setProviderFilter(new Set())}
-              />
-              <label className="flex h-9 cursor-pointer items-center gap-2 border border-gray-new-80 bg-white px-3 text-[13px] tracking-normal text-gray-new-40 dark:border-gray-new-20 dark:bg-black-new dark:text-white">
-                <input
-                  type="checkbox"
-                  className="size-3 rounded-none border-gray-new-40 accent-secondary-8 dark:accent-primary-1"
-                  checked={openWeightsOnly}
-                  onChange={(event) => setOpenWeightsOnly(event.target.checked)}
-                />
-                Open weights only
-              </label>
-            </>
-          )}
+        <div className="flex flex-wrap items-center gap-3">
+          <ProviderMultiSelect
+            providers={providers}
+            selected={providerFilter}
+            onToggle={toggleProvider}
+            onClear={() => setProviderFilter(new Set())}
+          />
+          <label
+            className={cn(
+              'group/check flex h-9 cursor-pointer items-center gap-2 border bg-transparent px-3 text-[.8125rem] tracking-normal text-gray-new-15 transition-colors focus-within:border-gray-new-30 hover:border-gray-new-70 dark:text-[#F1F2F4] dark:focus-within:border-gray-new-60 dark:hover:border-gray-new-30',
+              openWeightsOnly
+                ? 'border-gray-new-60 dark:border-gray-new-40'
+                : 'border-gray-new-80 dark:border-gray-new-20'
+            )}
+          >
+            <input
+              type="checkbox"
+              className="sr-only"
+              checked={openWeightsOnly}
+              onChange={(event) => setOpenWeightsOnly(event.target.checked)}
+            />
+            <span
+              className={cn(
+                'flex size-3 shrink-0 items-center justify-center border transition-colors',
+                openWeightsOnly
+                  ? 'border-[#2D8665] bg-[#2D8665] text-white dark:border-green-52 dark:bg-green-52 dark:text-black-new'
+                  : 'border-gray-new-60 group-hover/check:border-gray-new-40 dark:border-gray-new-40 group-hover/check:dark:border-gray-new-60'
+              )}
+              aria-hidden
+            >
+              {openWeightsOnly && <CheckMark />}
+            </span>
+            Open weights only
+          </label>
         </div>
       </div>
 
-      <div className="overflow-x-auto border border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure">
-        <table className="ai-gateway-model-table my-0! w-full min-w-[1160px]! table-fixed border-collapse text-[13px]">
-          <colgroup>
-            <col className="w-[19%]" />
-            <col className="w-[21%]" />
-            <col className="w-[10%]" />
-            <col className="w-[15%]" />
-            <col className="w-[7%]" />
-            <col className="w-[8%]" />
-            <col className="w-[6%]" />
-            <col className="w-[6%]" />
-            <col className="w-[8%]" />
-          </colgroup>
-          <thead>
-            <tr className="border-b border-gray-new-80 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
-              {COLUMNS.map((column) => (
-                <th
-                  key={column.key}
-                  scope="col"
-                  className="px-4! py-3.5! text-left! text-xs font-medium whitespace-nowrap text-gray-new-50 dark:text-gray-new-60"
-                >
-                  {column.sortable ? (
-                    <button
-                      type="button"
-                      className="group inline-flex items-center transition-colors hover:text-gray-new-20 dark:hover:text-white"
-                      onClick={() => onSort(column.key)}
-                    >
-                      {column.label}
-                      <SortArrow active={sort.key === column.key} dir={sort.dir} />
-                    </button>
-                  ) : (
-                    column.label
-                  )}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {visibleRows.map((row) => {
-              const href = getModelHref(row.id);
-              return (
-                <tr
-                  key={row.id}
-                  className="cursor-pointer border-b border-gray-new-80 transition-colors last:border-b-0 hover:bg-gray-new-98 dark:border-gray-new-20 dark:hover:bg-gray-new-8"
-                  onClick={(event) => {
-                    if (!event.target.closest('a, button, input, select')) router.push(href);
-                  }}
-                >
-                  <td className="py-4! pl-4! text-left!">
-                    <Link
-                      href={href}
-                      className="font-medium text-gray-new-10 no-underline! dark:text-white"
-                    >
-                      {row.name}
-                    </Link>
-                  </td>
-                  <td className="py-4! pl-4! text-left!">
-                    <CopyableModelId id={row.id} />
-                  </td>
-                  <td className="py-4! pl-4! text-left! text-[13px]! text-gray-new-30 dark:text-gray-new-80">
-                    <span className="flex items-center gap-2 whitespace-nowrap">
-                      <ProviderLogo provider={row.provider} />
-                      {row.providerName}
-                    </span>
-                  </td>
-                  <td className="py-4! pl-4! text-left! text-[13px]! text-gray-new-40 dark:text-gray-new-60">
-                    {row.inputsLabel}
-                  </td>
-                  <td className="py-4! pl-4! text-left! font-mono text-[13px]! text-gray-new-30 dark:text-gray-new-80">
-                    {row.contextLabel}
-                  </td>
-                  <td className="py-4! pl-4! text-left! text-[13px]! text-gray-new-40 dark:text-gray-new-60">
-                    {row.releaseLabel}
-                  </td>
-                  <td className="py-4! pl-4! text-left! font-mono text-[13px]! text-gray-new-30 dark:text-gray-new-80">
-                    {row.costInputLabel}
-                  </td>
-                  <td className="py-4! pl-4! text-left! font-mono text-[13px]! text-gray-new-30 dark:text-gray-new-80">
-                    {row.costOutputLabel}
-                  </td>
-                  <td className="pr-4 text-left! text-[13px]! whitespace-nowrap text-gray-new-40 dark:text-gray-new-60">
-                    {row.openWeights ? 'Open weights' : '—'}
+      <StickyTable
+        className="ai-gateway-model-table my-0! w-full min-w-290! table-fixed border-collapse text-[.8125rem]"
+        headerClassName="pointer-events-auto! border-x border-t border-gray-new-80 2xl:px-0! dark:border-gray-new-20"
+        headerKey={`${sort.key}:${sort.dir}`}
+        interactiveHeader
+        nativeSticky
+        stickyTopOffset={filtersHeight}
+      >
+        <div className="table-wrapper my-0! overflow-x-auto border border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure 2xl:mx-0! 2xl:px-0!">
+          <table className="ai-gateway-model-table my-0! w-full min-w-290! table-fixed border-collapse text-[.8125rem]">
+            <colgroup>
+              <col className="w-[19%]" />
+              <col className="w-[21%]" />
+              <col className="w-[10%]" />
+              <col className="w-[15%]" />
+              <col className="w-[5%]" />
+              <col className="w-[8%]" />
+              <col className="w-[5%]" />
+              <col className="w-[5%]" />
+              <col className="w-[9%]" />
+            </colgroup>
+            <thead>
+              <tr className="border-b border-gray-new-80 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
+                {COLUMNS.map((column) => (
+                  <th
+                    key={column.key}
+                    scope="col"
+                    className="px-4! py-3.5! text-left! text-xs font-medium whitespace-nowrap text-gray-new-50 dark:text-gray-new-60"
+                  >
+                    {column.sortable ? (
+                      <button
+                        type="button"
+                        className="group inline-flex items-center transition-colors hover:text-gray-new-20 dark:hover:text-white"
+                        onClick={() => onSort(column.key)}
+                      >
+                        {column.label}
+                        <SortArrow active={sort.key === column.key} dir={sort.dir} />
+                      </button>
+                    ) : (
+                      column.label
+                    )}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {visibleRows.map((row) => {
+                const href = getModelHref(row.id);
+                return (
+                  <tr
+                    key={row.id}
+                    className="cursor-pointer border-b border-gray-new-80 transition-colors last:border-b-0 hover:bg-gray-new-98 dark:border-gray-new-20 dark:hover:bg-gray-new-8"
+                    onClick={(event) => {
+                      if (!event.target.closest('a, button, input, select')) router.push(href);
+                    }}
+                  >
+                    <td className="py-4! pl-4! text-left!">
+                      <Link
+                        href={href}
+                        className="font-medium text-gray-new-10 no-underline! dark:text-white"
+                      >
+                        {row.name}
+                      </Link>
+                    </td>
+                    <td className="py-4! pl-4! text-left!">
+                      <CopyableModelId id={row.id} />
+                    </td>
+                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
+                      <span className="flex items-center gap-2 whitespace-nowrap">
+                        <ProviderLogo provider={row.provider} />
+                        {row.providerName}
+                      </span>
+                    </td>
+                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-40 dark:text-gray-new-60">
+                      {row.inputsLabel}
+                    </td>
+                    <td className="py-4! pl-4! text-left! font-mono text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
+                      {row.contextLabel}
+                    </td>
+                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-40 dark:text-gray-new-60">
+                      {row.releaseLabel}
+                    </td>
+                    <td className="py-4! pl-4! text-left! font-mono text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
+                      {row.costInputLabel}
+                    </td>
+                    <td className="py-4! pl-4! text-left! font-mono text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
+                      {row.costOutputLabel}
+                    </td>
+                    <td className="pr-4! text-left! text-[.8125rem]! whitespace-nowrap text-gray-new-40 dark:text-gray-new-60">
+                      {row.openWeights ? 'Open weights' : '—'}
+                    </td>
+                  </tr>
+                );
+              })}
+              {visibleRows.length === 0 && (
+                <tr className="border-b-0!">
+                  <td
+                    colSpan={COLUMNS.length}
+                    className="px-3 py-8 text-center text-gray-new-40 dark:text-gray-new-60"
+                  >
+                    No models match your filters.
                   </td>
                 </tr>
-              );
-            })}
-            {visibleRows.length === 0 && (
-              <tr>
-                <td
-                  colSpan={COLUMNS.length}
-                  className="px-3 py-8 text-center text-gray-new-40 dark:text-gray-new-60"
-                >
-                  No models match your filters.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </StickyTable>
 
-      <p className="mt-3 text-[13px] text-gray-new-40 dark:text-gray-new-60">
+      <p className="mt-3 text-[.8125rem] text-gray-new-40 dark:text-gray-new-60">
         Prices are provider list prices per million tokens. Inference is free during the private
         preview. Click a model for a copy-paste quickstart.
       </p>

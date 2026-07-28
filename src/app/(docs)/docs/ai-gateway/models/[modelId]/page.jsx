@@ -42,11 +42,14 @@ export async function generateMetadata({ params }) {
   });
 }
 
-const ModelPage = async ({ params }) => {
+const ModelPage = async ({ params, searchParams }) => {
   const { modelId } = await params;
+  const { mode: requestedMode } = (await searchParams) ?? {};
   const row = getRow(modelId);
 
   if (!row) return notFound();
+
+  const initialMode = requestedMode === 'image' && row.isImageCapable ? 'image' : 'text';
 
   const currentIndex = rows.findIndex((item) => item.id === row.id);
   const previousRow = rows[currentIndex - 1];
@@ -74,7 +77,7 @@ const ModelPage = async ({ params }) => {
       gitHubPath="content/docs/ai-gateway/models.md"
       markdownPath={`/docs/${currentSlug}.md`}
       tableOfContents={tableOfContents}
-      aboveContent={<ModelDetailIntro row={row} snippets={snippets} />}
+      aboveContent={<ModelDetailIntro row={row} snippets={snippets} initialMode={initialMode} />}
       className="w-full max-w-208 flex-1 lg:max-w-none"
     />
   );
