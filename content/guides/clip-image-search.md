@@ -122,6 +122,8 @@ S3_BUCKET=storage-test
 
 The `src/lib/storage.ts` file in the codebase signs every request with SigV4 over `fetch`. The bucket can stay private, as the app presigns a short-lived public URL for each result, without routing images through the server.
 
+Once `.env` has your database and storage values, `npm run setup` runs the whole pipeline in order: `dataset:pull`, `dataset:embed`, `db:schema`, `dataset:load`, `db:index`, and `db:warm`. The following sections walk through each command and what it does. For now, let's move to learning about the two important Lakebase extensions for this use case.
+
 ## Understand lakebase_vector and lakebase_text
 
 [Lakebase Search](/docs/ai/lakebase-search) is powered by the following two Postgres extensions:
@@ -158,6 +160,12 @@ Run the dataset pull and push script with the following command:
 
 ```bash
 npm run dataset:pull
+```
+
+By default this would pull 2000 images. Pass `--limit` to change the count, or `--limit all` to pull every photo:
+
+```bash
+npm run dataset:pull -- --limit all
 ```
 
 ## Embed images and text into one vector column
@@ -416,6 +424,16 @@ Lakebase ANN indexes are storage-backed and survive a scale-to-zero on their own
 
 ```bash
 npm run db:stats
+```
+
+## Warm the query cache
+
+Embedding a string means loading the 242 MB CLIP weights, so on a cold deploy that first search would pay the full model download before it could return anything.
+
+`npm run db:warm` embeds few fixed queries once and writes them to the `query_embeddings` table from the schema step. A fresh deployment then serves them straight from Postgres with an indexed primary-key lookup, instead of loading the model just to answer the default query. It uses `on conflict do nothing`, so it's safe to run repeatedly.
+
+```bash
+npm run db:warm
 ```
 
 ## Deploy to Vercel
