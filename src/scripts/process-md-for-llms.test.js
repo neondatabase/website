@@ -135,7 +135,8 @@ describe('MDX to Markdown Conversion', () => {
 
       // Quickstart snippets are served, once per language, with the model-id
       // placeholder rather than duplicated per model
-      expect(result).toContain('**Quickstart (text).**');
+      expect(result).toContain('**Quickstart (text, Chat Completions).**');
+      expect(result).toContain('Responses-only Codex models');
       expect(result).toContain('**Quickstart (image).**');
       expect(result).toContain('__MODEL_ID__');
       expect(result).toContain('import { generateText } from "ai";');

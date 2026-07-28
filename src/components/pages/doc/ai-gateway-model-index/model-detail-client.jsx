@@ -11,6 +11,8 @@ import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import highlight from 'lib/shiki';
 
+import { getLanguagesForModel } from './model-snippets';
+
 const HighlightedCode = ({ code, language }) => {
   const [html, setHtml] = useState('');
 
@@ -107,15 +109,7 @@ const ModelDetailClient = ({ row, snippets, initialMode }) => {
     setMode(initialMode);
   }, [initialMode]);
 
-  const languages = useMemo(() => {
-    const all = snippets.tabs[mode]?.languages ?? [];
-    // Mastra can't reach Responses-only (Codex) models through the
-    // OpenAI-compatible endpoint yet, so drop it for those in the text tab.
-    if (mode === 'text' && row.isResponsesOnly) {
-      return all.filter((language) => language.key !== 'mastra');
-    }
-    return all;
-  }, [snippets, mode, row.isResponsesOnly]);
+  const languages = useMemo(() => getLanguagesForModel(row, mode, snippets), [snippets, mode, row]);
 
   const [langKey, setLangKey] = useState(languages[0]?.key);
 

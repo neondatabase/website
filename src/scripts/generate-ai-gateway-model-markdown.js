@@ -12,6 +12,9 @@ const path = require('path');
 
 const modelsData = require('../app/models.json/data.json');
 const modelRows = require('../components/pages/doc/ai-gateway-model-index/model-rows');
+const {
+  getLanguagesForModel,
+} = require('../components/pages/doc/ai-gateway-model-index/model-snippets');
 const snippets = require('../components/pages/doc/ai-gateway-model-index/snippets.json');
 
 const BASE_URL = 'https://neon.com';
@@ -20,16 +23,6 @@ const capitalize = (value) => value.charAt(0).toUpperCase() + value.slice(1);
 const getModelFilename = (modelId) => `${encodeURIComponent(modelId)}.md`;
 
 const renderCodeBlock = (language, code) => `\`\`\`${language}\n${code.trimEnd()}\n\`\`\``;
-
-const getLanguagesForModel = (row, mode, modelSnippets) => {
-  const languages = modelSnippets.tabs[mode]?.languages ?? [];
-  if (mode === 'text' && row.isResponsesOnly) {
-    // Keep parity with ModelDetailClient: Mastra cannot reach Responses-only
-    // models through its OpenAI-compatible endpoint.
-    return languages.filter((language) => language.key !== 'mastra');
-  }
-  return languages;
-};
 
 const renderCommandSection = (row, mode, modelSnippets) => {
   const languages = getLanguagesForModel(row, mode, modelSnippets);

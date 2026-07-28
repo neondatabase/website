@@ -119,11 +119,11 @@ function renderAiGatewayModelIndex() {
   // Text tab — every catalog model.
   sections.push('### Text models');
   sections.push(renderProviderTables(rows, '####'));
-  const mastraNote = responsesOnly.length
-    ? ` Mastra can't reach Responses-only models through the OpenAI-compatible endpoint — use another language for ${responsesOnly.join(', ')}.`
+  const responsesNote = responsesOnly.length
+    ? ` Responses-only Codex models (${responsesOnly.join(', ')}) require the Responses API; use their linked model-detail quickstarts instead.`
     : '';
   sections.push(
-    `**Quickstart (text).** These snippets work for every model above — replace \`${placeholder}\` with any model ID from the tables.${mastraNote}`
+    `**Quickstart (text, Chat Completions).** These snippets work for models whose Endpoints column includes \`chat/completions\` — replace \`${placeholder}\` with one of those model IDs.${responsesNote}`
   );
   sections.push(renderSnippetQuickstart(aiGatewayModelSnippets.tabs.text, { includeEnv: true }));
 

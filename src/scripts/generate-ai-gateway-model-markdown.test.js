@@ -45,13 +45,20 @@ describe('AI Gateway model Markdown', () => {
     expect(renderModelDetailMarkdown(row)).toContain(content);
   });
 
-  it('includes image commands for capable models and omits unsupported Mastra commands', () => {
+  it('omits Chat Completions text commands for Responses-only models', () => {
     const row = rows.find(({ id }) => id === 'gpt-5-3-codex');
     const markdown = renderModelDetailMarkdown(row);
+    const textCommands = markdown.split('### Text generation')[1].split('### Image generation')[0];
 
     expect(markdown).toContain('### Image generation');
     expect(markdown).toContain('tools: [{ type: "image_generation" }]');
-    expect(markdown).not.toContain('#### Mastra');
+    expect(textCommands).toContain('#### AI SDK');
+    expect(textCommands).not.toContain('#### Mastra');
+    expect(textCommands).not.toContain('#### TypeScript');
+    expect(textCommands).not.toContain('#### Python');
+    expect(textCommands).not.toContain('#### curl');
+    expect(textCommands).not.toContain('chat.completions');
+    expect(textCommands).not.toContain('/v1/chat/completions');
   });
 
   it('writes one file per model to the public Markdown mirror', async () => {
