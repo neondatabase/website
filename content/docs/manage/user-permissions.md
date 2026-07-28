@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-28T15:16:30.383Z'
+updatedOn: '2026-07-28T15:56:49.349Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -120,12 +120,14 @@ The following table shows what each level allows:
 | Get connection strings and run SQL in the SQL Editor                                      |   ❌   |   ✅   |  ✅   |
 | Create, edit, or delete branches, endpoints, databases, and Postgres roles                |   ❌   |   ✅   |  ✅   |
 | Create, restore, delete, or reschedule snapshots                                          |   ❌   |   ✅   |  ✅   |
-| Configure integrations (GitHub, Vercel, Managed Better Auth)                              |   ❌   |   ✅   |  ✅   |
+| Configure integrations (GitHub, Vercel)                                                   |   ❌   |   ✅   |  ✅   |
 | Change project settings                                                                   |   ❌   |   ✅   |  ✅   |
 | Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |
 | Delete the project                                                                        |   ❌   |   ❌   |  ✅   |
 
-As a rule, Viewers can see a project's resources, Editors can change them, and Admins manage access and the project itself. Some newer capabilities don't yet enforce per-project permissions; support for those is being added over time.
+As a rule, Viewers can see a project's resources, Editors can change them, and Admins manage access and the project itself.
+
+Newer Neon products, including Managed Better Auth, Storage, Functions, and the AI Gateway, don't fully enforce per-project permissions yet. Per-project permission support for these products is being added over time.
 
 ### Inherited and explicit access (#inherited-and-explicit-access)
 
