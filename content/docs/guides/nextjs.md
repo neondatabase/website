@@ -14,7 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-28T13:50:18.981Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
@@ -44,7 +44,9 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 1. Create a Next.js project if you do not have one. For instructions, see [Create a Next.js App](https://nextjs.org/docs/app/getting-started/installation), in the Vercel documentation.
 
-2. Add project dependencies using one of the following commands:
+2. Add a Postgres driver. If you're not sure which to use, install the **Neon serverless driver** (`@neondatabase/serverless`). It's the recommended default for Next.js: it works in Server Components, Server Actions, Serverless Functions, and Edge Functions, and it's optimized for serverless and edge environments. Choose `postgres.js` or `node-postgres` instead if you're standardizing on an existing client for a long-running Node.js server.
+
+   Install the driver using one of the following commands:
 
    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
