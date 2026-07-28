@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-28T11:16:38.539Z'
+updatedOn: '2026-07-28T14:35:34.657Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -17,7 +17,9 @@ This page is mainly for organization Admins, who decide who can see and change p
 
 For an overview of organizations, see the [Organizations](/docs/manage/organizations) page.
 
-<EarlyAccessProps feature_name="Project permissions" />
+<Admonition type="note" title="Availability">
+New organizations use the permissions model described here. Existing organizations continue to use the [legacy permissions](#legacy-permissions) model until they're migrated, and their access is preserved when that happens. Organizations managed through the [Vercel-managed integration](/docs/guides/vercel-managed-integration) also continue to use the legacy model.
+</Admonition>
 
 ## How permissions work
 
@@ -123,7 +125,7 @@ The following table shows what each level allows:
 | Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |
 | Delete the project                                                                        |   ❌   |   ❌   |  ✅   |
 
-Per-project permissions apply to everything in a project. As a rule, Viewers can see a project's resources, Editors can change them, and Admins manage access and the project itself, including newer capabilities as they become available.
+As a rule, Viewers can see a project's resources, Editors can change them, and Admins manage access and the project itself. Some newer capabilities don't yet enforce per-project permissions; support for those is being added over time.
 
 ### Inherited and explicit access (#inherited-and-explicit-access)
 
