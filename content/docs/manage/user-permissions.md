@@ -8,7 +8,7 @@ summary: >-
   two layers are additive, so a permission can only raise a user's access on a
   project, never lower it.
 enableTableOfContents: true
-updatedOn: '2026-07-16T19:38:01.848Z'
+updatedOn: '2026-07-28T11:00:37.343Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -122,6 +122,8 @@ The following table shows what each level allows:
 | Manage who can access the project                                                         |   ❌   |   ❌   |  ✅   |
 | Delete the project                                                                        |   ❌   |   ❌   |  ✅   |
 
+Per-project permissions apply to everything in a project. As a rule, Viewers can see a project's resources, Editors can change them, and Admins manage access and the project itself, including newer capabilities as they become available.
+
 ### Inherited and explicit access (#inherited-and-explicit-access)
 
 On a project's **Project permissions** page, access shows up in one of two ways:
@@ -131,16 +133,26 @@ On a project's **Project permissions** page, access shows up in one of two ways:
 
 When a user has both an organization-role default and an explicit grant, the higher of the two applies.
 
-## What's changing
+### Manage project access with the API
 
-When your organization moves to the new model, everyone keeps the access they have today. No action is required.
+You can also manage project access programmatically with the [Neon API](/docs/reference/api). List who has access, grant or revoke access, and set an organization member's role on a project (`viewer`, `editor`, or `admin`) through the project members and permissions endpoints. As with the Console, only organization Admins can manage project access.
 
-- **Admins** stay **Admins**.
-- **Members** become **Editors**, with the same access under the new name.
-- **Project creators** become **Admin** on the projects they created.
-- **Existing project-share access becomes Editor access.** People who had a project shared with them are migrated to **Editor** on that project, so their access is preserved.
+The Neon CLI doesn't have a dedicated command for this yet, but you can call the same endpoints with the [`neon api`](/docs/cli/api) passthrough command. See [Manage organizations using the Neon CLI](/docs/manage/orgs-cli#manage-project-access) for an example.
 
-The new **Collaborator** organization role is different from the older project-sharing collaborator, even though they share a name. Project sharing is being deprecated: the new Collaborator role plus per-project permissions replaces it. For new access, use the **Collaborator** role plus per-project permissions instead of project sharing.
+## Legacy permissions
+
+The model on this page is rolling out to organizations gradually. Until it reaches your organization, you'll see the legacy model: three roles (**Admin**, **Member**, and **Collaborator**), where Members share one access level across every project and access is granted per project through project sharing.
+
+When the new model reaches your organization, everyone keeps the access they have today. No action is required. The legacy roles map as follows:
+
+| Legacy                | New                                                                 |
+| --------------------- | ------------------------------------------------------------------- |
+| **Admin**             | **Admin** (unchanged)                                               |
+| **Member**            | **Editor**, with the same access under a new name                   |
+| Project creator       | **Admin** on the projects they created                              |
+| Shared-project access | **Editor** on the projects they were shared, so access is preserved |
+
+The new **Collaborator** organization role is not the same as the legacy project-sharing collaborator, even though they share a name. Project sharing is being deprecated, and the new **Collaborator** role plus per-project permissions replaces it. For new access, use the Collaborator role plus per-project permissions instead of project sharing.
 
 ## Notes and limitations (#notes-and-limitations)
 
