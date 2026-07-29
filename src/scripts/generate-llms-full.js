@@ -77,6 +77,10 @@ async function scanDirectory(dirPath, relativeTo = '') {
       try {
         const raw = await fs.readFile(fullPath, 'utf-8');
         const { data: frontmatter } = matter(raw);
+
+        // Skip unlisted pages (e.g. early-access previews) from the full LLM text.
+        if (frontmatter.unlisted) continue;
+
         results.push({
           relativePath: relPath,
           contentPath: fullPath,

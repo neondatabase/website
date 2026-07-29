@@ -54,7 +54,7 @@ export async function generateMetadata(props) {
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
-    robotsNoindex: post?.data?.noindex ? 'noindex' : null,
+    robotsNoindex: post?.data?.noindex || post?.data?.unlisted ? 'noindex' : null,
     type: 'article',
     markdownPath: `/docs/${currentSlug}.md`,
   });

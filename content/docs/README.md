@@ -25,6 +25,8 @@ Right now Markdown files accept the following fields:
 5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
 7. `ogImage` - the social preview image of the page.
+8. `noindex` — flag that adds `noindex` robots metadata so search engines skip the page. The page still renders and is reachable by direct link.
+9. `unlisted` — flag for pages shared only by direct link (for example, early-access previews). Implies `noindex`, and also keeps the page out of the sitemap, the `llms.txt`/`llms-full.txt` feeds, and the promotional video modal. It does not add the page to navigation, so omit the `navigation.yaml` entry to keep it fully unlisted.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 

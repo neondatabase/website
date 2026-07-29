@@ -99,6 +99,9 @@ async function scanDirectory(dirPath, baseContentPath, routeKey) {
           const content = await fs.readFile(fullPath, 'utf-8');
           const { data: frontmatter } = matter(content);
 
+          // Skip unlisted pages (e.g. early-access previews) from the LLM index.
+          if (frontmatter.unlisted) continue;
+
           const pathParts = relPath.split('/');
           // Use route key as section name for flat routes (files at root of scanned dir)
           const section = pathParts.length > 1 ? toTitleCase(pathParts[0]) : toTitleCase(routeKey);
