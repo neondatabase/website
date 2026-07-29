@@ -17,17 +17,17 @@ and PR description together when a critical destination or outcome changes.
 
 ## Monitored flows
 
-| Test ID           | Priority | Journey                                 | Expected outcome                                                          |
-| ----------------- | -------- | --------------------------------------- | ------------------------------------------------------------------------- |
-| `TC-ACQ-001`      | P0       | Homepage signup                         | CTA targets Neon Console signup                                           |
-| `TC-ACQ-002..005` | P0       | Desktop and mobile authentication entry | Login and signup destinations remain correct                              |
-| `TC-ACQ-006..008` | P0       | Pricing plan selection                  | Free targets signup; Launch and Scale target billing                      |
-| `TC-DOC-001..002` | P0       | Documentation onboarding                | Docs load, quickstart is reachable, search opens, init command copies     |
-| `TC-LEAD-001`     | P0       | Contact sales                           | Analytics payload is sent and the final success or error state is visible |
-| `TC-LEAD-002`     | P1       | Startup application                     | Analytics payload is sent and the final success state is visible          |
-| `TC-LEAD-003`     | P1       | AI agent application                    | Analytics payload is sent and the final success state is visible          |
-| `TC-SUB-001`      | P1       | Changelog subscription                  | Subscription analytics and final UI state are correct                     |
-| `TC-SUB-002`      | P1       | Blog subscription                       | Subscription analytics and final UI state are correct                     |
+| Test ID           | Priority | Journey                                 | Expected outcome                                                            |
+| ----------------- | -------- | --------------------------------------- | --------------------------------------------------------------------------- |
+| `TC-ACQ-001`      | P0       | Homepage signup                         | CTA targets Neon Console signup                                             |
+| `TC-ACQ-002..005` | P0       | Desktop and mobile authentication entry | Login and signup destinations remain correct                                |
+| `TC-ACQ-006..008` | P0       | Pricing plan selection                  | Free targets signup; Launch and Scale target billing                        |
+| `TC-DOC-001..002` | P0       | Documentation onboarding                | Docs load, quickstart is reachable, search opens, init command copies       |
+| `TC-LEAD-001*`    | P0       | Contact sales                           | Required fields, email, analytics payload, success, and failure states work |
+| `TC-LEAD-002*`    | P1       | Startup application                     | Required fields, email, analytics payload, success, and failure states work |
+| `TC-LEAD-003*`    | P1       | AI agent application                    | Required email, analytics payload, success, and failure states work         |
+| `TC-SUB-001*`     | P1       | Changelog subscription                  | Email validation, subscription analytics, success, and failure states work  |
+| `TC-SUB-002`      | P1       | Blog article subscription               | Subscription analytics and the final success state are correct              |
 
 Every browser test follows Arrange, Act, Assert:
 
@@ -37,6 +37,23 @@ Every browser test follows Arrange, Act, Assert:
 
 Tests must never create accounts, leads, or subscriptions. Use `@example.com` addresses and keep
 all external submission boundaries mocked.
+
+## Cypress migration coverage
+
+The former Cypress suite contained 21 scenarios. Before migration, only 11 still passed against the
+current site. Playwright retains every passing behavior and restores useful validation checks for
+the current contact sales and changelog forms.
+
+Five obsolete expectations were intentionally retired instead of copying broken selectors:
+
+- four `/blog` index subscription tests, because that route no longer contains the form; `TC-SUB-002`
+  monitors the current blog article form instead
+- one AI agent URL-format test, because the current product contract requires a non-empty value but
+  does not validate its URL format
+
+The old assertions and waits on HubSpot requests were not ported. These forms currently submit
+analytics events and do not call that endpoint. Playwright still mocks external form routes
+defensively so future changes cannot create real leads or subscriptions during tests.
 
 ## Local commands
 
@@ -49,10 +66,11 @@ npx playwright install chromium webkit
 Run the complete desktop/mobile Chromium and WebKit matrix:
 
 ```bash
-npm run test:critical
+npm run test
 ```
 
-Run a fast desktop Chromium check:
+`npm run test:critical` is an explicit alias for the same monitoring suite. Run a fast desktop
+Chromium check with:
 
 ```bash
 npm run test:critical:quick
@@ -69,10 +87,9 @@ Playwright starts the local Next.js server automatically. Set `PLAYWRIGHT_BASE_U
 already running local or preview deployment. Set `PLAYWRIGHT_SKIP_WEB_SERVER=1` when the target
 server is managed separately.
 
-## Why Playwright for new critical flows
+## Why Playwright
 
-The existing Cypress suite remains supported as `npm run test:e2e:legacy`. Playwright is used for
-new critical-flow monitoring because it provides:
+Playwright is the project's E2E runner because it provides:
 
 - first-class Chromium and WebKit projects; Cypress WebKit support is experimental
 - one declarative project matrix for desktop and mobile device profiles
@@ -85,11 +102,9 @@ The tradeoffs are:
 
 - Cypress has a particularly strong interactive command log and time-travel debugging experience
 - Playwright's async API requires every action and assertion to be awaited consistently
-- a second E2E dependency and configuration while Cypress remains
 - additional browser downloads and CI time
-- temporary duplication of test conventions during migration
 - WebKit tests approximate Safari but do not execute the branded Safari browser
 
-Keeping both tools is intentional during migration. New critical flows belong in Playwright;
-existing Cypress tests stay unchanged until a separate decision is made about migration or
-retirement.
+The Cypress runner, configuration, workflow, and dependencies were removed after the active form
+coverage was migrated. Published Cypress integration guides remain part of the website content and
+are unrelated to this repository's test runner.

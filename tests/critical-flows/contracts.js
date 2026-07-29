@@ -159,6 +159,18 @@ const LEAD_FORM_CONTRACTS = [
         },
       },
     ],
+    identifyFailureId: 'TC-LEAD-001-ERR-IDENTIFY',
+    validation: {
+      required: {
+        id: 'TC-LEAD-001-VAL-REQUIRED',
+        seedField: 'firstname',
+        errorCount: 5,
+        errorText: /Required [Ff]ield/,
+      },
+      invalidEmail: {
+        id: 'TC-LEAD-001-VAL-EMAIL',
+      },
+    },
   },
   {
     id: 'TC-LEAD-002',
@@ -195,6 +207,18 @@ const LEAD_FORM_CONTRACTS = [
         },
       },
     ],
+    identifyFailureId: 'TC-LEAD-002-ERR-IDENTIFY',
+    validation: {
+      required: {
+        id: 'TC-LEAD-002-VAL-REQUIRED',
+        seedField: 'firstname',
+        errorCount: 4,
+        errorText: 'Required field',
+      },
+      invalidEmail: {
+        id: 'TC-LEAD-002-VAL-EMAIL',
+      },
+    },
   },
 ];
 
@@ -222,6 +246,17 @@ const AGENT_FORM_CONTRACT = {
       },
     },
   ],
+  identifyFailureId: 'TC-LEAD-003-ERR-IDENTIFY',
+  validation: {
+    required: {
+      id: 'TC-LEAD-003-VAL-REQUIRED',
+      errorText: 'This field is required',
+    },
+    invalidEmail: {
+      id: 'TC-LEAD-003-VAL-EMAIL',
+      errorText: 'Please enter a valid email address',
+    },
+  },
 };
 
 const SUBSCRIPTION_CONTRACTS = [
@@ -234,6 +269,17 @@ const SUBSCRIPTION_CONTRACTS = [
     policy: 'monitor',
     pagePath: '/docs/changelog',
     email: 'critical-flow-changelog@example.com',
+    validation: {
+      required: {
+        id: 'TC-SUB-001-VAL-REQUIRED',
+        errorText: 'Please enter your email',
+      },
+      invalidEmail: {
+        id: 'TC-SUB-001-VAL-EMAIL',
+        email: 'invalid-email',
+        errorText: 'Please enter a valid email',
+      },
+    },
   },
   {
     id: 'TC-SUB-002',

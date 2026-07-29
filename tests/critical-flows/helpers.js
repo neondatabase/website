@@ -108,7 +108,13 @@ async function installClipboardMock(page) {
 async function expectAnalyticsEvents(page, expectedEvents) {
   await expect
     .poll(() => page.evaluate((eventsKey) => window[eventsKey] || [], ANALYTICS_EVENTS_KEY))
-    .toEqual(expect.arrayContaining(expectedEvents));
+    .toEqual(expectedEvents);
+}
+
+async function expectNoAnalyticsEvents(page) {
+  const events = await page.evaluate((eventsKey) => window[eventsKey] || [], ANALYTICS_EVENTS_KEY);
+
+  expect(events).toEqual([]);
 }
 
 async function expectClipboardText(page, expectedText) {
@@ -140,6 +146,7 @@ module.exports = {
   expectClipboardText,
   expectHealthyPage,
   expectManagedFormReady,
+  expectNoAnalyticsEvents,
   expectReactHandlerReady,
   installAnalyticsMock,
   installClipboardMock,

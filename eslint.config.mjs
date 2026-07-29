@@ -5,7 +5,6 @@ import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 import nextPlugin from '@next/eslint-plugin-next';
 import prettierConfig from 'eslint-config-prettier/flat';
-import cypressPlugin from 'eslint-plugin-cypress/flat';
 import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
@@ -34,11 +33,6 @@ export default [
   {
     plugins: { '@next/next': nextPlugin },
     rules: { ...nextPlugin.configs.recommended.rules },
-  },
-
-  {
-    ...cypressPlugin.configs.recommended,
-    files: ['cypress/**/*.{js,jsx}'],
   },
 
   {
