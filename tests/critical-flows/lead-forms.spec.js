@@ -9,6 +9,7 @@ const {
   installAnalyticsMock,
   mockExternalFormSubmissions,
   openCriticalPage,
+  releaseDeferredAnalyticsFailure,
 } = require('./helpers');
 
 async function fillLeadForm(form, contract, fieldOverrides = {}) {
@@ -86,6 +87,15 @@ for (const contract of LEAD_FORM_CONTRACTS) {
 
     expect(validity).toMatchObject({ typeMismatch: true, valid: false });
     expect(validity.validationMessage).not.toBe('');
+
+    await form.evaluate((formElement) => {
+      formElement.noValidate = true;
+    });
+    await submitLeadForm(form, contract);
+
+    const errors = form.getByTestId('error-field-message');
+    await expect(errors).toHaveCount(1);
+    await expect(errors).toHaveText(contract.validation.invalidEmail.errorText);
     await expect(form.locator('button[type="submit"]')).toHaveText(contract.submitText);
     await expectNoAnalyticsEvents(page);
     await expectHealthyPage(applicationErrors);
@@ -108,7 +118,7 @@ for (const contract of LEAD_FORM_CONTRACTS) {
   });
 }
 
-test('[TC-LEAD-001-ERR] contact sales does not show success when analytics fails', async ({
+test(`[${LEAD_FORM_CONTRACTS[0].analyticsFailureId}] contact sales does not show success when analytics fails`, async ({
   page,
 }) => {
   const contract = LEAD_FORM_CONTRACTS[0];
@@ -192,14 +202,17 @@ test(`[${AGENT_FORM_CONTRACT.identifyFailureId}] ${AGENT_FORM_CONTRACT.name} sto
   page,
 }) => {
   const { applicationErrors, contract, form } = await openAgentForm(page, {
+    deferFailure: true,
     failureEventName: 'identify',
   });
   const submitButton = form.locator('button[type="submit"]');
 
   await submitAgentForm(form, contract);
 
-  await expect(submitButton).toHaveText('Submitting...');
+  await expect(submitButton).toBeDisabled();
+  await releaseDeferredAnalyticsFailure(page);
   await expect(submitButton).toHaveText('Apply');
+  await expect(submitButton).toBeEnabled();
   await expect(form.getByTestId('success-message')).toHaveCount(0);
   await expectAnalyticsEvents(page, [contract.expectedEvents[0]]);
   await expectHealthyPage(applicationErrors);

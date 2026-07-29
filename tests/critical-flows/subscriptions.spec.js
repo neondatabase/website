@@ -87,7 +87,9 @@ test(`[${changelogContract.validation.invalidEmail.id}] ${changelogContract.name
   await expectHealthyPage(applicationErrors);
 });
 
-test('[TC-SUB-001-ERR] changelog subscription reports analytics failure', async ({ page }) => {
+test(`[${changelogContract.analyticsFailureId}] changelog subscription reports analytics failure`, async ({
+  page,
+}) => {
   const contract = changelogContract;
   const { applicationErrors, formContainer } = await openSubscriptionForm(page, contract, {
     failureEventName: 'Changelog Subscription',

@@ -159,6 +159,7 @@ const LEAD_FORM_CONTRACTS = [
         },
       },
     ],
+    analyticsFailureId: 'TC-LEAD-001-ERR',
     identifyFailureId: 'TC-LEAD-001-ERR-IDENTIFY',
     validation: {
       required: {
@@ -169,6 +170,7 @@ const LEAD_FORM_CONTRACTS = [
       },
       invalidEmail: {
         id: 'TC-LEAD-001-VAL-EMAIL',
+        errorText: 'Please enter a valid email',
       },
     },
   },
@@ -217,6 +219,7 @@ const LEAD_FORM_CONTRACTS = [
       },
       invalidEmail: {
         id: 'TC-LEAD-002-VAL-EMAIL',
+        errorText: 'Please enter a valid email',
       },
     },
   },
@@ -269,6 +272,7 @@ const SUBSCRIPTION_CONTRACTS = [
     policy: 'monitor',
     pagePath: '/docs/changelog',
     email: 'critical-flow-changelog@example.com',
+    analyticsFailureId: 'TC-SUB-001-ERR',
     validation: {
       required: {
         id: 'TC-SUB-001-VAL-REQUIRED',

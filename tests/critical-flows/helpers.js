@@ -1,6 +1,7 @@
 const { expect } = require('@playwright/test');
 
 const ANALYTICS_EVENTS_KEY = '__NEON_CRITICAL_FLOW_ANALYTICS_EVENTS__';
+const ANALYTICS_FAILURE_RELEASE_KEY = '__NEON_CRITICAL_FLOW_ANALYTICS_FAILURE_RELEASE__';
 const CLIPBOARD_TEXT_KEY = '__NEON_CRITICAL_FLOW_CLIPBOARD_TEXT__';
 const NON_BLOCKING_PAGE_ERRORS = [
   /\/unpkg\.com\/@rive-app\/canvas@.+\/rive\.wasm due to access control checks\.$/,
@@ -61,7 +62,7 @@ async function expectManagedFormReady(form) {
 
 async function installAnalyticsMock(page, options = {}) {
   await page.addInitScript(
-    ({ eventsKey, failureEventName }) => {
+    ({ deferFailure, eventsKey, failureEventName, failureReleaseKey }) => {
       window[eventsKey] = [];
       const analytics = {
         identify: async (email) => {
@@ -70,6 +71,11 @@ async function installAnalyticsMock(page, options = {}) {
         track: async (name, properties) => {
           window[eventsKey].push({ name, properties });
           if (name === failureEventName) {
+            if (deferFailure) {
+              await new Promise((resolve) => {
+                window[failureReleaseKey] = resolve;
+              });
+            }
             throw new Error(`Mocked analytics failure for ${name}`);
           }
         },
@@ -82,10 +88,28 @@ async function installAnalyticsMock(page, options = {}) {
       });
     },
     {
+      deferFailure: options.deferFailure,
       eventsKey: ANALYTICS_EVENTS_KEY,
       failureEventName: options.failureEventName,
+      failureReleaseKey: ANALYTICS_FAILURE_RELEASE_KEY,
     }
   );
+}
+
+async function releaseDeferredAnalyticsFailure(page) {
+  await expect
+    .poll(() =>
+      page.evaluate(
+        (failureReleaseKey) => typeof window[failureReleaseKey] === 'function',
+        ANALYTICS_FAILURE_RELEASE_KEY
+      )
+    )
+    .toBe(true);
+
+  await page.evaluate((failureReleaseKey) => {
+    window[failureReleaseKey]();
+    delete window[failureReleaseKey];
+  }, ANALYTICS_FAILURE_RELEASE_KEY);
 }
 
 async function installClipboardMock(page) {
@@ -152,4 +176,5 @@ module.exports = {
   installClipboardMock,
   mockExternalFormSubmissions,
   openCriticalPage,
+  releaseDeferredAnalyticsFailure,
 };
