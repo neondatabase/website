@@ -40,7 +40,7 @@ seo:
 
 <blockquote>
 <p>"We're running lakebase_text and lakebase_vector across three different parts of our product. Query latency improved 1,000x and we don't need a separate search stack sitting next to our Postgres"</p>
-<cite>Srijit Ghosh, Co-founder and CTO at <a href="https://commsync.ai/">CommSync</a></cite>
+<cite>Srijit Ghosh, Co-founder and CTO at CommSync</cite>
 </blockquote>
 
 [CommSync](https://commsync.ai/) gives business owners one inbox for every conversation, threading SMS and email from every channel into a single view. It makes life simple for professionals that need to keep an eye on different people and operations all at once, e.g. wedding planners, brokers, med-spas...
@@ -53,7 +53,7 @@ The nature of the CommSync product means there's a need for search across a high
 
 <blockquote>
 <p>"Using Lakebase Search, we clocked around 18.6ms warm, versus around 19.5 seconds on our old cold-start GIN approach. That's a 1,000x improvement"</p>
-<cite>Srijit Ghosh, Co-founder and CTO at <a href="https://commsync.ai/">CommSync</a></cite>
+<cite>Srijit Ghosh, Co-founder and CTO at CommSync</cite>
 </blockquote>
 
 CommSync runs search in three different features, each one with different requirements:
@@ -118,7 +118,7 @@ Before an agent answers a customer, it retrieves from an org-level knowledge bas
 
 <blockquote>
 <p>"Our agents' knowledge base is just another table. Retrieval is a cosine top-K where tenancy and each agent's document whitelist are WHERE clauses in the same query. There's no second vector database to mirror our permission model into"</p>
-<cite>Srijit Ghosh, Co-founder and CTO at <a href="https://commsync.ai/">CommSync</a></cite>
+<cite>Srijit Ghosh, Co-founder and CTO at CommSync</cite>
 </blockquote>
 
 Because everything is pgvector-compatible SQL on one database, CommSync gets to pick the right retrieval strategy per corpus: the shared inbox index (hundreds of thousands of message chunks) uses the `lakebase_ann` index for approximate nearest-neighbor speed, while each organization's knowledge base (capped at a handful of documents) runs exact nearest-neighbor with no index at all, trading nothing for perfect recall. One extension, two strategies, chosen table by table.
@@ -132,7 +132,7 @@ CommSync could build all three search features directly in Postgres thanks to La
 
 <blockquote>
 <p>"The auto-detection of lakebase_text in shared_preload_libraries at boot made rollout painless. We didn't have to hardcode a feature flag per environment"</p>
-<cite>Srijit Ghosh, Co-founder and CTO at <a href="https://commsync.ai/">CommSync</a></cite>
+<cite>Srijit Ghosh, Co-founder and CTO at CommSync</cite>
 </blockquote>
 
 Used separately, the two extensions cover text search and vector search. Used together, they support hybrid search, combining exact-term precision with conceptual recall in a single query path on the same Postgres database that already holds the rest of the application's data.
