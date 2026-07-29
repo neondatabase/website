@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/user-permissions-preview
-updatedOn: '2026-07-29T12:28:16.687Z'
+updatedOn: '2026-07-29T13:53:54.324Z'
 ---
 
 In Neon, access works in two layers. Your **organization role** sets a baseline level of access across every project in the org, and **per-project permissions** grant additional access on individual projects. This page explains how the two layers combine and what each role and permission lets you do.
@@ -202,33 +202,6 @@ curl --request DELETE \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/members/{member_id}/role' \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $ORG_API_KEY'
-```
-
-### Preview a role change
-
-Before you change a member's organization role, preview how it would affect their access to each project. Pass the target role as a query parameter. The response lists each project with the member's current and resulting effective permission, and flags any project where the change would reduce their access.
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}/role_change_preview?role=admin' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $ORG_API_KEY' | jq
-```
-
-Example response:
-
-```json
-{
-  "projects": [
-    {
-      "project_id": "example-project-12345678",
-      "project_name": "billing-api",
-      "current_effective_project_role": "editor",
-      "resulting_effective_project_role": "admin",
-      "will_reduce_access": false
-    }
-  ]
-}
 ```
 
 ## Legacy permissions
