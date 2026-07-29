@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-28T14:35:34.657Z'
 ---
 
 <InfoBlock>
@@ -175,6 +175,10 @@ Team membership changes in Vercel automatically sync to your Neon organization:
 - **Removals**: When a user is removed from your Vercel team, they're automatically removed from the associated Neon organization.
 
 This ensures both platforms stay aligned for security and access control.
+
+<Admonition type="note">
+Organizations managed through the Vercel-managed integration use Neon's legacy roles (Admin and Member), as described above. The newer [organization roles and per-project permissions](/docs/manage/user-permissions) don't apply to Vercel-managed organizations.
+</Admonition>
 
 ### Project transfers between teams
 

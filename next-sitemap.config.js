@@ -18,9 +18,6 @@ module.exports = {
 
     // Legacy docs
     '/docs/auth/legacy/*',
-
-    // Early-access preview (unlisted, noindex)
-    '/docs/manage/user-permissions-preview',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],
