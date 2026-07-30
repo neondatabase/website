@@ -51,33 +51,24 @@ const formatDate = (iso) => {
   return `${MONTHS[monthIndex]} ${year}`;
 };
 
-const isResponsesOnly = (model) => model.id.toLowerCase().includes('codex');
-
-// Image tab: OpenAI GPT models that support the Responses image_generation
-// tool. Only open-weight gpt-oss is excluded (routes to MLflow, no Responses
-// tools); Codex models ARE image-capable (verified live against the gateway).
-const isImageCapable = (model) =>
-  model.provider === 'openai' && !model.id.toLowerCase().startsWith('gpt-oss');
+const isImageCapable = (capability) =>
+  capability?.entitled !== false && capability?.imageGeneration === true;
 
 // The gateway routes a model reaches. Conveyed to users mainly through the
 // quickstart snippet's base URL; surfaced here for the markdown mirror.
-const deriveEndpoints = (model) => {
-  const { provider, id } = model;
-  if (provider === 'openai') {
-    if (isResponsesOnly(model)) return ['openai/responses'];
-    if (id.toLowerCase().startsWith('gpt-oss')) return ['chat/completions'];
-    return ['chat/completions', 'openai/responses'];
+const deriveEndpoints = (capability) => {
+  if (!capability || capability.entitled === false || capability.chat === 'not-entitled') {
+    return [];
   }
-  if (provider === 'anthropic') return ['chat/completions', 'anthropic/messages'];
-  if (provider === 'google') {
-    return id.toLowerCase().startsWith('gemma')
-      ? ['chat/completions']
-      : ['chat/completions', 'gemini'];
-  }
-  return ['chat/completions'];
+
+  const endpoints = [];
+  if (capability.chat !== 'not-served') endpoints.push('chat/completions');
+  if (capability.nativeDialect === 'gemini') endpoints.push('gemini');
+  if (capability.responses) endpoints.push('openai/responses');
+  return endpoints;
 };
 
-const toRow = (model) => {
+const toRow = (model, capability) => {
   const inputs = model.modalities?.input ?? [];
   const contextWindow = model.limit?.context;
   const costInput = model.cost?.input;
@@ -101,17 +92,20 @@ const toRow = (model) => {
     releaseLabel: formatDate(model.release_date),
     openWeights: Boolean(model.open_weights),
     license: model.open_weights ? 'Open weights' : 'Proprietary',
-    endpoints: deriveEndpoints(model),
-    isImageCapable: isImageCapable(model),
-    isResponsesOnly: isResponsesOnly(model),
+    endpoints: deriveEndpoints(capability),
+    isImageCapable: isImageCapable(capability),
+    hasMeasuredCapabilities: Boolean(capability),
   };
 };
 
 // All rows, sorted by provider order then release date (newest first).
-const buildRows = (neonProvider) => {
+const buildRows = (neonProvider, capabilities) => {
   const models = neonProvider?.models ?? {};
+  const capabilitiesById = new Map(
+    (capabilities?.models ?? []).map((capability) => [capability.id, capability])
+  );
   return Object.values(models)
-    .map(toRow)
+    .map((model) => toRow(model, capabilitiesById.get(model.id)))
     .sort((a, b) => {
       const pa = PROVIDER_ORDER.indexOf(a.provider);
       const pb = PROVIDER_ORDER.indexOf(b.provider);
@@ -148,7 +142,6 @@ module.exports = {
   formatContextWindow,
   formatPrice,
   formatDate,
-  isResponsesOnly,
   isImageCapable,
   deriveEndpoints,
   toRow,

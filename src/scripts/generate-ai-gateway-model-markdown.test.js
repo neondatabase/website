@@ -4,18 +4,21 @@ import path from 'path';
 
 import { afterEach, describe, expect, it } from 'vitest';
 
+import capabilities from '../app/models/capabilities.json';
 import modelsData from '../app/models.json/data.json';
+import { resolveModel } from '../app/models/resolve';
 import getModelDetailPageData from '../components/pages/doc/ai-gateway-model-index/model-detail-data';
 import modelRows from '../components/pages/doc/ai-gateway-model-index/model-rows';
-import snippets from '../components/pages/doc/ai-gateway-model-index/snippets.json';
 
 import {
   generateAiGatewayModelMarkdown,
   renderModelDetailMarkdown,
+  resolveExamplesByMode,
 } from './generate-ai-gateway-model-markdown';
 
 const tempDirs = [];
-const rows = modelRows.buildRows(modelsData.neon);
+const rows = modelRows.buildRows(modelsData.neon, capabilities);
+const getExamplesByMode = (modelId) => resolveExamplesByMode(resolveModel, modelId);
 
 afterEach(async () => {
   await Promise.all(tempDirs.splice(0).map((dir) => fs.rm(dir, { recursive: true, force: true })));
@@ -24,14 +27,13 @@ afterEach(async () => {
 describe('AI Gateway model Markdown', () => {
   it('renders model-specific about text, commands, and fields', () => {
     const row = rows.find(({ id }) => id === 'gemini-3-5-flash');
-    const markdown = renderModelDetailMarkdown(row);
+    const markdown = renderModelDetailMarkdown(row, getExamplesByMode(row.id));
 
     expect(markdown).toContain('# Gemini 3.5 Flash');
     expect(markdown).toContain('## About');
     expect(markdown).toContain('Google provides the model');
     expect(markdown).toContain('## Command');
     expect(markdown).toContain('model: neon("gemini-3-5-flash")');
-    expect(markdown).not.toContain(snippets.modelIdPlaceholder);
     expect(markdown).toContain('## Model ID\n\ngemini-3-5-flash');
     expect(markdown).toContain('## Input /M');
     expect(markdown).toContain('## Output /M');
@@ -42,23 +44,33 @@ describe('AI Gateway model Markdown', () => {
     const row = rows.find(({ id }) => id === 'gemini-3-5-flash');
     const { content } = getModelDetailPageData(row);
 
-    expect(renderModelDetailMarkdown(row)).toContain(content);
+    expect(renderModelDetailMarkdown(row, getExamplesByMode(row.id))).toContain(content);
   });
 
-  it('omits Chat Completions text commands for Responses-only models', () => {
+  it('renders Responses-compatible commands for Responses-only models', () => {
     const row = rows.find(({ id }) => id === 'gpt-5-3-codex');
-    const markdown = renderModelDetailMarkdown(row);
+    const markdown = renderModelDetailMarkdown(row, getExamplesByMode(row.id));
     const textCommands = markdown.split('### Text generation')[1].split('### Image generation')[0];
 
     expect(markdown).toContain('### Image generation');
     expect(markdown).toContain('tools: [{ type: "image_generation" }]');
     expect(textCommands).toContain('#### AI SDK');
-    expect(textCommands).not.toContain('#### Mastra');
-    expect(textCommands).not.toContain('#### TypeScript');
-    expect(textCommands).not.toContain('#### Python');
-    expect(textCommands).not.toContain('#### curl');
+    expect(textCommands).toContain('#### Mastra');
+    expect(textCommands).toContain('#### TypeScript');
+    expect(textCommands).toContain('#### Python');
+    expect(textCommands).toContain('#### cURL');
+    expect(textCommands).toContain('client.responses.create');
     expect(textCommands).not.toContain('chat.completions');
     expect(textCommands).not.toContain('/v1/chat/completions');
+  });
+
+  it('does not advertise generic commands for models without measured capabilities', () => {
+    const row = rows.find(({ id }) => id === 'gpt-5-2-codex');
+    const markdown = renderModelDetailMarkdown(row, getExamplesByMode(row.id));
+
+    expect(markdown).toContain('Code examples are not currently available for this model.');
+    expect(markdown).not.toContain('**Environment variables**');
+    expect(markdown).not.toContain('chat.completions');
   });
 
   it('writes one file per model to the public Markdown mirror', async () => {

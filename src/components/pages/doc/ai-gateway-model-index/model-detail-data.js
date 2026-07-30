@@ -4,13 +4,17 @@ const BASE_TABLE_OF_CONTENTS = [
 ];
 
 const capitalize = (value) => value.charAt(0).toUpperCase() + value.slice(1);
+const getProviderDescription = (row) =>
+  row.endpoints.length > 0
+    ? `${row.providerName} provides ${row.name}. Access the model through the Neon AI Gateway using ${row.endpoints.join(' and ')}.`
+    : `${row.providerName} provides ${row.name}. Verified AI Gateway code examples are not currently available for this model.`;
 
 const getSections = (row) => [
   { title: 'Model ID', id: 'model-id', value: row.id },
   {
     title: 'Provider',
     id: 'provider',
-    value: `${row.providerName} provides ${row.name}. Access the model through the Neon AI Gateway using ${row.endpoints.join(' and ')}.`,
+    value: getProviderDescription(row),
   },
   { title: 'Inputs', id: 'inputs', value: capitalize(row.inputsLabel) },
   { title: 'Context', id: 'context', value: row.contextLabel },
@@ -33,4 +37,4 @@ const getModelDetailPageData = (row) => {
   };
 };
 
-export default getModelDetailPageData;
+module.exports = getModelDetailPageData;

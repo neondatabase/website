@@ -4,14 +4,14 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import parse from 'html-react-parser';
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import highlight from 'lib/shiki';
 
-import { getLanguagesForModel } from './model-snippets';
+import { ENV_EXAMPLE } from './model-examples';
 
 const HighlightedCode = ({ code, language }) => {
   const [html, setHtml] = useState('');
@@ -101,7 +101,7 @@ LanguageSelect.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-const ModelDetailClient = ({ row, snippets, initialMode }) => {
+const ModelDetailClient = ({ languagesByMode, initialMode }) => {
   const router = useRouter();
   const [mode, setMode] = useState(initialMode);
 
@@ -109,7 +109,7 @@ const ModelDetailClient = ({ row, snippets, initialMode }) => {
     setMode(initialMode);
   }, [initialMode]);
 
-  const languages = useMemo(() => getLanguagesForModel(row, mode, snippets), [snippets, mode, row]);
+  const languages = languagesByMode[mode] ?? [];
 
   const [langKey, setLangKey] = useState(languages[0]?.key);
 
@@ -120,12 +120,16 @@ const ModelDetailClient = ({ row, snippets, initialMode }) => {
   }, [languages]);
 
   const activeLang = languages.find((language) => language.key === langKey) ?? languages[0];
-  if (!activeLang) return null;
+  if (!activeLang) {
+    return (
+      <div className="not-prose mt-6 border border-gray-new-80 px-4 py-3 text-sm text-gray-new-40 dark:border-gray-new-20 dark:text-gray-new-70">
+        Code examples are not currently available for this model.
+      </div>
+    );
+  }
 
-  const placeholder = snippets.modelIdPlaceholder;
-  const codeForModel = activeLang.code.split(placeholder).join(row.id);
-  const codeFilename =
-    { typescript: 'index.ts', python: 'main.py', bash: 'request.sh' }[activeLang.lang] || 'snippet';
+  const codeFilename = activeLang.filename || 'snippet';
+  const hasImageExamples = languagesByMode.image.length > 0;
 
   const changeMode = (nextMode) => {
     setMode(nextMode);
@@ -139,7 +143,7 @@ const ModelDetailClient = ({ row, snippets, initialMode }) => {
   return (
     <div className="not-prose mt-6 flex flex-col gap-5">
       <div className="flex flex-wrap items-center gap-3">
-        {row.isImageCapable && (
+        {hasImageExamples && (
           <div
             className="inline-flex h-9 border border-gray-new-80 bg-white p-0.75 dark:border-gray-new-20 dark:bg-black-new"
             role="group"
@@ -181,16 +185,16 @@ const ModelDetailClient = ({ row, snippets, initialMode }) => {
         <CodeBlockWrapper
           className="[&>pre]:my-0 [&>pre]:rounded-none [&>pre]:bg-white! [&>pre]:py-4 [&>pre]:dark:bg-black-pure!"
           as="div"
-          copyCode={codeForModel}
+          copyCode={activeLang.code}
         >
-          <HighlightedCode code={codeForModel} language={activeLang.lang} />
+          <HighlightedCode code={activeLang.code} language={activeLang.lang} />
         </CodeBlockWrapper>
         <CodeBlockWrapper
           className="[&>pre]:my-0 [&>pre]:rounded-none [&>pre]:bg-white! [&>pre]:py-4 [&>pre]:dark:bg-black-pure!"
           as="div"
-          copyCode={snippets.envExample}
+          copyCode={ENV_EXAMPLE}
         >
-          <HighlightedCode code={snippets.envExample} language="bash" />
+          <HighlightedCode code={ENV_EXAMPLE} language="bash" />
         </CodeBlockWrapper>
       </CodeTabs>
     </div>
@@ -198,13 +202,11 @@ const ModelDetailClient = ({ row, snippets, initialMode }) => {
 };
 
 ModelDetailClient.propTypes = {
-  row: PropTypes.object.isRequired,
-  initialMode: PropTypes.oneOf(['text', 'image']).isRequired,
-  snippets: PropTypes.shape({
-    modelIdPlaceholder: PropTypes.string.isRequired,
-    tabs: PropTypes.object.isRequired,
-    envExample: PropTypes.string.isRequired,
+  languagesByMode: PropTypes.shape({
+    text: PropTypes.arrayOf(PropTypes.object).isRequired,
+    image: PropTypes.arrayOf(PropTypes.object).isRequired,
   }).isRequired,
+  initialMode: PropTypes.oneOf(['text', 'image']).isRequired,
 };
 
 export default ModelDetailClient;
