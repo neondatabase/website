@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-07-30T15:38:50.681Z'
+updatedOn: '2026-07-30T15:40:26.914Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -89,14 +89,14 @@ INFO: Linking organization XXX (org-round-sun-33472318).
 ✔ Name for the new project: … llm-proxy-demo
 ✔ Which region should the new project run in? › AWS US East 2 (Ohio) (aws-us-east-2)
 Created project winter-breeze-65209364 ("llm-proxy-demo") in aws-us-east-2.
-Linked /path/to/llm-proxy-backend/.neon:
+Linked <project-directory>/llm-proxy-backend/.neon:
   orgId:     org-round-sun-33472318
   projectId: winter-breeze-65209364
   branch:    main
 
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 
-INFO: Pulled 3 Neon variables into /path/to/llm-proxy-backend/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
+INFO: Pulled 3 Neon variables into <project-directory>/llm-proxy-backend/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
 ```
 
 When prompted whether to manage setup as code, select **Yes** to generate a `neon.ts` file. This file will configure your project's services and function deployment.
