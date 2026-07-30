@@ -1,14 +1,13 @@
 ---
 title: Neon and Lakebase
-subtitle: 'One database, two platforms: how to choose where to run Lakebase Postgres'
+subtitle: How to choose where to run Lakebase Postgres
 summary: >-
   Lakebase Postgres is an OLTP database where storage and compute are separated
-  and durable object storage is the source of truth. It runs on two platforms:
-  Neon, a suite of primitives for apps and agents built for developers,
-  startups, and agent platforms, and Databricks, the Data and AI platform for
+  and durable object storage is the source of truth. It runs in two places: on
+  Neon, a complete backend for apps and agents built for developers, startups,
+  and agent platforms, and on Databricks, the Data and AI platform for
   businesses. Same infrastructure, same technology, same core feature set. Use
-  this page to understand the lakebase architecture and decide which platform
-  fits your team.
+  this page to understand the lakebase architecture and decide where to run it.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
@@ -16,7 +15,7 @@ redirectFrom:
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-In 2025, Neon joined Databricks. The serverless Postgres architecture that Neon pioneered is now the foundation of Lakebase Postgres, a database you can run on two platforms: Neon and Databricks. Wherever you run it, it's the same infrastructure, the same technology, and the same core feature set. What differs is the platform around the database. This page explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase), what's the same on both platforms, and how to choose between them.
+In 2025, Neon joined Databricks. The serverless Postgres architecture that Neon pioneered is now the foundation of Lakebase Postgres, a database you can run in two places: on Neon and on Databricks. Wherever you run it, it's the same infrastructure, the same technology, and the same core feature set. What differs is what's built around the database. This page explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase), what's the same in both places, and how to choose between them.
 
 ## What is a lakebase?
 
@@ -27,19 +26,19 @@ At the broadest level, a lakebase is a type of OLTP database where storage and c
 - **Copies are virtual.** [Branches](/docs/introduction/branching) are copy-on-write views over shared storage, so a full copy of your database for development, testing, or an agent workflow is created in seconds and costs nothing until it diverges.
 - **Operational data is lake-native.** Data lives in the same storage layer as the lakehouse, so analytics and AI can reach it without ETL pipelines or fragile sync jobs.
 
-## One database, two platforms
+## Where Lakebase Postgres runs
 
 Lakebase Postgres is available in two places:
 
-- **On Neon**, as part of a suite of primitives designed for apps and agents: Postgres alongside [Auth](/docs/auth/overview), [Data API](/docs/data-api/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), and [AI Gateway](/docs/ai-gateway/overview).
+- **On Neon**, as the database at the core of a complete backend for apps and agents: Postgres alongside [Auth](/docs/auth/overview), [Data API](/docs/data-api/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), and [AI Gateway](/docs/ai-gateway/overview).
 - **On Databricks**, as [Lakebase](https://www.databricks.com/product/lakebase), an enterprise-grade Postgres database tightly integrated into the rest of the Databricks Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows.
 
-The database itself doesn't change between them. The platforms differ because they serve different customers: Neon is built for developers, startups, and agent platforms; Databricks is the Data and AI platform for businesses.
+The database itself doesn't change between them. What surrounds it differs, because Neon and Databricks serve different customers: Neon is built for developers, startups, and agent platforms; Databricks is the Data and AI platform for businesses.
 
-| Platform                | Neon                                                   | Databricks                                                        |
+|                         | Neon                                                   | Databricks                                                        |
 | ----------------------- | ------------------------------------------------------ | ----------------------------------------------------------------- |
 | **The database**        | Lakebase Postgres                                      | Lakebase Postgres                                                 |
-| **What the platform is**| A suite of primitives for apps and agents              | The Data and AI platform for businesses                           |
+| **What it is**          | A complete backend for apps and agents                 | The Data and AI platform for businesses                           |
 | **Built for**           | Developers, startups, agent and codegen platforms      | Enterprises, data and AI teams, companies building on Databricks  |
 | **Around the database** | Auth, Data API, Object Storage, Functions, AI Gateway  | Unity Catalog, lakehouse analytics, notebooks, ML and AI pipelines |
 | **Data access model**   | Application-centric (ORMs, drivers, APIs)              | Lakehouse-centric (SQL, notebooks, AI tooling, pipelines)         |
@@ -48,7 +47,7 @@ The database itself doesn't change between them. The platforms differ because th
 
 ## Core database features
 
-Because both platforms run the same infrastructure, the core feature set is the same. The links below go to each platform's documentation for the same underlying capability. Databricks availability is based on the [Lakebase documentation](https://docs.databricks.com/aws/en/oltp/projects/).
+Because Neon and Databricks run the same infrastructure, the core feature set is the same. The links below go to the Neon and Databricks documentation for the same underlying capability. Databricks availability is based on the [Lakebase documentation](https://docs.databricks.com/aws/en/oltp/projects/).
 
 | Feature                             | On Neon                                                      | On Databricks                                                                                         |
 | ----------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
@@ -64,9 +63,9 @@ Because both platforms run the same infrastructure, the core feature set is the 
 | **Terraform**                       | [Terraform provider](/docs/reference/terraform)              | [Terraform for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/automate-with-terraform)    |
 | **MCP server**                      | [Neon MCP Server](/docs/ai/neon-mcp-server)                  | [MCP on Databricks](https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp)                 |
 
-## Platform features
+## Features around the database
 
-The features around the database are where the two platforms diverge, because each is designed for a different customer. Neon leans into developer workflow and app-building primitives; Databricks leans into enterprise operations, governance, and integration with the rest of the Data Intelligence Platform.
+The features around the database are where Neon and Databricks diverge, because each is designed for a different customer. Neon leans into developer workflow and the backend services apps and agents need; Databricks leans into enterprise operations, governance, and integration with the rest of the Data Intelligence Platform.
 
 | Feature                                              | On Neon                                                                            | On Databricks                                                                                                                              |
 | ---------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -83,12 +82,12 @@ The features around the database are where the two platforms diverge, because ea
 
 ## How to choose
 
-You get the same database either way, so the decision comes down to which platform fits your team.
+You get the same database either way, so the decision comes down to what you need around it and how your team works.
 
 **Choose Neon if:**
 
 - You're a developer looking for a hands-off Postgres to power side projects, experiments, or personal apps without setup friction or infrastructure management
-- You're a startup focused on shipping quickly and need a database, plus the primitives around it, that keep up without slowing your team down
+- You're a startup focused on shipping quickly and want a complete backend, database included, that keeps up without slowing your team down
 - You're a small team iterating fast, using branching and previews to accelerate the software lifecycle and deploy safely
 - You're building an agent or codegen platform (like Replit, Lovable, or Bolt) and need to spin up and manage fleets of databases efficiently, with costs that stay under control through usage-based pricing and scale to zero
 
