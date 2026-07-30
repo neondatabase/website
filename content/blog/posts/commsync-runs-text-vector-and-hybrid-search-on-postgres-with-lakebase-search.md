@@ -17,7 +17,6 @@ cover:
     https://cdn.neonapi.io/public/images/pages/blog/commsync-runs-text-vector-and-hybrid-search-on-postgres-with-lakebase-search/cover.jpg
   alt: "CommSync Runs Text, Vector, and Hybrid Search on Postgres with Lakebase Search"
 isFeatured: true
-draft: true
 seo:
   title: >-
     CommSync Runs Text, Vector, and Hybrid Search on Postgres with Lakebase
