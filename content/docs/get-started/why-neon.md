@@ -6,15 +6,15 @@ summary: >-
   architecture, making instant branching, autoscaling, scale-to-zero, and
   point-in-time restore intrinsic rather than add-ons. Choose Neon when you need
   a fully managed, usage-based Postgres backend that scales from zero to
-  production without capacity planning. A Databricks company since May 2025,
-  Neon also offers Managed Better Auth and an HTTP Data API alongside full standard
+  production without capacity planning. Neon, now a part of Databricks since May
+  2025, also offers Managed Better Auth and an HTTP Data API alongside full standard
   Postgres compatibility.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-07-16T01:03:00.406Z'
+updatedOn: '2026-07-30T22:13:02.203Z'
 ---
 
 ## Our mission
@@ -25,7 +25,7 @@ We aim to deliver Postgres as a cloud service that feels effortless, from your f
 
 Neon is built on a distributed, cloud-native architecture that separates storage and compute, giving Postgres the scale, reliability, and efficiency modern applications require. This foundation unlocks the features developers expect today (autoscaling, scale-to-zero, instant branching, instant restores, usage-based pricing, and much more) without changing the Postgres you already know.
 
-<Admonition type="tip" title="A Databricks company">
+<Admonition type="tip" title="Neon, now a part of Databricks">
   In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Our mission stayed the same, but we’re now backed by the performance, security, and global scale of the Databricks Data Intelligence Platform. Neon’s architectural foundation also powers [Lakebase](https://www.databricks.com/product/lakebase); learn more in [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
