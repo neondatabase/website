@@ -17,7 +17,7 @@
 
   <!-- machine 1 -->
   <rect x="40" y="92" width="130" height="170" rx="10" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
-  <text x="52" y="114" font-size="12" font-weight="600" fill="#374151">Machine</text>
+  <text x="52" y="114" font-size="12" font-weight="600" fill="#374151">Primary</text>
   <rect x="52" y="126" width="106" height="52" rx="8" fill="#f9fafb" stroke="#d1d5db"/>
   <text x="105" y="148" font-size="12" fill="#111827" text-anchor="middle">Postgres</text>
   <text x="105" y="164" font-size="10.5" fill="#6b7280" text-anchor="middle">(compute)</text>
