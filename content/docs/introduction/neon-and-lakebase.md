@@ -106,7 +106,6 @@ Neon runs on AWS. Lakebase Postgres on Databricks inherits the cloud reach of th
 | -------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
 | **AWS**        | Yes ([Neon regions](/docs/introduction/regions))                                                 | Yes, generally available ([AWS regions](https://docs.databricks.com/aws/en/oltp/projects/manage-projects#availability)) |
 | **Azure**      | No, Azure support is being deprecated ([Neon regions](/docs/introduction/regions#azure-regions)) | Yes, in beta ([Azure regions](https://learn.microsoft.com/en-us/azure/databricks/oltp/projects/manage-projects))        |
-| **GCP**        | No, on the [roadmap](/docs/introduction/roadmap)                                                 | Yes, in beta ([GCP regions](https://docs.databricks.com/gcp/en/oltp/projects/manage-projects#availability))             |
 
 <Admonition type="tip" title="Keep exploring Lakebase">
     See the [Lakebase docs](https://docs.databricks.com/aws/en/oltp), review the [latest updates to the Lakebase platform](https://www.databricks.com/blog/lakebase-holiday-update), explore [customer stories](https://www.databricks.com/product/lakebase#customer-stories), and [watch a demo](https://www.databricks.com/resources/demos/tours/appdev/databricks-lakebase?itm_data=demo_center).
