@@ -25,7 +25,7 @@ Each project on the Free plan includes:
 - **Instant restore:** 6-hour history window (1 GB cap)
 - **Egress:** 5 GB/month of public network transfer included
 
-Hitting any monthly limit suspends compute until the next billing cycle. If that's a risk for you, set up a [spending limit](/docs/introduction/spending-limit) on a paid plan instead.
+Hitting any monthly limit suspends compute until the next billing cycle. If that's a risk for you, set up [spending notifications](/docs/introduction/spending-notifications) on a paid plan instead.
 
 See the full list on the [Pricing page](https://neon.com/pricing).
 
