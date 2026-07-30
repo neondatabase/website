@@ -13,7 +13,7 @@ import Blob from './images/blob.inline.svg';
 const STATS_DATA = [
   {
     icon: databaseIcon,
-    value: '12,000,000',
+    value: '15,000,000',
     description: 'Postgres databases turned on every day.',
   },
   {

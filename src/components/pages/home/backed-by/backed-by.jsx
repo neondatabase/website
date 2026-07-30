@@ -12,7 +12,7 @@ import Quotes from './quotes';
 const ITEMS = [
   {
     icon: databaseIcon,
-    title: '12,000,000',
+    title: '15,000,000',
     description: 'Postgres databases started daily.',
     className: 'w-[216px] xl:w-48',
   },
