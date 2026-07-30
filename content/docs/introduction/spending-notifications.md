@@ -38,7 +38,7 @@ Spending notifications help you keep track of your organization's Neon spending.
 Spending notifications are available on the Launch and Scale plans. You can manage them from the **Billing** page in the Neon Console or with the [Neon Management API](#manage-spending-notifications-with-the-neon-api).
 
 <Admonition type="comingSoon" title="Automatic project suspension">
-Currently, email alerts are the only available action. Automatic project suspension is coming soon: When the threshold is reached, projects' computes will pause until you raise the threshold or the next monthly billing period begins.
+Currently, email alerts are the only available action. Automatic project suspension is coming soon: when the threshold is reached, projects' computes will pause until you raise the threshold or the next monthly billing period begins.
 </Admonition>
 
 ## Who can set up spending notifications
