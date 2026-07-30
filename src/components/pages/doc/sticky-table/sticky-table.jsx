@@ -6,6 +6,15 @@ import { useEffect, useRef, useState } from 'react';
 
 const SCROLL_FADE_THRESHOLD = 50;
 const fadeTransition = { duration: 0.2 };
+const INTERACTIVE_SELECTOR = 'a[href], button, input, select, textarea, [tabindex]';
+
+const getPointerOnlyHeaderHtml = (thead) => {
+  const clone = thead.cloneNode(true);
+  clone.querySelectorAll(INTERACTIVE_SELECTOR).forEach((element) => {
+    element.setAttribute('tabindex', '-1');
+  });
+  return clone.innerHTML;
+};
 
 const StickyTableFades = ({ canScrollLeft, canScrollRight }) => (
   <>
@@ -77,7 +86,7 @@ const StickyTable = ({
         fadeLeft: wrapperRect.left - rootRect.left,
         fadeTop: wrapperRect.top - rootRect.top,
         fadeHeight: wrapperRect.height,
-        headerHtml: thead.innerHTML,
+        headerHtml: getPointerOnlyHeaderHtml(thead),
         left: wrapperRect.left,
         stickyTop,
         tableWidth: tableRect.width,
@@ -146,6 +155,10 @@ const StickyTable = ({
     originalButtons?.[buttonIndex]?.click();
   };
 
+  const handleHeaderMouseDown = (event) => {
+    if (interactiveHeader && event.target.closest('button')) event.preventDefault();
+  };
+
   return (
     <LazyMotion features={domAnimation}>
       <div
@@ -155,8 +168,9 @@ const StickyTable = ({
         {layout && (
           <div
             className={['sticky-table-header', headerClassName].filter(Boolean).join(' ')}
-            aria-hidden={interactiveHeader ? undefined : 'true'}
+            aria-hidden="true"
             onClick={handleHeaderClick}
+            onMouseDown={handleHeaderMouseDown}
             style={{
               left: nativeSticky ? undefined : layout.left,
               opacity: scroll.active ? 1 : 0,

@@ -24,6 +24,7 @@ const EXAMPLE_KEYS = {
   'ai-sdk': 'aisdk',
   typescript: 'ts',
 };
+const MODEL_MODES = ['text', 'image'];
 
 const getInstallCommand = ({ dependencies = [], language }) => {
   if (dependencies.length === 0) return null;
@@ -51,9 +52,20 @@ const toLanguageOption = (example) => {
 const getLanguagesForMode = (examplesByMode, mode) =>
   (examplesByMode[mode] ?? []).map(toLanguageOption).filter(Boolean);
 
+const getAvailableModes = (languagesByMode) =>
+  MODEL_MODES.filter((mode) => (languagesByMode[mode]?.length ?? 0) > 0);
+
+const getInitialMode = (languagesByMode, requestedMode) => {
+  const availableModes = getAvailableModes(languagesByMode);
+  return availableModes.includes(requestedMode) ? requestedMode : (availableModes[0] ?? 'text');
+};
+
 module.exports = {
   ENV_EXAMPLE,
+  MODEL_MODES,
+  getAvailableModes,
   getInstallCommand,
+  getInitialMode,
   getLanguagesForMode,
   toLanguageOption,
 };

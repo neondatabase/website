@@ -4,14 +4,16 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import parse from 'html-react-parser';
 import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import highlight from 'lib/shiki';
 
-import { ENV_EXAMPLE } from './model-examples';
+import { ENV_EXAMPLE, getAvailableModes, getInitialMode } from './model-examples';
+
+const EMPTY_LANGUAGES = [];
 
 const HighlightedCode = ({ code, language }) => {
   const [html, setHtml] = useState('');
@@ -104,12 +106,14 @@ LanguageSelect.propTypes = {
 const ModelDetailClient = ({ languagesByMode, initialMode }) => {
   const router = useRouter();
   const [mode, setMode] = useState(initialMode);
+  const availableModes = useMemo(() => getAvailableModes(languagesByMode), [languagesByMode]);
+  const activeMode = availableModes.includes(mode) ? mode : getInitialMode(languagesByMode);
 
   useEffect(() => {
-    setMode(initialMode);
-  }, [initialMode]);
+    setMode(getInitialMode(languagesByMode, initialMode));
+  }, [initialMode, languagesByMode]);
 
-  const languages = languagesByMode[mode] ?? [];
+  const languages = languagesByMode[activeMode] ?? EMPTY_LANGUAGES;
 
   const [langKey, setLangKey] = useState(languages[0]?.key);
 
@@ -129,7 +133,7 @@ const ModelDetailClient = ({ languagesByMode, initialMode }) => {
   }
 
   const codeFilename = activeLang.filename || 'snippet';
-  const hasImageExamples = languagesByMode.image.length > 0;
+  const hasMultipleModes = availableModes.length > 1;
 
   const changeMode = (nextMode) => {
     setMode(nextMode);
@@ -143,19 +147,19 @@ const ModelDetailClient = ({ languagesByMode, initialMode }) => {
   return (
     <div className="not-prose mt-6 flex flex-col gap-5">
       <div className="flex flex-wrap items-center gap-3">
-        {hasImageExamples && (
+        {hasMultipleModes && (
           <div
             className="inline-flex h-9 border border-gray-new-80 bg-white p-0.75 dark:border-gray-new-20 dark:bg-black-new"
             role="group"
             aria-label="Select model mode"
           >
-            {['text', 'image'].map((modeKey) => (
+            {availableModes.map((modeKey) => (
               <button
                 key={modeKey}
                 type="button"
-                aria-pressed={mode === modeKey}
+                aria-pressed={activeMode === modeKey}
                 className={
-                  mode === modeKey
+                  activeMode === modeKey
                     ? 'bg-gray-new-94 px-2 text-[.8125rem] font-medium text-gray-new-10 dark:bg-[#1D1E20] dark:text-white'
                     : 'px-2 text-[.8125rem] font-medium text-gray-new-50 transition-colors hover:text-gray-new-30 focus-visible:outline-gray-new-30 dark:text-[#8E9196] dark:hover:text-gray-new-80 dark:focus-visible:outline-gray-new-60'
                 }

@@ -2,11 +2,14 @@
 import { notFound } from 'next/navigation';
 
 import capabilities from 'app/models/capabilities.json';
-import modelsData from 'app/models.json/data.json';
 import { resolveModel } from 'app/models/resolve';
+import modelsData from 'app/models.json/data.json';
 import getModelDetailPageData from 'components/pages/doc/ai-gateway-model-index/model-detail-data';
 import ModelDetailIntro from 'components/pages/doc/ai-gateway-model-index/model-detail-intro';
-import { getLanguagesForMode } from 'components/pages/doc/ai-gateway-model-index/model-examples';
+import {
+  getInitialMode,
+  getLanguagesForMode,
+} from 'components/pages/doc/ai-gateway-model-index/model-examples';
 import * as modelRows from 'components/pages/doc/ai-gateway-model-index/model-rows';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
@@ -28,10 +31,6 @@ const getLanguagesByMode = (modelId) => {
     image: getLanguagesForMode(examplesByMode, 'image'),
   };
 };
-
-export function generateStaticParams() {
-  return rows.map((row) => ({ modelId: row.id }));
-}
 
 export async function generateMetadata({ params }) {
   const { modelId } = await params;
@@ -63,8 +62,7 @@ const ModelPage = async ({ params, searchParams }) => {
   if (!row) return notFound();
 
   const languagesByMode = getLanguagesByMode(row.id);
-  const initialMode =
-    requestedMode === 'image' && languagesByMode.image.length > 0 ? 'image' : 'text';
+  const initialMode = getInitialMode(languagesByMode, requestedMode);
 
   const currentIndex = rows.findIndex((item) => item.id === row.id);
   const previousRow = rows[currentIndex - 1];

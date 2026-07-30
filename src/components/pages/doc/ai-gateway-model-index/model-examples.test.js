@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import capabilities from '../../../../app/models/capabilities.json';
-import modelsData from '../../../../app/models.json/data.json';
 import { resolveModel } from '../../../../app/models/resolve';
+import modelsData from '../../../../app/models.json/data.json';
 
-import { getLanguagesForMode } from './model-examples';
+import { getAvailableModes, getInitialMode, getLanguagesForMode } from './model-examples';
 
 const getExamplesByMode = (modelId) => ({
   text: resolveModel(modelsData, capabilities, modelId, 'chat')?.examples ?? [],
@@ -44,5 +44,19 @@ describe('AI Gateway model examples', () => {
 
     expect(examplesByMode).toEqual({ text: [], image: [] });
     expect(getLanguagesForMode(examplesByMode, 'text')).toEqual([]);
+  });
+
+  it('selects the first available mode when the requested mode is unavailable', () => {
+    const imageOnly = { text: [], image: [{ key: 'ts' }] };
+
+    expect(getAvailableModes(imageOnly)).toEqual(['image']);
+    expect(getInitialMode(imageOnly)).toBe('image');
+    expect(getInitialMode(imageOnly, 'text')).toBe('image');
+    expect(getInitialMode(imageOnly, 'image')).toBe('image');
+  });
+
+  it('falls back to text when no code examples are available', () => {
+    expect(getAvailableModes({ text: [], image: [] })).toEqual([]);
+    expect(getInitialMode({ text: [], image: [] }, 'image')).toBe('text');
   });
 });
