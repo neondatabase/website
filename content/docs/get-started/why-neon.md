@@ -153,8 +153,8 @@ The final piece follows naturally from the others. Computes in Neon do not store
 - Handle fleets of thousands of short-lived databases
 - Support agent-driven and highly dynamic workloads
 
-<Admonition type="tip" title="Neon vs Lakebase">
-  For a full breakdown of both products, including when to choose each, see [Neon vs Lakebase](/docs/introduction/neon-and-lakebase).
+<Admonition type="tip" title="Neon and Lakebase">
+  Lakebase Postgres, the database Neon runs on, is also available on Databricks. For what's the same in both places and when to choose each, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
 <CTA title="Contact us" description="Neon and Lakebase represent two paths built on the same architectural foundation. Explore your options and get help deciding which service is the best fit." buttonText="Reach out" buttonUrl="https://www.databricks.com/company/contact" />

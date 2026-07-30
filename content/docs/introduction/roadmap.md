@@ -3,8 +3,8 @@ title: Roadmap
 summary: >-
   Neon's public product roadmap tracks what is in flight, recently shipped, and
   planned across compute, storage, security, and cloud regions. Planned features
-  include higher storage and compute limits, CMK encryption, RBAC, PCI
-  compliance, and GCP support. Recently shipped milestones include Postgres 18
+  include higher storage and compute limits, CMK encryption, RBAC, and PCI
+  compliance. Recently shipped milestones include Postgres 18
   GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
   pricing plan.
 enableTableOfContents: true
@@ -47,7 +47,6 @@ We're accelerating work on improving and scaling the core database on Neon as we
 ### Clouds & regions
 
 - Region expansion for paid plan users. Let us know where you want to see Neon next: [Request a region](/docs/introduction/regions)
-- Google Cloud Platform (GCP) support (targeting late 2025)
 
 ### Database storage
 
