@@ -24,7 +24,7 @@ const Footer = ({ hasThemesSupport = false }) => (
               'xl:mt-3'
             )}
           >
-            Neon is part of the Databricks Platform
+            Neon, now part of Databricks
           </span>
         </div>
 

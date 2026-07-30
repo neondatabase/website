@@ -30,7 +30,7 @@ const HeroMts = () => (
     <Container className="relative z-30 pt-96 pb-2 xl:pt-54 lg:pt-52 md:px-5! md:pt-53" size="1600">
       <Link href="#backed-by-giants">
         <SectionLabel theme="white" icon="databricks">
-          NEON IS PART OF THE DATABRICKS PLATFORM
+          Neon, now part of Databricks
         </SectionLabel>
       </Link>
 
