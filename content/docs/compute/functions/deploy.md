@@ -190,7 +190,7 @@ GET /projects/{project_id}/branches/{branch_id}/functions/{slug}
 The response includes `invocation_url`, the public URL for your function:
 
 ```
-https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech
+https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/
 ```
 
 ### List functions

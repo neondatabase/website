@@ -280,7 +280,8 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       expect(response.type).toBe('redirect');
       expect(response.url.toString()).toBe('https://neon.com/docs/cli/auth.md');
-      expect(response.headers.get('Cache-Control')).toBe('public, max-age=3600, s-maxage=86400');
+      // Short TTL so the redirect re-enters middleware (and is tracked) ~every 5 min.
+      expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
       // The agent hit is still tracked before the redirect returns.
       expect(global.fetch).toHaveBeenCalledWith(
         'https://neonapi.io/t.js',
@@ -465,7 +466,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it('should pass through static .md files under docs/ai/ without rewriting', async () => {
       const req = createMockRequest(
-        '/docs/ai/skills/neon-postgres/references/neon-sdk.md',
+        '/docs/ai/skills/neon-functions/references/sentry.md',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
         'text/html'
       );
@@ -481,7 +482,7 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
     it('should pass through static .md files under docs/ai/ for AI agents too', async () => {
       const req = createMockRequest(
-        '/docs/ai/skills/neon-postgres/references/neon-sdk.md',
+        '/docs/ai/skills/neon-functions/references/sentry.md',
         'Claude/1.0',
         'text/html'
       );

@@ -1,8 +1,8 @@
-# Integrations and observability
+# Sentry error monitoring on Neon Functions
 
 A Neon Function is a **long-lived Node.js 24 process running a web-standard request/response handler** — not an edge worker or a short-lived lambda. That means any integration SDK that works in an ordinary Node process works here unchanged: you initialize it once at module load, before your handler starts serving requests, and it stays instrumented for the life of the isolate.
 
-This reference walks through wiring up Sentry for error and performance monitoring; the same shape (init module imported first, gated on an env var, secret passed at deploy time) applies to other Node SDKs (OpenTelemetry, logging, analytics).
+This reference walks through wiring up Sentry for error and performance monitoring; the same shape (init module imported first, gated on an env var, secret passed at deploy time) applies to other Node SDKs (OpenTelemetry, logging, analytics) — see [Other Node integrations](#other-node-integrations) at the end.
 
 ## Sentry (error & performance monitoring)
 
@@ -51,7 +51,7 @@ import { Hono } from "hono";
 
 ### 2. Provide the DSN as a deploy-time secret
 
-The DSN is your own secret, so set it per-deployment (see "Environment variables" in `SKILL.md`). Either pass it on deploy:
+The DSN is your own secret, so set it per-deployment (see [Environment Variables](../SKILL.md#environment-variables)). Either pass it on deploy:
 
 ```bash
 neon functions deploy <slug> --src src/index.ts \

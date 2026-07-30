@@ -490,7 +490,7 @@ function buildTests() {
 
   // ── 4. Static doc prefixes (pass-through) ─────────────────────────────
 
-  const staticMdPath = '/docs/ai/skills/neon-postgres/references/neon-sdk.md';
+  const staticMdPath = '/docs/ai/skills/neon-functions/references/sentry.md';
 
   add(
     'Static .md',

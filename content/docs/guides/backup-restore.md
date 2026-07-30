@@ -12,7 +12,7 @@ summary: >-
 tag: new
 tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-07-13T14:20:27.525Z'
+updatedOn: '2026-07-24T11:09:31.723Z'
 ---
 
 <Admonition type="note" title="Snapshots">
@@ -297,7 +297,7 @@ PUT /projects/{project_id}/branches/{branch_id}/backup_schedule
 
 The request body must include a `schedule` array. Each item in the array can specify:
 
-- `frequency` (required): `hourly`, `daily`, `weekly`, `monthly`, or `yearly`
+- `frequency` (required): `daily`, `weekly`, or `monthly`
 - `hour` (optional): Hour of the day (0–23) to take the snapshot
 - `day` (optional): Day of the week or month (1–31) to take the snapshot
 - `month` (optional): Month of the year (1–12) to take the snapshot

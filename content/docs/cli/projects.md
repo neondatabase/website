@@ -10,7 +10,7 @@ summary: >-
   its 7-day recovery window. Projects created via the CLI default to Postgres
   18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-07-22T13:52:43.579Z'
+updatedOn: '2026-07-24T11:09:31.723Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -85,7 +85,13 @@ Creates a Neon project.
 The `--region-id` value defaults to `aws-us-east-2` if not specified. `--block-public-connections` and `--block-vpc-connections` are part of [Private Networking](/docs/guides/neon-private-networking); `--hipaa` enables [HIPAA compliance](/docs/security/hipaa) for the project.
 
 <Admonition type="note">
-Projects created using the CLI use the default Postgres version (Postgres 18) unless you specify `--pg-version`.
+Neon projects created using the CLI use the default Postgres version, which is Postgres 18. To create a project with a different Postgres version, pass `--pg-version`:
+
+```bash
+neon projects create --name mynewproject --pg-version 17
+```
+
+You can also enable logical replication for an existing project with `neon projects update <project-id> --enable-logical-replication` (add `--yes` to skip the confirmation prompt), and create protected branches with `neon branches create --protected`.
 </Admonition>
 
 Create a project with a user-defined name in a specific region:

@@ -17,7 +17,7 @@ authors:
 cover:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/neon-inspect-db/cover.jpg'
   alt: 'Debug your Postgres from the terminal: a tour of neon inspect db'
-isFeatured: false
+isFeatured: true
 draft: false
 seo:
   title: 'Debug your Postgres from the terminal: a tour of `neon inspect db` - Neon'
