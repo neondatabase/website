@@ -30,7 +30,7 @@ At the broadest level, a lakebase is a type of OLTP database where storage and c
 
 ## Where Lakebase Postgres runs
 
-Lakebase Postgres is available in two places:
+Lakebase Postgres is the Databricks implementation of a lakebase: Postgres, built on the architecture described above. It's available in two places:
 
 - **On Neon**, as the database at the core of a complete backend for apps and agents: Postgres alongside [Auth](/docs/auth/overview), [Data API](/docs/data-api/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), and [AI Gateway](/docs/ai-gateway/overview).
 - **On Databricks**, as [Lakebase](https://www.databricks.com/product/lakebase), an enterprise-grade Postgres database tightly integrated into the rest of the Databricks Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows.
