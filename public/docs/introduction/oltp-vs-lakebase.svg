@@ -9,11 +9,11 @@
   </defs>
 
   <rect x="1" y="1" width="758" height="398" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
-  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Standard OLTP vs lakebase</text>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Standard database vs lakebase</text>
   <line x1="380" y1="54" x2="380" y2="376" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 4"/>
 
   <!-- LEFT: standard OLTP -->
-  <text x="40" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#b45309">STANDARD OLTP</text>
+  <text x="40" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#b45309">STANDARD DATABASE</text>
 
   <!-- machine 1 -->
   <rect x="40" y="92" width="130" height="170" rx="10" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
