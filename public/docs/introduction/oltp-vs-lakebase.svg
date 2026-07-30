@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+    <marker id="ar-rev" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+
+  <rect x="1" y="1" width="758" height="398" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Standard OLTP vs lakebase</text>
+  <line x1="380" y1="54" x2="380" y2="376" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- LEFT: standard OLTP -->
+  <text x="40" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#b45309">STANDARD OLTP</text>
+
+  <!-- machine 1 -->
+  <rect x="40" y="92" width="130" height="170" rx="10" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="52" y="114" font-size="12" font-weight="600" fill="#374151">Machine</text>
+  <rect x="52" y="126" width="106" height="52" rx="8" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="105" y="148" font-size="12" fill="#111827" text-anchor="middle">Postgres</text>
+  <text x="105" y="164" font-size="10.5" fill="#6b7280" text-anchor="middle">(compute)</text>
+  <rect x="52" y="188" width="106" height="52" rx="8" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="105" y="210" font-size="12" fill="#111827" text-anchor="middle">Disk</text>
+  <text x="105" y="226" font-size="10.5" fill="#6b7280" text-anchor="middle">(storage)</text>
+
+  <!-- replication arrow -->
+  <line x1="174" y1="177" x2="206" y2="177" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <!-- machine 2 (replica) -->
+  <rect x="210" y="92" width="130" height="170" rx="10" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="222" y="114" font-size="12" font-weight="600" fill="#9ca3af">Replica</text>
+  <rect x="222" y="126" width="106" height="52" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="275" y="148" font-size="12" fill="#9ca3af" text-anchor="middle">Postgres</text>
+  <text x="275" y="164" font-size="10.5" fill="#9ca3af" text-anchor="middle">(compute)</text>
+  <rect x="222" y="188" width="106" height="52" rx="8" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="275" y="210" font-size="12" fill="#9ca3af" text-anchor="middle">Disk</text>
+  <text x="275" y="226" font-size="10.5" fill="#9ca3af" text-anchor="middle">(full copy)</text>
+
+  <text x="40" y="348" font-size="11" fill="#6b7280">Compute and storage live together on one machine.</text>
+  <text x="40" y="364" font-size="11" fill="#6b7280">Each replica keeps its own full copy of the data.</text>
+
+  <!-- RIGHT: lakebase -->
+  <text x="404" y="70" font-size="11" font-weight="700" letter-spacing="0.5" fill="#047857">LAKEBASE</text>
+
+  <!-- compute layer -->
+  <rect x="404" y="92" width="316" height="104" rx="10" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="416" y="114" font-size="12" font-weight="600" fill="#374151">Compute</text>
+  <rect x="420" y="126" width="130" height="56" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="1.5"/>
+  <text x="485" y="150" font-size="12" fill="#111827" text-anchor="middle">Postgres</text>
+  <text x="485" y="166" font-size="10.5" fill="#6b7280" text-anchor="middle">(primary)</text>
+  <rect x="574" y="126" width="130" height="56" rx="8" fill="#ffffff" stroke="#d1d5db" stroke-dasharray="5 4"/>
+  <text x="639" y="150" font-size="12" fill="#9ca3af" text-anchor="middle">Postgres</text>
+  <text x="639" y="166" font-size="10.5" fill="#9ca3af" text-anchor="middle">(replica)</text>
+
+  <!-- two-way arrow between layers -->
+  <line x1="562" y1="204" x2="562" y2="232" stroke="#9ca3af" stroke-width="1.5" marker-start="url(#ar-rev)" marker-end="url(#ar)"/>
+
+  <!-- storage layer -->
+  <rect x="404" y="240" width="316" height="88" rx="10" fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="416" y="262" font-size="12" font-weight="600" fill="#374151">Storage</text>
+  <rect x="420" y="274" width="284" height="40" rx="8" fill="#ecfdf5" stroke="#047857"/>
+  <text x="562" y="298" font-size="12" fill="#065f46" text-anchor="middle">Object storage (lake)</text>
+
+  <text x="404" y="348" font-size="11" fill="#6b7280">Stateless compute scales independently of shared,</text>
+  <text x="404" y="364" font-size="11" fill="#6b7280">durable object storage. Replicas add no data copies.</text>
+</svg>

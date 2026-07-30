@@ -19,6 +19,8 @@ In 2025, Neon joined Databricks. The serverless Postgres architecture that Neon 
 
 ## What is a lakebase?
 
+![Standard OLTP compared to lakebase. On the left, compute and storage live together on one machine and each replica keeps a full copy of the data. On the right, stateless Postgres compute runs in a layer separate from shared, durable object storage](/docs/introduction/oltp-vs-lakebase.svg 'no-border')
+
 At the broadest level, a lakebase is a type of OLTP database where storage and compute are separated and the source of truth for storage is cheap, durable object storage. That architectural choice has consequences that traditional Postgres deployments can't match:
 
 - **Compute is stateless and elastic.** Because no compute node owns the data, compute can scale up under load, scale down when idle, and [scale to zero](/docs/introduction/scale-to-zero) entirely. Read replicas spin up without copying data.
