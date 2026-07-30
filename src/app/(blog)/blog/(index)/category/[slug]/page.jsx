@@ -96,6 +96,6 @@ export async function generateStaticParams() {
   }));
 }
 
-export const revalidate = 300;
+export const revalidate = false;
 
 export default BlogCategoryPage;
