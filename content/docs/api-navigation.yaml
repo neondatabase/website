@@ -29,6 +29,15 @@
     - title: "Grant project access"
       slug: reference/api/projects/grant-permission-to-project
       method: POST
+    - title: "List org members and their project roles"
+      slug: reference/api/projects/list-project-members
+      method: GET
+    - title: "Set an org member's role on a project"
+      slug: reference/api/projects/set-project-member-role
+      method: PUT
+    - title: "Remove an org member's role on a project"
+      slug: reference/api/projects/remove-project-member-role
+      method: DELETE
     - title: "Revoke project access"
       slug: reference/api/projects/revoke-permission-from-project
       method: DELETE
@@ -572,3 +581,15 @@
     - title: "Deploy code to a function"
       slug: reference/api/functions/create-project-branch-function-deployment
       method: POST
+- title: "Logs"
+  slug: reference/api/logs
+  items:
+    - title: "Query branch logs"
+      slug: reference/api/logs/query-project-branch-logs
+      method: POST
+    - title: "List branch log fields"
+      slug: reference/api/logs/list-project-branch-log-fields
+      method: GET
+    - title: "List branch log field values"
+      slug: reference/api/logs/list-project-branch-log-field-values
+      method: GET

@@ -4,12 +4,12 @@
 //   npm run cli-docs -- refresh
 //
 // The CLI source lives in the neon-pkgs monorepo (packages/cli); its
-// releases are tagged `neonctl@<version>`. The published npm package and
-// its `neonctlVersion` schema field are still named `neonctl`, though the
-// CLI is now documented and invoked as `neon` (the package ships both bins).
+// releases are tagged `neon@<version>`. The CLI is published as the `neon`
+// package and invoked as `neon`; `neonctl` is now a compatibility package
+// that depends on it. The `neonctlVersion` schema field keeps its name.
 //
 // What it does:
-//   1. Looks up the latest `neonctl@*` release tag on GitHub (no clone needed).
+//   1. Looks up the latest `neon@*` release tag on GitHub (no clone needed).
 //   2. Downloads and extracts the release tarball to a temp directory.
 //   3. Regenerates schema.json from packages/cli (generate-schema.js + overrides.json).
 //   4. Prints a summary of command/option additions and removals vs the
@@ -27,7 +27,10 @@ const path = require('path');
 
 const REPO = 'neondatabase/neon-pkgs';
 // Monorepo release tags are `<package>@<version>`; the CLI uses this prefix.
-const TAG_PREFIX = 'neonctl@';
+// Releases up to 2.37.1 were tagged `neonctl@<version>`, before the CLI package
+// was renamed to `neon`. Sibling packages like `neon-new@*` don't collide,
+// because the `@` has to follow `neon` immediately.
+const TAG_PREFIX = 'neon@';
 // The CLI package lives under this subdirectory of the repo tarball.
 const CLI_SUBDIR = path.join('packages', 'cli');
 const SCHEMA_PATH = path.join(__dirname, 'schema.json');
@@ -41,7 +44,7 @@ const PREFER_ALIAS = {};
 
 // The monorepo publishes releases for many packages, so `/releases/latest`
 // is not necessarily the CLI. List releases and pick the highest-versioned
-// `neonctl@*` tag.
+// `neon@*` tag.
 function compareSemver(a, b) {
   const pa = a.split('.').map(Number);
   const pb = b.split('.').map(Number);
@@ -70,7 +73,7 @@ async function latestTag() {
 }
 
 async function downloadTarball(tag, destDir) {
-  // Tags contain `@` (e.g. neonctl@2.29.2); encode it for the codeload path.
+  // Tags contain `@` (e.g. neon@2.38.0); encode it for the codeload path.
   const url = `https://codeload.github.com/${REPO}/tar.gz/refs/tags/${encodeURIComponent(tag)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Tarball download failed: ${res.status} for ${url}`);
@@ -78,7 +81,7 @@ async function downloadTarball(tag, destDir) {
   fs.writeFileSync(tarPath, Buffer.from(await res.arrayBuffer()));
   execSync(`tar -xzf ${JSON.stringify(tarPath)} -C ${JSON.stringify(destDir)}`);
   // GitHub names the extracted dir after the repo and tag, replacing `/` and
-  // `@` with `-` (e.g. neon-pkgs-neonctl-2.29.2). Match the repo prefix.
+  // `@` with `-` (e.g. neon-pkgs-neon-2.38.0). Match the repo prefix.
   const repoName = REPO.split('/')[1];
   const extracted = fs
     .readdirSync(destDir)

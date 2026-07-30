@@ -11,10 +11,14 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/project-sharing-guide
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-28T15:40:22.495Z'
 ---
 
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
+
+<Admonition type="important">
+This page describes project collaboration on the legacy permissions model. New organizations manage project access with [per-project permissions](/docs/manage/user-permissions) instead. The new model also has a **Collaborator** organization role, but that's separate: it's an organization member you grant a project role to, not an external person you invite to a single project as described here.
+</Admonition>
 
 <Admonition type="note">
 Use project collaboration to work with people outside your organization. If you're working with team members, create an [Organization](/docs/manage/organizations) instead. Organization members get automatic access to all projects within that organization. Organizations can still use project collaboration when needed (for example, to allow an external contractor to contribute to a specific project without making them a full organization member).
