@@ -8,7 +8,7 @@ summary: >-
   projects, require a personal admin key and reject organization API keys. A
   permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-28T20:12:21.572Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -353,3 +353,7 @@ Key requirements:
 - Requires admin permissions in the source organization and at least member permissions in the target
 
 [Try in API Reference](/docs/reference/api/organizations/transfer-projects-from-org-to-org)
+
+## Manage project access
+
+For organizations on the [new permissions model](/docs/manage/user-permissions), you can list project members and set or remove a member's project role through the API. See [Manage project access with the API](/docs/manage/user-permissions#manage-project-access-with-the-api) for endpoints and examples.

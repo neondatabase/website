@@ -394,7 +394,7 @@
         - slug: postgresql-19/json-copy-to
           title: 'JSON Format for COPY TO'
         - slug: postgresql-19/query-improvements
-          title: 'Query Improvements: GROUP BY ALL, IGNORE NULLS'
+          title: 'Query Improvements: IGNORE NULLS, Memoize Estimates'
     - section: Schema & Operations
       items:
         - slug: postgresql-19/schema-management
