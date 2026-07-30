@@ -19,12 +19,12 @@ const Footer = ({ hasThemesSupport = false }) => (
           <Logo className="sm:h-6 sm:w-auto" width={102} height={28} />
           <span
             className={cn(
-              'mt-3.5 block text-[13px] leading-none tracking-extra-tight whitespace-nowrap',
+              'mt-3.5 block text-[13px] leading-none tracking-extra-tight',
               'text-gray-new-40 dark:text-gray-new-60',
               'xl:mt-3'
             )}
           >
-            A Databricks Company
+            Neon is part of the Databricks Platform
           </span>
         </div>
 
