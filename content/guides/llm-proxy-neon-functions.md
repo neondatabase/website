@@ -697,7 +697,7 @@ function Chat() {
 
           {error && (
             <div className="p-3 bg-red-900/50 border border-red-500 text-red-200 rounded-md text-sm">
-              ⚠️ You are rate limited. Please wait a few seconds before sending another message.
+              You are rate limited. Please wait a few seconds before sending another message.
             </div>
           )}
         </div>
