@@ -42,7 +42,7 @@ Over the past few weeks, you might’ve noticed something in our [changelog](htt
 We’ve reached two significant milestones that have allowed us to do this:
 
 - First, our infrastructure efficiency continues to scale. This is because our [architecture separates storage and compute](https://neon.com/blog/architecture-decisions-in-neon), and the platform optimizations we’re able to achieve as a result.
-- Second, [we’re now a Databricks company.](https://neon.com/blog/neon-and-databricks) As part of the integration, we’ve started running Neon on Databricks’ global infrastructure, which directly translates into lower operating costs.
+- Second, [Neon, now a part of Databricks.](https://neon.com/blog/neon-and-databricks) As part of the integration, we’ve started running Neon on Databricks’ global infrastructure, which directly translates into lower operating costs.
 
 We could have chosen to turn these efficiency gains into larger margins and profit, but that’s not in our DNA. Instead, we’re on a mission to deliver even more value to customers and developers, with two strategic goals in mind:
 
