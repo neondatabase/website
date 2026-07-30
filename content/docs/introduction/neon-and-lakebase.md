@@ -43,7 +43,7 @@ The database itself doesn't change between them. What surrounds it differs, beca
 | **Integrated products** | [Auth](/docs/auth/overview), [Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), [AI Gateway](/docs/ai-gateway/overview) | Lakehouse, Lakeflow, Unity Catalog, Unity AI Gateway, [all Databricks products](https://www.databricks.com/product/platform) |
 | **What it is**          | A complete backend for apps and agents                 | The Data and AI platform for businesses                           |
 | **Built for**           | Developers, startups, agent and codegen platforms      | Enterprises, data and AI teams, companies building on Databricks  |
-| **How teams use it**    | Build, iterate, preview, and deploy apps quickly       | Operate production-grade OLTP databases with tight integration to the data lake and unified governance via Unity Catalog |
+| **How teams use it**    | Build, iterate, preview, and deploy apps quickly       | Operate production-grade OLTP databases with tight integration to the data lake |
 | **Governance**          | Project-level access controls                          | Lakehouse-wide governance via Unity Catalog                       |
 
 ## Core database features
