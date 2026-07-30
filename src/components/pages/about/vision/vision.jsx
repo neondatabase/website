@@ -57,8 +57,8 @@ const Vision = () => (
         <SectionLabel icon="arrow">Where we&apos;re headed</SectionLabel>
 
         <h3 className="mt-5 max-w-[736px] text-5xl leading-dense font-normal tracking-tighter text-gray-new-40 xl:max-w-[600px] xl:text-[36px] lg:max-w-full lg:text-2xl md:mt-4 md:text-xl">
-          <span className="text-black-pure">Neon is a Databricks company.</span> In May 2025, Neon
-          joined Databricks to shape the future of AI-native application backends.
+          <span className="text-black-pure">Neon is part of the Databricks Platform.</span> In May
+          2025, Neon joined Databricks to shape the future of AI-native application backends.
         </h3>
 
         <div className="mt-[194px] flex gap-x-24 xl:mt-[136px] xl:gap-x-16 lg:gap-x-8 md:mt-9 md:flex-col md:gap-y-7 md:pr-24">
@@ -78,7 +78,7 @@ const Vision = () => (
               {' '}
               for developers and AI agents
             </mark>{' '}
-            — now backed by the scale and expertise of Databricks.
+            — now as part of the Databricks Platform.
           </p>
 
           <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base md:mr-8 md:text-[15px]">
