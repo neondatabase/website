@@ -1,28 +1,54 @@
-export const revalidate = 3600;
+import { getAllBlogPosts, getAllBlogCategories } from 'utils/api-blog';
 
-const CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
+export const dynamic = 'force-static';
+export const revalidate = false;
+
 const SITE_URL = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.com';
 
-// Only list categories whose labels can't be derived by title-casing the slug.
-// New categories from the CDN fall back to title case automatically.
-const CATEGORY_LABEL_OVERRIDES = {
-  ai: 'AI',
-  'case-study': 'Case Studies',
-};
-
-function categoryLabel(key) {
-  if (CATEGORY_LABEL_OVERRIDES[key]) return CATEGORY_LABEL_OVERRIDES[key];
+// Prefer the display name from the categories data. Unknown slugs fall back to
+// title-casing (e.g. "case-study" -> "Case Study").
+function categoryLabel(key, name) {
+  if (name) return name;
   return key.replace(/-./g, (m) => ' ' + m[1].toUpperCase()).replace(/^./, (m) => m.toUpperCase());
 }
 
-export async function GET() {
-  const res = await fetch(`${CDN_BASE}/titles.json`, { next: { revalidate: 3600 } });
+// Normalize a frontmatter date to YYYY-MM-DD without timezone conversion.
+// Dates are usually ISO strings ('2026-01-07T17:01:55'); a plain slice keeps
+// the calendar date as authored. For Date objects (unquoted YAML timestamps),
+// fall back to the UTC date, which matches how the value was serialized.
+function formatDate(date) {
+  if (typeof date === 'string') return date.slice(0, 10);
+  if (date instanceof Date && !Number.isNaN(date.getTime())) return date.toISOString().slice(0, 10);
+  return String(date).slice(0, 10);
+}
 
-  if (!res.ok) {
-    return new Response('Failed to load blog index', { status: 502 });
+export async function GET() {
+  const [posts, categories] = await Promise.all([
+    getAllBlogPosts({ fullList: true }),
+    getAllBlogCategories(),
+  ]);
+
+  // Group posts by category. `posts` is already sorted newest-first, so each
+  // category's posts stay date-descending.
+  const categoryNames = new Map(categories.map((category) => [category.slug, category.name]));
+  const byCategory = new Map();
+
+  for (const post of posts) {
+    for (const { slug: categorySlug } of post.categories.nodes) {
+      if (!byCategory.has(categorySlug)) byCategory.set(categorySlug, []);
+      byCategory.get(categorySlug).push(post);
+    }
   }
 
-  const byCategory = await res.json();
+  // Emit categories alphabetically by display label.
+  const sortedCategories = [...byCategory.entries()]
+    .map(([key, categoryPosts]) => ({
+      label: categoryLabel(key, categoryNames.get(key)),
+      posts: categoryPosts,
+    }))
+    .filter(({ posts: categoryPosts }) => categoryPosts.length)
+    .sort((left, right) => left.label.localeCompare(right.label));
+
   const lines = [];
 
   lines.push('# Neon Blog');
@@ -30,12 +56,11 @@ export async function GET() {
   lines.push('Engineering, product, and community posts from the Neon team.');
   lines.push('');
 
-  for (const [key, posts] of Object.entries(byCategory)) {
-    if (!posts.length) continue;
-    lines.push(`## ${categoryLabel(key)}`);
+  for (const { label, posts: categoryPosts } of sortedCategories) {
+    lines.push(`## ${label}`);
     lines.push('');
-    for (const { slug, title, date } of posts) {
-      lines.push(`- [${title}](${SITE_URL}/blog/${slug}.md) — ${date}`);
+    for (const { slug, title, date } of categoryPosts) {
+      lines.push(`- [${title}](${SITE_URL}/blog/${slug}.md) — ${formatDate(date)}`);
     }
     lines.push('');
   }

@@ -1,0 +1,258 @@
+{
+  "$comment": "Measured behaviour of every model the Neon AI Gateway serves. Produced by calling each model on /v1/chat/completions, its provider-native dialect, and /openai/v1/responses with the web_search and image_generation tools. This is what the gateway DID; models.json is what each model CLAIMS. /models needs both to know which code examples are correct.",
+  "$howToRegenerate": "Re-probe against a branch with all models enabled and replace `models`. Fields per model: id, owner, entitled, chat (conforms | array-content | not-served | not-entitled), deviations[], nativeDialect (openai-responses | gemini | none), responses, webSearch, imageGeneration. CI checks completeness, not freshness \u2014 see the models-rest validator in scripts/verify-agent-endpoints.mjs.",
+  "probedAt": "2026-07-28T22:50:55.124Z",
+  "models": [
+    {
+      "id": "qwen3-next-80b-a3b-instruct",
+      "owner": "alibaba",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "qwen35-122b-a10b",
+      "owner": "alibaba",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": ["content is array[2] of {summary/text/type}, spec requires string"],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gpt-oss-120b",
+      "owner": "databricks",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": ["content is array[2] of {summary/text/type}, spec requires string"],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gpt-oss-20b",
+      "owner": "databricks",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": ["content is array[2] of {summary/text/type}, spec requires string"],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gemini-3-1-flash-lite",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "id is null, spec requires string",
+        "content is array[1] of {text/thoughtSignature/type}, spec requires string",
+        "usage.total_tokens is 170, but prompt + completion = 11",
+        "usage.reasoning_tokens is top-level; spec nests it under completion_tokens_details"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gemini-3-1-pro",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "id is null, spec requires string",
+        "content is array[1] of {text/thoughtSignature/type}, spec requires string",
+        "usage.total_tokens is 252, but prompt + completion = 11",
+        "usage.reasoning_tokens is top-level; spec nests it under completion_tokens_details"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gemini-3-5-flash",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "id is null, spec requires string",
+        "content is array[1] of {text/thoughtSignature/type}, spec requires string",
+        "usage.total_tokens is 309, but prompt + completion = 11",
+        "usage.reasoning_tokens is top-level; spec nests it under completion_tokens_details"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gemini-3-flash",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "id is null, spec requires string",
+        "content is array[1] of {text/thoughtSignature/type}, spec requires string",
+        "usage.total_tokens is 119, but prompt + completion = 11",
+        "usage.reasoning_tokens is top-level; spec nests it under completion_tokens_details"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gemma-3-12b",
+      "owner": "google",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "llama-4-maverick",
+      "owner": "meta",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "meta-llama-3-1-8b-instruct",
+      "owner": "meta",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "meta-llama-3-3-70b-instruct",
+      "owner": "meta",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gpt-5",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-5-1",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-5-2",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-5-3-codex",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "not-served",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-5-4",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-5-4-mini",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-5-4-nano",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-5-mini",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    },
+    {
+      "id": "gpt-5-nano",
+      "owner": "openai",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "openai-responses",
+      "responses": true,
+      "webSearch": true,
+      "imageGeneration": true
+    }
+  ]
+}

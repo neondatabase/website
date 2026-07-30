@@ -114,6 +114,25 @@ endpoints:
     generator: src/scripts/generate-models-json.js
     liveSync: src/scripts/check-models-sync.js
 
+  - id: models-rest
+    name: AI Gateway models REST API
+    description: >-
+      Neon AI Gateway models as a REST resource at /models. Sibling of /models.json:
+      same models and same core data, but paired with the code examples that actually
+      work for each one. Query params scope it to a single model and use case. Must
+      never disagree with /models.json on the fields they share.
+    servedPath: /models
+    contentType: application/json
+    spec:
+      name: Neon AI Gateway models (REST)
+      url: https://neon.com/models
+      standard: false
+    validator: models-rest
+    check: file
+    file: src/app/models/capabilities.json
+    generator: live gateway probe (see $howToRegenerate in src/app/models/capabilities.json)
+    liveSync: src/scripts/check-models-endpoint-sync.js
+
   - id: llms-txt
     name: llms.txt
     description: >-
