@@ -35,13 +35,20 @@ const Hero = ({ logos, quotes }) => (
               Qualifying startups can receive up to $200K in credits for Neon and Databricks. Not
               sure if you qualify? Apply or ask your investor.
             </p>
+            {USE_EXTERNAL_APPLY_FORM && (
+              <div className="mt-10 lg:mt-8 md:mt-7">
+                <ApplyLink />
+              </div>
+            )}
           </div>
-          <div className="max-w-[530px] lg:mt-2 lg:max-w-full">
-            <Quotes items={quotes} />
-          </div>
+          {!USE_EXTERNAL_APPLY_FORM && (
+            <div className="max-w-[530px] lg:mt-2 lg:max-w-full">
+              <Quotes items={quotes} />
+            </div>
+          )}
         </div>
         <div className="w-full max-w-xl shrink-0 xl:max-w-[48%] lg:max-w-full">
-          {USE_EXTERNAL_APPLY_FORM ? <ApplyLink /> : <ContactForm />}
+          {USE_EXTERNAL_APPLY_FORM ? <Quotes items={quotes} /> : <ContactForm />}
         </div>
       </div>
 
