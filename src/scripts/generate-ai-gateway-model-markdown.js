@@ -54,7 +54,7 @@ const resolveExamplesByMode = (resolveModel, modelId) => ({
 
 const renderModelDetailMarkdown = (row, examplesByMode) => {
   const about = row.hasMeasuredCapabilities
-    ? `${row.name} is available through the Neon AI Gateway. ${row.providerName} provides the model, which accepts ${row.inputsLabel} inputs and supports a ${row.contextLabel} context window.`
+    ? `Neon AI Gateway provides ${row.name} by ${row.providerName}. The model supports ${row.inputsLabel} inputs and a ${row.contextLabel} context window.`
     : `${row.name} is listed in the Neon AI Gateway model catalog. Verified availability and code examples are not currently available for this model.`;
   const commands = [renderCommandSection(examplesByMode, 'text')];
   const hasExamples = ['text', 'image'].some(

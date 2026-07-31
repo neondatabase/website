@@ -5,8 +5,8 @@ import path from 'path';
 import { afterEach, describe, expect, it } from 'vitest';
 
 import capabilities from '../app/models/capabilities.json';
-import modelsData from '../app/models.json/data.json';
 import { resolveModel } from '../app/models/resolve';
+import modelsData from '../app/models.json/data.json';
 import getModelDetailPageData from '../components/pages/doc/ai-gateway-model-index/model-detail-data';
 import modelRows from '../components/pages/doc/ai-gateway-model-index/model-rows';
 
@@ -31,7 +31,9 @@ describe('AI Gateway model Markdown', () => {
 
     expect(markdown).toContain('# Gemini 3.5 Flash');
     expect(markdown).toContain('## About');
-    expect(markdown).toContain('Google provides the model');
+    expect(markdown).toContain(
+      'Neon AI Gateway provides Gemini 3.5 Flash by Google. The model supports text, image, video, audio, pdf inputs and a 1M context window.'
+    );
     expect(markdown).toContain('## Command');
     expect(markdown).toContain('model: neon("gemini-3-5-flash")');
     expect(markdown).toContain('## Model ID\n\ngemini-3-5-flash');

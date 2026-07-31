@@ -11,8 +11,8 @@ const ModelDetailIntro = ({ row, languagesByMode, initialMode }) => (
     <div id="about" className="anchor-heading scroll-mt-32" aria-hidden />
     {row.hasMeasuredCapabilities ? (
       <p>
-        {row.name} is available through the Neon AI Gateway. {row.providerName} provides the model,
-        which accepts {row.inputsLabel} inputs and supports a {row.contextLabel} context window.
+        Neon AI Gateway provides {row.name} by {row.providerName}. The model supports{' '}
+        {row.inputsLabel} inputs and a {row.contextLabel} context window.
       </p>
     ) : (
       <p>
