@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-aggregate-functions/postgresql-bool_or/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL STRING_AGG Function
@@ -129,7 +129,7 @@ Output:
 
 The `BOOL_OR()` function returns true indicating that the `members` table has active members.
 
-### 2\) Using BOOL_OR() function with GROUP BY clause
+### 3\) Using BOOL_OR() function with GROUP BY clause
 
 The following example uses the `BOOL_OR()` function with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause to check if there are any active members in each team:
 

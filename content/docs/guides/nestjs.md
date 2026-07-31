@@ -9,7 +9,7 @@ summary: >-
   cover Neon project creation, DATABASE_URL configuration in .env, and wiring
   a service and GET controller endpoint to query the database.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"
@@ -236,5 +236,12 @@ When you run `npm run start` you can expect to see output similar to the followi
 ```
 
 </Steps>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

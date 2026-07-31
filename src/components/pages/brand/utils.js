@@ -6,3 +6,9 @@ export const handleDownload = (url, filename) => {
   link.click();
   document.body.removeChild(link);
 };
+
+export const handleDownloads = (files) => {
+  files.forEach(({ url, filename }) => {
+    handleDownload(url, filename);
+  });
+};

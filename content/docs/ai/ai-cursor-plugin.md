@@ -7,7 +7,7 @@ summary: >-
   listing projects. Use this page to install Neon database capabilities in Cursor
   when you want natural language database management without leaving the editor.
   Install with /add-plugin neon-postgres in Cursor chat, or run npx
-  neonctl@latest init for automatic setup across supported editors.
+  neon@latest init for automatic setup across supported editors.
 description: >-
   Install the Neon Cursor plugin to use Neon agent skills and MCP-powered
   database operations directly in Cursor.
@@ -61,7 +61,7 @@ For plugin packaging details, see the [Cursor plugin template](https://github.co
 If you want Neon to configure AI tooling automatically, run:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 This configures MCP and installs Neon agent skills for supported editors.

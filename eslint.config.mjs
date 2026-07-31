@@ -16,7 +16,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default [
-  { ignores: ['eslint.config.mjs'] },
+  { ignores: ['eslint.config.mjs', '.claude/**'] },
 
   includeIgnoreFile(path.resolve(__dirname, '.gitignore')),
 
@@ -93,6 +93,23 @@ export default [
       'jsx-a11y/no-noninteractive-element-interactions': 'off',
       'jsx-a11y/media-has-caption': 'off',
       'jsx-a11y/no-autofocus': 'off',
+    },
+  },
+
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: { ...globals.node },
+    },
+    rules: {
+      'import/no-unresolved': 'off',
+      'import/named': 'off',
+      'no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
     },
   },
 

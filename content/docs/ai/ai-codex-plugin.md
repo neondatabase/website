@@ -8,15 +8,15 @@ summary: >-
   Codex to create and manage Neon projects, run SQL, validate connection
   strings, or reduce data transfer costs through natural-language prompts in
   the Codex CLI or app. Install via the Codex CLI (`npm install -g
-  @openai/codex`) or Codex app, or run `npx neonctl@latest init` to configure
+  @openai/codex`) or Codex app, or run `npx neon@latest init` to configure
   MCP and skills across supported AI tools.
 description: >-
   Install the Neon Postgres plugin in OpenAI Codex for MCP-backed database
   management plus skills for Neon workflows and egress cost optimization.
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-The **Neon Postgres** Codex plugin helps you manage **Neon Serverless Postgres** projects and databases. It adds Neon-specific [Agent Skills](https://developers.openai.com/codex/skills/) and Neon API access to [OpenAI Codex](https://developers.openai.com/codex/), including the **Neon MCP Server** for project and database management and skills that cover connection methods, branching, autoscaling, [Neon Auth](/docs/auth/overview), and more.
+The **Neon Postgres** Codex plugin helps you manage **Neon Serverless Postgres** projects and databases. It adds Neon-specific [Agent Skills](https://developers.openai.com/codex/skills/) and Neon API access to [OpenAI Codex](https://developers.openai.com/codex/), including the **Neon MCP Server** for project and database management and skills that cover connection methods, branching, autoscaling, [Managed Better Auth](/docs/auth/overview), and more.
 
 ## Overview
 
@@ -41,11 +41,11 @@ Once everything is installed, Codex can help you:
 
 The Neon Postgres plugin bundles these parts (as shown in Codex):
 
-| Component                          | Type  | What it does                                                                                                                                                                                                                                                         |
-| ---------------------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Neon Postgres**                  | App   | Manage Neon Postgres databases. Backed by the **Neon MCP Server** for project and database operations.                                                                                                                                                               |
-| **Neon Postgres**                  | Skill | Guides and best practices for Neon Serverless Postgres: connection methods, branching, autoscaling, Neon Auth, and related topics. This corresponds to the **`neon-postgres`** skill in the [Agent Skills repository](https://github.com/neondatabase/agent-skills). |
-| **Neon Postgres Egress Optimizer** | Skill | Diagnose and reduce excessive Postgres **data transfer (egress)** costs.                                                                                                                                                                                             |
+| Component                          | Type  | What it does                                                                                                                                                                                                                                                                   |
+| ---------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Neon Postgres**                  | App   | Manage Neon Postgres databases. Backed by the **Neon MCP Server** for project and database operations.                                                                                                                                                                         |
+| **Neon Postgres**                  | Skill | Guides and best practices for Neon Serverless Postgres: connection methods, branching, autoscaling, Managed Better Auth, and related topics. This corresponds to the **`neon-postgres`** skill in the [Agent Skills repository](https://github.com/neondatabase/agent-skills). |
+| **Neon Postgres Egress Optimizer** | Skill | Diagnose and reduce excessive Postgres **data transfer (egress)** costs.                                                                                                                                                                                                       |
 
 Together, the app gives Codex tools to act on your Neon organization and projects, while the skills steer workflows and deep dives (including cost optimization).
 
@@ -109,10 +109,10 @@ Start a new thread and describe what you want in natural language, or type `@` t
 To configure Neon MCP and agent skills across supported tools from the command line, you can run:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
-That flow can set up OAuth, API keys, MCP configuration, and project-level skills where applicable. See the [`neonctl init` reference](/docs/reference/cli-init) for details.
+That flow can set up OAuth, API keys, MCP configuration, and project-level skills where applicable. See the [`neon init` reference](/docs/cli/init) for details.
 
 ## Use skills outside the Codex plugin
 

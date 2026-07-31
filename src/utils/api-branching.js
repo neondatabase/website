@@ -10,8 +10,8 @@ const getAllPosts = async () => {
   const slugs = await getPostSlugs(BRANCHING_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, BRANCHING_DIR_PATH)) return;
       const data = getPostBySlug(slug, BRANCHING_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -28,6 +28,7 @@ const getAllPosts = async () => {
         isDraft,
       };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 

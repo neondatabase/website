@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 
+import Tag from 'components/pages/doc/tag';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import InfoIcon from 'components/shared/info-icon';
@@ -128,6 +129,14 @@ const Table = () => {
                           <>
                             <span className="relative w-fit text-base leading-snug font-normal tracking-extra-tight">
                               {item[key].title}
+                              {!!item[key].tag && (
+                                <Tag
+                                  className="relative -top-0.5 ml-2 inline-flex h-5 items-center px-2 py-0 font-mono text-[11px] font-medium"
+                                  label={item[key].tag.label}
+                                  size="xs"
+                                  theme={item[key].tag.theme}
+                                />
+                              )}
                               {!!item.soon && (
                                 <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] leading-none font-semibold tracking-wide text-gray-new-50 uppercase xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
                                   soon

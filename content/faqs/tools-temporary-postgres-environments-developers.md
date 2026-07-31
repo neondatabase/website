@@ -5,6 +5,12 @@ description: "Neon branches give each developer a temporary, isolated Postgres e
 slug: tools-temporary-postgres-environments-developers
 category: FAQ
 status: draft
+previousLink:
+  title: 'What tools help manage multiple Postgres databases across different projects and environments from a single account?'
+  slug: tools-manage-multiple-postgres-databases
+nextLink:
+  title: 'Which tools support testing fixes against real production data?'
+  slug: tools-testing-fixes-production-data
 ---
 
 ## Short answer

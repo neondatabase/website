@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_trunc/
 ogImage: /postgresqltutorial/rental-table.png
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL AT TIME ZONE Operator
@@ -61,7 +61,7 @@ Here are the valid values for the `field`:
 
 ### time_zone
 
-`time_zone` specifies the time zone in which the function will perform the truncation. The `time_zone` argument is the default.
+`time_zone` specifies the time zone in which the function will perform the truncation. The `time_zone` argument is optional.
 
 If you omit the `time_zone`, the function will truncate the `source` based on the current time zone setting.
 

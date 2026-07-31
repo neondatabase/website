@@ -6,7 +6,7 @@ page_description: >-
   existence of rows in the subquery.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-exists/'
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2026-06-04T15:04:42.682Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ALL Operator
@@ -158,7 +158,7 @@ The query returns the following output:
 
 In this example, for each customer in the `customer` table, the subquery checks the `payment` table to find if that customer made at least one payment (`p.customer_id = c.customer_id`) and the amount is greater than 11 ( `amount > 11`)
 
-### 2\) NOT EXISTS example
+### 3\) NOT EXISTS example
 
 The following example uses the `NOT EXISTS` operator to find customers who have not made any payment more than 11\.
 

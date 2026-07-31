@@ -3,13 +3,13 @@ title: Accounts
 subtitle: Manage your Neon account
 summary: >-
   Neon account settings let you update your profile, change your password, and
-  configure two-factor authentication (2FA). Use this page to switch login
-  methods, enable or remove TOTP-based 2FA, manage personal API keys, or
-  permanently delete your account. 2FA removal has a 24-hour security delay.
-  Deleted accounts can be reactivated within 30 days, after which all data is
-  permanently removed.
+  configure two-factor authentication (2FA) or passkeys. Use this page to
+  switch login methods, enable or remove TOTP-based 2FA, add or remove
+  passkeys, manage personal API keys, or permanently delete your account. 2FA
+  and passkey removal both have a 24-hour security delay. Deleted accounts can
+  be reactivated within 30 days, after which all data is permanently removed.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T14:03:39.757Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.
@@ -58,7 +58,7 @@ No surprises here: just enter your current password, then your new one (twice). 
 
 Protect your account with two-factor authentication (2FA). Once enabled, you'll enter a 6-digit code from your authenticator app each time you log in.
 
-If your organization admin requires 2FA for the organization, you must enroll in 2FA to continue accessing that organization.
+If your organization admin requires 2FA for the organization, you must enroll in 2FA or set up a [passkey](#passkeys) to continue accessing that organization.
 
 ### Enable 2FA
 
@@ -87,9 +87,44 @@ For security, removal is **delayed by 24 hours**. During the cooldown:
 Recovery codes are not currently supported. Keep your authenticator app backed up or synced across devices. If you lose access to your authenticator, [contact Support](/docs/introduction/support).
 </Admonition>
 
+## Passkeys
+
+A passkey lets you verify it's you when you sign in, using your device's built-in biometrics (like Touch ID or Windows Hello) or a security key, instead of typing a code. Passkeys are saved through your browser or operating system's passkey manager, such as Google Password Manager or iCloud Keychain.
+
+You can set up both a passkey and two-factor authentication (2FA) on your account. At sign-in, use whichever one you have available.
+
+### Add a passkey
+
+1. Go to **Account settings** and select **Passkeys** from the sidebar.
+2. Click **Add passkey**.
+3. Give the passkey a name, then click **Continue**.
+4. Follow your browser or device's prompts to save the passkey, for example, to Google Password Manager, iCloud Keychain, or a security key.
+
+Your new passkey appears in the list on this page. Click **Add another passkey** to register a passkey for another device.
+
+### Sign in with a passkey
+
+After you enter your email and password, click **Sign in with Passkey** to verify with your passkey instead of entering a code from your authenticator app. Follow your browser or device's prompts to complete verification. If you have more than one passkey saved, your browser may first ask which one to use.
+
+### Remove a passkey
+
+1. Go to **Account settings** and select **Passkeys** from the sidebar.
+2. Click **Remove** next to the passkey you want to remove.
+3. Verify your identity with an existing passkey.
+
+For security, removal is **delayed by 24 hours**. During the cooldown, the entry shows the time remaining and a **Cancel removal** button in place of **Remove**.
+
+- You'll receive an email notification saying someone requested to remove the passkey, with a link to cancel the removal if it wasn't you.
+- You can also cancel anytime from your account settings by clicking **Cancel removal**.
+- The passkey remains active until the cooldown expires.
+
+<Admonition type="note">
+If you lose access to your only passkey and have no other way to sign in, [contact Support](/docs/introduction/support).
+</Admonition>
+
 ## Create personal API keys
 
-Personal API keys let you securely interact with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), including through command-line tools, scripts, or third-party integrations that use the API. Your personal API key works for any organization you belong to, so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
+Personal API keys let you securely interact with the [Neon API](/docs/reference/api), including through command-line tools, scripts, or third-party integrations that use the API. Your personal API key works for any organization you belong to, so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
 
 [Learn more about API keys](/docs/manage/api-keys)
 

@@ -5,6 +5,12 @@ description: "Neon branches give you an isolated, writable copy of production Po
 slug: tools-testing-fixes-production-data
 category: FAQ
 status: draft
+previousLink:
+  title: 'What tools enable temporary Postgres environments for each developer?'
+  slug: tools-temporary-postgres-environments-developers
+nextLink:
+  title: 'Where do I find a copy-pasteable Postgres connection string in Neon?'
+  slug: where-find-database-connection-string
 ---
 
 ## Short answer

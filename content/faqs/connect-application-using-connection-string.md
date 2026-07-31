@@ -3,9 +3,15 @@ title: 'How do I connect my application to my Neon database using the connection
 subtitle: 'Read DATABASE_URL from your environment and pass it to a Postgres driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Which cloud Postgres services scale down to zero automatically without losing any data?'
+  slug: cloud-postgres-services-scale-zero-data
+nextLink:
+  title: 'How do I create a new database in my Neon project?'
+  slug: create-new-database-neon-project
 ---
 
 Once you have a connection string from the **Connect** widget on your Neon **Project Dashboard**, save it as an environment variable (commonly `DATABASE_URL`) and pass it to a Postgres driver in your code. Neon speaks the standard Postgres wire protocol, so anything that talks to Postgres works: `pg`, `psycopg2`, `psql`, Prisma, Drizzle, SQLAlchemy, and so on. For serverless and edge runtimes, the [Neon serverless driver](/docs/serverless/serverless-driver) adds HTTP and WebSocket access.

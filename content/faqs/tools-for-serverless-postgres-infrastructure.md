@@ -5,6 +5,12 @@ description: "Managed and serverless Postgres options like Neon, AWS Aurora Serv
 slug: tools-for-serverless-postgres-infrastructure
 category: FAQ
 status: draft
+previousLink:
+  title: 'What tools allow restoring a database to before a bug occurred?'
+  slug: tools-for-restoring-database-before-bug
+nextLink:
+  title: 'What tools allow inspecting production data without affecting users?'
+  slug: tools-inspecting-production-data-without-affecting-users
 ---
 
 ## Short answer

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-python/postgresql-python-call-postgresql-functions/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Transactions'
@@ -109,7 +109,7 @@ Notice that you can use any PostgreSQL client tools to create a function such as
 
 First, create a new module in the project directory called `call_function.py`:
 
-Second, define a new function called `get_parts()` that calls the `get_parts_by_vendors()` function in PostgreSQL:
+Second, define a new function called `get_parts()` that calls the `get_parts_by_vendor()` function in PostgreSQL:
 
 ```python
 import psycopg2

@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/partner-billing
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -47,7 +47,7 @@ To find the current usage level for any of these metrics, see [querying metrics]
 
 ### Corresponding quotas
 
-You can set quotas for these consumption metrics per project using the `quota` settings object in the [Create project](https://api-docs.neon.tech/reference/createproject) or [Update project](https://api-docs.neon.tech/reference/updateproject) API.
+You can set quotas for these consumption metrics per project using the `quota` settings object in the [Create project](/docs/reference/api/projects/create-project) or [Update project](/docs/reference/api/projects/update-project) API.
 
 The `quota` object includes an array of parameters used to set threshold limits. Their names generally match their corresponding metric:
 
@@ -92,7 +92,7 @@ In addition to the configurable limits that you can set, Neon also sets certain 
 - `branch_logical_size_limit` (MiB)
 - `branch_logical_size_limit_bytes`(Bytes)
 
-These limits are not directly configurable. You can query the limits by running the [Get project details](https://api-docs.neon.tech/reference/getproject) or [Get project list](https://api-docs.neon.tech/reference/listprojects) endpoints.
+These limits are not directly configurable. You can query the limits by running the [Get project details](/docs/reference/api/projects/get-project) or [Get project list](/docs/reference/api/projects/list-projects) endpoints.
 
 ## Suspending active computes
 
@@ -115,7 +115,7 @@ You can set quotas using the Neon API either in a `POST` when you create a proje
 
 ### Set quotas when you create the project
 
-For performance reasons, you might want to configure these quotas at the same time that you create a new project for your user using the [Create a project](https://api-docs.neon.tech/reference/createproject) API, reducing the number of API calls you need to make.
+For performance reasons, you might want to configure these quotas at the same time that you create a new project for your user using the [Create a project](/docs/reference/api/projects/create-project) API, reducing the number of API calls you need to make.
 
 Here is a sample `POST` in `curl` that creates a new project called `UserNew` and sets the `active_time_seconds` quota to a total allowed time of 10 hours (36,000 seconds) for the month, and a total allowed `compute_time_seconds` set to 2.5 hours (9,000 seconds) for the month. This 4:1 ratio between active and compute time is suitable for a fixed compute size of 0.25 CU.
 
@@ -143,7 +143,7 @@ curl --request POST \
 
 ### Update an existing project
 
-If you need to change the quota limits for an existing project &#8212; for example, if a user switches their plan to a higher usage tier &#8212; you can reset those limits via `PATCH` request. See [Update a project](https://api-docs.neon.tech/reference/updateproject) in the Neon API.
+If you need to change the quota limits for an existing project &#8212; for example, if a user switches their plan to a higher usage tier &#8212; you can reset those limits via `PATCH` request. See [Update a project](/docs/reference/api/projects/update-project) in the Neon API.
 
 Here is a sample `PATCH` that updates both the `active_time_seconds` and `compute_time_seconds` quotas to 30 hours (108,000):
 
@@ -169,14 +169,7 @@ curl --request PATCH \
 
 ## Querying metrics and quotas
 
-<ConsumptionAccountApiDeprecation/>
-
-You can use the Neon API to retrieve consumption metrics for your organization and projects using these endpoints:
-
-| Endpoint                                                                                             | Description                                                                                                                     | Plan Availability | Docs                                                                                                                 |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
-| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                          | Scale plan only   | [Get account-level aggregated metrics](consumption-metrics-legacy#get-account-level-aggregated-metrics-legacy-plans) |
-| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (for example, hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics](consumption-metrics-legacy#get-project-level-metrics-legacy-plans)              |
+You can use the Neon API to retrieve consumption metrics for your organization and projects using the [Granular metrics per project](/docs/reference/api/consumption/get-consumption-history-per-project) endpoint, which provides detailed metrics for each project at hourly, daily, or monthly granularity. See [Get granular project-level metrics](/docs/guides/consumption-metrics-legacy#project-level-endpoint) for details.
 
 ## Resetting a project after suspend
 

@@ -11,10 +11,14 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/project-sharing-guide
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-28T15:40:22.495Z'
 ---
 
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
+
+<Admonition type="important">
+This page describes project collaboration on the legacy permissions model. New organizations manage project access with [per-project permissions](/docs/manage/user-permissions) instead. The new model also has a **Collaborator** organization role, but that's separate: it's an organization member you grant a project role to, not an external person you invite to a single project as described here.
+</Admonition>
 
 <Admonition type="note">
 Use project collaboration to work with people outside your organization. If you're working with team members, create an [Organization](/docs/manage/organizations) instead. Organization members get automatic access to all projects within that organization. Organizations can still use project collaboration when needed (for example, to allow an external contractor to contribute to a specific project without making them a full organization member).
@@ -57,11 +61,11 @@ When you invite a user to your project, they operate under _your_ project allowa
 
 ### Access for collaborators via the Neon API or CLI
 
-Collaborators you invite to a project can access it from all supported Neon interfaces, including the Neon Console, [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), and [Neon CLI](/docs/reference/neon-cli).
+Collaborators you invite to a project can access it from all supported Neon interfaces, including the Neon Console, [Neon API](/docs/reference/api), and [Neon CLI](/docs/cli).
 
 Collaborators can use their own API key to access the project via the Neon API. See [Manage API keys](/docs/manage/api-keys) for details on generating an API key.
 
-When using the Neon CLI, collaborators authenticate as they normally would. They can access both their own Neon projects and any projects they are collaborating on. See [Neon CLI — Connect](/docs/reference/cli-install#connect) for authentication instructions.
+When using the Neon CLI, collaborators authenticate as they normally would. They can access both their own Neon projects and any projects they are collaborating on. See [Neon CLI — Connect](/docs/cli/install#connect) for authentication instructions.
 
 ## Billing for projects with collaborators
 

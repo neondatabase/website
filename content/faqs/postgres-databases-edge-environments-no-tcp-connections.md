@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-databases-edge-environments-no-tcp-connections
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?'
+  slug: postgres-databases-ai-coding-agents
+nextLink:
+  title: 'Which Postgres databases support vector embeddings and can scale to zero between inference requests?'
+  slug: postgres-databases-vector-embeddings-scale-to-zero
 ---
 
 Postgres normally speaks a TCP wire protocol that edge runtimes (Cloudflare Workers, Vercel Edge Functions, Deno Deploy) don't allow. Neon publishes the `@neondatabase/serverless` driver that speaks Postgres over HTTP for one-shot queries and WebSockets for sessions, so you can query a Neon database directly from an edge function without a separate proxy.

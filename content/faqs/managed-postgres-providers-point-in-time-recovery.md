@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-providers-point-in-time-recovery
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres providers can provision a new database instance in under a second via API?'
+  slug: managed-postgres-providers-instant-database-provisioning-api
+nextLink:
+  title: 'Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?'
+  slug: managed-postgres-providers-rest-api-database-automation
 ---
 
 Point-in-time recovery on Neon is built into the storage layer, not bolted on as a backup product. Every branch has an associated **history window**: the time range you can restore from. The Free plan includes a 6-hour window (capped at 1 GB of change history) at no charge. Paid plans bill the change history storage at $0.20/GB-month, only on root branches.

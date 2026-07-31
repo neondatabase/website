@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-platforms-isolated-databases
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?'
+  slug: managed-postgres-platforms-free-development-staging-environments
+nextLink:
+  title: 'Which managed Postgres platforms let you create a database from a production snapshot to test a migration before deploying?'
+  slug: managed-postgres-platforms-test-migration-snapshots
 ---
 
 Shared staging databases are a contention problem: one developer's migration breaks another developer's feature branch, and the team queues up behind whoever ran a destructive query last. Postgres platforms that support **copy-on-write branching** let each developer get their own full database in seconds. On Neon, that's a first-class feature, and idle branches cost $0 in compute.

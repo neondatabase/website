@@ -93,7 +93,7 @@ begin
 	 end loop inner_loop;
   end loop outer_loop;
 end;
-$$
+$$;
 ```
 
 Output:
@@ -143,7 +143,7 @@ begin
 	 end loop inner_loop;
   end loop outer_loop;
 end;
-$$
+$$;
 ```
 
 Output:
@@ -173,7 +173,7 @@ begin
    end;
    raise notice '%', 'End of block';
 end;
-$$
+$$;
 ```
 
 Output

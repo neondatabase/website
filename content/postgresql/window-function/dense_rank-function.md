@@ -7,7 +7,7 @@ page_description: >-
   set.
 prev_url: index.html
 ogImage: /postgresqltutorial/PostgreSQL-DENSE_RANK-Function-Sample-Table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CUME_DIST Function
@@ -40,7 +40,7 @@ DENSE_RANK() OVER (
 
 The `DENSE_RANK()` function is applied to every row in each partition defined by the `PARTITION BY` clause, in the sort order specified by `ORDER BY` clause. It will reset the rank when crossing the partition boundary.
 
-The `PARITION BY` clause is optional. If you skip it, the `DENSE_RANK()` function will treat the whole result set as a single partition.
+The `PARTITION BY` clause is optional. If you skip it, the `DENSE_RANK()` function will treat the whole result set as a single partition.
 
 ## PostgreSQL DENSE_RANK() function demo
 

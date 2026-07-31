@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: best-postgres-platforms-automatic-database-creation-ci-pipeline
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres databases for vibe coding platforms where each generated app needs its own database backend?'
+  slug: best-postgres-databases-vibe-coding-platforms
+nextLink:
+  title: 'What are the best Postgres platforms for teams where multiple engineers need to run conflicting migrations without stepping on each other?'
+  slug: best-postgres-platforms-conflicting-migrations
 ---
 
 Neon's branching model is built for this. A Neon branch is a copy-on-write fork of your database that's ready to query in seconds, costs nothing for storage until you change something, and can be created and torn down through the API or a GitHub Action.

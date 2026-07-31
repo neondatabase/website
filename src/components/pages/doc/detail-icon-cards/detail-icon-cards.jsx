@@ -68,6 +68,7 @@ import Queries from './images/queries.inline.svg';
 import Refresh from './images/refresh.inline.svg';
 import Research from './images/research.inline.svg';
 import RespondArrow from './images/respond-arrow.inline.svg';
+import Rocket from './images/rocket.inline.svg';
 import RowTable from './images/row-table.inline.svg';
 import ScaleUp from './images/scale-up.inline.svg';
 import Screen from './images/screen.inline.svg';
@@ -146,6 +147,7 @@ const icons = {
   refresh: Refresh,
   research: Research,
   'respond-arrow': RespondArrow,
+  rocket: Rocket,
   'scale-up': ScaleUp,
   screen: Screen,
   search: SearchContent,
@@ -170,47 +172,103 @@ const icons = {
 
 // const monochromeIcons = ['github'];
 
-const DetailIconCards = ({ children = null, withNumbers = false, compact = false, cols = 2 }) => {
+const CARD_THEMES = {
+  'green-flat': {
+    card: 'border border-green-44/70 bg-[#E4F1EB]/40 text-black-pure hover:border-green-44 dark:border-green-44/30 dark:bg-[#101815] dark:text-white dark:hover:border-green-44',
+    icon: 'text-[#2DAA7D] dark:text-[#00E599]',
+    title: 'text-black-pure dark:text-white',
+    description: 'text-gray-new-50',
+    tag: null,
+    withPattern: false,
+  },
+  grey: {
+    card: 'border border-gray-new-80 bg-gray-new-98 text-black-pure hover:border-gray-new-60 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-white dark:hover:border-gray-new-40',
+    icon: 'text-gray-new-50 dark:text-gray-new-60',
+    title: 'text-black-pure dark:text-white',
+    description: 'text-gray-new-50',
+    tag: 'flex items-center justify-center px-2.5 font-mono text-xs leading-none font-medium tracking-normal',
+    withPattern: false,
+  },
+  'green-dotted': {
+    card: 'border border-gray-new-80 bg-[#E4F1EB]/40 text-black-pure hover:border-gray-new-70 hover:bg-[#E4F1EB] dark:border-gray-new-30 dark:bg-gray-new-8 dark:text-white dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
+    icon: 'text-green-44',
+    title: 'dark:text-white',
+    description: 'text-gray-new-50 dark:text-gray-new-60',
+    tag: null,
+    withPattern: true,
+  },
+};
+
+const GHOST_CARD_THEME = {
+  card: 'border border-gray-new-90 bg-[#FAFAF9] text-gray-new-30 hover:border-gray-new-80 hover:bg-white dark:border-gray-new-20 dark:bg-[#0F0F0F] dark:text-gray-new-70 dark:hover:border-gray-new-30 dark:hover:bg-[#141414]',
+  icon: 'text-gray-new-50 opacity-70',
+  title: 'text-gray-new-30 dark:text-gray-new-70',
+  description: 'text-gray-new-50 dark:text-gray-new-60',
+  tag: null,
+  withPattern: false,
+};
+
+const DetailIconCards = ({
+  className,
+  children = null,
+  withNumbers = false,
+  compact = false,
+  forceGreenIcon = false,
+  cols = 2,
+  theme = 'green-dotted',
+}) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
+  const isFlatGroupTheme = theme !== 'green-dotted';
 
   return (
     <ListComponent
       className={cn(
         'detail-icon-cards not-prose grid p-0!',
         compact
-          ? 'my-7! grid-cols-2 gap-3 sm:grid-cols-1'
+          ? 'my-7! grid-cols-2 gap-6 sm:grid-cols-1'
           : cols === 4
             ? 'my-10! grid-cols-4 gap-3 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1'
             : cols === 3
               ? 'my-10! grid-cols-3 gap-5 md:grid-cols-2 sm:grid-cols-1'
-              : 'my-10! grid-cols-2 gap-5 sm:grid-cols-1'
+              : 'my-10! grid-cols-2 gap-5 sm:grid-cols-1',
+        className
       )}
     >
       {React.Children.map(children, (child, index) => {
-        const { children, href, description, icon, target, tag } = child.props ?? {};
+        const {
+          children,
+          href,
+          description,
+          icon,
+          target,
+          tag,
+          tagTheme = 'gray',
+          theme: childTheme,
+        } = child.props ?? {};
         const Icon = icons[icon];
 
-        const isGhost = !withNumbers && !!tag;
+        const cardThemeName = childTheme || (tag && isFlatGroupTheme ? 'grey' : theme);
+        const isGhost = !withNumbers && !!tag && cardThemeName === 'green-dotted';
+        const cardTheme = isGhost
+          ? GHOST_CARD_THEME
+          : CARD_THEMES[cardThemeName] || CARD_THEMES['green-dotted'];
 
         return (
           <li className="m-0! flex min-h-[169px] pl-0! before:hidden" key={index}>
             <Link
               className={cn(
                 'relative flex w-full flex-col p-5 transition-colors duration-200',
+                cols === 3 && 'p-4 md:p-5',
                 withNumbers &&
                   'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]',
-                !withNumbers &&
-                  !isGhost &&
-                  'border border-gray-new-80 bg-[#E4F1EB]/40 text-black-pure hover:border-gray-new-70 hover:bg-[#E4F1EB] dark:border-gray-new-30 dark:bg-gray-new-8 dark:text-white dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
-                isGhost &&
-                  'border border-gray-new-90 bg-[#FAFAF9] text-gray-new-30 hover:border-gray-new-80 hover:bg-white dark:border-gray-new-20 dark:bg-[#0F0F0F] dark:text-gray-new-70 dark:hover:border-gray-new-30 dark:hover:bg-[#141414]'
+                !withNumbers && cardTheme.card
               )}
               to={href}
               tagName="DocsNavCard"
               tagText={children}
               {...(target && { target })}
             >
-              {!isGhost && (
+              {(withNumbers || cardTheme.withPattern) && (
                 <Image
                   src={withNumbers ? patternNumbersSvg : patternSvg}
                   alt=""
@@ -219,7 +277,19 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                   className="absolute top-0 right-0 z-0"
                 />
               )}
-              {tag && <Tag label={tag} size="xs" className="absolute top-3.5 right-3.5 z-10" />}
+              {tag && (
+                <Tag
+                  label={tag}
+                  size="xs"
+                  theme={tagTheme}
+                  className={cn(
+                    'absolute z-10 h-6',
+                    'top-3.5 right-3.5',
+                    cols === 3 && 'top-4 right-4',
+                    cardTheme.tag
+                  )}
+                />
+              )}
               {withNumbers ? (
                 <span className="mb-[43px] inline-flex items-center gap-2 font-mono text-sm leading-none font-medium uppercase">
                   <СhevronIcon className="block h-3.5 w-3 flex-none text-[#FF3621]" />
@@ -228,17 +298,17 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
               ) : (
                 <Icon
                   className={cn(
-                    'mb-[29px] size-7',
-                    isGhost ? 'text-gray-new-50 opacity-70' : 'text-green-44'
+                    'mb-8 size-7',
+                    cardTheme.icon,
+                    forceGreenIcon && 'mb-8 size-7 text-green-44 dark:text-green-44'
                   )}
                 />
               )}
-              <div className="mt-auto flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5">
                 <h3
                   className={cn(
                     'text-lg leading-snug font-medium tracking-extra-tight',
-                    !withNumbers && !isGhost && 'dark:text-white',
-                    isGhost && 'text-gray-new-30 dark:text-gray-new-70'
+                    !withNumbers && cardTheme.title
                   )}
                 >
                   {children}
@@ -246,7 +316,8 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                 <p
                   className={cn(
                     'text-base leading-snug tracking-extra-tight',
-                    !withNumbers && 'text-gray-new-50 dark:text-gray-new-60'
+                    cols === 3 && 'text-[0.9375rem] md:text-base/snug',
+                    !withNumbers && cardTheme.description
                   )}
                 >
                   {description}
@@ -261,10 +332,13 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
 };
 
 DetailIconCards.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.node,
   withNumbers: PropTypes.bool,
   compact: PropTypes.bool,
+  forceGreenIcon: PropTypes.bool,
   cols: PropTypes.oneOf([2, 3, 4]),
+  theme: PropTypes.oneOf(['green-flat', 'grey', 'green-dotted']),
   highlightIndex: PropTypes.number,
 };
 

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: databases-instantly-spin-up-postgres-instance
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which databases avoid connection limits in serverless applications?'
+  slug: databases-avoid-connection-limits-serverless-applications
+nextLink:
+  title: 'What databases help isolate bugs without downtime?'
+  slug: databases-isolate-bugs-without-downtime
 ---
 
 Neon provisions a Postgres database in a few seconds. There's no hardware to wait for, and no `postgresql.conf` to edit. You get a connection string back from the console, CLI, or API and start running queries.
@@ -14,17 +20,17 @@ Neon provisions a Postgres database in a few seconds. There's no hardware to wai
 Install the CLI and create a project:
 
 ```bash
-npm i -g neonctl
+npm i -g neon
 neon auth
 neon projects create --name my-app
 neon connection-string
 ```
 
-The last command prints a Postgres connection string you can pass to any driver. The whole flow runs in well under a minute on a new account. See the [Neon CLI quickstart](https://neon.com/docs/reference/cli-quickstart).
+The last command prints a Postgres connection string you can pass to any driver. The whole flow runs in well under a minute on a new account. See the [Neon CLI quickstart](https://neon.com/docs/cli/quickstart).
 
 ## Or call the API directly
 
-For automated provisioning, the [Neon API](https://neon.com/docs/reference/api-reference) creates a project, branch, and compute in one call. This is how platforms like Vercel and Replit spin up a per-user database the moment someone signs up.
+For automated provisioning, the [Neon API](https://neon.com/docs/reference/api) creates a project, branch, and compute in one call. This is how platforms like Vercel and Replit spin up a per-user database the moment someone signs up.
 
 If you don't want to sign up at all, [Claimable Postgres](https://neon.new) gives you a working database in seconds without an account. Run `npx neon-new --yes` and you get a connection string that's valid for 72 hours. Claim it to a Neon account before it expires to keep it.
 

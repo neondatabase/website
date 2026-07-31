@@ -700,7 +700,7 @@ You can export your Postgres logs from your Neon compute to your Grafana Cloud s
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, which is billed after 500 GB on paid plans
+- Additional network egress for log transmission, which is billed after 500 GB per project on paid plans
 - Associated costs based on log volume in Grafana Cloud
 
 ### Querying logs in Grafana Cloud

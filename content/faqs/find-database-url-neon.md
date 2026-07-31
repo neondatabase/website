@@ -3,9 +3,15 @@ title: 'Where can I find my DATABASE_URL in Neon?'
 subtitle: 'Copy it from the Connect widget on the Project Dashboard and drop it into your .env.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Where can I find my database connection string in Neon?'
+  slug: find-database-connection-string
+nextLink:
+  title: 'Where can I find or generate API keys for Neon?'
+  slug: find-or-generate-neon-api-keys
 ---
 
 Your `DATABASE_URL` is the Postgres connection string Neon builds for you. Open your project in the [Neon Console](https://console.neon.tech), click **Connect** on the **Project Dashboard**, and copy the connection string from the **Connect to your database** modal. Paste it into your framework's `.env` file as `DATABASE_URL` and you're set.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-replace/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REVERSE() Function
@@ -147,4 +147,4 @@ The output indicates that the `http` in the `url` column were replaced by the `h
 
 ## Summary
 
-- Use the PostgreSQL `REPLACE()` function to replace all occurrences of a substring in a string with another a new substring.
+- Use the PostgreSQL `REPLACE()` function to replace all occurrences of a substring in a string with a new substring.

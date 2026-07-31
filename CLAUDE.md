@@ -87,6 +87,8 @@ npm run fix:js
 
 For markdown changes in `content/`, no manual step is needed. The pre-commit hook runs prettier and updates `updatedOn` automatically on staged files. To manually reformat all content markdown (prettier only), run `npm run fix:md`.
 
+The pre-push hook runs `npm run test:unit:run` automatically. If unit tests fail, the push is aborted.
+
 ## Environment Setup
 
 Copy `.env.example` to `.env` and configure. See internal Notion page for values.
@@ -499,6 +501,21 @@ To show an image without a border (for annotated UI screenshots):
 ```md
 ![Alt text](/docs/guides/my-feature.png 'no-border')
 ```
+
+## Agent Skills (`public/docs/ai/skills/`)
+
+The agent skills served under `public/docs/ai/skills/` are **vendored copies for discovery and hosted reference only** — they are **not** the source of truth. The canonical source for each skill (its `SKILL.md` and reference files) lives in the upstream skill repositories:
+
+- **[neondatabase/agent-skills](https://github.com/neondatabase/agent-skills)** — default source for all skills.
+- **[neondatabase/neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms)** — source for `neon-postgres-agent-platforms` (a per-skill override in `config/skills.json`).
+
+`config/skills.json` maps each skill to its upstream repo and ref. **Never hand-edit the copies here.** To change a skill's content, edit it in the source repo, then re-sync:
+
+```bash
+npm run update:skills   # sync:skills (pull from upstream) + generate:skills (rebuild discovery indexes)
+```
+
+CI enforces this. On any PR touching `public/docs/ai/skills/**`, `config/skills.json`, or the sync scripts, the **Skills Read-Only** workflow (`.github/workflows/skills-readonly.yml` → `npm run check:skills-sync` → `scripts/check-skills-sync.mjs`) verifies every vendored file matches its upstream source **1:1** — same content, no missing files, no extra files — and that `SKILL.md` links resolve. A hand-edit that diverges from upstream fails CI; the only way to change a skill here is to update it to match the source repo. (Reachability of each skill's reference files from its `SKILL.md` is enforced separately by the `check-skill-references` check in the source repos.)
 
 ## Important Files
 

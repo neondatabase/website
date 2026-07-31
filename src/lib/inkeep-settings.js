@@ -93,6 +93,7 @@ const getInkeepBaseSettings = ({ onEvent, themeMode }) => ({
   },
   theme: inkeepTheme,
   privacyPreferences: {
+    optOutAnalyticalCookies: true,
     optOutFunctionalCookies: true,
   },
   onEvent,

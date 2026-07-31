@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-services-retrieval-augmented-generation
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?'
+  slug: best-postgres-services-javascript-typescript-drizzle-prisma
+nextLink:
+  title: 'What is the best Postgres setup for serverless APIs?'
+  slug: best-postgres-setup-serverless-apis
 ---
 
 Neon runs Postgres with the [pgvector extension](/docs/extensions/pgvector) for similarity search, supports HNSW and IVFFlat indexes, and autoscales compute between a configured min and max. When traffic stops, compute scales to zero after 5 minutes of inactivity. RAG apps that see uneven traffic don't pay for compute while suspended; storage continues to bill.

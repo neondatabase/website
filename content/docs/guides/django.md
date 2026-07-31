@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
@@ -207,6 +207,7 @@ Learn how to use Django with Neon Postgres with this blog post and the accompany
 
 ## Next steps
 
-- [Set up Neon Auth](/docs/auth/overview): Add managed authentication that branches with your database.
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database.
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential.
 
 <NeedHelp/>

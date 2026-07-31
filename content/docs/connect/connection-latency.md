@@ -11,7 +11,7 @@ summary: >-
   Neon's proxy layer regardless of the underlying database version.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -28,10 +28,10 @@ You can check the current status of a compute on the **Branches** page in the Ne
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
-User actions that activate an idle compute include connecting from a client or application, running a query on your database from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+User actions that activate an idle compute include connecting from a client or application, running a query on your database from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), or accessing the compute via the [Neon API](/docs/reference/api).
 
 <Admonition type="info">
-The Neon API includes [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) and [Suspend endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) APIs for the specific purpose of activating and suspending a compute.
+The Neon API includes [Start endpoint](/docs/reference/api/endpoints/start-project-endpoint) and [Suspend endpoint](/docs/reference/api/endpoints/start-project-endpoint) APIs for the specific purpose of activating and suspending a compute.
 </Admonition>
 
 You can try any of these methods and watch the status of your compute as it changes from an **Idle** to an **Active** state. By default, a compute is suspended after 300 seconds (5 minutes) of inactivity. Users on the Neon [Scale plan](/docs/introduction/plans) can configure this delay period, which is described later in this topic.
@@ -56,7 +56,7 @@ For workloads where occasional cold starts are acceptable, you can also adjust t
 If you disable scale to zero entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/computes#restart-a-compute). 
 </Admonition>
 
-To configure a custom scale to zero setting, modify `suspend_timeout_seconds` using the [Update compute endpoint API](https://api-docs.neon.tech/reference/updateprojectendpoint) API, as shown below. To use this API, you need to specify your project ID and compute endpoint ID. You can find your project ID in your project's settings. You can find the compute endpoint ID on your branch page.
+To configure a custom scale to zero setting, modify `suspend_timeout_seconds` using the [Update compute endpoint API](/docs/reference/api/endpoints/update-project-endpoint) API, as shown below. To use this API, you need to specify your project ID and compute endpoint ID. You can find your project ID in your project's settings. You can find the compute endpoint ID on your branch page.
 
 ```bash
 curl --request PATCH \

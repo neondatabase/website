@@ -10,14 +10,14 @@ summary: >-
   regardless of role, and a permissions model that does not yet support
   fine-grained access controls.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-18T16:36:42.941Z'
 ---
 
 In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. You can start inviting teammates as soon as your organization is created. Paid plans also include billing management for your organization.
 
 ## About Neon Organizations
 
-In the Neon Console, the Organizations page gives you a centralized view of all your projects. From there, you can create new projects, manage existing ones, and oversee your members, billing information, and access to preview features through the [Early Access Program](/docs/introduction/roadmap#organization-early-access).
+In the Neon Console, the Organizations page gives you a centralized view of all your projects. From there, you can create new projects, manage existing ones, and oversee your members and billing information.
 
 ![organizations projects tab](/docs/manage/org_projects.png)
 

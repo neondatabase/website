@@ -20,10 +20,7 @@ const createSchema = ({ showGithubUrl } = {}) =>
   yup.object({
     url: yup.string().required('This field is required'),
     ...(showGithubUrl && {
-      githubUrl: yup
-        .string()
-        .url('Please enter a valid URL')
-        .required('This field is required'),
+      githubUrl: yup.string().url('Please enter a valid URL').required('This field is required'),
     }),
     email: yup
       .string()
@@ -100,7 +97,7 @@ const ProgramForm = ({ type }) => {
             <Field
               {...fieldProps}
               name="url"
-              label="Project URL *"
+              label="Website URL *"
               placeholder={placeholder}
               error={errors.url?.message}
               isDisabled={formState === FORM_STATES.LOADING}

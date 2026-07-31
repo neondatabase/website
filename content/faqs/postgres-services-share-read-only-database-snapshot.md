@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-services-share-read-only-database-snapshot
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services let a SaaS platform provision a new database per tenant at sign-up without manual steps?'
+  slug: postgres-services-saas-tenant-database-provisioning
+nextLink:
+  title: 'What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?'
+  slug: postgres-services-terraform-pulumi-infrastructure-as-code
 ---
 
 Create a branch from your production database, attach a fresh role, and hand the contractor a connection string. They get a live, queryable copy. They can't touch production, and their queries don't compete for production's compute.

@@ -3,12 +3,25 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import PropTypes from 'prop-types';
 import remarkGfm from 'remark-gfm';
 
+import AiGatewayModelIndex from 'components/pages/doc/ai-gateway-model-index';
+import ApiMethodBadge from 'components/pages/doc/api-method-badge';
+import ApiParam from 'components/pages/doc/api-param';
+import ApiResourceGrid from 'components/pages/doc/api-resource-grid/api-resource-grid';
+import ApiResponse from 'components/pages/doc/api-response';
 import Callout from 'components/pages/doc/callout';
 import ChatOptions from 'components/pages/doc/chat-options';
 import CheckItem from 'components/pages/doc/check-item';
 import CheckList from 'components/pages/doc/check-list';
+import {
+  CliCommandIndex,
+  CliUsage,
+  CliOptions,
+  CliSubcommands,
+  CliGlobalOptions,
+} from 'components/pages/doc/cli-reference';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
+import { CompactCards } from 'components/pages/doc/compact-cards';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
 import DocsLink from 'components/pages/doc/docs-link';
@@ -17,14 +30,13 @@ import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
 import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
-import PromptCards from 'components/pages/doc/prompt-cards';
 import Steps from 'components/pages/doc/steps';
 import StickyTable from 'components/pages/doc/sticky-table';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import Tag from 'components/pages/doc/tag';
 import TechCards from 'components/pages/doc/tech-cards';
-import TwinPaths, { QuickPath, GuidedPath } from 'components/pages/doc/twin-paths';
+import TwinPaths, { QuickPath, GuidedPath, TourCallout } from 'components/pages/doc/twin-paths';
 import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
@@ -162,6 +174,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       />
     );
   },
+  ApiMethodBadge,
+  ApiResourceGrid,
+  ApiParam,
+  ApiResponse,
   AutoscalingChart,
   AutoscalingViz,
   Button,
@@ -173,11 +189,12 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CodeTabs,
   DetailIconCards,
   TechCards,
-  PromptCards,
+  CompactCards,
   Tag,
   TwinPaths,
   QuickPath,
   GuidedPath,
+  TourCallout,
   CommunityBanner,
   QuickLinks,
   QuoteBlock,
@@ -205,11 +222,17 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   StickyTable,
   CheckList,
   CheckItem,
+  CliCommandIndex,
+  CliUsage,
+  CliOptions,
+  CliSubcommands,
+  CliGlobalOptions,
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,
   McpSetupConfigurator,
   SqlToRestConverter,
+  AiGatewayModelIndex,
   ...sharedComponents,
 });
 

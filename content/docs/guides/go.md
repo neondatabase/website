@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 
@@ -560,6 +560,11 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect a Go application to Neon using GORM](/guides/golang-gorm-postgres)
+
+## Next steps: Neon backend services
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 

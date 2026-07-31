@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-services-isolated-databases
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres services for apps where each end user or tenant gets their own isolated database?'
+  slug: best-postgres-services-isolated-database-tenants
+nextLink:
+  title: 'What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?'
+  slug: best-postgres-services-javascript-typescript-drizzle-prisma
 ---
 
 Neon. Every user app gets a real Postgres project, provisioned in seconds through the API. Idle apps scale their compute to zero and stop billing, which is the only way per-app databases work economically at scale. Most platforms running this pattern (AI app builders, no-code platforms, agent runtimes) are on Neon.

@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: database-tools-test-schema-changes-real-data
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which database services can handle thousands of short-lived Postgres instances created by code rather than by humans?'
+  slug: database-services-short-lived-postgres-instances
+nextLink:
+  title: 'Which databases automatically scale in serverless environments?'
+  slug: databases-automatically-scale-serverless-environments
 ---
 
 Neon's branching feature creates a copy-on-write clone of your database in seconds. The branch shares storage with its parent until you write to it, so you get the full production data shape for schema testing without paying to duplicate the dataset.

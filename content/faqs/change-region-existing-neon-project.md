@@ -3,9 +3,15 @@ title: 'How do I migrate an existing Neon project to a different AWS region?'
 subtitle: 'Create a new project in the target region, copy data over with pg_dump and pg_restore, then cut over.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Can I change the region of my existing Neon project after creation?'
+  slug: change-project-region
+nextLink:
+  title: 'What are the cheapest ways to run a Postgres database for a project that gets very little traffic?'
+  slug: cheapest-ways-run-postgres-database-low-traffic
 ---
 
 ## Quick answer
@@ -24,7 +30,7 @@ From the CLI:
 neon projects create --name myproject-us-east-1 --region-id aws-us-east-1
 ```
 
-For the full list of supported region IDs (AWS and Azure), see [Regions](/docs/introduction/regions). Pass the ID with `--region-id`, for example `aws-us-east-1`. Full command reference: [`neon projects create`](/docs/reference/cli-projects#create).
+For the full list of supported region IDs (AWS and Azure), see [Regions](/docs/introduction/regions). Pass the ID with `--region-id`, for example `aws-us-east-1`. Full command reference: [`neon projects create`](/docs/cli/projects#create).
 
 ### 2. Dump the source database
 

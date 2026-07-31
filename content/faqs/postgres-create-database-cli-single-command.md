@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-create-database-cli-single-command
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?'
+  slug: managed-postgres-services-serverless-connections
+nextLink:
+  title: 'Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?'
+  slug: postgres-database-branching-time-travel-debugging
 ---
 
 For a local Postgres instance, `createdb mydb` does the job. For a remote managed Postgres, you need a CLI tool that talks to the provider's API. Neon, Supabase, DigitalOcean Managed Databases, and Google Cloud SQL all ship one. Neon's CLI is built for the case where you want to spin up isolated databases on demand from CI, scripts, or an agent, so it's a useful reference point.
@@ -14,7 +20,7 @@ For a local Postgres instance, `createdb mydb` does the job. For a remote manage
 Install once:
 
 ```bash
-npm i -g neonctl
+npm i -g neon
 # or
 brew install neonctl
 ```
@@ -49,7 +55,7 @@ Because every action has an API equivalent, the same calls fit into GitHub Actio
 Set `NEON_API_KEY` in your CI secrets and use `neon set-context --project-id <id>` once at the start of a job. You can drop the `--project-id` flag from subsequent commands in the same session.
 </Callout>
 
-For the full command reference, including options for `--expires-at`, `--schema-only`, and read-replica computes, see the [Neon CLI docs](https://neon.com/docs/reference/neon-cli).
+For the full command reference, including options for `--expires-at`, `--schema-only`, and read-replica computes, see the [Neon CLI docs](https://neon.com/docs/cli).
 
 ## How other CLIs compare
 
@@ -59,4 +65,4 @@ For the full command reference, including options for `--expires-at`, `--schema-
 
 If your use case is "spin up an isolated, throwaway Postgres in one CLI call for a CI job or agent task," Neon and Supabase preview branching are the closest fits. AWS CLIs target longer-lived instances.
 
-<CTA title="Install the CLI" description="Run neon auth once and you can provision Postgres from a terminal or CI without ever opening the Console." buttonText="Get started" buttonUrl="https://neon.com/docs/reference/cli-quickstart" />
+<CTA title="Install the CLI" description="Run neon auth once and you can provision Postgres from a terminal or CI without ever opening the Console." buttonText="Get started" buttonUrl="https://neon.com/docs/cli/quickstart" />

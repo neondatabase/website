@@ -4,13 +4,13 @@ subtitle: Learn about monitoring resources and metrics in Neon
 summary: >-
   Neon's monitoring hub links every observability tool for your databases:
   the built-in Monitoring dashboard, usage metrics, active queries, query
-  performance, and pg_stat_statements. Find the right tool for your need,
-  from in-console visibility to external export for Datadog, Grafana Cloud,
-  and New Relic.
+  performance, logs, and pg_stat_statements. Find the right tool for your
+  need, from in-console visibility to external export for Datadog, Grafana
+  Cloud, and New Relic.
 enableTableOfContents: false
 redirectFrom:
   - /docs/introduction/monitor-external-tools
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T12:12:52.695Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
@@ -28,6 +28,8 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 <a href="/docs/introduction/monitor-active-queries" description="View and analyze running queries in your database" icon="import">Active Queries</a>
 
 <a href="/docs/introduction/monitor-query-performance" description="View and analyze query performance for your Neon database" icon="research">Query performance</a>
+
+<a href="/docs/introduction/monitor-logs" description="View, search, and download logs across Functions and Object Storage" icon="search">Logs</a>
 
 <a href="/docs/data-api/database-advisor" description="Detect Data API security and performance issues, in the console or via API" icon="warning">Data API Advisors</a>
 

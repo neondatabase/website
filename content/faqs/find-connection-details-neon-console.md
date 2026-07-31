@@ -3,9 +3,15 @@ title: 'Where can I find my database connection details in the Neon Console?'
 subtitle: 'Everything you need lives in the Connect widget on the Project Dashboard.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Why am I getting ''Error connecting to database: Failed to fetch'' in the Neon Console Tables view?'
+  slug: failed-to-fetch-error-tables-view
+nextLink:
+  title: 'Where can I find my database connection string or URL in Neon?'
+  slug: find-database-connection-string-url
 ---
 
 Open your project in the [Neon Console](https://console.neon.tech) and click **Connect** on the **Project Dashboard**. The **Connect to your database** modal lists every detail you need to connect: branch, compute, database, role, host, password, and a constructed connection string. They all live in this one widget rather than being scattered across the Console.

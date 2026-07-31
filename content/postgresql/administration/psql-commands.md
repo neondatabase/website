@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL database server effectively.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/psql-commands/'
 ogImage: /postgresqltutorial/psql-commands.jpg
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Describe Table
@@ -205,7 +205,7 @@ dvdrental=#
 
 ## 15\) Edit command in your editor
 
-It is very handy if you can type the command in your favorite editor. To do this in psql, you `\e` command. After issuing the command, psql will open the text editor defined by your EDITOR environment variable and place the most recent command that you entered in psql into the editor.
+It is very handy if you can type the command in your favorite editor. To do this in psql, you use the `\e` command. After issuing the command, psql will open the text editor defined by your EDITOR environment variable and place the most recent command that you entered in psql into the editor.
 
 ![psql commands](/postgresqltutorial/psql-commands.jpg)After you type the command in the editor, save it, and close the editor, psql will execute the command and return the result.
 

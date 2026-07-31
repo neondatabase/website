@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REVOKE Statement
@@ -145,7 +145,7 @@ Output:
 
 The output indicates that the role `alice` has the `SELECT` privilege on the `rental` table even though we did not explicitly assign it.
 
-### Removing a role to a group role
+### Removing a role from a group role
 
 To remove a role from a group role, you use the `REVOKE` statement:
 

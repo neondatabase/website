@@ -6,7 +6,7 @@ page_description: >-
   auto-increment column in a database table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-serial/'
 ogImage: /postgresqltutorial/PostgreSQL-Serial-268x300.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE TABLE AS
@@ -100,7 +100,7 @@ INSERT INTO fruits(id,name)
 VALUES(DEFAULT,'Apple');
 ```
 
-PostgreSQL inserted two rows into the `fruits` table with the values for the `id` column are 1 and 2\.
+PostgreSQL inserted two rows into the `fruits` table with the values for the `id` column being 1 and 2.
 
 ```sql
 SELECT * FROM fruits;

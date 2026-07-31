@@ -6,7 +6,7 @@ page_description: >-
   remainder after dividing the first argument by the second one.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-mod/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LOG() Function
@@ -20,7 +20,7 @@ nextLink:
 The MOD() function works the same way across every PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance, enterprise-grade security, and tight integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
-**Summary**: In this tutorial, you will learn how to use the PostgreSQL `MOD()` function performs the modulo operation, returning the remainder after dividing the first argument by the second one.
+**Summary**: In this tutorial, you will learn how to use the PostgreSQL `MOD()` function to perform the modulo operation, returning the remainder after dividing the first argument by the second one.
 
 ## Introduction to the PostgreSQL MOD() function
 
@@ -62,7 +62,7 @@ Output:
 (1 row)
 ```
 
-The following statement uses the `MOD()` function to get the remainder of 15 and \-5:
+The following statement uses the `MOD()` function to get the remainder of 15 and \-4:
 
 ```sql
 SELECT MOD(15,-4);

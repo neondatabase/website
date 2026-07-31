@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_insert/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON Extract
@@ -115,8 +115,8 @@ Output:
 
 In this example:
 
-- The original array is `\[1,2,\[3,4],6]`.
-- The path `\{2, 0\}`, `2` specifies the second element of the array which is the nested array `\[3,4]`, and `0` specifies the first element of the nested array.
+- The original array is `\[1,2,\[4,5],6]`.
+- The path `\{2, 0\}`, `2` specifies the second element of the array which is the nested array `\[4,5]`, and `0` specifies the first element of the nested array.
 - `3` is the new value.
 
 Therefore the `jsonb_insert()` function inserts the new value 3 before the first element of the nested array.

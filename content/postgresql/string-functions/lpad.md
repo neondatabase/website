@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-lpad/
 ogImage: /postgresqltutorial/customer-and-payment-tables.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL RIGHT() Function
@@ -41,7 +41,7 @@ is a string that should be padded on the left
 
 **2\) `length`**
 
-is an positive integer that specifies the length of the result string after padding.
+is a positive integer that specifies the length of the result string after padding.
 
 Note that if the string is longer than the length argument, the string will be truncated on the right.
 

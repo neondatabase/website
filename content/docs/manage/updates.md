@@ -11,7 +11,7 @@ summary: >-
   to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -87,14 +87,14 @@ In the Neon Console:
 
    ![Paid plan updates UI](/docs/manage/paid_plan_updates.png)
 
-You can check your project's settings for upcoming updates. We'll post a notice there at least **7 days** ahead of a planned update, letting you know when it's coming.
+You can check your project's settings for upcoming updates. On all paid plans, we post a notice there at least **3 days** ahead of a planned update, letting you know when it's coming.
 
-> If you're a Scale plan customer, you will also receive an **email notification** 7 days in advance of a planned update.
+> On the **Scale** and **Enterprise** plans, you also receive an **email notification** 3 days in advance of a planned update, in addition to the in-console notice. On the **Launch** plan, advance notice is provided in the console only, with no email.
 
 </TabItem>
 
 <TabItem>
-On Neon paid plans, the [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) APIs let you define an update window using the `maintenance_window` object, as shown in the `Update project` example below.
+On Neon paid plans, the [Create project](/docs/reference/api/projects/create-project) and [Update project](/docs/reference/api/projects/update-project) APIs let you define an update window using the `maintenance_window` object, as shown in the `Update project` example below.
 
 - The `weekdays` parameter accepts an integer (`1` for Monday, `2` for Tuesday, and so on) or an array of integers to specify multiple weekdays.
 - The `start_time` and `end_time` values must be in UTC (`HH:MM` format) and at least one hour apart. Shorter intervals are not supported. Both times must fall on the same day. For example, (`22:00`, `23:00`) and (`23:00`, `00:00`) are valid settings, but (`22:00`, `03:00`) is not, as it would span multiple days.
@@ -128,7 +128,7 @@ curl --request PATCH \
 
 ## Check for updates using the Neon API
 
-You can retrieve your update window and check for planned updates using the [Retrieve project details](https://api-docs.neon.tech/reference/getproject) endpoint.
+You can retrieve your update window and check for planned updates using the [Retrieve project details](/docs/reference/api/projects/get-project) endpoint.
 
 To get your project details, send the following request, replacing `<your_project_id>` with your Neon project ID, and `$NEON_API_KEY` with your [Neon API key](/docs/manage/api-keys):
 
@@ -182,7 +182,7 @@ Most Postgres connection drivers include built-in retry mechanisms that automati
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
-If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+If your application or integration uses the [Neon API](/docs/reference/api) or [SDKs](/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
 
 ## See also
 

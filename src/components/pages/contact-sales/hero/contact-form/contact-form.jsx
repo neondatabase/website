@@ -137,7 +137,7 @@ const ContactForm = () => {
     } catch (error) {
       if (error.name !== 'AbortError') {
         doNowOrAfterSomeTime(() => {
-          setFormState(FORM_STATES.BROKEN);
+          setFormState(FORM_STATES.ERROR);
           setIsBroken(true);
         }, 2000);
       }
@@ -265,7 +265,7 @@ const ContactForm = () => {
       <div className="relative z-0 col-span-full mt-1 flex items-end justify-between gap-6 sm:flex-col sm:items-start sm:gap-4">
         <p className="max-w-[300px] text-sm leading-[1.5] tracking-tight text-gray-new-60 sm:max-w-full">
           By submitting you agree to the{' '}
-          <Link className="decoration-dashed" to={LINKS.terms} theme="grey-85-underlined">
+          <Link className="decoration-dashed" to={LINKS.websiteTerms} theme="grey-85-underlined">
             Terms of Use
           </Link>{' '}
           and acknowledge the{' '}

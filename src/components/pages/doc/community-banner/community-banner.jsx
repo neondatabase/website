@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 import Button from 'components/shared/button';
 import { cn } from 'utils/cn';
 
-const CommunityBanner = ({ buttonText, buttonUrl, children = null }) => (
-  <section className="community-banner not-prose relative my-7">
+const CommunityBanner = ({ className, buttonText, buttonUrl, children = null }) => (
+  <section className={cn('community-banner not-prose relative my-7', className)}>
     <div
       className={cn(
-        'relative flex min-h-[194px] items-center overflow-hidden border px-8 pt-7 pb-7 sm:px-6 sm:pt-6 sm:pb-6',
-        'border-gray-new-80 bg-[rgba(228,241,235,0.4)]',
-        'dark:border-gray-new-30 dark:bg-gray-new-10'
+        'relative flex min-h-48.5 items-center overflow-hidden border px-8 pt-7 pb-7 sm:px-6 sm:pt-6 sm:pb-6',
+        'border-gray-new-80 bg-gray-new-98',
+        'dark:border-gray-new-20 dark:bg-gray-new-8'
       )}
     >
-      <div className="relative z-10 flex max-w-[287px] flex-col gap-6">
-        <h2 className="text-[28px] leading-tight font-normal tracking-tighter text-black-pure dark:text-white xs:text-2xl">
+      <div className="relative z-10 flex max-w-98 flex-col gap-6">
+        <h2 className="text-2xl leading-tight font-normal tracking-tighter text-black-pure dark:text-white">
           {children}
         </h2>
         <Button
-          className="max-w-[166px] rounded-[33px]! px-7! py-3.5! text-base! leading-none! font-medium! tracking-tighter!"
+          className="max-w-41.5 rounded-full px-7! py-3.5! text-base! leading-none! font-medium!"
           to={buttonUrl}
           size="xs"
           theme="white-filled-multi"
@@ -42,6 +42,7 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null }) => (
 );
 
 CommunityBanner.propTypes = {
+  className: PropTypes.string,
   children: PropTypes.node,
   buttonText: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,

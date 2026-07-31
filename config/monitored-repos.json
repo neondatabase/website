@@ -112,6 +112,16 @@
       "comment": "Agent Skills for Neon Serverless Postgres - PRs merge directly to main"
     },
     {
+      "name": "neon-pkgs",
+      "path": "~/Documents/GitHub/neon-pkgs",
+      "github_url": "git@github.com:neondatabase/neon-pkgs.git",
+      "github_org": "neondatabase",
+      "github_repo": "neon-pkgs",
+      "release_type": "direct",
+      "organize_by_category": false,
+      "comment": "Monorepo for Neon's open-source SDKs, libraries, CLIs, and framework plugins - per-package tags but main moves without consistent tagging"
+    },
+    {
       "name": "create-branch-action",
       "path": "~/create-branch-action",
       "github_url": "git@github.com:neondatabase/create-branch-action.git",

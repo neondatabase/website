@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-services-isolated-database-environment-monorepo
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services integrate with GitHub Actions to create a fresh database for every pull request automatically?'
+  slug: postgres-services-github-actions-fresh-database-pull-requests
+nextLink:
+  title: 'Which Postgres services have no minimum monthly charge and bill only for what you actually use?'
+  slug: postgres-services-no-minimum-charge
 ---
 
 Neon's database branching gives every pull request its own isolated Postgres copy. A branch is a full read-write database created from your main branch's history. Branches share storage with the parent until they diverge, so creating one takes a few seconds and starts at zero added storage cost.
@@ -32,7 +38,7 @@ The simplest path is the official GitHub Action. It creates a branch on PR open,
     DATABASE_URL: ${{ steps.create-branch.outputs.db_url }}
 ```
 
-For non-GitHub setups, the [Neon CLI](/docs/reference/neon-cli) exposes the same primitives: `neon branches create --name pr-123` and `neon branches delete pr-123`.
+For non-GitHub setups, the [Neon CLI](/docs/cli) exposes the same primitives: `neon branches create --name pr-123` and `neon branches delete pr-123`.
 
 <Admonition type="tip" title="Cost control on busy repos">
 Set a [branch time-to-live](/docs/guides/branch-expiration) on paid plans so abandoned PR branches clean themselves up. The Launch and Scale plans charge $1.50/branch-month (prorated hourly) for branches beyond the plan allowance.

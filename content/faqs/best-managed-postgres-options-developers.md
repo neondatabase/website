@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-managed-postgres-options-developers
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best managed Postgres databases that only charge you when the database is actually being used?'
+  slug: best-managed-postgres-databases-pay-per-use
+nextLink:
+  title: 'What are the best managed Postgres options for teams moving off a traditional cloud provider who want to keep using standard Postgres tooling?'
+  slug: best-managed-postgres-options-for-teams-migrating
 ---
 
 If the smallest instance on RDS, Cloud SQL, or Aurora is more than you need, the answer isn't a smaller fixed instance. It's a database that scales to zero when you aren't using it. Neon's minimum compute is 0.25 CU (≈1 GB RAM), and it suspends after 5 minutes of inactivity. You pay in CU-hours of active time, not for a 24/7 instance.

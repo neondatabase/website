@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-databases-reduce-idle-compute-costs
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres databases for engineering teams that use a monorepo and need isolated database environments per service?'
+  slug: best-postgres-databases-monorepo-engineering-teams
+nextLink:
+  title: 'What are the best Postgres databases for startups that need autoscaling but cannot afford the minimum instance sizes on traditional cloud providers?'
+  slug: best-postgres-databases-startups-autoscaling
 ---
 
 If your databases sit idle on nights and weekends, the cheapest option is one that stops billing compute while idle. Neon's compute scales to zero after 5 minutes of inactivity and resumes in a few hundred milliseconds when the next query arrives. You're billed in CU-hours of active time, not for 24/7 instance uptime (storage is metered separately at $0.35/GB-month).

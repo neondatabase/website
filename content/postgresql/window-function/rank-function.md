@@ -6,7 +6,7 @@ page_description: >-
   assign a rank for every row of a result set.
 prev_url: index.html
 ogImage: /postgresqltutorial/PostgreSQL-RANK-function-sample-table.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL PERCENT_RANK Function
@@ -40,7 +40,7 @@ RANK() OVER (
 In this syntax:
 
 - First, the `PARTITION BY` clause distributes rows of the result set into partitions to which the `RANK()` function is applied.
-- Then, the `ORDER BY` clause specifies the order of rows in each a partition to which the function is applied.
+- Then, the `ORDER BY` clause specifies the order of rows in each partition to which the function is applied.
 
 The `RANK()` function can be useful for creating top\-N and bottom\-N reports.
 
@@ -144,7 +144,7 @@ FROM
 In this example:
 
 - First, the `PARTITION BY` clause distributes products into partitions grouped by product group id (`group_id`).
-- Second, the `ORDER BY` clause sort products in each partition by their prices from high to low.
+- Second, the `ORDER BY` clause sorts products in each partition by their prices from high to low.
 
 The `RANK()` function was applied to every product in each product group and it is reinitialized when the product group changed.
 

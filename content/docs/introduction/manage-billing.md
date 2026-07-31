@@ -12,7 +12,7 @@ summary: >-
   manually because Stripe does not support e-Mandate recurring payments in
   India.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-10T15:22:41.769Z'
 ---
 
 <InfoBlock>
@@ -102,7 +102,7 @@ A Neon invoice includes the charges and the amount due for the billing period. F
 
 ### Pay an invoice
 
-Invoices are charged automatically to your payment method on the first day of the month. If you'd rather not wait for the automatic charge, or an automatic payment didn't go through, organization admins (or the account owner on a personal account) can pay an outstanding invoice manually at any time.
+Invoices are charged automatically to your payment method on the first day of the month. If an automatic payment didn't go through, organization admins (or the account owner on a personal account) can pay an outstanding invoice manually at any time.
 
 To pay an invoice manually:
 

@@ -13,7 +13,7 @@ summary: >-
   window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -32,7 +32,11 @@ When you add a new project, Neon creates the following resources by default:
 
 The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Playing with Neon](/docs/get-started/signing-up).
 
-To create a Neon project:
+You can create a project from the Console or the Neon CLI. To create one with the API, see [Create a project with the API](#create-a-project-with-the-api).
+
+<Tabs labels={["Console", "CLI"]}>
+
+<TabItem>
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
@@ -40,6 +44,22 @@ To create a Neon project:
 4. Click **Create Project**.
 
 After creating a project, you are directed to the **Project Dashboard**.
+
+</TabItem>
+
+<TabItem>
+
+Install the CLI with `npm i -g neon` and run `neon auth` to log in. Then create a project with `neon projects create`:
+
+```bash
+neon projects create --name myproject --region-id aws-us-east-2
+```
+
+The output includes the new project ID and the default connection string. For all options, see [Neon CLI — projects](/docs/cli/projects).
+
+</TabItem>
+
+</Tabs>
 
 ## View projects
 
@@ -180,7 +200,7 @@ To configure an allowlist:
 
 <TabItem>
 
-The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
+The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
@@ -208,7 +228,7 @@ neon ip-allow add 203.0.113.1 --protected-only false
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
+The [Create project](/docs/reference/api/projects/create-project) and [Update project](/docs/reference/api/projects/update-project) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
@@ -282,7 +302,7 @@ This list combines individual IP addresses, a range of IP addresses, a CIDR bloc
 
 You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). Replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.0.2.1`, and you want to extend access to IP address `192.0.2.2`, specify both addresses in your new configuration: `192.0.2.1, 192.0.2.2`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
 
-The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/reference/cli-ip-allow).
+The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/cli/ip-allow).
 
 #### Remove an IP Allow configuration
 
@@ -303,7 +323,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
+The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
 
 ```bash
 neon ip-allow reset
@@ -366,7 +386,7 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 
 <TabItem>
 
-Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+Use the [Update project](/docs/reference/api/projects/update-project) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/$PROJECT_ID' \
@@ -417,15 +437,15 @@ If you are any of Neon's paid plans, deleting all your Neon projects won't stop 
 </Admonition>
 
 <Admonition type="note">
-**Early Access:** Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
+Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
 </Admonition>
 
 ## Manage projects with the Neon API
 
-Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API Reference](/docs/reference/api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -438,7 +458,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a project with the API
 
-The following Neon API method creates a project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
+The following Neon API method creates a project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/create-project).
 
 ```http
 POST /projects
@@ -463,7 +483,7 @@ The response includes information about the role, the database, the default bran
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Create project](https://api-docs.neon.tech/reference/createproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create project](/docs/reference/api/projects/create-project) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -621,7 +641,7 @@ For attribute definitions, find the [Create project](https://api-docs.neon.tech/
 
 ### List projects with the API
 
-The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojects).
+The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/list-projects).
 
 ```http
 GET /projects
@@ -638,7 +658,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [List projects](https://api-docs.neon.tech/reference/listprojects) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List projects](/docs/reference/api/projects/list-projects) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -745,7 +765,7 @@ For attribute definitions, find the [List projects](https://api-docs.neon.tech/r
 
 ### Update a project with the API
 
-The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateproject).
+The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/update-project).
 
 ```http
 PATCH /projects/{project_id}
@@ -768,7 +788,7 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Update project](/docs/reference/api/projects/update-project) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -827,7 +847,7 @@ For attribute definitions, find the [Update project](https://api-docs.neon.tech/
 
 ### Delete a project with the API
 
-The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteproject).
+The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/delete-project).
 
 ```http
 DELETE /projects/{project_id}
@@ -845,7 +865,7 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Delete project](https://api-docs.neon.tech/reference/deleteproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete project](/docs/reference/api/projects/delete-project) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -964,7 +984,7 @@ neon projects recover crimson-voice-12345678
 └────────────────────────┴───────────┴───────────────┴──────────────────────┘
 ```
 
-For more information about the Neon CLI, see [Neon CLI — projects](/docs/reference/cli-projects).
+For more information about the Neon CLI, see [Neon CLI — projects](/docs/cli/projects).
 
 </TabItem>
 

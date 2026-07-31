@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-services-saas-tenant-database-provisioning
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services have no minimum monthly charge and bill only for what you actually use?'
+  slug: postgres-services-no-minimum-charge
+nextLink:
+  title: 'Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?'
+  slug: postgres-services-share-read-only-database-snapshot
 ---
 
 Neon's API creates a new Postgres project (or branch) per tenant in seconds, with no manual steps. Each project gets its own connection string, isolated storage, and independent compute that scales to zero when the tenant is idle. That last part is what makes database-per-tenant economically viable.

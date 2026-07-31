@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -33,7 +33,7 @@ With **Neon Private Networking**, you can connect to your database via AWS Priva
 - You must be a Neon [Business](/docs/introduction/plans#business) and [Scale](/docs/introduction/plans#scale) account user, and your user account must be [Neon organization](/docs/manage/organizations) Admin account. You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
 - **Ensure that your client application is deployed on AWS in the same region as the Neon database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
 - Neon Private Networking supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6).
-- Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).
+- Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](/docs/cli/install).
 
 ## Configuration steps
 
@@ -60,23 +60,30 @@ To configure Neon Private Networking, perform the following steps:
 
        - **us-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-01aeec2f4b558bc22`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-01b3c73657ed9bd29`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-040132f4a2dc43d76`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0492424e0bf471d59`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0824666dc46176a87`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0adffb07ac0333ac0`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0c4afbefbfdf6b031`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0d07f7f68c9a99f3b`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af`
        - **us-east-2**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
-         - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0d421498ff01becac`
+         - `com.amazonaws.vpce.us-east-2.vpce-svc-0fcb5fccfc8573aa3`
        - **eu-central-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-0260f9dcc9bf59e3e`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-04bac3120b20929cd`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
-       - **eu-west-2**:
+       - **eu-west-2**: Create entries, one for each of the following:
+         - `com.amazonaws.vpce.eu-west-2.vpce-svc-0375428488d22c05b`
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
@@ -84,6 +91,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d`
        - **ap-southeast-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-01c64edf7fe936ac7`
+         - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-028cc7060eb23ff43`
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
        - **ap-southeast-2**:
          - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
@@ -118,7 +126,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    In the following example, the VPC endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand) command.
+    In the following example, the VPC endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](/docs/cli/vpc#endpoint) command.
 
     ```bash shouldWrap
     neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-2
@@ -130,7 +138,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VPC endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, and a [Neon API key](/docs/manage/api-keys).
+    You can use the [Assign or update a VPC endpoint](/docs/reference/api/organizations/assign-organization-vpc-endpoint) API to assign a VPC endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, and a [Neon API key](/docs/manage/api-keys).
 
     ```bash
     curl --request POST \
@@ -183,7 +191,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    To block access via the Neon CLI, use the [neon projects update](/docs/reference/cli-projects#update) command with the `--block-public-connections` option.
+    To block access via the Neon CLI, use the [neon projects update](/docs/cli/projects#update) command with the `--block-public-connections` option.
 
     ```bash
     neon projects update orange-credit-12345678 --block-public-connections true
@@ -195,7 +203,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    To block access via the Neon API, use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint with the `block_public_connections` settings object attribute.
+    To block access via the Neon API, use the [Update project](/docs/reference/api/projects/update-project) endpoint with the `block_public_connections` settings object attribute.
 
     ```bash
     curl --request PATCH \
@@ -236,7 +244,7 @@ neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-1234
 
 You will need to provide the VPC endpoint ID and your Neon project ID. If the region has multiple **Service Names**, all **VPC Endpoint IDs** must be restricted in the way as above. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
-After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status command](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
+After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status command](/docs/cli/vpc#endpoint). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
 
 ```bash
 neon vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
@@ -251,7 +259,7 @@ neon vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --o
 
 <TabItem>
 
-The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
+The Neon API supports managing project restrictions using the [Assign or update a VPC endpoint restriction](/docs/reference/api/projects/assign-project-vpc-endpoint) endpoint. You will need to provide your VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
 
 ```bash
 curl --request POST \
@@ -262,7 +270,7 @@ curl --request POST \
      --data '{"label":"my_vpc"}'
 ```
 
-After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [Retrieve VPC endpoint details](https://api-docs.neon.tech/reference/getorganizationvpcendpointdetails) API. You will need to provide your VPC endpoint ID, region ID, Neon organization ID, and a Neon API key.
+After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [Retrieve VPC endpoint details](/docs/reference/api/organizations/get-organization-vpc-endpoint-details) API. You will need to provide your VPC endpoint ID, region ID, Neon organization ID, and a Neon API key.
 
 ```bash
 curl --request GET \
@@ -284,7 +292,7 @@ The `vpc` command includes `endpoint` and `project` subcommands for managing VPC
 - **`vpc endpoint`** – List, assign, remove, and retrieve the status of VPC endpoints for a Neon organization.
 - **`vpc project`** – List, configure, or remove VPC endpoint restrictions for specific Neon projects.
 
-For more details and examples, see [Neon CLI commands — vpc](/docs/reference/cli-vpc).
+For more details and examples, see [Neon CLI commands — vpc](/docs/cli/vpc).
 
 ## Managing Private Networking using the Neon API
 
@@ -292,16 +300,16 @@ The Neon API provides endpoints for managing VPC endpoints and project-level VPC
 
 ### APIs for managing VPC endpoints
 
-- [List VPC endpoints](https://api-docs.neon.tech/reference/listorganizationvpcendpoints)
-- [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint)
-- [Retrieve VPC endpoint configuration details](https://api-docs.neon.tech/reference/getorganizationvpcendpointdetails)
-- [Delete a VPC endpoint](https://api-docs.neon.tech/reference/deleteorganizationvpcendpoint)
+- [List VPC endpoints](/docs/reference/api/organizations/list-organization-vpc-endpoints)
+- [Assign or update a VPC endpoint](/docs/reference/api/organizations/assign-organization-vpc-endpoint)
+- [Retrieve VPC endpoint configuration details](/docs/reference/api/organizations/get-organization-vpc-endpoint-details)
+- [Delete a VPC endpoint](/docs/reference/api/organizations/delete-organization-vpc-endpoint)
 
 ### APIs for managing VPC endpoint restrictions
 
-- [Get VPC endpoint restrictions](https://api-docs.neon.tech/reference/listprojectvpcendpoints)
-- [Assign or update a VPC endpoint restriction](https://api-docs.neon.tech/reference/assignprojectvpcendpoint)
-- [Delete a VPC endpoint restriction](https://api-docs.neon.tech/reference/deleteprojectvpcendpoint)
+- [Get VPC endpoint restrictions](/docs/reference/api/projects/list-project-vpc-endpoints)
+- [Assign or update a VPC endpoint restriction](/docs/reference/api/projects/assign-project-vpc-endpoint)
+- [Delete a VPC endpoint restriction](/docs/reference/api/projects/delete-project-vpc-endpoint)
 
 ## Private Networking limits
 

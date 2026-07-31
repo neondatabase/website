@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-services-auto-resize-compute
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?'
+  slug: managed-postgres-providers-rest-api-database-automation
+nextLink:
+  title: 'Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?'
+  slug: managed-postgres-services-feature-branch-database-copies
 ---
 
 Neon's [Autoscaling](/docs/introduction/autoscaling) adjusts compute up and down inside a range you set, with no restarts and no plan changes. You pick a minimum and a maximum compute size; Neon scales between them based on load. Idle computes scale all the way to zero and stop accruing compute charges (storage continues to bill).
@@ -38,7 +44,7 @@ You're billed per CU-hour at the actual size the compute ran at. On Launch ($0.1
 - 1 hour at 4 CU during a spike = 4 CU-hours = $0.424
 - 1 hour scaled to zero = $0
 
-Set a [spending limit](/docs/introduction/spending-limit) on Launch or Scale to cap total spend across all projects in the organization.
+Set up [spending notifications](/docs/introduction/spending-notifications) on Launch or Scale to get alerts on total spend across all projects in the organization.
 
 <Admonition type="tip" title="Don't over-provision the minimum">
 Setting a high minimum CU defeats the purpose of autoscaling. Start with 0.25 CU as the minimum and let Neon scale up under load. Bump the minimum only if you see warm-up latency hurting real users.

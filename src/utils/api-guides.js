@@ -1,5 +1,7 @@
 import fs from 'fs';
 
+import matter from 'gray-matter';
+
 const { GUIDES_DIR_PATH } = require('../constants/content');
 
 const { getPostSlugs, getPostBySlug } = require('./api-content');
@@ -30,12 +32,42 @@ const getAuthor = (id) => {
   }
 };
 
+const getGuideFrontmatter = (slug) => {
+  try {
+    const source = fs.readFileSync(`${process.cwd()}/${GUIDES_DIR_PATH}/${slug}.md`, 'utf-8');
+    const { data } = matter(source);
+    return data;
+  } catch (_e) {
+    return null;
+  }
+};
+
+const getGuideNavigationItems = async () => {
+  const slugs = await getPostSlugs(GUIDES_DIR_PATH);
+  return slugs
+    .map((slug) => {
+      const data = getGuideFrontmatter(slug);
+      if (!data) return;
+
+      const { title, createdAt, isDraft } = data;
+
+      return {
+        title,
+        slug: slug.slice(1),
+        createdAt,
+        isDraft,
+      };
+    })
+    .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
+    .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
+};
+
 const getAllGuides = async () => {
   const slugs = await getPostSlugs(GUIDES_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, GUIDES_DIR_PATH)) return;
       const data = getPostBySlug(slug, GUIDES_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -68,6 +100,7 @@ const getAllGuides = async () => {
         excludeFromBlog,
       };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
     .sort((a, b) => (new Date(a.createdAt).getTime() < new Date(b.createdAt).getTime() ? 1 : -1));
 };
@@ -84,4 +117,4 @@ const getNavigationLinks = (slug, posts) => {
   };
 };
 
-export { getAllGuides, getAuthor, getAuthors, getNavigationLinks };
+export { getAllGuides, getAuthor, getAuthors, getGuideNavigationItems, getNavigationLinks };

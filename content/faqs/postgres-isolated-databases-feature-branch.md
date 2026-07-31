@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-isolated-databases-feature-branch
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres tools support instant rollback after a bad migration?'
+  slug: postgres-instant-rollback-tools
+nextLink:
+  title: 'What Postgres should I use for a Next.js app deployed on Vercel?'
+  slug: postgres-nextjs-vercel-integration
 ---
 
 ## Short answer

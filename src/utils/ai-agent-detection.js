@@ -45,7 +45,23 @@ export function isAIAgentRequest(request) {
 // path (or no path at all). Maps directly to the correct static file in public/.
 const CUSTOM_MARKDOWN_PATHS = {
   pricing: '/pricing.md', // Hand-written, served from public/pricing.md (no CONTENT_ROUTES entry)
+  // Docs root aliases to the curated llms.txt rather than a generated page-listing.
+  // Three places enforce this alias — keep them in sync if this changes:
+  //   1. Here (getMarkdownPath — middleware serving for /docs and /docs.md agent requests)
+  //   2. next.config.js beforeFiles rewrite: /docs.md → /docs/llms.txt (static/browser)
+  //   3. process-md-for-llms.js ROUTES_ALIASED_TO_LLMS (skips generating public/md/docs.md)
+  docs: '/docs/llms.txt',
+  // Blog root aliases to the blog index. Two places enforce this alias — keep in sync:
+  //   1. Here (getMarkdownPath — agent requests to /blog and /blog.md)
+  //   2. next.config.js beforeFiles rewrite: /blog.md → /blog/llms.txt (static/browser)
+  blog: '/blog/llms.txt',
   'docs/changelog': '/md/docs/changelog.md',
+  // Human-facing endpoint index. The HTML route is a searchable UI, but its
+  // agent-facing content should resolve to the canonical generated API index.
+  'docs/reference/api/reference': '/md/docs/reference/api.md',
+  // Legacy hand-maintained API reference path now resolves to the generated
+  // canonical API reference markdown.
+  'docs/reference/api-reference': '/md/docs/reference/api.md',
   'docs/skill.md': '/docs/ai/skills/neon-postgres/SKILL.md', // primary skill alias — update alongside next.config.js if primary changes (see config/skills.json)
 };
 
@@ -55,6 +71,10 @@ const CUSTOM_MARKDOWN_PATHS = {
 // - Route handlers that accept non-GET requests (docs/mcp), where the middleware
 //   would otherwise detect the non-HTML Accept header, try to serve /md/docs/mcp.md,
 //   fail with 404, and return a markdown error before the route handler fires.
+const STATIC_DOC_FILES = new Set([
+  'docs/reference/api/llms.txt',
+  'docs/reference/api/llms-full.txt',
+]);
 const STATIC_DOC_PREFIXES = ['docs/ai/skills/', 'docs/.well-known/', 'docs/mcp'];
 
 // Convert URL path to markdown file path
@@ -69,7 +89,8 @@ export function getMarkdownPath(pathname) {
 
   if (isExcluded) return null;
 
-  if (STATIC_DOC_PREFIXES.some((prefix) => path.startsWith(prefix))) return null;
+  if (STATIC_DOC_FILES.has(path) || STATIC_DOC_PREFIXES.some((prefix) => path.startsWith(prefix)))
+    return null;
 
   // Normalize .md suffix so /branching.md matches the branching route
   const normalized = path.endsWith('.md') ? path.slice(0, -3) : path;
@@ -86,7 +107,7 @@ export function getMarkdownPath(pathname) {
   // Get the content directory path from CONTENT_ROUTES and convert to public path
   // Example: content/docs -> /md/docs
   const contentPath = CONTENT_ROUTES[matchedRoute];
-  const publicPath = contentPath.replace('content/', '/md/');
+  const publicPath = contentPath.replace(/^content(?:\/pages)?\//, '/md/');
 
   // Extract slug after the matched route
   const slug = normalized === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
@@ -96,15 +117,37 @@ export function getMarkdownPath(pathname) {
   return slug ? `${publicPath}/${mdSlug}` : `${publicPath}.md`;
 }
 
-export function buildAgent404Response(pathname) {
+const DEFAULT_404_LINKS = [
+  {
+    label: 'Neon docs index',
+    href: '/docs/llms.txt',
+    description: 'full table of contents, start here to find the right page',
+  },
+  {
+    label: 'Neon REST API',
+    href: '/docs/reference/api.md',
+    description: 'all REST endpoints grouped by resource',
+  },
+  {
+    label: 'Neon CLI',
+    href: '/docs/cli.md',
+    description: 'neon commands, options, and usage',
+  },
+];
+
+export function buildAgent404Response(
+  pathname,
+  { extraLinks = [], context = 'Neon documentation' } = {}
+) {
+  const linkLines = [...extraLinks, ...DEFAULT_404_LINKS]
+    .map(({ label, href, description }) => `- [${label}](${href}): ${description}`)
+    .join('\n');
   return `# Page Not Found
 
-\`${pathname}\` does not exist in Neon documentation.
+\`${pathname}\` does not exist in ${context}.
 
-Find what you need:
+Try the docs index to locate the correct URL, or use one of these references:
 
-- [All Neon documentation](/docs/llms.txt): Table of contents for all Neon docs
-- [Full documentation text](/docs/llms-full.txt): Complete Neon docs in one file
-- [Neon API reference](/docs/reference/api-reference.md): API endpoints and usage
+${linkLines}
 `;
 }

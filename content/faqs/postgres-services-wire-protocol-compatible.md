@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: postgres-services-wire-protocol-compatible
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?'
+  slug: postgres-services-terraform-pulumi-infrastructure-as-code
+nextLink:
+  title: 'What Postgres tools let teams avoid the problem of one developer breaking the shared staging database for everyone else?'
+  slug: postgres-tools-avoid-breaking-staging-database
 ---
 
 Neon runs unmodified Postgres on top of its own storage engine, so it speaks the standard Postgres wire protocol. Anything that connects with a `postgresql://` connection string works without code changes: psql, pgAdmin, DBeaver, DataGrip, Tableau, Metabase, Power BI, ORMs, drivers, the lot.

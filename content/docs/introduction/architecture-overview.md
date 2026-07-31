@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-10T13:57:31.917Z'
 ---
 
 ## Top level overview
@@ -32,7 +32,7 @@ Neon’s design intentionally keeps object storage off the critical path. Object
 ![Neon architecture overview](/docs/introduction/neon-architecture-overview.png)
 
 <Admonition type="note" title="What is the difference between Neon and Lakebase?">
-Both products share the same architectural foundation but Lakebase comes with additional features integrating it with the rest of the Databricks Data and AI platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
+Neon and Databricks run the same database, Lakebase Postgres, on the same infrastructure. What surrounds it differs: on Neon it anchors a complete backend for apps and agents, while Databricks integrates it with the rest of the Data Intelligence Platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
 ## Resource hierarchy
@@ -82,7 +82,7 @@ For reads, **the compute node always prefers local access.** It first looks in m
 
 If the compute layer is responsible for execution, the storage layer is responsible for correctness, durability, and history. **This layer exists independently of any single compute node and continues to operate even when computes come and go.**
 
-Rather than exposing a traditional filesystem, the Neon storage layer is built around three distinct components, each with a well-defined role:
+Rather than exposing a traditional filesystem, the database storage layer is built around three distinct components, each with a well-defined role:
 
 - Safekeepers: define correctness by replicating WAL
 - The pageserver: turns WAL into queryable data pages
@@ -95,7 +95,7 @@ Safekeepers are responsible for one thing: **durable replication of WAL**. When 
 This is a fundamental difference from how traditional Postgres works:
 
 - Correctness in Neon is enforced through replication and consensus
-- Commit latency depends on network RTT, not disk fsync
+- Commit latency is primarily quorum/network-bound, with safekeepers batching WAL flushes rather than relying on compute-local fsync
 - No single machine defines the durable state of the database
 
 ### Pageserver: WAL ⇄ pages

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: databases-isolate-bugs-without-downtime
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which databases allow spinning up a Postgres instance instantly?'
+  slug: databases-instantly-spin-up-postgres-instance
+nextLink:
+  title: 'Which databases help recover from accidental data deletion?'
+  slug: databases-recover-accidental-data-deletion
 ---
 
 When you need to reproduce a bug against production data, the safe move is to copy production into a separate database first. Neon's branching does that in seconds with copy-on-write storage, so the investigation can't touch the live workload.

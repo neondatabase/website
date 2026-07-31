@@ -9,7 +9,7 @@ summary: >-
   scales to zero. Only `neon_superuser` roles can call
   `pg_stat_statements_reset()` to clear accumulated stats manually.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 ---
 
 The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a Postgres database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
@@ -85,6 +85,8 @@ FROM pg_stat_statements
 ORDER BY 3 DESC
 LIMIT 10;
 ```
+
+As an alternative to writing SQL, the Neon CLI wraps these two queries as [`neon inspect db calls`](/docs/cli/inspect#db-calls) and [`neon inspect db outliers`](/docs/cli/inspect#db-outliers).
 
 ### Monitor slow queries
 

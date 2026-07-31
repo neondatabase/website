@@ -166,7 +166,7 @@ Output:
 (1 row)
 ```
 
-### 7\) Extracting a week number from a timestamp
+### 7\) Extracting a millennium from a timestamp
 
 To get the current millennium, you use the `DATE_PART()` function with the [`NOW()`](postgresql-now) function as follows:
 

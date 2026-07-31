@@ -4,7 +4,7 @@ subtitle: Build a Web scraper AI Agent in minutes with AgentStack, Neon, and Fir
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-04T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 The rapid evolution of AI agents has created a key challenge: how to build and deploy agents quickly and efficiently. Imagine creating intelligent agents that can not only perform complex tasks but also interact easily with your data infrastructure, without adding unnecessary complexity to the code.
@@ -397,7 +397,7 @@ You can find the source code for the application described in this guide on GitH
 - [Firecrawl AgentStack Tool](https://docs.agentstack.sh/tools/tool/firecrawl)
 - [CrewAI Documentation](https://docs.crewai.com/introduction)
 - [Neon AgentStack Tool](https://docs.agentstack.sh/tools/tool/neon)
-- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [Neon API Reference](/docs/reference/api)
 - [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 
 <NeedHelp/>

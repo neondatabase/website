@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/workflow-primer
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
@@ -44,7 +44,7 @@ You can use either the Neon CLI or GitHub actions to incorporate branching into 
 
 ### Neon CLI
 
-Using the [Neon CLI](/docs/reference/neon-cli), you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
+Using the [Neon CLI](/docs/cli), you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
 
 And here are the key CLI actions you can use:
 
@@ -65,7 +65,7 @@ For more information, see:
 
 <a href="/docs/guides/branching-neon-cli" description="Learn about branching with the Neon CLI" icon="github">Branching with the Neon CLI</a>
 
-<a href="/docs/reference/neon-cli" description="Reference for all commands in the Neon CLI" icon="github">Neon CLI Reference</a>
+<a href="/docs/cli" description="Reference for all commands in the Neon CLI" icon="github">Neon CLI Reference</a>
 
 </DetailIconCards>
 
@@ -171,8 +171,8 @@ Example:
 preview/pr-123-feat/new-login-screen
 ```
 
-<Admonition type="tip" title="Using Neon Auth?">
-[Neon Auth](/docs/auth/overview) is provisioned on preview branches when enabled on production. Each preview gets isolated users, sessions, and auth configuration that branches with the database. Vercel integrations set `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` automatically. See [Branching authentication](/docs/auth/branching-authentication) and [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration).
+<Admonition type="tip" title="Using Managed Better Auth?">
+[Managed Better Auth](/docs/auth/overview) is provisioned on preview branches when enabled on production. Each preview gets isolated users, sessions, and auth configuration that branches with the database. Vercel integrations set `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` automatically. See [Branching authentication](/docs/auth/branching-authentication) and [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration).
 </Admonition>
 
 You can also automate branch creation for every preview. These example applications show how to create Neon branches with GitHub Actions for every preview environment.

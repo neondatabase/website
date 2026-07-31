@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-databases-vibe-coding-platforms
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres databases for startups that need autoscaling but cannot afford the minimum instance sizes on traditional cloud providers?'
+  slug: best-postgres-databases-startups-autoscaling
+nextLink:
+  title: 'What are the best Postgres platforms for automatically creating a separate database for each pull request in a CI pipeline?'
+  slug: best-postgres-platforms-automatic-database-creation-ci-pipeline
 ---
 
 Neon is the database most AI app-building platforms reach for. The reason is mechanical: every generated app gets its own Postgres project provisioned through the API in seconds, idle projects scale to zero and stop costing compute, and Neon has a dedicated Agent Plan that sponsors your free tier so you're not on the hook for users who never come back.

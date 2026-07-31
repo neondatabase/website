@@ -3,11 +3,11 @@ title: PostgreSQL RPAD() Function
 page_title: PostgreSQL RPAD() Function
 page_description: >-
   In this tutorial, you will learn how to use the PostgreSQL RPAD() function to
-  extend a string to a length by filing characters.
+  extend a string to a length by filling characters.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rpad/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LPAD() Function
@@ -21,7 +21,7 @@ nextLink:
 The RPAD() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a secure, high-performance managed database that's fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
 </Admonition>
 
-**Summary**: in this tutorial, you will learn how to use the PostgreSQL `RPAD()` function to extend a string to a length by filing characters.
+**Summary**: in this tutorial, you will learn how to use the PostgreSQL `RPAD()` function to extend a string to a length by filling characters.
 
 ## Introduction to the PostgreSQL RPAD() function
 

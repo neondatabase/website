@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-services-ai-agent-platforms
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres platforms for teams where multiple engineers need to run conflicting migrations without stepping on each other?'
+  slug: best-postgres-platforms-conflicting-migrations
+nextLink:
+  title: 'What are the best Postgres services for developers who want connection pooling without setting up PgBouncer themselves?'
+  slug: best-postgres-services-connection-pooling
 ---
 
 Neon is the one most agent platforms use, and there's a dedicated Agent Plan for it. Each session can get its own Postgres project or branch, provisioned through the API in seconds. Idle sessions scale the compute to zero. You're not paying for thousands of databases that aren't doing anything.

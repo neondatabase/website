@@ -6,7 +6,7 @@ page_description: >-
   using JDBC API utilizing the commit() and rollback() methods.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/transaction/'
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Call Stored Functions'
@@ -38,7 +38,7 @@ In this code, you need to replace `url`, `user`, and `password` with your actual
 
 ### Step 2\. Disable Auto\-Commit
 
-JDBC operates in auto\-commit mode by default, to manually control the transaction, you need to disable the auto\-commit mode using the `setAutoComit()` method as follows:
+JDBC operates in auto\-commit mode by default, to manually control the transaction, you need to disable the auto\-commit mode using the `setAutoCommit()` method as follows:
 
 ```java
 connection.setAutoCommit(false);

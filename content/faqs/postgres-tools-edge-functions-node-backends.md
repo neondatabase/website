@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-tools-edge-functions-node-backends
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres tools let teams avoid the problem of one developer breaking the shared staging database for everyone else?'
+  slug: postgres-tools-avoid-breaking-staging-database
+nextLink:
+  title: 'Which Postgres tools handle high volumes of short-lived connections efficiently?'
+  slug: postgres-tools-high-volumes-short-lived-connections
 ---
 
 The [Neon serverless driver](/docs/serverless/serverless-driver) (`@neondatabase/serverless`) works in both environments. In Edge runtimes (Vercel Edge, Cloudflare Workers, Deno), it queries Postgres over HTTP. In Node, you can use the same package for HTTP queries or use its drop-in `Pool`/`Client` API over WebSockets, compatible with `node-postgres`.

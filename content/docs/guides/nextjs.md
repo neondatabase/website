@@ -14,7 +14,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
@@ -441,6 +441,9 @@ Neon does not provide a built-in file storage service. For managing binary file 
 
 ## Next steps
 
-- [Set up Neon Auth](/docs/auth/quick-start/nextjs-api-only): Add managed authentication that branches with your database
+- [Set up Managed Better Auth](/docs/auth/quick-start/nextjs-api-only): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

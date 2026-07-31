@@ -1,184 +1,70 @@
 ---
 name: neon-postgres
 description: >-
-  Guides and best practices for working with Neon, the backend for apps and agents.
-  Covers setup, connection methods, branching, autoscaling, scale-to-zero,
-  read replicas, connection pooling, Neon Auth, and the Neon CLI, MCP server,
-  REST API, TypeScript SDK, and Python SDK.
+  Guides and best practices for working with Neon Serverless Postgres.
+  Covers setup, connection methods and drivers, pooled vs direct connections,
+  branching, autoscaling, scale-to-zero, instant restore, read replicas,
+  connection pooling, IP allow lists, and logical replication.
   Use when users ask about "Neon setup", "connect to Neon", "Neon project",
-  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neonctl", "Neon MCP",
+  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
   "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
   "scale to zero", "Neon autoscaling", "Neon read replica", or
   "Neon connection pooling".
+metadata:
+  parent: neon
 ---
 
-# Neon: the backend for apps and agents
+**FIRST**: Use the parent `neon` skill for a Neon platform overview, getting started with Neon, Neon development best practices, and more.
 
-Guide the user through any Neon-related task: setup, connections, branching, and advanced features. Deliver a working Neon connection, a completed feature configuration, or a specific answer from the official Neon docs.
-
-Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.
-
-## Neon Documentation
-
-The Neon documentation is the source of truth for all Neon-related information. Always verify claims against the official docs before responding. Neon features and APIs evolve, so prefer fetching current docs over relying on training data.
-
-### Fetching Docs as Markdown
-
-Any Neon doc page can be fetched as markdown in two ways:
-
-1. **Append `.md` to the URL** (simplest): https://neon.com/docs/introduction/branching.md
-2. **Request `text/markdown`** on the standard URL: `curl -H "Accept: text/markdown" https://neon.com/docs/introduction/branching`
-
-Both return the same markdown content. Use whichever method your tools support.
-
-### Finding the Right Page
-
-The docs index lists every available page with its URL and a short description:
-
-```
-https://neon.com/docs/llms.txt
-```
-
-Common doc URLs are organized in the topic links below. If you need a page not listed here, search the docs index: https://neon.com/docs/llms.txt. Don't guess URLs.
-
-## What Is Neon
-
-Use this for architecture explanations and terminology (organizations, projects, branches, endpoints) before giving implementation advice.
-
-Link: https://neon.com/docs/introduction/architecture-overview.md
-
-## Getting Started
-
-Use this section when guiding a user through first-time Neon setup.
-
-### Check Status Quo
-
-Before starting setup, inspect the user's codebase and environment:
-
-- Existing database connection code
-- Existing Neon MCP server or Neon CLI configuration
-- Existence of a `.env` file and `DATABASE_URL` environment variable
-- Existing ORM (Prisma, Drizzle, TypeORM) configuration
-
-### Self-Driving Setup With Neon's CLI or MCP Server
-
-Offer to inspect existing connected Neon projects or create new ones using the Neon CLI or MCP server. If neither is set up yet, run init with the `--agent` flag. Use `npx -y` to skip the package install prompt. Auth is handled automatically. If the user is not logged in, it opens their browser for OAuth and waits for completion before proceeding.
+If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
 ```bash
-npx -y neonctl@latest init --agent <agent-name>
+npx skills add neondatabase/agent-skills --skill neon
 ```
 
-Supported `--agent` values: `cursor`, `copilot`, `claude`, `claude-desktop`, `codex`, `opencode`, `cline`, `gemini-cli`, `goose`, `zed`.
+# Neon Serverless Postgres
 
-This installs the Neon extension (for Cursor/VS Code) or MCP server (for other agents), creates an API key, and adds the `neon-postgres` agent skill to the project.
+Serverless Postgres is the core of the Neon platform. It separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.
 
-If `init` is not suitable, the individual steps can be run non-interactively:
+## Setup Flow
 
-- **Extension:** `cursor --install-extension databricks.neon-local-connect`
-- **MCP server:** `npx -y add-mcp https://mcp.neon.tech/mcp -g -n Neon -y -a <agent-name>`
-- **Agent skill:** `npx skills add neondatabase/agent-skills --skill neon-postgres --agent <agent-name> -y`
+### 1. Select the organization and project
 
-For full CLI installation options, see https://neon.com/docs/reference/cli-install.md
+Use the CLI (default) or MCP server to list organizations and projects. Let the user select an existing project or create a new one. Check the `.neon` file for an existing linked project or branch.
 
-### Setup Flow
+### 2. Get the connection string
 
-**1. Select Organization and Project**
+Use the CLI (default), `neon env pull`, or the MCP server to get the connection string. Store it in `.env` as `DATABASE_URL`. Read the file first before modifying it, to avoid overwriting existing values.
 
-Use MCP server or CLI to list organizations and projects. Let the user select an existing project or create a new one.
+#### When to use pooled vs direct connections
 
-**2. Get Connection String**
+| Use case                                 | Connection type  |
+| ---------------------------------------- | ---------------- |
+| Web applications, serverless functions   | Pooled (-pooler) |
+| Schema migrations                        | Direct           |
+| pg_dump / pg_restore                     | Direct           |
+| Logical replication                      | Direct           |
+| Long-running analytics with temp tables  | Direct           |
+| Admin tasks needing SET or session state | Direct           |
+| LISTEN / NOTIFY                          | Direct           |
 
-Use MCP server or CLI to get the connection string. Store it in `.env` as `DATABASE_URL`. Read the file first before modifying to avoid overwriting existing values.
+### 3. Pick the connection method and driver
 
-**3. Pick Connection Method & Driver**
+Always pair Neon with an ORM such as **Drizzle** for easy schema management and migrations. Refer to the connection methods guide to pick the correct driver based on how the runtime treats your code: https://neon.com/docs/connect/choose-connection.md.
 
-Refer to the connection methods guide to pick the correct driver based on deployment platform: https://neon.com/docs/connect/choose-connection.md
+Recommendations:
 
-**4. User Authentication with Neon Auth (if needed)**
+- Drizzle as ORM (see https://neon.com/docs/guides/drizzle.md)
+- On Vercel, use `node-postgres` (`npm install pg`) with Vercel Fluid compute and `import { attachDatabasePool } from "@vercel/functions";`
+- On Cloudflare, use `node-postgres` with Cloudflare Hyperdrive
+- On Neon Functions, use `node-postgres`, as the functions are long-running and reuse the pool across requests.
+- Use the `@neondatabase/serverless` driver for serverless and edge environments (for example, when using Netlify) — HTTP transport for one-shot queries, WebSocket for transaction support. Link: https://neon.com/docs/serverless/serverless-driver.md
 
-Skip for CLI tools, scripts, or apps without user accounts. If the app needs auth: use MCP server `provision_neon_auth` tool, then see the auth overview (https://neon.com/docs/auth/overview.md) for setup. For auth + database queries, see the JavaScript SDK reference (https://neon.com/docs/reference/javascript-sdk.md).
+### 4. Set up the schema
 
-**5. ORM Setup (optional)**
+Manage schemas and migrations as code. Avoid running ad hoc schema migrations against your database, since they're hard to manage.
 
-Check for existing ORM (Prisma, Drizzle, TypeORM). If none, ask if they want one. For Drizzle integration, see https://neon.com/docs/guides/drizzle.md.
-
-**6. Schema Setup**
-
-- Check for existing migration files or ORM schemas
-- If none: offer to create an example schema or design one together
-
-### Resume Support
-
-If resuming setup, check what's already configured (MCP connection, `.env` with `DATABASE_URL`, dependencies, schema) and continue from the next incomplete step.
-
-### Security Reminders
-
-Remind users to use environment variables for credentials, never commit connection strings, and use least-privilege database roles.
-
-## Connection Methods & Drivers
-
-Use this when you need to pick the correct transport and driver based on runtime constraints (TCP, HTTP, WebSocket, edge, serverless, long-running).
-
-Link: https://neon.com/docs/connect/choose-connection.md
-
-### Serverless Driver
-
-Use this for `@neondatabase/serverless` patterns, including HTTP queries, WebSocket transactions, and runtime-specific optimizations.
-
-Link: https://neon.com/docs/serverless/serverless-driver.md
-
-### Neon JS SDK
-
-Use this for combined Neon Auth + Data API workflows with PostgREST-style querying and typed client setup.
-
-Link: https://neon.com/docs/reference/javascript-sdk.md
-
-## Developer Tools
-
-Use this for local development enablement with `npx -y neonctl@latest init --agent <agent-name>`, VSCode extension setup, and Neon MCP server configuration.
-
-| Tool             | URL                                             |
-| ---------------- | ----------------------------------------------- |
-| CLI Init Command | https://neon.com/docs/reference/cli-init.md     |
-| VSCode Extension | https://neon.com/docs/local/vscode-extension.md |
-| MCP Server       | https://neon.com/docs/ai/neon-mcp-server.md     |
-| Neon CLI         | https://neon.com/docs/reference/neon-cli.md     |
-
-### Neon CLI
-
-Use this for terminal-first workflows, scripts, and CI/CD automation with `neonctl`.
-
-Link: https://neon.com/docs/reference/neon-cli.md
-
-## Neon Admin API
-
-The Neon Admin API can be used to manage Neon resources programmatically. It is used behind the scenes by the Neon CLI and MCP server, but can also be used directly for more complex automation workflows or when embedding Neon in other applications.
-
-### Neon REST API
-
-Use this for direct HTTP automation, endpoint-level control, API key auth, rate-limit handling, and operation polling.
-
-Link: https://neon.com/docs/reference/api-reference.md
-
-### Neon TypeScript SDK
-
-Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neondatabase/api-client`.
-
-Link: https://neon.com/docs/reference/typescript-sdk.md
-
-### Neon Python SDK
-
-Use this when implementing programmatic Neon management in Python with the `neon-api` package.
-
-Link: https://neon.com/docs/reference/python-sdk.md
-
-## Neon Auth
-
-Use this for managed user authentication setup, UI components, auth methods, and Neon Auth integration pitfalls in Next.js and React apps.
-
-Link: https://neon.com/docs/auth/overview.md
-
-Neon Auth is also embedded in the Neon JS SDK. Depending on your use case, you may want to use the Neon JS SDK instead of Neon Auth alone. See https://neon.com/docs/connect/choose-connection.md for more details.
+If you're using an ORM, follow your ORM's best practices to manage schemas and migrations. For example, if using Drizzle, only use Drizzle for schema and migration management unless instructed otherwise.
 
 ## Branching
 
@@ -188,9 +74,15 @@ Key points:
 
 - Branches are instant, copy-on-write clones (no full data copy).
 - Each branch has its own compute endpoint.
-- Use the neonctl CLI or MCP server to create, inspect, and compare branches.
+- Use the neon CLI or MCP server to create, inspect, and compare branches.
 
 Link: https://neon.com/docs/introduction/branching.md
+
+For detailed branch creation workflows (normal vs schema-only branches, reset-from-parent, CLI/MCP selection), use the `neon-postgres-branches` skill. If it isn't installed, fetch it from https://neon.com/docs/ai/skills/neon-postgres-branches/SKILL.md or install it with:
+
+```bash
+npx skills add neondatabase/agent-skills --skill neon-postgres-branches
+```
 
 ## Autoscaling
 
@@ -204,7 +96,7 @@ Use this when optimizing idle costs and discussing suspend/resume behavior, incl
 
 Key points:
 
-- Idle computes suspend automatically (default 5 minutes, configurable) (unless disabled - launch & scale plan only)
+- Idle computes suspend automatically after a default of 5 minutes; the timeout is configurable, and suspension can only be disabled on the Launch and Scale plans.
 - First query after suspend typically has a cold-start penalty (around hundreds of ms)
 - Storage remains active while compute is suspended.
 

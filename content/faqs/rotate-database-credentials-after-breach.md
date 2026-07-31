@@ -3,9 +3,15 @@ title: 'How do I rotate all my Neon database credentials and connection strings 
 subtitle: 'Reset every affected role across every project, update env vars, and revoke API keys.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T12:41:06.646Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rotate my Neon database connection string for security purposes?'
+  slug: rotate-database-connection-string-security
+nextLink:
+  title: 'How do I rotate my database password in Neon after a security incident?'
+  slug: rotate-database-password-after-leak
 ---
 
 ## Quick answer

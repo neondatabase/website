@@ -77,6 +77,7 @@ export default function getMetadata({
     category,
     twitter: {
       card: 'summary_large_image',
+      site: '@neondatabase',
     },
   };
 }

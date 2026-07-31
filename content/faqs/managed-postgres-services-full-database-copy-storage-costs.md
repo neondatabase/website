@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-services-full-database-copy-storage-costs
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?'
+  slug: managed-postgres-services-feature-branch-database-copies
+nextLink:
+  title: 'Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?'
+  slug: managed-postgres-services-pay-active-compute
 ---
 
 Neon's branches are copy-on-write clones of your database. When you create a branch, no data is copied. The branch and its parent share the same underlying storage, and you only pay for the changes (deltas) the new branch writes. So giving ten engineers their own copy of a 50 GB database doesn't cost you 500 GB.

@@ -129,12 +129,12 @@ See existing handlers in the code for examples of each pattern.
 | Testimonial                                                                            | Blockquote with author name/company                                                              |
 | YoutubeIframe                                                                          | `Watch on YouTube: url`                                                                          |
 | CommunityBanner                                                                        | Text + link                                                                                      |
-| PromptCards                                                                            | List of AI coding prompt links                                                                   |
+| CompactCards                                                                           | List of compact card links, including prompt links via `promptSrc`                                |
 | CTA                                                                                    | Title, description (HTML links converted via `parseHtmlWithLinks`), command, button link         |
 | ProgramForm                                                                            | Hardcoded text for form types                                                                    |
 
 **Shared content components** (load templates from `content/docs/shared-content/`):
-FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation
+FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing, AzureRegionsDeprecation, ConsumptionAccountApiDeprecation
 
 **HTML elements**: `<a>` -> markdown link (wrapped in paragraph when block-level), `<details>/<summary>` -> preserved as HTML, `<p>` -> paragraph, `<br/>` -> preserved
 
@@ -183,7 +183,7 @@ Output goes to `public/md/` (gitignored), served via rewrites (`/docs/x.md` -> `
 13. **Navigation YAML has two patterns**: Both `navGroup.items` and `navGroup.subnav` exist in different sections.
 14. **Handler results are recursively transformed**: This enables nested components (like `<DocsList>` inside `<InfoBlock>`) to work, and allows handlers to access original JSX elements (like `<a>` attributes) before transformation.
 15. **Flow vs phrasing content**: Handlers that return inline nodes (like `link`) must wrap them in a `paragraph` when the source was a block-level element (`mdxJsxFlowElement`). Otherwise `toMarkdown` merges the content with surrounding nodes onto one line. Check `node.type === 'mdxJsxFlowElement'` to decide.
-16. **Generated lists need `spread: false`**: Lists created by handlers (DetailIconCards, TechCards, DocsList, PromptCards) should set `spread: false` to avoid blank lines between items.
+16. **Generated lists need `spread: false`**: Lists created by handlers (DetailIconCards, TechCards, DocsList, CompactCards) should set `spread: false` to avoid blank lines between items.
 17. **GFM tables**: `remark-gfm` is needed so tables are parsed into proper AST nodes. Without it, tables are plain text and `\|` escapes are consumed by the parser as backslash escapes, breaking table columns.
 
 ## Testing & CLI

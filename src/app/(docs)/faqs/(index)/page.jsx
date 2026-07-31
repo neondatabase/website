@@ -21,7 +21,7 @@ const FaqsPage = async () => {
   const validPosts = Array.isArray(posts) ? posts.filter(Boolean) : [];
 
   return (
-    <div className="relative min-w-0 pb-32 lg:pb-24 md:pb-20">
+    <div className="relative w-full max-w-[832px] pb-32 lg:max-w-none lg:pb-24 md:pb-20">
       <Breadcrumbs
         breadcrumbs={[
           {
@@ -33,13 +33,13 @@ const FaqsPage = async () => {
           },
         ]}
       />
-      <div className="relative mb-12 flex w-full items-end justify-between gap-5 lg:mb-2 md:mb-8 sm:flex-col sm:items-start sm:gap-5">
+      <div className="relative mb-12 flex w-full items-end justify-between gap-5 md:mb-8 sm:flex-col sm:items-start sm:gap-5">
         <div>
           <h1 className="max-w-[540px] text-[56px] leading-dense tracking-tighter lt:text-[48px] lg:text-[40px] md:text-[32px] sm:text-[28px]">
             FAQs
           </h1>
         </div>
-        <div className="mb-2.5 flex items-center gap-x-4 lg:mb-[60px] lg:gap-x-6 md:mb-0 sm:mb-0 [&_svg]:lg:size-4 [&_ul]:lg:gap-6">
+        <div className="mb-2.5 flex items-center gap-x-4 lg:mb-0 lg:gap-x-6 sm:mb-0 [&_svg]:lg:size-4 [&_ul]:lg:gap-6">
           <Socials withTitle={false} />
         </div>
       </div>

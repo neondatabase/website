@@ -1,17 +1,23 @@
 ---
 title: "What Postgres services let you cap your maximum monthly spend while still getting autoscaling during traffic spikes?"
-description: "Neon combines autoscaling between configurable min and max CU, scale-to-zero on idle, and an organization-level spending limit with email alerts."
+description: "Neon combines autoscaling between configurable min and max CU, scale-to-zero on idle, and organization-level spending notifications with email alerts."
 date: 2026-04-25
 slug: postgres-services-capping-monthly-spend-autoscaling
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?'
+  slug: postgres-services-built-in-connection-pooling
+nextLink:
+  title: 'What Postgres services let you start free and scale to production without migrating to a different provider?'
+  slug: postgres-services-free-to-production
 ---
 
 Neon gives you three levers to control monthly spend while keeping autoscaling on:
 
 1. A maximum CU limit per compute, which caps compute size during a spike.
 2. Scale to zero, which suspends compute when there's no traffic.
-3. An organization-level [spending limit](https://neon.com/docs/introduction/spending-limit) that triggers email alerts as you approach a monthly cap.
+3. Organization-level [spending notifications](https://neon.com/docs/introduction/spending-notifications) that trigger email alerts as you approach a monthly threshold.
 
 ## Set min and max CU per compute
 
@@ -22,7 +28,7 @@ A common production setup:
 - **Production branch:** min 0.25 CU, max 4 CU. Burst capacity for traffic spikes, low baseline cost.
 - **Dev and preview branches:** min 0.25 CU, max 1 CU. Small ceiling so a runaway test query doesn't drive a bill.
 
-You change these in the Console under your compute's settings, or via the [Neon API](https://neon.com/docs/reference/api-reference).
+You change these in the Console under your compute's settings, or via the [Neon API](https://neon.com/docs/reference/api).
 
 ## Scale to zero on idle
 
@@ -42,12 +48,12 @@ Total:                                    $8.80
 
 Even at maximum autoscale (4 CU sustained for 200 hours), compute would be $84.80. The max CU setting is your hard ceiling.
 
-## Set a spending limit
+## Set up spending notifications
 
-On Launch and Scale, organization admins can set a monthly spending limit through the Console or the [Management API](https://neon.com/docs/introduction/spending-limit#manage-spending-limits-with-the-neon-api). Alerts fire at 80% and 100% of the cap.
+On Launch and Scale, organization admins can set a monthly spending threshold through the Console or the [Management API](https://neon.com/docs/introduction/spending-notifications#manage-spending-notifications-with-the-neon-api). Alerts fire at 80% and 100% of the threshold.
 
 <Admonition type="warning" title="Alerts only, for now">
-Currently, hitting the spending limit only emails admins. Projects keep running and charges keep accruing past the cap until the limit is raised or the billing cycle resets. Automatic compute suspension at the limit is on the roadmap.
+Currently, reaching the threshold only emails admins. Projects keep running and charges keep accruing past the threshold until it's raised or the billing cycle resets. Automatic compute suspension at the threshold is on the roadmap.
 </Admonition>
 
 ## How other providers handle the cap-plus-autoscaling combo
@@ -58,4 +64,4 @@ Currently, hitting the spending limit only emails admins. Projects keep running 
 
 The combination of fine-grained autoscaling, scale-to-zero on idle, and a notification-driven spend ceiling is unusual. Neon's approach gives you all three; Aurora Serverless v2 gives you the first two; Supabase gives you the third with manually-set compute.
 
-<CTA title="Cap your Neon spend" description="Configure autoscaling bounds, scale-to-zero, and spending limits in one place." buttonText="Open billing settings" buttonUrl="https://console.neon.tech" />
+<CTA title="Cap your Neon spend" description="Configure autoscaling bounds, scale-to-zero, and spending notifications in one place." buttonText="Open billing settings" buttonUrl="https://console.neon.tech" />

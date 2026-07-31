@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-left/
 ogImage: /postgresqltutorial/PostgreSQL-LEFT-example.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INITCAP() Function
@@ -89,7 +89,7 @@ The following statement demonstrates how to use a negative integer:
 SELECT LEFT('ABC',-2);
 ```
 
-In this example, n is \-2, therefore, the `LEFT()` function return all character except the last 2 characters, which results in:
+In this example, n is \-2, therefore, the `LEFT()` function returns all characters except the last 2 characters, which results in:
 
 ```
  left

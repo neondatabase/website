@@ -7,15 +7,15 @@ summary: >-
   sessions, and magic-link verification tokens directly in a Neon database,
   enabling passwordless email authentication in Next.js without a separate auth
   service. Use this guide when you want self-hosted auth with full database
-  control, as an alternative to the managed Neon Auth option. The setup uses
+  control, as an alternative to the managed Managed Better Auth option. The setup uses
   @auth/pg-adapter, @neondatabase/serverless, and Resend as the email provider
   for magic link delivery.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <Admonition type="tip" title="Authentication on Neon">
-This guide uses the [Neon Adapter](https://authjs.dev/getting-started/adapters/neon) for Auth.js to store users and sessions in your database. If you prefer a managed option with no separate auth infrastructure, see [Neon Auth](/docs/auth/overview). Auth state branches with your database for preview and CI environments.
+This guide uses the [Neon Adapter](https://authjs.dev/getting-started/adapters/neon) for Auth.js to store users and sessions in your database. If you prefer a managed option with no separate auth infrastructure, see [Managed Better Auth](/docs/auth/overview). Auth state branches with your database for preview and CI environments.
 </Admonition>
 
 [Auth.js](https://authjs.dev/) (formerly NextAuth.js) is a popular authentication solution that supports a wide range of authentication methods, including social logins (for example, Google, Facebook), traditional email/password, and passwordless options like magic links. For simple authentication flows, such as social logins, Auth.js can operate using only in-memory session storage (in a browser cookie). However, if you want to implement custom login flows, or persist the signed-in users' information in your database, you need to specify a database backend.

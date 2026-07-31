@@ -7,7 +7,12 @@ import { GUIDES_DIR_PATH } from 'constants/content';
 import { GUIDES_BASE_PATH } from 'constants/guides';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
-import { getAuthor, getAllGuides, getNavigationLinks } from 'utils/api-guides';
+import {
+  getAuthor,
+  getAllGuides,
+  getGuideNavigationItems,
+  getNavigationLinks,
+} from 'utils/api-guides';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
 
@@ -50,7 +55,7 @@ export async function generateMetadata(props) {
 const GuidePost = async (props) => {
   const params = await props.params;
   const { slug } = params;
-  const posts = await getAllGuides();
+  const posts = await getGuideNavigationItems();
   const navigationLinks = getNavigationLinks(slug, posts);
   const gitHubPath = `${GUIDES_DIR_PATH}/${slug}.md`;
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);

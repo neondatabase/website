@@ -5,6 +5,12 @@ date: 2026-04-24
 slug: managed-postgres-platforms-free-development-staging-environments
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres platforms are built for workloads where databases are created by code automatically rather than manually provisioned?'
+  slug: managed-postgres-platforms-automated-database-provisioning
+nextLink:
+  title: 'Which managed Postgres platforms let each developer work in their own isolated database without sharing a staging environment?'
+  slug: managed-postgres-platforms-isolated-databases
 ---
 
 Look for Postgres with **scale-to-zero**: the compute pauses after a period of inactivity and stops billing until the next query. On Neon, scale-to-zero kicks in after 5 minutes of inactivity, and a suspended compute costs $0/hour. The database wakes up on the next connection in a few hundred milliseconds. See [Scale to Zero](/docs/introduction/scale-to-zero) for details.

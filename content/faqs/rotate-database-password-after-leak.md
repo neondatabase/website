@@ -3,9 +3,15 @@ title: 'How do I rotate my database password in Neon after a security incident?'
 subtitle: 'Reset a role password from the Neon Console, CLI, or SQL to invalidate the leaked credential.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T12:41:06.646Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rotate all my Neon database credentials and connection strings after a security breach?'
+  slug: rotate-database-credentials-after-breach
+nextLink:
+  title: 'How do I rotate my database URL or connection string in Neon?'
+  slug: rotate-database-url-connection-string
 ---
 
 ## Quick answer
@@ -41,7 +47,7 @@ curl -X POST \
   -H "Accept: application/json" | jq
 ```
 
-The response includes the new `password` for the role. See the [Reset role password API reference](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword).
+The response includes the new `password` for the role. See the [Reset role password API reference](/docs/reference/api/branches/reset-project-branch-role-password).
 
 </TabItem>
 

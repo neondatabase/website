@@ -2,10 +2,17 @@
   .prose-blog {
     @apply max-w-none leading-normal text-gray-new-90 prose-strong:text-gray-new-90;
     @apply prose-headings:leading-tight prose-headings:font-medium prose-headings:tracking-tighter prose-headings:text-white;
+    @apply prose-h2:m-0 prose-h2:pt-8 prose-h2:text-[28px] prose-h2:leading-tight prose-h2:font-medium prose-h2:tracking-tighter md:prose-h2:pt-6 md:prose-h2:text-[24px] sm:prose-h2:text-[20px];
+    @apply prose-h3:mt-7 prose-h3:text-xl prose-h3:leading-snug prose-h3:font-medium prose-h3:tracking-extra-tight md:prose-h3:mt-5 md:prose-h3:text-lg sm:prose-h3:text-[18px];
+    @apply prose-h4:mt-6 prose-h4:text-lg prose-h4:leading-snug prose-h4:font-medium prose-h4:tracking-extra-tight md:prose-h4:mt-4 md:prose-h4:text-base;
+    @apply prose-h5:mt-5 prose-h5:text-lg md:prose-h5:mt-4 md:prose-h5:text-base;
     @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-white prose-a:underline prose-a:decoration-white/40 prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out prose-a:hover:decoration-white sm:prose-a:break-words;
     @apply prose-figure:my-10 prose-img:my-10 prose-img:border prose-img:border-gray-new-90 dark:prose-img:border-gray-new-20 md:prose-figure:my-8 md:prose-img:my-8 sm:prose-figure:my-6 sm:prose-img:my-6;
     @apply prose-figcaption:mt-2.5 prose-figcaption:text-base prose-figcaption:leading-snug prose-figcaption:tracking-tight prose-figcaption:text-gray-new-50;
     @apply prose-pre:my-0 prose-pre:px-2;
+
+    @apply prose-p:mt-4.5 prose-p:mb-6 prose-p:text-lg prose-p:leading-normal prose-p:font-normal prose-p:tracking-tight prose-p:text-gray-new-85 md:prose-p:mt-4 md:prose-p:mb-5 md:prose-p:text-base;
+    /*      */
 
     *[id] {
       @apply scroll-mt-20 lg:scroll-mt-5;
@@ -33,26 +40,6 @@
       > code {
         @apply text-white! transition-colors duration-200;
       }
-    }
-
-    h2 {
-      @apply m-0 pt-8 text-[28px] leading-tight font-medium tracking-tighter md:pt-6 md:text-[24px] sm:text-[20px];
-    }
-
-    h3 {
-      @apply mt-7 text-xl leading-snug font-medium tracking-extra-tight md:mt-5 md:text-lg sm:text-[18px];
-    }
-
-    h4 {
-      @apply mt-6 text-lg leading-snug font-medium tracking-extra-tight md:mt-4 md:text-base;
-    }
-
-    h5 {
-      @apply mt-5 text-lg md:mt-4 md:text-base;
-    }
-
-    p {
-      @apply mt-[18px] mb-6 text-lg leading-normal font-normal tracking-tight text-gray-new-85 md:mt-4 md:mb-5 md:text-base;
     }
 
     ul,

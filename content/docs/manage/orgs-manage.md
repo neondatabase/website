@@ -8,20 +8,24 @@ summary: >-
   UI. Admins control deletions, billing changes, 2FA enforcement, and project
   deletion; all members can create projects and view billing.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-28T15:16:30.383Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
+
+<Admonition type="note">
+This page describes the legacy roles (Admin, Member, Collaborator). New organizations use an updated model with organization roles (Admin, Editor, Viewer, Collaborator) and per-project permissions. See [User permissions](/docs/manage/user-permissions) for the current model and how the two relate.
+</Admonition>
 
 <Steps>
 
 ## Create an organization
 
-To create a new org, use the **Create organization** button in the org switcher in the top navbar. Select a plan and enter billing details.
+To create a new org, use the **Create organization** button in the org switcher in the top navbar.
 
 ![create organization button](/docs/manage/orgs_create_button.png)
 
-Other than the free org you signed up with, organizations are always on paid plans. When creating a new organization, you'll need to select a paid plan and enter billing details.
+Select a plan for your new organization. Organizations can be free or paid; if you choose a paid plan, you'll enter billing details.
 
 ![create organization with billing](/docs/manage/orgs_create_with_billing.png)
 
@@ -59,12 +63,12 @@ Permissions within the organization are exclusively managed by Admins. As an Adm
 
 ## Require 2FA for organization members
 
-Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**.
+Admins can require two-factor authentication (2FA) for everyone in the organization from **Organization → Settings**. A passkey satisfies this requirement too, so members can enroll in either 2FA or a passkey to comply.
 
-- You can only enable this if your own account already has 2FA enabled.
-- When required 2FA is on, members who are not enrolled are prompted to set up 2FA when they access the organization.
+- You can only enable this if your own account already has 2FA or a passkey set up.
+- When required 2FA is on, members who don't have 2FA or a passkey enrolled are prompted to set one up when they access the organization.
 
-See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps.
+See [Manage your Neon account](/docs/manage/accounts#two-factor-authentication) for personal 2FA setup steps, or [Passkeys](/docs/manage/accounts#passkeys) for passkey setup steps.
 
 ## Invite Collaborators
 
@@ -104,7 +108,7 @@ All Members can create new projects from the Organization's **Projects** page; h
 
 ## Manage billing
 
-When you create a new organization, you'll choose a plan (Launch, Scale, or Scale) for that organization. Each organization manages its own billing and plan.
+When you create a new organization, you'll choose a plan for that organization. Each organization manages its own billing and plan.
 
 As the Admin for the organization account:
 
@@ -116,7 +120,7 @@ For detailed information on pricing and plans, refer to [Neon plans](/docs/intro
 
 ### Downgrade to Free plan
 
-You can only have one Free organization per account. If you already have a Free org, you can't downgrade another org to Free; you'll see an error if you try.
+If downgrading to the Free plan isn't available for your organization, you'll see an error when you try.
 
 To downgrade, your org must:
 
@@ -138,37 +142,7 @@ Complete any necessary steps. Once cleared, you can go ahead and delete. This ac
 
 </Steps>
 
-## More actions
-
-Here are a couple additional things you can do with your organization: **passwordless authentication** and **renaming an organization**.
-
-### Passwordless authentication
-
-If you want the simplest way to connect to your database from the command line, passwordless authentication using `pg.neon.tech` lets you directly start a `psql` connection with any of your organization's databases. This saves you time versus logging in to the Console and copying your connection string manually.
-
-```bash
-   psql -h pg.neon.tech
-```
-
-In the output, you'll get a URL you can paste into your browser. Log in if you need to. Or if you're already logged in, you'll be asked to select from your personal or organization account, select your project, and then your compute. After that, go back to your terminal and you'll be connected to your selected database.
-
-For example:
-
-```bash
-alexlopez@alex-machine ~ % psql -h pg.neon.tech
-NOTICE:  Welcome to Neon!
-Authenticate by visiting:
-    https://console.neon.tech/psql_session/secure_token
-
-NOTICE:  Connecting to database.
-psql (16.1, server 16.3)
-SSL connection (secure connection details hidden)
-Type "help" for help.
-
-alexlopez=>
-```
-
-### Rename an organization
+## Rename an organization
 
 Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally; the new name will appear for everyone in the organization.
 

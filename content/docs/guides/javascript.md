@@ -10,7 +10,7 @@ summary: >-
   suits serverless and edge runtimes. Bun and Deno users are directed to
   separate guides.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 
@@ -678,6 +678,13 @@ Explore these guides to integrate popular data tools with Neon:
 - [Connect with Drizzle ORM](/docs/guides/drizzle)
 - [Connect with TypeORM](/docs/guides/typeorm)
 - [Connect with Sequelize](/docs/guides/sequelize)
+
+## Next steps: Neon backend services
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Using Bun or Deno
 

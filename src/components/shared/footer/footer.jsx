@@ -19,18 +19,18 @@ const Footer = ({ hasThemesSupport = false }) => (
           <Logo className="sm:h-6 sm:w-auto" width={102} height={28} />
           <span
             className={cn(
-              'mt-3.5 block text-[13px] leading-none tracking-extra-tight whitespace-nowrap',
+              'mt-3.5 block text-[13px] leading-none tracking-extra-tight',
               'text-gray-new-40 dark:text-gray-new-60',
               'xl:mt-3'
             )}
           >
-            A Databricks Company
+            Neon is part of the Databricks Platform
           </span>
         </div>
 
         {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
 
-        <div className="flex flex-col items-start justify-between gap-y-5 lg:w-full lg:flex-row sm:flex-col">
+        <div className="flex flex-col items-start justify-between gap-5 lg:w-full lg:flex-row sm:flex-col">
           <StatusBadge />
           <div
             className={cn(

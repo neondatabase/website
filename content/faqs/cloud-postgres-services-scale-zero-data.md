@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: cloud-postgres-services-scale-zero-data
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which database services let you instantly clone a production Postgres database so developers can test independently?'
+  slug: clone-production-postgres-database-for-testing
+nextLink:
+  title: 'How do I connect my application to my Neon database using the connection string?'
+  slug: connect-application-using-connection-string
 ---
 
 Neon scales Postgres compute to zero after 5 minutes of inactivity, and storage stays put. The next query wakes the compute in a few hundred milliseconds. Your data, history, and connection strings are unchanged. You pay for the time compute is running, not for the time it sits idle.

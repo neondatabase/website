@@ -1,13 +1,13 @@
 ---
 title: PostgreSQL jsonb_strip_nulls() Function
-page_title: PostgreSQL json_strip_nulls() Function
+page_title: PostgreSQL jsonb_strip_nulls() Function
 page_description: >-
   You will learn how to use the PostgreSQL jsonb_strip_nulls() function to
   recursively delete all object fields that have null values.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_strip_nulls/
 ogImage: ''
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_set() Function

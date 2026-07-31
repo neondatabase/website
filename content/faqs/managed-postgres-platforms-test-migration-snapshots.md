@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: managed-postgres-platforms-test-migration-snapshots
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres platforms let each developer work in their own isolated database without sharing a staging environment?'
+  slug: managed-postgres-platforms-isolated-databases
+nextLink:
+  title: 'Which managed Postgres providers can provision a new database instance in under a second via API?'
+  slug: managed-postgres-providers-instant-database-provisioning-api
 ---
 
 The safest way to test a migration is to run it on a real copy of production data, with the same schema, indexes, and row counts. Postgres platforms that support **instant branching** let you do exactly that: create an isolated database from a current or past production state in seconds, run the migration, and either promote or throw it away.

@@ -408,7 +408,7 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       - name: Delete Neon Branch
-        run: bunx neonctl branches delete preview/pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }} --project-id ${{ vars.NEON_PROJECT_ID }}
+        run: bunx neon branches delete preview/pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }} --project-id ${{ vars.NEON_PROJECT_ID }}
         env:
           api_key: ${{ env.NEON_API_KEY }}
 ```

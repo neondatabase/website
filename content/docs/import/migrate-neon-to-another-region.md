@@ -10,12 +10,12 @@ summary: >-
   minimal-downtime cutover on busy databases).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-06-18T20:46:14.637Z'
 redirectFrom:
   - /docs/guides/migrate-neon-to-another-region
 ---
 
-When your **Neon database** must run in a **different Neon region** than it does today, you are not moving the project. A project's region is fixed, so you need to **create a new Neon project** in the target region and **migrate** your database into it.
+You can't change the region of an existing Neon project in place. A project's region is fixed when you create it. To move your database to a different region, you **create a new Neon project** in the target region and **migrate** your data into it, then cut over and delete the old project.
 
 <a id="azure-neon-regions-to-suggested-neon-aws-regions" aria-hidden="true"></a>
 

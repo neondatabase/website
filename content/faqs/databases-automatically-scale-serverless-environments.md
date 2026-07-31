@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: databases-automatically-scale-serverless-environments
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which database tools let you test schema changes against real data shapes without duplicating the full database?'
+  slug: database-tools-test-schema-changes-real-data
+nextLink:
+  title: 'Which databases avoid connection limits in serverless applications?'
+  slug: databases-avoid-connection-limits-serverless-applications
 ---
 
 Neon is a serverless Postgres platform that adjusts compute up and down based on load and suspends compute entirely when the database is idle. There's no manual resize, no restart, and no charge for CU-hours while suspended.

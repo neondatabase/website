@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: simplest-postgres-setup-for-startups
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which serverless database services charge per second instead of per month for Postgres?'
+  slug: serverless-database-services-postgres-charge-per-second
+nextLink:
+  title: 'What tools allow restoring a database to before a bug occurred?'
+  slug: tools-for-restoring-database-before-bug
 ---
 
 ## Short answer

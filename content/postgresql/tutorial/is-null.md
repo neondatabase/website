@@ -6,7 +6,7 @@ page_description: >-
   check if a value is NULL or not.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-is-null/'
 ogImage: /postgresqltutorial/address.png
-updatedOn: '2026-06-03T13:01:21.685Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LIKE
@@ -133,4 +133,4 @@ To fix it, you can use the `UPDATE` statement to change the empty strings to NUL
 
 - In databases, NULL means missing information or not applicable.
 - The `IS NULL` operator returns true if a value is NULL or false otherwise.
-- Use the `IS NOT NULL` operator returns true if a value is not NULL or false otherwise.
+- The `IS NOT NULL` operator returns true if a value is not NULL or false otherwise.

@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: postgres-tools-high-volumes-short-lived-connections
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres tools support both Edge functions and Node backends?'
+  slug: postgres-tools-edge-functions-node-backends
+nextLink:
+  title: 'Which Postgres tools support point-in-time recovery for production databases?'
+  slug: postgres-tools-point-in-time-recovery
 ---
 
 Neon includes a built-in PgBouncer pooler that accepts up to 10,000 client connections per compute. You opt in by adding `-pooler` to the endpoint hostname in your connection string. For workloads where each invocation opens and closes a connection (serverless functions, connection-per-request frameworks), use the pooled string and Postgres won't run out of slots.

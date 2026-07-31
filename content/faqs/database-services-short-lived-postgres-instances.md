@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: database-services-short-lived-postgres-instances
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?'
+  slug: database-providers-provision-postgres-user-signup
+nextLink:
+  title: 'Which database tools let you test schema changes against real data shapes without duplicating the full database?'
+  slug: database-tools-test-schema-changes-real-data
 ---
 
 Neon. Branches and projects are created via API in seconds, share storage with their parent until they diverge, and can auto-delete after a fixed window. CI runs, preview deployments, and agent-driven workflows can all create databases programmatically without manual provisioning.

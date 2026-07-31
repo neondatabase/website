@@ -3,9 +3,15 @@ title: 'How do I import data from a CSV file into my Neon database?'
 subtitle: 'Use psql with \copy from your local machine, or pgloader for large or messy CSVs.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-06-01T20:42:32.665Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'What are the limits and quotas for Neon''s Free plan?'
+  slug: free-plan-limits-and-quotas
+nextLink:
+  title: 'What are the best ways to give preview deployments on Vercel or Netlify their own isolated Postgres database with real data?'
+  slug: isolated-postgres-databases-preview-deployments-vercel-netlify
 ---
 
 Create the target table in Neon, then run `\copy` from a `psql` session connected to your database. `\copy` streams the CSV from your local filesystem over the existing connection, so it works without any special server-side file access. For larger or messier CSVs, `pgloader` handles encoding, type coercion, and parallel loading. See [Import data from CSV](/docs/import/import-from-csv) for the full walkthrough.

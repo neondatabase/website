@@ -18,6 +18,14 @@ You can configure **IP Allow** in your Neon project's settings. To get started, 
 
 ![IP Allow configuration](/docs/manage/ip_allow.png)
 
+## Neon services to allowlist
+
+If IP Allow is enabled on your project, add the following IP addresses to allow connections from Neon hosted services:
+
+| Service                                     | IP addresses                     |
+| ------------------------------------------- | -------------------------------- |
+| [Neon MCP Server](/docs/ai/neon-mcp-server) | `34.192.103.46`, `23.22.233.166` |
+
 ## IP Allow together with Protected Branches
 
 You can apply IP restrictions more precisely by designating specific branches in your Neon project as protected and enabling the **Restrict IP access to protected branches only** option. This will apply your IP allowlist to protected branches only with no IP restrictions on other branches in your project. Typically, the protected branches feature is used with branches that contain production or sensitive data. For step-by-step instructions, refer to our [Protected Branches guide](/docs/guides/protected-branches).

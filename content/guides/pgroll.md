@@ -243,7 +243,7 @@ The key to a zero-downtime rollout is updating your application to point to the 
 First, you can get the name of the latest schema version directly from `pgroll`. This is ideal for use in CI/CD pipelines:
 
 ```bash shouldWrap
-export PGROLL_SCHEMA_VERSION=$(pgroll latest --with-schema --postgres-url "postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require")
+export PGROLL_SCHEMA_VERSION=$(pgroll latest schema --postgres-url "postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require")
 echo $PGROLL_SCHEMA_VERSION
 # Example output: public_02_make_description_not_null
 ```

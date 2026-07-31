@@ -5,6 +5,12 @@ description: "Neon's instant restore lets you rewind a Postgres branch to any se
 slug: tools-for-restoring-database-before-bug
 category: FAQ
 status: draft
+previousLink:
+  title: 'What is the simplest Postgres setup for startups?'
+  slug: simplest-postgres-setup-for-startups
+nextLink:
+  title: 'Which tools allow using Postgres without managing infrastructure?'
+  slug: tools-for-serverless-postgres-infrastructure
 ---
 
 ## Short answer

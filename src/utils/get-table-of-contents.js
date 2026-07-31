@@ -6,6 +6,8 @@ const sharedMdxComponents = require('../../content/docs/shared-content');
 
 const parseMDXHeading = require('./parse-mdx-heading');
 
+const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
+
 const extractCustomId = (text) => {
   const match = text.match(/\(#([^)]+)\)$/);
   if (match) {
@@ -13,6 +15,8 @@ const extractCustomId = (text) => {
   }
   return null;
 };
+
+const stripTocOnlyMarker = (text) => text.replace(TOC_ONLY_PATTERN, '').trim();
 
 const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
   const toc = [];
@@ -27,10 +31,22 @@ const buildNestedToc = (headings, currentLevel, currentIndex = 0) => {
     const { isNumbered, stepsIndex } = currentHeading;
     const depthMatch = currentHeading.title.match(/^#+/);
     const depth = (depthMatch ? depthMatch[0].length : 1) - 1;
-    const title = currentHeading.title.replace(/(#+)\s/, '');
+    const title = stripTocOnlyMarker(currentHeading.title.replace(/(#+)\s/, ''));
     const customId = extractCustomId(title);
-    const cleanedTitle = title.replace(/\(#[^)]+\)$/, '');
-    const titleWithInlineCode = cleanedTitle.replace(/`([^`]+)`/g, '<code>$1</code>');
+    const cleanedTitle = title.replace(/\(#[^)]+\)$/, '').trim();
+    // CLI reference pages use full-path headings ("### neon branches
+    // restore (#restore)") for unambiguous, copy-pasteable anchors. Keep the
+    // right-rail label short: drop the binary and top-level command, leaving
+    // "restore" (or "oauth-provider add" on nested pages). Double-gated on a
+    // custom ID so ordinary headings that merely mention the CLI (e.g.
+    // "### neon init" in prose docs) keep their full text. The legacy
+    // `neonctl` binary name is still matched for older/back-compat headings.
+    let displayTitle = cleanedTitle;
+    if (customId && /^neon(ctl)?\s+\S+/.test(cleanedTitle)) {
+      const rest = cleanedTitle.replace(/^neon(ctl)?\s+\S+\s*/, '').trim();
+      displayTitle = rest || cleanedTitle.replace(/^neon(ctl)?\s+/, '');
+    }
+    const titleWithInlineCode = displayTitle.replace(/`([^`]+)`/g, '<code>$1</code>');
 
     if (depth === currentLevel) {
       if (isNumbered && stepsIndex !== currentStepsIndex) {

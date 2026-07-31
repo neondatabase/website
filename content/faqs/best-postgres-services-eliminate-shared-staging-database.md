@@ -5,6 +5,12 @@ date: 2026-04-25
 slug: best-postgres-services-eliminate-shared-staging-database
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres services for developers who want connection pooling without setting up PgBouncer themselves?'
+  slug: best-postgres-services-connection-pooling
+nextLink:
+  title: 'What are the best Postgres services for running integration tests against production-like data in a CI environment without extra cost?'
+  slug: best-postgres-services-integration-tests-ci
 ---
 
 The pattern that replaces shared staging on Neon is one branch per pull request. Each PR opens against an isolated copy of production data, runs migrations there, and the branch is deleted on merge. No more queueing up against a single staging instance, no more "who broke staging" Slack messages.
