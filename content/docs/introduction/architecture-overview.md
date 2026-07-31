@@ -1,6 +1,6 @@
 ---
 title: Neon's lakebase architecture
-subtitle: 'Inside Lakebase Postgres: decoupled compute and durable storage'
+subtitle: 'Inside Neon Postgres: decoupled compute and durable storage'
 summary: >-
   Neon's lakebase architecture splits Postgres into an ephemeral compute layer
   and a durable storage layer connected by WAL, so compute nodes can scale,
@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-07-31T15:49:10.111Z'
+updatedOn: '2026-07-31T16:06:36.671Z'
 ---
 
 ## Top level overview
@@ -29,7 +29,7 @@ This separation is what puts Neon in the [lakebase category](https://www.databri
 
 Neon’s design intentionally keeps object storage off the critical path. Object storage provides durability and scale, but never sits in front of query execution. Latency-sensitive work stays close to compute, while durability and history are handled asynchronously and independently.
 
-![lakebase architecture overview](/docs/introduction/neon-architecture-overview.png)
+![Neon architecture overview](/docs/introduction/neon-architecture-overview.png)
 
 <Admonition type="note" title="What is the difference between Neon and Lakebase?">
 Neon and Databricks run the same database, Lakebase Postgres, on the same infrastructure. What surrounds it differs: on Neon it anchors a complete backend for apps and agents, while Databricks integrates it with the rest of the Data Intelligence Platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
@@ -169,7 +169,7 @@ This layering is what allows Neon to tolerate failures intrinsically:
 
 ## In short
 
-Lakebase Postgres, the database service in the Neon backend, is a serverless engine that treats:
+Neon Postgres, the database service in the Neon backend, is a serverless engine that treats:
 
 - compute as ephemeral and replaceable;
 - storage as durable, replicated, and shared;
