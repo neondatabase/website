@@ -1,6 +1,6 @@
 ---
 title: Datadog integration
-subtitle: Send metrics and logs from Neon Postgres to Datadog
+subtitle: Send metrics and logs from Lakebase Postgres to Datadog
 summary: >-
   The Neon Datadog integration exports Postgres metrics and logs from all
   project computes to Datadog, available on Scale plan projects. Use this page
@@ -10,7 +10,7 @@ summary: >-
   Log transmission counts toward network egress billed after 500 GB per project
   on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <InfoBlock>

@@ -3,12 +3,12 @@ title: Managed Better Auth
 subtitle: Managed authentication that branches with your database
 summary: >-
   Managed Better Auth is a managed authentication service built on Better Auth. It stores
-  users, sessions, and OAuth configuration in your Neon Postgres database under
+  users, sessions, and OAuth configuration in your database under
   the neon_auth schema, compatible with Row Level Security. Every database branch
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth

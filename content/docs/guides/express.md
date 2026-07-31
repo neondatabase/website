@@ -2,7 +2,7 @@
 title: Connect an Express application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Express application
 summary: >-
-  Express and Neon Postgres connection guide covering Node.js driver options:
+  Express and Lakebase Postgres connection guide covering Node.js driver options:
   `@neondatabase/serverless` for edge and serverless platforms such as Vercel
   and Cloudflare Workers, `pg` (node-postgres) for long-running servers, and
   `postgres.js` for both. Use this page when connecting an Express API to a
@@ -11,13 +11,13 @@ summary: >-
   covers project creation, `DATABASE_URL` setup via `dotenv`, and connection
   pool initialization outside route handlers.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/express-prompt.md"
-description="Pre-built prompt for connecting ExpressJS applications to Neon Postgres"/>
+description="Pre-built prompt for connecting ExpressJS applications to Lakebase Postgres"/>
 
-This guide describes how to create a Neon project and connect to it from an Express application.
+This guide describes how to create a Neon project and connect to it from an Express application to query a Lakebase Postgres database.
 
 ## Choose a driver
 

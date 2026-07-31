@@ -7,13 +7,13 @@ summary: >-
   subscriber project using Postgres publications and subscriptions, enabling
   cross-region replication, region migration, and Postgres version upgrades (for
   example, Postgres 16 to 17). Use this guide when you need to replicate between
-  two separate Neon projects; replicating between databases on the same Neon
+  two separate Neon projects using Lakebase Postgres; replicating between databases on the same Neon
   project branch requires a different configuration. Enabling logical replication
   changes wal_level from replica to logical on all databases in the source
   project and the change cannot be reverted.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
@@ -101,7 +101,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ## Prepare your Neon destination database
 
-This section explains how to prepare your destination Neon Postgres database (the subscriber) to receive replicated data. For cross-region replication, be sure to create the destination Neon project in a different region than your source database.
+This section explains how to prepare your destination database (the subscriber) to receive replicated data. For cross-region replication, be sure to create the destination Neon project in a different region than your source database.
 
 ### Prepare your database schema
 

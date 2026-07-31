@@ -6,6 +6,31 @@ Preferred terms and patterns for Neon documentation. Used by `/review-content` a
 
 ---
 
+## The database is "Lakebase Postgres"
+
+The database product is **Lakebase Postgres**. "Neon" is not the name of the database. It's the brand, the company, and the access path: the set of cloud backend primitives (Lakebase Postgres, Object Storage, Functions, Managed Better Auth, AI Gateway) reached through Neon, from Databricks, as part of the Databricks Platform.
+
+The three terms:
+
+1. **Lakebase Postgres** — the database product. Same technology whether accessed via Neon or via Databricks.
+2. **lakebase architecture** (lowercase) — the category: OLTP built on cloud object storage, storage decoupled from compute. A category noun, not a proper noun. Never "the Neon architecture."
+3. **Neon** — the complete set of cloud backend primitives built around Lakebase Postgres. Never "the database," never "a platform" / "the Neon platform" (legal: Neon is not a platform separate from the Databricks Platform).
+
+| Use | Avoid | Notes |
+| --- | --- | --- |
+| Lakebase Postgres | Neon Postgres, Neon's database, our Postgres | The database product's name |
+| the database / Postgres | Lakebase Postgres database (when wordy) | Shorten on repeat, unambiguous references |
+| Lakebase Postgres (in full) | shortened forms | Name the product in full in each self-contained unit: summaries, subtitles, card descriptions, table rows, section ledes. Shorten to "the database" / "Postgres" only on repeat references within continuous body prose, to avoid awkward repetition. |
+| lakebase architecture | the Neon architecture | Lowercase category term |
+| Neon (brand / access path) | | Console, CLI, API, Auth, MCP Server keep "Neon" |
+| Neon, a set of cloud backend primitives | the Neon platform, Neon is a platform | Legal: not a platform separate from the Databricks Platform |
+
+Canonical line: "Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks."
+
+When it's genuinely just the database, say **Lakebase Postgres** (or "the database" / "Postgres" on repeat), never "Neon."
+
+---
+
 ## Postgres vs PostgreSQL
 
 Use **Postgres** in almost all cases.
@@ -55,7 +80,7 @@ Named features that are always capitalized regardless of context — these are p
 | Neon Console | The web UI |
 | Neon Auth | Not "Neon Authentication" |
 | Neon CLI | "Neon CLI" in prose; `neonctl` only in code |
-| Neon MCP Server | Full name on first mention; "the MCP Server" after |
+| Neon MCP Server | Full name on first mention; "the MCP Server" after. Never "Neon Postgres MCP Server" — drop "Postgres"; the product name does not contain the database name. |
 | Neon Serverless Driver | The `@neondatabase/serverless` package |
 | Data API | Neon's PostgREST-based API |
 | Import Data Assistant | |

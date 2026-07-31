@@ -1,8 +1,8 @@
 ---
-title: Neon Postgres
+title: Lakebase Postgres
 subtitle: The serverless database in the Neon backend
 summary: >-
-  Neon Postgres is a fully managed, serverless PostgreSQL database compatible
+  Lakebase Postgres is a fully managed, serverless PostgreSQL database compatible
   with any Postgres driver, ORM, or framework. Key features include
   autoscaling, scale to zero, database branching, instant point-in-time
   restore, and read replicas. Use this page as a starting point to create a
@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-Neon Postgres is fully managed and compatible with any Postgres driver, ORM, or framework. Key capabilities include:
+Lakebase Postgres is fully managed and compatible with any Postgres driver, ORM, or framework. Key capabilities include:
 
 - **Autoscaling** — compute scales up and down automatically with your workload
 - **Scale to zero** — idle databases suspend so you only pay for what you use

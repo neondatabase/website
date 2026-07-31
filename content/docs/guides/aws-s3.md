@@ -2,15 +2,15 @@
 title: File storage with AWS S3
 subtitle: Store files via AWS S3 and track metadata in Neon
 summary: >-
-  AWS S3 and Neon integration pattern that stores binary files (images, videos,
+  AWS S3 and Lakebase Postgres integration pattern that stores binary files (images, videos,
   uploads) in an S3 bucket while persisting file metadata (object key, URL,
-  user ID, timestamp) in a Neon Postgres table. Use this guide when you need a
+  user ID, timestamp) in a Lakebase Postgres table. Use this guide when you need a
   scalable file-upload architecture with presigned upload URLs, IAM credentials,
   CORS configuration, and a queryable metadata index in Postgres. Includes
   working backend examples in JavaScript (Hono, AWS SDK v3) and Python (Flask,
   boto3) with an s3_files schema and presign/save-metadata endpoints.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
@@ -21,7 +21,7 @@ Neon Object Storage is S3-compatible object storage built into the Neon backend.
 For more information, see [Neon Object Storage](/docs/storage/overview).
 </Callout>
 
-This guide demonstrates how to integrate AWS S3 with Neon by storing file metadata (like the object key and URL) in your Neon database, while using S3 for file storage.
+This guide demonstrates how to integrate AWS S3 with Lakebase Postgres by storing file metadata (like the object key and URL) in your database, while using S3 for file storage.
 
 ## Setup steps
 
@@ -98,11 +98,11 @@ In your S3 bucket settings, navigate to the **Permissions** tab and find the **C
 
 > This configuration allows any origin (`*`) to perform `GET` and `PUT` requests. In a production environment, you should restrict `AllowedOrigins` to your application's domain(s) for security.
 
-## Create a table in Neon for file metadata
+## Create a table in Lakebase Postgres for file metadata
 
-We need a table in Neon to store metadata about the objects uploaded to S3.
+We need a table in the database to store metadata about the objects uploaded to S3.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the object key, URL, user ID, and timestamp:
+1.  Connect to your database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the object key, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS s3_files (
@@ -117,9 +117,9 @@ We need a table in Neon to store metadata about the objects uploaded to S3.
 2.  Run the SQL statement. Add other relevant columns as needed (for example, `content_type`, `size`).
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `s3_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `s3_files` table. This controls who can view or modify the object references stored in the database based on your RLS rules.
 
-Note that these policies apply _only_ to the metadata in Neon. Access control for the objects within the S3 bucket itself is managed via S3 bucket policies, IAM permissions, and object ACLs.
+Note that these policies apply _only_ to the metadata in the database. Access control for the objects within the S3 bucket itself is managed via S3 bucket policies, IAM permissions, and object ACLs.
 </Admonition>
 
 ## Upload files to S3 and store metadata in Neon
@@ -152,8 +152,8 @@ AWS_SECRET_ACCESS_KEY=your_iam_user_secret_access_key
 AWS_REGION=your_s3_bucket_region # for example, us-east-1
 S3_BUCKET_NAME=your_s3_bucket_name # for example, my-neon-app-s3-uploads
 
-# Neon Connection String
-DATABASE_URL=your_neon_database_connection_string
+# Database Connection String
+DATABASE_URL=your_database_connection_string
 ```
 
 The following code snippet demonstrates this workflow:
@@ -262,8 +262,8 @@ AWS_SECRET_ACCESS_KEY=your_iam_user_secret_access_key
 AWS_REGION=your_s3_bucket_region # for example, us-east-1
 S3_BUCKET_NAME=your_s3_bucket_name # for example, my-neon-app-s3-uploads
 
-# Neon Connection String
-DATABASE_URL=your_neon_database_connection_string
+# Database Connection String
+DATABASE_URL=your_database_connection_string
 ```
 
 The following code snippet demonstrates this workflow:
@@ -455,7 +455,7 @@ You can now integrate API calls to these endpoints from various parts of your ap
 
 ## Accessing file metadata and files
 
-Storing metadata in Neon allows your application to easily retrieve references to the files hosted on S3.
+Storing metadata in the database allows your application to easily retrieve references to the files hosted on S3.
 
 Query the `s3_files` table from your application's backend when needed.
 
@@ -478,7 +478,7 @@ WHERE
 
 **Using the data:**
 
-- The query returns metadata stored in Neon.
+- The query returns metadata stored in the database.
 - The `file_url` column contains the direct link to access the file via S3.
 - Use this `file_url` in your application (for example, `<img>` tags, download links)
 
@@ -486,7 +486,7 @@ WHERE
   For private S3 buckets, store only the `object_key` and generate presigned *read* URLs on demand using a similar backend process.
   </Admonition>
 
-This pattern effectively separates file storage and delivery concerns (handled by S3) from structured metadata management (handled by Neon), leveraging the strengths of both services.
+This pattern effectively separates file storage and delivery concerns (handled by S3) from structured metadata management (handled by Postgres), leveraging the strengths of both services.
 
 </Steps>
 

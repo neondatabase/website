@@ -1,22 +1,22 @@
 ---
-title: Connect a Micronaut Kotlin application to Neon Postgres
+title: Connect a Micronaut Kotlin application to Lakebase Postgres
 subtitle: Learn how to make server-side queries to Postgres from a Micronaut Kotlin
   application
 summary: >-
-  Connect a Kotlin-based Micronaut microservice to Neon Postgres using Hikari
+  Connect a Kotlin-based Micronaut microservice to Lakebase Postgres using Hikari
   connection pooling, Flyway schema migrations, and Micronaut Data JDBC to
   expose CRUD REST endpoints. Use this guide when building a Micronaut app that
   needs a production-ready Postgres connection with automatic schema management.
   The setup uses the micronaut-data-jdbc, jdbc-hikari, and flyway Micronaut
   features alongside the org.postgresql JDBC driver.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/micronaut-kotlin-prompt.md"
-description="Pre-built prompt for connecting Micronaut Kotlin applications to Neon Postgres"/>
+description="Pre-built prompt for connecting Micronaut Kotlin applications to Lakebase Postgres"/>
 
-[Micronaut](https://micronaut.io/) is a modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications. This guide describes how to create a Neon Postgres database and connect to it from a Micronaut Kotlin application.
+[Micronaut](https://micronaut.io/) is a modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications. This guide describes how to create a Lakebase Postgres database and connect to it from a Micronaut Kotlin application.
 
 The final application will expose REST endpoints to perform CRUD (Create, Read, Update, Delete) operations on a `book` table in your Neon database.
 
@@ -232,7 +232,7 @@ You are now ready to run your application.
     ```
 
     The logs indicate the following sequence of events:
-    - HikariCP initializes the connection pool to the Neon Postgres database.
+    - HikariCP initializes the connection pool to the Lakebase Postgres database.
     - Flyway checks the database schema and found that the `flyway_schema_history` table does not exist.
     - Flyway creates the `flyway_schema_history` table and applies the migrations present in the migration folder.
     - The `book` table is created as per the migration script (i.e., `V1__create_book_table.sql`).
@@ -259,7 +259,7 @@ You are now ready to run your application.
     # Expected Output: {"id":3,"title":"The Great Gatsby","author":"F. Scott Fitzgerald"}
     ```
 
-You have successfully connected a Micronaut Kotlin application to your Neon Postgres database!
+You have successfully connected a Micronaut Kotlin application to your Lakebase Postgres database!
 
 </Steps>
 

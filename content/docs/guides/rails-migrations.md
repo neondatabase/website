@@ -1,20 +1,20 @@
 ---
-title: Schema migration with Neon Postgres and Ruby on Rails
-subtitle: Set up Neon Postgres and run migrations for your Rails project
+title: Schema migration with Lakebase Postgres and Ruby on Rails
+subtitle: Set up Lakebase Postgres and run migrations for your Rails project
 summary: >-
-  Ruby on Rails Active Record migrations against Neon Postgres require a direct
+  Ruby on Rails Active Record migrations against Lakebase Postgres require a direct
   (non-pooled) connection string in `DATABASE_URL` because PgBouncer pooled
   connections can cause migration errors. This guide walks through creating a
   Rails project, configuring `database.yml` to read `DATABASE_URL`, running
   `rails db:migrate` to create tables, and applying incremental schema changes
   such as adding a new column with a follow-on migration.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Ruby on Rails](https://rubyonrails.org/) is a popular web application framework for Ruby developers. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, that simplifies database interactions and schema management. Rails also includes a powerful migration system that allows you to define and manage database schema changes over time.
 
-This guide demonstrates how to run schema migrations in your Ruby on Rails project backed by the `Neon` Postgres database. We'll create a simple Rails application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
+This guide demonstrates how to run schema migrations in your Ruby on Rails project backed by the Lakebase Postgres database. We'll create a simple Rails application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
 ## Prerequisites
 
@@ -30,14 +30,14 @@ To follow along with this guide, you will need:
 
   We recommend using Rails 6 or higher. This project uses `Rails 7.1.3.2`.
 
-## Setting up your Neon database
+## Setting up your database
 
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 2. Select a project or click the **New Project** button to create a new one.
 
-### Retrieve your Neon database connection string
+### Retrieve your database connection string
 
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
@@ -119,7 +119,7 @@ These commands generate model files and the corresponding migration files in the
 
 ### Run the migrations
 
-To run the migrations and create the corresponding tables in the Neon Postgres database, run the following command:
+To run the migrations and create the corresponding tables in the Lakebase Postgres database, run the following command:
 
 ```bash
 rails db:migrate
@@ -358,7 +358,7 @@ Navigate to the url `http://localhost:3000/authors` to view the list of authors.
 
 ## Conclusion
 
-In this guide, we demonstrated how to set up a Ruby on Rails project with Neon Postgres, define database models, generate migrations, and run them. Rails' Active Record ORM and migration system make it easy to interact with the database and manage schema evolution over time.
+In this guide, we demonstrated how to set up a Ruby on Rails project with Lakebase Postgres, define database models, generate migrations, and run them. Rails' Active Record ORM and migration system make it easy to interact with the database and manage schema evolution over time.
 
 ## Source code
 
@@ -374,6 +374,6 @@ For more information on the tools and concepts used in this guide, refer to the 
 
 - [Ruby on Rails Guides](https://guides.rubyonrails.org/)
 - [Active Record Migrations](https://guides.rubyonrails.org/active_record_migrations.html)
-- [Neon Postgres](/docs/introduction)
+- [Lakebase Postgres](/docs/introduction)
 
 <NeedHelp/>

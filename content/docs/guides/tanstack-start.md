@@ -1,26 +1,26 @@
 ---
 title: Connect a TanStack Start application to Neon
-subtitle: Set up a Neon project in seconds and connect from a TanStack Start application
+subtitle: Set up a Lakebase Postgres project in seconds and connect from a TanStack Start application
 summary: >-
-  TanStack Start integration guide for Neon Postgres covers creating a Neon
+  TanStack Start integration guide for Lakebase Postgres covers creating a Lakebase Postgres
   project, installing a supported driver (node-postgres, postgres.js, or the
   Neon serverless driver), and writing server functions that query the database.
   Choose this page when building a type-safe React or Solid app with TanStack
   Start and need working code for both regular and static server functions
-  backed by Neon.
+  backed by Lakebase Postgres.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
-description="Pre-built prompt for connecting TanStack Start applications to Neon"/>
+description="Pre-built prompt for connecting TanStack Start applications to Lakebase Postgres"/>
 
 TanStack Start is an open-source, fully type-safe web framework for building feature rich React and Solid based applications using the TanStack ecosystem.
 
-To create a Neon project and access it from a Start application:
+To create a Lakebase Postgres project and access it from a Start application:
 
 <Steps>
 

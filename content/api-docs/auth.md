@@ -1,4 +1,4 @@
-Neon Auth is a managed authentication service powered by [Better Auth](https://www.better-auth.com/). It stores users, sessions, and auth configuration directly in your Neon Postgres database, so your auth state [branches with your data](/docs/auth/branching-authentication). Each branch gets its own isolated auth environment.
+Neon Auth is a managed authentication service powered by [Better Auth](https://www.better-auth.com/). It stores users, sessions, and auth configuration directly in your Lakebase Postgres database, so your auth state [branches with your data](/docs/auth/branching-authentication). Each branch gets its own isolated auth environment.
 
 Common uses include testing sign-up and login flows in preview environments, running end-to-end auth tests in CI without touching production, and provisioning auth as part of platform automation.
 

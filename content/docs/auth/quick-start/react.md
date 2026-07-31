@@ -6,10 +6,9 @@ summary: >-
   programmatic API methods (`signUp()`, `signIn.email()`, `getSession()`) instead
   of pre-built UI components. Use this page when you need full control over your
   own auth UI rather than dropping in ready-made components. Registered users are
-  automatically synced to the `neon_auth.user` table in your Neon Postgres
-  database.
+  automatically synced to the `neon_auth.user` table in your database.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 layout: wide
 redirectFrom:
   - /docs/auth/quick-start/react-router-components

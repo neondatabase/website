@@ -2,18 +2,18 @@
 title: Connect a React application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React application
 summary: >-
-  React connection hub for Neon Postgres, directing developers to server-side
+  React connection hub for Lakebase Postgres, directing developers to server-side
   integration guides for Next.js, Remix, TanStack Start, and SvelteKit. Use
-  this page when setting up a Neon database connection from a React
-  meta-framework, since Neon must be accessed server-side in React apps. Neon
+  this page when setting up a Lakebase Postgres connection from a React
+  meta-framework, since Lakebase Postgres must be accessed server-side in React apps. Neon
   Auth quick starts for Next.js and TanStack Router are also linked here.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.
 
-Neon Postgres should be accessed from the server side in React applications. Using the following React meta-frameworks, you can easily configure a server-side connection to a Neon Postgres database.
+Lakebase Postgres should be accessed from the server side in React applications. Using the following React meta-frameworks, you can easily configure a server-side connection to a Lakebase Postgres database.
 
 ## React Meta-Frameworks
 

@@ -1,31 +1,31 @@
 ---
 title: Connect from TypeORM to Neon
-subtitle: Learn how to connect to Neon from TypeORM
+subtitle: Learn how to connect to Lakebase Postgres from TypeORM
 summary: >-
-  TypeORM connects to Neon Postgres by setting `DataSource` type to `postgres`,
-  supplying the Neon connection string via `DATABASE_URL`, and enabling `ssl:
+  TypeORM connects to Lakebase Postgres by setting `DataSource` type to `postgres`,
+  supplying the Lakebase Postgres connection string via `DATABASE_URL`, and enabling `ssl:
   true`. Serverless deployments should use a pooled connection string (add
   `-pooler` to the endpoint ID) to handle high concurrency without exhausting
-  connections. To prevent timeouts from Neon's idle-compute cold start (default
+  connections. To prevent timeouts from Lakebase Postgres idle-compute cold start (default
   5 minutes), add `connect_timeout=10` to the connection string.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/typeorm-prompt.md" 
-description="Pre-built prompt for connecting Node.js applications to Neon using TypeORM."/>
+description="Pre-built prompt for connecting Node.js applications to Lakebase Postgres using TypeORM."/>
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
 
-- [Connect to Neon from TypeORM](#connect-to-neon-from-typeorm)
+- [Connect to Lakebase Postgres from TypeORM](#connect-to-lakebase-postgres-from-typeorm)
 - [Use connection pooling with TypeORM](#use-connection-pooling-with-typeorm)
 - [Connection timeouts](#connection-timeouts)
 
-## Connect to Neon from TypeORM
+## Connect to Lakebase Postgres from TypeORM
 
-To establish a basic connection from TypeORM to Neon, perform the following steps:
+To establish a basic connection from TypeORM to Lakebase Postgres, perform the following steps:
 
-1. Retrieve your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+1. Retrieve your database connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
    ![Connection details modal](/docs/connect/connection_details.png)
    The connection string includes the user name, password, hostname, and database name.
 
@@ -44,7 +44,7 @@ To establish a basic connection from TypeORM to Neon, perform the following step
    });
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require&channel_binding=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Lakebase Postgres connection string that you copied in the previous step. We also recommend adding `?sslmode=require&channel_binding=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
 

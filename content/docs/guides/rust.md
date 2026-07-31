@@ -1,9 +1,9 @@
 ---
-title: Connect a Rust application to Neon Postgres
-subtitle: Learn how to run SQL queries in Neon from Rust using the postgres or
+title: Connect a Rust application to Lakebase Postgres
+subtitle: Learn how to run SQL queries from Rust using the postgres or
   tokio-postgres crates
 summary: >-
-  Connecting a Rust application to Neon Postgres using either the synchronous
+  Connecting a Rust application to Lakebase Postgres using either the synchronous
   `postgres` crate or the async `tokio-postgres` crate with the Tokio runtime.
   Both options require SSL/TLS via postgres-openssl. Use this page when you need
   working Rust code for each CRUD operation, including when to use `execute`,
@@ -12,13 +12,13 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
-description="Pre-built prompt for connecting Rust applications to Neon"/>
+description="Pre-built prompt for connecting Rust applications to Lakebase Postgres"/>
 
-This guide describes how to create a Neon project and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
+This guide describes how to create a Lakebase Postgres project and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
 
 ## Prerequisites
 

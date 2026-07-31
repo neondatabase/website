@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -355,7 +355,7 @@ To create a role with SQL, issue a `CREATE ROLE` statement from a client such as
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
 ```
 
-- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your Neon Postgres instance. If the role is used only for privilege management, the `WITH LOGIN` privilege is unnecessary.
+- `WITH LOGIN` means that the role will have a login privilege, required for the role to log in to your database. If the role is used only for privilege management, the `WITH LOGIN` privilege is unnecessary.
 - A password must have a minimum entropy of 60 bits.
 
     <Admonition type="info">  

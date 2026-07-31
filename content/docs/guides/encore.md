@@ -3,12 +3,12 @@ title: Connect an Encore application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Encore.ts application
 summary: >-
   Encore.ts is a type-safe TypeScript backend framework that integrates with
-  Neon to automatically provision and migrate a Neon Postgres database when you
+  Neon to automatically provision and migrate a Lakebase Postgres database when you
   deploy a production environment from the Encore Cloud dashboard. Use this
   guide when you want Encore to create and manage your Neon database, including
   per-pull-request Neon branch preview environments for safe schema testing.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Encore](https://encore.dev) is a backend development framework that uses static analysis and type-safe primitives to provide automatic infrastructure provisioning, distributed tracing, and API documentation. This guide shows you how to use Neon with Encore for production deployments.
@@ -211,7 +211,7 @@ You can find a complete Encore + Neon example application on GitHub:
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-encore" description="Encore.ts application with Neon Postgres" icon="github">Get started with Encore and Neon</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-encore" description="Encore.ts application with Lakebase Postgres" icon="github">Get started with Encore and Neon</a>
 
 </DetailIconCards>
 

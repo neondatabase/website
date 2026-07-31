@@ -1,11 +1,11 @@
 ---
-title: Connect an SQLAlchemy application to Neon
-subtitle: Set up a Neon project in seconds and connect from an SQLAlchemy application
+title: Connect an SQLAlchemy application to Lakebase Postgres
+subtitle: Set up a Lakebase Postgres project in seconds and connect from an SQLAlchemy application
 summary: >-
-  SQLAlchemy, a Python SQL toolkit and ORM, connects to Neon Postgres by
+  SQLAlchemy, a Python SQL toolkit and ORM, connects to Lakebase Postgres by
   installing psycopg2 and passing a connection string to SQLAlchemy's
   create_engine function. Use this guide to build a working connection, then
-  resolve Neon-specific errors caused by compute scale-to-zero suspension,
+  resolve Lakebase-specific errors caused by compute scale-to-zero suspension,
   including SSL connection drops when idle connections are reused. A recent
   version of SQLAlchemy is required to avoid idle connection reuse bugs. Set
   pool_recycle or pool_pre_ping to prevent SSL SYSCALL EOF errors.
@@ -13,19 +13,19 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/sqlalchemy-prompt.md" 
-description="Pre-built prompt for connecting SQLAlchemy to Neon Postgres"/>
+description="Pre-built prompt for connecting SQLAlchemy to Lakebase Postgres"/>
 
-SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
+SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Lakebase Postgres project and connect to it from SQLAlchemy.
 
 **Prerequisites:**
 
 To complete the steps in this topic, ensure that you have an SQLAlchemy installation with a Postgres driver. The following instructions use `psycopg2`, the default driver for Postgres in SQLAlchemy. For SQLAlchemy installation instructions, refer to the [SQLAlchemy Installation Guide](https://docs.sqlalchemy.org/en/14/intro.html#installation). `psycopg2` installation instructions are provided below.
 
-To connect to Neon from SQLAlchemy:
+To connect to a Lakebase Postgres database from SQLAlchemy:
 
 <Steps>
 
@@ -122,7 +122,7 @@ For schema migration with SQLAlchemy, see our guide:
 
 <DetailIconCards>
 
-<a href="/docs/guides/sqlalchemy-migrations" description="Schema migration with Neon Postgres and SQLAlchemy" icon="app-store" icon="app-store">SQLAlchemy Migrations</a>
+<a href="/docs/guides/sqlalchemy-migrations" description="Schema migration with Lakebase Postgres and SQLAlchemy" icon="app-store" icon="app-store">SQLAlchemy Migrations</a>
 
 </DetailIconCards>
 

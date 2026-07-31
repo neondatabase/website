@@ -1,8 +1,8 @@
 ---
 title: Get started with logical replication
-subtitle: Learn how to replicate data to and from your Neon Postgres database
+subtitle: Learn how to replicate data to and from your Lakebase Postgres database
 summary: >-
-  Neon logical replication streams data between Neon Postgres and external
+  Neon logical replication streams data between Lakebase Postgres and external
   systems using Postgres's native publisher-subscriber model. Find guides for
   CDC to data warehouses, live migrations from AWS RDS, Google Cloud SQL,
   AlloyDB, or Supabase, and cross-region Neon-to-Neon replication. Logical
@@ -13,10 +13,10 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-aurora-to-neon
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
+Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Lakebase Postgres database:
 
 - Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others. See [Replicate data from Neon](#replicate-data-from-neon).
 - Perform live migrations to Neon from external sources such as AWS RDS and Google Cloud SQL &#8212; or any platform that runs Postgres. See [Replicate data to Neon](#replicate-data-to-neon).

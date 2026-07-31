@@ -1,22 +1,22 @@
 ---
-title: Connect a Ruby on Rails application to Neon Postgres
-subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails application
+title: Connect a Ruby on Rails application to Lakebase Postgres
+subtitle: Set up a Lakebase Postgres project in seconds and connect from a Ruby on Rails application
 summary: >-
   Ruby on Rails connection guide that shows how to configure DATABASE_URL in a
-  .env file so a Rails app connects to a Neon Postgres database, covering
+  .env file so a Rails app connects to a Lakebase Postgres database, covering
   project creation, role CREATEDB privileges, and running db:create. Use this
-  page when setting up a new or existing Rails project against Neon. A separate
+  page when setting up a new or existing Rails project. A separate
   sibling page covers Rails schema migrations.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 
-description="Pre-built prompt for connecting Ruby on Rails to Neon Postgres"/>
+description="Pre-built prompt for connecting Ruby on Rails to Lakebase Postgres"/>
 
-[Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.
+[Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect a Ruby on Rails application to a Lakebase Postgres database.
 
-To connect to Neon from a Ruby on Rails application:
+To connect to a Lakebase Postgres database from a Ruby on Rails application:
 
 <Admonition type="note">
 This guide was tested using Ruby v3.4.6 and Rails v8.0.3.
@@ -128,7 +128,7 @@ For schema migration with Ruby on Rails, see our guide:
 
 <DetailIconCards>
 
-<a href="/docs/guides/rails-migrations" description="Schema migration with Neon Postgres and Ruby on Rails" icon="app-store" icon="app-store">Ruby on Rails Migrations</a>
+<a href="/docs/guides/rails-migrations" description="Schema migration with Lakebase Postgres and Ruby on Rails" icon="app-store" icon="app-store">Ruby on Rails Migrations</a>
 
 </DetailIconCards>
 

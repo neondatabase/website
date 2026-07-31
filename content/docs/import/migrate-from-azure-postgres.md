@@ -14,7 +14,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -121,7 +121,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ### Allow inbound traffic from Neon
 
-You need to allow inbound traffic from Neon Postgres servers so it can connect to your Azure database. To do this, follow these steps:
+You need to allow inbound traffic from Neon servers so they can connect to your Azure database. To do this, follow these steps:
 
 1. Log into the Azure portal and navigate to your Azure Postgres Server resource.
 
@@ -137,7 +137,7 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
+This section describes how to prepare your destination database (the subscriber) to receive replicated data.
 
 You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. See [Connect from any application](/docs/connect/connect-from-any-app).
 
@@ -238,7 +238,7 @@ Once the initial data sync is complete and you've verified that ongoing changes 
 This ensures a much shorter downtime for the application, as you only need to wait for the last few transactions to be replicated before switching the application over to the Neon database.
 
 <Admonition type="note">
-Remember to update any Azure-specific configurations or extensions in your application code to be compatible with Neon. For Neon Postgres parameter settings, see [Postgres parameter settings](/docs/reference/compatibility#postgres-parameter-settings). For Postgres extensions supported by Neon, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
+Remember to update any Azure-specific configurations or extensions in your application code to be compatible with Lakebase Postgres. For Lakebase Postgres parameter settings, see [Postgres parameter settings](/docs/reference/compatibility#postgres-parameter-settings). For Postgres extensions supported by Lakebase Postgres, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
 </Admonition>
 
 ## Clean up

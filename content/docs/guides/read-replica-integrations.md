@@ -2,7 +2,7 @@
 title: Scale your application with Read Replicas
 subtitle: Scale your app with read replicas using built-in framework support
 summary: >-
-  Neon read replicas are independent read-only computes that share primary
+  Lakebase Postgres read replicas are independent read-only computes that share primary
   storage at no extra cost, letting you route SELECT queries to replicas and
   writes to the primary to increase read throughput. The page shows how to wire
   up that routing using each framework's built-in support: Prisma's
@@ -10,7 +10,7 @@ summary: >-
   `read`/`write` database config, Django's `DATABASE_ROUTERS`, and Entity
   Framework Core's separate `DbContext` classes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 In Neon, a read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -95,7 +95,7 @@ await db.delete(usersTable).where(eq(usersTable.id, 1))
 
 For more, refer to [Read Replicas](https://orm.drizzle.team/docs/read-replicas) in the Drizzle documentation.
 
-**Example application**: For a full example, refer to this Neon community guide: [Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas](/guides/read-replica-drizzle).
+**Example application**: For a full example, refer to this Neon community guide: [Scale your Next.js application with Drizzle ORM and Lakebase Postgres Read Replicas](/guides/read-replica-drizzle).
 
 ## Laravel
 
@@ -125,7 +125,7 @@ For example, in your `config/database.php`, you can configure read and write con
 ],
 ```
 
-**Example application**: For a full setup, refer to this Neon community guide: [Scale your Laravel application with Neon Postgres Read Replicas](/guides/read-replica-laravel).
+**Example application**: For a full setup, refer to this Neon community guide: [Scale your Laravel application with Lakebase Postgres Read Replicas](/guides/read-replica-laravel).
 
 ## Django
 
@@ -169,7 +169,7 @@ class PrimaryReplicaRouter:
 
 For more, see [Multiple databases](https://docs.djangoproject.com/en/5.1/topics/db/multi-db/) in the Django documentation.
 
-**Example application**: For a complete setup, refer to this Neon community guide: [Scale your Django application with Neon Postgres Read Replicas](/guides/read-replica-django).
+**Example application**: For a complete setup, refer to this Neon community guide: [Scale your Django application with Lakebase Postgres Read Replicas](/guides/read-replica-django).
 
 ## Entity Framework Core
 
@@ -195,6 +195,6 @@ namespace TodoApi.Data
 }
 ```
 
-**Example application**: For a complete setup, refer to this Neon community guide: [Scale your .NET application with Entity Framework and Neon Postgres Read Replicas](/guides/read-replica-entity-framework).
+**Example application**: For a complete setup, refer to this Neon community guide: [Scale your .NET application with Entity Framework and Lakebase Postgres Read Replicas](/guides/read-replica-entity-framework).
 
 <NeedHelp/>

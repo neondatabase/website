@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 ## access token
@@ -126,7 +126,7 @@ A service that provides virtualized computing resources, equipped with an operat
 
 A [compute endpoint](#compute-endpoint) is the access point for connecting to a Neon compute.
 
-Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a Neon Postgres database from a client or application.
+Neon creates a primary read-write compute for the project's default branch. Neon supports both read-write and [read replica](/docs/introduction/read-replicas) computes. A branch can have a single primary (read-write) compute but supports multiple read replica computes. The compute hostname is required to connect to a database from a client or application.
 
 ## compute endpoint
 
@@ -160,7 +160,7 @@ A method of creating a pool of connections and caching those connections for reu
 
 ## connection string
 
-A string containing details for connecting to a Neon Postgres database. The details include a user name (role), compute hostname, and database name; for example:
+A string containing details for connecting to a database. The details include a user name (role), compute hostname, and database name; for example:
 
 ```bash shouldWrap
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -337,7 +337,7 @@ An [Organizations](#organization) role in Neon with access to all projects withi
 
 ## Neon
 
-The backend for apps and agents. Includes Neon Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview), with the last three in beta. Neon Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
+The backend for apps and agents. Includes Lakebase Postgres, Managed Better Auth, Data API, [AI Gateway](/docs/ai-gateway/overview), [Object Storage](/docs/storage/overview), and [Functions](/docs/compute/functions/overview), with the last three in beta. Lakebase Postgres is serverless, with autoscaling, branching, instant restore, and scale-to-zero. For more information, see [Why Neon?](/docs/introduction).
 
 ## Neon API
 

@@ -1,12 +1,12 @@
 ---
 title: Connect MCP clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Code, VS Code,
-  ChatGPT, and other tools to your Neon Postgres database.
+  ChatGPT, and other tools to your Lakebase Postgres database.
 summary: >-
   Connection guide for wiring MCP clients (Cursor, Claude Code, VS Code with
   GitHub Copilot, ChatGPT, Cline, Windsurf, Zed, Claude Desktop, and more via
   the add-mcp CLI) to the Neon MCP Server so AI assistants can query and manage
-  Neon Postgres databases using natural language. Use this page when you need
+  Lakebase Postgres databases using natural language. Use this page when you need
   per-client setup instructions for `npx neon@latest init`, OAuth, or local
   API key authentication with `@neondatabase/mcp-server-neon`. Also covers
   troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache)
@@ -15,10 +15,10 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Neon Postgres databases.
+This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Lakebase Postgres databases.
 
 <Admonition type="important" title="Security">
 The Neon MCP Server is intended for **development and testing only**. Always review LLM-requested actions before execution. See [MCP security guidance](/docs/ai/neon-mcp-server#mcp-security-guidance).
@@ -126,7 +126,7 @@ Restart Cursor (or enable the MCP server in settings). When the OAuth window ope
 <a href="https://cursor.com/en-US/install-mcp?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="/docs/local/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
 </Admonition>
 
-For more, see [Get started with Cursor and Neon Postgres MCP Server](/guides/cursor-mcp-neon).
+For more, see [Get started with Cursor and Neon MCP Server](/guides/cursor-mcp-neon).
 
 ## Claude Code
 
@@ -164,7 +164,7 @@ Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys).
 </TabItem>
 </Tabs>
 
-For more, see [Get started with Claude Code and Neon Postgres MCP Server](/guides/claude-code-mcp-neon).
+For more, see [Get started with Claude Code and Neon MCP Server](/guides/claude-code-mcp-neon).
 
 ## VS Code (with GitHub Copilot)
 
@@ -328,7 +328,7 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 </TabItem>
 </Tabs>
 
-For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/cline-mcp-neon).
+For more, see [Get started with Cline and Neon MCP Server](/guides/cline-mcp-neon).
 
 ## Windsurf (Codeium)
 
@@ -382,7 +382,7 @@ For more, see [Get started with Cline and Neon Postgres MCP Server](/guides/clin
 </TabItem>
 </Tabs>
 
-For more, see [Get started with Windsurf and Neon Postgres MCP Server](/guides/windsurf-mcp-neon).
+For more, see [Get started with Windsurf and Neon MCP Server](/guides/windsurf-mcp-neon).
 
 ## Zed
 
@@ -416,7 +416,7 @@ Restart Zed (or enable the MCP server in settings). When the OAuth window opens,
 </TabItem>
 </Tabs>
 
-For more details, including workflow examples and troubleshooting, see [Get started with Zed and Neon Postgres MCP Server](/guides/zed-mcp-neon).
+For more details, including workflow examples and troubleshooting, see [Get started with Zed and Neon MCP Server](/guides/zed-mcp-neon).
 
 ## Jules
 

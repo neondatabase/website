@@ -14,14 +14,14 @@ summary: >-
 enableTableOfContents: true
 tag: community
 tagTheme: gray
-updatedOn: '2026-07-13T14:20:27.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
 
 This guide will show you how to use **Terraform to manage your Neon projects**, including your branches, databases, and compute endpoints. By using Terraform with Neon, you get better control, can track changes, and automate your database setup.
 
-Neon sponsors the following community-developed Terraform provider for managing Neon Postgres platform resources:
+Neon sponsors the following community-developed Terraform provider for managing Lakebase Postgres platform resources:
 
 **Terraform Provider Neon - Maintainer: Dmitry Kisler**
 
@@ -855,7 +855,7 @@ Terraform will ask for confirmation before deleting the resources.
 
 ## Example application
 
-The following example application demonstrates how to set up Terraform, connect to a Neon Postgres database, and perform a Terraform run that inserts data. It covers how to:
+The following example application demonstrates how to set up Terraform, connect to a database, and perform a Terraform run that inserts data. It covers how to:
 
 - Use Go's `os/exec` package to run Terraform commands
 - Write a Go test function to validate Terraform execution
@@ -863,10 +863,10 @@ The following example application demonstrates how to set up Terraform, connect 
 
 <DetailIconCards>
 
-<a href="https://github.com/mattmajestic/go-terraform" description="Run Terraform commands and test Terraform configurations with Go" icon="github">Neon Postgres with Terraform and Go</a>
+<a href="https://github.com/mattmajestic/go-terraform" description="Run Terraform commands and test Terraform configurations with Go" icon="github">Lakebase Postgres with Terraform and Go</a>
 
 </DetailIconCards>
 
-View the **YouTube tutorial**: [Neon Postgres for Terraform with Go](https://www.youtube.com/watch?v=Pw38lgfbX0s).
+View the **YouTube tutorial**: [Lakebase Postgres for Terraform with Go](https://www.youtube.com/watch?v=Pw38lgfbX0s).
 
 <NeedHelp/>

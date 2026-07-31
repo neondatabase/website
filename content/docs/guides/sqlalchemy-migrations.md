@@ -1,21 +1,21 @@
 ---
-title: Schema migration with Neon Postgres and SQLAlchemy
+title: Schema migration with Lakebase Postgres and SQLAlchemy
 subtitle: Manage database migrations in your Python project with SQLAlchemy and Alembic
 summary: >-
   SQLAlchemy with Alembic autogenerates and applies versioned schema migrations
-  to a Neon Postgres database using `alembic revision --autogenerate` and
+  to a Lakebase Postgres database using `alembic revision --autogenerate` and
   `alembic upgrade head`. A direct (non-pooled) connection string is required to
   avoid migration errors. Use this guide when you need to track and apply
   incremental DDL changes (such as adding columns) without writing manual SQL.
   The guide builds a FastAPI app with SQLAlchemy ORM models and walks through an
   end-to-end schema evolution cycle.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [SQLAlchemy](https://www.sqlalchemy.org/) is a popular SQL toolkit and Object-Relational Mapping (ORM) library for Python. SQLAlchemy provides a powerful way to interact with databases and manage database schema changes using [Alembic](https://alembic.sqlalchemy.org/), a lightweight database migration tool.
 
-This guide demonstrates how to use SQLAlchemy/Alembic to manage schema migrations for a Neon Postgres database. We create a simple API using the [FastAPI](https://fastapi.tiangolo.com/) web framework and define database models using SQLAlchemy. We then generate and run migrations to manage schema changes over time.
+This guide demonstrates how to use SQLAlchemy/Alembic to manage schema migrations for a Lakebase Postgres database. We create a simple API using the [FastAPI](https://fastapi.tiangolo.com/) web framework and define database models using SQLAlchemy. We then generate and run migrations to manage schema changes over time.
 
 ## Prerequisites
 
@@ -24,14 +24,14 @@ To follow along with this guide, you will need:
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 - [Python](https://www.python.org/) installed on your local machine. We recommend using a newer version of Python, 3.8 or higher.
 
-## Setting up your Neon database
+## Setting up your database
 
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 2. Select a project or click the **New Project** button to create a new one.
 
-### Retrieve your Neon database connection string
+### Retrieve your database connection string
 
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
@@ -74,7 +74,7 @@ pip install fastapi uvicorn python-dotenv
 pip freeze > requirements.txt
 ```
 
-We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Neon Postgres database. We then installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
+We installed SQLAlchemy, Alembic, and the `psycopg2-binary` package to connect to the Lakebase Postgres database. We then installed the `FastAPI` package to create the API endpoints and `uvicorn` as the web server. We then saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
 
 ### Set up the Database configuration
 
@@ -196,7 +196,7 @@ This command detects the `Author` and `Book` models and generates a new migratio
 
 ### Apply the migration
 
-To apply the migration and create the corresponding tables in the Neon Postgres database, run the following command:
+To apply the migration and create the corresponding tables in the Lakebase Postgres database, run the following command:
 
 ```bash
 alembic upgrade head
@@ -381,6 +381,6 @@ For more information on the tools and concepts used in this guide, refer to the 
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
 - [SQLAlchemy Documentation](https://docs.sqlalchemy.org/)
 - [Alembic Documentation](https://alembic.sqlalchemy.org/)
-- [Neon Postgres](/docs/introduction)
+- [Lakebase Postgres](/docs/introduction)
 
 <NeedHelp/>
