@@ -1,4 +1,4 @@
-text: 'Just shipped: Use neon inspect db to debug your Neon database from your agent/CLI'
+text: 'How CommSync runs Lakebase Search for text, vector, and hybrid search - with 1000x latency improvement vs cold-start GIN'
 link:
-  url: 'https://neon.com/blog/neon-inspect-db'
+  url: 'https://neon.com/blog/commsync-runs-text-vector-and-hybrid-search-on-postgres-with-lakebase-search'
   target: '_blank'
