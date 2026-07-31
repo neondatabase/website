@@ -19,7 +19,7 @@ Traditionally, provisioning thousands of Postgres databases meant:
 - Building internal control planes
 - Hiring infrastructure engineers just to keep up
 
-Neon changes the economics and the operational burden. **Because Neon is built on a [unique serverless Postgres architecture](https://neon.com/docs/introduction/architecture-overview), those constraints disappear.** You can embed real Postgres directly into your platform and deploy thousands of Postgres databases for your users, without hiring extra engineers to manage your fleet.
+Neon changes the economics and the operational burden. **Because Neon is built on a [unique Lakebase Postgres architecture](https://neon.com/docs/introduction/architecture-overview), those constraints disappear.** You can embed real Postgres directly into your platform and deploy thousands of Postgres databases for your users, without hiring extra engineers to manage your fleet.
 
 ## Importantly: your users need their own isolated database
 
@@ -93,7 +93,7 @@ _Sample API operations platforms use to implement database-per-user workflows wi
 
 ### Serverless economics: the key enabler
 
-Neon databases,
+Lakebase Postgres databases,
 
 - Provision in approximately 1 second
 - Scale to zero when inactive

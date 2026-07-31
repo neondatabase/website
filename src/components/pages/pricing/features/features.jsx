@@ -36,7 +36,7 @@ const FEATURES = [
   {
     icon: connectionsIcon,
     title: 'Connection pooling.',
-    description: `All Neon databases can use pooled connections built on pgBouncer (up to <a href="${LINKS.connectionPooling}">10,000 connections</a>).`,
+    description: `All Lakebase Postgres databases can use pooled connections built on pgBouncer (up to <a href="${LINKS.connectionPooling}">10,000 connections</a>).`,
   },
   {
     icon: extensionsIcon,
@@ -65,8 +65,8 @@ const Features = () => (
           '[&>strong]:font-normal [&>strong]:text-white'
         )}
       >
-        <strong>Included with every Neon database, on every plan, by default.</strong> These are
-        core platform capabilities that come out of the box with Neon.
+        <strong>Included with every Lakebase Postgres database, on every plan, by default.</strong>{' '}
+        These are core platform capabilities that come out of the box with Neon.
       </h2>
       <ul
         className={cn(

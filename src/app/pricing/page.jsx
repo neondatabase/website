@@ -35,7 +35,7 @@ const faqItems = [
     id: 'does-neon-offer-a-backend',
     initialState: 'open',
     answer: `
-      <p>Yes. Alongside our serverless Postgres database, Neon now offers Managed Better Auth, Object Storage, Functions, and AI Gateway - a full backend suite that runs alongside your database and branches with it.</p>
+      <p>Yes. Alongside our Lakebase Postgres database, Neon now offers Managed Better Auth, Object Storage, Functions, and AI Gateway - a full backend suite that runs alongside your database and branches with it.</p>
     `,
   },
   {
@@ -55,14 +55,14 @@ const faqItems = [
   {
     question: 'What is a CU?',
     answer: `
-      <p>A CU (short for Compute Unit) is Neon's way of representing <strong>Postgres database compute size</strong>. Neon databases <a href="${LINKS.autoscaling}">autoscale</a>, and CUs define how much CPU and memory your database is using at any moment - with each CU allocating approximately 1 vCPU and 4 GB of RAM.</p>
+      <p>A CU (short for Compute Unit) is Neon's way of representing <strong>Postgres database compute size</strong>. Lakebase Postgres databases <a href="${LINKS.autoscaling}">autoscale</a>, and CUs define how much CPU and memory your database is using at any moment - with each CU allocating approximately 1 vCPU and 4 GB of RAM.</p>
     `,
   },
   {
     question: 'What is a CU-hour?',
     id: 'compute-usage',
     answer: `
-      <p>A CU-hour is Neon's unit for measuring <strong>Postgres database compute usage</strong>. Because Neon databases scale to zero and autoscale, you're billed only for the database compute resources you actually use. In other words, your monthly database compute usage depends on:</p>
+      <p>A CU-hour is Neon's unit for measuring <strong>Postgres database compute usage</strong>. Because Lakebase Postgres databases scale to zero and autoscale, you're billed only for the database compute resources you actually use. In other words, your monthly database compute usage depends on:</p>
       <ul>
         <li>How many compute endpoints are you running</li>
         <li>How large your compute endpoints are (in CUs)</li>
@@ -168,7 +168,7 @@ const faqItems = [
     question: 'What does "no monthly minimum" mean on paid plans?',
     answer: `
       <p>Neon's paid plans don't require a minimum monthly spend or base fee. You're billed purely based on usage. If one month you barely use Neon, your bill might be just a few dollars.</p>
-      <p>For example, if your databases are mostly idle that month, or you only run them briefly for development or testing, you'll only pay for the compute and storage actually consumed during that time. Remember that Neon databases scale to zero by default.</p>
+      <p>For example, if your databases are mostly idle that month, or you only run them briefly for development or testing, you'll only pay for the compute and storage actually consumed during that time. Remember that Lakebase Postgres databases scale to zero by default.</p>
     `,
   },
   {
@@ -194,7 +194,7 @@ const faqItems = [
       <p><strong>History</strong> storage is billed based on the amount of Write-Ahead Log (WAL) retained within that history window, at $0.20 per GB-month on paid plans. This is billed separately from your regular database storage.</p>
       <p>If you don't need deep recovery or long Time Travel, shorten the history window to reduce costs.</p>
       <p><strong>Database storage (root and child branches)</strong></p>
-      <p>This is the storage used by your database data itself. Since Neon databases can branch, this is how branches contribute to database storage:</p>
+      <p>This is the storage used by your database data itself. Since Lakebase Postgres databases can branch, this is how branches contribute to database storage:</p>
       <ul>
         <li>Root branches are billed based on their actual data size (for example, 5 GB)</li>
         <li>Child branches <em>might</em> be billed based on the minimum of: the accumulated data changes since the branch was created, or the underlying storage footprint, which is zero if the branch is still within the history window used for instant restore (in this case, the child branch effectively shares storage with its parent).</li>
@@ -230,14 +230,14 @@ const faqItems = [
   {
     question: 'How is Managed Better Auth billed?',
     answer: `
-      <p>Neon Managed Better Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU). If you surpass that threshold, a member of our team will reach out to discuss pricing.</p>
+      <p>Neon Managed Better Auth is included at no additional cost for all Lakebase Postgres databases until you reach 1 million monthly active users (MAU). If you surpass that threshold, a member of our team will reach out to discuss pricing.</p>
       <p>On the Free plan, Managed Better Auth is included for up to 60,000 MAU.</p>
     `,
   },
   {
     question: 'How can I control my Postgres database costs (compute and storage consumption)?',
     answer: `
-      <p>Database compute is often the most variable part of a monthly bill. For Neon databases, the most effective way to control compute costs is to configure maximum autoscaling limits and scale-to-zero.</p>
+      <p>Database compute is often the most variable part of a monthly bill. For Lakebase Postgres databases, the most effective way to control compute costs is to configure maximum autoscaling limits and scale-to-zero.</p>
       <p>Autoscaling limits act as a built-in cost ceiling: your database will never scale beyond the limit you set, even during traffic spikes. If you want to prioritize performance over costs in a particular compute endpoint (e.g. production), choose a higher limit. If you want to optimize for cost predictability, set a lower one. <a href="${LINKS.docs}/guides/autoscaling-guide#configure-autoscaling-defaults-for-your-project">Learn how to configure autoscaling limits.</a></p>
       <p>Another effective way to control database compute costs is to ensure scale to zero is enabled for all non-production branches. When a branch is idle, compute scales down automatically, so you're not charged for unused databases. <a href="${LINKS.docs}/introduction/scale-to-zero">Learn about scale to zero.</a></p>
       <p>To manage database storage costs, regularly clean up unused branches, snapshots, and projects, and avoid retaining a large history window for instant restore if your use case does not require it. <a href="${LINKS.docs}/introduction/cost-optimization#storage-root-and-child-branches">Learn more about optimizing storage usage.</a></p>

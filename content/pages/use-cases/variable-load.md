@@ -121,7 +121,7 @@ Your database setup isn’t just production \- it includes development, testing,
 Our [platform data](https://neon.com/autoscaling-report) shows that non-production workloads that scale to zero use 13.7x less compute than their provisioned equivalent and cost 7.5x less.
 </Admonition>
 
-## Extra serverless Postgres perks
+## Extra Lakebase Postgres perks
 
 When compute scales dynamically and can drop to zero, features built on top of it inherit those efficiencies. For example: read replicas and connection pooling become lighter, cheaper, and more responsive than their equivalents in provisioned infrastructure.
 

@@ -11,7 +11,7 @@ image: '/images/social-previews/use-cases/postgres-for-saas.jpg'
 
 ## Summary
 
-Three features make Postgres on Neon a solid foundation for teams building SaaS applications:
+Three features make Lakebase Postgres on Neon a solid foundation for teams building SaaS applications:
 
 <DefinitionList bulletType="check">
 Database branching

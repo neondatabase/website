@@ -130,7 +130,7 @@ Neon's model maps cleanly to that way of working. That is why Neon is the Postgr
 
 What makes Neon so fitting for agents:
 
-- **Postgres that agents can deploy and manage.** With Neon, agents can provision Postgres databases programmatically via API, without manual sizing, capacity planning, or configuration work.
+- **Lakebase Postgres that agents can deploy and manage.** With Neon, agents can provision Postgres databases programmatically via API, without manual sizing, capacity planning, or configuration work.
 - **Large fleets != large costs.** Those same databases scale down to zero when inactive, so deploying thousands of rarely used databases does not become a cost concern.
 - **Branches for checkpoints and versions.** Agents can use branches and snapshots to maintain versioned states of an app or workflow, or to offer restore and rollback features directly to end users.
 - **A full backend via SDKs.** For full-stack agents, Neon also provides [Auth](https://neon.com/docs/auth/overview) and PostgREST-compatible APIs, packaged together in a single SDK.
