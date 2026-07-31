@@ -34,11 +34,11 @@ seo:
     https://cdn.neonapi.io/public/images/pages/blog/architecture-decisions-in-neon/cover.jpg
 ---
 
+![Architecture decisions in Neon](https://cdn.neonapi.io/public/images/pages/blog/architecture-decisions-in-neon/architecture-decisions-in-neon-1-1024x538-a53a6eb3.jpg)
+
 <Admonition type="note" title="This design is now the lakebase architecture">
 This 2022 post captures the early architecture decisions behind Neon: separate storage and compute, stream WAL to a dedicated safekeeper service, reconstruct pages on demand, and keep durable history in object storage. That design became what we now call the **lakebase architecture**, the foundation of [Lakebase Postgres](/docs/get-started/why-neon) whether you access it via Neon or via Databricks. For how the system works today, see [Lakebase architecture](/docs/introduction/architecture-overview).
 </Admonition>
-
-![Architecture decisions in Neon](https://cdn.neonapi.io/public/images/pages/blog/architecture-decisions-in-neon/architecture-decisions-in-neon-1-1024x538-a53a6eb3.jpg)
 
 The idea behind Neon is to create a new serverless Postgres service with a modern cloud-native architecture. When building for the cloud it usually is a good idea to separate storage and compute. For operational databases such design was first introduced by AWS Aurora <sup><a href="#fn-1">1</a></sup>, followed by many others <sup><a href="#fn-2">2</a><a href="#fn-3"> 3</a></sup>, however none of the implementations were open source and native to Postgres.
 
