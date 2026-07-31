@@ -201,6 +201,14 @@ const defaultConfig = {
 
     return [
       {
+        // Archived pre-2025 changelog entries (moved to content/changelog-archive/).
+        // Matches canonical dated slugs (e.g. 2023-05-05) and their redirectFrom
+        // aliases (e.g. 2023-05-05-storage-and-compute); all land on the index.
+        source: '/docs/changelog/:slug((?:2022|2023|2024)-\\d{2}-\\d{2}.*)',
+        destination: '/docs/changelog',
+        permanent: true,
+      },
+      {
         source: '/guides/neondatabase-toolkit',
         destination: '/docs/reference/sdk',
         permanent: true,
