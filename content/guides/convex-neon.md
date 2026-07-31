@@ -1,20 +1,20 @@
 ---
 title: Getting started with Convex and Neon
-subtitle: A step-by-step guide to integrating Convex with Neon Postgres
+subtitle: A step-by-step guide to integrating Convex with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-This guide explores Convex's self-hosting capability and demonstrates how to use it with Neon Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) significantly enhances the self-hosted experience, overcoming limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a robust and scalable database option.
+This guide explores Convex's self-hosting capability and demonstrates how to use it with Lakebase Postgres. [Convex](https://www.convex.dev) is a reactive backend platform ideal for building real-time applications. A [recent release](https://news.convex.dev/self-hosting) significantly enhances the self-hosted experience, overcoming limitations of the initial open-source version which lacked a dashboard and relied solely on SQLite. The new self-hosted Convex includes the [dashboard](https://docs.convex.dev/dashboard) and supports Postgres as a robust and scalable database option.
 
 Convex empowers developers to create dynamic, live-updating applications. Self-hosting retains these core features while granting you greater control over your deployment environment. While SQLite remains the default for simplicity, Postgres integration unlocks enhanced scalability and resilience, especially beneficial for production applications.
 
-This guide provides a step-by-step walkthrough of integrating Convex with Neon Postgres. You will learn how to:
+This guide provides a step-by-step walkthrough of integrating Convex with Lakebase Postgres. You will learn how to:
 
 - Set up Convex for self-hosting using Docker Compose.
-- Configure Convex to utilize Neon Postgres for persistent data storage.
+- Configure Convex to utilize Lakebase Postgres for persistent data storage.
 - Run the Convex [chat application tutorial](https://docs.convex.dev/tutorial) as a practical example.
 - Test the integration to ensure everything functions correctly.
 
@@ -32,13 +32,13 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
     For optimal performance, especially in production, it's highly recommended to locate your Neon database and Convex backend in the same geographical region. Convex's cloud-hosted platform achieves extremely low query times because the database and backend are co-located within their infrastructure.
 
-    While this guide focuses on setup and integration specifically for local development, for production applications, consider the physical proximity of your Neon Postgres and Convex Backend server to minimize latency.
+    While this guide focuses on setup and integration specifically for local development, for production applications, consider the physical proximity of your Lakebase Postgres and Convex Backend server to minimize latency.
 
 </Admonition>
 
 ## Setting up Neon Database
 
-To get started with your Postgres database, create a new Neon project in the [Neon Console](https://console.neon.tech). This project will provide the Postgres instance that Convex will use to store your application data. Within this Neon project, you'll need to create a database named `convex_self_hosted` – this is the specific database Convex is configured to use for storing chat messages. Follow these steps to set up your Neon Postgres database:
+To get started with your Postgres database, create a new Neon project in the [Neon Console](https://console.neon.tech). This project will provide the Postgres instance that Convex will use to store your application data. Within this Neon project, you'll need to create a database named `convex_self_hosted` – this is the specific database Convex is configured to use for storing chat messages. Follow these steps to set up your Lakebase Postgres database:
 
 - Navigate to the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) in your Neon project console to create the `convex_self_hosted` database.
 - Execute the following SQL command to create the database:
@@ -47,13 +47,13 @@ To get started with your Postgres database, create a new Neon project in the [Ne
   CREATE DATABASE convex_self_hosted;
   ```
 
-- Once the database is created, you can retrieve the connection string by clicking on "Connect" in the Neon project's dashboard. Select the `convex_self_hosted` database and copy the connection string. You will need this connection string later to configure the Convex backend to use Neon Postgres.
+- Once the database is created, you can retrieve the connection string by clicking on "Connect" in the Neon project's dashboard. Select the `convex_self_hosted` database and copy the connection string. You will need this connection string later to configure the Convex backend to use Lakebase Postgres.
 
   ![Neon Connection string for convex_self_hosted database](/docs/guides/neon-connection-string-for-convex-database.png)
 
 ## Setting up Self-Hosted Convex with Docker Compose
 
-Now, you'll set up the self-hosted Convex backend using Docker Compose, configuring it to use your Neon Postgres database.
+Now, you'll set up the self-hosted Convex backend using Docker Compose, configuring it to use your Lakebase Postgres database.
 
 1.  **Create a Project Directory:** Open your terminal and create a new directory for your Convex project. Navigate into it:
 
@@ -114,7 +114,7 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
     - When you access the dashboard for the first time, you will be prompted to log in.
     - For the password, you will use the `CONVEX_SELF_HOSTED_ADMIN_KEY` generated in the next step.
 
-6.  **Verify Neon Postgres Connection (Optional but Recommended):** You can confirm that Convex is using your Neon Postgres database by checking the Docker container logs. This verifies that the `POSTGRES_URL` environment variable was correctly processed.
+6.  **Verify Lakebase Postgres Connection (Optional but Recommended):** You can confirm that Convex is using your Lakebase Postgres database by checking the Docker container logs. This verifies that the `POSTGRES_URL` environment variable was correctly processed.
 
     Run this command in your terminal within the `convex-neon-integration` directory:
 
@@ -381,7 +381,7 @@ With the self-hosted Convex backend powered by Neon running, the next step is to
 
 ## Using the chat application
 
-With the Convex chat application running and connected to your self-hosted Convex backend powered by Neon Postgres, you can now test the chat functionality.
+With the Convex chat application running and connected to your self-hosted Convex backend powered by Lakebase Postgres, you can now test the chat functionality.
 
 1.  **Access the Chat application in your browser:** Open your web browser and navigate to[http://localhost:5173](http://localhost:5173). You should see the Convex chat application interface.
 
@@ -389,7 +389,7 @@ With the Convex chat application running and connected to your self-hosted Conve
 
 3.  **Send and receive real-time messages:** In one chat window, type and send a message. Verify that the message appears in real-time in both chat windows. Send messages from both windows and observe the bidirectional real-time updates.
 
-Congratulations! You have successfully integrated Convex with Neon Postgres and implemented a real-time chat application using Convex queries and mutations.
+Congratulations! You have successfully integrated Convex with Lakebase Postgres and implemented a real-time chat application using Convex queries and mutations.
 
 ## Resources
 

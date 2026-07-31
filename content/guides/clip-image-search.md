@@ -2,16 +2,16 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-24T00:00:00.000Z'
-updatedOn: '2026-07-24T00:00:00.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 title: Build image search over CLIP embeddings with Lakebase Search
-subtitle: Search a Flickr30k corpus by text, by image, and by caption from one vector(512) column on Neon Postgres with Lakebase Search.
+subtitle: Search a Flickr30k corpus by text, by image, and by caption from one vector(512) column on Lakebase Postgres with Lakebase Search.
 ---
 
 What if you tried to expand beyond the usual image search demos where you embed a few thousand photos, a text query, and then run `order by embedding <=> $1 limit 20` to display results? As the data corpus grows, the HNSW index builds that [stretch into hours on tens of millions of vectors](https://github.com/pgvector/pgvector/issues/807) become a common complaint in such setups.
 
 This is where [Lakebase Search](https://docs.databricks.com/aws/en/oltp/projects/lakebase-search) gets fun. Its `lakebase_ann` index uses IVF partitioning with RaBitQ quantisation instead of a graph, so it builds 50 to 100 times faster than HNSW on the same data. This guide searches a Flickr30k corpus three ways from one `vector(512)` column: by a phrase, by another photo, and by caption. The captions also get a BM25 index, so you can read a semantic ranking against a keyword one, plus a fourth shape, a radius scan, that pgvector cannot serve from an index.
 
-You will use Neon Postgres, the `lakebase_vector` and `lakebase_text` extensions, CLIP through transformers.js, and the [nlphuji/flickr30k](https://huggingface.co/datasets/nlphuji/flickr30k) dataset.
+You will use Lakebase Postgres, the `lakebase_vector` and `lakebase_text` extensions, CLIP through transformers.js, and the [nlphuji/flickr30k](https://huggingface.co/datasets/nlphuji/flickr30k) dataset.
 
 ## Demo
 

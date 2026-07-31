@@ -1,10 +1,10 @@
 ---
-title: Scale your .NET application with Entity Framework and Neon Postgres Read Replicas
-subtitle: Learn how to scale .NET applications with Entity Framework's DbContext and Neon Postgres Read Replicas
+title: Scale your .NET application with Entity Framework and Lakebase Postgres Read Replicas
+subtitle: Learn how to scale .NET applications with Entity Framework's DbContext and Lakebase Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-13T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that perform read operations on the same data as your primary read-write compute. A key advantage of Neon's architecture is that adding a read replica to a Neon project doesn't require additional storage, making it an efficient scaling solution.

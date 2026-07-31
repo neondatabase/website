@@ -1,10 +1,10 @@
 ---
-title: Scale your Laravel application with Neon Postgres Read Replicas
-subtitle: Learn how to scale Laravel applications with Neon Postgres Read Replicas
+title: Scale your Laravel application with Lakebase Postgres Read Replicas
+subtitle: Learn how to scale Laravel applications with Lakebase Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2025-12-03T12:37:52.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 ## Introduction
@@ -351,7 +351,7 @@ This automatic routing happens transparently, allowing you to scale your applica
 You can find the source code for the application described in this guide on GitHub.
 <DetailIconCards>
 <a href="https://github.com/dhanushreddy291/neon-read-replica-laravel" description="
-Learn how to scale Laravel applications with Neon Postgres Read Replicas" icon="github">Use read replicas with Laravel</a>
+Learn how to scale Laravel applications with Lakebase Postgres Read Replicas" icon="github">Use read replicas with Laravel</a>
 </DetailIconCards>
 
 ## Conclusion

@@ -1,10 +1,10 @@
 ---
-title: Automate Database Branching with Alchemy and Neon Postgres
+title: Automate Database Branching with Alchemy and Lakebase Postgres
 subtitle: Learn how to use Alchemy Infrastructure-as-Code to programmatically create and manage Neon database branches
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-10T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Database branching is one of Neon's most powerful features, letting you create isolated database copies in seconds.

@@ -1,10 +1,10 @@
 ---
-title: Using Strapi CMS with Neon Postgres and Astro to build a blog
+title: Using Strapi CMS with Lakebase Postgres and Astro to build a blog
 subtitle: A step-by-step guide for building your own blog in an Astro application with Strapi CMS and Postgres powered by Neon
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-06T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 In this guide, you will learn how to set up a serverless Postgres database with Neon, configure Strapi CMS with Postgres, define a blog schema, and author content using Strapi CMS. The guide also covers configuring API read permissions and building a dynamic frontend with Astro to display blog pages based on Strapi content.
@@ -84,7 +84,7 @@ cd blog-api
 yarn develop
 ```
 
-The command `strapi develop` runs, which takes care of creating the minimal schema required by Strapi CMS in the Neon Postgres database. When the setup is complete, you will be taken to `http://localhost:1337/admin` automatically. You will need to create an account for your locally hosted Strapi CMS instance. Strapi CMS makes sure to store the credentials (and all other data) in your Neon Postgres database.
+The command `strapi develop` runs, which takes care of creating the minimal schema required by Strapi CMS in the Lakebase Postgres database. When the setup is complete, you will be taken to `http://localhost:1337/admin` automatically. You will need to create an account for your locally hosted Strapi CMS instance. Strapi CMS makes sure to store the credentials (and all other data) in your Lakebase Postgres database.
 
 ![](/guides/images/strapi-cms/52fbde59-04bd-4af0-9e85-5bb33694d7a5.png)
 

@@ -1,15 +1,15 @@
 ---
-title: Distributed hyperparameter tuning with Optuna, Neon Postgres, and Kubernetes
-subtitle: Use Neon Postgres to orchestrate multi-node hyperparameter tuning for your scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras models on a Kubernetes cluster
+title: Distributed hyperparameter tuning with Optuna, Lakebase Postgres, and Kubernetes
+subtitle: Use Lakebase Postgres to orchestrate multi-node hyperparameter tuning for your scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras models on a Kubernetes cluster
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-28T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 In this guide, you'll learn how to set up distributed hyperparameter tuning for machine learning models across multiple nodes using Kubernetes. You'll use Optuna, a bayesian optimization library, to fine-tune models built with popular libraries like scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras.
 
-To orchestrate all the trials, you'll use Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway. The combination of Neon Postgres, Kubernetes, and Docker allows for scalable, distributed hyperparameter tuning, simplifying the orchestration and management of complex machine learning workflows.
+To orchestrate all the trials, you'll use Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway. The combination of Lakebase Postgres, Kubernetes, and Docker allows for scalable, distributed hyperparameter tuning, simplifying the orchestration and management of complex machine learning workflows.
 
 ## Prerequisites
 
@@ -27,17 +27,17 @@ Hyperparameters are essential to machine learning model performance. Unlike para
 
 Bayesian optimization offers an efficient method for hyperparameter tuning. Unlike traditional approaches like grid or random search, Bayesian optimization builds a probabilistic model of the objective function to help it sample which hyperparameters to test next, which reduces the number of experiments needed, saving time and compute.
 
-Distributing hyperparameter tuning across multiple nodes allows each trial to run independently on its own machine, enabling multiple configurations to be tested simultaneously and speeding up the search process. However, these nodes need to be coordinated, and a serverless database like Neon Postgres is perfect. Neon offers a pay-as-you-go model that minimizes costs during idle periods,but scales when the workload demands it. This database will maintain the state of the hyperparameter tuning process, storing the results of each trial and coordinating the distribution of new trials to available nodes.
+Distributing hyperparameter tuning across multiple nodes allows each trial to run independently on its own machine, enabling multiple configurations to be tested simultaneously and speeding up the search process. However, these nodes need to be coordinated, and a serverless database like Lakebase Postgres is perfect. Neon offers a pay-as-you-go model that minimizes costs during idle periods,but scales when the workload demands it. This database will maintain the state of the hyperparameter tuning process, storing the results of each trial and coordinating the distribution of new trials to available nodes.
 
 These nodes are managed using Kubernetes, a container orchestration platform, which enables the same task to run concurrently across multiple nodes, allowing each node to handle a separate trial independently. It can also manage resources per node, and reboot nodes that fail, allowing for a fault tolerant training process.
 
-In this guide, you will combine Optuna, Kubernetes, and Neon Postgres to create a scalable and cost-effective system for distributed tuning of your PyTorch, TensorFlow/Keras, scikit-learn, and XGBoost models.
+In this guide, you will combine Optuna, Kubernetes, and Lakebase Postgres to create a scalable and cost-effective system for distributed tuning of your PyTorch, TensorFlow/Keras, scikit-learn, and XGBoost models.
 
 ## Hyperparameter Tuning
 
 Optuna organizes hyperparameter tuning into studies, which are collections of trials. A study represents a single optimization run, and each trial within the study corresponds to a set of hyperparameters to be evaluated. Optuna uses a study to manage the optimization process, keeping track of the trials, their results, and the best hyperparameters found so far.
 
-When you create a study, you can specify various parameters like the study name, the direction of optimization (minimize or maximize), and the storage backend. The storage backend is where Optuna stores the study data, including the trials and their results. By using a persistent storage backend like Neon Postgres, you can save the state of the optimization process, allowing all nodes to access the same study and coordinate the tuning process.
+When you create a study, you can specify various parameters like the study name, the direction of optimization (minimize or maximize), and the storage backend. The storage backend is where Optuna stores the study data, including the trials and their results. By using a persistent storage backend like Lakebase Postgres, you can save the state of the optimization process, allowing all nodes to access the same study and coordinate the tuning process.
 
 A study is created like so :
 
@@ -413,7 +413,7 @@ Note the `eval "$(minikube docker-env)"` command, which sets the Docker environm
 
 To submit jobs to the Kubernetes cluster, you'll need to create a Kubernetes manifest file. This file describes the task you want to run, including the container image, command, and environment variables. You can define the number of parallel jobs to run and the restart policy for the job.
 
-To allow the Job to access the Neon Postgres database, you'll need to create a Kubernetes Secret containing the database credentials. You can create the secret from a `.env` file containing the database URL like so:
+To allow the Job to access the Lakebase Postgres database, you'll need to create a Kubernetes Secret containing the database credentials. You can create the secret from a `.env` file containing the database URL like so:
 
 ```bash
 kubectl create secret generic optuna-postgres-secrets --from-env-file=.env
@@ -457,7 +457,7 @@ spec:
                 name: optuna-postgres-secrets
 ```
 
-Here, the manifest tells Kubernetes to launch 3 parallel jobs, each running the `hyperparam_optimization.py` script inside the Docker container, and if the job fails, Kubernetes will restart it automatically. The `envFrom` field specifies that the Job should use the `optuna-postgres-secrets` secret you just created to access the Neon Postgres database.
+Here, the manifest tells Kubernetes to launch 3 parallel jobs, each running the `hyperparam_optimization.py` script inside the Docker container, and if the job fails, Kubernetes will restart it automatically. The `envFrom` field specifies that the Job should use the `optuna-postgres-secrets` secret you just created to access the Lakebase Postgres database.
 
 Finally, you can submit the Job to the Kubernetes cluster using the following command:
 
@@ -513,6 +513,6 @@ In the stern logs, you can see the pod getting removed, and a new pod being crea
 
 ## Conclusion
 
-Now, you have successfully set up distributed hyperparameter tuning using Optuna, Neon Postgres, and Kubernetes. By leveraging Kubernetes to manage multiple nodes running hyperparameter tuning jobs, you can speed up the optimization process and find the best hyperparameters for your machine learning models more efficiently. This kind of task, which sees bursts of database activity followed by long periods of inactivity, is well-suited to a serverless database like Neon Postgres, which can scale dynamically to any workload, then back to zero.
+Now, you have successfully set up distributed hyperparameter tuning using Optuna, Lakebase Postgres, and Kubernetes. By leveraging Kubernetes to manage multiple nodes running hyperparameter tuning jobs, you can speed up the optimization process and find the best hyperparameters for your machine learning models more efficiently. This kind of task, which sees bursts of database activity followed by long periods of inactivity, is well-suited to a serverless database like Lakebase Postgres, which can scale dynamically to any workload, then back to zero.
 
 To take this to the next step, you can leverage cloud Kubernetes services like Azure Kubernetes Service (AKS) or Amazon Elastic Kubernetes Service (EKS). These services offer managed Kubernetes clusters that can scale to hundreds of nodes to run your jobs at scale. You can also integrate with cloud storage services like Azure Blob Storage or Amazon S3 to store your training data and model checkpoints, making it easier to manage large datasets and distributed training workflows.

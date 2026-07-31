@@ -1,15 +1,15 @@
 ---
-title: Using GORM with Neon Postgres
+title: Using GORM with Lakebase Postgres
 subtitle: Learn how to use GORM, Go's most popular ORM, with Neon's serverless Postgres for efficient database operations
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-15T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 [GORM](https://gorm.io/) is Go's most popular ORM library, providing a developer-friendly interface to interact with databases. When combined with Neon's serverless Postgres, it creates a great foundation for building scalable Go applications with minimal database management overhead.
 
-This guide walks you through the process of integrating GORM with Neon Postgres, we will cover everything that you need to know to get started with GORM and Neon Postgres.
+This guide walks you through the process of integrating GORM with Lakebase Postgres, we will cover everything that you need to know to get started with GORM and Lakebase Postgres.
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ These commands fetch the latest versions of the packages and add them to your pr
 
 ### Basic Connection Setup
 
-Now let's establish a connection to your Neon Postgres database using GORM. This is an essential step that initializes the database connection that we'll use throughout our application.
+Now let's establish a connection to your Lakebase Postgres database using GORM. This is an essential step that initializes the database connection that we'll use throughout our application.
 
 Create a new file named `main.go` with the following code:
 
@@ -944,7 +944,7 @@ Save this code in a file named `main.go`, run `go mod tidy` to download the nece
 
 ## Conclusion
 
-GORM with Neon Postgres provides a great combination for building scalable Go applications. GORM's developer-friendly API simplifies database interactions, while Neon's serverless architecture ensures your database scales according to demand.
+GORM with Lakebase Postgres provides a great combination for building scalable Go applications. GORM's developer-friendly API simplifies database interactions, while Neon's serverless architecture ensures your database scales according to demand.
 
 By following the steps in this guide, you can build robust applications that efficiently interact with your Neon database. As your application grows, you can leverage additional GORM features such as plugins, hooks, and more advanced querying techniques to meet your evolving needs.
 

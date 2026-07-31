@@ -4,7 +4,7 @@ subtitle: Learn how to implement and optimize soft deletes in Laravel for improv
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-20T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Laravel is a PHP framework that offers a lot of features to simplify database operations. One such feature is soft deletes, which allows you to "delete" records without actually removing them from your database.
@@ -31,7 +31,7 @@ When enabling soft deletes, you essentially add a `deleted_at` timestamp to your
 3. Implement data archiving strategies.
 4. Comply with data retention policies.
 
-Let's explore how to implement soft deletes in Laravel along with Neon Postgres.
+Let's explore how to implement soft deletes in Laravel along with Lakebase Postgres.
 
 ## Setting up the Project
 
@@ -514,12 +514,12 @@ This test verifies that force deleting a post removes it entirely from the datab
 
 Laravel's soft delete feature provides a way to manage data deletion without losing valuable information. By using soft deletes, you can improve your application's data integrity and provide features like data recovery or undo functionality to your users.
 
-Consider the performance implications of soft deletes, especially when working with large datasets. Utilize Neon Postgres's capabilities, such as [indexing](/docs/postgresql/index-types) and [table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html), to maintain high performance as your application scales.
+Consider the performance implications of soft deletes, especially when working with large datasets. Utilize Lakebase Postgres's capabilities, such as [indexing](/docs/postgresql/index-types) and [table partitioning](https://www.postgresql.org/docs/current/ddl-partitioning.html), to maintain high performance as your application scales.
 
 When implementing soft deletes, always think about the lifecycle of your data. Plan on implementing policies for permanent deletion of old soft-deleted records to manage database growth optimally and comply with data retention regulations.
 
 ## Additional Resources
 
 - [Laravel Documentation on Soft Deletes](https://laravel.com/docs/eloquent#soft-deleting)
-- [Neon Postgres Documentation](/docs)
+- [Lakebase Postgres Documentation](/docs)
 - [Laravel Eloquent Performance Tips](https://laravel.com/docs/eloquent-relationships#eager-loading)

@@ -4,7 +4,7 @@ subtitle: How to use row-level security for multi-tenant apps, understand its ch
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-05-02T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 If you are building a multi-tenant app on Postgres, [row level security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) sounds like a clean promise, i.e. define access rules once in the database, and every query becomes safe by default. It is a compelling idea, especially when you have many tables, many endpoints, and many ways the same data can be accessed. But RLS is not "turn it on and forget it". It changes how your application authenticates, how your queries are shaped, how you debug production issues, and how confident you can be that a new feature did not pass through your data boundary.
@@ -171,7 +171,7 @@ Neon cannot write correct policies for you. What it can do is give you a **produ
 
 [Neon Branching](/docs/introduction/branching) lets you create an isolated copy of your current Postgres database quickly, including all schema, data, and system tables, without affecting production. Each [branch](/docs/manage/branches) is a fully functional database endpoint that you can connect to independently, making it practical to test schema changes, migrations, or RLS policy updates in a safe, production-like environment.
 
-[Managed Better Auth](/docs/auth/overview) is a managed auth layer built on Better Auth. Users, sessions, and related config live in your Neon Postgres (including the `neon_auth` schema). When you create a database branch, that identity data is copied along with your application tables, so policies that join to users, org membership, or tenant rows behave like production instead of hand-written mocks.
+[Managed Better Auth](/docs/auth/overview) is a managed auth layer built on Better Auth. Users, sessions, and related config live in your Lakebase Postgres (including the `neon_auth` schema). When you create a database branch, that identity data is copied along with your application tables, so policies that join to users, org membership, or tenant rows behave like production instead of hand-written mocks.
 
 Here’s how you can use branching and auth to safely test RLS before pushing changes to production:
 

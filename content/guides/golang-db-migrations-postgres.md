@@ -4,12 +4,12 @@ subtitle: Learn how to manage database schema changes in Go applications using N
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Database migrations are essential for managing schema evolution in applications as they grow and change over time. When working with Go applications and Neon's serverless Postgres, implementing a good migration strategy allows you to have smooth deployments and database changes without disruption.
 
-This guide will walk you through implementing and managing database migrations for Go applications using Neon Postgres, covering everything from basic concepts to advanced production deployment strategies.
+This guide will walk you through implementing and managing database migrations for Go applications using Lakebase Postgres, covering everything from basic concepts to advanced production deployment strategies.
 
 ## Prerequisites
 
@@ -61,7 +61,7 @@ While we'll focus on golang-migrate in this guide, other notable migration tools
 
 ## Setting Up golang-migrate
 
-Let's set up golang-migrate to work with your Neon Postgres database. It can be used both from the command line and programmatically within your Go code. We'll cover both approaches in this guide.
+Let's set up golang-migrate to work with your Lakebase Postgres database. It can be used both from the command line and programmatically within your Go code. We'll cover both approaches in this guide.
 
 Let's start by installing the golang-migrate CLI.
 
@@ -164,7 +164,7 @@ A few important points about this migration:
 
 Notice how the down migration drops objects in reverse order compared to how they were created in the up migration. This is important to avoid dependency issues when rolling back.
 
-## Connecting to Neon Postgres
+## Connecting to Lakebase Postgres
 
 To run migrations against your Neon database, you'll need to construct a proper connection string. Neon provides a secure, TLS-enabled connection:
 
@@ -331,7 +331,7 @@ This migration shows a few common patterns:
 
 ## Best Practices for Migrations
 
-When working with migrations in Go applications and Neon Postgres, follow these best practices:
+When working with migrations in Go applications and Lakebase Postgres, follow these best practices:
 
 ### 1. Keep Migrations Small and Focused
 
@@ -615,7 +615,7 @@ func GetDatabaseURL() string {
 
 ## Conclusion
 
-Database migrations are a critical part of managing application evolution. When working with Go applications and Neon Postgres, a well-implemented migration strategy ensures that your schema changes are version-controlled and applied consistently across environments.
+Database migrations are a critical part of managing application evolution. When working with Go applications and Lakebase Postgres, a well-implemented migration strategy ensures that your schema changes are version-controlled and applied consistently across environments.
 
 The combination of Go's strong tooling, the flexibility of golang-migrate, and Neon's powerful Postgres capabilities provides an excellent foundation for managing database schema changes throughout your application's lifecycle.
 

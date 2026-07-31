@@ -1,10 +1,10 @@
 ---
-title: Building a High-Performance API with FastAPI, Pydantic, and Neon Postgres
+title: Building a High-Performance API with FastAPI, Pydantic, and Lakebase Postgres
 subtitle: Learn how to create an API for managing a tech conference system using FastAPI, Pydantic for data validation, and Neon's serverless Postgres for data storage
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2026-03-03T03:19:43.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 FastAPI is a high-performance Python web framework for building APIs quickly and efficiently.
@@ -77,7 +77,7 @@ pip freeze > requirements.txt
 
 This will create a `requirements.txt` file with all the installed packages in your virtual environment and their versions. This is useful for sharing your project with others or deploying it to a server.
 
-## Connecting to Neon Postgres
+## Connecting to Lakebase Postgres
 
 First, let's set up our database connection. Create a `.env` file in your project root:
 
@@ -390,11 +390,11 @@ You need to make sure that your `.env` file is not included in the Docker image.
 
 ## Conclusion
 
-In this guide, we've built a simple API for managing a tech conference system using FastAPI, Pydantic, and Neon Postgres.
+In this guide, we've built a simple API for managing a tech conference system using FastAPI, Pydantic, and Lakebase Postgres.
 
 This combination provides a very good foundation for building scalable and efficient web services. FastAPI's speed and ease of use, combined with Pydantic's powerful data validation and Neon's serverless Postgres, make for a formidable tech stack.
 
-As a next step, you can extend the API with more features like authentication, authorization, and advanced query capabilities. You can check out the [Implementing Secure User Authentication in FastAPI using JWT Tokens and Neon Postgres](/guides/fastapi-jwt) guide for adding JWT-based authentication to your API.
+As a next step, you can extend the API with more features like authentication, authorization, and advanced query capabilities. You can check out the [Implementing Secure User Authentication in FastAPI using JWT Tokens and Lakebase Postgres](/guides/fastapi-jwt) guide for adding JWT-based authentication to your API.
 
 ## Additional Resources
 

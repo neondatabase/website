@@ -1,10 +1,10 @@
 ---
-title: Building an API with Django, Django REST Framework, and Neon Postgres
+title: Building an API with Django, Django REST Framework, and Lakebase Postgres
 subtitle: Learn how to create a robust RESTful API for an AI Model Marketplace using Django, Django REST Framework, and Neon's serverless Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Django is one of the most popular Python web frameworks for building web applications and APIs. Django REST Framework extends Django to provide powerful tools for building RESTful APIs quickly and efficiently based on your Django models with minimal code.
@@ -42,7 +42,7 @@ Now, let's install the necessary packages:
 pip install django djangorestframework psycopg2-binary python-dotenv
 ```
 
-This command installs Django, Django REST Framework, the PostgreSQL adapter for Python, and a package to manage environment variables. We'll use Django for the web framework, DRF for building the API, and psycopg2-binary to connect to the Neon Postgres database.
+This command installs Django, Django REST Framework, the PostgreSQL adapter for Python, and a package to manage environment variables. We'll use Django for the web framework, DRF for building the API, and psycopg2-binary to connect to the Lakebase Postgres database.
 
 ### Create a new Django project
 

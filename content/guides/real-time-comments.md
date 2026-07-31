@@ -2,12 +2,12 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2025-01-07T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 title: Building Real-Time Comments with a Serverless Postgres
 subtitle: A guide to building your own real-time comments in a Next.js application with Ably LiveSync and Postgres.
 ---
 
-Can a serverless Postgres database really handle the demands of a real-time application? The answer lies in pairing it with the right publish-subscribe model. In this guide, you will learn how to combine the real-time capabilities of Ably LiveSync with the structured power of Neon Postgres to build a optimistic and scalable comment system in your Next.js application.
+Can a serverless Postgres database really handle the demands of a real-time application? The answer lies in pairing it with the right publish-subscribe model. In this guide, you will learn how to combine the real-time capabilities of Ably LiveSync with the structured power of Lakebase Postgres to build a optimistic and scalable comment system in your Next.js application.
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` 
 
 Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
 
-## Set up Ably LiveSync with Neon Postgres
+## Set up Ably LiveSync with Lakebase Postgres
 
 Sign in into the [Ably Dashboard](https://ably.com/login), and click on `+ Create new app`.
 
@@ -124,7 +124,7 @@ prepare();
 
 The code above defines a function that connects to a Neon serverless Postgres database using a `DATABASE_URL` environment variable and sets up the necessary schema for the real-time application. It creates two tables, `nodes` and `outbox`, to store data and manage message processing, respectively. A trigger function, `outbox_notify`, is implemented to send notifications using `pg_notify` whenever new rows are inserted into the `outbox` table. This ensures the database is ready for real-time updates and WebSocket-based communication.
 
-To run the schema against your Neon Postgres, execute the following command:
+To run the schema against your Lakebase Postgres, execute the following command:
 
 ```
 npm run db
@@ -132,7 +132,7 @@ npm run db
 
 If it runs successfully, you should see `Database schema set up successfully.` in the terminal.
 
-## Set up Prisma for Neon Postgres
+## Set up Prisma for Lakebase Postgres
 
 In the directory `lib/prisma`, you would see the following code in `index.ts` file:
 
@@ -162,7 +162,7 @@ if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 export default prisma;
 ```
 
-The code above sets up a Prisma client for Neon Postgres. It configures the Neon database connection using the `@neondatabase/serverless` library, with WebSocket and `fetch` support to execute queries. A global `prisma` instance is created using the `PrismaNeon` adapter, ensuring reuse in development to avoid multiple instances. Finally, the configured `prisma` client is exported for use throughout the application.
+The code above sets up a Prisma client for Lakebase Postgres. It configures the Neon database connection using the `@neondatabase/serverless` library, with WebSocket and `fetch` support to execute queries. A global `prisma` instance is created using the `PrismaNeon` adapter, ensuring reuse in development to avoid multiple instances. Finally, the configured `prisma` client is exported for use throughout the application.
 
 In the same directory, you would see the following code in the `api.ts` file:
 
@@ -647,6 +647,6 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 ## Summary
 
-In this guide, you learned how to build a real-time comment system for a Next.js application by integrating Ably LiveSync with a serverless Neon Postgres database. The tutorial covered setting up the database schema, configuring Prisma for streamlined database access, and implementing Ably for real-time updates. You also explored how to handle optimistic updates, ensure data synchronization, and deploy the application to Vercel.
+In this guide, you learned how to build a real-time comment system for a Next.js application by integrating Ably LiveSync with a serverless Lakebase Postgres database. The tutorial covered setting up the database schema, configuring Prisma for streamlined database access, and implementing Ably for real-time updates. You also explored how to handle optimistic updates, ensure data synchronization, and deploy the application to Vercel.
 
 <NeedHelp />

@@ -4,7 +4,7 @@ subtitle: 'How AI agents can provision infrastructure and build real application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-15T00:00:00.000Z'
-updatedOn: '2026-05-15T06:36:44.402Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 AI has made writing code insanely easy, but all the tiny setup tasks around it still kill your momentum.
@@ -41,12 +41,12 @@ This guide uses **OpenCode** as the primary example because its shareable chat s
 
 ## What you will build
 
-To demonstrate this, you will build an **AI-powered Travel Concierge app**. Users will enter a destination, travel dates, budget, and interests. The app will scrape recent travel data, use an LLM to generate a personalized itinerary, and save the trip to a Neon Postgres database so it can be shared via a public link.
+To demonstrate this, you will build an **AI-powered Travel Concierge app**. Users will enter a destination, travel dates, budget, and interests. The app will scrape recent travel data, use an LLM to generate a personalized itinerary, and save the trip to a Lakebase Postgres database so it can be shared via a public link.
 
 **The Stack:**
 
 - **Frontend and API:** Next.js
-- **Database:** Neon Postgres
+- **Database:** Lakebase Postgres
 - **LLM Provider:** OpenRouter
 - **Data Gathering:** Firecrawl
 - **Deployment:** Vercel
@@ -269,7 +269,7 @@ That means you can focus entirely on what you want to build, while your AI assis
 
 - [Projects.dev Provider Directory](https://projects.dev/providers)
 - [Stripe Projects CLI Documentation](https://docs.stripe.com/cli)
-- [Neon Postgres](/docs/introduction/about)
+- [Lakebase Postgres](/docs/introduction/about)
 - [OpenCode](https://opencode.ai/)
 - [Agent Skills](https://github.com/agentskills/agentskills)
 
