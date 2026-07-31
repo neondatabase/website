@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?"
-description: "Neon provides a serverless Postgres database. It autoscales automatically. Compute scales to zero during inactivity. This consumption model charges deve..."
+description: "Neon provides a Lakebase Postgres database. It autoscales automatically. Compute scales to zero during inactivity. This consumption model charges deve..."
 date: 2026-04-24
 slug: managed-postgres-services-pay-active-compute
 category: FAQ

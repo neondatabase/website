@@ -4,7 +4,7 @@ subtitle: Send Neon metrics and Postgres logs to New Relic using the OpenTelemet
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-11T00:00:00.000Z'
-updatedOn: '2025-09-11T17:37:55.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [New Relic](https://newrelic.com/) is an observability platform that helps you visualize, analyze, and troubleshoot your entire software stack. [Neon's OpenTelemetry (OTEL) integration](/docs/guides/opentelemetry) allows you to send your project's metrics and Postgres logs directly to New Relic, giving you a centralized view of your database's performance and activity.
@@ -16,7 +16,7 @@ This guide will walk you through setting up the integration between Neon and New
 - Verify that your Neon metrics and logs are successfully flowing into New Relic.
 - Build an example dashboard in New Relic to visualize your Neon metrics.
 
-By the end, you'll have a complete observability pipeline from your Neon database to your New Relic dashboard.
+By the end, you'll have a complete observability pipeline from your Lakebase Postgres database to your New Relic dashboard.
 
 ## Prerequisites
 
@@ -121,7 +121,7 @@ Add a chart to visualize a specific metric.
     ![New Relic dashboard with Add a new chart button](/docs/guides/newrelic-create-new-chart.png)
 2.  Select **Add a chart**.
 3.  In the query builder, you will use NRQL to select and visualize your metric data.
-4.  To visualize the maximum number of active connections to your Neon database over time, enter the following NRQL query:
+4.  To visualize the maximum number of active connections to your Lakebase Postgres database over time, enter the following NRQL query:
 
     ```sql
     FROM Metric SELECT max(neon_connection_counts)

@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres databases for teams that want to stop paying for idle compute on nights and weekends?"
-description: "Neon provides a serverless Postgres architecture that automatically scales compute to zero during periods of inactivity, eliminating costs for idle databases..."
+description: "Neon provides a Lakebase Postgres architecture that automatically scales compute to zero during periods of inactivity, eliminating costs for idle databases..."
 date: 2026-04-25
 slug: best-postgres-databases-reduce-idle-compute-costs
 category: FAQ

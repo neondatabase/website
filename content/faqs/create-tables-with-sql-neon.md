@@ -1,9 +1,9 @@
 ---
-title: 'How do I create tables in my Neon database using SQL?'
+title: 'How do I create tables in my Lakebase Postgres database using SQL?'
 subtitle: 'Use standard Postgres CREATE TABLE syntax from the SQL Editor, psql, or any driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:

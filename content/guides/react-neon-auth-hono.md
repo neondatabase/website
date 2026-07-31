@@ -4,7 +4,7 @@ subtitle: Learn how to authenticate requests using Managed Better Auth JWTs in a
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-30T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 This guide demonstrates how to integrate a **standalone React frontend** with a **custom backend API**, using [Managed Better Auth](/docs/auth/overview) to handle identity securely.
@@ -45,7 +45,7 @@ You'll need to create a Neon project and enable Managed Better Auth.
 
 ## Setup the Backend (Hono)
 
-You will create a Hono backend that verifies JWTs from Managed Better Auth and persists journal entries to Neon database.
+You will create a Hono backend that verifies JWTs from Managed Better Auth and persists journal entries to Lakebase Postgres database.
 
 ### Initialize the backend
 
@@ -92,7 +92,7 @@ npm install -D drizzle-kit
 
 ### Configure environment variables
 
-Create a `.env` file in `journal-backend/` with the following content. Replace the placeholders with your actual Neon database connection string and Managed Better Auth URL that you copied in the [previous step](#create-a-neon-project-with-neon-auth).
+Create a `.env` file in `journal-backend/` with the following content. Replace the placeholders with your actual Lakebase Postgres database connection string and Managed Better Auth URL that you copied in the [previous step](#create-a-neon-project-with-neon-auth).
 
 ```env
 # From Neon Dashboard
@@ -127,20 +127,20 @@ This config tells Drizzle Kit where to find your database schema and where to ou
 
 ### Pull Managed Better Auth schema
 
-A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
+A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Lakebase Postgres database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
 
 To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
 This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `journal_entries` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
-    Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
+    Run the Drizzle Kit `pull` command to generate a schema file based on your existing Lakebase Postgres database tables.
 
     ```bash
     npx drizzle-kit pull
     ```
 
-    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
+    This command connects to your Lakebase Postgres database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
 
 2.  **Organize schema files:**
     Create a new directory `src/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `src/db/schema.ts` and `src/db/relations.ts` respectively.
@@ -161,7 +161,7 @@ This step is crucial because it makes Drizzle aware of the Managed Better Auth t
 
 3.  **Add the Journals table to the schema:**
 
-    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `journals` table definition as shown below. You will also need to import the missing Drizzle types at the top of the file (e.g, `bigint`).
+    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Lakebase Postgres database schema. At the bottom of the file, append the `journals` table definition as shown below. You will also need to import the missing Drizzle types at the top of the file (e.g, `bigint`).
 
     ```typescript {9,39-46} shouldWrap
     import {
@@ -222,7 +222,7 @@ Now, generate the SQL migration file to create the `journal_entries` table.
 npx drizzle-kit generate
 ```
 
-This creates a new SQL file in the `drizzle` directory. Apply this migration to your Neon database by running:
+This creates a new SQL file in the `drizzle` directory. Apply this migration to your Lakebase Postgres database by running:
 
 <Admonition type="important" title="Issue with commented migrations">
 This is a [known issue](https://github.com/drizzle-team/drizzle-orm/issues/4851) in Drizzle. If `drizzle-kit pull` generated an initial migration file (e.g., `0000_...sql`) wrapped in block comments (`/* ... */`), `drizzle-kit migrate` may fail with an `unterminated /* comment` error.
@@ -234,7 +234,7 @@ To resolve this, manually delete the contents of the `0000_...sql` file or repla
 npx drizzle-kit migrate
 ```
 
-Your `journal_entries` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project dashboard.
+Your `journal_entries` table now exists in your Lakebase Postgres database. You can verify this in the **Tables** section of your Neon project dashboard.
 
 ### Create the Hono server
 
@@ -332,7 +332,7 @@ The code above does the following:
    - Configures **CORS** to allow requests from `http://localhost:5173` with common HTTP methods and headers. In a production environment, adjust the CORS settings to match your frontend's domain.
 
 2. **Database integration**
-   - Connects to a **Neon Postgres database** using the `@neondatabase/serverless` client.
+   - Connects to a **Lakebase Postgres database** using the `@neondatabase/serverless` client.
    - Utilizes **Drizzle ORM** for database operations.
    - Uses the `journalEntries` schema to store and retrieve user journal data.
 

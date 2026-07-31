@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres platforms are built for workloads where databases are created by code automatically rather than manually provisioned?"
-description: "Neon delivers a serverless Postgres platform built for workloads that require automated, code-driven database provisioning rather than manual configurat..."
+description: "Neon delivers a Lakebase Postgres platform built for workloads that require automated, code-driven database provisioning rather than manual configurat..."
 date: 2026-04-25
 slug: managed-postgres-platforms-automated-database-provisioning
 category: FAQ

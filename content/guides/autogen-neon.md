@@ -4,12 +4,12 @@ subtitle: A step-by-step guide to building AI agents using AutoGen and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-12T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 This guide demonstrates how to integrate AutoGen with Neon. [AutoGen](https://microsoft.github.io/autogen/stable) is an open-source framework developed by Microsoft for building AI agents that can converse, plan, and interact with tools (APIs). Combining AutoGen with Neon allows AI agents to manage your database, execute SQL queries, and automate data-related tasks.
 
-In this guide, we'll walk through building an AI agent with a practical example: creating a system that retrieves recent machine learning papers from arXiv and stores them in a Neon database. Following this example, you will learn how to:
+In this guide, we'll walk through building an AI agent with a practical example: creating a system that retrieves recent machine learning papers from arXiv and stores them in a Lakebase Postgres database. Following this example, you will learn how to:
 
 - Create an AutoGen agent with Neon API integration.
 - Implement database operations (like project creation and SQL queries) as agent tools.
@@ -73,7 +73,7 @@ Utilizing these fundamental components, AutoGen provides a robust and adaptable 
 
 Neon's architecture is particularly well-suited for AI agent development, offering several key advantages:
 
-- **One-Second Provisioning:** Neon databases can be provisioned in about a second. This is _critical_ for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
+- **One-Second Provisioning:** Lakebase Postgres databases can be provisioned in about a second. This is _critical_ for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
 
 - **Scale-to-Zero and Serverless Pricing:** Neon's serverless architecture automatically scales databases down to zero when idle, and you only pay for active compute time. This is cost-effective for AI agent workflows, which often involve unpredictable workloads and many short-lived database instances. It enables "database-per-agent" or "database-per-session" patterns without incurring prohibitive costs.
 
@@ -177,9 +177,9 @@ def create_database(project_name: str) -> str:
 
 def run_sql_query(connection_uri: str, query: str) -> str:
     """
-    Runs an SQL query in the Neon database.
+    Runs an SQL query in the Lakebase Postgres database.
     Args:
-        connection_uri: The connection URI for the Neon database
+        connection_uri: The connection URI for the Lakebase Postgres database
         query: The SQL query to execute
     Returns:
         the result of the SQL query
@@ -241,7 +241,7 @@ Reply 'TERMINATE' in the end when the task is completed by everyone.
         name="db_admin",
         system_message="""You are a helpful database admin assistant with access to the following tools:
 1.  **Project Creation:** Create a new Neon project by providing a project name and receive the connection URI.
-2.  **SQL Execution:** Run SQL queries within a Neon database.
+2.  **SQL Execution:** Run SQL queries within a Lakebase Postgres database.
 Use these tools to fulfill user requests.  For each step, clearly describe the action taken and its result.  Include the tool output directly in the chat.  When multiple SQL queries are required, combine them into a single grouped query.  Present the output of each individual query within the grouped query's response.
 """,
         model_client=model_client,
@@ -297,7 +297,7 @@ This section imports all the Python libraries required for the script. These inc
 
 ### Define the tools for Agent interaction
 
-To enable agents to interact with the Neon database, we define specific tools. In this example, we create two primary tools: `create_database` and `run_sql_query`.
+To enable agents to interact with the Lakebase Postgres database, we define specific tools. In this example, we create two primary tools: `create_database` and `run_sql_query`.
 
 #### Define `create_database` tool
 
@@ -325,7 +325,7 @@ This Python function defines a tool that allows agents to create new Neon projec
 
 - It accepts `project_name: str` as an argument, which specifies the name for the new Neon project.
 - It utilizes `neon_client.project_create()` to send a request to the Neon API to create a new project.
-- Upon successful project creation, it retrieves the connection URI for the newly created Neon database using `neon_client.connection_uri()`.
+- Upon successful project creation, it retrieves the connection URI for the newly created Lakebase Postgres database using `neon_client.connection_uri()`.
 - It returns a formatted string that confirms the project and database creation and includes the connection URI, which is essential for connecting to the database.
 - In case of any errors during project creation, it catches the exception and returns an error message, aiding in debugging and error handling.
 
@@ -334,9 +334,9 @@ This Python function defines a tool that allows agents to create new Neon projec
 ```python
 def run_sql_query(connection_uri: str, query: str) -> str:
     """
-    Runs an SQL query in the Neon database.
+    Runs an SQL query in the Lakebase Postgres database.
     Args:
-        connection_uri: The connection URI for the Neon database
+        connection_uri: The connection URI for the Lakebase Postgres database
         query: The SQL query to execute
     Returns:
         the result of the SQL query
@@ -362,10 +362,10 @@ def run_sql_query(connection_uri: str, query: str) -> str:
         conn.close()
 ```
 
-This Python function is defined as a tool for agents to execute SQL queries directly against a Neon database.
+This Python function is defined as a tool for agents to execute SQL queries directly against a Lakebase Postgres database.
 
 - It takes two arguments: `connection_uri: str`, which is the URI string required to establish a database connection, and `query: str`, the SQL query intended for execution.
-- It establishes a connection to the Neon database using `psycopg2.connect(connection_uri)`
+- It establishes a connection to the Lakebase Postgres database using `psycopg2.connect(connection_uri)`
 - It creates a cursor object using `conn.cursor(cursor_factory=RealDictCursor)`. The `RealDictCursor` is specified to fetch query results as dictionaries, which is often more convenient for data manipulation in Python.
 - It executes the provided SQL query using `cur.execute(query)`.
 - It includes error handling for SQL query execution. If any exception occurs, it rolls back the transaction using `conn.rollback()` and returns an error message.
@@ -508,7 +508,7 @@ Executing this command will:
 - Start the collaborative process as the agents begin to interact to achieve the defined task.
 - Display a real-time, step-by-step conversation between the agents directly in your console.
 - Showcase the `assistant` agent's role in planning and delegating sub-tasks to the `code_executor` (for coding needs) and `db_admin` (for database operations).
-- Ultimately, lead to the retrieval of recent ML papers from arXiv and their storage in a Neon database named `arxiv_papers`, demonstrating a complete workflow.
+- Ultimately, lead to the retrieval of recent ML papers from arXiv and their storage in a Lakebase Postgres database named `arxiv_papers`, demonstrating a complete workflow.
 
 ### Expected output
 

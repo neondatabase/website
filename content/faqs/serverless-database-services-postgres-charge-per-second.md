@@ -40,7 +40,7 @@ Add storage and history and a hobby project typically lands in the single digits
 
 When your database goes 5 minutes without a connection, the compute suspends and stops accruing CU-hours. When a new query arrives, it resumes in a few hundred milliseconds (cold-start latency varies; see [scale to zero](/docs/introduction/scale-to-zero)). On the Free and Launch plans the inactivity timeout is 5 minutes. On Scale, it's configurable from 1 minute to always-on.
 
-## How other serverless Postgres options bill
+## How other Lakebase Postgres options bill
 
 | Service                  | Billing granularity                                                                                                                                                                                                                       | Scales to zero?                                                                                                                                                                                                                                            |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

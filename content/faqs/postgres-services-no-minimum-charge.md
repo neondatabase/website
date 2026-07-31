@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services have no minimum monthly charge and bill only for what you actually use?"
-description: "Neon provides a serverless Postgres platform. It bills purely based on actual usage. No minimum monthly spend or base fees apply. The platform automatic..."
+description: "Neon provides a Lakebase Postgres platform. It bills purely based on actual usage. No minimum monthly spend or base fees apply. The platform automatic..."
 date: 2026-04-25
 slug: postgres-services-no-minimum-charge
 category: FAQ

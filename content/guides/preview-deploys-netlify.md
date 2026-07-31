@@ -1,17 +1,17 @@
 ---
 title: Automate Preview Deployments with Netlify and Neon Database Branching
-subtitle: Set up automated preview deployments with isolated database branches for every pull request using GitHub Actions, Netlify, and Neon Postgres
+subtitle: Set up automated preview deployments with isolated database branches for every pull request using GitHub Actions, Netlify, and Lakebase Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2025-11-25T00:00:00.000Z'
-updatedOn: '2025-11-27T14:22:42.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 ## Introduction
 
 When building modern web applications, it's crucial to test changes in an environment that closely mirrors production before merging them. This guide shows you how to create an automated workflow that:
 
-- Creates a separate Neon database branch for each pull request
+- Creates a separate Lakebase Postgres database branch for each pull request
 - Deploys a preview version of your application to Netlify
 - Runs database migrations automatically
 - Cleans up resources when the pull request is closed
@@ -36,13 +36,13 @@ Before starting, make sure you have:
 The workflow consists of two main GitHub Actions:
 
 1. **Deploy Preview** - Triggered when a PR is opened or updated
-   - Creates a new Neon database branch
+   - Creates a new Lakebase Postgres database branch
    - Runs Prisma migrations on the new branch
    - Deploys the application to Netlify with the branch database URL
    - Comments on the PR with links to the preview deployment and database branch
 
 2. **Cleanup Preview** - Triggered when a PR is closed
-   - Deletes the Neon database branch to free up resources
+   - Deletes the Lakebase Postgres database branch to free up resources
 
 ## Create a New Next.js Project
 
@@ -384,7 +384,7 @@ jobs:
             | Neon branch 🐘 | https://console.neon.tech/app/projects/${{ env.NEON_PROJECT_ID }}/branches/${{ steps.create-branch.outputs.branch_id }} |
 ```
 
-This workflow automatically creates a new Neon database branch and preview deploy for every pull request. It posts links back to the PR so you can instantly preview your changes live and view the corresponding database branch.
+This workflow automatically creates a new Lakebase Postgres database branch and preview deploy for every pull request. It posts links back to the PR so you can instantly preview your changes live and view the corresponding database branch.
 
 ### Cleanup Preview Workflow
 
@@ -413,13 +413,13 @@ jobs:
           api_key: ${{ env.NEON_API_KEY }}
 ```
 
-This workflow automatically deletes the preview Neon database branch when a pull request is closed to prevent leftover resources.
+This workflow automatically deletes the preview Lakebase Postgres database branch when a pull request is closed to prevent leftover resources.
 
 ## Testing This Flow
 
 To see this workflow in action, you can simply open a pull request that edits any file (even just a markdown file) in your repository. The GitHub Actions workflow will automatically:
 
-- Create a new Neon database branch for your PR
+- Create a new Lakebase Postgres database branch for your PR
 - Deploy your app to a Netlify preview URL, connected to the new database branch
 - Post a comment on the PR with links to both the preview deployment and the Neon branch
 

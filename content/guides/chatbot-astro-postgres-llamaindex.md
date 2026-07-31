@@ -4,7 +4,7 @@ subtitle: A step-by-step guide for building a RAG chatbot in an Astro applicatio
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 ## Prerequisites
@@ -19,7 +19,7 @@ To follow the steps in this guide, you will need the following:
 ## Steps
 
 - [Generate the OpenAI API token](#generate-the-openai-api-token)
-- [Provisioning a Serverless Postgres](#provisioning-a-serverless-postgres)
+- [Provisioning a Lakebase Postgres](#provisioning-a-serverless-postgres)
 - [Create a new Astro application](#create-a-new-astro-application)
   - [Add Tailwind CSS to the application](#add-tailwind-css-to-the-application)
   - [Integrate React in your Astro project](#integrate-react-in-your-astro-project)
@@ -51,9 +51,9 @@ To create vector embeddings, you will use OpenAI API with LlamaIndex. To set up 
 - Enter a name for your token and click the **Create new secret key** button to generate a new key.
 - Copy and securely store this token for later use as the **OPENAI_API_KEY** environment variable.
 
-## Provisioning a Serverless Postgres
+## Provisioning a Lakebase Postgres
 
-Using a serverless Postgres database lets you scale compute resources down to zero, which helps you save on compute costs.
+Using a Lakebase Postgres database lets you scale compute resources down to zero, which helps you save on compute costs.
 
 To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and create a project.
 
@@ -208,7 +208,7 @@ Let's move on to loading the Postgres URL through an environment variable in the
 Create an `.env` file in the root directory of your project with the following environment variable to initiate the setup of a database connection:
 
 ```bash
-# Neon Postgres Pooled Connection URL
+# Lakebase Postgres Pooled Connection URL
 
 POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require&channel_binding=require"
 ```
@@ -923,6 +923,6 @@ Now, push the added GitHub workflow file to your GitHub repo. Follow the steps b
 
 ## Summary
 
-In this guide, you learned how to build a RAG Chatbot using LlamaIndex, Astro, and Neon Postgres. Additionally, you learned how to automate deployments of your Astro application using GitHub Actions to Amazon ECS on Amazon Fargate.
+In this guide, you learned how to build a RAG Chatbot using LlamaIndex, Astro, and Lakebase Postgres. Additionally, you learned how to automate deployments of your Astro application using GitHub Actions to Amazon ECS on Amazon Fargate.
 
 <NeedHelp />

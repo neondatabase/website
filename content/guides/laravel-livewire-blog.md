@@ -4,10 +4,10 @@ subtitle: Learn how to create a dynamic blog application using Laravel, Livewire
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2024-07-02T10:32:21.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-Laravel is a powerful PHP framework that makes it easy to build web applications. When combined with Livewire, a full-stack framework for Laravel, you can create dynamic, reactive interfaces with minimal JavaScript. In this guide, we'll build a blog application using Laravel and Livewire, and we'll use Laravel Breeze to handle authentication, along with Neon Postgres.
+Laravel is a powerful PHP framework that makes it easy to build web applications. When combined with Livewire, a full-stack framework for Laravel, you can create dynamic, reactive interfaces with minimal JavaScript. In this guide, we'll build a blog application using Laravel and Livewire, and we'll use Laravel Breeze to handle authentication, along with Lakebase Postgres.
 
 By the end of this tutorial, you'll have a fully functional blog where users can create, read, update, and delete posts. We'll also implement comments and a simple tagging system.
 
@@ -59,7 +59,7 @@ composer require livewire/livewire
 
 ### Setting up the Database
 
-Update your `.env` file with your Neon database credentials:
+Update your `.env` file with your Lakebase Postgres database credentials:
 
 ```env
 DB_CONNECTION=pgsql
@@ -184,7 +184,7 @@ Update the migration file as follows:
 
 We don't need to create a model for the pivot table, as it will be managed by Laravel's Eloquent ORM.
 
-Now, run the migrations to create all the tables in the Neon database:
+Now, run the migrations to create all the tables in the Lakebase Postgres database:
 
 ```bash
 php artisan migrate

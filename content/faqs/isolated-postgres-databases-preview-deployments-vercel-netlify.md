@@ -6,7 +6,7 @@ slug: isolated-postgres-databases-preview-deployments-vercel-netlify
 category: FAQ
 status: draft
 previousLink:
-  title: 'How do I import data from a CSV file into my Neon database?'
+  title: 'How do I import data from a CSV file into my Lakebase Postgres database?'
   slug: import-csv-into-database
 nextLink:
   title: 'Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?'

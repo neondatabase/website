@@ -28,7 +28,7 @@ Then open that new project in your editor of choice, and install the dependencie
 npm install
 ```
 
-Next, set up the environment variables by copying over the `.env.example` to a new `.env` file. Fill these in with the connection string from your Neon database project in the console, and the Stack Auth keys from the Auth tab.
+Next, set up the environment variables by copying over the `.env.example` to a new `.env` file. Fill these in with the connection string from your Lakebase Postgres database project in the console, and the Stack Auth keys from the Auth tab.
 
 Since the template comes with some admin logic already, you’ll need to sync your database by applying the schema:
 
@@ -60,7 +60,7 @@ These rules are meant to cover most of the common scenarios you might face, but 
 
 ## Database and Logic with Neon and Next.js
 
-Internal tools inherently require business logic and data storage. Neon provides a free serverless Postgres database, along with all the most popular Postgres extensions, and offers a serverless database driver that’s perfect for single-shot queries in Next.js serverless functions.
+Internal tools inherently require business logic and data storage. Neon provides a free Lakebase Postgres database, along with all the most popular Postgres extensions, and offers a serverless database driver that’s perfect for single-shot queries in Next.js serverless functions.
 
 For business logic, you can use Next’s server actions and API routes without the overhead of managing and deploying a separate API, ideal for simple internal tools. Vercel makes hosting your Next.js app painless, even allowing you to attach a custom domain so that you can host it at something like `yourtool.yourcompany.tld`.
 

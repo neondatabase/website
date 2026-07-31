@@ -25,7 +25,7 @@ Some of the incredible businesses delivering better experiences for their custom
 - **[Replit](https://replit.com)** – SOTA Text to App Agent helping creators "build an app for that" in minutes, DB included. [Details](/blog/neon-replit-integration)
 - **[White Widget](https://whitewidget.com)** – Scales up to 50M+ users in seconds with autoscaling. [Details](/blog/white-widgets-secret-to-scalable-postgres-neon)
 - **[Invenco](https://invenco.net)** – Handles high-traffic e-commerce spikes without needing to thinking about databases. [Details](/blog/why-invenco-migrated-to-neon)
-- **[Branch Insurance](https://ourbranch.com)** – Builds on Serverless Postgres to deliver faster experience out-of-the-box. [Details](/blog/branch-chose-neon-for-its-true-postgres-and-serverless-nature)
+- **[Branch Insurance](https://ourbranch.com)** – Builds on Lakebase Postgres to deliver faster experience out-of-the-box. [Details](/blog/branch-chose-neon-for-its-true-postgres-and-serverless-nature)
 - **[Magic Circle](https://magiccircle.io)** – Handles 2M+ game sessions on Neon. [Details](/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon)
 - **[Cedalio](https://cedalio.com)** – One-database-per-client model with auto-suspend. [Details](/blog/how-cedalio-uses-neon-for-an-efficient-development-workflow)
 - **[BaseHub](https://basehub.com)** – Uses autoscaling to handle peak loads with zero manual tuning. [Details](/blog/meet-basehub-developer-velocity-and-efficiency-right-down-to-the-database)
@@ -60,7 +60,7 @@ You can read about the [architectural decisions for Neon](/blog/architecture-dec
 
 Don't take our word for it. The best way to understand the performance of a service is to try it yourself. We've made Neon as easy as possible to try with a generous free plan with no credit card required.
 
-<CTA title="Try Postgres on Neon" description="Neon is Serverless Postgres built for the cloud. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try Postgres on Neon" description="Neon is Lakebase Postgres built for the cloud. Sign up for a free account to get started." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 ### Check Open Source Benchmarks
 
@@ -107,7 +107,7 @@ Serverless functions may be executing independently in short-lived environments,
 2. Execute [multiple queries in a single function](/docs/serverless/serverless-driver#issue-multiple-queries-with-the-transaction-function) - so you only pay the connection tax once.
 3. Use an HTTP API via the [Neon Serverless Driver](/docs/serverless/serverless-driver) - To reduce the number of roundtrips required to establish the connection.
    ![Serverless driver round-trips](/faster/postgres-http-roundtrips.jpg)
-   Neon's [serverless driver](/docs/serverless-driver) and proxy have been optimized to reduce the number of roundtrips to the absolute minimum. To read more about how this works, see: [Quicker serverless Postgres connections](/blog/quicker-serverless-postgres)
+   Neon's [serverless driver](/docs/serverless-driver) and proxy have been optimized to reduce the number of roundtrips to the absolute minimum. To read more about how this works, see: [Quicker Lakebase Postgres connections](/blog/quicker-serverless-postgres)
 </Admonition>
 
 ### Putting app and database close together
@@ -192,4 +192,4 @@ The best way to understand the speed and flexibility of Neon is to try it yourse
 
 Sign up for free today—no credit card required—and see how Neon can accelerate your workflow.
 
-<CTA title="Try Postgres on Neon" description="Neon is Serverless Postgres built for the cloud. Get started in seconds with our free plan." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try Postgres on Neon" description="Neon is Lakebase Postgres built for the cloud. Get started in seconds with our free plan." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />

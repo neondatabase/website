@@ -1,15 +1,15 @@
 ---
-title: Developing a Scalable Flask Application with Neon Postgres
-subtitle: Learn how to build a scalable Flask application with Neon Postgres
+title: Developing a Scalable Flask Application with Lakebase Postgres
+subtitle: Learn how to build a scalable Flask application with Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-14T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Building scalable web applications requires careful planning and the right tools. Flask is a Python web framework well-suited for building small to large web applications. It provides flexibility and extensibility, making it a popular choice for developers.
 
-In this guide, we'll walk through developing a Flask application that uses Neon Postgres. We'll cover setting up the project structure, defining models, creating routes, and handling database migrations. We'll also explore frontend development using Tailwind CSS for responsive styling.
+In this guide, we'll walk through developing a Flask application that uses Lakebase Postgres. We'll cover setting up the project structure, defining models, creating routes, and handling database migrations. We'll also explore frontend development using Tailwind CSS for responsive styling.
 
 ## Prerequisites
 
@@ -49,7 +49,7 @@ In this guide, we'll walk through developing a Flask application that uses Neon 
    DATABASE_URL=postgresql://user:password@your-neon-host:5432/your-database
    ```
 
-   Replace `user`, `password`, `your-neon-host`, and `your-database` with your Neon Postgres credentials.
+   Replace `user`, `password`, `your-neon-host`, and `your-database` with your Lakebase Postgres credentials.
 
 ## Application Structure
 
@@ -117,7 +117,7 @@ This setup initializes Flask, SQLAlchemy, and Flask-Migrate. It loads the databa
 
 Blueprints are a way to organize related routes and views in Flask applications. We will cover blueprints and routes in the next sections.
 
-To learn more about Flask-Migrate, check out the [Managing database migrations and schema changes with Flask and Neon Postgres](/guides/flask-database-migrations) guide.
+To learn more about Flask-Migrate, check out the [Managing database migrations and schema changes with Flask and Lakebase Postgres](/guides/flask-database-migrations) guide.
 
 ## Model Definition
 
@@ -374,7 +374,7 @@ For more advanced usage, Flask-Migrate provides additional commands:
 
 You should commit your migration files to version control so that all developers and deployment environments can maintain consistent database schemas.
 
-To learn more about managing database migrations with Flask and Neon Postgres, check out the [Managing database migrations and schema changes with Flask and Neon Postgres](/guides/flask-database-migrations) guide.
+To learn more about managing database migrations with Flask and Lakebase Postgres, check out the [Managing database migrations and schema changes with Flask and Lakebase Postgres](/guides/flask-database-migrations) guide.
 
 ## Scalability Considerations
 
@@ -382,7 +382,7 @@ Besides the above steps, as your Flask application grows, you can consider a few
 
 1. Connection pooling is a technique used to manage database connections efficiently. Instead of opening and closing a new connection for each database operation, a pool of reusable connections is maintained.
 
-   Neon Postgres supports connection pooling, which can significantly improve your application's performance by reducing the overhead of creating new connections.
+   Lakebase Postgres supports connection pooling, which can significantly improve your application's performance by reducing the overhead of creating new connections.
 
    To use connection pooling with Neon:
 
@@ -474,7 +474,7 @@ Besides the above steps, as your Flask application grows, you can consider a few
 
 ## Conclusion
 
-By following these practices, you've set up a scalable Flask application with Neon Postgres, including a responsive frontend using Tailwind CSS. This structure allows for easy expansion and maintenance as your project grows.
+By following these practices, you've set up a scalable Flask application with Lakebase Postgres, including a responsive frontend using Tailwind CSS. This structure allows for easy expansion and maintenance as your project grows.
 
 As a next step, consider adding authentication, authorization, and error handling to your application. These features are essential for securing your application and providing a good user experience.
 

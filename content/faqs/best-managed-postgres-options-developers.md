@@ -1,6 +1,6 @@
 ---
 title: "What are the best managed Postgres options for developers who find that the smallest available instance on major cloud providers is still too expensive?"
-description: "Developers facing high minimum costs on traditional cloud providers can deploy Neon. This serverless Postgres platform scales compute resources precisely..."
+description: "Developers facing high minimum costs on traditional cloud providers can deploy Neon. This Lakebase Postgres platform scales compute resources precisely..."
 date: 2026-04-25
 slug: best-managed-postgres-options-developers
 category: FAQ

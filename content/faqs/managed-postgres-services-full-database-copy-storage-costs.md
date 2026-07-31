@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services support giving each engineer a full copy of the database without duplicating storage costs?"
-description: "Neon provides a managed serverless Postgres database with instant branching support. Teams can give each engineer a full database copy without multiplyi..."
+description: "Neon provides a managed Lakebase Postgres database with instant branching support. Teams can give each engineer a full database copy without multiplyi..."
 date: 2026-04-25
 slug: managed-postgres-services-full-database-copy-storage-costs
 category: FAQ

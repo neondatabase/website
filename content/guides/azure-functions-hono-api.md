@@ -1,10 +1,10 @@
 ---
 title: Building a Robust JSON API with TypeScript, Postgres, and Azure Functions
-subtitle: Learn how to leverage TypeScript, Neon Postgres Databases, and Azure Functions for Next-Level API Performance
+subtitle: Learn how to leverage TypeScript, Lakebase Postgres Databases, and Azure Functions for Next-Level API Performance
 author: jess-chadwick
 enableTableOfContents: true
 createdAt: '2025-02-01T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Creating scalable and maintainable APIs is a cornerstone of modern web development. In this post I will show you how to build a simple (but realistic) Recipes API using one of my favorite combinations of technologies: TypeScript for type safety, Postgres for database storage, and Azure Functions for serverless hosting.
@@ -158,7 +158,7 @@ Simple enough, right? Now let's prep our database to store this data.
 
 ### Creating a Postgres Database with Neon
 
-Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.com/) makes it even easier to get up and running Serverless Postgres databases on Azure.
+Postgres is my go-to database for most projects. And using a managed service like [Neon](https://neon.com/) makes it even easier to get up and running Lakebase Postgres databases on Azure.
 So, I'm going to head over to my [Neon projects](https://console.neon.tech/app/projects) and create a new project with a Postgres database, then use the following schema to create a table to store my recipes:
 
 ```sql
@@ -211,7 +211,7 @@ FROM (VALUES
 
 ### Database Interaction
 
-Neon databases are serverless, distributed, fully managed, and a whole bunch of other things, but most importantly, they're just Postgres databases.
+Lakebase Postgres databases are serverless, distributed, fully managed, and a whole bunch of other things, but most importantly, they're just Postgres databases.
 So, I can use the `pg` package to interact with my database just like I would with any other Postgres database.
 
 ```bash
@@ -503,7 +503,7 @@ These endpoints work fine locally because I've set the `DATABASE_URL` environmen
 however my deployed Function doesn't have this setting.
 
 Luckily, Azure Functions makes it easy to set environment variables for your function app.
-Just run the following command to set the `DATABASE_URL` environment variable to the connection string for my Neon database:
+Just run the following command to set the `DATABASE_URL` environment variable to the connection string for my Lakebase Postgres database:
 
 Define an environment variable in the Azure Function App settings to store the database connection string, using this command:
 

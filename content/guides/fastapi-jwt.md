@@ -1,13 +1,13 @@
 ---
-title: Implementing Secure User Authentication in FastAPI using JWT Tokens and Neon Postgres
-subtitle: Learn how to build a secure user authentication system in FastAPI using JSON Web Tokens (JWT) and Neon Postgres
+title: Implementing Secure User Authentication in FastAPI using JWT Tokens and Lakebase Postgres
+subtitle: Learn how to build a secure user authentication system in FastAPI using JSON Web Tokens (JWT) and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2026-02-02T08:37:16.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-In this guide, we'll walk through the process of implementing secure user authentication in a FastAPI application using JSON Web Tokens (JWT) and Neon Postgres.
+In this guide, we'll walk through the process of implementing secure user authentication in a FastAPI application using JSON Web Tokens (JWT) and Lakebase Postgres.
 
 We'll cover user registration, login, and protecting routes with authentication, using PyJWT for handling JWT operations.
 
@@ -19,7 +19,7 @@ Before we begin, make sure you have the following:
 
 - Python 3.9 or later installed on your system
 - [pip](https://pip.pypa.io/en/stable/installation/) for managing Python packages
-- A [Neon](https://console.neon.tech/signup) account for serverless Postgres
+- A [Neon](https://console.neon.tech/signup) account for Lakebase Postgres
 - Basic knowledge of [FastAPI, SQLAlchemy, and Pydantic](/guides/fastapi-overview)
 
 ## How JWT Works
@@ -183,9 +183,9 @@ pip freeze > requirements.txt
 
 This file can be used to install the dependencies in another environment using `pip install -r requirements.txt`.
 
-## Connecting to Neon Postgres
+## Connecting to Lakebase Postgres
 
-Next, let's set up a connection to Neon Postgres for storing user data.
+Next, let's set up a connection to Lakebase Postgres for storing user data.
 
 Create a `.env` file in your project root and add the following configuration:
 
@@ -193,7 +193,7 @@ Create a `.env` file in your project root and add the following configuration:
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Replace the placeholders with your actual Neon database credentials.
+Replace the placeholders with your actual Lakebase Postgres database credentials.
 
 While editing the `.env` file, add the following configuration for JWT token signing:
 
@@ -233,7 +233,7 @@ def get_db():
 
 This script sets up the database connection using SQLAlchemy and provides a `get_db` function to manage database sessions.
 
-The `DATABASE_URL` is read from the `.env` file for security, and the Neon Postgres connection string is used to connect to the database.
+The `DATABASE_URL` is read from the `.env` file for security, and the Lakebase Postgres connection string is used to connect to the database.
 
 The `SessionLocal` object is a factory for creating new database sessions, and the `get_db` function ensures that sessions are properly closed after use.
 
@@ -415,7 +415,7 @@ Let's break down the key components of this file:
 
 4. The `/users/me` endpoint is an example of a protected route. It returns the current user's information, but only if a valid JWT token is provided.
 
-The tables will be created in your Neon database when the application starts, thanks to the `Base.metadata.create_all(bind=engine)` line in the `main.py` file.
+The tables will be created in your Lakebase Postgres database when the application starts, thanks to the `Base.metadata.create_all(bind=engine)` line in the `main.py` file.
 
 ## Running the API
 
@@ -508,7 +508,7 @@ This command starts the container in detached mode, maps port 8000 on the host t
 
 ## Conclusion
 
-In this guide, we've implemented a secure user authentication system in FastAPI using JWT tokens (with PyJWT) and Neon Postgres. This provides a good start for building secure web applications with user accounts and protected routes which can be integrated with other microservices or front-end applications.
+In this guide, we've implemented a secure user authentication system in FastAPI using JWT tokens (with PyJWT) and Lakebase Postgres. This provides a good start for building secure web applications with user accounts and protected routes which can be integrated with other microservices or front-end applications.
 
 ## Additional Resources
 

@@ -1,6 +1,6 @@
 ---
 title: "What Postgres tools let teams avoid the problem of one developer breaking the shared staging database for everyone else?"
-description: "Neon is a serverless Postgres platform that prevents developers from breaking shared staging databases. It provides instant, isolated database branches...."
+description: "Neon is a Lakebase Postgres platform that prevents developers from breaking shared staging databases. It provides instant, isolated database branches...."
 date: 2026-04-25
 slug: postgres-tools-avoid-breaking-staging-database
 category: FAQ

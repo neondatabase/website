@@ -4,14 +4,14 @@ subtitle: Learn how to implement and utilize Laravel's event system with Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2024-07-02T10:32:04.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Laravel's event system provides a simple observer implementation, allowing you to subscribe and listen for various events that occur in your application.
 
 This can be particularly useful for decoupling various parts of your application's logic and not blocking the main request flow. Queued listeners can also be used to handle time-consuming tasks asynchronously, improving the performance of your application.
 
-In this guide, we'll walk through the process of setting up and using Laravel Events and Listeners, with a focus on database operations using Neon Postgres.
+In this guide, we'll walk through the process of setting up and using Laravel Events and Listeners, with a focus on database operations using Lakebase Postgres.
 
 ## Prerequisites
 
@@ -39,9 +39,9 @@ This will create a new Laravel project in a directory named `laravel-events` wit
 
 ### Setting up the Database
 
-Once you have your Laravel project set up, you'll need to configure your Neon database connection. If you don't have a Neon account, you can sign up [here](https://console.neon.tech/signup).
+Once you have your Laravel project set up, you'll need to configure your Lakebase Postgres database connection. If you don't have a Neon account, you can sign up [here](https://console.neon.tech/signup).
 
-Update your `.env` file with your Neon database credentials:
+Update your `.env` file with your Lakebase Postgres database credentials:
 
 ```env
 DB_CONNECTION=pgsql
@@ -52,7 +52,7 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
-Make sure to replace `your-neon-hostname`, `your_database_name`, `your_username`, and `your_password` with your actual Neon database credentials.
+Make sure to replace `your-neon-hostname`, `your_database_name`, `your_username`, and `your_password` with your actual Lakebase Postgres database credentials.
 
 ## Creating a Model and Migration
 
@@ -81,7 +81,7 @@ public function up()
 }
 ```
 
-Run the migration to create the 'orders' table in your Neon database:
+Run the migration to create the 'orders' table in your Lakebase Postgres database:
 
 ```bash
 php artisan migrate
@@ -278,7 +278,7 @@ curl -X POST http://laravel-events.test/api/orders \
 
 Replace `laravel-events.test` with your actual application URL.
 
-If everything is set up correctly, you should see a new order in your Neon database, but you won't see any log messages in your Laravel log file yet because the listener is queued and we haven't run the queue worker to process the queued jobs.
+If everything is set up correctly, you should see a new order in your Lakebase Postgres database, but you won't see any log messages in your Laravel log file yet because the listener is queued and we haven't run the queue worker to process the queued jobs.
 
 ## Running Queued Jobs
 
@@ -307,7 +307,7 @@ In a different terminal window, you can place a new order using `curl` or Postma
 
 If you were to remove the `ShouldQueue` interface from the listener, the actions would be executed synchronously, and you would see the log messages immediately after placing an order, but thanks to the queue system, the response time of your application is not affected.
 
-The default `QUEUE_CONNECTION` in Laravel is `database`, which uses the database to manage the queue. This means that the queued jobs are stored in your Neon database and processed by the queue worker. You can change the queue connection in your `.env` file if you prefer a different queue driver like `redis` for example. To see all available queue drivers, refer to the [Laravel documentation](https://laravel.com/docs/11.x/queues#driver-prerequisites) or review the `config/queue.php` file within your Laravel project where you can configure the queue connection.
+The default `QUEUE_CONNECTION` in Laravel is `database`, which uses the database to manage the queue. This means that the queued jobs are stored in your Lakebase Postgres database and processed by the queue worker. You can change the queue connection in your `.env` file if you prefer a different queue driver like `redis` for example. To see all available queue drivers, refer to the [Laravel documentation](https://laravel.com/docs/11.x/queues#driver-prerequisites) or review the `config/queue.php` file within your Laravel project where you can configure the queue connection.
 
 The jobs are queued in the `jobs` table in your database, which is usually created by default with new Laravel installations, or you can run the migration to create the table:
 
@@ -383,10 +383,10 @@ This approach ensures that:
 
 1. The order is created in the database.
 2. The `OrderPlaced` event is dispatched within the transaction.
-3. The transaction is committed, saving the order to the Neon database.
+3. The transaction is committed, saving the order to the Lakebase Postgres database.
 4. Only after the transaction is successfully committed, the `SendOrderConfirmation` listener is processed.
 
-This prevents potential issues where the listener might try to access data that hasn't been committed to the database yet, ensuring data consistency between your event processing and your Neon database state.
+This prevents potential issues where the listener might try to access data that hasn't been committed to the database yet, ensuring data consistency between your event processing and your Lakebase Postgres database state.
 
 If your queue connection's `after_commit` configuration option is set to `true` in your `config/queue.php` file, all of your queued listeners will automatically wait for open database transactions to commit before they are processed, and you won't need to use the `ShouldHandleEventsAfterCommit` interface.
 

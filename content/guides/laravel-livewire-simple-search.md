@@ -4,7 +4,7 @@ subtitle: Learn how to integrate Laravel with Postgres on Neon, using Laravel's 
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-29T00:00:00.000Z'
-updatedOn: '2025-05-30T16:53:05.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Laravel is a powerful PHP framework known for its elegant syntax and feature-rich ecosystem. Livewire, a full-stack framework for Laravel, allows us to build dynamic interfaces with minimal JavaScript. Together, they provide a robust foundation for creating interactive web applications.
@@ -90,7 +90,7 @@ Leave the Vite development server running in the background to compile your asse
 
 ### Connecting to Neon Database
 
-To connect your Laravel application to your Neon database, update your `.env` file with the Neon database credentials:
+To connect your Laravel application to your Lakebase Postgres database, update your `.env` file with the Lakebase Postgres database credentials:
 
 ```env
 DB_CONNECTION=pgsql
@@ -101,7 +101,7 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
-Make sure to replace the placeholders with your actual Neon database details.
+Make sure to replace the placeholders with your actual Lakebase Postgres database details.
 
 ## Building the Search Functionality
 

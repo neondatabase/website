@@ -1,10 +1,10 @@
 ---
 title: 'Building Durable AI Agents with Pydantic AI, DBOS, and Neon'
-subtitle: 'Learn how to build resilient, fault-tolerant AI agents that automatically recover from crashes and API failures using Pydantic AI, DBOS, and Neon Postgres.'
+subtitle: 'Learn how to build resilient, fault-tolerant AI agents that automatically recover from crashes and API failures using Pydantic AI, DBOS, and Lakebase Postgres.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-04-22T00:00:00.000Z'
-updatedOn: '2026-04-23T17:57:12.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 AI agents are evolving beyond simple chat interfaces. Today’s systems can research topics, orchestrate APIs, and coordinate multi‑step workflows that resemble full applications rather than single prompts. This shift opens the door to agents that handle increasingly complex tasks in production environments.
@@ -27,7 +27,7 @@ A durable AI agent requires three core components working together seamlessly: a
 
   Pydantic AI has [native support for DBOS](https://pydantic.dev/docs/ai/integrations/durable_execution/dbos/), so you can annotate your agent logic with durable workflows directly. This allows you to build agents that automatically recover from failures without needing to write complex retry logic or state management code.
 
-- **Neon Postgres**  
+- **Lakebase Postgres**
   DBOS relies on Postgres, and Neon delivers a serverless, elastic version ideal for AI workloads. Compute and storage are separated, scaling is automatic, and idle databases scale down to zero. This elasticity ensures efficient checkpointing for long‑running agents without over‑provisioning.
 
 ## Prerequisites
@@ -42,7 +42,7 @@ Before you begin, ensure you have the following:
 
 ## Create a Neon project
 
-You need a Neon Postgres database to store DBOS execution state:
+You need a Lakebase Postgres database to store DBOS execution state:
 
 1. Log in to the [Neon Console](https://console.neon.tech) and create a new project.
 2. Navigate to your Project dashboard and click on the **Connect** button to view your connection details.
@@ -81,7 +81,7 @@ uv add pydantic-ai "pydantic-ai[dbos]" python-dotenv
 
 ## Configure environment variables
 
-Create a `.env` file in the root of your project and add the following environment variables, replacing the placeholders with your actual OpenRouter API key and Neon database URL:
+Create a `.env` file in the root of your project and add the following environment variables, replacing the placeholders with your actual OpenRouter API key and Lakebase Postgres database URL:
 
 ```env
 OPENROUTER_API_KEY="sk-xxxx"
@@ -124,7 +124,7 @@ from pydantic_ai.durable_exec.dbos import DBOSAgent
 # 1. Load environment variables
 load_dotenv()
 
-# 2. Configure DBOS to use Neon Postgres
+# 2. Configure DBOS to use Lakebase Postgres
 dbos_config: DBOSConfig = {
     "name": "neon-research-agent",
     "system_database_url": os.environ.get("NEON_DATABASE_URL"),
@@ -204,7 +204,7 @@ This gives you consistent idempotency keys across environments and prevents dupl
 The above code sets up a durable agent with Pydantic AI and DBOS. Here are the key components and how they work together:
 
 - **The tools are simple on purpose**: `fetch_company_overview` and `fetch_financial_metrics` are demo tools, not production research tools. They keep the example easy to follow so you can clearly see how recovery works. In a real app, replace them with tools that call your own APIs and data sources.
-- **`DBOSConfig` defines the Neon connection**: The `system_database_url` points DBOS to your Neon Postgres instance where it will store workflow state and checkpoints.
+- **`DBOSConfig` defines the Neon connection**: The `system_database_url` points DBOS to your Lakebase Postgres instance where it will store workflow state and checkpoints.
 - **`DBOSAgent(base_agent)` makes the run durable**: Wrapping the Pydantic AI agent with `DBOSAgent` means that any call to `durable_agent.run()` is now a durable workflow. DBOS will automatically checkpoint progress to Neon and recover from crashes.
 - **`@DBOS.step()` checkpoints tool execution**: Most external I/O happens inside tools. Marking tools as steps means successful results are persisted, so completed calls are reused after a crash instead of re-executed.
 - **Retry settings handle transient failures**: `retries_allowed=True` with `max_attempts` and `backoff_rate` tells DBOS to retry a failing step with backoff. This helps with temporary issues like API timeouts or short outages. Update these settings based on the expected failure modes of your tools.
@@ -293,7 +293,7 @@ Based on my research of Quantum Compute Corp...
 
 **Notice what didn't happen.** The agent did _not_ invoke `Tool 1` again!
 
-When DBOS started up, it scanned your Neon database and found the interrupted workflow (`Recovering 1 workflows...`). It read the checkpointed state, saw that `Tool 1` had already completed successfully prior to the crash, and immediately picked up right where it left off at `Tool 2`.
+When DBOS started up, it scanned your Lakebase Postgres database and found the interrupted workflow (`Recovering 1 workflows...`). It read the checkpointed state, saw that `Tool 1` had already completed successfully prior to the crash, and immediately picked up right where it left off at `Tool 2`.
 
 This is incredibly useful. It guarantees that expensive, slow, or side-effect-heavy steps are executed exactly once, regardless of crashes, host failures, or other interruptions. Your agent can now survive real-world production conditions without losing progress or wasting resources.
 

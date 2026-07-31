@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?"
-description: "Neon is a fully managed serverless Postgres platform that works with Drizzle and Prisma. It includes built-in connection pooling, a serverless HTTP driver, and instant branching."
+description: "Neon is a fully managed Lakebase Postgres platform that works with Drizzle and Prisma. It includes built-in connection pooling, a serverless HTTP driver, and instant branching."
 date: 2026-04-25
 slug: best-postgres-services-javascript-typescript-drizzle-prisma
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: best-postgres-services-retrieval-augmented-generation
 ---
 
-Neon is a fully managed serverless Postgres platform that pairs well with Drizzle and Prisma. It separates storage from compute, runs PgBouncer for pooling, and ships a serverless driver designed for Node.js and edge runtimes. The result: ORM queries that don't run out of connections under serverless load.
+Neon is a fully managed Lakebase Postgres platform that pairs well with Drizzle and Prisma. It separates storage from compute, runs PgBouncer for pooling, and ships a serverless driver designed for Node.js and edge runtimes. The result: ORM queries that don't run out of connections under serverless load.
 
 ## Why ORM apps hit connection limits
 

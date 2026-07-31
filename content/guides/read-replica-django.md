@@ -1,10 +1,10 @@
 ---
-title: Scale your Django application with Neon Postgres Read Replicas
-subtitle: Learn how to scale Django applications with Neon Postgres Read Replicas
+title: Scale your Django application with Lakebase Postgres Read Replicas
+subtitle: Learn how to scale Django applications with Lakebase Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2025-12-03T12:37:52.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications. A standout feature of Neon is that adding a read replica doesn't require extra storage. This makes it a cost-effective way to scale your database, suitable for businesses of all sizes.
@@ -21,7 +21,7 @@ Before you begin, make sure you have:
 
 ## Build the note-taking app
 
-To demonstrate how to use Neon read replicas with Django, we'll build a simple note-taking application that uses a Neon database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability.
+To demonstrate how to use Neon read replicas with Django, we'll build a simple note-taking application that uses a Lakebase Postgres database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability.
 
 ### Part 1: Build the initial note-taking app with a single database
 
@@ -340,7 +340,7 @@ You can find the source code for this application on GitHub:
 
 <DetailIconCards>
 <a href="https://github.com/dhanushreddy291/neon-read-replica-django" description="
-Learn how to scale Django applications with Neon Postgres Read Replicas" icon="github">Use read replicas with Django</a>
+Learn how to scale Django applications with Lakebase Postgres Read Replicas" icon="github">Use read replicas with Django</a>
 </DetailIconCards>
 
 <NeedHelp/>

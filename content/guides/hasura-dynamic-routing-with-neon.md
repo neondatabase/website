@@ -4,7 +4,7 @@ subtitle: Leverage Neon's branching with Hasura's dynamic routing for powerful d
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-20T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Managing different database environments for development, testing, staging, and production can be complex. Traditional methods often involve provisioning separate database instances, managing complex data synchronization scripts, or dealing with slow snapshot restores. Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, brings efficient, Git-like branching to your database, while Hasura provides an instant GraphQL API layer.
@@ -58,7 +58,7 @@ The template must resolve to one of the predefined connection identifiers:
 Here's a high-level overview of how to set up dynamic routing with Neon and Hasura:
 
 1.  **Create Neon branches:** For each environment you need (e.g., `dev`, `staging`, `feature-x`), create a corresponding branch in your Neon project. Obtain the connection string for each branch.
-2.  **Configure Hasura data source:** Add your _primary_ Neon database as a data source in Hasura.
+2.  **Configure Hasura data source:** Add your _primary_ Lakebase Postgres database as a data source in Hasura.
 3.  **Define connection set:** In the Hasura data source configuration, add the connection strings of your Neon branches to the Connection set, giving each a unique, descriptive name (e.g., `dev_branch`, `staging_branch`, `feature_x_branch`).
 4.  **Implement connection template:** Write a Kriti template that inspects the incoming GraphQL request (e.g., checks for a specific header like `x-hasura-branch-name`) and resolves to the appropriate member name in the Connection set (e.g., `$.connection_set.dev_branch`).
 5.  **Route Requests:** Send GraphQL requests to Hasura with the necessary context (e.g., the `x-hasura-branch-name` header) to route them to the desired Neon branch.
@@ -75,7 +75,7 @@ Copy the connection strings for each branch you create; you will need them later
 
 ### Configure Hasura data source
 
-If you haven't already, add your Neon database as a data source in Hasura. Follow the step by-step guide on [Connect from Hasura Cloud to Neon](/docs/guides/hasura) to set up the primary connection.
+If you haven't already, add your Lakebase Postgres database as a data source in Hasura. Follow the step by-step guide on [Connect from Hasura Cloud to Neon](/docs/guides/hasura) to set up the primary connection.
 
 ### Define the connection set in Hasura
 

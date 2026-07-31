@@ -13,7 +13,7 @@ nextLink:
   slug: best-free-low-cost-managed-postgres-services
 ---
 
-For early-stage startups with unpredictable load, the cheapest managed Postgres is one that doesn't bill you for capacity you aren't using. Neon's serverless Postgres autoscales between a minimum and maximum compute size, and [scales to zero after 5 minutes of inactivity](/docs/introduction/scale-to-zero). You pay for active CU-hours, not provisioned instance size.
+For early-stage startups with unpredictable load, the cheapest managed Postgres is one that doesn't bill you for capacity you aren't using. Neon's Lakebase Postgres autoscales between a minimum and maximum compute size, and [scales to zero after 5 minutes of inactivity](/docs/introduction/scale-to-zero). You pay for active CU-hours, not provisioned instance size.
 
 ## Why traditional providers overcharge for spiky traffic
 
@@ -38,8 +38,8 @@ When you outgrow Free, the [Launch plan](/docs/introduction/plans) is pay-as-you
 
 A worked example from the [Launch plan usage examples](/docs/introduction/plans#launch-plan): 120 CU-hours of compute (about 20 billable days at 0.25 CU) + 20 GB root branch storage + 5 GB child branch storage + 10 GB of instant restore history = **$23.47/month**.
 
-<Admonition type="tip" title="Set up spending notifications">
-On paid plans you can set up [spending notifications](/docs/introduction/spending-notifications) to get alerts before your bill grows. When the threshold is reached, computes will suspend instead of running up an unexpected invoice.
+<Admonition type="tip" title="Set a spending limit">
+On paid plans you can cap your monthly bill with a [spending limit](/docs/introduction/spending-limit). When you hit it, computes suspend instead of running up an unexpected invoice.
 </Admonition>
 
 If you eventually need SOC 2, HIPAA, private networking, or an uptime SLA, those features live on the [Scale plan](/docs/introduction/plans#compliance-and-security), not Free or Launch. Plan ahead if you're selling to regulated buyers.

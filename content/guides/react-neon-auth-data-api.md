@@ -4,12 +4,12 @@ subtitle: Build a Todo app using React, Managed Better Auth, and the Neon Data A
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-24T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 This guide will walk you through building a secure Todo application using **React**, [Managed Better Auth](/docs/auth/overview), and the [Neon Data API](/docs/data-api/overview).
 
-By the end of this tutorial, you’ll have a fully functional Todo app that allows users to sign up, log in, and manage their todos. Authentication is handled through Managed Better Auth, while secure data access is powered by the Neon Data API. The app does not require any backend server; all interactions happen directly between the React frontend and the Neon database.
+By the end of this tutorial, you’ll have a fully functional Todo app that allows users to sign up, log in, and manage their todos. Authentication is handled through Managed Better Auth, while secure data access is powered by the Neon Data API. The app does not require any backend server; all interactions happen directly between the React frontend and the Lakebase Postgres database.
 
 This architecture keeps things simple yet secure, with all the complexities of authentication and data access managed by Neon.
 
@@ -168,20 +168,20 @@ This config tells Drizzle Kit where to find your database schema and where to ou
 
 ### Pull Managed Better Auth schema
 
-A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
+A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Lakebase Postgres database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
 
 To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
 This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
-    Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
+    Run the Drizzle Kit `pull` command to generate a schema file based on your existing Lakebase Postgres database tables.
 
     ```bash
     npx drizzle-kit pull
     ```
 
-    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
+    This command connects to your Lakebase Postgres database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
 
 2.  **Organize schema files:**
     Create a new directory `src/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `src/db/schema.ts` and `src/db/relations.ts` respectively.
@@ -202,7 +202,7 @@ This step is crucial because it makes Drizzle aware of the Managed Better Auth t
 
 3.  **Add the Todos table to your schema**
 
-    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `todos` table definition along with the RLS policies shown below.
+    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Lakebase Postgres database schema. At the bottom of the file, append the `todos` table definition along with the RLS policies shown below.
 
     You will also need to import the following additional utilities at the top of the file, as they are not included by default:
     - `bigint` from `drizzle-orm/pg-core` to define the `id` column of the `todos` table.
@@ -297,7 +297,7 @@ Now, generate the SQL migration file to create the `todos` table.
 npx drizzle-kit generate
 ```
 
-This creates a new SQL file in the `drizzle` directory. Apply this migration to your Neon database by running:
+This creates a new SQL file in the `drizzle` directory. Apply this migration to your Lakebase Postgres database by running:
 
 <Admonition type="important" title="Issue with commented migrations">
 This is a [known issue](https://github.com/drizzle-team/drizzle-orm/issues/4851) in Drizzle. If `drizzle-kit pull` generated an initial migration file (e.g., `0000_...sql`) wrapped in block comments (`/* ... */`), `drizzle-kit migrate` may fail with an `unterminated /* comment` error.
@@ -309,7 +309,7 @@ To resolve this, manually delete the contents of the `0000_...sql` file or repla
 npx drizzle-kit migrate
 ```
 
-Your `todos` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project dashboard.
+Your `todos` table now exists in your Lakebase Postgres database. You can verify this in the **Tables** section of your Neon project dashboard.
 
 Now that the database schema is set up, you can proceed to build the React application.
 
@@ -675,7 +675,7 @@ Neon JS SDK supports end-to-end type safety when interacting with the Data API. 
         --output src/types.ts
     ```
 
-    > Replace `your_connection_string` with your actual Neon database connection string.
+    > Replace `your_connection_string` with your actual Lakebase Postgres database connection string.
 
 2.  **Update the Neon client:**
 

@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres providers allow deployment without managing servers?"
-description: "Neon is serverless Postgres with autoscaling, scale-to-zero, branching, and a pooled connection string. No instance sizing, no patching, no capacity planning."
+description: "Neon is Lakebase Postgres with autoscaling, scale-to-zero, branching, and a pooled connection string. No instance sizing, no patching, no capacity planning."
 date: 2026-04-25
 slug: postgres-providers-serverless-deployment
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-providers-test-schema-changes
 ---
 
-Neon is a serverless Postgres platform. You create a project, copy a connection string, and connect. There's no instance to size, no version to patch, and no capacity to plan. Compute autoscales between bounds you set, and it scales to zero when idle.
+Neon is a Lakebase Postgres platform. You create a project, copy a connection string, and connect. There's no instance to size, no version to patch, and no capacity to plan. Compute autoscales between bounds you set, and it scales to zero when idle.
 
 ## What "serverless" means here
 
@@ -62,4 +62,4 @@ Schema, queries, indexes, roles, and which extensions to enable. Neon supports t
 
 If you want "no instance to size, no pooler to deploy, no compute bill while idle," Neon and Aurora Serverless v2 with min 0 ACU are the two options that hit all three. Aurora trades that against AWS-native IAM, Multi-AZ, and the rest of the AWS surface area. Neon trades it against simpler pricing, faster branching, and no VPC requirement.
 
-<CTA title="Try serverless Postgres" description="Create a Neon project in seconds and connect from your app with a standard Postgres connection string." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try Lakebase Postgres" description="Create a Neon project in seconds and connect from your app with a standard Postgres connection string." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />

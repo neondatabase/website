@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to building AI agents with LangGraph and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-21T00:00:00.000Z'
-updatedOn: '2026-07-20T17:23:33.079Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 This guide demonstrates how to integrate LangGraph with Neon. [LangGraph](https://www.langchain.com/langgraph) is a library in the [LangChain](https://www.langchain.com/langchain) ecosystem that simplifies the development of complex, multi-agent LLM applications by using a directed graph structure for efficient coordination and state management.
@@ -51,7 +51,7 @@ By leveraging these powerful components, LangGraph empowers you to build reliabl
 
 Neon's architecture is particularly well-suited for AI agent development, offering several key advantages:
 
-- **One-Second Provisioning:** Neon databases can be provisioned in about a second. This is _critical_ for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
+- **One-Second Provisioning:** Lakebase Postgres databases can be provisioned in about a second. This is _critical_ for AI agents that need to dynamically create databases. Traditional databases, with provisioning times often measured in minutes, create a significant bottleneck. Neon's speed keeps agents operating efficiently.
 
 - **Scale-to-Zero and Serverless Pricing:** Neon's serverless architecture automatically scales databases down to zero when idle, and you only pay for active compute time. This is cost-effective for AI agent workflows, which often involve unpredictable workloads and many short-lived database instances. It enables "database-per-agent" or "database-per-session" patterns without incurring prohibitive costs.
 
@@ -59,7 +59,7 @@ Neon's architecture is particularly well-suited for AI agent development, offeri
 
 ## Building a LangGraph agent with Neon tools integration
 
-Let's build a LangGraph agent that can provision a Neon database and interact with it using SQL queries. This agent will use the LangGraph framework to manage the agent's state and workflow, while functions derived from Neon's API will handle the database operations.
+Let's build a LangGraph agent that can provision a Lakebase Postgres database and interact with it using SQL queries. This agent will use the LangGraph framework to manage the agent's state and workflow, while functions derived from Neon's API will handle the database operations.
 
 ### Setting up the project
 
@@ -161,9 +161,9 @@ def create_database(project_name: str) -> str:
 @tool
 def run_sql_query(connection_uri: str, query: str) -> str:
     """
-    Runs an SQL query in the Neon database.
+    Runs an SQL query in the Lakebase Postgres database.
     Args:
-        connection_uri: The connection URI for the Neon database
+        connection_uri: The connection URI for the Lakebase Postgres database
         query: The SQL query to execute
     Returns:
         the result of the SQL query
@@ -270,9 +270,9 @@ This Python function, decorated with LangChain's `@tool`, allows LangGraph agent
 @tool
 def run_sql_query(connection_uri: str, query: str) -> str:
     """
-    Runs an SQL query in the Neon database.
+    Runs an SQL query in the Lakebase Postgres database.
     Args:
-        connection_uri: The connection URI for the Neon database
+        connection_uri: The connection URI for the Lakebase Postgres database
         query: The SQL query to execute
     Returns:
         the result of the SQL query
@@ -295,7 +295,7 @@ def run_sql_query(connection_uri: str, query: str) -> str:
         conn.close()
 ```
 
-Similarly, `run_sql_query` decorated with LangChain's `@tool`, executes an SQL query on a Neon database. It takes a `connection_uri` and a `query` as input, connects to the database using `psycopg2`, and runs the query. If the query returns results, they are fetched and returned; otherwise, a success message is provided. In case of an error, the function rolls back the transaction and returns an error message.
+Similarly, `run_sql_query` decorated with LangChain's `@tool`, executes an SQL query on a Lakebase Postgres database. It takes a `connection_uri` and a `query` as input, connects to the database using `psycopg2`, and runs the query. If the query returns results, they are fetched and returned; otherwise, a success message is provided. In case of an error, the function rolls back the transaction and returns an error message.
 
 #### Define agent setup and graph invocation
 

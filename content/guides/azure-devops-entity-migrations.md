@@ -1,13 +1,13 @@
 ---
 title: Database Migrations with Entity Framework Core and Azure Pipelines for Neon
-subtitle: Automating schema changes with EF Core and Azure Pipelines in Neon Postgres
+subtitle: Automating schema changes with EF Core and Azure Pipelines in Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-01-18T00:00:00.000Z'
-updatedOn: '2025-05-30T16:53:05.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-[Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) provides a great migration system for managing database schema changes in .NET applications. When combined with [Azure Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines#overview), you can automate database migrations as part of a CI/CD pipeline, ensuring that schema changes are safely applied to your Neon Postgres database.
+[Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) provides a great migration system for managing database schema changes in .NET applications. When combined with [Azure Pipelines](https://azure.microsoft.com/en-us/products/devops/pipelines#overview), you can automate database migrations as part of a CI/CD pipeline, ensuring that schema changes are safely applied to your Lakebase Postgres database.
 
 In this guide, you'll learn how to use EF Core to create and apply database migrations in Neon and automate the process using Azure Pipelines.
 
@@ -59,7 +59,7 @@ dotnet tool install --global dotnet-ef
 
 ### Configure the Database Connection
 
-Retrieve your Neon database connection string from the [Neon Console](https://console.neon.tech) and store it in the `.env` file:
+Retrieve your Lakebase Postgres database connection string from the [Neon Console](https://console.neon.tech) and store it in the `.env` file:
 
 ```bash
 DATABASE_URL=Host=<your-host>;Database=<your-database>;Username=<your-username>;Password=<your-password>;SSLMode=Require
@@ -85,7 +85,7 @@ public class ApplicationDbContext : DbContext
 
 ## Creating and Applying Migrations
 
-Migration files are used to define schema changes in your database. In this section, let's create a simple `Product` entity and apply a migration to your Neon database.
+Migration files are used to define schema changes in your database. In this section, let's create a simple `Product` entity and apply a migration to your Lakebase Postgres database.
 
 ### Define the Data Model
 
@@ -112,7 +112,7 @@ dotnet ef migrations add InitialCreate
 
 ### Apply the Migration
 
-Run the following command to apply the migration to your Neon database:
+Run the following command to apply the migration to your Lakebase Postgres database:
 
 ```bash
 dotnet ef database update
@@ -181,7 +181,7 @@ To securely store your database connection string, create a variable group in Az
 
 1. Go to **Pipelines** → **Library** → **+ Variable Group**.
 1. Set the name to `NeonMigrations`.
-1. Create a variable named `DATABASE_URL` and set it to your Neon database connection string.
+1. Create a variable named `DATABASE_URL` and set it to your Lakebase Postgres database connection string.
 1. Mark it as a **secret** to protect sensitive information.
 1. Save the variable group.
 
@@ -214,7 +214,7 @@ In addition, consider the following:
 
 ## Conclusion
 
-By integrating Entity Framework Core with Azure Pipelines, you can simplify database migrations and ensure schema changes are consistently applied to your Neon Postgres database. Automating migrations reduces the risk of human error and helps maintain database integrity across environments.
+By integrating Entity Framework Core with Azure Pipelines, you can simplify database migrations and ensure schema changes are consistently applied to your Lakebase Postgres database. Automating migrations reduces the risk of human error and helps maintain database integrity across environments.
 
 As a next step, make sure to explore [Neon branches](/docs/introduction/branching), so you can test your migrations in a staging environment before deploying to production.
 

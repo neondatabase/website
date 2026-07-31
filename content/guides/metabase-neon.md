@@ -1,17 +1,17 @@
 ---
 title: Getting started with Metabase and Neon
-subtitle: Learn how to connect Metabase to your Neon Postgres database for interactive analytics and dashboards
+subtitle: Learn how to connect Metabase to your Lakebase Postgres database for interactive analytics and dashboards
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-01-25T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-[Metabase](https://www.metabase.com/) is an open-source business intelligence and data visualization platform that makes it easy to turn your data into insights. By connecting Metabase to your Neon Postgres database, you can build interactive dashboards, explore your data, and share findings with your team without writing SQL.
+[Metabase](https://www.metabase.com/) is an open-source business intelligence and data visualization platform that makes it easy to turn your data into insights. By connecting Metabase to your Lakebase Postgres database, you can build interactive dashboards, explore your data, and share findings with your team without writing SQL.
 
 This guide will walk you through the steps to set up Metabase with Neon. You'll learn how to:
 
-- Connect Metabase to your Neon database
+- Connect Metabase to your Lakebase Postgres database
 - Load a sample dataset for analytics
 - Build interactive dashboards and visualizations
 - Apply governance controls using collections and data permissions
@@ -27,14 +27,14 @@ To follow along with this guide, you'll need the following:
 - **Metabase instance:** You can use [Metabase Cloud](https://www.metabase.com/cloud/), run Metabase locally via [Docker](/docs/guides/metabase-neon#option-2-run-metabase-locally), or deploy to your preferred hosting platform. This guide covers both Metabase Cloud and local Docker setups.
 
 <Admonition type="important" title="Latency Considerations">
-For optimal performance, ensure that your Metabase instance is hosted in the same region as your Neon database to minimize latency.
+For optimal performance, ensure that your Metabase instance is hosted in the same region as your Lakebase Postgres database to minimize latency.
 </Admonition>
 
 ## Connecting Metabase to Neon
 
 ### Option 1: Metabase Cloud
 
-If you're using Metabase Cloud, follow these steps to connect to your Neon database:
+If you're using Metabase Cloud, follow these steps to connect to your Lakebase Postgres database:
 
 1. **Create a Metabase Cloud account** and complete the initial setup.
 2. **Add a database**:
@@ -77,15 +77,15 @@ You can also run Metabase locally with Docker:
 
 5. **Save the connection** by clicking **Connect database**.
 
-Now that Metabase is connected to your Neon database, you can start loading data and building dashboards.
+Now that Metabase is connected to your Lakebase Postgres database, you can start loading data and building dashboards.
 
 ## Loading sample data
 
-In this guide, you'll load a sample e-commerce dataset into your Neon database to explore with Metabase.
+In this guide, you'll load a sample e-commerce dataset into your Lakebase Postgres database to explore with Metabase.
 
 ### Create sample tables
 
-Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any Postgres client of your choice, and run the following SQL commands to create the necessary tables:
+Connect to your Lakebase Postgres database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any Postgres client of your choice, and run the following SQL commands to create the necessary tables:
 
 ```sql
 -- Create customers table
@@ -187,7 +187,7 @@ This will insert data into each table to simulate customer orders and products.
 Once the tables are created and populated:
 
 1. In Metabase, navigate to **Settings** > **Admin** > **Databases**.
-2. Select your Neon database.
+2. Select your Lakebase Postgres database.
 3. Click **Sync database schema** to scan the schema and make the tables available in Metabase.
 4. Click **Re-scan field values** to collect metadata for improved querying and filtering.
 
@@ -206,7 +206,7 @@ With your data loaded and synced, you can start creating visualizations and dash
 In Metabase, _Questions_ are saved queries that can be visualized and added to dashboards.
 
 1. Click **+ New** in the top navigation and choose **Question**.
-2. Select your Neon database and the **orders** table.
+2. Select your Lakebase Postgres database and the **orders** table.
 3. Choose a starting point:
    - Leave defaults to select all rows and columns.
    - Use **Filter** to narrow results.
@@ -235,7 +235,7 @@ Now, create a dashboard to combine multiple questions and visualizations.
 #### Question 1: Revenue over time
 
 1. Click **+ New** > **Question**.
-2. Select your Neon database and the **Orders** table.
+2. Select your Lakebase Postgres database and the **Orders** table.
 3. Click **Summarize**:
    - Choose **Sum** of **Total Amount**.
    - Click **Group by** and select **Order Date** (by day or week).
@@ -247,7 +247,7 @@ Now, create a dashboard to combine multiple questions and visualizations.
 #### Question 2: Top selling products
 
 1. Click **+ New** > **Question**.
-2. Select your Neon database and the **Order Items** table.
+2. Select your Lakebase Postgres database and the **Order Items** table.
 3. Join with the **Products** table:
    - Open the **Join data** tab below the table selector.
    - Add a join on **Order Items → Product Id = Products → Product Id**.
@@ -264,7 +264,7 @@ Now, create a dashboard to combine multiple questions and visualizations.
 #### Question 3: Customer acquisition by month
 
 1. Click **+ New** > **Question**.
-2. Select your Neon database and the **Customers** table.
+2. Select your Lakebase Postgres database and the **Customers** table.
 3. Click **Summarize**:
    - Choose **Count** of rows.
    - Click **Group by** and select **Created At** by **Month**.
@@ -334,10 +334,10 @@ Advanced data permissions - including **Row and Column Security**, **User Attrib
 
 ### Controlling Database Access (Data Permissions)
 
-Data permissions control how users interact with the raw data in your Neon database.
+Data permissions control how users interact with the raw data in your Lakebase Postgres database.
 
 1. Go to **Admin settings** > **Permissions** > **Data**.
-2. Select a group and your Neon database.
+2. Select a group and your Lakebase Postgres database.
 3. Configure the two main permission types:
 
    **View Data**: Determines how much of the database the group can see.
@@ -440,7 +440,7 @@ By default, self-hosted Metabase uses an internal H2 database to store its appli
 To run Metabase in production, configure it to use Neon as the backing database:
 
 1. **Create a separate database** in Neon (e.g., `metabaseappdb`) to store Metabase’s internal data.
-2. **Run Metabase with Neon Postgres** by starting the container with the following command:
+2. **Run Metabase with Lakebase Postgres** by starting the container with the following command:
 
    ```bash
    docker run -d -p 3000:3000 \
@@ -453,9 +453,9 @@ To run Metabase in production, configure it to use Neon as the backing database:
      --name metabase metabase/metabase
    ```
 
-   > Replace `name`, `password`, and `my-database-host` with your Neon database credentials and host.
+   > Replace `name`, `password`, and `my-database-host` with your Lakebase Postgres database credentials and host.
 
-This configuration ensures Metabase uses Neon Postgres for its application database, making your deployment production-ready.
+This configuration ensures Metabase uses Lakebase Postgres for its application database, making your deployment production-ready.
 
 ## Conclusion
 

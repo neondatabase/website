@@ -1,15 +1,15 @@
 ---
 title: Building ASP.NET Core Applications with Neon and Entity Framework Core
-subtitle: Learn how to build a .NET application with Neon's serverless Postgres and Entity Framework Core
+subtitle: Learn how to build a .NET application with Neon's Lakebase Postgres and Entity Framework Core
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-02T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 When building .NET applications, choosing the right database solution is an important step to good performance and scalability. Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. It's a great choice for .NET developers, thanks to features like automatic scaling, branching, and connection pooling that integrate well with .NET's ecosystem.
 
-In this guide, we'll walk through setting up a Neon database with a .NET application and explore best practices for connecting and interacting with Neon Postgres and structuring your application using Entity Framework Core.
+In this guide, we'll walk through setting up a Lakebase Postgres database with a .NET application and explore best practices for connecting and interacting with Lakebase Postgres and structuring your application using Entity Framework Core.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_bi
 
 ## Creating a .NET Project with Neon Integration
 
-With your Neon database set up, let's create a sample inventory management system to demonstrate Neon integration.
+With your Lakebase Postgres database set up, let's create a sample inventory management system to demonstrate Neon integration.
 
 1. Create a new .NET Web API project:
 
@@ -177,7 +177,7 @@ We've set up the basic structure for our application. Next, we'll configure the 
 
 ## Configuring Database Connection
 
-With the database context in place, we need to configure the connection to our Neon database. Let's set this up securely.
+With the database context in place, we need to configure the connection to our Lakebase Postgres database. Let's set this up securely.
 
 ### Basic Configuration
 
@@ -404,7 +404,7 @@ After implementing the repository pattern, make sure to register the controllers
 app.MapControllers();
 ```
 
-With the repository pattern in place, we are nearly ready to start using our Neon database. Before that, let's add some sample data to the database using migrations.
+With the repository pattern in place, we are nearly ready to start using our Lakebase Postgres database. Before that, let's add some sample data to the database using migrations.
 
 ## Migrations
 
@@ -452,7 +452,7 @@ Now if you run your application and navigate to `http://localhost:5221/api/produ
 
 ## Testing CRUD Operations
 
-With our API and database set up, we’re ready to test the CRUD operations. We’ll use simple HTTP requests to add, retrieve, update, and delete products from our Neon database.
+With our API and database set up, we’re ready to test the CRUD operations. We’ll use simple HTTP requests to add, retrieve, update, and delete products from our Lakebase Postgres database.
 
 ### 1. Adding a New Product
 

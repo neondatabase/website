@@ -1,13 +1,13 @@
 ---
-title: 'How do I rotate all my Neon database credentials and connection strings after a security breach?'
+title: 'How do I rotate all my Lakebase Postgres database credentials and connection strings after a security breach?'
 subtitle: 'Reset every affected role across every project, update env vars, and revoke API keys.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I rotate my Neon database connection string for security purposes?'
+  title: 'How do I rotate my Lakebase Postgres database connection string for security purposes?'
   slug: rotate-database-connection-string-security
 nextLink:
   title: 'How do I rotate my database password in Neon after a security incident?'

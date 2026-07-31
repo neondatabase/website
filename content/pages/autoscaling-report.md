@@ -70,7 +70,7 @@ Throughout the rest of this report, we focus on the difference between the amoun
 ## Production Autoscaling
 
 Most production databases have a predictable periodic pattern of load, especially at 24-hour and 7-day intervals.
-Here is the autoscaling history of a Neon database that illustrates it well:
+Here is the autoscaling history of a Lakebase Postgres database that illustrates it well:
 
 <AutoscalingChart title="One week of Autoscaling on a Production Database" datasetKey="predictable_fluctuation" autoscalingOnly={true} showStats={false} compact={true}/>
 
@@ -246,7 +246,7 @@ We've been careful to make these numbers as conservative as possible. For exampl
 
 1. We ignore the fact that Neon comes with storage durability and high availability built-in, while provisioned platforms require you to triple your compute footprint to get durability.
 2. We compute the size of provisioned instance needed per database each month. That assumes on a provisioned platform the operator would be resizing the database monthly for maximum efficiency.
-3. When a Neon database scales to zero and never comes back on, we immediately stop tallying up equivalent provisioned costs. In reality many idle databases on provisioned platforms are forgotten about until an invoice or audit exposes them and someone manually terminates them.
+3. When a Lakebase Postgres database scales to zero and never comes back on, we immediately stop tallying up equivalent provisioned costs. In reality many idle databases on provisioned platforms are forgotten about until an invoice or audit exposes them and someone manually terminates them.
 
 ### Classifying workloads
 
@@ -275,7 +275,7 @@ So if a database spent 1% of time scaled up to 8CU, the P99.5 would be 8CU and t
 
 To get a count of performance degradation incidents, we:
 
-1. Calculate the P99.5 + 20% "provisioned equivalent" size of each Neon database for each month
+1. Calculate the P99.5 + 20% "provisioned equivalent" size of each Lakebase Postgres database for each month
 2. Count the number of distinct time periods where the autoscaling history showed the database scaling up to larger than the P99.5 + 20% size.
 
 This means if a database spent 1 minute above the P99.5 + 20% threshold, it would count as one incident, and if it scaled above and below the threshold for 5 seconds at a time in three separate occasions it would count as three incidents.

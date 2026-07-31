@@ -1,13 +1,13 @@
 ---
-title: Using Strapi CMS with Neon Postgres and Astro to build a blog
+title: Using Strapi CMS with Lakebase Postgres and Astro to build a blog
 subtitle: A step-by-step guide for building your own blog in an Astro application with Strapi CMS and Postgres powered by Neon
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-06T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-In this guide, you will learn how to set up a serverless Postgres database with Neon, configure Strapi CMS with Postgres, define a blog schema, and author content using Strapi CMS. The guide also covers configuring API read permissions and building a dynamic frontend with Astro to display blog pages based on Strapi content.
+In this guide, you will learn how to set up a Lakebase Postgres database with Neon, configure Strapi CMS with Postgres, define a blog schema, and author content using Strapi CMS. The guide also covers configuring API read permissions and building a dynamic frontend with Astro to display blog pages based on Strapi content.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ To follow the steps in this guide, you will need the following:
 
 ## Steps
 
-- [Provisioning a serverless Postgres database powered by Neon](#provisioning-a-serverless-postgres-database-powered-by-neon)
+- [Provisioning a Lakebase Postgres database powered by Neon](#provisioning-a-serverless-postgres-database-powered-by-neon)
 - [Setting up Strapi locally with Postgres](#setting-up-strapi-locally-with-postgres)
 - [Configure a blog schema in Strapi CMS](#configure-a-blog-schema-in-strapi-cms)
 - [Configure API read permissions in Strapi CMS](#configure-api-read-permissions-in-strapi-cms)
@@ -28,9 +28,9 @@ To follow the steps in this guide, you will need the following:
 - [Build and test your Astro application locally](#build-and-test-your-astro-application-locally)
 - [Scale-to-zero with Postgres (powered by Neon)](#scale-to-zero-with-postgres-powered-by-neon)
 
-## Provisioning a serverless Postgres database powered by Neon
+## Provisioning a Lakebase Postgres database powered by Neon
 
-Using a serverless Postgres database powered by Neon lets you scale compute resources down to zero, which helps you save on compute costs.
+Using a Lakebase Postgres database powered by Neon lets you scale compute resources down to zero, which helps you save on compute costs.
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project.
 
@@ -84,7 +84,7 @@ cd blog-api
 yarn develop
 ```
 
-The command `strapi develop` runs, which takes care of creating the minimal schema required by Strapi CMS in the Neon Postgres database. When the setup is complete, you will be taken to `http://localhost:1337/admin` automatically. You will need to create an account for your locally hosted Strapi CMS instance. Strapi CMS makes sure to store the credentials (and all other data) in your Neon Postgres database.
+The command `strapi develop` runs, which takes care of creating the minimal schema required by Strapi CMS in the Lakebase Postgres database. When the setup is complete, you will be taken to `http://localhost:1337/admin` automatically. You will need to create an account for your locally hosted Strapi CMS instance. Strapi CMS makes sure to store the credentials (and all other data) in your Lakebase Postgres database.
 
 ![](/guides/images/strapi-cms/52fbde59-04bd-4af0-9e85-5bb33694d7a5.png)
 
@@ -326,6 +326,6 @@ Interestingly, during the entire process of building this application, you have 
 
 ## Summary
 
-In this guide, you learned how to build a blog in an Astro application using Strapi CMS and a serverless Postgres database (powered by Neon). Additionally, you learned how to create content collections in Strapi CMS and dynamic blog routes in an Astro application.
+In this guide, you learned how to build a blog in an Astro application using Strapi CMS and a Lakebase Postgres database (powered by Neon). Additionally, you learned how to create content collections in Strapi CMS and dynamic blog routes in an Astro application.
 
 <NeedHelp />

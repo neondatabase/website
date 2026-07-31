@@ -1,13 +1,13 @@
 ---
 title: Building a RESTful API with ASP.NET Core, Swagger, and Neon
-subtitle: Learn how to connect your .NET applications to Neon's serverless Postgres database
+subtitle: Learn how to connect your .NET applications to Neon's Lakebase Postgres database
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-In this guide, we'll walk through the process of developing a RESTful API using ASP.NET Core, connecting it to a Neon Postgres database. We will cover CRUD operations using Entity Framework Core (EF Core), generate interactive API documentation with Swagger, and explore best practices for testing your API endpoints. As a bonus, we'll also implement JWT authentication to secure your endpoints.
+In this guide, we'll walk through the process of developing a RESTful API using ASP.NET Core, connecting it to a Lakebase Postgres database. We will cover CRUD operations using Entity Framework Core (EF Core), generate interactive API documentation with Swagger, and explore best practices for testing your API endpoints. As a bonus, we'll also implement JWT authentication to secure your endpoints.
 
 ## Prerequisites
 
@@ -80,7 +80,7 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-// Add the Neon database context using Npgsql provider
+// Add the Lakebase Postgres database context using Npgsql provider
 builder.Services.AddDbContext<NeonDbContext>(options =>
     options.UseNpgsql(configuration.GetConnectionString("NeonDb")));
 
@@ -126,7 +126,7 @@ app.Run();
 
 In the above, we configure the necessary services directly within `Program.cs` to connect our ASP.NET Core API to Neon and secure it with JWT authentication:
 
-1. We use `AddDbContext` to set up `NeonDbContext` with the Npgsql provider, connecting to the Neon database using the connection string defined in `appsettings.json`. Make sure to update `"NeonDb"` with your actual connection string key if it's named differently.
+1. We use `AddDbContext` to set up `NeonDbContext` with the Npgsql provider, connecting to the Lakebase Postgres database using the connection string defined in `appsettings.json`. Make sure to update `"NeonDb"` with your actual connection string key if it's named differently.
 
 2. We register controllers with `AddControllers()`, which allows the application to handle incoming API requests and map them to their respective endpoints.
 
@@ -141,7 +141,7 @@ To avoid hardcoding sensitive information like the secret key, consider using en
 
 ## Creating the Entity Framework Core Models
 
-Data models define the structure of your database tables and the relationships between them. Here, we'll create a simple `Product` model to represent products in our Neon database.
+Data models define the structure of your database tables and the relationships between them. Here, we'll create a simple `Product` model to represent products in our Lakebase Postgres database.
 
 In the `Models` folder, create a `Product.cs` file:
 
@@ -169,7 +169,7 @@ Each property corresponds to a column in the database table that Entity Framewor
 
 ### Creating the Database Context
 
-Next, we need to create a database context class, which serves as a bridge between our C# code and the Neon database.
+Next, we need to create a database context class, which serves as a bridge between our C# code and the Lakebase Postgres database.
 
 Create a new folder named `Data` and add a `NeonDbContext.cs` file:
 
@@ -180,7 +180,7 @@ namespace NeonApi.Data
     {
         public NeonDbContext(DbContextOptions<NeonDbContext> options) : base(options) { }
 
-        // This DbSet represents the Products table in the Neon database
+        // This DbSet represents the Products table in the Lakebase Postgres database
         public DbSet<Product> Products { get; set; }
     }
 }
@@ -189,7 +189,7 @@ namespace NeonApi.Data
 The above code snippet does the following:
 
 - The `NeonDbContext` class inherits from `DbContext`, which is part of Entity Framework Core.
-- We pass `DbContextOptions` to the constructor to configure the connection to our Neon database.
+- We pass `DbContextOptions` to the constructor to configure the connection to our Lakebase Postgres database.
 - The `DbSet<Product>` property represents the `Products` table. This allows us to perform CRUD operations on the `Product` model directly through this context.
 
 ### Running Migrations to Create the Database Schema
@@ -202,15 +202,15 @@ dotnet ef migrations add InitialCreate
 
 The above command generates a migration file based on the changes made to the database schema. The migration file contains instructions to create the `Products` table.
 
-Next, apply the migration to your Neon database:
+Next, apply the migration to your Lakebase Postgres database:
 
 ```bash
 dotnet ef database update
 ```
 
-The `dotnet ef database update` command applies the migration to your Neon database, creating the `Products` table and any other necessary schema changes.
+The `dotnet ef database update` command applies the migration to your Lakebase Postgres database, creating the `Products` table and any other necessary schema changes.
 
-> **Note**: Make sure your database connection string in `appsettings.json` is correctly configured before running the migrations. That way the changes are applied to your Neon database instance.
+> **Note**: Make sure your database connection string in `appsettings.json` is correctly configured before running the migrations. That way the changes are applied to your Lakebase Postgres database instance.
 
 At this point, your database is set up and ready to store product data!
 
@@ -299,7 +299,7 @@ public class ProductsController : ControllerBase
 
 In the code above, we define a `ProductsController` to handle all CRUD operations for our `Product` model. Here's a breakdown of how each endpoint works:
 
-1. The `GetProducts` method handles `GET /api/products` requests, fetching all products stored in the Neon database.
+1. The `GetProducts` method handles `GET /api/products` requests, fetching all products stored in the Lakebase Postgres database.
 
 2. The `GetProduct` method handles `GET /api/products/{id}` requests to retrieve a single product by its unique ID. If no product with the given ID is found, it responds with a `404 Not Found`. This ensures the client is notified when attempting to access a non-existent product.
 
@@ -309,7 +309,7 @@ In the code above, we define a `ProductsController` to handle all CRUD operation
 
 5. The `DeleteProduct` method handles `DELETE /api/products/{id}` requests to remove a product by its ID. If the product doesn't exist, it returns a `404 Not Found` response.
 
-Each endpoint is fully asynchronous and interacts with the Neon database through the `NeonDbContext` context.
+Each endpoint is fully asynchronous and interacts with the Lakebase Postgres database through the `NeonDbContext` context.
 
 ## Setting Up Swagger for API Documentation
 
@@ -400,7 +400,7 @@ Open Postman and create the following requests:
    - Set to `DELETE`, enter `https://localhost:5001/api/products/1`, and click **Send**.
    - Expect a `204 No Content`.
 
-After testing, check that all changes are reflected in your Neon database. Use both Postman and Swagger UI to confirm the endpoints are functioning correctly.
+After testing, check that all changes are reflected in your Lakebase Postgres database. Use both Postman and Swagger UI to confirm the endpoints are functioning correctly.
 
 ## Securing Your API with JWT Authentication (Bonus)
 
@@ -463,7 +463,7 @@ With this header in place, the server can authenticate the user without requirin
 
 ## Conclusion
 
-In this guide, we covered the process of building a RESTful API with ASP.NET Core, connecting it to a Neon Postgres database, and securing it with JWT authentication. We explored CRUD operations using Entity Framework Core, generated interactive API documentation with Swagger, and tested our endpoints using Postman.
+In this guide, we covered the process of building a RESTful API with ASP.NET Core, connecting it to a Lakebase Postgres database, and securing it with JWT authentication. We explored CRUD operations using Entity Framework Core, generated interactive API documentation with Swagger, and tested our endpoints using Postman.
 
 As a next step, consider expanding your API with additional features, such as pagination, filtering, or sorting. You can also explore adding testing frameworks like xUnit or NUnit to write unit tests for your API endpoints.
 

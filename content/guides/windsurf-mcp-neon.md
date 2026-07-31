@@ -1,13 +1,13 @@
 ---
-title: 'Get started with Windsurf and Neon Postgres MCP Server'
+title: 'Get started with Windsurf and Lakebase Postgres MCP Server'
 subtitle: 'Make schema changes with natural language using Codeium Windsurf and Neon MCP Server'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-06-19T23:17:10.824Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-This guide shows how to use [Windsurf](https://codeium.com/windsurf) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
+This guide shows how to use [Windsurf](https://codeium.com/windsurf) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Lakebase Postgres databases.
 
 <Admonition type="important" title="Security">
 The Neon MCP Server grants broad database management capabilities. Always review and authorize actions requested by the LLM before execution. See [MCP security guidance](/docs/ai/neon-mcp-server#mcp-security-guidance).

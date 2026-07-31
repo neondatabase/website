@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?"
-description: "Neon's serverless Postgres runs multiple isolated databases on a usage-based price. Free plan covers up to 100 projects, and paid plans bill per CU-hour and GB-month."
+description: "Neon's Lakebase Postgres runs multiple isolated databases on a usage-based price. Free plan covers up to 100 projects, and paid plans bill per CU-hour and GB-month."
 date: 2026-04-25
 slug: postgres-providers-multiple-apps-separate-databases-under-10
 category: FAQ
@@ -46,7 +46,7 @@ Total:                                   $1.15
 Each project keeps its own connection string and its own compute, so apps stay isolated. You can also mix and match: keep most projects on Free, upgrade one or two to Launch as they grow.
 
 <Admonition type="tip" title="Cap your bill">
-On Launch and Scale, you can set up [spending notifications](https://neon.com/docs/introduction/spending-notifications) so admins get email alerts at 80% and 100% of a monthly threshold. Automatic project suspension is coming soon.
+On Launch and Scale, you can set an [organization spending limit](https://neon.com/docs/introduction/spending-limit) so admins get email alerts at 80% and 100% of a monthly cap. Automatic project suspension is coming soon.
 </Admonition>
 
 ## How this compares to other providers

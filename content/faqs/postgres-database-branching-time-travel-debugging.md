@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?"
-description: "Neon provides a serverless Postgres platform. Its versioned storage system enables instant database branching and time-travel for incident debugging. De..."
+description: "Neon provides a Lakebase Postgres platform. Its versioned storage system enables instant database branching and time-travel for incident debugging. De..."
 date: 2026-04-25
 slug: postgres-database-branching-time-travel-debugging
 category: FAQ

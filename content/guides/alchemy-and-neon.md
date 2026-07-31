@@ -1,17 +1,17 @@
 ---
-title: Automate Database Branching with Alchemy and Neon Postgres
-subtitle: Learn how to use Alchemy Infrastructure-as-Code to programmatically create and manage Neon database branches
+title: Automate Database Branching with Alchemy and Lakebase Postgres
+subtitle: Learn how to use Alchemy Infrastructure-as-Code to programmatically create and manage Lakebase Postgres database branches
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-10T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Database branching is one of Neon's most powerful features, letting you create isolated database copies in seconds.
 
 [Alchemy](https://github.com/sam-goodwin/alchemy) is a TypeScript-native Infrastructure-as-Code tool that lets you automate cloud resources with simple async functions. Unlike traditional IaC tools like Terraform that require learning new languages and complex state management, Alchemy lets you manage infrastructure using the TypeScript you already know.
 
-In this guide, you'll learn how to use Alchemy to automatically create, manage, and clean up Neon database branches as part of your development workflow. Think of it as "Git for your database infrastructure", you'll define what branches you want in code, and Alchemy will make sure they exist.
+In this guide, you'll learn how to use Alchemy to automatically create, manage, and clean up Lakebase Postgres database branches as part of your development workflow. Think of it as "Git for your database infrastructure", you'll define what branches you want in code, and Alchemy will make sure they exist.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ By the end of this guide, you'll have:
 
 ## Understanding Alchemy basics
 
-Before we dive into the implementation, let's understand what makes Alchemy different from traditional Infrastructure-as-Code tools and why it's particularly well-suited for managing Neon database branches.
+Before we dive into the implementation, let's understand what makes Alchemy different from traditional Infrastructure-as-Code tools and why it's particularly well-suited for managing Lakebase Postgres database branches.
 
 ### What is Alchemy?
 
@@ -550,7 +550,7 @@ Or by manually cleaning up resources in the Neon Console and starting fresh.
 
 ## Summary
 
-You've learned how to use Alchemy to automate Neon database branching with proper security practices.
+You've learned how to use Alchemy to automate Lakebase Postgres database branching with proper security practices.
 
 The combination of Alchemy's simple TypeScript approach and Neon's branching makes database infrastructure management almost invisible. You focus on building features, and the database branches you need just exist.
 

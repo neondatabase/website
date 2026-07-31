@@ -1,13 +1,13 @@
 ---
 title: Setting up GitHub Codespaces with Neon Database Branching for Pull Requests
-subtitle: Learn how to create separate development environments for each pull request using GitHub Codespaces and Neon's Postgres branching
+subtitle: Learn how to create separate development environments for each pull request using GitHub Codespaces and Lakebase Postgres branching
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-18T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-When working on a team project, it's useful to have separate environments for each new feature or bug fix. This helps prevent conflicts and makes it easier to test changes. In this guide, we'll show you how to set up a process that creates a new development environment for each pull request. We'll use GitHub Codespaces for the coding environment and Neon's Postgres branching for the database.
+When working on a team project, it's useful to have separate environments for each new feature or bug fix. This helps prevent conflicts and makes it easier to test changes. In this guide, we'll show you how to set up a process that creates a new development environment for each pull request. We'll use GitHub Codespaces for the coding environment and Lakebase Postgres branching for the database.
 
 By the end of this guide, you'll have a setup that automatically creates a new Codespace and a new database branch for each pull request. This means each change can be tested separately, making it easier to find and fix problems.
 
@@ -98,9 +98,9 @@ This file tells GitHub Codespaces how to set up the development environment. Her
 - `"postCreateCommand"`: This runs commands after the Codespace is created. It installs PHP dependencies, generates an application key, and runs a setup script for the database.
 - `"features"`: This adds Node.js to the environment.
 
-## Setting up Neon Postgres
+## Setting up Lakebase Postgres
 
-Now let's connect our project to a Neon Postgres database.
+Now let's connect our project to a Lakebase Postgres database.
 
 1. Go to the [Neon Console](https://console.neon.tech) and create a new project.
 
@@ -125,11 +125,11 @@ Replace the placeholders with the details from your Neon connection string.
 php artisan migrate
 ```
 
-This command creates the necessary tables in your Neon database.
+This command creates the necessary tables in your Lakebase Postgres database.
 
 ## Setting up GitHub Actions for Neon Branching
 
-Now we'll set up GitHub Actions to create and delete Neon database branches automatically. First, we need to add your Neon API key to your GitHub repository:
+Now we'll set up GitHub Actions to create and delete Lakebase Postgres database branches automatically. First, we need to add your Neon API key to your GitHub repository:
 
 1. In your GitHub repository, go to "Settings", then "Secrets and variables", then "Actions".
 2. Click "New repository secret".
@@ -290,7 +290,7 @@ With everything set up, here's how you would use this in your development proces
    - Click "Create pull request"
    - Fill in the title and description, then click "Create pull request"
 
-3. GitHub Actions will automatically create a new Neon database branch for your pull request:
+3. GitHub Actions will automatically create a new Lakebase Postgres database branch for your pull request:
    - This happens automatically when the pull request is opened
    - You can check the "Actions" tab in your GitHub repository to see the progress
    - Once complete, you'll see a new branch in your Neon console named `pr-[number]`
@@ -313,7 +313,7 @@ With everything set up, here's how you would use this in your development proces
    - When ready, merge the pull request on GitHub
 
 7. Automatic cleanup:
-   - When the pull request is closed (either merged or declined), GitHub Actions will automatically delete the associated Neon database branch
+   - When the pull request is closed (either merged or declined), GitHub Actions will automatically delete the associated Lakebase Postgres database branch
    - You can verify this in your Neon console
 
 ## Keeping Things Secure
@@ -326,7 +326,7 @@ It's important to keep your project and its data safe:
 
 ## Conclusion
 
-By setting up GitHub Codespaces with Neon database branching, you've created a system that gives each pull request its own complete development environment. This can help your team work more effectively by making it easier to test changes and avoid conflicts.
+By setting up GitHub Codespaces with Lakebase Postgres database branching, you've created a system that gives each pull request its own complete development environment. This can help your team work more effectively by making it easier to test changes and avoid conflicts.
 
 This workflow can be adapted to work with other languages and frameworks. You can also add more steps to the GitHub Actions workflows to suit your specific needs like running tests, deploying to staging environments, or sending notifications.
 

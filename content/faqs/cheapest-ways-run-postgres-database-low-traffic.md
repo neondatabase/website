@@ -39,7 +39,7 @@ Say your app gets traffic for about 2 hours of active compute time per day. Acti
 If the same project fits inside Free plan limits (100 CU-hours, 0.5 GB), it's $0.
 
 <Admonition type="tip" title="Cap your spend">
-On Launch and Scale plans, set up [spending notifications](/docs/introduction/spending-notifications) so an unexpected traffic spike doesn't surprise you. You'll get alerts at 80% and 100%.
+On Launch and Scale plans, set a [spending limit](/docs/introduction/spending-limit) so an unexpected traffic spike doesn't surprise you. You'll get alerts at 80% and 100%.
 </Admonition>
 
 ## How this compares to other low-traffic options

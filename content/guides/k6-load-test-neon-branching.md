@@ -4,7 +4,7 @@ subtitle: 'Learn how to fork your production database into an isolated Neon bran
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-04-26T00:00:00.000Z'
-updatedOn: '2026-04-28T06:24:08.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Performance testing is one of the hardest parts of shipping applications. Teams often turn to staging environments for testing, but these rarely reflect the realities of production. Staging databases are smaller, cleaner, and more predictable. Queries that seem instantaneous in staging can become serious bottlenecks when executed against millions of rows in production.
@@ -27,7 +27,7 @@ Before you begin, ensure you have the following installed and set up:
 
 ## Set up the example project
 
-You will create a simple Express API that connects to a Neon database and exposes an endpoint to fetch products by category. This API will be the target of your k6 load tests.
+You will create a simple Express API that connects to a Lakebase Postgres database and exposes an endpoint to fetch products by category. This API will be the target of your k6 load tests.
 
 <Admonition type="note" title="Apply this workflow to your own codebase">
 The Express API in this guide is only a simple example to make the load‑testing pattern clear. You can follow along with your own application code and schema, applying the same k6 testing and Neon branching workflow to analyze and optimize real production queries. The process is identical regardless of your tech stack or schema design: create a Neon branch, point your app to it, run k6 load tests, and iterate on optimizations until you’re satisfied. Once testing is complete, you can safely tear down the branch and roll the improvements into production with confidence.

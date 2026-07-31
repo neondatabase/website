@@ -4,7 +4,7 @@ subtitle: 'Learn how to safely offload complex schema migrations to AI agents us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-04T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Refactoring a database schema like splitting tables or dropping columns is inherently risky. When you introduce an AI coding assistant to handle these complex operations autonomously, the stakes get even higher. One wrong `DROP` statement or flawed migration in a shared environment can easily wipe out critical staging data and block your entire team's workflow.
@@ -28,7 +28,7 @@ Before you begin, ensure you have the following:
 
 ## Step 1: Generate a Neon API Key and set project context
 
-To allow Codex to interact with your Neon database, you'll need to generate a Neon API Key and configure your project context.
+To allow Codex to interact with your Lakebase Postgres database, you'll need to generate a Neon API Key and configure your project context.
 
 1. Navigate to your Neon organization settings and click on the **API Keys** tab.
 2. Click **Create new API Key** and give it a name (e.g., "Codex Integration").

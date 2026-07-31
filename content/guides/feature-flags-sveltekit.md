@@ -1,10 +1,10 @@
 ---
-title: Add feature flags in SvelteKit apps with Neon Postgres
+title: Add feature flags in SvelteKit apps with Lakebase Postgres
 subtitle: A step-by-step guide to integrating feature flags in SvelteKit apps with Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-05-24T13:24:36.612Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 This guide covers the step-by-step process of integrating feature flags in SvelteKit apps with Postgres (powered by Neon). Feature flags provide a way to control the behavior of your application without deploying new code, allowing you to test and roll out new features dynamically. Upon completing the guide, you will understand how to manage and roll out new features using dynamic feature flag integration.
@@ -21,12 +21,12 @@ To follow the steps in this guide, you will need the following:
 - [Provisioning a Postgres database powered by Neon](#provisioning-a-postgres-database-powered-by-neon)
 - [Creating a new SvelteKit application](#creating-a-new-sveltekit-application)
 - [(Optional) Adding Tailwind CSS to the application](#optional-adding-tailwind-css-to-the-application)
-- [Managing Feature Flags in Serverless Postgres](#managing-feature-flags-in-serverless-postgres)
+- [Managing Feature Flags in Lakebase Postgres](#managing-feature-flags-in-serverless-postgres)
 - [Dynamic Feature Flag Integration for Testing Fast Payment Methods](#dynamic-feature-flag-integration-for-testing-fast-payment-methods)
 
 ## Provisioning a Postgres database powered by Neon
 
-Using Serverless Postgres database powered by Neon helps you scale down to zero. With Neon, you only have to pay for what you use.
+Using Lakebase Postgres database powered by Neon helps you scale down to zero. With Neon, you only have to pay for what you use.
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
 
@@ -95,7 +95,7 @@ The libraries installed include:
 <CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
 
 ```markdown
-- `@neondatabase/serverless`: Neon's serverless Postgres driver for JavaScript and TypeScript.
+- `@neondatabase/serverless`: Neon's Lakebase Postgres driver for JavaScript and TypeScript.
 ```
 
 ```markdown
@@ -162,11 +162,11 @@ Finally, add an import to `app.css` in your `+page.svelte` file:
 <!-- +page.svelte's HTML -->
 ```
 
-## Managing Feature Flags in Serverless Postgres
+## Managing Feature Flags in Lakebase Postgres
 
-Feature flags offer a powerful way to control the behavior of your application without deploying new code. In a Serverless Postgres environment, you can easily create, read, and update feature flags using the following steps:
+Feature flags offer a powerful way to control the behavior of your application without deploying new code. In a Lakebase Postgres environment, you can easily create, read, and update feature flags using the following steps:
 
-### Create a serverless Postgres client
+### Create a Lakebase Postgres client
 
 To create a client that interacts with your serverless postgres, create a `postgres.server.ts` file inside the `src/lib` directory with the following content:
 
@@ -181,7 +181,7 @@ import 'dotenv/config';
 // Load the postgres module
 import { neon } from '@neondatabase/serverless';
 
-// Create a connection string to the Neon Postgres instance
+// Create a connection string to the Lakebase Postgres instance
 const connectionString: string = process.env.DATABASE_URL as string;
 
 // Create a in-memory query function
@@ -197,7 +197,7 @@ import 'dotenv/config';
 // Load the postgres module
 import pg from 'pg';
 
-// Create a connection string to the Neon Postgres instance
+// Create a connection string to the Lakebase Postgres instance
 const connectionString: string = process.env.DATABASE_URL as string;
 
 // Create a in-memory pool so that it's cached for multiple calls
@@ -397,7 +397,7 @@ In the code above, UI elements related to fast payment methods are conditionally
 
 ## Summary
 
-In this guide, you learned how to add feature flags in your SvelteKit apps using Serverless Postgres powered by Neon. By dynamically updating and utilizing feature flags, you can effectively test and roll out new features like fast payment methods, providing a controlled and iterative approach to your deployments.
+In this guide, you learned how to add feature flags in your SvelteKit apps using Lakebase Postgres powered by Neon. By dynamically updating and utilizing feature flags, you can effectively test and roll out new features like fast payment methods, providing a controlled and iterative approach to your deployments.
 
 ## Source code
 

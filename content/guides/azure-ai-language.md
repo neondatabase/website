@@ -1,15 +1,15 @@
 ---
 title: Sentiment Analysis with Azure AI Services and Neon
-subtitle: Learn how to analyze customer feedback using Azure AI Language and store results in Neon Postgres
+subtitle: Learn how to analyze customer feedback using Azure AI Language and store results in Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-30T00:00:00.000Z'
-updatedOn: '2026-01-07T13:45:46.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Analyzing customer sentiment can help you understand your customer satisfaction and identify areas for improvement. The Azure AI Language Services provide tools for sentiment analysis, key phrase extraction, and language detection which can be used to analyze customer feedback and extract valuable insights.
 
-In this guide, you'll learn how to use Azure AI Language Services to analyze customer feedback and save the results in Neon Postgres. We'll go through setting up your environment, creating a database to store feedback and analysis results, and running the analysis to get useful insights.
+In this guide, you'll learn how to use Azure AI Language Services to analyze customer feedback and save the results in Lakebase Postgres. We'll go through setting up your environment, creating a database to store feedback and analysis results, and running the analysis to get useful insights.
 
 ## Prerequisites
 
@@ -31,13 +31,13 @@ If you haven't already, follow these steps to set up your development environmen
 5. Name your project (e.g., "sentiment-analysis")
 6. Click "Create Project"
 
-Save your connection details, you'll need them later to connect to your Neon database.
+Save your connection details, you'll need them later to connect to your Lakebase Postgres database.
 
 ### Create Database Schema
 
 Next, you'll set up the database tables to store customer feedback and sentiment analysis results. These tables will hold the feedback text, analysis scores, sentiment labels, key phrases, and timestamps.
 
-Connect to your Neon database and create tables for storing our customer feedback and sentiment analysis results from the Azure AI Language service:
+Connect to your Lakebase Postgres database and create tables for storing our customer feedback and sentiment analysis results from the Azure AI Language service:
 
 ```sql
 CREATE TABLE customer_feedback (
@@ -77,7 +77,7 @@ The [Azure AI Language service](https://learn.microsoft.com/en-us/azure/ai-servi
 
 ### Project Setup
 
-For the sake of this guide, we'll create a Node.js script that analyzes existing feedback stored in the Neon database. In a real-world app, you could integrate this process directly so that whenever a user posts a review, a queued job or a scheduled task automatically analyzes the feedback right away.
+For the sake of this guide, we'll create a Node.js script that analyzes existing feedback stored in the Lakebase Postgres database. In a real-world app, you could integrate this process directly so that whenever a user posts a review, a queued job or a scheduled task automatically analyzes the feedback right away.
 
 Let's start by creating a new Node.js project:
 
@@ -96,10 +96,10 @@ npm install @azure/ai-language-text pg dotenv
 The packages we're using are:
 
 - `@azure/ai-language-text`: [Azure AI Language client library for JavaScript](https://www.npmjs.com/package/@azure/ai-language-text), this will allow us to interact with the Azure AI Language service to analyze text instead of using the REST API directly.
-- `pg`: A PostgreSQL client for Node.js, this will allow us to connect to the Neon database and store the analysis results.
+- `pg`: A PostgreSQL client for Node.js, this will allow us to connect to the Lakebase Postgres database and store the analysis results.
 - `dotenv`: A package for loading environment variables from a `.env` file.
 
-With the packages installed, create a `.env` file in the project root and add your Azure AI Language service key and endpoint, as well as your Neon database connection URL:
+With the packages installed, create a `.env` file in the project root and add your Azure AI Language service key and endpoint, as well as your Lakebase Postgres database connection URL:
 
 ```env
 AZURE_LANGUAGE_KEY=your_key_here
@@ -107,7 +107,7 @@ AZURE_LANGUAGE_ENDPOINT=your_endpoint_here
 DATABASE_URL=postgres://user:password@your-neon-host.cloud/dbname
 ```
 
-Change the `DATABASE_URL` to match your Neon database connection details. Also, replace `your_key_here` and `your_endpoint_here` with your Azure AI Language service key and endpoint which you can find in the Azure portal under your Language Service resource.
+Change the `DATABASE_URL` to match your Lakebase Postgres database connection details. Also, replace `your_key_here` and `your_endpoint_here` with your Azure AI Language service key and endpoint which you can find in the Azure portal under your Language Service resource.
 
 ## Implementation
 
@@ -115,7 +115,7 @@ With everything set up, let's start implementing the sentiment analysis script. 
 
 ### Database Connection
 
-In this step, we'll set up a connection to our Neon Postgres database using the `pg` package. This connection will allow you to read customer feedback and store sentiment analysis results whenever the analysis script runs.
+In this step, we'll set up a connection to our Lakebase Postgres database using the `pg` package. This connection will allow you to read customer feedback and store sentiment analysis results whenever the analysis script runs.
 
 We'll use a connection pool to manage multiple database connections efficiently, which is especially useful when running scripts that perform multiple queries.
 
@@ -137,7 +137,7 @@ The `pool` object will be used to connect to the database and execute queries. W
 
 ### Azure AI Language Client
 
-Now let's set up the Azure AI Language client to perform our sentiment analysis and extract key phrases from customer feedback stored in our Neon database. Here is where we'll use the `@azure/ai-language-text` package to interact with the Azure AI Language service.
+Now let's set up the Azure AI Language client to perform our sentiment analysis and extract key phrases from customer feedback stored in our Lakebase Postgres database. Here is where we'll use the `@azure/ai-language-text` package to interact with the Azure AI Language service.
 
 Create a new file `src/textAnalytics.js` and add the following code:
 
@@ -187,7 +187,7 @@ Now that the Azure AI Language client is ready, let's move on to the main analys
 
 ### Main Analysis Script
 
-Now that we have our database connection and Azure AI Language client set up, let's create a script to process customer feedback, analyze it, and store the results in our Neon database.
+Now that we have our database connection and Azure AI Language client set up, let's create a script to process customer feedback, analyze it, and store the results in our Lakebase Postgres database.
 
 Create a new file `src/analyze.js` and add the following code:
 
@@ -332,7 +332,7 @@ async function main() {
 main();
 ```
 
-This script will run the sentiment analysis on the customer feedback stored in the Neon database and generate reports based on the analysis results. You can run this script manually or set up a scheduled job to run it periodically.
+This script will run the sentiment analysis on the customer feedback stored in the Lakebase Postgres database and generate reports based on the analysis results. You can run this script manually or set up a scheduled job to run it periodically.
 
 The script can be extended to include additional reports, alerts, or integrations with other services based on the sentiment analysis results but for now, let's focus on running the analysis.
 
@@ -428,7 +428,7 @@ Alternatively, you can use a scheduled task to process feedback at regular inter
 
 2. Create a new Azure Function with a timer trigger. The schedule expression `0 0 */2 * * *` will run the function every two hours.
 
-3. Replace the default function code with the following to process the feedback from your Neon Postgres database:
+3. Replace the default function code with the following to process the feedback from your Lakebase Postgres database:
 
    ```javascript
    const { processFeedback } = require('./src/analyze');
@@ -467,7 +467,7 @@ The timer schedule is defined in the `function.json` file as follows:
 
 This configuration makes sure that the function runs every two hours. You can adjust the schedule as needed using a [cron expression](https://learn.microsoft.com/en-gb/azure/azure-functions/functions-bindings-timer).
 
-For more details on connecting Azure Functions to a Postgres database and deploying the function to Azure, see the [Building a Serverless Referral System with Neon Postgres and Azure Functions](/guides/azure-functions-referral-system) guide.
+For more details on connecting Azure Functions to a Postgres database and deploying the function to Azure, see the [Building a Serverless Referral System with Lakebase Postgres and Azure Functions](/guides/azure-functions-referral-system) guide.
 
 ## Analyzing Results
 
@@ -502,7 +502,7 @@ Now that you've processed customer feedback and stored the sentiment analysis re
 
 ## Conclusion
 
-In this guide, we covered how to analyze customer feedback using Azure AI Language Services and store the results in a Neon Postgres database. This setup is just a starting point. You can expand it by adding real-time triggers, building dashboards, or supporting multiple languages.
+In this guide, we covered how to analyze customer feedback using Azure AI Language Services and store the results in a Lakebase Postgres database. This setup is just a starting point. You can expand it by adding real-time triggers, building dashboards, or supporting multiple languages.
 
 The Azure AI Language service also includes SDKs for other languages like [Python](https://learn.microsoft.com/en-us/python/api/overview/azure/ai-textanalytics-readme), [Java](https://learn.microsoft.com/en-us/java/api/overview/azure/ai-textanalytics-readme), and [.NET](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/ai.textanalytics-readme), so you can integrate sentiment analysis into your existing applications.
 

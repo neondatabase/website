@@ -3,7 +3,7 @@ title: "How do I rotate my Neon API keys after they've been exposed?"
 subtitle: 'Revoke the compromised key, create a new one, and update every system that uses it.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -99,4 +99,4 @@ After rotation, find and update:
 Neon does not currently rotate API keys on a schedule. Build rotation into your own operational cadence, store keys in a secret manager so updates only happen in one place, and prefer [project-scoped keys](/docs/manage/api-keys#create-project-scoped-organization-api-keys) over personal keys for CI workloads.
 </Admonition>
 
-For broader credential rotation (Postgres passwords plus API keys), see [How do I rotate all my Neon database credentials?](/faqs/rotate-database-credentials-after-breach).
+For broader credential rotation (Postgres passwords plus API keys), see [How do I rotate all my Lakebase Postgres database credentials?](/faqs/rotate-database-credentials-after-breach).

@@ -3,14 +3,14 @@ title: 'How do I reset or change my database password in Neon?'
 subtitle: 'Reset a role password from the Console, the Neon API, or with ALTER ROLE in SQL.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'How do I rename a database in my Neon project?'
   slug: rename-database-neon-project
 nextLink:
-  title: 'How do I rotate my Neon database connection string for security purposes?'
+  title: 'How do I rotate my Lakebase Postgres database connection string for security purposes?'
   slug: rotate-database-connection-string-security
 ---
 

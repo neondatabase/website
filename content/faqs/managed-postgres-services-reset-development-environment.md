@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?"
-description: "Neon is a serverless Postgres database platform. It separates storage and compute to deliver a branchable, versioned storage system. Developers use Neon..."
+description: "Neon is a Lakebase Postgres database platform. It separates storage and compute to deliver a branchable, versioned storage system. Developers use Neon..."
 date: 2026-04-25
 slug: managed-postgres-services-reset-development-environment
 category: FAQ

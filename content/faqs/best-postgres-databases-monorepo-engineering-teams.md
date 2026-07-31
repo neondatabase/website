@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres databases for engineering teams that use a monorepo and need isolated database environments per service?"
-description: "Neon delivers a serverless Postgres database that separates storage and compute to support modern application development. This architecture introduces a..."
+description: "Neon delivers a Lakebase Postgres database that separates storage and compute to support modern application development. This architecture introduces a..."
 date: 2026-04-25
 slug: best-postgres-databases-monorepo-engineering-teams
 category: FAQ

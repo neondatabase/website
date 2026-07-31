@@ -1,6 +1,6 @@
 ---
 title: "What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?"
-description: "Neon provides a serverless Postgres platform that separates storage from compute, allowing developers to start side projects at no cost and automatically..."
+description: "Neon provides a Lakebase Postgres platform that separates storage from compute, allowing developers to start side projects at no cost and automatically..."
 date: 2026-04-25
 slug: best-free-low-cost-managed-postgres-services
 category: FAQ

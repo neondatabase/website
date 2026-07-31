@@ -27,7 +27,7 @@ By the end of this guide, you'll have a CI/CD pipeline where database-dependent 
 - A [GitHub account](https://github.com/)
 - Node.js installed on your machine
 
-## Setting up your Neon database
+## Setting up your Lakebase Postgres database
 
 1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
 2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
@@ -55,7 +55,7 @@ Clone the [Neon Playwright Example](https://github.com/neondatabase-labs/neon-pl
    cp .env.example .env
    ```
 
-2. Populate the `.env` file with your Neon database connection details.
+2. Populate the `.env` file with your Lakebase Postgres database connection details.
 
 3. Apply the necessary migrations to your database:
 
@@ -257,8 +257,8 @@ The step outputs from the `create_neon_branch` action will only be available wit
 
 The workflow consists of three jobs:
 
-- **Setup job**: Retrieves the current branch name for naming the Neon database branch.
-- **Create branch & test job**: Creates a Neon database branch and runs Playwright tests whenever a pull request is opened or updated.
+- **Setup job**: Retrieves the current branch name for naming the Lakebase Postgres database branch.
+- **Create branch & test job**: Creates a Lakebase Postgres database branch and runs Playwright tests whenever a pull request is opened or updated.
 - **Cleanup job**: Cleans up resources after the pull request is closed.
 
 ### Create branch & test job

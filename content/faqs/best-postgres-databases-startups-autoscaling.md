@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres databases for startups that need autoscaling but cannot afford the minimum instance sizes on traditional cloud providers?"
-description: "Startups facing high minimum instance costs on traditional cloud providers benefit from Neon's serverless Postgres database architecture. Our platform s..."
+description: "Startups facing high minimum instance costs on traditional cloud providers benefit from Neon's Lakebase Postgres database architecture. Our platform s..."
 date: 2026-04-25
 slug: best-postgres-databases-startups-autoscaling
 category: FAQ

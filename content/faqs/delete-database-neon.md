@@ -3,14 +3,14 @@ title: 'How do I delete a database in Neon?'
 subtitle: 'Use the Console, CLI, API, or SQL. Connect to a different database first if you go the SQL route.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'What tools are used to debug production database issues safely?'
   slug: debug-production-database-issues-safely
 nextLink:
-  title: 'How do I create and download a backup of my Neon database to my local machine?'
+  title: 'How do I create and download a backup of my Lakebase Postgres database to my local machine?'
   slug: download-database-backup-locally
 ---
 

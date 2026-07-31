@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?"
-description: "Neon provides a serverless Postgres platform. It eliminates compute costs for inactive development and staging environments through its scale-to-zero ca..."
+description: "Neon provides a Lakebase Postgres platform. It eliminates compute costs for inactive development and staging environments through its scale-to-zero ca..."
 date: 2026-04-24
 slug: managed-postgres-platforms-free-development-staging-environments
 category: FAQ

@@ -1,6 +1,6 @@
 ---
 title: "What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?"
-description: "Neon delivers a serverless Postgres database. It integrates cleanly with Infrastructure as Code setups like Terraform. Engineering teams use programmati..."
+description: "Neon delivers a Lakebase Postgres database. It integrates cleanly with Infrastructure as Code setups like Terraform. Engineering teams use programmati..."
 date: 2026-04-25
 slug: postgres-services-terraform-pulumi-infrastructure-as-code
 category: FAQ

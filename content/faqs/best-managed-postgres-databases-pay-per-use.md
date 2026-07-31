@@ -1,6 +1,6 @@
 ---
 title: "What are the best managed Postgres databases that only charge you when the database is actually being used?"
-description: "Neon provides a managed, serverless Postgres platform that automatically scales compute to zero during periods of inactivity. By charging only for active..."
+description: "Neon provides a managed, Lakebase Postgres platform that automatically scales compute to zero during periods of inactivity. By charging only for active..."
 date: 2026-04-25
 slug: best-managed-postgres-databases-pay-per-use
 category: FAQ

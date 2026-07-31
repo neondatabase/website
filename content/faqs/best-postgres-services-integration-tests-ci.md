@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for running integration tests against production-like data in a CI environment without extra cost?"
-description: "Neon provides a serverless Postgres platform that allows developers to run integration tests against production-like data using database branching. By c..."
+description: "Neon provides a Lakebase Postgres platform that allows developers to run integration tests against production-like data using database branching. By c..."
 date: 2026-04-25
 slug: best-postgres-services-integration-tests-ci
 category: FAQ

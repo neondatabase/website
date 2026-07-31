@@ -4,10 +4,10 @@ subtitle: Learn how to use Managed Better Auth Webhooks to build custom authenti
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-24T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-Managed Better Auth offers a fully integrated authentication and user management system designed to work seamlessly with your Neon database. By default, Managed Better Auth handles common authentication flows and delivers OTPs for email verification and passwordless login. This allows you to get up and running quickly with secure authentication.
+Managed Better Auth offers a fully integrated authentication and user management system designed to work seamlessly with your Lakebase Postgres database. By default, Managed Better Auth handles common authentication flows and delivers OTPs for email verification and passwordless login. This allows you to get up and running quickly with secure authentication.
 
 But every application is different, and you may need to customize how these messages are delivered or add extra logic to your authentication flow. Some common scenarios that go beyond the default Managed Better Auth features include:
 
@@ -108,7 +108,7 @@ Set up the Managed Better Auth SDK to handle user sessions, API routing, and the
     export const authClient = createAuthClient();
     ```
 
-3.  **Set up the Auth API route:** Create `app/api/auth/[...path]/route.ts`. This proxies Next.js auth requests to your Neon database:
+3.  **Set up the Auth API route:** Create `app/api/auth/[...path]/route.ts`. This proxies Next.js auth requests to your Lakebase Postgres database:
 
     ```typescript shouldWrap
     import { auth } from '@/lib/auth/server';

@@ -1,9 +1,9 @@
 ---
-title: 'How do I check which PostgreSQL version my Neon database is running?'
+title: 'How do I check which PostgreSQL version my Lakebase Postgres database is running?'
 subtitle: 'Run SELECT version() in SQL, check the Project Dashboard, or use the Neon CLI.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:

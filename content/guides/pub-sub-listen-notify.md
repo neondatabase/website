@@ -4,7 +4,7 @@ subtitle: A step-by-step guide describing how to use LISTEN and NOTIFY for pub/s
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-03-28T13:24:36.612Z'
-updatedOn: '2026-02-01T17:40:30.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 PostgreSQL has a built-in mechanism for publish/subscribe (Pub/Sub) communication using the `LISTEN` and `NOTIFY` commands.
@@ -90,7 +90,7 @@ Keep the above script running, you will trigger a notification in the next secti
 
 ### Send a Message using NOTIFY
 
-With the listener now configured, connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Then, run the following command to publish a notification to the `my_channel` channel.
+With the listener now configured, connect to your Lakebase Postgres database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Then, run the following command to publish a notification to the `my_channel` channel.
 
 ```sql
 NOTIFY my_channel, 'Hello from another session!';

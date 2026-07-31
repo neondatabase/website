@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?"
-description: "Neon delivers a serverless Postgres database. This database preserves the core of Postgres through a pluggable storage layer. This architecture ensures ..."
+description: "Neon delivers a Lakebase Postgres database. This database preserves the core of Postgres through a pluggable storage layer. This architecture ensures ..."
 date: 2026-04-24
 slug: postgres-services-wire-protocol-compatible
 category: FAQ

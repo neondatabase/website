@@ -30,7 +30,7 @@ company: 'Software Engineer at Retool',
 
 ## With instant provisioning and scale-to-zero
 
-Neon databases provision in less than a second and automatically suspend when idle, with no compute cost until the next query. **You can offer every user their own Postgres database without incurring the cost of idle infrastructure.** This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
+Lakebase Postgres databases provision in less than a second and automatically suspend when idle, with no compute cost until the next query. **You can offer every user their own Postgres database without incurring the cost of idle infrastructure.** This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
 
 - Provisioning time: ~1 second
 - Suspend latency: configurable (default is 5 min)
@@ -88,7 +88,7 @@ You can use these to:
 [Learn how to query consumption metrics via the API](/docs/guides/consumption-metrics)
 
 <QuoteBlock
-quote="Neon’s serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering."
+quote="Neon’s serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our Lakebase Postgres offering."
 author={{
 name: 'Edouard Bonlieu',
 company: 'co-founder and CPO at Koyeb',

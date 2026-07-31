@@ -1,15 +1,15 @@
 ---
-title: Building Dynamic Charts with Laravel, Livewire, and Neon Postgres
-subtitle: Learn how to build dynamic charts with Laravel, Livewire, and Neon Postgres
+title: Building Dynamic Charts with Laravel, Livewire, and Lakebase Postgres
+subtitle: Learn how to build dynamic charts with Laravel, Livewire, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2026-03-03T03:19:43.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Laravel is an amazing PHP framework for building web applications, while Livewire provides a simple way to build dynamic interfaces using PHP.
 
-In this guide, we'll walk through the process of creating a dynamic analytics dashboard for a SaaS application using Laravel Breeze for authentication, Livewire Charts for data visualization, and Neon Postgres for data storage.
+In this guide, we'll walk through the process of creating a dynamic analytics dashboard for a SaaS application using Laravel Breeze for authentication, Livewire Charts for data visualization, and Lakebase Postgres for data storage.
 
 We'll build interactive charts that display key metrics such as daily active users, feature usage trends, and user signups vs. cancellations.
 
@@ -50,7 +50,7 @@ Before we begin, make sure you have:
    php artisan livewire-charts:install
    ```
 
-5. Set up your Neon Postgres connection in the `.env` file:
+5. Set up your Lakebase Postgres connection in the `.env` file:
 
    ```env
    DB_CONNECTION=pgsql
@@ -61,7 +61,7 @@ Before we begin, make sure you have:
    DB_PASSWORD=your_password
    ```
 
-6. Run the migrations to set up the users table and other Breeze-related tables in your Neon Postgres database:
+6. Run the migrations to set up the users table and other Breeze-related tables in your Lakebase Postgres database:
 
    ```bash
    php artisan migrate
@@ -119,7 +119,7 @@ For the purpose of this guide, we'll track feature usage and subscriptions. You 
    }
    ```
 
-3. With the migrations in place, run the migrations to create the tables in your Neon Postgres database:
+3. With the migrations in place, run the migrations to create the tables in your Lakebase Postgres database:
 
    ```bash
    php artisan migrate
@@ -586,7 +586,7 @@ For more information on seeding the database, check out the [Laravel documentati
 
 When working with large datasets, you will have to make sure that your application is optimized for performance. This includes optimizing database queries, caching results, and using efficient algorithms.
 
-We will cover some optimization techniques for improving the performance of your Neon Postgres application below but you should also check out the [Performance tips for Neon Postgres](/blog/performance-tips-for-neon-postgres) blog post for more specific tips.
+We will cover some optimization techniques for improving the performance of your Lakebase Postgres application below but you should also check out the [Performance tips for Lakebase Postgres](/blog/performance-tips-for-neon-postgres) blog post for more specific tips.
 
 ### 1. Database Indexing for Frequently Queried Columns
 
@@ -608,7 +608,7 @@ Schema::table('subscriptions', function (Blueprint $table) {
 
 These indexes will optimize queries related to filtering or grouping by `user_id`, `used_at`, `started_at`, and `ended_at`, which are common in analytics.
 
-To learn more about indexing in Neon Postgres, check out the [Neon documentation](/docs/postgresql/index-types) on indexes.
+To learn more about indexing in Lakebase Postgres, check out the [Neon documentation](/docs/postgresql/index-types) on indexes.
 
 ### 2. Implement Caching for Expensive Queries
 
@@ -638,7 +638,7 @@ The `Cache::remember` method is a convenient way to cache query results in Larav
 
 ## Conclusion
 
-In this guide, we've built a simple dynamic SaaS dashboard using Laravel Breeze for authentication, Livewire Charts for data visualization, and Neon Postgres for data storage. This setup provides a good starting point for tracking key metrics in your SaaS or web application.
+In this guide, we've built a simple dynamic SaaS dashboard using Laravel Breeze for authentication, Livewire Charts for data visualization, and Lakebase Postgres for data storage. This setup provides a good starting point for tracking key metrics in your SaaS or web application.
 
 To go further, consider the following next steps:
 

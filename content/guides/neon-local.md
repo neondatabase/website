@@ -4,23 +4,23 @@ subtitle: Learn how to set up and use Neon Local and Neon Local Connect for seam
 author: 'dhanush-reddy'
 enableTableOfContents: true
 createdAt: '2025-08-17T00:00:00.000Z'
-updatedOn: '2025-08-20T16:09:13.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 One of Neon's most powerful features is database branching, the ability to instantly create isolated, copy-on-write clones of your database for any task. Just as you create a Git branch for every new feature or bug fix, you can create a parallel database branch. This eliminates environment drift, prevents developers from overwriting each other's work on shared staging databases, and ensures every development environment is a perfect, isolated replica of production.
 
-But how do you bring this cloud-native power into your local development workflow seamlessly? Constantly switching connection strings for each branch is tedious and error-prone. This is the problem that **Neon Local** and the **Neon Local Connect** VS Code extension solve. They act as a smart local proxy to your Neon database in the cloud. Your application connects to a single, static `localhost` address, while the tools handle all the complexity of routing and branch management behind the scenes.
+But how do you bring this cloud-native power into your local development workflow seamlessly? Constantly switching connection strings for each branch is tedious and error-prone. This is the problem that **Neon Local** and the **Neon Local Connect** VS Code extension solve. They act as a smart local proxy to your Lakebase Postgres database in the cloud. Your application connects to a single, static `localhost` address, while the tools handle all the complexity of routing and branch management behind the scenes.
 
 This guide will walk you through setting up and using both Neon Local and Neon Local Connect to create a powerful, modern development workflow. You'll learn how to:
 
 - Install and configure the Neon Local Connect extension in VS Code.
 - Utilize the built-in Schema Viewer, SQL Editor, and Table Editor.
-- Connect your local application to a Neon database using a single, static `localhost` connection string.
+- Connect your local application to a Lakebase Postgres database using a single, static `localhost` connection string.
 - Manage database branches (create, switch, reset) directly from your IDE.
 - Use Neon Local with Docker Compose for CI/CD or non-VS Code environments.
 
 <Admonition type="note" title="Neon Local vs. a Local Postgres Instance">
-This guide focuses on **Neon Local**, a **local proxy** for your **cloud-hosted Neon Postgres database**. It enables you to use Neon's powerful branching features with a convenient `localhost` connection, allowing you to seamlessly switch between branches, create new branches, and manage them directly from your IDE.
+This guide focuses on **Neon Local**, a **local proxy** for your **cloud-hosted Lakebase Postgres database**. It enables you to use Neon's powerful branching features with a convenient `localhost` connection, allowing you to seamlessly switch between branches, create new branches, and manage them directly from your IDE.
 
 This is different from [Local Development with Neon](/guides/local-development-with-neon) guide, which shows you how to run a completely separate, **local instance of Postgres** for fully offline development.
 
@@ -38,7 +38,7 @@ Before you begin, ensure you have the following:
 
 ## Neon Local Connect
 
-The easiest way to get started is with the Neon Local Connect VS Code extension. It manages the underlying Docker container for you, providing a full control panel for your Neon database within your editor.
+The easiest way to get started is with the Neon Local Connect VS Code extension. It manages the underlying Docker container for you, providing a full control panel for your Lakebase Postgres database within your editor.
 
 ### Install the extension
 
@@ -143,7 +143,7 @@ Follow the [Typical development workflow](#typical-development-workflow) section
 
 For non-VS Code users or CI/CD integration, you can use Neon Local directly. This gives you the same power, controlled in a programmatic way.
 
-Neon Local is a Docker-based proxy that connects to your Neon database, allowing you to run a local instance of your cloud database. It provides a static connection string (`localhost:5432`) that routes to the active branch, making it easy to switch branches without changing your code.
+Neon Local is a Docker-based proxy that connects to your Lakebase Postgres database, allowing you to run a local instance of your cloud database. It provides a static connection string (`localhost:5432`) that routes to the active branch, making it easy to switch branches without changing your code.
 
 ### Docker compose configuration
 
@@ -320,16 +320,16 @@ With the CLI, you create an ephemeral branch by specifying a `PARENT_BRANCH_ID` 
 
 ## Connecting your application conditionally
 
-Your application code needs to seamlessly switch between connecting to Neon Local for development and your live Neon database for production. The standard way to manage this is by using the `NODE_ENV` environment variable.
+Your application code needs to seamlessly switch between connecting to Neon Local for development and your live Lakebase Postgres database for production. The standard way to manage this is by using the `NODE_ENV` environment variable.
 
-The core logic is straightforward: when `process.env.NODE_ENV` is set to `'development'`, your application should use the static `localhost` connection string provided by Neon Local. For any other environment (such as `'production'` on platforms like Vercel, AWS, or other cloud providers), your app should use the actual Neon database URL, typically stored in your deployment environment's configuration or secrets on your cloud provider.
+The core logic is straightforward: when `process.env.NODE_ENV` is set to `'development'`, your application should use the static `localhost` connection string provided by Neon Local. For any other environment (such as `'production'` on platforms like Vercel, AWS, or other cloud providers), your app should use the actual Lakebase Postgres database URL, typically stored in your deployment environment's configuration or secrets on your cloud provider.
 
 The implementation details vary slightly depending on the database driver or ORM you are using.
 
 <Tabs labels={["@neondatabase/serverless", "Drizzle ORM", "Prisma", "Other drivers"]}>
 <TabItem>
 
-The Neon serverless driver is designed to communicate with a Neon database over HTTP/WebSocket. To redirect this traffic to your local Neon Local proxy, you must override its default behavior in your development environment.
+The Neon serverless driver is designed to communicate with a Lakebase Postgres database over HTTP/WebSocket. To redirect this traffic to your local Neon Local proxy, you must override its default behavior in your development environment.
 
 This is done by reconfiguring `neonConfig` to point to `localhost`.
 

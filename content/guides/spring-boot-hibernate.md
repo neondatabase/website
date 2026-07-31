@@ -1,15 +1,15 @@
 ---
 title: Database Schema Changes with Hibernate, Spring Boot, and Neon
-subtitle: Learn how to manage database schema changes with Hibernate, Spring Boot, and Neon Postgres
+subtitle: Learn how to manage database schema changes with Hibernate, Spring Boot, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-07T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Managing database schema changes is an important aspect of any application development lifecycle.
 
-When using Hibernate ORM with Spring Boot and Neon Postgres, you have several options for handling schema evolution.
+When using Hibernate ORM with Spring Boot and Lakebase Postgres, you have several options for handling schema evolution.
 
 This guide will explore different approaches, their pros and cons, and best practices for managing database schema changes.
 
@@ -19,7 +19,7 @@ Before we begin, ensure you have:
 
 - Java Development Kit (JDK) 11 or later
 - Maven or Gradle for dependency management
-- A [Neon](https://console.neon.tech/signup) account for serverless Postgres
+- A [Neon](https://console.neon.tech/signup) account for Lakebase Postgres
 - Basic familiarity with Spring Boot, Hibernate, and JPA concepts
 
 ## Setting up the Project
@@ -53,7 +53,7 @@ Before we begin, ensure you have:
 
 ## Configuring the Database Connection
 
-Next, configure your application to connect to a Neon Postgres database. To do that define your Neon database connection in `application.properties`:
+Next, configure your application to connect to a Lakebase Postgres database. To do that define your Lakebase Postgres database connection in `application.properties`:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://<your-neon-hostname>/<your-database-name>
@@ -61,7 +61,7 @@ spring.datasource.username=<your-username>
 spring.datasource.password=<your-password>
 ```
 
-Replace the placeholders with your actual Neon database credentials.
+Replace the placeholders with your actual Lakebase Postgres database credentials.
 
 While modifying the `application.properties` file, you can also configure Hibernate's DDL behavior and other properties:
 
@@ -182,7 +182,7 @@ For more information on using Flyway with Spring Boot, refer to the [Database Mi
 
 ## Using Hibernate auto DDL
 
-Now that we've covered different approaches to schema management, let's look at how to handle specific schema changes using Hibernate and Spring Boot with Neon Postgres.
+Now that we've covered different approaches to schema management, let's look at how to handle specific schema changes using Hibernate and Spring Boot with Lakebase Postgres.
 
 As we pointed out earlier, Hibernate's auto DDL feature is convenient for development but not recommended for production use. Let's see how it works and how to handle common schema changes.
 
@@ -256,7 +256,7 @@ An alternative approach here is to, use `create` or `create-drop` for `spring.jp
 
 ## Best Practices
 
-With the various approaches to schema management in mind, here are some best practices to follow when managing database schema changes with Hibernate, Spring Boot, and Neon Postgres:
+With the various approaches to schema management in mind, here are some best practices to follow when managing database schema changes with Hibernate, Spring Boot, and Lakebase Postgres:
 
 1. While Hibernate's auto DDL is convenient for development, use a dedicated migration tool like [Flyway](/guides/spring-boot-flyway) for production environments.
 

@@ -4,7 +4,7 @@ subtitle: Building a serverless Task API with Hono, Drizzle, Neon, and Cloudflar
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-14T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 The [HONC stack](https://honc.dev/) (Hono + ORM/Drizzle + Neon + Cloudflare) is a modern toolkit for building lightweight, type-safe, and edge-enabled data APIs. It's designed for developers seeking to build fast, serverless applications with a strong emphasis on scalability and a great developer experience.
@@ -13,7 +13,7 @@ This guide will walk you through building a simple Task management API using the
 
 - Initialize a HONC project using `create-honc-app`.
 - Define your database schema with Drizzle ORM.
-- Use Neon as your serverless Postgres database.
+- Use Neon as your Lakebase Postgres database.
 - Create API endpoints using the Hono framework.
 - Run your application locally and deploy it to Cloudflare Workers.
 - Utilize the built-in Fiberplane API playground for easy testing.
@@ -220,7 +220,7 @@ With the schema updated, generate and apply database migrations.
     ```bash
     npm run db:migrate
     ```
-    This applies the migrations to your Neon database. Your `tasks` table should now exist. You can verify this in the **Tables** section of your Neon project console.
+    This applies the migrations to your Lakebase Postgres database. Your `tasks` table should now exist. You can verify this in the **Tables** section of your Neon project console.
     ![Neon console - Tasks table](/docs/guides/honc-neon-tasks-table.png)
 
 ## Adapt API endpoints for tasks
@@ -712,7 +712,7 @@ This is incredibly useful for quick testing and debugging cycles during developm
 Deploy your application globally via Cloudflare's edge network.
 
 1.  **Set `DATABASE_URL` secret in Cloudflare:**
-    Your deployed Worker needs the Neon database connection string.
+    Your deployed Worker needs the Lakebase Postgres database connection string.
 
     ```bash
     npx wrangler secret put DATABASE_URL

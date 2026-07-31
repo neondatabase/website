@@ -4,7 +4,7 @@ subtitle: Learn how to create a robust, secure CRUD API using Laravel and Larave
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-01T00:00:00.000Z'
-updatedOn: '2026-02-02T06:44:09.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Laravel is a powerful PHP framework that allows developers to easily build web applications and APIs.
@@ -40,7 +40,7 @@ This will create a new Laravel project in a directory named `laravel-crud-api` a
 
 ### Setting up the Database
 
-Update your `.env` file with your Neon database credentials:
+Update your `.env` file with your Lakebase Postgres database credentials:
 
 ```env
 DB_CONNECTION=pgsql

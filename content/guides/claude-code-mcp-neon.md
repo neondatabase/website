@@ -1,13 +1,13 @@
 ---
-title: 'Get started with Claude Code and Neon Postgres MCP Server'
+title: 'Get started with Claude Code and Lakebase Postgres MCP Server'
 subtitle: 'Interact with Neon APIs using Claude Code through natural language'
 author: pedro-figueiredo
 enableTableOfContents: true
 createdAt: '2025-08-27T00:00:00.000Z'
-updatedOn: '2026-06-19T23:17:10.824Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-This guide shows how to use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
+This guide shows how to use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Lakebase Postgres databases.
 
 <Admonition type="important" title="Security">
 The Neon MCP Server grants broad database management capabilities. Always review and authorize actions requested by the LLM before execution. See [MCP security guidance](/docs/ai/neon-mcp-server#mcp-security-guidance).

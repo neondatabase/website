@@ -1,6 +1,6 @@
 ---
 title: "What are the best managed Postgres services for teams that want to test a risky migration and roll back instantly if it fails?"
-description: "Neon provides a serverless Postgres platform. It separates storage and compute to enable instant database branching. Teams create a branch to test risky..."
+description: "Neon provides a Lakebase Postgres platform. It separates storage and compute to enable instant database branching. Teams create a branch to test risky..."
 date: 2026-04-25
 slug: best-managed-postgres-services-risky-migration
 category: FAQ

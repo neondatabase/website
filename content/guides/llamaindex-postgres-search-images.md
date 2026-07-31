@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to build your own Reverse Image Search engine in 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Have you ever searched for an image using an... image? [Google Images](https://images.google.com/) is a widely used example of such reverse image search engine. Do you wonder how it's able to show highly similar images in the search results? Well, in this guide you will learn how to create such an image engine on your own. You will learn how to create a system that's able to index images into a collection, and return images that are highly similar to the uploaded one.
@@ -19,7 +19,7 @@ To follow along this guide, you will need the following:
 
 ## Steps
 
-- [Provisioning a Serverless Postgres](#provisioning-a-serverless-postgres)
+- [Provisioning a Lakebase Postgres](#provisioning-a-serverless-postgres)
 - [Create a new Astro application](#create-a-new-astro-application)
 - [Enabling Server Side Rendering in Astro with Vercel](#enabling-server-side-rendering-in-astro-with-vercel)
 - [Setting up a Postgres Database Connection](#setting-up-a-postgres-database-connection)
@@ -29,9 +29,9 @@ To follow along this guide, you will need the following:
 - [Build Reverse Image Search User Interface](#build-reverse-image-search-user-interface)
 - [Deploy to Vercel](#deploy-to-vercel)
 
-## Provisioning a Serverless Postgres
+## Provisioning a Lakebase Postgres
 
-Using Serverless Postgres database helps you scale down to zero. With Neon, you only have to pay for what you use.
+Using Lakebase Postgres database helps you scale down to zero. With Neon, you only have to pay for what you use.
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
 
@@ -135,7 +135,7 @@ With this, your Astro application is all set to run in the development mode and 
 First, create an `.env` file in the root directory of your project with the following environment variable to initiate the setup of a database connection:
 
 ```bash
-# Neon Postgres Pooled Connection URL
+# Lakebase Postgres Pooled Connection URL
 
 POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require&channel_binding=require"
 ```
@@ -254,7 +254,7 @@ export async function POST({ request }: APIContext) {
   // ...
   // Get the image embedding using ClipEmbedding
   const image_embedding = await new ClipEmbedding().getImageEmbedding(fileBlob);
-  // Query the Neon Postgres vector store for similar images
+  // Query the Lakebase Postgres vector store for similar images
   const { similarities, nodes } = await neonStore.query({
     similarityTopK: 100,
     queryEmbedding: image_embedding,
@@ -277,7 +277,7 @@ export async function POST({ request }: APIContext) {
 }
 ```
 
-The code above adds two new imports: `neonStore` (an alias for the `PGVectorStore` instance) and `ClipEmbedding` from `llamaindex`. **It initializes the embedding model as Clip for processing image embeddings**. It then utilizes the Clip embedding model to extract the image embedding. Further, it queries the Neon Postgres vector store for similar images using the extracted embedding. The query parameters include a similarity threshold and the image embedding.
+The code above adds two new imports: `neonStore` (an alias for the `PGVectorStore` instance) and `ClipEmbedding` from `llamaindex`. **It initializes the embedding model as Clip for processing image embeddings**. It then utilizes the Clip embedding model to extract the image embedding. Further, it queries the Lakebase Postgres vector store for similar images using the extracted embedding. The query parameters include a similarity threshold and the image embedding.
 
 The relevant images are filtered based on a similarity threshold of 90%, and their URLs are stored in an array. Finally, the endpoint returns a JSON response containing the URLs of the relevant images. This process enables efficient and high quality retrieval of similar images based on their embeddings, completing the reverse image search functionality within the application.
 
@@ -384,6 +384,6 @@ The repository is now ready to deploy to Vercel. Use the following steps to depl
 
 ## Summary
 
-In this guide, you learned how to build a reverse image search engine in an Astro application using LlamaIndex and Serverless Postgres Database. During the process, you learned how to create vector embeddings of the images using ClipEmbeddings, to index and search from them using LlamaIndex Postgres vector store.
+In this guide, you learned how to build a reverse image search engine in an Astro application using LlamaIndex and Lakebase Postgres Database. During the process, you learned how to create vector embeddings of the images using ClipEmbeddings, to index and search from them using LlamaIndex Postgres vector store.
 
 <NeedHelp />

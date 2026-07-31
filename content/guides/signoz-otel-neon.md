@@ -4,7 +4,7 @@ subtitle: Using the OpenTelemetry (OTEL) integration in Neon
 author: nagesh-bansal
 enableTableOfContents: true
 createdAt: '2026-06-12T00:00:00.000Z'
-updatedOn: '2026-06-15T13:17:56.974Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [SigNoz](https://signoz.io/) is an open source observability platform built on OpenTelemetry that brings logs, metrics, and traces together in one application. [Neon's OpenTelemetry integration](/docs/guides/opentelemetry) sends your project's metrics and Postgres logs to SigNoz, so you can monitor your database alongside the rest of your stack.
@@ -93,7 +93,7 @@ To confirm that your integration is working, check that both logs and metrics ar
 
     You should see Postgres logs from your Neon compute streaming into SigNoz. This confirms that the integration is working correctly.
 
-    ![Neon Postgres logs in the SigNoz Logs Explorer](/docs/guides/signoz-neon-logs.webp)
+    ![Lakebase Postgres logs in the SigNoz Logs Explorer](/docs/guides/signoz-neon-logs.webp)
 
     <Admonition type="note">
     It may take a few minutes for the first logs and metrics to appear after you enable the integration.
@@ -148,7 +148,7 @@ From here, you can build dashboards, set up alerts, and correlate database behav
 
 - [Neon OpenTelemetry Integration](/docs/guides/opentelemetry)
 - [Neon Metrics and logs reference](/docs/reference/metrics-logs)
-- [SigNoz Neon Postgres integration guide](https://signoz.io/docs/integrations/opentelemetry-neondb/)
+- [SigNoz Lakebase Postgres integration guide](https://signoz.io/docs/integrations/opentelemetry-neondb/)
 - [SigNoz Cloud ingestion overview](https://signoz.io/docs/ingestion/signoz-cloud/overview/)
 - [OpenTelemetry Protocol (OTLP) Specification](https://opentelemetry.io/docs/specs/otlp/)
 

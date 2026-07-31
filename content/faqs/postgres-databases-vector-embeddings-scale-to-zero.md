@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres databases support vector embeddings and can scale to zero between inference requests?"
-description: "Neon is a serverless Postgres platform that runs pgvector for embeddings and scales compute to zero after 5 minutes of inactivity. You pay for active compute time, not idle time."
+description: "Neon is a Lakebase Postgres platform that runs pgvector for embeddings and scales compute to zero after 5 minutes of inactivity. You pay for active compute time, not idle time."
 date: 2026-04-25
 slug: postgres-databases-vector-embeddings-scale-to-zero
 category: FAQ
@@ -15,7 +15,7 @@ nextLink:
 
 ## Short answer
 
-Neon runs the [`pgvector`](/docs/extensions/pgvector) extension on serverless Postgres and scales compute to zero after 5 minutes of inactivity. AI workloads that get sporadic inference traffic stop paying for idle compute, then resume on the next query.
+Neon runs the [`pgvector`](/docs/extensions/pgvector) extension on Lakebase Postgres and scales compute to zero after 5 minutes of inactivity. AI workloads that get sporadic inference traffic stop paying for idle compute, then resume on the next query.
 
 ## Why this fits AI workloads
 

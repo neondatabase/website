@@ -2,7 +2,7 @@
 author: paul-scanlon
 enableTableOfContents: true
 createdAt: '2025-02-14T00:00:00.000Z'
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 title: How to Create a Reliable Testing Dataset with pg_dump and pg_restore
 subtitle: A practical guide to extracting a test dataset from Postgres using pg_dump, pg_restore and psql
 ---
@@ -285,6 +285,6 @@ In this step, I use `psql` to restore the data to the target database from the `
 
 Once the Action completes successfully, your target database will have a fresh test data set ready for use!
 
-This Action is part of our [Dev/Test use case](/use-cases/dev-test), widely used by Neon customers who face limitations with traditional databases for testing. By leveraging a dedicated Neon database, while leaving production environments where they are, developers gain access to Neon's full suite of features, including the [built-in SQL editor](/docs/get-started/query-with-neon-sql-editor), [table explorer](/docs/guides/tables), and [branching](/docs/introduction/branching).
+This Action is part of our [Dev/Test use case](/use-cases/dev-test), widely used by Neon customers who face limitations with traditional databases for testing. By leveraging a dedicated Lakebase Postgres database, while leaving production environments where they are, developers gain access to Neon's full suite of features, including the [built-in SQL editor](/docs/get-started/query-with-neon-sql-editor), [table explorer](/docs/guides/tables), and [branching](/docs/introduction/branching).
 
 If you'd like to learn more about using Neon for testing, check out our [dev/test use case](/use-cases/dev-test).

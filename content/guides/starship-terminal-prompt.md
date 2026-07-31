@@ -1,17 +1,17 @@
 ---
 title: 'Customize your terminal prompt with Starship and Neon'
-subtitle: 'Learn how to set up Starship, a cross-shell prompt, and add a custom module to display your active Neon database branch.'
+subtitle: 'Learn how to set up Starship, a cross-shell prompt, and add a custom module to display your active Lakebase Postgres database branch.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-12T00:00:00.000Z'
-updatedOn: '2026-07-13T09:46:56.488Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Traditional shell prompt customization means wrestling with complex, shell-specific syntax: Zsh has its own prompt expansion rules, Bash uses the cryptic `PS1` escape sequences, and PowerShell relies on a completely different `prompt` function. Each shell requires a different approach, and moving between them often means rewriting everything from scratch.
 
 [Starship](https://starship.rs) solves this by standardizing prompt configuration across every shell through a single, friendly TOML file. Written in Rust, it runs on Zsh, Bash, Fish, PowerShell, and more, using the same config everywhere. Instead of a fixed prompt, Starship is built from small, independent modules: each module displays a piece of context only when it's relevant to the current directory. For example, the Git module shows your branch when you're inside a repository, and language modules show runtime versions when they detect matching project files like `package.json` or `requirements.txt`. You can enable, disable, reorder, and restyle these modules to build a prompt that fits your workflow.
 
-Beyond the built-in modules, Starship lets you define custom modules that run an arbitrary command and render its output. That makes it straightforward to surface information that isn't covered by default. When you work with Git branches and Neon database branches in the same terminal, it helps to see at a glance which Neon branch your local development is connected to, so you don't accidentally run commands against the wrong environment. By configuring a custom Starship module, you can query the Neon CLI to show the active database branch alongside the Git branch.
+Beyond the built-in modules, Starship lets you define custom modules that run an arbitrary command and render its output. That makes it straightforward to surface information that isn't covered by default. When you work with Git branches and Lakebase Postgres database branches in the same terminal, it helps to see at a glance which Neon branch your local development is connected to, so you don't accidentally run commands against the wrong environment. By configuring a custom Starship module, you can query the Neon CLI to show the active database branch alongside the Git branch.
 
 In this guide, you'll set up Starship and build a custom module that detects and displays your active Neon branch using the Neon CLI. You'll cover:
 
@@ -221,7 +221,7 @@ You can browse all presets visually on the [Starship Presets page](https://stars
 
 ## Define the custom Neon branch module
 
-If you use [Neon database branching](/docs/introduction/branching) to create isolated database environments for development and testing, you will frequently switch branches.
+If you use [Lakebase Postgres database branching](/docs/introduction/branching) to create isolated database environments for development and testing, you will frequently switch branches.
 
 By using Starship's [custom commands](https://starship.rs/config/#custom-commands), you can run a shell command and display its output dynamically. You can query the Neon CLI's `neon status --current-branch` command to render the active database branch.
 
@@ -278,7 +278,7 @@ This configuration walks up the directory tree looking for a `.neon` file. It on
 
 ## Link your project and verify
 
-To verify the integration, navigate to a project linked to a Neon database.
+To verify the integration, navigate to a project linked to a Lakebase Postgres database.
 
 1. Navigate to your local project directory:
    ```bash
@@ -318,7 +318,7 @@ If your custom Neon prompt isn't rendering correctly, check these common trouble
 
 Terminal prompts don’t have to be static or limited. With Starship and Neon, you can build a responsive, context‑aware development environment that adapts to your workflow. By adding a custom module that queries the Neon CLI, your active database branch appears directly alongside your Git branch reducing the risk of running commands against the wrong environment and keeping critical context visible at all times.
 
-Displaying your Git branch and Neon database branch side‑by‑side minimizes context switching, eliminates repetitive status checks, and creates a safer, more efficient setup for database‑backed development.
+Displaying your Git branch and Lakebase Postgres database branch side‑by‑side minimizes context switching, eliminates repetitive status checks, and creates a safer, more efficient setup for database‑backed development.
 
 ## Resources
 

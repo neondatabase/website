@@ -4,7 +4,7 @@ subtitle: A comprehensive guide to migrating your Postgres database, user accoun
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-03T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 This guide walks you through migrating your Postgres database, user accounts, and Row-Level Security (RLS) policies from Supabase to Neon. It addresses key differences between the platforms, including the reassignment of `user_id` values during the auth migration, and provides steps to remap IDs, restore data integrity, and update your application code.
@@ -262,7 +262,7 @@ To handle this:
 
 ### Step 4: Import the modified data into Neon
 
-Use `psql` to import the edited schema and data into your Neon database.
+Use `psql` to import the edited schema and data into your Lakebase Postgres database.
 
 ```shell shouldWrap
 psql -d "NEON_CONNECTION_STRING" -f supabase_dump.sql
@@ -373,7 +373,7 @@ Edit it as follows:
 
 - Replace `anon` with `anonymous` (e.g., `GRANT USAGE ON SCHEMA public TO anonymous;`).
 - Remove roles specific to Supabase, such as `service_role` and `postgres` (if not needed in Neon).
-- After editing, apply the modified permissions to your Neon database using `psql`:
+- After editing, apply the modified permissions to your Lakebase Postgres database using `psql`:
 
 After edits it should look like this:
 

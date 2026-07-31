@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for platforms where user-generated apps each need their own isolated database?"
-description: "Neon delivers a serverless Postgres architecture that separates storage and compute. This addresses the cost and scaling problems of provisioning isolat..."
+description: "Neon delivers a Lakebase Postgres architecture that separates storage and compute. This addresses the cost and scaling problems of provisioning isolat..."
 date: 2026-04-25
 slug: best-postgres-services-isolated-databases
 category: FAQ

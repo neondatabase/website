@@ -4,7 +4,7 @@ subtitle: 'Learn how to build an AI Agent for Postgres using Azure AI Agent Serv
 author: boburmirzo
 enableTableOfContents: true
 createdAt: '2025-04-07T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 AI agents are getting a lot of attention lately, but getting started can be confusing. You may have heard about tools like [LangChain/LangGraph](https://python.langchain.com/v0.1/docs/modules/agents/), [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/), [AutoGen](https://microsoft.github.io/autogen/), or [LlamaIndex](https://docs.llamaindex.ai/en/stable/use_cases/agents/). They are powerful, but sometimes all you need is something simple that works.
@@ -27,7 +27,7 @@ For example, when a user asks questions about their invoice, the AI can query Ne
 
 We’ll build an AI agent that connects to your Postgres database and uses a simple Python function to fetch and analyze the data.
 
-We’ll use [**Neon Postgres**](/) for our database. Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. It’s free to start, scales automatically, and works great for [AI agents](/use-cases/ai-agents) that need to query data on demand without managing infrastructure.
+We’ll use [**Lakebase Postgres**](/) for our database. Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. It’s free to start, scales automatically, and works great for [AI agents](/use-cases/ai-agents) that need to query data on demand without managing infrastructure.
 
 ### Prerequisites
 
@@ -37,11 +37,11 @@ We’ll use [**Neon Postgres**](/) for our database. Neon is the AI-native backe
 
 ## Create a Neon Database on Azure
 
-Open the [new Neon Resource page](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) on the Azure portal, and it brings up the form to create a Neon Serverless Postgres Resource. Fill out the form with the required fields and deploy it.
+Open the [new Neon Resource page](https://portal.azure.com/#view/Azure_Marketplace_Neon/NeonCreateResource.ReactView) on the Azure portal, and it brings up the form to create a Lakebase Postgres Resource. Fill out the form with the required fields and deploy it.
 
 ### Obtain Neon Database Credentials
 
-1. After the resource is created on Azure, go to the Neon Serverless Postgres Organization service and click on the Portal URL. This brings you to the Neon Console
+1. After the resource is created on Azure, go to the Lakebase Postgres Organization service and click on the Portal URL. This brings you to the Neon Console
 2. Click “New Project”
 3. Choose an Azure region
 4. Give your project a name (e.g., “Postgres AI Agent”)
@@ -111,7 +111,7 @@ tenant_456	2025-03-31	950	         24.8
 tenant_456	2025-03-30	2200	     26.0
 ```
 
-Run `python load_usage_data.py` [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/load_usage_data.py) to create and populate the `usage_data` table in your Neon Serverless Postgres instance:
+Run `python load_usage_data.py` [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/load_usage_data.py) to create and populate the `usage_data` table in your Lakebase Postgres instance:
 
 ```python
 # load_usage_data.py file
@@ -272,7 +272,7 @@ user_functions = [billing_anomaly_summary]
 
 ## Create and Configure the AI Agent
 
-Now we'll set up the AI agent and integrate it with our Neon Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
+Now we'll set up the AI agent and integrate it with our Lakebase Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
 
 - **Creates the agent**
   Instantiates an AI agent using the selected model (`gpt-4o`, for example), adds tool access, and sets instructions that tell the agent how to behave (e.g., “You are a helpful SaaS assistant…”).
@@ -403,7 +403,7 @@ You’ve now created a working AI agent that talks to your Postgres database, al
 
 - A simple Python function
 - Azure AI Agent Service
-- A Neon Serverless Postgres backend
+- A Lakebase Postgres backend
 
 This approach is beginner-friendly, lightweight, and practical for real-world use.
 

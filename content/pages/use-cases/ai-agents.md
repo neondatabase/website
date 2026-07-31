@@ -1,13 +1,13 @@
 ---
 title: 'Neon for AI Agent Platforms'
-subtitle: Build full-stack agents on a serverless Postgres backend
-summary: Covers the setup of a serverless Postgres backend specifically designed for AI agent platforms, enabling instant provisioning, automatic scaling, and integrated services for building full-stack applications.
+subtitle: Build full-stack agents on a Lakebase Postgres backend
+summary: Covers the setup of a Lakebase Postgres backend specifically designed for AI agent platforms, enabling instant provisioning, automatic scaling, and integrated services for building full-stack applications.
 enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
-<MegaLink tag="80% of Neon databases are deployed by agents." title="Platforms like Replit Agent run their backend on Neon because it fits how agents operate: a serverless Postgres data layer that’s instant, branchable, and invisible to end users." url="https://neon.com/use-cases/ai-agents#serverless-postgres-api-first" />
+<MegaLink tag="80% of Lakebase Postgres databases are deployed by agents." title="Platforms like Replit Agent run their backend on Neon because it fits how agents operate: a Lakebase Postgres data layer that’s instant, branchable, and invisible to end users." url="https://neon.com/use-cases/ai-agents#serverless-postgres-api-first" />
 
 <LogosSection containerClassName='py-3' logos={[
 'anything',
@@ -27,8 +27,8 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 
 The Neon architecture aligns with how agents work:
 
-**Serverless Postgres at the core.**
-Neon’s backend is powered by a serverless Postgres engine built on separated compute and storage. It provisions instantly, scales automatically, and idles to zero when not in use - perfect for the bursty, on-demand workloads that agents create.
+**Lakebase Postgres at the core.**
+Neon’s backend is powered by a Lakebase Postgres engine built on separated compute and storage. It provisions instantly, scales automatically, and idles to zero when not in use - perfect for the bursty, on-demand workloads that agents create.
 
 **With integrated services for full-stack backends.**
 Around that core, Neon includes Auth and a PostgREST-compatible Data API, so agents and developers can assemble complete, production-ready backends without stitching multiple services together.
@@ -39,9 +39,9 @@ Every capability - provisioning, quotas, branching, and fleet management - is ex
 **And version-aware by design.**
 Neon’s copy-on-write storage makes time travel effortless. Branching, snapshots, and point-in-time recovery enable undo, checkpoints, and safe experimentation across millions of databases.
 
-## Serverless Postgres, API-first
+## Lakebase Postgres, API-first
 
-At the core of Neon is a serverless Postgres architecture that [separates compute from storage](https://neon.com/blog/architecture-decisions-in-neon). Each database runs on ephemeral computes while the data itself lives on durable, high-performance storage.
+At the core of Neon is a Lakebase Postgres architecture that [separates compute from storage](https://neon.com/blog/architecture-decisions-in-neon). Each database runs on ephemeral computes while the data itself lives on durable, high-performance storage.
 
 **This architecture makes it possible for agents to provision databases instantly on demand, operate them at massive scale, and still keep costs under control.** Tens of thousands of projects can spin up and idle as users create apps, all programmatically, without intervention from you.
 
@@ -104,4 +104,4 @@ For instructions on using the Neon API to provision and manage backends on behal
 
 To learn more about the Agent Plan, [see the details on this page](https://neon.com/programs/agents#agent-plan-pricing) or [fill out the application form directly, at the top of this page](#agent-form).
 
-<CTA title="Prefer a claimable flow?" description="You can also allow your end-users to deploy a Neon database in seconds, use it immediately via connection string, claim it later." theme="column" buttonText="Explore this route" buttonUrl="https://neon.new/" linkText="See a case study" linkUrl="https://neon.com/blog/netlify-db-powered-by-neon" />
+<CTA title="Prefer a claimable flow?" description="You can also allow your end-users to deploy a Lakebase Postgres database in seconds, use it immediately via connection string, claim it later." theme="column" buttonText="Explore this route" buttonUrl="https://neon.new/" linkText="See a case study" linkUrl="https://neon.com/blog/netlify-db-powered-by-neon" />

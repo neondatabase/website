@@ -4,7 +4,7 @@ subtitle: A comprehensive guide on how to manage your Postgres database using DB
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-21T00:00:00.000Z'
-updatedOn: '2026-03-19T14:39:01.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 DBeaver is a versatile database management tool that allows you to interact with a wide range of databases, including PostgreSQL. This guide will walk you through the steps to set up and use DBeaver with a hosted Postgres database, enabling you to perform various database operations efficiently.
@@ -21,11 +21,11 @@ DBeaver is a versatile database management tool that allows you to interact with
 
 2. **Launch DBeaver**: Open DBeaver from your applications menu and ensure it is running.
 
-## Provisioning a Serverless Postgres
+## Provisioning a Lakebase Postgres
 
 1. To get started, go to the [Neon Console](https://console.neon.tech/) and create a new project by entering a project name of your choice.
 
-2. Retrieve connection details for your Neon Postgres database:
+2. Retrieve connection details for your Lakebase Postgres database:
    - Navigate to the **Dashboard** of your Neon project.
    - Click on the **Connect** button which opens a modal.
    - Select your database and branch.
@@ -33,7 +33,7 @@ DBeaver is a versatile database management tool that allows you to interact with
      ![Neon Connection Details](/docs/connect/connection_details_parameters_only.png)
 
    You will be provided with the following details:
-   - `PGHOST`: The hostname of your Neon Postgres database.
+   - `PGHOST`: The hostname of your Lakebase Postgres database.
    - `PGDATABASE`: The name of your database
    - `PGUSER`: Your database username.
    - `PGPASSWORD`: Your database password.

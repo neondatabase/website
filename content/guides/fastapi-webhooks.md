@@ -1,15 +1,15 @@
 ---
-title: Implementing Webhooks with FastAPI and Neon Postgres
-subtitle: Learn how to build a webhook system to receive and store event data using FastAPI and Neon Postgres
+title: Implementing Webhooks with FastAPI and Lakebase Postgres
+subtitle: Learn how to build a webhook system to receive and store event data using FastAPI and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Webhooks are a way for services to communicate with each other by sending HTTP requests when specific events occur. They allow your application to receive real-time data from other services without having to constantly poll for updates.
 
-In this guide, you'll learn how to implement a webhook system using FastAPI to receive event notifications and Neon Postgres to store and process the webhook data. We'll build a simple but practical webhook receiver that can handle events from GitHub, making this applicable to real-world development workflows.
+In this guide, you'll learn how to implement a webhook system using FastAPI to receive event notifications and Lakebase Postgres to store and process the webhook data. We'll build a simple but practical webhook receiver that can handle events from GitHub, making this applicable to real-world development workflows.
 
 ## Prerequisites
 
@@ -428,7 +428,7 @@ ngrok will provide you with a public URL (e.g., `https://abc123.ngrok.io`) that 
 
 5. Monitor your FastAPI application logs to see the webhook events being received and processed.
 
-After following these steps, you should see the webhook events being received by your FastAPI application and processed based on the event type and then stored in your Neon Postgres database.
+After following these steps, you should see the webhook events being received by your FastAPI application and processed based on the event type and then stored in your Lakebase Postgres database.
 
 To view the stored webhook events, you can access the `/webhooks/events` endpoint. You should see the recent webhook events stored in the database returned as JSON.
 
@@ -452,9 +452,9 @@ When implementing webhooks in a production environment, consider these security 
 
 ## Conclusion
 
-In this guide, you built a FastAPI application backed by Neon Postgres to securely receive and process webhook events. Along the way, you learned how to define a data model, implement a webhook endpoint, verify signatures, and handle different event types.
+In this guide, you built a FastAPI application backed by Lakebase Postgres to securely receive and process webhook events. Along the way, you learned how to define a data model, implement a webhook endpoint, verify signatures, and handle different event types.
 
-Webhooks are an important part of many API integrations, allowing your applications to respond to events in real-time. By combining FastAPI with Neon Postgres, you can build webhook receivers that can handle various types of event notifications from external services.
+Webhooks are an important part of many API integrations, allowing your applications to respond to events in real-time. By combining FastAPI with Lakebase Postgres, you can build webhook receivers that can handle various types of event notifications from external services.
 
 You can extend this basic webhook system to handle events from other services like Stripe (for payment notifications), Slack (for user interactions), or any other service that supports webhooks.
 

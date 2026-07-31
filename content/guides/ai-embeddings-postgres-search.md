@@ -4,7 +4,7 @@ subtitle: Learn how to create a semantic search system using AI embeddings, Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-05-17T00:00:00.000Z'
-updatedOn: '2026-01-07T13:45:46.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Traditional text search relies on exact keyword matches, which often misses the semantic meaning behind queries.
@@ -13,7 +13,7 @@ When someone searches for "car maintenance," they might also be interested in re
 
 AI embeddings solve this problem by converting text into high-dimensional vectors that capture semantic meaning. Words and phrases with similar meanings cluster together in this vector space, enabling search systems that understand context and intent rather than just matching exact words.
 
-The pgvector extension brings vector similarity search directly into PostgreSQL, letting you store embeddings alongside your regular data and perform complex semantic searches with simple SQL queries. Combined with Neon's serverless PostgreSQL, you can build intelligent search systems that scale automatically with your application's needs.
+The pgvector extension brings vector similarity search directly into PostgreSQL, letting you store embeddings alongside your regular data and perform complex semantic searches with simple SQL queries. Combined with Neon's Lakebase Postgres, you can build intelligent search systems that scale automatically with your application's needs.
 
 In this guide, you'll learn how to build a semantic search system that can power document search and content recommendations using OpenAI embeddings stored in Neon with pgvector.
 
@@ -22,7 +22,7 @@ In this guide, you'll learn how to build a semantic search system that can power
 By the end of this guide, you'll have:
 
 - An understanding of AI embeddings and how they improve search
-- A Neon database configured with the pgvector extension
+- A Lakebase Postgres database configured with the pgvector extension
 - An embedding generation service powered by OpenAI's API
 - A document search system that understands semantic similarity
 
@@ -77,7 +77,7 @@ Now let's build a system that puts these concepts to work.
 
 ## Setting up pgvector on Neon
 
-We'll start by enabling pgvector on your Neon database and creating the necessary tables for our search system.
+We'll start by enabling pgvector on your Lakebase Postgres database and creating the necessary tables for our search system.
 
 First, create a new Neon project optimized for vector operations:
 
@@ -596,7 +596,7 @@ The foundation you've built can be extended with features like real-time search 
 
 - [pgvector Documentation](https://github.com/pgvector/pgvector)
 - [OpenAI Embeddings Guide](https://platform.openai.com/docs/guides/embeddings)
-- [Neon Serverless PostgreSQL](/docs)
+- [Neon Lakebase Postgres](/docs)
 - [Vector Similarity Search Best Practices](https://github.com/pgvector/pgvector#best-practices)
 
 <NeedHelp />

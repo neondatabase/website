@@ -1,13 +1,13 @@
 ---
-title: Creating a Secure Authentication System with Go, JWT, and Neon Postgres
-subtitle: Learn how to build a secure authentication system using Go, JWT tokens, and Neon Postgres
+title: Creating a Secure Authentication System with Go, JWT, and Lakebase Postgres
+subtitle: Learn how to build a secure authentication system using Go, JWT tokens, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-29T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-Authentication is the foundation of web applications, it ensures that users are who they claim to be. In this guide, you'll learn how to create a secure authentication system using Go, JSON Web Tokens (JWT), and Neon Postgres.
+Authentication is the foundation of web applications, it ensures that users are who they claim to be. In this guide, you'll learn how to create a secure authentication system using Go, JSON Web Tokens (JWT), and Lakebase Postgres.
 
 We'll focus on the essential concepts and patterns for implementing a robust authentication system, including user registration, secure password storage, token-based authentication, and protected routes.
 
@@ -68,7 +68,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZXhwIjoxNjgwMDAwMDAwfQ.8Gj_9bJj
 To understand how JWT fits into our Go authentication system, let's walk through the flow of a user logging in and accessing protected routes:
 
 1. When a user successfully authenticates, our Go service:
-   - Validates credentials against Neon Postgres
+   - Validates credentials against Lakebase Postgres
    - Creates JWT with appropriate claims and expiration
    - Signs the token with a secret key
 
@@ -106,11 +106,11 @@ Once your project is created, you'll receive a connection string that looks like
 postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
-Save this connection string, you'll need it to connect your Go application to the Neon database.
+Save this connection string, you'll need it to connect your Go application to the Lakebase Postgres database.
 
 ## Set up the database schema
 
-Now we'll create a database schema that securely stores user information and authentication tokens. Connect to your Neon database and run the following SQL to create the necessary tables:
+Now we'll create a database schema that securely stores user information and authentication tokens. Connect to your Lakebase Postgres database and run the following SQL to create the necessary tables:
 
 ```sql
 -- Create users table
@@ -178,7 +178,7 @@ For this guide, let's focus on the key components we'll need:
 4. HTTP handlers
 5. Middleware for route protection
 
-Let's start with a connection to our Neon database:
+Let's start with a connection to our Lakebase Postgres database:
 
 ```go
 // db/db.go
@@ -208,7 +208,7 @@ func Connect(connectionString string) (*sql.DB, error) {
 }
 ```
 
-This simple function connects to our Neon Postgres database and verifies the connection with a ping.
+This simple function connects to our Lakebase Postgres database and verifies the connection with a ping.
 
 ## Implement password handling
 
@@ -1294,7 +1294,7 @@ You can use tools like [Postman](https://www.postman.com/) or [Insomnia](https:/
 
 ## Summary
 
-In this guide, you built a secure authentication system using Go, JWT, and Neon Postgres. The system includes secure password hashing, token-based authentication, refresh token support, middleware-protected routes, and basic rate limiting to prevent brute-force attacks. Security headers were also added to protect against common web vulnerabilities.
+In this guide, you built a secure authentication system using Go, JWT, and Lakebase Postgres. The system includes secure password hashing, token-based authentication, refresh token support, middleware-protected routes, and basic rate limiting to prevent brute-force attacks. Security headers were also added to protect against common web vulnerabilities.
 
 By building on Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway, you gain the scalability and performance you need without sacrificing the reliability and flexibility developers expect from PostgreSQL. It's an ideal foundation for authentication systems that need to scale securely and efficiently.
 

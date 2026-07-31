@@ -4,7 +4,7 @@ subtitle: 'Automate parallel feature development by giving every Claude Code sub
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-03T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 While modern AI assistants generate code at remarkable speeds, the development process often remains sequential. You ask an agent to build a feature and wait. You request a query optimization and wait again. This workflow is bottlenecked by the linear nature of the standard AI interface, which can only run one agent at a time, completing one task before starting the next.
@@ -59,7 +59,7 @@ Paste the following script into `.git/hooks/post-checkout`:
 #!/bin/bash
 set -euo pipefail
 
-# Git post-checkout hook: syncs Neon database branch with current Git branch
+# Git post-checkout hook: syncs Lakebase Postgres database branch with current Git branch
 # Args: $1 = previous HEAD, $2 = new HEAD, $3 = checkout type (1=branch, 0=file)
 if [ "${3:-0}" != "1" ]; then
   exit 0
@@ -230,7 +230,7 @@ When invoked with a feature request:
 
 The `isolation: worktree` property instructs Claude to place this agent in its own isolated Git worktree. The `background: true` property allows the agent to run asynchronously, freeing up your main terminal while it works.
 
-Additionally, the `permissionMode` parameter specifies how the subagent handles permission prompts. It can be set to `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, or `plan` depending on your preference. Since each subagent in this workflow operates in a fully isolated Git worktree and a dedicated Neon database branch, it is safe to use `bypassPermissions`. This allows the agent to execute commands and make database changes without pausing to ask for approval, as any modifications are strictly confined to its isolated environment.
+Additionally, the `permissionMode` parameter specifies how the subagent handles permission prompts. It can be set to `default`, `acceptEdits`, `dontAsk`, `bypassPermissions`, or `plan` depending on your preference. Since each subagent in this workflow operates in a fully isolated Git worktree and a dedicated Lakebase Postgres database branch, it is safe to use `bypassPermissions`. This allows the agent to execute commands and make database changes without pausing to ask for approval, as any modifications are strictly confined to its isolated environment.
 
 You can learn more about the different supported parameters in the [Claude Code subagents documentation](https://code.claude.com/docs/en/sub-agents#supported-frontmatter-fields).
 

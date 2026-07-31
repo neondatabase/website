@@ -4,7 +4,7 @@ subtitle: Use Neon's native TypeScript configuration to provision services, mana
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-24T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [`neon.ts`](/docs/reference/neon-ts) is Neon's native **Infrastructure-as-Code (IaC)** file designed for full-stack TypeScript projects. Unlike traditional IaC tools such as [Terraform](/docs/reference/terraform), [Pulumi](/guides/neon-pulumi), or [OpenTofu](/guides/opentofu-neon), which require learning a new DSL, managing complex state files, and wiring outputs into your application by hand, `neon.ts` is integrated into your local development loop. It provisions infrastructure through the [Neon CLI (`neon`)](/docs/cli), syncs connection strings directly into `.env.local`, and validates those variables inside your application code with strict TypeScript typing.
@@ -318,7 +318,7 @@ Neon will automatically provision a new isolated database branch for your featur
 
 Now you have a completely isolated environment for your feature: a git branch, a database branch, and the correct environment variables. You can immediately start coding. Your app is now talking to your isolated database branch, and any changes you make will not affect the main branch or other developers.
 
-When you are done with the feature development, you can merge your git branch back into `main` and apply the schema changes to the main database branch. After merging, you can delete the feature branch and its associated Neon database branch:
+When you are done with the feature development, you can merge your git branch back into `main` and apply the schema changes to the main database branch. After merging, you can delete the feature branch and its associated Lakebase Postgres database branch:
 
 ```bash
 git checkout main

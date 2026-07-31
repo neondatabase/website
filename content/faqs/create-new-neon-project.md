@@ -3,14 +3,14 @@ title: 'How do I create a new project in Neon?'
 subtitle: 'Create one from the Console or the Neon CLI. Each project gets its own Postgres database, branches, and computes.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'How do I create a new database in my Neon project?'
   slug: create-new-database-neon-project
 nextLink:
-  title: 'How do I create tables in my Neon database using SQL?'
+  title: 'How do I create tables in my Lakebase Postgres database using SQL?'
   slug: create-tables-with-sql-neon
 ---
 

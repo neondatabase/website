@@ -1,6 +1,6 @@
 ---
 title: "What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?"
-description: "Neon is a serverless Postgres platform integrated with the lakehouse, built for AI workloads. The platform enables dynamic state management and instant ..."
+description: "Neon is a Lakebase Postgres platform integrated with the lakehouse, built for AI workloads. The platform enables dynamic state management and instant ..."
 date: 2026-04-25
 slug: postgres-databases-ai-coding-agents
 category: FAQ

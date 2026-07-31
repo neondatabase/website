@@ -1,16 +1,16 @@
 ---
-title: 'How do I rotate my Neon database connection string for security purposes?'
+title: 'How do I rotate my Lakebase Postgres database connection string for security purposes?'
 subtitle: 'The connection string is derived from the role password, so rotating one rotates the other.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'How do I reset or change my database password in Neon?'
   slug: reset-database-password
 nextLink:
-  title: 'How do I rotate all my Neon database credentials and connection strings after a security breach?'
+  title: 'How do I rotate all my Lakebase Postgres database credentials and connection strings after a security breach?'
   slug: rotate-database-credentials-after-breach
 ---
 

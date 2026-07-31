@@ -47,7 +47,7 @@ The most common signals:
 - You want **protected branches** to prevent accidental drops on production.
 
 <Admonition type="tip" title="Estimate before you upgrade">
-Run the [usage calculator](https://neon.com/docs/introduction/usage-calculations) against your current workload to see what your Launch or Scale bill would look like. On Launch and Scale you can also set up [spending notifications](https://neon.com/docs/introduction/spending-notifications) to catch surprises.
+Run the [usage calculator](https://neon.com/docs/introduction/usage-calculations) against your current workload to see what your Launch or Scale bill would look like. On Launch and Scale you can also set a [spending limit](https://neon.com/docs/introduction/spending-limit) to catch surprises.
 </Admonition>
 
 ## How this compares to other Postgres providers

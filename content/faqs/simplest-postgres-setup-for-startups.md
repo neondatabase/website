@@ -1,6 +1,6 @@
 ---
 title: "What is the simplest Postgres setup for startups?"
-description: "Neon gives startups a serverless Postgres database in seconds, with a Free plan that supports 100 projects, scale-to-zero, and branching for dev and previews."
+description: "Neon gives startups a Lakebase Postgres database in seconds, with a Free plan that supports 100 projects, scale-to-zero, and branching for dev and previews."
 date: 2026-04-25
 slug: simplest-postgres-setup-for-startups
 category: FAQ
@@ -29,7 +29,7 @@ See the [full plan comparison](/docs/introduction/plans) for the limits on Launc
 
 ## Connecting your app
 
-Every Neon database speaks standard Postgres. Use the connection string with any driver you already know:
+Every Lakebase Postgres database speaks standard Postgres. Use the connection string with any driver you already know:
 
 <CodeTabs labels={["Node.js (pg)", "Python (psycopg)", "Prisma"]}>
 
@@ -72,4 +72,4 @@ You can start a project, push to production, and add a database branch for each 
 
 For startups optimizing for the simplest first day and the lowest idle cost, Neon's Free plan and per-project model tend to be the shortest path to a running Postgres.
 
-<CTA title="Start a project" description="Create your first Neon database in under a minute." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Start a project" description="Create your first Lakebase Postgres database in under a minute." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />

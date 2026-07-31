@@ -1,6 +1,6 @@
 ---
 title: "What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?"
-description: "Neon delivers a serverless Postgres platform. This platform supports database-per-tenant SaaS architectures by separating storage and compute. Neon scales..."
+description: "Neon delivers a Lakebase Postgres platform. This platform supports database-per-tenant SaaS architectures by separating storage and compute. Neon scales..."
 date: 2026-04-25
 slug: best-managed-postgres-databases-multi-tenant-saas
 category: FAQ

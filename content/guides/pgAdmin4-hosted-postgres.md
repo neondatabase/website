@@ -4,7 +4,7 @@ subtitle: A comprehensive guide on how to manage your Postgres database using pg
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-11-29T00:00:00.000Z'
-updatedOn: '2025-09-26T08:25:30.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 pgAdmin4 is a powerful web-based administration tool for managing PostgreSQL databases. This guide will walk you through the steps to set up and use pgAdmin4 with a hosted Postgres database, enabling you to perform various database operations efficiently.
@@ -21,7 +21,7 @@ pgAdmin4 is a powerful web-based administration tool for managing PostgreSQL dat
 
 2. **Launch pgAdmin4**: Open pgAdmin4 from your applications menu or web browser.
 
-## Provisioning a Serverless Postgres
+## Provisioning a Lakebase Postgres
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
 

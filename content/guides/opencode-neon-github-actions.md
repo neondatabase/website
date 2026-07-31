@@ -4,7 +4,7 @@ subtitle: 'A step‑by‑step guide to using GitHub Actions with OpenCode and Ne
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-09T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Coding assistants are rapidly evolving from simple code generators into autonomous collaborators that can implement features and open pull requests directly in your repository. To handle full-stack tasks safely, they need a production-like environment where they can test application code and validate database changes without touching production.
@@ -114,7 +114,7 @@ jobs:
         with:
           persist-credentials: false
 
-      # 1. Create an isolated Neon database branch for the AI agent
+      # 1. Create an isolated Lakebase Postgres database branch for the AI agent
       - name: Create Neon Branch
         id: create_neon_branch
         uses: neondatabase/create-branch-action@v6
@@ -151,7 +151,7 @@ jobs:
             5. Verify the complete fix works end to end.
 ```
 
-After updating `.github/workflows/opencode.yml`, commit and push the workflow to your repository. With this in place, the next time you comment on an issue with the trigger phrase, the workflow will execute, giving OpenCode a fully isolated Neon database branch to work with as it implements the requested changes.
+After updating `.github/workflows/opencode.yml`, commit and push the workflow to your repository. With this in place, the next time you comment on an issue with the trigger phrase, the workflow will execute, giving OpenCode a fully isolated Lakebase Postgres database branch to work with as it implements the requested changes.
 
 **How the Workflow Works**
 
@@ -220,7 +220,7 @@ Follow [Automated Database Branching with GitHub Actions](/guides/neon-github-ac
 
 ## (Optional) Enable automatic preview deployments
 
-For a complete end-to-end experience, you can configure Vercel to automatically deploy the Pull Requests that OpenCode creates. By combining Vercel with the [Neon Vercel Integration](/docs/guides/vercel-managed-integration), every PR opened by the agent gets a live preview URL backed by its own isolated Neon database branch.
+For a complete end-to-end experience, you can configure Vercel to automatically deploy the Pull Requests that OpenCode creates. By combining Vercel with the [Neon Vercel Integration](/docs/guides/vercel-managed-integration), every PR opened by the agent gets a live preview URL backed by its own isolated Lakebase Postgres database branch.
 
 This lets you review OpenCode's work in a real browser environment, validating the full stack from UI to database without touching production data or having to reproduce the setup locally.
 

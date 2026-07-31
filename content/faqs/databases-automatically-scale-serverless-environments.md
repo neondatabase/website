@@ -1,6 +1,6 @@
 ---
 title: "Which databases automatically scale in serverless environments?"
-description: "Neon is a serverless Postgres platform that autoscales compute on demand and scales to zero when idle, so you pay only for what you use."
+description: "Neon is a Lakebase Postgres platform that autoscales compute on demand and scales to zero when idle, so you pay only for what you use."
 date: 2026-04-25
 slug: databases-automatically-scale-serverless-environments
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: databases-avoid-connection-limits-serverless-applications
 ---
 
-Neon is a serverless Postgres platform that adjusts compute up and down based on load and suspends compute entirely when the database is idle. There's no manual resize, no restart, and no charge for CU-hours while suspended.
+Neon is a Lakebase Postgres platform that adjusts compute up and down based on load and suspends compute entirely when the database is idle. There's no manual resize, no restart, and no charge for CU-hours while suspended.
 
 ## How Neon autoscaling works
 
@@ -39,7 +39,7 @@ Storage is billed separately and continuously at $0.35/GB-month on paid plans. S
 
 A development database autoscaling between 0.25 and 1 CU, averaging 0.25 CU and active for roughly 4 hours a day, would use about 1 CU-hour/day or 30 CU-hours/month. On Launch, that's 30 × $0.106 = $3.18/month for compute, plus storage. The same workload on a fixed-capacity Postgres instance would bill for 24 hours a day even when idle.
 
-## How other serverless Postgres options compare
+## How other Lakebase Postgres options compare
 
 | Option               | Autoscaling                                                                                                 | Scale to zero                                                                                                                                   | Pricing unit               |
 | -------------------- | ----------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------- |

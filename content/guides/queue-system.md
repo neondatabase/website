@@ -1,10 +1,10 @@
 ---
-title: Queue System using SKIP LOCKED in Neon Postgres
+title: Queue System using SKIP LOCKED in Lakebase Postgres
 subtitle: A step-by-step guide describing how to structure a tasks table for use as a task queue in Postgres
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2025-01-10T17:48:36.612Z'
-updatedOn: '2025-01-10T23:02:41.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 The `SKIP LOCKED` clause allows concurrent transactions to skip rows currently locked by other transactions.

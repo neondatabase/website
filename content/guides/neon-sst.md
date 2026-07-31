@@ -1,10 +1,10 @@
 ---
 title: Manage Neon with SST
-subtitle: Use SST to provision Neon resources and build a serverless API with a Neon Postgres database.
+subtitle: Use SST to provision Neon resources and build a serverless API with a Lakebase Postgres database.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-10-10T00:00:00.000Z'
-updatedOn: '2025-10-10T13:12:54.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [SST](https://sst.dev/) is an open-source framework that simplifies building full-stack applications on your own infrastructure. By integrating Neon with SST, you can automate, version-control, and streamline your database provisioning workflows alongside your serverless applications.
@@ -173,9 +173,9 @@ Now that you have understood how to manage Neon resources with SST, let's explor
 
 ## Example: Building an API with SST and Neon
 
-A key feature of SST is [Resource Linking](https://sst.dev/docs/linking/), which allows your application code to securely access infrastructure resources in a typesafe manner. In this example, we’ll build a simple API using [Hono](https://hono.dev/) that connects to a Neon Postgres database. The connection string for the database will be securely passed to the API using resource linking.
+A key feature of SST is [Resource Linking](https://sst.dev/docs/linking/), which allows your application code to securely access infrastructure resources in a typesafe manner. In this example, we’ll build a simple API using [Hono](https://hono.dev/) that connects to a Lakebase Postgres database. The connection string for the database will be securely passed to the API using resource linking.
 
-The Hono API will be deployed to AWS Lambda, and we’ll use SST to manage both the Neon database and the API.
+The Hono API will be deployed to AWS Lambda, and we’ll use SST to manage both the Lakebase Postgres database and the API.
 
 <Admonition type="important" title="Configure AWS credentials">
 Make sure you have an AWS account and have configured your AWS IAM credentials. You can follow the instructions on [SST: IAM Credentials](https://sst.dev/docs/iam-credentials/) to set this up.
@@ -281,7 +281,7 @@ The above code does the following:
 
 ### Install dependencies
 
-To connect to the Neon database you can use any Postgres client. In this example, we’ll use the Neon serverless driver. Install it using `npm`:
+To connect to the Lakebase Postgres database you can use any Postgres client. In this example, we’ll use the Neon serverless driver. Install it using `npm`:
 
 ```bash
 npm install @neondatabase/serverless
@@ -289,7 +289,7 @@ npm install @neondatabase/serverless
 
 ### Update the API code
 
-Replace the contents of `src/index.ts` with the following code. This code connects to the Neon database and responds with with postgres version.
+Replace the contents of `src/index.ts` with the following code. This code connects to the Lakebase Postgres database and responds with with postgres version.
 
 ```typescript title="src/index.ts"
 import { Hono } from 'hono';
@@ -356,7 +356,7 @@ You can test the API endpoint using `curl` or by visiting the URL in your browse
 curl https://qntxxx.lambda-url.us-east-1.on.aws/version
 ```
 
-You should see a response like this, confirming a successful connection to your Neon database:
+You should see a response like this, confirming a successful connection to your Lakebase Postgres database:
 
 ```json
 {
@@ -402,9 +402,9 @@ SST 3.17.14  ready!
 curl https://qn2gxx.lambda-url.us-east-1.on.aws/version
 ```
 
-You should see the same response as before, confirming that your production deployment is working correctly and successfully connected to your Neon database.
+You should see the same response as before, confirming that your production deployment is working correctly and successfully connected to your Lakebase Postgres database.
 
-You have now successfully provisioned a Neon database and connected it to a serverless API using SST! You can continue to evolve your application by modifying your infrastructure in `sst.config.ts` or updating your API logic in `src/index.ts` as needed.
+You have now successfully provisioned a Lakebase Postgres database and connected it to a serverless API using SST! You can continue to evolve your application by modifying your infrastructure in `sst.config.ts` or updating your API logic in `src/index.ts` as needed.
 
 ## Import existing Neon resources
 

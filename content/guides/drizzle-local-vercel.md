@@ -2,9 +2,9 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-16T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
-title: Drizzle with Local and Serverless Postgres
-subtitle: A step-by-step guide to configure Drizzle ORM for local and serverless Postgres.
+updatedOn: '2026-07-31T11:01:30.658Z'
+title: Drizzle with Local and Lakebase Postgres
+subtitle: A step-by-step guide to configure Drizzle ORM for local and Lakebase Postgres.
 ---
 
 Drizzle is an ORM that simplifies database interactions in JavaScript applications. This guide will walk you through the steps to set up Drizzle to work with both local and hosted Postgres databases, and run schema migrations against them.
@@ -74,9 +74,9 @@ docker-compose up -d
 
 Use the connection string (`postgres://postgres:postgres@localhost:5432/postgres`) of the Postgres instance created as an environment variable, designated as `LOCAL_POSTGRES_URL` in the `.env` file.
 
-## Setting Up a Serverless Postgres
+## Setting Up a Lakebase Postgres
 
-To set up Neon serverless Postgres, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you will receive a connection string that you can use to connect to your Neon database. The connection string will look like this:
+To set up Neon Lakebase Postgres, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you will receive a connection string that you can use to connect to your Lakebase Postgres database. The connection string will look like this:
 
 ```bash
 postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
@@ -164,7 +164,7 @@ You can find the source code for the application described in this guide on GitH
 
 <DetailIconCards>
 
-<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-local-vercel" description="Drizzle with Local and Serverless Postgres" icon="github">Drizzle with Local and Serverless Postgres</a>
+<a href="https://github.com/neondatabase/examples/tree/main/with-nextjs-drizzle-local-vercel" description="Drizzle with Local and Lakebase Postgres" icon="github">Drizzle with Local and Lakebase Postgres</a>
 
 </DetailIconCards>
 

@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres platforms for automatically creating a separate database for each pull request in a CI pipeline?"
-description: "Neon is a cloud-native, serverless Postgres platform. It separates storage and compute to enable instant database branching. This architecture enables d..."
+description: "Neon is a cloud-native, Lakebase Postgres platform. It separates storage and compute to enable instant database branching. This architecture enables d..."
 date: 2026-04-24
 slug: best-postgres-platforms-automatic-database-creation-ci-pipeline
 category: FAQ

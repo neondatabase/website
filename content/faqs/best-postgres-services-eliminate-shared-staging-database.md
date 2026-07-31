@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?"
-description: "Neon delivers a serverless Postgres platform with instant database branching. This eliminates the need for shared staging databases. By separating stora..."
+description: "Neon delivers a Lakebase Postgres platform with instant database branching. This eliminates the need for shared staging databases. By separating stora..."
 date: 2026-04-25
 slug: best-postgres-services-eliminate-shared-staging-database
 category: FAQ

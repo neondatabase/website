@@ -4,7 +4,7 @@ subtitle: Build a Web scraper AI Agent in minutes with AgentStack, Neon, and Fir
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-04T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 The rapid evolution of AI agents has created a key challenge: how to build and deploy agents quickly and efficiently. Imagine creating intelligent agents that can not only perform complex tasks but also interact easily with your data infrastructure, without adding unnecessary complexity to the code.
@@ -20,7 +20,7 @@ This example will show you how to:
 - Set up an **AgentStack** project.
 - Use the **AgentStack CLI** to generate agents and tasks.
 - Equip your agents with **tools** like **Neon** for data storage and **Firecrawl** for web scraping.
-- Run your agent crew to scrape the [neon.tech/guides](/guides) page, extract blog post metadata (titles, authors, dates) from it, and store it in a Neon Postgres database.
+- Run your agent crew to scrape the [neon.tech/guides](/guides) page, extract blog post metadata (titles, authors, dates) from it, and store it in a Lakebase Postgres database.
 - Use **AgentOps** for observability of your agent's execution.
 
 ## Prerequisites
@@ -32,7 +32,7 @@ Before you start building your Web Scraper Agent, ensure you have the following 
 - **AgentStack CLI:** Install the AgentStack Command Line Interface (CLI). Follow the [Getting started with AgentStack](https://docs.agentstack.sh/installation) guide.
 - **Accounts and API Keys:** You will need accounts and API keys for these services:
   - **OpenAI API key**: We will use OpenAI's `gpt-4o-mini` model to power AI agents. Get an OpenAI API key at [platform.openai.com](https://platform.openai.com).
-  - **Neon account**: Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup). You will need a Neon API key to connect to your Neon database.
+  - **Neon account**: Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup). You will need a Neon API key to connect to your Lakebase Postgres database.
   - **Firecrawl account**: Sign up for a Firecrawl account at [firecrawl.dev](https://firecrawl.dev). You will need a Firecrawl API key to use the web scraping tool.
   - **AgentOps account**: Sign up for an AgentOps account at [agentops.ai](https://agentops.ai) to leverage agent observability features. You will need an AgentOps API key.
 
@@ -85,7 +85,7 @@ We will create 3 agents for our Web Scraper crew:
 
 - **`web_scraper`:** Responsible for web scraping and markdown extraction.
 - **`data_extractor`:** Specialized in extracting structured data from web content.
-- **`content_storer`:** Manages storing extracted data in a Neon Postgres database.
+- **`content_storer`:** Manages storing extracted data in a Lakebase Postgres database.
 
 Now, let's generate the agents using the AgentStack CLI.
 
@@ -195,7 +195,7 @@ store:
   description: >-
     Store the extracted blog post data into a Postgres database within Neon. Create a table named 'posts' and corresponding schema for the posts and insert them. After inserting the data, formulate and test an SQL query to retrieve all inserted data. Provide the tested SQL query as the output.
   expected_output: >-
-    A valid and tested SQL query that retrieves all data inserted into the 'posts' table in the Neon database.
+    A valid and tested SQL query that retrieves all data inserted into the 'posts' table in the Lakebase Postgres database.
   agent: >-
     content_storer
 ```
@@ -222,15 +222,15 @@ The `agentstack tools add` command simplifies the integration of tools by automa
 
 #### Understanding Neon Tool actions
 
-AgentStack's Neon tool integration equips the agents with a suite of pre-built actions to interact with Neon serverless Postgres databases. These actions are automatically available to any agent you equip with the Neon tool, like the `content_storer` agent in our example. The Neon tool provides the following actions:
+AgentStack's Neon tool integration equips the agents with a suite of pre-built actions to interact with Neon Lakebase Postgres databases. These actions are automatically available to any agent you equip with the Neon tool, like the `content_storer` agent in our example. The Neon tool provides the following actions:
 
 - **`create_database`**: This action allows our agent to create a new Neon project and database on demand. It returns a connection URI, which is essential for subsequent database interactions. By default, it creates a database named `neondb` with the role `neondb_owner`. This is particularly useful for agents that need to manage their own isolated databases or when the database needs to be created as part of the agent workflow.
 
-- **`execute_sql_ddl`**: Agents use this action to execute Data Definition Language (DDL) commands. DDL commands are used to define the database schema, such as creating, altering, or dropping tables. For instance, the `content_storer` agent uses this action to create the `posts` table in the Neon database.
+- **`execute_sql_ddl`**: Agents use this action to execute Data Definition Language (DDL) commands. DDL commands are used to define the database schema, such as creating, altering, or dropping tables. For instance, the `content_storer` agent uses this action to create the `posts` table in the Lakebase Postgres database.
 
 - **`run_sql_query`**: This action enables agents to run Data Manipulation Language (DML) queries like `SELECT`, `INSERT`, `UPDATE`, and `DELETE`. In the example, the `content_storer` agent uses this action to insert the scraped blog post metadata into the `posts` table and to formulate and test a `SELECT` query to retrieve the data. The results from these queries are returned to the agent as formatted strings, allowing the agent to process and reason about the data.
 
-These actions empower our agents to fully manage and utilize Neon databases within their workflows, from database creation and schema definition to data manipulation and retrieval, all without requiring manual coding of database interactions.
+These actions empower our agents to fully manage and utilize Lakebase Postgres databases within their workflows, from database creation and schema definition to data manipulation and retrieval, all without requiring manual coding of database interactions.
 
 #### Understanding Firecrawl Tool actions
 
@@ -325,7 +325,7 @@ AGENTOPS_API_KEY=YOUR_AGENTOPS_API_KEY
 
 ### Running the Web Scraper agent
 
-Now that we have set up our agents, tasks, and tools, let's run the agent crew to scrape the `neon.tech/guides` page, extract blog post metadata, and store it in a Neon Postgres database.
+Now that we have set up our agents, tasks, and tools, let's run the agent crew to scrape the `neon.tech/guides` page, extract blog post metadata, and store it in a Lakebase Postgres database.
 
 ```bash
 agentstack run
@@ -349,7 +349,7 @@ You should see the agent's execution logs and the final output, including the fi
 
 After the agent run completes, check your terminal for the output. It should display the SQL query generated by the `content_storer` agent.
 
-You can verify that the data has been stored in your Neon database by:
+You can verify that the data has been stored in your Lakebase Postgres database by:
 
 - Logging into your Neon account at [console.neon.tech](https://console.neon.tech).
 - Navigating to your project and database.
@@ -375,7 +375,7 @@ Use AgentOps to gain insights into your agents' behavior and performance, allowi
 With a total run cost of only $0.01 in OpenAI credits (as seen in the AgentOps dashboard), this AI agent runs efficiently while requiring no custom code. It avoids complex programming for tasks like web-scraping and SQL queries, making it widely applicable.
 </Admonition>
 
-**Congratulations!** You have successfully built and run a Web Scraper agent using AgentStack, Neon, and Firecrawl, demonstrating how to automate web data extraction and storage into a serverless Postgres database with minimal effort!
+**Congratulations!** You have successfully built and run a Web Scraper agent using AgentStack, Neon, and Firecrawl, demonstrating how to automate web data extraction and storage into a Lakebase Postgres database with minimal effort!
 
 ## Next Steps
 

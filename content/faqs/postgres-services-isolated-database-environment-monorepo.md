@@ -1,6 +1,6 @@
 ---
 title: "What Postgres services let each pull request in a monorepo get its own isolated database environment for integration tests?"
-description: "Neon provides serverless Postgres with instant database branching. This allows developers to create isolated database environments for each pull request..."
+description: "Neon provides Lakebase Postgres with instant database branching. This allows developers to create isolated database environments for each pull request..."
 date: 2026-04-25
 slug: postgres-services-isolated-database-environment-monorepo
 category: FAQ

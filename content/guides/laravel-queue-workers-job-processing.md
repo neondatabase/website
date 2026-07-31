@@ -1,15 +1,15 @@
 ---
-title: Implementing Queue Workers and Job Processing in Laravel with Neon Postgres
-subtitle: Learn how to implement efficient background processing in Laravel using queue workers and Neon Postgres
+title: Implementing Queue Workers and Job Processing in Laravel with Lakebase Postgres
+subtitle: Learn how to implement efficient background processing in Laravel using queue workers and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-14T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Laravel provides a powerful and flexible system for handling background processing through queues and scheduling. This allows you to improve your application's performance by offloading time-consuming tasks and automating recurring processes. In this comprehensive guide, we'll explore how to implement queue workers, job processing, and scheduled tasks in Laravel using Postgres as the queue driver.
 
-By the end of this tutorial, you'll know how to build a system for background processing and task automation, using the power of Laravel queues and the scheduler with Neon Postgres.
+By the end of this tutorial, you'll know how to build a system for background processing and task automation, using the power of Laravel queues and the scheduler with Lakebase Postgres.
 
 ## Prerequisites
 
@@ -35,7 +35,7 @@ cd laravel-queue-demo
 
 ### Setting up the Database
 
-Update your `.env` file with your Neon Postgres database credentials:
+Update your `.env` file with your Lakebase Postgres database credentials:
 
 ```env
 DB_CONNECTION=pgsql
@@ -52,7 +52,7 @@ Run the migrations:
 php artisan migrate
 ```
 
-This will create the necessary tables in your Neon Postgres database.
+This will create the necessary tables in your Lakebase Postgres database.
 
 ## Implementing Laravel Queues with Postgres
 
@@ -177,7 +177,7 @@ Route::get('/dispatch-job', function () {
 
 This route will dispatch the `GenerateDatabaseReport` job with the report ID `1` when accessed. You can test this by visiting `/dispatch-job` in your browser or using a tool like Postman or `curl`, which will trigger the job processing in the background, returning a response immediately instead of waiting for the job to complete.
 
-As we are using the `database` queue driver, the job will be stored in the `jobs` table in your Neon Postgres database.
+As we are using the `database` queue driver, the job will be stored in the `jobs` table in your Lakebase Postgres database.
 
 If you were to check the `jobs` table in your database, you would see an entry for the dispatched job with the serialized payload and other metadata:
 

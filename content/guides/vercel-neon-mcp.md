@@ -4,7 +4,7 @@ subtitle: 'Leverage Vercel logs and Neon branching to give AI agents the context
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-02T00:00:00.000Z'
-updatedOn: '2026-03-05T08:21:55.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 AI agents are evolving from simple task executors into integral parts of modern development workflows. As their role expands, giving them the right context and safeguards becomes essential especially when they’re trusted to diagnose and debug issues in production environments.
@@ -39,7 +39,7 @@ Before you begin, ensure you have the following ready:
 - **Neon account and project:** A Neon account with at least one project. Create one in the [Neon Console](https://console.neon.tech) if needed.
 - **Vercel account and project:** A Vercel account with your application deployed.
 
-In this demo, we use an example project called `ecommerce-web`, which has a production deployment named `ecommerce-web-prod` on Vercel and is connected to a Neon database. Analytics events are recorded in the `analytics_events` table within the Neon database.
+In this demo, we use an example project called `ecommerce-web`, which has a production deployment named `ecommerce-web-prod` on Vercel and is connected to a Lakebase Postgres database. Analytics events are recorded in the `analytics_events` table within the Lakebase Postgres database.
 
 You can follow the guide using your own projects.
 
@@ -47,7 +47,7 @@ You can follow the guide using your own projects.
 
 ## Step 1: Set up the Neon MCP server
 
-The Neon MCP server gives Claude Code tools to work with your Neon database, including creating database branches, running SQL queries, and applying migrations. For this scenario, we will use it to validate database schema changes in an isolated environment.
+The Neon MCP server gives Claude Code tools to work with your Lakebase Postgres database, including creating database branches, running SQL queries, and applying migrations. For this scenario, we will use it to validate database schema changes in an isolated environment.
 
 The simplest way to connect Claude Code to Neon is with the `neon init` command. It handles OAuth authentication, API key creation, configures Claude Code to use Neon's remote MCP server, and installs [Neon agent skills](https://github.com/neondatabase/agent-skills) for best practices.
 

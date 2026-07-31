@@ -4,7 +4,7 @@ subtitle: Learn how to create an asynchronous API for managing products using Fa
 author: sam-harri
 enableTableOfContents: true
 createdAt: '2024-10-08T00:00:00.000Z'
-updatedOn: '2026-01-07T13:45:46.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Following this guide, you’ll build an asynchronous product management API and leverage FastAPI's async capabilities and connection pools to efficiently manage database connections, ensuring your API can scale and handle high traffic with ease. Whether you’re aiming to improve performance or simply learn the best practices for building async APIs, this guide has you covered.
@@ -17,7 +17,7 @@ Before starting, ensure you have the following tools and services ready:
   ```bash
   pip --version
   ```
-- Neon serverless Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup)
+- Neon Lakebase Postgres : you will need a Neon account for provisioning and scaling your `PostgreSQL` database. If you don't have an account yet, [sign up here](https://console.neon.tech/signup)
 
 ## Setting up the Project
 
@@ -99,13 +99,13 @@ Follow these steps to set up your project and virtual environment:
 
 In this section, you will set up the connection pool, ensure your database schema is in place, and manage database connections effectively. To connect to your `PostgreSQL` database, you will use the `asyncpg` library for asynchronous database connections.
 
-First, create a `.env` file in the root of your project to store the database connection URL. This file will hold environment-specific variables, such as the connection string to your Neon PostgreSQL database.
+First, create a `.env` file in the root of your project to store the database connection URL. This file will hold environment-specific variables, such as the connection string to your Lakebase Postgres database.
 
 ```bash
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
-Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials which are available in the console.
+Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Lakebase Postgres database credentials which are available in the console.
 
 In your project, the `database.py` file manages the connection to `PostgreSQL` using `asyncpg` and its connection pool, which is a mechanism for managing and reusing database connections efficiently. With this, you can use asynchronous queries, allowing the application to handle multiple requests concurrently.
 

@@ -1,10 +1,10 @@
 ---
 title: "Running Vercel Eve agents and evals on disposable Neon branches"
-subtitle: "Learn how to build a Slack-based database assistant with Eve that provisions an isolated, disposable Neon database branch for every session, safe for migrations, exploration, and evals."
+subtitle: "Learn how to build a Slack-based database assistant with Eve that provisions an isolated, disposable Lakebase Postgres database branch for every session, safe for migrations, exploration, and evals."
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: "2026-06-23T00:00:00.000Z"
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Eve](https://eve.dev) by [Vercel](https://vercel.com) is a filesystem‑first framework for building durable backend agents. You define an agent as files (its instructions, tools, skills, channels, and schedules), and Eve takes care of the rest: stable HTTP routes, reconnectable session streams, durable state, and native human‑in‑the‑loop approvals. Agents built with Eve can run for days, pause for human review, and resume exactly where they left off.
@@ -547,7 +547,7 @@ The database agent in this guide is intentionally minimal, but Eve's filesystem-
 
 You can turn this agent into a capable junior developer by connecting it to the tools your team already uses. For example:
 
-- **GitHub**: Give the agent access to read pull requests, apply labels, post triage comments, and even propose code changes. See the [PR Triage Agent template](https://github.com/vercel-labs/eve-pr-triage-agent-template) for a production-ready example of an Eve agent that reads diffs and labels PRs automatically. Follow the same pattern mentioned in this guide to wire it up to your Neon database.
+- **GitHub**: Give the agent access to read pull requests, apply labels, post triage comments, and even propose code changes. See the [PR Triage Agent template](https://github.com/vercel-labs/eve-pr-triage-agent-template) for a production-ready example of an Eve agent that reads diffs and labels PRs automatically. Follow the same pattern mentioned in this guide to wire it up to your Lakebase Postgres database.
 - **Linear**: Connect the agent to [Linear](https://linear.app) via Eve's [connections](https://eve.dev/docs/connections) so it can create and update issues and keep your project board in sync.
 - **Custom tools**: Add any API or service as a typed tool under `agent/tools/`. Eve discovers and wires them automatically from the filesystem.
 

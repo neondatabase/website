@@ -1,13 +1,13 @@
 ---
-title: 'How do I export or download my Neon database as a SQL file?'
+title: 'How do I export or download my Lakebase Postgres database as a SQL file?'
 subtitle: 'Run pg_dump in plain-text format against a direct (non-pooled) connection string.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I enable the pgvector extension in my Neon database?'
+  title: 'How do I enable the pgvector extension in my Lakebase Postgres database?'
   slug: enable-pgvector-extension
 nextLink:
   title: 'Why am I getting ''Error connecting to database: Failed to fetch'' in the Neon Console Tables view?'

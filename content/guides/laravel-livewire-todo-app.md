@@ -4,12 +4,12 @@ subtitle: Learn how to create a simple yet powerful TODO app using Laravel, Live
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2025-05-30T16:53:05.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 In this guide, we'll walk through the process of building a TODO application using [Laravel](https://laravel.com/), [Livewire](https://livewire.laravel.com/), and [Volt](https://livewire.laravel.com/docs/volt).
 
-We'll use [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits) for authentication and Neon Postgres as our database.
+We'll use [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits) for authentication and Lakebase Postgres as our database.
 
 By the end of this tutorial, you'll have a simple yet fully functional TODO application that allows users to create, update, and delete tasks.
 
@@ -71,7 +71,7 @@ This can also be done directly via `composer` instead of using the Laravel insta
 
 ### Setting up the Database
 
-Update your `.env` file with your Neon database credentials:
+Update your `.env` file with your Lakebase Postgres database credentials:
 
 ```env
 DB_CONNECTION=pgsql
@@ -82,7 +82,7 @@ DB_USERNAME=your_username
 DB_PASSWORD=your_password
 ```
 
-Make sure to replace `your-neon-hostname`, `your_database_name`, `your_username`, and `your_password` with your actual Neon database details.
+Make sure to replace `your-neon-hostname`, `your_database_name`, `your_username`, and `your_password` with your actual Lakebase Postgres database details.
 
 Once you've updated the `.env` file, run the following command to create the default tables:
 
@@ -90,7 +90,7 @@ Once you've updated the `.env` file, run the following command to create the def
 php artisan migrate
 ```
 
-This will create the necessary tables in your Neon database.
+This will create the necessary tables in your Lakebase Postgres database.
 
 ### Compiling Assets
 
@@ -171,7 +171,7 @@ public function todos()
 
 This method defines a one-to-many relationship between the `User` and `Todo` models, allowing us to retrieve all todos associated with a user. For example, `Auth::user()->todos` will return all todos created by the authenticated user.
 
-Now, run the migrations to create the `todos` table in your Neon database:
+Now, run the migrations to create the `todos` table in your Lakebase Postgres database:
 
 ```bash
 php artisan migrate
@@ -533,7 +533,7 @@ The `livewire()` function is used to interact with the Livewire component and ma
 
 ### Running the Tests
 
-Again, before you run the tests, note that the `RefreshDatabase` trait will clear the database before each test, so make sure to use a separate database for testing to avoid data loss like an in-memory SQLite database or a Neon database branch.
+Again, before you run the tests, note that the `RefreshDatabase` trait will clear the database before each test, so make sure to use a separate database for testing to avoid data loss like an in-memory SQLite database or a Lakebase Postgres database branch.
 
 You can run these tests using the following command:
 

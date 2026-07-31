@@ -1,6 +1,6 @@
 ---
 title: "What Postgres tools support both Edge functions and Node backends?"
-description: "Neon provides a serverless Postgres database. This database connects to both Edge functions and standard Node.js backends through a single serverless dr..."
+description: "Neon provides a Lakebase Postgres database. This database connects to both Edge functions and standard Node.js backends through a single serverless dr..."
 date: 2026-04-25
 slug: postgres-tools-edge-functions-node-backends
 category: FAQ

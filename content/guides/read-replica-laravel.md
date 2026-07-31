@@ -1,10 +1,10 @@
 ---
-title: Scale your Laravel application with Neon Postgres Read Replicas
-subtitle: Learn how to scale Laravel applications with Neon Postgres Read Replicas
+title: Scale your Laravel application with Lakebase Postgres Read Replicas
+subtitle: Learn how to scale Laravel applications with Lakebase Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-20T00:00:00.000Z'
-updatedOn: '2025-12-03T12:37:52.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 ## Introduction
@@ -24,7 +24,7 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 
 ## Build the URL Shortener app
 
-To demonstrate how to use Neon read replicas with Laravel, we'll build a simple URL shortener application that uses a Neon database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability.
+To demonstrate how to use Neon read replicas with Laravel, we'll build a simple URL shortener application that uses a Lakebase Postgres database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability.
 
 ### Part 1: Build the initial URL Shortener app with a single database
 
@@ -59,7 +59,7 @@ laravel new url-shortener
 
 #### Configure the database connection
 
-Update your `.env` file with your Neon database credentials:
+Update your `.env` file with your Lakebase Postgres database credentials:
 
 ```
 DB_CONNECTION=pgsql
@@ -351,7 +351,7 @@ This automatic routing happens transparently, allowing you to scale your applica
 You can find the source code for the application described in this guide on GitHub.
 <DetailIconCards>
 <a href="https://github.com/dhanushreddy291/neon-read-replica-laravel" description="
-Learn how to scale Laravel applications with Neon Postgres Read Replicas" icon="github">Use read replicas with Laravel</a>
+Learn how to scale Laravel applications with Lakebase Postgres Read Replicas" icon="github">Use read replicas with Laravel</a>
 </DetailIconCards>
 
 ## Conclusion

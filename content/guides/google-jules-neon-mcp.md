@@ -4,7 +4,7 @@ subtitle: 'Learn how to use Google Jules and the Neon MCP server to spin up isol
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-26T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 AI coding agents are increasingly capable of implementing multi-step changes across an application. However, full-stack features often require updates to stateful infrastructure such as databases.
@@ -38,7 +38,7 @@ Use the following example repository if you want to follow along with the Snippe
 
 ## Get your Neon API Key
 
-To allow Google Jules to interact with your Neon database, you'll need to generate a Neon API Key.
+To allow Google Jules to interact with your Lakebase Postgres database, you'll need to generate a Neon API Key.
 
 1. Navigate to your Neon organization settings and click on the **API Keys** tab.
 2. Click **Create new API Key** and give it a name (e.g., "Google Jules Integration").
@@ -131,7 +131,7 @@ Once dispatched, Jules operates in the background. If you open the Jules executi
 ![Google Jules execution logs](/docs/guides/jules-execution-logs.png)
 
 1. **Branch creation**  
-   Jules creates a new branch in the Neon database for the `code-snippets` project using the MCP server. This branch is an exact copy of production but is completely isolated, allowing Jules to make any changes without risk.
+   Jules creates a new branch in the Lakebase Postgres database for the `code-snippets` project using the MCP server. This branch is an exact copy of production but is completely isolated, allowing Jules to make any changes without risk.
 
 2. **Code analysis**
    Jules analyzes the existing codebase to understand how snippets are currently stored, accessed, and rendered. It identifies the relevant database tables, API routes, and frontend components that will need to be modified.

@@ -28,7 +28,7 @@ This process ensures that database-dependent E2E tests are run in a clean, predi
 - A [GitHub account](https://github.com/)
 - Node.js installed locally on your machine
 
-## Setting up your Neon database
+## Setting up your Lakebase Postgres database
 
 1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
 2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
@@ -56,7 +56,7 @@ We'll start with a pre-configured example repository that includes a simple Todo
     cp .env.example .env
     ```
 
-2.  Open the `.env` file and add the Neon database connection string you copied earlier.
+2.  Open the `.env` file and add the Lakebase Postgres database connection string you copied earlier.
 
 3.  Apply the initial schema migrations to your production database branch:
 
@@ -266,7 +266,7 @@ The step outputs from the `create_neon_branch` action will only be available wit
 
 The workflow is divided into three jobs:
 
-- **Setup**: Gets the current Git branch name to use in naming the Neon database branch.
+- **Setup**: Gets the current Git branch name to use in naming the Lakebase Postgres database branch.
 - **Create branch & test**: This job runs when a pull request is opened or updated. It creates a database branch, runs migrations, and executes the Cypress tests.
 - **Cleanup**: This job runs when the pull request is closed. It deletes the temporary database branch and applies migrations to production branch if the PR was merged.
 

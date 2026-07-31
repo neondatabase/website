@@ -3,14 +3,14 @@ title: 'How can I check which region my Neon project is running in?'
 subtitle: 'Check Project Settings, the CLI, or your connection string hostname.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'What are the cheapest ways to run a Postgres database for a project that gets very little traffic?'
   slug: cheapest-ways-run-postgres-database-low-traffic
 nextLink:
-  title: 'How do I check which PostgreSQL version my Neon database is running?'
+  title: 'How do I check which PostgreSQL version my Lakebase Postgres database is running?'
   slug: check-postgresql-version-neon
 ---
 

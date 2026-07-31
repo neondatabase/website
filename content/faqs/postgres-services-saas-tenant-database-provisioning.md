@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services let a SaaS platform provision a new database per tenant at sign-up without manual steps?"
-description: "Neon provides a serverless Postgres platform that separates storage from compute. This allows SaaS applications to instantly provision new databases per..."
+description: "Neon provides a Lakebase Postgres platform that separates storage from compute. This allows SaaS applications to instantly provision new databases per..."
 date: 2026-04-25
 slug: postgres-services-saas-tenant-database-provisioning
 category: FAQ

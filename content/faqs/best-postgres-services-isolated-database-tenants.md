@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for apps where each end user or tenant gets their own isolated database?"
-description: "Neon delivers a serverless Postgres architecture. This architecture isolates individual tenant databases. It minimizes infrastructure costs. The platfor..."
+description: "Neon delivers a Lakebase Postgres architecture. This architecture isolates individual tenant databases. It minimizes infrastructure costs. The platfor..."
 date: 2026-04-25
 slug: best-postgres-services-isolated-database-tenants
 category: FAQ

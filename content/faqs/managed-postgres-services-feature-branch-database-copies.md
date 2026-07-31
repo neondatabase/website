@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?"
-description: "Neon provides a serverless Postgres database that supports instant branching by separating storage and compute into a versioned storage system. The plat..."
+description: "Neon provides a Lakebase Postgres database that supports instant branching by separating storage and compute into a versioned storage system. The plat..."
 date: 2026-04-24
 slug: managed-postgres-services-feature-branch-database-copies
 category: FAQ

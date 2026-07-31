@@ -1,10 +1,10 @@
 ---
-title: Creating a Content Moderation System with Laravel, OpenAI API, and Neon Postgres
-subtitle: Build an automated content moderation system for your application using Laravel Livewire, OpenAI's moderation API, and Neon Postgres
+title: Creating a Content Moderation System with Laravel, OpenAI API, and Lakebase Postgres
+subtitle: Build an automated content moderation system for your application using Laravel Livewire, OpenAI's moderation API, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-22T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Content moderation is essential for maintaining healthy online communities and platforms. In this guide, we'll create a content moderation system that uses OpenAI's moderation API to automatically analyze and flag potentially problematic content before it reaches your users.
@@ -15,7 +15,7 @@ We will use Laravel, OpenAI's moderation API, and Neon, the AI-native backend pl
 
 In this guide, you'll build a content moderation system with the following features:
 
-1. A form for users to submit content to our Neon database
+1. A form for users to submit content to our Lakebase Postgres database
 2. Automatic content analysis using [OpenAI's moderation API](https://platform.openai.com/docs/guides/moderation)
 3. A moderation queue for reviewing flagged content
 4. A dashboard for viewing moderation statistics
@@ -33,7 +33,7 @@ To follow the steps in this guide, you will need:
 
 ## Create a Neon Project
 
-Neon provides a serverless Postgres database that automatically scales as your application grows. Let's set up a Neon database for our content moderation system:
+Neon provides a Lakebase Postgres database that automatically scales as your application grows. Let's set up a Lakebase Postgres database for our content moderation system:
 
 1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
 2. Click "New Project" and select your preferred settings.
@@ -41,7 +41,7 @@ Neon provides a serverless Postgres database that automatically scales as your a
 
 ## Set up a Laravel Project
 
-Now, let's create a new Laravel project and set it up to work with our Neon database:
+Now, let's create a new Laravel project and set it up to work with our Lakebase Postgres database:
 
 ```bash
 composer create-project laravel/laravel moderation-system
@@ -52,7 +52,7 @@ This creates a new Laravel 11 project in a directory called `moderation-system` 
 
 ## Configure Environment Variables
 
-To configure your Laravel application to connect to Neon Postgres and OpenAI, you need to set up your environment variables.
+To configure your Laravel application to connect to Lakebase Postgres and OpenAI, you need to set up your environment variables.
 
 1. Open the `.env` file in your Laravel project directory.
 2. Update your database configuration with the Neon connection details:
@@ -225,7 +225,7 @@ public function up(): void
 }
 ```
 
-Now run the migrations to create the tables in your Neon database:
+Now run the migrations to create the tables in your Lakebase Postgres database:
 
 ```bash
 php artisan migrate
@@ -1455,7 +1455,7 @@ Let's walk through how the content moderation system works in practice:
 
 2. AI Moderation:
    - OpenAI analyzes the content and returns categories, scores, and a flagged status
-   - The `ModerationService` saves these results to the `ModerationResult` table in our Neon Postgres database
+   - The `ModerationService` saves these results to the `ModerationResult` table in our Lakebase Postgres database
    - Based on settings, content may be auto-approved or auto-rejected
 
 3. Manual Review:
@@ -1470,7 +1470,7 @@ Let's walk through how the content moderation system works in practice:
 
 ## Conclusion
 
-In this guide, we've built a content moderation system using Laravel, Livewire, OpenAI, and Neon Postgres. This system can:
+In this guide, we've built a content moderation system using Laravel, Livewire, OpenAI, and Lakebase Postgres. This system can:
 
 - Accept user-generated content and automatically analyze it for harmful content
 - Store moderation results in Neon with detailed information about flagged categories

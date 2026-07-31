@@ -4,7 +4,7 @@ subtitle: Leveraging Realistic Production Data for Robust Testing with Flask and
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Flask](https://flask.palletsprojects.com/) is a popular Python micro-framework widely used for building web applications. It includes powerful tools for automated testing, with [pytest](https://docs.pytest.org/) being a preferred option due to its simplicity and effectiveness.
@@ -47,13 +47,13 @@ To set up your testing environment with Neon and Flask, follow these steps:
 
 1. Configure Database Connection:
 
-   After creating your Neon account and a new database branch, obtain the connection details from the Neon dashboard. Create a `.env` file with the Neon database connection parameters:
+   After creating your Neon account and a new database branch, obtain the connection details from the Neon dashboard. Create a `.env` file with the Lakebase Postgres database connection parameters:
 
    ```env
    DATABASE_URL=postgresql://user:password@your-neon-hostname.neon.tech:5432/dbname
    ```
 
-   Replace `user`, `password`, `your-neon-hostname`, and `dbname` with your Neon database details.
+   Replace `user`, `password`, `your-neon-hostname`, and `dbname` with your Lakebase Postgres database details.
 
 2. Install Required Packages:
 
@@ -190,7 +190,7 @@ With the simple test in place, you can now run the tests using pytest:
 pytest
 ```
 
-This setup provides a foundation for testing Flask applications with Neon Postgres, which you can expand upon for more complex applications and comprehensive test suites.
+This setup provides a foundation for testing Flask applications with Lakebase Postgres, which you can expand upon for more complex applications and comprehensive test suites.
 
 ## Using Neon Branching with Flask
 
@@ -253,7 +253,7 @@ In addition to running tests locally, you can automate the testing process by in
 
 ## Managing Neon Branches with `neon` CLI
 
-With the `neon` CLI tool, managing your Neon database branches becomes more efficient and straightforward. You can create, list, obtain connection strings, and delete branches using simple commands.
+With the `neon` CLI tool, managing your Lakebase Postgres database branches becomes more efficient and straightforward. You can create, list, obtain connection strings, and delete branches using simple commands.
 
 ### Installing `neon`
 
@@ -261,7 +261,7 @@ Before you can start using `neon`, you need to install it on your local machine.
 
 ### Using `neon` to Manage Branches
 
-Once `neon` is installed, you can use it to interact with your Neon database branches. Here are the basic commands for managing branches:
+Once `neon` is installed, you can use it to interact with your Lakebase Postgres database branches. Here are the basic commands for managing branches:
 
 #### 1. [Creating a Branch](/docs/cli/branches#create)
 

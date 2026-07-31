@@ -1,16 +1,16 @@
 ---
-title: 'How do I create and download a backup of my Neon database to my local machine?'
+title: 'How do I create and download a backup of my Lakebase Postgres database to my local machine?'
 subtitle: 'Run pg_dump in custom format against a direct connection string and save the archive to disk.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'How do I delete a database in Neon?'
   slug: delete-database-neon
 nextLink:
-  title: 'How do I enable or disable connection pooling for my Neon database?'
+  title: 'How do I enable or disable connection pooling for my Lakebase Postgres database?'
   slug: enable-disable-connection-pooling-neon
 ---
 

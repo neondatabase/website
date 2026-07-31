@@ -1,9 +1,9 @@
 ---
-title: 'How do I import data from a CSV file into my Neon database?'
+title: 'How do I import data from a CSV file into my Lakebase Postgres database?'
 subtitle: 'Use psql with \copy from your local machine, or pgloader for large or messy CSVs.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:

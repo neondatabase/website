@@ -1,10 +1,10 @@
 ---
 title: 'Git worktrees and Neon Branching: Running multiple AI coding agents in parallel'
-subtitle: Learn how to run multiple AI coding agents in parallel with isolated Git worktrees and Neon database branches.
+subtitle: Learn how to run multiple AI coding agents in parallel with isolated Git worktrees and Lakebase Postgres database branches.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-25T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 You’ve probably seen people on X (Twitter) experimenting with [swarms of AI coding agents](https://x.com/notnotstorm/status/1993411360387162235?s=20), sometimes mentioning concepts like [Git worktrees](https://x.com/bcherny/status/2025007393290272904?s=20). If you’ve already been running Claude or another agent in your terminal, you might be wondering: _what exactly are worktrees, and why do they matter?_
@@ -68,7 +68,7 @@ File system isolation is only half the battle. If Agent A and Agent B are isolat
 
 This is where **Neon** is essential. Neon separates compute and storage, allowing you to branch your database as easily as you branch your code.
 
-Because Neon uses [copy-on-write](/docs/introduction/architecture-overview#what-this-architecture-enables) technology, creating a database branch takes less than a second and initially consumes zero extra storage. By assigning every Git worktree its own dedicated Neon database branch, your agents can run destructive migrations, seed test data, and execute complex logic in complete isolation.
+Because Neon uses [copy-on-write](/docs/introduction/architecture-overview#what-this-architecture-enables) technology, creating a database branch takes less than a second and initially consumes zero extra storage. By assigning every Git worktree its own dedicated Lakebase Postgres database branch, your agents can run destructive migrations, seed test data, and execute complex logic in complete isolation.
 
 Visually, you can map your database similarly to your Git branches:
 
@@ -86,7 +86,7 @@ To make this seamless, we can use a Git `post-checkout` hook. This script trigge
 
 1.  **Detect** that a new worktree is being created.
 2.  **Bootstrap** the environment by copying your main `.env` file.
-3.  **Provision** a new Neon database branch matching the Git branch name.
+3.  **Provision** a new Lakebase Postgres database branch matching the Git branch name.
 4.  **Configure** the new worktree's `DATABASE_URL` to point to this isolated database.
 
 ### Prerequisites
@@ -120,7 +120,7 @@ Paste the following script into `.git/hooks/post-checkout`:
 #!/bin/bash
 set -euo pipefail
 
-# Git post-checkout hook: syncs Neon database branch with current Git branch
+# Git post-checkout hook: syncs Lakebase Postgres database branch with current Git branch
 # Args: $1 = previous HEAD, $2 = new HEAD, $3 = checkout type (1=branch, 0=file)
 if [ "${3:-0}" != "1" ]; then
   exit 0
@@ -315,7 +315,7 @@ cd ../feature-search
 
 ## Merging changes and resolving conflicts
 
-Once an agent finishes its task, you’ll have a feature branch (e.g., `feature-auth`) with new commits and a corresponding Neon database branch. The next step is to merge that work back into `main`.
+Once an agent finishes its task, you’ll have a feature branch (e.g., `feature-auth`) with new commits and a corresponding Lakebase Postgres database branch. The next step is to merge that work back into `main`.
 
 ### Merging manually
 

@@ -1,10 +1,10 @@
 ---
-title: Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas
-subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplicas() function and Neon Postgres Read Replicas
+title: Scale your Next.js application with Drizzle ORM and Lakebase Postgres Read Replicas
+subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplicas() function and Lakebase Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-14T00:00:00.000Z'
-updatedOn: '2025-12-03T12:37:52.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.
@@ -21,7 +21,7 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 
 ## Build the Polling app
 
-To demonstrate how to use Neon read replicas with Drizzle in Next.js, we'll build a simple Polling application that uses a Neon database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability.
+To demonstrate how to use Neon read replicas with Drizzle in Next.js, we'll build a simple Polling application that uses a Lakebase Postgres database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability.
 
 ### Part 1: Build the initial Polling app with a single database
 
@@ -79,13 +79,13 @@ This code sets up the Drizzle ORM client. It creates a connection pool using the
 
 #### Update `.env`
 
-Add the Neon database connection string:
+Add the Lakebase Postgres database connection string:
 
 ```
 DATABASE_URL=postgres://your-username:your-password@your-neon-host/your-database
 ```
 
-This environment variable stores the connection string for your Neon database.
+This environment variable stores the connection string for your Lakebase Postgres database.
 
 #### Set up migrations and create tables
 
@@ -127,7 +127,7 @@ To generate your first migration based on your schema, run:
 npm run migration:generate
 ```
 
-To apply the migration and create the table in your Neon database, run:
+To apply the migration and create the table in your Lakebase Postgres database, run:
 
 ```bash
 npm run migration:migrate

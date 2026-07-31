@@ -96,7 +96,7 @@ As used herein, “month” refers to a calendar month.
 
 “**Business Hours”** means 06:00am to 14:00pm Pacific Standard Time (UTC -8), Monday through Friday, excluding public holidays in the United States.
 
-**“Compute Endpoints”** means compute instances that provide virtualized computing resources (CPU and memory) for running PostgreSQL. Clients and applications connect to a Neon database via a Compute Endpoint hostname.
+**“Compute Endpoints”** means compute instances that provide virtualized computing resources (CPU and memory) for running PostgreSQL. Clients and applications connect to a Lakebase Postgres database via a Compute Endpoint hostname.
 
 “**Downtime**” is calculated on a monthly basis and is the total number of minutes during the month that a Compute Endpoint was unavailable. For the purposes of calculating the Monthly Uptime Percentage, Downtime does not include partial minutes of unavailability, inaccessibility or unavailability due to Unscheduled Downtime. A minute is considered unavailable if all of your continuous attempts to establish a connection to a Compute Endpoint within the minute fail. 
 

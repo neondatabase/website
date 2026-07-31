@@ -1,13 +1,13 @@
 ---
-title: Using Payload CMS with Neon Postgres to Build an E-commerce Store in Next.js
+title: Using Payload CMS with Lakebase Postgres to Build an E-commerce Store in Next.js
 subtitle: Build your own E-commerce Store in a Next.js application with Payload CMS and Postgres (powered by Neon).
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-06T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-In this guide, you will learn how to set up a serverless Postgres database with Neon, configure Payload CMS with Postgres, and seed the Postgres database using the pre-populated information in Payload CMS Ecommerce template.
+In this guide, you will learn how to set up a Lakebase Postgres database with Neon, configure Payload CMS with Postgres, and seed the Postgres database using the pre-populated information in Payload CMS Ecommerce template.
 
 ## Prerequisites
 
@@ -18,15 +18,15 @@ To follow the steps in this guide, you will need the following:
 
 ## Steps
 
-- [Provisioning a Serverless Postgres database powered by Neon](#provisioning-a-serverless-postgres-database-powered-by-neon)
+- [Provisioning a Lakebase Postgres database powered by Neon](#provisioning-a-serverless-postgres-database-powered-by-neon)
 - [Create a new Payload CMS application with Next.js](#create-a-new-payload-cms-application-with-nextjs)
 - [Seed your Postgres database](#seed-your-postgres-database)
 - [Build and Test your E-commerce Store (locally)](#build-and-test-your-e-commerce-store-locally)
 - [Scale-to-zero with Postgres (powered by Neon)](#scale-to-zero-with-postgres-powered-by-neon)
 
-## Provisioning a Serverless Postgres database powered by Neon
+## Provisioning a Lakebase Postgres database powered by Neon
 
-Using a serverless Postgres database powered by Neon lets you scale down to zero, which helps you save on compute costs.
+Using a Lakebase Postgres database powered by Neon lets you scale down to zero, which helps you save on compute costs.
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project.
 
@@ -78,7 +78,7 @@ yarn && yarn dev
 
 The app should be running on [localhost:3000](http://localhost:3000). Let's keep the development server running as we work through the next steps.
 
-Next, let's move on to adding e-commerce seed data to your Neon Postgres database.
+Next, let's move on to adding e-commerce seed data to your Lakebase Postgres database.
 
 ## Seed your Postgres database
 
@@ -120,6 +120,6 @@ Interestingly, during the entire process of setting up this app, you were using 
 
 ## Summary
 
-In this guide, you learned how to build an e-commerce store in Next.js using Payload CMS and a serverless Postgres database (powered by Neon). Furthermore, using Postgres (powered by Neon) allowed you to save on cloud compute resources when the compute endpoint that runs Postgres was idle for more than 5 minutes.
+In this guide, you learned how to build an e-commerce store in Next.js using Payload CMS and a Lakebase Postgres database (powered by Neon). Furthermore, using Postgres (powered by Neon) allowed you to save on cloud compute resources when the compute endpoint that runs Postgres was idle for more than 5 minutes.
 
 <NeedHelp />

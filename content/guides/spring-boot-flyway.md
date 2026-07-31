@@ -1,17 +1,17 @@
 ---
 title: Database Migrations in Spring Boot with Flyway and Neon
-subtitle: Learn how to manage database schema changes in a Spring Boot application using Flyway with Neon Postgres.
+subtitle: Learn how to manage database schema changes in a Spring Boot application using Flyway with Lakebase Postgres.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-07T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Database schema management is an essential part of every application development and maintenance process.
 
 As your application grows, you need a reliable way to manage database changes across different environments.
 
-This guide will walk you through setting up and using [Flyway](https://github.com/flyway/flyway) for database migrations in a [Spring Boot](https://github.com/spring-projects/spring-boot) application with Neon Postgres.
+This guide will walk you through setting up and using [Flyway](https://github.com/flyway/flyway) for database migrations in a [Spring Boot](https://github.com/spring-projects/spring-boot) application with Lakebase Postgres.
 
 ## Prerequisites
 
@@ -19,7 +19,7 @@ Before we begin, ensure you have:
 
 - Java Development Kit installed
 - [Maven](https://maven.apache.org/) for dependency management
-- A [Neon](https://console.neon.tech/signup) account for serverless Postgres
+- A [Neon](https://console.neon.tech/signup) account for Lakebase Postgres
 - Basic familiarity with Spring Boot and SQL
 
 Instead of Maven, you can use Gradle for dependency management. The steps will be similar but for this guide, we'll use Maven.
@@ -64,7 +64,7 @@ Instead of Maven, you can use Gradle for dependency management. The steps will b
 
 Now that we have our project set up, let's configure the database connection.
 
-To configure your Neon database connection details, open the `application.properties` file in `src/main/resources` and add the following properties:
+To configure your Lakebase Postgres database connection details, open the `application.properties` file in `src/main/resources` and add the following properties:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://<your-neon-hostname>/<your-database-name>
@@ -78,7 +78,7 @@ spring.flyway.enabled=true
 spring.flyway.locations=classpath:db/migration
 ```
 
-Replace the placeholders with your actual Neon database credentials.
+Replace the placeholders with your actual Lakebase Postgres database credentials.
 
 Note that we set `spring.jpa.hibernate.ddl-auto=validate` to prevent Hibernate from automatically modifying the schema. Flyway will handle all schema changes.
 
@@ -123,11 +123,11 @@ Let's create our first migration script:
    );
    ```
 
-These scripts will create the `users` and `posts` tables in your Neon database when you run the migrations.
+These scripts will create the `users` and `posts` tables in your Lakebase Postgres database when you run the migrations.
 
 ## Running Migrations
 
-Now that we've configured Flyway with our Spring Boot application and Neon database, we can proceed to run the database migrations.
+Now that we've configured Flyway with our Spring Boot application and Lakebase Postgres database, we can proceed to run the database migrations.
 
 There are two primary methods to execute Flyway migrations: using the Flyway Maven plugin or programmatically through the Flyway API. Let's explore both approaches in detail.
 
@@ -326,7 +326,7 @@ There are several things to keep in mind when managing database migrations:
 
 ## Conclusion
 
-Using Flyway with Spring Boot and Neon Postgres provides a production ready solution for managing database schema changes. By following these practices, you can ensure that your database schema evolves safely and consistently across all environments.
+Using Flyway with Spring Boot and Lakebase Postgres provides a production ready solution for managing database schema changes. By following these practices, you can ensure that your database schema evolves safely and consistently across all environments.
 
 Remember to always test your migrations thoroughly and have a solid backup and rollback strategy in place. Neon's features like branching and point-in-time recovery can be a great addition to your already existing lifecycle of your database schema.
 

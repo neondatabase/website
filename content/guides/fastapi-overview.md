@@ -1,15 +1,15 @@
 ---
-title: Building a High-Performance API with FastAPI, Pydantic, and Neon Postgres
-subtitle: Learn how to create an API for managing a tech conference system using FastAPI, Pydantic for data validation, and Neon's serverless Postgres for data storage
+title: Building a High-Performance API with FastAPI, Pydantic, and Lakebase Postgres
+subtitle: Learn how to create an API for managing a tech conference system using FastAPI, Pydantic for data validation, and Neon's Lakebase Postgres for data storage
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2026-03-03T03:19:43.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 FastAPI is a high-performance Python web framework for building APIs quickly and efficiently.
 
-When combined with Pydantic for data validation and Neon's serverless Postgres for data storage, you can create a powerful and efficient API with minimal effort.
+When combined with Pydantic for data validation and Neon's Lakebase Postgres for data storage, you can create a powerful and efficient API with minimal effort.
 
 In this guide, we'll walk through the process of building an API for managing a tech conference system, focusing on best practices and performance optimizations.
 
@@ -19,7 +19,7 @@ Before we begin, make sure you have the following:
 
 - Python 3.9 or later installed on your system
 - [pip](https://pip.pypa.io/en/stable/installation/) for managing Python packages
-- A [Neon](https://console.neon.tech/signup) account for serverless Postgres
+- A [Neon](https://console.neon.tech/signup) account for Lakebase Postgres
 
 ## Setting up the Project
 
@@ -77,7 +77,7 @@ pip freeze > requirements.txt
 
 This will create a `requirements.txt` file with all the installed packages in your virtual environment and their versions. This is useful for sharing your project with others or deploying it to a server.
 
-## Connecting to Neon Postgres
+## Connecting to Lakebase Postgres
 
 First, let's set up our database connection. Create a `.env` file in your project root:
 
@@ -85,7 +85,7 @@ First, let's set up our database connection. Create a `.env` file in your projec
 DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
-Replace the placeholders with your actual Neon database credentials.
+Replace the placeholders with your actual Lakebase Postgres database credentials.
 
 Now, create a `database.py` file to manage the database connection:
 
@@ -390,11 +390,11 @@ You need to make sure that your `.env` file is not included in the Docker image.
 
 ## Conclusion
 
-In this guide, we've built a simple API for managing a tech conference system using FastAPI, Pydantic, and Neon Postgres.
+In this guide, we've built a simple API for managing a tech conference system using FastAPI, Pydantic, and Lakebase Postgres.
 
-This combination provides a very good foundation for building scalable and efficient web services. FastAPI's speed and ease of use, combined with Pydantic's powerful data validation and Neon's serverless Postgres, make for a formidable tech stack.
+This combination provides a very good foundation for building scalable and efficient web services. FastAPI's speed and ease of use, combined with Pydantic's powerful data validation and Neon's Lakebase Postgres, make for a formidable tech stack.
 
-As a next step, you can extend the API with more features like authentication, authorization, and advanced query capabilities. You can check out the [Implementing Secure User Authentication in FastAPI using JWT Tokens and Neon Postgres](/guides/fastapi-jwt) guide for adding JWT-based authentication to your API.
+As a next step, you can extend the API with more features like authentication, authorization, and advanced query capabilities. You can check out the [Implementing Secure User Authentication in FastAPI using JWT Tokens and Lakebase Postgres](/guides/fastapi-jwt) guide for adding JWT-based authentication to your API.
 
 ## Additional Resources
 

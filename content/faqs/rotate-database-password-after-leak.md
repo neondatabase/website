@@ -3,11 +3,11 @@ title: 'How do I rotate my database password in Neon after a security incident?'
 subtitle: 'Reset a role password from the Neon Console, CLI, or SQL to invalidate the leaked credential.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I rotate all my Neon database credentials and connection strings after a security breach?'
+  title: 'How do I rotate all my Lakebase Postgres database credentials and connection strings after a security breach?'
   slug: rotate-database-credentials-after-breach
 nextLink:
   title: 'How do I rotate my database URL or connection string in Neon?'
@@ -81,4 +81,4 @@ Update the connection string everywhere it's stored:
 Existing open sessions stay connected, but every new connection (or reconnect) must use the new password. Roll out the new value to your deployment platform first if you want to avoid authentication failures during the cutover.
 </Admonition>
 
-If the leak might have exposed more than one role, see [How do I rotate all my Neon database credentials after a breach?](/faqs/rotate-database-credentials-after-breach).
+If the leak might have exposed more than one role, see [How do I rotate all my Lakebase Postgres database credentials after a breach?](/faqs/rotate-database-credentials-after-breach).

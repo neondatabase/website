@@ -1,10 +1,10 @@
 ---
 title: 'Generate type-safe client schemas with Hey API from a Fastify, Neon, and Zod Backend'
-subtitle: 'Learn how to set up a CRUD backend using Fastify and Neon Postgres with Zod validation and generate matching runtime Zod validation schemas for client-side forms using Hey API.'
+subtitle: 'Learn how to set up a CRUD backend using Fastify and Lakebase Postgres with Zod validation and generate matching runtime Zod validation schemas for client-side forms using Hey API.'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-13T00:00:00.000Z'
-updatedOn: '2026-07-14T11:36:29.631Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Ensuring end-to-end type safety between your backend and frontend is one of the most common challenges in modern web development.
@@ -13,7 +13,7 @@ Traditionally, developers define a database schema, duplicate those constraints 
 
 In this guide, you will build a unified, type-safe pipeline that automatically solves this problem using:
 
-1. **Backend database**: Neon Postgres for scalable, zero-config relational storage.
+1. **Backend database**: Lakebase Postgres for scalable, zero-config relational storage.
 2. **Backend API**: A [Fastify](https://fastify.dev/) server using `fastify-type-provider-zod` to bind Zod validation directly to request payloads and responses.
 3. **OpenAPI generation**: `@fastify/swagger` to automatically translate backend Zod schemas into an OpenAPI schema (`openapi.json`).
 4. **Code generation**: [Hey API](https://heyapi.dev/) to parse the exported OpenAPI schema and generate a completely typed client SDK alongside matching **Zod validation schemas** for client-side forms.
@@ -43,7 +43,7 @@ To follow this guide, you will need:
 
 ## Create a Neon project
 
-You will need a Neon Postgres database to store your data.
+You will need a Lakebase Postgres database to store your data.
 
 1. Log in to the [Neon Console](https://console.neon.tech).
 2. Click on **New Project**.
@@ -148,7 +148,7 @@ export default fp(async function dbPlugin(app: FastifyInstance) {
 });
 ```
 
-The above code exports a Fastify plugin that registers the Postgres connection and ensures the `tasks` table exists. It uses the `DATABASE_URL` from the `.env` file to connect to your Neon database. Learn more about the [Fastify Postgres Plugin](https://github.com/fastify/fastify-postgres).
+The above code exports a Fastify plugin that registers the Postgres connection and ensures the `tasks` table exists. It uses the `DATABASE_URL` from the `.env` file to connect to your Lakebase Postgres database. Learn more about the [Fastify Postgres Plugin](https://github.com/fastify/fastify-postgres).
 
 ## Build the Fastify server with Zod Type Provider
 

@@ -1,10 +1,10 @@
 ---
-title: Scale your .NET application with Entity Framework and Neon Postgres Read Replicas
-subtitle: Learn how to scale .NET applications with Entity Framework's DbContext and Neon Postgres Read Replicas
+title: Scale your .NET application with Entity Framework and Lakebase Postgres Read Replicas
+subtitle: Learn how to scale .NET applications with Entity Framework's DbContext and Lakebase Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-13T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that perform read operations on the same data as your primary read-write compute. A key advantage of Neon's architecture is that adding a read replica to a Neon project doesn't require additional storage, making it an efficient scaling solution.
@@ -24,7 +24,7 @@ This guide demonstrates how to leverage Neon read replicas to efficiently scale 
 
 ## Build the Todo app
 
-To demonstrate how to use Neon read replicas with Entity Framework Core, we'll build a simple Todo application that uses a Neon database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability. This is just a simple example to demonstrate the concept, and you can apply the same principles to more complex applications.
+To demonstrate how to use Neon read replicas with Entity Framework Core, we'll build a simple Todo application that uses a Lakebase Postgres database. We'll then update the application to use a read replica for read operations, improving the application's performance and scalability. This is just a simple example to demonstrate the concept, and you can apply the same principles to more complex applications.
 
 ### Part 1: Build the initial Todo app with a single database
 

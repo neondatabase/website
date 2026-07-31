@@ -1,13 +1,13 @@
 ---
 title: Authentication and Authorization in ASP.NET Core with ASP.NET Identity and Neon
-subtitle: Learn how to implement secure user authentication and authorization in ASP.NET Core applications using ASP.NET Identity with Neon Postgres
+subtitle: Learn how to implement secure user authentication and authorization in ASP.NET Core applications using ASP.NET Identity with Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-In this guide, we'll explore how to implement secure authentication and authorization in an ASP.NET Core application using ASP.NET Core Identity with Neon Postgres as the database backend. We'll cover user management, role-based authorization, and JWT token generation for secure API access.
+In this guide, we'll explore how to implement secure authentication and authorization in an ASP.NET Core application using ASP.NET Core Identity with Lakebase Postgres as the database backend. We'll cover user management, role-based authorization, and JWT token generation for secure API access.
 
 ## Prerequisites
 
@@ -148,7 +148,7 @@ Open `Program.cs` and update it as follows:
 ```csharp
 var builder = WebApplication.CreateBuilder(args);
 
-// Add Neon database context
+// Add Lakebase Postgres database context
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("NeonConnection")));
 
@@ -221,7 +221,7 @@ app.UseAuthorization();
 
 We are doing quite a few things here:
 
-1. First, we configure our database context using the connection string we defined earlier in `appsettings.json`. This connects our application to the Neon Postgres database, allowing it to store and retrieve user data.
+1. First, we configure our database context using the connection string we defined earlier in `appsettings.json`. This connects our application to the Lakebase Postgres database, allowing it to store and retrieve user data.
 1. Next, we set up ASP.NET Identity to manage user accounts which includes:
    - We enforce strong passwords.
    - We configure lockout settings to protect against brute force attacks.
@@ -653,7 +653,7 @@ Unlike the standard login flow, the new flow involves three steps:
    }
    ```
 
-As a security measure, store refresh tokens securely in your Neon database while also making sure that clients use secure methods like HTTP-only cookies. Also, keep access tokens short-lived, rotate refresh tokens on refresh, and implement token expiration and revocation to enhance security.
+As a security measure, store refresh tokens securely in your Lakebase Postgres database while also making sure that clients use secure methods like HTTP-only cookies. Also, keep access tokens short-lived, rotate refresh tokens on refresh, and implement token expiration and revocation to enhance security.
 
 ## Integrating Auth0 for Authentication and Authorization (Optional)
 
@@ -749,7 +749,7 @@ For a more information on integrating Auth0 with ASP.NET Core, refer to the [Aut
 
 ## Conclusion
 
-In this guide, we implemented a secure authentication and authorization system in an ASP.NET Core application using ASP.NET Identity with Neon Postgres as the backend. We walked through setting up user registration and login endpoints, securing API routes with JWT tokens, and implementing role-based authorization.
+In this guide, we implemented a secure authentication and authorization system in an ASP.NET Core application using ASP.NET Identity with Lakebase Postgres as the backend. We walked through setting up user registration and login endpoints, securing API routes with JWT tokens, and implementing role-based authorization.
 
 For more information, check out:
 

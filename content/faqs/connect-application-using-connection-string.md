@@ -1,9 +1,9 @@
 ---
-title: 'How do I connect my application to my Neon database using the connection string?'
+title: 'How do I connect my application to my Lakebase Postgres database using the connection string?'
 subtitle: 'Read DATABASE_URL from your environment and pass it to a Postgres driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:

@@ -3,11 +3,11 @@ title: "Why am I getting 'Error connecting to database: Failed to fetch' in the 
 subtitle: 'Usually a cold-start, an ad-blocker, or an IP Allow misconfiguration. Walk through these in order.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
-  title: 'How do I export or download my Neon database as a SQL file?'
+  title: 'How do I export or download my Lakebase Postgres database as a SQL file?'
   slug: export-database-sql-file
 nextLink:
   title: 'Where can I find my database connection details in the Neon Console?'

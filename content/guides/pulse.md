@@ -2,7 +2,7 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-17T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 title: Building a Real-Time AI Voice Assistant with ElevenLabs
 subtitle: A step-by-step guide to building your own AI Voice Assistant in a Next.js application with ElevenLabs and Postgres
 ---
@@ -55,15 +55,15 @@ The libraries installed include:
 - `motion`: A library to create animations in React applications.
 - `sonner`: A notification library for React to display toast notifications.
 - `@11labs/react`: A React library to interact with [ElevenLabs API](https://elevenlabs.io/api).
-- `@neondatabase/serverless`: A library to connect and interact with Neon’s serverless Postgres database.
+- `@neondatabase/serverless`: A library to connect and interact with Neon’s Lakebase Postgres database.
 
 The development-specific libraries include:
 
 - `tsx`: To execute and rebuild TypeScript efficiently.
 
-## Provision a Serverless Postgres
+## Provision a Lakebase Postgres
 
-To set up a serverless Postgres, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you will receive a connection string that you can use to connect to your Neon database. The connection string will look like this:
+To set up a Lakebase Postgres, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project. Once your project is created, you will receive a connection string that you can use to connect to your Lakebase Postgres database. The connection string will look like this:
 
 ```bash shouldWrap
 postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
@@ -123,7 +123,7 @@ const createMessagesTable = async () => {
 createMessagesTable();
 ```
 
-The code above defines an asynchronous function `createMessagesTable` that connects to a Neon serverless Postgres database using a connection string stored in the `DATABASE_URL` environment variable, creates a `messages` table if it doesn't already exist, and sets up an index on the `session_id` and `created_at` columns for faster retrievals.
+The code above defines an asynchronous function `createMessagesTable` that connects to a Neon Lakebase Postgres database using a connection string stored in the `DATABASE_URL` environment variable, creates a `messages` table if it doesn't already exist, and sets up an index on the `session_id` and `created_at` columns for faster retrievals.
 
 To run the migrations, execute the following command:
 

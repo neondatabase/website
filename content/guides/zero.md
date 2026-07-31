@@ -1,19 +1,19 @@
 ---
 title: Getting started with Zero and Neon
-subtitle: A step-by-step guide to integrating Zero with Neon Postgres
+subtitle: A step-by-step guide to integrating Zero with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-01T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-This guide demonstrates how to integrate [Zero](https://zero.rocicorp.dev/) by [Rocicorp](https://rocicorp.dev/) with Neon Postgres. Zero allows you to build reactive, real-time applications by writing queries directly in your client code against your backend database schema. It synchronizes query results efficiently to a client-side cache, enabling instant UI updates and a local-first feel.
+This guide demonstrates how to integrate [Zero](https://zero.rocicorp.dev/) by [Rocicorp](https://rocicorp.dev/) with Lakebase Postgres. Zero allows you to build reactive, real-time applications by writing queries directly in your client code against your backend database schema. It synchronizes query results efficiently to a client-side cache, enabling instant UI updates and a local-first feel.
 
 Zero achieves this using its custom streaming query engine, [ZQL](https://zero.rocicorp.dev/docs/reading-data), and a stateful middleware service called `zero-cache`. `zero-cache` maintains a SQLite replica of your upstream Postgres database and serves ZQL queries to clients over WebSockets.
 
-This guide provides a step-by-step walkthrough of setting up Zero with Neon Postgres. You will learn how to:
+This guide provides a step-by-step walkthrough of setting up Zero with Lakebase Postgres. You will learn how to:
 
-- Prepare your Neon Postgres database for Zero integration.
+- Prepare your Lakebase Postgres database for Zero integration.
 - Clone and run the Zero `hello-zero` quickstart application as a practical example.
 - Test the integration to ensure data syncs correctly between the application, `zero-cache`, and Neon.
 
@@ -41,13 +41,13 @@ Zero requires a Postgres database (version 15+) with logical replication enabled
     - Click on the **Connect** button which opens a modal.
     - Select your database and branch, and copy the connection string with connection pooling disabled.
       <Admonition type="important">
-      Make sure to turn off connection pooling in the connection string modal. This is essential for `zero-cache` to maintain a persistent connection to the Neon database.
+      Make sure to turn off connection pooling in the connection string modal. This is essential for `zero-cache` to maintain a persistent connection to the Lakebase Postgres database.
       </Admonition>
       ![Neon direct connection string modal](/docs/guides/neon-console-direct-connection-string.png)
 
 ## Setting up the `hello-zero` example application
 
-With your Neon database prepared, let's set up the `hello-zero` example application from [Zero's Quickstart](https://zero.rocicorp.dev/docs/quickstart) to connect to it.
+With your Lakebase Postgres database prepared, let's set up the `hello-zero` example application from [Zero's Quickstart](https://zero.rocicorp.dev/docs/quickstart) to connect to it.
 
 1.  **Clone the `hello-zero` repository and install dependencies:**
     In a terminal window, navigate to the directory where you want to clone the `hello-zero` repository. Run the following commands:
@@ -78,7 +78,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     > Alternatively, you can run the SQL commands directly in the Neon SQL Editor. Copy the contents of `docker/seed.sql` and paste them into the SQL Editor in the Neon Console. Click **Run** to execute the commands.
 
 3.  **Configure environment variables:**
-    Open the `.env` file and modify the `ZERO_UPSTREAM_DB` variable to point to your Neon database. It should look something like this:
+    Open the `.env` file and modify the `ZERO_UPSTREAM_DB` variable to point to your Lakebase Postgres database. It should look something like this:
 
     ```env
     # other environment variables...
@@ -94,10 +94,10 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
     npm run dev:zero-cache
     ```
 
-    This command starts the `zero-cache` process. It connects to your Neon database, applies necessary [permissions](https://zero.rocicorp.dev/docs/permissions) required for the `hello-zero` application, and starts the replication process. The terminal will display logs indicating the connection status and replication progress. Keep this terminal window open as it runs the `zero-cache` service.
+    This command starts the `zero-cache` process. It connects to your Lakebase Postgres database, applies necessary [permissions](https://zero.rocicorp.dev/docs/permissions) required for the `hello-zero` application, and starts the replication process. The terminal will display logs indicating the connection status and replication progress. Keep this terminal window open as it runs the `zero-cache` service.
 
     <Admonition type="tip" title="Topology">
-    To optimize performance, deploy your `zero-cache` service in close proximity to your Neon database to minimize latency in production. During local development, you might notice logs indicating a higher ping time if your `zero-cache` service and Neon database are not in the same region. This is expected and can be disregarded in a development environment. However, for production, it is crucial to deploy the `zero-cache` service in the same region as your Neon database to achieve minimal latency. For more information on deployment, refer to [Deploying Zero](https://zero.rocicorp.dev/docs/deployment#topology).
+    To optimize performance, deploy your `zero-cache` service in close proximity to your Lakebase Postgres database to minimize latency in production. During local development, you might notice logs indicating a higher ping time if your `zero-cache` service and Lakebase Postgres database are not in the same region. This is expected and can be disregarded in a development environment. However, for production, it is crucial to deploy the `zero-cache` service in the same region as your Lakebase Postgres database to achieve minimal latency. For more information on deployment, refer to [Deploying Zero](https://zero.rocicorp.dev/docs/deployment#topology).
     </Admonition>
 
 5.  **Run the `hello-zero` UI:**
@@ -109,7 +109,7 @@ With your Neon database prepared, let's set up the `hello-zero` example applicat
 
 ## Using the demo application
 
-You should now have the `hello-zero` application running in your browser. It connects to the `zero-cache` process running in your first terminal window, which synchronizes data with your Neon Postgres database.
+You should now have the `hello-zero` application running in your browser. It connects to the `zero-cache` process running in your first terminal window, which synchronizes data with your Lakebase Postgres database.
 
 1.  **Access the application:** Open `http://localhost:5173` in your browser.
 2.  **Test functionality:** Try the features described in the [Zero Quickstart Overview](https://zero.rocicorp.dev/docs/quickstart#quick-overview):
@@ -123,7 +123,7 @@ You should now have the `hello-zero` application running in your browser. It con
 3.  **Verify data in Neon (Optional):** In the Neon Console, navigate to **Tables** and select the `message` table. You should see the messages you added in the application. This confirms that data is being synchronized correctly between the application, `zero-cache`, and Neon.
     ![Neon messages table](/docs/guides/zero-message-table.png)
 
-Congratulations! You have successfully set up Rocicorp Zero with Neon Postgres using the `hello-zero` example application. Check out [Canvas](https://github.com/neondatabase-labs/canvas), a collaborative drawing app built with Zero and Neon, for a more complex example of Zero in action.
+Congratulations! You have successfully set up Rocicorp Zero with Lakebase Postgres using the `hello-zero` example application. Check out [Canvas](https://github.com/neondatabase-labs/canvas), a collaborative drawing app built with Zero and Neon, for a more complex example of Zero in action.
 
 <Admonition type="note" title="Schema Changes">
 Zero uses Postgres event triggers for efficient schema migration handling. While Neon now supports event triggers, Zero may still perform a **full reset of the `zero-cache` and all connected client states** whenever schema changes are detected to ensure correctness.

@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres databases for vibe coding platforms where each generated app needs its own database backend?"
-description: "Neon provides a serverless Postgres database. Its architecture separates storage and compute. This enables instant database branching and automatic scal..."
+description: "Neon provides a Lakebase Postgres database. Its architecture separates storage and compute. This enables instant database branching and automatic scal..."
 date: 2026-04-25
 slug: best-postgres-databases-vibe-coding-platforms
 category: FAQ

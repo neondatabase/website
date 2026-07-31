@@ -1,15 +1,15 @@
 ---
 title: Building a Real-Time Task Board with Laravel, Neon, and WebSockets
-subtitle: Learn how to create a collaborative task management system using Laravel, Neon Postgres, and WebSockets
+subtitle: Learn how to create a collaborative task management system using Laravel, Lakebase Postgres, and WebSockets
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-17T00:00:00.000Z'
-updatedOn: '2026-03-03T03:19:43.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-Real-time features can significantly improve user experience in web applications. They allow users to see updates immediately without refreshing the page. In this guide, we'll demonstrate how to add real-time functionality to a Laravel application using Neon Postgres and WebSockets.
+Real-time features can significantly improve user experience in web applications. They allow users to see updates immediately without refreshing the page. In this guide, we'll demonstrate how to add real-time functionality to a Laravel application using Lakebase Postgres and WebSockets.
 
-We'll build a collaborative task board where team members can create, update, and move tasks in real-time. By the end of this guide, you'll understand how to set up WebSockets in Laravel, store and retrieve data using Neon Postgres, and broadcast updates to connected clients instantly.
+We'll build a collaborative task board where team members can create, update, and move tasks in real-time. By the end of this guide, you'll understand how to set up WebSockets in Laravel, store and retrieve data using Lakebase Postgres, and broadcast updates to connected clients instantly.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Before we begin, make sure you have the following:
 
 ## Setting up the Laravel project
 
-To get started we will need to create a new Laravel project and configuring it with Neon Postgres.
+To get started we will need to create a new Laravel project and configuring it with Lakebase Postgres.
 
 1. Create a new Laravel project:
 
@@ -32,7 +32,7 @@ To get started we will need to create a new Laravel project and configuring it w
 
    This will create a new Laravel project in a directory named `realtime-taskboard`. And using the `cd` command, we'll navigate to the project directory.
 
-2. Configure the Neon database connection. Open your `.env` file and update the database settings:
+2. Configure the Lakebase Postgres database connection. Open your `.env` file and update the database settings:
 
    ```env
    DB_CONNECTION=pgsql
@@ -43,7 +43,7 @@ To get started we will need to create a new Laravel project and configuring it w
    DB_PASSWORD=your_password
    ```
 
-   Replace the placeholders with your Neon database details which you can find in the Neon console.
+   Replace the placeholders with your Lakebase Postgres database details which you can find in the Neon console.
 
 3. Laravel provides a few starter kits for authentication. We'll use Laravel Breeze for this project to set up authentication:
 
@@ -57,7 +57,7 @@ To get started we will need to create a new Laravel project and configuring it w
 
    This will install Laravel Breeze, set up authentication views using Blade, run the migrations to create the necessary tables. The `npm install` and `npm run dev` commands install the frontend dependencies and compile the assets.
 
-Now that we've set up the Laravel project and connected it to Neon Postgres, let's create the task board.
+Now that we've set up the Laravel project and connected it to Lakebase Postgres, let's create the task board.
 
 ## Creating the Task model and migration
 
@@ -97,7 +97,7 @@ Let's create a model and migration for our tasks table.
    php artisan migrate
    ```
 
-   This will create the `tasks` table in your Neon Postgres database with the specified columns and constraints in the migration file.
+   This will create the `tasks` table in your Lakebase Postgres database with the specified columns and constraints in the migration file.
 
 4. Update the `Task` model in `app/Models/Task.php`:
 
@@ -583,7 +583,7 @@ Now that everything is set up, let's test our real-time task board.
 
    This will ensure that the broadcast events are processed and sent to connected clients.
 
-   To learn more about Laravel queues, check out the [Implementing Queue Workers and Job Processing in Laravel with Neon Postgres](/guides/laravel-queue-workers-job-processing) guide.
+   To learn more about Laravel queues, check out the [Implementing Queue Workers and Job Processing in Laravel with Lakebase Postgres](/guides/laravel-queue-workers-job-processing) guide.
 
 3. Open two different browsers and visit `http://localhost:8000/taskboard`.
 
@@ -599,7 +599,7 @@ Here's how the whole process of the real-time updates work:
 
 1. When a user creates or updates a task, it's sent to the server.
 
-2. The server saves the task in the Neon Postgres database.
+2. The server saves the task in the Lakebase Postgres database.
 
 3. After saving the task, the server broadcasts a `TaskCreated` or `TaskUpdated` event using Pusher.
 
@@ -617,7 +617,7 @@ As your task board grows, you might need to optimize it for better performance:
 
 2. **Caching**: Use Laravel's caching features to cache frequently accessed data, reducing database queries.
 
-3. **Database Indexing**: Add indexes to frequently queried columns in your Neon Postgres database to speed up queries. For more information, check out the Neon Postgres documentation on [Indexes](/docs/postgresql/index-types).
+3. **Database Indexing**: Add indexes to frequently queried columns in your Lakebase Postgres database to speed up queries. For more information, check out the Lakebase Postgres documentation on [Indexes](/docs/postgresql/index-types).
 
 4. **Queue Workers**: Use multiple queue workers to process broadcast events concurrently, especially in high-traffic applications. Also, consider using Laravel Horizon for monitoring and managing your queue workers.
 
@@ -625,7 +625,7 @@ As your task board grows, you might need to optimize it for better performance:
 
 ## Conclusion
 
-In this guide, we've built a simple real-time collaborative task board using Laravel, Neon Postgres, and WebSockets. This example shows how you can create interactive, real-time web applications that update instantly across multiple users using Laravel's broadcasting feature.
+In this guide, we've built a simple real-time collaborative task board using Laravel, Lakebase Postgres, and WebSockets. This example shows how you can create interactive, real-time web applications that update instantly across multiple users using Laravel's broadcasting feature.
 
 ## Additional Resources
 

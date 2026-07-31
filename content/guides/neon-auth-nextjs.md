@@ -4,7 +4,7 @@ subtitle: Learn how to setup Managed Better Auth in a Next.js application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-26T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 This guide walks you through building a demo todo application with **Next.js**, [Managed Better Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Managed Better Auth into your Next.js projects and manage database interactions with Drizzle ORM.
@@ -98,20 +98,20 @@ This config tells Drizzle Kit where to find your database schema and where to ou
 
 ### Pull Managed Better Auth schema
 
-A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
+A key feature of Managed Better Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Lakebase Postgres database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
 
 To integrate Managed Better Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
 
 This step is crucial because it makes Drizzle aware of the Managed Better Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Managed Better Auth.
 
 1.  **Introspect the database:**
-    Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
+    Run the Drizzle Kit `pull` command to generate a schema file based on your existing Lakebase Postgres database tables.
 
     ```bash
     npx drizzle-kit pull
     ```
 
-    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
+    This command connects to your Lakebase Postgres database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Managed Better Auth tables.
 
 2.  **Organize schema files:**
     Create a new directory `app/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `app/db/schema.ts` and `app/db/relations.ts` respectively.
@@ -132,7 +132,7 @@ This step is crucial because it makes Drizzle aware of the Managed Better Auth t
 
 3.  **Add the Todos table to your schema**
 
-    Open `app/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `todos` table definition as shown below:
+    Open `app/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Lakebase Postgres database schema. At the bottom of the file, append the `todos` table definition as shown below:
 
     ```typescript {9,39-49} shouldWrap
     import {
@@ -196,7 +196,7 @@ Now, generate the SQL migration file to create the `todos` table.
 npx drizzle-kit generate
 ```
 
-This creates a new SQL file in the `drizzle` directory. Apply this migration to your Neon database by running:
+This creates a new SQL file in the `drizzle` directory. Apply this migration to your Lakebase Postgres database by running:
 
 <Admonition type="important" title="Issue with commented migrations">
 This is a [known issue](https://github.com/drizzle-team/drizzle-orm/issues/4851) in Drizzle. If `drizzle-kit pull` generated an initial migration file (e.g., `0000_...sql`) wrapped in block comments (`/* ... */`), `drizzle-kit migrate` may fail with an `unterminated /* comment` error.
@@ -208,7 +208,7 @@ To resolve this, manually delete the contents of the `0000_...sql` file or repla
 npx drizzle-kit migrate
 ```
 
-Your `todos` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project dashboard.
+Your `todos` table now exists in your Lakebase Postgres database. You can verify this in the **Tables** section of your Neon project dashboard.
 
 ### Initialize database client
 

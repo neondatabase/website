@@ -3,14 +3,14 @@ title: "What are the limits and quotas for Neon's Free plan?"
 subtitle: '100 projects, 10 branches each, 100 CU-hours per project, and 0.5 GB storage per project.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 isDraft: false
 redirectFrom: []
 previousLink:
   title: 'Where can I find the pooled connection string in my Neon dashboard?'
   slug: find-pooled-connection-string-dashboard
 nextLink:
-  title: 'How do I import data from a CSV file into my Neon database?'
+  title: 'How do I import data from a CSV file into my Lakebase Postgres database?'
   slug: import-csv-into-database
 ---
 

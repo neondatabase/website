@@ -4,7 +4,7 @@ subtitle: 'How AI agents can provision infrastructure and build real application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-15T00:00:00.000Z'
-updatedOn: '2026-05-15T06:36:44.402Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 AI has made writing code insanely easy, but all the tiny setup tasks around it still kill your momentum.
@@ -31,7 +31,7 @@ To understand how this works, you need to know about [**Agent Skills**](https://
 
 Stripe Projects provides a CLI and an Agent Skill that standardizes how third-party services are provisioned. The catalog includes providers like Neon (for Postgres), Vercel (for hosting), OpenRouter (for AI models), and Firecrawl (for web scraping) etc.
 
-When you give your AI agent the Stripe Projects skill, it gains the ability to run commands like `stripe projects add neon/database` to provision a Neon database, without you having to touch a single dashboard. The CLI handles the authentication, provisioning, and secure retrieval of credentials, which are then automatically synced to your local `.env` file for immediate use in your code.
+When you give your AI agent the Stripe Projects skill, it gains the ability to run commands like `stripe projects add neon/database` to provision a Lakebase Postgres database, without you having to touch a single dashboard. The CLI handles the authentication, provisioning, and secure retrieval of credentials, which are then automatically synced to your local `.env` file for immediate use in your code.
 
 The AI handles the heavy lifting; you just guide the architecture.
 
@@ -41,12 +41,12 @@ This guide uses **OpenCode** as the primary example because its shareable chat s
 
 ## What you will build
 
-To demonstrate this, you will build an **AI-powered Travel Concierge app**. Users will enter a destination, travel dates, budget, and interests. The app will scrape recent travel data, use an LLM to generate a personalized itinerary, and save the trip to a Neon Postgres database so it can be shared via a public link.
+To demonstrate this, you will build an **AI-powered Travel Concierge app**. Users will enter a destination, travel dates, budget, and interests. The app will scrape recent travel data, use an LLM to generate a personalized itinerary, and save the trip to a Lakebase Postgres database so it can be shared via a public link.
 
 **The Stack:**
 
 - **Frontend and API:** Next.js
-- **Database:** Neon Postgres
+- **Database:** Lakebase Postgres
 - **LLM Provider:** OpenRouter
 - **Data Gathering:** Firecrawl
 - **Deployment:** Vercel
@@ -102,12 +102,12 @@ opencode
 For this guide, you will use the following prompt to instruct your agent to build the Travel Concierge app and provision the necessary infrastructure as needed (update the prompt as necessary to fit your specific app idea):
 
 ```text shouldWrap
-Build an AI-powered travel concierge app using Next.js and Neon Postgres where users enter destinations, travel dates, budget, traveler count, travel style, interests, and preferences to generate personalized itineraries.
+Build an AI-powered travel concierge app using Next.js and Lakebase Postgres where users enter destinations, travel dates, budget, traveler count, travel style, interests, and preferences to generate personalized itineraries.
 
 The app should:
 - Use Firecrawl to gather travel information.
 - Use OpenRouter for AI planning
-- Store trips (for share functionality) in Neon Postgres
+- Store trips (for share functionality) in Lakebase Postgres
 Make the app look modern. Do not add extra features and keep it simple as asked.
 Use free tier for all the services used via stripe projects.
 ```
@@ -159,7 +159,7 @@ To test it, simply run:
 npm run dev
 ```
 
-Open your browser, and you will see a fully functional, AI-powered travel concierge app backed by a live Neon database.
+Open your browser, and you will see a fully functional, AI-powered travel concierge app backed by a live Lakebase Postgres database.
 
 ## Deploying to production
 
@@ -206,7 +206,7 @@ stripe projects billing add
 Once configured, you just ask your agent to upgrade the resources:
 
 ```text shouldWrap
-Upgrade my Neon database and OpenRouter services to their paid tiers.
+Upgrade my Lakebase Postgres database and OpenRouter services to their paid tiers.
 ```
 
 Stripe uses a Shared Payment Token to handle the transaction securely in the background. Your resources are upgraded instantly, and you never have to enter your credit card details on multiple sites again.
@@ -269,7 +269,7 @@ That means you can focus entirely on what you want to build, while your AI assis
 
 - [Projects.dev Provider Directory](https://projects.dev/providers)
 - [Stripe Projects CLI Documentation](https://docs.stripe.com/cli)
-- [Neon Postgres](/docs/introduction/about)
+- [Lakebase Postgres](/docs/introduction/about)
 - [OpenCode](https://opencode.ai/)
 - [Agent Skills](https://github.com/agentskills/agentskills)
 

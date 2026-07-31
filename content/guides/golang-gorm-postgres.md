@@ -1,15 +1,15 @@
 ---
-title: Using GORM with Neon Postgres
-subtitle: Learn how to use GORM, Go's most popular ORM, with Neon's serverless Postgres for efficient database operations
+title: Using GORM with Lakebase Postgres
+subtitle: Learn how to use GORM, Go's most popular ORM, with Neon's Lakebase Postgres for efficient database operations
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-02-15T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
-[GORM](https://gorm.io/) is Go's most popular ORM library, providing a developer-friendly interface to interact with databases. When combined with Neon's serverless Postgres, it creates a great foundation for building scalable Go applications with minimal database management overhead.
+[GORM](https://gorm.io/) is Go's most popular ORM library, providing a developer-friendly interface to interact with databases. When combined with Neon's Lakebase Postgres, it creates a great foundation for building scalable Go applications with minimal database management overhead.
 
-This guide walks you through the process of integrating GORM with Neon Postgres, we will cover everything that you need to know to get started with GORM and Neon Postgres.
+This guide walks you through the process of integrating GORM with Lakebase Postgres, we will cover everything that you need to know to get started with GORM and Lakebase Postgres.
 
 ## Prerequisites
 
@@ -65,7 +65,7 @@ These commands fetch the latest versions of the packages and add them to your pr
 
 ### Basic Connection Setup
 
-Now let's establish a connection to your Neon Postgres database using GORM. This is an essential step that initializes the database connection that we'll use throughout our application.
+Now let's establish a connection to your Lakebase Postgres database using GORM. This is an essential step that initializes the database connection that we'll use throughout our application.
 
 Create a new file named `main.go` with the following code:
 
@@ -82,7 +82,7 @@ import (
 )
 
 func main() {
-	// Connection string for Neon Postgres
+	// Connection string for Lakebase Postgres
 	dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 
 	// Connect to the database
@@ -104,19 +104,19 @@ func main() {
 		log.Fatalf("Failed to ping DB: %v", err)
 	}
 
-	fmt.Println("Successfully connected to Neon Postgres database!")
+	fmt.Println("Successfully connected to Lakebase Postgres database!")
 }
 ```
 
 In this code, we're performing several important steps:
 
-1. Defining a DSN - this is the connection string that contains all the information needed to connect to your Neon database
+1. Defining a DSN - this is the connection string that contains all the information needed to connect to your Lakebase Postgres database
 2. Using `gorm.Open()` to establish a connection with the Postgres driver
 3. Configuring GORM's logger to show SQL queries during development, which helps with debugging
 4. Getting the underlying `*sql.DB` object to access lower-level database functions
 5. Verifying the connection is active by pinging the database
 
-Make sure to replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon database credentials. The `?sslmode=require&channel_binding=require` part of the connection string ensures secure communication with your Neon database.
+Make sure to replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Lakebase Postgres database credentials. The `?sslmode=require&channel_binding=require` part of the connection string ensures secure communication with your Lakebase Postgres database.
 
 Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual Neon connection details. You can find these by clicking the **Connect** button on your Neon **Project Dashboard**.
 
@@ -832,7 +832,7 @@ type Post struct {
 }
 
 func main() {
-	// Connection string for Neon Postgres
+	// Connection string for Lakebase Postgres
 	dsn := "postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 
 	// Connect to the database
@@ -944,9 +944,9 @@ Save this code in a file named `main.go`, run `go mod tidy` to download the nece
 
 ## Conclusion
 
-GORM with Neon Postgres provides a great combination for building scalable Go applications. GORM's developer-friendly API simplifies database interactions, while Neon's serverless architecture ensures your database scales according to demand.
+GORM with Lakebase Postgres provides a great combination for building scalable Go applications. GORM's developer-friendly API simplifies database interactions, while Neon's serverless architecture ensures your database scales according to demand.
 
-By following the steps in this guide, you can build robust applications that efficiently interact with your Neon database. As your application grows, you can leverage additional GORM features such as plugins, hooks, and more advanced querying techniques to meet your evolving needs.
+By following the steps in this guide, you can build robust applications that efficiently interact with your Lakebase Postgres database. As your application grows, you can leverage additional GORM features such as plugins, hooks, and more advanced querying techniques to meet your evolving needs.
 
 ## Additional Resources
 

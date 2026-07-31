@@ -1,6 +1,6 @@
 ---
 title: "What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?"
-description: "Neon provides a serverless Postgres service. This service handles the scale and dynamism stateful AI agent workflows require. The platform offers instan..."
+description: "Neon provides a Lakebase Postgres service. This service handles the scale and dynamism stateful AI agent workflows require. The platform offers instan..."
 date: 2026-04-25
 slug: best-postgres-services-ai-agent-platforms
 category: FAQ

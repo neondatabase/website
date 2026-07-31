@@ -4,7 +4,7 @@ subtitle: 'Automate database branching for every preview deployment using the na
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-07-14T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Nuxt.js](https://nuxt.com) is an open-source, progressive framework built on [Vue.js](https://vuejs.org/) that simplifies web development. It enhances Vue with versatile rendering options, including default [universal rendering (SSR)](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering) for fast initial loads and strong SEO, and [client-side rendering](https://nuxt.com/docs/guide/concepts/rendering#client-side-rendering) for highly interactive applications. Nuxt also supports advanced strategies like [hybrid rendering](https://nuxt.com/docs/guide/concepts/rendering#hybrid-rendering) to mix modes per-route.
@@ -114,7 +114,7 @@ First, create a new Nuxt.js application and push it to a GitHub repository, whic
     git push -u origin main
     ```
 
-To begin, you will set up the Vercel-managed Neon Integration. This is a crucial first step that provisions a Neon database and automatically injects the `DATABASE_URL` environment variable into your Nuxt.js application. This setup streamlines both local development and Vercel deployments.
+To begin, you will set up the Vercel-managed Neon Integration. This is a crucial first step that provisions a Lakebase Postgres database and automatically injects the `DATABASE_URL` environment variable into your Nuxt.js application. This setup streamlines both local development and Vercel deployments.
 
 ## Create a Vercel project
 
@@ -135,11 +135,11 @@ Install the Neon integration from the Vercel Marketplace. This process will crea
 
 ## Connect the database to your Vercel project
 
-With the integration installed, you need to connect your `nuxt-neon-vercel-todo` Vercel project to your new Neon database. This is where you enable the automated branching feature.
+With the integration installed, you need to connect your `nuxt-neon-vercel-todo` Vercel project to your new Lakebase Postgres database. This is where you enable the automated branching feature.
 
-1.  From the **Storage** tab in your Vercel dashboard, select your Neon database.
+1.  From the **Storage** tab in your Vercel dashboard, select your Lakebase Postgres database.
 2.  Click the **Connect Project** tab and select your `nuxt-neon-vercel-todo` project from the dropdown.
-3.  **Enable Preview Branches:** In the **Deployments Configuration** section, ensure the **Preview** toggle is enabled. This is the key step that instructs Vercel to create a new Neon database branch for every Preview Deployment.
+3.  **Enable Preview Branches:** In the **Deployments Configuration** section, ensure the **Preview** toggle is enabled. This is the key step that instructs Vercel to create a new Lakebase Postgres database branch for every Preview Deployment.
     ![Connect Vercel Project and enable Preview deployments](/docs/guides/nuxt-vercel-neon-connect-project.png)
 4.  Click **Connect**.
 
@@ -339,7 +339,7 @@ With the database configured, let's build the Todo application. This will includ
       <div class="container">
         <h1>Todo List</h1>
         <p>
-          A Nuxt.js app with a serverless Postgres database from Neon, deployed on Vercel with
+          A Nuxt.js app with a Lakebase Postgres database from Neon, deployed on Vercel with
           automated database branching.
         </p>
         <form @submit.prevent="addTodo">
@@ -467,7 +467,7 @@ With the database configured, let's build the Todo application. This will includ
     npm run dev
     ```
 
-    Open your browser and navigate to [http://localhost:3000](http://localhost:3000). You should see your Todo application running. You can add, toggle, and remove todos, which will interact with your Neon database.
+    Open your browser and navigate to [http://localhost:3000](http://localhost:3000). You should see your Todo application running. You can add, toggle, and remove todos, which will interact with your Lakebase Postgres database.
 
     ![Nuxt Todo Application](/docs/guides/nuxt-todo-app.png)
 
@@ -525,7 +525,7 @@ To demonstrate the automated branching workflow, you will add a new feature to y
       <div class="container">
         <h1>Todo List</h1>
         <p>
-          A Nuxt.js app with a serverless Postgres database from Neon, deployed on Vercel with
+          A Nuxt.js app with a Lakebase Postgres database from Neon, deployed on Vercel with
           automated database branching.
         </p>
         <form @submit.prevent="addTodo">

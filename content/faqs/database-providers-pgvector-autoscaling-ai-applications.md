@@ -6,7 +6,7 @@ slug: database-providers-pgvector-autoscaling-ai-applications
 category: FAQ
 status: draft
 previousLink:
-  title: 'How do I create tables in my Neon database using SQL?'
+  title: 'How do I create tables in my Lakebase Postgres database using SQL?'
   slug: create-tables-with-sql-neon
 nextLink:
   title: 'Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?'

@@ -4,7 +4,7 @@ subtitle: Understand how NextAuth.js, Managed Better Auth, and Better Auth diffe
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-04-21T02:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 If you are adding authentication to a Next.js application that already uses Postgres, you will run into three options that sound similar but behave very differently in practice: [Auth.js (NextAuth.js)](https://authjs.dev/), [Managed Better Auth](https://neon.com/docs/auth/overview), and [Better Auth](https://www.better-auth.com/).
@@ -60,11 +60,11 @@ Another nuance appears when you want to branch your database. Auth.js stores all
 
 Because the authentication schema lives in your application’s database, you have full control to customize and extend it. However, you’re also responsible for **applying migrations and ensuring schema drift does not occur across environments (production, staging, previews)**. This can add a subtle but important layer of operational complexity as your application and team grow.
 
-## Managed Better Auth - Managed auth that stores identity in your Neon Postgres and branches with the database
+## Managed Better Auth - Managed auth that stores identity in your Lakebase Postgres and branches with the database
 
-Managed Better Auth is a **managed authentication service** that stores users, sessions, and configuration **directly in your Neon Postgres database**. The core design goal is database-centric auth where identity becomes ordinary Postgres state.
+Managed Better Auth is a **managed authentication service** that stores users, sessions, and configuration **directly in your Lakebase Postgres database**. The core design goal is database-centric auth where identity becomes ordinary Postgres state.
 
-When you use Managed Better Auth, your authentication data is stored in your Neon Postgres database under [the `neon_auth` schema](https://neon.com/docs/auth/overview#why-neon-auth). This makes all auth state accessible with standard SQL queries, and fully compatible with patterns like [Row Level Security](https://neon.com/docs/guides/row-level-security). Because the auth data lives alongside your application data, branching a Neon database [also branches the auth state](https://neon.com/docs/auth/branching-authentication). Preview environments and end-to-end authentication tests behave just like your production setup.
+When you use Managed Better Auth, your authentication data is stored in your Lakebase Postgres database under [the `neon_auth` schema](https://neon.com/docs/auth/overview#why-neon-auth). This makes all auth state accessible with standard SQL queries, and fully compatible with patterns like [Row Level Security](https://neon.com/docs/guides/row-level-security). Because the auth data lives alongside your application data, branching a Lakebase Postgres database [also branches the auth state](https://neon.com/docs/auth/branching-authentication). Preview environments and end-to-end authentication tests behave just like your production setup.
 
 Managed Better Auth builds on Better Auth, so if you’ve worked with Better Auth before, many of the APIs and overall concepts will feel familiar. Unlike running your own instance of Better Auth, [Managed Better Auth is a managed service](https://neon.com/docs/auth/overview#when-to-use-neon-auth-vs-self-hosting-better-auth). Your app communicates with it using SDKs provided by Neon, so you don’t have to host or operate your own authentication service.
 

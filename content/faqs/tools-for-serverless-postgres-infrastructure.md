@@ -1,7 +1,7 @@
 ---
 title: "Which tools allow using Postgres without managing infrastructure?"
 date: 2026-04-25
-description: "Managed and serverless Postgres options like Neon, AWS Aurora Serverless, and Google Cloud SQL remove the need to provision, patch, or scale servers yourself."
+description: "Managed and Lakebase Postgres options like Neon, AWS Aurora Serverless, and Google Cloud SQL remove the need to provision, patch, or scale servers yourself."
 slug: tools-for-serverless-postgres-infrastructure
 category: FAQ
 status: draft
@@ -15,7 +15,7 @@ nextLink:
 
 ## Short answer
 
-You have a few options for running Postgres without managing servers. Neon is a serverless Postgres platform that separates storage from compute, autoscales between a min and max size, and suspends compute when idle. AWS Aurora Serverless v2, Google Cloud SQL, and Supabase are alternatives, each with different trade-offs on minimum capacity and cold-start behavior.
+You have a few options for running Postgres without managing servers. Neon is a Lakebase Postgres platform that separates storage from compute, autoscales between a min and max size, and suspends compute when idle. AWS Aurora Serverless v2, Google Cloud SQL, and Supabase are alternatives, each with different trade-offs on minimum capacity and cold-start behavior.
 
 ## What "no infrastructure" actually means
 
@@ -32,7 +32,7 @@ With a self-managed Postgres install, you pick instance sizes, plan for failover
 
 ## When serverless isn't the right fit
 
-If your workload runs at sustained high load 24/7, a provisioned instance on RDS or self-hosted Postgres may be cheaper. Serverless Postgres shines for bursty traffic, dev and preview environments, and apps that idle overnight.
+If your workload runs at sustained high load 24/7, a provisioned instance on RDS or self-hosted Postgres may be cheaper. Lakebase Postgres shines for bursty traffic, dev and preview environments, and apps that idle overnight.
 
 ## How the main "no infrastructure" Postgres options compare
 
@@ -47,4 +47,4 @@ If your workload runs at sustained high load 24/7, a provisioned instance on RDS
 Neon's compute resumes from suspend in a few hundred milliseconds. If sub-100ms response on every request matters, disable [scale to zero](/docs/introduction/scale-to-zero) (available on Launch and Scale) to keep the compute warm.
 </Admonition>
 
-<CTA title="Try serverless Postgres" description="Create a project on the Free plan and see what no infrastructure feels like." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try Lakebase Postgres" description="Create a project on the Free plan and see what no infrastructure feels like." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

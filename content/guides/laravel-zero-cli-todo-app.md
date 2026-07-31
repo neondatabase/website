@@ -1,15 +1,15 @@
 ---
-title: Building a Todo CLI App with Laravel Zero and Neon Postgres
-subtitle: Learn how to create a command-line interface (CLI) application using Laravel Zero and Neon Postgres for efficient task management.
+title: Building a Todo CLI App with Laravel Zero and Lakebase Postgres
+subtitle: Learn how to create a command-line interface (CLI) application using Laravel Zero and Lakebase Postgres for efficient task management.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-01T00:00:00.000Z'
-updatedOn: '2024-07-02T10:58:45.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Laravel Zero](https://laravel-zero.com/) is a micro-framework that provides a starting point for your console application.
 
-Combined with Neon's serverless Postgres database, you can create powerful CLI tools with persistent storage.
+Combined with Neon's Lakebase Postgres database, you can create powerful CLI tools with persistent storage.
 
 In this guide, we'll build a Todo CLI app that allows users to manage their tasks efficiently from the command line.
 
@@ -96,7 +96,7 @@ The `config/database.php` file will include the database configuration for your 
 ],
 ```
 
-Rather than hardcoding the database credentials in the configuration file, we can use environment variables to store sensitive information securely. Create a `.env` file in the root of your project and add your Neon database credentials:
+Rather than hardcoding the database credentials in the configuration file, we can use environment variables to store sensitive information securely. Create a `.env` file in the root of your project and add your Lakebase Postgres database credentials:
 
 ```env
 DB_CONNECTION=neon
@@ -108,7 +108,7 @@ DB_USERNAME=your-username
 DB_PASSWORD=your-password
 ```
 
-Make sure to replace the placeholders with your actual Neon database details.
+Make sure to replace the placeholders with your actual Lakebase Postgres database details.
 
 ## Creating the Todo App Structure
 
@@ -160,13 +160,13 @@ class Task extends Model
 }
 ```
 
-Run the migration to create the tasks table in your Neon database:
+Run the migration to create the tasks table in your Lakebase Postgres database:
 
 ```bash
 php todo migrate
 ```
 
-This command will create the `tasks` table in your Neon database.
+This command will create the `tasks` table in your Lakebase Postgres database.
 
 ### Creating Commands
 
@@ -628,7 +628,7 @@ To handle your database environment variables, you can create a `.env` file in t
 
 ## Conclusion
 
-In this tutorial, we've built a fully functional Todo CLI app using Laravel Zero and Neon Postgres. We've implemented features such as adding, listing, updating, and deleting tasks, as well as task prioritization and due date reminders.
+In this tutorial, we've built a fully functional Todo CLI app using Laravel Zero and Lakebase Postgres. We've implemented features such as adding, listing, updating, and deleting tasks, as well as task prioritization and due date reminders.
 
 This implementation provides a solid foundation for a CLI-based task management system, but there are always ways to improve and expand its functionality:
 
@@ -638,7 +638,7 @@ This implementation provides a solid foundation for a CLI-based task management 
 - Add user authentication for multi-user support
 - Implement task dependencies (subtasks)
 
-By combining the power of Laravel Zero and the scalability of Neon Postgres, you can quickly create efficient and powerful CLI applications that meet your specific needs.
+By combining the power of Laravel Zero and the scalability of Lakebase Postgres, you can quickly create efficient and powerful CLI applications that meet your specific needs.
 
 ## Additional Resources
 

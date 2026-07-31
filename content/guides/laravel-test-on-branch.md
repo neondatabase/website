@@ -4,7 +4,7 @@ subtitle: Leveraging Realistic Production Data for Robust Testing with Laravel a
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-05-26T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Laravel](https://laravel.com) is a popular PHP framework widely used for building web applications. It includes powerful tools for automated testing, with [PEST](https://pestphp.com/) being a preferred option due to its simplicity and effectiveness.
@@ -43,7 +43,7 @@ Setting up a robust testing environment with Neon and Laravel involves several s
 Before you begin, ensure you have the following:
 
 - **Neon Account:** You need an account with Neon to access their database services. You can sign up at [Neon's official website](https://neon.tech).
-- **API Keys:** Generate API keys from the Neon console. These keys will allow your Laravel application to interact with the Neon database programmatically.
+- **API Keys:** Generate API keys from the Neon console. These keys will allow your Laravel application to interact with the Lakebase Postgres database programmatically.
 - **Local Development Environment:** Laravel requires a PHP environment (PHP 7.4 or later) and [Composer](https://getcomposer.org/) for managing dependencies.
 - **Laravel Installation:** A Laravel project set up on your local machine. For installation instructions, refer to the [Laravel documentation](https://laravel.com/docs/11.x/installation).
 
@@ -53,7 +53,7 @@ To set up your testing environment with Neon and Laravel, follow these steps:
 
 1. **Configure Database Connection:**
    - After creating your Neon account and a new database branch, obtain the connection details from the Neon dashboard.
-   - Open your Laravel project and update the `.env` file with the Neon database connection parameters:
+   - Open your Laravel project and update the `.env` file with the Lakebase Postgres database connection parameters:
 
      ```env
      DB_CONNECTION=pgsql
@@ -290,7 +290,7 @@ Before you can start using `neon`, you need to install it on your local machine.
 
 ### Using `neon` to Manage Branches
 
-Once `neon` is installed, you can use it to interact with your Neon database branches. Here are the basic commands for managing branches:
+Once `neon` is installed, you can use it to interact with your Lakebase Postgres database branches. Here are the basic commands for managing branches:
 
 #### 1. [Creating a Branch](/docs/cli/branches#create)
 
@@ -354,4 +354,4 @@ Neon's branching feature provides isolation, efficiency, flexibility, and simpli
 - [Laravel Documentation](https://laravel.com/docs) - Official documentation for the Laravel PHP framework, covering installation, configuration, and usage guides.
 - [Neon Documentation](/docs) - Comprehensive documentation for Neon's database services, including guides, tutorials, and API references.
 - [GitHub Actions Tutorials](https://docs.github.com/en/actions/learn-github-actions) - Learn how to automate your workflow with GitHub Actions, including tutorials on setting up continuous integration for Laravel applications.
-- [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions) - Step-by-step guide on integrating Neon database branching with GitHub Actions for automated testing workflows.
+- [Neon Branching GitHub Actions Guide](/docs/guides/branching-github-actions) - Step-by-step guide on integrating Lakebase Postgres database branching with GitHub Actions for automated testing workflows.

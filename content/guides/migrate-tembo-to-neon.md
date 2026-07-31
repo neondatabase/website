@@ -1,10 +1,10 @@
 ---
-title: Migrating from Tembo.io to Neon Postgres
-subtitle: 'Learn how to migrate your data and applications from Tembo.io to Neon Postgres'
+title: Migrating from Tembo.io to Lakebase Postgres
+subtitle: 'Learn how to migrate your data and applications from Tembo.io to Lakebase Postgres'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-08T00:00:00.000Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 [Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your service from Tembo.io to Neon, follow the steps in this guide.
@@ -25,7 +25,7 @@ Plan your migration accordingly to avoid any disruption to your services.
 
 While both Tembo and Neon provide managed Postgres, Neon's architecture offers some advantages. Here’s a quick comparison of key features:
 
-| Feature                   | Tembo                                | Neon Postgres                                                                    |
+| Feature                   | Tembo                                | Lakebase Postgres                                                                |
 | ------------------------- | ------------------------------------ | -------------------------------------------------------------------------------- |
 | **Compute**               | Manual scaling                       | Autoscaling, scale-to-zero                                                       |
 | **Branching**             | NA                                   | Instant data branching for dev, test, and CI/CD workflows ("branch per feature") |
@@ -107,7 +107,7 @@ This is the traditional method for Postgres migrations and offers full control. 
 
 - `psql`, `pg_dump`, and `pg_restore` client utilities installed locally. Use versions compatible with your Tembo Postgres version and Neon (Postgres 14-17). It's generally recommended to use the latest client versions.
 - Connection string or parameters for your source Tembo database.
-- Connection string for your target Neon database: You can find the connection string by clicking the **Connect** button on your Project Dashboard. It will look something like this:
+- Connection string for your target Lakebase Postgres database: You can find the connection string by clicking the **Connect** button on your Project Dashboard. It will look something like this:
   ```bash
   postgresql://[user]:[password]@[neon_hostname]/[dbname]
   ```
@@ -136,25 +136,25 @@ The command options used are:
 - If your Tembo database uses multiple roles for object ownership, your dump file will contain `ALTER OWNER` commands. These may cause non-fatal errors during restore to Neon.
 - To avoid ownership errors, you can use the `--no-owner` option with `pg_restore`. All objects will then be owned by the Neon role executing the restore.
 
-Run the following command to restore the dump to your Neon database:
+Run the following command to restore the dump to your Lakebase Postgres database:
 
 ```bash
 pg_restore -v --no-owner -d "postgresql://neon_user:neon_pass@neon_host:port/target_db" your_tembo_dump.dump
 ```
 
-> Replace the connection string with your actual Neon database connection string.
+> Replace the connection string with your actual Lakebase Postgres database connection string.
 
 The command options used are:
 
 - `-v`: Verbose mode.
 - `--no-owner`: Ignores original ownership, objects owned by `neon_user`.
-- `-d`: Target Neon database connection string.
+- `-d`: Target Lakebase Postgres database connection string.
 
 For more detailed usage, refer to [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).
 
 ## Option 3: Logical replication
 
-Logical replication allows for near-zero downtime migration by continuously streaming data changes from your Tembo database (publisher) to your Neon database (subscriber).
+Logical replication allows for near-zero downtime migration by continuously streaming data changes from your Tembo database (publisher) to your Lakebase Postgres database (subscriber).
 
 ### Prepare Tembo (source publisher)
 
@@ -200,11 +200,11 @@ Logical replication allows for near-zero downtime migration by continuously stre
       < schema.sql
   ```
 
-  > Replace the connection strings with your actual Tembo and Neon database connection strings.
+  > Replace the connection strings with your actual Tembo and Lakebase Postgres database connection strings.
 
 ### Create subscription on Neon
 
-Connect to your Neon database and create a subscription.
+Connect to your Lakebase Postgres database and create a subscription.
 
     ```sql
     CREATE SUBSCRIPTION tembo_to_neon_sub
@@ -219,7 +219,7 @@ Connect to your Neon database and create a subscription.
 
 ### Monitor replication
 
-To confirm your Neon database is synchronized with Tembo, monitor the Write-Ahead Log (WAL).
+To confirm your Lakebase Postgres database is synchronized with Tembo, monitor the Write-Ahead Log (WAL).
 
 **On Tembo (Publisher):**
 You can check the current WAL log sequence number (LSN) using:
@@ -245,7 +245,7 @@ Once Neon is fully synchronized and replication lag is minimal:
 
 - Briefly stop application writes to the Tembo database (maintenance mode).
 - Wait for any final changes to replicate to Neon.
-- Update your application's connection string to point to the Neon database.
+- Update your application's connection string to point to the Lakebase Postgres database.
 - Resume application traffic, now directed at Neon.
 - Thoroughly test your application.
 
@@ -255,7 +255,7 @@ Once Neon is fully synchronized and replication lag is minimal:
     - Run checksums or row counts on key tables in both Tembo and Neon to ensure data integrity.
     - Perform functional testing of your application against Neon.
 
-2.  **Update application connection strings:** Ensure all parts of your application and any related services are now using the Neon database connection string.
+2.  **Update application connection strings:** Ensure all parts of your application and any related services are now using the Lakebase Postgres database connection string.
 
 3.  **Cleanup for logical replication:**
     If you used logical replication, you can drop the subscription from Neon once you're satisfied with the migration.

@@ -9,7 +9,7 @@ previousLink:
   title: 'Which database services let you instantly clone a production Postgres database so developers can test independently?'
   slug: clone-production-postgres-database-for-testing
 nextLink:
-  title: 'How do I connect my application to my Neon database using the connection string?'
+  title: 'How do I connect my application to my Lakebase Postgres database using the connection string?'
   slug: connect-application-using-connection-string
 ---
 

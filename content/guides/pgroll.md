@@ -4,7 +4,7 @@ subtitle: A comprehensive guide to using pgroll for safe, reversible Postgres mi
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-06-30T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-07-31T11:01:30.658Z'
 ---
 
 Database schema migrations are a critical but often risky part of application development. Traditional migration tools can lock tables, cause downtime, and make rollbacks difficult, especially for applications that require high availability. [`pgroll`](https://github.com/xataio/pgroll) is an open-source CLI tool that solves this problem for Postgres, enabling zero-downtime, reversible schema changes.
@@ -114,7 +114,7 @@ This abstracts the schema's structure. For example, when you rename a column, th
 
 ## Getting started
 
-Now that you understand the basics, let's dive into using `pgroll` for schema migrations in a Neon Postgres database. This guide will take you through installing and setting up `pgroll`, creating your first migration, and understanding how to manage schema changes safely.
+Now that you understand the basics, let's dive into using `pgroll` for schema migrations in a Lakebase Postgres database. This guide will take you through installing and setting up `pgroll`, creating your first migration, and understanding how to manage schema changes safely.
 
 ### Prerequisites
 
@@ -148,7 +148,7 @@ If you need a pre-compiled binary for your platform, please refer to [`pgroll` i
 pgroll init --postgres-url "postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
-> Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` with your Neon database connection details. You can find these in the [Neon Console](https://console.neon.tech) under your project's **Connect** section. Learn more: [Connect from any application](/docs/connect/connect-from-any-app)
+> Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` with your Lakebase Postgres database connection details. You can find these in the [Neon Console](https://console.neon.tech) under your project's **Connect** section. Learn more: [Connect from any application](/docs/connect/connect-from-any-app)
 
 ### Step 3: Your first migration
 
