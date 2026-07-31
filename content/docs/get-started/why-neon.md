@@ -29,8 +29,6 @@ This concept evolved into what's Lakebase Postgres today. Lakebase Postgres, our
 
 ## What makes Neon different
 
-<YoutubeIframe embedId="wLAeC-r4kfE" />
-
 ### Lakebase Postgres, built from first principles
 
 Lakebase Postgres isn’t “Postgres-like”: it is Postgres, with full compatibility across ORMs, extensions, and frameworks. But its defining characteristic is the lakebase architecture, which translates into serverless behavior that isn’t layered on but foundational to the system.
