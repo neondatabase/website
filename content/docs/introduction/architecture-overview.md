@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-07-31T15:49:10.111Z'
 ---
 
 ## Top level overview
@@ -29,7 +29,7 @@ This separation is what puts Neon in the [lakebase category](https://www.databri
 
 Neon’s design intentionally keeps object storage off the critical path. Object storage provides durability and scale, but never sits in front of query execution. Latency-sensitive work stays close to compute, while durability and history are handled asynchronously and independently.
 
-![Neon architecture overview](/docs/introduction/neon-architecture-overview.png)
+![lakebase architecture overview](/docs/introduction/neon-architecture-overview.png)
 
 <Admonition type="note" title="What is the difference between Neon and Lakebase?">
 Neon and Databricks run the same database, Lakebase Postgres, on the same infrastructure. What surrounds it differs: on Neon it anchors a complete backend for apps and agents, while Databricks integrates it with the rest of the Data Intelligence Platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).

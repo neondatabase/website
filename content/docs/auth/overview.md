@@ -8,7 +8,7 @@ summary: >-
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-07-31T15:49:10.111Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -65,7 +65,7 @@ Managed Better Auth currently supports Better Auth version **1.4.18**.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 
-Managed Better Auth is a managed authentication service built into Neon's architecture:
+Managed Better Auth is a managed authentication service built into the lakebase architecture:
 
 - **Branch-aware authentication**: Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
 - **Built-in Data API integration**: JWT token validation for the Data API has native support for Managed Better Auth.

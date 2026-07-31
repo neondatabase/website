@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-07-31T15:49:10.111Z'
 ---
 
 ## access token
@@ -176,7 +176,7 @@ See [Neon Console](#neon-console).
 
 ## Control Plane
 
-The part of the Neon architecture that manages cloud storage and compute resources.
+The part of the lakebase architecture that manages cloud storage and compute resources.
 
 ## Context file
 
@@ -389,7 +389,7 @@ A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the limit set by your project's [history window](/docs/introduction/history-window). Neon retains a history for all branches.
+A lakebase architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the limit set by your project's [history window](/docs/introduction/history-window). Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -536,7 +536,7 @@ The number of root branches allowed in a project depends on your Neon plan. See 
 
 ## Safekeeper
 
-A Neon architecture component responsible for the durability of database changes. Postgres streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
+A lakebase architecture component responsible for the durability of database changes. Postgres streams WAL records to Safekeepers. A quorum algorithm based on Paxos ensures that when a transaction is committed, it is stored on a majority of Safekeepers and can be recovered if a node is lost. Safekeepers are deployed in different availability zones to ensure high availability and durability.
 
 ## Scale plan
 

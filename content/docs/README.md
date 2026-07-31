@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:49:10.111Z'
 ---
 
 # Docs
@@ -710,13 +710,13 @@ Example file structure:
 To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:
 
 ```md
-![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png)
+![lakebase architecture diagram](/docs/conceptual-guides/neon_architecture_2.png)
 ```
 
 If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
 
 ```md
-![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png 'no-border')
+![lakebase architecture diagram](/docs/conceptual-guides/neon_architecture_2.png 'no-border')
 ```
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
