@@ -27,7 +27,7 @@ const logos = [
 export const heroServiceItems = [
   {
     title: 'Lakebase Postgres',
-    description: 'Serverless Postgres that scales and branches with your app.',
+    description: 'Serverless database that scales and branches with your app.',
     videoBase: 'postgres-database',
     aspectRatio: 'aspect-square',
     width: 512,
