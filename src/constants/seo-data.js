@@ -6,7 +6,7 @@ export default {
   index: {
     title: 'Neon — Postgres backends for apps and agents',
     description:
-      'The backend for apps and agents. Build with Serverless Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.',
+      'The backend for apps and agents. Build with Lakebase Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.',
     pathname: '',
   },
   about: {
