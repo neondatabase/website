@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-07-31T16:40:22.567Z'
 ---
 
 ## Getting started
@@ -45,7 +45,7 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <DetailIconCards className="my-7!" cols={3} theme="green-flat">
 
-<a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Postgres</a>
+<a href="/docs/postgres/overview" description="Serverless Postgres with branching, autoscaling, scale to zero, and instant restore." icon="database">Lakebase Postgres</a>
 
 <a href="/docs/auth/overview" description="Managed Better Auth with sign-up, OAuth, and sessions. Users live in your Postgres and branch with it." icon="lock-landscape">Auth</a>
 
