@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-07-31T16:04:44.241Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -79,7 +79,7 @@ See [Claude Code plugin for Neon](/docs/ai/ai-claude-code-plugin) for details.
 
 ### Codex plugin
 
-If you're using OpenAI Codex, install the **Lakebase Postgres** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Lakebase Postgres app (MCP), the main Neon skill, and the egress optimizer skill.
+If you're using OpenAI Codex, install the **Neon** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon app (MCP), the main Neon skill, and the egress optimizer skill.
 
 See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
 
