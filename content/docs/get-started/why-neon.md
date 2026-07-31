@@ -24,7 +24,7 @@ Neon started with a mission: to deliver Postgres as a cloud service that gets ou
 This concept evolved into what's Lakebase Postgres today. Lakebase Postgres, our database, is built on the lakebase architecture: a distributed, cloud-native design that separates storage and compute, giving Postgres the scale, reliability, and efficiency modern applications require. This foundation unlocks the features that agents (and the developers behind them) expect today: autoscaling, scale-to-zero, instant branching, instant restores, and usage-based pricing - without changing the Postgres you already know.
 
 <Admonition type="tip" title="Neon, now a part of Databricks">
-  In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Lakebase Postgres is also available via Databricks, giving you access to all the complete Databricks platform ([Lakebase](https://www.databricks.com/product/lakebase)). Learn more in [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
+  In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Lakebase Postgres is also available via the Databricks platform ([Lakebase](https://www.databricks.com/product/lakebase)) - learn more in [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
 ## What makes Neon different
