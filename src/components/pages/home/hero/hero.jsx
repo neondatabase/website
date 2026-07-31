@@ -76,7 +76,7 @@ const Hero = () => (
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-280 text-[72px] leading-dense tracking-tighter xl:max-w-215 xl:text-[64px] lg:max-w-180 lg:text-[52px] md:mt-4 md:text-[42px] sm:text-[32px]">
+      <h1 className="mt-5 max-w-280 text-[68px] leading-dense tracking-tighter xl:max-w-215 xl:text-[60px] lg:max-w-180 lg:text-[48px] md:mt-4 md:text-[42px] sm:text-[32px]">
         The backend for apps and agents,
         <br />
         built to scale on Lakebase Postgres.
