@@ -3,7 +3,7 @@ title: Neon documentation
 subtitle: Neon is the backend for apps and agents.
 summary: >-
   Neon documentation root covers the full Neon backend platform: serverless
-  Postgres with branching and autoscaling, Managed Better Auth, Data API, and upcoming
+  Lakebase Postgres with branching and autoscaling, Managed Better Auth, Data API, and upcoming
   Object Storage and AI Gateway services. Use this page to reach quickstarts, framework
   connection guides (Next.js, Django, Prisma, and more), and MCP-based AI
   editor integrations for Cursor, Claude Code, Codex, and GitHub Copilot.
@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-31T16:40:22.567Z'
+updatedOn: '2026-07-31T16:42:49.697Z'
 ---
 
 ## Getting started
@@ -27,14 +27,14 @@ Start with a quick setup prompt, or follow a guided tutorial to build the full N
   />
   <GuidedPath
     title="Build a full backend"
-    description="Next.js on the full Neon backend: Postgres, Auth, Object Storage, and AI Gateway, from create-next-app to deployed."
+    description="Next.js on the full Neon backend: Lakebase Postgres, Auth, Object Storage, and AI Gateway, from create-next-app to deployed."
     href="/docs/get-started/full-backend-quickstart"
   />
 </TwinPaths>
 
 <TourCallout
   title="Tour the Neon backend"
-  description="Learn how Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
+  description="Learn how Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway connect across a real project, and where each one lives in your codebase."
   href="/docs/get-started/backend-overview"
 />
 
