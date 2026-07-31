@@ -1,13 +1,13 @@
 ---
-title: Neon vs Lakebase
-subtitle: 'Two products, one architectural foundation — how to choose'
+title: Neon and Lakebase
+subtitle: How to choose where to run Lakebase Postgres
 summary: >-
-  Neon and Databricks Lakebase share the same serverless Postgres architecture,
-  but serve different audiences. Neon targets developers, startups, and agentic
-  platforms. Lakebase runs natively in the Databricks Data Intelligence Platform
-  for enterprises that need OLTP unified with analytics, AI pipelines, and Unity
-  Catalog governance. Use this page to decide which product fits your workload
-  based on team type, deployment environment, and data access model.
+  Lakebase Postgres is an OLTP database where storage and compute are separated
+  and durable object storage is the source of truth. It runs in two places: on
+  Neon, a complete backend for apps and agents built for developers, startups,
+  and agent platforms, and on Databricks, the Data and AI platform for
+  businesses. Same infrastructure, same technology, same core feature set. Use
+  this page to understand the lakebase architecture and decide where to run it.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
@@ -15,92 +15,99 @@ redirectFrom:
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres product that runs natively in the Databricks Data Intelligence Platform. This section explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) and how to determine whether Neon or Lakebase is a better fit for your workload.
+In 2025, Neon joined Databricks. The serverless Postgres architecture that Neon pioneered is now the foundation of Lakebase Postgres, a database you can run in two places: on Neon and on Databricks. Wherever you run it, it's the same infrastructure, the same technology, and the same core feature set. What differs is what's built around the database. This page explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase), what's the same in both places, and how to choose between them.
 
-### Lakebase architecture: Postgres built on object storage
+## What is a lakebase?
 
-A lakebase is a new category of operational database: OLTP built directly on cloud object storage, the same storage layer already used by your lakehouse. Durability and history live in the object store, not on servers. This decouples storage from compute, making compute stateless and elastic. Operational data becomes lake-native by default, accessible to analytics and AI without ETL.
+![Standard database compared to lakebase. On the left, compute and storage live together on one machine and each replica keeps a full copy of the data. On the right, stateless Postgres compute runs in a layer separate from shared, durable object storage](/docs/introduction/database-vs-lakebase.svg 'no-border')
 
-Databricks is pioneering the category with [Lakebase](https://www.databricks.com/product/lakebase), a managed serverless Postgres service built on the same architectural foundation as Neon and deeply integrated into the Databricks Data Intelligence Platform. This integration unlocks capabilities that only make sense when an operational database lives alongside analytical data:
+At the broadest level, a lakebase is a type of OLTP database where storage and compute are separated and the source of truth for storage is cheap, durable object storage. That architectural choice has consequences that traditional Postgres deployments can't match:
 
-- **No ETL friction.** Operational data is already in the lakehouse storage layer, so analytics, dashboards, and ML pipelines can access it without replication, CDC jobs, or fragile sync workflows.
-- **Unified analytics and AI.** Operational and analytical workloads work on the same data foundation.
-- **Lakehouse-native governance.** Access control, lineage, and security policies apply consistently across operational and analytical data through Unity Catalog.
-- **Serverless operations.** Like Neon, Lakebase removes manual capacity planning by using stateless compute that scales automatically and is optimized for Databricks environments.
+- **Compute is stateless and elastic.** Because no compute node owns the data, compute can scale up under load, scale down when idle, and [scale to zero](/docs/introduction/scale-to-zero) entirely. Read replicas spin up without copying data.
+- **History is cheap.** Object storage is inexpensive enough to retain a full history of changes, which makes [instant point-in-time restore](/docs/introduction/branch-restore) practical instead of a slow backup-and-restore exercise.
+- **Copies are virtual.** [Branches](/docs/introduction/branching) are copy-on-write views over shared storage, so a full copy of your database for development, testing, or an agent workflow is created in seconds and costs nothing until it diverges.
+- **Operational data is lake-native.** Data lives in the same storage layer as the lakehouse, so analytics and AI can reach it without ETL pipelines or fragile sync jobs.
 
-### How to choose between Neon and Lakebase
+## Where Lakebase Postgres runs
 
-Neon and Lakebase share the same core architectural principles, but they are optimized for different environments and team structures:
+Lakebase Postgres is the Databricks implementation of a lakebase: Postgres, built on the architecture described above. It's available in two places:
 
-- Neon is Postgres for developers, startups, and agent platforms.
-- Lakebase is Postgres for businesses whose operational data benefits from participating directly in the Databricks Lakehouse, alongside analytics, governance, and AI workflows.
+- **On Neon**, as the database at the core of a complete backend for apps and agents: Postgres alongside [Auth](/docs/auth/overview), [Data API](/docs/data-api/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), and [AI Gateway](/docs/ai-gateway/overview).
+- **On Databricks**, as [Lakebase](https://www.databricks.com/product/lakebase), an enterprise-grade Postgres database tightly integrated into the rest of the Databricks Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows.
 
-**Choose Neon if:**
+The database itself doesn't change between them. What surrounds it differs, because Neon and Databricks serve different customers: Neon is built for developers, startups, and agent platforms; Databricks is the Data and AI platform for businesses.
 
-- You’re a developer looking for a hands-off Postgres to power side projects, experiments, or personal apps without setup friction or infrastructure management
-- You’re a young startup focused on shipping quickly and need a database that keeps up without slowing your team down
-- You’re a small team iterating fast, looking for ways to accelerate the software lifecycle and deploy safely without blockers
-- You’re building an agent-driven or codegen platform (like Replit, Lovable, or Bolt) and need to spin up and manage fleets of databases efficiently, with costs that stay under control through usage-based pricing and scale-to-zero
+|                         | Neon                                                   | Databricks                                                        |
+| ----------------------- | ------------------------------------------------------ | ----------------------------------------------------------------- |
+| **The database**        | Lakebase Postgres                                      | Lakebase Postgres                                                 |
+| **Integrated products** | [Auth](/docs/auth/overview), [Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), [AI Gateway](/docs/ai-gateway/overview) | Lakehouse, Lakeflow, Unity Catalog, Unity AI Gateway, [all Databricks products](https://www.databricks.com/product/platform) |
+| **What it is**          | A complete backend for apps and agents                 | The Data and AI platform for businesses                           |
+| **Built for**           | Developers, startups, agent and codegen platforms      | Enterprises, data and AI teams, companies building on Databricks  |
+| **How teams use it**    | Build, iterate, preview, and deploy apps quickly       | Operate production-grade OLTP databases with tight integration to the data lake |
+| **Governance**          | Project-level access controls                          | Lakehouse-wide governance via Unity Catalog                       |
 
-**Choose Lakebase if:**
+## Core database features
 
-- You’re building on the Databricks Data Intelligence Platform
-- You’re running data-intensive or AI-driven applications where unified governance, lineage, and access control across OLTP and analytical data are essential
-- You’re a data or AI team that needs operational data to be immediately available for analytics, notebooks, and ML workflows
-- You’re an enterprise team that highly values security, compliance, and platform-level integrations
+Because Neon and Databricks run the same infrastructure, the core feature set is the same. The links below go to the Neon and Databricks documentation for the same underlying capability. Databricks availability is based on the [Lakebase documentation](https://docs.databricks.com/aws/en/oltp/projects/).
 
-| Product                        | Neon                                                   | Lakebase                                                               |
-| ------------------------------ | ------------------------------------------------------ | ---------------------------------------------------------------------- |
-| **Architecture**               | lakebase                                               | lakebase                                                               |
-| **What it is**                 | Serverless Postgres for applications                   | Postgres for the Lakehouse                                             |
-| **Who is it for**              | Developers, startups, agentic & codegen platforms      | Enterprises, data & AI teams, companies building on Databricks         |
-| **Where it runs**              | Standalone serverless Postgres platform                | Native to the Databricks Data Intelligence Platform                    |
-| **How teams use it**           | Build, iterate, preview, and deploy apps quickly       | Operate OLTP data alongside analytics and AI pipelines                 |
-| **Development workflows**      | Branching, previews, instant restores, rapid iteration | Branching-based workflows integrated with notebooks and pipelines      |
-| **Data access model**          | Application-centric (ORMs, drivers, APIs)              | Lakehouse-centric (SQL, notebooks, AI tooling, pipelines)              |
-| **Operational model**          | Developer-first                                        | Enterprise-grade                                                       |
-| **Scaling behavior**           | Autoscaling and scale-to-zero                          | Autoscaling and scale-to-zero aligned with Databricks serverless model |
-| **Governance & security**      | Project-level access controls                          | Lakehouse-wide governance via Unity Catalog                            |
-| **Analytics & AI integration** | Via external tools and pipelines                       | Native integration with Databricks analytics and AI                    |
-| **Best fit when**              | You’re building and shipping applications quickly      | You want OLTP data to participate directly in the Lakehouse            |
+| Feature                             | On Neon                                                      | On Databricks                                                                                         |
+| ----------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
+| **Branching**                       | [Branching](/docs/introduction/branching)                    | [Branches](https://docs.databricks.com/aws/en/oltp/projects/branches)                                 |
+| **Autoscaling**                     | [Autoscaling](/docs/introduction/autoscaling)                | [Autoscaling](https://docs.databricks.com/aws/en/oltp/projects/autoscaling)                           |
+| **Scale to zero**                   | [Scale to zero](/docs/introduction/scale-to-zero)            | [Scale to zero](https://docs.databricks.com/aws/en/oltp/projects/scale-to-zero)                       |
+| **Read replicas**                   | [Read replicas](/docs/introduction/read-replicas)            | [Read replicas](https://docs.databricks.com/aws/en/oltp/projects/read-replicas)                       |
+| **Instant restore (point-in-time)** | [Instant restore](/docs/introduction/branch-restore)         | [Point-in-time restore](https://docs.databricks.com/aws/en/oltp/projects/point-in-time-restore)       |
+| **Connection pooling**              | [Connection pooling](/docs/connect/connection-pooling)       | Built-in PgBouncer ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect))              |
+| **Data API (REST)**                 | [Data API](/docs/data-api/overview)                          | [Lakebase Data API](https://docs.databricks.com/aws/en/oltp/projects/data-api)                        |
+| **Management API**                  | [Neon API](/docs/reference/api)                              | [Lakebase API guide](https://docs.databricks.com/aws/en/oltp/projects/api-usage)                      |
+| **CLI**                             | [Neon CLI](/docs/cli/install)                                | [Databricks CLI for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/cli)                   |
+| **Terraform**                       | [Terraform provider](/docs/reference/terraform)              | [Terraform for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/automate-with-terraform)    |
+| **MCP server**                      | [Neon MCP Server](/docs/ai/neon-mcp-server)                  | [MCP on Databricks](https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp)                 |
 
-### Feature availability
+## Features around the database
 
-Neon and Lakebase share the same Postgres engine and serverless storage architecture, so many capabilities exist in both. The table below maps concrete features to each product, with links to the documentation. Lakebase availability is based on the [Lakebase documentation](https://docs.databricks.com/aws/en/oltp/projects/).
+The features around the database are where Neon and Databricks diverge, because each is designed for a different customer. Neon leans into developer workflow and the backend services apps and agents need; Databricks leans into enterprise operations, governance, and integration with the rest of the Data Intelligence Platform.
 
-| Feature                                              | Neon                                                                               | Lakebase                                                                                                                                   |
+| Feature                                              | On Neon                                                                            | On Databricks                                                                                                                              |
 | ---------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Branching**                                        | Yes ([Branching](/docs/introduction/branching))                                    | Yes ([Branches](https://docs.databricks.com/aws/en/oltp/projects/branches))                                                                |
-| **Autoscaling**                                      | Yes ([Autoscaling](/docs/introduction/autoscaling))                                | Yes ([Autoscaling](https://docs.databricks.com/aws/en/oltp/projects/autoscaling))                                                          |
-| **Scale to zero**                                    | Yes ([Scale to zero](/docs/introduction/scale-to-zero))                            | Yes ([Scale to zero](https://docs.databricks.com/aws/en/oltp/projects/scale-to-zero))                                                      |
-| **Read replicas**                                    | Yes ([Read replicas](/docs/introduction/read-replicas))                            | Yes ([Read replicas](https://docs.databricks.com/aws/en/oltp/projects/read-replicas))                                                      |
-| **Instant restore (point-in-time)**                  | Yes ([Instant restore](/docs/introduction/branch-restore))                         | Yes ([Point-in-time restore](https://docs.databricks.com/aws/en/oltp/projects/point-in-time-restore))                                      |
 | **High availability**                                | Coming soon ([Roadmap](/docs/introduction/roadmap))                                | Yes ([High availability](https://docs.databricks.com/aws/en/oltp/projects/manage-high-availability))                                       |
 | **Cross-cloud disaster recovery (DR)**               | Not available                                                                      | Private preview                                                                                                                            |
-| **Connection pooling**                               | Yes ([Connection pooling](/docs/connect/connection-pooling))                       | Yes, built-in PgBouncer ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect))                                              |
-| **Data API (REST)**                                  | Yes ([Data API](/docs/data-api/overview))                                          | Yes ([Lakebase Data API](https://docs.databricks.com/aws/en/oltp/projects/data-api))                                                       |
-| **Management API**                                   | Yes ([Neon API](/docs/reference/api))                                              | Yes ([Lakebase API guide](https://docs.databricks.com/aws/en/oltp/projects/api-usage))                                                     |
-| **CLI**                                              | Yes ([Neon CLI](/docs/cli/install))                                                | Yes ([Databricks CLI for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/cli))                                                  |
-| **Terraform**                                        | Yes ([Terraform provider](/docs/reference/terraform))                              | Yes ([Terraform for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/automate-with-terraform))                                   |
-| **MCP server**                                       | Yes ([Neon MCP Server](/docs/ai/neon-mcp-server))                                  | Yes, Databricks managed MCP ([MCP on Databricks](https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp))                        |
+| **Managed user authentication**                      | Yes ([Managed Better Auth](/docs/auth/overview))                                   | Not yet; database access uses Databricks identity and Postgres roles ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect)) |
 | **GitHub integration**                               | Yes ([GitHub integration](/docs/guides/neon-github-integration))                   | Via GitHub Actions ([GitHub Actions](https://docs.databricks.com/aws/en/dev-tools/ci-cd/github))                                           |
 | **Private networking (Private Link)**                | Yes ([Private Networking](/docs/guides/neon-private-networking))                   | Yes ([Data protection](https://docs.databricks.com/aws/en/oltp/projects/private-link))                                                     |
-| **Managed user authentication**                      | Yes ([Managed Better Auth](/docs/auth/overview))                                   | Not yet; database access uses Databricks identity and Postgres roles ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect)) |
 | **Metrics and logs export (Datadog, OpenTelemetry)** | Yes ([Datadog](/docs/guides/datadog), [OpenTelemetry](/docs/guides/opentelemetry)) | Via the Databricks platform                                                                                                                |
 | **HIPAA compliance**                                 | Yes ([HIPAA](/docs/security/hipaa))                                                | Yes, via Databricks ([HIPAA](https://docs.databricks.com/aws/en/security/privacy/hipaa))                                                   |
 | **SOC 2**                                            | Yes ([Compliance](/docs/security/compliance))                                      | Yes, via Databricks ([SOC](https://www.databricks.com/trust/compliance/soc))                                                               |
 | **Vercel Marketplace**                               | Yes ([Vercel integration](/docs/guides/vercel-overview))                           | Not yet                                                                                                                                    |
 | **Vercel Integration**                               | Yes ([Vercel-Managed integration](/docs/guides/vercel-managed-integration))        | Not yet                                                                                                                                    |
 
-### Provider and region availability
+## How to choose
 
-Neon runs on AWS. Lakebase inherits the cloud reach of the Databricks platform, with availability that varies by provider. For the full, current region lists, follow the links below.
+You get the same database either way, so the decision comes down to what you need around it and how your team works.
 
-| Cloud provider | Neon                                                                                             | Lakebase                                                                                                                |
+**Choose Neon if:**
+
+- You're a developer looking for a hands-off Postgres to power side projects, experiments, or personal apps without setup friction or infrastructure management
+- You're a startup focused on shipping quickly and want a complete backend, database included, that keeps up without slowing your team down
+- You're a small team iterating fast, using branching and previews to accelerate the software lifecycle and deploy safely
+- You're building an agent or codegen platform (like Replit, Lovable, or Bolt) and need to spin up and manage fleets of databases efficiently, with costs that stay under control through usage-based pricing and scale to zero
+
+**Choose Databricks if:**
+
+- You're building on the Databricks Data Intelligence Platform
+- You're running data-intensive or AI-driven applications where unified governance, lineage, and access control across OLTP and analytical data are essential
+- You're a data or AI team that needs operational data to be immediately available for analytics, notebooks, and ML workflows
+- You're an enterprise team that highly values security, compliance, high availability, and platform-level integrations
+
+## Provider and region availability
+
+Neon runs on AWS. Lakebase Postgres on Databricks inherits the cloud reach of the Databricks platform, with availability that varies by provider. For the full, current region lists, follow the links below.
+
+| Cloud provider | Neon                                                                                             | Databricks                                                                                                              |
 | -------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
 | **AWS**        | Yes ([Neon regions](/docs/introduction/regions))                                                 | Yes, generally available ([AWS regions](https://docs.databricks.com/aws/en/oltp/projects/manage-projects#availability)) |
 | **Azure**      | No, Azure support is being deprecated ([Neon regions](/docs/introduction/regions#azure-regions)) | Yes, in beta ([Azure regions](https://learn.microsoft.com/en-us/azure/databricks/oltp/projects/manage-projects))        |
-| **GCP**        | No, on the [roadmap](/docs/introduction/roadmap)                                                 | Yes, in beta ([GCP regions](https://docs.databricks.com/gcp/en/oltp/projects/manage-projects#availability))             |
+| **GCP**        | Not available                                                                                    | Yes, in beta ([GCP regions](https://docs.databricks.com/gcp/en/oltp/projects/manage-projects#availability))             |
 
 <Admonition type="tip" title="Keep exploring Lakebase">
     See the [Lakebase docs](https://docs.databricks.com/aws/en/oltp), review the [latest updates to the Lakebase platform](https://www.databricks.com/blog/lakebase-holiday-update), explore [customer stories](https://www.databricks.com/product/lakebase#customer-stories), and [watch a demo](https://www.databricks.com/resources/demos/tours/appdev/databricks-lakebase?itm_data=demo_center).

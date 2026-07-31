@@ -3,8 +3,8 @@ title: Roadmap
 summary: >-
   Neon's public product roadmap tracks what is in flight, recently shipped, and
   planned across compute, storage, security, and cloud regions. Planned features
-  include higher storage and compute limits, CMK encryption, RBAC, PCI
-  compliance, and GCP support. Recently shipped milestones include Postgres 18
+  include higher storage and compute limits, CMK encryption, RBAC, and PCI
+  compliance. Recently shipped milestones include Postgres 18
   GA, a major write throughput improvement, Managed Better Auth GA, and the AI agent
   pricing plan.
 enableTableOfContents: true
@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-07-21T12:07:59.860Z'
+updatedOn: '2026-07-27T15:32:20.707Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -47,7 +47,6 @@ We're accelerating work on improving and scaling the core database on Neon as we
 ### Clouds & regions
 
 - Region expansion for paid plan users. Let us know where you want to see Neon next: [Request a region](/docs/introduction/regions)
-- Google Cloud Platform (GCP) support (targeting late 2025)
 
 ### Database storage
 
@@ -99,7 +98,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Require 2FA for your organization**: Org admins can now enforce two-factor authentication for all members from Organization Settings. [Learn more](/docs/manage/orgs-manage#require-2fa-for-organization-members).
 - **One-click Neon MCP setup for Kiro**: The Neon MCP Server now supports an Add to Kiro badge for one-click MCP setup in the Kiro IDE. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
 - **Postgres 18 general availability**: Postgres 18 is now generally available on Neon. [Read the announcement](/blog/postgres-18).
-- **Organization spend limits**: Set a monthly spending limit for your organization from the Billing page and receive email alerts when you reach 80% and 100% of that limit. [Learn more](/docs/introduction/spending-limit).
+- **Organization spending notifications**: Set a monthly spending threshold for your organization from the Billing page and receive email alerts when you reach 80% and 100% of that threshold. [Learn more](/docs/introduction/spending-notifications).
 - **Neon plugin for OpenAI Codex**: The Neon Postgres plugin is now available in the OpenAI Codex plugin directory, adding the Neon MCP Server and Agent Skills to Codex so you can manage projects, branches, and databases from chat. [Learn more](/docs/ai/ai-codex-plugin)
 - **Neon Postgres in Stripe Projects**: Neon is now part of Stripe Projects, so you can provision a Neon database as part of a Stripe CLI app setup alongside other services. [Read the announcement](/blog/neon-works-with-stripe-projects-for-agentic-provisioning)
 - **Automatic cache prewarming**: Neon now prewarms your compute's in-memory cache during scheduled compute updates, protecting query performance immediately after the update restarts Postgres. [Read the blog post](https://neon.com/blog/prewarming)

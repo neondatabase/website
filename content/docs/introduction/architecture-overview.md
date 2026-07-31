@@ -32,7 +32,7 @@ Neon’s design intentionally keeps object storage off the critical path. Object
 ![Neon architecture overview](/docs/introduction/neon-architecture-overview.png)
 
 <Admonition type="note" title="What is the difference between Neon and Lakebase?">
-Both products share the same architectural foundation but Lakebase comes with additional features integrating it with the rest of the Databricks Data and AI platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
+Neon and Databricks run the same database, Lakebase Postgres, on the same infrastructure. What surrounds it differs: on Neon it anchors a complete backend for apps and agents, while Databricks integrates it with the rest of the Data Intelligence Platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
 ## Resource hierarchy

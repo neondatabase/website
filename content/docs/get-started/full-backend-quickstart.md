@@ -99,8 +99,8 @@ A single [`neon.ts`](/docs/reference/neon-ts) file declares your backend as code
 
 Work through the commands on the right:
 
-1. `neon link` and `neon checkout` pull the branch's `DATABASE_URL` into `.env.local`. If you created the project through the API or Console, run `neon auth` first to sign in the CLI.
-2. `neon config init` scaffolds `neon.ts` and installs `@neon/config`. The generated file includes a branch policy; leave it in place and add the `preview` block shown in later steps alongside it. The `neon.ts` snippets below omit the branch policy for brevity.
+1. `neon link` connects the directory to your project (writing a `.neon` file); `neon checkout` then pins the branch and pulls its env vars, including `DATABASE_URL`, into `.env.local`. If you haven't signed in to the CLI yet, run `neon auth` first.
+2. `neon config init` scaffolds `neon.ts` and installs `@neon/config` and `@neon/env`. It includes a branch policy; keep it and add the `preview` blocks shown in later steps alongside it (those snippets omit the policy for brevity).
 
 Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local` and you can build the data layer before adding any beta services.
 
@@ -109,8 +109,8 @@ Postgres is already available on the branch, so `DATABASE_URL` is in `.env.local
 
 ```bash filename="Terminal"
 neon link            # select the my-backend project
-neon checkout main   # pull DATABASE_URL into .env.local
-neon config init     # scaffold neon.ts, install @neon/config
+neon checkout main   # pin the branch, pull env vars into .env.local
+neon config init     # scaffold neon.ts, install @neon/config and @neon/env
 ```
 
 </TwoColumnLayout.Block>
@@ -273,6 +273,7 @@ The action returns the object's public URL. In a real app you'd store that URL o
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
+  // branch policy omitted for brevity; keep the one from `neon config init`
   preview: {
     buckets: {
       images: { access: 'public_read' },
@@ -446,7 +447,7 @@ export default app;
 
 Declare the function and the AI Gateway in `neon.ts`, then `neon deploy`. Neon builds the function, gives it a public URL, and injects the AI Gateway credentials (`NEON_AI_GATEWAY_TOKEN`, `NEON_AI_GATEWAY_BASE_URL`) so the `@neon/ai-sdk-provider` inside the function needs no configuration.
 
-Retrieve the function's URL and add it to `.env.local` as `NEXT_PUBLIC_POSTS_FN_URL` (the `NEXT_PUBLIC_` prefix exposes it to the browser, which calls the assistant directly).
+Copy the `invocation_url` from the `neon functions get posts` output into `.env.local` as `NEXT_PUBLIC_POSTS_FN_URL` (the `NEXT_PUBLIC_` prefix exposes it to the browser, which calls the assistant directly). `NEXT_PUBLIC_` variables are read at build time, so restart the dev server if it's already running.
 
 A Neon Function has its own URL, so the browser calls it directly. That keeps a long stream off your host's serverless timeout.
 
@@ -461,6 +462,7 @@ The first AI Gateway call on a new branch can return a `403` while the credentia
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
+  // branch policy omitted for brevity; keep the one from `neon config init`
   preview: {
     aiGateway: true,
     buckets: {
@@ -475,9 +477,13 @@ export default defineConfig({
 
 ```bash filename="Terminal"
 neon deploy
+neon functions get posts   # prints the invocation_url
+```
 
-# print the function's details, then copy its invocation_url
-neon functions get posts
+```
+slug           posts
+name           posts assistant
+invocation_url https://<branch_id>-posts.compute.<cell>.us-east-2.aws.neon.tech/
 ```
 
 ```bash filename=".env.local"
