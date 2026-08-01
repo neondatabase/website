@@ -28,7 +28,7 @@ const Feedback = ({ slug }) => {
     <div className="relative">
       <div
         className={cn(
-          'flex items-center space-x-5 transition-opacity duration-200 xs:flex-col xs:space-y-4 xs:space-x-0',
+          'flex items-center space-x-5 transition-opacity duration-200 sm:flex-col sm:space-y-4 sm:space-x-0',
           isFeedbackSent ? 'invisible opacity-0' : 'visible opacity-100'
         )}
       >
