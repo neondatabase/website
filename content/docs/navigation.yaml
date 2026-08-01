@@ -89,6 +89,8 @@
               slug: guides/go
             - title: Java
               slug: guides/java
+            - title: Kotlin
+              slug: guides/kotlin
             - title: JavaScript
               slug: guides/javascript
             - title: Python
