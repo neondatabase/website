@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-07-24T11:09:31.723Z'
+updatedOn: '2026-07-30T20:15:35.210Z'
 ---
 
 ## Available tools
@@ -18,6 +18,8 @@ Tools are grouped into categories. Use the `?category=` URL parameter to restric
 | Documentation (`docs`)            | Look up Neon documentation from within your assistant (no OAuth required)           |
 
 Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](/docs/ai/neon-mcp-server#project-scoped-mode).
+
+Schema tools accept schema-qualified table names, such as `crm.contacts`. An unqualified name resolves against the database `search_path`, which defaults to the `public` schema.
 
 <Admonition type="note">
 The `observability` tools query [Neon Functions logs](/docs/compute/functions/logs) and [object storage logs](/docs/storage/logs), which are part of the Neon backend beta, currently available in AWS `us-east-2` only. Log querying returns results only for projects in a supported region.
