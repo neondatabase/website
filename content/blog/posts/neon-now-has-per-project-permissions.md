@@ -32,13 +32,17 @@ seo:
   image: null
 ---
 
-Neon now supports a [new permission structure](https://neon.com/docs/manage/user-permissions), with four org-level roles (Admin, Editor, Viewer, and Collaborator) and per-project permissions that let you control exactly which projects your agents and collaborators can access.
+**Neon now supports a [new permission structure](https://neon.com/docs/manage/user-permissions), with four org-level roles (Admin, Editor, Viewer, and Collaborator) and per-project permissions that let you control exactly which projects your agents and collaborators can access.**
+
+**[ADD IMAGE-1]**
 
 Until now, anyone invited to a Neon org was assigned a single role that applied uniformly across every project in the org, with no way to scope access to individual projects. That's fine for small teams, but it breaks when agents are spinning up and managing databases at scale. The new structure lets you grant agents scoped credentials per project to avoid over-permissioned keys.
 
 ## The new permission structure: grant access project by project
 
 Neon's access model now works in two layers: org-level roles that define a user's baseline access across the organization, and project-level permissions that can expand that access on specific projects.
+
+**[ADD IMAGE 2]**
 
 ### Org-level roles
 
