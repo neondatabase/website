@@ -17,7 +17,7 @@ authors:
 cover:
   image: null
   alt: null
-isFeatured: false
+isFeatured: true
 seo:
   title: Neon now has per-project permissions - Neon
   description: >-
