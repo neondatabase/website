@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-27T17:22:37.262Z'
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
