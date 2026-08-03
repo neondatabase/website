@@ -24,7 +24,7 @@ and PR description together when a critical destination or outcome changes.
 | `TC-ACQ-006..008` | P0       | Pricing plan selection                  | Free targets signup; Launch and Scale target billing                        |
 | `TC-DOC-001..002` | P0       | Documentation onboarding                | Docs load, quickstart is reachable, search opens, init command copies       |
 | `TC-LEAD-001*`    | P0       | Contact sales                           | Required fields, email, analytics payload, success, and failure states work |
-| `TC-LEAD-002*`    | P1       | Startup application                     | Required fields, email, analytics payload, success, and failure states work |
+| `TC-LEAD-002`     | P1       | Startup application                     | Apply Now CTA targets the external Google Sites application form            |
 | `TC-LEAD-003*`    | P1       | AI agent application                    | Required email, analytics payload, success, and failure states work         |
 | `TC-SUB-001*`     | P1       | Changelog subscription                  | Email validation, subscription analytics, success, and failure states work  |
 | `TC-SUB-002`      | P1       | Blog article subscription               | Subscription analytics and the final success state are correct              |

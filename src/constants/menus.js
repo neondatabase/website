@@ -9,9 +9,9 @@ export default {
           title: 'Core Primitives',
           items: [
             {
-              title: 'Database',
+              title: 'Lakebase Postgres',
               to: LINKS.postgresOverview,
-              description: 'Serverless Postgres',
+              description: 'Serverless Postgres database',
             },
             {
               title: 'Auth',

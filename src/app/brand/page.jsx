@@ -1,3 +1,4 @@
+import Colors from 'components/pages/brand/colors';
 import Hero from 'components/pages/brand/hero';
 import Logo from 'components/pages/brand/logo';
 import Logomark from 'components/pages/brand/logomark';
@@ -11,6 +12,7 @@ const BrandPage = () => (
     <Logo />
     <Logomark />
     <Spacing />
+    <Colors />
   </Layout>
 );
 

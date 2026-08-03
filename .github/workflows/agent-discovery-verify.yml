@@ -20,8 +20,10 @@ on:
       - 'scripts/verify-agent-endpoints.mjs'
       - 'src/app/.well-known/**'
       - 'src/app/models.json/**'
+      - 'src/app/models/**'
       - 'src/scripts/generate-skills-index.js'
       - 'src/scripts/check-models-sync.js'
+      - 'src/scripts/check-models-endpoint-sync.js'
       - 'next.config.js'
   schedule:
     # Every day at 8:00 AM UTC (matches the old AI Gateway Models Sync cadence)

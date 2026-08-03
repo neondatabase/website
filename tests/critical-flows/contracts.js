@@ -3,6 +3,7 @@ const DESTINATIONS = {
   docs: '/docs/introduction',
   login: 'https://console.neon.tech/login',
   signup: 'https://console.neon.tech/signup',
+  startupsApply: 'https://sites.google.com/databricks.com/startup-program-apply',
 };
 
 const HOME_LINK_CONTRACTS = [
@@ -174,56 +175,25 @@ const LEAD_FORM_CONTRACTS = [
       },
     },
   },
-  {
-    id: 'TC-LEAD-002',
-    key: 'startups',
-    name: 'Startups application',
-    priority: 'P1',
-    mode: 'submit',
-    policy: 'monitor',
-    pagePath: '/startups',
-    testId: 'startups-form',
-    submitText: 'Apply Now',
-    successText: 'Applied!',
-    fields: {
-      firstname: 'Dana',
-      lastname: 'Smith',
-      email: 'critical-flow-startup@example.com',
-      companyWebsite: 'https://example.com',
-      investor: 'Example Accelerator',
-    },
-    selects: {},
-    expectedEvents: [
-      {
-        name: 'identify',
-        properties: { email: 'critical-flow-startup@example.com' },
-      },
-      {
-        name: 'Startup Form Submitted',
-        properties: {
-          email: 'critical-flow-startup@example.com',
-          first_name: 'Dana',
-          last_name: 'Smith',
-          company_website: 'https://example.com',
-          investor: 'Example Accelerator',
-        },
-      },
-    ],
-    identifyFailureId: 'TC-LEAD-002-ERR-IDENTIFY',
-    validation: {
-      required: {
-        id: 'TC-LEAD-002-VAL-REQUIRED',
-        seedField: 'firstname',
-        errorCount: 4,
-        errorText: 'Required field',
-      },
-      invalidEmail: {
-        id: 'TC-LEAD-002-VAL-EMAIL',
-        errorText: 'Please enter a valid email',
-      },
-    },
-  },
 ];
+
+// The startups application no longer submits an inline form. The Apply Now CTA
+// links out to the external Google Sites application, so the contract checks
+// the destination instead of a submit flow.
+const STARTUPS_APPLY_CONTRACT = {
+  id: 'TC-LEAD-002',
+  key: 'startups-apply',
+  name: 'Startups application link',
+  priority: 'P1',
+  mode: 'navigate',
+  policy: 'monitor',
+  pagePath: '/startups',
+  containerSelector: '#startups-form',
+  linkText: 'Apply Now',
+  expectedHref: DESTINATIONS.startupsApply,
+  expectedTarget: '_blank',
+  expectedRel: 'noopener noreferrer',
+};
 
 const AGENT_FORM_CONTRACT = {
   id: 'TC-LEAD-003',
@@ -305,5 +275,6 @@ module.exports = {
   HOME_LINK_CONTRACTS,
   LEAD_FORM_CONTRACTS,
   PRICING_LINK_CONTRACTS,
+  STARTUPS_APPLY_CONTRACT,
   SUBSCRIPTION_CONTRACTS,
 };

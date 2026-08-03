@@ -141,7 +141,11 @@ const SCHEMAS = {
             },
             'service-doc': {
               type: 'array',
-              items: { type: 'object', required: ['href'], properties: { href: { type: 'string' } } },
+              items: {
+                type: 'object',
+                required: ['href'],
+                properties: { href: { type: 'string' } },
+              },
             },
           },
         },
@@ -175,7 +179,11 @@ const SCHEMAS = {
     required: ['specVersion', 'host', 'entries'],
     properties: {
       specVersion: { type: 'string' },
-      host: { type: 'object', required: ['identifier'], properties: { identifier: { type: 'string' } } },
+      host: {
+        type: 'object',
+        required: ['identifier'],
+        properties: { identifier: { type: 'string' } },
+      },
       entries: {
         type: 'array',
         minItems: 1,
@@ -225,7 +233,11 @@ const VALIDATORS = {
         sot.MCP_SERVER.authorizationServer
       )
     );
-    checks.push(payload.url && isUrl(payload.url) ? ok('url is a valid URL') : fail('url is a valid URL', payload.url));
+    checks.push(
+      payload.url && isUrl(payload.url)
+        ? ok('url is a valid URL')
+        : fail('url is a valid URL', payload.url)
+    );
     return checks;
   },
 
@@ -241,7 +253,11 @@ const VALIDATORS = {
       )
     );
     checks.push(
-      equalsCheck('service-doc href matches SoT docsUrl', link['service-doc']?.[0]?.href, sot.NEON_API.docsUrl)
+      equalsCheck(
+        'service-doc href matches SoT docsUrl',
+        link['service-doc']?.[0]?.href,
+        sot.NEON_API.docsUrl
+      )
     );
     return checks;
   },
@@ -253,10 +269,16 @@ const VALIDATORS = {
     for (const skill of payload.skills || []) {
       const skillPath = path.join(SKILLS_DIR, skill.name, 'SKILL.md');
       if (!fs.existsSync(skillPath)) {
-        checks.push(fail(`digest up to date: ${skill.name}`, `missing SKILL.md at ${path.relative(ROOT, skillPath)}`));
+        checks.push(
+          fail(
+            `digest up to date: ${skill.name}`,
+            `missing SKILL.md at ${path.relative(ROOT, skillPath)}`
+          )
+        );
         continue;
       }
-      const digest = 'sha256:' + crypto.createHash('sha256').update(fs.readFileSync(skillPath)).digest('hex');
+      const digest =
+        'sha256:' + crypto.createHash('sha256').update(fs.readFileSync(skillPath)).digest('hex');
       checks.push(
         digest === skill.digest
           ? ok(`digest up to date: ${skill.name}`)
@@ -271,7 +293,9 @@ const VALIDATORS = {
 
   'ai-catalog'(payload, entry, sot) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.aiCatalog, payload)];
-    const mcpEntry = (payload.entries || []).find((e) => e.type === 'application/mcp-server-card+json');
+    const mcpEntry = (payload.entries || []).find(
+      (e) => e.type === 'application/mcp-server-card+json'
+    );
     checks.push(
       mcpEntry
         ? equalsCheck('MCP entry url matches SoT cardUrl', mcpEntry.url, sot.MCP_SERVER.cardUrl)
@@ -312,7 +336,55 @@ const VALIDATORS = {
       } else if (res.status === 1) {
         checks.push(fail('in sync with models.dev', `catalog drift — ${output}`));
       } else {
-        checks.push(fail('in sync with models.dev', `sync check errored (exit ${res.status}) — ${output}`));
+        checks.push(
+          fail('in sync with models.dev', `sync check errored (exit ${res.status}) — ${output}`)
+        );
+      }
+    }
+    return checks;
+  },
+
+  // /models pairs each model with the code examples that work for it. Offline we can only
+  // check the committed capability data is well formed; the cross-endpoint comparison needs
+  // both endpoints live, so it runs via liveSync.
+  'models-rest'(payload, entry, sot, { live }) {
+    const checks = [];
+    const models = Array.isArray(payload?.models) ? payload.models : null;
+    checks.push(
+      models && models.length > 0
+        ? ok('capability data present', `${models.length} models probed ${payload.probedAt || '?'}`)
+        : fail('capability data present', 'capabilities.json has no models array')
+    );
+
+    if (models) {
+      const REQUIRED = ['id', 'chat', 'nativeDialect', 'webSearch', 'imageGeneration'];
+      const incomplete = models
+        .filter((m) => REQUIRED.some((k) => m[k] === undefined))
+        .map((m) => m.id || '(unnamed)');
+      checks.push(
+        incomplete.length === 0
+          ? ok('every model has complete capability data')
+          : fail('every model has complete capability data', `incomplete: ${incomplete.join(', ')}`)
+      );
+    }
+
+    if (live && entry.liveSync) {
+      const res = spawnSync('node', [path.join(ROOT, entry.liveSync), '--live', '--ci'], {
+        cwd: ROOT,
+        encoding: 'utf-8',
+      });
+      const output = `${res.stdout || ''}${res.stderr || ''}`.trim();
+      if (res.status === 0) {
+        checks.push(ok('core data matches /models.json', output.split('\n').pop()));
+      } else if (res.status === 1) {
+        checks.push(fail('core data matches /models.json', `endpoint drift — ${output}`));
+      } else {
+        checks.push(
+          fail(
+            'core data matches /models.json',
+            `sync check errored (exit ${res.status}) — ${output}`
+          )
+        );
       }
     }
     return checks;
@@ -321,8 +393,12 @@ const VALIDATORS = {
   'llms-txt'(payload, entry, sot, { live, liveBody }) {
     if (!live) return [ok('generator present (checked live)', entry.generator)];
     const checks = [];
-    checks.push(liveBody && liveBody.length > 0 ? ok('non-empty') : fail('non-empty', 'empty body'));
-    checks.push(/neon/i.test(liveBody || '') ? ok('mentions Neon') : fail('mentions Neon', 'no "Neon" found'));
+    checks.push(
+      liveBody && liveBody.length > 0 ? ok('non-empty') : fail('non-empty', 'empty body')
+    );
+    checks.push(
+      /neon/i.test(liveBody || '') ? ok('mentions Neon') : fail('mentions Neon', 'no "Neon" found')
+    );
     return checks;
   },
 
@@ -353,7 +429,10 @@ async function runEntry(entry, sot) {
     checks.push(
       src.includes(entry.builder)
         ? ok('route delegates to SoT builder', entry.builder)
-        : fail('route delegates to SoT builder', `${entry.routeFile} does not reference ${entry.builder}`)
+        : fail(
+            'route delegates to SoT builder',
+            `${entry.routeFile} does not reference ${entry.builder}`
+          )
     );
   }
 
@@ -377,7 +456,10 @@ async function runEntry(entry, sot) {
         checks.push(
           served.contentType.includes(entry.contentType.split(';')[0])
             ? ok('content-type', served.contentType)
-            : fail('content-type', `expected ${entry.contentType}, got ${served.contentType || '(none)'}`)
+            : fail(
+                'content-type',
+                `expected ${entry.contentType}, got ${served.contentType || '(none)'}`
+              )
         );
       }
     } catch (err) {
@@ -414,7 +496,9 @@ async function main() {
   }
 
   if (JSON_MODE) {
-    console.log(JSON.stringify({ mode: LIVE ? 'live' : 'offline', base: BASE_URL, results }, null, 2));
+    console.log(
+      JSON.stringify({ mode: LIVE ? 'live' : 'offline', base: BASE_URL, results }, null, 2)
+    );
     process.exit(results.every((r) => r.ok) ? 0 : 1);
   }
 
@@ -431,7 +515,9 @@ async function main() {
       totalChecks += 1;
       if (!c.ok) failedChecks += 1;
       const mark = c.ok ? '  ✓' : '  ✗';
-      console.log(`${mark} ${c.name}${c.detail && (!c.ok || c.detail !== true) ? `  ${c.detail}` : ''}`);
+      console.log(
+        `${mark} ${c.name}${c.detail && (!c.ok || c.detail !== true) ? `  ${c.detail}` : ''}`
+      );
     }
     if (!entryOk) {
       console.log(`      spec: ${entry.spec.name} → ${entry.spec.url}`);

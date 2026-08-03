@@ -416,10 +416,60 @@
       ]
     },
     {
+      "slug": "buckets",
+      "display": "Buckets",
+      "description": "Manage branch buckets and objects",
+      "groups": [
+        {
+          "label": "Buckets",
+          "slugs": [
+            "list-project-branch-buckets",
+            "create-project-branch-bucket",
+            "delete-project-branch-bucket"
+          ]
+        },
+        {
+          "label": "Objects",
+          "slugs": [
+            "list-project-branch-bucket-objects",
+            "get-project-branch-bucket-object",
+            "presign-project-branch-bucket-object",
+            "delete-project-branch-bucket-object",
+            "delete-project-branch-bucket-objects-by-prefix"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "storage",
+      "display": "Storage",
+      "description": "Inspect branch storage state"
+    },
+    {
+      "slug": "ai-gateway",
+      "display": "AI Gateway",
+      "description": "Retrieve branch AI Gateway endpoints"
+    },
+    {
+      "slug": "credentials",
+      "display": "Credentials",
+      "description": "Issue and revoke scoped branch credentials"
+    },
+    {
+      "slug": "functions",
+      "display": "Functions",
+      "description": "Manage branch functions and deployments"
+    },
+    {
+      "slug": "logs",
+      "display": "Logs",
+      "description": "Query logs emitted by services running on branches"
+    },
+    {
       "slug": "auth-legacy",
       "specName": "auth-legacy",
       "display": "Legacy Auth",
-      "description": null,
+      "description": "Deprecated Neon Auth endpoints; use the Auth endpoints instead",
       "groups": [
         {
           "label": "Integrations",
@@ -468,31 +518,6 @@
           ]
         }
       ]
-    },
-    {
-      "slug": "buckets",
-      "display": "Buckets",
-      "description": "Manage branch buckets and objects"
-    },
-    {
-      "slug": "storage",
-      "display": "Storage",
-      "description": "Inspect branch storage state"
-    },
-    {
-      "slug": "ai-gateway",
-      "display": "AI Gateway",
-      "description": "Retrieve branch AI Gateway endpoints"
-    },
-    {
-      "slug": "credentials",
-      "display": "Credentials",
-      "description": "Issue and revoke scoped branch credentials"
-    },
-    {
-      "slug": "functions",
-      "display": "Functions",
-      "description": "Manage branch functions and deployments"
     }
   ],
   "operationOverrides": {

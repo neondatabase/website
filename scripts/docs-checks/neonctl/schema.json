@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.36.0",
+  "neonctlVersion": "2.38.5",
   "binaries": [
     "neonctl",
     "neon"
@@ -15,6 +15,7 @@
     "api-key": {
       "type": "string",
       "describe": "Neon API key, authenticates without `neon auth`",
+      "default": "",
       "defaultText": "NEON_API_KEY environment variable"
     },
     "color": {
@@ -3020,7 +3021,7 @@
               "describe": "Set a branch's automatic snapshot schedule",
               "examples": [
                 {
-                  "command": "$0 snapshots schedule set --branch main --schedule '[{\"frequency\":\"hourly\"},{\"frequency\":\"daily\",\"hour\":3}]'",
+                  "command": "$0 snapshots schedule set --branch main --schedule '[{\"frequency\":\"weekly\",\"day\":1,\"hour\":2},{\"frequency\":\"daily\",\"hour\":3}]'",
                   "description": "A multi-entry schedule via JSON"
                 },
                 {

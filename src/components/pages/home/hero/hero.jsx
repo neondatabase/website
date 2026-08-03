@@ -26,8 +26,8 @@ const logos = [
 
 export const heroServiceItems = [
   {
-    title: 'Postgres Database',
-    description: 'Serverless Postgres that scales and branches with your app.',
+    title: 'Lakebase Postgres',
+    description: 'Serverless database that scales and branches with your app.',
     videoBase: 'postgres-database',
     aspectRatio: 'aspect-square',
     width: 512,
@@ -72,14 +72,14 @@ const Hero = () => (
     <Container className="relative z-30 pt-96 pb-2 xl:pt-54 lg:pt-52 md:px-5! md:pt-53" size="1600">
       <Link href="#backed-by-giants">
         <SectionLabel theme="white" icon="databricks">
-          A DATABRICKS COMPANY
+          NEON IS PART OF THE DATABRICKS PLATFORM
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-280 text-[72px] leading-dense tracking-tighter xl:max-w-215 xl:text-[64px] lg:max-w-180 lg:text-[52px] md:mt-4 md:text-[42px] sm:text-[32px]">
-        Neon is the Postgres backend
+      <h1 className="mt-5 max-w-280 text-[68px] leading-dense tracking-tighter xl:max-w-215 xl:text-[60px] lg:max-w-180 lg:text-[48px] md:mt-4 md:text-[42px] sm:text-[32px]">
+        The backend for apps and agents,
         <br />
-        designed for apps and agents.
+        built to scale on Lakebase Postgres.
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">

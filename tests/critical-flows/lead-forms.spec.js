@@ -1,6 +1,10 @@
 const { expect, test } = require('@playwright/test');
 
-const { AGENT_FORM_CONTRACT, LEAD_FORM_CONTRACTS } = require('./contracts');
+const {
+  AGENT_FORM_CONTRACT,
+  LEAD_FORM_CONTRACTS,
+  STARTUPS_APPLY_CONTRACT,
+} = require('./contracts');
 const {
   expectAnalyticsEvents,
   expectHealthyPage,
@@ -134,6 +138,23 @@ test(`[${LEAD_FORM_CONTRACTS[0].analyticsFailureId}] contact sales does not show
     contract.successText
   );
   await expectAnalyticsEvents(page, contract.expectedEvents);
+  await expectHealthyPage(applicationErrors);
+});
+
+test(`[${STARTUPS_APPLY_CONTRACT.id}] ${STARTUPS_APPLY_CONTRACT.name} points at the external application`, async ({
+  page,
+}) => {
+  const contract = STARTUPS_APPLY_CONTRACT;
+  const applicationErrors = await openCriticalPage(page, contract.pagePath);
+
+  const applyLink = page
+    .locator(contract.containerSelector)
+    .getByRole('link', { name: contract.linkText });
+
+  await expect(applyLink, `${contract.id}: ${contract.name} is missing`).toBeVisible();
+  await expect(applyLink).toHaveAttribute('href', contract.expectedHref);
+  await expect(applyLink).toHaveAttribute('target', contract.expectedTarget);
+  await expect(applyLink).toHaveAttribute('rel', contract.expectedRel);
   await expectHealthyPage(applicationErrors);
 });
 

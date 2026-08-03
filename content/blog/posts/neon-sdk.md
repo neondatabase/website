@@ -21,7 +21,7 @@ cover:
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/neon-sdk/cover.jpg
   alt: 'Blog cover graphic on a blue dotted background with the Neon logo, the headline "Introducing @neon/sdk: TypeScript client for the Neon API", and a wireframe toolbox illustration labeled "SDK module" and "all-in-one".'
-isFeatured: true
+isFeatured: false
 seo:
   title: "Introducing @neon/sdk, our new TypeScript client for the Neon API - Neon"
   description: >-

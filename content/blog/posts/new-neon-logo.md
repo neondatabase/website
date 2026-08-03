@@ -38,7 +38,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/new-neon-logo/image-9-1024x574-3ebd7b70.png)
 
-The logo is refreshed, but it’s still recognizably true to the elephant and N that we founded the company with. _Did you know there has always been an elephant hiding in it?_ This update helps bring our visual identity into the Databricks universe. Since joining Databricks, we’ve grown our amazingly talented team, leveled up the product, and most importantly: we’ve helped more than a million developers ship faster with Postgres. We’re proud to be a Databricks company and excited to continue growing together.
+The logo is refreshed, but it’s still recognizably true to the elephant and N that we founded the company with. _Did you know there has always been an elephant hiding in it?_ This update helps bring our visual identity into the Databricks universe. Since joining Databricks, we’ve grown our amazingly talented team, leveled up the product, and most importantly: we’ve helped more than a million developers ship faster with Postgres. We’re proud of Neon, now a part of Databricks, and excited to continue growing together.
 
 ## Use the new logo
 

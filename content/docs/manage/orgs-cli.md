@@ -7,7 +7,7 @@ summary: >-
   repeating `--org-id` on every command, set a persistent org context with
   `set-context`.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-28T21:59:28.499Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
@@ -64,6 +64,24 @@ You can include the `org-id` to apply the following subcommands specifically to 
 - [Create projects](/docs/cli/projects#create)
 
 See [Projects - CLI](/docs/cli/projects) to learn more.
+
+## Manage project access
+
+The CLI doesn't have a dedicated command for [per-project permissions](/docs/manage/user-permissions) yet. To manage who can access a project from the CLI, use the [`neon api`](/docs/cli/api) command, which sends an authenticated request to any Neon API route.
+
+For example, to set an organization member's role on a project, call the member-role endpoint with the role you want to grant (`viewer`, `editor`, or `admin`). You send the role in lowercase; the response reports it as an uppercase permission level (`VIEWER`, `EDITOR`, or `ADMIN`):
+
+```bash
+neon api /projects/{project_id}/members/{member_id}/role -X PUT -F role=editor
+```
+
+To remove a member's explicit role on a project (they keep whatever their organization role grants by default):
+
+```bash
+neon api /projects/{project_id}/members/{member_id}/role -X DELETE
+```
+
+The [API key's permissions](/docs/manage/api-keys#types-of-api-keys) determine what these requests can do: only organization Admins can manage project access. For the full list of project-access routes and their fields, see the [Neon API reference](/docs/reference/api).
 
 ## Setting Organization Context
 
