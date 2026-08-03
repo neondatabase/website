@@ -30,7 +30,7 @@ That idea became what is now Lakebase Postgres, built on the lakebase architectu
 
 ## What makes Neon different
 
-### Lakebase Postgres, built from first principles
+### Postgres from first principles
 
 Lakebase Postgres isn’t “Postgres-like”: it is Postgres, with full compatibility across ORMs, extensions, and frameworks. But its defining characteristic is the lakebase architecture, which translates into serverless behavior that isn’t layered on but foundational to the system.
 
@@ -43,7 +43,7 @@ Traditional Postgres providers scale by moving VMs up and down, placing instance
 
 ### Developer-first features that fit modern workflows
 
-The lakebase architecture lets Lakebase Postgres behave the way developers expect modern infrastructure to behave: instant, intuitive, cost-efficient, and safe to experiment with. This modernizes workflows that, in other managed Postgres services, still feel decades old.
+The lakebase architecture lets Postgres behave the way developers expect modern infrastructure to behave: instant, intuitive, cost-efficient, and safe to experiment with. This modernizes workflows that, in other managed Postgres services, still feel decades old.
 
 - **Scale-to-zero.** Inactive databases shut down automatically to save costs. Ideal for side projects, development environments, and agent-generated apps.
 - **Autoscaling.** For your production database, Lakebase Postgres resizes your compute up and down automatically based on traffic. Your performance stays steady without capacity planning.
