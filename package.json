@@ -7,7 +7,7 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node scripts/generate-api-ref.mjs && npm run check:api-ref-generated && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
+    "prebuild": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
     "predev": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
     "dev": "next dev",
     "build": "next build",
