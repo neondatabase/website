@@ -1,7 +1,7 @@
 ---
 title: 'Embedded Postgres for Platforms'
 subtitle: >-
-  Provision dedicated Lakebase Postgres databases for your users: instantly,
+  Provision dedicated Postgres databases for your users: instantly,
   affordably, and at scale
 updatedOn: '2025-06-17T09:00:00.000Z'
 ---
