@@ -14,12 +14,12 @@ image: '/images/social-previews/use-cases/dev-test.jpg'
 
 ![Dev/Test branching](/use-cases/dev-test-branching.jpg)
 
-<Admonition type="note" title="About Neon today">
-This page focuses on Neon’s database for dev and test: [Lakebase Postgres](/docs/get-started/why-neon) and its branching model. Neon is a complete set of cloud backend primitives built around Lakebase Postgres (Auth, Object Storage, Functions, Data API, and AI Gateway). For most teams starting here, Lakebase Postgres and branches are enough. When a preview app needs more than a database, those other primitives sit on the same project and branch lifecycle. See [Lakebase architecture](/docs/introduction/architecture-overview) and [Our DX principles](/docs/get-started/dev-experience).
+<Admonition type="note" title="You can branch complete backends on Neon">
+This page mainly focuses on Neon's Postgres database and its branching capabilities ([Lakebase Postgres](/docs/get-started/why-neon)), but Neon now offers a [complete set of cloud backend primitives that branch](https://neon.com/blog/neon-backend-is-beta): Auth, Object Storage, Functions, Data API, and AI Gateway.
 </Admonition>
 
 <Admonition type="note" title="TL;DR">
-Database branching is a game-changer for dev/test environments: there's no need to manage seed data, keep environments in sync, or wait for instances to be available. What you get: more developer velocity with +75% less costs.
+Branching is a game-changer for dev/test environments. There's no need to manage seed data, keep environments in sync, or wait for instances to be available. What you get: more developer velocity with +75% less costs.
 - You can use Neon for your ephemeral environments even when production lives somewhere else:  
   - You keep your production DB in your current Postgres
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily)
