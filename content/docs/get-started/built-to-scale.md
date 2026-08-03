@@ -2,9 +2,11 @@
 title: Built to scale
 subtitle: Neon supports you from prototype to scale-up
 summary: >-
-  The Neon backend fits every growth stage without requiring an architecture
-  change: a free plan for side projects, autoscaling and copy-on-write branching
-  for startup teams, and API-driven fleet management for scale-ups.
+  Neon fits every growth stage without requiring an architecture change: a free
+  plan for side projects, autoscaling and copy-on-write branching for startup
+  teams, and API-driven fleet management for scale-ups. Use this page when
+  matching Neon features to your current growth stage, before selecting a plan
+  or designing a multi-tenant architecture.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
@@ -12,27 +14,30 @@ redirectFrom:
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-The Neon backend fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your architecture along the way.
+Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
 
 ## Stage 1: Side projects
 
-**A feature-complete Postgres backend via a free plan**
+**A full backend on the Free plan**
 
-When you’re looking for a free plan to run Postgres, what you want is simplicity and enough room to build. Neon’s Free Plan abstracts most database configuration work, delivers real-world performance, and gives you access to branching and autoscaling - and you can deploy not only a Postgres database but Managed Better Auth, Object Storage for your files, and compute Functions.
+When you’re looking for a free plan to run Postgres, what you want is simplicity and enough room to build. Neon’s Free plan abstracts most database configuration work, delivers real-world performance, and gives you access to branching and autoscaling.
 
-- You get a [Free Plan with real resources](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), including up to 100 projects
-- You get to run Lakebase Postgres with compute endpoints of up to 2 CU, and 0.5 GB of storage per project - enough to build and test real applications
+- You get a [Free plan with real resources](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), including up to 100 projects, computes with up to 2 CU, and 0.5 GB of storage per project - enough to build and test real applications
 - You get a Postgres connection string in a second so you can start building right away
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) ensures idle databases don’t eat up your compute limits: only active time counts
 - Standard Postgres compatibility means you can plug Lakebase Postgres into [any framework, ORM, or tool that speaks Postgres](https://neon.com/docs/get-started/frameworks)
 - A [broad catalog of Postgres extensions](https://neon.com/docs/extensions/pg-extensions) unlocks a Postgres-for-everything workflow
-- You get access to an entire backend via [Managed Better Auth](https://neon.com/docs/auth/overview), [Neon Object Storage](https://neon.com/docs/storage/overview), and [Functions](https://neon.com/docs/compute/functions/overview)
+- Beyond the database, you can deploy a full backend with [Managed Better Auth](https://neon.com/docs/auth/overview), [Neon Object Storage](https://neon.com/docs/storage/overview) for your files, and [Neon Functions](https://neon.com/docs/compute/functions/overview)
+
+<Admonition type="info" title="Region and access requirements">
+Object Storage and Functions are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use them. Lakebase Postgres and Managed Better Auth work in any region.
+</Admonition>
 
 ## Stage 2: Startups
 
 **Build and iterate fast**
 
-As a project becomes a product, small teams need to ship quickly and support real users. Neon allows these teams to build fast via coding agents without compromising on scalability or reliability, backed by the Lakebase Postgres features:
+As a project becomes a product, small teams need to ship quickly and support real users. Neon gives these teams a fast building experience, including from coding agents, without compromising on performance and reliability.
 
 <CTA title="Production checklist" description="Before launching your product, go through this checklist to make sure your database has the right configuration to support your end users." buttonText="View checklist" buttonUrl="/docs/get-started/production-checklist" />
 
@@ -62,16 +67,16 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 
 ### Multi-tenancy
 
-- Deploying a [database-per-tenant setup](https://neon.com/use-cases/database-per-tenant) in Lakebase Postgres gives each customer a dedicated project, providing strong isolation, eliminating noisy neighbors, and ensuring consistent performance
+- A [database-per-tenant setup](https://neon.com/use-cases/database-per-tenant) gives each customer a dedicated Neon project, providing strong isolation, eliminating noisy neighbors, and ensuring consistent performance
 - [API-first tenant management](https://neon.com/blog/provision-postgres-neon-api) enables programmatic provisioning, configuration, scaling, recovery, and deletion of tenant databases, making it practical for small teams to manage thousands of tenants
 
 ### Fleet management for platforms and agents
 
-- Instant, API-driven provisioning lets you deploy a full Neon backend (Lakebase Postgres and optional primitives) as part of your [platform](https://neon.com/docs/guides/embedded-postgres) or [agent](https://neon.com/docs/guides/ai-agent-integration)
+- Instant, API-driven provisioning lets you deploy a full Neon backend, Lakebase Postgres plus the primitives you need, as part of your [platform](https://neon.com/docs/guides/embedded-postgres) or [agent](https://neon.com/docs/guides/ai-agent-integration)
 - The fully embedded experience keeps Neon invisible to your end users, with no third-party logins or external configuration required as part of your product workflow
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
 - A mature API exposes [fleet management and cost-control capabilities](https://neon.com/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
 - You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](https://neon.com/blog/promoting-postgres-changes-safely-production)
-- Backend primitives such as [Managed Better Auth](https://neon.com/docs/auth/overview), [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), the [Data API](https://neon.com/docs/data-api/get-started), and the [AI Gateway](https://neon.com/docs/ai-gateway/overview) make it easy to hook full-stack applications out of the box
+- Backend primitives such as [Managed Better Auth](https://neon.com/docs/auth/overview), [Neon Object Storage](https://neon.com/docs/storage/overview), [Neon Functions](https://neon.com/docs/compute/functions/overview), the PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started), and the [AI Gateway](https://neon.com/docs/ai-gateway/overview) let you hook up full-stack applications by default
 
 <CTA title="Agent Plan" description="If you’re building a full-stack agent platform, apply to our Agent Plan for special pricing, resource limits, and assistance." buttonText="Check it out" buttonUrl="/programs/agents" />
