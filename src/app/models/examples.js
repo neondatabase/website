@@ -270,6 +270,29 @@ console.log(sources.filter((source) => source.sourceType === "url").map((source)
 `,
   }),
   tsExample({
+    id: 'mastra',
+    title: 'Mastra',
+    dependencies: ['@mastra/core', ...AI_SDK_DEPS],
+    endpoint: '/openai/v1 (via provider)',
+    // Mastra has no search API of its own. It passes the provider-executed tool through, and its
+    // own webSearchTool cannot be used here: that one infers the provider from the model id prefix
+    // and rejects neon/… with WEB_SEARCH_UNSUPPORTED_PROVIDER.
+    content: `import { Agent } from "@mastra/core/agent";
+import { neon } from "@neondatabase/ai-sdk-provider";
+
+const agent = new Agent({
+  id: "neon-demo",
+  name: "neon-demo",
+  instructions: "Use web search when you need current information.",
+  model: "neon/${model}",
+  tools: { web_search: neon.tools.webSearch({}) },
+});
+
+const { text } = await agent.generate("${SEARCH_PROMPT}");
+console.log(text);
+`,
+  }),
+  tsExample({
     id: 'typescript',
     title: 'TypeScript',
     dependencies: ['openai'],
@@ -327,8 +350,9 @@ print(response.output_text)
 
 /* ------------------------------------------------------ image generation */
 
-// Every variant streams. A generated image is ~3 MB of base64 and the gateway rejects buffered
-// responses over 655,360 bytes, which is also why there is no cURL variant.
+// A generated image is ~3 MB of base64 and the gateway rejects buffered responses over 655,360
+// bytes, which is why the SDK variants stream and why there is no cURL variant. Mastra is the
+// exception: its agent call returns once, with the base64 whole.
 const imageExamples = (model) => [
   tsExample({
     id: 'ai-sdk',
@@ -350,6 +374,29 @@ for await (const _ of result.textStream) {}
 
 const images = (await result.toolResults).filter((r) => r.toolName === "image_generation");
 console.log(images.length);
+`,
+  }),
+  tsExample({
+    id: 'mastra',
+    title: 'Mastra',
+    dependencies: ['@mastra/core', ...AI_SDK_DEPS],
+    endpoint: '/openai/v1 (via provider)',
+    // Mastra returns once with the base64 whole, so it is the one variant that does not iterate a
+    // stream. Its tool results carry an envelope the AI SDK does not have, hence payload.*.
+    content: `import { Agent } from "@mastra/core/agent";
+import { neon } from "@neondatabase/ai-sdk-provider";
+
+const agent = new Agent({
+  id: "neon-demo",
+  name: "neon-demo",
+  instructions: "Generate the image the user asks for.",
+  model: "neon/${model}",
+  tools: { image_generation: neon.tools.imageGeneration({ outputFormat: "jpeg" }) },
+});
+
+const { toolResults } = await agent.generate("${IMAGE_PROMPT}");
+const images = toolResults.filter((r) => r.payload.toolName === "image_generation");
+console.log(images.map((r) => r.payload.result.result.length));
 `,
   }),
   tsExample({

@@ -119,7 +119,20 @@ describe('GET /models', () => {
       const { model } = await body(res);
 
       expect(model.unsupported).toBeUndefined();
-      expect(model.examples.map((e) => e.id)).toEqual(['ai-sdk', 'typescript', 'python']);
+      expect(model.examples.map((e) => e.id)).toEqual(['ai-sdk', 'mastra', 'typescript', 'python']);
+    });
+
+    it('carries the provider-executed tool in the Mastra tool examples', async () => {
+      for (const useCase of ['image-generation', 'web-search']) {
+        const res = await GET(request(`?model=gpt-5-nano&use_case=${useCase}`));
+        const { model } = await body(res);
+        const mastra = model.examples.find((e) => e.id === 'mastra');
+
+        // The tool factory lives in the provider package even though the model is a router string.
+        expect(mastra.dependencies).toContain('@neondatabase/ai-sdk-provider');
+        expect(mastra.files[0].content).toContain('model: "neon/gpt-5-nano"');
+        expect(mastra.files[0].content).toContain('neon.tools.');
+      }
     });
   });
 
