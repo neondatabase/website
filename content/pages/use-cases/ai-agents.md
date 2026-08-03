@@ -11,8 +11,6 @@ updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
-<MegaLink tag="80% of Neon databases are deployed by agents." title="Platforms like Replit Agent run their backend on Neon because it fits how agents operate: Lakebase Postgres that’s instant, branchable, and invisible to end users, with the rest of the Neon primitives available when apps need more than a database." url="https://neon.com/use-cases/ai-agents#lakebase-postgres" />
-
 <LogosSection containerClassName='py-3' logos={[
 'anything',
 'replit',
