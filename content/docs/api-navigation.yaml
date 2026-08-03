@@ -119,9 +119,6 @@
     - title: "Set branch as default"
       slug: reference/api/branches/set-default-project-branch
       method: POST
-    - title: "Recover a deleted branch"
-      slug: reference/api/branches/recover-project-branch
-      method: POST
     - title: "Finalize branch restore from snapshot"
       slug: reference/api/branches/finalize-restore-branch
       method: POST
