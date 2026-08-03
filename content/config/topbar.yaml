@@ -1,4 +1,4 @@
-text: 'How CommSync runs Lakebase Search for text, vector, and hybrid search - with 1000x latency improvement vs cold-start GIN'
+text: 'Neon now has per-project permissions: give agents and developers exactly the right access'
 link:
-  url: 'https://neon.com/blog/commsync-runs-text-vector-and-hybrid-search-on-postgres-with-lakebase-search'
+  url: 'https://neon.com/blog/neon-now-has-per-project-permissions'
   target: '_blank'
