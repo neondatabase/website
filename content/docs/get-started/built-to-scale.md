@@ -4,9 +4,7 @@ subtitle: Neon supports you from prototype to scale-up
 summary: >-
   Neon fits every growth stage without requiring an architecture change: a free
   plan for side projects, autoscaling and copy-on-write branching for startup
-  teams, and API-driven fleet management for scale-ups. Use this page when
-  matching Neon features to your current growth stage, before selecting a plan
-  or designing a multi-tenant architecture.
+  teams, and API-driven fleet management for scale-ups.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
@@ -14,30 +12,26 @@ redirectFrom:
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
+Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your architecture along the way.
 
 ## Stage 1: Side projects
 
-**A full backend on the Free plan**
+**A full Postgres backend on the Free plan**
 
-When you’re looking for a free plan to run Postgres, what you want is simplicity and enough room to build. Neon’s Free plan abstracts most database configuration work, delivers real-world performance, and gives you access to branching and autoscaling.
+When you’re looking for a free plan to run Postgres, what you want is simplicity and enough room to build. Neon’s Free plan abstracts most database configuration work, delivers real-world performance, and gives you access to branching and autoscaling - and you can deploy not only a Postgres database but Managed Better Auth, Object Storage for your files, and Functions.
 
 - You get a [Free plan with real resources](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), including up to 100 projects, computes with up to 2 CU, and 0.5 GB of storage per project - enough to build and test real applications
 - You get a Postgres connection string in a second so you can start building right away
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) ensures idle databases don’t eat up your compute limits: only active time counts
 - Standard Postgres compatibility means you can plug Lakebase Postgres into [any framework, ORM, or tool that speaks Postgres](https://neon.com/docs/get-started/frameworks)
 - A [broad catalog of Postgres extensions](https://neon.com/docs/extensions/pg-extensions) unlocks a Postgres-for-everything workflow
-- Beyond the database, you can deploy a full backend with [Managed Better Auth](https://neon.com/docs/auth/overview), [Neon Object Storage](https://neon.com/docs/storage/overview) for your files, and [Neon Functions](https://neon.com/docs/compute/functions/overview)
-
-<Admonition type="info" title="Region and access requirements">
-Object Storage and Functions are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so create your project there to use them. Lakebase Postgres and Managed Better Auth work in any region.
-</Admonition>
+- You get access to an entire backend via [Managed Better Auth](https://neon.com/docs/auth/overview), [Neon Object Storage](https://neon.com/docs/storage/overview), and [Neon Functions](https://neon.com/docs/compute/functions/overview)
 
 ## Stage 2: Startups
 
 **Build and iterate fast**
 
-As a project becomes a product, small teams need to ship quickly and support real users. Neon gives these teams a fast building experience, including from coding agents, without compromising on performance and reliability.
+As a project becomes a product, small teams need to ship quickly and support real users. Neon allows these teams to build fast via coding agents without compromising on scalability or reliability, backed by the Lakebase Postgres features:
 
 <CTA title="Production checklist" description="Before launching your product, go through this checklist to make sure your database has the right configuration to support your end users." buttonText="View checklist" buttonUrl="/docs/get-started/production-checklist" />
 
