@@ -142,7 +142,8 @@ PostgreSQL has a sophisticated [syntax for window function call](https://www.pos
 ```sql
 window_function(arg1, arg2,..) OVER (
    [PARTITION BY partition_expression]
-   [ORDER BY sort_expression [ASC | DESC] [NULLS {FIRST | LAST }])
+   [ORDER BY sort_expression [ASC | DESC] [NULLS {FIRST | LAST }]
+   [frame_clause])
 ```
 
 In this syntax:
