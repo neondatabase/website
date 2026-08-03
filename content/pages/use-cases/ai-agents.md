@@ -9,7 +9,7 @@ updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
-<MegaLink tag="80% of Neon databases are deployed by agents." title="Platforms like Replit Agent run their backend on Neon because it fits how agents operate: Postgres that’s instant, branchable, and invisible to end users, with the rest of the Neon primitives available when apps need more than a database." url="https://neon.com/use-cases/ai-agents#lakebase-postgres-api-first" />
+<MegaLink tag="80% of Neon databases are deployed by agents." title="Platforms like Replit Agent run their backend on Neon because it fits how agents operate: instant to deploy, branchable, serverless, and invisible to users." url="https://neon.com/use-cases/ai-agents#lakebase-postgres-api-first" />
 
 <LogosSection containerClassName='py-3' logos={[
 'anything',
@@ -33,7 +33,7 @@ Neon is a complete set of cloud backend primitives built around Lakebase Postgre
 Agents get a serverless Postgres engine built on separated compute and storage. It provisions instantly, scales automatically, and idles to zero when not in use - a fit for the bursty, on-demand workloads that agents create.
 
 **With composable primitives for full-stack backends.**
-Around Lakebase Postgres, Neon includes [Managed Better Auth](https://neon.com/docs/auth/overview), a PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started), [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), and an [AI Gateway](https://neon.com/docs/ai-gateway/overview). Agents and developers can assemble complete backends without stitching multiple vendors together, and adopt only the pieces each generated app needs.
+Neon also includes [Managed Better Auth](https://neon.com/docs/auth/overview), a PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started), [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), and an [AI Gateway](https://neon.com/docs/ai-gateway/overview). Agents and developers can assemble complete backends without stitching multiple vendors together, and adopt only the pieces each generated app needs.
 
 **All API-first and programmable.**
 Every capability - provisioning, quotas, branching, and fleet management - is exposed through the Neon API, giving developers and agents precise control over their environments and usage at scale.
