@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-08-03T18:19:06.540Z'
+updatedOn: '2026-08-03T18:51:52.937Z'
 ---
 
 ## Our mission
@@ -28,9 +28,9 @@ That idea became what is now Lakebase Postgres, built on the lakebase architectu
   In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Our mission stayed the same. Lakebase Postgres is also available on Databricks, as [Lakebase](https://www.databricks.com/product/lakebase). Learn more in [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
-## What makes Lakebase Postgres different
+## What makes Neon different
 
-### Built from first principles
+### Lakebase Postgres, built from first principles
 
 Lakebase Postgres isn’t “Postgres-like”: it is Postgres, with full compatibility across ORMs, extensions, and frameworks. But its defining characteristic is the lakebase architecture, which translates into serverless behavior that isn’t layered on but foundational to the system.
 
