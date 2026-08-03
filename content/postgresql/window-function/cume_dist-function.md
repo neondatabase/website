@@ -145,6 +145,6 @@ Here is the output:
 In this example:
 
 - The `PARTITION BY`clause divided the rows into two partitions by the year 2018 and 2019\.
-- The `ORDER BY` clause sorted sales amount of every employee in each partition from high to low to which the `CUME_DIST()` function is applied.
+- The `ORDER BY` clause sorted sales amount of every employee in each partition from low to high to which the `CUME_DIST()` function is applied.
 
 In this tutorial, you have learned how to use the PostgreSQL `CUME_DIST()` function to calculate the cumulative distribution of a value in a group of values.
