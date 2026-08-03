@@ -1,7 +1,12 @@
 ---
 title: Neon for Development and Testing
-subtitle: Boost developer productivity with Neon—a flexible development sandbox for running non-production workloads.
-summary: Covers the setup of Neon as a flexible development sandbox for running non-production workloads, enabling efficient database branching and streamlined workflows for development and testing environments.
+subtitle: >-
+  Boost developer productivity with Neon, a flexible
+  development sandbox for running non-production workloads.
+summary: >-
+  Use Neon’s Lakebase Postgres as a flexible development sandbox for
+  non-production workloads: database branching, scale-to-zero, and streamlined
+  workflows for development and testing environments.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/dev-test.jpg'
@@ -9,12 +14,16 @@ image: '/images/social-previews/use-cases/dev-test.jpg'
 
 ![Dev/Test branching](/use-cases/dev-test-branching.jpg)
 
+<Admonition type="note" title="About Neon today">
+This page focuses on Neon’s database for dev and test: [Lakebase Postgres](/docs/get-started/why-neon) and its branching model. Neon is a complete set of cloud backend primitives built around Lakebase Postgres (Auth, Object Storage, Functions, Data API, and AI Gateway). For most teams starting here, Lakebase Postgres and branches are enough. When a preview app needs more than a database, those other primitives sit on the same project and branch lifecycle. See [Lakebase architecture](/docs/introduction/architecture-overview) and [Our DX principles](/docs/get-started/dev-experience).
+</Admonition>
+
 <Admonition type="note" title="TL;DR">
 Database branching is a game-changer for dev/test environments: there's no need to manage seed data, keep environments in sync, or wait for instances to be available. What you get: more developer velocity with +75% less costs.
 - You can use Neon for your ephemeral environments even when production lives somewhere else:  
   - You keep your production DB in your current Postgres
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily)
-  - To build / test / debug in Neon
+  - To build / test / debug against Lakebase Postgres on Neon
   - Once the changes are tested, you apply them back to prod
 Try this workflow in Neon right away. You can follow the steps [in this guide](/docs/use-cases/dev-test) to set things up.
 </Admonition>
@@ -92,18 +101,18 @@ link="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads
 
 </QuoteBlocksWrapper>
 
-We get it—migrating a production database is a big project, but you can still improve your non-pod experience by moving your dev/test environments to Neon.
+We get it: migrating a production database is a big project, but you can still improve your non-prod experience by moving your dev/test environments to Neon.
 
 ### Why should I move my dev databases to Neon?
 
-Neon is a Postgres provider that offers a much more modern developer experience than databases like RDS. We’ve built a serverless platform for Postgres focused on helping you ship faster instead of being held back by database management. As the cherry on top, you’ll save money.
+Neon gives you Lakebase Postgres with a much more modern developer experience than databases like RDS. Lakebase Postgres is serverless and built on the [lakebase architecture](/docs/introduction/architecture-overview), focused on helping you ship faster instead of being held back by database management. As the cherry on top, you’ll save money.
 
 ### Why it’s faster (and more affordable) to do dev/test in Neon?
 
-1. **Instant provisioning**. In Neon, it takes seconds to spin up new Postgres instances. Developers can start coding and testing immediately, no waiting time.
-2. **Database branching for ephemeral environments**. Neon's copy-on-write branching allows devs to create full copies of their testing dataset instantly and without consuming extra storage. This eliminates the operational load that comes with keeping testing data in sync across environments: In Neon, you can sync data with parent in one click. Branches are also extremely affordable.
+1. **Instant provisioning**. In Neon, it takes seconds to spin up new Lakebase Postgres instances. Developers can start coding and testing immediately, no waiting time.
+2. **Database branching for ephemeral environments**. Neon’s copy-on-write branching lets you create full copies of your testing dataset instantly and without consuming extra storage. This eliminates the operational load that comes with keeping testing data in sync across environments: you can sync data with the parent in one click. Branches are also extremely affordable.
 3. **Non-prod environments are automatically paused when unused**. If a database branch is idle, Neon pauses it automatically to save costs (and management work).
-4. **Intuitive DX with CI/CD integration**. Neon comes with a modern interface and APIs (no need to waste time navigating AWS obscurities). You can add Neon to your CI/CD pipelines to automate branch creation /deletion.
+4. **Intuitive DX with CI/CD integration**. Neon comes with a modern interface and APIs (no need to waste time navigating AWS obscurities). You can add Neon to your CI/CD pipelines to automate branch creation and deletion.
 
 ![Ephemeral environments in Neon](/use-cases/ephemeral-environments.jpg)
 
@@ -114,11 +123,11 @@ Here's how you'll go about it:
 1. **Set up a single Neon Project for dev/test**. Many non-prod instances can be substituted by a single Neon project.
 2. **Sync testing data to the production branch**. Load data from your staging database / testing data into the production branch within the Neon project. This production branch acts as the primary source for all dev/test environments, and it's the only place you need to update with new data or schema changes.
 3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the production branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the production branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment.
-4. **Automatic branch cleanup and scale to zero**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon's scale to zero automatically pauses these environments when unused, so you don't have to worry too much about them.
+4. **Automatic branch cleanup and scale to zero**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon’s scale to zero automatically pauses these environments when unused, so you don't have to worry too much about them.
 
 ### How much cost savings have you seen vs other serverless databases?
 
-By leveraging Neon's shared storage and compute autoscaling, it’s not rare to see **customers lowering their non-production database costs by 75% or more**. You only pay for the compute you actually use—no more bloating in your bill. The same goes for data redundancies—they’re also avoided.
+By leveraging Neon’s shared storage and compute autoscaling, it’s not rare to see **customers lowering their non-production database costs by 75% or more**. You only pay for the compute you actually use: no more bloating in your bill. The same goes for data redundancies: they’re also avoided.
 
 ### Show me a real use case example
 
@@ -210,7 +219,7 @@ textSize="md"
 
 ### Can Neon also help lower the costs of my production database?
 
-Yes. Overprovisioning is a big problem—we see this daily while talking to customers. If you suspect this is you, Neon can help: [autoscaling](/docs/introduction/autoscaling) is a powerful weapon against overprovisioning and the unnecessarily high costs it causes for production databases. [Read more about it here](/blog/neon-autoscaling-is-generally-available#why-autoscaling).\*\*
+Yes. Overprovisioning is a big problem: we see this daily while talking to customers. If you suspect this is you, Neon can help: [autoscaling](/docs/introduction/autoscaling) on Lakebase Postgres is a powerful weapon against overprovisioning and the unnecessarily high costs it causes for production databases. [Read more about it here](/blog/neon-autoscaling-is-generally-available#why-autoscaling).
 
 <QuoteBlocksWrapper>
 
