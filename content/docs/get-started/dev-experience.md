@@ -99,7 +99,7 @@ When your database keeps a complete, accessible record of its past, developers c
 
 ### Branching-first
 
-Modern software development is built around iteration, but most database setups are still built around a single mutable state. Lakebase Postgres takes a different approach: instead of treating a database as a static resource that must be copied over and over, it treats the database as a versioned system using short-lived [branches](https://neon.com/docs/introduction/branching).
+Modern software development is built around iteration, but most database setups are still built around a single mutable state. Neon takes a different approach: instead of treating a database as a static resource that must be copied over and over, Lakebase Postgres treats the database as a versioned system using short-lived [branches](https://neon.com/docs/introduction/branching).
 
 **Always lightweight**
 
