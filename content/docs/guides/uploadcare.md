@@ -10,7 +10,7 @@ summary: >-
   server and a Python Flask server, both writing to an uploadcare_files table
   with optional Row Level Security.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T04:41:00.271Z'
 ---
 
 [Uploadcare](https://uploadcare.com/) provides a cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
@@ -29,7 +29,7 @@ This guide demonstrates how to integrate Uploadcare with Lakebase Postgres by st
 
 ## Create a Lakebase Postgres project
 
-1. Navigate to the Neon Console to create a new Lakebase Postgres project.
+1. Navigate to the Neon Console to create a new project.
 2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an Uploadcare account and project

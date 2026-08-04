@@ -13,7 +13,7 @@ summary: >-
   active while Bemi is connected, which prevents scale-to-zero.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T04:41:00.271Z'
 ---
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
@@ -56,7 +56,7 @@ wal_level
 logical
 ```
 
-## Connect your Neon database to Bemi
+## Connect your database to Bemi
 
 The following instructions assume you are connecting with a Postgres role created via the console, API, or CLI. These roles are automatically granted membership in a `neon_superuser` group, which has the Postgres `REPLICATION` privilege. The role you use to connect to Bemi requires this privilege. If you prefer to create a dedicated read-only role for use with Bemi, see [Use a read-only Postgres role for Bemi](#use-a-read-only-postgres-role-for-bemi).
 

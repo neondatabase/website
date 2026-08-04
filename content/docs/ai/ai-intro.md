@@ -13,12 +13,12 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/ai-app-build
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T04:41:00.271Z'
 ---
 
 Build AI applications and agents on Neon. This guide collects resources for AI workloads: core concepts, starter applications, framework integrations, and deployment guides. Use them to build applications like RAG chatbots, semantic search engines, or custom AI tools.
 
-<CTA title="Start building AI apps with Neon" description="Sign up for Lakebase Postgres and jumpstart your AI application with our starter apps and resources." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Start building AI apps with Neon" description="Sign up for Lakebase Postgres on Neon and jumpstart your AI application with our starter apps and resources." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 ## Getting started
 
