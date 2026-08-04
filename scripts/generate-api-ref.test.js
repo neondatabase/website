@@ -24,6 +24,9 @@ import {
   descriptionToHtml,
   appendCliPositionals,
   buildCliFlags,
+  indexBodyFieldPaths,
+  assertGlobalFlagsCovered,
+  findOpsWithNoApiMappings,
   resolveCliPositionals,
   main,
   buildOperationData,
@@ -1122,25 +1125,265 @@ describe('buildCliFlags', () => {
     },
   };
 
+  // Mirrors POST /projects: nested body with `name` at two depths.
+  const bodyProperties = {
+    project: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        settings: { type: 'object', properties: { hipaa: { type: 'boolean' } } },
+        branch: { type: 'object', properties: { name: { type: 'string' } } },
+      },
+    },
+  };
+
   it('sets apiEquiv when a CLI flag maps to an API parameter', () => {
     const paramProps = [{ name: 'org_id', in: 'query' }];
     const flags = buildCliFlags('neon projects list', cliSchema, paramProps);
     const orgFlag = flags.find((f) => f.name === 'org-id');
     expect(orgFlag.apiEquiv).toBe('org_id');
+    expect(orgFlag.apiEquivIn).toBe('parameter');
   });
 
-  it('does not set apiEquiv when a CLI flag is only a request-body field', () => {
-    const paramProps = [];
-    const flags = buildCliFlags('neon projects create', cliSchema, paramProps);
+  it('maps a CLI flag to a nested request-body field by dot path', () => {
+    const flags = buildCliFlags('neon projects create', cliSchema, [], bodyProperties);
+    const nameFlag = flags.find((f) => f.name === 'name');
+    expect(nameFlag.apiEquiv).toBe('project.name');
+    expect(nameFlag.apiEquivIn).toBe('body');
+  });
+
+  it('prefers an API parameter over a body field of the same name', () => {
+    const paramProps = [{ name: 'name', in: 'query' }];
+    const flags = buildCliFlags('neon projects create', cliSchema, paramProps, bodyProperties);
+    const nameFlag = flags.find((f) => f.name === 'name');
+    expect(nameFlag.apiEquiv).toBe('name');
+    expect(nameFlag.apiEquivIn).toBe('parameter');
+  });
+
+  it('sets no mapping when the flag matches neither a parameter nor a body field', () => {
+    const flags = buildCliFlags('neon projects create', cliSchema, [], bodyProperties);
     const orgFlag = flags.find((f) => f.name === 'org-id');
     expect(orgFlag.apiEquiv).toBeUndefined();
+    expect(orgFlag.apiEquivIn).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// `--name` mapping regression table
+// ---------------------------------------------------------------------------
+//
+// `--name` means a different thing on every command, and the leaf-name
+// heuristic in buildCliFlags only agrees with neonctl's real semantics as long
+// as no shallower body field shadows the intended one. `neon projects create`
+// is the one live collision: its body holds both `project.name` and
+// `project.branch.name`, and shallowest-path-wins is what picks correctly
+// (verified against neonctl src/commands/projects.ts, where
+// `project.name = props.name` and `project.branch` is populated only from
+// --database/--role).
+//
+// Pinning the expected target per command means a neonctl bump that re-points
+// --name, or a spec change that adds a shadowing field, fails here instead of
+// silently shipping a wrong CLI↔API hint. Bodies mirror the live spec shapes.
+describe('--name flag maps to the right body field per command', () => {
+  const neonctlSchema = readJsonFixture('scripts/docs-checks/neonctl/schema.json');
+
+  const cases = [
+    {
+      command: 'neon projects create',
+      // Collision case: project.name must win over project.branch.name.
+      body: {
+        project: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            branch: {
+              type: 'object',
+              properties: {
+                name: { type: 'string' },
+                role_name: { type: 'string' },
+                database_name: { type: 'string' },
+              },
+            },
+          },
+        },
+      },
+      expected: 'project.name',
+    },
+    {
+      command: 'neon projects update',
+      body: { project: { type: 'object', properties: { name: { type: 'string' } } } },
+      expected: 'project.name',
+    },
+    {
+      command: 'neon branches create',
+      body: { branch: { type: 'object', properties: { name: { type: 'string' } } } },
+      expected: 'branch.name',
+    },
+    {
+      command: 'neon databases create',
+      body: {
+        database: {
+          type: 'object',
+          properties: { name: { type: 'string' }, owner_name: { type: 'string' } },
+        },
+      },
+      expected: 'database.name',
+    },
+    {
+      command: 'neon roles create',
+      body: { role: { type: 'object', properties: { name: { type: 'string' } } } },
+      expected: 'role.name',
+    },
+    {
+      command: 'neon branches add-compute',
+      body: { endpoint: { type: 'object', properties: { name: { type: 'string' } } } },
+      expected: 'endpoint.name',
+    },
+  ];
+
+  it.each(cases)('$command maps --name to $expected', ({ command, body, expected }) => {
+    const flags = buildCliFlags(command, neonctlSchema, [], body);
+    const nameFlag = flags.find((f) => f.name === 'name');
+    expect(nameFlag, `${command} should declare a --name flag`).toBeTruthy();
+    expect(nameFlag.apiEquiv).toBe(expected);
+    expect(nameFlag.apiEquivIn).toBe('body');
   });
 
-  it('sets no mapping when the flag has no API parameter twin', () => {
-    const paramProps = [];
-    const flags = buildCliFlags('neon projects create', cliSchema, paramProps);
-    const nameFlag = flags.find((f) => f.name === 'name');
-    expect(nameFlag.apiEquiv).toBeUndefined();
+  it('leaves --name unmapped rather than mis-mapped when no body field matches', () => {
+    // Safe failure direction: a flag with no body twin gets no hint at all.
+    const flags = buildCliFlags('neon projects create', neonctlSchema, [], {
+      project: { type: 'object', properties: { region_id: { type: 'string' } } },
+    });
+    expect(flags.find((f) => f.name === 'name').apiEquiv).toBeUndefined();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// indexBodyFieldPaths
+// ---------------------------------------------------------------------------
+
+describe('indexBodyFieldPaths', () => {
+  it('indexes nested fields by leaf name, shallowest path winning', () => {
+    const index = indexBodyFieldPaths({
+      project: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          branch: { type: 'object', properties: { name: { type: 'string' } } },
+        },
+      },
+    });
+    expect(index.get('name')).toBe('project.name');
+    expect(index.get('branch')).toBe('project.branch');
+  });
+
+  it('walks arrays of objects', () => {
+    const index = indexBodyFieldPaths({
+      rules: { type: 'array', items: { properties: { action: { type: 'string' } } } },
+    });
+    expect(index.get('action')).toBe('rules.action');
+  });
+
+  it('returns an empty index for no properties', () => {
+    expect(indexBodyFieldPaths(null).size).toBe(0);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// assertGlobalFlagsCovered
+// ---------------------------------------------------------------------------
+
+describe('assertGlobalFlagsCovered', () => {
+  it('throws when neonctl declares a global flag missing from the list', () => {
+    const schema = { globalOptions: { help: {}, 'context-file': {} } };
+    expect(() => assertGlobalFlagsCovered(schema, new Set(['help']))).toThrow(/context-file/);
+  });
+
+  it('passes when every declared global flag is listed', () => {
+    const schema = { globalOptions: { help: {}, output: {} } };
+    expect(() => assertGlobalFlagsCovered(schema, new Set(['help', 'output']))).not.toThrow();
+  });
+
+  it('the committed list covers the committed neonctl schema', () => {
+    const schema = readJsonFixture('scripts/docs-checks/neonctl/schema.json');
+    expect(() => assertGlobalFlagsCovered(schema)).not.toThrow();
+  });
+});
+
+// ---------------------------------------------------------------------------
+// findOpsWithNoApiMappings
+// ---------------------------------------------------------------------------
+
+describe('findOpsWithNoApiMappings', () => {
+  it('does not flag a pure-positional command whose positional maps', () => {
+    const ops = [
+      {
+        operationId: 'deleteProject',
+        cli: {
+          command: 'neon projects delete <project_id>',
+          flags: [],
+          positionals: [{ display: '<project_id>', apiEquiv: 'project_id' }],
+        },
+      },
+    ];
+    expect(findOpsWithNoApiMappings(ops)).toEqual([]);
+  });
+
+  it('does not flag an op mapped only through a body field', () => {
+    const ops = [
+      {
+        operationId: 'updateNeonAuthUserRole',
+        cli: {
+          command: 'neon neon-auth user update',
+          flags: [{ name: 'roles', apiEquiv: 'user.roles', apiEquivIn: 'body' }],
+          positionals: [],
+        },
+      },
+    ];
+    expect(findOpsWithNoApiMappings(ops)).toEqual([]);
+  });
+
+  it('flags an op where no positional or flag maps back to the API', () => {
+    const ops = [
+      {
+        operationId: 'someMismappedOp',
+        cli: {
+          command: 'neon projects list',
+          flags: [{ name: 'org-id' }, { name: 'recoverable-only' }],
+          positionals: [],
+        },
+      },
+    ];
+    expect(findOpsWithNoApiMappings(ops)).toEqual(['someMismappedOp']);
+  });
+
+  it('ignores global flags when deciding there is nothing to map', () => {
+    const ops = [
+      {
+        operationId: 'getSomething',
+        cli: { command: 'neon something', flags: [{ name: 'help' }], positionals: [] },
+      },
+    ];
+    expect(findOpsWithNoApiMappings(ops)).toEqual([]);
+  });
+
+  it('checks each command of a multi-command op and reports the op once', () => {
+    const ops = [
+      {
+        operationId: 'multiOp',
+        cli: {
+          commands: [
+            {
+              command: 'neon a <project_id>',
+              flags: [],
+              positionals: [{ display: '<project_id>', apiEquiv: 'project_id' }],
+            },
+            { command: 'neon b', flags: [{ name: 'unmapped' }], positionals: [] },
+          ],
+        },
+      },
+    ];
+    expect(findOpsWithNoApiMappings(ops)).toEqual(['multiOp']);
   });
 });
 
