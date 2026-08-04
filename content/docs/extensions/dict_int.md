@@ -12,7 +12,7 @@ summary: >-
   dictionary is superuser-owned; create a custom dictionary from
   `intdict_template` and bind it to a copied text search configuration.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 [Postgres Full-Text Search (FTS)](/postgresql/postgresql-indexes/postgresql-full-text-search) is a powerful tool for searching through textual data. However, when this data includes a significant number of integers like product IDs, serial numbers, or document codes, default FTS behavior can sometimes lead to inefficient indexes and slower search performance.
@@ -293,7 +293,7 @@ The `dict_int` dictionary template is a valuable tool in Postgres for fine-tunin
 - [PostgreSQL `dict_int` documentation](https://www.postgresql.org/docs/current/dict-int.html)
 - [Dictionary Testing with `ts_lexize`](https://www.postgresql.org/docs/current/textsearch-debugging.html#TEXTSEARCH-DICTIONARY-TESTING)
 - [PostgreSQL Full Text Search](/postgresql/postgresql-indexes/postgresql-full-text-search)
-- [Full Text Search using tsvector with Lakebase Postgres](/guides/full-text-search)
+- [Full Text Search using tsvector with Neon Postgres](/guides/full-text-search)
 - [Postgres tsvector data type](/docs/data-types/tsvector)
 
 <NeedHelp/>

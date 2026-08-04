@@ -10,7 +10,7 @@ summary: >-
   connection string for running migrations to avoid PgBouncer-related errors;
   the guide also covers dj-database-url configuration and seeding initial data.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 [Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a powerful migration system that allows you to define and manage database schema changes over time.
@@ -379,6 +379,6 @@ You can find the source code for the application described in this guide on GitH
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Django Documentation](https://docs.djangoproject.com/)
-- [Lakebase Postgres](/docs/introduction)
+- [Neon](/docs/introduction)
 
 <NeedHelp/>

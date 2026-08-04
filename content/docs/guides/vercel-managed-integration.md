@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:05:30.414Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 <InfoBlock>
@@ -44,7 +44,7 @@ updatedOn: '2026-08-04T05:05:30.414Z'
 - Optionally creates a dedicated database branch for every Preview Deployment so you can test schema changes safely
 
 <Admonition type="note" title="Who should use this path?">
-Choose the Vercel-Managed Integration if you **do not already have a Neon account** *or* you prefer to consolidate payment for Lakebase Postgres inside your Vercel invoice.
+Choose the Vercel-Managed Integration if you **do not already have a Neon account** *or* you prefer to consolidate payment for Neon inside your Vercel invoice.
 </Admonition>
 
 ---

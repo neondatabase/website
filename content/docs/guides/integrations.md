@@ -5,12 +5,12 @@ subtitle: Find detailed instructions for integration across various platforms an
 summary: >-
   Index of Neon integration guides organized by category: authentication,
   deployment, schema migration, replication, monitoring, and serverless.
-  Use this page to find setup instructions for connecting Lakebase Postgres to a
+  Use this page to find setup instructions for connecting Neon to a
   specific platform or tool.
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 ## Authentication
@@ -37,15 +37,15 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 
 <a href="/docs/guides/deno" title="Deno Deploy" description="Use Neon with Deno Deploy" icon="deno"></a>
 
-<a href="/docs/guides/heroku" title="Heroku" description="Deploy Your App with Lakebase Postgres on Heroku" icon="heroku"></a>
+<a href="/docs/guides/heroku" title="Heroku" description="Deploy Your App with Neon on Heroku" icon="heroku"></a>
 
 <a href="/docs/guides/koyeb" title="Koyeb" description="Use Neon with Koyeb" icon="koyeb"></a>
 
 <a href="/docs/guides/netlify-functions" title="Netlify Functions" description="Connect a Lakebase Postgres database to your Netlify Functions application" icon="netlify"></a>
 
-<a href="/docs/guides/railway" title="Railway" description="Use Lakebase Postgres with Railway" icon="railway"></a>
+<a href="/docs/guides/railway" title="Railway" description="Use Neon with Railway" icon="railway"></a>
 
-<a href="/docs/guides/render" title="Render" description="Use Lakebase Postgres with Render" icon="render"></a>
+<a href="/docs/guides/render" title="Render" description="Use Neon with Render" icon="render"></a>
 
 <a href="/docs/guides/vercel-overview" title="Vercel" description="Learn how to integrate Neon with Vercel" icon="vercel"></a>
 
@@ -55,7 +55,7 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 
 <TechCards>
 
-<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Lakebase Postgres" icon="convex"></a>
+<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Neon" icon="convex"></a>
 
 <a href="/docs/guides/neon-github-app" title="GitHub integration" description="Use the Neon GitHub integration" icon="github"></a>
 
@@ -73,7 +73,7 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 
 <a href="/docs/guides/file-storage" title="File storage" description="Integrate file storage with Neon" icon="database"></a>
 
-<a href="/docs/guides/aws-s3" title="AWS S3" description="Integrate AWS S3 with Lakebase Postgres" icon="aws-s3-bucket"></a>
+<a href="/docs/guides/aws-s3" title="AWS S3" description="Integrate AWS S3 with Neon" icon="aws-s3-bucket"></a>
 
 <a href="/docs/guides/azure-blob-storage" title="Azure Blob Storage" description="Integrate Azure Blob Storage with Neon" icon="azure"></a>
 
@@ -93,9 +93,9 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 
 <TechCards>
 
-<a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Lakebase Postgres to Datadog" icon="datadog"></a>
+<a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon to Datadog" icon="datadog"></a>
 
-<a href="/docs/guides/grafana-cloud" title="Grafana Cloud" description="Send metrics and logs from Lakebase Postgres to Grafana Cloud" icon="grafana"></a>
+<a href="/docs/guides/grafana-cloud" title="Grafana Cloud" description="Send metrics and logs from Neon to Grafana Cloud" icon="grafana"></a>
 
 <a href="/docs/guides/opentelemetry" title="OpenTelemetry" description="Send metrics and events from Neon to any OpenTelemetry compatible backend" icon="opentelemetry"></a>
 

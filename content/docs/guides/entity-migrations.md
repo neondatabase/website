@@ -10,7 +10,7 @@ summary: >-
   column. Migrations must use a direct (non-pooled) Neon connection string;
   PgBouncer pooled strings are not supported for dotnet-ef operations.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 [Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.
@@ -367,6 +367,6 @@ In this guide, we demonstrated how to set up an Entity Framework project with La
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Entity Framework Core Documentation](https://learn.microsoft.com/en-us/ef/core/)
-- [Lakebase Postgres](/docs/introduction)
+- [Neon](/docs/introduction)
 
 <NeedHelp/>

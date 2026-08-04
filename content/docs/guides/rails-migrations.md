@@ -9,7 +9,7 @@ summary: >-
   `rails db:migrate` to create tables, and applying incremental schema changes
   such as adding a new column with a follow-on migration.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 [Ruby on Rails](https://rubyonrails.org/) is a popular web application framework for Ruby developers. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, that simplifies database interactions and schema management. Rails also includes a powerful migration system that allows you to define and manage database schema changes over time.
@@ -374,6 +374,6 @@ For more information on the tools and concepts used in this guide, refer to the 
 
 - [Ruby on Rails Guides](https://guides.rubyonrails.org/)
 - [Active Record Migrations](https://guides.rubyonrails.org/active_record_migrations.html)
-- [Lakebase Postgres](/docs/introduction)
+- [Neon](/docs/introduction)
 
 <NeedHelp/>

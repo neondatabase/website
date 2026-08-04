@@ -10,7 +10,7 @@ summary: >-
   the SQLAlchemy or Django guides when you need raw SQL driver code rather than
   an ORM.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 
@@ -732,6 +732,6 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 - [Psycopg 3 documentation](https://www.psycopg.org/psycopg3/docs/)
 - [Psycopg 2 documentation](https://www.psycopg.org/docs/)
 - [Asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
-- [Building an API with Django, Django REST Framework, and Lakebase Postgres](/guides/django-rest-api)
+- [Building an API with Django, Django REST Framework, and Neon Postgres](/guides/django-rest-api)
 
 <NeedHelp/>
