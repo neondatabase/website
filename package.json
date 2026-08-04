@@ -175,5 +175,8 @@
     "tailwindcss": "^4.2.1",
     "url-loader": "^4.1.1",
     "vitest": "^4.1.0"
+  },
+  "overrides": {
+    "brace-expansion": "2.1.3"
   }
 }
