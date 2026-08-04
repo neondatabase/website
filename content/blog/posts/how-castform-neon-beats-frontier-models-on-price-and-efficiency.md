@@ -2,7 +2,7 @@
 title: How Castform + Neon Beats Frontier Models on Price and Efficiency
 description: >-
   A 4B open-source model post-trained with Castform retrieved search results as
-  accurately as GPT-5.6 Sol, while costing 100x less.
+  accurately as GPT-5.6 Sol, while costing 100x less
 excerpt: >-
   “Most teams' best training data is just sitting in their databases. The
   problem is that turning raw data into something usable is hard, and letting
@@ -33,16 +33,15 @@ seo:
   image: null
 ---
 
+**[ADD IMAGE 1]**
+
 <blockquote>
 <p>“Most teams' best training data is just sitting in their databases. The problem is that turning raw data into something usable is hard, and letting agents read, search, and mutate data cheaply at scale requires advanced infra. Pointing Castform at Neon skips both.”</p>
 <cite>Ying Hang Seah, cofounder, Castform</cite>
 </blockquote>
 
-A 4B open-source model post-trained with Castform retrieved search results as accurately as GPT-5.6 Sol, while costing 100x less. Castform used Lakebase Search for the entire pipeline, from training to inference.
 
-## What makes a 'good' agent?
-
-An agent needs to be strong in 2 areas:
+A "good agent" needs to be strong in 2 areas:
 
 - **Context**: can we provide the tools to find the right data?
 - **Model**: can the model decide what to search for?
@@ -54,6 +53,8 @@ An agent needs to be strong in 2 areas:
 In ~2022, the industry was going all in on embedding search. Every database provider added one, and pgvector was Neon's most downloaded extension. To provide context to LLMs, engineers handcrafted RAG pipelines, which in essence, is some form of embedding similarity search.
 
 In ~2025, agents started to gain more traction. Developers started creating multi-hop search workflows, decomposing big problems into smaller ones. Retrieval has shifted from the one-shot search systems to agentic retrieval. Instead of issuing a single query, models plan and search multiple times in a loop. Every loop iteration meant another call to the frontier model, increasing the overall cost and latency per user request.
+
+**[ADD IMAGE 2]**
 
 Concretely, a typical multi-turn search request with gpt-5.6-sol takes >10s and costs ~$0.03 end-to-end, making it prohibitively slow and expensive.
 
@@ -130,15 +131,19 @@ def reward(trace, ground_truth):
 
 See a comprehensive code example [here](https://github.com/castform-ai/benchmax/tree/main/examples/neon_rag).
 
-## Observability: Watch the Model Learn
+## Observability: Watch the model learn
 
 Castform gives you full observability into your RL run. You can monitor your reward climb with each step, but more importantly you can drop into individual tasks/prompts to watch how the model performs qualitatively, allowing you to debug problems such as broken tools or reward hacking.
 
 For more details on how to monitor your training runs, you can check out the [Castform blog here](https://castform.com/blog/monitoring-rl-runs/). You can also check out our [example training run here](https://app.castform.com/train/a7a898f6-d802-4908-b044-acb812f14a48?tab=train).
 
-## Why Neon 'Just Works'
+**[ADD IMAGE 3 - caption: "Average reward"]** 
+
+## Why Neon 'just works'
 
 During training, the agent repeatedly calls Lakebase Search until it has enough context to answer. Across thousands of parallel rollouts, each potentially making dozens of calls, this creates a highly bursty workload.
+
+**[ADD IMAGE 4]**
 
 Neon's dynamic compute scaling absorbs these peaks without requiring Castform to provision for maximum capacity around the clock. Training runs get low-latency search when demand spikes, while compute scales down during idle periods.
 
@@ -146,4 +151,4 @@ This infrastructure becomes even more valuable as agents move beyond search and 
 
 [Neon branching](https://neon.com/docs/introduction/branching) can give each rollout an isolated database state, while time-travel queries make it possible to reconstruct and inspect the state an agent encountered. Combined with autoscaling and scale-to-zero, this creates a path toward training thousands of stateful agent rollouts without maintaining thousands of continuously running environments.
 
-Castform makes it easy for any developer to post-train open-source models to be cheaper, faster, better than the frontier. Post-train your first model today at [castform.com](https://castform.com).
+*Castform makes it easy for any developer to post-train open-source models to be cheaper, faster, better than the frontier. Post-train your first model today at [castform.com](https://castform.com).*
