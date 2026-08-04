@@ -33,7 +33,7 @@ Neon is a complete set of cloud backend primitives built around Lakebase Postgre
 Agents get a serverless Postgres engine built on separated compute and storage. It provisions instantly, scales automatically, and idles to zero when not in use - a fit for the bursty, on-demand workloads that agents create.
 
 **With composable primitives for full-stack backends.**
-Around Lakebase Postgres, Neon includes [Managed Better Auth](https://neon.com/docs/auth/overview), a PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started), [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), and an [AI Gateway](https://neon.com/docs/ai-gateway/overview). Agents and developers can assemble complete backends without stitching multiple vendors together, and adopt only the pieces each generated app needs.
+Around Lakebase Postgres, Neon includes [Managed Better Auth](https://neon.com/docs/auth/overview), a PostgREST-compatible [Neon Data API](https://neon.com/docs/data-api/get-started), [Neon Object Storage](https://neon.com/docs/storage/overview), [Neon Functions](https://neon.com/docs/compute/functions/overview), and a [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview). Agents and developers can assemble complete backends without stitching multiple vendors together, and adopt only the pieces each generated app needs.
 
 **All API-first and programmable.**
 Every capability - provisioning, quotas, branching, and fleet management - is exposed through the Neon API, giving developers and agents precise control over their environments and usage at scale.
@@ -43,7 +43,7 @@ Copy-on-write storage in the lakebase architecture makes time travel cheap. Bran
 
 ## Lakebase Postgres
 
-At the core of Neon is [Lakebase Postgres](https://neon.com/docs/introduction/architecture-overview) on the lakebase architecture: compute separated from storage. Each database runs on ephemeral computes while the data itself lives on durable, high-performance storage. That is what agents provision for every generated app, and what every other Neon primitive is built around.
+At the core of Neon is [Lakebase Postgres](https://neon.com/docs/postgres/overview), built on the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview): compute separated from storage. Each database runs on ephemeral computes while the data itself lives on durable, high-performance storage. That is what agents provision for every generated app, and what every other Neon primitive is built around.
 
 ### API-first and serverless
 
@@ -78,25 +78,25 @@ It issues JWTs that your agent or front-end can use directly in database queries
 
 <QuoteBlock quote="Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 
-## Data API
+## Neon Data API
 
 Giving your agents direct access to the database is simple with the [Neon Data API](https://neon.com/docs/data-api/get-started). It exposes each database (and every branch) as a REST endpoint you can query over HTTPS. Fully PostgREST-compatible.
 
 Under the hood, Neon’s Data API is a [Rust-based re-implementation of PostgREST that runs natively in our proxy fleet](https://neon.com/blog/a-postgrest-compatible-data-api-now-on-neon). It’s lean, multi-tenant, and designed to scale across thousands of databases efficiently. Every Neon branch has its own API endpoint, perfect for preview environments, checkpoints, or dev branches.
 
-## Object Storage
+## Neon Object Storage
 
 Generated apps need files: uploads, attachments, generated assets. **[Neon Object Storage](https://neon.com/docs/storage/overview)** is S3-compatible object storage built into the Neon backend, so agents don’t provision a separate bucket vendor per app.
 
 Each branch gets its own isolated storage namespace. Agents can use any AWS S3-compatible SDK, point it at the branch endpoint, and authenticate with a Neon credential. Preview and agent branches can test uploads and deletions without touching production objects. Storage follows the same project and branch lifecycle as Lakebase Postgres.
 
-## Functions
+## Neon Functions
 
 Agents often need long-running backend code next to the data: APIs, tool-calling loops, webhooks, streaming handlers. **[Neon Functions](https://neon.com/docs/compute/functions/overview)** deploy serverless Node.js compute onto a Neon branch, in the same region as the database, with `DATABASE_URL` (and credentials for Object Storage and AI Gateway) injected automatically.
 
 Unlike short-lived lambdas, Functions can start responding within 15 minutes and keep streaming while work continues, which fits agent and WebSocket workloads. Each branch runs its own function at its own URL against its own database state, so generated apps stay isolated end to end.
 
-## AI Gateway
+## Neon AI Gateway
 
 Many generated apps call LLMs. **[Neon AI Gateway](https://neon.com/docs/ai-gateway/overview)** gives each project one credential for frontier and open-source models across providers, without standing up separate provider accounts per end user.
 
