@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-03T22:20:54.355Z'
 ---
 
 In 2025, Neon joined Databricks. The serverless Postgres architecture that Neon pioneered is now the foundation of Lakebase Postgres, a database you can run in two places: on Neon and on Databricks. Wherever you run it, it's the same infrastructure, the same technology, and the same core feature set. What differs is what's built around the database. This page explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase), what's the same in both places, and how to choose between them.
@@ -37,32 +37,32 @@ Lakebase Postgres is the Databricks implementation of a lakebase: Postgres, buil
 
 The database itself doesn't change between them. What surrounds it differs, because Neon and Databricks serve different customers: Neon is built for developers, startups, and agent platforms; Databricks is the Data and AI platform for businesses.
 
-|                         | Neon                                                   | Databricks                                                        |
-| ----------------------- | ------------------------------------------------------ | ----------------------------------------------------------------- |
-| **The database**        | Lakebase Postgres                                      | Lakebase Postgres                                                 |
+|                         | Neon                                                                                                                                                          | Databricks                                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **The database**        | Lakebase Postgres                                                                                                                                             | Lakebase Postgres                                                                                                            |
 | **Integrated products** | [Auth](/docs/auth/overview), [Functions](/docs/compute/functions/overview), [Object Storage](/docs/storage/overview), [AI Gateway](/docs/ai-gateway/overview) | Lakehouse, Lakeflow, Unity Catalog, Unity AI Gateway, [all Databricks products](https://www.databricks.com/product/platform) |
-| **What it is**          | A complete backend for apps and agents                 | The Data and AI platform for businesses                           |
-| **Built for**           | Developers, startups, agent and codegen platforms      | Enterprises, data and AI teams, companies building on Databricks  |
-| **How teams use it**    | Build, iterate, preview, and deploy apps quickly       | Operate production-grade OLTP databases with tight integration to the data lake |
-| **Governance**          | Project-level access controls                          | Lakehouse-wide governance via Unity Catalog                       |
+| **What it is**          | A complete backend for apps and agents                                                                                                                        | The Data and AI platform for businesses                                                                                      |
+| **Built for**           | Developers, startups, agent and codegen platforms                                                                                                             | Enterprises, data and AI teams, companies building on Databricks                                                             |
+| **How teams use it**    | Build, iterate, preview, and deploy apps quickly                                                                                                              | Operate production-grade OLTP databases with tight integration to the data lake                                              |
+| **Governance**          | Project-level access controls                                                                                                                                 | Lakehouse-wide governance via Unity Catalog                                                                                  |
 
 ## Core database features
 
 Because Neon and Databricks run the same infrastructure, the core feature set is the same. The links below go to the Neon and Databricks documentation for the same underlying capability. Databricks availability is based on the [Lakebase documentation](https://docs.databricks.com/aws/en/oltp/projects/).
 
-| Feature                             | On Neon                                                      | On Databricks                                                                                         |
-| ----------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| **Branching**                       | [Branching](/docs/introduction/branching)                    | [Branches](https://docs.databricks.com/aws/en/oltp/projects/branches)                                 |
-| **Autoscaling**                     | [Autoscaling](/docs/introduction/autoscaling)                | [Autoscaling](https://docs.databricks.com/aws/en/oltp/projects/autoscaling)                           |
-| **Scale to zero**                   | [Scale to zero](/docs/introduction/scale-to-zero)            | [Scale to zero](https://docs.databricks.com/aws/en/oltp/projects/scale-to-zero)                       |
-| **Read replicas**                   | [Read replicas](/docs/introduction/read-replicas)            | [Read replicas](https://docs.databricks.com/aws/en/oltp/projects/read-replicas)                       |
-| **Instant restore (point-in-time)** | [Instant restore](/docs/introduction/branch-restore)         | [Point-in-time restore](https://docs.databricks.com/aws/en/oltp/projects/point-in-time-restore)       |
-| **Connection pooling**              | [Connection pooling](/docs/connect/connection-pooling)       | Built-in PgBouncer ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect))              |
-| **Data API (REST)**                 | [Data API](/docs/data-api/overview)                          | [Lakebase Data API](https://docs.databricks.com/aws/en/oltp/projects/data-api)                        |
-| **Management API**                  | [Neon API](/docs/reference/api)                              | [Lakebase API guide](https://docs.databricks.com/aws/en/oltp/projects/api-usage)                      |
-| **CLI**                             | [Neon CLI](/docs/cli/install)                                | [Databricks CLI for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/cli)                   |
-| **Terraform**                       | [Terraform provider](/docs/reference/terraform)              | [Terraform for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/automate-with-terraform)    |
-| **MCP server**                      | [Neon MCP Server](/docs/ai/neon-mcp-server)                  | [MCP on Databricks](https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp)                 |
+| Feature                             | On Neon                                                | On Databricks                                                                                      |
+| ----------------------------------- | ------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| **Branching**                       | [Branching](/docs/introduction/branching)              | [Branches](https://docs.databricks.com/aws/en/oltp/projects/branches)                              |
+| **Autoscaling**                     | [Autoscaling](/docs/introduction/autoscaling)          | [Autoscaling](https://docs.databricks.com/aws/en/oltp/projects/autoscaling)                        |
+| **Scale to zero**                   | [Scale to zero](/docs/introduction/scale-to-zero)      | [Scale to zero](https://docs.databricks.com/aws/en/oltp/projects/scale-to-zero)                    |
+| **Read replicas**                   | [Read replicas](/docs/introduction/read-replicas)      | [Read replicas](https://docs.databricks.com/aws/en/oltp/projects/read-replicas)                    |
+| **Instant restore (point-in-time)** | [Instant restore](/docs/introduction/branch-restore)   | [Point-in-time restore](https://docs.databricks.com/aws/en/oltp/projects/point-in-time-restore)    |
+| **Connection pooling**              | [Connection pooling](/docs/connect/connection-pooling) | Built-in PgBouncer ([Connect](https://docs.databricks.com/aws/en/oltp/projects/connect))           |
+| **Data API (REST)**                 | [Data API](/docs/data-api/overview)                    | [Lakebase Data API](https://docs.databricks.com/aws/en/oltp/projects/data-api)                     |
+| **Management API**                  | [Neon API](/docs/reference/api)                        | [Lakebase API guide](https://docs.databricks.com/aws/en/oltp/projects/api-usage)                   |
+| **CLI**                             | [Neon CLI](/docs/cli/install)                          | [Databricks CLI for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/cli)                |
+| **Terraform**                       | [Terraform provider](/docs/reference/terraform)        | [Terraform for Lakebase](https://docs.databricks.com/aws/en/oltp/projects/automate-with-terraform) |
+| **MCP server**                      | [Neon MCP Server](/docs/ai/neon-mcp-server)            | [MCP on Databricks](https://docs.databricks.com/aws/en/generative-ai/mcp/managed-mcp)              |
 
 ## Features around the database
 

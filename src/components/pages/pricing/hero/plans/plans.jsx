@@ -154,6 +154,7 @@ const Plans = () => {
 
                   <Button
                     className="mt-5 w-full"
+                    data-test={`pricing-${planId}-cta`}
                     theme={highlighted ? 'white-filled' : 'outlined'}
                     to={button.url}
                     size="sm-new"

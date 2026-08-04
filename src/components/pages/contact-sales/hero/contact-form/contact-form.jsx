@@ -151,6 +151,7 @@ const ContactForm = () => {
       className="relative z-10 grid grid-cols-2 gap-6 gap-y-6 overflow-hidden border border-gray-new-20 bg-black-pure/80 px-8 py-7 xl:gap-5 xl:px-7 xl:py-6 lg:max-w-full md:grid-cols-1 md:px-5 md:py-5"
       method="POST"
       id="contact-sales-form"
+      data-test="contact-sales-form"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Field
