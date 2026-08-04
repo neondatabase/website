@@ -14,7 +14,7 @@ The three terms:
 
 1. **Lakebase Postgres** — the database product. Same technology whether accessed via Neon or via Databricks.
 2. **lakebase architecture** (lowercase) — the category: OLTP built on cloud object storage, storage decoupled from compute. A category noun, not a proper noun. Never "the Neon architecture."
-3. **Neon** — the complete set of cloud backend primitives built around Lakebase Postgres. Never "the database," never "a platform" / "the Neon platform" (legal: Neon is not a platform separate from the Databricks Platform).
+3. **Neon** — the complete set of cloud backend primitives built around Lakebase Postgres. Never "the database," never "a platform" / "the Neon platform" (because Neon is part of the Databricks platform)
 
 | Use | Avoid | Notes |
 | --- | --- | --- |
