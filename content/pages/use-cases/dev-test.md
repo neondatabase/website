@@ -4,7 +4,7 @@ subtitle: >-
   Boost developer productivity with Neon, a flexible
   development sandbox for running non-production workloads.
 summary: >-
-  Use Neon’s Lakebase Postgres as a flexible development sandbox for
+  Use Lakebase Postgres on Neon as a flexible development sandbox for
   non-production workloads: database branching, scale-to-zero, and streamlined
   workflows for development and testing environments.
 enableTableOfContents: true
@@ -15,7 +15,7 @@ image: '/images/social-previews/use-cases/dev-test.jpg'
 ![Dev/Test branching](/use-cases/dev-test-branching.jpg)
 
 <Admonition type="note" title="You can branch complete backends on Neon">
-This page mainly focuses on Neon's Postgres database and its branching capabilities ([Lakebase Postgres](/docs/get-started/why-neon)), but Neon now offers a [complete set of cloud backend primitives that branch](https://neon.com/blog/neon-backend-is-beta): Auth, Object Storage, Functions, Data API, and AI Gateway.
+This page mainly focuses on [Lakebase Postgres](/docs/postgres/overview) and its branching capabilities, but Neon now offers a [complete set of cloud backend primitives that branch](/blog/neon-backend-is-beta): Auth, Object Storage, Functions, Data API, and AI Gateway.
 </Admonition>
 
 <Admonition type="note" title="TL;DR">
@@ -23,7 +23,7 @@ Branching is a game-changer for dev/test environments. There's no need to manage
 - You can use Neon for your ephemeral environments even when production lives somewhere else:  
   - You keep your production DB in your current Postgres
   - You "move" your non-prod environments to Neon (i.e. by syncing a subset of data daily)
-  - To build / test / debug against Lakebase Postgres on Neon
+  - To build / test / debug on Neon
   - Once the changes are tested, you apply them back to prod
 Try this workflow in Neon right away. You can follow the steps [in this guide](/docs/use-cases/dev-test) to set things up.
 </Admonition>
@@ -109,7 +109,7 @@ Neon gives you Lakebase Postgres with a much more modern developer experience th
 
 ### Why it’s faster (and more affordable) to do dev/test in Neon?
 
-1. **Instant provisioning**. In Neon, it takes seconds to spin up new Lakebase Postgres instances. Developers can start coding and testing immediately, no waiting time.
+1. **Instant provisioning**. In Neon, it takes seconds to spin up new databases. Developers can start coding and testing immediately, no waiting time.
 2. **Database branching for ephemeral environments**. Neon’s copy-on-write branching lets you create full copies of your testing dataset instantly and without consuming extra storage. This eliminates the operational load that comes with keeping testing data in sync across environments: you can sync data with the parent in one click. Branches are also extremely affordable.
 3. **Non-prod environments are automatically paused when unused**. If a database branch is idle, Neon pauses it automatically to save costs (and management work).
 4. **Intuitive DX with CI/CD integration**. Neon comes with a modern interface and APIs (no need to waste time navigating AWS obscurities). You can add Neon to your CI/CD pipelines to automate branch creation and deletion.
