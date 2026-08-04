@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-07-26T18:33:44.965Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -571,7 +571,7 @@ You can now start charging users for generating images.
 
 ## Extending this workflow
 
-The bot you built is a starting point. Because Neon Functions can connect to [Neon Postgres](/docs/introduction), you can turn this into a full SaaS product with user management, billing, and usage tracking. Here are some ideas:
+The bot you built is a starting point. Because Neon Functions can connect to [Lakebase Postgres](/docs/postgres/overview), you can turn this into a full SaaS product with user management, billing, and usage tracking. Here are some ideas:
 
 - **User tracking:** Store Discord `user_id` in a Postgres table to track who is using your bot, how often, and what commands they invoke. This gives you per-user analytics and a foundation for billing.
 - **Paid access with Stripe:** Gate premium commands like `/chat` and `/imagine` behind a payment wall. When a user invokes a paid command, look up their `user_id` in your database. If they haven't paid, reply with a Stripe Checkout link. Use [Stripe webhooks](https://docs.stripe.com/webhooks) to update your database when a payment succeeds.

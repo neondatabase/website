@@ -1,10 +1,10 @@
 ---
-title: Real-Time Notifications using pg_notify with Neon Postgres
+title: Real-Time Notifications using pg_notify with Lakebase Postgres
 subtitle: A step-by-step guide describing how to implement real-time notifications using pg_notify in Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-07-02T13:24:36.612Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 This step-by-step guide shows how you can implement real-time notifications in Postgres (powered by Neon). Real-time notifications provide a way to instantly notify users in an application. With [pg_notify](https://www.postgresql.org/docs/current/sql-notify.html) and [Postgres triggers](https://www.postgresql.org/docs/current/triggers.html), you can create a webhook-like system to invoke external services on specific database operations.

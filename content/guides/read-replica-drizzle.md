@@ -1,10 +1,10 @@
 ---
-title: Scale your Next.js application with Drizzle ORM and Neon Postgres Read Replicas
-subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplicas() function and Neon Postgres Read Replicas
+title: Scale your Next.js application with Drizzle ORM and Lakebase Postgres Read Replicas
+subtitle: Learn how to scale Next.js applications with Drizzle ORM's withReplicas() function and Lakebase Postgres Read Replicas
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-10-14T00:00:00.000Z'
-updatedOn: '2025-12-03T12:37:52.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 [Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications.

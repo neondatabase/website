@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-07-30T15:40:26.914Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -142,7 +142,7 @@ LLM requests cost real money. Unlike typical API endpoints, where rate limiting 
 
 Neon Functions run as long-lived Node.js processes, but they can still scale horizontally. This means multiple instances of your function may operate simultaneously, each maintaining its own in-memory state. To enforce consistent rate limiting across all instances, you’ll need a shared store accessible to every process. You have two main options:
 
-- [**Neon Postgres**](/docs/postgres/overview): Keeps your entire stack within Neon, eliminating the need to manage additional cloud infrastructure.
+- [**Lakebase Postgres**](/docs/postgres/overview): Keeps your entire stack on Neon, eliminating the need to manage additional cloud infrastructure.
 - [**Upstash Redis**](https://upstash.com/redis): An alternative if you prefer an in-memory, key-value store specifically designed for low-latency rate-limiting counters.
 
 Both implementations follow the same pattern: a fixed-window counter that tracks requests per user within a 60-second bucket.
@@ -151,7 +151,7 @@ Both implementations follow the same pattern: a fixed-window counter that tracks
 
 <TabItem>
 
-Create a file named `src/ratelimit.ts`. This module tracks request counts per user using a fixed-window counter stored in Neon Postgres. It uses a connection pool to efficiently manage database connections and a simple upsert pattern to atomically check and increment the counter:
+Create a file named `src/ratelimit.ts`. This module tracks request counts per user using a fixed-window counter stored in Lakebase Postgres. It uses a connection pool to efficiently manage database connections and a simple upsert pattern to atomically check and increment the counter:
 
 ```typescript shouldWrap filename="src/ratelimit.ts"
 import { Pool } from 'pg';

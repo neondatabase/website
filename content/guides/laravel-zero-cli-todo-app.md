@@ -1,10 +1,10 @@
 ---
-title: Building a Todo CLI App with Laravel Zero and Neon Postgres
-subtitle: Learn how to create a command-line interface (CLI) application using Laravel Zero and Neon Postgres for efficient task management.
+title: Building a Todo CLI App with Laravel Zero and Lakebase Postgres
+subtitle: Learn how to create a command-line interface (CLI) application using Laravel Zero and Lakebase Postgres for efficient task management.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-01T00:00:00.000Z'
-updatedOn: '2024-07-02T10:58:45.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 [Laravel Zero](https://laravel-zero.com/) is a micro-framework that provides a starting point for your console application.
@@ -628,7 +628,7 @@ To handle your database environment variables, you can create a `.env` file in t
 
 ## Conclusion
 
-In this tutorial, we've built a fully functional Todo CLI app using Laravel Zero and Neon Postgres. We've implemented features such as adding, listing, updating, and deleting tasks, as well as task prioritization and due date reminders.
+In this tutorial, we've built a fully functional Todo CLI app using Laravel Zero and Lakebase Postgres. We've implemented features such as adding, listing, updating, and deleting tasks, as well as task prioritization and due date reminders.
 
 This implementation provides a solid foundation for a CLI-based task management system, but there are always ways to improve and expand its functionality:
 
@@ -638,7 +638,7 @@ This implementation provides a solid foundation for a CLI-based task management 
 - Add user authentication for multi-user support
 - Implement task dependencies (subtasks)
 
-By combining the power of Laravel Zero and the scalability of Neon Postgres, you can quickly create efficient and powerful CLI applications that meet your specific needs.
+By combining the power of Laravel Zero and the scalability of Lakebase Postgres, you can quickly create efficient and powerful CLI applications that meet your specific needs.
 
 ## Additional Resources
 

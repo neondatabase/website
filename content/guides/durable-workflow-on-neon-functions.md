@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-07-28T10:37:07.684Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 If you're building modern web applications, you inevitably run into work that shouldn't or can't happen inside a single HTTP request-response cycle. Whether it's running multi-step AI enrichment pipelines, orchestrating customer onboarding sequences, processing background uploads, or handling third-party webhooks, background work is a core requirement of production backends.
@@ -16,11 +16,11 @@ In traditional architectures, handling background work forces a technical compro
 
 The root cause of this complexity is that serverless compute has historically lacked **step-level durability**. If a single step in a multi-step workflow fails, the entire workflow fails, and you have to manually recover state and re-run the workflow.
 
-This guide solves that problem by combining [Inngest](https://www.inngest.com) with [Neon Functions](/docs/compute/functions/overview). Inngest provides an event-driven durable execution engine that turns code into checkpointed steps orchestrated over standard HTTP. Neon Functions provides long-running Node.js compute sitting right next to your [Neon Postgres](/docs/postgres/overview) database, with [Neon AI Gateway](/docs/ai-gateway/overview) credentials injected automatically.
+This guide solves that problem by combining [Inngest](https://www.inngest.com) with [Neon Functions](/docs/compute/functions/overview). Inngest provides an event-driven durable execution engine that turns code into checkpointed steps orchestrated over standard HTTP. Neon Functions provides long-running Node.js compute sitting right next to your [Lakebase Postgres](/docs/postgres/overview) database, with [Neon AI Gateway](/docs/ai-gateway/overview) credentials injected automatically.
 
 Inngest handles the orchestration layer: event triggers, step-level retries, and durable delays, while Neon Functions provides the co-located compute and data. Your function code stays linear and readable, and you avoid standing up separate queue infrastructure.
 
-In this tutorial, you will build an automated lead enrichment pipeline that receives a customer signup event, writes initial state to Neon Postgres, researches the company using a web search tool to generate an executive summary, executes a durable delay, and updates the database record upon completion. This serves as a blueprint for building multi-step AI agents, human-in-the-loop approval flows, scheduled reporting jobs, or any workflow which requires durable retries.
+In this tutorial, you will build an automated lead enrichment pipeline that receives a customer signup event, writes initial state to Lakebase Postgres, researches the company using a web search tool to generate an executive summary, executes a durable delay, and updates the database record upon completion. This serves as a blueprint for building multi-step AI agents, human-in-the-loop approval flows, scheduled reporting jobs, or any workflow which requires durable retries.
 
 ## Architecture overview
 
@@ -69,7 +69,7 @@ sequenceDiagram
 
 1. **Event dispatch**: Your API sends an event to the `/api/events` proxy endpoint on your Neon Function. The proxy forwards the event to Inngest using your server-side Event key.
 2. **HTTP step orchestration**: Inngest invokes your Neon Function endpoint over HTTP (`/api/inngest`) for each discrete step in your workflow.
-3. **In-process persistence & web search**: The handler executes queries against **Neon Postgres** using `pg` and uses a mock web search tool to simulate company research and generate an executive summary.
+3. **In-process persistence & web search**: The handler executes queries against **Lakebase Postgres** using `pg` and uses a mock web search tool to simulate company research and generate an executive summary.
 4. **Automatic checkpointing**: Inngest serializes and stores the return value of every completed step. If a transient network drop occurs during step 2, Inngest resumes execution directly at step 2, reusing the cached output of step 1.
 
 ## Prerequisites
@@ -81,7 +81,7 @@ Before starting, ensure you have:
 3. **Neon CLI**: Installed globally (`npm i -g neon`) and authenticated (`neon auth`). See the [Neon CLI Quickstart](/docs/cli/quickstart) for details.
 4. **Inngest Account**: Sign up for a free account at [inngest.com](https://www.inngest.com).
    <Admonition type="tip" title="Self-Hosting Inngest">
-   You can also self-host Inngest using the [Inngest self-hosting guide](https://www.inngest.com/docs/self-hosting). Use Neon Postgres as the backing database for Inngest's durable state storage. The workflow code in this guide works identically with either Inngest Cloud or a self-hosted Inngest instance.
+   You can also self-host Inngest using the [Inngest self-hosting guide](https://www.inngest.com/docs/self-hosting). Use Lakebase Postgres as the backing database for Inngest's durable state storage. The workflow code in this guide works identically with either Inngest Cloud or a self-hosted Inngest instance.
    </Admonition>
 
 <Steps>
@@ -112,7 +112,7 @@ npm install --save-dev esbuild @types/node @types/pg typescript dotenv
 - `hono`: A lightweight web framework for routing HTTP requests to Inngest's adapter.
 - `inngest`: The core Inngest SDK used to define durable steps, triggers, and retry behaviors.
 - `@neon/ai-sdk-provider`: Neon's AI SDK Provider, which provides access to LLMs through the Neon AI Gateway.
-- `pg`: Node.js PostgreSQL client for communicating with Neon Postgres.
+- `pg`: Node.js PostgreSQL client for communicating with Lakebase Postgres.
 
 ## Link your Neon project
 
@@ -268,7 +268,7 @@ export const functions = [processLeadWorkflow];
 
 The input to the workflow is an `app/lead.created` event with a payload containing the lead's ID, email, and company name (as would be sent from your frontend or backend API). The workflow executes four steps:
 
-- **Step 1 (`save-lead-to-db`)**: Inserts the incoming lead into Neon Postgres with a `processing` status.
+- **Step 1 (`save-lead-to-db`)**: Inserts the incoming lead into Lakebase Postgres with a `processing` status.
 - **Step 2 (`generate-ai-summary`)**: Uses a mock web search tool to simulate real-time research. The tool returns placeholder data so you can test the full workflow without external API keys. The LLM synthesizes the search results into a concise executive summary. See [Using a real web search API](#using-a-real-web-search-api) below for an example of how to swap in a real search provider for production use.
 - **Step 3 (`wait-for-processing-window`)**: Sleeps durably for 5 seconds without consuming compute or billing. This simulates a processing window, for example waiting on external API results or a human review cycle.
 - **Step 4 (`complete-lead-processing`)**: Writes the AI-generated summary back to Postgres and marks the lead as `completed`.
@@ -435,7 +435,7 @@ The `/api/events` endpoint forwards the event to Inngest using your server-side 
 
 Because the workflow includes a 5-second durable sleep, the full run takes about 5-10 seconds to complete. Inngest handles the delay externally, so no compute is consumed on your Neon Function during the wait.
 
-After the workflow completes, you can query your Neon Postgres database to verify that the lead record was updated with the AI-generated summary and marked as `completed`:
+After the workflow completes, you can query your Lakebase Postgres database to verify that the lead record was updated with the AI-generated summary and marked as `completed`:
 
 ```bash shouldWrap
 neon psql main -- -c "SELECT * FROM leads WHERE id = 'lead_prod_999'

@@ -4,7 +4,7 @@ subtitle: Learn how to authenticate requests using Managed Better Auth JWTs in a
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-30T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 This guide demonstrates how to integrate a **standalone React frontend** with a **custom backend API**, using [Managed Better Auth](/docs/auth/overview) to handle identity securely.
@@ -332,7 +332,7 @@ The code above does the following:
    - Configures **CORS** to allow requests from `http://localhost:5173` with common HTTP methods and headers. In a production environment, adjust the CORS settings to match your frontend's domain.
 
 2. **Database integration**
-   - Connects to a **Neon Postgres database** using the `@neondatabase/serverless` client.
+   - Connects to a **Lakebase Postgres database** using the `@neondatabase/serverless` client.
    - Utilizes **Drizzle ORM** for database operations.
    - Uses the `journalEntries` schema to store and retrieve user journal data.
 

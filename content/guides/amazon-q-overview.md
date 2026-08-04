@@ -1,17 +1,17 @@
 ---
-title: Querying Neon Postgres with Natural Language via Amazon Q Business
-subtitle: Learn how to set up Amazon Q Business to query your Neon Postgres database using natural language
+title: Querying Lakebase Postgres with Natural Language via Amazon Q Business
+subtitle: Learn how to set up Amazon Q Business to query your Lakebase Postgres database using natural language
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-23T00:00:00.000Z'
-updatedOn: '2026-06-04T15:33:28.271Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-Amazon Q Business enables you to build an interactive chat application that combines your Neon Postgres data with large language model capabilities.
+Amazon Q Business enables you to build an interactive chat application that combines your Lakebase Postgres data with large language model capabilities.
 
 Rather than querying your database directly, Amazon Q Business creates an index of your data which users can then interact with through a natural language interface.
 
-In this guide, you'll learn how to set up Amazon Q Business to query your Neon Postgres database using natural language. We'll cover the following topics:
+In this guide, you'll learn how to set up Amazon Q Business to query your Lakebase Postgres database using natural language. We'll cover the following topics:
 
 ## Prerequisites
 
@@ -55,7 +55,7 @@ Now that your environment is set up, you can proceed to connecting your Neon dat
 
 ## Database Setup
 
-If you already have data in your Neon Postgres database, you can skip this section. Otherwise, follow these steps to create a sample database and set up data syncing with Amazon Q Business.
+If you already have data in your Lakebase Postgres database, you can skip this section. Otherwise, follow these steps to create a sample database and set up data syncing with Amazon Q Business.
 
 Let's set up a sample database with customer data:
 
@@ -177,7 +177,7 @@ Keep in mind that Amazon Q Business is optimized for English language queries, s
 
 ## Conclusion
 
-Amazon Q provides a natural language interface to query your Neon Postgres database, making it easier for team members who aren't SQL experts to access data.
+Amazon Q provides a natural language interface to query your Lakebase Postgres database, making it easier for team members who aren't SQL experts to access data.
 
 Amazon Q Business also provides several methods to add data to your application beyond your primary Neon database connection, you can upload files like documentation, guides, or data dictionaries directly through the AWS Q console. Or use a Web Crawler to index web pages and documents directly from your website or the internet.
 

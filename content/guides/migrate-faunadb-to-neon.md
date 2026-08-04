@@ -1,18 +1,18 @@
 ---
-title: Migrating from FaunaDB to Neon Postgres
-subtitle: 'Learn how to migrate your data and applications from FaunaDB to Neon Postgres'
+title: Migrating from FaunaDB to Lakebase Postgres
+subtitle: 'Learn how to migrate your data and applications from FaunaDB to Lakebase Postgres'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-03-23T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Like Fauna, it offers a **serverless architecture**, but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.
 
-This guide is designed to help FaunaDB users understand how to transition to Neon Postgres.
+This guide is designed to help FaunaDB users understand how to transition to Lakebase Postgres.
 
 <Admonition type="note">
-Migrating from FaunaDB to Neon Postgres involves schema translation, data migration, and query conversion. This guide provides a structured approach to help you navigate the migration process effectively.
+Migrating from FaunaDB to Lakebase Postgres involves schema translation, data migration, and query conversion. This guide provides a structured approach to help you navigate the migration process effectively.
 </Admonition>
 
 ## FaunaDB vs. Neon (Postgres)
@@ -30,7 +30,7 @@ Before diving into the migration process, it's important to understand the funda
 
 ## Migration steps
 
-The migration process from FaunaDB to Neon Postgres involves several key steps, each essential for a successful transition. These steps include exporting your data and schema from FaunaDB, translating your schema to Postgres DDL, importing your data into Neon, and converting your queries from FQL to SQL. Let's break down these steps in detail:
+The migration process from FaunaDB to Lakebase Postgres involves several key steps, each essential for a successful transition. These steps include exporting your data and schema from FaunaDB, translating your schema to Postgres DDL, importing your data into Neon, and converting your queries from FQL to SQL. Let's break down these steps in detail:
 
 ### Step 1: Exporting data from FaunaDB
 
@@ -193,15 +193,15 @@ If you need a refresher on Postgres, you can refer to Neon's [PostgreSQL Tutoria
 
 **Key translation considerations:**
 
-- **Collections to tables:** Each FaunaDB collection in your FSL schema could become a Neon Postgres table.
-- **Field definitions to columns:** FaunaDB field definitions will guide your Neon Postgres column definitions. Pay attention to data types like `String`, `Number`, `Time`, `Ref`, and optionality (`?` for nullable).
+- **Collections to tables:** Each FaunaDB collection in your FSL schema could become a Lakebase Postgres table.
+- **Field definitions to columns:** FaunaDB field definitions will guide your Lakebase Postgres column definitions. Pay attention to data types like `String`, `Number`, `Time`, `Ref`, and optionality (`?` for nullable).
 - **Unique constraints:** Translate FaunaDB `unique` constraints in FSL to `UNIQUE` constraints in your Postgres `CREATE TABLE` statements.
 - **Indexes:** Translate FaunaDB `index` definitions in FSL to `CREATE INDEX` statements in Postgres. Consider the `terms` and `values` of FaunaDB indexes to create effective Postgres indexes.
 - **Computed fields/functions:** FaunaDB's more advanced schema features like `compute`, functions will require careful consideration for translation. Computed fields might translate to Postgres views or computed columns. UDFs will likely need to be rewritten as stored procedures or application logic.
 
 #### Example FSL to Postgres DDL translation
 
-Let's consider the `Category` collection from the FSL schema and translate it to a `categories` table in Neon Postgres. Here's the FSL schema for the `Category` collection:
+Let's consider the `Category` collection from the FSL schema and translate it to a `categories` table in Lakebase Postgres. Here's the FSL schema for the `Category` collection:
 
 ```fsl
 collection Category {
@@ -217,7 +217,7 @@ collection Category {
 }
 ```
 
-**Neon Postgres DDL (Translated):**
+**Lakebase Postgres DDL (Translated):**
 
 Here's how you can translate the `Category` collection to a `categories` table with the necessary constraints and indexes:
 
@@ -234,7 +234,7 @@ CREATE TABLE categories (
 CREATE INDEX idx_categories_name ON categories(name);
 ```
 
-Now let's consider the `Product` collection from the FSL schema and translate it to a `products` table in Neon Postgres. Here's the FSL schema for the `Product` collection:
+Now let's consider the `Product` collection from the FSL schema and translate it to a `products` table in Lakebase Postgres. Here's the FSL schema for the `Product` collection:
 
 ```fsl
 collection Product {
@@ -266,9 +266,9 @@ collection Product {
 }
 ```
 
-**Neon Postgres DDL (Translated):**
+**Lakebase Postgres DDL (Translated):**
 
-Now that you have a `categories` table created in Neon Postgres, here's how you can translate the `Product` collection to a `products` table with the necessary constraints, references and indexes:
+Now that you have a `categories` table created in Lakebase Postgres, here's how you can translate the `Product` collection to a `products` table with the necessary constraints, references and indexes:
 
 ```sql
 CREATE TABLE products (
@@ -301,13 +301,13 @@ Here we are adding a foreign key constraint `fk_category` to ensure that the `ca
 If you prefer a more programmatic approach to schema translation, you can use any Postgres library or ORM (object-relational mapping) tool in your chosen programming language. These tools can help automate the schema creation process and provide a more structured way to define your Postgres schema. Learn more on our [language guides](/docs/get-started/languages) and [ORM guides](/docs/get-started/orms) section.
 </Admonition>
 
-### Step 4: Data import to Neon Postgres
+### Step 4: Data import to Neon
 
-With your Neon Postgres database ready and your data exported from FaunaDB, the next step is to import this data into your newly created tables.
+With your database on Neon ready and your data exported from FaunaDB, the next step is to import this data into your newly created tables.
 
-For this guide, we'll demonstrate importing data from the `product.json` file (exported from FaunaDB) into the `products` table in Neon Postgres.
+For this guide, we'll demonstrate importing data from the `product.json` file (exported from FaunaDB) into the `products` table in Lakebase Postgres.
 
-This example Node.js script reads the `Product.json` file, parses the JSON data, and then generates and executes `INSERT` statements to populate your `products` table in Neon Postgres.
+This example Node.js script reads the `Product.json` file, parses the JSON data, and then generates and executes `INSERT` statements to populate your `products` table in Lakebase Postgres.
 
 You can get `NEON_CONNECTION_STRING` from your Neon dashboard. Learn more about [Connecting Neon to your stack](/docs/get-started/connect-neon)
 
@@ -391,7 +391,7 @@ Keep the following considerations in mind when importing data with relationships
 ### Step 5: Query conversion - FQL to SQL
 
 <Admonition type="tip" title="Gradual migration with Flags">
-We recommend using a flag-based approach to gradually migrate your application from FaunaDB to Neon Postgres. This approach involves running your application with both FaunaDB and Neon Postgres connections simultaneously, using a feature flag to switch between the two databases. This strategy allows you to test and validate your application's behavior on Neon Postgres without disrupting your production environment. Once you see that your application is functioning correctly with Neon Postgres, you can fully transition away from FaunaDB.
+We recommend using a flag-based approach to gradually migrate your application from FaunaDB to Lakebase Postgres. This approach involves running your application with both FaunaDB and Lakebase Postgres connections simultaneously, using a feature flag to switch between the two databases. This strategy allows you to test and validate your application's behavior on Lakebase Postgres without disrupting your production environment. Once you see that your application is functioning correctly with Lakebase Postgres, you can fully transition away from FaunaDB.
 </Admonition>
 
 This is a critical step in the migration process, as it involves converting your application's FaunaDB queries (written in Fauna Query Language - FQL) to equivalent SQL queries.
@@ -407,7 +407,7 @@ let collection = Collection("Product")
 collection.all()
 ```
 
-Assuming you have ported 'Product' collection to 'products' table in Neon Postgres, the equivalent SQL query would be:
+Assuming you have ported 'Product' collection to 'products' table in Lakebase Postgres, the equivalent SQL query would be:
 
 ```sql
 SELECT * FROM products;
@@ -577,7 +577,7 @@ RETURNING *;
 
 1.  **Review application queries:** Identify the key queries in your application that interact with FaunaDB.
 2.  **Translate FQL to SQL (focus on key queries):** Translate these key FQL queries into equivalent SQL queries, focusing on the patterns shown in the examples above.
-3.  **Test SQL queries:** Test your translated SQL queries against your Neon Postgres database to ensure they function correctly, return the expected data, and are performant. You might need to use [`EXPLAIN ANALYZE`](/postgresql/postgresql-tutorial/postgresql-explain) in Postgres to analyze query performance and optimize indexes if needed.
+3.  **Test SQL queries:** Test your translated SQL queries against your Lakebase Postgres database to ensure they function correctly, return the expected data, and are performant. You might need to use [`EXPLAIN ANALYZE`](/postgresql/postgresql-tutorial/postgresql-explain) in Postgres to analyze query performance and optimize indexes if needed.
 
 <Admonition type="note" title="Recommendation for complex queries">
 Given the potential volume of unstructured data insertion and retrieval queries in your application, which can be challenging to implement within a short timeframe, we recommend prioritizing the queries that are most critical to your application's core functionality and performance. For handling deeply nested unstructured data, consider using the [JSONB datatype in Postgres](/postgresql/postgresql-tutorial/postgresql-json)

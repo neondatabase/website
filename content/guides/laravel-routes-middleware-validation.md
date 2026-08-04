@@ -1,10 +1,10 @@
 ---
 title: "A Deep Dive into Laravel's Routes, Middleware, and Validation: Optimizing Database Interactions"
-subtitle: Explore Laravel's core features to build efficient and secure web applications with optimized database interactions using Neon Postgres
+subtitle: Explore Laravel's core features to build efficient and secure web applications with optimized database interactions using Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-07-14T00:00:00.000Z'
-updatedOn: '2026-03-03T03:19:43.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Laravel, a popular PHP framework, provides a wide range of tools for building web applications. Among its core features are routing, middleware, and validation, which work together to create secure, efficient, and well-structured applications. In this guide, we'll explore these concepts, with a particular focus on how they interact with and optimize database operations.
@@ -35,7 +35,7 @@ cd laravel-routes-middleware-validation
 
 ### Setting up the Database
 
-Update your `.env` file with your Neon Postgres database credentials:
+Update your `.env` file with your Lakebase Postgres database credentials:
 
 ```env
 DB_CONNECTION=pgsql
