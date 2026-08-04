@@ -11,7 +11,7 @@ enableTableOfContents: true
 ---
 
 <Admonition type="info" id="CTA">
-Everything in this PostgreSQL tutorial works against any Postgres database, not just [Neon](https://neon.com), so you can use it to learn the fundamentals wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance and security teams expect and native integration into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Everything in this PostgreSQL tutorial works against any Postgres database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 ![PostgreSQL Tutorial](/postgresqltutorial/postgresql-tutorial-homepage.svg?alignright 'PostgreSQL Tutorial')

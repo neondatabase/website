@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Getting started with PostgreSQL looks the same wherever you run it, so the installation steps, psql basics, and sample database exercises here work against any Postgres instance. When you're ready to run it in production, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, engineered for the AI era with strong performance, security, and deep integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Getting started with PostgreSQL looks the same wherever you run it. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS. You also learn how to connect to PostgreSQL using the psql tool as well as how to load a sample database into the PostgreSQL for practicing.

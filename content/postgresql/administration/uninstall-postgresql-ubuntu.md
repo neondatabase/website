@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Uninstalling PostgreSQL from Ubuntu works the same whether you run Postgres locally, on a VM, or anywhere else, so these steps apply to any standard Postgres install. If you're moving off self-hosted and want a managed home for your data, [Lakebase](https://www.databricks.com/product/lakebase) delivers enterprise-grade Postgres built for the AI era, with the performance, security, and deep Lakehouse integration large teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Uninstalling PostgreSQL from Ubuntu works the same whether you run Postgres locally, on a VM, or anywhere else. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn step\-by\-step how to uninstall PostgreSQL from Ubuntu.

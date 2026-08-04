@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Working with PostgreSQL from PHP uses the same PDO and PDO_PGSQL APIs no matter where your database runs, so everything here applies to any Postgres deployment. For enterprises running PHP workloads in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Working with PostgreSQL from PHP uses the same PDO and PDO_PGSQL APIs no matter where your database runs. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 ![PostgreSQL-PHP](/postgresqltutorial/PostgreSQL-PHP-1.png?alignright)
