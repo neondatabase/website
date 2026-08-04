@@ -15,18 +15,23 @@ const LABELS = {
   console: 'Console',
 };
 
+// Pre-fill the CLI snippet from the request-body seed, keyed off the body-field
+// mappings the generator already resolved (flag.apiEquiv is the field's dot
+// path when apiEquivIn === 'body'). Matching those paths exactly — rather than
+// re-deriving a leaf name here — keeps this in step with buildCliFlags and
+// avoids mapping the wrong field when a leaf name repeats at two depths
+// (`project.name` vs `project.branch.name` on `neon projects create`).
 function seedToCliEdits(seed, flags) {
   const edits = {};
   const included = new Set();
   if (!seed || !flags?.length) return { edits, included };
 
-  const byName = new Map(flags.map((flag) => [flag.name, flag]));
-  for (const [path, value] of Object.entries(seed)) {
-    const leaf = path.slice(path.lastIndexOf('.') + 1);
-    const flagName = leaf.replaceAll('_', '-');
-    if (!byName.has(flagName)) continue;
-    edits[flagName] = String(value);
-    included.add(flagName);
+  for (const flag of flags) {
+    if (flag.apiEquivIn !== 'body') continue;
+    const value = seed[flag.apiEquiv];
+    if (value === undefined) continue;
+    edits[flag.name] = String(value);
+    included.add(flag.name);
   }
   return { edits, included };
 }
