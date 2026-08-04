@@ -3,14 +3,14 @@ title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 summary: >-
   Neon's AI tools hub lists every integration for connecting AI editors and
-  agent frameworks to Lakebase Postgres, including the MCP server, Claude Code
+  agent frameworks to Neon, including the MCP server, Claude Code
   plugin, Cursor plugin, GitHub Copilot agents, and Agent Skills. Use this page
   to find the right integration for natural-language database control, safe
   migrations, or autonomous agent backends. A one-command setup (`npx
   neon@latest init`) configures OAuth, installs Agent Skills, and connects
   your editor in a single step.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T08:22:57.969Z'
 ---
 
 Neon is the backend for apps and agents. This page covers Neon's integrations with AI tools and agent frameworks, from natural language database control to autonomous agent platforms. Choose the tools that fit your workflow.
