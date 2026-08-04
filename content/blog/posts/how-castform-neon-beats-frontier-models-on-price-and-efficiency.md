@@ -48,7 +48,7 @@ A "good agent" needs to be strong in 2 areas:
 
 [Neon](https://neon.com/) (Lakebase Postgres) and their new [Search](https://neon.com/blog/lakebase-search-on-neon) extensions solve the first; [Castform](https://castform.com/) solves the second.
 
-## Evolution of Agentic Search
+## Evolution of agentic search
 
 In ~2022, the industry was going all in on embedding search. Every database provider added one, and pgvector was Neon's most downloaded extension. To provide context to LLMs, engineers handcrafted RAG pipelines, which in essence, is some form of embedding similarity search.
 
