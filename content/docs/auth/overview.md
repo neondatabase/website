@@ -65,7 +65,7 @@ Managed Better Auth currently supports Better Auth version **1.4.18**.
 
 ### When to use Managed Better Auth vs. self-hosting Better Auth
 
-Managed Better Auth is a managed authentication service built into the lakebase architecture:
+Managed Better Auth is a managed authentication service built into Lakebase Postgres on Neon:
 
 - **Branch-aware authentication**: Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
 - **Built-in Data API integration**: JWT token validation for the Data API has native support for Managed Better Auth.
