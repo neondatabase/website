@@ -23,7 +23,7 @@ The three terms:
 | Lakebase Postgres (in full) | shortened forms | Name the product in full in each self-contained unit: summaries, subtitles, card descriptions, table rows, section ledes. Shorten to "the database" / "Postgres" only on repeat references within continuous body prose, to avoid awkward repetition. |
 | lakebase architecture | the Neon architecture | Lowercase category term |
 | Neon (brand / access path) | | Console, CLI, API, Auth, MCP Server keep "Neon" |
-| Neon, a set of cloud backend primitives | the Neon platform, Neon is a platform | Legal: not a platform separate from the Databricks Platform |
+| Neon, a set of cloud backend primitives | the Neon platform, Neon is a platform | Neon is part of the Databricks platform |
 
 Canonical line: "Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks."
 
