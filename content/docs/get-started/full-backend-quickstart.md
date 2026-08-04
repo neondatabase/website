@@ -2,7 +2,7 @@
 title: Build a full backend with Next.js and Neon
 subtitle: Postgres, Object Storage, and a Neon Function for AI, declared in one neon.ts
 summary: >-
-  End-to-end Next.js App Router tutorial that wires Lakebase Postgres, Drizzle ORM,
+  End-to-end Next.js App Router tutorial that wires Lakebase Postgres on Neon, Drizzle ORM,
   Object Storage, and a Neon Function into a working backend, all declared in one
   neon.ts and provisioned with neon deploy. The function runs a streaming,
   tool-calling AI assistant on compute next to your database. Choose this page

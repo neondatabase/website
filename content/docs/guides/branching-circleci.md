@@ -3,7 +3,7 @@ title: Automate branching with CircleCI
 subtitle: Learn how to use the Neon CircleCI Orb to provision ephemeral Postgres
   branches for every CI pipeline run
 summary: >-
-  The Neon CircleCI Orb provisions an isolated Lakebase Postgres branch per CircleCI
+  The Neon CircleCI Orb provisions an isolated Lakebase Postgres branch on Neon per CircleCI
   pipeline run, giving each CI job a real managed Postgres environment instead of
   a generic Docker container. Use it to eliminate shared-database race conditions
   and "works in CI, breaks in prod" failures by forking from a pre-migrated parent
@@ -13,7 +13,7 @@ summary: >-
   zero between runs. The orb is community-maintained, not officially supported by
   Neon.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:05:30.414Z'
 tag: community
 tagTheme: gray
 ---

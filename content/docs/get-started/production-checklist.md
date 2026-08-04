@@ -2,7 +2,7 @@
 title: Getting ready for production
 subtitle: 'Guidelines to optimize price, performance, and reliability'
 summary: >-
-  A production readiness checklist for Lakebase Postgres covering plan selection,
+  A production readiness checklist for Lakebase Postgres on Neon covering plan selection,
   region placement, autoscaling limits, branch protection, and connection
   pooling. Use this page when moving a Neon project out of development. It
   covers scale-to-zero tradeoffs, instant restore history windows, snapshot
@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:05:30.414Z'
 ---
 
 <CheckList title="Production checklist">

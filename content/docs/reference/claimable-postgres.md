@@ -1,6 +1,6 @@
 ---
 title: Claimable Postgres by Neon
-subtitle: Launch an instant Lakebase Postgres database with zero configuration
+subtitle: Launch an instant Lakebase Postgres database on Neon with zero configuration
 summary: >-
   Claimable Postgres provisions an instant database via a single
   unauthenticated API call, CLI command, Node.js SDK, or Vite plugin with no
@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:05:30.414Z'
 ---
 
 Claimable Postgres gives you an instant Postgres database with a single API call. No account required.

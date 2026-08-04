@@ -1,12 +1,12 @@
 ---
 title: Connect MCP clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Code, VS Code,
-  ChatGPT, and other tools to your Lakebase Postgres database.
+  ChatGPT, and other tools to your Lakebase Postgres database on Neon.
 summary: >-
   Connection guide for wiring MCP clients (Cursor, Claude Code, VS Code with
   GitHub Copilot, ChatGPT, Cline, Windsurf, Zed, Claude Desktop, and more via
   the add-mcp CLI) to the Neon MCP Server so AI assistants can query and manage
-  Lakebase Postgres databases using natural language. Use this page when you need
+  Lakebase Postgres databases on Neon using natural language. Use this page when you need
   per-client setup instructions for `npx neon@latest init`, OAuth, or local
   API key authentication with `@neondatabase/mcp-server-neon`. Also covers
   troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache)
@@ -15,7 +15,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:05:30.414Z'
 ---
 
 This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Lakebase Postgres databases.

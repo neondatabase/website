@@ -2,7 +2,7 @@
 title: Connecting with the Vercel-Managed Integration
 subtitle: Create and manage Neon databases directly from your Vercel dashboard
 summary: >-
-  The Vercel-Managed Integration (also called Lakebase Postgres Native Integration)
+  The Vercel-Managed Integration (also called Neon Postgres Native Integration)
   provisions a Lakebase Postgres database from the Vercel Marketplace and routes all
   billing through your Vercel invoice, injecting DATABASE_URL and related
   environment variables automatically. Choose this path over the Neon-Managed
@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:05:30.414Z'
 ---
 
 <InfoBlock>
@@ -36,7 +36,7 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 
 ## About this integration
 
-**Vercel-Managed Integration** (also known as _Lakebase Postgres Native Integration_) lets you add a Lakebase Postgres database to your Vercel project **with billing handled entirely inside Vercel**. Installing it:
+**Vercel-Managed Integration** (also known as _Neon Postgres Native Integration_) lets you add a Lakebase Postgres database to your Vercel project **with billing handled entirely inside Vercel**. Installing it:
 
 - Creates a Neon account + project for you (if you don't already have one)
 - For existing Neon users, adds a new organization named `Vercel: <team-name>` to your account
