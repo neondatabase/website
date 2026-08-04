@@ -5,7 +5,7 @@ summary: >-
   connection strings, via the Console or API. The destination organization's
   plan must be the same tier or higher than the source.
 enableTableOfContents: true
-updatedOn: '2026-07-21T16:33:46.856Z'
+updatedOn: '2026-08-04T15:25:12.468Z'
 ---
 
 Move projects between organizations you belong to in the Neon Console or via the Neon API. You can also hand a project to a different Neon account with a claim link.
@@ -90,7 +90,7 @@ As an alternative, to hand a project to a different Neon account, create a claim
 - Transfer up to **200** projects at a time in the Console, or **400** via the API.
 - Destination organization must have capacity for the projects under its [plan](/docs/introduction/plans) (for example, project count limits).
 - Destination organization plan must be the **same tier or higher** than the source organization plan (for example, Launch to Scale works; Scale to Launch does not). This is a plan-level check, independent of the project's settings.
-- Requires **Admin** in the source organization and at least **Member** in the destination organization. See [User Permissions](/docs/manage/user-permissions).
+- Requires **Admin** in the source organization, since transferring a project out of an organization is Admin-only. In the destination organization you need any role that can create projects: **Admin**, **Editor**, or **Viewer**. Collaborators can't receive transfers. See [User permissions](/docs/manage/user-permissions).
 - Disconnect project integrations before you transfer. Open the project's **Integrations** page and remove any added integrations (for example, GitHub or Vercel). See [Manage integrations](/docs/manage/integrations).
 - [Vercel-managed organizations](/docs/guides/vercel-managed-integration) are not supported as source or destination.
 - HIPAA projects can only move to a HIPAA-enabled organization.

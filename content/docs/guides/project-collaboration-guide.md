@@ -11,17 +11,23 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/project-sharing-guide
-updatedOn: '2026-07-28T15:40:22.495Z'
+updatedOn: '2026-08-04T15:25:12.468Z'
 ---
 
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
 
 <Admonition type="important">
-This page describes project collaboration on the legacy permissions model. New organizations manage project access with [per-project permissions](/docs/manage/user-permissions) instead. The new model also has a **Collaborator** organization role, but that's separate: it's an organization member you grant a project role to, not an external person you invite to a single project as described here.
+Project sharing is being replaced by the **Collaborator** organization role combined with per-project permissions. For new access, use that instead: add the person to your organization as a Collaborator, then grant them a permission on each project they need. See [Assign project access](/docs/manage/user-permissions#assign-project-access).
+
+Project sharing still works, and it remains the option for organizations on the [legacy permissions](/docs/manage/user-permissions#legacy-permissions) model, including [Vercel-managed organizations](/docs/guides/vercel-managed-integration).
 </Admonition>
 
 <Admonition type="note">
-Use project collaboration to work with people outside your organization. If you're working with team members, create an [Organization](/docs/manage/organizations) instead. Organization members get automatic access to all projects within that organization. Organizations can still use project collaboration when needed (for example, to allow an external contractor to contribute to a specific project without making them a full organization member).
+The new **Collaborator** organization role is not the same as a project-sharing collaborator, even though the names match. A Collaborator is a member of your organization who you grant per-project permissions to. A project-sharing collaborator is an external Neon account invited to a single project, as described on this page.
+</Admonition>
+
+<Admonition type="note">
+Use project collaboration to work with people outside your organization. If you're working with team members, create an [Organization](/docs/manage/organizations) instead. Organization members get access to projects based on their organization role and any per-project permissions you grant them.
 </Admonition>
 
 ## Set up Neon accounts
