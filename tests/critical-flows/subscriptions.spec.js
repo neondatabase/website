@@ -11,6 +11,14 @@ const {
   openCriticalPage,
 } = require('./helpers');
 
+// The changelog and blog pages are heavy routes: first paint plus hydration
+// regularly runs past the 10s default expect timeout on CI, which showed up as
+// TC-SUB-001 failing at 25-32s and then passing on retry in 13s. Give this file
+// room to hydrate rather than racing it.
+test.describe.configure({ timeout: 180000 });
+
+const SUBSCRIPTION_EXPECT_TIMEOUT = 30000;
+
 function expectedSubscriptionEvents(email) {
   return [
     {
@@ -30,8 +38,8 @@ async function openSubscriptionForm(page, contract, analyticsOptions = {}) {
   const applicationErrors = await openCriticalPage(page, contract.pagePath);
   const formContainer = page.locator('#changelog-form:visible');
 
-  await expect(formContainer).toHaveCount(1);
-  await expectManagedFormReady(formContainer.locator('form'));
+  await expect(formContainer).toHaveCount(1, { timeout: SUBSCRIPTION_EXPECT_TIMEOUT });
+  await expectManagedFormReady(formContainer.locator('form'), SUBSCRIPTION_EXPECT_TIMEOUT);
 
   return { applicationErrors, formContainer };
 }
@@ -51,7 +59,9 @@ for (const contract of SUBSCRIPTION_CONTRACTS) {
 
     await submitSubscription(formContainer, contract.email);
 
-    await expect(formContainer.getByTestId('success-message')).toBeVisible();
+    await expect(formContainer.getByTestId('success-message')).toBeVisible({
+      timeout: SUBSCRIPTION_EXPECT_TIMEOUT,
+    });
     await expectAnalyticsEvents(page, expectedSubscriptionEvents(contract.email));
     await expectHealthyPage(applicationErrors);
   });
@@ -97,7 +107,9 @@ test(`[${changelogContract.analyticsFailureId}] changelog subscription reports a
 
   await submitSubscription(formContainer, contract.email);
 
-  await expect(formContainer.getByText('Please reload the page and try again')).toBeVisible();
+  await expect(formContainer.getByText('Please reload the page and try again')).toBeVisible({
+    timeout: SUBSCRIPTION_EXPECT_TIMEOUT,
+  });
   await expect(formContainer.getByTestId('success-message')).toHaveCount(0);
   await expectAnalyticsEvents(page, expectedSubscriptionEvents(contract.email));
   await expectHealthyPage(applicationErrors);
