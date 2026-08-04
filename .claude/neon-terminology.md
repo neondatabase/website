@@ -29,6 +29,36 @@ Canonical line: "Neon is a complete set of cloud backend primitives built around
 
 When it's genuinely just the database, say **Lakebase Postgres** (or "the database" / "Postgres" on repeat), never "Neon."
 
+### Disambiguate the access path when a claim isn't true of both
+
+Bare "Lakebase Postgres" is a claim about the database on **either** access path, so it's only correct when what you're saying holds on both Neon and Databricks. The moment a statement depends on one path, name it: **"Lakebase Postgres on Neon"** or **"Lakebase Postgres on Databricks."**
+
+Add the qualifier when the sentence touches any of these:
+
+- A Neon-only or Databricks-only feature (Managed Better Auth, Object Storage, Functions, AI Gateway, Data API, Claimable Postgres, Unity Catalog governance, high availability)
+- Console or UI instructions, signup, or account creation
+- Pricing, plans, credits, or free-tier limits
+- A path-specific API, CLI, SDK, Terraform provider, or MCP Server
+- A partner or marketplace integration that exists on only one path
+
+Leave it bare for shared capabilities: branching, autoscaling, scale to zero, read replicas, instant restore, connection pooling, logical replication, extensions, Postgres version support, and the storage/compute architecture. Projects and branches are also shared concepts — both paths use them, so "a Lakebase Postgres project" needs no qualifier on its own.
+
+- ✅ "Lakebase Postgres has instant point-in-time restore" (true on both)
+- ✅ "Sign up for Lakebase Postgres on Neon" (signup is path-specific)
+- ✅ "Export OTEL metrics from Lakebase Postgres on Neon" (path-specific tooling)
+- ❌ "Sign up for Lakebase Postgres" (no shared signup exists)
+
+**Don't over-qualify.** Adding "on Neon" to every mention makes shared capabilities look Neon-exclusive and undercuts the one-product framing. Default to bare "Lakebase Postgres"; add the path only where the claim actually narrows. When it's genuinely ambiguous, leave it bare.
+
+### Don't rename around the product name
+
+The rename applies to the database, not to things whose names merely contain it:
+
+- **Neon-owned product names keep "Neon":** Neon serverless driver, Neon Console, Neon CLI, Neon API, Neon Auth, Neon MCP Server, Data API. Never "Lakebase Postgres serverless driver."
+- **Third-party titles, templates, and link text are quoted strings.** Leave them exactly as the third party publishes them.
+- **Cross-page link text must match the target page's actual title.** If the target still reads "Neon Postgres Read Replicas," the link text says that too.
+- **Renaming a heading changes its anchor.** Update every same-page and cross-page `#anchor` that pointed at the old slug.
+
 ---
 
 ## Postgres vs PostgreSQL
