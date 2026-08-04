@@ -32,8 +32,12 @@
  *       reference tables)
  *     - operation-set coverage skew: documented ops ↔ @neon/sdk raw methods, and
  *       (in --strict) the live OpenAPI spec ↔ documented ops / @neon/sdk raw.
- *       Either side being ahead usually means "run npm run generate:api-ref" or
- *       "bump @neon/sdk".
+ *       The pairwise diffs are collapsed into action groups (see actionGroups
+ *       below): the spec is the source of truth, so each group is titled by who
+ *       is behind it and states the single command that resolves it — either
+ *       "run npm run generate:api-ref" (docs/artifacts stale) or "bump
+ *       @neon/sdk". This includes the "committed artifacts describe a removed
+ *       endpoint" case that used to fail production builds via prebuild.
  *
  * The scheduled watchdog runs this against `@neon/sdk@latest` with --strict (and
  * fetches the live spec) so a newly published SDK or endpoint that drifts from
@@ -50,8 +54,14 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { computeCoverage, operationIdsFromSpec, sdkRawOperationNames } from './lib/api-coverage.mjs';
+import {
+  computeCoverage,
+  groupCoverageActions,
+  operationIdsFromSpec,
+  sdkRawOperationNames,
+} from './lib/api-coverage.mjs';
 import { defaultSpecCachePath, loadOpenApiSpec } from './lib/openapi-spec-source.mjs';
+import { findMissingSpecTags, readTagConfig } from './lib/tag-config.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -281,8 +291,8 @@ async function main() {
   // Offline (PR): committed manifest vs the installed @neon/sdk raw layer.
   // Strict (watchdog): also fetch the live spec and diff its operationIds.
   const documentedOps = loadDocumentedOps();
-  let specVersionNote = '';
   let specOps = null;
+  let missingTags = [];
   if (STRICT) {
     try {
       const { spec } = await loadOpenApiSpec({
@@ -291,45 +301,50 @@ async function main() {
         log: () => {},
       });
       specOps = [...operationIdsFromSpec(spec)];
-      specVersionNote = ` (live spec: ${specOps.length} operations)`;
+      // Spec tags with no entry in tag-config.json render with auto-generated
+      // display/order in the API reference (the [tag-config] build warning). The
+      // build only logs it; surface it here so the weekly issue flags it too.
+      missingTags = findMissingSpecTags(readTagConfig(), spec);
     } catch (err) {
       notices.push(`Could not fetch the live OpenAPI spec for coverage: ${err.message}`);
     }
   }
 
-  const { sdkNotDocumented, documentedNotInSdk, specNotDocumented, specNotInSdk } = computeCoverage({
+  const coverage = computeCoverage({
     documentedOps,
     rawOps: rawOperations,
     specOps,
   });
 
-  if (sdkNotDocumented.length) {
-    notices.push(
-      `@neon/sdk@${version} raw layer exposes ${sdkNotDocumented.length} operation(s) the docs do not document ` +
-        `(docs behind — run npm run generate:api-ref): ${sdkNotDocumented.join(', ')}`
-    );
-  }
-  if (documentedNotInSdk.length) {
-    notices.push(
-      `docs document ${documentedNotInSdk.length} operation(s) missing from @neon/sdk@${version} raw layer ` +
-        `(SDK behind spec — bump @neon/sdk): ${documentedNotInSdk.join(', ')}`
-    );
-  }
-  if (specNotDocumented?.length) {
-    notices.push(
-      `OpenAPI spec exposes ${specNotDocumented.length} endpoint(s) the docs do not document ` +
-        `(docs behind — run npm run generate:api-ref and commit): ${specNotDocumented.join(', ')}`
-    );
-  }
-  if (specNotInSdk?.length) {
-    notices.push(
-      `OpenAPI spec exposes ${specNotInSdk.length} endpoint(s) missing from @neon/sdk@${version} raw layer ` +
-        `(SDK behind spec — bump @neon/sdk): ${specNotInSdk.join(', ')}`
-    );
+  // Collapse the pairwise diffs into spec-anchored action groups. See
+  // groupCoverageActions in ./lib/api-coverage.mjs for the routing rationale
+  // (spec-relative classification avoids mislabeling stale artifacts as an SDK
+  // bump). Kept pure and in the lib so the routing is unit tested.
+  const actionGroups = groupCoverageActions(coverage, {
+    sdkVersion: version,
+    hasSpec: Boolean(specOps),
+  });
+
+  // New spec tags missing from tag-config.json — same class of drift (the API
+  // grew a section the docs config doesn't curate yet), so it belongs in the
+  // report alongside operation coverage.
+  if (missingTags.length) {
+    actionGroups.push({
+      title:
+        'New API spec tag(s) missing from tag-config.json (section renders with auto-generated display/order)',
+      action:
+        'add an entry to scripts/data/tag-config.json for curated display, description, and operation groups',
+      ops: missingTags,
+    });
   }
 
   // --- Report -------------------------------------------------------------
-  const strictFail = STRICT && notices.length > 0;
+  // Two non-blocking signal sources: `notices` (unresolved prose references and
+  // any spec-fetch error) and `actionGroups` (coverage drift). Strict mode fails
+  // on either. Kept as distinct lists so a future edit can't update one and
+  // silently drop the other from the fail decision.
+  const driftCount = notices.length + actionGroups.length;
+  const strictFail = STRICT && driftCount > 0;
   const ok = blocking.length === 0 && !strictFail;
 
   if (JSON_MODE) {
@@ -344,6 +359,7 @@ async function main() {
           ok,
           blocking,
           notices,
+          actionGroups,
         },
         null,
         2
@@ -353,9 +369,25 @@ async function main() {
   }
 
   console.log(`Neon docs ↔ API consistency check`);
-  console.log(`  @neon/sdk version: ${version} (${rawOperations.size} raw operations)`);
-  console.log(`  docs scanned:      ${docFiles.length} file(s) referencing @neon/sdk`);
-  console.log(`  documented ops:    ${documentedOps.length}${specVersionNote}\n`);
+  console.log(
+    `Counts: ${specOps ? `live spec ${specOps.length}` : 'live spec n/a (offline)'}` +
+      ` · docs ${documentedOps.length} · @neon/sdk@${version} raw ${rawOperations.size}`
+  );
+  console.log(`Docs scanned: ${docFiles.length} file(s) referencing @neon/sdk\n`);
+
+  // The legend only earns its space when there's drift to interpret. A clean run
+  // stays terse.
+  if (actionGroups.length) {
+    console.log(`The ${specOps ? 'three' : 'two'} views compared, in operationId space:`);
+    // Only claim the spec as a source when it was actually fetched (strict runs).
+    if (specOps) {
+      console.log(`  - live OpenAPI spec  — the source of truth (${SPEC_URL})`);
+    }
+    console.log(
+      '  - docs               — the committed api-ref artifacts (api-operation-ids.json)'
+    );
+    console.log('  - @neon/sdk raw      — operations exposed by the installed SDK\n');
+  }
 
   if (blocking.length) {
     console.log(`[FAIL] ${blocking.length} broken @neon/sdk reference(s) in docs:\n`);
@@ -363,17 +395,29 @@ async function main() {
     console.log('');
   }
 
+  if (actionGroups.length) {
+    const label = STRICT ? 'FAIL (strict)' : 'NOTICE';
+    console.log(
+      `[${label}] ${actionGroups.length} coverage drift item(s) — each names the single action that resolves it:\n`
+    );
+    for (const group of actionGroups) {
+      console.log(`  ▸ ${group.title} (${group.ops.length})`);
+      console.log(`    Action: ${group.action}`);
+      console.log(`    Operations: ${group.ops.join(', ')}\n`);
+    }
+  }
+
   if (notices.length) {
     const label = STRICT ? 'FAIL (strict)' : 'NOTICE';
-    console.log(`[${label}] ${notices.length} coverage/drift notice(s):\n`);
+    console.log(`[${label}] ${notices.length} unresolved reference/fetch notice(s):\n`);
     for (const msg of notices) console.log(`  • ${msg}`);
     console.log('');
   }
 
   if (ok) {
     console.log(
-      notices.length
-        ? `[OK] No broken references. ${notices.length} non-blocking notice(s) above.`
+      driftCount
+        ? `[OK] No broken references. ${driftCount} non-blocking notice(s) above.`
         : `[OK] Docs are in sync with @neon/sdk@${version}.`
     );
     process.exit(0);
@@ -384,7 +428,9 @@ async function main() {
       'Fix broken references above, or run `npm run generate:api-ref` if the API reference is stale.'
     );
     if (strictFail)
-      console.log('Strict mode: coverage/drift notices are treated as failures (scheduled watchdog).');
+      console.log(
+        'Strict mode: coverage/drift notices are treated as failures (scheduled watchdog).'
+      );
   }
   process.exit(1);
 }

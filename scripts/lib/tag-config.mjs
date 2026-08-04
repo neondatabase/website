@@ -86,10 +86,12 @@ function validateStatic(cfg) {
   }
 }
 
-// Detect spec tags not in cfg, warn, and return synthesized minimal entries
-// for each. Resolution chain matches buildOperationData in generate-api-ref.mjs:
-//   raw spec tag → toTagSlug → specName map → final url slug
-function synthesizeMissingTags(cfg, specSchema) {
+// Pure detection: return the sorted list of raw spec tag names that have no
+// entry in cfg. Resolution chain matches buildOperationData in
+// generate-api-ref.mjs: raw spec tag → toTagSlug → specName map → final url
+// slug. Side-effect-free so the consistency check can reuse it without emitting
+// the build-log warning. `specSchema` may be a raw or dereferenced OpenAPI doc.
+export function findMissingSpecTags(cfg, specSchema) {
   const specToSlug = new Map();
   const slugSet = new Set();
   for (const t of cfg.tags) {
@@ -98,7 +100,7 @@ function synthesizeMissingTags(cfg, specSchema) {
   }
 
   const missing = new Set();
-  for (const [, pathItem] of Object.entries(specSchema.paths ?? {})) {
+  for (const [, pathItem] of Object.entries(specSchema?.paths ?? {})) {
     for (const method of ['get', 'post', 'put', 'patch', 'delete']) {
       const op = pathItem[method];
       if (!op?.operationId) continue;
@@ -111,7 +113,22 @@ function synthesizeMissingTags(cfg, specSchema) {
     }
   }
 
-  if (missing.size === 0) return [];
+  return [...missing].sort();
+}
+
+// Read the raw tag config from disk (parsed JSON). Exposed so callers other than
+// the generator (e.g. the consistency check) can run findMissingSpecTags without
+// building the full view.
+export function readTagConfig() {
+  return readRaw();
+}
+
+// Detect spec tags not in cfg, warn, and return synthesized minimal entries
+// for each.
+function synthesizeMissingTags(cfg, specSchema) {
+  const missing = findMissingSpecTags(cfg, specSchema);
+
+  if (missing.length === 0) return [];
 
   process.stderr.write(
     `[tag-config] warn: new spec tag(s) not in config: ${[...missing].join(', ')}.\n` +

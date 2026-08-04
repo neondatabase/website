@@ -23,8 +23,11 @@ Build pipeline and UI for the [Neon Management API reference](https://neon.com/d
 | `llms.txt` index                   | `public/docs/reference/api/llms.txt`           | No (gitignored) |
 | `llms-full.txt` (all ops)          | `public/docs/reference/api/llms-full.txt`      | No (gitignored) |
 | Navigation YAML (sidebar)          | `content/docs/api-navigation.yaml`             | **Yes**         |
+| Operation-id manifest              | `content/docs/api-operation-ids.json`          | **Yes**         |
 
-Navigation YAML is committed because it drives the sidebar and must be in the repo before `next build` reads it. Everything else is regenerated on every build.
+`api-navigation.yaml` and `api-operation-ids.json` are the only committed outputs; everything else is gitignored and regenerated on every build.
+
+**What the committed copies are for, and when they update.** Both are overwritten by the generator during `prebuild` on every build, so `next build` (and the sidebar via `src/utils/api-docs.js`) always reads a freshly regenerated `api-navigation.yaml`, never the committed bytes. The committed copies matter in two situations only: (1) a fresh `git` clone needs a valid `api-navigation.yaml` for local `npm run dev` **before** anyone runs the generator (`api-docs.js` falls back to no API section if the file is absent), and (2) `api-operation-ids.json` is the docs-side source of truth the consistency check diffs against. Nothing updates either file in git automatically — a Vercel build overwrites them only inside its ephemeral container. They enter git **only** when a human runs `npm run generate:api-ref` and commits the result. So a committed copy can drift from the live spec between those manual commits; that drift never affects the deployed site (regenerated at build time) — its only cost is a stale sidebar in a fresh local checkout and a noisier consistency check. The build-log `[api-ref] WARNING` and the weekly workflow flag the drift, but neither commits the fix for you.
 
 ## Running locally
 
@@ -54,7 +57,7 @@ Vercel runs `npm run build`, which triggers `prebuild` first. The generator fetc
 
 After a successful generation run, the generator writes the validated spec to `.next/cache/api-reference/openapi-v2.json`. If the live fetch fails, it uses that cache only when it is fresh (default: 7 days). If the cache is missing or stale, the generator throws and the build fails fast. Override the cache path with `API_REF_SPEC_CACHE_PATH` and the TTL with `API_REF_SPEC_CACHE_TTL_MS` when needed.
 
-`prebuild` also runs `npm run check:api-ref-generated` after generation. If either regenerated committed file (`content/docs/api-navigation.yaml` or `content/docs/api-operation-ids.json`) differs from the committed copy, the build fails with a diff. Run `npm run generate:api-ref`, review the change, and commit it.
+The generator overwrites the committed artifacts (`content/docs/api-navigation.yaml` and `content/docs/api-operation-ids.json`) from the freshly fetched spec on every build, so a spec change never fails the build — it just ships on the next deploy. As a heads-up, the generator emits a non-fatal `[api-ref] WARNING` in the build log when the committed manifest differed from what it regenerated (listing the added/removed operationIds), so drift is visible in the log. Committing the regenerated files keeps git history honest, but is not required for the build to pass. The enforcing signal is the weekly [Docs ↔ API consistency](#docs--api-consistency-check) workflow, not the build.
 
 **Recovery:** check the Vercel build log for the HTTP error code, verify `https://neon.com/api_spec/release/v2.json` is reachable (open in a browser or `curl -I`), then trigger a redeploy. No code changes are needed for a transient outage.
 
@@ -110,7 +113,7 @@ Additional manual exception lists (small, inline) live near the top of `build-co
 
 ### When the OpenAPI spec changes
 
-The generator fetches the spec fresh on every build, so most spec changes ship on the next Vercel deploy with no action. The spec is the source of truth for operation structure, field order, types, defaults, enums, descriptions, the `deprecated` flag, and which fields are required. The committed config files (`tag-config.json`, `field-group-config.mjs`, `console-breadcrumbs.json`, `response-examples.json`, coverage data) only enrich and organize; they never gate rendering. The only committed generator output is `content/docs/api-navigation.yaml`, so changes that add or remove pages or sections require committing the regenerated nav file.
+The generator fetches the spec fresh on every build, so most spec changes ship on the next Vercel deploy with no action. The spec is the source of truth for operation structure, field order, types, defaults, enums, descriptions, the `deprecated` flag, and which fields are required. The committed config files (`tag-config.json`, `field-group-config.mjs`, `console-breadcrumbs.json`, `response-examples.json`, coverage data) only enrich and organize; they never gate rendering. The committed generator outputs are `content/docs/api-navigation.yaml` (sidebar) and `content/docs/api-operation-ids.json` (operation manifest); both are regenerated at build time, so a stale copy never breaks the build, but changes that add or remove pages, sections, or operations should be committed to keep git history and the consistency check accurate.
 
 What happens for the common kinds of spec drift:
 
@@ -120,6 +123,7 @@ What happens for the common kinds of spec drift:
 | Endpoint description changed                        | Yes. Flows into the page, per-op markdown, and llms files.                                                                                                                         | None.                                                                                                                                                                                                                                        |
 | Default value, type, enum, or required-ness changed | Yes. The rendered field rows, type badges, enum pills, and the "N required" summary update from the schema.                                                                        | Only if a curated example now conflicts: `seed` values in `field-group-config.mjs` and `response-examples.json` overrides do not auto-track the spec. `npm run audit:api-ref` flags schema-invalid examples.                                 |
 | New tag (set of endpoints)                          | Yes, warn-only. `loadTagConfig(schema)` auto-injects a minimal entry (slug/display derived from the raw spec tag name) and the operations appear in nav. The build does not fail.  | Add a proper entry to `scripts/data/tag-config.json` for display name, order, description, and groups (see [Adding a new tag](#adding-a-new-tag)), optionally a `content/api-docs/{tag}.md` intro, then commit `api-navigation.yaml`.        |
+| Removed endpoint                                    | Yes. The operation's page, markdown, llms entry, and nav entry disappear; the regenerated `api-navigation.yaml`/`api-operation-ids.json` drop it. The build does not fail (this class used to fail `prebuild` before the gate was removed). | Commit the regenerated `api-navigation.yaml` and `api-operation-ids.json`. A `[api-ref] WARNING` in the build log and the weekly consistency workflow both flag the still-committed-but-removed operation until then. |
 
 For request-body grouping drift specifically (new/renamed/removed fields on a configured operation), see the table in [`field-group-config.md`](field-group-config.md#spec-drift-what-happens-the-site-build-never-breaks).
 
@@ -163,9 +167,12 @@ npm run check:api-ref-generated
 
 Review the generated committed files — `content/docs/api-navigation.yaml` (sidebar)
 and `content/docs/api-operation-ids.json` (operation manifest) — separately from UI
-changes. They can drift when the upstream spec changes. `prebuild` runs
-`check:api-ref-generated`, which fails if either regenerated file differs from
-`HEAD`; commit them when the diff is expected.
+changes. They can drift when the upstream spec changes. `npm run check:api-ref-generated`
+diffs the regenerated files against `HEAD` and exits non-zero if either differs; commit
+them when the diff is expected. This check is a manual/CI aid, not a build gate — it is
+**not** wired into `prebuild`, so a stale artifact on `main` never fails a production
+build (the generator overwrites these files at build time regardless). Spec drift surfaces
+as a build-log `[api-ref] WARNING` and in the weekly consistency workflow.
 
 For UI changes, walk [`SMOKE-CHECKLIST.md`](../src/components/pages/doc/api-operation/SMOKE-CHECKLIST.md) against a local `npm run dev`.
 
@@ -202,8 +209,14 @@ operations are documented. Coverage logic lives in the pure
   a `neon.*` ergonomic method, or imports a symbol that the SDK does not provide — readers
   copy these.
 - **Operation coverage (notifies; fails under `--strict`)** — skew between the documented ops,
-  the `@neon/sdk` raw layer, and (in `--strict`) the live OpenAPI spec. Either side being ahead
-  usually means "run `npm run generate:api-ref`" or "bump `@neon/sdk`".
+  the `@neon/sdk` raw layer, and (in `--strict`) the live OpenAPI spec. The pairwise diffs are
+  collapsed into spec-anchored **action groups** by `groupCoverageActions()` — the spec is the
+  source of truth, so each group states the single fix: "run `npm run generate:api-ref`" (docs
+  or committed artifacts behind/ahead of the spec, including the removed-endpoint case that used
+  to fail the build) or "bump `@neon/sdk`" (SDK behind the spec).
+- **Tag coverage (fails under `--strict`)** — under `--strict` the check also reports live spec
+  tags with no entry in `tag-config.json` (via `findMissingSpecTags()`), the same drift the
+  generator's `[tag-config]` build warning flags. Fix: add a `tag-config.json` entry.
 
 CI wiring — one workflow, `.github/workflows/docs-api-consistency.yml`:
 

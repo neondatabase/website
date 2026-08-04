@@ -37,6 +37,8 @@ Tools are grouped into categories. Use the \`?category=\` URL parameter to restr
 
 Search and navigation tools (search across projects, fetch resource details by ID) are available by default but disabled in [project-scoped mode](https://neon.com/docs/ai/neon-mcp-server#project-scoped-mode).
 
+Schema tools accept schema-qualified table names, such as \`crm.contacts\`. An unqualified name resolves against the database \`search_path\`, which defaults to the \`public\` schema.
+
 **Note:** The \`observability\` tools query [Neon Functions logs](https://neon.com/docs/compute/functions/logs) and [object storage logs](https://neon.com/docs/storage/logs), which are part of the Neon backend beta, currently available in AWS \`us-east-2\` only. Log querying returns results only for projects in a supported region.
 
 ### LinkAPIKey
