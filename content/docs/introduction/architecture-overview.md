@@ -1,5 +1,5 @@
 ---
-title: Lakebase architecture
+title: The lakebase architecture
 subtitle: 'Inside Lakebase Postgres: decoupled compute and durable storage'
 summary: >-
   The lakebase architecture splits Postgres into an ephemeral compute layer and
@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-08-04T04:07:29.373Z'
 ---
 
 ## Top level overview
@@ -38,7 +38,7 @@ Neon and Databricks run the same database, Lakebase Postgres, on the same infras
 
 ## Resource hierarchy
 
-While the sections below describe the physical architecture, Lakebase Postgres organizes resources into a logical hierarchy:
+While the sections below describe the physical architecture, Lakebase Postgres on Neon organizes resources into a logical hierarchy:
 
 | Concept          | Description                                                           | Relationship              |
 | ---------------- | --------------------------------------------------------------------- | ------------------------- |
@@ -75,7 +75,7 @@ When a query runs, the compute node behaves as you would expect:
 - Pages are accessed through the buffer manager
 - Changes are applied in memory
 
-The lakebase difference appears when the system crosses the boundary between execution and durability. **Instead of flushing WAL to a local filesystem, the compute node streams WAL to the storage layer.** A transaction is considered committed once that WAL has been acknowledged by a quorum of safekeepers (more on this later). The compute node does not wait for data pages to be written to disk or object storage.
+The architectural difference appears when the system crosses the boundary between execution and durability. **Instead of flushing WAL to a local filesystem, the compute node streams WAL to the storage layer.** A transaction is considered committed once that WAL has been acknowledged by a quorum of safekeepers (more on this later). The compute node does not wait for data pages to be written to disk or object storage.
 
 For reads, **the compute node always prefers local access.** It first looks in memory, then in the local NVMe cache. Only when a page is missing locally does the compute node request it from the pageserver, which reconstructs the correct page version and returns it over the network. At no point does the compute node read directly from object storage.
 
