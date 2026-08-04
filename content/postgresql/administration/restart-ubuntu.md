@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Restarting PostgreSQL on Ubuntu works the same way across any self-managed install, whether you reach for systemctl, service, or pg_ctl. If you'd rather skip the server babysitting altogether, [Lakebase](https://www.databricks.com/product/lakebase) delivers enterprise-grade managed Postgres for the AI era, tightly integrated with the Lakehouse and built for performance and security at scale. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Restarting PostgreSQL on Ubuntu works the same way across any self-managed install, whether you reach for systemctl, service, or pg_ctl. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to restart PostgreSQL on Ubuntu using `systemctl`, `service` command, and `pg_ctrl` command.

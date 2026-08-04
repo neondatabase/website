@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `jsonb_object_agg()` function works on any PostgreSQL database, so everything you learn here applies whether you run Postgres on your laptop, on a VM, or on a managed service. If you're an enterprise shipping AI-driven products, [Lakebase](https://www.databricks.com/product/lakebase) gives you the most performant and secure managed Postgres in the cloud, fully integrated into the Lakehouse so your operational and analytical data live side by side. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+The `jsonb_object_agg()` function works on any PostgreSQL database, so everything you learn here applies whether you run Postgres on your laptop, on a VM, or on a managed service. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_agg()` function to aggregate key/value pairs into a JSON object.
