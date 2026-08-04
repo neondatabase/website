@@ -9,11 +9,11 @@ summary: >-
   cover Neon project creation, DATABASE_URL configuration in .env, and wiring
   a service and GET controller endpoint to query the database.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"
-description="Pre-built prompt for connecting NestJS applications to Neon Postgres"/>
+description="Pre-built prompt for connecting NestJS applications to Lakebase Postgres"/>
 
 NestJS is a framework for building efficient, scalable Node.js server-side applications<sup><a target="_blank" href="https://docs.nestjs.com/">1</a></sup>. This guide explains how to connect NestJS with Neon using a secure server-side request.
 

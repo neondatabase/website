@@ -12,10 +12,10 @@ summary: >-
   datasets.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.
+This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication with Lakebase Postgres. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.
 
 ## Prerequisites
 
@@ -108,7 +108,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your Neon Postgres database (the subscriber) to receive replicated data from your Supabase Postgres instance.
+This section describes how to prepare your Lakebase Postgres database (the subscriber) to receive replicated data from your Supabase Postgres instance.
 
 ### Prepare your database schema
 

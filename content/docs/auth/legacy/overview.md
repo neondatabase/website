@@ -14,7 +14,7 @@ enableTableOfContents: true
 tag: archived
 tagTheme: gray
 noindex: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
@@ -25,7 +25,7 @@ updatedOn: '2026-07-15T00:08:00.682Z'
 
 ## What is legacy Neon Auth?
 
-Neon Auth brings authentication and user management natively to your Neon Postgres database.
+Neon Auth brings authentication and user management natively to your database.
 
 ### Why use Neon Auth?
 

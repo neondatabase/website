@@ -1,9 +1,9 @@
 ---
 title: AI Starter Kit
-subtitle: Resources for building AI applications with Neon Postgres
+subtitle: Resources for building AI applications with Lakebase Postgres on Neon
 summary: >-
   Neon AI Starter Kit is the central hub for building AI and vector search
-  applications on Neon Postgres, collecting concepts, framework integrations,
+  applications on Lakebase Postgres on Neon, collecting concepts, framework integrations,
   and deployable starter apps in one place. Use this page when starting an AI
   project on Neon and need to orient across pgvector setup, RAG pipelines,
   semantic search, or scaling strategies before diving into a specific guide.
@@ -13,12 +13,12 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/ai/ai-app-build
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-04T05:05:30.414Z'
 ---
 
 Build AI applications and agents on Neon. This guide collects resources for AI workloads: core concepts, starter applications, framework integrations, and deployment guides. Use them to build applications like RAG chatbots, semantic search engines, or custom AI tools.
 
-<CTA title="Start building AI apps with Neon" description="Sign up for Neon Postgres and jumpstart your AI application with our starter apps and resources." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Start building AI apps with Neon" description="Sign up for Lakebase Postgres on Neon and jumpstart your AI application with our starter apps and resources." buttonText="Sign Up" buttonUrl="https://console.neon.tech/signup" />
 
 ## Getting started
 

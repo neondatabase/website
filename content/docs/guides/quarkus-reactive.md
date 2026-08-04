@@ -1,23 +1,23 @@
 ---
 title: Connect Quarkus (Reactive) to Neon
-subtitle: Learn how to connect to Neon from Quarkus using a Reactive SQL Client
+subtitle: Learn how to connect to a Lakebase Postgres database from Quarkus using a Reactive SQL Client
 summary: >-
-  Quarkus Reactive SQL Client connects Java applications to Neon Postgres using
+  Quarkus Reactive SQL Client connects Java applications to Lakebase Postgres using
   non-blocking I/O via the Vert.x PgPool driver, instead of JDBC, making it the
   right choice when building reactive, cloud-native Quarkus services. The guide
   covers scaffolding a project with the reactive-pg-client extension,
   configuring QUARKUS_DATASOURCE_REACTIVE_URL with sslmode=require, and
-  exposing a REST endpoint that queries Neon asynchronously using Mutiny.
+  exposing a REST endpoint that queries the database asynchronously using Mutiny.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-reactive-prompt.md"
-description="Pre-built prompt for connecting Quarkus applications to Neon using Reactive SQL Client"/>
+description="Pre-built prompt for connecting Quarkus applications to Lakebase Postgres using Reactive SQL Client"/>
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using a Reactive SQL Client.
 
-To connect to Neon from a Quarkus application:
+To connect to a Lakebase Postgres database from a Quarkus application:
 
 <Steps>
 
@@ -44,7 +44,7 @@ You now have a Quarkus project in a folder named `neon-with-quarkus` with the Re
 
 ## Configure a PostgreSQL data source
 
-Create a `.env` file in the root of your Quarkus project directory. Configure a reactive data source using your Neon database connection string and specifying the database kind as shown:
+Create a `.env` file in the root of your Quarkus project directory. Configure a reactive data source using your database connection string and specifying the database kind as shown:
 
 ```shell shouldWrap
 QUARKUS_DATASOURCE_REACTIVE_URL=postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require

@@ -5,13 +5,13 @@ summary: >-
   Replicate data from Google Cloud SQL Postgres to Neon using logical
   replication. Setup involves enabling the `cloudsql.logical_decoding` flag,
   allowlisting Neon's NAT gateway IPs, and creating a publication on the
-  source with a matching `CREATE SUBSCRIPTION` on the Neon destination. Use
+  source with a matching `CREATE SUBSCRIPTION` on the Lakebase Postgres destination. Use
   this guide when migrating or continuously syncing from Cloud SQL to Neon
   rather than a one-time pg_dump import. Covers replication role creation,
   schema preparation, subscription verification, and application cutover.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This guide describes how to replicate data from Cloud SQL Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google Cloud SQL documentation.
@@ -139,7 +139,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your Cloud SQL Postgres instance.
+This section describes how to prepare your source database (the subscriber) to receive replicated data from your Cloud SQL Postgres instance.
 
 ### Prepare your database schema
 

@@ -11,9 +11,9 @@ summary: >-
   to convert row-per-category data into a columnar summary, populate test
   datasets with normally distributed values, or traverse a self-referencing
   table without recursive CTEs. Enable the extension with `CREATE EXTENSION
-  tablefunc` on any Neon Postgres database.
+  tablefunc` on any Lakebase Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 The `tablefunc` extension for Postgres provides a powerful set of functions for transforming data directly within your database. Its primary capabilities include creating pivot tables (also known as cross-tabulations) to reshape data, generating sets of normally distributed random numbers, and querying hierarchical or tree-like data structures.

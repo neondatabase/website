@@ -9,11 +9,11 @@ summary: >-
   creation, DATABASE_URL credential storage, and config updates for dev, test,
   and runtime environments.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/phoenix-prompt.md"
-description="Pre-built prompt for connecting Phoenix applications to Neon Postgres"/>
+description="Pre-built prompt for connecting Phoenix applications to Lakebase Postgres"/>
 
 This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframework.org) application. [Ecto](https://hexdocs.pm/ecto/3.11.2/Ecto.html) provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
@@ -53,7 +53,7 @@ When prompted, choose to not install the dependencies yet.
 
 ## Configure database connections
 
-Update the following configuration files with your Neon database connection details from the connection string you copied earlier.
+Update the following configuration files with your database connection details from the connection string you copied earlier.
 
 1. Update `config/dev.exs`:
 
@@ -70,7 +70,7 @@ Update the following configuration files with your Neon database connection deta
    ```
 
    <Admonition type="note">
-   The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
+   The `:ssl` option is required to connect to the database. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
    </Admonition>
 
 2. Update `config/runtime.exs`:

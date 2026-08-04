@@ -1,20 +1,20 @@
 ---
-title: Use Neon Postgres with Render
-subtitle: Connect a Neon Postgres database to your Node application deployed with Render
+title: Use Lakebase Postgres with Render
+subtitle: Connect a Lakebase Postgres database to your Node application deployed with Render
 summary: >-
-  Connecting a Node.js Express application to a Neon Postgres database and
+  Connecting a Node.js Express application to a Lakebase Postgres database and
   deploying it on Render covers project scaffolding, pg driver configuration,
   and pushing to GitHub to trigger automatic Render deployments. Use this guide
   when you want a serverless Postgres backend for a Render web service without
   using Render's native database. The guide uses Node.js with the pg library and
   Render's Git-based continuous deployment.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Render supports full-stack applications, offering both web services and background workers.
 
-This guide shows how to deploy a simple Node.js application connected to a Neon Postgres database on Render.
+This guide shows how to deploy a simple Node.js application connected to a Lakebase Postgres database on Render.
 
 ## Prerequisites
 
@@ -25,7 +25,7 @@ To follow along with this guide, you will need:
 - A GitHub account. Render integrates with public GitHub providers for continuous deployment. So, you'd need a GitHub account to upload your application code.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
-## Setting up your Neon database
+## Setting up your database
 
 ### Initialize a new project
 

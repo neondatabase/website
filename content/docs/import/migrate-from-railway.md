@@ -1,6 +1,6 @@
 ---
-title: Migrate from Railway Postgres to Neon Postgres
-subtitle: Learn how to migrate your database from Railway to Neon Postgres using
+title: Migrate from Railway Postgres to Lakebase Postgres
+subtitle: Learn how to migrate your database from Railway to Lakebase Postgres using
   pg_dump and pg_restore
 summary: >-
   Step-by-step guide for moving a Railway Postgres database to Neon using
@@ -12,10 +12,10 @@ summary: >-
   replication and CSV import as alternatives for larger datasets or
   minimal-downtime requirements.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This guide describes how to migrate a database from Railway to Neon Postgres using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
+This guide describes how to migrate a database from Railway to Lakebase Postgres using the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
 
 ## Prerequisites
 
@@ -91,7 +91,7 @@ pg_dump: dumping contents of table "public.lego_themes"
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon Postgres database to receive the imported data.
+This section describes how to prepare your destination Lakebase Postgres database to receive the imported data.
 
 ### Create the Neon database
 

@@ -2,7 +2,7 @@
 title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 summary: >-
-  Logical replication from Neon Postgres to Decodable uses a Postgres CDC
+  Logical replication from Lakebase Postgres to Decodable uses a Postgres CDC
   connector (Apache Flink and Debezium) to stream row-level changes into
   Decodable streams for routing to sinks such as Snowflake, Kafka, Amazon S3,
   or Elasticsearch. Use this guide when you need continuous, low-latency change
@@ -12,15 +12,15 @@ summary: >-
   table. Connect Decodable using a direct non-pooled connection string.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Decodable](https://www.decodable.co/) is a fully managed platform for ETL, ELT, and stream processing,
 powered by Apache Flink® and Debezium.
 
-In this guide, you will learn how to configure a Postgres source connector in Decodable for ingesting changes from your Neon database so that you can replicate data from Neon to any of Decodable's [supported data sinks](https://docs.decodable.co/connections.html#sinks), optionally processing the data with SQL or custom Flink jobs.
+In this guide, you will learn how to configure a Postgres source connector in Decodable for ingesting changes from your Neon database so that you can replicate data from Lakebase Postgres to any of Decodable's [supported data sinks](https://docs.decodable.co/connections.html#sinks), optionally processing the data with SQL or custom Flink jobs.
 
 ## Prerequisites
 

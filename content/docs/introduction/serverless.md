@@ -10,10 +10,10 @@ summary: >-
   Billing is compute- and storage-based; autoscaling enforces a user-set maximum
   to prevent unexpected costs.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon takes the world's most loved database, Postgres, and makes it serverless. As part of the Neon backend, Neon Postgres helps teams ship reliable and scalable applications faster.
+Neon takes the world's most loved database, Postgres, and makes it serverless. As part of the Neon backend, Lakebase Postgres helps teams ship reliable and scalable applications faster.
 
 Enabling serverless Postgres begins with Neon's [lakebase architecture](/docs/introduction/architecture-overview), which natively decouples storage and compute. By separating these components, Neon can dynamically scale up during periods of high activity and down to zero when idle. Developers can be hands-off instead of sizing infrastructure manually.
 

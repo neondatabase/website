@@ -9,7 +9,7 @@ summary: >-
   number of days. Set `PG_VERSION` and `AWS_REGION` to target any Postgres
   version or AWS region.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This guide shows you how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.
@@ -168,7 +168,7 @@ env:
 ```
 
 - `RETENTION`: Determines how long a backup file should be retained before it’s deleted
-- `DATABASE_URL`: The Neon Postgres connection string for the database you’re backing up
+- `DATABASE_URL`: The database connection string for the database you’re backing up
 - `IAM_ROLE`: The name of the AWS IAM Role
 - `AWS_ACCOUNT_ID`: Your AWS Account Id
 - `S3_BUCKET_NAME`: The name of the S3 bucket where all backups are being stored

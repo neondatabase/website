@@ -11,7 +11,7 @@ summary: >-
   with normalize_address. Each extension section includes a CREATE EXTENSION
   statement and working SQL examples.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 PostGIS adds support for geospatial data in PostgreSQL, providing both data types and functions to store and analyze it effectively. The Postgres ecosystem includes multiple extensions built on top of PostGIS, to further enhance its capabilities. This guide introduces you to some of these extensions supported by Neon:
@@ -457,7 +457,7 @@ This query returns a normalized version of the input addresses.
 
 ## Conclusion
 
-These examples provide a quick introduction to using other extensions in the PostGIS ecosystem. They can significantly expand the geospatial capabilities of your Neon Postgres database.
+These examples provide a quick introduction to using other extensions in the PostGIS ecosystem. They can significantly expand the geospatial capabilities of your database.
 
 For further information, refer to the official documentation for each extension.
 

@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-07-10T13:57:31.917Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -50,7 +50,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 
 ## Postgres parameter settings
 
-The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
+The following table shows parameter settings that are set explicitly for your database. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
 Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role).
