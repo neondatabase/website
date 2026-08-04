@@ -148,7 +148,7 @@ From here, you can build dashboards, set up alerts, and correlate database behav
 
 - [Neon OpenTelemetry Integration](/docs/guides/opentelemetry)
 - [Neon Metrics and logs reference](/docs/reference/metrics-logs)
-- [SigNoz Lakebase Postgres integration guide](https://signoz.io/docs/integrations/opentelemetry-neondb/)
+- [SigNoz Neon Postgres integration guide](https://signoz.io/docs/integrations/opentelemetry-neondb/)
 - [SigNoz Cloud ingestion overview](https://signoz.io/docs/ingestion/signoz-cloud/overview/)
 - [OpenTelemetry Protocol (OTLP) Specification](https://opentelemetry.io/docs/specs/otlp/)
 

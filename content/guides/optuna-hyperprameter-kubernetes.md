@@ -9,7 +9,7 @@ updatedOn: '2026-07-31T19:05:29.503Z'
 
 In this guide, you'll learn how to set up distributed hyperparameter tuning for machine learning models across multiple nodes using Kubernetes. You'll use Optuna, a bayesian optimization library, to fine-tune models built with popular libraries like scikit-learn, XGBoost, PyTorch, and TensorFlow/Keras.
 
-To orchestrate all the trials, you'll use Neon, the AI-native backend platform for apps and agents that spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway. The combination of Lakebase Postgres, Kubernetes, and Docker allows for scalable, distributed hyperparameter tuning, simplifying the orchestration and management of complex machine learning workflows.
+To orchestrate all the trials, you'll use Neon, a complete set of cloud backend primitives for apps and agents that spans Lakebase Postgres, Auth, Storage, Functions, and an AI Gateway. The combination of Lakebase Postgres, Kubernetes, and Docker allows for scalable, distributed hyperparameter tuning, simplifying the orchestration and management of complex machine learning workflows.
 
 ## Prerequisites
 

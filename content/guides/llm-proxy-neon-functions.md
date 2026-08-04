@@ -142,7 +142,7 @@ LLM requests cost real money. Unlike typical API endpoints, where rate limiting 
 
 Neon Functions run as long-lived Node.js processes, but they can still scale horizontally. This means multiple instances of your function may operate simultaneously, each maintaining its own in-memory state. To enforce consistent rate limiting across all instances, you’ll need a shared store accessible to every process. You have two main options:
 
-- [**Lakebase Postgres**](/docs/postgres/overview): Keeps your entire stack within Neon, eliminating the need to manage additional cloud infrastructure.
+- [**Lakebase Postgres**](/docs/postgres/overview): Keeps your entire stack on Neon, eliminating the need to manage additional cloud infrastructure.
 - [**Upstash Redis**](https://upstash.com/redis): An alternative if you prefer an in-memory, key-value store specifically designed for low-latency rate-limiting counters.
 
 Both implementations follow the same pattern: a fixed-window counter that tracks requests per user within a 60-second bucket.

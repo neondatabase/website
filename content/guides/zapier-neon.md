@@ -55,7 +55,7 @@ Before you begin, ensure you have the following:
 For Zapier's "New Row" trigger to reliably detect new entries in Neon, your table should have an auto-incrementing `PRIMARY KEY` (like `SERIAL` or `BIGSERIAL`) or a column that strictly orders new rows (like a `created_at` timestamp). Zapier uses this "Ordering Column" to check for new entries.
 </Admonition>
 
-## Connecting Lakebase Postgres to Zapier
+## Connecting your database on Neon to Zapier
 
 Before creating Zaps, you need to connect your Neon database to Zapier. Zapier uses a generic "PostgreSQL" app integration. Due to how [Neon uses Server Name Indication (SNI) for routing connections](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) and how some clients handle SNI, a specific format is required for the password field in Zapier to ensure a successful connection.
 
@@ -223,7 +223,7 @@ The process for building these Zaps will be very similar:
 
 If you encounter issues connecting Neon to Zapier or if your Zaps involving Neon are not working as expected, consider the following:
 
-- **Verify password format:** Ensure you are using the correct password format when connecting Neon to Zapier, which includes the `endpoint=[endpoint_id]$` prefix before your actual password. Refer to the details in the [Connecting Lakebase Postgres to Zapier](#connecting-lakebase-postgres-to-zapier) section for the exact structure. An incorrect password format is a common reason for connection failures.
+- **Verify password format:** Ensure you are using the correct password format when connecting Neon to Zapier, which includes the `endpoint=[endpoint_id]$` prefix before your actual password. Refer to the details in the [Connecting your database on Neon to Zapier](#connecting-your-database-on-neon-to-zapier) section for the exact structure. An incorrect password format is a common reason for connection failures.
 
 - **Specific Errors:**
 

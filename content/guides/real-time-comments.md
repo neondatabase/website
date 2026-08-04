@@ -65,7 +65,7 @@ Replace `<user>`, `<password>`, `<endpoint_hostname>`, `<port>`, and `<dbname>` 
 
 Use this connection string as an environment variable designated as `DATABASE_URL` in the `.env` file.
 
-## Set up Ably LiveSync with Lakebase Postgres
+## Set up Ably LiveSync with your database on Neon
 
 Sign in into the [Ably Dashboard](https://ably.com/login), and click on `+ Create new app`.
 
@@ -124,7 +124,7 @@ prepare();
 
 The code above defines a function that connects to a Neon serverless Postgres database using a `DATABASE_URL` environment variable and sets up the necessary schema for the real-time application. It creates two tables, `nodes` and `outbox`, to store data and manage message processing, respectively. A trigger function, `outbox_notify`, is implemented to send notifications using `pg_notify` whenever new rows are inserted into the `outbox` table. This ensures the database is ready for real-time updates and WebSocket-based communication.
 
-To run the schema against your Lakebase Postgres, execute the following command:
+To run the schema against your database on Neon, execute the following command:
 
 ```
 npm run db
@@ -132,7 +132,7 @@ npm run db
 
 If it runs successfully, you should see `Database schema set up successfully.` in the terminal.
 
-## Set up Prisma for Lakebase Postgres
+## Set up Prisma for your database on Neon
 
 In the directory `lib/prisma`, you would see the following code in `index.ts` file:
 
@@ -162,7 +162,7 @@ if (process.env.NODE_ENV === 'development') global.prisma = prisma;
 export default prisma;
 ```
 
-The code above sets up a Prisma client for Lakebase Postgres. It configures the Neon database connection using the `@neondatabase/serverless` library, with WebSocket and `fetch` support to execute queries. A global `prisma` instance is created using the `PrismaNeon` adapter, ensuring reuse in development to avoid multiple instances. Finally, the configured `prisma` client is exported for use throughout the application.
+The code above sets up a Prisma client for your database on Neon. It configures the Neon database connection using the `@neondatabase/serverless` library, with WebSocket and `fetch` support to execute queries. A global `prisma` instance is created using the `PrismaNeon` adapter, ensuring reuse in development to avoid multiple instances. Finally, the configured `prisma` client is exported for use throughout the application.
 
 In the same directory, you would see the following code in the `api.ts` file:
 

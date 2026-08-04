@@ -294,7 +294,7 @@ In addition to the monitoring dashboard, you can use the `pg_stat_statements` ex
 
 You can check out the [pg_stat_statements documentation](/docs/extensions/pg_stat_statements) for more information on how to enable and use this extension.
 
-This is very useful for identifying performance bottlenecks and optimizing your database queries. For example, once you identify slow queries, you can use tools like `EXPLAIN` to analyze query plans and then consider adding indexes or rewriting queries to improve performance. For more information, read the [Performance tips for Lakebase Postgres](/blog/performance-tips-for-neon-postgres) blog post.
+This is very useful for identifying performance bottlenecks and optimizing your database queries. For example, once you identify slow queries, you can use tools like `EXPLAIN` to analyze query plans and then consider adding indexes or rewriting queries to improve performance. For more information, read the [Performance tips for Neon Postgres](/blog/performance-tips-for-neon-postgres) blog post.
 
 ### Application-Side Monitoring
 

@@ -50,7 +50,7 @@ Before we begin, make sure you have:
    php artisan livewire-charts:install
    ```
 
-5. Set up your Lakebase Postgres connection in the `.env` file:
+5. Set up your Neon connection in the `.env` file:
 
    ```env
    DB_CONNECTION=pgsql
@@ -586,7 +586,7 @@ For more information on seeding the database, check out the [Laravel documentati
 
 When working with large datasets, you will have to make sure that your application is optimized for performance. This includes optimizing database queries, caching results, and using efficient algorithms.
 
-We will cover some optimization techniques for improving the performance of your Lakebase Postgres application below but you should also check out the [Performance tips for Lakebase Postgres](/blog/performance-tips-for-neon-postgres) blog post for more specific tips.
+We will cover some optimization techniques for improving the performance of your application below but you should also check out the [Performance tips for Neon Postgres](/blog/performance-tips-for-neon-postgres) blog post for more specific tips.
 
 ### 1. Database Indexing for Frequently Queried Columns
 

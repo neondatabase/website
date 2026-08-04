@@ -301,9 +301,9 @@ Here we are adding a foreign key constraint `fk_category` to ensure that the `ca
 If you prefer a more programmatic approach to schema translation, you can use any Postgres library or ORM (object-relational mapping) tool in your chosen programming language. These tools can help automate the schema creation process and provide a more structured way to define your Postgres schema. Learn more on our [language guides](/docs/get-started/languages) and [ORM guides](/docs/get-started/orms) section.
 </Admonition>
 
-### Step 4: Data import to Lakebase Postgres
+### Step 4: Data import to Neon
 
-With your Lakebase Postgres database ready and your data exported from FaunaDB, the next step is to import this data into your newly created tables.
+With your database on Neon ready and your data exported from FaunaDB, the next step is to import this data into your newly created tables.
 
 For this guide, we'll demonstrate importing data from the `product.json` file (exported from FaunaDB) into the `products` table in Lakebase Postgres.
 

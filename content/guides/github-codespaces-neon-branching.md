@@ -98,9 +98,9 @@ This file tells GitHub Codespaces how to set up the development environment. Her
 - `"postCreateCommand"`: This runs commands after the Codespace is created. It installs PHP dependencies, generates an application key, and runs a setup script for the database.
 - `"features"`: This adds Node.js to the environment.
 
-## Setting up Lakebase Postgres
+## Setting up a database on Neon
 
-Now let's connect our project to a Lakebase Postgres database.
+Now let's connect our project to a database on Neon.
 
 1. Go to the [Neon Console](https://console.neon.tech) and create a new project.
 

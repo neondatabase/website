@@ -20,7 +20,7 @@ This guide will walk you through setting up and using both Neon Local and Neon L
 - Use Neon Local with Docker Compose for CI/CD or non-VS Code environments.
 
 <Admonition type="note" title="Neon Local vs. a Local Postgres Instance">
-This guide focuses on **Neon Local**, a **local proxy** for your **cloud-hosted Lakebase Postgres database**. It enables you to use Neon's powerful branching features with a convenient `localhost` connection, allowing you to seamlessly switch between branches, create new branches, and manage them directly from your IDE.
+This guide focuses on **Neon Local**, a **local proxy** for your **cloud-hosted Postgres database on Neon**. It enables you to use Neon's powerful branching features with a convenient `localhost` connection, allowing you to seamlessly switch between branches, create new branches, and manage them directly from your IDE.
 
 This is different from [Local Development with Neon](/guides/local-development-with-neon) guide, which shows you how to run a completely separate, **local instance of Postgres** for fully offline development.
 

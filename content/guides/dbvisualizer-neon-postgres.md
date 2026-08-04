@@ -12,7 +12,7 @@ DbVisualizer is a universal SQL client and database‑management tool that provi
 ## Table of Contents
 
 - [Setting up DbVisualizer](#setting-up-dbvisualizer)
-- [Connecting DbVisualizer to Lakebase Postgres](#connect-dbvisualizer-to-lakebase-postgres)
+- [Connecting DbVisualizer to your database on Neon](#connect-dbvisualizer-to-your-database-on-neon)
 - [Basic operations in DbVisualizer](#basic-operations-in-dbvisualizer)
 
 ## Setting up DbVisualizer
@@ -21,7 +21,7 @@ DbVisualizer is a universal SQL client and database‑management tool that provi
 
 2. **Launch DbVisualizer**: Open DbVisualizer from your applications menu and ensure it is running.
 
-## Create a Lakebase Postgres Database
+## Create a database on Neon
 
 1. If you haven't already, create a new Neon project. You can use the [Neon Console](https://console.neon.tech/).
 
@@ -40,7 +40,7 @@ DbVisualizer is a universal SQL client and database‑management tool that provi
 
 Save the connection details as you will need them in the next steps.
 
-## Connect DbVisualizer to Lakebase Postgres
+## Connect DbVisualizer to your database on Neon
 
 1. **Open DbVisualizer**: Open DbVisualizer and finish the setup if you haven't done so already.
 

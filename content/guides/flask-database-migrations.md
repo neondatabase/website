@@ -59,7 +59,7 @@ Before we begin, make sure you have:
    pip install -r requirements.txt
    ```
 
-4. Create a `.env` file in your project root and add your Lakebase Postgres connection string:
+4. Create a `.env` file in your project root and add your Neon connection string:
 
    ```
    DATABASE_URL=postgresql://user:password@your-neon-host:5432/your-database

@@ -584,11 +584,11 @@ public function revokeRole(User $user, Request $request)
 
 Besides the `removeRole` and `assignRole` methods, the package provides other methods for managing roles and permissions, such as `syncRoles`, `givePermissionTo`, and `revokePermissionTo` for more advanced use cases.
 
-### Optimizing RBAC Performance with Lakebase Postgres
+### Optimizing RBAC Performance with Postgres on Neon
 
 When working with RBAC, especially in larger applications, you might encounter performance issues due to the increased number of database queries.
 
-Here are some tips to optimize performance when using Spatie Laravel Permission with Lakebase Postgres:
+Here are some tips to optimize performance when using Spatie Laravel Permission with Postgres on Neon:
 
 1. **Caching**: Enable caching in the package's configuration to reduce database queries:
 
@@ -608,11 +608,11 @@ Here are some tips to optimize performance when using Spatie Laravel Permission 
    $users = User::with('roles', 'permissions')->get();
    ```
 
-3. **Indexing**: Ensure that the `model_id` and `model_type` columns in the `model_has_roles` and `model_has_permissions` tables are properly indexed. For more information on indexing, refer to the [Lakebase Postgres documentation](/docs/postgresql/index-types).
+3. **Indexing**: Ensure that the `model_id` and `model_type` columns in the `model_has_roles` and `model_has_permissions` tables are properly indexed. For more information on indexing, refer to the [Postgres index types documentation](/docs/postgresql/index-types).
 
 4. **Minimize Permission Checks**: Instead of checking individual permissions, consider using roles or permission groups to reduce the number of checks you do on each request.
 
-5. **Use Database-Level Permissions**: For very large-scale applications, consider implementing some permissions at the database level using [Lakebase Postgres's role-based access control features](/blog/the-non-obviousness-of-postgres-roles).
+5. **Use Database-Level Permissions**: For very large-scale applications, consider implementing some permissions at the database level using [Postgres's role-based access control features](/blog/the-non-obviousness-of-postgres-roles).
 
 ## Conclusion
 
@@ -628,4 +628,4 @@ For more complex applications, Spatie's Laravel Permission package provides a fl
 - [Laravel Policies](https://laravel.com/docs/11.x/authorization#creating-policies)
 - [Laravel Gates](https://laravel.com/docs/11.x/authorization#gates)
 - [Spatie Laravel Permission Documentation](https://spatie.be/docs/laravel-permission)
-- [Lakebase Postgres Documentation](/docs)
+- [Neon Documentation](/docs)

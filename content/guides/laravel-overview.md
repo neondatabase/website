@@ -19,13 +19,13 @@ If you do not have one already, create a Neon project. Save your connection deta
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 
-## Setting Up Your Environment for Laravel and Lakebase Postgres
+## Setting Up Your Environment for Laravel and Neon
 
 Start by installing Laravel. For installation instructions, refer to the [Laravel documentation](https://laravel.com/docs/11.x/installation).
 
-To get Laravel working with Lakebase Postgres, you'll need to configure your environment settings.
+To get Laravel working with your database on Neon, you'll need to configure your environment settings.
 
-This process involves updating the `.env` file in your Laravel project to include the details for your Lakebase Postgres database connection.
+This process involves updating the `.env` file in your Laravel project to include the details for your database connection.
 
 Here's what you need to update in the `.env` file:
 
@@ -221,15 +221,15 @@ With this `metadata` column, you can easily store and retrieve structured data r
 
 By integrating these Postgres features into your Laravel application, you can enhance its performance, maintain data integrity, and provide a scalable solution for managing complex data structures.
 
-## Testing and Lakebase Postgres Branches
+## Testing and database branches on Neon
 
-When integrating Lakebase Postgres with your Laravel application, leveraging database branches for testing is a robust strategy to ensure the reliability and consistency of your tests.
+When integrating your database on Neon with your Laravel application, leveraging database branches for testing is a robust strategy to ensure the reliability and consistency of your tests.
 
-Lakebase Postgres Branches allow you to create isolated database environments, similar to branching in version control systems like Git. By using a separate database branch for testing, you ensure that your test executions are isolated from your production data, maintaining data integrity and consistency.
+Database branches on Neon allow you to create isolated database environments, similar to branching in version control systems like Git. By using a separate database branch for testing, you ensure that your test executions are isolated from your production data, maintaining data integrity and consistency.
 
-Usually, when running tests in Laravel, you would use a separate database for testing to avoid affecting your production data. In most cases, developers use an in-memory SQLite database for testing. However, Lakebase Postgres branches offer a more solid solution for testing your Laravel application.
+Usually, when running tests in Laravel, you would use a separate database for testing to avoid affecting your production data. In most cases, developers use an in-memory SQLite database for testing. However, database branches on Neon offer a more solid solution for testing your Laravel application.
 
-1. Lakebase Postgres lets you create branches of your database. This means you can have a dedicated branch just for testing purposes, where you can freely run tests, apply migrations, and modify data without affecting your production database.
+1. Neon lets you create branches of your database. This means you can have a dedicated branch just for testing purposes, where you can freely run tests, apply migrations, and modify data without affecting your production database.
 
 2. With a testing branch, you can execute your entire suite of tests in an environment that mirrors production without the risk of corrupting your actual production data. This is particularly useful for integration tests that interact with the database.
 
@@ -239,6 +239,6 @@ Usually, when running tests in Laravel, you would use a separate database for te
 
 Combining Laravel with Postgres on Neon offers a powerful and efficient environment for developing web applications. Laravel's seamless integration with Postgres allows developers to take advantage of the full power of both the framework and the database, providing a flexible, scalable, and developer-friendly platform.
 
-The ability to use database branches for testing with Lakebase Postgres brings an additional layer of robustness to your development process, allowing for isolated testing environments that mirror your production setup without risking data integrity.
+The ability to use database branches for testing on Neon brings an additional layer of robustness to your development process, allowing for isolated testing environments that mirror your production setup without risking data integrity.
 
 Laravel's expressive syntax combined with Lakebase Postgres's powerful features allow developers to build complex, data-driven applications efficiently and effectively.

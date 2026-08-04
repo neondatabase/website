@@ -1048,7 +1048,7 @@ You can extend this system by adding more specialized queues, extending the moni
 ## Additional resources
 
 - [Bull Documentation](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md)
-- [Lakebase Postgres Documentation](/docs)
+- [Neon Documentation](/docs)
 - [Node.js PostgreSQL Client (pg)](https://node-postgres.com/)
 - [Redis Documentation](https://redis.io/documentation)
 

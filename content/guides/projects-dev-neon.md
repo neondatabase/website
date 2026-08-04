@@ -269,7 +269,7 @@ That means you can focus entirely on what you want to build, while your AI assis
 
 - [Projects.dev Provider Directory](https://projects.dev/providers)
 - [Stripe Projects CLI Documentation](https://docs.stripe.com/cli)
-- [Lakebase Postgres](/docs/introduction/about)
+- [Neon documentation](/docs/introduction)
 - [OpenCode](https://opencode.ai/)
 - [Agent Skills](https://github.com/agentskills/agentskills)
 

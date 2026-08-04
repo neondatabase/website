@@ -521,5 +521,5 @@ When implementing soft deletes, always think about the lifecycle of your data. P
 ## Additional Resources
 
 - [Laravel Documentation on Soft Deletes](https://laravel.com/docs/eloquent#soft-deleting)
-- [Lakebase Postgres Documentation](/docs)
+- [Neon Documentation](/docs)
 - [Laravel Eloquent Performance Tips](https://laravel.com/docs/eloquent-relationships#eager-loading)

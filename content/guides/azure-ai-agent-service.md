@@ -27,7 +27,7 @@ For example, when a user asks questions about their invoice, the AI can query Ne
 
 We’ll build an AI agent that connects to your Postgres database and uses a simple Python function to fetch and analyze the data.
 
-We’ll use [**Lakebase Postgres**](/) for our database. Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. It’s free to start, scales automatically, and works great for [AI agents](/use-cases/ai-agents) that need to query data on demand without managing infrastructure.
+We’ll use [**Neon**](/) for our database. Neon is a complete set of cloud backend primitives for apps and agents, spanning Lakebase Postgres, Auth, Storage, Functions, and an AI Gateway. It’s free to start, scales automatically, and works great for [AI agents](/use-cases/ai-agents) that need to query data on demand without managing infrastructure.
 
 ### Prerequisites
 
@@ -272,7 +272,7 @@ user_functions = [billing_anomaly_summary]
 
 ## Create and Configure the AI Agent
 
-Now we'll set up the AI agent and integrate it with our Lakebase Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
+Now we'll set up the AI agent and integrate it with our Postgres tool using the **Azure AI Agent Service SDK.** The [Python script](https://github.com/neondatabase-labs/neon-azure-ai-agent-service-get-started/blob/main/billing_anomaly_agent.py) does the following:
 
 - **Creates the agent**
   Instantiates an AI agent using the selected model (`gpt-4o`, for example), adds tool access, and sets instructions that tell the agent how to behave (e.g., “You are a helpful SaaS assistant…”).

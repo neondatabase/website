@@ -92,7 +92,7 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint>.neon.tech/<dbname>?sslmo
 OPENROUTER_API_KEY="your-openrouter-api-key"
 ```
 
-## Configure Mastra to use Lakebase Postgres for storage
+## Configure Mastra to use your database on Neon for storage
 
 Mastra uses a central configuration file to tie your agents, workflows, and storage together. By default, agents share **instance-level storage**.
 

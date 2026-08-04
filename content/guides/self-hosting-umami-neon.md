@@ -21,7 +21,7 @@ To follow along and deploy the application in this guide, you will need the foll
 - [What is Umami?](#what-is-umami)
 - [Provisioning a Postgres database using Neon](#provisioning-a-postgres-database-using-neon)
 - [Set up an Umami instance for Fly.io](#set-up-an-umami-instance-for-flyio)
-- [Configure Lakebase Postgres as serverless database for self-hosted Umami analytics](#configure-lakebase-postgres-as-serverless-database-for-self-hosted-umami-analytics)
+- [Configure Postgres on Neon as serverless database for self-hosted Umami analytics](#configure-postgres-on-neon-as-serverless-database-for-self-hosted-umami-analytics)
 - [Deploy to Fly.io](#deploy-to-flyio)
 
 ## What is Umami?
@@ -170,7 +170,7 @@ This deployment will:
 
 Once the deployment is ready, you are left with just one step &#8212; to set the `DATABASE_URL` environment variable that we obtained in the previous section. We'll do that in the next section.
 
-## Configure Lakebase Postgres as serverless database for self-hosted Umami analytics
+## Configure Postgres on Neon as serverless database for self-hosted Umami analytics
 
 In your Fly.io [Dashboard > Apps](https://fly.io/dashboard), click on your app name, and you will be taken to the overview of your app on Fly.io.
 

@@ -183,9 +183,9 @@ pip freeze > requirements.txt
 
 This file can be used to install the dependencies in another environment using `pip install -r requirements.txt`.
 
-## Connecting to Lakebase Postgres
+## Connecting to your database on Neon
 
-Next, let's set up a connection to Lakebase Postgres for storing user data.
+Next, let's set up a connection to your database on Neon for storing user data.
 
 Create a `.env` file in your project root and add the following configuration:
 

@@ -77,7 +77,7 @@ pip freeze > requirements.txt
 
 This will create a `requirements.txt` file with all the installed packages in your virtual environment and their versions. This is useful for sharing your project with others or deploying it to a server.
 
-## Connecting to Lakebase Postgres
+## Connecting to your database on Neon
 
 First, let's set up our database connection. Create a `.env` file in your project root:
 

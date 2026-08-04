@@ -164,7 +164,7 @@ A few important points about this migration:
 
 Notice how the down migration drops objects in reverse order compared to how they were created in the up migration. This is important to avoid dependency issues when rolling back.
 
-## Connecting to Lakebase Postgres
+## Connecting to your database on Neon
 
 To run migrations against your Neon database, you'll need to construct a proper connection string. Neon provides a secure, TLS-enabled connection:
 

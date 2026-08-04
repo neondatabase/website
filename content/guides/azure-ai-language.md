@@ -467,7 +467,7 @@ The timer schedule is defined in the `function.json` file as follows:
 
 This configuration makes sure that the function runs every two hours. You can adjust the schedule as needed using a [cron expression](https://learn.microsoft.com/en-gb/azure/azure-functions/functions-bindings-timer).
 
-For more details on connecting Azure Functions to a Postgres database and deploying the function to Azure, see the [Building a Serverless Referral System with Lakebase Postgres and Azure Functions](/guides/azure-functions-referral-system) guide.
+For more details on connecting Azure Functions to a Postgres database and deploying the function to Azure, see the [Neon documentation](/docs/introduction).
 
 ## Analyzing Results
 

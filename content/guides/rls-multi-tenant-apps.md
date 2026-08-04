@@ -171,7 +171,7 @@ Neon cannot write correct policies for you. What it can do is give you a **produ
 
 [Neon Branching](/docs/introduction/branching) lets you create an isolated copy of your current Postgres database quickly, including all schema, data, and system tables, without affecting production. Each [branch](/docs/manage/branches) is a fully functional database endpoint that you can connect to independently, making it practical to test schema changes, migrations, or RLS policy updates in a safe, production-like environment.
 
-[Managed Better Auth](/docs/auth/overview) is a managed auth layer built on Better Auth. Users, sessions, and related config live in your Lakebase Postgres (including the `neon_auth` schema). When you create a database branch, that identity data is copied along with your application tables, so policies that join to users, org membership, or tenant rows behave like production instead of hand-written mocks.
+[Managed Better Auth](/docs/auth/overview) is a managed auth layer built on Better Auth. Users, sessions, and related config live in your database on Neon (including the `neon_auth` schema). When you create a database branch, that identity data is copied along with your application tables, so policies that join to users, org membership, or tenant rows behave like production instead of hand-written mocks.
 
 Here’s how you can use branching and auth to safely test RLS before pushing changes to production:
 

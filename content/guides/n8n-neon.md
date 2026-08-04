@@ -95,7 +95,7 @@ This workflow automates the process of ingesting and preparing your Google Drive
 7.  Select **Options > Add option > File Name.** Similarly, drag the "File Name" from the Google Drive Trigger node to this field. This will help in identifying the file later.
     ![Configuring Google Drive Download node](/docs/guides/n8n/n8n-google-drive-download-node.gif)
 
-### Step 3: Setting up the Lakebase Postgres PGVector store Node
+### Step 3: Setting up the Postgres PGVector store Node
 
 This node will store the document chunks and their embeddings in Lakebase Postgres using the [`pgvector` extension](/docs/extensions/pgvector).
 
