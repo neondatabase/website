@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.38.5",
+  "neonctlVersion": "2.43.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -48,6 +48,10 @@
         "yaml",
         "table"
       ]
+    },
+    "profile": {
+      "type": "string",
+      "describe": "Named credentials to use, from profiles.json (default: NEON_PROFILE, else DEFAULT)"
     },
     "version": {
       "type": "boolean",
@@ -136,6 +140,72 @@
           "description": "List every available API route"
         }
       ]
+    },
+    "api-keys": {
+      "aliases": [
+        "api-key"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "A name to identify the key later",
+              "required": true
+            },
+            "org-id": {
+              "type": "string",
+              "describe": "Create a key for this organization instead of your account"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Create a key that can access only this project. Its organization is looked up from the project"
+            }
+          },
+          "commands": {},
+          "describe": "Create an API key. The key is shown once and cannot be retrieved again"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "List the organization's keys instead of your account's"
+            }
+          },
+          "commands": {},
+          "describe": "List API keys for your account, or for an organization"
+        },
+        "revoke": {
+          "name": "revoke",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "The API key id, from `api-keys list`",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "Revoke an organization key instead of an account key"
+            }
+          },
+          "commands": {},
+          "describe": "Revoke an API key. Anything using it stops working immediately"
+        }
+      },
+      "describe": "Manage API keys",
+      "usage": "$0 api-keys <sub-command> [options]"
     },
     "auth": {
       "aliases": [
@@ -852,10 +922,17 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "from-branch": {
+              "type": "boolean",
+              "describe": "Seed neon.ts from a branch's live Neon state instead of asking. Uses the branch pinned in .neon, or --branch <name|id>, or the project's default branch. The only mode of `config init` that calls the Neon API."
+            },
             "install": {
               "type": "boolean",
               "describe": "Install @neon/config and @neon/env if they're missing. On by default; use --no-install to just print the command.",
               "default": true
+            },
+            "services": {
+              "type": "string"
             }
           },
           "commands": {},
@@ -2474,6 +2551,47 @@
       },
       "describe": "Manage organizations",
       "usage": "$0 orgs <sub-command> [options]"
+    },
+    "profiles": {
+      "aliases": [
+        "profile"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List profiles, the account each holds, and where its credentials live"
+        },
+        "remove": {
+          "name": "remove",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "Profile to remove",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt",
+              "default": false,
+              "alias": "y"
+            }
+          },
+          "commands": {},
+          "describe": "Revoke a profile's token and remove it"
+        }
+      },
+      "describe": "Manage named sets of Neon credentials",
+      "usage": "$0 profiles <sub-command> [options]"
     },
     "projects": {
       "aliases": [

@@ -1216,6 +1216,10 @@
                   slug: cli/set-context
                 - title: me
                   slug: cli/me
+                - title: profiles
+                  slug: cli/profiles
+                - title: api-keys
+                  slug: cli/api-keys
                 - title: completion
                   slug: cli/completion
             - title: Projects and branches
