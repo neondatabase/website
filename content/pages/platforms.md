@@ -6,7 +6,7 @@ subtitle: >-
 updatedOn: '2025-06-17T09:00:00.000Z'
 ---
 
-Neon makes it easy to embed Lakebase Postgres, Neon’s database, into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required.
+Neon makes it easy to embed Lakebase Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required.
 
 ![Partners](/images/pages/platforms/partners.jpg)
 
@@ -99,7 +99,7 @@ company: 'co-founder and CPO at Koyeb',
 
 ## Built for your platform, not ours
 
-**We’re not trying to own your user experience. We’re here to power it.** You can integrate Neon invisibly behind the scenes, whether you want to use our [OAuth integration](/docs/guides/oauth-integration) or manage Neon projects directly via API. **You decide how Lakebase Postgres shows up in your UI, we take care of the rest.**
+**We’re not trying to own your user experience. We’re here to power it.** You can integrate Neon invisibly behind the scenes, whether you want to use our [OAuth integration](/docs/guides/oauth-integration) or manage Neon projects directly via API. **You decide how the database shows up in your UI, we take care of the rest.**
 
 ## Beyond the database: Neon backend primitives
 
@@ -108,12 +108,12 @@ Lakebase Postgres is the core of what platforms embed today. When your product n
 Optional primitives that sit on the same project and branch lifecycle:
 
 - **[Managed Better Auth](/docs/auth/overview)** - authentication and identity stored in Postgres, branchable with the database
-- **[Data API](/docs/data-api/get-started)** - PostgREST-compatible HTTP access to each database and branch
-- **[Object Storage](/docs/storage/overview)** - S3-compatible files and blobs with per-branch isolation
-- **[Functions](/docs/compute/functions/overview)** - long-running Node.js compute next to the data
-- **[AI Gateway](/docs/ai-gateway/overview)** - one credential for frontier and open-source models
+- **[Neon Data API](/docs/data-api/get-started)** - PostgREST-compatible HTTP access to each database and branch
+- **[Neon Object Storage](/docs/storage/overview)** - S3-compatible files and blobs with per-branch isolation
+- **[Neon Functions](/docs/compute/functions/overview)** - long-running Node.js compute next to the data
+- **[Neon AI Gateway](/docs/ai-gateway/overview)** - one credential for frontier and open-source models
 
-Adopt only what each generated app needs. Keep Lakebase Postgres as the default, and turn on Auth, storage, functions, or model access when a user’s app requires a fuller backend, without sending them to another vendor.
+Adopt only what each user’s app needs. Keep Lakebase Postgres as the default, and turn on Auth, storage, functions, or model access when an app requires a fuller backend, without sending your users to another vendor.
 
 For agent platforms and full-stack codegen, see also [Neon for AI Agent Platforms](/use-cases/ai-agents).
 
