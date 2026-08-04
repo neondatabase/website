@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Restarting PostgreSQL on Windows works the same whether you're running it locally, on a server, or through any managed provider, since these techniques apply to Postgres everywhere. If you're running Postgres in the cloud for an enterprise workload, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed experience for the AI era, with strong performance, security, and native integration into the Lakehouse so your operational and analytical data stay in sync. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Restarting PostgreSQL on Windows works the same whether you're running it locally, on a server, or through any managed provider. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to restart PostgreSQL on Windows using Service Manager, command line, and `pg_ctl` command.

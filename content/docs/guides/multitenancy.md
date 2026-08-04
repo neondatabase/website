@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -691,7 +691,7 @@ env:
 ```
 
 - `RETENTION`: This determines how long a backup file should remain in the S3 bucket before it's deleted.
-- `DATABASE_URL`: This is the Neon Postgres connection string for the database you're backing up.
+- `DATABASE_URL`: This is the Lakebase Postgres connection string for the database you're backing up.
 - `IAM_ROLE`: This is the name of the AWS IAM Role.
 - `AWS_ACCOUNT_ID`: This is your AWS Account ID.
 - `S3_BUCKET_NAME`: This is the name of the S3 bucket where all backups are being stored.

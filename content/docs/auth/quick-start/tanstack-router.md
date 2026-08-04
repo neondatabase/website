@@ -7,9 +7,9 @@ summary: >-
   include AuthView, AccountView, SignedIn, and RedirectToSignIn. Use this page
   when you need sign-in, sign-up, and route protection without writing custom
   auth UI. User profiles are stored automatically in the `neon_auth.user` table
-  in your Neon Postgres database.
+  in your database.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 layout: wide
 ---
 

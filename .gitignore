@@ -59,6 +59,10 @@ jspm_packages/
 # next files
 .next/
 
+# Playwright test artifacts
+playwright-report/
+test-results/
+
 # ignore local sitemap
 public/sitemap.xml
 public/sitemap-0.xml

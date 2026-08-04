@@ -44,7 +44,7 @@ You're billed per CU-hour at the actual size the compute ran at. On Launch ($0.1
 - 1 hour at 4 CU during a spike = 4 CU-hours = $0.424
 - 1 hour scaled to zero = $0
 
-Set a [spending limit](/docs/introduction/spending-limit) on Launch or Scale to cap total spend across all projects in the organization.
+Set up [spending notifications](/docs/introduction/spending-notifications) on Launch or Scale to get alerts on total spend across all projects in the organization.
 
 <Admonition type="tip" title="Don't over-provision the minimum">
 Setting a high minimum CU defeats the purpose of autoscaling. Start with 0.25 CU as the minimum and let Neon scale up under load. Bump the minimum only if you see warm-up latency hurting real users.

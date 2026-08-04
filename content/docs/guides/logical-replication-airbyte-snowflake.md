@@ -2,17 +2,17 @@
 title: Replicate data to Snowflake with Airbyte
 subtitle: Learn how to replicate data from Neon to Snowflake with Airbyte
 summary: >-
-  Set up a Neon-to-Snowflake CDC pipeline using Airbyte's Postgres connector
+  Set up a Lakebase Postgres-to-Snowflake CDC pipeline using Airbyte's Postgres connector
   with the pgoutput plugin. Covers logical replication setup, replication slot
   and publication creation, Airbyte source configuration, and Snowflake
   destination provisioning. Enabling logical replication permanently sets
   wal_level to logical for all databases in the Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations. In this guide, you will learn how to define your Lakebase Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
 
 [Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
 
@@ -316,7 +316,7 @@ When you're finished filling in the required fields, click **Set up destination*
 
 ## Set up a connection
 
-In this step, you'll set up a connection between your Neon Postgres source and your Snowflake destination.
+In this step, you'll set up a connection between your Lakebase Postgres source and your Snowflake destination.
 
 To set up a new destination:
 

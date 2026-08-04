@@ -15,7 +15,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL 18's new features apply to any Postgres deployment, not just [Neon](https://neon.com), so you can use this guide wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and deep Lakehouse integration that modern data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+PostgreSQL 18's new features apply to any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: PostgreSQL 18 introduces many new features including asynchronous I/O providing significant I/O performance improvements, virtual generated columns, UUIDv7 support, temporal constraints, and enhanced security. This overview covers the major features that impact developers and DBAs.

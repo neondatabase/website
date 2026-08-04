@@ -119,9 +119,6 @@
     - title: "Set branch as default"
       slug: reference/api/branches/set-default-project-branch
       method: POST
-    - title: "Recover a deleted branch"
-      slug: reference/api/branches/recover-project-branch
-      method: POST
     - title: "Finalize branch restore from snapshot"
       slug: reference/api/branches/finalize-restore-branch
       method: POST
@@ -433,85 +430,6 @@
     - title: "Delete Neon Data API"
       slug: reference/api/dataapi/delete-project-branch-data-api
       method: DELETE
-- title: "Legacy Auth"
-  slug: reference/api/auth-legacy
-  items:
-    - title: "Create Auth Provider SDK keys"
-      slug: reference/api/auth-legacy/create-neon-auth-provider-sdk-keys
-      method: POST
-    - title: "Transfer Neon-managed auth project to your own account"
-      slug: reference/api/auth-legacy/transfer-neon-auth-provider-project
-      method: POST
-    - title: "Create Neon Auth integration"
-      slug: reference/api/auth-legacy/create-neon-auth-integration
-      method: POST
-      tag: deprecated
-      tagTheme: orange
-    - title: "List trusted redirect URI domains"
-      slug: reference/api/auth-legacy/list-neon-auth-redirect-uri-whitelist-domains
-      method: GET
-      tag: deprecated
-      tagTheme: orange
-    - title: "Add trusted redirect URI domain"
-      slug: reference/api/auth-legacy/add-neon-auth-domain-to-redirect-uri-whitelist
-      method: POST
-      tag: deprecated
-      tagTheme: orange
-    - title: "Delete trusted redirect URI domain"
-      slug: reference/api/auth-legacy/delete-neon-auth-domain-from-redirect-uri-whitelist
-      method: DELETE
-      tag: deprecated
-      tagTheme: orange
-    - title: "Create new auth user"
-      slug: reference/api/auth-legacy/create-neon-auth-new-user
-      method: POST
-      tag: deprecated
-      tagTheme: orange
-    - title: "Delete auth user"
-      slug: reference/api/auth-legacy/delete-neon-auth-user
-      method: DELETE
-      tag: deprecated
-      tagTheme: orange
-    - title: "List active integrations with auth providers"
-      slug: reference/api/auth-legacy/list-neon-auth-integrations
-      method: GET
-      tag: deprecated
-      tagTheme: orange
-    - title: "List OAuth providers"
-      slug: reference/api/auth-legacy/list-neon-auth-oauth-providers
-      method: GET
-      tag: deprecated
-      tagTheme: orange
-    - title: "Add an OAuth provider"
-      slug: reference/api/auth-legacy/add-neon-auth-oauth-provider
-      method: POST
-      tag: deprecated
-      tagTheme: orange
-    - title: "Update OAuth provider"
-      slug: reference/api/auth-legacy/update-neon-auth-oauth-provider
-      method: PATCH
-      tag: deprecated
-      tagTheme: orange
-    - title: "Delete OAuth provider"
-      slug: reference/api/auth-legacy/delete-neon-auth-oauth-provider
-      method: DELETE
-      tag: deprecated
-      tagTheme: orange
-    - title: "Retrieve email server configuration"
-      slug: reference/api/auth-legacy/get-neon-auth-email-server
-      method: GET
-      tag: deprecated
-      tagTheme: orange
-    - title: "Update email server configuration"
-      slug: reference/api/auth-legacy/update-neon-auth-email-server
-      method: PATCH
-      tag: deprecated
-      tagTheme: orange
-    - title: "Delete integration with auth provider"
-      slug: reference/api/auth-legacy/delete-neon-auth-integration
-      method: DELETE
-      tag: deprecated
-      tagTheme: orange
 - title: "Buckets"
   slug: reference/api/buckets
   items:
@@ -593,3 +511,82 @@
     - title: "List branch log field values"
       slug: reference/api/logs/list-project-branch-log-field-values
       method: GET
+- title: "Legacy Auth"
+  slug: reference/api/auth-legacy
+  items:
+    - title: "Create Auth Provider SDK keys"
+      slug: reference/api/auth-legacy/create-neon-auth-provider-sdk-keys
+      method: POST
+    - title: "Transfer Neon-managed auth project to your own account"
+      slug: reference/api/auth-legacy/transfer-neon-auth-provider-project
+      method: POST
+    - title: "Create Neon Auth integration"
+      slug: reference/api/auth-legacy/create-neon-auth-integration
+      method: POST
+      tag: deprecated
+      tagTheme: orange
+    - title: "List trusted redirect URI domains"
+      slug: reference/api/auth-legacy/list-neon-auth-redirect-uri-whitelist-domains
+      method: GET
+      tag: deprecated
+      tagTheme: orange
+    - title: "Add trusted redirect URI domain"
+      slug: reference/api/auth-legacy/add-neon-auth-domain-to-redirect-uri-whitelist
+      method: POST
+      tag: deprecated
+      tagTheme: orange
+    - title: "Delete trusted redirect URI domain"
+      slug: reference/api/auth-legacy/delete-neon-auth-domain-from-redirect-uri-whitelist
+      method: DELETE
+      tag: deprecated
+      tagTheme: orange
+    - title: "Create new auth user"
+      slug: reference/api/auth-legacy/create-neon-auth-new-user
+      method: POST
+      tag: deprecated
+      tagTheme: orange
+    - title: "Delete auth user"
+      slug: reference/api/auth-legacy/delete-neon-auth-user
+      method: DELETE
+      tag: deprecated
+      tagTheme: orange
+    - title: "List active integrations with auth providers"
+      slug: reference/api/auth-legacy/list-neon-auth-integrations
+      method: GET
+      tag: deprecated
+      tagTheme: orange
+    - title: "List OAuth providers"
+      slug: reference/api/auth-legacy/list-neon-auth-oauth-providers
+      method: GET
+      tag: deprecated
+      tagTheme: orange
+    - title: "Add an OAuth provider"
+      slug: reference/api/auth-legacy/add-neon-auth-oauth-provider
+      method: POST
+      tag: deprecated
+      tagTheme: orange
+    - title: "Update OAuth provider"
+      slug: reference/api/auth-legacy/update-neon-auth-oauth-provider
+      method: PATCH
+      tag: deprecated
+      tagTheme: orange
+    - title: "Delete OAuth provider"
+      slug: reference/api/auth-legacy/delete-neon-auth-oauth-provider
+      method: DELETE
+      tag: deprecated
+      tagTheme: orange
+    - title: "Retrieve email server configuration"
+      slug: reference/api/auth-legacy/get-neon-auth-email-server
+      method: GET
+      tag: deprecated
+      tagTheme: orange
+    - title: "Update email server configuration"
+      slug: reference/api/auth-legacy/update-neon-auth-email-server
+      method: PATCH
+      tag: deprecated
+      tagTheme: orange
+    - title: "Delete integration with auth provider"
+      slug: reference/api/auth-legacy/delete-neon-auth-integration
+      method: DELETE
+      tag: deprecated
+      tagTheme: orange

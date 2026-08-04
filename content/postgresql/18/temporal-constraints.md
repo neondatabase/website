@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL 18's temporal constraints work the same on any Postgres deployment, so everything here about WITHOUT OVERLAPS, the PERIOD clause, and range types applies whether you're running Postgres yourself or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres: high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+PostgreSQL 18's temporal constraints work the same on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: Learn how PostgreSQL 18 introduces temporal constraints using the WITHOUT OVERLAPS clause for primary keys and unique constraints, plus the PERIOD clause for foreign keys, enabling robust time-based data integrity at the database level.

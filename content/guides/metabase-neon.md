@@ -1,13 +1,13 @@
 ---
 title: Getting started with Metabase and Neon
-subtitle: Learn how to connect Metabase to your Neon Postgres database for interactive analytics and dashboards
+subtitle: Learn how to connect Metabase to your Lakebase Postgres database for interactive analytics and dashboards
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-01-25T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-[Metabase](https://www.metabase.com/) is an open-source business intelligence and data visualization platform that makes it easy to turn your data into insights. By connecting Metabase to your Neon Postgres database, you can build interactive dashboards, explore your data, and share findings with your team without writing SQL.
+[Metabase](https://www.metabase.com/) is an open-source business intelligence and data visualization platform that makes it easy to turn your data into insights. By connecting Metabase to your Lakebase Postgres database, you can build interactive dashboards, explore your data, and share findings with your team without writing SQL.
 
 This guide will walk you through the steps to set up Metabase with Neon. You'll learn how to:
 
@@ -440,7 +440,7 @@ By default, self-hosted Metabase uses an internal H2 database to store its appli
 To run Metabase in production, configure it to use Neon as the backing database:
 
 1. **Create a separate database** in Neon (e.g., `metabaseappdb`) to store Metabase’s internal data.
-2. **Run Metabase with Neon Postgres** by starting the container with the following command:
+2. **Run Metabase with Lakebase Postgres** by starting the container with the following command:
 
    ```bash
    docker run -d -p 3000:3000 \
@@ -455,7 +455,7 @@ To run Metabase in production, configure it to use Neon as the backing database:
 
    > Replace `name`, `password`, and `my-database-host` with your Neon database credentials and host.
 
-This configuration ensures Metabase uses Neon Postgres for its application database, making your deployment production-ready.
+This configuration ensures Metabase uses Lakebase Postgres for its application database, making your deployment production-ready.
 
 ## Conclusion
 

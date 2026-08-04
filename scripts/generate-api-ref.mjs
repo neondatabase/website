@@ -1157,6 +1157,38 @@ function buildOperationData(
 // Main
 // ---------------------------------------------------------------------------
 
+// Compare the committed operation-id manifest against the freshly generated
+// operationIds and warn (non-fatal) on any set difference. Reads the committed
+// file directly rather than diffing rendered files so it works from a single
+// source of truth; a parse/read failure is treated as "nothing to compare".
+function warnIfManifestStale(freshOperationIds) {
+  let committed;
+  try {
+    committed = JSON.parse(readFileSync(PATHS.operationIdsPath, 'utf8'));
+  } catch {
+    return; // no committed manifest yet (or unreadable) — nothing to compare
+  }
+
+  const committedIds = new Set(committed?.operationIds ?? []);
+  const fresh = new Set(freshOperationIds);
+  const removed = [...committedIds].filter((id) => !fresh.has(id)).sort();
+  const added = [...fresh].filter((id) => !committedIds.has(id)).sort();
+
+  if (removed.length === 0 && added.length === 0) return;
+
+  process.stderr.write(
+    `[api-ref] WARNING: committed api-operation-ids.json is stale vs the spec used this run ` +
+      `(${committedIds.size} -> ${fresh.size} operations). ` +
+      `Commit the regenerated content/docs/api-navigation.yaml and api-operation-ids.json.\n`
+  );
+  if (removed.length) {
+    process.stderr.write(`[api-ref]   removed (spec dropped): ${removed.join(', ')}\n`);
+  }
+  if (added.length) {
+    process.stderr.write(`[api-ref]   added (spec introduced): ${added.join(', ')}\n`);
+  }
+}
+
 async function main() {
   const { cachePath, ttlMs } = getSpecCacheConfig();
   const { spec: specRaw, cacheCandidate } = await loadOpenApiSpec({
@@ -1287,10 +1319,18 @@ async function main() {
 
   // Operation-id manifest (committed — docs-side source of truth for API
   // reference coverage; see scripts/lib/api-coverage.mjs)
-  writeOperationIdsManifest(
-    PATHS,
-    allOps.map((op) => op.operationId)
-  );
+  const freshOperationIds = allOps.map((op) => op.operationId);
+
+  // Build-visible staleness warning. The build overwrites the committed manifest
+  // regardless (so this never blocks — that failure class was removed from
+  // prebuild), but comparing the committed operationIds against the freshly
+  // generated set surfaces spec drift in every build log, matching the
+  // [cli-flags]/field-group advisory pattern. The weekly docs↔API workflow is
+  // the enforcing signal; this is the early heads-up so drift is noticed before
+  // Monday. WARN-ONLY.
+  warnIfManifestStale(freshOperationIds);
+
+  writeOperationIdsManifest(PATHS, freshOperationIds);
 
   writeRunSummary(PATHS, {
     opCount,

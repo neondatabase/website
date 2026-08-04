@@ -1,6 +1,6 @@
 ---
 title: Monitor Neon with pgAdmin
-subtitle: Monitor your Neon Postgres database with pgAdmin
+subtitle: Monitor your Lakebase Postgres database with pgAdmin
 summary: >-
   pgAdmin 4 is an open-source Postgres management tool for monitoring real-time
   metrics including active sessions, transactions per second, tuple operations,
@@ -10,7 +10,7 @@ summary: >-
   system_stats extension required for the System Statistics tab is not
   supported on Neon.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 pgAdmin is a database management tool for Postgres that supports various database tasks, including monitoring performance metrics.

@@ -6,7 +6,7 @@ enableTableOfContents: true
 createdAt: '2025-07-15T00:00:00.000Z'
 ---
 
-Event triggers are now fully supported in Neon Postgres databases, and allow you to automatically respond to DDL events like `CREATE`, `ALTER`, `DROP`, or any other statements that define or modify the structure of the database. In this post, we'll show how you can use this feature to build a simple schema audit trail that can record who made schema changes in your production database, what those changes were, and when they occurred.
+Event triggers are now fully supported in Lakebase Postgres databases, and allow you to automatically respond to DDL events like `CREATE`, `ALTER`, `DROP`, or any other statements that define or modify the structure of the database. In this post, we'll show how you can use this feature to build a simple schema audit trail that can record who made schema changes in your production database, what those changes were, and when they occurred.
 
 ## Set Up Schema Auditing in Postgres
 

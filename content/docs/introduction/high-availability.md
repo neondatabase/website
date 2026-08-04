@@ -12,12 +12,12 @@ summary: >-
   as temporary tables and the Local File Cache does not persist across a
   failover.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:49:10.111Z'
 ---
 
 At Neon, our lakebase architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
 
-![Neon architecture diagram](/docs/introduction/neon_architecture_5.jpg)
+![lakebase architecture diagram](/docs/introduction/neon_architecture_5.jpg)
 
 Based on this separation, we can break our approach into two main parts:
 

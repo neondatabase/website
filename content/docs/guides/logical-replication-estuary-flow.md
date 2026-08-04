@@ -3,7 +3,7 @@ title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
 summary: >-
   Estuary Flow's Neon PostgreSQL source connector streams CDC events from a
-  Neon Postgres database to any Estuary materialization destination at
+  Lakebase Postgres database to any Estuary materialization destination at
   sub-100ms latency. Use this guide when you need continuous, low-latency
   replication of inserts, updates, and deletes from Neon to an external system.
   Setup requires enabling logical replication (permanently sets wal_level to
@@ -11,14 +11,14 @@ summary: >-
   allowlisting for Estuary's egress addresses.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Estuary Flow](https://estuary.dev/) is a real-time data streaming platform that allows you to connect, transform, and move data from various sources to destinations with sub-100ms latency.
 
-In this guide, you will learn how to configure a Postgres source connector in Estuary Flow for ingesting changes from your Neon database, enabling you to replicate data from Neon to any of Estuary Flow's [supported destinations](https://docs.estuary.dev/reference/Connectors/materialization-connectors/#available-materialization-connectors), with optional transformations along the way.
+In this guide, you will learn how to configure a Postgres source connector in Estuary Flow for ingesting changes from your Neon database, enabling you to replicate data from Lakebase Postgres to any of Estuary Flow's [supported destinations](https://docs.estuary.dev/reference/Connectors/materialization-connectors/#available-materialization-connectors), with optional transformations along the way.
 
 ## Prerequisites
 

@@ -84,6 +84,7 @@ const ProgramForm = ({ type }) => {
     <figure
       className="doc-cta not-prose relative mt-9 mb-[22px] scroll-mt-20 border border-gray-new-80 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
       id={`${type}-form`}
+      data-test={`${type}-program-form`}
     >
       <h2 className="p-0 text-2xl leading-snug font-medium tracking-extra-tight text-gray-new-8 dark:text-white">
         {title}

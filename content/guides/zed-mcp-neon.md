@@ -1,10 +1,10 @@
 ---
-title: 'Get started with Zed and Neon Postgres MCP Server'
+title: 'Get started with Zed and Neon MCP Server'
 subtitle: 'Make schema changes with natural language using Zed and Neon MCP Server'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-10T00:00:00.000Z'
-updatedOn: '2026-06-19T23:17:10.824Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 This guide shows how to use [Zed](https://zed.dev) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.

@@ -1,9 +1,9 @@
 ---
 title: Stream database changes in real-time with Prisma Pulse
 subtitle: Learn how to create event-driven flows on your backend triggered by changes in
-  your Neon Postgres database
+  your database
 summary: >-
-  Prisma Pulse subscribes to Neon Postgres change events via logical replication
+  Prisma Pulse subscribes to Lakebase Postgres change events via logical replication
   and streams inserts, updates, and deletes to your backend in real time using
   the `@prisma/extension-pulse` package. Use this guide when you need
   event-driven triggers on database changes, such as firing Inngest workflows
@@ -12,12 +12,12 @@ summary: >-
   `PrismaNeon` driver adapter.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.
 
-[Prisma Pulse](https://www.prisma.io/data-platform/pulse?utm_source=neon&utm_medium=pulse-guide) is a fully managed, production-ready service that connects to your Neon Postgres database, and allows you to stream changes from your database in real-time, integrated closely with [Prisma ORM](https://www.prisma.io/orm?utm_source=neon&utm_medium=pulse-guide).
+[Prisma Pulse](https://www.prisma.io/data-platform/pulse?utm_source=neon&utm_medium=pulse-guide) is a fully managed, production-ready service that connects to your Lakebase Postgres database, and allows you to stream changes from your database in real-time, integrated closely with [Prisma ORM](https://www.prisma.io/orm?utm_source=neon&utm_medium=pulse-guide).
 
 In this guide, you will learn how to set up Prisma Pulse with your Neon database and create your first event stream.
 

@@ -4,7 +4,7 @@ subtitle: Learn how to set up and use Neon Local and Neon Local Connect for seam
 author: 'dhanush-reddy'
 enableTableOfContents: true
 createdAt: '2025-08-17T00:00:00.000Z'
-updatedOn: '2025-08-20T16:09:13.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 One of Neon's most powerful features is database branching, the ability to instantly create isolated, copy-on-write clones of your database for any task. Just as you create a Git branch for every new feature or bug fix, you can create a parallel database branch. This eliminates environment drift, prevents developers from overwriting each other's work on shared staging databases, and ensures every development environment is a perfect, isolated replica of production.
@@ -20,7 +20,7 @@ This guide will walk you through setting up and using both Neon Local and Neon L
 - Use Neon Local with Docker Compose for CI/CD or non-VS Code environments.
 
 <Admonition type="note" title="Neon Local vs. a Local Postgres Instance">
-This guide focuses on **Neon Local**, a **local proxy** for your **cloud-hosted Neon Postgres database**. It enables you to use Neon's powerful branching features with a convenient `localhost` connection, allowing you to seamlessly switch between branches, create new branches, and manage them directly from your IDE.
+This guide focuses on **Neon Local**, a **local proxy** for your **cloud-hosted Postgres database on Neon**. It enables you to use Neon's powerful branching features with a convenient `localhost` connection, allowing you to seamlessly switch between branches, create new branches, and manage them directly from your IDE.
 
 This is different from [Local Development with Neon](/guides/local-development-with-neon) guide, which shows you how to run a completely separate, **local instance of Postgres** for fully offline development.
 

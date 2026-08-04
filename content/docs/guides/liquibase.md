@@ -2,19 +2,19 @@
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
 summary: >-
-  Connect Liquibase to a Neon Postgres database over JDBC to track, deploy,
+  Connect Liquibase to a Lakebase Postgres database over JDBC to track, deploy,
   and roll back versioned schema changes defined in XML changelog files. Use
   this guide when you need to version-control DDL changes against Neon with a
   repeatable deploy-and-rollback workflow. Covers the liquibase.properties
   JDBC URL format for Neon and demonstrates the update and rollbackCount
   commands.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
 
-This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to a Neon database, deploying a database schema change, and rolling back the schema change. The guide follows the setup described in the [Liquibase Get Started](https://www.liquibase.org/get-started/quickstart).
+This guide steps you through installing the Liquibase CLI, configuring Liquibase to connect to a Lakebase Postgres database, deploying a database schema change, and rolling back the schema change. The guide follows the setup described in the [Liquibase Get Started](https://www.liquibase.org/get-started/quickstart).
 
 ## Prerequisites
 

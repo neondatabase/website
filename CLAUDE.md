@@ -20,7 +20,7 @@ This is the Neon database company's marketing website and documentation hub. It'
 - **Search:** Algolia for documentation search
 - **Animations:** GSAP, Framer Motion, Rive
 - **Code Highlighting:** Shiki
-- **Testing:** Cypress for E2E tests
+- **Testing:** Playwright for E2E tests, Vitest for unit tests
 
 ## Project Structure
 
@@ -71,7 +71,8 @@ npm run lint:md     # Markdown lint audit: intentional use only, never automatic
 ### Testing
 
 ```bash
-npm run test             # Open Cypress
+npm run test             # Run the complete Playwright E2E matrix
+npm run test:critical:ui # Open Playwright UI mode
 npm run check:broken-links -- https://neon.com  # Check for broken links
 ```
 

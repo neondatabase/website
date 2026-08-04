@@ -1,21 +1,21 @@
 ---
 title: Getting started with ElectricSQL and Neon
-subtitle: A step-by-step guide to integrating ElectricSQL with Neon Postgres
+subtitle: A step-by-step guide to integrating ElectricSQL with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-28T00:00:00.000Z'
-updatedOn: '2026-03-04T15:50:25.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-This guide demonstrates how to integrate [ElectricSQL](https://electric-sql.com/) with Neon Postgres. ElectricSQL is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.
+This guide demonstrates how to integrate [ElectricSQL](https://electric-sql.com/) with Lakebase Postgres. ElectricSQL is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.
 
 ElectricSQL acts as a read-path sync engine, efficiently replicating partial subsets of your Postgres data to client applications. These data subsets are defined using [Shapes](https://electric-sql.com/docs/guides/shapes), which are similar to live queries. Writes are handled by your application's existing API and backend logic, ensuring ElectricSQL integrates smoothly with your current stack.
 
-This guide provides a step-by-step walkthrough of setting up ElectricSQL with Neon Postgres. You will learn how to:
+This guide provides a step-by-step walkthrough of setting up ElectricSQL with Lakebase Postgres. You will learn how to:
 
-- Prepare your Neon Postgres database for ElectricSQL integration.
+- Prepare your Lakebase Postgres database for ElectricSQL integration.
 - Configure and run Electric using Docker.
-- Set up a simple React application that subscribes to data changes on Neon Postgres via ElectricSQL.
+- Set up a simple React application that subscribes to data changes on Lakebase Postgres via ElectricSQL.
 - Test the real-time data synchronization.
 
 ## Prerequisites
@@ -101,7 +101,7 @@ docker compose logs -f electric
 # Connected to Postgres xxxx and timeline
 ```
 
-You should see logs indicating that Electric has connected to your Neon Postgres database.
+You should see logs indicating that Electric has connected to your Lakebase Postgres database.
 
 ## Sample application
 
@@ -170,7 +170,7 @@ INSERT INTO scores (name, value) VALUES
 
 ## Using the demo application
 
-Your React application should now be running in your browser. It's actively connected to the Electric, which maintains a real-time link to your Neon Postgres database via Logical Replication.
+Your React application should now be running in your browser. It's actively connected to the Electric, which maintains a real-time link to your Lakebase Postgres database via Logical Replication.
 
 1.  **Access the application:** Open [`localhost:5173`](http://localhost:5173) in your browser. You should see the data from the `scores` table (`Alice` and `Bob`) displayed on the page.
 
@@ -206,13 +206,13 @@ Your React application should now be running in your browser. It's actively conn
 
     - The value for Alice should update in the React app to `6.28`.
 
-      ![React app displaying real-time data from Neon Postgres](/docs/guides/electric-sql-react-app.gif)
+      ![React app displaying real-time data from Lakebase Postgres](/docs/guides/electric-sql-react-app.gif)
 
 3.  **Understanding writes:**
     ElectricSQL handles the read-path synchronization (data from Postgres to client). To write data back to your Neon database (e.g., from user input in the React app), you would typically:
     - Implement an API endpoint in your backend application.
     - This API endpoint would receive write requests from your React app.
-    - The API endpoint then performs these operations directly on your Neon Postgres database.
+    - The API endpoint then performs these operations directly on your Lakebase Postgres database.
     - Once the data is written to Neon, Electric will detect these changes via Logical replication and automatically sync them to all connected clients.
 
     For detailed patterns on handling writes, refer to the [ElectricSQL Writes documentation](https://electric-sql.com/docs/guides/writes).
@@ -225,13 +225,13 @@ The core principle for a secure and scalable ElectricSQL deployment is to place 
 
 ### Production Architecture overview
 
-A typical production architecture with ElectricSQL and Neon Postgres involves the following components:
+A typical production architecture with ElectricSQL and Lakebase Postgres involves the following components:
 
 1.  **Client application:** Your web or mobile application using an ElectricSQL client (e.g., `@electric-sql/react`).
 2.  **Caching proxy (recommended for performance):** While optional, deploying Electric behind a caching proxy like Nginx, Caddy, Varnish, or a CDN (e.g., Cloudflare, Fastly) is recommended. This setup can significantly improve performance and reduce load by caching responses from Electric.
 3.  **Authorization proxy:** A service (which could be part of your existing backend or a dedicated middleware) that intercepts requests destined for Electric. Its primary roles are authentication and authorization.
-4.  **Electric:** Electric handles the real-time data synchronization between your client application requests and the Neon Postgres database.
-5.  **Neon Postgres Database:** Your source of truth.
+4.  **Electric:** Electric handles the real-time data synchronization between your client application requests and the Lakebase Postgres database.
+5.  **Lakebase Postgres Database:** Your source of truth.
 
 ### Securing read access
 
@@ -276,7 +276,7 @@ The read path (data syncing from Neon to your client via ElectricSQL) needs to b
 
     For more details on securing ElectricSQL in production, refer to the [ElectricSQL Security Guide](https://electric-sql.com/docs/guides/security).
 
-Congratulations! You have successfully set up ElectricSQL with Neon Postgres and built a basic real-time React application.
+Congratulations! You have successfully set up ElectricSQL with Lakebase Postgres and built a basic real-time React application.
 
 ## Resources
 

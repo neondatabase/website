@@ -1,15 +1,15 @@
 ---
-title: Connect a .NET (C#) application to Neon Postgres
+title: Connect a .NET (C#) application to Lakebase Postgres
 subtitle: Learn how to run SQL queries in Neon from .NET using the Npgsql library
 summary: >-
   Npgsql is the .NET data provider for PostgreSQL that lets a C# application
-  connect to a Neon Postgres database and run SQL queries directly, without an
+  connect to a Lakebase Postgres database and run SQL queries directly, without an
   ORM. Use this guide for raw SQL access to Neon via NpgsqlConnection and
   NpgsqlCommand, covering CRUD operations, parameterized queries to prevent SQL
   injection, and credential storage in appsettings.json. For ORM-based
   alternatives, see the Entity Framework guide.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-prompt.md" 

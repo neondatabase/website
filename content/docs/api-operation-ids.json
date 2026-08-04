@@ -1,6 +1,6 @@
 {
   "_generatedBy": "scripts/generate-api-ref.mjs — do not edit by hand",
-  "count": 169,
+  "count": 168,
   "operationIds": [
     "acceptProjectTransferRequest",
     "addBranchNeonAuthOauthProvider",
@@ -128,7 +128,6 @@
     "presignProjectBranchBucketObject",
     "queryProjectBranchLogs",
     "recoverProject",
-    "recoverProjectBranch",
     "removeOrganizationMember",
     "removeProjectMemberRole",
     "resetProjectBranchRolePassword",

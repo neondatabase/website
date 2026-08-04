@@ -1,4 +1,4 @@
-text: 'Just shipped: Use neon inspect db to debug your Neon database from your agent/CLI'
+text: 'Neon now has per-project permissions: give agents and developers exactly the right access'
 link:
-  url: 'https://neon.com/blog/neon-inspect-db'
+  url: 'https://neon.com/blog/neon-now-has-per-project-permissions'
   target: '_blank'

@@ -3,7 +3,7 @@ title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
 summary: >-
-  Sequin is an open-source tool that reads Neon's Write Ahead Log via logical
+  Sequin is an open-source tool that reads the Write Ahead Log via logical
   replication and forwards every insert, update, and delete to external services
   with exactly-once delivery. Use this guide when you need to trigger webhooks,
   fan out work to cloud functions, or stream database changes to services like
@@ -12,16 +12,16 @@ summary: >-
   sets wal_level=logical, which is permanent and keeps compute active while
   consumers are connected.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.
 
-[Sequin](https://github.com/sequinstream/sequin) uses Neon's logical replication to sends records and changes in your database to your applications and services, in real-time. It's designed to never miss an `insert`, `update`, or `delete` and provide exactly-once processing of all changes.
+[Sequin](https://github.com/sequinstream/sequin) uses logical replication to send records and changes in your database to your applications and services in real-time. It's designed to never miss an `insert`, `update`, or `delete` and provide exactly-once processing of all changes.
 
 Changes are sent as messages via HTTP push (webhooks) or pull (SQS-like, with Sequin SDKs). Out of the box, you can start triggering side-effects when a new record is created, fan out work to cloud functions, or activate workflows in services like trigger.dev.
 
-In this guide, we'll show you how to connect your Neon database to Sequin to start sending changes anywhere you need.
+In this guide, we'll show you how to connect your database to Sequin to start sending changes anywhere you need.
 
 ## Prerequisites
 
@@ -33,18 +33,18 @@ In this guide, we'll show you how to connect your Neon database to Sequin to sta
 Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
 </Admonition>
 
-## Enable logical replication in Neon
+## Enable logical replication
 
-Sequin uses the Write Ahead Log (WAL) to capture changes from your Postgres database. In this step, we'll enable logical replication for your Neon Postgres project.
+Sequin uses the Write Ahead Log (WAL) to capture changes from your Postgres database. In this step, we'll enable logical replication for your Lakebase Postgres project.
 
 <Admonition type="important">
 Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from replica to logical for all databases in your Neon project. Once the `wal_level` setting is changed to logical, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
 </Admonition>
 
-To enable logical replication in Neon:
+To enable logical replication:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Settings**.
+2. On the **Dashboard**, select **Settings**.
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 

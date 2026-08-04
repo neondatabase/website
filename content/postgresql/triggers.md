@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Triggers are a core part of PostgreSQL, and everything you'll learn here about creating, managing, and firing them on insert, update, delete, or truncate events works the same on any Postgres deployment. If you're an enterprise looking to put triggers to work in production, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering performance, security, and full integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Triggers are a core part of PostgreSQL, and everything you'll learn here about creating, managing, and firing them on insert, update, delete, or truncate events works the same on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 ![](/postgresqltutorial/PostgreSQL-Trigger.png?alignright)

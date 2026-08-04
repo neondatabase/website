@@ -36,7 +36,7 @@ describe('AI Gateway model examples', () => {
   it('keeps only supported image-generation languages', () => {
     expect(
       getLanguagesForMode(getExamplesByMode('gpt-5-4'), 'image').map(({ key }) => key)
-    ).toEqual(['aisdk', 'ts', 'python']);
+    ).toEqual(['aisdk', 'mastra', 'ts', 'python']);
   });
 
   it('returns no examples for catalogued models without measured capabilities', () => {

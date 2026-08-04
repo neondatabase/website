@@ -1,23 +1,23 @@
 ---
-title: Schema migration with Neon Postgres and Drizzle ORM
-subtitle: Set up Neon Postgres and run migrations for your TypeScript project using
+title: Schema migration with Lakebase Postgres and Drizzle ORM
+subtitle: Set up a database on Neon and run migrations for your TypeScript project using
   Drizzle ORM
 summary: >-
-  Drizzle ORM schema migrations with Neon Postgres walks through defining
+  Drizzle ORM schema migrations with Lakebase Postgres walks through defining
   TypeScript schemas, generating SQL migration files with drizzle-kit, and
-  applying them to a Neon database via the Neon serverless driver. Use this
+  applying them to a database via the Neon serverless driver. Use this
   guide when you need a complete migration workflow for a Node.js TypeScript
   project, including initial table creation, seeding, and iterative schema
   changes. The guide uses drizzle-orm, drizzle-kit, @neondatabase/serverless,
   and Hono.js, and requires a direct (non-pooled) connection string for
   migrations.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations.
 
-This guide shows how to use `Drizzle` with the `Neon` Postgres database in a Typescript project. We'll create a simple Node.js application with `Hono.js` and demonstrate the full workflow of setting up and working with your database using `Drizzle`.
+This guide shows how to use `Drizzle` with the Lakebase Postgres database in a Typescript project. We'll create a simple Node.js application with `Hono.js` and demonstrate the full workflow of setting up and working with your database using `Drizzle`.
 
 ## Prerequisites
 

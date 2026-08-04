@@ -5,20 +5,20 @@ summary: >-
   Inngest's native Neon integration uses Postgres logical replication to convert
   row-level database changes into typed events (such as db/users.updated) that
   trigger durable, serverless TypeScript workflows. Choose this approach when you
-  need to forward Neon Postgres changes to third-party destinations like
+  need to forward Lakebase Postgres changes to third-party destinations like
   Amplitude or S3 without writing a custom replication consumer. Setup requires
   enabling logical replication in the Neon console and supplying admin
   credentials to the Inngest integration wizard (credentials are not stored).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Inngest](https://www.inngest.com?utm_source=neon&utm_medium=logical-replication-guide) is a durable workflow platform that allows you to trigger workflow based on Neon database changes. With its native Neon integration, it is the easiest way to set up data replication with custom transformations or 3rd party API destinations (ex, Neon to Amplitude, Neon to S3).
 
-In this guide, you will learn how to configure your Inngest account for ingesting changes from your Neon database, enabling you to replicate data from Neon to Inngest workflows.
+In this guide, you will learn how to configure your Inngest account for ingesting changes from your Neon database, enabling you to replicate data from Lakebase Postgres to Inngest workflows.
 
 ## Prerequisites
 

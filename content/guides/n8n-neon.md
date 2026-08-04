@@ -1,13 +1,13 @@
 ---
-title: Build an AI-powered knowledge base chatbot using n8n and Neon Postgres
-subtitle: A step-by-step guide to creating an AI-powered knowledge base chatbot using n8n, Google Drive, and Neon Postgres
+title: Build an AI-powered knowledge base chatbot using n8n and Lakebase Postgres
+subtitle: A step-by-step guide to creating an AI-powered knowledge base chatbot using n8n, Google Drive, and Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-27T00:00:00.000Z'
-updatedOn: '2026-07-20T17:20:48.939Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-This guide demonstrates how to build a powerful **AI-powered internal knowledge base chatbot** using **n8n** and **Neon**. n8n is a low-code platform that allows you to connect various applications and services, enabling you to automate complex processes through a visual workflow editor. In this guide, we'll use n8n to orchestrate the integration between **Google Drive**, **Neon Postgres**, and **Google Gemini** to create a chatbot that can answer questions based on your documents stored in Google Drive. Neon will be used as a vector store to index and retrieve document chunks, while Google Drive will serve as the source of your documents.
+This guide demonstrates how to build a powerful **AI-powered internal knowledge base chatbot** using **n8n** and **Neon**. n8n is a low-code platform that allows you to connect various applications and services, enabling you to automate complex processes through a visual workflow editor. In this guide, we'll use n8n to orchestrate the integration between **Google Drive**, **Lakebase Postgres**, and **Google Gemini** to create a chatbot that can answer questions based on your documents stored in Google Drive. Neon will be used as a vector store to index and retrieve document chunks, while Google Drive will serve as the source of your documents.
 
 It will be built using a **Retrieval-Augmented Generation (RAG)** approach, which combines the power of large language models (LLMs) with your own documents. This allows the chatbot to access and utilize your documents as a knowledge base, enabling it to answer questions accurately and contextually.
 
@@ -26,10 +26,10 @@ Before you begin, ensure you have the following:
 
 The solution consists of two main n8n workflows:
 
-1.  **Indexing workflow:** This workflow is triggered when a new file is added to a specified Google Drive folder. It downloads the file, splits it into manageable chunks, generates vector embeddings for each chunk using Google Gemini, and then stores these chunks and their embeddings in a Neon Postgres database (acting as a PGVector store).
-2.  **Chat workflow:** This workflow provides a chat interface. When a user sends a message (a question), the AI Agent retrieves relevant document chunks from the Neon Postgres vector store based on the query's semantic similarity. These retrieved chunks are then passed as context to a Google Gemini chat model, which generates a response.
+1.  **Indexing workflow:** This workflow is triggered when a new file is added to a specified Google Drive folder. It downloads the file, splits it into manageable chunks, generates vector embeddings for each chunk using Google Gemini, and then stores these chunks and their embeddings in a Lakebase Postgres database (acting as a PGVector store).
+2.  **Chat workflow:** This workflow provides a chat interface. When a user sends a message (a question), the AI Agent retrieves relevant document chunks from the Lakebase Postgres vector store based on the query's semantic similarity. These retrieved chunks are then passed as context to a Google Gemini chat model, which generates a response.
 
-## Workflow 1: Indexing Google Drive documents into Neon Postgres
+## Workflow 1: Indexing Google Drive documents into Lakebase Postgres
 
 This workflow automates the process of ingesting and preparing your Google Drive documents for the chatbot.
 
@@ -95,9 +95,9 @@ This workflow automates the process of ingesting and preparing your Google Drive
 7.  Select **Options > Add option > File Name.** Similarly, drag the "File Name" from the Google Drive Trigger node to this field. This will help in identifying the file later.
     ![Configuring Google Drive Download node](/docs/guides/n8n/n8n-google-drive-download-node.gif)
 
-### Step 3: Setting up the Neon Postgres PGVector store Node
+### Step 3: Setting up the Postgres PGVector store Node
 
-This node will store the document chunks and their embeddings in Neon Postgres using the [`pgvector` extension](/docs/extensions/pgvector).
+This node will store the document chunks and their embeddings in Lakebase Postgres using the [`pgvector` extension](/docs/extensions/pgvector).
 
 1.  **Add Postgres PGVector Store Node:** Click the `+` after the Google Drive download node. Search for "Postgres PGVector Store" and add it.
 2.  Under **Actions** select "Add documents to vector store".
@@ -163,7 +163,7 @@ Click on the play icon (▶️) on the "Postgres PGVector Store" node to execute
 
 ![Testing the indexing workflow in n8n](/docs/guides/n8n/n8n-test-indexing-workflow.gif)
 
-The workflow should execute successfully, which will split the document into chunks, generate embeddings for each chunk, and store them in Neon Postgres database.
+The workflow should execute successfully, which will split the document into chunks, generate embeddings for each chunk, and store them in Lakebase Postgres database.
 
 ### Step 7: Verifying the embeddings in Neon (optional)
 
@@ -266,8 +266,8 @@ After all these configurations, your Workflow should look like this:
 
 ## How it works: A Brief recap
 
-1.  **Indexing:** New files in a designated Google Drive folder trigger an n8n workflow. The files are downloaded, broken into smaller text chunks, and each chunk is converted into a numerical representation (embedding) by Google Gemini. These embeddings, along with the text chunks and metadata (like the filename), are stored in your Neon Postgres database, which uses the pgvector extension to handle these vector embeddings.
-2.  **Retrieval & Generation (RAG):** When you ask a question in the chat interface, your query is also converted into an embedding. The n8n AI Agent uses this query embedding to search the Neon Postgres vector store for the text chunks whose embeddings are most similar to your query's embedding. These relevant chunks are retrieved and provided as context to the Google Gemini chat model. The chat model then generates a human-like answer based on your question and the provided context from your documents.
+1.  **Indexing:** New files in a designated Google Drive folder trigger an n8n workflow. The files are downloaded, broken into smaller text chunks, and each chunk is converted into a numerical representation (embedding) by Google Gemini. These embeddings, along with the text chunks and metadata (like the filename), are stored in your Lakebase Postgres database, which uses the pgvector extension to handle these vector embeddings.
+2.  **Retrieval & Generation (RAG):** When you ask a question in the chat interface, your query is also converted into an embedding. The n8n AI Agent uses this query embedding to search the Lakebase Postgres vector store for the text chunks whose embeddings are most similar to your query's embedding. These relevant chunks are retrieved and provided as context to the Google Gemini chat model. The chat model then generates a human-like answer based on your question and the provided context from your documents.
 
 This entire process ensures that the chatbot's answers are grounded in the information contained within your Google Drive documents.
 
@@ -279,7 +279,7 @@ For instance, the image below shows the output of a **AI Agent** node after a qu
 
     ![Debugging Chat Trigger Node Output](/docs/guides/n8n/n8n-chat-trigger-node-output.png)
 
-Here, you can see the input message, the AI Agent's response, and the tool (**Postgres PGVector Store**) used to retrieve relevant document chunks. The document chunks retrieved from the Neon Postgres vector store are also visible. This insight helps you understand how the chatbot generates its responses based on the indexed documents.
+Here, you can see the input message, the AI Agent's response, and the tool (**Postgres PGVector Store**) used to retrieve relevant document chunks. The document chunks retrieved from the Lakebase Postgres vector store are also visible. This insight helps you understand how the chatbot generates its responses based on the indexed documents.
 
 ## Resources
 

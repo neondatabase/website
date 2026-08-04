@@ -2,17 +2,17 @@
 title: Connect a Hono application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Hono application
 summary: >-
-  Connect a Hono application to Neon Postgres using node-postgres, postgres.js,
+  Connect a Hono application to Lakebase Postgres using node-postgres, postgres.js,
   or the Neon serverless driver (@neondatabase/serverless). Covers
   DATABASE_URL setup and route-level query code for Hono on Node.js, Bun,
   Deno, and Edge runtimes. Each driver option includes a complete TypeScript
   route handler with Postgres query examples.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/hono-prompt.md"
-description="Pre-built prompt for connecting Hono applications to Neon Postgres"/>
+description="Pre-built prompt for connecting Hono applications to Lakebase Postgres"/>
 
 [Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application.
 

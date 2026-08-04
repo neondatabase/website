@@ -1,14 +1,14 @@
 ---
 title: Import data from CSV
 summary: >-
-  Loading CSV data into a Neon Postgres table uses the psql `\copy` meta-command
+  Loading CSV data into a Lakebase Postgres table uses the psql `\copy` meta-command
   to stream rows directly from a local file into an existing table. Use this page
   when you need to bulk-load tabular data without application code, using only a
   psql connection string from the Neon Console. The target table must exist in
   advance with columns that match the CSV header; `\copy` returns the row count
   on success.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 To import data from a CSV file into your Neon database, create the target table first, then run the psql `\copy` meta-command from a session connected to your database. `\copy` streams the CSV from your local machine over the existing connection, so it works without any special server-side file access. This topic walks through the process with a simple example.

@@ -1,24 +1,24 @@
 ---
 title: Connect from Symfony with Doctrine to Neon
-subtitle: Set up a Neon project in seconds and connect from Symfony with Doctrine
+subtitle: Set up a project on Neon in seconds and connect from Symfony with Doctrine
 summary: >-
-  Connecting Symfony to Neon Postgres via Doctrine ORM requires only setting the
-  DATABASE_URL in your .env file to a Neon connection string with sslmode=require
+  Connecting Symfony to Lakebase Postgres via Doctrine ORM requires only setting the
+  DATABASE_URL in your .env file to a Lakebase Postgres connection string with sslmode=require
   and channel_binding=require. Choose this page when adding a serverless Postgres
   backend to a Symfony project using Doctrine for database access.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony
   - /docs/integrations/symfony
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/symfony-prompt.md" 
-description="Pre-built prompt for connecting Symfony applications to Neon using Doctrine ORM."/>
+description="Pre-built prompt for connecting Symfony applications to Lakebase Postgres using Doctrine ORM."/>
 
-Symfony is a free and open-source PHP web application framework. Symfony uses the Doctrine library for database access. Connecting to Neon from Symfony with Doctrine is the same as connecting to a standalone Postgres installation from Symfony with Doctrine. Only the connection details differ.
+Symfony is a free and open-source PHP web application framework. Symfony uses the Doctrine library for database access. Connecting to a Lakebase Postgres database from Symfony with Doctrine is the same as connecting to a standalone Postgres installation from Symfony with Doctrine. Only the connection details differ.
 
-To connect to Neon from Symfony with Doctrine:
+To connect to a Lakebase Postgres database from Symfony with Doctrine:
 
 <Steps>
 

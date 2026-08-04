@@ -9,7 +9,7 @@ summary: >-
   observability, security and compliance, and operations and maintenance.
   Use this page to find the right sub-topic when you know the management
   area but not the specific doc.
-updatedOn: '2026-07-15T17:37:06.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 ## The Neon platform, in brief
@@ -108,9 +108,9 @@ Monitor your Neon projects to track system health and performance.
 
 <a href="https://neon.com/guides/newrelic-otel-neon" description="Monitor Neon with New Relic using OpenTelemetry integration" icon="import">New Relic</a>
 
-<a href="/docs/introduction/monitor-pgadmin" description="Monitor your Neon Postgres database with pgAdmin" icon="wrench">pgAdmin</a>
+<a href="/docs/introduction/monitor-pgadmin" description="Monitor your database with pgAdmin" icon="wrench">pgAdmin</a>
 
-<a href="/docs/introduction/monitor-pghero" description="Monitor your Neon Postgres database with PgHero" icon="wrench">PgHero</a>
+<a href="/docs/introduction/monitor-pghero" description="Monitor your database with PgHero" icon="wrench">PgHero</a>
 
 </DetailIconCards>
 
@@ -140,7 +140,7 @@ Learn how Neon secures your projects and data, and explore the security features
 
 <a href="/docs/get-started/production-checklist" description="Guidelines to optimize price, performance, and reliability" icon="check">Production checklist</a>
 
-<a href="/docs/manage/backups" description="An overview of backup strategies for Neon Postgres" icon="database">Backups</a>
+<a href="/docs/manage/backups" description="An overview of backup strategies for Lakebase Postgres" icon="database">Backups</a>
 
 <a href="/docs/manage/backup-pg-dump" description="Learn how to create a backup of your Neon database using pg_dump" icon="database">Backup with pg_dump</a>
 

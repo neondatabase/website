@@ -12,7 +12,7 @@ summary: >-
   provisioning and fleet management runs through the Neon API, with
   autoscaling, scale-to-zero, branching, and point-in-time recovery included.
 enableTableOfContents: true
-updatedOn: '2026-06-23T22:05:54.707Z'
+updatedOn: '2026-07-31T15:49:10.111Z'
 ---
 
 <InfoBlock>
@@ -34,7 +34,7 @@ The Neon agent plan provides infrastructure for platforms that deploy Postgres d
 
 ## Why Neon for agent platforms
 
-Neon's architecture aligns with how agent platforms operate:
+The lakebase architecture aligns with how agent platforms operate:
 
 - **Instant provisioning**: Serverless Postgres with separated compute and storage provisions databases in seconds
 - **Autoscaling and scale-to-zero**: Compute scales up and down automatically based on workload, and idle databases cost nothing while remaining instantly accessible

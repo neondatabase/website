@@ -54,7 +54,7 @@ export default {
     },
     {
       rows: '1',
-      feature: 'Postgres database',
+      feature: 'Lakebase Postgres',
     },
     {
       rows: '2',

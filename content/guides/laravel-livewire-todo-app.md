@@ -4,12 +4,12 @@ subtitle: Learn how to create a simple yet powerful TODO app using Laravel, Live
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2025-05-30T16:53:05.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 In this guide, we'll walk through the process of building a TODO application using [Laravel](https://laravel.com/), [Livewire](https://livewire.laravel.com/), and [Volt](https://livewire.laravel.com/docs/volt).
 
-We'll use [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits) for authentication and Neon Postgres as our database.
+We'll use [Laravel Breeze](https://laravel.com/docs/11.x/starter-kits) for authentication and Lakebase Postgres as our database.
 
 By the end of this tutorial, you'll have a simple yet fully functional TODO application that allows users to create, update, and delete tasks.
 

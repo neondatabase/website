@@ -4,7 +4,7 @@ subtitle: A step-by-step guide for building a RAG chatbot in an Astro applicatio
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 ## Prerequisites
@@ -923,6 +923,6 @@ Now, push the added GitHub workflow file to your GitHub repo. Follow the steps b
 
 ## Summary
 
-In this guide, you learned how to build a RAG Chatbot using LlamaIndex, Astro, and Neon Postgres. Additionally, you learned how to automate deployments of your Astro application using GitHub Actions to Amazon ECS on Amazon Fargate.
+In this guide, you learned how to build a RAG Chatbot using LlamaIndex, Astro, and Lakebase Postgres. Additionally, you learned how to automate deployments of your Astro application using GitHub Actions to Amazon ECS on Amazon Fargate.
 
 <NeedHelp />

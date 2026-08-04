@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -182,7 +182,7 @@ If you're experimenting with an extension and run into trouble, we recommend che
 
 A preloaded library in Postgres is a shared library that must be loaded into memory when the Postgres server starts. These libraries are specified in your Postgres server's startup configuration using the `shared_preload_libraries` parameter and cannot be added dynamically after the server has started.
 
-Some Postgres extensions require preloaded libraries but most do not. Neon Postgres servers preload libraries for certain extensions by default. You can view **currently enabled** libraries by running the following command.
+Some Postgres extensions require preloaded libraries but most do not. Lakebase Postgres servers preload libraries for certain extensions by default. You can view **currently enabled** libraries by running the following command.
 
 ```sql shouldWrap
 SHOW shared_preload_libraries;

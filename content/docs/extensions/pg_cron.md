@@ -1,9 +1,9 @@
 ---
 title: The pg_cron extension
-subtitle: Schedule and manage cron jobs directly within your Neon Postgres database
+subtitle: Schedule and manage cron jobs directly within your Lakebase Postgres database
 summary: >-
   pg_cron is a cron-based job scheduler that runs SQL commands and stored
-  procedures on a schedule directly inside Neon Postgres, eliminating the need
+  procedures on a schedule directly inside Lakebase Postgres, eliminating the need
   for external cron utilities. Enable it by setting the `cron.database_name`
   parameter via the Neon API, then use `cron.schedule()` with standard cron
   syntax to automate tasks like data archival, vacuuming, and log purging.
@@ -11,7 +11,7 @@ summary: >-
   computes with scale-to-zero disabled. `cron.schedule_in_database()` is not
   supported in Neon.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
@@ -276,7 +276,7 @@ It's important to note that because `pg_cron` is managed by Neon, modifying thes
 
 ## Conclusion
 
-You have successfully learned how to enable and use the `pg_cron` extension within your Neon Postgres environment. You can now schedule routine database tasks directly within your database, simplifying automation and maintenance. Remember that `pg_cron` schedules are interpreted in UTC and will only run when your compute is active.
+You have successfully learned how to enable and use the `pg_cron` extension within your Lakebase Postgres environment. You can now schedule routine database tasks directly within your database, simplifying automation and maintenance. Remember that `pg_cron` schedules are interpreted in UTC and will only run when your compute is active.
 
 ## Resources
 
