@@ -1,13 +1,13 @@
 ---
 title: Connect a Vue.js application to Neon
-subtitle: Set up a Lakebase Postgres project in seconds and connect from a Vue.js application
+subtitle: Set up a project on Neon in seconds and connect from a Vue.js application
 summary: >-
   Connecting a Vue.js application to a Lakebase Postgres database requires
   server-side access because the database cannot be queried directly from the browser.
   Use a Vue meta-framework such as Nuxt.js or Quasar Framework to run database
   queries on the server and expose data to your Vue frontend.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 Vue.js is a progressive JavaScript framework for building user interfaces.

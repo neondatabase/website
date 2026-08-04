@@ -1,6 +1,6 @@
 ---
 title: Connect a React Router application to Neon
-subtitle: Set up a Lakebase Postgres project in seconds and connect from a React Router application
+subtitle: Set up a project on Neon in seconds and connect from a React Router application
 summary: >-
   React Router full-stack integration with Lakebase Postgres runs database queries
   server-side inside a route `loader` function, keeping credentials and SQL out
@@ -8,12 +8,12 @@ summary: >-
   serverless Postgres backend, with driver options for node-postgres,
   postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [React Router](https://reactrouter.com/home) is a powerful routing library for React that also includes modern, full-stack framework features. This guide explains how to connect a React Router application to Neon using a server-side `loader` function.
 
-To create a Lakebase Postgres project and access it from a React Router application:
+To create a project on Neon and access it from a React Router application:
 
 <Steps>
 

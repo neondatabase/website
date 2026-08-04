@@ -9,10 +9,10 @@ summary: >-
   `POSTGRES_URL` credential storage in `.env.local`, and a working TypeScript
   query to verify the connection.
 enableTableOfContents: true
-updatedOn: '2026-08-04T04:41:00.271Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
-This guide describes how to create a Lakebase Postgres project and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.
+This guide describes how to create a project on Neon and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.
 
 <Admonition type="note">
 The same configuration steps can be used for [Hono](https://hono.dev/docs/getting-started/bun), [Elysia](https://elysiajs.com), and other Bun-based web frameworks.
@@ -20,7 +20,7 @@ The same configuration steps can be used for [Hono](https://hono.dev/docs/gettin
 
 <Steps>
 
-## Create a Lakebase Postgres project
+## Create a project on Neon
 
 If you do not have one already, create a project.
 

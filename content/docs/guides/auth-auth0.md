@@ -11,7 +11,7 @@ summary: >-
   covers Auth0 application configuration, callback URLs, session handling with
   UserProvider, and Next.js server actions for inserting and deleting user data.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -25,7 +25,7 @@ User authentication is an essential part of most web applications. Modern apps o
 In this guide, we'll walk through setting up a simple Next.js application using Lakebase Postgres as the database, and add user authentication using [Auth0](https://auth0.com/). We will cover how to:
 
 - Set up a Next.js project with Auth0 for authentication
-- Create a Lakebase Postgres database and connect it to your application
+- Create a database on Neon and connect it to your application
 - Define a database schema using Drizzle ORM and generate migrations
 - Store and retrieve user data associated with Auth0 user IDs
 

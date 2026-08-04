@@ -1,6 +1,6 @@
 ---
 title: Schema migration with Lakebase Postgres and Entity Framework
-subtitle: Set up Lakebase Postgres and run migrations for your Entity Framework project
+subtitle: Set up a database on Neon and run migrations for your Entity Framework project
 summary: >-
   Entity Framework Core schema migrations on Lakebase Postgres walks through
   installing the Npgsql EF Core provider, defining C# models, and running
@@ -10,7 +10,7 @@ summary: >-
   column. Migrations must use a direct (non-pooled) Neon connection string;
   PgBouncer pooled strings are not supported for dotnet-ef operations.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [Entity Framework](https://learn.microsoft.com/en-us/ef/) is a popular Object-Relational Mapping (ORM) framework for .NET applications. It simplifies database access by allowing developers to work with domain-specific objects and properties without focusing on the underlying database tables and columns. Entity Framework also provides a powerful migration system that enables you to define and manage database schema changes over time.

@@ -11,7 +11,7 @@ summary: >-
   issuer URI and client credentials, defining a user_messages schema, and
   running drizzle-kit push:pg migrations against a Lakebase database.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -23,7 +23,7 @@ User authentication is critical for web applications, especially for apps intern
 In this guide, we'll walk through building a simple Next.js application using [Neon's](https://neon.tech) Lakebase Postgres database, and add user authentication to it using [Okta](https://www.okta.com/). We will cover how to:
 
 - Set up a Next.js project with Okta for authentication
-- Create a Lakebase Postgres database and connect it to your application
+- Create a database on Neon and connect it to your application
 - Define a database schema using Drizzle ORM and generate migrations
 - Store and retrieve user data associated with Okta user IDs
 

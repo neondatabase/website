@@ -1,6 +1,6 @@
 ---
 title: Connect from Symfony with Doctrine to Neon
-subtitle: Set up a Lakebase Postgres project in seconds and connect from Symfony with Doctrine
+subtitle: Set up a project on Neon in seconds and connect from Symfony with Doctrine
 summary: >-
   Connecting Symfony to Lakebase Postgres via Doctrine ORM requires only setting the
   DATABASE_URL in your .env file to a Lakebase Postgres connection string with sslmode=require
@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony
   - /docs/integrations/symfony
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/symfony-prompt.md" 

@@ -1,16 +1,16 @@
 ---
 title: Connect a RedwoodSDK application to Neon
-subtitle: Set up a Lakebase Postgres project in seconds and connect from a Redwood application
+subtitle: Set up a project on Neon in seconds and connect from a Redwood application
 summary: >-
   RedwoodSDK is a full-stack framework for Cloudflare Workers, and connecting it
   to Lakebase Postgres requires choosing between two drivers: postgres.js or the
   Neon serverless driver (@neondatabase/serverless). This guide walks through
-  creating a Lakebase Postgres project, installing the chosen driver, storing the
+  creating a project on Neon, installing the chosen driver, storing the
   DATABASE_URL connection string in .env, and configuring route handlers in
   TypeScript to query the database. Use this page when building a RedwoodSDK
   app on Cloudflare that needs a serverless Postgres backend.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"
@@ -18,7 +18,7 @@ description="Pre-built prompt for connecting RedwoodSDK applications to Lakebase
 
 [RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application.
 
-To create a Lakebase Postgres project and access it from a RedwoodSDK application:
+To create a project on Neon and access it from a RedwoodSDK application:
 
 <Steps>
 

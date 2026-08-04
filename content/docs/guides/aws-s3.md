@@ -10,7 +10,7 @@ summary: >-
   working backend examples in JavaScript (Hono, AWS SDK v3) and Python (Flask,
   boto3) with an s3_files schema and presign/save-metadata endpoints.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.
@@ -98,7 +98,7 @@ In your S3 bucket settings, navigate to the **Permissions** tab and find the **C
 
 > This configuration allows any origin (`*`) to perform `GET` and `PUT` requests. In a production environment, you should restrict `AllowedOrigins` to your application's domain(s) for security.
 
-## Create a table in Lakebase Postgres for file metadata
+## Create a table in Neon for file metadata
 
 We need a table in the database to store metadata about the objects uploaded to S3.
 

@@ -9,13 +9,13 @@ summary: >-
   node-postgres, postgres.js, and the Neon serverless driver, and shows query
   patterns for both .astro page components and server endpoint API routes.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 
 description="Pre-built prompt for connecting Astro to Neon using the Neon serverless driver"/>
 
-Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Lakebase Postgres database and access it from an Astro site or application.
+Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a database on Neon and access it from an Astro site or application.
 
 To create a Neon project and access it from an Astro site or application:
 

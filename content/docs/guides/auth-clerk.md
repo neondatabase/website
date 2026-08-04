@@ -12,7 +12,7 @@ summary: >-
   Drizzle-kit migration commands, ClerkProvider setup, and Next.js server
   actions backed by the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
@@ -30,7 +30,7 @@ Looking to manage **authorization** along with authentication? [Neon RLS](/docs/
 In this guide, we'll walk through setting up a simple Next.js application using Lakebase Postgres as the database, and add user authentication using [Clerk](https://clerk.com/). We will go over how to:
 
 - Set up a Next.js project with Clerk for authentication
-- Create a Lakebase Postgres database and connect it to your application
+- Create a database on Neon and connect it to your application
 - Define a database schema using Drizzle ORM and generate migrations
 - Store and retrieve user data associated with Clerk user IDs
 

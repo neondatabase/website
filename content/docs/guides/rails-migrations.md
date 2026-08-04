@@ -1,6 +1,6 @@
 ---
 title: Schema migration with Lakebase Postgres and Ruby on Rails
-subtitle: Set up Lakebase Postgres and run migrations for your Rails project
+subtitle: Set up a database on Neon and run migrations for your Rails project
 summary: >-
   Ruby on Rails Active Record migrations against Lakebase Postgres require a direct
   (non-pooled) connection string in `DATABASE_URL` because PgBouncer pooled
@@ -9,7 +9,7 @@ summary: >-
   `rails db:migrate` to create tables, and applying incremental schema changes
   such as adding a new column with a follow-on migration.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [Ruby on Rails](https://rubyonrails.org/) is a popular web application framework for Ruby developers. It provides an ORM (Object-Relational Mapping) layer called `Active Record`, that simplifies database interactions and schema management. Rails also includes a powerful migration system that allows you to define and manage database schema changes over time.

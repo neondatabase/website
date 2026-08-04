@@ -11,7 +11,7 @@ summary: >-
   @auth/pg-adapter, @neondatabase/serverless, and Resend as the email provider
   for magic link delivery.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <Admonition type="tip" title="Authentication on Neon">
@@ -25,7 +25,7 @@ For example, passwordless authentication methods like magic links require secure
 In this guide, we'll walk through setting up a simple Next.js application, using Lakebase Postgres as the database backend for both Auth.js authentication and application data. We'll use [Resend](https://resend.com/) for sending magic link emails. We will cover how to:
 
 - Set up a Next.js project with Auth.js for magic link authentication
-- Create a Lakebase Postgres database and configure it as the Auth.js database backend
+- Create a database on Neon and configure it as the Auth.js database backend
 - Configure Resend as an authentication provider
 - Implement a basic authenticated feature (a simple todo list)
 

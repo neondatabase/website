@@ -13,7 +13,7 @@ summary: >-
 redirectFrom:
   - /docs/integrations/draxlr
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [Draxlr](https://www.draxlr.com) is a no code analytics tool for Lakebase Postgres that lets you build dashboards, reports, and insights using SQL, visual queries, or AI. It is commonly used for product analytics, reporting, and embedded dashboards.
@@ -25,7 +25,7 @@ This guide shows how to connect Draxlr to a Lakebase Postgres database.
 - A Draxlr account. See [Sign up for Draxlr](https://app.draxlr.com/register/).
 - A Neon project with a Postgres database. See [Create a Neon project](/docs/manage/projects#create-a-project).
 
-## Connect Lakebase Postgres to Draxlr
+## Connect Neon to Draxlr
 
 1. **Get your Neon connection string**
    In the Neon Console, open your project and copy the Postgres connection string. It will look similar to the following:

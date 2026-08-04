@@ -7,7 +7,7 @@ summary: >-
   configure a Better Drizzle client, define schema relations, seed data, run
   CRUD queries, use plugins, and manage transactions with savepoints.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <InfoBlock>
@@ -62,7 +62,7 @@ Initialize a new Node.js project with a `package.json` file:
 npm init -y
 ```
 
-## Create a Lakebase Postgres project
+## Create a project on Neon
 
 If you do not have one already, create a project.
 

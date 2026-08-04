@@ -1,6 +1,6 @@
 ---
 title: Schema migration with Lakebase Postgres and Sequelize
-subtitle: Set up Lakebase Postgres and run migrations for your Javascript project using
+subtitle: Set up a database on Neon and run migrations for your Javascript project using
   Sequelize ORM
 summary: >-
   Sequelize ORM integration with Lakebase Postgres walks through connecting a
@@ -11,7 +11,7 @@ summary: >-
   connection string is required for migrations, as pooled connections via
   PgBouncer cause migration errors.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Lakebase Postgres database in a JavaScript project.

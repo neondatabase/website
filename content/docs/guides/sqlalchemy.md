@@ -1,6 +1,6 @@
 ---
 title: Connect an SQLAlchemy application to Lakebase Postgres
-subtitle: Set up a Lakebase Postgres project in seconds and connect from an SQLAlchemy application
+subtitle: Set up a project on Neon in seconds and connect from an SQLAlchemy application
 summary: >-
   SQLAlchemy, a Python SQL toolkit and ORM, connects to Lakebase Postgres by
   installing psycopg2 and passing a connection string to SQLAlchemy's
@@ -13,13 +13,13 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/sqlalchemy-prompt.md" 
 description="Pre-built prompt for connecting SQLAlchemy to Lakebase Postgres"/>
 
-SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Lakebase Postgres project and connect to it from SQLAlchemy.
+SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a project on Neon and connect to it from SQLAlchemy.
 
 **Prerequisites:**
 

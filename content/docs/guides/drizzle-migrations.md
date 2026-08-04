@@ -1,6 +1,6 @@
 ---
 title: Schema migration with Lakebase Postgres and Drizzle ORM
-subtitle: Set up Lakebase Postgres and run migrations for your TypeScript project using
+subtitle: Set up a database on Neon and run migrations for your TypeScript project using
   Drizzle ORM
 summary: >-
   Drizzle ORM schema migrations with Lakebase Postgres walks through defining
@@ -12,7 +12,7 @@ summary: >-
   and Hono.js, and requires a direct (non-pooled) connection string for
   migrations.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations.

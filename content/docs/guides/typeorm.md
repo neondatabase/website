@@ -9,7 +9,7 @@ summary: >-
   connections. To prevent timeouts from Lakebase Postgres idle-compute cold start (default
   5 minutes), add `connect_timeout=10` to the connection string.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/typeorm-prompt.md" 
@@ -17,13 +17,13 @@ description="Pre-built prompt for connecting Node.js applications to Lakebase Po
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
 
-- [Connect to Lakebase Postgres from TypeORM](#connect-to-lakebase-postgres-from-typeorm)
+- [Connect to a database on Neon from TypeORM](#connect-to-a-database-on-neon-from-typeorm)
 - [Use connection pooling with TypeORM](#use-connection-pooling-with-typeorm)
 - [Connection timeouts](#connection-timeouts)
 
-## Connect to Lakebase Postgres from TypeORM
+## Connect to a database on Neon from TypeORM
 
-To establish a basic connection from TypeORM to Lakebase Postgres, perform the following steps:
+To establish a basic connection from TypeORM to a database on Neon, perform the following steps:
 
 1. Retrieve your database connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
    ![Connection details modal](/docs/connect/connection_details.png)
@@ -44,7 +44,7 @@ To establish a basic connection from TypeORM to Lakebase Postgres, perform the f
    });
    ```
 
-3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Lakebase Postgres connection string that you copied in the previous step. We also recommend adding `?sslmode=require&channel_binding=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
+3. Add a `DATABASE_URL` variable to your `.env` file and set it to the Neon connection string that you copied in the previous step. We also recommend adding `?sslmode=require&channel_binding=require` to the end of the connection string to ensure a [secure connection](/docs/connect/connect-securely).
 
    Your setting will appear similar to the following:
 

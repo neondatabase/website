@@ -12,13 +12,13 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
 description="Pre-built prompt for connecting Rust applications to Lakebase Postgres"/>
 
-This guide describes how to create a Lakebase Postgres project and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
+This guide describes how to create a project on Neon and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
 
 ## Prerequisites
 

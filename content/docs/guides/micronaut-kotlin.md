@@ -10,13 +10,13 @@ summary: >-
   The setup uses the micronaut-data-jdbc, jdbc-hikari, and flyway Micronaut
   features alongside the org.postgresql JDBC driver.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/micronaut-kotlin-prompt.md"
 description="Pre-built prompt for connecting Micronaut Kotlin applications to Lakebase Postgres"/>
 
-[Micronaut](https://micronaut.io/) is a modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications. This guide describes how to create a Lakebase Postgres database and connect to it from a Micronaut Kotlin application.
+[Micronaut](https://micronaut.io/) is a modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications. This guide describes how to create a database on Neon and connect to it from a Micronaut Kotlin application.
 
 The final application will expose REST endpoints to perform CRUD (Create, Read, Update, Delete) operations on a `book` table in your Neon database.
 

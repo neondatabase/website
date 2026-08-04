@@ -1,6 +1,6 @@
 ---
 title: Connect a Tortoise ORM application to Neon
-subtitle: Set up a Lakebase Postgres project in seconds and connect from a Python async application
+subtitle: Set up a project on Neon in seconds and connect from a Python async application
 summary: >-
   Tortoise ORM is an asyncio-native Python ORM (inspired by Django) that
   connects to Lakebase Postgres via the asyncpg driver, enabling non-blocking
@@ -12,7 +12,7 @@ summary: >-
   python-dotenv, and avoiding hanging processes by calling
   Tortoise.close_connections() or using run_async().
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 

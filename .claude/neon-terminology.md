@@ -41,7 +41,7 @@ Add the qualifier when the sentence touches any of these:
 - A path-specific API, CLI, SDK, Terraform provider, or MCP Server
 - A partner or marketplace integration that exists on only one path
 
-Leave it bare for shared capabilities: branching, autoscaling, scale to zero, read replicas, instant restore, connection pooling, logical replication, extensions, Postgres version support, and the storage/compute architecture. Projects and branches are also shared concepts — both paths use them, so "a Lakebase Postgres project" needs no qualifier on its own.
+Leave it bare for shared capabilities: branching, autoscaling, scale to zero, read replicas, instant restore, connection pooling, logical replication, extensions, Postgres version support, and the storage/compute architecture. Projects and branches are shared concepts too, so a bare "Lakebase Postgres project" is fine when you're describing the concept rather than telling the reader to go make one (for that case, see the procedural rule below).
 
 - ✅ "Lakebase Postgres has instant point-in-time restore" (true on both)
 - ✅ "Sign up for Lakebase Postgres on Neon" (signup is path-specific)
@@ -49,6 +49,21 @@ Leave it bare for shared capabilities: branching, autoscaling, scale to zero, re
 - ❌ "Sign up for Lakebase Postgres" (no shared signup exists)
 
 **Don't over-qualify.** Adding "on Neon" to every mention makes shared capabilities look Neon-exclusive and undercuts the one-product framing. Default to bare "Lakebase Postgres"; add the path only where the claim actually narrows. When it's genuinely ambiguous, leave it bare.
+
+### Renaming "Neon Postgres" must not delete the Neon signal
+
+"Neon Postgres" carried two pieces of information: it's a database, and it's on Neon. Swapping in bare "Lakebase Postgres" keeps the first and silently drops the second, so a step that used to tell the reader where they're working no longer does.
+
+When the sentence is a **step the reader performs**, reword around Neon instead of renaming the product:
+
+- ❌ "Create a Lakebase Postgres database and connect it to your application"
+- ✅ "Create a database on Neon and connect it to your application"
+- ❌ "Set up a Lakebase Postgres project in seconds"
+- ✅ "Set up a project on Neon in seconds"
+
+Prefer plain "on Neon" phrasing over "Lakebase Postgres on Neon" in procedural text. "Create a database on Neon" reads like a human wrote it; "Create a Lakebase Postgres on Neon database" does not. Reserve the full "Lakebase Postgres on Neon" form for self-contained units where the product needs naming outright: titles, subtitles, summaries, card descriptions, table rows.
+
+The test: after the rename, can a reader following the steps still tell which product they're working in? If not, you removed information instead of correcting it.
 
 ### Don't rename around the product name
 

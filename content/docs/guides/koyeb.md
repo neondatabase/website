@@ -9,7 +9,7 @@ summary: >-
   own database server. Covers both the Koyeb control panel and CLI deployment
   paths, including Prisma schema sync and database seeding.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
@@ -50,7 +50,7 @@ To deploy the application from the Koyeb [control panel](https://app.koyeb.com/)
 1. Keep `example-express-prisma` as the name and `main` as the branch.
 1. In **Build and deployment settings**, enable the **Override** setting and add the following **Build command**: `npm run postgres:init`
 1. Select the region closest to your Neon database.
-1. Under **Advanced** > **Environment variables**, add a `DATABASE_URL` environment variable to enable the application to connect to your Lakebase Postgres database. Set the value to the Neon connection string provided to you when you created the Neon project.
+1. Under **Advanced** > **Environment variables**, add a `DATABASE_URL` environment variable to enable the application to connect to your database on Neon. Set the value to the Neon connection string provided to you when you created the Neon project.
 1. Enter a name for your app. For example, `express-neon`
 1. Click **Deploy**.
 
