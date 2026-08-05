@@ -39,8 +39,8 @@ describe('AI Gateway model examples', () => {
     ).toEqual(['aisdk', 'mastra', 'ts', 'python']);
   });
 
-  it('returns no examples for catalogued models without measured capabilities', () => {
-    const examplesByMode = getExamplesByMode('gpt-5-2-codex');
+  it('returns no examples for an unknown model id', () => {
+    const examplesByMode = getExamplesByMode('no-such-model');
 
     expect(examplesByMode).toEqual({ text: [], image: [] });
     expect(getLanguagesForMode(examplesByMode, 'text')).toEqual([]);

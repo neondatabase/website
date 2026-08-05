@@ -21,8 +21,14 @@ describe('AI Gateway model rows', () => {
     expect(row.endpoints).toEqual(['openai/responses']);
   });
 
+  // The catalog is allowed to run ahead of what a branch is entitled to serve, so a
+  // model can be listed with no measured capabilities. Built from a synthetic catalog
+  // because the real one currently has no such model.
   it('does not advertise endpoints for models without measured capabilities', () => {
-    const row = rows.find(({ id }) => id === 'gpt-5-2-codex');
+    const [row] = buildRows(
+      { models: { 'unprobed-model': { id: 'unprobed-model', name: 'Unprobed Model' } } },
+      { models: [] }
+    );
 
     expect(row.hasMeasuredCapabilities).toBe(false);
     expect(row.isImageCapable).toBe(false);
