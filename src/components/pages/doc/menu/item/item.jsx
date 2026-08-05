@@ -27,12 +27,14 @@ function hasActiveDescendant(items, slug) {
 }
 
 const MethodDot = ({ method }) => (
-  <span
-    className={cn(
-      'mt-[5px] inline-block size-[5px] shrink-0 rounded-full opacity-70',
-      METHOD_DOT_COLOR[method?.toUpperCase()] ?? 'bg-gray-new-50'
-    )}
-  />
+  <span className="flex h-[1.25em] shrink-0 items-center">
+    <span
+      className={cn(
+        'size-[5px] rounded-full opacity-70',
+        METHOD_DOT_COLOR[method?.toUpperCase()] ?? 'bg-gray-new-50'
+      )}
+    />
+  </span>
 );
 
 const Item = ({
