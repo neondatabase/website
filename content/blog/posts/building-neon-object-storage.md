@@ -60,8 +60,8 @@ In practice, what this means is:
 - You can create as many branches as you want without multiplying storage costs upfront
 - Branching a 100 TB database feels exactly the same as branching a 10 MB one; it's instant, and you only pay for compute while that branch's compute is running (it scales to zero when idle)
 
-<Admonition type="note" title="This is the lakebase architecture">
-Instant, copy-on-write branches are what you get when Postgres compute is ephemeral and storage is durable and versioned. More in [lakebase architecture](https://neon.com/docs/introduction/architecture-overview).
+<Admonition type="note" title="On the lakebase architecture">
+This design defines a new kind of OLTP database. [Get all details on how things work.](https://neon.com/docs/introduction/architecture-overview).
 </Admonition>
 
 ## Making files branch with your database
@@ -79,7 +79,7 @@ Each Object Storage branch keeps a lineage: an ordered record of itself, its par
 - Looking up a file walks that lineage
 - Deleting a file the child inherited doesn't touch the parent: the child adds a version marked deleted, and lookups on that branch return that from then on
 
-This setup carries over the essential properties of our branching experience to files. Branching stays instant no matter how much the parent has stored, isolation is the default, and you don't pay for duplicated object storage unless the branch diverges. Compute on the branch still scales to zero when idle.
+**This setup carries over the essential properties of our branching experience to files. Branching stays instant no matter how much the parent has stored, isolation is the default, and you don't pay for duplicated object storage unless the branch diverges. Compute on the branch still scales to zero when idle.**
 
 ### Branch databases + buckets as many times as you want. You don't pay for storage copies or idle compute
 
@@ -123,10 +123,10 @@ neon branches create --name preview/feature-x --parent main
 
 ## Try it on the Neon Free plan
 
-This is the era of branchable backends. We're extending Lakebase Postgres branching to files with [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Auth](https://neon.com/docs/auth/overview), and [AI models](https://neon.com/docs/ai-gateway/overview). Tell your agent to instantly branch your entire backend to create isolated environments, with minimal costs and no maintenance overhead, and delete them just as quickly.
+**This is the era of branchable backends.** We're extending Lakebase Postgres branching to files with [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Auth](https://neon.com/docs/auth/overview), and [AI models](https://neon.com/docs/ai-gateway/overview). Tell your agent to instantly branch your entire backend to create isolated environments, with minimal costs and no maintenance overhead, and delete them just as quickly.
 
 Start by [deploying an entire Neon backend](https://neon.com/docs/introduction) on the [Free plan](https://neon.com/pricing). You get up to 100 projects, with limits generous enough to actually build products.
 
-<Admonition type="note" title="Remember that Object Storage is still beta">
+<Admonition type="note" title="Remember that Object Storage is still beta!">
 Use it with caution, expect rough edges, and [tell us what breaks](https://discord.gg/92vNTzKDGp).
 </Admonition>
