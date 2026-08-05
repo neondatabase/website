@@ -38,26 +38,28 @@ async function expectHealthyPage(applicationErrors) {
   expect(applicationErrors).toEqual([]);
 }
 
-async function expectReactHandlerReady(element, handlerName) {
+async function expectReactHandlerReady(element, handlerName, timeout) {
   // SSR controls can be visible before React attaches their event handlers.
   await expect
-    .poll(() =>
-      element.evaluate(
-        (node, expectedHandlerName) =>
-          Object.keys(node).some(
-            (key) =>
-              key.startsWith('__reactProps$') &&
-              typeof node[key]?.[expectedHandlerName] === 'function'
-          ),
-        handlerName
-      )
+    .poll(
+      () =>
+        element.evaluate(
+          (node, expectedHandlerName) =>
+            Object.keys(node).some(
+              (key) =>
+                key.startsWith('__reactProps$') &&
+                typeof node[key]?.[expectedHandlerName] === 'function'
+            ),
+          handlerName
+        ),
+      timeout ? { timeout } : undefined
     )
     .toBe(true);
 }
 
-async function expectManagedFormReady(form) {
+async function expectManagedFormReady(form, timeout) {
   // A form without React's onSubmit falls back to a native GET navigation.
-  await expectReactHandlerReady(form, 'onSubmit');
+  await expectReactHandlerReady(form, 'onSubmit', timeout);
 }
 
 async function installAnalyticsMock(page, options = {}) {

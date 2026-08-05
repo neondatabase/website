@@ -47,14 +47,19 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
-          node-version: '20'
+          node-version: '22'
 
       # Zero-dependency check (Node builtins + global fetch, GitHub contents API
       # only) — no install needed, so nothing to fetch from the npm registry.
+      # pipefail is required: without it the shell returns tee's exit code and the
+      # check's failure is discarded, so the job reports success on real drift.
       - name: Check skills match upstream
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/check-skills-sync.mjs | tee skills-drift-report.txt
+        shell: bash
+        run: |
+          set -o pipefail
+          node scripts/check-skills-sync.mjs | tee skills-drift-report.txt
 
       - name: Open or update drift issue
         if: failure() && github.event_name != 'pull_request'

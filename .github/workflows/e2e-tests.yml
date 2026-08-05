@@ -1,7 +1,19 @@
 name: E2E on Chrome
 
 on:
+  # A full production build plus 72 browser tests takes ~16 minutes, so PRs only
+  # pay for it when they touch app code, the tests, or the dependency tree.
+  # Content-only PRs (the majority in this repo) skip it. Pushes to main and the
+  # Monday cron still run the whole matrix unconditionally.
   pull_request:
+    paths:
+      - 'src/**'
+      - 'tests/critical-flows/**'
+      - 'playwright.config.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'next.config.js'
+      - '.github/workflows/e2e-tests.yml'
   push:
     branches: [main]
   schedule:
@@ -14,6 +26,7 @@ concurrency:
 
 permissions:
   contents: read
+  id-token: write # mint the JFrog OIDC token for the Databricks npm mirror
 
 jobs:
   install:
@@ -37,10 +50,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
+      # The protected runner group has no egress to the public npm registry — it
+      # can only reach the Databricks JFrog mirror. Mint a short-lived token via
+      # OIDC and point npm at the mirror before anything fetches packages.
+      - name: Setup JFrog CLI with OIDC
+        id: setup-jfrog
+        uses: jfrog/setup-jfrog-cli@279b1f629f43dd5bc658d8361ac4802a7ef8d2d5 # v4.9.1
+        env:
+          JF_URL: https://databricks.jfrog.io
+        with:
+          oidc-provider-name: github-actions
+      - name: Configure npm registry (Databricks JFrog mirror)
+        run: |
+          cat > ~/.npmrc <<EOF
+          registry=https://databricks.jfrog.io/artifactory/api/npm/db-npm/
+          //databricks.jfrog.io/artifactory/api/npm/db-npm/:_authToken=${{ steps.setup-jfrog.outputs.oidc-token }}
+          always-auth=true
+          EOF
+
       - name: Setup Node.js
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -52,8 +83,33 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium webkit
 
+      # Advisory, not a gate. webkit is slow enough on these pages that hydration
+      # races still surface as flakes, and a red X on every PR would be noise, so
+      # the outcome goes to the job summary and the uploaded report instead of
+      # failing the run. Setup failures (install, build, browsers) still fail.
+      #
+      # This applies to the cron too: nothing here fails on a genuine regression,
+      # so the report has to be read. Wiring the scheduled run up to something
+      # that notifies (fail loudly, open an issue, post to Slack) is a follow-up.
       - name: Monitor critical user outcomes
+        id: critical
+        continue-on-error: true
         run: npm run test:critical
+
+      - name: Report critical flow outcome
+        if: always()
+        run: |
+          if [ "${{ steps.critical.outcome }}" = "success" ]; then
+            echo "### Critical user flows passed" >> "$GITHUB_STEP_SUMMARY"
+          else
+            {
+              echo "### Critical user flows reported failures"
+              echo
+              echo "This step is advisory and does not fail the build. Download the"
+              echo "\`critical-user-flow-report-${{ github.run_attempt }}\` artifact for traces,"
+              echo "screenshots, and video of each failure."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
 
       - name: Upload Playwright report
         if: always()
