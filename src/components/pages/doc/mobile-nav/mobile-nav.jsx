@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import CornerIcon from 'icons/corner-left.inline.svg';
 import { cn } from 'utils/cn';
+import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
 import Icon from '../menu/icon';
 
@@ -246,7 +247,7 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
       <DrawerContent className="bottom-12 hidden h-[70dvh]! flex-col rounded-t-2xl border-b-0 border-gray-new-80 bg-white p-0 text-black-new after:hidden dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
         <DrawerTitle className="sr-only">Menu</DrawerTitle>
         <div className="flex flex-1 flex-col overflow-y-auto p-6 pt-[15px] pb-8">
-          <RecursiveList nodes={menu} currentPath={pathname} />
+          <RecursiveList nodes={menu} currentPath={normalizeDocNavigationPath(pathname)} />
         </div>
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-10 w-full bg-[linear-gradient(180deg,rgba(255,255,255,0.00)_0%,#FFF_73.36%)] dark:bg-[linear-gradient(180deg,rgba(9,9,11,0.00)_0%,#09090B_73.36%)]"

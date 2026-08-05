@@ -116,7 +116,7 @@ describe('MDX to Markdown Conversion', () => {
       expect(result).not.toContain('<TwoColumnLayout');
     });
 
-    it('should render both AI Gateway tabs and quickstart snippets', async () => {
+    it('should render both AI Gateway model groups with links to accurate quickstarts', async () => {
       const inputPath = 'content/docs/ai-gateway/models.md';
       const pageUrl = 'https://neon.com/docs/ai-gateway/models';
       const projectRoot = process.cwd();
@@ -131,18 +131,19 @@ describe('MDX to Markdown Conversion', () => {
       // Per-provider tables render under each tab
       expect(result).toContain('#### OpenAI');
       expect(result).toContain('`gpt-5`');
+      expect(result).toContain('[GPT-5](https://neon.com/docs/ai-gateway/models/gpt-5.md)');
 
-      // Quickstart snippets are served, once per language, with the model-id
-      // placeholder rather than duplicated per model
-      expect(result).toContain('**Quickstart (text).**');
-      expect(result).toContain('**Quickstart (image).**');
-      expect(result).toContain('__MODEL_ID__');
-      expect(result).toContain('import { generateText } from "ai";');
-      expect(result).toContain('image_generation');
-
-      // Each language snippet appears exactly once per tab (no per-model repeat)
-      const aiSdkImportCount = result.split('import { generateText } from "ai";').length - 1;
-      expect(aiSdkImportCount).toBe(1);
+      // Examples differ by model, so the index links to generated detail pages
+      // instead of advertising a generic snippet that may not work.
+      expect(result).toContain(
+        'Select a linked model for code examples matched to its measured AI Gateway capabilities.'
+      );
+      expect(result).toContain('Verified code examples are not currently available for:');
+      expect(result).toContain('`gpt-5-2-codex`');
+      expect(result).toContain(
+        'Select a linked model for image-generation examples matched to that model.'
+      );
+      expect(result).not.toContain('__MODEL_ID__');
     });
   });
 

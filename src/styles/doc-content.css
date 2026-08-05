@@ -290,6 +290,19 @@
       @apply relative lg:[--docs-header-height:0px];
     }
 
+    .sticky-table--native {
+      @apply grid;
+
+      > .sticky-table-header,
+      > .table-wrapper {
+        grid-area: 1 / 1;
+      }
+
+      > .sticky-table-header {
+        @apply sticky left-auto w-auto self-start;
+      }
+    }
+
     .sticky-table-header {
       @apply pointer-events-none fixed top-(--docs-header-height) z-40 overflow-hidden bg-white dark:bg-black-pure 2xl:px-4;
 
