@@ -2,7 +2,7 @@
 title: "Product Specific Schedule (Neon)"
 template: Static
 seo:
-  title: "Product Specific Schedule (Neon) - Neon"
+  title: "Product Specific Schedule (Neon)"
   metaDesc: ""
   metaKeywords: ""
   metaRobotsNoindex: true
