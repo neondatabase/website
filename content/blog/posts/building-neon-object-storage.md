@@ -16,7 +16,7 @@ authors:
 cover:
   image: null
   alt: null
-isFeatured: false
+isFeatured: true
 seo:
   title: Building Neon Object Storage - Neon
   description: S3-compatible storage that branches with your Postgres database
