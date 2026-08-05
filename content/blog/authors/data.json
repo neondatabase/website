@@ -824,5 +824,12 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/zhou-sun.jpg",
     "photoAlt": "Zhou Sun"
+  },
+  "ying-hang-seah": {
+    "name": "Ying Hang Seah",
+    "role": "Co-Founder, Castform",
+    "url": "https://www.linkedin.com/in/ying-hang-seah",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/ying-hang-seah.jpg",
+    "photoAlt": "Ying Hang Seah"
   }
 }

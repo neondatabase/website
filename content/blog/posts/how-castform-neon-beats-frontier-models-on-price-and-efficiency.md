@@ -15,9 +15,10 @@ categories:
   - product
 authors:
   - pranav-aurora
+  - ying-hang-seah
 cover:
-  image: null
-  alt: null
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/cover.jpg'
+  alt: How Castform + Neon Beats Frontier Models on Price and Efficiency
 isFeatured: false
 seo:
   title: How Castform + Neon Beats Frontier Models on Price and Efficiency - Neon
@@ -30,16 +31,15 @@ seo:
   ogDescription: >-
     A 4B open-source model post-trained with Castform retrieved search results
     as accurately as GPT-5.6 Sol, while costing 100x less.
-  image: null
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/social.jpg'
 ---
 
-**[ADD IMAGE 1]**
+![Comparison of Castform fine-tune and frontier models by inference cost and mean evaluation reward](https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/image-1.jpg)
 
 <blockquote>
 <p>“Most teams' best training data is just sitting in their databases. The problem is that turning raw data into something usable is hard, and letting agents read, search, and mutate data cheaply at scale requires advanced infra. Pointing Castform at Neon skips both.”</p>
 <cite>Ying Hang Seah, cofounder, Castform</cite>
 </blockquote>
-
 
 A "good agent" needs to be strong in 2 areas:
 
@@ -54,7 +54,7 @@ In ~2022, the industry was going all in on embedding search. Every database prov
 
 In ~2025, agents started to gain more traction. Developers started creating multi-hop search workflows, decomposing big problems into smaller ones. Retrieval has shifted from the one-shot search systems to agentic retrieval. Instead of issuing a single query, models plan and search multiple times in a loop. Every loop iteration meant another call to the frontier model, increasing the overall cost and latency per user request.
 
-**[ADD IMAGE 2]**
+![Comparison of a traditional RAG pipeline and an agentic search workflow](https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/image-2.jpg)
 
 Concretely, a typical multi-turn search request with gpt-5.6-sol takes >10s and costs ~$0.03 end-to-end, making it prohibitively slow and expensive.
 
@@ -66,12 +66,12 @@ That is why we built Castform: to enable developers to RL post-train models with
 
 Castform's pipeline runs against Neon via Lakebase Search:
 
-| Stage | Neon + Lakebase Search |
-| --- | --- |
-| Corpus storage | Raw documents live in Postgres on Neon |
+| Stage                     | Neon + Lakebase Search                                                                        |
+| ------------------------- | --------------------------------------------------------------------------------------------- |
+| Corpus storage            | Raw documents live in Postgres on Neon                                                        |
 | Synthetic data generation | Castform training pipeline uses `lakebase_text` and `lakebase_vector` to write training tasks |
-| RL Training | Every rollout's search tool call uses Lakebase Search on Neon |
-| Production Inference | The final model uses the same search tool call during inference |
+| RL Training               | Every rollout's search tool call uses Lakebase Search on Neon                                 |
+| Production Inference      | The final model uses the same search tool call during inference                               |
 
 ## Your best training data already exists
 
@@ -137,13 +137,16 @@ Castform gives you full observability into your RL run. You can monitor your rew
 
 For more details on how to monitor your training runs, you can check out the [Castform blog here](https://castform.com/blog/monitoring-rl-runs/). You can also check out our [example training run here](https://app.castform.com/train/a7a898f6-d802-4908-b044-acb812f14a48?tab=train).
 
-**[ADD IMAGE 3 - caption: "Average reward"]** 
+<figure>
+<img src="https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/image-3.jpg" alt="Average reward over training steps" />
+<figcaption>Average reward</figcaption>
+</figure>
 
 ## Why Neon 'just works'
 
 During training, the agent repeatedly calls Lakebase Search until it has enough context to answer. Across thousands of parallel rollouts, each potentially making dozens of calls, this creates a highly bursty workload.
 
-**[ADD IMAGE 4]**
+![Neon CPU allocation and usage during a Castform training run](https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/image-4.jpg)
 
 Neon's dynamic compute scaling absorbs these peaks without requiring Castform to provision for maximum capacity around the clock. Training runs get low-latency search when demand spikes, while compute scales down during idle periods.
 
@@ -151,4 +154,4 @@ This infrastructure becomes even more valuable as agents move beyond search and 
 
 [Neon branching](https://neon.com/docs/introduction/branching) can give each rollout an isolated database state, while time-travel queries make it possible to reconstruct and inspect the state an agent encountered. Combined with autoscaling and scale-to-zero, this creates a path toward training thousands of stateful agent rollouts without maintaining thousands of continuously running environments.
 
-*Castform makes it easy for any developer to post-train open-source models to be cheaper, faster, better than the frontier. Post-train your first model today at [castform.com](https://castform.com).*
+_Castform makes it easy for any developer to post-train open-source models to be cheaper, faster, better than the frontier. Post-train your first model today at [castform.com](https://castform.com)._
