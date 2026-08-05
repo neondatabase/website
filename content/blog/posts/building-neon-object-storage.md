@@ -39,6 +39,8 @@ We made Object Storage branchable because that's our core operating philosophy. 
 
 When you create a branch, you get one branch_id that forks both your Postgres data and your Object Storage buckets:
 
+**[ADD IMAGE 1]**
+
 - **Data + files together.** The child inherits your database and your buckets/objects at that point in time.
 - **Same workflow as Postgres branches.** Create preview branches, PR environments, agent runs - files follow the same branch semantics you already use for data.
 - **Isolated by default.** Uploads and deletes on the child never touch the parent or sibling branches.
