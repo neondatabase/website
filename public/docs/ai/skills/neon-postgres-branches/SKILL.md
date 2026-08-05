@@ -13,7 +13,7 @@ metadata:
   parent: neon
 ---
 
-**FIRST**: Use the parent `neon` skill for a Neon platform overview, getting started with Neon, Neon development best practices, and more.
+**FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.
 
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
@@ -21,7 +21,7 @@ If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/ski
 npx skills add neondatabase/agent-skills --skill neon
 ```
 
-# Neon Postgres Branching
+# Lakebase Postgres Branching
 
 **Outcome:** a created Neon branch — or a clear, actionable next step if creation cannot proceed. Choose the correct branch type, then execute branch creation with the CLI (or MCP where the CLI isn't usable).
 
