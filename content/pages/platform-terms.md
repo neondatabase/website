@@ -6,7 +6,7 @@ seo:
   metaDesc: ""
   metaKeywords: ""
   metaRobotsNoindex: true
-  opengraphTitle: "Product Specific Schedule (Neon) - Neon"
+  opengraphTitle: "Product Specific Schedule (Neon)"
   opengraphDescription: ""
   twitterImage: ""
 ---
