@@ -11,7 +11,6 @@ seo:
   twitterImage: ""
 ---
 
-**Product Specific Schedule (Neon)**
 
 Last Updated: August 5, 2026
 
