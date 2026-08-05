@@ -16,6 +16,7 @@ categories:
 authors:
   - pranav-aurora
   - ying-hang-seah
+  - angel-pan
 cover:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/cover.jpg'
   alt: How Castform + Neon Beats Frontier Models on Price and Efficiency

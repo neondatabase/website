@@ -831,5 +831,12 @@
     "url": "https://www.linkedin.com/in/ying-hang-seah",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/ying-hang-seah.jpg",
     "photoAlt": "Ying Hang Seah"
+  },
+  "angel-pan": {
+    "name": "Angel Pan",
+    "role": "Castform",
+    "url": "https://www.linkedin.com/in/pan-angel/",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/angel-pan.jpg",
+    "photoAlt": "Angel Pan"
   }
 }
