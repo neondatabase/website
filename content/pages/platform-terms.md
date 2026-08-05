@@ -7,7 +7,7 @@ seo:
   metaKeywords: ""
   metaRobotsNoindex: true
   opengraphTitle: "Product Specific Schedule (Neon) - Neon"
-  opengraphDescription: "This Product Specific Schedule (Neon) (this “Schedule”) is entered into as of the Effective Date between Databricks, Inc., the parent company of Neon, LLC (\"Databricks\"), and Customer and governs Customer's use of Databricks’ Neon product family of cloud computing platform services, as described in the Documentation (the \"Platform Services\", for purposes of this Schedule). […]"
+  opengraphDescription: ""
   twitterImage: ""
 ---
 
