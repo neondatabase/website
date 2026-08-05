@@ -1,7 +1,7 @@
 name: E2E on Chrome
 
 on:
-  # A full production build plus 72 browser tests takes ~12 minutes, so PRs only
+  # A full production build plus 72 browser tests takes ~16 minutes, so PRs only
   # pay for it when they touch app code, the tests, or the dependency tree.
   # Content-only PRs (the majority in this repo) skip it. Pushes to main and the
   # Monday cron still run the whole matrix unconditionally.
@@ -83,12 +83,14 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium webkit
 
-      # Advisory, not a gate. These are monitoring checks against a dev-quality
-      # local build, and webkit in particular is slow enough that hydration races
-      # still surface as flakes. A red X here would be noise on every PR, so the
-      # result is reported in the summary and the artifact instead of failing the
-      # run. Genuine regressions show up in the uploaded report and in the Monday
-      # cron. Setup failures (install, build, browsers) still fail the job.
+      # Advisory, not a gate. webkit is slow enough on these pages that hydration
+      # races still surface as flakes, and a red X on every PR would be noise, so
+      # the outcome goes to the job summary and the uploaded report instead of
+      # failing the run. Setup failures (install, build, browsers) still fail.
+      #
+      # This applies to the cron too: nothing here fails on a genuine regression,
+      # so the report has to be read. Wiring the scheduled run up to something
+      # that notifies (fail loudly, open an issue, post to Slack) is a follow-up.
       - name: Monitor critical user outcomes
         id: critical
         continue-on-error: true
