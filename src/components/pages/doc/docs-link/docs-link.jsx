@@ -5,9 +5,10 @@ import { Children, isValidElement } from 'react';
 
 import LinkPreview from 'components/pages/doc/link-preview';
 import Link from 'components/shared/link';
+import { cn } from 'utils/cn';
 import getGlossaryItem from 'utils/get-glossary-item';
 
-const DocsLink = ({ href, children, ...otherProps }) => {
+const DocsLink = ({ href, children, className = null, ...otherProps }) => {
   const baseUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
   const isExternal = href?.startsWith('http') && !href?.startsWith(baseUrl);
   const isGlossary =
@@ -34,7 +35,13 @@ const DocsLink = ({ href, children, ...otherProps }) => {
     if (glossaryItem) {
       const { title, preview } = glossaryItem;
       return (
-        <LinkPreview href={href} title={title} preview={preview} {...otherProps}>
+        <LinkPreview
+          href={href}
+          title={title}
+          preview={preview}
+          className={className}
+          {...otherProps}
+        >
           {children}
         </LinkPreview>
       );
@@ -48,6 +55,7 @@ const DocsLink = ({ href, children, ...otherProps }) => {
       rel={isExternal ? 'noopener noreferrer' : undefined}
       icon={icon}
       tagName="DocsInlineLink"
+      className={cn(isExternal && 'text-pretty', className)}
       {...otherProps}
     >
       {children}
@@ -58,6 +66,7 @@ const DocsLink = ({ href, children, ...otherProps }) => {
 DocsLink.propTypes = {
   href: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 export default DocsLink;
