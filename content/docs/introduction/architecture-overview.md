@@ -1,22 +1,23 @@
 ---
 title: The lakebase architecture
-subtitle: 'Inside Lakebase Postgres: decoupled compute and durable storage'
+subtitle: 'Inside Lakebase Postgres: decoupled compute and storage, and the foundation for the Neon backend'
 summary: >-
   The lakebase architecture splits Postgres into an ephemeral compute layer and
   a durable storage layer connected by WAL, so compute nodes can scale, restart,
   or fail without data loss. The storage layer uses Paxos-based WAL quorum
   across safekeepers to define commit correctness, a pageserver to reconstruct
   page versions on demand, and object storage for immutable long-term history.
-  None of those components sit on the hot query path. This design enables
-  copy-on-write branching, instant point-in-time restores, and serverless
-  autoscaling including scale-to-zero, all as metadata operations rather than
-  data copies. Lakebase Postgres on Neon and on Databricks both run on this
-  architecture.
+  None of those components sit on the hot query path. This separation is also
+  what lets Neon's backend for apps and agents extend the same model beyond
+  Postgres: because a branch carries state instead of a compute node, Object
+  Storage, Functions, and Managed Better Auth can attach to a branch and fork
+  with it the same way Postgres does. Lakebase Postgres on Neon and on
+  Databricks both run on this architecture.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-08-04T04:07:29.373Z'
+updatedOn: '2026-08-05T19:23:18.806Z'
 ---
 
 ## Top level overview
@@ -30,11 +31,27 @@ This separation is what puts Lakebase Postgres in the [lakebase category](https:
 
 The lakebase architecture intentionally keeps object storage off the critical path. Object storage provides durability and scale, but never sits in front of query execution. Latency-sensitive work stays close to compute, while durability and history are handled asynchronously and independently.
 
+This same separation is the foundation the rest of Neon's backend for apps and agents is built on. Because durable state lives in the storage layer rather than on any single compute node, other services can adopt the same properties: attach to a branch instead of a fixed machine, scale independently, and fork wherever the branch forks. The section below, [A foundation for more than Postgres](#a-foundation-for-more-than-postgres), covers how.
+
 ![Lakebase architecture overview](/docs/introduction/neon-architecture-overview.png)
 
 <Admonition type="note" title="What is the difference between Neon and Lakebase?">
 Neon and Databricks run the same database, Lakebase Postgres, on the same infrastructure. What surrounds it differs: on Neon it anchors a complete backend for apps and agents, while Databricks integrates it with the rest of the Data Intelligence Platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
+
+## A foundation for more than Postgres
+
+On Neon, this architecture isn't only the database's foundation. [Neon Object Storage](/docs/storage/overview), [Neon Functions](/docs/compute/functions/overview), and [Managed Better Auth](/docs/auth/overview) are built to plug into the same substrate: durable state that lives independently of any compute node, addressed by branch rather than by machine. That's what lets each of them pick up a defining property of Lakebase Postgres, attaching to and forking with a branch, instead of re-deriving it as a separate system.
+
+- **Neon Object Storage** gives each branch its own S3-compatible storage namespace. Like Postgres pages, the objects a branch sees are scoped to that branch, so uploads and deletes on a preview branch never touch production data.
+- **Neon Functions** deploy serverless compute next to a branch's Postgres, with credentials injected automatically. A function attaches to whichever branch it's deployed against, the same way a compute endpoint attaches to a branch.
+- **Managed Better Auth** doesn't add a separate branch-aware system at all. It stores users, sessions, and OAuth configuration in the `neon_auth` schema, inside your database itself. Because that schema lives in Postgres, it branches for free whenever Postgres does, riding on the same mechanism described in the rest of this page rather than implementing its own.
+
+<Admonition type="note" title="Object Storage and Functions branching">
+Branching for Neon Object Storage and Neon Functions is rolling out behind a per-organization flag. Where it isn't yet enabled for a project, branches still fork Postgres, and Auth along with it, as described above.
+</Admonition>
+
+[Neon AI Gateway](/docs/ai-gateway/overview) doesn't follow this pattern. Its credentials are scoped to your Neon account rather than to an individual branch, so a new branch doesn't get its own gateway. See [What this architecture enables](#what-this-architecture-enables) for what branching does and doesn't fork, and [How a Neon backend fits together](/docs/get-started/backend-overview) for how all of these are declared and deployed together.
 
 ## Resource hierarchy
 
@@ -49,6 +66,8 @@ While the sections below describe the physical architecture, Lakebase Postgres o
 | Database         | Logical container for data (tables, schemas, views)                   | Exists within a Branch    |
 | Role             | Postgres role for authentication and authorization                    | Belongs to a Branch       |
 | Operation        | Async action by the control plane (creating branch, starting compute) | Associated with Project   |
+
+Where enabled, an Object Storage bucket and a Function deployment also attach to a Branch, alongside its Compute Endpoints and Databases, without adding new levels to this hierarchy. Managed Better Auth adds no new resource at all: its state lives in the `neon_auth` schema, inside a Database that already belongs to the Branch.
 
 For details on each concept, see the [glossary](/docs/reference/glossary).
 
@@ -165,6 +184,7 @@ This layering is what allows Lakebase Postgres to tolerate failures intrinsicall
 
 - **Serverless compute provisioning.** Because durable state lives outside the compute layer, compute endpoints can [automatically scale up and down according to load](https://neon.com/docs/introduction/autoscaling), or [scale to zero](https://neon.com/docs/introduction/scale-to-zero) entirely. When compute starts, it simply attaches to existing database history rather than reconstructing local state.
 - **Copy-on-write branching.** When you create a [branch](https://neon.com/docs/introduction/branching), the engine does not duplicate files or pages. Instead, the new branch points to an existing point in history and begins diverging from there using copy-on-write semantics. Only new or modified data consumes additional storage.
+- **A branchable backend, not just a branchable database.** Because Object Storage buckets and Function deployments attach to a branch the same way a compute endpoint does, and because Managed Better Auth's state lives inside the branch's own Postgres, creating a branch can fork the whole backend, Postgres, Object Storage, Functions, and Auth together, not the database alone (Object Storage and Functions branching is rolling out behind a per-organization flag; see [How a Neon backend fits together](/docs/get-started/backend-overview)). Neon AI Gateway is the exception: its credentials are scoped to your account rather than a branch, so a new branch doesn't get its own gateway.
 - **Instant restores.** Because the database’s history is preserved as immutable page versions in object storage, [restoring the database](https://neon.com/docs/introduction/branch-restore) does not involve copying data back into place. Compute can reattach to a past point in history, and execution can resume from the restored state. This process is fast and predictable, even for multi-terabyte databases.
 - **One foundation for OLTP and OLAP.** Once transactional data lives in object storage, it is no longer isolated from analytical or AI workloads. The same underlying history that supports an OLTP engine (Lakebase Postgres) can also support OLAP engines and AI systems. This is the principle behind the [lakebase architecture](https://www.databricks.com/product/lakebase).
 
@@ -177,4 +197,4 @@ Lakebase Postgres, the database product at the center of Neon’s backend primit
 - WAL as the source of truth;
 - and object storage as the foundation.
 
-The result is a database architecture that scales, recovers, and evolves without being constrained by a single machine or filesystem. For developers, this means faster iteration, safer workflows, and infrastructure that adapts automatically as applications grow from early prototypes to large-scale production systems. The same lakebase architecture underpins Lakebase Postgres via Neon and via Databricks, so transactional and analytical data can share one storage foundation.
+The result is a database architecture that scales, recovers, and evolves without being constrained by a single machine or filesystem. For developers, this means faster iteration, safer workflows, and infrastructure that adapts automatically as applications grow from early prototypes to large-scale production systems. On Neon, that same foundation extends past the database itself: Object Storage, Functions, and Auth are built to inherit branching and independent scaling from it, so a Neon branch can carry a working backend, not just a working database. The same lakebase architecture underpins Lakebase Postgres via Neon and via Databricks, so transactional and analytical data can share one storage foundation.
