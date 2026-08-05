@@ -460,7 +460,7 @@
 - title: "Storage"
   slug: reference/api/storage
   items:
-    - title: "Get branch storage state"
+    - title: "Get branch object storage state"
       slug: reference/api/storage/get-project-branch-storage
       method: GET
 - title: "AI Gateway"
