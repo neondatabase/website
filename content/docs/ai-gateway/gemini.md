@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-07-20T17:20:48.939Z'
+updatedOn: '2026-08-05T16:08:55.589Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -41,7 +41,6 @@ This endpoint accepts Google models only:
 | `gemini-3-5-flash`      |       |
 | `gemini-3-1-pro`        |       |
 | `gemini-3-1-flash-lite` |       |
-| `gemini-3-pro`          |       |
 | `gemini-3-flash`        |       |
 
 Sending a non-Google model ID returns `400 model "<model-id>" is not available on the gemini_generate_content endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you want to call Gemini models alongside other providers from the same code.

@@ -138,8 +138,8 @@ describe('MDX to Markdown Conversion', () => {
       expect(result).toContain(
         'Select a linked model for code examples matched to its measured AI Gateway capabilities.'
       );
-      expect(result).toContain('Verified code examples are not currently available for:');
-      expect(result).toContain('`gpt-5-2-codex`');
+      // Every cataloged model is currently served, so no "not available" note renders.
+      expect(result).not.toContain('Verified code examples are not currently available for:');
       expect(result).toContain(
         'Select a linked model for image-generation examples matched to that model.'
       );

@@ -66,9 +66,14 @@ describe('AI Gateway model Markdown', () => {
     expect(textCommands).not.toContain('/v1/chat/completions');
   });
 
+  // Built from a synthetic catalog: the real one currently has no unprobed model,
+  // but the catalog is allowed to list one. See the same case in model-rows.test.js.
   it('does not advertise generic commands for models without measured capabilities', () => {
-    const row = rows.find(({ id }) => id === 'gpt-5-2-codex');
-    const markdown = renderModelDetailMarkdown(row, getExamplesByMode(row.id));
+    const [row] = modelRows.buildRows(
+      { models: { 'unprobed-model': { id: 'unprobed-model', name: 'Unprobed Model' } } },
+      { models: [] }
+    );
+    const markdown = renderModelDetailMarkdown(row, { text: [], image: [] });
 
     expect(markdown).toContain('Code examples are not currently available for this model.');
     expect(markdown).not.toContain('**Environment variables**');
