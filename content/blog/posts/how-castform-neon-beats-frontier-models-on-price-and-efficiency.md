@@ -34,7 +34,7 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/social.jpg'
 ---
 
-![Comparison of Castform fine-tune and frontier models by inference cost and mean evaluation reward](https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/image-1.jpg)
+![Comparison of Castform fine-tune and frontier models by inference cost and mean evaluation reward](https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/diagram-1.jpg)
 
 <blockquote>
 <p>“Most teams' best training data is just sitting in their databases. The problem is that turning raw data into something usable is hard, and letting agents read, search, and mutate data cheaply at scale requires advanced infra. Pointing Castform at Neon skips both.”</p>
@@ -54,7 +54,7 @@ In ~2022, the industry was going all in on embedding search. Every database prov
 
 In ~2025, agents started to gain more traction. Developers started creating multi-hop search workflows, decomposing big problems into smaller ones. Retrieval has shifted from the one-shot search systems to agentic retrieval. Instead of issuing a single query, models plan and search multiple times in a loop. Every loop iteration meant another call to the frontier model, increasing the overall cost and latency per user request.
 
-![Comparison of a traditional RAG pipeline and an agentic search workflow](https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/image-2.jpg)
+![Comparison of a traditional RAG pipeline and an agentic search workflow](https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/diagram-2.jpg)
 
 Concretely, a typical multi-turn search request with gpt-5.6-sol takes >10s and costs ~$0.03 end-to-end, making it prohibitively slow and expensive.
 
