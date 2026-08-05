@@ -262,7 +262,7 @@ This step runs `pg_dump` and saves the output in the Action's virtual memory usi
     "${POSTGRES}/pg_dump" "$DATABASE_URL" | gzip > "$GZIP_NAME"
 ```
 
-The command checks that `DATABASE_URL` is set and quotes the connection string so shell characters in URL query parameters, such as `&`, do not change how the command is executed. Enabling `pipefail` ensures the workflow fails when `pg_dump` fails instead of reporting success because `gzip` completed.
+Enabling `pipefail` ensures the workflow fails when `pg_dump` fails instead of reporting success because `gzip` completed.
 
 ## Empty bucket of old files
 
