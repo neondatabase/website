@@ -50,9 +50,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      # The protected runner group has no egress to the public npm registry — it
-      # can only reach the Databricks JFrog mirror. Mint a short-lived token via
-      # OIDC and point npm at the mirror before anything fetches packages.
+      # CI installs through the Databricks JFrog npm mirror rather than the
+      # public registry (see scripts/check-deps-proxy-allowlisted.mjs). Mint a
+      # short-lived token via OIDC and point npm at the mirror before anything
+      # fetches packages.
       # Mirrors neondatabase/neon-pkgs and neondatabase/neonctl.
       - name: Setup JFrog CLI with OIDC
         id: setup-jfrog
