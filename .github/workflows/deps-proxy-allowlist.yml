@@ -45,10 +45,10 @@ jobs:
         if: github.base_ref != ''
         run: git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
 
-      # CI installs through the Databricks JFrog npm mirror rather than the
-      # public registry (see scripts/check-deps-proxy-allowlisted.mjs). Mint a
-      # short-lived token via OIDC and point npm at the mirror so the packument
-      # (with publish dates) is readable.
+      # The protected runner group has no egress to the public npm registry — it
+      # can only reach the Databricks JFrog mirror. Mint a short-lived token via
+      # OIDC and point npm at the mirror so the packument (with publish dates)
+      # is readable.
       - name: Setup JFrog CLI with OIDC
         id: setup-jfrog
         uses: jfrog/setup-jfrog-cli@279b1f629f43dd5bc658d8361ac4802a7ef8d2d5 # v4.9.1
