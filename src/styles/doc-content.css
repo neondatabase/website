@@ -121,6 +121,11 @@
       @apply my-2!;
     }
 
+    /* DocsList owns its item spacing; do not apply loose Markdown list margins. */
+    & .docs-list li > p {
+      @apply my-0!;
+    }
+
     > h2:first-child,
     > h3:first-child,
     > h4:first-child {

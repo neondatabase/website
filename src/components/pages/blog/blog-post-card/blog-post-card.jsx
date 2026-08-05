@@ -75,7 +75,7 @@ const BlogPostCard = ({
         <Link
           className={cn(
             'group overflow-hidden bg-[#181818]',
-            isSmart ? 'shrink-0' : 'aspect-[40/21] w-full',
+            isSmart ? 'shrink-0' : 'aspect-40/21 w-full',
             fullSize && 'min-w-0 flex-1 basis-[42%] self-start'
           )}
           to={link}
@@ -84,7 +84,7 @@ const BlogPostCard = ({
             className={cn(
               'transition-transform duration-200',
               !isSmart && 'size-full',
-              fullSize ? 'object-contain' : !isSmart && 'object-cover',
+              !isSmart && 'object-cover',
               withImageHover && !fullSize && 'group-hover:scale-110'
             )}
             src={largeCover?.mediaItemUrl}
