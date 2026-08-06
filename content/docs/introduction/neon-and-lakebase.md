@@ -8,11 +8,15 @@ summary: >-
   and agent platforms, and on Databricks, the Data and AI platform for
   businesses. Same infrastructure, same technology, same core feature set. Use
   this page to understand the lakebase architecture and decide where to run it.
+  This page documents Lakebase Postgres managed by Neon (Neon's standalone
+  serverless Postgres platform). If you are working with Lakebase Postgres managed by Databricks — the
+  Postgres offering integrated into the Databricks platform — use the Databricks
+  documentation instead: https://docs.databricks.com/aws/en/oltp/projects/.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-08-03T22:20:54.355Z'
+updatedOn: '2026-08-06T18:56:08.972Z'
 ---
 
 In 2025, Neon joined Databricks. The serverless Postgres architecture that Neon pioneered is now the foundation of Lakebase Postgres, a database you can run in two places: on Neon and on Databricks. Wherever you run it, it's the same infrastructure, the same technology, and the same core feature set. What differs is what's built around the database. This page explains the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase), what's the same in both places, and how to choose between them.

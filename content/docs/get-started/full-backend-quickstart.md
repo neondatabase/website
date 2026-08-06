@@ -9,6 +9,10 @@ summary: >-
   when building a Next.js project that needs a type-safe Postgres data layer plus
   serverless storage and long-running AI, without stitching together separate
   providers.
+  This page documents Lakebase Postgres managed by Neon (Neon's standalone
+  serverless Postgres platform). If you are working with Lakebase Postgres managed by Databricks — the
+  Postgres offering integrated into the Databricks platform — use the Databricks
+  documentation instead: https://docs.databricks.com/aws/en/oltp/projects/.
 enableTableOfContents: true
 layout: wide
 ---

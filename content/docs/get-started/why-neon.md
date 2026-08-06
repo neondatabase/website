@@ -8,12 +8,16 @@ summary: >-
   autoscaling, scale-to-zero, and point-in-time restore intrinsic rather than
   add-ons. Neon also includes Managed Better Auth, Object Storage, Functions,
   and AI Gateway.
+  This page documents Lakebase Postgres managed by Neon (Neon's standalone
+  serverless Postgres platform). If you are working with Lakebase Postgres managed by Databricks — the
+  Postgres offering integrated into the Databricks platform — use the Databricks
+  documentation instead: https://docs.databricks.com/aws/en/oltp/projects/.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-08-03T18:51:52.937Z'
+updatedOn: '2026-08-06T18:56:08.972Z'
 ---
 
 ## Our mission

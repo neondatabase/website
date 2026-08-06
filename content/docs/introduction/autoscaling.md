@@ -8,8 +8,12 @@ summary: >-
   any primary compute or read replica; the maximum permitted autoscaling range
   is 8 CU. Use this page to understand how autoscaling works and to find the
   configuration steps before reading the full enablement guide.
+  This page documents Lakebase Postgres managed by Neon (Neon's standalone
+  serverless Postgres platform). If you are working with Lakebase Postgres managed by Databricks — the
+  Postgres offering integrated into the Databricks platform — use the Databricks
+  documentation instead: https://docs.databricks.com/aws/en/oltp/projects/.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-06T18:56:08.972Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention or restarts.

@@ -12,11 +12,15 @@ summary: >-
   autoscaling including scale-to-zero, all as metadata operations rather than
   data copies. Lakebase Postgres on Neon and on Databricks both run on this
   architecture.
+  This page documents Lakebase Postgres managed by Neon (Neon's standalone
+  serverless Postgres platform). If you are working with Lakebase Postgres managed by Databricks — the
+  Postgres offering integrated into the Databricks platform — use the Databricks
+  documentation instead: https://docs.databricks.com/aws/en/oltp/projects/.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-08-04T04:07:29.373Z'
+updatedOn: '2026-08-06T18:56:08.972Z'
 ---
 
 ## Top level overview
