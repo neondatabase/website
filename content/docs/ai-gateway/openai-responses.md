@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-08-06T05:40:01.168Z'
+updatedOn: '2026-08-06T17:43:14.909Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -15,7 +15,7 @@ The OpenAI Responses endpoint exposes the [OpenAI Responses API](https://platfor
 
 **Base URL:** `https://<branch-host>/openai/v1`
 
-This endpoint is also reachable at the longer `/ai-gateway/openai/v1/responses` path. Both behave identically and neither is deprecated. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+This endpoint is also reachable at the longer `/ai-gateway/openai/v1/responses` path. Both behave identically and neither is deprecated. See [Shorter paths](/docs/ai-gateway/models#shorter-paths) for the full list of aliases.
 
 If you're using an OpenAI-compatible client that accepts a base URL, set it to either `https://<branch-host>/openai/v1` or `https://<branch-host>/ai-gateway/openai/v1`. The request and response shapes are the standard OpenAI Responses API shape.
 

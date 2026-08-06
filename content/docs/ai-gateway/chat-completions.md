@@ -6,7 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-updatedOn: '2026-08-06T05:40:01.168Z'
+updatedOn: '2026-08-06T17:43:14.909Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -15,7 +15,7 @@ The chat completions endpoint is the recommended way to use Neon AI Gateway. It'
 
 **Base URL:** `https://<branch-host>/v1`
 
-This endpoint is also reachable at the longer `/ai-gateway/mlflow/v1/chat/completions` path. Both behave identically and neither is deprecated. See [Shorter /v1 paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+This endpoint is also reachable at the longer `/ai-gateway/mlflow/v1/chat/completions` path. Both behave identically and neither is deprecated. See [Shorter paths](/docs/ai-gateway/models#shorter-paths) for the full list of aliases.
 
 If you're using an OpenRouter-compatible client that asks for a base URL, set it to `https://<branch-host>/v1` and call `/chat/completions`.
 
