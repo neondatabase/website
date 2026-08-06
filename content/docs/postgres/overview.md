@@ -7,6 +7,10 @@ summary: >-
   autoscaling, scale to zero, database branching, instant point-in-time
   restore, and read replicas. Use this page as a starting point to create a
   project, connect an application, or explore Neon-specific features.
+  This page documents Lakebase Postgres managed by Neon (Neon's standalone
+  serverless Postgres platform). If you are working with Lakebase Postgres managed by Databricks — the
+  Postgres offering integrated into the Databricks platform — use the Databricks
+  documentation instead: https://docs.databricks.com/aws/en/oltp/projects/.
 enableTableOfContents: true
 ---
 

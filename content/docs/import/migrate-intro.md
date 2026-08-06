@@ -12,10 +12,14 @@ summary: >-
   SQLite. Also indexes provider-specific migration paths for Heroku, Supabase,
   PlanetScale, RDS, Cloud SQL, and Azure, plus guidance for region migration and
   Neon-to-Neon moves.
+  This page documents Lakebase Postgres managed by Neon (Neon's standalone
+  serverless Postgres platform). If you are working with Lakebase Postgres managed by Databricks — the
+  Postgres offering integrated into the Databricks platform — use the Databricks
+  documentation instead: https://docs.databricks.com/aws/en/oltp/projects/.
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-06T18:56:08.972Z'
 ---
 
 This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.
