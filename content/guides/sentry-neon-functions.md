@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-08-06T15:56:21.939Z'
+updatedOn: '2026-08-06T16:37:03.541Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) make it easy to ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a platform-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
@@ -773,6 +773,12 @@ You can also see traces for the AI agent. Open **Explore > Traces** and click a 
 You won't browse these pages in isolation once the app is live. The loop is: an alert fires on a new issue, you open the issue and jump to its trace, the waterfall shows which span failed and where the time went, and the logs attached to each span narrate the rest. Because one trace ID ties errors, logs, and spans together, "something is wrong" becomes "this request, this span, this message" without leaving the dashboard.
 
 </Steps>
+
+<Admonition type="note" title="Source map support">
+Neon Functions bundling does not currently emit source maps, so stack traces in Sentry show minified bundle positions (for example, `index.mjs:56`) instead of the original `src/` lines. Errors, logs, and traces are still captured correctly, but you won't be able to pinpoint the exact line in your source where an error was thrown.
+
+If you need source-mapped stack traces today, you can bypass the CLI and bundle manually with esbuild's [`--sourcemap`](https://esbuild.github.io/api/#sourcemap) flag, then [upload the source maps to Sentry](https://docs.sentry.io/platforms/javascript/sourcemaps/) and deploy directly via the [Neon Functions API](/docs/compute/functions/deploy#deploy-with-the-api).
+</Admonition>
 
 ## Best practices
 
