@@ -1,8 +1,7 @@
 ---
-title: How Castform + Neon Beats Frontier Models on Price and Efficiency
+title: Training 100x Cheaper Retrieval models Neon and Castform
 description: >-
-  A 4B open-source model post-trained with Castform retrieved search results as
-  accurately as GPT-5.6 Sol, while costing 100x less
+  Using data in your Postgres (Neon + Lakebase Search) to train a 4B open-source model to be as accurate as GPT-5.6 Sol
 excerpt: >-
   “Most teams' best training data is just sitting in their databases. The
   problem is that turning raw data into something usable is hard, and letting
@@ -19,16 +18,16 @@ authors:
   - angel-pan
 cover:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/cover.jpg'
-  alt: How Castform + Neon Beats Frontier Models on Price and Efficiency
+  alt: Training 100x Cheaper Retrieval models Neon and Castform
 isFeatured: false
 seo:
-  title: How Castform + Neon Beats Frontier Models on Price and Efficiency - Neon
+  title: Training 100x Cheaper Retrieval models Neon and Castform - Neon
   description: >-
     A 4B open-source model post-trained with Castform retrieved search results
     as accurately as GPT-5.6 Sol, while costing 100x less.
   keywords: []
   noindex: false
-  ogTitle: How Castform + Neon Beats Frontier Models on Price and Efficiency - Neon
+  ogTitle: Training 100x Cheaper Retrieval models Neon and Castform - Neon
   ogDescription: >-
     A 4B open-source model post-trained with Castform retrieved search results
     as accurately as GPT-5.6 Sol, while costing 100x less.
