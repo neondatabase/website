@@ -6,20 +6,20 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-08-06T05:40:01.168Z'
+updatedOn: '2026-08-06T06:41:36.256Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
 
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
 
-**Base URL:** `https://<branch-host>/ai-gateway/anthropic`
+**Base URL:** `https://<branch-host>/anthropic`
 
 <Admonition type="note">
-The Anthropic SDK appends `/v1/messages` to the base URL automatically. Set the base URL to `/ai-gateway/anthropic` (without `/v1`).
+The Anthropic SDK appends `/v1/messages` to the base URL automatically. Set the base URL to `/anthropic` (without `/v1`).
 </Admonition>
 
-This endpoint is also reachable at the shorter `/anthropic/v1/messages` path (no `/ai-gateway` prefix). Both behave identically. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+This endpoint is also reachable at the longer `/ai-gateway/anthropic/v1/messages` path. Both behave identically and neither is deprecated. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
 
 ## Setup
 
@@ -50,7 +50,7 @@ import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
   authToken: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/anthropic`,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/anthropic`,
 });
 
 const message = await client.messages.create({
@@ -68,7 +68,7 @@ import os
 
 client = anthropic.Anthropic(
     auth_token=os.environ['NEON_AI_GATEWAY_TOKEN'],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/anthropic",
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/anthropic",
 )
 
 message = client.messages.create(
@@ -81,7 +81,7 @@ print(message.content[0].text)
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/anthropic/v1/messages" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/anthropic/v1/messages" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -H "anthropic-version: 2023-06-01" \

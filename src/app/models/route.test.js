@@ -63,7 +63,7 @@ describe('GET /models', () => {
       const { model } = await body(res);
       const curl = model.examples.find((e) => e.id === 'curl');
 
-      expect(curl.endpoint).toContain('/ai-gateway/gemini/v1beta');
+      expect(curl.endpoint).toContain('/v1/gemini/v1beta');
       expect(curl.variantReason).toBeTruthy();
     });
 
