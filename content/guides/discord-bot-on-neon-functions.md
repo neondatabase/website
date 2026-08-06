@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-08-06T05:08:51.429Z'
+updatedOn: '2026-08-06T15:58:59.107Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -82,7 +82,7 @@ $ neon init
   Agent skills installed ✓
 ```
 
-During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** and **Neon AI Gateway** skills so AI agents have the context to help you build and deploy your Discord bot. Install them with the following command and select both skills when prompted:
+During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** and **Neon AI Gateway** skills so AI agents have the context to help you build and deploy your Discord bot. Install them with the following command:
 
 ```bash
 npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions
