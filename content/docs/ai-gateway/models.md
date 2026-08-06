@@ -88,12 +88,12 @@ Each inference dialect is reachable at two equivalent paths: a shorter top-level
 
 Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-gateway/...` paths when a framework or existing Neon example expects the older dialect-specific route.
 
-| Shorter path                                            | Equivalent to                                              |
-| ------------------------------------------------------- | ---------------------------------------------------------- |
-| `POST /v1/chat/completions`                             | `/ai-gateway/mlflow/v1/chat/completions`                   |
-| `POST /openai/v1/responses`                             | `/ai-gateway/openai/v1/responses`                          |
-| `POST /anthropic/v1/messages`                           | `/ai-gateway/anthropic/v1/messages`                        |
-| `POST /gemini/v1beta/models/{model}:generateContent`    | `/ai-gateway/gemini/v1beta/models/{model}:generateContent` |
+| Shorter path                                         | Equivalent to                                              |
+| ---------------------------------------------------- | ---------------------------------------------------------- |
+| `POST /v1/chat/completions`                          | `/ai-gateway/mlflow/v1/chat/completions`                   |
+| `POST /openai/v1/responses`                          | `/ai-gateway/openai/v1/responses`                          |
+| `POST /anthropic/v1/messages`                        | `/ai-gateway/anthropic/v1/messages`                        |
+| `POST /gemini/v1beta/models/{model}:generateContent` | `/ai-gateway/gemini/v1beta/models/{model}:generateContent` |
 
 ### List available models
 

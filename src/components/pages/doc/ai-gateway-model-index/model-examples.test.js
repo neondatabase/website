@@ -29,7 +29,7 @@ describe('AI Gateway model examples', () => {
       'npm i @mastra/core ai @neondatabase/ai-sdk-provider'
     );
     expect(languages.find(({ key }) => key === 'curl')?.code).toContain(
-      '/v1/gemini/v1beta/models/gemini-3-5-flash:generateContent'
+      '/gemini/v1beta/models/gemini-3-5-flash:generateContent'
     );
   });
 

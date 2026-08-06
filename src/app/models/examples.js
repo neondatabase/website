@@ -183,10 +183,10 @@ const curlChat = (model, nativeDialect, responsesOnly, arrayContent) => {
     return shExample({
       id: 'curl',
       title: 'cURL',
-      endpoint: `/v1/gemini/v1beta/models/${model}:generateContent`,
+      endpoint: `/gemini/v1beta/models/${model}:generateContent`,
       variantReason:
         'The native Gemini dialect returns a conforming body; /v1/chat/completions does not.',
-      content: `curl "\${NEON_AI_GATEWAY_BASE_URL}/v1/gemini/v1beta/models/${model}:generateContent" \\
+      content: `curl "\${NEON_AI_GATEWAY_BASE_URL}/gemini/v1beta/models/${model}:generateContent" \\
   -H "Authorization: Bearer \${NEON_AI_GATEWAY_TOKEN}" \\
   -H "Content-Type: application/json" \\
   -d '{

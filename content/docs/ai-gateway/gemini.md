@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-08-06T06:41:36.256Z'
+updatedOn: '2026-08-06T09:06:39.642Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
