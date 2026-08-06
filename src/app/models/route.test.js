@@ -76,6 +76,31 @@ describe('GET /models', () => {
       expect(curl.endpoint).toBe('/v1/chat/completions');
     });
 
+    it('points cURL at Anthropic Messages for a Claude model that returns array content', async () => {
+      const res = await GET(request('?model=claude-opus-5'));
+      const { model } = await body(res);
+      const ids = model.examples.map((e) => e.id);
+      const curl = model.examples.find((e) => e.id === 'curl');
+
+      // Only when it reasons, but the OpenAI SDKs cannot express "sometimes a string".
+      expect(model.capabilities.chat).toBe('array-content');
+      expect(ids).not.toContain('typescript');
+      expect(ids).not.toContain('python');
+      expect(curl.endpoint).toBe('/anthropic/v1/messages');
+      expect(curl.variantReason).toBeTruthy();
+    });
+
+    it('keeps cURL on chat completions for a conforming Claude model', async () => {
+      const res = await GET(request('?model=claude-haiku-4-5'));
+      const { model } = await body(res);
+      const curl = model.examples.find((e) => e.id === 'curl');
+
+      // A native dialect alone is not a reason to leave the portable route.
+      expect(model.capabilities.chat).toBe('conforms');
+      expect(model.capabilities.native_dialect).toBe('anthropic');
+      expect(curl.endpoint).toBe('/v1/chat/completions');
+    });
+
     it('gives Mastra a provider instance when the neon/ string cannot work', async () => {
       const res = await GET(request('?model=gemini-3-5-flash'));
       const { model } = await body(res);

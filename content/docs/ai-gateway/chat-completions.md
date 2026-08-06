@@ -6,9 +6,7 @@ summary: >-
   Gateway. It is OpenAI Chat Completions-compatible, works with any model in
   the catalog, and lets you switch providers without changing your SDK code.
 enableTableOfContents: true
-redirectFrom:
-  - /docs/ai-gateway/anthropic-messages/
-updatedOn: '2026-07-20T19:53:53.968Z'
+updatedOn: '2026-08-06T05:40:01.168Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
