@@ -69,9 +69,22 @@ const KEY_ORDER = [
 ];
 
 // Sort order for providers in the output.
-const PROVIDER_ORDER = ['anthropic', 'openai', 'google', 'meta', 'alibaba'];
+const PROVIDER_ORDER = [
+  'anthropic',
+  'openai',
+  'google',
+  'meta',
+  'alibaba',
+  'zhipuai',
+  'thinkingmachines',
+];
 
 // Derive the underlying model provider from family (falling back to id).
+//
+// This is the organisation that *made* the model, matching the models.dev provider
+// ids, not the `owned_by` the gateway reports — the gateway serves `inkling` as
+// `databricks` and `glm-5-2` as `zhipu` because Databricks Model Serving hosts them.
+// Both fields are published: this one on /models.json, `owned_by` on /v1/models.
 function providerFor(model) {
   const family = typeof model.family === 'string' ? model.family : '';
   const id = typeof model.id === 'string' ? model.id : '';
@@ -86,7 +99,11 @@ function providerFor(model) {
             ? 'meta'
             : s.startsWith('qwen')
               ? 'alibaba'
-              : undefined;
+              : s.startsWith('glm')
+                ? 'zhipuai'
+                : s === 'ling' || s.startsWith('inkling')
+                  ? 'thinkingmachines'
+                  : undefined;
   return match(family) || match(id) || (id.includes('llama') ? 'meta' : undefined);
 }
 

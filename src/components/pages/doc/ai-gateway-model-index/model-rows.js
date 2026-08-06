@@ -9,7 +9,15 @@
  * each model already carries its underlying maker in `provider`.
  */
 
-const PROVIDER_ORDER = ['anthropic', 'openai', 'google', 'meta', 'alibaba'];
+const PROVIDER_ORDER = [
+  'anthropic',
+  'openai',
+  'google',
+  'meta',
+  'alibaba',
+  'zhipuai',
+  'thinkingmachines',
+];
 
 const PROVIDER_LABELS = {
   anthropic: 'Anthropic',
@@ -17,6 +25,8 @@ const PROVIDER_LABELS = {
   google: 'Google',
   meta: 'Meta',
   alibaba: 'Alibaba',
+  zhipuai: 'Zhipu AI',
+  thinkingmachines: 'Thinking Machines',
 };
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -64,6 +74,7 @@ const deriveEndpoints = (capability) => {
   const endpoints = [];
   if (capability.chat !== 'not-served') endpoints.push('chat/completions');
   if (capability.nativeDialect === 'gemini') endpoints.push('gemini');
+  if (capability.nativeDialect === 'anthropic') endpoints.push('anthropic/messages');
   if (capability.responses) endpoints.push('openai/responses');
   return endpoints;
 };
