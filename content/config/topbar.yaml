@@ -1,4 +1,4 @@
-text: 'You can now add files to your Postgres branches via Neon Object Storage, our S3-compatible object store'
+text: 'Add files to your Postgres branches via Neon Object Storage, our S3-compatible object store'
 link:
   url: 'https://neon.com/blog/building-neon-object-storage'
   target: '_blank'
