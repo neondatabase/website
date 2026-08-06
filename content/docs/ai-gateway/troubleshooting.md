@@ -53,7 +53,7 @@ The model exists in the catalog but doesn't work with the endpoint you're callin
 **Fix:** Check which endpoint the model requires:
 
 - OpenAI codex models on `/v1/chat/completions` → use `/openai/v1/responses`
-- Google models on `/openai/v1/responses` → use `/v1/gemini/v1beta/...` or `/v1/chat/completions`
+- Google models on `/openai/v1/responses` → use `/gemini/v1beta/...` or `/v1/chat/completions`
 
 See [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use).
 
