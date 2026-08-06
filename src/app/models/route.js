@@ -22,6 +22,8 @@ const json = (body, status = 200) =>
     headers: {
       'Content-Type': 'application/json',
       'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+      // Public catalog data; same policy Vercel already applies to the static /models.json sibling.
+      'Access-Control-Allow-Origin': '*',
     },
   });
 
