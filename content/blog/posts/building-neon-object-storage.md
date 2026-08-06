@@ -81,7 +81,7 @@ Each Object Storage branch keeps a lineage: an ordered record of itself, its par
 
 **This setup carries over the essential properties of our branching experience to files. Branching stays instant no matter how much the parent has stored, isolation is the default, and you don't pay for duplicated object storage unless the branch diverges. Compute on the branch still scales to zero when idle.**
 
-### Branch databases + buckets as many times as you want. You don't pay for storage copies or idle compute
+## Branch databases + buckets as many times as you want. You don't pay for storage copies or idle compute
 
 This last point on costs is worth emphasizing. Because Lakebase Postgres branching is copy-on-write, creating a branch does not duplicate your database storage - and the same is now true for your Object Storage buckets. You (or your agent) can automatically create a Neon branch for every session, PR, experiment, or version, and only pay for compute while the branch is actively doing work.
 
