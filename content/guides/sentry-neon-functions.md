@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-08-06T05:08:51.429Z'
+updatedOn: '2026-08-06T15:56:21.939Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) make it easy to ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a platform-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
@@ -58,7 +58,7 @@ Run the Neon CLI initialization command:
 neon init
 ```
 
-Use the default setup options for all prompts: this includes enabling AI skills, configuring the MCP server, and installing the VS Code extension. These steps ensure AI agents such as Claude Code and Cursor can assist you in building and deploying your function.
+Use the default setup options for all prompts: this includes enabling AI skills, configuring the MCP server, and installing the VS Code extension. These steps ensure AI agents such as Claude Code and Cursor can assist you in building with Neon.
 
 During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** skills so AI agents have the context to help you build and deploy your function. Install it with the following command:
 
@@ -92,13 +92,6 @@ INFO: Pulled 3 Neon variables into ~/neon-sentry-demo/.env.local: NEON_BRANCH, D
 INFO: Created neon.ts declaring functions.
 INFO: Created hello.ts — the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…
-
-added 20 packages in 4s
-
-8 packages are looking for funding
-  run `npm fund` for details
-INFO: Next: edit neon.ts, then run `neon config plan` to preview and `neon config apply`.
-INFO: Pulled 3 Neon variables into ~/neon-sentry-demo/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
 ```
 
 The `neon link` command also creates a placeholder function `hello.ts` that returns `"Hello from Neon Functions"`.
@@ -264,7 +257,7 @@ The middleware adds the request root span, and it's the one block you'll copy in
 
 ### Add the health check and order lookup routes
 
-These routes contain no Sentry code; the middleware wraps them anyway, which makes them the quickest way to confirm tracing works:
+Add two simple routes to verify the function is running and to return a canned order:
 
 ```ts filename="src/index.ts"
 app.get("/healthz", (c) => c.json({ status: "ok" }));
@@ -310,7 +303,7 @@ app.post("/api/orders", async (c) => {
 - **`Sentry.startSpan({ name: "order.charge" }, ...)`** wraps the charge attempt in a child span, so the waterfall shows how long the charge took under the request root span.
 - **The `catch` block runs only when every provider failed.** `Sentry.captureException` turns the error into a grouped issue: `tags` are for fields you filter and group by, `contexts` are for per-event detail like the order contents.
 
-The handler logs its way through the happy path, and only the terminal failure becomes an issue. The recoverable failures in between are the next snippet's job.
+The handler logs its way through the happy path, and only the terminal failure becomes an issue.
 
 ### Add the fake payment providers
 
@@ -318,7 +311,7 @@ These two helpers stand in for real payment SDK calls, so you can trigger failur
 
 ```ts filename="src/index.ts" shouldWrap
 function chargeOrder(orderId: string, forceFailure: boolean) {
-  const providers = ["stripe", "adyen"];
+  const providers = ["stripe", "polar"];
   let lastError: unknown;
 
   for (const provider of providers) {
@@ -354,7 +347,7 @@ function callProvider(name: string, orderId: string, forceFailure: boolean) {
 
 ### Add the test route and the global error handler
 
-Two pieces left: a route that throws on purpose, and the safety net that reports anything a route doesn't catch:
+Add a route that throws on purpose and a global error handler that reports any uncaught exception to Sentry. This is the last piece of the three-signal puzzle.
 
 ```ts filename="src/index.ts"
 app.get("/debug-sentry", () => {
@@ -367,23 +360,18 @@ app.onError((err, c) => {
   c.header("access-control-allow-origin", "*");
   return c.json({ error: "internal_error" }, 500);
 });
-```
 
-- **`GET /debug-sentry`** exists purely to prove the wiring works: hit it once, watch an issue appear in Sentry, then remove it before real traffic.
-- **`app.onError`** is Hono's global error handler. Any exception a route doesn't catch lands here, gets reported with `Sentry.captureException`, and the client gets a clean `500`. The dedicated `@sentry/hono` package isn't used: its Node entry point is built around `@hono/node-server`'s `serve()`, which isn't how Functions run Hono, so `onError` plus your own root span is the right integration.
-
-### Export the app
-
-`export default app` is the contract Neon Functions expect: a web-standard request/response handler.
-
-```ts filename="src/index.ts"
 export default app;
 ```
 
-<details>
-<summary>View the complete src/index.ts</summary>
+- **`GET /debug-sentry`** exists purely to prove the wiring works: it throws an error that the route doesn't catch, so the global error handler runs and reports it to Sentry.
+- **`app.onError`** is Hono's global error handler. Any exception a route doesn't catch lands here, gets reported with `Sentry.captureException`, and the client gets a clean `500`.
+- **`export default app`** is the contract Neon Functions expect: a web-standard request/response handler.
 
-If you skipped ahead or want to paste the whole file at once, here it is assembled:
+<details>
+<summary>Complete `src/index.ts` file</summary>
+
+You can copy the following complete `src/index.ts` file into your project:
 
 ```ts filename="src/index.ts" shouldWrap
 import "./instrument";
@@ -442,7 +430,7 @@ app.post("/api/orders", async (c) => {
 });
 
 function chargeOrder(orderId: string, forceFailure: boolean) {
-  const providers = ["stripe", "adyen"];
+  const providers = ["stripe", "polar"];
   let lastError: unknown;
 
   for (const provider of providers) {
@@ -487,14 +475,17 @@ export default app;
 
 </details>
 
-With three Sentry calls and one piece of middleware, every request now produces a trace with its logs and errors attached. Next, deploy it and watch the signals arrive.
+With three Sentry calls and one piece of middleware, every request now produces a trace with its logs and errors attached. You can deploy the function and verify the signals in Sentry in the next section.
 
 ## Configure neon.ts and deploy the function
 
 The `neon link` command created a `neon.ts` file in your project root. Update it to register the function and pass the Sentry variables as [deploy-time environment variables](/docs/compute/functions/environment-variables):
 
-```ts filename="neon.ts" {9-19}
+```ts filename="neon.ts" {12-24}
 import { defineConfig } from "@neon/config/v1";
+import { config as loadEnv } from "dotenv";
+
+loadEnv({ path: ".env.local" });
 
 export default defineConfig({
   branch: (branch) => {
@@ -523,7 +514,6 @@ Here's what each property does:
 
 - **`preview.functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
 - **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically.
-- **No `aiGateway` yet**: the API doesn't need it. You'll turn the gateway on when you add the agent in the final section.
 
 Apply the configuration and deploy your function to Neon:
 
@@ -549,7 +539,7 @@ You can run the function with the local dev server:
 neon dev
 ```
 
-With no `SENTRY_DSN` in your environment, the SDK stays disabled, so local runs behave identically and produce no Sentry noise. To see telemetry from your machine, export `SENTRY_DSN` (and optionally the other variables) before starting `neon dev`.
+You can then visit the function at `http://localhost:8787` and exercise the same routes as in the verification steps. The local dev server injects the same Neon environment variables, so you can test Sentry integration locally before deploying.
 
 </details>
 
@@ -557,7 +547,7 @@ With no `SENTRY_DSN` in your environment, the SDK stays disabled, so local runs 
 
 Exercise each route and confirm the matching signal lands in Sentry.
 
-### 1. Errors: trigger the throwing route
+### Errors: trigger the throwing route
 
 ```bash shouldWrap
 curl "https://<your-function-url>/debug-sentry"
@@ -565,9 +555,9 @@ curl "https://<your-function-url>/debug-sentry"
 
 > Replace `<your-function-url>` with your deployed Neon Function URL.
 
-The request returns a `500` with `{"error":"internal_error"}`. Within seconds, a grouped issue appears under **Issues** in your Sentry dashboard, tagged with environment `production` (or your preview branch name if you deployed from a branch). Remove this route before real production traffic.
+The request returns a `500` with `{"error":"internal_error"}`. After few seconds, a grouped issue appears under **Issues** in your Sentry dashboard, tagged with environment `production` (or your preview branch name if you deployed from a branch).
 
-### 2. Logs: trigger a recoverable failure
+### Logs: trigger a recoverable failure
 
 ```bash shouldWrap
 curl -X POST "https://<your-function-url>/api/orders" \
@@ -575,9 +565,9 @@ curl -X POST "https://<your-function-url>/api/orders" \
   -d '{"items":[{"sku":"PRL-KIT","qty":2}],"force_failure":true}'
 ```
 
-The `force_failure` flag makes the primary provider (`stripe`) decline the charge, so the route falls back to the second provider, which succeeds. The response is a normal `200` with `"provider":"adyen"`. In **Explore > Logs**, you'll find the `payment provider failed` warning record with its `component`, `phase`, `provider`, and `error` attributes, each individually searchable and linked to the request's trace. Notice that nothing appeared in **Issues**: the failure was recovered, so a log is all it earned.
+The `force_failure` flag makes the primary provider (`stripe`) decline the charge, so the route falls back to the second provider, which succeeds. The response is a normal `200` with `"provider":"polar"`. In **Explore > Logs**, you'll find the `payment provider failed` warning record with its `component`, `phase`, `provider`, and `error` attributes, each individually searchable and linked to the request's trace. Notice that nothing appeared in **Issues**: the failure was recovered, so a log is all it earned.
 
-### 3. Traces: run a normal request
+### Traces: run a normal request
 
 ```bash shouldWrap
 curl -X POST "https://<your-function-url>/api/orders" \
@@ -585,13 +575,13 @@ curl -X POST "https://<your-function-url>/api/orders" \
   -d '{"items":[{"sku":"PRL-KIT","qty":2}]}'
 ```
 
-This time the primary provider succeeds on the first attempt, so no warning is logged. In **Explore > Traces**, you'll see the `POST /api/orders` root span with the nested `order.charge` child span. A quick `GET /healthz` produces an even simpler trace with just the root span.
+This time the primary provider succeeds on the first attempt, so no warning is logged. In **Explore > Traces**, you'll see the `POST /api/orders` root span with the nested `order.charge` child span.
 
-Once all three signals land, you have the full debugging loop for a production function: an issue fires, you pivot from the issue to the logs of the same trace, and the trace itself shows where the time went.
+Once all three signals land, you have the full debugging loop for a production function: an issue fires, you pivot from the issue to the logs of the same trace, and the trace itself shows the waterfall of work that produced the error. You can now see exactly what happened, when, and why.
 
 ## Add a streaming AI agent on the AI Gateway
 
-The patterns you've built so far transfer unchanged to AI workloads. To prove it, you'll add a streaming, tool-calling agent to the same app. It calls LLMs through the [Neon AI Gateway](/docs/ai-gateway/overview), which means no provider keys to manage: the gateway injects credentials when it's enabled.
+The patterns you've built so far transfer unchanged to AI workloads. You'll add a new route that streams a tool-calling agent and shows off the traces signal on an AI workload. The agent uses the Neon AI Gateway to call a large language model (LLM) and two simple tools: one that returns the current server time and another that rolls dice.
 
 First, install the AI dependencies:
 
@@ -602,7 +592,7 @@ npm install @neon/ai-sdk-provider ai zod
 - `@neon/ai-sdk-provider`: Neon's AI SDK Provider, which gives your function access to LLMs through the Neon AI Gateway.
 - `ai` and `zod`: The [Vercel AI SDK](https://ai-sdk.dev/docs/introduction) and Zod schema validation, used to run the tool-calling agent.
 
-Next, extend the Sentry init. Two additions tell the SDK about the AI SDK so it can emit `gen_ai` spans for model calls. Update `src/instrument.ts`:
+Next, extend the Sentry initialization in `src/instrument.ts` to include the AI SDK integration and span streaming:
 
 ```ts filename="src/instrument.ts" shouldWrap
 import * as Sentry from "@sentry/node";
@@ -612,11 +602,10 @@ Sentry.init({
   enabled: Boolean(process.env.SENTRY_DSN),
   enableLogs: true,
   tracesSampleRate: Number(process.env.SENTRY_TRACES_SAMPLE_RATE ?? 1),
-  traceLifecycle: "stream",
-  streamGenAiSpans: true,
+  traceLifecycle: "stream", // [!code ++]
+  streamGenAiSpans: true, // [!code ++]
   integrations: [
-    // Deploy bundling hides the AI SDK from module detection, so force the integration.
-    Sentry.vercelAIIntegration({ force: true }),
+    Sentry.vercelAIIntegration({ force: true }), // [!code ++]
     Sentry.httpIntegration({ disableIncomingRequestSpans: true }),
   ],
   release: process.env.SENTRY_RELEASE,
@@ -632,19 +621,18 @@ process.on("SIGINT", () => void Sentry.flush(2000));
 export { Sentry };
 ```
 
-The two additions:
-
-- **`vercelAIIntegration({ force: true })`**: `neon deploy` bundles your code with esbuild, which defeats the integration's module detection, so it runs unconditionally. The same bundling caveat applies to any module-patching auto-instrumentation, including direct provider SDKs (`openai`, `@anthropic-ai/sdk`) and `pg` spans. If a library's spans are missing from a deployed function, bundling is the first thing to check.
-- **`traceLifecycle: "stream"`** opts into span streaming, which sends each span as it finishes instead of holding the whole tree until the request ends. That way spans that complete after the response, like streaming agent calls, don't get lost. `streamGenAiSpans: true` sends `gen_ai` spans as standalone items so large prompts aren't truncated; it's the default since SDK 10.61.0. Set it to `false` on self-hosted Sentry.
+The new options `traceLifecycle: "stream"` and `streamGenAiSpans: true` tell the SDK to stream `gen_ai` spans as they are produced by the AI SDK, rather than waiting for the request to finish. The `Sentry.vercelAIIntegration({ force: true })` integration enables the AI SDK to emit spans for model calls and tool executions.
 
 Now add a route to `src/index.ts`. The `POST /chat` route streams a tool-calling agent and shows off the traces signal on an AI workload. Add these imports and the route to your existing file:
 
 ```ts filename="src/index.ts" shouldWrap
-import { streamText, tool, stepCountIs } from "ai";
+import { streamText, tool, isStepCount } from "ai";
 import { neon } from "@neon/ai-sdk-provider";
 import { z } from "zod";
 
-const MODEL = process.env.AGENT_MODEL ?? "meta-llama-3-3-70b-instruct";
+// ... other imports and app setup ...
+
+const MODEL = process.env.AGENT_MODEL ?? "gpt-oss-120b";
 
 app.post("/chat", async (c) => {
   const { messages } = await c.req.json();
@@ -669,7 +657,7 @@ app.post("/chat", async (c) => {
         }),
       }),
     },
-    stopWhen: stepCountIs(5),
+    stopWhen: isStepCount(5),
     experimental_telemetry: { isEnabled: true },
     onError: ({ error }) => {
       Sentry.captureException(error, { tags: { component: "agent", phase: "chat-stream" } });
@@ -696,17 +684,13 @@ app.post("/chat", async (c) => {
 export default app;
 ```
 
-Here's what's Sentry-specific about the route:
+Here's what each piece does:
 
 - **`experimental_telemetry: { isEnabled: true }`** opts the AI SDK call into emitting `gen_ai` spans. Without it, Sentry sees nothing of the agent.
 - **`streamText` never throws**: failures surface as error parts inside the stream and the HTTP response just ends, so without `onError` a dead agent looks like an empty reply. The middleware's flush runs when the `Response` object is created, before the model finishes, and the `gen_ai` spans only end with the stream. The `TransformStream` finalizer flushes them while the request is still alive.
-- **`Sentry.setConversationId`** (plus an optional `Sentry.setUser`) groups multi-turn chats into a timeline under **Insights > AI Agents** in Sentry.
+- **`Sentry.setConversationId`** (plus an optional `Sentry.setUser`) groups multi-turn chats into a timeline.
 
 In the trace, the request root span now carries a `gen_ai` hierarchy (agent → `gen_ai.generate_content` for the model call → `gen_ai.execute_tool` for each tool run), including token usage per call.
-
-<Admonition type="note" title="Prompt content in traces">
-With `experimental_telemetry` enabled, the AI SDK records prompts and outputs on spans by default. If conversation content must not leave your application, set `recordInputs: false` and `recordOutputs: false` on the same `experimental_telemetry` object.
-</Admonition>
 
 Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway: true`:
 
@@ -724,7 +708,7 @@ Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway:
         },
       }
     },
-    aiGateway: true
+    aiGateway: true // [!code ++]
   },
 ```
 
@@ -742,17 +726,13 @@ curl -X POST "https://<your-function-url>/chat" \
   -d '{"messages":[{"role":"user","content":"Roll 3 dice and tell me the total."}]}'
 ```
 
-The agent calls the `rollDice` tool and streams the answer back. In **Explore > Traces**, you'll see the request root span with the nested `gen_ai` hierarchy including token usage per model call. The full run also shows up in the **Insights > AI Agents** dashboard.
-
-<Admonition type="note" title="Streamed spans take a few minutes to land">
-Streamed span ingestion lags several minutes behind errors and logs. An error visible in seconds doesn't mean its trace is lost; check **Explore > Traces** again after a few minutes before declaring it broken. And if spans never appear while errors and logs flow, check your SDK version: `@sentry/node` below 10.67.0 can't register its tracer against the runtime's OpenTelemetry global.
-</Admonition>
+The agent calls the `rollDice` tool and streams the answer back. In **Explore > Traces**, you'll see the request root span with the nested `gen_ai` hierarchy including token usage per model call.
 
 With all three signals landing for both the API and the agent, you have the full debugging loop for a production function: an issue fires, you pivot from the issue to the logs of the same trace, and the trace itself shows where the time and tokens went.
 
 ## Explore the telemetry in Sentry
 
-Sending telemetry is only half the story. Here's where each signal lands in the Sentry dashboard and how to read it once real traffic is flowing. Every view below has an environment selector at the top: use it to isolate `production`, or to zero in on one preview branch's events.
+You now have three signals flowing into Sentry: errors, logs, and traces. Each has its own dashboard page, and together they give you a complete picture of what happened in a request.
 
 ### Issues: your alert surface
 
@@ -760,22 +740,19 @@ Open **Issues** in your Sentry project. The `GET /debug-sentry` curl produced a 
 
 Click the issue to open its detail page. This is the view a real alert drops you into, and it answers the first questions of any incident:
 
-- **What threw**: the stack trace, down to the failing line of your function.
+- **What threw**: the stack trace and the exception message
 - **Where it ran**: the `environment` tag (`production`, or the preview branch name) and, if you set `SENTRY_RELEASE`, the release, so you can see which deploy introduced the error and get flagged if it regresses.
 - **What led up to it**: breadcrumbs recorded before the throw.
 - **Which request produced it**: the trace attached to the event, one click away from the full waterfall.
-
-![Sentry Issues page for the neon-functions-api project, showing the grouped "sentry test: unhandled route error" issue with its event count and environment tag](/docs/guides/sentry-neon-functions-issues.png)
-
-![Issue detail page for the captured error, showing the stack trace, the production environment tag, breadcrumbs, and the attached trace](/docs/guides/sentry-neon-functions-issue-detail.png)
+  ![Sentry Issues page for the neon-functions-api project, showing the grouped "sentry test: unhandled route error" issue with its event count and environment tag](/docs/guides/sentry-neon-functions-issues.png)
+  ![Issue in detail for the captured error](/docs/guides/sentry-neon-functions-issue-detail.png)
 
 ### Logs: the narrative record
 
 Open **Explore > Logs**. Every `Sentry.logger.*` call lands here as a row: the `order received` and `order charged` info records, and the `payment provider failed` warning from the forced-failure curl.
 
 The win over raw stdout is the query bar. The attributes you logged are searchable fields: `component:api` narrows to API records, `phase:charge-attempt` lists every recovered payment attempt, `provider:stripe` isolates one provider. Click a row to expand all its attributes, then follow the trace link to the exact request that produced it. In a real incident, that turns "stripe had trouble this morning" into a precise list of every affected order, without grepping anything.
-
-![Explore > Logs filtered to phase:charge-attempt, showing the recovered payment failure warnings with one row expanded to reveal its component, provider, and error attributes](/docs/guides/sentry-neon-functions-explore-logs.png)
+![Sentry Logs page for the neon-functions-api project](/docs/guides/sentry-neon-functions-explore-logs.png)
 
 ### Traces: where the time went
 
@@ -783,15 +760,13 @@ Open **Explore > Traces**. Each request your function served shows up as a trace
 
 With real traffic, this page answers "why is it slow". Filter to one route, sort the samples by duration, and open the slowest one: the waterfall shows exactly which span consumed the time, whether that's the model call, a tool execution, or your own charge logic.
 
-![Trace waterfall for a POST /api/orders request, showing the http.server root span and the nested order.charge child span with per-span durations](/docs/guides/sentry-neon-functions-explore-traces.png)
+![Trace waterfall for a POST /api/orders request, showing the http.server root span](/docs/guides/sentry-neon-functions-explore-traces.png)
 
 ### AI agent runs: tools and tokens
 
-Open **Insights > AI Agents**. Every `POST /chat` run shows up here: the model calls, the `rollDice` and `getServerTime` tool executions, and token usage per call. Because the route sets a conversation ID, multi-turn chats group into a single timeline instead of a pile of disconnected requests.
+You can also see traces for the AI agent. Open **Explore > Traces** and click a `POST /chat` trace. The waterfall shows the `http.server` root span with a nested `gen_ai.generate_content` span for the model call, and beneath that, one or more `gen_ai.execute_tool` spans for each tool the agent called. Each span shows its duration and token usage, so you can see exactly how long each step took and how many tokens it consumed.
 
-For a live agent, this view doubles as a behavior and cost report: which runs errored, which tools the model reached for, and how many tokens each conversation burned.
-
-![Insights > AI Agents dashboard for the /chat agent run, showing the model call, the rollDice tool execution, and token usage per call](/docs/guides/sentry-neon-functions-ai-agents.png)
+![Trace for AI Agent Run](/docs/guides/sentry-neon-functions-ai-agent-run.png)
 
 ### Putting it together
 
@@ -799,15 +774,14 @@ You won't browse these pages in isolation once the app is live. The loop is: an 
 
 </Steps>
 
-## Extending this workflow
+## Best practices
 
-This wiring is a solid starting point. Here are a few directions to take it further:
+With the Sentry SDK in place, you can now follow a few best practices to keep your telemetry clean and actionable:
 
 - **Releases and regressions**: Set `SENTRY_RELEASE` to your commit SHA on every deploy so Sentry can tell you exactly which release introduced or resurfaced an issue.
 - **Alerts**: Add Sentry alert rules on new issues and on log patterns (for example, `phase:charge-attempt`), so failures page you instead of waiting for a user report.
 - **Per-branch verification**: Deploy from a preview branch and confirm its events land tagged with the branch name, keeping preview noise out of production dashboards.
 - **Sampling at volume**: If you add a high-traffic endpoint, lower `SENTRY_TRACES_SAMPLE_RATE` for it while keeping `1` for interactive routes where every request is interesting.
-- **Apply the pattern to other integrations**: The init-once, gate-on-env-var shape works for any Node SDK you add to a function, from structured logging to analytics.
 
 ## Resources
 
