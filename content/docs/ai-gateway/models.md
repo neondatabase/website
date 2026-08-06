@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like gpt-5-mini or gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-07-20T19:53:53.968Z'
+updatedOn: '2026-08-06T06:23:44.441Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -91,6 +91,7 @@ Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-g
 | ------------------------------------------------------- | ---------------------------------------------------------- |
 | `POST /v1/chat/completions`                             | `/ai-gateway/mlflow/v1/chat/completions`                   |
 | `POST /openai/v1/responses`                             | `/ai-gateway/openai/v1/responses`                          |
+| `POST /anthropic/v1/messages`                           | `/ai-gateway/anthropic/v1/messages`                        |
 | `POST /v1/gemini/v1beta/models/{model}:generateContent` | `/ai-gateway/gemini/v1beta/models/{model}:generateContent` |
 
 ### List available models
