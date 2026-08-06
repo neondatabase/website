@@ -78,7 +78,7 @@ export default {
   californiaPolicy:
     'https://www.databricks.com/legal/supplemental-privacy-notice-california-residents',
   cookiePolicy: '/cookie-policy',
-  subprocessors: '/subprocessors',
+  subprocessors: 'https://www.databricks.com/legal/databricks-subprocessors',
   businessInformation: '/business-info',
   hipaaCompliance: '/docs/security/hipaa',
   hipaaContractors: '/hipaa-contractors',
