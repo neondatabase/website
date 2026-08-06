@@ -1,4 +1,4 @@
-text: 'How we trained an 4B open-source model to be as accurate as GPT-5.6 Sol while costing 100x less'
+text: 'You can now add files to your Postgres branches via Neon Object Storage, our S3-compatible object store'
 link:
-  url: 'https://neon.com/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency'
+  url: 'https://neon.com/blog/building-neon-object-storage'
   target: '_blank'
