@@ -216,6 +216,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/subprocessors',
+        destination: 'https://www.databricks.com/legal/databricks-subprocessors',
+        permanent: true,
+      },
+      {
         source: '/docs/use-cases/:path*',
         destination: '/use-cases',
         permanent: true,
