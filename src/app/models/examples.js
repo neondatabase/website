@@ -174,21 +174,44 @@ print(resp.choices[0].message.content)
 `,
   });
 
-const curlChat = (model, nativeDialect, responsesOnly) => {
-  if (nativeDialect === 'gemini') {
+// cURL swaps to a provider-native dialect only when the unified route is the broken one.
+// A native dialect on its own is not a reason to leave `/v1/chat/completions` — the eight
+// conforming Claude models are served at /anthropic/v1/messages too, and showing that
+// instead would trade a portable snippet for a vendor-specific one to fix nothing.
+const curlChat = (model, nativeDialect, responsesOnly, arrayContent) => {
+  if (arrayContent && nativeDialect === 'gemini') {
     return shExample({
       id: 'curl',
       title: 'cURL',
-      endpoint: `/ai-gateway/gemini/v1beta/models/${model}:generateContent`,
+      endpoint: `/v1/gemini/v1beta/models/${model}:generateContent`,
       variantReason:
         'The native Gemini dialect returns a conforming body; /v1/chat/completions does not.',
-      content: `curl "\${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini/v1beta/models/${model}:generateContent" \\
+      content: `curl "\${NEON_AI_GATEWAY_BASE_URL}/v1/gemini/v1beta/models/${model}:generateContent" \\
   -H "Authorization: Bearer \${NEON_AI_GATEWAY_TOKEN}" \\
   -H "Content-Type: application/json" \\
   -d '{
     "contents": [
       {"role": "user", "parts": [{"text": "${CHAT_PROMPT}"}]}
     ]
+  }'
+`,
+    });
+  }
+
+  if (arrayContent && nativeDialect === 'anthropic') {
+    return shExample({
+      id: 'curl',
+      title: 'cURL',
+      endpoint: '/anthropic/v1/messages',
+      variantReason:
+        'The native Anthropic Messages dialect returns a conforming body; /v1/chat/completions returns array content once this model reasons.',
+      content: `curl "\${NEON_AI_GATEWAY_BASE_URL}/anthropic/v1/messages" \\
+  -H "Authorization: Bearer \${NEON_AI_GATEWAY_TOKEN}" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "${model}",
+    "max_tokens": 1024,
+    "messages": [{"role": "user", "content": "${CHAT_PROMPT}"}]
   }'
 `,
     });
@@ -244,7 +267,7 @@ const chatExamples = (model, caps) => {
     examples.push(openaiTsChat(model, responsesOnly), openaiPyChat(model, responsesOnly));
   }
 
-  examples.push(curlChat(model, caps.nativeDialect, responsesOnly));
+  examples.push(curlChat(model, caps.nativeDialect, responsesOnly, arrayContent));
   return examples;
 };
 

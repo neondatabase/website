@@ -856,6 +856,8 @@
               slug: ai-gateway/chat-completions
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
+            - title: Anthropic Messages API
+              slug: ai-gateway/anthropic-messages
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference

@@ -6,7 +6,7 @@ summary: >-
   AI Gateway. Required for codex model variants, which do not work with the
   chat completions endpoint.
 enableTableOfContents: true
-updatedOn: '2026-08-05T16:08:55.589Z'
+updatedOn: '2026-08-06T05:40:01.168Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -38,6 +38,11 @@ This endpoint accepts OpenAI models only:
 
 | Model ID        | Notes                  |
 | --------------- | ---------------------- |
+| `gpt-5-6-sol`   |                        |
+| `gpt-5-6-terra` |                        |
+| `gpt-5-6-luna`  |                        |
+| `gpt-5-5`       |                        |
+| `gpt-5-5-pro`   | Requires this endpoint |
 | `gpt-5-4`       |                        |
 | `gpt-5-4-mini`  |                        |
 | `gpt-5-4-nano`  |                        |
