@@ -91,7 +91,7 @@ Use the shorter paths when you want OpenAI/OpenRouter-style URLs. Use the `/ai-g
 | ------------------------------------------------------- | ---------------------------------------------------------- |
 | `POST /v1/chat/completions`                             | `/ai-gateway/mlflow/v1/chat/completions`                   |
 | `POST /openai/v1/responses`                             | `/ai-gateway/openai/v1/responses`                          |
-| `POST /v1/gemini/v1beta/models/{model}:generateContent` | `/ai-gateway/gemini/v1beta/models/{model}:generateContent` |
+| `POST /gemini/v1beta/models/{model}:generateContent`    | `/ai-gateway/gemini/v1beta/models/{model}:generateContent` |
 
 ### List available models
 

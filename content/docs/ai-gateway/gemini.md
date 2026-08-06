@@ -21,7 +21,7 @@ The Gemini endpoint exposes the [Google Gemini API](https://ai.google.dev/api/ge
 Only `generateContent` and `streamGenerateContent` are supported. Requests to other actions (such as `countTokens`) return `404 unsupported gemini action`.
 </Admonition>
 
-This endpoint also has a shorter alias with no `/ai-gateway` prefix: `https://<branch-host>/v1/gemini/v1beta/models/<model>:<action>`. Both behave identically. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
+This endpoint also has a shorter alias with no `/ai-gateway` prefix: `https://<branch-host>/gemini/v1beta/models/<model>:<action>`. Both behave identically. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full list of aliases.
 
 ## Setup
 
