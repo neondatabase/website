@@ -7,6 +7,18 @@ const request = (query = '') => ({ nextUrl: new URL(`https://neon.com/models${qu
 const body = async (res) => JSON.parse(await res.text());
 
 describe('GET /models', () => {
+  it.each(['chat', 'image-generation', 'web-search'])(
+    'allows cross-origin requests for the %s use case',
+    async (useCase) => {
+      const res = await GET(request(`?use_case=${useCase}`));
+
+      expect(res.headers.get('Access-Control-Allow-Origin')).toBe('*');
+      expect(res.headers.get('Cache-Control')).toBe(
+        'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400'
+      );
+    }
+  );
+
   it('returns every served model with chat examples by default', async () => {
     const res = await GET(request());
     expect(res.status).toBe(200);

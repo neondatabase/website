@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-08-06T09:06:39.642Z'
+updatedOn: '2026-08-06T06:41:36.256Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -109,7 +109,7 @@ Append the dialect path for the endpoint you need:
 ```
 NEON_AI_GATEWAY_BASE_URL + /v1            → chat completions (all providers)
 NEON_AI_GATEWAY_BASE_URL + /openai/v1     → OpenAI Responses API
-NEON_AI_GATEWAY_BASE_URL + /gemini     → Gemini generateContent API
+NEON_AI_GATEWAY_BASE_URL + /gemini        → Gemini generateContent API
 ```
 
 Each inference dialect is also reachable at a longer `/ai-gateway/<dialect>/v1` path (e.g. `/ai-gateway/mlflow/v1` for chat completions, `/ai-gateway/openai/v1` for Responses, `/ai-gateway/anthropic/v1` for Anthropic Messages, `/ai-gateway/gemini` for Gemini). Both forms behave identically and neither is deprecated, but the shorter paths are what the docs and SDKs use. The model list is the exception: it has only `GET /v1/models`, with no `/ai-gateway/...` form. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full mapping.

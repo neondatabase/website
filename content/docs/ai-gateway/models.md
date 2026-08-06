@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like gpt-5-mini or gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-08-06T09:06:39.642Z'
+updatedOn: '2026-08-06T06:43:16.300Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
