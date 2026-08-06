@@ -14,8 +14,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/building-neon-object-storage/cover.jpg'
+  alt: Building Neon Object Storage
 isFeatured: true
 seo:
   title: Building Neon Object Storage - Neon
@@ -24,7 +24,7 @@ seo:
   noindex: false
   ogTitle: Building Neon Object Storage - Neon
   ogDescription: S3-compatible storage that branches with your Postgres database
-  image: null
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/building-neon-object-storage/social.jpg'
 ---
 
 <Admonition type="note" title="Neon Object Storage is in beta">
@@ -39,7 +39,7 @@ We made Object Storage branchable because that's our core operating philosophy. 
 
 When you create a branch, you get one branch_id that forks both your Postgres data and your Object Storage buckets:
 
-**[ADD IMAGE 1]**
+![A Neon branch creates an isolated environment containing both Postgres data and Object Storage buckets and objects](https://cdn.neonapi.io/public/images/pages/blog/building-neon-object-storage/image-1.jpg)
 
 - **Data + files together.** The child inherits your database and your buckets/objects at that point in time.
 - **Same workflow as Postgres branches.** Create preview branches, PR environments, agent runs - files follow the same branch semantics you already use for data.
