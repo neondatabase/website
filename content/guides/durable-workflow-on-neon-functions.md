@@ -4,7 +4,7 @@ subtitle: 'Learn how to orchestrate reliable, long-running workflows with Innges
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-25T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-06T05:08:51.429Z'
 ---
 
 If you're building modern web applications, you inevitably run into work that shouldn't or can't happen inside a single HTTP request-response cycle. Whether it's running multi-step AI enrichment pipelines, orchestrating customer onboarding sequences, processing background uploads, or handling third-party webhooks, background work is a core requirement of production backends.
@@ -101,6 +101,12 @@ neon init
 ```
 
 Use the default setup options for all prompts such as enabling AI skills, configuring the MCP server, and installing the VS Code extension. This streamlined setup makes it easier to build Neon powered applications with AI agents like Claude Code, Cursor, and others.
+
+During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** and **Neon AI Gateway** skills so AI agents have the context to help you build and deploy your durable workflow. Install them with the following command and select both skills when prompted:
+
+```bash
+npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions
+```
 
 Next, install the required dependencies:
 

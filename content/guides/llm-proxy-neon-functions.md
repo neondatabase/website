@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a secure LLM proxy backend that authenticates requ
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-07-22T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-06T05:08:51.429Z'
 ---
 
 If you’re building a web application that uses large language models (LLMs), you need a secure way to handle requests from the frontend to the model endpoints. Whether it’s a chat interface or a content generation tool, the frontend needs to reach a model endpoint. But exposing LLM API keys directly to the browser is a serious security risk. Secret keys can leak through browser DevTools or network logs. Without server-side controls, there’s also nothing stopping a user from sending unlimited requests, driving up costs, or bypassing access restrictions entirely.
@@ -69,6 +69,12 @@ neon init
 ```
 
 Use the default setup options for all prompts such as enabling AI skills, configuring the MCP server, and installing the VS Code extension. This streamlined setup makes it easier to build Neon powered applications with AI agents like Claude Code, Cursor, and others.
+
+During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** and **Neon AI Gateway** skills so AI agents have the context to help you build and deploy your proxy. Install them with the following command and select both skills when prompted:
+
+```bash
+npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions
+```
 
 Create a new Neon project by running the following command. This links your local project to a Neon project and sets up the necessary configuration:
 
