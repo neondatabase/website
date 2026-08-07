@@ -11,7 +11,7 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 <Admonition type="note">
@@ -115,7 +115,7 @@ curl --request POST \
 - User-initiated save points
 
 <Admonition type="tip">
-Learn how our Developer Advocate approaches snapshot-based workflows in [Promoting Postgres changes safely to production](https://neon.com/blog/promoting-postgres-changes-safely-production).
+Learn how our Developer Advocate approaches snapshot-based workflows in [Promoting Postgres changes safely to production](/blog/promoting-postgres-changes-safely-production).
 </Admonition>
 
 ### Rolling back to (restoring) a snapshot

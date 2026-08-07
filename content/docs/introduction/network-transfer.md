@@ -9,7 +9,7 @@ summary: >-
   replication syncs, and to monitor usage via the Console or Consumption API.
   Reduction strategies include scoping SELECT columns, using Neon snapshots,
   adding replication filters, and routing traffic over Private Link.
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
@@ -274,7 +274,7 @@ LIMIT 10;
 In Neon, [scaling to zero](/docs/introduction/scale-to-zero) clears [`pg_stat_statements`](/docs/extensions/pg_stat_statements) data, so computes that recently woke up already have fresh statistics. For long-running computes, run `SELECT pg_stat_statements_reset();` to start a clean measurement window. This cannot be undone and resets stats for all database roles.
 </Admonition>
 
-For wire-level analysis of exact message sizes, see [Elephantshark](https://neon.com/blog/elephantshark-monitor-postgres-network-traffic), an open-source Postgres traffic monitor from Neon.
+For wire-level analysis of exact message sizes, see [Elephantshark](/blog/elephantshark-monitor-postgres-network-traffic), an open-source Postgres traffic monitor from Neon.
 
 ## How to reduce network transfer
 

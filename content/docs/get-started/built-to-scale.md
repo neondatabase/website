@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your architecture along the way.
@@ -20,7 +20,7 @@ Neon fits into every stage of growth, from the first side project to operating l
 
 When you’re looking for a free plan to run Postgres, what you want is simplicity and enough room to build. Neon’s Free plan abstracts most database configuration work, delivers real-world performance, and gives you access to branching and autoscaling - and you can deploy not only a Postgres database but Managed Better Auth, Object Storage for your files, and Functions.
 
-- You get a [Free plan with real resources](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), including up to 100 projects, computes with up to 2 CU, and 0.5 GB of storage per project - enough to build and test real applications
+- You get a [Free plan with real resources](/blog/why-so-many-projects-in-the-neon-free-plan), including up to 100 projects, computes with up to 2 CU, and 0.5 GB of storage per project - enough to build and test real applications
 - You get a Postgres connection string in a second so you can start building right away
 - [Scale to zero](/docs/introduction/scale-to-zero) ensures idle databases don’t eat up your compute limits: only active time counts
 - Standard Postgres compatibility means you can plug Lakebase Postgres into [any framework, ORM, or tool that speaks Postgres](/docs/get-started/frameworks)
@@ -42,7 +42,7 @@ As a project becomes a product, small teams need to ship quickly and support rea
 - AI-coding support via [MCP](/docs/ai/neon-mcp-server) and [Agent Skills](/docs/ai/agent-skills) allows tools like Cursor and Claude to fully interact with Neon
 - [Instant restores](/docs/guides/backup-restore) lower the stakes for mistakes and accidents
 - [Built-in connection pooling](/docs/connect/connection-pooling) takes care of growing connections in your serverless apps
-- You get access to [compliance and security features](https://neon.com/blog/why-we-no-longer-lock-premium-features) without enterprise-only contracts
+- You get access to [compliance and security features](/blog/why-we-no-longer-lock-premium-features) without enterprise-only contracts
 
 ## Stage 3: Scale-ups and large fleets
 
@@ -55,14 +55,14 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 - [On-demand storage](https://neon.com/storage#unique-benefits-derived-from-neons-implementation) grows as data demands it, without planning for capacity in advance and without the risk of full-disk errors
 - [Built-in high availability](/docs/introduction/high-availability) is provided by default through storage redundancy, with data replicated across availability zones and cloud object storage
 - [Backup and restore via snapshots](/docs/guides/backup-restore) allows you to recover multi-terabyte databases in seconds, without full data copies
-- You can use [time travel and snapshot inspections](https://neon.com/blog/three-ways-to-use-your-snapshots) to review past database states for auditing, debugging, and incident analysis
-- By [creating environments as copy-on-write branches](https://neon.com/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches), you avoid the management work and costs associated with running separate instances for development, staging, testing, or recovery
-- [Programmatic lifecycle management](https://neon.com/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) lets you create, reset, and delete large numbers of environments without eating up engineering time
+- You can use [time travel and snapshot inspections](/blog/three-ways-to-use-your-snapshots) to review past database states for auditing, debugging, and incident analysis
+- By [creating environments as copy-on-write branches](/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches), you avoid the management work and costs associated with running separate instances for development, staging, testing, or recovery
+- [Programmatic lifecycle management](/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) lets you create, reset, and delete large numbers of environments without eating up engineering time
 
 ### Multi-tenancy
 
 - A [database-per-tenant setup](https://neon.com/use-cases/database-per-tenant) gives each customer a dedicated Neon project, providing strong isolation, eliminating noisy neighbors, and ensuring consistent performance
-- [API-first tenant management](https://neon.com/blog/provision-postgres-neon-api) enables programmatic provisioning, configuration, scaling, recovery, and deletion of tenant databases, making it practical for small teams to manage thousands of tenants
+- [API-first tenant management](/blog/provision-postgres-neon-api) enables programmatic provisioning, configuration, scaling, recovery, and deletion of tenant databases, making it practical for small teams to manage thousands of tenants
 
 ### Fleet management for platforms and agents
 
@@ -70,7 +70,7 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 - The fully embedded experience keeps Neon invisible to your end users, with no third-party logins or external configuration required as part of your product workflow
 - [Scale to zero](/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
 - A mature API exposes [fleet management and cost-control capabilities](/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
-- You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](https://neon.com/blog/promoting-postgres-changes-safely-production)
+- You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](/blog/promoting-postgres-changes-safely-production)
 - Backend primitives such as [Managed Better Auth](/docs/auth/overview), [Neon Object Storage](/docs/storage/overview), [Neon Functions](/docs/compute/functions/overview), the PostgREST-compatible [Data API](/docs/data-api/get-started), and the [AI Gateway](/docs/ai-gateway/overview) let you hook up full-stack applications by default
 
 <CTA title="Agent Plan" description="If you’re building a full-stack agent platform, apply to our Agent Plan for special pricing, resource limits, and assistance." buttonText="Check it out" buttonUrl="/programs/agents" />

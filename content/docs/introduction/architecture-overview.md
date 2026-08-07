@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 ## Top level overview
@@ -91,7 +91,7 @@ Rather than exposing a traditional filesystem, the database storage layer is bui
 
 ### Safekeepers: defining correctness via WAL quorum
 
-Safekeepers are responsible for one thing: **durable replication of WAL**. When a compute node generates WAL records, it streams them to multiple safekeepers. A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record [via the Paxos protocol](https://neon.com/blog/paxos).
+Safekeepers are responsible for one thing: **durable replication of WAL**. When a compute node generates WAL records, it streams them to multiple safekeepers. A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record [via the Paxos protocol](/blog/paxos).
 
 This is a fundamental difference from how traditional Postgres works:
 

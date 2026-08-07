@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 The developer experience across Neon is rooted in the lakebase architecture and anchored around four core pillars:
@@ -53,7 +53,7 @@ For production workloads where cold starts are not acceptable, paid plan users c
 
 Scale to zero is a foundational capability for the Neon experience, allowing us to offer:
 
-- **A free plan developers can actually use**. Neon can offer a generous free plan without subsidizing large amounts of idle infrastructure, something made possible by the lakebase architecture and scale-to-zero capabilities. [We want every Postgres developer building on Neon](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), and this starts with hosting their side projects and experiments.
+- **A free plan developers can actually use**. Neon can offer a generous free plan without subsidizing large amounts of idle infrastructure, something made possible by the lakebase architecture and scale-to-zero capabilities. [We want every Postgres developer building on Neon](/blog/why-so-many-projects-in-the-neon-free-plan), and this starts with hosting their side projects and experiments.
 
 - **Many short-lived, non-production environments**. Scale to zero makes it practical to run [large numbers of ephemeral databases](https://neon.com/use-cases/dev-test) for previews, CI runs, experiments, and testing. Teams can create and discard environments freely, without cost pressure forcing them to share databases or cut corners.
 
@@ -81,7 +81,7 @@ This speed adapts the experience of deploying backends to the agent era. It also
 
 ### A record of all past states, instantly accessible
 
-Storage in Lakebase Postgres is also [history-preserving](https://neon.com/blog/get-page-at-lsn) by design. As data changes over time, past versions of your database state are retained efficiently as part of normal operation, making operations that are painfully slow in traditional backends (like restores) trivial on Neon.
+Storage in Lakebase Postgres is also [history-preserving](/blog/get-page-at-lsn) by design. As data changes over time, past versions of your database state are retained efficiently as part of normal operation, making operations that are painfully slow in traditional backends (like restores) trivial on Neon.
 
 **Instant restores**
 
