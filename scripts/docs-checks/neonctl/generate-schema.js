@@ -207,6 +207,19 @@ function resolveStringValue(expr, consts) {
     if (arr && sep !== undefined) return arr.join(sep);
     return undefined;
   }
+  // `getCliName()` resolves to the rendered binary name. The CLI defines it as
+  // `basename(argv[1]) === 'neonctl' ? 'neonctl' : 'neon'`, i.e. "neon" for
+  // every invocation these docs describe. Source switched several describes
+  // from hardcoded strings to `${getCliName()} …` templates (neon-pkgs #361);
+  // without this, those spans fail to resolve and the whole describe is dropped.
+  if (
+    ts.isCallExpression(e) &&
+    ts.isIdentifier(e.expression) &&
+    e.expression.text === 'getCliName' &&
+    e.arguments.length === 0
+  ) {
+    return 'neon';
+  }
   // Template literals: resolvable only if every `${...}` span resolves.
   if (ts.isTemplateExpression(e)) {
     let out = e.head.text;

@@ -24,6 +24,23 @@
         }
       }
     },
+    "profile": {
+      "_comment": "Limit the table to the two common create paths (browser sign-in, then --mint). The upstream `.example()` list also demonstrates storing a pre-existing key via --api-key; that rarer path and its stdin/argument trade-off are covered in prose on the page instead. Same commands and descriptions as source (profile.ts) for the examples kept.",
+      "commands": {
+        "create": {
+          "examples": [
+            {
+              "command": "$0 profile create work",
+              "description": "Sign in with the browser, like `neon auth --profile work`"
+            },
+            {
+              "command": "$0 profile create ci --mint --org-id org-abc-123",
+              "description": "One browser sign-in, then an org-scoped key and no session left behind"
+            }
+          ]
+        }
+      }
+    },
     "link": {
       "options": {
         "env-pull": {
