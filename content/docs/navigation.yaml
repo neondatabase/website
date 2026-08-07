@@ -880,6 +880,8 @@
           items:
             - title: Accounts
               slug: manage/accounts
+            - title: Get started with project permissions
+              slug: manage/project-permissions-get-started
             - title: User permissions
               slug: manage/user-permissions
             - title: Organizations
