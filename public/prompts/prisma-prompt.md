@@ -53,7 +53,7 @@ DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon
 
 # Direct connection for Prisma CLI (migrations, db push, introspection)
 # Get this from Neon Console -> Connect -> Connection string (direct)
-DIRECT_URL="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
 ```
 
 **Important:** The pooled URL has `-pooler` in the hostname. The direct URL does not.
@@ -69,7 +69,7 @@ import { defineConfig, env } from 'prisma/config'
 export default defineConfig({
   schema: 'prisma/schema.prisma',
   datasource: {
-    url: env('DIRECT_URL'),
+    url: env('DATABASE_URL_UNPOOLED'),
   },
 })
 ```
@@ -162,7 +162,7 @@ main()
 
 Once the setup is complete:
 
-1.  Verify the user has correctly set both `DATABASE_URL` and `DIRECT_URL` in `.env`.
+1.  Verify the user has correctly set both `DATABASE_URL` and `DATABASE_URL_UNPOOLED` in `.env`.
 2.  Generate the Prisma Client:
     ```bash
     npx prisma generate
@@ -183,8 +183,8 @@ Once the setup is complete:
 
 Before suggesting code or making edits, ensure:
 - The `package.json` contains `prisma` (dev), `@prisma/client` (prod), `@prisma/adapter-neon` (prod), and `tsx` (dev).
-- The `.env` file has both `DATABASE_URL` (pooled) and `DIRECT_URL` (direct).
-- The `prisma.config.ts` file exists and points to `DIRECT_URL`.
+- The `.env` file has both `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct(Unpooled)).
+- The `prisma.config.ts` file exists and points to `DATABASE_URL_UNPOOLED`.
 - The `prisma/schema.prisma` does NOT have a `url` property in the datasource block.
 - The Prisma Client import uses the generated path: `./generated/prisma`.
 - The `PrismaNeon` adapter is instantiated with `{ connectionString: process.env.DATABASE_URL! }`.
