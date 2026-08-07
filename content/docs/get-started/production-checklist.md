@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-08-04T05:05:30.414Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 <CheckList title="Production checklist">
@@ -102,7 +102,7 @@ Keep reading: [Protected branches](/docs/guides/protected-branches)
 
 Neon autoscaling automatically adjusts compute resources based on your workload, allowing your database to absorb traffic spikes without manual intervention. For production workloads:
 
-- **Minimum compute size**: Set a minimum high enough so your working set (frequently accessed data) can be fully cached in memory. This is important because Neon's [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) allocation is tied to your compute size. When the compute scales down and the LFC shrinks, frequently accessed data may be evicted and need to be reloaded from storage, which impacts performance.
+- **Minimum compute size**: Set a minimum high enough so your working set (frequently accessed data) can be fully cached in memory. This is important because Neon's [compute cache](/docs/reference/glossary#compute-cache) is tied to your compute size. When the compute scales down and the cache shrinks, frequently accessed data may be evicted and need to be reloaded from storage, which impacts performance.
 
 - **Maximum compute size**: Set a maximum that provides enough extra capacity for traffic spikes. The maximum also determines your available local disk space, which is used for things like temporary files, complex queries, [pg_repack](/docs/extensions/pg_repack), and replication.
 

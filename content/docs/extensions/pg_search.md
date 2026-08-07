@@ -11,7 +11,7 @@ summary: >-
   and inverted index concepts, and examples for creating indexes, sorting by
   relevance, highlighting matches, and tuning performance.
 enableTableOfContents: true
-updatedOn: '2026-06-26T16:23:18.851Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 redirectFrom:
   - /guides/pg-search
   - /guides/pg-search/
@@ -504,9 +504,9 @@ SET max_parallel_workers_per_gather = 8;
 
 Keeping indexes in memory improves query performance by reducing disk access. In Postgres, `shared_buffers` defines the buffer cache size, which determines how much memory is allocated for caching data. In Neon, this value is set automatically based on your compute size.
 
-In addition to `shared_buffers`, **Neon’s Local File Cache (LFC)** extends memory up to 75% of your compute’s RAM. This allows frequently accessed indexes and data to remain in memory, improving performance.
+In Neon, up to 75% of your compute’s RAM is used for data caching. This allows frequently accessed indexes and data to remain in memory, improving performance.
 
-Both `shared_buffers` and the LFC size depend on your compute size. For details, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+The amount of memory available for caching depends on your compute size. For details, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 To further optimize performance, you can use the Postgres `pg_prewarm` extension to preload indexes into memory. This ensures fast query response times by warming up the cache after index creation or a restart of your Neon compute.
 

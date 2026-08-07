@@ -65,7 +65,7 @@ Since Kubernetes doesn’t natively support VMs, and preexisting VMs-in-Kubernet
 
 To implement the scaling logic of autoscaling, we use our `autoscaler-agent` — a daemon we deploy on each Kubernetes node to monitor metrics for each Postgres VM and make scaling decisions based on those metrics. The `autoscaler-agent` also works in conjunction with our modified [Kubernetes scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/) to prevent unintentionally overcommitting resources, making sure we don’t run out of resources on the host node.
 
-The `autoscaler-agent` also communicates with the `vm-monitor`, a small program inside the VM. The `vm-monitor` continuously monitors Postgres’ resource usage and will request upscaling on its behalf when there’s an imminent need, e.g., if a query is about to exhaust all available memory. `vm-monitor` is also responsible for adjusting the size of our [Local File Cache](https://neon.tech/docs/reference/glossary#local-file-cache) in Postgres when scaling occurs, to take advantage of added resources.
+The `autoscaler-agent` also communicates with the `vm-monitor`, a small program inside the VM. The `vm-monitor` continuously monitors Postgres’ resource usage and will request upscaling on its behalf when there’s an imminent need, e.g., if a query is about to exhaust all available memory. `vm-monitor` is also responsible for adjusting the size of our [Local File Cache](https://neon.tech/docs/reference/glossary#compute-cache) in Postgres when scaling occurs, to take advantage of added resources.
 
 For more background information, [read our original Scaling Serverless Postgres article](https://neon.tech/blog/scaling-serverless-postgres).
 
@@ -99,7 +99,7 @@ And while in the medium-term, we have some deeper technical changes coming (virt
 
 ### Smarter Autoscaling using Local File Cache Metrics
 
-[Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon) separates storage and compute. It’s an integral part of what enables us to autoscale and dramatically reduce cold start times for serverless Postgres. Of course, [accessing pages across the network](https://neon.tech/blog/get-page-at-lsn) can result in increased query latency, so Neon’s Postgres has a [Local File Cache (LFC)](https://neon.tech/docs/reference/glossary#local-file-cache) that acts as a resizable extension of [Postgres’ shared buffers](https://www.postgresql.org/docs/16/runtime-config-resource.html#GUC-SHARED-BUFFERS).
+[Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon) separates storage and compute. It’s an integral part of what enables us to autoscale and dramatically reduce cold start times for serverless Postgres. Of course, [accessing pages across the network](https://neon.tech/blog/get-page-at-lsn) can result in increased query latency, so Neon’s Postgres has a [Local File Cache (LFC)](https://neon.tech/docs/reference/glossary#compute-cache) that acts as a resizable extension of [Postgres’ shared buffers](https://www.postgresql.org/docs/16/runtime-config-resource.html#GUC-SHARED-BUFFERS).
 
 Picking the right size for the cache is crucial — with certain OLTP workloads, we see a stepwise effect based on whether the working set fits into cache, sometimes with a 10x increase in performance from just a marginal increase in LFC size. A corollary to this is that the ideal endpoint size is often just big enough to fit the [working set size](https://en.wikipedia.org/wiki/Working_set_size), but no larger.
 
