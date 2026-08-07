@@ -10,7 +10,7 @@ summary: >-
   minimal-downtime cutover on busy databases).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 redirectFrom:
   - /docs/guides/migrate-neon-to-another-region
 ---
@@ -33,7 +33,7 @@ In the Neon Console, open the **[Projects](https://console.neon.tech/app/)** pag
 
 ### pg_dump and pg_restore
 
-**Best for** when you want full control of dump files and restore timing. See **[Migrate data from another Neon project](/docs/import/migrate-from-neon)**.
+**Best for** when you want full control of dump files and restore timing. See **[Migrate data from another Neon project](/docs/import/migrate-from-neon)**. Use direct (unpooled) connection strings for both the source and target; avoid running `pg_dump` or `pg_restore` over a pooled connection.
 
 ### Logical replication
 

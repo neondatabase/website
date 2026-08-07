@@ -11,7 +11,7 @@ summary: >-
   `pgoutput` and `wal2json`.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-22T13:42:19.210Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
@@ -140,6 +140,10 @@ WHERE rolname = '<role_name>';
 ## Subscriber access
 
 A subscriber must be able to access the Neon database that is acting as a publisher. In Neon, no action is required unless you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon.
+
+<Admonition type="important">
+When a subscriber connects to a Neon publisher, use a direct connection string, not a pooled one. Logical replication requires a persistent connection and is not compatible with connection poolers. Make sure the connection string you give the subscriber does not include the `-pooler` suffix in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 If you use Neon's **IP Allow** feature:
 

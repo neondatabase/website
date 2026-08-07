@@ -13,7 +13,7 @@ summary: >-
   project and the change cannot be reverted.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
@@ -127,7 +127,7 @@ After creating a publication on the source database, you need to create a subscr
    ```
 
    - `subscription_name`: A name you chose for the subscription.
-   - `connection_string`: The connection string for the source Neon database where you defined the publication.
+   - `connection_string`: The connection string for the source Neon database where you defined the publication. Use a direct connection string, not a pooled one. Logical replication requires a persistent connection and is not compatible with connection poolers, so the hostname must not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
    - `publication_name`: The name of the publication you created on the source Neon database.
 
 3. Verify the subscription was created by running the following command:
