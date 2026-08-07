@@ -1078,6 +1078,8 @@
           slug: introduction/spending-notifications
           tag: new
           tagTheme: green
+        - title: Set hard usage limits
+          slug: guides/hard-usage-limits
         - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Usage and cost calculations
