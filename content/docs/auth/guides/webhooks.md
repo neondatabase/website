@@ -8,7 +8,8 @@ summary: >-
   before they are written to the database. Use this page when you need to
   override OTP or magic link delivery, block signups by domain, or sync new
   users to external systems. Webhooks support events including send.otp,
-  send.magic_link, user.before_create, user.created, and
+  send.magic_link, user.before_create, user.created,
+  organization.invitation.created, organization.invitation.accepted, and
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
@@ -27,13 +28,15 @@ For a step-by-step Next.js walkthrough that implements signature verification, c
 
 ## Supported events
 
-| Event                   | Type         | Trigger                                          | Use case                                                                  |
-| ----------------------- | ------------ | ------------------------------------------------ | ------------------------------------------------------------------------- |
-| `send.otp`              | Blocking     | OTP code needs delivery                          | Custom OTP delivery via SMS or email service                              |
-| `send.magic_link`       | Blocking     | Magic link needs delivery                        | Custom link delivery via any channel                                      |
-| `user.before_create`    | Blocking     | User attempts to sign up (before database write) | Signup validation, allowlists, user data enrichment                       |
-| `user.created`          | Non-blocking | User created in the database                     | Sync to CRM, analytics, post-signup workflows                             |
-| `phone_number.verified` | Non-blocking | User successfully verified a phone number        | Post-verification workflows for phone OTP sign-in or phone number linking |
+| Event                              | Type         | Trigger                                                        | Use case                                                                  |
+| ---------------------------------- | ------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `send.otp`                         | Blocking     | OTP code needs delivery                                        | Custom OTP delivery via SMS or email service                              |
+| `send.magic_link`                  | Blocking     | Magic link needs delivery                                      | Custom link delivery via any channel                                      |
+| `user.before_create`               | Blocking     | User attempts to sign up (before database write)               | Signup validation, allowlists, user data enrichment                       |
+| `user.created`                     | Non-blocking | User created in the database                                   | Sync to CRM, analytics, post-signup workflows                             |
+| `phone_number.verified`            | Non-blocking | User successfully verified a phone number                      | Post-verification workflows for phone OTP sign-in or phone number linking |
+| `organization.invitation.created`  | Non-blocking | An organization invitation is created                          | Custom invitation emails, audit logging, sync with external systems       |
+| `organization.invitation.accepted` | Non-blocking | A user accepts an organization invitation and becomes a member | Provision resources, update permissions, post-acceptance workflows        |
 
 **Blocking** events pause the auth flow until your server responds (or the timeout expires). **Non-blocking** events are fire-and-forget; failures do not affect the user.
 
@@ -50,12 +53,12 @@ GET /projects/{project_id}/branches/{branch_id}/auth/webhooks
 
 Both endpoints use the following fields:
 
-| Field             | Type               | Description                                                                                                                                         |
-| ----------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enabled`         | boolean (required) | Enable or disable webhook delivery                                                                                                                  |
-| `webhook_url`     | string             | HTTPS endpoint to receive webhook POST requests                                                                                                     |
-| `enabled_events`  | string[]           | Event types to subscribe to: `send.otp`, `send.magic_link`, `user.before_create`, `user.created`, `phone_number.verified`                           |
-| `timeout_seconds` | integer (1-10)     | Per-attempt timeout in seconds. Default: 5. Total delivery time across all attempts is capped at 15 seconds. See [Retry behavior](#retry-behavior). |
+| Field             | Type               | Description                                                                                                                                                                                      |
+| ----------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `enabled`         | boolean (required) | Enable or disable webhook delivery                                                                                                                                                               |
+| `webhook_url`     | string             | HTTPS endpoint to receive webhook POST requests                                                                                                                                                  |
+| `enabled_events`  | string[]           | Event types to subscribe to: `send.otp`, `send.magic_link`, `user.before_create`, `user.created`, `phone_number.verified`, `organization.invitation.created`, `organization.invitation.accepted` |
+| `timeout_seconds` | integer (1-10)     | Per-attempt timeout in seconds. Default: 5. Total delivery time across all attempts is capped at 15 seconds. See [Retry behavior](#retry-behavior).                                              |
 
 ### Webhook URL requirements
 
@@ -82,7 +85,7 @@ curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{br
   -d '{
     "enabled": true,
     "webhook_url": "https://your-app.com/webhooks/neon-auth",
-    "enabled_events": ["send.otp", "send.magic_link", "user.before_create", "user.created", "phone_number.verified"],
+    "enabled_events": ["send.otp", "send.magic_link", "user.before_create", "user.created", "phone_number.verified", "organization.invitation.created", "organization.invitation.accepted"],
     "timeout_seconds": 5
   }'
 ```
@@ -105,7 +108,9 @@ Both endpoints return the configuration in the same format:
     "send.magic_link",
     "user.before_create",
     "user.created",
-    "phone_number.verified"
+    "phone_number.verified",
+    "organization.invitation.created",
+    "organization.invitation.accepted"
   ],
   "timeout_seconds": 5
 }
@@ -204,6 +209,38 @@ Fires non-blocking after a user successfully verifies a phone number via the [Ph
 | `is_phone_update` | boolean | Reserved for future use; currently always `false`                                 |
 | `ip_address`      | string  | Requester's IP address                                                            |
 | `user_agent`      | string  | Requester's user agent                                                            |
+
+### `organization.invitation.created` event data
+
+Fires non-blocking when an organization invitation is created, via the [Organization plugin](/docs/auth/guides/plugins/organization).
+
+The top-level `user` object contains the **inviter**, not the invitee. Because the inviter isn't the subject of the event, this object is limited to `id`, `name`, and `email` rather than the full user allowlist described above. The same reduced object is repeated at `event_data.inviter` for convenience. The invitee's email is available in `event_data.invitee_email`.
+
+| Field               | Type         | Description                                                   |
+| ------------------- | ------------ | ------------------------------------------------------------- |
+| `invitation_id`     | string       | Unique ID of the invitation                                   |
+| `organization_id`   | string       | ID of the organization the invitation is for                  |
+| `organization_name` | string       | Name of the organization                                      |
+| `organization_slug` | string       | Slug of the organization                                      |
+| `invitee_email`     | string       | Email address of the invited user                             |
+| `role`              | string       | Role assigned to the invitee                                  |
+| `expires_at`        | ISO datetime | Invitation expiry time                                        |
+| `inviter`           | object       | `id`, `name`, and `email` of the user who sent the invitation |
+| `invitee`           | object       | `email` of the invited user                                   |
+
+### `organization.invitation.accepted` event data
+
+Fires non-blocking after a user accepts an organization invitation and becomes a member, via the [Organization plugin](/docs/auth/guides/plugins/organization). The `user` object contains the full user context for the person who accepted the invitation. `event_data.invitee` repeats the same person as a reduced `id`, `name`, `email` object.
+
+| Field               | Type   | Description                                                       |
+| ------------------- | ------ | ----------------------------------------------------------------- |
+| `invitation_id`     | string | Unique ID of the invitation                                       |
+| `organization_id`   | string | ID of the organization the user joined                            |
+| `organization_name` | string | Name of the organization                                          |
+| `organization_slug` | string | Slug of the organization                                          |
+| `role`              | string | Role assigned to the new member                                   |
+| `member_id`         | string | ID of the new organization membership record                      |
+| `invitee`           | object | `id`, `name`, and `email` of the user who accepted the invitation |
 
 ## Signature verification
 

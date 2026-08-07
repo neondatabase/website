@@ -1,4 +1,4 @@
-text: 'Neon now has per-project permissions: give agents and developers exactly the right access'
+text: 'Add files to your Postgres branches via Neon Object Storage, our S3-compatible object store'
 link:
-  url: 'https://neon.com/blog/neon-now-has-per-project-permissions'
+  url: 'https://neon.com/blog/building-neon-object-storage'
   target: '_blank'

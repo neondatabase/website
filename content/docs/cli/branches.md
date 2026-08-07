@@ -48,7 +48,7 @@ neon branches list --project-id solitary-leaf-288182
 └────────────────────────┴──────────────────────────┴──────────────────────┴──────────────────────┘
 ```
 
-Branch names include text labels that indicate status: `[default]` marks the project's default branch, `[protected]` marks a protected branch, and `[current]` marks the branch pinned in your local `.neon` context file.
+Branch names include text labels that indicate status: `[default]` marks the project's default branch, `[protected]` marks a protected branch, `[anon]` marks an anonymized branch, and `[current]` marks the branch pinned in your local `.neon` context file.
 
 List branches with `--output json`, which returns more information than the `table` format:
 

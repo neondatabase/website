@@ -1,12 +1,12 @@
 ---
 name: neon-postgres
 description: >-
-  Guides and best practices for working with Neon Serverless Postgres.
-  Covers setup, connection methods and drivers, pooled vs direct connections,
-  branching, autoscaling, scale-to-zero, instant restore, read replicas,
-  connection pooling, IP allow lists, and logical replication.
-  Use when users ask about "Neon setup", "connect to Neon", "Neon project",
-  "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
+  Guides and best practices for working with Lakebase Postgres, the database
+  behind Neon. Covers setup, connection methods and drivers, pooled vs direct
+  connections, branching, autoscaling, scale-to-zero, instant restore, read
+  replicas, connection pooling, IP allow lists, and logical replication.
+  Use when users ask about "Lakebase Postgres", "Neon setup", "connect to Neon",
+  "Neon project", "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
   "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
   "scale to zero", "Neon autoscaling", "Neon read replica", or
   "Neon connection pooling".
@@ -14,7 +14,7 @@ metadata:
   parent: neon
 ---
 
-**FIRST**: Use the parent `neon` skill for a Neon platform overview, getting started with Neon, Neon development best practices, and more.
+**FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.
 
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
@@ -22,9 +22,11 @@ If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/ski
 npx skills add neondatabase/agent-skills --skill neon
 ```
 
-# Neon Serverless Postgres
+# Lakebase Postgres
 
-Serverless Postgres is the core of the Neon platform. It separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.
+Lakebase Postgres is the database at the core of Neon. It runs on the lakebase architecture — OLTP built directly on cloud object storage — which decouples storage from compute to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.
+
+It is the same database whether you reach it through Neon or through Databricks; this skill covers the Neon access path.
 
 ## Setup Flow
 

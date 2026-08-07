@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import { cn } from 'utils/cn';
+import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
 import Icon from '../../menu/icon';
 
@@ -60,7 +61,7 @@ const Item = ({ nav: title, slug, icon, subnav, items, basePath, activeItems, se
   const isTutorials = slug === 'https://neon.com/postgresql/tutorial';
   const isExternalSlug = slug?.startsWith('http');
   const pathname = usePathname();
-  const currentSlug = pathname.replace(basePath, '');
+  const currentSlug = normalizeDocNavigationPath(pathname.replace(basePath, ''));
 
   const [isActive, setIsActive] = useState(false);
 

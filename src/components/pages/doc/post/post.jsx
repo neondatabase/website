@@ -52,6 +52,7 @@ const Post = ({
   changelogPosts = [],
   currentSlug,
   gitHubPath,
+  markdownPath,
   tableOfContents,
   author,
   aboveContent = null,
@@ -92,7 +93,7 @@ const Post = ({
             {isFaq ? (
               <>
                 <div className="mb-5 flex justify-end sm:mb-3">
-                  <DropdownMenu gitHubPath={gitHubPath} />
+                  <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
                 </div>
                 <div>
                   <h1
@@ -152,7 +153,9 @@ const Post = ({
                     </p>
                   )}
                 </div>
-                {!isChangelog && !isDocsIndex && <DropdownMenu gitHubPath={gitHubPath} />}
+                {!isChangelog && !isDocsIndex && (
+                  <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
+                )}
               </div>
             )}
             {aboveContent}
@@ -223,6 +226,7 @@ Post.propTypes = {
   ),
   currentSlug: PropTypes.string.isRequired,
   gitHubPath: PropTypes.string.isRequired,
+  markdownPath: PropTypes.string,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
   author: PropTypes.shape({
     slug: PropTypes.string,

@@ -7,6 +7,18 @@ const request = (query = '') => ({ nextUrl: new URL(`https://neon.com/models${qu
 const body = async (res) => JSON.parse(await res.text());
 
 describe('GET /models', () => {
+  it.each(['chat', 'image-generation', 'web-search'])(
+    'allows cross-origin requests for the %s use case',
+    async (useCase) => {
+      const res = await GET(request(`?use_case=${useCase}`));
+
+      expect(res.headers.get('Access-Control-Allow-Origin')).toBe('*');
+      expect(res.headers.get('Cache-Control')).toBe(
+        'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400'
+      );
+    }
+  );
+
   it('returns every served model with chat examples by default', async () => {
     const res = await GET(request());
     expect(res.status).toBe(200);
@@ -63,7 +75,7 @@ describe('GET /models', () => {
       const { model } = await body(res);
       const curl = model.examples.find((e) => e.id === 'curl');
 
-      expect(curl.endpoint).toContain('/ai-gateway/gemini/v1beta');
+      expect(curl.endpoint).toContain('/gemini/v1beta');
       expect(curl.variantReason).toBeTruthy();
     });
 
@@ -73,6 +85,31 @@ describe('GET /models', () => {
       const curl = model.examples.find((e) => e.id === 'curl');
 
       expect(model.capabilities.native_dialect).toBe('none');
+      expect(curl.endpoint).toBe('/v1/chat/completions');
+    });
+
+    it('points cURL at Anthropic Messages for a Claude model that returns array content', async () => {
+      const res = await GET(request('?model=claude-opus-5'));
+      const { model } = await body(res);
+      const ids = model.examples.map((e) => e.id);
+      const curl = model.examples.find((e) => e.id === 'curl');
+
+      // Only when it reasons, but the OpenAI SDKs cannot express "sometimes a string".
+      expect(model.capabilities.chat).toBe('array-content');
+      expect(ids).not.toContain('typescript');
+      expect(ids).not.toContain('python');
+      expect(curl.endpoint).toBe('/anthropic/v1/messages');
+      expect(curl.variantReason).toBeTruthy();
+    });
+
+    it('keeps cURL on chat completions for a conforming Claude model', async () => {
+      const res = await GET(request('?model=claude-haiku-4-5'));
+      const { model } = await body(res);
+      const curl = model.examples.find((e) => e.id === 'curl');
+
+      // A native dialect alone is not a reason to leave the portable route.
+      expect(model.capabilities.chat).toBe('conforms');
+      expect(model.capabilities.native_dialect).toBe('anthropic');
       expect(curl.endpoint).toBe('/v1/chat/completions');
     });
 

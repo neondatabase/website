@@ -1,28 +1,42 @@
 'use client';
 
-import parse from 'html-react-parser';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { SiMeta } from 'react-icons/si';
 
-import CodeBlockWrapper from 'components/shared/code-block-wrapper';
+import StickyTable from 'components/pages/doc/sticky-table';
 import CheckIcon from 'components/shared/code-block-wrapper/images/check.inline.svg';
 import CopyIcon from 'components/shared/code-block-wrapper/images/copy.inline.svg';
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
-import highlight from 'lib/shiki';
+import SearchIcon from 'icons/search.inline.svg';
 import { cn } from 'utils/cn';
 
+import AlibabaIcon from './images/alibaba.inline.svg';
+import AnthropicIcon from './images/anthropic.inline.svg';
+import GoogleIcon from './images/google.inline.svg';
+import OpenAIIcon from './images/openai.inline.svg';
 import { PROVIDER_ORDER, providerLabel } from './model-rows';
 
+const ASIDE_COLLISION_GAP = 24;
+
+const MODEL_TYPES = [
+  { key: 'all', label: 'All' },
+  { key: 'text', label: 'Text' },
+  { key: 'image', label: 'Image' },
+];
+
 const COLUMNS = [
-  { key: 'name', label: 'Model', sortable: true, align: 'left' },
-  { key: 'id', label: 'Model ID', sortable: true, align: 'left' },
-  { key: 'provider', label: 'Provider', sortable: true, align: 'left' },
-  { key: 'inputs', label: 'Inputs', sortable: false, align: 'left' },
-  { key: 'contextWindow', label: 'Context', sortable: true, align: 'right' },
-  { key: 'releaseDate', label: 'Released', sortable: true, align: 'right' },
-  { key: 'costInput', label: 'Input /M', sortable: true, align: 'right' },
-  { key: 'costOutput', label: 'Output /M', sortable: true, align: 'right' },
-  { key: 'openWeights', label: 'License', sortable: true, align: 'left' },
+  { key: 'name', label: 'Model', sortable: true },
+  { key: 'id', label: 'Model ID', sortable: true },
+  { key: 'provider', label: 'Provider', sortable: true },
+  { key: 'inputs', label: 'Inputs', sortable: false },
+  { key: 'contextWindow', label: 'Context', sortable: true },
+  { key: 'releaseDate', label: 'Released', sortable: true },
+  { key: 'costInput', label: 'Input /M', sortable: true },
+  { key: 'costOutput', label: 'Output /M', sortable: true },
+  { key: 'openWeights', label: 'License', sortable: true },
 ];
 
 const compareRows = (a, b, key) => {
@@ -46,44 +60,10 @@ const compareRows = (a, b, key) => {
   }
 };
 
-// Client-side syntax highlighting with a graceful <pre> fallback — the same
-// pattern the API reference / MCP configurator use (lib/shiki in useEffect).
-const HighlightedCode = ({ code, language }) => {
-  const [html, setHtml] = useState('');
-
-  useEffect(() => {
-    let cancelled = false;
-    highlight(code, language).then((result) => {
-      if (!cancelled) setHtml(result);
-    });
-    return () => {
-      cancelled = true;
-    };
-  }, [code, language]);
-
-  if (!html) {
-    return (
-      <pre
-        className="my-0 overflow-x-auto !bg-gray-new-98 p-4 text-sm leading-relaxed dark:!bg-gray-new-10"
-        data-language={language}
-      >
-        <code>{code}</code>
-      </pre>
-    );
-  }
-
-  return <>{parse(html)}</>;
-};
-
-HighlightedCode.propTypes = {
-  code: PropTypes.string.isRequired,
-  language: PropTypes.string.isRequired,
-};
-
 const SortArrow = ({ active, dir }) => (
   <span
     className={cn(
-      'ml-1 inline-block text-[10px] transition-opacity',
+      'ml-1 inline-block text-[.625rem] transition-opacity',
       active ? 'opacity-100' : 'opacity-0 group-hover:opacity-40'
     )}
     aria-hidden
@@ -97,9 +77,50 @@ SortArrow.propTypes = {
   dir: PropTypes.string.isRequired,
 };
 
+const PROVIDER_ICONS = {
+  alibaba: AlibabaIcon,
+  anthropic: AnthropicIcon,
+  google: GoogleIcon,
+  openai: OpenAIIcon,
+  meta: SiMeta,
+};
+
+const ProviderLogo = ({ provider }) => {
+  const Icon = PROVIDER_ICONS[provider];
+
+  if (!Icon) return null;
+
+  return (
+    <span className="flex size-5 shrink-0 items-center justify-center overflow-hidden" aria-hidden>
+      <Icon className="size-5" />
+    </span>
+  );
+};
+
+ProviderLogo.propTypes = {
+  provider: PropTypes.string.isRequired,
+};
+
 const CheckMark = () => (
-  <svg viewBox="0 0 10 10" className="size-2.5" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M2 5 L4 7 L8 3" strokeLinecap="round" strokeLinejoin="round" />
+  <svg viewBox="0 0 10 10" className="size-2.5" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M1.5 5 L4 7.5 L8.5 2.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const ClearIcon = () => (
+  <svg viewBox="0 0 12 12" className="size-3" fill="none" aria-hidden>
+    <path
+      d="M1.5 1.5L10.5 10.5"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10.5 1.5L1.5 10.5"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
@@ -134,23 +155,27 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
         aria-haspopup="listbox"
         aria-expanded={open}
         className={cn(
-          'flex h-10 items-center gap-2 rounded-md border bg-white px-3 text-sm transition-colors dark:bg-gray-new-8',
-          selected.size > 0
-            ? 'border-secondary-8/50 text-secondary-8 dark:border-primary-1/50 dark:text-primary-1'
-            : 'border-gray-new-80 text-gray-new-40 hover:border-gray-new-60 dark:border-gray-new-20 dark:text-gray-new-60'
+          'flex h-9 items-center gap-2 border bg-transparent px-3 text-[.8125rem] text-gray-new-15 transition-colors outline-none hover:border-gray-new-70 focus:border-gray-new-30 dark:text-[#F1F2F4] dark:hover:border-gray-new-30 dark:focus:border-gray-new-60',
+          open
+            ? 'border-gray-new-30 dark:border-gray-new-60'
+            : selected.size > 0
+              ? 'border-gray-new-60 dark:border-gray-new-40'
+              : 'border-gray-new-80 dark:border-gray-new-20'
         )}
         onClick={() => setOpen((value) => !value)}
       >
-        {label}
+        <span className="min-w-19">{label}</span>
         <svg
           viewBox="0 0 12 12"
-          className={cn('size-3 shrink-0 transition-transform', open && 'rotate-180')}
+          className={cn(
+            'size-3 shrink-0 text-gray-new-40 transition-transform',
+            open && 'rotate-180'
+          )}
           fill="none"
           stroke="currentColor"
-          strokeWidth="1.5"
           aria-hidden
         >
-          <path d="M3 4.5 L6 7.5 L9 4.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M1.75 4.25L6 8.5L10.25 4.25" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
@@ -158,7 +183,7 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
         <div
           role="listbox"
           aria-multiselectable="true"
-          className="absolute left-0 z-20 mt-1 min-w-[190px] rounded-md border border-gray-new-80 bg-white p-1 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-10"
+          className="absolute left-0 z-20 mt-1 min-w-47.5 border border-gray-new-80 bg-white p-1 shadow-lg dark:border-gray-new-20 dark:bg-gray-new-10"
         >
           {providers.map((providerId) => {
             const checked = selected.has(providerId);
@@ -168,15 +193,15 @@ const ProviderMultiSelect = ({ providers, selected, onToggle, onClear }) => {
                 type="button"
                 role="option"
                 aria-selected={checked}
-                className="flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm text-gray-new-30 transition-colors hover:bg-gray-new-98 dark:text-gray-new-80 dark:hover:bg-gray-new-8"
+                className="flex w-full items-center gap-2 px-2 py-1.5 text-left text-sm text-gray-new-30 transition-colors hover:bg-gray-new-98 dark:text-gray-new-80 dark:hover:bg-gray-new-8"
                 onClick={() => onToggle(providerId)}
               >
                 <span
                   className={cn(
-                    'flex size-4 shrink-0 items-center justify-center rounded border transition-colors',
+                    'flex size-3.5 shrink-0 items-center justify-center border transition-colors',
                     checked
-                      ? 'border-secondary-8 bg-secondary-8 text-white dark:border-primary-1 dark:bg-primary-1'
-                      : 'border-gray-new-70 dark:border-gray-new-30'
+                      ? 'border-[#2D8665] bg-[#2D8665] text-white dark:border-green-52 dark:bg-green-52 dark:text-black-new'
+                      : 'border-gray-new-40'
                   )}
                 >
                   {checked && <CheckMark />}
@@ -207,8 +232,7 @@ ProviderMultiSelect.propTypes = {
   onClear: PropTypes.func.isRequired,
 };
 
-// Click-to-copy model id. Stops propagation so copying doesn't also toggle the
-// row's expand/collapse.
+// Keep model IDs copyable without triggering the row navigation.
 const CopyableModelId = ({ id }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(2000);
   return (
@@ -222,7 +246,7 @@ const CopyableModelId = ({ id }) => {
         handleCopy(id);
       }}
     >
-      <code className="font-mono text-[13px] whitespace-nowrap text-gray-new-30 group-hover/copy:text-gray-new-10 dark:text-gray-new-80 dark:group-hover/copy:text-white">
+      <code className="rounded-sm border border-gray-new-80 bg-gray-new-98 px-1 py-px font-mono text-[.8125rem] leading-none whitespace-nowrap text-gray-new-30 group-hover/copy:text-gray-new-10 dark:border-gray-new-30 dark:bg-black-new dark:text-gray-new-85 dark:group-hover/copy:text-white">
         {id}
       </code>
       {isCopied ? (
@@ -238,136 +262,16 @@ CopyableModelId.propTypes = {
   id: PropTypes.string.isRequired,
 };
 
-// The expanded quickstart panel under a selected row.
-const RowDetail = ({ row, snippets, mode }) => {
-  const languages = useMemo(() => {
-    const all = snippets.tabs[mode]?.languages ?? [];
-    // Mastra can't reach Responses-only (Codex) models through the
-    // OpenAI-compatible endpoint yet, so drop it for those in the text tab.
-    if (mode === 'text' && row.isResponsesOnly) {
-      return all.filter((lang) => lang.key !== 'mastra');
-    }
-    return all;
-  }, [snippets, mode, row.isResponsesOnly]);
-
-  const [langKey, setLangKey] = useState(languages[0]?.key);
-  const [view, setView] = useState('code');
-
-  useEffect(() => {
-    setLangKey(languages[0]?.key);
-    setView('code');
-  }, [languages]);
-
-  const activeLang = languages.find((lang) => lang.key === langKey) ?? languages[0];
-  if (!activeLang) return null;
-
-  const placeholder = snippets.modelIdPlaceholder;
-  const codeForModel = activeLang.code.split(placeholder).join(row.id);
-  const isEnv = view === 'env';
-  const shownCode = isEnv ? snippets.envExample : codeForModel;
-  const shownLang = isEnv ? 'bash' : activeLang.lang;
-  // The code sub-tab always shows the language's filename; only the `.env` tab
-  // is fixed. (Computing it from `isEnv` would mislabel the code tab as `.env`.)
-  const codeFilename =
-    { typescript: 'index.ts', python: 'main.py', bash: 'request.sh' }[activeLang.lang] || 'snippet';
-
-  const specs = [
-    { label: 'Context', value: row.contextLabel },
-    { label: 'Input', value: `${row.costInputLabel}/M` },
-    { label: 'Output', value: `${row.costOutputLabel}/M` },
-    { label: 'Knowledge', value: row.knowledge || '—' },
-    { label: 'Endpoints', value: row.endpoints.join(' · ') },
-  ];
-
-  return (
-    <div className="flex flex-col gap-4 border-t border-gray-new-90 bg-gray-new-98 p-4 dark:border-gray-new-20 dark:bg-gray-new-8">
-      <dl className="flex flex-wrap gap-x-6 gap-y-2">
-        {specs.map((spec) => (
-          <div key={spec.label} className="flex flex-col gap-0.5">
-            <dt className="text-[10px] font-semibold tracking-wide text-gray-new-50 uppercase dark:text-gray-new-60">
-              {spec.label}
-            </dt>
-            <dd className="m-0 font-mono text-[13px] text-gray-new-20 dark:text-gray-new-90">
-              {spec.value}
-            </dd>
-          </div>
-        ))}
-      </dl>
-
-      <div className="flex flex-wrap items-center gap-3">
-        <label className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold tracking-wide text-gray-new-50 uppercase dark:text-gray-new-60">
-            Language
-          </span>
-          <select
-            className="h-8 rounded-md border border-gray-new-80 bg-white px-2 text-sm text-gray-new-20 outline-none focus:border-secondary-8 dark:border-gray-new-20 dark:bg-gray-new-10 dark:text-gray-new-90 dark:focus:border-primary-1"
-            value={activeLang.key}
-            onChange={(event) => {
-              setLangKey(event.target.value);
-              setView('code');
-            }}
-          >
-            {languages.map((lang) => (
-              <option key={lang.key} value={lang.key}>
-                {lang.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        {activeLang.install && (
-          <code className="rounded bg-gray-new-94 px-2 py-1 text-[12px] text-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-80">
-            {activeLang.install}
-          </code>
-        )}
-      </div>
-
-      <div>
-        <div className="flex items-center gap-1 border border-b-0 border-gray-new-80 bg-gray-new-98 px-1 pt-1 dark:border-gray-new-20 dark:bg-gray-new-8">
-          {[
-            { key: 'code', label: codeFilename },
-            { key: 'env', label: '.env' },
-          ].map((tab) => (
-            <button
-              key={tab.key}
-              type="button"
-              className={cn(
-                'rounded-t-md px-3 py-1.5 text-[13px] font-medium transition-colors',
-                (tab.key === 'env') === isEnv
-                  ? 'bg-white text-gray-new-10 dark:bg-gray-new-10 dark:text-white'
-                  : 'text-gray-new-50 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80'
-              )}
-              onClick={() => setView(tab.key)}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-        <CodeBlockWrapper
-          className="overflow-hidden rounded-b-md border border-gray-new-80 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10"
-          as="div"
-          copyCode={shownCode}
-        >
-          <HighlightedCode code={shownCode} language={shownLang} />
-        </CodeBlockWrapper>
-      </div>
-    </div>
-  );
-};
-
-RowDetail.propTypes = {
-  row: PropTypes.object.isRequired,
-  snippets: PropTypes.object.isRequired,
-  mode: PropTypes.string.isRequired,
-};
-
-const ModelIndexClient = ({ rows, snippets }) => {
-  const [mode, setMode] = useState('text');
+const ModelIndexClient = ({ rows }) => {
+  const router = useRouter();
+  const rootRef = useRef(null);
+  const filtersRef = useRef(null);
+  const [mode, setMode] = useState('all');
   const [search, setSearch] = useState('');
   const [providerFilter, setProviderFilter] = useState(() => new Set());
   const [openWeightsOnly, setOpenWeightsOnly] = useState(false);
   const [sort, setSort] = useState({ key: 'releaseDate', dir: 'desc' });
-  const [expandedId, setExpandedId] = useState(null);
+  const [filtersHeight, setFiltersHeight] = useState(0);
 
   const providers = useMemo(() => {
     const present = new Set(rows.map((row) => row.provider));
@@ -379,11 +283,13 @@ const ModelIndexClient = ({ rows, snippets }) => {
 
   const visibleRows = useMemo(() => {
     const query = search.trim().toLowerCase();
-    let list = rows.filter((row) => (mode === 'image' ? row.isImageCapable : true));
-    if (mode === 'text') {
-      if (providerFilter.size > 0) list = list.filter((row) => providerFilter.has(row.provider));
-      if (openWeightsOnly) list = list.filter((row) => row.openWeights);
-    }
+    let list = rows.filter((row) => {
+      if (mode === 'image') return row.isImageCapable;
+      if (mode === 'text') return row.inputs.includes('text');
+      return true;
+    });
+    if (providerFilter.size > 0) list = list.filter((row) => providerFilter.has(row.provider));
+    if (openWeightsOnly) list = list.filter((row) => row.openWeights);
     if (query) {
       list = list.filter(
         (row) =>
@@ -399,7 +305,6 @@ const ModelIndexClient = ({ rows, snippets }) => {
   const changeMode = (next) => {
     if (next === mode) return;
     setMode(next);
-    setExpandedId(null);
   };
 
   const onSort = (key) => {
@@ -417,175 +322,288 @@ const ModelIndexClient = ({ rows, snippets }) => {
     });
   };
 
+  const getModelHref = (modelId) =>
+    `/docs/ai-gateway/models/${encodeURIComponent(modelId)}${mode === 'image' ? '?mode=image' : ''}`;
+
+  useEffect(() => {
+    const filters = filtersRef.current;
+    if (!filters) return undefined;
+
+    const updateFiltersHeight = () => setFiltersHeight(filters.offsetHeight);
+    const resizeObserver = new ResizeObserver(updateFiltersHeight);
+    resizeObserver.observe(filters);
+    updateFiltersHeight();
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    const aside = document.querySelector('[data-docs-aside]');
+    const stickyContent = aside?.firstElementChild;
+
+    if (!root || !aside || !stickyContent) return undefined;
+
+    let animationFrame;
+    const updateOcclusion = () => {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(() => {
+        const rootRect = root.getBoundingClientRect();
+        const stickyTop = Number.parseFloat(getComputedStyle(stickyContent).top) || 0;
+        const stickyBottom = stickyTop + stickyContent.offsetHeight;
+        const obstacleTop = rootRect.top - ASIDE_COLLISION_GAP;
+        const obstacleBottom = rootRect.bottom + ASIDE_COLLISION_GAP;
+        const overlaps = obstacleTop < stickyBottom && obstacleBottom > stickyTop;
+        let translateY = 0;
+        let occluded = false;
+
+        if (overlaps) {
+          if (obstacleTop > stickyTop) {
+            // The table is approaching from below: let the sticky rail be
+            // pushed upward so its lower edge stops before the wide block.
+            translateY = obstacleTop - stickyBottom;
+          } else if (obstacleBottom < stickyBottom) {
+            // The table has passed: reveal the rail immediately below it and
+            // let it settle back into its sticky position.
+            translateY = obstacleBottom - stickyTop;
+          } else {
+            translateY = -stickyContent.offsetHeight;
+            occluded = true;
+          }
+        }
+
+        stickyContent.style.transform = `translate3d(0, ${translateY}px, 0)`;
+        aside.dataset.occluded = String(occluded);
+        aside.inert = occluded;
+      });
+    };
+
+    const resizeObserver = new ResizeObserver(updateOcclusion);
+    resizeObserver.observe(root);
+    resizeObserver.observe(stickyContent);
+    window.addEventListener('scroll', updateOcclusion, { passive: true });
+    window.addEventListener('resize', updateOcclusion);
+    updateOcclusion();
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      resizeObserver.disconnect();
+      window.removeEventListener('scroll', updateOcclusion);
+      window.removeEventListener('resize', updateOcclusion);
+      delete aside.dataset.occluded;
+      aside.inert = false;
+      stickyContent.style.removeProperty('transform');
+    };
+  }, []);
+
   return (
-    <div className="not-prose my-6">
-      {/* Text / Image tabs */}
-      <div className="mb-4 inline-flex rounded-lg border border-gray-new-90 bg-gray-new-98 p-1 dark:border-gray-new-20 dark:bg-gray-new-8">
-        {[
-          { key: 'text', label: 'Text' },
-          { key: 'image', label: 'Image' },
-        ].map((tab) => (
-          <button
-            key={tab.key}
-            type="button"
-            className={cn(
-              'rounded-md px-4 py-1.5 text-sm font-medium transition-colors',
-              mode === tab.key
-                ? 'bg-white text-gray-new-10 shadow-sm dark:bg-gray-new-10 dark:text-white'
-                : 'text-gray-new-50 hover:text-gray-new-30 dark:text-gray-new-60 dark:hover:text-gray-new-80'
-            )}
-            onClick={() => changeMode(tab.key)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Controls */}
-      <div className="mb-4 flex flex-wrap items-center gap-3">
-        <label className="relative min-w-[200px] flex-1">
-          <span className="sr-only">Search models</span>
-          <input
-            className="h-10 w-full rounded-md border border-gray-new-80 bg-white px-3 text-sm text-gray-new-15 outline-none placeholder:text-gray-new-50 focus:border-secondary-8 dark:border-gray-new-20 dark:bg-black-pure dark:text-white dark:placeholder:text-gray-new-60 dark:focus:border-primary-1"
-            type="search"
-            value={search}
-            placeholder="Search model, ID, or provider..."
-            onChange={(event) => setSearch(event.target.value)}
-          />
-        </label>
-
-        {mode === 'text' && (
-          <>
-            <ProviderMultiSelect
-              providers={providers}
-              selected={providerFilter}
-              onToggle={toggleProvider}
-              onClear={() => setProviderFilter(new Set())}
-            />
-            <label className="flex cursor-pointer items-center gap-2 text-[13px] text-gray-new-40 dark:text-gray-new-60">
-              <input
-                type="checkbox"
-                className="size-4 rounded border-gray-new-70 accent-secondary-8 dark:accent-primary-1"
-                checked={openWeightsOnly}
-                onChange={(event) => setOpenWeightsOnly(event.target.checked)}
-              />
-              Open weights only
+    <div
+      ref={rootRef}
+      className="not-prose relative z-20 my-11 w-[min(1380px,calc(100vw-472px))] bg-white dark:bg-black-pure 2xl:w-[calc(100vw-408px)] xl:w-full md:my-8"
+    >
+      <div
+        ref={filtersRef}
+        className="sticky top-[var(--docs-header-height)] z-50 mb-0 flex flex-wrap items-center justify-between gap-3 bg-white pt-5 pb-5 dark:bg-black-pure lg:top-0"
+      >
+        <div className="flex max-w-full flex-wrap items-center gap-3">
+          <div className="relative w-87 max-w-full">
+            <label className="sr-only" htmlFor="ai-gateway-model-search">
+              Search models
             </label>
-          </>
-        )}
+            <SearchIcon className="pointer-events-none absolute top-1/2 left-4 size-3.5 -translate-y-1/2 text-gray-new-30 dark:text-gray-new-70" />
+            <input
+              id="ai-gateway-model-search"
+              className="h-9 w-full border border-gray-new-80 bg-gray-new-98 pr-10 pl-9 text-[.8125rem] text-black-pure transition-colors outline-none placeholder:text-gray-new-40 hover:border-gray-new-70 focus:border-gray-new-30 dark:border-gray-new-20 dark:bg-black-new dark:text-white dark:placeholder:text-gray-new-60 dark:hover:border-gray-new-30 dark:focus:border-gray-new-60 md:text-base search-cancel:appearance-none"
+              type="search"
+              value={search}
+              placeholder="Search model, ID, or provider..."
+              onChange={(event) => setSearch(event.target.value)}
+            />
+            {search && (
+              <button
+                type="button"
+                className="absolute top-1/2 right-3 flex size-5 -translate-y-1/2 items-center justify-center text-gray-new-60 transition-colors hover:text-gray-new-40 dark:text-gray-new-70 dark:hover:text-gray-new-80"
+                aria-label="Clear search"
+                onClick={() => setSearch('')}
+              >
+                <ClearIcon />
+              </button>
+            )}
+          </div>
+
+          <div
+            className="inline-flex h-9 border border-gray-new-80 bg-white p-0.75 dark:border-gray-new-20 dark:bg-black-new"
+            role="group"
+            aria-label="Filter models by type"
+          >
+            {MODEL_TYPES.map((tab) => (
+              <button
+                key={tab.key}
+                type="button"
+                aria-pressed={mode === tab.key}
+                className={cn(
+                  'px-2 text-[.8125rem] font-medium tracking-normal transition-colors focus-visible:outline-gray-new-30 focus-visible:dark:outline-gray-new-60',
+                  mode === tab.key
+                    ? 'bg-gray-new-94 text-gray-new-10 dark:bg-[#1D1E20] dark:text-white'
+                    : 'text-gray-new-50 hover:text-gray-new-30 dark:text-[#8E9196] dark:hover:text-gray-new-80'
+                )}
+                onClick={() => changeMode(tab.key)}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <ProviderMultiSelect
+            providers={providers}
+            selected={providerFilter}
+            onToggle={toggleProvider}
+            onClear={() => setProviderFilter(new Set())}
+          />
+          <label
+            className={cn(
+              'group/check flex h-9 cursor-pointer items-center gap-2 border bg-transparent px-3 text-[.8125rem] tracking-normal text-gray-new-15 transition-colors focus-within:border-gray-new-30 hover:border-gray-new-70 dark:text-[#F1F2F4] dark:focus-within:border-gray-new-60 dark:hover:border-gray-new-30',
+              openWeightsOnly
+                ? 'border-gray-new-60 dark:border-gray-new-40'
+                : 'border-gray-new-80 dark:border-gray-new-20'
+            )}
+          >
+            <input
+              type="checkbox"
+              className="sr-only"
+              checked={openWeightsOnly}
+              onChange={(event) => setOpenWeightsOnly(event.target.checked)}
+            />
+            <span
+              className={cn(
+                'flex size-3 shrink-0 items-center justify-center border transition-colors',
+                openWeightsOnly
+                  ? 'border-[#2D8665] bg-[#2D8665] text-white dark:border-green-52 dark:bg-green-52 dark:text-black-new'
+                  : 'border-gray-new-60 group-hover/check:border-gray-new-40 dark:border-gray-new-40 group-hover/check:dark:border-gray-new-60'
+              )}
+              aria-hidden
+            >
+              {openWeightsOnly && <CheckMark />}
+            </span>
+            Open weights only
+          </label>
+        </div>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-new-90 dark:border-gray-new-20">
-        <table className="ai-gateway-model-table my-0! w-full min-w-[860px] border-collapse text-sm">
-          <thead>
-            <tr className="border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
-              {COLUMNS.map((column, index) => (
-                <th
-                  key={column.key}
-                  scope="col"
-                  className={cn(
-                    'px-3 py-2.5 font-medium text-gray-new-40 dark:text-gray-new-60',
-                    index === 0 && 'pl-5',
-                    index === COLUMNS.length - 1 && 'pr-5',
-                    column.align === 'right' ? 'text-right' : 'text-left'
-                  )}
-                >
-                  {column.sortable ? (
-                    <button
-                      type="button"
-                      className={cn(
-                        'group inline-flex items-center transition-colors hover:text-gray-new-20 dark:hover:text-white',
-                        column.align === 'right' && 'flex-row-reverse'
-                      )}
-                      onClick={() => onSort(column.key)}
-                    >
-                      {column.label}
-                      <SortArrow active={sort.key === column.key} dir={sort.dir} />
-                    </button>
-                  ) : (
-                    column.label
-                  )}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {visibleRows.map((row) => {
-              const expanded = expandedId === row.id;
-              return (
-                <Fragment key={row.id}>
-                  <tr
-                    className={cn(
-                      'cursor-pointer border-t border-gray-new-90 transition-colors first:border-t-0 hover:bg-gray-new-98 dark:border-gray-new-20 dark:hover:bg-gray-new-8',
-                      expanded && 'bg-gray-new-98 dark:bg-gray-new-8'
-                    )}
-                    onClick={() => setExpandedId(expanded ? null : row.id)}
+      <StickyTable
+        className="ai-gateway-model-table my-0! w-full min-w-290! table-fixed border-collapse text-[.8125rem]"
+        headerClassName="pointer-events-auto! border-x border-t border-gray-new-80 2xl:px-0! dark:border-gray-new-20"
+        headerKey={`${sort.key}:${sort.dir}`}
+        interactiveHeader
+        nativeSticky
+        stickyTopOffset={filtersHeight}
+      >
+        <div className="table-wrapper my-0! overflow-x-auto border border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure 2xl:mx-0! 2xl:px-0!">
+          <table className="ai-gateway-model-table my-0! w-full min-w-290! table-fixed border-collapse text-[.8125rem]">
+            <colgroup>
+              <col className="w-[19%]" />
+              <col className="w-[21%]" />
+              <col className="w-[10%]" />
+              <col className="w-[15%]" />
+              <col className="w-[5%]" />
+              <col className="w-[8%]" />
+              <col className="w-[5%]" />
+              <col className="w-[5%]" />
+              <col className="w-[9%]" />
+            </colgroup>
+            <thead>
+              <tr className="border-b border-gray-new-80 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8">
+                {COLUMNS.map((column) => (
+                  <th
+                    key={column.key}
+                    scope="col"
+                    className="px-4! py-3.5! text-left! text-xs font-medium whitespace-nowrap text-gray-new-50 dark:text-gray-new-60"
                   >
-                    <td className="py-2.5 pr-3 pl-5 font-medium text-gray-new-10 dark:text-white">
-                      <span className="inline-flex items-center gap-1.5">
-                        <span
-                          className={cn(
-                            'inline-block text-[9px] text-gray-new-50 transition-transform',
-                            expanded && 'rotate-90'
-                          )}
-                          aria-hidden
-                        >
-                          ▶
-                        </span>
+                    {column.sortable ? (
+                      <button
+                        type="button"
+                        className="group inline-flex items-center transition-colors hover:text-gray-new-20 dark:hover:text-white"
+                        onClick={() => onSort(column.key)}
+                      >
+                        {column.label}
+                        <SortArrow active={sort.key === column.key} dir={sort.dir} />
+                      </button>
+                    ) : (
+                      column.label
+                    )}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {visibleRows.map((row) => {
+                const href = getModelHref(row.id);
+                return (
+                  <tr
+                    key={row.id}
+                    className="cursor-pointer border-b border-gray-new-80 transition-colors last:border-b-0 hover:bg-gray-new-98 dark:border-gray-new-20 dark:hover:bg-gray-new-8"
+                    onClick={(event) => {
+                      if (!event.target.closest('a, button, input, select')) router.push(href);
+                    }}
+                  >
+                    <td className="py-4! pl-4! text-left!">
+                      <Link
+                        href={href}
+                        className="font-medium text-gray-new-10 no-underline! dark:text-white"
+                      >
                         {row.name}
-                      </span>
+                      </Link>
                     </td>
-                    <td className="px-3 py-2.5">
+                    <td className="py-4! pl-4! text-left!">
                       <CopyableModelId id={row.id} />
                     </td>
-                    <td className="px-3 py-2.5 text-gray-new-30 dark:text-gray-new-80">
-                      {row.providerName}
+                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
+                      <span className="flex items-center gap-2 whitespace-nowrap">
+                        <ProviderLogo provider={row.provider} />
+                        {row.providerName}
+                      </span>
                     </td>
-                    <td className="px-3 py-2.5 text-gray-new-40 dark:text-gray-new-60">
+                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-40 dark:text-gray-new-60">
                       {row.inputsLabel}
                     </td>
-                    <td className="px-3 py-2.5 text-right font-mono text-[13px] text-gray-new-30 dark:text-gray-new-80">
+                    <td className="py-4! pl-4! text-left! font-mono text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
                       {row.contextLabel}
                     </td>
-                    <td className="px-3 py-2.5 text-right text-gray-new-40 dark:text-gray-new-60">
+                    <td className="py-4! pl-4! text-left! text-[.8125rem]! text-gray-new-40 dark:text-gray-new-60">
                       {row.releaseLabel}
                     </td>
-                    <td className="px-3 py-2.5 text-right font-mono text-[13px] text-gray-new-30 dark:text-gray-new-80">
+                    <td className="py-4! pl-4! text-left! font-mono text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
                       {row.costInputLabel}
                     </td>
-                    <td className="px-3 py-2.5 text-right font-mono text-[13px] text-gray-new-30 dark:text-gray-new-80">
+                    <td className="py-4! pl-4! text-left! font-mono text-[.8125rem]! text-gray-new-30 dark:text-gray-new-80">
                       {row.costOutputLabel}
                     </td>
-                    <td className="py-2.5 pr-5 pl-3 whitespace-nowrap text-gray-new-40 dark:text-gray-new-60">
+                    <td className="pr-4! text-left! text-[.8125rem]! whitespace-nowrap text-gray-new-40 dark:text-gray-new-60">
                       {row.openWeights ? 'Open weights' : '—'}
                     </td>
                   </tr>
-                  {expanded && (
-                    <tr>
-                      <td colSpan={COLUMNS.length} className="p-0">
-                        <RowDetail row={row} snippets={snippets} mode={mode} />
-                      </td>
-                    </tr>
-                  )}
-                </Fragment>
-              );
-            })}
-            {visibleRows.length === 0 && (
-              <tr>
-                <td
-                  colSpan={COLUMNS.length}
-                  className="px-3 py-8 text-center text-gray-new-40 dark:text-gray-new-60"
-                >
-                  No models match your filters.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+                );
+              })}
+              {visibleRows.length === 0 && (
+                <tr className="border-b-0!">
+                  <td
+                    colSpan={COLUMNS.length}
+                    className="px-3 py-8 text-center text-gray-new-40 dark:text-gray-new-60"
+                  >
+                    No models match your filters.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </StickyTable>
 
-      <p className="mt-3 text-[13px] text-gray-new-40 dark:text-gray-new-60">
+      <p className="mt-3 text-[.8125rem] text-gray-new-40 dark:text-gray-new-60">
         Prices are provider list prices per million tokens. Inference is free during the private
         preview. Click a model for a copy-paste quickstart.
       </p>
@@ -595,11 +613,6 @@ const ModelIndexClient = ({ rows, snippets }) => {
 
 ModelIndexClient.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
-  snippets: PropTypes.shape({
-    modelIdPlaceholder: PropTypes.string.isRequired,
-    tabs: PropTypes.object.isRequired,
-    envExample: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
 export default ModelIndexClient;
