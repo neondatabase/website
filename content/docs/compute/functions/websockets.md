@@ -7,7 +7,7 @@ summary: >-
   from @neon/functions or a lower-level upgrade export, server-sent events for
   one-way streams, and Postgres LISTEN/NOTIFY to broadcast across isolates.
 enableTableOfContents: true
-updatedOn: '2026-08-07T14:11:22.722Z'
+updatedOn: '2026-08-07T21:00:07.264Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -124,7 +124,8 @@ Watch the package name. This page recommends `upgradeWebSocket` from `@neon/func
 
 - `upgradeWebSocket` from `@hono/node-server` doesn't work with Neon Functions. It requires Hono's own `serve()` wrapper, which the runtime doesn't use.
 - For Hono-style `onOpen`/`onMessage`/`onClose` route declarations, the `neon-functions` agent skill provides a `createNeonWebSocket` adapter with its own `upgradeWebSocket` helper.
-  </Admonition>
+
+</Admonition>
 
 ```ts filename="functions/hono-echo.ts"
 import { Hono } from 'hono';
