@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-08-06T16:37:03.541Z'
+updatedOn: '2026-08-07T15:09:20.266Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) make it easy to ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a platform-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
@@ -60,10 +60,10 @@ neon init
 
 Use the default setup options for all prompts: this includes enabling AI skills, configuring the MCP server, and installing the VS Code extension. These steps ensure AI agents such as Claude Code and Cursor can assist you in building with Neon.
 
-During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** skills so AI agents have the context to help you build and deploy your function. Install it with the following command:
+During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** and **Neon AI Gateway** skills so AI agents have the context to help you build and deploy your function. Install them with the following command:
 
 ```bash
-npx skills add https://github.com/neondatabase/agent-skills --skill neon-functions
+npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions
 ```
 
 Link your local workspace to a Neon project:
@@ -90,7 +90,7 @@ INFO: Pulled 3 Neon variables into ~/neon-sentry-demo/.env.local: NEON_BRANCH, D
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
 ✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
 INFO: Created neon.ts declaring functions.
-INFO: Created hello.ts — the source of the hello function.
+INFO: Created hello.ts - the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…
 ```
 
@@ -173,20 +173,24 @@ Create `src/instrument.ts`:
 
 ```ts filename="src/instrument.ts"
 import * as Sentry from "@sentry/node";
+import { parseEnv } from "@neon/env";
+import { config } from "../neon";
+
+const env = parseEnv(config, "api");
 
 Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  enabled: Boolean(process.env.SENTRY_DSN),
+  dsn: env.function.SENTRY_DSN,
+  enabled: Boolean(env.function.SENTRY_DSN),
   enableLogs: true,
-  tracesSampleRate: Number(process.env.SENTRY_TRACES_SAMPLE_RATE ?? 1),
+  tracesSampleRate: Number(env.function.SENTRY_TRACES_SAMPLE_RATE ?? 1),
   integrations: [
     // The request root span comes from the Hono middleware, so skip the SDK's own.
     Sentry.httpIntegration({ disableIncomingRequestSpans: true }),
   ],
-  release: process.env.SENTRY_RELEASE,
+  release: env.function.SENTRY_RELEASE,
   environment:
-    process.env.NEON_BRANCH && process.env.NEON_BRANCH !== process.env.PRODUCTION_BRANCH
-      ? process.env.NEON_BRANCH
+    env.branch && env.branch.name !== env.function.PRODUCTION_BRANCH
+      ? env.branch.name
       : "production",
 });
 
@@ -196,7 +200,7 @@ process.on("SIGINT", () => void Sentry.flush(2000));
 export { Sentry };
 ```
 
-Here's what each piece does:
+`parseEnv` reads `env.function.*` from the variables you declared on the `api` function in `neon.ts`, and `env.branch` from the `NEON_BRANCH` the runtime injects. It returns a typed object validated against your config, so a small typo like `env.function.SENRY_DSN` fails at build time instead of silently reading an undefined variable. Here's what each piece of the init does:
 
 - **`enabled`** turns the SDK into a no-op when `SENTRY_DSN` is missing. That keeps `neon dev` and any unconfigured branch from sending telemetry to Sentry.
 - **`enableLogs`** switches on the `Sentry.logger.*` structured logging API, which is off by default.
@@ -483,9 +487,6 @@ The `neon link` command created a `neon.ts` file in your project root. Update it
 
 ```ts filename="neon.ts" {12-24}
 import { defineConfig } from "@neon/config/v1";
-import { config as loadEnv } from "dotenv";
-
-loadEnv({ path: ".env.local" });
 
 export default defineConfig({
   branch: (branch) => {
@@ -514,6 +515,7 @@ Here's what each property does:
 
 - **`preview.functions.api`** registers `src/index.ts` as a deployable Neon Function named "Sentry-Instrumented API".
 - **`env`** passes the Sentry variables from your `.env.local` file to the function at runtime. The values resolve when `neon deploy` evaluates the config, which keeps secrets out of source control. Neon-injected variables like `NEON_BRANCH` don't need to be declared here; they're injected automatically.
+- **`export default config`** exposes the config object so your code can pass it to `parseEnv` for type-safe variable access. Command-line tooling reads the same value from the default export.
 
 Apply the configuration and deploy your function to Neon:
 
@@ -536,6 +538,7 @@ Copy this function endpoint URL. You'll use it in the verification steps below. 
 You can run the function with the local dev server:
 
 ```bash
+set -a && source .env.local && set +a # Read the Sentry variables into the shell environment
 neon dev
 ```
 
@@ -596,22 +599,26 @@ Next, extend the Sentry initialization in `src/instrument.ts` to include the AI 
 
 ```ts filename="src/instrument.ts" shouldWrap
 import * as Sentry from "@sentry/node";
+import { parseEnv } from "@neon/env";
+import { config } from "./neon";
+
+const env = parseEnv(config, "api");
 
 Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  enabled: Boolean(process.env.SENTRY_DSN),
+  dsn: env.function.SENTRY_DSN,
+  enabled: Boolean(env.function.SENTRY_DSN),
   enableLogs: true,
-  tracesSampleRate: Number(process.env.SENTRY_TRACES_SAMPLE_RATE ?? 1),
+  tracesSampleRate: Number(env.function.SENTRY_TRACES_SAMPLE_RATE ?? 1),
   traceLifecycle: "stream", // [!code ++]
   streamGenAiSpans: true, // [!code ++]
   integrations: [
     Sentry.vercelAIIntegration({ force: true }), // [!code ++]
     Sentry.httpIntegration({ disableIncomingRequestSpans: true }),
   ],
-  release: process.env.SENTRY_RELEASE,
+  release: env.function.SENTRY_RELEASE,
   environment:
-    process.env.NEON_BRANCH && process.env.NEON_BRANCH !== process.env.PRODUCTION_BRANCH
-      ? process.env.NEON_BRANCH
+    env.branch && env.branch !== env.function.PRODUCTION_BRANCH
+      ? env.branch
       : "production",
 });
 
@@ -629,10 +636,14 @@ Now add a route to `src/index.ts`. The `POST /chat` route streams a tool-calling
 import { streamText, tool, isStepCount } from "ai";
 import { neon } from "@neon/ai-sdk-provider";
 import { z } from "zod";
+import { parseEnv } from "@neon/env";
+import { config } from "./neon";
 
 // ... other imports and app setup ...
 
-const MODEL = process.env.AGENT_MODEL ?? "gpt-oss-120b";
+const env = parseEnv(config, "api");
+
+const MODEL = env.function.AGENT_MODEL;
 
 app.post("/chat", async (c) => {
   const { messages } = await c.req.json();
@@ -705,6 +716,7 @@ Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway:
           SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
           SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
           PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
+          AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b",
         },
       }
     },
