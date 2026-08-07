@@ -89,6 +89,13 @@ jobs:
       # crashes. That masked a partial npm install (ERR_MODULE_NOT_FOUND on ajv)
       # for months, so no drift was ever reported.
       # PRs: offline verification only (deterministic, no network dependency).
+      # The catalog classification and validation rules are pure functions with
+      # their own tests. unit-tests.yml only runs weekly, so without this a
+      # regression in either could merge unnoticed.
+      - name: Test the catalog rules
+        shell: bash
+        run: npx vitest run scripts/lib/models-catalog.test.js
+
       - name: Verify (offline)
         if: github.event_name == 'pull_request'
         shell: bash
@@ -114,9 +121,19 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          node src/scripts/check-models-sync.mjs --ci > mirror-report.txt 2>&1 || true
+          status=0
+          node src/scripts/check-models-sync.mjs --ci > mirror-report.txt 2>&1 || status=$?
+          # Exit 1 is a fault and exit 2 is an unreadable catalog; both are
+          # reported by the verify step above. Only act on the issue when the
+          # comparison actually succeeded, or a failed read would look like a
+          # mirror that has caught up and close the issue.
+          if [ "${status}" -ne 0 ]; then
+            echo "sync check exited ${status}; leaving the tracking issue untouched"
+            cat mirror-report.txt
+            exit 0
+          fi
           title="models.dev mirror is behind neon.com/models.json"
-          existing="$(gh issue list --state open --search "${title} in:title" --json number --jq '.[0].number' 2>/dev/null || echo '')"
+          existing="$(gh issue list --state open --search "${title} in:title" --json number --jq '.[0].number')"
           if grep -q '\[SYNC DEBT\]' mirror-report.txt; then
             body="$(cat mirror-report.txt)"
             body="${body}"$'\n\n'"— Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"

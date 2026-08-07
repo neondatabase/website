@@ -44,12 +44,34 @@ async function fetchJson(url) {
   return res.json();
 }
 
+// A mirror that answers with an empty or malformed catalog is a broken read, not
+// a catalog that happens to differ. Classifying it would report every model we
+// publish as ordinary sync debt and exit 0 on a payload nobody can trust.
 function extractNeonModels(apiJson, source) {
   const models = apiJson?.neon?.models;
-  if (!models || typeof models !== 'object') {
+  if (!models || typeof models !== 'object' || Array.isArray(models)) {
     throw new Error(`No "neon.models" map found in ${source}`);
   }
+  const ids = Object.keys(models);
+  if (ids.length === 0) {
+    throw new Error(`"neon.models" in ${source} is empty`);
+  }
+  const malformed = ids.filter((id) => !models[id] || typeof models[id] !== 'object');
+  if (malformed.length > 0) {
+    throw new Error(`"neon.models" in ${source} has non-object entries: ${malformed.join(', ')}`);
+  }
   return models;
+}
+
+const KNOWN_FLAGS = new Set(['--ci', '--json', '--strict', '--verbose']);
+
+function rejectUnknownFlags(args) {
+  const unknown = args.filter((a) => a.startsWith('-') && !KNOWN_FLAGS.has(a));
+  if (unknown.length > 0) {
+    console.error(`Unknown option(s): ${unknown.join(', ')}`);
+    console.error(`Known options: ${[...KNOWN_FLAGS].join(', ')}`);
+    process.exit(2);
+  }
 }
 
 async function loadWebsite() {
@@ -70,6 +92,7 @@ async function loadWebsite() {
 
 async function main() {
   const args = process.argv.slice(2);
+  rejectUnknownFlags(args);
   const jsonMode = args.includes('--json');
   const strict = args.includes('--strict');
   const verbose = args.includes('--verbose') || (!args.includes('--ci') && !process.env.CI);
@@ -88,7 +111,13 @@ async function main() {
     process.exit(2);
   }
 
-  const drift = classifyDrift(website.models, mirror.models);
+  let drift;
+  try {
+    drift = classifyDrift(website.models, mirror.models);
+  } catch (err) {
+    console.error(`Could not compare the catalogs: ${err.message}`);
+    process.exit(2);
+  }
   const exitCode = drift.hasFault || (strict && drift.hasSyncDebt) ? 1 : 0;
 
   if (jsonMode) {

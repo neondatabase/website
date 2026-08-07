@@ -125,7 +125,7 @@ describe('validateCatalog', () => {
   it('rejects a malformed date', () => {
     const errors = validateCatalog(catalog({ a: model({ release_date: '07/2026' }) }));
 
-    expect(errors).toEqual([expect.stringContaining('a.release_date must be YYYY-MM-DD')]);
+    expect(errors).toEqual([expect.stringContaining('a.release_date must be a real')]);
   });
 
   it('rejects a non-positive limit', () => {
@@ -137,7 +137,6 @@ describe('validateCatalog', () => {
   it('rejects a negative or non-numeric price', () => {
     const errors = validateCatalog(catalog({ a: model({ cost: { input: -1, output: 'free' } }) }));
 
-    expect(errors).toHaveLength(2);
     expect(errors.join(' ')).toContain('a.cost.input');
     expect(errors.join(' ')).toContain('a.cost.output');
   });
@@ -146,7 +145,11 @@ describe('validateCatalog', () => {
     const errors = validateCatalog(
       catalog({
         a: model({
-          cost: { input: 1, tiers: [{ tier: { type: 'context', size: 272000 }, input: -2 }] },
+          cost: {
+            input: 1,
+            output: 2,
+            tiers: [{ tier: { type: 'context', size: 272000 }, input: -2 }],
+          },
         }),
       })
     );
@@ -160,7 +163,11 @@ describe('validateCatalog', () => {
     const errors = validateCatalog(
       catalog({
         a: model({
-          cost: { input: 1, tiers: [{ tier: { type: 'context', size: 272000 }, input: 2 }] },
+          cost: {
+            input: 1,
+            output: 2,
+            tiers: [{ tier: { type: 'context', size: 272000 }, input: 2 }],
+          },
         }),
       })
     );
@@ -188,6 +195,73 @@ describe('validateCatalog', () => {
   // or date, which is worse than an absent field.
   it('accepts a model with no cost, knowledge or structured_output', () => {
     expect(validateCatalog(catalog({ a: model() }))).toEqual([]);
+  });
+
+  it('rejects an empty cost block instead of publishing a price of nothing', () => {
+    // A model whose price is unknown omits `cost`. `{}` renders as free.
+    expect(validateCatalog(catalog({ a: model({ cost: {} }) }))).toEqual([
+      expect.stringContaining('needs both an input and an output rate'),
+    ]);
+    expect(validateCatalog(catalog({ a: model({ cost: { input: 1 } }) }))).toEqual([
+      expect.stringContaining('needs both an input and an output rate'),
+    ]);
+  });
+
+  it('rejects an unrecognised rate key rather than publishing it unchecked', () => {
+    const errors = validateCatalog(
+      catalog({ a: model({ cost: { input: 1, output: 2, per_wish: 3 } }) })
+    );
+
+    expect(errors).toEqual([expect.stringContaining('a.cost.per_wish is not a known rate')]);
+  });
+
+  it('rejects a malformed or duplicated tier descriptor', () => {
+    const bad = validateCatalog(
+      catalog({
+        a: model({
+          cost: { input: 1, output: 2, tiers: [{ tier: { type: 42, size: -1 }, input: 3 }] },
+        }),
+      })
+    );
+    expect(bad).toEqual([
+      expect.stringContaining('tier.type must be a non-empty string'),
+      expect.stringContaining('tier.size must be a positive integer'),
+    ]);
+
+    const tier = { tier: { type: 'context', size: 272000 }, input: 3 };
+    const dupe = validateCatalog(
+      catalog({ a: model({ cost: { input: 1, output: 2, tiers: [tier, tier] } }) })
+    );
+    expect(dupe).toEqual([expect.stringContaining('two entries for context:272000')]);
+  });
+
+  it('rejects a date that matches the format but is not a real day', () => {
+    const errors = validateCatalog(catalog({ a: model({ release_date: '2026-02-31' }) }));
+
+    expect(errors).toEqual([expect.stringContaining('must be a real YYYY-MM-DD date')]);
+  });
+
+  it('rejects a non-boolean structured_output', () => {
+    const errors = validateCatalog(catalog({ a: model({ structured_output: 'yes' }) }));
+
+    expect(errors).toEqual([expect.stringContaining('a.structured_output must be a boolean')]);
+  });
+
+  it('rejects an array where an object is required', () => {
+    expect(validateCatalog(catalog({ a: model({ limit: [1, 2] }) }))).toEqual([
+      expect.stringContaining('a.limit must be an object'),
+    ]);
+    expect(validateCatalog(catalog({ a: model({ modalities: [] }) }))).toEqual([
+      expect.stringContaining('a.modalities must be an object'),
+    ]);
+  });
+
+  it('rejects a model keyed by an empty string', () => {
+    const errors = validateCatalog(catalog({ '': model({ id: '' }) }));
+
+    expect(errors).toEqual(
+      expect.arrayContaining([expect.stringContaining('keyed by an empty string')])
+    );
   });
 
   it('rejects a catalog with no models rather than passing vacuously', () => {

@@ -30,9 +30,37 @@ export const COMPARE_KEYS = [
   'status',
 ];
 
-const BOOLEAN_KEYS = ['attachment', 'reasoning', 'tool_call', 'temperature', 'open_weights'];
+const BOOLEAN_KEYS = [
+  'attachment',
+  'reasoning',
+  'tool_call',
+  'temperature',
+  'open_weights',
+  'structured_output',
+];
 const DATE_KEYS = ['release_date', 'last_updated', 'knowledge'];
 const ISO_DATE = /^\d{4}-\d{2}(-\d{2})?$/;
+/** Rate keys a `[cost]` block may carry, besides the `tiers` array. */
+const COST_RATE_KEYS = new Set([
+  'input',
+  'output',
+  'cache_read',
+  'cache_write',
+  'input_audio',
+  'output_audio',
+  'reasoning',
+]);
+
+const isPlainObject = (v) => Boolean(v) && typeof v === 'object' && !Array.isArray(v);
+
+// A regex accepts 2026-02-31. Round-tripping through Date does not.
+function isRealDate(value) {
+  if (typeof value !== 'string' || !ISO_DATE.test(value)) return false;
+  const parts = value.split('-').map(Number);
+  const [y, m, d] = [parts[0], parts[1], parts[2] ?? 1];
+  const date = new Date(Date.UTC(y, m - 1, d));
+  return date.getUTCFullYear() === y && date.getUTCMonth() === m - 1 && date.getUTCDate() === d;
+}
 
 function canonical(value) {
   if (Array.isArray(value)) return value.map(canonical);
@@ -133,13 +161,14 @@ export function validateCatalog(data) {
 
   for (const [key, model] of Object.entries(models)) {
     const at = (field) => `${key}.${field}`;
-    if (!model || typeof model !== 'object') {
+    if (key.trim() === '') fail('a model is keyed by an empty string');
+    if (!isPlainObject(model)) {
       fail(`${key} is not an object`);
       continue;
     }
     if (model.id !== key) fail(`${at('id')} is ${JSON.stringify(model.id)}, expected ${key}`);
 
-    for (const field of ['name', 'provider', 'family']) {
+    for (const field of ['id', 'name', 'provider', 'family']) {
       if (typeof model[field] !== 'string' || model[field].trim() === '') {
         fail(`${at(field)} must be a non-empty string`);
       }
@@ -150,24 +179,34 @@ export function validateCatalog(data) {
       }
     }
     for (const field of DATE_KEYS) {
-      if (model[field] !== undefined && !ISO_DATE.test(String(model[field]))) {
-        fail(`${at(field)} must be YYYY-MM-DD, got ${JSON.stringify(model[field])}`);
+      if (model[field] !== undefined && !isRealDate(model[field])) {
+        fail(`${at(field)} must be a real YYYY-MM-DD date, got ${JSON.stringify(model[field])}`);
       }
     }
 
     if (model.modalities !== undefined) {
-      for (const side of ['input', 'output']) {
-        const list = model.modalities?.[side];
-        if (!Array.isArray(list) || list.some((x) => typeof x !== 'string')) {
-          fail(`${at(`modalities.${side}`)} must be an array of strings`);
+      if (!isPlainObject(model.modalities)) {
+        fail(`${at('modalities')} must be an object`);
+      } else {
+        for (const side of ['input', 'output']) {
+          const list = model.modalities[side];
+          if (!Array.isArray(list) || list.some((x) => typeof x !== 'string')) {
+            fail(`${at(`modalities.${side}`)} must be an array of strings`);
+          }
         }
       }
     }
 
     if (model.limit !== undefined) {
-      for (const [field, value] of Object.entries(model.limit)) {
-        if (!Number.isInteger(value) || value <= 0) {
-          fail(`${at(`limit.${field}`)} must be a positive integer, got ${JSON.stringify(value)}`);
+      if (!isPlainObject(model.limit)) {
+        fail(`${at('limit')} must be an object`);
+      } else {
+        for (const [field, value] of Object.entries(model.limit)) {
+          if (!Number.isInteger(value) || value <= 0) {
+            fail(
+              `${at(`limit.${field}`)} must be a positive integer, got ${JSON.stringify(value)}`
+            );
+          }
         }
       }
     }
@@ -195,34 +234,69 @@ export function validateCatalog(data) {
   return errors;
 }
 
-function costErrors(cost, at) {
+/**
+ * A `[cost]` block, or one of the nested rate objects inside it.
+ *
+ * An empty block is rejected rather than tolerated: a model whose price is not
+ * known omits `cost` entirely, and `{}` would render as a price of nothing.
+ */
+function costErrors(cost, at, { requireRates = true } = {}) {
   const errors = [];
-  if (!cost || typeof cost !== 'object') return [`${at} must be an object`];
-  for (const [field, value] of Object.entries(cost)) {
-    if (field === 'tiers') {
-      if (!Array.isArray(value)) {
-        errors.push(`${at}.tiers must be an array`);
-        continue;
-      }
-      value.forEach((tier, i) => errors.push(...costErrors(stripTier(tier), `${at}.tiers[${i}]`)));
+  if (!isPlainObject(cost)) return [`${at} must be an object`];
+
+  const rateKeys = Object.keys(cost).filter((k) => k !== 'tiers');
+  if (requireRates && (typeof cost.input !== 'number' || typeof cost.output !== 'number')) {
+    errors.push(`${at} needs both an input and an output rate; omit cost entirely if unknown`);
+  }
+
+  for (const field of rateKeys) {
+    const value = cost[field];
+    // `context_over_200k` and friends are nested rate objects, not rates.
+    if (isPlainObject(value)) {
+      errors.push(...costErrors(value, `${at}.${field}`, { requireRates: false }));
       continue;
     }
-    // `context_over_200k` and friends are nested rate objects, not rates.
-    if (value && typeof value === 'object') {
-      errors.push(...costErrors(value, `${at}.${field}`));
+    if (!COST_RATE_KEYS.has(field)) {
+      errors.push(`${at}.${field} is not a known rate; add it to COST_RATE_KEYS if it is real`);
       continue;
     }
     if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) {
       errors.push(`${at}.${field} must be a non-negative number, got ${JSON.stringify(value)}`);
     }
   }
-  return errors;
-}
 
-// A tier carries its own `tier` descriptor alongside the rates; the descriptor
-// is metadata (type, size), not a price, so it is not rate-checked.
-function stripTier(tier) {
-  if (!tier || typeof tier !== 'object') return tier;
-  const { tier: _descriptor, ...rates } = tier;
-  return rates;
+  if (cost.tiers !== undefined) {
+    if (!Array.isArray(cost.tiers)) {
+      errors.push(`${at}.tiers must be an array`);
+    } else {
+      const seen = new Set();
+      cost.tiers.forEach((tier, i) => {
+        const where = `${at}.tiers[${i}]`;
+        if (!isPlainObject(tier)) {
+          errors.push(`${where} must be an object`);
+          return;
+        }
+        // The descriptor sits alongside the rates but is metadata, so it is
+        // checked as metadata rather than rate-checked — `size` is a token
+        // count, not a price.
+        const { tier: descriptor, ...rates } = tier;
+        if (!isPlainObject(descriptor)) {
+          errors.push(`${where}.tier must be an object describing when the rate applies`);
+        } else {
+          if (typeof descriptor.type !== 'string' || descriptor.type.trim() === '') {
+            errors.push(`${where}.tier.type must be a non-empty string`);
+          }
+          if (!Number.isInteger(descriptor.size) || descriptor.size <= 0) {
+            errors.push(`${where}.tier.size must be a positive integer`);
+          }
+          const fingerprint = `${descriptor.type}:${descriptor.size}`;
+          if (seen.has(fingerprint)) errors.push(`${at}.tiers has two entries for ${fingerprint}`);
+          seen.add(fingerprint);
+        }
+        errors.push(...costErrors(rates, where, { requireRates: false }));
+      });
+    }
+  }
+
+  return errors;
 }
