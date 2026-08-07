@@ -10,8 +10,6 @@ import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 import { cn } from 'utils/cn';
 
-import HeroServices from './hero-services';
-
 const logos = [
   'replit',
   'outfront',
@@ -24,49 +22,6 @@ const logos = [
   'framer',
 ];
 
-export const heroServiceItems = [
-  {
-    title: 'Lakebase Postgres',
-    description: 'Serverless database that scales and branches with your app.',
-    videoBase: 'postgres-database',
-    aspectRatio: 'aspect-square',
-    width: 512,
-    height: 512,
-  },
-  {
-    title: 'Managed Better Auth',
-    description: 'Authentication with users and sessions stored in Postgres.',
-    videoBase: 'authentication',
-    aspectRatio: 'aspect-512/390',
-    width: 512,
-    height: 390,
-  },
-  {
-    title: 'Functions',
-    description: 'Long-running, without timeouts, and closer to your database.',
-    videoBase: 'compute',
-    aspectRatio: 'aspect-512/308',
-    width: 512,
-    height: 308,
-  },
-  {
-    title: 'Object Storage',
-    description: 'S3-compatible blob storage that branches with your projects.',
-    videoBase: 'storage',
-    aspectRatio: 'aspect-512/696',
-    width: 512,
-    height: 696,
-  },
-  {
-    title: 'AI Gateway',
-    description: 'All models, one API, one bill. Powered by Databricks.',
-    videoBase: 'ai-gateway',
-    aspectRatio: 'aspect-512/226',
-    width: 512,
-    height: 226,
-  },
-];
-
 const Hero = () => (
   <section className="hero relative mt-16 safe-paddings lg:mt-14">
     <Container className="relative z-30 pt-96 pb-2 xl:pt-54 lg:pt-52 md:px-5! md:pt-53" size="1600">
@@ -76,10 +31,8 @@ const Hero = () => (
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-280 text-[68px] leading-dense tracking-tighter xl:max-w-215 xl:text-[60px] lg:max-w-180 lg:text-[48px] md:mt-4 md:text-[42px] sm:text-[32px]">
-        The backend for apps and agents,
-        <br />
-        built to scale on Lakebase Postgres.
+      <h1 className="mt-5 max-w-288 text-[4.5rem] leading-dense tracking-tighter text-balance xl:max-w-244 xl:text-[3.25rem]/dense lg:max-w-200 lg:text-[2.5rem]/dense md:mt-4 md:text-[2.625rem]/dense sm:text-[2rem]/dense">
+        The backend for apps and agents, built to scale on Lakebase Postgres.
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
@@ -91,11 +44,7 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="relative mt-16 md:mt-14 sm:mt-12">
-        <HeroServices items={heroServiceItems} />
-      </div>
-
-      <div className="relative mt-16 border-t border-gray-new-20 pt-10 select-none lg:mt-14 md:mt-12 sm:mt-10 sm:pt-8">
+      <div className="relative mt-11 border-t border-gray-new-20 pt-10 select-none lg:mt-10 md:mt-9 sm:mt-8 sm:pt-8">
         <Logos className="max-w-full p-0!" logos={logos} size="md" />
       </div>
     </Container>
