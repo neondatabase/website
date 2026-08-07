@@ -54,7 +54,7 @@ Read replicas have several benefits:
 
 ## Neon read-only replicas
 
-In traditional Postgres, read replica data is synchronized using log-based replication. In this process, changes to the primary database are recorded in a Write-Ahead Log (WAL) and are then replayed on the read replicas to ensure data consistency. This process works differently in Neon [due to its architecture](https://neon.tech/blog/architecture-decisions-in-neon), which separates storage and compute.
+In traditional Postgres, read replica data is synchronized using log-based replication. In this process, changes to the primary database are recorded in a Write-Ahead Log (WAL) and are then replayed on the read replicas to ensure data consistency. This process works differently in Neon [due to its architecture](https://neon.com/blog/architecture-decisions-in-neon), which separates storage and compute.
 
 Read-only replicas in Neon are independent read-only compute instances that perform read operations on the same data as your read-write computes. Data is _not_ replicated across database instances, and read requests are directed to a single source.
 
@@ -64,19 +64,19 @@ Read-only replicas in Neon are independent read-only compute instances that perf
 
 Neon’s read-only replica feature includes the following advantages:
 
-1. Cost effectiveness: Since read-only computes read from the same source as your read-write compute, this means zero additional storage cost. Read-only computes also take advantage of Neon’s [Autoscaling](https://neon.tech/docs/introduction/autoscaling) and [Auto-suspend](https://neon.tech/docs/introduction/auto-suspend) features, which enable efficient compute resource management.
+1. Cost effectiveness: Since read-only computes read from the same source as your read-write compute, this means zero additional storage cost. Read-only computes also take advantage of Neon’s [Autoscaling](https://neon.com/docs/introduction/autoscaling) and [Auto-suspend](https://neon.com/docs/introduction/auto-suspend) features, which enable efficient compute resource management.
 2. Data consistency: Read-write and read-only compute instances read data from a single source, ensuring a high degree of data consistency.
 3. Instant availability. When a read replica starts up, it is instantly up to date with your read-write primary. You do not have to wait for updates.
 
 ### Creating a read-only replica
 
-To create a read-only replica, you’ll need to sign up for Neon’s [Pro plan](https://neon.tech/docs/introduction/pro-plan). You can then select the branch where your database resides, click “Add Compute”, choose the read-only option, and configure the compute size.
+To create a [read-only replica](https://neon.com/docs/introduction/read-replicas), select the branch where your database resides, click “Add Compute”, choose the read-only option, and configure the compute size.
 
 <video autoPlay playsInline muted loop width="1920" height="1080">
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/read-replicas-prisma/read-replica-3d8d10f3.mp4" />
 </video>
 
-Alternatively, you can use the [Neon CLI](https://neon.tech/docs/reference/neon-cli) to create a read-only replica by running the following command:
+Alternatively, you can use the [Neon CLI](https://neon.com/docs/cli) to create a read-only replica by running the following command:
 
 ```bash
 neonctl branches add-compute mybranch --type read_only

@@ -67,11 +67,11 @@ Cedalio **[uses Neon branches to automate the setup of isolated environments for
 
 Once the PR is approved and merged, GitHub Actions automates the deployment of changes to the production environment and cleans up the temporary database branch and application instance. This workflow accelerates the development cycle while reducing manual steps.
 
-An important benefit of using Neon for this workflow is **[scale to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero),** which **makes these non-production database branches very affordable.** Since these temporary environments are often only needed during active development and testing, the ability to scale down to zero resources when not in use significantly reduces costs. Cedalio can maintain multiple database branches for different PRs without worrying about the bill.
+An important benefit of using Neon for this workflow is **[scale to zero](https://neon.com/blog/why-you-want-a-database-that-scales-to-zero),** which **makes these non-production database branches very affordable.** Since these temporary environments are often only needed during active development and testing, the ability to scale down to zero resources when not in use significantly reduces costs. Cedalio can maintain multiple database branches for different PRs without worrying about the bill.
 
 ## Ensuring data isolation with a DB-per-customer design
 
-Another important capability of Neon is how [**it facilitates one-database-per-customer architectures via its flexible and user-friendly API**.](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) This is important for Cedalio, as they need this architecture to ensure complete data isolation and enhance security – something important given the company’s background in blockchain and user-owned data.
+Another important capability of Neon is how [**it facilitates one-database-per-customer architectures via its flexible and user-friendly API**.](https://neon.com/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) This is important for Cedalio, as they need this architecture to ensure complete data isolation and enhance security – something important given the company’s background in blockchain and user-owned data.
 
 By using dedicated databases, Cedalio’s developers also avoid the potential errors associated with (for example) filtering data for different clients. This design also makes it easier to implement and test features, ensuring that changes in one customer’s environment do not inadvertently affect others.
 

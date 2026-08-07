@@ -47,7 +47,7 @@ Neon works best with a project-per-user architecture, but there’s more than on
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/shared-application-environment/ad4nxddukjhjbngilrvfcrpqbxy7n7pv70tefptdi4b0e7e6efuqzq98trpekhlyf5eyemrclvivsxhyq1bco3ujvpwj0tkalerfgj1dadmbirwg7pwna7gqm1nju0ihnk6jafyzyiywilrqxeqx7tjnui-y-9eea5d9f.png)
 
-This article is part of a series on building [database-per-user architectures](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres). In the next article, we cover the opposite design choice: [isolated application environments.](https://neon.tech/blog/database-per-user-architecture-with-isolated-application-environments)
+This article is part of a series on building [database-per-user architectures](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres). In the next article, we cover the opposite design choice: [isolated application environments.](https://neon.com/blog/database-per-user-architecture-with-isolated-application-environments)
 
 ## Disclaimers
 
@@ -58,7 +58,7 @@ The advantages of deploying a shared application environment don’t come for fr
 
 ## Getting Into a Single App Environment
 
-The way your customers access your application will inform both its design and the architecture of your [control plane](https://neon.tech/blog/control-planes-for-database-per-user-in-neon). With a single environment, you’re already gravitating toward one set of choices — things like “bring your own URL” are much more difficult to implement. However, you still have decisions to make among the set that remain.
+The way your customers access your application will inform both its design and the architecture of your [control plane](https://neon.com/blog/control-planes-for-database-per-user-in-neon). With a single environment, you’re already gravitating toward one set of choices — things like “bring your own URL” are much more difficult to implement. However, you still have decisions to make among the set that remain.
 
 To route queries and data to the correct database, users need to **authenticate**. What information do they need to provide in order to log in? At minimum, likely a username and password; ideally, a second factor from a hardware key or authenticator app. But how do you know which customer they’re authenticating on behalf of, and whose data to show them?
 
@@ -88,11 +88,11 @@ You can see it in this [example repo](https://github.com/neondatabase/db-per-ten
 
 When individual user accounts are managed by other customer users instead of in the catalog database, a couple of elements here do get more complex, but the overall workflow is about the same. The authenticating user’s customer id needs to be stored in a signed token like a JWT that they can pass back to the server with each request. When they do so, the router validates the token, picks the customer id back out, and uses that to find the appropriate database.
 
-The demo connection router goes step by step for clarity, but there are a couple of useful optimizations that can speed up production code. First, the API client can be a long-lived object rather than created and destroyed in each request, since the application’s Neon API key is static. Second, you can add the [pooled](https://api-docs.neon.tech/reference/getconnectionuri) option in step 3 to use Neon’s [built-in pgBouncer pooling](https://neon.tech/docs/connect/connection-pooling).
+The demo connection router goes step by step for clarity, but there are a couple of useful optimizations that can speed up production code. First, the API client can be a long-lived object rather than created and destroyed in each request, since the application’s Neon API key is static. Second, you can add the [pooled](https://neon.com/docs/reference/api/projects/get-connection-uri) option in step 3 to use Neon’s [built-in pgBouncer pooling](https://neon.com/docs/connect/connection-pooling).
 
 ## The Control Plane and Catalog Database in a Shared Application Environment
 
-We covered the [general attributes and uses of the control plane and catalog db in a previous post](https://neon.tech/blog/control-planes-for-database-per-user-in-neon). The main point of specialization in a shared environment is responsibility for Neon project **connections**. When a customer signs up and a new Neon project is provisioned, that project id needs to become an option for connections on behalf of that customer’s users.
+We covered the [general attributes and uses of the control plane and catalog db in a previous post](https://neon.com/blog/control-planes-for-database-per-user-in-neon). The main point of specialization in a shared environment is responsibility for Neon project **connections**. When a customer signs up and a new Neon project is provisioned, that project id needs to become an option for connections on behalf of that customer’s users.
 
 When you’re deploying only the one system, it can be tempting to build the control plane into it, as an administrative mode or control panel. This does simplify operations — as long as things go well. When they start going wrong, you might find yourself without the tools you need to resolve problems quickly if the application has taken your control plane down with it.
 
@@ -112,7 +112,7 @@ In this situation, there are two ways to manage schema changes safely.
 
 First, you can move slowly, and roll out changes well before the application starts relying on them. Some types of change are more amenable to this than others: new columns are as easy as it gets, but redefining a table starts to require scaffolding in the form of views and triggers to present the same “interface” to client code.
 
-Second, you can test upgrades against each user database. This is a discrete step from upgrade rollout, and blocks the upgrade if any individual database fails testing. [Branching](https://neon.tech/docs/manage/branches) is a great way to test potential changes without blocking activity in the primary databases.
+Second, you can test upgrades against each user database. This is a discrete step from upgrade rollout, and blocks the upgrade if any individual database fails testing. [Branching](https://neon.com/docs/manage/branches) is a great way to test potential changes without blocking activity in the primary databases.
 
 It’s important to remember that these are risk mitigation strategies rather than guarantees! The most thorough tests cannot stop someone from adding a null where you’re about to require a value — _after_ you mark their database test passed.
 
@@ -126,7 +126,7 @@ It isn’t all simple, of course. However, even fully isolated environments face
 
 **This article is part of a series. Check out the previous two articles on the topic of building database-per-user architectures:**
 
-- [Part I: Multi-tenancy and Database-per-User Design in Postgres](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres)
-- [Part II: Control Planes for Database-Per-User](https://neon.tech/blog/control-planes-for-database-per-user-in-neon)
+- [Part I: Multi-tenancy and Database-per-User Design in Postgres](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres)
+- [Part II: Control Planes for Database-Per-User](https://neon.com/blog/control-planes-for-database-per-user-in-neon)
 
-And [the next article in the series](https://neon.tech/blog/database-per-user-architecture-with-isolated-application-environments) where we cover isolated application environments.
+And [the next article in the series](https://neon.com/blog/database-per-user-architecture-with-isolated-application-environments) where we cover isolated application environments.

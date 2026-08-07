@@ -76,9 +76,9 @@ By suspending idle instances, Retool would reduce the costs associated with runn
 <cite>Himanshu Bhandoh, Software Engineer at Retool</cite>
 </blockquote>
 
-The Retool team ended up partnering with Neon to power [RetoolDB](https://docs.retool.com/data-sources/quickstarts/retool-database). The Neon API allowed Retool to integrate and automate all database management, streamlining workflows and reducing manual work. Retool creates one [Neon project](https://neon.tech/docs/manage/projects#manage-projects-with-the-neon-api) per every end user, each project with one Postgres database.
+The Retool team ended up partnering with Neon to power [RetoolDB](https://docs.retool.com/data-sources/quickstarts/retool-database). The Neon API allowed Retool to integrate and automate all database management, streamlining workflows and reducing manual work. Retool creates one [Neon project](https://neon.com/docs/manage/projects#manage-projects-with-the-neon-api) per every end user, each project with one Postgres database.
 
-Due to their serverless nature, Neon databases [scale to zero](https://neon.tech/docs/introduction/auto-suspend) automatically when inactive. This saves Retool the costs of idle instances, which is crucial for managing resources cost-effectively across a large fleet. This streamlined architecture enables Retool to manage **+300,000 database projects** with minimal engineering overhead—the fleet is currently managed by one engineer.
+Due to their serverless nature, Neon databases [scale to zero](https://neon.com/docs/introduction/auto-suspend) automatically when inactive. This saves Retool the costs of idle instances, which is crucial for managing resources cost-effectively across a large fleet. This streamlined architecture enables Retool to manage **+300,000 database projects** with minimal engineering overhead—the fleet is currently managed by one engineer.
 
 ## The beauty of dogfooding: how Retool uses Retool to manage RetoolDB
 

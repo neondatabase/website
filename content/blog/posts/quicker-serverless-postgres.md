@@ -35,7 +35,7 @@ seo:
     https://cdn.neonapi.io/public/images/pages/blog/quicker-serverless-postgres/image-5-1024x576-a1654fe9.png
 ---
 
-[Neon’s serverless driver](https://neon.tech/blog/serverless-driver-for-postgres/) redirects the PostgreSQL TCP wire protocol over WebSockets. This makes ordinary, fully-functional PostgreSQL connections accessible from new environments — including serverless platforms like Cloudflare Workers and Vercel Edge Functions.
+[Neon’s serverless driver](https://neon.com/blog/serverless-driver-for-postgres/) redirects the PostgreSQL TCP wire protocol over WebSockets. This makes ordinary, fully-functional PostgreSQL connections accessible from new environments — including serverless platforms like Cloudflare Workers and Vercel Edge Functions.
 
 A key feature of these environments is that state is not generally persisted from one request to the next. That means we can’t use standard client-side database connection pooling. Instead, we set up a new connection every time. And that makes the time taken to establish a new database connection particularly important.
 

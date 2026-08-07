@@ -46,7 +46,7 @@ This has got to be the most exciting and complex feature. By pressing the ✨ bu
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/how-to-be-ai-fancy/ai-features-demo-48027ed6.mp4" />
 </video>
 
-If you are not sure whether the generated query is safe to run towards your actual database, you can simply [create a branch](https://neon.tech/docs/manage/branches#create-a-branch) and run it there. To make the generation sensible, we extract your database schema and pass it to the LLM along with the prompt. So, if you ask to find data that is not present in the database, you are expected to get a descriptive error response.
+If you are not sure whether the generated query is safe to run towards your actual database, you can simply [create a branch](https://neon.com/docs/manage/branches#create-a-branch) and run it there. To make the generation sensible, we extract your database schema and pass it to the LLM along with the prompt. So, if you ask to find data that is not present in the database, you are expected to get a descriptive error response.
 
 This feature heavily relies on LLM capabilities, so we tried multiple models (more about that in the next section), and none of them were perfect. So it’s possible that a generated query will not work exactly as you expect, that’s why, for now, we’ve stopped at the generation, and we leave the execution to users.
 

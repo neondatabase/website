@@ -40,7 +40,7 @@ seo:
 We’ve moved the functionality previously known as Neon RLS / Neon Authorize into the Neon Data API. You can [read more about the Data API here](https://neon.com/docs/data-api/get-started) and start using it in your projects today.
 </Admonition>
 
-Today we’re launching [Neon RLS](https://neon.tech/docs/guides/neon-authorize), a tool that aims to simplify the usage of Postgres row-level security policies while enabling new deployment models for app developers. With Neon RLS, you can manage RLS directly in your codebase and integrate with any authentication provider, making it easier to enforce fine-grained access control without added complexity.
+Today we’re launching [Neon RLS](https://neon.com/docs/guides/neon-authorize), a tool that aims to simplify the usage of Postgres row-level security policies while enabling new deployment models for app developers. With Neon RLS, you can manage RLS directly in your codebase and integrate with any authentication provider, making it easier to enforce fine-grained access control without added complexity.
 
 Every app needs a database. And every app needs authentication and authorization.
 
@@ -145,7 +145,7 @@ Here’s a list of Auth providers we’ve already tested in partnership with eac
 - Keycloak
 - GCP Cloud Identity
 
-Refer to the [Neon RLS docs](https://neon.tech/docs/guides/neon-authorize) for all the details.
+Refer to the [Neon RLS docs](https://neon.com/docs/guides/neon-authorize) for all the details.
 
 ## The elephant in the room: RLS’s SQL syntax
 
@@ -228,7 +228,7 @@ _Of course_, one can also just keep all these rules in “regular application co
 
 ## Get started with Neon RLS + Drizzle + Clerk
 
-If you’re using [Clerk](https://clerk.com/), we have a [tutorial](https://neon.tech/docs/guides/neon-authorize-tutorial) to help you get set up quickly, using a sample todos app built with Next.js. Also in [this repo.](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize)
+If you’re using [Clerk](https://clerk.com/), we have a [tutorial](https://neon.com/docs/guides/neon-authorize-tutorial) to help you get set up quickly, using a sample todos app built with Next.js. Also in [this repo.](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize)
 
 What you’ll learn:
 
@@ -244,4 +244,4 @@ One of the novelties that comes out of this new feature is that you can now deve
 
 ## RLS for everything or not?
 
-Whether to use PG RLS for everything or not is an interesting debate. For the most part, we recommend defining some RLS rules for very important and core authorization logic. For example, [multi-tenant enterprise applications](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres#shared-schema) can definitely benefit from having RLS for extra security. However, it’s probably better to define very intricate access logic in your backend code.
+Whether to use PG RLS for everything or not is an interesting debate. For the most part, we recommend defining some RLS rules for very important and core authorization logic. For example, [multi-tenant enterprise applications](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres#shared-schema) can definitely benefit from having RLS for extra security. However, it’s probably better to define very intricate access logic in your backend code.

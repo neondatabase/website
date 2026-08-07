@@ -47,7 +47,7 @@ Exporting metrics has been a most requested feature by our users, and for good r
 
 ## Console Monitoring: Our First Step in Observability
 
-Before building native metrics export, we started by giving users visibility directly in the [Monitoring dashboard](https://neon.tech/docs/introduction/monitoring-page) in the Neon console.
+Before building native metrics export, we started by giving users visibility directly in the [Monitoring dashboard](https://neon.com/docs/introduction/monitoring-page) in the Neon console.
 
 Our Monitoring page shows key performance and system metrics collected from every running compute node in our Kubernetes clusters. We use [vmagent t](https://docs.victoriametrics.com/victoriametrics/vmagent/) o automatically scrape these metrics from all active Compute pods. Each pod runs two exporters:
 

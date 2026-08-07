@@ -41,7 +41,7 @@ We’ve moved the functionality previously known as Neon RLS / Neon Authorize in
 
 In Neon, we recommend using a [project-per-user pattern](https://neon.tech/use-cases/database-per-tenant) for multitenancy whenever possible. If this doesn’t work for you and you’re placing all your tenants within a single Postgres database, you should at least use RLS to prevent cross-tenant access—but expressing your entire authorization model with RLS is not for the faint of heart. In this blog post, we uncover why.
 
-With the [recent launch of Neon RLS](https://neon.tech/blog/introducing-neon-authorize), I’ve been building a lot of things with [Postgres RLS](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security), as well as talking to a lot of people who use it for their apps. And one question that keeps coming up is: **should all of the authorization for my app be expressed with RLS?** Should I even use RLS?
+With the [recent launch of Neon RLS](https://neon.com/blog/introducing-neon-authorize), I’ve been building a lot of things with [Postgres RLS](https://neon.tech/postgresql/postgresql-administration/postgresql-row-level-security), as well as talking to a lot of people who use it for their apps. And one question that keeps coming up is: **should all of the authorization for my app be expressed with RLS?** Should I even use RLS?
 
 I’ll start by saying that RLS is not the best authorization model out there. First of all, the syntax itself is very dense and repetitive. For example, if you’re building a todo list, this is the SQL you’ll have to write to properly protect your `todos` table:
 
@@ -149,7 +149,7 @@ export const projects = pgTable(
 );
 ```
 
-Then, just make sure that the JWTs you’re passing to [Neon RLS](https://neon.tech/docs/guides/neon-authorize) have a `tenantId` claim, and you’re much better protected against data leaks.
+Then, just make sure that the JWTs you’re passing to [Neon RLS](https://neon.com/docs/guides/neon-authorize) have a `tenantId` claim, and you’re much better protected against data leaks.
 
 ## Conclusion
 

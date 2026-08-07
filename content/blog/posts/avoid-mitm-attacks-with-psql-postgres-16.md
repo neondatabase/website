@@ -99,7 +99,7 @@ Postgres has [several methods](https://www.postgresql.org/docs/current/auth-pass
 The bad actor now has free access to your database. They might begin by running, say, `pg_dumpall`, or `DROP DATABASE main`.
 
 <blockquote>
-<p>If the bad actor did run <code>DROP DATABASE main</code>, you might be happy to hear about Neon’s <a href="https://neon.tech/docs/guides/branching-pitr">point-in-time restore</a> functionality, but that’s not really the point here.</p>
+<p>If the bad actor did run <code>DROP DATABASE main</code>, you might be happy to hear about Neon’s <a href="https://neon.com/docs/guides/branching-pitr">point-in-time restore</a> functionality, but that’s not really the point here.</p>
 </blockquote>
 
 Perhaps you’re now saying: “But _a-ha_! _My_ Postgres server uses [SCRAM-SHA-256](https://www.postgresql.org/docs/current/auth-password.html#AUTH-PASSWORD) to authenticate me as a user. This is a challenge-response scheme, so my password never gets sent over the network. Therefore the worst that can happen is that the bad actor gets to forward on and observe this particular Postgres session”.
@@ -150,7 +150,7 @@ To make that work with Neon from a Mac looks something like this:
 psql "postgres://user:pass@endpoint.neon.tech/main?sslmode=verify-full&sslrootcert=/etc/ssl/cert.pem"
 ```
 
-On Linux distributions, you alter the sslrootcert location: [see our docs](https://neon.tech/docs/connect/connect-securely). On Windows, you download [a root cert bundle](https://curl.se/docs/caextract.html) and point `sslrootcert` to that.
+On Linux distributions, you alter the sslrootcert location: [see our docs](https://neon.com/docs/connect/connect-securely). On Windows, you download [a root cert bundle](https://curl.se/docs/caextract.html) and point `sslrootcert` to that.
 
 If you’re using a psql version below 16, that’s how you should connect. It’s fine, but it’s pretty verbose and not so easy to remember (where are those SSL certs again?).
 

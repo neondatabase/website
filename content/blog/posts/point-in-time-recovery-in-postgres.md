@@ -38,11 +38,11 @@ seo:
 
 **We are Neon, the serverless Postgres. We separate storage and compute, allowing developers to query their database at any point in its history. In this article, Raouf explains how Neon’s storage system enables Time Travel queries to confidently run your Point In Time Restore processes.**
 
-Imagine working on a crucial project when suddenly, due to an unexpected event, you lose significant chunks of your database. Whether it’s a human error, a malicious attack, or a software bug, data loss is a nightmare scenario. But fear not! We recently added support for [Point-In-Time Restore (PITR)](https://neon.tech/blog/announcing-point-in-time-restore) to Neon, so you can turn back the clock to a happier moment before things went south.
+Imagine working on a crucial project when suddenly, due to an unexpected event, you lose significant chunks of your database. Whether it’s a human error, a malicious attack, or a software bug, data loss is a nightmare scenario. But fear not! We recently added support for [Point-In-Time Restore (PITR)](https://neon.com/blog/announcing-point-in-time-restore) to Neon, so you can turn back the clock to a happier moment before things went south.
 
 [You can try PITR on Neon for free now](https://console.neon.tech).
 
-In the video below and in the [PITR announcement article](https://neon.tech/blog/announcing-point-in-time-restore), my friend Evan shows you can recover your data in a few clicks. He also uses Time Travel Assist to observe the state of the database at a given timestamp to confidently and safely run the restore process.
+In the video below and in the [PITR announcement article](https://neon.com/blog/announcing-point-in-time-restore), my friend Evan shows you can recover your data in a few clicks. He also uses Time Travel Assist to observe the state of the database at a given timestamp to confidently and safely run the restore process.
 
 <video controls width="1920" height="1080">
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/point-in-time-recovery-in-postgres/restore-5618e814.mp4" />
@@ -101,7 +101,7 @@ Neon’s philosophy is that the “database is its logs”. In our case: “Post
 
 Neon configures Postgres to stream the WAL to a custom Rust-based storage engine. Neon’s storage engine is composed of three parts:
 
-- A persistence layer called “[Safekeepers](https://github.com/neondatabase/neon/blob/main/docs/rfcs/014-safekeepers-gossip.md)” makes sure the written data is never lost, [using Paxos as a consensus algorithm](https://neon.tech/blog/paxos).
+- A persistence layer called “[Safekeepers](https://github.com/neondatabase/neon/blob/main/docs/rfcs/014-safekeepers-gossip.md)” makes sure the written data is never lost, [using Paxos as a consensus algorithm](https://neon.com/blog/paxos).
 - A storage layer called “Pageservers”: multi-tenant storage that can reconstruct the data from WAL and send it to Postgres.
 - A second persistence layer to durably store the WAL in AWS S3.
 
@@ -116,7 +116,7 @@ The data flow would look like the following:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/point-in-time-recovery-in-postgres/the-data-flow-1024x237-201d7dcf.jpg)
 
-Check out the [_Architecture decisions in Neon_ article by Heikki Linnakangas](https://neon.tech/blog/architecture-decisions-in-neon) to learn more.
+Check out the [_Architecture decisions in Neon_ article by Heikki Linnakangas](https://neon.com/blog/architecture-decisions-in-neon) to learn more.
 
 To understand the magic behind PITR in Neon, we’ll explore how the Pageservers work.
 
@@ -145,7 +145,7 @@ When Postgres requests a page from the Pageserver, it triggers the [GetPage@LSN]
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/point-in-time-recovery-in-postgres/87-1024x456-ab2b2049.jpg)
 
-Read the [Deep dive in Neon’s storage engine](https://neon.tech/blog/get-page-at-lsn) article to learn more about Neon’s architecture.
+Read the [Deep dive in Neon’s storage engine](https://neon.com/blog/get-page-at-lsn) article to learn more about Neon’s architecture.
 
 In practice, you can access different timelines through database branches. These branches are copy-on-write clones of your database, representing the state of your data at any point in its history. When you create a branch, you specify the LSN (or a timestamp), and Neon’s control plane generates a timeline associated with your project, keeping track of it.
 

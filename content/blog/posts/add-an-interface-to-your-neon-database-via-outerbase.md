@@ -39,7 +39,7 @@ seo:
 
 We are beyond excited to announce that **the Outerbase integration for Neon is now publicly available**.
 
-This integration enables you to instantly connect your Neon Postgres database to Outerbase’s Data Studio and invite your team to view, edit, query, and visualize your data with you. To learn how to connect Outerbase to your Neon project, [check out this guide](https://neon.tech/docs/guides/outerbase).
+This integration enables you to instantly connect your Neon Postgres database to Outerbase’s Data Studio and invite your team to view, edit, query, and visualize your data with you. To learn how to connect Outerbase to your Neon project, [check out this guide](https://neon.com/docs/guides/outerbase).
 
 ## What is Outerbase?
 
@@ -57,7 +57,7 @@ Outerbase also includes data visualization tools that help create concise and be
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/add-an-interface-to-your-neon-database-via-outerbase/ad4nxdyz2as-q-xys-2kssf191aedek4n5wdug-1namy-oksebbq2va-ocykzd1segjg4ffhzbx679o0dm7zupohnjaauxywxfq7tmp6vatwneli6bvsolihucmyoaelzhwd97zdl5mpqj3s5l6qzbd99eo5-fc8c8869.png)
 
-Outerbase simplifies data exploration for everyone, whether you are a solo-founder or part of a large organization. Once you have [connected your Neon Postgres database through the Outerbase integration](https://neon.tech/docs/guides/outerbase), you can [invite your teammates](https://docs.outerbase.com/workspaces/members) and start querying your data.<br /><br />With Outerbase’s Data Studio, you can edit data, update schemas, create tables, and more. You manage multiple Neon databases from a single interface. Its built-in filters, sorting, and queries make data management intuitive and efficient no matter your skill level. Outerbase also allows you and your team to write and save SQL queries, ensuring everyone has access to the same data views.
+Outerbase simplifies data exploration for everyone, whether you are a solo-founder or part of a large organization. Once you have [connected your Neon Postgres database through the Outerbase integration](https://neon.com/docs/guides/outerbase), you can [invite your teammates](https://docs.outerbase.com/workspaces/members) and start querying your data.<br /><br />With Outerbase’s Data Studio, you can edit data, update schemas, create tables, and more. You manage multiple Neon databases from a single interface. Its built-in filters, sorting, and queries make data management intuitive and efficient no matter your skill level. Outerbase also allows you and your team to write and save SQL queries, ensuring everyone has access to the same data views.
 
 ## Ask data questions in natural language
 

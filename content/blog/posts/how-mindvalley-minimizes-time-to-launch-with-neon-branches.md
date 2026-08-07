@@ -46,7 +46,7 @@ seo:
 
 Mindvalley primarily uses Google CloudSQL for their production databases, but they recently started using Neon to speed up their non-production workflows. Previously, everything—including development and testing—was handled in CloudSQL, which introduced inefficiencies that slowed the team down (more details later).
 
-Mindvalley now takes advantage of Neon’s faster DX for development and testing while keeping their production databases untouched. The key feature driving this boost in developer velocity is [branching](https://neon.tech/docs/introduction/branching), which allows their developers to spin up new previews in less than a minute. [Automatically creating branches with every PR](https://neon.tech/flow#preview-environment-workflow) has drastically reduced waiting times, speeding up their development cycle.
+Mindvalley now takes advantage of Neon’s faster DX for development and testing while keeping their production databases untouched. The key feature driving this boost in developer velocity is [branching](https://neon.com/docs/introduction/branching), which allows their developers to spin up new previews in less than a minute. [Automatically creating branches with every PR](https://neon.tech/flow#preview-environment-workflow) has drastically reduced waiting times, speeding up their development cycle.
 
 ## Their database branching workflow
 
@@ -54,15 +54,15 @@ Let’s take a closer look at how Mindvalley uses branching:
 
 ### Nightly data syncs via Github Actions (Neon Twin)
 
-Mindvalley has built a [Neon Twin](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) to automate the nightly synchronization between their production database in CloudSQL and a main development branch in Neon. Through GitHub Actions, a nightly dump from CloudSQL is restored in the main branch in Neon without developers having to perform any manual work.
+Mindvalley has built a [Neon Twin](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) to automate the nightly synchronization between their production database in CloudSQL and a main development branch in Neon. Through GitHub Actions, a nightly dump from CloudSQL is restored in the main branch in Neon without developers having to perform any manual work.
 
 ### Child branches for independent development environments
 
-From this main branch, hundreds of ephemeral environments can be immediately spun up without requiring any additional data syncs. These child environments feel like perfect “copies” of the main branch, containing all the latest data and schema. Each developer gets their own child branch and can work independently without disrupting others. Developers can [easily propagate updates](https://neon.tech/docs/guides/reset-from-parent) from the master branch to their own environments.
+From this main branch, hundreds of ephemeral environments can be immediately spun up without requiring any additional data syncs. These child environments feel like perfect “copies” of the main branch, containing all the latest data and schema. Each developer gets their own child branch and can work independently without disrupting others. Developers can [easily propagate updates](https://neon.com/docs/guides/reset-from-parent) from the master branch to their own environments.
 
 ### Integration with CI/CD for end-to-end testing
 
-All of this happens through Mindvalley’s in-house CI/CD automation system, which is fully integrated with the Neon API. Whenever developers launch a PR, the automation system automatically creates a new database branch in Neon. Neon’s [connection pooling](https://neon.tech/docs/connect/connection-pooling) ensures there are no issues with too many connections going into the branches. Once the PR is closed, the database branch is deleted.
+All of this happens through Mindvalley’s in-house CI/CD automation system, which is fully integrated with the Neon API. Whenever developers launch a PR, the automation system automatically creates a new database branch in Neon. Neon’s [connection pooling](https://neon.com/docs/connect/connection-pooling) ensures there are no issues with too many connections going into the branches. Once the PR is closed, the database branch is deleted.
 
 ## The problem with dev/test on other managed databases: A closer look
 
@@ -88,14 +88,14 @@ This problem with seeding is also why Mindvalley chose Neon over Supabase. Like 
 <p>“We are using the Neon Twin workflow. We just install the GitHub action and it takes care of the rest. Developers may not know how to dump and restore well, but they know how to run a GitHub Action. It’s amazing” (<em>Alex Co, Head of Platform Engineering at Mindvalley</em>)</p>
 </blockquote>
 
-To keep their data in sync with their main setup in CloudSQL and Neon, Mindvalley set up a [Neon Twin](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon). A Neon Twin is a synchronized copy of your testing dataset hosted on Neon, while your main production environment stays elsewhere.
+To keep their data in sync with their main setup in CloudSQL and Neon, Mindvalley set up a [Neon Twin](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon). A Neon Twin is a synchronized copy of your testing dataset hosted on Neon, while your main production environment stays elsewhere.
 
 By scheduling nightly dump/restores via GitHub actions, your developers can access a fresh copy of the dataset every day without manual intervention; this sync is done to the main development branch in Neon, from which many independent child branches can be immediately derived to run tests and building features. You only need to sync your data once, for hundreds of dev environments.
 
 On a glimpse, the Neon Twin workflow looks like this:
 
 1. You set up your [Neon account](https://console.neon.tech/signup) and create a project to host your non-production databases. This project will be the home of your Neon Twin. In this project, you create a main branch that will receive the daily dataset updates, and from which all the child branches (for each independent environment) will be derived.
-2. To keep the data in the main branch in sync, you automate the dump/restore via GitHub Actions ([we’ve built this action for you](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon#create-the-workflow-file)).
-3. Once you’ve tested changes in the Neon environment, you can deploy them back to production in your main database. You can track schema changes in Neon via Prisma or SQLfiles—[we tell you how.](https://neon.tech/blog/neon-twin-deploy-workflow)
+2. To keep the data in the main branch in sync, you automate the dump/restore via GitHub Actions ([we’ve built this action for you](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon#create-the-workflow-file)).
+3. Once you’ve tested changes in the Neon environment, you can deploy them back to production in your main database. You can track schema changes in Neon via Prisma or SQLfiles—[we tell you how.](https://neon.com/blog/neon-twin-deploy-workflow)
 
-If you’d like to try it out, follow the steps [here](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon). [Neon was a Free plan](https://neon.tech/pricing), so you can get started without committing to anything.
+If you’d like to try it out, follow the steps [here](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon). [Neon was a Free plan](https://neon.tech/pricing), so you can get started without committing to anything.

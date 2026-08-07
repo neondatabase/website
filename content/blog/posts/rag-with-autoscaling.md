@@ -39,7 +39,7 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/rag-with-autoscaling/image-3-1024x576-ca9bd983.png)
 
-**Neon’s autoscaling, [now GA and available in all pricing plans](https://neon.tech/blog/neon-autoscaling-is-generally-available), enables Postgres instances to dynamically scale up for the high memory and CPU demands of HNSW index builds, avoiding constant overprovisioning. With memory extension through disk swaps, Neon efficiently handles large index builds even with lower resource limits, ensuring optimal performance.** **[Start using Neon autoscaling by creating a free account.](https://console.neon.tech/signup)**
+**Neon’s autoscaling, [now GA and available in all pricing plans](https://neon.com/blog/neon-autoscaling-is-generally-available), enables Postgres instances to dynamically scale up for the high memory and CPU demands of HNSW index builds, avoiding constant overprovisioning. With memory extension through disk swaps, Neon efficiently handles large index builds even with lower resource limits, ensuring optimal performance.** **[Start using Neon autoscaling by creating a free account.](https://console.neon.tech/signup)**
 
 Querying large datasets is slow at scale because scanning entire databases could be more efficient. Take, for example, running a vector similarity search operation on a 1 million-row dataset on an 8-CPU Neon instance. The query takes approximately 3 seconds to complete.
 
@@ -106,7 +106,7 @@ This is why we implemented Index Build operations to Neon Autoscaling.
 
 ## How Neon’s autoscaling optimizes HNSW index builds
 
-[Neon Autoscaling](https://neon.tech/blog/neon-autoscaling-is-generally-available) dynamically resizes your Postgres instance based on load, allowing you to constantly meet your application demands and saving you cost. In the previous example, we must allocate a minimum of 8GB of memory and 2 CPUs. With Neon, all I need to do is specify the minimum and maximum resources the application needs and leave it to the Autoscaling feature to handle the resizing. I can allocate as few as ¼ shared CPUs to a maximum 8 CPUs.
+[Neon Autoscaling](https://neon.com/blog/neon-autoscaling-is-generally-available) dynamically resizes your Postgres instance based on load, allowing you to constantly meet your application demands and saving you cost. In the previous example, we must allocate a minimum of 8GB of memory and 2 CPUs. With Neon, all I need to do is specify the minimum and maximum resources the application needs and leave it to the Autoscaling feature to handle the resizing. I can allocate as few as ¼ shared CPUs to a maximum 8 CPUs.
 
 Using the index build query below, we inform Postgres we want to use 8 workers and allocate 8GB of `maintenance_work_mem`. Consequently, the autoscaler-agent will detect the load on CPU usage and allocate additional resources.
 

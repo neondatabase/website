@@ -219,7 +219,7 @@ const config = {
 }
 ```
 
-Postgres itself evolved from a local installation to a fully managed service. Cloud services with a Free plan like [Neon](https://neon.tech/home) popularized this workflow, adding features to the table that would have seemed magical a decade ago—especially [branching](https://neon.tech/docs/introduction/branching). Creating a new Postgres environment became as simple as:
+Postgres itself evolved from a local installation to a fully managed service. Cloud services with a Free plan like [Neon](https://neon.tech/home) popularized this workflow, adding features to the table that would have seemed magical a decade ago—especially [branching](https://neon.com/docs/introduction/branching). Creating a new Postgres environment became as simple as:
 
 ```bash
 # Create a new database branch for a feature

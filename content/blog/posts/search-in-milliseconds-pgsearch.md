@@ -48,7 +48,7 @@ seo:
   ></video>
 </figure>
 
-[We just announced that pg_search is available on Neon](https://neon.tech/blog/pgsearch-on-neon), making it easier than ever to build fast, full-text search experiences with Postgres. To demonstrate its performance, we forked [Vercel’s Book Inventory template](https://github.com/vercel-labs/book-inventory) and replaced the AI-powered search with native PostgreSQL full-text search using pg_search.
+[We just announced that pg_search is available on Neon](https://neon.com/blog/pgsearch-on-neon), making it easier than ever to build fast, full-text search experiences with Postgres. To demonstrate its performance, we forked [Vercel’s Book Inventory template](https://github.com/vercel-labs/book-inventory) and replaced the AI-powered search with native PostgreSQL full-text search using pg_search.
 
 **The results are blazing fast—up to 200x faster**. No need for OpenAI or embedding costs. Skip the complexity of generating and inserting embeddings: keep your data as-is and search across millions of books with ranked results in milliseconds.
 
@@ -74,7 +74,7 @@ So, we forked the template, and introduced this core change: **instead of using 
 
 ## A recap on pg_search
 
-[If you missed our launch blog post](https://neon.tech/blog/pgsearch-on-neon), pg_search is a high-performance full-text search extension that brings Elasticsearch-grade speed and ranking into Postgres—and it’s now available on Neon.
+[If you missed our launch blog post](https://neon.com/blog/pgsearch-on-neon), pg_search is a high-performance full-text search extension that brings Elasticsearch-grade speed and ranking into Postgres—and it’s now available on Neon.
 
 Built in Rust using the pgrx framework, pg_search addresses key gaps in Postgres’ native full-text search (FTS). While Postgres FTS uses tsvector and tsquery, it struggles with relevance ranking, fuzzy matches, and faceted search at scale. But with pg_search, you get:
 
@@ -171,6 +171,6 @@ Here are few query examples we tested under the hood. We’re including the full
 
 The code for the demo is available here: [https://github.com/neondatabase-labs/book-inventory](https://github.com/neondatabase-labs/book-inventory)
 
-Feel free to explore it or fork the repo for your own experimentation. To learn more about pg_search, check out the documentation from [ParadeDB](https://www.paradedb.com) (the team behind the extension) alongside [this guide](https://neon.tech/blog/pgsearch-on-neon).
+Feel free to explore it or fork the repo for your own experimentation. To learn more about pg_search, check out the documentation from [ParadeDB](https://www.paradedb.com) (the team behind the extension) alongside [this guide](https://neon.com/blog/pgsearch-on-neon).
 
 You can start building with pg_search today on any Neon database running Postgres 17! Sign up for Neon [here](https://console.neon.tech/signup) (we have a Free plan).

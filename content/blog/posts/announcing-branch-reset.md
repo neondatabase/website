@@ -38,7 +38,7 @@ seo:
 
 One of the benefits of Neon’s serverless architecture, which sets it apart from other Postgres providers, is its database branching capabilities.
 
-Neon’s [database branching](https://neon.tech/docs/introduction/branching#what-is-a-branch) allows you to create an instant copy-on-write clone of your data (a child branch) that you can modify without compromising your main data (parent branch). You can use it to manage your database environments, for development purposes, or incorporate it into your CI/CD pipeline using the [Neon API](https://neon.tech/docs/reference/api-reference) or [CLI](https://neon.tech/docs/reference/cli-install).
+Neon’s [database branching](https://neon.com/docs/introduction/branching#what-is-a-branch) allows you to create an instant copy-on-write clone of your data (a child branch) that you can modify without compromising your main data (parent branch). You can use it to manage your database environments, for development purposes, or incorporate it into your CI/CD pipeline using the [Neon API](https://neon.com/docs/reference/api-reference) or [CLI](https://neon.com/docs/reference/cli-install).
 
 Today, we are announcing the release of our newest feature for your developer workflows: branch reset.
 
@@ -120,4 +120,4 @@ The reset process fetches the latest data and schema from the parent branch, int
 
 The reset operation is a complete overwrite, meaning any local changes in your branch will be lost. Also, while the reset is in progress, database connections will be temporarily interrupted, though they will automatically re-establish once the reset is completed.
 
-By leveraging the branch reset feature, you can ensure that your development efforts are always in sync with your team’s progress, leading to a more efficient and collaborative development process.<br />We encourage you to log in or [create a Neon account](https://console.neon.tech/login) to explore the branch reset feature and see how it can transform your development process. [Read more about branch reset in the docs](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent) and share your feedback. Join our [Discord](https://neon.tech/discord) and tell us what you think.
+By leveraging the branch reset feature, you can ensure that your development efforts are always in sync with your team’s progress, leading to a more efficient and collaborative development process.<br />We encourage you to log in or [create a Neon account](https://console.neon.tech/login) to explore the branch reset feature and see how it can transform your development process. [Read more about branch reset in the docs](https://neon.com/docs/manage/branches#reset-a-branch-from-parent) and share your feedback. Join our [Discord](https://neon.tech/discord) and tell us what you think.

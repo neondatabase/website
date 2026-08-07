@@ -4,7 +4,7 @@ subtitle: Recreate a similar Google Docs style version history flow on Postgres 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-05-04T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 If you have ever used Google Docs version history, you know how easily you can jump to an older version, compare it to what you have now, and roll back without losing the thread of what changed. Relational databases usually give you one live schema and one head revision, unless you add your own audit tables or event sourcing.
@@ -175,8 +175,8 @@ flowchart TD
 
 Operationally, you would need the following:
 
-- Project's [API Key](https://neon.com/docs/manage/api-keys) (as `NEON_API_KEY`) to manage branches.
-- Project's [ID](https://neon.com/docs/manage/projects#project-settings) (as `NEON_PROJECT_ID`) to make sure that the right document is being referenced.
+- Project's [API Key](/docs/manage/api-keys) (as `NEON_API_KEY`) to manage branches.
+- Project's [ID](/docs/manage/projects#project-settings) (as `NEON_PROJECT_ID`) to make sure that the right document is being referenced.
 - A clear choice of **which branch is "production"** for your app (`NEON_MAIN_BRANCH_ID`).
 
 Once the restore is complete, just refresh your app or reload your data as now your document will reflect the state from the restored snapshot, with the **version history up to that point**.

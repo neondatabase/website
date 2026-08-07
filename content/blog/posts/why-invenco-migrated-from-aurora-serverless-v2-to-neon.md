@@ -75,22 +75,22 @@ Invenco’s architecture is microservices-based, with eight distinct services co
 
 For production, Invenco follows a one-project-per-service model to isolate resources. This way each service has its own dedicated database and scaling configuration, ensuring that spikes in one service don’t negatively affect others.
 
-Production databases use [autoscaling](https://neon.tech/docs/introduction/autoscaling) with minimum limit around 2 CUs and a higher maximum limit to handle traffic spikes.
+Production databases use [autoscaling](https://neon.com/docs/introduction/autoscaling) with minimum limit around 2 CUs and a higher maximum limit to handle traffic spikes.
 
 **All non-production environments = 1 Neon project**.
 
-When moving to Neon, Invenco consolidated all non-prod services into a single Neon project. Why: this approach allows for better management of ephemeral environments through branching workflows. Testing data is loaded once into the main staging branch, with child branches created as needed for ephemeral environments. Non-production databases take advantage of [scale-to-zero](https://neon.tech/docs/guides/auto-suspend-guide) to save costs when they’re not being used.
+When moving to Neon, Invenco consolidated all non-prod services into a single Neon project. Why: this approach allows for better management of ephemeral environments through branching workflows. Testing data is loaded once into the main staging branch, with child branches created as needed for ephemeral environments. Non-production databases take advantage of [scale-to-zero](https://neon.com/docs/guides/auto-suspend-guide) to save costs when they’re not being used.
 
 ## Migrating progressively with minimal downtime
 
-For migrating services from Aurora to Neon, Invenco initially used AWS DMS but shifted to [logical replication as a migration strategy](https://neon.tech/docs/guides/logical-replication-aurora-to-neon) as soon as this feature was stable in Neon. This has been critical for Invenco, allowing them to progressively migrate their services with minimal downtime:
+For migrating services from Aurora to Neon, Invenco initially used AWS DMS but shifted to [logical replication as a migration strategy](https://neon.com/docs/guides/logical-replication-aurora-to-neon) as soon as this feature was stable in Neon. This has been critical for Invenco, allowing them to progressively migrate their services with minimal downtime:
 
 1. They enable logical replication in their Aurora instance (creating a publication)
 2. They create a subscription in a Neon project
 3. The replication process begins to copy data from Aurora to Neon in the background
 4. Once databases are in sync, a controlled switch can be performed—e.g. the source can be switched to read-only mode, letting the final changes replicate, and pointing the application to Neon
 
-Invenco also uses logical replication for their BI workflows, streaming data from Neon into [Fivetran](https://neon.tech/docs/guides/logical-replication-fivetran) and [Kafka](https://neon.tech/docs/guides/logical-replication-kafka-confluent) for analytics and event-driven operations.
+Invenco also uses logical replication for their BI workflows, streaming data from Neon into [Fivetran](https://neon.com/docs/guides/logical-replication-fivetran) and [Kafka](https://neon.com/docs/guides/logical-replication-kafka-confluent) for analytics and event-driven operations.
 
 ## Get started
 

@@ -55,7 +55,7 @@ Fortunately, Neon addresses these challenges by enabling you to create isolated 
 
 ## Getting started with Neon
 
-Neon is fully managed serverless Postgres. It can automatically allocate resources to meet your database workload and scale down to zero when your app is unused. This means you don’t have to pick a size for your database upfront, and you only pay for what you use. All of this is possible because [Neon’s architecture separates storage and compute](https://neon.tech/docs/introduction/architecture-overview).
+Neon is fully managed serverless Postgres. It can automatically allocate resources to meet your database workload and scale down to zero when your app is unused. This means you don’t have to pick a size for your database upfront, and you only pay for what you use. All of this is possible because [Neon’s architecture separates storage and compute](https://neon.com/docs/introduction/architecture-overview).
 
 ### Creating a Neon project
 
@@ -75,7 +75,7 @@ Neon enables you to branch your data the same way you branch your code. This bra
 
 When you create a project, a “main” branch is created. You would typically use this branch for your production environment and create branches from it for development or preview environments.
 
-You can automate the branch creation process using [the Neon CLI](https://neon.tech/docs/reference/neon-cli). We’ll demonstrate how you can do it with Qovery.
+You can automate the branch creation process using [the Neon CLI](https://neon.com/docs/cli). We’ll demonstrate how you can do it with Qovery.
 
 ## Qovery lifecycle jobs
 

@@ -55,7 +55,7 @@ Reproducibly, the query without an ORDER BY ran fine every time. Reproducibly, t
 
 I was intrigued by this. I was also keen to fix it.
 
-[Our serverless driver](https://www.npmjs.com/package/@neondatabase/serverless) redirects the Postgres binary protocol — which is ordinarily carried over TCP — over a WebSocket connection, [so that it can be used from serverless platforms](https://neon.tech/blog/serverless-driver-for-postgres) that support WebSockets but not TCP.
+[Our serverless driver](https://www.npmjs.com/package/@neondatabase/serverless) redirects the Postgres binary protocol — which is ordinarily carried over TCP — over a WebSocket connection, [so that it can be used from serverless platforms](https://neon.com/blog/serverless-driver-for-postgres) that support WebSockets but not TCP.
 
 Our partner was using [undici](https://www.npmjs.com/package/undici) to support WebSockets in Node 18 and above, and [ws](https://www.npmjs.com/package/ws) to support them in Node 17 and below. Node 17 and below worked, Node 18 and above didn’t. Plus, undici’s WebSockets support was labelled as ‘experimental’. So they’d identified undici as a good place to start looking for the problem.
 
@@ -123,7 +123,7 @@ Let’s unmask the data by using the relevant tab at the bottom of the bottom-ri
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/when-limit-9-works-but-limit-10-hangs/image-26-1024x599-acc69d6e.png)
 
-There are three separate short binary Postgres-protocol messages jammed together here: a [StartupMessage](https://www.postgresql.org/docs/current/protocol-message-formats.html#PROTOCOL-MESSAGE-FORMATS-STARTUPMESSAGE), a [PasswordMessage](https://www.postgresql.org/docs/current/protocol-message-formats.html#PROTOCOL-MESSAGE-FORMATS-PASSWORDMESSAGE), and [Query](https://www.postgresql.org/docs/current/protocol-message-formats.html#PROTOCOL-MESSAGE-FORMATS-QUERY) message (we pipeline these for speed, [as I’ve mentioned before](https://neon.tech/blog/quicker-serverless-postgres)). This is all fine and just as expected.
+There are three separate short binary Postgres-protocol messages jammed together here: a [StartupMessage](https://www.postgresql.org/docs/current/protocol-message-formats.html#PROTOCOL-MESSAGE-FORMATS-STARTUPMESSAGE), a [PasswordMessage](https://www.postgresql.org/docs/current/protocol-message-formats.html#PROTOCOL-MESSAGE-FORMATS-PASSWORDMESSAGE), and [Query](https://www.postgresql.org/docs/current/protocol-message-formats.html#PROTOCOL-MESSAGE-FORMATS-QUERY) message (we pipeline these for speed, [as I’ve mentioned before](https://neon.com/blog/quicker-serverless-postgres)). This is all fine and just as expected.
 
 So: what’s the difference between screenshots 1 and 2, which are the undici and ws versions of the same communication? Byte 1 is the same in both: it says that this is the final (only) packet of this binary transmission. Byte 2 is the same in both, too: it says that the transmission is masked, and that we should treat the next two bytes as a 16-bit payload length.
 

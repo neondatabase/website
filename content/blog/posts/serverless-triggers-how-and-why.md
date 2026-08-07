@@ -35,7 +35,7 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/serverless-triggers-how-and-why/neon-triggers1-1024x576-d91afb16.jpg)
 
-Neon is a true serverless database, with [connection pooling](https://neon.tech/docs/connect/connection-pooling) and [automatic scaling](https://neon.tech/docs/introduction/autoscaling). To add to the serverless stack, we recently [co-launched the Inngest integration with Neon](https://www.inngest.com/blog/neon-postgres-database-triggers-for-durable-functions?utm_source=neon&utm_medium=trigger-serverless-functions-blog-post), which enables you to leverage Neon’s [Logical Replication](https://neon.tech/docs/guides/logical-replication-guide) to trigger Serverless functions (Vercel Functions, AWS Lambdas, Cloudflare Workers, and more) from database changes.
+Neon is a true serverless database, with [connection pooling](https://neon.com/docs/connect/connection-pooling) and [automatic scaling](https://neon.com/docs/introduction/autoscaling). To add to the serverless stack, we recently [co-launched the Inngest integration with Neon](https://www.inngest.com/blog/neon-postgres-database-triggers-for-durable-functions?utm_source=neon&utm_medium=trigger-serverless-functions-blog-post), which enables you to leverage Neon’s [Logical Replication](https://neon.com/docs/guides/logical-replication-guide) to trigger Serverless functions (Vercel Functions, AWS Lambdas, Cloudflare Workers, and more) from database changes.
 
 In this blog post, **we discuss a few use cases unlocked with these new serverless triggers**—from user onboarding to building AI workflows.
 
@@ -196,6 +196,6 @@ export const newUser = inngest.createFunction(
 
 ## Get started
 
-You can start triggering serverless functions from your Neon database by installing the Inngest integrations in under a few minutes [with its one-click installation](https://neon.tech/docs/guides/trigger-serverless-functions).
+You can start triggering serverless functions from your Neon database by installing the Inngest integrations in under a few minutes [with its one-click installation](https://neon.com/docs/guides/trigger-serverless-functions).
 
 ![](https://cdn.neonapi.io/public/images/pages/blog/serverless-triggers-how-and-why/ad4nxcyrl0fz7zqqn6wcd2xkof82yt6kou2wegax3abghwtupid9ieg9lyulmsz9ett3oqia5ytd2un9geyh4mfdt0khjir5es6pafm6jy8rojqv-ls4e8ny3wduloc0fujpupqp38mzumgtyha4fdpfv7jhl4-de79ff4c.png)

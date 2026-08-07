@@ -48,7 +48,7 @@ seo:
 
 Neon now has beta support for Postgres Logical Replication. This enables teams to use [Change Data Capture (CDC)](https://en.wikipedia.org/wiki/Change_data_capture) to observe database changes – such as INSERT and UPDATE operations – and stream these changes to downstream systems.
 
-We previously wrote about the [benefits of CDC](https://neon.tech/blog/change-data-capture-with-serverless-postgres#why-cdc-matters) and how it enables [Event-Driven Architecture (EDA)](https://en.wikipedia.org/wiki/Event-driven_architecture). An EDA facilitates the implementation of messaging patterns, such as [fan-out](<https://en.wikipedia.org/wiki/Fan-out_(software)>), with your Neon Postgres database at the heart of the system.
+We previously wrote about the [benefits of CDC](https://neon.com/blog/change-data-capture-with-serverless-postgres#why-cdc-matters) and how it enables [Event-Driven Architecture (EDA)](https://en.wikipedia.org/wiki/Event-driven_architecture). An EDA facilitates the implementation of messaging patterns, such as [fan-out](<https://en.wikipedia.org/wiki/Fan-out_(software)>), with your Neon Postgres database at the heart of the system.
 
 Implementing a fan-out pattern enables you to create applications composed of loosely coupled components. Downstream consumers can work individually or as groups to asynchronously process database events to update other parts of your system in real-time.
 
@@ -97,7 +97,7 @@ Debezium tracks its progress through the WAL by storing its current WAL offset. 
 
 ## Get Started with Neon and Logical Replication
 
-To start using Debezium with Neon’s serverless Postgres, [sign up for Neon](https://neon.tech/docs/get-started-with-neon/signing-up) and create a project.
+To start using Debezium with Neon’s serverless Postgres, [sign up for Neon](https://neon.com/docs/get-started-with-neon/signing-up) and create a project.
 
 ![Neon's create project UI.](https://cdn.neonapi.io/public/images/pages/blog/fan-out-postgres-changes-using-debezium-and-upstash-redis/createfirstproject-1024x576-e8c8eccb.jpeg)
 
@@ -155,7 +155,7 @@ table.include.list=playing_with_neon
 This configuration instructs Debezium to:
 
 - Connect to Postgres using the connection details defined in the `PG` environment variables.
-- Accept payloads in `pgoutput` format. Neon also [supports wal2json](https://neon.tech/docs/guides/logical-replication-neon#decoder-plugins).
+- Accept payloads in `pgoutput` format. Neon also [supports wal2json](https://neon.com/docs/guides/logical-replication-neon#decoder-plugins).
 - Subscribe to changes in the `playing_with_neon` table.
 - Perform a table snapshot to inform downstream consumers of the initial state. This is useful if you’re adding Debezium to an existing application that has tables that already contain data and you’d like to process the existing rows and not just new rows.
 
@@ -328,4 +328,4 @@ main()
 
 ## Conclusion
 
-Neon’s support for Postres’ Logical Replication enables development teams to leverage Event-Driven Architectures to create robust, real-time applications with Postgres at the core. Change Data Capture platforms and technologies like Debezium provide low-code open-source solutions to reliably stream changes from Postgres to messaging systems such as Redis for further processing and analysis. If you’re looking for a Postgres database, [sign up and try Neon](https://neon.tech/blog/python-django-and-neons-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon) for free. Join us in our [Discord server](https://neon.tech/discord) to share your experiences, suggestions, and challenges.
+Neon’s support for Postres’ Logical Replication enables development teams to leverage Event-Driven Architectures to create robust, real-time applications with Postgres at the core. Change Data Capture platforms and technologies like Debezium provide low-code open-source solutions to reliably stream changes from Postgres to messaging systems such as Redis for further processing and analysis. If you’re looking for a Postgres database, [sign up and try Neon](https://neon.com/blog/python-django-and-neons-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon) for free. Join us in our [Discord server](https://neon.tech/discord) to share your experiences, suggestions, and challenges.

@@ -80,11 +80,11 @@ Manually creating and maintaining ERDs can be tedious and time-consuming, but th
 - No manual diagramming is required—your diagrams are built automatically.
 - Your ERD updates automatically as your schema changes, always staying current.
 
-If you’re already using Neon to manage your database, [Outerbase is just one click away to visualize your table relationships.](https://neon.tech/blog/add-an-interface-to-your-neon-database-via-outerbase)
+If you’re already using Neon to manage your database, [Outerbase is just one click away to visualize your table relationships.](https://neon.com/blog/add-an-interface-to-your-neon-database-via-outerbase)
 
 ## How to view your Neon database ERD
 
-Go to Neon Console > Integrations. [Add Outerbase](https://neon.tech/docs/guides/outerbase).
+Go to Neon Console > Integrations. [Add Outerbase](https://neon.com/docs/guides/outerbase).
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/bring-postgres-relationships-to-light/ad4nxdavnikcpiqfvrokboeq0ha038paffonahyplhiqbvedsi0yhfiktahlajy7m1sput5kwjejan2vzeb0xwx3dvycv8ginga29-zfr0sfuzd1ltzp4j4ralj2gkikcoujwsirxc-bkvgmgu6bvi1vlduii-101247ee.png)
 

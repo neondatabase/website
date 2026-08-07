@@ -80,7 +80,7 @@ Ryan Dahl chose to take the learnings from Node and built [Deno](https://deno.co
 
 Deno is gaining traction, especially among developers who appreciate its modern features and security-first approach. It’s particularly attractive for projects that can benefit from its TypeScript integration and don’t rely heavily on Node-specific libraries.
 
-Deno also provides infrastructure beyond the runtime. Tests, linters, and formatters are also included. You can also deploy your applications using Deno’s serverless environment, Deno Deploy (learn [how to use Neon with Deno Deploy](https://neon.tech/docs/guides/deno)), and build entire applications using Deno’s framework, [Fresh](https://fresh.deno.dev/).
+Deno also provides infrastructure beyond the runtime. Tests, linters, and formatters are also included. You can also deploy your applications using Deno’s serverless environment, Deno Deploy (learn [how to use Neon with Deno Deploy](https://neon.com/docs/guides/deno)), and build entire applications using Deno’s framework, [Fresh](https://fresh.deno.dev/).
 
 Here’s a simple setup with Deno to use Neon. The Deno-specific things are the import (@neon/serverless is called @neondatabase/serverless in NPM) and the &#96;Deno.env.get&#96; bits. Also, this is a Deno v2 example (which is currently in “canary”).
 

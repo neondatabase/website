@@ -36,7 +36,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/building-a-news-app-with-replit-agent-a-step-by-step-guide/image-1-1024x576-e1bf5cae.png)
 
-**Replit released** [Replit Agent](https://docs.replit.com/replitai/agent)**, an AI Software Engineer that helps build full-stack apps. Replit Agent includes a planner, a code editor, integrations to third-party APIs such as Discord and Stripe, and the ability to create and deploy Postgres databases** [powered by Neon](https://neon.tech/blog/neon-replit-integration).
+**Replit released** [Replit Agent](https://docs.replit.com/replitai/agent)**, an AI Software Engineer that helps build full-stack apps. Replit Agent includes a planner, a code editor, integrations to third-party APIs such as Discord and Stripe, and the ability to create and deploy Postgres databases** [powered by Neon](https://neon.com/blog/neon-replit-integration).
 
 In this tutorial, we’ll walk through how to use **Replit Agent** to build a news app that scrapes data from Hacker News, stores it in a Postgres database, and displays the front end. But first, let’s dive into what **Replit Agent** is and why it’s a powerful tool for developers.
 

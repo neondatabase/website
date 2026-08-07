@@ -79,7 +79,7 @@ This setup lets us deliver lightning-fast results (under 100ms in most cases) no
 
 Now, let’s talk about [Neon](https://neon.tech/), which handles the analytics for 301.Pro. I tried AWS RDS first, but AWS RDS is too expensive for the volume of Analytics and overly complex to set up, especially when using fine-grained user permissions.
 
-So, I tried Neon after talking to a few friends who had recommended it. **I was able to transition our entire analytics operation from AWS RDS to Neon in about two hours. That tells you how different the UX was and the simplicity of Neon.** The dashboard is amazingly simple to use. A detail I loved right away was the [browser based table viewer / editor.](https://neon.tech/blog/edit-records-directly-from-the-neon-console-meet-the-new-tables-page)
+So, I tried Neon after talking to a few friends who had recommended it. **I was able to transition our entire analytics operation from AWS RDS to Neon in about two hours. That tells you how different the UX was and the simplicity of Neon.** The dashboard is amazingly simple to use. A detail I loved right away was the [browser based table viewer / editor.](https://neon.com/blog/edit-records-directly-from-the-neon-console-meet-the-new-tables-page)
 
 Neon also fits really well into this multi-cloud, serverless setup. Both AWS Lambda and Cloudflare can direct connect to the Neon, each with their appropriate credentials. You could accomplish this 100 different ways, but Neon was super simple and easy to understand. For 301.Pro, Neon sits perfectly in the middle of our Multi Cloud setup, acting as the centralized data hub for analytics collection and reporting.
 
@@ -93,7 +93,7 @@ In my opinion, applications should not be running with DBOwner permissions. I wa
 
 ## The Next Steps: Branching Workflows And Branch vs Project Design
 
-Now that we have the basics covered, my next big focus is exploring some of the more advanced features Neon has to offer. First up, I’m looking into Neon’s [branching](https://neon.tech/docs/introduction/branching). The idea of being able to create [ephemeral environments for testing without duplicating entire datasets](https://neon.tech/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) sounds really cool, where I can branch off a main branch that I keep in sync with a testing dataset, run tests or experiments, and then delete those branches automatically.
+Now that we have the basics covered, my next big focus is exploring some of the more advanced features Neon has to offer. First up, I’m looking into Neon’s [branching](https://neon.com/docs/introduction/branching). The idea of being able to create [ephemeral environments for testing without duplicating entire datasets](https://neon.com/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) sounds really cool, where I can branch off a main branch that I keep in sync with a testing dataset, run tests or experiments, and then delete those branches automatically.
 
 Also, I’m still figuring out whether I should create a separate Neon project per customer or manage them within branches. The key here is making sure each customer’s data is isolated for faster queries and better performance, especially as 301 Pro grows. We’ll share where I end up in a future blog post!
 

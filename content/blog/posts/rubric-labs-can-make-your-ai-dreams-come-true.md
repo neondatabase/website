@@ -58,7 +58,7 @@ seo:
 <cite>Sarim Malik, CEO at Rubric Labs</cite>
 </blockquote>
 
-Rubric Labs uses [Neon](https://neon.tech/) for both internal and client projects. Neon is a serverless Postgres database that prioritizes the development experience—it is Postgres built for developers, not DBAs. Thanks to features like [scale to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero) and [autoscaling](https://v/), it eliminates the need to size servers or pay for unused capacity, while speeding up development workflows via [database branching](https://neon.tech/docs/introduction/branching).
+Rubric Labs uses [Neon](https://neon.tech/) for both internal and client projects. Neon is a serverless Postgres database that prioritizes the development experience—it is Postgres built for developers, not DBAs. Thanks to features like [scale to zero](https://neon.com/blog/why-you-want-a-database-that-scales-to-zero) and [autoscaling](https://v/), it eliminates the need to size servers or pay for unused capacity, while speeding up development workflows via [database branching](https://neon.com/docs/introduction/branching).
 
 Speaking of branching: Rubric Labs uses a [development workflow](https://neon.tech/flow) that relies on database branches. Instead of the traditional setup with separate development, staging, and production environments, each developer at Rubric works in their own isolated environment. This includes GitHub branches for every developer, unique database branches for local and staging, plus their own auth tokens and URLs.
 

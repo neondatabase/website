@@ -60,12 +60,12 @@ With our focus on the very thin edge of innovation around Serverless, Edge Funct
 
 The jury is in and Postgres is the winner. The refrain from Oracle customers is “get me off this vendor”. MySQL lost its mojo after Oracle acquired it and SQLServer is strictly for Microsoft zealots with very deep infrastructure budgets. For the rest of us there is the most stable, most functional open-source relational database ever written. When it counts Open-Source still rules.
 
-Neon is not here to teach you how to use Postgres, nor are we here to convince you to move to the cloud or stop using your favorite &lt;insert exotic database variety&gt; brand of database. But if you are using Postgres in the cloud today and you want [Serverless](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) and [Vector search](https://neon.tech/blog/pg-embedding-extension-for-vector-search) in one tidy bundle or you want to distribute Postgres as part of your platform, Neon is the answer.
+Neon is not here to teach you how to use Postgres, nor are we here to convince you to move to the cloud or stop using your favorite &lt;insert exotic database variety&gt; brand of database. But if you are using Postgres in the cloud today and you want [Serverless](https://neon.com/blog/sub-10ms-postgres-queries-for-vercel-edge-functions) and [Vector search](https://neon.com/blog/pg-embedding-extension-for-vector-search) in one tidy bundle or you want to distribute Postgres as part of your platform, Neon is the answer.
 
 Our goal is to become the database of choice for the modern developer cloud. Integrated in every cloud, supported by every tool and platform vendor and the OEM of choice for people who want to embed and/or resell Postgres.
 
 ## 📚 Continue reading
 
-- **[Neon is Generally Available:](https://neon.tech/blog/neon-ga)** we’re bringing serverless Postgres to every developer, simplifying developer workflows and database operations for companies across the board.
-- **[Expanding the Neon Partner Program:](https://neon.tech/blog/expanding-our-partner-program)** if you’re building a developer platform, you can offer managed Postgres to your users powered by Neon.
+- **[Neon is Generally Available:](https://neon.com/blog/neon-ga)** we’re bringing serverless Postgres to every developer, simplifying developer workflows and database operations for companies across the board.
+- **[Expanding the Neon Partner Program:](https://neon.com/blog/expanding-our-partner-program)** if you’re building a developer platform, you can offer managed Postgres to your users powered by Neon.
 - **[How are companies using Neon:](https://neon.tech/case-studies)** explore our Case Studies to learn first-hand why others are choosing Neon. (Hint: it’s because of serverless and autoscaling, easier developer workflows due to copy-on-write branching, and Neon’s suitability for one-database-per-tenant architectures).

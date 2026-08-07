@@ -71,14 +71,14 @@ For databases of this size, full backups and restores aren’t practical. That l
 
 [Neon](https://neon.tech/home) is a fully managed Postgres platform with a modern architecture built to solve the scaling and cost issues teams often encounter with Amazon RDS.
 
-It [separates storage and compute](https://neon.tech/docs/introduction/serverless), allowing developers to create [branches](https://neon.tech/docs/introduction/branching) – copy-on-write clones of a database that don’t duplicate storage and can be created or reset in seconds. Each branch has its own compute layer, which can be autoscaled independently based on workload.
+It [separates storage and compute](https://neon.com/docs/introduction/serverless), allowing developers to create [branches](https://neon.com/docs/introduction/branching) – copy-on-write clones of a database that don’t duplicate storage and can be created or reset in seconds. Each branch has its own compute layer, which can be autoscaled independently based on workload.
 
 This design lets you:
 
 - [Replace heavyweight environments with lightweight branches](https://neon.tech/use-cases/dev-test)
 - [Autoscale compute instead of provisioning for peak usage](https://neon.tech/use-cases/serverless-apps)
 - Pay for actual usage, not for pre-allocated capacity
-- [Restore instantly from any point](https://neon.tech/docs/introduction/branch-restore#how-instant-restore-works) using branches as the underlying primitive
+- [Restore instantly from any point](https://neon.com/docs/introduction/branch-restore#how-instant-restore-works) using branches as the underlying primitive
 
 For traconiq, adopting Neon meant a complete makeover for their infrastructure:
 
@@ -97,14 +97,14 @@ Instead of maintaining and paying for multiple full-blown RDS instances, traconi
 
 To test their setup reliably, traconiq needs their dev environments to mirror production, not just the schema, but also the full data volume. That meant dev instances in RDS needed multi-TB storage volumes too. With Neon, this is no longer a problem:
 
-- Branches don’t duplicate storage, thanks to [Neon’s copy-on-write architecture](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write)
+- Branches don’t duplicate storage, thanks to [Neon’s copy-on-write architecture](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write)
 - Dev environments can be synced with production in one click
 - Compute scales to zero when dev branches are idle
 
-All production branches run with [autoscaling](https://neon.tech/docs/introduction/autoscaling) enabled, which allows traconiq to accommodate daytime ingestion spikes of over 100 records per second, and at the same time, scale down automatically during quiet nighttime hours to save compute costs.
+All production branches run with [autoscaling](https://neon.com/docs/introduction/autoscaling) enabled, which allows traconiq to accommodate daytime ingestion spikes of over 100 records per second, and at the same time, scale down automatically during quiet nighttime hours to save compute costs.
 
 <Admonition type="info">
-On top of this main workload, traconiq also migrated a geo lookup service based on OpenStreetMap and [PostGIS](https://neon.tech/docs/extensions/postgis). To maximize parallelism and response times, they created multiple Neon branches of the same dataset and run them concurrently, something that would have been cost-prohibitive to replicate in RDS.
+On top of this main workload, traconiq also migrated a geo lookup service based on OpenStreetMap and [PostGIS](https://neon.com/docs/extensions/postgis). To maximize parallelism and response times, they created multiple Neon branches of the same dataset and run them concurrently, something that would have been cost-prohibitive to replicate in RDS.
 </Admonition>
 
 ## Final Thoughts

@@ -72,7 +72,7 @@ Once your Postgres instance in RDS reaches a certain size, full logical backups 
 
 When storage and compute are tightly coupled, when environments are full instance clones, and when scaling is manual, costs naturally spiral as you scale – there’s no other way around it. [Neon](https://neon.tech/home) was built to break this pattern.
 
-If you’re new here: Neon is a [serverless Postgres platform](https://neon.tech/docs/get-started-with-neon/why-neon) built to fix all the inefficiencies of traditional managed databases. By [separating storage and compute](https://neon.tech/docs/introduction/architecture-overview) and implementing an innovative storage design with [copy-on-write branching](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write), Neon enables a more flexible and efficient way to manage Postgres at scale.
+If you’re new here: Neon is a [serverless Postgres platform](https://neon.com/docs/get-started-with-neon/why-neon) built to fix all the inefficiencies of traditional managed databases. By [separating storage and compute](https://neon.com/docs/introduction/architecture-overview) and implementing an innovative storage design with [copy-on-write branching](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write), Neon enables a more flexible and efficient way to manage Postgres at scale.
 
 ### Create branches instead of full instances
 
@@ -90,7 +90,7 @@ _**You only pay for the compute and storage that your databases actually use.**_
 
 _**Restores become economical, fast at scale, and testable.**_
 
-Neon implements [point-in-time restore (PITR](https://neon.tech/blog/recover-large-postgres-databases)) as a native part of its branching model. You can restore from any historical point instantly (no matter how large your database is) by creating a branch from that point. You can query that branch directly, test migrations against it, or promote it to production. This model avoids the operational and cost overhead of traditional snapshot-based recovery.
+Neon implements [point-in-time restore (PITR](https://neon.com/blog/recover-large-postgres-databases)) as a native part of its branching model. You can restore from any historical point instantly (no matter how large your database is) by creating a branch from that point. You can query that branch directly, test migrations against it, or promote it to production. This model avoids the operational and cost overhead of traditional snapshot-based recovery.
 
 ## Summary: How Neon Breaks the AWS RDS Cost Spiral
 

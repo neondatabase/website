@@ -44,13 +44,13 @@ You notice the mistake a few minutes later, during which your high-ingestion wor
 
 ## Neon’s superpower: Instant PITR
 
-Enter Neon’s superpower: [Instant Point-in-Time Recovery (PITR)](https://neon.tech/docs/guides/branch-restore). With Neon, you can use branches to restore your database to the moment just before the table disappeared; this is instant, no matter how large the database.
+Enter Neon’s superpower: [Instant Point-in-Time Recovery (PITR)](https://neon.com/docs/guides/branch-restore). With Neon, you can use branches to restore your database to the moment just before the table disappeared; this is instant, no matter how large the database.
 
 When you restore your database to just before the table disappeared, you’re actually creating a new branch rather than overwriting your current production branch. This means:
 
 - **Production stays online.** Your existing “main” branch—the one missing the table—continues running unaltered. New data can keep flowing in, so there’s no disruption to ongoing workloads.
 - **You get a fully independent environment.** The restored branch has its own dedicated compute resources. It’s equivalent to the concept of restoring to a new database instance, but much, much faster.
-- **It takes 1 second—even for huge databases.** Neon uses [copy-on-write storage](https://neon.tech/blog/get-page-at-lsn). Instead of cloning terabytes of data, the new branch references the same underlying storage until you modify something. This is what makes the recovery process nearly instantaneous, taking about one second regardless of database size.
+- **It takes 1 second—even for huge databases.** Neon uses [copy-on-write storage](https://neon.com/blog/get-page-at-lsn). Instead of cloning terabytes of data, the new branch references the same underlying storage until you modify something. This is what makes the recovery process nearly instantaneous, taking about one second regardless of database size.
 
 **How to use this PITR feature to restore the missing table in production?** Below, we’ll outline two recovery routes you can follow, also highlighting why this process is so much faster and more efficient—especially at large scales—than the conventional restore process in RDS and other managed Postgres.
 
@@ -62,8 +62,8 @@ When you restore your database to just before the table disappeared, you’re ac
 
 To recover production as quickly as possible, follow these steps:
 
-1. **Identify the time of the “bad event”.** Estimate the timestamp just before the table was dropped. If you’re unsure when this happened, you can use Neon’s [Time Travel](https://neon.tech/docs/guides/time-travel-assist) feature: in the production branch, you can run queries against past timestamps to pinpoint _exactly_ when the table disappeared.
-2. **Create a branch from before the drop.** [Create a new branch](https://neon.tech/docs/manage/branches#create-a-branch) at the exact point in time before the table was dropped. This _recovered branch_ is instantly available and contains your dropped table in its pre-drop state. Your production branch remains untouched and continues running as usual.
+1. **Identify the time of the “bad event”.** Estimate the timestamp just before the table was dropped. If you’re unsure when this happened, you can use Neon’s [Time Travel](https://neon.com/docs/guides/time-travel-assist) feature: in the production branch, you can run queries against past timestamps to pinpoint _exactly_ when the table disappeared.
+2. **Create a branch from before the drop.** [Create a new branch](https://neon.com/docs/manage/branches#create-a-branch) at the exact point in time before the table was dropped. This _recovered branch_ is instantly available and contains your dropped table in its pre-drop state. Your production branch remains untouched and continues running as usual.
 3. **Dump/copy the dropped table from the recovered branch.** Connect to the new branch and export the schema and data of the missing table (e.g., using pg_dump).
 4. **Restore the table into your production branch.** Import the table into your _current production branch_, which has continued ingesting data since the drop.
 5. **Validate & confirm.** Verify that the table is restored and that all data is consistent. Your ongoing data ingestion (the inserts/updates that happened after the table drop) remains intact because you never rewound or replaced the production branch.
@@ -79,7 +79,7 @@ _Scroll down for a more detailed comparison of Neon’s approach versus traditio
 To switch production to the recovered branch, follow these steps:
 
 1. Just like in Route 1, find the timestamp from just before the table was dropped.
-2. **Run PITR to the time just before the drop.** [Branch Restore](https://neon.tech/docs/guides/branch-restore) will create a new branch at the exact point in time before the table was dropped. This _recovered branch_ is instantly available and contains your dropped table in its pre-drop state. Neon will also update the connection string and switch it to the newly created branch with recovered data. This means your production app already points to the recovered branch without changing DB connection URLs or restarting the application. The switch is seamless.
+2. **Run PITR to the time just before the drop.** [Branch Restore](https://neon.com/docs/guides/branch-restore) will create a new branch at the exact point in time before the table was dropped. This _recovered branch_ is instantly available and contains your dropped table in its pre-drop state. Neon will also update the connection string and switch it to the newly created branch with recovered data. This means your production app already points to the recovered branch without changing DB connection URLs or restarting the application. The switch is seamless.
 3. **Decide what to do with the post-drop data.** If you don’t need the data that was written after the drop, you’re done—your database has been fully restored to its pre-drop state. If you do need the post-drop data, you’ll need to manually copy it into the recovered branch.
 
 **This approach is best suited for scenarios where you want to fully revert to a known good state and discard any post-drop changes.** This may be the case for applications and datasets that don’t get continuous updates by the human end users, and are updated by scripts that can easily re-run (think of the geospatial datasets, ETL transformers, or applications building prognosis on datasets). The key advantage is that Neon enables an instant transition, allowing you to simply swap branches seamlessly under the same database endpoint.
@@ -92,15 +92,15 @@ Let’s recap Neon’s unique advantages for recovery:
 
 With Neon, spinning up a new restored branch is immediate—even for massive databases. Whether your database is 10 GB or 100 TB, the recovery time remains the same: about one second.
 
-This is made possible by Neon’s copy-on-write storage model; instead of duplicating data, it simply references existing storage pages until changes are made. Traditional restore methods require [creating a separate instance, recovering data from snapshots, and replaying WAL](https://neon.tech/blog/recover-large-postgres-databases). This process is not necessary in Neon—you’re saving all that time.
+This is made possible by Neon’s copy-on-write storage model; instead of duplicating data, it simply references existing storage pages until changes are made. Traditional restore methods require [creating a separate instance, recovering data from snapshots, and replaying WAL](https://neon.com/blog/recover-large-postgres-databases). This process is not necessary in Neon—you’re saving all that time.
 
 ### Recover from an exact time, which you can verify using Time Travel
 
-[Neon retains a complete history of your database](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal), allowing you to restore to an exact moment—whether it’s “10 minutes before a bad migration” or just before an accidental table drop. If you’re unsure of the precise recovery point, you can use [Time Travel queries](https://neon.tech/docs/guides/time-travel-assist) to inspect past database states and pinpoint when the data was lost. Your restored branch is created at the optimal moment, minimizing data loss and recovery time.
+[Neon retains a complete history of your database](https://neon.com/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal), allowing you to restore to an exact moment—whether it’s “10 minutes before a bad migration” or just before an accidental table drop. If you’re unsure of the precise recovery point, you can use [Time Travel queries](https://neon.com/docs/guides/time-travel-assist) to inspect past database states and pinpoint when the data was lost. Your restored branch is created at the optimal moment, minimizing data loss and recovery time.
 
 ### Point production to a restored branch without updating the database connection string in your app
 
-For cases where you want to revert to a pre-drop state entirely, Neon [swaps branches under an existing database endpoint.](https://neon.tech/docs/manage/endpoints?utm_source=chatgpt.com) This instantly points your application to the recovered branch without changing connection URLs and restarting your app, a process that would often require updating configuration files and redeploying your app.
+For cases where you want to revert to a pre-drop state entirely, Neon [swaps branches under an existing database endpoint.](https://neon.com/docs/manage/endpoints?utm_source=chatgpt.com) This instantly points your application to the recovered branch without changing connection URLs and restarting your app, a process that would often require updating configuration files and redeploying your app.
 
 ## Comparison vs. AWS RDS and other managed Postgres
 
@@ -122,7 +122,7 @@ Experience Neon's PITR speed by yourself: [run this demo.](https://neon-demos-br
 
 ### The AWS RDS restore process: Why it’s slower
 
-[AWS RDS relies on automated snapshots and WAL replays for PITR.](https://neon.tech/blog/recover-large-postgres-databases) If your last snapshot was taken hours ago, RDS must:
+[AWS RDS relies on automated snapshots and WAL replays for PITR.](https://neon.com/blog/recover-large-postgres-databases) If your last snapshot was taken hours ago, RDS must:
 
 1. Restore the full snapshot (which takes time, especially for large instances).
 2. Replay all WAL logs from that snapshot to the desired recovery point.

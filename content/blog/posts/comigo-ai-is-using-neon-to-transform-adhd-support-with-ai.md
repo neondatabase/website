@@ -72,7 +72,7 @@ When they first built Comigo, the team initially managed their database using Cl
 
 When Comigo tried [Neon](https://neon.tech/), they realized they’d found what they were looking for. Neon is a serverless Postgres platform built to enable developers to ship faster without babysitting their database.
 
-Due to its unique architecture, Neon is much simpler to maintain than other Postgres solutions. Instead of provisioning CPU / memory / storage upfront, [Neon autoscales resources automatically in response to load.](https://neon.tech/docs/introduction/autoscaling) It’s also developer-friendly in nature, with an lo API-first feel and [integrations](https://neon.tech/docs/guides/integrations) with all the popular frameworks, tools, and ORMs. Even [small teams can manage thousands of Postgres databases](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) on Neon.
+Due to its unique architecture, Neon is much simpler to maintain than other Postgres solutions. Instead of provisioning CPU / memory / storage upfront, [Neon autoscales resources automatically in response to load.](https://neon.com/docs/introduction/autoscaling) It’s also developer-friendly in nature, with an lo API-first feel and [integrations](https://neon.com/docs/guides/integrations) with all the popular frameworks, tools, and ORMs. Even [small teams can manage thousands of Postgres databases](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) on Neon.
 
 ## The magic of database branching
 
@@ -81,7 +81,7 @@ Due to its unique architecture, Neon is much simpler to maintain than other Post
 <cite>Paul Dlug, CTO at Comigo.ai</cite>
 </blockquote>
 
-But one of the most unique advantages of Neon is its [branching](https://neon.tech/docs/introduction/branching) capability. Neon allows you to “branch” your databases in order to create instant copies of data and schema via copy-and-write which feel similar to how Git branches code.
+But one of the most unique advantages of Neon is its [branching](https://neon.com/docs/introduction/branching) capability. Neon allows you to “branch” your databases in order to create instant copies of data and schema via copy-and-write which feel similar to how Git branches code.
 
 This enables teams like Comigo to adopt [database branching workflows](https://neon.tech/flow) for their deployment and testing pipelines. Comigo uses branching for:
 

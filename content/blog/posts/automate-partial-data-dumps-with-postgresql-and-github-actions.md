@@ -47,7 +47,7 @@ In this post, I’ll show you how to create a partial copy of your production da
 
 ## What is a Neon Twin?
 
-A [Neon Twin](https://neon.tech/docs/guides/neon-twin-intro) is a copy of your production database, free from the cumbersome, hard-to-manage, and expensive workflows. With a Neon Twin, you can instantly spin up a new branch, develop features, or track down bugs, all from the safety of an isolated environment using production data. Any changes made to a Twin would be migrated back to your production database using your existing workflow or pipeline.
+A [Neon Twin](https://neon.com/docs/guides/neon-twin-intro) is a copy of your production database, free from the cumbersome, hard-to-manage, and expensive workflows. With a Neon Twin, you can instantly spin up a new branch, develop features, or track down bugs, all from the safety of an isolated environment using production data. Any changes made to a Twin would be migrated back to your production database using your existing workflow or pipeline.
 
 ## How to create a Neon Twin
 
@@ -125,7 +125,7 @@ Below is the `cron` schedule. It is written using [POSIX cron syntax](https://pu
 There are three environment variables, the first two will be securely stored as GitHub secrets:
 
 1. `PROD_DATABASE_URL`: The Postgres connection string for your production or staging database.
-2. `DEV_DATABASE_URL`: The Postgres connection string for your Neon database. If you don’t have a Neon account, [sign up here](https://console.neon.tech/signup) and follow our [getting started guide](https://neon.tech/docs/get-started-with-neon/signing-up).
+2. `DEV_DATABASE_URL`: The Postgres connection string for your Neon database. If you don’t have a Neon account, [sign up here](https://console.neon.tech/signup) and follow our [getting started guide](https://neon.com/docs/get-started-with-neon/signing-up).
 3. `PG_VERSION`: The Postgres version is to be installed in the Action environment. It should be compatible with both your production and Neon Twin databases.
 
 You’ll also need to add the values from steps 1 and 2 as GitHub repository secrets—I’ll cover that later.
@@ -224,8 +224,8 @@ In the GitHub UI, navigate to **Settings** > **Secrets and variables** > **Actio
 
 Dumping production data into development environments can raise potential concerns, especially regarding Personally Identifiable Information (PII).
 
-However, sensitive information is often confined to specific tables and columns. Partial data dumps can potentially avoid these issues and ensure that only safe-to-use data is included. That said, data privacy remains an important consideration. [We’ve been actively working on a new solution](https://neon.tech/docs/introduction/roadmap#what-were-working-on-now) that enables the anonymization of sensitive data whenever a branch is created, addressing these privacy concerns more effectively.
+However, sensitive information is often confined to specific tables and columns. Partial data dumps can potentially avoid these issues and ensure that only safe-to-use data is included. That said, data privacy remains an important consideration. [We’ve been actively working on a new solution](https://neon.com/docs/introduction/roadmap#what-were-working-on-now) that enables the anonymization of sensitive data whenever a branch is created, addressing these privacy concerns more effectively.
 
 ## Conclusion
 
-With a [Neon Twin](https://neon.tech/docs/guides/neon-twin-intro), you can create isolated environments that mirror staging or production for safe development and testing. And our plans to help you anonymize sensitive data will further secure your workflow, making your testing more effective. Happy coding!!
+With a [Neon Twin](https://neon.com/docs/guides/neon-twin-intro), you can create isolated environments that mirror staging or production for safe development and testing. And our plans to help you anonymize sensitive data will further secure your workflow, making your testing more effective. Happy coding!!

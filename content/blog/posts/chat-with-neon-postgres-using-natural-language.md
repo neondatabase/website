@@ -68,7 +68,7 @@ Even technical teams can offload routine data tasks to the AI, freeing up time f
 
 ## Combining AskYourDatabase with Neon branching
 
-Neon is uniquely advantageous for AskYourDatabase due to their branching feature. [Neon allows you to create isolated copies, or “branches,” of your database environment for development:](https://neon.tech/docs/introduction/branching) each branch is a full, independent clone of your database, including its data and schema, created without impacting the production environment.
+Neon is uniquely advantageous for AskYourDatabase due to their branching feature. [Neon allows you to create isolated copies, or “branches,” of your database environment for development:](https://neon.com/docs/introduction/branching) each branch is a full, independent clone of your database, including its data and schema, created without impacting the production environment.
 
 Instead of granting non-technical teams access to the production database, with Neon you can easily connect AskYourDatabase to a development branch. This setup allows your non-technical teammates to query and manipulate data safely without impacting the live environment.
 

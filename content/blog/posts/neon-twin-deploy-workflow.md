@@ -41,7 +41,7 @@ seo:
 If you're looking for a comparison of Neon vs RDS, check out [neon.tech/rds](https://neon.tech/rds).
 </Admonition>
 
-In previous articles, we discussed the [advantages of using Neon as a development database](https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres) while keeping your production workloads on AWS RDS. We covered [how to set up nightly dump/restore jobs](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) using GitHub Actions to create a synchronized Neon Twin of your production database and [how to implement Slack Webhooks](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows%5C) for real-time notifications when the synchronization is complete.
+In previous articles, we discussed the [advantages of using Neon as a development database](https://neon.com/blog/development-environments-for-aws-rds-using-neon-postgres) while keeping your production workloads on AWS RDS. We covered [how to set up nightly dump/restore jobs](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) using GitHub Actions to create a synchronized Neon Twin of your production database and [how to implement Slack Webhooks](https://neon.com/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows%5C) for real-time notifications when the synchronization is complete.
 
 In this article, we’ll explore the reverse workflow: **how to migrate changes from your Neon Twin (your development environment) back to your AWS RDS production database.** We will automate this process through a GitHub Action that triggers when a pull request is merged.
 
@@ -51,15 +51,15 @@ We call this workflow the Reverse Twin, and it all starts with [database branchi
 
 ## Quick intro to database branching with Neon
 
-In our previous articles, [we built a Neon Twin synced with your production database in AWS RDS](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon), so you could rely on Neon’s [superior development experience](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle) for your dev and testing environments. Now, we’ll introduce you to database branching in Neon so you can take advantage of if in your development workflows.
+In our previous articles, [we built a Neon Twin synced with your production database in AWS RDS](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon), so you could rely on Neon’s [superior development experience](https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle) for your dev and testing environments. Now, we’ll introduce you to database branching in Neon so you can take advantage of if in your development workflows.
 
 [Database branching](https://www.google.com/search?client=safari&rls=en&q=neon+database+branching&ie=UTF-8&oe=UTF-8) in Neon works similarly to Git branching. It enables you to instantly create isolated copies of a particular dataset via copy-on-write, to build and test new features on a copy of production data without further dumping/restoring into new instances or paying extra for storage.
 
-This is a great feature to [boost development speed](https://neon.tech/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd). By branching from your Neon Twin, you can safely experiment with changes without affecting the main development branch, where you’re loading prod data from RDS. In this section, we’ll guide you through creating and working with these branches, and we’ll set the stage for migrating your updates back to production.
+This is a great feature to [boost development speed](https://neon.com/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd). By branching from your Neon Twin, you can safely experiment with changes without affecting the main development branch, where you’re loading prod data from RDS. In this section, we’ll guide you through creating and working with these branches, and we’ll set the stage for migrating your updates back to production.
 
 ## Documenting changes in your dev branches in Neon
 
-The first step to migrating (or applying) changes made to your Neon Twin to your production database is to _record_ the changes that were made in your development branches (how they differ from main). Neon allows you to do this in a straightforward way via the [schema diff](https://neon.tech/docs/guides/schema-diff) feature.
+The first step to migrating (or applying) changes made to your Neon Twin to your production database is to _record_ the changes that were made in your development branches (how they differ from main). Neon allows you to do this in a straightforward way via the [schema diff](https://neon.com/docs/guides/schema-diff) feature.
 
 Let’s set things up. From within the Neon console, navigate to **Branches** and click the **Create branch** button.
 
@@ -233,7 +233,7 @@ In our case, using `psql`, we can run `\\d users` to see the schema for our user
 
 ## Syncing Production with Neon Twin
 
-The final piece of this puzzle is to re-synchronize your production database with your Neon Twin. In a [previous post](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) we explained how to perform a dump/restore using a scheduled GitHub Action, for this workflow we’ll use a similar approach but rather than the dump/restore running on a schedule, it’ll run after production migrations have been applied.
+The final piece of this puzzle is to re-synchronize your production database with your Neon Twin. In a [previous post](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) we explained how to perform a dump/restore using a scheduled GitHub Action, for this workflow we’ll use a similar approach but rather than the dump/restore running on a schedule, it’ll run after production migrations have been applied.
 
 For either of the above Actions you could add the following which will perform a fresh dump/restore from your production database back to your Neon Twin.
 
@@ -245,6 +245,6 @@ name: Migrate to prod (...)<br><br>on:<br>  pull_request:<br>    types: [closed]
 
 And that just about wraps things up. This completes our series on how to use Neon for development. If you missed the first three articles, here are the links again.
 
-1. [Optimize your AWS RDS Dev Environments with Neon Postgres](https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres)
-2. [Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
-3. [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows)
+1. [Optimize your AWS RDS Dev Environments with Neon Postgres](https://neon.com/blog/development-environments-for-aws-rds-using-neon-postgres)
+2. [Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
+3. [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.com/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows)

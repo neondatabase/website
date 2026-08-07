@@ -52,7 +52,7 @@ Of course, it’s not just `\\d` and `\\l`: there are lots of other useful backs
 
 # \\d **works now**
 
-Fast-forward a year or two. Having put together Neon’s [serverless driver](https://neon.tech/docs/serverless/serverless-driver) — which runs in environments that don’t offer raw TCP connections, such as web browsers — I was tasked to upgrade our web-based SQL Editor to make use of it. This enables interactive sessions and transactions in the SQL Editor, and reduces memory usage on our back-end, amongst other things.
+Fast-forward a year or two. Having put together Neon’s [serverless driver](https://neon.com/docs/serverless/serverless-driver) — which runs in environments that don’t offer raw TCP connections, such as web browsers — I was tasked to upgrade our web-based SQL Editor to make use of it. This enables interactive sessions and transactions in the SQL Editor, and reduces memory usage on our back-end, amongst other things.
 
 <blockquote>
 <p>Easter egg alert! As a as result of this work, if you open your browser’s dev tools in the SQL Editor, you can also run queries there using the currently-connected serverless driver client. The client is a property of the window, named <code>rawClient</code>. It’s so named because all parsing has been turned off: it returns the raw Postgres text format for each data type. Try pasting in <code>rawClient.query('SELECT now()').then(console.log)</code>, for instance.</p>
@@ -94,7 +94,7 @@ To figure out which semicolons are the significant ones, there are three syntax 
 - Comments are only a little trickier. Single-line comments extend from a double-dash to the end of a line. C-style `/* … */` block comments also exist, and can be nested.
 - Strings are the most complex. They can be plain single-quoted, in which case the character-escape behaviour inside them depends on the Postgres server’s `standard_conforming_strings` configuration parameter. Or they can be ‘escape strings’, which have an `e` or `E` before the opening quote. Both these sorts of strings can combine across whitespace (but only if it includes a newline). Or, of course, they can be dollar-quoted strings.
 
-In any case, the upshot is that I wrote [another little open-source package](https://github.com/neondatabase/semicolons) to do only this much parsing. It makes heavy use of [sticky RegExps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky) — a JS parser-writer’s best friend, [as I’ve mentioned elsewhere](https://neon.tech/blog/parsing-json-from-postgres-in-js) — to efficiently locate both comments and statement-terminating semicolons in SQL string.
+In any case, the upshot is that I wrote [another little open-source package](https://github.com/neondatabase/semicolons) to do only this much parsing. It makes heavy use of [sticky RegExps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky) — a JS parser-writer’s best friend, [as I’ve mentioned elsewhere](https://neon.com/blog/parsing-json-from-postgres-in-js) — to efficiently locate both comments and statement-terminating semicolons in SQL string.
 
 We also allow backslash commands to be newline-terminated, which is just a small extra step on top of the work done by the package.
 

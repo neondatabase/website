@@ -140,13 +140,13 @@ The performance benefits of mocks often mask hidden costs in maintenance time an
 
 ## Don’t Mock, Branch
 
-There is another option–[branching](https://neon.tech/docs/introduction/branching).
+There is another option–[branching](https://neon.com/docs/introduction/branching).
 
 Instead of creating mocks or maintaining separate test databases, you create lightweight, isolated copies of your actual database. But here’s the clever part–these aren’t full copies. Through copy-on-write technology, each branch initially references the same data as its parent, only creating new copies when changes are made. This means you get instant test environments with real data and real behavior but without the overhead of full database copies.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/test-your-database-without-mocks/671-1024x426-2fa9c82d.png)
 
-With [Neon’s Dev/Test paradigm](https://neon.tech/docs/use-cases/dev-test), let’s look at how branching transforms common testing scenarios.
+With [Neon’s Dev/Test paradigm](https://neon.com/docs/use-cases/dev-test), let’s look at how branching transforms common testing scenarios.
 
 ### Isolated Testing Environments
 

@@ -50,19 +50,19 @@ We have a generous free tier for you with availability in four major regions: US
 
 Here are a few steps to get you started:
 
-1. Create a project in seconds and [connect to your application](https://neon.tech/docs/connect/connect-from-any-app/) with the database URL.
-2. Query a Neon project database from the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor/) or connect using Neon’s [passwordless connect](https://neon.tech/docs/connect/passwordless-connect/) feature from your terminal: `psql -h pg.neon.tech`.
+1. Create a project in seconds and [connect to your application](https://neon.com/docs/connect/connect-from-any-app/) with the database URL.
+2. Query a Neon project database from the [Neon SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor/) or connect using Neon’s [passwordless connect](https://neon.com/docs/connect/passwordless-connect/) feature from your terminal: `psql -h pg.neon.tech`.
 3. Navigate to the **Branches** page to create a branch
-4. [Import your Postgres data to](https://neon.tech/docs/import/import-from-postgres) [Neon](https://neon.tech/docs/how-to-guides/import-an-existing-database/)
+4. [Import your Postgres data to](https://neon.com/docs/import/import-from-postgres) [Neon](https://neon.com/docs/how-to-guides/import-an-existing-database/)
 
-With Neon database branching, your database environments are just a branch of your production database. Because Neon stores Write-Ahead-Log records, this means you can create a branch with the latest and most up-to-date information or from any point in time in your database’s history to run tests on the previous state of your data. Read the full announcement in the Database Branching with Neon blog post, or learn more about database branching in the [Neon documentation](https://neon.tech/docs/introduction/branching/).
+With Neon database branching, your database environments are just a branch of your production database. Because Neon stores Write-Ahead-Log records, this means you can create a branch with the latest and most up-to-date information or from any point in time in your database’s history to run tests on the previous state of your data. Read the full announcement in the Database Branching with Neon blog post, or learn more about database branching in the [Neon documentation](https://neon.com/docs/introduction/branching/).
 
 <video autoPlay muted controls width="800" height="390">
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/neon-serverless-postgres-is-live/recording-opt-1ad3fda0.webm" type="video/webm" />
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/neon-serverless-postgres-is-live/recording-opt-7054b1f1.mp4" type="video/mp4" />
 </video>
 
-You can automate your processes with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Create an API Key to manage your projects, branches, and databases with a simple API call from your application or CI/CD. Create a branch, run your tests, then delete it once your jobs are completed.
+You can automate your processes with the [Neon API](https://neon.com/docs/reference/api/get-started). Create an API Key to manage your projects, branches, and databases with a simple API call from your application or CI/CD. Create a branch, run your tests, then delete it once your jobs are completed.
 
 ```bash
 curl -X 'GET' \
@@ -71,6 +71,6 @@ curl -X 'GET' \
   -H 'Authorization: Bearer API_KEY'
 ```
 
-Join us tomorrow at the Neon Developer Days to talk about All-Things-Branching, where we will discuss using the Neon API for local development and CI/CD with GitHub Actions. Learn more about the Neon API in our [documentation](https://api-docs.neon.tech/reference/getting-started-with-neon-api).<br />
+Join us tomorrow at the Neon Developer Days to talk about All-Things-Branching, where we will discuss using the Neon API for local development and CI/CD with GitHub Actions. Learn more about the Neon API in our [documentation](https://neon.com/docs/reference/api/get-started).<br />
 
 As always, the Neon team values your feedback, and we’re here to answer your questions. Please get in touch with us in our Community Forum or email us at [feedback@neon.tech](mailto:feedback@neon.tech). You can also [star Neon on GitHub](https://github.com/neondatabase/neon) and find us on Twitter [@neondatabase](https://twitter.com/neondatabase).
