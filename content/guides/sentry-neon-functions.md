@@ -4,7 +4,7 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-08-07T15:09:20.266Z'
+updatedOn: '2026-08-07T16:58:52.237Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) make it easy to ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a platform-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
@@ -216,7 +216,7 @@ You'll build a small JSON API that "charges" an order through two fake payment p
 | --------------------- | ---------------------------------------------------------------------- | ----------------- |
 | `POST /api/orders`    | Charges an order, falling back to a second payment provider on failure | Logs and errors   |
 | `GET /api/orders/:id` | Returns a canned order                                                 | Traces            |
-| `GET /healthz`        | Health check                                                           | Traces            |
+| `GET /health`         | Health check                                                           | Traces            |
 | `GET /debug-sentry`   | Throws on purpose so you can test the wiring                           | Errors            |
 
 Three Sentry calls cover the three signals: `Sentry.startSpan()` times a piece of work (traces), `Sentry.logger.*()` records a structured log entry (logs), and `Sentry.captureException()` reports an error as a grouped issue (errors).
@@ -264,7 +264,7 @@ The middleware adds the request root span, and it's the one block you'll copy in
 Add two simple routes to verify the function is running and to return a canned order:
 
 ```ts filename="src/index.ts"
-app.get("/healthz", (c) => c.json({ status: "ok" }));
+app.get("/health", (c) => c.json({ status: "ok" }));
 
 app.get("/api/orders/:id", (c) => c.json({ orderId: c.req.param("id"), status: "confirmed" }));
 ```
@@ -402,7 +402,7 @@ app.use("*", (c, next) =>
   ),
 );
 
-app.get("/healthz", (c) => c.json({ status: "ok" }));
+app.get("/health", (c) => c.json({ status: "ok" }));
 
 app.get("/api/orders/:id", (c) => c.json({ orderId: c.req.param("id"), status: "confirmed" }));
 
@@ -488,7 +488,7 @@ The `neon link` command created a `neon.ts` file in your project root. Update it
 ```ts filename="neon.ts" {12-24}
 import { defineConfig } from "@neon/config/v1";
 
-export default defineConfig({
+export const config = defineConfig({
   branch: (branch) => {
     if (branch.isDefault) { return {}; }
     if (!branch.exists) { return { ttl: "7d" }; }
@@ -509,6 +509,8 @@ export default defineConfig({
     },
   },
 });
+
+export default config;
 ```
 
 Here's what each property does:
@@ -600,7 +602,7 @@ Next, extend the Sentry initialization in `src/instrument.ts` to include the AI 
 ```ts filename="src/instrument.ts" shouldWrap
 import * as Sentry from "@sentry/node";
 import { parseEnv } from "@neon/env";
-import { config } from "./neon";
+import { config } from "../neon";
 
 const env = parseEnv(config, "api");
 
@@ -610,15 +612,14 @@ Sentry.init({
   enableLogs: true,
   tracesSampleRate: Number(env.function.SENTRY_TRACES_SAMPLE_RATE ?? 1),
   traceLifecycle: "stream", // [!code ++]
-  streamGenAiSpans: true, // [!code ++]
   integrations: [
     Sentry.vercelAIIntegration({ force: true }), // [!code ++]
     Sentry.httpIntegration({ disableIncomingRequestSpans: true }),
   ],
   release: env.function.SENTRY_RELEASE,
   environment:
-    env.branch && env.branch !== env.function.PRODUCTION_BRANCH
-      ? env.branch
+    env.branch && env.branch.name !== env.function.PRODUCTION_BRANCH
+      ? env.branch.name
       : "production",
 });
 
@@ -628,7 +629,7 @@ process.on("SIGINT", () => void Sentry.flush(2000));
 export { Sentry };
 ```
 
-The new options `traceLifecycle: "stream"` and `streamGenAiSpans: true` tell the SDK to stream `gen_ai` spans as they are produced by the AI SDK, rather than waiting for the request to finish. The `Sentry.vercelAIIntegration({ force: true })` integration enables the AI SDK to emit spans for model calls and tool executions.
+The new option `traceLifecycle: "stream"` tells the SDK to stream `gen_ai` spans in batches. The `Sentry.vercelAIIntegration({ force: true })` integration enables the AI SDK to emit spans for model calls and tool executions.
 
 Now add a route to `src/index.ts`. The `POST /chat` route streams a tool-calling agent and shows off the traces signal on an AI workload. Add these imports and the route to your existing file:
 
@@ -637,7 +638,7 @@ import { streamText, tool, isStepCount } from "ai";
 import { neon } from "@neon/ai-sdk-provider";
 import { z } from "zod";
 import { parseEnv } from "@neon/env";
-import { config } from "./neon";
+import { config } from "../neon";
 
 // ... other imports and app setup ...
 
@@ -669,7 +670,7 @@ app.post("/chat", async (c) => {
       }),
     },
     stopWhen: isStepCount(5),
-    experimental_telemetry: { isEnabled: true },
+    telemetry: { isEnabled: true },
     onError: ({ error }) => {
       Sentry.captureException(error, { tags: { component: "agent", phase: "chat-stream" } });
     },
@@ -697,7 +698,7 @@ export default app;
 
 Here's what each piece does:
 
-- **`experimental_telemetry: { isEnabled: true }`** opts the AI SDK call into emitting `gen_ai` spans. Without it, Sentry sees nothing of the agent.
+- **`telemetry: { isEnabled: true }`** opts the AI SDK call into emitting `gen_ai` spans. Without it, Sentry sees nothing of the agent.
 - **`streamText` never throws**: failures surface as error parts inside the stream and the HTTP response just ends, so without `onError` a dead agent looks like an empty reply. The middleware's flush runs when the `Response` object is created, before the model finishes, and the `gen_ai` spans only end with the stream. The `TransformStream` finalizer flushes them while the request is still alive.
 - **`Sentry.setConversationId`** (plus an optional `Sentry.setUser`) groups multi-turn chats into a timeline.
 
@@ -716,7 +717,7 @@ Finally, enable the AI Gateway and redeploy. Update `neon.ts` to set `aiGateway:
           SENTRY_RELEASE: process.env.SENTRY_RELEASE ?? "",
           SENTRY_TRACES_SAMPLE_RATE: process.env.SENTRY_TRACES_SAMPLE_RATE ?? "1",
           PRODUCTION_BRANCH: process.env.PRODUCTION_BRANCH ?? "main",
-          AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b",
+          AGENT_MODEL: process.env.AGENT_MODEL ?? "gpt-oss-120b", // [!code ++]
         },
       }
     },
