@@ -14,7 +14,12 @@ const model = (over = {}) => ({
   name: 'A',
   provider: 'openai',
   family: 'gpt',
+  attachment: false,
   reasoning: false,
+  tool_call: true,
+  temperature: true,
+  modalities: { input: ['text'], output: ['text'] },
+  limit: { context: 1000, output: 100 },
   ...over,
 });
 
@@ -148,7 +153,7 @@ describe('validateCatalog', () => {
           cost: {
             input: 1,
             output: 2,
-            tiers: [{ tier: { type: 'context', size: 272000 }, input: -2 }],
+            tiers: [{ tier: { type: 'context', size: 272000 }, input: -2, output: 4 }],
           },
         }),
       })
@@ -166,7 +171,7 @@ describe('validateCatalog', () => {
           cost: {
             input: 1,
             output: 2,
-            tiers: [{ tier: { type: 'context', size: 272000 }, input: 2 }],
+            tiers: [{ tier: { type: 'context', size: 272000 }, input: 2, output: 4 }],
           },
         }),
       })
@@ -219,7 +224,11 @@ describe('validateCatalog', () => {
     const bad = validateCatalog(
       catalog({
         a: model({
-          cost: { input: 1, output: 2, tiers: [{ tier: { type: 42, size: -1 }, input: 3 }] },
+          cost: {
+            input: 1,
+            output: 2,
+            tiers: [{ tier: { type: 42, size: -1 }, input: 3, output: 6 }],
+          },
         }),
       })
     );
@@ -228,7 +237,7 @@ describe('validateCatalog', () => {
       expect.stringContaining('tier.size must be a positive integer'),
     ]);
 
-    const tier = { tier: { type: 'context', size: 272000 }, input: 3 };
+    const tier = { tier: { type: 'context', size: 272000 }, input: 3, output: 6 };
     const dupe = validateCatalog(
       catalog({ a: model({ cost: { input: 1, output: 2, tiers: [tier, tier] } }) })
     );
@@ -262,6 +271,85 @@ describe('validateCatalog', () => {
     expect(errors).toEqual(
       expect.arrayContaining([expect.stringContaining('keyed by an empty string')])
     );
+  });
+
+  it('rejects a model missing a required field', () => {
+    const { limit: _limit, ...withoutLimit } = model();
+    const errors = validateCatalog(catalog({ a: withoutLimit }));
+
+    expect(errors).toEqual([expect.stringContaining('a.limit is missing')]);
+  });
+
+  it('rejects an unknown modality or limit key', () => {
+    expect(
+      validateCatalog(
+        catalog({ a: model({ modalities: { input: ['telepathy'], output: ['text'] } }) })
+      )
+    ).toEqual([expect.stringContaining('unknown modalities: telepathy')]);
+    expect(validateCatalog(catalog({ a: model({ limit: { vibes: 10 } }) }))).toEqual([
+      expect.stringContaining('a.limit.vibes is not a known limit'),
+    ]);
+  });
+
+  it('rejects an unknown reasoning option type', () => {
+    const errors = validateCatalog(
+      catalog({ a: model({ reasoning: true, reasoning_options: [{ type: 'vibes' }] }) })
+    );
+
+    expect(errors).toEqual([
+      expect.stringContaining('must be one of toggle, effort, budget_tokens'),
+    ]);
+  });
+
+  it('accepts the reasoning option types the catalog actually uses', () => {
+    const errors = validateCatalog(
+      catalog({
+        a: model({
+          reasoning: true,
+          reasoning_options: [
+            { type: 'toggle' },
+            { type: 'effort', values: ['low'] },
+            { type: 'budget_tokens' },
+          ],
+        }),
+      })
+    );
+
+    expect(errors).toEqual([]);
+  });
+
+  it('rejects a numeric status', () => {
+    expect(validateCatalog(catalog({ a: model({ status: 7 }) }))).toEqual([
+      expect.stringContaining('a.status must be one of'),
+    ]);
+  });
+
+  // An empty nested block says the condition it names is free.
+  it('holds a nested cost block to the same rules as the top level', () => {
+    expect(
+      validateCatalog(
+        catalog({ a: model({ cost: { input: 1, output: 2, context_over_200k: {} } }) })
+      )
+    ).toEqual([
+      expect.stringContaining('a.cost.context_over_200k needs both an input and an output'),
+    ]);
+    expect(
+      validateCatalog(catalog({ a: model({ cost: { input: 1, output: 2, per_wish: {} } }) }))
+    ).toEqual([expect.stringContaining('a.cost.per_wish is not a known rate')]);
+  });
+
+  it('rejects a tier that carries a descriptor but no rates', () => {
+    const errors = validateCatalog(
+      catalog({
+        a: model({
+          cost: { input: 1, output: 2, tiers: [{ tier: { type: 'context', size: 272000 } }] },
+        }),
+      })
+    );
+
+    expect(errors).toEqual([
+      expect.stringContaining('a.cost.tiers[0] needs both an input and an output'),
+    ]);
   });
 
   it('rejects a catalog with no models rather than passing vacuously', () => {

@@ -56,9 +56,16 @@ function extractNeonModels(apiJson, source) {
   if (ids.length === 0) {
     throw new Error(`"neon.models" in ${source} is empty`);
   }
-  const malformed = ids.filter((id) => !models[id] || typeof models[id] !== 'object');
+  const malformed = ids.filter((id) => {
+    const model = models[id];
+    return (
+      !model || typeof model !== 'object' || Array.isArray(model) || Object.keys(model).length === 0
+    );
+  });
   if (malformed.length > 0) {
-    throw new Error(`"neon.models" in ${source} has non-object entries: ${malformed.join(', ')}`);
+    throw new Error(
+      `"neon.models" in ${source} has empty or non-object entries: ${malformed.join(', ')}`
+    );
   }
   return models;
 }

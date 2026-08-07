@@ -82,6 +82,7 @@ const PROVIDER_ORDER = [
   'alibaba',
   'zhipuai',
   'thinkingmachines',
+  'moonshotai',
 ];
 
 // The organisation that made the model, matching models.dev provider ids — not
@@ -102,9 +103,11 @@ function providerFor(model) {
               ? 'alibaba'
               : s.startsWith('glm')
                 ? 'zhipuai'
-                : s === 'ling' || s.startsWith('inkling')
-                  ? 'thinkingmachines'
-                  : undefined;
+                : s.startsWith('kimi')
+                  ? 'moonshotai'
+                  : s === 'ling' || s.startsWith('inkling')
+                    ? 'thinkingmachines'
+                    : undefined;
   const family = typeof model.family === 'string' ? model.family : '';
   const id = typeof model.id === 'string' ? model.id : '';
   return match(family) || match(id) || (id.includes('llama') ? 'meta' : undefined);
@@ -197,6 +200,21 @@ async function main() {
   }
 
   const ids = requested;
+  const unusable = ids.filter((id) => {
+    const model = upstream[id];
+    return (
+      id in upstream &&
+      (!model ||
+        typeof model !== 'object' ||
+        Array.isArray(model) ||
+        Object.keys(model).length === 0)
+    );
+  });
+  if (unusable.length) {
+    console.error(`Empty or malformed in ${from}: ${unusable.join(', ')}`);
+    process.exit(2);
+  }
+
   const unknown = ids.filter((id) => !(id in upstream));
   if (unknown.length) {
     console.error(`Not present in ${from}: ${unknown.join(', ')}`);

@@ -39,6 +39,25 @@ const BOOLEAN_KEYS = [
   'structured_output',
 ];
 const DATE_KEYS = ['release_date', 'last_updated', 'knowledge'];
+/** Every field a published model must carry. */
+const REQUIRED_KEYS = [
+  'id',
+  'name',
+  'provider',
+  'family',
+  'attachment',
+  'reasoning',
+  'tool_call',
+  'temperature',
+  'modalities',
+  'limit',
+];
+const MODALITIES = new Set(['text', 'image', 'audio', 'video', 'pdf']);
+const LIMIT_KEYS = new Set(['context', 'input', 'output']);
+const REASONING_OPTION_TYPES = new Set(['toggle', 'effort', 'budget_tokens']);
+const STATUSES = new Set(['deprecated', 'retired']);
+/** Nested rate blocks, keyed by the condition under which they apply. */
+const NESTED_COST_KEYS = new Set(['context_over_200k']);
 const ISO_DATE = /^\d{4}-\d{2}(-\d{2})?$/;
 /** Rate keys a `[cost]` block may carry, besides the `tiers` array. */
 const COST_RATE_KEYS = new Set([
@@ -168,10 +187,19 @@ export function validateCatalog(data) {
     }
     if (model.id !== key) fail(`${at('id')} is ${JSON.stringify(model.id)}, expected ${key}`);
 
+    for (const field of REQUIRED_KEYS) {
+      if (model[field] === undefined) fail(`${at(field)} is missing`);
+    }
     for (const field of ['id', 'name', 'provider', 'family']) {
-      if (typeof model[field] !== 'string' || model[field].trim() === '') {
+      if (
+        model[field] !== undefined &&
+        (typeof model[field] !== 'string' || model[field].trim() === '')
+      ) {
         fail(`${at(field)} must be a non-empty string`);
       }
+    }
+    if (model.status !== undefined && !STATUSES.has(model.status)) {
+      fail(`${at('status')} must be one of ${[...STATUSES].join(', ')}`);
     }
     for (const field of BOOLEAN_KEYS) {
       if (model[field] !== undefined && typeof model[field] !== 'boolean') {
@@ -190,8 +218,13 @@ export function validateCatalog(data) {
       } else {
         for (const side of ['input', 'output']) {
           const list = model.modalities[side];
-          if (!Array.isArray(list) || list.some((x) => typeof x !== 'string')) {
-            fail(`${at(`modalities.${side}`)} must be an array of strings`);
+          if (!Array.isArray(list) || list.length === 0) {
+            fail(`${at(`modalities.${side}`)} must be a non-empty array`);
+            continue;
+          }
+          const unknown = list.filter((x) => !MODALITIES.has(x));
+          if (unknown.length > 0) {
+            fail(`${at(`modalities.${side}`)} has unknown modalities: ${unknown.join(', ')}`);
           }
         }
       }
@@ -202,7 +235,9 @@ export function validateCatalog(data) {
         fail(`${at('limit')} must be an object`);
       } else {
         for (const [field, value] of Object.entries(model.limit)) {
-          if (!Number.isInteger(value) || value <= 0) {
+          if (!LIMIT_KEYS.has(field)) {
+            fail(`${at(`limit.${field}`)} is not a known limit`);
+          } else if (!Number.isInteger(value) || value <= 0) {
             fail(
               `${at(`limit.${field}`)} must be a positive integer, got ${JSON.stringify(value)}`
             );
@@ -218,8 +253,10 @@ export function validateCatalog(data) {
         fail(`${at('reasoning_options')} must be an array`);
       } else {
         model.reasoning_options.forEach((opt, i) => {
-          if (!opt || typeof opt.type !== 'string') {
-            fail(`${at(`reasoning_options[${i}]`)} needs a string \`type\``);
+          if (!opt || !REASONING_OPTION_TYPES.has(opt.type)) {
+            fail(
+              `${at(`reasoning_options[${i}]`)}.type must be one of ${[...REASONING_OPTION_TYPES].join(', ')}`
+            );
           } else if (opt.type === 'effort' && !Array.isArray(opt.values)) {
             fail(`${at(`reasoning_options[${i}]`)} is an effort option without \`values\``);
           }
@@ -251,9 +288,11 @@ function costErrors(cost, at, { requireRates = true } = {}) {
 
   for (const field of rateKeys) {
     const value = cost[field];
-    // `context_over_200k` and friends are nested rate objects, not rates.
-    if (isPlainObject(value)) {
-      errors.push(...costErrors(value, `${at}.${field}`, { requireRates: false }));
+    // `context_over_200k` and friends are nested rate blocks. They are held to
+    // the same rules as the top level, including needing both rates — an empty
+    // one says the condition is free.
+    if (NESTED_COST_KEYS.has(field)) {
+      errors.push(...costErrors(value, `${at}.${field}`));
       continue;
     }
     if (!COST_RATE_KEYS.has(field)) {
@@ -293,7 +332,7 @@ function costErrors(cost, at, { requireRates = true } = {}) {
           if (seen.has(fingerprint)) errors.push(`${at}.tiers has two entries for ${fingerprint}`);
           seen.add(fingerprint);
         }
-        errors.push(...costErrors(rates, where, { requireRates: false }));
+        errors.push(...costErrors(rates, where));
       });
     }
   }

@@ -130,7 +130,7 @@ jobs:
           if [ "${status}" -ne 0 ]; then
             echo "sync check exited ${status}; leaving the tracking issue untouched"
             cat mirror-report.txt
-            exit 0
+            exit "${status}"
           fi
           title="models.dev mirror is behind neon.com/models.json"
           existing="$(gh issue list --state open --search "${title} in:title" --json number --jq '.[0].number')"
