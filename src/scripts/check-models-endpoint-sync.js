@@ -2,7 +2,7 @@
 /**
  * Verify that /models and /models.json describe the same models with the same core data.
  *
- * The two endpoints intentionally differ in shape — /models.json mirrors models.dev, /models is a
+ * The two endpoints intentionally differ in shape — /models.json is the catalog, /models is a
  * REST resource carrying code examples — but they must never disagree on the facts they share.
  * A model present in one and missing from the other, or priced differently in each, means one of
  * them is lying to whoever reads it.
@@ -150,7 +150,7 @@ async function main() {
 
   if (!inSync) {
     console.error(
-      '\nRegenerate with `npm run generate:models`, then re-probe capabilities if the model set changed.'
+      '\nEdit src/app/models.json/data.json, then re-probe capabilities if the model set changed.'
     );
     process.exit(1);
   }

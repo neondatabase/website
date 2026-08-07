@@ -100,19 +100,21 @@ endpoints:
   - id: models-json
     name: AI Gateway model catalog (custom)
     description: >-
-      Neon AI Gateway model catalog served at /models.json. Custom format that
-      mirrors the models.dev `neon` provider; must stay in sync with it.
+      Neon AI Gateway model catalog served at /models.json, and the source of
+      truth for it. Authored and reviewed in this repo. Uses the models.dev
+      shape so anything that reads models.dev can read it unchanged; the `neon`
+      provider on models.dev is a mirror we keep in sync afterwards.
     servedPath: /models.json
     contentType: application/json
     spec:
-      name: Neon AI Gateway models (custom; mirrors models.dev)
-      url: https://models.dev/api.json
+      name: Neon AI Gateway models (custom; models.dev-shaped)
+      url: https://neon.com/models.json
       standard: false
     validator: models-json
     check: file
     file: src/app/models.json/data.json
-    generator: src/scripts/generate-models-json.js
-    liveSync: src/scripts/check-models-sync.js
+    editedBy: hand; src/scripts/import-models-from-models-dev.mjs can merge resolved upstream metadata
+    liveSync: src/scripts/check-models-sync.mjs
 
   - id: models-rest
     name: AI Gateway models REST API

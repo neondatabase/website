@@ -1,6 +1,6 @@
 // Joins the models.json catalog with measured gateway capabilities.
 //
-// models.json says what a model *advertises* (it mirrors models.dev); capabilities say what the
+// models.json says what a model *advertises*; capabilities say what the
 // gateway *did* when the model was called. The two disagree often enough that code examples
 // cannot be derived from the catalog alone.
 //

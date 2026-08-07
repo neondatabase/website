@@ -6,7 +6,7 @@ summary: >-
   OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
   like gpt-5-mini or gemini-3-flash. The databricks- prefix is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-08-06T17:43:14.909Z'
+updatedOn: '2026-08-07T14:53:45.186Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -19,7 +19,7 @@ Models are hosted by Databricks and served through Neon AI Gateway. By using the
 
 Model availability may vary by region, and the catalog expands over time, so check back for new additions.
 
-The full catalog is published as the [`neon` provider on models.dev](https://models.dev/providers/neon), the machine-readable source of truth, and served as JSON at [`neon.com/models.json`](https://neon.com/models.json).
+The full catalog is served as JSON at [`neon.com/models.json`](https://neon.com/models.json), the machine-readable source of truth, and mirrored as the [`neon` provider on models.dev](https://models.dev/providers/neon).
 
 ## Model access
 
