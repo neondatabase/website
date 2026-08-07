@@ -2,9 +2,10 @@
 title: AI Gateway models
 subtitle: Available models and how to specify them
 summary: >-
-  Neon AI Gateway serves Databricks-hosted foundation models from
-  OpenAI, Google, Meta, Databricks, and Alibaba. Use short model IDs
-  like gpt-5-mini or gemini-3-flash. The databricks- prefix is also accepted.
+  Neon AI Gateway serves Databricks-hosted foundation models from Anthropic,
+  OpenAI, Google, Meta, Alibaba, Zhipu AI, Moonshot AI, and Thinking Machines.
+  Use short model IDs like gpt-5-mini or gemini-3-flash. The databricks- prefix
+  is also accepted.
 enableTableOfContents: true
 updatedOn: '2026-08-07T14:53:45.186Z'
 ---
