@@ -113,14 +113,18 @@ Replace the contents of `hello.ts` with the following code, which creates a Hono
 ```ts filename="hello.ts"
 import { Hono } from 'hono';
 import { Pool } from 'pg';
+import { parseEnv } from '@neon/env';
+import config from './neon';
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+const env = parseEnv(config, 'hello');
+
+const pool = new Pool({ connectionString: env.postgres.databaseUrl, max: 5 });
 const app = new Hono();
 
 app.get('/', async (c) => {
   const { rows } = await pool.query('SELECT version()');
   return c.json({
-    greeting: process.env.GREETING,
+    greeting: env.function.GREETING,
     database: rows[0].version,
   });
 });
@@ -128,7 +132,9 @@ app.get('/', async (c) => {
 export default app;
 ```
 
-> The `GREETING` environment variable here is an intentional placeholder for a secret value that you will set in GitHub. The workflow will inject it into the environment at deploy time, so the function can read it without hardcoding it in your source code.
+[`parseEnv`](https://www.npmjs.com/package/@neon/env) reads your `neon.ts` config, validates the injected variables, and returns a typed `env` object. Passing the function's slug (`hello`) adds a typed `env.function` namespace for the variables you declare. So `env.postgres.databaseUrl` is the branch's `DATABASE_URL` injected at runtime, and `env.function.GREETING` is the `GREETING` you declare below, catching typos or missing variables at build time. See the [Neon environment variables docs](/docs/compute/functions/environment-variables) for full detail.
+
+> `GREETING` is a placeholder for the secret you'll set in GitHub. The workflow injects it at deploy time, and `parseEnv` reads it from there, so the secret never appears in your source code.
 
 ## Declare the function in neon.ts
 
