@@ -230,7 +230,7 @@ neon inspect db locks
 ```
 
 <Admonition type="info" title="Seeing LFCLock?">
-Neon caches hot data in local memory between `shared_buffers` and remote storage: the Local File Cache (LFC). `LFCLock` is the lightweight lock that keeps that cache consistent as backends read, write, resize, or evict. It is not a stuck query and never appears in `pg_locks`; it shows up as a wait event in `pg_stat_activity`. It is a single global lock, so heavy concurrent cache access can serialize and cap throughput. If it shows up often, your working set is likely larger than the cache. See [Local File Cache docs](https://neon.com/docs/reference/glossary#local-file-cache).
+Neon caches hot data in local memory between `shared_buffers` and remote storage: the Local File Cache (LFC). `LFCLock` is the lightweight lock that keeps that cache consistent as backends read, write, resize, or evict. It is not a stuck query and never appears in `pg_locks`; it shows up as a wait event in `pg_stat_activity`. It is a single global lock, so heavy concurrent cache access can serialize and cap throughput. If it shows up often, your working set is likely larger than the cache. See [Local File Cache docs](https://neon.com/docs/reference/glossary#compute-cache).
 </Admonition>
 
 ## Query workload

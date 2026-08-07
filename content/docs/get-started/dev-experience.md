@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 The developer experience across Neon is rooted in the lakebase architecture and anchored around four core pillars:
@@ -34,7 +34,7 @@ Traditional OLTP databases force you to provision compute upfront (i.e., choose 
 Lakebase Postgres runs an autoscaling loop that continuously monitors three core database / compute metrics, then adjusts resources in near real time. The three core metrics are:
 
 - CPU load and overall memory usage are checked every 5 seconds
-- Local File Cache working set size is evaluated every 20 seconds
+- Compute cache working set size is evaluated every 20 seconds
 - Memory usage inside Postgres itself is monitored every 100 milliseconds
 
 Rather than relying on fixed intervals or manual triggers, the autoscaling algorithm continuously evaluates these three workload signals, adjusting compute up or down based on the live measurements - while always staying within the minimum and maximum limits you configure.

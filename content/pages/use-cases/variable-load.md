@@ -83,7 +83,7 @@ This reduces costs, but:
 
 <QuoteBlock quote="Instead of having to overprovision our servers to handle peak loads, which leads to inefficiencies and higher costs, Neon's autoscaling handles it. We get more performance when we need it." author="julian-benegas" role="CEO of BaseHub" />
 
-Instead of choosing a fixed instance size, Neon comes with autoscaling: it automatically allocates compute based on real-time workload demand. CPU, memory, and local file cache (LFC) are adjusted dynamically between a configured minimum and maximum. Compute simply follows your load in near real-time.
+Instead of choosing a fixed instance size, Neon comes with autoscaling: it automatically allocates compute based on real-time workload demand. CPU, memory, and compute cache are adjusted dynamically between a configured minimum and maximum. Compute simply follows your load in near real-time.
 
 ![Neon autoscaling dynamically matches compute to workload](/use-cases/variable-load/neon-autoscaling-compute-allocation.png)
 
@@ -97,13 +97,13 @@ Neon’s autoscaling algorithm is built around three core metrics:
 
 - **CPU load** \- sampled every 5 seconds, retrieving 1-minute averages
 - **Memory usage** \- the platform inspects Postgres-specific memory usage every 100 ms; every 5 seconds, the platform collects overall memory metrics from the underlying VM
-- **Local File Cache (LFC) working set size** \- every 20 seconds, the platform evaluates the working set size across multiple rolling windows (1-min, 2-min \- up to 60 min). This is one of the most sophisticated datapoints collected by the Neon algorithm: at all times, it keeps the subset of data that is actively being accessed in memory to optimize performance.
+- **Compute cache working set size** \- every 20 seconds, the platform evaluates the working set size across multiple rolling windows (1-min, 2-min \- up to 60 min). This is one of the most sophisticated datapoints collected by the Neon algorithm: at all times, it keeps the subset of data that is actively being accessed in memory to optimize performance.
 
 The platform’s algorithm has goals for each of these metrics, and it sizes compute accordingly to meet these goals \- always bounded by your configured min and max autoscaling limits:
 
 - **“Keep the 1-minute average CPU load ≤ 90% of available CPU”**
 - **“Keep overall memory usage ≤ 75% of total RAM”**
-- **“Ensure the working set fits within 75% of RAM allocated to the Local File Cache”**
+- **“Ensure the working set fits within the compute cache (up to 75% of RAM)”**
 
 <Admonition type="info">
 The average production database on Neon [adjusts its compute size 11,000+ times per month](https://neon.com/autoscaling-report). This demonstrates fine-grained scaling at runtime.
