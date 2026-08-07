@@ -251,9 +251,10 @@ on:
       - synchronize
       - closed
 
-# Ensures only the latest commit runs, preventing race conditions in concurrent PR updates
+# Ensure only one workflow runs at a time for a given branch or PR, and cancel any in-progress runs if a new one is triggered.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   setup:
@@ -306,26 +307,24 @@ jobs:
       - name: Get preview function URLs
         id: function_urls
         run: |
-          neon functions list --project-id ${{ vars.NEON_PROJECT_ID }} --branch preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }} -o json \
-            | jq -r '.[] | "- " + .slug + ": " + .invocation_url' > function_urls.txt
-          cat function_urls.txt
+          urls=$(neon functions list --project-id ${{ vars.NEON_PROJECT_ID }} --branch preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }} -o json \
+            | jq -r '.[] | "- " + .slug + ": " + .invocation_url')
+          echo "urls<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$urls" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Comment preview URLs on the pull request
         uses: actions/github-script@v7
         with:
           script: |
-            const urls = require('fs').readFileSync('function_urls.txt', 'utf8');
-            const marker = '<!-- neon-preview-function -->';
-            const body = `${marker}\n**Preview functions deployed:**\n${urls}\n\nThese functions run on an isolated Neon branch for this PR, against the branch's own database. Both are deleted when the PR is closed.`;
-            const { owner, repo } = context.repo;
-            const issue_number = context.issue.number;
-            const { data: comments } = await github.rest.issues.listComments({ owner, repo, issue_number, per_page: 100 });
-            const existing = comments.find((c) => c.user.type === 'Bot' && c.body.includes(marker));
-            if (existing) {
-              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
-            } else {
-              await github.rest.issues.createComment({ owner, repo, issue_number, body });
-            }
+            const urls = `${{ steps.function_urls.outputs.urls }}`;
+            const body = `**Preview functions deployed:**\n${urls}\n\nThese functions run on an isolated Neon branch for this PR, against the branch's own database. Both are deleted when the PR is closed.`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
 
   deploy_production:
     name: Deploy production function
@@ -374,7 +373,7 @@ jobs:
 
 ## Understanding the workflow
 
-The workflow has three main jobs (excluding the setup): **deploy preview**, **deploy production**, and **cleanup**, and each one runs the same idea: deploy function to a branch. Because functions are branch-scoped, every environment ends up with its own function at its own URL, running against its own database state. Thinking of it as "deploy to a branch" makes the whole workflow easy to follow.
+The workflow (excluding the setup) has three main jobs: **deploy preview**, **deploy production**, and **cleanup**, and each one runs the same idea: deploy function to a branch. Because functions are branch-scoped, every environment ends up with its own function at its own URL, running against its own database state. Thinking of it as "deploy to a branch" makes the whole workflow easy to follow.
 
 - **Deploy preview**: Runs when a PR is opened, reopened, or updated. It creates an isolated branch, deploys to it, comments the preview URL on the PR for review.
 - **Deploy production**: Runs on any push to `main` (which includes merged PRs). It applies the same code to the production branch.
@@ -398,6 +397,17 @@ A few flags make the command safe to run unattended on a CI runner:
 - **`--no-env-pull`**: Skips writing the branch's variables to a local `.env` file, which there's no use for on a throwaway runner.
 
 Because every job installs the CLI and runs this same deploy logic, the workflow scales to any number of functions. `neon deploy` applies whatever's in your `neon.ts`, and the steps that list URLs pick up every function on the branch, so you never need to touch the YAML when you add a function.
+
+### Reusable actions
+
+The workflow uses a few GitHub Actions to handle the branch lifecycle and other tasks:
+
+- **[`neondatabase/create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action)** (Neon): Creates a Neon branch from your primary branch. The preview job calls it to create a branch for the PR, so the function runs against that branch's database state.
+- **[`neondatabase/delete-branch-action`](https://github.com/marketplace/actions/neon-database-delete-branch)** (Neon): Removes a Neon branch when you no longer need it. The cleanup job calls it to tear down the preview branch (and its function) once its PR closes, so branches don't accumulate.
+- **`actions/checkout`**, **`actions/setup-node`**, and **`actions/github-script`**: Standard GitHub Actions for checking out the repo, installing Node, and running JavaScript against the GitHub API.
+- **`tj-actions/branch-names`**: Outputs the name of the branch that triggered the run. The preview branch is named after it (for example `preview/pr-12-fix-auth`) so you can tell which PR and code it came from.
+
+The two Neon actions handle the branch lifecycle, and plain `neon deploy` invocations handle the function lifecycle. So this exact workflow boils down to: create a branch with Neon's action, deploy the function with the CLI, and clean up the branch.
 
 <Admonition type="note" title="Secrets are shared across branches">
 GitHub doesn't support branch-specific secrets. Any secret you define (like `GREETING`) is shared across all environments, so both preview and production get the same value.
@@ -474,29 +484,26 @@ The same workflow extends to any number of functions. Add a new function to `neo
 
 ## Adapting to other CI/CD platforms
 
-The steps in the workflow are the same on any CI/CD platform: install Node, install the Neon CLI, and run `neon deploy` with the right branch. Here's an example of a pseudo-code for a production deploy job on other platforms:
+The workflow is really just a branch lifecycle: create a Neon branch, deploy the function to it, and delete the branch when it's done. GitHub Actions bundles that into jobs with the `neondatabase/create-branch-action` and `neondatabase/delete-branch-action`, but those actions are the Neon CLI (and its REST API) under the hood. On any other CI/CD platform you run the same commands in your pipelines:
 
-```yaml
-deploy_production:
-  image: node:24
-  rules:
-    - if: $CI_COMMIT_BRANCH == "main"
-  script:
-    - npm ci
-    - npm install -g neon@latest
-    - neon deploy --project-id "$NEON_PROJECT_ID" --branch main --update-existing --allow-protected --no-env-pull
-
-deploy_preview:
-  image: node:24
-  rules:
-    - if: $CI_MERGE_REQUEST_ID
-  script:
-    - npm ci
-    - npm install -g neon@latest
-    - neon deploy --project-id "$NEON_PROJECT_ID" --branch preview/pr-$CI_MERGE_REQUEST_ID-$CI_COMMIT_REF_NAME --update-existing --no-env-pull
+```mermaid
+flowchart TD
+    A[Push event] --> B{target?}
+    B -->|main| C[neon deploy --branch main]
+    B -->|preview PR| D[create branch: neon branches create --name preview/pr-id-branch]
+    D --> E[deploy to branch: neon deploy --branch preview/pr-id-branch]
+    E --> F[merge and close PR]
+    F --> G[delete branch: neon branches delete preview/pr-id-branch]
+    C --> H[Production function]
+    G --> H
 ```
 
-Store `NEON_API_KEY`, `NEON_PROJECT_ID`, and `GREETING` as masked CI/CD variables and they're picked up the same way. For previews you'll need to adapt the branch naming to whatever your CI/CD platform provides for merge requests or pull requests.
+The logic is the same everywhere:
+
+- **Merge to `main`**: Run `neon deploy --branch main`. The branch already exists, so there's nothing to create.
+- **Preview merge request**: Create a branch with `neon branches create`, deploy to it with `neon deploy --branch preview/<id>`, and on close remove it with `neon branches delete`. Every command targets a branch with a `--branch` flag.
+
+Add `NEON_API_KEY` and `NEON_PROJECT_ID` to your CI/CD environment, and the workflow works the same way on any platform.
 
 ## Conclusion
 
