@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -145,47 +145,47 @@ For information about monitoring your compute as it scales up and down, see [Mon
 
 The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues.
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) and Neon also uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 75% of your compute's RAM.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, up to 75% of your compute's RAM is used for data caching.
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration.
 
-The following table outlines the RAM, LFC size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+The following table outlines the RAM, compute cache size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
 Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
 </Admonition>
 
-| Compute Size (CU) | RAM (GB) | LFC size (GB) | max_connections |
-| :---------------- | :------- | :------------ | :-------------- |
-| 0.25              | 1        | 0.75          | 104             |
-| 0.50              | 2        | 1.5           | 209             |
-| 1                 | 4        | 3             | 419             |
-| 2                 | 8        | 6             | 839             |
-| 3                 | 12       | 9             | 1258            |
-| 4                 | 16       | 12            | 1678            |
-| 5                 | 20       | 15            | 2098            |
-| 6                 | 24       | 18            | 2517            |
-| 7                 | 28       | 21            | 2937            |
-| 8                 | 32       | 24            | 3357            |
-| 9                 | 36       | 27            | 4000            |
-| 10                | 40       | 30            | 4000            |
-| 11                | 44       | 33            | 4000            |
-| 12                | 48       | 36            | 4000            |
-| 13                | 52       | 39            | 4000            |
-| 14                | 56       | 42            | 4000            |
-| 15                | 60       | 45            | 4000            |
-| 16                | 64       | 48            | 4000            |
-| 18                | 72       | 54            | 4000            |
-| 20                | 80       | 60            | 4000            |
-| 22                | 88       | 66            | 4000            |
-| 24                | 96       | 72            | 4000            |
-| 26                | 104      | 78            | 4000            |
-| 28                | 112      | 84            | 4000            |
-| 30                | 120      | 90            | 4000            |
-| 32                | 128      | 96            | 4000            |
-| 34                | 136      | 102           | 4000            |
-| 36                | 144      | 108           | 4000            |
-| 38                | 152      | 114           | 4000            |
+| Compute Size (CU) | RAM (GB) | Compute cache size (GB) | max_connections |
+| :---------------- | :------- | :---------------------- | :-------------- |
+| 0.25              | 1        | 0.75                    | 104             |
+| 0.50              | 2        | 1.5                     | 209             |
+| 1                 | 4        | 3                       | 419             |
+| 2                 | 8        | 6                       | 839             |
+| 3                 | 12       | 9                       | 1258            |
+| 4                 | 16       | 12                      | 1678            |
+| 5                 | 20       | 15                      | 2098            |
+| 6                 | 24       | 18                      | 2517            |
+| 7                 | 28       | 21                      | 2937            |
+| 8                 | 32       | 24                      | 3357            |
+| 9                 | 36       | 27                      | 4000            |
+| 10                | 40       | 30                      | 4000            |
+| 11                | 44       | 33                      | 4000            |
+| 12                | 48       | 36                      | 4000            |
+| 13                | 52       | 39                      | 4000            |
+| 14                | 56       | 42                      | 4000            |
+| 15                | 60       | 45                      | 4000            |
+| 16                | 64       | 48                      | 4000            |
+| 18                | 72       | 54                      | 4000            |
+| 20                | 80       | 60                      | 4000            |
+| 22                | 88       | 66                      | 4000            |
+| 24                | 96       | 72                      | 4000            |
+| 26                | 104      | 78                      | 4000            |
+| 28                | 112      | 84                      | 4000            |
+| 30                | 120      | 90                      | 4000            |
+| 32                | 128      | 96                      | 4000            |
+| 34                | 136      | 102                     | 4000            |
+| 36                | 144      | 108                     | 4000            |
+| 38                | 152      | 114                     | 4000            |
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
@@ -195,12 +195,12 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from database storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
 
-As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. You can monitor the Local File Cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
+You can monitor your compute cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
 
-- [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate)
+- [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate)
 - [Working set size](/docs/introduction/monitoring-page#working-set-size)
 
-Neon also provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view that you can use to query the cache hit ratio for your compute's Local File Cache. For more information, see [The neon extension](/docs/extensions/neon).
+Neon also provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view that you can use to query the cache hit ratio for your compute. For more information, see [The neon extension](/docs/extensions/neon).
 
 #### Autoscaling considerations
 

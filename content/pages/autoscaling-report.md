@@ -26,7 +26,7 @@ For example, here is the compute utilization of a typical database over a 24-hou
 
 <AutoscalingChart title="Compute Usage of a Database over 24hrs" datasetKey="actual_compute_1d" autoscalingOnly={true} showStats={false} compact={true}/>
 
-In the chart, a CU is an index of CPU, memory, and local file cache (LFC) utilization.
+In the chart, a CU is an index of CPU, memory, and compute cache utilization.
 1 CU ≈ 1 CPU, 4GB RAM.
 
 <blockquote className="text-xl">
