@@ -77,6 +77,8 @@ To change someone already in the organization, open the more options menu (⋮) 
 
 Invited people get an email, and the organization appears in their organization switcher once they accept. For what each role allows, see [Organization roles](/docs/manage/user-permissions#organization-roles).
 
+**ADD SCREEN CAP HERE: Invite member dialog with the role dropdown open, showing all four roles**
+
 <Admonition type="tip" title="Adding a whole team at once">
 If your teammates all use email addresses at a domain you control, [auto-join by domain](/docs/manage/orgs-add-members-by-domain) adds them automatically when they sign up or log in. They join as **Editors**, so change the role afterwards for anyone who needs less.
 </Admonition>
@@ -89,6 +91,8 @@ Open `acme-staging`, go to **Settings** → **Project permissions**, and select 
 
 ![Granting a per-project permission in the Neon Console](/docs/manage/user-permissions/grant-permission.png)
 
+**SCREEN CAP OPTIONAL: image above is reused from user-permissions. Retake granting Editor to Dana on acme-staging if you want it to match the scenario**
+
 Dana can now get connection strings and run SQL on staging, while staying read-only on production and analytics.
 
 ## Grant Zhang Kai access to the analytics project
@@ -96,6 +100,8 @@ Dana can now get connection strings and run SQL on staging, while staying read-o
 Zhang Kai is a Collaborator, so right now they can't see any project at all. Open `acme-analytics`, go to **Settings** → **Project permissions**, select **Grant permission**, choose **Editor**, and pick Zhang Kai.
 
 That single grant is their entire access to your organization. Nothing else needs locking down, because Collaborators start with nothing.
+
+**ADD SCREEN CAP HERE (nice to have): the Collaborator's own project list, showing only acme-analytics. Best proof that production is genuinely invisible, but needs a second account to capture**
 
 ## Verify what everyone can reach
 
@@ -105,6 +111,8 @@ On each project's **Project permissions** page, review the list of people who ca
 - **Explicit** means you granted it on this project. Dana on staging and Zhang Kai on analytics show up this way.
 
 Check `acme-production` in particular: it should list you and Alex, and neither Dana nor Zhang Kai with edit access. Dana appears as an inherited Viewer, and Zhang Kai doesn't appear at all.
+
+**ADD SCREEN CAP HERE: Project permissions page showing both Inherited and Explicit tags in the same member list**
 
 To change or revoke an explicit grant, use the more options menu (⋮) next to the person's name. Removing a grant drops them back to their organization role's baseline.
 
