@@ -9,7 +9,7 @@ summary: >-
   JDBC URL format for Neon and demonstrates the update and rollbackCount
   commands.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -116,6 +116,10 @@ Your Java connection string should look something like the one shown below.
 ```bash shouldWrap
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
 ```
+
+<Admonition type="important">
+Use a direct (non-pooled) connection string with Liquibase. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure the hostname does not include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Connect from Liquibase to your Neon database
 

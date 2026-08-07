@@ -12,7 +12,7 @@ summary: >-
   python-dotenv, and avoiding hanging processes by calling
   Tortoise.close_connections() or using run_async().
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 
@@ -81,6 +81,10 @@ DATABASE_URL="postgres://[PGUSER]:[PGPASSWORD]@[PGHOST]/[PGDATABASE]?ssl=true"
 ```
 
 > Replace the placeholders `[PGUSER]`, `[PGPASSWORD]`, `[PGHOST]`, and `[PGDATABASE]` with the corresponding values from your Neon connection details. Make sure to include `ssl=true` to ensure a secure connection.
+
+<Admonition type="important">
+Use a direct (non-pooled) connection string when generating schemas or running migrations (for example, with Aerich). Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema changes rely on, so running them over a pooled connection can lead to errors. Make sure the hostname does not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Create the application
 

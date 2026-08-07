@@ -10,7 +10,7 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -70,6 +70,10 @@ Create a `.env` file in your project's root directory and add the connection str
 ```text shouldWrap
 DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
+
+<Admonition type="note">
+Neon supports both direct and pooled connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard**. A pooled connection string (the hostname includes `-pooler`) routes through a PgBouncer connection pool, which is ideal for your application at runtime. However, using a pooled connection string for migrations can lead to errors. Use a direct (non-pooled) connection when running Drizzle Kit migrations. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
+</Admonition>
 
 ## Install Drizzle and a driver
 
