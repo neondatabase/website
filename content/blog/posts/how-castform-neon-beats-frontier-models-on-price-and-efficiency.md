@@ -17,7 +17,7 @@ authors:
   - ying-hang-seah
   - angel-pan
 cover:
-  image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/cover.jpg'
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/cover-1.jpg'
   alt: Training 100x Cheaper Retrieval models Neon and Castform
 isFeatured: false
 seo:
@@ -31,7 +31,7 @@ seo:
   ogDescription: >-
     A 4B open-source model post-trained with Castform retrieved search results
     as accurately as GPT-5.6 Sol, while costing 100x less.
-  image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/social.jpg'
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/social-1.jpg'
 ---
 
 ![Comparison of Castform fine-tune and frontier models by inference cost and mean evaluation reward](https://cdn.neonapi.io/public/images/pages/blog/how-castform-neon-beats-frontier-models-on-price-and-efficiency/diagram-1.jpg)
