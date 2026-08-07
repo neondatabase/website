@@ -1136,6 +1136,24 @@
           "context": 1050000,
           "input": 922000,
           "output": 128000
+        },
+        "cost": {
+          "input": 30,
+          "output": 180,
+          "tiers": [
+            {
+              "input": 60,
+              "output": 270,
+              "tier": {
+                "type": "context",
+                "size": 272000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 60,
+            "output": 270
+          }
         }
       },
       "gpt-5-6-luna": {
