@@ -17,13 +17,11 @@ updatedOn: '2026-08-04T15:25:12.468Z'
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
 
 <Admonition type="important">
-Project sharing is being replaced by the **Collaborator** organization role combined with per-project permissions. For new access, use that instead: add the person to your organization as a Collaborator, then grant them a permission on each project they need. See [Assign project access](/docs/manage/user-permissions#assign-project-access).
+Project sharing is being deprecated and will be removed in a future release, so switch to organization-based collaboration now: add the person to your organization as a **Collaborator**, then grant them a permission on each project they need. See [Assign project access](/docs/manage/user-permissions#assign-project-access).
 
-Project sharing still works, and it remains the option for organizations on the [legacy permissions](/docs/manage/user-permissions#legacy-permissions) model, including [Vercel-managed organizations](/docs/guides/vercel-managed-integration).
-</Admonition>
+Project sharing still works today, and it remains the option for organizations on the [legacy permissions](/docs/manage/user-permissions#legacy-permissions) model, including [Vercel-managed organizations](/docs/guides/vercel-managed-integration).
 
-<Admonition type="note">
-The new **Collaborator** organization role is not the same as a project-sharing collaborator, even though the names match. A Collaborator is a member of your organization who you grant per-project permissions to. A project-sharing collaborator is an external Neon account invited to a single project, as described on this page.
+Note that the **Collaborator** organization role is not the same as a project-sharing collaborator, even though the names match. A Collaborator is a member of your organization who you grant per-project permissions to. A project-sharing collaborator is an external Neon account invited to a single project, as described on this page.
 </Admonition>
 
 <Admonition type="note">

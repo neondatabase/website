@@ -104,7 +104,7 @@ To manage an existing project-sharing collaborator, open the more options menu (
 
 ![collaborators more options menu](/docs/manage/orgs_collaborators_kebab.png 'no-border')
 
-Project sharing is being replaced by the **Collaborator** role plus per-project permissions. For new access, prefer that approach. For details on sharing itself, see the [Project collaboration guide](/docs/guides/project-collaboration-guide).
+Project sharing is being deprecated and will be removed in a future release. For new access, use the **Collaborator** role plus per-project permissions instead. For details on sharing itself, see the [Project collaboration guide](/docs/guides/project-collaboration-guide).
 
 ## Create and delete projects
 

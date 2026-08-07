@@ -161,7 +161,7 @@ How you grant access depends on whether the person is already in your organizati
 Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
 
 <Admonition type="note">
-Project sharing is being replaced by the **Collaborator** organization role combined with per-project permissions. To give a contractor or other limited-access user access to specific projects, prefer adding them to the organization as a Collaborator and granting per-project permissions. See [User permissions](/docs/manage/user-permissions).
+Project sharing is being deprecated and will be removed in a future release. To give a contractor or other limited-access user access to specific projects, add them to the organization as a **Collaborator** and grant per-project permissions instead. See [User permissions](/docs/manage/user-permissions).
 </Admonition>
 
 Organization members can't be added as collaborators on organization-owned projects. Grant them a per-project permission instead.
