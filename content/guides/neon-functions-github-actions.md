@@ -4,7 +4,6 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-08-07T08:36:27.530Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are serverless compute you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
@@ -105,7 +104,7 @@ npm install hono pg
 npm install --save-dev @types/pg typescript dotenv
 ```
 
-You now have a project linked to Neon and the necessary dependencies to build a Hono based API that interacts with your Neon Postgres database.
+You now have a project linked to Neon and the necessary dependencies to build a Hono-based API that interacts with your Neon Postgres database.
 
 ## Write the function
 
@@ -335,9 +334,9 @@ jobs:
     env:
       NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
 
@@ -375,9 +374,9 @@ jobs:
 
 ## Understanding the workflow
 
-The workflow has three jobs, and each one runs the same idea: deploy function to a branch. Because functions are branch-scoped, every environment ends up with its own function at its own URL, running against its own database state. Thinking of it as "deploy to a branch" makes the whole workflow easy to follow.
+The workflow has three main jobs (excluding the setup): **deploy preview**, **deploy production**, and **cleanup**, and each one runs the same idea: deploy function to a branch. Because functions are branch-scoped, every environment ends up with its own function at its own URL, running against its own database state. Thinking of it as "deploy to a branch" makes the whole workflow easy to follow.
 
-- **Deploy preview**: Runs when a PR is opened, reopened, or updated. It creates an isolated branch, deploys to it, comments the preview URL on the PR, and leaves the preview url as a comment for review.
+- **Deploy preview**: Runs when a PR is opened, reopened, or updated. It creates an isolated branch, deploys to it, comments the preview URL on the PR for review.
 - **Deploy production**: Runs on any push to `main` (which includes merged PRs). It applies the same code to the production branch.
 - **Cleanup**: Runs when a PR is closed. It deletes the preview branch, which removes the preview function too, so you don't have to worry about orphaned branches or functions.
 
