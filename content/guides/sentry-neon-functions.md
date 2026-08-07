@@ -555,7 +555,7 @@ curl "https://<your-function-url>/debug-sentry"
 
 > Replace `<your-function-url>` with your deployed Neon Function URL.
 
-The request returns a `500` with `{"error":"internal_error"}`. After few seconds, a grouped issue appears under **Issues** in your Sentry dashboard, tagged with environment `production` (or your preview branch name if you deployed from a branch).
+The request returns a `500` with `{"error":"internal_error"}`. After a few seconds, a grouped issue appears under **Issues** in your Sentry dashboard, tagged with environment `production` (or your preview branch name if you deployed from a branch).
 
 ### Logs: trigger a recoverable failure
 
