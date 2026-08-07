@@ -56,8 +56,8 @@ A four-person team runs three Neon projects:
 The team:
 
 - **You** run the organization and own billing.
-- **Alex Lopez** is a backend engineer who works across production and staging every day.
-- **Dana Smith** is a designer who needs to look things up but shouldn't be changing databases.
+- **Alex** is a backend engineer who works across production and staging every day.
+- **Dana** is a designer who needs to look things up but shouldn't be changing databases.
 - **Sam** is a contractor building the analytics project, and shouldn't see the customer data in production or staging.
 
 Without per-project permissions, everyone you invite gets the same access on all three projects, so Sam would be able to open `acme-production`. Here's how to avoid that.
