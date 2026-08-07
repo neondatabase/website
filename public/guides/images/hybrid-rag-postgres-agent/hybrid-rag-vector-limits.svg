@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ah" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="758" height="298" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Why vector-only search misses</text>
+
+  <!-- Panel A: exact tokens -->
+  <text x="24" y="62" font-size="11" font-weight="700" fill="#6b7280" letter-spacing="0.5">LIMIT 1 · EXACT TOKENS DRIFT</text>
+  <rect x="24" y="72" width="344" height="206" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
+  <rect x="40" y="86" width="150" height="30" rx="15" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="115" y="105" font-size="12" font-weight="600" fill="#3730a3" text-anchor="middle">query: “ERR_4042”</text>
+  <line x1="115" y1="116" x2="115" y2="132" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah)"/>
+  <text x="40" y="150" font-size="11" fill="#6b7280">nearest neighbors by cosine distance:</text>
+  <rect x="40" y="158" width="312" height="30" rx="7" fill="#fef2f2" stroke="#f87171"/>
+  <text x="52" y="177" font-size="12" fill="#991b1b">timeout error log · semantically close, wrong</text>
+  <rect x="40" y="194" width="312" height="30" rx="7" fill="#fef2f2" stroke="#f87171"/>
+  <text x="52" y="213" font-size="12" fill="#991b1b">generic 404 page · semantically close, wrong</text>
+  <rect x="40" y="230" width="312" height="34" rx="7" fill="#ecfdf5" stroke="#10b981"/>
+  <text x="52" y="251" font-size="12" fill="#065f46">chunk that literally says ERR_4042 · ranked low</text>
+
+  <!-- Panel B: no history -->
+  <text x="392" y="62" font-size="11" font-weight="700" fill="#6b7280" letter-spacing="0.5">LIMIT 2 · NO CONVERSATION HISTORY</text>
+  <rect x="392" y="72" width="344" height="206" rx="10" fill="#f9fafb" stroke="#e5e7eb"/>
+  <rect x="408" y="86" width="200" height="26" rx="6" fill="#f3f4f6" stroke="#d1d5db" opacity="0.55"/>
+  <text x="420" y="103" font-size="11" fill="#374151" opacity="0.8">turn 1: here are options A and B…</text>
+  <rect x="408" y="116" width="200" height="26" rx="6" fill="#f3f4f6" stroke="#d1d5db" opacity="0.55"/>
+  <text x="420" y="133" font-size="11" fill="#374151" opacity="0.8">turn 2: B costs less but…</text>
+  <rect x="408" y="150" width="232" height="30" rx="15" fill="#eef2ff" stroke="#a5b4fc"/>
+  <text x="524" y="169" font-size="12" font-weight="600" fill="#3730a3" text-anchor="middle">“what about the second one?”</text>
+  <line x1="524" y1="180" x2="524" y2="196" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ah)"/>
+  <rect x="408" y="204" width="312" height="60" rx="8" fill="#fef2f2" stroke="#f87171"/>
+  <text x="424" y="224" font-size="12" fill="#991b1b">embedded on its own, it lands in an</text>
+  <text x="424" y="242" font-size="12" fill="#991b1b">unrelated region in the vector space.</text>
+</svg>

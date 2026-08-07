@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <rect x="1" y="1" width="758" height="358" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Schema: chunks, sessions, and messages</text>
+
+  <!-- rag_documents -->
+  <rect x="32" y="58" width="300" height="92" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="32" y="58" width="300" height="26" rx="9" fill="#eef2ff" stroke="#cbd5e1"/>
+  <rect x="32" y="71" width="300" height="13" fill="#eef2ff"/>
+  <line x1="32" y1="84" x2="332" y2="84" stroke="#cbd5e1"/>
+  <text x="46" y="76" font-size="12.5" font-weight="700" fill="#3730a3">rag_documents</text>
+  <text x="46" y="104" font-size="11" fill="#111827">id · uuid PK</text>
+  <text x="46" y="121" font-size="11" fill="#6b7280">source_id · file, URL, or ticket</text>
+  <text x="46" y="138" font-size="11" fill="#6b7280">title, created_at</text>
+
+  <!-- rag_chunks -->
+  <rect x="32" y="186" width="300" height="146" rx="9" fill="#ffffff" stroke="#10b981"/>
+  <rect x="32" y="186" width="300" height="26" rx="9" fill="#ecfdf5" stroke="#10b981"/>
+  <rect x="32" y="199" width="300" height="13" fill="#ecfdf5"/>
+  <line x1="32" y1="212" x2="332" y2="212" stroke="#10b981"/>
+  <text x="46" y="204" font-size="12.5" font-weight="700" fill="#065f46">rag_chunks</text>
+  <text x="46" y="231" font-size="11" fill="#111827">id · uuid PK</text>
+  <text x="46" y="248" font-size="11" fill="#6b7280">document_id · FK</text>
+  <text x="46" y="265" font-size="11" fill="#6b7280">tenant_id · scopes every query</text>
+  <text x="46" y="282" font-size="11" fill="#111827">content · text</text>
+  <text x="46" y="299" font-size="11" fill="#1d4ed8">searchable · tsvector (GIN)</text>
+  <text x="46" y="316" font-size="11" fill="#7c3aed">embedding · vector(1536) (HNSW)</text>
+
+  <!-- relation documents -> chunks -->
+  <line x1="150" y1="150" x2="150" y2="186" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="160" y="172" font-size="11" fill="#6b7280">1 to many</text>
+
+  <!-- chat_sessions -->
+  <rect x="428" y="58" width="300" height="110" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="428" y="58" width="300" height="26" rx="9" fill="#fff7ed" stroke="#cbd5e1"/>
+  <rect x="428" y="71" width="300" height="13" fill="#fff7ed"/>
+  <line x1="428" y1="84" x2="728" y2="84" stroke="#cbd5e1"/>
+  <text x="442" y="76" font-size="12.5" font-weight="700" fill="#9a3412">chat_sessions</text>
+  <text x="442" y="104" font-size="11" fill="#111827">id · uuid PK</text>
+  <text x="442" y="121" font-size="11" fill="#6b7280">tenant_id, user_id</text>
+  <text x="442" y="138" font-size="11" fill="#6b7280">summary · rolling recap</text>
+  <text x="442" y="155" font-size="11" fill="#6b7280">updated_at</text>
+
+  <!-- chat_messages -->
+  <rect x="428" y="206" width="300" height="126" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <rect x="428" y="206" width="300" height="26" rx="9" fill="#fff7ed" stroke="#cbd5e1"/>
+  <rect x="428" y="219" width="300" height="13" fill="#fff7ed"/>
+  <line x1="428" y1="232" x2="728" y2="232" stroke="#cbd5e1"/>
+  <text x="442" y="224" font-size="12.5" font-weight="700" fill="#9a3412">chat_messages</text>
+  <text x="442" y="251" font-size="11" fill="#111827">id · uuid PK</text>
+  <text x="442" y="268" font-size="11" fill="#6b7280">session_id · FK</text>
+  <text x="442" y="285" font-size="11" fill="#6b7280">role · user / assistant / system</text>
+  <text x="442" y="302" font-size="11" fill="#111827">content · text</text>
+  <text x="442" y="319" font-size="11" fill="#6b7280">created_at · indexed DESC</text>
+
+  <line x1="546" y1="168" x2="546" y2="206" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="556" y="190" font-size="11" fill="#6b7280">1 to many</text>
+
+  <!-- divider note -->
+  <line x1="380" y1="70" x2="380" y2="320" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 4"/>
+  <text x="32" y="350" font-size="11" fill="#6b7280">Retrieval reads the green table. Memory lives in the orange tables. Different access patterns, separate tables.</text>
+</svg>
