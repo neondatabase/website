@@ -43,7 +43,7 @@ Developers need a lot of databases.
 
 But most of these needs are ephemeral. Beyond your production database and maybe a core analytics warehouse, almost every other DB a developer uses every day has low throughput and is temporary. Yet, you have to spin up an entire instance and remember to turn it off when you’re done. This costs money.
 
-At Neon, we think this straightforwardly sucks. That’s why a core feature of every single Neon instance is “[scale to zero](https://neon.tech/docs/introduction/auto-suspend).” If you aren’t using your db, we’ll store the data and put the compute to sleep. You’ll incur zero compute costs during this time.
+At Neon, we think this straightforwardly sucks. That’s why a core feature of every single Neon instance is “[scale to zero](https://neon.com/docs/introduction/auto-suspend).” If you aren’t using your db, we’ll store the data and put the compute to sleep. You’ll incur zero compute costs during this time.
 
 Given this obvious benefit, why do scale-to-zero databases get such a bad wrap? It’s because people don’t understand German escalators.
 
@@ -77,7 +77,7 @@ Escalators that shut off when nobody uses them aren’t worse during rush hour. 
 
 How does this work? When you spin up a Neon database, the compute and the storage are decoupled–your Postgres servers executing queries are _physically separate_ from the data storage. Each Postgres instance is a MicroVM inside a larger bare metal node. Suspending the compute is as easy as deallocating vCPU and RAM to the MicroVM.
 
-If you use a Neon database for a high-traffic production instance, this suspension never happens. The CPU/RAM is always available, and, in fact, you can use this architecture to easily [autoscale](https://neon.tech/docs/introduction/autoscaling) your database.
+If you use a Neon database for a high-traffic production instance, this suspension never happens. The CPU/RAM is always available, and, in fact, you can use this architecture to easily [autoscale](https://neon.com/docs/introduction/autoscaling) your database.
 
 ## The Core Value of Scale to Zero
 

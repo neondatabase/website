@@ -59,7 +59,7 @@ This is a great feature to [boost development speed](https://neon.tech/blog/adop
 
 ## Documenting changes in your dev branches in Neon
 
-The first step to migrating (or applying) changes made to your Neon Twin to your production database is to _record_ the changes that were made in your development branches (how they differ from main). Neon allows you to do this in a straightforward way via the [schema diff](https://neon.tech/docs/guides/schema-diff) feature.
+The first step to migrating (or applying) changes made to your Neon Twin to your production database is to _record_ the changes that were made in your development branches (how they differ from main). Neon allows you to do this in a straightforward way via the [schema diff](https://neon.com/docs/guides/schema-diff) feature.
 
 Let’s set things up. From within the Neon console, navigate to **Branches** and click the **Create branch** button.
 

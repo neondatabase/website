@@ -93,7 +93,7 @@ In my opinion, applications should not be running with DBOwner permissions. I wa
 
 ## The Next Steps: Branching Workflows And Branch vs Project Design
 
-Now that we have the basics covered, my next big focus is exploring some of the more advanced features Neon has to offer. First up, I’m looking into Neon’s [branching](https://neon.tech/docs/introduction/branching). The idea of being able to create [ephemeral environments for testing without duplicating entire datasets](https://neon.tech/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) sounds really cool, where I can branch off a main branch that I keep in sync with a testing dataset, run tests or experiments, and then delete those branches automatically.
+Now that we have the basics covered, my next big focus is exploring some of the more advanced features Neon has to offer. First up, I’m looking into Neon’s [branching](https://neon.com/docs/introduction/branching). The idea of being able to create [ephemeral environments for testing without duplicating entire datasets](https://neon.tech/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) sounds really cool, where I can branch off a main branch that I keep in sync with a testing dataset, run tests or experiments, and then delete those branches automatically.
 
 Also, I’m still figuring out whether I should create a separate Neon project per customer or manage them within branches. The key here is making sure each customer’s data is isolated for faster queries and better performance, especially as 301 Pro grows. We’ll share where I end up in a future blog post!
 

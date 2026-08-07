@@ -35,7 +35,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/neon-autoscaling-is-generally-available/neon-autoscaling-ga-2-1-1024x576-6052fc41.jpg)
 
-**Neon autoscaling has officially graduated out of beta and is now available for all Neon databases, including the Free plan. [With autoscaling enabled](https://neon.tech/docs/guides/autoscaling-guide), your Neon Postgres databases automatically adjust CPU and memory based on workload, ensuring optimal performance and cost efficiency. This removes the need for manual server resizing and prevents budget waste from overprovisioning. [Create a free Neon account and try it today.](https://console.neon.tech/signup)**
+**Neon autoscaling has officially graduated out of beta and is now available for all Neon databases, including the Free plan. [With autoscaling enabled](https://neon.com/docs/guides/autoscaling-guide), your Neon Postgres databases automatically adjust CPU and memory based on workload, ensuring optimal performance and cost efficiency. This removes the need for manual server resizing and prevents budget waste from overprovisioning. [Create a free Neon account and try it today.](https://console.neon.tech/signup)**
 
 Building autoscaling has been a main goal for Neon since we launched. A serverless experience for Postgres had to include a compute layer that scaled up and down automatically, including scaling down to zero when the database was not in use.
 
@@ -50,7 +50,7 @@ Building autoscaling was no small feat. We faced many engineering challenges in 
 <figcaption><em>Initial sketch for autoscaling, conceived during a 2022 hackathon. The final implementation ended up needing a bit more code than what’s here 🙂</em></figcaption>
 </figure>
 
-Our [autoscaling algorithm](https://neon.tech/docs/guides/autoscaling-algorithm) is deeply integrated into the Neon architecture, which natively decouples storage and compute. In Neon, each Postgres instance operates within its own VM in a Kubernetes cluster. While Kubernetes traditionally uses containers, we opted for VMs to provide strong isolation boundaries, support dynamic resource adjustments, and enable seamless live migration.
+Our [autoscaling algorithm](https://neon.com/docs/guides/autoscaling-algorithm) is deeply integrated into the Neon architecture, which natively decouples storage and compute. In Neon, each Postgres instance operates within its own VM in a Kubernetes cluster. While Kubernetes traditionally uses containers, we opted for VMs to provide strong isolation boundaries, support dynamic resource adjustments, and enable seamless live migration.
 
 <figure>
 <img src="https://cdn.neonapi.io/public/images/pages/blog/neon-autoscaling-is-generally-available/screenshot-2024-08-25-at-113838percente2percent80percentafam-1024x403-69feab35.png" alt="Image" />
@@ -111,7 +111,7 @@ Overall, the experience is not good—and something we believe can be improved w
 <cite><a href="https://neon.tech/blog/white-widgets-secret-to-scalable-postgres-neon%5C">Technical Director at White Widget</a></cite>
 </blockquote>
 
-We’ve built Neon autoscaling to offer a better way for Postgres. Instead of provisioning fixed compute, Neon autoscales CPU and memory dynamically up and down in response to load. **For cost-control, you define a maximum** [autoscaling limit](https://neon.tech/docs/introduction/autoscaling). Your Neon database will never scale beyond the max CPU/RAM you set, preventing unexpected charges on your bill.
+We’ve built Neon autoscaling to offer a better way for Postgres. Instead of provisioning fixed compute, Neon autoscales CPU and memory dynamically up and down in response to load. **For cost-control, you define a maximum** [autoscaling limit](https://neon.com/docs/introduction/autoscaling). Your Neon database will never scale beyond the max CPU/RAM you set, preventing unexpected charges on your bill.
 
 In addition to a max autoscaling limit, you also define a minimum autoscaling limit, below which your CPU/RAM will never scale down. This allows you to balance costs and performance for your specific needs. A non-production database can scale to zero when not in use, and a production database can maintain a minimum performance level while also being ready to respond to traffic spikes at a moments notice.
 
@@ -124,7 +124,7 @@ In addition to a max autoscaling limit, you also define a minimum autoscaling li
 <figcaption><em>To configure autoscaling, click on “Enable autoscaling” and select your min/max compute size</em><br></br></figcaption>
 </figure>
 
-[You can also configure autoscaling via the Neon CLI](https://neon.tech/docs/reference/cli-branches). For example, this command specifies an autoscaling range with a minimum of 0.5 CU and a maximum of 2 CU for the compute in the main branch: `neon branches add-compute main --cu 0.5-2`
+[You can also configure autoscaling via the Neon CLI](https://neon.com/docs/reference/cli-branches). For example, this command specifies an autoscaling range with a minimum of 0.5 CU and a maximum of 2 CU for the compute in the main branch: `neon branches add-compute main --cu 0.5-2`
 
 Our configuration advice:
 

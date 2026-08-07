@@ -73,12 +73,12 @@ When you create a Replit app with persistence, [the Replit Agent provisions a Ne
 Here’s what happens behind the scenes when you click “Preview” on a checkpoint from, say, 3 days ago:
 
 1. Branching the database: Replit requests a new branch from Neon at the exact timestamp of the checkpoint. The Neon engine “points” to that database moment and creates a branch instantly, no full data copy required
-2. Connecting the preview: Neon then spins up a temporary [compute endpoint](https://neon.tech/docs/manage/computes) for the branch. The preview app connects to this branch – any reads or writes happen safely outside your production database
+2. Connecting the preview: Neon then spins up a temporary [compute endpoint](https://neon.com/docs/manage/computes) for the branch. The preview app connects to this branch – any reads or writes happen safely outside your production database
 3. Loading the code snapshot: Replit loads the corresponding Git commit for that checkpoint, including the full file system and the Agent’s memory at that moment. The Agent resets to what it knew at that point in time, so its behavior matches the historical context. The code is then built and deployed into a temporary environment, fully in sync with the branched database.
 
 Because both the code and data are restored together, the preview behaves exactly as the app did at that point in time. There’s no manual restore, no brittle migrations, just instant, accurate rollback.
 
-If you then choose to roll back for real, a similar process applies. Replit [promotes the branched database to replace your current one](https://neon.tech/docs/introduction/branch-restore), giving you a full app restore (code and data) in one move. This is a robust, low-friction alternative to traditional backup/restore or ad hoc migration scripts, taken care of entirely by Replit.
+If you then choose to roll back for real, a similar process applies. Replit [promotes the branched database to replace your current one](https://neon.com/docs/introduction/branch-restore), giving you a full app restore (code and data) in one move. This is a robust, low-friction alternative to traditional backup/restore or ad hoc migration scripts, taken care of entirely by Replit.
 
 ## Improving Quality and Security in Vibe Coding
 

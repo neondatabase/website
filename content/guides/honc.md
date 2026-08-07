@@ -4,7 +4,7 @@ subtitle: Building a serverless Task API with Hono, Drizzle, Neon, and Cloudflar
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-14T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 The [HONC stack](https://honc.dev/) (Hono + ORM/Drizzle + Neon + Cloudflare) is a modern toolkit for building lightweight, type-safe, and edge-enabled data APIs. It's designed for developers seeking to build fast, serverless applications with a strong emphasis on scalability and a great developer experience.
@@ -778,7 +778,7 @@ You can find the source code for the application described in this guide on GitH
 - **Fiberplane API Playground:** [Hono-native API Playground, powered by OpenAPI](https://fiberplane.com/blog/hono-native-playground/), [Features](https://fiberplane.com/docs/features/playground/)
 - **Hono:** [hono.dev](https://hono.dev)
 - **Drizzle ORM:** [orm.drizzle.team](https://orm.drizzle.team)
-- **Neon:** [neon.tech/docs](/docs)
+- **Neon:** [neon.com/docs](/docs)
 - **Cloudflare Workers:** [developers.cloudflare.com/workers](https://developers.cloudflare.com/workers/)
 
 <NeedHelp/>

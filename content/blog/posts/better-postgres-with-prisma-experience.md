@@ -113,7 +113,7 @@ datasource db {
 
 Note you only need the pooled connection to run Prisma with Postgres. It’s no longer required to specify a direct connection to the database and the `pgbouncer=true` query parameter. The pooled connection is used to scale your queries and run schema migrations.
 
-This allows Neon to confidently set the default URL to the pooled connection string on the Console and the [Vercel Integration](https://neon.tech/docs/changelog/2024-02-23-console#neon-vercel-integration-improvements).
+This allows Neon to confidently set the default URL to the pooled connection string on the Console and the [Vercel Integration](https://neon.com/docs/changelog/2024-02-23-console#neon-vercel-integration-improvements).
 
 ## DROP shadow database WITH (FORCE)
 

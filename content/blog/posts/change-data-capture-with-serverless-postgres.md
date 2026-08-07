@@ -64,7 +64,7 @@ In Postgres, logical replication is one of the methods of implementing CDC and s
 
 Your Neon database works as a publisher, copying first a snapshot of the data and then streaming changes to one or more target data stores (subscribers). This model allows for selective replication, where only specified tables or even specific columns within a table can be replicated.
 
-Learn more about connecting [Neon to different data stores](https://neon.tech/docs/guides/logical-replication-guide) in the documentation.
+Learn more about connecting [Neon to different data stores](https://neon.com/docs/guides/logical-replication-guide) in the documentation.
 
 The [Write-Ahead-Log (WAL)](https://www.postgresql.org/docs/current/wal-intro.html) is a fundamental component in Postgres, designed to ensure data integrity and facilitate recovery. It records every change made to the database, including transactions and their states.
 
@@ -103,7 +103,7 @@ This action is also irreversible, and you will not be able to disable logical re
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/change-data-capture-with-serverless-postgres/logical-replication-6fb5add7.mp4" />
 </video>
 
-Ensure that logical replication is enabled by running the following query in the [SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) within the Neon console or using `psql` on your terminal.
+Ensure that logical replication is enabled by running the following query in the [SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) within the Neon console or using `psql` on your terminal.
 
 ```sql
 SHOW wal_level;
@@ -135,7 +135,7 @@ Execute the following query to create a publication for the users table:
 CREATE PUBLICATION users_publication FOR TABLE users;
 ```
 
-Learn more about [how to connect Neon to different data stores](https://neon.tech/docs/guides/logical-replication-guide) in the documentation.
+Learn more about [how to connect Neon to different data stores](https://neon.com/docs/guides/logical-replication-guide) in the documentation.
 
 ## Limitations
 

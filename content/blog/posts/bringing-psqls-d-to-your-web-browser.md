@@ -52,7 +52,7 @@ Of course, it’s not just `\\d` and `\\l`: there are lots of other useful backs
 
 # \\d **works now**
 
-Fast-forward a year or two. Having put together Neon’s [serverless driver](https://neon.tech/docs/serverless/serverless-driver) — which runs in environments that don’t offer raw TCP connections, such as web browsers — I was tasked to upgrade our web-based SQL Editor to make use of it. This enables interactive sessions and transactions in the SQL Editor, and reduces memory usage on our back-end, amongst other things.
+Fast-forward a year or two. Having put together Neon’s [serverless driver](https://neon.com/docs/serverless/serverless-driver) — which runs in environments that don’t offer raw TCP connections, such as web browsers — I was tasked to upgrade our web-based SQL Editor to make use of it. This enables interactive sessions and transactions in the SQL Editor, and reduces memory usage on our back-end, amongst other things.
 
 <blockquote>
 <p>Easter egg alert! As a as result of this work, if you open your browser’s dev tools in the SQL Editor, you can also run queries there using the currently-connected serverless driver client. The client is a property of the window, named <code>rawClient</code>. It’s so named because all parsing has been turned off: it returns the raw Postgres text format for each data type. Try pasting in <code>rawClient.query('SELECT now()').then(console.log)</code>, for instance.</p>

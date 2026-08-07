@@ -39,7 +39,7 @@ seo:
 
 **In this post, I’ll walk you through setting up an AWS S3 bucket to store Postgres backups. This is part 1 of a 2-part series on automating nightly backups for multiple Neon projects—a helpful approach if you’re managing hundreds or even thousands of Neon projects (e.g. [in multi-tenant architectures with one project per customer](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)).**
 
-Neon already provides [S3-level durability](https://neon.tech/blog/our-approach-to-high-availability) and [rollback options for changes](https://neon.tech/docs/guides/branch-restore) made to databases, however some customers still want to back up data to their own S3. This is somewhat simple if you only have one project, but Neon users often adopt a [database-per-tenant architecture](https://neon.tech/use-cases/database-per-tenant)—making manually backing up each project to S3 can feel overwhelming.
+Neon already provides [S3-level durability](https://neon.tech/blog/our-approach-to-high-availability) and [rollback options for changes](https://neon.com/docs/guides/branch-restore) made to databases, however some customers still want to back up data to their own S3. This is somewhat simple if you only have one project, but Neon users often adopt a [database-per-tenant architecture](https://neon.tech/use-cases/database-per-tenant)—making manually backing up each project to S3 can feel overwhelming.
 
 Setting up a scheduled GitHub Action for each database simplifies this process, making the workflow much easier to manage. This first post will focus on the AWS side of things; [in the following post, I explain how the GitHub Actions work.](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects)
 

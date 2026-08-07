@@ -77,7 +77,7 @@ So one can define a ‘Rosetta stone’ <sup><a href="https://neon.tech/blog/pax
 
 Imagine we want Postgres to have a built-in replication with automatic failover. How much of the current replication infrastructure can we reuse? Should we write it from scratch, or can we augment an existing one? I would argue it is the latter. In fact, Postgres replication does a lot of things that Raft does for a happy case:
 
-- Replication is built around WAL ([Write-Ahead Log](https://neon.tech/docs/postgres/wal-intro)), which is strictly ordered, and each message is stamped with an LSN ([Log Sequence Number](https://neon.tech/docs/reference/glossary#lsn)).
+- Replication is built around WAL ([Write-Ahead Log](https://neon.com/docs/postgres/wal-intro)), which is strictly ordered, and each message is stamped with an LSN ([Log Sequence Number](https://neon.com/docs/reference/glossary#lsn)).
 - The replication connection mainly transfers WAL records, but there are out-of-band messages going in both directions to perform heartbeats and acknowledgments of the received LSN.
 - Synchronous replication can be configured to proceed when the majority of acknowledgments are received. Namely, one can configure the primary with `synchronous_standby_names = 'ANY 1 (follower_A, follower_B)'` and have the same wait logic as in Raft in the case of three nodes.
 

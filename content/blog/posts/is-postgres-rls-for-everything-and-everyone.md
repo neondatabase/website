@@ -149,7 +149,7 @@ export const projects = pgTable(
 );
 ```
 
-Then, just make sure that the JWTs you’re passing to [Neon RLS](https://neon.tech/docs/guides/neon-authorize) have a `tenantId` claim, and you’re much better protected against data leaks.
+Then, just make sure that the JWTs you’re passing to [Neon RLS](https://neon.com/docs/guides/neon-authorize) have a `tenantId` claim, and you’re much better protected against data leaks.
 
 ## Conclusion
 

@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
 The above limitations make it difficult for applications with extensive knowledge bases and gigabytes of private data to be converted to GPTs. Another concern is related to data security. OpenAI operates as a black box, which makes it challenging to know what’s going on internally and how your data is accessed. This can be a blocker for users with sensitive data.
 
-An alternative would be to create your own RAG app that uses open-source tools and models such as [Mixtral 8x7B](https://neon.tech/blog/mixtral-8x7b-what-you-need-to-know-about-mistral-ais-latest-model) and [pgvector](https://neon.tech/docs/extensions/pgvector). Learn more about [AI concepts](https://neon.tech/docs/ai/ai-concepts) and [how to use create a chatbot using pgvector and Next.js](https://neon.tech/blog/building-an-ai-powered-chatbot-using-vercel-openai-and-postgres).
+An alternative would be to create your own RAG app that uses open-source tools and models such as [Mixtral 8x7B](https://neon.tech/blog/mixtral-8x7b-what-you-need-to-know-about-mistral-ais-latest-model) and [pgvector](https://neon.com/docs/extensions/pgvector). Learn more about [AI concepts](https://neon.com/docs/ai/ai-concepts) and [how to use create a chatbot using pgvector and Next.js](https://neon.tech/blog/building-an-ai-powered-chatbot-using-vercel-openai-and-postgres).
 
 ## Publishing to the GPT Store
 

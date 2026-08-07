@@ -39,7 +39,7 @@ Storing files directly in a database is generally discouraged in favour of dedic
 
 PostgREST turns Postgres into a webserver, exposing API endpoints for CRUD operations based on constraints and permissions in the database. The PostgREST philosophy focuses on making the database the single source of truth which can help avoid common pitfalls in API development like duplicating or ignoring database structures, leaky ORM abstractions, and managing permissions in API controllers instead of directly within the database.
 
-We’ll be accessing PostgREST using the new [Neon Data API](https://neon.tech/docs/data-api/get-started), available for members of the Early Access Program. If you’re interested in trying features right as they come out, [join here](https://neon.tech/docs/introduction/early-access)!
+We’ll be accessing PostgREST using the new [Neon Data API](https://neon.com/docs/data-api/get-started), available for members of the Early Access Program. If you’re interested in trying features right as they come out, [join here](https://neon.com/docs/introduction/early-access)!
 
 ## Setting up the Database
 
@@ -47,7 +47,7 @@ First, start by provisioning a new Postgres instance by creating a fresh project
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/recreating-s3-in-postgres-using-postgrest/ad4nxfzrzcm9aum3bv2g7zdvlakrsugvauowoxcctgsfipzhwdwhdlhbto2mp8mmfpdp2gpquu1oqowvojiad00-h-rwnjkhr0nnzpbv79no3v-ysb50y8lvsdpygfwqqlx7mosjxma-b77777bc.gif)
 
-Next, head to the SQL editor tab and add the [pgcrypto](https://neon.tech/docs/extensions/pgcrypto) extension for hashing files, and the blobs table we’ll be using to store all our binary data and its metadata.
+Next, head to the SQL editor tab and add the [pgcrypto](https://neon.com/docs/extensions/pgcrypto) extension for hashing files, and the blobs table we’ll be using to store all our binary data and its metadata.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pgcrypto;

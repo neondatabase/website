@@ -74,7 +74,7 @@ Neon gives you both:
 <figcaption><em>Branching workflows without PII</em></figcaption>
 </figure>
 
-In Neon, a [branch](https://neon.tech/docs/introduction/branching) is a lightweight, copy-on-write clone of a Postgres database. It contains the same schema and data as its parent, but diverges safely in isolation, with its own compute endpoint and connection URL.
+In Neon, a [branch](https://neon.com/docs/introduction/branching) is a lightweight, copy-on-write clone of a Postgres database. It contains the same schema and data as its parent, but diverges safely in isolation, with its own compute endpoint and connection URL.
 
 Branches are created instantly no matter _how large the dataset_ and don’t require provisioning a new instance or duplicating storage, it’s all built into Neon’s architecture. They remain “logically connected’ to the parent, so production drift is a thing of the past – child branches can be synced with their parent in one API call, and they’ll reflect up-to-date and schema again.
 
@@ -97,7 +97,7 @@ Teams use branches where they were using redundant instances or local setups bef
 
 Neon branches eliminate the overhead of environment setup – no need to provision a new instance, create a new database, populate it, or worry about environments drifting out of sync. But if your production database contains PII, branching it directly is not an option.
 
-That’s where the [PostgreSQL Anonymizer extension (anon)](https://neon.tech/docs/extensions/postgresql-anonymizer) comes in. This open-source extension lets you define masking rules on sensitive columns in your database, replacing real values with fake but realistic-looking alternatives. Neon currently supports static masking, meaning the data is permanently rewritten on the branch.
+That’s where the [PostgreSQL Anonymizer extension (anon)](https://neon.com/docs/extensions/postgresql-anonymizer) comes in. This open-source extension lets you define masking rules on sensitive columns in your database, replacing real values with fake but realistic-looking alternatives. Neon currently supports static masking, meaning the data is permanently rewritten on the branch.
 
 You can choose from multiple masking strategies, such as
 
@@ -168,14 +168,14 @@ The workflow is simple:
 Since these branches are all copy-on-write, the data overhead is minimal, and the experience is fast.
 
 <Admonition type="tip" title="Automate this workflow">
-Our docs include an example of [how to use GitHub Actions to create an anonymized Neon branch every time a pull request is opened.](https://neon.tech/docs/workflows/data-anonymization#automate-data-anonymization) The Action installs the extension, applies masking rules, and runs the anonymization, all in one CI job.
+Our docs include an example of [how to use GitHub Actions to create an anonymized Neon branch every time a pull request is opened.](https://neon.com/docs/workflows/data-anonymization#automate-data-anonymization) The Action installs the extension, applies masking rules, and runs the anonymization, all in one CI job.
 </Admonition>
 
 ## Start Building with Anonymized Branches in Neon
 
 Cloning production environments has always been a pain, especially when sensitive data is involved. But by combining Neon’s branching architecture and&nbsp; the PostgreSQL Anonymizer extension it’s much easier to create safe, production-like environments. Just branch from production, anonymize once, reuse everywhere.
 
-To get started, [sign up to Neon](https://console.neon.tech/signup) and follow [this guide](https://neon.tech/docs/workflows/data-anonymization). If you have any questions on how to integrate anonymized branching workflows into your environment, [reach out to our team.](https://neon.tech/contact-sales)
+To get started, [sign up to Neon](https://console.neon.tech/signup) and follow [this guide](https://neon.com/docs/workflows/data-anonymization). If you have any questions on how to integrate anonymized branching workflows into your environment, [reach out to our team.](https://neon.tech/contact-sales)
 
 <Admonition type="tip" title="Get $100 in credits">
 If you sign up [via this link](https://fyi.neon.tech/credits), your first $100 are on us!

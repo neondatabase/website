@@ -52,7 +52,7 @@ Without further ado, let’s get started!
 
 `pg_stat_statements` is an open-source Postgres extension for monitoring and analyzing SQL query performance. It provides aggregated query statistics for executed SQL statements. The data collected includes the number of query executions, total execution time, rows returned by the query, and much more.
 
-This extension isn’t installed by default, so your first step is to install it and allow some time for data collection. To install the extension, you can run the following `CREATE EXTENSION` statement in a Postgres client such as [`psql`](https://neon.tech/docs/connect/query-with-psql-editor) that is connected to your database.
+This extension isn’t installed by default, so your first step is to install it and allow some time for data collection. To install the extension, you can run the following `CREATE EXTENSION` statement in a Postgres client such as [`psql`](https://neon.com/docs/connect/query-with-psql-editor) that is connected to your database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
@@ -148,7 +148,7 @@ LIMIT 10;
 
 Long-running queries are candidates for optimization. As a next step, you can run [`EXPLAIN (ANALYZE)`](https://www.postgresql.org/docs/current/sql-explain.html) on each to identify opportunities for optimization, such as full table scans or inefficient joins.
 
-There are many other useful queries you can run with `pg_stat_statements`, which you can find online and in our [`pg_stat_statements` guide](https://neon.tech/docs/extensions/pg_stat_statements).
+There are many other useful queries you can run with `pg_stat_statements`, which you can find online and in our [`pg_stat_statements` guide](https://neon.com/docs/extensions/pg_stat_statements).
 
 ## Strategy 2: Checking your cache hit ratio
 
@@ -197,12 +197,12 @@ file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses))
 
 If the `file_cache_hit_ratio` is below 99%, your working set (your most frequently accessed data) may not be adequately in memory. This could be due to your Postgres instance not having sufficient memory.
 
-If it’s a lack of memory, you can consider allocating more. In Postgres, this requires increasing your shared_buffers setting, assuming your system has memory resources to support it. In Neon, shared_buffers is always set to 128 MB. To increase available memory in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, please refer to [How to size your compute](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute).
+If it’s a lack of memory, you can consider allocating more. In Postgres, this requires increasing your shared_buffers setting, assuming your system has memory resources to support it. In Neon, shared_buffers is always set to 128 MB. To increase available memory in Neon, you can increase the size of your compute. Larger computes have larger local file caches. For information about selecting an appropriate compute size in Neon, please refer to [How to size your compute](https://neon.com/docs/manage/endpoints#how-to-size-your-compute).
 
 Please remember that the local file cache statistics are for the entire compute, not specific databases or tables. A Neon compute runs an instance of Postgres, which can have multiple databases and tables.
 
 <Admonition type="note">
-The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the [pg_prewarm](https://neon.tech/docs/extensions/pg_prewarm) extension to pre-load data into memory after a restart.
+The cache hit ratio query is based on statistics that represent the lifetime of your Postgres instance, from the last time you started it until the time you ran the query. Statistics are lost when your instance stops and gathered again from scratch when your instance restarts. In Neon, your compute runs Postgres, so starting and stopping a compute also starts and stops Postgres. Additionally, you'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you restart Postgres. In this case, you should run a representative workload before you try the cache hit ratio query again to see if your cache hit ratio improved. Optionally, to help speed up the process, you can use the [pg_prewarm](https://neon.com/docs/extensions/pg_prewarm) extension to pre-load data into memory after a restart.
 </Admonition>
 
 ## Strategy 3: Checking for table or index bloat

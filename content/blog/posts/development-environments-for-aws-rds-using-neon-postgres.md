@@ -121,7 +121,7 @@ Speaking of workflows: [Neon integrates into your pipelines by allowing you to a
 <cite><a href="https://neon.tech/blog/how-supergood-unlocked-their-postgres-developer-productivity">Alex Klarfeld, CEO and co-founder of Supergood.ai</a></cite>
 </blockquote>
 
-Neon workflows are based on [database branching](https://neon.tech/docs/manage/branches) — allowing you to develop and test with data that very closely mirrors your production environment. Instead of relying on synthetic datasets or dealing with the complexities of maintaining local data scripts, you can create a branch with a perfect copy of your production data. This approach ensures your local testing is more reliable and reduces the risk of encountering issues when deploying to production.
+Neon workflows are based on [database branching](https://neon.com/docs/manage/branches) — allowing you to develop and test with data that very closely mirrors your production environment. Instead of relying on synthetic datasets or dealing with the complexities of maintaining local data scripts, you can create a branch with a perfect copy of your production data. This approach ensures your local testing is more reliable and reduces the risk of encountering issues when deploying to production.
 
 <figure className="wp-block-image size-large is-style-default">
 <img src="https://cdn.neonapi.io/public/images/pages/blog/development-environments-for-aws-rds-using-neon-postgres/screenshot-2024-07-15-at-55014percente2percent80percentafpm-c0c1f2f6.png" alt="Post image" width="1024" height="559" />

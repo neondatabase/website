@@ -40,7 +40,7 @@ Now that [Neon supports logical replication](https://neon.tech/blog/change-data-
 
 ## Why Materialize?
 
-[Logical replication](https://neon.tech/docs/guides/logical-replication-materialize) allows capturing `INSERT` s, `UPDATE` s, and `DELETE` s as these operations happen in your Neon database, making this data available to an external system for processing — a pattern known as Change Data Capture (CDC). If your use case requires more than simple mirroring, Materialize can help you transform the replicated data into **actionable results** that are **always fresh and consistent**.
+[Logical replication](https://neon.com/docs/guides/logical-replication-materialize) allows capturing `INSERT` s, `UPDATE` s, and `DELETE` s as these operations happen in your Neon database, making this data available to an external system for processing — a pattern known as Change Data Capture (CDC). If your use case requires more than simple mirroring, Materialize can help you transform the replicated data into **actionable results** that are **always fresh and consistent**.
 
 Materialize shines at [operational use cases](https://materialize.com/blog/operational-data-warehouse/), where an analytical data warehouse would be too slow or too costly, and a stream processor would introduce too much complexity. It can handle arbitrarily complex transformations on changing data using — you’ve guessed it — just SQL. For CDC from a PostgreSQL database like Neon, it has the added benefit of requiring **no additional infrastructure** (_e.g._ Debezium), while guaranteeing **transactional consistency**.
 
@@ -73,7 +73,7 @@ SHOW wal_level;
  logical
 ```
 
-Once logical replication is enabled, the next step is to create a publication with the tables that you want to replicate to Materialize. It’s also recommended to [create a dedicated user](https://neon.tech/docs/manage/roles) for replication.
+Once logical replication is enabled, the next step is to create a publication with the tables that you want to replicate to Materialize. It’s also recommended to [create a dedicated user](https://neon.com/docs/manage/roles) for replication.
 
 **4.** Grant the replication user the required permissions on the tables you want to replicate:
 

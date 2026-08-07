@@ -48,7 +48,7 @@ Each Neon project has a root branch called main, and you can create more branche
 
 End-to-end (e2e) testing ensures that your application works as expected in a real-world environment. However, e2e testing can be challenging, especially when it involves testing with production data. This is where Neon’s database branching comes into play.
 
-Instead of manually creating a branch from the Neon console, you can automate and extend this capability using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This opens up a few scenarios, one of which is integrating database branching into your GitHub pipelines for testing.
+Instead of manually creating a branch from the Neon console, you can automate and extend this capability using the [Neon API](https://neon.com/docs/reference/api/get-started). This opens up a few scenarios, one of which is integrating database branching into your GitHub pipelines for testing.
 
 With database branching, you can create and manage multiple database versions without impacting your production environment. This means you can test your application against different data sets without worrying about downtime or data loss.
 

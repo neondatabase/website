@@ -36,7 +36,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/checkpoints-for-agents-with-neon-snapshots/neon-snapshots-api-1024x576-c6dedd99.jpg)
 
-You can now [create Neon snapshots via API](https://api-docs.neon.tech/reference/createsnapshot). This new capability isn’t just useful for backups or disaster recovery, but also serves as a [powerful building block for one of the most requested features in agentic platforms: versioning (or checkpoints).](https://neon.com/docs/ai/ai-database-versioning)
+You can now [create Neon snapshots via API](https://neon.com/docs/reference/api/snapshots/create-snapshot). This new capability isn’t just useful for backups or disaster recovery, but also serves as a [powerful building block for one of the most requested features in agentic platforms: versioning (or checkpoints).](https://neon.com/docs/ai/ai-database-versioning)
 
 Neon’s snapshots, built on our [copy-on-write branching](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write), make it simple and cost-effective to implement this feature – unlocking a magical user experience for your users. With snapshots, you can give your agents the ability to create checkpoints after each change, so your users can jump between app versions and restore not only the code, but also the exact database schema and data that version was built on.
 
@@ -74,7 +74,7 @@ In this demo,
 - Every prompt affects both the app code and the underlying Postgres database
 - After each change, the platform takes a Neon snapshot of the production branch, saving the complete state of the app after each user prompt
 - These snapshots are stored alongside metadata in a separate meta database that keeps track of the timeline of checkpoints
-- If the end user wants to go back to a previous version, whether to preview it or fully restore it, the platform looks up the associated snapshot ID in the meta database and calls Neon’s [restore snapshot API](https://api-docs.neon.tech/reference/restoresnapshot)
+- If the end user wants to go back to a previous version, whether to preview it or fully restore it, the platform looks up the associated snapshot ID in the meta database and calls Neon’s [restore snapshot API](https://neon.com/docs/reference/api/snapshots/restore-snapshot)
 - Neon instantly reverts the production branch to the exact schema and data from that checkpoint, so the rolled-back code runs without broken queries, failed migrations, or mismatched data.
 
 <Admonition type="tip" title="Build your own">
@@ -151,7 +151,7 @@ As we introduced earlier, Neon has a [unique architecture](https://neon.com/blog
 - **Instant speed.** Because snapshots are just references to existing data, they can be created and restored without the heavy I/O you’d expect from a backup/restore cycle. The restore process is just as fast and efficient – Neon just swaps the branch pointer to the snapshot’s state.
 - **API-first provisioning and control.** Everything in Neon is exposed via API – from creating databases and branches, to controlling compute consumption, to (now!) creating and restoring snapshots. You can wire up this entire checkpointing system into your agent’s workflow without touching a UI.
 
-The [snapshots API](https://api-docs.neon.tech/reference/createsnapshot) makes it simple to build agent features that let users jump between versions of their app. Code rollbacks alone can’t guarantee that – but with Neon, you get schema and data rollbacks as well.
+The [snapshots API](https://neon.com/docs/reference/api/snapshots/create-snapshot) makes it simple to build agent features that let users jump between versions of their app. Code rollbacks alone can’t guarantee that – but with Neon, you get schema and data rollbacks as well.
 
 Try the [live demo](https://snapshots-as-checkpoints-demo.vercel.app/) to see how it works. Then, [sign up for Neon](https://console.neon.tech/signup) and start building your agent. We’ve built a step by step guide [here](https://neon.com/docs/ai/ai-database-versioning).
 

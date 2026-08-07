@@ -74,7 +74,7 @@ The purpose of the Pageserver is to store and quickly reconstruct Postgres pages
 
 Note:
 
-A tenant in Neon terms holds the data of a Postgres instance. When you create a Neon project in the Console, Neon assigns it a project-id (also known as a tenant-id), and the main branch-id, which is referred to as timeline-id. See [Operations](https://neon.tech/docs/manage/operations) for more information.
+A tenant in Neon terms holds the data of a Postgres instance. When you create a Neon project in the Console, Neon assigns it a project-id (also known as a tenant-id), and the main branch-id, which is referred to as timeline-id. See [Operations](https://neon.com/docs/manage/operations) for more information.
 
 In the diagram below, we show the example of a Pageserver with 2 tenants. The area of the rectangles represents the amount of data a tenant has. The bigger the surface area, the larger the dataset. Also, for simplicity, we assume that each tenant has exactly one table.
 

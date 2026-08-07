@@ -39,13 +39,13 @@ seo:
 <video width="2336" height="1794" style={{ aspectRatio: '2336 / 1794' }} autoPlay loop muted playsInline src="https://cdn.neonapi.io/public/videos/pages/blog/automating-neon-branch-creation-with-githooks/sequence-01-f5e99565.mp4"></video>
 </figure>
 
-In this blog post, we’ll walk through creating a [Githook](https://git-scm.com/docs/githooks) script that automates the creation of [Neon branches](https://neon.tech/docs/introduction/branching) every time a new Git branch is created. This is possible because Neon provides an API to manage your projects, branches, and most other operations supported by the Neon Console. You can [learn more about the Neon API here](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+In this blog post, we’ll walk through creating a [Githook](https://git-scm.com/docs/githooks) script that automates the creation of [Neon branches](https://neon.com/docs/introduction/branching) every time a new Git branch is created. This is possible because Neon provides an API to manage your projects, branches, and most other operations supported by the Neon Console. You can [learn more about the Neon API here](https://neon.com/docs/reference/api/get-started).
 
 We’ll start with a simple Githook example and incrementally build up to our final solution. You can find the repository along with the instructions on [GitHub](https://github.com/raoufchebri/create-neon-branch-with-githooks).
 
 ## What are Neon branches?
 
-Similarly to Git branches, Neon branches are isolated copies of your database that are helpful for experimenting with new features without compromising your database. You can instantly create Neon branches using the Neon console or the API. [Learn more about database branching in the docs](https://neon.tech/docs/introduction/branching).
+Similarly to Git branches, Neon branches are isolated copies of your database that are helpful for experimenting with new features without compromising your database. You can instantly create Neon branches using the Neon console or the API. [Learn more about database branching in the docs](https://neon.com/docs/introduction/branching).
 
 ## What are Githooks?
 
@@ -110,7 +110,7 @@ The issue here is if we switch back to a previously checked-out Git branch, the 
 
 We want to create a new Neon branch for every new Git branch in our local development environment and paste the new connection string to our environment variables.
 
-To that end, we need to add code that sends a POST request to the Neon API to create a new database branch. For that, you need to [create a project](https://console.neon.tech/) and [generate an API key](https://neon.tech/docs/manage/api-keys#create-an-api-key) on the Neon Console. To generate an API key:
+To that end, we need to add code that sends a POST request to the Neon API to create a new database branch. For that, you need to [create a project](https://console.neon.tech/) and [generate an API key](https://neon.com/docs/manage/api-keys#create-an-api-key) on the Neon Console. To generate an API key:
 
 1. Log in to the Neon Console.
 2. Click your account in the bottom left corner of the Neon Console, and select Account.

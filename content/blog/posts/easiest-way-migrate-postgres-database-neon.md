@@ -89,7 +89,7 @@ To get started, just follow the prompts. The process is very simple:
 2. Neon runs an automatic compatibility check
 3. If everything looks good, it starts the import. The assistant creates a new branch in your project of choice, and brings your data in.
 
-That’s it: no setup, no CLI, no exports. You can find full step-by-step instructions in [our docs](https://neon.tech/docs/import/import-data-assistant).
+That’s it: no setup, no CLI, no exports. You can find full step-by-step instructions in [our docs](https://neon.com/docs/import/import-data-assistant).
 
 ## Migrating a Large Database? Reach Out to Us
 

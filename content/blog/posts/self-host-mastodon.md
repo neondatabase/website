@@ -215,7 +215,7 @@ DB_PASS='project=<project_id>;<password>'
 DB_PORT='5432' 
 ```
 
-The `DB_PASS` variable has the `DB_PASS='project=<project_id>;password'` string format because the underlying database client library in the Docker image does not support the SNI (Server Name Indication) mechanism in TLS. Check out the documentation to learn more about [how Neon routes connections](https://neon.tech/docs/connect/connectivity-issues#how-neon-routes-connections).
+The `DB_PASS` variable has the `DB_PASS='project=<project_id>;password'` string format because the underlying database client library in the Docker image does not support the SNI (Server Name Indication) mechanism in TLS. Check out the documentation to learn more about [how Neon routes connections](https://neon.com/docs/connect/connectivity-issues#how-neon-routes-connections).
 
 You can find the Project ID in your project’s settings.
 

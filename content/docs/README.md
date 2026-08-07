@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-07-31T15:49:10.111Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 # Docs
@@ -559,7 +559,7 @@ The `TwoColumnLayout` component creates a two-column layout for tutorial pages a
 
 > **Note:** Pages using `TwoColumnLayout` should include `layout: wide` prop to hide the right sidebar (Table of Contents) and provide more space for the two-column layout.
 
-Check [Managed Better Auth with Next.js](https://neon.com/docs/auth/quick-start/nextjs-api-only) and [Neon TypeScript SDK](https://neon.com/docs/reference/javascript-sdk) for usage examples.
+Check [Managed Better Auth with Next.js](/docs/auth/quick-start/nextjs-api-only) and [Neon TypeScript SDK](/docs/reference/javascript-sdk) for usage examples.
 
 ````md
 <TwoColumnLayout>

@@ -36,7 +36,7 @@ seo:
 
 ## Summary
 
-On two occasions in the past week, Neon customers in AWS/us-east-1 were unable to create or start [inactive databases](https://neon.tech/docs/introduction/scale-to-zero), for a total period of 5.5 hours. Customers with running databases were unaffected.
+On two occasions in the past week, Neon customers in AWS/us-east-1 were unable to create or start [inactive databases](https://neon.com/docs/introduction/scale-to-zero), for a total period of 5.5 hours. Customers with running databases were unaffected.
 
 The root cause related to our ability to assign IP addresses to new database instances. We have taken preventative measures with our IP allocation, subnet size and VPC configuration to avoid re-occurrence. We have also redirected some load from this region to others. We have a longer-term plan to replace our current Kubernetes architecture, which is in progress.
 
@@ -55,7 +55,7 @@ On Friday,
 - Having that many active pods exhausted all available IP addresses in 2 of the 3 subnets in that region, which prevented starting new databases.
 - After reconfiguring [AWS CNI](https://github.com/aws/amazon-vpc-cni-k8s/) with _WARM_IP_TARGET=1_, some IPs were released and more databases were started, until we reached another ceiling of ~10k pods.
 - In parallel, we upscaled our control plane database, allowing it to successfully process database suspensions and release previously in use but no longer needed IPs.
-- We also enabled rate limiting at the [Neon Proxy](https://neon.tech/docs/reference/glossary#neon-proxy) layer to protect our control plane from experiencing thundering herd symptoms while it was restarting. This resulted in some customers noticing a _Rate Limit Exceeded_ error when trying to connect to their databases.
+- We also enabled rate limiting at the [Neon Proxy](https://neon.com/docs/reference/glossary#neon-proxy) layer to protect our control plane from experiencing thundering herd symptoms while it was restarting. This resulted in some customers noticing a _Rate Limit Exceeded_ error when trying to connect to their databases.
 - IP allocation continued to fail, so we then set _WARM_IP_TARGET_ and _WARM_ENI_TARGET_ to ‘0’, after which IP allocation improved.
 - This enabled new databases to start and for normal operations to resume.
 - Finally, we then disabled rate limiting in our Proxy layer.
@@ -70,7 +70,7 @@ On Monday,
 
 _**Note:** During this incident, there was a period in which IPs were available in our subnets, but only a small number were successfully assigned to pods. We are currently investigating the root cause of this issue and working with AWS Support. We will update this article when the investigation concludes._
 
-Our [Production Readiness checklist](https://neon.tech/docs/get-started-with-neon/production-checklist) recommends that customers with production databases disable [scale-to-zero](https://neon.tech/blog/using-neons-auto-suspend-with-long-running-applications), so these customers were unaffected.
+Our [Production Readiness checklist](https://neon.com/docs/get-started-with-neon/production-checklist) recommends that customers with production databases disable [scale-to-zero](https://neon.tech/blog/using-neons-auto-suspend-with-long-running-applications), so these customers were unaffected.
 
 However, many of our customers rely on this mechanism to reduce costs for their development branches. These customers experienced significant outages, for which we apologize. We are taking active steps to prevent this from happening again.
 

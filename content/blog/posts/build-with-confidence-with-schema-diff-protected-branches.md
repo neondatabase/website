@@ -136,7 +136,7 @@ You have a limit of 5 protected branches in your project. To set your branch as 
   height="512"
 />
 
-Check out the documentation for [more details on protected branches](https://neon.tech/docs/manage/branches#protected-branch).
+Check out the documentation for [more details on protected branches](https://neon.com/docs/manage/branches#protected-branch).
 
 # Conclusion
 

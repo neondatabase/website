@@ -39,7 +39,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/1-year-of-autoscaling-postgres-at-neon/image-24-1024x576-728fa3e9.png)
 
-Neon introduced [autoscaling for serverless Postgres](https://github.com/neondatabase/autoscaling/) to the world [over a year ago](https://neon.tech/blog/scaling-serverless-postgres), enabling your applications to handle peak demand without incurring peak infrastructure costs 24/7. Our [autoscaling feature](https://neon.tech/docs/introduction/autoscaling) performs zero-downtime vertical scaling of your Postgres instance, provisioning extra CPU and memory when your workload needs it and scaling down to reduce costs when possible.
+Neon introduced [autoscaling for serverless Postgres](https://github.com/neondatabase/autoscaling/) to the world [over a year ago](https://neon.tech/blog/scaling-serverless-postgres), enabling your applications to handle peak demand without incurring peak infrastructure costs 24/7. Our [autoscaling feature](https://neon.com/docs/introduction/autoscaling) performs zero-downtime vertical scaling of your Postgres instance, provisioning extra CPU and memory when your workload needs it and scaling down to reduce costs when possible.
 
 Almost a third of our customers use autoscaling today. Recrowd, a Neon customer, recently shared how Neon’s [autoscaling provides them with the peace of mind](https://neon.tech/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand#scaling-up-and-down-automatically-meeting-fluctuating-demand-with-neon) that they’re ready to handle fluctuating demand.
 
@@ -65,7 +65,7 @@ Since Kubernetes doesn’t natively support VMs, and preexisting VMs-in-Kubernet
 
 To implement the scaling logic of autoscaling, we use our `autoscaler-agent` — a daemon we deploy on each Kubernetes node to monitor metrics for each Postgres VM and make scaling decisions based on those metrics. The `autoscaler-agent` also works in conjunction with our modified [Kubernetes scheduler](https://kubernetes.io/docs/concepts/scheduling-eviction/scheduling-framework/) to prevent unintentionally overcommitting resources, making sure we don’t run out of resources on the host node.
 
-The `autoscaler-agent` also communicates with the `vm-monitor`, a small program inside the VM. The `vm-monitor` continuously monitors Postgres’ resource usage and will request upscaling on its behalf when there’s an imminent need, e.g., if a query is about to exhaust all available memory. `vm-monitor` is also responsible for adjusting the size of our [Local File Cache](https://neon.tech/docs/reference/glossary#local-file-cache) in Postgres when scaling occurs, to take advantage of added resources.
+The `autoscaler-agent` also communicates with the `vm-monitor`, a small program inside the VM. The `vm-monitor` continuously monitors Postgres’ resource usage and will request upscaling on its behalf when there’s an imminent need, e.g., if a query is about to exhaust all available memory. `vm-monitor` is also responsible for adjusting the size of our [Local File Cache](https://neon.com/docs/reference/glossary#local-file-cache) in Postgres when scaling occurs, to take advantage of added resources.
 
 For more background information, [read our original Scaling Serverless Postgres article](https://neon.tech/blog/scaling-serverless-postgres).
 
@@ -85,7 +85,7 @@ To fix these, we simplified — just polling the Postgres cgroup’s memory usag
 
 ### Scaling Down to Zero TPS
 
-Just before Neon’s last offsite in November, we discovered a strange issue during internal pre-release benchmarking: Under certain circumstances, communication appeared to stall between the Postgres instance and its [safekeepers](https://neon.tech/docs/introduction/architecture-overview), for up to a minute. At the same time, the ongoing `pgbench` run would start reporting that it was making no progress, i.e., 0 TPS (transactions per second).
+Just before Neon’s last offsite in November, we discovered a strange issue during internal pre-release benchmarking: Under certain circumstances, communication appeared to stall between the Postgres instance and its [safekeepers](https://neon.com/docs/introduction/architecture-overview), for up to a minute. At the same time, the ongoing `pgbench` run would start reporting that it was making no progress, i.e., 0 TPS (transactions per second).
 
 We quickly identified that the issue only affected autoscaling-enabled endpoints. The issue wasn’t consistently reproducible, and when we did see it, we had a limited window during which we could interrogate the state of the VM. To make matters worse, it sometimes seemed as if looking at the problem caused it to resolve! Occasionally, when we’d run `ps` to see the state of all processes inside the VM, `pgbench` would immediately resume as if nothing had happened.
 
@@ -99,7 +99,7 @@ And while in the medium-term, we have some deeper technical changes coming (virt
 
 ### Smarter Autoscaling using Local File Cache Metrics
 
-[Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon) separates storage and compute. It’s an integral part of what enables us to autoscale and dramatically reduce cold start times for serverless Postgres. Of course, [accessing pages across the network](https://neon.tech/blog/get-page-at-lsn) can result in increased query latency, so Neon’s Postgres has a [Local File Cache (LFC)](https://neon.tech/docs/reference/glossary#local-file-cache) that acts as a resizable extension of [Postgres’ shared buffers](https://www.postgresql.org/docs/16/runtime-config-resource.html#GUC-SHARED-BUFFERS).
+[Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon) separates storage and compute. It’s an integral part of what enables us to autoscale and dramatically reduce cold start times for serverless Postgres. Of course, [accessing pages across the network](https://neon.tech/blog/get-page-at-lsn) can result in increased query latency, so Neon’s Postgres has a [Local File Cache (LFC)](https://neon.com/docs/reference/glossary#local-file-cache) that acts as a resizable extension of [Postgres’ shared buffers](https://www.postgresql.org/docs/16/runtime-config-resource.html#GUC-SHARED-BUFFERS).
 
 Picking the right size for the cache is crucial — with certain OLTP workloads, we see a stepwise effect based on whether the working set fits into cache, sometimes with a 10x increase in performance from just a marginal increase in LFC size. A corollary to this is that the ideal endpoint size is often just big enough to fit the [working set size](https://en.wikipedia.org/wiki/Working_set_size), but no larger.
 
@@ -107,7 +107,7 @@ However, determining the right LFC size on the fly is challenging. Cache hit rat
 
 To help larger workloads stay performant, we’re currently working on augmenting our scaling algorithm with metrics from the LFC — specifically, using a [HyperLogLog](https://en.wikipedia.org/wiki/HyperLogLog) estimator for working set size based on the number of unique pages accessed.
 
-In the meantime, you can read more about [sizing your Postgres database on Neon](https://neon.tech/docs/manage/endpoints#sizing-your-computed-based-on-the-working-set) for optimal LFC usage in our documentation.
+In the meantime, you can read more about [sizing your Postgres database on Neon](https://neon.com/docs/manage/endpoints#sizing-your-computed-based-on-the-working-set) for optimal LFC usage in our documentation.
 
 ### Accommodating Rapid Memory Allocation with Swap
 

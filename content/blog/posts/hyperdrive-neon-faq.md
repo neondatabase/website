@@ -110,13 +110,13 @@ To demonstrate how to integrate Neon with Cloudflare’s Hyperdrive in a Cloudfl
 
 [https://github.com/neondatabase/examples/tree/main/with-hyperdrive](https://github.com/neondatabase/examples/tree/main/with-hyperdrive)
 
-You can also follow [this guide](https://neon.tech/docs/guides/cloudflare-hyperdrive) in docs.
+You can also follow [this guide](https://neon.com/docs/guides/cloudflare-hyperdrive) in docs.
 
 ## How does Hyperdrive overlap with Neon’s pooler?
 
 Hyperdrive and Neon’s connection pooler both manage database connections:
 
-- [Neon’s pooler](https://neon.tech/docs/connect/connection-pooling) (built on PgBouncer) reduces the number of connections to the Postgres database on Neon’s servers but does not influence connection setup latency.
+- [Neon’s pooler](https://neon.com/docs/connect/connection-pooling) (built on PgBouncer) reduces the number of connections to the Postgres database on Neon’s servers but does not influence connection setup latency.
 - Hyperdrive reduces latency by keeping global connection pools distributed across Cloudflare’s network, allowing Cloudflare Workers to connect to the nearest pool with minimal overhead.
 
 ## So, should I use Hyperdrive together with Neon’s pooling?
@@ -127,8 +127,8 @@ Actually, we don’t recommend it. Since Hyperdrive maintains its own global poo
 
 No, this isn’t possible. You should use Hyperdrive directly with standard Postgres drivers, like `node-postgres` or `Postgres.js`.
 
-Hyperdrive relies on TCP connections between the client and the database, while the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) is instead uses WebSockets or HTTP, which means it can be used in environments where TCP is not available. Also Hyperdrive already provides its own optimized connection pooling and caching — so you wouldn’t see much benefit from the serverless driver anyways.
+Hyperdrive relies on TCP connections between the client and the database, while the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) is instead uses WebSockets or HTTP, which means it can be used in environments where TCP is not available. Also Hyperdrive already provides its own optimized connection pooling and caching — so you wouldn’t see much benefit from the serverless driver anyways.
 
 ## Getting started
 
-[Follow this guide](https://neon.tech/docs/guides/cloudflare-hyperdrive#setting-up-your-cloudflare-workers-application) for instructions on how to connect Hyperdrive to Neon. If you don’t have a Neon account yet, create a free one [here](https://console.neon.tech/signup).
+[Follow this guide](https://neon.com/docs/guides/cloudflare-hyperdrive#setting-up-your-cloudflare-workers-application) for instructions on how to connect Hyperdrive to Neon. If you don’t have a Neon account yet, create a free one [here](https://console.neon.tech/signup).

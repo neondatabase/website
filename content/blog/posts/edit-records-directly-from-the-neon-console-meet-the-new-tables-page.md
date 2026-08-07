@@ -50,7 +50,7 @@ With our new feature, you can now browse your tables and make edits visually and
 If you want to give it a spin:
 
 1. Log in to your Neon account
-2. Optionally, [create a development branch](https://neon.tech/docs/manage/branches#create-a-branch) from your primary branch (named ‘main’ by default). This branch will be an exact copy-on-write clone of all your data and schemas from main, but it’s isolated – it allows you to play around with your data safely.
+2. Optionally, [create a development branch](https://neon.com/docs/manage/branches#create-a-branch) from your primary branch (named ‘main’ by default). This branch will be an exact copy-on-write clone of all your data and schemas from main, but it’s isolated – it allows you to play around with your data safely.
 3. Once you’re in the development branch, navigate to the Tables view and try to make edits directly on the tables (**similarly as you would do on a spreadsheet**)
 
 After making your changes, you can simply save them, and they’re immediately reflected in the console – and in your dataset _for that particular branch_. Changes won’t be reflected on the main branch, unless you modify your data there as well.

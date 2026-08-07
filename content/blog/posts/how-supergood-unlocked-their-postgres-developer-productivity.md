@@ -52,7 +52,7 @@ Under the hood, Supergood is powered by Neon as their mission-critical database.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/how-supergood-unlocked-their-postgres-developer-productivity/screenshot-2024-02-20-at-10436percente2percent80percentafpm-1024x522-f962ad19.png)
 
-Supergood splits their architecture into staging and production environments, with both environments having their isolated databases, Redis caches, workers running scheduled jobs, and a data worker and server handling API calls.<br /><br />To optimize performance for time series data, Supergood [enables the TimescaleDB extension in Neon.](https://neon.tech/docs/extensions/pg-extensions) Supergood’s time series data are stored in hypertables, which are Postgres tables with automatic partitioning.
+Supergood splits their architecture into staging and production environments, with both environments having their isolated databases, Redis caches, workers running scheduled jobs, and a data worker and server handling API calls.<br /><br />To optimize performance for time series data, Supergood [enables the TimescaleDB extension in Neon.](https://neon.com/docs/extensions/pg-extensions) Supergood’s time series data are stored in hypertables, which are Postgres tables with automatic partitioning.
 
 ## How database branching allowed Supergood to ship faster
 
@@ -71,7 +71,7 @@ One Neon feature was behind this productivity boost: database branching. Being a
 
 Neon branches use a copy-on-write mechanism under the hood, meaning that they don’t require to spin up a new storage instance with a separate copy of the production data. Branches are ready immediately after you create them, _with all your production data._
 
-Instead of spinning up new instances and waiting for them to be available, something that might take many minutes or even hours if your database is somewhat large, you can start working right away. Branches allows you to create development, staging, and testing environments in seconds with full security—without leaving your VPC and [with additional security features like IP Allow](https://neon.tech/docs/introduction/ip-allow).
+Instead of spinning up new instances and waiting for them to be available, something that might take many minutes or even hours if your database is somewhat large, you can start working right away. Branches allows you to create development, staging, and testing environments in seconds with full security—without leaving your VPC and [with additional security features like IP Allow](https://neon.com/docs/introduction/ip-allow).
 
 Supergood first realized this potential when onboarding their different team members to Neon. “Onboarding engineers became so easy as soon as we started using Neon. I just spin up a branch of Postgres for them and they can get onboard on the platform in 2 seconds”, said Alex. Soon, every developer was using their own branch. Their staging environment also runs on a dedicated branch.
 

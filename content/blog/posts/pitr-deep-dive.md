@@ -52,7 +52,7 @@ Unlike traditional Postgres setups, where each compute instance controls its own
 
 ### Neon’s storage system
 
-Neon’s multi-tenant storage system is designed for high availability, durability, and efficient data retrieval, with [redundancy across multiple availability zones (AZs)](https://neon.tech/docs/introduction/high-availability) to ensure fault tolerance. It consists of three key components:
+Neon’s multi-tenant storage system is designed for high availability, durability, and efficient data retrieval, with [redundancy across multiple availability zones (AZs)](https://neon.com/docs/introduction/high-availability) to ensure fault tolerance. It consists of three key components:
 
 - **WAL safekeepers**: A durable write buffer that receives WAL records from compute nodes, replicates them across multiple nodes for fault tolerance, and ensures transactions are safely persisted before being processed by the pageserver.
 - **Pageservers**: The engine that reconstructs database pages on demand by applying WAL changes to historical snapshots, serving reads efficiently, and caching frequently accessed data for performance.

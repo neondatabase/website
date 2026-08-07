@@ -97,7 +97,7 @@ Debezium tracks its progress through the WAL by storing its current WAL offset. 
 
 ## Get Started with Neon and Logical Replication
 
-To start using Debezium with Neon’s serverless Postgres, [sign up for Neon](https://neon.tech/docs/get-started-with-neon/signing-up) and create a project.
+To start using Debezium with Neon’s serverless Postgres, [sign up for Neon](https://neon.com/docs/get-started-with-neon/signing-up) and create a project.
 
 ![Neon's create project UI.](https://cdn.neonapi.io/public/images/pages/blog/fan-out-postgres-changes-using-debezium-and-upstash-redis/createfirstproject-1024x576-e8c8eccb.jpeg)
 
@@ -155,7 +155,7 @@ table.include.list=playing_with_neon
 This configuration instructs Debezium to:
 
 - Connect to Postgres using the connection details defined in the `PG` environment variables.
-- Accept payloads in `pgoutput` format. Neon also [supports wal2json](https://neon.tech/docs/guides/logical-replication-neon#decoder-plugins).
+- Accept payloads in `pgoutput` format. Neon also [supports wal2json](https://neon.com/docs/guides/logical-replication-neon#decoder-plugins).
 - Subscribe to changes in the `playing_with_neon` table.
 - Perform a table snapshot to inform downstream consumers of the initial state. This is useful if you’re adding Debezium to an existing application that has tables that already contain data and you’d like to process the existing rows and not just new rows.
 

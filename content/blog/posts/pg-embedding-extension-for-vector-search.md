@@ -44,7 +44,7 @@ seo:
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/pg-embedding-extension-for-vector-search/image-19-1024x576-7a6c632f.png)
 
 <Admonition type="note" title="pgvector">
-Back when we wrote this, we were proud to bring HNSW indexes to Postgres. Since then, pgvector has added support for the HNSW index, and we've chosen to pause the development of pg_embedding and contribute to pgvector instead.<br />We plan on always supporting the latest version of pgvector. For more information, please refer to [pgvector](https://neon.tech/docs/extensions/pgvector) docs.
+Back when we wrote this, we were proud to bring HNSW indexes to Postgres. Since then, pgvector has added support for the HNSW index, and we've chosen to pause the development of pg_embedding and contribute to pgvector instead.<br />We plan on always supporting the latest version of pgvector. For more information, please refer to [pgvector](https://neon.com/docs/extensions/pgvector) docs.
 </Admonition>
 
 We’re excited to announce the release of our `pg_embedding` extension for Postgres and LangChain!

@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your architecture along the way.
@@ -22,10 +22,10 @@ When you’re looking for a free plan to run Postgres, what you want is simplici
 
 - You get a [Free plan with real resources](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), including up to 100 projects, computes with up to 2 CU, and 0.5 GB of storage per project - enough to build and test real applications
 - You get a Postgres connection string in a second so you can start building right away
-- [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) ensures idle databases don’t eat up your compute limits: only active time counts
-- Standard Postgres compatibility means you can plug Lakebase Postgres into [any framework, ORM, or tool that speaks Postgres](https://neon.com/docs/get-started/frameworks)
-- A [broad catalog of Postgres extensions](https://neon.com/docs/extensions/pg-extensions) unlocks a Postgres-for-everything workflow
-- You get access to an entire backend via [Managed Better Auth](https://neon.com/docs/auth/overview), [Neon Object Storage](https://neon.com/docs/storage/overview), and [Neon Functions](https://neon.com/docs/compute/functions/overview)
+- [Scale to zero](/docs/introduction/scale-to-zero) ensures idle databases don’t eat up your compute limits: only active time counts
+- Standard Postgres compatibility means you can plug Lakebase Postgres into [any framework, ORM, or tool that speaks Postgres](/docs/get-started/frameworks)
+- A [broad catalog of Postgres extensions](/docs/extensions/pg-extensions) unlocks a Postgres-for-everything workflow
+- You get access to an entire backend via [Managed Better Auth](/docs/auth/overview), [Neon Object Storage](/docs/storage/overview), and [Neon Functions](/docs/compute/functions/overview)
 
 ## Stage 2: Startups
 
@@ -35,13 +35,13 @@ As a project becomes a product, small teams need to ship quickly and support rea
 
 <CTA title="Production checklist" description="Before launching your product, go through this checklist to make sure your database has the right configuration to support your end users." buttonText="View checklist" buttonUrl="/docs/get-started/production-checklist" />
 
-- [Autoscaling](https://neon.com/docs/introduction/autoscaling) adapts automatically to unpredictable workloads: you don’t have to plan capacity in advance
+- [Autoscaling](/docs/introduction/autoscaling) adapts automatically to unpredictable workloads: you don’t have to plan capacity in advance
 - [Branching](https://neon.com/branching) lets you spin up development, preview, and test environments instantly, matching the latest production state, without manual work
-- [Out-of-the-box integrations](https://neon.com/docs/guides/integrations) with platforms like Vercel further simplify previews and deployments
-- [API-first workflows](https://neon.com/docs/reference/api) make it easy to automate almost all database operations
-- AI-coding support via [MCP](https://neon.com/docs/ai/neon-mcp-server) and [Agent Skills](https://neon.com/docs/ai/agent-skills) allows tools like Cursor and Claude to fully interact with Neon
-- [Instant restores](https://neon.com/docs/guides/backup-restore) lower the stakes for mistakes and accidents
-- [Built-in connection pooling](https://neon.com/docs/connect/connection-pooling) takes care of growing connections in your serverless apps
+- [Out-of-the-box integrations](/docs/guides/integrations) with platforms like Vercel further simplify previews and deployments
+- [API-first workflows](/docs/reference/api) make it easy to automate almost all database operations
+- AI-coding support via [MCP](/docs/ai/neon-mcp-server) and [Agent Skills](/docs/ai/agent-skills) allows tools like Cursor and Claude to fully interact with Neon
+- [Instant restores](/docs/guides/backup-restore) lower the stakes for mistakes and accidents
+- [Built-in connection pooling](/docs/connect/connection-pooling) takes care of growing connections in your serverless apps
 - You get access to [compliance and security features](https://neon.com/blog/why-we-no-longer-lock-premium-features) without enterprise-only contracts
 
 ## Stage 3: Scale-ups and large fleets
@@ -53,8 +53,8 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 ### Operational efficiency
 
 - [On-demand storage](https://neon.com/storage#unique-benefits-derived-from-neons-implementation) grows as data demands it, without planning for capacity in advance and without the risk of full-disk errors
-- [Built-in high availability](https://neon.com/docs/introduction/high-availability) is provided by default through storage redundancy, with data replicated across availability zones and cloud object storage
-- [Backup and restore via snapshots](https://neon.com/docs/guides/backup-restore) allows you to recover multi-terabyte databases in seconds, without full data copies
+- [Built-in high availability](/docs/introduction/high-availability) is provided by default through storage redundancy, with data replicated across availability zones and cloud object storage
+- [Backup and restore via snapshots](/docs/guides/backup-restore) allows you to recover multi-terabyte databases in seconds, without full data copies
 - You can use [time travel and snapshot inspections](https://neon.com/blog/three-ways-to-use-your-snapshots) to review past database states for auditing, debugging, and incident analysis
 - By [creating environments as copy-on-write branches](https://neon.com/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches), you avoid the management work and costs associated with running separate instances for development, staging, testing, or recovery
 - [Programmatic lifecycle management](https://neon.com/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) lets you create, reset, and delete large numbers of environments without eating up engineering time
@@ -66,11 +66,11 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 
 ### Fleet management for platforms and agents
 
-- Instant, API-driven provisioning lets you deploy a full Neon backend, Lakebase Postgres plus the primitives you need, as part of your [platform](https://neon.com/docs/guides/embedded-postgres) or [agent](https://neon.com/docs/guides/ai-agent-integration)
+- Instant, API-driven provisioning lets you deploy a full Neon backend, Lakebase Postgres plus the primitives you need, as part of your [platform](/docs/guides/embedded-postgres) or [agent](/docs/guides/ai-agent-integration)
 - The fully embedded experience keeps Neon invisible to your end users, with no third-party logins or external configuration required as part of your product workflow
-- [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
-- A mature API exposes [fleet management and cost-control capabilities](https://neon.com/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
+- [Scale to zero](/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
+- A mature API exposes [fleet management and cost-control capabilities](/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
 - You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](https://neon.com/blog/promoting-postgres-changes-safely-production)
-- Backend primitives such as [Managed Better Auth](https://neon.com/docs/auth/overview), [Neon Object Storage](https://neon.com/docs/storage/overview), [Neon Functions](https://neon.com/docs/compute/functions/overview), the PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started), and the [AI Gateway](https://neon.com/docs/ai-gateway/overview) let you hook up full-stack applications by default
+- Backend primitives such as [Managed Better Auth](/docs/auth/overview), [Neon Object Storage](/docs/storage/overview), [Neon Functions](/docs/compute/functions/overview), the PostgREST-compatible [Data API](/docs/data-api/get-started), and the [AI Gateway](/docs/ai-gateway/overview) let you hook up full-stack applications by default
 
 <CTA title="Agent Plan" description="If you’re building a full-stack agent platform, apply to our Agent Plan for special pricing, resource limits, and assistance." buttonText="Check it out" buttonUrl="/programs/agents" />

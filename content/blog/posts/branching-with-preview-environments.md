@@ -80,7 +80,7 @@ The alternative would be to create a database for every pull request and import 
 
 That is why teams often skip the step of creating a database for every preview and just use a shared database. The drawback is that any changes made to that shared database will impact all active previews. So, if a developer’s changes include evolving the database schema, they must notify their team members about this change and potentially prevent them from deploying. Furthermore, if the shared database goes down, no one will be able to create preview environments. This flow is somewhat similar to having a staging environment, but now the database is the bottleneck.
 
-The great news is that you can use Neon’s [branching feature](https://neon.tech/docs/introduction/branching?utm_source=devday&utm_medium=blogpost&utm_campaign=blog) to create a production-like database for every preview. This database will contain production data and can be created in seconds.
+The great news is that you can use Neon’s [branching feature](https://neon.com/docs/introduction/branching?utm_source=devday&utm_medium=blogpost&utm_campaign=blog) to create a production-like database for every preview. This database will contain production data and can be created in seconds.
 
 ## What is Neon?
 
@@ -91,7 +91,7 @@ To get started, go ahead and [create an account](https://neon.tech/?utm_source=d
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/branching-with-preview-environments/301940761-1814eb55-557b-4d1c-8136-908c816dabd4-1024x576-65eb2e62.png)
 
 <blockquote>
-<p>Neon’s architecture separates storage and compute. This makes a Neon Postgres instance stateless, which makes it possible to automatically scale compute resources up or down based on demand.  To learn more, check out <a href="https://neon.tech/docs/introduction/architecture-overview?utm_source=devday&amp;utm_medium=blogpost&amp;utm_campaign=blog" target="_blank" rel="noreferrer noopener">Neon’s architecture</a>.</p>
+<p>Neon’s architecture separates storage and compute. This makes a Neon Postgres instance stateless, which makes it possible to automatically scale compute resources up or down based on demand.  To learn more, check out <a href="https://neon.com/docs/introduction/architecture-overview?utm_source=devday&amp;utm_medium=blogpost&amp;utm_campaign=blog" target="_blank" rel="noreferrer noopener">Neon’s architecture</a>.</p>
 </blockquote>
 
 ### Neon’s object hierarchy
@@ -144,7 +144,7 @@ Here, you will first need to specify the parent branch that will be copied. Righ
 You will then need to specify the data you want to include. For that, you have several options:
 
 - **Current point in time**: this will include all of the available data
-- **Specific date and time**: this enables you to include all data up to a certain point in time. This is useful if you want to restore your branch to a previous state. You can create a branch from any previous point in time as long as it falls within your [history-retention window](https://neon.tech/docs/introduction/point-in-time-restore#history-retention).
+- **Specific date and time**: this enables you to include all data up to a certain point in time. This is useful if you want to restore your branch to a previous state. You can create a branch from any previous point in time as long as it falls within your [history-retention window](https://neon.com/docs/introduction/point-in-time-restore#history-retention).
 - **Specific Log Sequence Number**: include data up to a certain LSN in the database log. This option allows for precise data recovery
 
 Choose the main branch as the parent, pick the “**Current point in time**” option, and click “Create new branch”. You will get a new connection string that is different than the main branch. This connection string will be associated with the newly created branch.
@@ -163,7 +163,7 @@ This query adds ten more items to the `elements` table. If you go back to the ta
 
 ## Creating a branch for every Preview environment
 
-Neon offers an [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api?utm_source=devday&utm_medium=blogpost&utm_campaign=blog) that you can use to manage resources programmatically. You can use it along with a CI/CD tool to achieve the following flow:
+Neon offers an [API](https://neon.com/docs/reference/api/get-started) that you can use to manage resources programmatically. You can use it along with a CI/CD tool to achieve the following flow:
 
 1. A developer will work on changes locally against a local Postgres instance or a Neon branch. These changes could potentially include schema changes.
 2. They will then open a pull request which triggers a CI/CD workflow that does the following:

@@ -46,9 +46,9 @@ To apply, just leave us your email [here](https://neon.tech/yc-startups).
 
 Two words: development velocity. Neon’s serverless nature allows you to spin up databases in seconds, and the ability to branch your data and schema allows you to ship faster than ever before:
 
-- Onboarding new developers takes no time. [They can work on their own isolated dev data branches](https://neon.tech/docs/introduction/branching#development), experimenting with new features or updates without the risk of data inconsistencies that slow everyone down. When their work is done, they can [reset their dev branch from parent in one click](https://neon.tech/docs/manage/branches#reset-a-branch-from-parent) so it mirrors the latest state of production, and start again.
+- Onboarding new developers takes no time. [They can work on their own isolated dev data branches](https://neon.com/docs/introduction/branching#development), experimenting with new features or updates without the risk of data inconsistencies that slow everyone down. When their work is done, they can [reset their dev branch from parent in one click](https://neon.com/docs/manage/branches#reset-a-branch-from-parent) so it mirrors the latest state of production, and start again.
 - [You can automatically test schema migrations before they ship](https://www.youtube.com/watch?v=EOVa68Uviks) by integrating database branching directly into your CI/CD pipelines via the Neon API or GitHub Actions, creating one preview database branch per PR.
-- Bugs can be fixed faster. Neon database branches [can be created from any past point](https://neon.tech/docs/introduction/branching#what-is-a-branch), enabling your team to reproduce and diagnose issues and fix regressions easily.
+- Bugs can be fixed faster. Neon database branches [can be created from any past point](https://neon.com/docs/introduction/branching#what-is-a-branch), enabling your team to reproduce and diagnose issues and fix regressions easily.
 
 Multiple database branches can be used simultaneously to test different fixes or updates without any risk for conflicts. This is sustainable also: [branching uses a copy-on-write system in Neon](https://neon.tech/blog/architecture-decisions-in-neon), making database branches very resource-efficient and virtually free.
 

@@ -40,7 +40,7 @@ seo:
 
 Via [database branching workflows](https://neon.tech/flow), developers can quickly experiment and ship updates—this is why we often hear [how Neon accelerates development for teams](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle). But it can be nerve-wracking to think that you might accidentally delete the production branch or project.
 
-**To give you peace of mind, we’ve implemented** [**protected branches**](https://neon.tech/docs/guides/protected-branches) **in Neon.** By designating a branch as protected, you’ll enforce specific restrictions regarding access and usability, preventing any accidents and limiting access to allowlisted IP lists and networks.
+**To give you peace of mind, we’ve implemented** [**protected branches**](https://neon.com/docs/guides/protected-branches) **in Neon.** By designating a branch as protected, you’ll enforce specific restrictions regarding access and usability, preventing any accidents and limiting access to allowlisted IP lists and networks.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/restrict-access-to-the-production-branch/ad4nxfi4p8hwx7amuwe1vs-j5yrajz3pfnuqiaj123yxwcfhaeilwq-mnbhf-ll99plsoyjd2s15qyx34ixguxevklpar1u-fbek5r-aauapvuk5i9jglzdt8elp3zcmgbqufoqlww5ui8je2xowsde5qse-70fd1953.png)
 
@@ -49,7 +49,7 @@ Via [database branching workflows](https://neon.tech/flow), developers can quick
 Once you set a branch to protected, you’ll enforce a set of rules regarding access control and operational restrictions:
 
 - **Protected branches cannot be deleted or reset.** This safeguards critical data from potential accidents. Similarly, projects containing protected branches cannot be deleted, nor can compute endpoints associated with protected branches.
-- **Only authorized IP addresses can connect to protected branches.** Access to these branches can be limited to the specific IP addresses defined in the project’s [IP allowlist](https://neon.tech/docs/introduction/ip-allow). This ensures that only connections from your protected, e.g. production networks can be established to these branches.
+- **Only authorized IP addresses can connect to protected branches.** Access to these branches can be limited to the specific IP addresses defined in the project’s [IP allowlist](https://neon.com/docs/introduction/ip-allow). This ensures that only connections from your protected, e.g. production networks can be established to these branches.
 
 <blockquote>
 <p><strong>Coming soon:</strong> We’ll enhance protected branches by ensuring the production branch credentials aren’t reused in dev and testing branches. Sign up for our <a href="https://neon.tech/early-access-program">Early Access list</a> if you’d like to test it first.</p>
@@ -94,7 +94,7 @@ Done. Your branch will show as protected; only clients from allowlisted IP addre
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/restrict-access-to-the-production-branch/ad4nxd0l4v487lwigv8pslhjetlzgfvav-7159a1otdadhlv0fxaxwmyqu2v1j4ado1o6bwe-aketmrdgub2krekqtjnglujr5oc92ruodnaeswfittbtud1mll8u9rfqbgo7bistlndsvym04gin41fbsmd4a-fb58de36.png)
 
-Visit [our docs](https://neon.tech/docs/guides/protected-branches) for detailed instructions.
+Visit [our docs](https://neon.com/docs/guides/protected-branches) for detailed instructions.
 
 ## Now available in the Scale plan
 

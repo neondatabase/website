@@ -64,9 +64,9 @@ But now, to look at the other side of the coin: Unless you either a) are really 
 
 So that’s the first reason many Postgres users hesitate to upgrade: Postgres is already great as it is. But we’d be fooling ourselves if we didn’t also acknowledge how painful it can be to update major versions of Postgres, especially for large production databases.
 
-Minor updates are fine, and they’re completely covered for you by many managed Postgres services like Neon—[you don’t even have to think about them](https://neon.tech/docs/postgresql/postgres-version-policy). But updating a major version is a different game. Major versions of Postgres might introduce changes that aren’t backward compatible (something that doesn’t happen with minor versions) meaning that it’s much harder for Postgres companies to simply upgrade you automatically.
+Minor updates are fine, and they’re completely covered for you by many managed Postgres services like Neon—[you don’t even have to think about them](https://neon.com/docs/postgresql/postgres-version-policy). But updating a major version is a different game. Major versions of Postgres might introduce changes that aren’t backward compatible (something that doesn’t happen with minor versions) meaning that it’s much harder for Postgres companies to simply upgrade you automatically.
 
-This doesn’t mean that it’s impossible to simplify this process. At Neon, we’ve put a lot of thought into [making it easier for you to upgrade](https://neon.tech/docs/postgresql/postgres-upgrade)—for example, by supporting logical replication—and **we’re working on a one-click Postgres upgrade feature so you can upgrade with minimal downtime. Not only that, but with Neon you’ll upgrade within a branch to ensure things work, and then upgrade your production with the least amount of interruption as possible. (Keep an eye on 2025 roadmap).**
+This doesn’t mean that it’s impossible to simplify this process. At Neon, we’ve put a lot of thought into [making it easier for you to upgrade](https://neon.com/docs/postgresql/postgres-upgrade)—for example, by supporting logical replication—and **we’re working on a one-click Postgres upgrade feature so you can upgrade with minimal downtime. Not only that, but with Neon you’ll upgrade within a branch to ensure things work, and then upgrade your production with the least amount of interruption as possible. (Keep an eye on 2025 roadmap).**
 
 ## Real upgrade stories 
 
@@ -112,7 +112,7 @@ If [pgversions](https://pgversions.com/) inspires you to finally upgrade, the `H
 
 ## Do it (before it’s too late) 
 
-If you’re running an older version of Postgres and thinking there’s plenty more time. We know it’s tempting to procrastinate, but don’t let technical debt haunt you. [Follow this guide to plan to upgrade your Neon database to Postgres 17](https://neon.tech/docs/postgresql/postgres-upgrade) and just cross it off your to-do list.
+If you’re running an older version of Postgres and thinking there’s plenty more time. We know it’s tempting to procrastinate, but don’t let technical debt haunt you. [Follow this guide to plan to upgrade your Neon database to Postgres 17](https://neon.com/docs/postgresql/postgres-upgrade) and just cross it off your to-do list.
 
 Are you running an older version of Postgres where they don’t offer the latest versions? A migration to Neon could mean upgrading and [switching to a better development environment](https://neon.tech/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora). Feel free to [reach out to us](https://neon.tech/migration-assistance) with any questions.
 

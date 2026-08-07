@@ -114,7 +114,7 @@ This architecture allows Neon to automatically scale up compute on demand in res
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/pg_embedding-on-disk-hnsw-index/autoscaling-5bbbc306.mp4" />
 </video>
 
-Furthermore, Neon supports [regional read replicas](https://neon.tech/docs/introduction/read-replicas), which are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Read replicas do not replicate data across database instances since storage and compute are separate. Instead, read requests are directed to a single source.
+Furthermore, Neon supports [regional read replicas](https://neon.com/docs/introduction/read-replicas), which are independent read-only compute instances designed to perform read operations on the same data as your read-write computes. Read replicas do not replicate data across database instances since storage and compute are separate. Instead, read requests are directed to a single source.
 
 Since vector similarity search is a read-heavy workload, you can leverage read replicas to offload reads from your read-write compute instance to a dedicated read-only compute instance when building AI and LLM applications.
 
@@ -126,7 +126,7 @@ Combining these features enables you to build scalable AI/LLM applications.
 
 ## Final thoughts
 
-If you’re already using pg_embedding for your project, first of all, thank you! We appreciate you being an early adopter of the extension. If you would like to use the newest version of the extension, check out the [upgrade guide in our docs](https://neon.tech/docs/extensions/pg_embedding#upgrade-to-pgembedding-for-on-disk-indexes).
+If you’re already using pg_embedding for your project, first of all, thank you! We appreciate you being an early adopter of the extension. If you would like to use the newest version of the extension, check out the [upgrade guide in our docs](https://neon.com/docs/extensions/pg_embedding#upgrade-to-pgembedding-for-on-disk-indexes).
 
 We’re excited about this new release of pg_embedding, and we plan on ensuring Neon users have a great experience when building their AI/LLM applications. Feel free to reach out on [Twitter](https://twitter.com/neondatabase) or our [community forum](https://community.neon.tech/) if you have any questions or feedback, we’d love to hear from you.
 

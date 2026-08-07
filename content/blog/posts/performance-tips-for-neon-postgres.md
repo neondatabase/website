@@ -35,15 +35,15 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/performance-tips-for-neon-postgres/neon-performance-tips-1-1024x576-867903e3.jpg)
 
-[Neon](https://neon.tech/) is serverless Postgres. Neon databases elastically scale up and down according to load—including scaling to zero—and database operations are greatly simplified via [robust API support](https://api-docs.neon.tech/reference/getting-started-with-neon-api?__hstc=4255788.e7f27dd03bdedc4049d0cbd46ad91c27.1705698345533.1712185061623.1712247421502.187&__hssc=4255788.5.1712247421502&__hsfp=1117521915) and [database branching capabilities](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds). But just like every Postgres, to get the most out of Neon’s performance, it’s good to know a few tricks and best practices.
+[Neon](https://neon.tech/) is serverless Postgres. Neon databases elastically scale up and down according to load—including scaling to zero—and database operations are greatly simplified via [robust API support](https://neon.com/docs/reference/api/get-started) and [database branching capabilities](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds). But just like every Postgres, to get the most out of Neon’s performance, it’s good to know a few tricks and best practices.
 
 ## Compute sizing and connections management
 
 Let’s start by quickly covering some Neon resource sizing essentials:
 
-- If your application handles multiple connections, use [connection pooling](https://neon.tech/docs/connect/connection-pooling).
-- In Neon, the system allocates a certain amount of RAM per connection to ensure stable performance. A [general rule of thumb](https://neon.tech/docs/connect/connection-pooling#default-connection-limits) is that Neon allows approximately 100 connections per 1 GB of RAM. You can consider this ratio for planning the scale of your compute resources based on the expected number of concurrent connections.
-- The best way to cover this is by taking advantage of Neon’s [autoscaling](https://neon.tech/docs/introduction/autoscaling) to dynamically adjust compute resources based on actual usage patterns. Autoscaling can help manage unexpected spikes in connections or workload, ensuring that your database remains responsive under varying conditions.
+- If your application handles multiple connections, use [connection pooling](https://neon.com/docs/connect/connection-pooling).
+- In Neon, the system allocates a certain amount of RAM per connection to ensure stable performance. A [general rule of thumb](https://neon.com/docs/connect/connection-pooling#default-connection-limits) is that Neon allows approximately 100 connections per 1 GB of RAM. You can consider this ratio for planning the scale of your compute resources based on the expected number of concurrent connections.
+- The best way to cover this is by taking advantage of Neon’s [autoscaling](https://neon.com/docs/introduction/autoscaling) to dynamically adjust compute resources based on actual usage patterns. Autoscaling can help manage unexpected spikes in connections or workload, ensuring that your database remains responsive under varying conditions.
 
 While it might be tempting to minimize costs by keeping compute resources limited, under-provisioning can lead to performance issues, especially during peak loads. If you enable autoscaling, you don’t have to worry about this – we highly recommend it.
 
@@ -187,7 +187,7 @@ file_cache_writes:                 10767410
 file_cache_hit_ratio:              98.08
 ```
 
-If the hit ratio falls below the ideal threshold (99% in Neon), [reconsider your compute configuration – e.g. increase your autoscaling limits.](https://neon.tech/docs/manage/endpoints#how-to-size-your-compute) Often, the reason behind this issue is inefficient memory allocation, which is a simple thing to fix.
+If the hit ratio falls below the ideal threshold (99% in Neon), [reconsider your compute configuration – e.g. increase your autoscaling limits.](https://neon.com/docs/manage/endpoints#how-to-size-your-compute) Often, the reason behind this issue is inefficient memory allocation, which is a simple thing to fix.
 
 ## Optimizing ingestion rates in Neon Postgres
 
@@ -199,9 +199,9 @@ This is a basic, but it happens. At the start of this post, we mentioned how it 
 
 ### Use read replicas
 
-This tip could also live in the query performance section since it helps both with writes and reads. If your application deals with heavy writes, heavy read queries, or both, Neon allows you to liberate load in your main compute by offloading read queries to a [read-only compute endpoint](https://neon.tech/docs/introduction/read-replicas), which is equivalent to the concept of read replica in other databases.
+This tip could also live in the query performance section since it helps both with writes and reads. If your application deals with heavy writes, heavy read queries, or both, Neon allows you to liberate load in your main compute by offloading read queries to a [read-only compute endpoint](https://neon.com/docs/introduction/read-replicas), which is equivalent to the concept of read replica in other databases.
 
-The main difference between Neon’s implementation and “regular” read replicas resides in the serverless nature of Neon. In Neon, [read replicas are ephemeral](https://neon.tech/blog/white-widgets-secret-to-scalable-postgres-neon): they don’t need their own copy of storage, they’re ready instantly when you need them, and they scale down to zero when traffic slows down. They’re much more affordable than traditional read replicas – [take advantage of them.](https://neon.tech/docs/guides/read-replica-guide)
+The main difference between Neon’s implementation and “regular” read replicas resides in the serverless nature of Neon. In Neon, [read replicas are ephemeral](https://neon.tech/blog/white-widgets-secret-to-scalable-postgres-neon): they don’t need their own copy of storage, they’re ready instantly when you need them, and they scale down to zero when traffic slows down. They’re much more affordable than traditional read replicas – [take advantage of them.](https://neon.com/docs/guides/read-replica-guide)
 
 ### Insert data in batches
 
@@ -229,9 +229,9 @@ A good practice is to regularly evaluate the indexes on your tables (`\d table_n
 
 ## Safely testing performance improvements
 
-Testing performance improvements in production databases can be challenging due to the risks involved. Neon makes it easy with [database branching](https://neon.tech/docs/guides/branching-test-queries): you can create a full, isolated copy of your database (data and schema) in a separate branch, where you can experiment freely without the risk of disrupting your live operations.
+Testing performance improvements in production databases can be challenging due to the risks involved. Neon makes it easy with [database branching](https://neon.com/docs/guides/branching-test-queries): you can create a full, isolated copy of your database (data and schema) in a separate branch, where you can experiment freely without the risk of disrupting your live operations.
 
-To [create a testing branch](https://neon.tech/docs/guides/branching-test-queries#create-a-test-branch), you can use Neon’s CLI ([or the API](https://api-docs.neon.tech/reference/getting-started-with-neon-api?__hstc=4255788.e7f27dd03bdedc4049d0cbd46ad91c27.1705698345533.1712185061623.1712247421502.187&__hssc=4255788.2.1712247421502&__hsfp=1117521915)), specifying your production branch as the source:
+To [create a testing branch](https://neon.com/docs/guides/branching-test-queries#create-a-test-branch), you can use Neon’s CLI ([or the API](https://neon.com/docs/reference/api/get-started)), specifying your production branch as the source:
 
 ```bash
 neonctl branches create --project-id <project-id> --name my_test_branch
@@ -241,4 +241,4 @@ This creates a new, instantly available database environment that mirrors your p
 
 ## Wrap up
 
-We hope these strategies help you keep your Neon Postgres as fast as possible, so you can keep scaling your workloads at ease. [Check out our docs](https://neon.tech/docs/postgres/query-performance#use-joins-instead-of-subqueries) for even more performance advice, and if you haven’t tried Neon yet, [create a free account now.](https://console.neon.tech/signup)
+We hope these strategies help you keep your Neon Postgres as fast as possible, so you can keep scaling your workloads at ease. [Check out our docs](https://neon.com/docs/postgres/query-performance#use-joins-instead-of-subqueries) for even more performance advice, and if you haven’t tried Neon yet, [create a free account now.](https://console.neon.tech/signup)

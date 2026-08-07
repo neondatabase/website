@@ -52,9 +52,9 @@ Since the announcement, over a thousand developers have created a Neon project. 
 
 ![Neon Postgres Extensions](https://cdn.neonapi.io/public/images/pages/blog/october-update/neon-postgres-extensions-1024x358-5a38c2e3.png)
 
-In addition to PostGIS (shipped in September), we added support to two other extensions: plv8 and h3_pg. We’re working on adding more extensions to Neon. For information about supported extensions, see [Available PostgreSQL extensions](https://neon.tech/docs/reference/compatibility/#available-postgresql-extensions).
+In addition to PostGIS (shipped in September), we added support to two other extensions: plv8 and h3_pg. We’re working on adding more extensions to Neon. For information about supported extensions, see [Available PostgreSQL extensions](https://neon.com/docs/reference/compatibility/#available-postgresql-extensions).
 
-See everything we shipped on [Neon’s release notes](https://neon.tech/docs/release-notes/) page.
+See everything we shipped on [Neon’s release notes](https://neon.com/docs/release-notes/) page.
 
 ## Community highlights:
 

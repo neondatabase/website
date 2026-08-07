@@ -6,14 +6,14 @@ summary: >-
   pre-built UI components, including enabling Managed Better Auth, creating a React app,
   and configuring the necessary environment variables.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 layout: wide
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
 
 <Admonition type="note" title="Archived copy">
-This quick start is kept in the repo for reference but is not published on [neon.com/docs](https://neon.com/docs). Use the [React quick start (API methods)](/docs/auth/quick-start/react), the [UI components reference](/docs/auth/reference/ui-components), and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples) instead.
+This quick start is kept in the repo for reference but is not published on [neon.com/docs](/docs). Use the [React quick start (API methods)](/docs/auth/quick-start/react), the [UI components reference](/docs/auth/reference/ui-components), and the [neon-js examples](https://github.com/neondatabase/neon-js/tree/main/examples) instead.
 </Admonition>
 
 <TwoColumnLayout>

@@ -78,7 +78,7 @@ Neon’s DPA covers the following:
 4. **Subprocessing Accountability**: Transparency regarding any third-party subprocessors engaged by Neon and ensuring their compliance with GDPR. More information on our subprocessors can be found here [https://neon.tech/subprocessors](https://neon.tech/subprocessors)
 5. **Comprehensive GDPR Alignment**: Our DPA ensures that all data processing activities align with GDPR requirements, helping you demonstrate compliance and protect personal data effectively.
 6. **Facilitating International Data Transfers**: Neon relies on the **Data Privacy Framework** to enable lawful and secure transfer of personal data. This framework ensures compliance with GDPR’s cross-border data transfer requirements, providing customers with the confidence to store and process data globally while remaining fully compliant. More information can be found in our Privacy Guide [https://neon.tech/privacy-guide](https://neon.tech/privacy-guide)
-7. **Security and Accountability**: The DPA includes a legal commitment to ensure robust security measures such as encryption, access controls, and breach notification protocols, ensuring your data is protected at all times. A full and detailed analysis on our security features can be found at [https://neon.tech/docs/security/security-overview](https://neon.tech/docs/security/security-overview)
+7. **Security and Accountability**: The DPA includes a legal commitment to ensure robust security measures such as encryption, access controls, and breach notification protocols, ensuring your data is protected at all times. A full and detailed analysis on our security features can be found at [https://neon.com/docs/security/security-overview](https://neon.com/docs/security/security-overview)
 8. **Clear Roles and Responsibilities**: The DPA clearly defines the roles of Neon as the data processor and our customers as data controllers, ensuring clarity and accountability throughout the data lifecycle.
 
 ## Which security measures does Neon implement to support GDPR compliance?
@@ -91,7 +91,7 @@ At Neon, data security is integral to supporting your GDPR compliance. We implem
 4. **Incident Response**: In the unlikely event of a data breach involving personal data, Neon follows a GDPR-compliant notification protocol, informing affected customers promptly, typically within 72 hours.
 
 <Admonition type="info" title="Additional info">
-Neon is also **ISO 27701** certified, an international standard for privacy information management systems that supports GDPR compliance. For more details about our certifications, policies, and compliance practices, visit our [Trust Center](https://trust.neon.tech/). To learn more about the security features we implement to protect personal data, visit our [Security Overview](https://neon.tech/docs/security/security-overview).
+Neon is also **ISO 27701** certified, an international standard for privacy information management systems that supports GDPR compliance. For more details about our certifications, policies, and compliance practices, visit our [Trust Center](https://trust.neon.tech/). To learn more about the security features we implement to protect personal data, visit our [Security Overview](https://neon.com/docs/security/security-overview).
 </Admonition>
 
 ## Simplify your path to GDPR compliance
@@ -102,5 +102,5 @@ For more information on how Neon supports your compliance efforts, please visit:
 
 - **Trust Center:** [https://trust.neon.tech/](https://trust.neon.tech/)
 - **Privacy Guide:** [https://neon.tech/privacy-guide](https://neon.tech/privacy-guide)
-- **Security Overview:** [https://neon.tech/docs/security/security-overview](https://neon.tech/docs/security/security-overview)
+- **Security Overview:** [https://neon.com/docs/security/security-overview](https://neon.com/docs/security/security-overview)
 - **Data Processing Agreement:** [https://neon.tech/dpa](https://neon.tech/dpa)

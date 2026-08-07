@@ -108,7 +108,7 @@ Combine 30 of those, and we should stress Postgres enough to trigger autoscaling
 
 ## Enabling autoscaling
 
-Autoscaling is the process of automatically increasing or decreasing the CPU and memory allocated to a database based on its current load. It dynamically adjusts the compute resources allocated to a Neon compute instance in response to the current load, eliminating the need for manual intervention. [Learn more about autoscaling in the docs](https://neon.tech/docs/introduction/autoscaling).
+Autoscaling is the process of automatically increasing or decreasing the CPU and memory allocated to a database based on its current load. It dynamically adjusts the compute resources allocated to a Neon compute instance in response to the current load, eliminating the need for manual intervention. [Learn more about autoscaling in the docs](https://neon.com/docs/introduction/autoscaling).
 
 You can enable autoscaling by defining the minimum and maximum compute units (CU) you’d like to allocate to your Postgres instance. This way, you remain in control of your resource consumption. For example, 1 CU allocates 1vCPU and 4GB of RAM to your instance.
 

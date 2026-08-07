@@ -90,7 +90,7 @@ At Neon, we’re deeply invested in the success of our customers. Unlike AWS, [w
 
 ### Experimenting with pgvector for embeddings
 
-Velocity isn’t just handling traditional relational workloads on Neon: they’re also experimenting with vector search as part of their AI-powered incident response platform. By using [pgvector](https://neon.tech/docs/extensions/pgvector) on Neon, they can store and query embeddings directly alongside structured data, simplifying their architecture. Rather than relying on a patchwork of specialized databases, Velocity aims to consolidate its data stack—why use many databases when there’s a solution (Postgres) capable of handling everything?
+Velocity isn’t just handling traditional relational workloads on Neon: they’re also experimenting with vector search as part of their AI-powered incident response platform. By using [pgvector](https://neon.com/docs/extensions/pgvector) on Neon, they can store and query embeddings directly alongside structured data, simplifying their architecture. Rather than relying on a patchwork of specialized databases, Velocity aims to consolidate its data stack—why use many databases when there’s a solution (Postgres) capable of handling everything?
 
 <blockquote>
 <p><strong>“We’ve started using pgvector on Neon for embeddings, and so far, performance has been great. We tried other solutions that couldn’t scale with us, but Neon handled it smoothly”</strong> (<a href="https://x.com/talkain">Tal Kain</a>, Founder and CEO at <a href="https://velocity.tech/">Velocity</a>)</p>

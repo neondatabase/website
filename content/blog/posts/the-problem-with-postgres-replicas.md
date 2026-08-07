@@ -113,13 +113,13 @@ This gets combined with autoscaling to scale up Postgres performance scaling wit
 
 ## How to try it
 
-You can create and configure read replicas to any database branch in Neon [using the console, the CLI, or the API](https://neon.tech/docs/guides/read-replica-guide#create-a-read-replica). When specifying the compute capacity of the read replica, you can select the [autoscaling range](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration) (e.g. from 0.25-1 CU) and also [configure scale to zero](https://neon.tech/docs/guides/auto-suspend-guide#configure-autosuspend-for-a-compute-endpoint).
+You can create and configure read replicas to any database branch in Neon [using the console, the CLI, or the API](https://neon.com/docs/guides/read-replica-guide#create-a-read-replica). When specifying the compute capacity of the read replica, you can select the [autoscaling range](https://neon.com/docs/manage/endpoints#compute-size-and-autoscaling-configuration) (e.g. from 0.25-1 CU) and also [configure scale to zero](https://neon.com/docs/guides/auto-suspend-guide#configure-autosuspend-for-a-compute-endpoint).
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/the-problem-with-postgres-replicas/screenshot-2024-06-27-at-113428percente2percent80percentafam-1024x384-480000e5.png)
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/the-problem-with-postgres-replicas/screenshot-2024-06-27-at-113455percente2percent80percentafam-1024x696-24c303a5.png)
 
-Connecting to a branch via a read replica is equivalent to doing it via the main compute. You can view the dedicated URL via the console or by running [get endpoints](https://api-docs.neon.tech/reference/listprojectendpoints) in the API. [Check our docs for all the info on how to work with read replicas.](https://neon.tech/docs/guides/read-replica-guide)
+Connecting to a branch via a read replica is equivalent to doing it via the main compute. You can view the dedicated URL via the console or by running [get endpoints](https://neon.com/docs/reference/api/endpoints/list-project-endpoints) in the API. [Check our docs for all the info on how to work with read replicas.](https://neon.com/docs/guides/read-replica-guide)
 
 ## A better way to scale Postgres performance
 

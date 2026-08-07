@@ -53,7 +53,7 @@ We built [Neon’s Regional Latency Dashboard](https://neon.tech/demos/regional-
 
 Measuring database latency is an essential step in understanding the response times you can achieve from API endpoints that interact with your database. Performing this measurement might seem trivial, but there are a few variables to bear in mind:
 
-- Does your database receive consistent queries, thereby eliminating the impact of [Neon’s cold starts](https://neon.tech/blog/cold-starts-just-got-hot)? Or have you disabled Neon’s [auto-suspend](https://neon.tech/docs/introduction/auto-suspend)?
+- Does your database receive consistent queries, thereby eliminating the impact of [Neon’s cold starts](https://neon.tech/blog/cold-starts-just-got-hot)? Or have you disabled Neon’s [auto-suspend](https://neon.com/docs/introduction/auto-suspend)?
 - If you’re using a serverless deployment platform, are your functions receiving consistent traffic and [are warmed up](https://vercel.com/guides/how-can-i-improve-serverless-function-lambda-cold-start-performance-on-vercel) as a result?
 - Have you applied indexes and optimized your database queries?
 
@@ -225,7 +225,7 @@ The configuration required for reusing connections will depend on your runtime a
 
 ### Application-level Connection Pooling
 
-This tip applies if you’re using a Postgres driver such as [node-postgres](https://node-postgres.com/apis/pool) or the [WebSocket mode exposed by Neon’s serverless driver](https://neon.tech/docs/serverless/serverless-driver#use-the-driver-over-websockets) in Node.js. It can also be applied to other runtimes and drivers.
+This tip applies if you’re using a Postgres driver such as [node-postgres](https://node-postgres.com/apis/pool) or the [WebSocket mode exposed by Neon’s serverless driver](https://neon.com/docs/serverless/serverless-driver#use-the-driver-over-websockets) in Node.js. It can also be applied to other runtimes and drivers.
 
 When a non-serverless application serves concurrent users but only opens a single connection against the database, you and your users will quickly notice rising response times under load. This is because all database interactions performed in response to user requests are in contention for that single database connection. Instead of opening a single connection using a Client, use a Pool.
 

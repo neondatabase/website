@@ -40,7 +40,7 @@ Increasing the velocity at which teams can develop, test, and deploy is a key go
 
 Diagnosing and debugging complex issues is a harsh reality of developing and shipping software. Doing so can involve working backwards from the current state of your system, and sifting through logs to get a complete picture of the series of events leading up to your current situation.
 
-If the ability to query your database at any time in the recent past sounds like a superpower, consider yourself a superhero because we’re introducing [Time Travel Queries in the Neon SQL Editor](https://neon.tech/docs/guides/time-travel-assist).
+If the ability to query your database at any time in the recent past sounds like a superpower, consider yourself a superhero because we’re introducing [Time Travel Queries in the Neon SQL Editor](https://neon.com/docs/guides/time-travel-assist).
 
 This article is going to provide you with an introduction to this feature, and a brief overview of how it works, plus a teaser of what’s coming next.
 
@@ -52,13 +52,13 @@ As of today, the Time Travel feature is available in the SQL Editor on [console.
 
 <img src="https://lh7-us.googleusercontent.com/y5MVAWN--Ml6V1jnAE7z5xHZKHZ-jgnzFmj0rIMS9eoeV8Wjn3YU9WHcFynwH_SXm2eyUFUekrJgJw-nilrjhXI0ZxyJNdWNyhGixV1QRDkyjKpbyaK8IAk3KXuFfIGwsHzb0wSN0vEgWytk-wNwwac" alt="Post image" width="975" height="512" />
 
-After enabling **Time Travel,** you can use the timestamp selector to query your database at any time within your configured [history retention window](https://neon.tech/docs/introduction/point-in-time-restore#history-retention).
+After enabling **Time Travel,** you can use the timestamp selector to query your database at any time within your configured [history retention window](https://neon.com/docs/introduction/point-in-time-restore#history-retention).
 
 ### Diagnosing an Issue using Time Travel Queries
 
 Let’s explore a hypothetical scenario where **Time Travel** could help us out.
 
-Sign up for Neon, and follow the steps in our documentation to [import the chinook sample database](https://neon.tech/docs/import/import-sample-data#chinook-database). It contains data such as artists, albums, invoices, and employees.
+Sign up for Neon, and follow the steps in our documentation to [import the chinook sample database](https://neon.com/docs/import/import-sample-data#chinook-database). It contains data such as artists, albums, invoices, and employees.
 
 Imagine a scenario where an application error causes data to be deleted from this database. Specifically, line items for the invoice with the ID of `360`. This could manifest as a customer seeing their order summary but not the detailed line-by-line breakdown of their order in an e-commerce application.
 

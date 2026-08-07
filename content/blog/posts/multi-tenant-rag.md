@@ -123,7 +123,7 @@ Note that Neon’s [database-per-user design](https://neon.tech/use-cases/databa
 
 ### Querying multi-tenant databases
 
-[Neon’s serverless SDK](https://neon.tech/docs/serverless/serverless-driver) makes connecting to a database on the fly easy. Our project provides a `getTenantConnectionString(workspaceId)` helper that retrieves the Neon project associated with a given workspace:
+[Neon’s serverless SDK](https://neon.com/docs/serverless/serverless-driver) makes connecting to a database on the fly easy. Our project provides a `getTenantConnectionString(workspaceId)` helper that retrieves the Neon project associated with a given workspace:
 
 ```javascript
 import { neon } from "@neondatabase/serverless";
@@ -280,6 +280,6 @@ Feel free to explore this article’s demo by [looking at the repository on Gith
 
 ---
 
-_[Neon](https://neon.tech/home) is a serverless Postgres platform that helps you build faster. We have a generous Free Plan – create your account [here](https://console.neon.tech/signup) (no credit card required). You can add the Inngest integration in [one click](https://neon.tech/docs/guides/trigger-serverless-functions)._
+_[Neon](https://neon.tech/home) is a serverless Postgres platform that helps you build faster. We have a generous Free Plan – create your account [here](https://console.neon.tech/signup) (no credit card required). You can add the Inngest integration in [one click](https://neon.com/docs/guides/trigger-serverless-functions)._
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/multi-tenant-rag/image-1024x474-ab1a278d.png)

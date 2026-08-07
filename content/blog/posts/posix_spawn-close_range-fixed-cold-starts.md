@@ -46,7 +46,7 @@ Today, we want to share the story of tracking down and fixing that regression, w
 
 ## Background: Neon Pageserver
 
-The [Pageserver](https://neon.tech/docs/reference/glossary#pageserver) is a key [component of Neon](https://neon.tech/docs/introduction/architecture-overview). It manages the long-term storage and versioning of all the data you store in a Neon Project. When a Compute needs to read a database page, it requests it from the Pageserver, which reconstructs the page from a base page image and subsequent Write-Ahead Log (WAL) records. This task is handled by the `walredo` mechanism. Before we get into the details, let’s briefly recall the role of WAL in Postgres.
+The [Pageserver](https://neon.com/docs/reference/glossary#pageserver) is a key [component of Neon](https://neon.com/docs/introduction/architecture-overview). It manages the long-term storage and versioning of all the data you store in a Neon Project. When a Compute needs to read a database page, it requests it from the Pageserver, which reconstructs the page from a base page image and subsequent Write-Ahead Log (WAL) records. This task is handled by the `walredo` mechanism. Before we get into the details, let’s briefly recall the role of WAL in Postgres.
 
 (Learn more about this topic from our [earlier post on Neon storage](https://neon.tech/blog/get-page-at-lsn).)
 

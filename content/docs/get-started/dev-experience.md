@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 The developer experience across Neon is rooted in the lakebase architecture and anchored around four core pillars:
@@ -45,7 +45,7 @@ You don’t need to pick instance sizes when creating a Neon branch: only your m
 
 ### Scale to zero
 
-When a database is not actively handling queries, Lakebase Postgres [automatically scales compute all the way down to zero](https://neon.com/docs/introduction/scale-to-zero). Unused databases consume no compute resources, eliminating the cost of always-on instances that sit unused for large portions of the day. This happens by default after 5 minutes of inactivity, and when it’s time to restart, cold starts take less than 1 second, with less than 500 milliseconds being typical.
+When a database is not actively handling queries, Lakebase Postgres [automatically scales compute all the way down to zero](/docs/introduction/scale-to-zero). Unused databases consume no compute resources, eliminating the cost of always-on instances that sit unused for large portions of the day. This happens by default after 5 minutes of inactivity, and when it’s time to restart, cold starts take less than 1 second, with less than 500 milliseconds being typical.
 
 For production workloads where cold starts are not acceptable, paid plan users can disable scale to zero to keep their compute always active. See [Scale to zero](/docs/introduction/scale-to-zero).
 
@@ -63,7 +63,7 @@ Scale to zero is a foundational capability for the Neon experience, allowing us 
 
 In traditional Postgres setups, storage is something you plan upfront: you estimate how much data you’ll need, provision disk accordingly, and revisit that decision as your application grows. Getting this wrong leads to wasted capacity and full-disk errors. Lakebase Postgres removes this friction by making storage fully on demand.
 
-Lakebase Postgres storage is [built on object storage](https://neon.com/docs/introduction/architecture-overview), decoupled from compute. It is reliable by design and it expands automatically as data is written, as scaling storage does not require resizing compute resources or causing downtime. You can start with a small database and grow it continuously, without ever revisiting storage sizing decisions.
+Lakebase Postgres storage is [built on object storage](/docs/introduction/architecture-overview), decoupled from compute. It is reliable by design and it expands automatically as data is written, as scaling storage does not require resizing compute resources or causing downtime. You can start with a small database and grow it continuously, without ever revisiting storage sizing decisions.
 
 **What this means for DX**
 
@@ -85,11 +85,11 @@ Storage in Lakebase Postgres is also [history-preserving](https://neon.com/blog/
 
 **Instant restores**
 
-In Lakebase Postgres, [Instant Restore](https://neon.com/docs/introduction/branch-restore#how-instant-restore-works) allows you to restore your database to a precise point in time in a few clicks or a single API call. Restore operations are near-instant because Lakebase Postgres doesn’t copy data or rebuild the database, it simply re-anchors the database state to a known point in its history.
+In Lakebase Postgres, [Instant Restore](/docs/introduction/branch-restore#how-instant-restore-works) allows you to restore your database to a precise point in time in a few clicks or a single API call. Restore operations are near-instant because Lakebase Postgres doesn’t copy data or rebuild the database, it simply re-anchors the database state to a known point in its history.
 
 **Snapshots as checkpoints**
 
-In addition to continuous history, Lakebase Postgres exposes [snapshots](https://neon.com/docs/guides/backup-restore), explicit checkpoints that capture your database state at a moment in time. Snapshots are useful when you want long-lived restore points independent of the [history window](https://neon.com/docs/introduction/history-window), a known rollback point before a risky change, or versioned checkpoints for environments or [agent workflows](https://neon.com/docs/ai/ai-database-versioning).
+In addition to continuous history, Lakebase Postgres exposes [snapshots](/docs/guides/backup-restore), explicit checkpoints that capture your database state at a moment in time. Snapshots are useful when you want long-lived restore points independent of the [history window](/docs/introduction/history-window), a known rollback point before a risky change, or versioned checkpoints for environments or [agent workflows](/docs/ai/ai-database-versioning).
 
 **What this means for DX**
 
@@ -99,7 +99,7 @@ When your database keeps a complete, accessible record of its past, developers c
 
 ### Branching-first
 
-Modern software development is built around iteration, but most database setups are still built around a single mutable state. Neon takes a different approach: instead of treating a database as a static resource that must be copied over and over, Lakebase Postgres treats the database as a versioned system using short-lived [branches](https://neon.com/docs/introduction/branching).
+Modern software development is built around iteration, but most database setups are still built around a single mutable state. Neon takes a different approach: instead of treating a database as a static resource that must be copied over and over, Lakebase Postgres treats the database as a versioned system using short-lived [branches](/docs/introduction/branching).
 
 **Always lightweight**
 
@@ -107,7 +107,7 @@ Whether your database is 1 GB or 1 TB, creating a branch takes seconds. Branches
 
 **Designed to be discarded**
 
-Branching is optimized for short-lived environments or for environments that get to be refreshed often. To support this, Lakebase Postgres provides [branch expiration](https://neon.com/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time. You can also [reset a branch](https://neon.com/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one click or API call, whenever you need a new starting point.
+Branching is optimized for short-lived environments or for environments that get to be refreshed often. To support this, Lakebase Postgres provides [branch expiration](/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time. You can also [reset a branch](/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one click or API call, whenever you need a new starting point.
 
 You can build your branching workflows using the [Neon CLI](/docs/cli), [Neon API](/docs/reference/api), or [GitHub Actions](/docs/guides/branching-github-actions). You can also keep your development branches up-to-date by resetting your schema and data to the latest from `main` with a simple command.
 
@@ -146,7 +146,7 @@ Every core operation in Neon is available programmatically:
 
 **How agents use Neon**
 
-- **In the IDE.** [MCP](https://neon.com/docs/ai/neon-mcp-server) and [Agent Skills](https://neon.com/docs/ai/agent-skills) let tools like Cursor and Claude understand and operate a Neon project in a structured, safe way.
+- **In the IDE.** [MCP](/docs/ai/neon-mcp-server) and [Agent Skills](/docs/ai/agent-skills) let tools like Cursor and Claude understand and operate a Neon project in a structured, safe way.
 - **As the backend for agent platforms.** [Full-stack codegen and agent platforms](https://neon.com/platforms) embed Lakebase Postgres (and the rest of the Neon primitives) so each generated app gets its own backend, provisioned and cleaned up automatically.
 - **In your own pipelines.** Scripts and agents call the same API humans use in CI: create a branch, run migrations, take a snapshot, delete when done.
 

@@ -43,7 +43,7 @@ You might think, _“Why not migrate to a better provider?”_ But let’s be ho
 
 So don’t migrate. Leave production where it is. Instead, supercharge your development and testing environments with Neon, which is built to handle any size, from small projects to massive datasets.
 
-In this post, I’ll describe some of our best features, walk you through our [Dev/Test workflow](https://neon.tech/docs/use-cases/dev-test), and introduce the process of creating a [Neon Twin](https://neon.tech/docs/guides/neon-twin-intro).
+In this post, I’ll describe some of our best features, walk you through our [Dev/Test workflow](https://neon.com/docs/use-cases/dev-test), and introduce the process of creating a [Neon Twin](https://neon.com/docs/guides/neon-twin-intro).
 
 ## What are Neon’s best features?
 
@@ -63,12 +63,12 @@ Neon is designed to make developer workflows simpler, faster, and safer. Traditi
 
 ## What is the Dev/Test Workflow?
 
-Our [Dev/Test](https://neon.tech/docs/use-cases/dev-test) workflow is simple: production stays put, while development and testing move to a [Neon Twin](https://neon.tech/docs/guides/neon-twin-intro). In this workflow, your dev and test environments are clones of your existing production or staging databases, kept in sync through two key processes:
+Our [Dev/Test](https://neon.com/docs/use-cases/dev-test) workflow is simple: production stays put, while development and testing move to a [Neon Twin](https://neon.com/docs/guides/neon-twin-intro). In this workflow, your dev and test environments are clones of your existing production or staging databases, kept in sync through two key processes:
 
 1. Nightly automated dump and restore to keep your data up to date.
 2. Dump and restore triggered by GitHub events to prevent schema drift.
 
-[Branches](https://neon.tech/docs/introduction/branching) of the Twin can be created instantly, giving each member of your team a safe space to build, test, and iterate with real production data and schema without impacting the stability or performance of your production environment—or each other!
+[Branches](https://neon.com/docs/introduction/branching) of the Twin can be created instantly, giving each member of your team a safe space to build, test, and iterate with real production data and schema without impacting the stability or performance of your production environment—or each other!
 
 ![Neon Twin workflow displaying a traditional database setup with the development and testing environments shutdown.](https://cdn.neonapi.io/public/images/pages/blog/from-shared-chaos-to-isolated-control-with-neon/twin-workflow-1024x316-5bdce811.jpg)
 
@@ -78,12 +78,12 @@ A Neon Twin is a full or partial copy of your production or staging database, gi
 
 With a Neon Twin, teams can streamline their workflows, move faster, and stay productive—while avoiding the complexity and costs of traditional dev and test environments.
 
-We currently have two Twin workflows available in our [docs](https://neon.tech/docs/guides/neon-twin-intro), which include:
+We currently have two Twin workflows available in our [docs](https://neon.com/docs/guides/neon-twin-intro), which include:
 
-- **Full Twin**: [A Full Twin](https://neon.tech/docs/guides/neon-twin-full-pg-dump-restore) is an exact copy of your production or staging database, including all data and schema.
-- **Partial Twin**: [A Partial Twin](https://neon.tech/docs/guides/neon-twin-partial-pg-dump-restore) is an exact copy of your production or staging databases schema but only includes a subset of dat
+- **Full Twin**: [A Full Twin](https://neon.com/docs/guides/neon-twin-full-pg-dump-restore) is an exact copy of your production or staging database, including all data and schema.
+- **Partial Twin**: [A Partial Twin](https://neon.com/docs/guides/neon-twin-partial-pg-dump-restore) is an exact copy of your production or staging databases schema but only includes a subset of dat
 
-GitHub Actions power both workflows and can be added to any existing GitHub repository. You can configure them to run on a recurring schedule that fits your needs or trigger them with specific [GitHub events](https://neon.tech/docs/guides/neon-twin-partial-pg-dump-restore#handling-pull-request-events)—such as when a pull request is closed and merged—to keep schema changes in sync. Plus, both workflows support [concurrency controls](https://neon.tech/docs/guides/neon-twin-partial-pg-dump-restore#add-concurrency-and-conditions) to prevent overlapping runs.
+GitHub Actions power both workflows and can be added to any existing GitHub repository. You can configure them to run on a recurring schedule that fits your needs or trigger them with specific [GitHub events](https://neon.com/docs/guides/neon-twin-partial-pg-dump-restore#handling-pull-request-events)—such as when a pull request is closed and merged—to keep schema changes in sync. Plus, both workflows support [concurrency controls](https://neon.com/docs/guides/neon-twin-partial-pg-dump-restore#add-concurrency-and-conditions) to prevent overlapping runs.
 
 <blockquote>
 <p><em>We are using the Neon Twin workflow. We just install the GitHub action and it takes care of the rest. Developers may not know how to dump and restore well, but they know how to run a GitHub Action. It’s amazing (Alex Co, Head of Platform Engineering at Mindvalley)</em></p>
@@ -106,7 +106,7 @@ A self-hosted runner can help solve both of these limitations by giving you cont
 
 ## Team notifications
 
-For larger teams, it’s essential to keep developers informed when a new Twin is available so they can [reset their own branches](https://neon.tech/docs/guides/reset-from-parent) to maintain consistency. To help with this, we’ve put together a guide on setting up Slack notifications to keep everyone in the loop: [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows).
+For larger teams, it’s essential to keep developers informed when a new Twin is available so they can [reset their own branches](https://neon.com/docs/guides/reset-from-parent) to maintain consistency. To help with this, we’ve put together a guide on setting up Slack notifications to keep everyone in the loop: [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows).
 
 ![Mockup of Slack interface displyang a message in the engineering-general channel explaining a new Neon Twin is available](https://cdn.neonapi.io/public/images/pages/blog/from-shared-chaos-to-isolated-control-with-neon/twin-slack-notifications-1024x641-272b37b8.jpg)
 

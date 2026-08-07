@@ -74,7 +74,7 @@ _This solution isn’t intended to replace Google Analytics but, it is a nice wa
 
 ## Create a Neon serverless Postgres database
 
-To get started, [sign up](https://neon.tech/) to Neon, then follow our [Create your first project guide](https://neon.tech/docs/get-started-with-neon/setting-up-a-project). You might also like to look at this guide from our docs: [Query with Neon’s SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor).
+To get started, [sign up](https://neon.tech/) to Neon, then follow our [Create your first project guide](https://neon.com/docs/get-started-with-neon/setting-up-a-project). You might also like to look at this guide from our docs: [Query with Neon’s SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).
 
 Once you have a database set up, save the connection string to your `.env` file and name it, `DATABASE_URL`.
 
@@ -105,7 +105,7 @@ CREATE TABLE analytics (
 
 ## Install dependencies
 
-There are three dependencies required. The first is the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver), the second is the [Astro Vercel adapter](https://docs.astro.build/en/guides/integrations-guide/vercel/), and the third is the [@vercel/edge](https://vercel.com/docs/functions/edge-functions/vercel-edge-package) package including a `geolocation` helper function that can extract geographical information from incoming requests.
+There are three dependencies required. The first is the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver), the second is the [Astro Vercel adapter](https://docs.astro.build/en/guides/integrations-guide/vercel/), and the third is the [@vercel/edge](https://vercel.com/docs/functions/edge-functions/vercel-edge-package) package including a `geolocation` helper function that can extract geographical information from incoming requests.
 
 ```bash
 npm install @neondatabase/serverless @astrojs/vercel @vercel/edge

@@ -376,7 +376,7 @@ FROM products
 WHERE to_tsvector('english', description) @@ to_tsquery('english', 'running:*');
 ```
 
-You might also opt for [Elasticsearch](https://www.elastic.co/elasticsearch) or use the [pg_trgm](https://neon.tech/docs/extensions/pg_trgm) extension for trigram-based similarity search. Each approach has a community of users, contributors, and best practices.
+You might also opt for [Elasticsearch](https://www.elastic.co/elasticsearch) or use the [pg_trgm](https://neon.com/docs/extensions/pg_trgm) extension for trigram-based similarity search. Each approach has a community of users, contributors, and best practices.
 
 This community-driven development also means that Postgres often gets cutting-edge features before they appear in commercial databases. For instance, the JSONB data type and operations in [Postgres](https://wiki.postgresql.org/wiki/What%27s_new_in_PostgreSQL_9.4) predated SQL Server’s JSON support by several years. The tradeoff is that you must be more proactive about staying current with community developments and best practices.
 

@@ -55,7 +55,7 @@ After that, we were so enthusiastic about this idea that we decided to move forw
 
 Technically, that’s correct. Postgres relies on the TCP stack, which isn’t accessible from the browser environment. However, at Neon, we’ve deployed a [WebSocket proxy](https://github.com/neondatabase/wsproxy) that allows users to connect to their databases directly from browser-like environments. (Initially, we built this for serverless environments without TCP stack access, like Cloudflare Workers.)
 
-We also developed a [serverless driver](https://neon.tech/docs/serverless/serverless-driver) to act as a client for the WebSocket proxy. It works great in many JavaScript environments—Node, Vercel Edge, Cloudflare Workers—and browsers!
+We also developed a [serverless driver](https://neon.com/docs/serverless/serverless-driver) to act as a client for the WebSocket proxy. It works great in many JavaScript environments—Node, Vercel Edge, Cloudflare Workers—and browsers!
 
 So, when starting this project, we already had all the infrastructure in place; we just needed to emulate psql’s behavior in the browser.
 
@@ -73,7 +73,7 @@ You can write SQL queries that will be executed against this fresh database. Thi
 
 As mentioned, we use our serverless driver to connect to the database. But where do we get the connection string from?
 
-For this, I created a Neon project with several branches—one for each template. So, **the templates in psql.sh are actually** [Neon branches](https://neon.tech/docs/introduction/branching):
+For this, I created a Neon project with several branches—one for each template. So, **the templates in psql.sh are actually** [Neon branches](https://neon.com/docs/introduction/branching):
 
 When someone instantiates a new connection, the backend simply creates a new child branch from the corresponding template (the `main` branch):
 

@@ -30,7 +30,7 @@ seo:
 Lots of you told us it would be nice to have more projects. Starting today (10/10 😉), **everyone on the Free Plan can now create up to ten projects.**
 
 <Admonition type="note">
-See [Neon Free Plan Documentation](https://neon.tech/docs/introduction/plans#free-plan) for all details.
+See [Neon Free Plan Documentation](https://neon.com/docs/introduction/plans#free-plan) for all details.
 </Admonition>
 
 You can create up to 10 branches on each Free Plan Project. Account-level limits on compute hours, storage, and bandwidth remain unchanged. We’re confident that only increasing the Project limit will lead to a nice quality-of-life boost amongst Free Plan users because when we look at resource usage, it is stratified:

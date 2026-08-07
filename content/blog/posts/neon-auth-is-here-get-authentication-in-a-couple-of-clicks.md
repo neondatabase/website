@@ -35,7 +35,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/neon-auth-is-here-get-authentication-in-a-couple-of-clicks/neon-neon-auth-1-1024x576-e09dcd5f.jpg)
 
-**We’re excited to announce** [Neon Auth](https://neon.tech/docs/guides/neon-auth)**, a fully managed authentication solution tightly integrated into the Neon platform.** It now takes seconds to provision an auth solution directly from the Neon console; once set up, your user profiles automatically sync to your database.
+**We’re excited to announce** [Neon Auth](https://neon.com/docs/guides/neon-auth)**, a fully managed authentication solution tightly integrated into the Neon platform.** It now takes seconds to provision an auth solution directly from the Neon console; once set up, your user profiles automatically sync to your database.
 
 **The best part: if you ever decide to move away from Neon, you can transfer ownership of your managed auth configuration to an external account just as easily as you set it up.** And if you ever decide to change auth providers, all your auth data lives in your database, which makes any migration much easier.
 
@@ -132,7 +132,7 @@ Using `LEFT JOIN` ensures the main query still executes, even if the user record
 
 ## Get started
 
-[Auth](https://neon.tech/docs/guides/neon-auth) is available to all Neon users, **currently in Beta**. Check out our documentation for details, and [jump into to the console](https://v/) to set it up.
+[Auth](https://neon.com/docs/guides/neon-auth) is available to all Neon users, **currently in Beta**. Check out our documentation for details, and [jump into to the console](https://v/) to set it up.
 
 ---
 

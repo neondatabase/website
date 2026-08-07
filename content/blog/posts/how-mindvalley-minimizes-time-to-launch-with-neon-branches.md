@@ -46,7 +46,7 @@ seo:
 
 Mindvalley primarily uses Google CloudSQL for their production databases, but they recently started using Neon to speed up their non-production workflows. Previously, everything—including development and testing—was handled in CloudSQL, which introduced inefficiencies that slowed the team down (more details later).
 
-Mindvalley now takes advantage of Neon’s faster DX for development and testing while keeping their production databases untouched. The key feature driving this boost in developer velocity is [branching](https://neon.tech/docs/introduction/branching), which allows their developers to spin up new previews in less than a minute. [Automatically creating branches with every PR](https://neon.tech/flow#preview-environment-workflow) has drastically reduced waiting times, speeding up their development cycle.
+Mindvalley now takes advantage of Neon’s faster DX for development and testing while keeping their production databases untouched. The key feature driving this boost in developer velocity is [branching](https://neon.com/docs/introduction/branching), which allows their developers to spin up new previews in less than a minute. [Automatically creating branches with every PR](https://neon.tech/flow#preview-environment-workflow) has drastically reduced waiting times, speeding up their development cycle.
 
 ## Their database branching workflow
 
@@ -58,11 +58,11 @@ Mindvalley has built a [Neon Twin](https://neon.tech/blog/optimizing-dev-environ
 
 ### Child branches for independent development environments
 
-From this main branch, hundreds of ephemeral environments can be immediately spun up without requiring any additional data syncs. These child environments feel like perfect “copies” of the main branch, containing all the latest data and schema. Each developer gets their own child branch and can work independently without disrupting others. Developers can [easily propagate updates](https://neon.tech/docs/guides/reset-from-parent) from the master branch to their own environments.
+From this main branch, hundreds of ephemeral environments can be immediately spun up without requiring any additional data syncs. These child environments feel like perfect “copies” of the main branch, containing all the latest data and schema. Each developer gets their own child branch and can work independently without disrupting others. Developers can [easily propagate updates](https://neon.com/docs/guides/reset-from-parent) from the master branch to their own environments.
 
 ### Integration with CI/CD for end-to-end testing
 
-All of this happens through Mindvalley’s in-house CI/CD automation system, which is fully integrated with the Neon API. Whenever developers launch a PR, the automation system automatically creates a new database branch in Neon. Neon’s [connection pooling](https://neon.tech/docs/connect/connection-pooling) ensures there are no issues with too many connections going into the branches. Once the PR is closed, the database branch is deleted.
+All of this happens through Mindvalley’s in-house CI/CD automation system, which is fully integrated with the Neon API. Whenever developers launch a PR, the automation system automatically creates a new database branch in Neon. Neon’s [connection pooling](https://neon.com/docs/connect/connection-pooling) ensures there are no issues with too many connections going into the branches. Once the PR is closed, the database branch is deleted.
 
 ## The problem with dev/test on other managed databases: A closer look
 

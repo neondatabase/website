@@ -59,7 +59,7 @@ You can specify which data you want to include when creating a branch:
 - Include all data up to the point of branch creation.
 - Include data up to a specific point. You can specify either:
   - Date and time
-  - LSN (Log Sequence Number, a byte offset to a location in the [WAL stream](https://neon.tech/docs/reference/glossary#wal-stream).)
+  - LSN (Log Sequence Number, a byte offset to a location in the [WAL stream](https://neon.com/docs/reference/glossary#wal-stream).)
 
 Creating a branch and including data up to a certain point enables you to implement a backup strategy to restore your data to a previous state.
 
@@ -69,7 +69,7 @@ Neon retains a data history in the form of Write-Ahead-Log (WAL) records, allowi
 
 The data history window is seven days by default, but we plan to make it configurable in the future.
 
-You can use the [Neon CLI](https://neon.tech/docs/reference/cli-branches#create) or the console to create a branch from a point in time.
+You can use the [Neon CLI](https://neon.com/docs/reference/cli-branches#create) or the console to create a branch from a point in time.
 
 To do it from the Neon console:
 
@@ -95,7 +95,7 @@ Here’s a high-level overview of how it can be done:
 
 - Create a branch without a compute endpoint from a previous point in time.
 - Assign the compute endpoint you want to use to that newly created branch.
-- Set the new branch as the primary branch. (This ensures that access to data is never interrupted since the primary branch has no limit on [Active time](https://neon.tech/docs/reference/glossary#active-time).)
+- Set the new branch as the primary branch. (This ensures that access to data is never interrupted since the primary branch has no limit on [Active time](https://neon.com/docs/reference/glossary#active-time).)
 
 Here’s an example script using TypeScript. It’s [available on GitHub](https://github.com/neondatabase/restore-neon-branch), along with setup and usage instructions.
 
@@ -160,6 +160,6 @@ Since you won’t be using the old branch anymore, we recommend that you do the 
 
 ## Conclusion
 
-In this guide, you learned how to use Neon’s branching feature to restore your data to a previous state. You can check out [more ways to leverage branching](https://neon.tech/docs/introduction/branching#branching-workflows) in your workflow.
+In this guide, you learned how to use Neon’s branching feature to restore your data to a previous state. You can check out [more ways to leverage branching](https://neon.com/docs/introduction/branching#branching-workflows) in your workflow.
 
 Also, if you’re new to Neon, you can [sign up for free](https://console.neon.tech/).

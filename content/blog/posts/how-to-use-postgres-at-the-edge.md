@@ -37,7 +37,7 @@ seo:
 
 ![Ping Thing: Serverles Postgres at the Edge](https://cdn.neonapi.io/public/images/pages/blog/how-to-use-postgres-at-the-edge/ping-thing-page-1024x576-17286e02.jpg)
 
-In this post, I’d like to introduce [Neon’s serverless driver](https://neon.tech/docs/serverless/serverless-driver) which is suitable for use with Vercel Edge Functions. I’ll explain how to use it with Next.js and a **free** [Neon serverless Postgres database](https://neon.tech/)
+In this post, I’d like to introduce [Neon’s serverless driver](https://neon.com/docs/serverless/serverless-driver) which is suitable for use with Vercel Edge Functions. I’ll explain how to use it with Next.js and a **free** [Neon serverless Postgres database](https://neon.tech/)
 
 Here’s a demo I created. I’ve called it Ping Thing.
 
@@ -64,7 +64,7 @@ The serverless driver can use either HTTP or Websockets to make a connection to 
 
 In the below example, I’ll show you how to use Neon’s serverless driver with Next.js [API Routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes).
 
-To get started, sign up to [Neon](https://neon.tech/), then follow our [Create your first project](https://neon.tech/docs/get-started-with-neon/setting-up-a-project) guide. You might also like to have a look at this guide from our docs: [Query with Neon’s SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor).<br />Once you have a database set up, save the connection string to your Next.js `.env` file and give it a name of `DATABASE_URL`.
+To get started, sign up to [Neon](https://neon.tech/), then follow our [Create your first project](https://neon.com/docs/get-started-with-neon/setting-up-a-project) guide. You might also like to have a look at this guide from our docs: [Query with Neon’s SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor).<br />Once you have a database set up, save the connection string to your Next.js `.env` file and give it a name of `DATABASE_URL`.
 
 ### Neon’s serverless driver
 
@@ -100,7 +100,7 @@ And that’s it! Postgres at the Edge.
 
 ## SQL-over-HTTP or WebSockets?
 
-In the above example using the `neon` export, you’re querying using **SQL-over-HTTP**. This is great for single-shot queries, but if you’re looking to perform multiple queries in a single connection you might want to take a look at [Pool or Client](https://neon.tech/docs/serverless/serverless-driver#using-node-postgres-pool-or-client) which use **WebSockets**.
+In the above example using the `neon` export, you’re querying using **SQL-over-HTTP**. This is great for single-shot queries, but if you’re looking to perform multiple queries in a single connection you might want to take a look at [Pool or Client](https://neon.com/docs/serverless/serverless-driver#using-node-postgres-pool-or-client) which use **WebSockets**.
 
 Pool and Client are part of the same npm package, and you can use Pool like this.
 

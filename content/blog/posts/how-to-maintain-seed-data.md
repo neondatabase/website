@@ -206,7 +206,7 @@ So, what’s a DBA to do?
 
 ## Use Database Branching
 
-[Database branching](https://neon.tech/docs/guides/branching-intro) allows you to create isolated copies of your database that share the same underlying storage but can evolve independently. Instead of version-controlling your seed files, you control your entire database.
+[Database branching](https://neon.com/docs/guides/branching-intro) allows you to create isolated copies of your database that share the same underlying storage but can evolve independently. Instead of version-controlling your seed files, you control your entire database.
 
 Database branching isn’t one-size-fits-all. You’ve got two main flavors: branches with data and schema-only branches. Each serves different purposes and comes with its own trade-offs.
 
@@ -237,7 +237,7 @@ After creating a schema-only branch, you have options for populating it:
 - Load sanitized production data
 - Use your test fixtures
 
-This is the option for when you’re working with sensitive data (though we are working on [data anonymization](https://neon.tech/docs/introduction/roadmap)), need pristine test environments, and/or want controlled test scenarios.
+This is the option for when you’re working with sensitive data (though we are working on [data anonymization](https://neon.com/docs/introduction/roadmap)), need pristine test environments, and/or want controlled test scenarios.
 
 Neon is leading the way in data and schema branching, with schema-only branches on the horizon. While other providers offer similar features, Neon’s branching-based approach sets a new standard by removing the challenges of traditional seeding and enhancing the developer experience for you and your team.
 

@@ -44,7 +44,7 @@ Here’s a deeper dive into what’s behind this price reduction, if you’re in
 Neon uses a [custom storage engine](https://neon.tech/blog/get-page-at-lsn), so its “regular” per-GB price covers more than just basic storage. It also includes:
 
 - **Cache for high performance**. Neon is built for speed, with a cache component we’re calling the [Pageserver](https://neon.tech/blog/get-page-at-lsn). The Pageserver stores frequently accessed data on high-performance SSDs to ensure low latencies. For HA, Neon also runs secondary Pageservers in different availability zones that maintain up-to-date copies of the project’s data.
-- **Safekeepers for WAL**. Neon’s storage also includes Safekeepers, which capture [every change made to your database through WAL.](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal) This is how Neon can offer features like branching and [time travel queries](https://neon.tech/docs/guides/time-travel-assist).
+- **Safekeepers for WAL**. Neon’s storage also includes Safekeepers, which capture [every change made to your database through WAL.](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal) This is how Neon can offer features like branching and [time travel queries](https://neon.com/docs/guides/time-travel-assist).
 - **Object storage for the long term**. While the Pageserver handles fast access, Neon uses cloud object storage (Amazon S3 or Azure Blob Storage) as the durable layer that holds the bulk of your data.
 
 <figure>

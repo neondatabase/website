@@ -84,7 +84,7 @@ If you’re already using Neon to manage your database, [Outerbase is just one c
 
 ## How to view your Neon database ERD
 
-Go to Neon Console > Integrations. [Add Outerbase](https://neon.tech/docs/guides/outerbase).
+Go to Neon Console > Integrations. [Add Outerbase](https://neon.com/docs/guides/outerbase).
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/bring-postgres-relationships-to-light/ad4nxdavnikcpiqfvrokboeq0ha038paffonahyplhiqbvedsi0yhfiktahlajy7m1sput5kwjejan2vzeb0xwx3dvycv8ginga29-zfr0sfuzd1ltzp4j4ralj2gkikcoujwsirxc-bkvgmgu6bvi1vlduii-101247ee.png)
 

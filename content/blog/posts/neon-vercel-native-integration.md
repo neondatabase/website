@@ -36,7 +36,7 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/neon-vercel-native-integration/neon-neon-verpercentd1percent81el-1-1024x576-6d5a002d.jpg)
 
-[To Vercel users deploying Neon via the Vercel Marketplace:](https://vercel.com/marketplace/neon) we have good news. You can now use Neon’s **Native Vercel Integration** to automatically create a database branch for each Vercel preview deployment. [Check out our docs](https://neon.tech/docs/guides/vercel-native-integration-previews) for a step-by-step guide.
+[To Vercel users deploying Neon via the Vercel Marketplace:](https://vercel.com/marketplace/neon) we have good news. You can now use Neon’s **Native Vercel Integration** to automatically create a database branch for each Vercel preview deployment. [Check out our docs](https://neon.com/docs/guides/vercel-native-integration-previews) for a step-by-step guide.
 
 ## Why deploy Neon branches in your Vercel project
 
@@ -81,4 +81,4 @@ Next,
 
 Once you’re done, click “Connect”. That’s it: with each commit to a branch in your application’s GitHub repository, Vercel preview deployments will be created with their own Neon branch.
 
-Check out [our documentation](https://neon.tech/docs/guides/vercel-native-integration-previews) for more detailed instructions, and join us [on Discord](https://discord.gg/92vNTzKDGp) to ask questions.
+Check out [our documentation](https://neon.com/docs/guides/vercel-native-integration-previews) for more detailed instructions, and join us [on Discord](https://discord.gg/92vNTzKDGp) to ask questions.

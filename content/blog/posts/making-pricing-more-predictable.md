@@ -44,7 +44,7 @@ After enrolling over half a million databases and nearly a year of listening to 
 
 In Neon, Postgres scales to zero upon idle activity. Bringing this advantage to developers by starting billing at $0 was a no-brainer from day one. However, one of the most common pieces of feedback was: “How much will my database cost at the end of the month?”.
 
-We would jump on calls to explain the different metrics, point to our pricing calculator, and refer to our detailed [documentation](https://neon.tech/docs/introduction/about-billing), all to help customers better answer this question.
+We would jump on calls to explain the different metrics, point to our pricing calculator, and refer to our detailed [documentation](https://neon.com/docs/introduction/about-billing), all to help customers better answer this question.
 
 ## We hate egress as much as you do
 
@@ -72,7 +72,7 @@ The Scale plan also includes security features important to production workloads
 
 ## Fewer billing metrics
 
-As part of our efforts to simplify our pricing, we are also happy to announce that we will be dropping our written data and data transfer fees, subject to our [acceptable use policy](https://neon.tech/docs/security/acceptable-use-policy), and will continue to find creative solutions to better manage our costs and pass those savings to our customers.
+As part of our efforts to simplify our pricing, we are also happy to announce that we will be dropping our written data and data transfer fees, subject to our [acceptable use policy](https://neon.com/docs/security/acceptable-use-policy), and will continue to find creative solutions to better manage our costs and pass those savings to our customers.
 
 The new plans directly address our customers’ concerns by making their database spending more predictable.
 

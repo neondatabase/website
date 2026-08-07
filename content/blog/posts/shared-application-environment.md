@@ -88,7 +88,7 @@ You can see it in this [example repo](https://github.com/neondatabase/db-per-ten
 
 When individual user accounts are managed by other customer users instead of in the catalog database, a couple of elements here do get more complex, but the overall workflow is about the same. The authenticating user’s customer id needs to be stored in a signed token like a JWT that they can pass back to the server with each request. When they do so, the router validates the token, picks the customer id back out, and uses that to find the appropriate database.
 
-The demo connection router goes step by step for clarity, but there are a couple of useful optimizations that can speed up production code. First, the API client can be a long-lived object rather than created and destroyed in each request, since the application’s Neon API key is static. Second, you can add the [pooled](https://api-docs.neon.tech/reference/getconnectionuri) option in step 3 to use Neon’s [built-in pgBouncer pooling](https://neon.tech/docs/connect/connection-pooling).
+The demo connection router goes step by step for clarity, but there are a couple of useful optimizations that can speed up production code. First, the API client can be a long-lived object rather than created and destroyed in each request, since the application’s Neon API key is static. Second, you can add the [pooled](https://neon.com/docs/reference/api/projects/get-connection-uri) option in step 3 to use Neon’s [built-in pgBouncer pooling](https://neon.com/docs/connect/connection-pooling).
 
 ## The Control Plane and Catalog Database in a Shared Application Environment
 
@@ -112,7 +112,7 @@ In this situation, there are two ways to manage schema changes safely.
 
 First, you can move slowly, and roll out changes well before the application starts relying on them. Some types of change are more amenable to this than others: new columns are as easy as it gets, but redefining a table starts to require scaffolding in the form of views and triggers to present the same “interface” to client code.
 
-Second, you can test upgrades against each user database. This is a discrete step from upgrade rollout, and blocks the upgrade if any individual database fails testing. [Branching](https://neon.tech/docs/manage/branches) is a great way to test potential changes without blocking activity in the primary databases.
+Second, you can test upgrades against each user database. This is a discrete step from upgrade rollout, and blocks the upgrade if any individual database fails testing. [Branching](https://neon.com/docs/manage/branches) is a great way to test potential changes without blocking activity in the primary databases.
 
 It’s important to remember that these are risk mitigation strategies rather than guarantees! The most thorough tests cannot stop someone from adding a null where you’re about to require a value — _after_ you mark their database test passed.
 

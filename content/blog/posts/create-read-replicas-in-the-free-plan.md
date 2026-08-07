@@ -37,7 +37,7 @@ seo:
 
 We keep bringing you new things, following up on the [10/10 spirit](https://neon.tech/blog/10x-projects-on-free-plan). Today’s news: **read replicas are now available in the Free Plan.** This is particularly great if you’ve been curious to test out how awesome they are.
 
-Why are we doing this? Read Replicas are just another way to use your [compute hours](https://neon.tech/docs/introduction/usage-metrics#compute). Our Free Plan includes 190 CU-hours, enough to run the smallest compute 24/7 if that’s what you prefer. But if you don’t need your database running all the time, you can invest your compute hours in more projects ([you now get ten](https://neon.tech/blog/10x-projects-on-free-plan)), higher capacity (via [autoscaling](https://neon.tech/docs/introduction/usage-metrics#compute)) or, now, in read replicas.
+Why are we doing this? Read Replicas are just another way to use your [compute hours](https://neon.com/docs/introduction/usage-metrics#compute). Our Free Plan includes 190 CU-hours, enough to run the smallest compute 24/7 if that’s what you prefer. But if you don’t need your database running all the time, you can invest your compute hours in more projects ([you now get ten](https://neon.tech/blog/10x-projects-on-free-plan)), higher capacity (via [autoscaling](https://neon.com/docs/introduction/usage-metrics#compute)) or, now, in read replicas.
 
 ## Neon read replicas crash course
 
@@ -66,7 +66,7 @@ The most popular use case for read replicas in Neon is granting read access to y
 
 Another popular use case for Neon read replicas is helping teams scale compute horizontally. If you’re running a write-heavy workload in production, you could use read replicas to offload read queries, relieving pressure on the primary compute and ensuring that your application continues running with optimal performance.
 
-But you can even do this if your primary workload isn’t that heavy. Instead of scaling your primary database by [increasing the compute autoscaling limit](https://neon.tech/docs/guides/autoscaling-guide#configure-autoscaling-defaults-for-your-project), you could create multiple read replicas and distribute your queries across them, keeping all your computes small.
+But you can even do this if your primary workload isn’t that heavy. Instead of scaling your primary database by [increasing the compute autoscaling limit](https://neon.com/docs/guides/autoscaling-guide#configure-autoscaling-defaults-for-your-project), you could create multiple read replicas and distribute your queries across them, keeping all your computes small.
 
 ## Create your first read replica
 

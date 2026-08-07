@@ -45,7 +45,7 @@ But if you’re already in production on RDS, migrating a live database is painf
 
 A Neon Twin is a synchronized copy of your RDS production database in Neon, created and maintained using a GitHub Action. This action automatically runs a nightly pg_dump of your RDS database and restores it to Neon, ensuring your development environment stays up-to-date.
 
-With a Neon Twin in place, developers can quickly start building, testing, and taking advantage of Neon’s [rapid development features](https://neon.tech/docs/get-started-with-neon/why-neon), such as instant database provisioning, branching, and automated scaling, without disrupting the production or staging environments.
+With a Neon Twin in place, developers can quickly start building, testing, and taking advantage of Neon’s [rapid development features](https://neon.com/docs/get-started-with-neon/why-neon), such as instant database provisioning, branching, and automated scaling, without disrupting the production or staging environments.
 
 ## Prerequisites
 
@@ -68,7 +68,7 @@ All the code shown in this article can be found on this GitHub repo: [create-neo
 
 As explained in the [GitHub documentation](https://docs.github.com/en/actions/learn-github-actions/usage-limits-billing-and-administration#usage-limits), there are some usage limits on GitHub Actions. Specifically, job execution time is limited to 6 hours; if a job reaches this limit, the job is terminated and fails to complete.
 
-This limit might be relevant for the dump/restore nightly job. How long this job takes to execute will depend on the size of your production database, the specifications of the EC2 and Neon instances, and the regions where both are deployed. For jobs that may run for longer than 6 hours, [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners) can be used. To optimize execution times, we recommend using the same region for both the RDS instance and Neon Twin. [A list of supported regions can be found in the Neon docs.](https://neon.tech/docs/introduction/regions#available-regions)
+This limit might be relevant for the dump/restore nightly job. How long this job takes to execute will depend on the size of your production database, the specifications of the EC2 and Neon instances, and the regions where both are deployed. For jobs that may run for longer than 6 hours, [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners) can be used. To optimize execution times, we recommend using the same region for both the RDS instance and Neon Twin. [A list of supported regions can be found in the Neon docs.](https://neon.com/docs/introduction/regions#available-regions)
 
 ### GitHub Actions IP addresses
 
@@ -87,7 +87,7 @@ If your production database connection requires an SSL certificate, [you might f
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon/neon-twin-environments-1024x576-98308e91.jpg)
 
-If you’re new to Neon, the first step is to [sign up](https://console.neon.tech/signup) and follow our [getting started guide](https://neon.tech/docs/get-started-with-neon/signing-up) to create your initial project. During the onboarding, you’ll be introduced to these key Neon terms:
+If you’re new to Neon, the first step is to [sign up](https://console.neon.tech/signup) and follow our [getting started guide](https://neon.com/docs/get-started-with-neon/signing-up) to create your initial project. During the onboarding, you’ll be introduced to these key Neon terms:
 
 - **Project:** The top-level container for your Neon databases—the logical equivalent to an “instance” in RDS.
 - **Branch:** A versioned copy of your database environment. Each Neon project can have multiple branches, as we will see later.

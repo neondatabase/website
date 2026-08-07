@@ -100,7 +100,7 @@ These ephemeral environments are a key part of Dispatch’s development process.
 
 ### Neon’s read replicas for ETL and analytics
 
-In addition to their primary workflow, Dispatch uses Neon’s [read replicas](https://neon.tech/docs/introduction/read-replicas) (read-only endpoints) to make their data pipelines more efficient. Previously, they ran both critical workloads and ETL jobs on the readers of their Aurora Global cluster, which caused frequent issues. Now, they create read-only replicas in Neon for specific use cases. For example, team members who need reports can run live data queries in tools like Metabase without having to wait for ETL pipelines to finish.
+In addition to their primary workflow, Dispatch uses Neon’s [read replicas](https://neon.com/docs/introduction/read-replicas) (read-only endpoints) to make their data pipelines more efficient. Previously, they ran both critical workloads and ETL jobs on the readers of their Aurora Global cluster, which caused frequent issues. Now, they create read-only replicas in Neon for specific use cases. For example, team members who need reports can run live data queries in tools like Metabase without having to wait for ETL pipelines to finish.
 
 ## If you’re running Postgres in AWS, give Neon a try
 

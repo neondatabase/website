@@ -115,7 +115,7 @@ To get started, [sign up for Neon](https://console.neon.tech/) and create a proj
 
 ![Creating your first project on https://console.neon.tech](https://cdn.neonapi.io/public/images/pages/blog/real-time-materialized-view-postgres-kafka-ksqldb/create-project-neon-1024x540-6d990421.jpg)
 
-Next, visit the **Beta** section of the **Project settings** screen and enable logical replication. Visit our documentation to view a complete set of [logical replication guides](https://neon.tech/docs/guides/logical-replication-concepts#enabling-logical-replication).
+Next, visit the **Beta** section of the **Project settings** screen and enable logical replication. Visit our documentation to view a complete set of [logical replication guides](https://neon.com/docs/guides/logical-replication-concepts#enabling-logical-replication).
 
 ![Enabling logical replication for a project on https://console.neon.tech](https://cdn.neonapi.io/public/images/pages/blog/real-time-materialized-view-postgres-kafka-ksqldb/lr-enable-1024x565-b5c4048d.png)
 
@@ -150,7 +150,7 @@ Create a [logical replication slot](https://www.postgresql.org/docs/current/logi
 SELECT pg_create_logical_replication_slot('debezium', 'pgoutput');
 ```
 
-Use the **Roles** section of the Neon console to [create a new role](https://neon.tech/docs/manage/roles#manage-roles-in-the-neon-console) named `confluent_cdc`. Be sure to save the password for the role someplace safe since it will only be displayed once. With the role in place, grant it permissions on the public schema using the **SQL Editor**:
+Use the **Roles** section of the Neon console to [create a new role](https://neon.com/docs/manage/roles#manage-roles-in-the-neon-console) named `confluent_cdc`. Be sure to save the password for the role someplace safe since it will only be displayed once. With the role in place, grant it permissions on the public schema using the **SQL Editor**:
 
 ```sql
 GRANT USAGE ON SCHEMA public TO confluent_cdc;
@@ -185,7 +185,7 @@ Next, configure the connection between the connector and your Postgres database 
 1. Database name: `neondb`
 2. Database server name: `neon`
 3. SSL mode: `require`
-4. Database hostname: Find this on the Neon console. Refer to [our documentation](https://neon.tech/docs/connect/connect-from-any-app).
+4. Database hostname: Find this on the Neon console. Refer to [our documentation](https://neon.com/docs/connect/connect-from-any-app).
 5. Database port: `5432`
 6. Database username: `confluent_cdc`
 7. Database password: This is the password for the `confluent_cdc` role you created earlier.

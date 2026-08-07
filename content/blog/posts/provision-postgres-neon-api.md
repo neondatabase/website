@@ -56,9 +56,9 @@ The Neon API is useful for any developer, but when it comes to managing Postgres
 
 ## How the Neon API Helps You Manage Thousands of Postgres DBs
 
-For platforms and agents deploying thousands of isolated databases, the Neon API offers **fine-grained control** over provisioning, scaling, and usage. Paired with Neon’s [instant provisioning](https://neon.tech/demos/instant-postgres) and [scale-to-zero](https://neon.tech/docs/introduction/scale-to-zero) capabilities, it gives teams the flexibility to manage large fleets of Postgres databases programmatically, while staying cost-efficient.
+For platforms and agents deploying thousands of isolated databases, the Neon API offers **fine-grained control** over provisioning, scaling, and usage. Paired with Neon’s [instant provisioning](https://neon.tech/demos/instant-postgres) and [scale-to-zero](https://neon.com/docs/introduction/scale-to-zero) capabilities, it gives teams the flexibility to manage large fleets of Postgres databases programmatically, while staying cost-efficient.
 
-In most embedded Postgres workflows, [one Neon project maps to one Postgres database](https://neon.tech/docs/use-cases/database-per-user#setting-up-neon-for-database-per-user). That means managing a fleet of databases at scale is really about managing thousands of Neon projects—the features we’ve progressively added to the Neon API, as we work with parrners, make this possible even with small teams.
+In most embedded Postgres workflows, [one Neon project maps to one Postgres database](https://neon.com/docs/use-cases/database-per-user#setting-up-neon-for-database-per-user). That means managing a fleet of databases at scale is really about managing thousands of Neon projects—the features we’ve progressively added to the Neon API, as we work with parrners, make this possible even with small teams.
 
 <Admonition type="info" title="true story">
 The Retool team was able to manage [300k+ Neon projects](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) with a team of one engineer.
@@ -104,7 +104,7 @@ Neon also offers dedicated interfaces for AI agents that need to spin up and man
 
 ### Neon Model Context Protocol (MCP) Server
 
-The [Model Context Protocol (MCP)](https://www.anthropic.com/news/model-context-protocol) is an emerging standard that enables large language models and AI agents to interact with APIs and developer tools using structured, natural-language commands. [Neon’s MCP server](https://neon.tech/docs/ai/neon-mcp-server) enables agents to perform tasks like
+The [Model Context Protocol (MCP)](https://www.anthropic.com/news/model-context-protocol) is an emerging standard that enables large language models and AI agents to interact with APIs and developer tools using structured, natural-language commands. [Neon’s MCP server](https://neon.com/docs/ai/neon-mcp-server) enables agents to perform tasks like
 
 - Creating and deleting Postgres databases
 - Running SQL queries
@@ -116,7 +116,7 @@ Originally, Neon’s MCP server was available for local use. Now, with the launc
 
 We also have a lightweight, agent-friendly toolkit for provisioning and querying Neon databases. It includes:
 
-- [The Neon TypeScript SDK,](https://neon.tech/docs/reference/typescript-sdk) for programmatic access to Neon resources.
+- [The Neon TypeScript SDK,](https://neon.com/docs/reference/typescript-sdk) for programmatic access to Neon resources.
 - [The Neon Serverless Driver](https://github.com/neondatabase/serverless), which supports SQL queries over HTTP and works in edge environments like Cloudflare Workers or Vercel Functions.
 
 ## Wrap Up

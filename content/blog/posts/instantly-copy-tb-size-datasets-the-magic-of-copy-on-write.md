@@ -57,7 +57,7 @@ Neon branches are what make this speed possible. Let’s take a closer look.
 
 ## Copy-on-write in action
 
-This demo lives within a [Neon project](https://neon.tech/docs/manage/overview). When we built it, we loaded the original 1 TB dataset (1047.48 GB to be exact) into the main branch of this project:
+This demo lives within a [Neon project](https://neon.com/docs/manage/overview). When we built it, we loaded the original 1 TB dataset (1047.48 GB to be exact) into the main branch of this project:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write/ad4nxfjrphm9-wyxdeo0fik84kws6cb4q58dvb2fztxvsvxyfrrwyin3mnhgc3fbvhvcnvwdmsokpjhtmem0cseyizwhiel-6dosyajzgqmqtwjnumnffx03pxqkum-gisrltg4svdq-336bed3b.png)
 
@@ -101,8 +101,8 @@ You may still be thinking, _this is flashy for a demo—but how can I benefit fr
 
 Once you’ve experimented with branches and understand the basics of how they work, it gets easier to appreciate their potential. Here are the most popular use cases among our user base:
 
-- **Ephemeral dev/test environments**. If you sync a testing dataset into a Neon main branch, you can use branches to create as many ephemeral environments as you need for development and testing. Each branch serves as a clean, independent workspace. When it’s time to resync the environments, you do it with a single click or an API call. [Read more.](https://neon.tech/docs/use-cases/dev-test)
-- **Previews.** You can also use Neon branches to automatically create a preview environment for each pull request, e.g. via Vercel. Each preview branch mirrors the same state as production at the time it was created. When the pull request is closed, you delete the branch. [This guide](https://neon.tech/docs/guides/vercel-previews-integration) explains how to set this up with Vercel.
+- **Ephemeral dev/test environments**. If you sync a testing dataset into a Neon main branch, you can use branches to create as many ephemeral environments as you need for development and testing. Each branch serves as a clean, independent workspace. When it’s time to resync the environments, you do it with a single click or an API call. [Read more.](https://neon.com/docs/use-cases/dev-test)
+- **Previews.** You can also use Neon branches to automatically create a preview environment for each pull request, e.g. via Vercel. Each preview branch mirrors the same state as production at the time it was created. When the pull request is closed, you delete the branch. [This guide](https://neon.com/docs/guides/vercel-previews-integration) explains how to set this up with Vercel.
 - **Local development.** On a team, every engineer can have their own Neon branch as a personal development environment, preloaded with a realistic dataset.
 
 ## Not all branching is the same
@@ -149,7 +149,7 @@ select * from users;
 
 Only the table definitions exist, but the data has not been brought into the branch with it. This is the implementation of branching that [Supabase](https://supabase.com/docs/guides/deployment/branching) and [Planetscale](https://planetscale.com/docs/concepts/branching) offer (Planetscale has a separate Data Branching feature that we’ll discuss in a minute).
 
-Branching schemas can be useful for some very specific use cases ([which is why we’re planning to offer this in Neon soon](https://neon.tech/docs/introduction/roadmap)) but for most workflows, schema-only branching has a massive trade-off: **it still requires loading a dataset into every branch.** If you wanted to implement this type of branching for your dev/test environments for example, you would still be stuck managing seed data files, which is complex (code to manage), slow (generation takes time), and error-prone (not necessarily representative of production).
+Branching schemas can be useful for some very specific use cases ([which is why we’re planning to offer this in Neon soon](https://neon.com/docs/introduction/roadmap)) but for most workflows, schema-only branching has a massive trade-off: **it still requires loading a dataset into every branch.** If you wanted to implement this type of branching for your dev/test environments for example, you would still be stuck managing seed data files, which is complex (code to manage), slow (generation takes time), and error-prone (not necessarily representative of production).
 
 ### Schema and data branching
 
@@ -183,7 +183,7 @@ It’s easy to see how the Planetscale method is also problematic at scale, e.g.
 
 ### The next frontier: Schema and data branching w/ PII transformed
 
-From here, it’s easy to see what the next step would be. If we consider [Neon’s model for ephemeral environments](https://neon.tech/docs/use-cases/dev-test), if you have PII and can’t use production data directly for dev and testing, you still have to manually load your transformed dataset at least once to the main branch (and keep it updated). Many environments can be directly derived from it, but some management of seed/transformed data is still necessary.
+From here, it’s easy to see what the next step would be. If we consider [Neon’s model for ephemeral environments](https://neon.com/docs/use-cases/dev-test), if you have PII and can’t use production data directly for dev and testing, you still have to manually load your transformed dataset at least once to the main branch (and keep it updated). Many environments can be directly derived from it, but some management of seed/transformed data is still necessary.
 
 Instead, the ideal workflow would be
 

@@ -95,7 +95,7 @@ This load variability makes traditional database provisioning very inefficient. 
 
 Neon now powers all of Vapi’s business-critical Postgres workloads. While Vapi’s database workload is primarily read-driven, write operations spike in real time as calls are processed. Call metadata—such as events, status updates, and token usage—is written to Neon instantly. The database scales up when demand surges and scales down when traffic dips.
 
-**Vapi migrated from Supabase to Neon for exactly this reason: real-time** [autoscaling](https://neon.tech/docs/introduction/autoscaling). With Neon’s serverless architecture and compute and storage autoscaling, the Vapi team no longer has to worry about overprovisioning or hitting performance ceilings.
+**Vapi migrated from Supabase to Neon for exactly this reason: real-time** [autoscaling](https://neon.com/docs/introduction/autoscaling). With Neon’s serverless architecture and compute and storage autoscaling, the Vapi team no longer has to worry about overprovisioning or hitting performance ceilings.
 
 <blockquote>
 <p><strong>“Database migrations are always a headache, but the Neon team made it a smooth process. Their support helped us troubleshoot performance issues and get everything running fast” (<a href="https://www.linkedin.com/in/tejas-siripurapu-7b7b81105/overlay/about-this-profile/">Tejas Siripurapu</a>, Founding Engineer at <a href="https://vapi.ai/?utm_source=partner&amp;utm_campaign=neon-web&amp;utm_term=neon&amp;utm_medium=neon-web&amp;utm_content=blog">Vapi.ai</a>)</strong></p>
@@ -103,7 +103,7 @@ Neon now powers all of Vapi’s business-critical Postgres workloads. While Vapi
 
 ### Reliable connection pooling
 
-Connection pooling is critical for Vapi. To efficiently manage their thousands of concurrent voice interactions, Vapi uses Neon’s [connection pooler](https://neon.tech/docs/connect/connection-pooling), built on PgBouncer. Like all resources in Neon, concurrent connections scale automatically with load: as compute autoscales up and down, the pooler adjusts dynamically, supporting up to 10,000 concurrent calls.
+Connection pooling is critical for Vapi. To efficiently manage their thousands of concurrent voice interactions, Vapi uses Neon’s [connection pooler](https://neon.com/docs/connect/connection-pooling), built on PgBouncer. Like all resources in Neon, concurrent connections scale automatically with load: as compute autoscales up and down, the pooler adjusts dynamically, supporting up to 10,000 concurrent calls.
 
 <blockquote>
 <p><strong>“We love that Neon just uses PgBouncer under the hood—no unexpected behavior, no surprises. It keeps our database connections stable, even under heavy load” (<a href="https://www.linkedin.com/in/tejas-siripurapu-7b7b81105/overlay/about-this-profile/">Tejas Siripurapu</a>, Founding Engineer at <a href="https://vapi.ai/?utm_source=partner&amp;utm_campaign=neon-web&amp;utm_term=neon&amp;utm_medium=neon-web&amp;utm_content=blog">Vapi.ai</a>)</strong></p>

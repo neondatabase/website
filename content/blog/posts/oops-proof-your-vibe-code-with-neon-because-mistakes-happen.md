@@ -42,13 +42,13 @@ seo:
 
 If you’re vibe coding an app, don’t leave the database choice up to the AI code generator. Take control and tell it you want to use **Neon**. Why? Because Neon’s built-in safety features ensure your app stays secure and runs smoothly, even if you’re not a database expert!
 
-It’s free to [sign up](https://console.neon.tech/signup), and our [free tier](https://neon.tech/pricing) lets you create up to 10 databases and 10 [branches](https://neon.tech/docs/introduction/branching) per project! Plus, Neon has integrations with [v0](https://v0.dev/), [Windsurf](https://codeium.com/windsurf), and [create.xyz](https://www.create.xyz/), making it easier than ever to add a database to your app.
+It’s free to [sign up](https://console.neon.tech/signup), and our [free tier](https://neon.tech/pricing) lets you create up to 10 databases and 10 [branches](https://neon.com/docs/introduction/branching) per project! Plus, Neon has integrations with [v0](https://v0.dev/), [Windsurf](https://codeium.com/windsurf), and [create.xyz](https://www.create.xyz/), making it easier than ever to add a database to your app.
 
 Neon also helps protect your app from malicious attacks and gives you powerful recovery options if something goes wrong!
 
 ## 1. PITR
 
-There may be instances where your AI code generator creates code that modifies your database schema. If these changes cause your application to break, you can use [Point-in-Time Restore](https://neon.tech/docs/manage/backups#instant-point-in-time-restore-pitr) (PITR) to roll back your database to a previous working state.
+There may be instances where your AI code generator creates code that modifies your database schema. If these changes cause your application to break, you can use [Point-in-Time Restore](https://neon.com/docs/manage/backups#instant-point-in-time-restore-pitr) (PITR) to roll back your database to a previous working state.
 
 To restore your database in Neon, go to the **Restore** section in the Neon console, select the **main**, or **production** branch, choose the desired date, and start the restore process.
 
@@ -120,7 +120,7 @@ It’s an easy mistake to make, but just as easy to prevent using Neon’s serve
 
 ### Neon serverless driver
 
-Neon’s [serverless driver](https://neon.tech/docs/serverless/serverless-driver) automatically prevents SQL injection by safely parameterizing variables, even when directly injecting them into SQL statements.
+Neon’s [serverless driver](https://neon.com/docs/serverless/serverless-driver) automatically prevents SQL injection by safely parameterizing variables, even when directly injecting them into SQL statements.
 
 ```javascript
 sql`SELECT * FROM users WHERE user_id=${id}`;
@@ -168,7 +168,7 @@ postgresql://neondb_owner:abc_123xyz@ep-small-block-99-pooler.us-east-2.aws.neon
 
 By default, Neon rejects any connections that do not specify an `sslmode`, ensuring all data transfers remain secure and protected from unauthorized access.
 
-<br />However, there are different levels of protection when using SSL/TLS encryption, which you can configure by appending an `sslmode` parameter to your connection string. You can read more about the connection modes in our documentation here: [Connection modes](https://neon.tech/docs/connect/connect-securely#connection-modes).
+<br />However, there are different levels of protection when using SSL/TLS encryption, which you can configure by appending an `sslmode` parameter to your connection string. You can read more about the connection modes in our documentation here: [Connection modes](https://neon.com/docs/connect/connect-securely#connection-modes).
 
 ## 7. Reset Password
 

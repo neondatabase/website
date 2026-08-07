@@ -44,16 +44,16 @@ Vibe coding is all about skipping the boilerplate and getting straight to the go
 
 ## Using AI for synthetic data generation
 
-But, before I go any further, let me take a step back and explain why I started exploring AI for synthetic data generation. At Neon, I’ve been focused on improving our [Dev/Test workflows](https://neon.tech/docs/use-cases/dev-test). Simply put, this means keeping production where it is while shifting development and testing environments to Neon. You can read more about this workflow here: [From Shared Chaos to Isolated Control with Neon](https://neon.tech/blog/from-shared-chaos-to-isolated-control-with-neon).
+But, before I go any further, let me take a step back and explain why I started exploring AI for synthetic data generation. At Neon, I’ve been focused on improving our [Dev/Test workflows](https://neon.com/docs/use-cases/dev-test). Simply put, this means keeping production where it is while shifting development and testing environments to Neon. You can read more about this workflow here: [From Shared Chaos to Isolated Control with Neon](https://neon.tech/blog/from-shared-chaos-to-isolated-control-with-neon).
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/vibe-coding-with-ai-to-generate-synthetic-data-part-1/twin-workflow-1-1024x316-e2cabc81.jpg)
 
 ## AI requirements for generating synthetic data
 
-To integrate synthetic data generation into our [Twin workflows](https://neon.tech/docs/guides/neon-twin-intro), the process needs to be seamless, scalable, and hands-off. Rather than relying on manual setup or maintenance, I want an approach that adapts dynamically and works universally across different Postgres databases, large and small, but that’s not all:
+To integrate synthetic data generation into our [Twin workflows](https://neon.com/docs/guides/neon-twin-intro), the process needs to be seamless, scalable, and hands-off. Rather than relying on manual setup or maintenance, I want an approach that adapts dynamically and works universally across different Postgres databases, large and small, but that’s not all:
 
 - The process should be fully automated.
-- It should run just like the [Full](https://neon.tech/docs/guides/neon-twin-full-pg-dump-restore) and [Partial](https://neon.tech/docs/guides/neon-twin-partial-pg-dump-restore) Twin workflows.
+- It should run just like the [Full](https://neon.com/docs/guides/neon-twin-full-pg-dump-restore) and [Partial](https://neon.com/docs/guides/neon-twin-partial-pg-dump-restore) Twin workflows.
 - No manual management of seed data generation scripts.
 - It must work with any PostgreSQL schema.
 - New synthetic data should be generated automatically with every production schema change.

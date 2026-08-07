@@ -72,7 +72,7 @@ Once your Postgres instance in RDS reaches a certain size, full logical backups 
 
 When storage and compute are tightly coupled, when environments are full instance clones, and when scaling is manual, costs naturally spiral as you scale – there’s no other way around it. [Neon](https://neon.tech/home) was built to break this pattern.
 
-If you’re new here: Neon is a [serverless Postgres platform](https://neon.tech/docs/get-started-with-neon/why-neon) built to fix all the inefficiencies of traditional managed databases. By [separating storage and compute](https://neon.tech/docs/introduction/architecture-overview) and implementing an innovative storage design with [copy-on-write branching](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write), Neon enables a more flexible and efficient way to manage Postgres at scale.
+If you’re new here: Neon is a [serverless Postgres platform](https://neon.com/docs/get-started-with-neon/why-neon) built to fix all the inefficiencies of traditional managed databases. By [separating storage and compute](https://neon.com/docs/introduction/architecture-overview) and implementing an innovative storage design with [copy-on-write branching](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write), Neon enables a more flexible and efficient way to manage Postgres at scale.
 
 ### Create branches instead of full instances
 

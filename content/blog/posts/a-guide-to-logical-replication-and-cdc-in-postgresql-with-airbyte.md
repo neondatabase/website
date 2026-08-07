@@ -128,7 +128,7 @@ Effectively managing and scaling PostgreSQL deployments in the cloud can be expe
 
 Neon recently added support for [logical replication](https://neon.tech/blog/change-data-capture-with-serverless-postgres), and is fully-compatible with Airbyte’s CDC solution. Pairing a cloud database like Neon with Airbyte’s own managed offering, Airbyte Cloud, can deliver a scalable, reliable, and low-cost solution for your OLTP and replication needs.
 
-To get started, check out Neon’s [documentation](https://neon.tech/docs/guides/logical-replication-airbyte) on connecting to Airbyte.
+To get started, check out Neon’s [documentation](https://neon.com/docs/guides/logical-replication-airbyte) on connecting to Airbyte.
 
 **Final Thoughts**
 

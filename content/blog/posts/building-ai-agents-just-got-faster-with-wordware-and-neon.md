@@ -74,7 +74,7 @@ Since Wordware is all about building and iterating quickly, their architecture c
 
 [Neon](https://neon.tech/) is a serverless Postgres database that prioritizes development speed. With serverless features like scale-to-zero and autoscaling, it saves developers the hassle of sizing servers and paying for unused capacity.
 
-On top of it, Neon’s [native database branching capabilities via copy-on-write](https://neon.tech/docs/introduction/branching) allow Wordware to instantly create previews on real data with minimal setup. The compounded value of this feature is “immense”, they said—it enables them to identify and fix problems early, preventing major system outages and reducing the need for emergency fixes.
+On top of it, Neon’s [native database branching capabilities via copy-on-write](https://neon.com/docs/introduction/branching) allow Wordware to instantly create previews on real data with minimal setup. The compounded value of this feature is “immense”, they said—it enables them to identify and fix problems early, preventing major system outages and reducing the need for emergency fixes.
 
 <blockquote>
 <p><strong>“Creating previews on real data gives us another level of confidence that, when we merge changes into prod, things will actually work. In Wordware, everything – from Stripe webhooks to just new code that’s being run— gets put on some preview URL using a Neon branch”</strong></p>
@@ -83,7 +83,7 @@ On top of it, Neon’s [native database branching capabilities via copy-on-write
 
 Wordware’s development workflow is designed for speed and efficiency, focusing on minimizing friction to maximize velocity:
 
-- When a developer picks up a ticket in Linear, they create a new Git branch for their work. As soon as they push this branch, it gets deployed as a fresh instance via [Vercel](https://neon.tech/docs/guides/vercel).
+- When a developer picks up a ticket in Linear, they create a new Git branch for their work. As soon as they push this branch, it gets deployed as a fresh instance via [Vercel](https://neon.com/docs/guides/vercel).
 - This deployment process includes hooking up a new Neon branch for the database, making the environment an exact copy of production. [Everything is set up automatically](https://neon.tech/flow).
 - Every change, whether it’s code, environment variables, or database migrations, is deployed to a preview URL.
 - The team can then review and test the merge request without having to check out the code or configure their local environments. This setup allows anyone to run and interact with the new feature without any manual set up, ensuring any issues are identified early.
@@ -97,7 +97,7 @@ As developers continue to make changes and push updates, these get built and dep
 <cite>Robert Chandler, CTO at Wordware.ai</cite>
 </blockquote>
 
-Another area where Neon and Wordware align is in their serverless approach. Wordware is built on serverless architecture; serverless unlocks scalability without the need to manage infrastructure, and Neon brings the serverless experience to Postgres. Neon has an [API-first feel](https://neon.tech/docs/reference/api-reference), robust [connection pooling](https://neon.tech/docs/connect/connection-pooling), and works seamlessly with an architecture that relies heavily on AWS Lambdas, like Wordware’s.
+Another area where Neon and Wordware align is in their serverless approach. Wordware is built on serverless architecture; serverless unlocks scalability without the need to manage infrastructure, and Neon brings the serverless experience to Postgres. Neon has an [API-first feel](https://neon.com/docs/reference/api-reference), robust [connection pooling](https://neon.com/docs/connect/connection-pooling), and works seamlessly with an architecture that relies heavily on AWS Lambdas, like Wordware’s.
 
 Neon’s uniqueness lies in its ability to apply serverless practices while maintaining the flexibility of traditional Postgres. While other serverless databases like DynamoDB excel at scale by enforcing specific access patterns through a key-value store architecture, this can be limiting during the early stages of a startup. In DynamoDB, adding new records requires careful planning on how they will be read, written, updated, and queried. Running joins is challenging, and denormalizing data can be cumbersome.
 

@@ -56,7 +56,7 @@ For this interactive demo,
 
 1. We built a simple web app, a [social media feed](https://twitter-clone-outage-demo.vercel.app/). It loads posts from a real Postgres database running on [Neon](https://neon.tech/home).
 2. Then, we simulate a database failure. The app crashes, everything breaks.
-3. To fix it, we trigger an [instant restore](https://neon.tech/docs/guides/branch-restore) in Neon.
+3. To fix it, we trigger an [instant restore](https://neon.com/docs/guides/branch-restore) in Neon.
 4. The app then comes back online—fast.
 
 Watch it happen or [run it yourself](https://neon-demos-outage.vercel.app/):
@@ -75,7 +75,7 @@ In the [Outage Simulator](https://neon-demos-outage.vercel.app/), this is what w
 
 1. We loaded 1 TB (1254 GB to be exact) into a main branch in a Neon project.
 2. Instead of having everyone connect to a shared database, each user session gets a dedicated Neon branch.
-3. When the app fails, we don’t reload a backup. Instead, Neon [creates a new branch from the exact point in time before the failure](https://neon.tech/docs/guides/branch-restore) and seamlessly redirects the app to this restored branch. This happens in less than a second.
+3. When the app fails, we don’t reload a backup. Instead, Neon [creates a new branch from the exact point in time before the failure](https://neon.com/docs/guides/branch-restore) and seamlessly redirects the app to this restored branch. This happens in less than a second.
 
 Thanks to Neon’s architecture, branches don’t copy data; they reference shared storage and only record changes. That’s what makes recovery so fast, even for multi-terabyte databases. **If this demo was 100 TB, recovery would be just as quick.**
 

@@ -112,7 +112,7 @@ Now, we’ll walk you through the workflow. We’ll be using three scripts:
 
 ### The create script
 
-To create new Neon projects in this example, we’ve created a simple CLI using [commander](https://www.npmjs.com/package/commander/v/5.1.0) and use the Neon API [createProject](https://api-docs.neon.tech/reference/createproject) method:
+To create new Neon projects in this example, we’ve created a simple CLI using [commander](https://www.npmjs.com/package/commander/v/5.1.0) and use the Neon API [createProject](https://neon.com/docs/reference/api/projects/create-project) method:
 
 ```javascript
 import { Command } from 'commander';
@@ -165,7 +165,7 @@ In our example, we’ve used this same approach to create 4 projects. They are:
 3. Finance Co
 4. Talent Biz
 
-To use this Neon API you’ll need to create an API key. You can read more about API keys in the docs: [Create an API key](https://api-docs.neon.tech/reference/createapikey).
+To use this Neon API you’ll need to create an API key. You can read more about API keys in the docs: [Create an API key](https://neon.com/docs/reference/api/api-keys/create-api-key).
 
 ### The generate script
 
@@ -299,8 +299,8 @@ Ok, now, the script. This is what it does:
 1. There are two variables, `repoOwner` and `repoName` that define the owner and the name of the repository. Update these to suit your needs.
 2. Check to see if a `configs` directory exists. If it doesn’t, create one. This will be where a new directory for each project/customer will be created.
 3. Make a request to the GitHub API to get a `publicKeyData`. This will be used later by the [encryptedSecret](https://github.com/neondatabase-labs/neon-database-per-tenant-drizzle/blob/main/src/utils/encrypt-secret.js) utility function.
-4. Make a request using the Neon API to [listProjects](https://api-docs.neon.tech/reference/listprojects), which returns a list of projects / customer databases.
-5. Iterate over each project and use the project id to make a second call to the Neon API, [getConnectionUri](https://api-docs.neon.tech/reference/getconnectionuri), to get the connection string for each.
+4. Make a request using the Neon API to [listProjects](https://neon.com/docs/reference/api/projects/list-projects), which returns a list of projects / customer databases.
+5. Iterate over each project and use the project id to make a second call to the Neon API, [getConnectionUri](https://neon.com/docs/reference/api/projects/get-connection-uri), to get the connection string for each.
 6. Create new variables for:
    1. `safeName` uses regex to ensure the customer name is suitable to use a directory name, removing any spaces and converting them to a – and lastly, all characters to lowercase.
    2. `path` variable is the path to where the DrizzleORM config should be written and uses a hardcoded value of configs, plus the `safeName` variable.

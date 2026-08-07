@@ -41,7 +41,7 @@ To create your first Neon project on Azure, [click here](https://console.neon.te
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/first-azure-region-available-in-neon/ad4nxdpcnkau2s5g3glhfzioo4obfcs4sxkwy87a1vuxl9df7qy2zorcsmu2ctalcdqoyiwv7fcpfqr9pp0l-a2jlhba-32wpctfy6gzmgcuumhtffs6ggek0isyr2e50waes6g9et7cciqophiggyu7ylso-6915468b.png)
 
-We’ll be adding more Azure regions soon—let us know what regions you’d like to see next on our [regions page.](https://neon.tech/docs/introduction/regions#request-a-region)
+We’ll be adding more Azure regions soon—let us know what regions you’d like to see next on our [regions page.](https://neon.com/docs/introduction/regions#request-a-region)
 
 ## How pricing works during the Beta
 

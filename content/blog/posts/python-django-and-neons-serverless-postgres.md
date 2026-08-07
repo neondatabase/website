@@ -202,7 +202,7 @@ This will result in several tables being created in your Postgres database, incl
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/python-django-and-neons-serverless-postgres/screenshot-2024-01-24-at-115502-1024x572-389a6c85.png)
 
-Use the [SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) in the Neon Console to insert elements into the `elements_element` table using the following INSERT statement:
+Use the [SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) in the Neon Console to insert elements into the `elements_element` table using the following INSERT statement:
 
 ```sql
 INSERT INTO elements_element (name, symbol, atomic_number)

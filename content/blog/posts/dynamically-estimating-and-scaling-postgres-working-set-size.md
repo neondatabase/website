@@ -106,7 +106,7 @@ One assumption that helped was that we knew we only cared about the number of di
 
 Doing this gives us a way to estimate the number of distinct pages accessed since some arbitrary time in the past, which gave us much more data to use in experimentation – and as we’ll see below, plenty of data to use in the final algorithm as well.
 
-**Pro-tip:** You can try this out yourself! We implemented this as the Postgres function `neon.approximate_working_set_size_seconds(d)`, which returns the HLL estimate of the working set size (i.e. number of distinct pages accessed) for the last d seconds. Check out [our docs](https://neon.tech/docs/extensions/neon) for more information on how to use the `neon` extension.
+**Pro-tip:** You can try this out yourself! We implemented this as the Postgres function `neon.approximate_working_set_size_seconds(d)`, which returns the HLL estimate of the working set size (i.e. number of distinct pages accessed) for the last d seconds. Check out [our docs](https://neon.com/docs/extensions/neon) for more information on how to use the `neon` extension.
 
 ### Keeping it simple: Finding a heuristic
 

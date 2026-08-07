@@ -141,7 +141,7 @@ export const db = drizzle(sql, {
 });
 ```
 
-Next, create a file named _.env.local_ in the root of the Next.js project directory and add your [database URL from the Neon Console](https://neon.tech/docs/connect/connect-from-any-app) as an environment variable named DATABASE_URL.
+Next, create a file named _.env.local_ in the root of the Next.js project directory and add your [database URL from the Neon Console](https://neon.com/docs/connect/connect-from-any-app) as an environment variable named DATABASE_URL.
 
 ```bash
 # Copy this from your project dashboard on https://console.neon.tech

@@ -175,7 +175,7 @@ If you’re open to trying a better way, Neon takes care of this problem by **dy
 
 ### Autoscale Postgres
 
-[Neon’s autoscaling](https://neon.tech/docs/introduction/autoscaling) dynamically adjusts the compute resources allocated to a Neon compute endpoint based on the current load, eliminating manual intervention. The benefits:
+[Neon’s autoscaling](https://neon.com/docs/introduction/autoscaling) dynamically adjusts the compute resources allocated to a Neon compute endpoint based on the current load, eliminating manual intervention. The benefits:
 
 - Neon automatically handles workloads with varying demand, such as applications with regional or time-based changes in traffic.
 - Neon optimizes resource utilization, ensuring you only pay for the resources you need rather than over-provisioning for peak loads.
@@ -186,7 +186,7 @@ If you’re open to trying a better way, Neon takes care of this problem by **dy
 
 ### Scale Postgres to zero
 
-[Autosuspend](https://neon.tech/docs/introduction/auto-suspend) complements autoscaling by allowing compute instances to scale to zero when not in use. By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity, but as a user, you can configure this behavior as you please. For example, [you can disable autosuspend for your production databases (which they’ll most likely stay on 24/7 anyways) and keep it enabled for your non-production instances to optimize compute costs.](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero)
+[Autosuspend](https://neon.com/docs/introduction/auto-suspend) complements autoscaling by allowing compute instances to scale to zero when not in use. By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity, but as a user, you can configure this behavior as you please. For example, [you can disable autosuspend for your production databases (which they’ll most likely stay on 24/7 anyways) and keep it enabled for your non-production instances to optimize compute costs.](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero)
 
 ### Simplify one-database-per-tenant
 

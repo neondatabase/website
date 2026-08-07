@@ -79,7 +79,7 @@ Copy-on-write combined with scale-to-zero works well for development teams that 
 
 Neon enables every developer to have a branch of the production database for development and testing features with “real” data.
 
-As a developer, you know way too well how important it is to test your code in your CI/CD before deploying it to production. But what about your database? With the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), you can implement branching into your CI/CD pipeline to ensure that your database changes won’t break your application or cause other problems in production.
+As a developer, you know way too well how important it is to test your code in your CI/CD before deploying it to production. But what about your database? With the [Neon API](https://neon.com/docs/reference/api/get-started), you can implement branching into your CI/CD pipeline to ensure that your database changes won’t break your application or cause other problems in production.
 
 Tune in to [our talk about the Neon API](https://www.youtube.com/watch?v=NI2x1mhB6uI) to learn more about using database branching to address common pain points in your workflows.
 
@@ -91,7 +91,7 @@ In your Neon account, you can create multiple projects. Every project comes with
 
 `project xyz -> main branch -> neondb database`
 
-You can learn more about [Neon account hierarchy](https://neon.tech/docs/manage/overview/) in the documentation.
+You can learn more about [Neon account hierarchy](https://neon.com/docs/manage/overview/) in the documentation.
 
 ## Recap
 

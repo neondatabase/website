@@ -40,7 +40,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/how-psql-pg-neon-tech-works/neon-psql-550eec13.jpg)
 
-One of the things that got me really excited and curious about Neon, long before I joined the company, was the `psql -h pg.neon.tech` command. I’ve recently come to find out that other employees here went through the same “wow” experience even before they joined the company. So, I’ve decided to write a little bit about [how to use it](https://neon.tech/docs/connect/passwordless-connect), how it works and why it’s so useful.
+One of the things that got me really excited and curious about Neon, long before I joined the company, was the `psql -h pg.neon.tech` command. I’ve recently come to find out that other employees here went through the same “wow” experience even before they joined the company. So, I’ve decided to write a little bit about [how to use it](https://neon.com/docs/connect/passwordless-connect), how it works and why it’s so useful.
 
 When you run `psql -h pg.neon.tech` in your CLI, you get a URL that you can click on:
 
@@ -101,7 +101,7 @@ Confusing? That’s okay, we’ve got a diagram that should help clear things up
 
 ## Why is this command so interesting?
 
-This command is extremely useful for developers playing around with more than one Neon project, or multiple [compute endpoints](https://neon.tech/docs/manage/endpoints) inside the same Neon project. Most of us are not keeping track of the URLs or credentials for all the endpoint/databases that we’re connecting to in our development workflow. So, it’s simply much easier to just type `psql -h pg.neon.tech` (or even better, to have a `pgneon` alias in your CLI for this!).
+This command is extremely useful for developers playing around with more than one Neon project, or multiple [compute endpoints](https://neon.com/docs/manage/endpoints) inside the same Neon project. Most of us are not keeping track of the URLs or credentials for all the endpoint/databases that we’re connecting to in our development workflow. So, it’s simply much easier to just type `psql -h pg.neon.tech` (or even better, to have a `pgneon` alias in your CLI for this!).
 
 Finally, both the regular Neon Proxy as well as the “Link Proxy” described in this article are [open source](https://github.com/neondatabase/neon/tree/507f1a5bdd4a168e589550e7c1bb5ac6de41643f/proxy). So, feel free to poke around in the codebase and to ask us any questions you might have on its architecture [on our Discord server](https://neon.tech/discord).
 

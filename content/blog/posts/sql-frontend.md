@@ -64,15 +64,15 @@ And this is totally fine for many apps! By having your UI be able to retrieve an
 
 There’s a few things that traditional databases will have to build in order to make it safe to do “SQL from the frontend”:
 
-1. Some form of [query and query parameter allow-listing](https://neon.tech/docs/guides/neon-authorize-future#query-allow-listing). It’d be essential for developers to be able to dictate up front which query shapes can be sent to the database in production. Otherwise, your database instance will become a free for all crypto mining playground.
-   1. This needs to be done _right_, which means that there needs to be really good tooling to automatically generate and maintain these allow-lists over time. (We have some ideas for how Neon could build this from [development branches](https://neon.tech/docs/introduction/branching).)
+1. Some form of [query and query parameter allow-listing](https://neon.com/docs/guides/neon-authorize-future#query-allow-listing). It’d be essential for developers to be able to dictate up front which query shapes can be sent to the database in production. Otherwise, your database instance will become a free for all crypto mining playground.
+   1. This needs to be done _right_, which means that there needs to be really good tooling to automatically generate and maintain these allow-lists over time. (We have some ideas for how Neon could build this from [development branches](https://neon.com/docs/introduction/branching).)
    2. SurrealDB [implements something like this](https://ddlele.com/posts/surreal-db-row-security#creating-the-users-scope).
-2. [Rate limiting](https://neon.tech/docs/guides/neon-authorize-future#proxy-rate-limiting) of requests by IP to prevent DDoS-style attacks.
+2. [Rate limiting](https://neon.com/docs/guides/neon-authorize-future#proxy-rate-limiting) of requests by IP to prevent DDoS-style attacks.
 3. Authorization/Access Rules for the data. As an example, Postgres already has [Row-Level Security](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) for this.
 
 ## And now what?
 
-As we were working on [Neon RLS](https://neon.tech/blog/introducing-neon-authorize), one of the use cases we considered was “SQL from the frontend” apps. And while it isn’t necessarily ready for that yet, we [wrote down our thoughts on the future of the feature](https://neon.tech/docs/guides/neon-authorize-future) and a lot of what’s in there is indeed geared towards that. This is definitely an area we’re interested in exploring more, so we’d love to get any feedback on it. Please [reach out to me](https://x.com/davidrfgomes) or send us a message on [our Discord server](https://neon.tech/discord) if you have any ideas.
+As we were working on [Neon RLS](https://neon.tech/blog/introducing-neon-authorize), one of the use cases we considered was “SQL from the frontend” apps. And while it isn’t necessarily ready for that yet, we [wrote down our thoughts on the future of the feature](https://neon.com/docs/guides/neon-authorize-future) and a lot of what’s in there is indeed geared towards that. This is definitely an area we’re interested in exploring more, so we’d love to get any feedback on it. Please [reach out to me](https://x.com/davidrfgomes) or send us a message on [our Discord server](https://neon.tech/discord) if you have any ideas.
 
 <Admonition type="important" title="Update: Neon RLS is now part of the Neon Data API">
 We’ve moved the functionality previously known as Neon RLS / Neon Authorize into the Neon Data API. You can [read more about the Data API here](https://neon.com/docs/data-api/get-started) and start using it in your projects today.

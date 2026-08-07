@@ -47,16 +47,16 @@ This blog post teaches you an easy method to implement row-level security in you
 [AWS Cognito](https://aws.amazon.com/pm/cognito/?trk=814a4b59-9fc6-4dda-8199-bd06c380b692&sc_channel=ps&ef_id=CjwKCAiA3ZC6BhBaEiwAeqfvyk_0ibOUKOC_1-Ke8OflGNuMXBjb3ZkKZW3t50ck3O0C6aq1F0sCzRoCaMoQAvD_BwE:G:s&s_kwcid=AL!4422!3!652240143559!e!!g!!cognito!19878797452!155825919588&gbraid=0AAAAADjHtp8ebQXdQ6F9JJLkesdyUp56E&gclid=CjwKCAiA3ZC6BhBaEiwAeqfvyk_0ibOUKOC_1-Ke8OflGNuMXBjb3ZkKZW3t50ck3O0C6aq1F0sCzRoCaMoQAvD_BwE) is a popular tool for handing authorization in AWS architectures. It has good options for working with social sign-ins, traditional email/password combos, or federated identities, also making it easy to set up features like multi-factor authentication.
 
 <Admonition type="info">
-We also have tutorials for setting up RLS with many other Authorization providers, including Clerk, Auth0, Stack Auth, Keycloak, and more. [Check out our docs](https://neon.tech/docs/guides/neon-authorize#supported-providers).
+We also have tutorials for setting up RLS with many other Authorization providers, including Clerk, Auth0, Stack Auth, Keycloak, and more. [Check out our docs](https://neon.com/docs/guides/neon-authorize#supported-providers).
 </Admonition>
 
 ### Neon and its serverless driver
 
-[Neon](https://neon.tech/home) is Postgres packaged into a serverless platform, offering features like autoscaling and scale-to-zero. It integrates very well within AWS architectures, especially in serverless apps: Neon comes with a HTTP/Websockets-based [serverless driver](https://neon.tech/docs/serverless/serverless-driver) optimized for ephemeral environments (e.g. Lambdas) which often lead to connection issues with standard Postgres drivers. Neon has a Free Plan, so you can [create an account](https://console.neon.tech/signup) to follow along.
+[Neon](https://neon.tech/home) is Postgres packaged into a serverless platform, offering features like autoscaling and scale-to-zero. It integrates very well within AWS architectures, especially in serverless apps: Neon comes with a HTTP/Websockets-based [serverless driver](https://neon.com/docs/serverless/serverless-driver) optimized for ephemeral environments (e.g. Lambdas) which often lead to connection issues with standard Postgres drivers. Neon has a Free Plan, so you can [create an account](https://console.neon.tech/signup) to follow along.
 
 ### Neon Authorize
 
-[Neon Authorize](https://neon.tech/docs/guides/neon-authorize) is an open-source tool that takes the Postgres developer experience up a notch by making row-level security easy to implement. Instead of hardcoding user permissions, Neon Authorize allows you to use JWTs from your authentication provider (like AWS Cognito) to enforce fine-grained access controls directly at the database level. [Read more about it.](https://neon.tech/blog/introducing-neon-authorize)
+[Neon Authorize](https://neon.com/docs/guides/neon-authorize) is an open-source tool that takes the Postgres developer experience up a notch by making row-level security easy to implement. Instead of hardcoding user permissions, Neon Authorize allows you to use JWTs from your authentication provider (like AWS Cognito) to enforce fine-grained access controls directly at the database level. [Read more about it.](https://neon.tech/blog/introducing-neon-authorize)
 
 ## Step-by-step guide: AWS Cognito and Postgres’ Row-Level Security
 

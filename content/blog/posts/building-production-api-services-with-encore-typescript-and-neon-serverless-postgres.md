@@ -238,11 +238,11 @@ Visit the [Neon Console](https://console.neon.tech/), sign up, and create your f
 
 ### Add the Neon API Key
 
-Next, [create a Neon API ke](https://neon.tech/docs/manage/api-keys#create-an-api-key) y for your Neon account. Add this API key to the Neon section of the URL Shortener App Settings at `https://app.encore.dev/<app-id>/settings/integrations/neon` and **Save**.
+Next, [create a Neon API ke](https://neon.com/docs/manage/api-keys#create-an-api-key) y for your Neon account. Add this API key to the Neon section of the URL Shortener App Settings at `https://app.encore.dev/<app-id>/settings/integrations/neon` and **Save**.
 
 ![Encore link Neon account](https://cdn.neonapi.io/public/images/pages/blog/building-production-api-services-with-encore-typescript-and-neon-serverless-postgres/encore-neon-link-1024x692-7339bfaa.png)
 
-This allows Encore to provision and configure Neon projects in your Neon account using the [Neon API](https://neon.tech/docs/reference/api-reference). So, instead of the production database being hosted in the Encore account; the production Neon database will be in your personal Neon account.
+This allows Encore to provision and configure Neon projects in your Neon account using the [Neon API](https://neon.com/docs/reference/api-reference). So, instead of the production database being hosted in the Encore account; the production Neon database will be in your personal Neon account.
 
 ![Linked Neon account in Encore](https://cdn.neonapi.io/public/images/pages/blog/building-production-api-services-with-encore-typescript-and-neon-serverless-postgres/linked-neon-account-1024x397-34d6d294.png)
 

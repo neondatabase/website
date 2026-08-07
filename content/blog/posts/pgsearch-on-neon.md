@@ -170,7 +170,7 @@ To install the extension, simply run:
 CREATE EXTENSION IF NOT EXISTS pg_search;
 ```
 
-[Check out our docs for all the details.](https://neon.tech/docs/extensions/pg_search) If you’re not yet a Neon user, [create a free account today](https://console.neon.tech/signup) and start playing around with pg_search.
+[Check out our docs for all the details.](https://neon.com/docs/extensions/pg_search) If you’re not yet a Neon user, [create a free account today](https://console.neon.tech/signup) and start playing around with pg_search.
 
 ---
 

@@ -157,7 +157,7 @@ PouchDB shows us that local-first isn’t just about new, bleeding-edge tech–i
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/comparing-local-first-frameworks-and-approaches/use-cases-1024x473-1eb14d99.png)
 
-The ElectricSQL service listens for changes in your database using [Postgres logical replication](https://neon.tech/docs/guides/logical-replication-concepts) and efficiently syncs little subsets of data into connected local apps.
+The ElectricSQL service listens for changes in your database using [Postgres logical replication](https://neon.com/docs/guides/logical-replication-concepts) and efficiently syncs little subsets of data into connected local apps.
 
 The sync engine is only the server-side component though, you still need a local component to consume the data. [ElectricSQL has a Typescript client](https://www.npmjs.com/package/@electric-sql/client) that gives you basic functionality for consuming data from the sync engine:
 

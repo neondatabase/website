@@ -38,9 +38,9 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/api-track-schema-changes/neon-api-1-1024x576-78a92fa9.jpg)
 
-**We keep expanding our Schema Diff feature, this time adding an** [API endpoint](https://neon.tech/docs/guides/schema-diff#using-the-neon-api)**: `compare_schema`. You can use it in all your Neon projects, including the** [Free Plan](https://console.neon.tech/signup).
+**We keep expanding our Schema Diff feature, this time adding an** [API endpoint](https://neon.com/docs/guides/schema-diff#using-the-neon-api)**: `compare_schema`. You can use it in all your Neon projects, including the** [Free Plan](https://console.neon.tech/signup).
 
-[Schema Diff](https://neon.tech/docs/guides/schema-diff) allows you to easily compare schemas between Neon databases. It was first made available via the Neon Console and CLI, and we recently expanded it by launching the [Schema Diff GitHub Action](https://neon.tech/blog/track-schema-changes-automatically-in-your-pull-requests). This action integrates schema diffs directly into pull requests; whenever a pull request is created or updated, the GitHub Action runs a schema comparison, posting a comment in the PR summarizing the differences.
+[Schema Diff](https://neon.com/docs/guides/schema-diff) allows you to easily compare schemas between Neon databases. It was first made available via the Neon Console and CLI, and we recently expanded it by launching the [Schema Diff GitHub Action](https://neon.tech/blog/track-schema-changes-automatically-in-your-pull-requests). This action integrates schema diffs directly into pull requests; whenever a pull request is created or updated, the GitHub Action runs a schema comparison, posting a comment in the PR summarizing the differences.
 
 After shipping the GitHub Action, we wanted to extend these automation capabilities to other CI/CD pipelines via an API. Also, we saw another use case demanding an API for checking schema diffs: **Agentic systems**.
 
@@ -62,7 +62,7 @@ The `compare_schema` API facilitates this workflow by enabling programmatic sche
 
 What’s useful for agents is useful for developers. Agentic systems benefit from tools that enable autonomy, same for developers looking to streamline their pipelines.
 
-Database migrations are one of the trickiest things to automate. They require comparing the current database schema with a target schema, identifying discrepancies, writing migration scripts to align the two, and testing the migrations to ensure they work. The `compare_schema` API facilitates the automation of these steps, especially when combined with [Neon branches](https://neon.tech/docs/introduction/branching). Teams can set up a system in which:
+Database migrations are one of the trickiest things to automate. They require comparing the current database schema with a target schema, identifying discrepancies, writing migration scripts to align the two, and testing the migrations to ensure they work. The `compare_schema` API facilitates the automation of these steps, especially when combined with [Neon branches](https://neon.com/docs/introduction/branching). Teams can set up a system in which:
 
 1. Schema changes are applied and tested in a Neon branch. Branches include a copy of production data but don’t interfere with the production database (they have their own compute)
 2. The API is used to track schema discrepancies
@@ -72,7 +72,7 @@ This method reduces the risk of errors (since new schemas are being tested in re
 
 ## Taking a look at the API
 
-The [API](https://neon.tech/docs/guides/schema-diff#using-the-neon-api) accepts two Neon branch IDs and returns a schema diff, highlighting additions, modifications, and deletions in database objects. It supports these parameters:
+The [API](https://neon.com/docs/guides/schema-diff#using-the-neon-api) accepts two Neon branch IDs and returns a schema diff, highlighting additions, modifications, and deletions in database objects. It supports these parameters:
 
 - **`project_id`**: the ID of your Neon project
 - **`branch_id`**: the ID of the target branch to compare—the branch with the modified schema
@@ -113,4 +113,4 @@ The (-) lines indicate schema elements removed from the base branch, and the (+)
 
 ## Getting started
 
-Review our [API reference](https://api-docs.neon.tech/reference/getprojectbranchschemacomparison) for detailed instructions. If you don’t have a Neon account yet, you can create one for free [here](https://console.neon.tech/signup). Neon has a [Free Plan](https://neon.tech/pricing) that includes 10 projects, with 10 branches per project.
+Review our [API reference](https://neon.com/docs/reference/api/branches/get-project-branch-schema-comparison) for detailed instructions. If you don’t have a Neon account yet, you can create one for free [here](https://console.neon.tech/signup). Neon has a [Free Plan](https://neon.tech/pricing) that includes 10 projects, with 10 branches per project.

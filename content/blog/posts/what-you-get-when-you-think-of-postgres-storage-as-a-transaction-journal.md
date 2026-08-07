@@ -143,7 +143,7 @@ In Neon,
 - WAL is streamed to a [layered storage system](https://neon.tech/blog/get-page-at-lsn) where data is organized into immutable files in object storage.
 - Compute nodes are ephemeral and stateless.
 
-Neon relies on WAL to separate storage and compute through two different components: Safekeepers and Pageservers. Safekeepers ensure the durability of database changes; Postgres streams the WAL to the Safekeepers, where a [Paxos-like consensus algorithm](https://neon.tech/blog/paxos) ensures that transactions can be restored if lost (the core function of the WAL). Pageservers read the WAL from the Safekeepers to find the modified pages, convert them into Neon [Pages](https://neon.tech/docs/reference/glossary#page), and process them into S3 object storage.
+Neon relies on WAL to separate storage and compute through two different components: Safekeepers and Pageservers. Safekeepers ensure the durability of database changes; Postgres streams the WAL to the Safekeepers, where a [Paxos-like consensus algorithm](https://neon.tech/blog/paxos) ensures that transactions can be restored if lost (the core function of the WAL). Pageservers read the WAL from the Safekeepers to find the modified pages, convert them into Neon [Pages](https://neon.com/docs/reference/glossary#page), and process them into S3 object storage.
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal/screenshot-2024-04-30-at-91905percente2percent80percentafam-1024x437-5d970a12.png)
 
@@ -157,7 +157,7 @@ By reimagining the use of WAL, Neon can add new features to Postgres that improv
 
 Neon enables database branching via copy-on-write. This allows developers to create and manage separate branches of the database for development, testing, or staging without duplicating the entire database, similar to how branches are used in version control systems.
 
-The core element of the log we use for branching is the [LSN](https://neon.tech/docs/reference/glossary#lsn), the log sequence number. As we’ve seen above, every single entry to the log has a unique identifier that allows for precise synchronization and replication. When you [create a branch](https://neon.tech/docs/introduction/branching#branching-workflows) in Neon, you’re essentially creating a new pointer to a specific LSN in the WAL. This means that the branch starts with the exact same data as the parent branch at that point in time.
+The core element of the log we use for branching is the [LSN](https://neon.com/docs/reference/glossary#lsn), the log sequence number. As we’ve seen above, every single entry to the log has a unique identifier that allows for precise synchronization and replication. When you [create a branch](https://neon.com/docs/introduction/branching#branching-workflows) in Neon, you’re essentially creating a new pointer to a specific LSN in the WAL. This means that the branch starts with the exact same data as the parent branch at that point in time.
 
 Thanks to the copy-on-write mechanism, any changes made to the branch are isolated from the parent branch. When you write to the branch, Neon creates new pages (or new versions of pages) specifically for the branch, leaving the original pages untouched.
 
@@ -165,13 +165,13 @@ This is why creating a branch is fast and doesn’t impact the performance of th
 
 ### Instant PITR
 
-This storage architecture also allows for [quick point-in-time recoveries](https://neon.tech/docs/guides/branch-restore), enabling databases to be restored to any previous state defined by a LSN. This is made possible because the entire database state is continuously recorded in WAL, stored, and indexed in a way that makes historical data rapidly accessible.
+This storage architecture also allows for [quick point-in-time recoveries](https://neon.com/docs/guides/branch-restore), enabling databases to be restored to any previous state defined by a LSN. This is made possible because the entire database state is continuously recorded in WAL, stored, and indexed in a way that makes historical data rapidly accessible.
 
 Under the hood, instant recovery is a specialized form of branching. When you initiate a point-in-time recovery, Neon creates a new branch pointing to the specific LSN in the WAL corresponding to your chosen point in time. When you perform a Point-in-Time Restore, you restore to a particular LSN. The Pageserver retains all the WAL in a randomly-accessible format, so it can reconstruct pages as of any LSN, allowing for time travel queries.
 
 ### Ephemeral read replicas
 
-Another consequence of this custom storage are ephemeral, instant [read replicas](https://neon.tech/docs/introduction/read-replicas). Neon’s read replicas are independent read-only compute instances designed to perform read operations on the same data as the read-write primary. However, unlike traditional read replicas, Neon’s instant replicas do not actually replicate data across database instances.
+Another consequence of this custom storage are ephemeral, instant [read replicas](https://neon.com/docs/introduction/read-replicas). Neon’s read replicas are independent read-only compute instances designed to perform read operations on the same data as the read-write primary. However, unlike traditional read replicas, Neon’s instant replicas do not actually replicate data across database instances.
 
 Instead, both the read-write primary and the read-only replicas send read requests to the same Neon Pageserver, which serves as the single source of truth for the data. This is made possible by Neon’s unique architecture that separates storage and compute.
 
@@ -179,7 +179,7 @@ When the read-write primary makes updates, the Safekeepers durably store the dat
 
 ### Time travel queries
 
-Neon’s [time travel queries](https://neon.tech/docs/guides/time-travel-assist) leverage the LSN to enable querying the database at any previous state. Each transaction recorded in the WAL is associated with an LSN, which uniquely identifies every change. When a time travel query is executed, Neon’s Pageservers use the specified LSN to retrieve and reconstruct the database’s state at that particular moment. This functionality is useful for auditing and debugging, allowing developers to examine database states before and after specific changes, and comparing historical data against current data. It’s also useful for [double-checking the right timestamp before a PITR](https://neon.tech/docs/guides/time-travel-assist).
+Neon’s [time travel queries](https://neon.com/docs/guides/time-travel-assist) leverage the LSN to enable querying the database at any previous state. Each transaction recorded in the WAL is associated with an LSN, which uniquely identifies every change. When a time travel query is executed, Neon’s Pageservers use the specified LSN to retrieve and reconstruct the database’s state at that particular moment. This functionality is useful for auditing and debugging, allowing developers to examine database states before and after specific changes, and comparing historical data against current data. It’s also useful for [double-checking the right timestamp before a PITR](https://neon.com/docs/guides/time-travel-assist).
 
 ## A new way to build with Postgres
 

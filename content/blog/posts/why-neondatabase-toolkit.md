@@ -94,7 +94,7 @@ console.log(await toolkit.sql(project, `SELECT name FROM users`));
 await toolkit.deleteProject(project);
 ```
 
-Since you can access the underlying `toolkit.apiClient`, you can already perform any action from the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). However, we’ll be streamlining more features through the higher-level API such as [branching](https://neon.tech/docs/introduction/branching) and [autoscaling](https://neon.tech/docs/introduction/autoscaling) configuration. Furthermore, we’ll soon expose an easier way for consumers to dictate whether they wish to connect via HTTP, WebSockets or good old TCP. (The default will continue to be HTTP.)
+Since you can access the underlying `toolkit.apiClient`, you can already perform any action from the [Neon API](https://neon.com/docs/reference/api/get-started). However, we’ll be streamlining more features through the higher-level API such as [branching](https://neon.com/docs/introduction/branching) and [autoscaling](https://neon.com/docs/introduction/autoscaling) configuration. Furthermore, we’ll soon expose an easier way for consumers to dictate whether they wish to connect via HTTP, WebSockets or good old TCP. (The default will continue to be HTTP.)
 
 ### Building Agents? Try it. Join us.
 

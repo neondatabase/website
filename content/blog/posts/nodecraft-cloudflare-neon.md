@@ -104,7 +104,7 @@ A couple examples of how Nodecraft likes to use branching:
 
 ## Serverless for the win. Try it
 
-By combining serverless Postgres with Neon and edge computing with Cloudflare, Nodecraft has transformed the way they manage infrastructure. If you’d like to try this stack, [get started with Neon’s Free Plan](https://console.neon.tech/signup) (no credit card required, no spam). And as you explore, don’t forget to [use Hyperdrive](https://neon.tech/docs/guides/cloudflare-hyperdrive) for an extra boost!
+By combining serverless Postgres with Neon and edge computing with Cloudflare, Nodecraft has transformed the way they manage infrastructure. If you’d like to try this stack, [get started with Neon’s Free Plan](https://console.neon.tech/signup) (no credit card required, no spam). And as you explore, don’t forget to [use Hyperdrive](https://neon.com/docs/guides/cloudflare-hyperdrive) for an extra boost!
 
 ---
 

@@ -48,13 +48,13 @@ If you’ve been keeping up with the Neon story, we introduced database branchin
 <p>Neon allows us to develop much faster than we’ve ever been used to. Instead of putting a lot of effort into getting a synthetic dataset within Docker or local Postgres, we just test in a Neon branch with a perfect copy of production data. — Alex Klarfeld, – CEO and co-founder of Supergood.ai</p>
 </blockquote>
 
-The positive impact of branches on our customers’ workflows has been extraordinary. Building on this success, we’re thrilled to introduce [instant schema-only branches](https://neon.tech/docs/guides/branching-schema-only) for users in our [Early Access Program](https://console.neon.tech/app/settings/early-access), and spoiler alert: later this year, we plan to launch **anonymized branching**, enabling the anonymization of sensitive data whenever a new branch is created with data.
+The positive impact of branches on our customers’ workflows has been extraordinary. Building on this success, we’re thrilled to introduce [instant schema-only branches](https://neon.com/docs/guides/branching-schema-only) for users in our [Early Access Program](https://console.neon.tech/app/settings/early-access), and spoiler alert: later this year, we plan to launch **anonymized branching**, enabling the anonymization of sensitive data whenever a new branch is created with data.
 
 ## Database branches recap
 
-A database branch is similar to a code branch—a replica or copy of the main production database branch. However, unlike a code branch, [database branches](https://neon.tech/docs/introduction/branching) can be created in two different ways: schema-only, which includes only the structure that defines the tables and their data types, and data+schema, which consists of the structure and all the data stored in the database; a complete copy.
+A database branch is similar to a code branch—a replica or copy of the main production database branch. However, unlike a code branch, [database branches](https://neon.com/docs/introduction/branching) can be created in two different ways: schema-only, which includes only the structure that defines the tables and their data types, and data+schema, which consists of the structure and all the data stored in the database; a complete copy.
 
-Initially, we only supported full branching, but today we’re introducing schema-only branches. Both types can now be created **instantly** through the Neon console or via our [API](https://neon.tech/docs/reference/api-reference). Please note that the API is subject to change during the early development stages as we continue to refine and improve the functionality.
+Initially, we only supported full branching, but today we’re introducing schema-only branches. Both types can now be created **instantly** through the Neon console or via our [API](https://neon.com/docs/reference/api-reference). Please note that the API is subject to change during the early development stages as we continue to refine and improve the functionality.
 
 ## A closer look at schema-only branches
 
@@ -94,8 +94,8 @@ Here’s a sneak peek at what we’ve been working on: branches with anonymized 
 <figcaption><em>Only a mockup. <a href="https://discord.gg/92vNTzKDGp">Reach out on Discord</a> if you want to give feedback while we develop this feature.</em></figcaption>
 </figure>
 
-With the upcoming addition of [data anonymiziation](https://neon.tech/docs/introduction/roadmap#what-were-working-on-now), Neon is set to transform database workflows—by making them as seamless, intuitive, and effective as other modern development tools.
+With the upcoming addition of [data anonymiziation](https://neon.com/docs/introduction/roadmap#what-were-working-on-now), Neon is set to transform database workflows—by making them as seamless, intuitive, and effective as other modern development tools.
 
 ## Try schema-only branches
 
-Instant schema-only branches will be released to all Neon users very soon. But for now, they are available to users in our [Early Access Program](https://console.neon.tech/app/settings/early-access)—join the program if you want to start using them right away. For more info, [read the docs](https://neon.tech/docs/guides/branching-schema-only).
+Instant schema-only branches will be released to all Neon users very soon. But for now, they are available to users in our [Early Access Program](https://console.neon.tech/app/settings/early-access)—join the program if you want to start using them right away. For more info, [read the docs](https://neon.com/docs/guides/branching-schema-only).

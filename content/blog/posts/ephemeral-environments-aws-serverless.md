@@ -80,7 +80,7 @@ Neon integrates PgBouncer directly into its architecture, enabling it to handle 
 
 Aurora Serverless v2 calculates the max connections based on ACU. Serverless applications often create many short-lived connections as Lambda execution environments are created and destroyed. This can cause connection pool exhaustion, which is why many serverless applications would use RDS Proxy to scale the number of concurrent connections or switch to Aurora Serverless v2’s Data API.
 
-Neon also has a data API that allows you to execute queries over HTTP or WebSockets. You can use the data API via Neon’s [serverless driver](https://neon.tech/docs/serverless/serverless-driver?ref=tbm-blog).
+Neon also has a data API that allows you to execute queries over HTTP or WebSockets. You can use the data API via Neon’s [serverless driver](https://neon.com/docs/serverless/serverless-driver?ref=tbm-blog).
 
 ### Data Branching
 
@@ -193,7 +193,7 @@ environment:
   DATABASE_URL: ${env:DATABASE_URL}
 ```
 
-This way, our code can use the `DATABASE_URL` environment variable to initialise the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver?ref=tbm-blog) at runtime, like this.
+This way, our code can use the `DATABASE_URL` environment variable to initialise the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver?ref=tbm-blog) at runtime, like this.
 
 ```javascript
 import { neon } from '@neondatabase/serverless';
@@ -303,7 +303,7 @@ You can create a new branch of your database every time you create an ephemeral 
 
 You can use the Neon console to create and delete branches. But we want to automate this process to eliminate manual steps.
 
-Fortunately, you can use the [Neon API SDK](https://neon.tech/docs/reference/typescript-sdk?ref=tbm-blog) to accomplish this. The [demo repo](https://github.com/theburningmonk/ephemeral-env-with-neon) contains examples of this – have a look in the [scripts folder](https://github.com/theburningmonk/ephemeral-env-with-neon/tree/main/scripts).
+Fortunately, you can use the [Neon API SDK](https://neon.com/docs/reference/typescript-sdk?ref=tbm-blog) to accomplish this. The [demo repo](https://github.com/theburningmonk/ephemeral-env-with-neon) contains examples of this – have a look in the [scripts folder](https://github.com/theburningmonk/ephemeral-env-with-neon/tree/main/scripts).
 
 Your workflow might look like this:
 
@@ -319,7 +319,7 @@ Your workflow might look like this:
 
 Another common use case for ephemeral environments is in CI/CD pipelines. This ensures that tests are run against a clean, well-defined initial system state and avoids polluting shared environments with test data.
 
-Neon also offers [several GitHub Actions](https://neon.tech/docs/guides/branching-github-actions) to help you automate the creation and deletion of branches.
+Neon also offers [several GitHub Actions](https://neon.com/docs/guides/branching-github-actions) to help you automate the creation and deletion of branches.
 
 In the demo app, you can see an [example workflow](https://github.com/theburningmonk/ephemeral-env-with-neon/blob/main/.github/workflows/dev.yaml) that:
 

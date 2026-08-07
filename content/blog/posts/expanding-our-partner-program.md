@@ -55,7 +55,7 @@ If this sounds like you, keep reading.
 
 ## Why become a Neon partner?
 
-Over the past year, Neon has grown to serve over 500K databases. Developers love Neon’s product velocity, supported by features like [database branching](https://neon.tech/docs/introduction/branching), [scale to zero](https://neon.tech/docs/introduction/auto-suspend), and [autoscaling](https://neon.tech/docs/introduction/autoscaling). And our partners love that they can offer this experience to their customers by seamlessly integrating Neon into their platforms via the [Neon API](https://neon.tech/docs/reference/api-reference), also taking advantage of security enhancements like [IP allow](https://neon.tech/docs/introduction/ip-allow).
+Over the past year, Neon has grown to serve over 500K databases. Developers love Neon’s product velocity, supported by features like [database branching](https://neon.com/docs/introduction/branching), [scale to zero](https://neon.com/docs/introduction/auto-suspend), and [autoscaling](https://neon.com/docs/introduction/autoscaling). And our partners love that they can offer this experience to their customers by seamlessly integrating Neon into their platforms via the [Neon API](https://neon.com/docs/reference/api-reference), also taking advantage of security enhancements like [IP allow](https://neon.com/docs/introduction/ip-allow).
 
 If you’re a partner, you also get access to 24×7 technical support, and as part of our partnership, we will scale up our marketing efforts to help you reach more developers. Our [existing partners](https://neon.tech/partners) have already been able to leverage the Neon advantage to support their product and commercial success. [Vercel](https://neon.tech/blog/neon-postgres-on-vercel) and [Replit](https://neon.tech/blog/neon-replit-integration) incorporated serverless Postgres into their platforms and have been offering it to their developers since early 2023. [Many other](https://neon.tech/blog/neon-bunnyshell-integration) platforms have also decided to leverage Neon to serve their developers’ needs.
 
@@ -78,7 +78,7 @@ As part of this expansion, we are excited to offer two partner options:
 | Projects                    | Unlimited<br />_If > 200 projects contact for custom pricing_        | Unlimited                                                    |
 | Storage                     | Unlimited                                                            | Unlimited                                                    |
 | Branches                    | 500/project                                                          | Custom                                                       |
-| Compute units               | Up to 7 [compute units](https://neon.tech/docs/introduction/billing) | Custom                                                       |
+| Compute units               | Up to 7 [compute units](https://neon.com/docs/introduction/billing) | Custom                                                       |
 | **Features**                | All [Scale](https://neon.tech/2024-plan-updates) plan features       | All [Enterprise](https://neon.tech/enterprise) plan features |
 | Service SLA of 99.99        | ✔                                                                    | ✔                                                            |
 | Partner API                 | ✔                                                                    | ✔                                                            |

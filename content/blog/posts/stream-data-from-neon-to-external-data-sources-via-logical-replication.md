@@ -83,7 +83,7 @@ This depends on your needs. Some scenarios require both data sources to be compl
 
 ### How logical replication works in Postgres
 
-📚 [Check out our documentation on logical replication for a deeper dive.](https://neon.tech/docs/guides/logical-replication-concepts)
+📚 [Check out our documentation on logical replication for a deeper dive.](https://neon.com/docs/guides/logical-replication-concepts)
 
 Logical replication in Neon works similarly to standard Postgres, using a publish-subscribe model where all changes are tracked via Postgres’ Write-Ahead Log (WAL).
 
@@ -114,7 +114,7 @@ SHOW wal_level;
 
 ### Replication roles
 
-Once you enable logical replication, check that the right roles have the `REPLICATION` privilege. The default Postgres role and roles created via the [Neon Console](https://neon.tech/docs/manage/roles#manage-roles-in-the-neon-console), [CLI](https://neon.tech/docs/manage/roles#manage-roles-with-the-neon-cli), or [API](https://api-docs.neon.tech/reference/createprojectbranchrole) have this privilege; [roles created via SQL](https://neon.tech/docs/manage/roles#manage-roles-with-sql) do not, and this privilege cannot be granted manually.
+Once you enable logical replication, check that the right roles have the `REPLICATION` privilege. The default Postgres role and roles created via the [Neon Console](https://neon.com/docs/manage/roles#manage-roles-in-the-neon-console), [CLI](https://neon.com/docs/manage/roles#manage-roles-with-the-neon-cli), or [API](https://neon.com/docs/reference/api/branches/create-project-branch-role) have this privilege; [roles created via SQL](https://neon.com/docs/manage/roles#manage-roles-with-sql) do not, and this privilege cannot be granted manually.
 
 To verify that a role has the `REPLICATION` privilege, run:
 
@@ -163,9 +163,9 @@ To remove a replication slot, you can use:
 SELECT pg_drop_replication_slot('my_replication_slot');
 ```
 
-In Neon, inactive replication slots are automatically removed after 75 minutes if other active slots exist. This helps prevent storage bloat. If your setup requires a longer inactivity period, [reach out to us](https://neon.tech/docs/introduction/support) so we can modify this for you.
+In Neon, inactive replication slots are automatically removed after 75 minutes if other active slots exist. This helps prevent storage bloat. If your setup requires a longer inactivity period, [reach out to us](https://neon.com/docs/introduction/support) so we can modify this for you.
 
-📚 [Check out our docs for detailed instructions on setting up logical replication](https://neon.tech/docs/guides/logical-replication-neon)
+📚 [Check out our docs for detailed instructions on setting up logical replication](https://neon.com/docs/guides/logical-replication-neon)
 
 ## Get started with logical replication guides
 
@@ -173,52 +173,52 @@ To help you get started with logical replication in Neon, we have a series of gu
 
 ### Airbyte
 
-[Airbyte](https://neon.tech/docs/guides/logical-replication-airbyte) is an open-source data integration platform that moves data from a source to a destination system. [Check out this guide](https://neon.tech/docs/guides/logical-replication-airbyte) to replicate data from a Neon database to Airbyte.
+[Airbyte](https://neon.com/docs/guides/logical-replication-airbyte) is an open-source data integration platform that moves data from a source to a destination system. [Check out this guide](https://neon.com/docs/guides/logical-replication-airbyte) to replicate data from a Neon database to Airbyte.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/stream-data-from-neon-to-external-data-sources-via-logical-replication/ad4nxcx45zhyofsrllzo73jnugjpspntphxwz-mmiypix4govvggovbefq4dalklee4j4xzedjw6eywtx60rvfsgfjdkdibrcvzgbkm21n-9vuys9vqs7gdvg1dfux4obqkxtt-v8hrushvzgmiiqkyqg7wo-42964092.png)
 
 ### Bemi
 
-[Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. [Check out this guide](https://neon.tech/docs/guides/bemi) to replicate data from a Neon database to Bemi.
+[Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. [Check out this guide](https://neon.com/docs/guides/bemi) to replicate data from a Neon database to Bemi.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/stream-data-from-neon-to-external-data-sources-via-logical-replication/ad4nxey5gnj1y62pfdivc-ob-lfgki4kmznc9edpgwtqginohkcnr9knrg9wesjwwg6vidvxgi-vx8gpl7kplgrz-hqnqz7tlkvhfhath6kdcktynqkgbetymdeczlrtfu8-xhwigj-kwqhuiaojxhu5g9m8-b8f3be4c.png)
 
 ### DoubleCloud
 
-[DoubleCloud](https://double.cloud/) is a managed data platform that helps engineering teams build data infrastructure with open-source technologies. [Check out this guide](https://neon.tech/docs/guides/logical-replication-clickhouse) to replicate data from a Neon database to ClickHouse via DoubleCloud.
+[DoubleCloud](https://double.cloud/) is a managed data platform that helps engineering teams build data infrastructure with open-source technologies. [Check out this guide](https://neon.com/docs/guides/logical-replication-clickhouse) to replicate data from a Neon database to ClickHouse via DoubleCloud.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/stream-data-from-neon-to-external-data-sources-via-logical-replication/ad4nxedlhcqhnwakkigyix1greffqajcq7mizyaz2i3xjhgrp6vwrojgjdupde2kkoub4z1nerlmlis8dgkcso1p5nlvipuwbkk45nbrfgowkml7-k7nxjpzcy4nmxiitg4rdb14obmnnnevmjwtfmq4avaueo-af5d10f2.png)
 
 ### Fivetran
 
-[Fivetran](https://www.fivetran.com/) is a data pipeline platform that helps you centralize data from disparate sources. [Check out this guide](https://neon.tech/docs/guides/logical-replication-fivetran) to replicate data from a Neon database to Fivetran.
+[Fivetran](https://www.fivetran.com/) is a data pipeline platform that helps you centralize data from disparate sources. [Check out this guide](https://neon.com/docs/guides/logical-replication-fivetran) to replicate data from a Neon database to Fivetran.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/stream-data-from-neon-to-external-data-sources-via-logical-replication/ad4nxfl1tja1gvmpkf2cp3azjabdzsbv31-rxqvs4zdlaxisktbqqn8f28xu5faqdzcl1y7wtydqcxgve1tlmo46feqen2qzyujki4vdy1p2zmzqwnedpdagbbl-pba25q7ofp6xgvuqb9id06wjp5i8ekkg0t-adc7bc84.png)
 
 ### Kafka via Confluent
 
-[Confluent](https://neon.tech/docs/guides/logical-replication-kafka-confluent) is a fully managed, cloud-native real-time data streaming service built on Apache Kafka. [Check out this guide](https://neon.tech/docs/guides/logical-replication-kafka-confluent) to replicate data from a Neon database to Confluent.
+[Confluent](https://neon.com/docs/guides/logical-replication-kafka-confluent) is a fully managed, cloud-native real-time data streaming service built on Apache Kafka. [Check out this guide](https://neon.com/docs/guides/logical-replication-kafka-confluent) to replicate data from a Neon database to Confluent.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/stream-data-from-neon-to-external-data-sources-via-logical-replication/ad4nxd9csjurfvsgssbnlojpknjvm7lkikk0cueehgi2uhjpmqd5fvw5vfc-qfpmoti46xmhkylj2efkr4xjcps3odmtkskqpxergwvm2qmuebppnp2bkejyoi0lwdsh0k2t0ovsjq6g2pqhbmfrdfqawoek0-7001418e.png)
 
 ### Materialize
 
-[Materialize](https://materialize.com/) is a data warehouse for operational workloads, purpose-built for low-latency applications. [Check out this guide](https://neon.tech/docs/guides/logical-replication-materialize) to replicate data from a Neon database to Materialize.
+[Materialize](https://materialize.com/) is a data warehouse for operational workloads, purpose-built for low-latency applications. [Check out this guide](https://neon.com/docs/guides/logical-replication-materialize) to replicate data from a Neon database to Materialize.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/stream-data-from-neon-to-external-data-sources-via-logical-replication/ad4nxcqnarvkpiqlyofkww1nap-qw-77jbqgqkaad7xvrpaxtjtbech2medlxljioeb8ieaqfclfeewm-r8aqlntrhgya-xpzjuawz31siwzdprazx58gw7a-tapln3tnixsfyvvkvqsdbyucqauoatswpw-e510be23.png)
 
 ### Decodable
 
-[Decodable](https://www.decodable.co/) is a fully managed platform for ETL, ELT, and stream processing, powered by Apache Flink® and Debezium. [Check out this guide](https://neon.tech/docs/guides/logical-replication-decodable) to replicate data from a Neon database to Decodable.
+[Decodable](https://www.decodable.co/) is a fully managed platform for ETL, ELT, and stream processing, powered by Apache Flink® and Debezium. [Check out this guide](https://neon.com/docs/guides/logical-replication-decodable) to replicate data from a Neon database to Decodable.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/stream-data-from-neon-to-external-data-sources-via-logical-replication/ad4nxdmgywpjzcrxjxr1suwklevsmfh2omstkyv2pjecoxt12dbio-4qc1mwozz-kzpv3u0gxp5v-6qzzhqe3ngdwy-qyyldubmvs8mk1clwm4dax54ldpuartumkiszhqsjmo7yqjvq8oazcrgwkkg8fgfl-5afaa096.png)
 
 ### Sequin
 
-[Sequin](https://sequin.io/) is a serverless messaging stream for API integrations. [Check out this guide](https://neon.tech/docs/guides/sequin) to replicate data from a Neon database to Sequin.
+[Sequin](https://sequin.io/) is a serverless messaging stream for API integrations. [Check out this guide](https://neon.com/docs/guides/sequin) to replicate data from a Neon database to Sequin.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/stream-data-from-neon-to-external-data-sources-via-logical-replication/ad4nxdyow2jhgvhcup0yf6qdbxrjmwkvjignqmcswd-chovrgvwrphthxxojwxyqfyvvdsvjunvwejxy-vlgqio9fkjafkuzhgl7zoykw67n1h9x7njlq6ie4crlq8vp8aacprnqhtcvv5tkekzqv6oeoa3kt-8db63148.png)
 
 ## Try it: create a Neon account for free
 
-You can get started with logical replication and Neon right away. [Create an account in our Free Plan](https://console.neon.tech/signup), no credit card required. And [keep an eye on our docs](https://neon.tech/docs/guides/integrations#replicate) for more logical replication guides to come!
+You can get started with logical replication and Neon right away. [Create an account in our Free Plan](https://console.neon.tech/signup), no credit card required. And [keep an eye on our docs](https://neon.com/docs/guides/integrations#replicate) for more logical replication guides to come!

@@ -35,7 +35,7 @@ seo:
 
 We recently launched [Neon RLS](https://neon.tech/blog/introducing-neon-authorize) to simplify Postgres authorization with row-level security.
 
-If you’ve been reading our posts, [tutorials](https://neon.tech/docs/guides/neon-authorize-tutorial), or [READMEs](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) on the subject, you’ll have come across three little letters: JWT. This whole world seems to run on JWTs–so what are they?
+If you’ve been reading our posts, [tutorials](https://neon.com/docs/guides/neon-authorize-tutorial), or [READMEs](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) on the subject, you’ll have come across three little letters: JWT. This whole world seems to run on JWTs–so what are they?
 
 JWTs, or JSON Web Tokens to give them their full titles, or JOTs to give their weird pronunciation, are standardized, compact, self-contained tokens for transmitting information. They are JSON objects that are digitally signed so each party can trust and verify the information.
 
@@ -260,7 +260,7 @@ This system allows for:
 - Multiple keys: Different keys for different purposes or environments
 - Trust verification: Everyone knows they’re using the correct keys
 
-For Neon RLS, you don’t have to manage keys yourself. You just point Neon at your [auth provider’s JWKS endpoint](https://neon.tech/docs/guides/neon-authorize#supported-providers), which handles the verification automatically.
+For Neon RLS, you don’t have to manage keys yourself. You just point Neon at your [auth provider’s JWKS endpoint](https://neon.com/docs/guides/neon-authorize#supported-providers), which handles the verification automatically.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/wtf-are-jwts/screenshot-2024-11-29-at-83349percente2percent80percentafam-1024x908-66444d48.png)
 
@@ -310,7 +310,7 @@ Remember the key points:
 - Your auth provider handles the complex stuff
 - Neon uses JWT claims to enforce row-level security
 
-Want to learn more? Check out our posts about using [Neon RLS](https://neon.tech/docs/guides/neon-authorize) and our [guides](https://neon.tech/docs/guides/neon-authorize-tutorial) for using Neon RLS with your auth provider.
+Want to learn more? Check out our posts about using [Neon RLS](https://neon.com/docs/guides/neon-authorize) and our [guides](https://neon.com/docs/guides/neon-authorize-tutorial) for using Neon RLS with your auth provider.
 
 ---
 

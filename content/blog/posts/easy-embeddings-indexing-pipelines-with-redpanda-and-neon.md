@@ -43,7 +43,7 @@ seo:
 
 Building high throughput, scalable embeddings indexing pipelines can be a daunting task, often requiring stitching together systems with code that needs to scale, handle failures and ensure delivery guarantees. However, with powerful tools like [Redpanda](https://redpanda.com) and Neon, this process can be significantly simplified.
 
-In this blog post, we walk through how to set up an embeddings indexing pipeline using these technologies, without the need for any code. This streamlined approach leverages Redpanda for data ingestion and Neon for efficient indexing and querying all in a managed environment. Neon is a scalable, serverless postgres database with support for vector similarity search using [pgvector](https://neon.tech/docs/extensions/pgvector). Combined with Redpanda, a unified streaming data platform that is blazing fast and simple to manage, we can create an embedding indexing pipeline that checks all the boxes without needing to write any code.
+In this blog post, we walk through how to set up an embeddings indexing pipeline using these technologies, without the need for any code. This streamlined approach leverages Redpanda for data ingestion and Neon for efficient indexing and querying all in a managed environment. Neon is a scalable, serverless postgres database with support for vector similarity search using [pgvector](https://neon.com/docs/extensions/pgvector). Combined with Redpanda, a unified streaming data platform that is blazing fast and simple to manage, we can create an embedding indexing pipeline that checks all the boxes without needing to write any code.
 
 ## Setting up an embeddings indexing pipeline
 
@@ -51,7 +51,7 @@ Prerequisites:
 
 - [Latest version](https://github.com/redpanda-data/connect/releases) of Redpanda Connect
 - [Redpanda Serverless Cluster](https://www.redpanda.com/redpanda-cloud/serverless)
-- [Neon Postgres Database](https://neon.tech/docs/get-started-with-neon/signing-up)
+- [Neon Postgres Database](https://neon.com/docs/get-started-with-neon/signing-up)
 
 As a warm up, you can check out Neon’s blog post on [building a Retrieval-Augmented Generation (RAG) applications with Neon and pgvector](https://neon.tech/blog/building-a-rag-application-with-llama-3-1-and-pgvector). In this post, we’ll demonstrate a way to create a high throughput, scalable embeddings indexing pipeline for RAG applications using [Redpanda Connect](https://docs.redpanda.com/redpanda-connect/about/).
 

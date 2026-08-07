@@ -84,7 +84,7 @@ This is how they do it:
 <p>“While games typically ship on multi-week release cycles, we want to ship as fast as possible — so we built a pretty cool in-house game platform on top of Cloudflare and Neon that lets us deploy multiple times a day, in minutes, with zero downtime.” </p><p><em>(Avi Romanoff, Founder at Magic Circle)</em></p>
 </blockquote>
 
-**Something unique about Magic Circle’s development approach is how they bring a rapid iteration strategy—typically seen in web development—to the world of multiplayer gaming.** Their workflow enables them to ship updates multiple times a day, with [Neon branches](https://neon.tech/docs/introduction/branching) serving as a cornerstone of this process.
+**Something unique about Magic Circle’s development approach is how they bring a rapid iteration strategy—typically seen in web development—to the world of multiplayer gaming.** Their workflow enables them to ship updates multiple times a day, with [Neon branches](https://neon.com/docs/introduction/branching) serving as a cornerstone of this process.
 
 In Neon, users can instantly create database branches, which act as fully isolated copies of the database, including both data and schema. These branches are widely used for [creating development and testing environments](https://neon.tech/use-cases/dev-test) that are ephemeral and cost-effective, allowing teams to iterate quickly on features, fix bugs, or test database schema changes.
 
@@ -118,7 +118,7 @@ Let’s take a closer look at Magic Circle’s branching workflows.
 
 **4/ Rollbacks are executed fast via branches.**
 
-- Even if this is not needed often (🤞) Neon’s [Branch Restore](https://neon.tech/docs/guides/branch-restore) makes rollbacks straightforward and reliable without downtime.
+- Even if this is not needed often (🤞) Neon’s [Branch Restore](https://neon.com/docs/guides/branch-restore) makes rollbacks straightforward and reliable without downtime.
 - In the very rare case when a problematic commit is indeed merged to production, Magic Circle creates a new Neon branch from a specific point in time to revert to a known good state.
 - This process is ready immediately, minimizing potential downtime—something essential in gaming.
 

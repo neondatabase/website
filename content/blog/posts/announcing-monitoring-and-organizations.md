@@ -48,7 +48,7 @@ Let’s take a quick tour of these new features.
 
 Using Neon means using Postgres. When you interact with Neon, you aren’t doing so using a wrapper – you’re interacting directly with a Postgres database.
 
-This provides you with a great deal of power and flexibility. It also means you can exhaust connections, cause deadlocks, and max out your allocated CPU and RAM. That’s why we’ve shipped a comprehensive [monitoring dashboard](https://neon.tech/docs/introduction/monitoring-page) in the Neon console.
+This provides you with a great deal of power and flexibility. It also means you can exhaust connections, cause deadlocks, and max out your allocated CPU and RAM. That’s why we’ve shipped a comprehensive [monitoring dashboard](https://neon.com/docs/introduction/monitoring-page) in the Neon console.
 
 The usual suspects, CPU and RAM, are present, but it also includes:
 
@@ -76,15 +76,15 @@ Now you can test the performance of this database and generate metrics using the
 pgbench -c 95 -j 4 -P 30 -t 10000 $PG_URL
 ```
 
-Using the default 0.25 CU [compute size](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration) results in a lower number of transactions per second (TPS) versus 3 CU. You can see this clearly in the screenshot below. The cache hit rate increases dramatically after autoscaling is enabled and up to 12 GB of RAM becomes available to Postgres.
+Using the default 0.25 CU [compute size](https://neon.com/docs/manage/endpoints#compute-size-and-autoscaling-configuration) results in a lower number of transactions per second (TPS) versus 3 CU. You can see this clearly in the screenshot below. The cache hit rate increases dramatically after autoscaling is enabled and up to 12 GB of RAM becomes available to Postgres.
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/announcing-monitoring-and-organizations/monitoring-cache-hit-1024x579-398978bf.jpg)
 
-Monitoring can help you identify potential performance issues, but the metrics can also help you understand your storage usage. The **Rows** metric tracks the inserts, updates, and deletes you’ve made. More changes mean a larger [history](https://neon.tech/docs/reference/glossary#history), which means [increased storage usage](https://neon.tech/docs/introduction/usage-metrics#storage-details) if you have a large history retention window configured.
+Monitoring can help you identify potential performance issues, but the metrics can also help you understand your storage usage. The **Rows** metric tracks the inserts, updates, and deletes you’ve made. More changes mean a larger [history](https://neon.com/docs/reference/glossary#history), which means [increased storage usage](https://neon.com/docs/introduction/usage-metrics#storage-details) if you have a large history retention window configured.
 
 ## Organizations
 
-Each project in Neon provides an isolated database timeline, the ability to create read-write endpoints and read-replicas, and branches for development and testing. Projects can be [shared with other Neon users](https://neon.tech/docs/manage/projects#share-a-project) to facilitate collaboration.
+Each project in Neon provides an isolated database timeline, the ability to create read-write endpoints and read-replicas, and branches for development and testing. Projects can be [shared with other Neon users](https://neon.com/docs/manage/projects#share-a-project) to facilitate collaboration.
 
 Today, we’re announcing our Organizations feature in Private Preview. An organization represents a collection of projects, and members of the organization have access to those projects.
 

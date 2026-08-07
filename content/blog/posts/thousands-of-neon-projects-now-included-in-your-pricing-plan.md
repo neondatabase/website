@@ -47,7 +47,7 @@ seo:
 
 [Neon](https://neon.tech/home) is a serverless Postgres solution, making it a very versatile database for developers and teams who use Neon in various ways. Inside this broader group, there are a few _special_ use cases—special due to their requirements—where Neon uniquely shines:
 
-**SaaS with database-per-user:** Neon makes it easy for small teams to manage isolated databases, e.g. for B2B AI platforms needing data isolation. Neon’s superior [API](https://neon.tech/docs/reference/api-reference) reduces management complexity compared to solutions like AWS RDS, while [autoscaling](https://neon.tech/docs/introduction/autoscaling) and [scale-to-zero](https://neon.tech/docs/introduction/auto-suspend) ensure cost-efficiency.
+**SaaS with database-per-user:** Neon makes it easy for small teams to manage isolated databases, e.g. for B2B AI platforms needing data isolation. Neon’s superior [API](https://neon.com/docs/reference/api-reference) reduces management complexity compared to solutions like AWS RDS, while [autoscaling](https://neon.com/docs/introduction/autoscaling) and [scale-to-zero](https://neon.com/docs/introduction/auto-suspend) ensure cost-efficiency.
 
 **Developer platforms:** This DB-per-user architecture scales extremely well in Neon—it can actually scale up to the hundreds of thousands of tenants, something that platforms like [Vercel](https://neon.tech/blog/neon-postgres-on-vercel), [Retool](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases), or [Koyeb](https://www.koyeb.com/blog/serverless-postgres-public-preview) are taking advantage of.
 
@@ -75,12 +75,12 @@ As part of this pricing plan’s expansion, we’ve also launched our Business p
 
 What’s included in the Business Plan:
 
-- **500 GB of shared storage:** Neon’s unique architecture makes this 500 GB _stretch_. [All branches within a project share the same storage pool,](https://neon.tech/docs/introduction/branching) allowing you to create multiple database copies and read replicas without using additional storage.
-- **More compute usage and priority support:** The Business plan comes with enough [compute hours](https://neon.tech/docs/introduction/usage-metrics#compute) to support production workloads that need to run 24/7 with high capacity. Priority technical support is included to help you resolve any issues quickly and keep your operations running smoothly.
+- **500 GB of shared storage:** Neon’s unique architecture makes this 500 GB _stretch_. [All branches within a project share the same storage pool,](https://neon.com/docs/introduction/branching) allowing you to create multiple database copies and read replicas without using additional storage.
+- **More compute usage and priority support:** The Business plan comes with enough [compute hours](https://neon.com/docs/introduction/usage-metrics#compute) to support production workloads that need to run 24/7 with high capacity. Priority technical support is included to help you resolve any issues quickly and keep your operations running smoothly.
 - **Migration assistance:** We know migrations are a pain, so we help you move your existing databases to Neon with minimal downtime. While we’re working on the migration, we’ll waive all the migration-related fees.
-- **Organization accounts:** The Business plan also comes with [organization accounts](https://neon.tech/docs/manage/organizations), allowing multiple users to collaborate on managing projects—perfect for larger teams working on shared database infrastructure.
-- **Branch protection:** To protect your key databases in this team setting, [you can restrict which IPs have access to your production branches](https://neon.tech/docs/guides/protected-branches) and protect them against accidental deletions or modifications.
-- **Instant PITR and time-travel queries (30 days):** The Business plan allows you to perform [instant point-in-time recovery (no matter how large your dataset](https://neon.tech/docs/guides/branch-restore)) and time-travel queries for up to 30 days back.
+- **Organization accounts:** The Business plan also comes with [organization accounts](https://neon.com/docs/manage/organizations), allowing multiple users to collaborate on managing projects—perfect for larger teams working on shared database infrastructure.
+- **Branch protection:** To protect your key databases in this team setting, [you can restrict which IPs have access to your production branches](https://neon.com/docs/guides/protected-branches) and protect them against accidental deletions or modifications.
+- **Instant PITR and time-travel queries (30 days):** The Business plan allows you to perform [instant point-in-time recovery (no matter how large your dataset](https://neon.com/docs/guides/branch-restore)) and time-travel queries for up to 30 days back.
 - **Compliance and security:** The Business plan comes with SOC 2 report and a [99.95% Service Level Agreement](https://neon.tech/neon-business-sla).
 
 ## From Free to Business: Start today

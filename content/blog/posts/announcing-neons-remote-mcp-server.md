@@ -32,7 +32,7 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/announcing-neons-remote-mcp-server/neon-remote-mcp-server-cover-v2-5971f229.jpg)
 
-At Neon, we like to be on top of things, especially when it comes to AI. We first announced our MCP server [back on December 3rd, 2024](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here). That was a long time before MCP really took off, and we’ve been iterating on our MCP server’s capabilities ever since. You can read more about our MCP server [in our docs](https://neon.tech/docs/ai/neon-mcp-server).
+At Neon, we like to be on top of things, especially when it comes to AI. We first announced our MCP server [back on December 3rd, 2024](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here). That was a long time before MCP really took off, and we’ve been iterating on our MCP server’s capabilities ever since. You can read more about our MCP server [in our docs](https://neon.com/docs/ai/neon-mcp-server).
 
 As such, we’ve been closely following the [Model Context Protocol specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/) and waiting anxiously for the protocol to be ready for **remote hosting.** Today, we’re pleased to announce that we’ve got a hosted version of our MCP server ready for our users to use.
 

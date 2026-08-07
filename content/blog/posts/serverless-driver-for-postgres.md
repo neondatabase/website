@@ -48,7 +48,7 @@ We plan to extend and improve this driver in the coming weeks. In particular, we
 
 ## How to use it
 
-As [we’ve explained elsewhere](https://blog.cloudflare.com/neon-postgres-database-from-workers/), the `@neondatabase/serverless` driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package you may already know. After going through our [getting started](https://neon.tech/docs/get-started-with-neon/signing-up/) process to set up a Neon database, you could create a minimal Cloudflare Worker to ask Postgres for the current time like so:<br />
+As [we’ve explained elsewhere](https://blog.cloudflare.com/neon-postgres-database-from-workers/), the `@neondatabase/serverless` driver is a drop-in replacement for [node-postgres](https://node-postgres.com/), the popular npm `pg` package you may already know. After going through our [getting started](https://neon.com/docs/get-started-with-neon/signing-up/) process to set up a Neon database, you could create a minimal Cloudflare Worker to ask Postgres for the current time like so:<br />
 
 1. **Create a new Worker** — Run `npx wrangler init neon-cf-demo` and accept all the defaults. Enter the new folder with `cd neon-cf-demo`.<br />
 2. **Install our driver package** — Run `npm install @neondatabase/serverless`.<br />
@@ -159,7 +159,7 @@ The SCRAM-SHA-256 [RFC](https://www.rfc-editor.org/rfc/rfc7677#section-4) recomm
 
 You may already see a problem here. Edge functions establish a new database connection on each run, and we want that to be as quick as possible. Even worse, serverless providers typically limit the CPU time allocated to each run. For example, a Cloudflare Worker currently gets 10ms on the free plan or 50ms on the paid plan. 100ms of SCRAM calculations would use that up (and then some) before we even got started on making a query.
 
-In the medium term, we may look at reducing the number of SCRAM rounds our servers demand. Since we generate all database passwords on our platform, we can in principle, do that without compromising security by increasing password length (and, therefore the size of the brute-force search space) simultaneously. For now, we instead fall back to cleartext authentication by automatically using our [Workaround D](https://neon.tech/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field). This is OK since mandatory TLS secures our database connections and authenticates that the database server is really who it says it is.
+In the medium term, we may look at reducing the number of SCRAM rounds our servers demand. Since we generate all database passwords on our platform, we can in principle, do that without compromising security by increasing password length (and, therefore the size of the brute-force search space) simultaneously. For now, we instead fall back to cleartext authentication by automatically using our [Workaround D](https://neon.com/docs/connect/connectivity-issues#d-specify-the-endpoint-id-in-the-password-field). This is OK since mandatory TLS secures our database connections and authenticates that the database server is really who it says it is.
 
 (On a related note, earlier work by [Arthur](https://neon.tech/about-us/) on a driver based on deno-postgres uncovered SCRAM-related bugs [in both deno-postgres](https://github.com/denodrivers/postgres/pull/411) [and Deno itself](https://github.com/denodrivers/postgres/pull/411)).
 

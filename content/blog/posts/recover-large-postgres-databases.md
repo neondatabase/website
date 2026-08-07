@@ -119,7 +119,7 @@ Lastly, it’s worth mentioning that enabling **Multi-AZ doubles your production
 
 [Neon](https://neon.tech/home) **is a managed Postgres service that takes a fundamentally different approach to high availability (HA) and point-in-time recovery (PITR).** It’s a great alternative to alleviate the shortcomings of RDS’s capabilities for large databases.
 
-Instead of relying on full-size replicas for HA or multi-hour WAL replays for PITR, Neon [separates storage and compute](https://neon.tech/docs/introduction/serverless) and uses an [innovative log-structured storage system.](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal) This architecture enables:
+Instead of relying on full-size replicas for HA or multi-hour WAL replays for PITR, Neon [separates storage and compute](https://neon.com/docs/introduction/serverless) and uses an [innovative log-structured storage system.](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal) This architecture enables:
 
 - **Instant point-in-time recovery (PITR)** without snapshot restores or WAL replays.
 - **Built-in high availability** without the need for dedicated standby instances.
@@ -136,18 +136,18 @@ Neon offers a much faster alternative than the traditional “backup and restore
 - Versions all modifications in real-time, keeping historical states available;
 - Automatically distributes records across multiple availability zones, ensuring redundancy at the storage layer.
 
-**Because Neon never modifies old data, every historical state is instantly accessible (up to a configurable retention limit).** This allows teams to create an isolated [database branch](https://neon.tech/docs/introduction/branching) from any past timestamp, with its own dedicated Postgres URL and its own isolated compute resources, acting as a perfect copy of the production instance at that point in time.
+**Because Neon never modifies old data, every historical state is instantly accessible (up to a configurable retention limit).** This allows teams to create an isolated [database branch](https://neon.com/docs/introduction/branching) from any past timestamp, with its own dedicated Postgres URL and its own isolated compute resources, acting as a perfect copy of the production instance at that point in time.
 
 #### How PITR works in Neon
 
 1. **Instantly create a branch at any point in time.** No need to manually restore from a snapshot or replay WAL.
-2. **Spin up a temporary compute node.** Attach a compute instance to the branch, with your desired CPU/memory or [autoscaling limits](https://neon.tech/docs/guides/autoscaling-guide).
+2. **Spin up a temporary compute node.** Attach a compute instance to the branch, with your desired CPU/memory or [autoscaling limits](https://neon.com/docs/guides/autoscaling-guide).
 3. **Recover your data.** You can do a full rollback (swap the production endpoint to this new branch, reverting the database entirely) or a partial recovery (copy specific tables or rows back to the production database).
 
 #### Benefits of Neon’s approach vs AWS RDS for large databases
 
 - **Fastest possible PITR**. Since the old state already exists in Neon’s storage, there’s no need to copy or replay data.
-- **Safer recovery.** Teams can verify data before committing to a full rollback via [time-travel queries](https://neon.tech/docs/guides/time-travel-assist).
+- **Safer recovery.** Teams can verify data before committing to a full rollback via [time-travel queries](https://neon.com/docs/guides/time-travel-assist).
 
 ## Neon’s multi-AZ availability
 
@@ -157,7 +157,7 @@ Neon offers a much faster alternative than the traditional “backup and restore
 
 Neon eliminates the need for full-size replicas by ensuring high availability at the storage layer instead of relying on traditional replication.
 
-- **Storage-level redundancy.** On the storage side, all data is backed by cloud object storage for long-term durability, and [Pageserver and Safekeepers](https://neon.tech/docs/introduction/high-availability) are distributed across [Availability Zones](https://en.wikipedia.org/wiki/Availability_zone) for redundancy.
+- **Storage-level redundancy.** On the storage side, all data is backed by cloud object storage for long-term durability, and [Pageserver and Safekeepers](https://neon.com/docs/introduction/high-availability) are distributed across [Availability Zones](https://en.wikipedia.org/wiki/Availability_zone) for redundancy.
 - **Compute resiliency.** Compute nodes (where Postgres runs) are ephemeral and stateless in Neon. If Postgres crashes or there’s an AZ failure, Neon’s control plane automatically spins up a new node in another AZ, keeping your application continuously connected.
 
 #### Benefits of Neon’s approach vs AWS RDS for large databases
