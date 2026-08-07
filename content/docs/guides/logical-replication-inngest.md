@@ -11,7 +11,7 @@ summary: >-
   credentials to the Inngest integration wizard (credentials are not stored).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -50,7 +50,7 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 ![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app). Use a direct connection, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers, so make sure the connection string does not include `-pooler` in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
 
 ## Example: Replicating data to Amplitude
 

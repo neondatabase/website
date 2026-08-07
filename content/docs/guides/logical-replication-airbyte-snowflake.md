@@ -9,7 +9,7 @@ summary: >-
   wal_level to logical for all databases in the Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations. In this guide, you will learn how to define your Lakebase Postgres database as a data source in Airbyte so that you can stream data to Snowflake.
@@ -170,7 +170,7 @@ The Airbyte UI currently allows selecting any table for Change Data Capture (CDC
 ## Create a Postgres source in Airbyte
 
 1. From your Airbyte Cloud account, select **Sources** from the left navigation bar, search for **Postgres**, and then create a new Postgres source.
-2. Enter the connection details for your Neon database. You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**.
+2. Enter the connection details for your Neon database. You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. Use a direct connection to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers, so make sure the connection string does not include `-pooler` in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
    For example, given a connection string like this:
 
    ```bash shouldWrap

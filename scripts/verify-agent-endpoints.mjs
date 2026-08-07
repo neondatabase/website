@@ -6,8 +6,10 @@
  * the validator named in its `validator` field. Each validator checks that the
  * served payload BOTH matches its governing spec AND is up to date with the
  * spec-agnostic source of truth (src/constants/agent-discovery.js). Model
- * catalog verification (/models.json vs models.dev) is folded in here too, so a
- * single command / CI job covers every discovery surface.
+ * catalog verification is folded in here too, so a single command / CI job
+ * covers every discovery surface. /models.json is itself a source of truth, so
+ * what gets verified there is the catalog's own shape offline, and how far the
+ * models.dev mirror has fallen behind it live.
  *
  * The run never stops at the first failure: it collects every check across all
  * endpoints and prints exactly what failed and why, then exits non-zero if any
@@ -15,7 +17,7 @@
  *
  * Usage:
  *   node scripts/verify-agent-endpoints.mjs               # offline (PR gate)
- *   node scripts/verify-agent-endpoints.mjs --live        # + fetch neon.com and run models.dev sync
+ *   node scripts/verify-agent-endpoints.mjs --live        # + fetch neon.com and check the models.dev mirror
  *   node scripts/verify-agent-endpoints.mjs --live --base https://preview.example.com
  *   node scripts/verify-agent-endpoints.mjs --json        # machine-readable
  */
@@ -29,6 +31,8 @@ import crypto from 'crypto';
 
 import Ajv from 'ajv';
 import { load as loadYaml } from 'js-yaml';
+
+import { validateCatalog } from './lib/models-catalog.mjs';
 
 const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -323,21 +327,42 @@ const VALIDATORS = {
     return checks;
   },
 
+  // /models.json is the source of truth for the gateway catalog, not a copy of
+  // anything, so offline verification validates the catalog on its own terms.
+  // That used to be implied by the file being machine-generated from models.dev;
+  // now that it is authored, the invariants have to be stated and checked.
   'models-json'(payload, entry, sot, { live }) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.modelsJson, payload)];
+
+    const errors = validateCatalog(payload);
+    checks.push(
+      errors.length === 0
+        ? ok('catalog is well formed', `${Object.keys(payload.neon.models).length} models`)
+        : fail('catalog is well formed', errors.slice(0, 10).join('; '))
+    );
+
     if (live && entry.liveSync) {
       const res = spawnSync('node', [path.join(ROOT, entry.liveSync), '--ci'], {
         cwd: ROOT,
         encoding: 'utf-8',
       });
       const output = `${res.stdout || ''}${res.stderr || ''}`.trim();
+      // Exit 0 covers both "mirrored" and "models.dev is behind". Lag is the
+      // normal state of an in-flight change and must not fail the run; the
+      // workflow reports it as sync debt instead.
       if (res.status === 0) {
-        checks.push(ok('in sync with models.dev', output.split('\n').pop()));
+        const debt = output.includes('[SYNC DEBT]');
+        checks.push(
+          ok(
+            'models.dev mirror',
+            debt ? 'behind — upstream PR owed' : output.split('\n').pop()
+          )
+        );
       } else if (res.status === 1) {
-        checks.push(fail('in sync with models.dev', `catalog drift — ${output}`));
+        checks.push(fail('models.dev mirror', `advertises a model we do not publish — ${output}`));
       } else {
         checks.push(
-          fail('in sync with models.dev', `sync check errored (exit ${res.status}) — ${output}`)
+          fail('models.dev mirror', `sync check errored (exit ${res.status}) — ${output}`)
         );
       }
     }
@@ -522,6 +547,8 @@ async function main() {
     if (!entryOk) {
       console.log(`      spec: ${entry.spec.name} → ${entry.spec.url}`);
       if (entry.generator) console.log(`      regenerate: node ${entry.generator}`);
+      // Authored endpoints have no generator; "regenerate" would be wrong advice.
+      else if (entry.editedBy) console.log(`      maintained: ${entry.editedBy}`);
     }
     console.log('');
   }

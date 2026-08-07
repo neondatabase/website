@@ -1,7 +1,7 @@
 {
   "$comment": "Measured behaviour of every model the Neon AI Gateway serves. Produced by calling each model on /v1/chat/completions, its provider-native dialect, and /openai/v1/responses with the web_search and image_generation tools. This is what the gateway DID; models.json is what each model CLAIMS. /models needs both to know which code examples are correct.",
   "$howToRegenerate": "Generated from the conformance record in neondatabase/neon-console-code-examples: run `bun run probe:conformance` there, then copy its conformance.json into the shape below. One probe feeds both repos so the console and /models cannot disagree. Fields per model: id, owner, entitled, chat (conforms | array-content | not-served | not-entitled), deviations[], nativeDialect (anthropic | openai-responses | gemini | none), responses, webSearch, imageGeneration. Conformance MUST be measured with a prompt that makes the model reason as well as a trivial one, taking the worse shape: claude-opus-5, claude-sonnet-5 and claude-fable-5 return a compliant string for a trivial prompt and an array of {reasoning, text} parts once they think, and an easy-prompt-only probe is what published all three as `conforms`. CI checks completeness, not freshness - see the models-rest validator in scripts/verify-agent-endpoints.mjs.",
-  "probedAt": "2026-08-05T15:04:33.139Z",
+  "probedAt": "2026-08-07T13:40:27.012Z",
   "models": [
     {
       "id": "claude-fable-5",
@@ -138,7 +138,7 @@
       "deviations": [
         "`id` is null; the spec requires a string",
         "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 344, but prompt + completion is 205",
+        "`usage.total_tokens` is 356, but prompt + completion is 212",
         "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
       ],
       "nativeDialect": "gemini",
@@ -154,7 +154,7 @@
       "deviations": [
         "`id` is null; the spec requires a string",
         "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 595, but prompt + completion is 248",
+        "`usage.total_tokens` is 585, but prompt + completion is 240",
         "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
       ],
       "nativeDialect": "gemini",
@@ -170,7 +170,39 @@
       "deviations": [
         "`id` is null; the spec requires a string",
         "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 593, but prompt + completion is 232",
+        "`usage.total_tokens` is 469, but prompt + completion is 217",
+        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gemini-3-5-flash-lite",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "`id` is null; the spec requires a string",
+        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
+        "`usage.total_tokens` is 572, but prompt + completion is 218",
+        "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
+      ],
+      "nativeDialect": "gemini",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "gemini-3-6-flash",
+      "owner": "google",
+      "entitled": true,
+      "chat": "array-content",
+      "deviations": [
+        "`id` is null; the spec requires a string",
+        "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
+        "`usage.total_tokens` is 387, but prompt + completion is 195",
         "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
       ],
       "nativeDialect": "gemini",
@@ -186,7 +218,7 @@
       "deviations": [
         "`id` is null; the spec requires a string",
         "`content` is an array[1] of {text} with keys {text, thoughtSignature, type}; the spec requires a string",
-        "`usage.total_tokens` is 588, but prompt + completion is 221",
+        "`usage.total_tokens` is 619, but prompt + completion is 225",
         "`usage.reasoning_tokens` is top-level; the spec nests it under `completion_tokens_details`"
       ],
       "nativeDialect": "gemini",
@@ -399,6 +431,17 @@
     {
       "id": "inkling",
       "owner": "databricks",
+      "entitled": true,
+      "chat": "conforms",
+      "deviations": [],
+      "nativeDialect": "none",
+      "responses": false,
+      "webSearch": false,
+      "imageGeneration": false
+    },
+    {
+      "id": "kimi-k3",
+      "owner": "moonshot",
       "entitled": true,
       "chat": "conforms",
       "deviations": [],

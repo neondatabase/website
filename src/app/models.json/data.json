@@ -753,7 +753,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2024-09-30",
@@ -800,7 +800,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -847,7 +847,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -895,7 +895,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -959,7 +959,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -1006,7 +1006,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -1136,6 +1136,24 @@
           "context": 1050000,
           "input": 922000,
           "output": 128000
+        },
+        "cost": {
+          "input": 30,
+          "output": 180,
+          "tiers": [
+            {
+              "input": 60,
+              "output": 270,
+              "tier": {
+                "type": "context",
+                "size": 272000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 60,
+            "output": 270
+          }
         }
       },
       "gpt-5-6-luna": {
@@ -1537,6 +1555,101 @@
           "input_audio": 1.5
         }
       },
+      "gemini-3-5-flash-lite": {
+        "id": "gemini-3-5-flash-lite",
+        "name": "Gemini 3.5 Flash Lite",
+        "provider": "google",
+        "family": "gemini-flash-lite",
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "minimal",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-03",
+        "release_date": "2026-07-21",
+        "last_updated": "2026-07-21",
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 0.3,
+          "output": 2.5,
+          "cache_read": 0.03
+        }
+      },
+      "gemini-3-6-flash": {
+        "id": "gemini-3-6-flash",
+        "name": "Gemini 3.6 Flash",
+        "provider": "google",
+        "family": "gemini-flash",
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "minimal",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-03",
+        "release_date": "2026-07-21",
+        "last_updated": "2026-07-21",
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 1.5,
+          "output": 7.5,
+          "cache_read": 0.15,
+          "input_audio": 1.5
+        }
+      },
       "gemma-3-12b": {
         "id": "gemma-3-12b",
         "name": "Gemma 3 12B",
@@ -1820,6 +1933,55 @@
         "limit": {
           "context": 1048576,
           "output": 1048576
+        }
+      },
+      "kimi-k3": {
+        "id": "kimi-k3",
+        "name": "Kimi K3",
+        "provider": "moonshotai",
+        "family": "kimi-k3",
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "minimal",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": true,
+        "release_date": "2026-07-16",
+        "last_updated": "2026-07-16",
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 131072
+        },
+        "cost": {
+          "input": 3,
+          "output": 15,
+          "cache_read": 0.3
         }
       }
     }

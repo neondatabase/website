@@ -17,6 +17,7 @@ const PROVIDER_ORDER = [
   'alibaba',
   'zhipuai',
   'thinkingmachines',
+  'moonshotai',
 ];
 
 const PROVIDER_LABELS = {
@@ -27,6 +28,7 @@ const PROVIDER_LABELS = {
   alibaba: 'Alibaba',
   zhipuai: 'Zhipu AI',
   thinkingmachines: 'Thinking Machines',
+  moonshotai: 'Moonshot AI',
 };
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
