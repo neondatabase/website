@@ -20,6 +20,9 @@ const model = (over = {}) => ({
   temperature: true,
   modalities: { input: ['text'], output: ['text'] },
   limit: { context: 1000, output: 100 },
+  open_weights: false,
+  release_date: '2026-01-01',
+  last_updated: '2026-01-01',
   ...over,
 });
 
@@ -134,7 +137,7 @@ describe('validateCatalog', () => {
   });
 
   it('rejects a non-positive limit', () => {
-    const errors = validateCatalog(catalog({ a: model({ limit: { context: 0 } }) }));
+    const errors = validateCatalog(catalog({ a: model({ limit: { context: 0, output: 100 } }) }));
 
     expect(errors).toEqual([expect.stringContaining('a.limit.context must be a positive integer')]);
   });
@@ -233,7 +236,7 @@ describe('validateCatalog', () => {
       })
     );
     expect(bad).toEqual([
-      expect.stringContaining('tier.type must be a non-empty string'),
+      expect.stringContaining('tier.type must be "context"'),
       expect.stringContaining('tier.size must be a positive integer'),
     ]);
 
@@ -286,7 +289,7 @@ describe('validateCatalog', () => {
         catalog({ a: model({ modalities: { input: ['telepathy'], output: ['text'] } }) })
       )
     ).toEqual([expect.stringContaining('unknown modalities: telepathy')]);
-    expect(validateCatalog(catalog({ a: model({ limit: { vibes: 10 } }) }))).toEqual([
+    expect(validateCatalog(catalog({ a: model({ limit: { output: 100, vibes: 10 } }) }))).toEqual([
       expect.stringContaining('a.limit.vibes is not a known limit'),
     ]);
   });
@@ -318,9 +321,38 @@ describe('validateCatalog', () => {
     expect(errors).toEqual([]);
   });
 
-  it('rejects a numeric status', () => {
-    expect(validateCatalog(catalog({ a: model({ status: 7 }) }))).toEqual([
-      expect.stringContaining('a.status must be one of'),
+  // Taken from the resolved-model schema in models.dev, not guessed: it is
+  // alpha | beta | deprecated, and a tier type is the literal "context".
+  it('accepts the statuses upstream defines and rejects the rest', () => {
+    for (const status of ['alpha', 'beta', 'deprecated']) {
+      expect(validateCatalog(catalog({ a: model({ status }) }))).toEqual([]);
+    }
+    for (const status of [7, 'retired']) {
+      expect(validateCatalog(catalog({ a: model({ status }) }))).toEqual([
+        expect.stringContaining('a.status must be one of'),
+      ]);
+    }
+  });
+
+  it('rejects a tier type other than context', () => {
+    const errors = validateCatalog(
+      catalog({
+        a: model({
+          cost: {
+            input: 1,
+            output: 2,
+            tiers: [{ tier: { type: 'phase', size: 10 }, input: 1, output: 2 }],
+          },
+        }),
+      })
+    );
+
+    expect(errors).toEqual([expect.stringContaining('tier.type must be "context"')]);
+  });
+
+  it('rejects an empty limit', () => {
+    expect(validateCatalog(catalog({ a: model({ limit: {} }) }))).toEqual([
+      expect.stringContaining('a.limit.output is missing'),
     ]);
   });
 

@@ -130,6 +130,13 @@ jobs:
           if [ "${status}" -ne 0 ]; then
             echo "sync check exited ${status}; leaving the tracking issue untouched"
             cat mirror-report.txt
+            # The drift issue is opened from verify-report.txt by the next step.
+            # That file describes the earlier run, which succeeded, so append this
+            # failure or the issue would describe a healthy check.
+            {
+              printf '\n## models.dev mirror check failed (exit %s)\n\n' "${status}"
+              cat mirror-report.txt
+            } >> verify-report.txt
             exit "${status}"
           fi
           title="models.dev mirror is behind neon.com/models.json"

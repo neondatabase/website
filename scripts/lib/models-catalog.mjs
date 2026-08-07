@@ -51,11 +51,16 @@ const REQUIRED_KEYS = [
   'temperature',
   'modalities',
   'limit',
+  'open_weights',
+  'release_date',
+  'last_updated',
 ];
+/** `limit.output` is required upstream; `limit.context` is not, but every entry has it. */
+const REQUIRED_LIMIT_KEYS = ['output'];
 const MODALITIES = new Set(['text', 'image', 'audio', 'video', 'pdf']);
 const LIMIT_KEYS = new Set(['context', 'input', 'output']);
 const REASONING_OPTION_TYPES = new Set(['toggle', 'effort', 'budget_tokens']);
-const STATUSES = new Set(['deprecated', 'retired']);
+const STATUSES = new Set(['alpha', 'beta', 'deprecated']);
 /** Nested rate blocks, keyed by the condition under which they apply. */
 const NESTED_COST_KEYS = new Set(['context_over_200k']);
 const ISO_DATE = /^\d{4}-\d{2}(-\d{2})?$/;
@@ -234,6 +239,9 @@ export function validateCatalog(data) {
       if (!isPlainObject(model.limit)) {
         fail(`${at('limit')} must be an object`);
       } else {
+        for (const field of REQUIRED_LIMIT_KEYS) {
+          if (model.limit[field] === undefined) fail(`${at(`limit.${field}`)} is missing`);
+        }
         for (const [field, value] of Object.entries(model.limit)) {
           if (!LIMIT_KEYS.has(field)) {
             fail(`${at(`limit.${field}`)} is not a known limit`);
@@ -322,8 +330,8 @@ function costErrors(cost, at, { requireRates = true } = {}) {
         if (!isPlainObject(descriptor)) {
           errors.push(`${where}.tier must be an object describing when the rate applies`);
         } else {
-          if (typeof descriptor.type !== 'string' || descriptor.type.trim() === '') {
-            errors.push(`${where}.tier.type must be a non-empty string`);
+          if (descriptor.type !== 'context') {
+            errors.push(`${where}.tier.type must be "context"`);
           }
           if (!Number.isInteger(descriptor.size) || descriptor.size <= 0) {
             errors.push(`${where}.tier.size must be a positive integer`);
