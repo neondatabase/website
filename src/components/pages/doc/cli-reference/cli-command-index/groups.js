@@ -45,16 +45,12 @@ const GROUP_OF = {
   snapshots: 'core',
   inspect: 'debugging',
   'api-keys': 'setup',
-  profile: 'setup',
+  profiles: 'setup',
 };
 
 // Commands documented as a section of another command's page instead of a
-// standalone page, or under a slug that differs from the schema command name.
-// `profile` is the schema's command name (`profiles` is its alias), but the
-// page, nav entry, and CLI help all lead with the plural, so it's documented
-// at cli/profiles.
-const HREF_OVERRIDES = {
-  profile: '/docs/cli/profiles',
-};
+// standalone page. Empty now that deploy and status have their own pages;
+// add an entry here for any future command that lives in another page's section.
+const HREF_OVERRIDES = {};
 
 export { GROUPS, GROUP_OF, HREF_OVERRIDES };

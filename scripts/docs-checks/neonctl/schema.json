@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.46.0",
+  "neonctlVersion": "2.43.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -259,6 +259,7 @@
         },
         "link": {
           "type": "boolean",
+          "describe": "Run `neon link` in the scaffolded directory after installing. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
           "default": true
         },
         "list-templates": {
@@ -1835,6 +1836,7 @@
         },
         "branch": {
           "type": "string",
+          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neonctl checkout <branch>` (link never guesses a default).",
           "alias": "branch-id"
         },
         "checks": {
@@ -1901,7 +1903,7 @@
         },
         {
           "command": "$0 link --project-id polished-snowflake-12345678",
-          "description": ""
+          "description": "Link an existing project (org is inferred); pin a branch later with 'neonctl checkout'"
         }
       ]
     },
@@ -2550,69 +2552,13 @@
       "describe": "Manage organizations",
       "usage": "$0 orgs <sub-command> [options]"
     },
-    "profile": {
+    "profiles": {
       "aliases": [
-        "profiles"
+        "profile"
       ],
       "positionals": [],
       "options": {},
       "commands": {
-        "create": {
-          "name": "create",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "name",
-              "required": true,
-              "describe": "Name for the new profile",
-              "type": "string"
-            }
-          ],
-          "options": {
-            "api-key": {
-              "type": "string",
-              "describe": "API key to store, or \"-\" to read it from stdin"
-            },
-            "force": {
-              "type": "boolean",
-              "describe": "Replace an existing profile, revoking the credential it holds now",
-              "default": false
-            },
-            "mint": {
-              "type": "boolean",
-              "describe": "Sign in once in the browser, then store a freshly minted API key and nothing else",
-              "default": false
-            },
-            "org-id": {
-              "type": "string",
-              "describe": "With --mint, mint a key for this organization instead of your account"
-            },
-            "project-id": {
-              "type": "string",
-              "describe": "With --mint, mint a key that can access only this project"
-            }
-          },
-          "commands": {},
-          "describe": "Create a profile. It holds either a browser sign-in or an API key, never both",
-          "examples": [
-            {
-              "command": "$0 profile create work",
-              "description": "Sign in with the browser, like `neon auth --profile work`"
-            },
-            {
-              "command": "$0 profile create work --api-key \"$KEY\"",
-              "description": "Store a key you already have"
-            },
-            {
-              "command": "echo \"$KEY\" | $0 profile create work --api-key -",
-              "description": "Or pipe it, so it never reaches the process arguments"
-            },
-            {
-              "command": "$0 profile create ci --mint --org-id org-abc-123",
-              "description": "One browser sign-in, then an org-scoped key and no session left behind"
-            }
-          ]
-        },
         "list": {
           "name": "list",
           "aliases": [],
@@ -2641,26 +2587,11 @@
             }
           },
           "commands": {},
-          "describe": "Revoke a profile's credential where possible, and remove it"
-        },
-        "rotate-key": {
-          "name": "rotate-key",
-          "aliases": [],
-          "positionals": [
-            {
-              "name": "name",
-              "required": true,
-              "describe": "Profile to rotate",
-              "type": "string"
-            }
-          ],
-          "options": {},
-          "commands": {},
-          "describe": "Mint a fresh API key for a profile, at the same scope, and revoke the one it replaces"
+          "describe": "Revoke a profile's token and remove it"
         }
       },
       "describe": "Manage named sets of Neon credentials",
-      "usage": "$0 profile <sub-command> [options]"
+      "usage": "$0 profiles <sub-command> [options]"
     },
     "projects": {
       "aliases": [
@@ -2988,6 +2919,7 @@
         }
       },
       "commands": {},
+      "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
       "usage": "$0 set-context [options]"
     },
     "snapshots": {
