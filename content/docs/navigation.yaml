@@ -880,6 +880,8 @@
           items:
             - title: Accounts
               slug: manage/accounts
+            - title: Permissions quickstart
+              slug: manage/project-permissions-get-started
             - title: User permissions
               slug: manage/user-permissions
             - title: Organizations
