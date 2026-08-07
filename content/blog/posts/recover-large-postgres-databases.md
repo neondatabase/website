@@ -119,7 +119,7 @@ Lastly, it’s worth mentioning that enabling **Multi-AZ doubles your production
 
 [Neon](https://neon.tech/home) **is a managed Postgres service that takes a fundamentally different approach to high availability (HA) and point-in-time recovery (PITR).** It’s a great alternative to alleviate the shortcomings of RDS’s capabilities for large databases.
 
-Instead of relying on full-size replicas for HA or multi-hour WAL replays for PITR, Neon [separates storage and compute](https://neon.com/docs/introduction/serverless) and uses an [innovative log-structured storage system.](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal) This architecture enables:
+Instead of relying on full-size replicas for HA or multi-hour WAL replays for PITR, Neon [separates storage and compute](https://neon.com/docs/introduction/serverless) and uses an [innovative log-structured storage system.](https://neon.com/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal) This architecture enables:
 
 - **Instant point-in-time recovery (PITR)** without snapshot restores or WAL replays.
 - **Built-in high availability** without the need for dedicated standby instances.

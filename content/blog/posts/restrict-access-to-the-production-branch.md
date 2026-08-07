@@ -38,7 +38,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/restrict-access-to-the-production-branch/neon-protect-1-1024x576-9b03a7ab.jpg)
 
-Via [database branching workflows](https://neon.tech/flow), developers can quickly experiment and ship updates—this is why we often hear [how Neon accelerates development for teams](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle). But it can be nerve-wracking to think that you might accidentally delete the production branch or project.
+Via [database branching workflows](https://neon.tech/flow), developers can quickly experiment and ship updates—this is why we often hear [how Neon accelerates development for teams](https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle). But it can be nerve-wracking to think that you might accidentally delete the production branch or project.
 
 **To give you peace of mind, we’ve implemented** [**protected branches**](https://neon.com/docs/guides/protected-branches) **in Neon.** By designating a branch as protected, you’ll enforce specific restrictions regarding access and usability, preventing any accidents and limiting access to allowlisted IP lists and networks.
 

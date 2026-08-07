@@ -44,7 +44,7 @@ This increased project limit, combined with Neon’s [scale to zero](https://neo
 
 The Neon partnership program includes [special pricing plans](https://neon.tech/partners) for those companies looking to expand their own platforms with a managed database, but don’t want to get into the business of database hosting themselves. By becoming partners, they can integrate Neon into their applications via OAuth or API-based integrations.
 
-The OAuth integration allows companies to integrate Neon into their platforms (e.g. [you can create a Neon project via Hasura](https://neon.tech/blog/neon-hasura-integration)), while the API integration enables partners to offer managed databases as a fully incorporated element of their products (e.g. [RetoolDB is powered by Neon](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)).
+The OAuth integration allows companies to integrate Neon into their platforms (e.g. [you can create a Neon project via Hasura](https://neon.com/blog/neon-hasura-integration)), while the API integration enables partners to offer managed databases as a fully incorporated element of their products (e.g. [RetoolDB is powered by Neon](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)).
 
 ## What is a Neon project?
 

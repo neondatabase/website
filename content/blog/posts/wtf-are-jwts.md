@@ -33,7 +33,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/wtf-are-jwts/neon-jwt-1-1024x576-0397aca7.jpg)
 
-We recently launched [Neon RLS](https://neon.tech/blog/introducing-neon-authorize) to simplify Postgres authorization with row-level security.
+We recently launched [Neon RLS](https://neon.com/blog/introducing-neon-authorize) to simplify Postgres authorization with row-level security.
 
 If you’ve been reading our posts, [tutorials](https://neon.com/docs/guides/neon-authorize-tutorial), or [READMEs](https://github.com/neondatabase-labs/clerk-nextjs-neon-authorize) on the subject, you’ll have come across three little letters: JWT. This whole world seems to run on JWTs–so what are they?
 

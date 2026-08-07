@@ -49,9 +49,9 @@ The short answer: faster query latencies.
 
 Neon is compatible with any Postgres driver, such as Postgres.js, node-postgres, etc. However, we built the serverless driver to allow V8-isolate runtimes such as Deno and Cloudflare Workers to connect to the database via protocols other than TCP.
 
-Our driver connects to the proxy over a WebSocket, telling the proxy which database host and port it wants to reach. We then worked to optimize for sub-10ms first query latencies, [cutting by half the number of WebSocket roundtrips](https://neon.tech/blog/quicker-serverless-postgres) and then adding support for HTTP and connection caching.
+Our driver connects to the proxy over a WebSocket, telling the proxy which database host and port it wants to reach. We then worked to optimize for sub-10ms first query latencies, [cutting by half the number of WebSocket roundtrips](https://neon.com/blog/quicker-serverless-postgres) and then adding support for HTTP and connection caching.
 
-Read more about [HTTP vs. WebSockets: Which protocol for your Postgres queries at the Edge](https://neon.tech/blog/http-vs-websockets-for-postgres-queries-at-the-edge).
+Read more about [HTTP vs. WebSockets: Which protocol for your Postgres queries at the Edge](https://neon.com/blog/http-vs-websockets-for-postgres-queries-at-the-edge).
 
 You can get started with the serverless driver using the `deno add` command:
 

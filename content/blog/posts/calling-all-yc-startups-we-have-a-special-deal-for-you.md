@@ -50,7 +50,7 @@ Two words: development velocity. Neon’s serverless nature allows you to spin u
 - [You can automatically test schema migrations before they ship](https://www.youtube.com/watch?v=EOVa68Uviks) by integrating database branching directly into your CI/CD pipelines via the Neon API or GitHub Actions, creating one preview database branch per PR.
 - Bugs can be fixed faster. Neon database branches [can be created from any past point](https://neon.com/docs/introduction/branching#what-is-a-branch), enabling your team to reproduce and diagnose issues and fix regressions easily.
 
-Multiple database branches can be used simultaneously to test different fixes or updates without any risk for conflicts. This is sustainable also: [branching uses a copy-on-write system in Neon](https://neon.tech/blog/architecture-decisions-in-neon), making database branches very resource-efficient and virtually free.
+Multiple database branches can be used simultaneously to test different fixes or updates without any risk for conflicts. This is sustainable also: [branching uses a copy-on-write system in Neon](https://neon.com/blog/architecture-decisions-in-neon), making database branches very resource-efficient and virtually free.
 
 <blockquote>
 <p>With branching, we can test with actual data and spot and fix errors easily. Since every engineer can work on an individual branch that mirrors production, we can collaboratively develop, test, and debug in a synchronized manner.</p>

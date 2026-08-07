@@ -97,7 +97,7 @@ Instead of maintaining and paying for multiple full-blown RDS instances, traconi
 
 To test their setup reliably, traconiq needs their dev environments to mirror production, not just the schema, but also the full data volume. That meant dev instances in RDS needed multi-TB storage volumes too. With Neon, this is no longer a problem:
 
-- Branches don’t duplicate storage, thanks to [Neon’s copy-on-write architecture](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write)
+- Branches don’t duplicate storage, thanks to [Neon’s copy-on-write architecture](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write)
 - Dev environments can be synced with production in one click
 - Compute scales to zero when dev branches are idle
 

@@ -140,14 +140,14 @@ In Neon,
 
 - WAL is conceptualized as the core of the storage mechanism.
 - All changes are first recorded in WAL, which is then processed to update the database state.
-- WAL is streamed to a [layered storage system](https://neon.tech/blog/get-page-at-lsn) where data is organized into immutable files in object storage.
+- WAL is streamed to a [layered storage system](https://neon.com/blog/get-page-at-lsn) where data is organized into immutable files in object storage.
 - Compute nodes are ephemeral and stateless.
 
-Neon relies on WAL to separate storage and compute through two different components: Safekeepers and Pageservers. Safekeepers ensure the durability of database changes; Postgres streams the WAL to the Safekeepers, where a [Paxos-like consensus algorithm](https://neon.tech/blog/paxos) ensures that transactions can be restored if lost (the core function of the WAL). Pageservers read the WAL from the Safekeepers to find the modified pages, convert them into Neon [Pages](https://neon.com/docs/reference/glossary#page), and process them into S3 object storage.
+Neon relies on WAL to separate storage and compute through two different components: Safekeepers and Pageservers. Safekeepers ensure the durability of database changes; Postgres streams the WAL to the Safekeepers, where a [Paxos-like consensus algorithm](https://neon.com/blog/paxos) ensures that transactions can be restored if lost (the core function of the WAL). Pageservers read the WAL from the Safekeepers to find the modified pages, convert them into Neon [Pages](https://neon.com/docs/reference/glossary#page), and process them into S3 object storage.
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal/screenshot-2024-04-30-at-91905percente2percent80percentafam-1024x437-5d970a12.png)
 
-[Read our deep dive on storage to learn more about these components and how reads and writes are handled in Neon.](https://neon.tech/blog/get-page-at-lsn)
+[Read our deep dive on storage to learn more about these components and how reads and writes are handled in Neon.](https://neon.com/blog/get-page-at-lsn)
 
 ## What this enables
 

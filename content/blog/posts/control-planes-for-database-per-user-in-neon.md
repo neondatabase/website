@@ -35,7 +35,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/control-planes-for-database-per-user-in-neon/neon-control-planes-1-1024x576-cc6a7102.jpg)
 
-Due to its serverless architecture, [Neon](https://neon.tech/) is a great option for building multi-tenant, database-per-user applications in Postgres. [In a previous post](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres), we explored the various approaches to multi-tenancy in Postgres, with a particular focus on the database-per-user architecture and its advantages for isolating customer data.
+Due to its serverless architecture, [Neon](https://neon.tech/) is a great option for building multi-tenant, database-per-user applications in Postgres. [In a previous post](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres), we explored the various approaches to multi-tenancy in Postgres, with a particular focus on the database-per-user architecture and its advantages for isolating customer data.
 
 In this second post, we dive into a crucial component of managing database-per-user systems: the control plane. Understanding and implementing an effective control plane is key to scaling your application while maintaining operational efficiency and security.
 
@@ -43,13 +43,13 @@ In this second post, we dive into a crucial component of managing database-per-u
 
 Before we get into the specifics of control planes, let’s review the core concepts that make up the Neon ecosystem so that you can follow through the logic of the sections below.
 
-[Neon](https://neon.tech) is a Postgres service with a [custom-built storage engine](https://neon.tech/blog/get-page-at-lsn) that separates compute from persistence. When you build on Neon, you organize your backend in a [hierarchy](https://neon.com/docs/manage/overview) of three primary elements: **projects**, **branches**, and **databases**.
+[Neon](https://neon.tech) is a Postgres service with a [custom-built storage engine](https://neon.com/blog/get-page-at-lsn) that separates compute from persistence. When you build on Neon, you organize your backend in a [hierarchy](https://neon.com/docs/manage/overview) of three primary elements: **projects**, **branches**, and **databases**.
 
 - A **project** in Neon acts as a container for all your database resources. Each project can host multiple branches and databases, making projects the top-level unit within your Neon organization.
 - **Branches** in Neon are similar to branches in version control systems like Git. They allow you to create copies of your database environment at specific points in time and make changes in an isolated sandbox. This feature is particularly useful for testing, development, or experimenting with new features without affecting the main branch.
 - Within each branch, you can have one or more Postgres **databases**. These databases store the actual data and are isolated from each other, even within the same branch.
 
-When talking about database-per-user architectures in Neon, we’re usually speaking of a [project-per-user](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) design. Projects offer the highest level of isolation, and features like branching and [PITR](https://neon.com/docs/guides/branch-restore) are difficult if not impossible to use safely without each user’s data in its own project.
+When talking about database-per-user architectures in Neon, we’re usually speaking of a [project-per-user](https://neon.com/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) design. Projects offer the highest level of isolation, and features like branching and [PITR](https://neon.com/docs/guides/branch-restore) are difficult if not impossible to use safely without each user’s data in its own project.
 
 If you’re creating one Neon project per user, the number of Neon projects will quickly grow. Managing them individually becomes increasingly complex and time-consuming — so a centralized approach will be necessary to stay on top of operations. This is where the **control plane** comes into play.
 

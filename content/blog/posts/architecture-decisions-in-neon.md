@@ -112,14 +112,14 @@ We built a modern, cloud-native architecture that separates storage from compute
 
 ---
 
-1\. A. Verbitski et al., “Amazon Aurora,” Proceedings of the 2017 ACM International Conference on Management of Data. ACM, May 09, 2017 [Online]. Available: [https://dx.doi.org/10.1145/3035918.3056101](https://dx.doi.org/10.1145/3035918.3056101) [↩](https://neon.tech/blog/architecture-decisions-in-neon/#fnref-1)
+1\. A. Verbitski et al., “Amazon Aurora,” Proceedings of the 2017 ACM International Conference on Management of Data. ACM, May 09, 2017 [Online]. Available: [https://dx.doi.org/10.1145/3035918.3056101](https://dx.doi.org/10.1145/3035918.3056101) [↩](https://neon.com/blog/architecture-decisions-in-neon/#fnref-1)
 
-2\. P. Antonopoulos et al., “Socrates,” Proceedings of the 2019 International Conference on Management of Data. ACM, Jun. 25, 2019 [Online]. Available: [https://www.microsoft.com/en-us/research/uploads/prod/2019/05/socrates.pdf](https://www.microsoft.com/en-us/research/uploads/prod/2019/05/socrates.pdf) [↩](https://neon.tech/blog/architecture-decisions-in-neon/#fnref-2)
+2\. P. Antonopoulos et al., “Socrates,” Proceedings of the 2019 International Conference on Management of Data. ACM, Jun. 25, 2019 [Online]. Available: [https://www.microsoft.com/en-us/research/uploads/prod/2019/05/socrates.pdf](https://www.microsoft.com/en-us/research/uploads/prod/2019/05/socrates.pdf) [↩](https://neon.com/blog/architecture-decisions-in-neon/#fnref-2)
 
-3\. W. Cao et al., “PolarDB Serverless,” Proceedings of the 2021 International Conference on Management of Data. ACM, Jun. 09, 2021 [Online]. Available: [https://dx.doi.org/10.1145/3448016.3457560](https://dx.doi.org/10.1145/3448016.3457560) [↩](https://neon.tech/blog/architecture-decisions-in-neon/#fnref-3)
+3\. W. Cao et al., “PolarDB Serverless,” Proceedings of the 2021 International Conference on Management of Data. ACM, Jun. 09, 2021 [Online]. Available: [https://dx.doi.org/10.1145/3448016.3457560](https://dx.doi.org/10.1145/3448016.3457560) [↩](https://neon.com/blog/architecture-decisions-in-neon/#fnref-3)
 
 ## 📚 Keep reading
 
-- **[A deep dive into our storage engine:](https://neon.tech/blog/get-page-at-lsn)** Neon’s custom-built storage is the core of the platform—get details into how its built.
-- **[How we scale an open-source, multi-tenant storage engine for Postgres written in Rust](https://neon.tech/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust):** keep learning about how we implemented sharding in our storage to allow Neon to host larger datasets and I/O.
-- **[1 year of autoscaling Postgres:](https://neon.tech/blog/1-year-of-autoscaling-postgres-at-neon)** a review of our autoscaling design. Neon can autoscale your Postgres instance without dropping connections or interrupting your queries, avoiding the need for overprovisioning or resizing manually.
+- **[A deep dive into our storage engine:](https://neon.com/blog/get-page-at-lsn)** Neon’s custom-built storage is the core of the platform—get details into how its built.
+- **[How we scale an open-source, multi-tenant storage engine for Postgres written in Rust](https://neon.com/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust):** keep learning about how we implemented sharding in our storage to allow Neon to host larger datasets and I/O.
+- **[1 year of autoscaling Postgres:](https://neon.com/blog/1-year-of-autoscaling-postgres-at-neon)** a review of our autoscaling design. Neon can autoscale your Postgres instance without dropping connections or interrupting your queries, avoiding the need for overprovisioning or resizing manually.

@@ -90,7 +90,7 @@ But when it came to choosing a database, Rhythmic doubled down on Neon. **Neon o
 ## Making it Easy With the Neon Azure Native Integration
 
 <Admonition type="note" title="for azure teams">
-Our Azure Native Integration is now generally available. [Read the announcement to get familiar with what it offers](https://neon.tech/blog/azure-native-integration-ga)—if you’re running on Azure, this gives you a Neon experience that’s deeply integrated, just like any other Azure-native service.
+Our Azure Native Integration is now generally available. [Read the announcement to get familiar with what it offers](https://neon.com/blog/azure-native-integration-ga)—if you’re running on Azure, this gives you a Neon experience that’s deeply integrated, just like any other Azure-native service.
 </Admonition>
 
 Rhythmic was already using Neon in their initial stack, on an non-Azure Neon tenant. After joining [Microsoft for Startups](https://www.microsoft.com/en-us/startups) and shifting to Azure for long-term compliance and partner alignment, Neon’s integration with the Azure ecosystem made the transition smooth. What stood out:

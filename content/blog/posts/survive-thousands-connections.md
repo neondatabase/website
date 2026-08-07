@@ -87,7 +87,7 @@ But RDS Proxy has its limitations. It imposes hard limits on concurrent connecti
 <p>“Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS” <em>(Cody Jenkins, Head of Engineering at Invenco)</em></p>
 </blockquote>
 
-[Invenco](https://www.invenco.net/), an e-commerce logistics company, [suffered these problems](https://neon.tech/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon). Their architecture involved Lambda functions processing payment transactions against Aurora Serverless v2. In theory, AWS Lambda and Aurora Serverless v2 should be a match made in cloud heaven. But Aurora Serverless v2 struggled to handle the concurrent connections from their Lambda functions during traffic spikes, and adding RDS Proxy didn’t solve the issues.
+[Invenco](https://www.invenco.net/), an e-commerce logistics company, [suffered these problems](https://neon.com/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon). Their architecture involved Lambda functions processing payment transactions against Aurora Serverless v2. In theory, AWS Lambda and Aurora Serverless v2 should be a match made in cloud heaven. But Aurora Serverless v2 struggled to handle the concurrent connections from their Lambda functions during traffic spikes, and adding RDS Proxy didn’t solve the issues.
 
 Why? Let’s take a look at a typical Aurora Serverless v2 connection pattern during a traffic spike:
 
@@ -133,7 +133,7 @@ Remember: connection pooling isn’t magic. Those 10,000 concurrent connections 
 
 ## How to Use Neon Connection Pooling With AWS Lambda
 
-Let’s build an app that might need to take advantage of this type of pooling. We will mimic a service like [Invenco](https://neon.tech/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon) with fulfillment, sales, and inventory management endpoints.
+Let’s build an app that might need to take advantage of this type of pooling. We will mimic a service like [Invenco](https://neon.com/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon) with fulfillment, sales, and inventory management endpoints.
 
 We’ll start with Neon. We’ll create a [new project](https://console.neon.tech/app/projects), our schema, and some mock data:
 

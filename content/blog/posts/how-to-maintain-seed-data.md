@@ -37,7 +37,7 @@ seo:
 
 As beautiful as a greenfield database is, it’s useless without data. This is not just for production–tests, development, staging, and demos–all need data for proper functionality.
 
-This is where seed files come in. [Seed files](https://neon.tech/blog/database-testing-with-fixtures-and-seeding) are scripts that populate your database with initial data: admin roles, initial categories, and basic users. This seems like a simple concept. But as with everything in development, what seems simple at the outset becomes complex as you scale.
+This is where seed files come in. [Seed files](https://neon.com/blog/database-testing-with-fixtures-and-seeding) are scripts that populate your database with initial data: admin roles, initial categories, and basic users. This seems like a simple concept. But as with everything in development, what seems simple at the outset becomes complex as you scale.
 
 Seeding needs management just like anything else. So, how do you do that?
 

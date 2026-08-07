@@ -40,11 +40,11 @@ Neon Support often receives support tickets related to Postgres query performanc
 
 Specifically, we’ll take a look at these strategies:
 
-- [Analyzing query performance with pg_stat_statements](https://neon.tech/blog/postgres-support-recap-investigating-postgres-query-performance#strategy-1-analyzing-query-performance-with-pgstatstatements)
-- [Checking your cache hit ratio](https://neon.tech/blog/postgres-support-recap-investigating-postgres-query-performance#strategy-2-checking-your-cache-hit-ratio)
-- [Checking for table or index bloat](https://neon.tech/blog/postgres-support-recap-investigating-postgres-query-performance#strategy-3-checking-for-table-or-index-bloat)
+- [Analyzing query performance with pg_stat_statements](https://neon.com/blog/postgres-support-recap-investigating-postgres-query-performance#strategy-1-analyzing-query-performance-with-pgstatstatements)
+- [Checking your cache hit ratio](https://neon.com/blog/postgres-support-recap-investigating-postgres-query-performance#strategy-2-checking-your-cache-hit-ratio)
+- [Checking for table or index bloat](https://neon.com/blog/postgres-support-recap-investigating-postgres-query-performance#strategy-3-checking-for-table-or-index-bloat)
 
-For those who prefer a visual monitoring tool over running SQL queries, we’ll finish off this post by introducing a free and open-source Postgres query monitoring and analysis application called [PgHero](https://neon.tech/blog/postgres-support-recap-investigating-postgres-query-performance#pghero-a-performance-dashboard-for-postgres).
+For those who prefer a visual monitoring tool over running SQL queries, we’ll finish off this post by introducing a free and open-source Postgres query monitoring and analysis application called [PgHero](https://neon.com/blog/postgres-support-recap-investigating-postgres-query-performance#pghero-a-performance-dashboard-for-postgres).
 
 Without further ado, let’s get started!
 

@@ -35,7 +35,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/performance-tips-for-neon-postgres/neon-performance-tips-1-1024x576-867903e3.jpg)
 
-[Neon](https://neon.tech/) is serverless Postgres. Neon databases elastically scale up and down according to load—including scaling to zero—and database operations are greatly simplified via [robust API support](https://neon.com/docs/reference/api/get-started) and [database branching capabilities](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds). But just like every Postgres, to get the most out of Neon’s performance, it’s good to know a few tricks and best practices.
+[Neon](https://neon.tech/) is serverless Postgres. Neon databases elastically scale up and down according to load—including scaling to zero—and database operations are greatly simplified via [robust API support](https://neon.com/docs/reference/api/get-started) and [database branching capabilities](https://neon.com/blog/how-to-copy-large-postgres-databases-in-seconds). But just like every Postgres, to get the most out of Neon’s performance, it’s good to know a few tricks and best practices.
 
 ## Compute sizing and connections management
 
@@ -49,7 +49,7 @@ While it might be tempting to minimize costs by keeping compute resources limite
 
 ## Troubleshooting Postgres query performance
 
-As we covered in this [Support Recap](https://neon.tech/blog/postgres-support-recap-investigating-postgres-query-performance) blog post, fixing query performance is something that comes up frequently among Postgres users. Things were looking fast yesterday but are sluggish today: what’s going on?
+As we covered in this [Support Recap](https://neon.com/blog/postgres-support-recap-investigating-postgres-query-performance) blog post, fixing query performance is something that comes up frequently among Postgres users. Things were looking fast yesterday but are sluggish today: what’s going on?
 
 ### Using pg_stat_statements for performance analysis
 
@@ -150,7 +150,7 @@ After implementing this index, rerunning `EXPLAIN ANALYZE` on the query should s
 
 ### Reduce bloat
 
-After ruling out indexes, the next thing to consider would be table bloat. Managing bloat can be (unfortunately) [quite a pain in Postgres](https://rbranson.medium.com/10-things-i-hate-about-postgresql-20dbab8c2791), so it really pays off to keep an eye on it. A bloated table not only will be less performant, but it will also need much more storage than a healthy table – [therefore inflating your bill.](https://neon.tech/blog/6-tips-to-optimize-storage-costs-for-your-postgres-databases)
+After ruling out indexes, the next thing to consider would be table bloat. Managing bloat can be (unfortunately) [quite a pain in Postgres](https://rbranson.medium.com/10-things-i-hate-about-postgresql-20dbab8c2791), so it really pays off to keep an eye on it. A bloated table not only will be less performant, but it will also need much more storage than a healthy table – [therefore inflating your bill.](https://neon.com/blog/6-tips-to-optimize-storage-costs-for-your-postgres-databases)
 
 Let’s go back to our previous EXPLAIN example output. Imagine we already had an index in customer_id; its absence in the plan might indicate that the index is inefficient, possibly due to bloat. A bloated index can lead Postgres to default back to a full table scan.
 
@@ -163,7 +163,7 @@ To fix this, you could consider a strategy with two parts:
 
 If you optimize indexes and reduce bloat but still observe suboptimal performance, checking cache usage could be a good next step.
 
-Ensuring that data you frequently access is predominantly served from cache can mitigate performance issues not solved by indexing alone. This is especially important in Neon, [given its unique architecture that extends Postgres shared buffers with a local file cache.](https://neon.tech/blog/architecture-decisions-in-neon) The process of analyzing cache usage therefore looks a bit different in Neon vs in traditional Postgres.
+Ensuring that data you frequently access is predominantly served from cache can mitigate performance issues not solved by indexing alone. This is especially important in Neon, [given its unique architecture that extends Postgres shared buffers with a local file cache.](https://neon.com/blog/architecture-decisions-in-neon) The process of analyzing cache usage therefore looks a bit different in Neon vs in traditional Postgres.
 
 To evaluate caching effectiveness in Neon, you need to look at local file cache hits instead of shared buffer hits. Neon allows you to do this by providing a `neon_stat_file_cache` view. To access this view, you need to install the neon extension first:
 
@@ -201,7 +201,7 @@ This is a basic, but it happens. At the start of this post, we mentioned how it 
 
 This tip could also live in the query performance section since it helps both with writes and reads. If your application deals with heavy writes, heavy read queries, or both, Neon allows you to liberate load in your main compute by offloading read queries to a [read-only compute endpoint](https://neon.com/docs/introduction/read-replicas), which is equivalent to the concept of read replica in other databases.
 
-The main difference between Neon’s implementation and “regular” read replicas resides in the serverless nature of Neon. In Neon, [read replicas are ephemeral](https://neon.tech/blog/white-widgets-secret-to-scalable-postgres-neon): they don’t need their own copy of storage, they’re ready instantly when you need them, and they scale down to zero when traffic slows down. They’re much more affordable than traditional read replicas – [take advantage of them.](https://neon.com/docs/guides/read-replica-guide)
+The main difference between Neon’s implementation and “regular” read replicas resides in the serverless nature of Neon. In Neon, [read replicas are ephemeral](https://neon.com/blog/white-widgets-secret-to-scalable-postgres-neon): they don’t need their own copy of storage, they’re ready instantly when you need them, and they scale down to zero when traffic slows down. They’re much more affordable than traditional read replicas – [take advantage of them.](https://neon.com/docs/guides/read-replica-guide)
 
 ### Insert data in batches
 

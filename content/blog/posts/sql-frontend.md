@@ -72,7 +72,7 @@ There’s a few things that traditional databases will have to build in order to
 
 ## And now what?
 
-As we were working on [Neon RLS](https://neon.tech/blog/introducing-neon-authorize), one of the use cases we considered was “SQL from the frontend” apps. And while it isn’t necessarily ready for that yet, we [wrote down our thoughts on the future of the feature](https://neon.com/docs/guides/neon-authorize-future) and a lot of what’s in there is indeed geared towards that. This is definitely an area we’re interested in exploring more, so we’d love to get any feedback on it. Please [reach out to me](https://x.com/davidrfgomes) or send us a message on [our Discord server](https://neon.tech/discord) if you have any ideas.
+As we were working on [Neon RLS](https://neon.com/blog/introducing-neon-authorize), one of the use cases we considered was “SQL from the frontend” apps. And while it isn’t necessarily ready for that yet, we [wrote down our thoughts on the future of the feature](https://neon.com/docs/guides/neon-authorize-future) and a lot of what’s in there is indeed geared towards that. This is definitely an area we’re interested in exploring more, so we’d love to get any feedback on it. Please [reach out to me](https://x.com/davidrfgomes) or send us a message on [our Discord server](https://neon.tech/discord) if you have any ideas.
 
 <Admonition type="important" title="Update: Neon RLS is now part of the Neon Data API">
 We’ve moved the functionality previously known as Neon RLS / Neon Authorize into the Neon Data API. You can [read more about the Data API here](https://neon.com/docs/data-api/get-started) and start using it in your projects today.

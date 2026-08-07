@@ -188,5 +188,5 @@ We are excited to see the innovative applications you will develop with `pg_embe
 ## 📚 Continue reading
 
 - **[Understanding vector search and HNSW index with pgvector:](https://Understanding vector search and HNSW index with pgvector)** learn how HNSW enhances the efficiency and responsiveness of AI applications by allowing faster and more scalable vector similarity searches.
-- **[What you need to know about Mixtral 8x7B:](https://neon.tech/blog/mixtral-8x7b-what-you-need-to-know-about-mistral-ais-latest-model)** learn about the advancements introduced by this model, including potential cost benefits.
-- **[30x faster index build for your vector embeddings with pgvector:](https://neon.tech/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings)** learn how the new pgvector speeds up the index building process for vector embeddings by 30 times, optimizing performance for your AI apps.
+- **[What you need to know about Mixtral 8x7B:](https://neon.com/blog/mixtral-8x7b-what-you-need-to-know-about-mistral-ais-latest-model)** learn about the advancements introduced by this model, including potential cost benefits.
+- **[30x faster index build for your vector embeddings with pgvector:](https://neon.com/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings)** learn how the new pgvector speeds up the index building process for vector embeddings by 30 times, optimizing performance for your AI apps.

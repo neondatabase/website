@@ -86,7 +86,7 @@ The project lives in these repos:
 At the heart of Instagres is [Neon](https://neon.tech/home), a serverless Postgres platform that allows databases to be created in under a second. When a user accesses Instagres, either through the browser or the CLI, the tool interacts with [Neon’s API](https://neon.com/docs/reference/api-reference) to spin up a new Postgres database.
 
 <Admonition type="info" title="FYI">
-Tools like Retool and Replit Agent leverage this instant provisioning speed to quickly create databases for end-users and AI agents. Explore their stories [here](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) and [here](https://neon.tech/blog/how-to-add-a-postgres-database-to-your-replit-agent-project).
+Tools like Retool and Replit Agent leverage this instant provisioning speed to quickly create databases for end-users and AI agents. Explore their stories [here](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) and [here](https://neon.com/blog/how-to-add-a-postgres-database-to-your-replit-agent-project).
 </Admonition>
 
 <br />This lightning-fast provisioning generates a connection string almost instantly. Once you claim your database, Neon also handles the backend heavy lifting, such as autoscaling for storage and compute.

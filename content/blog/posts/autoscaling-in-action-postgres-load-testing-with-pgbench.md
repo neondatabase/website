@@ -39,7 +39,7 @@ In this article, I’ll show Neon autoscaling in action by running a load test u
 
 While 30 doesn’t sound like a lot, the query involves a mathematical function with high computational overhead, which signals to the autoscaler-agent that it needs to allocate more resources to the VM.
 
-We will not cover how autoscaling works, but for those interested in knowing the details, you can read more about [how we implemented autoscaling in Neon](https://neon.tech/blog/scaling-serverless-postgres).
+We will not cover how autoscaling works, but for those interested in knowing the details, you can read more about [how we implemented autoscaling in Neon](https://neon.com/blog/scaling-serverless-postgres).
 
 For this load test, you will need:
 

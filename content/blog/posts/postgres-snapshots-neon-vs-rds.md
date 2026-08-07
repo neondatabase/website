@@ -107,7 +107,7 @@ In the life of a DBA, there are plenty of these _database moments_ you’d like 
 
 ## How Neon Implements A New Architecture for Snapshots
 
-At [Neon](https://neon.tech/home), we’ve taken a different approach to snapshots, one that’s built on our underlying [copy-on-write storage architecture](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write).
+At [Neon](https://neon.tech/home), we’ve taken a different approach to snapshots, one that’s built on our underlying [copy-on-write storage architecture](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write).
 
 **In Neon, a snapshot isn’t a static backup stored in S3, but a point-in-time reference to the state of a branch, captured instantly and without performance impact.** When you restore a snapshot, you’re not spinning up a new instance or copying terabytes of data: you’re creating a new branch. This new branch points to the same underlying storage and can be queried immediately.
 

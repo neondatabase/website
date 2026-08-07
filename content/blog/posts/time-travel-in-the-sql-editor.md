@@ -89,19 +89,19 @@ Next, enable **Time Travel** and set the timestamp to a minute before you ran th
 
 <img src="https://lh7-us.googleusercontent.com/xlxsA27P7uMtxu3aV2tkdTwCZUqj55OZAGjqFJHLPJZpDQo6u-tlOK4_IKcIEf7AoSZFU6G-bYdkxOkG3mWdhUryySzq9qzEIMAAhvfLbAAFm77lbbsH6nMqTSiLuaOz9i5QdbnlYocE85pbUOmGJJE" alt="Post image" width="975" height="512" />
 
-In reality, you would probably [perform a bisect](https://neon.tech/blog/time-travel-with-postgres) that starts at the point in time when the invoice was created and moves forward from there to find the point in time when the data loss occurred. From there you can take steps to restore the data.
+In reality, you would probably [perform a bisect](https://neon.com/blog/time-travel-with-postgres) that starts at the point in time when the invoice was created and moves forward from there to find the point in time when the data loss occurred. From there you can take steps to restore the data.
 
 ## Ephemeral Branches: Behind the Scenes
 
-You might be aware that [Neon’s architecture seprates storage and compute](https://neon.tech/blog/point-in-time-recovery-in-postgres). Storage is primarily handled by two components: the Pageserver and Safekeepers.
+You might be aware that [Neon’s architecture seprates storage and compute](https://neon.com/blog/point-in-time-recovery-in-postgres). Storage is primarily handled by two components: the Pageserver and Safekeepers.
 
-Safekeepers are responsible for persistence. They process the [Write-Ahead Log (WAL)](https://www.postgresql.org/docs/current/wal-intro.html) and ensure it is replicated for redundancy using the Paxos consensus algorithm. The Pageservers respond to read requests by [reconstructing a given page](https://neon.tech/blog/get-page-at-lsn) (identified by LSN) from the last image of that page plus any subsequent WAL records.
+Safekeepers are responsible for persistence. They process the [Write-Ahead Log (WAL)](https://www.postgresql.org/docs/current/wal-intro.html) and ensure it is replicated for redundancy using the Paxos consensus algorithm. The Pageservers respond to read requests by [reconstructing a given page](https://neon.com/blog/get-page-at-lsn) (identified by LSN) from the last image of that page plus any subsequent WAL records.
 
 Compute instances (Postgres VMs) can request the database state at a given point in time, identified by LSN. This has some interesting implications.
 
 <img src="https://lh7-us.googleusercontent.com/BULbelREmftw6e0vPkvezF7atrLzgkt3ihtLu2xmoMQDcgWYQzBPwiDdUp4CBpNMxIwKTVb8PVraBw2YAxmn2CEuoj6v0I9JdYimtXhMm5onqEyxkTbu680Bw9crk_kUtZtS7hPOIDT4JTtKCmWXffA" alt="Post image" width="975" height="512" />
 
-Since Neon’s Postgres computes can request the database at a specific point in the database’s history, we can provide near [instantaneous point-in-time recovery](https://neon.tech/blog/point-in-time-recovery-in-postgres), and our **Time Travel** queries.
+Since Neon’s Postgres computes can request the database at a specific point in the database’s history, we can provide near [instantaneous point-in-time recovery](https://neon.com/blog/point-in-time-recovery-in-postgres), and our **Time Travel** queries.
 
 ## Conclusion
 

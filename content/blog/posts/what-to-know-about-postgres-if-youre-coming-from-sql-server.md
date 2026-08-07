@@ -61,7 +61,7 @@ Postgres, on the other hand, uses [PL/pgSQL](https://neon.tech/postgresql/postgr
 This means that while both are SQL at heart, they each have their quirks and conventions. We will set up two databases, one on the SQL server and one on [Neon](https://neon.tech/home) with Postgres, and see some of the differences between the two.
 
 <Admonition type="note" title="About Neon">
-*Neon is a serverless Postgres platform that’s available in Azure as a* [Native Integration](https://neon.tech/blog/neon-is-now-available-as-an-azure-native-integration)*. It also has a Free Plan—you can get a Postgres database running in seconds.*
+*Neon is a serverless Postgres platform that’s available in Azure as a* [Native Integration](https://neon.com/blog/neon-is-now-available-as-an-azure-native-integration)*. It also has a Free Plan—you can get a Postgres database running in seconds.*
 </Admonition>
 
 ### String delimiters
@@ -354,7 +354,7 @@ Moving away from the specifics of syntactic play in SQL Server and Postgres, it 
 
 This manifests in different ways. First, in how features are developed and rolled out. In SQL Server, features come through Microsoft’s product roadmap–they’re carefully planned, extensively tested, and released in major versions with precise deprecation schedules. When Microsoft decides to add temporal tables or JSON support, it happens comprehensively and with extensive documentation.
 
-Postgres, by contrast, evolves through community consensus and contribution. For instance, here are [Neon developers’ contributions to Postgres 17](https://neon.tech/blog/top-3-features-in-postgres-17). Features might start as extensions before being incorporated into core, and different distributions might support different feature sets. For instance, the popular [uuid-ossp](https://www.postgresql.org/docs/current/uuid-ossp.html) module for UUID generation isn’t part of the core installation–you’ll need to explicitly enable it with CREATE EXTENSION. This modularity is both a strength and a complexity you’ll need to navigate.
+Postgres, by contrast, evolves through community consensus and contribution. For instance, here are [Neon developers’ contributions to Postgres 17](https://neon.com/blog/top-3-features-in-postgres-17). Features might start as extensions before being incorporated into core, and different distributions might support different feature sets. For instance, the popular [uuid-ossp](https://www.postgresql.org/docs/current/uuid-ossp.html) module for UUID generation isn’t part of the core installation–you’ll need to explicitly enable it with CREATE EXTENSION. This modularity is both a strength and a complexity you’ll need to navigate.
 
 This community-driven nature extends to tooling as well. Where [SQL Server Management Studio](https://learn.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms?view=sql-server-ver16) (SSMS) is the de facto standard for SQL Server development, Postgres users choose between pgAdmin, DBeaver, DataGrip, and dozens of other tools (such as [Neon](https://neon.tech/home)). Each has its strengths and user communities. The same goes for monitoring, backup solutions, and other operational tools–you’re not locked into a single vendor’s ecosystem.
 
@@ -382,7 +382,7 @@ This community-driven development also means that Postgres often gets cutting-ed
 
 ## Switching worlds
 
-There are a ton of good reasons to stay with SQL Server. The Microsoft ecosystem is deeply integrated and well-supported, and if your team has years of T-SQL expertise, that’s valuable institutional knowledge. Plus, Microsoft’s development pace has picked up significantly in recent years, with features like ledger tables and intelligent query processing showing they’re still innovating (and, of course, [their integration of Neon in Azure](https://neon.tech/blog/first-azure-region-available-in-neon)).
+There are a ton of good reasons to stay with SQL Server. The Microsoft ecosystem is deeply integrated and well-supported, and if your team has years of T-SQL expertise, that’s valuable institutional knowledge. Plus, Microsoft’s development pace has picked up significantly in recent years, with features like ledger tables and intelligent query processing showing they’re still innovating (and, of course, [their integration of Neon in Azure](https://neon.com/blog/first-azure-region-available-in-neon)).
 
 However, there are also _great_ reasons to move to Postgres. The rapid pace of community innovation means you’re often getting cutting-edge features years before they appear in commercial databases, and the freedom to choose your tools, hosting, and extensions gives you unprecedented flexibility in building your stack. The vibrant community means you’re never solving problems alone.
 

@@ -48,7 +48,7 @@ seo:
 
 Neon now has beta support for Postgres Logical Replication. This enables teams to use [Change Data Capture (CDC)](https://en.wikipedia.org/wiki/Change_data_capture) to observe database changes – such as INSERT and UPDATE operations – and stream these changes to downstream systems.
 
-We previously wrote about the [benefits of CDC](https://neon.tech/blog/change-data-capture-with-serverless-postgres#why-cdc-matters) and how it enables [Event-Driven Architecture (EDA)](https://en.wikipedia.org/wiki/Event-driven_architecture). An EDA facilitates the implementation of messaging patterns, such as [fan-out](<https://en.wikipedia.org/wiki/Fan-out_(software)>), with your Neon Postgres database at the heart of the system.
+We previously wrote about the [benefits of CDC](https://neon.com/blog/change-data-capture-with-serverless-postgres#why-cdc-matters) and how it enables [Event-Driven Architecture (EDA)](https://en.wikipedia.org/wiki/Event-driven_architecture). An EDA facilitates the implementation of messaging patterns, such as [fan-out](<https://en.wikipedia.org/wiki/Fan-out_(software)>), with your Neon Postgres database at the heart of the system.
 
 Implementing a fan-out pattern enables you to create applications composed of loosely coupled components. Downstream consumers can work individually or as groups to asynchronously process database events to update other parts of your system in real-time.
 
@@ -328,4 +328,4 @@ main()
 
 ## Conclusion
 
-Neon’s support for Postres’ Logical Replication enables development teams to leverage Event-Driven Architectures to create robust, real-time applications with Postgres at the core. Change Data Capture platforms and technologies like Debezium provide low-code open-source solutions to reliably stream changes from Postgres to messaging systems such as Redis for further processing and analysis. If you’re looking for a Postgres database, [sign up and try Neon](https://neon.tech/blog/python-django-and-neons-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon) for free. Join us in our [Discord server](https://neon.tech/discord) to share your experiences, suggestions, and challenges.
+Neon’s support for Postres’ Logical Replication enables development teams to leverage Event-Driven Architectures to create robust, real-time applications with Postgres at the core. Change Data Capture platforms and technologies like Debezium provide low-code open-source solutions to reliably stream changes from Postgres to messaging systems such as Redis for further processing and analysis. If you’re looking for a Postgres database, [sign up and try Neon](https://neon.com/blog/python-django-and-neons-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon) for free. Join us in our [Discord server](https://neon.tech/discord) to share your experiences, suggestions, and challenges.

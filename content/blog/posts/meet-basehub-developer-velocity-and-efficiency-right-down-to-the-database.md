@@ -72,7 +72,7 @@ Specifically: once they got to production, the BaseHub team noticed how their tr
 
 These cost inefficiencies also came from their non-prod environments. BaseHub uses a staging database, which (like all staging databases) is typically only used for a few hours—not 24/7. It seemed natural to have a way to pay very little for it by default, without having to do any manual work or babysit it in any way.
 
-With its focus on efficiency and DX, [Neon](https://neon.tech/) is a special kind of Postgres service. It adds a custom-built [serverless architecture](https://neon.tech/blog/architecture-decisions-in-neon) to Postgres, bringing an [autoscaling experience](https://neon.com/docs/introduction/autoscaling) that dynamically adjusts resources based on actual demand—[scaling down all the way to zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero) when databases are not being accessed. With Neon, during high-traffic moments, BaseHub gets the compute power it needs; during quieter times, the servers scale back down automatically, reducing unnecessary overhead.
+With its focus on efficiency and DX, [Neon](https://neon.tech/) is a special kind of Postgres service. It adds a custom-built [serverless architecture](https://neon.com/blog/architecture-decisions-in-neon) to Postgres, bringing an [autoscaling experience](https://neon.com/docs/introduction/autoscaling) that dynamically adjusts resources based on actual demand—[scaling down all the way to zero](https://neon.com/blog/why-you-want-a-database-that-scales-to-zero) when databases are not being accessed. With Neon, during high-traffic moments, BaseHub gets the compute power it needs; during quieter times, the servers scale back down automatically, reducing unnecessary overhead.
 
 Likewise, non-production environments like staging automatically scale down when not in use, eliminating idle compute costs entirely. When needed, databases spin back up in under 500 ms—without any manual intervention.
 
@@ -83,7 +83,7 @@ Likewise, non-production environments like staging automatically scale down when
 <cite>Julian Benegas, CEO of BaseHub</cite>
 </blockquote>
 
-Another specialty of Neon is [database branching](https://neon.com/docs/introduction/branching). Due to its unique [storage design](https://neon.tech/blog/get-page-at-lsn), Neon databases can branch via copy-on-write, giving developers a branch with a perfect copy of data and schema to run tests on and experiment with. Branches can also be used as [instant, lightweight backups.](https://neon.com/docs/guides/branch-restore)
+Another specialty of Neon is [database branching](https://neon.com/docs/introduction/branching). Due to its unique [storage design](https://neon.com/blog/get-page-at-lsn), Neon databases can branch via copy-on-write, giving developers a branch with a perfect copy of data and schema to run tests on and experiment with. Branches can also be used as [instant, lightweight backups.](https://neon.com/docs/guides/branch-restore)
 
 By using branches, BaseHub could create isolated database copies for testing without relying on traditional backups. This not only makes migrations smoother, but it also makes debugging faster and safer—especially in production—while reducing operational costs. All changes going to production are first tested on an isolated branch and only applied to production once they’re safe.
 

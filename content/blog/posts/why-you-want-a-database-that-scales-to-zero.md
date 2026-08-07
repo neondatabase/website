@@ -123,4 +123,4 @@ But for all your other databases? You’ll see drastically reduced costs for any
 
 Scale-to-zero keeps costs low across the board.
 
-Free yourself from the overhead of manually turning on and off databases. Start with the [Neon free tier](https://console.neon.tech/signup), bring your team and [ship a SaaS app](https://neon.tech/blog/why-topo-io-switched-from-amazon-rds-to-neon), or go full send and [manage a fleet of 300,000 databases](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases). Rest assured scale to zero is helping you move faster without anyone wasting money on idle databases.
+Free yourself from the overhead of manually turning on and off databases. Start with the [Neon free tier](https://console.neon.tech/signup), bring your team and [ship a SaaS app](https://neon.com/blog/why-topo-io-switched-from-amazon-rds-to-neon), or go full send and [manage a fleet of 300,000 databases](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases). Rest assured scale to zero is helping you move faster without anyone wasting money on idle databases.

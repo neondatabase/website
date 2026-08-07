@@ -202,7 +202,7 @@ What do each of these functions do?
 - **`get_embeddings(quotes)`**: This is the heart of the code. We generate an embedding for each quote using the “helper/gte-large” model via the OctoAI API and return this list of embeddings.
 - **`insert_into_db(quotes, authors, embeddings)`**: Now we can add everything to Neon. We utilize a connection pool for efficient database connections and execute an SQL INSERT statement for each quote-author-embedding trio, committing the transaction at the end. It ensures proper closure of database connections and the connection pool.
 
-With that done, we can see our data in the [Neon tables page](https://neon.tech/blog/edit-records-directly-from-the-neon-console-meet-the-new-tables-page):
+With that done, we can see our data in the [Neon tables page](https://neon.com/blog/edit-records-directly-from-the-neon-console-meet-the-new-tables-page):
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/building-a-rag-application-with-llama-3-1-and-pgvector/screenshot-2024-07-30-at-94721percente2percent80percentafam-1024x302-4aa7a1df.png)
 

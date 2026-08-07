@@ -111,7 +111,7 @@ Connection pooling is critical for Vapi. To efficiently manage their thousands o
 
 ### Streaming replication to ClickHouse via PeerDB
 
-Postgres isn’t the only data store in Vapi’s stack. To support log analysis and reporting, [Vapi streams data from Neon to ClickHouse via PeerDB](https://neon.tech/blog/postgres-meets-analytics-cdc-from-neon-to-clickhouse-via-peerdb).
+Postgres isn’t the only data store in Vapi’s stack. To support log analysis and reporting, [Vapi streams data from Neon to ClickHouse via PeerDB](https://neon.com/blog/postgres-meets-analytics-cdc-from-neon-to-clickhouse-via-peerdb).
 
 Some logs are written directly to ClickHouse, while others pass through Neon first before being replicated. This setup allows Vapi to correlate structured call data with raw logs, providing a more comprehensive view of interactions.
 

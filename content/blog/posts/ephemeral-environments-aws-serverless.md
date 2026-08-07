@@ -227,7 +227,7 @@ Your immediate reaction might be “This is vulnerable to SQL injection attacks!
 
 It’s written as a JavaScript tag function, which receives the string literal and its values as separate parameters. Internally, the `sql` template tag converts these into a SQL template with separate parameters.
 
-It’s a really nice feature and helps keep your code clean and safe at the same time. If you want to learn more about how this works, then read [this article](https://neon.tech/blog/sql-template-tags?ref=tbm-blog) for more details.
+It’s a really nice feature and helps keep your code clean and safe at the same time. If you want to learn more about how this works, then read [this article](https://neon.com/blog/sql-template-tags?ref=tbm-blog) for more details.
 
 One thing to note, however, is that this only works if you use the `sql` template tag with a string literal directly! The following will not work because the `sql` tag function is called with a string, not a string literal.
 

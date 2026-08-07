@@ -73,7 +73,7 @@ The space complexity of creating a branch is _O(parent-branch-metadata),_ which 
 
 ![Branching](https://cdn.neonapi.io/public/images/pages/blog/database-branching-for-postgres-with-neon/branching-1024x690-8e7b7e72.png)
 
-Neon separates storage and compute, which enables branching. Our co-founder Heikki Linnakangas [discusses Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon/) in a different blog post. In addition to branching, one of the benefits of Neon’s architecture is the ability to scale compute nodes to zero.
+Neon separates storage and compute, which enables branching. Our co-founder Heikki Linnakangas [discusses Neon’s architecture](https://neon.com/blog/architecture-decisions-in-neon/) in a different blog post. In addition to branching, one of the benefits of Neon’s architecture is the ability to scale compute nodes to zero.
 
 Copy-on-write combined with scale-to-zero works well for development teams that only want to consume the necessary resources—no more VMs with development databases that run 24/7 but are used only 10% of the time.
 

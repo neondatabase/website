@@ -50,7 +50,7 @@ When you restore your database to just before the table disappeared, you’re ac
 
 - **Production stays online.** Your existing “main” branch—the one missing the table—continues running unaltered. New data can keep flowing in, so there’s no disruption to ongoing workloads.
 - **You get a fully independent environment.** The restored branch has its own dedicated compute resources. It’s equivalent to the concept of restoring to a new database instance, but much, much faster.
-- **It takes 1 second—even for huge databases.** Neon uses [copy-on-write storage](https://neon.tech/blog/get-page-at-lsn). Instead of cloning terabytes of data, the new branch references the same underlying storage until you modify something. This is what makes the recovery process nearly instantaneous, taking about one second regardless of database size.
+- **It takes 1 second—even for huge databases.** Neon uses [copy-on-write storage](https://neon.com/blog/get-page-at-lsn). Instead of cloning terabytes of data, the new branch references the same underlying storage until you modify something. This is what makes the recovery process nearly instantaneous, taking about one second regardless of database size.
 
 **How to use this PITR feature to restore the missing table in production?** Below, we’ll outline two recovery routes you can follow, also highlighting why this process is so much faster and more efficient—especially at large scales—than the conventional restore process in RDS and other managed Postgres.
 
@@ -92,11 +92,11 @@ Let’s recap Neon’s unique advantages for recovery:
 
 With Neon, spinning up a new restored branch is immediate—even for massive databases. Whether your database is 10 GB or 100 TB, the recovery time remains the same: about one second.
 
-This is made possible by Neon’s copy-on-write storage model; instead of duplicating data, it simply references existing storage pages until changes are made. Traditional restore methods require [creating a separate instance, recovering data from snapshots, and replaying WAL](https://neon.tech/blog/recover-large-postgres-databases). This process is not necessary in Neon—you’re saving all that time.
+This is made possible by Neon’s copy-on-write storage model; instead of duplicating data, it simply references existing storage pages until changes are made. Traditional restore methods require [creating a separate instance, recovering data from snapshots, and replaying WAL](https://neon.com/blog/recover-large-postgres-databases). This process is not necessary in Neon—you’re saving all that time.
 
 ### Recover from an exact time, which you can verify using Time Travel
 
-[Neon retains a complete history of your database](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal), allowing you to restore to an exact moment—whether it’s “10 minutes before a bad migration” or just before an accidental table drop. If you’re unsure of the precise recovery point, you can use [Time Travel queries](https://neon.com/docs/guides/time-travel-assist) to inspect past database states and pinpoint when the data was lost. Your restored branch is created at the optimal moment, minimizing data loss and recovery time.
+[Neon retains a complete history of your database](https://neon.com/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal), allowing you to restore to an exact moment—whether it’s “10 minutes before a bad migration” or just before an accidental table drop. If you’re unsure of the precise recovery point, you can use [Time Travel queries](https://neon.com/docs/guides/time-travel-assist) to inspect past database states and pinpoint when the data was lost. Your restored branch is created at the optimal moment, minimizing data loss and recovery time.
 
 ### Point production to a restored branch without updating the database connection string in your app
 
@@ -122,7 +122,7 @@ Experience Neon's PITR speed by yourself: [run this demo.](https://neon-demos-br
 
 ### The AWS RDS restore process: Why it’s slower
 
-[AWS RDS relies on automated snapshots and WAL replays for PITR.](https://neon.tech/blog/recover-large-postgres-databases) If your last snapshot was taken hours ago, RDS must:
+[AWS RDS relies on automated snapshots and WAL replays for PITR.](https://neon.com/blog/recover-large-postgres-databases) If your last snapshot was taken hours ago, RDS must:
 
 1. Restore the full snapshot (which takes time, especially for large instances).
 2. Replay all WAL logs from that snapshot to the desired recovery point.

@@ -64,7 +64,7 @@ Second, Hyperdrive also automatically caches the results of popular read queries
 
 ### Routing optimization
 
-Third—and this one is particularly interesting—Hyperdrive reduces the number of network round-trips required for a write request from a Cloudflare Worker to reach the database. This might require a more detailed explanation to get it right— [we already covered it in this blog post](https://neon.tech/blog/quicker-serverless-postgres).
+Third—and this one is particularly interesting—Hyperdrive reduces the number of network round-trips required for a write request from a Cloudflare Worker to reach the database. This might require a more detailed explanation to get it right— [we already covered it in this blog post](https://neon.com/blog/quicker-serverless-postgres).
 
 The basic idea is this: When a database client (e.g. Cloudflare Worker) connects to a Postgres database, the connection process involves several sequential steps, each requiring a network round-trip between the client and the database server:
 

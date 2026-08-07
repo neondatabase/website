@@ -87,7 +87,7 @@ Since Neon branching is instantaneous, we can get a connection string right away
 
 ### Slash commands
 
-For slash commands, I used the same library we use in our Neon SQL Editor, created by [George MacKerron](https://mackerron.com/home/). If you haven’t read about it, I highly recommend [this blog post](https://neon.tech/blog/bringing-psqls-d-to-your-web-browser)—it’s quite the journey!
+For slash commands, I used the same library we use in our Neon SQL Editor, created by [George MacKerron](https://mackerron.com/home/). If you haven’t read about it, I highly recommend [this blog post](https://neon.com/blog/bringing-psqls-d-to-your-web-browser)—it’s quite the journey!
 
 ### Terminal emulation
 

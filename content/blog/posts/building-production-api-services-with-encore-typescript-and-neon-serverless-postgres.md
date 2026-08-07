@@ -98,8 +98,8 @@ If you aren’t using AWS or GCP directly, you can deploy your apps directly to 
 Neon Serverless Postgres complements Encore by offering a serverless Postgres service optimized for cloud environments. Here’s how Neon Serverless Postgres enhances the development experience:
 
 - Neon abstracts away the complexities of managing Postgres databases, allowing developers to focus on application logic.
-- With Neon’s serverless architecture, [databases automatically scale](https://neon.tech/blog/1-year-of-autoscaling-postgres-at-neon#architecture-of-autoscaling-a-refresher) to accommodate fluctuating workloads, providing optimal performance without manual intervention.
-- Neon enables [database branching](https://neon.tech/blog/move-fast-and-branch-things), making it fast and cost effective to create a separate database instance for each environment, such as development, staging, and production.
+- With Neon’s serverless architecture, [databases automatically scale](https://neon.com/blog/1-year-of-autoscaling-postgres-at-neon#architecture-of-autoscaling-a-refresher) to accommodate fluctuating workloads, providing optimal performance without manual intervention.
+- Neon enables [database branching](https://neon.com/blog/move-fast-and-branch-things), making it fast and cost effective to create a separate database instance for each environment, such as development, staging, and production.
 
 ## Create and Deploy the URL shortener app
 

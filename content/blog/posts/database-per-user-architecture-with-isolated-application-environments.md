@@ -35,7 +35,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/database-per-user-architecture-with-isolated-application-environments/isolated-application-environment-1-1024x576-02e03898.jpg)
 
-Previously in this series, we discussed implementing [database-per-user architecture](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres) in Neon with a [shared application environment](https://neon.tech/blog/shared-application-environment) communicating with individual user databases.
+Previously in this series, we discussed implementing [database-per-user architecture](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres) in Neon with a [shared application environment](https://neon.com/blog/shared-application-environment) communicating with individual user databases.
 
 That approach keeps operational complexity contained by minimizing the number of software systems deployed and limiting the flexibility you can offer your customers. But the world is a complex place, and sometimes your customers need more than the “one size fits all” service approach allows.
 
@@ -67,7 +67,7 @@ Capacity limits and enabled features are always constant within each deployment.
 
 ## Managing Isolated Environments
 
-Like any other [database-per-user](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres) system, isolated environments need to be provisioned, monitored, and maintained. Also like other such systems, this is all best done from a [central control plane and catalog database](https://neon.tech/blog/control-planes-for-database-per-user-in-neon). Even if a problem for one user stands no chance of being a problem for others as happens in shared application environments, those isolated problems are still hard to investigate and remediate if you don’t know how to find them.
+Like any other [database-per-user](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres) system, isolated environments need to be provisioned, monitored, and maintained. Also like other such systems, this is all best done from a [central control plane and catalog database](https://neon.com/blog/control-planes-for-database-per-user-in-neon). Even if a problem for one user stands no chance of being a problem for others as happens in shared application environments, those isolated problems are still hard to investigate and remediate if you don’t know how to find them.
 
 The main distinguishing factor for control planes in an isolated-environment setting is the complexity of provisioning. A new customer needs not just a Neon project, but a whole new application deployment with its attendant delivery pipeline, network configuration (some of which may require customer input, for example requesting a TLS certificate for a custom URL), and observability infrastructure. Automation is very much a journey in this kind of system, and the pace will be determined by the frequency with which you onboard new customers. If your customers are fewer and larger, it’s possible to get by for longer on engineering documentation and active account management.
 
@@ -99,6 +99,6 @@ Isolated environments are an investment. They offer your customers flexibility i
 
 This article is part of a series. Check out the previous three articles on the topic of building database-per-user architectures:
 
-- [Part I: Multi-tenancy and Database-per-User Design in Postgres](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres)
-- [Part II: Control Planes for Database-Per-User](https://neon.tech/blog/control-planes-for-database-per-user-in-neon)
-- [Part III: Shared Application Environments](https://neon.tech/blog/shared-application-environment)
+- [Part I: Multi-tenancy and Database-per-User Design in Postgres](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres)
+- [Part II: Control Planes for Database-Per-User](https://neon.com/blog/control-planes-for-database-per-user-in-neon)
+- [Part III: Shared Application Environments](https://neon.com/blog/shared-application-environment)

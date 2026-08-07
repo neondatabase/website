@@ -63,7 +63,7 @@ Some of the metrics above are self-explanatory, but others might be more obscure
 
 ### Local File Cache
 
-First, let’s take a closer look at the local file cache (LFC) metrics and its particular significance within the Neon architecture. [The LFC in your Neon database serves as an in-memory storage layer,](https://neon.tech/blog/get-page-at-lsn) designed to expedite data retrieval by minimizing disk I/O operations. Monitoring the LFC size can help you identify performance bottlenecks originating from this layer.
+First, let’s take a closer look at the local file cache (LFC) metrics and its particular significance within the Neon architecture. [The LFC in your Neon database serves as an in-memory storage layer,](https://neon.com/blog/get-page-at-lsn) designed to expedite data retrieval by minimizing disk I/O operations. Monitoring the LFC size can help you identify performance bottlenecks originating from this layer.
 
 For example, if your workload frequently accesses a dataset larger than the allocated LFC size, the cache may not effectively store all necessary data, leading to increased cache misses and requests to retrieve data from our storage layer (via pageserver getpage requests)—a.k.a., reduced performance.
 
@@ -80,7 +80,7 @@ One more thing that can help you optimize Neon’s performance related to LFC: u
 
 Another metric to get familiar with is working set size. The working set size in Postgres reflects the active portion of your data – the data that’s frequently in use within your dataset – and to optimize performance, you’d like it to be in memory.
 
-In Neon, we dynamically estimate the working set size over specific time intervals to be able to [autoscale](https://neon.com/docs/introduction/autoscaling) your workload optimally, always keeping your working set size within memory. [We explain how we do this in this blog post](https://neon.tech/blog/dynamically-estimating-and-scaling-postgres-working-set-size). (Hint: we use a modified version of HyperLogLog that includes a sliding window continuously measuring the number of unique pages accessed over the last minutes.)
+In Neon, we dynamically estimate the working set size over specific time intervals to be able to [autoscale](https://neon.com/docs/introduction/autoscaling) your workload optimally, always keeping your working set size within memory. [We explain how we do this in this blog post](https://neon.com/blog/dynamically-estimating-and-scaling-postgres-working-set-size). (Hint: we use a modified version of HyperLogLog that includes a sliding window continuously measuring the number of unique pages accessed over the last minutes.)
 
 But going back to monitoring, here’s some examples of how keeping an eye on the working set size can give you practical information:
 

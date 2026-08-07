@@ -43,7 +43,7 @@ One more year, Postgres is the most loved and trusted database in the world—an
 
 **_Why we like this change: it helps application developers who need to handle conditional data modifications without juggling multiple queries._**
 
-Building on the `MERGE` command [introduced in Postgres 15](https://neon.tech/blog/postgresql-15-three-features-you-can-try-with-neon), Postgres 17 takes it a step further by adding support for the `RETURNING` clause. This improvement allows developers to retrieve and return the rows modified by the `MERGE` operation in a single step, reducing the need for additional queries and simplifying complex workflows. You’ll be able to write more concise and efficient SQL, especially in scenarios involving conditional inserts, updates, or deletions.
+Building on the `MERGE` command [introduced in Postgres 15](https://neon.com/blog/postgresql-15-three-features-you-can-try-with-neon), Postgres 17 takes it a step further by adding support for the `RETURNING` clause. This improvement allows developers to retrieve and return the rows modified by the `MERGE` operation in a single step, reducing the need for additional queries and simplifying complex workflows. You’ll be able to write more concise and efficient SQL, especially in scenarios involving conditional inserts, updates, or deletions.
 
 Example:
 

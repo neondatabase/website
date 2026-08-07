@@ -53,7 +53,7 @@ Prerequisites:
 - [Redpanda Serverless Cluster](https://www.redpanda.com/redpanda-cloud/serverless)
 - [Neon Postgres Database](https://neon.com/docs/get-started-with-neon/signing-up)
 
-As a warm up, you can check out Neon’s blog post on [building a Retrieval-Augmented Generation (RAG) applications with Neon and pgvector](https://neon.tech/blog/building-a-rag-application-with-llama-3-1-and-pgvector). In this post, we’ll demonstrate a way to create a high throughput, scalable embeddings indexing pipeline for RAG applications using [Redpanda Connect](https://docs.redpanda.com/redpanda-connect/about/).
+As a warm up, you can check out Neon’s blog post on [building a Retrieval-Augmented Generation (RAG) applications with Neon and pgvector](https://neon.com/blog/building-a-rag-application-with-llama-3-1-and-pgvector). In this post, we’ll demonstrate a way to create a high throughput, scalable embeddings indexing pipeline for RAG applications using [Redpanda Connect](https://docs.redpanda.com/redpanda-connect/about/).
 
 ### Step 1. Understand our data
 

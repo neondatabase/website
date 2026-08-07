@@ -72,7 +72,7 @@ The main point is that if you share resources across multiple tenants, any singl
 
 ## The Problems Caused by Noisy Neighbors in AWS RDS
 
-This can be a massive problem for scaling teams. [OpusFlow](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) experienced this firsthand when trying to ensure data isolation for their European customers in RDS. They found that having multiple databases compete for resources in a single instance created problematic edge cases.
+This can be a massive problem for scaling teams. [OpusFlow](https://neon.com/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) experienced this firsthand when trying to ensure data isolation for their European customers in RDS. They found that having multiple databases compete for resources in a single instance created problematic edge cases.
 
 What might these edge cases be?
 

@@ -125,7 +125,7 @@ export const config = {
 };
 ```
 
-Having the flexibility to use either, HTTP or WebSockets in one package is super helpful and here’s a great blog post from my colleague [Raouf Chebri](https://twitter.com/raoufdevrel) where he explains both approaches in more detail: [HTTP vs. WebSockets: Which protocol for your Postgres queries at the Edge](https://neon.tech/blog/http-vs-websockets-for-postgres-queries-at-the-edge)
+Having the flexibility to use either, HTTP or WebSockets in one package is super helpful and here’s a great blog post from my colleague [Raouf Chebri](https://twitter.com/raoufdevrel) where he explains both approaches in more detail: [HTTP vs. WebSockets: Which protocol for your Postgres queries at the Edge](https://neon.com/blog/http-vs-websockets-for-postgres-queries-at-the-edge)
 
 ## What can you do with Edge Functions?
 

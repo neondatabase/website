@@ -39,7 +39,7 @@ seo:
 A few weeks ago, we participated in a [panel](https://www.youtube.com/watch?v=DSbf_t_VOuM) talking about [AI Agents](https://neon.tech/use-cases/ai-agents) with [Wordware](https://www.wordware.ai/). For those of you who prefer to scroll through it, here’s a summary of our conversation—plus a Wordware demo.
 
 <Admonition type="info">
-The team at Wordware (YC S24) is building their platform on Neon. You can read more about why they picked Neon and how they’re using it [here](https://neon.tech/blog/building-ai-agents-just-got-faster-with-wordware-and-neon). If you're also YC, ask us about our [deals](https://neon.tech/yc-startups).
+The team at Wordware (YC S24) is building their platform on Neon. You can read more about why they picked Neon and how they’re using it [here](https://neon.com/blog/building-ai-agents-just-got-faster-with-wordware-and-neon). If you're also YC, ask us about our [deals](https://neon.tech/yc-startups).
 </Admonition>
 
 ---

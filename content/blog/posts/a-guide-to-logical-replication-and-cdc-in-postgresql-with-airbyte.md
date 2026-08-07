@@ -126,7 +126,7 @@ From there, it’s as simple as walking through Airbyte’s UI to set up your Po
 
 Effectively managing and scaling PostgreSQL deployments in the cloud can be expensive and impractical for smaller teams. Several companies now offer Postgres database maintenance with cloud-native scalability. [Neon](https://neon.tech/) is one such platform for serverless PostgreSQL. It comes with features you’d expect from a managed cloud solution, like autoscaling and the separation of compute and storage, but also supports advanced features like [database branching](https://neon.tech/branching).
 
-Neon recently added support for [logical replication](https://neon.tech/blog/change-data-capture-with-serverless-postgres), and is fully-compatible with Airbyte’s CDC solution. Pairing a cloud database like Neon with Airbyte’s own managed offering, Airbyte Cloud, can deliver a scalable, reliable, and low-cost solution for your OLTP and replication needs.
+Neon recently added support for [logical replication](https://neon.com/blog/change-data-capture-with-serverless-postgres), and is fully-compatible with Airbyte’s CDC solution. Pairing a cloud database like Neon with Airbyte’s own managed offering, Airbyte Cloud, can deliver a scalable, reliable, and low-cost solution for your OLTP and replication needs.
 
 To get started, check out Neon’s [documentation](https://neon.com/docs/guides/logical-replication-airbyte) on connecting to Airbyte.
 

@@ -47,7 +47,7 @@ Neon works best with a project-per-user architecture, but there’s more than on
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/shared-application-environment/ad4nxddukjhjbngilrvfcrpqbxy7n7pv70tefptdi4b0e7e6efuqzq98trpekhlyf5eyemrclvivsxhyq1bco3ujvpwj0tkalerfgj1dadmbirwg7pwna7gqm1nju0ihnk6jafyzyiywilrqxeqx7tjnui-y-9eea5d9f.png)
 
-This article is part of a series on building [database-per-user architectures](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres). In the next article, we cover the opposite design choice: [isolated application environments.](https://neon.tech/blog/database-per-user-architecture-with-isolated-application-environments)
+This article is part of a series on building [database-per-user architectures](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres). In the next article, we cover the opposite design choice: [isolated application environments.](https://neon.com/blog/database-per-user-architecture-with-isolated-application-environments)
 
 ## Disclaimers
 
@@ -58,7 +58,7 @@ The advantages of deploying a shared application environment don’t come for fr
 
 ## Getting Into a Single App Environment
 
-The way your customers access your application will inform both its design and the architecture of your [control plane](https://neon.tech/blog/control-planes-for-database-per-user-in-neon). With a single environment, you’re already gravitating toward one set of choices — things like “bring your own URL” are much more difficult to implement. However, you still have decisions to make among the set that remain.
+The way your customers access your application will inform both its design and the architecture of your [control plane](https://neon.com/blog/control-planes-for-database-per-user-in-neon). With a single environment, you’re already gravitating toward one set of choices — things like “bring your own URL” are much more difficult to implement. However, you still have decisions to make among the set that remain.
 
 To route queries and data to the correct database, users need to **authenticate**. What information do they need to provide in order to log in? At minimum, likely a username and password; ideally, a second factor from a hardware key or authenticator app. But how do you know which customer they’re authenticating on behalf of, and whose data to show them?
 
@@ -92,7 +92,7 @@ The demo connection router goes step by step for clarity, but there are a couple
 
 ## The Control Plane and Catalog Database in a Shared Application Environment
 
-We covered the [general attributes and uses of the control plane and catalog db in a previous post](https://neon.tech/blog/control-planes-for-database-per-user-in-neon). The main point of specialization in a shared environment is responsibility for Neon project **connections**. When a customer signs up and a new Neon project is provisioned, that project id needs to become an option for connections on behalf of that customer’s users.
+We covered the [general attributes and uses of the control plane and catalog db in a previous post](https://neon.com/blog/control-planes-for-database-per-user-in-neon). The main point of specialization in a shared environment is responsibility for Neon project **connections**. When a customer signs up and a new Neon project is provisioned, that project id needs to become an option for connections on behalf of that customer’s users.
 
 When you’re deploying only the one system, it can be tempting to build the control plane into it, as an administrative mode or control panel. This does simplify operations — as long as things go well. When they start going wrong, you might find yourself without the tools you need to resolve problems quickly if the application has taken your control plane down with it.
 
@@ -126,7 +126,7 @@ It isn’t all simple, of course. However, even fully isolated environments face
 
 **This article is part of a series. Check out the previous two articles on the topic of building database-per-user architectures:**
 
-- [Part I: Multi-tenancy and Database-per-User Design in Postgres](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres)
-- [Part II: Control Planes for Database-Per-User](https://neon.tech/blog/control-planes-for-database-per-user-in-neon)
+- [Part I: Multi-tenancy and Database-per-User Design in Postgres](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres)
+- [Part II: Control Planes for Database-Per-User](https://neon.com/blog/control-planes-for-database-per-user-in-neon)
 
-And [the next article in the series](https://neon.tech/blog/database-per-user-architecture-with-isolated-application-environments) where we cover isolated application environments.
+And [the next article in the series](https://neon.com/blog/database-per-user-architecture-with-isolated-application-environments) where we cover isolated application environments.

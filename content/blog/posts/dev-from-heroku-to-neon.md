@@ -80,7 +80,7 @@ Capacity spikes? Neon handles it. Quiet periods? Neon scales down automatically.
 
 ### Built for developers, not DBAs
 
-Neon is Postgres for developers. DEV valued this focus on DX right away: Neon’s intuitive UI and [API-first approach](https://neon.tech/blog/provision-postgres-neon-api) that made it easy to automate database operations, [branches](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) could be created and torn down programmatically, they were integrations with platforms like [Vercel](https://neon.tech/blog/neon-vercel-integration) – making full-stack previews as simple as opening a pull request.
+Neon is Postgres for developers. DEV valued this focus on DX right away: Neon’s intuitive UI and [API-first approach](https://neon.com/blog/provision-postgres-neon-api) that made it easy to automate database operations, [branches](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) could be created and torn down programmatically, they were integrations with platforms like [Vercel](https://neon.com/blog/neon-vercel-integration) – making full-stack previews as simple as opening a pull request.
 
 And just like DEV, Neon was accessible by design. There’s a generous free plan, no onboarding friction, and no vendor lock-in. Just fast, flexible Postgres, built to match the way modern developers work.
 

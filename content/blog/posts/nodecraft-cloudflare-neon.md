@@ -85,7 +85,7 @@ Here’s the essence of their stack:
 Because much of Nodecraft’s game configuration data rarely changes, caching plays a crucial role in optimizing performance. They’ve taken advantage of Cloudflare’s [Hyperdrive](https://v/) to reduce query times and improve the responsiveness of their setup. Beyond caching, Hyperdrive also optimizes connection handling, reducing latency for Nodecraft’s global users.
 
 <Admonition type="note" title="about hyperdrive">
-[Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a globally distributed connection pooler and caching service built by Cloudflare. It helps optimize database performance for serverless environments built on [Cloudflare Workers](https://workers.cloudflare.com/). If you’re not familiar with it, start [here](https://neon.tech/blog/hyperdrive-neon-faq).
+[Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a globally distributed connection pooler and caching service built by Cloudflare. It helps optimize database performance for serverless environments built on [Cloudflare Workers](https://workers.cloudflare.com/). If you’re not familiar with it, start [here](https://neon.com/blog/hyperdrive-neon-faq).
 </Admonition>
 
 ## Using Neon Branching for Faster Development (and Live Demos!)

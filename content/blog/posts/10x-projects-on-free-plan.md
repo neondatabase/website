@@ -35,10 +35,10 @@ See [Neon Free Plan Documentation](https://neon.com/docs/introduction/plans#free
 
 You can create up to 10 branches on each Free Plan Project. Account-level limits on compute hours, storage, and bandwidth remain unchanged. We’re confident that only increasing the Project limit will lead to a nice quality-of-life boost amongst Free Plan users because when we look at resource usage, it is stratified:
 
-- At any point in time, the majority of Free Projects are using less than 100MB of storage and not actively using compute (thanks to [scale-to-zero](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero).)
+- At any point in time, the majority of Free Projects are using less than 100MB of storage and not actively using compute (thanks to [scale-to-zero](https://neon.com/blog/why-you-want-a-database-that-scales-to-zero).)
 - Free Projects that are maxing out resources are the ones powering an app or business that is taking off – the owner is happy to upgrade to a paid plan for access to larger computes, increased data retention, and support.<br />
 
-So if we can increase the Project limit and make it easier for you to learn a new stack, [try Azure](https://neon.tech/blog/first-azure-region-available-in-neon), launch an AI-powered IDE, ship an MVP, we see it as a win.
+So if we can increase the Project limit and make it easier for you to learn a new stack, [try Azure](https://neon.com/blog/first-azure-region-available-in-neon), launch an AI-powered IDE, ship an MVP, we see it as a win.
 
 ## Engineering Unlock, not Financial Risk
 
@@ -52,7 +52,7 @@ So that’s what we did! Because of separation of storage and compute, and becau
 
 ## Neon: 0.01x-ing Database costs from day one
 
-This isn’t a new idea, it was written into the [founding manifesto of Neon](https://neon.tech/blog/hello-world):
+This isn’t a new idea, it was written into the [founding manifesto of Neon](https://neon.com/blog/hello-world):
 
 <blockquote>
 <p>We realized that a modern Postgres service can be designed differently in order to be cheaper and more efficient in cloud environments, but it will require some real systems engineering. We call this approach separation of storage and compute. It allows us to architect the service around performance, reliability, manageability, and cost. Cost is particularly important when you design a system for the cloud. Any cloud service has an infrastructure bill that it has to pass on to the end user. If you don’t account for cost at the architecture level running a service can get very expensive. That’s why when you build for the cloud you have to make the cost of running the service an important design consideration on par with manageability, reliability, and performance. One of the immediate implications of designing for cost was to never use EBS volumes and use a combination of local storage and S3 instead. Local storage for hot and S3 for cold data.</p>
@@ -60,7 +60,7 @@ This isn’t a new idea, it was written into the [founding manifesto of Neon](ht
 
 The impact of a step-function reduction in the entry cost of databases goes well beyond free tiers:<br />
 
-- Companies like [Retool use Neon to operate fleets](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) of hundreds of thousands of separate databases for each of their customers.
+- Companies like [Retool use Neon to operate fleets](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) of hundreds of thousands of separate databases for each of their customers.
 - AI Platforms like [Replit Agent use Neon](https://x.com/nikitabase/status/1837138637516931252) to put database provisioning in the hands of AI Agents.
 
 None of this would be possible in the bygone era of databases running on statically provisioned CPU, RAM and Storage.

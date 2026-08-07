@@ -37,7 +37,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write/neon-magic-copy-1024x576-be8b396e.jpg)
 
-Neon’s [serverless architecture with decoupled storage and compute](https://neon.tech/blog/architecture-decisions-in-neon) makes it possible to offer database branching via copy-on-write. This feature is among the most loved by [teams using Neon](https://neon.tech/case-studies), but if you’ve never seen it in action, it’s hard to visualize how it works or why it’s useful.
+Neon’s [serverless architecture with decoupled storage and compute](https://neon.com/blog/architecture-decisions-in-neon) makes it possible to offer database branching via copy-on-write. This feature is among the most loved by [teams using Neon](https://neon.tech/case-studies), but if you’ve never seen it in action, it’s hard to visualize how it works or why it’s useful.
 
 That’s why we’ve built this demo:
 
@@ -69,7 +69,7 @@ When you click `Copy` in the demo, you’re actually creating a Neon branch unde
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write/ad4nxdfxj3tljatqjt6lxfwjqgqmdbvkzv9y8kmf8uq75hhhstqfg2ghx1bstukzon3i4fa6m1nlodjfoho3xc938ehnaizdmhpfzoa-xvgczi0i6ebgxkcjho4pwgcmusshgvhg-7fcac78d.png)
 
-Thanks to the magic of copy-on-write, Neon branches are incredibly agile and can be treated as ephemeral. When you create a branch, Neon doesn’t have to load the entire dataset again. Instead, it references the same data pages as the parent environment ([read about Neon’s storage design](https://neon.tech/blog/get-page-at-lsn)).
+Thanks to the magic of copy-on-write, Neon branches are incredibly agile and can be treated as ephemeral. When you create a branch, Neon doesn’t have to load the entire dataset again. Instead, it references the same data pages as the parent environment ([read about Neon’s storage design](https://neon.com/blog/get-page-at-lsn)).
 
 Since branches are ready instantly, even for very large datasets (in fact, the size of the dataset has no impact at all) they can be created for a specific purpose—a development task, a test run, a Vercel preview, this demo—and deleted once the task is done.
 
@@ -88,15 +88,15 @@ _![Image](https://cdn.neonapi.io/public/images/pages/blog/instantly-copy-tb-size
 You may still be thinking, _this is flashy for a demo—but how can I benefit from it?_ As we said at the start of this post, branching is probably the most loved Neon feature by our users:
 
 <blockquote>
-<p>“We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day—to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this” (Avi Romanoff, Founder at <a href="https://magiccircle.studio">Magic Circle</a> – <a href="https://neon.tech/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon">Read more</a>)</p>
+<p>“We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day—to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this” (Avi Romanoff, Founder at <a href="https://magiccircle.studio">Magic Circle</a> – <a href="https://neon.com/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon">Read more</a>)</p>
 </blockquote>
 
 <blockquote>
-<p>“Branching saves us both money and developer time. We no longer have to set up an actual testing database instance and make sure the data is always synced with production. We now spin up an ephemeral branch when we need to and then tear it down via the create/delete Github Actions” (Angelina Quach, Software Engineer at <a href="https://shepherdinsurance.com">Shepherd</a> – <a href="https://neon.tech/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd">Read more</a>)</p>
+<p>“Branching saves us both money and developer time. We no longer have to set up an actual testing database instance and make sure the data is always synced with production. We now spin up an ephemeral branch when we need to and then tear it down via the create/delete Github Actions” (Angelina Quach, Software Engineer at <a href="https://shepherdinsurance.com">Shepherd</a> – <a href="https://neon.com/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd">Read more</a>)</p>
 </blockquote>
 
 <blockquote>
-<p>“Database branching is the best quality-of-life improvement to my tech stack that I can think of in recent years. Second to maybe only Copilot” (Miguel Hernandez, Backend Tech Lead at Neo.Tax – <a href="https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle">Read more</a>)</p>
+<p>“Database branching is the best quality-of-life improvement to my tech stack that I can think of in recent years. Second to maybe only Copilot” (Miguel Hernandez, Backend Tech Lead at Neo.Tax – <a href="https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle">Read more</a>)</p>
 </blockquote>
 
 Once you’ve experimented with branches and understand the basics of how they work, it gets easier to appreciate their potential. Here are the most popular use cases among our user base:

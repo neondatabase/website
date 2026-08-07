@@ -79,7 +79,7 @@ In Postgres, each connection is a backend process that requires memory allocatio
 
 PgBouncer becomes increasingly important at scale when using serverless services such as [AWS Lambda](https://aws.amazon.com/pm/lambda/) or [Vercel functions](https://vercel.com/docs/functions), since each function call establishes a new connection. We name database connections that use PgBouncer pooled connections.
 
-Additionally, [`prisma migrate`](https://www.prisma.io/docs/orm/prisma-migrate/getting-started) uses prepared statements to optimize SQL query performance, and [`DEALLOCATE ALL`](https://github.com/prisma/prisma-engines/blob/4308b705cc0694626ff407996f3145ddef0ad1c6/quaint/src/connector/postgres/native/mod.rs#L507) to release all prepared statements in the current session [before preparing and executing Prisma Client queries](https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/databases-connections/pgbouncer#add-pgbouncertrue-to-the-connection-url). More on prepared statements in the [PgBouncer 1.22.0 support announcement article](https://neon.tech/blog/pgbouncer-the-one-with-prepared-statements#what-are-prepared-statements).
+Additionally, [`prisma migrate`](https://www.prisma.io/docs/orm/prisma-migrate/getting-started) uses prepared statements to optimize SQL query performance, and [`DEALLOCATE ALL`](https://github.com/prisma/prisma-engines/blob/4308b705cc0694626ff407996f3145ddef0ad1c6/quaint/src/connector/postgres/native/mod.rs#L507) to release all prepared statements in the current session [before preparing and executing Prisma Client queries](https://www.prisma.io/docs/orm/prisma-client/setup-and-configuration/databases-connections/pgbouncer#add-pgbouncertrue-to-the-connection-url). More on prepared statements in the [PgBouncer 1.22.0 support announcement article](https://neon.com/blog/pgbouncer-the-one-with-prepared-statements#what-are-prepared-statements).
 
 Before version 1.22.0, if you attempted to run `prisma migrate` commands using a pooled connection, you might have seen the following error:
 
@@ -129,7 +129,7 @@ datasource db {
 }
 ```
 
-We have added [support for managing roles and databases via SQL](https://neon.tech/blog/prisma-dx-improvements#removing-the-need-for-manually-creating-the-shadow-database) on Neon, which allowed for removing the need for manually creating a shadow database. Additionally, [Prisma 5.10.0](https://github.com/prisma/prisma/releases/tag/5.10.0) [introduces support for `DROP WITH (FORCE)`](https://github.com/prisma/prisma-engines/pull/4722) as an alternative drop database path in the schema engine, which allows it to dispose of shadow databases.
+We have added [support for managing roles and databases via SQL](https://neon.com/blog/prisma-dx-improvements#removing-the-need-for-manually-creating-the-shadow-database) on Neon, which allowed for removing the need for manually creating a shadow database. Additionally, [Prisma 5.10.0](https://github.com/prisma/prisma/releases/tag/5.10.0) [introduces support for `DROP WITH (FORCE)`](https://github.com/prisma/prisma-engines/pull/4722) as an alternative drop database path in the schema engine, which allows it to dispose of shadow databases.
 
 So, in your `schema.prisma` file, you would have:
 

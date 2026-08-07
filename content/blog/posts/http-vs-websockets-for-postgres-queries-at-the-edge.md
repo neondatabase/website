@@ -59,7 +59,7 @@ We first developed the Neon driver to help developers query their Postgres datab
 
 The key advantage of this approach is you get a real, ordinary Postgres connection via a familiar, ordinary Postgres driver.
 
-However, the main challenge with WebSockets is minimizing network round-trips since state persistence is typically lacking between requests in Edge environments. After several significant optimizations to the WebSockets driver, we successfully [reduced the number of round-trips from nine to four](https://neon.tech/blog/quicker-serverless-postgres).
+However, the main challenge with WebSockets is minimizing network round-trips since state persistence is typically lacking between requests in Edge environments. After several significant optimizations to the WebSockets driver, we successfully [reduced the number of round-trips from nine to four](https://neon.com/blog/quicker-serverless-postgres).
 
 We ran some tests with the WebSockets driver from Edge Functions, and the query latency distribution shows there are two distinct query groups:
 

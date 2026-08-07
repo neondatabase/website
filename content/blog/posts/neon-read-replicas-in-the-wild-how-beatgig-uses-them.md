@@ -84,4 +84,4 @@ You also save on compute: replicas automatically scale to zero when not in use, 
 
 ## Try them out. Now in the Free plan
 
-[We just made read replicas available in the Neon Free Plan](https://neon.tech/blog/create-read-replicas-in-the-free-plan), so you can give them a spin for free. [Create a Neon account](https://console.neon.tech/signup), run some tests, and if you have any questions, [find us on Discord.](https://discord.gg/92vNTzKDGp)
+[We just made read replicas available in the Neon Free Plan](https://neon.com/blog/create-read-replicas-in-the-free-plan), so you can give them a spin for free. [Create a Neon account](https://console.neon.tech/signup), run some tests, and if you have any questions, [find us on Discord.](https://discord.gg/92vNTzKDGp)

@@ -51,7 +51,7 @@ It’s unfortunate that `sslmode=require` is so widely used, and sounds so much 
 
 The problem is this: `sslmode=require` _encrypts_, but it doesn’t _authenticate_. It does all the hard work to make sure your communication channel is secured, while doing nothing at all to check who’s on the other end of it. This slightly odd behaviour makes it vulnerable to the most trivially straightforward [MITM attacks](https://en.wikipedia.org/wiki/Man-in-the-middle_attack).
 
-[I’ve blogged about this before, back in 2023](https://neon.tech/blog/avoid-mitm-attacks-with-psql-postgres-16). That time I managed to MITM my own `sslmode=require` connection in the space of a few hours. From a standing start, those few hours included the time taken to (1) write a simple, password-stealing Postgres proxy; (2) give it a self-signed certificate for any random domain; and (3) find out how to poison a DNS cache.
+[I’ve blogged about this before, back in 2023](https://neon.com/blog/avoid-mitm-attacks-with-psql-postgres-16). That time I managed to MITM my own `sslmode=require` connection in the space of a few hours. From a standing start, those few hours included the time taken to (1) write a simple, password-stealing Postgres proxy; (2) give it a self-signed certificate for any random domain; and (3) find out how to poison a DNS cache.
 
 As I also mentioned back then, the traditional way to _properly_ secure a Postgres connection is to use `sslmode=verify-full`, not `sslmode=require`. This requires you to also supply the client with one or more root certificates to verify the server’s certificate against. The extra friction involved here may seem small, but it’s enough to ensure that this option has not been so commonly used.
 

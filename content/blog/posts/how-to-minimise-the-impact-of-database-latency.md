@@ -53,7 +53,7 @@ We built [Neon’s Regional Latency Dashboard](https://neon.tech/demos/regional-
 
 Measuring database latency is an essential step in understanding the response times you can achieve from API endpoints that interact with your database. Performing this measurement might seem trivial, but there are a few variables to bear in mind:
 
-- Does your database receive consistent queries, thereby eliminating the impact of [Neon’s cold starts](https://neon.tech/blog/cold-starts-just-got-hot)? Or have you disabled Neon’s [auto-suspend](https://neon.com/docs/introduction/auto-suspend)?
+- Does your database receive consistent queries, thereby eliminating the impact of [Neon’s cold starts](https://neon.com/blog/cold-starts-just-got-hot)? Or have you disabled Neon’s [auto-suspend](https://neon.com/docs/introduction/auto-suspend)?
 - If you’re using a serverless deployment platform, are your functions receiving consistent traffic and [are warmed up](https://vercel.com/guides/how-can-i-improve-serverless-function-lambda-cold-start-performance-on-vercel) as a result?
 - Have you applied indexes and optimized your database queries?
 
@@ -221,7 +221,7 @@ await db.insert(authors)
 
 Reusing connections eliminates the overhead of establishing a new TLS connection between your backend and the Postgres database hosted on Neon for each incoming request – an operation that requires multiple round trips and is therefore impacted by latency between your backend and database.
 
-The configuration required for reusing connections will depend on your runtime and application framework. In a previous blog post discussing [Python and Django with Neon](https://neon.tech/blog/python-django-and-neons-serverless-postgres#application-deployment-and-scaling-using-gunicorn), we demonstrated how to enable connection reuse. Benchmarking our sample Django application showed an 8-9x reduction in API response times and a similar increase in application throughput when connection reuse was enabled.
+The configuration required for reusing connections will depend on your runtime and application framework. In a previous blog post discussing [Python and Django with Neon](https://neon.com/blog/python-django-and-neons-serverless-postgres#application-deployment-and-scaling-using-gunicorn), we demonstrated how to enable connection reuse. Benchmarking our sample Django application showed an 8-9x reduction in API response times and a similar increase in application throughput when connection reuse was enabled.
 
 ### Application-level Connection Pooling
 
@@ -247,7 +247,7 @@ export const pool = new Pool({
 
 The pool enables concurrent queries with reusable persistent connections. It doesn’t reduce the number of round trips, but it does increase concurrency and reduce contention for database connections.
 
-Our prior blog post, which explored [client-side connection pooling in Node.js](https://neon.tech/blog/using-neons-auto-suspend-with-long-running-applications#managing-connections-with-client-side-pooling), demonstrated that connection pooling provided more than a 10x boost in throughput and a similar reduction in application response times for our sample application.
+Our prior blog post, which explored [client-side connection pooling in Node.js](https://neon.com/blog/using-neons-auto-suspend-with-long-running-applications#managing-connections-with-client-side-pooling), demonstrated that connection pooling provided more than a 10x boost in throughput and a similar reduction in application response times for our sample application.
 
 ## Conclusion
 
@@ -255,4 +255,4 @@ Placing your backend and database near one another is essential to minimize the 
 
 Using Neon’s Regional Latency dashboard can help you identify the best locations to deploy your backend and database and provide a clearer picture of what impact database queries will have on your API endpoint response times.
 
-To accelerate your development process and leverage the power of Neon Serverless Postgres, [sign up and try Neon for free](https://neon.tech/blog/building-production-api-services-with-encore-typescript-and-neon-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon%20for%20free). Stay updated by following us on [Twitter/X](https://twitter.com/neondatabase), and join our [Discord](https://neon.tech/discord) community to share your experiences and explore how we can support you in building the next generation of applications.
+To accelerate your development process and leverage the power of Neon Serverless Postgres, [sign up and try Neon for free](https://neon.com/blog/building-production-api-services-with-encore-typescript-and-neon-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon%20for%20free). Stay updated by following us on [Twitter/X](https://twitter.com/neondatabase), and join our [Discord](https://neon.tech/discord) community to share your experiences and explore how we can support you in building the next generation of applications.

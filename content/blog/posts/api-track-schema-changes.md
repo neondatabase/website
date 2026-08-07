@@ -40,7 +40,7 @@ seo:
 
 **We keep expanding our Schema Diff feature, this time adding an** [API endpoint](https://neon.com/docs/guides/schema-diff#using-the-neon-api)**: `compare_schema`. You can use it in all your Neon projects, including the** [Free Plan](https://console.neon.tech/signup).
 
-[Schema Diff](https://neon.com/docs/guides/schema-diff) allows you to easily compare schemas between Neon databases. It was first made available via the Neon Console and CLI, and we recently expanded it by launching the [Schema Diff GitHub Action](https://neon.tech/blog/track-schema-changes-automatically-in-your-pull-requests). This action integrates schema diffs directly into pull requests; whenever a pull request is created or updated, the GitHub Action runs a schema comparison, posting a comment in the PR summarizing the differences.
+[Schema Diff](https://neon.com/docs/guides/schema-diff) allows you to easily compare schemas between Neon databases. It was first made available via the Neon Console and CLI, and we recently expanded it by launching the [Schema Diff GitHub Action](https://neon.com/blog/track-schema-changes-automatically-in-your-pull-requests). This action integrates schema diffs directly into pull requests; whenever a pull request is created or updated, the GitHub Action runs a schema comparison, posting a comment in the PR summarizing the differences.
 
 After shipping the GitHub Action, we wanted to extend these automation capabilities to other CI/CD pipelines via an API. Also, we saw another use case demanding an API for checking schema diffs: **Agentic systems**.
 
@@ -48,7 +48,7 @@ After shipping the GitHub Action, we wanted to extend these automation capabilit
 
 [Agentic systems](https://www.anthropic.com/research/building-effective-agents) are autonomous AI entities powered by LLMs that can dynamically determine their own actions to achieve complex objectives, for example deploying software infrastructure to build end-to-end apps. Unlike predefined AI workflows (which follow static sequences), agentic systems can dynamically adapt to the task at hand.
 
-If we want these systems to deploy functional applications, persistent data is a requirement. Agentic systems need databases to enable continuity and memory for their apps: for example, [Replit Agent](https://docs.replit.com/replitai/agent) knows how to [deploy and manage Postgres databases](https://neon.tech/blog/how-to-add-a-postgres-database-to-your-replit-agent-project) as required by each project.
+If we want these systems to deploy functional applications, persistent data is a requirement. Agentic systems need databases to enable continuity and memory for their apps: for example, [Replit Agent](https://docs.replit.com/replitai/agent) knows how to [deploy and manage Postgres databases](https://neon.com/blog/how-to-add-a-postgres-database-to-your-replit-agent-project) as required by each project.
 
 This means agentic systems also have to handle schema evolution. When the structure of stored data needs to change (e.g. due to new features), the agent must assess the current Postgres schema, determine necessary updates, and apply them.
 
@@ -78,7 +78,7 @@ The [API](https://neon.com/docs/guides/schema-diff#using-the-neon-api) accepts t
 - **`branch_id`**: the ID of the target branch to compare—the branch with the modified schema
 - **`db_name`**: the name of the database
 - **`base_branch_id`** (optional): the ID of the base branch for comparison, if empty, infers, by default, the parent branch of branch_id
-- **`lsn`** (optional): the [LSN](https://neon.tech/blog/get-page-at-lsn) on the target branch
+- **`lsn`** (optional): the [LSN](https://neon.com/blog/get-page-at-lsn) on the target branch
 - **`timestamp`** (optional): the point in time on the target branch
 - **`base_lsn`** (optional): the LSN for the base branch
 - **`base_timestamp`** (optional): the point in time on the base branch

@@ -41,7 +41,7 @@ seo:
 
 Imagine an IDE that not only writes your code but also provisions, migrates, and queries your Postgres database. Stop imagining—this is possible today with [Windsurf](https://codeium.com/windsurf).
 
-In this blog post, we will explore how Windsurf can be integrated with the [Neon MCP server](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here) to allow agents to interact directly with your database. We’ll walk through an example where we build a simple Todo application using Next.js, Typescript, Drizzle ORM, and Neon, and then see how [Cascade](https://codeium.com/cascade) can iterate on the project, **adding features and managing migrations without writing a line of code**.
+In this blog post, we will explore how Windsurf can be integrated with the [Neon MCP server](https://neon.com/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here) to allow agents to interact directly with your database. We’ll walk through an example where we build a simple Todo application using Next.js, Typescript, Drizzle ORM, and Neon, and then see how [Cascade](https://codeium.com/cascade) can iterate on the project, **adding features and managing migrations without writing a line of code**.
 
 ## What is MCP?
 

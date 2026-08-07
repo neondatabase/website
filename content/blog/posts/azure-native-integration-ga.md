@@ -43,7 +43,7 @@ seo:
 </video>
 
 <Admonition type="info" title="context">
-Neon is working with Microsoft to bring serverless Postgres to the Azure ecosystem. [Review our original announcement](https://neon.tech/blog/neon-is-coming-to-azure) for a refresher.
+Neon is working with Microsoft to bring serverless Postgres to the Azure ecosystem. [Review our original announcement](https://neon.com/blog/neon-is-coming-to-azure) for a refresher.
 </Admonition>
 
 ## What Is the Neon Azure Native Integration?
@@ -82,8 +82,8 @@ If your organization has a [Microsoft Azure Consumption Commitment (MACC)](https
 [Enterprises choose Neon](https://neon.tech/enterprise) due to its efficient scalability, strong recovery guarantees, and developer workflows that align with modern software development practices:
 
 - **Efficient scalability**: [Neon’s compute layer scales automatically based on workload](https://neon.com/docs/introduction/autoscaling), including CPU, memory, and active connections. There’s no need to overprovision resources or worry about connection limits. The benefits are smoother performance during peak traffic, lower infrastructure costs, and reduced operational overhead for engineering teams.
-- **Reliable recovery options**: Neon also enables [instant restores](https://neon.com/docs/introduction/branch-restore), even for multi-terabyte databases. This significantly reduces downtime in the event of failures, providing a [strong safety net for production environments](https://neon.tech/blog/the-true-cost-of-slow-postgres-restores). Every database on Neon also includes [high availability by default,](https://neon.com/docs/introduction/high-availability) with no need to manage replicas or monitor replication lag.
-- **Smoother development workflows**: Neon’s [database branching](https://neon.com/docs/introduction/branching) makes it easy to create isolated, production-like environments for testing, CI/CD, and feature development. Teams can spin up branches in seconds, iterate quickly, and [launch with confidence](https://neon.tech/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches). And with scale-to-zero, idle dev and staging environments incur no cost, keeping budgets lean across the SDLC.
+- **Reliable recovery options**: Neon also enables [instant restores](https://neon.com/docs/introduction/branch-restore), even for multi-terabyte databases. This significantly reduces downtime in the event of failures, providing a [strong safety net for production environments](https://neon.com/blog/the-true-cost-of-slow-postgres-restores). Every database on Neon also includes [high availability by default,](https://neon.com/docs/introduction/high-availability) with no need to manage replicas or monitor replication lag.
+- **Smoother development workflows**: Neon’s [database branching](https://neon.com/docs/introduction/branching) makes it easy to create isolated, production-like environments for testing, CI/CD, and feature development. Teams can spin up branches in seconds, iterate quickly, and [launch with confidence](https://neon.com/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches). And with scale-to-zero, idle dev and staging environments incur no cost, keeping budgets lean across the SDLC.
 
 All of this is backed by Neon’s commitment to [enterprise-grade security and compliance.](https://neon.tech/security) We follow industry best practices for encryption, access control, and data protection.
 
@@ -99,7 +99,7 @@ If you’re a startup, especially if part of the [Microsoft for Startups program
 
 [Replit Agent and Create.xyz are using Neon as a foundation for agentic app creation](https://x.com/nikitabase/status/1837138637516931252). These AI agents automatically spin up Neon databases in response to user input, whether it’s a new AI workspace, a micro SaaS, or a proof-of-concept app.
 
-Neon’s instant provisioning, fully managed storage, and [powerful API](https://neon.tech/blog/provision-postgres-neon-api) enable agents to deploy Postgres completely autonomously. No manual setup, no disk provisioning, no credential management. Neon handles it all in the background, so the agent can stay focused on the user experience.
+Neon’s instant provisioning, fully managed storage, and [powerful API](https://neon.com/blog/provision-postgres-neon-api) enable agents to deploy Postgres completely autonomously. No manual setup, no disk provisioning, no credential management. Neon handles it all in the background, so the agent can stay focused on the user experience.
 
 ### RAG pipelines with pgvector
 

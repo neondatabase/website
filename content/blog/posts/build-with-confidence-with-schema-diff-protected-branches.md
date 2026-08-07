@@ -56,7 +56,7 @@ Similar to diffs in Git, the Neon schema diff feature compares schemas between t
 
 Join us on [Discord](https://neon.tech/discord) and let us know what you think and how you use schema diff in your workflows.
 
-We detailed how Neon storage and ephemeral branches work in the [Point In Time Recovery Under the Hood in Serverless Postgres](https://neon.tech/blog/point-in-time-recovery-in-postgres#ephemeral-branches) article. In short, Neon’s storage engine saves Write-Ahead-Log records and can reconstruct a Postgres page at any given timestamp or Log-Sequence Number, allowing for time travel queries.
+We detailed how Neon storage and ephemeral branches work in the [Point In Time Recovery Under the Hood in Serverless Postgres](https://neon.com/blog/point-in-time-recovery-in-postgres#ephemeral-branches) article. In short, Neon’s storage engine saves Write-Ahead-Log records and can reconstruct a Postgres page at any given timestamp or Log-Sequence Number, allowing for time travel queries.
 
 Under the hood, schema diff creates short-lived, ephemeral branches (TTL=10 seconds) set at a specific time (and LSN), then queries the Pageservers to retrieve the past schema, and then compares it with the current one to effectively display the changes.
 

@@ -37,7 +37,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/move-fast-and-branch-things/image-28-1024x576-4f1aa171.png)
 
-Neon simplifies the use of [scalable Postgres](https://neon.tech/blog/neon-ga), changing how you handle your database infrastructure from development through production. This is a fundamental shift in how to leverage your Postgres infrastructure. Instead of spending time on Infrastructure as code (IaC) and cloud-specific configuration tasks in services like Amazon RDS or Google Cloud SQL, with Neon you can increase developer velocity and focus on building for your customer.
+Neon simplifies the use of [scalable Postgres](https://neon.com/blog/neon-ga), changing how you handle your database infrastructure from development through production. This is a fundamental shift in how to leverage your Postgres infrastructure. Instead of spending time on Infrastructure as code (IaC) and cloud-specific configuration tasks in services like Amazon RDS or Google Cloud SQL, with Neon you can increase developer velocity and focus on building for your customer.
 
 When making architecture decisions for any app, it is always important to consider the constraints of your system and under what circumstances those constraints and requirements apply, both during periods of low request traffic and during high-traffic bursts. Neon maintains Postgres compatibility while enhancing the developer experience with database branching, autoscaling, and serverless scale to zero – enabling _you_ to launch and scale your projects quickly.
 
@@ -64,19 +64,19 @@ These factors combined contribute to a higher total cost of ownership, especiall
 
 ### Want scale to zero serverless?
 
-Neon is [scale-to-zero Postgres](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero). No changes are needed. Your compute scales down (to idle) when not in use and scales up in capacity to handle increased requests and manage capacity. This also results in cost savings for production-like environments. Your environments can be exact copies of each other in `dev`/`test`/`prod` but _not incur additional costs_ when not in use or receiving traffic. Additional services, proxies, or cloud event logging aren’t needed. Enough said.
+Neon is [scale-to-zero Postgres](https://neon.com/blog/why-you-want-a-database-that-scales-to-zero). No changes are needed. Your compute scales down (to idle) when not in use and scales up in capacity to handle increased requests and manage capacity. This also results in cost savings for production-like environments. Your environments can be exact copies of each other in `dev`/`test`/`prod` but _not incur additional costs_ when not in use or receiving traffic. Additional services, proxies, or cloud event logging aren’t needed. Enough said.
 
 True serverless architecture can significantly transform the way a managed Postgres platform is utilized. This transition can improve developer productivity by allowing them to concentrate on creating value, while also enhancing the scalability and availability of applications. This leads to quicker development cycles and increased reliability of the applications.
 
 ### Need connection pooling?
 
-Without Neon that is a separate configuration, piece of infrastructure to manage, and service fee. With Neon, it’s included. [Neon supports connection pooling using PgBouncer](https://neon.tech/blog/pgbouncer-the-one-with-prepared-statements#what-is-pgbouncer), which allows your database on Neon to support up to 10,000 concurrent connections.
+Without Neon that is a separate configuration, piece of infrastructure to manage, and service fee. With Neon, it’s included. [Neon supports connection pooling using PgBouncer](https://neon.com/blog/pgbouncer-the-one-with-prepared-statements#what-is-pgbouncer), which allows your database on Neon to support up to 10,000 concurrent connections.
 
 ### Want your database to autoscale?
 
 Neon dynamically adjusts the amount of compute resources allocated to a Neon compute endpoint in response to the current load, eliminating the need for manual intervention. This is autoscaling-on-the-fly.
 
-Without Neon, you’re faced with either managing the autoscaling yourself by monitoring and adjusting instance types and policies with RDS, or settling for [increased cold starts and lack of scale to zero with Aurora](https://neon.tech/blog/aurora-serverless-v1-to-neon) (20-60s on Aurora V1). Even with Aurora V2 and RDS, you’ll likely need to use connection pooling (above). This means you might have to set up Amazon RDS Proxy or run PgBouncer on a separate Amazon Elastic Compute Cloud (Amazon EC2) instance to manage your database connections.
+Without Neon, you’re faced with either managing the autoscaling yourself by monitoring and adjusting instance types and policies with RDS, or settling for [increased cold starts and lack of scale to zero with Aurora](https://neon.com/blog/aurora-serverless-v1-to-neon) (20-60s on Aurora V1). Even with Aurora V2 and RDS, you’ll likely need to use connection pooling (above). This means you might have to set up Amazon RDS Proxy or run PgBouncer on a separate Amazon Elastic Compute Cloud (Amazon EC2) instance to manage your database connections.
 
 ## Move fast and “branch” things<span>&nbsp;&nbsp;</span>
 
@@ -98,7 +98,7 @@ In seconds, you can branch your entire database as shown in the video below:
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/move-fast-and-branch-things/create-branch-8ddab1bd.mp4" />
 </video>
 
-Neon’s [separation of storage and compute](https://neon.tech/blog/architecture-decisions-in-neon) makes this possible – allowing for flexible and independent scaling of each. For comparison, to isolate development/test/production database environments in a traditional cloud environment, each of these environments would require the provisioning of a separate database cluster or database within a cluster for isolation. It’s not possible to branch your Postgres database in this manner with other vendors.
+Neon’s [separation of storage and compute](https://neon.com/blog/architecture-decisions-in-neon) makes this possible – allowing for flexible and independent scaling of each. For comparison, to isolate development/test/production database environments in a traditional cloud environment, each of these environments would require the provisioning of a separate database cluster or database within a cluster for isolation. It’s not possible to branch your Postgres database in this manner with other vendors.
 
 To isolate a new Postgres database in Amazon RDS or Aurora Postgres, the only option is to create a new instance or replicate an existing one. This task, while ultimately not providing the equivalent outcome, is significantly more complex and time-consuming. Creating a new RDS Postgres instance takes **~5 minutes**. This also does not account for the role and policy IAM updates, new infra, and additional storage costs for the copy.
 
@@ -130,9 +130,9 @@ Below is a video to demonstrate how to restore a Neon Postgres database in just 
 
 ### Connect from Serverless Environments
 
-The Neon Serverless Driver for JavaScript and TypeScript is a [low-latency Postgres driver for JavaScript and TypeScript](https://neon.tech/blog/http-vs-websockets-for-postgres-queries-at-the-edge) that allows you to query data from serverless and edge environments over HTTP or WebSockets where direct access to TCP is restricted.
+The Neon Serverless Driver for JavaScript and TypeScript is a [low-latency Postgres driver for JavaScript and TypeScript](https://neon.com/blog/http-vs-websockets-for-postgres-queries-at-the-edge) that allows you to query data from serverless and edge environments over HTTP or WebSockets where direct access to TCP is restricted.
 
-This can be used in [serverless environments like AWS Lambda](https://neon.tech/blog/serverless-api-using-aws-lambda-cdk-and-neon), Cloudflare Workers, and Vercel Edge functions. With a few lines of code, you can connect to and query your database the same way that you would in a backend persistent server instance.
+This can be used in [serverless environments like AWS Lambda](https://neon.com/blog/serverless-api-using-aws-lambda-cdk-and-neon), Cloudflare Workers, and Vercel Edge functions. With a few lines of code, you can connect to and query your database the same way that you would in a backend persistent server instance.
 
 ```typescript
 import { neon } from '@neondatabase/serverless';
@@ -150,13 +150,13 @@ With the movement away from Postgres as just a piece of infrastructure, develope
 
 ### Leveraging AI in your application<span>&nbsp;</span>
 
-Use Neon Postgres with the [pgvector extension](https://neon.tech/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings) as the way to store vector embeddings and enhance your models using Retrieval Augmented Generation (RAG) with vector search.
+Use Neon Postgres with the [pgvector extension](https://neon.com/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings) as the way to store vector embeddings and enhance your models using Retrieval Augmented Generation (RAG) with vector search.
 
 Neon can scale up on-demand to build your index and scale back down to save on cost. This on-demand scaling can lead to cost savings compared to traditional, always-on database instances that are overprovisioned to accommodate peak usage periods.
 
 ### Building SaaS platforms
 
-The streamlined experience of using Neon to use Postgres makes it even more possible to build Software as a service (SaaS) platforms that have requirements to [rapidly provision Postgres](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) and even isolate those instances across tenants using database branching. With traditional cloud vendors, this is costly and operationally intense – in terms of provisioning time, maintenance, and cost.
+The streamlined experience of using Neon to use Postgres makes it even more possible to build Software as a service (SaaS) platforms that have requirements to [rapidly provision Postgres](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) and even isolate those instances across tenants using database branching. With traditional cloud vendors, this is costly and operationally intense – in terms of provisioning time, maintenance, and cost.
 
 Neon helps to unblock these use cases and empower SaaS builders to take full advantage of Postgres on a per customer or tenant basis. Effectively allowing SaaS businesses to provide their Platform as a Service (PaaS).
 

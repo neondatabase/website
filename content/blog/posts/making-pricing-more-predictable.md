@@ -62,7 +62,7 @@ _Here is the compute usage (in daily Compute hours) from a real-world Launch pla
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/making-pricing-more-predictable/78-1024x552-e5d89ebd.png)
 
-For customers with larger production workloads that also have dev, staging, and testing environments, like [Branch](https://neon.tech/blog/branch-chose-neon-for-its-true-postgres-and-serverless-nature), the Scale plan provides all of the necessary resources and features to run their base workload while also allowing them to scale compute and storage as they grow without needing to worry about managing infrastructure.
+For customers with larger production workloads that also have dev, staging, and testing environments, like [Branch](https://neon.com/blog/branch-chose-neon-for-its-true-postgres-and-serverless-nature), the Scale plan provides all of the necessary resources and features to run their base workload while also allowing them to scale compute and storage as they grow without needing to worry about managing infrastructure.
 
 _Here is the compute usage (in daily Compute hours) from a real-world Scale plan customer:_
 

@@ -44,7 +44,7 @@ Vibe coding is all about skipping the boilerplate and getting straight to the go
 
 ## Using AI for synthetic data generation
 
-But, before I go any further, let me take a step back and explain why I started exploring AI for synthetic data generation. At Neon, I’ve been focused on improving our [Dev/Test workflows](https://neon.com/docs/use-cases/dev-test). Simply put, this means keeping production where it is while shifting development and testing environments to Neon. You can read more about this workflow here: [From Shared Chaos to Isolated Control with Neon](https://neon.tech/blog/from-shared-chaos-to-isolated-control-with-neon).
+But, before I go any further, let me take a step back and explain why I started exploring AI for synthetic data generation. At Neon, I’ve been focused on improving our [Dev/Test workflows](https://neon.com/docs/use-cases/dev-test). Simply put, this means keeping production where it is while shifting development and testing environments to Neon. You can read more about this workflow here: [From Shared Chaos to Isolated Control with Neon](https://neon.com/blog/from-shared-chaos-to-isolated-control-with-neon).
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/vibe-coding-with-ai-to-generate-synthetic-data-part-1/twin-workflow-1-1024x316-e2cabc81.jpg)
 

@@ -66,7 +66,7 @@ As they progressed on their Neon journey, Velocity discovered more unexpected be
 
 Keeping development environments in sync with production is a challenge that most teams experience. The traditional way to handle this is to set up local instances, manage migrations manually, and constantly keep an eye on things to ensure staging and dev environments reflect the latest schema. Neon’s [branching model](https://neon.tech/flow) flips this on its head.
 
-Instead of copying production data or spinning up entirely separate databases, [Neon lets developers instantly create branches](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write)—lightweight, copy-on-write database clones. These branches can be used to test schema changes, debug issues, or validate migrations without risking production data.
+Instead of copying production data or spinning up entirely separate databases, [Neon lets developers instantly create branches](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write)—lightweight, copy-on-write database clones. These branches can be used to test schema changes, debug issues, or validate migrations without risking production data.
 
 <blockquote>
 <p><strong>“We use Neon branching in our development process to find issues, test migrations, and experiment safely. We create dev branches, test changes, and delete them when we’re done. It makes development faster and cleaner” </strong>(<a href="https://x.com/talkain">Tal Kain</a>, Founder and CEO at <a href="https://velocity.tech/">Velocity</a>)</p>

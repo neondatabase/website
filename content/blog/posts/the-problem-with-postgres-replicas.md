@@ -76,7 +76,7 @@ All combined, this experience sucks. The result is not what was originally promi
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/the-problem-with-postgres-replicas/screenshot-2024-06-27-at-111648percente2percent80percentafam-1024x553-f22783d6.png)
 
-Neon’s architecture is very different from the traditional managed database. [It has a natively decoupled architecture with separated compute and storage](https://neon.tech/blog/architecture-decisions-in-neon), and it also incorporates an [innovative storage engine](https://neon.tech/blog/get-page-at-lsn) that records database history and combines SSDs for performance with S3 for durability.
+Neon’s architecture is very different from the traditional managed database. [It has a natively decoupled architecture with separated compute and storage](https://neon.com/blog/architecture-decisions-in-neon), and it also incorporates an [innovative storage engine](https://neon.com/blog/get-page-at-lsn) that records database history and combines SSDs for performance with S3 for durability.
 
 This allows Neon to reimagine Postgres replicas:
 

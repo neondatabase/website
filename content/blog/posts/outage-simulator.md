@@ -42,7 +42,7 @@ seo:
   height="576"
 />
 
-We all have experienced what happens when a production database goes down—it’s not fun. [No matter the cause](https://neon.tech/blog/recover-production-database), the result is always the same—high stress, downtime, and a rush to restore everything as quickly as possible.
+We all have experienced what happens when a production database goes down—it’s not fun. [No matter the cause](https://neon.com/blog/recover-production-database), the result is always the same—high stress, downtime, and a rush to restore everything as quickly as possible.
 
 How long would it take to get your Postgres database back online? For most, the answer hours, certainly if your DB has a certain size (TBs).
 
@@ -69,7 +69,7 @@ Watch it happen or [run it yourself](https://neon-demos-outage.vercel.app/):
 
 What’s actually happening under the hood?
 
-Traditional Postgres restores involve restoring from snapshots or backups and replaying WAL, a process that takes time, [especially for large datasets](https://neon.tech/blog/recover-large-postgres-databases). Neon is able to take a completely different approach to recovery, leveraging its [copy-on-write branching](https://neon.tech/blog/get-page-at-lsn) to make restores near-instant.
+Traditional Postgres restores involve restoring from snapshots or backups and replaying WAL, a process that takes time, [especially for large datasets](https://neon.com/blog/recover-large-postgres-databases). Neon is able to take a completely different approach to recovery, leveraging its [copy-on-write branching](https://neon.com/blog/get-page-at-lsn) to make restores near-instant.
 
 In the [Outage Simulator](https://neon-demos-outage.vercel.app/), this is what we’re doing:
 

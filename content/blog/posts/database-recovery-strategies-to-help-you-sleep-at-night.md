@@ -82,7 +82,7 @@ The previous section pretty much summarizes why so many developers choose manage
 
 ### Strategy #2 – Take your own nightly backups via Github actions
 
-Needless to say, [Neon](https://neon.tech/home) is one of those managed Postgres options you can choose for your workload. As such, we take care of your data; [Neon keeps a copy of your data in highly durable object storage](https://neon.tech/blog/architecture-decisions-in-neon), so you definitely don’t have to take your own backups.
+Needless to say, [Neon](https://neon.tech/home) is one of those managed Postgres options you can choose for your workload. As such, we take care of your data; [Neon keeps a copy of your data in highly durable object storage](https://neon.com/blog/architecture-decisions-in-neon), so you definitely don’t have to take your own backups.
 
 That said, sometimes you want to be extra sure. We get it. If you want to also run your own nightly backups, **not as your recovery path in case something goes wrong** but as a safety net, [this article walks you through how to schedule nightly backups in Neon via a GitHub Action and store them to S3.](https://thenewstack.io/how-to-schedule-postgresql-backups-with-github-actions/)
 
@@ -96,9 +96,9 @@ Standby replicas can save you in case of disaster, and they’re a recommended p
 
 ### Strategy #4 – Chose Neon for instant PITR via branching
 
-If you’re using Neon, you have some special tools 🛠️ for database recovery, derived from the unique architecture of Neon. First, [Neon’s storage is inherently durable](https://neon.tech/blog/get-page-at-lsn), since it implements an architecture that uses a combination of safekeepers and pageservers running in high-performance SSDs with cloud object storage to ensure data durability.
+If you’re using Neon, you have some special tools 🛠️ for database recovery, derived from the unique architecture of Neon. First, [Neon’s storage is inherently durable](https://neon.com/blog/get-page-at-lsn), since it implements an architecture that uses a combination of safekeepers and pageservers running in high-performance SSDs with cloud object storage to ensure data durability.
 
-Second, Neon offers a different approach to recovery: [you can run instant PITR via database branching.](https://neon.tech/blog/announcing-point-in-time-restore) Since Neon’s storage is [brancheable](https://neon.com/docs/guides/branch-restore), instead of relying on a slow recovery-from-backup process or on expensive standby replicas, you simply create a [database branch](https://neon.com/docs/guides/branch-restore) from any time in the past within the project’s [history retention window](https://neon.com/docs/manage/projects#configure-history-retention).
+Second, Neon offers a different approach to recovery: [you can run instant PITR via database branching.](https://neon.com/blog/announcing-point-in-time-restore) Since Neon’s storage is [brancheable](https://neon.com/docs/guides/branch-restore), instead of relying on a slow recovery-from-backup process or on expensive standby replicas, you simply create a [database branch](https://neon.com/docs/guides/branch-restore) from any time in the past within the project’s [history retention window](https://neon.com/docs/manage/projects#configure-history-retention).
 
 Running this PITR in Neon doesn’t incur additional costs, and **it’s an extremely fast process regardless of how large your dataset is**. [You can even run queries before restoring to a precise point in the past, to make sure you’re restoring to the right timestamp.](https://neon.com/docs/guides/time-travel-assist) If this has picked your curiosity, watch this demo to see it in action:
 

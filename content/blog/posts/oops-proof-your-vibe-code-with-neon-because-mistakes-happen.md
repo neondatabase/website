@@ -58,7 +58,7 @@ This allows you to roll back your database to a specific point in time before an
 
 ## 2. Snapshots
 
-Similar to PITR, [Snapshots](https://neon.tech/blog/announcing-neon-snapshots-a-smoother-path-to-recovery) provide another layer of safety if undesirable changes are made to your database. Snapshots are currently available to our users in our [Early Access Program](https://console.neon.tech/app/settings/early-access) and can be created at the click of a button from the Neon console.
+Similar to PITR, [Snapshots](https://neon.com/blog/announcing-neon-snapshots-a-smoother-path-to-recovery) provide another layer of safety if undesirable changes are made to your database. Snapshots are currently available to our users in our [Early Access Program](https://console.neon.tech/app/settings/early-access) and can be created at the click of a button from the Neon console.
 
 <br />To take a snapshot head over to **Backup & Restore**, and click **Create snapshot**.
 

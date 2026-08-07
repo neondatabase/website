@@ -273,7 +273,7 @@ That’s all there is to it. Calling it a three-step process is overkill. It’s
 
 Here’s more reading on Neon Auth to help you get your bearings:
 
-- [Neon Auth is Here](https://neon.tech/blog/neon-auth-is-here-get-authentication-in-a-couple-of-clicks)
+- [Neon Auth is Here](https://neon.com/blog/neon-auth-is-here-get-authentication-in-a-couple-of-clicks)
 - [About Neon Auth](https://neon.com/docs/guides/neon-auth)
 - [Neon Auth Tutorial](https://neon.com/docs/guides/neon-auth-tutorial)
 - [Manage Neon Auth using the API](https://neon.com/docs/guides/neon-auth-api)

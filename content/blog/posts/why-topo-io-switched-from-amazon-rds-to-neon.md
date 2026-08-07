@@ -55,7 +55,7 @@ With a decade of experience working with different types of databases, Leo knew 
 
 ## The problem with Amazon RDS
 
-Initially, the team at Topo.io decided to use Amazon RDS to run Postgres. RDS worked well in terms of operating their production database, but, like many other developers working with RDS, Leo and his team ran into limitations integrating it into their development workflows. [RDS gets hard to manage.](https://neon.tech/blog/frictionless-development-experience-with-neon-branching)
+Initially, the team at Topo.io decided to use Amazon RDS to run Postgres. RDS worked well in terms of operating their production database, but, like many other developers working with RDS, Leo and his team ran into limitations integrating it into their development workflows. [RDS gets hard to manage.](https://neon.com/blog/frictionless-development-experience-with-neon-branching)
 
 <blockquote>
 <p><em>When we were using RDS, we had trouble keeping the same environment on my computer, my developer’s environment, and production. It was definitely not good for data consistency.</em></p>
@@ -83,7 +83,7 @@ Neon’s serverless Postgres was a perfect fit for Topo.io’s needs, with [bran
 
 ### How branching improves the Postgres experience
 
-In Neon, [you can branch your Postgres database](https://neon.tech/blog/database-branching-for-postgres-with-neon) to enable parallel development and testing without impacting the production environment, just as you already do with your application code. This improves the development experience in many ways:
+In Neon, [you can branch your Postgres database](https://neon.com/blog/database-branching-for-postgres-with-neon) to enable parallel development and testing without impacting the production environment, just as you already do with your application code. This improves the development experience in many ways:
 
 - **Your production and development environments stay consistent (without extra work).** After switching to Neon, every developer at Topo.io could get an isolated development environment with up-to-date production data in seconds.
 - **You can test against actual data.** Working with branches makes it easy to have a real-world testing scenario, which helps identify and solve issues that might not be evident when using synthetic test data.
@@ -95,9 +95,9 @@ Implementing database branching might seem like an innovative thing to do (and i
 
 - **One branch per developer.** Each developer at Topo.io creates a branch from the main database, providing them with an isolated environment to work on features or fixes. This setup allows for parallel development without interfering with the main production database or the work of other team members.
 - **Branches as `dev` environments.** By branching off the main database, developers immediately have a development environment available, with production data. The Topo.io engineers use these environments to build new features.
-- **Branches as staging environments.** Before applying changes to the production database, Topo.io tests them on a branched database that acts as the staging environment. Shortly, they’ll be also implementing [preview environments](https://neon.tech/blog/branching-with-preview-environments) using branching.
+- **Branches as staging environments.** Before applying changes to the production database, Topo.io tests them on a branched database that acts as the staging environment. Shortly, they’ll be also implementing [preview environments](https://neon.com/blog/branching-with-preview-environments) using branching.
 - **Automating with GitHub actions.** Topo.io integrates all of this within its CI/CD pipeline. [They use GitHub Actions to create branches automatically](https://neon.com/docs/guides/branching-github-actions) fo testing schema migrations, ensuring that these changes are validated in a controlled environment before being deployed.
-- **Refreshing branches with Branch Reset.** [Branch Reset](https://neon.tech/blog/announcing-branch-reset) is a favorite of Topo.io, a feature that allows them to quickly reset any branch they’re using for development to the state of the main branch. “I use Branch Reset at least once a day”, Leo told us. This feature streamlines the process of keeping branches up-to-date with the latest changes in the production environment, something that’s non-trivial to do in databases like RDS.
+- **Refreshing branches with Branch Reset.** [Branch Reset](https://neon.com/blog/announcing-branch-reset) is a favorite of Topo.io, a feature that allows them to quickly reset any branch they’re using for development to the state of the main branch. “I use Branch Reset at least once a day”, Leo told us. This feature streamlines the process of keeping branches up-to-date with the latest changes in the production environment, something that’s non-trivial to do in databases like RDS.
 
 ## Easier rollback migrations in Prisma
 
@@ -108,7 +108,7 @@ Implementing database branching might seem like an innovative thing to do (and i
 
 Topo.io’s tech stack is centered around TypeScript, with Node.js in the backend and Next.js on the frontend. Topo.io maintains both its frontend and backend codebases in a single monorepo, which allows for the seamless integration of shared resources, types, and interfaces across both frontend and backend.
 
-[For interacting with Neon, Topo.io uses Prisma](https://neon.com/docs/guides/prisma), an open-source database toolkit and ORM that harmonizes beautifully with TypeScript. Prisma simplifies building and executing queries against Neon and it facilitates schema migrations via [Prisma Migrate](https://neon.tech/blog/prisma-day-talk), streamlining the process of evolving the database schema over time.
+[For interacting with Neon, Topo.io uses Prisma](https://neon.com/docs/guides/prisma), an open-source database toolkit and ORM that harmonizes beautifully with TypeScript. Prisma simplifies building and executing queries against Neon and it facilitates schema migrations via [Prisma Migrate](https://neon.com/blog/prisma-day-talk), streamlining the process of evolving the database schema over time.
 
 Handling migrations with Prisma is another scenario where branches are particularly useful. [Doing “down” migrations is not a seamless experience in Prisma,](https://www.prisma.io/docs/orm/prisma-migrate/workflows/generating-down-migrations#how-to-generate-and-run-down-migrations) but this is made easier with branches. When using branching, if migration does not perform as expected, it’s easy to revert to the previous state without affecting the main database.
 

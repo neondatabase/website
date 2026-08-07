@@ -94,7 +94,7 @@ One last highlight: Postgres 18 also adds a new oauth authentication method. Thi
 
 ## Postgres 18 will be available on Neon as soon as it’s stable
 
-As always, we plan to make Postgres 18 available on Neon as soon as the final release is out. When Postgres 17 shipped, [we had support ready within a few hours.](https://neon.tech/blog/postgres-17) We expect to do the same this time.
+As always, we plan to make Postgres 18 available on Neon as soon as the final release is out. When Postgres 17 shipped, [we had support ready within a few hours.](https://neon.com/blog/postgres-17) We expect to do the same this time.
 
 But as always, the Postgres community encourages testing against real workloads. You can spin up a local Postgres 18 beta instance and try it out. Read the [official release notes](https://www.postgresql.org/docs/18/release-18.html), and if you hit issues, [file a bug](https://www.postgresql.org/account/submitbug/). You’ll be helping make Postgres better.
 

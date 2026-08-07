@@ -56,10 +56,10 @@ Neon is designed to make developer workflows simpler, faster, and safer. Traditi
 
 ## See Neon in Action: Customer Case Studies
 
-- [Adopting Neon branching in CI/CD pipelines: a practical story by Shepherd](https://neon.tech/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd)
-- [Why Invenco Migrated From Aurora Serverless v2 to Neon](https://neon.tech/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon)
-- [How Dispatch speeds up development with Neon while keeping workloads on Aurora](https://neon.tech/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora)
-- [How Mindvalley Minimizes Time-To-Launch With Neon Branches](https://neon.tech/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches)
+- [Adopting Neon branching in CI/CD pipelines: a practical story by Shepherd](https://neon.com/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd)
+- [Why Invenco Migrated From Aurora Serverless v2 to Neon](https://neon.com/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon)
+- [How Dispatch speeds up development with Neon while keeping workloads on Aurora](https://neon.com/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora)
+- [How Mindvalley Minimizes Time-To-Launch With Neon Branches](https://neon.com/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches)
 
 ## What is the Dev/Test Workflow?
 
@@ -106,7 +106,7 @@ A self-hosted runner can help solve both of these limitations by giving you cont
 
 ## Team notifications
 
-For larger teams, it’s essential to keep developers informed when a new Twin is available so they can [reset their own branches](https://neon.com/docs/guides/reset-from-parent) to maintain consistency. To help with this, we’ve put together a guide on setting up Slack notifications to keep everyone in the loop: [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows).
+For larger teams, it’s essential to keep developers informed when a new Twin is available so they can [reset their own branches](https://neon.com/docs/guides/reset-from-parent) to maintain consistency. To help with this, we’ve put together a guide on setting up Slack notifications to keep everyone in the loop: [Building Slack notifications to monitor pg_dump and restore workflows](https://neon.com/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows).
 
 ![Mockup of Slack interface displyang a message in the engineering-general channel explaining a new Neon Twin is available](https://cdn.neonapi.io/public/images/pages/blog/from-shared-chaos-to-isolated-control-with-neon/twin-slack-notifications-1024x641-272b37b8.jpg)
 

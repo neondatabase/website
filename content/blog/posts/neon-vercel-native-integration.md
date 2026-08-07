@@ -50,7 +50,7 @@ In a typical workflow, every PR points to the same database—this causes confli
 
 ### Databases don’t need to be populated with seed data
 
-Neon branches work via [copy-on-write](https://neon.tech/blog/get-page-at-lsn): **each Neon branch is ready instantly with a perfect “copy” of the data and schema of its parent**. This eliminates the need to manually populate a preview database with seed data.
+Neon branches work via [copy-on-write](https://neon.com/blog/get-page-at-lsn): **each Neon branch is ready instantly with a perfect “copy” of the data and schema of its parent**. This eliminates the need to manually populate a preview database with seed data.
 
 ### You can test application and schema changes together
 

@@ -124,6 +124,6 @@ Let’s take a closer look at Magic Circle’s branching workflows.
 
 ## Try it yourself
 
-Database branching workflows might seem a bit outlandish at first, but once you try them, [you’ll be converted](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle). With Neon’s Free Plan, you can create up to 10 branches per project to get a feel for it—sign up [here](https://console.neon.tech/signup). It only takes seconds and you don’t need a credit card.
+Database branching workflows might seem a bit outlandish at first, but once you try them, [you’ll be converted](https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle). With Neon’s Free Plan, you can create up to 10 branches per project to get a feel for it—sign up [here](https://console.neon.tech/signup). It only takes seconds and you don’t need a credit card.
 
 Once you’re set up, don’t forget to play Magic Circle with your friends [in Discord](https://discord.com/application-directory/1227719606223765687) or on the web at [magiccircle.gg](https://magiccircle.gg/). To learn more about them and their company, [give this podcast a listen](https://a16z.com/podcast/next-gen-gaming-ai-souls-real-time-culture-personalized-avatars/).

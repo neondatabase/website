@@ -40,7 +40,7 @@ In this guide, you’ll learn how to leverage Neon branching to programmatically
 
 ## What’s Neon?
 
-Neon is a fully managed serverless Postgres. This means you do not have to pick a size for your database upfront, and it will automatically allocate resources to meet your database’s workload. This is possible because Neon’s architecture [separates storage and compute.](https://neon.tech/blog/architecture-decisions-in-neon)
+Neon is a fully managed serverless Postgres. This means you do not have to pick a size for your database upfront, and it will automatically allocate resources to meet your database’s workload. This is possible because Neon’s architecture [separates storage and compute.](https://neon.com/blog/architecture-decisions-in-neon)
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/point-in-time-recovery/image-41-2a78b06f.png)
 

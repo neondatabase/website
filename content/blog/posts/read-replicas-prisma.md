@@ -54,7 +54,7 @@ Read replicas have several benefits:
 
 ## Neon read-only replicas
 
-In traditional Postgres, read replica data is synchronized using log-based replication. In this process, changes to the primary database are recorded in a Write-Ahead Log (WAL) and are then replayed on the read replicas to ensure data consistency. This process works differently in Neon [due to its architecture](https://neon.tech/blog/architecture-decisions-in-neon), which separates storage and compute.
+In traditional Postgres, read replica data is synchronized using log-based replication. In this process, changes to the primary database are recorded in a Write-Ahead Log (WAL) and are then replayed on the read replicas to ensure data consistency. This process works differently in Neon [due to its architecture](https://neon.com/blog/architecture-decisions-in-neon), which separates storage and compute.
 
 Read-only replicas in Neon are independent read-only compute instances that perform read operations on the same data as your read-write computes. Data is _not_ replicated across database instances, and read requests are directed to a single source.
 

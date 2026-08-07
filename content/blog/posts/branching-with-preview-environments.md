@@ -42,7 +42,7 @@ seo:
     https://cdn.neonapi.io/public/images/pages/blog/branching-with-preview-environments/social.png
 ---
 
-In this guide, you will learn how to leverage Neon’s branching feature to create a database for every [preview environment](https://neon.tech/blog/branching-with-preview-environments#preview-environments). We will use [Vercel](https://vercel.com/) as an example deployment provider and [GitHub actions](https://github.com/features/actions) as the&nbsp; CI/CD tool.
+In this guide, you will learn how to leverage Neon’s branching feature to create a database for every [preview environment](https://neon.com/blog/branching-with-preview-environments#preview-environments). We will use [Vercel](https://vercel.com/) as an example deployment provider and [GitHub actions](https://github.com/features/actions) as the&nbsp; CI/CD tool.
 
 ## Staging environments and why they are not ideal
 

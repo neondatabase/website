@@ -36,7 +36,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/cdc-with-materialize/image-10-1024x576-8d261962.png)
 
-Now that [Neon supports logical replication](https://neon.tech/blog/change-data-capture-with-serverless-postgres), your head might be filled with questions about how to turn this new feature into interactive data apps, better customer experiences, and other use cases ripe for **fresh data**. Do you need to rethink your architecture? Does your team need to catch up with all the streaming jargon? In this blog post, we’ll walk through how you can use Materialize to replicate data from Neon in real-time without needing to rethink much.
+Now that [Neon supports logical replication](https://neon.com/blog/change-data-capture-with-serverless-postgres), your head might be filled with questions about how to turn this new feature into interactive data apps, better customer experiences, and other use cases ripe for **fresh data**. Do you need to rethink your architecture? Does your team need to catch up with all the streaming jargon? In this blog post, we’ll walk through how you can use Materialize to replicate data from Neon in real-time without needing to rethink much.
 
 ## Why Materialize?
 

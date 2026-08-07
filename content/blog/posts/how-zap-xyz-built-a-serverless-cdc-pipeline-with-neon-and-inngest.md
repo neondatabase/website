@@ -70,7 +70,7 @@ Zap’s core philosophy is to build fast, iterate often, and focus on the produc
 By adopting this new architecture, Zap eliminated unnecessary infrastructure management while ensuring their system could scale. Each tool solves a key piece of the puzzle:
 
 - [Neon](https://neon.tech/home) is a serverless Postgres database that eliminates manual scaling and offers built-in connection pooling, key to Zap’s application.
-- [Inngest](https://www.inngest.com/) is an eventing framework that [taps directly into Neon’s logical replication](https://neon.tech/blog/serverless-triggers-how-and-why). Inngest provides an out-of-the-box CDC pipeline—every new record inserted in Neon automatically becomes an event that can trigger downstream workflows.
+- [Inngest](https://www.inngest.com/) is an eventing framework that [taps directly into Neon’s logical replication](https://neon.com/blog/serverless-triggers-how-and-why). Inngest provides an out-of-the-box CDC pipeline—every new record inserted in Neon automatically becomes an event that can trigger downstream workflows.
 - [Vercel](https://vercel.com/home) gives Zap the ability to deploy serverless functions with minimal overhead, ideal for handling lower-volume events and for quickly iterating on new features. (High-volume events are handled on dedicated servers.)
 
 ### Data ingestion into Neon
@@ -96,6 +96,6 @@ Once Inngest receives an event, it hands off the message to Zap’s chosen runti
 
 ## Next steps
 
-With these building blocks, Zap can now focus on scaling without the pain of wrangling all the AWS tools. If you’d like to replicate their approach, [try setting up Neon and Inngest](https://neon.tech/blog/serverless-triggers-how-and-why).
+With these building blocks, Zap can now focus on scaling without the pain of wrangling all the AWS tools. If you’d like to replicate their approach, [try setting up Neon and Inngest](https://neon.com/blog/serverless-triggers-how-and-why).
 
 And if you’re into crypto, [keep an eye on Zap](https://x.com/zap_xyz)👀 (they’re also hiring!)

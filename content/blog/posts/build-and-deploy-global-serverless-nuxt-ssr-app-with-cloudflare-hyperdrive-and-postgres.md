@@ -425,7 +425,7 @@ export const Elements = pgTable("Element", {
 ...
 ```
 
-In a production setup, consider setting up [database migrations with Drizzle and Neon](https://neon.tech/blog/api-cf-drizzle-neon) to speed up development iteration and harden your workflow.
+In a production setup, consider setting up [database migrations with Drizzle and Neon](https://neon.com/blog/api-cf-drizzle-neon) to speed up development iteration and harden your workflow.
 
 ### Update the Nuxt Server Route
 

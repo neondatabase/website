@@ -37,11 +37,11 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups/how-to-create-an-aws-s3-1024x576-424d7f4f.jpg)
 
-**In this post, I’ll walk you through setting up an AWS S3 bucket to store Postgres backups. This is part 1 of a 2-part series on automating nightly backups for multiple Neon projects—a helpful approach if you’re managing hundreds or even thousands of Neon projects (e.g. [in multi-tenant architectures with one project per customer](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)).**
+**In this post, I’ll walk you through setting up an AWS S3 bucket to store Postgres backups. This is part 1 of a 2-part series on automating nightly backups for multiple Neon projects—a helpful approach if you’re managing hundreds or even thousands of Neon projects (e.g. [in multi-tenant architectures with one project per customer](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)).**
 
-Neon already provides [S3-level durability](https://neon.tech/blog/our-approach-to-high-availability) and [rollback options for changes](https://neon.com/docs/guides/branch-restore) made to databases, however some customers still want to back up data to their own S3. This is somewhat simple if you only have one project, but Neon users often adopt a [database-per-tenant architecture](https://neon.tech/use-cases/database-per-tenant)—making manually backing up each project to S3 can feel overwhelming.
+Neon already provides [S3-level durability](https://neon.com/blog/our-approach-to-high-availability) and [rollback options for changes](https://neon.com/docs/guides/branch-restore) made to databases, however some customers still want to back up data to their own S3. This is somewhat simple if you only have one project, but Neon users often adopt a [database-per-tenant architecture](https://neon.tech/use-cases/database-per-tenant)—making manually backing up each project to S3 can feel overwhelming.
 
-Setting up a scheduled GitHub Action for each database simplifies this process, making the workflow much easier to manage. This first post will focus on the AWS side of things; [in the following post, I explain how the GitHub Actions work.](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects)
+Setting up a scheduled GitHub Action for each database simplifies this process, making the workflow much easier to manage. This first post will focus on the AWS side of things; [in the following post, I explain how the GitHub Actions work.](https://neon.com/blog/nightly-backups-for-multiple-neon-projects)
 
 ## Setup AWS Providers and Roles
 
@@ -171,7 +171,7 @@ There are just a couple of things to note before moving on to the second part of
 - `S3_BUCKET_NAME`: In my case, this would be, **neon-multiple-db-s3-backups**
 - `IAM_ROLE`: In my case this would be, **neon-multiple-db-s3-backups-github-action**
 
-Make a note of these so you have them ready [for the next part!](https://neon.tech/blog/nightly-backups-for-multiple-neon-projects)
+Make a note of these so you have them ready [for the next part!](https://neon.com/blog/nightly-backups-for-multiple-neon-projects)
 
 ---
 

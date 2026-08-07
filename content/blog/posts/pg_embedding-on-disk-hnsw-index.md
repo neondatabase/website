@@ -37,7 +37,7 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/pg_embedding-on-disk-hnsw-index/neon-on-disk-hnsw-index2x-1024x576-5a527d05.jpg)
 
-A few weeks back, we released [pg_embedding](https://github.com/neondatabase/pg_embedding), a new extension for Postgres and LangChain which introduced [Hierarchical Navigable Small Worlds (HNSW)](https://arxiv.org/abs/1603.09320) indexes for vector similarity search. This new indexing method resulted in [20x faster queries at a 99% accuracy compared to traditional IVFFlat indexing](https://neon.tech/blog/pg-embedding-extension-for-vector-search).
+A few weeks back, we released [pg_embedding](https://github.com/neondatabase/pg_embedding), a new extension for Postgres and LangChain which introduced [Hierarchical Navigable Small Worlds (HNSW)](https://arxiv.org/abs/1603.09320) indexes for vector similarity search. This new indexing method resulted in [20x faster queries at a 99% accuracy compared to traditional IVFFlat indexing](https://neon.com/blog/pg-embedding-extension-for-vector-search).
 
 Today, we’re thrilled to announce the newest version of pg_embedding, which includes the following improvements:
 
@@ -106,7 +106,7 @@ So why do we sacrifice performance by persisting the index? The short answer is 
 
 ## Scalable vector search on Neon
 
-Neon is a fully managed serverless Postgres. This means you do not have to pick a size for your database upfront, and it will automatically allocate resources to meet your database’s workload. This is possible because [Neon’s architecture separates storage and compute.](https://neon.tech/blog/architecture-decisions-in-neon)
+Neon is a fully managed serverless Postgres. This means you do not have to pick a size for your database upfront, and it will automatically allocate resources to meet your database’s workload. This is possible because [Neon’s architecture separates storage and compute.](https://neon.com/blog/architecture-decisions-in-neon)
 
 This architecture allows Neon to automatically scale up compute on demand in response to application workload and down to zero on inactivity. Since Neon is serverless, you’re only charged for what you use.
 
@@ -120,7 +120,7 @@ Since vector similarity search is a read-heavy workload, you can leverage read r
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/pg_embedding-on-disk-hnsw-index/image-1024x453-0eadc1ea.png)
 
-Finally, you can experience reduced query latencies by using the [Neon serverless driver](https://www.npmjs.com/package/@neondatabase/serverless), which makes it possible to achieve [sub-10ms Postgres queries when querying from Edge functions](https://neon.tech/blog/sub-10ms-postgres-queries-for-vercel-edge-functions).
+Finally, you can experience reduced query latencies by using the [Neon serverless driver](https://www.npmjs.com/package/@neondatabase/serverless), which makes it possible to achieve [sub-10ms Postgres queries when querying from Edge functions](https://neon.com/blog/sub-10ms-postgres-queries-for-vercel-edge-functions).
 
 Combining these features enables you to build scalable AI/LLM applications.
 

@@ -244,4 +244,4 @@ One of the novelties that comes out of this new feature is that you can now deve
 
 ## RLS for everything or not?
 
-Whether to use PG RLS for everything or not is an interesting debate. For the most part, we recommend defining some RLS rules for very important and core authorization logic. For example, [multi-tenant enterprise applications](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres#shared-schema) can definitely benefit from having RLS for extra security. However, it’s probably better to define very intricate access logic in your backend code.
+Whether to use PG RLS for everything or not is an interesting debate. For the most part, we recommend defining some RLS rules for very important and core authorization logic. For example, [multi-tenant enterprise applications](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres#shared-schema) can definitely benefit from having RLS for extra security. However, it’s probably better to define very intricate access logic in your backend code.

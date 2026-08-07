@@ -56,7 +56,7 @@ We also have tutorials for setting up RLS with many other Authorization provider
 
 ### Neon Authorize
 
-[Neon Authorize](https://neon.com/docs/guides/neon-authorize) is an open-source tool that takes the Postgres developer experience up a notch by making row-level security easy to implement. Instead of hardcoding user permissions, Neon Authorize allows you to use JWTs from your authentication provider (like AWS Cognito) to enforce fine-grained access controls directly at the database level. [Read more about it.](https://neon.tech/blog/introducing-neon-authorize)
+[Neon Authorize](https://neon.com/docs/guides/neon-authorize) is an open-source tool that takes the Postgres developer experience up a notch by making row-level security easy to implement. Instead of hardcoding user permissions, Neon Authorize allows you to use JWTs from your authentication provider (like AWS Cognito) to enforce fine-grained access controls directly at the database level. [Read more about it.](https://neon.com/blog/introducing-neon-authorize)
 
 ## Step-by-step guide: AWS Cognito and Postgres’ Row-Level Security
 

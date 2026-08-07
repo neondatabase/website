@@ -80,7 +80,7 @@ Manually creating and maintaining ERDs can be tedious and time-consuming, but th
 - No manual diagramming is required—your diagrams are built automatically.
 - Your ERD updates automatically as your schema changes, always staying current.
 
-If you’re already using Neon to manage your database, [Outerbase is just one click away to visualize your table relationships.](https://neon.tech/blog/add-an-interface-to-your-neon-database-via-outerbase)
+If you’re already using Neon to manage your database, [Outerbase is just one click away to visualize your table relationships.](https://neon.com/blog/add-an-interface-to-your-neon-database-via-outerbase)
 
 ## How to view your Neon database ERD
 

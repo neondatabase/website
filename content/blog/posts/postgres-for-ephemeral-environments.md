@@ -136,8 +136,8 @@ By integrating Neon branches into your ephemeral environments, you’re solving 
 You can try it for multiple use cases:
 
 - [Preview environments for each PR](https://neon.com/docs/guides/vercel-previews-integration)
-- [End-to-end testing](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
+- [End-to-end testing](https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
 - [Local development](https://neon.tech/guides/local-development-with-neon)
-- [Onboarding new engineers](https://neon.tech/blog/how-supergood-unlocked-their-postgres-developer-productivity)
+- [Onboarding new engineers](https://neon.com/blog/how-supergood-unlocked-their-postgres-developer-productivity)
 
 [Neon’s Free Plan](https://console.neon.tech/signup) gives you 10 independent projects with up to 10 branches per project at no cost. Give it a go let us know how it went on [Discord](https://discord.gg/92vNTzKDGp). For larger teams, Neon’s [Scale Plan](https://neon.tech/pricing) ($69/month) will give you thousands of branches at no additional cost, more than enough to cover all your non-prod environments.

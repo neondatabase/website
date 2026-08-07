@@ -72,7 +72,7 @@ When they first built Comigo, the team initially managed their database using Cl
 
 When Comigo tried [Neon](https://neon.tech/), they realized they’d found what they were looking for. Neon is a serverless Postgres platform built to enable developers to ship faster without babysitting their database.
 
-Due to its unique architecture, Neon is much simpler to maintain than other Postgres solutions. Instead of provisioning CPU / memory / storage upfront, [Neon autoscales resources automatically in response to load.](https://neon.com/docs/introduction/autoscaling) It’s also developer-friendly in nature, with an lo API-first feel and [integrations](https://neon.com/docs/guides/integrations) with all the popular frameworks, tools, and ORMs. Even [small teams can manage thousands of Postgres databases](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) on Neon.
+Due to its unique architecture, Neon is much simpler to maintain than other Postgres solutions. Instead of provisioning CPU / memory / storage upfront, [Neon autoscales resources automatically in response to load.](https://neon.com/docs/introduction/autoscaling) It’s also developer-friendly in nature, with an lo API-first feel and [integrations](https://neon.com/docs/guides/integrations) with all the popular frameworks, tools, and ORMs. Even [small teams can manage thousands of Postgres databases](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) on Neon.
 
 ## The magic of database branching
 

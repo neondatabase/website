@@ -47,7 +47,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/real-time-materialized-view-postgres-kafka-ksqldb/neon-ksqldb-materialized-views-1024x576-45232e8f.jpeg)
 
-Neon’s support for Postgres’ logical replication features opens up a variety of interesting use cases, including for real-time streaming architectures based on [change data capture](https://neon.tech/blog/change-data-capture-with-serverless-postgres#why-cdc-matters). We previously demonstrated how to use [Debezium to fan-out changes](https://neon.tech/blog/fan-out-postgres-changes-using-debezium-and-upstash-redis) from Postgres by using Redis as a message broker.
+Neon’s support for Postgres’ logical replication features opens up a variety of interesting use cases, including for real-time streaming architectures based on [change data capture](https://neon.com/blog/change-data-capture-with-serverless-postgres#why-cdc-matters). We previously demonstrated how to use [Debezium to fan-out changes](https://neon.com/blog/fan-out-postgres-changes-using-debezium-and-upstash-redis) from Postgres by using Redis as a message broker.
 
 Today we’ll explore how you can leverage the [Apache Kafka](https://kafka.apache.org/) and [Kafka Connect](https://kafka.apache.org/documentation/#connect) ecosystem to capture and process changes from your Neon Postgres database. Specifically, you’ll learn how to stream changes from Postgres to Apache Kafka and process those changes using [ksqlDB](https://ksqldb.io/) to create a [materialized view](https://en.wikipedia.org/wiki/Materialized_view) that updates in response to database changes.
 
@@ -55,7 +55,7 @@ It’s possible to run Apache Kafka, Kafka Connect, and ksqlDB on your infrastru
 
 ## Why Apache Kafka with Postgres for Materialized Views?
 
-Postgres is a mature and battle-tested database solution that [supports materialized views](https://www.postgresql.org/docs/current/rules-materializedviews.html), so why do we need messaging infrastructure like Apache Kafka to process events and create a materialized view? We already explained the importance of avoiding the [dual-write problem](https://neon.tech/blog/fan-out-postgres-changes-using-debezium-and-upstash-redis#the-dual-write-problem) when integrating your application with message brokers, so let’s focus on the data streaming and performance concerns instead.
+Postgres is a mature and battle-tested database solution that [supports materialized views](https://www.postgresql.org/docs/current/rules-materializedviews.html), so why do we need messaging infrastructure like Apache Kafka to process events and create a materialized view? We already explained the importance of avoiding the [dual-write problem](https://neon.com/blog/fan-out-postgres-changes-using-debezium-and-upstash-redis#the-dual-write-problem) when integrating your application with message brokers, so let’s focus on the data streaming and performance concerns instead.
 
 As a reminder, a materialized view stores the result of a query at a specific point in time. Let’s take a look at an example. Imagine you have a write-heavy application that involves two tables represented by the following SQL:
 
@@ -170,7 +170,7 @@ Sign into [https://confluent.cloud](https://confluent.cloud) and follow the onbo
 
 Once your cluster has been provisioned, click on it in the **Environments** screen, then select the **Connectors** view from the side menu on the next page.
 
-Apache Kafka on Confluent supports a [plethora of connectors](https://www.confluent.io/product/connectors/). Many of these are based on the various open-source [Kafka Connect](https://kafka.apache.org/documentation/#connect) connectors. Find and select the **Postgres CDC Source** connector in the list. This connector is based on the [Debezium project](https://debezium.io/) we wrote about in [our fan-out using Debezium and Upstash Redis article](https://neon.tech/blog/fan-out-postgres-changes-using-debezium-and-upstash-redis).
+Apache Kafka on Confluent supports a [plethora of connectors](https://www.confluent.io/product/connectors/). Many of these are based on the various open-source [Kafka Connect](https://kafka.apache.org/documentation/#connect) connectors. Find and select the **Postgres CDC Source** connector in the list. This connector is based on the [Debezium project](https://debezium.io/) we wrote about in [our fan-out using Debezium and Upstash Redis article](https://neon.com/blog/fan-out-postgres-changes-using-debezium-and-upstash-redis).
 
 ![The Debezuim-based Postgres CDC Source in Confluent Cloud.](https://cdn.neonapi.io/public/images/pages/blog/real-time-materialized-view-postgres-kafka-ksqldb/confluent-debezium-connector-1024x555-a7dd11f8.jpg)
 
@@ -305,4 +305,4 @@ This same stream of events over HTTP can be integrated into your application to 
 
 ## Conclusion
 
-Neon’s support for Postgres’ logical replication enables change data capture, and streaming database changes to Apache Kafka for real-time processing with ksqlDB to create [enriched data streams](https://developer.confluent.io/courses/data-pipelines/hands-on-joining-data-streams/) and materialized views using SQL syntax. If you’re looking for a Postgres database, [sign up and try Neon](https://neon.tech/blog/python-django-and-neons-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon) for free. Join us in our [Discord server](https://neon.tech/discord) to share your experiences, suggestions, and challenges.
+Neon’s support for Postgres’ logical replication enables change data capture, and streaming database changes to Apache Kafka for real-time processing with ksqlDB to create [enriched data streams](https://developer.confluent.io/courses/data-pipelines/hands-on-joining-data-streams/) and materialized views using SQL syntax. If you’re looking for a Postgres database, [sign up and try Neon](https://neon.com/blog/python-django-and-neons-serverless-postgres#:~:text=sign%20up%20and%20try%20Neon) for free. Join us in our [Discord server](https://neon.tech/discord) to share your experiences, suggestions, and challenges.

@@ -39,9 +39,9 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/1-year-of-autoscaling-postgres-at-neon/image-24-1024x576-728fa3e9.png)
 
-Neon introduced [autoscaling for serverless Postgres](https://github.com/neondatabase/autoscaling/) to the world [over a year ago](https://neon.tech/blog/scaling-serverless-postgres), enabling your applications to handle peak demand without incurring peak infrastructure costs 24/7. Our [autoscaling feature](https://neon.com/docs/introduction/autoscaling) performs zero-downtime vertical scaling of your Postgres instance, provisioning extra CPU and memory when your workload needs it and scaling down to reduce costs when possible.
+Neon introduced [autoscaling for serverless Postgres](https://github.com/neondatabase/autoscaling/) to the world [over a year ago](https://neon.com/blog/scaling-serverless-postgres), enabling your applications to handle peak demand without incurring peak infrastructure costs 24/7. Our [autoscaling feature](https://neon.com/docs/introduction/autoscaling) performs zero-downtime vertical scaling of your Postgres instance, provisioning extra CPU and memory when your workload needs it and scaling down to reduce costs when possible.
 
-Almost a third of our customers use autoscaling today. Recrowd, a Neon customer, recently shared how Neon’s [autoscaling provides them with the peace of mind](https://neon.tech/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand#scaling-up-and-down-automatically-meeting-fluctuating-demand-with-neon) that they’re ready to handle fluctuating demand.
+Almost a third of our customers use autoscaling today. Recrowd, a Neon customer, recently shared how Neon’s [autoscaling provides them with the peace of mind](https://neon.com/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand#scaling-up-and-down-automatically-meeting-fluctuating-demand-with-neon) that they’re ready to handle fluctuating demand.
 
 Implementing autoscaling for Postgres is no easy feat though, and we’ve learned many lessons by bringing over 700,000 databases under management this past year and a half. We’d like to take this opportunity to thank everyone building on Neon — your valuable feedback has helped grow and shape our platform.
 
@@ -67,7 +67,7 @@ To implement the scaling logic of autoscaling, we use our `autoscaler-agent` —
 
 The `autoscaler-agent` also communicates with the `vm-monitor`, a small program inside the VM. The `vm-monitor` continuously monitors Postgres’ resource usage and will request upscaling on its behalf when there’s an imminent need, e.g., if a query is about to exhaust all available memory. `vm-monitor` is also responsible for adjusting the size of our [Local File Cache](https://neon.com/docs/reference/glossary#compute-cache) in Postgres when scaling occurs, to take advantage of added resources.
 
-For more background information, [read our original Scaling Serverless Postgres article](https://neon.tech/blog/scaling-serverless-postgres).
+For more background information, [read our original Scaling Serverless Postgres article](https://neon.com/blog/scaling-serverless-postgres).
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/1-year-of-autoscaling-postgres-at-neon/diagram-1024x498-844cc38e.jpg)
 
@@ -99,7 +99,7 @@ And while in the medium-term, we have some deeper technical changes coming (virt
 
 ### Smarter Autoscaling using Local File Cache Metrics
 
-[Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon) separates storage and compute. It’s an integral part of what enables us to autoscale and dramatically reduce cold start times for serverless Postgres. Of course, [accessing pages across the network](https://neon.tech/blog/get-page-at-lsn) can result in increased query latency, so Neon’s Postgres has a [Local File Cache (LFC)](https://neon.com/docs/reference/glossary#compute-cache) that acts as a resizable extension of [Postgres’ shared buffers](https://www.postgresql.org/docs/16/runtime-config-resource.html#GUC-SHARED-BUFFERS).
+[Neon’s architecture](https://neon.com/blog/architecture-decisions-in-neon) separates storage and compute. It’s an integral part of what enables us to autoscale and dramatically reduce cold start times for serverless Postgres. Of course, [accessing pages across the network](https://neon.com/blog/get-page-at-lsn) can result in increased query latency, so Neon’s Postgres has a [Local File Cache (LFC)](https://neon.com/docs/reference/glossary#compute-cache) that acts as a resizable extension of [Postgres’ shared buffers](https://www.postgresql.org/docs/16/runtime-config-resource.html#GUC-SHARED-BUFFERS).
 
 Picking the right size for the cache is crucial — with certain OLTP workloads, we see a stepwise effect based on whether the working set fits into cache, sometimes with a 10x increase in performance from just a marginal increase in LFC size. A corollary to this is that the ideal endpoint size is often just big enough to fit the [working set size](https://en.wikipedia.org/wiki/Working_set_size), but no larger.
 
@@ -115,9 +115,9 @@ With the way autoscaling works today, there’s fundamental limits to how fast w
 
 We’ve considered a couple of strategies, and in the end landed on the combination of adding swap<sup>1</sup> and disabling memory overcommitting<sup>2</sup>.
 
-What practical applications does this have? Well, pgvector 0.6 implemented a parallel Hierarchical Navigable Small World (HNSW) index build feature. We wrote about how using this feature [can result in 30x faster index builds](https://neon.tech/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings). As a consequence of supporting parallel index building, pgvector 0.6 switched to allocating all its memory up-front ­ — without these changes, we found it’d fail with inscrutable errors if the dataset was too large.
+What practical applications does this have? Well, pgvector 0.6 implemented a parallel Hierarchical Navigable Small World (HNSW) index build feature. We wrote about how using this feature [can result in 30x faster index builds](https://neon.com/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings). As a consequence of supporting parallel index building, pgvector 0.6 switched to allocating all its memory up-front ­ — without these changes, we found it’d fail with inscrutable errors if the dataset was too large.
 
-From an implementation perspective though, it’s not trivial. To support blazingly fast cold starts, we keep [a pool of pre-created VMs](https://neon.tech/blog/cold-starts-just-got-hot), waiting to be assigned an endpoint to run — unfortunately this means that we don’t know how much swap the VM will need until after it’s created.
+From an implementation perspective though, it’s not trivial. To support blazingly fast cold starts, we keep [a pool of pre-created VMs](https://neon.com/blog/cold-starts-just-got-hot), waiting to be assigned an endpoint to run — unfortunately this means that we don’t know how much swap the VM will need until after it’s created.
 
 Thankfully, the solution’s not so bad — we can mount an empty disk for swap, and when the VM is assigned an endpoint, `mkswap` with the desired size and `swapon`. All `mkswap` does is write the header page (which itself is only 4KiB on most systems), and `swapon` is only expensive for non-contiguous disk space (like swapfiles), so this ends up quick enough to be included in the hot path.
 

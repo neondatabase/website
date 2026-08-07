@@ -83,7 +83,7 @@ Another favorite feature of the 222 team is Neon’s branching. In Neon, you can
 
 222’s engineering team has built out tooling to routinely spin up database branches for various testing purposes, such as schema migrations. This tooling, built on Neon’s REST API and the open-source [Goose](https://github.com/pressly/goose) library, allows the team to run schema migrations on an exact copy of their production database without touching their production data. They can validate their migrations in both the up-and down-directions, seeing the exact schema changes in a sandboxed environment.
 
-This process significantly reduces the anxiety of potentially running a bad query that could disrupt the database, especially when making comprehensive changes to their data models. And, although they haven’t needed to use it yet:), if something goes wrong, Neon’s [point-in-time restore](https://neon.tech/blog/point-in-time-recovery-in-postgres) can be used to instantaneously revert bad actions.
+This process significantly reduces the anxiety of potentially running a bad query that could disrupt the database, especially when making comprehensive changes to their data models. And, although they haven’t needed to use it yet:), if something goes wrong, Neon’s [point-in-time restore](https://neon.com/blog/point-in-time-recovery-in-postgres) can be used to instantaneously revert bad actions.
 
 ## Simplify your Postgres experience: give Neon a go
 

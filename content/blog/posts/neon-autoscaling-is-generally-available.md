@@ -43,7 +43,7 @@ In most managed Postgres (RDS, Azure PG, Heroku, Supabase, Render) users have to
 
 ## The architectural foundations
 
-Building autoscaling was no small feat. We faced many engineering challenges in building a solution reliable and robust enough for general availability, [including kernel panics, I/O throttling, and a crucial issue involving communication stalls between Postgres instances and their safekeepers](https://neon.tech/blog/1-year-of-autoscaling-postgres-at-neon).
+Building autoscaling was no small feat. We faced many engineering challenges in building a solution reliable and robust enough for general availability, [including kernel panics, I/O throttling, and a crucial issue involving communication stalls between Postgres instances and their safekeepers](https://neon.com/blog/1-year-of-autoscaling-postgres-at-neon).
 
 <figure>
 <img src="https://cdn.neonapi.io/public/images/pages/blog/neon-autoscaling-is-generally-available/screenshot-2024-08-25-at-111325percente2percent80percentafam-1024x715-3ad64b83.png" alt="Image" />
@@ -76,7 +76,7 @@ Lastly, to further improve performance during scaling operations, we introduced 
 
 <blockquote>
 <p>“Our database traffic peaks at nights and on weekends. Building on a database that preemptively autoscales allows us to regularly handle these traffic spikes”</p>
-<cite><a href="https://neon.tech/blog/how-222-uses-neon-to-handle-their-frequent-spikes-in-demand">Lex Nasser, Founding Engineer at 222</a></cite>
+<cite><a href="https://neon.com/blog/how-222-uses-neon-to-handle-their-frequent-spikes-in-demand">Lex Nasser, Founding Engineer at 222</a></cite>
 </blockquote>
 
 A core part of Neon’s mission is to make resizing Postgres instances obsolete. Being bound to a specific CPU/RAM config puts developers between a rock and a hard place: unless the database load is incredibly stable and predictable, their choices are: 1) overprovisioning, or 2) manually resizing the instance during traffic spikes, which can lead to unnecessary downtime.
@@ -103,12 +103,12 @@ Overall, the experience is not good—and something we believe can be improved w
 
 <blockquote>
 <p>“When we were using MySQL in Azure, we had to manually upgrade the database during the days of peak traffic and downgrade later in the day, which caused a couple of minutes of downtime and a huge waste of time for the team”</p><p></p>
-<cite><a href="https://neon.tech/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand">Pieralberto Colombo, CTO at Recrowd</a></cite>
+<cite><a href="https://neon.com/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand">Pieralberto Colombo, CTO at Recrowd</a></cite>
 </blockquote>
 
 <blockquote>
 <p>“Neon perfectly meets our needs for a Postgres solution that scales with demand. We can push the boundaries of what’s possible in our projects without compromising efficiency or costs”</p>
-<cite><a href="https://neon.tech/blog/white-widgets-secret-to-scalable-postgres-neon%5C">Technical Director at White Widget</a></cite>
+<cite><a href="https://neon.com/blog/white-widgets-secret-to-scalable-postgres-neon%5C">Technical Director at White Widget</a></cite>
 </blockquote>
 
 We’ve built Neon autoscaling to offer a better way for Postgres. Instead of provisioning fixed compute, Neon autoscales CPU and memory dynamically up and down in response to load. **For cost-control, you define a maximum** [autoscaling limit](https://neon.com/docs/introduction/autoscaling). Your Neon database will never scale beyond the max CPU/RAM you set, preventing unexpected charges on your bill.

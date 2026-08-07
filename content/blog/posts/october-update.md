@@ -38,7 +38,7 @@ October has been a great month. We improved query performance for larger databas
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/october-update/image-1-1-1024x358-c31af61a.jpg)
 
-We were very excited to [introduce Neon’s partnership with Hasura](https://neon.tech/blog/neon-hasura-integration/) on October 18th, 2022, we didn’t anticipate the success of Neon’s integration into the Hasura console to create their GraphQL API on top of Neon’s Serverless Postgres.
+We were very excited to [introduce Neon’s partnership with Hasura](https://neon.com/blog/neon-hasura-integration/) on October 18th, 2022, we didn’t anticipate the success of Neon’s integration into the Hasura console to create their GraphQL API on top of Neon’s Serverless Postgres.
 
 Since the announcement, over a thousand developers have created a Neon project. We can’t wait to see what you will build using Hasura and Neon.
 
@@ -46,7 +46,7 @@ Since the announcement, over a thousand developers have created a Neon project. 
 
 ![Neon PostgrSQL 15 support](https://cdn.neonapi.io/public/images/pages/blog/october-update/neon-postgrsql-15-support-1024x358-45d24e94.png)
 
-[We announced support for PostgreSQL 15](https://neon.tech/blog/postgresql-15-three-features-you-can-try-with-neon/) at the PGConf Europe. You can create a PostgreSQL 15 project on Neon’s console and try some of the newest features, such as the MERGE query.
+[We announced support for PostgreSQL 15](https://neon.com/blog/postgresql-15-three-features-you-can-try-with-neon/) at the PGConf Europe. You can create a PostgreSQL 15 project on Neon’s console and try some of the newest features, such as the MERGE query.
 
 ## New Extensions
 

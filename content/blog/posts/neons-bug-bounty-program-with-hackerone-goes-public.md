@@ -37,7 +37,7 @@ seo:
 
 At Neon, speed and security go hand in hand. As we continue pushing the boundaries of database technology, we’re opening our platform to the world’s top security researchers to put it to the test. Security isn’t just something we do; it’s built into every layer of Neon. From our infrastructure to our API, we’re committed to creating a robust and resilient platform.
 
-[Three months ago, we launched our private bug bounty program on HackerOne](https://neon.tech/blog/bugbounty-and-pentests-at-neon). The goal? Identify vulnerabilities, strengthen defenses, and ensure top-tier security, fast. The results? Incredible. Security researchers delivered high-quality reports, helping us harden our platform. Now, we’re taking the next big step: [our bug bounty program is officially going public](https://hackerone.com/neon_bbp?type=team)!
+[Three months ago, we launched our private bug bounty program on HackerOne](https://neon.com/blog/bugbounty-and-pentests-at-neon). The goal? Identify vulnerabilities, strengthen defenses, and ensure top-tier security, fast. The results? Incredible. Security researchers delivered high-quality reports, helping us harden our platform. Now, we’re taking the next big step: [our bug bounty program is officially going public](https://hackerone.com/neon_bbp?type=team)!
 
 ## Why Public? Why Now?
 

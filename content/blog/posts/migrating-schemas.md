@@ -57,7 +57,7 @@ Thankfully, we now have tools that make this process much easier.
 
 ### Example requirements
 
-To demonstrate the method, we’ll set up an [example architecture](https://github.com/neondatabase-labs/neon-database-per-tenant-drizzle) with 4 Neon databases (customers), each one living on its own Neon project, all using Postgres 16 and all deployed to AWS us-east-1 (although, [Neon can also deploy to Azure](https://neon.tech/blog/neon-is-coming-to-azure)).
+To demonstrate the method, we’ll set up an [example architecture](https://github.com/neondatabase-labs/neon-database-per-tenant-drizzle) with 4 Neon databases (customers), each one living on its own Neon project, all using Postgres 16 and all deployed to AWS us-east-1 (although, [Neon can also deploy to Azure](https://neon.com/blog/neon-is-coming-to-azure)).
 
 The schema consists of three tables: **users**, **projects** and **tasks**. You can see the schema here: [schema.ts](https://github.com/neondatabase-labs/neon-database-per-tenant-drizzle/blob/main/src/db/schema.ts), and for good measure, here’s the raw SQL equivalent: [schema.sql](https://github.com/neondatabase-labs/neon-database-per-tenant-drizzle/blob/main/schema.sql).
 

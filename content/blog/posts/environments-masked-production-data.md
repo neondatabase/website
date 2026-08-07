@@ -53,7 +53,7 @@ To summarize:
 - **Environments drift constantly.** As the environments add up, staging lags behind prod, dev diverges from staging, and no one’s quite sure what version the tests are running against.
 
 <blockquote>
-<p><strong>“Our testing process was very manual before. Product would create a test customer in our development environment, then generate PDFs; the QA team would test and manually run through all the math; then an engineer would have to go into the database, look at all the values, and handwrite them into fixtures for our end-to-end tests… That’s multiple days for every single change”</strong> (<em><a href="https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle">Miguel Hernandez, Backend Tech Lead at Neo.Tax</a></em>)</p>
+<p><strong>“Our testing process was very manual before. Product would create a test customer in our development environment, then generate PDFs; the QA team would test and manually run through all the math; then an engineer would have to go into the database, look at all the values, and handwrite them into fixtures for our end-to-end tests… That’s multiple days for every single change”</strong> (<em><a href="https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle">Miguel Hernandez, Backend Tech Lead at Neo.Tax</a></em>)</p>
 </blockquote>
 
 All of this points to one missing primitive – a safe, fast, and repeatable way to create production-like environments without exposing real user data. This is what we’re working on in Neon.
@@ -85,7 +85,7 @@ Teams use branches where they were using redundant instances or local setups bef
 - Reproduce issues, test migrations, or preview features in realistic conditions
 
 <blockquote>
-<p><strong>“With Neon branches we get a totally isolated copy to test code changes even when they include database migrations. We can test all changes in real data and ensure that by the time we actually merge the PR to main, things really work”</strong>  <em>(<a href="https://neon.tech/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon">Avi Romanoff, Founder at Magic Circle</a>)</em></p>
+<p><strong>“With Neon branches we get a totally isolated copy to test code changes even when they include database migrations. We can test all changes in real data and ensure that by the time we actually merge the PR to main, things really work”</strong>  <em>(<a href="https://neon.com/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon">Avi Romanoff, Founder at Magic Circle</a>)</em></p>
 </blockquote>
 
 ### PostgreSQL Anonymizer – Protect PII with static masking
@@ -145,7 +145,7 @@ SELECT * FROM users LIMIT 3;
  3  | Stefanie   | Byrd      | barbara40@example.com  | GB67CAZQ75813049489060
 ```
 
-The real data is gone, replaced by randomly generated values using PostgreSQL Anonymizer’s built-in faker functions. This approach is far more realistic and scalable than using handcrafted seed data. [Seed files are hard to maintain](https://neon.tech/blog/how-to-maintain-seed-data) and rarely reflect your actual production schema. As your app evolves with new tables, columns, relationships, your seed data drifts behind.
+The real data is gone, replaced by randomly generated values using PostgreSQL Anonymizer’s built-in faker functions. This approach is far more realistic and scalable than using handcrafted seed data. [Seed files are hard to maintain](https://neon.com/blog/how-to-maintain-seed-data) and rarely reflect your actual production schema. As your app evolves with new tables, columns, relationships, your seed data drifts behind.
 
 The anon extension takes care of masking sensitive data while preserving the structure, schema, and referential integrity of the database. Foreign keys, data types, and relationships remain intact, making the anonymized database safe but fully usable as a production clone.
 

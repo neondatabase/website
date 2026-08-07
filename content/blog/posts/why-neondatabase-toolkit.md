@@ -41,7 +41,7 @@ We recently published a package on NPM called [`@neondatabase/toolkit`](https://
 For example:
 
 - Vercel’s [v0](https://v0.dev/) AI product for UI generation works very well _because_ it is limited to [React](https://react.dev), [Tailwind CSS](https://tailwindcss.com/) and [ShadCN/UI](https://ui.shadcn.com/) (as the “component library”).
-- [Replit Agents](https://docs.replit.com/replitai/agent) only currently support [Postgres via Neon](https://neon.tech/blog/building-a-news-app-with-replit-agent-a-step-by-step-guide) which is also important for their efficacy in generating good apps.
+- [Replit Agents](https://docs.replit.com/replitai/agent) only currently support [Postgres via Neon](https://neon.com/blog/building-a-news-app-with-replit-agent-a-step-by-step-guide) which is also important for their efficacy in generating good apps.
 
 If these agents had to support a bunch of different frontend frameworks, or various storage providers, they wouldn’t work as well. This might become less relevant in the future as the models get better, but just like specialized software engineers can generally outperform generic engineers when operating with their comfort stack, the same might be true for all AI agents going forward.
 

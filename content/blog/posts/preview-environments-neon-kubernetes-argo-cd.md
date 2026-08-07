@@ -44,7 +44,7 @@ Coding in a local development environment provides developers with faster feedba
 
 Wouldn’t it be better to test the developer’s changes in an isolated production-like environment that’s created automatically in response to the pull request being opened? Using platforms that support serverless paradigms and shared compute make this possible, and cost-effective too.
 
-A [prior blog post by Mahmoud](https://neon.tech/blog/branching-with-preview-environments) discussed the advantages of using preview environments, and how Neon’s database branching feature enables teams to create an isolated production-like database for each of their preview environments. That blog post also included an end-to-end example of how development teams could configure such a setup using Vercel as a hosting and continuous delivery (CD) environment, Neon for serverless Postgres, and GitHub Actions workflows for continuous integration (CI).
+A [prior blog post by Mahmoud](https://neon.com/blog/branching-with-preview-environments) discussed the advantages of using preview environments, and how Neon’s database branching feature enables teams to create an isolated production-like database for each of their preview environments. That blog post also included an end-to-end example of how development teams could configure such a setup using Vercel as a hosting and continuous delivery (CD) environment, Neon for serverless Postgres, and GitHub Actions workflows for continuous integration (CI).
 
 This post describes how you can achieve a similar setup using Kubernetes and Argo CD as your hosting and continuous delivery platforms. Two Git repositories will be referenced throughout this post to demonstrate the workflow:
 

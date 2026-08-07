@@ -66,7 +66,7 @@ This experience works so smoothly because Replit’s App History **captures not 
 
 <EmbedTweet url="https://twitter.com/jordwalke/status/1923927692803702998?ref_src=twsrc%5Etfw" />
 
-Replit handles this by integrating with [Neon](https://neon.tech/home), a serverless Postgres platform built for branching. Neon’s architecture uses [copy-on-write](https://neon.tech/blog/get-page-at-lsn), so creating a database branch is fast and lightweight. Each App History checkpoint effectively becomes a branch of your app’s full state, code and data included.
+Replit handles this by integrating with [Neon](https://neon.tech/home), a serverless Postgres platform built for branching. Neon’s architecture uses [copy-on-write](https://neon.com/blog/get-page-at-lsn), so creating a database branch is fast and lightweight. Each App History checkpoint effectively becomes a branch of your app’s full state, code and data included.
 
 When you create a Replit app with persistence, [the Replit Agent provisions a Neon Postgres database for you](https://v/). As you iterate, Neon tracks all data changes and retains the history, typically up to 7 days. This lets Replit rewind the database to any point within that window.
 

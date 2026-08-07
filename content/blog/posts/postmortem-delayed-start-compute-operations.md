@@ -65,12 +65,12 @@ On Monday,
 - During the Friday incident, we made several AWS CNI configuration changes. As part of our post-incident process, we reverted these changes to our standard cluster configuration.
 - Unexpectedly, restoring _WARM_IP_TARGET to ‘1’_ triggered a new outage; we were once again unable to allocate IP addresses, even though sufficient free IPs were available in each of our subnets.
 - We immediately reverted the change, but there was an extended period before IP allocation began to function correctly again. We are continuing to investigate this phase. Our kubernetes clusters are highly customised, and we are continuing to work on reproducing this behaviour in our test environments.
-- To mitigate IP allocation errors, we doubled the size of our [prewarmed](https://neon.tech/blog/cold-starts-just-got-hot) compute (database) pools.
+- To mitigate IP allocation errors, we doubled the size of our [prewarmed](https://neon.com/blog/cold-starts-just-got-hot) compute (database) pools.
 - This eliminated the impact experienced by our customers; several hours later, the IP allocation error rate returned to near-zero on its own.
 
 _**Note:** During this incident, there was a period in which IPs were available in our subnets, but only a small number were successfully assigned to pods. We are currently investigating the root cause of this issue and working with AWS Support. We will update this article when the investigation concludes._
 
-Our [Production Readiness checklist](https://neon.com/docs/get-started-with-neon/production-checklist) recommends that customers with production databases disable [scale-to-zero](https://neon.tech/blog/using-neons-auto-suspend-with-long-running-applications), so these customers were unaffected.
+Our [Production Readiness checklist](https://neon.com/docs/get-started-with-neon/production-checklist) recommends that customers with production databases disable [scale-to-zero](https://neon.com/blog/using-neons-auto-suspend-with-long-running-applications), so these customers were unaffected.
 
 However, many of our customers rely on this mechanism to reduce costs for their development branches. These customers experienced significant outages, for which we apologize. We are taking active steps to prevent this from happening again.
 

@@ -76,7 +76,7 @@ For instance, in a Postgres-to-Postgres logical replication, the standard `pgout
 
 Today’s data pipelines involve more than one data store type. For example, you can integrate all your Postgres databases into a data warehouse or streaming platform, such as [Materialize](https://materialize.com/) or [Kafka](https://kafka.apache.org/), to process and analyze data at higher scales. This is why, with the release of logical replication on Neon, we added support for [wal2json](https://github.com/eulerto/wal2json), which outputs changes in the JSON format to be easily consumed by other systems and data stores.
 
-You can read more on [Change Data Capture using Neon and Materialize](https://neon.tech/blog/cdc-with-materialize) by our friend Marta Paes, to learn how to integrate your database with external systems.
+You can read more on [Change Data Capture using Neon and Materialize](https://neon.com/blog/cdc-with-materialize) by our friend Marta Paes, to learn how to integrate your database with external systems.
 
 ## Logical vs. physical replication
 
