@@ -121,7 +121,9 @@ jobs:
 
       - name: Run pg_dump
         run: |
-          $POSTGRES/pg_dump ${{ env.DATABASE_URL }} | gzip > "${{ env.GZIP_NAME }}"
+          set -o pipefail
+          : "${DATABASE_URL:?DATABASE_URL secret is not set}"
+          "${POSTGRES}/pg_dump" "$DATABASE_URL" | gzip > "$GZIP_NAME"
 
       - name: Empty bucket of old files
         run: |
@@ -255,8 +257,12 @@ This step runs `pg_dump` and saves the output in the Action's virtual memory usi
 ```yml
 - name: Run pg_dump
   run: |
-    $POSTGRES/$pg_dump ${{ env.DATABASE_URL }} | gzip > "${{ env.GZIP_NAME }}"
+    set -o pipefail
+    : "${DATABASE_URL:?DATABASE_URL secret is not set}"
+    "${POSTGRES}/pg_dump" "$DATABASE_URL" | gzip > "$GZIP_NAME"
 ```
+
+Enabling `pipefail` ensures the workflow fails when `pg_dump` fails instead of reporting success because `gzip` completed.
 
 ## Empty bucket of old files
 
