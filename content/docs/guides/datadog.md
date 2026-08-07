@@ -10,7 +10,7 @@ summary: >-
   Log transmission counts toward network egress billed after 500 GB per project
   on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:05:30.414Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 <InfoBlock>
@@ -522,7 +522,7 @@ If any of the computes in your project are active, you should start seeing data 
     {
       "id": 630770240665422,
       "definition": {
-        "title": "Local file cache hit rate",
+        "title": "Compute cache hit rate",
         "title_size": "16",
         "title_align": "left",
         "show_legend": true,
@@ -601,7 +601,7 @@ If any of the computes in your project are active, you should start seeing data 
           {
             "formulas": [
               {
-                "alias": "Local file cache size",
+                "alias": "Compute cache size",
                 "number_format": {
                   "unit": {
                     "type": "canonical_unit",

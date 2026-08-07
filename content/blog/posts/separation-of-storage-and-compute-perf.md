@@ -55,7 +55,7 @@ But do you need to sacrifice performance for elasticity? The answer is no, with 
 
 ## Best of Both Worlds
 
-Neon computes have a [Local File Cache](https://neon.com/docs/extensions/neon#what-is-the-local-file-cache) (LFC) – an extra caching layer between traditional postgres shared buffers and Neon storage. Shared buffers remain as a small hot cache on top of the LFC.
+Neon computes have a [Local File Cache](https://neon.com/docs/extensions/neon#what-is-the-compute-cache) (LFC) – an extra caching layer between traditional postgres shared buffers and Neon storage. Shared buffers remain as a small hot cache on top of the LFC.
 
 The LFC is a key component in Neon Autoscaling, as it is resizeable, while postgres shared buffers have a fixed size (although we’re working on making them resizable in future). The LFC leverages the linux page cache to provide RAM-like latencies up to a point, and then spills to disk when an LFC large than RAM is used.
 
