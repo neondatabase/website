@@ -123,7 +123,7 @@ On each project's **Project permissions** page, review the list of people who ca
 - **Inherited** means the access comes from their organization role. You'll always appear here as Admin.
 - **Explicit** means you granted it on this project. Dana on staging and Sam on analytics show up this way.
 
-Check `acme-production` in particular: it should list you and Alex, and neither Dana nor Sam with edit access. Dana appears as an inherited Viewer, and Sam doesn't appear at all.
+Check `acme-production` in particular: you and Alex have access, and neither Dana nor Sam can edit it. Dana appears as an inherited Viewer, and Sam has no access at all.
 
 To change or revoke an explicit grant, use the more options menu (⋮) next to the person's name. Removing a grant drops them back to their organization role's baseline.
 
