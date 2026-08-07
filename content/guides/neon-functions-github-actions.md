@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-08-07T12:32:03.620Z'
+updatedOn: '2026-08-07T15:13:48.384Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are serverless compute you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
@@ -102,7 +102,7 @@ Install the dependencies for your function:
 
 ```bash
 npm install hono pg
-npm install --save-dev @types/pg typescript dotenv
+npm install --save-dev @types/pg typescript
 ```
 
 You now have a project linked to Neon and the necessary dependencies to build a Hono-based API that interacts with your Neon Postgres database.
@@ -143,9 +143,6 @@ Replace the contents of the generated `neon.ts` with the following:
 
 ```ts filename="neon.ts"
 import { defineConfig } from '@neon/config/v1';
-import { config as loadEnv } from 'dotenv';
-
-loadEnv({ path: '.env.local' });
 
 export default defineConfig({
   preview: {
@@ -164,7 +161,7 @@ export default defineConfig({
 
 The key (`hello`) is the function's slug. It becomes part of the invocation URL and can't be changed after the first deploy.
 
-The important line for CI/CD is the `env` block. Values here are resolved **at deploy time**: when `neon deploy` runs, `process.env.GREETING` captures whatever `GREETING` is set to in that environment. Locally that's your shell or `.env.local` file (from the `dotenv` configuration); in CI it's the job's environment, which is where GitHub secrets come in. Neon injects `DATABASE_URL` and other branch-specific variables at runtime, so you only declare your own variables here.
+The important line for CI/CD is the `env` block. Values here are resolved **at deploy time**: when `neon deploy` runs, `process.env.GREETING` captures whatever `GREETING` is set to in that environment. Locally that's your shell; in CI it's the job's environment, which is where GitHub secrets come in. Neon injects `DATABASE_URL` and other branch-specific variables at runtime, so you only declare your own variables here.
 
 ## Test a manual deploy
 
