@@ -1,6 +1,6 @@
 ---
 title: Get started with project permissions
-subtitle: Set up access for a small team, from one shared organization to scoped per-project access
+subtitle: Scope each person and agent to the projects they need, in about five minutes
 summary: >-
   A worked example that takes a four-person team from everyone-sees-everything
   to a proper access structure. Set each person's organization role, grant
@@ -10,9 +10,34 @@ summary: >-
 enableTableOfContents: true
 ---
 
-Neon access works in two layers: an **organization role** sets a person's baseline across every project, and **per-project permissions** grant extra access on individual projects. This guide walks through setting both up for a small team, so you finish with each person holding exactly the access their work needs.
+By default, everyone you invite to your Neon organization can reach every project in it. That's fine until it isn't: a contractor you brought in for one reporting project can open your production database, and an agent you gave a credential to can modify any project instead of the one you meant. Project permissions fix that, so a mistake or a leaked credential affects one project rather than everything you have.
 
-The example uses a four-person team and three projects, but the same approach scales to any size. If you want the complete role and permission reference instead of a worked example, see [User permissions](/docs/manage/user-permissions).
+This guide sets that up for a small team. It takes about five minutes, and you finish with each person and agent holding exactly the access their work needs.
+
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How organization roles and per-project permissions combine</p>
+<p>Which role to give a teammate, a contractor, and an agent</p>
+<p>How to grant access on a single project</p>
+<p>How to verify who can reach what</p>
+</DocsList>
+
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/manage/user-permissions">User permissions reference</a>
+<a href="/docs/manage/organizations">Organizations</a>
+<a href="/docs/manage/api-keys">Manage API keys</a>
+</DocsList>
+</InfoBlock>
+
+The example uses a four-person team and three projects, but the same approach scales to any size.
+
+## Set it up with your AI assistant
+
+If you'd rather have an assistant do this, copy the prompt below. It asks who needs access to what, proposes a role structure, then walks you through applying it in the Console or through the API.
+
+<CopyPrompt src="/prompts/project-permissions-prompt.md" description="Copy this prompt to have an AI assistant design and apply a permissions structure for your organization." buttonText="Copy prompt" />
+
+To do it yourself, carry on below.
 
 ## Before you start
 
@@ -67,6 +92,13 @@ A per-project permission can only raise someone above their organization-role ba
 
 ## Set it up
 
+<CheckList title="Setup checklist">
+<CheckItem title="Invite each person with their baseline role" href="#invite-each-person-with-their-baseline-role">Set the organization role that covers most of their work.</CheckItem>
+<CheckItem title="Grant Dana edit access on staging" href="#grant-dana-edit-access-on-staging">Raise a Viewer to Editor on one project.</CheckItem>
+<CheckItem title="Grant Zhang Kai access to the analytics project" href="#grant-zhang-kai-access-to-the-analytics-project">Give a Collaborator their only project.</CheckItem>
+<CheckItem title="Verify what everyone can reach" href="#verify-what-everyone-can-reach">Confirm production is closed to the people who shouldn't have it.</CheckItem>
+</CheckList>
+
 <Steps>
 
 ## Invite each person with their baseline role
@@ -116,6 +148,16 @@ Check `acme-production` in particular: it should list you and Alex, and neither 
 
 To change or revoke an explicit grant, use the more options menu (⋮) next to the person's name. Removing a grant drops them back to their organization role's baseline.
 
+For a definitive answer rather than a visual check, ask the API who can reach a project. It returns each person's `effective_project_permission`, which is the access that actually applies after both layers combine:
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects/$PROJECT_ID/members' \
+     --header 'authorization: Bearer $ORG_API_KEY' | jq '.project_members[] | {email, org_role, effective_project_permission, grant_source}'
+```
+
+Run it against `acme-production` and you should see Alex with `EDITOR` from `org_role_default`, and no entry for Zhang Kai at all. `grant_source` tells you whether the access came from someone's organization role or an explicit grant.
+
 </Steps>
 
 ## The result
@@ -129,41 +171,40 @@ Your team now has an access structure rather than a single shared level:
 
 When the contract ends, remove Zhang Kai from the organization on the **People** page, or revoke the grant on `acme-analytics` to leave them in the organization with no project access.
 
-## Do the same thing with the API
+## Scoping access for agents
 
-If you provision projects programmatically, or hand scoped credentials to agents, the same two layers are available through the [Neon API](/docs/reference/api). These calls need an [organization API key](/docs/manage/api-keys) with the Admin role.
+An agent is the case this model is built for. Give it the **Collaborator** role and grant it one project, and a misbehaving or compromised agent can reach only that project.
+
+Pair the grant with a [project-scoped API key](/docs/cli/api-keys), so the credential itself is bounded too. A project-scoped key can't create projects, can't mint more keys, and can't see any other project:
+
+```bash
+neon api-keys create --name analytics-agent --project-id $PROJECT_ID
+```
+
+<details>
+<summary>**Do the whole setup through the API**</summary>
+
+If you provision projects programmatically, the same two layers are available through the [Neon API](/docs/reference/api). These calls need an [organization API key](/docs/manage/api-keys) with the Admin role. Roles are sent lowercase and returned uppercase.
 
 Grant a member Editor on one project:
 
 ```bash shouldWrap
 curl --request PUT \
-     --url 'https://console.neon.tech/api/v2/projects/{project_id}/members/{member_id}/role' \
+     --url 'https://console.neon.tech/api/v2/projects/$PROJECT_ID/members/$MEMBER_ID/role' \
      --header 'authorization: Bearer $ORG_API_KEY' \
      --header 'content-type: application/json' \
      --data '{"role": "editor"}'
 ```
 
-Check who can reach a project, with each person's effective permission and whether it came from their role or a grant:
-
-```bash shouldWrap
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/projects/{project_id}/members' \
-     --header 'authorization: Bearer $ORG_API_KEY' | jq
-```
-
-Get a member's `member_id` from that same response. To remove an explicit grant, send `DELETE` to the same role route. See [Manage project access with the API](/docs/manage/user-permissions#manage-project-access-with-the-api) for full request and response details.
+Get each `member_id` from the [List project members](/docs/manage/user-permissions#list-project-members) response. To remove an explicit grant and drop someone back to their organization-role baseline, send `DELETE` to the same route. See [Manage project access with the API](/docs/manage/user-permissions#manage-project-access-with-the-api) for full request and response details.
 
 The CLI doesn't have a dedicated command for this yet, but you can call the same routes through the [`neon api`](/docs/cli/api) passthrough:
 
 ```bash
-neon api /projects/{project_id}/members/{member_id}/role -X PUT -F role=editor
+neon api /projects/$PROJECT_ID/members/$MEMBER_ID/role -X PUT -F role=editor
 ```
 
-For agents, pair this with a [project-scoped API key](/docs/cli/api-keys) so the credential itself can only reach the project you granted:
-
-```bash
-neon api-keys create --name analytics-agent --project-id {project_id}
-```
+</details>
 
 ## Next steps
 
