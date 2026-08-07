@@ -1218,8 +1218,8 @@
                   slug: cli/set-context
                 - title: me
                   slug: cli/me
-                - title: profiles
-                  slug: cli/profiles
+                - title: profile
+                  slug: cli/profile
                 - title: api-keys
                   slug: cli/api-keys
                 - title: completion

@@ -270,6 +270,37 @@ describe('parseCommandFile: builder passed as a bare identifier', () => {
   });
 });
 
+describe('parseCommandFile: getCliName() in describe templates', () => {
+  it('resolves `${getCliName()}` to "neon" instead of dropping the describe', () => {
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      import { getCliName } from "../utils/cli_name";
+      export const command = "link";
+      export const describe = "Link a project";
+      export const builder = (argv: yargs.Argv) =>
+        argv.options({
+          branch: {
+            type: "string",
+            describe:
+              "Branch to pin. " +
+              \`Pin it with \\\`\${getCliName()} checkout <branch>\\\`.\`,
+          },
+          link: {
+            type: "boolean",
+            describe: \`Run \\\`\${getCliName()} link\\\` after installing.\`,
+          },
+        });
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    // Without getCliName() resolution these describes would be dropped
+    // entirely (neon-pkgs #361 switched them to templates).
+    expect(parsed.options.branch.describe).toBe(
+      'Branch to pin. Pin it with `neon checkout <branch>`.'
+    );
+    expect(parsed.options.link.describe).toBe('Run `neon link` after installing.');
+  });
+});
+
 describe('enumerateConstEntries', () => {
   it('reads keys and describe from a const object literal', () => {
     const file = writeTempSource(`
