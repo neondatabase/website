@@ -314,7 +314,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const urls = fs.readFileSync('function_urls.txt', 'utf8');
+            const urls = require('fs').readFileSync('function_urls.txt', 'utf8');
             const marker = '<!-- neon-preview-function -->';
             const body = `${marker}\n**Preview functions deployed:**\n${urls}\n\nThese functions run on an isolated Neon branch for this PR, against the branch's own database. Both are deleted when the PR is closed.`;
             const { owner, repo } = context.repo;
