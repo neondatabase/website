@@ -17,24 +17,31 @@ const blendedCost = (cost) =>
     ? Math.round(((3 * cost.input + cost.output) / 4) * 1000) / 1000
     : undefined;
 
-/** models.json fields plus the measured ones. Snake_case is kept so the two line up. */
+/**
+ * The catalog entry verbatim, plus what only this endpoint knows.
+ *
+ * `/models.json` is the catalog and `/models` builds on top of it, so this **adds
+ * and never restates**. It used to hand-list sixteen fields, which failed in both
+ * directions: `attachment` and `reasoning_options` were simply never listed and so
+ * vanished from `/models` entirely, and each listed field carried a `??` fallback
+ * that invented a value the catalog had not given. `cost: entry.cost ?? {}` was the
+ * one that fired — a model with no price was published as `cost: {}`, which reads as
+ * free, and made the two endpoints disagree about the same fact.
+ *
+ * Spreading also removes the reason they could drift: a field added to the catalog
+ * now appears here without anyone remembering to add it.
+ *
+ * The other six fallbacks were dead. `validateCatalog` (scripts/lib/models-catalog.mjs)
+ * requires id, name, provider, family, attachment, reasoning, tool_call, temperature,
+ * modalities, limit, open_weights, release_date and last_updated on every PR, so there
+ * is no path on which they were reachable. Note `provider ?? caps.owner` was worse than
+ * dead: `provider` is the model's maker and `owner` is whoever hosts it, so the fallback
+ * would have substituted "databricks" for "thinkingmachines".
+ */
 function toModel(id, entry, caps) {
   return {
+    ...entry,
     id,
-    name: entry.name ?? id,
-    provider: entry.provider ?? caps.owner,
-    family: entry.family,
-    release_date: entry.release_date,
-    last_updated: entry.last_updated,
-    knowledge: entry.knowledge,
-    reasoning: Boolean(entry.reasoning),
-    tool_call: Boolean(entry.tool_call),
-    structured_output: entry.structured_output,
-    temperature: entry.temperature,
-    open_weights: entry.open_weights,
-    modalities: entry.modalities ?? { input: [], output: [] },
-    limit: entry.limit ?? {},
-    cost: entry.cost ?? {},
     blended_cost: blendedCost(entry.cost),
     capabilities: {
       entitled: caps.entitled !== false,
