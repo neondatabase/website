@@ -8,7 +8,7 @@ summary: >-
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T19:40:41.456Z'
 ---
 
 ## Neon plans
@@ -26,6 +26,8 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 <a href="/docs/introduction/manage-billing" description="View and manage your monthly bill and learn how to change your plan" icon="setup">Manage billing</a>
 
 <a href="/docs/introduction/monitor-usage" description="Learn how to monitor billing and usage in Neon" icon="setup">Monitor billing and usage</a>
+
+<a href="/docs/guides/hard-usage-limits" description="Set enforced consumption limits that suspend a project when usage reaches a cap you choose" icon="setup">Set hard usage limits</a>
 
 <a href="/docs/introduction/usage-calculations" description="Convert raw API metrics into billing units and calculate your costs" icon="setup">Usage and cost calculations</a>
 
