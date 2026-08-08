@@ -3,13 +3,14 @@ name: neon-postgres
 description: >-
   Guides and best practices for working with Lakebase Postgres, the database
   behind Neon. Covers setup, connection methods and drivers, pooled vs direct
-  connections, branching, autoscaling, scale-to-zero, instant restore, read
-  replicas, connection pooling, IP allow lists, and logical replication.
+  connections, branching, schema migrations, autoscaling, scale-to-zero, instant
+  restore, read replicas, connection pooling, IP allow lists, and logical
+  replication.
   Use when users ask about "Lakebase Postgres", "Neon setup", "connect to Neon",
   "Neon project", "DATABASE_URL", "serverless Postgres", "Neon CLI", "neon", "Neon MCP",
   "Neon Auth", "@neondatabase/serverless", "@neondatabase/neon-js",
-  "scale to zero", "Neon autoscaling", "Neon read replica", or
-  "Neon connection pooling".
+  "scale to zero", "Neon autoscaling", "Neon read replica",
+  "Neon connection pooling", or "schema migrations".
 metadata:
   parent: neon
 ---
@@ -86,6 +87,12 @@ For detailed branch creation workflows (normal vs schema-only branches, reset-fr
 npx skills add neondatabase/agent-skills --skill neon-postgres-branches
 ```
 
+## Migrations
+
+Test a migration on a branch of production, against production-like data, before applying it to production.
+
+Use a **direct (non-pooled)** connection string when you run the migration, not a pooled one. `neon connection-string` returns the direct string by default; make sure the hostname does not include the `-pooler` suffix.
+
 ## Autoscaling
 
 Use this when the user needs compute to scale automatically with workload and wants guidance on CU sizing and runtime behavior.
@@ -156,3 +163,14 @@ Key points:
 - Useful for replicating to/from external Postgres systems.
 
 Link: https://neon.com/docs/guides/logical-replication-guide.md
+
+## Gotchas
+
+### Pooled vs direct connections: use the direct URL for migrations, dumps, and replication
+
+Neon gives you two connection strings for the same database: a **pooled** one (hostname with the `-pooler` suffix) and a **direct/unpooled** one (no `-pooler` suffix). `neon env pull` writes them as `DATABASE_URL` and `DATABASE_URL_UNPOOLED`. The pooled connection routes through PgBouncer in transaction mode, which doesn't support session-level operations. Choose the right one:
+
+- **Pooled (`DATABASE_URL`)** — your application's normal query traffic, especially serverless and connection-per-request workloads.
+- **Direct (`DATABASE_URL_UNPOOLED`)** — schema migrations (Prisma Migrate, Drizzle Kit, Alembic, and others), `pg_dump` / `pg_restore`, logical replication, `LISTEN`/`NOTIFY`, and anything relying on `SET` or other session state.
+
+Running migrations, dumps, or replication over the pooled connection can fail, and never in a way that names pooling: `prepared statement "s0" already exists` from Prisma Migrate, a `SET search_path` that doesn't persist past its own transaction so the next query reports `relation "mytable" does not exist`, or a write intermittently hitting a read-only transaction (`SQLSTATE 25006`) that a pooled backend inherited from an earlier client. Migration tools generally take both strings at once — Prisma's `directUrl` alongside `url` — so point that at the direct one rather than swapping `DATABASE_URL` and losing pooling for the application. See https://neon.com/docs/connect/connection-pooling.md.
