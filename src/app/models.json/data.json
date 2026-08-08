@@ -549,7 +549,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 32768
+          "output": 25000
         },
         "cost": {
           "input": 0.072,
@@ -589,7 +589,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 32768
+          "output": 25000
         },
         "cost": {
           "input": 0.05,
@@ -1675,7 +1675,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 16384
+          "output": 8192
         },
         "cost": {
           "input": 0.15,
@@ -1706,7 +1706,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 16384
+          "output": 8192
         },
         "cost": {
           "input": 0.15,
@@ -1737,7 +1737,7 @@
         },
         "limit": {
           "context": 1000000,
-          "output": 16384
+          "output": 8192
         },
         "cost": {
           "input": 0.5,
@@ -1797,7 +1797,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 32768
+          "output": 10000
         },
         "cost": {
           "input": 0.15,
@@ -1884,7 +1884,7 @@
         },
         "limit": {
           "context": 1000000,
-          "output": 131072
+          "output": 65536
         },
         "cost": {
           "input": 1.4,
@@ -1932,7 +1932,7 @@
         },
         "limit": {
           "context": 1048576,
-          "output": 1048576
+          "output": 65536
         }
       },
       "kimi-k3": {
@@ -1976,7 +1976,7 @@
         },
         "limit": {
           "context": 1048576,
-          "output": 131072
+          "output": 65536
         },
         "cost": {
           "input": 3,
