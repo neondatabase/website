@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-08-08T09:32:54.609Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -77,6 +77,13 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **Project-level permissions**: Grant people and agents Viewer, Editor, or Admin access on individual projects instead of across your whole organization, on top of four organization roles (Admin, Editor, Viewer, Collaborator). Now available to all organizations. [Learn more](/docs/manage/user-permissions).
+- **API keys and profiles in the Neon CLI**: New `neon api-keys` and `neon profile` commands let you mint account, organization, or project-scoped keys and switch between multiple accounts from the terminal. [Learn more](/docs/cli/api-keys).
+- **More models on the AI Gateway**: The AI Gateway catalog expanded with Kimi K3, GLM-5.2, Inkling, and new Gemini and GPT models, all reachable through one credential and one base URL. [Learn more](/docs/ai-gateway/models#available-models).
+- **New Console layout for the Neon backend**: The Console sidebar now places every branch-level backend service (Auth, Object Storage, Functions, AI Gateway) alongside your Postgres database, with a branch Overview page that shows each service's status. [Learn more](/docs/get-started/backend-overview).
+- **Debug Postgres from the CLI with `neon inspect db`**: Run read-only Postgres diagnostics (table sizes, bloat, unused indexes, long-running queries, locks, and more) straight from the Neon CLI, safe to hand to an agent. [Learn more](/docs/cli/inspect).
+- **Snapshots in the Neon CLI**: The new `neon snapshots` command group manages the full snapshot lifecycle (list, create, restore, and schedule) from your terminal. [Learn more](/docs/cli/snapshots).
+- **Query Functions and Storage logs from the Neon MCP server**: New read-only `query_logs`, `list_log_fields`, and `list_log_field_values` tools let your AI assistant investigate Functions and Object Storage failures without leaving your editor. [Learn more](/docs/ai/neon-mcp-server).
 - **Neon backend services in beta**: Object Storage, Functions, and AI Gateway have graduated from private preview to beta and are available to everyone in AWS US East (Ohio). Declare your whole backend in one `neon.ts` file and it branches with your data. [Read the announcement](/blog/neon-backend-is-beta).
 - **New TypeScript SDK for the Neon API**: `@neon/sdk` is a fetch-based, zero-dependency client that covers the full Neon Platform API, including the new backend services, and replaces `@neondatabase/api-client` as the recommended client. [Learn more](/docs/reference/typescript-sdk).
 - **Passkey support**: Sign in to Neon with a passkey using device biometrics or a security key. Passkeys satisfy organization-level 2FA requirements. [Learn more](/docs/manage/accounts#passkeys).
