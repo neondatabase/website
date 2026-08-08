@@ -1767,7 +1767,7 @@
         },
         "limit": {
           "context": 128000,
-          "output": 4096
+          "output": 8192
         },
         "cost": {
           "input": 0.5,
@@ -1838,7 +1838,7 @@
         },
         "limit": {
           "context": 262144,
-          "output": 8000
+          "output": 25000
         },
         "cost": {
           "input": 0.22,
