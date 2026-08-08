@@ -106,7 +106,7 @@ CREATE OR REPLACE FUNCTION before_truncate_companies()
 RETURNS TRIGGER AS
 $$
 BEGIN
-    RAISE NOTICE 'Truncating the companies table is not allowed';
+    RAISE EXCEPTION 'Truncating the companies table is not allowed';
     RETURN NULL;
 END;
 $$
@@ -131,8 +131,8 @@ TRUNCATE TABLE companies;
 Output:
 
 ```
-NOTICE:  Truncating the companies table is not allowed
-TRUNCATE TABLE
+ERROR:  Truncating the companies table is not allowed
+CONTEXT:  PL/pgSQL function before_truncate_companies() line 3 at RAISE
 ```
 
 The output indicates that the `BEFORE TRUNCATE` trigger fires, raising an exception that aborts the `TRUNCATE` operation.
