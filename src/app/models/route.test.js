@@ -6,6 +6,61 @@ import { GET } from './route.js';
 const request = (query = '') => ({ nextUrl: new URL(`https://neon.com/models${query}`) });
 const body = async (res) => JSON.parse(await res.text());
 
+import catalog from '../models.json/data.json';
+
+// /models.json is the catalog and /models builds on top of it, so /models must add
+// and never restate. This is the property, asserted rather than left as a convention:
+// the endpoint drifted from it twice at once — dropping `attachment` and
+// `reasoning_options` because nobody added them to a hand-written field list, and
+// publishing `cost: {}` for a model the catalog gives no price, which reads as free
+// and made the two endpoints disagree about the same fact.
+describe('/models is additive over /models.json', () => {
+  it('carries every catalog field through unchanged, for every model', async () => {
+    const { models } = await body(await GET(request()));
+    const served = new Map(models.map((m) => [m.id, m]));
+
+    const drift = [];
+    for (const [id, entry] of Object.entries(catalog.neon.models)) {
+      const model = served.get(id);
+      if (!model) continue; // /models is keyed on the probe; absence is its own check
+      for (const [key, value] of Object.entries(entry)) {
+        if (JSON.stringify(model[key]) !== JSON.stringify(value)) {
+          drift.push(
+            `${id}.${key}: catalog ${JSON.stringify(value)}, /models ${JSON.stringify(model[key])}`
+          );
+        }
+      }
+    }
+
+    expect(drift).toEqual([]);
+  });
+
+  it('does not invent a field the catalog withholds', async () => {
+    const { models } = await body(await GET(request()));
+
+    for (const model of models) {
+      const entry = catalog.neon.models[model.id];
+      if (!entry) continue;
+      // A price the catalog does not give must be absent here too. `{}` is not
+      // "unknown", it renders as free.
+      expect({ id: model.id, hasCost: 'cost' in model }).toEqual({
+        id: model.id,
+        hasCost: 'cost' in entry,
+      });
+    }
+  });
+
+  it('adds what only this endpoint knows', async () => {
+    const { models } = await body(await GET(request()));
+    const model = models.find((m) => m.id === 'gpt-5-2');
+
+    // The three things /models contributes on top of the catalog.
+    expect(model.capabilities).toBeDefined();
+    expect(model.examples.length).toBeGreaterThan(0);
+    expect(typeof model.blended_cost).toBe('number');
+  });
+});
+
 describe('GET /models', () => {
   it.each(['chat', 'image-generation', 'web-search'])(
     'allows cross-origin requests for the %s use case',
