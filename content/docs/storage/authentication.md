@@ -28,7 +28,7 @@ In the Neon Console, select your branch and click **Credentials** under **APP BA
 After creation, the credentials are shown once. Copy the snippet or click **Download .env** before closing:
 
 ```text
-AWS_ENDPOINT_URL_S3=https://br-cool-darkness-a1b2c3d4.storage.c-1.us-east-2.aws.neon.build
+AWS_ENDPOINT_URL_S3=https://br-cool-darkness-a1b2c3d4.storage.c-1.us-east-2.aws.neon.tech
 AWS_ACCESS_KEY_ID=nak_live_...
 AWS_SECRET_ACCESS_KEY=nsk_live_...
 AWS_REGION=us-east-2
