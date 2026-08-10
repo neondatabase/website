@@ -1282,6 +1282,8 @@
               items:
                 - title: inspect
                   slug: cli/inspect
+                - title: logs
+                  slug: cli/logs
         - section: API
           icon: api
           items:

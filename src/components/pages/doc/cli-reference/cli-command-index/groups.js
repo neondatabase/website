@@ -46,6 +46,7 @@ const GROUP_OF = {
   inspect: 'debugging',
   'api-keys': 'setup',
   profile: 'setup',
+  logs: 'debugging',
 };
 
 // Commands documented as a section of another command's page instead of a

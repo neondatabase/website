@@ -5,8 +5,9 @@ summary: >-
   The Neon CLI `neon env pull` command writes a branch's Neon environment
   variables to a local .env file. By default it targets an existing .env file,
   otherwise .env.local, and only Neon-managed variables are rewritten; other
-  lines in the file are preserved. Use --file to target a specific file and
-  --branch to pull from a specific branch.
+  lines in the file are preserved. Use --file to target a specific file,
+  --branch to pull from a specific branch, and --service to pull only selected
+  services.
 enableTableOfContents: true
 ---
 
@@ -34,4 +35,10 @@ Pull a specific branch into a specific file:
 
 ```bash
 neon env pull --branch preview --file .env.preview
+```
+
+Pull only the variables for the services you name, ignoring `neon.ts`. Repeat `--service` or comma-separate the values (`postgres`, `auth`, `data-api`, `object-storage`, `ai-gateway`):
+
+```bash
+neon env pull --service ai-gateway --service postgres
 ```

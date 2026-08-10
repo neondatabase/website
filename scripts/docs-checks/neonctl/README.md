@@ -149,6 +149,14 @@ The TypeScript source is canonical. CI only reads `schema.json`.
   by keeping output out of bash fences entirely.)
 - **Enum-reference defaults render as source text** unless patched via
   `overrides.json`.
+- **Factory-built option specs aren't resolved.** An option whose spec is a
+  factory call rather than an object literal (e.g. `services: servicesOption({…})`
+  in `config init` and `env pull`, where `servicesOption()` lives in the
+  non-command file `neon_services.ts` and builds its `describe` from a
+  conditional + array join) falls back to `type: unknown`; both are patched in
+  `overrides.json`. `.options(…)` and `...spread` positions built from a factory
+  call *are* resolved (see `resolveOptionsObject`) — the gap is only the
+  individual-option-value position (`parseOptionSpec`).
 - **Server-side defaults** (generated branch names, default CU) exist only
   in the control plane; they are documented as verified `defaultText`
   overrides, never inferred.
