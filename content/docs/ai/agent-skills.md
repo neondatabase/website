@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-08-10T20:46:10.540Z'
+updatedOn: '2026-08-10T23:01:57.354Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -85,9 +85,9 @@ See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
 
 ### Kimi Code plugin
 
-If you're using Kimi Code, install the repository directly as a plugin. Kimi reads its own manifest (`kimi.plugin.json`), which points at the skills and declares the Neon MCP Server, so this one command sets up both skills and MCP integration:
+If you're using Kimi Code, install the Neon plugin for skills and MCP integration. In the Kimi CLI chat, run:
 
-```text
+```bash
 /plugins install https://github.com/neondatabase/agent-skills
 ```
 
