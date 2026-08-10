@@ -32,9 +32,9 @@
     {
       "name": "neon",
       "type": "skill-md",
-      "description": "Overview of Neon, a complete set of cloud backend primitives for apps and agents, spanning Lakebase Postgres, Auth, the Data API, Object Storage, Compute Functions, and the AI Gateway. Start here to route to the right Neon skill, set up the CLI or MCP server, and follow the branch-first workflow. Use when \"Neon\" or \"Lakebase Postgres\" is mentioned, or when any of its individual capabilities are the trigger: \"object storage\" or \"S3\", \"buckets\", \"serverless functions\", \"AI gateway\", \"call an LLM\", \"postgres\", \"database\", or \"backend\".",
+      "description": "Overview of Neon, a complete set of cloud backend primitives for apps and agents, spanning Lakebase Postgres, Auth, the Data API, Object Storage, Compute Functions, and the AI Gateway. Start here to route to the right Neon skill, set up the CLI or MCP server, and follow the branch-first workflow. Use when \"Neon\" or \"Lakebase Postgres\" is mentioned, or when any of its individual capabilities are the trigger: \"object storage\" or \"S3\", \"buckets\", \"serverless functions\", \"AI gateway\", \"call an LLM\", \"logs\", \"branch logs\", \"query logs\", \"log export\", \"Loki\", \"Grafana\", \"observability\", \"telemetry\", \"postgres\", \"database\", or \"backend\".",
       "url": "/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:a488b24deb85886487b2176195fa419100ba8e5293b77b094e5b68e196966a04"
+      "digest": "sha256:5cda928c0f9b098c30eb65e70960e73de4c780249dd57789649b649c7261da82"
     },
     {
       "name": "neon-postgres-agent-platforms",
@@ -46,9 +46,9 @@
     {
       "name": "neon-object-storage",
       "type": "skill-md",
-      "description": "S3-compatible object storage that branches with your Neon project, so files and the database stay in sync across every branch. Use when a user wants object storage, a bucket, blob/file storage, or somewhere to put uploads, images, documents, avatars, or user-generated files for their app or agent — especially when they already use (or are setting up) Lakebase Postgres and don't want to add a separate storage provider like AWS S3, Cloudflare R2, or Supabase Storage. Triggers include \"object storage\", \"bucket\", \"blob storage\", \"file storage\", \"store uploads/images/files\", \"S3-compatible storage\", \"presigned URL\", \"where do I put files\", \"Neon Object Storage\", \"Neon Storage\", and \"storage that branches with my database\".",
+      "description": "S3-compatible object storage that branches with your Neon project, so files and the database stay in sync across every branch. Use when a user wants object storage, a bucket, blob/file storage, or somewhere to put uploads, images, documents, avatars, or user-generated files for their app or agent — especially when they already use (or are setting up) Lakebase Postgres and don't want to add a separate storage provider like AWS S3, Cloudflare R2, or Supabase Storage. Triggers include \"object storage\", \"bucket\", \"blob storage\", \"file storage\", \"store uploads/images/files\", \"S3-compatible storage\", \"presigned URL\", \"where do I put files\", \"storage logs\", \"bucket logs\", \"Neon Object Storage\", \"Neon Storage\", and \"storage that branches with my database\".",
       "url": "/.well-known/agent-skills/neon-object-storage/SKILL.md",
-      "digest": "sha256:34beec217b672bce83069294612bd4660c23d46c1eb33b273806d11999af68ce"
+      "digest": "sha256:8f9b26b5838f64fa78983d9cb598f34ab89c82d1c737d7d7c6d15402b65fd0d3"
     },
     {
       "name": "neon-ai-gateway",
@@ -60,9 +60,9 @@
     {
       "name": "neon-functions",
       "type": "skill-md",
-      "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, an MCP server, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"MCP server\", \"run code next to my database\", \"function that won't time out\", \"Neon Functions\", and \"Neon Compute\".",
+      "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, an MCP server, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"MCP server\", \"run code next to my database\", \"function that won't time out\", \"function logs\", \"Neon Functions\", and \"Neon Compute\".",
       "url": "/.well-known/agent-skills/neon-functions/SKILL.md",
-      "digest": "sha256:fa7415df22128e7921369eb1c5949211a3dbbd002b5789b1e7fcc80aaae5255c"
+      "digest": "sha256:a8c63dc719f12bdebc4d70a3f1cfeda84d7104f5df6841566e7c382d6552ddea"
     }
   ]
 }
