@@ -6,7 +6,7 @@ excerpt: >-
   same region as your Lakebase Postgres database, with DATABASE_URL injected
   automatically. They're long-running enough that agents can stream for minutes
   and WebSockets or SSE can stay open while data flows.
-date: '2026-08-11T12:00:00'
+date: '2026-08-17T12:00:00'
 updatedOn: '2026-08-10T17:30:00'
 category: product
 categories:
@@ -43,6 +43,8 @@ At runtime Neon injects that branch's DATABASE_URL, and if you're using other pa
 
 That cuts the cross-region (or even cross-VPC) hop you'd otherwise pay on every query from a remote serverless host. And because the function stays up across requests, you keep a long-lived pg Pool open instead of opening a fresh connection on every invoke the way edge-style handlers often do.
 
+**[ADD DIAGRAM 1]**
+
 <Admonition type="note" title="Neon Functions aren't meant for full-stack hosting">
 We recommend you keep the UI on Vercel, Netlify, or wherever you already host frontends. Reach for Neon Functions when the work starts inside Neon, or when the primary job is reading and writing Neon primitives.
 </Admonition>
@@ -62,6 +64,8 @@ A function isn't a background job runner: it's always requested and always retur
 [Branching](https://neon.com/docs/introduction/branching) is Neon’s flagship feature. Powered by the underlying [lakebase architecture](https://neon.com/docs/introduction/architecture-overview), a Neon branch acts like a lightweight copy-on-write environment of your database - now that you can create in one API call, instantly, without duplicating storage up front.
 
 Now that Neon also has [Object Storage](https://neon.com/docs/storage/overview), files branch with the database as well - and the same goes for [Managed Better Auth](https://neon.com/docs/auth/overview) and [AI Gateway](https://neon.com/docs/ai-gateway/overview). We want all our backend primitives to branch, and Functions are no exception.
+
+**[ADD DIAGRAM 2]**
 
 When you create a branch in Neon, functions follow that same branch_id:
 
