@@ -118,9 +118,9 @@ export default app;
 We don’t recommend using @neondatabase/serverless with Neon fucntions. Our serverless driver is built for short-lived, edge-style invocations.
 </Admonition>
 
-## Coming soon: schedules and events that call your Functions
+## Coming soon: schedules and triggers for your Functions
 
-Today, Neon Functions are invoked over HTTP - but we're already working on the next layer: a declarative invocation surface (rules) so Neon can call your functions from schedules and service events without an external scheduler or app-tier glue.
+Today, Neon Functions are invoked over HTTP - but we're already working on the next layer: a declarative invocation surface (function triggers) so Neon can call your functions from schedules and service events without an external scheduler or app-tier glue.
 
 It is still WIP, but this is how we're thinking about it:
 
@@ -128,7 +128,7 @@ It is still WIP, but this is how we're thinking about it:
 - Then storage events: object created, deleted, or replaced
 - Then auth, database, and platform events
 
-Of course, rules will be branch-scoped as well. Stay tuned.
+Of course, the triggers will be branch-scoped as well. Stay tuned.
 
 ## A few examples: building with functions
 
