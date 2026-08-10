@@ -28,7 +28,7 @@ seo:
 ---
 
 <Admonition type="note" title="We're building backends">
-Neon started by building a serverless Postgres database that branches, but a database alone isn't enough for how apps get built today. When a coding agent ships an app, it needs Postgres, then files, then something to run long-lived logic next to that data, then a way to call models - and those pieces only work well if they share the same branch semantics and live close to each other. That's the [Neon backend](https://neon.com/blog/neon-backend-is-beta): [Lakebase Postgres](https://neon.com/docs/postgres/overview) (our database) at the center, with [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Auth](https://neon.com/docs/auth/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview) around it.
+Neon started by building a serverless Postgres database that branches, but a database alone isn't enough for how apps get built today. When a coding agent ships an app, it needs Postgres, then files, then something to run long-lived logic next to that data, then a way to call models. That's the [Neon backend](https://neon.com/blog/neon-backend-is-beta): [Lakebase Postgres](https://neon.com/docs/postgres/overview) (our database) at the center, with [Object Storage](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Auth](https://neon.com/docs/auth/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview) around it.
 </Admonition>
 
 Once we decided to evolve Neon into a [complete set of cloud backend primitives](https://neon.com/docs/get-started/backend-overview), it was clear Functions should be one of the first tools we launch.  Most serverless handlers talk to the database over the public internet - and that's fine, but there are hiccups we were itching to fix. Every query pays a cross-network round trip, you wire secrets yourself, and runtimes often cap at a few seconds, so an agent mid-tool-loop or a WebSocket never gets a fair shot.
@@ -37,7 +37,7 @@ We designed Neon Functions to flip that. They're Node.js 24 compute you deploy o
 
 ## If the job involves the database, run the function next to it
 
-Noen functions run on the same infra that runs your Postgres and the same region as your [branch](https://neon.com/docs/introduction/branching).
+Neon functions run on the same infra that runs your Postgres and the same region as your [branch](https://neon.com/docs/introduction/branching).
 
 At runtime Neon injects that branch's DATABASE_URL, and if you're using other parts of the Neon backend, like the [AI Gateway](https://neon.com/docs/ai-gateway/overview) or [Object Storage](https://neon.com/docs/storage/overview), those credentials land too. So a function that reads from Postgres, pulls an attachment from Object Storage, and streams an answer through the AI Gateway doesn't assemble three third-party accounts - it reads process.env on the branch it was deployed to.
 
@@ -130,7 +130,7 @@ It is still WIP, but this is how we're thinking about it:
 
 Of course, rules will be branch-scoped as well. Stay tuned.
 
-## A few examples
+## A few examples: building with functions
 
 Each of these is a complete, runnable build. Read the source on GitHub, or scaffold one with `neon bootstrap --template <name>`
 
