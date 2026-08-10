@@ -4,16 +4,16 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-08-07T15:13:48.384Z'
+updatedOn: '2026-08-10T23:24:12.670Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are serverless compute you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
 
-Neon CLI (`neon deploy`) allows you to deploy a function to any branch with a single command. It works well for testing locally, but as a best practice you should never deploy to the production branch by hand or push changes to it directly. Instead, every change should go through a pull request that gets exercised in isolation first. Because a PR's preview branch runs the exact same code, config, and deploy command as production, merging it becomes a simple step: if it worked in preview, it works in production.
+The Neon CLI (`neon deploy`) lets you deploy a function to any branch with a single command. It works well for testing locally, but as a best practice you should never deploy to the production branch by hand or push changes to it directly. Instead, every change should go through a pull request that gets exercised in isolation first. Because a PR's preview branch runs the exact same code, config, and deploy command as production, merging it becomes a simple step: if it worked in preview, it works in production.
 
 Automating your deployments keeps things consistent and reproducible. No one has to remember the right command or wonder what state production is in, and there's less risk that an unreviewed change reaches production.
 
-In this guide, you'll set up that automation with GitHub Actions and build a small API on Neon Functions with a pipeline that:
+You'll set up that automation with GitHub Actions and build a small API on Neon Functions with a pipeline that:
 
 - Deploys your function to the production branch whenever code is merged into `main`
 - Creates an isolated Neon branch for every pull request and deploys a preview function to it, running against that branch's own database
@@ -96,7 +96,7 @@ export default async function hello(): Promise<Response> {
 }
 ```
 
-The `hello.ts` file defines a simple default exported function that returns a plain text response. You will replace this with a Hono app, allowing you to handle multiple routes within the same function.
+The `hello.ts` file defines a default exported function that returns a plain text response. You will replace this with a Hono app, allowing you to handle multiple routes within the same function.
 
 Install the dependencies for your function:
 
@@ -219,7 +219,7 @@ Before automating anything, verify the function deploys cleanly from your machin
    git push -u origin main
    ```
 
-Now you have a working Neon Functions project with a simple API, and it's ready to be deployed automatically through GitHub Actions for both preview and production environments.
+Now you have a working Neon Functions project with an API, ready to deploy automatically through GitHub Actions for both preview and production environments.
 
 ## Set up the Neon GitHub Integration
 
@@ -488,7 +488,7 @@ The same workflow extends to any number of functions. Add a new function to `neo
 
 ## Adapting to other CI/CD platforms
 
-The workflow is really just a branch lifecycle: create a Neon branch, deploy the function to it, and delete the branch when it's done. GitHub Actions bundles that into jobs with the `neondatabase/create-branch-action` and `neondatabase/delete-branch-action`, but those actions are the Neon CLI (and its REST API) under the hood. On any other CI/CD platform you run the same commands in your pipelines:
+The workflow is just a branch lifecycle: create a Neon branch, deploy the function to it, and delete the branch when it's done. GitHub Actions bundles that into jobs with the `neondatabase/create-branch-action` and `neondatabase/delete-branch-action`, but those actions are the Neon CLI (and its REST API) under the hood. On any other CI/CD platform you run the same commands in your pipelines:
 
 ```mermaid
 flowchart TD
