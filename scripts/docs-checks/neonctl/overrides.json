@@ -17,6 +17,32 @@
     }
   },
   "commands": {
+    "config": {
+      "commands": {
+        "init": {
+          "options": {
+            "services": {
+              "_comment": "Built by the servicesOption() factory in neon_services.ts, which the static parser can't evaluate (factory call as an option-spec value, in a non-command file; the describe is composed from a conditional + array filter/join). See generate-schema.js parseOptionSpec for the limitation. type and describe verified against `neon config init --help` at neonctl 3.1.0.",
+              "type": "array",
+              "describe": "Services the scaffolded neon.ts declares: auth, functions, object-storage, ai-gateway. Pass \"none\" for the bare starter policy. Repeat the flag or comma-separate. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY."
+            }
+          }
+        }
+      }
+    },
+    "env": {
+      "commands": {
+        "pull": {
+          "options": {
+            "service": {
+              "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). type and describe verified against `neon env pull --help` at neonctl 3.1.0.",
+              "type": "array",
+              "describe": "Pull only these services' variables: postgres, auth, data-api, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
+            }
+          }
+        }
+      }
+    },
     "checkout": {
       "options": {
         "env-pull": {
