@@ -4,7 +4,7 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-08-10T23:24:12.670Z'
+updatedOn: '2026-08-10T23:26:27.219Z'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) are serverless compute you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
@@ -54,7 +54,7 @@ neon init
 
 Use the default setup options for all prompts: this enables AI skills, configures the MCP server, and installs the VS Code extension. These ensure AI agents such as Claude Code and Cursor can assist you in building and working with Neon.
 
-During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** skills so AI agents have the context to help you build and deploy your function. Install them with:
+During initialization, the **Neon** skills are installed automatically. You'll also need the **Neon Functions** skills so AI agents have the context to help you build and deploy your function. Install them with:
 
 ```bash
 npx skills add https://github.com/neondatabase/agent-skills --skill neon-functions
@@ -105,7 +105,7 @@ npm install hono pg
 npm install --save-dev @types/pg typescript
 ```
 
-You now have a project linked to Neon and the necessary dependencies to build a Hono-based API that interacts with your Neon Postgres database.
+You now have a project linked to Neon and the necessary dependencies to build a Hono-based API that interacts with your Postgres database.
 
 ## Write the function
 
