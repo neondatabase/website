@@ -12,7 +12,7 @@ summary: >-
   `uuid_timestamptz_to_v7()`. The last function supports zeroed random bits for
   boundary UUID generation in range scans.
 enableTableOfContents: true
-updatedOn: '2026-08-11T11:33:36.249Z'
+updatedOn: '2026-08-11T11:35:03.765Z'
 ---
 
 The `pg_uuidv7` extension allows you to generate and work with version 7 Universally Unique Identifiers (UUIDs) in Postgres. UUIDv7 is a newer UUID format designed to be time-ordered and sortable, which offers significant benefits for database performance, especially when used as primary keys or in time-series data.
@@ -171,7 +171,7 @@ SELECT uuidv7();
 
 PostgreSQL 18 also provides `uuid_extract_timestamp()` for extracting the timestamp from a UUIDv7 value.
 
-The native PostgreSQL implementation does not provide all of the functionality available in `pg_uuidv7`. In particular, `pg_uuidv7` provides `uuid_timestamptz_to_v7()`, which lets you construct a UUIDv7 value from a timestamp. It can also zero the UUID's random bits, which is useful for constructing UUID boundaries for time-based range queries.
+The native PostgreSQL implementation doesn't provide everything `pg_uuidv7` does. In particular, `pg_uuidv7` provides `uuid_timestamptz_to_v7()`, which lets you construct a UUIDv7 value from a timestamp. It can also zero the UUID's random bits, which is useful for constructing UUID boundaries for time-based range queries.
 
 For example:
 
