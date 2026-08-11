@@ -11,7 +11,7 @@ When we say "Ship faster with Postgres" — it's not just about helping you buil
 See for yourself how faster gets shipped with these open source examples.
 
 - [NextFaster](https://next-faster.vercel.app/) - 400ms initial page load and 10ms nth pageloads on this full-stack Next.JS demo backed by Vercel and Neon. [Source](https://github.com/ethanniser/NextFaster) created by [@ethanniser](https://x.com/ethanniser), [RhysSullivan](https://x.com/RhysSullivan)
-- [AI Chatbot](https://chat.vercel.ai) - uses Vercel's AI SDK to provide a fast SOTA chatbot UI template on Vercel and Neon. [Source](https://github.com/vercel/ai-chatbot) created by Vercel Team
+- [Chatbot](https://chatbot.ai-sdk.dev/) - uses Vercel's AI SDK to provide a fast SOTA chatbot UI template on Vercel and Neon. [Source](https://github.com/vercel/chatbot) created by Vercel Team
 - [Book inventory](https://next-books-search.vercel.app/) - full-stack Next.JS template to search/filter/paginate 600,000 books on Vercel and Neon. [Source](https://github.com/vercel-labs/book-inventory) - credit to [@leerob](https://x.com/leeerob)
 - [Vector DB per Tenant](https://db-per-tenant.up.railway.app/) - Fast, secure chat-with-pdf app showing how to provision a dedicated vector database instance for each user on [Railway](https://railway.com) and Neon. [Source](https://github.com/neondatabase/db-per-tenant) created by [Mahmoud](https://x.com/thisismahmoud_)
 
