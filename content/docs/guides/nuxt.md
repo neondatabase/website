@@ -9,7 +9,7 @@ summary: >-
   covering CLI setup, driver selection (Neon serverless driver, node-postgres,
   or postgres.js), and reading the connection string in server code.
 enableTableOfContents: true
-updatedOn: '2026-08-11T21:10:25.139Z'
+updatedOn: '2026-08-11T22:46:22.787Z'
 ---
 
 <CopyPrompt src="/prompts/nuxt-neon-prompt.md"
@@ -36,6 +36,8 @@ neon auth
 neon projects create --name my-app
 ```
 
+If you belong to more than one organization, the CLI prompts you to choose one. To skip the prompt, pass `--org-id <id>` (find it with `neon orgs list`).
+
 You'll link this project and pull its credentials in a later step.
 
 </TabItem>
@@ -52,7 +54,15 @@ You'll link this project and pull its credentials in a later step.
 
 ## Create a Nuxt project and add dependencies
 
-1. Create a Nuxt project if you do not have one, then change into its directory. `npm create nuxt@latest my-app && cd my-app` scaffolds a new app and enters it; see [Create a Nuxt Project](https://nuxt.com/docs/getting-started/installation#new-project) for details. The CLI commands in the next step run from this directory.
+1. Create a Nuxt project if you do not have one, then change into its directory. The scaffolder is interactive (it asks about the template, package manager, git, and modules); for CI or an AI agent, pass those as flags to run non-interactively. See [Create a Nuxt Project](https://nuxt.com/docs/getting-started/installation#new-project) for details. The CLI commands in the next step run from this directory.
+
+   ```bash filename="Terminal"
+   # Interactive (human):
+   npm create nuxt@latest my-app && cd my-app
+
+   # Non-interactive (CI / AI agents):
+   npm create nuxt@latest my-app -- --template minimal --packageManager npm --no-gitInit --modules "" && cd my-app
+   ```
 
 2. Add a Postgres driver. This guide's examples use the Neon serverless driver, which suits serverless and edge deployments; for long-lived servers, `pg` or `postgres.js` are recommended. See [Choosing your connection method](/docs/connect/choose-connection).
 
@@ -84,11 +94,15 @@ From your project directory, link the app to your Neon project and pull its conn
 
 ```bash filename="Terminal"
 neon link                    # connects this directory to your project (writes .neon)
-neon checkout main           # pins the branch
-neon env pull --file .env    # writes DATABASE_URL into .env
+neon env pull --file .env    # writes DATABASE_URL from your default branch into .env
 ```
 
-If you haven't signed in to the CLI yet, run `neon auth` first. CLI-created projects get a default branch named `main`; if yours differs (Console-created projects use `production`), run `neon branches list` to check. `neon env pull` defaults to `.env.local`, but `nuxt dev` only loads `.env`, so pass `--file .env`.
+Notes:
+
+- Not signed in yet? Run `neon auth` first.
+- `neon link` prompts for an org and project. To skip the prompts, pass `--project-id <id>` (find IDs with `neon projects list`).
+- For Nuxt, pass in `--file .env` to `neon env pull` as it writes to `.env.local` by default, and `nuxt dev` only reads `.env` by default.
+- Which branch? `neon env pull` uses your project's default branch: `main` for CLI-created projects, `production` for Console-created ones (`neon branches list` shows yours). To use a different branch, run `neon checkout <branch>` first; it re-pins the branch in `.neon` so the next `env pull` reads from it.
 
 </TabItem>
 
@@ -137,7 +151,7 @@ Start the dev server:
 npm run dev
 ```
 
-Then open [localhost:3000/api/version](http://localhost:3000/api/version). The route returns your Postgres version, confirming the connection:
+Then open `localhost:3000/api/version`. The route returns your Postgres version, confirming the connection:
 
 ```json
 { "version": "PostgreSQL 18.4 on aarch64-unknown-linux-gnu, compiled by gcc ..." }
