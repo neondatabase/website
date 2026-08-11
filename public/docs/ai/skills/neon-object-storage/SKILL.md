@@ -9,8 +9,9 @@ description: >-
   want to add a separate storage provider like AWS S3, Cloudflare R2, or
   Supabase Storage. Triggers include "object storage", "bucket", "blob
   storage", "file storage", "store uploads/images/files", "S3-compatible
-  storage", "presigned URL", "where do I put files", "Neon Object Storage",
-  "Neon Storage", and "storage that branches with my database".
+  storage", "presigned URL", "where do I put files", "storage logs",
+  "bucket logs", "Neon Object Storage", "Neon Storage", and "storage that
+  branches with my database".
 metadata:
   parent: neon
 ---
@@ -194,6 +195,14 @@ The canonical pattern: an agent generates an image → `PutObject` into the `ima
 ## CLI Bucket and Object Commands
 
 `neon` also has first-class bucket/object commands (`neon bucket create|list|delete`, `neon bucket object put|get|list|delete`) for scripting and one-off operations.
+
+## Built-in Branch Logs
+
+```bash
+neon logs query --branch production --source storage --since 1h
+```
+
+Storage is one of the two sources branch logs cover today, alongside Neon Functions. Logs are scoped to a single branch, so pass `--branch` when the bucket you're debugging isn't on the branch you're checked out on. Everything else about logs — the required CLI version, filters, the SDK, and the Loki-compatible read API — is in the parent `neon` skill's **Observability** section.
 
 ## Neon Documentation
 
