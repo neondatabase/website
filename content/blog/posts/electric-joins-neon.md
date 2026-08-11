@@ -47,7 +47,7 @@ More software will be built over the next few years than in all of history. As c
 
 In [our very first post announcing Neon](https://neon.com/blog/hello-world#:~:text=you%20have%20to%20make%20the%20cost%20of%20running%20the%20service%20an%20important%20design%20consideration%20on%20par%20with%20manageability%2C%20reliability%2C%20and%20performance.), we called this out:
 
-“You have to make the cost of running the service an important design consideration on par with manageability, reliability, and performance.”
+> You have to make the cost of running the service an important design consideration on par with manageability, reliability, and performance.
 
 This has proven to be more true than we could have ever imagined.
 
