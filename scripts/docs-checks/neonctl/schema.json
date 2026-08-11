@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "3.1.0",
+  "neonctlVersion": "3.1.1",
   "binaries": [
     "neonctl",
     "neon"
@@ -1462,6 +1462,10 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "env": {
+              "type": "array",
+              "alias": "e"
+            },
             "file": {
               "type": "string",
               "describe": "Target .env file to write. Defaults to an existing .env, otherwise .env.local. Only Neon variables are updated; other lines are preserved."
@@ -1485,6 +1489,14 @@
             {
               "command": "$0 env pull -s ai-gateway -s postgres",
               "description": "Pull only the AI Gateway and Postgres variables"
+            },
+            {
+              "command": "$0 env pull -e DATABASE_URL",
+              "description": "Pull only the pooled Postgres connection string"
+            },
+            {
+              "command": "$0 env pull -s auth -e DATABASE_URL",
+              "description": "Pull all Auth variables plus DATABASE_URL"
             }
           ],
           "usage": "$0 env pull [options]"
