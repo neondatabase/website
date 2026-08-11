@@ -14,7 +14,7 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/neon-functions-backend-logic-next-to-your-data/cover.jpg
   alt: null
 isFeatured: false
 seo:
@@ -24,7 +24,7 @@ seo:
   noindex: false
   ogTitle: 'Neon Functions: backend logic next to your data - Neon'
   ogDescription: Serverless compute that sits on your Neon branch
-  image: null
+  image: https://cdn.neonapi.io/public/images/pages/blog/neon-functions-backend-logic-next-to-your-data/cover.jpg
 ---
 
 <Admonition type="note" title="We're building backends">
@@ -43,7 +43,7 @@ At runtime Neon injects that branch's DATABASE_URL, and if you're using other pa
 
 That cuts the cross-region (or even cross-VPC) hop you'd otherwise pay on every query from a remote serverless host. And because the function stays up across requests, you keep a long-lived pg Pool open instead of opening a fresh connection on every invoke the way edge-style handlers often do.
 
-**[ADD DIAGRAM 1]**
+![Diagram 1](https://cdn.neonapi.io/public/images/pages/blog/neon-functions-backend-logic-next-to-your-data/diagram-1.jpg)
 
 <Admonition type="note" title="Neon Functions aren't meant for full-stack hosting">
 We recommend you keep the UI on Vercel, Netlify, or wherever you already host frontends. Reach for Neon Functions when the work starts inside Neon, or when the primary job is reading and writing Neon primitives.
@@ -65,7 +65,7 @@ A function isn't a background job runner: it's always requested and always retur
 
 Now that Neon also has [Object Storage](https://neon.com/docs/storage/overview), files branch with the database as well - and the same goes for [Managed Better Auth](https://neon.com/docs/auth/overview) and [AI Gateway](https://neon.com/docs/ai-gateway/overview). We want all our backend primitives to branch, and Functions are no exception.
 
-**[ADD DIAGRAM 2]**
+![Diagram 2](https://cdn.neonapi.io/public/images/pages/blog/neon-functions-backend-logic-next-to-your-data/diagram-2.jpg)
 
 When you create a branch in Neon, functions follow that same branch_id:
 
