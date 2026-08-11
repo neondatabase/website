@@ -206,22 +206,22 @@ Unsupported pre-claim capabilities return the `capability_requires_claim` error 
 
 ```bash
 # Create a Postgres project
-neon claim create --env-pull
+npx neon@latest claim create --env-pull
 
 # Request services explicitly
-neon claim create --service data-api --service auth --env-pull
+npx neon@latest claim create --service data-api --service auth --env-pull
 
 # Check the current human-claim state
-neon claim status
+npx neon@latest claim status
 
 # Generate and open a human claim link
-neon claim accept
+npx neon@latest claim accept
 
 # List claimable projects saved on this machine
-neon claim list
+npx neon@latest claim list
 
 # Delete the unclaimed project and local credentials
-neon claim delete --yes
+npx neon@latest claim delete --yes
 ```
 
 After `claim create`, regular Neon CLI commands exchange the saved identity assertion and route supported management operations through Claimable Neon. Explicit Neon account credentials take precedence when you pass them.
