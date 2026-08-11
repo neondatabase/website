@@ -82,7 +82,7 @@ await authClient.getSession({
 
 ### Example decoded JWT payload
 
-A typical decoded JWT payload looks like this:
+For a session with an active organization, a decoded JWT payload looks like this:
 
 ```json
 {
@@ -98,12 +98,19 @@ A typical decoded JWT payload looks like this:
   "banReason": null,
   "banExpires": null,
   "id": "860dc360-609f-4b7d-9e70-ec93fe6414d3",
+  "o": {
+    "id": "org-123",
+    "slug": "my-org",
+    "role": "owner"
+  },
   "sub": "860dc360-609f-4b7d-9e70-ec93fe6414d3",
   "exp": 1766321585,
   "iss": "<YOUR_NEON_AUTH_URL_ORIGIN>",
   "aud": "<YOUR_NEON_AUTH_URL_ORIGIN>"
 }
 ```
+
+The `o` claim contains the active organization ID (`id`), slug (`slug`), and the user's organization membership role (`role`). It appears only when the session has an active organization and the **Organization plugin** is enabled for the project. The plugin is controlled by a per-project configuration toggle, not a rollout flag. The `role` value is a snapshot of the user's organization role when the token is issued and does not update in an already-issued token.
 
 ## Verify a token
 
