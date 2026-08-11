@@ -17,7 +17,7 @@
 
 module.exports = {
   tagline:
-    'Neon is the backend for apps and agents. Services include Neon Postgres, Neon Auth, Data API, Neon Functions, Object Storage, and AI Gateway. Every service is agent-ready: instant, branchable, and serverless. Neon Postgres includes autoscaling, instant restore, and scale-to-zero, and is fully compatible with any language, framework, or ORM that supports Postgres.',
+    'Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks. Services include Lakebase Postgres, Managed Better Auth, Data API, Functions, Object Storage, and AI Gateway. Lakebase Postgres on Neon includes autoscaling, instant restore, and scale-to-zero, and works with any language, framework, or ORM that supports Postgres.',
 
   intro: [
     'Neon docs are available as markdown.',
@@ -27,6 +27,10 @@ module.exports = {
 
   // Quick-reference links emitted as "## Common Queries" before the section list.
   commonQueries: [
+    {
+      label: 'Provision a temporary database for an agent (Claimable Postgres)',
+      url: 'https://neon.com/docs/reference/claimable-postgres.md',
+    },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
     {
       label: 'Choose a connection method (drivers, pooling, serverless)',
