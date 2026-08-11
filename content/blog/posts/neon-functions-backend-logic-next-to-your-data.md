@@ -15,7 +15,7 @@ authors:
   - carlota-soto
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/neon-functions-backend-logic-next-to-your-data/cover.jpg
-  alt: null
+  alt: 'Neon Functions: backend logic next to your data'
 isFeatured: false
 seo:
   title: 'Neon Functions: backend logic next to your data - Neon'
