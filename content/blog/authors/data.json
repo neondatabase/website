@@ -251,6 +251,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dom-eccleston.jpg",
     "photoAlt": "Dom Eccleston"
   },
+  "dominik-koch": {
+    "name": "Dominik Koch",
+    "role": "CEO and Co-Founder of Marble",
+    "url": null,
+    "photo": null,
+    "photoAlt": "Dominik Koch"
+  },
   "eduard-dyckman": {
     "name": "Eduard Dyckman",
     "role": "Software Engineer",
