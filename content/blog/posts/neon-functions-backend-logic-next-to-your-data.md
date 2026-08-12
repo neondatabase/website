@@ -6,7 +6,7 @@ excerpt: >-
   same region as your Lakebase Postgres database, with DATABASE_URL injected
   automatically. They're long-running enough that agents can stream for minutes
   and WebSockets or SSE can stay open while data flows.
-date: '2026-08-17T12:00:00'
+date: '2026-08-12T12:00:00'
 updatedOn: '2026-08-10T17:30:00'
 category: product
 categories:
