@@ -30,15 +30,21 @@ I just released [Neon for Herdr](https://github.com/neon-solutions/neon-herdr), 
 
 The plugin lives here: [neon-solutions/neon-herdr](https://github.com/neon-solutions/neon-herdr)
 
+**[ADD VIDEO CLIP]**
+
 ## What Neon for Herdr does
 
 [Herdr](https://herdr.dev) is a terminal workspace manager for developers and coding agents. Your editor, shells, and agents live in panes inside one persistent workspace, and plugins can add their own panes and actions. Neon for Herdr is the plugin that turns Neon into one of those panes: a terminal dashboard built with [Ink](https://github.com/vadimdemedes/ink), [Effect](https://effect.website/), and the [Neon TypeScript SDK](https://www.npmjs.com/package/@neon/sdk).
 
 Inside Neon for Herdr, the project list shows every project you can reach, with its region, Postgres version, and storage:
 
+**[ADD IMAGE 1]**
+
 `/` opens a live fuzzy search over project name, organization, ID, and region. It ranks the cached list, so typing doesn't fire a request per keystroke.
 
 Hit Enter on a project and you land on this screen below. Every branch shows its state and whether it's default or protected. The selected branch fills in its databases and roles, with the last four operations Neon ran at the bottom. The compute line is the one I read most: active or idle, the autoscaling range, and the suspend timeout for whichever branch you have selected:
+
+**[ADD IMAGE 2]**
 
 Typing `c` creates a branch, `n` renames it, `d` deletes it, and `x` resets it from its parent.
 
@@ -72,7 +78,9 @@ To open the dashboard, run:
 herdr plugin action invoke neon.herdr.dashboard
 ```
 
-It opens on a Not connected screen and stays there until you do something about it. Press `a`, finish the flow in the browser, and the project list loads by itself:
+It opens on a "Not connected" screen and stays there until you do something about it. Press `a`, finish the flow in the browser, and the project list loads by itself:
+
+**[ADD IMAGE 3]**
 
 Behind that key is authorization code with PKCE against Neon's OAuth host. The only local moving part is a temporary callback listener on 127.0.0.1. Refresh tokens rotate and renew without reopening the browser, so you do this once per machine.
 
@@ -111,9 +119,13 @@ You can configure it in config.json. The plugin ignores your .env file. Copy con
 
 You don't have to remember which of those you set. `?` shows the settings actually in force, each tagged with where it came from, plus the exact path to edit:
 
+**[ADD IMAGE 4]**
+
 ### Switch organizations
 
 If your account has several organizations and you haven't pinned one, the dashboard asks which one you want and remembers the answer:
+
+**[ADD IMAGE 5]**
 
 `o` reopens that picker and it filters by name, handle, ID, or plan as you type. Setting `orgId` in config.json pins it and skips the prompt.
 
@@ -125,6 +137,8 @@ Your keybinding opens the pane below your editor, still on the project you were 
 
 Once the compute is up, `y` copies the branch's connection string. The masked toast is all that lands in your scrollback:
 
+**[ADD IMAGE 6]**
+
 Now the part I like:
 
 Your first attempt at the migration is wrong, as first attempts are. Press `x`, confirm with the branch name, and the branch is back to whatever production looks like right now. Your broken state survives under a timestamped branch, in case you want to look at what you did.
@@ -132,6 +146,8 @@ Your first attempt at the migration is wrong, as first attempts are. Press `x`, 
 When you're done, press `d`, type the name, and it's gone. Pressing `s` suspends a compute that is still awake, so nothing keeps running after you have stopped caring about it.
 
 The whole loop:
+
+**[ADD VIDEO CLIP AGAIN]**
 
 ## Try it out
 
