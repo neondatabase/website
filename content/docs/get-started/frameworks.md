@@ -14,6 +14,10 @@ redirectFrom:
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
+<Admonition type="info">
+**REWRITE:** "Build a [framework] app with Neon" framing; hub for framework guides and full-backend integration.
+</Admonition>
+
 Several frameworks support [Managed Better Auth](/docs/auth/overview), managed authentication stored in your database that **branches with your data**. Quick starts are available for [Next.js](/docs/auth/quick-start/nextjs-api-only), [React](/docs/auth/quick-start/react), and [TanStack Router](/docs/auth/quick-start/tanstack-router).
 
 <TechCards>

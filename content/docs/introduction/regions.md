@@ -13,6 +13,10 @@ redirectFrom:
 updatedOn: '2026-08-06T14:21:49.406Z'
 ---
 
+<Admonition type="info">
+**REWRITE:** Repositioned under Availability grouping; single target for beta/region-scoped badges.
+</Admonition>
+
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
 
 Each Neon **project** exists in exactly one region. Your database runs in that region. **You cannot change the region** for an existing project. If you need your **data** in a different region, you **create a new Neon project** in that region and **migrate your database** there. You are not moving the project; region is fixed when the project is created.

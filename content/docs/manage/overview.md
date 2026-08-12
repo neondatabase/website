@@ -12,6 +12,10 @@ isDraft: false
 updatedOn: '2026-08-11T18:35:41.335Z'
 ---
 
+<Admonition type="info">
+**REWRITE:** Reframed as backend-wide data model (not just Postgres/DB objects).
+</Admonition>
+
 Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.
 
 ![Neon object hierarchy](/docs/manage/neon_object_hierarchy.jpg)

@@ -17,6 +17,10 @@ redirectFrom:
 updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
+<Admonition type="info">
+**REWRITE:** Recast as backend progression; Connect is project/branch scope, not per-DB.
+</Admonition>
+
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to view and modify data in the console</p>
