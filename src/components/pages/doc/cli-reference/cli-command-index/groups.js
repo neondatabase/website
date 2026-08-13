@@ -47,6 +47,7 @@ const GROUP_OF = {
   'api-keys': 'setup',
   profile: 'setup',
   logs: 'debugging',
+  open: 'setup',
 };
 
 // Commands documented as a section of another command's page instead of a
