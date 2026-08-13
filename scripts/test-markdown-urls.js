@@ -1153,6 +1153,23 @@ function buildTests() {
     { note: 'redirectFrom source → 308 to target' }
   );
 
+  // ── 12. Retired neon-postgres skill reference URLs ────────────────────
+  // The references/ directory was removed by the upstream skills 1:1 sync
+  // (#5309); SKILL.md was repointed at the consolidated docs pages (#4666). The
+  // middleware (src/proxy.js SKILL_REFERENCE_REDIRECTS) 308s the old URLs to
+  // those pages so tools with cached links don't 404.
+
+  add(
+    'Skill reference redirect',
+    '/docs/ai/skills/neon-postgres/references/branching.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 308),
+      (r) => expectHeader(r.headers, 'location', '/docs/introduction/branching.md'),
+    ],
+    { note: 'retired skill reference .md → 308 to consolidated docs page' }
+  );
+
   return tests;
 }
 
