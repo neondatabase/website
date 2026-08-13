@@ -27,6 +27,8 @@ By default the command resolves the project, branch, database, and role from you
 
 Some queries read from Postgres statistics extensions. `outliers` and `calls` need [`pg_stat_statements`](/docs/extensions/pg_stat_statements), and `lfc-hit-rate` and `working-set` need the [`neon`](/docs/extensions/neon) extension. If a required extension is not installed, the command reports it instead of returning rows.
 
+From an AI assistant, the same checks are available through the Neon MCP server's `inspect_database` tool. See [Database diagnostics](/docs/ai/neon-mcp-server#database-diagnostics).
+
 <CliSubcommands command="inspect db" anchorParts="db" />
 
 ### neon inspect db table-sizes (#db-table-sizes)
