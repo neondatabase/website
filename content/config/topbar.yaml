@@ -1,4 +1,4 @@
-text: 'Electric is joining team Neon at Databricks, bringing PGlite and real-time sync to Neon'
+text: 'You can now deploy Neon Functions - they live in the branch next to your DB, are long-running, perfect for agents and realtime'
 link:
-  url: 'https://neon.com/blog/electric-joins-neon'
+  url: 'https://neon.com/blog/neon-functions-backend-logic-next-to-your-data'
   target: '_blank'
