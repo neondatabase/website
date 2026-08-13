@@ -8,6 +8,7 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
+import lakebaseUnderline from 'images/pages/home/hero/lakebase-underline.svg';
 import { cn } from 'utils/cn';
 
 const logos = [
@@ -22,6 +23,16 @@ const logos = [
   'framer',
 ];
 
+const LAKEBASE_UNDERLINE_STYLE = {
+  backgroundColor: 'currentColor',
+  maskImage: `url(${lakebaseUnderline.src})`,
+  maskRepeat: 'no-repeat',
+  maskSize: '100% 100%',
+  WebkitMaskImage: `url(${lakebaseUnderline.src})`,
+  WebkitMaskRepeat: 'no-repeat',
+  WebkitMaskSize: '100% 100%',
+};
+
 const Hero = () => (
   <section className="hero relative mt-16 safe-paddings lg:mt-14">
     <Container className="relative z-30 pt-96 pb-2 xl:pt-54 lg:pt-52 md:px-5! md:pt-53" size="1600">
@@ -32,7 +43,16 @@ const Hero = () => (
       </Link>
 
       <h1 className="mt-5 max-w-288 text-[4.5rem] leading-dense tracking-tighter text-balance xl:max-w-244 xl:text-[3.25rem]/dense lg:max-w-200 lg:text-[2.5rem]/dense md:mt-4 md:text-[2.625rem]/dense sm:text-[2rem]/dense">
-        The backend for apps and agents, built to scale on Lakebase Postgres.
+        The backend for apps and agents, built to scale on{' '}
+        <Link className="group relative inline-block text-inherit" to="#autoscaling" smoothScroll>
+          Lakebase
+          <span
+            className="absolute bottom-px left-0 h-0.5 w-full opacity-40 transition-opacity duration-150 group-hover:opacity-80 group-focus-visible:opacity-80 motion-reduce:transition-none"
+            style={LAKEBASE_UNDERLINE_STYLE}
+            aria-hidden="true"
+          />
+        </Link>{' '}
+        Postgres.
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">

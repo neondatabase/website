@@ -10,8 +10,8 @@ import Container from 'components/shared/container';
 import autoscalingLegendIcon from 'icons/home/autoscaling/legend/autoscaling.svg';
 import dbLoadLegendIcon from 'icons/home/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/home/autoscaling/legend/resource.svg';
-import avoidImageMd from 'images/pages/home/autoscaling/avoid-illustration-md.png';
-import saveCostsImageMd from 'images/pages/home/autoscaling/save-costs-md.png';
+import autoscalingMobileImage from 'images/pages/home/autoscaling/autoscaling-mobile.png';
+import saveCostsMobileImage from 'images/pages/home/autoscaling/save-costs-mobile.png';
 import { cn } from 'utils/cn';
 
 import Animation from './animation';
@@ -110,24 +110,25 @@ const Autoscaling = () => {
                 <Animation className="absolute inset-0 h-full w-full" state={activeItem} />
               )}
             </div>
-            <div className="hidden justify-center md:flex">
-              <Image
-                className={cn('h-0 w-192 max-w-none', activeItem === 0 && 'h-auto!')}
-                src={avoidImageMd}
-                width={768}
-                height={560}
-                alt=""
-              />
-              <Image
-                className={cn(
-                  'h-0 w-192 max-w-none border-t border-gray-new-10',
-                  activeItem === 1 && 'h-auto!'
-                )}
-                src={saveCostsImageMd}
-                width={768}
-                height={280}
-                alt=""
-              />
+            <div className="hidden md:-mx-5 md:block md:w-[calc(100%+2.5rem)]">
+              {activeItem === 0 && (
+                <Image
+                  className="h-auto w-full"
+                  src={autoscalingMobileImage}
+                  sizes="200vw"
+                  quality={100}
+                  alt=""
+                />
+              )}
+              {activeItem === 1 && (
+                <Image
+                  className="h-auto w-full"
+                  src={saveCostsMobileImage}
+                  sizes="200vw"
+                  quality={100}
+                  alt=""
+                />
+              )}
             </div>
 
             <div className="relative z-20 flex min-h-9 items-center border-b border-gray-new-30 bg-gray-new-15 px-3 md:-mx-5 md:px-5">

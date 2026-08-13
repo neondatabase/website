@@ -7,7 +7,7 @@ import { useInView } from 'react-intersection-observer';
 
 import { cn } from 'utils/cn';
 
-const VIDEO_VERSION = '20260709';
+const VIDEO_VERSION = '20260813-3';
 const SLIDER_VIEWPORT_QUERY = '(max-width: 63.9375rem)';
 const COMPACT_SLIDER_VIEWPORT_QUERY = '(max-width: 33.6875rem)';
 const VIDEO_SWITCH_DELAY_MS = 20;
@@ -20,9 +20,9 @@ const getScrollPaddingLeft = (element) => {
 
 /*
   Service video optimization:
-    webm: ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 18 -b:v 0 -pix_fmt yuv420p -vf "scale=512:-2:flags=lanczos" -deadline best -row-mt 1 -threads 8 -an output.webm
-    mp4:  ffmpeg -i input.mp4 -c:v libx265 -crf 14 -pix_fmt yuv420p -vf "scale=512:-2:flags=lanczos" -preset veryslow -tag:v hvc1 -movflags faststart -an output.mp4
-    poster: ffmpeg -ss 00:00:00 -i sources/input.mp4 -frames:v 1 -vf "scale=512:-2:flags=lanczos" -q:v 1 output.jpg
+    webm: ffmpeg -i input.mp4 -map 0:v:0 -c:v libvpx-vp9 -crf 42 -b:v 0 -pix_fmt yuv420p -deadline good -cpu-used 2 -row-mt 1 -an output.webm
+    mp4:  ffmpeg -i input.mp4 -map 0:v:0 -c:v libx265 -crf 30 -preset slow -pix_fmt yuv420p -tag:v hvc1 -movflags faststart -an output.mp4
+    poster: ffmpeg -i output.webm -map 0:v:0 -vf "select=eq(n\,0)" -frames:v 1 -fps_mode vfr -q:v 1 output.jpg
 */
 
 const ServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoBase, width }) => {
@@ -30,8 +30,7 @@ const ServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoBase,
   const endDelayTimeoutRef = useRef(null);
   const shouldLoopRef = useRef(shouldLoop);
   const onEndedRef = useRef(onEnded);
-  const posterImagePath = `/videos/pages/home/hero/${videoBase}.jpg`;
-  const posterVideoPath = `${posterImagePath}?updated=${VIDEO_VERSION}`;
+  const posterImagePath = `/videos/pages/home/hero/${videoBase}-${VIDEO_VERSION}.jpg`;
 
   useEffect(() => {
     shouldLoopRef.current = shouldLoop;
@@ -109,7 +108,7 @@ const ServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoBase,
         preload={isActive ? 'auto' : 'none'}
         muted
         playsInline
-        poster={posterVideoPath}
+        poster={posterImagePath}
         width={width}
         height={height}
         aria-hidden="true"

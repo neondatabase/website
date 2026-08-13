@@ -3,9 +3,7 @@
 import { RuntimeLoader } from '@rive-app/react-canvas';
 import { usePathname } from 'next/navigation';
 
-const RIVE_WASM_URL = '/animations/rive.wasm';
-
-RuntimeLoader.setWasmUrl(RIVE_WASM_URL);
+const RIVE_WASM_URL = RuntimeLoader.getWasmUrl();
 
 const RiveWasm = () => {
   const pathname = usePathname();

@@ -4,6 +4,9 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
+import backgroundAccentOne from 'images/pages/home/agent-platform/background-accent-one.svg';
+import backgroundAccentTwo from 'images/pages/home/agent-platform/background-accent-two.svg';
+import backgroundNoise from 'images/pages/home/agent-platform/background-noise.svg';
 import efficientDevTestIcon from 'images/pages/home/agent-platform/efficient-dev-test-icon.svg';
 import lowEntryBarrierIcon from 'images/pages/home/agent-platform/low-entry-barrier-icon.svg';
 import multiTenancyIcon from 'images/pages/home/agent-platform/multi-tenancy-icon.svg';
@@ -33,14 +36,34 @@ const CARDS = [
   },
 ];
 
-// TODO: Add decorative background
-// const DecorativeBackground = () => (
-//   <div
-//     className="pointer-events-none absolute inset-0 overflow-hidden lg:hidden"
-//     aria-hidden="true"
-//   >
-//   </div>
-// );
+const DecorativeBackground = () => (
+  <div
+    className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none lg:hidden"
+    aria-hidden="true"
+  >
+    <Image
+      className="absolute -top-84 -right-40 h-auto w-298.75 max-w-none"
+      src={backgroundNoise}
+      width={1195}
+      height={1559}
+      alt=""
+    />
+    <Image
+      className="absolute -top-72 -right-20 h-auto w-221.5 max-w-none"
+      src={backgroundAccentOne}
+      width={886}
+      height={1140}
+      alt=""
+    />
+    <Image
+      className="absolute -top-98 -right-70 h-auto w-212 max-w-none"
+      src={backgroundAccentTwo}
+      width={848}
+      height={1201}
+      alt=""
+    />
+  </div>
+);
 
 const AgentPlatform = () => (
   <section
@@ -48,8 +71,8 @@ const AgentPlatform = () => (
     id="agent-platform"
     aria-labelledby="agent-platform-heading"
   >
-    {/* <DecorativeBackground /> */}
-    <Container className="z-10 px-0! 2xl:px-8! md:px-5!" size="1280">
+    <DecorativeBackground />
+    <Container className="relative z-10 px-0! 2xl:px-8! md:px-5!" size="1280">
       <div className="max-w-5xl">
         <SectionLabel className="mb-5">Agent platform</SectionLabel>
         <h2
