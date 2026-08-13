@@ -86,10 +86,10 @@ Claimable Postgres implements [auth.md](https://auth.md/). Agents can discover t
 | `POST /v1/agent/identity`                     | Provision a project and issue a durable identity assertion   |
 | `POST /v1/oauth2/token`                       | Exchange the assertion for a short-lived bearer access token |
 | `POST /v1/oauth2/revoke`                      | Revoke an access token or identity assertion                 |
-| `GET /v1/databases/{project_id}/credentials`  | Read scoped project and service credentials                  |
-| `POST /v1/databases/{project_id}/claim`       | Create a short-lived human claim code                        |
-| `GET /v1/databases/{project_id}/claim`        | Read claim and reconciliation status                         |
-| `DELETE /v1/databases/{project_id}`           | Delete an unclaimed project                                  |
+| `GET /v1/projects/{project_id}/credentials`   | Read scoped project and service credentials                  |
+| `POST /v1/projects/{project_id}/claim`        | Create a short-lived human claim code                        |
+| `GET /v1/projects/{project_id}/claim`         | Read claim and reconciliation status                         |
+| `DELETE /v1/projects/{project_id}`            | Delete an unclaimed project                                  |
 | `/v1/projects/{project_id}/...`               | Use supported Neon Management API operations before claiming |
 
 The identity assertion is a secret. Store it like an API key. There are no refresh tokens. Exchange the assertion again when an access token expires.
@@ -163,7 +163,7 @@ The response contains a bearer `access_token`, its scope, and its expiration:
 ### Pull credentials
 
 ```bash
-curl https://claimable.neon.tech/v1/databases/quiet-fog-12345678/credentials \
+curl https://claimable.neon.tech/v1/projects/quiet-fog-12345678/credentials \
   --header "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
@@ -245,7 +245,7 @@ Create a claim code with the API:
 
 ```bash
 curl --request POST \
-  https://claimable.neon.tech/v1/databases/quiet-fog-12345678/claim \
+  https://claimable.neon.tech/v1/projects/quiet-fog-12345678/claim \
   --header "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
@@ -268,7 +268,7 @@ Open `verification_uri_complete`, sign in to Neon, and choose the destination or
 Poll claim status at the server-provided `interval`:
 
 ```bash
-curl https://claimable.neon.tech/v1/databases/quiet-fog-12345678/claim \
+curl https://claimable.neon.tech/v1/projects/quiet-fog-12345678/claim \
   --header "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
@@ -305,14 +305,9 @@ Common codes include:
 | `project_claimed`           | The project transferred and agent credentials no longer apply |
 | `upstream_unavailable`      | A Neon API or service dependency is temporarily unavailable   |
 
-## Legacy `neon.new` clients
-
-The `neon-new` package and `vite-plugin-neon-new` target the earlier `https://neon.new/api/v1/database` interface. They do not implement auth.md or scoped agent tokens. New agent integrations should use `neon claim`, `auth.md`, or the `/v1` API described on this page.
-
 ## Resources
 
 - [Create a database in the browser](/claimable-postgres)
 - [Claimable Neon auth.md](https://claimable.neon.tech/auth.md)
-- [Claimable Neon source](https://github.com/neondatabase/claimable-neon)
 - [Neon CLI reference](/docs/cli)
 - [Claimable database integration](/docs/workflows/claimable-database-integration)

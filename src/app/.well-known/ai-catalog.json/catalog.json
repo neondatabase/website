@@ -26,12 +26,6 @@
       "description": "Guides and best practices for working with Lakebase Postgres, the database behind Neon. Covers setup, connection methods and drivers, pooled vs direct connections, branching, schema migrations, autoscaling, scale-to-zero, instant restore, read replicas, connection pooling, IP allow lists, and logical replication. Use when users ask about \"Lakebase Postgres\", \"Neon setup\", \"connect to Neon\", \"Neon project\", \"DATABASE_URL\", \"serverless Postgres\", \"Neon CLI\", \"neon\", \"Neon MCP\", \"Neon Auth\", \"@neondatabase/serverless\", \"@neondatabase/neon-js\", \"scale to zero\", \"Neon autoscaling\", \"Neon read replica\", \"Neon connection pooling\", or \"schema migrations\"."
     },
     {
-      "identifier": "urn:air:neon.com:skill:claimable-postgres",
-      "type": "application/agent-skills+md",
-      "url": "https://neon.com/.well-known/agent-skills/claimable-postgres/SKILL.md",
-      "description": "Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK. Use when users ask for a quick Postgres environment, a throwaway DATABASE_URL for prototyping/tests, or \"just give me a DB now\". Triggers include: \"quick postgres\", \"temporary postgres\", \"no signup database\", \"no credit card database\", \"instant DATABASE_URL\", \"npx neon-new\", \"neon.new\", \"neon.new API\", \"claimable postgres API\"."
-    },
-    {
       "identifier": "urn:air:neon.com:skill:neon-postgres-egress-optimizer",
       "type": "application/agent-skills+md",
       "url": "https://neon.com/.well-known/agent-skills/neon-postgres-egress-optimizer/SKILL.md",

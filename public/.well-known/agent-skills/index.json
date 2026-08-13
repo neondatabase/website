@@ -9,13 +9,6 @@
       "digest": "sha256:eb8081a09e25ff2062e8f8de7cba00c38123aeb259771605c988ca0245389886"
     },
     {
-      "name": "claimable-postgres",
-      "type": "skill-md",
-      "description": "Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK. Use when users ask for a quick Postgres environment, a throwaway DATABASE_URL for prototyping/tests, or \"just give me a DB now\". Triggers include: \"quick postgres\", \"temporary postgres\", \"no signup database\", \"no credit card database\", \"instant DATABASE_URL\", \"npx neon-new\", \"neon.new\", \"neon.new API\", \"claimable postgres API\".",
-      "url": "/.well-known/agent-skills/claimable-postgres/SKILL.md",
-      "digest": "sha256:54af158fccb7412ce0e00ce136c2f7e23fcf173670db84224c445f254d902b41"
-    },
-    {
       "name": "neon-postgres-egress-optimizer",
       "type": "skill-md",
       "description": "Diagnose and fix excessive Postgres egress (network data transfer) in a codebase. Use when a user mentions high database bills, unexpected data transfer costs, network transfer charges, egress spikes, \"why is my Neon bill so high\", \"database costs jumped\", SELECT * optimization, query overfetching, reduce Neon costs, optimize database usage, or wants to reduce data sent from their database to their application. Also use when reviewing query patterns for cost efficiency, even if the user doesn't explicitly mention egress or data transfer.",
