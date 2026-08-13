@@ -4,18 +4,18 @@ subtitle: 'Learn how to add error tracking, structured logs, and request tracing
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
-updatedOn: '2026-08-07T16:58:52.237Z'
+updatedOn: '2026-08-13T14:46:11.074Z'
 ---
 
-[Neon Functions](/docs/compute/functions/overview) make it easy to ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a platform-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
+[Neon Functions](/docs/compute/functions/overview) let you ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a platform-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
 
 But once that code is live, logs alone leave real questions unanswered: which errors keep firing, how a single failed request got to where it did, and where the latency came from.
 
 That's where [Sentry](https://sentry.io) comes in. It groups errors into issues, keeps structured logs next to traces, and ties everything to a single trace ID, so from one error you can jump straight to the logs and spans of the request that produced it.
 
-Neon Functions make that integration painless. A Neon Function is a long-lived Node.js process running a web-standard request/response handler, so the standard [Sentry Node SDK](https://docs.sentry.io/platforms/javascript/guides/node/) works unchanged. You initialize it once at module load before your handler starts serving requests, and it stays instrumented for the life of the isolate. No separate setup or wrapper is needed.
+The integration fits Neon Functions naturally. A Neon Function is a long-lived Node.js process running a web-standard request/response handler, so the standard [Sentry Node SDK](https://docs.sentry.io/platforms/javascript/guides/node/) works unchanged. You initialize it once at module load before your handler starts serving requests, and it stays instrumented for the life of the isolate. You don't need any separate setup or wrapper.
 
-In this guide, you'll build a simple JSON API on Neon Functions and wire it up to Sentry's three signals:
+You'll build a simple JSON API on Neon Functions and wire it up to Sentry's three signals:
 
 - **Errors**: unhandled route failures, captured as grouped, alertable issues
 - **Logs**: recoverable failures and narrative events, like a failed payment attempt your code retried and recovered from, recorded as structured, searchable log entries
@@ -25,7 +25,7 @@ Once the signals are flowing, you'll also tour where each one lands in the Sentr
 
 ## Prerequisites
 
-Before starting, ensure you have:
+Before you start, make sure you have:
 
 1. **Node.js**: Version 20 or later (v24 recommended). Download from [nodejs.org](https://nodejs.org/).
 2. **Neon Account**: Sign up for a free account at [console.neon.tech](https://console.neon.tech/signup).
@@ -111,7 +111,7 @@ rm hello.ts
 mkdir src
 ```
 
-A `.env.local` file should also be created automatically in your project root with your Neon project details, including `DATABASE_URL`, `NEON_BRANCH`, and other Neon-specific variables. You'll add the Sentry variables to this file in the next step.
+The `neon link` command also creates a `.env.local` file in your project root with your Neon project details, including `DATABASE_URL`, `NEON_BRANCH`, and other Neon-specific variables. You'll add the Sentry variables to this file in the next step.
 
 Next, install the dependencies you'll need for the Hono framework and Sentry Node SDK. Run the following commands:
 
@@ -149,7 +149,7 @@ The Sentry SDK reads up to four environment variables. Only the DSN is required:
 | Variable                    | Purpose                                                                                                                                                   |
 | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `SENTRY_DSN`                | Your Sentry project DSN. When unset, the SDK stays fully disabled, which keeps local dev and unconfigured branches silent.                                |
-| `SENTRY_RELEASE`            | Optional release identifier, such as a commit SHA (`git rev-parse --short HEAD`). Unlocks regression detection in Sentry.                                 |
+| `SENTRY_RELEASE`            | Optional release identifier, such as a commit SHA (`git rev-parse --short HEAD`). Enables regression detection in Sentry.                                 |
 | `SENTRY_TRACES_SAMPLE_RATE` | Trace sample rate from 0 to 1, default `1`. A function is low-throughput and every request is interesting, so keep `1`; lower it for high-volume traffic. |
 | `PRODUCTION_BRANCH`         | The name of your default branch (usually `main`), so the default branch reports as the `production` environment instead of its branch name.               |
 
@@ -261,7 +261,7 @@ The middleware adds the request root span, and it's the one block you'll copy in
 
 ### Add the health check and order lookup routes
 
-Add two simple routes to verify the function is running and to return a canned order:
+Add two routes to verify the function is running and to return a canned order:
 
 ```ts filename="src/index.ts"
 app.get("/health", (c) => c.json({ status: "ok" }));
@@ -586,7 +586,7 @@ Once all three signals land, you have the full debugging loop for a production f
 
 ## Add a streaming AI agent on the AI Gateway
 
-The patterns you've built so far transfer unchanged to AI workloads. You'll add a new route that streams a tool-calling agent and shows off the traces signal on an AI workload. The agent uses the Neon AI Gateway to call a large language model (LLM) and two simple tools: one that returns the current server time and another that rolls dice.
+The patterns you've built so far transfer unchanged to AI workloads. You'll add a new route that streams a tool-calling agent, exercising the traces signal on an AI workload. The agent uses the Neon AI Gateway to call a large language model (LLM) and two tools: one that returns the current server time and another that rolls dice.
 
 First, install the AI dependencies:
 
@@ -631,7 +631,7 @@ export { Sentry };
 
 The new option `traceLifecycle: "stream"` tells the SDK to stream `gen_ai` spans in batches. The `Sentry.vercelAIIntegration({ force: true })` integration enables the AI SDK to emit spans for model calls and tool executions.
 
-Now add a route to `src/index.ts`. The `POST /chat` route streams a tool-calling agent and shows off the traces signal on an AI workload. Add these imports and the route to your existing file:
+Now add the `POST /chat` route to `src/index.ts`. Add these imports and the route to your existing file:
 
 ```ts filename="src/index.ts" shouldWrap
 import { streamText, tool, isStepCount } from "ai";
@@ -741,7 +741,7 @@ curl -X POST "https://<your-function-url>/chat" \
 
 The agent calls the `rollDice` tool and streams the answer back. In **Explore > Traces**, you'll see the request root span with the nested `gen_ai` hierarchy including token usage per model call.
 
-With all three signals landing for both the API and the agent, you have the full debugging loop for a production function: an issue fires, you pivot from the issue to the logs of the same trace, and the trace itself shows where the time and tokens went.
+The same debugging loop now covers AI work: the trace shows how long each model call and tool run took, and how many tokens it used.
 
 ## Explore the telemetry in Sentry
 
