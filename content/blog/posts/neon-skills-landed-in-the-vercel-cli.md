@@ -37,7 +37,7 @@ vercel integration add neon
 
 ## Provision Neon from the Vercel CLI
 
-If you deploy to Vercel, you've probably used the CLI mostly for vercel deploy or vercel env pull. The part that matters here is a different subcommand, [vercel integration](https://vercel.com/changelog/vercel-cli-for-marketplace-integrations-optimized-for-agents), which manages [Marketplace integrations](https://vercel.com/marketplace) from the terminal. You can use this command to provision a resource from a Marketplace integration (e.g. a Neon backend), and if that integration isn't installed on your team yet, it installs it first. (It's also available as vercel install (alias vercel i), so vc i neon gets you to the same place.)
+If you deploy to Vercel, you've probably used the CLI mostly for `vercel deploy` or `vercel env pull`. The part that matters here is a different subcommand, [`vercel integration`](https://vercel.com/changelog/vercel-cli-for-marketplace-integrations-optimized-for-agents), which manages [Marketplace integrations](https://vercel.com/marketplace) from the terminal. You can use this command to provision a resource from a Marketplace integration (e.g. a Neon backend), and if that integration isn't installed on your team yet, it installs it first. (It's also available as `vercel install` (alias `vercel i`), so `vc i neon` gets you to the same place.)
 
 If you run the command plain, it prompts you for the choices it needs, like the billing plan and region - but if you run it with flags, it skips the prompts entirely, which is what makes it perfect for agents:
 
@@ -62,12 +62,12 @@ vercel integration add neon installs the [Vercel-Managed Integration](https://ne
 If you already have a Neon account and want to keep billing with Neon, use the [Neon-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration) instead.
 </Admonition>
 
-There’s more integration subcommands you can run without leaving the terminal, e.g.
+There’s more `integration` subcommands you can run without leaving the terminal, e.g.
 
-- vercel integration discover browses available providers
-- vercel integration categories lists how they're grouped (databases, AI, observability, and so on)
-- vercel integration guide neon prints setup snippets,
-- and vercel integration open neon opens the Neon console
+- `vercel integration discover` browses available providers
+- `vercel integration categories` lists how they're grouped (databases, AI, observability, and so on)
+- `vercel integration guide neon` prints setup snippets,
+- and `vercel integration open neon` opens the Neon console
 
 ## Preview branches, included
 
@@ -79,7 +79,7 @@ That maps cleanly onto how Vercel already works with PRs. If you push a feature 
 Cleanup timing depends on which path you chose. The Vercel-Managed path follows Vercel's deployment retention policy, while the Neon-Managed path can follow Git branch deletion. The details, and a few ways to tighten it up, are in [Managing Vercel preview branch cleanup](https://neon.com/docs/guides/vercel-branch-cleanup).
 </Admonition>
 
-PS: If you've turned on Managed Better Auth on the production branch, preview deployments also receive NEON_AUTH_BASE_URL, [so auth works in each isolated preview too](https://neon.com/guides/vercel-neon-auth-branching).
+PS: If you've turned on Managed Better Auth on the production branch, preview deployments also receive `NEON_AUTH_BASE_URL`, [so auth works in each isolated preview too](https://neon.com/guides/vercel-neon-auth-branching).
 
 ## Skills now load automatically
 
@@ -101,7 +101,7 @@ Agents are the first-class interface for deploying Neon. There’s a few ways to
 
 | Path | Provisions a database? | MCP / tooling | Best when |
 | --- | --- | --- | --- |
-| Vercel CLI `vercel integration add neon` | Yes - on your Vercel project | No MCP setup. Connection vars via vercel env pull | You’re working on Vercel |
+| Vercel CLI `vercel integration add neon` | Yes - on your Vercel project | No MCP setup. Connection vars via `vercel env pull` | You’re working on Vercel |
 | Cursor plugin [cursor.com/marketplace/neon](https://cursor.com/marketplace/neon) | No - waits for your input | Neon MCP server | You’re in Cursor and want live Neon access |
 | Claude Code plugin `claude plugin install neon@claude-plugins-official` | No - waits for your input | Neon MCP server | You’re in Claude Code and want live Neon |
 | `npx neon@latest init` | No - waits for your input | OAuth auth, API key, MCP config, plus the Neon extension for Cursor/VS Code when applicable | You want a full Neon setup for a project |
