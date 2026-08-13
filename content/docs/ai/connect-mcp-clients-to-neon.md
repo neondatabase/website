@@ -9,11 +9,12 @@ summary: >-
   Lakebase Postgres databases on Neon using natural language. Use this page when you need
   per-client setup instructions for `npx neon@latest init`, OAuth, or local
   API key authentication with `@neondatabase/mcp-server-neon`. Also covers
-  troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache).
+  troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache)
+  and the retired HTTP+SSE endpoints (`/sse`, `/message`), which return 410.
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-13T10:00:00.000Z'
+updatedOn: '2026-08-04T05:05:30.414Z'
 ---
 
 This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Lakebase Postgres databases.
@@ -468,7 +469,7 @@ npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 ```
 
 <Admonition type="note">
-The older HTTP+SSE endpoints (`/sse` and `/message`) are retired and return `410 Gone`. Use `https://mcp.neon.tech/mcp` (Streamable HTTP), or the `mcp-remote` command above for stdio-only clients.
+The older HTTP+SSE endpoints (`/sse` and `/message`) are retired and return `410 Gone`. Use `https://mcp.neon.tech/mcp` (Streamable HTTP). If your client only supports local stdio servers, put `npx -y mcp-remote https://mcp.neon.tech/mcp` in its MCP config.
 </Admonition>
 
 ### OAuth Authentication Errors
