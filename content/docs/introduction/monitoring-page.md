@@ -7,7 +7,7 @@ summary: >-
   connection saturation, cache misses, or replication lag, and decide whether
   to scale up or enable pooling. Historical data retention depends on your plan.
 enableTableOfContents: true
-updatedOn: '2026-08-13T11:04:48.562Z'
+updatedOn: '2026-08-13T12:40:58.627Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -201,15 +201,7 @@ The **Replication delay seconds** graph shows the time delay, in seconds, betwee
 
 ![compute cache hit rate graph](/docs/introduction/compute_cache_hit_rate.png)
 
-The **Compute cache hit rate** graph shows the percentage of read requests served from your compute's cache rather than from storage. Your compute cache is layered: a read first checks Postgres [shared buffers](/docs/reference/glossary#shared-buffers), then the [local file cache](/docs/reference/glossary#compute-cache), and only reads from storage if the data isn't in either. Reads served from storage are more costly and can result in slower query performance.
-
-The graph plots three lines:
-
-- **Local file cache**: The hit rate for the local file cache.
-- **Shared buffers**: The hit rate for Postgres shared buffers.
-- **Total**: The overall hit rate pooled across both caches.
-
-To learn more about how Neon caches data, see [Monitoring compute cache usage](/docs/extensions/neon#monitoring-compute-cache-usage).
+The **Compute cache hit rate** graph shows the percentage of read requests served from your [compute cache](/docs/reference/glossary#compute-cache) rather than from storage. Reads served from storage are more costly and can result in slower query performance. To learn more about how Neon caches data, see [Monitoring compute cache usage](/docs/extensions/neon#monitoring-compute-cache-usage).
 
 ## Working set size
 
@@ -222,8 +214,7 @@ The **Working set size** graph visualizes the amount of data accessed (calculate
 - **5m** (5 minutes): This line shows the data accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in the last 15 minutes.
 - **1h** (1 hour): This line represents the data accessed in the last hour.
-- **Local file cache size**: The size of the local file cache, determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
-- **Shared buffers size**: The size of Postgres shared buffers, which also scales with your compute size.
+- **Compute cache size**: The size of your compute cache, determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 For optimal performance your compute cache should be larger than your working set size for a given time interval. If your working set size is larger than the compute cache size it is recommended to increase the maximum size of the compute to improve the cache hit rate and achieve good performance.
 
