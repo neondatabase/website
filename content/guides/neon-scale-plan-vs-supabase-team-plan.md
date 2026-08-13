@@ -8,7 +8,7 @@ createdAt: '2026-07-15T00:00:00.000Z'
 ---
 
 <Admonition type="note">
-Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 3, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
+Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 13, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
 </Admonition>
 
 This comparison is for established production workloads: higher capacity, read scaling, recovery guarantees, compliance controls, and support commitments across the whole backend, services included. For the service-by-service comparison, start with [Neon vs Supabase](/guides/neon-vs-supabase).
@@ -17,19 +17,24 @@ The plans at this stage are Neon's Scale plan and Supabase's Team plan. At this 
 
 ## Production plan comparison
 
-| Dimension        | Neon Scale plan                                                                       | Supabase Team plan                                                                            |
-| ---------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Base price       | No monthly minimum; pay for usage                                                     | $599 per month, plus hourly per-project compute (with a $10 monthly credit)                   |
+| Dimension        | Neon Scale plan                                                                                          | Supabase Team plan                                                                                                  |
+| ---------------- | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Base price       | No monthly minimum; pay for usage                                                                        | $599 per month, plus hourly per-project compute (with a $10 monthly credit)                                         |
 | Database compute | Lakebase Postgres: $0.222 per CU-hour; autoscaling up to 16 CU, or fixed sizes up to 56 CU (≈224 GB RAM) | Traditional Postgres: per-project instances from Micro through 16XL (64 cores, 256 GB RAM); custom sizes above that |
-| Database storage | $0.35 per GB-month; up to 16 TB logical size per branch                               | 8 GB disk included per project, then $0.125 per GB; disks up to 60 TB                         |
-| Auth             | Managed Better Auth, up to 1M MAU, increases on request                               | 100,000 MAU included, then $0.00325 per MAU                                                   |
-| Other services   | Data API, Functions, Object Storage, AI Gateway                                       | Auth, Storage, Realtime, Edge Functions, Cron, and Queues                                     |
-| Projects         | 1,000, with increases available on request                                            | Unlimited, with each project's compute billed hourly                                          |
-| Scale-to-zero    | Configurable from 1 minute to always-on                                               | Not applicable; instances run continuously                                                    |
-| Recovery         | Instant restore with a history window up to 30 days; scheduled snapshots              | Daily backups retained 14 days; point-in-time recovery add-on at $100 per month per 7 days    |
-| Compliance       | SOC 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA; HIPAA at additional charge            | SOC 2 and ISO 27001; HIPAA as a paid add-on                                                   |
-| Uptime SLA       | Included                                                                              | Not included (Enterprise plan only)                                                           |
-| Support          | Standard included; Business and Production tiers available                            | Priority email support and SLAs                                                               |
+| Database storage | $0.35 per GB-month; up to 16 TB logical size per branch                                                  | 8 GB disk included per project, then $0.125 per GB; disks up to 60 TB                                               |
+| Auth             | Managed Better Auth, up to 1M MAU, increases on request                                                  | 100,000 MAU included, then $0.00325 per MAU                                                                         |
+| Data API         | PostgREST-compatible REST API                                                                            | REST plus GraphQL                                                                                                   |
+| Functions        | Included, with usage limits                                                                              | 2M Edge Function invocations included, then $2 per million                                                          |
+| File storage     | Object Storage included, with usage limits                                                               | 100 GB included, then $0.0213 per GB                                                                                |
+| Realtime         | Not offered as a managed service                                                                         | Managed Broadcast, Presence, and Postgres Changes                                                                   |
+| Jobs and cron    | `pg_cron` available; only runs with active compute; managed jobs planned                                 | Managed Cron and Queues, built on `pg_cron` and `pgmq`                                                              |
+| AI Gateway       | Models from multiple providers via one credential; inference free during beta, then provider list prices | Not currently offered                                                                                               |
+| Projects         | 1,000, increases on request; idle projects consume no compute                                            | First project included; additional projects from $10/month each, billed as hourly compute                           |
+| Scale-to-zero    | Configurable from 1 minute to always-on                                                                  | Not applicable; instances run continuously                                                                          |
+| Recovery         | Instant restore with a history window up to 30 days; scheduled snapshots                                 | Daily backups retained 14 days; point-in-time recovery add-on at $100 per month per 7 days                          |
+| Compliance       | SOC 2, SOC 3, ISO 27001, ISO 27701, GDPR, CCPA; HIPAA at additional charge                               | SOC 2 and ISO 27001; HIPAA as a paid add-on                                                                         |
+| Uptime SLA       | Included                                                                                                 | Not included (Enterprise plan only)                                                                                 |
+| Support          | Standard included; Business and Production tiers available                                               | Priority email support and SLAs                                                                                     |
 
 Sources: [Neon plans](/docs/introduction/plans); [Supabase pricing](https://supabase.com/pricing), [compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk).
 
@@ -65,9 +70,9 @@ Be specific when you compare: "any point in the last 30 days" and "each of the l
 
 ## Compliance, access controls, and support
 
-The Neon Scale plan's certifications cover SOC 2, SOC 3, ISO 27001, ISO 27701, GDPR, and CCPA, with [HIPAA](/docs/security/hipaa) at additional charge. Access controls include IP Allow and Private Networking over AWS PrivateLink ($0.01/GB transfer), and metrics and Postgres logs export to Datadog or any OTel-compatible platform ([source](/docs/introduction/plans#compliance-and-security)). An uptime SLA is included; support is Standard by default with Business and Production tiers above it ([source](/docs/introduction/plans#support)).
+The Neon Scale plan's certifications cover SOC 2, SOC 3, ISO 27001, ISO 27701, GDPR, and CCPA, with [HIPAA](/docs/security/hipaa) at additional charge. Access controls include IP Allow and [Private Networking](/docs/guides/neon-private-networking) over AWS PrivateLink, and metrics and Postgres logs export to Datadog or any OTel-compatible platform ([source](/docs/introduction/plans#compliance-and-security)). An uptime SLA is included; support is Standard by default with Business and Production tiers above it ([source](/docs/introduction/plans#support)).
 
-The Supabase Team plan includes SOC 2 and ISO 27001, HIPAA as a paid add-on, SSO for the dashboard, and priority email support with SLAs; its pricing page lists the uptime SLA under Enterprise ([source](https://supabase.com/pricing)). Network restrictions and log drains are available on the platform side ([source](https://supabase.com/docs/guides/platform/network-restrictions)). Note what Supabase's Pro-to-Team step buys: certifications, dashboard SSO, longer backup retention, and support, not capacity. Headline quotas like the 100,000 included MAU stay the same, so the move is usually triggered by a customer security review rather than by load ([source](https://supabase.com/pricing)).
+The Supabase Team plan includes SOC 2 and ISO 27001, HIPAA as a paid add-on, SSO for the dashboard, and priority email support with SLAs; its pricing page lists the uptime SLA under Enterprise ([source](https://supabase.com/pricing)). Network restrictions and log drains are available on the platform side ([source](https://supabase.com/docs/guides/platform/network-restrictions)). PrivateLink for private VPC connectivity is available on Team and Enterprise ([source](https://supabase.com/docs/guides/platform/privatelink)). Note what Supabase's Pro-to-Team step buys: certifications, dashboard SSO, longer backup retention, and support, not capacity. Headline quotas like the 100,000 included MAU stay the same, so the move is usually triggered by a customer security review rather than by load ([source](https://supabase.com/pricing)).
 
 If an audit is on your calendar, ask both vendors for current certification reports; pricing pages summarize, and auditors want the reports themselves.
 
@@ -84,23 +89,23 @@ Before committing, price one realistic month end to end on Neon and on Supabase:
 3. Storage and disk, including replica disks on Supabase and change-history retention on Neon.
 4. Auth at your real MAU. Beyond 100,000 MAU, Supabase bills $0.00325 per MAU; Neon includes up to 1M with increases on request.
 5. Service usage: Realtime messages and peak concurrent connections, function invocations, and file storage on Supabase's meters; on Neon, Functions and Object Storage are included with usage limits, so check your volumes against the current limits.
-6. Network transfer at your egress volume (Neon includes 500 GB per project, then $0.10/GB; Supabase includes 250 GB, then $0.09/GB).
+6. Network transfer at your egress volume (Neon includes 500 GB per project, then $0.10/GB; Supabase pools 250 GB across the organization, then $0.09/GB). For private networking, Neon meters transfer at $0.01/GB; Supabase's PrivateLink has no published rate, so private egress appears to bill at the standard $0.09/GB (confirm with Supabase).
 7. Recovery add-ons, branches, support tiers, and compliance line items your contracts require.
 
-Two worked months below, using the representative workloads from the [Neon pricing FAQ](/pricing#workload-cost-estimates) and Supabase's [compute price list](https://supabase.com/docs/guides/platform/compute-and-disk), priced August 3, 2026. Beyond the production database, each adds what a business actually runs: point-in-time recovery, three non-production environments (dev, staging, test), egress, and function usage, with the assumption stated in each row. A Neon CU is ≈1 vCPU and 4 GB RAM; a fixed instance doesn't resize with load, so it's provisioned once at the size that clears the workload's peak with headroom. Replicas, auth MAU, and Realtime usage from the checklist apply on top of both.
+Two worked months below, using the representative workloads from the [Neon pricing FAQ](/pricing#workload-cost-estimates) and Supabase's [compute price list](https://supabase.com/docs/guides/platform/compute-and-disk), priced August 13, 2026. Beyond the production database, each adds what a business actually runs: point-in-time recovery, three non-production environments (dev, staging, test), egress, and function usage, with the assumption stated in each row. A Neon CU is ≈1 vCPU and 4 GB RAM; a fixed instance doesn't resize with load, so it's provisioned once at the size that clears the workload's peak with headroom. Replicas, auth MAU, and Realtime usage from the checklist apply on top of both.
 
 **High Load: sustained production traffic.** 3,000 CU-hours, 100 GB of data, scaling between 3 and 7 CU.
 
-| Line item                | Neon Scale plan                                                 | Supabase Team plan                                     |
-| ------------------------ | ---------------------------------------------------------------- | ------------------------------------------------------- |
-| Base fee                 | $0                                                              | $599 (includes a $10 compute credit)                   |
-| Production database      | $666 (3,000 CU-hours at $0.222)                                 | $410 (2XL ≈ 8 CU, clears the 7 CU peak, all month)     |
-| Database storage         | $35 (100 GB at $0.35/GB-month)                                  | $11.50 (92 GB beyond the included disk)                |
-| Point-in-time recovery   | $10 (7-day instant restore history, ~50 GB of changes retained) | $100 (PITR add-on, 7-day retention)                    |
-| Dev, staging, test       | ~$15 (3 branches, scale to zero, ~60 CU-hours plus divergence)  | ~$30 (3 Micro instances, running continuously)         |
-| Egress (300 GB)          | $0 (500 GB included)                                            | $4.50 (50 GB over the included 250 GB)                 |
-| Functions (5M calls)     | $0 (included, with usage limits)                                | $6 (3M over the included 2M)                           |
-| **Total**                | **~$725/month**                                                 | **~$1,150/month**                                      |
+| Line item              | Neon Scale plan                                                 | Supabase Team plan                                 |
+| ---------------------- | --------------------------------------------------------------- | -------------------------------------------------- |
+| Base fee               | $0                                                              | $599 (includes a $10 compute credit)               |
+| Production database    | $666 (3,000 CU-hours at $0.222)                                 | $410 (2XL ≈ 8 CU, clears the 7 CU peak, all month) |
+| Database storage       | $35 (100 GB at $0.35/GB-month)                                  | $11.50 (92 GB beyond the included disk)            |
+| Point-in-time recovery | $10 (7-day instant restore history, ~50 GB of changes retained) | $100 (PITR add-on, 7-day retention)                |
+| Dev, staging, test     | ~$15 (3 branches, scale to zero, ~60 CU-hours plus divergence)  | ~$30 (3 Micro instances, running continuously)     |
+| Egress (300 GB)        | $0 (500 GB included)                                            | $4.50 (50 GB over the included 250 GB)             |
+| Functions (5M calls)   | $0 (included, with usage limits)                                | $6 (3M over the included 2M)                       |
+| **Total**              | **~$725/month**                                                 | **~$1,150/month**                                  |
 
 ![The High Load workload over a month, scaling between 3 and 7 CU with sustained traffic](/images/pricing/3000-CU-Hours.webp)
 
@@ -108,16 +113,16 @@ Two worked months below, using the representative workloads from the [Neon prici
 
 **XL Load: large-scale production.** 6,000 CU-hours, 1,000 GB of data, scaling between 6 and 14 CU.
 
-| Line item                | Neon Scale plan                                                   | Supabase Team plan                                     |
-| ------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------- |
-| Base fee                 | $0                                                                | $599 (includes a $10 compute credit)                   |
-| Production database      | $1,332 (6,000 CU-hours at $0.222)                                 | $960 (4XL ≈ 16 CU, clears the 14 CU peak, all month)   |
-| Database storage         | $350 (1 TB at $0.35/GB-month)                                     | $124 (992 GB beyond the included disk)                 |
-| Point-in-time recovery   | $40 (7-day instant restore history, ~200 GB of changes retained)  | $100 (PITR add-on, 7-day retention)                    |
-| Dev, staging, test       | ~$40 (3 branches, scale to zero, ~150 CU-hours plus divergence)   | ~$45 (3 Small instances, running continuously)         |
-| Egress (800 GB)          | $30 (300 GB over the included 500 GB)                             | $49.50 (550 GB over the included 250 GB)               |
-| Functions (5M calls)     | $0 (included, with usage limits)                                  | $6 (3M over the included 2M)                           |
-| **Total**                | **~$1,790/month**                                                 | **~$1,875/month**                                      |
+| Line item              | Neon Scale plan                                                  | Supabase Team plan                                   |
+| ---------------------- | ---------------------------------------------------------------- | ---------------------------------------------------- |
+| Base fee               | $0                                                               | $599 (includes a $10 compute credit)                 |
+| Production database    | $1,332 (6,000 CU-hours at $0.222)                                | $960 (4XL ≈ 16 CU, clears the 14 CU peak, all month) |
+| Database storage       | $350 (1 TB at $0.35/GB-month)                                    | $124 (992 GB beyond the included disk)               |
+| Point-in-time recovery | $40 (7-day instant restore history, ~200 GB of changes retained) | $100 (PITR add-on, 7-day retention)                  |
+| Dev, staging, test     | ~$40 (3 branches, scale to zero, ~150 CU-hours plus divergence)  | ~$45 (3 Small instances, running continuously)       |
+| Egress (800 GB)        | $30 (300 GB over the included 500 GB)                            | $49.50 (550 GB over the included 250 GB)             |
+| Functions (5M calls)   | $0 (included, with usage limits)                                 | $6 (3M over the included 2M)                         |
+| **Total**              | **~$1,790/month**                                                | **~$1,875/month**                                    |
 
 ![The XL Load workload over a month, scaling between 6 and 14 CU](/images/pricing/6000-CU-Hours.webp)
 
