@@ -54,6 +54,11 @@ export default {
               description: 'Faster Postgres workflows',
             },
             {
+              title: 'Search',
+              to: LINKS.lakebaseSearch,
+              description: 'Vector, keyword, and hybrid search',
+            },
+            {
               title: 'Instant Restore',
               to: LINKS.instantRestore,
               description: 'Instant recovery when mistakes happen',

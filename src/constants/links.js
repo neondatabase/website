@@ -56,6 +56,7 @@ export default {
   docsMigration: '/docs/import/import-data-assistant',
   docsPgvector: '/docs/extensions/pgvector',
   instantRestore: '/docs/introduction/branch-restore',
+  lakebaseSearch: '/docs/ai/lakebase-search',
   manageBilling: '/docs/introduction/manage-billing',
   migrationIntro: '/docs/import/migrate-intro',
   docsExtensionsPgVector: '/docs/extensions/pgvector',
