@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-07-31T16:04:44.241Z'
+updatedOn: '2026-08-13T16:00:41.084Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -103,20 +103,19 @@ Skills are grouped by area. Each skill is a `SKILL.md` entry point that your age
 
 Start here for platform overview and Postgres development.
 
-| Skill                                                                        | Description                                                                                                                 |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| [`neon`](https://skills.sh/neondatabase/agent-skills/neon)                   | Platform overview for apps and agents: Postgres, Auth, Data API, Functions, Storage, and AI Gateway, and how to get started |
-| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Comprehensive index of Neon Serverless Postgres documentation and best practices                                            |
+| Skill                                                                        | Description                                                                         |
+| ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| [`neon`](https://skills.sh/neondatabase/agent-skills/neon)                   | Overview for apps and agents, including Claimable Neon when there is no account yet |
+| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Comprehensive index of Neon Serverless Postgres documentation and best practices    |
 
 ### Database workflows
 
-Provision, branch, and optimize Postgres projects.
+Branch and optimize Postgres projects.
 
-| Skill                                                                                                          | Description                                                                                                       |
-| -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`claimable-postgres`](https://skills.sh/neondatabase/agent-skills/claimable-postgres)                         | Instant temporary Postgres via [Claimable Postgres](/docs/reference/claimable-postgres) — no login or credit card |
-| [`neon-postgres-branches`](https://skills.sh/neondatabase/agent-skills/neon-postgres-branches)                 | Choose and create the right branch type for migrations, schema-only branches, and reset-from-parent workflows     |
-| [`neon-postgres-egress-optimizer`](https://skills.sh/neondatabase/agent-skills/neon-postgres-egress-optimizer) | Diagnose and fix excessive Postgres egress and query overfetching                                                 |
+| Skill                                                                                                          | Description                                                                                                   |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [`neon-postgres-branches`](https://skills.sh/neondatabase/agent-skills/neon-postgres-branches)                 | Choose and create the right branch type for migrations, schema-only branches, and reset-from-parent workflows |
+| [`neon-postgres-egress-optimizer`](https://skills.sh/neondatabase/agent-skills/neon-postgres-egress-optimizer) | Diagnose and fix excessive Postgres egress and query overfetching                                             |
 
 ### Neon Platform
 
@@ -158,7 +157,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 
 **Database workflows**
 
-- **Disposable databases** via Claimable Postgres for agents and tests
+- **Disposable databases** via Claimable Postgres in the `neon` skill, for agents and tests
 - **Branch types and workflows** for migrations, schema-only branches, and reset-from-parent
 - **Egress optimization** for high transfer costs and query anti-patterns
 

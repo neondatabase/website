@@ -17,8 +17,8 @@ const SKILLS = [
     digest: 'sha256:abc123',
   },
   {
-    name: 'claimable-postgres',
-    description: 'Provision instant temporary Postgres databases.',
+    name: 'neon-functions',
+    description: 'Long-running serverless Node.js HTTP functions.',
     digest: 'sha256:def456',
   },
 ];
@@ -44,19 +44,19 @@ describe('buildAgentSkillsIndex', () => {
   it('constructs root-relative urls with root prefix', () => {
     const index = buildAgentSkillsIndex(SKILLS, '/.well-known/agent-skills/');
     expect(index.skills[0].url).toBe('/.well-known/agent-skills/neon-postgres/SKILL.md');
-    expect(index.skills[1].url).toBe('/.well-known/agent-skills/claimable-postgres/SKILL.md');
+    expect(index.skills[1].url).toBe('/.well-known/agent-skills/neon-functions/SKILL.md');
   });
 
   it('constructs /docs/-prefixed urls with docs prefix', () => {
     const index = buildAgentSkillsIndex(SKILLS, '/docs/.well-known/agent-skills/');
     expect(index.skills[0].url).toBe('/docs/.well-known/agent-skills/neon-postgres/SKILL.md');
-    expect(index.skills[1].url).toBe('/docs/.well-known/agent-skills/claimable-postgres/SKILL.md');
+    expect(index.skills[1].url).toBe('/docs/.well-known/agent-skills/neon-functions/SKILL.md');
   });
 
   it('preserves skill ordering from input array', () => {
     const index = buildAgentSkillsIndex(SKILLS, '/.well-known/agent-skills/');
     expect(index.skills[0].name).toBe('neon-postgres');
-    expect(index.skills[1].name).toBe('claimable-postgres');
+    expect(index.skills[1].name).toBe('neon-functions');
   });
 });
 

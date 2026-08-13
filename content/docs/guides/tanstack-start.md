@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-08-13T16:00:41.084Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
@@ -62,31 +62,13 @@ Add a `.env` file to your project directory and add your Neon connection string 
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
-If you haven't created a database yet, run the following command to generate a [Claimable Postgres by Neon database](https://neon.new/). It will spin up a database instance that you can use for 72 hours, or claim to keep forever.
-
-<CodeTabs labels={["npm", "yarn", "pnpm", "bun", "deno"]}>
+If you haven't created a database yet, [Claimable Postgres](/claimable-postgres) provisions a temporary database on Neon without an account:
 
 ```bash
-  npm neon-new
+npx neon@latest claim create --env-pull
 ```
 
-```bash
-  yarn dlx neon-new
-```
-
-```bash
-  pnpm neon-new
-```
-
-```bash
-  bunx neon-new
-```
-
-```bash
-  deno run -A neon-new
-```
-
-</CodeTabs>
+That writes `DATABASE_URL` to `.env`. A human can claim the project into a Neon account before it expires. See [Claimable Postgres](/docs/reference/claimable-postgres).
 
 ## Configure the Postgres client
 
