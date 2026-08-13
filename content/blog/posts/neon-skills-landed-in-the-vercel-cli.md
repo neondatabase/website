@@ -33,7 +33,7 @@ seo:
 vercel integration add neon
 ```
 
-<EmbedTweet url="https://x.com/vercel_dev/status/2085467364129472921?s=20" />
+**[ADD CLIP 1]**
 
 ## Provision Neon from the Vercel CLI
 
@@ -84,6 +84,8 @@ PS: If you've turned on Managed Better Auth on the production branch, preview de
 ## Skills now load automatically
 
 When you tell your agent to deploy Neon via Vercel, you’d want your agent to know Neon already and what to do with it. To make sure this is the case, now when you install a Marketplace integration from the CLI, it now also pulls that provider's agent skills from [skills.sh](https://skills.sh/neondatabase/agent-skills):
+
+**[ADD CLIP 2]**
 
 Instead of guessing and reinventing workflows, your agent will gets Neon's own guidance on how to work with Postgres and the rest of the primitives.
 
