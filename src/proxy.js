@@ -9,6 +9,8 @@ import {
   getMarkdownPath,
   buildAgent404Response,
 } from './utils/ai-agent-detection';
+import { trackLLMPageview } from './utils/llm-analytics';
+import { markdownNotFoundResponse } from './utils/markdown-404';
 
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
@@ -29,36 +31,6 @@ function applyDocHeaders(response) {
   response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
   response.headers.append('Link', '</docs/llms-full.txt>; rel="llms-full-txt"');
   return response;
-}
-
-function trackLLMPageview(req, { is404 = false } = {}) {
-  const url = req.nextUrl.href;
-  const referrer = req.headers.get('referer') || '';
-  const cookies = req.headers.get('cookie') || '';
-  const userAgent = req.headers.get('user-agent') || '';
-
-  // Match the payload shape the Zaraz JS tag sends to this endpoint
-  const payload = {
-    name: 'Pageview',
-    data: { llm_agent: true, llm_404: is404 },
-    zarazData: {
-      c: cookies, // raw cookie string — Zaraz extracts ajs_anonymous_id / ajs_user_id from here
-      l: url,
-      r: referrer,
-    },
-    system: {
-      device: {
-        ip: '192.168.0.1',
-      },
-    },
-  };
-
-  // Fire and forget — do not await to avoid blocking the response
-  fetch('https://neonapi.io/t.js', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'User-Agent': `LLMAGENT: ${userAgent}` },
-    body: JSON.stringify(payload),
-  }).catch(() => {});
 }
 
 const BLOG_CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
@@ -118,17 +90,7 @@ async function markdownMovedOr404Response(req, pathname, source) {
   const redirect = await markdownRedirectResponse(req, pathname);
   if (redirect) return redirect;
 
-  return applyDocHeaders(
-    new NextResponse(buildAgent404Response(pathname), {
-      status: 404,
-      headers: {
-        'Content-Type': 'text/markdown; charset=utf-8',
-        'Cache-Control': 'public, max-age=60, s-maxage=300',
-        'X-Content-Source': source,
-        'X-Robots-Tag': 'noindex',
-      },
-    })
-  );
+  return markdownNotFoundResponse(pathname, { source });
 }
 
 // Retired neon-postgres skill reference files. The `references/` directory was
