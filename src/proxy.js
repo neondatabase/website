@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { checkCookie, getReferer } from 'app/actions';
 import { CONTENT_ROUTES } from 'constants/content';
 import LINKS from 'constants/links';
+import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
 import {
   isAIAgentRequest,
@@ -132,6 +133,41 @@ function skillReferenceRedirectResponse(req, pathname) {
   return response;
 }
 
+// Real static .md files (skills SKILL.md, prompts, /pricing.md, …) live in
+// public/ and have no generated /md sibling, so getMarkdownPath returns null for
+// them. STATIC_MD is the build-time manifest of those files.
+const STATIC_MD = new Set(STATIC_MD_PATHS);
+
+// For a `.md` URL with no generated /md sibling: serve the real static file if it
+// exists (manifest hit → next), else a markdown 404. This makes every missing
+// `.md` — skills, .well-known, or an arbitrary path like /foo/bar.md — return
+// markdown instead of the HTML 404, using a Set lookup with no per-request fetch.
+// Runs at the proxy layer (before rewrites/routes), so nothing downstream can
+// pre-empt it. Returns a response, or null when this isn't an unmirrored `.md`
+// (generated-docs `.md` keep their existing fetch-based handling).
+function staticMarkdownResponse(req, pathname) {
+  if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
+
+  // Agent-skill discovery aliases (and /skill.md) have no physical file at the
+  // request path — next.config rewrites map them to a real SKILL.md elsewhere.
+  // The proxy runs before those rewrites, so don't 404 them here; fall through
+  // and let the rewrite serve. Keep in sync with the skill-discovery rewrites in
+  // next.config.js.
+  if (
+    pathname === '/skill.md' ||
+    pathname.startsWith('/.well-known/') ||
+    pathname.startsWith('/docs/.well-known/')
+  )
+    return null;
+
+  if (getMarkdownPath(pathname) !== null) return null;
+
+  if (STATIC_MD.has(pathname)) return NextResponse.next();
+
+  trackLLMPageview(req, { is404: true });
+  return markdownNotFoundResponse(pathname, { source: 'agent-404' });
+}
+
 export async function proxy(req) {
   try {
     const { pathname } = req.nextUrl;
@@ -193,6 +229,11 @@ export async function proxy(req) {
     // both follow the redirect.
     const skillRedirect = skillReferenceRedirectResponse(req, pathname);
     if (skillRedirect) return skillRedirect;
+
+    // Missing `.md` with no generated /md sibling → markdown 404 (real static
+    // files pass through). Covers skills, .well-known, and arbitrary paths.
+    const staticMd = staticMarkdownResponse(req, pathname);
+    if (staticMd) return staticMd;
 
     if (isAIAgentRequest(req)) {
       let agentHit404 = false;
@@ -350,5 +391,6 @@ export const config = {
     '/blog/:slug.md', // Individual blog post markdown
     '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*', // All markdown routes
     '/:path(docs|postgresql|guides|branching|programs|use-cases).md', // Top-level .md index URLs
+    '/(.*\\.md)', // Any .md anywhere: staticMarkdownResponse serves the file or a markdown 404
   ],
 };

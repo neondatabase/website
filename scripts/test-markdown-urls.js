@@ -1170,6 +1170,61 @@ function buildTests() {
     { note: 'retired skill reference .md → 308 to consolidated docs page' }
   );
 
+  // ── 13. Missing .md → markdown 404 (static manifest, src/proxy.js) ─────
+  // Any .md with no generated /md sibling that isn't a real static file returns a
+  // markdown 404 instead of the HTML 404 — site-wide, including out-of-namespace
+  // paths. Browser mode proves the invariant holds regardless of User-Agent.
+
+  const missingMdCases = [
+    ['out-of-namespace path', '/foo/bar-does-not-exist-qa.md'],
+    ['deep out-of-namespace path', '/foo/bar/baz-does-not-exist-qa.md'],
+    ['missing skill reference', '/docs/ai/skills/neon-postgres/references/does-not-exist-qa.md'],
+  ];
+
+  for (const [label, path] of missingMdCases) {
+    add(
+      'Missing .md → markdown 404',
+      path,
+      'browser',
+      [
+        (r) => expectStatus(r.status, 404),
+        (r) => expectContentType(r.contentType, 'text/markdown'),
+        (r) => expectBodyContains(r.body, 'Page Not Found'),
+        (r) => expectHeader(r.headers, 'x-content-source', 'agent-404'),
+        (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
+      ],
+      { note: label }
+    );
+  }
+
+  // Skill-discovery aliases have no physical file at the request path — they are
+  // served only by next.config rewrites to a real SKILL.md. The proxy must pass
+  // them through (not 404), or agent discovery breaks. Regression guard for the
+  // matcher broadening.
+  const skillDiscoveryAliases = [
+    ['/skill.md alias', '/skill.md'],
+    ['.well-known agent-skills alias', '/.well-known/agent-skills/neon-postgres/SKILL.md'],
+    ['docs .well-known alias', '/docs/.well-known/agent-skills/neon-postgres/SKILL.md'],
+  ];
+
+  for (const [label, path] of skillDiscoveryAliases) {
+    add(
+      'Skill-discovery alias (rewrite-backed)',
+      path,
+      'browser',
+      [
+        (r) => expectStatus(r.status, 200),
+        (r) => expectBodyNotEmpty(r.body),
+        // Must NOT be the markdown 404 body.
+        (r) =>
+          r.body.includes('# Page Not Found')
+            ? 'served the markdown 404 instead of SKILL.md'
+            : null,
+      ],
+      { spotCheck: (r) => expectBodyContains(r.body, 'neon', true), note: label }
+    );
+  }
+
   return tests;
 }
 

@@ -512,6 +512,46 @@ describe('Middleware - AI Agent Integration Tests', () => {
     );
   });
 
+  describe('Missing .md → markdown 404 (static manifest)', () => {
+    const nonAnalyticsFetches = () =>
+      global.fetch.mock.calls.filter(([url]) => url !== 'https://neonapi.io/t.js');
+
+    it.each([
+      ['out-of-namespace path', '/foo/bar.md'],
+      ['deep out-of-namespace path', '/foo/bar/baz.md'],
+      ['missing skill reference', '/docs/ai/skills/neon-postgres/references/gone.md'],
+    ])('returns a markdown 404 for a missing %s', async (_label, path) => {
+      const req = createMockRequest(path, 'Mozilla/5.0', 'text/html');
+
+      const response = await middleware(req);
+
+      expect(response.status).toBe(404);
+      expect(response.headers.get('content-type')).toContain('text/markdown');
+      expect(response.headers.get('x-content-source')).toBe('agent-404');
+      expect(response.headers.get('x-robots-tag')).toBe('noindex');
+      // No filesystem/markdown fetch — the manifest is a Set lookup.
+      expect(nonAnalyticsFetches()).toHaveLength(0);
+    });
+
+    it.each([
+      ['real static file', '/pricing.md'],
+      ['real skill SKILL.md', '/docs/ai/skills/neon-postgres/SKILL.md'],
+      // Rewrite-backed skill-discovery aliases: no physical file at the request
+      // path (next.config rewrites to a real SKILL.md), so the proxy must pass
+      // them through rather than 404, or agent discovery breaks.
+      ['/skill.md alias', '/skill.md'],
+      ['.well-known agent-skills alias', '/.well-known/agent-skills/neon-postgres/SKILL.md'],
+      ['docs .well-known alias', '/docs/.well-known/agent-skills/neon-postgres/SKILL.md'],
+    ])('passes through a %s with no fetch', async (_label, path) => {
+      const req = createMockRequest(path, 'Mozilla/5.0', 'text/html');
+
+      const response = await middleware(req);
+
+      expect(response.type).toBe('next');
+      expect(nonAnalyticsFetches()).toHaveLength(0);
+    });
+  });
+
   describe('Response headers validation', () => {
     it('should include correct cache headers for markdown responses', async () => {
       const req = createMockRequest('/docs/introduction', 'Claude/1.0', 'text/html');
