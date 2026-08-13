@@ -14,8 +14,10 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/neon-skills-landed-in-the-vercel-cli/cover.jpg
+  alt: >-
+    Neon skills landed in the Vercel CLI
 isFeatured: false
 seo:
   title: Neon skills landed in the Vercel CLI - Neon
@@ -24,7 +26,8 @@ seo:
   noindex: false
   ogTitle: Neon skills landed in the Vercel CLI - Neon
   ogDescription: One CLI command = Neon + agent skills on your Vercel project
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/neon-skills-landed-in-the-vercel-cli/cover.jpg
 ---
 
 [Vercel just gave their CLI a new trick](https://vercel.com/changelog/vercel-marketplace-agent-skills): when you install a Marketplace integration from the terminal, it also installs that provider's agent skills. A single command now provisions a Neon database on your Vercel project and hands your coding agent the instructions it needs to actually use it:
@@ -33,7 +36,9 @@ seo:
 vercel integration add neon
 ```
 
-**[ADD CLIP 1]**
+<figure>
+<video height="1938" width="3424" style={{ aspectRatio: '3424 / 1938' }} autoPlay muted loop playsInline src="https://cdn.neonapi.io/public/images/pages/blog/neon-skills-landed-in-the-vercel-cli/clip-1.mp4"></video>
+</figure>
 
 ## Provision Neon from the Vercel CLI
 
@@ -85,7 +90,9 @@ PS: If you've turned on Managed Better Auth on the production branch, preview de
 
 When you tell your agent to deploy Neon via Vercel, you’d want your agent to know Neon already and what to do with it. To make sure this is the case, now when you install a Marketplace integration from the CLI, it now also pulls that provider's agent skills from [skills.sh](https://skills.sh/neondatabase/agent-skills):
 
-**[ADD CLIP 2]**
+<figure>
+<video height="1580" width="3454" style={{ aspectRatio: '3454 / 1580' }} autoPlay muted loop playsInline src="https://cdn.neonapi.io/public/images/pages/blog/neon-skills-landed-in-the-vercel-cli/clip-2.mp4"></video>
+</figure>
 
 Instead of guessing and reinventing workflows, your agent will gets Neon's own guidance on how to work with Postgres and the rest of the primitives.
 
