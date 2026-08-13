@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 512" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="6.5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#9ca3af"/>
+    </marker>
+  </defs>
+  <style>
+    .compute { cursor: pointer; }
+    .compute .hint { opacity: 0; transition: opacity 0.15s ease-in; }
+    .compute:hover .hint { opacity: 1; }
+    .compute:hover .cbox { stroke-width: 2.5; }
+  </style>
+
+  <rect x="1" y="1" width="758" height="510" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="34" font-size="15" font-weight="700" fill="#111827">Two architectures for a Postgres backend</text>
+  <line x1="380" y1="54" x2="380" y2="488" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 4"/>
+
+  <!-- LEFT: Neon -->
+  <text x="34" y="68" font-size="11" font-weight="700" letter-spacing="0.5" fill="#047857">NEON: INDEPENDENT SERVICES, SERVERLESS CORE</text>
+
+  <rect x="130" y="78" width="120" height="26" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="190" y="95" font-size="12" fill="#374151" text-anchor="middle">Your app</text>
+
+  <line x1="190" y1="104" x2="190" y2="116" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <rect x="34" y="120" width="52" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="60" y="137" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">Auth</text>
+  <rect x="90" y="120" width="64" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="122" y="137" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">Data API</text>
+  <rect x="158" y="120" width="52" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="184" y="137" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">Funcs</text>
+  <rect x="214" y="120" width="58" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="243" y="137" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">Storage</text>
+  <rect x="276" y="120" width="62" height="26" rx="7" fill="#d1fae5" stroke="#10b981"/>
+  <text x="307" y="137" font-size="8.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#065f46" text-anchor="middle">AI Gateway</text>
+
+  <text x="190" y="162" font-size="9.5" font-style="italic" fill="#6b7280" text-anchor="middle">independent peers: each service works on its own</text>
+
+  <line x1="190" y1="170" x2="190" y2="182" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <g class="compute" id="cgroup">
+    <rect class="cbox" x="110" y="186" width="160" height="56" rx="10" fill="#ecfdf5" stroke="#10b981">
+      <animate attributeName="x" values="110;88;110" keyTimes="0;0.4;1" dur="1.8s" begin="cgroup.click" restart="whenNotActive"/>
+      <animate attributeName="width" values="160;204;160" keyTimes="0;0.4;1" dur="1.8s" begin="cgroup.click" restart="whenNotActive"/>
+      <animate attributeName="y" values="186;181;186" keyTimes="0;0.4;1" dur="1.8s" begin="cgroup.click" restart="whenNotActive"/>
+      <animate attributeName="height" values="56;66;56" keyTimes="0;0.4;1" dur="1.8s" begin="cgroup.click" restart="whenNotActive"/>
+    </rect>
+    <text x="190" y="208" font-size="12.5" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#047857" text-anchor="middle">Lakebase Postgres</text>
+    <text x="190" y="224" font-size="10" fill="#065f46" text-anchor="middle">autoscales, suspends when idle</text>
+    <text class="hint" x="300" y="200" font-size="9.5" font-style="italic" fill="#10b981">click to</text>
+    <text class="hint" x="300" y="212" font-size="9.5" font-style="italic" fill="#10b981">autoscale</text>
+  </g>
+
+  <line x1="172" y1="252" x2="172" y2="264" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="208" y1="264" x2="208" y2="252" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="228" y="262" font-size="9" font-style="italic" fill="#6b7280">separate layers</text>
+
+  <rect x="60" y="268" width="260" height="100" rx="10" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="190" y="288" font-size="12" font-weight="600" fill="#374151" text-anchor="middle">Storage layer</text>
+  <rect x="76" y="298" width="100" height="30" rx="8" fill="#d1fae5" stroke="#10b981"/>
+  <text x="126" y="317" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#065f46" text-anchor="middle">main data</text>
+  <rect x="184" y="298" width="120" height="30" rx="8" fill="none" stroke="#10b981" stroke-dasharray="4 3"/>
+  <text x="244" y="317" font-size="8.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#047857" text-anchor="middle">branch (copy-on-write)</text>
+  <text x="190" y="352" font-size="10" fill="#6b7280" text-anchor="middle">branches store only what diverges</text>
+
+  <text x="34" y="456" font-size="11.5" font-weight="600" fill="#374151">Services are integrated but not dependent on each other.</text>
+  <text x="34" y="474" font-size="11" fill="#6b7280">Separate compute and storage: autoscale, scale to zero, branch.</text>
+
+  <!-- RIGHT: Supabase -->
+  <text x="410" y="68" font-size="11" font-weight="700" letter-spacing="0.5" fill="#4338ca">SUPABASE: SERVICES BUILT ON THE DATABASE</text>
+
+  <rect x="510" y="78" width="120" height="26" rx="8" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="570" y="95" font-size="12" fill="#374151" text-anchor="middle">Your app</text>
+
+  <line x1="570" y1="104" x2="570" y2="114" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <rect x="470" y="118" width="200" height="24" rx="8" fill="#eef2ff" stroke="#6366f1"/>
+  <text x="570" y="134" font-size="11.5" font-weight="600" fill="#4338ca" text-anchor="middle">API gateway</text>
+
+  <line x1="570" y1="142" x2="570" y2="152" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <rect x="420" y="156" width="50" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="445" y="173" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">Auth</text>
+  <rect x="474" y="156" width="50" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="499" y="173" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">REST</text>
+  <rect x="528" y="156" width="64" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="560" y="173" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">Realtime</text>
+  <rect x="596" y="156" width="58" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="625" y="173" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">Storage</text>
+  <rect x="658" y="156" width="50" height="26" rx="7" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="683" y="173" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">Funcs</text>
+
+  <line x1="445" y1="182" x2="480" y2="222" stroke="#9ca3af" stroke-width="1.2" marker-end="url(#ar)"/>
+  <line x1="499" y1="182" x2="525" y2="222" stroke="#9ca3af" stroke-width="1.2" marker-end="url(#ar)"/>
+  <line x1="560" y1="182" x2="565" y2="222" stroke="#9ca3af" stroke-width="1.2" marker-end="url(#ar)"/>
+  <line x1="625" y1="182" x2="605" y2="222" stroke="#9ca3af" stroke-width="1.2" marker-end="url(#ar)"/>
+  <line x1="683" y1="182" x2="650" y2="222" stroke="#9ca3af" stroke-width="1.2" marker-end="url(#ar)"/>
+
+  <rect x="452" y="228" width="236" height="152" rx="12" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="466" y="246" font-size="9.5" font-weight="700" letter-spacing="0.5" fill="#6b7280">ONE SERVER</text>
+
+  <rect x="470" y="254" width="200" height="46" rx="10" fill="#eef2ff" stroke="#6366f1"/>
+  <text x="570" y="272" font-size="12" font-weight="600" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#4338ca" text-anchor="middle">Traditional Postgres</text>
+  <text x="570" y="288" font-size="9.5" fill="#4338ca" text-anchor="middle">fixed size, compute + disk coupled</text>
+
+  <line x1="570" y1="302" x2="570" y2="310" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <path d="M524,318 L524,344 A46,7 0 0 0 616,344 L616,318 Z" fill="#ffffff" stroke="#9ca3af"/>
+  <ellipse cx="570" cy="318" rx="46" ry="7" fill="#f3f4f6" stroke="#9ca3af"/>
+  <text x="570" y="338" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#374151" text-anchor="middle">SSD disk</text>
+
+  <text x="570" y="368" font-size="8.5" font-style="italic" fill="#6b7280" text-anchor="middle">holds: auth schema, RLS policies, storage metadata</text>
+
+  <rect x="500" y="392" width="140" height="26" rx="7" fill="none" stroke="#9ca3af" stroke-dasharray="4 3"/>
+  <text x="570" y="409" font-size="9" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" fill="#6b7280" text-anchor="middle">AI gateway: not offered</text>
+
+  <text x="410" y="456" font-size="11.5" font-weight="600" fill="#374151">Every service depends on the database.</text>
+  <text x="410" y="474" font-size="11" fill="#6b7280">Serverful: compute and disk are coupled in one instance.</text>
+</svg>

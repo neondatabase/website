@@ -1218,6 +1218,8 @@
                   slug: cli/env
                 - title: set-context
                   slug: cli/set-context
+                - title: open
+                  slug: cli/open
                 - title: me
                   slug: cli/me
                 - title: profile

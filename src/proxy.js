@@ -131,6 +131,45 @@ async function markdownMovedOr404Response(req, pathname, source) {
   );
 }
 
+// Retired neon-postgres skill reference files. The `references/` directory was
+// removed when the vendored skills were reconciled 1:1 with upstream (#5309),
+// and SKILL.md was updated (#4666) to link the consolidated docs pages instead.
+// Tools that cached the old SKILL.md still fetch these URLs, so 308 them to the
+// consolidated pages. Keyed by the reference basename (no `.md`); values are the
+// live targets.
+const SKILL_REFERENCE_BASE = '/docs/ai/skills/neon-postgres/references/';
+const SKILL_REFERENCE_REDIRECTS = {
+  'what-is-neon': '/docs/introduction/architecture-overview.md',
+  'getting-started': '/docs/get-started/connect-neon.md',
+  'connection-methods': '/docs/connect/choose-connection.md',
+  'neon-serverless': '/docs/serverless/serverless-driver.md',
+  'neon-js': '/docs/reference/javascript-sdk.md',
+  'neon-rest-api': '/docs/reference/api-reference.md',
+  'neon-typescript-sdk': '/docs/reference/typescript-sdk.md',
+  'neon-python-sdk': '/docs/reference/python-sdk.md',
+  'neon-auth': '/docs/auth/overview.md',
+  branching: '/docs/introduction/branching.md',
+  'neon-cli': '/docs/cli/install.md',
+  devtools: '/docs/reference/api.md',
+};
+
+// 308 for a retired skill reference URL, or null if it isn't one. Normalizes the
+// variants seen in logs: missing `.md` (`…/neon-auth`) and doubled (`…/neon-auth.md.md`).
+function skillReferenceRedirectResponse(req, pathname) {
+  if (!pathname.startsWith(SKILL_REFERENCE_BASE)) return null;
+
+  let basename = pathname.slice(SKILL_REFERENCE_BASE.length);
+  while (basename.endsWith('.md')) basename = basename.slice(0, -3);
+
+  const target = SKILL_REFERENCE_REDIRECTS[basename];
+  if (!target) return null;
+
+  const response = NextResponse.redirect(new URL(target, req.url), 308);
+  // Short TTL so cached redirects still re-enter the proxy and get LLM-tracked.
+  response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300');
+  return response;
+}
+
 export async function proxy(req) {
   try {
     const { pathname } = req.nextUrl;
@@ -186,6 +225,12 @@ export async function proxy(req) {
         });
       }
     }
+
+    // Retired neon-postgres skill reference URLs (PR #4666) → 308 to their
+    // consolidated docs pages. Runs before agent detection so browsers and tools
+    // both follow the redirect.
+    const skillRedirect = skillReferenceRedirectResponse(req, pathname);
+    if (skillRedirect) return skillRedirect;
 
     if (isAIAgentRequest(req)) {
       let agentHit404 = false;
