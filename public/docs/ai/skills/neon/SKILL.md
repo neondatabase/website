@@ -10,6 +10,8 @@ description: >-
   "AI gateway", "call an LLM", "logs", "branch logs", "query logs",
   "log export", "Loki", "Grafana", "observability", "telemetry", "postgres",
   "database", or "backend".
+metadata:
+  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon
 ---
 
 # Neon
