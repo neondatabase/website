@@ -32,18 +32,7 @@ Most teams still run one production database, a shared staging database, and som
 
 So teams compromise. They test migrations against partial or outdated data. They share environments and coordinate over Slack about who is running what. They avoid certain schema changes because the blast radius feels too wide. Past a few hundred gigabytes, copying stops being practical at all, and non-production databases stop resembling production.
 
-<QuoteBlocksWrapper>
-
-<QuoteBlock
-quote="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data."
-author={{
-  name: 'Jonathan Reyes',
-  company: 'Principal Engineer at Dispatch',
-}}
-link="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
-/>
-
-</QuoteBlocksWrapper>
+<QuoteBlock quote="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data." author="jonathan-reyes" role="Principal Engineer at Dispatch" link="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora" />
 
 Better scripts and faster restores only move the ceiling a little. The fix has to come from the database model itself.
 
@@ -53,19 +42,33 @@ A branch starts as a pointer. When you create one, Lakebase Postgres records a r
 
 Two things follow from that. Branch creation takes seconds no matter how large the parent is, because the amount of data copied is zero. And a branch stays cheap until it diverges, because both branches read the same underlying pages until one of them writes.
 
-This works because [Lakebase Postgres](/docs/postgres/overview) separates compute, the Postgres process where queries run, from storage. The storage engine is copy-on-write and versioned by WAL, so every change creates a new version instead of overwriting the old one, and many branches can reference the same data safely. Each branch also gets its own compute endpoint and connection string, scales independently, and scales to zero when idle. See the [architecture overview](/docs/introduction/architecture-overview) for how the pieces fit together.
+None of this is possible on a standard Postgres instance, and the reason is architectural. In a conventional setup, the Postgres process and its disk live together on one machine. The database is a single mutable filesystem, so the only way to get a second environment is to stand up a second machine with a full copy of the data on it.
+
+Lakebase Postgres splits those two halves apart. Compute is the stateless Postgres process where queries run. Storage is a separate, distributed engine that keeps data on shared object storage and writes copy-on-write, versioned by WAL, so every change creates a new version instead of overwriting the old one.
+
+![Standard database architecture with compute and storage on one machine, next to the lakebase architecture with stateless compute over shared copy-on-write storage](/use-cases/branching-workflows/lakebase-architecture.jpg)
+
+Once storage is shared and versioned, starting a new compute against an existing version of the data is cheap. That single property is what branches, instant restore, and fast restarts are all built on. A branch is just another compute pointed at a version of the storage that already exists.
 
 The practical result is that branches stop being precious. They are cheap enough to create, use, and delete constantly, by developers, by CI, and by agents.
 
-![The Mastering Database Branching Workflows guide on neon.com](/use-cases/branching-workflows/branching-guide.jpg)
-
-_A full walkthrough of the patterns below, with diagrams and setup steps: [Mastering database branching workflows](/branching)._
+<Admonition type="info" title="Go deeper on the architecture">
+- [Architecture overview](/docs/introduction/architecture-overview) - how compute, storage, and the WAL fit together
+- [Instantly copy TB-size datasets: the magic of copy-on-write](/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) - why branch time doesn't grow with database size
+- [Lakebase Postgres](/docs/postgres/overview) - autoscaling, scale to zero, and connection pooling on top of the same engine
+</Admonition>
 
 ## Branching workflows
 
 Most teams start with one of the patterns below and add others as they get comfortable creating branches on demand. They combine well, and they all rest on the same primitive.
 
+![The Mastering Database Branching Workflows guide on neon.com](/use-cases/branching-workflows/branching-guide.jpg)
+
+_A full walkthrough of every pattern below, with diagrams and setup steps: [Mastering database branching workflows](/branching)._
+
 ### One branch per developer
+
+![Two developer branches created from the production branch, each isolated from the other](/use-cases/branching-workflows/branch-per-developer.jpg)
 
 Each engineer gets their own branch, created from production or from an anonymized copy of production when PII is involved. Nobody steps on anyone else's schema changes, and every developer works against realistic data instead of a fixtures file.
 
@@ -73,20 +76,11 @@ Because branches don't duplicate storage and idle compute scales to zero, this s
 
 ### One branch per pull request
 
+![A staging branch created from production, with a pull request branch created from staging](/use-cases/branching-workflows/branch-per-pull-request.jpg)
+
 A branch is created when the pull request opens and deleted when it merges or closes. Each change gets a database to run its migrations against, so migration bugs surface in review rather than in production. PR branches are usually derived from staging when a staging branch exists, and from production otherwise.
 
-<QuoteBlocksWrapper>
-
-<QuoteBlock
-quote="Developers already face significant delays when working on a PR—running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away"
-author={{
-  name: 'Alex Co',
-  company: 'Head of Platform Engineering at Mindvalley',
-}}
-link="/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches"
-/>
-
-</QuoteBlocksWrapper>
+<QuoteBlock quote="Developers already face significant delays when working on a PR—running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away" author="alex-co" role="Head of Platform Engineering at Mindvalley" link="/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches" />
 
 ### One branch per preview
 
@@ -96,20 +90,11 @@ A preview environment is supposed to show what a change looks like before it shi
 
 Instead of reusing a shared test database and running destructive cleanup between runs, create a branch at the start of the pipeline, run migrations and tests against it, and delete it at the end. Every run starts from the same baseline, so results are deterministic and no run inherits leftover rows or schema drift from the last one. Because branches are instant, this holds up when pipelines run frequently or in parallel.
 
-<QuoteBlocksWrapper>
-
-<QuoteBlock
-quote="Branching saves us both money and developer time. We no longer have to set up an actual testing database instance and make sure the data is always synced with production. We now spin up an ephemeral branch when we need to and then tear it down via the create/delete Github Actions"
-author={{
-  name: 'Angelina Quach',
-  company: 'Software Engineer at Shepherd',
-}}
-link="/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd"
-/>
-
-</QuoteBlocksWrapper>
+<QuoteBlock quote="Branching saves us both money and developer time. We no longer have to set up an actual testing database instance and make sure the data is always synced with production. We now spin up an ephemeral branch when we need to and then tear it down via the create/delete Github Actions" author={{ name: 'Angelina Quach', company: 'Software Engineer at Shepherd' }} link="/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd" />
 
 ### Branches for restore and debugging
+
+![A restored production branch created from a point in history before an incident on the production branch](/use-cases/branching-workflows/branch-per-restore.jpg)
 
 The same mechanism works backwards. Lakebase Postgres retains history for each branch within a [history window](/docs/introduction/history-window), so you can create a branch from a moment in the past and get the exact schema and data as of then, without rolling production back.
 
@@ -119,7 +104,13 @@ That covers most of what teams need after something goes wrong:
 - **Debug a migration** - Branch from before the migration ran and compare state, or re-run it in isolation
 - **Audit a past state** - Inspect a historical point for an incident review or compliance check while production keeps serving traffic
 
-Delete restored branches when you're done so they don't sit in storage. See [instant restore](/docs/introduction/branch-restore) for the mechanics.
+Delete restored branches when you're done so they don't sit in storage.
+
+<Admonition type="info" title="Restore workflows in detail">
+- [Instant restore](/docs/introduction/branch-restore) - restore a branch to any point inside its history window
+- [Use branches to restore instantly](/branching/recovery-workflows) - recovery, migration debugging, and audit patterns
+- [I dropped a table in production, now what?](/blog/recover-production-database) - a worked example of the recovery flow
+</Admonition>
 
 ## Automating branch creation and cleanup
 
@@ -132,33 +123,11 @@ Branching becomes a workflow once nobody has to think about it. Every operation 
 
 Cleanup matters more than it sounds. Branches left running for weeks eventually fall outside the history window and start contributing to storage. Automating deletion keeps both the branch list and the bill predictable.
 
-<QuoteBlocksWrapper>
-
-<QuoteBlock
-quote="Database branching is the best quality-of-life improvement to my tech stack that I can think of in recent years. Second to maybe only Copilot"
-author={{
-  name: 'Miguel Hernandez',
-  company: 'Backend Tech Lead at Neo.Tax',
-}}
-link="/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle"
-/>
-
-</QuoteBlocksWrapper>
+<QuoteBlock quote="Database branching is the best quality-of-life improvement to my tech stack that I can think of in recent years. Second to maybe only Copilot" author={{ name: 'Miguel Hernandez', company: 'Backend Tech Lead at Neo.Tax' }} link="/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle" />
 
 ## Teams using branching workflows
 
-<QuoteBlocksWrapper>
-
-<QuoteBlock
-quote="Neon’s branching gave us the last missing piece in our RISE (Robust Isolated Staging Environment): true database isolation. The services that touched schema changes or write-heavy paths could never share a database safely. Now every sandbox gets its own isolated Postgres DB whenever required"
-author={{
-  name: 'Joe Horsnell',
-  company: 'Principal Platform Engineer at Bitso',
-}}
-link="/blog/bitso-branching-workflow"
-/>
-
-</QuoteBlocksWrapper>
+<QuoteBlock quote="Neon’s branching gave us the last missing piece in our RISE (Robust Isolated Staging Environment): true database isolation. The services that touched schema changes or write-heavy paths could never share a database safely. Now every sandbox gets its own isolated Postgres DB whenever required" author="joe-horsnell" role="Principal Platform Engineer at Bitso" link="/blog/bitso-branching-workflow" />
 
 - **[Inside Bitso's branch-based workflow](/blog/bitso-branching-workflow)** - Hundreds of developers and microservices, with an isolated Postgres database behind every sandbox
 - **[How Mindvalley minimizes time-to-launch with Neon branches](/blog/how-mindvalley-minimizes-time-to-launch-with-neon-branches)** - Cutting the wait between opening a pull request and having an environment to test it in
@@ -169,7 +138,10 @@ link="/blog/bitso-branching-workflow"
 - **[ketteQ uses Neon branching for scenario analysis](/blog/database-branching-for-postgres-with-neon)** - Testing hundreds of scenarios against production data with no risk to it
 - **[From Heroku to Neon: the dev.to story](/blog/dev-from-heroku-to-neon)** - Serverless Postgres behind a platform used by millions of developers
 
-More of these are collected under [fast-moving teams](/case-studies#fast-moving-teams) in the case studies.
+<Admonition type="info" title="More teams building this way">
+- [Fast-moving teams](/case-studies#fast-moving-teams) - the full set of case studies behind these workflows
+- [Practical guide to database branching](/blog/practical-guide-to-database-branching) - the common patterns collected in one place
+</Admonition>
 
 ## Branching the rest of the backend
 
