@@ -60,7 +60,7 @@ What's included when you deploy Neon:
 
 ## Lakebase Postgres
 
-<video autoPlay playsInline muted loop width="260" height="260">
+<video autoPlay playsInline muted loop width="260" height="260" style={{ marginLeft: 0, marginRight: 'auto' }}>
   <source src="/videos/pages/home/hero/postgres-database.webm?updated=20260709" type="video/webm" />
   <source src="/videos/pages/home/hero/postgres-database.mp4?updated=20260709" type="video/mp4" />
 </video>
@@ -81,7 +81,7 @@ Use any Postgres driver, ORM, or framework you already know. When you only need 
 
 ## Managed Better Auth
 
-<video autoPlay playsInline muted loop width="260" height="198">
+<video autoPlay playsInline muted loop width="260" height="198" style={{ marginLeft: 0, marginRight: 'auto' }}>
   <source src="/videos/pages/home/hero/authentication.webm?updated=20260709" type="video/webm" />
   <source src="/videos/pages/home/hero/authentication.mp4?updated=20260709" type="video/mp4" />
 </video>
@@ -94,7 +94,7 @@ Use any Postgres driver, ORM, or framework you already know. When you only need 
 
 ## Neon Object Storage
 
-<video autoPlay playsInline muted loop width="230" height="313">
+<video autoPlay playsInline muted loop width="230" height="313" style={{ marginLeft: 0, marginRight: 'auto' }}>
   <source src="/videos/pages/home/hero/storage.webm?updated=20260709" type="video/webm" />
   <source src="/videos/pages/home/hero/storage.mp4?updated=20260709" type="video/mp4" />
 </video>
@@ -116,7 +116,7 @@ Declare buckets in [`neon.ts`](/docs/reference/neon-ts), run `neon deploy`, and 
 
 ## Neon Functions
 
-<video autoPlay playsInline muted loop width="260" height="156">
+<video autoPlay playsInline muted loop width="260" height="156" style={{ marginLeft: 0, marginRight: 'auto' }}>
   <source src="/videos/pages/home/hero/compute.webm?updated=20260709" type="video/webm" />
   <source src="/videos/pages/home/hero/compute.mp4?updated=20260709" type="video/mp4" />
 </video>
@@ -140,7 +140,7 @@ Declare functions in [`neon.ts`](/docs/reference/neon-ts) and deploy with `neon 
 
 ## Neon AI Gateway
 
-<video autoPlay playsInline muted loop width="260" height="115">
+<video autoPlay playsInline muted loop width="260" height="115" style={{ marginLeft: 0, marginRight: 'auto' }}>
   <source src="/videos/pages/home/hero/ai-gateway.webm?updated=20260709" type="video/webm" />
   <source src="/videos/pages/home/hero/ai-gateway.mp4?updated=20260709" type="video/mp4" />
 </video>
