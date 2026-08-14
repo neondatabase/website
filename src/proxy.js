@@ -54,11 +54,55 @@ function trackLLMPageview(req, { is404 = false } = {}) {
   };
 
   // Fire and forget — do not await to avoid blocking the response
+  // [LLMPROBE] throwaway debug: log beacon outcome instead of swallowing it.
+  // CAVEAT: this .then/.catch runs AFTER the response is returned. Without
+  // event.waitUntil() (not plumbed into proxy(req)), the runtime may tear the
+  // invocation down before it fires, so LLMBEACON lines can be dropped. Treat
+  // PRESENCE of an LLMBEACON error as signal; treat ABSENCE as inconclusive
+  // (not proof the beacon succeeded).
+  const beaconPath = req.nextUrl.pathname; // pathname only — never the query string
   fetch('https://neonapi.io/t.js', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'User-Agent': `LLMAGENT: ${userAgent}` },
     body: JSON.stringify(payload),
-  }).catch(() => {});
+  })
+    .then((r) =>
+      console.log(
+        JSON.stringify({ tag: 'LLMBEACON', ok: r.ok, status: r.status, path: beaconPath })
+      )
+    )
+    .catch((e) =>
+      console.log(JSON.stringify({ tag: 'LLMBEACON', error: e.message, path: beaconPath }))
+    );
+}
+
+// [LLMPROBE] throwaway debug — remove after investigation.
+// One structured log line per middleware run. A request served from EDGE CACHE
+// produces NO line (middleware didn't run) — that absence is the signal.
+function debugLog(req, { branch, status, is404 = null, tracked }) {
+  try {
+    console.log(
+      JSON.stringify({
+        tag: 'LLMPROBE',
+        ts: new Date().toISOString(),
+        path: req.nextUrl.pathname,
+        isMd: req.nextUrl.pathname.endsWith('.md'),
+        // The April rename (#4761) created ~41 redirects across many postgresql
+        // subsections (tutorial, administration, aggregate-functions, ...), all of
+        // the shape /postgresql/.../postgresql-*. Match them all, not just tutorial.
+        oldSlug: /\/postgresql\/(?:[^/]+\/)*postgresql-/.test(req.nextUrl.pathname),
+        ua: (req.headers.get('user-agent') || '').slice(0, 120),
+        accept: (req.headers.get('accept') || '').slice(0, 60),
+        agent: isAIAgentRequest(req),
+        branch,
+        status,
+        is404, // exact value passed to trackLLMPageview (null = not tracked)
+        tracked,
+      })
+    );
+  } catch (_e) {
+    // never break the request over logging
+  }
 }
 
 const BLOG_CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
@@ -109,6 +153,9 @@ async function markdownRedirectResponse(req, pathname) {
   const response = NextResponse.redirect(new URL(target, req.url), 308);
   // Short TTL so cached 308s still re-enter the proxy and get tracked.
   response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300');
+  // [LLMPROBE] throwaway debug instrumentation — remove after investigation.
+  response.headers.set('x-llm-debug', 'redirect-308;308;tracked=false');
+  debugLog(req, { branch: 'redirect-308', status: 308, is404: null, tracked: false });
   return response;
 }
 
@@ -243,6 +290,7 @@ export async function proxy(req) {
 
           if (response.ok) {
             trackLLMPageview(req);
+            debugLog(req, { branch: 'agent-md', status: 200, is404: false, tracked: true });
             const markdown = await response.text();
             return applyDocHeaders(
               new NextResponse(markdown, {
@@ -270,6 +318,15 @@ export async function proxy(req) {
       }
 
       trackLLMPageview(req, { is404: agentHit404 });
+      // Non-404 here means no markdownPath, a 5xx from the md fetch, or a thrown
+      // fetch — NOT a 200 (the 200 case already returned above). Report status as
+      // null in that case rather than fabricating 200.
+      debugLog(req, {
+        branch: agentHit404 ? 'agent-404' : 'agent-nomatch',
+        status: agentHit404 ? 404 : null,
+        is404: agentHit404,
+        tracked: true,
+      });
 
       if (agentHit404) {
         return markdownMovedOr404Response(req, pathname, 'agent-404');
@@ -307,6 +364,12 @@ export async function proxy(req) {
             const isMarkdown404 = response.status === 404;
             if (response.ok || isMarkdown404) {
               trackLLMPageview(req, { is404: isMarkdown404 });
+              debugLog(req, {
+                branch: isMarkdown404 ? 'md-404' : 'md-content',
+                status: isMarkdown404 ? 404 : 200,
+                is404: isMarkdown404,
+                tracked: true,
+              });
             }
 
             if (response.ok) {
