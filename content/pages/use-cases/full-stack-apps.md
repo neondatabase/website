@@ -14,12 +14,12 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 <Admonition type="note" title="Summary">
 Neon is a complete set of cloud backend primitives built around Lakebase Postgres. You can deploy the database, auth, object storage, serverless functions, and model access from one project, then wire it into your app with your editor or a coding agent.
 
-- **Lakebase Postgres** - Serverless Postgres with autoscaling, branching, and scale to zero ([docs](/docs/postgres/overview))
-- **Managed Better Auth** - Users and sessions stored in Postgres, branching with your data ([docs](/docs/auth/overview))
-- **Neon Object Storage** - S3-compatible storage that branches with your project ([docs](/docs/storage/overview))
-- **Neon Functions** - Long-running serverless compute on the same branch as your database ([docs](/docs/compute/functions/overview))
-- **Neon AI Gateway** - One credential for models across providers ([docs](/docs/ai-gateway/overview))
-- **Neon Data API** - PostgREST-compatible REST access to every branch ([docs](/docs/data-api/get-started))
+- **[Lakebase Postgres](/docs/postgres/overview)** - Serverless Postgres with autoscaling, branching, and scale to zero
+- **[Managed Better Auth](/docs/auth/overview)** - Users and sessions stored in Postgres, branching with your data
+- **[Neon Object Storage](/docs/storage/overview)** - S3-compatible storage that branches with your project
+- **[Neon Functions](/docs/compute/functions/overview)** - Long-running serverless compute on the same branch as your database
+- **[Neon AI Gateway](/docs/ai-gateway/overview)** - One credential for models across providers
+- **[Neon Data API](/docs/data-api/get-started)** - PostgREST-compatible REST access to every branch
 
 Run `npx neon@latest init` from your project root to connect your agent, then browse runnable templates at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
 </Admonition>
