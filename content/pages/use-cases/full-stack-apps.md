@@ -24,17 +24,35 @@ Neon is a complete set of cloud backend primitives built around Lakebase Postgre
 Run `npx neon@latest init` from your project root to connect your agent, then browse runnable templates at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
 </Admonition>
 
-## Build the backend, not just the database
+![Agent-friendly database lifecycle with Neon](/use-cases/fast-dev-workflows/agent-database-lifecycle-workflow.png)
 
-Most apps need more than a connection string. You need users, files, APIs, and often model calls. Until recently, that meant stitching together a database host, an auth vendor, object storage, a functions provider, and separate AI accounts.
+## Build with your agent or editor
 
-Neon brings those pieces into one backend you can provision from a single project. Lakebase Postgres stays at the center. Auth, storage, functions, and model access branch with it, so preview environments get isolated users, files, and endpoints without extra setup.
+Agents and AI-native editors are a first-class way to work with Neon. One command connects your project to Neon, installs agent skills, and configures the Neon MCP server for Cursor, VS Code, Claude Code, and other supported clients.
 
-![Neon backend architecture for embedded Postgres](/images/pages/platforms/architecture.jpg)
+```bash
+npx neon@latest init
+```
+
+After `init`, restart your editor and ask your agent to get started with Neon. The flow authenticates via OAuth, writes MCP config, and installs the `neon-postgres` skill so your agent can provision projects, run SQL, enable auth, and deploy functions. See [`neon init`](/docs/cli/init) for what gets created.
+
+### Runnable templates
+
+Browse working apps at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). Each template is a complete project you can read on GitHub or scaffold locally:
+
+```bash
+neon bootstrap --template hono
+neon bootstrap --template ai-sdk
+neon bootstrap --template realtime-chat
+```
+
+Templates cover REST APIs, image-generation agents, realtime chat, MCP servers, and more. See [Neon Functions starter templates](/docs/compute/functions/overview#starter-templates) for the full list.
+
+## A complete set of backend primitives built around Postgres
+
+Fully functional apps need more than a connection string - you'll need to handle users, files, APIs, and often model calls. Neon brings those pieces into one backend you can provision from a single project. Lakebase Postgres, our serverless database, stays at the center; auth, storage, functions, and model access branch with it - all your dev environments get isolated users, files, and endpoints without extra setup.
 
 This page is for developers building apps: you write the product, and your editor or agent wires the backend. If you are building an agent product that provisions Neon for your own end users, see [Neon for AI Agent Platforms](/use-cases/ai-agents) and [Embedded Postgres for Platforms](/platforms).
-
-<QuoteBlock quote="Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 
 ## Lakebase Postgres
 
@@ -89,41 +107,10 @@ The [Neon Data API](/docs/data-api/get-started) exposes each database branch as 
 
 Every branch has its own endpoint, which fits preview deployments and agent-generated apps that need quick CRUD access over HTTPS.
 
-## Build with your agent or editor
-
-Agents and AI-native editors are a first-class way to work with Neon. One command connects your project to Neon, installs agent skills, and configures the Neon MCP server for Cursor, VS Code, Claude Code, and other supported clients.
-
-```bash
-npx neon@latest init
-```
-
-After `init`, restart your editor and ask your agent to get started with Neon. The flow authenticates via OAuth, writes MCP config, and installs the `neon-postgres` skill so your agent can provision projects, run SQL, enable auth, and deploy functions. See [`neon init`](/docs/cli/init) for what gets created.
-
-![Agent-friendly database lifecycle with Neon](/use-cases/fast-dev-workflows/agent-database-lifecycle-workflow.png)
-
-### Runnable templates
-
-Browse working apps at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/). Each template is a complete project you can read on GitHub or scaffold locally:
-
-```bash
-neon bootstrap --template hono
-neon bootstrap --template ai-sdk
-neon bootstrap --template realtime-chat
-```
-
-Templates cover REST APIs, image-generation agents, realtime chat, MCP servers, and more. See [Neon Functions starter templates](/docs/compute/functions/overview#starter-templates) for the full list.
-
-### Case studies
-
-Teams already ship full backends on Neon this way:
-
-- [Databutton](https://neon.com/blog/databutton-neon-integration) - Agents build and debug the full stack on Neon
-- [Anything](https://neon.com/blog/from-idea-to-full-stack-app-in-one-conversation-with-create) - From idea to full-stack app in one conversation
-- [Dyad](https://neon.com/blog/dyad-brings-postgres-to-local-ai-app-building-powered-by-neon) - Local AI app building with a Neon backend
 
 ## Start on the Free plan
 
-You can build and test on the [Neon Free plan](/docs/introduction/plans) before you upgrade:
+You can start building on the [Neon Free plan](/docs/introduction/plans). It comes with enough resources to support fully working apps, not just experiments:
 
 - **$0/month** with no credit card required
 - **100 projects** and **100 CU-hours per project** (enough to run a 0.25 CU compute for 400 active hours)
@@ -131,6 +118,5 @@ You can build and test on the [Neon Free plan](/docs/introduction/plans) before 
 - **Autoscaling** up to 2 CU (≈8 GB RAM) with scale to zero after 5 minutes of inactivity
 - **Managed Better Auth** up to 60,000 MAU (beta)
 
-Object Storage and Functions are free to use during beta, subject to usage limits. AI Gateway requires a paid plan. When you outgrow Free, upgrade to Launch or Scale and pay only for what you use.
 
 <CTA title="Start building" description="Create a project on the Free plan, run npx neon@latest init, and deploy your first backend primitive in minutes." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" linkText="Browse templates" linkUrl="https://build-on-neon.vercel.app/" />
