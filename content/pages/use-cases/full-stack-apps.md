@@ -60,6 +60,11 @@ What's included when you deploy Neon:
 
 ## Lakebase Postgres
 
+<video autoPlay playsInline muted loop width="260" height="260">
+  <source src="/videos/pages/home/hero/postgres-database.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/postgres-database.mp4?updated=20260709" type="video/mp4" />
+</video>
+
 Every Neon backend starts with [Lakebase Postgres](/docs/postgres/overview): fully managed Postgres on the [lakebase architecture](/docs/introduction/architecture-overview), with compute and storage separated. Compute is where queries run. Storage is where data lives, on a copy-on-write engine versioned by WAL, so a branch can point at a particular page without duplicating the dataset underneath.
 
 That separation is what makes the rest of the Neon experience possible. You do not size an instance up front. You do not copy a database to get an isolated environment. You create a branch in about a second, and the child starts as a pointer into the same pages as its parent until one of them writes.
@@ -72,14 +77,14 @@ That separation is what makes the rest of the Neon experience possible. You do n
 
 Use any Postgres driver, ORM, or framework you already know. When you only need the database, start here and add other primitives as the app grows.
 
-<video autoPlay playsInline muted loop width="320" height="320">
-  <source src="/videos/pages/home/hero/postgres-database.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/postgres-database.mp4?updated=20260709" type="video/mp4" />
-</video>
-
 <MegaLink tag="Separated compute and storage" title="How the lakebase architecture makes Postgres branchable, serverless, and instant to restore" url="/docs/introduction/architecture-overview" />
 
 ## Managed Better Auth
+
+<video autoPlay playsInline muted loop width="260" height="198">
+  <source src="/videos/pages/home/hero/authentication.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/authentication.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 [Managed Better Auth](/docs/auth/overview) stores users, sessions, and OAuth configuration in your Postgres database under the `neon_auth` schema. Auth state branches with your data, so preview branches get isolated sign-up and login flows.
 
@@ -87,12 +92,12 @@ Use any Postgres driver, ORM, or framework you already know. When you only need 
 - JWTs that work with the Neon Data API and Row Level Security
 - Setup from the Console, `npx neon@latest init`, or the Neon MCP server
 
-<video autoPlay playsInline muted loop width="320" height="244">
-  <source src="/videos/pages/home/hero/authentication.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/authentication.mp4?updated=20260709" type="video/mp4" />
-</video>
-
 ## Neon Object Storage
+
+<video autoPlay playsInline muted loop width="230" height="313">
+  <source src="/videos/pages/home/hero/storage.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/storage.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 Apps need files: uploads, attachments, generated assets. Wired to a separate bucket vendor, those files sit outside your database environments. Preview branches point at production objects, or you invent path conventions and cleanup jobs to keep things apart.
 
@@ -107,14 +112,14 @@ You implement the real S3 wire protocol. Point the AWS SDK, boto3, the AWS CLI, 
 
 Declare buckets in [`neon.ts`](/docs/reference/neon-ts), run `neon deploy`, and Neon provisions them on the linked branch and writes the AWS credentials into `.env.local`.
 
-<video autoPlay playsInline muted loop width="280" height="381">
-  <source src="/videos/pages/home/hero/storage.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/storage.mp4?updated=20260709" type="video/mp4" />
-</video>
-
 <MegaLink tag="Keep reading" title="How we built Neon Object Storage: S3-compatible buckets with the same branch semantics as your database" url="https://neon.com/blog/building-neon-object-storage" />
 
 ## Neon Functions
+
+<video autoPlay playsInline muted loop width="260" height="156">
+  <source src="/videos/pages/home/hero/compute.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/compute.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 Most serverless handlers talk to the database over the public internet. Every query pays a cross-network round trip, you wire secrets yourself, and runtimes often cap at a few seconds, so an agent mid-tool-loop or a WebSocket never gets a fair shot.
 
@@ -131,14 +136,14 @@ Functions follow the same `branch_id` as the rest of the stack. Deploy onto `mai
 
 Declare functions in [`neon.ts`](/docs/reference/neon-ts) and deploy with `neon deploy`. Hono is the recommended framework.
 
-<video autoPlay playsInline muted loop width="320" height="193">
-  <source src="/videos/pages/home/hero/compute.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/compute.mp4?updated=20260709" type="video/mp4" />
-</video>
-
 <MegaLink tag="Keep reading" title="Neon Functions: long-running Node.js handlers that live on your branch beside Lakebase Postgres" url="https://neon.com/blog/neon-functions-backend-logic-next-to-your-data" />
 
 ## Neon AI Gateway
+
+<video autoPlay playsInline muted loop width="260" height="115">
+  <source src="/videos/pages/home/hero/ai-gateway.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/ai-gateway.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 Most apps end up calling a model somewhere. Wired directly, that means a separate account, key, and invoice for every lab, and a new integration every time a better model ships.
 
@@ -150,11 +155,6 @@ The gateway runs on the Databricks AI infrastructure that already serves [more t
 - **No markup** - Neon charges the same per-token rate as the model provider, with no margin on top ([pricing](/docs/ai-gateway/overview#pricing))
 - **Inference that branches with your app** - Each branch gets its own gateway endpoint, so model calls from a preview branch stay isolated from production
 - **Wired into Functions automatically** - Gateway credentials are injected into [Neon Functions](/docs/compute/functions/overview), so a model-backed handler runs next to Postgres and Object Storage on the same branch
-
-<video autoPlay playsInline muted loop width="320" height="141">
-  <source src="/videos/pages/home/hero/ai-gateway.webm?updated=20260709" type="video/webm" />
-  <source src="/videos/pages/home/hero/ai-gateway.mp4?updated=20260709" type="video/mp4" />
-</video>
 
 ## Neon Data API
 
@@ -171,6 +171,5 @@ You can start building on the [Neon Free plan](/docs/introduction/plans). It com
 - **0.5 GB storage per project** and **5 GB of public network transfer per project per month**
 - **Autoscaling** up to 2 CU (≈8 GB RAM) with scale to zero after 5 minutes of inactivity
 - **Managed Better Auth** up to 60,000 MAU (beta)
-
 
 <CTA title="Start building" description="Create a project on the Free plan, run npx neon@latest init, and deploy your first backend primitive in minutes." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" linkText="Browse templates" linkUrl="https://build-on-neon.vercel.app/" />
