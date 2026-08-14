@@ -11,6 +11,8 @@ updatedOn: '2026-08-14T13:30:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
+![Running npx neon init in a code editor to add Neon skills and the Neon MCP server](/use-cases/full-stack-apps/neon-init.png)
+
 <Admonition type="note" title="Summary">
 Neon is a complete set of cloud backend primitives built around Lakebase Postgres. You can deploy the database, auth, object storage, serverless functions, and model access from one project, then wire it into your app with your editor or a coding agent.
 
@@ -52,7 +54,9 @@ Templates cover REST APIs, image-generation agents, realtime chat, MCP servers, 
 
 Fully functional apps need more than a connection string - you'll need to handle users, files, APIs, and often model calls. Neon brings those pieces into one backend you can provision from a single project. Lakebase Postgres, our serverless database, stays at the center; auth, storage, functions, and model access branch with it - all your dev environments get isolated users, files, and endpoints without extra setup.
 
+<Admonition type="info" title="Who this page is for">
 This page is for developers building apps: you write the product, and your editor or agent wires the backend. If you are building an agent product that provisions Neon for your own end users, see [Neon for AI Agent Platforms](/use-cases/ai-agents) and [Embedded Postgres for Platforms](/platforms).
+</Admonition>
 
 What's included when you deploy Neon:
 
@@ -91,7 +95,20 @@ Every Neon backend starts with [Lakebase Postgres](/docs/postgres/overview) - fu
 
 ## Neon AI Gateway
 
-[Neon AI Gateway](/docs/ai-gateway/overview) routes model calls through one Neon credential. Standard OpenAI-compatible SDKs work with a URL change. Each branch gets its own gateway endpoint.
+Most apps end up calling a model somewhere. Wired directly, that means a separate account, key, and invoice for every lab, and a new integration every time a better model ships.
+
+[Neon AI Gateway](/docs/ai-gateway/overview) collapses that into one credential and one bill. A single endpoint serves frontier and open-weight models from OpenAI, Google, Meta, Databricks, and Alibaba, and standard SDKs work with a URL change: point the OpenAI SDK or `google-genai` at your branch endpoint and leave the rest of your code alone. Native provider routes are still there when you need provider-specific features like reasoning modes and prompt caching, and streaming works on every endpoint.
+
+The gateway runs on the Databricks AI infrastructure that already serves [more than 145 trillion tokens a month](https://neon.com/blog/neon-backend-is-beta), hardened by enterprise requirements: day-0 coverage of new models, high availability, deep metrics, logging, and granular cost controls.
+
+- **One credential, one bill** - No separate accounts, keys, or invoices per provider
+- **No markup** - Neon charges the same per-token rate as the model provider, with no margin on top ([pricing](/docs/ai-gateway/overview#pricing))
+- **Inference that branches with your app** - Each branch gets its own gateway endpoint, so model calls from a preview branch stay isolated from production
+- **Wired into Functions automatically** - Gateway credentials are injected into [Neon Functions](/docs/compute/functions/overview), so a model-backed handler runs next to Postgres and Object Storage on the same branch
+
+AI Gateway is in beta on the Launch and Scale plans, and inference is free while the beta runs.
+
+<MegaLink tag="One API, one bill" title="How the Neon backend fits together: Object Storage, Functions, and AI Gateway in beta" url="https://neon.com/blog/neon-backend-is-beta" />
 
 ## Neon Data API
 
