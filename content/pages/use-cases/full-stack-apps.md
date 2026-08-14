@@ -26,8 +26,6 @@ Neon is a complete set of cloud backend primitives built around Lakebase Postgre
 Run `npx neon@latest init` from your project root to connect your agent, then browse runnable templates at [build-on-neon.vercel.app](https://build-on-neon.vercel.app/).
 </Admonition>
 
-![Agent-friendly database lifecycle with Neon](/use-cases/fast-dev-workflows/agent-database-lifecycle-workflow.png)
-
 ## Ask your agent to deploy a full backend
 
 Agents and AI-native editors are a first-class way to work with Neon. One command connects your project to Neon, installs agent skills, and configures the Neon MCP server for Cursor, VS Code, Claude Code, and other supported clients.
@@ -105,10 +103,6 @@ The gateway runs on the Databricks AI infrastructure that already serves [more t
 - **No markup** - Neon charges the same per-token rate as the model provider, with no margin on top ([pricing](/docs/ai-gateway/overview#pricing))
 - **Inference that branches with your app** - Each branch gets its own gateway endpoint, so model calls from a preview branch stay isolated from production
 - **Wired into Functions automatically** - Gateway credentials are injected into [Neon Functions](/docs/compute/functions/overview), so a model-backed handler runs next to Postgres and Object Storage on the same branch
-
-AI Gateway is in beta on the Launch and Scale plans, and inference is free while the beta runs.
-
-<MegaLink tag="One API, one bill" title="How the Neon backend fits together: Object Storage, Functions, and AI Gateway in beta" url="https://neon.com/blog/neon-backend-is-beta" />
 
 ## Neon Data API
 
