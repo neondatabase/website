@@ -113,6 +113,8 @@ Official Neon documentation written and maintained by the Neon docs team. All pa
 
 Community and third-party contributed guides showing how to use Neon with other technologies, frameworks, and services. These go through a lighter review process than core docs. Guides do **not** require a `navigation.yaml` entry — they are surfaced through their own index. Follow the same frontmatter and style conventions as `content/docs/` unless a guide contributor has a specific format.
 
+Optional guide-only field: `canonical` — an absolute `http://` or `https://` URL. When set, `<link rel="canonical">` points there instead of the Neon guide URL. Use it when a partner published the same guide and should receive the search ranking. Invalid values fail the build.
+
 ### Updating components
 
 1. Find the component in `src/components/`

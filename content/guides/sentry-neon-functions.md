@@ -5,6 +5,7 @@ author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-05T00:00:00.000Z'
 updatedOn: '2026-08-13T14:46:11.074Z'
+canonical: 'https://sentry.io/cookbook/monitor-neon-functions-sentry/'
 ---
 
 [Neon Functions](/docs/compute/functions/overview) let you ship server-side code next to your Postgres. They also come with basic visibility out of the box: every deployed function streams its standard output and error to the [Monitoring page in the Neon Console](/docs/compute/functions/logs), with a platform-emitted `invoke begin` / `invoke end` line around each request. That's great for raw logs and spot checks.
