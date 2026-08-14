@@ -1,21 +1,21 @@
 ---
-title: Getting started with ElectricSQL and Neon
-subtitle: A step-by-step guide to integrating ElectricSQL with Lakebase Postgres
+title: Getting started with Electric and Neon
+subtitle: A step-by-step guide to integrating Electric with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-28T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-14T09:39:29.175Z'
 ---
 
-This guide demonstrates how to integrate [ElectricSQL](https://electric-sql.com/) with Lakebase Postgres. ElectricSQL is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.
+This guide demonstrates how to integrate [Electric](https://electric.ax/) with Lakebase Postgres. Electric is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.
 
-ElectricSQL acts as a read-path sync engine, efficiently replicating partial subsets of your Postgres data to client applications. These data subsets are defined using [Shapes](https://electric-sql.com/docs/guides/shapes), which are similar to live queries. Writes are handled by your application's existing API and backend logic, ensuring ElectricSQL integrates smoothly with your current stack.
+Electric acts as a read-path sync engine, efficiently replicating partial subsets of your Postgres data to client applications. These data subsets are defined using [Shapes](https://electric.ax/docs/guides/shapes), which are similar to live queries. Writes are handled by your application's existing API and backend logic, ensuring Electric integrates smoothly with your current stack.
 
-This guide provides a step-by-step walkthrough of setting up ElectricSQL with Lakebase Postgres. You will learn how to:
+This guide provides a step-by-step walkthrough of setting up Electric with Lakebase Postgres. You will learn how to:
 
-- Prepare your Lakebase Postgres database for ElectricSQL integration.
+- Prepare your Lakebase Postgres database for Electric integration.
 - Configure and run Electric using Docker.
-- Set up a simple React application that subscribes to data changes on Lakebase Postgres via ElectricSQL.
+- Set up a simple React application that subscribes to data changes on Lakebase Postgres via Electric.
 - Test the real-time data synchronization.
 
 ## Prerequisites
@@ -28,10 +28,10 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
 ## Setting up Neon Database
 
-ElectricSQL requires a Postgres database with logical replication enabled. You'll configure your Neon project accordingly.
+Electric requires a Postgres database with logical replication enabled. You'll configure your Neon project accordingly.
 
 1.  **Create a Neon Project:** If you haven't already, create a new Neon project. You can use the [Neon Console](https://console.neon.tech).
-2.  **Enable Logical Replication:** ElectricSQL uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
+2.  **Enable Logical Replication:** Electric uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
     - Navigate to your Neon Project in the [Neon Console](https://console.neon.tech/).
     - Open the **Settings** menu.
     - Click on **Logical Replication**.
@@ -52,7 +52,7 @@ ElectricSQL requires a Postgres database with logical replication enabled. You'l
 
 ## Setting up Electric
 
-With your Neon database ready, you can now set up Electric to connect to it. We'll use Docker to run Electric. Run the following commands in your terminal to create a new directory for your ElectricSQL project and navigate into it:
+With your Neon database ready, you can now set up Electric to connect to it. We'll use Docker to run Electric. Run the following commands in your terminal to create a new directory for your Electric project and navigate into it:
 
 ```bash
 mkdir neon-electric-quickstart
@@ -75,7 +75,7 @@ services:
 ```
 
 <Admonition type="note">
-The `ELECTRIC_INSECURE=true` setting is for local development only. Electric doesn't perform any authentication or authorization checks. You will need to proxy requests through an authorization layer in production to secure Electric. Please refer to [Using ElectricSQL in Production](#using-electricsql-in-production) for a typical production setup.
+The `ELECTRIC_INSECURE=true` setting is for local development only. Electric doesn't perform any authentication or authorization checks. You will need to proxy requests through an authorization layer in production to secure Electric. Please refer to [Using Electric in production](#using-electric-in-production) for a typical production setup.
 </Admonition>
 
 Create a `.env` file in the same directory to store your Neon database connection string:
@@ -105,7 +105,7 @@ You should see logs indicating that Electric has connected to your Lakebase Post
 
 ## Sample application
 
-Now that Electric is running and connected to your Neon database, you can test it with a simple React application that uses ElectricSQL to sync data from Neon. We will be following the [ElectricSQL Quickstart](https://electric-sql.com/docs/quickstart) to set up a basic React app that subscribes to changes in a Postgres table.
+Now that Electric is running and connected to your Neon database, you can test it with a simple React application that uses Electric to sync data from Neon. We will be following the [Electric Quickstart](https://electric.ax/docs/quickstart) to set up a basic React app that subscribes to changes in a Postgres table.
 
 ### Create sample data in Neon
 
@@ -133,7 +133,7 @@ INSERT INTO scores (name, value) VALUES
     npm install
     ```
 
-2.  Install ElectricSQL React client:
+2.  Install Electric React client:
 
     ```bash
     npm install @electric-sql/react
@@ -145,12 +145,16 @@ INSERT INTO scores (name, value) VALUES
     import { useShape } from '@electric-sql/react';
 
     function Component() {
-      const { data } = useShape({
+      const { data, isLoading } = useShape({
         url: `http://localhost:3000/v1/shape`,
         params: {
           table: `scores`,
         },
       });
+
+      if (isLoading) {
+        return <pre>Loading...</pre>;
+      }
 
       return <pre>{JSON.stringify(data, null, 2)}</pre>;
     }
@@ -158,7 +162,7 @@ INSERT INTO scores (name, value) VALUES
     export default Component;
     ```
 
-    ElectricSQL uses Shapes to define subsets of your Postgres data for real-time synchronization. Here, `useShape` subscribes to a shape representing the `scores` table, ensuring your React app always has the latest score data.
+    Electric uses Shapes to define subsets of your Postgres data for real-time synchronization. Here, `useShape` subscribes to a shape representing the `scores` table, ensuring your React app always has the latest score data.
 
 4.  Start the React development server by running the following command in your terminal:
 
@@ -197,7 +201,7 @@ Your React application should now be running in your browser. It's actively conn
       INSERT INTO scores (name, value) VALUES ('Charlie', 1.618);
       ```
 
-    - Observe your React application. The new data for 'Charlie' should appear automatically without needing a page refresh. This demonstrates ElectricSQL's real-time sync capabilities.
+    - Observe your React application. The new data for 'Charlie' should appear automatically without needing a page refresh. This demonstrates Electric's real-time sync capabilities.
     - Try updating or deleting rows in Neon and see the changes reflect in the app.
 
       ```sql
@@ -209,25 +213,25 @@ Your React application should now be running in your browser. It's actively conn
       ![React app displaying real-time data from Lakebase Postgres](/docs/guides/electric-sql-react-app.gif)
 
 3.  **Understanding writes:**
-    ElectricSQL handles the read-path synchronization (data from Postgres to client). To write data back to your Neon database (e.g., from user input in the React app), you would typically:
+    Electric handles the read-path synchronization (data from Postgres to client). To write data back to your Neon database (e.g., from user input in the React app), you would typically:
     - Implement an API endpoint in your backend application.
     - This API endpoint would receive write requests from your React app.
     - The API endpoint then performs these operations directly on your Lakebase Postgres database.
     - Once the data is written to Neon, Electric will detect these changes via Logical replication and automatically sync them to all connected clients.
 
-    For detailed patterns on handling writes, refer to the [ElectricSQL Writes documentation](https://electric-sql.com/docs/guides/writes).
+    For detailed patterns on handling writes, refer to the [Electric Writes documentation](https://electric.ax/docs/guides/writes).
 
-## Using ElectricSQL in Production
+## Using Electric in production
 
-While ElectricSQL simplifies real-time data synchronization, Electric itself does not handle authentication or authorization. In production, you must implement a secure architecture to ensure that only authorized users can access and sync data.
+While Electric simplifies real-time data synchronization, Electric itself does not handle authentication or authorization. In production, you must implement a secure architecture to ensure that only authorized users can access and sync data.
 
-The core principle for a secure and scalable ElectricSQL deployment is to place an **Authorization Proxy** in front of Electric. This proxy becomes the gatekeeper for data access, ensuring that clients only sync the data they are permitted to see. Additionally, you may whitelist Electric to only accept requests from your proxy, preventing direct access from end users.
+The core principle for a secure and scalable Electric deployment is to place an **Authorization Proxy** in front of Electric. This proxy becomes the gatekeeper for data access, ensuring that clients only sync the data they are permitted to see. Additionally, you may whitelist Electric to only accept requests from your proxy, preventing direct access from end users.
 
 ### Production Architecture overview
 
-A typical production architecture with ElectricSQL and Lakebase Postgres involves the following components:
+A typical production architecture with Electric and Lakebase Postgres involves the following components:
 
-1.  **Client application:** Your web or mobile application using an ElectricSQL client (e.g., `@electric-sql/react`).
+1.  **Client application:** Your web or mobile application using an Electric client (e.g., `@electric-sql/react`).
 2.  **Caching proxy (recommended for performance):** While optional, deploying Electric behind a caching proxy like Nginx, Caddy, Varnish, or a CDN (e.g., Cloudflare, Fastly) is recommended. This setup can significantly improve performance and reduce load by caching responses from Electric.
 3.  **Authorization proxy:** A service (which could be part of your existing backend or a dedicated middleware) that intercepts requests destined for Electric. Its primary roles are authentication and authorization.
 4.  **Electric:** Electric handles the real-time data synchronization between your client application requests and the Lakebase Postgres database.
@@ -235,13 +239,13 @@ A typical production architecture with ElectricSQL and Lakebase Postgres involve
 
 ### Securing read access
 
-The read path (data syncing from Neon to your client via ElectricSQL) needs to be robustly secured.
+The read path (data syncing from Neon to your client via Electric) needs to be robustly secured.
 
 **Typical flow for read requests (`GET /v1/shape`):**
 
-`User Client -> Caching Proxy (optional) -> Authorization Proxy -> ElectricSQL -> Neon Postgres`
+`User Client -> Caching Proxy (optional) -> Authorization Proxy -> Electric -> Neon Postgres`
 
-1.  **Client request:** The ElectricSQL client in the user's application initiates a shape subscription request. This request should include authentication credentials (e.g., a JWT in an `Authorization` header) and the desired shape definition (e.g., `table=items`).
+1.  **Client request:** The Electric client in the user's application initiates a shape subscription request. This request should include authentication credentials (e.g., a JWT in an `Authorization` header) and the desired shape definition (e.g., `table=items`).
 
     ```typescript
     // Example: Client-side useShape hook with an auth header
@@ -274,15 +278,15 @@ The read path (data syncing from Neon to your client via ElectricSQL) needs to b
         This ensures that Electric only processes and syncs data relevant to that specific user.
     - **(Optional) Adding `ELECTRIC_SECRET`:** You can configure Electric by setting the `ELECTRIC_SECRET` environment variable when initializing the service. Your Authorization Proxy should then include this secret with requests it sends to Electric. This allows Electric to verify that requests originate from your trusted proxy, enhancing security by ensuring only authenticated requests are processed.
 
-    For more details on securing ElectricSQL in production, refer to the [ElectricSQL Security Guide](https://electric-sql.com/docs/guides/security).
+    For more details on securing Electric in production, refer to the [Electric Security Guide](https://electric.ax/docs/guides/security).
 
-Congratulations! You have successfully set up ElectricSQL with Lakebase Postgres and built a basic real-time React application.
+Congratulations! You have successfully set up Electric with Lakebase Postgres and built a basic real-time React application.
 
 ## Resources
 
-- [ElectricSQL Documentation](https://electric-sql.com/docs/intro)
-- [ElectricSQL Quickstart](https://electric-sql.com/docs/quickstart)
-- [ElectricSQL Shapes](https://electric-sql.com/docs/guides/shapes)
+- [Electric Documentation](https://electric.ax/docs/intro)
+- [Electric Quickstart](https://electric.ax/docs/quickstart)
+- [Electric Shapes](https://electric.ax/docs/guides/shapes)
 - [Neon Documentation](/docs)
 
 <NeedHelp/>
