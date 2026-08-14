@@ -64,11 +64,11 @@ Every Neon backend starts with [Lakebase Postgres](/docs/postgres/overview): ful
 
 That separation is what makes the rest of the Neon experience possible. You do not size an instance up front. You do not copy a database to get an isolated environment. You create a branch in about a second, and the child starts as a pointer into the same pages as its parent until one of them writes.
 
-- **Autoscaling** - Compute adjusts between your min and max limits as load changes ([autoscaling](/docs/introduction/autoscaling))
-- **Scale to zero** - Idle databases suspend so you do not pay for compute while they are inactive ([scale to zero](/docs/introduction/scale-to-zero))
-- **Instant branching** - Create isolated copies for development, previews, CI, and agent runs, with no storage duplication up front ([branching](/docs/introduction/branching))
-- **Instant restore** - Recover to any point in your history window without waiting on a dump-and-restore ([instant restore](/docs/introduction/branch-restore))
-- **Connection pooling** - Pooled endpoints support up to 10,000 connections per compute ([connection pooling](/docs/connect/connection-pooling))
+- **Autoscaling** - Compute adjusts between your min and max limits as load changes. ([Read more](/docs/introduction/autoscaling))
+- **Scale to zero** - Idle databases suspend so you do not pay for compute while they are inactive. ([Read more](/docs/introduction/scale-to-zero))
+- **Instant branching** - Create isolated copies for development, previews, CI, and agent runs, with no storage duplication up front. ([Read more](/docs/introduction/branching))
+- **Instant restore** - Recover to any point in your history window without waiting on a dump-and-restore. ([Read more](/docs/introduction/branch-restore))
+- **Connection pooling** - Pooled endpoints support up to 10,000 connections per compute. ([Read more](/docs/connect/connection-pooling))
 
 Use any Postgres driver, ORM, or framework you already know. When you only need the database, start here and add other primitives as the app grows.
 
@@ -112,7 +112,7 @@ Declare buckets in [`neon.ts`](/docs/reference/neon-ts), run `neon deploy`, and 
   <source src="/videos/pages/home/hero/storage.mp4?updated=20260709" type="video/mp4" />
 </video>
 
-<MegaLink tag="Files that branch with Postgres" title="How we built Neon Object Storage: S3-compatible buckets with the same branch semantics as your database" url="https://neon.com/blog/building-neon-object-storage" />
+<MegaLink tag="Keep reading" title="How we built Neon Object Storage: S3-compatible buckets with the same branch semantics as your database" url="https://neon.com/blog/building-neon-object-storage" />
 
 ## Neon Functions
 
@@ -136,7 +136,7 @@ Declare functions in [`neon.ts`](/docs/reference/neon-ts) and deploy with `neon 
   <source src="/videos/pages/home/hero/compute.mp4?updated=20260709" type="video/mp4" />
 </video>
 
-<MegaLink tag="Compute next to your data" title="Neon Functions: long-running Node.js handlers that live on your branch beside Lakebase Postgres" url="https://neon.com/blog/neon-functions-backend-logic-next-to-your-data" />
+<MegaLink tag="Keep reading" title="Neon Functions: long-running Node.js handlers that live on your branch beside Lakebase Postgres" url="https://neon.com/blog/neon-functions-backend-logic-next-to-your-data" />
 
 ## Neon AI Gateway
 
@@ -155,8 +155,6 @@ The gateway runs on the Databricks AI infrastructure that already serves [more t
   <source src="/videos/pages/home/hero/ai-gateway.webm?updated=20260709" type="video/webm" />
   <source src="/videos/pages/home/hero/ai-gateway.mp4?updated=20260709" type="video/mp4" />
 </video>
-
-<MegaLink tag="One API, one bill" title="How the Neon backend fits together: Object Storage, Functions, and AI Gateway in beta" url="https://neon.com/blog/neon-backend-is-beta" />
 
 ## Neon Data API
 
