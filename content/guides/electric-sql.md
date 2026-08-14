@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to integrating Electric with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-28T00:00:00.000Z'
-updatedOn: '2026-08-14T09:39:29.175Z'
+updatedOn: '2026-08-14T09:39:45.068Z'
 ---
 
 This guide demonstrates how to integrate [Electric](https://electric.ax/) with Lakebase Postgres. Electric is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.
@@ -174,7 +174,7 @@ INSERT INTO scores (name, value) VALUES
 
 ## Using the demo application
 
-Your React application should now be running in your browser. It's actively connected to the Electric, which maintains a real-time link to your Lakebase Postgres database via Logical Replication.
+Your React application should now be running in your browser. It's actively connected to Electric, which maintains a real-time link to your Lakebase Postgres database via Logical Replication.
 
 1.  **Access the application:** Open [`localhost:5173`](http://localhost:5173) in your browser. You should see the data from the `scores` table (`Alice` and `Bob`) displayed on the page.
 
