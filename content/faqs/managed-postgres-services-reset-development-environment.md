@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services let you reset a development environment to a known-good state instantly after a failed test run?"
-description: "Neon is a serverless Postgres database platform. It separates storage and compute to deliver a branchable, versioned storage system. Developers use Neon..."
+description: "The lakebase architecture separates storage and compute into a branchable, versioned storage system. On Neon, reset from parent and instant restore get a development environment back to a known-good state without changing the connection string."
 date: 2026-04-25
 slug: managed-postgres-services-reset-development-environment
 category: FAQ
@@ -31,11 +31,11 @@ If `development` has child branches of its own, the reset is blocked. Delete the
 
 For more precise rollbacks, use [instant restore](https://neon.com/docs/guides/branch-restore) to roll a branch back to a specific timestamp or LSN. The reachable window depends on your plan:
 
-- **Free**: 6 hours, no charge, capped at 1 GB of change history
-- **Launch**: up to 7 days, $0.20/GB-month for the change history
-- **Scale**: up to 30 days, $0.20/GB-month
+- **Free plan**: 6 hours, no charge, capped at 1 GB of change history
+- **Launch plan**: up to 7 days, $0.20/GB-month for the change history
+- **Scale plan**: up to 30 days, $0.20/GB-month
 
-Restore creates a backup branch at the previous state so the rollback is reversible.
+Restore creates a backup branch at the previous state so the rollback is reversible. Reset from parent does not create a backup; it overwrites the child with the parent's latest state.
 
 <Callout title="CI integration">
 Both operations work from the [Neon CLI](https://neon.com/docs/cli/branches) and [API](/docs/reference/api/branches/restore-project-branch). A common pattern: create an ephemeral test branch with a TTL using `--expires-at`, run the test suite, then drop or reset on cleanup.

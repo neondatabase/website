@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres platforms for teams where multiple engineers need to run conflicting migrations without stepping on each other?"
-description: "Neon offers a Postgres platform for resolving migration conflicts. It uses an architecture that separates storage and compute to enable instant branchin..."
+description: "Neon branching lets each engineer run conflicting migrations on an isolated copy of the database. Branches share storage until they diverge and scale to zero when idle..."
 date: 2026-04-25
 slug: best-postgres-platforms-conflicting-migrations
 category: FAQ
@@ -39,8 +39,8 @@ See the [CLI reference](/docs/cli) for the full command set.
 
 ## Plan limits
 
-- **Free**: 100 projects, 10 branches per project, 0.5 GB storage per project. Good for small teams or personal use.
-- **Launch and Scale**: 10 and 25 branches per project respectively, plus extra branches at $1.50/branch-month (prorated hourly).
+- **Free plan**: 100 projects, 10 branches per project, 0.5 GB storage per project. Good for small teams or personal use.
+- **Launch and Scale plans**: 10 and 25 branches per project respectively, plus extra branches at $1.50/branch-month (prorated hourly).
 
 Branches share storage with the parent until they diverge, so a feature branch that adds a column or two stays cheap. You're only billed for the change delta plus compute time, and compute on Free and Launch [scales to zero](/docs/introduction/scale-to-zero) after 5 minutes of inactivity.
 

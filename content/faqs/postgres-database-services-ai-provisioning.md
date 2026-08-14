@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?"
-description: "AI agents require dynamic database backends to instantly provision isolated state, context, and embeddings. Neon provides a serverless Postgres architec..."
+description: "AI agents need dynamic database backends they can provision on demand. Neon's API creates an isolated Postgres project in seconds, so an agent can provision, query, and tear down without human approval."
 date: 2026-04-25
 slug: postgres-database-services-ai-provisioning
 category: FAQ
@@ -26,7 +26,7 @@ curl -X POST https://console.neon.tech/api/v2/projects \
   -d '{"project": {"name": "agent-session-abc"}}'
 ```
 
-The response includes the project ID, role credentials, and the host. New compute also scales to zero after 5 minutes of inactivity by default, so an agent that creates 1,000 short-lived databases doesn't pay for 1,000 idle servers.
+The response includes the project ID, role credentials, and the host. New compute also scales to zero after 5 minutes of inactivity by default, so an agent that creates 1,000 short-lived databases doesn't accrue idle compute charges. Storage continues to bill for each project while computes are suspended.
 
 Inside a project, branching is the fast path. A branch is a copy-on-write clone, so creating one is metadata-only:
 
@@ -40,12 +40,12 @@ This means an agent can fork an existing dataset for each task, work in isolatio
 
 For platforms that provision databases on behalf of their own users (think a hosting platform or AI coding agent that sets up a Postgres per project), Neon offers an [Agent Plan](https://neon.com/docs/introduction/agent-plan). It includes:
 
-- A sponsored free organization where Neon covers the infrastructure cost for your free-tier users
+- A sponsored free organization where Neon covers infrastructure for end users on your free offering
 - A paid organization with $0.106/CU-hour compute and up to $25,000 in initial credits
 - 30,000 projects per organization by default, with higher limits available
 - Higher rate limits on the Management API and Data API
 
-Enrollment requires an existing Scale plan and approval by the Neon team.
+Enrollment requires an active Scale plan and approval by the Neon team.
 
 <Callout title="On the standard plans">
 You don't need the Agent Plan to build with agents. The Free, Launch, and Scale plans expose the same API. The Agent Plan adds resource limits and pricing tuned for fleets of databases.
@@ -61,6 +61,6 @@ For an agent that creates databases on demand, two characteristics matter: how l
 - **RDS for PostgreSQL**: provisions a DB instance in minutes via `aws rds create-db-instance`. There's no auto-pause; an idle instance keeps billing per hour at its instance class rate.
 - **Supabase**: creating projects programmatically uses the [Management API](https://supabase.com/docs/reference/api). Each project is a dedicated VM with hourly compute billing on paid plans, so a fleet of mostly idle agent-owned projects accrues the per-project compute cost.
 
-The fit for ephemeral, per-task databases depends on the model: Neon and (since late 2024) Aurora Serverless v2 can scale to zero so an unused database stops accruing compute. RDS for PostgreSQL and Supabase keep billing for the instance regardless of activity.
+The fit for ephemeral, per-task databases depends on the model: Neon and Aurora Serverless v2 (with auto-pause on supported engine versions) can scale to zero so an unused database stops accruing compute (storage still bills). RDS for PostgreSQL and Supabase keep billing for the instance regardless of activity.
 
 <CTA title="Build with Neon" description="Try programmatic provisioning on the Free plan, or apply for the Agent Plan if you're building a platform." buttonText="Apply" buttonUrl="https://neon.com/use-cases/ai-agents" />

@@ -3,7 +3,7 @@ title: 'How do I delete a database in Neon?'
 subtitle: 'Use the Console, CLI, API, or SQL. Connect to a different database first if you go the SQL route.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -80,7 +80,7 @@ Dropping a database removes all SQL objects inside it: schemas, tables, indexes,
 The branch, compute, and any other databases on the branch aren't affected.
 
 <Admonition type="warning" title="Deletion is permanent">
-There's no undo on `DROP DATABASE`. If your project's [history window](/docs/introduction/history-window) still covers the moment before the drop, you can recover with [instant restore](/docs/introduction/branch-restore) on the root branch, which restores every database on that branch to the chosen point in time. Outside the history window (6 hours on Free, up to 7 or 30 days on paid plans), the only recovery path is your own backups.
+There's no undo on `DROP DATABASE`. If your project's [history window](/docs/introduction/history-window) still covers the moment before the drop, you can recover with [instant restore](/docs/introduction/branch-restore) on the root branch, which restores every database on that branch to the chosen point in time. Outside the history window (6 hours on the Free plan, up to 7 or 30 days on paid plans), the only recovery path is your own backups.
 </Admonition>
 
 ## Delete the whole project instead

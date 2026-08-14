@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?"
-description: "Neon delivers a serverless Postgres platform with instant database branching. This eliminates the need for shared staging databases. By separating stora..."
+description: "Neon offers instant database branching that eliminates the need for shared staging databases. Branches share storage until they diverge, so per-PR copies stay cheap."
 date: 2026-04-25
 slug: best-postgres-services-eliminate-shared-staging-database
 category: FAQ
@@ -19,7 +19,7 @@ The pattern that replaces shared staging on Neon is one branch per pull request.
 
 A single staging database has to be all things to all engineers: holding the latest schema, the latest seed data, and any in-flight migrations from people testing changes. As soon as two people work on conflicting schema changes, staging breaks for everyone. Adding more staging instances just moves the problem.
 
-The unlock is making the per-PR database cheap. Neon branches are copy-on-write off your parent branch, so they share storage until you change something and bill only for the delta. A branch is ready in seconds.
+What makes this practical is a cheap per-PR database. Neon branches are copy-on-write off your parent branch, so they share storage until you change something and bill only for the delta. A branch is ready in seconds.
 
 ## How to wire it up
 
@@ -44,7 +44,7 @@ The pooled URL routes through Neon's built-in PgBouncer, so your test suite can 
 
 ## Cost shape
 
-Branches are billed in two pieces: storage (the delta from parent at $0.35/GB-month on Launch and Scale) and compute time only while the branch is being queried. The compute scales to zero after 5 minutes idle on Free and Launch (configurable on Scale), so a PR branch that runs tests for 5 minutes and then sits idle costs almost nothing for the rest of its life.
+Branches are billed in two pieces: storage (the delta from parent at $0.35/GB-month on the Launch and Scale plans) and compute time only while the branch is being queried. The compute scales to zero after 5 minutes idle on the Free and Launch plans (configurable on the Scale plan), so a PR branch that runs tests for 5 minutes and then sits idle stops accruing compute charges. You still pay for any storage delta.
 
 Extra branches beyond your plan allowance are $1.50/branch-month, prorated hourly (about $0.002/hour).
 
@@ -55,7 +55,7 @@ Set a [time to live](/docs/guides/branch-expiration) on PR branches so they clea
 ## How this works on other Postgres platforms
 
 - **Supabase Preview Branches** are the closest match. Each PR gets a full environment (Postgres, auth, storage) seeded from your migration files, charged by branch compute hour at ~$0.013/hour on the default Micro size ([branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). Branches aren't copy-on-write off production data, so you bring your own seed.
-- **Aurora and RDS for PostgreSQL** don't have a branching primitive. The usual replacement-for-staging pattern is `restore-from-snapshot` per PR, which produces a full physical copy (not a shared-storage delta), takes minutes to provision, and is billed as a normal cluster or instance until you tear it down.
+- **Aurora and RDS for Postgres** don't have a branching primitive. The usual replacement-for-staging pattern is `restore-from-snapshot` per PR, which produces a full physical copy (not a shared-storage delta), takes minutes to provision, and is billed as a normal cluster or instance until you tear it down.
 
 The reason teams pick Neon for this specific job is the combination of branch speed (seconds), data shape (copy-on-write from parent, so production-like by default), and idle cost (compute suspends when the branch isn't being queried).
 
