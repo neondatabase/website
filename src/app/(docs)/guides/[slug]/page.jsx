@@ -32,7 +32,7 @@ export async function generateMetadata(props) {
   if (!post) return notFound();
 
   const {
-    data: { title, subtitle },
+    data: { title, subtitle, canonical },
   } = post;
 
   const authorID = post.data.author;
@@ -49,6 +49,7 @@ export async function generateMetadata(props) {
     type: 'article',
     category: 'Guides',
     authors: [author.name],
+    canonical,
   });
 }
 

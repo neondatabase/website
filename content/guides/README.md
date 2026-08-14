@@ -26,6 +26,7 @@ Right now Markdown files accept the following fields:
 6. `enableTableOfContents`: flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
 7. `ogImage` - the social preview image of the page.
 8. `excludeFromBlog`: flag that hides the guide from the blog's guides listing and the "All posts" feed. The guide page itself is still published at its `/guides/...` URL — use this for guides that should remain accessible but not be surfaced alongside blog content.
+9. `canonical`: an absolute `http://` or `https://` URL. When set, `<link rel="canonical">` points there instead of the Neon guide URL, and the guide is omitted from the sitemap. Use it when a partner published the same guide and should receive the search ranking. Invalid values fail the build.
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
