@@ -16,7 +16,7 @@ authors:
 cover:
   image: https://cdn.neonapi.io/public/images/pages/blog/neon-functions-backend-logic-next-to-your-data/cover.jpg
   alt: 'Neon Functions: backend logic next to your data'
-isFeatured: false
+isFeatured: true
 seo:
   title: 'Neon Functions: backend logic next to your data - Neon'
   description: Serverless compute that sits on your Neon branch
