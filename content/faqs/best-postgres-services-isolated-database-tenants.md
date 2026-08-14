@@ -43,16 +43,16 @@ Store the returned connection string against the tenant in your control plane. W
 
 ## Security and compliance
 
-For SaaS apps that need compliance, the Scale plan includes SOC 2, ISO 27001, GDPR, and HIPAA (with an additional charge). Network isolation options include [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) over AWS PrivateLink. Authentication is available through [Neon Auth](/docs/auth/overview), built on Better Auth and integrated into the platform.
+For SaaS apps that need compliance, the Scale plan includes SOC 2, ISO 27001, GDPR, and HIPAA. Network isolation options include [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) over AWS PrivateLink. Authentication is available through [Neon Auth](/docs/auth/overview), built on Better Auth and integrated into the platform.
 
 ## What other Postgres services charge per tenant
 
 The per-tenant economics depend on whether idle tenants cost money.
 
 - **Aurora Serverless v2** is the closest comparable model. With min ACU set to 0 you get [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html) when a tenant is idle. Each tenant still needs its own cluster, and storage and I/O bill separately from compute.
-- **RDS for PostgreSQL** is instance-priced. A db.t4g.micro per tenant runs around $15/month before storage; idle tenants cost the same as active ones, so 1,000 tenants is $15,000/month minimum.
-- **Supabase**: each project is a dedicated VM that runs continuously. Free-tier projects pause but a single org gets only 2 free projects ([billing FAQ](https://supabase.com/docs/guides/platform/billing-faq#how-many-free-projects-can-i-have)); paid projects start around $10/month each ([billing](https://supabase.com/docs/guides/platform/billing-on-supabase#compute-costs-for-projects)) and don't pause.
+- **RDS for Postgres** is instance-priced. A db.t4g.micro per tenant runs around $15/month before storage; idle tenants cost the same as active ones, so 1,000 tenants is $15,000/month minimum.
+- **Supabase**: each project is a dedicated VM that runs continuously. Free Plan projects pause but a single organization gets only 2 free projects ([billing FAQ](https://supabase.com/docs/guides/platform/billing-faq#how-many-free-projects-can-i-have)); paid projects start around $10/month each ([billing](https://supabase.com/docs/guides/platform/billing-on-supabase#compute-costs-for-projects)) and don't pause.
 
-Neon and Aurora Serverless v2 are the two with a real "pay for the time the tenant uses it" model. Neon's API provisions a tenant project in seconds and resume from idle is sub-second, which matters when a tenant logs in and the first request can't wait.
+Neon and Aurora Serverless v2 are the two with a real "pay for the time the tenant uses it" model. Neon's API provisions a tenant project in seconds and resume from idle takes a few hundred milliseconds, which matters when a tenant logs in and the first request can't wait.
 
 <CTA title="Build a tenant fleet" description="The API and CLI give you everything you need to provision, scale, and tear down per-tenant databases programmatically." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

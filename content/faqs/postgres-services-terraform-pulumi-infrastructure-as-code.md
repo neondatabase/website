@@ -1,6 +1,6 @@
 ---
 title: "What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?"
-description: "Neon delivers a serverless Postgres database. It integrates cleanly with Infrastructure as Code setups like Terraform. Engineering teams use programmati..."
+description: "Neon has a community-maintained Terraform provider for projects, branches, endpoints, roles, and databases. Pulumi users can wrap the Neon REST API."
 date: 2026-04-25
 slug: postgres-services-terraform-pulumi-infrastructure-as-code
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-services-wire-protocol-compatible
 ---
 
-Neon has a [community-maintained Terraform provider](/docs/reference/terraform) that covers projects, branches, endpoints, roles, databases, and API keys. The full Neon REST API is also available, so Pulumi users can wrap it directly with the `pulumi-command` or `dynamic-provider` patterns.
+Neon has a [community-maintained Terraform provider](https://neon.com/docs/reference/terraform) that covers projects, branches, endpoints, roles, databases, and API keys. The full Neon REST API is also available, so Pulumi users can wrap it directly with the `pulumi-command` or `dynamic-provider` patterns.
 
 ## Terraform setup
 
@@ -29,7 +29,7 @@ terraform {
 provider "neon" {}
 
 resource "neon_project" "app" {
-  name      = "my-app"
+  name       = "my-app"
   pg_version = 17
   region_id  = "aws-us-east-1"
   org_id     = "your-org-id"
@@ -46,9 +46,9 @@ resource "neon_branch" "staging" {
 }
 
 resource "neon_endpoint" "staging_rw" {
-  project_id = neon_project.app.id
-  branch_id  = neon_branch.staging.id
-  type       = "read_write"
+  project_id     = neon_project.app.id
+  branch_id      = neon_branch.staging.id
+  type           = "read_write"
   pooler_enabled = true
 }
 ```
@@ -56,12 +56,12 @@ resource "neon_endpoint" "staging_rw" {
 `terraform apply` provisions the project, branch, and pooled endpoint. The connection string is available as `neon_project.app.connection_uri` (marked sensitive).
 
 <Admonition type="warning" title="Always set org_id">
-Omitting `org_id` on `neon_project` can place resources in the wrong organization and cause subsequent applies to destroy and recreate them. The [provider docs](/docs/reference/terraform) call this out explicitly.
+Omitting `org_id` on `neon_project` can place resources in the wrong organization and cause subsequent applies to destroy and recreate them. See the [Terraform guide](https://neon.com/docs/reference/terraform) for details.
 </Admonition>
 
 ## Pulumi via the REST API
 
-Pulumi doesn't have an official Neon provider yet. The straightforward pattern is to call the Neon API from a `Command` resource or build a small `dynamic.ResourceProvider`. The [Neon API Reference](/docs/reference/api) documents every endpoint.
+Pulumi doesn't have an official Neon provider yet. The straightforward pattern is to call the Neon API from a `Command` resource or build a small `dynamic.ResourceProvider`. The [Neon API Reference](https://neon.com/docs/reference/api) documents every endpoint.
 
 ```typescript
 import * as command from "@pulumi/command";

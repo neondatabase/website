@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-create-database-cli-single-command
 ---
 
-Neon runs PgBouncer in front of every database in transaction mode, with `max_client_conn` set to 10,000. That means up to 10,000 clients (serverless function invocations, edge workers, request-per-connection web frameworks) can hold a connection to PgBouncer at once, even though the underlying Postgres has a much smaller `max_connections` limit.
+Neon runs PgBouncer on a pooled endpoint for every compute, in transaction mode, with `max_client_conn` set to 10,000. That means up to 10,000 clients (serverless function invocations, edge workers, request-per-connection web frameworks) can hold a connection to PgBouncer at once, even though the underlying Postgres has a much smaller `max_connections` limit.
 
 ## Why this matters for serverless
 
@@ -36,10 +36,10 @@ Add `-pooler` to your endpoint hostname in the connection string:
 
 ```text
 # Direct
-postgresql://user:pass@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
 
 # Pooled
-postgresql://user:pass@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
 ```
 
 You can grab the pooled string from the **Connect** dialog in the Console. Use the pooled connection for serverless functions, edge runtimes, and any framework that opens a connection per request.

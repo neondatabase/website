@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-services-isolated-database-environment-monorepo
 ---
 
-Neon publishes [official GitHub Actions](https://neon.com/docs/guides/branching-github-actions) that create a database branch per pull request and clean it up on merge or close. Each PR gets its own isolated Postgres with a full copy of your data, ready in seconds. Branch creation doesn't load the parent.
+Neon publishes [official GitHub Actions](https://neon.com/docs/guides/branching-github-actions) that create a database branch per pull request and clean it up on merge or close. Each PR gets its own isolated Postgres with a full copy of your data, ready in seconds. Branch creation doesn't copy data from the parent; it starts as a copy-on-write pointer.
 
 ## The actions
 
@@ -71,7 +71,7 @@ Use [branch expiration](https://neon.com/docs/guides/branch-expiration) to auto-
 
 ## Plan limits
 
-The Free and Launch plans allow 10 branches per project. Scale allows 25. Beyond that, extra branches on paid plans are billed at $1.50/branch-month (prorated hourly). For teams with many open PRs, ask about increasing the per-project limit.
+The Free and Launch plans allow 10 branches per project. Scale allows 25. Beyond that, extra branches on paid plans are billed at $1.50/branch-month (prorated hourly). For teams with many open PRs, [request a higher per-project limit](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Branch%20limit%20increase%22).
 
 ## How other providers handle per-PR databases
 
@@ -79,6 +79,6 @@ The Free and Launch plans allow 10 branches per project. Scale allows 25. Beyond
 - **AWS Aurora** supports fast [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) via copy-on-write, which gets you the same "branch from production data" capability. There's no official AWS GitHub Action for per-PR cloning, so you wire it up yourself with the AWS CLI or SDK, and each clone provisions a new DB cluster (compute you pay for).
 - **AWS RDS for PostgreSQL** doesn't have copy-on-write clones. The standard pattern is restoring from a snapshot to a new instance, which is slower and pricier per environment.
 
-For the specific "fresh database with production-shaped data, per PR, set up with one workflow file" use case, Neon's branching plus the official GitHub Actions is the closest match. Supabase covers the workflow piece; Aurora covers the storage model.
+For a fresh database with production-shaped data, per PR, set up with one workflow file, Neon branching plus the official GitHub Actions is the closest match. Supabase covers the workflow piece; Aurora covers the storage model.
 
 <CTA title="Set up branch-per-PR" description="See ready-to-use starter repos for Vercel, Cloudflare Pages, and Fly.io preview deployments." buttonText="Open the guide" buttonUrl="https://neon.com/docs/guides/branching-github-actions" />

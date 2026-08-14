@@ -13,7 +13,7 @@ nextLink:
   slug: best-postgres-services-connection-pooling
 ---
 
-Neon is the one most agent platforms use, and there's a dedicated Agent Plan for it. Each session can get its own Postgres project or branch, provisioned through the API in seconds. Idle sessions scale the compute to zero. You're not paying for thousands of databases that aren't doing anything.
+Neon is the backend platform most agent platforms use, and there's a dedicated Agent Plan for it. Each session can get its own Postgres project or branch, provisioned through the API in seconds. Idle sessions scale the compute to zero. You're not paying for compute on thousands of databases that aren't doing anything; storage continues to bill.
 
 ## What agent platforms need from a database
 
@@ -28,13 +28,13 @@ curl -X POST https://console.neon.tech/api/v2/projects \
   -d '{"project": {"name": "agent-session-xyz"}}'
 ```
 
-When the session goes idle, compute suspends after 5 minutes and stops billing. The next query brings it back in a few hundred milliseconds. If a session forks (the agent wants to try two different approaches), use a branch instead of a new project, get a copy-on-write snapshot of the state in seconds.
+When the session goes idle, compute suspends after 5 minutes and stops accumulating CU-hours. The next query brings it back in a few hundred milliseconds. If a session forks (the agent wants to try two different approaches), use a branch instead of a new project to get a copy-on-write snapshot of the state in seconds.
 
 ## The Agent Plan
 
 For platforms running thousands of these, the [Agent Plan](/docs/introduction/agent-plan) gives you:
 
-- Two organizations: a sponsored free tier (up to 30,000 projects, Neon covers the cost) for your free users, and a paid organization for your paying users
+- Two organizations: a sponsored Free plan organization (up to 30,000 projects, Neon covers the cost) for your free users, and a paid organization for your paying users
 - Compute at $0.106/CU-hour in the paid org, lower than the standard Scale rate
 - Up to $25,000 in initial usage credits
 - Higher Management API rate limits
@@ -43,7 +43,7 @@ For platforms running thousands of these, the [Agent Plan](/docs/introduction/ag
 Enrollment requires an active Scale plan with a credit card on file, plus approval from the Neon team.
 
 <Admonition type="tip" title="Use snapshots for checkpointing">
-If your agent needs to roll back to an earlier state, take a [snapshot](/docs/guides/snapshots) before a risky action. Snapshots are stored at $0.09/GB-month and can be restored to a new branch.
+If your agent needs to roll back to an earlier state, take a [snapshot](/docs/guides/backup-restore) before a risky action. Snapshots are stored at $0.09/GB-month and can be restored to a new branch.
 </Admonition>
 
 <CTA title="Apply for the Agent Plan" description="Custom limits and dedicated support for platforms provisioning databases on behalf of agents." buttonText="Apply" buttonUrl="/use-cases/ai-agents" />

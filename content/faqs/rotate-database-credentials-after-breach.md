@@ -3,7 +3,7 @@ title: 'How do I rotate all my Neon database credentials and connection strings 
 subtitle: 'Reset every affected role across every project, update env vars, and revoke API keys.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -27,7 +27,7 @@ Work through this list once per affected project. For a team with multiple proje
 - Copy the new connection string from the **Connect** modal on each Project Dashboard.
 - Update environment variables in every deployment platform (Vercel, Render, Fly, Railway, AWS, etc.), CI system, secret manager, and local `.env` files.
 - Revoke any Neon API keys that may have been exposed and create new ones. See [How do I rotate my Neon API keys?](/faqs/rotate-neon-api-keys).
-- If the breach affects production data access, review the **IP Allow** list under **Project Settings → Network security** and tighten it.
+- If the breach affects production data access and you're on the Scale plan, review the **IP Allow** list under **Project Settings → Network security** and tighten it. IP Allow is Scale-only. See [IP Allow](/docs/introduction/ip-allow).
 - Audit Postgres roles you don't recognize, and drop any that shouldn't exist.
 
 ## Script the password resets

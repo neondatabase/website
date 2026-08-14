@@ -15,7 +15,7 @@ nextLink:
 
 ## Short answer
 
-Neon runs the [`pgvector`](/docs/extensions/pgvector) extension on serverless Postgres and scales compute to zero after 5 minutes of inactivity. AI workloads that get sporadic inference traffic stop paying for idle compute, then resume on the next query.
+Neon runs the [`pgvector`](/docs/extensions/pgvector) extension and scales compute to zero after 5 minutes of inactivity. AI workloads with sporadic inference traffic stop accruing idle compute charges, then resume on the next query. Storage continues to bill while compute is suspended.
 
 ## Why this fits AI workloads
 
@@ -56,7 +56,7 @@ When an inference request wakes the compute, your serverless functions may open 
 
 | Provider                          | pgvector                 | Scales to zero          | Notes                                                                                           |
 | --------------------------------- | ------------------------ | ----------------------- | ----------------------------------------------------------------------------------------------- |
-| Neon                              | Yes                      | Yes, after 1–5 min idle | Compute suspends and pays only for storage when idle                                            |
+| Neon                              | Yes                      | Yes, after 1–5 min idle | Compute drops to $0 when suspended; storage still applies                                       |
 | Aurora Serverless v2 (PostgreSQL) | Yes (via extension)      | Yes, when min ACU is 0  | Requires Aurora PostgreSQL 13.15, 14.12, 15.7, or 16.3+; pause is per cluster, not per database |
 | Supabase                          | Yes (`vector` extension) | No                      | Compute add-ons run continuously                                                                |
 

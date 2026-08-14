@@ -60,7 +60,7 @@ The pooled URL routes through Neon's built-in PgBouncer (up to 10,000 client con
 - **Compute**: $0.106/CU-hour on Launch. A 5-minute test job on a 0.25 CU compute is about $0.002.
 - **Extra branches**: $1.50/branch-month (prorated hourly, ~$0.002/hour) for branches beyond your plan allowance. A branch that lives 10 minutes costs around $0.0003.
 
-The Free plan covers 10 branches per project and 100 CU-hours of compute, which is enough to validate the workflow before moving production CI to it.
+The Free plan covers 10 branches per project and 100 CU-hours of compute per project, which is enough to validate the workflow before moving production CI to it.
 
 <Admonition type="tip" title="Reset, don't recreate, between local runs">
 For local dev work, `neon branches reset` discards changes and pulls fresh parent state without deleting the branch. See [Reset from parent](/docs/guides/reset-from-parent).
@@ -70,7 +70,7 @@ For local dev work, `neon branches reset` discards changes and pulls fresh paren
 
 - **Supabase Preview Branches** spin up a full environment per branch and are billed at ~$0.013/hour per branch on the default Micro size ([branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching)). The branch is seeded from your migration files (not from a parent's data), so production-like state means importing it on each run.
 - **Aurora Serverless v2** has no branching. The closest pattern is `restore-db-cluster-from-snapshot` per CI run, which copies the full cluster (not a delta), takes minutes to be ready, and bills full ACU while it's up.
-- **RDS for PostgreSQL** is the same story with snapshot restores, plus you pay the full instance hourly rate as soon as the restored DB is up.
+- **RDS for Postgres** is the same story with snapshot restores, plus you pay the full instance hourly rate as soon as the restored database is up.
 
 For per-PR test isolation against production-shaped data, the speed and cost shape of Neon branches usually wins. For migration-driven previews where you're fine seeding the schema on every run, Supabase Preview Branches are the comparable choice.
 

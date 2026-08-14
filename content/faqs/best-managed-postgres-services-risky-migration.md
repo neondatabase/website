@@ -39,7 +39,7 @@ See [Branching with the Neon CLI](/docs/guides/branching-neon-cli) for the full 
 
 ## Rolling back production with instant restore
 
-If a migration runs on `main` and breaks something, [instant restore](/docs/introduction/branch-restore) rewinds the branch to a point in time within your project's history window. The default history window is 6 hours on Free, 1 day on paid plans, configurable up to 7 days on Launch or 30 days on Scale.
+If a migration runs on `main` and breaks something, [instant restore](/docs/introduction/branch-restore) rewinds the branch to a point in time within your project's history window. The default history window is 6 hours on Free, 1 day on paid plans, configurable up to 7 days on Launch or 30 days on Scale ([Plans](/docs/introduction/plans#history-window)).
 
 Restore takes seconds because Neon doesn't replay logs into a new instance. It changes which point in the storage history the compute reads from.
 
@@ -49,11 +49,11 @@ Instant restore can only reach back as far as your configured history window. In
 
 ## Snapshots for known-good states
 
-For migrations you want to keep a fixed restore point for, take a [snapshot](/docs/guides/backup-restore) before running the migration. Snapshots persist beyond the history window and can be restored to a new branch on demand. Free plan includes 1 manual snapshot; paid plans include 100.
+For migrations you want to keep a fixed restore point for, take a [snapshot](/docs/guides/backup-restore) before running the migration. Snapshots persist beyond the history window and can be restored to a new branch on demand. Free plan includes 1 manual snapshot; paid plans include 100. Snapshot storage is billed at $0.09/GB-month.
 
 ## How other providers approach safe migrations
 
-- **RDS for PostgreSQL** offers [blue/green deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments-creating.html), which create a staging environment (the "green" instance) that's kept in sync with production using logical replication. The green environment is a separate DB instance that you provision and pay for while it's running. It's well-suited to engine upgrades and schema changes but slower to spin up than a copy-on-write branch.
+- **RDS for PostgreSQL** offers [blue/green deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments-creating.html), which create a staging environment (the "green" instance) that's kept in sync with production using logical replication. The green environment is a separate database instance that you provision and pay for while it's running. It's well-suited to engine upgrades and schema changes but slower to spin up than a copy-on-write branch.
 - **Aurora** has a similar blue/green deployment model on top of cluster-level cloning. Clones share storage initially but become independent copies as data diverges.
 - **Supabase** [preview branches](https://supabase.com/docs/guides/deployment/branching/working-with-branches) create a separate Postgres database per branch, primarily intended for previewing schema migrations from a Git pull request. Branches are reseeded from `supabase/seed.sql` rather than cloning production data, so they aren't a like-for-like copy of your production state.
 

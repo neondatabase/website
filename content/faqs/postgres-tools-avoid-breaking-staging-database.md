@@ -1,6 +1,6 @@
 ---
 title: "What Postgres tools let teams avoid the problem of one developer breaking the shared staging database for everyone else?"
-description: "Neon is a serverless Postgres platform that prevents developers from breaking shared staging databases. It provides instant, isolated database branches...."
+description: "Give each developer a Neon branch instead of a shared staging database. Isolated copies of staging or production data, created in seconds."
 date: 2026-04-25
 slug: postgres-tools-avoid-breaking-staging-database
 category: FAQ
@@ -39,10 +39,10 @@ neon branches delete alex/feature-payments
 
 Branches share storage with the parent until they diverge. A branch that nobody writes to costs nothing in storage. Once you start writing, you're billed on the minimum of changes accumulated or the logical data size, at $0.35/GB-month.
 
-Compute on the branch scales to zero after 5 minutes of inactivity (configurable on paid plans), so an unused branch sitting overnight doesn't accumulate compute charges.
+Compute on the branch scales to zero after 5 minutes of inactivity (configurable on paid plans), so an unused branch sitting overnight doesn't accumulate compute charges. Storage on the parent and any child delta still bills.
 
 <Admonition type="tip" title="Auto-cleanup with TTL">
-On paid plans, set a [time-to-live](/docs/guides/branch-expiration) on dev branches so abandoned ones disappear. Useful when developers create branches and forget about them.
+On paid plans, set a [time-to-live](https://neon.com/docs/guides/branch-expiration) on dev branches so abandoned ones disappear. Useful when developers create branches and forget about them.
 </Admonition>
 
 ## Restoring a branch you broke
@@ -53,13 +53,13 @@ If you do break your own branch, you can reset it to its parent's current state 
 neon branches reset alex/feature-payments --parent
 ```
 
-Or, on the parent, use [instant restore](/docs/introduction/branch-restore) to roll back a root branch to any point in the history window (6 hours on Free, up to 7 days on Launch, up to 30 days on Scale).
+Or, on a root branch, use [instant restore](https://neon.com/docs/introduction/branch-restore) to roll back to any point in the history window (6 hours on Free, up to 7 days on Launch, up to 30 days on Scale). Instant restore is only supported on root branches.
 
 ## Plan limits
 
 - **Free**: 10 branches per project, 0.5 GB storage per project
 - **Launch**: 10 included branches per project, $1.50/branch-month for extras, up to 5,000 per project
-- **Scale**: 25 included branches per project, same overage rate
+- **Scale**: 25 included branches per project, same overage rate, up to 5,000 per project
 
 ## How this compares to other Postgres services
 

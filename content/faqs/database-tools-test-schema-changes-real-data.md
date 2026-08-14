@@ -32,14 +32,14 @@ Then run your migration against the connection string the CLI prints. If it brea
 neon branches delete migration-test
 ```
 
-Branches are included in every plan: 10 per project on Free and Launch, 25 on Scale. Extra branches are billed at $1.50/branch-month, prorated hourly to roughly $0.002/hour, so a short-lived migration branch costs cents. See [Plans](https://neon.com/docs/introduction/plans) for the full breakdown.
+Branches included per project: 10 on Free and Launch, 25 on Scale. On paid plans, extra branches are billed at $1.50/branch-month, prorated hourly to roughly $0.002/hour, so a short-lived migration branch costs cents. Extra branches aren't available on Free. See [Plans](/docs/introduction/plans) for the full breakdown.
 
 ## Why this beats dump-and-restore
 
-A `pg_dump`/`pg_restore` cycle on a 50 GB database can take hours, and you pay full storage for the duplicate. With branching, your test environment is ready in seconds and you only pay for the delta the migration writes. You can also automate the whole flow in CI with the [Neon GitHub Action](https://neon.com/docs/guides/branching-github-actions) so every PR gets its own throwaway database with real schema and data.
+A `pg_dump`/`pg_restore` cycle on a 50 GB database can take hours, and you pay full storage for the duplicate. With branching, your test environment is ready in seconds and you only pay for the delta the migration writes. You can also automate the whole flow in CI with the [Neon GitHub Action](/docs/guides/branching-github-actions) so every PR gets its own throwaway database with real schema and data.
 
 <Admonition type="tip">
-Use [schema-only branches](https://neon.com/docs/guides/branching-schema-only) if you need to test a migration but can't expose production data to the test environment.
+Use [schema-only branches](/docs/guides/branching-schema-only) if you need to test a migration but can't expose production data to the test environment.
 </Admonition>
 
 ## How other providers compare

@@ -33,14 +33,18 @@ Now every developer has their own connection string in `.env.local`. Running mig
 
 A traditional setup gives each developer a small RDS instance. Five developers at the smallest production-grade instance is around $50 to $100/month sitting idle on weekends.
 
-On Neon, each branch shares storage with `main` until it diverges. You pay for the delta and for compute only while the branch is being queried. With [scale to zero](/docs/introduction/scale-to-zero), an idle dev branch costs effectively nothing in compute. Extra branches beyond your plan's allowance are $1.50/branch-month (~$0.002/hr); see [extra branches pricing](/docs/introduction/plans#extra-branches).
+On Neon, each branch shares storage with `main` until it diverges. You pay for the delta and for compute only while the branch is being queried. With [scale to zero](/docs/introduction/scale-to-zero), an idle dev branch accrues no CU-hours. Extra branches beyond your plan's allowance are $1.50/branch-month (~$0.002/hr); see [extra branches pricing](/docs/introduction/plans#extra-branches).
 
 ## Auto-cleaning ephemeral branches
 
 For CI and short-lived environments, set a [time to live](/docs/guides/branch-expiration) so the branch deletes itself:
 
 ```bash
+# Linux/GNU
 neon branches create --name pr-1234 --parent main --expires-at "$(date -u -d '+24 hours' +%Y-%m-%dT%H:%M:%SZ)"
+
+# macOS/BSD
+# neon branches create --name pr-1234 --parent main --expires-at "$(date -u -v+24H +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
 Neon removes the branch at the expiration time. No script to write, no orphaned environments piling up.

@@ -63,6 +63,6 @@ Even with cheap branch storage, stale branches add up. Set a [time to live](/doc
 - **Aurora Serverless v2** has no built-in branching primitive. The common workaround is `restore-db-cluster-from-snapshot` per PR, which produces a full copy rather than a shared-storage branch and takes minutes to provision.
 - **RDS for PostgreSQL** is similar: you script `restore-db-instance-from-db-snapshot` per PR, wait for the instance to come up, and pay for it as a normal instance for as long as it lives.
 
-The differences that matter for CI workflows are speed (Neon branches finish in seconds), data shape (Neon branches start as a copy-on-write fork of the parent, including data), and idle cost (Neon compute suspends when tests aren't running).
+The differences that matter for CI workflows are speed (Neon branches finish in seconds), data shape (Neon branches start as a copy-on-write fork of the parent, including data), and idle cost (Neon compute suspends when tests aren't running; storage continues to bill for any delta).
 
 <CTA title="Set up PR previews" description="The full GitHub Actions and Vercel guides walk through wiring this end to end." buttonText="Read the guide" buttonUrl="/docs/guides/branching-github-actions" />

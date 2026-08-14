@@ -34,7 +34,7 @@ Creating the branch doesn't increase load on the parent, and writes on the branc
 
 ## Branch from a point in the past
 
-If the bug already happened in production, branch from before the bad data was written. The history window is 6 hours on Free, up to 7 days on Launch, and up to 30 days on Scale. See [Instant restore](https://neon.com/docs/introduction/branch-restore) for how to choose a timestamp or LSN.
+If the bug already happened in production, branch from before the bad data was written. The history window is 6 hours on Free, up to 7 days on Launch, and up to 30 days on Scale. See [Instant restore](/docs/introduction/branch-restore) for how to choose a timestamp or LSN.
 
 ```bash
 neon branches create --name pre-incident --parent 2026-04-25T09:00:00Z
@@ -44,10 +44,10 @@ You can connect that branch to a staging app, dump the rows you care about, and 
 
 ## Costs
 
-Branches included in your plan: 10 on Free and Launch, 25 on Scale. Extra branches are $1.50/branch-month, prorated hourly to roughly $0.002/hour. A debug branch that lives for two hours costs about half a cent in branch fees, plus whatever compute and storage delta it consumes.
+Branches included in your plan: 10 on Free and Launch, 25 on Scale. On paid plans, extra branches are $1.50/branch-month, prorated hourly to roughly $0.002/hour. Extra branches aren't available on Free. A debug branch that lives for two hours costs about half a cent in branch fees on a paid plan, plus whatever compute and storage delta it consumes.
 
 <Admonition type="tip">
-Mark production as a [protected branch](https://neon.com/docs/guides/protected-branches) on Launch and Scale to block accidental deletion or reset.
+Mark production as a [protected branch](/docs/guides/protected-branches) on Launch and Scale to block accidental deletion or reset.
 </Admonition>
 
 ## How this compares to other options

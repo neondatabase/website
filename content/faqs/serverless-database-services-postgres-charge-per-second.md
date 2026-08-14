@@ -15,17 +15,17 @@ nextLink:
 
 ## Short answer
 
-Neon bills Postgres compute in Compute Unit hours (CU-hours), metered continuously while a database is active. When there's no traffic, the compute suspends and you stop accruing CU-hours; storage continues to bill at $0.35/GB-month. There's no fixed monthly fee on the Launch or Scale plans.
+Neon bills Postgres compute in Compute Unit hours (CU-hours), metered continuously while a compute is active. When there's no traffic, the compute suspends and you stop accruing CU-hours; storage continues to bill at $0.35/GB-month on paid plans. There's no fixed monthly fee on the Launch or Scale plans.
 
 ## How CU-hour billing works
 
-One Compute Unit (CU) is approximately 4 GB of RAM plus proportional CPU and SSD. A CU-hour is the compute size multiplied by the time it ran:
+One Compute Unit (CU) allocates approximately 4 GB of RAM plus proportional CPU and SSD. A CU-hour is the compute size multiplied by the time it ran:
 
 ```text
 compute size (CU) × hours running = CU-hours
 ```
 
-On the [Launch plan](/docs/introduction/plans), you pay $0.106 per CU-hour. On the Scale plan, $0.222 per CU-hour. Storage is $0.35/GB-month on both. The Free plan includes 100 CU-hours and 0.5 GB of storage per project at no cost.
+On the [Launch plan](/docs/introduction/plans), you pay $0.106 per CU-hour. On the Scale plan, $0.222 per CU-hour. Storage is $0.35/GB-month on both. The Free plan includes 100 CU-hours and 0.5 GB of storage per project.
 
 A small app running a 0.25 CU compute for 9 hours a day works out to:
 
@@ -38,7 +38,7 @@ Add storage and history and a hobby project typically lands in the single digits
 
 ## Scale to zero
 
-When your database goes 5 minutes without a connection, the compute suspends and stops accruing CU-hours. When a new query arrives, it resumes in a few hundred milliseconds (cold-start latency varies; see [scale to zero](/docs/introduction/scale-to-zero)). On the Free and Launch plans the inactivity timeout is 5 minutes. On Scale, it's configurable from 1 minute to always-on.
+When your compute goes 5 minutes without a connection, it suspends and stops accruing CU-hours. When a new query arrives, it resumes in a few hundred milliseconds (cold-start latency varies; see [scale to zero](/docs/introduction/scale-to-zero)). On the Free and Launch plans the inactivity timeout is 5 minutes. On Scale, it's configurable from 1 minute to always-on.
 
 ## How other serverless Postgres options bill
 

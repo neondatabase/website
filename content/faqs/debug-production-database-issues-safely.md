@@ -13,7 +13,7 @@ nextLink:
   slug: delete-database-neon
 ---
 
-The safe way to debug production is to put the diagnostic queries on separate compute from the user-facing workload. Neon gives you two ways to do that: branches for full read/write isolation, and read replicas for read-only investigation against live data.
+The safe way to debug production is to put diagnostic queries on separate compute from the user-facing workload. Neon gives you two ways to do that: branches for full read/write isolation, and read replicas for read-only investigation against live data.
 
 ## Read replicas for live diagnostics
 
@@ -25,7 +25,7 @@ Create one from the console or CLI:
 neon branches add-compute main --type read_only
 ```
 
-Replicas autoscale independently from the primary, so a heavy diagnostic query can run on a 4 CU replica while production stays at 1 CU. See [Read replicas](https://neon.com/docs/introduction/read-replicas).
+Replicas autoscale independently from the primary, so a heavy diagnostic query can run on a larger replica while production stays at a smaller size. See [Read replicas](https://neon.com/docs/introduction/read-replicas).
 
 ## Branches for write-heavy debugging
 
@@ -42,26 +42,30 @@ neon branches create --name pre-deploy \
   --parent 2026-04-25T08:00:00Z
 ```
 
-History window: 6 hours on Free, up to 7 days on Launch, up to 30 days on Scale.
+History window: 6 hours on the Free plan, up to 7 days on Launch, up to 30 days on Scale ([History window](https://neon.com/docs/introduction/history-window)).
 
 ## Inspect what's running right now
 
-Before reaching for a branch, the Neon Console's [Monitoring page](https://neon.com/docs/introduction/monitoring-page) shows live connection counts, CPU, and active sessions. For deeper inspection, the `pg_stat_statements` extension is enabled by default:
+Before reaching for a branch, the Neon Console's [Monitoring page](https://neon.com/docs/introduction/monitoring-page) shows live connection counts, CPU, and active sessions. For deeper query stats, install `pg_stat_statements` if it isn't already enabled:
 
 ```sql
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+
 SELECT query, calls, total_exec_time, mean_exec_time
 FROM pg_stat_statements
 ORDER BY total_exec_time DESC
 LIMIT 10;
 ```
 
+See [Query performance](https://neon.com/docs/postgresql/query-performance).
+
 <Admonition type="tip">
-Mark production as a [protected branch](https://neon.com/docs/guides/protected-branches) on Launch and Scale to prevent accidental writes during debugging sessions.
+Mark production as a [protected branch](https://neon.com/docs/guides/protected-branches) on Launch and Scale to prevent accidental deletion or reset during debugging.
 </Admonition>
 
 ## How other providers compare for safe debugging
 
-- **AWS RDS / Aurora**: read replicas are available and run on separate compute, see the [RDS read replica docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html). For write-side debugging, the standard path is [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new instance, which takes minutes and adds full instance and storage cost until you tear it down.
+- **AWS RDS / Aurora**: read replicas are available and run on separate compute; see the [RDS read replica docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html). For write-side debugging, the standard path is [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new instance, which takes minutes and adds full instance and storage cost until you tear it down.
 - **Supabase**: [read replicas](https://supabase.com/docs/guides/platform/read-replicas) are available for projects on Pro and above. Write-side debugging means restoring a PITR backup into the project (a paid add-on) or creating a [preview branch](https://supabase.com/docs/guides/deployment/branching), which won't include your production data.
 
 Neon's combination of read replicas (live, no separate storage cost) and copy-on-write branches (writable, full data shape, seconds to create) covers both read-only diagnostics and write-side experiments on the same platform.

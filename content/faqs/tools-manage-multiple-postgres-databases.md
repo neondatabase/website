@@ -15,7 +15,7 @@ nextLink:
 
 ## Short answer
 
-Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/cli), or the [API](/docs/reference/api). Free accounts include 100 projects.
+Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/cli), or the [API](/docs/reference/api). The Free plan includes 100 projects.
 
 ## How the hierarchy works
 
@@ -31,7 +31,7 @@ Branches inside a project share storage, so creating a `staging` or `preview/*` 
 
 ## Project limits by plan
 
-| Plan   | Projects per account                     |
+| Plan   | Projects                                 |
 | ------ | ---------------------------------------- |
 | Free   | 100                                      |
 | Launch | 100                                      |
@@ -70,6 +70,6 @@ If you're building a B2B app and want hard data isolation between customers, cre
 - **AWS RDS for PostgreSQL**: Each database is a separate DB instance with its own instance hours and storage. There's no "project" abstraction; you organize instances with tags, accounts, or VPCs. Scripted provisioning is possible via the AWS CLI or CloudFormation ([RDS docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)).
 - **AWS Aurora Serverless v2**: Same idea as RDS but with elastic compute. Each cluster is billed independently and you manage them through the AWS Console or API ([Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)).
 
-For per-customer database-per-tenant patterns, Neon's project model tends to be the lowest-overhead choice because idle projects scale to zero and contribute no compute cost to the invoice.
+For per-customer database-per-tenant patterns, Neon's project model tends to be the lowest-overhead choice because idle projects scale to zero and contribute no compute cost (storage continues to bill on paid plans; Free includes up to 0.5 GB/project).
 
 <CTA title="Manage projects in one place" description="Sign up and see how 100 free projects fit on one account." buttonText="Try Neon" buttonUrl="https://console.neon.tech/signup" />

@@ -35,7 +35,7 @@ For more precise rollbacks, use [instant restore](https://neon.com/docs/guides/b
 - **Launch**: up to 7 days, $0.20/GB-month for the change history
 - **Scale**: up to 30 days, $0.20/GB-month
 
-Restore creates a backup branch at the previous state so the rollback is reversible.
+Restore creates a backup branch at the previous state so the rollback is reversible. Reset from parent does not create a backup; it overwrites the child with the parent's latest state.
 
 <Callout title="CI integration">
 Both operations work from the [Neon CLI](https://neon.com/docs/cli/branches) and [API](/docs/reference/api/branches/restore-project-branch). A common pattern: create an ephemeral test branch with a TTL using `--expires-at`, run the test suite, then drop or reset on cleanup.

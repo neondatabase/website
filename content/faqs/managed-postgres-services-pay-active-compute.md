@@ -13,15 +13,15 @@ nextLink:
   slug: managed-postgres-services-reset-development-environment
 ---
 
-Neon charges for compute by the second, in CU-hours (compute-unit hours). When your database is idle, it suspends after a configurable timeout and stops accruing compute charges entirely. There's no per-instance monthly fee, no minimum, and no separate charge to keep a small database around.
+Neon charges for compute by the second, in CU-hours (compute-unit hours). When your database is idle, it suspends after a configurable timeout and stops accruing compute charges. There's no per-instance monthly fee and no minimum compute charge. Storage continues to bill while the compute is suspended ($0.35/GB-month on paid plans; Free includes 0.5 GB/project).
 
 ## How CU-hours work
 
-A Compute Unit (CU) is approximately 4 GB of RAM plus matching CPU and local SSD. Sizes range from 0.25 CU (≈1 GB RAM) up to 56 CU (≈224 GB RAM, Scale plan only). Compute usage is `compute size × hours running = CU-hours`.
+A Compute Unit (CU) allocates approximately 4 GB of RAM (≈4 GB) plus matching CPU and local SSD. Sizes range from 0.25 CU (≈1 GB RAM) up to 56 CU (≈224 GB RAM, Scale plan only). Compute usage is `compute size × hours running = CU-hours`.
 
 Pricing by plan:
 
-- **Free**: 100 CU-hours included per project per month. That's 400 hours of a 0.25 CU compute, enough to keep a small project always-on.
+- **Free**: 100 CU-hours included per project per month. That's enough to run a 0.25 CU compute for about 400 hours.
 - **Launch**: $0.106/CU-hour, autoscaling up to 16 CU.
 - **Scale**: $0.222/CU-hour, autoscaling up to 16 CU or fixed sizes up to 56 CU.
 
@@ -38,7 +38,7 @@ After 5 minutes of inactivity (the default), Neon suspends the compute. On the n
 ```
 
 <Admonition type="warning" title="Cold starts">
-Suspended computes wake on the first connection. The wake is typically fast but isn't free latency. For a latency-sensitive API, set a higher minimum compute size or disable scale-to-zero on the Launch and Scale plans.
+Suspended computes wake on the first connection, typically within a few hundred milliseconds. That resume latency may matter for latency-sensitive APIs. On Launch or Scale, raise the minimum compute size or disable scale-to-zero if you need always-warm compute.
 </Admonition>
 
 Storage is billed separately at $0.35/GB-month, and instant-restore history at $0.20/GB-month. The Neon [usage-based cost examples](https://neon.com/docs/introduction/plans#usage-based-cost-examples) page walks through full bills at different usage levels.

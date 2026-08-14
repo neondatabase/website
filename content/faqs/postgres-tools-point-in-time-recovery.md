@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres tools support point-in-time recovery for production databases?"
-description: "Standard Postgres administrators rely on external tools like pgBackRest, WAL-G, and Barman to handle continuous Write-Ahead Log archiving. Neon replaces..."
+description: "Neon instant restore (PITR) is built in. Restore a root branch to any moment in your history window without pgBackRest, WAL-G, or Barman."
 date: 2026-04-25
 slug: postgres-tools-point-in-time-recovery
 category: FAQ
@@ -53,7 +53,7 @@ PITR storage is only billed on root branches, since you can only restore from th
 
 ## Time Travel Assist: pick the right timestamp
 
-Before you overwrite a production branch, you usually want to confirm the data at the target timestamp looks right. [Time Travel Assist](/docs/guides/time-travel-assist) lets you run read-only queries against a historical state without performing a restore. Useful for narrowing down exactly when a bad migration ran or a row got deleted.
+Before you overwrite a production branch, you usually want to confirm the data at the target timestamp looks right. [Time Travel Assist](https://neon.com/docs/guides/time-travel-assist) lets you run read-only queries against a historical state without performing a restore. Useful for narrowing down exactly when a bad migration ran or a row got deleted.
 
 <Admonition type="important" title="Restore is an overwrite, not a merge">
 A restore replaces the entire branch with its historical state. Everything written after the target timestamp is excluded. Neon does create an automatic backup branch (named `{branch}_old_{timestamp}`) so you can roll back the restore if needed.
@@ -61,7 +61,7 @@ A restore replaces the entire branch with its historical state. Everything writt
 
 ## Snapshots for known-good points
 
-If you want a captured copy of a branch you can hold onto (separately from the rolling history window), use [snapshots](/docs/guides/snapshots). The Free plan includes 1 manual snapshot, Launch and Scale include 100. Snapshot storage is billed at $0.09/GB-month. Restore a snapshot to a new branch any time.
+If you want a captured copy of a branch you can hold onto (separately from the rolling history window), use [snapshots](https://neon.com/docs/guides/backup-restore). The Free plan includes 1 manual snapshot, Launch and Scale include 100. Snapshot storage is billed at $0.09/GB-month. Restore a snapshot to a new branch any time.
 
 ## How this compares to other Postgres services
 

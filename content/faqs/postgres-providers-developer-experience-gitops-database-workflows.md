@@ -25,7 +25,7 @@ A typical GitOps loop with Neon:
 2. CI calls the [Neon API](/docs/reference/api) or [CLI](/docs/cli) to create a child branch from `main`.
 3. Migrations run against the new branch as part of the build.
 4. Preview deployment gets the branch's connection string injected as an environment variable.
-5. PR merges, migration is applied to `main`, child branch auto-expires.
+5. PR merges, migration is applied to `main`, child branch auto-expires or is deleted.
 
 In a GitHub Actions step:
 
@@ -37,18 +37,19 @@ In a GitHub Actions step:
     project_id: ${{ secrets.NEON_PROJECT_ID }}
     branch_name: preview/pr-${{ github.event.pull_request.number }}
     api_key: ${{ secrets.NEON_API_KEY }}
+    username: neondb_owner
 
 - name: Run migrations
   run: drizzle-kit migrate
   env:
-    DATABASE_URL: ${{ steps.create-branch.outputs.db_url_pooled }}
+    DATABASE_URL: ${{ steps.create-branch.outputs.db_url_with_pooler }}
 ```
 
 See the [GitHub Actions guide](/docs/guides/branching-github-actions) for the full setup, including a cleanup workflow that deletes the branch when the PR closes.
 
 ## Why this works on Neon's architecture
 
-Branches are cheap because storage is versioned. A new branch records a pointer to the parent's state and only stores the pages it changes. Creating a branch of a 500 GB database doesn't copy 500 GB of data. The compute on each branch can scale to zero, so an idle preview branch costs storage delta only, not compute hours.
+Branches are cheap because storage is versioned. A new branch records a pointer to the parent's state and only stores the pages it changes. Creating a branch of a 500 GB database doesn't copy 500 GB of data. The compute on each branch can scale to zero, so an idle preview branch doesn't accrue CU-hours. You still pay for any storage delta on the branch.
 
 ## Built-in integrations
 

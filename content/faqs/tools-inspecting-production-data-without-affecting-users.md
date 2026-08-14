@@ -15,7 +15,7 @@ nextLink:
 
 ## Short answer
 
-You have two safe ways to inspect production data on Neon. Create a [branch](/docs/introduction/branching) for an isolated copy with its own compute, or attach a [read replica](/docs/guides/read-replicas) to your existing branch. Both run on separate compute from your production endpoint, so analytics queries don't slow down user-facing traffic.
+You have two safe ways to inspect production data on Neon. Create a [branch](/docs/introduction/branching) for an isolated copy with its own compute, or attach a [read replica](/docs/introduction/read-replicas) to your existing branch. Both run on separate compute from your production endpoint, so analytics queries don't slow down user-facing traffic.
 
 ## Branches: a separate copy with its own compute
 
@@ -33,7 +33,7 @@ Point Metabase, a notebook, or `psql` at the branch's connection string. When yo
 neon branches delete analytics
 ```
 
-Branches are included on all plans: 10/project on Free and Launch, 25 on Scale. Extra branches cost $1.50/branch-month (about $0.002/hour).
+Branches are included on all plans: 10/project on Free and Launch, 25 on Scale. Extra branches on paid plans cost $1.50/branch-month (about $0.002/hour).
 
 ## Read replicas: same data, separate compute
 
@@ -43,7 +43,7 @@ If you want the live state of production rather than a point-in-time fork, add a
 neon branches add-compute main --type read_only
 ```
 
-Use the read-only endpoint's connection string for read traffic. Replicas count toward CU-hour usage like any other compute.
+Use the read-only endpoint's connection string for read traffic. Replicas count toward CU-hour usage like any other compute. See [Create and manage read replicas](/docs/guides/read-replica-guide).
 
 ## When to pick which
 
@@ -55,7 +55,7 @@ Use the read-only endpoint's connection string for read traffic. Replicas count 
 | Offloading reporting queries                  |        |      x       |
 
 <Admonition type="tip" title="Mask sensitive data first">
-If you're sharing the connection string with non-engineering teammates, anonymize or drop PII on the branch before they connect. See the [data anonymization guide](/docs/guides/branching-test-queries).
+If you're sharing the connection string with non-engineering teammates, create an [anonymized branch](/docs/workflows/data-anonymization) so PII is masked before they connect.
 </Admonition>
 
 ## How other Postgres platforms handle this

@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?"
-description: "Providers like DigitalOcean and WAYSCloud deliver REST APIs for creating and deleting database clusters to support infrastructure automation. Neon provi..."
+description: "Neon's REST API creates and deletes projects and copy-on-write branches in seconds, with TypeScript and Python SDKs plus a Terraform provider."
 date: 2026-04-24
 slug: managed-postgres-providers-rest-api-database-automation
 category: FAQ
@@ -40,7 +40,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects" \
   }'
 ```
 
-The response includes the project ID, default branch, default role with password, and a connection string. You can pipe that straight into your tenant onboarding flow or a Terraform plan.
+The response includes the project ID, default branch, default role with password, and a connection string. You can pipe that straight into your tenant onboarding flow or a Terraform plan. Regions are AWS-only.
 
 ## Delete on a schedule
 

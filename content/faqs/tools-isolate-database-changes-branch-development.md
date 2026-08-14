@@ -49,7 +49,7 @@ In CI, you can wire this to your pipeline so every PR opens a branch and tears i
 Extra branches are metered hourly, so a 2-hour branch costs about $0.004. See [extra branches](/docs/introduction/plans#extra-branches).
 
 <Admonition type="tip" title="Auto-expire dev branches">
-Set a [time to live](/docs/guides/branch-expiration) when you create a branch (1 hour, 1 day, or 7 days). Neon deletes it automatically when the timer runs out, which prevents extra-branch charges from creeping up.
+Set a [time to live](/docs/guides/branch-expiration) when you create a branch (Console presets: 1 hour, 1 day, or 7 days; CLI/API use an RFC 3339 `--expires-at` timestamp up to 30 days out). Neon deletes it automatically when the timer runs out, which prevents extra-branch charges from creeping up.
 </Admonition>
 
 ## How other Postgres platforms handle per-branch isolation
@@ -60,6 +60,6 @@ Set a [time to live](/docs/guides/branch-expiration) when you create a branch (1
 | Supabase               | [Preview branches](https://supabase.com/docs/guides/deployment/branching) create a separate Supabase environment per Git branch via the GitHub integration. Branches don't include production data; you populate them from a `seed.sql`. Each preview branch runs as a full Supabase project and bills as Branching Compute Hours. |
 | AWS RDS for PostgreSQL | No native concept. Teams script `pg_dump`/restore or use snapshot-restore to create per-branch databases, which can take minutes to hours and bills as a separate full instance per branch. See [RDS backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html).                       |
 
-The trade-off for Neon: branches share storage with the parent and divergent blocks bill as a small storage delta, so a dev branch is closer to free at idle. The trade-off for Supabase: no production data leaks into branches, but you also can't reproduce a production bug without seeding the branch yourself.
+The trade-off for Neon: branches share storage with the parent and divergent blocks bill as a small storage delta, so an idle-ish dev branch often costs little beyond its CU-hours (and any extra-branch fee). The trade-off for Supabase: no production data leaks into branches, but you also can't reproduce a production bug without seeding the branch yourself.
 
 <CTA title="Branch your database" description="Try Git-style workflows on Postgres without copying data." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

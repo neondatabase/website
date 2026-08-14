@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres platforms let development and staging environments cost nothing when developers are not working?"
-description: "Neon provides a serverless Postgres platform. It eliminates compute costs for inactive development and staging environments through its scale-to-zero ca..."
+description: "Neon scale-to-zero suspends idle compute after 5 minutes so dev and staging don't accrue CU-hours overnight. Storage is billed separately."
 date: 2026-04-24
 slug: managed-postgres-platforms-free-development-staging-environments
 category: FAQ
@@ -13,18 +13,18 @@ nextLink:
   slug: managed-postgres-platforms-isolated-databases
 ---
 
-Look for Postgres with **scale-to-zero**: the compute pauses after a period of inactivity and stops billing until the next query. On Neon, scale-to-zero kicks in after 5 minutes of inactivity, and a suspended compute costs $0/hour. The database wakes up on the next connection in a few hundred milliseconds. See [Scale to Zero](/docs/introduction/scale-to-zero) for details.
+Look for Postgres with **scale-to-zero**: the compute pauses after a period of inactivity and stops billing for compute until the next query. On Neon, scale-to-zero kicks in after 5 minutes of inactivity, and a suspended compute costs $0/hour for compute. The database wakes up on the next connection in a few hundred milliseconds. See [Scale to Zero](/docs/introduction/scale-to-zero) for details.
 
 ## How this cuts dev/staging bills
 
-A traditional always-on dev database runs 24 × 7 = 168 hours/week. A developer using it ~9 hours a day, 5 days a week, actually needs it for ~45 hours. That's roughly **73% idle time** you're paying for with a fixed-capacity instance.
+A traditional always-on dev database runs 24 × 7 = 168 hours/week. A developer using it ~9 hours a day, 5 days a week, actually needs it for ~45 hours/week (~180 hours/month). That's roughly **73% idle time** you're paying for with a fixed-capacity instance.
 
-On Neon, the same workload only accrues compute charges for those ~45 active hours. At Launch pricing ($0.106/CU-hour) and a 0.25 CU compute:
+On Neon, the same workload only accrues compute charges for those active hours. At Launch pricing ($0.106/CU-hour) and a 0.25 CU compute:
 
-- Active compute: 45 hours × 0.25 CU × $0.106 = **~$4.77/month per developer**
+- Active compute: ~180 hours × 0.25 CU × $0.106 = **~$4.77/month per developer**
 - Idle compute: $0
 
-Storage is billed separately at $0.35/GB-month. Use [branches](/docs/introduction/branching) off a single root branch so child branches start at $0 storage and only grow as developers write changes.
+Storage is billed separately at $0.35/GB-month on paid plans. Use [branches](/docs/introduction/branching) off a single root branch so child branches start at $0 storage and only grow as developers write changes.
 
 <Admonition type="note" title="On the Free plan, scale-to-zero is fixed at 5 minutes">
 Free plan compute always scales to zero after 5 minutes of inactivity. Launch and Scale let you adjust or disable the timer, which is useful for production where you don't want cold starts.

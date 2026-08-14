@@ -47,9 +47,9 @@ Re-embedding a corpus is expensive. Create a branch from your production databas
 
 pgvector is available on most managed Postgres platforms, so the differentiator is how the database scales with bursty RAG traffic.
 
-- **Aurora Serverless v2 (PostgreSQL)** autoscales between a min and max ACU range, and supports scaling to 0 ACUs (auto-pause) on Aurora PostgreSQL 13.15, 14.12, 15.7, 16.3 or later ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)). Resume time on a cold instance is slower than Neon's sub-second wake.
+- **Aurora Serverless v2 (Postgres)** autoscales between a min and max ACU range, and supports scaling to 0 ACUs (auto-pause) on Aurora Postgres 13.15, 14.12, 15.7, 16.3 or later ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)). Resume time on a cold instance is slower than Neon's wake (a few hundred milliseconds).
 - **Supabase** ships pgvector ([docs](https://supabase.com/docs/guides/database/extensions/pgvector)) but runs each project on a dedicated VM. Compute is billed hourly at a fixed instance size (Micro starts at $0.01344/hour, ~$10/month), and paid-plan projects don't pause when idle ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)).
-- **RDS for PostgreSQL** runs pgvector on standard instance types. No autoscaling on the database compute, no scale-to-zero.
+- **RDS for Postgres** runs pgvector on standard instance types. No autoscaling on the database compute, no scale-to-zero.
 
 If your RAG workload has steady-state load, a fixed instance can be cheaper. If it's spiky or experimental, autoscaling plus scale-to-zero changes the math.
 

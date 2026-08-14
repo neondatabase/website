@@ -1,7 +1,7 @@
 ---
 title: "Which tools allow using Postgres without managing infrastructure?"
 date: 2026-04-25
-description: "Managed and serverless Postgres options like Neon, AWS Aurora Serverless, and Google Cloud SQL remove the need to provision, patch, or scale servers yourself."
+description: "Managed and serverless Postgres options like Neon, AWS Aurora Serverless, and Supabase remove the need to provision, patch, or scale servers yourself."
 slug: tools-for-serverless-postgres-infrastructure
 category: FAQ
 status: draft
@@ -15,19 +15,19 @@ nextLink:
 
 ## Short answer
 
-You have a few options for running Postgres without managing servers. Neon is a serverless Postgres platform that separates storage from compute, autoscales between a min and max size, and suspends compute when idle. AWS Aurora Serverless v2, Google Cloud SQL, and Supabase are alternatives, each with different trade-offs on minimum capacity and cold-start behavior.
+You have a few options for running Postgres without managing servers. Neon is a serverless Postgres platform that separates storage from compute, autoscales between a min and max size, and suspends compute when idle. AWS Aurora Serverless v2 and Supabase are alternatives, each with different trade-offs on minimum capacity and cold-start behavior.
 
 ## What "no infrastructure" actually means
 
-With a self-managed Postgres install, you pick instance sizes, plan for failover, run major-version upgrades, and provision storage ahead of demand. A managed platform takes those tasks over. A serverless platform goes further: capacity scales with traffic, and you stop paying when traffic stops.
+With a self-managed Postgres install, you pick instance sizes, plan for failover, run major-version upgrades, and provision storage ahead of demand. A managed platform takes those tasks over. A serverless platform goes further: capacity scales with traffic, and you stop paying for **compute** when traffic stops (storage continues to bill on paid plans).
 
 ## What Neon handles for you
 
-- **Provisioning**. Sign up, paste the connection string, and start querying. No instance type to choose. See the [quickstart](/docs/get-started-with-neon/signing-up).
+- **Provisioning**. Sign up, paste the connection string, and start querying. No instance type to choose. See the [quickstart](/docs/get-started/signing-up).
 - **Scaling**. [Autoscaling](/docs/introduction/autoscaling) adjusts compute between your configured min and max (up to 16 CU, ≈64 GB RAM) based on load.
 - **Connection limits**. Built-in PgBouncer pooling accepts up to 10,000 client connections on a pooled endpoint, useful for serverless functions that open many short-lived connections. See [connection pooling](/docs/connect/connection-pooling).
-- **High availability**. Storage is replicated across three AZs. Compute restarts automatically on failure.
-- **Backups**. [Instant restore](/docs/introduction/branch-restore) covers up to 30 days of point-in-time recovery on the Scale plan.
+- **High availability**. Storage components (Safekeepers and Pageservers) are distributed across multiple Availability Zones. Compute restarts or reschedules automatically on failure. See [high availability](/docs/introduction/high-availability).
+- **Backups**. [Instant restore](/docs/introduction/branch-restore) covers up to 30 days of point-in-time recovery on the Scale plan (root branches only).
 - **Extensions**. [pgvector, PostGIS, pg_stat_statements](/docs/extensions/pg-extensions), and dozens more are pre-installed.
 
 ## When serverless isn't the right fit
@@ -44,7 +44,7 @@ If your workload runs at sustained high load 24/7, a provisioned instance on RDS
 | Supabase                 | Dedicated Postgres instance per project; you pick a Compute size (Micro through 16XL) and resize manually. See [Supabase compute](https://supabase.com/docs/guides/platform/manage-your-usage/compute).        | Free Plan projects can be paused after extended inactivity. Paid plans run continuously and accrue Compute Hours.                                                                                                                                                   |
 
 <Admonition type="tip" title="Cold starts">
-Neon's compute resumes from suspend in a few hundred milliseconds. If sub-100ms response on every request matters, disable [scale to zero](/docs/introduction/scale-to-zero) (available on Launch and Scale) to keep the compute warm.
+Neon's compute resumes from suspend in a few hundred milliseconds. If you need every request to hit an already-warm compute, disable [scale to zero](/docs/introduction/scale-to-zero) on Launch or Scale.
 </Admonition>
 
 <CTA title="Try serverless Postgres" description="Create a project on the Free plan and see what no infrastructure feels like." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

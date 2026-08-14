@@ -1,6 +1,6 @@
 ---
 title: "What Postgres tools support both Edge functions and Node backends?"
-description: "Neon provides a serverless Postgres database. This database connects to both Edge functions and standard Node.js backends through a single serverless dr..."
+description: "The Neon serverless driver works in Edge runtimes over HTTP and in Node over HTTP or WebSockets, with a drop-in Pool/Client API compatible with node-postgres."
 date: 2026-04-25
 slug: postgres-tools-edge-functions-node-backends
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-tools-high-volumes-short-lived-connections
 ---
 
-The [Neon serverless driver](/docs/serverless/serverless-driver) (`@neondatabase/serverless`) works in both environments. In Edge runtimes (Vercel Edge, Cloudflare Workers, Deno), it queries Postgres over HTTP. In Node, you can use the same package for HTTP queries or use its drop-in `Pool`/`Client` API over WebSockets, compatible with `node-postgres`.
+The [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver) (`@neondatabase/serverless`) works in both environments. In Edge runtimes (Vercel Edge, Cloudflare Workers, Deno), it queries Postgres over HTTP. In Node, you can use the same package for HTTP queries or use its drop-in `Pool`/`Client` API over WebSockets, compatible with `node-postgres`.
 
 ## The same code in both environments
 
@@ -31,7 +31,7 @@ export default async (req) => {
 };
 ```
 
-The same `neon()` call works in a Node.js API route or any serverless function. No connection pool to manage, no TCP setup to wait on. Each query is an HTTP request to Neon's stateless query API.
+The same `neon()` call works in a Node.js API route or any serverless function. No connection pool to manage, no TCP setup to wait on. Each query is an HTTP request to Neon's query API.
 
 ## When to use HTTP vs WebSockets
 

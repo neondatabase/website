@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services let a SaaS platform provision a new database per tenant at sign-up without manual steps?"
-description: "Neon provides a serverless Postgres platform that separates storage from compute. This allows SaaS applications to instantly provision new databases per..."
+description: "Neon's API creates a Postgres project or branch per tenant in seconds, with isolated storage and compute that scales to zero when the tenant is idle."
 date: 2026-04-25
 slug: postgres-services-saas-tenant-database-provisioning
 category: FAQ
@@ -42,14 +42,14 @@ Provisioned databases bill for capacity 24/7. With Neon, an inactive tenant's co
 For a SaaS where most tenants are inactive most of the time, you only pay compute for the ones currently using the app.
 
 <Admonition type="important" title="Plan limits matter at scale">
-The Scale plan allows 1,000 projects per organization by default, with increases available on request. If you expect more tenants than that, look at the [Agent plan](/docs/introduction/agent-plan), which is built for platforms provisioning thousands of databases.
+The Scale plan allows 1,000 projects per organization by default, with increases available on request. If you expect more tenants than that, look at the [Agent plan](https://neon.com/docs/introduction/agent-plan), which is built for platforms provisioning thousands of databases.
 </Admonition>
 
 ## Connection handling
 
-Each Neon compute has a built-in PgBouncer pooler that accepts up to 10,000 client connections. Just add `-pooler` to the endpoint hostname:
+Each Neon compute has a built-in PgBouncer pooler that accepts up to 10,000 client connections. Add `-pooler` to the endpoint hostname:
 
-```
+```text
 postgresql://user:pass@ep-cool-name-123456-pooler.us-east-2.aws.neon.tech/dbname
 ```
 

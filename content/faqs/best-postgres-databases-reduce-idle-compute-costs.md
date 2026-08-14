@@ -33,7 +33,7 @@ Pricing on the Launch plan is $0.106/CU-hour. A 0.25 CU database that runs queri
 0.25 CU × 8 hours × 22 weekdays = 44 CU-hours = $4.66 / month
 ```
 
-The same 0.25 CU compute running 24/7 (about 720 hours/month) would be $19.08/month at the same rate. The difference is what you'd otherwise be paying for nights and weekends — and that gap grows proportionally with the average CU size.
+The same 0.25 CU compute running 24/7 (about 720 hours/month) would be $19.08/month at the same rate. The difference is what you'd otherwise be paying for nights and weekends, and that gap grows proportionally with the average CU size.
 
 The exact savings depend on your traffic pattern. The [Launch plan usage examples](/docs/introduction/plans#launch-plan) show a few realistic shapes: a light workload (10 CU-hours/month, ~$2.31 total) and a heavier one (250 CU-hours/month, ~$48 total).
 

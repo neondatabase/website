@@ -40,7 +40,7 @@ neon branches create \
 Or append the LSN to `--parent` (for example, `--parent 0/1E88838`) if you have the exact LSN from a log. The resulting branch is a normal database. Connect to it with `psql` or any client, run `SELECT * FROM orders WHERE ...` against the state at 14:32 UTC, and compare against production.
 
 <Callout title="Why this beats restoring a backup">
-Creating the branch is metadata-only. There's no `pg_restore` to wait on, no extra storage for a duplicate, and no impact on the parent's performance. When you're done, delete the branch and the storage goes with it.
+Creating the branch is metadata-only. There's no `pg_restore` to wait on, no full duplicate of the parent's data, and no impact on the parent's performance. When you're done, delete the branch; you're billed only for any delta the branch wrote while it existed.
 </Callout>
 
 If you'd rather rewind production itself, [instant restore](https://neon.com/docs/guides/branch-restore) rolls the branch back to a chosen timestamp and leaves a backup branch behind so the operation is reversible. For ad-hoc historical queries, [Time Travel queries](https://neon.com/docs/guides/time-travel-assist) let you run SQL against past states without creating a branch at all.

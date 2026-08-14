@@ -3,7 +3,7 @@ title: 'Where can I find my DATABASE_URL in Neon?'
 subtitle: 'Copy it from the Connect widget on the Project Dashboard and drop it into your .env.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -29,7 +29,7 @@ A Neon `DATABASE_URL` looks like:
 postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Both `sslmode=require` and `channel_binding=require` are part of the URL because Neon requires TLS. Don't strip them. See [Connect from any app](/docs/connect/connect-from-any-app) for what each segment means.
+Neon requires SSL/TLS (`sslmode=require`). `channel_binding=require` adds SCRAM mutual authentication. Keep both unless your client doesn't support channel binding. See [Connect to Neon securely](/docs/connect/connect-securely) and [Connect from any app](/docs/connect/connect-from-any-app).
 
 ## Use it in your app
 

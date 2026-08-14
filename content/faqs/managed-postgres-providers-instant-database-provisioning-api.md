@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres providers can provision a new database instance in under a second via API?"
-description: "Traditional database provisioning delays automated testing and CI/CD pipelines because initializing storage and compute takes minutes. Neon delivers ins..."
+description: "Neon branch API returns a connection string in seconds via copy-on-write. Pair with branch expiration for ephemeral CI databases at fractions of a cent."
 date: 2026-04-25
 slug: managed-postgres-providers-instant-database-provisioning-api
 category: FAQ
@@ -19,7 +19,7 @@ If your CI pipeline or test runner needs a fresh Postgres database for every job
 
 A traditional managed Postgres provider creates a new database by spinning up a VM, attaching storage, and initializing a Postgres instance. That takes minutes.
 
-Neon decouples storage from compute. Creating a [branch](/docs/introduction/branching) is a metadata operation: the API records a new branch pointing to existing storage pages and provisions a compute endpoint. The compute is ready within seconds, and the connection string is returned immediately in the API response.
+Neon decouples storage from compute. Creating a [branch](/docs/introduction/branching) is a metadata operation: the API records a new branch pointing to existing storage pages and provisions a compute endpoint. The compute is ready within seconds, and the connection string is returned in the API response.
 
 ## Provision a database via API
 
@@ -55,8 +55,8 @@ For per-CI-run databases, what matters is how long the API takes to return a usa
 
 - **Supabase** preview branches are full project environments (database, auth, storage, edge functions) and are provisioned via the Management API. Branch creation involves the full deployment workflow (clone, migrate, seed, deploy) and waits up to 2 minutes for health checks before the branch is usable. See [Supabase branching](https://supabase.com/docs/guides/deployment/branching). Compute on the default Micro size starts at ~$0.01344/hour.
 - **Aurora Serverless v2** clusters can be created via the AWS API or CloudFormation, but provisioning a new cluster takes minutes (the API call returns quickly, but the cluster isn't usable immediately). For ephemeral CI work, Aurora clones are faster than creating a new cluster but still require a parent cluster and a separate billing unit per clone.
-- **RDS for PostgreSQL** create-DB-instance calls take minutes to return a connection-ready instance. Per-CI-run databases on RDS usually aren't economical because of the per-instance-hour billing.
+- **RDS for PostgreSQL** `CreateDBInstance` calls take minutes to return a connection-ready instance. Per-CI-run databases on RDS usually aren't economical because of the per-instance-hour billing.
 
-The Neon branch API returns a connection string immediately because the storage layer doesn't need to copy data and the compute is provisioned lazily on first connection.
+The Neon branch API returns a connection string quickly because the storage layer doesn't need to copy data and the compute is provisioned lazily on first connection.
 
 <CTA title="Wire branching into your CI" description="See how to spin up a fresh Postgres database for every pull request." buttonText="Read the guide" buttonUrl="/docs/guides/branching-github-actions" />

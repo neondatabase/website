@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres platforms let you create a database from a production snapshot to test a migration before deploying?"
-description: "Testing database migrations directly on production carries high risk of downtime. Managed Postgres platforms like Neon and Supabase offer database branc..."
+description: "Branch from production (or a snapshot) on Neon, run the migration on the copy, then promote or delete. Copy-on-write keeps storage costs low."
 date: 2026-04-25
 slug: managed-postgres-platforms-test-migration-snapshots
 category: FAQ
@@ -49,11 +49,11 @@ Most migration tools rely on session-level features like `SET` and prepared stat
 
 ## Snapshots for repeatable tests
 
-If you want a reusable baseline, take a [snapshot](/docs/manage/backups) of the production branch and create new test branches from it as needed. Snapshots persist outside the history window and are billed at $0.09/GB-month. Free includes 1 manual snapshot; Launch and Scale include 100.
+If you want a reusable baseline, take a [snapshot](/docs/guides/backup-restore) of the production branch and create new test branches from it as needed. Snapshots persist outside the history window and are billed at $0.09/GB-month. Free includes 1 manual snapshot; Launch and Scale include 100.
 
 ## How other providers handle migration testing
 
-- **RDS for PostgreSQL** lets you restore from an automated backup or snapshot into a new DB instance. The restore is a full provision: it spins up a new VM and copies storage, which takes minutes to hours depending on database size. See [Backup retention period](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
+- **RDS for PostgreSQL** lets you restore from an automated backup or snapshot into a new database instance. The restore is a full provision: it spins up a new VM and copies storage, which takes minutes to hours depending on database size. See [Backup retention period](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
 - **Aurora PostgreSQL** supports fast database cloning at the cluster level using a copy-on-write mechanism. Clones are available in minutes (faster than RDS restore) but still create a separate cluster with its own writer/reader instances to manage and pay for.
 - **Supabase** preview branches give you an isolated database environment, but the branch starts empty: you seed it from a `seed.sql` file rather than from production data. For migration testing against real schema and row counts, you'd need a separate process to populate the branch. See [Supabase branching](https://supabase.com/docs/guides/deployment/branching).
 

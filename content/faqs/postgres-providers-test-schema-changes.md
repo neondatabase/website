@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-seed-test-environment-production-data
 ---
 
-Neon's [database branching](https://neon.com/docs/introduction/branching) creates an isolated, copy-on-write clone of your database in seconds. Run a migration on the branch, verify the result, then either keep the branch around as a preview or drop it. Production never sees the change.
+Neon's [database branching](/docs/introduction/branching) creates an isolated, copy-on-write clone of your database in seconds. Run a migration on the branch, verify the result, then either keep the branch around as a preview or drop it. Production never sees the change.
 
 ## How branching works
 
@@ -46,16 +46,16 @@ A common pattern for schema changes:
 1. Create a branch from `main` (or from production, if you keep it separate).
 2. Apply the migration on the branch with your tool of choice (Drizzle, Prisma, Alembic, raw SQL).
 3. Run your test suite against the branch's connection string.
-4. If anything is wrong, restore the branch to its starting point with `neon branches reset`, or delete and recreate it.
+4. If anything is wrong, reset the branch to its parent with `neon branches reset test-migration --parent`, or delete and recreate it.
 5. Once green, merge the migration into `main` through your usual deploy process.
 
 <Admonition type="tip" title="Automate it in CI">
-Neon's [GitHub Actions](https://neon.com/docs/guides/branching-github-actions) create a fresh branch per pull request and delete it on merge or close. Your CI tests run against real data shape without touching production.
+Neon's [GitHub Actions](/docs/guides/branching-github-actions) create a fresh branch per pull request and delete it on merge or close. Your CI tests run against real data shape without touching production.
 </Admonition>
 
 ## When to use a schema-only branch
 
-If your production data contains PII or your full data set is large, use a [schema-only branch](https://neon.com/docs/guides/branching-schema-only). It clones the schema without the rows, which is faster to provision and avoids any compliance concerns.
+If your production data contains PII or your full data set is large, use a [schema-only branch](/docs/guides/branching-schema-only). It clones the schema without the rows, which is faster to provision and avoids compliance concerns around copying production data.
 
 ## What other providers offer
 

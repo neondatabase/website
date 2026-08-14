@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres tools handle high volumes of short-lived connections efficiently?"
-description: "Neon resolves native Postgres connection limits by integrating PgBouncer directly into its serverless platform. This built-in connection pooling archite..."
+description: "Neon includes PgBouncer on every compute, accepting up to 10,000 pooled client connections. Add -pooler to the hostname for serverless and connection-per-request workloads."
 date: 2026-04-25
 slug: postgres-tools-high-volumes-short-lived-connections
 category: FAQ
@@ -26,7 +26,7 @@ Each Postgres connection is a separate OS process, and `max_connections` scales 
 | 4 CU         | ≈16 GB  | 1,678            |
 | 9+ CU        | ≈36+ GB | 4,000 (hard cap) |
 
-Hit that ceiling and new connections get rejected. Serverless function fleets exhaust these limits quickly.
+Hit that ceiling and new connections get rejected. Serverless function fleets exhaust these limits quickly. That's why Neon leads with pooled connections for most apps; direct connections are for workloads that can't use a pooler.
 
 ## How the pooler works
 
@@ -64,9 +64,9 @@ Transaction-mode pooling means session state doesn't persist between transaction
 If you have a fleet that opens more than 10,000 simultaneous client connections to a single compute, you can:
 
 1. Use multiple database users (each gets its own pool).
-2. Skip the connection entirely and query over HTTP with the [Neon serverless driver](/docs/serverless/serverless-driver), which sends each query as a stateless HTTP request.
+2. Skip the connection entirely and query over HTTP with the [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver), which sends each query as a stateless HTTP request.
 
-The HTTP path scales effectively without limit because there's no persistent connection per client.
+The HTTP path avoids a persistent connection per client.
 
 ## How this compares to other Postgres services
 
@@ -75,6 +75,6 @@ Pooling support varies across managed Postgres offerings:
 - **Supabase** runs [Supavisor](https://supabase.com/docs/guides/database/connecting-to-postgres) as a shared pooler for every project, with both transaction mode (port 6543) and session mode (port 5432). Paid plans also get a [dedicated PgBouncer](https://supabase.com/docs/guides/database/connecting-to-postgres#dedicated-pooler) co-located with the database. Transaction mode in either pooler doesn't support [prepared statements](https://supabase.com/docs/guides/database/prisma/prisma-troubleshooting).
 - **Amazon RDS** and **Aurora** support [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) as an add-on managed connection pooler. It pools connections, handles IAM auth, and is billed separately from the DB instance.
 
-Neon's pooler is built into every compute by default (just toggle the `-pooler` hostname), and the underlying compute size determines pooler client capacity up to 10,000.
+Neon's pooler is available on every compute (toggle the `-pooler` hostname), and the underlying compute size determines pooler client capacity up to 10,000.
 
 <CTA title="Read the connection pooling guide" description="Full breakdown of pool sizing, query timeouts, and monitoring PgBouncer activity." buttonText="View pooling docs" buttonUrl="https://neon.com/docs/connect/connection-pooling" />

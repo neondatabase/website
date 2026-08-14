@@ -1,6 +1,6 @@
 ---
 title: "Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?"
-description: "Neon supports pgvector for similarity search and autoscales compute between a configured min and max. Compute also scales to zero when idle, so spiky AI workloads don't pay for downtime."
+description: "Neon supports pgvector for similarity search and autoscales compute between a configured min and max. Compute also scales to zero when idle, so spiky AI workloads don't pay for idle compute."
 date: 2026-04-25
 slug: database-providers-pgvector-autoscaling-ai-applications
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: database-providers-provision-postgres-user-signup
 ---
 
-Neon runs Postgres with the [pgvector extension](/docs/extensions/pgvector) and autoscales compute based on load. The same compute that idles at 0.25 CU between requests can scale up to 16 CU during a burst of similarity searches, then drop back. When traffic stops entirely, compute scales to zero after 5 minutes. AI workloads that go from quiet to busy and back fit this model well.
+Neon runs Postgres with the [pgvector extension](/docs/extensions/pgvector) and autoscales compute based on load. The same compute that idles at 0.25 CU (≈1 GB RAM) between requests can scale up to 16 CU (≈64 GB RAM) during a burst of similarity searches, then drop back. When traffic stops entirely, compute scales to zero after 5 minutes. AI workloads that go from quiet to busy and back fit this model well.
 
 ## Why AI workloads need autoscaling
 
@@ -21,11 +21,11 @@ Vector similarity searches are CPU-heavy. An HNSW query on a few million embeddi
 
 Neon's [autoscaling](/docs/introduction/autoscaling) changes compute size between a min and max you set:
 
-- **Free**: autoscale up to 2 CU
-- **Launch**: autoscale up to 16 CU
-- **Scale**: autoscale up to 16 CU, fixed sizes up to 56 CU
+- **Free**: autoscale up to 2 CU (≈8 GB RAM)
+- **Launch**: autoscale up to 16 CU (≈64 GB RAM)
+- **Scale**: autoscale up to 16 CU, fixed sizes up to 56 CU (≈224 GB RAM)
 
-Compute is billed in CU-hours at the average size during each hour, so you pay for the spike only while it lasts.
+Compute is billed in CU-hours at the average size during each hour, so you pay for the spike only while it lasts. You continue to pay for storage whether compute is active or suspended.
 
 ## pgvector setup
 
@@ -51,7 +51,7 @@ Test a new embedding model on a branch of your production data without re-embedd
 
 | Provider                          | pgvector                                                                    | Autoscaling compute                                                                                             | Scale to zero                                                                                                                                                               |
 | --------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Neon                              | Yes ([docs](/docs/extensions/pgvector))                                     | Between min/max CU, second-level scaling ([docs](/docs/introduction/autoscaling))                               | 5 min idle, sub-second wake                                                                                                                                                 |
+| Neon                              | Yes ([docs](/docs/extensions/pgvector))                                     | Between min/max CU, second-level scaling ([docs](/docs/introduction/autoscaling))                               | 5 min idle, few-hundred-ms wake                                                                                                                                             |
 | Aurora Serverless v2 (PostgreSQL) | Yes                                                                         | ACU range, scales automatically                                                                                 | 0 ACU auto-pause on Aurora PostgreSQL 13.15+/14.12+/15.7+/16.3+ ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)) |
 | Supabase                          | Yes ([docs](https://supabase.com/docs/guides/database/extensions/pgvector)) | Manual compute size change, brief downtime ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)) | Paid plans run 24/7                                                                                                                                                         |
 | RDS for PostgreSQL                | Yes                                                                         | None on the database compute                                                                                    | None                                                                                                                                                                        |

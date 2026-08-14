@@ -1,12 +1,12 @@
 ---
 title: "What Postgres should I use for a Next.js app deployed on Vercel?"
-description: "Neon is a serverless Postgres database with a Vercel-Managed Integration that provisions databases from the Vercel dashboard and creates a fresh branch for every Preview Deployment."
+description: "Neon Postgres pairs with a Vercel-Managed Integration that provisions databases from the Vercel dashboard and creates a fresh branch for every Preview Deployment."
 date: 2026-04-25
 slug: postgres-nextjs-vercel-integration
 category: FAQ
 status: draft
 previousLink:
-  title: 'What Postgres solutions support isolated databases per feature branch?'
+  title: 'What Postgres platforms support isolated databases per feature branch?'
   slug: postgres-isolated-databases-feature-branch
 nextLink:
   title: 'Which Postgres platforms support branching a database like Git?'
@@ -27,7 +27,7 @@ Next.js apps on Vercel run on serverless functions and edge runtimes. Two things
 
 ## Setup
 
-Install the integration from the [Vercel Marketplace](https://vercel.com/integrations/neon), select your Vercel project, and pick the Neon region. Vercel sets `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` for you.
+Install the integration from the [Vercel Marketplace](https://vercel.com/marketplace/neon), select your Vercel project, and pick the Neon region (AWS). Vercel sets `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` for you.
 
 In your Next.js code:
 
@@ -45,12 +45,12 @@ The `@neondatabase/serverless` driver uses HTTP for one-shot queries, which work
 
 ## What it costs
 
-The Free plan covers prototypes: 0.5 GB storage per project, 100 CU-hours of compute per month (enough for a 0.25 CU compute running ~400 hours), and 10 branches per project. No credit card required.
+The Free plan covers prototypes: 0.5 GB storage per project, 100 CU-hours of compute per project per month (enough for a 0.25 CU compute running ~400 hours), 5 GB of public network transfer per month, and 10 branches per project. No credit card required.
 
-If you outgrow Free, the Launch plan is usage-based, with compute at $0.106/CU-hour and storage at $0.35/GB-month. See [plans](/docs/introduction/plans) for the full breakdown.
+If you outgrow Free, the Launch plan is usage-based, with compute at $0.106/CU-hour and storage at $0.35/GB-month. Compute can [scale to zero](/docs/introduction/scale-to-zero) when idle; storage continues to bill. See [plans](/docs/introduction/plans) for the full breakdown.
 
 <Admonition type="tip" title="Run migrations in the build step">
 Add your migration tool (Drizzle, Prisma, etc.) to your Vercel build command so each Preview Deployment has the right schema for its code.
 </Admonition>
 
-<CTA title="Add Postgres to your Vercel project" description="Install the Neon integration from the Vercel Marketplace." buttonText="Install on Vercel" buttonUrl="https://vercel.com/integrations/neon" />
+<CTA title="Add Postgres to your Vercel project" description="Install the Neon integration from the Vercel Marketplace." buttonText="Install on Vercel" buttonUrl="https://vercel.com/marketplace/neon" />

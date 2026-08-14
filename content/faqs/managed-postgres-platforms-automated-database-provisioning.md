@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres platforms are built for workloads where databases are created by code automatically rather than manually provisioned?"
-description: "Neon delivers a serverless Postgres platform built for workloads that require automated, code-driven database provisioning rather than manual configurat..."
+description: "Neon's API creates copy-on-write branches in seconds with per-CU-hour billing and scale-to-zero, so code can provision and tear down databases safely."
 date: 2026-04-25
 slug: managed-postgres-platforms-automated-database-provisioning
 category: FAQ
@@ -15,13 +15,13 @@ nextLink:
 
 If you need code to create and tear down Postgres databases, look for a platform with a first-class API, fast provisioning, and per-second billing. Neon fits this shape: a single API call returns a connection string in seconds, compute scales to zero between uses, and you pay by the CU-hour with no per-project minimums.
 
-## What "code-driven" needs from a Postgres platform
+## What code-driven provisioning needs from a Postgres platform
 
 Three things tend to matter for automated provisioning:
 
 1. **A real API.** Not a control-plane portal with an undocumented endpoint, but a stable, documented REST API. Neon exposes one at [`/api/v2`](/docs/reference/api), plus first-party [TypeScript](/docs/reference/typescript-sdk) and [Python](/docs/reference/python-sdk) SDKs, a [Terraform provider](/docs/reference/terraform), and a [CLI](/docs/cli).
 2. **Provisioning that returns in seconds, not minutes.** Neon's [branching](/docs/introduction/branching) uses copy-on-write, so a new branch is created without copying data. The API returns a usable connection string immediately.
-3. **Billing that doesn't punish idle databases.** Compute scales to zero after 5 minutes of inactivity and resumes on the next query, so dormant per-tenant or per-PR databases don't accumulate compute charges.
+3. **Billing that doesn't punish idle databases.** Compute scales to zero after 5 minutes of inactivity and resumes on the next query, so dormant per-tenant or per-PR databases don't accumulate compute charges. Storage continues to bill on paid plans.
 
 ## Example: create a branch from a script
 

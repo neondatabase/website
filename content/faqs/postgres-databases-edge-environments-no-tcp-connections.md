@@ -56,7 +56,7 @@ For interactive transactions on the edge, remember that a WebSocket connection c
 
 ## Pooling still applies
 
-If you also have non-edge clients (long-running services, scheduled jobs) hitting the same database, point them at the pooled endpoint (`-pooler` in the hostname). PgBouncer handles up to 10,000 client connections, which keeps a bursty serverless workload from exhausting Postgres directly.
+If you also have non-edge clients (long-running services, scheduled jobs) hitting the same database, point them at the pooled endpoint (`-pooler` in the hostname). PgBouncer accepts up to 10,000 client connections per compute, which keeps a bursty serverless workload from exhausting Postgres `max_connections`.
 
 ## How other managed Postgres services handle edge clients
 

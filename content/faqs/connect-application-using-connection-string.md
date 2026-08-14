@@ -3,7 +3,7 @@ title: 'How do I connect my application to my Neon database using the connection
 subtitle: 'Read DATABASE_URL from your environment and pass it to a Postgres driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -76,7 +76,7 @@ Neon offers two flavors of the same connection string:
 The Connect widget gives you either by toggling **Connection pooling**. Most apps set `DATABASE_URL` to the pooled URL and `DIRECT_URL` to the direct URL for migrations. See [Connection pooling](/docs/connect/connection-pooling) for when to use which.
 
 <Admonition type="important" title="Always read the string from the environment">
-Hardcoding the URL in source code is a common source of credential leaks. Read it from `process.env.DATABASE_URL`, `os.environ`, or your secret manager. If you're deploying to Vercel, Render, Fly, or similar, set `DATABASE_URL` in the platform's env settings. The [Neon-Vercel integration](/docs/guides/vercel-managed-integration) sets it automatically.
+Hardcoding the URL in source code is a common source of credential leaks. Read it from `process.env.DATABASE_URL`, `os.environ`, or your secret manager. If you're deploying to Vercel, Render, Fly, or similar, set `DATABASE_URL` in the platform's env settings. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) sets it automatically.
 </Admonition>
 
 <CTA title="Choose your connection method" description="Compare drivers and connection types based on where you're deploying." buttonText="Read the docs" buttonUrl="/docs/connect/choose-connection" />

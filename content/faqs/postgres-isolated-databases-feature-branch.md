@@ -1,5 +1,5 @@
 ---
-title: "What Postgres solutions support isolated databases per feature branch?"
+title: "What Postgres platforms support isolated databases per feature branch?"
 description: "Neon creates a writable copy of your Postgres database for each feature branch in seconds, with branch expiration policies to auto-delete unused environments after 1 hour, 1 day, or 7 days."
 date: 2026-04-25
 slug: postgres-isolated-databases-feature-branch
@@ -34,7 +34,7 @@ The most common pattern is GitHub Actions plus the Neon CLI:
     neon branches create \
       --name preview/pr-${{ github.event.pull_request.number }} \
       --parent main \
-      --expiration-period 7d
+      --expires-at "$(date -u -d '+7 days' +%Y-%m-%dT%H:%M:%SZ)"
 ```
 
 For Vercel users, the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) handles the same flow automatically. Every Preview Deployment gets a fresh branch with environment variables injected at build time. See the [GitHub Actions guide](/docs/guides/branching-github-actions) for a full example.
@@ -43,8 +43,8 @@ For Vercel users, the [Vercel-Managed Integration](/docs/guides/vercel-managed-i
 
 Stale branches add storage cost. Set a TTL when you create the branch:
 
-- 1 hour, 1 day, or 7 days from the [Console](/docs/guides/branch-expiration#using-the-console)
-- Any timestamp via `--expires-at` on the CLI or `expires_at` on the API
+- 1 hour, 1 day, or 7 days from the [Console](/docs/guides/branch-expiration)
+- Any RFC 3339 timestamp via `--expires-at` on the CLI or `expires_at` on the API (up to 30 days ahead)
 
 The branch is deleted automatically when it expires.
 
@@ -66,6 +66,6 @@ The hard maximum is 5,000 branches per project on paid plans. For teams running 
 
 - **Amazon RDS for PostgreSQL.** No native per-branch databases. Most teams use snapshot-and-restore, which copies the full dataset and provisions a fresh instance per environment.
 
-Neon's branches include the parent's data by default (or no data, if you prefer), and the compute on an idle branch [scales to zero](/docs/introduction/scale-to-zero), so unused preview branches cost only storage delta.
+Neon's branches include the parent's data by default (or no data, if you prefer a [schema-only branch](/docs/guides/branching-schema-only)). Compute on an idle branch [scales to zero](/docs/introduction/scale-to-zero), so unused preview branches don't accrue CU-hours; you still pay for any storage delta on the branch.
 
 <CTA title="Branch Postgres like you branch code" description="Free plan includes 10 branches per project with no credit card." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

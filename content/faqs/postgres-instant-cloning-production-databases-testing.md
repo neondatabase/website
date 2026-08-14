@@ -50,8 +50,8 @@ The new branch has its own connection string and a [time-to-live](/docs/guides/b
 ## Plan limits
 
 - **Free**: 10 branches per project, 0.5 GB storage cap
-- **Launch**: 10 branches included, extra branches at $1.50/branch-month (prorated hourly)
-- **Scale**: 25 branches included, same overage rate
+- **Launch**: 10 branches included, extra at $1.50/branch-month (prorated hourly), up to 5,000 per project
+- **Scale**: 25 branches included, same overage rate, up to 5,000 per project
 
 ## How other Postgres options compare
 
@@ -61,6 +61,6 @@ The new branch has its own connection string and a [time-to-live](/docs/guides/b
 
 - **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) creates a fresh Postgres environment per branch and runs your migrations on it, but [no production data is copied to the preview branch](https://supabase.com/docs/guides/deployment/branching/github-integration#seeding). Branches are seeded from a `seed.sql` file instead. That's a deliberate choice for security; it also means a branch isn't a clone of production data.
 
-Neon's branches are copy-on-write at the storage layer and include the parent's data by default. You can also create a branch [without data](/docs/guides/branching-without-data) when that fits your workflow.
+Neon's branches are copy-on-write at the storage layer and include the parent's data by default. You can also create a [schema-only branch](/docs/guides/branching-schema-only) when you need the structure without production data.
 
 <CTA title="Branch a database in seconds" description="Free plan includes 10 branches per project." buttonText="Try it free" buttonUrl="https://console.neon.tech/signup" />

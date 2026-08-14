@@ -36,7 +36,7 @@ A branch's storage is capped at the logical size of its data, but the delta does
 
 ## Plan limits to know
 
-The Free plan includes 10 branches per project and 0.5 GB of total storage per project, which is enough to prototype the workflow. The Launch and Scale plans include 10 and 25 branches per project respectively, and you can create extra branches at $1.50/branch-month (prorated hourly). For larger teams, Scale supports up to 5,000 branches per project.
+The Free plan includes 10 branches per project and 0.5 GB of total storage per project, which is enough to prototype the workflow. Launch and Scale include 10 and 25 branches per project respectively, and you can create extra branches at $1.50/branch-month (prorated hourly). Both paid plans support up to 5,000 branches per project.
 
 See the full breakdown in the [Neon plans](https://neon.com/docs/introduction/plans) page.
 
@@ -44,7 +44,7 @@ See the full breakdown in the [Neon plans](https://neon.com/docs/introduction/pl
 
 | Provider           | Per-copy storage                                                         | Practical limit                                                                 |
 | ------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| Neon               | Copy-on-write delta only, billed at $0.35/GB-month                       | Up to 5,000 branches per project on Scale                                       |
+| Neon               | Copy-on-write delta only, billed at $0.35/GB-month                       | Up to 5,000 branches per project on Launch and Scale                            |
 | Aurora PostgreSQL  | Copy-on-write at the storage layer (clones share pages until divergence) | Up to 15 copy-on-write clones per source cluster before the next is a full copy |
 | Supabase           | Full project per preview branch (dedicated DB, Auth, Storage)            | Each preview branch incurs its own compute and disk size charges                |
 | RDS for PostgreSQL | Full duplicate via `pg_dump` or snapshot restore                         | Each copy uses the full provisioned disk                                        |

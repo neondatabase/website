@@ -33,7 +33,7 @@ neon branches create \
 The maximum expiration is 30 days from the time you set it. Protected branches, default branches, and branches that have children of their own can't have expirations attached.
 
 <Admonition type="tip" title="Working with sensitive data?">
-Use [schema-only branches](https://neon.com/docs/guides/branching-schema-only) to copy the schema without any production data, then seed the branch with anonymized fixtures.
+Use [schema-only branches](https://neon.com/docs/guides/branching-schema-only) (beta) to copy the schema without any production data, then seed the branch with anonymized fixtures.
 </Admonition>
 
 ## Wire it into your pipeline

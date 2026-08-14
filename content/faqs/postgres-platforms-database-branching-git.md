@@ -51,7 +51,7 @@ The hard ceiling is 5,000 branches per project on paid plans.
 Stale branches accumulate storage cost. Set a [branch expiration](/docs/guides/branch-expiration) when you create one:
 
 - 1 hour, 1 day, or 7 days from the Console
-- Any RFC 3339 timestamp on the CLI (`--expires-at`) or API (`expires_at`)
+- Any RFC 3339 timestamp on the CLI (`--expires-at`) or API (`expires_at`), up to 30 days ahead
 
 The branch is deleted automatically when it expires. This pairs well with preview-per-PR workflows where branches outlive PRs unless cleanup runs.
 
@@ -63,6 +63,6 @@ The branch is deleted automatically when it expires. This pairs well with previe
 
 - **Amazon RDS for PostgreSQL.** No native branching. The closest workflow is snapshot-and-restore, which copies the full dataset and provisions a fresh instance per environment.
 
-Neon's branches include parent data by default, scale compute to zero independently per branch, and ship with [auto-expiration](/docs/guides/branch-expiration) so preview environments clean themselves up.
+Neon's branches include parent data by default, scale compute to zero independently per branch, and ship with [auto-expiration](/docs/guides/branch-expiration) so preview environments clean themselves up. Idle branch compute doesn't accrue CU-hours; storage delta still bills.
 
 <CTA title="Branch your Postgres database in seconds" description="Free plan includes 10 branches per project." buttonText="Try it free" buttonUrl="https://console.neon.tech/signup" />

@@ -38,22 +38,22 @@ neon branches create --name test --parent main
 neon connection-string test
 ```
 
-Through the API or a [GitHub Action](https://neon.com/docs/guides/branching-github-actions), the equivalent call is one HTTP request. Branch creation imposes no load on the parent. See the [branching foundational concepts](https://neon.com/branching/foundational-concepts) for the storage model.
+Through the API or a [GitHub Action](/docs/guides/branching-github-actions), the equivalent call is one HTTP request. Branch creation imposes no load on the parent. See the [branching foundational concepts](https://neon.com/branching/foundational-concepts) for the storage model.
 
 ## When production data is sensitive
 
 If you can't use raw production data in a test environment, Neon has two options:
 
-- **[Schema-only branches](https://neon.com/docs/guides/branching-schema-only)** clone the structure without the rows. Useful when test data is generated separately, or when you only need to validate migrations.
-- **[Data anonymization](https://neon.com/docs/workflows/data-anonymization)** uses the PostgreSQL Anonymizer extension to mask PII in a branch. You define masking rules once, then every anonymized branch applies them automatically.
+- **[Schema-only branches](/docs/guides/branching-schema-only)** clone the structure without the rows. Useful when test data is generated separately, or when you only need to validate migrations.
+- **[Data anonymization](/docs/workflows/data-anonymization)** uses the PostgreSQL Anonymizer extension to mask PII in a branch. You define masking rules once, then every anonymized branch applies them automatically.
 
 <Admonition type="tip" title="Refresh, don't recreate">
-To pull the latest production data into an existing test branch, use `neon branches reset --parent` instead of deleting and recreating. The branch keeps its name and connection string, so anything pointing at it keeps working.
+To pull the latest production data into an existing test branch, use `neon branches reset test --parent` instead of deleting and recreating. The branch keeps its name and connection string, so anything pointing at it keeps working.
 </Admonition>
 
 ## Storage cost
 
-A child branch is billed only for changes you make against it, capped at the parent's logical data size. If your test branch only reads, you pay close to $0 in storage for it. See the [storage billing details](https://neon.com/docs/introduction/plans#storage).
+A child branch is billed only for changes you make against it, capped at the parent's logical data size. If your test branch only reads, it starts with no storage delta. See the [storage billing details](/docs/introduction/plans#storage).
 
 ## How other Postgres services compare
 
