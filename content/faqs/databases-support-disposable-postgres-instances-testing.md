@@ -1,6 +1,6 @@
 ---
 title: "What databases support disposable Postgres instances for testing?"
-description: "Neon's branching creates disposable Postgres instances in seconds. Use them for CI test runs, preview deployments, or one-off experiments, then throw them away."
+description: "Lakebase Postgres branching creates disposable Postgres instances in seconds. Use them for CI test runs, preview deployments, or one-off experiments, then throw them away."
 date: 2026-04-25
 slug: databases-support-disposable-postgres-instances-testing
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: debug-production-database-issues-safely
 ---
 
-Neon's branches work well as disposable Postgres environments. You create a branch in seconds, run your tests against it, and delete it when you're done. Because branches use copy-on-write storage, you don't pay to duplicate data upfront.
+Lakebase Postgres branches work well as disposable Postgres environments. You create a branch in seconds, run your tests against it, and delete it when you're done. Because branches use copy-on-write storage, you don't pay to duplicate data upfront.
 
 ## Spin up, test, tear down
 
@@ -51,8 +51,8 @@ The branch is deleted automatically at the expiration time. See [Branch expirati
 Plan allowances ([Plans](https://neon.com/docs/introduction/plans)):
 
 - **Free plan**: 10 branches per project, 100 projects, 0.5 GB storage per project
-- **Launch**: 10 branches included, $1.50/branch-month for extras (prorated hourly)
-- **Scale**: 25 branches included, same overage rate
+- **Launch plan**: 10 branches included, $1.50/branch-month for extras (prorated hourly)
+- **Scale plan**: 25 branches included, same overage rate
 
 A short-lived test branch that exists for an hour costs about $0.002 in branch fees, plus compute (suspended after 5 minutes of idle on Free and Launch) and any storage written during the test. You don't pay for compute while the branch is suspended; you continue to pay for storage the branch wrote.
 
@@ -66,6 +66,6 @@ Pair branching with [Neon Local](https://neon.com/docs/local/neon-local) to run 
 - **Aurora Serverless v2**: starts faster than RDS and can scale to zero ACUs once provisioned, but creation is still cluster-level. Setting up one per PR is heavier than a Neon branch.
 - **Supabase**: [preview branches](https://supabase.com/docs/guides/deployment/branching) per pull request are the closest analog. They don't carry data from your main project, so disposable test data has to come from a `seed.sql` file or your own migration scripts.
 
-Neon's branch model fits the disposable-instance pattern because creation is fast, the test environment carries real data shapes from production, and an unused branch stops billing compute once it scales to zero.
+The Lakebase Postgres branch model fits the disposable-instance pattern because creation is fast, the test environment carries real data shapes from production, and an unused branch stops billing compute once it scales to zero.
 
 <CTA title="Run disposable Postgres on Neon" description="Free plan, 10 branches per project, no credit card." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

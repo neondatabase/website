@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for apps where each end user or tenant gets their own isolated database?"
-description: "Neon delivers a serverless Postgres architecture. This architecture isolates individual tenant databases. It minimizes infrastructure costs. The platfor..."
+description: "Lakebase Postgres isolates individual tenant databases with scale-to-zero compute, so idle tenants don't cost compute. Provision one project per tenant through the Neon API."
 date: 2026-04-25
 slug: best-postgres-services-isolated-database-tenants
 category: FAQ
@@ -19,7 +19,7 @@ Neon. Each tenant gets its own Postgres project, provisioned through the API. Th
 
 Database-per-tenant gives you the cleanest isolation: no shared tables, no row-level security to get wrong, easy per-tenant backups and deletes. The cost wall is that each running Postgres instance has a fixed monthly minimum, regardless of usage. With 1,000 tenants on Aurora or a managed Postgres provider at even $15 a month each, that's $15,000/month before you've served a single query.
 
-Neon decouples storage from compute. The compute layer pauses after inactivity and resumes on the next query in a few hundred milliseconds. Storage is cheap and scales with actual tenant data.
+Lakebase Postgres decouples storage from compute. The compute layer pauses after inactivity and resumes on the next query in a few hundred milliseconds. Storage is cheap and scales with actual tenant data.
 
 ## How to provision per tenant
 
@@ -36,14 +36,14 @@ Store the returned connection string against the tenant in your control plane. W
 
 ## Cost shape for a tenant fleet
 
-- **Idle tenants**: compute scales to zero after 5 minutes of inactivity on Free and Launch, configurable from 1 minute to always-on on Scale. Idle compute is $0.
+- **Idle tenants**: compute scales to zero after 5 minutes of inactivity on the Free and Launch plans, configurable from 1 minute to always-on on the Scale plan. Idle compute is $0.
 - **Active tenants**: $0.106/CU-hour on Launch, $0.222/CU-hour on Scale. Autoscale between a min and max to absorb traffic spikes.
 - **Storage**: $0.35/GB-month on Launch and Scale, billed on actual data size.
 - **Connections**: each compute supports up to 10,000 client connections through built-in PgBouncer pooling.
 
 ## Security and compliance
 
-For SaaS apps that need compliance, the Scale plan includes SOC 2, ISO 27001, GDPR, and HIPAA. Network isolation options include [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) over AWS PrivateLink. Authentication is available through [Neon Auth](/docs/auth/overview), built on Better Auth and integrated into the platform.
+For SaaS apps that need compliance, the Scale plan includes SOC 2, ISO 27001, GDPR, and HIPAA. Network isolation options include [IP Allow](/docs/introduction/ip-allow) and [Private Networking](/docs/guides/neon-private-networking) over AWS PrivateLink. Authentication is available through [Neon Auth](/docs/auth/overview), built on Better Auth and integrated into Neon.
 
 ## What other Postgres services charge per tenant
 

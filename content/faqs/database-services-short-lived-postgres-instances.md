@@ -39,8 +39,8 @@ curl -X POST https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches \
 
 ## What scales
 
-- **Branches per project**: 10 on Free and Launch, 25 on Scale; paid plans support up to 5,000 with extras billed hourly
-- **Projects**: 100 on Free and Launch, 1,000 on Scale (increasable on request)
+- **Branches per project**: 10 on the Free plan and Launch plan, 25 on the Scale plan; paid plans support up to 5,000 with extras billed hourly
+- **Projects**: 100 on the Free plan and Launch plan, 1,000 on the Scale plan (increasable on request)
 - **For higher volumes**: the [Agent plan](/docs/introduction/agent-plan) is built for platforms that provision thousands of databases with custom limits
 
 Each branch can scale to zero independently. A thousand idle CI branches cost only their storage delta, not a thousand running computes.

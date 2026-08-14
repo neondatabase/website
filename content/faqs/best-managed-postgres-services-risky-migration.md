@@ -1,6 +1,6 @@
 ---
 title: "What are the best managed Postgres services for teams that want to test a risky migration and roll back instantly if it fails?"
-description: "Neon provides a serverless Postgres platform. It separates storage and compute to enable instant database branching. Teams create a branch to test risky..."
+description: "Neon separates storage and compute so you can branch Lakebase Postgres instantly. Teams create a branch to test risky migrations and roll back in seconds..."
 date: 2026-04-25
 slug: best-managed-postgres-services-risky-migration
 category: FAQ
@@ -39,9 +39,9 @@ See [Branching with the Neon CLI](/docs/guides/branching-neon-cli) for the full 
 
 ## Rolling back production with instant restore
 
-If a migration runs on `main` and breaks something, [instant restore](/docs/introduction/branch-restore) rewinds the branch to a point in time within your project's history window. The default history window is 6 hours on Free, 1 day on paid plans, configurable up to 7 days on Launch or 30 days on Scale ([Plans](/docs/introduction/plans#history-window)).
+If a migration runs on `main` and breaks something, [instant restore](/docs/introduction/branch-restore) rewinds the branch to a point in time within your project's history window. The default history window is 6 hours on the Free plan, 1 day on paid plans, configurable up to 7 days on the Launch plan or 30 days on the Scale plan ([Plans](/docs/introduction/plans#history-window)).
 
-Restore takes seconds because Neon doesn't replay logs into a new instance. It changes which point in the storage history the compute reads from.
+Restore takes seconds because Lakebase Postgres doesn't replay logs into a new instance. It changes which point in the storage history the compute reads from.
 
 <Admonition type="warning" title="Set your history window before you need it">
 Instant restore can only reach back as far as your configured history window. Increase it under **Settings -> Instant restore** in the Console if you need longer recovery options. Longer windows cost more in instant restore storage ($0.20/GB-month on paid plans).

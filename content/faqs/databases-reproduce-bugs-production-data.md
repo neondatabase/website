@@ -1,6 +1,6 @@
 ---
 title: "Which databases help reproduce bugs using real production data?"
-description: "Neon's branching gives you an isolated, full-data copy of production in seconds, so you can reproduce bugs without risk to live traffic."
+description: "Lakebase Postgres branching gives you an isolated, full-data copy of production in seconds, so you can reproduce bugs without risk to live traffic."
 date: 2026-04-25
 slug: databases-reproduce-bugs-production-data
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: databases-support-disposable-postgres-instances-testing
 ---
 
-Reproducing a production bug usually means running the bad request against the same data that caused it. Neon's branching gives you a full copy of your production data in seconds, on its own compute, so you can investigate without affecting the live database.
+Reproducing a production bug usually means running the bad request against the same data that caused it. Lakebase Postgres branching gives you a full copy of your production data in seconds, on its own compute, so you can investigate without affecting the live database.
 
 ## Branch from now, or from when the bug happened
 
@@ -24,7 +24,7 @@ neon branches create --name repro-bug-1234 --parent main
 neon connection-string repro-bug-1234
 ```
 
-If the bug only existed for a window, branch from a point in time inside your history window (6 hours on the Free plan, up to 7 days on Launch, up to 30 days on Scale):
+If the bug only existed for a window, branch from a point in time inside your history window (6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan):
 
 ```bash
 neon branches create --name repro-pre-deploy \

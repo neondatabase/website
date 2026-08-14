@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-providers-serverless-deployment
 ---
 
-Neon runs a managed [PgBouncer pooler](/docs/connect/connection-pooling) in front of every database. You don't deploy it, configure it, or maintain it. To use it, add `-pooler` to your endpoint hostname.
+Every database on Neon includes a managed [PgBouncer pooler](/docs/connect/connection-pooling). You don't deploy it, configure it, or maintain it. To use it, add `-pooler` to your endpoint hostname.
 
 ## Two strings, one database
 

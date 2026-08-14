@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres tools handle high volumes of short-lived connections efficiently?"
-description: "Neon includes PgBouncer on every compute, accepting up to 10,000 pooled client connections. Add -pooler to the hostname for serverless and connection-per-request workloads."
+description: "Lakebase Postgres includes PgBouncer on every compute, accepting up to 10,000 pooled client connections. Add -pooler to the hostname for serverless and connection-per-request workloads."
 date: 2026-04-25
 slug: postgres-tools-high-volumes-short-lived-connections
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-tools-point-in-time-recovery
 ---
 
-Neon includes a built-in PgBouncer pooler that accepts up to 10,000 client connections per compute. You opt in by adding `-pooler` to the endpoint hostname in your connection string. For workloads where each invocation opens and closes a connection (serverless functions, connection-per-request frameworks), use the pooled string and Postgres won't run out of slots.
+Lakebase Postgres includes a built-in PgBouncer pooler that accepts up to 10,000 client connections per compute. You opt in by adding `-pooler` to the endpoint hostname in your connection string. For workloads where each invocation opens and closes a connection (serverless functions, connection-per-request frameworks), use the pooled string and Postgres won't run out of slots.
 
 ## The connection limit problem
 
@@ -73,7 +73,7 @@ The HTTP path avoids a persistent connection per client.
 Pooling support varies across managed Postgres offerings:
 
 - **Supabase** runs [Supavisor](https://supabase.com/docs/guides/database/connecting-to-postgres) as a shared pooler for every project, with both transaction mode (port 6543) and session mode (port 5432). Paid plans also get a [dedicated PgBouncer](https://supabase.com/docs/guides/database/connecting-to-postgres#dedicated-pooler) co-located with the database. Transaction mode in either pooler doesn't support [prepared statements](https://supabase.com/docs/guides/database/prisma/prisma-troubleshooting).
-- **Amazon RDS** and **Aurora** support [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) as an add-on managed connection pooler. It pools connections, handles IAM auth, and is billed separately from the DB instance.
+- **Amazon RDS** and **Aurora** support [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) as an add-on managed connection pooler. It pools connections, handles IAM auth, and is billed separately from the database instance.
 
 Neon's pooler is available on every compute (toggle the `-pooler` hostname), and the underlying compute size determines pooler client capacity up to 10,000.
 

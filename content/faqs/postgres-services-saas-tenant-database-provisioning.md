@@ -37,7 +37,7 @@ For higher tenant density, create a new branch under a shared project instead of
 
 ## Why the cost model fits multi-tenant
 
-Provisioned databases bill for capacity 24/7. With Neon, an inactive tenant's compute scales to zero after 5 minutes of inactivity (configurable down to 1 minute on Scale). Storage still costs $0.35/GB-month, but compute drops to $0 for idle tenants.
+Provisioned databases bill for capacity 24/7. With Lakebase Postgres on Neon, an inactive tenant's compute scales to zero after 5 minutes of inactivity (configurable down to 1 minute on the Scale plan). Storage still costs $0.35/GB-month, but compute drops to $0 for idle tenants.
 
 For a SaaS where most tenants are inactive most of the time, you only pay compute for the ones currently using the app.
 
@@ -47,7 +47,7 @@ The Scale plan allows 1,000 projects per organization by default, with increases
 
 ## Connection handling
 
-Each Neon compute has a built-in PgBouncer pooler that accepts up to 10,000 client connections. Add `-pooler` to the endpoint hostname:
+Each compute on Neon has a built-in PgBouncer pooler that accepts up to 10,000 client connections. Add `-pooler` to the endpoint hostname:
 
 ```text
 postgresql://user:pass@ep-cool-name-123456-pooler.us-east-2.aws.neon.tech/dbname
@@ -59,10 +59,10 @@ This is what lets a single tenant absorb traffic spikes from serverless function
 
 Database-per-tenant is feasible on other managed Postgres services, but the cost and provisioning speed varies:
 
-- **Amazon RDS for PostgreSQL** can be automated with the AWS SDK, but each tenant gets a separate DB instance billed by the hour, with no scale-to-zero. For thousands of mostly-idle tenants, this is expensive.
-- **Aurora Serverless v2** is closer to viable. You can [create a DB cluster per tenant via the AWS API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html) and configure [auto-pause to 0 ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). Cold-start resume from a paused state typically takes longer than Neon's compute wake.
+- **Amazon RDS for Postgres** can be automated with the AWS SDK, but each tenant gets a separate database instance billed by the hour, with no scale-to-zero. For thousands of mostly-idle tenants, this is expensive.
+- **Aurora Serverless v2** is closer to viable. You can [create a database cluster per tenant via the AWS API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html) and configure [auto-pause to 0 ACUs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). Cold-start resume from a paused state typically takes longer than Neon's compute wake.
 - **Supabase** provisions a [dedicated VM and Postgres instance per project](https://supabase.com/docs/guides/platform/manage-your-usage/compute), with Compute billed by the hour at ~$0.01344+/hr per project. Paid projects don't auto-pause, so each active tenant adds a continuous compute line item.
 
 Neon's combination of API-driven project/branch creation and per-second compute that scales to zero is what makes the database-per-tenant pattern affordable at thousands of tenants.
 
-<CTA title="Build a tenant-per-database SaaS on Neon" description="Browse the platform integration guide for full code examples and webhook patterns." buttonText="Read the guide" buttonUrl="https://neon.com/docs/use-cases/database-per-tenant" />
+<CTA title="Build a tenant-per-database SaaS on Neon" description="Browse the database-per-tenant guide for full code examples and webhook patterns." buttonText="Read the guide" buttonUrl="https://neon.com/docs/use-cases/database-per-tenant" />

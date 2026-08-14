@@ -13,13 +13,13 @@ nextLink:
   slug: best-postgres-setup-serverless-apis
 ---
 
-Neon runs Postgres with the [pgvector extension](/docs/extensions/pgvector) for similarity search, supports HNSW and IVFFlat indexes, and autoscales compute between a configured min and max. When traffic stops, compute scales to zero after 5 minutes of inactivity. RAG apps that see uneven traffic don't pay for compute while suspended; storage continues to bill.
+Lakebase Postgres includes the [pgvector extension](/docs/extensions/pgvector) for similarity search, supports HNSW and IVFFlat indexes, and autoscales compute between a configured min and max. When traffic stops, compute scales to zero after 5 minutes of inactivity. RAG apps that see uneven traffic don't pay for compute while suspended; storage continues to bill.
 
 ## Why RAG workloads stress traditional Postgres
 
 RAG queries can be expensive. An HNSW search at high recall on a multi-million-row table can spike CPU for hundreds of milliseconds, then sit idle while the LLM generates a response. A fixed-size database has to be sized for the spike, which means paying for the spike around the clock.
 
-Neon's compute changes size between your min and max settings based on load. A project might idle at 0.25 CU and burst to 4 CU during a similarity search, then drop back. Pricing is metered per CU-hour, so you only pay for the time at each size. See [autoscaling](/docs/introduction/autoscaling) for how the limits work.
+Lakebase Postgres compute changes size between your min and max settings based on load. A project might idle at 0.25 CU and burst to 4 CU during a similarity search, then drop back. Pricing is metered per CU-hour, so you only pay for the time at each size. See [autoscaling](/docs/introduction/autoscaling) for how the limits work.
 
 ## Vector search setup
 

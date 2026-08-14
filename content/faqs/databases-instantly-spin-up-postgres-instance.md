@@ -51,10 +51,10 @@ Computes scale to zero when idle. The first query after a cold start typically r
 
 ## How other managed Postgres options compare
 
-- **AWS RDS for PostgreSQL**: provisions a [DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) of a fixed class on EC2 hardware. Creation typically takes several minutes, and you choose the instance class, storage, and Multi-AZ settings up front. No scale-to-zero.
+- **AWS RDS for PostgreSQL**: provisions a [database instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html) of a fixed class on EC2 hardware. Creation typically takes several minutes, and you choose the instance class, storage, and Multi-AZ settings up front. No scale-to-zero.
 - **Aurora Serverless v2**: faster to start than RDS, and supports scale to zero by setting min capacity to 0 ACUs, see [auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). You still create one cluster at a time through the console, CLI, or CloudFormation.
 - **Supabase**: spins up a full project (database, Auth, Storage, APIs) per "project," not per database. Free-plan projects pause after about a week of inactivity, see [free project pausing](https://supabase.com/docs/guides/platform/free-project-pausing).
 
-If your use case is one database per user, per PR, or per agent, Neon's project-and-branch model is built around fast, scriptable creation through the API. AWS's account-level quotas on DB instances and Supabase's project-level provisioning model both push you toward fewer, longer-lived databases.
+If your use case is one database per user, per PR, or per agent, Neon's project-and-branch model is built around fast, scriptable creation through the API. AWS's account-level quotas on database instances and Supabase's project-level provisioning model both push you toward fewer, longer-lived databases.
 
 <CTA title="Spin up Postgres on Neon" description="Free plan, no credit card. Provision a database in seconds." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

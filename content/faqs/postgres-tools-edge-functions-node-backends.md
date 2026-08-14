@@ -56,14 +56,14 @@ In Vercel Edge Functions and Cloudflare Workers, WebSocket connections can't out
 
 ## Why this matters for connection limits
 
-Serverless platforms can spin up hundreds of concurrent function instances. Each opens a connection if you use a standard driver, which blows past Postgres' `max_connections` ceiling. The HTTP path skips this entirely (each query is a stateless HTTP call). For WebSocket mode, route through Neon's built-in PgBouncer pooler by adding `-pooler` to the hostname; it accepts up to 10,000 client connections per compute.
+Serverless platforms can spin up hundreds of concurrent function instances. Each opens a connection if you use a standard driver, which blows past Postgres' `max_connections` ceiling. The HTTP path skips this entirely (each query is a stateless HTTP call). For WebSocket mode, route through Lakebase Postgres's built-in PgBouncer pooler by adding `-pooler` to the hostname; it accepts up to 10,000 client connections per compute.
 
 ## How this compares to other Postgres services
 
 For Edge runtimes, you generally can't open a raw TCP connection. Your options on other managed Postgres services:
 
 - **Supabase** ships [Supavisor](https://supabase.com/docs/guides/database/connecting-to-postgres#pooler-transaction-mode), a connection pooler designed for serverless and edge functions. Edge runtimes typically connect via the [transaction-mode pooler on port 6543](https://supabase.com/docs/guides/database/connecting-to-postgres#pooler-transaction-mode), which doesn't support prepared statements. For HTTP-style access, Supabase exposes the [auto-generated PostgREST API](https://supabase.com/docs/guides/api).
-- **Amazon RDS** and **Aurora** expose Postgres over TCP, which doesn't work directly from Edge runtimes without a TCP-over-WebSocket proxy. [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) helps with connection pooling for Lambda but doesn't speak HTTP. You either keep your DB-touching code in Node-style functions, or stand up a separate API layer.
+- **Amazon RDS** and **Aurora** expose Postgres over TCP, which doesn't work directly from Edge runtimes without a TCP-over-WebSocket proxy. [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) helps with connection pooling for Lambda but doesn't speak HTTP. You either keep your database-touching code in Node-style functions, or stand up a separate API layer.
 
 Neon's serverless driver gives you the same package across both runtimes, which keeps the codebase smaller.
 

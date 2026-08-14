@@ -21,7 +21,7 @@ Neon clones a Postgres database in seconds by creating a [branch](/docs/introduc
 
 In a typical setup, cloning a production database means running `pg_dump`, transferring the file, and restoring it onto another instance. For a 100 GB database, that can take hours and doubles your storage cost.
 
-Neon separates storage from compute and treats storage like a versioned filesystem. When you create a branch, Neon records a pointer to the parent's state. The new branch gets its own compute and connection string, but reads from the same underlying data pages. Only the pages your branch writes are stored separately. The [child branch storage section in the pricing docs](/docs/introduction/plans#storage) explains the billing math: you pay for the smaller of the delta or your logical data size.
+The lakebase architecture separates storage from compute and treats storage like a versioned filesystem. When you create a branch, Neon records a pointer to the parent's state. The new branch gets its own compute and connection string, but reads from the same underlying data pages. Only the pages your branch writes are stored separately. The [child branch storage section in the pricing docs](/docs/introduction/plans#storage) explains the billing math: you pay for the smaller of the delta or your logical data size.
 
 ## Creating a branch
 
@@ -49,9 +49,9 @@ The new branch has its own connection string and a [time-to-live](/docs/guides/b
 
 ## Plan limits
 
-- **Free**: 10 branches per project, 0.5 GB storage cap
-- **Launch**: 10 branches included, extra at $1.50/branch-month (prorated hourly), up to 5,000 per project
-- **Scale**: 25 branches included, same overage rate, up to 5,000 per project
+- **Free plan**: 10 branches per project, 0.5 GB storage cap
+- **Launch plan**: 10 branches included, extra at $1.50/branch-month (prorated hourly), up to 5,000 per project
+- **Scale plan**: 25 branches included, same overage rate, up to 5,000 per project
 
 ## How other Postgres options compare
 

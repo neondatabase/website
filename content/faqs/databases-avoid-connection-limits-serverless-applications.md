@@ -17,7 +17,7 @@ Serverless functions open a new database connection on most invocations, which q
 
 ## Use the pooled connection string
 
-Every Neon database exposes a pooled endpoint. Add `-pooler` to the hostname:
+Every database on Neon exposes a pooled endpoint. Add `-pooler` to the hostname:
 
 ```text
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
@@ -47,7 +47,7 @@ For high-concurrency serverless apps that need session features, combine the poo
 ## How other providers handle this
 
 - **AWS RDS / Aurora**: pooling isn't built in. You add [RDS Proxy](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html) in front of your instance as a separate service. It pools and multiplexes connections, but it's a paid component you configure and size yourself.
-- **Supabase**: every project includes [Supavisor](https://supabase.com/docs/guides/database/connecting-to-postgres), a transaction-mode pooler on port 6543. Like Neon's pooler, it doesn't support session-level features such as prepared statements in transaction mode. Paid projects can also use a dedicated PgBouncer co-located with Postgres.
+- **Supabase**: every project includes [Supavisor](https://supabase.com/docs/guides/database/connecting-to-postgres), a transaction-mode pooler on port 6543. Like the Neon pooler, it doesn't support session-level features such as prepared statements in transaction mode. Paid projects can also use a dedicated PgBouncer co-located with Postgres.
 - **HTTP query interface**: Neon's serverless driver lets you query over HTTPS from environments without TCP, which is useful for Cloudflare Workers and Vercel Edge. AWS Aurora exposes a similar idea via the [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html); Supabase exposes [PostgREST](https://supabase.com/docs/guides/api) rather than a raw HTTP SQL endpoint.
 
 <CTA title="Try Neon for serverless Postgres" description="Free plan, no credit card, scales compute to zero when idle." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

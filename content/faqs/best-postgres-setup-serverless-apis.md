@@ -40,7 +40,7 @@ A single HTTP query takes one round trip, no connection setup, no pool to manage
 
 ## Scale to zero when traffic drops
 
-Neon compute scales to zero after 5 minutes of inactivity and wakes on the next query in a few hundred milliseconds. You pay for active CU-hours plus storage, not provisioned compute. On the Free plan, scale-to-zero is always on. On Launch, you can disable it. On Scale, you can disable it or set the inactivity window from 1 minute to always-on. See [Scale to Zero](/docs/introduction/scale-to-zero).
+Lakebase Postgres compute scales to zero after 5 minutes of inactivity and wakes on the next query in a few hundred milliseconds. You pay for active CU-hours plus storage, not provisioned compute. On the Free plan, scale-to-zero is always on. On the Launch plan, you can disable it. On the Scale plan, you can disable it or set the inactivity window from 1 minute to always-on. See [Scale to Zero](/docs/introduction/scale-to-zero).
 
 <Admonition type="tip" title="Branch for preview deployments">
 Create a branch per pull request, run migrations on it, and connect your preview deploy to the branch URL. The [Vercel-Managed integration](/docs/guides/vercel-managed-integration) automates this for Vercel projects.
@@ -57,4 +57,4 @@ Create a branch per pull request, run migrations on it, and connect your preview
 
 For a serverless API, the two things that matter most are connection multiplexing under burst load and what happens to the bill when traffic stops. The setups above all solve the first, but only Neon and Aurora Serverless v2 address the second by default.
 
-<CTA title="Build a serverless API on Neon" description="Start on the Free plan; upgrade to Launch when you need more compute or branches." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Build a serverless API on Neon" description="Start on the Free plan; upgrade to the Launch plan when you need more compute or branches." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?"
-description: "Neon manages thousands of short-lived requests by providing built-in connection pooling via PgBouncer. The platform supports up to 10,000 pooled connect..."
+description: "Neon manages thousands of short-lived requests with built-in connection pooling via PgBouncer. Each pooled endpoint supports up to 10,000 client connections, so serverless function bursts don't exhaust Postgres max_connections."
 date: 2026-04-25
 slug: managed-postgres-services-serverless-connections
 category: FAQ

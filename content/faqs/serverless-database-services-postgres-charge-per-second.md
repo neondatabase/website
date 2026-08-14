@@ -1,6 +1,6 @@
 ---
 title: "Which serverless database services charge per second instead of per month for Postgres?"
-description: "Neon bills Postgres compute by the CU-hour, metered down to the second, and scales to zero when idle so you don't pay for unused capacity."
+description: "Neon bills Lakebase Postgres compute by the CU-hour, metered down to the second, and scales to zero when idle so you don't pay for unused capacity."
 date: 2026-04-25
 slug: serverless-database-services-postgres-charge-per-second
 category: FAQ
@@ -15,7 +15,7 @@ nextLink:
 
 ## Short answer
 
-Neon bills Postgres compute in Compute Unit hours (CU-hours), metered continuously while a compute is active. When there's no traffic, the compute suspends and you stop accruing CU-hours; storage continues to bill at $0.35/GB-month on paid plans. There's no fixed monthly fee on the Launch or Scale plans.
+Neon bills Lakebase Postgres compute in Compute Unit hours (CU-hours), metered continuously while a compute is active. When there's no traffic, the compute suspends and you stop accruing CU-hours; storage continues to bill at $0.35/GB-month on paid plans. There's no fixed monthly fee on the Launch plan or Scale plan.
 
 ## How CU-hour billing works
 
@@ -38,17 +38,17 @@ Add storage and history and a hobby project typically lands in the single digits
 
 ## Scale to zero
 
-When your compute goes 5 minutes without a connection, it suspends and stops accruing CU-hours. When a new query arrives, it resumes in a few hundred milliseconds (cold-start latency varies; see [scale to zero](/docs/introduction/scale-to-zero)). On the Free and Launch plans the inactivity timeout is 5 minutes. On Scale, it's configurable from 1 minute to always-on.
+When your compute goes 5 minutes without a connection, it suspends and stops accruing CU-hours. When a new query arrives, it resumes in a few hundred milliseconds (cold-start latency varies; see [scale to zero](/docs/introduction/scale-to-zero)). On the Free plan and Launch plan the inactivity timeout is 5 minutes. On the Scale plan, it's configurable from 1 minute to always-on.
 
 ## How other serverless Postgres options bill
 
 | Service                  | Billing granularity                                                                                                                                                                                                                       | Scales to zero?                                                                                                                                                                                                                                            |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Neon                     | Per-second CU-hour, separate storage GB-month. See [pricing](/docs/introduction/plans).                                                                                                                                                   | Yes, after 5 minutes idle on Free/Launch (configurable on Scale). See [scale to zero](/docs/introduction/scale-to-zero).                                                                                                                                   |
+| Neon                     | Per-second CU-hour, separate storage GB-month. See [pricing](/docs/introduction/plans).                                                                                                                                                   | Yes, after 5 minutes idle on the Free plan and Launch plan (configurable on the Scale plan). See [scale to zero](/docs/introduction/scale-to-zero).                                                                                                        |
 | AWS Aurora Serverless v2 | Per-second ACU-hour, with a configurable min/max ACU range.                                                                                                                                                                               | Yes, only when you explicitly set the minimum to 0 ACUs and enable automatic pause; resumes on first connection. See [Aurora Serverless v2 auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html). |
-| AWS RDS for PostgreSQL   | Per-second instance hours, but a chosen instance class runs continuously. Backups in S3 are billed separately. See [RDS automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html). | No. An RDS instance runs until you stop or delete it.                                                                                                                                                                                                      |
+| AWS RDS for Postgres     | Per-second instance hours, but a chosen instance class runs continuously. Backups in S3 are billed separately. See [RDS automated backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html). | No. An RDS instance runs until you stop or delete it.                                                                                                                                                                                                      |
 | Supabase                 | Per-hour Compute Hours per project (Micro starts at $0.01344/hr, billed for partial hours as full hours). See [Supabase compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute).                              | Not on paid plans. Free Plan projects can be paused after extended inactivity. See [paused project status](https://supabase.com/docs/guides/troubleshooting/http-status-codes).                                                                            |
 
-Aurora Serverless v2's automatic pause is available with Aurora PostgreSQL and MySQL on recent engine versions, but a cold resume can take several seconds and isn't recommended for stringent SLOs ([AWS docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
+Aurora Serverless v2's automatic pause is available with Aurora Postgres and MySQL on recent engine versions, but a cold resume can take several seconds and isn't recommended for stringent SLOs ([AWS docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
 
 <CTA title="See a real bill" description="Sign up for the Free plan and watch usage accrue per second in the Neon Console." buttonText="Try Neon free" buttonUrl="https://console.neon.tech/signup" />

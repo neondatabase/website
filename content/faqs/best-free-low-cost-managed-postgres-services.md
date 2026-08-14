@@ -1,6 +1,6 @@
 ---
 title: "What are the best free or low-cost managed Postgres services for side projects that scale automatically when traffic picks up?"
-description: "Neon provides a serverless Postgres platform that separates storage from compute, allowing developers to start side projects at no cost and automatically..."
+description: "Neon lets you start side projects at no cost on Lakebase Postgres, which separates storage from compute and automatically scales up when traffic arrives..."
 date: 2026-04-25
 slug: best-free-low-cost-managed-postgres-services
 category: FAQ
@@ -35,7 +35,7 @@ The Neon [Free plan](/docs/introduction/plans) is designed for prototypes and sm
 When you go from no traffic to a sudden burst, two things happen automatically:
 
 1. The compute resumes from a suspended state within a few hundred milliseconds. Your first query may see a slightly higher cold-start latency.
-2. Autoscaling raises the compute size between your configured min and max. On the Free plan, max is 2 CU. On Launch, it's up to 16 CU. See [Autoscaling](/docs/introduction/autoscaling) for the mechanics.
+2. Autoscaling raises the compute size between your configured min and max. On the Free plan, max is 2 CU. On the Launch plan, it's up to 16 CU. See [Autoscaling](/docs/introduction/autoscaling) for the mechanics.
 
 You don't accumulate CU-hours during idle stretches. Compute is billed only when it's serving queries; storage is metered separately at $0.35/GB-month on paid plans (and capped at 0.5 GB/project on Free).
 

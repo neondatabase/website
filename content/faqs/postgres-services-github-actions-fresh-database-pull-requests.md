@@ -71,13 +71,13 @@ Use [branch expiration](https://neon.com/docs/guides/branch-expiration) to auto-
 
 ## Plan limits
 
-The Free and Launch plans allow 10 branches per project. Scale allows 25. Beyond that, extra branches on paid plans are billed at $1.50/branch-month (prorated hourly). For teams with many open PRs, [request a higher per-project limit](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Branch%20limit%20increase%22).
+The Free and Launch plans allow 10 branches per project. The Scale plan allows 25. Beyond that, extra branches on paid plans are billed at $1.50/branch-month (prorated hourly). For teams with many open PRs, [request a higher per-project limit](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Branch%20limit%20increase%22).
 
 ## How other providers handle per-PR databases
 
 - **Supabase** has [GitHub integration for branching](https://supabase.com/docs/guides/deployment/branching/github-integration) that creates a preview branch when a PR is opened and tears it down on merge. The difference: Supabase preview branches don't copy production data; they apply your migration files and an optional `seed.sql`. Good for compliance, but you can't test against real production-shaped data.
-- **AWS Aurora** supports fast [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) via copy-on-write, which gets you the same "branch from production data" capability. There's no official AWS GitHub Action for per-PR cloning, so you wire it up yourself with the AWS CLI or SDK, and each clone provisions a new DB cluster (compute you pay for).
-- **AWS RDS for PostgreSQL** doesn't have copy-on-write clones. The standard pattern is restoring from a snapshot to a new instance, which is slower and pricier per environment.
+- **AWS Aurora** supports fast [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html) via copy-on-write, which gets you the same "branch from production data" capability. There's no official AWS GitHub Action for per-PR cloning, so you wire it up yourself with the AWS CLI or SDK, and each clone provisions a new database cluster (compute you pay for).
+- **AWS RDS for Postgres** doesn't have copy-on-write clones. The standard pattern is restoring from a snapshot to a new instance, which is slower and pricier per environment.
 
 For a fresh database with production-shaped data, per PR, set up with one workflow file, Neon branching plus the official GitHub Actions is the closest match. Supabase covers the workflow piece; Aurora covers the storage model.
 

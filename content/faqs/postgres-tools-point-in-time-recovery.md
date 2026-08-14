@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres tools support point-in-time recovery for production databases?"
-description: "Neon instant restore (PITR) is built in. Restore a root branch to any moment in your history window without pgBackRest, WAL-G, or Barman."
+description: "Lakebase Postgres instant restore (PITR) is built in. Restore a root branch to any moment in your history window without pgBackRest, WAL-G, or Barman."
 date: 2026-04-25
 slug: postgres-tools-point-in-time-recovery
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-tools-preview-deployments
 ---
 
-Neon has point-in-time recovery (called **instant restore**) built in. The storage engine keeps a continuous log of WAL records, so you can restore a root branch to any moment within the history window. No `pgBackRest`, `WAL-G`, or `Barman` setup. No base-backup-plus-WAL-replay wait.
+Lakebase Postgres has point-in-time recovery (called **instant restore**) built in. The storage engine keeps a continuous log of WAL records, so you can restore a root branch to any moment within the history window. No `pgBackRest`, `WAL-G`, or `Barman` setup. No base-backup-plus-WAL-replay wait.
 
 ## How to restore
 
@@ -43,11 +43,11 @@ The restore overwrites the branch with its state at that timestamp. Connection s
 
 The history window depends on your plan:
 
-| Plan   | Max history window                 | Cost           |
-| ------ | ---------------------------------- | -------------- |
-| Free   | 6 hours, capped at 1 GB of changes | $0             |
-| Launch | Up to 7 days                       | $0.20/GB-month |
-| Scale  | Up to 30 days                      | $0.20/GB-month |
+| Plan        | Max history window                 | Cost           |
+| ----------- | ---------------------------------- | -------------- |
+| Free plan   | 6 hours, capped at 1 GB of changes | $0             |
+| Launch plan | Up to 7 days                       | $0.20/GB-month |
+| Scale plan  | Up to 30 days                      | $0.20/GB-month |
 
 PITR storage is only billed on root branches, since you can only restore from those. Child branches don't add to the bill.
 
@@ -61,18 +61,18 @@ A restore replaces the entire branch with its historical state. Everything writt
 
 ## Snapshots for known-good points
 
-If you want a captured copy of a branch you can hold onto (separately from the rolling history window), use [snapshots](https://neon.com/docs/guides/backup-restore). The Free plan includes 1 manual snapshot, Launch and Scale include 100. Snapshot storage is billed at $0.09/GB-month. Restore a snapshot to a new branch any time.
+If you want a captured copy of a branch you can hold onto (separately from the rolling history window), use [snapshots](https://neon.com/docs/guides/backup-restore). The Free plan includes 1 manual snapshot, Launch and Scale plans include 100. Snapshot storage is billed at $0.09/GB-month. Restore a snapshot to a new branch any time.
 
 ## How this compares to other Postgres services
 
 PITR is broadly available on managed Postgres, but the mechanics and cost models differ:
 
-| Provider                  | Max history window                                                                                                            | Restore destination                                          | Notes                                                                               |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| Neon                      | 30 days (Scale)                                                                                                               | Overwrites the branch in place; auto-creates a backup branch | Built in, billed per GB-month of change history on root branches                    |
-| Amazon RDS for PostgreSQL | [Up to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html) | Restores to a new DB instance                                | Setting retention to 0 days disables automated backups                              |
-| Aurora PostgreSQL         | [Up to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.Retaining.html)          | Restores to a new DB cluster                                 | Continuous WAL backups included                                                     |
-| Supabase                  | [Up to 28 days](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery)                                     | Restores in place; requires downtime                         | Paid PITR add-on starting at $100/month for 7 days; daily logical backups otherwise |
+| Provider                | Max history window                                                                                                            | Restore destination                                          | Notes                                                                               |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| Neon                    | 30 days (Scale plan)                                                                                                          | Overwrites the branch in place; auto-creates a backup branch | Built in, billed per GB-month of change history on root branches                    |
+| Amazon RDS for Postgres | [Up to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html) | Restores to a new database instance                          | Setting retention to 0 days disables automated backups                              |
+| Aurora Postgres         | [Up to 35 days](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.Retaining.html)          | Restores to a new database cluster                           | Continuous WAL backups included                                                     |
+| Supabase                | [Up to 28 days](https://supabase.com/docs/guides/platform/backups#point-in-time-recovery)                                     | Restores in place; requires downtime                         | Paid PITR add-on starting at $100/month for 7 days; daily logical backups otherwise |
 
 Neon's restore is in-place and typically completes in seconds because the storage engine references existing pages instead of replaying WAL.
 

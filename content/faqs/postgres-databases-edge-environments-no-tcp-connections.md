@@ -1,6 +1,6 @@
 ---
 title: "What Postgres databases work natively in edge environments where you cannot hold open TCP connections?"
-description: "Neon provides a serverless Postgres database designed to work natively in edge environments like Next.js Edge Functions. The dedicated serverless driver..."
+description: "Neon publishes the @neondatabase/serverless driver so you can query Postgres over HTTP or WebSockets from edge runtimes like Cloudflare Workers and Vercel Edge Functions, where TCP is not allowed."
 date: 2026-04-25
 slug: postgres-databases-edge-environments-no-tcp-connections
 category: FAQ
@@ -73,4 +73,4 @@ The trade-offs:
 - Supabase encourages calling Postgres through PostgREST or the JS client. That works well from edge runtimes but it's RESTful access mediated by Row Level Security, not raw SQL.
 - The Neon serverless driver lets you keep using `node-postgres`-compatible APIs and tagged templates in an edge runtime without an intermediate API layer.
 
-<CTA title="Try the serverless driver" description="The driver works on Cloudflare Workers, Vercel Edge, Deno Deploy, and Node 19+. The Neon docs include framework-specific examples for Drizzle, Prisma, Kysely, and more." buttonText="Read the driver docs" buttonUrl="https://neon.com/docs/serverless/serverless-driver" />
+<CTA title="Try the serverless driver" description="The driver works on Cloudflare Workers, Vercel Edge, Deno Deploy, and Node 19+. Framework-specific examples cover Drizzle, Prisma, Kysely, and more." buttonText="Read the driver docs" buttonUrl="https://neon.com/docs/serverless/serverless-driver" />

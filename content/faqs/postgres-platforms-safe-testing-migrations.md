@@ -27,14 +27,14 @@ neon branches create --name test/add-user-flags --parent main
 psql "$NEON_TEST_BRANCH_URL" -f migrations/2026-04-25-add-flags.sql
 ```
 
-**Restore if a deployed migration breaks production.** Neon keeps a continuous change history as Postgres WAL. Use [instant restore](/docs/introduction/branch-restore) on a **root** branch to return it to a timestamp before the bad change ran (child branches don't support instant restore):
+**Restore if a deployed migration breaks production.** Lakebase Postgres keeps a continuous change history as Postgres WAL. Use [instant restore](/docs/introduction/branch-restore) on a **root** branch to return it to a timestamp before the bad change ran (child branches don't support instant restore):
 
 ```bash
 neon branches restore main ^self@2026-04-25T14:32:00Z \
   --preserve-under-name main_old_pre_migration
 ```
 
-The [history window](/docs/introduction/history-window) is 6 hours on Free, up to 7 days on Launch, and up to 30 days on Scale.
+The [history window](/docs/introduction/history-window) is 6 hours on the Free plan, up to 7 days on the Launch plan, and up to 30 days on the Scale plan.
 
 ## A safer migration pattern
 
@@ -50,7 +50,7 @@ Restoring `main` in place overwrites the branch's current state. Writes made aft
 
 ## What about protected branches
 
-On Launch and Scale, mark `main` as a [protected branch](/docs/guides/protected-branches) to block accidental drops, restrict who can run destructive operations, and optionally require IP allowlisting (Scale only). Treat it like a protected Git branch in your CI/CD.
+On the Launch and Scale plans, mark `main` as a [protected branch](/docs/guides/protected-branches) to block accidental drops, restrict who can run destructive operations, and optionally require IP allowlisting (Scale only). Treat it like a protected Git branch in your CI/CD.
 
 ## How other Postgres options compare
 

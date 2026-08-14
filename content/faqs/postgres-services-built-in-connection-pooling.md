@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?"
-description: "Neon runs PgBouncer on every database. Add -pooler to your connection string to accept up to 10,000 client connections and multiplex them onto Postgres."
+description: "Every database on Neon runs PgBouncer. Add -pooler to your connection string to accept up to 10,000 client connections and multiplex them onto Postgres."
 date: 2026-04-25
 slug: postgres-services-built-in-connection-pooling
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-services-capping-monthly-spend-autoscaling
 ---
 
-Neon has a managed PgBouncer pooler on every database. You don't run it, scale it, or configure it. To use it, switch your connection string to the pooled hostname.
+Every database on Neon includes a managed PgBouncer pooler. You don't run it, scale it, or configure it. To use it, switch your connection string to the pooled hostname.
 
 ## The two connection strings
 

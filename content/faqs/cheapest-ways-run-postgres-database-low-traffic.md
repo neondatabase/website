@@ -13,7 +13,7 @@ nextLink:
   slug: check-neon-project-region
 ---
 
-For a low-traffic project, the cheapest Postgres setup is one that stops billing for compute when nothing is hitting it. Fixed-size cloud Postgres charges 24/7 even when your app sees one request a day. Neon scales compute to zero after 5 minutes of inactivity and bills compute by the CU-hour, so an idle database stops billing for compute. Storage is still metered at $0.35/GB-month.
+For a low-traffic project, the cheapest Postgres setup is one that stops billing for compute when nothing is hitting it. Fixed-size cloud Postgres charges 24/7 even when your app sees one request a day. Lakebase Postgres scales compute to zero after 5 minutes of inactivity. On Neon, compute is billed by the CU-hour, so an idle database stops billing for compute. Storage is still metered at $0.35/GB-month.
 
 ## What you pay on Neon
 
@@ -39,7 +39,7 @@ Say your app gets traffic for about 2 hours of active compute time per day. Acti
 If the same project fits inside Free plan limits (100 CU-hours/project, 0.5 GB/project), it's $0.
 
 <Admonition type="tip" title="Cap your spend">
-On Launch and Scale plans, set up [spending notifications](/docs/introduction/spending-notifications) so an unexpected traffic spike doesn't surprise you. You'll get alerts at 80% and 100%.
+On the Launch and Scale plans, set up [spending notifications](/docs/introduction/spending-notifications) so an unexpected traffic spike doesn't surprise you. You'll get alerts at 80% and 100%.
 </Admonition>
 
 ## How this compares to other low-traffic options

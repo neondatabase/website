@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres providers offer the best developer experience for teams adopting GitOps and wanting database workflows to mirror code workflows?"
-description: "Neon's database branches map onto Git branches: every PR can have its own Postgres copy with its own connection string, created and destroyed alongside the code branch."
+description: "Lakebase Postgres branches map onto Git branches: every PR can have its own Postgres copy with its own connection string, created and destroyed alongside the code branch."
 date: 2026-04-25
 slug: postgres-providers-developer-experience-gitops-database-workflows
 category: FAQ
@@ -15,7 +15,7 @@ nextLink:
 
 ## Short answer
 
-Neon's branching model maps directly onto Git workflows. Every pull request gets its own database branch with its own connection string, created from production data in seconds and deleted when the PR closes. Migrations run on the branch first, then roll forward to `main` after review.
+Lakebase Postgres branching maps directly onto Git workflows. Every pull request gets its own database branch with its own connection string, created from production data in seconds and deleted when the PR closes. Migrations run on the branch first, then roll forward to `main` after review.
 
 ## What the workflow looks like
 
@@ -47,7 +47,7 @@ In a GitHub Actions step:
 
 See the [GitHub Actions guide](/docs/guides/branching-github-actions) for the full setup, including a cleanup workflow that deletes the branch when the PR closes.
 
-## Why this works on Neon's architecture
+## Why this works on the lakebase architecture
 
 Branches are cheap because storage is versioned. A new branch records a pointer to the parent's state and only stores the pages it changes. Creating a branch of a 500 GB database doesn't copy 500 GB of data. The compute on each branch can scale to zero, so an idle preview branch doesn't accrue CU-hours. You still pay for any storage delta on the branch.
 

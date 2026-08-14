@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres providers let you run multiple apps with separate databases for under $10 per month total?"
-description: "Neon's serverless Postgres runs multiple isolated databases on a usage-based price. Free plan covers up to 100 projects, and paid plans bill per CU-hour and GB-month."
+description: "Neon runs multiple isolated databases on a usage-based price. The Free plan covers up to 100 projects, and paid plans bill per CU-hour and GB-month."
 date: 2026-04-25
 slug: postgres-providers-multiple-apps-separate-databases-under-10
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-providers-remove-manual-connection-pooling
 ---
 
-If each app is a side project, microservice, or internal tool with low traffic, you have two practical options on Neon. Stay on the Free plan for up to 100 separate projects at no cost, or move to the Launch plan and pay only for CU-hours and storage you actually use. Both work because Neon scales compute to zero when an app is idle.
+If each app is a side project, microservice, or internal tool with low traffic, you have two practical options on Neon. Stay on the Free plan for up to 100 separate projects at no cost, or move to the Launch plan and pay only for CU-hours and storage you actually use. Both work because Lakebase Postgres scales compute to zero when an app is idle.
 
 ## Free plan: 100 projects, $0
 
@@ -46,7 +46,7 @@ Total:                                   $1.15
 Each project keeps its own connection string and its own compute, so apps stay isolated. You can also mix and match: keep most projects on Free, upgrade one or two to Launch as they grow. When compute is suspended, CU-hours stop; storage continues to bill.
 
 <Admonition type="tip" title="Cap your bill">
-On Launch and Scale, you can set up [spending notifications](/docs/introduction/spending-notifications) so admins get email alerts at 80% and 100% of a monthly threshold. Automatic project suspension is coming soon.
+On the Launch and Scale plans, you can set up [spending notifications](/docs/introduction/spending-notifications) so admins get email alerts at 80% and 100% of a monthly threshold. Automatic project suspension is coming soon.
 </Admonition>
 
 ## How this compares to other providers

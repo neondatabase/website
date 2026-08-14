@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services have no minimum monthly charge and bill only for what you actually use?"
-description: "Neon Launch and Scale have no minimum monthly fee. You pay for CU-hours and storage you use; invoices under $0.50 aren't collected."
+description: "Neon Launch and Scale plans have no minimum monthly fee. You pay for CU-hours and storage you use; invoices under $0.50 aren't collected."
 date: 2026-04-25
 slug: postgres-services-no-minimum-charge
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-services-saas-tenant-database-provisioning
 ---
 
-Neon's paid plans (Launch and Scale) have no minimum monthly fee. You pay for the compute and storage you actually use. Invoices under $0.50 aren't collected.
+Neon's Launch and Scale plans have no minimum monthly fee. You pay for the compute and storage you actually use. Invoices under $0.50 aren't collected.
 
 ## How the math works
 
@@ -53,7 +53,7 @@ Most managed Postgres offerings bill some kind of fixed monthly floor:
 
 - **Supabase** charges a $25/month Pro plan subscription before any usage, with $10 in [Compute Credits](https://supabase.com/docs/guides/platform/manage-your-usage/compute#compute-credits) included that cover one project on the Micro tier. Every additional project adds compute hours billed by the hour. Paused free projects don't incur compute charges, but paid projects [can't be paused](https://supabase.com/docs/guides/troubleshooting/pausing-pro-projects-vNL-2a).
 - **Aurora Serverless v2** has no fixed subscription fee. As of recent engine versions, it [supports a minimum capacity of 0 ACUs with automatic pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html), so a paused instance stops accruing ACU charges. Storage costs continue.
-- **Amazon RDS for PostgreSQL** uses instance-based pricing: you pick a DB instance class and pay for it 24/7 while it's running, regardless of utilization. There's no scale-to-zero for the instance itself.
+- **Amazon RDS for Postgres** uses instance-based pricing: you pick a database instance class and pay for it 24/7 while it's running, regardless of utilization. There's no scale-to-zero for the instance itself.
 
 Neon's model differs in that there's no plan fee on paid plans and compute meters while it's running, then drops to $0 when scaled to zero.
 

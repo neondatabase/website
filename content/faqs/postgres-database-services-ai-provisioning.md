@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres database services support programmatic provisioning fast enough for AI agents to spin up new databases on demand?"
-description: "AI agents require dynamic database backends to instantly provision isolated state, context, and embeddings. Neon provides a serverless Postgres architec..."
+description: "AI agents need dynamic database backends they can provision on demand. Neon's API creates an isolated Postgres project in seconds, so an agent can provision, query, and tear down without human approval."
 date: 2026-04-25
 slug: postgres-database-services-ai-provisioning
 category: FAQ

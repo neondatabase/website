@@ -13,11 +13,11 @@ nextLink:
   slug: delete-database-neon
 ---
 
-The safe way to debug production is to put diagnostic queries on separate compute from the user-facing workload. Neon gives you two ways to do that: branches for full read/write isolation, and read replicas for read-only investigation against live data.
+The safe way to debug production is to put diagnostic queries on separate compute from the user-facing workload. Lakebase Postgres gives you two ways to do that: branches for full read/write isolation, and read replicas for read-only investigation against live data.
 
 ## Read replicas for live diagnostics
 
-A Neon read replica is a separate compute that reads from the same storage as the primary. Open a long `EXPLAIN ANALYZE`, run an expensive aggregation, or attach a slow analytics query to a replica without touching the primary compute.
+A read replica is a separate compute that reads from the same storage as the primary. Open a long `EXPLAIN ANALYZE`, run an expensive aggregation, or attach a slow analytics query to a replica without touching the primary compute.
 
 Create one from the console or CLI:
 
@@ -42,7 +42,7 @@ neon branches create --name pre-deploy \
   --parent 2026-04-25T08:00:00Z
 ```
 
-History window: 6 hours on the Free plan, up to 7 days on Launch, up to 30 days on Scale ([History window](https://neon.com/docs/introduction/history-window)).
+History window: 6 hours on the Free plan, up to 7 days on the Launch plan, up to 30 days on the Scale plan ([History window](https://neon.com/docs/introduction/history-window)).
 
 ## Inspect what's running right now
 
@@ -68,6 +68,6 @@ Mark production as a [protected branch](https://neon.com/docs/guides/protected-b
 - **AWS RDS / Aurora**: read replicas are available and run on separate compute; see the [RDS read replica docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html). For write-side debugging, the standard path is [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new instance, which takes minutes and adds full instance and storage cost until you tear it down.
 - **Supabase**: [read replicas](https://supabase.com/docs/guides/platform/read-replicas) are available for projects on Pro and above. Write-side debugging means restoring a PITR backup into the project (a paid add-on) or creating a [preview branch](https://supabase.com/docs/guides/deployment/branching), which won't include your production data.
 
-Neon's combination of read replicas (live, no separate storage cost) and copy-on-write branches (writable, full data shape, seconds to create) covers both read-only diagnostics and write-side experiments on the same platform.
+Lakebase Postgres combines read replicas (live, no separate storage cost) and copy-on-write branches (writable, full data shape, seconds to create), so you can cover both read-only diagnostics and write-side experiments without a separate restore workflow.
 
 <CTA title="Debug Postgres safely with Neon" description="Branches and read replicas included on every plan." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" />

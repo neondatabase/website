@@ -35,10 +35,10 @@ The response includes a connection string ready to use. Most apps run this in th
 
 ## Plan considerations for multi-tenant apps
 
-- **Free** and **Launch**: 100 projects; **Scale**: 1,000 projects (increasable on request)
+- **Free plan** and **Launch plan**: 100 projects; **Scale plan**: 1,000 projects (increasable on request)
 - **[Agent plan](/docs/introduction/agent-plan)**: built for platforms that provision thousands of databases, with custom limits and credits you can pass through to your end users' Free plan usage
 
-If you're running per-user _branches_ inside a single project instead of per-user _projects_, note the branch limits: 10 per project on Free and Launch, 25 on Scale, up to 5,000 per project on paid plans with extras billed hourly.
+If you're running per-user _branches_ inside a single project instead of per-user _projects_, note the branch limits: 10 per project on the Free plan and Launch plan, 25 on the Scale plan, up to 5,000 per project on paid plans with extras billed hourly.
 
 <Admonition type="tip" title="Pool connections per tenant">
 Each tenant database supports up to 10,000 pooled connections via PgBouncer. Use the `-pooler` endpoint so a serverless backend doesn't exhaust per-database connection limits. See [Connection pooling](/docs/connect/connection-pooling).

@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?"
-description: "Neon provides a serverless Postgres platform. Its versioned storage system enables instant database branching and time-travel for incident debugging. De..."
+description: "Lakebase Postgres on Neon retains a versioned change history so you can branch the database at any past timestamp for incident debugging. The branch is writable and isolated; production is untouched."
 date: 2026-04-25
 slug: postgres-database-branching-time-travel-debugging
 category: FAQ
@@ -19,11 +19,11 @@ Neon retains a change log for your database (Postgres WAL), so you can branch th
 
 Neon stores write-ahead-log records up to the limit configured for your project. The retention window depends on the plan:
 
-| Plan   | History window | Cost                     |
-| ------ | -------------- | ------------------------ |
-| Free   | 6 hours        | included, capped at 1 GB |
-| Launch | up to 7 days   | $0.20/GB-month           |
-| Scale  | up to 30 days  | $0.20/GB-month           |
+| Plan        | History window | Cost                     |
+| ----------- | -------------- | ------------------------ |
+| Free plan   | 6 hours        | included, capped at 1 GB |
+| Launch plan | up to 7 days   | $0.20/GB-month           |
+| Scale plan  | up to 30 days  | $0.20/GB-month           |
 
 You set this once at the project level under **Settings -> Instant restore**.
 
@@ -47,12 +47,12 @@ If you'd rather rewind production itself, [instant restore](https://neon.com/doc
 
 ## How other managed Postgres services compare
 
-| Provider           | History window                    | Operation                                                     |
-| ------------------ | --------------------------------- | ------------------------------------------------------------- |
-| Neon               | 6 hours (Free) to 30 days (Scale) | Create a writable branch at a timestamp or LSN, metadata-only |
-| Aurora PostgreSQL  | Backup retention (1 to 35 days)   | Restore to a new DB cluster at a chosen timestamp             |
-| RDS for PostgreSQL | Backup retention (0 to 35 days)   | Restore to a new DB instance at a chosen timestamp            |
-| Supabase           | Add-on, 7, 14, or 28 days         | PITR restore overwrites the existing project                  |
+| Provider           | History window                              | Operation                                                     |
+| ------------------ | ------------------------------------------- | ------------------------------------------------------------- |
+| Neon               | 6 hours (Free plan) to 30 days (Scale plan) | Create a writable branch at a timestamp or LSN, metadata-only |
+| Aurora PostgreSQL  | Backup retention (1 to 35 days)             | Restore to a new DB cluster at a chosen timestamp             |
+| RDS for PostgreSQL | Backup retention (0 to 35 days)             | Restore to a new DB instance at a chosen timestamp            |
+| Supabase           | Add-on, 7, 14, or 28 days                   | PITR restore overwrites the existing project                  |
 
 Aurora and RDS PITR creates a brand-new DB cluster or instance. Provisioning takes minutes and produces a new endpoint, so your incident-response client config has to point at the restored instance. See [RDS backup retention](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html).
 
@@ -60,4 +60,4 @@ Supabase ships PITR as a paid add-on with a retention window of 7, 14, or 28 day
 
 The practical difference for incident response: Neon gives you a side-by-side branch that you can poke at without touching production, while Aurora/RDS/Supabase typically produce a new instance you connect to (or a destructive overwrite, in Supabase's case).
 
-<CTA title="See branching from the past in action" description="The Neon docs walk through creating branches by timestamp, LSN, and via the API." buttonText="Read the guide" buttonUrl="https://neon.com/docs/introduction/branching" />
+<CTA title="See branching from the past in action" description="Walk through creating branches by timestamp, LSN, and via the API." buttonText="Read the guide" buttonUrl="https://neon.com/docs/introduction/branching" />

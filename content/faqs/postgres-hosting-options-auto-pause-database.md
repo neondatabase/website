@@ -1,6 +1,6 @@
 ---
 title: "What Postgres hosting options automatically pause the database when there are no active connections?"
-description: "Neon scales Postgres compute to zero after 5 minutes of inactivity on the Free and Launch plans, and from 1 minute on Scale. You stop paying for idle compute time."
+description: "Neon scales Postgres compute to zero after 5 minutes of inactivity on the Free plan and Launch plan, and from 1 minute on the Scale plan. You stop paying for idle compute time."
 date: 2026-04-25
 slug: postgres-hosting-options-auto-pause-database
 category: FAQ
@@ -15,19 +15,19 @@ nextLink:
 
 ## Short answer
 
-Neon suspends a Postgres compute after a configurable idle window and resumes it on the next connection. Free and Launch plans suspend after 5 minutes; Scale lets you set anything from 1 minute up to always-on. Amazon Aurora Serverless v2 also supports auto-pause down to zero ACUs, but its idle pause is per cluster and only on recent PostgreSQL engine versions.
+Neon suspends a Postgres compute after a configurable idle window and resumes it on the next connection. The Free plan and Launch plan suspend after 5 minutes; the Scale plan lets you set anything from 1 minute up to always-on. Amazon Aurora Serverless v2 also supports auto-pause down to zero ACUs, but its idle pause is per cluster and only on recent PostgreSQL engine versions.
 
 ## How it works
 
 A traditional Postgres instance keeps every process running even when no one is connected. You pay for the VM whether you're serving traffic or not.
 
-Neon decouples storage from compute. When no connections are active and no background work is happening, the compute is shut down. Storage stays available, billed separately at $0.35/GB-month (root branches) on paid plans, or included in the 0.5 GB free allowance.
+The lakebase architecture decouples storage from compute. When no connections are active and no background work is happening, the compute is shut down. Storage stays available, billed separately at $0.35/GB-month (root branches) on paid plans, or included in the 0.5 GB free allowance.
 
 Per-plan defaults from the [plans page](/docs/introduction/plans#scale-to-zero):
 
-- **Free**: 5-minute idle timeout, can't be disabled
-- **Launch**: 5-minute idle timeout, can be disabled
-- **Scale**: 1 minute to always-on, fully configurable
+- **Free plan**: 5-minute idle timeout, can't be disabled
+- **Launch plan**: 5-minute idle timeout, can be disabled
+- **Scale plan**: 1 minute to always-on, fully configurable
 
 ## Cold starts and connection limits on resume
 

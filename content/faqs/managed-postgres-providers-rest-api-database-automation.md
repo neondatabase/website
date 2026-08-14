@@ -53,7 +53,7 @@ neon branches create --name pr-1234 --expires-at 2026-05-24T00:00:00Z
 Neon deletes the branch automatically at the timestamp, so your CI doesn't need a cleanup step.
 
 <Admonition type="note" title="Hard limits to plan around">
-Free plan: 100 projects, 10 branches per project. Launch: 100 projects, 10 branches included (more at $1.50/branch-month). Scale: 1,000 projects (raisable on request), 25 branches included.
+Free plan: 100 projects, 10 branches per project. Launch plan: 100 projects, 10 branches included (more at $1.50/branch-month). Scale plan: 1,000 projects (raisable on request), 25 branches included.
 </Admonition>
 
 ## How other Postgres providers compare on REST APIs

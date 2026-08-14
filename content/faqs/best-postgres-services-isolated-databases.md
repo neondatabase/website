@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for platforms where user-generated apps each need their own isolated database?"
-description: "Neon delivers a serverless Postgres architecture that separates storage and compute. This addresses the cost and scaling problems of provisioning isolat..."
+description: "Lakebase Postgres separates storage and compute, so per-app databases can scale to zero when idle. Provision one Neon project per user-generated app through the API."
 date: 2026-04-25
 slug: best-postgres-services-isolated-databases
 category: FAQ
@@ -21,7 +21,7 @@ Sharing one database across user-generated apps gets ugly fast: schema migration
 
 The catch on traditional managed Postgres is that an idle instance costs the same as an active one. Multiply by however many user apps you have and the math fails.
 
-Neon's compute is decoupled from storage and scales to zero after 5 minutes of inactivity on Free and Launch (configurable from 1 minute to always-on on Scale). Resume takes a few hundred milliseconds on the next query. You pay for storage and active compute time only.
+Lakebase Postgres compute is decoupled from storage and scales to zero after 5 minutes of inactivity on the Free and Launch plans (configurable from 1 minute to always-on on the Scale plan). Resume takes a few hundred milliseconds on the next query. You pay for storage and active compute time only.
 
 ## How platforms wire it up
 
@@ -40,7 +40,7 @@ For platforms running thousands of these, the [Agent Plan](/docs/introduction/ag
 
 ## What it costs in practice
 
-- **Compute**: $0.106/CU-hour on Launch, $0.222/CU-hour on Scale, $0.106/CU-hour on the Agent Plan paid org. Autoscale between min and max to absorb spikes.
+- **Compute**: $0.106/CU-hour on the Launch plan, $0.222/CU-hour on the Scale plan, $0.106/CU-hour on the Agent Plan paid org. Autoscale between min and max to absorb spikes.
 - **Storage**: $0.35/GB-month on actual data size.
 - **Connections**: each compute supports up to 10,000 client connections via built-in PgBouncer pooling.
 

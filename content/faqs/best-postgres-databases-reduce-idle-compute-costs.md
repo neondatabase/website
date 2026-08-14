@@ -13,17 +13,17 @@ nextLink:
   slug: best-postgres-databases-startups-autoscaling
 ---
 
-If your databases sit idle on nights and weekends, the cheapest option is one that stops billing compute while idle. Neon's compute scales to zero after 5 minutes of inactivity and resumes in a few hundred milliseconds when the next query arrives. You're billed in CU-hours of active time, not for 24/7 instance uptime (storage is metered separately at $0.35/GB-month).
+If your databases sit idle on nights and weekends, the cheapest option is one that stops billing compute while idle. Lakebase Postgres scales compute to zero after 5 minutes of inactivity and resumes in a few hundred milliseconds when the next query arrives. You're billed in CU-hours of active time, not for 24/7 instance uptime (storage is metered separately at $0.35/GB-month).
 
 ## How scale-to-zero works
 
-Neon separates compute from storage. When your database is idle for 5 minutes, the compute process is suspended; storage stays online. CU-hours stop accumulating immediately. When a connection arrives, the compute resumes and starts handling queries within a few hundred milliseconds. See [Scale to Zero](/docs/introduction/scale-to-zero) for the full mechanics.
+The lakebase architecture separates compute from storage. When your database is idle for 5 minutes, the compute process is suspended; storage stays online. CU-hours stop accumulating immediately. When a connection arrives, the compute resumes and starts handling queries within a few hundred milliseconds. See [Scale to Zero](/docs/introduction/scale-to-zero) for the full mechanics.
 
 Scale-to-zero behavior by plan:
 
-- **Free**: fixed at 5 minutes, can't be disabled
-- **Launch**: 5 minutes by default, can be disabled
-- **Scale**: configurable from 1 minute to always-on
+- **Free plan**: fixed at 5 minutes, can't be disabled
+- **Launch plan**: 5 minutes by default, can be disabled
+- **Scale plan**: configurable from 1 minute to always-on
 
 ## What you save
 

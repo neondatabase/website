@@ -32,11 +32,11 @@ Each developer gets their own connection string, their own compute, and full wri
 
 ## Plan limits to know
 
-- **Free**: 10 branches per project, 0.5 GB storage per project
-- **Launch**: 10 branches included per project, then $1.50/branch-month for extras
-- **Scale**: 25 branches included per project, up to 5,000 total
+- **Free plan**: 10 branches per project, 0.5 GB storage per project
+- **Launch plan**: 10 branches included per project, then $1.50/branch-month for extras
+- **Scale plan**: 25 branches included per project, up to 5,000 total
 
-If a team of fifteen is on Launch with 5 extra long-lived dev branches, that's $7.50/month in branch overage on top of compute and storage.
+If a team of fifteen is on the Launch plan with 5 extra long-lived dev branches, that's $7.50/month in branch overage on top of compute and storage.
 
 <Admonition type="tip" title="Set an expiration on dev branches">
 Branches can auto-delete after 1 hour, 1 day, 7 days, or a custom date. Use this for short-lived branches tied to a feature or PR. See [Branch expiration](/docs/guides/branch-expiration).

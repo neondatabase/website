@@ -88,9 +88,9 @@ API keys and JWKS URLs can be created but not imported.
 
 Most managed Postgres services expose IaC via official or community providers, but coverage varies:
 
-- **Amazon RDS for PostgreSQL** and **Aurora PostgreSQL** are first-class in the [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) and [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-rds-dbclusterparametergroup.html), with broad resource coverage (clusters, instances, parameter groups, subnet groups, snapshots, IAM auth).
+- **Amazon RDS for Postgres** and **Aurora Postgres** are first-class in the [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) and [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-rds-dbclusterparametergroup.html), with broad resource coverage (clusters, instances, parameter groups, subnet groups, snapshots, IAM auth).
 - **Supabase** ships an official [Terraform provider](https://supabase.com/docs/guides/platform/terraform) currently in [public alpha](https://supabase.com/docs/guides/getting-started/features) per their feature status page. It manages projects, branches, and settings via the Supabase Management API.
 
-The Neon Terraform provider is community-maintained but covers the full set of project, branch, endpoint, and role resources. Pulumi users on any of these platforms can fall back to wrapping the provider's REST API.
+The Neon Terraform provider is community-maintained but covers the full set of project, branch, endpoint, and role resources. Pulumi users on any of these services can fall back to wrapping the provider's REST API.
 
 <CTA title="Read the Terraform guide" description="Step-by-step setup, import patterns, and examples for every resource type." buttonText="Open the guide" buttonUrl="https://neon.com/docs/reference/terraform" />

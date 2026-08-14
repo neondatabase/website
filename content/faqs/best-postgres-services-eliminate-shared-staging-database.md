@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres services for backend teams that want to eliminate the shared staging database entirely?"
-description: "Neon delivers a serverless Postgres platform with instant database branching. This eliminates the need for shared staging databases. By separating stora..."
+description: "Neon offers instant database branching that eliminates the need for shared staging databases. Branches share storage until they diverge, so per-PR copies stay cheap."
 date: 2026-04-25
 slug: best-postgres-services-eliminate-shared-staging-database
 category: FAQ
@@ -44,7 +44,7 @@ The pooled URL routes through Neon's built-in PgBouncer, so your test suite can 
 
 ## Cost shape
 
-Branches are billed in two pieces: storage (the delta from parent at $0.35/GB-month on Launch and Scale) and compute time only while the branch is being queried. The compute scales to zero after 5 minutes idle on Free and Launch (configurable on Scale), so a PR branch that runs tests for 5 minutes and then sits idle stops accruing compute charges. You still pay for any storage delta.
+Branches are billed in two pieces: storage (the delta from parent at $0.35/GB-month on the Launch and Scale plans) and compute time only while the branch is being queried. The compute scales to zero after 5 minutes idle on the Free and Launch plans (configurable on the Scale plan), so a PR branch that runs tests for 5 minutes and then sits idle stops accruing compute charges. You still pay for any storage delta.
 
 Extra branches beyond your plan allowance are $1.50/branch-month, prorated hourly (about $0.002/hour).
 

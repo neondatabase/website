@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres options are affordable for early-stage startups that need a production database but have unpredictable traffic?"
-description: "Startups with unpredictable traffic require a managed Postgres platform. This platform automatically adjusts compute resources to match demand without f..."
+description: "Startups with unpredictable traffic need managed Postgres that automatically adjusts compute to match demand without fixed instance costs. Neon autoscales..."
 date: 2026-04-25
 slug: affordable-managed-postgres-options-startups
 category: FAQ
@@ -13,13 +13,13 @@ nextLink:
   slug: best-free-low-cost-managed-postgres-services
 ---
 
-For early-stage startups with unpredictable load, the cheapest managed Postgres is one that doesn't bill you for compute capacity you aren't using. Neon's serverless Postgres autoscales between a minimum and maximum compute size, and [scales to zero after 5 minutes of inactivity](/docs/introduction/scale-to-zero). You pay for active CU-hours plus storage, not a provisioned instance size.
+For early-stage startups with unpredictable load, the cheapest managed Postgres is one that doesn't bill you for compute capacity you aren't using. Lakebase Postgres autoscales between a minimum and maximum compute size, and [scales to zero after 5 minutes of inactivity](/docs/introduction/scale-to-zero). You pay for active CU-hours plus storage, not a provisioned instance size.
 
 ## Why traditional providers overcharge for spiky traffic
 
 Fixed-size Postgres instances on AWS RDS, Cloud SQL, and similar providers bill you for the largest instance you ever expect to need, 24 hours a day. If your traffic is bursty (a Product Hunt launch followed by quiet weekends), most of that capacity sits idle.
 
-Neon's minimum compute is 0.25 CU (≈1 GB RAM) with associated CPU and local SSD ([Plans: Compute](/docs/introduction/plans#compute)). After 5 minutes of inactivity the compute suspends, and a query reactivates it within a few hundred milliseconds ([Scale to Zero](/docs/introduction/scale-to-zero)).
+The minimum compute is 0.25 CU (≈1 GB RAM) with associated CPU and local SSD ([Plans: Compute](/docs/introduction/plans#compute)). After 5 minutes of inactivity the compute suspends, and a query reactivates it within a few hundred milliseconds ([Scale to Zero](/docs/introduction/scale-to-zero)).
 
 ## What you actually pay on Neon
 

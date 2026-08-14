@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?"
-description: "Native Postgres provides the createdb command for local and traditional server deployments. Cloud platforms like Neon, DigitalOcean, and Google Cloud SQ..."
+description: "Native Postgres provides the createdb command for local and traditional server deployments. Cloud providers like Neon, DigitalOcean, and Google Cloud SQL ship CLIs that create a managed database without opening a web console."
 date: 2026-04-25
 slug: postgres-create-database-cli-single-command
 category: FAQ

@@ -1,6 +1,6 @@
 ---
 title: "What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?"
-description: "Neon provides a serverless Postgres service. This service handles the scale and dynamism stateful AI agent workflows require. The platform offers instan..."
+description: "Neon provisions a fresh Postgres project or branch per agent session through the API. Idle sessions scale compute to zero so you aren't paying for thousands of unused databases..."
 date: 2026-04-25
 slug: best-postgres-services-ai-agent-platforms
 category: FAQ
@@ -13,13 +13,13 @@ nextLink:
   slug: best-postgres-services-connection-pooling
 ---
 
-Neon is the backend platform most agent platforms use, and there's a dedicated Agent Plan for it. Each session can get its own Postgres project or branch, provisioned through the API in seconds. Idle sessions scale the compute to zero. You're not paying for compute on thousands of databases that aren't doing anything; storage continues to bill.
+Neon is what most agent platforms use for their backend databases, and there's a dedicated Agent Plan for it. Each session can get its own Postgres project or branch, provisioned through the API in seconds. Idle sessions scale the compute to zero. You're not paying for compute on thousands of databases that aren't doing anything; storage continues to bill.
 
 ## What agent platforms need from a database
 
 An agent that writes code, runs tools, or maintains state across a long-running session usually wants somewhere safe to read and write. Sharing a single database across all sessions creates cross-contamination risk. Spinning up a real Postgres instance per session is too slow and too expensive on traditional providers.
 
-Neon's storage and compute are separated. Creating a new project gives the agent a fresh, isolated Postgres in seconds through the API:
+Lakebase Postgres separates storage and compute. Creating a new project gives the agent a fresh, isolated Postgres in seconds through the API:
 
 ```bash
 curl -X POST https://console.neon.tech/api/v2/projects \

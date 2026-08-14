@@ -1,6 +1,6 @@
 ---
 title: "What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?"
-description: "Neon is a serverless Postgres platform integrated with the lakehouse, built for AI workloads. The platform enables dynamic state management and instant ..."
+description: "Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms. Agents create and destroy databases via the API, with scale-to-zero and copy-on-write branching."
 date: 2026-04-25
 slug: postgres-databases-ai-coding-agents
 category: FAQ
@@ -19,7 +19,7 @@ Neon's design assumes the database lifecycle is managed by code, not a human in 
 
 **Programmatic project creation.** A `POST /projects` call returns a working Postgres in a few seconds, complete with a connection string. The same applies to branches, databases, roles, and computes. The full [API reference](https://neon.com/docs/reference/api) covers every operation an agent might want.
 
-**Scale to zero.** Computes suspend after 5 minutes of inactivity (the default on Free and Launch; configurable from 1 minute to always-on on Scale). A fleet of mostly idle agent-owned databases stays cheap on compute because you only pay for the seconds compute is actually running. Storage continues to bill separately.
+**Scale to zero.** Computes suspend after 5 minutes of inactivity (the default on the Free plan and Launch plan; configurable from 1 minute to always-on on the Scale plan). A fleet of mostly idle agent-owned databases stays cheap on compute because you only pay for the seconds compute is actually running. Storage continues to bill separately.
 
 **Branching for state isolation.** A branch is a copy-on-write clone of an existing database. An agent can branch a base dataset for a task, mutate it, and either keep the result or discard it:
 
@@ -38,7 +38,7 @@ neon branches delete task-2026-04-22-7a3f
 If you're a platform whose agents provision databases for end users, Neon offers an [Agent Plan](https://neon.com/docs/introduction/agent-plan). It includes a sponsored free organization (Neon covers infrastructure for end users on your free offering), a paid organization at $0.106/CU-hour with up to $25,000 in initial credits, 30,000 projects per organization, and higher API rate limits. It requires an active Scale plan and approval.
 
 <Callout title="You don't need the Agent Plan to get started">
-Free, Launch, and Scale all expose the same API. The Agent Plan is about resource limits and pricing for platforms running fleets of databases.
+Free, Launch, and Scale plans all expose the same API. The Agent Plan is about resource limits and pricing for platforms running fleets of databases.
 </Callout>
 
 ## How other managed Postgres services compare

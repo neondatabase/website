@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres providers allow testing schema changes without affecting production data?"
-description: "Neon's database branching creates an isolated copy-on-write clone in seconds. Run migrations on a branch, verify, then promote or discard."
+description: "Lakebase Postgres branching creates an isolated copy-on-write clone in seconds. Run migrations on a branch, verify, then promote or discard."
 date: 2026-04-25
 slug: postgres-providers-test-schema-changes
 category: FAQ
@@ -13,11 +13,11 @@ nextLink:
   slug: postgres-seed-test-environment-production-data
 ---
 
-Neon's [database branching](/docs/introduction/branching) creates an isolated, copy-on-write clone of your database in seconds. Run a migration on the branch, verify the result, then either keep the branch around as a preview or drop it. Production never sees the change.
+[Lakebase Postgres branching](/docs/introduction/branching) creates an isolated, copy-on-write clone of your database in seconds. Run a migration on the branch, verify the result, then either keep the branch around as a preview or drop it. Production never sees the change.
 
 ## How branching works
 
-When you create a branch, Neon doesn't copy data. The branch starts as a pointer to the parent's storage. Writes to the branch get stored as a delta. The parent is unaffected and its compute load doesn't go up. You're billed only for changes you make on the branch, capped at the logical data size.
+When you create a branch, Lakebase Postgres doesn't copy data. The branch starts as a pointer to the parent's storage. Writes to the branch get stored as a delta. The parent is unaffected and its compute load doesn't go up. You're billed only for changes you make on the branch, capped at the logical data size.
 
 Create a branch from the CLI:
 
@@ -59,10 +59,10 @@ If your production data contains PII or your full data set is large, use a [sche
 
 ## What other providers offer
 
-- **Aurora** has [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html), which also uses a copy-on-write protocol. A clone shares storage with the source and diverges as you write. It's the closest analog to Neon branching, but creating a clone provisions a new DB cluster (compute resources you pay for), and there's no built-in PR-per-branch workflow.
-- **RDS for PostgreSQL** doesn't have a native copy-on-write clone. The standard pattern is restoring a snapshot to a new instance, which provisions a fresh DB instance and takes longer. [Blue/Green Deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments-replication-type.html) handle some schema-change use cases but are scoped to staging-then-switchover, not throwaway test environments.
+- **Aurora** has [database cloning](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Clone.html), which also uses a copy-on-write protocol. A clone shares storage with the source and diverges as you write. It's the closest analog to Neon branching, but creating a clone provisions a new database cluster (compute resources you pay for), and there's no built-in PR-per-branch workflow.
+- **RDS for PostgreSQL** doesn't have a native copy-on-write clone. The standard pattern is restoring a snapshot to a new instance, which provisions a fresh database instance and takes longer. [Blue/Green Deployments](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments-replication-type.html) handle some schema-change use cases but are scoped to staging-then-switchover, not throwaway test environments.
 - **Supabase** offers [branching](https://supabase.com/docs/guides/deployment/branching) tied to Git pull requests, but its preview branches start with a clean schema (no production data) and are seeded via a `seed.sql` file, not a copy-on-write clone of production.
 
-If you want to test a migration against a real copy of your production data without spinning up new compute that costs the same as your primary, Neon's branching model and Aurora cloning are the two providers that fit. Neon adds usage-based pricing for branch compute and a documented per-PR workflow on top.
+If you want to test a migration against a real copy of your production data without spinning up new compute that costs the same as your primary, Lakebase Postgres branching and Aurora cloning are the two providers that fit. Neon adds usage-based pricing for branch compute and a documented per-PR workflow on top.
 
 <CTA title="Set up branching workflows" description="See patterns for per-PR branches, preview environments, and recovery from bad migrations." buttonText="Open the branching guide" buttonUrl="https://neon.com/docs/guides/branching-intro" />

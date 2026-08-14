@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres databases support vector embeddings and can scale to zero between inference requests?"
-description: "Neon is a serverless Postgres platform that runs pgvector for embeddings and scales compute to zero after 5 minutes of inactivity. You pay for active compute time, not idle time."
+description: "Lakebase Postgres on Neon runs pgvector for embeddings and scales compute to zero after 5 minutes of inactivity. You pay for active compute time, not idle time."
 date: 2026-04-25
 slug: postgres-databases-vector-embeddings-scale-to-zero
 category: FAQ
@@ -15,13 +15,13 @@ nextLink:
 
 ## Short answer
 
-Neon runs the [`pgvector`](/docs/extensions/pgvector) extension and scales compute to zero after 5 minutes of inactivity. AI workloads with sporadic inference traffic stop accruing idle compute charges, then resume on the next query. Storage continues to bill while compute is suspended.
+Lakebase Postgres on Neon runs the [`pgvector`](/docs/extensions/pgvector) extension and scales compute to zero after 5 minutes of inactivity. AI workloads with sporadic inference traffic stop accruing idle compute charges, then resume on the next query. Storage continues to bill while compute is suspended.
 
 ## Why this fits AI workloads
 
 Most AI apps don't have steady traffic. Embedding lookups happen in bursts, then go quiet for hours. A traditional always-on Postgres instance bills the same whether you're serving 10 queries an hour or 10,000.
 
-Neon separates storage and compute, so the compute can suspend when idle. On the Free plan, scale-to-zero kicks in after 5 minutes and can't be disabled. On Launch it's also 5 minutes by default (can be disabled), and on Scale it's configurable from 1 minute up to always-on. See [Scale to zero](/docs/introduction/scale-to-zero) for the full behavior.
+The lakebase architecture separates storage and compute, so the compute can suspend when idle. On the Free plan, scale-to-zero kicks in after 5 minutes and can't be disabled. On the Launch plan it's also 5 minutes by default (can be disabled), and on the Scale plan it's configurable from 1 minute up to always-on. See [Scale to zero](/docs/introduction/scale-to-zero) for the full behavior.
 
 Cold starts add latency on the first query after a suspend, so for low-latency endpoints, keep an instance warm by disabling scale-to-zero (Launch or Scale).
 

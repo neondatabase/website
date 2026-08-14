@@ -13,7 +13,7 @@ nextLink:
   slug: managed-postgres-platforms-automated-database-provisioning
 ---
 
-If most of your ten databases are idle most of the time (dev, staging, per-developer branches, preview environments), a serverless Postgres platform that scales compute to zero will almost always beat ten always-on instances. On Neon, an idle database costs $0/hour for compute. You only pay for the seconds compute is actually running, plus storage.
+If most of your ten databases are idle most of the time (dev, staging, per-developer branches, preview environments), serverless Postgres that scales compute to zero will almost always beat ten always-on instances. On Neon, an idle database costs $0/hour for compute. You only pay for the seconds compute is actually running, plus storage.
 
 ## How the math works on Neon
 
@@ -38,7 +38,7 @@ Set autoscaling limits per branch so dev branches stay small. A dev branch fixed
 ## How this compares to other providers
 
 - **Aurora Serverless v2** supports scaling to 0 ACUs and automatically pausing during idle periods, but each cluster is billed individually. Ten Aurora clusters means ten separate clusters to manage and pay for. See [Scaling to Zero ACUs with automatic pause and resume](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html).
-- **RDS for PostgreSQL** bills per instance-hour at fixed instance classes. A `db.t4g.micro` is roughly $13–15/month per instance, and you pay the full hourly rate whether the database is queried or idle. Ten instances multiply that bill.
+- **RDS for Postgres** bills per instance-hour at fixed instance classes. A `db.t4g.micro` is roughly $13–15/month per instance, and you pay the full hourly rate whether the database is queried or idle. Ten instances multiply that bill.
 - **Supabase** is per-project, not per-branch. Each additional Supabase project on the Pro plan adds ~$10/month for compute on the default Micro size, and paid plans include $10 of compute credits to cover one project. Ten projects on Supabase Pro cost ~$25 (Pro fee) + ~$100 (10 projects) − $10 credit = ~$115/month minimum. See [Supabase billing FAQ](https://supabase.com/docs/guides/platform/billing-faq).
 
 For ten low-traffic environments, Neon's mix of branching plus scale-to-zero is cheapest at the unit level when most databases are idle most of the time.

@@ -35,25 +35,25 @@ A 0.25 CU compute has ≈1 GB of RAM and supports up to 104 max connections (97 
 
 Because compute suspends after 5 minutes of inactivity and resumes in a few hundred milliseconds on the next query, an app with sparse traffic can stay well under the 100 CU-hours allotted per project.
 
-## When to move to Launch
+## When to move to the Launch plan
 
-When you outgrow the Free limits, the Launch plan is pay-as-you-go with no monthly minimum: $0.106/CU-hour for compute, $0.35/GB-month for storage, and autoscaling up to 16 CU (≈64 GB RAM). You can keep scale-to-zero on, or disable it for production workloads.
+When you outgrow the Free plan limits, the Launch plan is pay-as-you-go with no monthly minimum: $0.106/CU-hour for compute, $0.35/GB-month for storage, and autoscaling up to 16 CU (≈64 GB RAM). You can keep scale-to-zero on, or disable it for production workloads.
 
 ## How Neon's Free plan compares
 
-| Provider                     | Always free?       | Storage          | Compute                            | Project / database limit            |
-| ---------------------------- | ------------------ | ---------------- | ---------------------------------- | ----------------------------------- |
-| Neon Free                    | Yes, no expiration | 0.5 GB / project | 100 CU-hours, autoscale up to 2 CU | 100 projects                        |
-| Supabase Free                | Yes, with caveat   | 500 MB / project | Shared Micro compute               | 2 projects, paused after inactivity |
-| Aurora PostgreSQL Free Tier  | Yes, with limits   | 1 GB / cluster   | Up to 4 ACUs                       | 2 clusters, 2 instances             |
-| RDS for PostgreSQL Free Tier | 12 months only     | 20 GB            | db.t4g.micro                       | 750 hours/month                     |
+| Provider         | Always free?       | Storage          | Compute                            | Project / database limit            |
+| ---------------- | ------------------ | ---------------- | ---------------------------------- | ----------------------------------- |
+| Neon Free plan   | Yes, no expiration | 0.5 GB / project | 100 CU-hours, autoscale up to 2 CU | 100 projects                        |
+| Supabase Free    | Yes, with caveat   | 500 MB / project | Shared Micro compute               | 2 projects, paused after inactivity |
+| Aurora Postgres  | Yes, with limits   | 1 GB / cluster   | Up to 4 ACUs                       | 2 clusters, 2 instances             |
+| RDS for Postgres | 12 months only     | 20 GB            | db.t4g.micro                       | 750 hours/month                     |
 
 A few things to know about the alternatives:
 
 - **Supabase Free** pauses projects after about 7 days of low activity, and you can only have two active free projects across organizations where you're an Owner or Admin. See [Free project pausing](https://supabase.com/docs/guides/platform/free-project-pausing) and [Supabase billing FAQ](https://supabase.com/docs/guides/platform/billing-faq).
-- **Aurora PostgreSQL Free Tier** allows up to 4 ACUs per cluster, 1 GB storage, and a maximum of 2 clusters per account. See [Amazon Aurora on the AWS Free Tier](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html).
-- **RDS for PostgreSQL** offers a 12-month free tier on `db.t4g.micro` with 20 GB of gp2 storage, but it expires after the first year.
+- **Aurora Postgres** on AWS allows up to 4 ACUs per cluster, 1 GB storage, and a maximum of 2 clusters per account under the always-free allowance. See [Amazon Aurora always-free allowance](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-free-tier.html).
+- **RDS for Postgres** offers a 12-month free period on `db.t4g.micro` with 20 GB of gp2 storage, but it expires after the first year.
 
-If the app is dormant most of the time, Neon's scale-to-zero means the 100 CU-hour budget covers a real prototype without the inactivity pause Supabase enforces or the 12-month clock RDS runs against.
+If the app is dormant most of the time, scale-to-zero on Neon means the 100 CU-hour budget covers a real prototype without the inactivity pause Supabase enforces or the 12-month clock RDS runs against.
 
 <CTA title="Start on the Free plan" description="No credit card required. Spin up Postgres in seconds." buttonText="Sign up" buttonUrl="https://console.neon.tech/signup" />

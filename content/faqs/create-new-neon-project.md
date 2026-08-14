@@ -3,7 +3,7 @@ title: 'How do I create a new project in Neon?'
 subtitle: 'Create one from the Console or the Neon CLI. Each project gets its own Postgres database, branches, and computes.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-08-14T02:59:16.781Z'
+updatedOn: '2026-08-14T03:15:28.979Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: create-tables-with-sql-neon
 ---
 
-A Neon project is the top-level container for your database environment. Each project has its own root branch, default database, default role, and primary compute. To create one, click **New Project** in the [Neon Console](https://console.neon.tech) and pick a name, Postgres version, and AWS region. Or use the Neon CLI with `neon projects create`. Project limits depend on your plan: Free and Launch get 100 projects, Scale gets 1,000.
+A Neon project is the top-level container for your database environment. Each project has its own root branch, default database, default role, and primary compute. To create one, click **New Project** in the [Neon Console](https://console.neon.tech) and pick a name, Postgres version, and AWS region. Or use the Neon CLI with `neon projects create`. Project limits depend on your plan: the Free plan and Launch plan get 100 projects, the Scale plan gets 1,000.
 
 ## Create the project
 
@@ -65,16 +65,16 @@ For more on what's included, see [Default resources](/docs/manage/projects#defau
 
 The most common reason a project creation fails is hitting your plan's project limit:
 
-| Plan       | Project limit                                                         |
-| ---------- | --------------------------------------------------------------------- |
-| **Free**   | 100                                                                   |
-| **Launch** | 100                                                                   |
-| **Scale**  | 1,000 (request an increase via [support](/docs/introduction/support)) |
+| Plan            | Project limit                                                         |
+| --------------- | --------------------------------------------------------------------- |
+| **Free plan**   | 100                                                                   |
+| **Launch plan** | 100                                                                   |
+| **Scale plan**  | 1,000 (request an increase via [support](/docs/introduction/support)) |
 
 If you're at the limit:
 
 - Delete unused projects from **Settings** > **Delete** in the Console. Deleted projects can be recovered within 7 days via the [API or CLI](/docs/manage/projects#recover-a-deleted-project).
-- Or upgrade to Scale for the higher limit.
+- Or upgrade to the Scale plan for the higher limit.
 
 Other reasons creation can fail:
 

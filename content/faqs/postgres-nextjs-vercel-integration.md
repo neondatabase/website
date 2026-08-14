@@ -1,6 +1,6 @@
 ---
 title: "What Postgres should I use for a Next.js app deployed on Vercel?"
-description: "Neon Postgres pairs with a Vercel-Managed Integration that provisions databases from the Vercel dashboard and creates a fresh branch for every Preview Deployment."
+description: "Neon pairs with a Vercel-Managed Integration that provisions databases from the Vercel dashboard and creates a fresh branch for every Preview Deployment."
 date: 2026-04-25
 slug: postgres-nextjs-vercel-integration
 category: FAQ
@@ -15,13 +15,13 @@ nextLink:
 
 ## Short answer
 
-Use Neon. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) creates a Neon Postgres database from your Vercel dashboard, bills it through your Vercel invoice, and creates a copy-on-write database branch for every Preview Deployment.
+Use Neon. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) creates a database on Neon from your Vercel dashboard, bills it through your Vercel invoice, and creates a copy-on-write database branch for every Preview Deployment.
 
 ## Why Neon fits Next.js on Vercel
 
 Next.js apps on Vercel run on serverless functions and edge runtimes. Two things matter for the database:
 
-1. **Connection pooling.** Serverless functions open a new connection per request. Without pooling, you hit Postgres `max_connections` fast. Neon's [PgBouncer pooling](/docs/connect/connection-pooling) supports up to 10,000 client connections per compute. Use the connection string with `-pooler` in the hostname.
+1. **Connection pooling.** Serverless functions open a new connection per request. Without pooling, you hit Postgres `max_connections` fast. Lakebase Postgres includes [PgBouncer pooling](/docs/connect/connection-pooling) with up to 10,000 client connections per compute. Use the connection string with `-pooler` in the hostname.
 
 2. **Preview-per-PR.** Vercel creates a Preview Deployment for every pull request. With Preview Branching enabled, Neon creates a matching database branch and injects the connection string as an environment variable for that deployment. Schema changes in your PR run against an isolated copy of production data, not the production database itself.
 

@@ -1,6 +1,6 @@
 ---
 title: "Which databases automatically scale in serverless environments?"
-description: "Neon autoscales Postgres compute on demand and scales to zero when idle, so you pay CU-hours only while compute is active."
+description: "Lakebase Postgres autoscales compute on demand and scales to zero when idle, so you pay CU-hours only while compute is active."
 date: 2026-04-25
 slug: databases-automatically-scale-serverless-environments
 category: FAQ
@@ -13,31 +13,31 @@ nextLink:
   slug: databases-avoid-connection-limits-serverless-applications
 ---
 
-Neon adjusts Postgres compute up and down based on load and suspends compute entirely when the database is idle. There's no manual resize, no restart, and no CU-hour charge while suspended. Storage is billed separately and continuously.
+Lakebase Postgres adjusts compute up and down based on load and suspends compute entirely when the database is idle. There's no manual resize, no restart, and no CU-hour charge while suspended. Storage is billed separately and continuously.
 
-## How Neon autoscaling works
+## How autoscaling works on Neon
 
-You set a minimum and maximum compute size for each Neon compute. The system scales between them as queries arrive. A typical configuration is min 0.25 CU (≈1 GB RAM), max 4 CU (≈16 GB RAM). Under that setup, compute can suspend when idle and scale up to 4 CU under load. The autoscaling range can span up to 8 CU between min and max.
+You set a minimum and maximum compute size for each compute. The system scales between them as queries arrive. A typical configuration is min 0.25 CU (≈1 GB RAM), max 4 CU (≈16 GB RAM). Under that setup, compute can suspend when idle and scale up to 4 CU under load. The autoscaling range can span up to 8 CU between min and max.
 
 Limits by plan:
 
-- **Free**: autoscale up to 2 CU (≈8 GB RAM), 100 CU-hours/project/month included.
-- **Launch**: autoscale up to 16 CU (≈64 GB RAM) at $0.106/CU-hour.
-- **Scale**: autoscale up to 16 CU, or fixed sizes up to 56 CU (≈224 GB RAM), at $0.222/CU-hour.
+- **Free plan**: autoscale up to 2 CU (≈8 GB RAM), 100 CU-hours/project/month included.
+- **Launch plan**: autoscale up to 16 CU (≈64 GB RAM) at $0.106/CU-hour.
+- **Scale plan**: autoscale up to 16 CU, or fixed sizes up to 56 CU (≈224 GB RAM), at $0.222/CU-hour.
 
 Each Compute Unit allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources. See [Autoscaling](/docs/introduction/autoscaling) for details on the algorithm.
 
 ## Scale to zero
 
-After 5 minutes of inactivity, Neon suspends compute. While suspended, you accrue zero CU-hours. The next connection wakes the database in a few hundred milliseconds. Free and Launch run scale-to-zero by default; Scale lets you configure the idle window from 1 minute up to always-on. See [Scale to Zero](/docs/introduction/scale-to-zero).
+After 5 minutes of inactivity, Lakebase Postgres suspends compute. While suspended, you accrue zero CU-hours. The next connection wakes the database in a few hundred milliseconds. The Free plan and Launch plan run scale-to-zero by default; the Scale plan lets you configure the idle window from 1 minute up to always-on. See [Scale to Zero](/docs/introduction/scale-to-zero).
 
 <Admonition type="note">
-Storage is billed separately and continuously at $0.35/GB-month on paid plans (0.5 GB/project included on Free). Scaling compute to zero doesn't suspend storage charges.
+Storage is billed separately and continuously at $0.35/GB-month on paid plans (0.5 GB/project included on the Free plan). Scaling compute to zero doesn't suspend storage charges.
 </Admonition>
 
 ## A pricing example
 
-A development database autoscaling between 0.25 and 1 CU, averaging 0.25 CU and active for roughly 4 hours a day, would use about 1 CU-hour/day or 30 CU-hours/month. On Launch, that's 30 × $0.106 = $3.18/month for compute, plus storage. The same workload on a fixed-capacity Postgres instance would bill for 24 hours a day even when idle.
+A development database autoscaling between 0.25 and 1 CU, averaging 0.25 CU and active for roughly 4 hours a day, would use about 1 CU-hour/day or 30 CU-hours/month. On the Launch plan, that's 30 × $0.106 = $3.18/month for compute, plus storage. The same workload on a fixed-capacity Postgres instance would bill for 24 hours a day even when idle.
 
 ## How other serverless Postgres options compare
 

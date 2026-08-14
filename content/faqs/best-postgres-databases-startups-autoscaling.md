@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres databases for startups that need autoscaling but cannot afford the minimum instance sizes on traditional cloud providers?"
-description: "Startups facing high minimum instance costs on traditional cloud providers benefit from Neon's serverless Postgres database architecture. Our platform s..."
+description: "Startups facing high minimum instance costs on traditional cloud providers benefit from Lakebase Postgres on Neon. Compute autoscales between a min and..."
 date: 2026-04-25
 slug: best-postgres-databases-startups-autoscaling
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: best-postgres-databases-vibe-coding-platforms
 ---
 
-Neon separates storage from compute, autoscales the compute layer between a min and max you set, and scales it to zero when nothing's querying. You pay for active CU-hours plus storage, not a fixed instance running 24/7.
+Lakebase Postgres separates storage from compute, autoscales the compute layer between a min and max you set, and scales it to zero when nothing's querying. You pay for active CU-hours plus storage, not a fixed instance running 24/7.
 
 ## Why fixed-size instances hurt early-stage apps
 
@@ -23,7 +23,7 @@ That's a problem when your traffic is intermittent, when you've got staging and 
 
 ## How Neon handles it
 
-Neon's compute pauses after 5 minutes of inactivity on the Free and Launch plans, and resumes in a few hundred milliseconds when a query arrives. On Scale, the suspend timeout is configurable from 1 minute to always-on. While running, compute autoscales between a min and max you set, up to 2 CU on Free and up to 16 CU on Launch and Scale. 1 CU is ≈4 GB of RAM with proportional CPU.
+Compute pauses after 5 minutes of inactivity on the Free and Launch plans, and resumes in a few hundred milliseconds when a query arrives. On the Scale plan, the suspend timeout is configurable from 1 minute to always-on. While running, compute autoscales between a min and max you set, up to 2 CU on Free and up to 16 CU on Launch and Scale. 1 CU is ≈4 GB of RAM with proportional CPU.
 
 The Free plan covers a lot of early use cases at $0:
 

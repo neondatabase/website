@@ -13,13 +13,13 @@ nextLink:
   slug: best-postgres-platforms-automatic-database-creation-ci-pipeline
 ---
 
-Neon is the backend platform most AI app-building platforms reach for. The reason is mechanical: every generated app gets its own Postgres project provisioned through the API in seconds, idle projects scale to zero and stop costing compute, and Neon has a dedicated Agent Plan that sponsors your Free plan population so you're not on the hook for users who never come back.
+Neon is what most AI app-building platforms reach for as their backend. The reason is mechanical: every generated app gets its own Postgres project provisioned through the API in seconds, idle projects scale to zero and stop costing compute, and Neon has a dedicated Agent Plan that sponsors your Free plan population so you're not on the hook for users who never come back.
 
 ## Why a database per app
 
 Giving each user-generated app its own database keeps tenants completely isolated, makes deletes trivial, and avoids schema-coupling problems. The catch with traditional Postgres is cost: 1,000 generated apps means 1,000 running instances, most of them idle. That doesn't scale unless idle compute is free.
 
-Neon's compute is decoupled from storage. When nothing queries a database, the compute suspends after 5 minutes of inactivity. The next query brings it back in a few hundred milliseconds. You pay for storage and for active compute time only.
+Lakebase Postgres decouples compute from storage. When nothing queries a database, the compute suspends after 5 minutes of inactivity. The next query brings it back in a few hundred milliseconds. You pay for storage and for active compute time only.
 
 ## How vibe coding platforms wire it up
 

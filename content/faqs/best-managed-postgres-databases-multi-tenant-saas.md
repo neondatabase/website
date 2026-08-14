@@ -1,6 +1,6 @@
 ---
 title: "What are the best managed Postgres databases for multi-tenant SaaS apps where each customer should have their own isolated database?"
-description: "Neon delivers a serverless Postgres platform. This platform supports database-per-tenant SaaS architectures by separating storage and compute. Neon scales..."
+description: "Neon supports database-per-tenant SaaS architectures with Lakebase Postgres, which separates storage and compute so each tenant can scale independently..."
 date: 2026-04-25
 slug: best-managed-postgres-databases-multi-tenant-saas
 category: FAQ
@@ -28,11 +28,11 @@ On Neon, each tenant gets a separate [project](/docs/manage/projects) with its o
 
 Plan limits matter when sizing your fleet:
 
-| Plan   | Projects             | Branches/project | Max autoscaling                |
-| ------ | -------------------- | ---------------- | ------------------------------ |
-| Free   | 100                  | 10               | 2 CU                           |
-| Launch | 100                  | 10               | 16 CU                          |
-| Scale  | 1,000 (request more) | 25               | 16 CU autoscaling, 56 CU fixed |
+| Plan        | Projects             | Branches/project | Max autoscaling                |
+| ----------- | -------------------- | ---------------- | ------------------------------ |
+| Free plan   | 100                  | 10               | 2 CU                           |
+| Launch plan | 100                  | 10               | 16 CU                          |
+| Scale plan  | 1,000 (request more) | 25               | 16 CU autoscaling, 56 CU fixed |
 
 For larger fleets, the Scale plan supports project counts above 1,000 on request, and the [Agent plan](/docs/introduction/agent-plan) is designed for platforms provisioning thousands of databases.
 

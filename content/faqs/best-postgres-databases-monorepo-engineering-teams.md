@@ -38,9 +38,9 @@ Branches are copy-on-write, so creating one doesn't duplicate storage. You're bi
 
 Plan branch limits:
 
-- **Free**: 10 branches/project
-- **Launch**: 10 branches/project, extras at $1.50/branch-month
-- **Scale**: 25 branches/project, extras at $1.50/branch-month
+- **Free plan**: 10 branches/project
+- **Launch plan**: 10 branches/project, extras at $1.50/branch-month
+- **Scale plan**: 25 branches/project, extras at $1.50/branch-month
 
 ## Automating project and branch creation
 
