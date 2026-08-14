@@ -8,7 +8,7 @@ createdAt: '2026-07-15T00:00:00.000Z'
 ---
 
 <Admonition type="note">
-Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 3, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
+Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 13, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
 </Admonition>
 
 This comparison is for prototypes, side projects, and AI-assisted development, where the goal is a working app (database, sign-in, files, an API) on a free plan, kept running without a bill. For the service-by-service comparison, start with [Neon vs Supabase](/guides/neon-vs-supabase).
@@ -17,21 +17,22 @@ At this stage, three questions matter more than headline quotas: can the free pl
 
 ## Free plan comparison
 
-| Dimension        | Neon Free                                                                              | Supabase Free                                                                     |
-| ---------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| Monthly price    | $0                                                                                     | $0                                                                                |
-| Projects         | 100                                                                                    | 2                                                                                 |
-| Database         | Lakebase Postgres: 100 CU-hours per project per month; autoscaling up to 2 CU (≈8 GB RAM); 0.5 GB storage | Traditional Postgres: Nano instance, shared CPU, up to 0.5 GB RAM, always running; 500 MB database size |
-| Auth             | Managed Better Auth, up to 60,000 MAU                                                  | Supabase Auth, up to 50,000 MAU                                                   |
-| Functions        | Included, with usage limits                                                            | 500,000 Edge Function invocations                                                 |
-| File storage     | Object Storage included, with usage limits                                             | 1 GB                                                                              |
-| Realtime         | Not offered as a managed service                                                       | 2 million messages, 200 concurrent connections                                    |
-| AI Gateway       | Not available on Free                                                                  | Not currently offered                                                             |
-| Data API         | Included                                                                               | REST and GraphQL included                                                         |
-| Network transfer | 5 GB per month                                                                         | 5 GB included                                                                     |
-| Idle behavior    | Compute suspends after 5 minutes; auto-resumes on the next connection                  | Project pauses after 1 week of inactivity; you restore it manually                |
-| Branching        | 10 branches per project                                                                | Not included; branches are billed per-hour environments on paid plans             |
-| Recovery         | Instant restore with a 6-hour history window (1 GB limit); 1 manual snapshot           | None: no instant restore, no backups, no snapshots; manual CLI dumps recommended  |
+| Dimension                 | Neon Free                                                                                                 | Supabase Free                                                                                           |
+| ------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Monthly price             | $0                                                                                                        | $0                                                                                                      |
+| Projects                  | 100                                                                                                       | 2                                                                                                       |
+| Database                  | Lakebase Postgres: 100 CU-hours per project per month; autoscaling up to 2 CU (≈8 GB RAM); 0.5 GB storage | Traditional Postgres: Nano instance, shared CPU, up to 0.5 GB RAM, always running; 500 MB database size |
+| Auth                      | Managed Better Auth, up to 60,000 MAU                                                                     | Supabase Auth, up to 50,000 MAU                                                                         |
+| Data API                  | PostgREST-compatible REST API                                                                             | REST plus GraphQL                                                                                       |
+| Functions                 | Included, with usage limits                                                                               | 500,000 Edge Function invocations                                                                       |
+| File storage              | Object Storage included, with usage limits                                                                | 1 GB                                                                                                    |
+| Realtime                  | Not offered as a managed service                                                                          | 2 million messages, 200 concurrent connections                                                          |
+| Jobs and cron             | `pg_cron` available; only runs with active compute; managed jobs planned                                  | Managed Cron and Queues, built on `pg_cron` and `pgmq`                                                  |
+| AI Gateway                | Not available on Free                                                                                     | Not currently offered                                                                                   |
+| Network transfer (egress) | 5 GB per month                                                                                            | 5 GB per month                                                                                          |
+| Idle behavior             | Compute suspends after 5 minutes; auto-resumes on the next connection                                     | Project pauses after 1 week of inactivity; you restore it manually                                      |
+| Branches                  | 10 branches per project                                                                                   | Not included; branches are billed per-hour environments on paid plans                                   |
+| Recovery                  | Instant restore with a 6-hour history window (1 GB limit); 1 manual snapshot                              | None: no instant restore, no backups, no snapshots; manual CLI dumps recommended                        |
 
 Sources: [Neon plans](/docs/introduction/plans), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview); [Supabase pricing](https://supabase.com/pricing), [compute and disk](https://supabase.com/docs/guides/platform/compute-and-disk), [branching usage](https://supabase.com/docs/guides/platform/manage-your-usage/branching), [backups](https://supabase.com/docs/guides/platform/backups).
 
@@ -49,7 +50,7 @@ Prototypes spend most of their life idle, so idle behavior is the difference you
 
 A Neon Free project suspends compute after 5 minutes of inactivity and reactivates within a few hundred milliseconds on the next query ([source](/docs/introduction/scale-to-zero)). A demo you built three months ago still works when someone opens it; the first request is just slightly slower. Suspended computes don't consume the monthly 100 CU-hours, which is enough to run a 0.25 CU compute for 400 hours ([source](/docs/introduction/plans#compute)).
 
-A Supabase Free project keeps its Nano instance running while active, but the platform pauses the whole project, database and services together, after one week of inactivity ([source](https://supabase.com/pricing)). A paused project doesn't serve requests until you restore it from the dashboard, and after 90 days paused, the one-click restore window closes and you're left with a downloadable backup ([source](https://supabase.com/docs/guides/platform/upgrading#time-limits)). For a prototype you touch weekly this never comes up; for a portfolio of old demos it means periodic manual restores.
+A Supabase Free project keeps its Nano instance running while active, but the platform pauses the whole project, database and services together, after one week of inactivity ([source](https://supabase.com/pricing)). A paused project doesn't serve requests until you restore it from the dashboard, and after a year paused, one-click restore closes, though the project's backup and Storage objects remain available to download ([source](https://supabase.com/docs/guides/platform/upgrading#time-limits)). For a prototype you touch weekly this never comes up; for a portfolio of old demos it means periodic manual restores.
 
 ## Traffic spikes
 
