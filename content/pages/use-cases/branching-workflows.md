@@ -36,7 +36,7 @@ So teams compromise. They test migrations against partial or outdated data. They
 
 Better scripts and faster restores only move the ceiling a little. The fix has to come from the database model itself.
 
-## Branching databases
+## The lakebase architecture allows Postgres to branch
 
 A branch starts as a pointer. When you create one, Lakebase Postgres records a reference to the parent's data at a specific point in time and writes nothing. The child sees the exact schema and rows the parent had at that moment. When you run a migration, insert rows, or drop a table on the child, only those changes are written separately.
 
@@ -112,7 +112,7 @@ Delete restored branches when you're done so they don't sit in storage.
 - [I dropped a table in production, now what?](/blog/recover-production-database) - a worked example of the recovery flow
 </Admonition>
 
-## Automating branch creation and cleanup
+### Automating branch creation and cleanup
 
 Branching becomes a workflow once nobody has to think about it. Every operation is available through the [Neon API](/docs/reference/api) and the CLI, so branch lifecycle can follow the same events your pipeline already reacts to:
 
@@ -141,11 +141,10 @@ A few examples on how branching workflows are transforming teams of all size - o
 - **[From Heroku to Neon: the dev.to story](/blog/dev-from-heroku-to-neon)** - Serverless Postgres behind a platform used by millions of developers
 
 <Admonition type="info" title="More teams building this way">
-- [Fast-moving teams](/case-studies#fast-moving-teams) - the full set of case studies behind these workflows
-- [Practical guide to database branching](/blog/practical-guide-to-database-branching) - the common patterns collected in one place
+Explore [the full set of case studies](/case-studies#fast-moving-teams)
 </Admonition>
 
-## Branching backends
+## We're now branching backends
 
 Everything above covers the database half of an environment. For a long time that was as far as branching went - that's changing. [Neon is now building backends](https://neon.com/blog/neon-backend-is-beta), and the full suite of Neon backend primitives are keyed to the same `branch_id`. So a Neon branch now forks more than the database - one API call forks the data, the files, the users, and the code that runs against them:
 
@@ -153,4 +152,4 @@ Everything above covers the database half of an environment. For a long time tha
 - **[Managed Better Auth](/docs/auth/overview)** - Users, sessions, and OAuth configuration live in your Postgres database, so a branch gets its own isolated sign-up and login flows
 - **[Neon Functions](/docs/compute/functions/overview)** - Node.js handlers deployed onto a branch, each with its own URL and its own database state, deleted when the branch is
 
-<CTA title="Start branching" description="Ask your agent to create a Neon and experiment with branching right away. We have a generous free plan, no credit card required." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" linkText="Read the branching guide" linkUrl="/branching" />
+<CTA title="Start branching" description="Ask your agent to create a Neon and experiment with branching right away. We have a generous free plan, no credit card required." buttonText="Get started" buttonUrl="https://neon.com/docs/introduction" linkText="Read the branching guide" linkUrl="/branching" />
