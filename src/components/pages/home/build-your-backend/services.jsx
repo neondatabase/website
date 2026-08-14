@@ -7,7 +7,6 @@ import { useInView } from 'react-intersection-observer';
 
 import { cn } from 'utils/cn';
 
-const VIDEO_VERSION = '20260813-3';
 const SLIDER_VIEWPORT_QUERY = '(max-width: 63.9375rem)';
 const COMPACT_SLIDER_VIEWPORT_QUERY = '(max-width: 33.6875rem)';
 const VIDEO_SWITCH_DELAY_MS = 20;
@@ -25,12 +24,21 @@ const getScrollPaddingLeft = (element) => {
     poster: ffmpeg -i output.webm -map 0:v:0 -vf "select=eq(n\,0)" -frames:v 1 -fps_mode vfr -q:v 1 output.jpg
 */
 
-const ServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoBase, width }) => {
+const ServiceVideo = ({
+  height,
+  isActive,
+  onEnded,
+  shouldLoop,
+  title,
+  videoBase,
+  version,
+  width,
+}) => {
   const videoRef = useRef(null);
   const endDelayTimeoutRef = useRef(null);
   const shouldLoopRef = useRef(shouldLoop);
   const onEndedRef = useRef(onEnded);
-  const posterImagePath = `/videos/pages/home/hero/${videoBase}-${VIDEO_VERSION}.jpg`;
+  const posterImagePath = `/videos/pages/home/hero/${videoBase}-${version}.jpg`;
 
   useEffect(() => {
     shouldLoopRef.current = shouldLoop;
@@ -115,11 +123,11 @@ const ServiceVideo = ({ height, isActive, onEnded, shouldLoop, title, videoBase,
         onEnded={handleEnded}
       >
         <source
-          src={`/videos/pages/home/hero/${videoBase}.webm?updated=${VIDEO_VERSION}`}
+          src={`/videos/pages/home/hero/${videoBase}.webm?updated=${version}`}
           type="video/webm"
         />
         <source
-          src={`/videos/pages/home/hero/${videoBase}.mp4?updated=${VIDEO_VERSION}`}
+          src={`/videos/pages/home/hero/${videoBase}.mp4?updated=${version}`}
           type="video/mp4"
         />
       </video>
@@ -134,6 +142,7 @@ ServiceVideo.propTypes = {
   shouldLoop: PropTypes.bool.isRequired,
   title: PropTypes.string.isRequired,
   videoBase: PropTypes.string.isRequired,
+  version: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
 };
 
@@ -339,7 +348,8 @@ const BackendServices = ({ items }) => {
       className="grid grid-cols-5 items-end gap-4 lg:-mx-5 lg:no-scrollbars lg:flex lg:snap-x lg:snap-mandatory lg:scroll-px-5 lg:items-start lg:gap-x-6 lg:overflow-x-auto lg:px-5"
       ref={setListRef}
     >
-      {items.map(({ title, description, videoBase, aspectRatio, width, height }, index) => {
+      {items.map((item, index) => {
+        const { title, description, videoBase, version, aspectRatio, width, height } = item;
         const activeIndex = hoveredIndex ?? (isAutoPlayInView ? autoPlayIndex : null);
         const isActive = activeIndex === index;
 
@@ -375,6 +385,7 @@ const BackendServices = ({ items }) => {
                 shouldLoop={!isSliderViewport && hoveredIndex === index}
                 title={title}
                 videoBase={videoBase}
+                version={version}
                 width={width}
               />
             </span>
@@ -396,6 +407,7 @@ BackendServices.propTypes = {
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       videoBase: PropTypes.string.isRequired,
+      version: PropTypes.string.isRequired,
       aspectRatio: PropTypes.string.isRequired,
       width: PropTypes.number.isRequired,
       height: PropTypes.number.isRequired,
