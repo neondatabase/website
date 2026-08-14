@@ -7,8 +7,8 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
-    "prebuild": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
-    "predev": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js && npm run generate:ai-gateway-model-markdown",
+    "prebuild": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && node src/scripts/generate-static-md-manifest.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js",
+    "predev": "node scripts/generate-api-ref.mjs && node src/scripts/update-github-stars.js && node src/scripts/generate-docs-icons-config.js && node src/scripts/generate-static-md-manifest.js && npm run check:content-data && npm run check:pricing-sync && node scripts/docs-checks/neonctl/check-staleness.js && npm run generate:ai-gateway-model-markdown",
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
@@ -24,7 +24,8 @@
     "lint:md": "markdownlint --ignore-path .gitignore .",
     "sync:skills": "node src/scripts/sync-skills.js",
     "generate:skills": "node src/scripts/generate-skills-index.js",
-    "update:skills": "npm run sync:skills && npm run generate:skills",
+    "generate:static-md-manifest": "node src/scripts/generate-static-md-manifest.js",
+    "update:skills": "npm run sync:skills && npm run generate:skills && npm run generate:static-md-manifest",
     "generate:api-ref": "node scripts/generate-api-ref.mjs",
     "check:api-ref-generated": "node scripts/check-api-ref-generated.mjs",
     "check:docs-api-consistency": "node scripts/check-docs-api-consistency.mjs",
