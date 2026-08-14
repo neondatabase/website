@@ -13,6 +13,10 @@ summary: >-
 enableTableOfContents: true
 ---
 
+<Admonition type="info">
+**Fundamentals landing page** (nav label: "How Neon fits together"). Refactor note: this is the whole-backend overview; dek should be "The backend for apps and agents." Nav label reworked from the weak "Overview."
+</Admonition>
+
 On Neon, a single [`neon.ts`](/docs/reference/neon-ts) file declares your whole backend: a **Postgres database**, S3-compatible **Object Storage**, long-running **Functions**, an **AI Gateway** for calling LLMs through one credential, and managed **Auth**. Each capability is a toggle, or on by default for Postgres, plus [`neon deploy`](/docs/cli/deploy), which provisions it and injects standard environment variables into your app. Branch your project and the whole backend forks with your data.
 
 <Admonition type="note" title="This is an orientation page">

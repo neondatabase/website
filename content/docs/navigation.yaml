@@ -8,6 +8,10 @@
       items:
         - title: Why Neon?
           slug: get-started/why-neon
+        - title: Developer experience
+          slug: get-started/dev-experience
+        - title: Built to scale
+          slug: get-started/built-to-scale
     - section: Start with Neon
       icon: start
       items:
@@ -17,10 +21,7 @@
           slug: get-started/full-backend-quickstart
         - title: Connect your app
           slug: connect/connect-hub
-    - section: Explore Neon
-      icon: book
-      items:
-        - title: Tour the Neon Console
+        - title: Get started in the console
           slug: get-started/signing-up
     - section: Frontend & Frameworks
       items:
@@ -215,7 +216,7 @@
   items:
     - section: Core concepts
       items:
-        - title: Overview
+        - title: How Neon fits together
           slug: get-started/backend-overview
         - title: The Neon object model
           slug: manage/overview
@@ -223,6 +224,16 @@
           slug: platform/branching
         - title: Credentials
           slug: manage/credentials
+    - section: More fundamentals (planned)
+      items:
+        - title: Access model
+          slug: fundamentals/access-model
+        - title: Serverless
+          slug: fundamentals/serverless
+        - title: High availability
+          slug: fundamentals/high-availability
+        - title: Regions
+          slug: fundamentals/regions
 - nav: Products
   title: Products
   icon: features

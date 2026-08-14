@@ -13,8 +13,6 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-  - /docs/get-started/dev-experience
-  - /docs/get-started/built-to-scale
   - /docs/introduction/neon-and-lakebase
 updatedOn: '2026-08-03T18:51:52.937Z'
 ---

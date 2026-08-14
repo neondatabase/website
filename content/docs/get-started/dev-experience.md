@@ -16,6 +16,10 @@ redirectFrom:
 updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
+<Admonition type="info">
+**REFACTOR CANDIDATE (marketing-owned):** Proposed for consolidation into `why-neon` (differentiators). Marketing owns this page, so this is a proposal to make to them — not a decision. Restored to nav pending that conversation. ("Managed Better Auth" → "Better Auth" if content survives.)
+</Admonition>
+
 The developer experience across Neon is rooted in the lakebase architecture and anchored around four core pillars:
 
 1. **Invisible infra** - compute and storage adapt to your workload in real-time
