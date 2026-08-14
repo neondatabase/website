@@ -26,7 +26,7 @@ Run `npx neon@latest init` from your project root to connect your agent, then br
 
 ![Agent-friendly database lifecycle with Neon](/use-cases/fast-dev-workflows/agent-database-lifecycle-workflow.png)
 
-## Build with your agent or editor
+## Ask your agent to deploy a full backend
 
 Agents and AI-native editors are a first-class way to work with Neon. One command connects your project to Neon, installs agent skills, and configures the Neon MCP server for Cursor, VS Code, Claude Code, and other supported clients.
 
@@ -54,16 +54,16 @@ Fully functional apps need more than a connection string - you'll need to handle
 
 This page is for developers building apps: you write the product, and your editor or agent wires the backend. If you are building an agent product that provisions Neon for your own end users, see [Neon for AI Agent Platforms](/use-cases/ai-agents) and [Embedded Postgres for Platforms](/platforms).
 
+What's included when you deploy Neon:
+
 ## Lakebase Postgres
 
-Every Neon backend starts with [Lakebase Postgres](/docs/postgres/overview): fully managed Postgres with separated compute and storage.
+Every Neon backend starts with [Lakebase Postgres](/docs/postgres/overview) - fully managed serverless Postgres with separated compute and storage and the innovative features of the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview):
 
 - **Autoscaling** - Compute adjusts between your min and max limits as load changes ([autoscaling](/docs/introduction/autoscaling))
 - **Scale to zero** - Idle databases suspend so you do not pay for compute while they are inactive ([scale to zero](/docs/introduction/scale-to-zero))
 - **Branching** - Create instant copies for development, previews, and CI ([branching](/docs/introduction/branching))
 - **Connection pooling** - Pooled endpoints support up to 10,000 connections per compute ([connection pooling](/docs/connect/connection-pooling))
-
-Use any Postgres driver, ORM, or framework you already know. When you only need the database, start here and add other primitives as the app grows.
 
 ## Managed Better Auth
 
@@ -73,8 +73,6 @@ Use any Postgres driver, ORM, or framework you already know. When you only need 
 - JWTs that work with the Neon Data API and Row Level Security
 - Setup from the Console, `npx neon@latest init`, or the Neon MCP server
 
-Managed Better Auth is in beta and available in AWS regions. See [Managed Better Auth overview](/docs/auth/overview#availability) for current limits.
-
 ## Neon Object Storage
 
 [Neon Object Storage](/docs/storage/overview) is S3-compatible object storage built into the Neon backend. Each branch gets its own isolated namespace, so preview uploads do not touch production files.
@@ -82,8 +80,6 @@ Managed Better Auth is in beta and available in AWS regions. See [Managed Better
 - Use standard S3 SDKs and tools
 - `private` and `public_read` bucket access modes
 - Same credential system as Functions and AI Gateway
-
-Object Storage is in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`). See [Object Storage overview](/docs/storage/overview) for details.
 
 ## Neon Functions
 
@@ -93,13 +89,9 @@ Object Storage is in beta and currently available in AWS US East (Ohio) (`aws-us
 - Each branch runs its own function at its own URL
 - JavaScript and TypeScript on Node.js during beta
 
-Functions are in beta and currently available in AWS US East (Ohio) (`aws-us-east-2`). See [Neon Functions overview](/docs/compute/functions/overview) for runtime limits.
-
 ## Neon AI Gateway
 
 [Neon AI Gateway](/docs/ai-gateway/overview) routes model calls through one Neon credential. Standard OpenAI-compatible SDKs work with a URL change. Each branch gets its own gateway endpoint.
-
-AI Gateway is in beta, requires a paid Neon plan (Launch or Scale), and is currently available in AWS US East (Ohio) (`aws-us-east-2`). Inference is free on paid plans during beta. See [AI Gateway pricing](/docs/ai-gateway/overview#pricing).
 
 ## Neon Data API
 
@@ -107,8 +99,7 @@ The [Neon Data API](/docs/data-api/get-started) exposes each database branch as 
 
 Every branch has its own endpoint, which fits preview deployments and agent-generated apps that need quick CRUD access over HTTPS.
 
-
-## Start on the Free plan
+## A Free plan with enough room to build
 
 You can start building on the [Neon Free plan](/docs/introduction/plans). It comes with enough resources to support fully working apps, not just experiments:
 
