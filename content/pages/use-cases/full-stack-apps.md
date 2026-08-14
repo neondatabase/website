@@ -72,7 +72,10 @@ That separation is what makes the rest of the Neon experience possible. You do n
 
 Use any Postgres driver, ORM, or framework you already know. When you only need the database, start here and add other primitives as the app grows.
 
-<Video sources={[{src: "/videos/pages/home/hero/postgres-database.webm?updated=20260709", type: "video/webm"}, {src: "/videos/pages/home/hero/postgres-database.mp4?updated=20260709", type: "video/mp4"}]} width={704} height={704} />
+<video autoPlay playsInline muted loop width="320" height="320">
+  <source src="/videos/pages/home/hero/postgres-database.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/postgres-database.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 <MegaLink tag="Separated compute and storage" title="How the lakebase architecture makes Postgres branchable, serverless, and instant to restore" url="/docs/introduction/architecture-overview" />
 
@@ -84,7 +87,10 @@ Use any Postgres driver, ORM, or framework you already know. When you only need 
 - JWTs that work with the Neon Data API and Row Level Security
 - Setup from the Console, `npx neon@latest init`, or the Neon MCP server
 
-<Video sources={[{src: "/videos/pages/home/hero/authentication.webm?updated=20260709", type: "video/webm"}, {src: "/videos/pages/home/hero/authentication.mp4?updated=20260709", type: "video/mp4"}]} width={704} height={537} />
+<video autoPlay playsInline muted loop width="320" height="244">
+  <source src="/videos/pages/home/hero/authentication.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/authentication.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 ## Neon Object Storage
 
@@ -101,7 +107,10 @@ You implement the real S3 wire protocol. Point the AWS SDK, boto3, the AWS CLI, 
 
 Declare buckets in [`neon.ts`](/docs/reference/neon-ts), run `neon deploy`, and Neon provisions them on the linked branch and writes the AWS credentials into `.env.local`.
 
-<Video sources={[{src: "/videos/pages/home/hero/storage.webm?updated=20260709", type: "video/webm"}, {src: "/videos/pages/home/hero/storage.mp4?updated=20260709", type: "video/mp4"}]} width={704} height={957} />
+<video autoPlay playsInline muted loop width="280" height="381">
+  <source src="/videos/pages/home/hero/storage.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/storage.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 <MegaLink tag="Files that branch with Postgres" title="How we built Neon Object Storage: S3-compatible buckets with the same branch semantics as your database" url="https://neon.com/blog/building-neon-object-storage" />
 
@@ -122,7 +131,10 @@ Functions follow the same `branch_id` as the rest of the stack. Deploy onto `mai
 
 Declare functions in [`neon.ts`](/docs/reference/neon-ts) and deploy with `neon deploy`. Hono is the recommended framework.
 
-<Video sources={[{src: "/videos/pages/home/hero/compute.webm?updated=20260709", type: "video/webm"}, {src: "/videos/pages/home/hero/compute.mp4?updated=20260709", type: "video/mp4"}]} width={704} height={424} />
+<video autoPlay playsInline muted loop width="320" height="193">
+  <source src="/videos/pages/home/hero/compute.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/compute.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 <MegaLink tag="Compute next to your data" title="Neon Functions: long-running Node.js handlers that live on your branch beside Lakebase Postgres" url="https://neon.com/blog/neon-functions-backend-logic-next-to-your-data" />
 
@@ -139,7 +151,10 @@ The gateway runs on the Databricks AI infrastructure that already serves [more t
 - **Inference that branches with your app** - Each branch gets its own gateway endpoint, so model calls from a preview branch stay isolated from production
 - **Wired into Functions automatically** - Gateway credentials are injected into [Neon Functions](/docs/compute/functions/overview), so a model-backed handler runs next to Postgres and Object Storage on the same branch
 
-<Video sources={[{src: "/videos/pages/home/hero/ai-gateway.webm?updated=20260709", type: "video/webm"}, {src: "/videos/pages/home/hero/ai-gateway.mp4?updated=20260709", type: "video/mp4"}]} width={704} height={311} />
+<video autoPlay playsInline muted loop width="320" height="141">
+  <source src="/videos/pages/home/hero/ai-gateway.webm?updated=20260709" type="video/webm" />
+  <source src="/videos/pages/home/hero/ai-gateway.mp4?updated=20260709" type="video/mp4" />
+</video>
 
 <MegaLink tag="One API, one bill" title="How the Neon backend fits together: Object Storage, Functions, and AI Gateway in beta" url="https://neon.com/blog/neon-backend-is-beta" />
 
