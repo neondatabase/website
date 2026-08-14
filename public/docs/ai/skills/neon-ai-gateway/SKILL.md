@@ -14,6 +14,7 @@ description: >-
   Gateway", and "log/rate-limit AI calls".
 metadata:
   parent: neon
+  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-ai-gateway
 ---
 
 **FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.
