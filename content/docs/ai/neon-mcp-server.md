@@ -7,7 +7,7 @@ summary: >-
   `npx neon@latest init` or use the config generator. Supports OAuth and
   API key auth.
 enableTableOfContents: true
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-08-13T22:11:29.293Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -88,6 +88,12 @@ The hosted Neon MCP Server (`mcp.neon.tech`) connects to your Neon databases fro
 - `23.22.233.166`
 
 If [IP Allow](/docs/introduction/ip-allow) is enabled on your project, add these addresses to your allowlist so the MCP server can connect.
+
+## Database diagnostics
+
+When you ask why a branch is slow, large, or behind, the MCP server can run `inspect_database` instead of inventing catalog SQL. It exposes the same 14 read-only checks as [`neon inspect db`](/docs/cli/inspect): table and index sizes, unused indexes, sequential scans, long-running queries and locks, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state.
+
+Pick a check with the `check` parameter (for example `table-sizes` or `unused-indexes`). The tool runs inside a read-only transaction, so it works with [`?readonly=true`](#read-only-mode). It belongs to the `querying` category, not `observability`. Some checks need [`pg_stat_statements`](/docs/extensions/pg_stat_statements) or the [`neon`](/docs/extensions/neon) extension; the tool reports that and asks before suggesting installation.
 
 <MCPTools />
 
