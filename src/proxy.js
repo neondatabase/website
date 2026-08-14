@@ -145,25 +145,53 @@ const STATIC_MD = new Set(STATIC_MD_PATHS);
 // Runs at the proxy layer (before rewrites/routes), so nothing downstream can
 // pre-empt it. Returns a response, or null when this isn't an unmirrored `.md`
 // (generated-docs `.md` keep their existing fetch-based handling).
+// next() that serves a static `.md` as-is, carrying the doc headers + noindex the
+// isContentRoute branch would otherwise apply (this short-circuit runs before it)
+// plus the LLM read beacon. Without this, static skill files would lose the
+// X-Robots-Tag: noindex they get on the isContentRoute path and become indexable.
+function servedStaticMarkdown(req) {
+  trackLLMPageview(req);
+  const response = applyDocHeaders(NextResponse.next());
+  response.headers.set('X-Robots-Tag', 'noindex');
+  return response;
+}
+
+// Maps a skill-discovery alias to the real SKILL.md path a next.config rewrite
+// sends it to, or null if pathname isn't such an alias. These have no physical
+// file at the request path. Keep in sync with the skill-discovery rewrites in
+// next.config.js.
+function skillAliasTarget(pathname) {
+  if (pathname === '/skill.md') return '/docs/ai/skills/neon-postgres/SKILL.md';
+  const match = pathname.match(
+    /^\/(?:docs\/)?\.well-known\/(?:agent-skills|skills)\/([^/]+)\/SKILL\.md$/
+  );
+  return match ? `/docs/ai/skills/${match[1]}/SKILL.md` : null;
+}
+
 function staticMarkdownResponse(req, pathname) {
   if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
 
-  // Agent-skill discovery aliases (and /skill.md) have no physical file at the
-  // request path — next.config rewrites map them to a real SKILL.md elsewhere.
-  // The proxy runs before those rewrites, so don't 404 them here; fall through
-  // and let the rewrite serve. Keep in sync with the skill-discovery rewrites in
-  // next.config.js.
-  if (
-    pathname === '/skill.md' ||
-    pathname.startsWith('/.well-known/') ||
-    pathname.startsWith('/docs/.well-known/')
-  )
-    return null;
+  // Skill-discovery alias: no physical file here — a next.config rewrite maps it
+  // to a real SKILL.md. Serve (via the rewrite) if that skill exists, else a
+  // markdown 404. Returning next() rather than null keeps a single beacon —
+  // falling through would fire again in the agent branch for agent UAs.
+  const aliasTarget = skillAliasTarget(pathname);
+  if (aliasTarget !== null) {
+    if (STATIC_MD.has(aliasTarget)) return servedStaticMarkdown(req);
+    trackLLMPageview(req, { is404: true });
+    return markdownNotFoundResponse(pathname, { source: 'agent-404' });
+  }
 
+  // Real static file (SKILL.md, references, prompts, /pricing.md): serve it as-is.
+  // Checked before getMarkdownPath because some static files also have a
+  // CUSTOM_MARKDOWN_PATHS mapping (e.g. /pricing.md) — the file is right here.
+  if (STATIC_MD.has(pathname)) return servedStaticMarkdown(req);
+
+  // Has a generated /md sibling → let the existing fetch-based branch serve it
+  // (or return its own markdown 404); both outcomes are tracked there.
   if (getMarkdownPath(pathname) !== null) return null;
 
-  if (STATIC_MD.has(pathname)) return NextResponse.next();
-
+  // No static file and no /md sibling → genuine miss.
   trackLLMPageview(req, { is404: true });
   return markdownNotFoundResponse(pathname, { source: 'agent-404' });
 }
@@ -192,6 +220,7 @@ export async function proxy(req) {
           });
         }
         if (res.status === 404) {
+          trackLLMPageview(req, { is404: true });
           return new NextResponse(
             buildAgent404Response(pathname, {
               context: 'Neon Blog',
@@ -235,7 +264,8 @@ export async function proxy(req) {
     const staticMd = staticMarkdownResponse(req, pathname);
     if (staticMd) return staticMd;
 
-    if (isAIAgentRequest(req)) {
+    const isAgent = isAIAgentRequest(req);
+    if (isAgent) {
       let agentHit404 = false;
       const markdownPath = getMarkdownPath(pathname);
 
@@ -305,10 +335,12 @@ export async function proxy(req) {
             const response = await fetch(markdownUrl);
 
             // Track .md as agent traffic, but only on outcomes handled here
-            // (200/404). A 5xx falls through untracked — the agent branch above
-            // already tracked it, so tracking again would double-count.
+            // (200/404). A 5xx falls through untracked. Skip agents entirely:
+            // the agent branch above already tracked them, and an agent whose
+            // first fetch threw falls through to here — tracking again would
+            // double-count (a browser only ever reaches this branch).
             const isMarkdown404 = response.status === 404;
-            if (response.ok || isMarkdown404) {
+            if (!isAgent && (response.ok || isMarkdown404)) {
               trackLLMPageview(req, { is404: isMarkdown404 });
             }
 

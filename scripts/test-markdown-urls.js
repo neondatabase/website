@@ -492,38 +492,27 @@ function buildTests() {
 
   const staticMdPath = '/docs/ai/skills/neon-functions/references/sentry.md';
 
-  add(
-    'Static .md',
-    staticMdPath,
-    'browser',
-    [(r) => expectStatus(r.status, 200), (r) => expectBodyNotEmpty(r.body)],
-    {
-      spotCheck: (r) => expectBodyContains(r.body, 'neon', true),
-      note: 'static file, not rewritten',
-    }
-  );
-
-  add(
-    'Static .md',
-    staticMdPath,
-    'accept-md',
-    [(r) => expectStatus(r.status, 200), (r) => expectBodyNotEmpty(r.body)],
-    {
-      spotCheck: (r) => expectBodyContains(r.body, 'neon', true),
-      note: 'should pass through unchanged',
-    }
-  );
-
-  add(
-    'Static .md',
-    staticMdPath,
-    'agent-ua',
-    [(r) => expectStatus(r.status, 200), (r) => expectBodyNotEmpty(r.body)],
-    {
-      spotCheck: (r) => expectBodyContains(r.body, 'neon', true),
-      note: 'should pass through unchanged',
-    }
-  );
+  // Static skill .md must serve as text/markdown and stay noindex. NOTE: on Vercel
+  // *preview* deploys the platform auto-adds X-Robots-Tag: noindex to everything,
+  // masking a regression — run these against production or localhost to trust the
+  // noindex assertion.
+  for (const mode of ['browser', 'accept-md', 'agent-ua']) {
+    add(
+      'Static .md',
+      staticMdPath,
+      mode,
+      [
+        (r) => expectStatus(r.status, 200),
+        (r) => expectBodyNotEmpty(r.body),
+        (r) => expectContentType(r.contentType, 'text/markdown'),
+        (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
+      ],
+      {
+        spotCheck: (r) => expectBodyContains(r.body, 'neon', true),
+        note: 'static file served as-is, noindex preserved',
+      }
+    );
+  }
 
   // ── 5. 404 behavior ───────────────────────────────────────────────────
 
@@ -1179,6 +1168,8 @@ function buildTests() {
     ['out-of-namespace path', '/foo/bar-does-not-exist-qa.md'],
     ['deep out-of-namespace path', '/foo/bar/baz-does-not-exist-qa.md'],
     ['missing skill reference', '/docs/ai/skills/neon-postgres/references/does-not-exist-qa.md'],
+    // Unknown skill via a discovery alias → markdown 404 (rewrite target missing).
+    ['unknown skill alias', '/.well-known/agent-skills/does-not-exist-qa/SKILL.md'],
   ];
 
   for (const [label, path] of missingMdCases) {
@@ -1215,6 +1206,7 @@ function buildTests() {
       [
         (r) => expectStatus(r.status, 200),
         (r) => expectBodyNotEmpty(r.body),
+        (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
         // Must NOT be the markdown 404 body.
         (r) =>
           r.body.includes('# Page Not Found')
