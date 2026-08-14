@@ -308,11 +308,56 @@ curl --request PATCH \
 '
 ```
 
+<Admonition type="important" title="This call replaces the whole list">
+`enabled_libraries` is replaced, not merged. Any library you leave out is turned off, including non-default ones you enabled earlier (such as `pgx_ulid`). To add a library without disturbing the rest, build the new list from your current settings.
+</Admonition>
+
+To add one or more libraries without dropping the ones you already use, read your current libraries and the defaults, then send their union. This requires [`jq`](https://jqlang.github.io/jq/):
+
+```bash shouldWrap
+PROJECT_ID=your_project_id
+
+AVAILABLE="$(curl -sS \
+    --url https://console.neon.tech/api/v2/projects/$PROJECT_ID/available_preload_libraries \
+    --header 'accept: application/json' \
+    --header "authorization: Bearer $NEON_API_KEY")"
+
+CURRENT="$(curl -sS \
+    --url https://console.neon.tech/api/v2/projects/$PROJECT_ID \
+    --header 'accept: application/json' \
+    --header "authorization: Bearer $NEON_API_KEY")"
+
+BODY="$(jq -n --argjson avail "$AVAILABLE" --argjson cur "$CURRENT" '
+  {
+    project: {
+      settings: {
+        preload_libraries: {
+          enabled_libraries: (
+            [$avail.libraries[] | select(.is_default == true) | .library_name | split(",")[]]
+            + ($cur.project.settings.preload_libraries.enabled_libraries // [])
+            + ["library_to_add"]
+            | unique
+          )
+        }
+      }
+    }
+  }')"
+
+curl -sS --request PATCH \
+    --url https://console.neon.tech/api/v2/projects/$PROJECT_ID \
+    --header 'accept: application/json' \
+    --header "authorization: Bearer $NEON_API_KEY" \
+    --header 'content-type: application/json' \
+    --data "$BODY"
+```
+
+Replace `library_to_add` with the libraries you want to enable. The `split(",")` handles default entries that pack several names into one comma-separated string (such as the `pgrag` libraries). Restart your compute afterward so the new libraries load.
+
 When running a `Create project` or `Update project` API call to enable libraries:
 
 - Library names must be quoted, comma-separated, and specified in a single string.
 - Specify all libraries that should be enabled. If a library is not included in the API call, it will not be enabled.
-- The "use_defaults": true`option overrides the`"enabled_libraries"` option, enabling only default libraries
+- Setting `use_defaults` to `true` overrides `enabled_libraries` and enables only the default libraries.
 - The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not; they're used by a Neon system-managed database.
 - If you do not use one of the libraries enabled by default, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude its libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`).
 - The `pg_search` library is **deprecated**; do not add it for new projects. Existing projects that still preload it should plan migration; see [The pg_search extension](/docs/extensions/pg_search).
