@@ -8,8 +8,6 @@
       items:
         - title: Why Neon?
           slug: get-started/why-neon
-        - title: The Neon backend
-          slug: get-started/backend-overview
     - section: Start with Neon
       icon: start
       items:
@@ -210,6 +208,21 @@
         - title: Sample data
           slug: import/import-sample-data
 
+- nav: Neon fundamentals
+  slug: get-started/backend-overview
+  title: Neon fundamentals
+  icon: book
+  items:
+    - section: Core concepts
+      items:
+        - title: Overview
+          slug: get-started/backend-overview
+        - title: The Neon object model
+          slug: manage/overview
+        - title: Branch your backend
+          slug: platform/branching
+        - title: Credentials
+          slug: manage/credentials
 - nav: Products
   title: Products
   icon: features
@@ -865,18 +878,6 @@
   title: Platform
   icon: architecture
   subnav:
-    - title: Branch your backend
-      slug: platform/branching
-      icon: branching
-      items:
-        - section: Overview
-          items:
-            - title: Overview
-              slug: platform/branching
-            - title: Branching with the CLI
-              slug: guides/branching-neon-cli
-            - title: Branching with the API
-              slug: guides/branching-neon-api
     - title: Manage & operate
       slug: manage/platform
       icon: settings
@@ -922,16 +923,12 @@
         - section: Projects & resources
           icon: book
           items:
-            - title: Object hierarchy
-              slug: manage/overview
             - title: Projects
               slug: manage/projects
             - title: Multitenancy
               slug: guides/multitenancy
             - title: Branches
               slug: manage/branches
-            - title: Credentials (Beta)
-              slug: manage/credentials
             - title: Computes
               slug: manage/computes
             - title: Roles
