@@ -4,8 +4,10 @@
 // result onto an opaque background first. Source elements that were already pale
 // invert into near-black, so --relight forces a brightness band of grays to a
 // readable output gray instead.
+// --key drops a flat background colour to transparent. Keyed pixels are also set to
+// black, so the result looks the same if an image pipeline discards the alpha.
 // Usage: node scripts/invert-image-lightness.mjs <input.png> <output.png>
-//          [--flatten RRGGBB] [--relight MIN-MAX:GRAY]
+//          [--flatten RRGGBB] [--relight MIN-MAX:GRAY] [--key RRGGBB:TOLERANCE]
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { inflateSync, deflateSync } from 'node:zlib';
@@ -152,6 +154,18 @@ const flattenTo =
     ? null
     : [0, 2, 4].map((i) => parseInt(rest[flattenIndex + 1].slice(i, i + 2), 16));
 
+const keyIndex = rest.indexOf('--key');
+const key =
+  keyIndex === -1
+    ? null
+    : (() => {
+        const [hex, tolerance] = rest[keyIndex + 1].split(':');
+        return {
+          rgb: [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)),
+          tolerance: Number(tolerance),
+        };
+      })();
+
 const relightIndex = rest.indexOf('--relight');
 const relight =
   relightIndex === -1
@@ -199,6 +213,36 @@ for (let i = 0; i < pixels.length; i += bpp) {
 let outPixels = pixels;
 let outHeader = ihdr.data;
 let outBpp = bpp;
+
+if (key) {
+  outBpp = 4;
+  outPixels = Buffer.alloc(width * height * 4);
+  let keyed = 0;
+  for (let p = 0; p < width * height; p += 1) {
+    const src = p * bpp;
+    const dst = p * 4;
+    const distance = Math.max(
+      Math.abs(pixels[src] - key.rgb[0]),
+      Math.abs(pixels[src + 1] - key.rgb[1]),
+      Math.abs(pixels[src + 2] - key.rgb[2])
+    );
+    if (distance <= key.tolerance) {
+      keyed += 1;
+      outPixels[dst] = 0;
+      outPixels[dst + 1] = 0;
+      outPixels[dst + 2] = 0;
+      outPixels[dst + 3] = 0;
+    } else {
+      outPixels[dst] = pixels[src];
+      outPixels[dst + 1] = pixels[src + 1];
+      outPixels[dst + 2] = pixels[src + 2];
+      outPixels[dst + 3] = bpp === 4 ? pixels[src + 3] : 255;
+    }
+  }
+  outHeader = Buffer.from(ihdr.data);
+  outHeader[9] = 6;
+  console.log(`keyed ${((100 * keyed) / (width * height)).toFixed(1)}% of pixels to transparent`);
+}
 
 if (flattenTo && bpp === 4) {
   outBpp = 3;

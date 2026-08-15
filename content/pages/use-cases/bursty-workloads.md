@@ -11,7 +11,7 @@ updatedOn: '2026-08-15T15:45:00.000Z'
 image: '/images/social-previews/use-cases/bursty-workloads.jpg'
 ---
 
-![Neon autoscaling allocating compute above a spiky database load curve, with a panel reporting that resources were adjusted by four compute units](/use-cases/bursty-workloads/autoscaling-hero.jpg)
+![Neon autoscaling allocating compute above a spiky database load curve, with a panel reporting that resources were adjusted by four compute units](/use-cases/bursty-workloads/autoscaling-hero.png)
 
 <Admonition type="note" title="Summary">
 Every database's demand for CPU and memory changes constantly. On a provisioned platform you buy one instance size and live with it, so you either pay for peak capacity around the clock or run out of headroom when traffic spikes. Lakebase Postgres (Neon's database) separates compute from storage, which lets it resize compute in seconds while queries keep running.
