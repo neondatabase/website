@@ -12,6 +12,10 @@ redirectFrom:
 updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
+<Admonition type="info">
+**REFACTOR CANDIDATE (marketing-owned):** Proposed for consolidation into `why-neon` (growth-stage story). Marketing owns this page, so this is a proposal to make to them — not a decision. Restored to nav pending that conversation.
+</Admonition>
+
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your architecture along the way.
 
 ## Stage 1: Side projects

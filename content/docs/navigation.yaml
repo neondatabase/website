@@ -6,7 +6,7 @@
     - section: Why Neon?
       icon: info
       items:
-        - title: Our mission
+        - title: Why Neon?
           slug: get-started/why-neon
         - title: Developer experience
           slug: get-started/dev-experience
@@ -19,9 +19,9 @@
           slug: get-started/with-an-agent
         - title: Full backend quickstart
           slug: get-started/full-backend-quickstart
-        - title: Tour the Neon backend
-          slug: get-started/backend-overview
-        - title: Tour the Neon Console
+        - title: Connect your app
+          slug: connect/connect-hub
+        - title: Get started in the console
           slug: get-started/signing-up
     - section: Frontend & Frameworks
       items:
@@ -209,6 +209,31 @@
         - title: Sample data
           slug: import/import-sample-data
 
+- nav: Neon fundamentals
+  slug: get-started/backend-overview
+  title: Neon fundamentals
+  icon: book
+  items:
+    - section: Core concepts
+      items:
+        - title: How Neon fits together
+          slug: get-started/backend-overview
+        - title: The Neon object model
+          slug: manage/overview
+        - title: Branch your backend
+          slug: platform/branching
+        - title: Credentials
+          slug: manage/credentials
+    - section: More fundamentals (planned)
+      items:
+        - title: Access model
+          slug: fundamentals/access-model
+        - title: Serverless
+          slug: fundamentals/serverless
+        - title: High availability
+          slug: fundamentals/high-availability
+        - title: Regions
+          slug: fundamentals/regions
 - nav: Products
   title: Products
   icon: features
@@ -220,6 +245,8 @@
         - section: Connect to Postgres
           icon: connect
           items:
+            - title: Quickstart
+              slug: get-started/connect-neon
             - title: Connect to Neon
               slug: connect/connect-intro
             - title: Connection methods
@@ -259,6 +286,33 @@
                   slug: connect/connection-errors
                 - title: Latency and timeouts
                   slug: connect/connection-latency
+        - section: Data API
+          icon: api
+          items:
+            - title: Overview
+              slug: data-api/overview
+            - title: Get started
+              slug: data-api/get-started
+            - title: Access control & security
+              slug: data-api/access-control
+            - title: Secure your app with RLS
+              slug: guides/rls-tutorial
+            - title: Custom authentication providers
+              slug: data-api/custom-authentication-providers
+            - title: Data API Advisors
+              slug: data-api/database-advisor
+            - title: Auth and Data API SDK
+              slug: reference/javascript-sdk
+            - title: SQL to REST API Translator
+              slug: data-api/sql-to-rest
+            - title: Generate TypeScript types
+              slug: data-api/generate-types
+            - title: Building a note-taking app
+              slug: data-api/demo
+            - title: Managing the Data API
+              slug: data-api/manage
+            - title: Troubleshooting
+              slug: data-api/troubleshooting
         - section: Compute & scaling
           icon: features
           items:
@@ -664,7 +718,7 @@
                       slug: ai/lakebase-search-get-started
                     - title: Migrate from pg_search
                       slug: extensions/migrate-pg-search-to-lakebase-text
-    - title: Auth
+    - title: Better Auth
       icon: auth
       slug: auth/overview
       items:
@@ -752,42 +806,6 @@
                   slug: auth/legacy/overview
                 - title: Database integration
                   slug: auth/legacy/database-integration
-    - title: Data API
-      icon: api
-      slug: data-api/overview
-      items:
-        - section: Introduction
-          items:
-            - title: Overview
-              slug: data-api/overview
-            - title: Get started
-              slug: data-api/get-started
-        - section: Guides
-          items:
-            - title: Access control & security
-              slug: data-api/access-control
-            - title: Secure your app with RLS
-              slug: guides/rls-tutorial
-            - title: Custom authentication providers
-              slug: data-api/custom-authentication-providers
-            - title: Data API Advisors
-              slug: data-api/database-advisor
-        - section: Tools
-          items:
-            - title: Auth and Data API SDK
-              slug: reference/javascript-sdk
-            - title: SQL to REST API Translator
-              slug: data-api/sql-to-rest
-            - title: Generate TypeScript types
-              slug: data-api/generate-types
-        - section: Using the Data API
-          items:
-            - title: Building a note-taking app
-              slug: data-api/demo
-            - title: Managing the Data API
-              slug: data-api/manage
-            - title: Troubleshooting
-              slug: data-api/troubleshooting
     - title: Neon Functions
       icon: features
       slug: compute/functions/overview
@@ -916,8 +934,6 @@
         - section: Projects & resources
           icon: book
           items:
-            - title: Object hierarchy
-              slug: manage/overview
             - title: Projects
               slug: manage/projects
             - title: Multitenancy
@@ -972,12 +988,6 @@
             - title: Backup & restore
               slug: manage/backups
               items:
-                - title: Backup & restore
-                  slug: guides/backup-restore
-                - title: History window
-                  slug: introduction/history-window
-                - title: Instant restore
-                  slug: introduction/branch-restore
                 - title: Overview
                   slug: manage/backups
                 - title: Backup with pg_dump
@@ -998,6 +1008,12 @@
                   slug: manage/platform-maintenance
                 - title: Updates
                   slug: manage/updates
+    - title: Availability
+      slug: introduction/regions
+      icon: status
+      items:
+        - section: Regional deployment
+          items:
             - title: Regions
               slug: introduction/regions
     - title: Resilience & architecture
@@ -1030,12 +1046,8 @@
         - section: Data recovery
           icon: report
           items:
-            - title: Backup & restore
-              slug: guides/backup-restore
-            - title: History window
-              slug: introduction/history-window
-            - title: Instant restore
-              slug: introduction/branch-restore
+            - title: Restore and backups
+              slug: manage/backups
             - title: Time Travel
               slug: guides/time-travel-assist
               items:

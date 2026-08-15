@@ -6,15 +6,20 @@ summary: >-
   Postgres, for developers, startups, and agent platforms, from Databricks.
   Lakebase Postgres runs on the lakebase architecture, making instant branching,
   autoscaling, scale-to-zero, and point-in-time restore intrinsic rather than
-  add-ons. Neon also includes Managed Better Auth, Object Storage, Functions,
+  add-ons. Neon also includes Better Auth, Object Storage, Functions,
   and AI Gateway.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
+  - /docs/introduction/neon-and-lakebase
 updatedOn: '2026-08-03T18:51:52.937Z'
 ---
+
+<Admonition type="info">
+**REWRITE:** Differentiators, developer experience, and scale story consolidated here (absorbs the former Developer experience and Built to scale pages).
+</Admonition>
 
 ## Our mission
 

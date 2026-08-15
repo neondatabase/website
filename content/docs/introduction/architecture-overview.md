@@ -19,6 +19,10 @@ redirectFrom:
 updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
+<Admonition type="info">
+**SPLIT:** Engine internals moved to postgres/architecture; cross-product/platform framing moved to Branching and Backend data model. This page now focuses on the lakebase architecture as background to understanding Neon's capabilities.
+</Admonition>
+
 ## Top level overview
 
 Instead of running Postgres as a single stateful system tied to a VM and its filesystem, Lakebase Postgres is a serverless database that splits the system into two independent layers: compute and storage. These layers communicate over the network, with a stream of write-ahead log (WAL) records connecting them.

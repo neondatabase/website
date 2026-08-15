@@ -1,15 +1,18 @@
 ---
-title: Backups
-subtitle: An overview of backup strategies for Lakebase Postgres
+title: Restore and backups
+subtitle: An overview of backup and restore strategies for Lakebase Postgres
 summary: >-
-  Neon supports built-in point-in-time restore (PITR), manual backups using
-  `pg_dump` and `pg_restore`, and automated nightly `pg_dump` exports to AWS
-  S3 via GitHub Actions. Choose PITR for instant recovery without additional
-  tooling; choose `pg_dump` workflows for business continuity, disaster
-  recovery, or compliance. Each strategy links to a dedicated setup guide.
+  Neon supports built-in point-in-time restore (PITR), instant branch restores, history window recovery, and manual backups using `pg_dump` and `pg_restore`. Choose PITR for instant recovery without additional tooling; choose `pg_dump` workflows for business continuity, disaster recovery, or compliance.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+redirectFrom:
+  - /docs/introduction/history-window
+  - /docs/introduction/branch-restore
+updatedOn: '2026-08-12T00:00:00.000Z'
 ---
+
+<Admonition type="info">
+**REWRITE — CONSOLIDATE:** Canonical home for restore/history — consolidates history-window, branch-restore, and backups into one page.
+</Admonition>
 
 <InfoBlock>
 <DocsList title="What you will learn:">

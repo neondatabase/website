@@ -1,18 +1,22 @@
 ---
-title: Overview of the Neon object hierarchy
+title: The Neon object model
 summary: >-
-  The Neon object hierarchy nests Organizations > Projects > Branches, with
-  each branch holding Computes, Roles, and Databases. Read this page before
-  structuring a Neon environment to understand how resources are scoped and
-  what plan limits apply at each level. Roles created via the Console, CLI,
-  or API receive neon_superuser privileges. API keys are account-scoped or
-  organization-scoped, not branch-scoped.
+  The Neon object hierarchy nests Organizations > Projects > Branches. Each
+  branch holds your whole backend — Lakebase Postgres (computes, roles,
+  databases), Better Auth, Object Storage, and Functions — which branch
+  together. AI Gateway is account-scoped (a branch changes only its gateway
+  URL). Read this to understand how backend resources are scoped and what plan
+  limits apply at each level.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-08-11T18:35:41.335Z'
 ---
 
-Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.
+<Admonition type="info">
+**REWRITE (keystone):** The object model is backend-wide — a branch holds Lakebase Postgres, Better Auth, Object Storage, and Functions, which branch together. AI Gateway is account-scoped (a branch changes only its gateway URL, not a separate gateway). Per-product detail lives on each product's page; this page is the cross-product model.
+</Admonition>
+
+Managing your Neon environment starts with the object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, and each branch holds your whole backend — **Lakebase Postgres** (with its computes, roles, and databases), **Better Auth**, **Object Storage**, and **Functions** — which all branch together, copy-on-write. **AI Gateway** is the exception: it is account-scoped, so a branch changes only its gateway URL, not a separate gateway. The sections below cover each part of the model.
 
 ![Neon object hierarchy](/docs/manage/neon_object_hierarchy.jpg)
 

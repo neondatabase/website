@@ -1,5 +1,5 @@
 ---
-title: Managed Better Auth
+title: Better Auth
 subtitle: Managed authentication that branches with your database
 summary: >-
   Managed Better Auth is a managed authentication service built on Better Auth. It stores
@@ -23,6 +23,10 @@ redirectFrom:
   - /docs/guides/neon-auth-how-it-works
   - /docs/guides/neon-auth-best-practices
 ---
+
+<Admonition type="info">
+**REWRITE:** Naming standardized to "Better Auth" (nav label, product node, page title).
+</Admonition>
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
 
