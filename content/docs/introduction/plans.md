@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-15T00:37:08.193Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -53,6 +53,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Public network transfer](#public-network-transfer)   | 5 GB included                              | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                                                        |
 | [Monitoring](#monitoring)                             | 1 day                                      | 3 days                                     | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | —                                          | —                                          | ✅                                                                                                |
+| [Spending notifications](#spending-notifications)     | —                                          | ✅                                         | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                               | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                       | 100 manual snapshots                                                                              |
@@ -265,6 +266,12 @@ See [Monitoring dashboard](/docs/introduction/monitoring-page) for details.
 
 Export metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible platform](/docs/guides/opentelemetry).  
 Available only on the **Scale** plan.
+
+### Spending notifications
+
+Get email alerts when your organization's monthly Neon charges reach 80% and 100% of a threshold you set, so you can act before the bill grows. Available on the **Launch** and **Scale** plans.
+
+See [Spending notifications](/docs/introduction/spending-notifications) for how to set a threshold.
 
 ### Instant restore
 

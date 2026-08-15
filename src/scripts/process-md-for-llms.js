@@ -1328,6 +1328,20 @@ const componentHandlers = {
   },
 
   /**
+   * InlineSvg -> markdown image, using the title attribute as descriptive alt text
+   * <InlineSvg src="/docs/guides/diagram.svg" title="What the diagram shows" />
+   */
+  InlineSvg(node) {
+    const src = getAttr(node, 'src');
+    if (!src) return null;
+    const title = getAttr(node, 'title') || '';
+    return {
+      type: 'paragraph',
+      children: [{ type: 'image', url: src, alt: title, title: null }],
+    };
+  },
+
+  /**
    * MegaLink -> link card with tag and description
    * <MegaLink tag="Tagline" title="Description text" url="https://..." />
    */

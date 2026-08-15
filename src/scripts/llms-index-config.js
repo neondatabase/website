@@ -236,7 +236,6 @@ module.exports = {
     'auth/legacy/',
     'auth/migrate/from-auth-v0.1',
     'changelog.md',
-    'get-started/platform-private-preview.md',
     'guides/GUIDE_TEMPLATE.md',
     'introduction.md',
   ],
