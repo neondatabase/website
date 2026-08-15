@@ -1,8 +1,11 @@
 // Inverts the lightness of a PNG while preserving hue and saturation, which turns a
 // light-background graphic into a dark-background one without shifting brand colors.
 // Transparent source pixels flatten to white in JPEG, so --flatten composites the
-// result onto an opaque background first.
-// Usage: node scripts/invert-image-lightness.mjs <input.png> <output.png> [--flatten RRGGBB]
+// result onto an opaque background first. Source elements that were already pale
+// invert into near-black, so --relight forces a brightness band of grays to a
+// readable output gray instead.
+// Usage: node scripts/invert-image-lightness.mjs <input.png> <output.png>
+//          [--flatten RRGGBB] [--relight MIN-MAX:GRAY]
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { inflateSync, deflateSync } from 'node:zlib';
@@ -149,6 +152,16 @@ const flattenTo =
     ? null
     : [0, 2, 4].map((i) => parseInt(rest[flattenIndex + 1].slice(i, i + 2), 16));
 
+const relightIndex = rest.indexOf('--relight');
+const relight =
+  relightIndex === -1
+    ? null
+    : (() => {
+        const [band, gray] = rest[relightIndex + 1].split(':');
+        const [min, max] = band.split('-').map(Number);
+        return { min, max, gray: Number(gray) };
+      })();
+
 const chunks = readChunks(readFileSync(inputPath));
 const ihdr = chunks.find((c) => c.type === 'IHDR');
 const width = ihdr.data.readUInt32BE(0);
@@ -166,7 +179,18 @@ const idat = Buffer.concat(chunks.filter((c) => c.type === 'IDAT').map((c) => c.
 const pixels = unfilter(inflateSync(idat), width, height, bpp);
 
 for (let i = 0; i < pixels.length; i += bpp) {
-  const [r, g, b] = invertLightness(pixels[i], pixels[i + 1], pixels[i + 2]);
+  const [sr, sg, sb] = [pixels[i], pixels[i + 1], pixels[i + 2]];
+  const isNeutral = Math.max(sr, sg, sb) - Math.min(sr, sg, sb) <= 12;
+  const brightness = Math.max(sr, sg, sb);
+
+  if (relight && isNeutral && brightness >= relight.min && brightness <= relight.max) {
+    pixels[i] = relight.gray;
+    pixels[i + 1] = relight.gray;
+    pixels[i + 2] = relight.gray;
+    continue;
+  }
+
+  const [r, g, b] = invertLightness(sr, sg, sb);
   pixels[i] = r;
   pixels[i + 1] = g;
   pixels[i + 2] = b;

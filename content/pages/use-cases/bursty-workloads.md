@@ -11,7 +11,7 @@ updatedOn: '2026-08-15T15:45:00.000Z'
 image: '/images/social-previews/use-cases/bursty-workloads.jpg'
 ---
 
-![Database load over time on a fixed-resource instance, where a spike exceeds the limit and degrades performance, next to the same load served by Neon autoscaling](/use-cases/bursty-workloads/autoscaling-hero.jpg)
+![Neon autoscaling allocating compute above a spiky database load curve, with a panel reporting that resources were adjusted by four compute units](/use-cases/bursty-workloads/autoscaling-hero.jpg)
 
 <Admonition type="note" title="Summary">
 Every database's demand for CPU and memory changes constantly. On a provisioned platform you buy one instance size and live with it, so you either pay for peak capacity around the clock or run out of headroom when traffic spikes. Lakebase Postgres (Neon's database) separates compute from storage, which lets it resize compute in seconds while queries keep running.
@@ -46,7 +46,12 @@ The provisioned model assumes someone is watching. Traffic grows, an alert fires
 
 That loop was always slow. It's harder to justify now that a single agent-driven feature can multiply query volume overnight, that a product can get posted somewhere and go from hundreds of requests to hundreds of thousands in an afternoon, and that most teams don't have anyone whose job is to watch database metrics.
 
-Capacity planning is a task the platform should own. What matters to you is that queries stay fast when load arrives and that you stop paying when it leaves.
+<div style={{ margin: '2.5rem 0', borderLeft: '3px solid #00E599', borderRadius: '0.25rem', background: 'rgba(0, 229, 153, 0.07)', padding: '1.75rem 2rem' }}>
+  <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>The short version</p>
+  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>Guessing your peak isn't a capacity plan, it's a standing bill. In 2026 the database should size itself, and charge you for what it used.</p>
+</div>
+
+What matters to you is narrower than a sizing strategy: queries stay fast when load arrives, and you stop paying when it leaves.
 
 <QuoteBlock quote="Our database traffic peaks at nights and on weekends when thousands of our members are attending experiences. Building on a database that preemptively autoscales allows us to regularly handle these traffic spikes." author={{ name: 'Lex Nasser', company: 'Founding Engineer at 222' }} link="/blog/how-222-uses-neon-to-handle-their-frequent-spikes-in-demand" />
 
@@ -92,7 +97,7 @@ The [compute autoscaling report](/autoscaling-report) covers the methodology beh
 
 <QuoteBlock quote="Our workload ingests hundreds of data points per second and our RDS costs were increasing. With Neon, we found a way to scale our setup more efficiently" author="thorsten-riess" role="Software Architect at traconiq" link="/blog/why-traconiq-migrated-from-aws-rds-to-neon" />
 
-## Workloads where the difference is largest
+## Where autoscaling helps most
 
 Autoscaling helps every workload, but the savings scale with how uneven the load is. The teams that see the biggest difference tend to have one of these patterns:
 
@@ -106,11 +111,11 @@ Autoscaling helps every workload, but the savings scale with how uneven the load
 
 <QuoteBlock quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS" author="cody-jenkins" role="Head of Engineering at Invenco" link="/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon" />
 
-## The rest of the backend works the same way
+## Deploy serverless backends
 
-Compute is where the waste is most visible, but it isn't the only place a fixed allocation shows up. Storage on Neon grows and shrinks with your data and bills for what you're actually storing, with no volume to size in advance.
+Database compute is where the waste is most visible, but it isn't the only place a fixed allocation shows up. The rest of the Neon backend is built on the same model, so the parts of your application around the database don't reintroduce the problem.
 
-The newer primitives follow the same rule. [Neon Functions](/docs/compute/functions/overview) run your handlers on demand next to the database. [Neon Object Storage](/docs/storage/overview) charges for the objects you keep. [Managed Better Auth](/docs/auth/overview) and the [Neon AI Gateway](/docs/ai-gateway/overview) come with the same consumption model.
+Storage grows and shrinks with your data and bills for what you're actually storing, with no volume to size in advance. [Neon Functions](/docs/compute/functions/overview) run your handlers on demand next to the database. [Neon Object Storage](/docs/storage/overview) charges for the objects you keep. [Managed Better Auth](/docs/auth/overview) and the [Neon AI Gateway](/docs/ai-gateway/overview) come with the same consumption model.
 
 The point is the same one autoscaling makes about compute. You describe what your application needs, and the platform decides how much of it to run at any given moment.
 
