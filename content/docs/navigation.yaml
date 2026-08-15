@@ -1169,6 +1169,8 @@
                   slug: ai/ai-database-versioning
                 - title: Neon API Reference
                   slug: reference/api
+                - title: Lakebase Search
+                  slug: ai/lakebase-search
             - section: Agent frameworks
               icon: frameworks
               items:
