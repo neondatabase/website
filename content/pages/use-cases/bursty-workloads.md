@@ -1,6 +1,6 @@
 ---
 title: 'Postgres for Bursty Workloads'
-subtitle: Traffic moves constantly and instance sizes don't. Lakebase Postgres allocates compute as load changes and bills only what you consume
+subtitle: Traffic moves constantly - your instance size should too. Lakebase Postgres allocates compute as load changes and bills only what you consume.
 summary: >-
   Why provisioning a fixed instance for peak traffic wastes compute and still
   causes performance degradations, how autoscaling on Lakebase Postgres allocates
@@ -14,10 +14,10 @@ image: '/images/social-previews/use-cases/bursty-workloads.jpg'
 ![Database load over time on a fixed-resource instance, where a spike exceeds the limit and degrades performance, next to the same load served by Neon autoscaling](/use-cases/bursty-workloads/autoscaling-hero.jpg)
 
 <Admonition type="note" title="Summary">
-Every database's demand for CPU and memory changes constantly. On a provisioned platform you buy one instance size and live with it, so you either pay for peak capacity around the clock or run out of headroom when traffic spikes. Lakebase Postgres separates compute from storage, which lets it resize compute in seconds while queries keep running.
+Every database's demand for CPU and memory changes constantly. On a provisioned platform you buy one instance size and live with it, so you either pay for peak capacity around the clock or run out of headroom when traffic spikes. Lakebase Postgres (Neon's database) separates compute from storage, which lets it resize compute in seconds while queries keep running.
 
 - **Automatic** - The platform allocates compute to fit current load. There is no instance size to pick and no resize to schedule
-- **Fast** - The average production database on Neon adjusts its size about once every 81 seconds
+- **Responsive** - The average production database on Neon adjusts its size about once every 81 seconds
 - **Down to zero** - Idle compute suspends entirely and comes back in around 350ms
 - **Consumption-based** - You're billed for the compute you actually used, not the ceiling you provisioned for
 
