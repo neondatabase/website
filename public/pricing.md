@@ -38,9 +38,12 @@ Invoices under $0.50 are not collected.
 | Public network transfer (egress) | 5 GB included                              | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                       |
 | Private network transfer         | -                                          | -                                    | $0.01/GB                                                         |
 | Auth (MAU)                       | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                     |
+| Object Storage                   | No charge during beta, usage limits apply  | No charge during beta, usage limits apply | No charge during beta, usage limits apply                        |
+| Functions                        | No charge during beta, usage limits apply  | No charge during beta, usage limits apply | No charge during beta, usage limits apply                        |
+| AI Gateway                       | -                                          | Free during beta                     | Free during beta                                                 |
 | Monitoring retention             | 1 day                                      | 3 days                               | 14 days                                                          |
 | Metrics/logs export              | -                                          | -                                    | Yes                                                              |
-| Set spending limits              | -                                          | Yes                                  | Yes                                                              |
+| Spending notifications           | -                                          | Yes                                  | Yes                                                              |
 | Protected branches               | -                                          | Yes                                  | Yes                                                              |
 | IP Allow rules                   | -                                          | -                                    | Yes                                                              |
 | Private Networking               | -                                          | -                                    | Yes                                                              |
@@ -92,7 +95,7 @@ Hitting any Free monthly limit (100 CU-hours, 0.5 GB storage, 5 GB egress) suspe
 | Keep scale-to-zero on for non-prod                                                               | Idle compute = $0                       |
 | Delete unused branches, or set TTL                                                               | Saves $1.50/branch-month each           |
 | Shorten the history window                                                                         | Saves $0.20/GB-month on instant restore (History) storage |
-| Org-level [spending limits](https://neon.com/docs/introduction/spending-limit.md) (Launch/Scale) | Email alerts at 80% and 100%            |
+| Org-level [spending notifications](https://neon.com/docs/introduction/spending-notifications.md) (Launch/Scale) | Email alerts at 80% and 100%            |
 
 See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md) for the full guide and [Reduce network transfer costs](https://neon.com/docs/introduction/network-transfer.md) for egress.
 
