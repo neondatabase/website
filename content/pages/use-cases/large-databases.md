@@ -26,7 +26,7 @@ Lakebase Postgres separates those layers. Storage is versioned and shared. Compu
 The recovery numbers on this page come from the [Impact of Postgres restores survey](/restores-survey), where we asked 50 developers managing 1TB+ production databases about failures, downtime, and business impact.
 </Admonition>
 
-## Size turns every ops task into a project
+## Large databases turn every ops task into a project
 
 Legacy OLTP Postgres is a monolith. The Postgres process and its disk live together, so the only way to get a second environment is to stand up a second machine with a full copy of the data on it. That works when the database is small. At multi-TB scale, the copy becomes the product.
 
@@ -39,7 +39,7 @@ Those are scalability problems. They also show up as developer experience proble
   <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>A multi-TB Postgres shouldn't make every restore, replica, and staging environment a multi-hour project. Size should not be the thing that decides how fast you can move.</p>
 </div>
 
-## Failures are common. Slow recovery is the expensive part
+## Your DB *will* break - and legacy infra sets your team for failure 
 
 Large Postgres failures are not rare. In the [restores survey](/restores-survey), **59% of companies managing 1TB+ databases** reported a critical production failure in the past 12 months: hardware failure, an accidental table drop, corruption, or something adjacent.
 
@@ -54,7 +54,7 @@ Those numbers track with what people wrote in when we asked for the stories behi
 
 Snapshot plus WAL replay gets slower as the database grows. High availability standbys help with infrastructure failure, but they don't help when someone drops a table, when data is corrupted, or when the standby itself is behind. **68% of teams** put faster point-in-time recovery on their wishlist.
 
-## Lakebase architecture changes the unit of work
+## The lakebase architecture turns restores into a metadata operation
 
 None of the patterns below are possible on a conventional Postgres instance, and the reason is architectural. In a standard setup, compute and storage are glued together. Moving to a different size, a different environment, or a different point in time means moving the data.
 
@@ -70,7 +70,7 @@ Once storage is shared and versioned, starting a new compute against an existing
 - [Recover large Postgres databases](/blog/recover-large-postgres-databases) - how instant PITR compares to snapshot plus WAL replay
 </Admonition>
 
-## Restore in seconds, even at multi-TB scale
+## Restore Postgres in seconds, even at multi-TB scale
 
 Instant restore is the same branching primitive pointed backwards. Lakebase Postgres retains history for each branch within its [history window](/docs/introduction/history-window). You pick a timestamp, create a branch from that moment, and get the exact schema and data as of then, without rolling production back and without replaying WAL.
 
@@ -88,7 +88,7 @@ The restore itself is instantaneous. The UI says so because the architecture mak
 
 Compare that to the survey baseline, where nearly a third of teams were still waiting three hours later. Size stops being the variable that decides how long you're down.
 
-## Staging and development that look like production
+## Staging and development always look like production - without maintenance work
 
 The same pointer model is what makes realistic non-production environments affordable at multi-TB scale. A staging branch starts from production state in seconds. A developer branch does the same. Neither one duplicates the storage of the parent. Idle compute [scales to zero](/docs/introduction/scale-to-zero), so forgotten environments stop accumulating cost.
 
@@ -96,7 +96,7 @@ That is the opposite of the conventional pattern, where a realistic staging data
 
 For the full set of patterns (one branch per developer, per pull request, per preview, per test run), see [Branching workflows on Neon](/use-cases/branching-workflows).
 
-## Read replicas without a second copy of the data
+## Deploy read replicas without copying data
 
 On a provisioned platform, a read replica usually means a second machine with a second copy of the storage. At multi-TB scale that doubles the storage bill, and creation time grows with the size of the dataset.
 
@@ -106,7 +106,7 @@ On Neon, a [read replica](/docs/introduction/read-replicas) is another compute p
 
 That makes replicas useful for more than horizontal read scale-out. Offload analytics, ad-hoc queries, and reporting onto a replica without touching primary performance, and without paying for another multi-TB volume to host them.
 
-## Ops that used to need a DBA can run from an API call
+## Ops that used to need a DBA can now run from an API call
 
 Once restore, branching, and replicas are cheap and fast, they stop being special procedures and start being things you can automate. Every operation is available through the [Neon API](/docs/reference/api) and the CLI:
 
@@ -117,9 +117,9 @@ Once restore, branching, and replicas are cheap and fast, they stop being specia
 
 None of that requires someone to provision storage, wait on a restore, or keep a standby warm. The operational surface area of a large database shrinks to the same tools a small database already uses.
 
-## The cost economics of not copying the data
+## Your costs shrink too 
 
-The architecture also changes the bill. On a conventional platform, every environment and every replica multiplies storage. Teams running multi-region production plus development often end up paying for the same terabytes several times over. Storage volumes that grow usually can't shrink, so even when cold data moves out, the volume (and the invoice) stay large. Snapshots become the only realistic backup strategy at that size, and they are both expensive and slow to restore from.
+The lakebase architecture also changes the bill. On a conventional platform, every environment and every replica multiplies storage. Teams running multi-region production plus development often end up paying for the same terabytes several times over. Storage volumes that grow usually can't shrink, so even when cold data moves out, the volume (and the invoice) stay large. Snapshots become the only realistic backup strategy at that size, and they are both expensive and slow to restore from.
 
 traconiq hit that spiral with a multi-TB telemetry workload on RDS, then moved it to Neon.
 
@@ -130,11 +130,5 @@ On Neon, production, development, and extra read capacity share one copy of the 
 <QuoteBlock quote="In RDS, there’s no realistic backup strategy at that scale besides snapshots. But they’re expensive, and restoring still takes a long time" author="thorsten-riess" role="Software Architect at traconiq" link="/blog/why-traconiq-migrated-from-aws-rds-to-neon" />
 
 The full write-up is in [Why traconiq migrated their multi-TB telemetry dataset to Neon](/blog/why-traconiq-migrated-from-aws-rds-to-neon).
-
-## What teams ask for next
-
-Faster point-in-time recovery topped the wishlist in the survey for a reason. When restore takes hours, confidence stays low even after you survive an incident. When restore takes seconds, recovery stops being a multi-team fire drill and becomes a branch you open, inspect, and clean up.
-
-If you want the full set of survey numbers, the recovery stories, and the methodology behind them, read the [Impact of Postgres restores survey](/restores-survey). For the workflow side of the same architecture, see [Branching workflows](/use-cases/branching-workflows) and [Postgres for bursty workloads](/use-cases/bursty-workloads).
 
 <CTA title="Restore without waiting on size" description="Create a project, load a database, and restore to a point in history in seconds. No credit card required." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" secondaryButtonText="Read the restores survey" secondaryButtonUrl="/restores-survey" />
