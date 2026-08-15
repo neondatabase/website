@@ -24,6 +24,11 @@ Every database's demand for CPU and memory changes constantly. On a provisioned 
 The numbers on this page come from the [Neon compute autoscaling report](/autoscaling-report), which compares every production database on Neon against what the same workloads would cost on a provisioned platform.
 </Admonition>
 
+<div style={{ margin: '2.5rem 0', borderLeft: '3px solid #00E599', borderRadius: '0.25rem', background: 'rgba(0, 229, 153, 0.07)', padding: '1.75rem 2rem' }}>
+  <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>The short version</p>
+  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>Allocating fixed compute to infra feels outdated in 2026. Autoscaling breaks this old pattern with a smoother (and less wasteful) workflow.</p>
+</div>
+
 ## Buying for peak means paying for peak
 
 Database load is never flat. It follows the day, the week, and the batch jobs you scheduled. A typical production database peaks mid-day and drops overnight, drops further on weekends, and spikes whenever a migration, bulk export, or index build runs.
@@ -45,11 +50,6 @@ There's a second problem hiding in the sizing decision: you can't buy exactly wh
 The provisioned model assumes someone is watching. Traffic grows, an alert fires, an engineer sizes up the instance, and the workload takes a maintenance window or a failover to get there. Traffic falls back and, in practice, nobody sizes it down again.
 
 That loop was always slow. It's harder to justify now that a single agent-driven feature can multiply query volume overnight, that a product can get posted somewhere and go from hundreds of requests to hundreds of thousands in an afternoon, and that most teams don't have anyone whose job is to watch database metrics.
-
-<div style={{ margin: '2.5rem 0', borderLeft: '3px solid #00E599', borderRadius: '0.25rem', background: 'rgba(0, 229, 153, 0.07)', padding: '1.75rem 2rem' }}>
-  <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>The short version</p>
-  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>Guessing your peak isn't a capacity plan, it's a standing bill. In 2026 the database should size itself, and charge you for what it used.</p>
-</div>
 
 What matters to you is narrower than a sizing strategy: queries stay fast when load arrives, and you stop paying when it leaves.
 
