@@ -1,6 +1,6 @@
 ---
 title: 'Postgres for Large Databases'
-subtitle: Restores, replicas, and realistic environments stay instant when your database is measured in terabytes
+subtitle: Restore instantly, deploy lightweight replicas, and test on environments that always match production - even as your Postgres grows to TBs 
 summary: >-
   Why conventional Postgres becomes operationally heavy as it grows into the
   multi-TB range, how Lakebase architecture makes restore, branching, and
