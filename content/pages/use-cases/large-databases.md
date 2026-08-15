@@ -14,11 +14,11 @@ image: '/images/social-previews/use-cases/large-databases.jpg'
 ![A production branch diverging after a failure, with a restored production branch created from the healthy point in history](/use-cases/large-databases/restore-branch-diagram.png)
 
 <Admonition type="note" title="Summary">
-On a conventional Postgres instance, compute and storage live on the same machine. Past a few hundred gigabytes, that design starts to tax every operational task: restores take hours, replicas duplicate storage, and realistic staging or development environments become too expensive to keep around.
+On a conventional Postgres instance, compute and storage live on the same machine. Past a few hundred gigabytes, this monolithic design starts to hurt operations: restores take hours, replicas duplicate storage, and it becomes too painful to keep staging and development environments in sync with production.
 
-Lakebase Postgres separates those layers. Storage is versioned and shared. Compute is disposable. That single change makes restore, branching, and read replicas cheap enough to treat as ordinary tools rather than rare DBA events.
+Lakebase Postgres runs on a different architecture, where storage is versioned and shared and compute is disposable. This makes running restores, keeping up to date environments, and replicating instances lightweight metadata operations rather than serious DBA events.
 
-- **Instant restore** - Branch from any point in the [history window](/docs/introduction/history-window). Restore time does not grow with database size
+- **Instant restores** - Branch from any point in the [history window](/docs/introduction/history-window). Restore time does not grow with database size
 - **Realistic environments** - Staging and development start from production state in seconds, without copying terabytes
 - **Lightweight replicas** - Read replicas are compute only. They share storage with the primary and scale independently
 - **Programmatic** - The same operations are available through the API, the CLI, and agents. Nobody has to babysit a dump and restore
@@ -35,7 +35,7 @@ Restores take hours because snapshot plus WAL replay has to rebuild the whole vo
 Those are scalability problems. They also show up as developer experience problems. Teams stop testing migrations against real data. They share staging and coordinate over Slack. They treat restore drills as something to schedule rather than something to run. The same architecture that makes [branching workflows](/use-cases/branching-workflows) and [autoscaling](/use-cases/bursty-workloads) hard on a conventional instance is the one that makes large databases operationally heavy.
 
 <div style={{ margin: '2.5rem 0', borderLeft: '3px solid #00E599', borderRadius: '0.25rem', background: 'rgba(0, 229, 153, 0.07)', padding: '1.75rem 2rem' }}>
-  <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>The short version</p>
+  <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>In short</p>
   <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>A multi-TB Postgres shouldn't make every restore, replica, and staging environment a multi-hour project. Size should not be the thing that decides how fast you can move.</p>
 </div>
 
