@@ -71,7 +71,7 @@ Compute is measured in Compute Units, where 1 CU is roughly 1 vCPU and 4 GB of R
 
 When the load goes away completely, compute can suspend. [Scale to zero](/docs/introduction/scale-to-zero) shuts the compute down after a period with no active connections and restarts it in around 350ms on the next one, which is what makes idle databases nearly free rather than a line item.
 
-<Admonition type="info" title="Go deeper on the mechanics">
+<Admonition type="info" title="Go deeper">
 - [Autoscaling](/docs/introduction/autoscaling) - how to configure minimum and maximum compute for a branch
 - [The autoscaling algorithm](/docs/guides/autoscaling-algorithm) - what Neon measures and how it decides to scale
 - [Architecture overview](/docs/introduction/architecture-overview) - how separating compute from storage makes resizing cheap
