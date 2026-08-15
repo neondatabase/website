@@ -40,6 +40,8 @@ Most teams still treat them that way though. They’re calling OpenAI, Google, A
 Neon AI Gateway is not a thin proxy that marks up someone else's API. It serves models hosted by Databricks, on the same [Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/) infrastructure Databricks already runs at scale.
 </Admonition>
 
+**[ADD DIAGRAM 1]**
+
 ## What you get when model calls live in your backend
 
 ### One call can access a wide catalog of frontier and open-weight models
@@ -61,6 +63,8 @@ Chat completions sit on an OpenAI-compatible /v1 path, so the same client works 
 
 Our supported model list grows often enough that any number we aim to print goes stale immediately. Check the live catalog on the [models page](https://neon.com/docs/ai-gateway/models). We aim to offer new models the same day they launch, and we’re committed to shipping both open-weight and proprietary models on the same endpoint.
 
+**[ADD VIDEO CLIP - INLINE, AUTOPLAY IN LOOP, NO CONTROLS]**
+
 ### All your LLM usage gets unified in one bill, without penalizing you on pricing
 
 Unified access is also simpler for billing and cost visibility. LLM usage lands on your Neon invoice instead of a stack of lab statements, so you can see token spend next to the rest of your backend. We pass through each provider's published per-token rates, without markup.
@@ -75,9 +79,11 @@ We always repeat this when talking about our backend: we want every primitive to
 
 Powered by the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview), a Neon branch is a lightweight "copy" environment of your backend that actually doesn't duplicate storage - only the compute you consume when running adds to your bill. Branching is the most popular feature of our Postgres database (Lakebase Postgres), and now we've been expanding the branching semantics across the backend. All our tools ([Object Storage](https://neon.com/docs/storage/overview) buckets, [Managed Better Auth](https://neon.com/docs/auth/overview), [Functions](https://neon.com/docs/compute/functions/overview), and now AI Gateway) can branch.
 
-So, each Neon branch gets its own AI Gateway host - so a preview deploy hits br-preview-…, not production's endpoint. neon env pull writes NEON_AI_GATEWAY_TOKEN and NEON_AI_GATEWAY_BASE_URL for the branch you're on, next to DATABASE_URL - same branch-first loop as Postgres.
+So, each Neon branch gets its own AI Gateway host - so a preview deploy hits br-preview-…, not production's endpoint. neon env pull writes `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL` for the branch you're on, next to `DATABASE_URL` - same branch-first loop as Postgres.
 
-Credentials follow lineage, not a single shared lab key. A credential created on main works on main and its descendants (preview, feature, CI). It does not work on a sibling lineage. So you are not pasting the same OpenAI (or Google, or Anthropic) key into every PR bot - instead, each branch calls its own gateway host, with a Neon credential that is only valid inside that branch family. When you delete the branch, that host goes with it.
+Credentials follow lineage, not a single shared lab key. A credential created on `main` works on `main` and its descendants (preview, feature, CI). It does not work on a sibling lineage. So you are not pasting the same OpenAI (or Google, or Anthropic) key into every PR bot - instead, each branch calls its own gateway host, with a Neon credential that is only valid inside that branch family. When you delete the branch, that host goes with it.
+
+**[ADD DIAGRAM 2]**
 
 ### Agent state, data, models - all lives in one Neon branch
 
@@ -102,7 +108,9 @@ In practice, a request already looks like this today:
 - It pulls a file from Object Storage if it needs it
 - It calls a model through AI Gateway with the same branch's credential
 
-One branch, one deploy, one set of env vars. The Function already gets DATABASE_URL, NEON_AI_GATEWAY_TOKEN, and NEON_AI_GATEWAY_BASE_URL [injected automatically](https://neon.com/docs/ai-gateway/authentication#credentials-in-neon-functions). The model call and the data live one process.env apart. Create a Neon branch and you copy that whole story, not just the database.
+One branch, one deploy, one set of env vars. The Function already gets `DATABASE_URL`, `NEON_AI_GATEWAY_TOKEN`, and `NEON_AI_GATEWAY_BASE_URL` [injected automatically](https://neon.com/docs/ai-gateway/authentication#credentials-in-neon-functions). The model call and the data live one process.env apart. Create a Neon branch and you copy that whole story, not just the database.
+
+**[ADD DIAGRAM 3]**
 
 ## Neon AI Gateway = Databricks scale and performance
 
@@ -126,9 +134,9 @@ export default defineConfig({
 neon deploy
 ```
 
-That provisions credentials and pulls them into .env as NEON_AI_GATEWAY_TOKEN and NEON_AI_GATEWAY_BASE_URL.
+That provisions credentials and pulls them into `.env` as `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL`.
 
-(Or create a credential in the Console under APP BACKEND → Credentials, check ai_gateway:invoke, and copy the snippet once.)
+(Or create a credential in the Console under APP BACKEND → Credentials, check `ai_gateway:invoke`, and copy the snippet once.)
 
 Then point the SDK you already use at Neon:
 
@@ -146,7 +154,7 @@ const response = await client.chat.completions.create({
 console.log(response.choices[0].message.content);
 ```
 
-NEON_AI_GATEWAY_BASE_URL is the bare branch host (https://br-…-api.ai.…aws.neon.tech). You append the dialect path yourself (/v1 for chat completions, /openai/v1 for Responses, and so on).
+`NEON_AI_GATEWAY_BASE_URL` is the bare branch host (`https://br-…-api.ai.…aws.neon.tech`). You append the dialect path yourself (`/v1` for chat completions, `/openai/v1` for Responses, and so on).
 
 For TypeScript apps on the Vercel AI SDK, [@neon/ai-sdk-provider](https://www.npmjs.com/package/@neon/ai-sdk-provider) reads those env vars and routes each catalog model to the right gateway endpoint. Two starter templates already wire this together - [ai-sdk](https://build-on-neon.vercel.app/) (image-generation agent with AI Gateway + Object Storage + a Neon Function) and [mastra](https://build-on-neon.vercel.app/) (personal assistant with Postgres-backed memory on a Function):
 
@@ -156,6 +164,6 @@ neon bootstrap --template ai-sdk
 
 ## Try it
 
-Tokens are a backend primitive, and they should live where the rest of the backend lives. Neon AI Gateway puts frontier and open-weight models right on your branch, billed through Neon with no markup, with Databricks-scale performance.
+**Tokens are a backend primitive, and they should live where the rest of the backend lives. Neon AI Gateway puts frontier and open-weight models right on your branch, billed through Neon with no markup, with Databricks-scale performance.**
 
 AI Gateway is in beta, it is free to use during the beta period. Point your SDK at Neon, call a model, and [send us feedback](https://discord.gg/92vNTzKDGp) - we’re working hard to take AI Gateway to GA!
