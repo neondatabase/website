@@ -24,11 +24,6 @@ Every database's demand for CPU and memory changes constantly. On a provisioned 
 The numbers on this page come from the [Neon compute autoscaling report](/autoscaling-report), which compares every production database on Neon against what the same workloads would cost on a provisioned platform.
 </Admonition>
 
-<div style={{ margin: '2.5rem 0', borderLeft: '3px solid #00E599', borderRadius: '0.25rem', background: 'rgba(0, 229, 153, 0.07)', padding: '1.75rem 2rem' }}>
-  <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>The short version</p>
-  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>Allocating fixed compute to infra feels outdated in 2026. Autoscaling breaks this old pattern with a smoother (and less wasteful) workflow.</p>
-</div>
-
 ## Buying for peak means paying for peak
 
 Database load is never flat. It follows the day, the week, and the batch jobs you scheduled. A typical production database peaks mid-day and drops overnight, drops further on weekends, and spikes whenever a migration, bulk export, or index build runs.
@@ -70,6 +65,11 @@ The green is the compute Neon allocated. The blue is what the workload used. All
 Compute is measured in Compute Units, where 1 CU is roughly 1 vCPU and 4 GB of RAM. You set a minimum and a maximum, and everything between them is handled for you. The average production database on Neon changes size 32,016 times per month, about once every 81 seconds.
 
 When the load goes away completely, compute can suspend. [Scale to zero](/docs/introduction/scale-to-zero) shuts the compute down after a period with no active connections and restarts it in around 350ms on the next one, which is what makes idle databases nearly free rather than a line item.
+
+<div style={{ margin: '2.5rem 0', borderLeft: '3px solid #00E599', borderRadius: '0.25rem', background: 'rgba(0, 229, 153, 0.07)', padding: '1.75rem 2rem' }}>
+  <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>In short</p>
+  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>Allocating fixed compute to infra feels outdated in 2026. Autoscaling breaks this old pattern with a smoother (and less wasteful) workflow.</p>
+</div>
 
 <Admonition type="info" title="Go deeper">
 - [Autoscaling](/docs/introduction/autoscaling) - how to configure minimum and maximum compute for a branch
