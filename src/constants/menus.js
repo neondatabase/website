@@ -68,10 +68,9 @@ export default {
       ],
     },
     {
-      text: 'Solutions',
+      text: 'Use cases',
       sections: [
         {
-          title: 'Use cases',
           items: [
             {
               title: 'Full-stack apps',
@@ -84,11 +83,6 @@ export default {
               description: 'Simplify operations to ship faster & safer',
             },
             {
-              title: 'Platforms',
-              to: LINKS.platforms,
-              description: 'Deploy isolated backends for your end users',
-            },
-            {
               title: 'Bursty workloads',
               to: `${LINKS.useCases}/bursty-workloads`,
               description: 'Avoid overprovisioning & optimize performance',
@@ -96,12 +90,16 @@ export default {
           ],
         },
         {
-          title: '\u00a0',
           items: [
             {
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
               description: 'Infra for app generation agents',
+            },
+            {
+              title: 'Platforms',
+              to: LINKS.platforms,
+              description: 'Deploy isolated backends for your end users',
             },
             {
               title: 'Large databases',
