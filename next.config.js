@@ -2333,6 +2333,36 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/.well-known/skills/claimable-postgres',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/claimable-postgres/:path*',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/claimable-postgres',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/claimable-postgres/:path*',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/claimable-postgres',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/claimable-postgres/:path*',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
         source: '/docs/local/neon-local-vscode',
         destination: '/docs/local/neon-local-connect',
         permanent: true,

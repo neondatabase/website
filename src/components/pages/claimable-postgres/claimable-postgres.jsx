@@ -398,7 +398,7 @@ const ClaimablePostgres = () => (
             auth.md, the Neon CLI, and neon.ts.
           </h2>
           <p className="mt-5 max-w-[680px] text-lg leading-relaxed text-gray-new-60 md:text-base">
-            The same scoped agent credential works through the Claimable Neon API, Neon CLI, and{' '}
+            The same scoped agent credential works through the Claimable Postgres API, Neon CLI, and{' '}
             <code>neon.ts</code>.
           </p>
         </div>

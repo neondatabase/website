@@ -62,7 +62,7 @@ const requestClaimable = async (path, init = {}) => {
       body = JSON.parse(text);
     } catch {
       throw new ClaimableContractError(
-        `Claimable Neon returned non-JSON content with HTTP ${response.status}.`
+        `Claimable Postgres returned non-JSON content with HTTP ${response.status}.`
       );
     }
   }
