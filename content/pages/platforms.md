@@ -14,11 +14,11 @@ image: '/images/social-previews/platforms.jpg'
 ![Databases deployed across a fleet, with active databases lit up in green and idle ones dimmed as they scale to zero](/images/pages/platforms/databases-deployed.png)
 
 <Admonition type="note" title="Summary">
-Neon is built for platforms that need to offer every user their own Postgres database. You provision via API, integrate the database into your product, and your users never have to create a Neon account unless you want them to.
+Neon is perfect for platforms that need to offer every user their own Postgres database. You provision via API, integrate the database into your product, and your users never have to create a Neon account unless you want them to.
 
 - **Instant** - Databases provision in about a second and resume from scale-to-zero in around 500ms
 - **Isolated** - Every user gets a dedicated Neon project with its own connection string
-- **Cheap at idle** - Inactive databases suspend automatically, so you pay for what is used, not for what sits waiting
+- **Practically free at idle** - Inactive databases suspend automatically, so you pay for what is used, not for what sits waiting
 - **API-first** - Provision, set quotas, track usage, and transfer ownership programmatically across tens or hundreds of thousands of projects
 - **Claimable when you need it** - Spin up a database with no signup, then let the user claim it into their own Neon account later
 
@@ -108,9 +108,9 @@ That pattern fits:
 - Development tools that need instant database access
 - SaaS products that want deferred account creation
 
-### Featured: Netlify DB
+### Example: Netlify DB
 
-[Netlify DB](/blog/netlify-db-powered-by-neon) is the clearest example in production. Developers and agents provision a production-ready Postgres database from a Netlify project in one click or one CLI command, with no external signup. When they are ready, they claim the database into a Neon account.
+Via [Netlify DB](/blog/netlify-db-powered-by-neon) developers and agents can provision a production-ready Postgres database from a Netlify project in one click or one CLI command, with no external signup. If they wish, they claim the database into a Neon account.
 
 <video autoPlay playsInline muted loop width="704" height="400" style={{ marginLeft: 0, marginRight: 'auto', width: '100%', height: 'auto' }}>
   <source src="https://cdn.neonapi.io/public/videos/pages/blog/netlify-db-powered-by-neon/netlify-db-clip-449bd1a2.mp4" type="video/mp4" />
@@ -128,8 +128,6 @@ _Netlify DB provisioning a Postgres database from a Netlify project, powered by 
 
 ## From database fleets to full backends
 
-The database is still the center of this story. Most platforms start by embedding Lakebase Postgres and stop there for a while. The same project model now reaches further when you want it to.
-
 Around each database, Neon also offers [Managed Better Auth](/docs/auth/overview), [Neon Object Storage](/docs/storage/overview), [Neon Functions](/docs/compute/functions/overview), the [Neon Data API](/docs/data-api/get-started), and the [Neon AI Gateway](/docs/ai-gateway/overview). Those primitives share the same branch and project boundaries as the database, so a fleet of user environments can grow from "a Postgres per user" into "a backend per user" without changing the provisioning model you already run.
 
 You can adopt only the pieces each product needs. The fleet controls, quotas, and claim flows above keep applying either way.
@@ -138,4 +136,4 @@ You can adopt only the pieces each product needs. The fleet controls, quotas, an
 
 We are not trying to own your user experience. We are here to power it. You can integrate Neon behind the scenes, whether you manage projects directly via API, use the [claimable database flow](/docs/guides/platform-integration-overview#claimable-database-flow), or connect existing Neon accounts through [OAuth](/docs/guides/oauth-integration). You decide how the database shows up in your UI. We take care of the rest.
 
-<CTA title="Pick the integration path that fits" description="Start with the platform integration overview. If you want instant Postgres without requiring signup first, follow the claimable database flow. Our team can also help with a proof of concept." buttonText="Claimable database flow" buttonUrl="/docs/guides/platform-integration-overview#claimable-database-flow" secondaryButtonText="Talk to us" secondaryButtonUrl="/contact-sales" />
+<CTA title="Pick the integration path that fits" description="Our team can also help with a proof of concept." buttonText="Claimable database flow" buttonUrl="/docs/guides/platform-integration-overview#claimable-database-flow" secondaryButtonText="Talk to us" secondaryButtonUrl="/contact-sales" />
