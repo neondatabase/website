@@ -54,15 +54,24 @@ Those numbers track with what people wrote in when we asked for the stories behi
 
 Snapshot plus WAL replay gets slower as the database grows. High availability standbys help with infrastructure failure, but they don't help when someone drops a table, when data is corrupted, or when the standby itself is behind. **68% of teams** put faster point-in-time recovery on their wishlist.
 
-## How the lakebase architecture simplifies Postgres operations
+## How the Lakebase architecture simplifies Postgres operations
 
-None of the patterns below are possible on a conventional Postgres instance, and the reason is architectural. In a standard setup, compute and storage are glued together. Moving to a different size, a different environment, or a different point in time means moving the data.
+The recoveries, environments, and replicas in the sections below are not separate products bolted onto Postgres. They are what you get once compute and storage stop living on the same machine.
 
-Lakebase Postgres splits those halves apart. Compute is a stateless Postgres process where queries run. Storage is a separate, distributed engine that keeps data on shared object storage and writes copy-on-write, versioned by WAL. Every change creates a new version instead of overwriting the old one.
+On a conventional instance, those two layers are glued together. Moving to a different size, a different environment, or a different point in time means moving the data. At multi-TB scale, that is why every ops task turns into a project.
+
+Lakebase Postgres splits the halves apart. Compute is a stateless Postgres process where queries run. Storage is a separate, distributed engine that keeps data on shared object storage and writes copy-on-write, versioned by WAL. Every change creates a new version instead of overwriting the old one.
 
 ![Lakebase architecture with ephemeral compute on the left reading and writing to durable shared storage on the right](/use-cases/large-databases/lakebase-architecture.jpg)
 
-Once storage is shared and versioned, starting a new compute against an existing version of the data is cheap. A branch is a pointer. A restore is a branch from a past version. A read replica is another compute pointed at the same storage. Database size stops deciding how long any of those operations take.
+Once storage is shared and versioned, starting a new compute against an existing version of the data is cheap. Database size stops deciding how long an operation takes. What follows from that single property:
+
+- A **restore** is a branch from a past version of storage
+- A **staging or development environment** is a branch from the current version
+- A **read replica** is another compute pointed at the same storage
+- All of it is available through an **API**, so agents and pipelines can do the work a DBA used to do by hand
+
+The next sections walk through each of those in practice.
 
 <Admonition type="info" title="Go deeper on the architecture">
 - [Architecture overview](/docs/introduction/architecture-overview) - how compute, storage, and the WAL fit together
@@ -72,7 +81,7 @@ Once storage is shared and versioned, starting a new compute against an existing
 
 ## Restore Postgres in seconds, even at multi-TB scale
 
-Instant restore is the same branching primitive pointed backwards. Lakebase Postgres retains history for each branch within its [history window](/docs/introduction/history-window). You pick a timestamp, create a branch from that moment, and get the exact schema and data as of then, without rolling production back and without replaying WAL.
+Start with recovery. Lakebase Postgres retains history for each branch within its [history window](/docs/introduction/history-window). You pick a timestamp, create a branch from that moment, and get the exact schema and data as of then, without rolling production back and without replaying WAL.
 
 ![Restore from history panel with a source branch, a point-in-time picker, and a Restore button](/use-cases/large-databases/restore-from-history.jpg)
 
@@ -90,7 +99,7 @@ Compare that to the survey baseline, where nearly a third of teams were still wa
 
 ## Staging and development always look like production - without maintenance work
 
-The same pointer model is what makes realistic non-production environments affordable at multi-TB scale. A staging branch starts from production state in seconds. A developer branch does the same. Neither one duplicates the storage of the parent. Idle compute [scales to zero](/docs/introduction/scale-to-zero), so forgotten environments stop accumulating cost.
+The same property that makes restore cheap also makes realistic non-production environments affordable at multi-TB scale. A staging branch starts from production state in seconds. A developer branch does the same. Neither one duplicates the storage of the parent. Idle compute [scales to zero](/docs/introduction/scale-to-zero), so forgotten environments stop accumulating cost.
 
 That is the opposite of the conventional pattern, where a realistic staging database means another full-size instance, another backup schedule, and another sync job that always drifts. Past a few hundred gigabytes, most teams stop trying. On Neon, the environment is cheap enough to create, use, and delete as part of the workflow, including from CI and from agents.
 
@@ -98,7 +107,7 @@ For the full set of patterns (one branch per developer, per pull request, per pr
 
 ## Deploy read replicas without copying data
 
-On a provisioned platform, a read replica usually means a second machine with a second copy of the storage. At multi-TB scale that doubles the storage bill, and creation time grows with the size of the dataset.
+Shared storage is also why replicas stay light. On a provisioned platform, a read replica usually means a second machine with a second copy of the storage. At multi-TB scale that doubles the storage bill, and creation time grows with the size of the dataset.
 
 On Neon, a [read replica](/docs/introduction/read-replicas) is another compute pointed at the same storage as the primary. It doesn't replicate or duplicate data. Creation takes seconds regardless of database size. Each replica autoscales on its own, and idle replicas can scale to zero.
 
@@ -108,7 +117,7 @@ That makes replicas useful for more than horizontal read scale-out. Offload anal
 
 ## Ops that used to need a DBA are now an API call
 
-Once restore, branching, and replicas are cheap and fast, they stop being special procedures and start being things you can automate. Every operation is available through the [Neon API](/docs/reference/api) and the CLI:
+Because restore, branching, and replicas are cheap and fast, they stop being special procedures and start being things you can automate. Every operation is available through the [Neon API](/docs/reference/api) and the CLI:
 
 - Create a branch from a timestamp when a deploy goes wrong
 - Spin up a staging branch for a preview environment, then delete it when the pull request closes
@@ -119,7 +128,7 @@ None of that requires someone to provision storage, wait on a restore, or keep a
 
 ## Your costs shrink too 
 
-The lakebase architecture also changes the bill. On a conventional platform, every environment and every replica multiplies storage. Teams running multi-region production plus development often end up paying for the same terabytes several times over. Storage volumes that grow usually can't shrink, so even when cold data moves out, the volume (and the invoice) stay large. Snapshots become the only realistic backup strategy at that size, and they are both expensive and slow to restore from.
+The Lakebase architecture also changes the bill. On a conventional platform, every environment and every replica multiplies storage. Teams running multi-region production plus development often end up paying for the same terabytes several times over. Storage volumes that grow usually can't shrink, so even when cold data moves out, the volume (and the invoice) stay large. Snapshots become the only realistic backup strategy at that size, and they are both expensive and slow to restore from.
 
 traconiq hit that spiral with a multi-TB telemetry workload on RDS, then moved it to Neon.
 
