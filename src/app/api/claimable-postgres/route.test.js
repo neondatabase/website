@@ -55,30 +55,17 @@ const jsonResponse = (body, init) =>
   });
 
 describe('/api/claimable-postgres', () => {
-  let GET;
   let POST;
 
   beforeEach(async () => {
     vi.clearAllMocks();
     vi.resetModules();
     process.env.CLAIMABLE_NEON_ORIGIN = ORIGIN;
-    ({ GET, POST } = await import('./route.js'));
+    ({ POST } = await import('./route.js'));
   });
 
   afterEach(() => {
     delete process.env.CLAIMABLE_NEON_ORIGIN;
-  });
-
-  it('documents the browser provisioning interface', async () => {
-    const response = await GET();
-
-    expect(response.status).toBe(200);
-    expect(await response.json()).toMatchObject({
-      endpoint: 'POST /api/claimable-postgres',
-      body: {
-        services: ['auth', 'data-api'],
-      },
-    });
   });
 
   it('provisions requested services and returns credentials plus a claim URL', async () => {

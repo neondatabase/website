@@ -143,7 +143,11 @@ const Provisioner = () => {
     }).format(new Date(project.expires_at));
 
     return (
-      <div className="relative overflow-hidden rounded-2xl border border-green-45/30 bg-[#0b1311] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.45)] md:p-5">
+      <div
+        className="relative overflow-hidden rounded-2xl border border-green-45/30 bg-[#0b1311] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.45)] md:p-5"
+        role="status"
+        aria-live="polite"
+      >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-45 to-transparent" />
         <div className="flex items-start justify-between gap-5">
           <div>
@@ -175,9 +179,9 @@ const Provisioner = () => {
           <p className="text-sm leading-relaxed text-gray-new-70">
             Copy these values now. This page will not show them again. The claim link expires in{' '}
             {Math.round(claim.expires_in / 60)} minutes; after that this project cannot be claimed
-            from here. Claiming transfers the Postgres database. It disables Data API and deletes
-            Managed Better Auth and its data so pre-claim tokens do not survive. The project itself
-            expires on {expiresAt}.
+            and will expire. Claiming transfers the Postgres database. It disables Data API and
+            deletes Managed Better Auth and its data so pre-claim tokens do not survive. The project
+            itself expires on {expiresAt}.
           </p>
           <Button
             className="mt-4 w-full"
@@ -319,7 +323,7 @@ const ClaimablePostgres = () => (
             </h1>
             <p className="mt-6 max-w-[620px] text-xl leading-relaxed tracking-tight text-gray-new-60 xl:text-lg md:text-base">
               Agents can provision Lakebase Postgres on Neon before a human creates an account.
-              Start building, then transfer the project into a Neon organization when it matters.
+              Start building, then claim the project into a Neon organization before it expires.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-5">
               <Button
@@ -367,7 +371,7 @@ const ClaimablePostgres = () => (
             One service, three interfaces
           </p>
           <h2 className="mt-4 font-title text-5xl tracking-[-0.04em] xl:text-4xl md:text-[34px]">
-            Agents discover the protocol. Developers use the CLI. Projects keep their config.
+            auth.md, the Neon CLI, and neon.ts.
           </h2>
           <p className="mt-5 max-w-[680px] text-lg leading-relaxed text-gray-new-60 md:text-base">
             The same scoped agent credential works through the Claimable Neon API, Neon CLI, and{' '}
@@ -390,7 +394,7 @@ const ClaimablePostgres = () => (
           <InterfaceCard
             eyebrow="neon.ts"
             title="Declare services"
-            description="Config-as-code requests the services your app needs. Unsupported pre-claim services return a machine-readable claim requirement."
+            description="If neon.ts is present, neon claim create requests its declared services. Unsupported pre-claim services return capability_requires_claim."
             code={CODE_EXAMPLES.config}
           />
         </div>
@@ -401,11 +405,9 @@ const ClaimablePostgres = () => (
       <Container size="960">
         <div className="grid grid-cols-[0.8fr_1.2fr] gap-20 lg:grid-cols-1 lg:gap-10">
           <div>
-            <p className="font-mono text-xs tracking-wide text-green-45 uppercase">
-              The ownership boundary
-            </p>
+            <p className="font-mono text-xs tracking-wide text-green-45 uppercase">Claim</p>
             <h2 className="mt-4 font-title text-4xl tracking-[-0.04em] md:text-[32px]">
-              Temporary infrastructure, explicit handoff
+              One project, a claim link, an expiry
             </h2>
           </div>
           <div className="space-y-8">

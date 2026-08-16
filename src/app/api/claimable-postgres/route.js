@@ -4,15 +4,6 @@ const ALLOWED_SERVICES = new Map([
   ['data-api', 'data_api'],
 ]);
 
-const API_INFO = {
-  endpoint: 'POST /api/claimable-postgres',
-  description:
-    'Create a temporary database on Neon with optional Managed Better Auth and Data API.',
-  body: {
-    services: ['auth', 'data-api'],
-  },
-};
-
 class ClaimableResponseError extends Error {
   constructor(status, body) {
     super('Claimable Neon rejected the request.');
@@ -187,10 +178,6 @@ const errorFor = (error) => {
     500
   );
 };
-
-export async function GET() {
-  return jsonResponse(API_INFO);
-}
 
 export async function POST(request) {
   let input;
