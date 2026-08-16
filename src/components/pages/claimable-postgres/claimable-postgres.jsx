@@ -334,7 +334,7 @@ const ClaimablePostgres = () => (
                 theme="green"
                 withArrow
               >
-                Read the agent guide
+                Read the docs
               </Link>
             </div>
             <div className="mt-10 grid max-w-[640px] grid-cols-3 gap-3 sm:grid-cols-1">

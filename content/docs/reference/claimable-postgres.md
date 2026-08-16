@@ -1,6 +1,6 @@
 ---
 title: Claimable Postgres by Neon
-subtitle: Let an agent create a temporary database before a human creates an account
+subtitle: Human reference. Agents fetch auth.md from neon.com/docs/llms.txt.
 summary: >-
   Claimable Postgres lets agents provision Lakebase Postgres on Neon through
   auth.md, the Neon CLI, or a REST API without a Neon account. The service
@@ -75,7 +75,7 @@ The response contains an `identity_assertion`, project metadata, and one decisio
 
 ## Agent discovery
 
-Agents start at [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt), which points at [`auth.md`](https://claimable.neon.tech/auth.md) on the service origin. This page is for humans and SEO. It is not on that path.
+Agents start at [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt), which points at [`auth.md`](https://claimable.neon.tech/auth.md) on the service origin. This page is the human reference.
 
 Claimable Postgres implements [auth.md](https://auth.md/). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
 
