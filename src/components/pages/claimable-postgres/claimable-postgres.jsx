@@ -37,11 +37,10 @@ Content-Type: application/json
 
 neon branches list
 neon claim accept`,
-  config: `import { defineConfig } from '@neon/config';
+  config: `import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   dataApi: true,
-  auth: false,
 });`,
 };
 

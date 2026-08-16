@@ -222,7 +222,7 @@ After `claim create`, regular Neon CLI commands exchange the saved identity asse
 If a `neon.ts` file is present, `claim create` requests its declared services automatically:
 
 ```typescript filename="neon.ts"
-import { defineConfig } from '@neon/config';
+import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
   auth: true,
@@ -252,11 +252,11 @@ curl --request POST \
 }
 ```
 
-Open `verification_uri_complete`, sign in to Neon, and choose the destination organization. The project transfer then moves through these states:
+Open `verification_uri_complete` and sign in to Neon. Starting the browser claim prepares the transfer: it revokes the project key, access tokens, Data API, and Managed Better Auth (including Auth database data) before the console transfer URL is shown. Choose the destination organization. The project then moves through these states:
 
 1. `pending`: the claim code exists, but the transfer has not completed.
 2. `accepted`: the project has left the unclaimed-project organization.
-3. `reconciled`: Claimable Neon has revoked its project key, agent tokens, and derived credentials.
+3. `reconciled`: the identity assertion is revoked and the ceremony is finished.
 
 Poll claim status at the server-provided `interval`:
 
@@ -265,7 +265,7 @@ curl https://claimable.neon.tech/v1/projects/quiet-fog-12345678/claim \
   --header "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
-Stop using agent credentials when the state reaches `accepted`. Use credentials from the destination Neon organization after reconciliation.
+Only `reconciled` means the assertion is dead. Use credentials from the destination Neon organization after that. The recipient can enable Auth again after transfer.
 
 ## Errors
 
@@ -287,16 +287,18 @@ Use `error.code` for control flow and show `error.message` to the user. Retry on
 
 Common codes include:
 
-| Code                        | Meaning                                                       |
-| --------------------------- | ------------------------------------------------------------- |
-| `invalid_request`           | The request body or parameter is invalid                      |
-| `invalid_grant`             | The identity assertion cannot be exchanged                    |
-| `invalid_token`             | The access token is invalid, expired, or revoked              |
-| `insufficient_scope`        | The access token does not permit the operation                |
-| `capability_requires_claim` | The requested service or operation requires human ownership   |
-| `claim_in_progress`         | Credential issuance is frozen while a claim is pending        |
-| `project_claimed`           | The project transferred and agent credentials no longer apply |
-| `upstream_unavailable`      | A Neon API or service dependency is temporarily unavailable   |
+| Code                        | Meaning                                                      |
+| --------------------------- | ------------------------------------------------------------ |
+| `invalid_request`           | The request body or parameter is invalid                     |
+| `invalid_grant`             | The identity assertion cannot be exchanged. Discard it       |
+| `unauthorized`              | No credential was presented, or it did not verify            |
+| `token_expired`             | The access token expired. Re-exchange the identity assertion |
+| `scope_insufficient`        | The access token does not permit the operation               |
+| `capability_requires_claim` | The requested service or operation requires human ownership  |
+| `claim_in_progress`         | Only claim-status polling remains available                  |
+| `project_claimed`           | The project transferred. Discard the identity assertion      |
+| `project_expired`           | The unclaimed window closed. Discard the identity assertion  |
+| `upstream_error`            | A Neon API or service dependency failed                      |
 
 ## Resources
 
