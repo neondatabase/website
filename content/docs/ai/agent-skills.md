@@ -177,7 +177,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 
 **Database workflows**
 
-- **Disposable databases** via Claimable Postgres in the `neon` skill, for agents and tests
+- **Disposable databases** via [Claimable Postgres](/claimable-postgres), for agents and tests
 - **Branch types and workflows** for migrations, schema-only branches, and reset-from-parent
 - **Egress optimization** for high transfer costs and query anti-patterns
 

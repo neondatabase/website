@@ -2304,12 +2304,12 @@ const defaultConfig = {
       },
       {
         source: '/launchpad',
-        destination: 'https://neon.new',
+        destination: '/claimable-postgres',
         permanent: false,
       },
       {
         source: '/instagres',
-        destination: 'https://neon.new',
+        destination: '/claimable-postgres',
         permanent: false,
       },
       {
