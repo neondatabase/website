@@ -41,11 +41,16 @@ Those are scalability problems. They also show up as developer experience proble
 
 ## Your DB will break. Legacy infra sets your team for failure 
 
-Large Postgres failures are not rare. In the [restores survey](/restores-survey), **59% of companies managing 1TB+ databases** reported a critical production failure in the past 12 months: hardware failure, an accidental table drop, corruption, or something adjacent.
+Failures on large Postgres databases are not rare events, and recovery is rarely quick.
 
-The downtime that followed is what turns an incident into a business problem:
+![59% of companies experienced a critical production failure in the past 12 months, including hardware failures, accidental table drops, and data corruption](/use-cases/large-databases/survey-critical-failures.png)
 
-- **30% of teams** spent 3+ hours recovering, and some pushed past half a day. Only **21%** recovered in under an hour
+![30% of teams had 3+ hours of downtime, some pushed past half a day, and only 21% recovered in less than 60 minutes](/use-cases/large-databases/survey-downtime.png)
+
+_Source: [Impact of Postgres restores survey](/restores-survey), based on 50 developers running 1TB+ Postgres in production._
+
+The cost of those hours lands well outside the incident channel:
+
 - **40%** reported significant business interruption. Only **8%** said the incident caused little stress
 - **52%** saw negative customer feedback. **48%** got a spike in support cases. **26%** dealt with SLA breaches and penalties
 - **72%** felt only somewhat confident in their ability to recover quickly. Just **21%** felt very confident
