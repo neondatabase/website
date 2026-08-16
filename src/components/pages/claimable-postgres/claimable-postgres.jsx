@@ -12,12 +12,12 @@ const SERVICES = [
   {
     id: 'data-api',
     title: 'Data API',
-    description: 'Query the database over HTTPS.',
+    description: 'Query the database over HTTPS. Claiming disables Data API.',
   },
   {
     id: 'auth',
     title: 'Managed Better Auth',
-    description: 'Add authentication that shares the project lifecycle.',
+    description: 'Add authentication. Claiming deletes Auth and its data.',
   },
 ];
 
@@ -175,7 +175,9 @@ const Provisioner = () => {
           <p className="text-sm leading-relaxed text-gray-new-70">
             Copy these values now. This page will not show them again. The claim link expires in{' '}
             {Math.round(claim.expires_in / 60)} minutes; after that this project cannot be claimed
-            from here. The project itself expires on {expiresAt}.
+            from here. Claiming transfers the Postgres database. It disables Data API and deletes
+            Managed Better Auth and its data so pre-claim tokens do not survive. The project itself
+            expires on {expiresAt}.
           </p>
           <Button
             className="mt-4 w-full"
@@ -418,7 +420,7 @@ const ClaimablePostgres = () => (
               ],
               [
                 'Unclaimed projects expire',
-                'Every response includes an expiration time. Claim the project before then to keep the database and its services.',
+                'Every response includes an expiration time. Claim the project before then to keep the Postgres database. Claiming disables Data API and deletes Managed Better Auth and its data.',
               ],
             ].map(([title, description], index) => (
               <div className="grid grid-cols-[36px_1fr] gap-4" key={title}>
