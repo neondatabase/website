@@ -28,8 +28,8 @@ module.exports = {
   // Quick-reference links emitted as "## Common Queries" before the section list.
   commonQueries: [
     {
-      label: 'Provision a temporary database for an agent (Claimable Postgres)',
-      url: 'https://neon.com/docs/reference/claimable-postgres.md',
+      label: 'Provision a temporary database for an agent (Claimable Neon)',
+      url: 'https://claimable.neon.tech/auth.md',
     },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
     {
