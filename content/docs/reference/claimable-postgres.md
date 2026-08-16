@@ -1,12 +1,9 @@
 ---
 title: Claimable Postgres by Neon
-subtitle: Human reference. Agents fetch auth.md from neon.com/docs/llms.txt.
+subtitle: CLI, claim, and HTTP reference
 summary: >-
-  Claimable Postgres lets agents provision Lakebase Postgres on Neon through
-  auth.md, the Neon CLI, or a REST API without a Neon account. The service
-  issues scoped agent credentials for one temporary project, can add Data API
-  and Managed Better Auth, and transfers the project into a Neon organization
-  when a human claims it.
+  Human reference for Claimable Postgres: CLI commands, claim, and HTTP.
+  Agents fetch https://claimable.neon.tech/auth.md from neon.com/docs/llms.txt.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
@@ -77,7 +74,7 @@ The response contains an `identity_assertion`, project metadata, and one decisio
 
 Agents start at [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt), which points at [`auth.md`](https://claimable.neon.tech/auth.md) on the service origin. This page is the human reference.
 
-Claimable Postgres implements [auth.md](https://auth.md/). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
+Claimable Postgres implements [auth.md](https://workos.com/auth-md/docs/auth-md). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
 
 | Document or endpoint                          | Purpose                                                      |
 | --------------------------------------------- | ------------------------------------------------------------ |
