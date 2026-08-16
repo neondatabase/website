@@ -49,6 +49,8 @@ Neon databases provision in less than a second and automatically suspend when id
 
 [Read about the benefits of database-per-user architectures](/docs/use-cases/database-per-user#database-per-user)
 
+<QuoteBlock quote="We were getting ready to hire dedicated engineers just to manage and scale Zite Database. With Neon, we didn’t need to do that. We were able to give every end user their own database, including on the free plan" author={{ name: 'Dominic Whyte', company: 'Co-founder at Zite' }} link="/blog/how-zite-provisions-isolated-postgres-databases-for-every-user" />
+
 ## API-first fleet management
 
 Neon's API is built for platforms that manage large fleets of Postgres databases with minimal engineering effort. It has been shaped in collaboration with partners running at the edge of scale and automation. Via the Neon API, you can:
