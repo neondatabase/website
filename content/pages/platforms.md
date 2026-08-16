@@ -64,13 +64,36 @@ Neon's API is built for platforms that manage large fleets of Postgres databases
 
 ## Built-in quotas and billing controls
 
-Define usage limits per project to manage cost and enforce pricing tiers. As users upgrade or change plans, you can update limits via API without downtime or user impact.
+Platforms that ship free, pro, and enterprise tiers need hard caps per user, not just observability. Neon exposes those caps on the project itself through the `quota` object on [Create project](/docs/reference/api/projects/create-project) and [Update project](/docs/reference/api/projects/update-project). Set them when you provision a tenant, then raise or lower them when the user changes plan, without downtime.
 
-- Set maximum allowed storage
-- Cap CPU usage
-- Limit egress by plan
-- Track and cap monthly data written
-- Customize suspend timeouts for different tiers
+When any configured quota is hit, Neon suspends every active compute on that project and keeps them suspended until the next billing period starts. That is a hard stop, not scale-to-zero: the next connection does not wake the database unless you raise or clear the quota.
+
+| Quota | Scope | What it caps |
+| --- | --- | --- |
+| `active_time_seconds` | Project, per billing period | How long computes can stay active, excluding idle scale-to-zero time |
+| `compute_time_seconds` | Project, per billing period | CPU-seconds across all computes in the project, weighted by compute size |
+| `written_data_bytes` | Project, per billing period | Total data written across all branches |
+| `data_transfer_bytes` | Project, per billing period | Egress through the Neon proxy |
+| `logical_size_bytes` | Branch, lifetime of the branch | Maximum size of any one branch. Only that branch's compute is suspended when hit |
+
+Project quotas reset with the monthly billing cycle. `logical_size_bytes` does not: it is a standing size ceiling for the life of the branch.
+
+You can also size each endpoint from the same API surface, as project defaults, on branch create, or when creating or updating an endpoint:
+
+| Setting | What it controls |
+| --- | --- |
+| `autoscaling_limit_min_cu` | Minimum compute size when the endpoint wakes |
+| `autoscaling_limit_max_cu` | Hard ceiling for autoscaling under load |
+| `suspend_timeout_seconds` | How long an idle endpoint stays warm before scale-to-zero |
+
+Together, quotas and endpoint settings let you encode your pricing tiers in API calls:
+
+- Give free-tier users tight active-time, compute-time, write, and egress ceilings
+- Raise the same fields when a user upgrades, or set a quota to `0` to remove the limit
+- Force a suspend for abuse or unpaid accounts by dropping a quota to a near-zero threshold
+- Pair monthly quotas with per-endpoint autoscaling and suspend timeouts so each tier gets a different compute envelope
+
+[Configure consumption limits](/docs/guides/consumption-limits) covers setting quotas on create or update, querying current usage against them, and resetting a suspended project.
 
 <MegaLink tag="Case Study" title="Koyeb’s Database Instance Types show how to use Neon’s quota controls to define compute, storage, write, and data transfer limits per plan." url="https://www.koyeb.com/docs/databases#database-instance-types" />
 
