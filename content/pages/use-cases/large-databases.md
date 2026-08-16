@@ -36,7 +36,7 @@ Those are scalability problems. They also show up as developer experience proble
 
 <div style={{ margin: '2.5rem 0', borderLeft: '3px solid #00E599', borderRadius: '0.25rem', background: 'rgba(0, 229, 153, 0.07)', padding: '1.75rem 2rem' }}>
   <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>In short</p>
-  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>A multi-TB Postgres shouldn't make every restore, replica, and staging environment a big DBA event. Database size should not be the thing that decides how fast you can move.</p>
+  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>A multi-TB Postgres shouldn't turn every restore, replica, and staging environment a big DBA event.</p>
 </div>
 
 ## Your DB will break. Legacy infra sets your team for failure 
