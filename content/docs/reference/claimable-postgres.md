@@ -2,16 +2,17 @@
 title: Claimable Postgres by Neon
 subtitle: CLI, claim, and HTTP reference
 summary: >-
-  Human reference for Claimable Postgres: CLI commands, claim, and HTTP.
-  Agents fetch https://claimable.neon.tech/auth.md from neon.com/docs/llms.txt.
+  If an agent needs a Neon account and the user is not around, provision a
+  project now; they claim it later. Agents fetch
+  https://claimable.neon.tech/auth.md from neon.com/docs/llms.txt.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-08-16T17:08:36.389Z'
+updatedOn: '2026-08-16T17:20:23.281Z'
 ---
 
-Claimable Postgres lets an agent create a temporary database on Neon before a human signs up. The agent receives credentials scoped to one project, builds with standard Postgres tools, and gives the human a claim link when the project is worth keeping.
+If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link.
 
 Start in the browser at [neon.com/claimable-postgres](/claimable-postgres), or give an agent the service's [`auth.md`](https://claimable.neon.tech/auth.md) document.
 
@@ -73,7 +74,7 @@ The response contains an `identity_assertion`, project metadata, and one decisio
 
 ## Agent discovery
 
-Agents start at [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt), which points at [`auth.md`](https://claimable.neon.tech/auth.md) on the service origin. This page is the human reference.
+If an agent needs a Neon account and the user is not around, [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt) points at [`auth.md`](https://claimable.neon.tech/auth.md) on the service origin. This page is the human reference.
 
 Claimable Postgres implements [auth.md](https://workos.com/auth-md/docs/auth-md). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
 
