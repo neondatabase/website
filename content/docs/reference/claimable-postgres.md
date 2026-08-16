@@ -75,6 +75,8 @@ The response contains an `identity_assertion`, project metadata, and one decisio
 
 ## Agent discovery
 
+Agents start at [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt), which points at [`auth.md`](https://claimable.neon.tech/auth.md) on the service origin. This page is for humans and SEO. It is not on that path.
+
 Claimable Postgres implements [auth.md](https://auth.md/). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
 
 | Document or endpoint                          | Purpose                                                      |
