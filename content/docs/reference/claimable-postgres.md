@@ -8,6 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
+updatedOn: '2026-08-16T17:08:36.389Z'
 ---
 
 Claimable Postgres lets an agent create a temporary database on Neon before a human signs up. The agent receives credentials scoped to one project, builds with standard Postgres tools, and gives the human a claim link when the project is worth keeping.
