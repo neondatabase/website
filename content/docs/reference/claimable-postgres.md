@@ -197,7 +197,7 @@ Only requested and granted services appear under `services`.
 | Storage    | No                     | Requires claiming the project |
 | AI Gateway | No                     | Requires claiming the project |
 
-Unsupported pre-claim capabilities return the `capability_requires_claim` error code. Agents should preserve that code and give the user the claim URL instead of retrying.
+Registration records those as `{ granted: false, reason: "requires_claim" }`. A later protected operation returns `capability_requires_claim`. Preserve the denied capability and give the human a claim link; do not retry or drop it.
 
 ## Use the Neon CLI
 
