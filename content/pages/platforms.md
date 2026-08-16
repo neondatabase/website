@@ -76,21 +76,35 @@ Define usage limits per project to manage cost and enforce pricing tiers. As use
 
 ## Tracking usage at scale
 
-Neon also provides consumption APIs for observability across the fleet:
+Platforms that bill their own users, or that need to watch a large fleet, get invoice-aligned consumption data from the Neon API. The v2 consumption endpoints return the same line items Neon bills on, at hourly, daily, or monthly granularity, without waking suspended computes when you poll.
 
-| Endpoint | Description | Availability |
+| Endpoint | Path | What it returns | Plan availability |
+| --- | --- | --- | --- |
+| Project metrics | `GET /consumption_history/v2/projects` | Usage-based metrics per project, cursor-paginated across the org | Launch, Scale, Agent, Enterprise |
+| Branch metrics (beta) | `GET /consumption_history/v2/branches` | The same usage-based metrics broken down by branch across one or more projects | Launch, Scale, Agent, Enterprise |
+
+Project metrics cover the full billing surface. Branch metrics omit snapshot storage and extra-branch counts, and are meant for attributing compute and storage to CI branches, previews, or development environments inside a project.
+
+| Metric | What it measures | Useful for |
 | --- | --- | --- |
-| Account-level cumulative metrics | Aggregate metrics across all projects in the account | Scale and Business plans |
-| Granular project-level metrics | Usage metrics per project at hourly, daily, or monthly granularity | Scale and Business plans |
-| Single project metrics | Detailed metrics and quota info for an individual project | All plans |
+| `compute_unit_seconds` | CPU time weighted by compute size | Passing through compute cost per user or project |
+| `root_branch_bytes_month` | Storage on root branches | Primary database storage per tenant |
+| `child_branch_bytes_month` | Delta storage on child branches | Preview, CI, and developer branch cost |
+| `instant_restore_bytes_month` | Point-in-time history storage | History-window cost per project |
+| `snapshot_storage_bytes_month` | Snapshot storage (project endpoint only) | Backup and snapshot line items |
+| `public_network_transfer_bytes` | Egress over the public internet | Data-transfer quotas and billing |
+| `private_network_transfer_bytes` | Egress over private networks | PrivateLink and similar paths |
+| `extra_branches_month` | Child branches beyond plan allowance (project endpoint only) | Enforcing or billing for branch headroom |
 
 You can use these to:
 
-- Monitor total usage across all projects for a billing period
-- Break down metrics by project or time range (hourly, daily, monthly)
-- Power usage-based billing or internal dashboards
+- Monitor total usage across all projects for a billing period, then page through the fleet with cursor-based pagination
+- Filter to specific projects or branches when you only need a subset of the fleet
+- Break metrics down by hour, day, or month (hourly for the last 7 days, daily for the last 60 days, monthly for the last year)
+- Power usage-based billing, free-tier enforcement, and internal dashboards from the same numbers that appear on a Neon invoice
+- Poll on your own schedule. Consumption data refreshes about every 15 minutes, and polling does not wake idle computes
 
-[Learn how to query consumption metrics via the API](/docs/guides/consumption-metrics)
+[Learn how to query consumption metrics via the API](/docs/guides/consumption-metrics), including request parameters, pagination, and a worked usage-dashboard example.
 
 <QuoteBlock quote="Neon’s serverless philosophy is aligned with our vision: no infrastructure to manage, no servers to provision, no database cluster to maintain." author={{ name: 'Edouard Bonlieu', company: 'Co-founder at Koyeb' }} link="/case-studies#platforms" />
 
