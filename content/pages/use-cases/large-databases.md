@@ -36,10 +36,10 @@ Those are scalability problems. They also show up as developer experience proble
 
 <div style={{ margin: '2.5rem 0', borderLeft: '3px solid #00E599', borderRadius: '0.25rem', background: 'rgba(0, 229, 153, 0.07)', padding: '1.75rem 2rem' }}>
   <p style={{ margin: 0, fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace', fontSize: '0.75rem', letterSpacing: '0.14em', textTransform: 'uppercase', opacity: 0.6 }}>In short</p>
-  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>A multi-TB Postgres shouldn't make every restore, replica, and staging environment a multi-hour project. Size should not be the thing that decides how fast you can move.</p>
+  <p style={{ margin: '0.75rem 0 0', fontSize: '1.5rem', lineHeight: 1.35, fontWeight: 500 }}>A multi-TB Postgres shouldn't make every restore, replica, and staging environment a big DBA event. Database size should not be the thing that decides how fast you can move.</p>
 </div>
 
-## Your DB *will* break - and legacy infra sets your team for failure 
+## Your DB will break. Legacy infra sets your team for failure 
 
 Large Postgres failures are not rare. In the [restores survey](/restores-survey), **59% of companies managing 1TB+ databases** reported a critical production failure in the past 12 months: hardware failure, an accidental table drop, corruption, or something adjacent.
 
@@ -54,7 +54,7 @@ Those numbers track with what people wrote in when we asked for the stories behi
 
 Snapshot plus WAL replay gets slower as the database grows. High availability standbys help with infrastructure failure, but they don't help when someone drops a table, when data is corrupted, or when the standby itself is behind. **68% of teams** put faster point-in-time recovery on their wishlist.
 
-## The lakebase architecture turns restores into a metadata operation
+## How the lakebase architecture simplifies Postgres operations
 
 None of the patterns below are possible on a conventional Postgres instance, and the reason is architectural. In a standard setup, compute and storage are glued together. Moving to a different size, a different environment, or a different point in time means moving the data.
 
@@ -106,7 +106,7 @@ On Neon, a [read replica](/docs/introduction/read-replicas) is another compute p
 
 That makes replicas useful for more than horizontal read scale-out. Offload analytics, ad-hoc queries, and reporting onto a replica without touching primary performance, and without paying for another multi-TB volume to host them.
 
-## Ops that used to need a DBA can now run from an API call
+## Ops that used to need a DBA are now an API call
 
 Once restore, branching, and replicas are cheap and fast, they stop being special procedures and start being things you can automate. Every operation is available through the [Neon API](/docs/reference/api) and the CLI:
 
