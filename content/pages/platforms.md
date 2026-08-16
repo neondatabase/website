@@ -96,9 +96,9 @@ You can use these to:
 
 ## Claimable databases for frictionless onboarding
 
-Not every platform wants users to create a Neon account before they get a database. The [claimable database flow](/docs/guides/platform-integration-overview#claimable-database-flow) is the flavor of this use case for plugins, CLIs, and platforms that want instant Postgres with deferred ownership.
+Not every platform wants users to sign up anywhere before they get a database. The [claimable database flow](/docs/guides/platform-integration-overview#claimable-database-flow) is the flavor of this use case for plugins, CLIs, and platforms that want instant Postgres with deferred ownership.
 
-You create the database on behalf of the user. They get a connection string immediately, with no signup. If they do not claim it, the database expires after 72 hours. When they are ready, they claim ownership into their own Neon account, and the connection string stays valid.
+How it works: your users get a Neon connection string immediately, with no signup - if they do not claim it, the database expires after 72 hours. When they are ready, they claim ownership into their own Neon account, and the connection string stays valid.
 
 That pattern fits:
 
