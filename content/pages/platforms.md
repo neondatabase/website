@@ -11,7 +11,7 @@ updatedOn: '2026-08-16T23:10:00.000Z'
 image: '/images/social-previews/platforms.jpg'
 ---
 
-![A grid of isolated Postgres instances, each with its own resources that can scale independently](/images/pages/platforms/fleet-databases.jpg)
+![Databases deployed across a fleet, with active databases lit up in green and idle ones dimmed as they scale to zero](/images/pages/platforms/databases-deployed.png)
 
 <Admonition type="note" title="Summary">
 Neon is built for platforms that need to offer every user their own Postgres database. You provision via API, integrate the database into your product, and your users never have to create a Neon account unless you want them to.
