@@ -173,8 +173,9 @@ const Provisioner = () => {
 
         <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
           <p className="text-sm leading-relaxed text-gray-new-70">
-            This project expires on {expiresAt} unless you claim it. The claim link expires in{' '}
-            {Math.round(claim.expires_in / 60)} minutes.
+            Copy these values now. This page will not show them again. The claim link expires in{' '}
+            {Math.round(claim.expires_in / 60)} minutes; after that this project cannot be claimed
+            from here. The project itself expires on {expiresAt}.
           </p>
           <Button
             className="mt-4 w-full"
