@@ -140,7 +140,7 @@ describe('/api/claimable-postgres', () => {
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
-  it('preserves structured Claimable Neon errors', async () => {
+  it('preserves structured Claimable Postgres errors', async () => {
     const upstreamError = {
       error: {
         code: 'rate_limit_exceeded',
@@ -164,7 +164,7 @@ describe('/api/claimable-postgres', () => {
     expect(await response.json()).toEqual(upstreamError);
   });
 
-  it('returns 502 when Claimable Neon cannot be reached', async () => {
+  it('returns 502 when Claimable Postgres cannot be reached', async () => {
     global.fetch.mockRejectedValueOnce(new Error('ECONNREFUSED'));
 
     const response = await POST(
@@ -179,7 +179,7 @@ describe('/api/claimable-postgres', () => {
     expect(await response.json()).toEqual({
       error: {
         code: 'claimable_service_unavailable',
-        message: 'Claimable Neon could not be reached.',
+        message: 'Claimable Postgres could not be reached.',
       },
     });
   });

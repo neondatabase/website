@@ -137,13 +137,17 @@ const Provisioner = () => {
 
   if (state.status === 'success') {
     const { capabilities, claim, credentials, project } = state.result;
-    const expiresAt = new Intl.DateTimeFormat(undefined, {
-      dateStyle: 'medium',
-      timeStyle: 'short',
-    }).format(new Date(project.expires_at));
+    const formatTime = (value) =>
+      new Intl.DateTimeFormat(undefined, {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      }).format(new Date(value));
+    const expiresAt = formatTime(project.expires_at);
+    const claimExpiresAt = formatTime(Date.now() + claim.expires_in * 1000);
     const granted = new Set(
       capabilities.filter(({ granted }) => granted).map(({ capability }) => capability)
     );
+    const denied = capabilities.filter(({ granted }) => !granted);
     const teardown = [
       granted.has('data_api') ? 'disables Data API' : null,
       granted.has('auth') ? 'deletes Managed Better Auth and its data' : null,
@@ -175,6 +179,16 @@ const Provisioner = () => {
             <Capability key={capability} name={capability} granted={granted} />
           ))}
         </div>
+        {denied.length > 0 && (
+          <ul className="mt-3 space-y-1 text-sm leading-relaxed text-gray-new-60">
+            {denied.map(({ capability, reason, message }) => (
+              <li key={capability}>
+                {capability.replaceAll('_', ' ')} was not granted
+                {message || reason ? `: ${message || reason}` : '.'}
+              </li>
+            ))}
+          </ul>
+        )}
 
         <div className="mt-6 space-y-5">
           <Credential label="DATABASE_URL" value={credentials.database_url} />
@@ -188,10 +202,9 @@ const Provisioner = () => {
 
         <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
           <p className="text-sm leading-relaxed text-gray-new-70">
-            Copy these values now. This page will not show them again. The claim link expires in{' '}
-            {Math.round(claim.expires_in / 60)} minutes; after that this project cannot be claimed
-            and will expire. Claiming transfers the Postgres database.{teardownSentence} The project
-            itself expires on {expiresAt}.
+            Copy these values now. This page will not show them again. The claim link expires on{' '}
+            {claimExpiresAt}. Claiming transfers the Postgres database.{teardownSentence} The
+            project itself expires on {expiresAt}.
           </p>
           <Button
             className="mt-4 w-full"
@@ -285,7 +298,8 @@ const Provisioner = () => {
       </Button>
 
       <p className="mt-3 text-center text-xs leading-relaxed text-gray-new-50">
-        No account or payment details required. Claim the project to keep it.
+        No account or payment details required. Unclaimed projects expire in 72 hours and are capped
+        at 100 MB storage and 1 GB transfer.
       </p>
     </div>
   );
@@ -293,14 +307,14 @@ const Provisioner = () => {
 
 const InterfaceCard = ({ eyebrow, title, description, code }) => (
   <article className="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/[0.025] p-6 md:p-5">
-    <p className="font-mono text-xs tracking-wide text-green-45 uppercase">{eyebrow}</p>
+    <div className="flex items-start justify-between gap-3">
+      <p className="font-mono text-xs tracking-wide text-green-45 uppercase">{eyebrow}</p>
+      <CopyButton value={code} />
+    </div>
     <h3 className="mt-3 font-title text-2xl tracking-tight">{title}</h3>
     <p className="mt-2 min-h-12 text-sm leading-relaxed text-gray-new-60">{description}</p>
-    <div className="relative mt-5 min-w-0 grow rounded-xl border border-white/10 bg-black-pure/70 p-4">
-      <div className="absolute top-3 right-3">
-        <CopyButton value={code} />
-      </div>
-      <pre className="overflow-x-auto pr-12 font-mono text-xs leading-relaxed text-gray-new-70">
+    <div className="mt-5 min-w-0 grow rounded-xl border border-white/10 bg-black-pure/70 p-4">
+      <pre className="overflow-x-auto font-mono text-xs leading-relaxed break-all whitespace-pre-wrap text-gray-new-70">
         <code>{code}</code>
       </pre>
     </div>
@@ -432,7 +446,7 @@ const ClaimablePostgres = () => (
               ],
               [
                 'Unclaimed projects expire',
-                'Every response includes an expiration time. Claim the project before then to keep the Postgres database. Claiming disables Data API and deletes Managed Better Auth and its data.',
+                'Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer. Claim the project before then to keep the Postgres database. Claiming disables Data API and deletes Managed Better Auth and its data.',
               ],
             ].map(([title, description], index) => (
               <div className="grid grid-cols-[36px_1fr] gap-4" key={title}>

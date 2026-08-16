@@ -9,10 +9,10 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-08-16T17:20:23.281Z'
+updatedOn: '2026-08-16T17:43:51.979Z'
 ---
 
-If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link.
+If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
 
 Start in the browser at [neon.com/claimable-postgres](/claimable-postgres), or give an agent the service's [`auth.md`](https://claimable.neon.tech/auth.md) document.
 
