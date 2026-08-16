@@ -81,7 +81,7 @@ export default {
             {
               title: 'Branching workflows',
               to: `${LINKS.useCases}/branching-workflows`,
-              description: 'Simplify DB ops to ship faster & safer',
+              description: 'Simplify operations to ship faster & safer',
             },
             {
               title: 'Platforms',
