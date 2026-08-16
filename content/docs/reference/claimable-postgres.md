@@ -204,22 +204,16 @@ Unsupported pre-claim capabilities return the `capability_requires_claim` error 
 `neon claim` and its `neon claimable` alias manage anonymous projects:
 
 ```bash
-# Create a Postgres project
 npx neon@latest claim create --env-pull
 
-# Request services explicitly
 npx neon@latest claim create --service data-api --service auth --env-pull
 
-# Check the current human-claim state
 npx neon@latest claim status
 
-# Generate and open a human claim link
 npx neon@latest claim accept
 
-# List claimable projects saved on this machine
 npx neon@latest claim list
 
-# Delete the unclaimed project and local credentials
 npx neon@latest claim delete --yes
 ```
 
