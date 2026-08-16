@@ -250,13 +250,13 @@ export async function POST(request) {
     accessToken = requireToken(await exchangeAssertion(registration.identity_assertion));
     const authorization = { Authorization: `Bearer ${accessToken}` };
     const credentials = requireCredentials(
-      await requestClaimable(`/v1/databases/${registration.project.id}/credentials`, {
+      await requestClaimable(`/v1/projects/${registration.project.id}/credentials`, {
         headers: authorization,
       }),
       registration.project
     );
     const claim = requireClaim(
-      await requestClaimable(`/v1/databases/${registration.project.id}/claim`, {
+      await requestClaimable(`/v1/projects/${registration.project.id}/claim`, {
         method: 'POST',
         headers: authorization,
       })
@@ -280,7 +280,7 @@ export async function POST(request) {
         if (!accessToken) {
           accessToken = requireToken(await exchangeAssertion(registration.identity_assertion));
         }
-        await requestClaimable(`/v1/databases/${registration.project.id}`, {
+        await requestClaimable(`/v1/projects/${registration.project.id}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${accessToken}` },
         });

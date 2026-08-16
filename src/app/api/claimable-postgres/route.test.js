@@ -122,14 +122,14 @@ describe('/api/claimable-postgres', () => {
     );
     expect(global.fetch).toHaveBeenNthCalledWith(
       3,
-      `${ORIGIN}/v1/databases/${registration.project.id}/credentials`,
+      `${ORIGIN}/v1/projects/${registration.project.id}/credentials`,
       expect.objectContaining({
         headers: expect.objectContaining({ Authorization: `Bearer ${token.access_token}` }),
       })
     );
     expect(global.fetch).toHaveBeenNthCalledWith(
       4,
-      `${ORIGIN}/v1/databases/${registration.project.id}/claim`,
+      `${ORIGIN}/v1/projects/${registration.project.id}/claim`,
       expect.objectContaining({ method: 'POST' })
     );
   });
@@ -222,7 +222,7 @@ describe('/api/claimable-postgres', () => {
     expect(await response.json()).toEqual(upstreamError);
     expect(global.fetch).toHaveBeenNthCalledWith(
       4,
-      `${ORIGIN}/v1/databases/${registration.project.id}`,
+      `${ORIGIN}/v1/projects/${registration.project.id}`,
       expect.objectContaining({
         method: 'DELETE',
         headers: expect.objectContaining({ Authorization: `Bearer ${token.access_token}` }),
