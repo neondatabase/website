@@ -1,48 +1,57 @@
 ---
 title: 'Embedded Postgres for Platforms'
-subtitle: Provision dedicated Postgres databases for your users — instantly, affordably, and at scale
-updatedOn: '2025-06-17T09:00:00.000Z'
+subtitle: Provision dedicated Postgres databases for your users, instantly, affordably, and at scale
+summary: >-
+  How platforms embed Lakebase Postgres for their users: one-second
+  provisioning, scale-to-zero economics, API-first fleet management, claimable
+  databases for frictionless onboarding, and the path from database fleets to
+  full Neon backends.
+enableTableOfContents: true
+updatedOn: '2026-08-16T23:10:00.000Z'
+image: '/images/social-previews/platforms.jpg'
 ---
 
-Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero—so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required.
+![A grid of isolated Postgres instances, each with its own resources that can scale independently](/images/pages/platforms/fleet-databases.jpg)
 
-![Partners](/images/pages/platforms/partners.jpg)
+<Admonition type="note" title="Summary">
+Neon is built for platforms that need to offer every user their own Postgres database. You provision via API, integrate the database into your product, and your users never have to create a Neon account unless you want them to.
 
-<CTA title="" description="Our Solutions Engineers have helped platforms like yours embed Postgres at scale. Tell us about your use case—we’ll help you design the right approach." buttonText="Meet with us" buttonUrl="/contact-sales" />
+- **Instant** - Databases provision in about a second and resume from scale-to-zero in around 500ms
+- **Isolated** - Every user gets a dedicated Neon project with its own connection string
+- **Cheap at idle** - Inactive databases suspend automatically, so you pay for what is used, not for what sits waiting
+- **API-first** - Provision, set quotas, track usage, and transfer ownership programmatically across tens or hundreds of thousands of projects
+- **Claimable when you need it** - Spin up a database with no signup, then let the user claim it into their own Neon account later
 
-## Uniquely built to scale Postgres fleets
+This page covers the embedded Postgres model for SaaS and developer platforms. If you are building an agent product that provisions Neon for end users, see also [Neon for AI Agent Platforms](/use-cases/ai-agents).
+</Admonition>
 
-Neon is the best Postgres provider for deploying one-database-per-user fleets at scale. **You don’t need a DevOps team to manage a large Neon fleet** – the Neon API lets you track usage, enforce limits, and scale programmatically. With pay-per-use pricing and automatic scale-to-zero, [you’ll spend a fraction of what you'd pay on AWS](/cost-fleets). What you get:
+## Built to scale Postgres fleets
 
-- Dedicated connection strings for every user or project - every user gets their own secure, isolated Postgres [project](/docs/manage/projects)
-- High connection capacity - pooled endpoints support up to 10,000 connections
-- Full Postgres compatibility - no proprietary query layer
-- Custom branching and PITR - instant copies and rollbacks, no manual backups
-- All of this is available across multiple regions, with autoscaling and high availability
+Neon is the Postgres layer platforms use when every user, workspace, or generated app needs its own database. You do not need a DevOps team to run a large Neon fleet. The Neon API lets you track usage, enforce limits, and scale programmatically. With pay-per-use pricing and automatic scale-to-zero, [you spend a fraction of what you'd pay on AWS for the same fleet](/cost-fleets).
 
-<QuoteBlock
-quote="We’ve been able to automate virtually all database management tasks via the Neon API. We manage 300,000+ projects with minimal engineering overhead."
-author={{
-name: 'Himanshu Bandoth',
-company: 'Software Engineer at Retool',
-}}
-/>
+What you get:
 
-## With instant provisioning and scale-to-zero
+- Dedicated connection strings for every user or project, each in its own secure, isolated Neon [project](/docs/manage/projects)
+- High connection capacity, with pooled endpoints that support up to 10,000 connections
+- Full Postgres compatibility, with no proprietary query layer
+- Branching and instant restore for copies and rollbacks, without manual backups
+- Multi-region placement, autoscaling, and high availability on the same model
 
-Neon databases provision in less than a second and automatically suspend when idle, with no compute cost until the next query. **You can offer every user their own Postgres database without incurring the cost of idle infrastructure.** This is what makes Neon ideal for platforms: dedicated Postgres per user, but with shared-infrastructure economics.
+<QuoteBlock quote="We’ve been able to manage 300K+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort." author="himanshu-bhandoh" role="Software Engineer at Retool" link="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
+
+## Instant provisioning and scale-to-zero
+
+Neon databases provision in less than a second and automatically suspend when idle, with no compute cost until the next query. That is what makes dedicated Postgres per user viable: isolation without the cost of idle infrastructure.
 
 - Provisioning time: ~1 second
-- Suspend latency: configurable (default is 5 min)
+- Suspend latency: configurable (default is 5 minutes)
 - Resume latency (cold start): ~500ms
 
-![Architecture](/images/pages/platforms/architecture.jpg)
+[Read about the benefits of database-per-user architectures](/docs/use-cases/database-per-user#database-per-user)
 
-[Read about the benefits of database-per-user architectures for scalability](/docs/use-cases/database-per-user#database-per-user)
+## API-first fleet management
 
-## API-first management
-
-Neon’s API is purpose-built to help platforms manage large fleets of Postgres databases with minimal engineering effort. **We’ve continuously improved our API in collaboration with 20+ partners, each pushing the boundaries of scale and automation**. Via the Neon API, you can:
+Neon's API is built for platforms that manage large fleets of Postgres databases with minimal engineering effort. It has been shaped in collaboration with partners running at the edge of scale and automation. Via the Neon API, you can:
 
 - Provision new databases instantly
 - Set per-project resource limits to support free, pro, and enterprise plans
@@ -51,13 +60,11 @@ Neon’s API is purpose-built to help platforms manage large fleets of Postgres 
 - Monitor usage across thousands of projects
 - Update quotas and configurations without downtime
 
-…and more
-
-<MegaLink tag="Case Study" title="Retool uses the Neon API to manage over 300,000 databases with just one engineer — handling everything from provisioning to quota enforcement." url="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
+<MegaLink tag="Case Study" title="Retool uses the Neon API to manage over 300,000 databases with just one engineer, handling everything from provisioning to quota enforcement." url="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
 
 ## Built-in quotas and billing controls
 
-Neon allows you to easily **define usage limits per project to manage cost and enforce pricing tiers**. As users upgrade or change plans, you can dynamically update limits via API, without downtime or user impact.
+Define usage limits per project to manage cost and enforce pricing tiers. As users upgrade or change plans, you can update limits via API without downtime or user impact.
 
 - Set maximum allowed storage
 - Cap CPU usage
@@ -65,19 +72,17 @@ Neon allows you to easily **define usage limits per project to manage cost and e
 - Track and cap monthly data written
 - Customize suspend timeouts for different tiers
 
-…and more
-
-<MegaLink tag="Case Study" title="Koyeb’s Database Instance Types sets an example of how to use Neon’s quota controls to define compute, storage, write, and data transfer limits per plan." url="https://www.koyeb.com/docs/databases#database-instance-types" />
+<MegaLink tag="Case Study" title="Koyeb’s Database Instance Types show how to use Neon’s quota controls to define compute, storage, write, and data transfer limits per plan." url="https://www.koyeb.com/docs/databases#database-instance-types" />
 
 ## Tracking usage at scale
 
-Neon also provides rich consumption APIs for observability at scale:
+Neon also provides consumption APIs for observability across the fleet:
 
-| Endpoint                                             | Description                                                        | Availability                                              |
-| ---------------------------------------------------- | ------------------------------------------------------------------ | --------------------------------------------------------- |
-| Account-level cumulative metrics                     | Granular project-level metrics                                     | Single project metrics                                    |
-| Aggregate metrics across all projects in the account | Usage metrics per project at hourly, daily, or monthly granularity | Detailed metrics and quota info for an individual project |
-| Scale and Business plans                             | Scale and Business plans                                           | All plans                                                 |
+| Endpoint | Description | Availability |
+| --- | --- | --- |
+| Account-level cumulative metrics | Aggregate metrics across all projects in the account | Scale and Business plans |
+| Granular project-level metrics | Usage metrics per project at hourly, daily, or monthly granularity | Scale and Business plans |
+| Single project metrics | Detailed metrics and quota info for an individual project | All plans |
 
 You can use these to:
 
@@ -87,16 +92,50 @@ You can use these to:
 
 [Learn how to query consumption metrics via the API](/docs/guides/consumption-metrics)
 
-<QuoteBlock
-quote="Neon’s serverless philosophy is aligned with our vision (no infrastructure to manage, no servers to provision, no database cluster to maintain) making them the obvious partner to power our serverless Postgres offering."
-author={{
-name: 'Edouard Bonlieu',
-company: 'co-founder and CPO at Koyeb',
-}}
-/>
+<QuoteBlock quote="Neon’s serverless philosophy is aligned with our vision: no infrastructure to manage, no servers to provision, no database cluster to maintain." author={{ name: 'Edouard Bonlieu', company: 'Co-founder at Koyeb' }} link="/case-studies#platforms" />
+
+## Claimable databases for frictionless onboarding
+
+Not every platform wants users to create a Neon account before they get a database. The [claimable database flow](/docs/guides/platform-integration-overview#claimable-database-flow) is the flavor of this use case for plugins, CLIs, and platforms that want instant Postgres with deferred ownership.
+
+You create the database on behalf of the user. They get a connection string immediately, with no signup. If they do not claim it, the database expires after 72 hours. When they are ready, they claim ownership into their own Neon account, and the connection string stays valid.
+
+That pattern fits:
+
+- Framework plugins and CLI tools
+- Demo environments and trial experiences
+- Educational platforms handing out databases to students
+- Development tools that need instant database access
+- SaaS products that want deferred account creation
+
+### Featured: Netlify DB
+
+[Netlify DB](/blog/netlify-db-powered-by-neon) is the clearest example in production. Developers and agents provision a production-ready Postgres database from a Netlify project in one click or one CLI command, with no external signup. When they are ready, they claim the database into a Neon account.
+
+<video autoPlay playsInline muted loop width="704" height="400" style={{ marginLeft: 0, marginRight: 'auto', width: '100%', height: 'auto' }}>
+  <source src="https://cdn.neonapi.io/public/videos/pages/blog/netlify-db-powered-by-neon/netlify-db-clip-449bd1a2.mp4" type="video/mp4" />
+</video>
+
+_Netlify DB provisioning a Postgres database from a Netlify project, powered by Neon's claimable database flow. [Read the launch post](/blog/netlify-db-powered-by-neon)._
+
+<Admonition type="info" title="Implement claimable databases">
+- [Platform integration overview: claimable database flow](/docs/guides/platform-integration-overview#claimable-database-flow) - when this path fits vs embedded Postgres, OAuth, or the Agent plan
+- [Claimable database integration guide](/docs/workflows/claimable-database-integration) - create a project, issue a transfer request, and hand off ownership
+- [Claimable Postgres](/docs/reference/claimable-postgres) - reference for the neon.new instant-database flow
+</Admonition>
+
+<QuoteBlock quote="Our users were asking for preview environments that already had their data in place. Neon’s branching was exactly what we needed: it lets us copy databases very quickly so teams can validate changes end to end immediately" author={{ name: 'Marcus Kohlberg', company: 'Founder at Encore' }} link="/blog/where-agents-meet-infrastructure-encore-leap-and-neon" />
+
+## From database fleets to full backends
+
+The database is still the center of this story. Most platforms start by embedding Lakebase Postgres and stop there for a while. The same project model now reaches further when you want it to.
+
+Around each database, Neon also offers [Managed Better Auth](/docs/auth/overview), [Neon Object Storage](/docs/storage/overview), [Neon Functions](/docs/compute/functions/overview), the [Neon Data API](/docs/data-api/get-started), and the [Neon AI Gateway](/docs/ai-gateway/overview). Those primitives share the same branch and project boundaries as the database, so a fleet of user environments can grow from "a Postgres per user" into "a backend per user" without changing the provisioning model you already run.
+
+You can adopt only the pieces each product needs. The fleet controls, quotas, and claim flows above keep applying either way.
 
 ## Built for your platform, not ours
 
-**We’re not trying to own your user experience — we’re here to power it.** You can integrate Neon invisibly behind the scenes, whether you want to use our [OAuth integration](/docs/guides/oauth-integration) or manage Neon projects directly via API. **You decide how the database shows up in your UI, we take care of the rest.**
+We are not trying to own your user experience. We are here to power it. You can integrate Neon behind the scenes, whether you manage projects directly via API, use the [claimable database flow](/docs/guides/platform-integration-overview#claimable-database-flow), or connect existing Neon accounts through [OAuth](/docs/guides/oauth-integration). You decide how the database shows up in your UI. We take care of the rest.
 
-<CTA title="Let us help you launch" description="We’re happy to support proof-of-concepts, provide technical guidance, and share best practices from other platforms." theme="column" buttonText="Talk to us" buttonUrl="/contact-sales" linkText="Explore the API" linkUrl="/docs/reference/api" />
+<CTA title="Pick the integration path that fits" description="Start with the platform integration overview. If you want instant Postgres without requiring signup first, follow the claimable database flow. Our team can also help with a proof of concept." buttonText="Claimable database flow" buttonUrl="/docs/guides/platform-integration-overview#claimable-database-flow" secondaryButtonText="Talk to us" secondaryButtonUrl="/contact-sales" />
