@@ -141,6 +141,17 @@ const Provisioner = () => {
       dateStyle: 'medium',
       timeStyle: 'short',
     }).format(new Date(project.expires_at));
+    const granted = new Set(
+      capabilities.filter(({ granted }) => granted).map(({ capability }) => capability)
+    );
+    const teardown = [
+      granted.has('data_api') ? 'disables Data API' : null,
+      granted.has('auth') ? 'deletes Managed Better Auth and its data' : null,
+    ].filter(Boolean);
+    const teardownSentence =
+      teardown.length > 0
+        ? ` It ${teardown.join(' and ')} so pre-claim tokens do not survive.`
+        : '';
 
     return (
       <div
@@ -179,8 +190,7 @@ const Provisioner = () => {
           <p className="text-sm leading-relaxed text-gray-new-70">
             Copy these values now. This page will not show them again. The claim link expires in{' '}
             {Math.round(claim.expires_in / 60)} minutes; after that this project cannot be claimed
-            and will expire. Claiming transfers the Postgres database. It disables Data API and
-            deletes Managed Better Auth and its data so pre-claim tokens do not survive. The project
+            and will expire. Claiming transfers the Postgres database.{teardownSentence} The project
             itself expires on {expiresAt}.
           </p>
           <Button
