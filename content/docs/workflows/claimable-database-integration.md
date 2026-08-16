@@ -10,7 +10,7 @@ summary: >-
   creation. The feature is in private preview and does not support
   transferring projects into Vercel-managed Neon organizations.
 enableTableOfContents: true
-updatedOn: '2026-08-11T16:50:44.197Z'
+updatedOn: '2026-08-16T15:49:10.359Z'
 ---
 
 ## Overview
@@ -242,7 +242,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Demo environments** - Create ready-to-use demo databases that prospects can claim
 - **Team environments** - Provision project databases for team members to claim into their organization
 
-For a working implementation, try [Claimable Postgres by Neon](/claimable-postgres). Agents can provision a temporary database through auth.md, receive project-scoped credentials, and hand a claim link to a human. The registration response provides the project expiration time. See the [Claimable Postgres reference](/docs/reference/claimable-postgres) for the agent protocol, API, and CLI commands.
+For a working implementation, try [Claimable Postgres by Neon](/claimable-postgres). Agents fetch [`auth.md`](https://claimable.neon.tech/auth.md), receive project-scoped credentials, and hand a claim link to a human. The registration response provides the project expiration time. See the [Claimable Postgres reference](/docs/reference/claimable-postgres) for CLI commands.
 
 ## Troubleshooting
 
