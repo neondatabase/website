@@ -258,9 +258,15 @@ Open `verification_uri_complete` and sign in to Neon. Starting the browser claim
 2. `accepted`: the project has left the unclaimed-project organization.
 3. `reconciled`: the identity assertion is revoked and the ceremony is finished.
 
-Poll claim status at the server-provided `interval`:
+Starting the browser claim revokes existing access tokens. Re-exchange the identity assertion, then poll claim status at the server-provided `interval`. The new token is only good for that poll until `reconciled`.
 
 ```bash
+curl --request POST https://claimable.neon.tech/v1/oauth2/token \
+  --header 'Content-Type: application/x-www-form-urlencoded' \
+  --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer' \
+  --data-urlencode "assertion=$IDENTITY_ASSERTION" \
+  --data-urlencode 'resource=https://claimable.neon.tech/'
+
 curl https://claimable.neon.tech/v1/projects/quiet-fog-12345678/claim \
   --header "Authorization: Bearer $ACCESS_TOKEN"
 ```
@@ -275,7 +281,7 @@ Errors use one JSON shape across provisioning, token, credential, and management
 {
   "error": {
     "code": "capability_requires_claim",
-    "origin": "service",
+    "origin": "proxy",
     "message": "Functions require claiming this project.",
     "retryable": false,
     "request_id": "req_..."
