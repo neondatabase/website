@@ -74,39 +74,39 @@ export default {
           title: 'Use cases',
           items: [
             {
-              title: 'Serverless App',
-              to: `${LINKS.useCases}/serverless-apps`,
-              description: 'Autoscale with traffic',
+              title: 'Full-stack apps',
+              to: `${LINKS.useCases}/full-stack-apps`,
+              description: 'Deploy backends via your agent',
             },
             {
-              title: 'Multi-TB',
-              to: `${LINKS.useCases}/multi-tb`,
-              description: 'Scale and restore instantly',
+              title: 'Branching workflows',
+              to: `${LINKS.useCases}/branching-workflows`,
+              description: 'Simplify DB ops to ship faster & safer',
             },
             {
-              title: 'Database per tenant',
-              to: `${LINKS.useCases}/database-per-tenant`,
-              description: 'Data isolation without overhead',
+              title: 'Platforms',
+              to: LINKS.platforms,
+              description: 'Deploy isolated backends for your end users',
+            },
+            {
+              title: 'Bursty workloads',
+              to: `${LINKS.useCases}/bursty-workloads`,
+              description: 'Avoid overprovisioning & optimize performance',
             },
           ],
         },
         {
-          title: 'Build & operate',
+          title: '\u00a0',
           items: [
-            {
-              title: 'Platforms',
-              to: LINKS.platforms,
-              description: 'Offer Postgres for your users',
-            },
-            {
-              title: 'Dev/Tests',
-              to: `${LINKS.useCases}/dev-test`,
-              description: 'Production-like environment',
-            },
             {
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
-              description: 'Build full-stack AI agents',
+              description: 'Infra for app generation agents',
+            },
+            {
+              title: 'Large databases',
+              to: `${LINKS.useCases}/large-databases`,
+              description: 'Restore & replicate your DB in seconds',
             },
           ],
         },
