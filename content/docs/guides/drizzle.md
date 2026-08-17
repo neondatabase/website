@@ -10,7 +10,7 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-08-17T13:30:01.413Z'
+updatedOn: '2026-08-17T13:30:38.295Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -158,8 +158,8 @@ config({ path: '.env.local' });
 
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set in .env.local');
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in .env.local');
 }
 
 // ...rest of config unchanged
