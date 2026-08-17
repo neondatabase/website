@@ -19,7 +19,7 @@ cover:
     The title "LLMs belong in your backend" beside a code window enabling
     aiGateway in a Neon config file, with model provider logos floating around
     it
-isFeatured: false
+isFeatured: true
 seo:
   title: LLMs belong in your backend - Neon
   description: AI Gateway brings Databricks-scale inference to your Neon branch
