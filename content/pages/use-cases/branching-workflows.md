@@ -26,23 +26,24 @@ For the long-form version of the patterns below, see [Mastering database branchi
 
 ## Copying databases doesn't scale. It's time to branch 
 
-Software development is built around parallel work. Engineers open pull requests, previews get generated for review, CI runs on every commit, and several versions of an application exist at the same time. Code handles all of this. Databases usually don't.
+Software development is built around parallel work. Engineers open pull requests, previews get generated for review, CI runs on every commit, and several versions of an application exist at the same time. Code handles all of this. Traditional databases don't.
 
 Most teams still run one production database, a shared staging database, and sometimes a shared development database. Getting an isolated environment means copying one of them: dump, restore, wait. That is expensive in every direction. Dumps and restores take minutes or hours. Every copy duplicates storage. Long restores fail partway or drift. And a copy is already stale by the time it finishes.
 
-So teams compromise. They test migrations against partial or outdated data. They share environments and coordinate over Slack about who is running what. They avoid certain schema changes because the blast radius feels too wide. Past a few hundred gigabytes, copying stops being practical at all, and non-production databases stop resembling production.
-
-<QuoteBlock quote="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data." author="jonathan-reyes" role="Principal Engineer at Dispatch" link="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora" />
+So teams compromise: they test migrations against partial or outdated data, share environments and coordinate over Slack about who is running what, and avoid certain schema changes because the blast radius feels too wide. Past a few hundred gigabytes, copying stops being practical at all, and non-production databases stop resembling production.
 
 Better scripts and faster restores only move the ceiling a little. The fix has to come from the database model itself.
 
-## The lakebase architecture allows Postgres to branch
+<QuoteBlock quote="Getting realistic data into our verification environments was largely unfeasible, it was time-consuming, expensive, and a beast to maintain. You need to process hefty backups, transfer costs stack up, and there’s a lot of manual oversight required just to move that data." author="jonathan-reyes" role="Principal Engineer at Dispatch" link="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora" />
 
-A branch starts as a pointer. When you create one, Lakebase Postgres records a reference to the parent's data at a specific point in time and writes nothing. The child sees the exact schema and rows the parent had at that moment. When you run a migration, insert rows, or drop a table on the child, only those changes are written separately.
+## The lakebase architecture that allows Postgres to branch
 
-Two things follow from that: 
+The key element that changes the game: database branches. 
+
+A database branch starts as a pointer. When you create one, Neon records a reference to the parent's data at a specific point in time and writes nothing. The child sees the exact schema and rows the parent had at that moment. When you run a migration, insert rows, or drop a table on the child, only those changes are written separately.
+
 - **Branch creation takes seconds no matter how large the parent is**, because the amount of data copied is zero, 
-- And a **branch stays cheap until it diverges**, because both branches read the same underlying pages until one of them writes.
+- **Branches stays cheap until they diverge**, because both branches read the same underlying pages until one of them writes.
 
 None of this is possible on a standard Postgres instance, and the reason is architectural. In a conventional setup, the Postgres process and its disk live together on one machine. The database is a single mutable filesystem, so the only way to get a second environment is to stand up a second machine with a full copy of the data on it.
 
@@ -51,8 +52,6 @@ Lakebase Postgres is a [lakebase](https://www.databricks.com/blog/what-is-a-lake
 ![Standard database architecture with compute and storage on one machine, next to the lakebase architecture with stateless compute over shared copy-on-write storage](/use-cases/branching-workflows/lakebase-architecture.jpg)
 
 Once storage is shared and versioned, starting a new compute against an existing version of the data is cheap. That single property is what branches, instant restore, and fast restarts are all built on. A branch is just another compute pointed at a version of the storage that already exists.
-
-The practical result is that branches stop being precious. They are cheap enough to create, use, and delete constantly, by developers, by CI, and by agents.
 
 <Admonition type="info" title="Go deeper on the architecture">
 - [Lakebase Postgres architecture overview](/docs/introduction/architecture-overview) - learn how compute, storage, and the WAL fit together in the lakebase 
