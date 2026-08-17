@@ -18,7 +18,7 @@ updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <Admonition type="info">
-**REWRITE:** Recast as backend progression; Connect is project/branch scope, not per-DB.
+**REWRITE → "Branching in action":** Refocus this console tour into a show-don't-tell branching walkthrough — branch the whole backend, make a change in isolation, reset to production — instead of a sign-up/feature tour. Connect is project/branch scope, not per-DB.
 </Admonition>
 
 <InfoBlock>

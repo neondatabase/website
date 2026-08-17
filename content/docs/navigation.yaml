@@ -21,7 +21,7 @@
           slug: get-started/full-backend-quickstart
         - title: Connect your app
           slug: connect/connect-hub
-        - title: Get started in the console
+        - title: Branching in action
           slug: get-started/signing-up
     - section: Frontend & Frameworks
       items:
@@ -948,7 +948,7 @@
               slug: manage/databases
             - title: Tables
               slug: guides/tables
-            - title: Integrations
+            - title: Integrations (connect tools to Neon)
               slug: manage/integrations
         - section: Monitoring & observability
           icon: report
@@ -1029,15 +1029,6 @@
               slug: introduction/compute-lifecycle
             - title: Serverless
               slug: introduction/serverless
-        - section: Data protection
-          icon: security
-          items:
-            - title: IP Allow
-              slug: introduction/ip-allow
-            - title: Private Networking
-              slug: guides/neon-private-networking
-            - title: Protected branches
-              slug: guides/protected-branches
         - section: High availability
           icon: status
           items:
@@ -1074,6 +1065,14 @@
           slug: security/acceptable-use-policy
         - title: AI use in Neon
           slug: security/ai-use-in-neon
+        - section: Data protection
+          items:
+            - title: IP Allow
+              slug: introduction/ip-allow
+            - title: Private Networking
+              slug: guides/neon-private-networking
+            - title: Protected branches
+              slug: guides/protected-branches
     - title: Plans & billing
       slug: introduction/about-billing
       icon: billing
@@ -1107,13 +1106,26 @@
         - section: Overview
           icon: info
           items:
-            - title: Integrating with Neon
+            - title: Integrating with Neon (embed Neon in your platform)
               slug: guides/platform-integration-overview
-        - section: OAuth integration
-          icon: lock
+        - section: AI-agent platforms
+          icon: ai-agent
           items:
-            - title: OAuth integration
-              slug: guides/oauth-integration
+            - title: Agent plan
+              slug: introduction/agent-plan
+            - title: AI Agent integration
+              slug: guides/ai-agent-integration
+            - title: Neon for Agent platforms
+              slug: https://neon.com/use-cases/ai-agents
+            - title: Database versioning
+              slug: ai/ai-database-versioning
+        - section: Claimable Postgres
+          icon: rocket
+          items:
+            - title: Claimable Postgres
+              slug: reference/claimable-postgres
+            - title: Claimable database integration
+              slug: workflows/claimable-database-integration
         - section: Embedded Postgres
           icon: import
           items:
@@ -1125,76 +1137,11 @@
               slug: guides/consumption-metrics
             - title: Query consumption metrics (legacy)
               slug: guides/consumption-metrics-legacy
-        - section: Claimable Postgres
-          icon: rocket
+        - section: Partner OAuth (supporting setup)
+          icon: lock
           items:
-            - title: Claimable Postgres
-              slug: reference/claimable-postgres
-        - section: Guides
-          icon: book
-          items:
-            - title: Claimable database integration
-              slug: workflows/claimable-database-integration
-    - title: AI agents on Neon
-      slug: ai/ai-agents-tools
-      icon: ai-agent
-      items:
-        - section: Neon for AI Agents
-          icon: ai-agent
-          items:
-            - title: Agent plan
-              slug: introduction/agent-plan
-            - title: AI Agent integration
-              slug: guides/ai-agent-integration
-        - title: AI for Agents
-          icon: ai-agent
-          slug: ai/ai-agents-tools
-          items:
-            - title: Overview
-              slug: ai/ai-agents-tools
-            - section: MCP integration
-              icon: api
-              items:
-                - title: Overview
-                  slug: ai/neon-mcp-server
-                - title: Connect MCP clients
-                  slug: ai/connect-mcp-clients-to-neon
-            - section: Agent Skills
-              icon: docs
-              items:
-                - title: Agent Skills
-                  slug: ai/agent-skills
-                - title: Claude Code plugin
-                  slug: ai/ai-claude-code-plugin
-                - title: Codex plugin
-                  slug: ai/ai-codex-plugin
-                - title: Cursor plugin
-                  slug: ai/ai-cursor-plugin
-                - title: GitHub Copilot agents
-                  slug: ai/ai-github-copilot-agents
-            - section: Build AI agents
-              icon: openai
-              items:
-                - title: Neon for Agent platforms
-                  slug: https://neon.com/use-cases/ai-agents
-                - title: Database versioning
-                  slug: ai/ai-database-versioning
-                - title: Neon API Reference
-                  slug: reference/api
-            - section: Agent frameworks
-              icon: frameworks
-              items:
-                - title: AgentStack
-                  slug: https://neon.com/guides/agentstack-neon
-                - title: AutoGen
-                  slug: https://neon.com/guides/autogen-neon
-                - title: Azure AI Agent Service
-                  slug: https://neon.com/guides/azure-ai-agent-service
-                - title: Composio + CrewAI
-                  slug: https://neon.com/guides/composio-crewai-neon
-                - title: LangGraph
-                  slug: https://neon.com/guides/langgraph-neon
-
+            - title: OAuth integration
+              slug: guides/oauth-integration
 - nav: Reference
   title: Reference
   icon: cli
@@ -1334,6 +1281,45 @@
       slug: guides/integrations
       icon: integrations
       items:
+        - title: AI tools & frameworks
+          icon: ai-agent
+          slug: ai/ai-agents-tools
+          items:
+            - title: Overview
+              slug: ai/ai-agents-tools
+            - section: MCP integration
+              icon: api
+              items:
+                - title: Overview
+                  slug: ai/neon-mcp-server
+                - title: Connect MCP clients
+                  slug: ai/connect-mcp-clients-to-neon
+            - section: Agent Skills & IDE plugins
+              icon: docs
+              items:
+                - title: Agent Skills
+                  slug: ai/agent-skills
+                - title: Claude Code plugin
+                  slug: ai/ai-claude-code-plugin
+                - title: Codex plugin
+                  slug: ai/ai-codex-plugin
+                - title: Cursor plugin
+                  slug: ai/ai-cursor-plugin
+                - title: GitHub Copilot agents
+                  slug: ai/ai-github-copilot-agents
+            - section: Agent frameworks
+              icon: frameworks
+              items:
+                - title: AgentStack
+                  slug: https://neon.com/guides/agentstack-neon
+                - title: AutoGen
+                  slug: https://neon.com/guides/autogen-neon
+                - title: Azure AI Agent Service
+                  slug: https://neon.com/guides/azure-ai-agent-service
+                - title: Composio + CrewAI
+                  slug: https://neon.com/guides/composio-crewai-neon
+                - title: LangGraph
+                  slug: https://neon.com/guides/langgraph-neon
         - title: Integrations (3rd party)
           icon: integrations
           slug: guides/integrations
