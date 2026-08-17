@@ -102,7 +102,7 @@ export default {
             {
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
-              description: 'Infra for app generation agents - used for Replit, v0, and others',
+              description: 'Infra for app generation agents - used by Replit, v0, and others',
               graphic: 'agents',
             },
             {
