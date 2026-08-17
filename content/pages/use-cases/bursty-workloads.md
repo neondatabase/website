@@ -26,7 +26,7 @@ The numbers on this page come from the [Neon compute autoscaling report](/autosc
 
 ## Buying for peak means paying for peak
 
-Database load is never flat. It follows the day, the week, and the batch jobs you scheduled. A typical production database peaks mid-day and drops overnight, drops further on weekends, and spikes whenever a migration, bulk export, or index build runs.
+Database load is never flat. A typical production database peaks mid-day and drops overnight, drops further on weekends, and spikes whenever a migration, bulk export, or index build runs.
 
 A provisioned database can't follow any of that. You pick a CPU and memory configuration when you create the instance, and that allocation is yours until someone changes it. So the sizing decision comes down to guessing the largest load you'll see and paying for it 24 hours a day.
 
@@ -46,7 +46,7 @@ The provisioned model assumes someone is watching. Traffic grows, an alert fires
 
 That loop was always slow. It's harder to justify now that a single agent-driven feature can multiply query volume overnight, that a product can get posted somewhere and go from hundreds of requests to hundreds of thousands in an afternoon, and that most teams don't have anyone whose job is to watch database metrics.
 
-What matters to you is narrower than a sizing strategy: queries stay fast when load arrives, and you stop paying when it leaves.
+What matters to you is narrower than a sizing strategy: queries stay fast when load arrives, and you stop paying when the need is no longer there.
 
 <QuoteBlock quote="Our database traffic peaks at nights and on weekends when thousands of our members are attending experiences. Building on a database that preemptively autoscales allows us to regularly handle these traffic spikes." author={{ name: 'Lex Nasser', company: 'Founding Engineer at 222' }} link="/blog/how-222-uses-neon-to-handle-their-frequent-spikes-in-demand" />
 
@@ -54,15 +54,13 @@ What matters to you is narrower than a sizing strategy: queries stay fast when l
 
 In a conventional Postgres setup, the process and its disk live on the same machine. Changing CPU or memory means moving to a different machine, which is why resizing is disruptive and why nobody does it often.
 
-Lakebase Postgres splits those halves apart. Compute is a stateless Postgres process. Storage is a separate distributed engine backed by object storage, and it holds your data independently of any compute. Because the compute doesn't own the data, it can be resized without moving anything.
+Lakebase Postgres, the Neon database built on the [lakebase architecture](https://neon.com/docs/introduction/architecture-overview), splits those halves apart. Compute is a stateless Postgres process; storage is a separate distributed engine backed by object storage, and it holds your data independently of any compute. Because the compute doesn't own the data, it can be resized without moving anything. 
 
-That's what makes the allocation continuous rather than a migration. Neon runs an autoscaling algorithm that watches CPU, memory, and cache pressure and adjusts the compute size within the range you set, in both directions, while connections stay open.
+Neon runs an autoscaling algorithm that watches CPU, memory, and cache pressure and adjusts the compute size within the range you set, in both directions, while connections stay open:
 
 ![A day of database compute usage with the autoscaling allocation tracking each spike in demand closely](/use-cases/bursty-workloads/autoscaling-matches-workload.jpg)
 
 The green is the compute Neon allocated. The blue is what the workload used. Allocation tracks the shape of the load instead of drawing a flat line above it, which is what removes both the waste and the ceiling at the same time.
-
-Compute is measured in Compute Units, where 1 CU is roughly 1 vCPU and 4 GB of RAM. You set a minimum and a maximum, and everything between them is handled for you. The average production database on Neon changes size 32,016 times per month, about once every 81 seconds.
 
 When the load goes away completely, compute can suspend. [Scale to zero](/docs/introduction/scale-to-zero) shuts the compute down after a period with no active connections and restarts it in around 350ms on the next one, which is what makes idle databases nearly free rather than a line item.
 
@@ -83,7 +81,7 @@ Neon ran the AWS rightsizing algorithm against the autoscaling history of every 
 
 <AutoscalingViz />
 
-Factoring in the price of each plan against a conservative $0.1/CU-hour for provisioned databases, that works out to roughly 50% lower compute cost. The gap widens for workloads at the extremes:
+Factoring in the price of each plan against a conservative price estimation for provisioned databases, that works out to roughly 50% lower compute cost. The gap widens for workloads at the extremes:
 
 - **55 degradations per month avoided** - The number of times the average production database scaled above what a P99.5 + 20% instance would have had available. On a provisioned platform each one is a slow query, a timeout, or a page
 - **4x less compute on read replicas** - Neon read replicas run their own compute against the same storage, so each one autoscales independently and costs 78% less than a provisioned replica
