@@ -183,7 +183,7 @@ Once the setup is complete:
 
 Before suggesting code or making edits, ensure:
 - The `package.json` contains `prisma` (dev), `@prisma/client` (prod), `@prisma/adapter-neon` (prod), and `tsx` (dev).
-- The `.env` file has both `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct(Unpooled)).
+- The `.env` file has both `DATABASE_URL` (pooled) and `DATABASE_URL_UNPOOLED` (direct (unpooled)).
 - The `prisma.config.ts` file exists and points to `DATABASE_URL_UNPOOLED`.
 - The `prisma/schema.prisma` does NOT have a `url` property in the datasource block.
 - The Prisma Client import uses the generated path: `./generated/prisma`.
