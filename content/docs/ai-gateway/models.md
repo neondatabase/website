@@ -114,6 +114,7 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
     {
       "id": "gpt-5-mini",
       "canonical_slug": "gpt-5-mini",
+      "enabled": true,
       "pricing": null,
       "per_request_limits": null,
       "context_length": null
@@ -123,6 +124,8 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
 ```
 
 `canonical_slug`, `pricing`, `per_request_limits`, and `context_length` are reserved OpenRouter-compatible fields. `pricing`, `per_request_limits`, and `context_length` are currently always `null`; use the tables earlier on this page for context window and model details in the meantime.
+
+`enabled` reflects whether your account can use that model. It's currently always `true` while per-account access verification is off.
 
 ## Provider terms
 
