@@ -7,7 +7,7 @@ summary: >-
   Use short model IDs like gpt-5-mini or gemini-3-flash. The databricks- prefix
   is also accepted.
 enableTableOfContents: true
-updatedOn: '2026-08-07T14:53:45.186Z'
+updatedOn: '2026-08-17T22:56:05.062Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -114,15 +114,47 @@ curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
     {
       "id": "gpt-5-mini",
       "canonical_slug": "gpt-5-mini",
+      "name": "GPT-5 Mini",
+      "object": "model",
+      "owned_by": "openai",
+      "created": 0,
+      "enabled": true,
+      "context_length": null,
+      "architecture": {
+        "modality": "text->text",
+        "input_modalities": ["text"],
+        "output_modalities": ["text"],
+        "tokenizer": "GPT",
+        "instruct_type": null
+      },
+      "top_provider": {
+        "is_moderated": false,
+        "context_length": null,
+        "max_completion_tokens": null
+      },
       "pricing": null,
-      "per_request_limits": null,
-      "context_length": null
+      "per_request_limits": null
     }
   ]
 }
 ```
 
-`canonical_slug`, `pricing`, `per_request_limits`, and `context_length` are reserved OpenRouter-compatible fields. `pricing`, `per_request_limits`, and `context_length` are currently always `null`; use the tables earlier on this page for context window and model details in the meantime.
+The response returns one object per model. Key fields:
+
+- `enabled` is whether your account can call the model. If `false`, a request returns a `403` (see [Troubleshooting](/docs/ai-gateway/troubleshooting#403-model-requires-a-verified-account)). Gated models are sometimes left out of the list entirely, so use `enabled: true` as your check. To request access to more models, see [Foundation model access](/docs/ai-gateway/overview#foundation-model-access).
+- `id`, `name`, and `owned_by` identify the model. Use `id` (or its `databricks-` prefixed form) in the `model` field of a request.
+- `canonical_slug`, `architecture`, and `top_provider` are OpenRouter-compatible descriptive fields.
+- `created` is always `0`, and `pricing`, `per_request_limits`, and `context_length` are currently always `null`. Use the tables earlier on this page for context windows and model details.
+
+### Check what your account can call
+
+To list only the models your account can call, filter on `enabled`:
+
+```bash shouldWrap
+curl "$NEON_AI_GATEWAY_BASE_URL/v1/models" \
+  -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
+  | jq -r '.data[] | select(.enabled) | .id'
+```
 
 ## Provider terms
 
