@@ -2304,13 +2304,63 @@ const defaultConfig = {
       },
       {
         source: '/launchpad',
-        destination: 'https://neon.new',
+        destination: '/claimable-postgres',
         permanent: false,
       },
       {
         source: '/instagres',
-        destination: 'https://neon.new',
+        destination: '/claimable-postgres',
         permanent: false,
+      },
+      {
+        source: '/docs/ai/skills/claimable-postgres',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/claimable-postgres/:path*',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/claimable-postgres',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/claimable-postgres/:path*',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/claimable-postgres',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/claimable-postgres/:path*',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/claimable-postgres',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/claimable-postgres/:path*',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/claimable-postgres',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/claimable-postgres/:path*',
+        destination: '/docs/reference/claimable-postgres',
+        permanent: true,
       },
       {
         source: '/docs/local/neon-local-vscode',

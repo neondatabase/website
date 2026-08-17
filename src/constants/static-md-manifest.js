@@ -4,7 +4,6 @@
 
 export const STATIC_MD_PATHS = [
   '/agentic-provisioning-llm-context.md',
-  '/docs/ai/skills/claimable-postgres/SKILL.md',
   '/docs/ai/skills/neon-ai-gateway/SKILL.md',
   '/docs/ai/skills/neon-functions/SKILL.md',
   '/docs/ai/skills/neon-functions/references/ai-sdk.md',
