@@ -141,7 +141,7 @@ neon deploy
 
 That provisions credentials and pulls them into `.env` as `NEON_AI_GATEWAY_TOKEN` and `NEON_AI_GATEWAY_BASE_URL`.
 
-(Or create a credential in the Console under APP BACKEND → Credentials, check `ai_gateway:invoke`, and copy the snippet once.)
+(Or create a credential in the Console under Branch → Credentials, check `ai_gateway:invoke`, and copy the snippet once.)
 
 Then point the SDK you already use at Neon:
 
