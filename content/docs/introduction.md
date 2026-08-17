@@ -97,6 +97,8 @@ Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-start
 
 <a href="/docs/guides/java" title="Java" icon="java"></a>
 
+<a href="/docs/guides/kotlin" title="Kotlin" icon="kotlin"></a>
+
 <a href="/docs/guides/rust" title="Rust" icon="rust"></a>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" icon="dotnet"></a>

@@ -91,6 +91,8 @@
               slug: guides/java
             - title: JavaScript
               slug: guides/javascript
+            - title: Kotlin
+              slug: guides/kotlin
             - title: Python
               slug: guides/python
             - title: Rust

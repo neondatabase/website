@@ -39,6 +39,7 @@ export const STATIC_MD_PATHS = [
   '/prompts/hono-prompt.md',
   '/prompts/java-prompt.md',
   '/prompts/javascript-prompt.md',
+  '/prompts/kotlin-prompt.md',
   '/prompts/kysely-prompt.md',
   '/prompts/laravel-prompt.md',
   '/prompts/micronaut-kotlin-prompt.md',
