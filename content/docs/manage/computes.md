@@ -1,12 +1,14 @@
 ---
 title: Manage computes
 summary: >-
-  Covers the management of computes in Neon, detailing how to connect
-  applications to Postgres databases via primary and read replica computes,
-  along with viewing and editing compute details in the Neon Console.
+  Neon computes are virtualized Postgres instances attached to branches,
+  available as primary read-write or read-replica types. Use this page to
+  create, resize, or delete a compute, configure autoscaling or scale-to-zero,
+  size your compute based on working set and connection limits, or manage
+  compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -143,47 +145,47 @@ For information about monitoring your compute as it scales up and down, see [Mon
 
 The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues.
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) and Neon also uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 75% of your compute's RAM.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, up to 75% of your compute's RAM is used for data caching.
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration.
 
-The following table outlines the RAM, LFC size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+The following table outlines the RAM, compute cache size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
 Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
 </Admonition>
 
-| Compute Size (CU) | RAM (GB) | LFC size (GB) | max_connections |
-| :---------------- | :------- | :------------ | :-------------- |
-| 0.25              | 1        | 0.75          | 104             |
-| 0.50              | 2        | 1.5           | 209             |
-| 1                 | 4        | 3             | 419             |
-| 2                 | 8        | 6             | 839             |
-| 3                 | 12       | 9             | 1258            |
-| 4                 | 16       | 12            | 1678            |
-| 5                 | 20       | 15            | 2098            |
-| 6                 | 24       | 18            | 2517            |
-| 7                 | 28       | 21            | 2937            |
-| 8                 | 32       | 24            | 3357            |
-| 9                 | 36       | 27            | 4000            |
-| 10                | 40       | 30            | 4000            |
-| 11                | 44       | 33            | 4000            |
-| 12                | 48       | 36            | 4000            |
-| 13                | 52       | 39            | 4000            |
-| 14                | 56       | 42            | 4000            |
-| 15                | 60       | 45            | 4000            |
-| 16                | 64       | 48            | 4000            |
-| 18                | 72       | 54            | 4000            |
-| 20                | 80       | 60            | 4000            |
-| 22                | 88       | 66            | 4000            |
-| 24                | 96       | 72            | 4000            |
-| 26                | 104      | 78            | 4000            |
-| 28                | 112      | 84            | 4000            |
-| 30                | 120      | 90            | 4000            |
-| 32                | 128      | 96            | 4000            |
-| 34                | 136      | 102           | 4000            |
-| 36                | 144      | 108           | 4000            |
-| 38                | 152      | 114           | 4000            |
+| Compute Size (CU) | RAM (GB) | Compute cache size (GB) | max_connections |
+| :---------------- | :------- | :---------------------- | :-------------- |
+| 0.25              | 1        | 0.75                    | 104             |
+| 0.50              | 2        | 1.5                     | 209             |
+| 1                 | 4        | 3                       | 419             |
+| 2                 | 8        | 6                       | 839             |
+| 3                 | 12       | 9                       | 1258            |
+| 4                 | 16       | 12                      | 1678            |
+| 5                 | 20       | 15                      | 2098            |
+| 6                 | 24       | 18                      | 2517            |
+| 7                 | 28       | 21                      | 2937            |
+| 8                 | 32       | 24                      | 3357            |
+| 9                 | 36       | 27                      | 4000            |
+| 10                | 40       | 30                      | 4000            |
+| 11                | 44       | 33                      | 4000            |
+| 12                | 48       | 36                      | 4000            |
+| 13                | 52       | 39                      | 4000            |
+| 14                | 56       | 42                      | 4000            |
+| 15                | 60       | 45                      | 4000            |
+| 16                | 64       | 48                      | 4000            |
+| 18                | 72       | 54                      | 4000            |
+| 20                | 80       | 60                      | 4000            |
+| 22                | 88       | 66                      | 4000            |
+| 24                | 96       | 72                      | 4000            |
+| 26                | 104      | 78                      | 4000            |
+| 28                | 112      | 84                      | 4000            |
+| 30                | 120      | 90                      | 4000            |
+| 32                | 128      | 96                      | 4000            |
+| 34                | 136      | 102                     | 4000            |
+| 36                | 144      | 108                     | 4000            |
+| 38                | 152      | 114                     | 4000            |
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
@@ -191,14 +193,14 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 #### Sizing your compute based on the working set
 
-If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from Neon storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
+If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from database storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
 
-As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. You can monitor the Local File Cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
+You can monitor your compute cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
 
-- [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate)
+- [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate)
 - [Working set size](/docs/introduction/monitoring-page#working-set-size)
 
-Neon also provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view that you can use to query the cache hit ratio for your compute's Local File Cache. For more information, see [The neon extension](/docs/extensions/neon).
+Neon also provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view that you can use to query the cache hit ratio for your compute. For more information, see [The neon extension](/docs/extensions/neon).
 
 #### Autoscaling considerations
 
@@ -241,7 +243,7 @@ You can restart a compute using these methods:
 
 - Use the **Restart compute** option in the Neon console. Navigate to the **Branches** page from your project dashboard, and select a branch. On the Computes tab, select **Restart compute** from the menu.
   ![Restart a compute in the console](/docs/manage/restart_compute.png)
-- Issue a [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
+- Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
 
   ```bash
   curl --request POST \
@@ -251,7 +253,7 @@ You can restart a compute using these methods:
   ```
 
   <Admonition type="note">
-  The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. 
+  The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API. 
   </Admonition>
 
 - Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
@@ -269,10 +271,10 @@ To delete a compute:
 
 ## Manage computes with the Neon API
 
-Compute actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). The following examples demonstrate how to create, view, update, and delete computes using the Neon API. For other compute-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Compute actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). The following examples demonstrate how to create, view, update, and delete computes using the Neon API. For other compute-related API methods, refer to the [Neon API Reference](/docs/reference/api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -309,7 +311,7 @@ curl -X 'POST' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Create compute](https://api-docs.neon.tech/reference/createprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -357,7 +359,7 @@ For attribute definitions, find the [Create compute](https://api-docs.neon.tech/
 
 ### List computes with the API
 
-The following Neon API method lists computes for the specified project. A compute belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectendpoints).
+The following Neon API method lists computes for the specified project. A compute belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/list-project-endpoints).
 
 ```http
 GET /projects/{project_id}/endpoints
@@ -375,7 +377,7 @@ curl -X 'GET' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [List computes](https://api-docs.neon.tech/reference/listprojectendpoints) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List computes](/docs/reference/api/endpoints/list-project-endpoints) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -436,7 +438,7 @@ For attribute definitions, find the [List computes](https://api-docs.neon.tech/r
 
 ### Update a compute with the API
 
-The following Neon API method updates the specified compute. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectendpoint).
+The following Neon API method updates the specified compute. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/update-project-endpoint).
 
 ```http
 PATCH /projects/{project_id}/endpoints/{endpoint_id}
@@ -460,7 +462,7 @@ curl -X 'PATCH' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Update compute](https://api-docs.neon.tech/reference/updateprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Update compute](/docs/reference/api/endpoints/update-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -496,7 +498,7 @@ For attribute definitions, find the [Update compute](https://api-docs.neon.tech/
 
 ### Delete a compute with the API
 
-The following Neon API method deletes the specified compute. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectendpoint).
+The following Neon API method deletes the specified compute. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/delete-project-endpoint).
 
 ```http
 DELETE /projects/{project_id}/endpoints/{endpoint_id}
@@ -514,7 +516,7 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Delete compute](https://api-docs.neon.tech/reference/deleteprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete compute](/docs/reference/api/endpoints/delete-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {

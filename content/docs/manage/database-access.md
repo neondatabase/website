@@ -2,13 +2,16 @@
 title: Manage database access
 subtitle: Learn how to manage user access to databases in your Neon project
 summary: >-
-  Covers the management of user access to databases in Neon projects, including
-  creating roles with specific permissions, assigning roles to users, and
-  implementing a least privilege model for database access.
+  Database access control in Neon uses Postgres roles to separate
+  administrative neon_superuser privileges from least-privilege read-only,
+  read-write, and developer roles scoped to specific databases and schemas.
+  Use this page for SQL statements covering CREATE ROLE, GRANT, ALTER DEFAULT
+  PRIVILEGES, and REVOKE. Includes guidance on revoking public schema defaults,
+  which differ between Postgres 14 and Postgres 15+.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access
-updatedOn: '2026-02-15T20:51:54.231Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`.

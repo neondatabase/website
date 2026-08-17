@@ -3,11 +3,13 @@ title: Reduce network transfer costs
 subtitle: Monitor and reduce data egress costs
 enableTableOfContents: true
 summary: >-
-  Covers the monitoring and reduction of network transfer (egress) costs in
-  Neon, including the egress optimizer agent skill, public and private transfer
-  types, common causes of high usage, Console and API monitoring, and strategies
-  to reduce transfer.
-updatedOn: '2026-03-16T10:19:48.546Z'
+  Network transfer (egress) in Neon counts all outbound data through the Neon
+  proxy, with per-plan monthly allowances and overage rates. Use this page to
+  diagnose high egress costs from large result sets, pg_dump exports, or logical
+  replication syncs, and to monitor usage via the Console or Consumption API.
+  Reduction strategies include scoping SELECT columns, using Neon snapshots,
+  adding replication filters, and routing traffic over Private Link.
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
@@ -20,7 +22,7 @@ There are two types of network transfer:
 
 - **Public network transfer**: Data sent over the public internet. [Logical replication](/docs/guides/logical-replication-neon) to any destination counts as public network transfer.
   - **Free plan**: 5 GB/month included. Exceeding this suspends your compute until the next billing cycle or you upgrade.
-  - **Launch / Scale plans**: 100 GB/month included, then $0.10/GB.
+  - **Launch / Scale plans**: 500 GB per project per month included, then $0.10/GB.
 - **Private network transfer**: Traffic routed over AWS PrivateLink. Available on the Scale plan only. Billed at $0.01/GB, bi-directional. Unlike public network transfer, which only counts outbound data, private network transfer counts traffic in both directions: data sent from your database to clients and data sent from clients to your database.
 
 In the Console, these appear as **Public network transfer** and **Private network transfer**. In the Consumption API, the fields are `public_network_transfer_bytes` and `private_network_transfer_bytes`. In project and branch detail API responses, the combined field is `data_transfer_bytes`.
@@ -65,7 +67,7 @@ Navigate to **Organization > Billing** to see **Public network transfer** and **
 On the Free plan? Skip to [Project and branch detail APIs](#project-and-branch-detail-apis) for an API option available on all plans.
 </Admonition>
 
-The [`/consumption_history/v2/projects`](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) endpoint provides programmatic access to network transfer metrics on paid plans.
+The [`/consumption_history/v2/projects`](/docs/reference/api/consumption/get-consumption-history-per-project-v2) endpoint provides programmatic access to network transfer metrics on paid plans.
 
 It supports three granularity levels:
 
@@ -143,7 +145,7 @@ For full details on parameters, pagination, and polling, see [Querying consumpti
 
 ### Project and branch detail APIs
 
-The `data_transfer_bytes` field on the [Get project details](https://api-docs.neon.tech/reference/getproject) and [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) endpoints returns a running total of network transfer for the current billing period. Unlike the [Consumption API](#consumption-api-for-paid-plans), which provides time-windowed breakdowns, this value resets at the start of each billing cycle and is not broken down by hour or day. These endpoints are available on all plans.
+The `data_transfer_bytes` field on the [Get project details](/docs/reference/api/projects/get-project) and [Get branch details](/docs/reference/api/branches/get-project-branch) endpoints returns a running total of network transfer for the current billing period. Unlike the [Consumption API](#consumption-api-for-paid-plans), which provides time-windowed breakdowns, this value resets at the start of each billing cycle and is not broken down by hour or day. These endpoints are available on all plans.
 
 **Get project details:**
 
@@ -272,7 +274,7 @@ LIMIT 10;
 In Neon, [scaling to zero](/docs/introduction/scale-to-zero) clears [`pg_stat_statements`](/docs/extensions/pg_stat_statements) data, so computes that recently woke up already have fresh statistics. For long-running computes, run `SELECT pg_stat_statements_reset();` to start a clean measurement window. This cannot be undone and resets stats for all database roles.
 </Admonition>
 
-For wire-level analysis of exact message sizes, see [Elephantshark](https://neon.com/blog/elephantshark-monitor-postgres-network-traffic), an open-source Postgres traffic monitor from Neon.
+For wire-level analysis of exact message sizes, see [Elephantshark](/blog/elephantshark-monitor-postgres-network-traffic), an open-source Postgres traffic monitor from Neon.
 
 ## How to reduce network transfer
 

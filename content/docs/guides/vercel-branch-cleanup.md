@@ -3,11 +3,16 @@ title: Managing Vercel preview branch cleanup
 subtitle: Understand cleanup timing and reduce branch accumulation for the
   Vercel-Managed integration
 summary: >-
-  Explains why Neon preview branches may not be deleted promptly when using the
-  Vercel-Managed integration, how to reduce Vercel's deployment retention
-  policy, and workarounds for immediate cleanup.
+  Neon preview branch cleanup in the Vercel-Managed integration is triggered by
+  Vercel deployment deletion, not Git branch deletion, so branches can persist
+  up to 6 months under Vercel's default retention policy. To clean up sooner,
+  lower Vercel's pre-production retention period, delete deployments manually
+  via the Vercel CLI or API, or add a GitHub Action using
+  neondatabase/delete-branch-action that fires on pull_request closed events.
+  Stale branches count toward plan branch limits and incur storage costs even
+  after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-03-20T16:01:10.989Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <InfoBlock>
@@ -135,7 +140,7 @@ For more GitHub Actions branching workflows, see [Automate branching with GitHub
 
 ### Neon CLI or API
 
-You can also delete branches programmatically using the [Neon CLI](/docs/reference/cli-branches#delete) or the [Neon API](/docs/manage/branches#delete-a-branch-with-the-api). This is useful for building custom automation or scheduled cleanup scripts.
+You can also delete branches programmatically using the [Neon CLI](/docs/cli/branches#delete) or the [Neon API](/docs/manage/branches#delete-a-branch-with-the-api). This is useful for building custom automation or scheduled cleanup scripts.
 
 ### Branch expiration
 
@@ -156,7 +161,7 @@ This shows all branches with their names, states, and creation dates. Look for b
 To remove stale branches:
 
 - **Neon Console**: Go to the **Branches** page and delete branches individually
-- **Neon CLI**: Use `neon branches delete <branch-id-or-name>` to remove specific branches. See [CLI branches reference](/docs/reference/cli-branches#delete).
+- **Neon CLI**: Use `neon branches delete <branch-id-or-name>` to remove specific branches. See [CLI branches reference](/docs/cli/branches#delete).
 - **Neon API**: Use `DELETE /projects/{project_id}/branches/{branch_id}`. See [Delete a branch with the API](/docs/manage/branches#delete-a-branch-with-the-api).
 
 ---

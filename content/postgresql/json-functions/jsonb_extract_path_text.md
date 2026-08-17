@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_extract_path_text/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_extract_path() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `jsonb_extract_path_text()` function works the same way on any PostgreSQL deployment, so you can apply what you learn here wherever you run Postgres. If you're an enterprise navigating the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated with the Lakehouse so your operational and analytical data stay in sync. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the most flexible Postgres platform with instant branching, autoscaling, and a generous free tier.
+The `jsonb_extract_path_text()` function works the same way on any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_extract_path_text()` function to extract a JSON subobject at the specified path.

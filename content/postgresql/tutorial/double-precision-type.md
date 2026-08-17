@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-double-precision-type/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL NUMERIC Type
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DOUBLE PRECISION type behaves the same across any PostgreSQL deployment, so what you learn here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse so your analytical and operational data live side by side. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform around, with instant provisioning, branching, and autoscaling built in.
+The DOUBLE PRECISION type behaves the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `DOUBLE PRECISION` data type and its features.
@@ -45,9 +45,9 @@ Alternatively, you can use the `float8` or `float` data type which is the same a
 column_name float
 ```
 
-A column of `DOUBLE PRECISION` type can store values that have a range around `1E-307` to `1E+308` with a precision of at least 15 digits.
+A column of `DOUBLE PRECISION` type can store values that have a range between `1E-307` to `1E+308` with a precision of at least 15 digits.
 
-If you store a value that is out of the range, PostgreSQL will be unable to store it and raise an error.
+If you store a value that is out of range, PostgreSQL will be unable to store it and raise an error.
 
 If you store numbers with very high precision, PostgreSQL may round them to fit within the limitation of double precision. This may potentially lose some precision in the calculation.
 
@@ -152,7 +152,7 @@ Output:
 
 The output indicates that the sum of `0.1`, `0.1`, and `0.1` is not `0.3` but `0.30000000000000004`. This indicates that PostgreSQL cannot store the exact number `0.1` using the `DOUBLE PRECISION` type.
 
-### 2\) Inserting too small numbers
+### 3\) Inserting too small numbers
 
 The following statement attempts to [insert](postgresql-insert) a very small number into the `c` column of the `t` table:
 

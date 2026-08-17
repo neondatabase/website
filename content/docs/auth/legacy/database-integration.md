@@ -2,19 +2,25 @@
 title: Legacy Neon Auth - Database Integration
 subtitle: 'Technical reference for users_sync table, backend auth, and RLS'
 summary: >-
-  Covers how to use the `neon_auth.users_sync` table for user data
-  synchronization, authenticate backend requests, and implement Row-Level
-  Security (RLS) within the Legacy Neon Auth framework.
+  The legacy Neon Auth `neon_auth.users_sync` table is automatically created
+  and kept in sync with your Stack Auth provider, so you can query user data
+  and add foreign keys without building custom webhook handlers. This reference
+  covers foreign key patterns (CASCADE vs SET NULL), Row-Level Security setup
+  using a Stack Auth JWKS URL, and backend token verification via JWT or the
+  Stack Auth REST API in Node.js and Python. Legacy Neon Auth is no longer
+  available for new projects; new projects should use Neon Auth with
+  Better Auth.
 enableTableOfContents: true
 tag: archived
+tagTheme: gray
 noindex: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
 **This is the documentation for the previous Neon Auth implementation built with Stack Auth.** It is no longer available for new projects but remains supported for existing users.
 
-**For the new Neon Auth built with Better Auth**, see [Neon Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
+**For the current Managed Better Auth**, see [Managed Better Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
 </Admonition>
 
 This guide covers how to work with the `neon_auth.users_sync` table, authenticate backend requests, and implement Row-Level Security (RLS) with Legacy Neon Auth.
@@ -268,7 +274,7 @@ print('User is not authenticated', response.status_code, response.text)
 ### Legacy Neon Auth
 
 - [Legacy Overview](/docs/auth/legacy/overview) - What is Legacy Neon Auth, claiming projects, environment variables
-- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Neon Auth with Better Auth
+- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Managed Better Auth
 
 ### Stack Auth documentation
 
@@ -280,6 +286,6 @@ For SDK components, hooks, and OAuth configuration:
 
 - [Secure your app with RLS](/docs/guides/rls-tutorial) - RLS tutorial
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle) - RLS with Drizzle ORM
-- [Neon Auth](/docs/auth/overview) - Current Neon Auth with Better Auth
+- [Neon Auth](/docs/auth/overview) - Current Managed Better Auth
 
 <NeedHelp/>

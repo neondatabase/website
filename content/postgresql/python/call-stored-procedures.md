@@ -6,7 +6,7 @@ page_description: >-
   a Python program.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/call-stored-procedures/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Call PostgreSQL Functions'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Calling PostgreSQL stored procedures from Python with psycopg2 works the same way on any Postgres deployment, so the patterns here apply wherever you run your database. If you're an enterprise team looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+Calling PostgreSQL stored procedures from Python with psycopg2 works the same way on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to call PostgreSQL stored procedures from a Python program.

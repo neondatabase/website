@@ -1,12 +1,16 @@
 ---
 title: Datadog integration
-subtitle: Send metrics and logs from Neon Postgres to Datadog
+subtitle: Send metrics and logs from Lakebase Postgres on Neon to Datadog
 summary: >-
-  Covers the setup of the Datadog integration for Neon, enabling the export of
-  metrics and Postgres logs to monitor database performance and resource
-  utilization directly within Datadog's observability platform.
+  The Neon Datadog integration exports Postgres metrics and logs from all
+  project computes to Datadog, available on Scale plan projects. Use this page
+  to set up monitoring of CPU, memory, connection counts, replication lag,
+  database size, deadlocks, and PgBouncer stats, or to forward Postgres logs for
+  error and activity visibility. Postgres log export is a preview feature.
+  Log transmission counts toward network egress billed after 500 GB per project
+  on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.945Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 <InfoBlock>
@@ -518,7 +522,7 @@ If any of the computes in your project are active, you should start seeing data 
     {
       "id": 630770240665422,
       "definition": {
-        "title": "Local file cache hit rate",
+        "title": "Compute cache hit rate",
         "title_size": "16",
         "title_align": "left",
         "show_legend": true,
@@ -597,7 +601,7 @@ If any of the computes in your project are active, you should start seeing data 
           {
             "formulas": [
               {
-                "alias": "Local file cache size",
+                "alias": "Compute cache size",
                 "number_format": {
                   "unit": {
                     "type": "canonical_unit",
@@ -687,7 +691,7 @@ You can export your Postgres logs from your Neon compute to your Datadog account
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission, which is billed after 100 GB on paid plans
+- Additional network egress for log transmission, which is billed after 500 GB per project on paid plans
 - Associated costs based on log volume in Datadog
 
 ## Feedback and future improvements

@@ -2,16 +2,18 @@
 title: Password reset
 subtitle: Allow users to reset forgotten passwords
 summary: >-
-  Covers the setup of password reset functionality in Neon Auth, including
-  enabling email authentication and using pre-built UI components for user
-  password recovery.
+  Managed Better Auth password reset sends a verification link to the user's email and
+  requires email authentication to be enabled in project Settings. The pre-built
+  `<ForgotPasswordForm>` and `<ResetPasswordForm>` components handle the full
+  forgot-password flow; reset links expire after 15 minutes, and the SDK
+  `resetPasswordForEmail` method is not yet supported.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Password reset allows users to securely reset forgotten passwords. Neon Auth supports password reset via verification links sent to the user's email address.
+Password reset allows users to securely reset forgotten passwords. Managed Better Auth supports password reset via verification links sent to the user's email address.
 
 ## Enable password reset
 
@@ -100,4 +102,5 @@ Password reset links expire after **15 minutes**. If a link expires, users need 
 ## Next steps
 
 - [Add email verification](/docs/auth/guides/email-verification) to ensure users own their email addresses
+- [Customize the application name](/docs/auth/production-checklist#application-name) shown in password reset emails
 - [Learn how to branch your auth](/docs/auth/branching-authentication) to use database branches with isolated auth environments

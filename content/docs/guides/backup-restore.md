@@ -2,16 +2,21 @@
 title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 summary: >-
-  Covers the process of using the Backup & Restore feature in Neon to instantly
-  restore branches to previous states, create and manage snapshots, and schedule
-  automated backups for data recovery.
+  Neon's Backup & Restore feature combines instant point-in-time restore (PITR)
+  and snapshots to recover a branch from accidental changes, schema issues, or
+  data loss. Use it when you need to roll back a root branch to a specific
+  timestamp or LSN, create manual snapshots before risky changes, or schedule
+  automated daily, weekly, or monthly backups. Snapshot storage is billed at
+  $0.09/GB-month. Scheduled snapshots do not count toward the manual snapshot
+  limit.
 tag: new
+tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-04-17T11:58:10.000Z'
+updatedOn: '2026-08-05T22:15:40.109Z'
 ---
 
-<Admonition type="note" title="Snapshots in Beta">
-The **Snapshots** feature is in Beta and available to all users. Manual snapshot limits: 1 on the Free plan and 10 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+<Admonition type="note" title="Snapshots">
+The **Snapshots** feature is available to all users. Manual snapshot limits: 1 on the Free plan and 100 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
 **Pricing:** Snapshot storage is billed at $0.09/GB-month.
 
@@ -21,6 +26,8 @@ Billing behavior: manual snapshots are charged as full snapshots. Scheduled snap
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
 
 The **Enhanced view** toggle in the Neon Console lets you access the Backup & Restore page with snapshot capabilities. When enabled, you can create and manage snapshots alongside instant point-in-time restore. Toggle it off to return to the original Restore page if needed.
+
+You can also manage snapshots from the terminal with the Neon CLI. For every subcommand, flag, and default, see the [snapshots](/docs/cli/snapshots) CLI reference.
 
 ![Backup and restore UI](/docs/guides/backup_restore_ui.png)
 
@@ -46,7 +53,7 @@ Instantly restore your branch to a specific time in its history.
 
 <TabItem>
 
-You can restore from any time that falls within your project's [restore window](/docs/introduction/restore-window).
+You can restore from any time that falls within your project's [history window](/docs/introduction/history-window).
 
 1. **Select a time**
 
@@ -93,7 +100,7 @@ neon branches restore development ^self@2025-01-01T00:00:00Z --preserve-under-na
 
 This command resets the target branch `development` to its state at the start of 2025. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
-For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
+For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
 
 </TabItem>
 
@@ -141,7 +148,7 @@ curl --request POST \
 
 Snapshots capture the state of your branch at a point in time. You can create snapshots manually (on root branches only). You can restore to these snapshots from any branch in your project.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -153,28 +160,87 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
+Use the [snapshots create](/docs/cli/snapshots#create) command to snapshot a branch. By default, it captures the head of the branch:
 
 ```bash
-curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
-  -H "Content-Type: application/json" \
-  -H 'authorization: Bearer $NEON_API_KEY' \
-  -d '{
-    "timestamp": "2025-07-29T21:00:00Z",
-    "name": "my_snapshot",
-    "expires_at": "2025-08-05T22:00:00Z"
-  }' |jq
+neon snapshots create --branch main --name pre-migration
+```
+
+To capture an earlier point within the branch's [history window](/docs/introduction/history-window), pass `--timestamp` or `--lsn`. The two options are mutually exclusive.
+
+```bash
+neon snapshots create --branch main --timestamp 2025-07-29T21:00:00Z
+```
+
+Use `--expires-at` to have the snapshot deleted automatically. It must be a future time. Omit it to keep the snapshot until you delete it.
+
+```bash
+neon snapshots create --branch main --name pre-upgrade --expires-at 2027-08-05T22:00:00Z
+```
+
+Both options use RFC 3339 format. Snapshot names must be unique within a project.
+
+#### Update a snapshot's expiration
+
+Use [snapshots update](/docs/cli/snapshots#update) to change a snapshot's expiration after it's created, or `--clear-expiration` to remove the expiration so it never expires:
+
+```bash
+neon snapshots update snap-1234 --expires-at 2027-12-31T00:00:00Z
+```
+
+```bash
+neon snapshots update snap-1234 --clear-expiration
+```
+
+#### List and inspect snapshots
+
+```bash
+neon snapshots list
+```
+
+```bash
+neon snapshots get snap-1234
+```
+
+For all subcommands and flags, see the [snapshots](/docs/cli/snapshots) CLI reference.
+
+</TabItem>
+
+<TabItem>
+
+You can create a snapshot from a branch using the [Create snapshot](/docs/reference/api/snapshots/create-snapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/introduction/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
+
+This endpoint takes its parameters in the query string. It has no request body, and a body you send is ignored without an error.
+
+```bash shouldWrap
+curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot?name=my_snapshot&timestamp=2025-07-29T21:00:00Z&expires_at=2027-08-05T22:00:00Z" \
+  -H 'authorization: Bearer $NEON_API_KEY' |jq
 ```
 
 The parameters used in the example above:
 
 - `timestamp`: A point in time to create the snapshot from (RFC 3339 format).
 - `name`: A user-defined name for the snapshot.
-- `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format).
+- `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format). Omit it to keep the snapshot until you delete it. Manual snapshots have no maximum expiration.
+
+#### Update a snapshot's expiration
+
+You can change a snapshot's expiration after it is created using the [Update snapshot](/docs/reference/api/snapshots/update-snapshot) endpoint. Set `expires_at` to a future timestamp to extend or change the retention deadline, or send `null` to clear it so the snapshot never expires. Omit the field to leave the expiration unchanged.
+
+```bash
+curl -X PATCH "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id" \
+  -H "Content-Type: application/json" \
+  -H 'authorization: Bearer $NEON_API_KEY' \
+  -d '{
+    "snapshot": {
+      "expires_at": "2026-12-31T00:00:00Z"
+    }
+  }' |jq
+```
 
 ### Snapshot size fields in API responses
 
-Responses from the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot), [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots), and [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot) endpoints include a `snapshot` object that may contain optional **`full_size`** and **`diff_size`** (both **`int64`**, size in bytes).
+Responses from the [Create snapshot](/docs/reference/api/snapshots/create-snapshot), [List project snapshots](/docs/reference/api/snapshots/list-snapshots), and [Update snapshot](/docs/reference/api/snapshots/update-snapshot) endpoints include a `snapshot` object that may contain optional **`full_size`** and **`diff_size`** (both **`int64`**, size in bytes).
 
 #### Manual and scheduled snapshots
 
@@ -189,14 +255,14 @@ Full logical size of the snapshot in bytes at the time it was taken. When the fi
 
 Incremental storage size in bytes since the **previous scheduled snapshot**, when the snapshot is billed on **incremental (diff)** usage. When **absent**, either the incremental size has not been calculated yet and the snapshot is **not** being charged, or the snapshot is charged at **full logical size** (in that case **`full_size`** is set).
 
-Depending on billing mode and whether sizes have finished calculating, either field may be omitted. For parameter-level definitions, see each endpoint in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Depending on billing mode and whether sizes have finished calculating, either field may be omitted. For parameter-level definitions, see each endpoint in the [Neon API Reference](/docs/reference/api).
 
 **Related API references:**
 
-- [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot)
-- [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots)
-- [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot)
-- [Delete snapshot](https://api-docs.neon.tech/reference/deletesnapshot)
+- [Create snapshot](/docs/reference/api/snapshots/create-snapshot)
+- [List project snapshots](/docs/reference/api/snapshots/list-snapshots)
+- [Update snapshot](/docs/reference/api/snapshots/update-snapshot)
+- [Delete snapshot](/docs/reference/api/snapshots/delete-snapshot)
 
 </TabItem>
 
@@ -206,7 +272,7 @@ Depending on billing mode and whether sizes have finished calculating, either fi
 
 Schedule automated snapshots to run at regular intervals (daily, weekly, or monthly) to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -238,11 +304,49 @@ Once configured, snapshots created by the backup schedule will appear on the **B
 
 <TabItem>
 
-You can view and set backup schedules for branches using the Neon API. For complete API documentation, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Use [snapshots schedule set](/docs/cli/snapshots#schedule-set) to set a branch's schedule. Pick a `--frequency`, then set the companion flags it requires:
+
+| `--frequency` | Also required     | `--day` range       |
+| ------------- | ----------------- | ------------------- |
+| `daily`       | `--hour` (0-23)   | not used            |
+| `weekly`      | `--day`, `--hour` | 1-7 (Monday-Sunday) |
+| `monthly`     | `--day`, `--hour` | 1-31                |
+
+Set a daily snapshot at 23:00 UTC, kept for 7 days:
+
+```bash
+neon snapshots schedule set --branch main --frequency daily --hour 23 --retention 604800
+```
+
+Set a weekly snapshot on Mondays at 04:00:
+
+```bash
+neon snapshots schedule set --branch main --frequency weekly --day 1 --hour 4
+```
+
+For a multi-entry schedule, pass JSON with `--schedule`, which overrides the single-entry flags:
+
+```bash shouldWrap
+neon snapshots schedule set --branch main --schedule '[{"frequency":"daily","hour":3},{"frequency":"weekly","day":1,"hour":4}]'
+```
+
+`--retention` is in seconds, from 3600 (1 hour) to 3024000 (35 days). See [Snapshot retention](#snapshot-retention) for what happens when you omit it.
+
+To view the current schedule, use [snapshots schedule get](/docs/cli/snapshots#schedule-get):
+
+```bash
+neon snapshots schedule get --branch main
+```
+
+</TabItem>
+
+<TabItem>
+
+You can view and set backup schedules for branches using the Neon API. For complete API documentation, refer to the [Neon API Reference](/docs/reference/api).
 
 **View backup schedule**
 
-Retrieves the current backup schedule configuration for a branch using the [View backup schedule](https://api-docs.neon.tech/reference/getsnapshotschedule) endpoint.
+Retrieves the current backup schedule configuration for a branch using the [View backup schedule](/docs/reference/api/snapshots/get-snapshot-schedule) endpoint.
 
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/backup_schedule
@@ -269,7 +373,7 @@ curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id
 
 **Set backup schedule**
 
-Set the backup schedule for a branch using the [Update backup schedule](https://api-docs.neon.tech/reference/setsnapshotschedule) endpoint.
+Set the backup schedule for a branch using the [Update backup schedule](/docs/reference/api/snapshots/set-snapshot-schedule) endpoint.
 
 ```bash
 PUT /projects/{project_id}/branches/{branch_id}/backup_schedule
@@ -277,11 +381,12 @@ PUT /projects/{project_id}/branches/{branch_id}/backup_schedule
 
 The request body must include a `schedule` array. Each item in the array can specify:
 
-- `frequency` (required): `hourly`, `daily`, `weekly`, `monthly`, or `yearly`
-- `hour` (optional): Hour of the day (0–23) to take the snapshot
-- `day` (optional): Day of the week or month (1–31) to take the snapshot
-- `month` (optional): Month of the year (1–12) to take the snapshot
-- `retention_seconds` (optional): How long to keep the snapshot before it is automatically deleted (minimum 3600). If not set, the snapshot is kept indefinitely.
+- `frequency` (required): `daily`, `weekly`, or `monthly`
+- `hour`: Hour of the day (0–23) to take the snapshot. Required for every frequency.
+- `day`: Day of the week (1–7, Monday to Sunday) for `weekly`, or day of the month (1–31) for `monthly`. Required for those two frequencies, and setting it also requires `hour`.
+- `retention_seconds` (optional): How long to keep each snapshot before it is automatically deleted, from 3600 (1 hour) to 3024000 (35 days). See [Snapshot retention](#snapshot-retention) for what happens when you omit it.
+
+Although the schema marks `hour` and `day` optional, the server rejects a schedule that leaves out the values its frequency needs, with an error such as `daily schedules must specify the hour of the day`.
 
 **Example: set a daily schedule**
 
@@ -308,17 +413,18 @@ This example creates a daily snapshot at 23:00 (11:00 PM) UTC and keeps it for 7
 
 ### Snapshot retention
 
-Snapshots are automatically deleted after their retention period expires. You can adjust retention settings at any time by editing the schedule. Note that:
+Manual and scheduled snapshots expire on different rules:
 
-- Shorter retention periods help manage storage; on paid plans, the per-plan snapshot limit applies only to manual snapshots (scheduled backup snapshots do not count)
-- Deleted snapshots cannot be recovered
-- Manual snapshots are not affected by backup schedule retention settings
+- **Scheduled snapshots** are kept for 35 days unless you set a shorter retention, and 35 days is also the maximum. The Console shows this per frequency as 35 days, 5 weeks, or 1 month.
+- **Manual snapshots** never expire unless you give them an expiration, which has no maximum. Backup schedule retention settings do not apply to them.
+
+You can adjust retention at any time by editing the schedule. Shorter retention periods help manage storage. On paid plans, the per-plan snapshot limit applies only to manual snapshots; scheduled backup snapshots do not count. Deleted snapshots cannot be recovered.
 
 ## Update backup schedules
 
 Change an existing backup schedule or turn it off.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -327,6 +433,22 @@ From the **Backup & restore** page, click **Edit schedule** to open the **Edit b
 **To turn off a snapshot schedule:** Select **No schedule** from the dropdown in the **Edit backup schedule** modal, then click **Update schedule**. No snapshots will be created until you set a schedule again.
 
 ![Edit backup schedule modal](/docs/guides/edit_backup_schedule_modal.png)
+
+</TabItem>
+
+<TabItem>
+
+To change a schedule, run [snapshots schedule set](/docs/cli/snapshots#schedule-set) again with the new values. The command replaces the existing schedule rather than adding to it.
+
+```bash
+neon snapshots schedule set --branch main --frequency weekly --day 1 --hour 4
+```
+
+**To turn off a backup schedule:** pass an empty JSON array with `--schedule`:
+
+```bash
+neon snapshots schedule set --branch main --schedule '[]'
+```
 
 </TabItem>
 
@@ -360,7 +482,7 @@ You can restore from any snapshot in your project using one of two methods:
 
 Use this option if you want to restore the snapshot data immediately without inspecting the data first.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -371,13 +493,13 @@ Use this option if you want to restore the snapshot data immediately without ins
 2. The **One-step restore** modal explains the operation:
    - The restore operation will occur instantly.
    - The current branch will be restored to the snapshot state.
-   - A branch named `<branch_name (old)>` will be created as a backup. Other snapshots you may have taken previously remain attached to this branch.
+   - A branch named `<branch_name> (old)` will be created as a backup. Other snapshots you may have taken previously remain attached to this branch.
 
    ![One step restore confirmation modal](/docs/guides/one_step_restore_modal.png)
 
    Click **Restore** to proceed with the operation.
 
-3. Your branch is immediately restored to the snapshot state, and the `<branch_name>_old` branch is created, which you'll find on the **Branches** page in the Neon Console, as shown here:
+3. Your branch is immediately restored to the snapshot state, and the `<branch_name> (old)` branch is created, which you'll find on the **Branches** page in the Neon Console, as shown here:
    ![Branches page that shows the backup branch](/docs/guides/one_step_restore_branches_page.png)
 
    After you verify that the restore operation was successful, you can delete the backup branch if you no longer need it.
@@ -386,22 +508,40 @@ Use this option if you want to restore the snapshot data immediately without ins
 
 <TabItem>
 
-A one-step restore operation is performed using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
+Use [snapshots restore](/docs/cli/snapshots#restore) with `--finalize` to restore and swap the branch in one step. This restores the snapshot to a new branch, moves your computes onto it, and replaces the target branch, so your connection details stay the same.
 
 ```bash
-curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore?name=restored_branch" \
+neon snapshots restore snap-1234 --target-branch main --finalize
+```
+
+Options:
+
+- `--target-branch`: The branch to restore onto. Defaults to the snapshot's source branch. Recommended whenever you finalize, and especially if you apply several snapshots in succession, so the restore doesn't target a branch renamed by an earlier restore.
+- `--name`: Name for the newly restored branch. Auto-generated when omitted.
+
+Find the snapshot ID with `neon snapshots list`. The replaced branch is kept as a backup, renamed to `<branch_name> (old)`. If the branch being replaced was **protected**, that protection is **moved** to the branch with the restored data, not left on both branches.
+
+</TabItem>
+
+<TabItem>
+
+A one-step restore operation is performed using the [Restore snapshot](/docs/reference/api/snapshots/restore-snapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
+
+```bash
+curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore" \
   -H "Content-Type: application/json" \
   -H 'authorization: Bearer $NEON_API_KEY' \
   -d '{
     "name": "restored_branch",
-    "finalize_restore": false
+    "target_branch_id": "br-twilight-river-31791249",
+    "finalize_restore": true
   }' |jq
 ```
 
 Parameters:
 
-- `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
-- `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation; no need to change the connection details in your application. If the branch being replaced was **protected**, that protection is **moved** to the branch with the restored data (it is not left on both branches).
+- `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated. Pass this in the request body; the `name` query parameter is deprecated.
+- `finalize_restore`: Set to `true` to finalize the restore immediately, which is what makes this a one-step restore. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation; no need to change the connection details in your application. If the branch being replaced was **protected**, that protection is **moved** to the branch with the restored data (it is not left on both branches). Set it to `false` for a [multi-step restore](#multi-step-restore) instead.
 - `target_branch_id`: (Optional but recommended) The ID of the branch you want to replace when finalizing the restore. If omitted, subsequent snapshot restores may target the branch renamed to `<branch_name> (old)` from a previous restore, not your intended production branch.
 
 <Admonition type="note">
@@ -410,8 +550,8 @@ If you plan to apply multiple snapshots in succession, always supply `target_bra
 
 **Related API references:**
 
-- [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)
-- [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots)
+- [Restore snapshot](/docs/reference/api/snapshots/restore-snapshot)
+- [List project snapshots](/docs/reference/api/snapshots/list-snapshots)
 
 </TabItem>
 
@@ -421,7 +561,7 @@ If you plan to apply multiple snapshots in succession, always supply `target_bra
 
 Use this option if you need to inspect the restored data before you switch over to the new branch.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -446,7 +586,43 @@ Use this option if you need to inspect the restored data before you switch over 
 
 1.  **Restore the snapshot to a new branch**
 
-    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint:
+    Run [snapshots restore](/docs/cli/snapshots#restore) without `--finalize`, which leaves the restore un-finalized so you can inspect the new branch first:
+
+    ```bash
+    neon snapshots restore snap-1234 --target-branch main --name my_restored_branch
+    ```
+
+    Options:
+    - `--name`: (Optional) Name for the newly restored branch. Auto-generated when omitted.
+    - `--target-branch`: (Optional but recommended) The branch you intend to replace when you later finalize (typically your production branch). Providing this avoids finalizing against the `<branch_name> (old)` branch created by an earlier restore.
+
+    Find the snapshot ID with `neon snapshots list`. The command prints the ID of the restored branch along with the exact `finalize` command to run.
+
+2.  **Inspect the new branch**
+
+    Connect to the restored branch and query it to confirm the data is what you expect:
+
+    ```bash
+    neon connection-string my_restored_branch
+    ```
+
+3.  **Finalize the restore**
+
+    Pass the restored branch, not the target branch, to [snapshots finalize](/docs/cli/snapshots#finalize):
+
+    ```bash
+    neon snapshots finalize br-twilight-river-31791249
+    ```
+
+    This performs the same actions as the API's finalize step: it moves the original branch's computes to the restored branch, renames the restored branch to the original's name, and renames the original to `<branch_name> (old)`. Any backup schedule moves to the restored branch, and if the original was **protected**, that protection is **moved** rather than left on both branches. Use `--name` to choose the replaced branch's name instead of the generated one.
+
+</TabItem>
+
+<TabItem>
+
+1.  **Restore the snapshot to a new branch**
+
+    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](/docs/reference/api/snapshots/restore-snapshot) endpoint:
 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore" \
@@ -464,7 +640,7 @@ Use this option if you need to inspect the restored data before you switch over 
     - `target_branch_id`: (Optional but recommended) Specify the branch ID you intend to replace when you later finalize the restore (typically your production branch). Providing this avoids subsequent operations defaulting to the `<branch_name> (old)` branch created by an earlier restore.
 
        <Admonition type="note">
-          You can find the `snapshot_id` using the [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots) endpoint.
+          You can find the `snapshot_id` using the [List project snapshots](/docs/reference/api/snapshots/list-snapshots) endpoint.
 
              ```bash
              curl -X GET "https://console.neon.tech/api/v2/projects/project_id/snapshots" \
@@ -480,7 +656,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 2.  **Inspect the new branch**
 
-    After restoring the snapshot, you can connect to the new branch and run queries to inspect the data. You can get the branch connection string from the Neon Console or using the [Retrieve connection URI](https://api-docs.neon.tech/reference/getconnectionuri) endpoint.
+    After restoring the snapshot, you can connect to the new branch and run queries to inspect the data. You can get the branch connection string from the Neon Console or using the [Retrieve connection URI](/docs/reference/api/projects/get-connection-uri) endpoint.
 
     ```bash
     curl --request GET \
@@ -491,7 +667,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 3.  **Finalize the restore**
 
-    If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalizerestorebranch) endpoint. This step performs the following actions:
+    If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](/docs/reference/api/branches/finalize-restore-branch) endpoint. This step performs the following actions:
     - Moves your original branch's computes to the new branch and restarts the computes.
     - Renames the new branch to original branch's name.
     - Renames the original branch to `<branch_name> (old)`. Other snapshots you may have taken remain attached to this branch.

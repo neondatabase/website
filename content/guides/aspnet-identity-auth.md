@@ -1,13 +1,13 @@
 ---
 title: Authentication and Authorization in ASP.NET Core with ASP.NET Identity and Neon
-subtitle: Learn how to implement secure user authentication and authorization in ASP.NET Core applications using ASP.NET Identity with Neon Postgres
+subtitle: Learn how to implement secure user authentication and authorization in ASP.NET Core applications using ASP.NET Identity with Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-In this guide, we'll explore how to implement secure authentication and authorization in an ASP.NET Core application using ASP.NET Core Identity with Neon Postgres as the database backend. We'll cover user management, role-based authorization, and JWT token generation for secure API access.
+In this guide, we'll explore how to implement secure authentication and authorization in an ASP.NET Core application using ASP.NET Core Identity with Lakebase Postgres as the database backend. We'll cover user management, role-based authorization, and JWT token generation for secure API access.
 
 ## Prerequisites
 
@@ -221,7 +221,7 @@ app.UseAuthorization();
 
 We are doing quite a few things here:
 
-1. First, we configure our database context using the connection string we defined earlier in `appsettings.json`. This connects our application to the Neon Postgres database, allowing it to store and retrieve user data.
+1. First, we configure our database context using the connection string we defined earlier in `appsettings.json`. This connects our application to the Lakebase Postgres database, allowing it to store and retrieve user data.
 1. Next, we set up ASP.NET Identity to manage user accounts which includes:
    - We enforce strong passwords.
    - We configure lockout settings to protect against brute force attacks.
@@ -492,7 +492,7 @@ If the token is valid, you'll receive a response from the protected resource. If
 As an optional step, to improve user session management, we'll implement a two-token authentication system using both access tokens and refresh tokens:
 
 - An access token which is a short-lived JWT used to authenticate API requests
-- A longer-lived tokens used to obtain new access tokens without requiring re-login
+- A longer-lived token used to obtain new access tokens without requiring re-login
 
 ### Setting Up the Token System
 
@@ -749,7 +749,7 @@ For a more information on integrating Auth0 with ASP.NET Core, refer to the [Aut
 
 ## Conclusion
 
-In this guide, we implemented a secure authentication and authorization system in an ASP.NET Core application using ASP.NET Identity with Neon Postgres as the backend. We walked through setting up user registration and login endpoints, securing API routes with JWT tokens, and implementing role-based authorization.
+In this guide, we implemented a secure authentication and authorization system in an ASP.NET Core application using ASP.NET Identity with Lakebase Postgres as the backend. We walked through setting up user registration and login endpoints, securing API routes with JWT tokens, and implementing role-based authorization.
 
 For more information, check out:
 

@@ -3,11 +3,14 @@ title: Run RLS queries with Drizzle ORM
 subtitle: Learn how to execute RLS queries securely with Drizzle ORM, including best
   practices for Postgres roles, connection management, and dynamic client setup.
 summary: >-
-  Covers how to execute RLS queries using Drizzle ORM securely, with details on
-  Postgres custom roles, advanced connection string configurations, and dynamic
-  client setup with auth callbacks.
+  Running RLS queries with Drizzle ORM on Neon requires custom Postgres roles
+  with LOGIN and no BYPASSRLS, plus separate connection strings for
+  authenticated vs. admin access. JWT claims are injected via set_config inside
+  a transaction. Use this page after defining RLS policies in your Drizzle
+  schema to wire up the runtime connection layer, whether from a frontend using
+  the Data API or a backend using the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-03-23T18:27:00.724Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <InfoBlock>
@@ -190,7 +193,7 @@ When requests go through the Data API, your database enforces RLS policies autom
 
 For complete examples of using Drizzle and RLS with the Data API, see:
 
-- [Data API tutorial](/docs/data-api/demo) - Full note-taking app example built with Neon Auth, Drizzle RLS, and the Data API
+- [Data API tutorial](/docs/data-api/demo) - Full note-taking app example built with Managed Better Auth, Drizzle RLS, and the Data API
 - [Data API getting started](/docs/data-api/get-started) - Setup and basic queries
 
 ### Backend: Use Drizzle with the serverless driver
@@ -218,7 +221,7 @@ The `$withAuth` method in Drizzle is deprecated; instead, set JWT claims in the 
 </Admonition>
 
 ```typescript
-iimport { createRemoteJWKSet, jwtVerify, type JWTPayload } from 'jose';
+import { createRemoteJWKSet, jwtVerify, type JWTPayload } from 'jose';
 import { Pool } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
 import { sql } from 'drizzle-orm';

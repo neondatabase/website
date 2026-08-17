@@ -1,17 +1,18 @@
 ---
-title: Schema migration with Neon Postgres and Laravel
-subtitle: Set up Neon Postgres and run migrations for your Laravel project
+title: Schema migration with Lakebase Postgres and Laravel
+subtitle: Set up a database on Neon and run migrations for your Laravel project
 summary: >-
-  Step-by-step guide for setting up Neon Postgres with Laravel, including
-  initializing a project, retrieving the database connection string, and
-  managing schema migrations using Laravel's migration system.
+  Run Laravel schema migrations on Lakebase Postgres using the Eloquent ORM and
+  `php artisan migrate`. Covers first-time setup and adding columns via new
+  migration files. Neon requires a direct (non-pooled) connection string for
+  migrations; pooled PgBouncer connections can cause migration errors.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.999Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 [Laravel](https://laravel.com/) is a popular PHP web application framework that provides an expressive and elegant syntax for building web applications. It includes an ORM (Object-Relational Mapping) called Eloquent, which allows you to interact with databases using a fluent API. Laravel also provides a powerful migration system to manage database schema changes over time.
 
-This guide demonstrates how to use Laravel with the Neon Postgres database. We'll create a simple Laravel application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
+This guide demonstrates how to use Laravel with the Lakebase Postgres database. We'll create a simple Laravel application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
 ## Prerequisites
 
@@ -70,7 +71,7 @@ Replace `NEON_POSTGRES_CONNECTION_STRING` with the connection string you retriev
 
 ### Specify the data model
 
-Data models are defined using the `Elquent` ORM in Laravel. Our application is a simple catalog of authors and books, where each author can have multiple books. We'll create two models, `Author` and `Book`, to represent the data.
+Data models are defined using the `Eloquent` ORM in Laravel. Our application is a simple catalog of authors and books, where each author can have multiple books. We'll create two models, `Author` and `Book`, to represent the data.
 
 Create a new file `Author.php` in the `app/Models` directory with the following code:
 
@@ -153,7 +154,7 @@ public function up()
 
 ### Apply the migration
 
-To apply the migration and create the corresponding tables in the Neon Postgres database, run the following command:
+To apply the migration and create the corresponding tables in the Lakebase Postgres database, run the following command:
 
 ```bash
 php artisan migrate
@@ -365,6 +366,6 @@ You can find the source code for the application described in this guide on GitH
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Laravel Documentation](https://laravel.com/docs)
-- [Neon Postgres](/docs/introduction)
+- [Neon](/docs/introduction)
 
 <NeedHelp/>

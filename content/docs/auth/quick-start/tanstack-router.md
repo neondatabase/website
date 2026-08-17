@@ -1,25 +1,21 @@
 ---
-title: Use Neon Auth with TanStack Router
+title: Use Managed Better Auth with TanStack Router
 subtitle: Set up authentication using pre-built UI components
 summary: >-
-  Step-by-step guide for setting up Neon Auth with TanStack Router, including
-  project creation, SDK installation, environment variable configuration, and
-  style integration.
+  Managed Better Auth quick start for TanStack Router (file-router) using the
+  `@neondatabase/neon-js` and `@neondatabase/auth-ui` SDKs. Pre-built components
+  include AuthView, AccountView, SignedIn, and RedirectToSignIn. Use this page
+  when you need sign-in, sign-up, and route protection without writing custom
+  auth UI. User profiles are stored automatically in the `neon_auth.user` table
+  in your database.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 layout: wide
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-<Admonition type="tip" title="Using an AI coding tool?">
-Run [`neonctl init`](/docs/reference/cli-init) to configure your editor with the Neon MCP server and agent skills, including Neon Auth setup guidance:
-
-```bash
-npx neonctl@latest init
-```
-
-</Admonition>
+<AuthAISetupTip />
 
 <TwoColumnLayout>
 
@@ -35,7 +31,7 @@ You can then find your Auth URL on the Configuration tab. Copy this URL - you'll
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Console">
 
-![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
+![Managed Better Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
@@ -55,10 +51,10 @@ npx create-tsrouter-app@latest my-app --template file-router --tailwind
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Install the Neon Auth SDK">
+<TwoColumnLayout.Step title="Install the Managed Better Auth SDK">
 <TwoColumnLayout.Block>
 
-Install the Neon Auth SDK and UI library:
+Install the Managed Better Auth SDK and UI library:
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -89,7 +85,7 @@ VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Add Neon Auth styles">
+<TwoColumnLayout.Step title="Add Managed Better Auth styles">
 <TwoColumnLayout.Block>
 
 Open your existing `src/styles.css` file and add this import at the **top**, right after the Tailwind import:
@@ -113,14 +109,23 @@ See [UI Component Styles](/docs/auth/reference/ui-components#styling) for altern
 
 Create a `src/auth.ts` file to initialize the auth client:
 
+<Admonition type="tip" title="Using Auth and Data API together?">
+This quick start uses the standalone Auth client. For one `createClient()` instance that derives both Auth and Data API URLs from a single Neon URL, see [`createClient()` initialization](/docs/reference/javascript-sdk#initializing).
+</Admonition>
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
 ```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, { adapter: BetterAuthReactAdapter() });
+// credentials: 'include' sends the session cookie on cross-origin requests.
+// Required if you later call authClient.token() from an origin other than your Managed Better Auth URL.
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, {
+  adapter: BetterAuthReactAdapter(),
+  fetchOptions: { credentials: 'include' },
+});
 ```
 
 </TwoColumnLayout.Block>

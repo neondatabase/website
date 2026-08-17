@@ -6,7 +6,7 @@ page_description: >-
   the nearest integer, which is less than or equal to the number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-floor/'
 ogImage: /postgresqltutorial/payment-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL FACTORIAL() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The FLOOR() function is standard PostgreSQL and works the same on any Postgres deployment, so you can apply what you learn here wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for your pace.
+The FLOOR() function is standard PostgreSQL and works the same on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 The PostgreSQL `FLOOR()` function returns a number rounded down to the next whole number.
@@ -80,6 +80,6 @@ The following picture illustrates the result:
 
 ## Remarks
 
-To round a number up to the nearest whole number, you use the [`CEIL()`](postgresql-floor) function.
+To round a number up to the nearest whole number, you use the [`CEIL()`](postgresql-ceil) function.
 
 In this tutorial, you have learned how to use the PostgreSQL `FLOOR()` function to round a number down to the nearest integer, which is less than or equal to the number.

@@ -2,11 +2,15 @@
 title: Connect from Kysely to Neon
 subtitle: Learn how to connect to Neon from Kysely
 summary: >-
-  How to connect a TypeScript/Node.js application to a Neon Postgres database
-  using Kysely, including setup, TypeScript schema definitions, and executing
-  migrations and queries.
+  Connect Kysely to Lakebase Postgres using the Neon HTTP serverless driver for
+  edge environments, the Neon WebSocket driver for serverless workloads that
+  need transactions, or node-postgres for long-running servers. Choose this
+  guide when you want full SQL control with TypeScript type-checking and need
+  to pick the right Neon driver dialect for your deployment target. Covers
+  interface-based schema definitions, client initialization per driver,
+  optional migrations via FileMigrationProvider, and CRUD query examples.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.167Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/kysely-prompt.md" 
@@ -26,7 +30,7 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 
 </InfoBlock>
 
-Kysely is a modern, type‑safe SQL query builder for TypeScript. Unlike traditional ORMs, it focuses on providing a flexible and intuitive API for building SQL queries while leveraging TypeScript's type system for safety and autocompletion. This guide walks you through connecting your application to a Neon Postgres database using Kysely.
+Kysely is a modern, type‑safe SQL query builder for TypeScript. Unlike traditional ORMs, it focuses on providing a flexible and intuitive API for building SQL queries while leveraging TypeScript's type system for safety and autocompletion. This guide walks you through connecting your application to a Lakebase Postgres database using Kysely.
 
 To connect a TypeScript/Node.js project to Neon using Kysely, follow these steps:
 
@@ -424,3 +428,10 @@ For more advanced use cases, such as complex filters, joins, transactions, and s
 - [Kysely Documentation](https://kysely.dev/docs/intro)
 - [kysely-neon GitHub Repository](https://github.com/kysely-org/kysely-neon)
 - [Neon serverless driver](/docs/serverless/serverless-driver)
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential

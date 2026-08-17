@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-reverse/
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REPEAT() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The REVERSE() function works the same across any PostgreSQL deployment, so anything you learn here applies wherever you run Postgres. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with high performance, strong security, and native integration into the Lakehouse. For developers and startups who need to ship features and scale on day one, [Neon](https://neon.com) is the Postgres platform built for speed.
+The REVERSE() function works the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REVERSE()` function to reverse the characters within a string.
@@ -41,7 +41,7 @@ The `REVERSE()` function returns a string with the order of all the characters r
 
 The `REVERSE()` function returns `NULL` if the `text` is `NULL`.
 
-## MySQL REVERSE() function examples
+## PostgreSQL REVERSE() function examples
 
 Let’s explore some examples of using the `REVERSE()` function.
 

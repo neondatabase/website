@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rtrim/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPPER() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The RTRIM() function is part of standard PostgreSQL and works the same on any Postgres deployment, so you can apply these examples wherever your database runs. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, high performance, secure database that plugs directly into the Lakehouse. For developers and startups who need to ship features quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The RTRIM() function is part of standard PostgreSQL and works the same on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `RTRIM()` function to remove specified characters from the end of a string.
@@ -65,7 +65,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Using the PostgreSQL RTRIM() function to remove leading spaces
+### 2\) Using the PostgreSQL RTRIM() function to remove trailing spaces
 
 The following example uses the `RTRIM()` function to remove all the spaces from the end of the string `'PostgreSQL '`:
 

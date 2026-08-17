@@ -181,6 +181,35 @@ const CHECKS = [
     },
   },
   {
+    name: '/docs/llms.txt — docs index served to curl (no browser UA)',
+    path: '/docs/llms.txt',
+    requestHeaders: { 'User-Agent': 'curl/8.4.0', Accept: '*/*' },
+    validate(status, body) {
+      if (status !== 200) return `expected 200, got ${status}`;
+      if (body.includes('Page Not Found')) return 'got agent 404 page instead of llms.txt content';
+      if (!body.includes('Neon')) return 'response does not look like llms.txt';
+      return null;
+    },
+    summarize(body) {
+      return body.split('\n')[0]?.slice(0, 80) ?? '';
+    },
+  },
+  {
+    name: '/docs/llms-full.txt — full docs served to curl (no browser UA)',
+    path: '/docs/llms-full.txt',
+    requestHeaders: { 'User-Agent': 'curl/8.4.0', Accept: '*/*' },
+    validate(status, body) {
+      if (status !== 200) return `expected 200, got ${status}`;
+      if (body.includes('Page Not Found'))
+        return 'got agent 404 page instead of llms-full.txt content';
+      if (!body.includes('Neon')) return 'response does not look like llms-full.txt';
+      return null;
+    },
+    summarize(body) {
+      return body.split('\n')[0]?.slice(0, 80) ?? '';
+    },
+  },
+  {
     name: '/docs/.well-known/agent-skills/index.json — skills discovery at /docs/ path',
     path: '/docs/.well-known/agent-skills/index.json',
     validate(status, body) {

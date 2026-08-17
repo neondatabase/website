@@ -2,11 +2,14 @@
 title: Connect from Elixir with Ecto to Neon
 subtitle: Set up a Neon project in seconds and connect from Elixir with Ecto
 summary: >-
-  Step-by-step guide for connecting an Elixir application to a Neon Serverless
-  Postgres database using Ecto, including database creation and configuration
-  instructions.
+  Elixir Ecto connection guide walks through adding ecto_sql and Postgrex
+  dependencies, configuring SSL with cacerts against a Neon Serverless Postgres
+  database, and running migrations via mix ecto.migrate. Choose this page when
+  setting up a new Elixir project that connects to Neon and needs to account for
+  Postgrex idle_interval defaults that can prevent Neon's scale-to-zero
+  autosuspend from triggering.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.958Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-ecto-prompt.md" 
@@ -201,6 +204,11 @@ You can find the application code for the example above on GitHub.
 ## Next steps
 
 The [Ecto Getting Started Guide](https://hexdocs.pm/ecto/getting-started.html#content) provides additional steps that you can follow to create a schema, insert data, and run queries. See [Creating the schema](https://hexdocs.pm/ecto/getting-started.html#creating-the-schema) in the _Ecto Getting Started Guide_ to pick up where the steps in this guide leave off.
+
+## Next steps: Neon backend services
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Usage notes
 

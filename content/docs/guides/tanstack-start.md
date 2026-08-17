@@ -1,23 +1,26 @@
 ---
 title: Connect a TanStack Start application to Neon
-subtitle: Set up a Neon project in seconds and connect from a TanStack Start application
+subtitle: Set up a project on Neon in seconds and connect from a TanStack Start application
 summary: >-
-  How to connect a TanStack Start application to a Neon project by creating a
-  Neon project, adding necessary dependencies, and configuring connection
-  settings with your database credentials.
+  TanStack Start integration guide for Lakebase Postgres covers creating a Lakebase Postgres
+  project, installing a supported driver (node-postgres, postgres.js, or the
+  Neon serverless driver), and writing server functions that query the database.
+  Choose this page when building a type-safe React or Solid app with TanStack
+  Start and need working code for both regular and static server functions
+  backed by Lakebase Postgres.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
-description="Pre-built prompt for connecting TanStack Start applications to Neon"/>
+description="Pre-built prompt for connecting TanStack Start applications to Lakebase Postgres"/>
 
 TanStack Start is an open-source, fully type-safe web framework for building feature rich React and Solid based applications using the TanStack ecosystem.
 
-To create a Neon project and access it from a Start application:
+To create a project on Neon and access it from a Start application:
 
 <Steps>
 
@@ -267,5 +270,12 @@ You can find the source code for the applications described in this guide on Git
 
 <a href="https://github.com/neondatabase/examples/tree/main/with-tanstack-start-static-server-functions" description="Get started with TanStack Start Static Server Functions and Neon" icon="github">Get started with TanStack Start Static Server Functions and Neon</a>
 </DetailIconCards>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/quick-start/tanstack-router): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

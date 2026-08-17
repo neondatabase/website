@@ -1,6 +1,6 @@
 # Neon Pricing Plans
 
-> Serverless Postgres with three plans: Free, Launch, and Scale. Pay only for what you use on paid plans; no monthly minimum.
+> Postgres Database, Authentication, and more backend primitives coming soon with three plans: Free, Launch, and Scale. Pay only for what you use on paid plans; no monthly minimum.
 
 ## How billing works
 
@@ -32,15 +32,18 @@ Invoices under $0.50 are not collected.
 | Scale to zero                    | After 5 min                                | After 5 min, can be disabled         | Configurable (1 minute to always on)                             |
 | Storage                          | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                   |
 | Instant restore                  | -                                          | $0.20/GB-month                       | $0.20/GB-month                                                   |
-| Restore window                   | 6 hours (1 GB limit)                       | Up to 7 days                         | Up to 30 days                                                    |
-| Snapshots (manual)               | 1                                          | 10                                   | 10                                                               |
+| History window                   | 6 hours (1 GB limit)                       | Up to 7 days                         | Up to 30 days                                                    |
+| Snapshots (manual)               | 1                                          | 100                                  | 100                                                              |
 | Snapshots (scheduled)            | -                                          | Yes                                  | Yes                                                              |
-| Public network transfer (egress) | 5 GB included                              | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                   |
+| Public network transfer (egress) | 5 GB included                              | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                       |
 | Private network transfer         | -                                          | -                                    | $0.01/GB                                                         |
 | Auth (MAU)                       | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                     |
+| Object Storage                   | No charge during beta, usage limits apply  | No charge during beta, usage limits apply | No charge during beta, usage limits apply                        |
+| Functions                        | No charge during beta, usage limits apply  | No charge during beta, usage limits apply | No charge during beta, usage limits apply                        |
+| AI Gateway                       | -                                          | Free during beta                     | Free during beta                                                 |
 | Monitoring retention             | 1 day                                      | 3 days                               | 14 days                                                          |
 | Metrics/logs export              | -                                          | -                                    | Yes                                                              |
-| Set spending limits              | -                                          | Yes                                  | Yes                                                              |
+| Spending notifications           | -                                          | Yes                                  | Yes                                                              |
 | Protected branches               | -                                          | Yes                                  | Yes                                                              |
 | IP Allow rules                   | -                                          | -                                    | Yes                                                              |
 | Private Networking               | -                                          | -                                    | Yes                                                              |
@@ -91,15 +94,17 @@ Hitting any Free monthly limit (100 CU-hours, 0.5 GB storage, 5 GB egress) suspe
 | Cap autoscaling per compute                                                                      | Hard ceiling on compute spend           |
 | Keep scale-to-zero on for non-prod                                                               | Idle compute = $0                       |
 | Delete unused branches, or set TTL                                                               | Saves $1.50/branch-month each           |
-| Shorten the restore window                                                                       | Saves $0.20/GB-month on restore storage |
-| Org-level [spending limits](https://neon.com/docs/introduction/spending-limit.md) (Launch/Scale) | Email alerts at 80% and 100%            |
+| Shorten the history window                                                                         | Saves $0.20/GB-month on instant restore (History) storage |
+| Org-level [spending notifications](https://neon.com/docs/introduction/spending-notifications.md) (Launch/Scale) | Email alerts at 80% and 100%            |
 
 See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md) for the full guide and [Reduce network transfer costs](https://neon.com/docs/introduction/network-transfer.md) for egress.
 
 ## Links
 
 - Get started: https://neon.com/signup
-- Full plan details: https://neon.com/docs/introduction/plans.md
-- Open Source Program: https://neon.com/programs/open-source.md
-- Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
-- Startup credits: https://neon.com/startups
+- Claim $20 in free credits to try paid features: https://console.neon.tech/app/?promo=beepboop
+- Get up to $100k in credits for your startup: https://neon.com/startups
+- Get credits for building Open Source on Neon: https://neon.com/programs/open-source.md
+- Apply for the Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
+- More plan details: https://neon.com/docs/introduction/plans.md
+

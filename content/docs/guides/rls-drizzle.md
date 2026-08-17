@@ -3,11 +3,16 @@ title: Simplify RLS with Drizzle
 subtitle: Use Drizzle ORM to declaratively manage Row-Level Security policies in your
   schema
 summary: >-
-  Covers the setup of Row-Level Security (RLS) using Drizzle ORM, including how
-  to implement `crudPolicy`, use custom Postgres roles, and integrate RLS
-  with the Data API and serverless driver.
+  Drizzle ORM's `crudPolicy` and `pgPolicy` helpers let you declare Row-Level
+  Security policies directly in your TypeScript schema, replacing repetitive
+  per-table SQL with a single migration step that enforces access rules at the
+  Postgres level. Use this page when you want to define, version, and migrate
+  RLS policies through Drizzle rather than write raw SQL. Patterns covered
+  include user-owned data, role-based access, and relationship-based rules. For
+  running queries that respect those policies at runtime, see the companion page
+  on RLS query execution with Drizzle.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
@@ -96,7 +101,7 @@ export const todos = pgTable(
 ```
 
 <Admonition type="note">
-**About Drizzle's role:** Drizzle is used to **declare and migrate RLS policies** in TypeScript. When migrations are run, these policies are created in your Postgres database and enforced automatically regardless of how queries are executed.
+**About Drizzle's role:** Drizzle is used to **declare and migrate RLS policies** in TypeScript. When migrations are run, these policies are created in your Postgres database and enforced automatically regardless of how queries are executed. Run these migrations over a direct (non-pooled) connection string, not a pooled one. See [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations) and [Connection pooling](/docs/connect/connection-pooling).
 
 You can run queries that respect these policies using either the [Data API client](/docs/data-api/get-started#connect-and-query) (frontend) or the [Neon serverless driver](#using-drizzle-with-the-serverless-driver) using the Drizzle query builder (backend).
 </Admonition>

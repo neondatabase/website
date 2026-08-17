@@ -2,12 +2,23 @@
 title: Automate branching with CircleCI
 subtitle: Learn how to use the Neon CircleCI Orb to provision ephemeral Postgres
   branches for every CI pipeline run
+summary: >-
+  The Neon CircleCI Orb provisions an isolated Lakebase Postgres branch on Neon per CircleCI
+  pipeline run, giving each CI job a real managed Postgres environment instead of
+  a generic Docker container. Use it to eliminate shared-database race conditions
+  and "works in CI, breaks in prod" failures by forking from a pre-migrated parent
+  branch, running tests against that branch, then auto-cleaning up. The orb
+  provides the neon/run_tests job and neon/create_branch, neon/delete_branch, and
+  neon/reset_branch commands. Branches default to a 3600-second TTL and scale to
+  zero between runs. The orb is community-maintained, not officially supported by
+  Neon.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-08-11T18:35:41.335Z'
 tag: community
+tagTheme: gray
 ---
 
-The **Neon CircleCI Orb** provisions a real Neon Postgres branch per pipeline run (or per parallel node), instead of a generic Postgres-in-Docker service container. That means your CI database behaves like production - same managed Postgres, network, and extensions, so you get fewer "works in CI, breaks in prod" issues.
+The **Neon CircleCI Orb** provisions a real Lakebase Postgres branch per pipeline run (or per parallel node), instead of a generic Postgres-in-Docker service container. That means your CI database behaves like production - same managed Postgres, network, and extensions, so you get fewer "works in CI, breaks in prod" issues.
 
 Each run gets an isolated, ephemeral branch; you can branch from a pre-migrated parent to skip running migrations from scratch, and the orb handles cleanup and TTL so tests stay deterministic and parallel jobs never share state. This guide covers the `neon/run_tests` job and the `neon/create_branch`, `neon/delete_branch`, and `neon/reset_branch` commands.
 
@@ -79,14 +90,14 @@ The job accepts the following parameters:
 
 - `api_key`: (Optional) Environment variable name containing the Neon API key. Defaults to `NEON_API_KEY`. Ensure this variable is set in your CircleCI project settings.
 - `project_id`: (Optional) Environment variable name containing the Neon project ID. Defaults to `NEON_PROJECT_ID`. Ensure this variable is set in your CircleCI project settings.
-- `parent_branch`: (Optional) The branch to fork from. Defaults to your project's default branch (e.g., `production`).
+- `parent_branch`: (Optional) The branch to fork from. Defaults to your project's default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console).
 - `migrate_command`: The command to prepare the database (e.g., run migrations). This command runs after the branch is ready but before tests start. You can chain multiple commands here if needed (for example, installing dependencies and running migrations).
 - `test_command`: The command to execute your tests. This command runs after the `migrate_command` completes. It should be configured to run your test suite (e.g., unit tests, integration tests, or end-to-end tests with Playwright) against the database using the `DATABASE_URL` environment variable.
 - `role`: (Optional) The role to use for the connection. Defaults to `neondb_owner`.
 - `database`: (Optional) The database name. Defaults to `neondb`.
 - `password`: (Optional) The password for the role. You need to set this if you chose not to store passwords for your provided role in the Neon Console. If your role has a stored password in Neon, the Orb retrieves it automatically via API.
 - `schema_only`: (Optional) If `true`, creates a schema-only branch. Defaults to `false`.
-- `get_auth_url`: (Optional) If `true`, exports `NEON_AUTH_URL` for branches with Neon Auth enabled. Defaults to `false`.
+- `get_auth_url`: (Optional) If `true`, exports `NEON_AUTH_URL` for branches with Managed Better Auth enabled. Defaults to `false`.
 - `get_data_api_url`: (Optional) If `true`, tries to export `NEON_DATA_API_URL` for branches with Data API enabled. Defaults to `false`.
 
 **Outputs:**
@@ -95,7 +106,7 @@ The job accepts the following parameters:
 - `DATABASE_URL_POOLED`: The pooled connection string.
 - `PGHOST`, `PGHOST_POOLED`, `PGUSER`, `PGPASSWORD`, `PGDATABASE`: Individual connection parameters.
 - `NEON_BRANCH_ID`: The ID of the created branch.
-- `NEON_AUTH_URL`: The Neon Auth URL (if `get_auth_url` is `true` and Neon Auth is enabled).
+- `NEON_AUTH_URL`: The Managed Better Auth URL (if `get_auth_url` is `true` and Managed Better Auth is enabled).
 - `NEON_DATA_API_URL`: The Neon Data API URL (if `get_data_api_url` is `true` and Data API is enabled).
 
 An example usage of the `neon/run_tests` job is provided in the [Example: CircleCI configuration](#example-circleci-configuration) section below.
@@ -173,7 +184,7 @@ Creates a new database branch. This command waits for the branch to be active ("
 | `password`         | string       | _retrieved via API_ | Password for the role. Required if role passwords are not stored in Neon.                                                                      |
 | `ttl_seconds`      | integer      | `3600`              | Branch lifespan in seconds. Set `0` to disable auto-expiry.                                                                                    |
 | `schema_only`      | boolean      | `false`             | Creates a schema-only branch when enabled.                                                                                                     |
-| `get_auth_url`     | boolean      | `false`             | Exports `NEON_AUTH_URL` when Neon Auth is enabled for the branch.                                                                              |
+| `get_auth_url`     | boolean      | `false`             | Exports `NEON_AUTH_URL` when Managed Better Auth is enabled for the branch.                                                                    |
 | `get_data_api_url` | boolean      | `false`             | Exports `NEON_DATA_API_URL` when Data API is enabled for the branch/database.                                                                  |
 
 **Outputs:**
@@ -184,7 +195,7 @@ Creates a new database branch. This command waits for the branch to be active ("
 - `PGHOST_POOLED`: The pooled host address.
 - `PGUSER`, `PGPASSWORD`, `PGDATABASE`: Individual connection parameters.
 - `NEON_BRANCH_ID`: The ID of the created branch.
-- `NEON_AUTH_URL`: The Neon Auth URL (if `get_auth_url` is `true` and Neon Auth is enabled).
+- `NEON_AUTH_URL`: The Managed Better Auth URL (if `get_auth_url` is `true` and Managed Better Auth is enabled).
 - `NEON_DATA_API_URL`: The Neon Data API URL (if `get_data_api_url` is `true` and Data API is enabled).
 
 ### `neon/delete_branch`

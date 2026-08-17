@@ -17,6 +17,8 @@ import AnchorHeading from 'components/shared/anchor-heading';
 import BlogQuote from 'components/shared/blog-quote';
 import ChangelogForm from 'components/shared/changelog-form';
 import EmbedTweet from 'components/shared/embed-tweet';
+import ImageZoom from 'components/shared/image-zoom';
+import RequestForm from 'components/shared/request-form';
 import { DEFAULT_BLOG_ROUTE_CONFIG } from 'constants/blog';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMarkdownTableOfContents from 'utils/get-markdown-table-of-contents';
@@ -31,9 +33,45 @@ const renderBlogCodeBlockFromPre = async (props) => {
   return <CodeBlock language={languageMatch ? languageMatch[1] : 'bash'}>{rawCode}</CodeBlock>;
 };
 
+/* eslint-disable @next/next/no-img-element */
+const renderBlogImage = ({ src, alt = '', ...props }) => {
+  if (!src) {
+    return <img alt={alt} {...props} />;
+  }
+
+  return (
+    <ImageZoom src={src} isDark>
+      <img src={src} alt={alt} {...props} />
+    </ImageZoom>
+  );
+};
+/* eslint-enable @next/next/no-img-element */
+
+const renderBlogRequestForm = (props) => {
+  const isBackendPlatformForm = props.type === 'backend-platform';
+
+  return (
+    <RequestForm
+      {...props}
+      isBlogBackendCta={isBackendPlatformForm}
+      title={
+        isBackendPlatformForm && !props.title
+          ? 'Early access to the Neon backend platform'
+          : props.title
+      }
+      description={
+        isBackendPlatformForm && !props.description
+          ? "We're expanding Neon into a complete backend platform. Drop your email and we'll reach out soon."
+          : props.description
+      }
+    />
+  );
+};
+
 const mdxComponents = {
   h2: AnchorHeading('h2'),
   h3: AnchorHeading('h3'),
+  img: renderBlogImage,
   pre: renderBlogCodeBlockFromPre,
   table: (props) => (
     <div className="table-wrapper">
@@ -45,6 +83,7 @@ const mdxComponents = {
   CodeTabs,
   CTA,
   EmbedTweet,
+  RequestForm: renderBlogRequestForm,
   YoutubeIframe,
 };
 

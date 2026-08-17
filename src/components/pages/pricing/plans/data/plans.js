@@ -54,21 +54,21 @@ export default {
     },
     {
       rows: '1',
-      feature: 'Compute',
+      feature: 'Lakebase Postgres',
     },
     {
       rows: '2',
       feature: {
-        title: 'Rates',
+        title: 'Compute rates',
       },
       free: '100 CU-hours<span>Per Project</span>',
       launch: '$0.106 per CU-hour',
       scale: '$0.222 per CU-hour',
     },
     {
-      rows: '1-2',
+      rows: '2',
       feature: {
-        title: 'Sizes',
+        title: 'Compute sizes',
       },
       free: 'Up to 2 CU (8 GB RAM)',
       launch: 'Up to 16 CU (64 GB RAM)',
@@ -94,13 +94,9 @@ export default {
       scale: 'Configurable',
     },
     {
-      rows: '1',
-      feature: 'Storage',
-    },
-    {
       rows: '2',
       feature: {
-        title: 'Database',
+        title: 'Database storage',
         subtitle: 'Root and child branches',
       },
       free: 'Free<span>0.5 GB per Project</span>',
@@ -115,45 +111,82 @@ export default {
       },
       free: 'Free<span>with limited window/size</span>',
       launch:
-        '$0.20 per GB-month <span>based on volume of data changes during your selected restore window</span>',
+        '$0.20 per GB-month <span>based on volume of data changes during your selected history window</span>',
       scale:
-        '$0.20 per GB-month <span>based on volume of data changes during your selected restore window</span>',
+        '$0.20 per GB-month <span>based on volume of data changes during your selected history window</span>',
     },
     {
       rows: '3',
       feature: {
-        title: 'Restore window',
-        subtitle: 'Controls history (configurable)',
+        title: 'History window',
+        subtitle: 'For instant restore (configurable)',
       },
       free: 'Up to 6 hours<span>or 1 GB of data changes</span>',
       launch: 'Up to 7 days',
       scale: 'Up to 30 days',
     },
     {
-      rows: '1',
-      feature: 'Auth',
-    },
-    {
-      rows: '3',
+      rows: '2',
       feature: {
-        title: 'MAU',
-        subtitle: 'Monthly Active Users',
+        title: 'Snapshots',
       },
-      free: 'Up to 60k',
-      launch:
-        "Up to 1M <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
-      scale:
-        "Up to 1M <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+      free: '1 snapshot',
+      launch: '100 snapshots  <span>$0.09/GB-month</span>',
+      scale: '100 snapshots  <span>$0.09/GB-month</span>',
     },
     {
       rows: '2',
       feature: {
-        title: 'MFA',
-        subtitle: 'Multi-Factor Authentication',
+        title: 'Scheduled Backups',
       },
       free: false,
-      launch: 'Coming soon',
-      scale: 'Coming soon',
+      launch: 'Daily/Weekly/Monthly <span>$0.09/GB-month</span>',
+      scale: 'Daily/Weekly/Monthly <span>$0.09/GB-month</span>',
+    },
+    {
+      rows: '1',
+      feature: 'Backend',
+    },
+    {
+      rows: '3',
+      feature: {
+        title: 'Managed Better Auth',
+      },
+      free: 'Up to 60k MAUs',
+      launch:
+        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+      scale:
+        "Up to 1M MAUs <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Object Storage',
+        tag: { label: 'Beta', theme: 'orange-muted' },
+      },
+      free: 'No charges applied during beta, with usage limits',
+      launch: 'No charges applied during beta, with usage limits',
+      scale: 'No charges applied during beta, with usage limits',
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'Functions',
+        tag: { label: 'Beta', theme: 'orange-muted' },
+      },
+      free: 'No charges applied during beta, with usage limits',
+      launch: 'No charges applied during beta, with usage limits',
+      scale: 'No charges applied during beta, with usage limits',
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'AI Gateway',
+        tag: { label: 'Beta', theme: 'orange-muted' },
+      },
+      free: false,
+      launch: 'No charges applied during beta. <span>Pricing will match model provider</span>',
+      scale: 'No charges applied during beta. <span>Pricing will match model provider</span>',
     },
     {
       rows: '1',
@@ -185,8 +218,8 @@ export default {
         subtitle: 'Egress',
       },
       free: '5 GB included',
-      launch: '100 GB included<span>then $0.10 per GB</span>',
-      scale: '100 GB included<span>then $0.10 per GB</span>',
+      launch: '500 GB per project included<span>then $0.10/GB</span>',
+      scale: '500 GB per project included<span>then $0.10/GB</span>',
     },
     {
       rows: '2',
@@ -225,8 +258,8 @@ export default {
     {
       rows: '2',
       feature: {
-        title: 'Spending limits',
-        subtitle: 'Control your monthly spend',
+        title: 'Spending notifications',
+        subtitle: 'Get alerts as your spend grows',
       },
       free: false,
       launch: true,

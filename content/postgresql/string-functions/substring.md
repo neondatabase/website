@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-substring/
 ogImage: /postgresqltutorial/PostgreSQL-substring-function-example.jpg
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-08-17T11:14:42.184Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL POSITION() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The SUBSTRING() function works the same in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, on a VM, or in a managed service. For enterprises building on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The SUBSTRING() function works the same in any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SUBSTRING()` function to extract a substring from a string.
@@ -69,9 +69,9 @@ Output:
 (1 row)
 ```
 
-In the example, we extract a substring that has a length of 8, starting at the first character of the `PostgreSQL` string. The result is et `PostgreS` as illustrated in the following picture:
+In the example, we extract a substring that has a length of 8, starting at the first character of the `PostgreSQL` string. The result is `PostgreS` as illustrated in the following picture:
 
-![PostgreSQL substring function example](/postgresqltutorial/PostgreSQL-substring-function-example.jpg)The following example uses the `SUBSTRING()` function to extract the first 8 characters from the PostgreSQL string:
+![PostgreSQL substring function example](/postgresqltutorial/PostgreSQL-substring-function-example.jpg)The following example uses the `SUBSTRING()` function to extract the substring of the `PostgreSQL` string starting at position 8:
 
 ```sql
 SELECT

@@ -137,7 +137,7 @@ const ContactForm = () => {
     } catch (error) {
       if (error.name !== 'AbortError') {
         doNowOrAfterSomeTime(() => {
-          setFormState(FORM_STATES.BROKEN);
+          setFormState(FORM_STATES.ERROR);
           setIsBroken(true);
         }, 2000);
       }
@@ -151,6 +151,7 @@ const ContactForm = () => {
       className="relative z-10 grid grid-cols-2 gap-6 gap-y-6 overflow-hidden border border-gray-new-20 bg-black-pure/80 px-8 py-7 xl:gap-5 xl:px-7 xl:py-6 lg:max-w-full md:grid-cols-1 md:px-5 md:py-5"
       method="POST"
       id="contact-sales-form"
+      data-test="contact-sales-form"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Field
@@ -265,7 +266,7 @@ const ContactForm = () => {
       <div className="relative z-0 col-span-full mt-1 flex items-end justify-between gap-6 sm:flex-col sm:items-start sm:gap-4">
         <p className="max-w-[300px] text-sm leading-[1.5] tracking-tight text-gray-new-60 sm:max-w-full">
           By submitting you agree to the{' '}
-          <Link className="decoration-dashed" to={LINKS.terms} theme="grey-85-underlined">
+          <Link className="decoration-dashed" to={LINKS.websiteTerms} theme="grey-85-underlined">
             Terms of Use
           </Link>{' '}
           and acknowledge the{' '}

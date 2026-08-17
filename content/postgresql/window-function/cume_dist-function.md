@@ -8,7 +8,7 @@ page_description: >-
 prev_url: index.html
 ogImage: >-
   /postgresqltutorial/PostgreSQL-CUME_DIST-Function-over-a-result-set-example.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Window Functions
@@ -19,7 +19,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The CUME_DIST() function works the same way across every PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The CUME_DIST() function works the same way across every PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CUME_DIST()` function to calculate the cumulative distribution of a value within a set of values.
@@ -54,7 +54,7 @@ The `ORDER BY` clause sorts rows in each partition to which the `CUME_DIST()` fu
 
 ### Return value
 
-The `CUME_DIST()` a double precision value which is greater than 0 and less than or equal to 1:
+The `CUME_DIST()` returns a double precision value which is greater than 0 and less than or equal to 1:
 
 ```sql
 0 < CUME_DIST() <= 1
@@ -145,6 +145,6 @@ Here is the output:
 In this example:
 
 - The `PARTITION BY`clause divided the rows into two partitions by the year 2018 and 2019\.
-- The `ORDER BY` clause sorted sales amount of every employee in each partition from high to low to which the `CUME_DIST()` function is applied.
+- The `ORDER BY` clause sorted sales amount of every employee in each partition from low to high to which the `CUME_DIST()` function is applied.
 
 In this tutorial, you have learned how to use the PostgreSQL `CUME_DIST()` function to calculate the cumulative distribution of a value in a group of values.

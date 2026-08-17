@@ -1,18 +1,23 @@
 ---
-title: Migrate from Supabase to Neon Postgres
-subtitle: Learn how to migrate your database from Supabase to Neon Postgres using
+title: Migrate from Supabase to Lakebase Postgres
+subtitle: Learn how to migrate your database from Supabase to Lakebase Postgres using
   pg_dump and pg_restore
 summary: >-
-  How to migrate a database from Supabase to Neon Postgres using `pg_dump` and
-  `pg_restore`, including preparation steps and prerequisites for a successful
-  transfer.
+  Step-by-step guide to moving a Supabase Postgres database to Neon using
+  `pg_dump` and `pg_restore`, with `--no-owner` and `--no-acl` flags required
+  because Supabase ties object ownership to its own authentication system. Use
+  this page when you need a full offline dump-and-restore migration; for
+  near-zero downtime, the guide points to logical replication from Supabase
+  instead. Also covers connection string retrieval, schema selection with
+  `--schema` for public and non-public schemas (auth, storage), and
+  post-restore verification.
 redirectFrom:
   - /docs/import/import-from-supabase
 enableTableOfContents: true
-updatedOn: '2026-04-01T20:14:28.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This guide describes how to migrate a database from Supabase to Neon Postgres.
+This guide describes how to migrate a database from Supabase to Lakebase Postgres.
 
 We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
 
@@ -100,7 +105,7 @@ Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon Postgres database to receive the imported data.
+This section describes how to prepare your destination Lakebase Postgres database to receive the imported data.
 
 ### Create the Neon database
 

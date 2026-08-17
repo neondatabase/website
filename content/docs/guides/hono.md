@@ -2,15 +2,17 @@
 title: Connect a Hono application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Hono application
 summary: >-
-  Step-by-step guide for creating a Neon project and connecting it to a Hono
-  application, including setting up dependencies and configuring the Postgres
-  client for database access.
+  Connect a Hono application to Lakebase Postgres using node-postgres, postgres.js,
+  or the Neon serverless driver (@neondatabase/serverless). Covers
+  DATABASE_URL setup and route-level query code for Hono on Node.js, Bun,
+  Deno, and Edge runtimes. Each driver option includes a complete TypeScript
+  route handler with Postgres query examples.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.164Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/hono-prompt.md"
-description="Pre-built prompt for connecting Hono applications to Neon Postgres"/>
+description="Pre-built prompt for connecting Hono applications to Lakebase Postgres"/>
 
 [Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application.
 
@@ -154,5 +156,12 @@ Navigate to your application's URL ([localhost:3000](http://localhost:3000)). Yo
 > The specific version may vary depending on the PostgreSQL version you are using.
 
 </Steps>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

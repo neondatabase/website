@@ -1,12 +1,15 @@
 ---
 title: Manage integrations
 summary: >-
-  Covers the management of third-party integrations within a Neon project,
-  including adding, configuring, and suggesting new integrations to enhance
-  functionality and streamline workflows.
+  The Integrations page in the Neon Console is the central hub for adding,
+  configuring, and removing third-party integrations with a Neon project.
+  Automated and manual setup flows are both supported. Use this page to connect
+  a new service, update an existing integration, or request one that is not yet
+  available. Unavailable integrations offer a Request button to register
+  interest and inform the Neon team's rollout priorities.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.116Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The **Integrations** page in the Neon Console provides a hub for managing third-party integrations with your Neon project. You can use these supported integrations to optimize and extend Neon's functionality and streamline your workflow.

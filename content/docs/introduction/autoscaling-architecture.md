@@ -2,11 +2,18 @@
 title: Autoscaling architecture
 subtitle: Learn how Neon automatically scales compute resources on demand
 summary: >-
-  Covers the structure of Neon's autoscaling architecture, detailing the roles
-  of the autoscaler-agent and Kubernetes scheduler in dynamically allocating
-  compute resources for Postgres instances.
+  Neon's autoscaling architecture runs each Postgres instance inside a VM on a
+  Kubernetes node. CPU and RAM scale dynamically through an autoscaler-agent
+  that collects metrics, a modified Kubernetes scheduler that approves
+  upscaling requests to prevent memory overcommit, and NeonVM, a custom VM
+  controller built on QEMU/KVM. When a node is saturated, NeonVM live-migrates
+  VMs to another machine in roughly 100ms, preserving the VM's IP address and
+  keeping active queries uninterrupted. Memory scaling is event-driven through
+  Linux cgroups notifications. A compute cache dedicates a portion of each
+  VM's allocated RAM to disk-backed caching to accelerate repeated scans and
+  index builds.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 <InfoBlock>
@@ -54,9 +61,9 @@ The live migration process allows for the proactive reduction of node load by mi
 
 Postgres memory consumption can escalate rapidly in specific scenarios. Fortunately, Neon's autoscaling system is able to detect memory usage increases without constantly requesting metrics from the VM. This is accomplished by running Postgres within a [cgroups](/docs/reference/glossary#cgroups), which provides notifications when memory usage crosses a specified threshold. Using cgroups in this way requires running our [vm-monitor](/docs/reference/glossary#vm-monitor) in the VM alongside Postgres to request more resources from the autoscaler-agent when Postgres consumes too much memory. The vm-monitor also verifies that downscaling requests from an autoscaler-agent will leave sufficient memory leftover.
 
-## Local File Cache
+## Compute cache
 
-To expedite queries, the autoscaling system incorporates a Postgres extension that places a cache in front of the storage layer. Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache to itself. The cache is backed by disk and kept at a size intended to fit in the kernel page cache. Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-monitor adjusts the LFC size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
+To expedite queries, the autoscaling system places a cache in front of the storage layer. Many queries benefit from this additional memory, particularly those requiring multiple database scans (such as creating an index). The [compute cache](/docs/reference/glossary#compute-cache) capitalizes on the additional memory allocated to the VM by dedicating a portion to the cache to itself. The cache is backed by disk and kept at a size intended to fit in the kernel page cache. Due to the storage model, writebacks are not required, resulting in near-instant evictions. The vm-monitor adjusts the cache size when scaling occurs through the autoscaler-agent, ensuring seamless operation.
 
 ## Autoscaling source code
 

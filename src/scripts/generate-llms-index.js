@@ -16,14 +16,12 @@ const path = require('path');
 
 const matter = require('gray-matter');
 
-const { CONTENT_ROUTES } = require('../constants/content');
+const { CONTENT_ROUTES, EXCLUDED_DIRS } = require('../constants/content');
 
 const config = require('./llms-index-config');
 
 const BASE_URL = 'https://neon.com';
 const OUTPUT_PATH = 'public/docs/llms.txt';
-
-const EXCLUDED_DIRS = ['shared-content', 'unused'];
 const EXCLUDED_FILES = ['README.md', 'index.md', '_index.md'];
 
 const COLLAPSED_ROUTES = config.collapsedRoutes || {};
@@ -36,7 +34,9 @@ const ALL_EXCLUDE_PATHS = [
 
 /** Display names for path segments and route keys */
 const SECTION_DISPLAY_NAMES = {
-  ai: 'AI',
+  ai: 'AI & Agents',
+  'ai-gateway': 'AI Gateway',
+  storage: 'Object Storage',
   'data-api': 'Data API',
   postgresql: 'PostgreSQL',
   'use-cases': 'Solutions',
@@ -70,8 +70,6 @@ async function scanDirectory(dirPath, baseContentPath, routeKey) {
     excludeMatchCounts.set(prefix, 0);
   }
 
-  const collapsedSections = new Set(config.sections.filter((s) => s.collapse).map((s) => s.name));
-
   async function scan(currentPath, relativePath = '') {
     let entries;
     try {
@@ -86,7 +84,6 @@ async function scanDirectory(dirPath, baseContentPath, routeKey) {
 
       if (entry.isDirectory()) {
         if (EXCLUDED_DIRS.includes(entry.name)) continue;
-        if (!relativePath && collapsedSections.has(toTitleCase(entry.name))) continue;
         await scan(fullPath, relPath);
       } else if (entry.name.endsWith('.md')) {
         if (EXCLUDED_FILES.includes(entry.name)) continue;
@@ -159,7 +156,7 @@ function applyReclassifications(allDocs) {
           prefixMatchCounts.get(prefixRule.pathPrefix) + 1
         );
         if (prefixRule.section) doc.section = prefixRule.section;
-        if (prefixRule.subsection) doc.subSection = prefixRule.subsection;
+        if ('subsection' in prefixRule) doc.subSection = prefixRule.subsection ?? null;
         break;
       }
     }
@@ -285,7 +282,8 @@ function generateIndexText(organized, collapsedEntries = []) {
   for (const section of sections) {
     const sectionConf = getSectionConfig(section);
 
-    // Handle collapsed sections
+    // Handle collapsed sections (section.collapse is vestigial — not used by any current config.
+    // Route-level collapsing is handled via COLLAPSED_ROUTES above.)
     if (sectionConf && sectionConf.collapse) {
       const { title, url, description } = sectionConf.collapse;
       lines.push(`## ${section}`);
@@ -317,8 +315,9 @@ function generateIndexText(organized, collapsedEntries = []) {
         `- [All ${allDocs.length} ${section} pages](${sectionConf.subIndex.url}) — key pages below`
       );
       lines.push('');
-      const highlightSet = new Set(sectionConf.subIndex.highlights || []);
-      const highlighted = allDocs.filter((d) => highlightSet.has(d.path));
+      const highlighted = (sectionConf.subIndex.highlights || [])
+        .map((p) => allDocs.find((d) => d.path === p))
+        .filter(Boolean);
       for (const doc of highlighted) {
         const description = doc.subtitle ? `: ${doc.subtitle}` : '';
         lines.push(`- [${doc.title}](${doc.url})${description}`);

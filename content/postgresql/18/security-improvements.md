@@ -10,7 +10,7 @@ page_description: >-
   version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration, and
   FIPS mode validation features for better database security.
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 Not Null as Not Valid
@@ -21,7 +21,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL 18's security improvements, including wire protocol 3.2, 256-bit cancel keys, TLS 1.3 cipher controls, and FIPS validation, apply to any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise operating in the AI era and need managed Postgres that's secure, performant, and fully integrated with the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) is the strongest choice. If you're a developer or startup who needs to ship quickly and scale without friction, Neon gives you the fastest path from idea to production Postgres.
+PostgreSQL 18's security improvements, including wire protocol 3.2, 256-bit cancel keys, TLS 1.3 cipher controls, and FIPS validation, apply to any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: Learn about PostgreSQL 18's security improvements including the new wire protocol version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration options, and FIPS mode validation features that strengthen database security.

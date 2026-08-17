@@ -2,17 +2,19 @@
 title: Replicate data from Amazon RDS Postgres
 subtitle: Learn how to replicate data from Amazon RDS Postgres to Neon
 summary: >-
-  Covers the setup of logical replication from Amazon RDS PostgreSQL to Neon,
-  including prerequisites, enabling logical replication, and preparing the
-  source database for data migration.
+  Migrate from Amazon RDS PostgreSQL to Neon with minimal downtime using logical
+  replication. Set rds.logical_replication=1 on RDS, create a publication, then
+  create a matching subscription on Neon to stream row-level changes. The guide
+  covers enabling WAL logical level on RDS, allowlisting Neon NAT gateway IPs
+  in the RDS security group, schema preparation, and application cutover.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.016Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <MigrationAssistant/>
 
-Neon's logical replication feature allows you to replicate data from Amazon RDS PostgreSQL to Neon.
+Neon's logical replication feature allows you to replicate data from Amazon RDS PostgreSQL to Neon using Lakebase Postgres.
 
 ## Prerequisites
 
@@ -111,7 +113,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ## Prepare your destination database
 
-This section describes how to prepare your source Neon Postgres database (the subscriber) to receive replicated data from your AWS RDS Postgres instance.
+This section describes how to prepare your destination Lakebase Postgres database (the subscriber) to receive replicated data from your AWS RDS Postgres instance.
 
 ### Prepare your database schema
 
@@ -182,6 +184,6 @@ SELECT subname, received_lsn, latest_end_lsn, last_msg_receipt_time FROM pg_cata
 
 After the replication operation is complete, you can switch your application over to the destination database by swapping out your AWS RDS source database connection details for your Neon destination database connection details.
 
-You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app). See [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. See [Connect from any application](/docs/connect/connect-from-any-app).
 
 </Steps>

@@ -6,7 +6,7 @@ page_description: >-
   to remove one or more views from the database.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-drop-view/'
 ogImage: /postgresqltutorial/film-film_category-category-tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CREATE VIEW
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DROP VIEW syntax covered here works on any PostgreSQL database, so you can apply these patterns wherever your Postgres runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
+The DROP VIEW syntax covered here works on any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DROP VIEW` statement to delete a view from your database.
@@ -91,7 +91,7 @@ WHERE
   category = 'Horror';
 ```
 
-The following statement creates a view called `comedy_film` based on the `film_master` view:
+The following statement creates a view called `comedy_film` based on the `film_info` view:
 
 ```sql
 CREATE VIEW comedy_film AS

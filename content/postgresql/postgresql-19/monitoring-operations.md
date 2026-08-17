@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Monitoring and Operations'
 page_title: 'PostgreSQL 19 Monitoring and Operations Improvements'
 page_description: 'Learn about PostgreSQL 19 monitoring and operational improvements including online data checksums, WAL statistics, vacuum progress tracking, per-process logging, psql enhancements, and 64-bit MultiXactOffset.'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 Schema Management'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 Parallel Autovacuum'
   slug: 'postgresql-19/parallel-autovacuum'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try the new operational features for yourself ahead of the final release expected later in 2026. Beta 1 adds online enabling and disabling of data checksums, a `WAIT FOR` command for read-your-writes on standbys, per-process-type log levels, and 64-bit MultiXact offsets that remove the MultiXact wraparound risk.
+</Admonition>
 
 **Summary**: PostgreSQL 19 adds online data checksum management, WAL full-page image tracking, vacuum progress details, per-process-type log levels, psql prompt improvements, the new `WAIT FOR LSN` command for read-your-writes on async replicas, dynamic WAL level, and eliminates the MultiXact wraparound risk with a 64-bit offset. These changes give DBAs better visibility into database operations and remove long-standing operational hazards.
 

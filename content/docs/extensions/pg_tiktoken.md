@@ -3,11 +3,14 @@ title: The pg_tiktoken extension
 subtitle: Efficiently tokenize data in your Postgres database using OpenAI's `tiktoken`
   library
 summary: >-
-  Covers the installation and usage of the `pg_tiktoken` extension for efficient
-  tokenization of data in Postgres databases using OpenAI's `tiktoken` library,
-  including functions for encoding and counting tokens.
+  The `pg_tiktoken` Postgres extension tokenizes text and counts tokens inside
+  SQL queries using OpenAI's tiktoken library, exposing `tiktoken_encode` and
+  `tiktoken_count`. Use it to enforce OpenAI model token limits in database
+  queries without moving data to application code. Supported encodings include
+  cl100k_base (ChatGPT, text-embedding-ada-002), p50k_base (Codex,
+  text-davinci-002/003), and r50k_base (GPT-3/davinci).
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your Postgres database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.

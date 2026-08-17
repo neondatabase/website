@@ -2,11 +2,17 @@
 title: The pgcrypto extension
 subtitle: Secure your data with cryptographic functions in Postgres
 summary: >-
-  Covers the setup and usage of the `pgcrypto` extension in Neon, detailing how
-  to enable it and use its cryptographic functions for encryption,
-  decryption, and hashing within Postgres.
+  The pgcrypto extension adds SQL-callable functions for encryption, decryption,
+  password hashing, and HMAC generation directly inside Postgres, removing the
+  need for an external cryptographic library. Use it to store passwords with
+  salted Blowfish hashing via crypt() and gen_salt(), encrypt sensitive columns
+  with OpenPGP symmetric or public-key functions (pgp_sym_encrypt,
+  pgp_pub_encrypt), or produce SHA-256 digests and secure random bytes in
+  standard SQL queries. The page covers enabling pgcrypto on Neon, all major
+  function groups, and security best practices for key management and algorithm
+  selection.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:36:02.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.

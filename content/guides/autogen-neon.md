@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to building AI agents using AutoGen and Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-12T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 This guide demonstrates how to integrate AutoGen with Neon. [AutoGen](https://microsoft.github.io/autogen/stable) is an open-source framework developed by Microsoft for building AI agents that can converse, plan, and interact with tools (APIs). Combining AutoGen with Neon allows AI agents to manage your database, execute SQL queries, and automate data-related tasks.
@@ -535,7 +535,7 @@ You can find the source code for the application described in this guide on GitH
 - [AutoGen documentation](https://microsoft.github.io/autogen/stable/)
 - [Neon documentation](/docs)
 - [neon_api: Python API wrapper for the Neon API](https://github.com/neondatabase/neon-api-python)
-- [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [Neon API Reference](/docs/reference/api)
 - [Neon API keys](/docs/manage/api-keys#creating-api-keys)
 - [Postgres for AI Agents](/use-cases/ai-agents)
 

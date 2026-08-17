@@ -8,7 +8,7 @@ page_description: >-
 prev_url: 'https://www.postgresqltutorial.com/postgresql-functions/'
 ogImage: >-
   https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Advanced
@@ -19,7 +19,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL's built-in functions work the same whether you're running Postgres on your laptop, on self-managed infrastructure, or on any managed service, so everything you learn here carries over. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+PostgreSQL's built-in functions work the same whether you're running Postgres on your laptop, on self-managed infrastructure, or on any managed service. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 The **PostgreSQL Functions** section provides comprehensive coverage of PostgreSQL's powerful built-in functions for data manipulation, analysis, and transformation. These functions are essential tools for working with data in PostgreSQL, enabling you to perform complex calculations, format data, and extract meaningful insights from your databases.

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/
 ogImage: /postgresqltutorial/dvd-rental-sample-database-diagram.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: What is PostgreSQL?
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DVD rental sample database works with any PostgreSQL server, so you can follow along on a local install, [Neon](https://neon.com), [Lakebase](https://www.databricks.com/product/lakebase), or any other Postgres environment. For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres with strong performance and security, fully integrated into the Lakehouse. For developers and startups who need to ship and scale fast, Neon is the Postgres platform built to get you from prototype to production in minutes.
+The DVD rental sample database works with any PostgreSQL server. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, we will introduce you to a PostgreSQL sample database that you can use for learning and practicing PostgreSQL.

@@ -4,7 +4,7 @@ subtitle: Learn how to run multiple AI coding agents in parallel with isolated G
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-02-25T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 You’ve probably seen people on X (Twitter) experimenting with [swarms of AI coding agents](https://x.com/notnotstorm/status/1993411360387162235?s=20), sometimes mentioning concepts like [Git worktrees](https://x.com/bcherny/status/2025007393290272904?s=20). If you’ve already been running Claude or another agent in your terminal, you might be wondering: _what exactly are worktrees, and why do they matter?_
@@ -92,7 +92,7 @@ To make this seamless, we can use a Git `post-checkout` hook. This script trigge
 ### Prerequisites
 
 - A [Neon account](https://console.neon.tech)
-- The [Neon CLI](/docs/reference/neon-cli) installed (`npm i -g neonctl` or `brew install neonctl`)
+- The [Neon CLI](/docs/cli) installed (`npm i -g neon` or `brew install neonctl`)
 - Your project configured with a `.env` file containing:
 
   ```env
@@ -175,7 +175,7 @@ if [ ! -f "$ENV_FILE" ]; then
 fi
 
 if ! command -v neon &>/dev/null; then
-  echo "❌ Neon CLI not found. Install it with: brew install neonctl  OR  npm i -g neonctl"
+  echo "❌ Neon CLI not found. Install it with: brew install neonctl  OR  npm i -g neon"
   exit 1
 fi
 

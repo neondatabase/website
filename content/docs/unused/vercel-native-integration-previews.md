@@ -4,7 +4,7 @@ subtitle: Create a database branch for every preview deployment with Neon's nati
   Vercel integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-11-13T02:12:26.599Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <InfoBlock>
@@ -143,7 +143,7 @@ This will disconnect the database from your Vercel project by removing all of th
 
 ## Manage branches created by the integration
 
-The integration creates a database branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](/docs/manage/branches#delete-a-branch), [CLI](/docs/reference/cli-branches#delete), or [API](/docs/manage/branches#delete-a-branch-with-the-api).
+The integration creates a database branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](/docs/manage/branches#delete-a-branch), [CLI](/docs/cli/branches#delete), or [API](/docs/manage/branches#delete-a-branch-with-the-api).
 
 <Admonition type="note" title="What happens to branches if you don't remove them?">
 Unused branches are eventually archived, consuming space in archive storage. For more information, see [Branch archiving](/docs/guides/branch-archiving).

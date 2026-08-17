@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-temporary-table/
 ogImage: /postgresqltutorial/PostgreSQL-Temporary-Table-300x254.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRUNCATE TABLE
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Temporary tables are a standard PostgreSQL feature, and everything covered here works the same on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship quickly and scale without friction, Neon is the Postgres platform built for you.
+Temporary tables are a standard PostgreSQL feature, and everything covered here works the same on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 ![PostgreSQL Temporary Table](/postgresqltutorial/PostgreSQL-Temporary-Table-300x254.png?alignright)**Summary**: in this tutorial, you will learn about the PostgreSQL temporary table and how to manage it effectively.
@@ -182,5 +182,5 @@ DROP TABLE customers;
 ## Summary
 
 - A temporary table is a short\-lived table that exists during a database session or a transaction.
-- Use `the CREATE TEMP TABLE` statement to create a temporary table.
+- Use the `CREATE TEMP TABLE` statement to create a temporary table.
 - Use the `DROP TABLE` statement to drop a temporary table.

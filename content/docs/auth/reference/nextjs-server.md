@@ -1,17 +1,21 @@
 ---
 title: Next.js Server SDK Reference
-subtitle: Server-side authentication API for Next.js with Neon Auth
+subtitle: Server-side authentication API for Next.js with Managed Better Auth
 summary: >-
-  Covers the setup of the Neon Auth Next.js server SDK for implementing
-  server-side authentication in Next.js applications, detailing installation,
-  environment variable configuration, and core functionalities like session
-  management and middleware creation.
+  Managed Better Auth Next.js Server SDK (`@neondatabase/auth/next/server`) provides
+  server-side authentication for Next.js apps via React Server Components, API
+  routes, middleware, and server actions. Session caching uses a signed HTTP-only
+  cookie to reduce Auth Server calls. Use this page to implement or debug
+  server-side sign-in, sign-up, route protection, and admin user management in
+  Next.js. Covers `createNeonAuth()` configuration, `auth.middleware()`,
+  `auth.getSession()`, email/OTP/OAuth sign-in, organization and admin APIs,
+  structured upstream error codes, and migration from v0.1.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-03-23T12:18:17.915Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
+Reference documentation for the Managed Better Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
 
 For client-side authentication, see the [Client SDK reference](/docs/reference/javascript-sdk). For UI components, see the [UI Components reference](/docs/auth/reference/ui-components).
 
@@ -20,7 +24,7 @@ For client-side authentication, see the [Client SDK reference](/docs/reference/j
 <TwoColumnLayout.Item title="Installation" id="installation">
 <TwoColumnLayout.Block>
 
-Install the Neon Auth package in your Next.js project using npm, yarn, pnpm, or bun.
+Install the Managed Better Auth package in your Next.js project using npm, yarn, pnpm, or bun.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -37,7 +41,7 @@ npm install @neondatabase/auth@latest
 
 Configure these environment variables in your `.env.local` file:
 
-- **NEON_AUTH_BASE_URL** (required): Your Neon Auth server URL from the Neon Console
+- **NEON_AUTH_BASE_URL** (required): Your Managed Better Auth server URL from the Neon Console
 - **NEON_AUTH_COOKIE_SECRET** (required): Secret for signing session cookies (must be 32+ characters for HMAC-SHA256 security)
 
 Generate a secure secret with: `openssl rand -base64 32`
@@ -46,7 +50,7 @@ Generate a secure secret with: `openssl rand -base64 32`
 <TwoColumnLayout.Block>
 
 ```bash
-# Required: Your Neon Auth server URL
+# Required: Your Managed Better Auth server URL
 NEON_AUTH_BASE_URL=https://your-neon-auth-url.neon.tech
 
 # Required: Cookie secret for session data signing (32+ characters)
@@ -70,12 +74,17 @@ Returns an `auth` object with:
 
 ### Parameters
 
-| Parameter                       | Type   | Required | Default |
-| ------------------------------- | ------ | -------- | ------- |
-| <tt>baseUrl</tt>                | string | ✓        | -       |
-| <tt>cookies.secret</tt>         | string | ✓        | -       |
-| <tt>cookies.sessionDataTtl</tt> | number |          | 300     |
-| <tt>cookies.domain</tt>         | string |          | -       |
+| Parameter                       | Type   | Required | Default               |
+| ------------------------------- | ------ | -------- | --------------------- |
+| <tt>baseUrl</tt>                | string | ✓        | -                     |
+| <tt>cookies.secret</tt>         | string | ✓        | -                     |
+| <tt>cookies.sessionDataTtl</tt> | number |          | 300                   |
+| <tt>cookies.domain</tt>         | string |          | -                     |
+| <tt>cookies.sameSite</tt>       | string |          | `strict`              |
+| <tt>logLevel</tt>               | string |          | `warn`                |
+| <tt>logger</tt>                 | object |          | `console` (per level) |
+
+See [Server logging](#server-logging) and [Upstream fetch errors](#upstream-fetch-errors).
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -89,8 +98,49 @@ export const auth = createNeonAuth({
   cookies: {
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
   },
+  // logLevel: 'silent',
 });
 ```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="Server logging" id="server-logging">
+<TwoColumnLayout.Block>
+
+Managed Better Auth emits structured logs from the API proxy, middleware, and Better Auth server `fetch` for upstream failures and session issues.
+
+**Defaults:** `logLevel: 'warn'` writes **`error`** and **`warn`** to **`console`**. Set **`logLevel: 'silent'`** to disable all Managed Better Auth `console` output (`'silent'` ignores any custom **`logger`**). Use **`info`** or **`debug`** for more detail during local troubleshooting.
+
+**Custom sink:** Pass a partial **`logger`** object with `error`, `warn`, `info`, and/or `debug` methods. Omitted methods still use `console`. Metadata may include `err` and `detail` for observability tools.
+
+`auth.middleware()` inherits the same resolved logging configuration from `createNeonAuth` (no per-request reconfiguration).
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: { secret: process.env.NEON_AUTH_COOKIE_SECRET! },
+  logLevel: 'debug',
+  logger: {
+    warn(message, meta) {
+      myLogger.warn({ message, ...meta });
+    },
+  },
+});
+```
+
+| <tt>logLevel</tt> | Console output          |
+| ----------------- | ----------------------- |
+| `silent`          | None                    |
+| `error`           | `error` only            |
+| `warn` (default)  | `error`, `warn`         |
+| `info`            | `error`, `warn`, `info` |
+| `debug`           | all levels              |
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Item>
@@ -98,7 +148,7 @@ export const auth = createNeonAuth({
 <TwoColumnLayout.Item title="auth.handler()" method="auth.handler()" id="auth-handler">
 <TwoColumnLayout.Block>
 
-Creates GET and POST route handlers for the Neon Auth API proxy.
+Creates GET and POST route handlers for the Managed Better Auth API proxy.
 
 Create a catch-all route at `app/api/auth/[...path]/route.ts`. This handles all authentication API calls from your client, including:
 
@@ -148,11 +198,12 @@ The middleware automatically:
 
 </details>
 
+<NextjsProxyNote/>
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
 
-```typescript
-// middleware.ts
+```typescript filename="proxy.ts"
 import { auth } from '@/lib/auth/server';
 
 export default auth.middleware({
@@ -786,6 +837,52 @@ const { data, error } = await auth.admin.setRole({
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Item>
 
+<TwoColumnLayout.Item title="Upstream fetch errors" id="upstream-fetch-errors">
+<TwoColumnLayout.Block>
+
+When the SDK cannot reach your Managed Better Auth server (wrong `baseUrl`, DNS, TLS, timeout), the API proxy returns a synthetic **502** JSON body with a stable **`code`**. Server methods such as `auth.signIn.email()` surface the same codes on **`error.code`** when the failure is transport-related.
+
+| Code              | Typical cause             |
+| ----------------- | ------------------------- |
+| `NETWORK_DNS`     | Hostname does not resolve |
+| `NETWORK_REFUSED` | Connection refused        |
+| `NETWORK_TIMEOUT` | Request timed out         |
+| `NETWORK_TLS`     | TLS / certificate error   |
+| `NETWORK_RESET`   | Connection reset          |
+| `NETWORK_ABORT`   | Request aborted           |
+| `NETWORK_ERROR`   | Other transport failure   |
+
+Client-visible messages are generic (for example, “Could not resolve authentication server hostname”). Check server logs (set `logLevel: 'debug'`) for `detail` and the raw error.
+
+**Non-transport failures** (unexpected exceptions while handling a response) are **re-thrown** so Next.js error boundaries still receive the original error. HTTP **4xx** upstream responses are logged at **`info`**; **5xx** at **`warn`**.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript
+'use server';
+
+import { auth } from '@/lib/auth/server';
+
+export async function signIn(formData: FormData) {
+  const { error } = await auth.signIn.email({
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  });
+
+  if (error?.code === 'NETWORK_DNS') {
+    return { error: 'Check NEON_AUTH_BASE_URL in .env.local' };
+  }
+
+  if (error) {
+    return { error: error.message };
+  }
+}
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
 <TwoColumnLayout.Item title="Performance features" id="performance-features">
 <TwoColumnLayout.Block>
 
@@ -832,11 +929,17 @@ Complete configuration options for `createNeonAuth()`:
 | `cookies.secret`         | string | Yes      | -         |
 | `cookies.sessionDataTtl` | number | No       | 300       |
 | `cookies.domain`         | string | No       | undefined |
+| `cookies.sameSite`       | string | No       | `strict`  |
+| `logLevel`               | string | No       | `warn`    |
+| `logger`                 | object | No       | `console` |
 
-- **baseUrl**: Your Neon Auth server URL from the Neon Console
+- **baseUrl**: Your Managed Better Auth server URL from the Neon Console
 - **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
-- **cookies.sessionDataTtl**: Cache TTL in seconds
+- **cookies.sessionDataTtl**: Cache TTL in seconds for the signed `session_data` cookie
 - **cookies.domain**: For cross-subdomain sessions (for example, ".example.com")
+- **cookies.sameSite**: `strict` (default), `lax`, or `none`. Use `lax` or `none` if you embed the app in a third-party iframe or need cookies on cross-site navigations
+- **logLevel**: `silent`, `error`, `warn`, `info`, or `debug` — see [Server logging](#server-logging)
+- **logger**: Optional custom logger; see [Server logging](#server-logging)
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -858,14 +961,16 @@ export const auth = createNeonAuth({
 <TwoColumnLayout.Item title="Project structure" id="project-structure">
 <TwoColumnLayout.Block>
 
-Recommended file structure for Next.js with Neon Auth:
+Recommended file structure for Next.js with Managed Better Auth:
 
 - `app/api/auth/[...path]/route.ts` - Auth API handlers
 - `app/auth/[path]/page.tsx` - Auth views (sign-in, sign-up)
 - `app/dashboard/page.tsx` - Protected pages
 - `lib/auth/server.ts` - Server auth instance
 - `lib/auth/client.ts` - Client auth instance
-- `middleware.ts` - Next.js middleware
+- `proxy.ts` (Next.js 16+) or `middleware.ts` (earlier versions) - Route protection
+
+<NextjsProxyNote/>
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -889,7 +994,7 @@ lib/
     ├── server.ts
     └── client.ts
 
-middleware.ts
+proxy.ts          # or middleware.ts on Next.js < 16
 .env.local
 ```
 
@@ -900,7 +1005,7 @@ middleware.ts
 
 ## Migration from v0.1
 
-If you're upgrading from Neon Auth SDK v0.1, see the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
+If you're upgrading from Managed Better Auth SDK v0.1, see the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
 
 ## Related documentation
 

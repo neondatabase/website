@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-replace/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REVERSE() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The REPLACE() function works the same in any PostgreSQL database, so everything here carries over whether you run Postgres on your laptop, on a managed service, or in the cloud. If you're an enterprise standardizing on a Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres for the AI era, with the performance, security, and deep Lakehouse integration large teams need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The REPLACE() function works the same in any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REPLACE()` function to replace a substring with a new one.
@@ -70,7 +70,7 @@ If you want to search and replace a substring in a table column, you use the fol
 UPDATE
   table_name
 SET
-  column_name = REPLACE(column, old_text, new_text)
+  column_name = REPLACE(column_name, old_text, new_text)
 WHERE
   condition;
 ```
@@ -125,7 +125,7 @@ UPDATE 3
 
 The output indicates that three rows were updated.
 
-Third, verify the update by retrieving data from the `customer` table:
+Third, verify the update by retrieving data from the `posts` table:
 
 ```sql
 SELECT * FROM posts;
@@ -147,4 +147,4 @@ The output indicates that the `http` in the `url` column were replaced by the `h
 
 ## Summary
 
-- Use the PostgreSQL `REPLACE()` function to replace all occurrences of a substring in a string with another a new substring.
+- Use the PostgreSQL `REPLACE()` function to replace all occurrences of a substring in a string with a new substring.

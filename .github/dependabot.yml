@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Keep pinned GitHub Action SHAs current (Dependabot updates the SHA and the
+  # trailing version comment together).
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: 'ci'
+
+  # npm dependencies (source of truth is package-lock.json / npm ci in CI).
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: 'chore'

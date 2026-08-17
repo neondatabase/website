@@ -2,11 +2,15 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 summary: >-
-  Step-by-step guide for leveraging Neon read replicas to scale Prisma
-  applications, including creating read replicas and configuring compute size
-  settings for optimized read operations.
+  Neon read replicas for Prisma route read queries to independent read-only
+  computes using the @prisma/extension-read-replicas package, distributing
+  load without extra storage costs. Use this page when you want to offload
+  SELECT queries from your primary compute in a Prisma app, keeping writes and
+  $transaction calls on the primary. Newer Prisma versions require each replica
+  to be a separate PrismaClient instance with a PrismaNeon adapter. Multiple
+  replicas are selected randomly per query.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -43,7 +47,7 @@ You can add a read replica by following these steps:
 
    Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.
 
-Alternatively, you can create read replicas using the [Neon API](https://api-docs.neon.tech/reference/createprojectendpoint) or [Neon CLI](/docs/reference/cli-branches#create).
+Alternatively, you can create read replicas using the [Neon API](/docs/reference/api/endpoints/create-project-endpoint) or [Neon CLI](/docs/cli/branches#create).
 
 <CodeTabs labels={["API", "CLI"]}>
 
@@ -166,6 +170,10 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
    When your application runs, read operations are sent to the read replica. If you specify multiple read replicas, a read replica is selected randomly.
 
    All write and `$transaction` queries are sent to the primary compute defined by `DATABASE_URL`, which is your read/write compute.
+
+   <Admonition type="warning">
+   Read replicas are read-only. Sending a write (`INSERT`, `UPDATE`, `DELETE`, or DDL) to a read replica fails with `ERROR: cannot execute INSERT in a read-only transaction (SQLSTATE 25006)`. Make sure `DATABASE_REPLICA_URL` points at a read replica compute and `DATABASE_URL` points at your read/write compute so writes are routed to the primary. See [cannot execute ... in a read-only transaction](/docs/connect/connection-errors#error-read-only-transaction).
+   </Admonition>
 
    If you want to read from the primary compute and bypass read replicas, you can use the `$primary()` method in your extended Prisma Client instance:
 

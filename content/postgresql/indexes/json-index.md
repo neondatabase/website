@@ -6,7 +6,7 @@ page_description: >-
   JSONB column to improve query performance.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-json-index/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Full Text Search
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Indexing JSONB columns with GIN works the same way on any PostgreSQL database, so everything here applies whether you run Postgres yourself or on a managed service. If you're an enterprise investing in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the job, delivering high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup that needs to ship fast and scale without friction, [Neon](https://neon.com) gives you serverless Postgres with branching, instant provisioning, and a generous free tier.
+Indexing JSONB columns with GIN works the same way on any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to create a PostgreSQL JSON index for a JSONB column to improve query performance.
@@ -54,7 +54,7 @@ ON table_name
 USING GIN(jsonb_column jsonb_path_ops);
 ```
 
-This index is optimized for the queries that use the @\> (contains), ? (exists), and @@ JSONB operators. It can be useful for searches involving keys or values within JSONB documents.
+This index is optimized for the queries that use the @\> (contains), @?, and @@ JSONB operators. It can be useful for searches involving keys or values within JSONB documents.
 
 The following table displays the `GIN` operator classes:
 
@@ -298,7 +298,7 @@ Output:
 (5 rows)
 ```
 
-In this plan, the query cannot fully utilize the `GIN` index `customer_json_index`. The reason is that the query does not use the JSONB operator (`@`, `@?`, `@@`) that the `jsonb_path_ops` operator class is optimized for.
+In this plan, the query cannot fully utilize the `GIN` index `customer_json_index`. The reason is that the query does not use the JSONB operator (`@>`, `@?`, `@@`) that the `jsonb_path_ops` operator class is optimized for.
 
 ### 4\) Creating an index on a specific field of a JSONB column
 

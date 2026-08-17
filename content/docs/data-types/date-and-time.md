@@ -2,11 +2,15 @@
 title: Postgres Date and Time data types
 subtitle: Work with date and time values in Postgres
 summary: >-
-  Covers the storage and manipulation of date and time values in Postgres,
-  detailing five primary data types and their usage in various applications such
-  as event logging and duration calculations.
+  Postgres date and time types (DATE, TIME, TIMESTAMP, TIMESTAMPTZ, and
+  INTERVAL) store moments, times of day, and durations with or without time
+  zone awareness, at 1-microsecond resolution. Use this page to choose between
+  TIMESTAMP and TIMESTAMPTZ, understand how Postgres converts timezone-aware
+  input to UTC internally, and write queries that filter date ranges or compute
+  durations. Topics include arithmetic operators, the OVERLAPS predicate, and
+  functions such as EXTRACT and AGE.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.073Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Postgres offers a rich set of native data types for storing date and time values. Both moment-in-time and interval data can be stored, and Postgres provides a variety of functions to query and manipulate them.

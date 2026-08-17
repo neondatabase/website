@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_object_keys/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_each_text() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `jsonb_object_keys()` function is part of standard PostgreSQL and works the same on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking to run JSONB workloads at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with the performance, security, and native Lakehouse integration that large teams need. If you're a developer or startup who wants to ship fast on Postgres and scale without friction, Neon is the platform to build on.
+The `jsonb_object_keys()` function is part of standard PostgreSQL and works the same on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_keys()` function to extract the keys from a JSON object.
@@ -47,7 +47,7 @@ If the `json_object` is `NULL`, the function will return an empty set.
 
 Let’s take some examples of using the `jsonb_object_keys()` function.
 
-### 1\) Basic the jsonb_object_keys() function examples
+### 1\) Basic jsonb_object_keys() function examples
 
 The following example uses the `jsonb_object_keys()` function to extract the keys of a JSON object as a set of text values:
 

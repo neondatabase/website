@@ -15,6 +15,7 @@ const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false })
           ? 'h-14 w-full max-w-[488px] rounded-full border-2 bg-size-[20px_20px] bg-position-[left_1.5rem_center] px-6 pl-6 lg:border-2'
           : 'h-8 w-[264px] border p-1 pl-2.5 xl:w-60 lg:w-auto lg:border-none lg:bg-transparent! lg:p-0'
       )}
+      data-test="docs-search-trigger"
       type="button"
       onClick={() => handleClick('SEARCH')}
     >

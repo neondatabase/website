@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-width_bucket/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL TRIM_SCALE() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The WIDTH_BUCKET() function works the same across any PostgreSQL deployment, so the techniques here for binning numeric data and building histograms apply whether you're running Postgres on your laptop, in your own cluster, or on a managed service. For enterprises standardizing on AI and analytics, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance and security built directly into the Lakehouse. For developers and startups who need to ship features and scale without friction, [Neon](https://neon.com) is the Postgres platform that keeps up with you.
+The WIDTH_BUCKET() function works the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `WIDTH_BUCKET()` function for binning numeric data into discrete buckets.
@@ -86,7 +86,7 @@ In this example:
 - The `WIDTH_BUCKET()` function returns 1 for the value 0 because 0 falls in the range of the first bucket (0,10\).
 - The `WIDTH_BUCKET()` function returns 2 for the value 12 because 12 falls in the second bucket (10, 20\).
 - The `WIDTH_BUCKET()` function returns 3 for the value 25 because 25 falls in the third bucket (20, 30\).
-- The `WIDTH_BUCKET()` functions return 3 for the value 35 because 35 is greater than the upper bound (30\).
+- The `WIDTH_BUCKET()` function returns 4 for the value 35 because 35 is greater than the upper bound (30\).
 
 ### 2\) Using the WIDTH_BUCKET() function with table data
 

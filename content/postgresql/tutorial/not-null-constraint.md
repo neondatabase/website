@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-not-null-constraint/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UNIQUE Constraint
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-NOT NULL constraints work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+NOT NULL constraints work the same way on any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL not\-null constraints to ensure the values of a column are not null.
@@ -57,7 +57,7 @@ If a column has a `NOT NULL` constraint, any attempt to [insert](postgresql-inse
 
 ## Declaring NOT NULL columns
 
-The following `CREATE TABLE` statement creates a new table name `invoices` with the not\-null constraints.
+The following `CREATE TABLE` statement creates a new table named `invoices` with the not\-null constraints.
 
 ```sql
 CREATE TABLE invoices(
@@ -83,7 +83,7 @@ ALTER TABLE table_name
 ALTER COLUMN column_name SET NOT NULL;
 ```
 
-To add multiple `NOT NULL` constraints to multiple columns, you use the following syntax:
+To add `NOT NULL` constraints to multiple columns, you use the following syntax:
 
 ```sql
 ALTER TABLE table_name
@@ -123,7 +123,7 @@ UPDATE production_orders
 SET qty = 1;
 ```
 
-The values in the `qty` column is updated to one. Now, you can add the `NOT NULL` constraint to the `qty` column:
+The values in the `qty` column are updated to one. Now, you can add the `NOT NULL` constraint to the `qty` column:
 
 ```sql
 ALTER TABLE production_orders

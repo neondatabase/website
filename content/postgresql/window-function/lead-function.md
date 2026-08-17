@@ -6,7 +6,7 @@ page_description: >-
   access a row that follows the current row, at a specific physical offset.
 prev_url: index.html
 ogImage: /postgresqltutorial/Sales-sample-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LAST_VALUE Function
@@ -17,18 +17,18 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The LEAD() function is standard PostgreSQL and works the same on any Postgres deployment, so everything here applies wherever you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres with the performance, security, and native Lakehouse integration your analytics and AI workloads need. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+The LEAD() function is standard PostgreSQL and works the same on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LEAD()` function to access a row that follows the current row, at a specific physical offset.
 
 ## Introduction to PostgreSQL LEAD() function
 
-PostgreSQL `LEAD()` function provide access to a row that follows the current row at a specified physical offset.
+PostgreSQL `LEAD()` function provides access to a row that follows the current row at a specified physical offset.
 
 It means that from the current row, the `LEAD()` function can access data of the next row, the row after the next row, and so on.
 
-The `LEAD()` function is very useful for comparing the value of the current row with the value of the row that following the current row.
+The `LEAD()` function is very useful for comparing the value of the current row with the value of the row that follows the current row.
 
 The following illustrates the syntax of `LEAD()` function:
 

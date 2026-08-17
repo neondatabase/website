@@ -6,7 +6,7 @@ page_description: >-
   and TIMESTAMPTZ for storing timestamp data.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-timestamp/'
 ogImage: /postgresqltutorial/PostgreSQL-Timestamp-300x171.jpg
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DATE Data Type
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Working with timestamp and timestamptz is core PostgreSQL behavior, so everything here applies whether you run Postgres on your laptop, in your own data center, or on any managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that's natively integrated into the Lakehouse. If you're a developer or startup who needs to ship features and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for your speed.
+Working with timestamp and timestamptz is core PostgreSQL behavior. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL timestamp data types including `timestamp` and `timestamptz`. You will also learn how to use some handy functions to handle timestamp data effectively.

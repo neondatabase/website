@@ -11,8 +11,8 @@ const getAllPosts = async () => {
   const slugs = await getPostSlugs(DOCS_DIR_PATH);
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, DOCS_DIR_PATH)) return;
       const data = getPostBySlug(slug, DOCS_DIR_PATH);
+      if (!data) return;
 
       const slugWithoutFirstSlash = slug.slice(1);
       const {
@@ -25,8 +25,47 @@ const getAllPosts = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
-const getNavigation = () =>
-  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/navigation.yaml`, 'utf8'));
+function mergeApiNavigation(mainNav, apiNavItems) {
+  let replaced = false;
+  function inject(nodes) {
+    if (!Array.isArray(nodes)) return nodes;
+    return nodes.map((node) => {
+      if (node.section === 'API Reference') {
+        replaced = true;
+        return { ...node, items: apiNavItems };
+      }
+      const next = { ...node };
+      if (node.items) next.items = inject(node.items);
+      if (node.subnav) next.subnav = inject(node.subnav);
+      return next;
+    });
+  }
+  const result = inject(mainNav);
+  if (!replaced) {
+    console.warn(
+      "[api-docs] 'API Reference' section not found in navigation.yaml — api-navigation.yaml was not merged"
+    );
+  }
+  return result;
+}
+
+let _navigationCache = null;
+
+const getNavigation = () => {
+  if (_navigationCache) return _navigationCache;
+  const mainNav = jsYaml.load(
+    fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/navigation.yaml`, 'utf8')
+  );
+  const apiNavPath = `${process.cwd()}/${DOCS_DIR_PATH}/api-navigation.yaml`;
+  const result = fs.existsSync(apiNavPath)
+    ? mergeApiNavigation(mainNav, jsYaml.load(fs.readFileSync(apiNavPath, 'utf8')))
+    : mainNav;
+  // Skip cache in development so navigation.yaml edits are visible on reload.
+  if (process.env.NODE_ENV !== 'development') {
+    _navigationCache = result;
+  }
+  return result;
+};
 
 const getSDKNavigation = () =>
   jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sdk-navigation.yaml`, 'utf8'));
@@ -51,11 +90,14 @@ const getAllChangelogs = async () => {
 
   return slugs
     .map((slug) => {
-      if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
+      const post = getPostBySlug(slug, CHANGELOG_DIR_PATH);
+      if (!post) return;
+
       const {
         data: { title, isDraft, redirectFrom },
         content,
-      } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
+      } = post;
+
       const slugWithoutFirstSlash = slug.slice(1);
       const date = slugWithoutFirstSlash;
 

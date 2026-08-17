@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL INNER JOIN clause.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-inner-join/'
 ogImage: /postgresqltutorial/PostgreSQL-Join-Inner-Join.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Table Aliases
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The INNER JOIN clause works the same way across any PostgreSQL deployment, so the syntax and examples here apply wherever you run Postgres. If you're an enterprise running analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, security, and native integration into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path to production Postgres with branching, instant provisioning, and serverless scale.
+The INNER JOIN clause works the same way across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to select data from multiple tables using the **PostgreSQL INNER JOIN** clause.

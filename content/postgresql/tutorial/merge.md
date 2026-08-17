@@ -6,7 +6,7 @@ page_description: >-
   conditionally insert, update, and delete rows of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-merge/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-07-13T14:20:27.525Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL UPSERT using INSERT ON CONFLICT Statement
@@ -15,10 +15,11 @@ nextLink:
   title: PostgreSQL Transaction
   slug: postgresql-tutorial/postgresql-transaction
 tag: new
+tagTheme: green
 ---
 
 <Admonition type="info" id="CTA">
-The MERGE statement works the same way across any PostgreSQL 15 or later deployment, so everything here applies whether you run Postgres yourself or on a managed service. For enterprises standardizing on an AI-ready data stack, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant and secure managed Postgres in the cloud, fully integrated with the Lakehouse so your transactional and analytical data stay in sync. For developers and startups who need to ship features fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform to reach for.
+The MERGE statement works the same way across any PostgreSQL 15 or later deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: In this tutorial, you will learn how to use the PostgreSQL `MERGE` statement to conditionally insert, update, and delete rows of a table.

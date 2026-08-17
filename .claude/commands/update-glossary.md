@@ -33,7 +33,7 @@ Use when the user names a doc file or is working on a specific page.
 
 1. **Identify the file(s).** Use the file the user named or the currently open doc. If none, ask: "Which doc should I check against the glossary?"
 2. **Load the glossary.** Read `content/docs/reference/glossary.md`. Build a list of existing terms from `## term` headings (normalize for comparison, e.g. "read replica" vs "read replicas").
-3. **Scan the doc for Neon terms.** Flag phrases that look like Neon product or feature terms: compute, branch, read replica, primary compute, Pageserver, Safekeeper, Autoscaling, Scale to Zero, endpoint, connection pooling, logical replication, restore window, IP Allow, and any other capitalized or technical terms that might belong in the glossary.
+3. **Scan the doc for Neon terms.** Flag phrases that look like Neon product or feature terms: compute, branch, read replica, primary compute, Pageserver, Safekeeper, Autoscaling, Scale to Zero, endpoint, connection pooling, logical replication, history window, instant restore, IP Allow, and any other capitalized or technical terms that might belong in the glossary.
 4. **Compare and produce the checklist.**
    - **Missing terms:** In the doc but not the glossary. Suggest a short definition following the best practices above, or "See [Existing term](#anchor)" if it's an alias.
    - **Terms to review:** In both the doc and glossary where the doc's usage may have changed.

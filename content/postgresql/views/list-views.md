@@ -6,7 +6,7 @@ page_description: >-
   database in PostgreSQL using psql or SQL.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-views/postgresql-list-views/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Recursive View
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Listing views with psql's dv command, information_schema.views, and pg_matviews works the same way on any PostgreSQL deployment, so you can apply these techniques wherever your database runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with high performance, strong security, and native integration into the Lakehouse. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
+Listing views with psql's dv command, information_schema.views, and pg_matviews works the same way on any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to list views in the PostgreSQL database server using the `psql` command and SQL statements.
@@ -170,5 +170,5 @@ Output:
 ## Summary
 
 - Utilize the `\dv` command to list all views of a database using the `psql` program.
-- Use the `information_schemas.views` view to retrieve information about views.
+- Use the `information_schema.views` view to retrieve information about views.
 - Use the `pg_matviews` view to obtain the materialized views.

@@ -2,14 +2,18 @@
 title: User management
 subtitle: 'Update profiles, change passwords, and manage account settings'
 summary: >-
-  Covers the management of user profiles, including updating personal
-  information, securely changing passwords, verifying email address changes, and
-  deleting accounts within the Neon platform.
+  Managed Better Auth user management exposes `updateUser()` to edit
+  profile fields such as display name, and `changePassword()` to change
+  passwords for signed-in users while requiring the current password for
+  verification. Use this page when you need to update account settings or change
+  credentials after sign-in, not for password reset flows or email verification,
+  which are covered in separate guides. The `revokeOtherSessions` flag in
+  `changePassword()` lets you sign out all other devices in the same call.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.752Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Manage user profiles and account settings after users sign in. This guide covers:
 

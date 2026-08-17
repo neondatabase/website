@@ -2,12 +2,16 @@
 title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 summary: >-
-  Covers the setup and important considerations for logical replication in Neon,
-  detailing how it functions as both a publisher and subscriber, including
-  management of replication slots and implications for scaling.
+  Logical replication in Neon requires enabling it per project, which
+  permanently changes `wal_level` to `logical` and restarts all computes.
+  Use this page when configuring Neon as a publisher or subscriber. It covers
+  Neon-specific constraints: inactive replication slots are removed after ~40
+  hours, subscribers prevent scale-to-zero, and `max_wal_senders` and
+  `max_replication_slots` are both set to 10. Supported decoder plugins are
+  `pgoutput` and `wal2json`.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-27T17:26:37.000Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
@@ -20,7 +24,7 @@ When replicating data from Neon, enable logical replication on your Neon project
 Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
 </Admonition>
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -33,7 +37,17 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 
 <TabItem>
 
-Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+Use the [Neon CLI](/docs/cli) `projects update` command with `--enable-logical-replication`. Replace `$PROJECT_ID` with your project ID. The `--yes` flag skips the confirmation prompt.
+
+```bash
+neon projects update $PROJECT_ID --enable-logical-replication --yes
+```
+
+</TabItem>
+
+<TabItem>
+
+Use the [Update project](/docs/reference/api/projects/update-project) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/$PROJECT_ID' \
@@ -126,6 +140,10 @@ WHERE rolname = '<role_name>';
 ## Subscriber access
 
 A subscriber must be able to access the Neon database that is acting as a publisher. In Neon, no action is required unless you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon.
+
+<Admonition type="important">
+When a subscriber connects to a Neon publisher, use a direct connection string, not a pooled one. Logical replication requires a persistent connection and is not compatible with connection poolers. Make sure the connection string you give the subscriber does not include the `-pooler` suffix in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 If you use Neon's **IP Allow** feature:
 

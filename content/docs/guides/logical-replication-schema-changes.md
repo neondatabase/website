@@ -2,12 +2,17 @@
 title: Managing schema changes in a logical replication setup
 subtitle: Learn about managing schema changes in a logical replication setup
 summary: >-
-  Covers the management of schema changes in a Postgres logical replication
-  setup, emphasizing the need for manual synchronization of schema modifications
-  and recommending the application of additive changes to the subscriber first.
+  Postgres logical replication does not replicate DDL or schema changes, so
+  developers must manually apply and coordinate schema modifications across
+  publisher and subscriber to avoid replication errors. Additive changes (such
+  as adding a column) should be applied to the subscriber first. Non-additive
+  changes (such as dropping a column) should be applied to the publisher first,
+  optionally after pausing writes. Also covers verifying replication health with
+  pg_stat_subscription and using migration tools like Flyway and Liquibase to
+  keep environments in sync.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.017Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 When working with Postgres logical replication, managing schema changes is a task that requires careful planning. As stated in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-restrictions.html):

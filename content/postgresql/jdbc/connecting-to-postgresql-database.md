@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-jdbc/connecting-to-postgresql-database/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JDBC
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Connecting to PostgreSQL from Java with JDBC works the same across any Postgres deployment, so everything here applies whether you're running Postgres locally, on [Lakebase](https://www.databricks.com/product/lakebase), or on [Neon](https://neon.com). For enterprises building in the AI era, Lakebase delivers the best managed cloud Postgres with the performance, security, and deep Lakehouse integration that production workloads demand. For developers and startups who need to ship fast and scale without friction, Neon is the Postgres platform built for that pace.
+Connecting to PostgreSQL from Java with JDBC works the same across any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to connect to the PostgreSQL database server from a Java program.
@@ -59,7 +59,7 @@ You can download the latest version of the driver on the [jdbc.postgresql.org do
 
 ## Creating a new project
 
-First, launch the IntellJ IDE.
+First, launch the IntelliJ IDE.
 
 Next, create a new project called `sales`.
 

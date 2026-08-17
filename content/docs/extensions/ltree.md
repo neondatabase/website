@@ -2,11 +2,16 @@
 title: The ltree extension
 subtitle: Store and query hierarchical tree-like structures in Postgres
 summary: >-
-  Covers the setup of the `ltree` extension in Postgres, enabling the creation
-  and querying of hierarchical tree-like structures for modeling parent-child
-  relationships in data.
+  The `ltree` Postgres extension adds a native data type for storing
+  hierarchical label paths. It provides operators like `<@` and `@>` for
+  ancestor/descendant queries, `~` for lquery pattern matching, and functions
+  like `nlevel()`, `subpath()`, and `lca()` for tree traversal. Use it instead
+  of recursive CTEs or adjacency list models when querying org charts, category
+  trees, file system paths, or any parent-child hierarchy. GiST indexes
+  accelerate ancestor/descendant lookups; B-tree indexes suit equality
+  comparisons on `ltree` columns.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `ltree` extension provides a data type for representing labels of data stored in a hierarchical tree-like structure. It offers specialized functions and operators for efficiently traversing and searching through these tree structures, making it ideal for modeling hierarchical relationships in your data.

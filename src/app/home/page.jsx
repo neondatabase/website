@@ -6,7 +6,7 @@ import Branching from 'components/pages/home/branching';
 import CTA from 'components/pages/home/cta';
 import Features from 'components/pages/home/features';
 import Hero from 'components/pages/home/hero';
-import SpeedScale from 'components/pages/home/speed-scale';
+// import SpeedScale from 'components/pages/home/speed-scale';
 import TocWrapper from 'components/pages/home/toc-wrapper/toc-wrapper';
 import JsonLd from 'components/shared/json-ld';
 import Layout from 'components/shared/layout';
@@ -33,7 +33,7 @@ const HomePage = () => {
         <Auth />
         <Features />
       </TocWrapper>
-      <SpeedScale />
+      {/* <SpeedScale /> */}
       <BackedBy />
       <CTA />
     </Layout>

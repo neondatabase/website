@@ -4,11 +4,11 @@ subtitle: A step-by-step guide describing how to use Postgres as a document stor
 author: vkarpov15
 enableTableOfContents: true
 createdAt: '2024-12-17T13:24:36.612Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-06-04T15:33:28.271Z'
 ---
 
 The JSONB type enables you to store and query nested JSON-like data in Postgres.
-With JSONB, you can to store arbitrarily complex objects and arrays in your Postgres tables, as well as query based on properties in those objects and arrays.
+With JSONB, you can store arbitrarily complex objects and arrays in your Postgres tables, as well as query based on properties in those objects and arrays.
 You can even use GIN indexes to index nested properties within JSONB objects.
 
 ## Steps

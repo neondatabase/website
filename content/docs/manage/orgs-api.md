@@ -1,11 +1,14 @@
 ---
 title: Manage organizations using the Neon API
 summary: >-
-  Covers managing Neon Organizations through the Neon API, including handling
-  organization API keys, member management, and invitations, with distinctions
-  between personal and organization API key usage.
+  Neon Organization API endpoints for managing org API keys, members,
+  invitations, and project transfers. Organization API keys are auto-scoped to
+  the org; personal API keys require an explicit org_id parameter. Some
+  operations, including creating invitations, removing members, and transferring
+  projects, require a personal admin key and reject organization API keys. A
+  permission matrix maps each endpoint to its supported key type.
 enableTableOfContents: true
-updatedOn: '2026-03-13T19:35:31.433Z'
+updatedOn: '2026-08-04T15:25:12.468Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -65,14 +68,16 @@ To find your organization's `org_id`, navigate to your Organization's **Settings
 
 There are two types of organization API keys:
 
-- **Organization API keys**: Provide admin-level access to all organization resources, including projects, members, and settings. Only organization admins can create these keys.
-- **Project-scoped organization API keys**: Provide limited, member-level access to specific projects within the organization. Any organization member can create a key for any organization-owned project.
+- **Organization API keys**: Provide admin-level access to all organization resources, including projects, members, and settings. Only organization Admins can create these keys.
+- **Project-scoped organization API keys**: Provide [**Editor** access](/docs/manage/user-permissions#per-project-permissions) to a single project within the organization, so they can read and modify project resources but can't delete the project or manage who can access it. Only organization Admins can create these keys.
+
+If you're an Editor, Viewer, or Collaborator, create a personal API key instead; it's scoped to your own access.
 
 The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
 Organization API key creation (`POST /organizations/{org_id}/api_keys`) is rate limited to 10 requests per second. If you create keys in bulk, throttle your requests or use retries with backoff.
 
-[Try in API Reference](https://api-docs.neon.tech/reference/createorgapikey)
+[Try in API Reference](/docs/reference/api/organizations/create-org-api-key)
 
 ## List API keys
 
@@ -103,7 +108,7 @@ Example response:
 ]
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/listorgapikeys)
+[Try in API Reference](/docs/reference/api/organizations/list-org-api-keys)
 
 ## Revoke an API key
 
@@ -130,7 +135,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/revokeorgapikey)
+[Try in API Reference](/docs/reference/api/organizations/revoke-org-api-key)
 
 ## Get organization details
 
@@ -156,7 +161,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/getorganization)
+[Try in API Reference](/docs/reference/api/organizations/get-organization)
 
 ## List members
 
@@ -213,7 +218,7 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmembers)
+[Try in API Reference](/docs/reference/api/organizations/get-organization-members)
 
 <Admonition type="note">The member ID (`id`) from this response is needed for operations like updating roles or removing members.</Admonition>
 
@@ -240,11 +245,13 @@ Example response:
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmember)
+[Try in API Reference](/docs/reference/api/organizations/get-organization-member)
 
 ## Update member role
 
 Changes a member's current role in the organization. If using your personal API key, you need to be an admin in the organization to perform this action. Note: you cannot downgrade the role of the organization's only admin.
+
+Valid roles are `admin`, `editor`, `viewer`, and `collaborator`. The value `member` is still accepted as a legacy alias for `editor`. A member's organization role sets their baseline access on every project; to change their access on a single project, see [Manage project access](#manage-project-access).
 
 ```bash shouldWrap
 curl --request PATCH \
@@ -252,7 +259,7 @@ curl --request PATCH \
      --header 'accept: application/json' \
      --header 'authorization: Bearer $ORG_API_KEY' \
      --header 'content-type: application/json' \
-     --data '{"role": "admin"}' | jq
+     --data '{"role": "editor"}' | jq
 ```
 
 Example response:
@@ -262,12 +269,12 @@ Example response:
   "id": "abc123de-4567-8fab-9012-3cdef4567890",
   "user_id": "def456gh-7890-1abc-2def-3ghi4567890j",
   "org_id": "org-example-12345678",
-  "role": "admin",
+  "role": "editor",
   "joined_at": "2024-01-01T12:00:00Z"
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/updateorganizationmember)
+[Try in API Reference](/docs/reference/api/organizations/update-organization-member)
 
 ## Remove member
 
@@ -280,7 +287,7 @@ curl --request DELETE \
      --header 'authorization: Bearer $PERSONAL_API_KEY'
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/removeorganizationmember)
+[Try in API Reference](/docs/reference/api/organizations/remove-organization-member)
 
 ## List invitations
 
@@ -304,20 +311,20 @@ Example response:
       "org_id": "org-example-12345678",
       "invited_by": "def456gh-7890-1abc-2def-3ghi4567890j",
       "invited_at": "2024-01-01T12:00:00Z",
-      "role": "member"
+      "role": "editor"
     }
   ]
 }
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationinvitations)
+[Try in API Reference](/docs/reference/api/organizations/get-organization-invitations)
 
 ## Create invitations
 
-Creates invitations for new organization members. Each invited user:
+Creates invitations for new organization members. Specify the organization role each invited user should get (`admin`, `editor`, `viewer`, or `collaborator`). Each invited user:
 
 - Receives an email notification about the invitation
-- If they have an existing Neon account, they automatically join as a member
+- If they have an existing Neon account, they automatically join with the role you specified
 - If they don't have an account yet, the email invites them to create one
 
 You must use your personal API key and have admin-level permissions in the organization to use this endpoint. Organization API keys are not supported.
@@ -332,13 +339,13 @@ curl --request POST \
        "invitations": [
          {
            "email": "user@example.com",
-           "role": "member"
+           "role": "editor"
          }
        ]
      }' | jq
 ```
 
-[Try in API Reference](https://api-docs.neon.tech/reference/createorganizationinvitations)
+[Try in API Reference](/docs/reference/api/organizations/create-organization-invitations)
 
 ## Transfer projects between organizations
 
@@ -347,6 +354,10 @@ The API supports transferring projects between organizations. For detailed instr
 Key requirements:
 
 - Must use a personal API key
-- Requires admin permissions in the source organization and at least member permissions in the target
+- Requires Admin in the source organization, and a role that can create projects in the target (Admin, Editor, or Viewer)
 
-[Try in API Reference](https://api-docs.neon.tech/reference/transferproject)
+[Try in API Reference](/docs/reference/api/organizations/transfer-projects-from-org-to-org)
+
+## Manage project access
+
+For organizations on the [new permissions model](/docs/manage/user-permissions), you can list project members and set or remove a member's project role through the API. See [Manage project access with the API](/docs/manage/user-permissions#manage-project-access-with-the-api) for endpoints and examples.

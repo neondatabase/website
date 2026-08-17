@@ -5,6 +5,8 @@ description: Context for agents using or developing the Agentic Provisioning Pro
 
 # Agentic provisioning with Neon
 
+Neon is the backend for apps and agents. Neon Postgres, Neon Auth, and Data API are available today, with Storage, Compute, and AI Gateway coming soon. Every service is agent-ready: instant, branchable, and serverless.
+
 Context for LLMs and agents: use the **API key** from the APP account request to interact with Neon (projects, branches, connection strings, provisioning). Full documentation index: [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt).
 
 ---
@@ -46,7 +48,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 All of these use the same `Authorization: Bearer <access_token>` and base URL above.
 
-A full list of endpoints, request/response schemas, rate limits, and constraints is in [Neon REST API](https://neon.com/docs/ai/skills/neon-postgres/references/neon-rest-api.md).
+A full list of endpoints, request/response schemas, rate limits, and constraints is in the [Neon API reference](https://neon.com/docs/reference/api-reference.md).
 
 **Create a branch** — Optional body: `branch.parent_id` (omit to use project default branch), `endpoints` (e.g. `[{ "type": "read_write" }]` for compute). Example:
 
@@ -64,7 +66,7 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
 
 ## Part 2: Neon documentation and features
 
-Neon is a serverless Postgres platform (autoscaling, branching, instant restore, scale-to-zero). Use the API key from Part 1 for all Neon API and connection operations. The Neon docs are the source of truth; prefer fetching current docs over relying on training data.
+Neon is the backend for apps and agents. Use the API key from Part 1 for all Neon API and connection operations. The Neon docs are the source of truth; prefer fetching current docs over relying on training data.
 
 **Fetching docs as Markdown:** Append `.md` to the URL (e.g. https://neon.com/docs/introduction/branching.md) or send `Accept: text/markdown` on the standard URL.
 
@@ -74,18 +76,18 @@ Neon is a serverless Postgres platform (autoscaling, branching, instant restore,
 
 | Topic | Use when | Link |
 |-------|----------|------|
-| What Is Neon | Architecture, terminology (orgs, projects, branches, endpoints) | [what-is-neon.md](https://neon.com/docs/ai/skills/neon-postgres/references/what-is-neon.md) |
-| Getting Started | First-time setup, connection strings, driver install, schema | [getting-started.md](https://neon.com/docs/ai/skills/neon-postgres/references/getting-started.md) |
-| Connection Methods & Drivers | Choosing transport/driver (TCP, HTTP, WebSocket, edge, serverless) | [connection-methods.md](https://neon.com/docs/ai/skills/neon-postgres/references/connection-methods.md) |
-| Serverless Driver | `@neondatabase/serverless`, HTTP/WebSocket, runtime optimizations | [neon-serverless.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-serverless.md) |
-| Neon JS SDK | Neon Auth + Data API, PostgREST-style queries, typed client | [neon-js.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-js.md) |
-| Developer Tools | `npx neonctl@latest init`, VSCode, Neon MCP server | [devtools.md](https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md) |
-| Neon CLI | Terminal/scripts/CI with `neonctl` | [neon-cli.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-cli.md) |
-| Neon REST API | Direct HTTP automation, API key auth, rate limits, polling | [neon-rest-api.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-rest-api.md) |
-| Neon TypeScript SDK | Typed Neon control in TypeScript (`@neondatabase/api-client`) | [neon-typescript-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-typescript-sdk.md) |
-| Neon Python SDK | Programmatic Neon management in Python (`neon-api`) | [neon-python-sdk.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-python-sdk.md) |
-| Neon Auth | Managed auth, UI components, methods, Next.js/React integration | [neon-auth.md](https://neon.com/docs/ai/skills/neon-postgres/references/neon-auth.md) (see also Neon JS SDK) |
-| Branching | Isolated environments, preview deployments, branch lifecycle | [branching.md](https://neon.com/docs/ai/skills/neon-postgres/references/branching.md) |
+| What Is Neon | Architecture, terminology (orgs, projects, branches, endpoints) | [neon-postgres skill](https://neon.com/docs/ai/skills/neon-postgres/SKILL.md) |
+| Getting Started | First-time setup, connection strings, driver install, schema | [neon-postgres skill](https://neon.com/docs/ai/skills/neon-postgres/SKILL.md) |
+| Connection Methods & Drivers | Choosing transport/driver (TCP, HTTP, WebSocket, edge, serverless) | [neon-postgres skill](https://neon.com/docs/ai/skills/neon-postgres/SKILL.md) |
+| Serverless Driver | `@neondatabase/serverless`, HTTP/WebSocket, runtime optimizations | [neon-postgres skill](https://neon.com/docs/ai/skills/neon-postgres/SKILL.md) |
+| Neon JS SDK | Neon Auth + Data API, PostgREST-style queries, typed client | [javascript-sdk.md](https://neon.com/docs/reference/javascript-sdk.md) |
+| Developer Tools | `npx neon@latest init`, VSCode, Neon MCP server | [neon-postgres skill](https://neon.com/docs/ai/skills/neon-postgres/SKILL.md) |
+| Neon CLI | Terminal/scripts/CI with `neon` | [neon-postgres skill](https://neon.com/docs/ai/skills/neon-postgres/SKILL.md) |
+| Neon REST API | Direct HTTP automation, API key auth, rate limits, polling | [api-reference.md](https://neon.com/docs/reference/api-reference.md) |
+| Neon TypeScript SDK | Typed Neon control in TypeScript (`@neon/sdk`) | [typescript-sdk.md](https://neon.com/docs/reference/typescript-sdk.md) |
+| Neon Python SDK | Programmatic Neon management in Python (`neon-api`) | [python-sdk.md](https://neon.com/docs/reference/python-sdk.md) |
+| Neon Auth | Managed auth, UI components, methods, Next.js/React integration | [auth/overview.md](https://neon.com/docs/auth/overview.md) |
+| Branching | Isolated environments, preview deployments, branch lifecycle | [branching.md](https://neon.com/docs/introduction/branching.md) |
 | Autoscaling | Compute scaling with workload, CU sizing | [autoscaling.md](https://neon.com/docs/introduction/autoscaling.md) |
 | Scale to Zero | Idle suspend/resume, cold-start trade-offs | [scale-to-zero.md](https://neon.com/docs/introduction/scale-to-zero.md) |
 | Instant Restore | Point-in-time recovery, branch from history, Time Travel | [branch-restore.md](https://neon.com/docs/introduction/branch-restore.md) |

@@ -2,16 +2,22 @@
 title: High Availability (HA) in Neon
 subtitle: Understanding Neon's approach to High Availability
 summary: >-
-  Covers the setup of high availability in Neon by detailing its unique
-  architecture that separates storage and compute, ensuring data redundancy and
-  compute resiliency across multiple Availability Zones.
+  Neon high availability separates storage and compute. WAL is replicated
+  across Availability Zones by Safekeepers, and Pageservers fail over to
+  secondaries in seconds, without idle standby compute replicas. Object storage
+  provides 99.999999999% durability. Recovery times vary by failure type:
+  Postgres crash and VM failure resolve in seconds, node failure in 1-2
+  minutes, AZ failure in 1-10 minutes, and unresponsive endpoints after 5
+  minutes. Neon HA does not support cross-region replication. Session data such
+  as temporary tables and the compute cache does not persist across a
+  failover.
 enableTableOfContents: true
-updatedOn: '2026-03-13T18:10:11.940Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 At Neon, our lakebase architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
 
-![Neon architecture diagram](/docs/introduction/neon_architecture_5.jpg)
+![lakebase architecture diagram](/docs/introduction/neon_architecture_5.jpg)
 
 Based on this separation, we can break our approach into two main parts:
 
@@ -107,7 +113,7 @@ Here's a summary of how different types of compute failures are handled and thei
 
 ### Impact on session data after failover?
 
-While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the Local File Cache ([LFC](/docs/reference/glossary#local-file-cache)), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
+While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the [compute cache](/docs/reference/glossary#compute-cache), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
 
 For details on uptime and performance guarantees, refer to our available [SLAs](/docs/introduction/support#slas).
 

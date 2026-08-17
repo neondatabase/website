@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-at-time-zone/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAKE_INTERVAL() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The AT TIME ZONE operator works the same across any PostgreSQL deployment, so the techniques here apply whether you're running Postgres on your laptop, on a server, or in the cloud. For enterprises handling time zone conversions across global analytics and AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres in the cloud, built for the AI era with strong performance, security, and tight Lakehouse integration. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform to build on.
+The AT TIME ZONE operator works the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `AT TIME ZONE` operator to convert a timestamp or a timestamp with time zone to a different time zone.

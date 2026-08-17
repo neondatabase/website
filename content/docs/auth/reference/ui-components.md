@@ -1,17 +1,20 @@
 ---
 title: UI Components Reference
-subtitle: Quick reference for Neon Auth UI components
+subtitle: Quick reference for Managed Better Auth UI components
 summary: >-
-  Step-by-step guide for integrating Neon Auth UI components using
-  `@neondatabase/neon-js`, including installation, provider setup, and
-  configuration of common props for customization.
+  Reference for the `@neondatabase/auth-ui` package, which provides prebuilt
+  React components for sign-in, sign-up, user menus, and protected routes.
+  Components include `NeonAuthUIProvider`, `AuthView`, `UserButton`, and
+  `SignedIn`, built on Better Auth UI. Use this page for the full
+  `NeonAuthUIProvider` prop table, CSS import instructions for Tailwind v4 and
+  non-Tailwind projects, or the `neon-auth-codemod` migration command.
 enableTableOfContents: true
-updatedOn: '2026-05-12T20:18:01.470Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Quick reference for Neon Auth UI components from `@neondatabase/auth-ui`. These components are built with [Better Auth UI](https://legacy.better-auth-ui.com/) and work with Neon Auth.
+Quick reference for Managed Better Auth UI components from `@neondatabase/auth-ui`. These components are built with [Better Auth UI](https://legacy.better-auth-ui.com/) and work with Managed Better Auth.
 
 <Admonition type="note" title="Migrating from older imports">
 Older releases re-exported the UI from `@neondatabase/auth/react/ui` and `@neondatabase/neon-js/auth/react/ui`. Those entrypoints are deprecated and will be removed in the next major version. Install `@neondatabase/auth-ui` directly and run the codemod to update existing imports:
@@ -50,7 +53,7 @@ function App() {
 
 | Prop                         | Type                     | Description                                                              | Example                                                  |
 | ---------------------------- | ------------------------ | ------------------------------------------------------------------------ | -------------------------------------------------------- |
-| `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Neon Auth client instance                             | `authClient={authClient}`                                |
+| `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Managed Better Auth client instance                   | `authClient={authClient}`                                |
 | `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (for example, Google, GitHub, Vercel) | `social={{ providers: ['google', 'github', 'vercel'] }}` |
 | `navigate`                   | `(href: string) => void` | Navigation function for React Router                                     | `navigate={navigate}`                                    |
 | `Link`                       | `ComponentType`          | Custom Link component for routing                                        | `Link={RouterLink}`                                      |
@@ -82,7 +85,7 @@ function App() {
 }
 ```
 
-**Note:** Google OAuth works with shared credentials for development. GitHub OAuth requires custom credentials. The `social.providers` prop controls which provider buttons are displayed in the UI. For production, configure your own OAuth credentials in the Neon Console (Settings → Auth). See the [OAuth setup guide](/docs/auth/guides/setup-oauth) for details.
+**Note:** Google OAuth works with shared credentials for development. GitHub OAuth requires custom credentials. The `social.providers` prop controls which provider buttons are displayed in the UI. For production, configure OAuth credentials in the Neon Console (**branch → Auth**) and register provider redirect URIs (see [OAuth setup](/docs/auth/guides/setup-oauth#production-setup)).
 
 ### React Router Integration
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-date_part/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LOCALTIMESTAMP Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `DATE_PART()` function works the same across any PostgreSQL deployment, so the examples here apply wherever you run Postgres. If you're an enterprise looking for managed cloud Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The `DATE_PART()` function works the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DATE_PART()` function to retrieve the subfields such as year, month, and week from a [date](../postgresql-tutorial/postgresql-date) or [time](../postgresql-tutorial/postgresql-time) value.
@@ -166,7 +166,7 @@ Output:
 (1 row)
 ```
 
-### 7\) Extracting a week number from a timestamp
+### 7\) Extracting a millennium from a timestamp
 
 To get the current millennium, you use the `DATE_PART()` function with the [`NOW()`](postgresql-now) function as follows:
 

@@ -6,7 +6,7 @@ page_description: >-
   NUMERIC column for storing values that precision is required.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-numeric/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Character Types: CHAR, VARCHAR, and TEXT'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The NUMERIC type works the same way across every PostgreSQL deployment, so what you learn here applies whether you're running Postgres on your laptop, in [Neon](https://neon.com), or anywhere else. For enterprises that need exact numeric precision for financial data at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with strong performance, enterprise-grade security, and deep integration with the Lakehouse. For developers and startups who want to ship fast and scale without friction, Neon is the Postgres platform built for your pace.
+The NUMERIC type works the same way across every PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL `NUMERIC` type for storing numeric data.
@@ -45,7 +45,7 @@ The scale of the `NUMERIC` type can be zero, positive, or negative.
 
 PostgreSQL 15 or later allows you to declare a numeric column with a negative scale.
 
-The following declares the price column with the numeric type that can store total numbers with 7 digits, 5 before the decimal point and 2 digits after the decimal point:
+The following declares the price column with the numeric type that can store numbers with 7 digits in total, 5 before the decimal point and 2 digits after the decimal point:
 
 ```sql
 price NUMERIC(7,2)

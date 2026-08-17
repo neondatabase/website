@@ -2,11 +2,15 @@
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
 summary: >-
-  How to connect a GUI application or IDE to a Neon database by gathering
-  necessary connection details and entering them into the application for
-  successful database access.
+  Connect a GUI application or IDE (pgAdmin, DBeaver, DataGrip, TablePlus) to
+  Neon using a hostname, port 5432, role, password, and database name from the
+  Neon Console Connect modal. Per-tool SSL configuration and SNI compatibility
+  are addressed, with a tested compatibility table that includes SNI
+  workarounds for Segment, Azure Data Studio, and older Postico versions. For
+  BI tools such as Metabase, Tableau, and Power BI, Neon recommends connecting
+  to a read replica to avoid performance impact on the primary branch.
 enableTableOfContents: true
-updatedOn: '2026-04-23T13:49:55.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.

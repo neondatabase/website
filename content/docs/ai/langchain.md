@@ -2,11 +2,16 @@
 title: LangChain
 subtitle: Build AI applications faster with LangChain and Postgres
 summary: >-
-  Covers the setup of LangChain with Neon as a vector store, detailing how to
-  initialize Postgres, generate embeddings, and implement chat completions using
-  OpenAI's API.
+  LangChain integration with Neon uses the `NeonPostgres` vector store class
+  (backed by `pgvector`) to store embeddings and run similarity search directly
+  in Postgres. Use this page when building RAG pipelines, AI chatbots, or
+  semantic search in JavaScript/TypeScript and you need LangChain's retrieval
+  chain wired to a Neon database. Includes full TypeScript code for initializing
+  the vector store with OpenAI embeddings, streaming chat completions via
+  `createRetrievalChain`, and links to Next.js starter apps for chatbot, RAG,
+  semantic search, and PDF chat.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 LangChain is a popular framework for working with AI, Vectors, and embeddings. LangChain supports using Neon as a vector store, using the `pgvector` extension.

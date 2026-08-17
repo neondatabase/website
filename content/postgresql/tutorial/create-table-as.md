@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-create-table-as/
 ogImage: /postgresqltutorial/film_and_film_category_tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL SELECT INTO
@@ -18,12 +18,12 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `CREATE TABLE AS` statement works the same across any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or on a managed platform. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration your teams need. If you're a developer or startup who wants to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The `CREATE TABLE AS` statement works the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CREATE TABLE AS` statement to create a new table from the result set of a query.
 
-## Introduction to the PostgreSQL CREATE TABLE statement
+## Introduction to the PostgreSQL CREATE TABLE AS statement
 
 The `CREATE TABLE AS` statement [creates a new table](postgresql-create-table) and fills it with the data returned by a query. The following shows the syntax of the `CREATE TABLE AS` statement:
 

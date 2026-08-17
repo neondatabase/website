@@ -2,11 +2,10 @@
 title: Connect Outerbase to Neon
 subtitle: Connect Outerbase to your Neon project with the Neon Outerbase integration
 summary: >-
-  Covers the integration process for connecting Outerbase to a Neon project,
-  noting that the guide is deprecated due to Outerbase's shutdown on October 15,
-  2025.
+  This guide for connecting Outerbase to a Neon project is deprecated.
+  Outerbase shut down on October 15, 2025.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.030Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 redirectTo: /docs/guides/integrations
 ---
 

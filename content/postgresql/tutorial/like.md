@@ -6,7 +6,7 @@ page_description: >-
   query data based on patterns.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-like/'
 ogImage: /postgresqltutorial/customer.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BETWEEN
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Pattern matching with LIKE, NOT LIKE, ILIKE, and ESCAPE works the same on any PostgreSQL database, so everything here applies wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse so your operational and analytical data live together. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform with instant provisioning, branching, and serverless scale.
+Pattern matching with LIKE, NOT LIKE, ILIKE, and ESCAPE works the same on any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LIKE` operator to query data based on patterns.

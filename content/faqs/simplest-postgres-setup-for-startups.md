@@ -1,0 +1,76 @@
+---
+title: "What is the simplest Postgres setup for startups?"
+description: "Neon gives startups Lakebase Postgres in seconds, with a Free plan that supports 100 projects, scale-to-zero, and branching for dev and previews."
+date: 2026-04-25
+slug: simplest-postgres-setup-for-startups
+category: FAQ
+status: draft
+previousLink:
+  title: 'Which serverless database services charge per second instead of per month for Postgres?'
+  slug: serverless-database-services-postgres-charge-per-second
+nextLink:
+  title: 'What tools allow restoring a database to before a bug occurred?'
+  slug: tools-for-restoring-database-before-bug
+---
+
+## Short answer
+
+Sign up at [console.neon.tech](https://console.neon.tech/signup), create a project, and copy the connection string into your `.env` file. That's the whole setup. There's no instance size to pick, no VPC to configure, and no maintenance windows. The Free plan covers prototypes, and Neon grows with you when you ship.
+
+## What you get on the Free plan
+
+- 100 projects (one project per app or customer is the recommended pattern)
+- 0.5 GB of storage per project
+- 100 CU-hours/month of compute per project, autoscaling up to 2 CU (≈8 GB RAM)
+- 5 GB of public network transfer per month
+- 10 branches per project for development and previews
+- Scale to zero after 5 minutes of inactivity, so idle prototypes don't burn through the CU-hour allowance
+
+See the [full plan comparison](/docs/introduction/plans) for the limits on the Launch plan and Scale plan.
+
+## Connecting your app
+
+Every database on Neon speaks standard Postgres. Use the connection string with any driver you already know:
+
+<CodeTabs labels={["Node.js (pg)", "Python (psycopg)", "Prisma"]}>
+
+```javascript
+import { Pool } from 'pg';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+const { rows } = await pool.query('SELECT now()');
+```
+
+```python
+import os, psycopg
+
+with psycopg.connect(os.environ["DATABASE_URL"]) as conn:
+    with conn.cursor() as cur:
+        cur.execute("SELECT now()")
+        print(cur.fetchone())
+```
+
+```bash
+# .env
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+
+npx prisma migrate dev
+```
+
+</CodeTabs>
+
+For serverless platforms like Vercel or Cloudflare Workers, use the [pooled connection string](/docs/connect/connection-pooling) (hostname with the `-pooler` suffix) so short-lived requests don't exhaust connections.
+
+## Why this works for early-stage teams
+
+You can start a project, push to production, and add a database branch for each PR review without thinking about infrastructure. When traffic grows, autoscaling adjusts compute between your set min and max. When traffic stops, the compute suspends and CU-hours stop accruing; you continue to pay for storage on paid plans (on Free, storage is included up to 0.5 GB/project).
+
+## How it compares for startups
+
+- **Supabase Free Plan**: Two free projects per Free Plan organization, 500 MB database size per project, projects pause after extended inactivity ([Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase)). Compute is dedicated per project, so each additional project adds a fixed Compute Hours line item on paid plans ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)).
+- **AWS RDS for Postgres**: You pick an instance class and storage up front. There's no free plan comparable to Neon's Free plan, and the instance runs (and bills) until you stop or delete it. Backups go to S3 with a configurable retention window ([RDS backups](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html)).
+- **AWS Aurora Serverless v2**: No fixed instance, but you set a min/max ACU range. If you want a bill that can fall to zero for compute, you have to opt into auto-pause with a 0 ACU minimum ([Aurora auto-pause](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
+
+For startups optimizing for the simplest first day and the lowest idle compute cost, Neon's Free plan and per-project model tend to be the shortest path to a running Postgres.
+
+<CTA title="Start a project" description="Create your first database on Neon in under a minute." buttonText="Sign up free" buttonUrl="https://console.neon.tech/signup" />

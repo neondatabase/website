@@ -2,11 +2,15 @@
 title: Understanding Neon’s autoscaling algorithm
 subtitle: How Neon’s algorithm scales resources to match your workload
 summary: >-
-  Covers the mechanics of Neon's autoscaling algorithm, detailing how it
-  monitors key metrics like CPU load and memory usage to automatically adjust
-  compute resources for optimal performance and efficiency.
+  Neon's autoscaling algorithm scales compute by evaluating CPU load average,
+  RAM usage, and compute cache working set size against fixed thresholds,
+  then applying the formula goalCU = max(cpuGoalCU, memGoalCU, lfcGoalCU). The
+  autoscaler-agent polls CPU, memory, and cache activity on a regular schedule, while the
+  vm-monitor checks Postgres memory every 100 milliseconds. Use this page to
+  understand the internal decision logic, not the configuration steps covered
+  in the enablement guide.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.123Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 <InfoBlock>
@@ -29,7 +33,7 @@ That said, it can be helpful to understand exactly when and under what circumsta
 
 ## How the algorithm works
 
-Neon's autoscaling algorithm uses two components, the [vm-monitor](/docs/reference/glossary#vm-monitor) and the [autoscaler-agent](/docs/reference/glossary#autoscaler-agent), to continuously monitor three key metrics: your average CPU load, your memory usage, and the activity of your [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache). These metrics determine how your compute resources (the virtual machine that powers your database) should be scaled to maintain performance and efficiency.
+Neon's autoscaling algorithm uses two components, the [vm-monitor](/docs/reference/glossary#vm-monitor) and the [autoscaler-agent](/docs/reference/glossary#autoscaler-agent), to continuously monitor three key metrics: your average CPU load, your memory usage, and the activity of your [compute cache](/docs/reference/glossary#compute-cache). These metrics determine how your compute resources (the virtual machine that powers your database) should be scaled to maintain performance and efficiency.
 
 ### The Formula
 
@@ -37,7 +41,7 @@ In essence, the algorithm is built on **goals**. We set a goal (an ideal compute
 
 - **`cpuGoalCU`** &#8212; Keep the 1-minute average CPU load at or below 90% of the available CPU capacity.
 - **`memGoalCU`** &#8212; Keep memory usage at or below 75% of the total allocated RAM.
-- **`lfcGoalCU`** &#8212; Fit your frequently accessed working set within 75% of the compute's RAM allocated to the LFC.
+- **`lfcGoalCU`** &#8212; Fit your frequently accessed working set within the compute cache (up to 75% of the compute's RAM).
 
 The formula can be expressed as:
 
@@ -65,14 +69,14 @@ Memory usage refers to the amount of RAM your database and its related processes
 
 The algorithm aims to keep overall memory usage at or below 75% of the total allocated memory. If your database starts using more memory than this threshold, the algorithm increases compute size to allocate more memory, making sure your database has enough RAM to perform well without over-provisioning.
 
-#### Local File Cache (LFC) working set size
+#### Compute cache working set size
 
-An important part of the scaling algorithm is estimating your current working set size (a subset of your most frequently accessed data) and scaling your compute to ensure it fits within the LFC.
+An important part of the scaling algorithm is estimating your current working set size (a subset of your most frequently accessed data) and scaling your compute to ensure it fits within the compute cache.
 
-Every 20 seconds, the autoscaler-agent checks the working set size across a variety of time windows, ranging from 1 to 60 minutes. The goal is to fit your working set within 75% of the compute’s RAM allocated to the LFC. If your working set exceeds this threshold, the algorithm increases compute size to expand the LFC, keeping frequently accessed data in memory for faster access. To learn more about how we do this, see [Dynamically estimating and scaling Postgres’ working set size](/blog/dynamically-estimating-and-scaling-postgres-working-set-size).
+Every 20 seconds, the autoscaler-agent checks the working set size across a variety of time windows, ranging from 1 to 60 minutes. The goal is to fit your working set within the compute cache (up to 75% of the compute’s RAM). If your working set exceeds this threshold, the algorithm increases compute size to expand the cache, keeping frequently accessed data in memory for faster access. To learn more about how we do this, see [Dynamically estimating and scaling Postgres’ working set size](/blog/dynamically-estimating-and-scaling-postgres-working-set-size).
 
 <Admonition type="note">
-If your dataset is small enough, you can improve performance by keeping the entire dataset in memory. Check your database size on the Monitoring [dashboard](/docs/introduction/monitoring-page#database-size) and adjust your minimum compute size accordingly. For example, a 6.4 GB database can comfortably fit within a compute size of 2 CU (8 GB of RAM), where the LFC can use up to 75% of the available RAM.
+If your dataset is small enough, you can improve performance by keeping the entire dataset in memory. Check your database size on the Monitoring [dashboard](/docs/introduction/monitoring-page#database-size) and adjust your minimum compute size accordingly. For example, a 6.4 GB database can comfortably fit within a compute size of 2 CU (8 GB of RAM), where up to 75% of the available RAM is used for data caching.
 </Admonition>
 
 ## How often the metrics are polled
@@ -80,7 +84,7 @@ If your dataset is small enough, you can improve performance by keeping the enti
 To give you a sense of the algorithm's responsiveness, here's a summary of how often the metrics are polled:
 
 - **Every 5 seconds** → the autoscaler-agent fetches load metrics from the VM, including CPU usage and overall memory usage.
-- **Every 20 seconds** → the autoscaler-agent checks the Local File Cache (LFC) metrics, including the working set size across various time windows: 1 minute, 2 minutes, up to 60 minutes.
+- **Every 20 seconds** → the autoscaler-agent checks the compute cache metrics, including the working set size across various time windows: 1 minute, 2 minutes, up to 60 minutes.
 - **Every 100 milliseconds** → the vm-monitor checks memory usage specifically within Postgres.
 
 This frequent polling allows the algorithm to respond swiftly to changes in workload, ensuring that your compute resources are always appropriately scaled to meet current demands.

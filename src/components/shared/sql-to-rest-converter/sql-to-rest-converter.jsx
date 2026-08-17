@@ -24,14 +24,9 @@ import { createClient } from "@neondatabase/neon-js";
 // An example of how to use the data api with neon auth can be found here:
 // https://github.com/neondatabase-labs/neon-data-api-neon-auth
 
-const client = createClient<Database>({
-  auth: {
-    url: 'NEON-AUTH-URL',
-  },
-  dataApi: {
-    url: 'DATA-API-URL',
-  },
-});
+// Use your Neon database URL without credentials or query parameters.
+// Example: https://ep-example.c-2.us-east-1.aws.neon.tech/neondb
+const client = createClient<Database>('NEON-DATABASE-URL');
 
 
 // Perform signin using client.auth before making any requests to the data api

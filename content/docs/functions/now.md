@@ -2,11 +2,16 @@
 title: Postgres now() function
 subtitle: Get the current date and time
 summary: >-
-  Covers the usage of the Postgres `now()` function to retrieve the current date
-  and time with timezone, including examples for timestamping database entries
-  and calculating time differences.
+  The Postgres `now()` function returns the current date and time as a
+  `timestamp with time zone`, fixed at the start of the current transaction,
+  making it an alias for `current_timestamp` and `transaction_timestamp()`. Use
+  `now()` to auto-populate `created_at` or `last_updated` columns via DEFAULT
+  constraints or triggers when a stable, transaction-scoped timestamp is needed.
+  Unlike the bare `now` keyword (evaluated once at table creation) or
+  `clock_timestamp()` (updates within a statement), `now()` re-evaluates on
+  every row insert.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.881Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Postgres `now()` function returns the current date and time with timezone. It's an alias for the `current_timestamp()` function.

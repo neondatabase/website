@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-left/
 ogImage: /postgresqltutorial/PostgreSQL-LEFT-example.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INITCAP() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The LEFT() function works the same across any PostgreSQL deployment, so you can apply these examples wherever you run Postgres. If you're an enterprise building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration your data teams expect. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The LEFT() function works the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 The PostgreSQL `LEFT()` function returns the first `n` characters in the string.
@@ -89,7 +89,7 @@ The following statement demonstrates how to use a negative integer:
 SELECT LEFT('ABC',-2);
 ```
 
-In this example, n is \-2, therefore, the `LEFT()` function return all character except the last 2 characters, which results in:
+In this example, n is \-2, therefore, the `LEFT()` function returns all characters except the last 2 characters, which results in:
 
 ```
  left

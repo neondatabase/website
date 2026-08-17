@@ -6,7 +6,7 @@ page_description: >-
   ALTER TABLE statement to remove one or more columns of a table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-drop-column/'
 ogImage: /postgresqltutorial/PostgreSQL-Drop-Column-300x128.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL ADD COLUMN:  Add One or More Columns to a Table'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Dropping columns with ALTER TABLE works the same on any PostgreSQL deployment, so everything here applies whether you run Postgres yourself or through a managed service. For enterprises modernizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and native integration that regulated teams need. For developers and startups who want to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for that pace.
+Dropping columns with ALTER TABLE works the same on any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 ![PostgreSQL DROP COLUMN](/postgresqltutorial/PostgreSQL-Drop-Column-300x128.png?alignright)

@@ -2,11 +2,15 @@
 title: The timescaledb extension
 subtitle: Work with time-series data in Postgres with the timescaledb extension
 summary: >-
-  Covers the setup and usage of the `timescaledb` extension in Neon for
-  efficient storage and retrieval of time-series data, including enabling the
-  extension, creating hypertables, and running queries.
+  The `timescaledb` extension adds time-series storage to Postgres by
+  partitioning data into hypertables and chunks, enabling efficient querying of
+  large timestamped datasets such as IoT sensor readings and financial data.
+  Choose this page to install `timescaledb` on Neon, convert tables to
+  hypertables, and run hyperfunctions like `time_bucket`, `first`, `last`, and
+  `histogram` for time-oriented analysis. Only Apache-2 licensed features are
+  supported on Neon; compression is not available.
 enableTableOfContents: true
-updatedOn: '2026-02-13T21:49:13.619Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 `timescaledb` enables the efficient storage and retrieval of time-series data. Time-series data is a sequential collection of observations or measurements recorded over time. For example, IoT devices continuously generate data points with timestamps, representing measurements or events. `timescaledb` is designed to handle large volumes of time-stamped data and provides SQL capabilities on top of a time-oriented data model such as IoT data, sensor readings, financial market data, and other time-series datasets.

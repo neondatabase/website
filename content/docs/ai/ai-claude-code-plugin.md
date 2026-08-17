@@ -1,20 +1,25 @@
 ---
 title: Claude Code plugin for Neon
 summary: >-
-  Covers the setup of the Neon Claude Code plugin, which integrates
-  Neon-specific Skills and API access into Claude Code, enabling tasks like
-  managing databases and configuring serverless connections.
+  The Neon Claude Code plugin, available on the official Claude plugins
+  marketplace, bundles the neon-postgres Skill and an MCP server integration
+  that gives Claude Code direct access to Neon's API for creating projects,
+  managing branches, running SQL, and configuring serverless Postgres connections.
+  Use this page to install the plugin (`claude plugin install
+  neon@claude-plugins-official`) and verify the neon-postgres skill is active,
+  distinguishing it from the standalone Agent Skills setup used with other AI
+  tools.
 description: >-
   Install the Neon Claude Code plugin to give Claude access to Neon's APIs,
   Postgres workflows, and built-in Skills.
-updatedOn: '2026-03-24T15:05:42.000Z'
+updatedOn: '2026-08-04T08:22:57.969Z'
 ---
 
 The **Neon Claude Code plugin** is available on the official Claude plugins marketplace. It adds Neon-specific Skills and API access to Claude Code, Anthropic's AI development environment, bundling guided Skills plus an MCP (Model Context Protocol) server integration.
 
 ## Overview
 
-Claude Skills are Markdown-based workflows that tell Claude how to complete specific tasks (like setting up a database connection, editing a file, or running a script). The Neon plugin packages several of these Skills into a reusable bundle, so Claude Code can interact directly with Neon Postgres.
+Claude Skills are Markdown-based workflows that tell Claude how to complete specific tasks (like setting up a database connection, editing a file, or running a script). The Neon plugin packages several of these Skills into a reusable bundle, so Claude Code can interact directly with Neon.
 
 Once installed, the plugin gives Claude the ability to:
 
@@ -27,7 +32,7 @@ Once installed, the plugin gives Claude the ability to:
 
 The plugin contains:
 
-- **The `neon-postgres` skill** for guided Neon workflows, covering getting started, connections, Neon Auth, the Data API, platform SDKs, and developer tools
+- **The `neon-postgres` skill** for guided Neon workflows, covering getting started, connections, Managed Better Auth, the Data API, platform SDKs, and developer tools
 - **An MCP server integration** that connects Claude to Neon's APIs
 
 ## How it works

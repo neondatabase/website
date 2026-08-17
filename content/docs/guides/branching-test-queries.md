@@ -2,13 +2,16 @@
 title: Branching — Testing queries
 subtitle: Create a Neon branch to test queries before running them in production
 summary: >-
-  Step-by-step guide for creating a Neon branch to test potentially destructive
-  queries using a copy of production data, including instructions for testing
-  and deleting the branch afterward.
+  Neon branching lets you create an instant copy-on-write clone of your
+  production database to safely run destructive or schema-altering queries
+  before they touch live data. Use this page when you need to test a DELETE,
+  UPDATE, or DDL statement against real production data without risk of data
+  loss. The guide covers creating a test branch via the Neon Console, CLI, or
+  API; running queries in the SQL Editor; and deleting the branch when done.
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries
-updatedOn: '2026-02-06T22:07:32.932Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Complex queries that modify data or alter schemas have the potential to be destructive. It is advisable to test these types of queries before running them in production. On other database systems, testing potentially destructive queries can be time and resource intensive. For example, testing may involve setting up a separate database instance and replicating data. With Neon, you can instantly create a database branch with a full copy-on-write clone of your production data in just a few clicks. When you finish testing, you can remove the branch just as easily.
@@ -58,7 +61,7 @@ VALUES
 
 You are directed to the connection details for the branch, and then the **Branches** page where you are shown the details for your new branch.
 
-You can also create a test branch using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](/docs/manage/branches#create-a-branch-with-the-api).
+You can also create a test branch using the [Neon CLI](/docs/cli/branches#create) or [Neon API](/docs/manage/branches#create-a-branch-with-the-api).
 
 <CodeTabs labels={["CLI", "API"]}>
 
@@ -109,7 +112,7 @@ When you finish testing your query, you can delete the test branch:
 3. Select the test branch from the table.
 4. From the **Actions** menu on the branch overview page, select **Delete**.
 
-You can also delete a branch using the [Neon CLI](/docs/reference/cli-branches#delete) or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api).
+You can also delete a branch using the [Neon CLI](/docs/cli/branches#delete) or [Neon API](/docs/manage/branches#delete-a-branch-with-the-api).
 
 <CodeTabs labels={["CLI", "API"]}>
 

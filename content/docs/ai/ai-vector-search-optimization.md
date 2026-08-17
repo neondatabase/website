@@ -3,11 +3,16 @@ title: Optimize pgvector search
 subtitle: Fine-tune parameters for efficient and accurate similarity searches in
   Postgres
 summary: >-
-  Step-by-step guide for optimizing `pgvector` searches in Postgres, focusing on
-  profiling queries, indexing strategies, and parameter tuning to enhance
-  performance and accuracy in AI applications.
+  pgvector similarity search optimization in Postgres covers profiling with
+  EXPLAIN ANALYZE, choosing between sequential scans and approximate nearest
+  neighbor indexes (HNSW or IVFFlat), and tuning build and query-time
+  parameters to balance speed and recall. Use this page when query latency is
+  too high and you need to select an index type, set build parameters, or tune
+  query-time settings like ef_search or probes. HNSW delivers better query
+  speed than IVFFlat at the cost of higher build time and memory; IVFFlat
+  requires existing data before the index can be created.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide covers how to use `pgvector` for vector similarity searches. We'll address the following key questions:

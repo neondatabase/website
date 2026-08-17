@@ -6,7 +6,7 @@ page_description: >-
   (CTE) to simplify complex queries.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-cte/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL EXCEPT
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Common table expressions are a standard PostgreSQL feature, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship fast and scale without friction, Neon is the Postgres platform built for you.
+Common table expressions are a standard PostgreSQL feature. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL common table expression (CTE) to simplify complex queries.

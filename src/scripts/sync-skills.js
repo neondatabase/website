@@ -1,0 +1,223 @@
+#!/usr/bin/env node
+/**
+ * Sync skill files from neondatabase/agent-skills to public/docs/ai/skills/.
+ *
+ * Fetches each allow-listed skill's directory from the upstream GitHub repo
+ * and writes the files locally, deleting any local file the upstream no longer
+ * has. Runs on-demand — not at build time — so the build never depends on
+ * GitHub API availability. Synced files are committed.
+ *
+ * Usage:
+ *   node src/scripts/sync-skills.js              # sync all allow-listed skills
+ *   node src/scripts/sync-skills.js --skill name # sync one skill by name
+ *
+ * Authentication:
+ *   Set GITHUB_TOKEN env var to avoid the 60 req/hr unauthenticated rate limit.
+ *   Without a token, syncing 2-3 skills (~5 API calls each) is well within limits.
+ *
+ * Config: config/skills.json controls which skills are synced and at what ref.
+ * Each entry may set an optional "repo" (owner/name) and "path" to source a
+ * skill from a different repository than the default neondatabase/agent-skills
+ * (e.g. neon-postgres-agent-platforms lives in neondatabase/neon-for-agent-platforms).
+ */
+
+const fs = require('fs').promises;
+const path = require('path');
+
+const DEFAULT_REPO = 'neondatabase/agent-skills';
+const DEFAULT_SKILLS_PATH = 'skills';
+const LOCAL_SKILLS_DIR = path.resolve(__dirname, '../../public/docs/ai/skills');
+const CONFIG_PATH = path.resolve(__dirname, '../../config/skills.json');
+
+function githubHeaders() {
+  const headers = { 'User-Agent': 'neon-website-sync-skills' };
+  if (process.env.GITHUB_TOKEN) {
+    headers['Authorization'] = `Bearer ${process.env.GITHUB_TOKEN}`;
+  }
+  return headers;
+}
+
+async function fetchJson(url) {
+  const res = await fetch(url, { headers: githubHeaders() });
+  if (!res.ok) {
+    throw new Error(`GitHub API request failed: ${res.status} ${res.statusText} — ${url}`);
+  }
+  return res.json();
+}
+
+/**
+ * Recursively fetch all files in a GitHub directory.
+ * Returns an array of { path, downloadUrl } for each file.
+ */
+async function listFilesRecursive(apiUrl) {
+  const entries = await fetchJson(apiUrl);
+  const files = [];
+
+  for (const entry of entries) {
+    if (entry.type === 'file') {
+      files.push({ path: entry.path, downloadUrl: entry.download_url });
+    } else if (entry.type === 'dir') {
+      const subFiles = await listFilesRecursive(entry.url);
+      files.push(...subFiles);
+    }
+  }
+
+  return files;
+}
+
+/**
+ * The upstream path "skills/neon-postgres/references/x.md" as the local
+ * "references/x.md", relative to the skill's directory.
+ */
+function toLocalRelative(upstreamPath, skillName, skillsPath) {
+  return upstreamPath.replace(`${skillsPath}/${skillName}/`, '');
+}
+
+/**
+ * Local files with no upstream counterpart, given both sets as skill-relative
+ * paths. Pure so the deletion decision is testable without touching disk.
+ */
+function filesToPrune(localRelativePaths, upstreamRelativePaths) {
+  const upstream = new Set(upstreamRelativePaths);
+  return localRelativePaths.filter((file) => !upstream.has(file)).sort();
+}
+
+/** Every file under dir as a path relative to it. Empty when dir is absent. */
+async function listLocalFiles(dir, prefix = '') {
+  let entries;
+  try {
+    entries = await fs.readdir(dir, { withFileTypes: true });
+  } catch (err) {
+    if (err.code === 'ENOENT') return [];
+    throw err;
+  }
+
+  const files = [];
+  for (const entry of entries) {
+    const relative = prefix ? path.posix.join(prefix, entry.name) : entry.name;
+    if (entry.isDirectory()) {
+      files.push(...(await listLocalFiles(path.join(dir, entry.name), relative)));
+    } else if (entry.isFile()) {
+      files.push(relative);
+    }
+  }
+  return files;
+}
+
+/** Remove subdirectories left empty by pruning, deepest first. Keeps `dir`. */
+async function removeEmptySubdirs(dir, root = dir) {
+  for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const child = path.join(dir, entry.name);
+    await removeEmptySubdirs(child, root);
+    if ((await fs.readdir(child)).length === 0) {
+      await fs.rmdir(child);
+      console.log(`  - ${path.relative(root, child)}/ (empty)`);
+    }
+  }
+}
+
+/**
+ * Download and write a single file from GitHub to the local skills directory.
+ */
+async function downloadFile(downloadUrl, localRelative, skillName) {
+  const res = await fetch(downloadUrl, { headers: githubHeaders() });
+  if (!res.ok) {
+    throw new Error(`Failed to download ${localRelative}: ${res.status}`);
+  }
+  const content = await res.text();
+
+  const localPath = path.join(LOCAL_SKILLS_DIR, skillName, localRelative);
+
+  await fs.mkdir(path.dirname(localPath), { recursive: true });
+  await fs.writeFile(localPath, content, 'utf-8');
+  console.log(`  ✓ ${localRelative}`);
+}
+
+async function syncSkill({
+  name,
+  ref,
+  repo = DEFAULT_REPO,
+  path: skillsPath = DEFAULT_SKILLS_PATH,
+}) {
+  const apiUrl = `https://api.github.com/repos/${repo}/contents/${skillsPath}/${name}?ref=${ref}`;
+  console.log(`\nSyncing ${name} @ ${ref} from ${repo}...`);
+
+  let files;
+  try {
+    files = await listFilesRecursive(apiUrl);
+  } catch (err) {
+    throw new Error(`Failed to list files for skill "${name}": ${err.message}`);
+  }
+
+  // Refuse to prune against an empty listing: that would delete the whole
+  // vendored copy on an upstream rename or a partial API response.
+  if (files.length === 0) {
+    console.warn(`  Warning: no files found for skill "${name}" at ref "${ref}"`);
+    return;
+  }
+
+  const upstreamRelative = files.map((file) => toLocalRelative(file.path, name, skillsPath));
+
+  for (const [index, file] of files.entries()) {
+    await downloadFile(file.downloadUrl, upstreamRelative[index], name);
+  }
+
+  // Writing alone leaves a file that upstream deleted in place, where it fails
+  // check-skills-sync on "extra local file not in upstream" — a state re-syncing
+  // cannot clear, which is what that check tells you to do.
+  const skillDir = path.join(LOCAL_SKILLS_DIR, name);
+  const stale = filesToPrune(await listLocalFiles(skillDir), upstreamRelative);
+  for (const file of stale) {
+    await fs.unlink(path.join(skillDir, file));
+    console.log(`  - ${file} (removed upstream)`);
+  }
+  await removeEmptySubdirs(skillDir);
+
+  const pruned = stale.length > 0 ? `, ${stale.length} deleted` : '';
+  console.log(`  Done. ${files.length} file(s) synced${pruned}.`);
+}
+
+async function main() {
+  const args = process.argv.slice(2);
+  const skillArg = args.includes('--skill') ? args[args.indexOf('--skill') + 1] : null;
+
+  // Load config
+  let config;
+  try {
+    config = JSON.parse(await fs.readFile(CONFIG_PATH, 'utf-8'));
+  } catch {
+    console.error(`Error: could not read config/skills.json`);
+    process.exit(1);
+  }
+
+  let skillsToSync = config.skills;
+
+  if (skillArg) {
+    skillsToSync = skillsToSync.filter((s) => s.name === skillArg);
+    if (skillsToSync.length === 0) {
+      console.error(`Error: skill "${skillArg}" not found in config/skills.json`);
+      process.exit(1);
+    }
+  }
+
+  console.log(`Syncing ${skillsToSync.length} skill(s)...`);
+
+  for (const skill of skillsToSync) {
+    await syncSkill(skill);
+  }
+
+  console.log(`\nSync complete. Run "npm run generate:skills" to regenerate index files.`);
+}
+
+// Only run main() when invoked directly, so importing the module for its
+// exported helpers doesn't start a sync that writes over the vendored copies.
+if (require.main === module) {
+  main().catch((err) => {
+    console.error('Error:', err.message);
+    process.exit(1);
+  });
+}
+
+// Export pure helpers for testing
+module.exports = { filesToPrune, toLocalRelative };

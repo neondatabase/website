@@ -1,11 +1,13 @@
 ---
 title: Security reporting
 summary: >-
-  Covers the procedure for reporting security issues, including contact
-  information, response commitments, confidentiality measures, and details about
-  Neon's bug bounty program through HackerOne.
+  Neon accepts vulnerability reports at security@neon.tech or via Signal for
+  sensitive information. Neon commits to responding within three business
+  days with strict confidentiality and public credit in security.txt. Report
+  suspected vulnerabilities here, review responsible disclosure rules, or
+  submit through Neon's bug bounty program on HackerOne.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.150Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 We have established the following security reporting procedure to address security issues quickly.

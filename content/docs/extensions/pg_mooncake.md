@@ -2,18 +2,21 @@
 title: The pg_mooncake extension
 subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
 summary: >-
-  Covers the setup of the pg_mooncake extension for Postgres, enabling fast
-  analytics through columnstore tables and DuckDB execution, allowing efficient
-  data retrieval and integration with object stores.
+  pg_mooncake is a Postgres extension that adds native columnstore tables with
+  DuckDB-powered vectorized execution, storing data as Parquet files in S3, R2,
+  or GCP object storage with Iceberg or Delta Lake metadata. Use it to run
+  analytical queries on large datasets directly from Postgres without a
+  separate OLAP system. The extension requires
+  `SET neon.allow_unstable_extensions='true'` before installation.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.836Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The [pg_mooncake](https://github.com/Mooncake-Labs/pg_mooncake) extension enables fast analytic workloads in Postgres by adding native columnstore tables and vectorized execution (DuckDB).
 
 Columnstore tables improve analytical queries by storing data vertically, enabling compression and efficient column-specific retrieval with vectorized execution.
 
-`pg_mooncake` columnstore tables are designed so that only metadata is stored in Postgres, while data is stored in an object store as Parquet files with [Iceberg](https://iceberg.apache.org/)or [Delta Lake](https://delta.io/) metadata.
+`pg_mooncake` columnstore tables are designed so that only metadata is stored in Postgres, while data is stored in an object store as Parquet files with [Iceberg](https://iceberg.apache.org/) or [Delta Lake](https://delta.io/) metadata.
 
 Queries on `pg_mooncake` columnstore tables are executed by DuckDB.
 

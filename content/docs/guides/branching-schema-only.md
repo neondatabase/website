@@ -2,11 +2,16 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 summary: >-
-  Covers the creation of schema-only branches in Neon, allowing users to
-  replicate only the database schema from a source branch without copying
-  sensitive data, ensuring a secure environment for development and testing.
+  Schema-only branches in Neon copy only the database structure from a source
+  branch, leaving all row data behind, so teams can develop and test against
+  production schemas without exposing confidential records. Use this feature
+  when you need a compliant development or CI/CD environment with realistic
+  table structure but no sensitive data, distinct from standard Neon branches
+  that copy both schema and data via copy-on-write. Schema-only branches are
+  independent root branches with plan-specific storage limits; reset-from-parent
+  is not supported.
 enableTableOfContents: true
-updatedOn: '2026-04-23T14:34:21.000Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 <FeatureBeta />
@@ -43,7 +48,7 @@ To create a schema-only branch using the Neon CLI:
 neon branch create --schema-only
 ```
 
-If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/reference/cli-branches#create).
+If you have more than one project, you'll need to specify the `--project-id` option. See [Neon CLI - branch create](/docs/cli/branches#create).
 
 </TabItem>
 
@@ -53,7 +58,7 @@ If you have more than one project, you'll need to specify the `--project-id` opt
 The API is in Beta and subject to change.
 </Admonition>
 
-To create a schema-only branch using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
+To create a schema-only branch using the Neon API, use the [Create branch](/docs/reference/api/branches/create-project-branch) endpoint with the `init_source` option set to `schema-only`, as shown below. Required values include:
 
 - Your Neon `project_id`
 - The `parent_id`, which is the branch ID of the branch containing the schema you want to copy

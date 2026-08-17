@@ -1,9 +1,12 @@
 ---
 title: Neon plans
 summary: >-
-  Covers the comparison of Neon's Free, Launch, and Scale plans, detailing
-  features, pricing, and target users to support projects from prototypes to
-  production at scale.
+  Neon's Free, Launch, and Scale plans differ in compute rates, branch counts,
+  storage pricing, and autoscaling limits. Compare per-unit pricing, feature
+  availability, and billing examples to choose a plan or estimate monthly costs.
+  Scale adds compliance certifications, uptime SLAs, private networking, and
+  configurable scale-to-zero. Launch and Free plans share pay-only-for-what-you-use
+  pricing with no monthly minimum.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -19,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-05-01T12:59:49.000Z'
+updatedOn: '2026-08-15T00:37:08.193Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -35,29 +38,33 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with custom resource limits and credits for **your** free tier. [Learn more](/docs/introduction/agent-plan)
 </Admonition>
 
-| Plan feature                                          | **Free**                                   | **Launch**                           | **Scale**                                                                                         |
-| ----------------------------------------------------- | ------------------------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| [Price](#price)                                       | $0/month                                   | Pay for what you use                 | Pay for what you use                                                                              |
-| [Who it's for](#who-its-for)                          | Prototypes, side projects, and small teams | Startups and growing teams           | Production-grade workloads and larger companies                                                   |
-| [Organization members](#organization-members)         | Unlimited                                  | Unlimited                            | Unlimited                                                                                         |
-| [Projects](#projects)                                 | 100                                        | 100                                  | 1,000 (can be increased on request)                                                               |
-| [Branches](#branches)                                 | 10/project                                 | 10/project                           | 25/project                                                                                        |
-| [Extra branches](#extra-branches)                     | —                                          | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                                              |
-| [Compute](#compute)                                   | 100 CU-hours/project                       | $0.106/CU-hour                       | $0.222/CU-hour                                                                                    |
-| [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                      | Up to 16 CU (64 GB RAM)              | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
-| [Scale to zero](#scale-to-zero)                       | After 5 min                                | After 5 min, can be disabled         | Configurable (1 minute to always on)                                                              |
-| [Storage](#storage)                                   | 0.5 GB/project                             | $0.35/GB-month                       | $0.35/GB-month                                                                                    |
-| [Public network transfer](#public-network-transfer)   | 5 GB included                              | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                                    |
-| [Monitoring](#monitoring)                             | 1 day                                      | 3 days                               | 14 days                                                                                           |
-| [Metrics/logs export](#metricslogs-export)            | —                                          | —                                    | ✅                                                                                                |
-| [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
-| [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                         | Up to 30 days                                                                                     |
-| [Snapshots](#snapshots)                               | 1 manual snapshot                          | 10 manual snapshots                  | 10 manual snapshots                                                                               |
-| [Auth](#auth)                                         | Up to 60k MAU                              | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
-| [Private network transfer](#private-network-transfer) | —                                          | —                                    | $0.01/GB                                                                                          |
-| [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
-| [Uptime SLA](#uptime-sla)                             | —                                          | —                                    | ✅                                                                                                |
-| [Support](#support)                                   | Community                                  | Billing support                      | Standard, Business, or Production                                                                 |
+| Plan feature                                          | **Free**                                   | **Launch**                                 | **Scale**                                                                                         |
+| ----------------------------------------------------- | ------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [Price](#price)                                       | $0/month                                   | Pay for what you use                       | Pay for what you use                                                                              |
+| [Who it's for](#who-its-for)                          | Prototypes, side projects, and small teams | Startups and growing teams                 | Production-grade workloads and larger companies                                                   |
+| [Organization members](#organization-members)         | Unlimited                                  | Unlimited                                  | Unlimited                                                                                         |
+| [Projects](#projects)                                 | 100                                        | 100                                        | 1,000 (can be increased on request)                                                               |
+| [Branches](#branches)                                 | 10/project                                 | 10/project                                 | 25/project                                                                                        |
+| [Extra branches](#extra-branches)                     | —                                          | $1.50/branch-month (prorated hourly)       | $1.50/branch-month (prorated hourly)                                                              |
+| [Compute](#compute)                                   | 100 CU-hours/project                       | $0.106/CU-hour                             | $0.222/CU-hour                                                                                    |
+| [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)                      | Up to 16 CU (64 GB RAM)                    | Up to 16 CU autoscaling, or fixed sizes up to 56 CU (224 GB RAM)                                  |
+| [Scale to zero](#scale-to-zero)                       | After 5 min                                | After 5 min, can be disabled               | Configurable (1 minute to always on)                                                              |
+| [Storage](#storage)                                   | 0.5 GB/project                             | $0.35/GB-month                             | $0.35/GB-month                                                                                    |
+| [Public network transfer](#public-network-transfer)   | 5 GB included                              | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                                                        |
+| [Monitoring](#monitoring)                             | 1 day                                      | 3 days                                     | 14 days                                                                                           |
+| [Metrics/logs export](#metricslogs-export)            | —                                          | —                                          | ✅                                                                                                |
+| [Spending notifications](#spending-notifications)     | —                                          | ✅                                         | ✅                                                                                                |
+| [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
+| [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                               | Up to 30 days                                                                                     |
+| [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                       | 100 manual snapshots                                                                              |
+| [Auth](#auth) (Beta)                                  | Up to 60k MAU                              | Up to 1M MAU                               | Up to 1M MAU                                                                                      |
+| [Object Storage](#object-storage) (Beta)              | No charge during beta, usage limits apply  | No charge during beta, usage limits apply  | No charge during beta, usage limits apply                                                         |
+| [Functions](#functions) (Beta)                        | No charge during beta, usage limits apply  | No charge during beta, usage limits apply  | No charge during beta, usage limits apply                                                         |
+| [AI Gateway](#ai-gateway) (Beta)                      | —                                          | Free during beta                           | Free during beta                                                                                  |
+| [Private network transfer](#private-network-transfer) | —                                          | —                                          | $0.01/GB                                                                                          |
+| [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                         | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
+| [Uptime SLA](#uptime-sla)                             | —                                          | —                                          | ✅                                                                                                |
+| [Support](#support)                                   | Community                                  | Billing support                            | Standard (additional options for higher-volume customers)                                         |
 
 ## Plan features
 
@@ -71,6 +78,8 @@ Learn how to manage your Neon costs effectively with our [cost optimization guid
 
 On **Launch** and **Scale** plans, you pay only for what you use; there's no minimum monthly fee. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
 
+Higher-volume customers may qualify for annual commits. [Contact sales](/contact-sales) to learn more.
+
 <Admonition type="note">
 Invoices under $0.50 are not collected.
 </Admonition>
@@ -79,7 +88,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### Who it's for
 
-- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per project, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch**: Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale**: Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
@@ -181,7 +190,7 @@ average compute size × hours running = CU-hours
 
 #### Compute with scale to zero
 
-Scale to zero suspends computes after inactivity to compute usage and cost.
+Scale to zero suspends computes after inactivity to reduce compute usage and cost.
 
 ### Autoscaling
 
@@ -238,8 +247,8 @@ Public network transfer (egress) is the total volume of data sent from your data
 Allowances per plan:
 
 - **Free**: 5 GB/month
-- **Launch**: 100 GB/month, then $0.10/GB
-- **Scale**: 100 GB/month, then $0.10/GB
+- **Launch**: 500 GB per project per month, then $0.10/GB
+- **Scale**: 500 GB per project per month, then $0.10/GB
 
 ### Monitoring
 
@@ -258,6 +267,12 @@ See [Monitoring dashboard](/docs/introduction/monitoring-page) for details.
 Export metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible platform](/docs/guides/opentelemetry).  
 Available only on the **Scale** plan.
 
+### Spending notifications
+
+Get email alerts when your organization's monthly Neon charges reach 80% and 100% of a threshold you set, so you can act before the bill grows. Available on the **Launch** and **Scale** plans.
+
+See [Spending notifications](/docs/introduction/spending-notifications) for how to set a threshold.
+
 ### Instant restore
 
 Neon stores a change history to support point-in-time restore (instant restore). You can only point-in-time restore from **root branches**, so PITR storage is charged only for root branches. Child branches do not add to this charge.
@@ -266,23 +281,23 @@ Neon stores a change history to support point-in-time restore (instant restore).
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
 - **Scale**: Up to 30 days, billed at $0.20/GB-month
 
-You can change your [restore window](#restore-window) to control how much change history you retain. See [Instant restore](/docs/introduction/branch-restore) for details.
+You can change your [history window](#history-window) to control how much change history you retain for **instant restore**. See [Instant restore](/docs/introduction/branch-restore) for how to use the feature.
 
 > The change history is a log of write operations in the form of Postgres [Write-Ahead Logs](/docs/reference/glossary#write-ahead-logging-wal).
 
-### Restore window
+### History window
 
-How far back you can restore data.
+How far back **instant restore** can reach (and how much change history is retained) for your project.
 
-The maximum restore window per plan:
+The maximum history window per plan:
 
 - **Free**: No charge, 6-hour limit, capped at 1 GB-month of changes
 - **Launch**: Up to 7 days
 - **Scale**: Up to 30 days
 
-> The restore window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
+> The history window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
 
-The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Restore window](/docs/introduction/restore-window) for configuration details and more information.
+Shortening the history window can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [History window](/docs/introduction/history-window) for configuration details and more information.
 
 ### Snapshots
 
@@ -293,8 +308,8 @@ The per-plan snapshot limit applies to **manual snapshots only**. On paid plans,
 Manual snapshot limits per plan:
 
 - **Free**: 1 manual snapshot
-- **Launch**: 10 manual snapshots
-- **Scale**: 10 manual snapshots
+- **Launch**: 100 manual snapshots
+- **Scale**: 100 manual snapshots
 
 **Pricing**: Snapshot storage is billed at $0.09/GB-month.
 
@@ -304,7 +319,7 @@ Automated backup schedules are available on paid plans except for the Agent plan
 
 ### Auth
 
-Neon Auth is a managed authentication service built on [Better Auth](https://www.better-auth.com/), fully integrated into the Neon platform.
+Managed Better Auth is a managed authentication service built on [Better Auth](https://www.better-auth.com/), fully integrated into the Neon platform.
 
 Monthly Active User (MAU) limits per plan:
 
@@ -314,7 +329,31 @@ Monthly Active User (MAU) limits per plan:
 
 > An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
 
-See [Neon Auth](/docs/auth/overview) for more information.
+See [Managed Better Auth](/docs/auth/overview) for more information.
+
+### Object Storage
+
+Neon Object Storage is S3-compatible object storage that branches with your Neon project. It's available on all plans, including Free, during the beta.
+
+There's no charge for Object Storage during the beta, but usage limits apply.
+
+See [Neon Object Storage](/docs/storage/overview) for more information.
+
+### Functions
+
+Neon Functions are serverless Node.js compute you deploy onto a Neon branch, so your backend code runs next to your database. They're available on all plans, including Free, during the beta.
+
+There's no charge for Functions during the beta, but usage limits apply.
+
+See [Neon Functions](/docs/compute/functions/overview) for what's included and current limitations.
+
+### AI Gateway
+
+Neon AI Gateway provides access to foundation models from Anthropic, OpenAI, Google, Meta, Databricks, and Alibaba through a single Neon credential. It is available on paid plans (Launch and Scale) during the beta.
+
+Inference is free during the beta. When billing begins, prices will match each provider's published list prices, with no additional markup.
+
+See [AI Gateway models](/docs/ai-gateway/models#pricing) for details.
 
 ### Private network transfer
 
@@ -352,7 +391,9 @@ Support level by plan:
 
 - **Free**: Community support
 - **Launch**: Billing support
-- **Scale**: Standard support, with Business or Production support plans available for an additional fee
+- **Scale**: Standard support
+
+Higher-volume customers may qualify for annual commits and additional support options aligned with [Databricks Support](https://www.databricks.com/support). [Contact sales](/contact-sales) to learn more.
 
 See [Support](/docs/introduction/support) for details.
 
@@ -497,7 +538,7 @@ How are instant restores billed?
  Change history is stored as Postgres WAL records.
 
 Is instant restore history accumulated at the project or branch level?
-: You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single restore window (for example, 7 days or 30 days) for the entire project. You cannot enable, disable, or configure the restore window per branch.
+: You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single **history window** (for example, 7 days or 30 days) for the entire project for **instant restore**. You cannot enable, disable, or configure the history window per branch.
 
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  
@@ -505,19 +546,22 @@ Can I disable scale-to-zero?
  Scale: Yes, fully configurable (1 minute to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
 
 What is autoscaling and how does it work?
-: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
+: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
 
 How are read replicas billed?
 : Each read replica is its own compute and contributes to CU-hours.
 
 Do public network transfer limits reset each month?
-: Yes. Free plan includes 5 GB/month, Launch and Scale include 100 GB/month. Beyond that, it's $0.10/GB.
+: Yes. Free includes 5 GB/month. Launch and Scale include 500 GB per project per month. Beyond that, it's $0.10/GB.
 
 How is private network transfer billed?
 : Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
 
+What are the limits and quotas for the Free plan?
+: The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+
 What happens if I exceed my Free plan limits?
-: On the Free plan, compute will suspend when limits are reached (for example, CU-hours or public network transfer). To continue, upgrade to a paid plan.
+: On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 0.5 GB storage cap causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
 
 Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.
@@ -535,7 +579,7 @@ How can I control my costs?
 : • Set a maximum autoscaling limit to cap compute size.  
  • Enable scale-to-zero for idle databases.  
  • Delete unused branches to reduce storage costs.  
- • Shorten your restore window to reduce instant restore storage.  
+ • Shorten your **history window** to reduce **History** usage (instant restore storage).  
  For more detailed strategies, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
 
 Do you offer credits for startups?

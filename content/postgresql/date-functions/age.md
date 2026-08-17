@@ -6,7 +6,7 @@ page_description: >-
   calculate ages based on two timestamps.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-date-functions/postgresql-age/'
 ogImage: /postgresqltutorial/rental-table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MAKE_TIME() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The AGE() function works in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, on a cloud VM, or on a managed service. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that production analytics and AI workloads demand. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to keep up with you.
+The AGE() function works in any PostgreSQL database, so everything here applies whether you run Postgres on your laptop, on a cloud VM, or on a managed service. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `AGE()` function to calculate ages.

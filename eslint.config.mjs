@@ -5,7 +5,6 @@ import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 import nextPlugin from '@next/eslint-plugin-next';
 import prettierConfig from 'eslint-config-prettier/flat';
-import cypressPlugin from 'eslint-plugin-cypress/flat';
 import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import react from 'eslint-plugin-react';
@@ -16,7 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default [
-  { ignores: ['eslint.config.mjs'] },
+  { ignores: ['eslint.config.mjs', '.claude/**'] },
 
   includeIgnoreFile(path.resolve(__dirname, '.gitignore')),
 
@@ -34,11 +33,6 @@ export default [
   {
     plugins: { '@next/next': nextPlugin },
     rules: { ...nextPlugin.configs.recommended.rules },
-  },
-
-  {
-    ...cypressPlugin.configs.recommended,
-    files: ['cypress/**/*.{js,jsx}'],
   },
 
   {
@@ -93,6 +87,23 @@ export default [
       'jsx-a11y/no-noninteractive-element-interactions': 'off',
       'jsx-a11y/media-has-caption': 'off',
       'jsx-a11y/no-autofocus': 'off',
+    },
+  },
+
+  {
+    files: ['**/*.mjs'],
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: { ...globals.node },
+    },
+    rules: {
+      'import/no-unresolved': 'off',
+      'import/named': 'off',
+      'no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
     },
   },
 

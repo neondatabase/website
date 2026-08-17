@@ -1,24 +1,28 @@
 ---
-title: Use Neon Postgres with Railway
-subtitle: Connect a Neon Postgres database to your Node application deployed with
+title: Use Lakebase Postgres with Railway
+subtitle: Connect a Lakebase Postgres database to your Node application deployed with
   Railway
 summary: >-
-  Step-by-step guide for deploying a Node.js application connected to a Neon
-  Postgres database on Railway, including prerequisites and setup instructions
-  for both quick start and manual configurations.
+  Connecting a Lakebase Postgres database to a Node.js application deployed on
+  Railway lets you use GitHub-based continuous deployment with a serverless
+  Postgres backend. Use this guide when you need a manual Express + pg setup
+  with full control over schema creation, environment variables, and deployment
+  steps. A faster alternative uses the Railway Next.js template with Claimable
+  Postgres, which provisions a database instantly without signup and stays
+  claimable for 72 hours.
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-08-04T04:41:00.271Z'
 ---
 
 [Railway](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon) is a cloud deployment platform that allows users to deploy anything, anywhere, seamlessly. On Railway, develop locally, connect to a repository or image, and have infrastructure provisioned automatically. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.
 
-This guide shows how to deploy a simple Node.js application connected to a Neon Postgres database on Railway.
+This guide shows how to deploy a simple Node.js application connected to a Lakebase Postgres database on Railway.
 
 ## Quick start alternative
 
-If you want to get started quickly with Next.js and Neon Postgres on Railway, you can use the [Next.js with Neon Postgres template](https://railway.com/deploy/nextjs-with-neon-postgres?utm_medium=integration&utm_source=button&utm_campaign=neon). This template uses [Claimable Postgres by Neon](/docs/reference/claimable-postgres) to provision a Neon database instantly without signup, perfect for rapid prototyping. The database is claimable for 72 hours, giving you time to develop before claiming it to your Neon account.
+If you want to get started quickly with Next.js and Lakebase Postgres on Railway, you can use the [Next.js with Neon Postgres template](https://railway.com/deploy/nextjs-with-neon-postgres?utm_medium=integration&utm_source=button&utm_campaign=neon). This template uses [Claimable Postgres by Neon](/docs/reference/claimable-postgres) to provision a database instantly without signup, perfect for rapid prototyping. The database is claimable for 72 hours, giving you time to develop before claiming it to your Neon account.
 
-For a more detailed walkthrough using Node.js/Express with manual Neon setup, continue with this guide below.
+For a more detailed walkthrough using Node.js/Express with manual setup, continue with this guide below.
 
 ## Prerequisites
 
@@ -29,7 +33,7 @@ To follow along with this guide, you will need:
 - A GitHub account. Railway integrates with GitHub for continuous deployment. So, you'd need a GitHub account to upload your application code.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
-## Setting up your Neon database
+## Setting up your database
 
 ### Initialize a new project
 

@@ -2,14 +2,17 @@
 title: Connect a Bun application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Bun application
 summary: >-
-  Step-by-step guide for creating a Neon project and connecting it to a Bun
-  application, including examples for using Bun's SQL client and the Neon
-  serverless driver.
+  Connecting a Bun application to a Lakebase Postgres database requires either
+  Bun's built-in `sql` client (no extra dependencies) or the
+  `@neondatabase/serverless` driver installed via `bun add`. Choose this page
+  when setting up Bun, Hono, or Elysia with Lakebase Postgres, covering project creation,
+  `POSTGRES_URL` credential storage in `.env.local`, and a working TypeScript
+  query to verify the connection.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.933Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
-This guide describes how to create a Neon project and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.
+This guide describes how to create a project on Neon and connect to it from a Bun application. Examples are provided for using [Bun's built-in SQL client](https://bun.sh/docs/api/sql) and the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver. Use the client you prefer.
 
 <Admonition type="note">
 The same configuration steps can be used for [Hono](https://hono.dev/docs/getting-started/bun), [Elysia](https://elysiajs.com), and other Bun-based web frameworks.
@@ -17,11 +20,11 @@ The same configuration steps can be used for [Hono](https://hono.dev/docs/gettin
 
 <Steps>
 
-## Create a Neon project
+## Create a project on Neon
 
-If you do not have one already, create a Neon project.
+If you do not have one already, create a project.
 
-1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+1. Navigate to the [Projects](https://console.neon.tech/app/projects) page in the console.
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 

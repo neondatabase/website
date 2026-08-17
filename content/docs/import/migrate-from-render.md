@@ -1,18 +1,23 @@
 ---
-title: Migrate from Render to Neon Postgres
-subtitle: Learn how to migrate your database from Render to Neon Postgres using pg_dump
+title: Migrate from Render to Lakebase Postgres
+subtitle: Learn how to migrate your database from Render to Lakebase Postgres using pg_dump
   and pg_restore
 summary: >-
-  Covers the migration process of a database from Render to Neon Postgres using
-  `pg_dump` and `pg_restore`, detailing prerequisites and step-by-step
-  instructions for preparing and exporting data.
+  Migration guide for moving a PostgreSQL database from Render to Neon using
+  `pg_dump` and `pg_restore`. Retrieve the Render External Database URL, dump
+  the public schema to a custom-format file (`-Fc`), then restore to Neon using
+  an unpooled connection string with `--no-owner` and `--no-acl`. Choose this
+  page over the general Postgres migration guide when Render is the source, as
+  it covers Render-specific connection steps and the ownership flags required
+  when moving between hosted providers. Also covers logical replication as an
+  alternative for large databases with minimal downtime.
 redirectFrom:
   - /docs/import/import-from-render
 enableTableOfContents: true
-updatedOn: '2026-04-01T20:14:28.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This guide describes how to migrate a database from Render to Neon Postgres.
+This guide describes how to migrate a database from Render to Lakebase Postgres.
 
 We use the `pg_dump` and `pg_restore` utilities, which are part of the Postgres client toolset. `pg_dump` works by dumping both the schema and data in a custom format that is compressed and suitable for input into `pg_restore` to rebuild the database.
 
@@ -90,7 +95,7 @@ Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon Postgres database to receive the imported data.
+This section describes how to prepare your destination Lakebase Postgres database to receive the imported data.
 
 ### Create the Neon database
 
@@ -110,10 +115,11 @@ For more information, see [Create a database](/docs/manage/databases#create-a-da
 
 1. In the Neon Console, go to your **Project Dashboard**.
 2. Select **Connect** to open the **Connect to your database** modal.
-3. Copy the connection string. It will look similar to this:
+3. Select the user and database as needed for your connection. Make sure the **Connection pooling** toggle is disabled to get an unpooled connection string.
+4. Copy the connection string. It will look similar to this:
 
-   ```
-   postgresql://[user]:[password]@[neon_hostname]/[dbname]
+   ```text shouldWrap
+   postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
 ## Restore data to Neon with pg_restore

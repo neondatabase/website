@@ -3,11 +3,16 @@ title: Branch expiration
 subtitle: Learn how to use Neon's branch expiration feature to automatically delete
   temporary branches
 summary: >-
-  Covers the setup of Neon's branch expiration feature, enabling automatic
-  deletion of temporary branches by setting expiration timestamps through the
-  Console, CLI, or API.
+  Branch expiration automatically deletes Neon branches at a scheduled time
+  using a TTL model, with expiration set via the Console, CLI (--expires-at
+  flag), or API (expires_at) using RFC 3339 timestamps up to 30 days in the
+  future. Use this feature to prevent storage accumulation from CI/CD test
+  branches, ephemeral AI workflows, or time-boxed feature branches that would
+  otherwise require manual cleanup. Expiration cannot be set on protected,
+  default, or parent branches, and deletion is permanent and also removes
+  associated compute endpoints.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.140Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 ## Overview
@@ -122,7 +127,7 @@ Branch expiration is not supported with these Neon features:
 
 - **Data API**
 
-Branch expiration is supported with [Neon Auth](/docs/auth/overview).
+Branch expiration is supported with [Managed Better Auth](/docs/auth/overview).
 
 <Admonition type="note">
 When a branch expires and is deleted, all associated compute endpoints are also deleted. Ensure any critical workloads are migrated before expiration.
@@ -297,7 +302,7 @@ Check expiration status of your branches:
 <TabItem>
 
 ```bash
-neon branches info <branch_id> --project-id <project_id>
+neon branches get <branch_id> --project-id <project_id>
 ```
 
 </TabItem>
@@ -319,13 +324,13 @@ curl --request GET \
 
 ### Create project branch
 
-[`POST /projects/{project_id}/branches`](https://api-docs.neon.tech/reference/createprojectbranch)
+[`POST /projects/{project_id}/branches`](/docs/reference/api/branches/create-project-branch)
 
 - **`expires_at`** (optional) - Timestamp for automatic deletion in [RFC 3339](#timestamp-format-requirements) format
 
 ### Update project branch
 
-[`PATCH /projects/{project_id}/branches/{branch_id}`](https://api-docs.neon.tech/reference/updateprojectbranch)
+[`PATCH /projects/{project_id}/branches/{branch_id}`](/docs/reference/api/branches/update-project-branch)
 
 - **`expires_at`** (optional, nullable) - Update or remove expiration
   - Timestamp value: Sets/updates expiration

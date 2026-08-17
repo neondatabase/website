@@ -4,7 +4,7 @@ subtitle: Learn how to create separate development environments for each pull re
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-08-18T00:00:00.000Z'
-updatedOn: '2025-06-23T15:22:02.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 When working on a team project, it's useful to have separate environments for each new feature or bug fix. This helps prevent conflicts and makes it easier to test changes. In this guide, we'll show you how to set up a process that creates a new development environment for each pull request. We'll use GitHub Codespaces for the coding environment and Neon's Postgres branching for the database.
@@ -98,9 +98,9 @@ This file tells GitHub Codespaces how to set up the development environment. Her
 - `"postCreateCommand"`: This runs commands after the Codespace is created. It installs PHP dependencies, generates an application key, and runs a setup script for the database.
 - `"features"`: This adds Node.js to the environment.
 
-## Setting up Neon Postgres
+## Setting up a database on Neon
 
-Now let's connect our project to a Neon Postgres database.
+Now let's connect our project to a database on Neon.
 
 1. Go to the [Neon Console](https://console.neon.tech) and create a new project.
 

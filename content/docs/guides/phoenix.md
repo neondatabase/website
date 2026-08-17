@@ -2,15 +2,18 @@
 title: Connect from Phoenix to Neon
 subtitle: Set up a Neon project in seconds and connect from Phoenix
 summary: >-
-  Step-by-step guide for connecting a Phoenix application to a Neon database,
-  including project creation, credential storage, and configuration of database
-  connections using Ecto.
+  Connecting a Phoenix (Elixir) application to Neon requires configuring Ecto
+  with SSL certificate verification, which recent Postgrex releases enforce by
+  default using the `:cacerts` or `:cacertfile` option. Use this page when
+  setting up a new or existing Phoenix project with Neon, covering project
+  creation, DATABASE_URL credential storage, and config updates for dev, test,
+  and runtime environments.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.031Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/phoenix-prompt.md"
-description="Pre-built prompt for connecting Phoenix applications to Neon Postgres"/>
+description="Pre-built prompt for connecting Phoenix applications to Lakebase Postgres"/>
 
 This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframework.org) application. [Ecto](https://hexdocs.pm/ecto/3.11.2/Ecto.html) provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
@@ -50,7 +53,7 @@ When prompted, choose to not install the dependencies yet.
 
 ## Configure database connections
 
-Update the following configuration files with your Neon database connection details from the connection string you copied earlier.
+Update the following configuration files with your database connection details from the connection string you copied earlier.
 
 1. Update `config/dev.exs`:
 
@@ -67,7 +70,7 @@ Update the following configuration files with your Neon database connection deta
    ```
 
    <Admonition type="note">
-   The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
+   The `:ssl` option is required to connect to the database. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
    </Admonition>
 
 2. Update `config/runtime.exs`:
@@ -146,5 +149,10 @@ mix phx.server
 ```
 
 </Steps>
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

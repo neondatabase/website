@@ -6,7 +6,7 @@ page_description: >-
   prepared statement support, improved prompt options, and improved workflow
   capabilities that make database development more efficient.
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL 18 pg_stat_io Improvements
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The psql improvements covered here ship with PostgreSQL 18 itself, so pipeline queries, prepared statement commands, and the new prompt options work against any Postgres deployment. If you're an enterprise running AI workloads on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and natively integrated so your operational and analytical data live side by side. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the most flexible Postgres platform around, with instant branching, autoscaling, and a generous free tier.
+The psql improvements covered here ship with PostgreSQL 18 itself. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's `psql` improvements, including new pipeline query commands, prepared statement support, improved prompt options, and workflow features that make database development and debugging more efficient.

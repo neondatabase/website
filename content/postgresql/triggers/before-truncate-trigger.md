@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-before-truncate-trigger/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INSTEAD OF Triggers
@@ -18,14 +18,14 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `BEFORE TRUNCATE` trigger is a standard PostgreSQL feature, so everything here works the same on any Postgres deployment. If you're an enterprise looking for managed Postgres that's built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) gives you the fastest path on Postgres.
+The `BEFORE TRUNCATE` trigger is a standard PostgreSQL feature. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE TRUNCATE` trigger that fires before a `TRUNCATE` event occurs on a table.
 
 ## Introduction to the PostgreSQL BEFORE TRUNCATE trigger
 
-A [`TRUNCATE TABLE`](../postgresql-tutorial/postgresql-truncate-table) statement removes all from a table without creating any logs, making it faster than a [`DELETE`](../postgresql-tutorial/postgresql-delete) operation.
+A [`TRUNCATE TABLE`](../postgresql-tutorial/postgresql-truncate-table) statement removes all rows from a table without creating any logs, making it faster than a [`DELETE`](../postgresql-tutorial/postgresql-delete) operation.
 
 PostgreSQL allows you to [create a trigger](creating-first-trigger-postgresql) that fires before a `TRUNCATE` event occurs.
 

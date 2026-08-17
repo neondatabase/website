@@ -1,23 +1,33 @@
 ---
 title: File storage
 subtitle: Store files in external object storage and file management services and track
-  metadata in Neon
+  metadata in Lakebase
 summary: >-
-  Covers the setup of integrating Neon with external object storage services for
-  file uploads and management, detailing how to store file references and
-  metadata in a Neon Postgres database.
+  File storage in Neon uses a split-storage pattern where files go to an
+  external object storage or file management service and file URLs, keys, and
+  metadata are stored in a Lakebase Postgres database. Supported providers include
+  AWS S3, Cloudflare R2, Azure Blob, Backblaze B2, Cloudinary, ImageKit, and
+  Uploadcare. Choose this approach when your app needs file uploads and you want
+  a relational store for querying and filtering metadata without building a
+  native file store.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.155Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Applications often need to handle file uploads and storage, from user avatars and documents to images and other media. Neon does not yet provide a native file storage solution. Instead, we recommend combining Neon with a specialized storage service.
+Applications often need to handle file uploads and storage, from user avatars and documents to images and other media.
 
-The typical pattern looks like this:
+<Callout title="Neon now offers native storage">
+Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in beta.
+
+For more information, see [Neon Object Storage](/docs/storage/overview).
+</Callout>
+
+If you prefer an external provider or need features like image optimization, transformations, or CDN delivery, you can combine Neon with a specialized storage service instead. The typical pattern looks like this:
 
 1. Upload files from your application (client or backend) to an object storage provider or file management service.
-2. Store references (such as the file URL, unique key, or identifier) and related metadata like user ID, upload timestamp, file type, size, and permissions in your Neon Postgres database.
+2. Store references (such as the file URL, unique key, or identifier) and related metadata like user ID, upload timestamp, file type, size, and permissions in your database.
 
-This pattern separates file storage from relational data management, with purpose-built services like S3 or R2 handling file storage and Neon managing your data.
+This pattern separates file storage from relational data management, with purpose-built services like S3 or R2 handling file storage and the database managing your data.
 
 ## Options for external storage
 

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-a-stored-procedure/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Call a PostgreSQL Function'
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Calling PostgreSQL stored procedures from C# with Npgsql and ADO.NET works the same against any Postgres database, so the patterns here carry over wherever you run your workloads. If you're building an enterprise .NET application in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. If you're a developer or startup who wants to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+Calling PostgreSQL stored procedures from C# with Npgsql and ADO.NET works the same against any Postgres database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn to call a PostgreSQL stored procedure from a C\# program using ADO.NET

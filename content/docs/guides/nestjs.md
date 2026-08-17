@@ -2,15 +2,18 @@
 title: Connect a NestJS application to Neon
 subtitle: Set up a Neon project in seconds and connect from a NestJS application
 summary: >-
-  Step-by-step guide for connecting a NestJS application to a Neon project,
-  including project setup, dependency installation, and configuration of
-  database credentials for secure access.
+  NestJS-to-Neon integration uses a DatabaseModule that provisions a connection
+  pool via node-postgres, postgres.js, or the Neon serverless driver and injects
+  it as a NestJS provider. Choose this guide when adding a Neon serverless
+  Postgres backend to a TypeScript NestJS project without an ORM. The steps
+  cover Neon project creation, DATABASE_URL configuration in .env, and wiring
+  a service and GET controller endpoint to query the database.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"
-description="Pre-built prompt for connecting NestJS applications to Neon Postgres"/>
+description="Pre-built prompt for connecting NestJS applications to Lakebase Postgres"/>
 
 NestJS is a framework for building efficient, scalable Node.js server-side applications<sup><a target="_blank" href="https://docs.nestjs.com/">1</a></sup>. This guide explains how to connect NestJS with Neon using a secure server-side request.
 
@@ -233,5 +236,12 @@ When you run `npm run start` you can expect to see output similar to the followi
 ```
 
 </Steps>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

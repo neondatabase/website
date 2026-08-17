@@ -1,13 +1,13 @@
 ---
-title: Migrating from Tembo.io to Neon Postgres
-subtitle: 'Learn how to migrate your data and applications from Tembo.io to Neon Postgres'
+title: Migrating from Tembo.io to Lakebase Postgres
+subtitle: 'Learn how to migrate your data and applications from Tembo.io to Lakebase Postgres'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-08T00:00:00.000Z'
-updatedOn: '2025-08-01T20:49:23.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-[Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your serviced from Tembio.io to Neon, follow the steps in this guide.
+[Tembo.io](https://legacy.tembo.io/cloud) recently announced that it's sunsetting its managed Postgres service. If you've decided to migrate your service from Tembo.io to Neon, follow the steps in this guide.
 
 <Admonition type="warning" title="Tembo Shutdown Timeline">
 Please be aware of Tembo's [official shutdown timeline](https://tembo-io.notion.site/Tembo-Cloud-Migration-Guide-1de7c9367d6a80349570e7469ba7f17b)
@@ -25,7 +25,7 @@ Plan your migration accordingly to avoid any disruption to your services.
 
 While both Tembo and Neon provide managed Postgres, Neon's architecture offers some advantages. Here’s a quick comparison of key features:
 
-| Feature                   | Tembo                                | Neon Postgres                                                                    |
+| Feature                   | Tembo                                | Lakebase Postgres                                                                |
 | ------------------------- | ------------------------------------ | -------------------------------------------------------------------------------- |
 | **Compute**               | Manual scaling                       | Autoscaling, scale-to-zero                                                       |
 | **Branching**             | NA                                   | Instant data branching for dev, test, and CI/CD workflows ("branch per feature") |

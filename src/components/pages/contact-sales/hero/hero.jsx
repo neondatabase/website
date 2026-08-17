@@ -41,7 +41,7 @@ const Hero = () => (
             size="md-new"
             theme="white"
           >
-            Start shipping faster with serverless Postgres
+            Start shipping faster with the backend for apps and agents
           </Heading>
           <div className="mt-auto flex flex-col gap-7 xl:gap-5 lg:gap-7">
             <p className="max-w-[544px] text-lg leading-normal tracking-tight text-pretty text-gray-new-70 xl:text-base lg:mt-[18px] lg:max-w-xl">

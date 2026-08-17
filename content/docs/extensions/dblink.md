@@ -2,11 +2,16 @@
 title: The dblink extension
 subtitle: Connect to and query other Postgres databases from Neon using dblink
 summary: >-
-  Covers the setup and usage of the `dblink` extension in Neon, enabling
-  connections to and querying of remote Postgres databases for data integration
-  and cross-database operations.
+  The `dblink` extension lets a Neon session connect to and query remote
+  Postgres databases, returning results as local rows for cross-database
+  reporting, data synchronization, and ad-hoc data pulls. Use `dblink` for a
+  quick, session-scoped connection to another Postgres instance without
+  persistent foreign tables. Use `postgres_fdw` instead for a structured,
+  more secure mapping of remote tables. The extension supports multiple named
+  connections and requires explicit column type definitions in every query
+  result.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `dblink` extension provides the ability to connect to other Postgres databases from within your current database. This is invaluable for tasks such as data integration, cross-database querying, and building applications that span multiple database instances. `dblink` allows you to execute queries on these remote databases and retrieve the results directly into your Neon project.

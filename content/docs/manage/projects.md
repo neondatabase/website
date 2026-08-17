@@ -4,11 +4,16 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 summary: >-
-  How to manage Neon projects using the Neon Console or API, including creating
-  branches, databases, roles, and computes within each project workspace.
+  A Neon project is the top-level workspace that groups branches, databases,
+  roles, and computes. This page covers the full project lifecycle: create,
+  configure, and delete, via the Console or API. Use it when you need to set
+  project-level defaults such as compute autoscaling, history window for
+  instant restore and Time Travel, IP Allow rules, logical replication, or
+  project access. Deleted projects can be recovered within a 7-day
+  window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-04-28T20:12:16.000Z'
+updatedOn: '2026-08-04T15:25:12.468Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -27,7 +32,11 @@ When you add a new project, Neon creates the following resources by default:
 
 The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Playing with Neon](/docs/get-started/signing-up).
 
-To create a Neon project:
+You can create a project from the Console or the Neon CLI. To create one with the API, see [Create a project with the API](#create-a-project-with-the-api).
+
+<Tabs labels={["Console", "CLI"]}>
+
+<TabItem>
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
@@ -35,6 +44,22 @@ To create a Neon project:
 4. Click **Create Project**.
 
 After creating a project, you are directed to the **Project Dashboard**.
+
+</TabItem>
+
+<TabItem>
+
+Install the CLI with `npm i -g neon` and run `neon auth` to log in. Then create a project with `neon projects create`:
+
+```bash
+neon projects create --name myproject --region-id aws-us-east-2
+```
+
+The output includes the new project ID and the default connection string. For all options, see [Neon CLI — projects](/docs/cli/projects).
+
+</TabItem>
+
+</Tabs>
 
 ## View projects
 
@@ -54,13 +79,14 @@ The **Settings** page includes these sub-pages:
 
 - **General**: Change the name of your project or copy the project ID.
 - **Compute**: Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Instant restore**: Set the [restore window](/docs/introduction/restore-window) to enable instant restore, time travel queries, and branching from past states.
+- **Instant restore**: Under **Settings → Instant restore**, set the **history window** to control how far back **instant restore**, Time Travel queries, and branching from past states can reach.
 - **Updates**: Schedule a time for Postgres and Neon updates.
+- **Project permissions**: Grant organization members access to this project, and review who can already reach it. See [User permissions](/docs/manage/user-permissions).
 - **Collaborators**: Invite external collaborators to join your Neon project.
 - **Network security**: Configure Neon's IP and Private Networking features for secure access.
 - **RLS**: Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
 - **Logical replication**: Enable logical replication to replicate data from your Neon project to external data services and platforms.
-- **Transfer**: Transfer your project from the current organization to another organization you are a member of.
+- **Transfer**: Transfer your project from the current organization to another organization you belong to. Transferring a project out of an organization requires the **Admin** organization role.
 - **Delete**: Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
 ### General project settings
@@ -88,26 +114,26 @@ Neon supports two compute configurations:
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs
 - **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: The maximum permitted autoscaling range is 8 CU, meaning the difference between max and min cannot exceed 8 CU (for example, if min = 1 CU, max can be at most 9 CU). For more information, see [Autoscaling](/docs/introduction/autoscaling)
 
-### Configure your restore window
+### Configure the history window for instant restore
 
 By default, Neon retains a history of changes for all branches in your project, enabling features like:
 
 - [Instant restore](/docs/introduction/branch-restore) for recovering lost data
 - [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
-For complete details about the restore window feature, including plan limits, how it works, and storage implications, see [Restore window](/docs/introduction/restore-window).
+For plan limits, billing, and how retention works, see [History window](/docs/introduction/history-window).
 
-If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your instant restore storage.
+If you extend the history window, you expand how far back **instant restore** and Time Travel can go, but you also increase **History** usage (change history billed for instant restore) on your project.
 
-Also note that adjusting the restore window affects _all_ branches in your project.
+Also note that adjusting the history window affects _all_ branches in your project.
 
-To configure the restore window for a project:
+To configure the history window:
 
 1. Select a project in the Neon Console.
 2. On your **Project Dashboard**, select **Settings**.
-3. Select **Restore window**.
-   ![Restore window configuration](/docs/manage/instant_restore_setting.png)
-4. Use the slider to select the restore window.
+3. Select **Instant restore**.
+4. Under **History window**, use the slider to choose how long to keep change history.
+   ![History window configuration](/docs/manage/instant_restore_setting.png)
 5. Click **Save**.
 
 ### Schedule updates for your project
@@ -123,13 +149,22 @@ To set your project's update schedule or view currently scheduled updates:
 
 For more information, see [Updates](/docs/manage/updates).
 
-### Invite collaborators to a project
+### Give someone access to a project
+
+How you grant access depends on whether the person is already in your organization:
+
+- **Organization members**: Grant them a per-project permission (**Viewer**, **Editor**, or **Admin**) from the project's **Settings** → **Project permissions** page. This is also how you give a member more access on one project than their organization role provides. See [Assign project access](/docs/manage/user-permissions#assign-project-access).
+- **People outside your organization**: Invite them as a collaborator, as described below.
+
+#### Invite collaborators to a project
 
 Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
 
 <Admonition type="note">
-Organization members cannot be added as collaborators to organization-owned projects since they already have access to all projects through their organization membership.
+Project sharing is being deprecated and will be removed in a future release. To give a contractor or other limited-access user access to specific projects, add them to the organization as a **Collaborator** and grant per-project permissions instead. See [User permissions](/docs/manage/user-permissions).
 </Admonition>
+
+Organization members can't be added as collaborators on organization-owned projects. Grant them a per-project permission instead.
 
 To invite collaborators to a Neon project:
 
@@ -175,7 +210,7 @@ To configure an allowlist:
 
 <TabItem>
 
-The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
+The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
@@ -203,7 +238,7 @@ neon ip-allow add 203.0.113.1 --protected-only false
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
+The [Create project](/docs/reference/api/projects/create-project) and [Update project](/docs/reference/api/projects/update-project) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
@@ -277,7 +312,7 @@ This list combines individual IP addresses, a range of IP addresses, a CIDR bloc
 
 You can update your IP Allow configuration via the Neon Console or API as described in [Configure IP Allow](#configure-ip-allow). Replace the current configuration with the new configuration. For example, if your IP Allow configuration currently allows access from IP address `192.0.2.1`, and you want to extend access to IP address `192.0.2.2`, specify both addresses in your new configuration: `192.0.2.1, 192.0.2.2`. You cannot append values to an existing configuration. You can only replace an existing configuration with a new one.
 
-The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/reference/cli-ip-allow).
+The Neon CLI provides an `ip-allow` command with `add`, `reset`, and `remove` options that you can use to update your IP Allow configuration. For instructions, refer to [Neon CLI commands — ip-allow](/docs/cli/ip-allow).
 
 #### Remove an IP Allow configuration
 
@@ -298,7 +333,7 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 
 <TabItem>
 
-The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
+The [Neon CLI ip-allow command](/docs/cli/ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
 
 ```bash
 neon ip-allow reset
@@ -361,7 +396,7 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 
 <TabItem>
 
-Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+Use the [Update project](/docs/reference/api/projects/update-project) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/$PROJECT_ID' \
@@ -396,6 +431,8 @@ After enabling logical replication, the next steps involve creating publications
 
 Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
 
+Deleting a project requires **Admin** access on that project, which every organization Admin has. A member granted Admin on a single project can delete that project. See [Per-project permissions](/docs/manage/user-permissions#per-project-permissions).
+
 To delete a project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
@@ -403,20 +440,24 @@ To delete a project:
 3. Select **Settings**.
 4. Select **Delete**.
 
+<Admonition type="note">
+For HIPAA-compliant projects, see [HIPAA Compliance](/docs/security/hipaa#delete-a-hipaa-compliant-project) before deleting a project—for example, to export audit logs you may need.
+</Admonition>
+
 <Admonition type="important">
 If you are any of Neon's paid plans, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 </Admonition>
 
 <Admonition type="note">
-**Early Access:** Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
+Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
 </Admonition>
 
 ## Manage projects with the Neon API
 
-Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API Reference](/docs/reference/api).
 
 <Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -429,7 +470,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 
 ### Create a project with the API
 
-The following Neon API method creates a project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
+The following Neon API method creates a project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/create-project).
 
 ```http
 POST /projects
@@ -454,7 +495,7 @@ The response includes information about the role, the database, the default bran
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Create project](https://api-docs.neon.tech/reference/createproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create project](/docs/reference/api/projects/create-project) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -612,7 +653,7 @@ For attribute definitions, find the [Create project](https://api-docs.neon.tech/
 
 ### List projects with the API
 
-The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojects).
+The following Neon API method lists projects for your Neon account. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/list-projects).
 
 ```http
 GET /projects
@@ -629,7 +670,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [List projects](https://api-docs.neon.tech/reference/listprojects) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List projects](/docs/reference/api/projects/list-projects) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -736,7 +777,7 @@ For attribute definitions, find the [List projects](https://api-docs.neon.tech/r
 
 ### Update a project with the API
 
-The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateproject).
+The following Neon API method updates the specified project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/update-project).
 
 ```http
 PATCH /projects/{project_id}
@@ -759,7 +800,7 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Update project](/docs/reference/api/projects/update-project) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -818,7 +859,7 @@ For attribute definitions, find the [Update project](https://api-docs.neon.tech/
 
 ### Delete a project with the API
 
-The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteproject).
+The following Neon API method deletes the specified project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/projects/delete-project).
 
 ```http
 DELETE /projects/{project_id}
@@ -836,7 +877,7 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Delete project](https://api-docs.neon.tech/reference/deleteproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete project](/docs/reference/api/projects/delete-project) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -897,7 +938,7 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
 If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
 
 <Admonition type="note">
-The deletion recovery period is different from the [restore window](/docs/introduction/restore-window). The restore window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
+The deletion recovery period is different from the [history window](/docs/introduction/history-window) used for **instant restore** on branch data. The history window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
 </Admonition>
 
 ### What's recovered
@@ -955,7 +996,7 @@ neon projects recover crimson-voice-12345678
 └────────────────────────┴───────────┴───────────────┴──────────────────────┘
 ```
 
-For more information about the Neon CLI, see [Neon CLI — projects](/docs/reference/cli-projects).
+For more information about the Neon CLI, see [Neon CLI — projects](/docs/cli/projects).
 
 </TabItem>
 

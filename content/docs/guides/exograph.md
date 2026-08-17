@@ -2,11 +2,14 @@
 title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
 summary: >-
-  Step-by-step guide for creating a GraphQL backend using Exograph with Neon,
-  covering project setup, schema creation, and backend launch.
+  Exograph is a Rust-based GraphQL backend framework that uses Postgres for data
+  persistence, making it a natural fit for Neon. This guide walks through
+  scaffolding an Exograph project with `exo new`, applying the schema to a Neon
+  database using `exo schema create | psql`, and starting a local dev server
+  with `exo dev` that exposes a GraphQL endpoint and playground.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:32.962Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 _This guide was contributed by the Exograph team_

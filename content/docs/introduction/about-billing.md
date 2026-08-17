@@ -3,12 +3,12 @@ title: Plans and billing
 enableTableOfContents: true
 subtitle: Learn about Neon's pricing plans and how to manage billing
 summary: >-
-  Covers the details of Neon's pricing plans, how to manage billing, monitor
-  usage, and strategies for cost optimization.
+  Neon's pricing plans, how to manage billing, monitor usage, and strategies
+  for cost optimization.
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
-updatedOn: '2026-04-02T20:54:29.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 ## Neon plans

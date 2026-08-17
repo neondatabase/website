@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-csharp/postgresql-csharp-call-postgresql-function/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL C#: Transaction'
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Calling PostgreSQL functions from C# with Npgsql works the same way on any standard Postgres, so you can apply these ADO.NET patterns wherever your database runs. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration that serious data teams demand. For developers and startups who need to ship and scale fast, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
+Calling PostgreSQL functions from C# with Npgsql works the same way on any standard Postgres. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn to call a PostgreSQL function from a C\# program using ADO.NET
@@ -76,7 +76,7 @@ psql -U ed -d elearning
 
 It’ll prompt you to enter a password for the `ed` user. Input the valid password and press Enter to connect to the PostgreSQL server.
 
-Second, create a stored procedure in PostgreSQL, which enrolls a student in a course and creates a corresponding invoice:
+Second, create a function in PostgreSQL that returns the count of students who registered within a date range:
 
 ```sql
 create function get_student_count(begin_date date, end_date date)

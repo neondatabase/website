@@ -2,15 +2,25 @@
 title: Media storage with ImageKit.io
 subtitle: Store files via ImageKit.io and track metadata in Neon
 summary: >-
-  Step-by-step guide for integrating ImageKit.io with Neon to upload media files
-  directly from the client-side and store their metadata in a Neon database.
+  Integrate ImageKit.io with Lakebase Postgres for client-side media uploads to
+  ImageKit's CDN, with file metadata stored in a Neon database. Backend
+  authentication generates signed parameters (token, expire, signature) so
+  uploads never touch your server. Includes backend examples for Node.js
+  (Hono) and Python (Flask), a curl test workflow, and SQL patterns for
+  per-user metadata retrieval.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.011Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
 
-This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how to upload files directly from the client-side to ImageKit.io using securely generated authentication parameters from your backend, and then store the resulting file metadata (like the ImageKit File ID and URL) in your Neon database.
+<Callout title="Neon now offers native storage">
+Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in beta.
+
+For more information, see [Neon Object Storage](/docs/storage/overview).
+</Callout>
+
+This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how to upload files directly from the client-side to ImageKit.io using securely generated authentication parameters from your backend, and then store the resulting file metadata (like the ImageKit File ID and URL) in your Lakebase Postgres database.
 
 ## Setup steps
 
@@ -30,9 +40,9 @@ This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how
 
 ## Create a table in Neon for file metadata
 
-We need a table in Neon to store metadata about the files uploaded to ImageKit.io. This allows your application to reference the media stored in ImageKit.
+We need a table in Lakebase Postgres to store metadata about the files uploaded to ImageKit.io. This allows your application to reference the media stored in ImageKit.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
+1.  Connect to your database on Neon using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
 
     ```sql
     CREATE TABLE IF NOT EXISTS imagekit_files (
@@ -47,14 +57,14 @@ We need a table in Neon to store metadata about the files uploaded to ImageKit.i
 2.  Run the SQL statement. You can customize this table by adding or removing columns (like `width`, `height`, `tags`, etc.) based on the information you need from ImageKit and your application's requirements.
 
 <Admonition type="note" title="Securing metadata with RLS">
-If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `imagekit_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
+If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `imagekit_files` table. This controls who can view or modify the object references stored in Lakebase Postgres based on your RLS rules.
 
 Note that these policies apply _only_ to the metadata in Neon. Access control for the actual files on ImageKit is managed via ImageKit features (like private files or signed URLs, if needed). The default setup makes files publicly accessible via their URL.
 </Admonition>
 
 ## Upload files to ImageKit.io and store metadata in Neon
 
-The recommended approach for client-side uploads is to generate secure **authentication parameters** on your backend. The client (for example, a web browser) uses these parameters, along with your public API key, to upload the file directly to ImageKit's Upload API. After a successful upload, the client sends the returned metadata (like `fileId` and `url`) back to your backend to be saved in Neon.
+The recommended approach for client-side uploads is to generate secure **authentication parameters** on your backend. The client (for example, a web browser) uses these parameters, along with your public API key, to upload the file directly to ImageKit's Upload API. After a successful upload, the client sends the returned metadata (like `fileId` and `url`) back to your backend to be saved in Lakebase Postgres.
 
 This requires two backend endpoints:
 
@@ -157,11 +167,11 @@ serve({ fetch: app.fetch, port }, (info) => {
 
 **Explanation**
 
-1.  **Setup:** Initializes the Neon database client (`sql`), the Hono web framework (`app`), and the ImageKit Node.js SDK (`imagekit`) using credentials from environment variables.
+1.  **Setup:** Initializes the Lakebase Postgres database client (`sql`), the Hono web framework (`app`), and the ImageKit Node.js SDK (`imagekit`) using credentials from environment variables.
 2.  **Authentication:** Includes a placeholder `authMiddleware`. **Replace this with your actual user authentication logic** to ensure only authenticated users can generate upload parameters and save metadata.
 3.  **API endpoints:**
     - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `getAuthenticationParameters()` method to create a short-lived `token`, `expire` timestamp, and `signature`. These are returned to the client.
-    - **`/save-metadata` (POST):** This endpoint is called by the client _after_ it has successfully uploaded a file directly to ImageKit's Upload API. The client sends the relevant metadata returned by ImageKit (like `fileId`, `url`, `thumbnailUrl`, etc.). The endpoint then inserts this metadata, along with the authenticated `userId`, into the `imagekit_files` table in Neon.
+    - **`/save-metadata` (POST):** This endpoint is called by the client _after_ it has successfully uploaded a file directly to ImageKit's Upload API. The client sends the relevant metadata returned by ImageKit (like `fileId`, `url`, `thumbnailUrl`, etc.). The endpoint then inserts this metadata, along with the authenticated `userId`, into the `imagekit_files` table in Lakebase Postgres.
 
 </TabItem>
 
@@ -299,11 +309,11 @@ if __name__ == "__main__":
 
 **Explanation**
 
-1.  **Setup:** Initializes the Flask web framework (`app`), the PostgreSQL client function (`get_db_connection`), and the ImageKit Python SDK (`imagekit`) using environment variables.
+1.  **Setup:** Initializes the Flask web framework (`app`), the PostgreSQL client function (`get_db_connection`) for Lakebase Postgres, and the ImageKit Python SDK (`imagekit`) using environment variables.
 2.  **Authentication:** Includes a placeholder `get_authenticated_user_id` function. **Replace this with your actual user authentication logic.**
 3.  **API endpoints:**
     - **`/generate-auth-params` (GET):** Uses the ImageKit SDK's `get_authentication_parameters()` method to create `token`, `expire`, and `signature`. These are returned to the client, usually as JSON.
-    - **`/save-metadata` (POST):** Called by the client _after_ it has successfully uploaded a file directly to ImageKit. The client provides the metadata returned by ImageKit. The backend validates the required fields and inserts the data along with the `userId` into the `imagekit_files` table in Neon using `psycopg2`.
+    - **`/save-metadata` (POST):** Called by the client _after_ it has successfully uploaded a file directly to ImageKit. The client provides the metadata returned by ImageKit. The backend validates the required fields and inserts the data along with the `userId` into the `imagekit_files` table in Lakebase Postgres using `psycopg2`.
 4.  **Database Connection:** The example shows creating a new connection per request. In production, use a global connection pool for better performance.
 
 </TabItem>
@@ -385,11 +395,11 @@ This workflow involves getting authentication parameters from your backend, usin
 **Expected outcome:**
 
 - The file is successfully uploaded to your ImageKit Media Library.
-- You can verify a new row corresponding to the uploaded file exists in your `imagekit_files` table in Neon.
+- You can verify a new row corresponding to the uploaded file exists in your `imagekit_files` table in Lakebase Postgres.
 
 ## Accessing file metadata and files
 
-With metadata stored in Neon, your application can easily retrieve references to the media hosted on ImageKit.io.
+With metadata stored in Lakebase Postgres, your application can easily retrieve references to the media hosted on ImageKit.io.
 
 Query the `imagekit_files` table from your application's backend whenever you need to display or link to uploaded files.
 
@@ -416,7 +426,7 @@ WHERE
 - The `file_url` is the direct link to the file on ImageKit's CDN. You can use this directly in `<img>` tags, video players, or links.
 - **ImageKit transformations:** A key benefit of ImageKit is real-time manipulation. You can append transformation parameters directly to the `file_url` to resize, crop, format, or optimize the media on-the-fly. For example, `file_url + '?tr=w-300,h-200'` would resize an image to 300x200 pixels. Learn more on [ImageKit transformation docs](https://imagekit.io/docs/image-transformation) for possibilities.
 
-This pattern separates media storage, optimization, and delivery (handled by ImageKit.io) from structured metadata management (handled by Neon).
+This pattern separates media storage, optimization, and delivery (handled by ImageKit.io) from structured metadata management (handled by Lakebase Postgres).
 
 </Steps>
 

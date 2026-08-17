@@ -2,19 +2,23 @@
 title: Replicate data with Inngest
 subtitle: Learn how to replicate data from Neon with Inngest
 summary: >-
-  How to replicate data from a Neon Postgres database to Inngest workflows using
-  Neon's logical replication feature, enabling custom transformations and
-  integration with third-party APIs.
+  Inngest's native Neon integration uses Postgres logical replication to convert
+  row-level database changes into typed events (such as db/users.updated) that
+  trigger durable, serverless TypeScript workflows. Choose this approach when you
+  need to forward Lakebase Postgres changes to third-party destinations like
+  Amplitude or S3 without writing a custom replication consumer. Setup requires
+  enabling logical replication in the Neon console and supplying admin
+  credentials to the Inngest integration wizard (credentials are not stored).
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-03T14:18:20.103Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Inngest](https://www.inngest.com?utm_source=neon&utm_medium=logical-replication-guide) is a durable workflow platform that allows you to trigger workflow based on Neon database changes. With its native Neon integration, it is the easiest way to set up data replication with custom transformations or 3rd party API destinations (ex, Neon to Amplitude, Neon to S3).
 
-In this guide, you will learn how to configure your Inngest account for ingesting changes from your Neon database, enabling you to replicate data from Neon to Inngest workflows.
+In this guide, you will learn how to configure your Inngest account for ingesting changes from your Neon database, enabling you to replicate data from Lakebase Postgres to Inngest workflows.
 
 ## Prerequisites
 
@@ -46,7 +50,7 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 ![Neon authorization step inside the Inngest integrations page](/docs/guides/inngest-integration-neon-authorize-step.png)
 
-You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For details, see [Connect from any application](/docs/connect/connect-from-any-app). Use a direct connection, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers, so make sure the connection string does not include `-pooler` in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
 
 ## Example: Replicating data to Amplitude
 

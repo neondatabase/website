@@ -1,17 +1,17 @@
 ---
-title: Managing database migrations and schema changes with Flask and Neon Postgres
-subtitle: Learn how to handle database migrations and schema changes in a Flask application using Flask-Migrate and Neon Postgres
+title: Managing database migrations and schema changes with Flask and Lakebase Postgres
+subtitle: Learn how to handle database migrations and schema changes in a Flask application using Flask-Migrate and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-14T00:00:00.000Z'
-updatedOn: '2026-03-03T03:19:43.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Flask is a lightweight and flexible web framework for Python that makes it easy to build web applications. When working with databases in [Flask](https://flask.palletsprojects.com/), [SQLAlchemy](https://www.sqlalchemy.org/) is a popular choice for an ORM.
 
 As your Flask application grows, so does your database schema and its complexity. Managing these changes effectively is important for maintaining data integrity and smooth deployments.
 
-This guide will walk you through the process of handling database migrations and schema changes in a Flask application using Flask-Migrate and Neon Postgres.
+This guide will walk you through the process of handling database migrations and schema changes in a Flask application using Flask-Migrate and Lakebase Postgres.
 
 ## Prerequisites
 
@@ -59,7 +59,7 @@ Before we begin, make sure you have:
    pip install -r requirements.txt
    ```
 
-4. Create a `.env` file in your project root and add your Neon Postgres connection string:
+4. Create a `.env` file in your project root and add your Neon connection string:
 
    ```
    DATABASE_URL=postgresql://user:password@your-neon-host:5432/your-database
@@ -173,7 +173,7 @@ It is a good practice to review the generated migration script before applying i
 
 ## Applying the Migration
 
-After reviewing the migration script, to apply the migration and create the table in your Neon Postgres database, run:
+After reviewing the migration script, to apply the migration and create the table in your Lakebase Postgres database, run:
 
 ```bash
 flask db upgrade
@@ -395,7 +395,7 @@ Using Neon's branching feature in your CI pipeline offers several advantages:
 
 ## Conclusion
 
-Managing database migrations is an important part of maintaining and evolving your Flask application. With Flask-Migrate and Neon Postgres, you have powerful tools at your disposal to handle schema changes efficiently and safely. Remember to always test your migrations thoroughly and have a solid backup strategy in place.
+Managing database migrations is an important part of maintaining and evolving your Flask application. With Flask-Migrate and Lakebase Postgres, you have powerful tools at your disposal to handle schema changes efficiently and safely. Remember to always test your migrations thoroughly and have a solid backup strategy in place.
 
 One thing that you should get in the habit of doing is to always review the generated migration scripts before applying them to your database. This way you can ensure that the changes that are about to be applied are correct and that they will not cause any issues. As well as that, you should use meaningful names for your migrations so that you can easily identify what each migration does.
 

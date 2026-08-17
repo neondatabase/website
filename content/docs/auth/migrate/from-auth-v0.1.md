@@ -1,15 +1,19 @@
 ---
-title: Migrate from Neon Auth SDK v0.1 to v0.2
-subtitle: Upgrade guide for breaking changes in the Neon Auth SDK
+title: Migrate from Managed Better Auth SDK v0.1 to v0.2
+subtitle: Upgrade guide for breaking changes in the Managed Better Auth SDK
 summary: >-
-  Covers the migration process from Neon Auth SDK v0.1.x to v0.2.x, detailing
-  changes such as a unified API, session caching, and explicit configuration
-  requirements.
+  The Managed Better Auth SDK v0.2 replaces multiple server imports with a single
+  `createNeonAuth()` function, adds signed-cookie session caching that
+  significantly reduces Auth Server API calls, and requires an explicit
+  `NEON_AUTH_COOKIE_SECRET` passed at configuration time. Use this guide when
+  upgrading from v0.1: it covers the package update, new environment variables,
+  API route and middleware changes, the updated `getSession()` return format,
+  and a complete migration checklist.
 enableTableOfContents: true
-updatedOn: '2026-05-06T12:48:49.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-This guide helps you migrate from Neon Auth SDK v0.1.x to v0.2.x, which introduces a unified API and performance improvements through session caching.
+This guide helps you migrate from Managed Better Auth SDK v0.1.x to v0.2.x, which introduces a unified API and performance improvements through session caching.
 
 ## What's new in v0.2
 
@@ -391,8 +395,8 @@ npm run dev
 ## Additional resources
 
 - [Next.js Server SDK Reference](/docs/auth/reference/nextjs-server) - Complete API documentation
-- [Neon Auth SDK Changelog](https://github.com/neondatabase/neon-js/blob/main/packages/auth/CHANGELOG.md#020-beta1)
+- [Managed Better Auth SDK Changelog](https://github.com/neondatabase/neon-js/blob/main/packages/auth/CHANGELOG.md#020-beta1)
 - [Next.js integration guide](/docs/auth/quick-start/nextjs-api-only)
-- [Neon Auth Overview](/docs/auth/overview)
+- [Managed Better Auth Overview](/docs/auth/overview)
 
 <NeedHelp/>

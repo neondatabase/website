@@ -89,7 +89,7 @@ From your backend, you can:
 
 _Sample API operations platforms use to implement database-per-user workflows with Neon._
 
-[Explore our API documentation](https://neon.com/docs/reference/api-reference)
+[Explore our API documentation](https://neon.com/docs/reference/api)
 
 ### Serverless economics: the key enabler
 

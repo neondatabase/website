@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_insert/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON Extract
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `jsonb_insert()` function works the same way across any PostgreSQL deployment, so everything here applies whether you're running Postgres on your laptop, on a managed service, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience, with strong performance, enterprise-grade security, and native integration into the Lakehouse. For developers and startups who need to ship fast and scale effortlessly, [Neon](https://neon.com) is the Postgres platform built for your velocity.
+The `jsonb_insert()` function works the same way across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_insert()` function to insert a new element into a JSON array or a key/value pair into a JSON object.
@@ -115,8 +115,8 @@ Output:
 
 In this example:
 
-- The original array is `\[1,2,\[3,4],6]`.
-- The path `\{2, 0\}`, `2` specifies the second element of the array which is the nested array `\[3,4]`, and `0` specifies the first element of the nested array.
+- The original array is `\[1,2,\[4,5],6]`.
+- The path `\{2, 0\}`, `2` specifies the second element of the array which is the nested array `\[4,5]`, and `0` specifies the first element of the nested array.
 - `3` is the new value.
 
 Therefore the `jsonb_insert()` function inserts the new value 3 before the first element of the nested array.

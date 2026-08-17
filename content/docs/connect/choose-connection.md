@@ -2,10 +2,15 @@
 title: Choosing your connection method
 subtitle: Find the right driver and connection type for your deployment platform
 summary: >-
-  Guides you to the right Postgres driver, connection type, and pooling strategy
-  based on your language, deployment platform, and runtime environment.
+  Decision guide for mapping each deployment environment to the correct Neon
+  driver and transport. TCP with pg or postgres.js suits long-lived servers.
+  @neondatabase/serverless over HTTP or WebSocket suits Cloudflare Workers,
+  Netlify, and Deno Deploy. The Data API suits browser apps. Use this page
+  when choosing between pooled and direct connections, or when debugging
+  double-pooling or WebSocket lifecycle errors in serverless request handlers.
+  ORM compatibility for Drizzle, Prisma, Kysely, and TypeORM is also covered.
 enableTableOfContents: true
-updatedOn: '2026-03-20T21:22:58.809Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Your connection method depends on where your code runs. Use the table below for a quick lookup, or read the scenario sections for detailed guidance.

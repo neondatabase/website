@@ -1,17 +1,22 @@
 ---
 title: Self-Host Medusa with Neon
-subtitle: Learn how to self-host Medusa using Neon Postgres as your database.
+subtitle: Learn how to self-host Medusa using Lakebase Postgres as your database.
 summary: >-
-  Step-by-step guide for self-hosting Medusa using Neon as the Postgres
-  database, including setup instructions and prerequisites for creating a Neon
-  project and connecting to the database.
+  Self-hosting Medusa, an open-source headless e-commerce platform, with Neon
+  serverless Lakebase Postgres uses a Neon connection string passed via `--db-url` to
+  `create-medusa-app`, which runs database migrations and seeds demo data
+  automatically. A non-pooled connection string is required during initial
+  setup for migrations; switch to the pooled string afterward for better
+  production performance. Deployment options covered include local development
+  and self-hosted environments such as DigitalOcean, AWS EC2, Render, and
+  Fly.io.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.172Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.
 
-In this guide, you'll learn how to set up and self-host Medusa using [Neon](https://neon.com) as your Postgres database. Neon is a serverless Postgres database platform that offers features like serverless compute, and automated scaling, making it an excellent choice for hosting your Medusa backend.
+In this guide, you'll learn how to set up and self-host Medusa using [Neon](https://neon.com) as your Postgres database. Neon is the backend for apps and agents. Lakebase Postgres is serverless, with autoscaling and scale-to-zero, making it an excellent choice for hosting your Medusa backend.
 
 ## Prerequisites
 
@@ -145,5 +150,12 @@ You can optionally enable IP whitelisting in the Neon Console to restrict databa
 - [Neon Documentation](/docs/introduction)
 - [Medusa Official Documentation](https://docs.medusajs.com/)
 - [Medusa Application Deployment Guide](https://docs.medusajs.com/learn/deployment/general)
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

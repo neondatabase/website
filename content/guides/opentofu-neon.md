@@ -4,7 +4,7 @@ subtitle: Use OpenTofu to provision and manage your Neon projects, branches, end
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-26T00:00:00.000Z'
-updatedOn: '2026-03-05T04:10:30.000Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 [OpenTofu](https://opentofu.org) is an open-source infrastructure as code (IaC) tool, forked from Terraform, that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, OpenTofu enables consistent, repeatable, and automated deployments, significantly reducing manual errors. It is a community-driven alternative governed by the Linux Foundation.
@@ -33,7 +33,7 @@ This provider is a Terraform provider compatible with OpenTofu. It is not mainta
   - Explicitly define all critical resource parameters in your OpenTofu configurations, even if they had defaults previously.
   - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
 
-- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) will continue to evolve. These changes may not immediately appear in community-maintained providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
+- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](/docs/reference/api) will continue to evolve. These changes may not immediately appear in community-maintained providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
 
 ## Prerequisites
 

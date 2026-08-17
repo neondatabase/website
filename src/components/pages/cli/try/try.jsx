@@ -16,7 +16,7 @@ const Try = () => (
             Try Neon on the command&nbsp;line
           </Heading>
           <p className="mt-4 text-lg leading-snug font-light tracking-extra-tight xl:text-lg lg:mt-4 md:mt-2.5 md:text-center md:text-base">
-            The Neon CLI brings serverless Postgres to&nbsp;your&nbsp;terminal.
+            The Neon CLI brings the Neon backend platform to&nbsp;your&nbsp;terminal.
           </p>
           <AnimatedButton
             className="relative mt-12 px-6 py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-7 md:mt-6"

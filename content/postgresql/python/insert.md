@@ -1,12 +1,12 @@
 ---
 title: 'PostgreSQL Python: Insert Data Into a Table'
-page_title: 'PostgresSQL Python: Insert Data Into a Table'
+page_title: 'PostgreSQL Python: Insert Data Into a Table'
 page_description: >-
   This tutorial shows you the step by step how to insert one or more rows into a
   PostgreSQL table in Python.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/insert/'
 ogImage: /postgresqltutorial/vendors_table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Create Tables'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Inserting rows from Python with psycopg2 works the same against any PostgreSQL database, so the patterns here carry over wherever you run Postgres. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+Inserting rows from Python with psycopg2 works the same against any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn to insert one or more rows into a PostgreSQL table from Python.

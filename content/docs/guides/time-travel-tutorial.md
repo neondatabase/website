@@ -2,11 +2,16 @@
 title: Time Travel tutorial
 subtitle: Use Time Travel to analyze changes made to your database over time
 summary: >-
-  Covers the use of Time Travel in Neon to debug issues related to feature flag
-  activations after CI/CD deployments, including database setup and simulation
-  of feature flag changes.
+  Neon Time Travel tutorial that shows how to use the SQL Editor's Time Travel
+  toggle to run point-in-time SELECT queries and confirm exactly when a feature
+  flag changed state after a CI/CD deployment. Reach for this guide when you
+  need to debug a production regression by comparing database state before and
+  after a specific timestamp, without restoring a branch or snapshot. The
+  tutorial covers creating a feature_flags table, recording the activation
+  timestamp from query history, and verifying pre- and post-activation values
+  with time-scoped queries.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.060Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
@@ -18,7 +23,7 @@ In this scenario, your team has recently introduced a streamlined checkout proce
 To follow this tutorial, you'll need:
 
 - A Neon account. [Sign up here](/docs/get-started/signing-up).
-- A [restore window](/docs/introduction/restore-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
+- A [history window](/docs/introduction/history-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
 
 <Steps>
 

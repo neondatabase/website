@@ -3,13 +3,18 @@ title: Postgres query reference
 subtitle: Find examples of commonly-used Postgres queries for basic to advanced
   operations
 summary: >-
-  Covers examples of commonly-used Postgres queries for creating tables,
-  modifying columns, and performing data operations such as inserting, updating,
-  deleting, and selecting data.
+  A ready-to-copy Postgres SQL reference covering DDL, DML, SELECT, JOINs,
+  transactions, indexes, views, stored procedures, functions, and performance
+  analysis. Use this page when you need a working SQL snippet without reading
+  full reference docs. Includes performance diagnostics using
+  pg_stat_statements, EXPLAIN, EXPLAIN ANALYZE, pg_stat_user_tables,
+  pg_locks, and connection management with pg_cancel_backend and
+  pg_terminate_backend, plus Neon-specific notes on max_connections and
+  data size.
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-reference
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 ---
 
 <CTA />
@@ -656,6 +661,8 @@ Functions are typically used to perform computations. For additional information
 ## Performance tuning
 
 To analyze query performance in Postgres, you can use a combination of built-in views, extensions, and commands that help identify performance bottlenecks and optimize query execution. Here are some examples:
+
+Many of the checks below are also available as one-line commands under [`neon inspect db`](/docs/cli/inspect) in the Neon CLI.
 
 ### Use pg_stat_statements
 

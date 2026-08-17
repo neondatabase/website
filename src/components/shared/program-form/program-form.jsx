@@ -16,9 +16,12 @@ import sendGtagEvent from 'utils/send-gtag-event';
 import DATA from './data';
 
 // Schema for validation
-const createSchema = () =>
+const createSchema = ({ showGithubUrl } = {}) =>
   yup.object({
     url: yup.string().required('This field is required'),
+    ...(showGithubUrl && {
+      githubUrl: yup.string().url('Please enter a valid URL').required('This field is required'),
+    }),
     email: yup
       .string()
       .email('Please enter a valid email address')
@@ -33,7 +36,7 @@ const fieldProps = {
 };
 
 const ProgramForm = ({ type }) => {
-  const { title, description, placeholder, buttonText } = DATA[type];
+  const { title, description, placeholder, buttonText, showGithubUrl } = DATA[type];
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
 
   const {
@@ -41,13 +44,13 @@ const ProgramForm = ({ type }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(createSchema()),
+    resolver: yupResolver(createSchema({ showGithubUrl })),
     mode: 'onSubmit',
   });
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { url, email } = data;
+    const { url, email, githubUrl } = data;
     const loadingAnimationStartedTime = Date.now();
 
     setFormState(FORM_STATES.LOADING);
@@ -58,7 +61,11 @@ const ProgramForm = ({ type }) => {
 
         // Send identify event with user provided email
         await sendGtagEvent('identify', { email });
-        await sendGtagEvent(eventName, { email, url });
+        await sendGtagEvent(eventName, {
+          email,
+          url,
+          ...(showGithubUrl && { githubUrl }),
+        });
       }
 
       doNowOrAfterSomeTime(() => {
@@ -77,6 +84,7 @@ const ProgramForm = ({ type }) => {
     <figure
       className="doc-cta not-prose relative mt-9 mb-[22px] scroll-mt-20 border border-gray-new-80 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
       id={`${type}-form`}
+      data-test={`${type}-program-form`}
     >
       <h2 className="p-0 text-2xl leading-snug font-medium tracking-extra-tight text-gray-new-8 dark:text-white">
         {title}
@@ -90,12 +98,25 @@ const ProgramForm = ({ type }) => {
             <Field
               {...fieldProps}
               name="url"
-              label="Project URL *"
+              label="Website URL *"
               placeholder={placeholder}
               error={errors.url?.message}
               isDisabled={formState === FORM_STATES.LOADING}
               {...register('url')}
             />
+
+            {showGithubUrl && (
+              <Field
+                {...fieldProps}
+                name="githubUrl"
+                label="GitHub Project Link *"
+                type="url"
+                placeholder="Enter a link to your GitHub project"
+                error={errors.githubUrl?.message}
+                isDisabled={formState === FORM_STATES.LOADING}
+                {...register('githubUrl')}
+              />
+            )}
 
             <Field
               {...fieldProps}

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-ascii/
 ogImage: /postgresqltutorial/PostgreSQL-ASCII-function-example.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL String Functions
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `ASCII()` function works the same across any PostgreSQL deployment, so you can apply what you learn here on Postgres anywhere you run it. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure managed Postgres, fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform to do it.
+The `ASCII()` function works the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 The PostgreSQL `ASCII()` function returns an [ASCII](https://en.wikipedia.org/wiki/ASCII) code value of a character. In the case of UTF\-8, the `ASCII()` function returns the Unicode code point of the character.
@@ -79,6 +79,6 @@ The following example illustrates how to use the `ASCII()` function to get the U
 
 ## Remarks
 
-To get the ASCII code value or Unicode code point of an integer, you use the [`CHR()`](postgresql-chr) function.
+To get the character corresponding to an ASCII code value or Unicode code point, you use the [`CHR()`](postgresql-chr) function.
 
 In this tutorial, you have learned how to use the PostgreSQL `ASCII()` function to get the ASCII code or Unicode code point of a character.

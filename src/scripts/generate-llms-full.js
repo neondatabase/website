@@ -22,16 +22,15 @@ const path = require('path');
 
 const matter = require('gray-matter');
 
-const { CONTENT_ROUTES } = require('../constants/content');
+const { CONTENT_ROUTES, EXCLUDED_DIRS } = require('../constants/content');
 
 const config = require('./llms-index-config');
 const { stripNavigationContext } = require('./process-md-for-llms');
 
 const BASE_URL = 'https://neon.com';
 const OUTPUT_PATH = 'public/docs/llms-full.txt';
-
-const EXCLUDED_DIRS = ['shared-content', 'unused'];
 const EXCLUDED_FILES = ['README.md', 'index.md', '_index.md'];
+const GENERATED_MODEL_MARKDOWN_DIR = 'docs/ai-gateway/models';
 
 const FULL_TEXT_CONFIG = config.fullText || {};
 const EXCLUDE_ROUTES = new Set(FULL_TEXT_CONFIG.excludeRoutes || []);
@@ -153,6 +152,25 @@ async function main() {
 
     console.log(`  ${route}: ${files.length} files`);
   }
+
+  // Dynamic model-detail pages have no source files under content/, but their
+  // generated Markdown is part of the public documentation and belongs in the
+  // full-text bundle alongside the regular processed docs.
+  const generatedModelDir = path.join(mdOutputDir, GENERATED_MODEL_MARKDOWN_DIR);
+  const generatedModelFiles = await scanDirectory(generatedModelDir, GENERATED_MODEL_MARKDOWN_DIR);
+  const knownSortKeys = new Set(allFiles.map(({ sortKey }) => sortKey));
+
+  for (const file of generatedModelFiles) {
+    if (knownSortKeys.has(file.relativePath)) continue;
+    allFiles.push({
+      ...file,
+      mdPath: file.contentPath,
+      url: `${BASE_URL}/${file.relativePath}`,
+      route: 'docs',
+      sortKey: file.relativePath,
+    });
+  }
+  console.log(`  generated AI Gateway models: ${generatedModelFiles.length} files`);
 
   // Sort by directory path (natural grouping)
   allFiles.sort((a, b) => a.sortKey.localeCompare(b.sortKey));

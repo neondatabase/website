@@ -6,7 +6,7 @@ page_description: >-
   calculate the logarithm of a number
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-log/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LN() Function
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The LOG() function works the same on any PostgreSQL deployment, so everything here applies whether you're running Postgres locally, self-hosted, or on a managed service. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for you.
+The LOG() function works the same on any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LOG()` function to calculate the logarithm of a number
@@ -120,7 +120,7 @@ Output:
 (1 row)
 ```
 
-In this example, the `LOG()` function converts the text `'64'` into a number and calculate the base\-2 logarithm of 64\.
+In this example, the `LOG()` function converts the text `'64'` into a number and calculates the base\-2 logarithm of 64\.
 
 The following example raises an error because the `LOG()` function cannot convert the string `'64x'` into a number for calculation:
 

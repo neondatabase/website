@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-json-extract/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_extract_path_text() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `->` and `->>` operators for extracting JSON array elements and object values work the same way on any PostgreSQL database, so you can apply what you learn here wherever you run Postgres. If you're an enterprise bringing JSON workloads and AI alongside your analytics, [Lakebase](https://www.databricks.com/product/lakebase) gives you a fully managed Postgres built for the AI era, with the performance, security, and deep Lakehouse integration that serious data teams need. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you.
+The `->` and `->>` operators for extracting JSON array elements and object values work the same way on any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the operator `->` and `->>` to extract an element from a JSON array or a value of a key from a JSON object.
@@ -127,7 +127,7 @@ Output:
 
 ### 3\) Extracting the last array element example
 
-The following example uses the `->` operator to retrieve the first phone number of an employee with the name `Jane Smith`:
+The following example uses the `->` operator to retrieve the last phone number of an employee with the name `Jane Smith`:
 
 ```sql
 SELECT
@@ -148,7 +148,7 @@ Output:
 (1 row)
 ```
 
-To extract the last phone number as a `JSONB` value, you can use the \-\>\> operator:
+To extract the last phone number as a text string, you can use the \-\>\> operator:
 
 ```sql
 SELECT
@@ -291,7 +291,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Extract a key that does not exist
+### 3\) Extract a key that does not exist
 
 The following example attempts to extract a value of a non\-existing key from a JSON object:
 

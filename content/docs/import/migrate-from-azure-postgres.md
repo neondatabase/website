@@ -3,13 +3,18 @@ title: Migrate from Azure PostgreSQL to Neon
 subtitle: Learn how to migrate your database from Azure PostgreSQL to Neon using logical
   replication
 summary: >-
-  Covers the migration of a database from Azure PostgreSQL to Neon using logical
-  replication, detailing the necessary preparations and steps to ensure minimal
-  downtime during the process.
+  Migration guide for moving an Azure Database for PostgreSQL instance to Neon
+  using Postgres logical replication, which streams row changes to minimize
+  downtime during the cutover. Use this page when you need a live-replication
+  approach rather than a full-stop dump: it walks through setting wal_level to
+  LOGICAL in Azure, creating a replication role and publication, importing the
+  schema with pg_dump, and creating a subscription on the Neon side.
+  Alternative paths using pg_dump/pg_restore, pgAdmin, and CSV import are also
+  described.
 redirectFrom:
   - /docs/import/import-from-azure-postgres
 enableTableOfContents: true
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This guide describes how to migrate your database from Azure Database for PostgreSQL to Neon, using logical replication.
@@ -94,7 +99,7 @@ $do$;
 
 ### Create a publication on the source database
 
-Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. The following commands examples create publication named `azure_publication` with one or more tables.
+Publications are a fundamental part of logical replication in Postgres. They define what will be replicated. The following command examples create a publication named `azure_publication` with one or more tables.
 
 To create a publication for a specific table:
 
@@ -116,7 +121,7 @@ For syntax details, see [CREATE PUBLICATION](https://www.postgresql.org/docs/cur
 
 ### Allow inbound traffic from Neon
 
-You need to allow inbound traffic from Neon Postgres servers so it can connect to your Azure database. To do this, follow these steps:
+You need to allow inbound traffic from Neon servers so they can connect to your Azure database. To do this, follow these steps:
 
 1. Log into the Azure portal and navigate to your Azure Postgres Server resource.
 
@@ -128,11 +133,11 @@ You need to allow inbound traffic from Neon Postgres servers so it can connect t
 
 4. To fetch the database schema using `pg_dump`, you also need to allow inbound traffic from your local machine (or where you are running `pg_dump`) so it can connect to your Azure database. Add another firewall rule entry with that IP address as the start and end IP address.
 
-5. CLick `Save` at the bottom to make sure all changes are saved.
+5. Click `Save` at the bottom to make sure all changes are saved.
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon PostgreSQL database (the subscriber) to receive replicated data.
+This section describes how to prepare your destination database (the subscriber) to receive replicated data.
 
 You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. See [Connect from any application](/docs/connect/connect-from-any-app).
 
@@ -233,7 +238,7 @@ Once the initial data sync is complete and you've verified that ongoing changes 
 This ensures a much shorter downtime for the application, as you only need to wait for the last few transactions to be replicated before switching the application over to the Neon database.
 
 <Admonition type="note">
-Remember to update any Azure-specific configurations or extensions in your application code to be compatible with Neon. For Neon Postgres parameter settings, see [Postgres parameter settings](/docs/reference/compatibility#postgres-parameter-settings). For Postgres extensions supported by Neon, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
+Remember to update any Azure-specific configurations or extensions in your application code to be compatible with Lakebase Postgres. For Lakebase Postgres parameter settings, see [Postgres parameter settings](/docs/reference/compatibility#postgres-parameter-settings). For Postgres extensions supported by Lakebase Postgres, see [Supported Postgres extensions](/docs/extensions/pg-extensions).
 </Admonition>
 
 ## Clean up

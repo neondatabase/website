@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-plpgsql/plpgsql-function-overloading/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PL/pgSQL Function Parameter Modes: IN, OUT, INOUT'
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Function overloading works the same across every PostgreSQL deployment, so the patterns and pitfalls here apply whether you run Postgres yourself or through a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a secure, high performance managed database that plugs directly into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built to get you from prototype to production fast.
+Function overloading works the same across every PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about function overloading in PostgreSQL.
@@ -54,7 +54,7 @@ end; $$
 
 ```
 
-The `get_rental_function` function has the `p_customer_id` as an `in` parameter.
+The `get_rental_duration` function has the `p_customer_id` as an `in` parameter.
 
 The following returns the number of rental days of customer id 232:
 

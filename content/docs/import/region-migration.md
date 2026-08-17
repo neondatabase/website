@@ -2,19 +2,23 @@
 title: Region migration
 subtitle: Move your Neon database to another region
 summary: >-
-  Choose a path to migrate your database to another region (new Neon project plus data migration), or to export your Neon
-  data in Postgres-compatible form. Covers another Neon region, Lakebase, dump and restore, logical replication,
-  and export options.
+  A Neon project's region is fixed at creation, so moving data to a different
+  region requires creating a new project in the target region and migrating the
+  database into it. A decision flowchart routes you to one of three paths:
+  migrate to another Neon region (Import Data Assistant, pg_dump/restore, or
+  logical replication), migrate to Databricks Lakebase Postgres when Postgres
+  must stay in Azure, or export a pg_dump archive for migration to any other
+  provider.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-04-01T22:55:35.000Z'
+updatedOn: '2026-06-19T19:20:32.356Z'
 redirectFrom:
   - /docs/guides/region-migration
 ---
 
-A Neon **project** is created in a single [region](/docs/introduction/regions). Your database runs there, and you **cannot change the region** for that project.
+**Can you change the region of an existing Neon project?** Not directly, but you have options. A Neon **project** is created in a single [region](/docs/introduction/regions), and that region is fixed after creation. All branches in a project share the project's region, so branching alone won't move your data.
 
-If you need your **data** in a different region, you **create a new Neon project** in that region and **migrate your database** into it.
+To run your database in a different region, you **create a new Neon project** in that region and **migrate your database** into it.
 
 Common reasons to migrate to a different region:
 

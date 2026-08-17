@@ -6,7 +6,7 @@ page_description: >-
   to use them properly.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL List Indexes
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL ships with several index types, including B-tree, Hash, GiST, SP-GiST, GIN, and BRIN, and everything covered here applies to any Postgres deployment. If you're an enterprise standardizing on a managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration that AI-era workloads demand. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+PostgreSQL ships with several index types, including B-tree, Hash, GiST, SP-GiST, GIN, and BRIN, and everything covered here applies to any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about various PostgreSQL index types and how to use them appropriately.
@@ -43,7 +43,7 @@ IS NULL
 IS NOT NULL
 ```
 
-In addition, the query planner can use a B\-tree index for queries that involve a pattern\-matching operator [`LIKE`](../postgresql-tutorial/postgresql-like) and `~` if the pattern is a constant and is anchor at the beginning of the pattern, for example:
+In addition, the query planner can use a B\-tree index for queries that involve a pattern\-matching operator [`LIKE`](../postgresql-tutorial/postgresql-like) and `~` if the pattern is a constant and is anchored at the beginning of the pattern, for example:
 
 ```sql
 column_name LIKE 'foo%'

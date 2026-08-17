@@ -6,16 +6,16 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2026-01-29T16:44:02.633Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
 A simpler one-click branch restore operation is now available. Read more about it [here](/docs/guides/branch-restore). The restore procedure described on this page is still valid and might fit your specific use case.
 </Admonition>
 
-Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined restore window. You can use this capability to recover lost data, which is a form of Instant restore (PITR).
+Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined history window. You can use this capability to recover lost data, which is a form of Instant restore (PITR).
 
-The restore window is configurable. For configuration instructions, see [Configure restore window](/docs/manage/projects#configure-restore-window).
+The history window is configurable. For configuration instructions, see [Configure the history window for instant restore](/docs/manage/projects#configure-the-history-window-for-instant-restore).
 
 This guide shows how to recover your data to a point in time before a data loss occurred using Neon's branching feature.
 
@@ -34,7 +34,7 @@ To create a point-in-time branch:
 6. Under **Include data up to**, select the **Specific date and time** option, which creates a branch with data up to the specified date and time. For example, if the data loss occurred on Nov 26, 2023 at 5:01pm, select Nov 11, 2023, at 5:00pm, just before the faulty query was run.
 
 <Admonition type="note">
-The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your restore window. See [Configure restore window](/docs/manage/projects#configure-restore-window).
+The **Specific date and time** option does not include data changes that occurred after the specified date and time, which means the branch contains data as it existed previously. You can only specify a date and time that falls within your history window. See [Configure the history window for instant restore](/docs/manage/projects#configure-the-history-window-for-instant-restore).
 </Admonition>
 
 7. Click **Create new branch** to create your branch.
@@ -42,7 +42,7 @@ The **Specific date and time** option does not include data changes that occurre
 You are directed to the **Branches** page where you are shown the details for your new branch.
 
 <Admonition type="tip">
-You can also create point-in-time branches using the [Neon CLI](/docs/reference/neon-cli). For example, you can perform the same action described above with the following CLI command:
+You can also create point-in-time branches using the [Neon CLI](/docs/cli). For example, you can perform the same action described above with the following CLI command:
 
 ```bash
 neon branches create --name recovery_branch --parent 2023-07-11T10:00:00Z

@@ -2,16 +2,20 @@
 title: Postgres indexes
 subtitle: Optimize query performance with indexes in Postgres
 summary: >-
-  Covers the setup of various index types in Postgres, including B-tree, Hash,
-  GiST, GIN, and BRIN, and provides guidance on creating and effectively using
-  these indexes to optimize query performance.
+  Postgres supports several index types, each targeting different query
+  patterns: B-tree for equality and range queries, Hash for exact-match
+  lookups, GiST for spatial and full-text data, GIN for arrays and inverted
+  indexes, and BRIN for ordered large tables. Use this page to choose the
+  right index type and learn CREATE INDEX syntax, trade-offs for write
+  overhead and storage, and advanced strategies such as multicolumn, partial,
+  and expression indexes.
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/indexes
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Indexes speed up query performance in relational databases like Neon Postgres by allowing the database engine to quickly locate and retrieve specific rows. In the absence of an index, Postgres must scan the entire table to find the rows that satisfy the query conditions.
+Indexes speed up query performance in relational databases like Postgres by allowing the database engine to quickly locate and retrieve specific rows. In the absence of an index, Postgres must scan the entire table to find the rows that satisfy the query conditions.
 
 <CTA />
 

@@ -2,11 +2,16 @@
 title: Postgres JSON data types
 subtitle: Model JSON data in Postgres
 summary: >-
-  Covers the storage and manipulation of JSON and JSONB data types in Postgres,
-  highlighting their differences, use cases, and how to create and query JSON
-  data effectively.
+  Postgres JSON and JSONB data types store semi-structured, document-like data
+  without schema changes. JSONB uses a binary format that supports GIN indexing,
+  containment queries with @>, and in-place field updates via jsonb_set; JSON
+  preserves exact input whitespace and key order. Choose JSONB for most
+  workloads where query and index performance matter; use JSON only when
+  preserving exact input format is required. Topics include storage differences,
+  the ->, ->>, and @> operators, nested field extraction, and GIN index
+  creation.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Postgres supports JSON (JavaScript Object Notation) data types, providing a flexible way to store and manipulate semi-structured data. The two types are `JSON` and `JSONB`. The functions work similarly, but there are trade-offs related to data ingestion and querying performance.

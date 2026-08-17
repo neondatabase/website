@@ -22,7 +22,7 @@ const AI = () => (
       size="1600"
     >
       <div className="min-w-0">
-        <Heading title="<strong>Postgres for the AI Engineering era.</strong> Integrate with a single command and the LLM does the hard work." />
+        <Heading title="<strong>Cloud primitives for the AI Engineering era.</strong> Integrate with a single command and the LLM does the hard work." />
         <div className="relative mt-[182px] pl-32 xl:mt-[174px] xl:-mr-8 xl:pl-16 lg:-mx-8 lg:mt-[143px] lg:px-0 md:mx-0 sm:mt-11">
           <div className="pointer-events-none relative w-full sm:hidden">
             <Animation className="absolute -top-[86px] left-1/2 aspect-[941/658] size-[105%]! -translate-x-1/2 xl:-top-[72px] lg:-top-[60px]" />
@@ -51,7 +51,7 @@ const AI = () => (
             <p className="sm::text-[15px] ml-3 text-[20px] leading-snug tracking-tight text-white lg:text-[18px] sm:ml-0">
               Try for yourself, start building <br className="hidden md:block" /> with Neon now.
             </p>
-            <CopyCodeButton code="npx neonctl init" copyText="npx neonctl@latest init" />
+            <CopyCodeButton code="npx neon init" copyText="npx neon@latest init" />
           </div>
         </div>
 

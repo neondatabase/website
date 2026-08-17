@@ -1,12 +1,15 @@
 ---
 title: Overview of the Neon object hierarchy
 summary: >-
-  Covers the structure of the Neon object hierarchy, detailing how
-  Organizations, Projects, Branches, Computes, Roles, and Databases are
-  organized and managed within a Neon environment.
+  The Neon object hierarchy nests Organizations > Projects > Branches, with
+  each branch holding Computes, Roles, and Databases. Read this page before
+  structuring a Neon environment to understand how resources are scoped and
+  what plan limits apply at each level. Roles created via the Console, CLI,
+  or API receive neon_superuser privileges. API keys are account-scoped or
+  organization-scoped, not branch-scoped.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.238Z'
+updatedOn: '2026-08-11T18:35:41.335Z'
 ---
 
 Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.
@@ -29,7 +32,7 @@ A project is a container for all objects except for API keys, which are global a
 
 ## Default branch
 
-Data resides in a branch. Each Neon project is created with a default branch (named `production` in the Console, `main` via API/CLI). This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
+Data resides in a branch. Each Neon project is created with a default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console). This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
 
 ## R/W computes and Read Replicas
 

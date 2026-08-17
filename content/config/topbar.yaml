@@ -1,4 +1,4 @@
-text: 'Team accounts with unlimited members now available to everyone! Invite your teammates and ship faster together, even on the Free Plan.'
+text: 'You can now deploy Neon Functions - they live in the branch next to your DB, are long-running, perfect for agents and realtime'
 link:
-  url: 'https://neon.com/docs/changelog/2026-03-13'
+  url: 'https://neon.com/blog/neon-functions-backend-logic-next-to-your-data'
   target: '_blank'

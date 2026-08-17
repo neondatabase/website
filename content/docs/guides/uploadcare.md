@@ -1,24 +1,35 @@
 ---
 title: Media storage with Uploadcare
-subtitle: Store files via Uploadcare and track metadata in Neon
+subtitle: Store files via Uploadcare and track metadata in Lakebase Postgres
 summary: >-
-  How to integrate Uploadcare with Neon for storing file metadata while
-  utilizing Uploadcare's cloud platform for file uploads and storage management.
+  Uploadcare and Lakebase Postgres integration pattern stores uploaded files on Uploadcare's
+  CDN while persisting each file's UUID, CDN URL, and user ID as metadata rows
+  in a Lakebase Postgres table. Use this guide when you need a dedicated CDN for
+  images, videos, and documents but want queryable, structured metadata in
+  Postgres rather than in Uploadcare alone. Code examples cover a Node.js/Hono
+  server and a Python Flask server, both writing to an uploadcare_files table
+  with optional Row Level Security.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.013Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
-[Uploadcare](https://uploadcare.com/) provides an cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
+[Uploadcare](https://uploadcare.com/) provides a cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
 
-This guide demonstrates how to integrate Uploadcare with Neon by storing file metadata in your Neon database while using Uploadcare for file uploads and storage.
+<Callout title="Neon now offers native storage">
+Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in beta.
+
+For more information, see [Neon Object Storage](/docs/storage/overview).
+</Callout>
+
+This guide demonstrates how to integrate Uploadcare with Lakebase Postgres by storing file metadata in your Lakebase Postgres database while using Uploadcare for file uploads and storage.
 
 ## Setup steps
 
 <Steps>
 
-## Create a Neon project
+## Create a project on Neon
 
-1. Navigate to the [Neon Console](https://console.neon.tech) to create a new Neon project.
+1. Navigate to the Neon Console to create a new project.
 2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an Uploadcare account and project
@@ -29,11 +40,11 @@ This guide demonstrates how to integrate Uploadcare with Neon by storing file me
 4.  Note your **Public Key** and **Secret Key**. They are needed to interact with the Uploadcare API and widgets.
     ![Uploadcare API Keys](/docs/guides/uploadcare-api-keys.png)
 
-## Create a table in Neon for file metadata
+## Create a table for file metadata
 
-We need to create a table in Neon to store metadata about the files uploaded to Uploadcare. This table will include fields for the file's unique identifier, URL, upload timestamp, and any other relevant metadata you want to track.
+We need to create a table to store metadata about the files uploaded to Uploadcare. This table will include fields for the file's unique identifier, URL, upload timestamp, and any other relevant metadata you want to track.
 
-1. You can run the create table statement using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database. Here is an example SQL statement to create a simple table for file metadata which includes a file ID, URL, user ID, and upload timestamp:
+1. You can run the create table statement using the SQL Editor or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your database. Here is an example SQL statement to create a simple table for file metadata which includes a file ID, URL, user ID, and upload timestamp:
 
    ```sql
    CREATE TABLE IF NOT EXISTS uploadcare_files (

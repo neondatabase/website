@@ -1,17 +1,21 @@
 ---
-title: Schema migration with Neon Postgres and Django
-subtitle: Set up Neon Postgres and run migrations for your Django project
+title: Schema migration with Lakebase Postgres and Django
+subtitle: Set up a database on Neon and run migrations for your Django project
 summary: >-
-  Covers the setup of a Neon Postgres database for a Django project, including
-  initializing the project, retrieving the database connection string, and
-  managing schema migrations using Django's migration system.
+  Django schema migrations with Lakebase Postgres use Django's built-in ORM and the
+  makemigrations/migrate commands to create and evolve database tables in a
+  serverless Postgres database. Use this guide when connecting a Python 3.8+
+  Django project to Neon for the first time or when you need to apply model
+  changes as versioned migrations. Neon recommends a direct (non-pooled)
+  connection string for running migrations to avoid PgBouncer-related errors;
+  the guide also covers dj-database-url configuration and seeding initial data.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.947Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 [Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a powerful migration system that allows you to define and manage database schema changes over time.
 
-This guide demonstrates how to use Django with a Neon Postgres database. We'll create a simple Django application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
+This guide demonstrates how to use Django with a Lakebase Postgres database. We'll create a simple Django application and walk through the process of setting up the database, defining models, and generating and running migrations to manage schema changes.
 
 ## Prerequisites
 
@@ -70,7 +74,7 @@ pip install python-dotenv dj-database-url
 pip freeze > requirements.txt
 ```
 
-We installed Django and the `psycopg2-binary` package to connect to the Neon Postgres database. We also added the `python-dotenv` to read environment variables easily, and the `dj-database-url` package to parse the Neon connection string into Django settings. We also saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
+We installed Django and the `psycopg2-binary` package to connect to the Lakebase Postgres database. We also added the `python-dotenv` to read environment variables easily, and the `dj-database-url` package to parse the Neon connection string into Django settings. We also saved the installed packages to a `requirements.txt` file so the project can be easily recreated in another environment.
 
 ### Create a new Django project
 
@@ -178,7 +182,7 @@ This command detects the new `Author` and `Book` models that were added and gene
 
 ### Apply the migration
 
-Now, to apply the migration and create the corresponding tables in the Neon Postgres database, run the following command:
+Now, to apply the migration and create the corresponding tables in the database, run the following command:
 
 ```bash
 python manage.py migrate
@@ -360,7 +364,7 @@ Navigate to the url `http://localhost:8000/catalog/authors` to view the list of 
 
 ## Conclusion
 
-In this guide, we demonstrated how to set up a Django project with Neon Postgres, define database models, and generate migrations and run them. Django's ORM and migration system make it easy to interact with the database and manage schema evolution over time.
+In this guide, we demonstrated how to set up a Django project with Lakebase Postgres, define database models, and generate migrations and run them. Django's ORM and migration system make it easy to interact with the database and manage schema evolution over time.
 
 ## Source code
 
@@ -375,6 +379,6 @@ You can find the source code for the application described in this guide on GitH
 For more information on the tools and concepts used in this guide, refer to the following resources:
 
 - [Django Documentation](https://docs.djangoproject.com/)
-- [Neon Postgres](/docs/introduction)
+- [Neon](/docs/introduction)
 
 <NeedHelp/>

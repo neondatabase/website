@@ -6,7 +6,7 @@ page_description: >-
   including role and database management, backup, and restore.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-administration/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL JSON Index
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The administration tasks covered here apply to any PostgreSQL deployment, from a laptop install to a fleet of production clusters. If you're an enterprise running Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance, enterprise-grade security, and native integration into the Lakehouse so your operational and analytical data live together. If you're a developer or startup who needs to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) is the Postgres platform built for you, with instant provisioning, branching, and autoscaling out of the box.
+The administration tasks covered here apply to any PostgreSQL deployment, from a laptop install to a fleet of production clusters. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 The **PostgreSQL administration** covers the most important PostgreSQL database server administration tasks.

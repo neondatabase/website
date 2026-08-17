@@ -1,18 +1,20 @@
 ---
-title: Deploy Your Node.js App with Neon Postgres on Heroku
-subtitle: A step-by-step guide to deploying a Node application with a Neon Postgres
+title: Deploy Your Node.js App with Lakebase Postgres on Heroku
+subtitle: A step-by-step guide to deploying a Node application with a Lakebase Postgres
   database on Heroku
 summary: >-
-  Step-by-step guide for deploying a Node.js application with a Neon Postgres
-  database on Heroku, including project setup and database connection
-  configuration.
+  Deploy a Node.js Express app to Heroku with Lakebase Postgres as the database
+  backend. Covers creating the Neon project, connecting via the `pg` driver
+  and `DATABASE_URL`, and pushing to Heroku using the Heroku CLI and Git.
+  Useful when migrating from Heroku Postgres or hosting a new Node app on
+  Heroku with Neon.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.983Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process, making it a favorite among developers for its ease of use and integration capabilities.
 
-This guide walks you through deploying a simple Node.js application connected to a Neon Postgres database, on Heroku.
+This guide walks you through deploying a simple Node.js application connected to a Lakebase Postgres database, on Heroku.
 
 ## Prerequisites
 
@@ -178,7 +180,7 @@ remote: Verifying deploy... done.
 
 Once the deployment is complete, you should see a message with the URL of your deployed application. Navigate to this URL in your browser to see your application live on Heroku.
 
-You've now successfully deployed a Node.js application on Heroku that connects to a Neon Postgres database. For further customization and scaling options, you can explore the Heroku and Neon documentation.
+You've now successfully deployed a Node.js application on Heroku that connects to a Lakebase Postgres database. For further customization and scaling options, you can explore the Heroku and Neon documentation.
 
 ## Removing Your Application and Neon Project
 

@@ -1,23 +1,26 @@
 ---
 title: Use WunderGraph with Neon
-subtitle: Leverage the power of Neon and WunderGraph to build fully serverless apps in
+subtitle: Leverage the power of Lakebase Postgres and WunderGraph to build fully serverless apps in
   minutes
 summary: >-
-  Step-by-step guide for integrating WunderGraph with a Neon database to create
-  serverless applications, including setup instructions for deploying a
-  full-stack app with Next.js in under 15 minutes.
+  WunderGraph is an open-source Backend for Frontend (BFF) framework that
+  introspects a Lakebase Postgres database and exposes it as a typesafe GraphQL or
+  JSON-RPC API, enabling a fully serverless Next.js stack deployable on
+  WunderGraph Cloud in under 15 minutes. Use this guide when you want to connect
+  a Lakebase Postgres project to WunderGraph, generate a typesafe client, and ship a
+  full-stack app without a dedicated CI/CD pipeline or DevOps setup.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 _This guide was contributed by the team at WunderGraph_
 
 WunderGraph is an open-source Backend for Frontend (BFF) framework designed to optimize developer workflows through API composition. Developers can use this framework to compose multiple APIs into a single unified interface and generate typesafe API clients that include authentication and file uploads. This guide shows how you can pair WunderGraph with your Neon database to accelerate application development.
 
-With WunderGraph, you can easily introspect your data sources and combine them within your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Neon database into a GraphQL API or expose it via JSON-RPC or REST. With an easy-to-deploy Postgres database like Neon, you can now have a 100% serverless stack and build your own stateful serverless apps on the edge.
+With WunderGraph, you can easily introspect your data sources and combine them within your virtual graph. WunderGraph treats APIs as dependencies. You can easily turn your Lakebase Postgres database into a GraphQL API or expose it via JSON-RPC or REST. With an easy-to-deploy Postgres database like Lakebase Postgres, you can now have a 100% serverless stack and build your own stateful serverless apps on the edge.
 
-This guide demonstrates setting up a full-stack app with Neon and WunderGraph, securely exposing Neon to your Next.js frontend in under 15 minutes. While WunderGraph and Neon are compatible with a variety of frontend clients, this demo focuses on using Next.js.
+This guide demonstrates setting up a full-stack app with Lakebase Postgres and WunderGraph, securely exposing it to your Next.js frontend in under 15 minutes. While WunderGraph and Lakebase Postgres are compatible with a variety of frontend clients, this demo focuses on using Next.js.
 
 <Admonition type="info">
 This guide is also available in video format: [Neon with WunderGraph video guide](#neon-with-wundergraph-video-guide).
@@ -26,7 +29,7 @@ This guide is also available in video format: [Neon with WunderGraph video guide
 ## Prerequisites
 
 - A [WunderGraph Cloud](https://cloud.wundergraph.com/) account
-- A Neon project. See [Create a Neon project](/docs/manage/projects#create-a-project).
+- A Lakebase Postgres project. See [Create a project](/docs/manage/projects#create-a-project).
 
 ## Installation
 
@@ -39,11 +42,11 @@ Sign into [WunderGraph Cloud](https://cloud.wundergraph.com/) and follow these s
 
 The deployment will take a few moments.
 
-### Add sample data to Neon
+### Add sample data to your database
 
-While the project is deploying, add some sample data to your Neon database.
+While the project is deploying, add some sample data to your database.
 
-1. Navigate to the [Neon Console](https://console.neon.tech/) and select **SQL Editor** from the sidebar.
+1. Navigate to the Console and select **SQL Editor** from the sidebar.
 2. Run the following SQL statements to add the sample data.
 
 ```sql

@@ -14,8 +14,8 @@ import CheckIcon from './images/check.inline.svg';
 import CopyIcon from './images/copy.inline.svg';
 
 const TABS = [
-  { id: 'npm', label: 'npm', command: 'npx neonctl@latest init' },
-  { id: 'brew', label: 'brew', command: 'neonctl init' },
+  { id: 'npm', label: 'npm', command: 'npx neon@latest init' },
+  { id: 'brew', label: 'brew', command: 'neon init' },
 ];
 
 const NeonInitModal = ({ isOpen, onClose }) => {

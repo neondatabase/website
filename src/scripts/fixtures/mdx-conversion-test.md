@@ -185,12 +185,12 @@ Values must be provided in <LinkPreview href="https://tools.ietf.org/html/rfc333
 
 <CommunityBanner buttonText="Join Discord" buttonUrl="https://discord.gg/neon">Share your feedback</CommunityBanner>
 
-## PromptCards
+## CompactCards
 
-<PromptCards>
-<a title="Next.js" promptSrc="/prompts/nextjs-prompt.md"></a>
-<a title="Django" promptSrc="/prompts/django-prompt.md"></a>
-</PromptCards>
+<CompactCards cols={2}>
+<a title="Next.js" description="Copy a Next.js setup prompt" icon="next-js" promptSrc="/prompts/nextjs-prompt.md"></a>
+<a title="Django" description="Open the Django guide" icon="django" href="/docs/guides/django"></a>
+</CompactCards>
 
 ## MegaLink
 
@@ -241,10 +241,6 @@ Scale compute up and down based on demand.
 
 <FeatureBeta />
 
-### EarlyAccess (parameterless)
-
-<EarlyAccess />
-
 ### FeatureBetaProps (with prop)
 
 <FeatureBetaProps feature_name="Autoscaling" />
@@ -268,10 +264,6 @@ Scale compute up and down based on demand.
 ### LRNotice
 
 <LRNotice />
-
-### ComingSoon
-
-<ComingSoon />
 
 ### PrivatePreview
 
@@ -304,10 +296,6 @@ Scale compute up and down based on demand.
 ### AzureRegionsDeprecation
 
 <AzureRegionsDeprecation />
-
-### ConsumptionAccountApiDeprecation
-
-<ConsumptionAccountApiDeprecation />
 
 ## Ignored components
 

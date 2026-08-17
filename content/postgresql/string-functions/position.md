@@ -1,13 +1,13 @@
 ---
 title: PostgreSQL POSITION() Function
-page_title: 'PostgresQL POSITION: Locate a Substring in a String'
+page_title: 'PostgreSQL POSITION: Locate a Substring in a String'
 page_description: >-
   This tutorial shows you how to use the PostgreSQL POSITION() function to
   locate a substring in a string.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-position/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL INITCAP() Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The POSITION() function is standard PostgreSQL behavior, so everything here works the same whether you run Postgres on your laptop, on a self-hosted server, or on a managed platform. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The POSITION() function is standard PostgreSQL behavior, so everything here works the same whether you run Postgres on your laptop, on a self-hosted server, or on a managed platform. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 The PostgreSQL `POSITION()` function returns the location of the first instance of a substring within a string.
@@ -66,7 +66,7 @@ position
 (1 row)
 ```
 
-Note that the `POSITION()` function searches for the substring case\-insensitively.
+Note that the `POSITION()` function searches for the substring case-sensitively.
 
 See the following example:
 

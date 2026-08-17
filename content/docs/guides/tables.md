@@ -2,11 +2,14 @@
 title: Managing your data and schemas in the Neon Console
 subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
 summary: >-
-  Covers the management of data and schemas in the Neon Console's Tables page,
-  including adding, editing, and deleting records, filtering data, and modifying
-  table structures.
+  The Tables page in the Neon Console is a visual, interactive editor powered
+  by Drizzle Studio. It supports reading, inserting, updating, deleting,
+  filtering, and exporting Postgres table data, plus managing schemas, views,
+  enums, roles, and RLS policies without writing SQL. Choose this page over the
+  SQL Editor when you want point-and-click record editing, column filtering,
+  bulk deletion, or JSON/CSV export.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.200Z'
+updatedOn: '2026-07-31T13:16:53.831Z'
 ---
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
@@ -60,9 +63,13 @@ You can also use the checkboxes to mark records for export. Select the records y
 
 Or just choose `Export all...` to download the entire contents of the table.
 
-You can export to either JSON or CSV.
+You can export to either JSON or CSV. You can also copy or export selected rows as SQL `INSERT` statements, and copy a table's `CREATE TABLE` statement to the clipboard.
 
 ![export data from table](/docs/manage/export_drizzle.png)
+
+<Admonition type="tip" title="Keyboard shortcuts">
+The **Tables** page supports keyboard shortcuts for common actions, including selecting all rows (`Cmd/Ctrl + A`), adding a row (`Option/Alt + N`), filtering (`Option/Alt + F`), and refreshing (`Cmd/Ctrl + R`).
+</Admonition>
 
 ## Manage schemas
 

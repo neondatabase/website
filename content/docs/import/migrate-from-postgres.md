@@ -1,15 +1,18 @@
 ---
 title: Migrate data from Postgres with pg_dump and pg_restore
 summary: >-
-  Covers the migration of data between Postgres databases using `pg_dump` and
-  `pg_restore`, including connection requirements and best practices for Neon
-  environments.
+  Command reference for migrating a Postgres database to Neon using `pg_dump`
+  and `pg_restore`, covering flags (-Fc, -j, -O/--no-owner), custom-format
+  archives, and piping for small databases. Use this page when you need exact
+  dump/restore commands. For region migration or logical replication decisions,
+  see the Region migration page instead. Neon requires unpooled connection
+  strings, and does not support `pg_dumpall` or the `-C/--create` option.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2026-04-01T20:17:14.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
@@ -28,7 +31,7 @@ If you are performing this procedure to migrate data from one Neon project to an
 
 - We recommended that you use the `pg_dump` and `pg_restore` programs from the latest version of Postgres, to take advantage of enhancements that might have been made in these programs. To check the version of `pg_dump` or `pg_restore`, use the `-V` option. For example: `pg_dump -V`.
 - Neon supports PostgreSQL 14, 15, 16, and 17. We recommend that clients are the same version as source Postgres instance.
-- Retrieve the connection parameters or connection string for your source Postgres database. This could be a Neon Postgres database or another Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a local Postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
+- Retrieve the connection parameters or connection string for your source Postgres database. This could be a Lakebase Postgres database or another Postgres database. The instructions below use a [connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), but you can use the connection format you prefer. If you are logged in to a local Postgres instance, you may only need to provide the database name. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for information about connection parameters.
 - Optionally, create a role in Neon to perform the restore operation. The role that performs the restore operation becomes the owner of restored database objects. For example, if you want role `sally` to own database objects, create `role` sally in Neon and perform the restore operation as `sally`.
 - If you have assigned database object ownership to different roles in your source database, read [Database object ownership considerations](#database-object-ownership-considerations). You may want to add the `-O, --no-owner` option to your `pg_restore` command to avoid errors.
 - Create the target database in Neon. For example, if you are migrating a database named `pagila`, create a database named `pagila` in Neon. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
@@ -57,6 +60,18 @@ The `pg_dump` command above includes these arguments:
 - `-f`: The dump file name. It can be any name you choose (`mydumpfile.bak`, for example).
 
 For more command options, see [Advanced pg_dump and pg_restore options](#advanced-pg_dump-and-pg_restore-options).
+
+### Export a database as a plain SQL file
+
+To export your database as a portable, human-readable `.sql` file instead of a custom-format archive, leave out the `-F` option. Plain text is the default `pg_dump` format:
+
+```bash shouldWrap
+pg_dump -d <source_database_connection_string> -f dump.sql
+```
+
+The result is a SQL script you can read, edit, version, or grep, and replay with `psql -f dump.sql`. You can narrow what you export with `--schema-only` (no data), `--data-only` (no DDL), or `-t <table_name>` (a single table). Add `--no-owner` to skip `ALTER OWNER` statements when you plan to restore to a different role. See [Database object ownership considerations](#database-object-ownership-considerations).
+
+Choose the custom format (`-Fc`) shown above when you want `pg_restore` features such as selective or parallel restore. Choose plain SQL when you want to read or edit the output, or load it with `psql`. Note that `psql` only supports plain-text dumps.
 
 ## Restore data to Neon with pg_restore
 
@@ -106,7 +121,7 @@ For example:
 pg_dump -Fc -v -d <source_database_connection_string> | pg_restore -v -d <neon-database-connection-string>
 ```
 
-Piping is not recommended for large databases because it can fail during lengthy migration operations. Incompatibilities between the source and target Postgres instances or databases may also cause a piping operation to fail. If you're importing from another Postgres instance, review Neon's [compatibility](/docs/reference/compatibility) page to ensure that Neon Postgres is compatible with your source Postgres instance. If you're unsure or encounter issues, consider using separate dump and restore operations. This approach lets you adjust dump and restore options or modify the dump file directly to resolve migration challenges.
+Piping is not recommended for large databases because it can fail during lengthy migration operations. Incompatibilities between the source and target Postgres instances or databases may also cause a piping operation to fail. If you're importing from another Postgres instance, review Neon's [compatibility](/docs/reference/compatibility) page to ensure that Lakebase Postgres is compatible with your source Postgres instance. If you're unsure or encounter issues, consider using separate dump and restore operations. This approach lets you adjust dump and restore options or modify the dump file directly to resolve migration challenges.
 
 When piping `pg_dump` output directly to `pg_restore`, the custom output format (`-Fc`) is most efficient. The directory format (`-Fd`) format cannot be piped to `pg_restore`.
 

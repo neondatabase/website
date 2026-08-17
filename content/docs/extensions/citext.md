@@ -2,11 +2,14 @@
 title: The citext Extension
 subtitle: Use the citext extension to handle case-insensitive data in Postgres
 summary: >-
-  Covers the setup and usage of the `citext` extension in Postgres for handling
-  case-insensitive text data, including installation steps and practical
-  examples for applications like user registration systems.
+  The `citext` extension adds a native case-insensitive text data type to
+  Postgres. Columns using it match regardless of capitalization without calling
+  `lower()` on every query. Use it when you need case-insensitive uniqueness or
+  lookups on text columns and want to avoid manually wrapping comparisons in
+  `lower()` or `upper()`. The extension supports btree indexing, regex
+  functions, and casting back to `text` for case-sensitive operations.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:16:58.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `citext` extension in Postgres provides a case-insensitive data type for text. Use it for columns where case shouldn't matter, like usernames or email addresses.

@@ -59,6 +59,10 @@ jspm_packages/
 # next files
 .next/
 
+# Playwright test artifacts
+playwright-report/
+test-results/
+
 # ignore local sitemap
 public/sitemap.xml
 public/sitemap-0.xml
@@ -71,6 +75,12 @@ public/md
 public/docs/**/llms.txt
 public/docs/llms-full.txt
 src/utils/data/github-stars.generated.json
+
+# API ref generator output (never commit — CI regenerates on every deploy)
+src/data/api-ref/
+src/data/api-ref.next/
+public/docs/reference/api/
+public/md/docs/reference/api.next/
 
 # Mac files
 .DS_Store
@@ -88,11 +98,16 @@ yarn-error.log
 
 yarn.lock
 package-lock.json
+# Vendored agent skills must mirror their source repo 1:1, so lockfiles that are
+# tracked upstream have to be tracked here too (check:skills-sync enforces this).
+!public/docs/ai/skills/**/package-lock.json
 .vercel
 .neon
+
+# Isaac Review local tooling state
+.isaac/
 
 # Evals directory (test validation for documentation)
 .evals/
 
-# Blog content gets imported automatically
-content/blog
+scripts/docs-checks/neonctl/fragments/

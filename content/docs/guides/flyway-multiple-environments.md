@@ -2,11 +2,16 @@
 title: Manage multiple database environments
 subtitle: Learn how to manage schemas for multiple database environments with Flyway
 summary: >-
-  Covers the management of multiple database environments using Flyway with
-  Neon's branching feature, detailing how to configure schema changes across
-  development, staging, and production environments.
+  Flyway multi-environment schema management with Neon maps each environment
+  (development, staging, production) to a separate Neon branch, giving each an
+  isolated Postgres instance and its own JDBC connection string. A
+  per-environment Flyway config file controls which database receives each
+  `flyway migrate -configFiles=` run, keeping schemas consistent across the
+  pipeline. Use this guide when automating releases across a chain of
+  environments and want to integrate Neon branch creation with Flyway migration
+  ordering.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.965Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -111,6 +116,10 @@ Your connection strings should look something like the ones shown below. Note th
   jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
 
+<Admonition type="important">
+Use direct (non-pooled) connection strings with Flyway. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure none of the hostnames include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
+
 ## Configure flyway to connect each environment
 
 To enable Flyway to connect to multiple environments, we'll create a configuration file for each environment and add the environment-specific connection details. When running Flyway, you'll specify the configuration file to be used.
@@ -205,7 +214,7 @@ After you run the migration commands, your database should be consistent across 
 
 ## Conclusion
 
-You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
+You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](/docs/cli) and [API](/docs/reference/api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
 
 ## References
 

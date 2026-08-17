@@ -4,7 +4,7 @@ subtitle: Learn best practices for building applications that gracefully handle 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-11-13T00:00:00.000Z'
-updatedOn: '2025-11-20T17:11:00.000Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 Building resilient applications is essential when working with managed database services, where brief connection drops though rare can occur. While this guide uses Neon as an example, these best practices and code examples apply to **any** managed database service, helping you handle interruptions gracefully and keep your application stable and responsive.
@@ -842,7 +842,7 @@ Navigate to the **Branches** page in the Neon Console:
 
 To use the Neon API, retrieve your Neon API key from the [API Keys](/docs/manage/api-keys) section in the Neon Console settings. You also need your project ID and endpoint ID, which you can find in the [Branches](/docs/manage/branches#view-branches) page of your project. For more details on project settings, see [Project Settings](/docs/manage/projects#project-settings). Additionally, refer to [Computes](/docs/manage/computes) for information on endpoints.
 
-Use the [Restart compute endpoint](/docs/reference/api-reference#/operations/restartProjectEndpoint) API. This is ideal for automated testing.
+Use the [Restart compute endpoint](/docs/reference/api#/operations/restartProjectEndpoint) API. This is ideal for automated testing.
 
 ```bash shouldWrap
 curl --request POST \
@@ -851,7 +851,7 @@ curl --request POST \
      --header 'accept: application/json'
 ```
 
-For more details on using the Neon API, see [Neon API Reference](/docs/reference/api-reference).
+For more details on using the Neon API, see [Neon API Reference](/docs/reference/api).
 
 </TabItem>
 

@@ -6,7 +6,7 @@ page_description: >-
   values for displaying data and preventing division by zero error.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-nullif/'
 ogImage: ''
-updatedOn: '2026-05-09T12:27:33.909Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL ISNULL
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The NULLIF function is a standard PostgreSQL conditional expression, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're running Postgres at enterprise scale, [Lakebase](https://www.databricks.com/product/lakebase) is the best managed cloud Postgres for the AI era, delivering high performance, strong security, and deep integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale without friction, Neon is the Postgres platform built for you.
+The NULLIF function is a standard PostgreSQL conditional expression. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `NULLIF()` function to handle null values.
@@ -32,7 +32,7 @@ Here’s the basic syntax of the `NULLIF` function:
 NULLIF(argument_1,argument_2);
 ```
 
-The `NULLIF` function returns a null value if `argument_1` equals to `argument_2`, otherwise, it returns `argument_1`.
+The `NULLIF` function returns a null value if `argument_1` equals `argument_2`, otherwise, it returns `argument_1`.
 
 ## PostgreSQL NULLIF function examples
 

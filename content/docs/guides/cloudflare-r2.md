@@ -1,17 +1,28 @@
 ---
 title: File storage with Cloudflare R2
-subtitle: Store files via Cloudflare R2 and track metadata in Neon
+subtitle: Store files via Cloudflare R2 and track metadata in Lakebase
 summary: >-
-  Step-by-step guide for integrating Cloudflare R2 with Neon to store files and
-  track metadata in your Neon database, utilizing R2's S3-compatible object
-  storage capabilities.
+  Cloudflare R2 file storage paired with Neon gives you S3-compatible object
+  storage with zero egress fees while keeping structured file metadata (object
+  key, public URL, user ID, upload timestamp) in a Lakebase Postgres table. Use
+  this guide when you need a split-storage architecture where R2 holds blobs and
+  Neon holds queryable metadata, using presigned upload URLs to let clients
+  upload directly without routing files through your backend. Covers bucket
+  setup, CORS configuration, metadata schema, and backend endpoints in
+  JavaScript (Hono, @aws-sdk/client-s3) and Python (Flask, boto3, psycopg2).
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.009Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
 
-This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file metadata in your Neon database, while using R2 for file storage.
+<Callout title="Neon now offers native storage">
+Neon Object Storage is S3-compatible object storage built into the Neon backend. Object storage branches with your database: each branch gets its own isolated namespace, so you can test file uploads in preview branches without touching production. No separate cloud account needed. Use any S3-compatible SDK with your existing Neon credential. Neon Object Storage is currently in beta.
+
+For more information, see [Neon Object Storage](/docs/storage/overview).
+</Callout>
+
+This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file metadata in your database, while using R2 for file storage.
 
 ## Setup steps
 
@@ -58,9 +69,9 @@ Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests
 
 ## Create a table in Neon for file metadata
 
-We need a table in Neon to store metadata about the objects uploaded to R2.
+We need a table in the database to store metadata about the objects uploaded to R2.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Here is an example SQL statement to create a simple table including the object key, URL, user ID, and timestamp:
+1.  Connect to your database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Here is an example SQL statement to create a simple table including the object key, URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS r2_files (
@@ -402,13 +413,13 @@ Testing the presigned URL flow involves multiple steps:
 **Expected outcome:**
 
 - The file is uploaded to your R2 bucket. You can verify this in the Cloudflare dashboard or by accessing the `publicFileUrl` if your bucket is public.
-- A new row appears in your `r2_files` table in Neon containing the `object_key` and `file_url`.
+- A new row appears in your `r2_files` table containing the `object_key` and `file_url`.
 
 You can now integrate API calls to these endpoints from various parts of your application (for example, web clients using JavaScript's `fetch` API, mobile apps, backend services) to handle file uploads.
 
 ## Accessing file metadata and files
 
-Storing metadata in Neon allows your application to easily retrieve references to the files hosted on R2.
+Storing metadata in the database allows your application to easily retrieve references to the files hosted on R2.
 
 Query the `r2_files` table from your application's backend when needed.
 
@@ -439,7 +450,7 @@ WHERE
     For private R2 buckets, store only the `object_key` and generate presigned *read* URLs on demand using a similar backend process.
     </Admonition>
 
-This pattern separates file storage and delivery (handled by R2) from structured metadata management (handled by Neon).
+This pattern separates file storage and delivery (handled by R2) from structured metadata management (handled by the database).
 
 </Steps>
 

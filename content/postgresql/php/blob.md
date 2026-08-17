@@ -6,7 +6,7 @@ page_description: >-
   such inserting BLOB, querying BLOB, and deleting BLOB.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-php/postgresql-blob/'
 ogImage: /postgresqltutorial/PostgreSQL-PHP-BLOB.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL PHP: Calling Stored Procedures'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Working with binary data through PHP and PDO uses standard PostgreSQL features like BYTEA and large objects, so the techniques here apply to any Postgres deployment. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship fast and scale on demand, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+Working with binary data through PHP and PDO uses standard PostgreSQL features like BYTEA and large objects. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to store binary data in the PostgreSQL database using PHP.

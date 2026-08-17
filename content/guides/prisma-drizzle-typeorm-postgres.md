@@ -4,12 +4,12 @@ subtitle: Learn real-world differences in schema modeling, migrations, and devel
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-04-21T00:00:00.000Z'
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 If you are choosing a data layer for a TypeScript or JavaScript service on Postgres, you will almost certainly run into these three names. They are not interchangeable implementations of the same idea. They reflect different opinions about where your schema should live, how close to SQL you want to stay day to day, and how much tooling you want wrapped around migrations and collaboration.
 
-Neon does not ship its own ORM. Neon is a serverless Postgres to which you connect with a standard connection string and driver, and you pick the library that fits your team and architecture. That separation is useful to keep in mind. The database is Postgres and the ORM is how your application _talks_ to Postgres. Comparing these tools is less about crowning a winner and more about matching strengths and constraints to the kind of system you are building.
+Neon does not ship its own ORM. Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. You connect to its Postgres with a standard connection string and driver, and you pick the library that fits your team and architecture. That separation is useful to keep in mind. The database is Postgres and the ORM is how your application _talks_ to Postgres. Comparing these tools is less about crowning a winner and more about matching strengths and constraints to the kind of system you are building.
 
 This article compares [Prisma](https://www.prisma.io/), [Drizzle](https://orm.drizzle.team/), and [TypeORM](https://typeorm.io/) by examining their approach to schema modeling, query styles, and migrations. It concludes with situations where each tool is particularly well-suited, without claiming that any single option is the universal “best” choice.
 
@@ -143,6 +143,6 @@ Community benchmarks [[3](https://db-latency.vercel.app/)] can be a useful place
 
 ## Where Neon Fits When Using These ORMs
 
-No matter which ORM you go with Prisma, Drizzle, or TypeORM, Neon is the cloud Postgres running underneath, taking care of things like [serverless scaling](https://neon.com/blog/scaling-serverless-postgres), [branching databases for isolated environments](https://neon.com/docs/introduction/branching), [connection pooling](https://neon.com/docs/connect/connection-pooling), and all the operational details you want your database platform to handle automatically. You and your team still get to decide how you define your schemas, structure your migrations, and write your queries. Neon gives you the managed Postgres layer you need for fast iteration and CI-friendly workflows.
+No matter which ORM you go with Prisma, Drizzle, or TypeORM, Neon is the cloud Postgres running underneath, taking care of things like [serverless scaling](/blog/scaling-serverless-postgres), [branching databases for isolated environments](/docs/introduction/branching), [connection pooling](/docs/connect/connection-pooling), and all the operational details you want your database platform to handle automatically. You and your team still get to decide how you define your schemas, structure your migrations, and write your queries. Neon gives you the managed Postgres layer you need for fast iteration and CI-friendly workflows.
 
 So when you're comparing tools like Prisma, Drizzle, and TypeORM, you're mostly weighing how your team will work together on schema changes, and how close to raw SQL you want your application logic to get. Neon stays out of your way and supplies the database building blocks, so you can assemble the stack that matches your habits and allows you to not bend your code to fit some database vendor's opinion.

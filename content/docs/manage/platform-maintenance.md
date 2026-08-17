@@ -1,13 +1,15 @@
 ---
 title: Platform maintenance
 summary: >-
-  Covers the process of Neon platform maintenance, detailing potential
-  disruptions, types of updates performed, and how to monitor for maintenance
-  notifications while ensuring applications handle brief interruptions
-  effectively.
+  Neon platform maintenance covers unscheduled infrastructure updates, resource
+  rebalancing, and critical security patches. These may cause brief compute
+  restarts or temporary latency on queries, API requests, and compute starts.
+  Use this page to monitor upcoming maintenance via the Neon Status page or the
+  Console maintenance indicator. Includes guidance on connection retry logic,
+  timeouts, and pooling strategies for strict SLOs.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.239Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 Neon occasionally performs essential **platform maintenance** outside of [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.
@@ -41,6 +43,6 @@ If your application has strict SLOs (Service Level Objectives) or availability r
 - [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres)
 - [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application)
 
-If you use the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap it, apply the same retry logic to those calls.
+If you use the [Neon API](/docs/reference/api) or [SDKs](/docs/reference/sdk) that wrap it, apply the same retry logic to those calls.
 
 <NeedHelp/>

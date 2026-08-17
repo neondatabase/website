@@ -2,12 +2,13 @@
 title: Account recovery
 subtitle: Learn how to recover a lost Neon account
 summary: >-
-  Covers the steps to recover a Neon account owned by a former employee,
-  including methods for regaining access through original login methods or
-  initiating a manual identity verification process if those methods are
-  unavailable.
+  To recover a former employee's Neon account, either regain access through the
+  original login provider, or submit a support ticket with company letterhead
+  for manual identity verification. Use this page when ownership was not
+  transferred and your organization needs to recover projects, billing, or admin
+  access. Manual verification requires a government-issued ID.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.222Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 If a former employee owned a Neon account and didn’t shut it down or transfer access before leaving, you can follow the steps outlined below to recover the account.

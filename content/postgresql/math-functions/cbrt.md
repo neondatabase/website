@@ -6,7 +6,7 @@ page_description: >-
   calculate the cube root of a number.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-cbrt/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CEIL() Function
@@ -17,14 +17,14 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The CBRT() function is part of standard PostgreSQL, so everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best performance, security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon is the Postgres platform built for you.
+The CBRT() function is part of standard PostgreSQL. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CBRT()` function to calculate the cube root of a number.
 
 ## Introduction to the PostgreSQL CBRT() function
 
-A cube root number is a number that when you multiply itself twice, you’ll get the cube number. For example, 2 is a cube root number of 8 because when you multiply the number 2 by itself three times, you’ll get the number 8:
+A cube root number is a number that when you multiply itself twice, you’ll get the cube number. For example, 2 is a cube root number of 8 because when you multiply the number 2 by itself two times, you’ll get the number 8:
 
 ```sql
 2 * 2 * 2 = 8

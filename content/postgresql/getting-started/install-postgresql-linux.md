@@ -8,7 +8,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-linux/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T15:04:42.682Z'
 enableTableOfContents: true
 previousLink:
   title: Install PostgreSQL macOS
@@ -19,7 +19,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Installing PostgreSQL on Linux works the same whether you're running it on a laptop, a VM, or a production server, and the steps below apply to any standard Postgres distribution. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and Lakehouse integration that enterprises expect. For developers and startups who want to ship and scale without managing servers, [Neon](https://neon.com) is the fastest way to get production Postgres in the cloud.
+Installing PostgreSQL on Linux works the same whether you're running it on a laptop, a VM, or a production server, and the steps below apply to any standard Postgres distribution. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to download and install PostgreSQL on Linux.
@@ -181,7 +181,7 @@ Seventh, access the PostgreSQL database server again using `psql`:
 psql
 ```
 
-Eighth, switch to the `dvdental` database:
+Eighth, switch to the `dvdrental` database:
 
 ```
 \c dvdrental

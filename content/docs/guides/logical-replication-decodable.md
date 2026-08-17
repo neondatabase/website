@@ -2,20 +2,25 @@
 title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 summary: >-
-  Step-by-step guide for configuring a Postgres source connector in Decodable to
-  replicate data from a Neon Postgres database, including enabling logical
-  replication and creating a dedicated Postgres role for the process.
+  Logical replication from Lakebase Postgres to Decodable uses a Postgres CDC
+  connector (Apache Flink and Debezium) to stream row-level changes into
+  Decodable streams for routing to sinks such as Snowflake, Kafka, Amazon S3,
+  or Elasticsearch. Use this guide when you need continuous, low-latency change
+  capture from Neon with optional SQL or Flink transformations before data
+  reaches its destination. Setup requires enabling wal_level=logical on the Neon
+  project (irreversible) and setting replica identity to FULL on each source
+  table. Connect Decodable using a direct non-pooled connection string.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-03T13:21:51.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Decodable](https://www.decodable.co/) is a fully managed platform for ETL, ELT, and stream processing,
 powered by Apache Flink® and Debezium.
 
-In this guide, you will learn how to configure a Postgres source connector in Decodable for ingesting changes from your Neon database so that you can replicate data from Neon to any of Decodable's [supported data sinks](https://docs.decodable.co/connections.html#sinks), optionally processing the data with SQL or custom Flink jobs.
+In this guide, you will learn how to configure a Postgres source connector in Decodable for ingesting changes from your Neon database so that you can replicate data from Lakebase Postgres to any of Decodable's [supported data sinks](https://docs.decodable.co/connections.html#sinks), optionally processing the data with SQL or custom Flink jobs.
 
 ## Prerequisites
 
@@ -57,7 +62,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
 
 ```bash
 neon roles create --name replication_user
@@ -82,7 +87,7 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \

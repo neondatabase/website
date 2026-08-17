@@ -4,13 +4,6 @@
 
 **Purpose:** To guide the user through getting an API key and making their first successful API call.
 
-**When to use this prompt:** Copy and paste this into your AI assistant when you want to:
-- Get set up with a Neon API key for the first time
-- Make your first API call to verify everything works
-- Understand the basics of Neon API authentication
-
----
-
 ## Step 1: Get Your Neon API Key
 
 Before you can use the Neon API, you need an API key. Here's how to create one:
@@ -28,9 +21,9 @@ Store the key securely. If you lose it, you'll need to create a new one.
 
 | Key Type | Scope | Best For |
 |----------|-------|----------|
-| **Personal API Key** | All projects you own or have access to | Getting started, personal scripts |
+| **Personal API Key** | All organization projects where the user is a member | Personal development, scripts |
 | **Organization API Key** | All projects in an organization | Team automation, CI/CD |
-| **Project-scoped API Key** | Single project only | Limited-access integrations |
+| **Project-scoped API Key** | Single project only | Limited access integrations |
 
 For getting started, a **Personal API Key** is what you need.
 
@@ -44,9 +37,7 @@ First, set your API key as an environment variable:
 export NEON_API_KEY="neon_api_key_your_key_here"
 ```
 
-Then choose your preferred method:
-
-### Option A: Using curl
+Then make your first call with curl:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects' \
@@ -54,42 +45,9 @@ curl 'https://console.neon.tech/api/v2/projects' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-### Option B: Using the TypeScript SDK
-
-```bash
-npm install @neondatabase/api-client
-```
-
-```typescript
-import { createApiClient } from '@neondatabase/api-client';
-
-const apiClient = createApiClient({
-  apiKey: process.env.NEON_API_KEY!,
-});
-
-const response = await apiClient.listProjects({});
-console.log(response.data.projects);
-```
-
-### Option C: Using the Python SDK
-
-```bash
-pip install neon-api
-```
-
-```python
-import os
-from neon_api import NeonAPI
-
-neon = NeonAPI(api_key=os.environ["NEON_API_KEY"])
-
-projects = neon.projects()
-print(projects)
-```
-
 ### Expected Result
 
-All three options return your projects:
+The request returns your projects:
 
 ```json
 {
@@ -108,51 +66,14 @@ All three options return your projects:
 
 - `401 Unauthorized` — Check that your API key is correct
 - `403 Forbidden` — Your API key doesn't have access to the requested resource
-- `Connection error` (SDK) — Verify the package is installed and your API key environment variable is set
-
----
-
-## Next Steps
-
-Once your first API call works, here are common operations:
-
-### Create a Branch
-
-Use the `project_id` from the list projects response:
-
-**curl:**
-```bash
-curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{"branch": {"name": "dev-branch"}}'
-```
-
-**TypeScript SDK:**
-```typescript
-const response = await apiClient.createProjectBranch('project-id-here', {
-  branch: { name: 'dev-branch' },
-});
-console.log(response.data.branch);
-```
-
-**Python SDK:**
-```python
-branch = neon.branch_create(
-    project_id="project-id-here",
-    branch={"name": "dev-branch"}
-)
-print(branch)
-```
+- `Connection error` — Verify your API key environment variable is set
 
 ---
 
 ## Key Resources
 
-- **Interactive API Reference:** https://api-docs.neon.tech/reference/getting-started-with-neon-api (try endpoints directly)
-- **Full API Documentation:** https://neon.tech/docs/reference/api-reference
-- **SDKs:** https://neon.tech/docs/reference/sdk
-- **Comprehensive AI Rules:** https://neon.tech/docs/ai/ai-rules-neon-api (for deeper AI integration)
+- **API Reference:** https://neon.com/docs/reference/api
+- **OpenAPI Spec:** https://neon.com/api_spec/release/v2.json
 
 ---
 

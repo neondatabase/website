@@ -2,11 +2,17 @@
 title: pg_dump / pg_restore — Full Twin
 subtitle: Create a full Twin of your production database
 summary: >-
-  Step-by-step guide for creating a full Neon Twin of your production database
-  using `pg_dump` and `pg_restore` within a GitHub Actions workflow.
+  Full Neon Twin workflow that copies a complete production database into a Neon
+  development database using `pg_dump` (custom `-Fc` format) and `pg_restore`
+  inside a GitHub Actions job scheduled daily via cron or triggered on merged
+  pull requests. Choose this workflow over schema-only or incremental approaches
+  when you need a full data refresh and GitHub Actions is your CI platform.
+  Requires unpooled connection strings for both source and target databases;
+  GitHub Actions enforces a 6-hour per-job limit, so very large databases may
+  require self-hosted runners.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.

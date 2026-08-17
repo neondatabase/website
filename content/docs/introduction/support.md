@@ -1,10 +1,13 @@
 ---
 title: Support
 summary: >-
-  Covers the support plans, channels, and policies available for Neon users,
-  detailing how to access support based on their specific pricing plan.
+  Neon support plans map to pricing tiers. Free plan users get community
+  (Discord) support only. Launch adds billing-only tickets. Scale unlocks
+  Standard support. Higher-volume customers can access additional support
+  options aligned with Databricks Support. Use this page to find which
+  channels your plan includes and review the general support policy.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-06-30T18:26:43.964Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -13,30 +16,33 @@ This page outlines Neon's support plans, available channels, and policies. To le
 
 Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans), as outlined in the following table.
 
-| Neon pricing plan | Support plan options                                                                                 |
-| :---------------- | :--------------------------------------------------------------------------------------------------- |
-| Free plan         | Community support                                                                                    |
-| Launch plan       | Billing support                                                                                      |
-| Scale plan        | • Standard support<br/>• Business support (additional fee)<br/>• Production support (additional fee) |
+| Neon pricing plan | Support plan options |
+| :---------------- | :------------------- |
+| Free plan         | Community support    |
+| Launch plan       | Billing support      |
+| Scale plan        | Standard support     |
 
-Scale plan customers can upgrade to **Business** or **Production** support plans for an additional fee. In addition to all Standard support plan options, these plans offer a [response time SLA](#response-time-sla).
+### Higher-volume customers
+
+Higher-volume Neon customers have access to the same flexibility as other Databricks customers, including annual commits and additional support options. These options follow the [Databricks Support](https://www.databricks.com/support) plans (Business, Production, and Mission Critical), which add response-time SLAs and more support channels.
+
+To learn whether you qualify and to discuss options, [contact our sales team](/contact-sales).
 
 ## Support channels
 
 The support channels you can access differ according to your [Support Plan](#support-plans).
 
-| Support channels                                                              | Community support | Billing support | Standard support | Business support | Production support |
-| :---------------------------------------------------------------------------- | :---------------: | :-------------: | :--------------: | :--------------: | :----------------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |     &check;     |     &check;      |     &check;      |      &check;       |
-| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |     &check;     |     &check;      |     &check;      |      &check;       |
-| [Support tickets](#support-tickets)                                           |         -         |       \*        |     &check;      |     &check;      |      &check;       |
-| [Slack channel](#slack-channel)                                               |         -         |        -        |       \*\*       |       \*\*       |        \*\*        |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |        -        |       \*\*       |       \*\*       |        \*\*        |
-| [SLA](#response-time-sla)                                                     |         -         |        -        |        -         |     &check;      |      &check;       |
+| Support channels                                                              | Community support | Billing support | Standard support |
+| :---------------------------------------------------------------------------- | :---------------: | :-------------: | :--------------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |     &check;     |     &check;      |
+| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |     &check;     |     &check;      |
+| [Support tickets](#support-tickets)                                           |         -         |       \*        |     &check;      |
+| [Slack channel](#slack-channel)                                               |         -         |        -        |       \*\*       |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |        -        |       \*\*       |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>\*</sup> Under **Billing support** (Launch plan), you can only use [support tickets](#support-tickets) for **billing-related** issues. **Scale** plan and higher can use support tickets for **any** Neon issue. On paid plans, **Request billing support** on the [Billing](/docs/introduction/manage-billing#view-the-billing-page) page is the dedicated path for invoice and billing questions.</small><br/>
-<small><sup>\*\*</sup> [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available for an additional fee for Standard, Business, and Production support plans.</small>
+<small><sup>\*\*</sup> [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available for an additional fee, and with some Databricks support plans for [higher-volume customers](#higher-volume-customers). [Contact sales](/contact-sales) to learn more.</small>
 </div>
 
 ### Neon Discord Server
@@ -51,11 +57,11 @@ The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Open the Help menu (`?`) in the top right corner and select **Technical Support**. This opens the AI assistant so you can ask questions about Neon.
+- **Neon Console**: Open the Help menu (`?`) in the top right corner and select **Support**. This opens the **Neon AI Assistant** so you can ask questions about Neon.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
 
-Neon AI Chat assistants are updated regularly and built on various sources the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
+Neon AI Chat assistants are updated regularly and built on various sources including the Neon documentation, the Neon website, the Neon API, and Neon GitHub repositories.
 
 <Admonition type="important">
 Neon AI chat is not an official Neon Support channel.
@@ -65,12 +71,14 @@ Neon AI chat is not an official Neon Support channel.
 
 **Launch** plan (**Billing support**): you can get help with **billing and invoices** (for example through [Request billing support](/docs/introduction/manage-billing#request-billing-support) on the Billing page). Support tickets tied to the console are limited to **billing-related** issues on this plan.
 
-**Scale** plan (**Standard support**) and plans with **Business** or **Production** support: you can open support tickets for **any** Neon issue. **Business** and **Production** add SLA response times on top of that.
+**Scale** plan (**Standard support**): you can open support tickets for **any** Neon issue.
+
+**Vercel-managed Neon integration**: if you use Neon through the Vercel-managed Neon integration and are on Neon's Scale plan, you can also open support tickets for any Neon issue.
 
 You can reach the ticketing flow in these ways:
 
-1. **AI assistant**: Open the Help menu (`?`) in the top right corner and select **Technical Support**. This opens the **AI assistant**. When your account is allowed to file a ticket, use **Open Support Ticket** in the assistant. **Launch** plan: use this only for **billing-related** problems (for invoice-specific requests, **Request billing support** on the Billing page is usually simpler). **Scale** and above: you can use **Open Support Ticket** for any eligible issue.
-2. **Billing page (paid plans)**: On the **Billing** page, select **Request billing support** in the page header (next to **View past invoices**). In the form, select a related invoice if you have one and describe your issue. You can also select **View past invoices**, open an invoice’s actions menu, and select **Request support** to open the same form with that invoice pre-selected. If you have no invoices yet, the header button may be disabled; open **Technical Support** from the Help menu (`?`) to reach the AI assistant for billing-related help. Step-by-step detail is in [Manage billing](/docs/introduction/manage-billing#request-billing-support).
+1. **Neon AI Assistant**: Open the Help menu (`?`) in the top right corner and select **Support**. This opens the **Neon AI Assistant**. When your account is allowed to file a ticket, use **Open Support Ticket** in the assistant. **Launch** plan: use this only for **billing-related** problems (for invoice-specific requests, **Request billing support** on the Billing page is usually simpler). **Scale** and above: you can use **Open Support Ticket** for any eligible issue.
+2. **Billing page (paid plans)**: On the **Billing** page, select **Request billing support** in the page header (next to **View past invoices**). In the form, select a related invoice if you have one and describe your issue. You can also select **View past invoices**, open an invoice’s actions menu, and select **Request support** to open the same form with that invoice pre-selected. If you have no invoices yet, the header button may be disabled; open **Support** from the Help menu (`?`) to reach the Neon AI Assistant for billing-related help. Step-by-step detail is in [Manage billing](/docs/introduction/manage-billing#request-billing-support).
 
 <Admonition type="tip">
 To ensure you receive responses from our support team, please whitelist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
@@ -78,44 +86,11 @@ To ensure you receive responses from our support team, please whitelist the `hel
 
 ### Slack channel
 
-[Slack connect](https://slack.com/intl/en-ie/connect) channels are available for an additional fee for Standard, Business, and Production support plan customers. To learn more, [contact our sales team](/contact-sales).
+[Slack connect](https://slack.com/intl/en-ie/connect) channels are available for an additional fee for Standard support customers, and with some Databricks support plans for [higher-volume customers](#higher-volume-customers). To learn more, [contact our sales team](/contact-sales).
 
 ### Dedicated Support Engineer
 
-A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. This service is available for an additional fee for Standard, Business, and Production support plan customers. To learn more, [contact our sales team](/contact-sales).
-
-### Response time SLA
-
-A response time SLA is available to Neon [Scale plan](/docs/introduction/plans) customers who have purchased a **Business** or **Production** support plan. If you are interested in purchasing one of these plans, [please reach out to our sales team](/contact-sales).
-
-#### Response times
-
-Neon aims to respond to all **Business** and **Production** support plan requests in a timely manner and as soon as practically possible. Customers are prioritized based on their support plan and the [Severity](#severity-levels) of their issue.
-
-The table below outlines Neon's response time guidelines for Business and Production support plans.
-
-These times relate to the time it takes Neon to respond to the Customer's initial request. This guideline only applies when submitting a support ticket through the Neon Console.
-
-| Severity Level | Business support plan | Production support plan |
-| -------------- | --------------------- | ----------------------- |
-| Severity 1     | Within 4 hours        | Within 1 hour           |
-| Severity 2     | Within 1 business day | Within 4 hours          |
-| Severity 3     | Within 1 business day | Within 1 business day   |
-| Severity 4     | Within 1 business day | Within 1 business day   |
-
-#### Severity levels
-
-When the Customer submits an issue (with or without specifying a starting severity), Neon will reasonably assess its severity according to the appropriate severity levels defined below. Neon reserves the right to set, upgrade and downgrade severities of support tickets, on a case-by-case basis, considering any available mitigations, workarounds, and timely cooperation from Customers. Neon will explain the reasoning to the Customer and will resolve any disagreement regarding the severity as soon as is reasonably practicable. **High severity levels should not be used for low-impact issues or general questions\!**
-
-An explanation of each severity level is provided below.
-
-• **Severity 1** - Production system is down or severely impacted such that routine operation is impossible
-
-• **Severity 2** - Production issue where the system is functioning but in degraded or restricted capacity
-
-• **Severity 3** - Issue where minor functionality is impacted or a development issue occurs
-
-• **Severity 4** - Request for information or feature request with no impact on business operations
+A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. This service is available for an additional fee. To learn more, [contact our sales team](/contact-sales).
 
 ## General support policy
 
@@ -251,7 +226,7 @@ Examples:
 
 ##### Severity 4 (Low)
 
-A general usage question; here is no impact on the product's quality, performance, or functionality in a production or non-production system:
+A general usage question; there is no impact on the product's quality, performance, or functionality in a production or non-production system:
 
 - Any request for information, enhancement, or documentation clarification regarding the platform
 

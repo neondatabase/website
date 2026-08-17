@@ -2,11 +2,16 @@
 title: PostGIS-related extensions
 subtitle: Improve geospatial functionality with additional PostGIS extensions
 summary: >-
-  Covers the setup and functionality of various PostGIS-related extensions in
-  Neon, including pgrouting, H3_PostGIS, PostGIS SFCGAL, and PostGIS Tiger
-  Geocoder, to enhance geospatial data handling and analysis.
+  PostGIS companion extensions supported by Neon (pgrouting, H3/H3_PostGIS,
+  PostGIS SFCGAL, and PostGIS Tiger Geocoder) add network routing, hexagonal
+  geospatial indexing, 3D solid geometry, and US address geocoding on top of the
+  base PostGIS install. Use this page when you need geospatial capabilities
+  beyond what PostGIS alone provides, such as Dijkstra shortest-path queries,
+  H3 cell aggregation, ST_Extrude volume calculations, or address normalization
+  with normalize_address. Each extension section includes a CREATE EXTENSION
+  statement and working SQL examples.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.846Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 PostGIS adds support for geospatial data in PostgreSQL, providing both data types and functions to store and analyze it effectively. The Postgres ecosystem includes multiple extensions built on top of PostGIS, to further enhance its capabilities. This guide introduces you to some of these extensions supported by Neon:
@@ -452,7 +457,7 @@ This query returns a normalized version of the input addresses.
 
 ## Conclusion
 
-These examples provide a quick introduction to using other extensions in the PostGIS ecosystem. They can significantly expand the geospatial capabilities of your Neon Postgres database.
+These examples provide a quick introduction to using other extensions in the PostGIS ecosystem. They can significantly expand the geospatial capabilities of your database.
 
 For further information, refer to the official documentation for each extension.
 

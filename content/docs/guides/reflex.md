@@ -1,22 +1,25 @@
 ---
-title: Build a Python App with Reflex and Neon
-subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
+title: Build a Python App with Reflex and Lakebase Postgres
+subtitle: Learn how to build a Python Full Stack application with Reflex and Lakebase Postgres
 summary: >-
-  Step-by-step guide for building a full-stack Python application using the
-  Reflex framework and connecting it to a Neon Postgres database, including
-  project setup and dependency management.
+  Connecting a Reflex Python web app to Lakebase Postgres requires setting a
+  DATABASE_URL in rxconfig.py via python-dotenv, defining sqlmodel ORM models,
+  and running Alembic migrations. Use this page when building a Python
+  full-stack application with Reflex that needs a serverless Postgres backend,
+  covering virtual environment setup, psycopg2-binary installation, schema
+  migrations, and a working CRUD example.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.041Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/reflex-prompt.md"
-description="Pre-built prompt for connecting Reflex applications to Neon Postgres"/>
+description="Pre-built prompt for connecting Reflex applications to Lakebase Postgres"/>
 
 [Reflex](https://reflex.dev/) is a Python web framework that allows you to build full-stack applications with Python.
 
-Using Reflex, you can build frontend and backend applications using Python to manage the interaction between the frontend UI and the state with the server-side logic. To make the application data-driven, you can connect to a Neon Postgres database.
+Using Reflex, you can build frontend and backend applications using Python to manage the interaction between the frontend UI and the state with the server-side logic. To make the application data-driven, you can connect to a Lakebase Postgres database.
 
-To connect to Neon from a Reflex application:
+To connect to a Lakebase Postgres database from a Reflex application:
 
 <Steps>
 
@@ -65,7 +68,7 @@ To create a virtual environment, run the following command in your project direc
 
 ### Install the required packages
 
-Install Reflex, `python-dotenv` to manage environment variables, and `psycopg2-binary` to connect to Neon Postgres:
+Install Reflex, `python-dotenv` to manage environment variables, and `psycopg2-binary` to connect to Postgres:
 
 ```bash
 pip install reflex python-dotenv psycopg2-binary
@@ -463,10 +466,15 @@ reflex run
 
 This command starts the Reflex development server. You can access the app by navigating to `http://localhost:3000` in your web browser.
 
-You should see the Customer Data App interface, where you can add, view, and delete customer records stored in your Neon Postgres database.
+You should see the Customer Data App interface, where you can add, view, and delete customer records stored in your database.
 
 ![Reflex Customer Data App](/docs/guides/reflex_customer_data_app.png)
 
 </Steps>
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

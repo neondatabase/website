@@ -2,11 +2,15 @@
 title: Postgres trim() function
 subtitle: Remove leading and trailing characters from a string
 summary: >-
-  Covers the usage of the Postgres `trim()` function to remove specified leading
-  and trailing characters from strings, aiding in data preprocessing and
-  standardization tasks.
+  The Postgres `trim()` function removes leading, trailing, or both-end
+  characters from a string, defaulting to spaces when no character set is
+  specified. Use it to clean user input, strip sentinel characters like `#` or
+  `*`, or normalize strings before comparison, filtering, or joining. Related
+  functions include `ltrim()`, `rtrim()`, and `btrim()`; applying `trim()` in a
+  `WHERE` clause on large datasets may require a functional index to avoid
+  performance degradation.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.883Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The Postgres `trim()` function removes the specified characters from the beginning and/or end of a string.

@@ -2,18 +2,22 @@
 title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
 summary: >-
-  Step-by-step guide for defining a Neon Postgres database as a data source in
-  Fivetran to enable data replication to supported destinations.
+  Logical replication from Neon to Fivetran lets you stream Postgres WAL changes
+  to any Fivetran-supported destination by configuring a pgoutput replication
+  slot and publication on Lakebase Postgres, then connecting Fivetran via a direct
+  (non-pooled) connection. Use this page when setting up Neon as a PostgreSQL
+  source in Fivetran. Note that enabling logical replication is a one-way,
+  irreversible change, and Fivetran IPs must be added to Neon's IP Allow list.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-09T15:15:10.215Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Fivetran](https://fivetran.com/) is an automated data movement platform that helps you centralize data from disparate sources, which you can then manage directly from your browser. Fivetran extracts your data and loads it into your data destination.
 
-In this guide, you will learn how to define a Neon Postgres database as a data source in Fivetran so that you can replicate data to one or more of Fivetran's supported destinations.
+In this guide, you will learn how to define a Lakebase Postgres database as a data source in Fivetran so that you can replicate data to one or more of Fivetran's supported destinations.
 
 ## Prerequisites
 
@@ -55,7 +59,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
 
 ```bash
 neon roles create --name replication_user
@@ -80,7 +84,7 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \

@@ -4,7 +4,7 @@ subtitle: Learn how to develop applications locally with Neon
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2024-11-05T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-06-11T23:50:21.258Z'
 ---
 
 Setting up your development environment should be simple and fast. With Neon's modern approach to PostgreSQL, you get exactly that. Here's how to create the perfect setup for your applications.
@@ -38,21 +38,21 @@ Imagine creating a complete copy of your database as easily as creating a Git br
 
 ### Quickstart
 
-1. Install the [**Neon CLI**](/docs/reference/neon-cli) by following the guide [here](/docs/reference/neon-cli#install).
+1. Install the [**Neon CLI**](/docs/cli) by following the guide [here](/docs/cli/install).
 
 2. **Connect your account**
 
    ```bash
-   neonctl auth
+   neon auth
    ```
 
 3. **Create your branch**
 
    ```bash
-   neonctl branches create --name dev/your-name
+   neon branches create --name dev/your-name
 
    # Get your connection details
-   neonctl connection-string dev/your-name
+   neon connection-string dev/your-name
    ```
 
    <Admonition type="note">

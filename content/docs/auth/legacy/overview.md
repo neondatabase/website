@@ -2,24 +2,30 @@
 title: Legacy Neon Auth with Stack Auth
 subtitle: For existing users only (not available for new projects)
 summary: >-
-  Covers the setup and functionality of the legacy Neon Auth system using Stack
-  Auth for existing users, detailing user management and data synchronization
-  within a Neon Postgres database.
+  Legacy Neon Auth (Stack Auth-based, archived) automatically syncs
+  authenticated user profiles into a `neon_auth.users_sync` Postgres table,
+  making user data available for SQL queries without custom sync code. Only
+  existing projects using the Stack Auth integration should reference this page;
+  new projects must use Managed Better Auth instead. Setup requires
+  environment variables including NEXT_PUBLIC_STACK_PROJECT_ID and
+  STACK_SECRET_SERVER_KEY, and existing users can claim their Stack Auth
+  project to manage OAuth providers and production settings.
 enableTableOfContents: true
 tag: archived
+tagTheme: gray
 noindex: true
-updatedOn: '2026-02-15T20:51:54.041Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
 **This is the documentation for the previous Neon Auth implementation built with Stack Auth.** It is no longer available for new projects but remains supported for existing users.
 
-**For the new Neon Auth built with Better Auth**, see [Neon Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
+**For the current Managed Better Auth**, see [Managed Better Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
 </Admonition>
 
 ## What is legacy Neon Auth?
 
-Neon Auth brings authentication and user management natively to your Neon Postgres database.
+Neon Auth brings authentication and user management natively to your database.
 
 ### Why use Neon Auth?
 
@@ -112,7 +118,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthprovidersdkkeys)
+[Try in API Reference ↗](/docs/reference/api/auth-legacy/create-neon-auth-provider-sdk-keys)
 
 ## Claiming your Stack Auth project
 
@@ -155,7 +161,7 @@ curl --request POST \
 ```
 
 Open the returned URL in your browser to complete the claim process.
-See [Neon Auth API Reference](https://api-docs.neon.tech/reference/transferneonauthownership) for more details.
+See [Neon Auth API Reference](/docs/reference/api/auth-legacy/transfer-neon-auth-provider-project) for more details.
 
 <Admonition type="note">
 After claiming, you'll still be able to access your project from the Neon Console, but you'll also have direct access from the Stack Auth dashboard.
@@ -163,9 +169,9 @@ After claiming, you'll still be able to access your project from the Neon Consol
 
 </Steps>
 
-## Migrating to Neon Auth with Better Auth
+## Migrating to Managed Better Auth
 
-Ready to upgrade to Neon Auth with Better Auth? See our comprehensive [migration guide](/docs/auth/migrate/from-legacy-auth).
+Ready to upgrade to Managed Better Auth? See our comprehensive [migration guide](/docs/auth/migrate/from-legacy-auth).
 
 ### Benefits of upgrading
 
@@ -196,7 +202,7 @@ For SDK documentation, components, hooks, and client-side authentication:
 ### Neon technical docs
 
 - [Database Integration](/docs/auth/legacy/database-integration) - Technical reference for `users_sync`, backend auth, RLS
-- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Neon Auth with Better Auth
-- [Neon Auth](/docs/auth/overview) - Current Neon Auth with Better Auth
+- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Managed Better Auth
+- [Neon Auth](/docs/auth/overview) - Current Managed Better Auth
 
 <NeedHelp/>

@@ -6,7 +6,7 @@ page_description: >-
   retrieve data from a single table.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-select/'
 ogImage: /postgresqltutorial/PostgreSQL-Select.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Server and Database Objects
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The SELECT statement works the same way across every PostgreSQL deployment, so anything you learn here carries over to Postgres running anywhere. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with the performance, security, and native Lakehouse integration your data platform needs. If you're a developer or startup who needs to ship and scale fast, [Neon](https://neon.com) gives you the best Postgres platform for that, with instant provisioning, branching, and serverless scale built in.
+The SELECT statement works the same way across every PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you are going to learn how to use the basic **PostgreSQL SELECT** statement to query data from a table.

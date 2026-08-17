@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-role-membership/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL REVOKE Statement
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Group roles work the same way across any PostgreSQL deployment, so the patterns you learn here apply whether you're running Postgres yourself or on a managed platform. For enterprises modernizing on the Lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and tightly integrated managed Postgres for the AI era. For developers and startups who need to move fast, [Neon](https://neon.com) gives you the Postgres platform built to ship and scale without the operational drag.
+Group roles work the same way across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about PostgreSQL group roles and how to use them to manage privileges more effectively.
@@ -145,7 +145,7 @@ Output:
 
 The output indicates that the role `alice` has the `SELECT` privilege on the `rental` table even though we did not explicitly assign it.
 
-### Removing a role to a group role
+### Removing a role from a group role
 
 To remove a role from a group role, you use the `REVOKE` statement:
 

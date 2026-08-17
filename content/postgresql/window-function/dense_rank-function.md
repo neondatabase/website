@@ -7,7 +7,7 @@ page_description: >-
   set.
 prev_url: index.html
 ogImage: /postgresqltutorial/PostgreSQL-DENSE_RANK-Function-Sample-Table.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CUME_DIST Function
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `DENSE_RANK()` function works the same way across any PostgreSQL deployment, so the techniques shown here for ranking rows without gaps apply whether you're running Postgres on your laptop, on a server, or in the cloud. For enterprises building analytical and AI workloads on top of their operational data, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres that's fast, secure, and fully integrated into the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The `DENSE_RANK()` function works the same way across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you are going to learn how to use the PostgreSQL `DENSE_RANK()` function to assign a rank to each row within a partition of a result set, with no gaps in ranking values.
@@ -40,7 +40,7 @@ DENSE_RANK() OVER (
 
 The `DENSE_RANK()` function is applied to every row in each partition defined by the `PARTITION BY` clause, in the sort order specified by `ORDER BY` clause. It will reset the rank when crossing the partition boundary.
 
-The `PARITION BY` clause is optional. If you skip it, the `DENSE_RANK()` function will treat the whole result set as a single partition.
+The `PARTITION BY` clause is optional. If you skip it, the `DENSE_RANK()` function will treat the whole result set as a single partition.
 
 ## PostgreSQL DENSE_RANK() function demo
 

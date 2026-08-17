@@ -2,11 +2,14 @@
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
 summary: >-
-  Covers the installation and usage of the `neon_utils` extension, specifically
-  the `num_cpus()` function for monitoring CPU resource allocation by Neon's
-  Autoscaling feature in response to workload changes.
+  The `neon_utils` PostgreSQL extension provides a `num_cpus()` function that
+  returns the current number of CPU cores allocated to a Neon compute by the
+  Autoscaling feature. Use it to observe real-time CPU scaling during load
+  tests or to verify that autoscaling is responding to workload as expected.
+  `num_cpus()` rounds fractional CU values up and only returns correct results
+  on autoscaling-enabled computes, not fixed-size computes.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.079Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates CPU resources in response to workload. The function returns the current number of allocated CPU cores.

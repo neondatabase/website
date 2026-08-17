@@ -3,6 +3,19 @@ import SEO_DATA, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 const DEFAULT_TITLE = SEO_DATA.index.title;
 const DEFAULT_DESCRIPTION = SEO_DATA.index.description;
 
+const assertAbsoluteHttpUrl = (value, fieldName) => {
+  let parsed;
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new Error(`${fieldName} must be an absolute HTTP(S) URL, got ${JSON.stringify(value)}`);
+  }
+
+  if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+    throw new Error(`${fieldName} must be an absolute HTTP(S) URL, got ${JSON.stringify(value)}`);
+  }
+};
+
 export default function getMetadata({
   title,
   description,
@@ -18,6 +31,7 @@ export default function getMetadata({
   isPostgres = false,
   currentSlug = null,
   markdownPath = null,
+  canonical,
 }) {
   const SITE_URL =
     process.env.VERCEL_ENV === 'preview'
@@ -33,14 +47,21 @@ export default function getMetadata({
   const siteName = 'Neon';
   const robots = robotsNoindex === 'noindex' ? { index: false } : null;
 
+  let alternateCanonical = isPostgres
+    ? `https://www.postgresql.org/docs/16/${currentSlug}.html`
+    : canonicalUrl;
+
+  if (canonical !== undefined && canonical !== null) {
+    assertAbsoluteHttpUrl(canonical, 'canonical');
+    alternateCanonical = canonical;
+  }
+
   return {
     metadataBase: new URL(SITE_URL),
     title: metaTitle,
     description: metaDescription,
     alternates: {
-      canonical: isPostgres
-        ? `https://www.postgresql.org/docs/16/${currentSlug}.html`
-        : canonicalUrl,
+      canonical: alternateCanonical,
       types: {
         'application/rss+xml': rssPathname ? `${SITE_URL}${rssPathname}` : null,
         'text/markdown': markdownPath ? `${SITE_URL}${markdownPath}` : null,
@@ -77,6 +98,7 @@ export default function getMetadata({
     category,
     twitter: {
       card: 'summary_large_image',
+      site: '@neondatabase',
     },
   };
 }

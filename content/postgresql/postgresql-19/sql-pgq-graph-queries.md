@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 SQL/PGQ Property Graph Queries'
 page_title: 'PostgreSQL 19 SQL/PGQ - Graph Queries on Existing Tables'
 page_description: 'Learn how to use PostgreSQL 19 SQL/PGQ to define property graphs over existing tables and query relationships with graph pattern matching, no migration or extensions required.'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 New Features'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 ON CONFLICT DO SELECT'
   slug: 'postgresql-19/on-conflict-do-select'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try SQL/PGQ property graph queries for yourself ahead of the final release expected later in 2026. Beta 1 adds support for property graph queries using SQL standard syntax over your existing relational tables, with no new storage engine or extensions.
+</Admonition>
 
 **Summary**: PostgreSQL 19 adds SQL/PGQ (Property Graph Queries) based on the SQL:2023 standard. You can define graph structures over your existing relational tables and query them with pattern matching syntax - no new storage engine, no extensions, no data migration.
 

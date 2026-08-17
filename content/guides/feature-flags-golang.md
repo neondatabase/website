@@ -1,15 +1,15 @@
 ---
-title: Implementing Feature Flags with Go, Neon Postgres, and Server-Side Rendering
-subtitle: Learn how to create a feature flag system using Go, Neon Postgres, and server-side rendering for controlled feature rollouts
+title: Implementing Feature Flags with Go, Lakebase Postgres, and Server-Side Rendering
+subtitle: Learn how to create a feature flag system using Go, Lakebase Postgres, and server-side rendering for controlled feature rollouts
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-29T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Feature flags are a technique that allows developers to modify system behavior without changing code. They enable you to control when features are visible to specific users, perform A/B testing, and implement kill switches for problematic features.
 
-In this guide, you'll learn how to implement a feature flag system using Go, Neon Postgres, and server-side rendering. This approach allows for feature visibility decisions to happen on the server, providing better security and performance compared to client-side feature flags.
+In this guide, you'll learn how to implement a feature flag system using Go, Lakebase Postgres, and server-side rendering. This approach allows for feature visibility decisions to happen on the server, providing better security and performance compared to client-side feature flags.
 
 ## Prerequisites
 
@@ -1027,7 +1027,7 @@ Remember to set the `DATABASE_URL` environment variable in your deployment envir
 
 ## Summary
 
-In this guide, you built a server-rendered feature flag system using Go and Neon Postgres. You implemented a way to define flags and user segments in the database, control feature visibility based on user attributes, and gradually roll out features using percentage-based targeting.
+In this guide, you built a server-rendered feature flag system using Go and Lakebase Postgres. You implemented a way to define flags and user segments in the database, control feature visibility based on user attributes, and gradually roll out features using percentage-based targeting.
 
 By handling feature flag logic on the server, you ensure that users only see what they're meant to, making the system both secure and performant. This approach gives you full control over feature exposure without relying on client-side logic.
 

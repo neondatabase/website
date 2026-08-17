@@ -2,14 +2,17 @@
 title: Connect from Hasura Cloud to Neon
 subtitle: Learn how to connect a Hasura Cloud project to a new or existing Neon database
 summary: >-
-  Step-by-step guide for connecting a Hasura Cloud project to a new or existing
-  Neon database, including authentication and configuration instructions for
-  seamless integration.
+  Hasura Cloud connects to Lakebase Postgres either by OAuth (creating a new Neon
+  project automatically) or by pasting an existing connection string into the
+  Hasura Console. Connection limits depend on compute size and pooling settings,
+  so tuning both Neon and Hasura values is required when hitting limits. Hasura
+  event triggers, cron triggers, and source health checks can prevent Neon's
+  scale-to-zero suspension.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2026-02-15T20:51:54.163Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
@@ -30,11 +33,11 @@ Use the following instructions to connect to a new Neon database. This connectio
 7. You will be redirected to an Oauth page to authorize Hasura to access your Neon account. Click **Authorize** to allow Hasura to create a new Neon project and database.
    ![Hasura Authorize Neon](/docs/guides/hasura/authorize-hasura.png)
 
-After authenticating, a new Neon Postgres database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
+After authenticating, a new Lakebase Postgres database is created and connected to your Hasura project, and the Neon project connection string is associated with the `PG_DATABASE_URL` environment variable.
 
 ![Environment Variables](/docs/guides/hasura/environment-variables.png)
 
-To start exploring Hasura's GraphQL API with data stored in Neon, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
+To start exploring Hasura's GraphQL API with data stored in the database, see [Load a template in Hasura](#load-a-template-in-hasura-optional).
 
 ## Connecting to an existing Neon database
 

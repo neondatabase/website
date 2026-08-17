@@ -1,4 +1,8 @@
 {
+  "neon-team": {
+    "name": "Team Neon",
+    "position": "Neon"
+  },
   "rishi-raj-jain": {
     "name": "Rishi Raj Jain",
     "position": "Solutions Engineer",
@@ -77,6 +81,22 @@
     "link": {
       "title": "GitHub",
       "url": "https://github.com/PaulieScanlon"
+    }
+  },
+  "nagesh-bansal": {
+    "name": "Nagesh Bansal",
+    "position": "Platform Engineer, SigNoz",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/Nageshbansal"
+    }
+  },
+  "anthony-giuliano": {
+    "name": "Anthony Giuliano",
+    "position": "Developer Advocate",
+    "link": {
+      "title": "GitHub",
+      "url": "https://github.com/a-giuliano"
     }
   }
 }

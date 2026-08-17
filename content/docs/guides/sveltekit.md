@@ -1,20 +1,24 @@
 ---
 title: Connect a Sveltekit application to Neon
-subtitle: Set up a Neon project in seconds and connect from a Sveltekit application
+subtitle: Set up a project on Neon in seconds and connect from a Sveltekit application
 summary: >-
-  Step-by-step guide for connecting a SvelteKit application to a Neon project,
-  including project creation, dependency installation, and configuration of
-  database credentials.
+  SvelteKit integration with Lakebase Postgres connects a SvelteKit app to a
+  serverless Postgres database through a secure server-side route using
+  node-postgres, postgres.js, or the Neon serverless driver. Use this guide
+  when setting up a new SvelteKit project that needs a Postgres backend, covering
+  project creation, db.server.ts configuration, and a +page.server.ts load
+  function. Requires a DATABASE_URL connection string with sslmode=require and
+  channel_binding=require.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.056Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/sveltekit-prompt.md"
-description="Pre-built prompt for connecting SvelteKit applications to Neon."/>
+description="Pre-built prompt for connecting SvelteKit applications to Lakebase Postgres."/>
 
 Sveltekit is a modern JavaScript framework that compiles your code to tiny, framework-less vanilla JS. This guide explains how to connect Sveltekit with Neon using a secure server-side request.
 
-To create a Neon project and access it from a Sveltekit application:
+To create a project on Neon and access it from a Sveltekit application:
 
 <Steps>
 
@@ -180,5 +184,12 @@ PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.
 ```
 
 </Steps>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

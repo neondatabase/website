@@ -19,7 +19,7 @@ You will need:
 
 ## Why Neon?
 
-Neon stands out as a cloud-native Postgres solution with an innovative architecture that separates compute and storage, offering a truly serverless database. This means Neon automatically adjusts its resources based on your application’s needs, making it ideal for projects that require flexible scalability without directly managing the infrastructure. In other words, Neon allows you to accelerate project delivery by focusing solely on development, while having an infrastructure that scales on demand.
+Neon is the AI-native backend platform for apps and agents, spanning a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Its Postgres database uses an innovative architecture that separates compute and storage, offering a truly serverless experience. This means Neon automatically adjusts its resources based on your application’s needs, making it ideal for projects that require flexible scalability without directly managing the infrastructure. In other words, Neon allows you to accelerate project delivery by focusing solely on development, while having an infrastructure that scales on demand.
 
 > Neon Database is cloud-native Serverless Postgres, meaning it has completely separated storage from compute. This means Neon automatically adjusts its resources based on your application’s needs, making it ideal for projects that require flexible scaling without directly managing the infrastructure. In other words, Neon Database is a fully managed database service that allows you to focus on building your application without worrying about the underlying infrastructure.
 

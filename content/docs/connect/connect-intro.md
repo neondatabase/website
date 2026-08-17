@@ -2,11 +2,13 @@
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
 summary: >-
-  Covers the various methods to connect to a Neon database, including standard
-  Postgres connections, specialized drivers, and tools for different
-  environments and applications.
+  Index of every supported Neon connection method: standard PostgreSQL
+  connection strings, the Neon serverless driver (HTTP and WebSockets for edge
+  and serverless environments), the Data API (driver-free HTTP queries), psql,
+  and GUI tools such as pgAdmin and DBeaver. Also links to connection pooling,
+  SSL/TLS security, and latency and timeout troubleshooting.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.788Z'
+updatedOn: '2026-07-24T15:46:49.998Z'
 ---
 
 This section covers all the ways to connect to your Neon database, from standard Postgres connections to specialized drivers and tools. For framework-specific guides and quick starts, see [Get Started](/docs/get-started/connect-neon).
@@ -29,13 +31,13 @@ This section covers all the ways to connect to your Neon database, from standard
 
 <a href="/docs/data-api/overview" description="Query Postgres via HTTP without database drivers or connection pooling" icon="transactions">Data API</a>
 
-<a href="/docs/connect/query-with-psql-editor" description="Connect with psql, the native command-line client for Postgres" icon="cli">Connect with psql</a>
+<a href="/docs/connect/query-with-psql-editor" description="Connect with psql, the native command-line client for Postgres" icon="postgres">Connect with psql</a>
 
 <a href="/docs/connect/connect-postgres-gui" description="Connect from GUI tools like pgAdmin, DBeaver, and TablePlus" icon="gui">GUI applications</a>
 
 <a href="/docs/local/vscode-extension" description="Connect to Neon branches and manage your database directly in VS Code, Cursor, and other editors" icon="code">VS Code Extension</a>
 
-<a href="/docs/connect/passwordless-connect" description="Connect to psql without a password using Neon's passwordless auth" icon="unlock">Passwordless auth</a>
+<a href="/docs/cli/psql" description="Open a psql session from the Neon CLI without a connection string or a psql install" icon="cli">Neon CLI (neon psql)</a>
 
 </DetailIconCards>
 

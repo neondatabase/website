@@ -1,20 +1,24 @@
 ---
-title: Migrate from Firebase Firestore to Neon Postgres
-subtitle: Learn how to migrate your data from Firebase Firestore to Neon Postgres using
+title: Migrate from Firebase Firestore to Lakebase Postgres
+subtitle: Learn how to migrate your data from Firebase Firestore to Lakebase Postgres using
   a custom Python script
 summary: >-
-  Covers the migration of data from Firebase Firestore to Neon Postgres using a
-  custom Python script, detailing the export and import processes necessary to
-  convert document-based data into a relational format.
+  Firebase Firestore to Lakebase Postgres migration uses two custom Python scripts
+  to export Firestore collections to line-delimited JSON files and import them
+  into Postgres tables with id, parent_id, and JSONB data columns. Use this
+  guide when replacing a NoSQL document store with a relational Postgres
+  database that preserves Firestore subcollection hierarchies as parent-child
+  rows. Alternatives for large datasets include the Google Cloud managed
+  Firestore export service or open-source tools such as firestore-import-export.
 redirectFrom:
   - /docs/import/import-from-firebase
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.069Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This guide describes how to migrate data from Firebase Firestore to Neon Postgres.
+This guide describes how to migrate data from Firebase Firestore to Lakebase Postgres.
 
-We'll use a custom Python script to export data from Firestore to a local file, and then import the data into Neon Postgres. This approach allows us to handle Firestore's document-based structure and convert it into the relational database format suitable for Postgres.
+We'll use a custom Python script to export data from Firestore to a local file, and then import the data into Lakebase Postgres. This approach allows us to handle Firestore's document-based structure and convert it into the relational database format suitable for Postgres.
 
 ## Prerequisites
 
@@ -24,7 +28,7 @@ We'll use a custom Python script to export data from Firestore to a local file, 
 
   For detailed information on creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 
-- Python 3.10 or later installed on your local machine. Additionally, add the following packages to your Python virtual environment: `firebase_admin`, which is Google's python SDK for Firebase and `psycopg`, which is used to connect to Neon Postgres database.
+- Python 3.10 or later installed on your local machine. Additionally, add the following packages to your Python virtual environment: `firebase_admin`, which is Google's python SDK for Firebase and `psycopg`, which is used to connect to the Lakebase Postgres database.
 
   You can install them using `pip`:
 
@@ -182,7 +186,7 @@ This structure allows for easy reconstruction of the hierarchical relationships 
 
 ## Prepare your Neon destination database
 
-This section describes how to prepare your destination Neon Postgres database to receive the imported data.
+This section describes how to prepare your destination Lakebase Postgres database to receive the imported data.
 
 ### Create the Neon database
 

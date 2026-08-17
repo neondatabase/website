@@ -10,6 +10,12 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 const defaultConfig = {
   poweredByHeader: false,
   transpilePackages: ['geist', 'react-icons'],
+  outputFileTracingExcludes: {
+    '*': ['./public/**'],
+  },
+  outputFileTracingIncludes: {
+    '*': ['./public/**/*.svg', './public/**/*.md'],
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85, 90, 95, 99, 100],
@@ -30,6 +36,18 @@ const defaultConfig = {
     ],
   },
   async headers() {
+    // Serve top-level index URLs (e.g. /faqs.md, /programs.md, /docs.md) as inline markdown.
+    // Only non-nested routes have an index file; /docs.md is aliased to /docs/llms.txt via rewrite.
+    const mdIndexHeaders = Object.keys(CONTENT_ROUTES)
+      .filter((route) => !route.includes('/'))
+      .map((route) => ({
+        source: `/${route}.md`,
+        headers: [
+          { key: 'Content-Disposition', value: 'inline' },
+          { key: 'Content-Type', value: 'text/markdown; charset=utf-8' },
+        ],
+      }));
+
     return [
       {
         source: '/',
@@ -45,6 +63,7 @@ const defaultConfig = {
               '</docs/llms.txt>; rel="llms-txt"',
               '</.well-known/agent-skills/index.json>; rel="profile"',
               '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+              '</.well-known/ai-catalog.json>; rel="ai-catalog"',
             ].join(', '),
           },
         ],
@@ -63,6 +82,7 @@ const defaultConfig = {
               '</docs/llms.txt>; rel="llms-txt"',
               '</.well-known/agent-skills/index.json>; rel="profile"',
               '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+              '</.well-known/ai-catalog.json>; rel="ai-catalog"',
             ].join(', '),
           },
         ],
@@ -136,7 +156,9 @@ const defaultConfig = {
         ],
       },
       {
-        source: '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*.md',
+        source: `/(${Object.keys(CONTENT_ROUTES)
+          .filter((r) => !r.includes('/'))
+          .join('|')})/:path*.md`,
         headers: [
           {
             key: 'Content-Disposition',
@@ -148,6 +170,7 @@ const defaultConfig = {
           },
         ],
       },
+      ...mdIndexHeaders,
     ];
   },
   async redirects() {
@@ -184,6 +207,26 @@ const defaultConfig = {
 
     return [
       {
+        source: '/guides/neondatabase-toolkit',
+        destination: '/docs/reference/sdk',
+        permanent: true,
+      },
+      {
+        source: '/backend',
+        destination: '/docs/introduction#products',
+        permanent: false,
+      },
+      {
+        source: '/cookie-policy',
+        destination: 'https://www.databricks.com/legal/cookienotice',
+        permanent: true,
+      },
+      {
+        source: '/subprocessors',
+        destination: 'https://www.databricks.com/legal/databricks-subprocessors',
+        permanent: true,
+      },
+      {
         source: '/docs/use-cases/:path*',
         destination: '/use-cases',
         permanent: true,
@@ -201,6 +244,62 @@ const defaultConfig = {
       {
         source: '/burningmonk',
         destination: '/?ref=tbm-p',
+        permanent: true,
+      },
+      // Branching page redirects — old slugs deleted in PR #4374 (Jan 2026)
+      {
+        source: '/branching/identifying-use-case',
+        destination: '/branching/introduction',
+        permanent: true,
+      },
+      {
+        source: '/branching/production-on-neon',
+        destination: '/branching/production-staging-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-developer',
+        destination: '/branching/branching-workflows-for-development',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-preview',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branch-per-test-run',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/branches',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/hierarchies',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/projects',
+        destination: '/branching/foundational-concepts',
+        permanent: true,
+      },
+      {
+        source: '/branching/ephemeral-environments',
+        destination: '/branching/ci-preview-workflows',
+        permanent: true,
+      },
+      {
+        source: '/branching/neon-for-dev-test',
+        destination: '/branching/branching-workflows-for-development',
+        permanent: true,
+      },
+      {
+        source: '/branching/resources-and-next-steps',
+        destination: '/branching/introduction',
         permanent: true,
       },
       {
@@ -2053,11 +2152,10 @@ const defaultConfig = {
         destination: '/docs/connect/connection-errors',
         permanent: true,
       },
-      {
-        source: '/docs',
-        destination: '/docs/introduction',
-        permanent: true,
-      },
+      // NOTE: bare `/docs` is intentionally NOT redirected here. The middleware
+      // (src/proxy.js) owns it: agents / Accept: markdown get /docs/llms.txt, and
+      // browsers are redirected to /docs/introduction. A next.config redirect would
+      // run before middleware and intercept the markdown case.
       {
         source: '/docs/postgres',
         destination: '/docs/postgres/index',
@@ -2066,6 +2164,11 @@ const defaultConfig = {
       {
         source: '/early-access',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/docs/introduction/early-access',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
@@ -2105,12 +2208,12 @@ const defaultConfig = {
       },
       {
         source: '/api-reference',
-        destination: 'https://api-docs.neon.tech',
+        destination: '/docs/reference/api',
         permanent: true,
       },
       {
         source: '/api-reference/v2',
-        destination: 'https://api-docs.neon.tech/v2',
+        destination: '/docs/reference/api',
         permanent: true,
       },
       {
@@ -2176,7 +2279,7 @@ const defaultConfig = {
       },
       {
         source: '/early-access-program',
-        destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
+        destination: '/docs/introduction/roadmap',
         permanent: true,
       },
       {
@@ -2458,6 +2561,23 @@ const defaultConfig = {
         destination: '/platform-terms',
         permanent: true,
       },
+      // /demos index and /templates gallery removed (outdated marketing pages).
+      // /demos/* sub-routes (regional-latency, ping-thing) remain as external rewrites below.
+      {
+        source: '/demos',
+        destination: '/use-cases',
+        permanent: true,
+      },
+      {
+        source: '/templates',
+        destination: 'https://github.com/neondatabase/examples',
+        permanent: true,
+      },
+      {
+        source: '/templates/:slug*',
+        destination: 'https://github.com/neondatabase/examples',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -2472,8 +2592,10 @@ const defaultConfig = {
 
     // /:path*.md above requires at least one segment after the route name,
     // so /branching.md (no separator) doesn't match. Add explicit index rewrites.
+    // /docs.md is excluded here: it's aliased to the canonical /docs/llms.txt index
+    // below rather than a generated page-listing (see process-md-for-llms.js).
     const indexRewrites = Object.keys(CONTENT_ROUTES)
-      .filter((route) => !route.includes('/'))
+      .filter((route) => !route.includes('/') && route !== 'docs')
       .map((route) => ({
         source: `/${route}.md`,
         destination: `/md/${route}.md`,
@@ -2484,12 +2606,39 @@ const defaultConfig = {
       // docs/[...slug] catch-all intercepts them
       beforeFiles: [
         { source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' },
+        { source: '/docs/:path*/llms-full.txt', destination: '/docs/:path*/llms-full.txt' },
         { source: '/docs/llms-full.txt', destination: '/docs/llms-full.txt' },
-        // Skill discovery under /docs/ — must be beforeFiles to avoid the docs/[...slug] catch-all
+        // Skill discovery under /docs/ — wildcard :name handles all skills without per-skill edits.
+        // Must be beforeFiles to avoid the docs/[...slug] catch-all intercepting them.
+        // /docs/skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
+        // Update the destination here if the primary skill changes.
         { source: '/docs/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         {
-          source: '/docs/.well-known/agent-skills/neon-postgres/SKILL.md',
-          destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+          source: '/docs/.well-known/agent-skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
+        {
+          source: '/docs/.well-known/skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
+        // /docs.md serves the canonical, curated docs index (llms.txt) instead of a
+        // generated page-listing. beforeFiles so the [slug] catch-all doesn't intercept it.
+        { source: '/docs.md', destination: '/docs/llms.txt' },
+        { source: '/blog.md', destination: '/blog/llms.txt' },
+        // Index .md files (e.g. /faqs.md, /programs.md) must be beforeFiles so the
+        // top-level [slug] catch-all doesn't intercept them before the rewrite fires.
+        ...indexRewrites,
+        // Canonical OpenAPI path probed by agent-discovery tooling (e.g. integrations.sh).
+        // Aliases the published Neon API spec (the same document served at
+        // /api_spec/release/v2.json) so /openapi.json resolves as application/json.
+        // Must be beforeFiles for the same reason as the index .md rewrites above: as a
+        // single top-level segment, /openapi.json is otherwise intercepted by the [slug]
+        // catch-all (a fallback rewrite never fires → 404). Point straight at the
+        // CloudFront origin the /api_spec/release/v2.json rewrite targets, since Next.js
+        // does not chain rewrites (a relative /api_spec/... destination wouldn't resolve).
+        {
+          source: '/openapi.json',
+          destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
         },
       ],
       // afterFiles: runs after checking pages/public files but before dynamic routes
@@ -2498,15 +2647,19 @@ const defaultConfig = {
         // Serve /llms.txt and /llms-full.txt from /docs/ (canonical location is public/docs/)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
         { source: '/llms-full.txt', destination: '/docs/llms-full.txt' },
-        // Agent skill discovery (agentskills.io 0.2.0) — site root
+        // Agent skill discovery — wildcard :name handles all skills (agentskills.io 0.2.0 and v0.1.0).
+        // /skill.md is a single-entrypoint alias for the primary skill (see config/skills.json).
+        // Update the destination here if the primary skill changes.
         {
-          source: '/.well-known/agent-skills/neon-postgres/SKILL.md',
-          destination: '/docs/ai/skills/neon-postgres/SKILL.md',
+          source: '/.well-known/agent-skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
         },
-        // /skill.md at site root for checkers that probe this path
+        {
+          source: '/.well-known/skills/:name/SKILL.md',
+          destination: '/docs/ai/skills/:name/SKILL.md',
+        },
         { source: '/skill.md', destination: '/docs/ai/skills/neon-postgres/SKILL.md' },
         { source: '/docs/changelog/:path*.md', destination: '/md/changelog/:path*.md' },
-        ...indexRewrites,
         ...contentRewrites,
       ],
       // fallback: existing rewrites for external services

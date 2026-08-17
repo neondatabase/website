@@ -22,11 +22,21 @@ const copySvgToClipboard = async () => {
     const isDarkMode = document.documentElement.classList.contains('dark');
     const logoToUse = isDarkMode ? logoDarkSvg : logoLightSvg;
 
-    const response = await fetch(logoToUse);
+    const response = await fetch(logoToUse.src);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch logo SVG: ${response.status} ${response.statusText}`);
+    }
+
     const svgContent = await response.text();
-    copyToClipboard(svgContent);
+    const copied = copyToClipboard(svgContent);
+    if (!copied) {
+      throw new Error('Failed to copy SVG content to clipboard');
+    }
+
+    return true;
   } catch (error) {
     console.error('Failed to copy SVG content: ', error);
+    return false;
   }
 };
 
@@ -53,9 +63,11 @@ const Logo = ({ className = null, width, height, isHeader = false }) => {
     setClicked(true);
   };
 
-  const handleCopySvg = () => {
-    copySvgToClipboard();
-    setOpen(true);
+  const handleCopySvg = async () => {
+    const copied = await copySvgToClipboard();
+    if (copied) {
+      setOpen(true);
+    }
   };
 
   return (

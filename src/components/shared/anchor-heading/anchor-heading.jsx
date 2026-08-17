@@ -6,6 +6,7 @@ import { cn } from 'utils/cn';
 import HashIcon from './images/hash.inline.svg';
 
 const CUSTOM_ID_PATTERN = /\s*(?:\(#([^)]+)\)|\{#([^}]+)\})$/;
+const TOC_ONLY_PATTERN = /\s*\[toc-only\]\s*$/i;
 
 const extractText = (children) => {
   if (typeof children === 'string') {
@@ -37,11 +38,17 @@ const extractCustomId = (text) => {
 };
 
 const stripCustomId = (text) => text.replace(CUSTOM_ID_PATTERN, '').trim();
+const hasTocOnlyMarker = (text) => TOC_ONLY_PATTERN.test(text);
 
 const AnchorHeading = (Tag) => {
   // eslint-disable-next-line react/prop-types
   const Component = ({ children, className = null }) => {
     const text = extractText(children);
+
+    if (hasTocOnlyMarker(text)) {
+      return null;
+    }
+
     const customId = extractCustomId(text);
     const cleanText = stripCustomId(text);
 

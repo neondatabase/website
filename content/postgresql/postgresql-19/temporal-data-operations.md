@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 Temporal Data Operations'
 page_title: 'PostgreSQL 19 UPDATE/DELETE FOR PORTION OF - Temporal Data Operations'
 page_description: 'Learn how to use PostgreSQL 19 UPDATE and DELETE FOR PORTION OF to modify temporal data, automatically splitting rows to preserve history outside the targeted time range.'
 ogImage: ''
-updatedOn: '2026-05-01T20:19:36.000Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 ON CONFLICT DO SELECT'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 pg_plan_advice'
   slug: 'postgresql-19/pg-plan-advice'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try the new temporal operations for yourself ahead of the final release expected later in 2026. Beta 1 adds a `FOR PORTION OF` clause to `UPDATE` and `DELETE`, so you can modify temporal data within a specific range while preserving the untouched portions.
+</Admonition>
 
 **Summary**: PostgreSQL 19 adds `UPDATE ... FOR PORTION OF` and `DELETE ... FOR PORTION OF` to modify temporal data within a specific time range, automatically splitting rows to preserve the untouched portions. This completes the SQL:2011 temporal feature set that began with `WITHOUT OVERLAPS` in PostgreSQL 18.
 

@@ -3,11 +3,16 @@ title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
 summary: >-
-  How to configure OpenTelemetry exports from Neon to send metrics and Postgres
-  logs to any OTEL-compatible observability platform, including setup with
-  Grafana OSS, Tempo, and integration with New Relic.
+  Neon's OpenTelemetry integration exports Postgres metrics and logs to any
+  OTLP-compatible platform, including Grafana OSS, Grafana Cloud, New Relic,
+  and Honeycomb, using HTTP or gRPC transport. Use this page when you need to
+  forward connection counts, CPU, memory, replication lag, or Postgres log
+  events to an external observability backend. Configuration requires only a
+  base OTLP endpoint URL and auth credentials. Neon automatically appends
+  signal-specific paths (/v1/metrics, /v1/logs) and collects data from all
+  computes in a project.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.183Z'
+updatedOn: '2026-07-20T22:03:00.289Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -203,11 +208,19 @@ You can enable either or both options based on your monitoring needs.
 
 ## Configure resource attributes
 
-Neon automatically organizes your data into separate service entities: your configured service name will receive Postgres logs, while metrics are split into `compute-host-metrics` (infrastructure metrics) and `sql-metrics` (database metrics).
+In the **Resource** section, set the `service.name` attribute to the name your Postgres logs should appear under in your observability platform, such as `neon-postgres-production`.
 
-1. In the **Resource** section, configure the `service.name` attribute to identify your Neon project in your observability platform. For example, you might use "neon-postgres-test" or your actual project name.
+Logs are event messages; metrics are numeric values sampled over time. This name labels your logs only. Metrics are not tagged with it; they arrive under fixed, Neon-assigned service names. Your data appears as follows:
 
-2. Optionally, you can add additional resource attributes by providing a value in the second field to further categorize or filter your data in your observability platform.
+| Data             | Service name                   | Includes                                                            |
+| ---------------- | ------------------------------ | ------------------------------------------------------------------- |
+| Postgres logs    | Your configured `service.name` | Errors, warnings, connection events, and other Postgres activity    |
+| Database metrics | `sql-metrics`                  | Connections, database size, replication delay, and other statistics |
+| Compute metrics  | `compute-host-metrics`         | CPU, memory, and load                                               |
+
+The metric service names are also exposed as the `job` label on each metric.
+
+`service.name` is the only resource attribute Neon exports. Custom resource attributes and custom request headers are not currently supported.
 
 ## Complete the setup
 
@@ -253,8 +266,8 @@ _Postgres logs flowing into New Relic_
 **Find your data under APM & Services**
 ![Multiple Neon services in New Relic APM & Services](/docs/guides/new_relic_services.png)
 
-- **Logs**: Check your configured service name in APM & Services (for example, `neon-postgres-test`)
-- **Metrics**: Look for the auto-created `compute-host-metrics` and `sql-metrics` services
+- **Logs**: Check your configured service name in APM & Services (for example, `neon-postgres-production`)
+- **Metrics**: Look for the auto-created `compute-host-metrics` and `sql-metrics` services. Metrics are not tagged with your configured `service.name`; see [Configure resource attributes](#configure-resource-attributes).
 
 </Steps>
 

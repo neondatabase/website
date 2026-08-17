@@ -1,19 +1,22 @@
 ---
-title: Chat with Neon Postgres with AskYourDatabase
-subtitle: Chat with your Neon Postgres database without writing SQL
+title: Chat with Lakebase Postgres with AskYourDatabase
+subtitle: Chat with your Lakebase Postgres database without writing SQL
 summary: >-
-  How to connect AskYourDatabase to Neon Postgres for natural language
-  interactions, allowing users to manage data, visualize information, and
-  perform queries without writing SQL.
+  AskYourDatabase is a natural language SQL client that connects to Lakebase
+  Postgres so users can query, visualize, and manage data by typing plain
+  English instead of writing SQL. Use this guide to set up the connection
+  via a Neon connection string and start chatting with your database in the
+  AskYourDatabase desktop app. The guide also covers embedding a
+  customer-facing chatbot powered by Lakebase Postgres directly into a website.
 redirectFrom:
   - /docs/connect/connect-ai
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.909Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 AskYourDatabase is the ChatGPT for SQL databases, enabling you to interact with your SQL databases using natural language. You can use it for data management, business intelligence, schema design & migration, data visualization, and more. To learn more, see [AskYourDatabase](https://www.askyourdatabase.com/).
 
-This guide shows how to connect from AskYourDatabase to Neon Postgres.
+This guide shows how to connect from AskYourDatabase to Lakebase Postgres.
 
 ## Prerequisites
 
@@ -51,4 +54,4 @@ If you want to know what the four most popular databases are and visualize the d
 
 ## What's more
 
-AskYourDatabase also supports a customer-facing chatbot that can connect to a Neon Postgres database. You can embed the chatbot in your existing website, enabling your customers to explore analytics data by asking questions in natural language. To learn more, see [Create and Integrate Chatbot](https://www.askyourdatabase.com/docs/chatbot), in the AskYourDatabase documentation.
+AskYourDatabase also supports a customer-facing chatbot that can connect to a Lakebase Postgres database. You can embed the chatbot in your existing website, enabling your customers to explore analytics data by asking questions in natural language. To learn more, see [Create and Integrate Chatbot](https://www.askyourdatabase.com/docs/chatbot), in the AskYourDatabase documentation.

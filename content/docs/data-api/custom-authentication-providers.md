@@ -2,11 +2,15 @@
 title: Custom authentication providers
 subtitle: Configure custom authentication providers with the Data API
 summary: >-
-  Covers the configuration of custom authentication providers for the Data API,
-  enabling integration with existing systems that issue JSON Web Tokens (JWTs)
-  like Auth0, Clerk, and AWS Cognito.
+  The Neon Data API works with any JWT-issuing identity system. Supply a JWKS
+  URL to let the Data API validate tokens and enforce Row-Level Security,
+  without requiring Managed Better Auth. Provider-specific JWKS URL formats and JWT
+  Audience (aud claim) requirements are given for Auth0, Clerk, AWS Cognito,
+  Azure AD, Firebase, and Keycloak. Use this page when your application already
+  uses an existing auth provider and you need provider-specific configuration
+  details rather than the default Managed Better Auth setup.
 enableTableOfContents: true
-updatedOn: '2026-03-05T04:12:51.006Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---
@@ -22,7 +26,7 @@ redirectFrom:
   </DocsList>
 </InfoBlock>
 
-The Data API works with any authentication provider that issues [JSON Web Tokens (JWTs)](https://jwt.io/introduction). While [Neon Auth](/docs/auth/overview) provides the simplest setup, you can use existing authentication infrastructure with providers like Auth0, Clerk, AWS Cognito, and others.
+The Data API works with any authentication provider that issues [JSON Web Tokens (JWTs)](https://jwt.io/introduction). While [Managed Better Auth](/docs/auth/overview) provides the simplest setup, you can use existing authentication infrastructure with providers like Auth0, Clerk, AWS Cognito, and others.
 
 ## How it works
 
@@ -68,7 +72,7 @@ The key steps:
 
 ## Add your authentication provider
 
-You can configure your authentication provider when you first enable the Data API, or add it later from the **Configuration** tab. Select **Other Provider** from the dropdown and enter:
+You can configure your authentication provider when you first enable the Data API, or add it later from the **Settings** tab. Select **Other Provider** from the dropdown and enter:
 
 - Your provider's **JWKS URL** (see provider-specific instructions below).
 - Your **JWT Audience** value, if required by your provider (see [What is JWT Audience?](#what-is-jwt-audience) below).
@@ -374,7 +378,7 @@ https://api.workos.com/sso/jwks/client_12345
 After configuring your authentication provider, include the JWT in your Data API requests:
 
 ```http
-GET https://your-project.data.neon.tech/v1/posts
+GET https://ep-example.apirest.us-east-1.aws.neon.tech/neondb/rest/v1/posts
 Authorization: Bearer {your_jwt_token}
 ```
 

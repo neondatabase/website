@@ -3,19 +3,24 @@ title: Create an automatic audit trail with Bemi
 subtitle: Learn how to create an automatic audit trail for your Postgres database with
   Bemi
 summary: >-
-  How to create an automatic audit trail for your Postgres database using Bemi,
-  including steps to enable logical replication in your Neon project for
-  real-time change tracking.
+  Bemi is an open-source audit trail tool that uses Postgres logical replication
+  (CDC via WAL) to automatically record every create, update, and delete on your
+  Lakebase Postgres database, capturing both before and after row states without schema
+  changes. Use this guide when you need tamper-evident change history, time
+  travel queries, or ORM-level context tracking with Prisma, TypeORM,
+  SQLAlchemy, or Rails. Enabling logical replication permanently sets
+  wal_level=logical on all databases in the project and keeps compute
+  active while Bemi is connected, which prevents scale-to-zero.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-03T14:18:20.097Z'
+updatedOn: '2026-08-04T04:41:00.271Z'
 ---
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
 Designed with simplicity and non-invasiveness in mind, Bemi doesn't require alterations to your existing database structure. It operates in the background, empowering you with data change tracking features.
 
-In this guide, we'll show you how to connect your Neon database to Bemi to create an automatic audit trail.
+In this guide, we'll show you how to connect your Lakebase Postgres database to Bemi to create an automatic audit trail.
 
 ## Prerequisites
 
@@ -29,7 +34,7 @@ Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to
 
 ## Enable logical replication in Neon
 
-Bemi tracks changes made in a Postgres database through Change Data Capture (CDC), which is a process of identifying and capturing changes made to your database tables in real-time. In Postgres, CDC is supported by the Postgres logical replication feature. In this step, we'll enable logical replication for your Neon Postgres project.
+Bemi tracks changes made in a Postgres database through Change Data Capture (CDC), which is a process of identifying and capturing changes made to your database tables in real-time. In Postgres, CDC is supported by the Postgres logical replication feature. In this step, we'll enable logical replication for your Lakebase Postgres project.
 
 <Admonition type="important">
 Enabling logical replication modifies the Postgres `wal_level` configuration parameter, changing it from replica to logical for all databases in your Neon project. Once the `wal_level` setting is changed to logical, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning active connections will be dropped and have to reconnect.
@@ -51,13 +56,13 @@ wal_level
 logical
 ```
 
-## Connect your Neon database to Bemi
+## Connect your database to Bemi
 
-The following instructions assume you are connecting with a Postgres role created via the Neon Console, API, or CLI. These roles are automatically granted membership in a `neon_superuser` group, which has the Postgres `REPLICATION` privilege. The role you use to connect to Bemi requires this privilege. If you prefer to create a dedicated read-only role for use with Bemi, see [Use a read-only Postgres role for Bemi](#use-a-read-only-postgres-role-for-bemi).
+The following instructions assume you are connecting with a Postgres role created via the console, API, or CLI. These roles are automatically granted membership in a `neon_superuser` group, which has the Postgres `REPLICATION` privilege. The role you use to connect to Bemi requires this privilege. If you prefer to create a dedicated read-only role for use with Bemi, see [Use a read-only Postgres role for Bemi](#use-a-read-only-postgres-role-for-bemi).
 
 To connect your database to Bemi:
 
-1. In Neon, retrieve your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It will look similar to this:
+1. Retrieve your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It will look similar to this:
 
    ```sql shouldWrap
    postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
@@ -118,7 +123,7 @@ CALL _bemi_set_replica_identity();
 ```
 
 <Admonition type="note">
-After creating a read-only role, you can find the connection details for this role by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use this role when connecting your Neon database to Bemi, as described [above](#connect-your-neon-database-to-bemi).
+After creating a read-only role, you can find the connection details for this role by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use this role when connecting your database to Bemi, as described [above](#connect-your-database-to-bemi).
 </Admonition>
 
 ## Allow inbound traffic

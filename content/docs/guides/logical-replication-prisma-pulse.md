@@ -1,19 +1,23 @@
 ---
 title: Stream database changes in real-time with Prisma Pulse
 subtitle: Learn how to create event-driven flows on your backend triggered by changes in
-  your Neon Postgres database
+  your database
 summary: >-
-  How to set up Prisma Pulse with your Neon Postgres database to stream
-  real-time changes and create event-driven workflows using logical replication
-  features.
+  Prisma Pulse subscribes to Lakebase Postgres change events via logical replication
+  and streams inserts, updates, and deletes to your backend in real time using
+  the `@prisma/extension-pulse` package. Use this guide when you need
+  event-driven triggers on database changes, such as firing Inngest workflows
+  or re-indexing search, without polling. Enabling logical replication sets
+  `wal_level=logical` project-wide and is irreversible; Prisma 7 requires the
+  `PrismaNeon` driver adapter.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-03T14:18:20.106Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.
 
-[Prisma Pulse](https://www.prisma.io/data-platform/pulse?utm_source=neon&utm_medium=pulse-guide) is a fully managed, production-ready service that connects to your Neon Postgres database, and allows you to stream changes from your database in real-time, integrated closely with [Prisma ORM](https://www.prisma.io/orm?utm_source=neon&utm_medium=pulse-guide).
+[Prisma Pulse](https://www.prisma.io/data-platform/pulse?utm_source=neon&utm_medium=pulse-guide) is a fully managed, production-ready service that connects to your Lakebase Postgres database, and allows you to stream changes from your database in real-time, integrated closely with [Prisma ORM](https://www.prisma.io/orm?utm_source=neon&utm_medium=pulse-guide).
 
 In this guide, you will learn how to set up Prisma Pulse with your Neon database and create your first event stream.
 
@@ -60,7 +64,7 @@ SHOW wal_level;
 1. If you haven't already done so, create a new account or sign in on the [Prisma Data Platform](https://pris.ly/pdp?utm_source=neon&utm_medium=pulse-guide).
 2. In the [Prisma Data Platform Console](https://console.prisma.io?utm_source=neon&utm_medium=pulse-guide) create a new project by clicking the **New project** button.
 3. In the **New project** configuration, select **Pulse** as your starting point.
-4. Copy your database connection string from Neon into the database connection input field on the Platform Console.
+4. Copy your database connection string from Neon into the database connection input field on the Platform Console. Use a direct connection to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers, so make sure the connection string does not include `-pooler` in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
 5. Choose a region that is closest to your Neon database.
 6. Click **Create project**.
 7. We recommend leaving **Event persistence** switched **on** (default). This means Prisma Pulse will automatically store events in the case your server goes down, allowing you to resume again with zero data loss.

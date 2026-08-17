@@ -3,12 +3,16 @@ title: 'PostgreSQL 19 New Features'
 page_title: "PostgreSQL 19 New Features: What's New and Why It Matters"
 page_description: 'Explore PostgreSQL 19 new features including SQL/PGQ property graph queries, ON CONFLICT DO SELECT, temporal data operations, pg_plan_advice, REPACK, parallel autovacuum, and more.'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-04T14:03:00.799Z'
 enableTableOfContents: true
 nextLink:
   title: 'PostgreSQL 19 SQL/PGQ Graph Queries'
   slug: 'postgresql-19/sql-pgq-graph-queries'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can test the features in this guide for yourself ahead of the final release expected later in 2026. Beta 1 includes SQL/PGQ property graph queries, `ON CONFLICT DO SELECT`, the new `REPACK` command, parallel autovacuum, and native JSON output for `COPY TO`.
+</Admonition>
 
 **Summary**: PostgreSQL 19 is a landmark release that brings SQL/PGQ property graph queries, atomic get-or-create with `ON CONFLICT DO SELECT`, temporal data operations, query plan hints, online table repacking, parallel autovacuum, native JSON export, and logical replication improvements. This overview covers the highlights with links to detailed guides.
 
@@ -61,7 +65,7 @@ The initial implementation covers fixed-depth pattern matching. Variable-length 
 
 ## DML and Query Improvements
 
-PostgreSQL 19 adds several long-requested DML primitives. `ON CONFLICT DO SELECT` finally provides atomic get-or-create semantics, `FOR PORTION OF` completes SQL:2011 temporal modifications, and convenience features like `GROUP BY ALL` and `IGNORE NULLS` reduce verbosity in common query patterns.
+PostgreSQL 19 adds several long-requested DML primitives. `ON CONFLICT DO SELECT` finally provides atomic get-or-create semantics, `FOR PORTION OF` completes SQL:2011 temporal modifications, and convenience features like `IGNORE NULLS` reduce verbosity in common query patterns.
 
 ### [ON CONFLICT DO SELECT](/postgresql/postgresql-19/on-conflict-do-select)
 
@@ -95,24 +99,6 @@ WHERE product_id = 1;
 ```
 
 This completes PostgreSQL's SQL:2011 temporal feature set, making it suitable for booking systems, employee records, insurance policies, and any data with validity periods.
-
-### [GROUP BY ALL](/postgresql/postgresql-19/query-improvements)
-
-A convenience feature that automatically groups by every non-aggregate expression in the SELECT list:
-
-```sql
--- Before: manually repeat column names
-SELECT department, role, count(*)
-FROM employees
-GROUP BY department, role;
-
--- PostgreSQL 19: GROUP BY ALL
-SELECT department, role, count(*)
-FROM employees
-GROUP BY ALL;
-```
-
-This eliminates a common source of errors when adding or removing columns from SELECT lists.
 
 ### [IGNORE NULLS / RESPECT NULLS for Window Functions](/postgresql/postgresql-19/query-improvements)
 

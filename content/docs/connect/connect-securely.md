@@ -2,14 +2,19 @@
 title: Connect to Neon securely
 subtitle: Learn how to connect to Neon securely when using a connection string
 summary: >-
-  Covers the setup of secure connections to Neon using SSL/TLS encryption,
-  detailing the `sslmode` parameter options for varying levels of connection
-  security in PostgreSQL.
+  Neon enforces SSL/TLS on every connection and rejects unencrypted clients.
+  Three `sslmode` levels (`require`, `verify-ca`, `verify-full`) are supported,
+  along with `channel_binding=require` for SCRAM-SHA-256-PLUS mutual
+  authentication against man-in-the-middle attacks. Use this page to configure
+  a secure Postgres connection string for psql, psycopg2, JDBC, or any driver
+  that needs an explicit CA root certificate path. OS-specific root certificate
+  locations for Debian/Ubuntu, CentOS, macOS, Windows, and Android are
+  included. Neon uses the ISRG Root X1 certificate from Let's Encrypt.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/security/secure-connections
-updatedOn: '2026-02-06T22:07:32.793Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.

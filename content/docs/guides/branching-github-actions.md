@@ -2,11 +2,15 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 summary: >-
-  Covers the setup and usage of Neon GitHub Actions for automating the creation,
-  deletion, and management of database branches within CI/CD workflows,
-  including authentication and configuration steps.
+  Neon's GitHub Actions automate database branching inside CI/CD pipelines,
+  enabling ephemeral Postgres branches for pull request (PR) preview
+  deployments and isolated test environments. The actions cover branch
+  creation, deletion, reset, and schema diff. Configure NEON_API_KEY and
+  NEON_PROJECT_ID via the Neon GitHub integration or manual repository secrets
+  before wiring them into workflow YAML files. The schema diff action posts a
+  branch comparison as a pull request comment.
 enableTableOfContents: true
-updatedOn: '2026-04-20T17:20:38.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon provides a set of GitHub Actions to automate the creation, deletion, and management of database branches in your Neon projects.

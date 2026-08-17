@@ -2,18 +2,22 @@
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
 summary: >-
-  How to upgrade your Neon project to a new major Postgres version, including
-  steps for creating a new project with the desired version and considerations
-  for compatibility and performance testing.
+  Upgrading to a new major Postgres version in Neon requires creating a new
+  project at the target version and migrating data. Each Neon project is
+  locked to the major version selected at creation. Use the Import Data
+  Assistant for smaller databases, pg_dump/pg_restore for larger ones, or
+  logical replication for near-zero downtime on active databases. Note that
+  pg_upgrade is not supported, minor version upgrades are automatic, and
+  pg_dump must use an unpooled connection string.
 enableTableOfContents: true
-updatedOn: '2026-04-01T20:14:28.000Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
 
 Postgres version numbers consist of a **major** and a **minor** version number. For example, in the version number 16.1, 16 is the major version number and the 1 is the minor version number.
 
-Neon manages **minor** Postgres version upgrades for you, as per the [Neon Postgres Version Support Policy](/docs/postgresql/postgres-version-policy). Typically, no user action is required for **minor** version upgrades. Neon deploys minor versions soon after they become available. However, upgrading to a new major Postgres version is a manual task that must be performed by you.
+Neon manages **minor** Postgres version upgrades for you, as per the [Lakebase Postgres Version Support Policy](/docs/postgresql/postgres-version-policy). Typically, no user action is required for **minor** version upgrades. Neon deploys minor versions soon after they become available. However, upgrading to a new major Postgres version is a manual task that must be performed by you.
 
 Each Neon project is tied to a specific Postgres major version, which you selected when creating your Neon project.
 
@@ -72,7 +76,7 @@ Alternatively, you can apply these configurations after migrating your data.
     <Admonition type="note" title="Notes">
     - Neon does not support the `pg_dumpall` utility. If upgrading via dump and restore, dumps must be performed one database at a time using `pg_dump`.
     - Neon does not yet support upgrading using `pg_upgrade`. Support for this utility is being considered for a future release.
-    - If you choose a dump and restore method, it is recommended that you use `pg_dump` and `pg_store` programs from the newer version of Postgres, to take advantage of any enhancements introduced in the newer version. Current releases of the these programs can read data from all previous Postgres versions supported by Neon.
+    - If you choose a dump and restore method, it is recommended that you use `pg_dump` and `pg_restore` programs from the newer version of Postgres, to take advantage of any enhancements introduced in the newer version. Current releases of these programs can read data from all previous Postgres versions supported by Neon.
     </Admonition>
 
 ### 3. Switch over your applications

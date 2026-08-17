@@ -2,11 +2,13 @@
 title: AI use in Neon
 subtitle: How Neon integrates AI into its platform
 summary: >-
-  Covers the integration of AI in Neon, detailing its use in the SQL Editor for
-  query assistance and in chat support for user guidance, while ensuring data
-  privacy and security.
+  Neon integrates AI in two places. The SQL Editor uses Amazon Bedrock to
+  write, optimize, and name SQL queries by sharing only your database schema
+  (no row data). AI chat assistants draw on public sources such as Neon docs
+  and GitHub repos without ingesting PII. Review what data each integration
+  can access before enabling these features.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.149Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 Neon integrates AI to enhance user experience across different parts of the platform. Below is an overview of where and how AI is used in Neon.

@@ -1,11 +1,15 @@
 ---
 title: Enable Autoscaling in Neon
 summary: >-
-  How to enable autoscaling for compute resources in a Neon project, including
-  configuring minimum and maximum compute sizes to automatically adjust based on
-  workload demand.
+  Step-by-step guide to enabling autoscaling on a Neon compute by setting a
+  minimum and maximum CU so Neon scales compute up and down automatically with
+  no restarts. Use this page to configure or update autoscaling on an individual
+  compute, set project-level defaults that propagate to new branches and read
+  replicas, and interpret monitoring graphs to tune min/max thresholds. The
+  neon_utils extension exposes a num_cpus() function for observing live CPU
+  allocation.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.123Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 <InfoBlock>

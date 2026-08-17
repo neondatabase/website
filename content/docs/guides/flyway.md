@@ -2,11 +2,15 @@
 title: Get started with Flyway and Neon
 subtitle: Learn how to manage schema changes in Neon with Flyway
 summary: >-
-  Step-by-step guide for installing and configuring the Flyway command-line tool
-  to manage schema changes in a Neon database, including setting up the
-  connection and executing migrations.
+  Flyway database migration tool connects to a Lakebase Postgres database via a
+  JDBC connection string, letting developers apply versioned SQL scripts and
+  track schema history in a flyway_schema_history table. Use this page to
+  install the Flyway CLI, write a flyway.conf file with Neon credentials, and
+  run your first migrations against a Neon project. For applying the same
+  migration workflow across multiple Neon branches or environments, see the
+  companion guide on multiple database environments.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Flyway is a database migration tool that provides version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
@@ -66,6 +70,10 @@ Your Java connection string should look something like this:
 ```bash shouldWrap
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
 ```
+
+<Admonition type="important">
+Use a direct (non-pooled) connection string with Flyway. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure the hostname does not include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Configure flyway
 

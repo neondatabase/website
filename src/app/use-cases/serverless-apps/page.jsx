@@ -38,6 +38,7 @@ const ServerlessAppsPage = () => (
     <CTANew
       title="Sign up and<br> get $100 credits"
       description="Start saving with Neon."
+      label="Get started"
       buttonText="Sign up"
       buttonUrl={LINKS.signupCredits}
     />

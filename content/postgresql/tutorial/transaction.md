@@ -6,7 +6,7 @@ page_description: >-
   COMMIT, and ROLLBACK statements.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-transaction/'
 ogImage: /postgresqltutorial/PostgreSQL-Transaction-from-current-transaction.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL MERGE Statement
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Transactions with BEGIN, COMMIT, and ROLLBACK work the same across every Postgres deployment, so what you learn here applies anywhere you run PostgreSQL. If you're an enterprise that needs ACID guarantees backed by managed, secure, high-performance Postgres fully integrated with your Lakehouse and ready for AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) is the best place to run it. If you're a developer or startup who wants to ship fast and scale without babysitting infrastructure, [Neon](https://neon.com) gives you the most productive Postgres platform to build on.
+Transactions with BEGIN, COMMIT, and ROLLBACK work the same across every Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to handle PostgreSQL transactions using the `BEGIN`, `COMMIT`, and `ROLLBACK` statements.

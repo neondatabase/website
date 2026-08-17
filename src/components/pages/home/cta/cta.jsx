@@ -10,7 +10,7 @@ const CTA = () => (
     <div className="absolute inset-0 z-10 pt-14 pb-9 xl:pt-12 xl:pb-5 lg:pt-9 md:pt-[52px] md:pb-6">
       <Container className="flex h-full flex-col" size="1920">
         <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
-          The world&apos;s most advanced <br /> Postgres platform.
+          The world&apos;s most advanced <br /> backend platform.
         </h2>
 
         <div className="mt-auto flex items-end justify-between gap-x-14 lg:flex-col lg:items-start lg:gap-y-5 md:gap-y-6">
@@ -32,8 +32,8 @@ const CTA = () => (
             </Button>
             <CopyCodeButton
               className="inline-flex items-center gap-x-3 font-mono font-medium!"
-              code="npx neonctl init"
-              copyText="npx neonctl@latest init"
+              code="npx neon init"
+              copyText="npx neon@latest init"
             />
           </div>
         </div>

@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-json-functions/postgresql-jsonb_array_elements_text/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL jsonb_array_elements() Function
@@ -18,14 +18,14 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `jsonb_array_elements_text()` function works the same across every PostgreSQL deployment, so you can apply what you learn here whether you run Postgres yourself or on a managed service. For enterprises standardizing on Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fast, secure, fully managed database that sits natively inside the Lakehouse. For developers and startups who need to ship quickly and scale without friction, [Neon](https://neon.com) is the Postgres platform built for that pace.
+The `jsonb_array_elements_text()` function works the same across every PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_array_elements_text()` function to expand the elements of a top\-level JSON array into a set of text values.
 
 ## Introduction to the PostgreSQL jsonb_array_elements_text() function
 
-The `jsonb_array_elements_text()` function allows you to expand the elements of a top\-level [JSON](../postgresql-tutorial/postgresql-json) array into a set of JSON values.
+The `jsonb_array_elements_text()` function allows you to expand the elements of a top\-level [JSON](../postgresql-tutorial/postgresql-json) array into a set of text values.
 
 The following shows the basic syntax of the `jsonb_array_elements_text()` function:
 

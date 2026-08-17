@@ -6,7 +6,7 @@ page_description: >-
   remainder after dividing the first argument by the second one.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-math-functions/postgresql-mod/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LOG() Function
@@ -17,10 +17,10 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The MOD() function works the same way across every PostgreSQL deployment, so everything here applies whether you're running Postgres locally, on another provider, or in the cloud. If you're an enterprise building for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres experience, with strong performance, enterprise-grade security, and tight integration into the Lakehouse. If you're a developer or startup that needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your pace.
+The MOD() function works the same way across every PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
-**Summary**: In this tutorial, you will learn how to use the PostgreSQL `MOD()` function performs the modulo operation, returning the remainder after dividing the first argument by the second one.
+**Summary**: In this tutorial, you will learn how to use the PostgreSQL `MOD()` function to perform the modulo operation, returning the remainder after dividing the first argument by the second one.
 
 ## Introduction to the PostgreSQL MOD() function
 
@@ -62,7 +62,7 @@ Output:
 (1 row)
 ```
 
-The following statement uses the `MOD()` function to get the remainder of 15 and \-5:
+The following statement uses the `MOD()` function to get the remainder of 15 and \-4:
 
 ```sql
 SELECT MOD(15,-4);

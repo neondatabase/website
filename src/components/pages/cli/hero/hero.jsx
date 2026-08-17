@@ -14,7 +14,7 @@ const Hero = () => (
         <span className="text-green-45">in the terminal</span>
       </h1>
       <p className="mt-4 text-center text-xl leading-snug font-light tracking-extra-tight xl:text-lg lg:mt-4 md:mt-2.5 md:text-base">
-        The Neon CLI brings serverless Postgres to the command line.
+        The Neon CLI brings the Neon backend platform to the command line.
       </p>
       <AnimatedButton
         className="relative mt-9 px-8 py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-7 md:mt-6"

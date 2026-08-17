@@ -4,7 +4,7 @@ subtitle: A step-by-step guide to build your own Reverse Image Search engine in 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-11T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Have you ever searched for an image using an... image? [Google Images](https://images.google.com/) is a widely used example of such reverse image search engine. Do you wonder how it's able to show highly similar images in the search results? Well, in this guide you will learn how to create such an image engine on your own. You will learn how to create a system that's able to index images into a collection, and return images that are highly similar to the uploaded one.
@@ -277,7 +277,7 @@ export async function POST({ request }: APIContext) {
 }
 ```
 
-The code above adds two new imports: `neonStore` (an alias for the `PGVectorStore` instance) and `ClipEmbedding` from `llamaindex`. **It initializes the embedding model as Clip for processing image embeddings**. It then utilizes the Clip embedding model to extract the image embedding. Further, it queries the Neon Postgres vector store for similar images using the extracted embedding. The query parameters include a similarity threshold and the image embedding.
+The code above adds two new imports: `neonStore` (an alias for the `PGVectorStore` instance) and `ClipEmbedding` from `llamaindex`. **It initializes the embedding model as Clip for processing image embeddings**. It then utilizes the Clip embedding model to extract the image embedding. Further, it queries the Lakebase Postgres vector store for similar images using the extracted embedding. The query parameters include a similarity threshold and the image embedding.
 
 The relevant images are filtered based on a similarity threshold of 90%, and their URLs are stored in an array. Finally, the endpoint returns a JSON response containing the URLs of the relevant images. This process enables efficient and high quality retrieval of similar images based on their embeddings, completing the reverse image search functionality within the application.
 

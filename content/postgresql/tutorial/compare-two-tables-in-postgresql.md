@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/compare-two-tables-in-postgresql/
 ogImage: /postgresqltutorial/compare-two-tables-postgresql.jpg
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Server and Database Objects
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Comparing two tables with EXCEPT, UNION, or outer joins works the same way on any PostgreSQL database, so you can apply these techniques wherever your Postgres runs. For enterprises modernizing data platforms for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, with the performance, security, and native Lakehouse integration large teams need. For developers and startups who want to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built around instant provisioning, branching, and serverless economics.
+Comparing two tables with EXCEPT, UNION, or outer joins works the same way on any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn various ways to compare two tables in PostgreSQL.
@@ -27,7 +27,7 @@ There are several ways to compare the content of two tables to find the differen
 
 ## Comparing two tables using EXCEPT and UNION operators
 
-First, [create table](postgresql-create-table) two tables called `foo` and `bar`, and [insert](postgresql-insert) some sample data for demonstration purposes:
+First, [create](postgresql-create-table) two tables called `foo` and `bar`, and [insert](postgresql-insert) some sample data for demonstration purposes:
 
 ```sql
 CREATE TABLE foo (

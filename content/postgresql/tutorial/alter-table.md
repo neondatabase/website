@@ -6,7 +6,7 @@ page_description: >-
   PostgreSQL ALTER TABLE statement.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-alter-table/'
 ogImage: /postgresqltutorial/PostgreSQL-ALTER-TABLE-SET-DEFAULT.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL Generated Columns
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The ALTER TABLE syntax and behavior covered here applies to any PostgreSQL database, not just [Neon](https://neon.com). If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. If you're a developer or startup who needs to ship and scale fast, Neon gives you the best Postgres platform to do it on.
+The ALTER TABLE syntax and behavior covered here applies to any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALTER TABLE` statement to modify the structure of a table.

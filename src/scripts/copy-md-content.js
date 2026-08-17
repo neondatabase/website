@@ -9,13 +9,13 @@ const path = require('path');
 
 const { CONTENT_ROUTES } = require('../constants/content');
 
-const { processAllContent } = require('./process-md-for-llms');
+const { processAllContentParallel } = require('./process-md-for-llms');
 
 (async () => {
   console.log('Processing markdown content for LLMs...\n');
   try {
     const projectRoot = path.resolve(__dirname, '../..');
-    await processAllContent(CONTENT_ROUTES, projectRoot);
+    await processAllContentParallel(CONTENT_ROUTES, projectRoot);
     console.log('\nDone processing markdown content.');
   } catch (err) {
     console.error('Error occurred while processing markdown files:', err);

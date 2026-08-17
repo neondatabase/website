@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql-macos/
 ogImage: /postgresqltutorial/Install-PostgreSQL-macOS-step-1.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: Load PostgreSQL Sample Database
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Installing PostgreSQL on macOS works the same whether you're running it locally for development or planning to deploy it elsewhere, since this is standard Postgres. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for enterprises, purpose-built for the AI era with the performance, security, and native Lakehouse integration that demanding workloads require. For developers and startups who want to ship fast and scale without friction, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling that keep pace with your product.
+Installing PostgreSQL on macOS works the same whether you're running it locally for development or planning to deploy it elsewhere. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to download the PostgreSQL, install PostgreSQL on macOS, and restore the sample database.
@@ -62,7 +62,7 @@ Eighth, review the installation information. If everything looks correct, click 
 Ninth, click the Next button to start installing the PostgreSQL database server on your computer:
 
 ![](/postgresqltutorial/Install-PostgreSQL-macOS-step-9.png)
-It will take few mintues to complete the installation.
+It will take a few minutes to complete the installation.
 
 ![](/postgresqltutorial/Install-PostgreSQL-step-10.png)
 Finally, click the Finish button once the installation is completed:
@@ -81,7 +81,7 @@ Third, right\-click the PostgreSQL 12 and select **Create \> Database..** to ope
 Fourth, enter dvdrental as the database, postgres as the owner, and click the Save button to create the dvdrental database.
 
 ![](/postgresqltutorial/Restore-Sample-Database-Step-2.png)
-Sixth, [download the sample database](postgresql-sample-database) and unzip it. You’ll get a directory with many files.
+Fifth, [download the sample database](postgresql-sample-database) and unzip it. You’ll get a directory with many files.
 
 Seventh, right\-click the **dvdrental** database and select the **Restore…** menu item:
 

@@ -2,12 +2,16 @@
 title: Import Data Assistant
 subtitle: Import a database under 10 GB to Neon using our automated import tool
 summary: >-
-  How to use the Import Data Assistant to import an existing Postgres database
-  under 10 GB to Neon using a connection string, or to migrate data between
-  Neon projects.
+  Import Data Assistant is a guided, automated tool in the Neon console
+  that migrates a Postgres database under 10 GB to Neon using only a connection
+  string, with no manual pg_dump steps required. Use it to migrate from any
+  supported Postgres platform (excluding Supabase and Heroku) or to move data
+  between Neon projects for a version upgrade or region change. For databases
+  over 10 GB, use pg_dump and pg_restore instead.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-05-09T15:15:10.215Z'
+tagTheme: blue
+updatedOn: '2026-08-07T18:39:13.799Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -31,7 +35,7 @@ You'll need:
   postgresql://username:password@host:port/database?sslmode=require&channel_binding=require
   ```
 
-  If you are migrating a database from one Neon project to another, you need the connection string for the source database, which you can access from the **Connect** modal on the project dashboard.
+  If you are migrating a database from one Neon project to another, you need the connection string for the source database, which you can access from the **Connect** modal on the project dashboard. When the source is a Neon project, use a direct (unpooled) connection string, not a pooled one. Make sure the hostname does not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
 
 - **Admin privileges** on your source database. We recommend using a superuser if migrating from another platform, or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
 - A database **smaller than 10 GB** in size for automated import. For larger databases, use [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).

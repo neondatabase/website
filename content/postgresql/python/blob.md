@@ -6,7 +6,7 @@ page_description: >-
   database using Python.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-python/blob/'
 ogImage: /postgresqltutorial/parts_part_drawings_tables.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL Python: Call Stored Procedures'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Working with BYTEA from Python is the same on any PostgreSQL database, so you can apply these psycopg2 patterns to Postgres wherever you run it. If you're storing binary data at enterprise scale and want it unified with your analytics, [Lakebase](https://www.databricks.com/product/lakebase) delivers managed Postgres built for the AI era, with strong performance, security, and native Lakehouse integration. If you're a developer or startup shipping a Python app and need to move quickly, [Neon](https://neon.com) gives you the fastest path to a production Postgres with instant provisioning, branching, and autoscaling.
+Working with BYTEA from Python is the same on any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to store binary data in the PostgreSQL database using Python.

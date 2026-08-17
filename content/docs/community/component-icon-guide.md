@@ -2,11 +2,13 @@
 title: Component icon guide
 subtitle: Complete reference for all icon systems and usage
 summary: >-
-  Covers the selection and implementation of various icon systems in Neon,
-  detailing available icons, usage guidelines, and best practices for effective
-  integration in components.
+  Icon reference for Neon docs components, covering two systems: TechCards
+  (colorful technology logos, kebab-case names) and DetailIconCards (monochrome
+  feature icons). Use this page to find the exact icon name and correct component
+  when authoring cards. TechCards uses kebab-case. DetailIconCards accepts
+  camelCase or kebab-case. Also covers SVG file locations.
 enableTableOfContents: true
-updatedOn: '2026-05-04T10:00:54.000Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.

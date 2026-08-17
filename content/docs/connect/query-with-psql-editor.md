@@ -2,15 +2,18 @@
 title: Connect with psql
 subtitle: Learn how to connect to Neon using psql
 summary: >-
-  How to connect to Neon using the `psql` command-line client, including
-  installation instructions and connection string retrieval for seamless
-  interaction with Neon's Postgres environment.
+  The `psql` command-line client connects to Neon using a standard PostgreSQL
+  connection string over SSL on port 5432. Installation steps are provided for
+  Mac, Linux, and Windows. Use this page when you need an interactive terminal
+  session for ad-hoc queries, meta-commands, or scripted SQL against a Neon
+  database. Older `psql` builds without SNI support require a workaround;
+  see the linked connection errors reference for details.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
   - /docs/get-started/query-with-psql-editor
-updatedOn: '2026-02-06T22:07:32.802Z'
+updatedOn: '2026-07-24T15:46:49.998Z'
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.
@@ -18,7 +21,7 @@ The following instructions require a working installation of [psql](https://www.
 <Admonition type="note">
 A Neon compute runs Postgres, which means that any Postgres application or standard utility such as `psql` is compatible with Neon. You can also use Postgres client libraries and drivers to connect. However, please be aware that some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).
 
-Neon also provides a passwordless auth feature that uses `psql`. For more information, see [Passwordless auth](/docs/connect/passwordless-connect).
+The [Neon CLI](/docs/cli) also provides a [`neon psql`](/docs/cli/psql) command that opens a `psql` session without a connection string, and doesn't require `psql` to be installed.
 </Admonition>
 
 ## How to install psql
@@ -191,12 +194,12 @@ For more information about meta-commands, see [psql Meta-Commands](https://www.p
 
 ## Running psql from the Neon CLI
 
-If you have `psql` and the [Neon CLI](/docs/reference/neon-cli) installed, you can run `psql` commands directly from the Neon CLI using the `connection-string` command with the `--psql` option.
+If you have `psql` and the [Neon CLI](/docs/cli) installed, you can run `psql` commands directly from the Neon CLI using the `connection-string` command with the `--psql` option.
 
 ```bash
 neon connection-string --psql -- -c "SELECT version()"
 ```
 
-For more examples, see [Neon CLI commands — connection-string](/docs/reference/cli-connection-string).
+For more examples, see [Neon CLI commands — connection-string](/docs/cli/connection-string).
 
 <NeedHelp/>

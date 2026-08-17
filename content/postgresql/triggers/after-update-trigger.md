@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-triggers/postgresql-after-update-trigger/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL BEFORE UPDATE Trigger
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-AFTER UPDATE triggers work the same across every PostgreSQL deployment, so the patterns here apply whether you're running Postgres locally, on a managed service, or in the cloud. For enterprises building in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres, combining strong performance and security with native integration into the Lakehouse. For developers and startups who need to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform of choice, with instant provisioning, branching, and autoscaling built in.
+AFTER UPDATE triggers work the same across every PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `AFTER UPDATE` trigger that executes a function after an update event occurs.
@@ -42,7 +42,7 @@ Additionally, you can access the following variables:
 - `TG_OP`: Represent the operation that activates the trigger, which is `UPDATE` for the `AFTER` `UPDATE` trigger.
 - `TG_WHEN`: Represent the trigger timing, which is `AFTER` for the `AFTER UPDATE` trigger.
 
-To create a `AFTER UPDATE` trigger, you use the following steps:
+To create an `AFTER UPDATE` trigger, you use the following steps:
 
 First, [define a trigger function](../postgresql-plpgsql/postgresql-create-function) that will execute when the `AFTER UPDATE` trigger fires:
 
@@ -95,7 +95,7 @@ CREATE TABLE salary_changes (
 
 ```
 
-Third, define the function `log_salary_changes()` that logs the changes of values in the `salary` column to the `salary_changes` table:
+Third, define the function `log_salary_change()` that logs the changes of values in the `salary` column to the `salary_changes` table:
 
 ```plsql
 CREATE OR REPLACE FUNCTION log_salary_change()
@@ -167,4 +167,4 @@ The output shows that the salary before and after changes have been logged to th
 
 ## Summary
 
-- Use a `BEFORE` `UPDATE` trigger to execute a function before an update operation occurs.
+- Use an `AFTER UPDATE` trigger to execute a function after an update operation occurs.

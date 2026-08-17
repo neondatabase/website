@@ -1,11 +1,14 @@
 ---
-title: Connect an Elixir application to Neon Postgres
+title: Connect an Elixir application to Lakebase Postgres
 subtitle: Learn how to run SQL queries in Neon from Elixir using Postgrex
 summary: >-
-  How to connect an Elixir application to a Neon Postgres database using
-  Postgrex, including project setup and performing basic CRUD operations.
+  Postgrex-based guide for connecting an Elixir app to a Lakebase serverless
+  Postgres database using raw SQL over SSL, covering project setup with mix,
+  credential configuration in config.exs, and CRUD operations. Use this page
+  when you want direct Postgrex access without an ORM; for Ecto-based
+  integration see the Elixir Ecto guide.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.150Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-prompt.md" 
@@ -13,7 +16,7 @@ description="Pre-built prompt for connecting Elixir applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from an Elixir application using [Postgrex](https://hex.pm/packages/postgrex), a high-performance, concurrent, and robust PostgreSQL driver for Elixir.
 
-You'll learn how to connect to your Neon database from an Elixir application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
+You'll learn how to connect to your database from an Elixir application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 ## Prerequisites
 
@@ -362,6 +365,11 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect an Elixir Ecto application to Neon](/docs/guides/elixir-ecto)
+
+## Next steps: Neon backend services
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 

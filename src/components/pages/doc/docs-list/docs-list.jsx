@@ -11,7 +11,7 @@ import PageIcon from './images/page.inline.svg';
 const Icon = ({ theme = 'default', className = null }) => {
   if (theme === 'docs') return <PageIcon className={cn('top-1', className)} aria-hidden />;
   if (theme === 'repo') return <GitHubIcon className={cn('top-1', className)} aria-hidden />;
-  return <CheckIcon className={cn('top-[5px]', className)} aria-hidden />;
+  return <CheckIcon className={cn('top-1.25', className)} aria-hidden />;
 };
 
 Icon.propTypes = {
@@ -34,7 +34,7 @@ const DocsList = ({ title, theme = 'default', children }) => (
         {title}
       </h3>
     )}
-    <ul className="m-0! flex flex-col gap-y-2 p-0!">
+    <ul className="docs-list m-0! flex flex-col gap-y-3.5 p-0!">
       {parsedChildren(children).map((child, index) => (
         <li
           key={index}

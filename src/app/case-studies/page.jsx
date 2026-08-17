@@ -4,7 +4,11 @@ import Testimonials from 'components/pages/case-studies/testimonials';
 import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
-import { getCaseStudiesData, getCaseStudiesCategories } from 'utils/api-local-data';
+import {
+  getCaseStudiesData,
+  getCaseStudiesCategories,
+  getCaseStudiesTestimonials,
+} from 'utils/api-local-data';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.caseStudies);
@@ -14,11 +18,12 @@ export const dynamic = 'force-static';
 const CaseStudiesPage = () => {
   const caseStudies = getCaseStudiesData();
   const categories = getCaseStudiesCategories();
+  const testimonials = getCaseStudiesTestimonials();
 
   return (
     <Layout>
       <Hero />
-      <Testimonials />
+      <Testimonials items={testimonials} />
       <Cards items={caseStudies} categories={categories} />
       <CTANew
         label="Get started"

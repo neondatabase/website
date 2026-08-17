@@ -2,12 +2,24 @@
 title: Passwordless auth
 subtitle: Learn how to connect to Neon without a password
 summary: >-
-  Covers the setup of Neon's passwordless authentication feature for connecting
-  to the database using `psql`, detailing the command to initiate the connection
-  and the steps to authenticate via a web link.
+  Use the Neon CLI's `neon psql` command to open a `psql` session against any
+  branch, role, and database in your project, without a connection string or a
+  local psql install. It's the recommended alternative to the older
+  `psql -h pg.neon.tech` passwordless auth flow, which connects only to the
+  first database on the branch and is planned for deprecation in favor of `neon psql`.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.801Z'
+updatedOn: '2026-07-24T15:46:49.998Z'
 ---
+
+<Admonition type="tip" title="Try neon psql instead">
+The [Neon CLI](/docs/cli) offers a more capable way to open a `psql` session: [`neon psql`](/docs/cli/psql). It connects to any branch, role, and database in your project, works without a local `psql` install, and supports [pooled connections](/docs/connect/connection-pooling) and [time travel](/docs/guides/time-travel-assist). The `psql -h pg.neon.tech` flow on this page is planned for deprecation in favor of it.
+
+```bash
+neon psql
+```
+
+To get a connection string instead of an interactive session, use [`neon connection-string`](/docs/cli/connection-string). For all the ways to connect, see [Connect to Neon](/docs/connect/connect-intro).
+</Admonition>
 
 Neon's `psql` passwordless auth feature helps you quickly authenticate a connection to Neon without providing a password.
 

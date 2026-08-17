@@ -3,7 +3,7 @@ title: 'PostgreSQL 19 ON CONFLICT DO SELECT'
 page_title: 'PostgreSQL 19 ON CONFLICT DO SELECT - Atomic Get-or-Create'
 page_description: 'Learn how to use PostgreSQL 19 ON CONFLICT DO SELECT for atomic get-or-create operations without dead rows, extra queries, or CTE workarounds.'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 19 SQL/PGQ Graph Queries'
@@ -12,6 +12,10 @@ nextLink:
   title: 'PostgreSQL 19 Temporal Data Operations'
   slug: 'postgresql-19/temporal-data-operations'
 ---
+
+<Admonition type="note" title="PostgreSQL 19 Beta 1 is here">
+[PostgreSQL 19 Beta 1 was released on June 4, 2026](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/), so you can try `ON CONFLICT DO SELECT` for yourself ahead of the final release expected later in 2026. Beta 1 adds `INSERT ... ON CONFLICT DO SELECT ... RETURNING`, which returns conflicting rows (optionally locked with `FOR UPDATE`/`SHARE`) for atomic get-or-create.
+</Admonition>
 
 **Summary**: PostgreSQL 19 adds `ON CONFLICT DO SELECT` to the `INSERT` statement, giving you an atomic get-or-create operation that returns existing rows on conflict without generating dead tuples or requiring CTE workarounds.
 
@@ -98,7 +102,7 @@ Benchmarks from the PostgreSQL mailing list show the performance difference:
 | `DO NOTHING` + CTE workaround | 28,929           |
 | `DO UPDATE` (no-op)           | 9,222            |
 
-`DO SELECT` is nearly 4x faster than the no-op `DO UPDATE` approach, and about 24% faster than the CTE workaround.
+`DO SELECT` is nearly 4x faster than the no-op `DO UPDATE` approach, and about 24% faster than the `DO NOTHING` CTE workaround.
 
 ## The CTE Workaround DO SELECT Replaces
 

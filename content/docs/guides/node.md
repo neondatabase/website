@@ -2,13 +2,18 @@
 title: Connect a Node.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Node.js application
 summary: >-
-  Covers the setup of a Neon project and the connection process from a Node.js
-  application, including examples using node-postgres and Postgres.js clients.
+  Step-by-step connection guide for Node.js, Express, and Next.js apps targeting
+  a Neon serverless Postgres database, with working code for three clients: the
+  Neon serverless driver (@neondatabase/serverless), node-postgres (pg), and
+  Postgres.js. Use this page when you need to wire up environment-variable-based
+  SSL credentials and pick the right client for your project. Also covers the
+  ENDPOINT_ID workaround required by older clients that lack SNI support, which
+  newer node-postgres and Postgres.js releases do not need.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2026-02-06T22:07:33.028Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 
@@ -265,5 +270,12 @@ getPgVersion();
 ## Community resources
 
 - [Serverless Node.js Tutorial – Neon Serverless Postgres, AWS Lambda, Next.js, Vercel](https://youtu.be/cxgAN7T3rq8)
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

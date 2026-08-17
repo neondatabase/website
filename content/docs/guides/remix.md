@@ -1,12 +1,14 @@
 ---
 title: Connect a Remix application to Neon
-subtitle: Set up a Neon project in seconds and connect from a Remix application
+subtitle: Set up a project on Neon in seconds and connect from a Remix application
 summary: >-
-  How to connect a Remix application to a Neon project by creating a Neon
-  project, setting up a Remix project, and configuring connection settings
-  securely.
+  Connecting a Remix application (now React Router) to Lakebase Postgres requires a
+  server-side `db.server` file that holds the database connection, preventing
+  credentials from leaking into the client bundle. This guide walks through
+  creating a project on Neon, storing the DATABASE_URL in `.env`, and wiring up a
+  loader route using node-postgres, postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.042Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <Admonition type="note">
@@ -15,9 +17,9 @@ Remix is now React Router v7. The features of the Remix framework have been merg
 For more information, see the [Remix announcement](https://remix.run/blog/merging-remix-and-react-router).
 </Admonition>
 
-Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
+Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Lakebase Postgres using a secure server-side request.
 
-To create a Neon project and access it from a Remix application:
+To create a project on Neon and access it from a Remix application:
 
 <Steps>
 
@@ -168,5 +170,12 @@ PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1
 ```
 
 </Steps>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

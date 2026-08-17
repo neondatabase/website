@@ -6,7 +6,7 @@ page_description: >-
   using JDBC API utilizing the commit() and rollback() methods.
 prev_url: 'https://www.postgresqltutorial.com/postgresql-jdbc/transaction/'
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL JDBC: Call Stored Functions'
@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Managing transactions with JDBC works the same against any PostgreSQL database, so the patterns here apply wherever you run Postgres. If you're an enterprise looking for managed Postgres in the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers the performance, security, and native Lakehouse integration you need to run mission-critical Java workloads at scale. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you the best Postgres platform to build on.
+Managing transactions with JDBC works the same against any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to manage PostgreSQL transactions in Java programs using JDBC.
@@ -38,7 +38,7 @@ In this code, you need to replace `url`, `user`, and `password` with your actual
 
 ### Step 2\. Disable Auto\-Commit
 
-JDBC operates in auto\-commit mode by default, to manually control the transaction, you need to disable the auto\-commit mode using the `setAutoComit()` method as follows:
+JDBC operates in auto\-commit mode by default, to manually control the transaction, you need to disable the auto\-commit mode using the `setAutoCommit()` method as follows:
 
 ```java
 connection.setAutoCommit(false);

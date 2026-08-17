@@ -2,11 +2,15 @@
 title: Postgres JSON_TABLE() function
 subtitle: Transform JSON data into relational views
 summary: >-
-  Covers the usage of the `JSON_TABLE` function in PostgreSQL 17 to transform
-  JSON data into relational views, enabling SQL queries on complex JSON
-  structures through a virtual table format.
+  The `JSON_TABLE` function, introduced in PostgreSQL 17, converts JSON and
+  JSONB documents into queryable virtual tables using SQL/JSON path expressions
+  and a COLUMNS clause. Use it when you need to flatten nested JSON objects or
+  arrays into rows, join JSON data with relational tables, or apply SQL
+  aggregation and filtering to JSON structures. Column-level error handling
+  with `ON EMPTY` and `ON ERROR` clauses controls NULL and default-value
+  behavior; GIN indexes on JSONB columns improve query performance.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.870Z'
+updatedOn: '2026-06-05T17:20:32.620Z'
 ---
 
 The `JSON_TABLE` function transforms JSON data into relational views, allowing you to query JSON data using standard SQL operations. Added in PostgreSQL 17, this feature helps you work with complex JSON data by presenting it as a virtual table which you can access with regular SQL queries.

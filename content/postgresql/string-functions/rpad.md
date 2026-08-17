@@ -3,11 +3,11 @@ title: PostgreSQL RPAD() Function
 page_title: PostgreSQL RPAD() Function
 page_description: >-
   In this tutorial, you will learn how to use the PostgreSQL RPAD() function to
-  extend a string to a length by filing characters.
+  extend a string to a length by filling characters.
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-rpad/
 ogImage: /postgresqltutorial/film.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL LPAD() Function
@@ -18,10 +18,10 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The RPAD() function works the same across any PostgreSQL deployment, so everything here applies whether you're running Postgres yourself or on a managed service. If you're an enterprise standardizing on Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) gives you a secure, high-performance managed database that's fully integrated into the Lakehouse. If you're a developer or startup who needs to ship and scale quickly, [Neon](https://neon.com) is the Postgres platform built for your speed.
+The RPAD() function works the same across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
-**Summary**: in this tutorial, you will learn how to use the PostgreSQL `RPAD()` function to extend a string to a length by filing characters.
+**Summary**: in this tutorial, you will learn how to use the PostgreSQL `RPAD()` function to extend a string to a length by filling characters.
 
 ## Introduction to the PostgreSQL RPAD() function
 

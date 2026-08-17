@@ -2,20 +2,22 @@
 title: Configure trusted domains
 subtitle: Add your application domains to enable secure authentication redirects
 summary: >-
-  Covers the setup of application domains in Neon Auth's allowlist to enable
-  secure OAuth and email verification redirects, preventing unauthorized access
-  and ensuring proper functionality in production environments.
+  Managed Better Auth's trusted domain allowlist restricts OAuth and email verification
+  redirects to domains you explicitly approve, blocking unauthorized redirects.
+  Add exact production origins (https://myapp.com) or wildcard patterns
+  (https://*.preview.vercel.app) in Console > Auth > Configuration > Domains.
+  Localhost ports are pre-approved and need no entry.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.738Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Add your application domains to Neon Auth's allowlist to enable OAuth and email verification redirects in production.
+Add your application domains to Managed Better Auth's allowlist to enable OAuth and email verification redirects in production.
 
 ## Why domains are required
 
-Neon Auth only redirects to domains in your allowlist. This prevents phishing attacks and unauthorized redirects by ensuring users are only sent to your legitimate application URLs.
+Managed Better Auth only redirects to domains in your allowlist. This prevents phishing attacks and unauthorized redirects by ensuring users are only sent to your legitimate application URLs.
 
 Without adding your production domain, OAuth sign-in and verification links will fail when users try to access your application.
 
@@ -47,8 +49,14 @@ Add all domains where users access your application:
 - `https://www.myapp.com` (if you support www subdomain)
 - `https://app.myapp.com` (if using a subdomain)
 
-<Admonition type="important">
-Add each subdomain explicitly. Wildcards like `*.myapp.com` are not supported.
+## Wildcard domains for previews
+
+For preview environments with dynamic hostnames (for example Vercel preview deployments), you can add a **wildcard trusted domain** such as `https://*.my-app-preview.vercel.app`. One entry can match every preview under that pattern instead of adding hosts one by one.
+
+Use the same rules as fixed domains: include `https://` (or `http://` where appropriate) and omit trailing slashes after the pattern.
+
+<Admonition type="note">
+Wildcard patterns apply to the hostname segment you replace with `*`. Production apex domains (for example `https://myapp.com`) are usually still added as exact entries unless your wildcard covers them.
 </Admonition>
 
 ## Common issues

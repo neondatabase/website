@@ -2,16 +2,21 @@
 title: Connect from Prisma to Neon
 subtitle: Learn how to connect to Neon from Prisma
 summary: >-
-  Step-by-step guide for connecting a Prisma application to Neon using the
-  serverless driver adapter, including installation of dependencies, obtaining
-  connection strings, and configuring the Prisma schema.
+  Prisma ORM (Node.js/TypeScript) connects to Neon using the
+  `@prisma/adapter-neon` serverless driver adapter, which routes queries over
+  WebSockets for compatibility with serverless environments. The setup requires
+  two connection strings: a pooled URL (`DATABASE_URL`) for application queries
+  and a direct URL (`DIRECT_URL`) for Prisma CLI commands such as migrations and
+  `db push`. Newer Prisma versions configure the direct connection in
+  `prisma.config.ts`; older versions use the `directUrl` property in
+  `schema.prisma`.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-03-26T12:44:08.000Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
@@ -262,6 +267,13 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 
 - [Schema migrations with Prisma](/docs/guides/prisma-migrations): Full tutorial for building an app with migrations
 - [Neon serverless driver](/docs/serverless/serverless-driver): Learn more about the driver powering the adapter
+
+## Next steps: Neon backend services
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 

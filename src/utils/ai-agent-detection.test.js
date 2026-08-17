@@ -26,6 +26,7 @@ describe('isAIAgentRequest', () => {
       'llm-agent',
       'axios',
       'got',
+      'curl',
     ];
 
     aiAgentPatterns.forEach((pattern) => {
@@ -162,12 +163,12 @@ describe('getMarkdownPath', () => {
 
     it('should convert /programs/agents to markdown path', () => {
       const result = getMarkdownPath('/programs/agents');
-      expect(result).toBe('/md/pages/programs/agents.md');
+      expect(result).toBe('/md/programs/agents.md');
     });
 
     it('should convert /use-cases/ai-agents to markdown path', () => {
       const result = getMarkdownPath('/use-cases/ai-agents');
-      expect(result).toBe('/md/pages/use-cases/ai-agents.md');
+      expect(result).toBe('/md/use-cases/ai-agents.md');
     });
 
     it('should handle nested docs paths', () => {
@@ -187,6 +188,21 @@ describe('getMarkdownPath', () => {
       expect(result).toBeNull();
     });
 
+    it('should alias /docs.md to the curated llms.txt index', () => {
+      const result = getMarkdownPath('/docs.md');
+      expect(result).toBe('/docs/llms.txt');
+    });
+
+    it('should alias bare /docs to the curated llms.txt index (agent / Accept: markdown)', () => {
+      const result = getMarkdownPath('/docs');
+      expect(result).toBe('/docs/llms.txt');
+    });
+
+    it('should not alias docs subpaths to llms.txt', () => {
+      const result = getMarkdownPath('/docs/introduction');
+      expect(result).toBe('/md/docs/introduction.md');
+    });
+
     it('should resolve /docs/changelog to custom markdown path', () => {
       const result = getMarkdownPath('/docs/changelog');
       expect(result).toBe('/md/docs/changelog.md');
@@ -195,6 +211,26 @@ describe('getMarkdownPath', () => {
     it('should resolve /docs/changelog.md to custom markdown path', () => {
       const result = getMarkdownPath('/docs/changelog.md');
       expect(result).toBe('/md/docs/changelog.md');
+    });
+
+    it('should resolve the API endpoint index route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api/reference');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
+    it('should resolve the API endpoint index .md route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api/reference.md');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
+    it('should resolve the legacy API reference route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api-reference');
+      expect(result).toBe('/md/docs/reference/api.md');
+    });
+
+    it('should resolve the legacy API reference .md route to the canonical API markdown', () => {
+      const result = getMarkdownPath('/docs/reference/api-reference.md');
+      expect(result).toBe('/md/docs/reference/api.md');
     });
 
     it('should resolve individual changelog entries to changelog content path', () => {
@@ -223,6 +259,14 @@ describe('getMarkdownPath', () => {
       const result = getMarkdownPath('/docs/rss.xml');
       expect(result).toBeNull();
     });
+
+    it.each(['/docs/reference/api/llms.txt', '/docs/reference/api/llms-full.txt'])(
+      'should pass through static API reference index files: %s',
+      (path) => {
+        const result = getMarkdownPath(path);
+        expect(result).toBeNull();
+      }
+    );
   });
 
   describe('Invalid routes (should return null)', () => {
@@ -278,9 +322,9 @@ describe('getMarkdownPath', () => {
       expect(result).toBe('/md/postgresql.md');
     });
 
-    it('should map /programs.md to /md/pages/programs.md (file may not exist)', () => {
+    it('should map /programs.md to /md/programs.md', () => {
       const result = getMarkdownPath('/programs.md');
-      expect(result).toBe('/md/pages/programs.md');
+      expect(result).toBe('/md/programs.md');
     });
   });
 });
@@ -291,15 +335,16 @@ describe('buildAgent404Response', () => {
     expect(result).toContain('`/docs/manage/nonexistent-page`');
   });
 
-  it('should include links to llms.txt and llms-full.txt', () => {
+  it('should include links to llms.txt, api.md, and cli.md', () => {
     const result = buildAgent404Response('/docs/some-page');
     expect(result).toContain('/docs/llms.txt');
-    expect(result).toContain('/docs/llms-full.txt');
+    expect(result).toContain('/docs/reference/api.md');
+    expect(result).toContain('/docs/cli.md');
   });
 
   it('should include a link to the API reference', () => {
     const result = buildAgent404Response('/docs/some-page');
-    expect(result).toContain('/docs/reference/api-reference.md');
+    expect(result).toContain('/docs/reference/api.md');
   });
 
   it('should work with deeply nested paths', () => {

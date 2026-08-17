@@ -1,12 +1,17 @@
 ---
 title: The pg_cron extension
-subtitle: Schedule and manage cron jobs directly within your Neon Postgres database
+subtitle: Schedule and manage cron jobs directly within your Lakebase Postgres database
 summary: >-
-  Covers the setup and management of the `pg_cron` extension for scheduling and
-  executing SQL commands within a Neon Postgres database, including enabling the
-  extension and monitoring scheduled tasks.
+  pg_cron is a cron-based job scheduler that runs SQL commands and stored
+  procedures on a schedule directly inside Lakebase Postgres, eliminating the need
+  for external cron utilities. Enable it by setting the `cron.database_name`
+  parameter via the Neon API, then use `cron.schedule()` with standard cron
+  syntax to automate tasks like data archival, vacuuming, and log purging.
+  Jobs only run when the compute is active, so pg_cron is best suited for
+  computes with scale-to-zero disabled. `cron.schedule_in_database()` is not
+  supported in Neon.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.085Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 The `pg_cron` extension provides a simple, cron-based job scheduler for Postgres. It operates directly within your database, allowing you to schedule standard SQL commands or calls to stored procedures using familiar cron syntax. This eliminates the need for external cron utilities for many database maintenance and automation tasks.
@@ -21,11 +26,11 @@ Please note that `pg_cron` jobs will only run when your compute is active. We th
 
 ## Enable the `pg_cron` extension
 
-To install `pg_cron` on Neon, you must first enable it by setting the `cron.database_name` parameter to the name of the database where you want to install `pg_cron`. This requires making an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint) API call.
+To install `pg_cron` on Neon, you must first enable it by setting the `cron.database_name` parameter to the name of the database where you want to install `pg_cron`. This requires making an [Update compute endpoint](/docs/reference/api/endpoints/update-project-endpoint) API call.
 
 The `cron.database_name` parameter is passed to your Postgres instance through the `pg_settings` option in the endpoint settings object. The following `Update endpoint` API example shows where to specify your Neon `project_id`, `endpoint_id`, [Neon API key](/docs/manage/api-keys), and database name.
 
-The `project_id` and `endpoint_id` values can be obtained from the Neon Console or [using the Neon API](https://api-docs.neon.tech/reference/path-parameters). In the Neon Console, the `project_id` is found on your project's **Settings** page, and will look something like this: `young-sun-12345678`. The `endpoint_id` is found on the **Compute** tab on your **Branches** page, where it is referred to as the **Endpoint ID**. It will have an `ep` prefix, and look similar to this: `ep-still-rain-abcd1234`.
+The `project_id` and `endpoint_id` values can be obtained from the Neon Console or [using the Neon API](/docs/reference/api). In the Neon Console, the `project_id` is found on your project's **Settings** page, and will look something like this: `young-sun-12345678`. The `endpoint_id` is found on the **Compute** tab on your **Branches** page, where it is referred to as the **Endpoint ID**. It will have an `ep` prefix, and look similar to this: `ep-still-rain-abcd1234`.
 
 ```bash
 curl --request PATCH \
@@ -46,7 +51,7 @@ curl --request PATCH \
 '
 ```
 
-After setting `cron.database_name`, you must restart your compute to apply the new setting. You can do this using the [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API. Specify the same `project_id` and `endpoint_id` used to set the `cron.database_name` parameter above. **Please note that restarting your compute endpoint will drop current connections to your database.**
+After setting `cron.database_name`, you must restart your compute to apply the new setting. You can do this using the [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API. Specify the same `project_id` and `endpoint_id` used to set the `cron.database_name` parameter above. **Please note that restarting your compute endpoint will drop current connections to your database.**
 
 ```bash
 curl --request POST \
@@ -56,7 +61,7 @@ curl --request POST \
 ```
 
 <Admonition type="note">
-The [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/computes#restart-a-compute).
+The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If your compute is idle, you can start it by running a query to wake it up or running the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API. For more information and other compute restart options, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 </Admonition>
 
 You can then install the `pg_cron` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
@@ -271,7 +276,7 @@ It's important to note that because `pg_cron` is managed by Neon, modifying thes
 
 ## Conclusion
 
-You have successfully learned how to enable and use the `pg_cron` extension within your Neon Postgres environment. You can now schedule routine database tasks directly within your database, simplifying automation and maintenance. Remember that `pg_cron` schedules are interpreted in UTC and will only run when your compute is active.
+You have successfully learned how to enable and use the `pg_cron` extension within your Lakebase Postgres environment. You can now schedule routine database tasks directly within your database, simplifying automation and maintenance. Remember that `pg_cron` schedules are interpreted in UTC and will only run when your compute is active.
 
 ## Resources
 

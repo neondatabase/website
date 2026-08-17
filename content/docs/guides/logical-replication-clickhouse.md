@@ -2,18 +2,22 @@
 title: Replicate data to ClickHouse
 subtitle: Learn how to replicate data from Neon to ClickHouse Cloud
 summary: >-
-  Step-by-step guide for replicating data from a Neon Postgres database to
-  ClickHouse Cloud using ClickPipes, ClickHouse's native CDC connector.
+  Replicate data from Lakebase Postgres to ClickHouse Cloud using ClickPipes, a
+  WAL-based ingestion service that reads CDC events via a Postgres publication
+  and a dedicated replication role. Use this guide to sync Neon tables into
+  ClickHouse for real-time analytics without custom ETL, with Console, API,
+  or Terraform setup options. Enabling logical replication permanently sets
+  wal_level=logical for the entire Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-05-08T10:09:13.470Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
-[ClickHouse](https://clickhouse.com/) is an open-source column-oriented database management system designed for real-time analytical queries on large volumes of data. Using **[ClickPipes](https://clickhouse.com/cloud/clickpipes)**, ClickHouse Cloud's native continuous data ingestion service, you can easily set up Change Data Capture (CDC) from your Neon Postgres database to stream real-time changes directly into ClickHouse.
+[ClickHouse](https://clickhouse.com/) is an open-source column-oriented database management system designed for real-time analytical queries on large volumes of data. Using **[ClickPipes](https://clickhouse.com/cloud/clickpipes)**, ClickHouse Cloud's native continuous data ingestion service, you can easily set up Change Data Capture (CDC) from your Lakebase Postgres database to stream real-time changes directly into ClickHouse.
 
-In this guide, you will learn how to prepare your Neon Postgres database and configure a Postgres CDC ClickPipe to replicate data to ClickHouse Cloud.
+In this guide, you will learn how to prepare your Lakebase Postgres database and configure a Postgres CDC ClickPipe to replicate data to ClickHouse Cloud.
 
 ## Prerequisites
 
@@ -29,7 +33,7 @@ Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to
 
 ## Prepare your source Neon database
 
-Before setting up the ClickPipe in ClickHouse Cloud, you need to prepare your source Neon Postgres database for logical replication. This involves enabling logical replication, creating a publication, and ensuring your tables are properly configured for replication.
+Before setting up the ClickPipe in ClickHouse Cloud, you need to prepare your source database for logical replication. This involves enabling logical replication, creating a publication, and ensuring your tables are properly configured for replication.
 
 ### Enable logical replication in Neon
 
@@ -54,7 +58,7 @@ To enable logical replication in Neon:
 
 <TabItem>
 
-Use the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
+Use the [Update project](/docs/reference/api/projects/update-project) endpoint to enable logical replication programmatically. Replace `$PROJECT_ID` with your project ID.
 
 ```bash
 curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID" \
@@ -108,7 +112,7 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \
@@ -537,7 +541,7 @@ You should see an output indicating that a ClickHouse service and a ClickPipe wi
 terraform apply "tfplan"
 ```
 
-Terraform will create the ClickHouse Cloud service and set up the ClickPipe to replicate data from your Neon Postgres database to ClickHouse. You can monitor the status of your ClickPipe in the ClickHouse Cloud console or by using the ClickHouse Cloud API.
+Terraform will create the ClickHouse Cloud service and set up the ClickPipe to replicate data from your database to ClickHouse. You can monitor the status of your ClickPipe in the ClickHouse Cloud console or by using the ClickHouse Cloud API.
 
 </TabItem>
 

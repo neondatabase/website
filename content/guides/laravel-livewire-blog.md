@@ -4,10 +4,10 @@ subtitle: Learn how to create a dynamic blog application using Laravel, Livewire
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2024-07-02T10:32:21.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-Laravel is a powerful PHP framework that makes it easy to build web applications. When combined with Livewire, a full-stack framework for Laravel, you can create dynamic, reactive interfaces with minimal JavaScript. In this guide, we'll build a blog application using Laravel and Livewire, and we'll use Laravel Breeze to handle authentication, along with Neon Postgres.
+Laravel is a powerful PHP framework that makes it easy to build web applications. When combined with Livewire, a full-stack framework for Laravel, you can create dynamic, reactive interfaces with minimal JavaScript. In this guide, we'll build a blog application using Laravel and Livewire, and we'll use Laravel Breeze to handle authentication, along with Lakebase Postgres.
 
 By the end of this tutorial, you'll have a fully functional blog where users can create, read, update, and delete posts. We'll also implement comments and a simple tagging system.
 

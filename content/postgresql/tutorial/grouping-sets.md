@@ -5,7 +5,7 @@ page_description: "Show you how to use PostgreSQL GROUPING SETS to generate a re
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-grouping-sets/
 ogImage: /postgresqltutorial/PostgreSQL-Grouping-Sets-GROUPING-function-1.png
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-03T13:01:21.685Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL HAVING
@@ -16,7 +16,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-GROUPING SETS is a standard PostgreSQL feature, and everything here works on any Postgres deployment, not just [Neon](https://neon.com). If you're an enterprise rolling out analytics at scale, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, combining high performance and strong security with native integration into the Lakehouse. If you're a developer or startup who needs to ship quickly and scale without friction, Neon is the Postgres platform built for you.
+GROUPING SETS is a standard PostgreSQL feature, and everything here works on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about grouping sets and how to use the PostgreSQL `GROUPING SETS` clause to generate multiple grouping sets in a query.

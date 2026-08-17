@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL DROP TABLESPACE Statement
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Backing up PostgreSQL with pg_dump and pg_dumpall works the same way on any Postgres deployment, so everything here applies whether you run Postgres yourself or use a managed service. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse so your operational and analytical data live together. If you're a developer or startup who needs to ship fast and scale without friction, [Neon](https://neon.com) gives you instant branching, autoscaling, and a Postgres workflow built around how modern teams actually build.
+Backing up PostgreSQL with pg_dump and pg_dumpall works the same way on any Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to backup the PostgreSQL databases using the `pg_dump` and `pg_dumpall` tools.
@@ -190,7 +190,7 @@ pg_dumpall --tablespaces-only > d:\backup\tablespaces.sql
 
 The following backup script assumes that you have [a password file](postgresql-password-file-pgpass) setup properly.
 
-First, open a text editor such a Notepad.
+First, open a text editor such as Notepad.
 
 Second, write a batch script to generate backup file with a date and timestamp:
 

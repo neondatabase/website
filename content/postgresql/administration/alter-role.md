@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-administration/postgresql-alter-role/
 ogImage: ''
-updatedOn: '2026-05-07T18:15:13.000Z'
+updatedOn: '2026-06-19T17:44:03.964Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL CURRENT_USER
@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The ALTER ROLE statement works the same way across every PostgreSQL deployment, so everything you learn here about modifying attributes, renaming roles, and setting session defaults applies to Postgres wherever you run it. If you're an enterprise looking for managed Postgres built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and deep integration with the Lakehouse. If you're a developer or startup that needs to ship and scale fast, [Neon](https://neon.com) is the Postgres platform built for you.
+The ALTER ROLE statement works the same way across every PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ALTER ROLE` statement to modify the attributes of a role, rename a role, and change a role’s session default for a configuration variable.
@@ -27,7 +27,7 @@ The ALTER ROLE statement works the same way across every PostgreSQL deployment, 
 
 To change attributes of a [role](postgresql-roles), you use the following form of `ALTER ROLE` statement.
 
-Here’s the basic syntax of the
+Here’s the basic syntax of the `ALTER ROLE` statement:
 
 ```sql
 ALTER ROLE role_name [WITH] option;
@@ -49,8 +49,8 @@ The option can be:
 The following rules are applied:
 
 - Superusers can change any of those attributes for any role.
-- Roles that have the `CREATEROLE` attribute can change any of these attributes for only non\-superusers and no\-replication roles.
-- Ordinal roles can only change their passwords.
+- Roles that have the `CREATEROLE` attribute can change any of these attributes for only non\-superusers and non\-replication roles.
+- Ordinary roles can only change their passwords.
 
 First, log in to PostgreSQL server using the `postgres` role.
 

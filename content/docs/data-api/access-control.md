@@ -3,11 +3,15 @@ title: Access control & security
 subtitle: Understand how the Data API authenticates requests and enforces database
   permissions.
 summary: >-
-  Covers the authentication process of the Neon Data API, detailing how it
-  uses PostgreSQL's security model to enforce role privileges and Row-Level
-  Security for database access control.
+  The Neon Data API has no separate permission system. All access control is
+  delegated to PostgreSQL through two layers: GRANT-based table privileges and
+  Row-Level Security (RLS) policies. The database role is selected from the
+  incoming JWT: `authenticated` for valid tokens, `anonymous` for unauthenticated
+  requests, or a custom role from the JWT `role` claim. Use this page to
+  configure GRANT statements, enable RLS, and write per-row policies with
+  `auth.user_id()`, which extracts the `sub` claim from the request JWT.
 enableTableOfContents: true
-updatedOn: '2026-04-18T12:27:58.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -29,7 +33,7 @@ Securing your data involves two layers:
 
 ## API Roles
 
-When the Data API receives an HTTP request, it switches to a specific PostgreSQL role before executing the query. The role chosen depends on whether the request includes an Authorization header.
+When the Data API receives an HTTP request, it switches to a specific PostgreSQL role before executing the query. The role chosen depends on the JWT sent in the `Authorization` header.
 
 ### 1. The `authenticated` role
 
@@ -42,12 +46,34 @@ When a client sends a valid Bearer token, the API switches to the `authenticated
 
 ### 2. The `anonymous` role
 
-**Used for:** Requests without a token.
-If a request arrives with no `Authorization` header, the API switches to the `anonymous` role.
+**Used for:** Requests from unauthenticated users.
+
+Anonymous access still uses a JWT, but no user sign-in is required. How you obtain that token depends on your auth setup:
+
+**With Managed Better Auth:** Set `allowAnonymous: true` in the client config. The SDK fetches a short-lived anonymous token (`GET /token/anonymous`) on the first request, caches it, and sends it as `Authorization: Bearer <jwt>` on every query.
+
+```js
+import { createClient } from '@neondatabase/neon-js';
+
+const client = createClient(import.meta.env.VITE_NEON_DATABASE_URL, {
+  auth: {
+    allowAnonymous: true,
+  },
+});
+
+// No sign-in needed. The SDK fetches and caches an anonymous JWT automatically.
+const { data, error } = await client.from('public_items').select('*');
+```
+
+<Admonition type="warning" title="Not yet on npm">
+The single-URL form shown above, `createClient(url)`, requires a version of `@neondatabase/neon-js` that has not been published to npm as of this writing. The latest published version, `0.6.2-beta`, only accepts the two-URL object form. If `npm install @neondatabase/neon-js` installs `0.6.2-beta` or earlier for you, use the [object-form alternative](/docs/reference/javascript-sdk#initializing) in the JavaScript SDK reference instead.
+</Admonition>
+
+**With a third-party provider:** Check whether your provider supports issuing anonymous or guest tokens. If it does, obtain the token using your provider's method and include it in the `Authorization: Bearer <token>` header on each request.
 
 - By default, this role has **no permissions**.
-- You can explicitly `GRANT` SELECT permissions to this role if you want to expose public data (for example, a list of products or public blog posts) without requiring users to log in.
-- The `GRANT` statements would be similar to the grants for the `authenticated` role. See [Configure schema access](/docs/data-api/get-started#3-configure-schema-access) for an example.
+- You can explicitly `GRANT` SELECT permissions to this role to expose public data (for example, a product list or public blog posts) without requiring users to log in.
+- Typically, you'd only `GRANT SELECT` to this role, not write permissions. The syntax follows the same pattern as for the `authenticated` role. See [Configure schema access](/docs/data-api/get-started#3-configure-schema-access) for an example.
 
 ### 3. Custom roles
 
