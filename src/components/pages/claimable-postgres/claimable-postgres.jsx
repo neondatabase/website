@@ -12,12 +12,12 @@ const SERVICES = [
   {
     id: 'data-api',
     title: 'Data API',
-    description: 'Query the database over HTTPS. Claiming disables Data API.',
+    description: 'Query the database over HTTPS. Stays enabled after claim.',
   },
   {
     id: 'auth',
     title: 'Managed Better Auth',
-    description: 'Add authentication. Claiming deletes Auth and its data.',
+    description: 'Add authentication. Stays enabled after claim.',
   },
 ];
 
@@ -144,18 +144,7 @@ const Provisioner = () => {
       }).format(new Date(value));
     const expiresAt = formatTime(project.expires_at);
     const claimExpiresAt = formatTime(Date.now() + claim.expires_in * 1000);
-    const granted = new Set(
-      capabilities.filter(({ granted }) => granted).map(({ capability }) => capability)
-    );
     const denied = capabilities.filter(({ granted }) => !granted);
-    const teardown = [
-      granted.has('data_api') ? 'disables Data API' : null,
-      granted.has('auth') ? 'deletes Managed Better Auth and its data' : null,
-    ].filter(Boolean);
-    const teardownSentence =
-      teardown.length > 0
-        ? ` It ${teardown.join(' and ')} so pre-claim tokens do not survive.`
-        : '';
 
     return (
       <div
@@ -203,8 +192,8 @@ const Provisioner = () => {
         <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
           <p className="text-sm leading-relaxed text-gray-new-70">
             Copy these values now. This page will not show them again. The claim link expires on{' '}
-            {claimExpiresAt}. Claiming transfers the Postgres database.{teardownSentence} The
-            project itself expires on {expiresAt}.
+            {claimExpiresAt}. Claiming transfers the Postgres database and rotates the database
+            password. Auth and the Data API stay enabled. The project itself expires on {expiresAt}.
           </p>
           <Button
             className="mt-4 w-full"
@@ -446,7 +435,7 @@ const ClaimablePostgres = () => (
               ],
               [
                 'Unclaimed projects expire',
-                'Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer. Claim the project before then to keep the Postgres database. Claiming disables Data API and deletes Managed Better Auth and its data.',
+                'Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer. Claim the project before then to keep it. Claiming rotates the database password; Auth and the Data API stay enabled.',
               ],
             ].map(([title, description], index) => (
               <div className="grid grid-cols-[36px_1fr] gap-4" key={title}>
