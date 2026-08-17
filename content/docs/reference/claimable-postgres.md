@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-08-16T17:43:51.979Z'
+updatedOn: '2026-08-17T08:13:01.739Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
@@ -254,7 +254,7 @@ curl --request POST \
 }
 ```
 
-Open `verification_uri_complete` and sign in to Neon. Starting the browser claim prepares the transfer: it revokes the project key, access tokens, Data API, and Managed Better Auth (including Auth database data) before the console transfer URL is shown. Choose the destination organization. The project then moves through these states:
+Open `verification_uri_complete` and sign in to Neon. Starting the browser claim prepares the transfer: it revokes the project key, access tokens, and database password before the console transfer URL is shown. Auth and the Data API stay enabled and transfer with the project. Choose the destination organization. The project then moves through these states:
 
 1. `pending`: the claim code exists, but the transfer has not completed.
 2. `accepted`: the project has left the unclaimed-project organization.
@@ -273,7 +273,7 @@ curl https://claimable.neon.tech/v1/projects/quiet-fog-12345678/claim \
   --header "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
-Only `reconciled` means the assertion is dead. Use credentials from the destination Neon organization after that. The recipient can enable Auth again after transfer.
+Only `reconciled` means the assertion is dead. Use credentials from the destination Neon organization after that. Fetch a new `DATABASE_URL` there; Auth and the Data API keep working.
 
 ## Errors
 
