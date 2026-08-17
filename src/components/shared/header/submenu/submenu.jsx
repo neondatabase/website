@@ -58,7 +58,11 @@ const Submenu = ({
               >
                 <ul className="flex gap-x-[128px] pl-[195px] xl:gap-x-5 xl:pl-[143px]" role="menu">
                   {sections.map(({ title, items, variant }, sectionIndex) => (
-                    <li key={sectionIndex} role="none">
+                    <li
+                      key={sectionIndex}
+                      className={cn(variant === 'cards' && 'flex flex-col')}
+                      role="none"
+                    >
                       {title && (
                         <span
                           className="mb-6 block text-[10px] leading-none font-medium tracking-snug text-gray-new-50 uppercase"

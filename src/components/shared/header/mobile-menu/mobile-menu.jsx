@@ -62,7 +62,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
               >
                 <ul className="grid grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
                   {sections.map(({ title, items, variant }, index) => (
-                    <li key={index}>
+                    <li key={index} className={cn(variant === 'cards' && 'flex flex-col')}>
                       {title && (
                         <h3 className="mb-5 text-[10px] leading-none tracking-snug text-gray-new-50 uppercase">
                           {title}

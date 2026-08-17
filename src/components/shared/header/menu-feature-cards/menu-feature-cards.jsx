@@ -75,19 +75,11 @@ const AgentsGraphic = () => (
   </div>
 );
 
+const PLATFORM_TILES = [false, true, false, true, false, false, false, false, true];
+
 const PlatformsGraphic = () => (
   <div className="pointer-events-none absolute top-1/2 right-4 grid -translate-y-1/2 grid-cols-3 gap-1.5 sm:right-2">
-    {[
-      false,
-      true,
-      false,
-      true,
-      false,
-      false,
-      false,
-      false,
-      true,
-    ].map((isHighlighted, index) => (
+    {PLATFORM_TILES.map((isHighlighted, index) => (
       <DatabaseIcon
         key={index}
         className={cn(
@@ -109,7 +101,12 @@ const MenuFeatureCards = ({
   linkProps: { className, ...linkProps } = {},
   className: wrapperClassName,
 }) => (
-  <ul className={cn('flex w-[340px] flex-col gap-y-3 lg:w-auto md:w-[320px]', wrapperClassName)}>
+  <ul
+    className={cn(
+      'flex h-full w-[340px] flex-1 flex-col gap-y-3 lg:w-auto md:w-[320px]',
+      wrapperClassName
+    )}
+  >
     {items.map(({ title, description, to, isExternal, graphic }) => {
       const Graphic = GRAPHICS[graphic];
 
@@ -117,9 +114,9 @@ const MenuFeatureCards = ({
         <li key={title} className="min-h-0 flex-1" role="none">
           <Link
             className={cn(
-              'group relative flex h-full min-h-[148px] items-end overflow-hidden rounded border border-gray-new-90 bg-gray-new-98 p-5 pr-32 transition-colors duration-200',
+              'group relative flex h-full min-h-[104px] items-end overflow-hidden rounded border border-gray-new-90 bg-gray-new-98 p-5 pr-32 transition-colors duration-200',
               'hover:border-gray-new-80 dark:border-gray-new-15 dark:bg-gray-new-8 dark:hover:border-gray-new-30',
-              'lg:min-h-[132px] lg:pr-24 md:min-h-[120px] md:pr-20',
+              'lg:pr-24 md:pr-20',
               className
             )}
             to={to}
