@@ -10,7 +10,7 @@ summary: >-
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-08-17T13:30:01.413Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -72,7 +72,7 @@ Create a `.env` file in your project's root directory and add the connection str
 DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
 
 # Unpooled connection for Drizzle Kit
-DIRECT_URL="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
 ```
 
 ## Install Drizzle and a driver
@@ -135,8 +135,8 @@ Drizzle Kit uses a configuration file to manage schema and migrations. Create a 
 import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set in the .env file');
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in the .env file');
 }
 
 export default defineConfig({
@@ -144,7 +144,7 @@ export default defineConfig({
   out: './drizzle', // Your migrations folder
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DIRECT_URL,
+    url: process.env.DATABASE_URL_UNPOOLED,
   },
 });
 ```
