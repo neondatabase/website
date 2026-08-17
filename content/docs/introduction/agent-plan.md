@@ -12,7 +12,7 @@ summary: >-
   provisioning and fleet management runs through the Neon API, with
   autoscaling, scale-to-zero, branching, and point-in-time recovery included.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:49:10.111Z'
+updatedOn: '2026-08-17T12:17:37.017Z'
 ---
 
 <InfoBlock>
@@ -151,7 +151,7 @@ For step-by-step implementation instructions, see the [AI Agent integration guid
 The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides TypeScript samples and a companion agent skill for building on the agent plan. Install the companion skill with:
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms
+npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms -y
 ```
 
 </Admonition>

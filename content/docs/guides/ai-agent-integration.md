@@ -11,7 +11,7 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-08-17T12:17:37.017Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -55,7 +55,7 @@ For details about **Agent plan** structure, pricing, and benefits, refer to the 
 The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides runnable TypeScript samples for the patterns in this guide. Install the companion agent skill with:
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms
+npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms -y
 ```
 
 </Admonition>
