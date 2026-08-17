@@ -51,7 +51,7 @@ We continue to focus on the developer experience, and in the coming months, weâ€
 
 Hasura GraphQL Engine gives you instant, real-time GraphQL APIs to connect to your Postgres database. Get started with [Hasura](https://hasura.io/docs/latest/getting-started/index/) today.
 
-Visit the [documentation](https://neon.tech/docs/guides/hasura) for more information about integrating Neon with Hasura.
+Visit the [documentation](https://neon.com/docs/guides/hasura) for more information about integrating Neon with Hasura.
 
 Stay tuned for further Neon-Hasura integration enhancements planned for the coming weeks and months.
 

@@ -83,10 +83,10 @@ The project lives in these repos:
 
 ### Instant database creation via Neon
 
-At the heart of Instagres is [Neon](https://neon.tech/home), a serverless Postgres platform that allows databases to be created in under a second. When a user accesses Instagres, either through the browser or the CLI, the tool interacts with [Neon’s API](https://neon.tech/docs/reference/api-reference) to spin up a new Postgres database.
+At the heart of Instagres is [Neon](https://neon.tech/home), a serverless Postgres platform that allows databases to be created in under a second. When a user accesses Instagres, either through the browser or the CLI, the tool interacts with [Neon’s API](https://neon.com/docs/reference/api-reference) to spin up a new Postgres database.
 
 <Admonition type="info" title="FYI">
-Tools like Retool and Replit Agent leverage this instant provisioning speed to quickly create databases for end-users and AI agents. Explore their stories [here](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) and [here](https://neon.tech/blog/how-to-add-a-postgres-database-to-your-replit-agent-project).
+Tools like Retool and Replit Agent leverage this instant provisioning speed to quickly create databases for end-users and AI agents. Explore their stories [here](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) and [here](https://neon.com/blog/how-to-add-a-postgres-database-to-your-replit-agent-project).
 </Admonition>
 
 <br />This lightning-fast provisioning generates a connection string almost instantly. Once you claim your database, Neon also handles the backend heavy lifting, such as autoscaling for storage and compute.
@@ -106,7 +106,7 @@ One challenge with offering free, no-signup databases is preventing abuse from b
 
 Instagres databases are temporary by default: they self-destruct after an hour. But if you want to save your database for later, Instagres has a feature for long-term use: transferring databases to a Neon account.
 
-This feature works by using [Neon’s OAuth](https://neon.tech/docs/guides/oauth-integration) for authentication. When a user decides to transfer their database, Instagres securely links the temporary database to their Neon account.
+This feature works by using [Neon’s OAuth](https://neon.com/docs/guides/oauth-integration) for authentication. When a user decides to transfer their database, Instagres securely links the temporary database to their Neon account.
 
 The actual transfer process is powered by a [Docker-based AWS Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/images-create.html), which uses pg_dump to export the data from the temporary database and pg_restore to import it into the persistent Neon database.
 

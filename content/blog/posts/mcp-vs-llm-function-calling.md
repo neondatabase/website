@@ -39,7 +39,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/mcp-vs-llm-function-calling/neon-mcp-compare-1-1024x576-4225e9e0.jpg)
 
-The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) has been rapidly gaining traction, going viral on social media over the past two weeks. The community has already built dozens of MCP servers across a [wide spectrum of domains](https://github.com/modelcontextprotocol/servers/#-third-party-servers), extending LLM capabilities with external tools, services, and data sources. For example, the [Neon MCP Server](https://neon.tech/blog/building-a-cli-client-for-model-context-protocol-servers) allows LLMs to connect directly to Neon projects, creating new projects and database branches and running SQL queries.
+The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) has been rapidly gaining traction, going viral on social media over the past two weeks. The community has already built dozens of MCP servers across a [wide spectrum of domains](https://github.com/modelcontextprotocol/servers/#-third-party-servers), extending LLM capabilities with external tools, services, and data sources. For example, the [Neon MCP Server](https://neon.com/blog/building-a-cli-client-for-model-context-protocol-servers) allows LLMs to connect directly to Neon projects, creating new projects and database branches and running SQL queries.
 
 If you’re unsure what MCP is or why it matters, this post will walk you through building a small MCP server and comparing it to [LLM function calling](https://platform.openai.com/docs/guides/function-calling).
 
@@ -129,7 +129,7 @@ Let’s see how the Model Context Protocol (MCP) builds on this concept to provi
 
 ## MCP
 
-Rather than building an LLM application with Home Assistant integration code, we can instead build a standalone MCP server that exposes our smart home control utilities to any existing LLM agents like [Claude for Desktop](https://claude.ai/download), [Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf), or our [own custom MCP client](https://neon.tech/blog/building-a-cli-client-for-model-context-protocol-servers). This makes the approach more scalable, allowing us to reuse the same function across multiple LLM apps and agents instead of defining it separately for each one.
+Rather than building an LLM application with Home Assistant integration code, we can instead build a standalone MCP server that exposes our smart home control utilities to any existing LLM agents like [Claude for Desktop](https://claude.ai/download), [Cursor](https://www.cursor.com/), [Windsurf](https://codeium.com/windsurf), or our [own custom MCP client](https://neon.com/blog/building-a-cli-client-for-model-context-protocol-servers). This makes the approach more scalable, allowing us to reuse the same function across multiple LLM apps and agents instead of defining it separately for each one.
 
 Using the MCP SDK npm package, we can create an MCP server in JavaScript:
 
@@ -207,4 +207,4 @@ If you want to learn more about integrating MCP Servers with MCP-compatible LLMs
 - [Using the Postgres MCP Server with Windsurf](https://neon.tech/guides/windsurf-mcp-neon)
 - [Using the Postgres MCP Server with Claude Desktop](https://neon.tech/guides/neon-mcp-server)
 
-If you are interested in building your own MCP Client or you want to better understand the flip side of the protocol, check out this guide on [Building a CLI Client For Model Context Protocol Servers](https://neon.tech/blog/building-a-cli-client-for-model-context-protocol-servers).
+If you are interested in building your own MCP Client or you want to better understand the flip side of the protocol, check out this guide on [Building a CLI Client For Model Context Protocol Servers](https://neon.com/blog/building-a-cli-client-for-model-context-protocol-servers).

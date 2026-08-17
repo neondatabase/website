@@ -1,13 +1,13 @@
 ---
 title: Building AI-Powered Chatbots with Azure AI Studio and Neon
-subtitle: Learn how to create AI powered chatbot using Azure AI Studio with Neon Postgres as the backend database
+subtitle: Learn how to create AI powered chatbot using Azure AI Studio with Lakebase Postgres as the backend database
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-24T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-In this guide, we'll walk through creating an AI-powered chatbot from scratch. We will be using Azure AI Studio, Neon Postgres as the backend database, React for the frontend interface and Express for the backend API.
+In this guide, we'll walk through creating an AI-powered chatbot from scratch. We will be using Azure AI Studio, Lakebase Postgres as the backend database, React for the frontend interface and Express for the backend API.
 
 We'll deploy a GPT-4 model to Azure AI Studio, which we will then use to build a support chatbot that can answer questions, store conversations, and learn from interactions over time.
 
@@ -37,7 +37,7 @@ Save your connection details - you'll need these to configure your chatbot's dat
 
 ### Create the Database Schema
 
-A standard chatbot needs to store conversations and track how users interact with it. We'll create a database schema in Neon Postgres that stores messages, tracks user data, and helps us understand how well the chatbot is performing.
+A standard chatbot needs to store conversations and track how users interact with it. We'll create a database schema in Lakebase Postgres that stores messages, tracks user data, and helps us understand how well the chatbot is performing.
 
 Our schema will include 4 tables:
 
@@ -286,7 +286,7 @@ You can get your Azure OpenAI API key from the Azure OpenAI Studio portal under 
 
 ### Database Configuration
 
-Next, let's set up the database connection. We'll use the `pg` package to connect to our Neon Postgres database.
+Next, let's set up the database connection. We'll use the `pg` package to connect to our Lakebase Postgres database.
 
 Create a `src/config/database.js` file with the following code:
 
@@ -316,7 +316,7 @@ module.exports = {
 };
 ```
 
-This sets up a connection to the Neon Postgres database using the `pg` package. We use the `DATABASE_URL` environment variable to connect to the database.
+This sets up a connection to the Lakebase Postgres database using the `pg` package. We use the `DATABASE_URL` environment variable to connect to the database.
 
 ### OpenAI Service
 

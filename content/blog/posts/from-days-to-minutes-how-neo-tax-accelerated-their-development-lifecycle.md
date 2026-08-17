@@ -69,9 +69,9 @@ To ensure the accuracy of their calculations, the team put a QA process in place
 <cite>Miguel Hernandez, Backend Tech Lead at Neo.tax</cite>
 </blockquote>
 
-Now, Neo.Tax uses Neon to streamline this process. The big difference is this: with Neon, the team can create accurate [deploy previews](https://neon.tech/flow) by leveraging [database branching](https://neon.tech/docs/introduction/branching). Here’s how the new process works:
+Now, Neo.Tax uses Neon to streamline this process. The big difference is this: with Neon, the team can create accurate [deploy previews](https://neon.tech/flow) by leveraging [database branching](https://neon.com/docs/introduction/branching). Here’s how the new process works:
 
-1. When a PR is open, Neo.Tax uses the [Neon CLI](https://neon.tech/docs/reference/neon-cli) to create a new branch from the development database. The branch name is associated with the GitHub branch name for consistency.
+1. When a PR is open, Neo.Tax uses the [Neon CLI](https://neon.com/docs/cli) to create a new branch from the development database. The branch name is associated with the GitHub branch name for consistency.
 2. The new branch URL is injected into their Cloud Run instances via environment variables in CircleCI.
 3. Product and QA teams can now perform manual and automatic tests using this isolated database branch. They can generate PDFs, compare data, and ensure all calculations are accurate.
 4. When the PR is merged, the associated database branch is deleted.
@@ -95,11 +95,11 @@ This method is not only more convenient but also more secure, as it avoids the r
 
 ## A note on Neon design: environments, branches, projects
 
-Especially for those users already familiar with Neon [and its object hierarchy,](https://neon.tech/docs/manage/overview) you might be curious to know how Neo.Tax structured their Neon deployment. Here’s an overview:
+Especially for those users already familiar with Neon [and its object hierarchy,](https://neon.com/docs/manage/overview) you might be curious to know how Neo.Tax structured their Neon deployment. Here’s an overview:
 
 **Environments**
 
-Neo.Tax uses three primary environments, each one with its own separate [project](https://neon.tech/docs/manage/overview#projects) in Neon: development, staging, and production. Each of these projects has a main branch that serves as the base for creating other branches.
+Neo.Tax uses three primary environments, each one with its own separate [project](https://neon.com/docs/manage/overview#projects) in Neon: development, staging, and production. Each of these projects has a main branch that serves as the base for creating other branches.
 
 - `development` isused for day-to-day development tasks.
 - `staging` acts as a middle ground where features and fixes from development are tested before being released to production.

@@ -11,7 +11,7 @@ summary: >-
   constructors over WebSockets when sessions, interactive transactions, or
   node-postgres drop-in compatibility are required. TypeScript types are
   bundled; install with `npm install @neondatabase/serverless`.
-updatedOn: '2026-06-18T22:47:28.438Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -552,7 +552,7 @@ The GitHub repository and [changelog](https://github.com/neondatabase/serverless
 - [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 - [node-postgres](https://node-postgres.com/)
 - [Drizzle-ORM](https://orm.drizzle.team/docs/quick-postgresql/neon)
-- [Schema migration with Neon Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
+- [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
 - [kysely](https://github.com/kysely-org/kysely)
 - [Zapatos](https://jawj.github.io/zapatos/)
 - [Vercel Edge Functions](https://vercel.com/docs/functions/edge-functions)

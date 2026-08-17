@@ -51,7 +51,7 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 
 AWS App Runner is a fully managed service that makes it easy for developers to quickly deploy containerized web applications and APIs, at scale. These services will automatically scale the instances up or down for your App Runner application in accordance to incoming traffic volume.
 
-Neon complements this setup by providing a serverless Postgres database that [scales compute resources automatically](https://neon.tech/docs/introduction/autoscaling), optimizing performance based on demand.
+Neon complements this setup by providing a serverless Postgres database that [scales compute resources automatically](https://neon.com/docs/introduction/autoscaling), optimizing performance based on demand.
 
 We’ll walk through deploying a FastAPI application with Neon Serverless Postgres, focusing on secure database connection management via AWS Systems Manager (SSM) Parameter Store. This approach allows for flexible application environment management across development, testing, and production stages.
 
@@ -216,7 +216,7 @@ This example API allows clients to create (POST) and retrieve (GET) todos. The d
 
 [Lifespan events](https://fastapi.tiangolo.com/advanced/events/) are the recommended way to execute code once the server starts in FastAPI. In this example, the `Todo` model (i.e. table) is created if it doesn’t yet exist in the database.
 
-The `pool_recycle=300` option is an “optimistic” approach to [prevent the pool from using a connection that has passed a certain age](https://docs.sqlalchemy.org/en/20/core/pooling.html#setting-pool-recycle). In this case, we are setting the value to 5 minutes to correspond with the default [compute auto-suspend in Neon](https://neon.tech/docs/guides/auto-suspend-guide).
+The `pool_recycle=300` option is an “optimistic” approach to [prevent the pool from using a connection that has passed a certain age](https://docs.sqlalchemy.org/en/20/core/pooling.html#setting-pool-recycle). In this case, we are setting the value to 5 minutes to correspond with the default [compute auto-suspend in Neon](https://neon.com/docs/guides/auto-suspend-guide).
 
 Another option to account for possible stale connections is to use the `pool_pre_ping` option. This option is used to test the availability of a database connection before the connection is used. Note, this can add additional latency to new connections since they are first “checked”.
 

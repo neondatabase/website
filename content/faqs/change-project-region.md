@@ -3,7 +3,7 @@ title: 'Can I change the region of my existing Neon project after creation?'
 subtitle: 'No. Region is fixed at project creation. Migrate to a new project to change regions.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-15T17:19:53.989Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -28,7 +28,7 @@ For the full reasoning and a flowchart of migration options, see [Region migrati
 
 The high-level steps:
 
-1. **Create a new Neon project** in the target region. From the [Neon Console](https://console.neon.tech), click **New Project** and pick the cloud provider and region you want.
+1. **Create a new Neon project** in the target region. From the [Neon Console](https://console.neon.tech), click **New Project** and pick an AWS region.
 2. **Dump from the old project** with `pg_dump`:
 
    ```bash shouldWrap

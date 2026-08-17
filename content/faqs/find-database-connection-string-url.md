@@ -3,7 +3,7 @@ title: 'Where can I find my database connection string or URL in Neon?'
 subtitle: 'The Connect widget builds it for you. The URL is fixed per role and branch, but you can reset the password.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -21,7 +21,7 @@ Click **Connect** on your **Project Dashboard** in the [Neon Console](https://co
 1. Sign in to the [Neon Console](https://console.neon.tech) and select your project.
 2. On the **Project Dashboard**, click **Connect**.
 3. Pick a **Branch**, **Compute**, **Database**, and **Role**.
-4. Copy the URL. Toggle **Connection pooling** off if you need the direct URL (no `-pooler` in the hostname).
+4. Copy the URL. Neon shows the pooled URL by default. Toggle **Connection pooling** off if you need the direct URL (no `-pooler` in the hostname).
 
 Neon URLs follow this shape:
 

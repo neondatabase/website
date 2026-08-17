@@ -7,7 +7,7 @@ summary: >-
   created on your main branch works in all preview branches. No provider
   API keys are required.
 enableTableOfContents: true
-updatedOn: '2026-07-20T20:13:30.657Z'
+updatedOn: '2026-08-06T17:43:14.909Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -23,7 +23,7 @@ A credential must include the `ai_gateway:invoke` scope.
 
 In the Neon Console, select your branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, give it a name, and check **ai_gateway:invoke**.
 
-After creation, the credential is shown once. Copy the snippet or click **Download .env** before closing. The snippet includes the gateway env vars (see [Environment variables](#environment-variables) below).
+After creation, the credential is shown once. Copy the snippet or click **Download .env** before closing. The snippet includes both gateway env vars (see [Environment variables](#environment-variables) below).
 
 To view or revoke credentials later, return to the **Credentials** page and use the action menu (⋮) next to the credential.
 
@@ -109,10 +109,13 @@ Append the dialect path for the endpoint you need:
 ```
 NEON_AI_GATEWAY_BASE_URL + /v1            → chat completions (all providers)
 NEON_AI_GATEWAY_BASE_URL + /openai/v1     → OpenAI Responses API
-NEON_AI_GATEWAY_BASE_URL + /v1/gemini     → Gemini generateContent API
+NEON_AI_GATEWAY_BASE_URL + /anthropic     → Anthropic Messages API
+NEON_AI_GATEWAY_BASE_URL + /gemini        → Gemini generateContent API
 ```
 
-Each inference dialect is also reachable at a longer `/ai-gateway/<dialect>/v1` path (e.g. `/ai-gateway/mlflow/v1` for chat completions, `/ai-gateway/openai/v1` for Responses, `/ai-gateway/gemini` for Gemini). Both forms behave identically and neither is deprecated. The model list is the exception: it has only `GET /v1/models`, with no `/ai-gateway/...` form. See [Shorter paths](/docs/ai-gateway/models#shorter-v1-paths) for the full mapping.
+The Anthropic and Gemini values are SDK base URLs: the Anthropic SDK appends `/v1/messages` and google-genai appends `/v1beta/models/...`, so don't add those segments yourself. Calling either endpoint directly takes the full path, `/anthropic/v1/messages` or `/gemini/v1beta/models/<model>:<action>`.
+
+Each inference dialect is also reachable at a longer `/ai-gateway/<dialect>/v1` path (e.g. `/ai-gateway/mlflow/v1` for chat completions, `/ai-gateway/openai/v1` for Responses, `/ai-gateway/anthropic/v1` for Anthropic Messages, `/ai-gateway/gemini` for Gemini). Both forms behave identically and neither is deprecated, but the shorter paths are what the docs and SDKs use. The model list is the exception: it has only `GET /v1/models`, with no `/ai-gateway/...` form. See [Shorter paths](/docs/ai-gateway/models#shorter-paths) for the full mapping.
 
 To use an OpenAI SDK, set its `apiKey` and `baseURL` from these variables (see the examples below).
 

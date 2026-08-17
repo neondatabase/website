@@ -63,7 +63,7 @@ Here is an overview of how some of our partners use this integration to offer a 
 
 ## Integrating using the Neon API
 
-Neon Partners can integrate Neon into their products using our [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This integration enables partners to effortlessly create serverless Postgres databases and incorporate them into their products. Here is an overview of how some of our partners use this integration:
+Neon Partners can integrate Neon into their products using our [API](https://neon.com/docs/reference/api/get-started). This integration enables partners to effortlessly create serverless Postgres databases and incorporate them into their products. Here is an overview of how some of our partners use this integration:
 
 ### Vercel
 

@@ -54,7 +54,6 @@
   "updateNeonAuthUserRole": "neon neon-auth user set-role <user-id>",
   "getCurrentUserOrganizations": "neon orgs list",
   "listProjects": "neon projects list",
-  "listSharedProjects": "neon projects list",
   "createProject": "neon projects create",
   "deleteProject": "neon projects delete",
   "updateProject": "neon projects update",

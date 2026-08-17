@@ -5,7 +5,7 @@ summary: >-
   Solutions for common errors when using Neon AI Gateway, including
   authentication failures, model errors, quota limits, and upstream issues.
 enableTableOfContents: true
-updatedOn: '2026-07-20T19:53:53.968Z'
+updatedOn: '2026-08-06T09:06:39.642Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -53,7 +53,7 @@ The model exists in the catalog but doesn't work with the endpoint you're callin
 **Fix:** Check which endpoint the model requires:
 
 - OpenAI codex models on `/v1/chat/completions` → use `/openai/v1/responses`
-- Google models on `/openai/v1/responses` → use `/v1/gemini/v1beta/...` or `/v1/chat/completions`
+- Google models on `/openai/v1/responses` → use `/gemini/v1beta/...` or `/v1/chat/completions`
 
 See [Which endpoint to use](/docs/ai-gateway/models#which-endpoint-to-use).
 
@@ -116,7 +116,7 @@ Your account's AI Gateway quota is blocked. This can happen if you exceed the to
 }
 ```
 
-If the block is due to the per-minute token limit specifically rather than the daily cap, the message reads `ai gateway TPM limit exceeded for model "<model-id>"` instead.
+If the block is due to the per-minute token limit specifically rather than the daily cap, the message reads `ai gateway per-minute token limit exceeded for model "<model-id>"` instead.
 
 **Fix:** Check the `Retry-After` header. If present, the block is temporary and will lift at that time. If absent, the block is permanent until resolved. Contact support for a quota increase or to resolve a permanent block. See [Rate limits](/docs/ai-gateway/models#rate-limits) for current per-minute quota values.
 

@@ -78,4 +78,4 @@ Sign up with Neon, try it, and experience the seamless integration that can take
 
 ## Additional Resources
 
-To dive deeper into PolyScale and Neon, check out the [detailed documentation](https://neon.tech/docs/guides/polyscale-integration) and join the [Neon community forum](https://community.neon.tech/) for insights and support.
+To dive deeper into PolyScale and Neon, check out the [detailed documentation](https://neon.com/docs/guides/polyscale-integration) and join the [Neon community forum](https://community.neon.tech/) for insights and support.

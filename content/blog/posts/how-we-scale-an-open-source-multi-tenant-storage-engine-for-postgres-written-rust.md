@@ -74,7 +74,7 @@ The purpose of the Pageserver is to store and quickly reconstruct Postgres pages
 
 Note:
 
-A tenant in Neon terms holds the data of a Postgres instance. When you create a Neon project in the Console, Neon assigns it a project-id (also known as a tenant-id), and the main branch-id, which is referred to as timeline-id. See [Operations](https://neon.tech/docs/manage/operations) for more information.
+A tenant in Neon terms holds the data of a Postgres instance. When you create a Neon project in the Console, Neon assigns it a project-id (also known as a tenant-id), and the main branch-id, which is referred to as timeline-id. See [Operations](https://neon.com/docs/manage/operations) for more information.
 
 In the diagram below, we show the example of a Pageserver with 2 tenants. The area of the rectangles represents the amount of data a tenant has. The bigger the surface area, the larger the dataset. Also, for simplicity, we assume that each tenant has exactly one table.
 
@@ -96,7 +96,7 @@ Currently, the default stripe size is 256MiB, and this cannot be changed once a 
 
 ## Read & Write Paths
 
-We’ve discussed Neon Read and Write paths in detail in the [deep dive into Neon’s storage engine](https://neon.tech/blog/get-page-at-lsn) article. In summary, for insert, delete, and update queries, Postgres streams WAL records to a durability layer called Safekeepers, which uses the Paxos consensus algorithm. Once a quorum is reached, the WAL is sent to the Pageservers that transform it into immutable files.
+We’ve discussed Neon Read and Write paths in detail in the [deep dive into Neon’s storage engine](https://neon.com/blog/get-page-at-lsn) article. In summary, for insert, delete, and update queries, Postgres streams WAL records to a durability layer called Safekeepers, which uses the Paxos consensus algorithm. Once a quorum is reached, the WAL is sent to the Pageservers that transform it into immutable files.
 
 For read queries, Postgres sends a page request to the Pageserver using GetPage@LSN function, which returns the desired pages.
 
@@ -129,6 +129,6 @@ Storage sharding allows Neon to support databases up to 10x the current capacity
 
 ## 📚 Continue reading
 
-- **[A deep dive into the Neon storage engine:](https://neon.tech/blog/get-page-at-lsn)** Neon’s custom-built storage is the core of the platform—get an overview of how it’s built.
-- **[1 year of autoscaling Postgres:](https://neon.tech/blog/1-year-of-autoscaling-postgres-at-neon)** learn how Neon can autoscale your Postgres instance without dropping connections or interrupting your queries, avoiding the need for overprovisioning or resizing manually.
+- **[A deep dive into the Neon storage engine:](https://neon.com/blog/get-page-at-lsn)** Neon’s custom-built storage is the core of the platform—get an overview of how it’s built.
+- **[1 year of autoscaling Postgres:](https://neon.com/blog/1-year-of-autoscaling-postgres-at-neon)** learn how Neon can autoscale your Postgres instance without dropping connections or interrupting your queries, avoiding the need for overprovisioning or resizing manually.
 - **[How others are using Neon:](https://neon.tech/case-studies)** learn first-hand why others are choosing Neon. (Hint: it’s because of serverless and autoscaling, easier developer workflows due to copy-on-write branching, and Neon’s suitability for one-database-per-tenant architectures).

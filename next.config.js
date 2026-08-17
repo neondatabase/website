@@ -10,6 +10,12 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 const defaultConfig = {
   poweredByHeader: false,
   transpilePackages: ['geist', 'react-icons'],
+  outputFileTracingExcludes: {
+    '*': ['./public/**'],
+  },
+  outputFileTracingIncludes: {
+    '*': ['./public/**/*.svg', './public/**/*.md'],
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85, 90, 95, 99, 100],
@@ -213,6 +219,11 @@ const defaultConfig = {
       {
         source: '/cookie-policy',
         destination: 'https://www.databricks.com/legal/cookienotice',
+        permanent: true,
+      },
+      {
+        source: '/subprocessors',
+        destination: 'https://www.databricks.com/legal/databricks-subprocessors',
         permanent: true,
       },
       {

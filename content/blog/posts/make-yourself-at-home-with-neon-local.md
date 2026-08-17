@@ -38,17 +38,17 @@ seo:
 
 The term ephemeral gets thrown around a lot in the database world, but what does it actually mean?
 
-In the context of database [branches](https://neon.tech/docs/introduction/branching), it refers to something temporary, short-lived, and not meant to persist. That might sound odd because databases are usually the most permanent part of your stack. So why go ephemeral?
+In the context of database [branches](https://neon.com/docs/introduction/branching), it refers to something temporary, short-lived, and not meant to persist. That might sound odd because databases are usually the most permanent part of your stack. So why go ephemeral?
 
 **Because not every environment needs to last.**
 
 ## What is Neon Local?
 
-[Neon Local](https://neon.tech/docs/local/neon-local) is a proxy service that provides a local interface to your Neon cloud database. By default, it automatically creates a new database branch when your container starts and deletes it when it stops.
+[Neon Local](https://neon.com/docs/local/neon-local) is a proxy service that provides a local interface to your Neon cloud database. By default, it automatically creates a new database branch when your container starts and deletes it when it stops.
 
 ### Key benefits:
 
-- **CI-friendly branching:** Automatically creates and removes a database branch for each test run, no need to configure [GitHub Actions](https://neon.tech/docs/guides/branching-github-actions) manually.
+- **CI-friendly branching:** Automatically creates and removes a database branch for each test run, no need to configure [GitHub Actions](https://neon.com/docs/guides/branching-github-actions) manually.
 - **Local development support:** Lets you use branching locally without manually managing branches or connection strings.
 - **Consistent connectivity:** Your application connects to a local Postgres endpoint while Neon Local routes and authenticates to the correct project and branch.<br />
 
@@ -67,7 +67,7 @@ So, Neon Local adopts a hybrid approach. With Neon’s instant branching, look h
 
 There are several ways to use Neon Local, including using **Docker compose** and **Docker run** commands, with a variety of Postgres clients, and with configuration options to suit your needs.
 
-To give you just one example, here are some code snippets that show how you might use Neon Local in a JavaScript application using our [serverless driver](https://neon.tech/docs/serverless/serverless-driver) and a `docker-compose.yml` file.
+To give you just one example, here are some code snippets that show how you might use Neon Local in a JavaScript application using our [serverless driver](https://neon.com/docs/serverless/serverless-driver) and a `docker-compose.yml` file.
 
 For a more comprehensive explaination, see the following guide:
 
@@ -75,7 +75,7 @@ For a more comprehensive explaination, see the following guide:
 
 ### Docker Compose
 
-In this `docker-compose.yml`, the `app` service is set up to depend on a `db` service. The db service uses the [neondatabase/neon_local](https://hub.docker.com/r/neondatabase/neon_local) Docker image and is configured with the necessary environment variables. The `DRIVER` is set to `serverless` to indicate that [Neon’s serverless driver](https://neon.tech/docs/serverless/serverless-driver) should be used for database connections, but it is possible to use Neon Local with any Postgres client by setting the `DRIVER` value to `postgres`.
+In this `docker-compose.yml`, the `app` service is set up to depend on a `db` service. The db service uses the [neondatabase/neon_local](https://hub.docker.com/r/neondatabase/neon_local) Docker image and is configured with the necessary environment variables. The `DRIVER` is set to `serverless` to indicate that [Neon’s serverless driver](https://neon.com/docs/serverless/serverless-driver) should be used for database connections, but it is possible to use Neon Local with any Postgres client by setting the `DRIVER` value to `postgres`.
 
 ```yaml
 services:
@@ -104,7 +104,7 @@ services:
 
 ### Neon serverless driver
 
-This snippet configures the Neon [serverless driver](https://neon.tech/docs/serverless/serverless-driver) to behave differently depending on the environment. In development, it connects to Neon Local on `db:5432` and sets the `fetchEndpoint` accordingly. In production, the connection is established using the `DATABASE_URL` environment variable.
+This snippet configures the Neon [serverless driver](https://neon.com/docs/serverless/serverless-driver) to behave differently depending on the environment. In development, it connects to Neon Local on `db:5432` and sets the `fetchEndpoint` accordingly. In production, the connection is established using the `DATABASE_URL` environment variable.
 
 ```javascript
 import { neon, neonConfig } from "@neondatabase/serverless";
@@ -168,7 +168,7 @@ By default, if no `PARENT_BRANCH_ID` is set, Neon Local will create a new branch
 
 By default, Neon Local creates a new branch when the container starts and deletes it when it stops. That said, there are cases where you might want to keep the branch around. To persist branches between container runs, set `DELETE_BRANCH` to `false`, this will prevent the branch from being deleted when the container shuts down.
 
-For more detailed configuration information, visit the docs: [Neon Local](https://neon.tech/docs/local/neon-local).
+For more detailed configuration information, visit the docs: [Neon Local](https://neon.com/docs/local/neon-local).
 
 <p></p>
 
@@ -182,4 +182,4 @@ We’re also exploring support for an “offline mode”, which would allow you 
 
 Neon has always made working with branches easy, and with Neon Local, it’s now just as simple to do from Docker environments. Whether developing, testing, or previewing features, you can spin up clean, isolated ephemeral environments that feel local but behave like prod.
 
-<br />Ready to give it a try? Make yourself comfortable and head over to our [docs](https://neon.tech/docs/local/neon-local) to get started.
+<br />Ready to give it a try? Make yourself comfortable and head over to our [docs](https://neon.com/docs/local/neon-local) to get started.

@@ -65,7 +65,7 @@ This is a very common situation that traditional managed databases don’t solve
 <cite>Pieralberto Colombo, CTO at Recrowd</cite>
 </blockquote>
 
-The Recrowd team decided to move away from the scalability dilemma by switching to Neon. Being serverless Postgres, Neon comes with [autoscaling](https://neon.tech/docs/introduction/autoscaling), a feature that dynamically adjusts compute resources to match current demand without manual intervention. This makes it seamless to manage traffic peaks without the manual overhead, downtime, or cost inefficiencies.
+The Recrowd team decided to move away from the scalability dilemma by switching to Neon. Being serverless Postgres, Neon comes with [autoscaling](https://neon.com/docs/introduction/autoscaling), a feature that dynamically adjusts compute resources to match current demand without manual intervention. This makes it seamless to manage traffic peaks without the manual overhead, downtime, or cost inefficiencies.
 
 From a user’s perspective, the process is straightforward and requires minimal intervention:
 
@@ -73,7 +73,7 @@ From a user’s perspective, the process is straightforward and requires minimal
 - Once a need for scaling is detected, Neon dynamically adjusts the compute resources, which become available almost instantly. When demand diminishes, resources are scaled down.
 - This elastic scaling happens with zero downtime. Applications remain accessible, and database operations continue without interruption.
 
-Users can set [autoscaling limits](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration) to control how aggressively or conservatively resources are scaled.
+Users can set [autoscaling limits](https://neon.com/docs/manage/endpoints#compute-size-and-autoscaling-configuration) to control how aggressively or conservatively resources are scaled.
 
 ## Give it a try
 

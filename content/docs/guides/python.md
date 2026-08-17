@@ -1,16 +1,16 @@
 ---
-title: Connect a Python application to Neon Postgres
-subtitle: Learn how to run SQL queries in Neon from Python using psycopg, psycopg2, or
+title: Connect a Python application to Lakebase Postgres
+subtitle: Learn how to run SQL queries from Python using psycopg, psycopg2, or
   asyncpg
 summary: >-
-  Connecting Python to Neon Postgres requires choosing between three drivers:
+  Connecting Python to Lakebase Postgres requires choosing between three drivers:
   psycopg (v3, synchronous), psycopg2 (legacy synchronous), and asyncpg
   (asyncio-based async). The guide covers project setup, .env connection string
   configuration, and full CRUD examples for all three drivers. Pick this over
   the SQLAlchemy or Django guides when you need raw SQL driver code rather than
   an ORM.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 
@@ -18,7 +18,7 @@ description="Pre-built prompt for connecting Python applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Python application using popular Postgres drivers. We'll cover [Psycopg 3](https://www.psycopg.org/psycopg3/docs/), the latest generation of the popular synchronous adapter, its predecessor [Psycopg 2 (psycopg2)](https://pypi.org/project/psycopg2-binary/), and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
 
-You'll learn how to connect to your Neon database from a Python application and perform basic Create, Read, Update, and Delete (CRUD) operations.
+You'll learn how to connect to the database from a Python application and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 ## Prerequisites
 
@@ -73,7 +73,7 @@ For your Python project, create a project directory, set up a virtual environmen
     </CodeTabs>
 
 3.  Install the required libraries using `pip`.
-    - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3).
+    - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3). **Recommended** for new projects.
     - `psycopg2-binary`: An older, widely-used synchronous database adapter.
     - `asyncpg`: The asynchronous database adapter for connecting to Postgres.
     - `python-dotenv`: A helper library to manage environment variables.
@@ -82,7 +82,7 @@ For your Python project, create a project directory, set up a virtual environmen
     pip install "psycopg[binary]" psycopg2-binary asyncpg python-dotenv
     ```
 
-    > Install the library that best fits your project needs. This guide provides examples for all three.
+    > If you're not sure which driver to use, use `psycopg` (v3). It's the actively maintained successor to `psycopg2`. This guide provides examples for all three in case your project already depends on one of the others.
 
 ## Store your Neon connection string
 

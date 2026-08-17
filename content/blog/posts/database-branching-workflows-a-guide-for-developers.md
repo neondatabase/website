@@ -40,7 +40,7 @@ seo:
 
 Modern development demands speed and flexibility, but this is nowhere to be found in database development. Even when using managed databases, database workflows are still slow and prone to errors: setting up new instances takes time, undoing changes is risky, keeping data consistent across environments becomes a pain over time—the list goes on. For many teams, the database is still the place where it’s way too easy to make a fatal mistake and slow everything down.
 
-This is a problem that we’re very familiar with in Neon. In fact, it is one of our main [product inspirations](https://neon.tech/blog/hello-world). We believe that data and databases should be treated as everything else in our codebase —with the same capacity for safe development and collaboration, iterative improvement, and potential for automation, all without compromising security or jeopardizing engineering time.
+This is a problem that we’re very familiar with in Neon. In fact, it is one of our main [product inspirations](https://neon.com/blog/hello-world). We believe that data and databases should be treated as everything else in our codebase —with the same capacity for safe development and collaboration, iterative improvement, and potential for automation, all without compromising security or jeopardizing engineering time.
 
 ## Database development done right: ship faster with these database branching guides
 

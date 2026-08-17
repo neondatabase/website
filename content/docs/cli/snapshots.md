@@ -9,7 +9,7 @@ summary: >-
   a snapshot into a new or existing branch, and configure an automatic backup
   schedule.
 enableTableOfContents: true
-updatedOn: '2026-07-17T17:50:54.830Z'
+updatedOn: '2026-08-05T22:15:40.109Z'
 ---
 
 The `snapshots` command creates, lists, updates, deletes, and restores snapshots of your Neon branches, and manages the automatic backup schedule of a branch. A snapshot captures the state of a branch at a point in time, so you can restore it later. For background on the feature, plans, and limits, see [Backup and restore](/docs/guides/backup-restore).
@@ -20,7 +20,7 @@ If `--project-id` is omitted, the CLI resolves it from your [context file](/docs
 
 ## neon snapshots create (#create)
 
-Creates a snapshot from a branch. By default, it snapshots the head of the branch from your context or the project's default branch. Use `--lsn` or `--timestamp` to capture an earlier point within the branch's [restore window](/docs/introduction/history-window); the two options are mutually exclusive.
+Creates a snapshot from a branch. By default, it snapshots the head of the branch from your context or the project's default branch. Use `--lsn` or `--timestamp` to capture an earlier point within the branch's [history window](/docs/introduction/history-window); the two options are mutually exclusive.
 
 <CliUsage command="snapshots create" />
 
@@ -35,7 +35,7 @@ neon snapshots create --branch main --name pre-migration
 Snapshot a branch at a specific LSN and set an expiration:
 
 ```bash
-neon snapshots create --branch main --lsn 0/1F3C8A0 --expires-at 2025-12-31T23:59:59Z
+neon snapshots create --branch main --lsn 0/1F3C8A0 --expires-at 2027-12-31T23:59:59Z
 ```
 
 Snapshot a branch at a point in time:
@@ -44,7 +44,7 @@ Snapshot a branch at a point in time:
 neon snapshots create --branch main --timestamp 2025-01-01T00:00:00Z
 ```
 
-Timestamps and expiration times use RFC 3339 format. Omit `--expires-at` to keep the snapshot indefinitely.
+Timestamps and expiration times use RFC 3339 format. `--timestamp` must be in the past and `--expires-at` in the future. Omit `--expires-at` to keep the snapshot until you delete it; a manual snapshot's expiration has no maximum, unlike the 35-day cap on [scheduled snapshots](#schedule-set). Snapshot names must be unique within a project.
 
 ## neon snapshots list (#list)
 
@@ -172,11 +172,15 @@ Pick one `--frequency`; that choice determines which of `--day` and `--hour` you
 | `weekly`      | `--day`, `--hour` | 1-7 (Monday-Sunday) |
 | `monthly`     | `--day`, `--hour` | 1-31                |
 
+The server enforces these combinations, so a schedule missing a value its frequency needs is rejected with an error such as `daily schedules must specify the hour of the day`.
+
 Use `--retention` with any frequency to set how long each snapshot is kept.
 
 <CliUsage command="snapshots schedule set" />
 
 <CliOptions command="snapshots schedule set" />
+
+Of the options above, `--month` is the exception: none of the supported frequencies read it, so setting it has no effect on when snapshots are taken.
 
 Set a daily 03:00 snapshot kept for 7 days (604800 seconds):
 
@@ -196,4 +200,4 @@ Set a multi-entry schedule with JSON:
 neon snapshots schedule set --branch main --schedule '[{"frequency":"daily","hour":3},{"frequency":"weekly","day":1,"hour":4}]'
 ```
 
-Retention is set in seconds (minimum 3600). Omit `--retention` to keep snapshots indefinitely.
+`--retention` is in seconds, from 3600 (1 hour) to 3024000 (35 days). Omit it and scheduled snapshots are kept for 35 days, the maximum. Manual snapshots created with [snapshots create](#create) follow the opposite rule: they never expire unless you set `--expires-at`. See [Snapshot retention](/docs/guides/backup-restore#snapshot-retention).

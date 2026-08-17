@@ -280,7 +280,8 @@ describe('Middleware - AI Agent Integration Tests', () => {
 
       expect(response.type).toBe('redirect');
       expect(response.url.toString()).toBe('https://neon.com/docs/cli/auth.md');
-      expect(response.headers.get('Cache-Control')).toBe('public, max-age=3600, s-maxage=86400');
+      // Short TTL so the redirect re-enters middleware (and is tracked) ~every 5 min.
+      expect(response.headers.get('Cache-Control')).toBe('public, max-age=60, s-maxage=300');
       // The agent hit is still tracked before the redirect returns.
       expect(global.fetch).toHaveBeenCalledWith(
         'https://neonapi.io/t.js',
@@ -509,6 +510,92 @@ describe('Middleware - AI Agent Integration Tests', () => {
         expect(response.type).toBe('next');
       }
     );
+  });
+
+  describe('Missing .md → markdown 404 (static manifest)', () => {
+    const nonAnalyticsFetches = () =>
+      global.fetch.mock.calls.filter(([url]) => url !== 'https://neonapi.io/t.js');
+
+    // The single LLM beacon fired for this request (or null). Asserting on it
+    // proves every .md read is tracked exactly once with the right llm_404 flag.
+    const beacons = () =>
+      global.fetch.mock.calls
+        .filter(([url]) => url === 'https://neonapi.io/t.js')
+        .map(([, opts]) => JSON.parse(opts.body));
+
+    it.each([
+      ['out-of-namespace path', '/foo/bar.md'],
+      ['deep out-of-namespace path', '/foo/bar/baz.md'],
+      ['missing skill reference', '/docs/ai/skills/neon-postgres/references/gone.md'],
+      // Unknown skill via a discovery alias: the rewrite target doesn't exist, so
+      // return a markdown 404 (not a mislabeled read + HTML 404).
+      ['unknown skill alias', '/.well-known/agent-skills/does-not-exist/SKILL.md'],
+    ])('returns a markdown 404 for a missing %s and tracks it', async (_label, path) => {
+      const req = createMockRequest(path, 'Mozilla/5.0', 'text/html');
+
+      const response = await middleware(req);
+
+      expect(response.status).toBe(404);
+      expect(response.headers.get('content-type')).toContain('text/markdown');
+      expect(response.headers.get('x-content-source')).toBe('agent-404');
+      expect(response.headers.get('x-robots-tag')).toBe('noindex');
+      // No filesystem/markdown fetch — the manifest is a Set lookup.
+      expect(nonAnalyticsFetches()).toHaveLength(0);
+      // Tracked once as a 404.
+      expect(beacons()).toEqual([
+        expect.objectContaining({ data: { llm_agent: true, llm_404: true } }),
+      ]);
+    });
+
+    it.each([
+      ['real static file', '/pricing.md'],
+      ['real skill SKILL.md', '/docs/ai/skills/neon-postgres/SKILL.md'],
+      // Rewrite-backed skill-discovery aliases: no physical file at the request
+      // path (next.config rewrites to a real SKILL.md), so the proxy must pass
+      // them through rather than 404, or agent discovery breaks.
+      ['/skill.md alias', '/skill.md'],
+      ['.well-known agent-skills alias', '/.well-known/agent-skills/neon-postgres/SKILL.md'],
+      ['docs .well-known alias', '/docs/.well-known/agent-skills/neon-postgres/SKILL.md'],
+    ])('passes through a %s, tracks the read, no markdown fetch', async (_label, path) => {
+      const req = createMockRequest(path, 'Mozilla/5.0', 'text/html');
+
+      const response = await middleware(req);
+
+      expect(response.type).toBe('next');
+      // Static .md must stay noindex (the isContentRoute branch would otherwise
+      // set it; this short-circuit carries it forward).
+      expect(response.headers.get('x-robots-tag')).toBe('noindex');
+      // Served statically / by rewrite — no markdown fetch, just the beacon.
+      expect(nonAnalyticsFetches()).toHaveLength(0);
+      // Tracked once as a read (not a 404).
+      expect(beacons()).toEqual([
+        expect.objectContaining({ data: { llm_agent: true, llm_404: false } }),
+      ]);
+    });
+  });
+
+  describe('Single-beacon invariant on transient error', () => {
+    it('agent .md whose first /md fetch throws is tracked exactly once', async () => {
+      // Agent branch fetch throws → it tracks (is404:false) and falls through to
+      // the isContentRoute branch, which re-fetches successfully. That branch must
+      // NOT track again (it's gated on !isAgent), or the request double-counts.
+      let mdFetches = 0;
+      global.fetch = vi.fn((url) => {
+        if (url === 'https://neonapi.io/t.js') return Promise.resolve({ ok: true });
+        mdFetches += 1;
+        if (mdFetches === 1) return Promise.reject(new Error('transient network error'));
+        return Promise.resolve({ ok: true, status: 200, text: () => Promise.resolve('# Doc') });
+      });
+
+      const req = createMockRequest('/docs/introduction.md', 'Claude/1.0', 'text/html');
+      const response = await middleware(req);
+
+      const beacons = global.fetch.mock.calls.filter(([url]) => url === 'https://neonapi.io/t.js');
+      expect(beacons).toHaveLength(1); // exactly one, despite the retry
+      expect(mdFetches).toBe(2); // the retry still happened (availability preserved)
+      const text = await response.text();
+      expect(text).toContain('# Doc'); // served from the successful retry
+    });
   });
 
   describe('Response headers validation', () => {

@@ -172,7 +172,7 @@ Once you’ve configured Neon and ClickHouse in PeerDB, the data synchronization
 
 To get started:
 
-- Create accounts with [Neon](https://neon.tech/docs/get-started-with-neon/signing-up) and [ClickHouse](https://clickhouse.com/docs/en/cloud-quick-start).
+- Create accounts with [Neon](https://neon.com/docs/get-started-with-neon/signing-up) and [ClickHouse](https://clickhouse.com/docs/en/cloud-quick-start).
 - Sign up [PeerDB Cloud](https://peerdb.cloud/) for seamless CDC from Neon to ClickHouse.
 
 If you have any questions, we’ll be happy to help in the [ClickHouse Slack](https://clickhouse.com/slack) and the [Neon Discord](https://discord.gg/92vNTzKDGp).

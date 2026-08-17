@@ -47,7 +47,7 @@ The first problem (how to create database copies efficiently) is being solved by
 
 ## Creating database branches with anonymized data: a workflow by Neon and Neosync
 
-One of the standout features of Neon is its ability to perform [database branching including data and schema](https://neon.tech/docs/introduction/branching) via copy-on-write. This feature is inspired by code branching in Git, enabling developers to create lightweight, isolated database branches in seconds.
+One of the standout features of Neon is its ability to perform [database branching including data and schema](https://neon.com/docs/introduction/branching) via copy-on-write. This feature is inspired by code branching in Git, enabling developers to create lightweight, isolated database branches in seconds.
 
 These branches effectively act like database copies but without duplicating storage, saving you the time and money required to duplicate your entire dataset. Database branches [can be added to your existing workflows](https://neon.tech/flow) via GitHub Actions. [Preview deployments with prod-like data are a perfect application for database branches.](https://neon.tech/flow)
 
@@ -57,10 +57,10 @@ By combining both tools, developers can anonymize data in their database branche
 
 <YoutubeIframe embedId="IcoOpnAcO1Y" isDocPost={false} />
 
-[You can check out our docs for a complete walkthrough](https://neon.tech/docs/guides/neosync-anonymize) of the Neon and Neosync integration. For setting up your Preview workflows, [follow the Actions on this page](https://neon.tech/flow).
+[You can check out our docs for a complete walkthrough](https://neon.com/docs/guides/neosync-anonymize) of the Neon and Neosync integration. For setting up your Preview workflows, [follow the Actions on this page](https://neon.tech/flow).
 
 _PS: If you would like to see a tighter integration between Neon and Neosync, where database branches are anonymized without configuring them in Neosync, let us know on [Twitter](https://x.com/neondatabase)._
 
 ## Try it out
 
-Both Neosync and Neon offer generous free tiers. If you’re interested in trying this workflow for free, [follow the steps in the guide](https://neon.tech/docs/guides/neosync-anonymize) and get started in just a few minutes.
+Both Neosync and Neon offer generous free tiers. If you’re interested in trying this workflow for free, [follow the steps in the guide](https://neon.com/docs/guides/neosync-anonymize) and get started in just a few minutes.

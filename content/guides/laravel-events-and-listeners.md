@@ -4,14 +4,14 @@ subtitle: Learn how to implement and utilize Laravel's event system with Neon
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-06-30T00:00:00.000Z'
-updatedOn: '2024-07-02T10:32:04.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Laravel's event system provides a simple observer implementation, allowing you to subscribe and listen for various events that occur in your application.
 
 This can be particularly useful for decoupling various parts of your application's logic and not blocking the main request flow. Queued listeners can also be used to handle time-consuming tasks asynchronously, improving the performance of your application.
 
-In this guide, we'll walk through the process of setting up and using Laravel Events and Listeners, with a focus on database operations using Neon Postgres.
+In this guide, we'll walk through the process of setting up and using Laravel Events and Listeners, with a focus on database operations using Lakebase Postgres.
 
 ## Prerequisites
 

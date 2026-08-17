@@ -27,6 +27,8 @@ By default the command resolves the project, branch, database, and role from you
 
 Some queries read from Postgres statistics extensions. `outliers` and `calls` need [`pg_stat_statements`](/docs/extensions/pg_stat_statements), and `lfc-hit-rate` and `working-set` need the [`neon`](/docs/extensions/neon) extension. If a required extension is not installed, the command reports it instead of returning rows.
 
+From an AI assistant, the same checks are available through the Neon MCP server's `inspect_database` tool. See [Database diagnostics](/docs/ai/neon-mcp-server#database-diagnostics).
+
 <CliSubcommands command="inspect db" anchorParts="db" />
 
 ### neon inspect db table-sizes (#db-table-sizes)
@@ -163,7 +165,7 @@ neon inspect db calls
 
 ### neon inspect db lfc-hit-rate (#db-lfc-hit-rate)
 
-Local File Cache hit rate, the share of reads served from Neon's Local File Cache instead of storage. A low or falling ratio means your working set no longer fits in the cache. Read it after the compute has handled some traffic, not on a freshly resumed one. Needs the [`neon`](/docs/extensions/neon) extension.
+Compute cache hit rate, the share of reads served from your compute's cache instead of storage. A low or falling ratio means your working set no longer fits in the cache. Read it after the compute has handled some traffic, not on a freshly resumed one. Needs the [`neon`](/docs/extensions/neon) extension.
 
 ```bash
 neon inspect db lfc-hit-rate
@@ -171,7 +173,7 @@ neon inspect db lfc-hit-rate
 
 ### neon inspect db working-set (#db-working-set)
 
-Estimated working set size over several time windows, compared with the Local File Cache size. When `Exceeds Lfc` is `no`, your recent data fits in cache. A `yes` means the working set has outgrown the cache, and a larger compute may help. Needs the [`neon`](/docs/extensions/neon) extension.
+Estimated working set size over several time windows, compared with the compute cache size. When `Exceeds Lfc` is `no`, your recent data fits in cache. A `yes` means the working set has outgrown the cache, and a larger compute may help. Needs the [`neon`](/docs/extensions/neon) extension.
 
 ```bash
 neon inspect db working-set

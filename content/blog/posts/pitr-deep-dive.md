@@ -34,25 +34,25 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/pitr-deep-dive/neon-pitr-1-1024x576-2265889e.jpg)
 
-Our [instant restore feature](https://neon.tech/blog/recover-large-postgres-databases) is a favorite with customers managing multi-terabyte databases—it gives them peace of mind knowing they can recover everything instantly to any point in time if something goes wrong. Most Postgres services offer PITR, but Neon’s implementation is unique—designed around its architecture and novel approach to storage.
+Our [instant restore feature](https://neon.com/blog/recover-large-postgres-databases) is a favorite with customers managing multi-terabyte databases—it gives them peace of mind knowing they can recover everything instantly to any point in time if something goes wrong. Most Postgres services offer PITR, but Neon’s implementation is unique—designed around its architecture and novel approach to storage.
 
 In this post, we’ll take a technical deep dive into how instant PITR works in Neon, exploring the architecture that enables it and how it differs from other implementations.
 
 <Admonition type="important" title="disclaimer">
-You don’t need to know any of this to take advantage of Neon’s PITR. Restores are extremely easy to run in Neon—see [this blog post](https://neon.tech/blog/outage-simulator) if you’d rather jump straight into a demo.
+You don’t need to know any of this to take advantage of Neon’s PITR. Restores are extremely easy to run in Neon—see [this blog post](https://neon.com/blog/outage-simulator) if you’d rather jump straight into a demo.
 </Admonition>
 
 ## A refresher on the Neon architecture
 
 As we just mentioned, Neon’s instant restores are possible due to its unique design, particularly its storage architecture. Before diving into the PITR mechanism, let’s review a few key design principles that are essential to understanding the restore process.
 
-At a high level, Neon’s architecture is built on the [separation of compute and storage](https://neon.tech/blog/architecture-decisions-in-neon), orchestrated by a control plane that manages cloud resources across both layers.
+At a high level, Neon’s architecture is built on the [separation of compute and storage](https://neon.com/blog/architecture-decisions-in-neon), orchestrated by a control plane that manages cloud resources across both layers.
 
-Unlike traditional Postgres setups, where each compute instance controls its own storage, Neon’s compute nodes run Postgres without local persistence. In Neon, all reads and writes go through a [multi-tenant storage system](https://neon.tech/blog/get-page-at-lsn), keeping compute nodes ephemeral.
+Unlike traditional Postgres setups, where each compute instance controls its own storage, Neon’s compute nodes run Postgres without local persistence. In Neon, all reads and writes go through a [multi-tenant storage system](https://neon.com/blog/get-page-at-lsn), keeping compute nodes ephemeral.
 
 ### Neon’s storage system
 
-Neon’s multi-tenant storage system is designed for high availability, durability, and efficient data retrieval, with [redundancy across multiple availability zones (AZs)](https://neon.tech/docs/introduction/high-availability) to ensure fault tolerance. It consists of three key components:
+Neon’s multi-tenant storage system is designed for high availability, durability, and efficient data retrieval, with [redundancy across multiple availability zones (AZs)](https://neon.com/docs/introduction/high-availability) to ensure fault tolerance. It consists of three key components:
 
 - **WAL safekeepers**: A durable write buffer that receives WAL records from compute nodes, replicates them across multiple nodes for fault tolerance, and ensures transactions are safely persisted before being processed by the pageserver.
 - **Pageservers**: The engine that reconstructs database pages on demand by applying WAL changes to historical snapshots, serving reads efficiently, and caching frequently accessed data for performance.
@@ -106,13 +106,13 @@ No data is truly “copied”; the branch simply references existing storage lay
 
 The result is a “restored branch”. This is logically equivalent to a restored instance in other Postgres services, except no data needs to be “copied” to a new Postgres instance.
 
-This eliminates hours of restore time and expensive compute operations. Users can immediately switch to the restored branch if they wish or trigger other [recovery mechanisms](https://neon.tech/blog/recover-production-database), such as selectively retrieving and restoring corrupted data back into the original branch, depending on their specific needs.
+This eliminates hours of restore time and expensive compute operations. Users can immediately switch to the restored branch if they wish or trigger other [recovery mechanisms](https://neon.com/blog/recover-production-database), such as selectively retrieving and restoring corrupted data back into the original branch, depending on their specific needs.
 
 ## How Neon’s PITR differs from traditional restore processes (e.g., AWS RDS)
 
 If you’ve made it this far into this blog post, you already have an intuitive understanding of how Neon’s PITR is fundamentally different from traditional database restore mechanisms such as those used in AWS RDS. Neon’s architecture and storage design is what makes this branch-based approach possible, something that could never be replicated in a system like RDS.
 
-[This blog post provides an in-depth comparison between recovering a large database in Neon vs. AWS RDS.](https://neon.tech/blog/recover-large-postgres-databases) But from a practical perspective, the core difference can be summarized as follows:
+[This blog post provides an in-depth comparison between recovering a large database in Neon vs. AWS RDS.](https://neon.com/blog/recover-large-postgres-databases) But from a practical perspective, the core difference can be summarized as follows:
 
 **Neon’s process is instant and requires no data copying.** Instead of restoring a new database instance, Neon can create a branch at a specific timestamp, referencing existing storage layers without copying any data.
 

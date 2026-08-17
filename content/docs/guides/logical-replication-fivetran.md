@@ -4,20 +4,20 @@ subtitle: Learn how to replicate data from Neon with Fivetran
 summary: >-
   Logical replication from Neon to Fivetran lets you stream Postgres WAL changes
   to any Fivetran-supported destination by configuring a pgoutput replication
-  slot and publication on Neon, then connecting Fivetran via a direct
+  slot and publication on Lakebase Postgres, then connecting Fivetran via a direct
   (non-pooled) connection. Use this page when setting up Neon as a PostgreSQL
   source in Fivetran. Note that enabling logical replication is a one-way,
   irreversible change, and Fivetran IPs must be added to Neon's IP Allow list.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Fivetran](https://fivetran.com/) is an automated data movement platform that helps you centralize data from disparate sources, which you can then manage directly from your browser. Fivetran extracts your data and loads it into your data destination.
 
-In this guide, you will learn how to define a Neon Postgres database as a data source in Fivetran so that you can replicate data to one or more of Fivetran's supported destinations.
+In this guide, you will learn how to define a Lakebase Postgres database as a data source in Fivetran so that you can replicate data to one or more of Fivetran's supported destinations.
 
 ## Prerequisites
 

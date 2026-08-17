@@ -1,26 +1,32 @@
 ---
 name: neon
 description: >-
-  Overview of the Neon platform for apps and agents, spanning Postgres, Auth, the
-  Data API, Object Storage, Compute Functions, and the AI Gateway. Start here to
-  route to the right Neon skill, set up the CLI or MCP server, and follow the
-  branch-first workflow. Use when "Neon" is mentioned, or when any of its
-  individual capabilities are the trigger: "object storage" or "S3", "buckets",
-  "serverless functions", "AI gateway", "call an LLM", "postgres", "database", or
-  "backend".
+  Overview of Neon, a complete set of cloud backend primitives for apps and
+  agents, spanning Lakebase Postgres, Auth, the Data API, Object Storage, Compute
+  Functions, and the AI Gateway. Start here to route to the right Neon skill, set
+  up the CLI or MCP server, and follow the branch-first workflow. Use when "Neon"
+  or "Lakebase Postgres" is mentioned, or when any of its individual capabilities
+  are the trigger: "object storage" or "S3", "buckets", "serverless functions",
+  "AI gateway", "call an LLM", "logs", "branch logs", "query logs",
+  "log export", "Loki", "Grafana", "observability", "telemetry", "postgres",
+  "database", or "backend".
+metadata:
+  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon
 ---
 
 # Neon
 
-Important: Neon is no longer just a Serverless Postgres provider. Neon is the backend for apps and agents, bundling Serverless Postgres, Auth (managed Better Auth), long-running Functions, Object Storage, and an AI Gateway — all instant, branchable, and serverless.
+Important: Neon is no longer just a Postgres provider. Neon is a complete set of cloud backend primitives built around Lakebase Postgres, for developers, startups, and agent platforms, from Databricks — bundling Lakebase Postgres, Auth (managed Better Auth), long-running Functions, Object Storage, and an AI Gateway, all instant, branchable, and serverless.
+
+**Lakebase Postgres** is the database itself. It is one product, reached two ways: through Neon, with a free plan and the full set of backend primitives above, or through Databricks, alongside the rest of the Databricks suite. Same infrastructure, same features, same engineering team. Call the database Lakebase Postgres, and use "Neon" for the brand and for this access path — not as a name for the database.
 
 A Neon branch is an isolated, copy-on-write clone of your data, taken from its current state or from a past state within your project's retained history window. You can freely modify or delete it. It shares data with its parent until writes cause it to diverge, and those writes are stored independently as deltas.
 
-## Platform Services
+## Backend Primitives
 
 Neon bundles several backend primitives for building apps and agents that all branch together:
 
-- **Postgres** — Serverless Postgres that scales and branches with your app. _Generally available._
+- **Lakebase Postgres** — Postgres that scales and branches with your app, built on the lakebase architecture: OLTP directly on cloud object storage, with storage decoupled from compute. _Generally available._
 - **Auth** — Managed Better Auth with users and sessions stored in Postgres. _Generally available._
 - **Object Storage** — S3-compatible object storage that branches with your projects. _Public beta._
 - **Functions** — Neon's compute offering: long-running serverless functions that run close to your database, for WebSocket servers, long agent HTTP streams, APIs, and server-sent event servers. _Public beta._
@@ -34,11 +40,11 @@ Beta access features are only available on projects in the `us-east-2` region. B
 
 ## Architecture: How to Use Neon
 
-Neon is **not** a place to host your app frontend. Neon provides the backend primitives (Postgres, Auth, Object Storage, Functions, AI Gateway) that **compose with** the application platform you already use.
+Neon is **not** a place to host your app frontend. Neon provides the backend primitives (Lakebase Postgres, Auth, Object Storage, Functions, AI Gateway) that **compose with** the application platform you already use.
 
 Recommended architectures:
 
-**Full-stack app on Vercel** (or Netlify) augmented with Neon — the app framework (Next.js, TanStack Start, etc.) owns your UI and routes and talks directly to your Neon services (Postgres, Auth, Object Storage, Functions, AI Gateway).
+**Full-stack app on Vercel** (or Netlify) augmented with Neon — the app framework (Next.js, TanStack Start, etc.) owns your UI and routes and talks directly to your Neon services (Lakebase Postgres, Auth, Object Storage, Functions, AI Gateway).
 
 **Reach for Neon Functions when you outgrow the host's limits** — a WebSocket or SSE server, long-running agents, or an MCP server that risks timing out on short, lambda-style serverless functions. As long as there is an active connection, a Neon Function can run up to 24 hours without interruption, with the added benefit of running close to your data.
 
@@ -83,7 +89,7 @@ The skills below live in the [`neondatabase/agent-skills`](https://github.com/ne
 | `claimable-postgres` | Provisioning instant, claimable temporary Postgres databases (for example, one per end user or demo). |
 | `neon-postgres-egress-optimizer` | Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase. |
 
-For guidance on agent platforms that provision and operate Neon Postgres at scale, use `neon-postgres-agent-platforms`, which lives in a separate repo: [`neondatabase/neon-for-agent-platforms`](https://github.com/neondatabase/neon-for-agent-platforms).
+For guidance on agent platforms that provision and operate Lakebase Postgres on Neon at scale, use `neon-postgres-agent-platforms`, which lives in a separate repo: [`neondatabase/neon-for-agent-platforms`](https://github.com/neondatabase/neon-for-agent-platforms).
 
 ### Installing the Right Skill
 
@@ -164,7 +170,7 @@ Useful MCP tools to initialize a project:
 
 ## Neon Infrastructure as Code
 
-`neon.ts` is Neon's branch config and infrastructure-as-code file: declare which Neon services your project's branches should have, get type-safe env vars, and program branch settings — all in TypeScript. It's the config layer for Neon as a platform, and it composes with the branch-first loop below. Add it with `@neon/config`:
+`neon.ts` is Neon's branch config and infrastructure-as-code file: declare which Neon services your project's branches should have, get type-safe env vars, and program branch settings — all in TypeScript. It's the config layer for your Neon services, and it composes with the branch-first loop below. Add it with `@neon/config`:
 
 ```bash
 npm i @neon/config
@@ -194,7 +200,7 @@ export default defineConfig({
 
 ### Provision services with neon config
 
-Every project ships with serverless Postgres; `neon.ts` lets you also declare Neon Auth and the Data API today, with Functions, buckets, and the AI Gateway under a `preview` block — every service for the branch composes in one file:
+Every project ships with Lakebase Postgres; `neon.ts` lets you also declare Neon Auth and the Data API today, with Functions, buckets, and the AI Gateway under a `preview` block — every service for the branch composes in one file:
 
 ```typescript
 // neon.ts
@@ -354,6 +360,64 @@ When an agent should not write a local `.env`, instruct it (for example in your 
 
 For reading env you _already_ have on disk (typed and validated against your `neon.ts`), use `parseEnv` — see [Type-safe env vars with parseEnv](#type-safe-env-vars-with-parseenv) above.
 
+## Observability
+
+Neon exposes branch-scoped logs. **Today they cover Neon Functions and Object Storage only.** Postgres computes and the AI Gateway are coming; until then, neither emits records. Logs are region-gated like the other beta services above — only `us-east-2` is enabled today, and a branch in any other region answers `404` with reason `telemetry_not_enabled` rather than an empty result.
+
+Use Neon CLI 3.1 or newer first. **Decide which branch you are querying.** Without `--branch`, the CLI uses the branch pinned in `.neon`, or the project's default branch when the workspace isn't linked. A deployed function or bucket usually lives on a different branch than the one checked out for development, so an empty result is more often the wrong branch than a missing log.
+
+```bash
+neon logs query --since 1h
+neon logs query --branch production --source function --minimum-severity error --since 6h
+neon logs query --source storage --since 1h --output json
+neon logs fields
+neon logs field-values service_name --since 1h
+```
+
+`--source` accepts `function`, `storage`, and `pg_endpoint`, but only `function` and `storage` return records today — `pg_endpoint` is accepted and comes back empty until Postgres logs ship. The window defaults to 1h on `query` and 6h on `field-values`, and cannot exceed 7d on either. If Neon reports `--minimum-severity` as unsupported on a branch, use `--severity-text` instead. Run `neon logs --help` for the full filter and pagination interface.
+
+`--logql` replaces the structured filters with a raw stream selector or line filter. Its stream label is `entity_type`, not `source`:
+
+```bash
+neon logs query --since 1h --logql '{entity_type="function"} |= "timeout"'
+```
+
+If the CLI is unavailable, fall back to the Neon MCP server's read-only `query_logs`, `list_log_fields`, and `list_log_field_values` tools.
+
+In TypeScript applications, use `@neon/sdk`. Project and branch are positional, and `query` returns a lazy paginated iterable rather than a promise:
+
+```typescript
+for await (const record of neon.logs.query(projectId, branchId, {
+  since: "1h",
+  source: "function",
+})) {
+  console.log(record.timestamp, record.severity_text, record.message);
+}
+
+const { data: fields } = await neon.logs.fields(projectId, branchId);
+const { data: serviceNames } = await neon.logs.fieldValues(projectId, branchId, "service_name");
+```
+
+`query`'s iterator always throws on error, but `fields` and `fieldValues` follow the client's `throwOnError`, which defaults to `false` and hands back `{ data, error }`. `fieldValues` resolves to the whole response, not a bare array: read `serviceNames.values`, and treat them as an arbitrary subset whenever `serviceNames.is_truncated` is true.
+
+### Loki-compatible read API
+
+For direct HTTP reads, authenticate with `Authorization: Bearer <NEON_API_KEY>` and use this branch-scoped base URL:
+
+```text
+https://console.neon.tech/telemetry/v1/projects/{projectId}/branches/{branchId}/loki
+```
+
+The available endpoints are:
+
+- `GET /api/v1/query_range`
+- `GET /api/v1/labels`
+- `GET /api/v1/label/{name}/values`
+
+This is a read-only Loki-compatible subset, not a push endpoint or complete Loki deployment. `query_range` supports LogQL stream selectors and line filters, plus `since` or `start`/`end`, `limit`, and `direction`; it does not support aggregations, parsers, or formatting stages.
+
+The paths above are the ones to call directly. A Loki client that builds its own paths — a Grafana data source appends `/loki/api/v1` to whatever URL it is given — may need a different root, so confirm the data-source URL against the Neon docs rather than pasting this base.
+
 ## Manage Neon Resources
 
 Recommended: Use `@neon/sdk` to manage Neon resources programmatically, such as creating projects, branches, and snapshots for dev scripts, CI/CD automations, and platforms building on top of Neon.
@@ -362,7 +426,7 @@ Recommended: Use `@neon/sdk` to manage Neon resources programmatically, such as 
 
 ### Neon for (Agentic) Platforms
 
-If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: instant, branchable, serverless Postgres data layer, invisible to users.
+If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: an instant, branchable, serverless Lakebase Postgres data layer, invisible to users.
 
 Neon features for agents:
 

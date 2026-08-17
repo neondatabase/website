@@ -14,9 +14,10 @@ description: >-
   Gateway", and "log/rate-limit AI calls".
 metadata:
   parent: neon
+  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-ai-gateway
 ---
 
-**FIRST**: Use the parent `neon` skill for a Neon platform overview, getting started with Neon, Neon development best practices, and more.
+**FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.
 
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
@@ -112,7 +113,7 @@ When `preview.aiGateway` is enabled, Neon injects the gateway credentials as **N
 - `/v1` — unified, OpenAI **Chat Completions**-compatible; recommended default, works with every provider (`/v1/chat/completions`).
 - `/openai/v1` — OpenAI **Responses** API (required for `gpt-5-…-codex` variants and `gpt-5-5-pro`); the `@ai-sdk/openai` provider uses the Responses API by default (`/openai/v1/responses`).
 - `/anthropic/v1` — native Anthropic Messages (extended thinking, prompt caching); mirrors the real Anthropic API path (`/anthropic/v1/messages`).
-- `/ai-gateway/gemini/v1beta/...` — native Gemini `generateContent` (this dialect is still served under the legacy `/ai-gateway/` prefix).
+- `/gemini/v1beta/...` — native Gemini `generateContent` (`/gemini/v1beta/models/<model>:generateContent`).
 
 So `${NEON_AI_GATEWAY_BASE_URL}/v1` is the chat-completions endpoint, `${NEON_AI_GATEWAY_BASE_URL}/openai/v1` the OpenAI Responses endpoint, and so on.
 
@@ -231,7 +232,7 @@ const res = await client.chat.completions.create({
 });
 ```
 
-The Anthropic SDK and google-genai work the same way for native provider features — point the Anthropic SDK at `${NEON_AI_GATEWAY_BASE_URL}/anthropic/v1` (mirrors the real Anthropic API path, so `/anthropic/v1/messages`) and google-genai at `${NEON_AI_GATEWAY_BASE_URL}/ai-gateway/gemini` (Gemini is still served under the legacy `/ai-gateway/` prefix).
+The Anthropic SDK and google-genai work the same way for native provider features — point the Anthropic SDK at `${NEON_AI_GATEWAY_BASE_URL}/anthropic` (it appends `/v1/messages` itself) and google-genai at `${NEON_AI_GATEWAY_BASE_URL}/gemini` (it appends `/v1beta/models/...`).
 
 ## Model Identifiers
 

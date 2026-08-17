@@ -175,6 +175,13 @@ function resolveStringValue(expr, consts) {
   const direct = stringLiteralValue(e);
   if (direct !== undefined) return direct;
   if (!e) return undefined;
+  // Bare identifier bound to a string literal — used to resolve factory-function
+  // parameters (`windowOptions(defaultWindow)`) whose value was substituted into
+  // `consts` as a string-literal node by resolveOptionsObject.
+  if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
+    const bound = stringLiteralValue(consts.get(e.text));
+    if (bound !== undefined) return bound;
+  }
   if (ts.isPropertyAccessExpression(e) && ts.isIdentifier(e.name)) {
     const target = resolveSpecObject(e.expression, consts);
     if (target) {
@@ -206,6 +213,19 @@ function resolveStringValue(expr, consts) {
     const sep = e.arguments.length ? stringLiteralValue(e.arguments[0]) : ',';
     if (arr && sep !== undefined) return arr.join(sep);
     return undefined;
+  }
+  // `getCliName()` resolves to the rendered binary name. The CLI defines it as
+  // `basename(argv[1]) === 'neonctl' ? 'neonctl' : 'neon'`, i.e. "neon" for
+  // every invocation these docs describe. Source switched several describes
+  // from hardcoded strings to `${getCliName()} …` templates (neon-pkgs #361);
+  // without this, those spans fail to resolve and the whole describe is dropped.
+  if (
+    ts.isCallExpression(e) &&
+    ts.isIdentifier(e.expression) &&
+    e.expression.text === 'getCliName' &&
+    e.arguments.length === 0
+  ) {
+    return 'neon';
   }
   // Template literals: resolvable only if every `${...}` span resolves.
   if (ts.isTemplateExpression(e)) {
@@ -248,6 +268,19 @@ function literalValue(expr) {
 // choices, alias, required, hidden }`. Handles internal spreads
 // (`{ ...req['key'], describe: 'override' }`) by merging the resolved
 // spread first so explicit props win.
+//
+// LIMITATION: an option spec produced by a *factory call* rather than an
+// object literal — e.g. `services: servicesOption({ ... })` in config.ts and
+// env.ts, where servicesOption() lives in the non-command file
+// neon_services.ts and composes its `describe` from a conditional plus an
+// array filter/join — is not resolved. resolveSpecObject returns undefined
+// and the option falls back to `{ type: 'unknown' }` (safe: validation just
+// skips type/choices on it). Recovering type + describe correctly would need
+// cross-file function resolution and static evaluation of the composed
+// string, so those two flags are patched in overrides.json instead
+// (config init --services, env pull --service). Contrast the `.options(...)`
+// / spread positions, which resolveOptionsObject *does* resolve through a
+// factory call.
 function parseOptionSpec(expr, consts) {
   const obj = resolveSpecObject(expr, consts);
   if (!obj) return { type: 'unknown' };
@@ -318,6 +351,47 @@ function parseOptionSpec(expr, consts) {
   return spec;
 }
 
+// Resolves an expression to an options ObjectLiteralExpression, if possible.
+// Handles inline object literals, bare identifiers bound to a module-level
+// object const (`.options(scopeOptions)`), and calls to a module-level factory
+// arrow that returns an object literal (`...windowOptions("1h")`). For a
+// factory call, the arrow's parameters are bound to the call's argument
+// expressions in a child `consts` map so the returned object's templates
+// (`Defaults to ${defaultWindow}`) resolve; the resolved map is returned
+// alongside the object so callers can parse it with the right scope.
+function resolveOptionsObject(expr, consts) {
+  const e = unwrapExpression(expr);
+  if (!e) return undefined;
+  if (ts.isObjectLiteralExpression(e)) return { obj: e, consts };
+  if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
+    const target = consts.get(e.text);
+    if (target && ts.isObjectLiteralExpression(target)) return { obj: target, consts };
+  }
+  if (
+    ts.isCallExpression(e) &&
+    ts.isIdentifier(e.expression) &&
+    consts &&
+    consts.has(e.expression.text)
+  ) {
+    const fn = consts.get(e.expression.text);
+    if (fn && (ts.isArrowFunction(fn) || ts.isFunctionExpression(fn))) {
+      const body = unwrapExpression(fn.body);
+      if (body && ts.isObjectLiteralExpression(body)) {
+        // Bind each parameter name to its call-site argument expression so
+        // string interpolations inside the returned object resolve.
+        const scoped = new Map(consts);
+        fn.parameters.forEach((param, i) => {
+          if (ts.isIdentifier(param.name) && e.arguments[i]) {
+            scoped.set(param.name.text, unwrapExpression(e.arguments[i]));
+          }
+        });
+        return { obj: body, consts: scoped };
+      }
+    }
+  }
+  return undefined;
+}
+
 // Parse the argument to `.options({...})` into a map of
 // `{ name: { type, describe, default, choices, alias, required } }`.
 // `consts` resolves `...identifier` spreads and external spec references
@@ -326,9 +400,9 @@ function parseOptionsObject(obj, consts) {
   const out = {};
   for (const p of obj.properties) {
     if (ts.isSpreadAssignment(p)) {
-      const spread = unwrapExpression(p.expression);
-      if (spread && ts.isIdentifier(spread) && consts && consts.has(spread.text)) {
-        Object.assign(out, parseOptionsObject(consts.get(spread.text), consts));
+      const resolved = resolveOptionsObject(p.expression, consts);
+      if (resolved) {
+        Object.assign(out, parseOptionsObject(resolved.obj, resolved.consts));
       }
       continue;
     }
@@ -467,12 +541,12 @@ function walkBuilder(builderNode, node, consts) {
       if (ts.isPropertyAccessExpression(callee) && ts.isIdentifier(callee.name)) {
         const method = callee.name.text;
         if (method === 'options') {
-          // yargs.options({...}) or .options({...}). Merge argument into
-          // accumulator.
-          const arg = e.arguments[0];
-          if (arg && ts.isObjectLiteralExpression(arg)) {
-            const parsed = parseOptionsObject(arg, consts);
-            Object.assign(node.options, parsed);
+          // yargs.options({...}) or .options({...}). The argument is an object
+          // literal, a bare identifier bound to one (`.options(scopeOptions)`),
+          // or a factory call returning one. Merge it into the accumulator.
+          const resolved = resolveOptionsObject(e.arguments[0], consts);
+          if (resolved) {
+            Object.assign(node.options, parseOptionsObject(resolved.obj, resolved.consts));
           }
         } else if (method === 'option') {
           // .option('name', { ... }) single-form.

@@ -32,16 +32,16 @@ seo:
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/first-azure-region-available-in-neon/neon-azure-1-1024x576-4304f6d7.jpg)
 
 <Admonition type="important" title="December 2024 Update">
-There are now more Azure regions available in the Neon console. Plus, Neon is also available in the Azure Marketplace as an Azure Native Integration. Read more [here](https://neon.tech/blog/neon-is-now-available-as-an-azure-native-integration).
+There are now more Azure regions available in the Neon console. Plus, Neon is also available in the Azure Marketplace as an Azure Native Integration. Read more [here](https://neon.com/blog/neon-is-now-available-as-an-azure-native-integration).
 </Admonition>
 
-**Starting today, you can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our [Azure roadmap](https://neon.tech/blog/neon-is-coming-to-azure)—many more exciting updates are on the way, including deeper integrations with the Azure ecosystem.**
+**Starting today, you can deploy Neon databases on Azure, starting with the East US 2 region. This marks the first milestone on our [Azure roadmap](https://neon.com/blog/neon-is-coming-to-azure)—many more exciting updates are on the way, including deeper integrations with the Azure ecosystem.**
 
 To create your first Neon project on Azure, [click here](https://console.neon.tech/app/projects/new?provider=azure) or navigate to the console and select “Azure” as your cloud provider.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/first-azure-region-available-in-neon/ad4nxdpcnkau2s5g3glhfzioo4obfcs4sxkwy87a1vuxl9df7qy2zorcsmu2ctalcdqoyiwv7fcpfqr9pp0l-a2jlhba-32wpctfy6gzmgcuumhtffs6ggek0isyr2e50waes6g9et7cciqophiggyu7ylso-6915468b.png)
 
-We’ll be adding more Azure regions soon—let us know what regions you’d like to see next on our [regions page.](https://neon.tech/docs/introduction/regions#request-a-region)
+We’ll be adding more Azure regions soon—let us know what regions you’d like to see next on our [regions page.](https://neon.com/docs/introduction/regions#request-a-region)
 
 ## How pricing works during the Beta
 

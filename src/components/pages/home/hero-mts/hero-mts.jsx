@@ -30,7 +30,7 @@ const HeroMts = () => (
     <Container className="relative z-30 pt-96 pb-2 xl:pt-54 lg:pt-52 md:px-5! md:pt-53" size="1600">
       <Link href="#backed-by-giants">
         <SectionLabel theme="white" icon="databricks">
-          A DATABRICKS COMPANY
+          NEON IS PART OF THE DATABRICKS PLATFORM
         </SectionLabel>
       </Link>
 
@@ -65,10 +65,10 @@ const HeroMts = () => (
       </Link>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
-        <Button theme="white-filled" size="new" to={LINKS.signup}>
+        <Button data-test="home-signup" theme="white-filled" size="new" to={LINKS.signup}>
           Get started
         </Button>
-        <Button theme="outlined" size="new" to={LINKS.docsHome}>
+        <Button data-test="home-docs" theme="outlined" size="new" to={LINKS.docsHome}>
           Read the docs
         </Button>
       </div>

@@ -1,5 +1,21 @@
+const { guideHasExternalCanonical } = require('./src/utils/guide-has-external-canonical');
+
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.com',
+  transform: async (config, routePath) => {
+    if (guideHasExternalCanonical(routePath)) {
+      return null;
+    }
+
+    return {
+      loc: routePath,
+      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      changefreq: config.changefreq,
+      priority: config.priority,
+      alternateRefs: config.alternateRefs ?? [],
+      trailingSlash: config.trailingSlash,
+    };
+  },
   exclude: [
     // API routes
     '/api/*',
@@ -18,9 +34,6 @@ module.exports = {
 
     // Legacy docs
     '/docs/auth/legacy/*',
-
-    // Early-access preview (unlisted, noindex)
-    '/docs/manage/user-permissions-preview',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],

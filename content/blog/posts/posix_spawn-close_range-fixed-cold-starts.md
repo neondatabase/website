@@ -46,9 +46,9 @@ Today, we want to share the story of tracking down and fixing that regression, w
 
 ## Background: Neon Pageserver
 
-The [Pageserver](https://neon.tech/docs/reference/glossary#pageserver) is a key [component of Neon](https://neon.tech/docs/introduction/architecture-overview). It manages the long-term storage and versioning of all the data you store in a Neon Project. When a Compute needs to read a database page, it requests it from the Pageserver, which reconstructs the page from a base page image and subsequent Write-Ahead Log (WAL) records. This task is handled by the `walredo` mechanism. Before we get into the details, let’s briefly recall the role of WAL in Postgres.
+The [Pageserver](https://neon.com/docs/reference/glossary#pageserver) is a key [component of Neon](https://neon.com/docs/introduction/architecture-overview). It manages the long-term storage and versioning of all the data you store in a Neon Project. When a Compute needs to read a database page, it requests it from the Pageserver, which reconstructs the page from a base page image and subsequent Write-Ahead Log (WAL) records. This task is handled by the `walredo` mechanism. Before we get into the details, let’s briefly recall the role of WAL in Postgres.
 
-(Learn more about this topic from our [earlier post on Neon storage](https://neon.tech/blog/get-page-at-lsn).)
+(Learn more about this topic from our [earlier post on Neon storage](https://neon.com/blog/get-page-at-lsn).)
 
 ## Background: Role Of WAL in Postgres
 
@@ -96,7 +96,7 @@ There’s no way to sugarcoat it: this latency regression was not properly inves
 
 The curious case with that customer was that their compute was used often enough for it to never scale to zero, yet rarely enough that our `walredo` quiescing mechanism would kick in. The resulting symptom was that the first query after 200s of no queries would often take multiple seconds.
 
-In the past, we had seen such issues with cold starts, i.e., after scaling a compute to zero. Cold starts [involve many Neon components](https://neon.tech/blog/cold-starts-just-got-hot), so, it is tempting to discount any problems in that area. But this case was unambiguously a Pageserver problem. Inspecting the project’s Pageserver-side logs revealed that the last message before the slow query was the `walredo` quiescing. We didn’t log walredo launches at the time, but, there was a metric for `walredo` process launch latency. It had existed for several weeks, but no alerts had been defined on it. The magnitude of the problem was immediately clear, as the histogram’s buckets weren’t even able to properly capture the majority of observations:
+In the past, we had seen such issues with cold starts, i.e., after scaling a compute to zero. Cold starts [involve many Neon components](https://neon.com/blog/cold-starts-just-got-hot), so, it is tempting to discount any problems in that area. But this case was unambiguously a Pageserver problem. Inspecting the project’s Pageserver-side logs revealed that the last message before the slow query was the `walredo` quiescing. We didn’t log walredo launches at the time, but, there was a metric for `walredo` process launch latency. It had existed for several weeks, but no alerts had been defined on it. The magnitude of the problem was immediately clear, as the histogram’s buckets weren’t even able to properly capture the majority of observations:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/posix_spawn-close_range-fixed-cold-starts/scr-20240215-ufhe-f26de0ca.png)
 

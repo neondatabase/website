@@ -1,20 +1,20 @@
 ---
 title: Create a REST API from Postgres with PostgREST
-subtitle: Generate a REST API automatically from your Neon Postgres database schema
+subtitle: Generate a REST API automatically from your Lakebase Postgres database schema
 summary: >-
-  PostgREST is a standalone web server that turns a Neon Postgres schema into a
+  PostgREST is a standalone web server that turns a Lakebase Postgres schema into a
   fully functional REST API with CRUD endpoints, filtering, and pagination
   without writing any backend code. Use this guide when you want to expose your
-  Neon database as a REST API locally using Docker, including JWT-based
+  database as a REST API locally using Docker, including JWT-based
   authentication and row-level security for per-user access control.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>What is PostgREST and how it works</p>
-<p>Setting up a Neon project for PostgREST</p>
+<p>Setting up a Lakebase Postgres project for PostgREST</p>
 <p>Running PostgREST with Docker</p>
 <p>Adding authentication with JWT</p>
 <p>Implementing Row-Level Security</p>
@@ -31,14 +31,14 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 </InfoBlock>
 
 <Admonition type="note">
-Neon also provides a built-in [Data API](/docs/data-api/overview) that automatically creates REST endpoints for your database without requiring PostgREST or any additional setup. The Data API is fully managed and includes built-in authentication support.
+Neon also provides a built-in [Data API](/docs/data-api/overview) that automatically creates REST endpoints for the database without requiring PostgREST or any additional setup. The Data API is fully managed and includes built-in authentication support.
 </Admonition>
 
 ## What is PostgREST?
 
 PostgREST is a standalone web server that automatically turns your PostgreSQL database schema into a RESTful API. It uses the database's structure, constraints, and permissions to create API endpoints without requiring you to write any backend code. The API follows REST conventions and supports full CRUD operations, filtering, pagination, and even complex joins.
 
-This guide shows you how to set up PostgREST with a Neon Postgres database using Docker for local development. You'll learn how to configure basic read access, add authenticated endpoints with JWT tokens, and implement row-level security for fine-grained access control.
+This guide shows you how to set up PostgREST with a Lakebase Postgres database using Docker for local development. You'll learn how to configure basic read access, add authenticated endpoints with JWT tokens, and implement row-level security for fine-grained access control.
 
 <Steps>
 
@@ -52,7 +52,7 @@ If you do not have one already, create a Neon project.
 
 ## Set up your database
 
-From the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client such as [psql](/docs/connect/query-with-psql-editor), set up your database using the following queries:
+From the SQL Editor or any SQL client such as [psql](/docs/connect/query-with-psql-editor), set up your database using the following queries:
 
 ```sql shouldWrap
 CREATE SCHEMA api;

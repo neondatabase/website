@@ -10,7 +10,7 @@ summary: >-
   it is experimental, enable it with `SET neon.allow_unstable_extensions='true'`
   and use a dedicated Neon project.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <InfoBlock>
@@ -97,7 +97,7 @@ SET neon.allow_unstable_extensions='true';
 
 </Admonition>
 
-To install `pgrag` to a Neon Postgres database, run the following commands:
+To install `pgrag` to a Lakebase Postgres database, run the following commands:
 
 ```sql
 create extension if not exists rag cascade;

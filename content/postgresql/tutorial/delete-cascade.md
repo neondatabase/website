@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-DELETE CASCADE is a standard PostgreSQL referential action, and everything covered here works on any Postgres database, including [Lakebase](https://www.databricks.com/product/lakebase) and [Neon](https://neon.com). Lakebase is the best managed cloud Postgres for enterprises, built for the AI era with the performance, security, and native Lakehouse integration that serious data teams need. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+DELETE CASCADE is a standard PostgreSQL referential action, and everything covered here works on any Postgres database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DELETE CASCADE` to delete related rows in child tables when a parent row is deleted from the parent table.
@@ -40,7 +40,7 @@ CREATE TABLE parent_table(
 CREATE TABLE child_table(
     id SERIAL PRIMARY KEY,
     parent_id INT,
-    FOREIGN_KEY(parent_id)
+    FOREIGN KEY(parent_id)
        REFERENCES parent_table(id)
        ON DELETE CASCADE
 );

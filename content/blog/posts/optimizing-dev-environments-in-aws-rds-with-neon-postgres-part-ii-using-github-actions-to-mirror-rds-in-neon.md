@@ -35,7 +35,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon/neon-rds-part-ii-1024x576-21810cfa.jpg)
 
-[As we discussed in Part I of this series](https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres), AWS RDS is great for production, but unwieldy for dev, stage, and test databases. Businesses of all kinds ship faster with their entire DB load on Neon: Instant provisioning saves time, development is smoother with branching, and scale to zero [reduces non-prod cost by 40%](https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres#example-rds-cost-breakdown).
+[As we discussed in Part I of this series](https://neon.com/blog/development-environments-for-aws-rds-using-neon-postgres), AWS RDS is great for production, but unwieldy for dev, stage, and test databases. Businesses of all kinds ship faster with their entire DB load on Neon: Instant provisioning saves time, development is smoother with branching, and scale to zero [reduces non-prod cost by 40%](https://neon.com/blog/development-environments-for-aws-rds-using-neon-postgres#example-rds-cost-breakdown).
 
 But if you’re already in production on RDS, migrating a live database is painful. You don’t need to move everything over to get the development velocity and cost efficiency of non-production databases on Neon. There’s an automated, low-risk way using a **Neon Twin**—a synchronized copy of your RDS dataset in Neon, that updates automatically every night using pg_dump/restore and GitHub Actions.
 
@@ -45,7 +45,7 @@ But if you’re already in production on RDS, migrating a live database is painf
 
 A Neon Twin is a synchronized copy of your RDS production database in Neon, created and maintained using a GitHub Action. This action automatically runs a nightly pg_dump of your RDS database and restores it to Neon, ensuring your development environment stays up-to-date.
 
-With a Neon Twin in place, developers can quickly start building, testing, and taking advantage of Neon’s [rapid development features](https://neon.tech/docs/get-started-with-neon/why-neon), such as instant database provisioning, branching, and automated scaling, without disrupting the production or staging environments.
+With a Neon Twin in place, developers can quickly start building, testing, and taking advantage of Neon’s [rapid development features](https://neon.com/docs/get-started-with-neon/why-neon), such as instant database provisioning, branching, and automated scaling, without disrupting the production or staging environments.
 
 ## Prerequisites
 
@@ -68,7 +68,7 @@ All the code shown in this article can be found on this GitHub repo: [create-neo
 
 As explained in the [GitHub documentation](https://docs.github.com/en/actions/learn-github-actions/usage-limits-billing-and-administration#usage-limits), there are some usage limits on GitHub Actions. Specifically, job execution time is limited to 6 hours; if a job reaches this limit, the job is terminated and fails to complete.
 
-This limit might be relevant for the dump/restore nightly job. How long this job takes to execute will depend on the size of your production database, the specifications of the EC2 and Neon instances, and the regions where both are deployed. For jobs that may run for longer than 6 hours, [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners) can be used. To optimize execution times, we recommend using the same region for both the RDS instance and Neon Twin. [A list of supported regions can be found in the Neon docs.](https://neon.tech/docs/introduction/regions#available-regions)
+This limit might be relevant for the dump/restore nightly job. How long this job takes to execute will depend on the size of your production database, the specifications of the EC2 and Neon instances, and the regions where both are deployed. For jobs that may run for longer than 6 hours, [self-hosted runners](https://docs.github.com/en/actions/hosting-your-own-runners/managing-self-hosted-runners/about-self-hosted-runners#about-self-hosted-runners) can be used. To optimize execution times, we recommend using the same region for both the RDS instance and Neon Twin. [A list of supported regions can be found in the Neon docs.](https://neon.com/docs/introduction/regions#available-regions)
 
 ### GitHub Actions IP addresses
 
@@ -87,7 +87,7 @@ If your production database connection requires an SSL certificate, [you might f
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon/neon-twin-environments-1024x576-98308e91.jpg)
 
-If you’re new to Neon, the first step is to [sign up](https://console.neon.tech/signup) and follow our [getting started guide](https://neon.tech/docs/get-started-with-neon/signing-up) to create your initial project. During the onboarding, you’ll be introduced to these key Neon terms:
+If you’re new to Neon, the first step is to [sign up](https://console.neon.tech/signup) and follow our [getting started guide](https://neon.com/docs/get-started-with-neon/signing-up) to create your initial project. During the onboarding, you’ll be introduced to these key Neon terms:
 
 - **Project:** The top-level container for your Neon databases—the logical equivalent to an “instance” in RDS.
 - **Branch:** A versioned copy of your database environment. Each Neon project can have multiple branches, as we will see later.
@@ -98,10 +98,10 @@ If you’re new to Neon, the first step is to [sign up](https://console.neon.tec
 <figcaption><em>The Neon object hierarchy </em><br></br></figcaption>
 </figure>
 
-Neon is built on an innovative [branch-based architecture](https://neon.tech/blog/architecture-decisions-in-neon):
+Neon is built on an innovative [branch-based architecture](https://neon.com/blog/architecture-decisions-in-neon):
 
 - The main branch will be your primary development branch, where you’ll load the data from your RDS database every night.
-- Once everything is set up, you’ll be able to create additional branches from the main branch to [duplicate your development environment in a second](https://neon.tech/blog/how-to-copy-large-postgres-databases-in-seconds), without additional storage costs, as many times as you need. Every engineer on your team can have their own dev branch, facilitating parallel development without adding overheads in database management or costs.
+- Once everything is set up, you’ll be able to create additional branches from the main branch to [duplicate your development environment in a second](https://neon.com/blog/how-to-copy-large-postgres-databases-in-seconds), without additional storage costs, as many times as you need. Every engineer on your team can have their own dev branch, facilitating parallel development without adding overheads in database management or costs.
 
 Once you’ve set up your Neon account and your project, **create a database in the main branch**, and make a note of the connection string. You will need this in the next step.
 
@@ -195,10 +195,10 @@ We’ve built a tool specifically designed to assist with the creation of Github
 
 In this blog post, we walked you through the process of optimizing your development environments by creating a Neon Twin of your RDS database using GitHub Actions. Here’s a quick recap of what we covered so far:
 
-- In [Part I](https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres), we discussed how setting up a synchronized copy of your RDS database in Neon (a Neon Twin) can streamline your development workflows.
+- In [Part I](https://neon.com/blog/development-environments-for-aws-rds-using-neon-postgres), we discussed how setting up a synchronized copy of your RDS database in Neon (a Neon Twin) can streamline your development workflows.
 - We discussed how to set up the essential components required for the process of setting up a dev environment in Neon.
 - We automated the process of moving data from RDS to Neon via a nightly pg_dump triggered by Github Actions.
 
 ## Next steps
 
-**Continue building the workflow**: [Move on to Part III](https://neon.tech/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows) to add Slack alerts to monitor the status of your dumps / restores, and [learn how to deploy a change tested on Neon back to prod in RDS in Part IV.](https://neon.tech/blog/neon-twin-deploy-workflow)
+**Continue building the workflow**: [Move on to Part III](https://neon.com/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows) to add Slack alerts to monitor the status of your dumps / restores, and [learn how to deploy a change tested on Neon back to prod in RDS in Part IV.](https://neon.com/blog/neon-twin-deploy-workflow)

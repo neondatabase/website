@@ -31,9 +31,9 @@ const operation = {
   cli: {
     command: 'neon projects create',
     flags: [
-      { name: 'name', type: 'string' },
-      { name: 'region-id', type: 'string' },
-      { name: 'pg-version', type: 'integer' },
+      { name: 'name', type: 'string', apiEquiv: 'project.name', apiEquivIn: 'body' },
+      { name: 'region-id', type: 'string', apiEquiv: 'project.region_id', apiEquivIn: 'body' },
+      { name: 'pg-version', type: 'integer', apiEquiv: 'project.pg_version', apiEquivIn: 'body' },
     ],
   },
   mcp: {

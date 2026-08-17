@@ -1,9 +1,9 @@
 ---
 title: The Neon GitHub integration
-subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
+subtitle: Connect Lakebase Postgres on Neon to a GitHub repository and build GitHub Actions
   workflows
 summary: >-
-  The Neon GitHub integration connects a Neon Postgres project to a GitHub
+  The Neon GitHub integration connects a Lakebase Postgres project on Neon to a GitHub
   repository by installing a GitHub App that stores a NEON_API_KEY secret and
   NEON_PROJECT_ID variable in the repo. GitHub Actions workflows use these to
   create a database branch when a pull request opens and delete it on close.
@@ -15,7 +15,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-04T05:05:30.414Z'
 ---
 
 The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).

@@ -39,7 +39,7 @@ seo:
 A few weeks ago, we participated in a [panel](https://www.youtube.com/watch?v=DSbf_t_VOuM) talking about [AI Agents](https://neon.tech/use-cases/ai-agents) with [Wordware](https://www.wordware.ai/). For those of you who prefer to scroll through it, here’s a summary of our conversation—plus a Wordware demo.
 
 <Admonition type="info">
-The team at Wordware (YC S24) is building their platform on Neon. You can read more about why they picked Neon and how they’re using it [here](https://neon.tech/blog/building-ai-agents-just-got-faster-with-wordware-and-neon). If you're also YC, ask us about our [deals](https://neon.tech/yc-startups).
+The team at Wordware (YC S24) is building their platform on Neon. You can read more about why they picked Neon and how they’re using it [here](https://neon.com/blog/building-ai-agents-just-got-faster-with-wordware-and-neon). If you're also YC, ask us about our [deals](https://neon.tech/yc-startups).
 </Admonition>
 
 ---
@@ -80,13 +80,13 @@ We launched [an agent that analyzed Twitter feeds and offered personality insigh
 
 <EmbedTweet url="https://twitter.com/yoheinakajima/status/1817989020984791374?ref_src=twsrc%5Etfw" />
 
-Overnight it became a hit, and we were not expecting it. We saw a big traffic spike that turned out to be a real stress test for our infrastructure. That’s when [Neon](https://neon.tech/home)’s serverless architecture and [autoscaling](https://neon.tech/docs/introduction/autoscaling) truly proved useful.
+Overnight it became a hit, and we were not expecting it. We saw a big traffic spike that turned out to be a real stress test for our infrastructure. That’s when [Neon](https://neon.tech/home)’s serverless architecture and [autoscaling](https://neon.com/docs/introduction/autoscaling) truly proved useful.
 
 ### Tell us more about how Neon supported you!
 
 Because we’re using Neon, we didn’t have to scramble to manually scale up or worry about provisioning additional resources—it all happened automatically. Neon provisions new databases really fast, and these databases autoscale up very quickly also, which was critical given how much our load was increasing.
 
-This whole experience made clear the importance of having dynamic autoscaling in your database, especially for applications where traffic can fluctuate wildly. We also love Neon’s [branching](https://neon.tech/docs/introduction/branching), which lets us create isolated, on-demand environments that mirror production data without the overhead of duplicating it. This makes it easy for us to quickly test and iterate new features and schema changes, shipping faster and with fewer mistakes.
+This whole experience made clear the importance of having dynamic autoscaling in your database, especially for applications where traffic can fluctuate wildly. We also love Neon’s [branching](https://neon.com/docs/introduction/branching), which lets us create isolated, on-demand environments that mirror production data without the overhead of duplicating it. This makes it easy for us to quickly test and iterate new features and schema changes, shipping faster and with fewer mistakes.
 
 ---
 

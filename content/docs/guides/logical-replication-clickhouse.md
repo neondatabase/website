@@ -2,7 +2,7 @@
 title: Replicate data to ClickHouse
 subtitle: Learn how to replicate data from Neon to ClickHouse Cloud
 summary: >-
-  Replicate data from Neon Postgres to ClickHouse Cloud using ClickPipes, a
+  Replicate data from Lakebase Postgres to ClickHouse Cloud using ClickPipes, a
   WAL-based ingestion service that reads CDC events via a Postgres publication
   and a dedicated replication role. Use this guide to sync Neon tables into
   ClickHouse for real-time analytics without custom ETL, with Console, API,
@@ -10,14 +10,14 @@ summary: >-
   wal_level=logical for the entire Neon project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
-[ClickHouse](https://clickhouse.com/) is an open-source column-oriented database management system designed for real-time analytical queries on large volumes of data. Using **[ClickPipes](https://clickhouse.com/cloud/clickpipes)**, ClickHouse Cloud's native continuous data ingestion service, you can easily set up Change Data Capture (CDC) from your Neon Postgres database to stream real-time changes directly into ClickHouse.
+[ClickHouse](https://clickhouse.com/) is an open-source column-oriented database management system designed for real-time analytical queries on large volumes of data. Using **[ClickPipes](https://clickhouse.com/cloud/clickpipes)**, ClickHouse Cloud's native continuous data ingestion service, you can easily set up Change Data Capture (CDC) from your Lakebase Postgres database to stream real-time changes directly into ClickHouse.
 
-In this guide, you will learn how to prepare your Neon Postgres database and configure a Postgres CDC ClickPipe to replicate data to ClickHouse Cloud.
+In this guide, you will learn how to prepare your Lakebase Postgres database and configure a Postgres CDC ClickPipe to replicate data to ClickHouse Cloud.
 
 ## Prerequisites
 
@@ -33,7 +33,7 @@ Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to
 
 ## Prepare your source Neon database
 
-Before setting up the ClickPipe in ClickHouse Cloud, you need to prepare your source Neon Postgres database for logical replication. This involves enabling logical replication, creating a publication, and ensuring your tables are properly configured for replication.
+Before setting up the ClickPipe in ClickHouse Cloud, you need to prepare your source database for logical replication. This involves enabling logical replication, creating a publication, and ensuring your tables are properly configured for replication.
 
 ### Enable logical replication in Neon
 
@@ -541,7 +541,7 @@ You should see an output indicating that a ClickHouse service and a ClickPipe wi
 terraform apply "tfplan"
 ```
 
-Terraform will create the ClickHouse Cloud service and set up the ClickPipe to replicate data from your Neon Postgres database to ClickHouse. You can monitor the status of your ClickPipe in the ClickHouse Cloud console or by using the ClickHouse Cloud API.
+Terraform will create the ClickHouse Cloud service and set up the ClickPipe to replicate data from your database to ClickHouse. You can monitor the status of your ClickPipe in the ClickHouse Cloud console or by using the ClickHouse Cloud API.
 
 </TabItem>
 

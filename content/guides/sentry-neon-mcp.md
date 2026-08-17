@@ -4,7 +4,7 @@ subtitle: 'How to use AI agents to fetch stack traces from Sentry and safely tes
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-04-06T00:00:00.000Z'
-updatedOn: '2026-04-08T10:44:25.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Resolving stateful production bugs requires exact runtime context and a safe place to experiment. If an AI agent only has access to your local codebase, its ability to troubleshoot database bottlenecks is severely limited.
@@ -30,7 +30,7 @@ Rather than manually hunting down the slow query in your observability tools, cl
 
 Before you begin, ensure you have the following ready.
 
-This guide assumes your application already sends events to Sentry and uses Neon Postgres as its primary database.
+This guide assumes your application already sends events to Sentry and uses Lakebase Postgres as its primary database.
 
 - **Sentry account and project:** An active Sentry account with an application sending error and performance events. If Sentry is not yet added to your app, follow the [Sentry setup docs](https://docs.sentry.io/platforms/) first.
 - **Neon account and project:** A Neon account with a project configured as the primary database for your application. If you haven’t set up Neon yet, you can create an account and follow [Connecting Neon to your stack](/docs/get-started/connect-neon) to get started.

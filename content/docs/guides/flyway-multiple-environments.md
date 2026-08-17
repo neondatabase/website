@@ -11,7 +11,7 @@ summary: >-
   environments and want to integrate Neon branch creation with Flyway migration
   ordering.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -115,6 +115,10 @@ Your connection strings should look something like the ones shown below. Note th
   ```bash shouldWrap
   jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
+
+<Admonition type="important">
+Use direct (non-pooled) connection strings with Flyway. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure none of the hostnames include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Configure flyway to connect each environment
 

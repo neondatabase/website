@@ -1,4 +1,10 @@
 {
+  "addBranchNeonAuthOauthProvider": {
+    "id": "github",
+    "type": "standard",
+    "client_id": "example-client-id",
+    "client_secret": "****cret"
+  },
   "addProjectJWKS": {
     "jwks": {
       "id": "00000000-0000-0000-0000-000000000000",
@@ -20,20 +26,20 @@
         "action": "apply_config",
         "status": "running",
         "failures_count": 0,
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "total_duration_ms": 0
       },
       {
         "id": "00000000-0000-0000-0000-000000000000",
         "project_id": "aged-wildflower-123456",
         "branch_id": "br-young-forest-a5b6c7d8",
-        "endpoint_id": "ep-cool-darkness-a5b6c7d8",
+        "endpoint_id": "ep-cool-darkness-12345678",
         "action": "apply_config",
         "status": "scheduling",
         "failures_count": 0,
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "total_duration_ms": 0
       }
     ]
@@ -42,29 +48,41 @@
     "count": 5
   },
   "createApiKey": {
-    "id": 3084345,
-    "key": "<API_KEY>",
-    "name": "my-api-key-13",
+    "id": 1000000,
+    "key": "napi_examplekey000000000000000000000000000000000000000000000000",
+    "name": "service-key-49",
     "created_at": "2025-01-15T10:30:00Z",
     "created_by": "00000000-0000-0000-0000-000000000000"
   },
   "createBranchNeonAuthNewUser": {
     "id": "00000000-0000-0000-0000-000000000000"
   },
+  "createCredential": {
+    "token_id": "nak_live_example0000000000000000",
+    "token_id_short": "000000000000",
+    "name": "my-credential",
+    "api_token": "nt_example00000000000000000000000000000000000000000",
+    "s3_secret_access_key": "nsk_live_0000000000000000000000000000000000000000000000000000000000000",
+    "scopes": [
+      "storage:read"
+    ],
+    "branch_id": "br-young-forest-a5b6c7d8",
+    "created_at": "2025-01-15T10:30:00Z"
+  },
   "createNeonAuth": {
     "auth_provider": "better_auth",
     "auth_provider_project_id": "00000000-0000-0000-0000-000000000000",
     "pub_client_key": "",
     "secret_server_key": "",
-    "jwks_url": "https://ep-cool-darkness-a5b6c7d8.neonauth.c-3.us-east-2.aws.neon.tech/neondb/auth/.well-known/jwks.json",
+    "jwks_url": "https://ep-cool-darkness-a5b6c7d8.neonauth.c-4.us-east-2.aws.neon.tech/neondb/auth/.well-known/jwks.json",
     "schema_name": "neon_auth",
     "table_name": "users_sync",
-    "base_url": "https://ep-cool-darkness-a5b6c7d8.neonauth.c-3.us-east-2.aws.neon.tech/neondb/auth"
+    "base_url": "https://ep-cool-darkness-a5b6c7d8.neonauth.c-4.us-east-2.aws.neon.tech/neondb/auth"
   },
   "createOrgApiKey": {
-    "id": 3084350,
-    "key": "<API_KEY>",
-    "name": "my-api-key-19",
+    "id": 1000000,
+    "key": "napi_examplekey000000000000000000000000000000000000000000000000",
+    "name": "service-key-55",
     "created_at": "2025-01-15T10:30:00Z",
     "created_by": "00000000-0000-0000-0000-000000000000"
   },
@@ -95,17 +113,17 @@
         "enable_logical_replication": false,
         "maintenance_window": {
           "weekdays": [
-            5
+            3
           ],
-          "start_time": "07:00",
-          "end_time": "08:00"
+          "start_time": "09:00",
+          "end_time": "10:00"
         },
         "block_public_connections": false,
         "block_vpc_connections": false,
         "hipaa": false
       },
       "pg_version": 17,
-      "proxy_host": "c-3.us-east-2.aws.neon.tech",
+      "proxy_host": "c-4.us-east-2.aws.neon.tech",
       "branch_logical_size_limit": 16777216,
       "branch_logical_size_limit_bytes": 17592186044416,
       "store_passwords": true,
@@ -113,8 +131,8 @@
       "history_retention_seconds": 86400,
       "created_at": "2025-01-15T10:30:00Z",
       "updated_at": "2025-01-15T10:30:00Z",
-      "consumption_period_start": "2025-01-15T10:30:00Z",
-      "consumption_period_end": "2025-01-15T10:30:00Z",
+      "consumption_period_start": "2025-01-15T11:00:00Z",
+      "consumption_period_end": "2025-01-15T11:00:00Z",
       "owner_id": "org-spring-garden-12345",
       "org_id": "org-spring-garden-12345"
     },
@@ -125,8 +143,8 @@
           "database": "neondb",
           "password": "AbC123dEf",
           "role": "neondb_owner",
-          "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-          "pooler_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+          "host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
+          "pooler_host": "ep-cool-darkness-a5b6c7d8-pooler.c-4.us-east-2.aws.neon.tech"
         }
       }
     ],
@@ -143,7 +161,7 @@
     ],
     "databases": [
       {
-        "id": 1636576,
+        "id": 1000000,
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "neondb",
         "owner_name": "neondb_owner",
@@ -199,10 +217,10 @@
     },
     "endpoints": [
       {
-        "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+        "host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
         "hosts": {
-          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
+          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-4.us-east-2.aws.neon.tech"
         },
         "id": "ep-cool-darkness-a5b6c7d8",
         "slug": "ep-cool-darkness-a5b6c7d8",
@@ -224,12 +242,12 @@
           "allow_readable_secondaries": false,
           "computes": [
             {
-              "binding_id": "cs8",
+              "binding_id": "dsq",
               "current_state": "init",
               "pending_state": "active",
               "role": "read_write",
-              "compute_host": "ep-cool-darkness-a5b6c7d8-cs8.c-3.us-east-2.aws.neon.tech",
-              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-cs8-pooler.c-3.us-east-2.aws.neon.tech",
+              "compute_host": "ep-cool-darkness-a5b6c7d8-dsq.c-4.us-east-2.aws.neon.tech",
+              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-dsq-pooler.c-4.us-east-2.aws.neon.tech",
               "created_at": "2025-01-15T10:30:00Z",
               "updated_at": "2025-01-15T10:30:00Z"
             }
@@ -243,7 +261,7 @@
         "creation_source": "console",
         "created_at": "2025-01-15T10:30:00Z",
         "updated_at": "2025-01-15T10:30:00Z",
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
+        "proxy_host": "c-4.us-east-2.aws.neon.tech",
         "suspend_timeout_seconds": 0,
         "provisioner": "k8s-neonvm"
       }
@@ -253,8 +271,8 @@
     "branch": {
       "id": "br-young-forest-a5b6c7d8",
       "project_id": "aged-wildflower-123456",
-      "parent_id": "br-young-forest-a5b6c7d8",
-      "parent_lsn": "0/1964220",
+      "parent_id": "br-young-forest-12345678",
+      "parent_lsn": "0/1964D68",
       "name": "my-branch-2",
       "slug": "br-young-forest-a5b6c7d8",
       "project_slug": "aged-wildflower-123456",
@@ -302,45 +320,45 @@
     "roles": [
       {
         "branch_id": "br-young-forest-a5b6c7d8",
-        "name": "neondb_owner",
-        "protected": false,
-        "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
-      },
-      {
-        "branch_id": "br-young-forest-a5b6c7d8",
         "name": "authenticator",
         "protected": false,
         "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
       },
       {
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "anonymous",
         "protected": false,
         "authentication_method": "no_login",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
       },
       {
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "authenticated",
         "protected": false,
         "authentication_method": "no_login",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
+      },
+      {
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "name": "neondb_owner",
+        "protected": false,
+        "authentication_method": "password",
+        "created_at": "2025-01-15T11:30:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
       }
     ],
     "databases": [
       {
-        "id": 1636596,
+        "id": 1000000,
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "neondb",
         "owner_name": "neondb_owner",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:30:00Z",
+        "updated_at": "2025-01-15T11:30:00Z"
       }
     ]
   },
@@ -348,8 +366,8 @@
     "branch": {
       "id": "br-young-forest-a5b6c7d8",
       "project_id": "aged-wildflower-123456",
-      "parent_id": "br-young-forest-a5b6c7d8",
-      "parent_lsn": "0/196A1A0",
+      "parent_id": "br-young-forest-12345678",
+      "parent_lsn": "0/1964E60",
       "name": "br-young-forest-a5b6c7d8",
       "slug": "br-young-forest-a5b6c7d8",
       "project_slug": "aged-wildflower-123456",
@@ -385,10 +403,10 @@
     },
     "endpoints": [
       {
-        "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+        "host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
         "hosts": {
-          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-5.us-east-2.aws.neon.tech"
         },
         "id": "ep-cool-darkness-a5b6c7d8",
         "slug": "ep-cool-darkness-a5b6c7d8",
@@ -410,12 +428,12 @@
           "allow_readable_secondaries": false,
           "computes": [
             {
-              "binding_id": "kzy",
+              "binding_id": "ffk",
               "current_state": "init",
               "pending_state": "active",
               "role": "read_write",
-              "compute_host": "ep-cool-darkness-a5b6c7d8-kzy.c-3.us-east-2.aws.neon.tech",
-              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-kzy-pooler.c-3.us-east-2.aws.neon.tech",
+              "compute_host": "ep-cool-darkness-a5b6c7d8-ffk.c-5.us-east-2.aws.neon.tech",
+              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-ffk-pooler.c-5.us-east-2.aws.neon.tech",
               "created_at": "2025-01-15T10:30:00Z",
               "updated_at": "2025-01-15T10:30:00Z"
             }
@@ -436,7 +454,7 @@
         "creation_source": "console",
         "created_at": "2025-01-15T10:30:00Z",
         "updated_at": "2025-01-15T10:30:00Z",
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
+        "proxy_host": "c-5.us-east-2.aws.neon.tech",
         "suspend_timeout_seconds": 0,
         "provisioner": "k8s-neonvm"
       }
@@ -480,54 +498,61 @@
     "roles": [
       {
         "branch_id": "br-young-forest-a5b6c7d8",
-        "name": "neondb_owner",
-        "protected": false,
-        "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
-      },
-      {
-        "branch_id": "br-young-forest-a5b6c7d8",
         "name": "authenticator",
         "protected": false,
         "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
       },
       {
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "anonymous",
         "protected": false,
         "authentication_method": "no_login",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
       },
       {
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "authenticated",
         "protected": false,
         "authentication_method": "no_login",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
+      },
+      {
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "name": "neondb_owner",
+        "protected": false,
+        "authentication_method": "password",
+        "created_at": "2025-01-15T11:30:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
       }
     ],
     "databases": [
       {
-        "id": 1636673,
+        "id": 1000000,
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "neondb",
         "owner_name": "neondb_owner",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:30:00Z",
+        "updated_at": "2025-01-15T11:30:00Z"
       }
     ]
   },
+  "createProjectBranchBucket": {
+    "bucket": {
+      "name": "my-bucket",
+      "access_level": "private",
+      "created_at": "2025-01-15T10:30:00Z"
+    }
+  },
   "createProjectBranchDataAPI": {
-    "url": "https://ep-cool-darkness-a5b6c7d8.apirest.c-3.us-east-2.aws.neon.tech/neondb/rest/v1"
+    "url": "https://ep-cool-darkness-a5b6c7d8.apirest.c-4.us-east-2.aws.neon.tech/neondb/rest/v1"
   },
   "createProjectBranchDatabase": {
     "database": {
-      "id": 1636685,
+      "id": 1000000,
       "branch_id": "br-young-forest-a5b6c7d8",
       "name": "my-database-2",
       "owner_name": "alex",
@@ -548,6 +573,15 @@
         "total_duration_ms": 0
       }
     ]
+  },
+  "createProjectBranchFunctionDeployment": {
+    "deployment": {
+      "id": 1,
+      "status": "pending",
+      "memory_mib": 2048,
+      "runtime": "nodejs24",
+      "created_at": "2025-01-15T10:30:00Z"
+    }
   },
   "createProjectBranchRole": {
     "role": {
@@ -576,10 +610,10 @@
   },
   "createProjectEndpoint": {
     "endpoint": {
-      "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+      "host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
       "hosts": {
-        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
+        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-4.us-east-2.aws.neon.tech"
       },
       "id": "ep-cool-darkness-a5b6c7d8",
       "slug": "ep-cool-darkness-a5b6c7d8",
@@ -600,11 +634,11 @@
         "allow_readable_secondaries": true,
         "computes": [
           {
-            "binding_id": "rmg",
+            "binding_id": "hqh",
             "current_state": "idle",
             "role": "read_only",
-            "compute_host": "ep-cool-darkness-a5b6c7d8-rmg.c-3.us-east-2.aws.neon.tech",
-            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-rmg-pooler.c-3.us-east-2.aws.neon.tech",
+            "compute_host": "ep-cool-darkness-a5b6c7d8-hqh.c-4.us-east-2.aws.neon.tech",
+            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-hqh-pooler.c-4.us-east-2.aws.neon.tech",
             "created_at": "2025-01-15T10:30:00Z",
             "updated_at": "2025-01-15T10:30:00Z"
           }
@@ -618,15 +652,21 @@
       "creation_source": "console",
       "created_at": "2025-01-15T10:30:00Z",
       "updated_at": "2025-01-15T10:30:00Z",
-      "proxy_host": "c-3.us-east-2.aws.neon.tech",
+      "proxy_host": "c-4.us-east-2.aws.neon.tech",
       "suspend_timeout_seconds": 0,
       "provisioner": "k8s-neonvm"
     },
     "operations": []
   },
+  "createProjectTransferRequest": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "project_id": "misty-meadow-000007",
+    "created_at": "2025-01-15T10:30:00Z",
+    "expires_at": "2025-02-15T10:30:00Z"
+  },
   "createSnapshot": {
     "snapshot": {
-      "id": "snap-billowing-night-aje3jh1j",
+      "id": "snap-quiet-meadow-a5b6c7d8",
       "name": "my-snapshot-2",
       "source_branch_id": "br-young-forest-a5b6c7d8",
       "created_at": "2025-01-15T10:30:00Z",
@@ -636,7 +676,7 @@
       {
         "id": "00000000-0000-0000-0000-000000000000",
         "project_id": "aged-wildflower-123456",
-        "branch_id": "br-young-forest-a5b6c7d8",
+        "branch_id": "br-young-forest-12345678",
         "action": "create_branch",
         "status": "running",
         "failures_count": 0,
@@ -647,7 +687,7 @@
       {
         "id": "00000000-0000-0000-0000-000000000000",
         "project_id": "aged-wildflower-123456",
-        "branch_id": "br-young-forest-a5b6c7d8",
+        "branch_id": "br-young-forest-12345678",
         "action": "timeline_archive",
         "status": "scheduling",
         "failures_count": 0,
@@ -665,11 +705,11 @@
       "compute_time_seconds": 0,
       "active_time_seconds": 0,
       "cpu_used_sec": 0,
-      "id": "temp-project-000010",
+      "id": "misty-meadow-000014",
       "platform_id": "aws",
       "region_id": "aws-us-east-2",
-      "name": "my-project-10",
-      "slug": "temp-project-000010",
+      "name": "my-project-14",
+      "slug": "misty-meadow-000014",
       "provisioner": "k8s-neonvm",
       "default_endpoint_settings": {
         "autoscaling_limit_min_cu": 1,
@@ -684,7 +724,7 @@
         "enable_logical_replication": false,
         "maintenance_window": {
           "weekdays": [
-            4
+            2
           ],
           "start_time": "07:00",
           "end_time": "08:00"
@@ -694,17 +734,17 @@
         "hipaa": false
       },
       "pg_version": 17,
-      "proxy_host": "c-3.us-east-2.aws.neon.tech",
+      "proxy_host": "c-5.us-east-2.aws.neon.tech",
       "branch_logical_size_limit": 16777216,
       "branch_logical_size_limit_bytes": 17592186044416,
       "store_passwords": true,
       "creation_source": "console",
       "history_retention_seconds": 86400,
       "created_at": "2025-01-15T10:30:00Z",
-      "updated_at": "2025-01-15T10:30:00Z",
+      "updated_at": "2025-01-15T11:00:00Z",
       "synthetic_storage_size": 0,
-      "consumption_period_start": "2025-01-15T10:30:00Z",
-      "consumption_period_end": "2025-01-15T10:30:00Z",
+      "consumption_period_start": "2025-01-15T11:30:00Z",
+      "consumption_period_end": "2025-01-15T11:30:00Z",
       "owner_id": "org-spring-garden-12345",
       "org_id": "org-spring-garden-12345"
     }
@@ -748,9 +788,12 @@
       }
     ]
   },
+  "deleteProjectBranchBucketObjectsByPrefix": {
+    "deleted": 1
+  },
   "deleteProjectBranchDatabase": {
     "database": {
-      "id": 1636705,
+      "id": 1000000,
       "branch_id": "br-young-forest-a5b6c7d8",
       "name": "my-database-8",
       "owner_name": "alex",
@@ -766,8 +809,8 @@
         "action": "apply_config",
         "status": "running",
         "failures_count": 0,
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "total_duration_ms": 0
       }
     ]
@@ -790,15 +833,88 @@
         "action": "apply_config",
         "status": "running",
         "failures_count": 0,
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
+        "total_duration_ms": 0
+      }
+    ]
+  },
+  "deleteProjectEndpoint": {
+    "endpoint": {
+      "host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+      "hosts": {
+        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-5.us-east-2.aws.neon.tech"
+      },
+      "id": "ep-cool-darkness-a5b6c7d8",
+      "slug": "ep-cool-darkness-a5b6c7d8",
+      "branch_slug": "br-young-forest-a5b6c7d8",
+      "project_slug": "aged-wildflower-123456",
+      "project_id": "aged-wildflower-123456",
+      "branch_id": "br-young-forest-a5b6c7d8",
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 1,
+      "region_id": "aws-us-east-2",
+      "type": "read_only",
+      "current_state": "active",
+      "pending_state": "idle",
+      "group": {
+        "size": {
+          "min": 1,
+          "max": 1
+        },
+        "allow_readable_secondaries": true,
+        "computes": [
+          {
+            "binding_id": "fgc",
+            "current_state": "active",
+            "pending_state": "idle",
+            "role": "read_only",
+            "compute_host": "ep-cool-darkness-a5b6c7d8-fgc.c-5.us-east-2.aws.neon.tech",
+            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-fgc-pooler.c-5.us-east-2.aws.neon.tech",
+            "created_at": "2025-01-15T10:30:00Z",
+            "updated_at": "2025-01-15T11:00:00Z",
+            "started_at": "2025-01-15T11:30:00Z"
+          }
+        ]
+      },
+      "settings": {
+        "pg_settings": {
+          "statement_timeout": "60000",
+          "idle_in_transaction_session_timeout": "300000"
+        }
+      },
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "last_active": "2025-01-15T12:00:00Z",
+      "creation_source": "console",
+      "created_at": "2025-01-15T10:30:00Z",
+      "updated_at": "2025-01-15T11:00:00Z",
+      "started_at": "2025-01-15T11:30:00Z",
+      "proxy_host": "c-5.us-east-2.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
+    },
+    "operations": [
+      {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "project_id": "aged-wildflower-123456",
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "endpoint_id": "ep-cool-darkness-a5b6c7d8",
+        "action": "suspend_compute",
+        "status": "running",
+        "failures_count": 0,
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "total_duration_ms": 0
       }
     ]
   },
   "deleteProjectJWKS": {
     "id": "00000000-0000-0000-0000-000000000000",
-    "project_id": "temp-project-000009",
+    "project_id": "misty-meadow-000012",
     "jwks_url": "https://www.googleapis.com/oauth2/v3/certs",
     "provider_name": "Google",
     "created_at": "2025-01-15T10:30:00Z",
@@ -831,32 +947,11 @@
         "geo_long": "-83"
       },
       {
-        "region_id": "azure-eastus2",
-        "name": "Azure East US 2 (Virginia)",
-        "default": false,
-        "geo_lat": "36.66",
-        "geo_long": "-78.38"
-      },
-      {
         "region_id": "aws-us-east-1",
         "name": "AWS US East 1 (N. Virginia)",
         "default": true,
         "geo_lat": "38.13",
         "geo_long": "-78.45"
-      },
-      {
-        "region_id": "azure-westus3",
-        "name": "Azure West US 3 (Arizona)",
-        "default": false,
-        "geo_lat": "33.45",
-        "geo_long": "-112.07"
-      },
-      {
-        "region_id": "azure-gwc",
-        "name": "Azure Germany West Central (Frankfurt)",
-        "default": false,
-        "geo_lat": "50.11",
-        "geo_long": "8.68"
       },
       {
         "region_id": "aws-us-west-2",
@@ -905,9 +1000,10 @@
   "getAnonymizedBranchStatus": {
     "project_id": "aged-wildflower-123456",
     "branch_id": "br-young-forest-a5b6c7d8",
-    "state": "created",
+    "state": "initialized",
+    "status_message": "Successfully initialized PostgreSQL Anonymizer on all databases",
     "created_at": "2025-01-15T10:30:00Z",
-    "updated_at": "2025-01-15T10:30:00Z"
+    "updated_at": "2025-01-15T11:00:00Z"
   },
   "getAvailablePreloadLibraries": {
     "libraries": [
@@ -959,6 +1055,20 @@
         "is_default": false,
         "is_experimental": false,
         "version": "2.4.1"
+      },
+      {
+        "library_name": "lakebase_vector",
+        "description": "High-performance vector index, fully compatible with pgvector.",
+        "is_default": false,
+        "is_experimental": false,
+        "version": "1.0.0-dev"
+      },
+      {
+        "library_name": "lakebase_text",
+        "description": "High-performance BM25 full-text search.",
+        "is_default": false,
+        "is_experimental": false,
+        "version": "0.1.0-dev"
       }
     ]
   },
@@ -1032,231 +1142,235 @@
       }
     ]
   },
+  "getConsumptionHistoryPerBranchV2": {
+    "branches": [
+      {
+        "project_id": "aged-wildflower-123456",
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "periods": [
+          {
+            "period_id": "00000000-0000-0000-0000-000000000000",
+            "period_start": "2025-01-15T10:30:00Z",
+            "period_end": "2025-02-15T10:30:00Z",
+            "consumption": [
+              {
+                "timeframe_start": "2025-01-15T10:30:00Z",
+                "timeframe_end": "2025-01-16T10:30:00Z",
+                "metrics": [
+                  {
+                    "metric_name": "compute_unit_seconds",
+                    "value": 21600
+                  }
+                ]
+              },
+              {
+                "timeframe_start": "2025-01-16T10:30:00Z",
+                "timeframe_end": "2025-01-17T10:30:00Z",
+                "metrics": [
+                  {
+                    "metric_name": "compute_unit_seconds",
+                    "value": 20700
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "getConsumptionHistoryPerProject": {
     "projects": [
       {
-        "project_id": "quiet-river-789012",
+        "project_id": "quiet-river-000270",
         "periods": [
           {
             "period_id": "00000000-0000-0000-0000-000000000000",
             "period_plan": "scale",
             "period_start": "2025-01-15T10:30:00Z",
+            "period_end": "2025-01-15T11:00:00Z",
             "consumption": [
               {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 652,
-                "compute_time_seconds": 166,
+                "timeframe_start": "2025-01-15T11:30:00Z",
+                "timeframe_end": "2025-01-15T11:00:00Z",
+                "active_time_seconds": 72,
+                "compute_time_seconds": 72,
                 "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 31434888
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 968,
-                "compute_time_seconds": 254,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 31602992
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 0,
-                "compute_time_seconds": 0,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 31536368
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 0,
-                "compute_time_seconds": 0,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 31334400
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 0,
-                "compute_time_seconds": 0,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 31334400
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 0,
-                "compute_time_seconds": 0,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 31334400
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 0,
-                "compute_time_seconds": 0,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 31334400
+                "synthetic_storage_size_bytes": 0
               }
             ]
           }
         ]
       },
       {
-        "project_id": "bright-meadow-654321",
+        "project_id": "quiet-river-000271",
         "periods": [
           {
             "period_id": "00000000-0000-0000-0000-000000000000",
             "period_plan": "scale",
             "period_start": "2025-01-15T10:30:00Z",
+            "period_end": "2025-01-15T11:00:00Z",
             "consumption": [
               {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 5448,
-                "compute_time_seconds": 2960,
+                "timeframe_start": "2025-01-15T11:30:00Z",
+                "timeframe_end": "2025-01-15T11:00:00Z",
+                "active_time_seconds": 84,
+                "compute_time_seconds": 84,
                 "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 510949592
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 83912,
-                "compute_time_seconds": 21309,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 462717096
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 86400,
-                "compute_time_seconds": 21617,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 109347248
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 86400,
-                "compute_time_seconds": 21615,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 109283456
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 86400,
-                "compute_time_seconds": 21626,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 109292088
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 86448,
-                "compute_time_seconds": 21618,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 109292032
-              },
-              {
-                "timeframe_start": "2025-01-15T10:30:00Z",
-                "timeframe_end": "2025-01-15T10:30:00Z",
-                "active_time_seconds": 86376,
-                "compute_time_seconds": 21607,
-                "written_data_bytes": 0,
-                "synthetic_storage_size_bytes": 109291920
+                "synthetic_storage_size_bytes": 0
               }
             ]
           }
         ]
       },
       {
-        "project_id": "dormant-slug-000036",
-        "periods": []
+        "project_id": "quiet-river-000272",
+        "periods": [
+          {
+            "period_id": "00000000-0000-0000-0000-000000000000",
+            "period_plan": "scale",
+            "period_start": "2025-01-15T10:30:00Z",
+            "period_end": "2025-01-15T11:00:00Z",
+            "consumption": [
+              {
+                "timeframe_start": "2025-01-15T11:30:00Z",
+                "timeframe_end": "2025-01-15T11:00:00Z",
+                "active_time_seconds": 84,
+                "compute_time_seconds": 84,
+                "written_data_bytes": 0,
+                "synthetic_storage_size_bytes": 0
+              }
+            ]
+          }
+        ]
       }
     ],
     "pagination": {
-      "cursor": "dormant-slug-000041"
+      "cursor": "quiet-river-000270"
     }
   },
   "getConsumptionHistoryPerProjectV2": {
     "projects": [
       {
-        "project_id": "dormant-slug-000038",
-        "periods": []
-      },
-      {
-        "project_id": "dormant-slug-000042",
-        "periods": []
-      },
-      {
-        "project_id": "dormant-slug-000043",
-        "periods": []
-      },
-      {
-        "project_id": "dormant-slug-000036",
-        "periods": []
-      },
-      {
-        "project_id": "dormant-slug-000040",
-        "periods": []
-      },
-      {
-        "project_id": "dormant-slug-000041",
-        "periods": []
-      },
-      {
-        "project_id": "bright-meadow-654321",
-        "periods": []
-      },
-      {
         "project_id": "quiet-river-789012",
-        "periods": []
+        "periods": [
+          {
+            "period_id": "00000000-0000-0000-0000-000000000000",
+            "period_plan": "scale",
+            "period_start": "2025-01-15T10:30:00Z",
+            "consumption": [
+              {
+                "timeframe_start": "2025-01-15T10:30:00Z",
+                "timeframe_end": "2025-01-16T10:30:00Z",
+                "active_time_seconds": 86400,
+                "compute_time_seconds": 21600,
+                "written_data_bytes": 4194304,
+                "synthetic_storage_size_bytes": 1782579200
+              },
+              {
+                "timeframe_start": "2025-01-16T10:30:00Z",
+                "timeframe_end": "2025-01-17T10:30:00Z",
+                "active_time_seconds": 82800,
+                "compute_time_seconds": 20700,
+                "written_data_bytes": 3145728,
+                "synthetic_storage_size_bytes": 1810427904
+              }
+            ]
+          }
+        ]
       },
       {
-        "project_id": "dormant-slug-000039",
-        "periods": []
+        "project_id": "misty-stream-987654",
+        "periods": [
+          {
+            "period_id": "00000000-0000-0000-0000-000000000000",
+            "period_plan": "scale",
+            "period_start": "2025-01-15T10:30:00Z",
+            "consumption": [
+              {
+                "timeframe_start": "2025-01-15T10:30:00Z",
+                "timeframe_end": "2025-01-16T10:30:00Z",
+                "active_time_seconds": 86400,
+                "compute_time_seconds": 21600,
+                "written_data_bytes": 4194304,
+                "synthetic_storage_size_bytes": 1782579200
+              },
+              {
+                "timeframe_start": "2025-01-16T10:30:00Z",
+                "timeframe_end": "2025-01-17T10:30:00Z",
+                "active_time_seconds": 82800,
+                "compute_time_seconds": 20700,
+                "written_data_bytes": 3145728,
+                "synthetic_storage_size_bytes": 1810427904
+              }
+            ]
+          }
+        ]
       },
       {
-        "project_id": "dormant-slug-000037",
-        "periods": []
+        "project_id": "quiet-river-000272",
+        "periods": [
+          {
+            "period_id": "00000000-0000-0000-0000-000000000000",
+            "period_plan": "scale",
+            "period_start": "2025-01-15T10:30:00Z",
+            "consumption": [
+              {
+                "timeframe_start": "2025-01-15T10:30:00Z",
+                "timeframe_end": "2025-01-16T10:30:00Z",
+                "active_time_seconds": 86400,
+                "compute_time_seconds": 21600,
+                "written_data_bytes": 4194304,
+                "synthetic_storage_size_bytes": 1782579200
+              },
+              {
+                "timeframe_start": "2025-01-16T10:30:00Z",
+                "timeframe_end": "2025-01-17T10:30:00Z",
+                "active_time_seconds": 82800,
+                "compute_time_seconds": 20700,
+                "written_data_bytes": 3145728,
+                "synthetic_storage_size_bytes": 1810427904
+              }
+            ]
+          }
+        ]
       }
     ],
     "pagination": {
-      "cursor": "dormant-slug-000041"
+      "cursor": "quiet-river-000270"
     }
   },
   "getCurrentUserInfo": {
     "active_seconds_limit": 0,
     "auth_accounts": [
       {
-        "email": "alex@example.com",
+        "email": "jane.doe@example.com",
         "image": "https://example.com/avatar.png",
-        "login": "alex",
-        "name": "Alex",
+        "login": "jane-doe",
+        "name": "Jane",
         "provider": "google"
       },
       {
-        "email": "alex@example.com",
+        "email": "jane.doe@example.com",
         "image": "https://example.com/avatar.png",
-        "login": "alex",
-        "name": "Alex",
+        "login": "jane-doe",
+        "name": "Jane",
         "provider": "keycloak"
       },
       {
-        "email": "alex@example.com",
+        "email": "jane.doe@example.com",
         "image": "https://example.com/avatar.png",
-        "login": "alex",
-        "name": "Alex",
+        "login": "jane-doe",
+        "name": "Jane",
         "provider": "vercelmp"
       }
     ],
-    "email": "alex@example.com",
+    "email": "jane.doe@example.com",
     "id": "00000000-0000-0000-0000-000000000000",
     "image": "https://example.com/avatar.png",
-    "login": "alex",
-    "name": "Alex",
-    "last_name": "Lopez",
+    "login": "jane-doe",
+    "name": "Jane",
+    "last_name": "Doe",
     "projects_limit": 0,
     "branches_limit": 0,
     "max_autoscaling_limit": 0,
@@ -1271,7 +1385,7 @@
         "plan": "free",
         "created_at": "2025-01-15T10:30:00Z",
         "managed_by": "vercel",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "require_mfa": false
       },
       {
@@ -1279,19 +1393,29 @@
         "name": "My Backup Org",
         "handle": "my-backup-org-org-coral-tide-222222",
         "plan": "free",
-        "created_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T11:30:00Z",
         "managed_by": "console",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T11:30:00Z",
+        "require_mfa": false
+      },
+      {
+        "id": "org-pebble-stone-333333",
+        "name": "My Archived Org",
+        "handle": "my-archived-org-org-pebble-stone-333333",
+        "plan": "free",
+        "created_at": "2025-01-15T12:00:00Z",
+        "managed_by": "console",
+        "updated_at": "2025-01-15T12:30:00Z",
         "require_mfa": false
       },
       {
         "id": "org-spring-garden-12345",
-        "name": "Big Org, LLC",
-        "handle": "bigorg-org-spring-garden-12345",
+        "name": "My Org",
+        "handle": "my-org-org-spring-garden-12345",
         "plan": "scale",
-        "created_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T13:00:00Z",
         "managed_by": "console",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T13:30:00Z",
         "require_mfa": false
       }
     ]
@@ -1306,8 +1430,8 @@
     "db_name": "neondb",
     "created_at": "2025-01-15T10:30:00Z",
     "owned_by": "neon",
-    "jwks_url": "https://ep-cool-darkness-a5b6c7d8.neonauth.c-3.us-east-2.aws.neon.tech/neondb/auth/.well-known/jwks.json",
-    "base_url": "https://ep-cool-darkness-a5b6c7d8.neonauth.c-3.us-east-2.aws.neon.tech/neondb/auth",
+    "jwks_url": "https://ep-cool-darkness-a5b6c7d8.neonauth.c-5.us-east-2.aws.neon.tech/neondb/auth/.well-known/jwks.json",
+    "base_url": "https://ep-cool-darkness-a5b6c7d8.neonauth.c-5.us-east-2.aws.neon.tech/neondb/auth",
     "name": "my-project"
   },
   "getNeonAuthAllowLocalhost": {
@@ -1362,10 +1486,8 @@
     },
     "oauth_providers": [
       {
-        "id": "github",
-        "type": "standard",
-        "client_id": "cid",
-        "client_secret": "csecret"
+        "id": "google",
+        "type": "shared"
       }
     ],
     "allow_localhost": true
@@ -1377,12 +1499,12 @@
   },
   "getOrganization": {
     "id": "org-spring-garden-12345",
-    "name": "Big Org, LLC",
-    "handle": "bigorg-org-spring-garden-12345",
+    "name": "My Org",
+    "handle": "my-org-org-spring-garden-12345",
     "plan": "scale",
     "created_at": "2025-01-15T10:30:00Z",
     "managed_by": "console",
-    "updated_at": "2025-01-15T10:30:00Z",
+    "updated_at": "2025-01-15T11:00:00Z",
     "require_mfa": false
   },
   "getOrganizationInvitations": {
@@ -1409,10 +1531,10 @@
           "user_id": "00000000-0000-0000-0000-000000000000",
           "org_id": "org-spring-garden-12345",
           "role": "admin",
-          "joined_at": "2025-01-15T10:30:00Z"
+          "joined_at": "2025-01-15T11:00:00Z"
         },
         "user": {
-          "email": "alex@example.com",
+          "email": "jane.doe@example.com",
           "has_mfa": false
         }
       }
@@ -1452,35 +1574,35 @@
         "enable_logical_replication": false,
         "maintenance_window": {
           "weekdays": [
-            1
+            6
           ],
-          "start_time": "04:00",
-          "end_time": "05:00"
+          "start_time": "08:00",
+          "end_time": "09:00"
         },
         "block_public_connections": false,
         "block_vpc_connections": false,
         "hipaa": false
       },
       "pg_version": 17,
-      "proxy_host": "c-3.us-east-2.aws.neon.tech",
+      "proxy_host": "c-5.us-east-2.aws.neon.tech",
       "branch_logical_size_limit": 16777216,
       "branch_logical_size_limit_bytes": 17592186044416,
       "store_passwords": true,
       "creation_source": "console",
       "history_retention_seconds": 86400,
       "created_at": "2025-01-15T10:30:00Z",
-      "updated_at": "2025-01-15T10:30:00Z",
+      "updated_at": "2025-01-15T11:00:00Z",
       "synthetic_storage_size": 0,
-      "consumption_period_start": "2025-01-15T10:30:00Z",
-      "consumption_period_end": "2025-01-15T10:30:00Z",
+      "consumption_period_start": "2025-01-15T11:30:00Z",
+      "consumption_period_end": "2025-01-15T12:00:00Z",
       "owner_id": "org-spring-garden-12345",
       "owner": {
-        "email": "alex@example.com",
-        "name": "Big Org, LLC",
+        "email": "jane.doe@example.com",
+        "name": "My Org",
         "branches_limit": 5000,
         "subscription_type": "scale_v3"
       },
-      "compute_last_active_at": "2025-01-15T10:30:00Z",
+      "compute_last_active_at": "2025-01-15T12:30:00Z",
       "org_id": "org-spring-garden-12345"
     }
   },
@@ -1492,13 +1614,14 @@
       "id": "br-young-forest-a5b6c7d8",
       "project_id": "aged-wildflower-123456",
       "parent_id": "br-young-forest-a5b6c7d8",
-      "parent_lsn": "0/1959500",
+      "parent_lsn": "0/1959918",
       "parent_timestamp": "2025-01-15T10:30:00Z",
       "name": "dev",
       "slug": "br-young-forest-a5b6c7d8",
       "project_slug": "aged-wildflower-123456",
       "current_state": "ready",
-      "state_changed_at": "2025-01-15T10:30:00Z",
+      "state_changed_at": "2025-01-15T11:00:00Z",
+      "logical_size": 38879232,
       "creation_source": "console",
       "primary": false,
       "default": false,
@@ -1508,8 +1631,8 @@
       "active_time_seconds": 0,
       "written_data_bytes": 0,
       "data_transfer_bytes": 0,
-      "created_at": "2025-01-15T10:30:00Z",
-      "updated_at": "2025-01-15T10:30:00Z",
+      "created_at": "2025-01-15T11:00:00Z",
+      "updated_at": "2025-01-15T11:30:00Z",
       "init_source": "parent-data"
     },
     "annotation": {
@@ -1520,8 +1643,12 @@
       "value": {}
     }
   },
+  "getProjectBranchAiGateway": {
+    "enabled": true,
+    "base_url": "https://br-young-forest-a5b6c7d8-api.ai.c-5.us-east-2.aws.neon.tech"
+  },
   "getProjectBranchDataAPI": {
-    "url": "https://ep-cool-darkness-a5b6c7d8.apirest.c-3.us-east-2.aws.neon.tech/neondb/rest/v1",
+    "url": "https://ep-cool-darkness-a5b6c7d8.apirest.c-5.us-east-2.aws.neon.tech/neondb/rest/v1",
     "status": "active",
     "settings": {
       "db_aggregates_enabled": true,
@@ -1538,12 +1665,35 @@
   },
   "getProjectBranchDatabase": {
     "database": {
-      "id": 1636569,
+      "id": 1000000,
       "branch_id": "br-young-forest-a5b6c7d8",
       "name": "dbname",
       "owner_name": "alex",
       "created_at": "2025-01-15T10:30:00Z",
       "updated_at": "2025-01-15T10:30:00Z"
+    }
+  },
+  "getProjectBranchFunction": {
+    "function": {
+      "id": "myfunction",
+      "slug": "myfunction",
+      "name": "myfunction",
+      "invocation_url": "https://br-young-forest-a5b6c7d8-myfunction.compute.c-5.us-east-2.aws.neon.tech/",
+      "current_deployment": {
+        "id": 7,
+        "status": "completed",
+        "memory_mib": 2048,
+        "runtime": "nodejs24",
+        "created_at": "2025-01-15T10:30:00Z"
+      },
+      "active_deployment": {
+        "id": 7,
+        "status": "completed",
+        "memory_mib": 2048,
+        "runtime": "nodejs24",
+        "created_at": "2025-01-15T10:30:00Z"
+      },
+      "created_at": "2025-01-15T11:00:00Z"
     }
   },
   "getProjectBranchRole": {
@@ -1560,17 +1710,23 @@
     "password": "AbC123dEf"
   },
   "getProjectBranchSchema": {
-    "sql": "--\n-- PostgreSQL database dump\n--\n\n-- Dumped from database version 17.10 (322a063)\n-- Dumped by pg_dump version 17.10 (322a063)\n\nSET statement_timeout = 0;\nSET lock_timeout = 0;\nSET idle_in_transaction_session_timeout = 0;\nSET transaction_timeout = 0;\nSET client_encoding = 'UTF8';\nSET standard_conforming_strings = on;\nSELECT pg_catalog.set_config('search_path', '', false);\nSET check_function_bodies = false;\nSET xmloption = content;\nSET client_min_messages = warning;\nSET row_security = off;\n\n--\n-- Name: DEFAULT PRIVILEGES FOR SEQUENCES; Type: DEFAULT ACL; Schema: public; Owner: cloud_admin\n--\n\nALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON SEQUENCES TO neon_superuser WITH GRANT OPTION;\n\n\n--\n-- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: public; Owner: cloud_admin\n--\n\nALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON TABLES TO neon_superuser WITH GRANT OPTION;\n\n\n--\n-- PostgreSQL database dump complete\n--\n\n"
+    "sql": "--\n-- PostgreSQL database dump\n--\n\n-- Dumped from database version 17.10 (4f20678)\n-- Dumped by pg_dump version 17.10 (4f20678)\n\nSET statement_timeout = 0;\nSET lock_timeout = 0;\nSET idle_in_transaction_session_timeout = 0;\nSET transaction_timeout = 0;\nSET client_encoding = 'UTF8';\nSET standard_conforming_strings = on;\nSELECT pg_catalog.set_config('search_path', '', false);\nSET check_function_bodies = false;\nSET xmloption = content;\nSET client_min_messages = warning;\nSET row_security = off;\n\n--\n-- Name: DEFAULT PRIVILEGES FOR SEQUENCES; Type: DEFAULT ACL; Schema: public; Owner: cloud_admin\n--\n\nALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON SEQUENCES TO neon_superuser WITH GRANT OPTION;\n\n\n--\n-- Name: DEFAULT PRIVILEGES FOR TABLES; Type: DEFAULT ACL; Schema: public; Owner: cloud_admin\n--\n\nALTER DEFAULT PRIVILEGES FOR ROLE cloud_admin IN SCHEMA public GRANT ALL ON TABLES TO neon_superuser WITH GRANT OPTION;\n\n\n--\n-- PostgreSQL database dump complete\n--\n\n"
   },
   "getProjectBranchSchemaComparison": {
     "diff": "--- a/neondb\n+++ b/neondb\n@@ -18,100 +18,404 @@\n SET row_security = off;\n \n --\n--- Name: pg_session_jwt; Type: EXTENSION; Schema: -; Owner: -\n+-- Name: neon_auth; Type: SCHEMA; Schema: -; Owner: neon_auth\n --\n \n-CREATE EXTENSION IF NOT EXISTS pg_session_jwt WITH SCHEMA public;\n+CREATE SCHEMA neon_auth;\n \n \n+ALTER SCHEMA neon_auth OWNER TO neon_auth;\n+\n+SET default_tablespace = '';\n+\n+SET default_table_access_method = heap;\n+\n --\n--- Name: EXTENSION pg_session_jwt; Type: COMMENT; Schema: -; Owner: \n+-- Name: account; Type: TABLE; Schema: neon_auth; Owner: neon_auth\n --\n \n-COMMENT ON EXTENSION pg_session_jwt IS 'pg_session_jwt: manage authentication sessions using JWTs';\n+CREATE TABLE neon_auth.account (\n+    id uuid DEFAULT gen_random_uuid() NOT NULL,\n+    \"accountId\" text NOT NULL,\n+    \"providerId\" text NOT NULL,\n+    \"userId\" uuid NOT NULL,\n+    \"accessToken\" text,\n+    \"refreshToken\" text,\n+    \"idToken\" text,\n+    \"accessTokenExpiresAt\" timestamp with time zone,\n+    \"refreshTokenExpiresAt\" timestamp with time zone,\n+    scope text,\n+    password text,\n+    \"createdAt\" timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,\n+    \"updatedAt\" timestamp with time zone NOT NULL\n… (truncated for docs)"
   },
+  "getProjectBranchStorage": {
+    "enabled": true,
+    "s3_endpoint": "https://br-young-forest-a5b6c7d8.storage.c-5.us-east-2.aws.neon.tech",
+    "region": "us-east-2",
+    "force_path_style": true
+  },
   "getProjectEndpoint": {
     "endpoint": {
-      "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+      "host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
       "hosts": {
-        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-5.us-east-2.aws.neon.tech"
       },
       "id": "ep-cool-darkness-a5b6c7d8",
       "slug": "ep-cool-darkness-a5b6c7d8",
@@ -1582,7 +1738,7 @@
       "autoscaling_limit_max_cu": 1,
       "region_id": "aws-us-east-2",
       "type": "read_only",
-      "current_state": "active",
+      "current_state": "idle",
       "group": {
         "size": {
           "min": 1,
@@ -1591,30 +1747,33 @@
         "allow_readable_secondaries": true,
         "computes": [
           {
-            "binding_id": "sqy",
-            "current_state": "active",
+            "binding_id": "hx7",
+            "current_state": "idle",
             "role": "read_only",
-            "compute_host": "ep-cool-darkness-a5b6c7d8-sqy.c-3.us-east-2.aws.neon.tech",
-            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-sqy-pooler.c-3.us-east-2.aws.neon.tech",
+            "compute_host": "ep-cool-darkness-a5b6c7d8-hx7.c-5.us-east-2.aws.neon.tech",
+            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-hx7-pooler.c-5.us-east-2.aws.neon.tech",
             "created_at": "2025-01-15T10:30:00Z",
-            "updated_at": "2025-01-15T10:30:00Z",
-            "started_at": "2025-01-15T10:30:00Z"
+            "updated_at": "2025-01-15T11:00:00Z",
+            "suspended_at": "2025-01-15T11:00:00Z"
           }
         ]
       },
       "settings": {
-        "pg_settings": {}
+        "pg_settings": {
+          "idle_in_transaction_session_timeout": "300000",
+          "statement_timeout": "60000"
+        }
       },
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "last_active": "2025-01-15T10:30:00Z",
+      "last_active": "2025-01-15T11:30:00Z",
       "creation_source": "console",
       "created_at": "2025-01-15T10:30:00Z",
-      "updated_at": "2025-01-15T10:30:00Z",
-      "started_at": "2025-01-15T10:30:00Z",
-      "proxy_host": "c-3.us-east-2.aws.neon.tech",
+      "updated_at": "2025-01-15T11:00:00Z",
+      "suspended_at": "2025-01-15T11:00:00Z",
+      "proxy_host": "c-5.us-east-2.aws.neon.tech",
       "suspend_timeout_seconds": 0,
       "provisioner": "k8s-neonvm"
     }
@@ -1625,102 +1784,47 @@
   "getSnapshotSchedule": {
     "schedule": []
   },
+  "grantPermissionToProject": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "granted_to_email": "dana.smith@example.com",
+    "granted_at": "2025-01-15T10:30:00Z"
+  },
   "listApiKeys": [
     {
-      "id": 3083288,
-      "name": "my-api-key-4",
+      "id": 1000000,
+      "name": "production-backend",
       "created_at": "2025-01-15T10:30:00Z",
       "created_by": {
         "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
+        "name": "Jane Doe",
         "image": "https://example.com/avatar.png"
       },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "130.41.56.60"
+      "last_used_at": "2025-01-15T11:00:00Z",
+      "last_used_from_addr": "203.0.113.42"
     },
     {
-      "id": 3081828,
-      "name": "my-api-key-5",
-      "created_at": "2025-01-15T10:30:00Z",
+      "id": 1000001,
+      "name": "ci-cd-pipeline",
+      "created_at": "2025-01-15T11:30:00Z",
       "created_by": {
         "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
+        "name": "Jane Doe",
         "image": "https://example.com/avatar.png"
       },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "165.85.242.101"
+      "last_used_at": "2025-01-15T12:00:00Z",
+      "last_used_from_addr": "203.0.113.42"
     },
     {
-      "id": 3068005,
-      "name": "my-api-key-6",
-      "created_at": "2025-01-15T10:30:00Z",
+      "id": 1000002,
+      "name": "local-development",
+      "created_at": "2025-01-15T12:30:00Z",
       "created_by": {
         "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
+        "name": "Jane Doe",
         "image": "https://example.com/avatar.png"
       },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "134.238.164.15"
-    },
-    {
-      "id": 3010070,
-      "name": "my-api-key-7",
-      "created_at": "2025-01-15T10:30:00Z",
-      "created_by": {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
-        "image": "https://example.com/avatar.png"
-      },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "130.41.56.60"
-    },
-    {
-      "id": 2980899,
-      "name": "my-api-key-8",
-      "created_at": "2025-01-15T10:30:00Z",
-      "created_by": {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
-        "image": "https://example.com/avatar.png"
-      },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "3.143.18.120"
-    },
-    {
-      "id": 2977430,
-      "name": "my-api-key-9",
-      "created_at": "2025-01-15T10:30:00Z",
-      "created_by": {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
-        "image": "https://example.com/avatar.png"
-      },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "44.210.126.213"
-    },
-    {
-      "id": 2874436,
-      "name": "my-api-key-10",
-      "created_at": "2025-01-15T10:30:00Z",
-      "created_by": {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
-        "image": "https://example.com/avatar.png"
-      },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "130.41.56.60"
-    },
-    {
-      "id": 2464764,
-      "name": "my-api-key-11",
-      "created_at": "2025-01-15T10:30:00Z",
-      "created_by": {
-        "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
-        "image": "https://example.com/avatar.png"
-      },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "3.21.162.163,3.21.162.163"
+      "last_used_at": "2025-01-15T13:00:00Z",
+      "last_used_from_addr": "203.0.113.42"
     }
   ],
   "listBranchNeonAuthOauthProviders": {
@@ -1728,49 +1832,94 @@
       {
         "id": "google",
         "type": "shared"
+      },
+      {
+        "id": "vercel",
+        "type": "standard",
+        "client_id": "example-client-id",
+        "client_secret": "****cret"
       }
     ]
   },
   "listBranchNeonAuthTrustedDomains": {
-    "domains": []
+    "domains": [
+      {
+        "domain": "https://app.example.com",
+        "auth_provider": "better_auth"
+      }
+    ]
+  },
+  "listCredentials": {
+    "credentials": [
+      {
+        "token_id": "nak_live_example0000000000000000",
+        "token_id_short": "000000000000",
+        "name": "ai-gateway-client",
+        "scopes": [
+          "ai_gateway:invoke"
+        ],
+        "principal_type": "user",
+        "created_at": "2025-01-15T10:30:00Z"
+      },
+      {
+        "token_id": "nak_live_example0000000000000001",
+        "token_id_short": "000000000000",
+        "name": "storage-writer",
+        "scopes": [
+          "storage:read",
+          "storage:write"
+        ],
+        "principal_type": "user",
+        "created_at": "2025-01-15T10:30:00Z"
+      },
+      {
+        "token_id": "nak_live_example0000000000000002",
+        "token_id_short": "000000000000",
+        "name": "storage-reader",
+        "scopes": [
+          "storage:read"
+        ],
+        "principal_type": "user",
+        "created_at": "2025-01-15T10:30:00Z"
+      }
+    ]
   },
   "listOrgApiKeys": [
     {
-      "id": 3083287,
-      "name": "my-api-key",
+      "id": 1000000,
+      "name": "production-backend",
       "created_at": "2025-01-15T10:30:00Z",
       "created_by": {
         "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
+        "name": "Jane Doe",
         "image": "https://example.com/avatar.png"
       },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "130.41.56.60"
+      "last_used_at": null,
+      "last_used_from_addr": ""
     },
     {
-      "id": 3049989,
-      "name": "my-api-key-2",
+      "id": 1000001,
+      "name": "ci-cd-pipeline",
       "created_at": "2025-01-15T10:30:00Z",
       "created_by": {
         "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
+        "name": "Jane Doe",
         "image": "https://example.com/avatar.png"
       },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "130.41.56.60"
+      "last_used_at": null,
+      "last_used_from_addr": ""
     },
     {
-      "id": 3049986,
-      "name": "my-api-key-3",
-      "created_at": "2025-01-15T10:30:00Z",
+      "id": 1000002,
+      "name": "local-development",
+      "created_at": "2025-01-15T11:00:00Z",
       "created_by": {
         "id": "00000000-0000-0000-0000-000000000000",
-        "name": "Alex Lopez",
+        "name": "Jane Doe",
         "image": "https://example.com/avatar.png"
       },
-      "last_used_at": "2025-01-15T10:30:00Z",
-      "last_used_from_addr": "130.41.56.60",
-      "project_id": "dormant-slug-000022"
+      "last_used_at": null,
+      "last_used_from_addr": ""
     }
   ],
   "listOrganizationVPCEndpoints": {
@@ -1779,10 +1928,42 @@
   "listOrganizationVPCEndpointsAllRegions": {
     "endpoints": []
   },
+  "listProjectBranchBucketObjects": {
+    "folders": [],
+    "objects": [
+      {
+        "key": "uploads/hello.txt",
+        "size": 11,
+        "last_modified": "2025-01-15T10:30:00Z",
+        "etag": "5eb63bbbe01eeed093cb22bb8f5acdc3"
+      }
+    ],
+    "prefix": "",
+    "is_truncated": false
+  },
+  "listProjectBranchBuckets": {
+    "buckets": [
+      {
+        "name": "avatars",
+        "access_level": "public_read",
+        "created_at": "2025-01-15T10:30:00Z"
+      },
+      {
+        "name": "backups",
+        "access_level": "private",
+        "created_at": "2025-01-15T10:30:00Z"
+      },
+      {
+        "name": "my-bucket",
+        "access_level": "private",
+        "created_at": "2025-01-15T10:30:00Z"
+      }
+    ]
+  },
   "listProjectBranchDatabases": {
     "databases": [
       {
-        "id": 1636569,
+        "id": 1000000,
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "dbname",
         "owner_name": "alex",
@@ -1790,99 +1971,46 @@
         "updated_at": "2025-01-15T10:30:00Z"
       },
       {
-        "id": 1636567,
+        "id": 1000001,
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "neondb",
         "owner_name": "neondb_owner",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z"
       },
       {
-        "id": 1636685,
+        "id": 1000002,
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "my-database-2",
         "owner_name": "alex",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:30:00Z",
+        "updated_at": "2025-01-15T11:30:00Z"
       },
       {
-        "id": 1636684,
+        "id": 1000003,
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "my-database",
         "owner_name": "alex",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T12:00:00Z",
+        "updated_at": "2025-01-15T12:00:00Z"
       },
       {
-        "id": 1636688,
+        "id": 1000004,
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "my-database-3",
         "owner_name": "alex",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T12:30:00Z",
+        "updated_at": "2025-01-15T12:30:00Z"
       }
     ]
   },
   "listProjectBranchEndpoints": {
     "endpoints": [
       {
-        "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+        "host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
         "hosts": {
-          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
-        },
-        "id": "ep-cool-darkness-a5b6c7d8",
-        "slug": "ep-cool-darkness-a5b6c7d8",
-        "branch_slug": "br-young-forest-a5b6c7d8",
-        "project_slug": "aged-wildflower-123456",
-        "project_id": "aged-wildflower-123456",
-        "branch_id": "br-young-forest-a5b6c7d8",
-        "autoscaling_limit_min_cu": 1,
-        "autoscaling_limit_max_cu": 1,
-        "region_id": "aws-us-east-2",
-        "type": "read_write",
-        "current_state": "active",
-        "group": {
-          "size": {
-            "min": 1,
-            "max": 1
-          },
-          "allow_readable_secondaries": false,
-          "computes": [
-            {
-              "binding_id": "vqm",
-              "current_state": "active",
-              "role": "read_write",
-              "compute_host": "ep-cool-darkness-a5b6c7d8-vqm.c-3.us-east-2.aws.neon.tech",
-              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-vqm-pooler.c-3.us-east-2.aws.neon.tech",
-              "created_at": "2025-01-15T10:30:00Z",
-              "updated_at": "2025-01-15T10:30:00Z",
-              "started_at": "2025-01-15T10:30:00Z"
-            }
-          ]
-        },
-        "settings": {
-          "pg_settings": {}
-        },
-        "pooler_enabled": false,
-        "pooler_mode": "transaction",
-        "disabled": false,
-        "passwordless_access": true,
-        "last_active": "2025-01-15T10:30:00Z",
-        "creation_source": "console",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
-        "started_at": "2025-01-15T10:30:00Z",
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
-        "suspend_timeout_seconds": 0,
-        "provisioner": "k8s-neonvm",
-        "compute_release_version": "12738"
-      },
-      {
-        "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-        "hosts": {
-          "read_only_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-          "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+          "read_only_host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+          "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-5.us-east-2.aws.neon.tech"
         },
         "id": "ep-cool-darkness-a5b6c7d8",
         "slug": "ep-cool-darkness-a5b6c7d8",
@@ -1903,14 +2031,70 @@
           "allow_readable_secondaries": true,
           "computes": [
             {
-              "binding_id": "sqy",
+              "binding_id": "hx7",
               "current_state": "active",
               "role": "read_only",
-              "compute_host": "ep-cool-darkness-a5b6c7d8-sqy.c-3.us-east-2.aws.neon.tech",
-              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-sqy-pooler.c-3.us-east-2.aws.neon.tech",
+              "compute_host": "ep-cool-darkness-a5b6c7d8-hx7.c-5.us-east-2.aws.neon.tech",
+              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-hx7-pooler.c-5.us-east-2.aws.neon.tech",
               "created_at": "2025-01-15T10:30:00Z",
-              "updated_at": "2025-01-15T10:30:00Z",
-              "started_at": "2025-01-15T10:30:00Z"
+              "updated_at": "2025-01-15T11:00:00Z",
+              "started_at": "2025-01-15T11:00:00Z"
+            }
+          ]
+        },
+        "settings": {
+          "pg_settings": {
+            "idle_in_transaction_session_timeout": "300000",
+            "statement_timeout": "60000"
+          }
+        },
+        "pooler_enabled": false,
+        "pooler_mode": "transaction",
+        "disabled": false,
+        "passwordless_access": true,
+        "last_active": "2025-01-15T11:30:00Z",
+        "creation_source": "console",
+        "created_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
+        "started_at": "2025-01-15T11:00:00Z",
+        "proxy_host": "c-5.us-east-2.aws.neon.tech",
+        "suspend_timeout_seconds": 0,
+        "provisioner": "k8s-neonvm",
+        "compute_release_version": "13903"
+      },
+      {
+        "host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+        "hosts": {
+          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-5.us-east-2.aws.neon.tech"
+        },
+        "id": "ep-cool-darkness-a5b6c7d8",
+        "slug": "ep-cool-darkness-a5b6c7d8",
+        "branch_slug": "br-young-forest-a5b6c7d8",
+        "project_slug": "aged-wildflower-123456",
+        "project_id": "aged-wildflower-123456",
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "autoscaling_limit_min_cu": 1,
+        "autoscaling_limit_max_cu": 1,
+        "region_id": "aws-us-east-2",
+        "type": "read_write",
+        "current_state": "active",
+        "group": {
+          "size": {
+            "min": 1,
+            "max": 1
+          },
+          "allow_readable_secondaries": false,
+          "computes": [
+            {
+              "binding_id": "g8k",
+              "current_state": "active",
+              "role": "read_write",
+              "compute_host": "ep-cool-darkness-a5b6c7d8-g8k.c-5.us-east-2.aws.neon.tech",
+              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-g8k-pooler.c-5.us-east-2.aws.neon.tech",
+              "created_at": "2025-01-15T12:00:00Z",
+              "updated_at": "2025-01-15T12:30:00Z",
+              "started_at": "2025-01-15T13:00:00Z"
             }
           ]
         },
@@ -1921,60 +2105,54 @@
         "pooler_mode": "transaction",
         "disabled": false,
         "passwordless_access": true,
-        "last_active": "2025-01-15T10:30:00Z",
+        "last_active": "2025-01-15T13:30:00Z",
         "creation_source": "console",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
-        "started_at": "2025-01-15T10:30:00Z",
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
+        "created_at": "2025-01-15T12:00:00Z",
+        "updated_at": "2025-01-15T12:30:00Z",
+        "started_at": "2025-01-15T13:00:00Z",
+        "proxy_host": "c-5.us-east-2.aws.neon.tech",
         "suspend_timeout_seconds": 0,
         "provisioner": "k8s-neonvm",
-        "compute_release_version": "12738"
+        "compute_release_version": "13903"
       }
+    ]
+  },
+  "listProjectBranchFunctions": {
+    "functions": [
+      {
+        "id": "myfunction",
+        "slug": "myfunction",
+        "name": "myfunction",
+        "invocation_url": "https://br-young-forest-a5b6c7d8-myfunction.compute.c-5.us-east-2.aws.neon.tech/",
+        "current_deployment": {
+          "id": 4,
+          "status": "completed",
+          "memory_mib": 2048,
+          "runtime": "nodejs24",
+          "created_at": "2025-01-15T10:30:00Z"
+        },
+        "active_deployment": {
+          "id": 4,
+          "status": "completed",
+          "memory_mib": 2048,
+          "runtime": "nodejs24",
+          "created_at": "2025-01-15T10:30:00Z"
+        },
+        "created_at": "2025-01-15T11:00:00Z"
+      }
+    ],
+    "pagination": {}
+  },
+  "listProjectBranchLogFields": {
+    "fields": [
+      "service_name",
+      "severity_text",
+      "scope_name",
+      "entity_type"
     ]
   },
   "listProjectBranchRoles": {
     "roles": [
-      {
-        "branch_id": "br-young-forest-a5b6c7d8",
-        "name": "authenticator",
-        "protected": false,
-        "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
-      },
-      {
-        "branch_id": "br-young-forest-a5b6c7d8",
-        "name": "authenticated",
-        "protected": false,
-        "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
-      },
-      {
-        "branch_id": "br-young-forest-a5b6c7d8",
-        "name": "anonymous",
-        "protected": false,
-        "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
-      },
-      {
-        "branch_id": "br-young-forest-a5b6c7d8",
-        "name": "my-role",
-        "protected": false,
-        "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
-      },
-      {
-        "branch_id": "br-young-forest-a5b6c7d8",
-        "name": "my-role-3",
-        "protected": false,
-        "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
-      },
       {
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "alex",
@@ -1988,16 +2166,56 @@
         "name": "neondb_owner",
         "protected": false,
         "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:30:00Z"
+      },
+      {
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "name": "authenticator",
+        "protected": false,
+        "authentication_method": "password",
+        "created_at": "2025-01-15T12:00:00Z",
+        "updated_at": "2025-01-15T12:00:00Z"
+      },
+      {
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "name": "authenticated",
+        "protected": false,
+        "authentication_method": "password",
+        "created_at": "2025-01-15T12:00:00Z",
+        "updated_at": "2025-01-15T12:00:00Z"
+      },
+      {
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "name": "anonymous",
+        "protected": false,
+        "authentication_method": "password",
+        "created_at": "2025-01-15T12:00:00Z",
+        "updated_at": "2025-01-15T12:00:00Z"
       },
       {
         "branch_id": "br-young-forest-a5b6c7d8",
         "name": "my-role-2",
         "protected": false,
         "authentication_method": "password",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z"
+        "created_at": "2025-01-15T12:30:00Z",
+        "updated_at": "2025-01-15T12:30:00Z"
+      },
+      {
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "name": "my-role",
+        "protected": false,
+        "authentication_method": "password",
+        "created_at": "2025-01-15T13:00:00Z",
+        "updated_at": "2025-01-15T13:00:00Z"
+      },
+      {
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "name": "my-role-3",
+        "protected": false,
+        "authentication_method": "password",
+        "created_at": "2025-01-15T12:30:00Z",
+        "updated_at": "2025-01-15T12:30:00Z"
       }
     ]
   },
@@ -2006,14 +2224,14 @@
       {
         "id": "br-young-forest-a5b6c7d8",
         "project_id": "aged-wildflower-123456",
-        "parent_id": "br-young-forest-a5b6c7d8",
-        "parent_lsn": "0/1964220",
+        "parent_id": "br-young-forest-12345678",
+        "parent_lsn": "0/1964D68",
         "parent_timestamp": "2025-01-15T10:30:00Z",
         "name": "my-branch-3",
         "slug": "br-young-forest-a5b6c7d8",
         "project_slug": "aged-wildflower-123456",
         "current_state": "ready",
-        "state_changed_at": "2025-01-15T10:30:00Z",
+        "state_changed_at": "2025-01-15T11:00:00Z",
         "creation_source": "console",
         "primary": false,
         "default": false,
@@ -2023,21 +2241,21 @@
         "active_time_seconds": 0,
         "written_data_bytes": 0,
         "data_transfer_bytes": 0,
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "init_source": "parent-data"
       },
       {
-        "id": "br-young-forest-a5b6c7d8",
+        "id": "br-young-forest-12345678",
         "project_id": "aged-wildflower-123456",
-        "parent_id": "br-young-forest-a5b6c7d8",
-        "parent_lsn": "0/1964220",
+        "parent_id": "br-young-forest-12345678",
+        "parent_lsn": "0/1964D68",
         "parent_timestamp": "2025-01-15T10:30:00Z",
         "name": "my-branch-2",
-        "slug": "br-young-forest-a5b6c7d8",
+        "slug": "br-young-forest-12345678",
         "project_slug": "aged-wildflower-123456",
         "current_state": "ready",
-        "state_changed_at": "2025-01-15T10:30:00Z",
+        "state_changed_at": "2025-01-15T11:00:00Z",
         "creation_source": "console",
         "primary": false,
         "default": false,
@@ -2047,14 +2265,14 @@
         "active_time_seconds": 0,
         "written_data_bytes": 0,
         "data_transfer_bytes": 0,
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "init_source": "parent-data"
       }
     ],
     "annotations": {},
     "pagination": {
-      "next": "eyJicmFuY2hfaWQiOiJici13YW5kZXJpbmctbGFrZS1hamRxbmU2MyIsInNvcnRfYnkiOiJ1cGRhdGVkX2F0Iiwic29ydF9ieV92YWx1ZSI6IjIwMjYtMDUtMjFUMTc6MDQ6NDAuNTIzNDExWiIsInNvcnRfb3JkZXIiOiJERVNDIn0=",
+      "next": "eyJicmFuY2hfaWQiOiJici15b3VuZy1mb3Jlc3QtYTViNmM3ZDgiLCJzb3J0X2J5IjoidXBkYXRlZF9hdCIsInNvcnRfYnlfdmFsdWUiOiIyMDI1LTAxLTE1VDEwOjMwOjAwWiIsInNvcnRfb3JkZXIiOiJERVNDIn0=",
       "sort_by": "updated_at",
       "sort_order": "DESC"
     }
@@ -2062,10 +2280,10 @@
   "listProjectEndpoints": {
     "endpoints": [
       {
-        "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+        "host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
         "hosts": {
-          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-5.us-east-2.aws.neon.tech"
         },
         "id": "ep-cool-darkness-a5b6c7d8",
         "slug": "ep-cool-darkness-a5b6c7d8",
@@ -2077,7 +2295,7 @@
         "autoscaling_limit_max_cu": 1,
         "region_id": "aws-us-east-2",
         "type": "read_write",
-        "current_state": "active",
+        "current_state": "idle",
         "group": {
           "size": {
             "min": 1,
@@ -2086,14 +2304,13 @@
           "allow_readable_secondaries": false,
           "computes": [
             {
-              "binding_id": "ghv",
-              "current_state": "active",
+              "binding_id": "tcj",
+              "current_state": "idle",
               "role": "read_write",
-              "compute_host": "ep-cool-darkness-a5b6c7d8-ghv.c-3.us-east-2.aws.neon.tech",
-              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-ghv-pooler.c-3.us-east-2.aws.neon.tech",
+              "compute_host": "ep-cool-darkness-a5b6c7d8-tcj.c-5.us-east-2.aws.neon.tech",
+              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-tcj-pooler.c-5.us-east-2.aws.neon.tech",
               "created_at": "2025-01-15T10:30:00Z",
-              "updated_at": "2025-01-15T10:30:00Z",
-              "started_at": "2025-01-15T10:30:00Z"
+              "updated_at": "2025-01-15T10:30:00Z"
             }
           ]
         },
@@ -2110,21 +2327,19 @@
         "pooler_mode": "transaction",
         "disabled": false,
         "passwordless_access": true,
-        "last_active": "2025-01-15T10:30:00Z",
+        "last_active": "2025-01-15T11:00:00Z",
         "creation_source": "console",
         "created_at": "2025-01-15T10:30:00Z",
         "updated_at": "2025-01-15T10:30:00Z",
-        "started_at": "2025-01-15T10:30:00Z",
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
+        "proxy_host": "c-5.us-east-2.aws.neon.tech",
         "suspend_timeout_seconds": 0,
-        "provisioner": "k8s-neonvm",
-        "compute_release_version": "12738"
+        "provisioner": "k8s-neonvm"
       },
       {
-        "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+        "host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
         "hosts": {
-          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+          "read_only_host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+          "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-5.us-east-2.aws.neon.tech"
         },
         "id": "ep-cool-darkness-a5b6c7d8",
         "slug": "ep-cool-darkness-a5b6c7d8",
@@ -2135,62 +2350,58 @@
         "autoscaling_limit_min_cu": 1,
         "autoscaling_limit_max_cu": 1,
         "region_id": "aws-us-east-2",
-        "type": "read_write",
-        "current_state": "active",
+        "type": "read_only",
+        "current_state": "idle",
         "group": {
           "size": {
             "min": 1,
             "max": 1
           },
-          "allow_readable_secondaries": false,
+          "allow_readable_secondaries": true,
           "computes": [
             {
-              "binding_id": "t41",
-              "current_state": "active",
-              "role": "read_write",
-              "compute_host": "ep-cool-darkness-a5b6c7d8-t41.c-3.us-east-2.aws.neon.tech",
-              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-t41-pooler.c-3.us-east-2.aws.neon.tech",
-              "created_at": "2025-01-15T10:30:00Z",
-              "updated_at": "2025-01-15T10:30:00Z",
-              "started_at": "2025-01-15T10:30:00Z"
+              "binding_id": "hx7",
+              "current_state": "idle",
+              "role": "read_only",
+              "compute_host": "ep-cool-darkness-a5b6c7d8-hx7.c-5.us-east-2.aws.neon.tech",
+              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-hx7-pooler.c-5.us-east-2.aws.neon.tech",
+              "created_at": "2025-01-15T11:30:00Z",
+              "updated_at": "2025-01-15T12:00:00Z",
+              "suspended_at": "2025-01-15T12:00:00Z"
             }
           ]
         },
         "settings": {
-          "pg_settings": {},
-          "preload_libraries": {
-            "use_defaults": false,
-            "enabled_libraries": [
-              "anon"
-            ]
+          "pg_settings": {
+            "idle_in_transaction_session_timeout": "300000",
+            "statement_timeout": "60000"
           }
         },
         "pooler_enabled": false,
         "pooler_mode": "transaction",
         "disabled": false,
         "passwordless_access": true,
-        "last_active": "2025-01-15T10:30:00Z",
+        "last_active": "2025-01-15T11:00:00Z",
         "creation_source": "console",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
-        "started_at": "2025-01-15T10:30:00Z",
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
+        "created_at": "2025-01-15T11:30:00Z",
+        "updated_at": "2025-01-15T12:00:00Z",
+        "suspended_at": "2025-01-15T12:00:00Z",
+        "proxy_host": "c-5.us-east-2.aws.neon.tech",
         "suspend_timeout_seconds": 0,
-        "provisioner": "k8s-neonvm",
-        "compute_release_version": "12738"
+        "provisioner": "k8s-neonvm"
       },
       {
-        "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+        "host": "ep-cool-darkness-12345678.c-5.us-east-2.aws.neon.tech",
         "hosts": {
-          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+          "read_write_host": "ep-cool-darkness-12345678.c-5.us-east-2.aws.neon.tech",
+          "read_write_pooled_host": "ep-cool-darkness-12345678-pooler.c-5.us-east-2.aws.neon.tech"
         },
-        "id": "ep-cool-darkness-a5b6c7d8",
-        "slug": "ep-cool-darkness-a5b6c7d8",
-        "branch_slug": "br-young-forest-a5b6c7d8",
+        "id": "ep-cool-darkness-12345678",
+        "slug": "ep-cool-darkness-12345678",
+        "branch_slug": "br-young-forest-12345678",
         "project_slug": "aged-wildflower-123456",
         "project_id": "aged-wildflower-123456",
-        "branch_id": "br-young-forest-a5b6c7d8",
+        "branch_id": "br-young-forest-12345678",
         "autoscaling_limit_min_cu": 1,
         "autoscaling_limit_max_cu": 1,
         "region_id": "aws-us-east-2",
@@ -2204,39 +2415,33 @@
           "allow_readable_secondaries": false,
           "computes": [
             {
-              "binding_id": "lmm",
+              "binding_id": "z92",
               "current_state": "active",
               "role": "read_write",
-              "compute_host": "ep-cool-darkness-a5b6c7d8-lmm.c-3.us-east-2.aws.neon.tech",
-              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-lmm-pooler.c-3.us-east-2.aws.neon.tech",
-              "created_at": "2025-01-15T10:30:00Z",
-              "updated_at": "2025-01-15T10:30:00Z",
-              "started_at": "2025-01-15T10:30:00Z"
+              "compute_host": "ep-cool-darkness-12345678-z92.c-5.us-east-2.aws.neon.tech",
+              "compute_pooled_host": "ep-cool-darkness-12345678-z92-pooler.c-5.us-east-2.aws.neon.tech",
+              "created_at": "2025-01-15T12:30:00Z",
+              "updated_at": "2025-01-15T13:00:00Z",
+              "started_at": "2025-01-15T13:00:00Z"
             }
           ]
         },
         "settings": {
-          "pg_settings": {},
-          "preload_libraries": {
-            "use_defaults": false,
-            "enabled_libraries": [
-              "anon"
-            ]
-          }
+          "pg_settings": {}
         },
         "pooler_enabled": false,
         "pooler_mode": "transaction",
         "disabled": false,
         "passwordless_access": true,
-        "last_active": "2025-01-15T10:30:00Z",
+        "last_active": "2025-01-15T13:30:00Z",
         "creation_source": "console",
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
-        "started_at": "2025-01-15T10:30:00Z",
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
+        "created_at": "2025-01-15T12:30:00Z",
+        "updated_at": "2025-01-15T14:00:00Z",
+        "started_at": "2025-01-15T13:00:00Z",
+        "proxy_host": "c-5.us-east-2.aws.neon.tech",
         "suspend_timeout_seconds": 0,
         "provisioner": "k8s-neonvm",
-        "compute_release_version": "12738"
+        "compute_release_version": "13903"
       }
     ]
   },
@@ -2251,8 +2456,8 @@
         "status": "finished",
         "failures_count": 0,
         "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
-        "total_duration_ms": 313
+        "updated_at": "2025-01-15T11:00:00Z",
+        "total_duration_ms": 480
       },
       {
         "id": "00000000-0000-0000-0000-000000000000",
@@ -2263,13 +2468,22 @@
         "status": "finished",
         "failures_count": 0,
         "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
-        "total_duration_ms": 1283
+        "updated_at": "2025-01-15T11:30:00Z",
+        "total_duration_ms": 1438
       }
     ],
     "pagination": {
-      "cursor": "2025-01-15T10:30:00Z"
+      "cursor": "2025-01-15T12:00:00Z"
     }
+  },
+  "listProjectPermissions": {
+    "project_permissions": [
+      {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "granted_to_email": "dana.smith@example.com",
+        "granted_at": "2025-01-15T10:30:00Z"
+      }
+    ]
   },
   "listProjectVPCEndpoints": {
     "endpoints": []
@@ -2295,7 +2509,7 @@
           "enable_logical_replication": false,
           "maintenance_window": {
             "weekdays": [
-              6
+              2
             ],
             "start_time": "04:00",
             "end_time": "05:00"
@@ -2305,7 +2519,7 @@
           "hipaa": false
         },
         "pg_version": 17,
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
+        "proxy_host": "c-5.us-east-2.aws.neon.tech",
         "branch_logical_size_limit": 16777216,
         "branch_logical_size_limit_bytes": 17592186044416,
         "store_passwords": true,
@@ -2313,9 +2527,9 @@
         "cpu_used_sec": 0,
         "creation_source": "console",
         "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "synthetic_storage_size": 0,
-        "quota_reset_at": "2025-01-15T10:30:00Z",
+        "quota_reset_at": "2025-01-15T11:30:00Z",
         "owner_id": "org-spring-garden-12345",
         "org_id": "org-spring-garden-12345",
         "history_retention_seconds": 86400
@@ -2339,17 +2553,17 @@
           "enable_logical_replication": false,
           "maintenance_window": {
             "weekdays": [
-              5
+              3
             ],
-            "start_time": "07:00",
-            "end_time": "08:00"
+            "start_time": "09:00",
+            "end_time": "10:00"
           },
           "block_public_connections": false,
           "block_vpc_connections": false,
           "hipaa": false
         },
         "pg_version": 17,
-        "proxy_host": "c-3.us-east-2.aws.neon.tech",
+        "proxy_host": "c-4.us-east-2.aws.neon.tech",
         "branch_logical_size_limit": 16777216,
         "branch_logical_size_limit_bytes": 17592186044416,
         "store_passwords": true,
@@ -2357,9 +2571,9 @@
         "cpu_used_sec": 0,
         "creation_source": "console",
         "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T12:00:00Z",
         "synthetic_storage_size": 0,
-        "quota_reset_at": "2025-01-15T10:30:00Z",
+        "quota_reset_at": "2025-01-15T11:30:00Z",
         "owner_id": "org-spring-garden-12345",
         "org_id": "org-spring-garden-12345",
         "history_retention_seconds": 86400
@@ -2372,23 +2586,158 @@
     "integrations": {}
   },
   "listSharedProjects": {
-    "projects": []
+    "projects": [
+      {
+        "id": "quiet-river-000267",
+        "platform_id": "aws",
+        "region_id": "aws-us-east-1",
+        "name": "hello world",
+        "provisioner": "k8s-neonvm",
+        "default_endpoint_settings": {
+          "autoscaling_limit_min_cu": 0.25,
+          "autoscaling_limit_max_cu": 5,
+          "suspend_timeout_seconds": 600
+        },
+        "settings": {
+          "allowed_ips": {
+            "ips": [
+              "203.0.113.4",
+              "198.51.100.0/24"
+            ],
+            "protected_branches_only": false
+          },
+          "enable_logical_replication": true,
+          "maintenance_window": {
+            "weekdays": [
+              1
+            ],
+            "start_time": "06:00",
+            "end_time": "07:00"
+          },
+          "block_public_connections": false,
+          "block_vpc_connections": false,
+          "audit_log_level": "extended",
+          "hipaa": true
+        },
+        "pg_version": 17,
+        "proxy_host": "c-4.us-east-1.aws.neon.tech",
+        "branch_logical_size_limit": 16777216,
+        "branch_logical_size_limit_bytes": 17592186044416,
+        "store_passwords": true,
+        "active_time": 2828,
+        "cpu_used_sec": 964,
+        "creation_source": "console",
+        "created_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
+        "synthetic_storage_size": 38578376,
+        "owner_id": "org-quiet-river-000268",
+        "compute_last_active_at": "2025-01-15T11:30:00Z",
+        "org_id": "org-quiet-river-000268",
+        "org_name": "My Org",
+        "history_retention_seconds": 43200,
+        "hipaa_enabled_at": "2025-01-15T12:00:00Z"
+      }
+    ],
+    "unavailable_project_ids": [],
+    "pagination": {
+      "cursor": "quiet-river-000267"
+    }
   },
   "listSnapshots": {
     "snapshots": [
       {
-        "id": "snap-calm-forest-aj9c59bh",
+        "id": "snap-quiet-meadow-a5b6c7d8",
         "name": "my-snapshot-3",
         "source_branch_id": "br-young-forest-a5b6c7d8",
         "created_at": "2025-01-15T10:30:00Z",
         "manual": true
       },
       {
-        "id": "snap-billowing-night-aje3jh1j",
+        "id": "snap-quiet-meadow-12345678",
         "name": "my-snapshot-2",
         "source_branch_id": "br-young-forest-a5b6c7d8",
         "created_at": "2025-01-15T10:30:00Z",
         "manual": true
+      }
+    ]
+  },
+  "presignProjectBranchBucketObject": {
+    "url": "https://br-young-forest-a5b6c7d8.storage.c-5.us-east-2.aws.neon.tech/user-uploads-ms9mbu2o16/uploads/hello.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=nak_live_00000000000000000000000000000000%2Fus-east-2&X-Amz-Date=20250115T103000Z&X-Amz-Expires=900&X-Amz-Signature=0000000000000000000000000000000000000000000000000000000000000000&X-Amz-SignedHeaders=host",
+    "method": "GET",
+    "headers": {},
+    "expires_at": "2025-02-15T10:30:00Z"
+  },
+  "recoverProject": {
+    "project": {
+      "data_storage_bytes_hour": 0,
+      "data_transfer_bytes": 0,
+      "written_data_bytes": 0,
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "cpu_used_sec": 0,
+      "id": "misty-meadow-000017",
+      "platform_id": "aws",
+      "region_id": "aws-us-east-2",
+      "name": "my-project-17",
+      "slug": "misty-meadow-000017",
+      "provisioner": "k8s-neonvm",
+      "default_endpoint_settings": {
+        "autoscaling_limit_min_cu": 1,
+        "autoscaling_limit_max_cu": 1,
+        "suspend_timeout_seconds": 0
+      },
+      "settings": {
+        "allowed_ips": {
+          "ips": [],
+          "protected_branches_only": false
+        },
+        "enable_logical_replication": false,
+        "maintenance_window": {
+          "weekdays": [
+            7
+          ],
+          "start_time": "09:00",
+          "end_time": "10:00"
+        },
+        "block_public_connections": false,
+        "block_vpc_connections": false,
+        "hipaa": false
+      },
+      "pg_version": 17,
+      "proxy_host": "c-4.us-east-2.aws.neon.tech",
+      "branch_logical_size_limit": 16777216,
+      "branch_logical_size_limit_bytes": 17592186044416,
+      "store_passwords": true,
+      "creation_source": "console",
+      "history_retention_seconds": 86400,
+      "created_at": "2025-01-15T10:30:00Z",
+      "updated_at": "2025-01-15T11:00:00Z",
+      "synthetic_storage_size": 0,
+      "consumption_period_start": "2025-01-15T11:30:00Z",
+      "consumption_period_end": "2025-01-15T11:30:00Z",
+      "owner_id": "org-spring-garden-12345"
+    },
+    "branches": [
+      {
+        "id": "br-young-forest-a5b6c7d8",
+        "project_id": "misty-meadow-000017",
+        "name": "main",
+        "slug": "br-young-forest-a5b6c7d8",
+        "project_slug": "misty-meadow-000017",
+        "current_state": "ready",
+        "state_changed_at": "2025-01-15T11:00:00Z",
+        "creation_source": "console",
+        "primary": true,
+        "default": true,
+        "protected": false,
+        "cpu_used_sec": 0,
+        "compute_time_seconds": 0,
+        "active_time_seconds": 0,
+        "written_data_bytes": 0,
+        "data_transfer_bytes": 0,
+        "created_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T12:00:00Z",
+        "init_source": "parent-data"
       }
     ]
   },
@@ -2400,7 +2749,7 @@
       "protected": false,
       "authentication_method": "password",
       "created_at": "2025-01-15T10:30:00Z",
-      "updated_at": "2025-01-15T10:30:00Z"
+      "updated_at": "2025-01-15T11:00:00Z"
     },
     "operations": [
       {
@@ -2411,8 +2760,8 @@
         "action": "apply_config",
         "status": "running",
         "failures_count": 0,
-        "created_at": "2025-01-15T10:30:00Z",
-        "updated_at": "2025-01-15T10:30:00Z",
+        "created_at": "2025-01-15T11:00:00Z",
+        "updated_at": "2025-01-15T11:00:00Z",
         "total_duration_ms": 0
       }
     ]
@@ -2480,9 +2829,125 @@
       }
     ]
   },
+  "restoreSnapshot": {
+    "branch": {
+      "id": "br-young-forest-a5b6c7d8",
+      "project_id": "aged-wildflower-123456",
+      "parent_lsn": "0/1ADB9F8",
+      "name": "restored-from-snapshot",
+      "slug": "br-young-forest-a5b6c7d8",
+      "current_state": "init",
+      "pending_state": "ready",
+      "state_changed_at": "2025-01-15T10:30:00Z",
+      "creation_source": "console",
+      "primary": false,
+      "default": false,
+      "protected": false,
+      "cpu_used_sec": 0,
+      "compute_time_seconds": 0,
+      "active_time_seconds": 0,
+      "written_data_bytes": 0,
+      "data_transfer_bytes": 0,
+      "created_at": "2025-01-15T10:30:00Z",
+      "updated_at": "2025-01-15T10:30:00Z",
+      "init_source": "parent-data",
+      "restore_status": "restored",
+      "restored_from": "snap-quiet-meadow-a5b6c7d8",
+      "restored_as": "br-young-forest-12345678"
+    },
+    "endpoints": [
+      {
+        "host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+        "hosts": {
+          "read_write_host": "ep-cool-darkness-a5b6c7d8.c-5.us-east-2.aws.neon.tech",
+          "read_write_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-5.us-east-2.aws.neon.tech"
+        },
+        "id": "ep-cool-darkness-a5b6c7d8",
+        "slug": "ep-cool-darkness-a5b6c7d8",
+        "branch_slug": "br-young-forest-a5b6c7d8",
+        "project_slug": "aged-wildflower-123456",
+        "project_id": "aged-wildflower-123456",
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "autoscaling_limit_min_cu": 1,
+        "autoscaling_limit_max_cu": 1,
+        "region_id": "aws-us-east-2",
+        "type": "read_write",
+        "current_state": "init",
+        "pending_state": "active",
+        "group": {
+          "size": {
+            "min": 1,
+            "max": 1
+          },
+          "allow_readable_secondaries": false,
+          "computes": [
+            {
+              "binding_id": "sw2",
+              "current_state": "init",
+              "pending_state": "active",
+              "role": "read_write",
+              "compute_host": "ep-cool-darkness-a5b6c7d8-sw2.c-5.us-east-2.aws.neon.tech",
+              "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-sw2-pooler.c-5.us-east-2.aws.neon.tech",
+              "created_at": "2025-01-15T10:30:00Z",
+              "updated_at": "2025-01-15T10:30:00Z"
+            }
+          ]
+        },
+        "settings": {
+          "pg_settings": {}
+        },
+        "pooler_enabled": false,
+        "pooler_mode": "transaction",
+        "disabled": false,
+        "passwordless_access": true,
+        "creation_source": "console",
+        "created_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T10:30:00Z",
+        "proxy_host": "c-5.us-east-2.aws.neon.tech",
+        "suspend_timeout_seconds": 0,
+        "provisioner": "k8s-neonvm"
+      }
+    ],
+    "operations": [
+      {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "project_id": "aged-wildflower-123456",
+        "branch_id": "br-young-forest-12345678",
+        "action": "timeline_unarchive",
+        "status": "running",
+        "failures_count": 0,
+        "created_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T10:30:00Z",
+        "total_duration_ms": 0
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "project_id": "aged-wildflower-123456",
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "action": "create_branch",
+        "status": "scheduling",
+        "failures_count": 0,
+        "created_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T10:30:00Z",
+        "total_duration_ms": 0
+      },
+      {
+        "id": "00000000-0000-0000-0000-000000000000",
+        "project_id": "aged-wildflower-123456",
+        "branch_id": "br-young-forest-a5b6c7d8",
+        "endpoint_id": "ep-cool-darkness-a5b6c7d8",
+        "action": "start_compute",
+        "status": "scheduling",
+        "failures_count": 0,
+        "created_at": "2025-01-15T10:30:00Z",
+        "updated_at": "2025-01-15T10:30:00Z",
+        "total_duration_ms": 0
+      }
+    ]
+  },
   "revokeApiKey": {
-    "id": 3084349,
-    "name": "my-api-key-16",
+    "id": 1000000,
+    "name": "service-key-52",
     "created_at": "2025-01-15T10:30:00Z",
     "created_by": "00000000-0000-0000-0000-000000000000",
     "last_used_at": null,
@@ -2490,13 +2955,19 @@
     "revoked": true
   },
   "revokeOrgApiKey": {
-    "id": 3084353,
-    "name": "my-api-key-22",
+    "id": 1000000,
+    "name": "service-key-58",
     "created_at": "2025-01-15T10:30:00Z",
     "created_by": "00000000-0000-0000-0000-000000000000",
     "last_used_at": null,
     "last_used_from_addr": "",
     "revoked": true
+  },
+  "revokePermissionFromProject": {
+    "id": "00000000-0000-0000-0000-000000000000",
+    "granted_to_email": "dana.smith@example.com",
+    "granted_at": "2025-01-15T10:30:00Z",
+    "revoked_at": "2025-01-15T10:30:00Z"
   },
   "sendNeonAuthTestEmail": {
     "success": false,
@@ -2530,10 +3001,10 @@
   },
   "suspendProjectEndpoint": {
     "endpoint": {
-      "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+      "host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
       "hosts": {
-        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
+        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-4.us-east-2.aws.neon.tech"
       },
       "id": "ep-cool-darkness-a5b6c7d8",
       "slug": "ep-cool-darkness-a5b6c7d8",
@@ -2554,38 +3025,41 @@
         "allow_readable_secondaries": true,
         "computes": [
           {
-            "binding_id": "sgn",
+            "binding_id": "czk",
             "current_state": "idle",
             "role": "read_only",
-            "compute_host": "ep-cool-darkness-a5b6c7d8-sgn.c-3.us-east-2.aws.neon.tech",
-            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-sgn-pooler.c-3.us-east-2.aws.neon.tech",
+            "compute_host": "ep-cool-darkness-a5b6c7d8-czk.c-4.us-east-2.aws.neon.tech",
+            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-czk-pooler.c-4.us-east-2.aws.neon.tech",
             "created_at": "2025-01-15T10:30:00Z",
             "updated_at": "2025-01-15T10:30:00Z"
           }
         ]
       },
       "settings": {
-        "pg_settings": {}
+        "pg_settings": {
+          "statement_timeout": "60000",
+          "idle_in_transaction_session_timeout": "300000"
+        }
       },
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "last_active": "2025-01-15T10:30:00Z",
+      "last_active": "2025-01-15T11:00:00Z",
       "creation_source": "console",
       "created_at": "2025-01-15T10:30:00Z",
       "updated_at": "2025-01-15T10:30:00Z",
-      "proxy_host": "c-3.us-east-2.aws.neon.tech",
+      "proxy_host": "c-4.us-east-2.aws.neon.tech",
       "suspend_timeout_seconds": 0,
       "provisioner": "k8s-neonvm"
     },
     "operations": []
   },
   "updateBranchNeonAuthOauthProvider": {
-    "id": "google",
+    "id": "github",
     "type": "standard",
     "client_id": "rotated-client-id",
-    "client_secret": "rotated-client-secret"
+    "client_secret": "****cret"
   },
   "updateMaskingRules": {
     "masking_rules": []
@@ -2640,11 +3114,11 @@
       "compute_time_seconds": 0,
       "active_time_seconds": 0,
       "cpu_used_sec": 0,
-      "id": "temp-project-000006",
+      "id": "misty-meadow-000005",
       "platform_id": "aws",
       "region_id": "aws-us-east-2",
-      "name": "my-project-6-updated",
-      "slug": "temp-project-000006",
+      "name": "my-project-5-updated",
+      "slug": "misty-meadow-000005",
       "provisioner": "k8s-neonvm",
       "default_endpoint_settings": {
         "autoscaling_limit_min_cu": 1,
@@ -2661,25 +3135,25 @@
           "weekdays": [
             7
           ],
-          "start_time": "06:00",
-          "end_time": "07:00"
+          "start_time": "09:00",
+          "end_time": "10:00"
         },
         "block_public_connections": false,
         "block_vpc_connections": false,
         "hipaa": false
       },
       "pg_version": 17,
-      "proxy_host": "c-3.us-east-2.aws.neon.tech",
+      "proxy_host": "c-4.us-east-2.aws.neon.tech",
       "branch_logical_size_limit": 16777216,
       "branch_logical_size_limit_bytes": 17592186044416,
       "store_passwords": true,
       "creation_source": "console",
       "history_retention_seconds": 86400,
       "created_at": "2025-01-15T10:30:00Z",
-      "updated_at": "2025-01-15T10:30:00Z",
+      "updated_at": "2025-01-15T11:00:00Z",
       "synthetic_storage_size": 0,
-      "consumption_period_start": "2025-01-15T10:30:00Z",
-      "consumption_period_end": "2025-01-15T10:30:00Z",
+      "consumption_period_start": "2025-01-15T11:30:00Z",
+      "consumption_period_end": "2025-01-15T11:30:00Z",
       "owner_id": "org-spring-garden-12345"
     },
     "operations": []
@@ -2713,7 +3187,7 @@
   },
   "updateProjectBranchDatabase": {
     "database": {
-      "id": 1636696,
+      "id": 1000000,
       "branch_id": "br-young-forest-a5b6c7d8",
       "name": "my-database-5",
       "owner_name": "alex",
@@ -2722,12 +3196,35 @@
     },
     "operations": []
   },
+  "updateProjectBranchFunction": {
+    "function": {
+      "id": "myfunction",
+      "slug": "myfunction",
+      "name": "My Function",
+      "invocation_url": "https://br-young-forest-a5b6c7d8-myfunction.compute.c-5.us-east-2.aws.neon.tech/",
+      "current_deployment": {
+        "id": 10,
+        "status": "completed",
+        "memory_mib": 2048,
+        "runtime": "nodejs24",
+        "created_at": "2025-01-15T10:30:00Z"
+      },
+      "active_deployment": {
+        "id": 10,
+        "status": "completed",
+        "memory_mib": 2048,
+        "runtime": "nodejs24",
+        "created_at": "2025-01-15T10:30:00Z"
+      },
+      "created_at": "2025-01-15T11:00:00Z"
+    }
+  },
   "updateProjectEndpoint": {
     "endpoint": {
-      "host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
+      "host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
       "hosts": {
-        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-3.us-east-2.aws.neon.tech",
-        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-3.us-east-2.aws.neon.tech"
+        "read_only_host": "ep-cool-darkness-a5b6c7d8.c-4.us-east-2.aws.neon.tech",
+        "read_only_pooled_host": "ep-cool-darkness-a5b6c7d8-pooler.c-4.us-east-2.aws.neon.tech"
       },
       "id": "ep-cool-darkness-a5b6c7d8",
       "slug": "ep-cool-darkness-a5b6c7d8",
@@ -2748,28 +3245,31 @@
         "allow_readable_secondaries": true,
         "computes": [
           {
-            "binding_id": "ygk",
+            "binding_id": "lcw",
             "current_state": "idle",
             "role": "read_only",
-            "compute_host": "ep-cool-darkness-a5b6c7d8-ygk.c-3.us-east-2.aws.neon.tech",
-            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-ygk-pooler.c-3.us-east-2.aws.neon.tech",
+            "compute_host": "ep-cool-darkness-a5b6c7d8-lcw.c-4.us-east-2.aws.neon.tech",
+            "compute_pooled_host": "ep-cool-darkness-a5b6c7d8-lcw-pooler.c-4.us-east-2.aws.neon.tech",
             "created_at": "2025-01-15T10:30:00Z",
             "updated_at": "2025-01-15T10:30:00Z"
           }
         ]
       },
       "settings": {
-        "pg_settings": {}
+        "pg_settings": {
+          "idle_in_transaction_session_timeout": "300000",
+          "statement_timeout": "60000"
+        }
       },
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "last_active": "2025-01-15T10:30:00Z",
+      "last_active": "2025-01-15T11:00:00Z",
       "creation_source": "console",
       "created_at": "2025-01-15T10:30:00Z",
       "updated_at": "2025-01-15T10:30:00Z",
-      "proxy_host": "c-3.us-east-2.aws.neon.tech",
+      "proxy_host": "c-4.us-east-2.aws.neon.tech",
       "suspend_timeout_seconds": 0,
       "provisioner": "k8s-neonvm"
     },
@@ -2777,7 +3277,7 @@
   },
   "updateSnapshot": {
     "snapshot": {
-      "id": "snap-tiny-bonus-aj5la61c",
+      "id": "snap-quiet-meadow-a5b6c7d8",
       "name": "my-snapshot-8-renamed",
       "source_branch_id": "br-young-forest-a5b6c7d8",
       "created_at": "2025-01-15T10:30:00Z",

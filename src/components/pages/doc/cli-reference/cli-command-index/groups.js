@@ -44,6 +44,10 @@ const GROUP_OF = {
   diff: 'core',
   snapshots: 'core',
   inspect: 'debugging',
+  'api-keys': 'setup',
+  profile: 'setup',
+  logs: 'debugging',
+  open: 'setup',
 };
 
 // Commands documented as a section of another command's page instead of a

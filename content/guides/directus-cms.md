@@ -2,8 +2,8 @@
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-12-22T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
-title: Using Directus CMS with Neon Postgres and Astro to build a blog
+updatedOn: '2026-07-31T19:05:29.503Z'
+title: Using Directus CMS with Lakebase Postgres and Astro to build a blog
 subtitle: A step-by-step guide for building your own blog in an Astro application with Directus CMS and Postgres powered by Neon
 ---
 

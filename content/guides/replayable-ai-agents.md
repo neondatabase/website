@@ -4,7 +4,7 @@ subtitle: 'Learn how to build AI agents that can checkpoint execution, replay fa
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-05-21T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Most AI agents today are effectively black boxes.
@@ -47,7 +47,7 @@ To follow this guide, you will need:
 
 ## Create a Neon project and get credentials
 
-You need a Neon Postgres database for the demo application, plus a Neon API key to programmatically create snapshots and restorations.
+You need a Lakebase Postgres database for the demo application, plus a Neon API key to programmatically create snapshots and restorations.
 
 1. Log in to the [Neon Console](https://console.neon.tech/app/projects).
 2. Open your organization settings from the sidebar and go to the **API Keys** tab.

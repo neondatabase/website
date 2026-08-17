@@ -1,14 +1,14 @@
 ---
 title: Connect a Remix application to Neon
-subtitle: Set up a Neon project in seconds and connect from a Remix application
+subtitle: Set up a project on Neon in seconds and connect from a Remix application
 summary: >-
-  Connecting a Remix application (now React Router) to Neon Postgres requires a
+  Connecting a Remix application (now React Router) to Lakebase Postgres requires a
   server-side `db.server` file that holds the database connection, preventing
   credentials from leaking into the client bundle. This guide walks through
-  creating a Neon project, storing the DATABASE_URL in `.env`, and wiring up a
+  creating a project on Neon, storing the DATABASE_URL in `.env`, and wiring up a
   loader route using node-postgres, postgres.js, or the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <Admonition type="note">
@@ -17,9 +17,9 @@ Remix is now React Router v7. The features of the Remix framework have been merg
 For more information, see the [Remix announcement](https://remix.run/blog/merging-remix-and-react-router).
 </Admonition>
 
-Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
+Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Lakebase Postgres using a secure server-side request.
 
-To create a Neon project and access it from a Remix application:
+To create a project on Neon and access it from a Remix application:
 
 <Steps>
 

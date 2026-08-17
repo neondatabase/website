@@ -41,7 +41,7 @@ You created your app with Neon Postgres and love having all your data in it.
 
 Now you need to manage HTML content, images, and file uploads for your app’s data, such as products, events, profiles, etc. Your marketing team has to manage blog posts, landing pages, documentation, FAQs, and case studies.
 
-The built-in [Neon Console](https://neon.tech/docs/guides/tables) works nicely for simpler edits. But it falls short when you need to edit HTML or store references to uploads from your storage service.
+The built-in [Neon Console](https://neon.com/docs/guides/tables) works nicely for simpler edits. But it falls short when you need to edit HTML or store references to uploads from your storage service.
 
 A popular alternative is to integrate with a headless CMS. To do so, you must design the CMS schema separately from your app’s database, learn the vendor’s DSL, and integrate with an SDK. It could take you from a few days to a few weeks to get started. From this moment on, whenever you add features to your app, you’ll need to merge data from two sources, keep them in sync, and consider the vendor’s architecture.
 

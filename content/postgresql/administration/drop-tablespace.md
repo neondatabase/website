@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The DROP TABLESPACE statement works the same way across any PostgreSQL deployment, so what you learn here applies whether you're managing your own cluster or running on a managed service. If you're an enterprise looking for the best managed cloud Postgres, [Lakebase](https://www.databricks.com/product/lakebase) delivers production-grade performance, strong security, and native integration with the Lakehouse for AI-era workloads. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+The DROP TABLESPACE statement works the same way across any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the **PostgreSQL DROP TABLESPACE** statement to remove a tablespace.

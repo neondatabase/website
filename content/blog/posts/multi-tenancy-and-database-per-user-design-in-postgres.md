@@ -44,7 +44,7 @@ During the series, we’ll talk about the concepts and tools you can use to mana
 
 But first, let’s summarize the big-picture history.
 
-_If you’ve been here before, check out part II: [Control Planes For Database-Per-User in Neon](https://neon.tech/blog/control-planes-for-database-per-user-in-neon)_
+_If you’ve been here before, check out part II: [Control Planes For Database-Per-User in Neon](https://neon.com/blog/control-planes-for-database-per-user-in-neon)_
 
 ## How to store other people’s data in Postgres: the three multi tenant architectures
 
@@ -131,4 +131,4 @@ Shared environments are simpler to operate, and enable more complexity within th
 
 ## 📚 Keep reading
 
-Check out the second article of the series: [Control Planes in Database-Per-User in Neon](https://neon.tech/blog/control-planes-for-database-per-user-in-neon). You’ll learn how to implement an effective control plane to scale your multi-tenant application with efficiency and security.
+Check out the second article of the series: [Control Planes in Database-Per-User in Neon](https://neon.com/blog/control-planes-for-database-per-user-in-neon). You’ll learn how to implement an effective control plane to scale your multi-tenant application with efficiency and security.

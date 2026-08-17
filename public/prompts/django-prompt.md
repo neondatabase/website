@@ -5,7 +5,7 @@
 **Purpose:** To connect the current Django project to Neon Postgres by installing the required packages, configuring `settings.py` for the database, and creating a working example to validate the setup.
 
 **Scope:**
-- Must be run inside an existing Django project directory.
+- Can be run inside an existing Django project directory, or bootstrap a new one with `django-admin startproject myproject` if none exists.
 - Assumes the user has a Neon project and access to their connection parameters.
 - All package installations must occur within an active Python virtual environment.
 

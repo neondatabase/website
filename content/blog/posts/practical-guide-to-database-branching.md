@@ -63,7 +63,7 @@ Most non-production branches sit idle most of the time. Neon automatically scale
 
 **Branches are fully programmable**
 
-You can create, delete, or reset branches [via the Neon AP](https://neon.com/blog/provision-postgres-neon-api) I, [CLI](https://neon.com/docs/reference/neon-cli), [GitHub Actions](https://neon.com/docs/guides/branching-github-actions), [Vercel](https://neon.com/docs/guides/neon-managed-vercel-integration#how-preview-branching-works)… Most teams end up implementing automation in one way or another to spin branches up and clean them up as part of their CI workflows.
+You can create, delete, or reset branches [via the Neon AP](https://neon.com/blog/provision-postgres-neon-api) I, [CLI](https://neon.com/docs/cli), [GitHub Actions](https://neon.com/docs/guides/branching-github-actions), [Vercel](https://neon.com/docs/guides/neon-managed-vercel-integration#how-preview-branching-works)… Most teams end up implementing automation in one way or another to spin branches up and clean them up as part of their CI workflows.
 
 **Branches restore instantly**
 

@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig } from 'vitest/config';
 
 export default defineConfig({
   // Match Next.js's automatic JSX runtime so .jsx files don't need an
@@ -11,6 +11,7 @@ export default defineConfig({
   },
   test: {
     environment: 'happy-dom',
+    exclude: [...configDefaults.exclude, 'tests/critical-flows/**'],
     globals: true,
     setupFiles: ['./vitest.setup.js'],
   },

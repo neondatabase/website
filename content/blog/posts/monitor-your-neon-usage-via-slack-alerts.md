@@ -39,7 +39,7 @@ seo:
 This version of the Slack App is now deprecated. If you're looking for something similar, [tell us on Discord](https://discord.gg/92vNTzKDGp).
 </Admonition>
 
-We’ve shipped a Slack app to make it easier to monitor your Neon consumption metrics. By adding the app to your Slack, **you’ll receive automatic notifications when you reach your plan limits for compute hours, storage, or data transfer.** To install the app, follow the instructions [here](https://neon.tech/docs/manage/slack-app#setup).
+We’ve shipped a Slack app to make it easier to monitor your Neon consumption metrics. By adding the app to your Slack, **you’ll receive automatic notifications when you reach your plan limits for compute hours, storage, or data transfer.** To install the app, follow the instructions [here](https://neon.com/docs/manage/slack-app#setup).
 
 <video autoPlay muted loop width="1920" height="1080">
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/monitor-your-neon-usage-via-slack-alerts/slack-app-ffd470ab.mp4" />
@@ -63,4 +63,4 @@ And you’ll see a summary of the main usage metrics:
 
 ## Install it and tell us what you think
 
-[Follow the instructions in the docs](https://neon.tech/docs/manage/slack-app#setup) to install the app and view the full list of available commands. If there are other notifications you’d like to see in Slack, let us know by running `/neon feedback` in a Slack DM!
+[Follow the instructions in the docs](https://neon.com/docs/manage/slack-app#setup) to install the app and view the full list of available commands. If there are other notifications you’d like to see in Slack, let us know by running `/neon feedback` in a Slack DM!

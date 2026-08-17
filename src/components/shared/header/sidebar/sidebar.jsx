@@ -82,6 +82,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
     <div className={cn('flex', isDocs ? 'gap-x-2' : 'gap-x-3.5')}>
       <Button
         className="h-9 px-[18px]"
+        data-test="header-login"
         to={LINKS.login}
         theme="outlined"
         size="xxs"
@@ -91,6 +92,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
       </Button>
       <Button
         className="h-9 px-[18px]"
+        data-test="header-signup"
         to={LINKS.signup}
         theme="white-filled-multi"
         size="xxs"

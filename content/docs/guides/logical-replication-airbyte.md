@@ -2,21 +2,21 @@
 title: Replicate data with Airbyte
 subtitle: Learn how to replicate data from Neon with Airbyte
 summary: >-
-  Configure Neon as an Airbyte source for Change Data Capture using Postgres
+  Configure Lakebase Postgres as an Airbyte source for Change Data Capture using Postgres
   WAL and the pgoutput plugin over a direct, non-pooled connection. Covers
   wal_level promotion to logical, replication slot creation, publication setup,
   and Airbyte source configuration. Enabling logical replication permanently
   sets wal_level to logical for all databases in the project.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Airbyte](https://airbyte.com/) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
 
-In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to one or more of Airbyte's supported destinations.
+In this guide, you will learn how to define your Lakebase Postgres database as a data source in Airbyte so that you can stream data to one or more of Airbyte's supported destinations.
 
 ## Prerequisites
 

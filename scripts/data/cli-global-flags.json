@@ -4,5 +4,8 @@
   "color",
   "analytics",
   "config-dir",
-  "output"
+  "context-file",
+  "output",
+  "profile",
+  "version"
 ]

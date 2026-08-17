@@ -133,7 +133,7 @@ When a new project is created, the control plane coordinates a full environment 
 3. **Request dev server (Freestyle).** The control plane sends a request to Freestyle to spin up a development server linked to the repo. This server will later run CLI commands for code scaffolding and preview builds.
 4. **Save credentials and secrets.** The resulting DATABASE_URL, Neon Auth keys, and other environment variables are stored securely in the meta database (the control-plane Postgres on Neon).
 5. **Retrieve initial commit.** Once Freestyle finishes scaffolding, the system retrieves the initial Git commit hash from the dev server using CLI commands.
-6. **Create initial snapshot (Neon).** The control plane calls Neon again to create a [snapshot](https://api-docs.neon.tech/reference/createsnapshot) of the project database, capturing its initial state before the agent begins work.
+6. **Create initial snapshot (Neon).** The control plane calls Neon again to create a [snapshot](https://neon.com/docs/reference/api/snapshots/create-snapshot) of the project database, capturing its initial state before the agent begins work.
 7. **Save version metadata.** The snapshot ID and Git commit hash are stored together as version 1 of the project in the control-plane database.
 
 ### Project iteration (agent loop)

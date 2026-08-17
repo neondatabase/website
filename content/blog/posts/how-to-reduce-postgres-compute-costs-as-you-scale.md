@@ -61,7 +61,7 @@ Now, with the billing structure in mind, let’s explore what can be done to opt
 
 First things first: if you’re choosing a traditional managed database service like RDS and you don’t want to be ripped off over time, it is essential that you plan your database strategy correctly. Managing AWS infra takes more money, time, and effort the more your deployment grows, so make sure to ask yourself the right questions upfront:
 
-- How many prod instances do you need? E.g., if you want to create one-database-per-tenant, should every database be on its own instance? [In RDS, this architecture often means not only higher costs but also complex operations overtime.](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) Do you prefer to fit many databases into a larger production instance? This is often more cost-effective, but be aware of potential performance isolation problems, complexities with region-dependent data compliance regulations, and more complex Postgres management.
+- How many prod instances do you need? E.g., if you want to create one-database-per-tenant, should every database be on its own instance? [In RDS, this architecture often means not only higher costs but also complex operations overtime.](https://neon.com/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) Do you prefer to fit many databases into a larger production instance? This is often more cost-effective, but be aware of potential performance isolation problems, complexities with region-dependent data compliance regulations, and more complex Postgres management.
 - Similarly, ask yourself how many non-production instances do you need. Do you want one separate dev instance per engineer? Make sure to audit your testing and staging environments too, and evaluate if you really need them.
 - If you want multi-AZ for your production instances, _make sure you really need this level of availability_. High-availability deployments are expensive (in RDS and elsewhere).
 
@@ -93,7 +93,7 @@ As you can see, the process of downsizing has a significant amount of friction i
 
 The advice we’ve covered so far works when your current setup shows that you are overprovisioned. But what if this is ot the case? Optimizations can still be made within your database for performance gains. These optimizations focus on improving the efficiency of your Postgres database and reducing the compute resources required to handle the workload.
 
-The first thing you can look into is [query optimization](https://neon.tech/blog/postgres-support-recap-investigating-postgres-query-performance). If you are hand-rolling your SQL, you can analyze and optimize slow-running queries using tools like [EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html) and [ANALYZE](https://www.postgresql.org/docs/current/sql-analyze.html). Here’s a quick example of `EXPLAIN`:
+The first thing you can look into is [query optimization](https://neon.com/blog/postgres-support-recap-investigating-postgres-query-performance). If you are hand-rolling your SQL, you can analyze and optimize slow-running queries using tools like [EXPLAIN](https://www.postgresql.org/docs/current/using-explain.html) and [ANALYZE](https://www.postgresql.org/docs/current/sql-analyze.html). Here’s a quick example of `EXPLAIN`:
 
 ```sql
 EXPLAIN ANALYZE
@@ -137,13 +137,13 @@ The execution plan shows the steps and costs involved in executing the query. By
 - Create an index on the `customer_id` column in the orders table to improve the join performance.
 - Consider using a [materialized view](https://www.postgresql.org/docs/current/rules-materializedviews.html) to pre-aggregate the total spent amount per customer if this query is frequently executed.
 
-This helps identify and optimize queries that consume significant CPU resources or have high execution times. [Other options for improving DB performance include:](https://neon.tech/blog/performance-tips-for-neon-postgres)
+This helps identify and optimize queries that consume significant CPU resources or have high execution times. [Other options for improving DB performance include:](https://neon.com/blog/performance-tips-for-neon-postgres)
 
 - Use appropriate indexes to improve query performance and reduce the need for full table scans.
 - Avoid using unnecessary joins or complex subqueries that can impact performance.
 - Optimize query parameters and use parameterized queries to avoid query plan cache misses.
 
-Caching is also an option to reduce database load by storing frequently accessed data in memory. You can implement application-level caching using tools like [Redis](https://neon.tech/blog/how-supergood-unlocked-their-postgres-developer-productivity#building-supergood-using-neon-redis-and-timescaledb) to cache query results or frequently accessed objects.
+Caching is also an option to reduce database load by storing frequently accessed data in memory. You can implement application-level caching using tools like [Redis](https://neon.com/blog/how-supergood-unlocked-their-postgres-developer-productivity#building-supergood-using-neon-redis-and-timescaledb) to cache query results or frequently accessed objects.
 
 ### ORMs and query optimization
 
@@ -168,35 +168,35 @@ To point out just a few drawbacks of the manual RDS approach:
 
 - First, all manual intervention is prone to human error.
 - Second, with manual scaling, there is always a delay between when a performance issue arises and when it is addressed. By the time you notice a problem and take action, your users may have already experienced slow response times or service disruptions.
-- Third, [resizing and restarts require downtime](https://neon.tech/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand). Sometimes this is only a few seconds, sometimes your instances get stuck.
+- Third, [resizing and restarts require downtime](https://neon.com/blog/how-recrowd-uses-neon-autoscaling-to-meet-fluctuating-demand). Sometimes this is only a few seconds, sometimes your instances get stuck.
 - Manual sizing and scaling inevitably lead to overprovisioning or underprovisioning of resources. As we discussed earlier, it is very unlikely that you’ll have a workload that 1) you know so well in advance to size properly, and 2) it is so steady that you can allocate exactly the resources you need. Realistically, it’s one of two options: you may allocate too many resources to your database, leading to wasted spending, or too few resources, resulting in poor performance. Finding the right balance is challenging and requires constant adjustment.
 
 If you’re open to trying a better way, Neon takes care of this problem by **dynamically autoscaling your compute instances in response to load, downsizing them all way down to zero if you so wish.** This means costs always match load, without you having to do anything.
 
 ### Autoscale Postgres
 
-[Neon’s autoscaling](https://neon.tech/docs/introduction/autoscaling) dynamically adjusts the compute resources allocated to a Neon compute endpoint based on the current load, eliminating manual intervention. The benefits:
+[Neon’s autoscaling](https://neon.com/docs/introduction/autoscaling) dynamically adjusts the compute resources allocated to a Neon compute endpoint based on the current load, eliminating manual intervention. The benefits:
 
 - Neon automatically handles workloads with varying demand, such as applications with regional or time-based changes in traffic.
 - Neon optimizes resource utilization, ensuring you only pay for the resources you need rather than over-provisioning for peak loads.
 - Autoscaling operates within min and max user-defined limits, ensuring your compute resources and costs don’t scale indefinitely.
 - Autoscaling requires no manual intervention, allowing you to focus on your applications once enabled and configured.
 
-[Under the hood, autoscaling is built using a combination of the autoscaler-agent, a modified Kubernetes scheduler, and the NeonVM tool.](https://neon.tech/blog/1-year-of-autoscaling-postgres-at-neon) The autoscaler-agent collects metrics, makes scaling decisions, and coordinates with the scheduler to allocate resources. NeonVM manages creating and modifying the virtual machines hosting the Postgres instances.
+[Under the hood, autoscaling is built using a combination of the autoscaler-agent, a modified Kubernetes scheduler, and the NeonVM tool.](https://neon.com/blog/1-year-of-autoscaling-postgres-at-neon) The autoscaler-agent collects metrics, makes scaling decisions, and coordinates with the scheduler to allocate resources. NeonVM manages creating and modifying the virtual machines hosting the Postgres instances.
 
 ### Scale Postgres to zero
 
-[Autosuspend](https://neon.tech/docs/introduction/auto-suspend) complements autoscaling by allowing compute instances to scale to zero when not in use. By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity, but as a user, you can configure this behavior as you please. For example, [you can disable autosuspend for your production databases (which they’ll most likely stay on 24/7 anyways) and keep it enabled for your non-production instances to optimize compute costs.](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero)
+[Autosuspend](https://neon.com/docs/introduction/auto-suspend) complements autoscaling by allowing compute instances to scale to zero when not in use. By default, a Neon compute instance scales to zero after 300 seconds (5 minutes) of inactivity, but as a user, you can configure this behavior as you please. For example, [you can disable autosuspend for your production databases (which they’ll most likely stay on 24/7 anyways) and keep it enabled for your non-production instances to optimize compute costs.](https://neon.com/blog/why-you-want-a-database-that-scales-to-zero)
 
 ### Simplify one-database-per-tenant
 
 A powerful side effect of all of this is how easy it is in Neon to manage full isolation architectures, a.k.a with one-database-per-tenant with each tenant on its own instance.
 
-Remember at the start of the post where we discussed how in RDS, it is a _pain_ to manage fleets of thousands of instances, therefore you should think about this architecture very carefully? This problem goes away in Neon, since creating instances doesn’t require cost overhead (due to scale to zero) or management overhead (all databases can be handled automatically via APIs on a serverless manner). [Neon partners are running fleets of hundreds of thousands of databases very cost-effectively and without a dedicated DevOps team.](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
+Remember at the start of the post where we discussed how in RDS, it is a _pain_ to manage fleets of thousands of instances, therefore you should think about this architecture very carefully? This problem goes away in Neon, since creating instances doesn’t require cost overhead (due to scale to zero) or management overhead (all databases can be handled automatically via APIs on a serverless manner). [Neon partners are running fleets of hundreds of thousands of databases very cost-effectively and without a dedicated DevOps team.](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
 
 ### Don’t worry about dev and testing instances (they’re cheap)
 
-Similarly, in Neon you don’t have to worry too much about how many dev and testing instances you need and how much resources to allocate to them. [You can use database branching to give every engineer in your team their own isolated database to work on](https://neon.tech/blog/how-supergood-unlocked-their-postgres-developer-productivity), which will scale to zero when idle.
+Similarly, in Neon you don’t have to worry too much about how many dev and testing instances you need and how much resources to allocate to them. [You can use database branching to give every engineer in your team their own isolated database to work on](https://neon.com/blog/how-supergood-unlocked-their-postgres-developer-productivity), which will scale to zero when idle.
 
 ## Stop watching the inverse
 
@@ -208,6 +208,6 @@ We’re building Neon to improve this experience. If you are curious, you can ge
 
 ## 📚 Continue Reading
 
-- **[Why you want a database that scales to zero:](https://neon.tech/blog/why-you-want-a-database-that-scales-to-zero)** scale to zero sometimes gets a bad rep when talking about databases, but it is actually an incredibly helpful feature to lower cloud costs.
-- **[Autoscaling in review:](https://neon.tech/blog/1-year-of-autoscaling-postgres-at-neon)** Neon can autoscale your Postgres instance without dropping connections or interrupting your queries, avoiding the need for overprovisioning or resizing manually.
-- **[Architecture decisions in Neon:](https://neon.tech/blog/architecture-decisions-in-neon)** we’re building serverless Postgres by separating storage and compute and re-designing the storage engine from the ground up. The end goal: to improve the developer experience of building with Postgres.
+- **[Why you want a database that scales to zero:](https://neon.com/blog/why-you-want-a-database-that-scales-to-zero)** scale to zero sometimes gets a bad rep when talking about databases, but it is actually an incredibly helpful feature to lower cloud costs.
+- **[Autoscaling in review:](https://neon.com/blog/1-year-of-autoscaling-postgres-at-neon)** Neon can autoscale your Postgres instance without dropping connections or interrupting your queries, avoiding the need for overprovisioning or resizing manually.
+- **[Architecture decisions in Neon:](https://neon.com/blog/architecture-decisions-in-neon)** we’re building serverless Postgres by separating storage and compute and re-designing the storage engine from the ground up. The end goal: to improve the developer experience of building with Postgres.

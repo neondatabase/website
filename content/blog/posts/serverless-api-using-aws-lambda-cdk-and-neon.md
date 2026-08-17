@@ -70,7 +70,7 @@ Neon is a fully managed serverless Postgres. This means you do not have to pick 
 You can [sign up for Neon](https://console.neon.tech/sign_in) and provision a Postgres instance for free.
 
 <blockquote>
-<p><em>Note: Neon’s architecture separates storage and compute. This makes a Neon Postgres instance stateless, making it possible to scale compute resources up or down automatically based on demand. To learn more, check out Neon’s</em><a href="https://neon.tech/blog/architecture-decisions-in-neon"><em> architecture</em></a><em>.</em></p>
+<p><em>Note: Neon’s architecture separates storage and compute. This makes a Neon Postgres instance stateless, making it possible to scale compute resources up or down automatically based on demand. To learn more, check out Neon’s</em><a href="https://neon.com/blog/architecture-decisions-in-neon"><em> architecture</em></a><em>.</em></p>
 </blockquote>
 
 ## Get started with CDK

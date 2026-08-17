@@ -20,8 +20,9 @@ const Aside = ({
   const authorPagePath = author ? `${GUIDES_BASE_PATH}authors/${author.slug}` : null;
   return (
     <div
+      data-docs-aside
       className={cn(
-        'relative -ml-6 w-full max-w-[312px] xl:hidden',
+        'relative -ml-6 w-full max-w-[312px] transition-opacity duration-150 data-[occluded=true]:pointer-events-none data-[occluded=true]:opacity-0 xl:hidden',
         isTemplate
           ? 'col-span-2 col-start-11 mt-4 min-w-64 justify-self-end 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto'
           : '',

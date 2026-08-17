@@ -4,10 +4,10 @@ subtitle: Learn how to connect your .NET applications to Neon's serverless Postg
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-03T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-In this guide, we'll walk through the process of developing a RESTful API using ASP.NET Core, connecting it to a Neon Postgres database. We will cover CRUD operations using Entity Framework Core (EF Core), generate interactive API documentation with Swagger, and explore best practices for testing your API endpoints. As a bonus, we'll also implement JWT authentication to secure your endpoints.
+In this guide, we'll walk through the process of developing a RESTful API using ASP.NET Core, connecting it to a Lakebase Postgres database. We will cover CRUD operations using Entity Framework Core (EF Core), generate interactive API documentation with Swagger, and explore best practices for testing your API endpoints. As a bonus, we'll also implement JWT authentication to secure your endpoints.
 
 ## Prerequisites
 
@@ -463,7 +463,7 @@ With this header in place, the server can authenticate the user without requirin
 
 ## Conclusion
 
-In this guide, we covered the process of building a RESTful API with ASP.NET Core, connecting it to a Neon Postgres database, and securing it with JWT authentication. We explored CRUD operations using Entity Framework Core, generated interactive API documentation with Swagger, and tested our endpoints using Postman.
+In this guide, we covered the process of building a RESTful API with ASP.NET Core, connecting it to a Lakebase Postgres database, and securing it with JWT authentication. We explored CRUD operations using Entity Framework Core, generated interactive API documentation with Swagger, and tested our endpoints using Postman.
 
 As a next step, consider expanding your API with additional features, such as pagination, filtering, or sorting. You can also explore adding testing frameworks like xUnit or NUnit to write unit tests for your API endpoints.
 

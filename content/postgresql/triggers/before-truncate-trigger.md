@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The `BEFORE TRUNCATE` trigger is a standard PostgreSQL feature, so everything here works the same on any Postgres deployment. If you're an enterprise looking for managed Postgres that's built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers high performance, strong security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+The `BEFORE TRUNCATE` trigger is a standard PostgreSQL feature. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to define a PostgreSQL `BEFORE TRUNCATE` trigger that fires before a `TRUNCATE` event occurs on a table.
@@ -106,8 +106,7 @@ CREATE OR REPLACE FUNCTION before_truncate_companies()
 RETURNS TRIGGER AS
 $$
 BEGIN
-    RAISE NOTICE 'Truncating the companies table is not allowed';
-    RETURN NULL;
+    RAISE EXCEPTION 'Truncating the companies table is not allowed';
 END;
 $$
 LANGUAGE plpgsql;
@@ -128,11 +127,11 @@ Fifth, attempt to truncate the `companies` table:
 TRUNCATE TABLE companies;
 ```
 
-Output:
+Error:
 
 ```
-NOTICE:  Truncating the companies table is not allowed
-TRUNCATE TABLE
+ERROR:  Truncating the companies table is not allowed
+CONTEXT:  PL/pgSQL function before_truncate_companies() line 3 at RAISE
 ```
 
 The output indicates that the `BEFORE TRUNCATE` trigger fires, raising an exception that aborts the `TRUNCATE` operation.

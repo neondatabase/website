@@ -44,22 +44,17 @@ const jsYaml = require('js-yaml');
 // web page and this llms mirror can never disagree on the generated tables.
 const cliDocs = require('../../scripts/docs-checks/neonctl/generate-docs');
 const cliSchema = require('../../scripts/docs-checks/neonctl/schema.json');
+const aiGatewayCapabilities = require('../app/models/capabilities.json');
 const aiGatewayModelsData = require('../app/models.json/data.json');
 const aiGatewayModelRows = require('../components/pages/doc/ai-gateway-model-index/model-rows');
-const aiGatewayModelSnippets = require('../components/pages/doc/ai-gateway-model-index/snippets.json');
 const { isUnusedOrSharedContent } = require('../constants/content');
 
 // AI Gateway model catalog: <AiGatewayModelIndex/> renders an interactive table
-// with Text/Image tabs and per-model copy-paste quickstarts on the web page.
-// Here it degrades to static markdown built from the SAME committed /models.json
-// data + the vendored quickstart snippets.json, so the web page and the
-// agent-facing markdown can never disagree. Both tab contents are rendered:
-// Text (every catalog model) and Image (image-generation-capable models only).
-//
-// The quickstart snippets differ across models ONLY by the model id, so instead
-// of repeating each snippet once per model, we emit each language snippet a
-// single time per tab with the `__MODEL_ID__` placeholder intact — the model
-// tables directly above each quickstart are the list of IDs to drop in.
+// with Text/Image tabs and links to per-model copy-paste quickstarts on the web page.
+// Here it degrades to static markdown built from the same /models.json catalog
+// and measured capabilities as the web page. Code examples vary by model, so
+// the index links to the generated model-detail Markdown instead of advertising
+// a generic snippet that may not work for every row.
 
 const MODEL_TABLE_HEADER =
   '| Model | Model ID | Inputs | Context | Reasoning | Input /M | Output /M | Endpoints | License |\n' +
@@ -69,14 +64,14 @@ function renderModelTableRows(rows) {
   return rows
     .map((row) =>
       [
-        row.name,
+        `[${row.name}](${BASE_URL}/docs/ai-gateway/models/${encodeURIComponent(row.id)}.md)`,
         `\`${row.id}\``,
         row.inputsLabel,
         row.contextLabel,
         row.reasoning ? 'Yes' : '—',
         row.costInputLabel,
         row.costOutputLabel,
-        row.endpoints.join(' · '),
+        row.endpoints.join(' · ') || '—',
         row.license,
       ].join(' | ')
     )
@@ -95,51 +90,35 @@ function renderProviderTables(rows, headingDepth) {
     .join('\n\n');
 }
 
-// One fenced code block per language (model id left as the placeholder), plus the
-// shared `.env` when requested. Emitted once per tab — not once per model.
-function renderSnippetQuickstart(tab, { includeEnv }) {
-  const blocks = tab.languages.map((lang) => {
-    const install = lang.install ? ` — install: \`${lang.install}\`` : '';
-    return `**${lang.label}**${install}\n\n\`\`\`${lang.lang}\n${lang.code.trimEnd()}\n\`\`\``;
-  });
-  if (includeEnv) {
-    blocks.push(`**.env**\n\n\`\`\`bash\n${aiGatewayModelSnippets.envExample.trimEnd()}\n\`\`\``);
-  }
-  return blocks.join('\n\n');
-}
-
 function renderAiGatewayModelIndex() {
-  const rows = aiGatewayModelRows.buildRows(aiGatewayModelsData.neon);
-  const placeholder = aiGatewayModelSnippets.modelIdPlaceholder;
-  const responsesOnly = rows.filter((row) => row.isResponsesOnly).map((row) => `\`${row.id}\``);
+  const rows = aiGatewayModelRows.buildRows(aiGatewayModelsData.neon, aiGatewayCapabilities);
   const imageRows = rows.filter((row) => row.isImageCapable);
+  const unavailableRows = rows.filter((row) => !row.hasMeasuredCapabilities);
 
   const sections = [];
 
-  // Text tab — every catalog model.
+  // Text tab - every catalog model.
   sections.push('### Text models');
   sections.push(renderProviderTables(rows, '####'));
-  const mastraNote = responsesOnly.length
-    ? ` Mastra can't reach Responses-only models through the OpenAI-compatible endpoint — use another language for ${responsesOnly.join(', ')}.`
-    : '';
   sections.push(
-    `**Quickstart (text).** These snippets work for every model above — replace \`${placeholder}\` with any model ID from the tables.${mastraNote}`
+    'Select a linked model for code examples matched to its measured AI Gateway capabilities.'
   );
-  sections.push(renderSnippetQuickstart(aiGatewayModelSnippets.tabs.text, { includeEnv: true }));
+  if (unavailableRows.length > 0) {
+    sections.push(
+      `Verified code examples are not currently available for: ${unavailableRows
+        .map((row) => `\`${row.id}\``)
+        .join(', ')}.`
+    );
+  }
 
-  // Image tab — image-generation-capable models only.
+  // Image tab - image-generation-capable models only.
   if (imageRows.length > 0) {
     sections.push('### Image models');
     sections.push(
       'These models support image generation through the Responses API (base URL `/openai/v1`):'
     );
     sections.push(renderProviderTables(imageRows, '####'));
-    sections.push(
-      `**Quickstart (image).** Replace \`${placeholder}\` with any image model ID above. Environment variables are the same as the Text quickstart.`
-    );
-    sections.push(
-      renderSnippetQuickstart(aiGatewayModelSnippets.tabs.image, { includeEnv: false })
-    );
+    sections.push('Select a linked model for image-generation examples matched to that model.');
   }
 
   return sections.join('\n\n');
@@ -1345,6 +1324,20 @@ const componentHandlers = {
           children: [{ type: 'text', value: 'Watch on YouTube' }],
         },
       ],
+    };
+  },
+
+  /**
+   * InlineSvg -> markdown image, using the title attribute as descriptive alt text
+   * <InlineSvg src="/docs/guides/diagram.svg" title="What the diagram shows" />
+   */
+  InlineSvg(node) {
+    const src = getAttr(node, 'src');
+    if (!src) return null;
+    const title = getAttr(node, 'title') || '';
+    return {
+      type: 'paragraph',
+      children: [{ type: 'image', url: src, alt: title, title: null }],
     };
   },
 

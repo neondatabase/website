@@ -29,6 +29,15 @@
     - title: "Grant project access"
       slug: reference/api/projects/grant-permission-to-project
       method: POST
+    - title: "List org members and their project roles"
+      slug: reference/api/projects/list-project-members
+      method: GET
+    - title: "Set an org member's role on a project"
+      slug: reference/api/projects/set-project-member-role
+      method: PUT
+    - title: "Remove an org member's role on a project"
+      slug: reference/api/projects/remove-project-member-role
+      method: DELETE
     - title: "Revoke project access"
       slug: reference/api/projects/revoke-permission-from-project
       method: DELETE
@@ -109,9 +118,6 @@
       method: POST
     - title: "Set branch as default"
       slug: reference/api/branches/set-default-project-branch
-      method: POST
-    - title: "Recover a deleted branch"
-      slug: reference/api/branches/recover-project-branch
       method: POST
     - title: "Finalize branch restore from snapshot"
       slug: reference/api/branches/finalize-restore-branch
@@ -424,6 +430,87 @@
     - title: "Delete Neon Data API"
       slug: reference/api/dataapi/delete-project-branch-data-api
       method: DELETE
+- title: "Buckets"
+  slug: reference/api/buckets
+  items:
+    - title: "List buckets on the branch"
+      slug: reference/api/buckets/list-project-branch-buckets
+      method: GET
+    - title: "Create a bucket on the branch"
+      slug: reference/api/buckets/create-project-branch-bucket
+      method: POST
+    - title: "Delete a bucket on the branch"
+      slug: reference/api/buckets/delete-project-branch-bucket
+      method: DELETE
+    - title: "List objects in a bucket"
+      slug: reference/api/buckets/list-project-branch-bucket-objects
+      method: GET
+    - title: "Delete an object in a bucket"
+      slug: reference/api/buckets/delete-project-branch-bucket-object
+      method: DELETE
+    - title: "Download an object's bytes"
+      slug: reference/api/buckets/get-project-branch-bucket-object
+      method: GET
+    - title: "Delete every object under a key prefix (folder) in a bucket"
+      slug: reference/api/buckets/delete-project-branch-bucket-objects-by-prefix
+      method: DELETE
+    - title: "Presign an upload or download for an object in a bucket"
+      slug: reference/api/buckets/presign-project-branch-bucket-object
+      method: POST
+- title: "Storage"
+  slug: reference/api/storage
+  items:
+    - title: "Get branch object storage state"
+      slug: reference/api/storage/get-project-branch-storage
+      method: GET
+- title: "AI Gateway"
+  slug: reference/api/ai-gateway
+  items:
+    - title: "Get branch AI Gateway endpoint"
+      slug: reference/api/ai-gateway/get-project-branch-ai-gateway
+      method: GET
+- title: "Credentials"
+  slug: reference/api/credentials
+  items:
+    - title: "List credentials on the branch"
+      slug: reference/api/credentials/list-credentials
+      method: GET
+    - title: "Issue a scoped credential on the branch"
+      slug: reference/api/credentials/create-credential
+      method: POST
+    - title: "Revoke a credential"
+      slug: reference/api/credentials/revoke-credential
+      method: DELETE
+- title: "Functions"
+  slug: reference/api/functions
+  items:
+    - title: "List functions on the branch"
+      slug: reference/api/functions/list-project-branch-functions
+      method: GET
+    - title: "Get function details"
+      slug: reference/api/functions/get-project-branch-function
+      method: GET
+    - title: "Update a function"
+      slug: reference/api/functions/update-project-branch-function
+      method: PATCH
+    - title: "Delete a function on the branch"
+      slug: reference/api/functions/delete-project-branch-function
+      method: DELETE
+    - title: "Deploy code to a function"
+      slug: reference/api/functions/create-project-branch-function-deployment
+      method: POST
+- title: "Logs"
+  slug: reference/api/logs
+  items:
+    - title: "Query branch logs"
+      slug: reference/api/logs/query-project-branch-logs
+      method: POST
+    - title: "List branch log fields"
+      slug: reference/api/logs/list-project-branch-log-fields
+      method: GET
+    - title: "List branch log field values"
+      slug: reference/api/logs/list-project-branch-log-field-values
+      method: GET
 - title: "Legacy Auth"
   slug: reference/api/auth-legacy
   items:
@@ -503,72 +590,3 @@
       method: DELETE
       tag: deprecated
       tagTheme: orange
-- title: "Buckets"
-  slug: reference/api/buckets
-  items:
-    - title: "List buckets on the branch"
-      slug: reference/api/buckets/list-project-branch-buckets
-      method: GET
-    - title: "Create a bucket on the branch"
-      slug: reference/api/buckets/create-project-branch-bucket
-      method: POST
-    - title: "Delete a bucket on the branch"
-      slug: reference/api/buckets/delete-project-branch-bucket
-      method: DELETE
-    - title: "List objects in a bucket"
-      slug: reference/api/buckets/list-project-branch-bucket-objects
-      method: GET
-    - title: "Delete an object in a bucket"
-      slug: reference/api/buckets/delete-project-branch-bucket-object
-      method: DELETE
-    - title: "Download an object's bytes"
-      slug: reference/api/buckets/get-project-branch-bucket-object
-      method: GET
-    - title: "Delete every object under a key prefix (folder) in a bucket"
-      slug: reference/api/buckets/delete-project-branch-bucket-objects-by-prefix
-      method: DELETE
-    - title: "Presign an upload or download for an object in a bucket"
-      slug: reference/api/buckets/presign-project-branch-bucket-object
-      method: POST
-- title: "Storage"
-  slug: reference/api/storage
-  items:
-    - title: "Get branch storage state"
-      slug: reference/api/storage/get-project-branch-storage
-      method: GET
-- title: "AI Gateway"
-  slug: reference/api/ai-gateway
-  items:
-    - title: "Get branch AI Gateway endpoint"
-      slug: reference/api/ai-gateway/get-project-branch-ai-gateway
-      method: GET
-- title: "Credentials"
-  slug: reference/api/credentials
-  items:
-    - title: "List credentials on the branch"
-      slug: reference/api/credentials/list-credentials
-      method: GET
-    - title: "Issue a scoped credential on the branch"
-      slug: reference/api/credentials/create-credential
-      method: POST
-    - title: "Revoke a credential"
-      slug: reference/api/credentials/revoke-credential
-      method: DELETE
-- title: "Functions"
-  slug: reference/api/functions
-  items:
-    - title: "List functions on the branch"
-      slug: reference/api/functions/list-project-branch-functions
-      method: GET
-    - title: "Get function details"
-      slug: reference/api/functions/get-project-branch-function
-      method: GET
-    - title: "Update a function"
-      slug: reference/api/functions/update-project-branch-function
-      method: PATCH
-    - title: "Delete a function on the branch"
-      slug: reference/api/functions/delete-project-branch-function
-      method: DELETE
-    - title: "Deploy code to a function"
-      slug: reference/api/functions/create-project-branch-function-deployment
-      method: POST

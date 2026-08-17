@@ -492,38 +492,27 @@ function buildTests() {
 
   const staticMdPath = '/docs/ai/skills/neon-functions/references/sentry.md';
 
-  add(
-    'Static .md',
-    staticMdPath,
-    'browser',
-    [(r) => expectStatus(r.status, 200), (r) => expectBodyNotEmpty(r.body)],
-    {
-      spotCheck: (r) => expectBodyContains(r.body, 'neon', true),
-      note: 'static file, not rewritten',
-    }
-  );
-
-  add(
-    'Static .md',
-    staticMdPath,
-    'accept-md',
-    [(r) => expectStatus(r.status, 200), (r) => expectBodyNotEmpty(r.body)],
-    {
-      spotCheck: (r) => expectBodyContains(r.body, 'neon', true),
-      note: 'should pass through unchanged',
-    }
-  );
-
-  add(
-    'Static .md',
-    staticMdPath,
-    'agent-ua',
-    [(r) => expectStatus(r.status, 200), (r) => expectBodyNotEmpty(r.body)],
-    {
-      spotCheck: (r) => expectBodyContains(r.body, 'neon', true),
-      note: 'should pass through unchanged',
-    }
-  );
+  // Static skill .md must serve as text/markdown and stay noindex. NOTE: on Vercel
+  // *preview* deploys the platform auto-adds X-Robots-Tag: noindex to everything,
+  // masking a regression — run these against production or localhost to trust the
+  // noindex assertion.
+  for (const mode of ['browser', 'accept-md', 'agent-ua']) {
+    add(
+      'Static .md',
+      staticMdPath,
+      mode,
+      [
+        (r) => expectStatus(r.status, 200),
+        (r) => expectBodyNotEmpty(r.body),
+        (r) => expectContentType(r.contentType, 'text/markdown'),
+        (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
+      ],
+      {
+        spotCheck: (r) => expectBodyContains(r.body, 'neon', true),
+        note: 'static file served as-is, noindex preserved',
+      }
+    );
+  }
 
   // ── 5. 404 behavior ───────────────────────────────────────────────────
 
@@ -1152,6 +1141,81 @@ function buildTests() {
     ],
     { note: 'redirectFrom source → 308 to target' }
   );
+
+  // ── 12. Retired neon-postgres skill reference URLs ────────────────────
+  // The references/ directory was removed by the upstream skills 1:1 sync
+  // (#5309); SKILL.md was repointed at the consolidated docs pages (#4666). The
+  // middleware (src/proxy.js SKILL_REFERENCE_REDIRECTS) 308s the old URLs to
+  // those pages so tools with cached links don't 404.
+
+  add(
+    'Skill reference redirect',
+    '/docs/ai/skills/neon-postgres/references/branching.md',
+    'browser',
+    [
+      (r) => expectStatus(r.status, 308),
+      (r) => expectHeader(r.headers, 'location', '/docs/introduction/branching.md'),
+    ],
+    { note: 'retired skill reference .md → 308 to consolidated docs page' }
+  );
+
+  // ── 13. Missing .md → markdown 404 (static manifest, src/proxy.js) ─────
+  // Any .md with no generated /md sibling that isn't a real static file returns a
+  // markdown 404 instead of the HTML 404 — site-wide, including out-of-namespace
+  // paths. Browser mode proves the invariant holds regardless of User-Agent.
+
+  const missingMdCases = [
+    ['out-of-namespace path', '/foo/bar-does-not-exist-qa.md'],
+    ['deep out-of-namespace path', '/foo/bar/baz-does-not-exist-qa.md'],
+    ['missing skill reference', '/docs/ai/skills/neon-postgres/references/does-not-exist-qa.md'],
+    // Unknown skill via a discovery alias → markdown 404 (rewrite target missing).
+    ['unknown skill alias', '/.well-known/agent-skills/does-not-exist-qa/SKILL.md'],
+  ];
+
+  for (const [label, path] of missingMdCases) {
+    add(
+      'Missing .md → markdown 404',
+      path,
+      'browser',
+      [
+        (r) => expectStatus(r.status, 404),
+        (r) => expectContentType(r.contentType, 'text/markdown'),
+        (r) => expectBodyContains(r.body, 'Page Not Found'),
+        (r) => expectHeader(r.headers, 'x-content-source', 'agent-404'),
+        (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
+      ],
+      { note: label }
+    );
+  }
+
+  // Skill-discovery aliases have no physical file at the request path — they are
+  // served only by next.config rewrites to a real SKILL.md. The proxy must pass
+  // them through (not 404), or agent discovery breaks. Regression guard for the
+  // matcher broadening.
+  const skillDiscoveryAliases = [
+    ['/skill.md alias', '/skill.md'],
+    ['.well-known agent-skills alias', '/.well-known/agent-skills/neon-postgres/SKILL.md'],
+    ['docs .well-known alias', '/docs/.well-known/agent-skills/neon-postgres/SKILL.md'],
+  ];
+
+  for (const [label, path] of skillDiscoveryAliases) {
+    add(
+      'Skill-discovery alias (rewrite-backed)',
+      path,
+      'browser',
+      [
+        (r) => expectStatus(r.status, 200),
+        (r) => expectBodyNotEmpty(r.body),
+        (r) => expectHeader(r.headers, 'x-robots-tag', 'noindex'),
+        // Must NOT be the markdown 404 body.
+        (r) =>
+          r.body.includes('# Page Not Found')
+            ? 'served the markdown 404 instead of SKILL.md'
+            : null,
+      ],
+      { spotCheck: (r) => expectBodyContains(r.body, 'neon', true), note: label }
+    );
+  }
 
   return tests;
 }

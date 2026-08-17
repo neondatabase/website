@@ -251,6 +251,13 @@
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dom-eccleston.jpg",
     "photoAlt": "Dom Eccleston"
   },
+  "dominik-koch": {
+    "name": "Dominik Koch",
+    "role": "DX Engineer",
+    "url": "https://x.com/dominikkoch",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/dominik-koch.jpg",
+    "photoAlt": "Dominik Koch"
+  },
   "eduard-dyckman": {
     "name": "Eduard Dyckman",
     "role": "Software Engineer",
@@ -540,7 +547,7 @@
   },
   "nikita-shamgunov": {
     "name": "Nikita Shamgunov",
-    "role": "CEO at Neon",
+    "role": "Co-founder of Neon",
     "url": "https://twitter.com/nikitabase",
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/nikita-shamgunov.jpg",
     "photoAlt": "Nikita Shamgunov"
@@ -824,5 +831,19 @@
     "url": null,
     "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/zhou-sun.jpg",
     "photoAlt": "Zhou Sun"
+  },
+  "ying-hang-seah": {
+    "name": "Ying Hang Seah",
+    "role": "Co-Founder, Castform",
+    "url": "https://www.linkedin.com/in/ying-hang-seah",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/ying-hang-seah.jpg",
+    "photoAlt": "Ying Hang Seah"
+  },
+  "angel-pan": {
+    "name": "Angel Pan",
+    "role": "Castform",
+    "url": "https://www.linkedin.com/in/pan-angel/",
+    "photo": "https://cdn.neonapi.io/public/images/pages/blog/authors/angel-pan.jpg",
+    "photoAlt": "Angel Pan"
   }
 }

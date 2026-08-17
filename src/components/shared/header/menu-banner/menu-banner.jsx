@@ -40,7 +40,7 @@ const MenuBanner = ({ linkProps: { className, ...linkProps } = {} }) => (
         <ArrowTopRightIcon className="-translate-x-2 scale-75 text-white opacity-0 transition-[translate,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100" />
       </p>
       <p className="text-[15px] leading-tight tracking-extra-tight text-gray-new-60 lg:text-[13px]">
-        Serverless Postgres, by Databricks
+        Built around Lakebase Postgres, by Databricks
       </p>
     </div>
   </Link>

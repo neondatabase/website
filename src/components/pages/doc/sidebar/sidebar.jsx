@@ -6,6 +6,7 @@ import { useEffect, useRef } from 'react';
 
 import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
 import { cn } from 'utils/cn';
+import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
 import Menu from '../menu';
 
@@ -41,7 +42,8 @@ const getActiveMenu = (navigation, slug) => {
 const Sidebar = ({ className = null, navigation, basePath, customType, sdkNavigation }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  const menu = getActiveMenu(navigation, currentSlug);
+  const navigationSlug = normalizeDocNavigationPath(currentSlug);
+  const menu = getActiveMenu(navigation, navigationSlug);
   const navRef = useRef(null);
 
   // Get SDK TOC for current page from pre-loaded data

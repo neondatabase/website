@@ -57,6 +57,7 @@ import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
 import GradientBorder from 'components/shared/gradient-border';
 import ImageZoom from 'components/shared/image-zoom';
+import InlineSvg from 'components/shared/inline-svg';
 import LatencyCalculator from 'components/shared/latency-calculator';
 import MegaLink from 'components/shared/mega-link';
 import Mermaid from 'components/shared/mermaid';
@@ -228,6 +229,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CliSubcommands,
   CliGlobalOptions,
   ExternalCode: (props) => <ExternalCode {...props} />,
+  InlineSvg,
   MegaLink,
   CopyPrompt,
   McpSetupConfigurator,

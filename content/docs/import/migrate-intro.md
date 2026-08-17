@@ -1,6 +1,6 @@
 ---
 title: Neon data migration guides
-subtitle: Learn how to migrate data to Neon Postgres from different database providers
+subtitle: Learn how to migrate data to Lakebase Postgres from different database providers
   and sources
 summary: >-
   Neon migration guide selection page compares transfer methods (Import Data
@@ -15,7 +15,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.

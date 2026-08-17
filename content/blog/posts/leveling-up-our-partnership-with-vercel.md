@@ -45,21 +45,21 @@ Since its launch last year, hundreds of thousands of developers have built apps 
 </video>
 </figure>
 
-On the Neon side, we’ve shipped a lot this past year, including important improvements in our [autoscaling](https://neon.tech/blog/neon-autoscaling-is-generally-available) and [branching](https://neon.tech/flow), more features for the in-console SQL and [table editors](https://neon.tech/blog/edit-records-directly-from-the-neon-console-meet-the-new-tables-page), enhancements in our [API](https://neon.tech/docs/reference/api-reference) and [pooler](https://neon.tech/docs/connect/connection-pooling), [monitoring](https://neon.tech/docs/introduction/monitoring), [more integrations](https://neon.tech/docs/guides/integrations), more flexible pricing plans… But not all of these upgrades were feasible to incorporate into Vercel Postgres.
+On the Neon side, we’ve shipped a lot this past year, including important improvements in our [autoscaling](https://neon.com/blog/neon-autoscaling-is-generally-available) and [branching](https://neon.tech/flow), more features for the in-console SQL and [table editors](https://neon.com/blog/edit-records-directly-from-the-neon-console-meet-the-new-tables-page), enhancements in our [API](https://neon.com/docs/reference/api-reference) and [pooler](https://neon.com/docs/connect/connection-pooling), [monitoring](https://neon.com/docs/introduction/monitoring), [more integrations](https://neon.com/docs/guides/integrations), more flexible pricing plans… But not all of these upgrades were feasible to incorporate into Vercel Postgres.
 
 **To give everyone access to the latest features and improvements in Neon, Vercel Postgres is transitioning to [Neon via the Vercel Marketplace](https://vercel.com/blog/introducing-the-vercel-marketplace).** This change gives Vercel developers a tightly integrated frontend cloud experience and maintains unified billing, while also opening up access to the full power of Neon.
 
 Via the Vercel Marketplace, Vercel developers will now have access to the best Neon features, including:
 
-- [Database branching](https://neon.tech/docs/introduction/branching) with data + schema
-- Serverless compute configurations via [autoscaling](https://neon.tech/docs/introduction/autoscaling) and [autosuspend](https://neon.tech/docs/guides/auto-suspend-guide)
-- [Instantaneous PITR](https://neon.tech/docs/guides/branch-restore)
-- Full [API and management](https://neon.tech/docs/manage/databases) options
-- [Protected access to branches via IP allowlist](https://neon.tech/docs/guides/protected-branches)
-- [Organization accounts](https://neon.tech/docs/manage/organizations)
-- Advanced [security](https://neon.tech/docs/security/security-overview) configurations
-- [Monitoring](https://neon.tech/docs/introduction/monitoring) and observability
-- Improved compute and [storage](https://neon.tech/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust) scalability
+- [Database branching](https://neon.com/docs/introduction/branching) with data + schema
+- Serverless compute configurations via [autoscaling](https://neon.com/docs/introduction/autoscaling) and [autosuspend](https://neon.com/docs/guides/auto-suspend-guide)
+- [Instantaneous PITR](https://neon.com/docs/guides/branch-restore)
+- Full [API and management](https://neon.com/docs/manage/databases) options
+- [Protected access to branches via IP allowlist](https://neon.com/docs/guides/protected-branches)
+- [Organization accounts](https://neon.com/docs/manage/organizations)
+- Advanced [security](https://neon.com/docs/security/security-overview) configurations
+- [Monitoring](https://neon.com/docs/introduction/monitoring) and observability
+- Improved compute and [storage](https://neon.com/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust) scalability
 
 <blockquote>
 <p>More than ever developers need simplified platforms as our universe expands and grows more complex. We believe that Neon, with its integrated database preview environments, represents the best way for developers to have the repeatable, fast, and reliable infrastructure needed to build the next generation of applications.</p>

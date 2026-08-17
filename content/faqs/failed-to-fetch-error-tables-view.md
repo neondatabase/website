@@ -3,7 +3,7 @@ title: "Why am I getting 'Error connecting to database: Failed to fetch' in the 
 subtitle: 'Usually a cold-start, an ad-blocker, or an IP Allow misconfiguration. Walk through these in order.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -16,7 +16,7 @@ nextLink:
 
 ## Quick answer
 
-`Failed to fetch` on the **Tables** page means the Console's request to your compute didn't complete. The most common causes, in order, are: the compute is starting up after scale to zero, a browser extension is blocking the request, IP Allow is excluding the Console origin, or a transient backend error. Refresh, then work through the checks below.
+`Failed to fetch` on the **Tables** page means the Console's request to your compute didn't complete. The most common causes, in order, are: the compute is starting up after scale to zero, a browser extension is blocking the request, IP Allow is excluding your current IP, or a transient backend error. Refresh, then work through the checks below. See [Error connecting to database: Failed to fetch](/docs/connect/connection-errors#error-connecting-to-database-failed-to-fetch).
 
 ## Walk through the common causes
 
@@ -36,12 +36,11 @@ Ad-blockers, privacy extensions, and corporate browser security tools sometimes 
 - Or temporarily disable extensions like uBlock Origin, Privacy Badger, or DuckDuckGo Privacy Essentials on `console.neon.tech` and reload.
 - Check the browser's developer console (**F12 → Network**) for blocked requests to your compute hostname.
 
-### 3. IP Allow is excluding the Console
+### 3. IP Allow is excluding your browser IP
 
-If you've configured an **IP Allow** list (Scale plan) and didn't add the IP ranges Neon's Console uses to reach your compute, queries from the Tables view get rejected. Check **Project Settings → Network security**.
+If you've configured an **IP Allow** list (Scale plan) and your current public IP isn't on it, queries from the Tables view get rejected. The Tables page connects from the IP address you're browsing from, not from a Neon server IP. Check **Project Settings → Network security** and add your current IP.
 
 - If you only need IP Allow on protected branches, enable **Restrict IP Access to protected branches only** so Console queries against development branches still work.
-- If you need to restrict the production branch too, add Neon's documented Console IP ranges to your allowlist.
 
 See [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
@@ -59,6 +58,6 @@ If lookups against Google DNS succeed but your default resolver fails, switch th
 
 If none of the above explain it, check the [Neon status page](https://neonstatus.com/) for ongoing incidents.
 
-<Admonition type="tip" title="Grab the error ID before contacting Support">
-The full error message on the Tables view includes an error ID after the colon. Copy it before refreshing. Support uses that ID to look up the exact request in our logs, which is much faster than reproducing the issue.
+<Admonition type="tip" title="Grab the error ID">
+The full error message on the Tables view includes an error ID after the colon. Copy it before refreshing. If you open a support ticket (paid plans) or ask in the [Neon Discord](https://neon.com/discord) (Free plan), that ID helps look up the exact request in the logs.
 </Admonition>

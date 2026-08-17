@@ -12,7 +12,7 @@ summary: >-
   running queries that respect those policies at runtime, see the companion page
   on RLS query execution with Drizzle.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
@@ -101,7 +101,7 @@ export const todos = pgTable(
 ```
 
 <Admonition type="note">
-**About Drizzle's role:** Drizzle is used to **declare and migrate RLS policies** in TypeScript. When migrations are run, these policies are created in your Postgres database and enforced automatically regardless of how queries are executed.
+**About Drizzle's role:** Drizzle is used to **declare and migrate RLS policies** in TypeScript. When migrations are run, these policies are created in your Postgres database and enforced automatically regardless of how queries are executed. Run these migrations over a direct (non-pooled) connection string, not a pooled one. See [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations) and [Connection pooling](/docs/connect/connection-pooling).
 
 You can run queries that respect these policies using either the [Data API client](/docs/data-api/get-started#connect-and-query) (frontend) or the [Neon serverless driver](#using-drizzle-with-the-serverless-driver) using the Drizzle query builder (backend).
 </Admonition>

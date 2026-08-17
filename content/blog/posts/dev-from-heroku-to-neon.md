@@ -74,13 +74,13 @@ The team started looking for a new Postgres provider that could support their sc
 
 ### Serverless Postgres with autoscaling (no overprovisioning)
 
-The immediate win was how Neon eliminated the need to overprovision. With Neon, there are no instance sizes – instead, [Neon is serverless:](https://neon.tech/docs/get-started-with-neon/why-neon) CPU, memory, connections, and storage scale up and down with actual usage and responding to [highly performant algorithms](https://neon.tech/docs/guides/autoscaling-algorithm).
+The immediate win was how Neon eliminated the need to overprovision. With Neon, there are no instance sizes – instead, [Neon is serverless:](https://neon.com/docs/get-started-with-neon/why-neon) CPU, memory, connections, and storage scale up and down with actual usage and responding to [highly performant algorithms](https://neon.com/docs/guides/autoscaling-algorithm).
 
 Capacity spikes? Neon handles it. Quiet periods? Neon scales down automatically. No manual resizing, no guessing at tiers, no paying for “just in case.” It’s that simple.
 
 ### Built for developers, not DBAs
 
-Neon is Postgres for developers. DEV valued this focus on DX right away: Neon’s intuitive UI and [API-first approach](https://neon.tech/blog/provision-postgres-neon-api) that made it easy to automate database operations, [branches](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) could be created and torn down programmatically, they were integrations with platforms like [Vercel](https://neon.tech/blog/neon-vercel-integration) – making full-stack previews as simple as opening a pull request.
+Neon is Postgres for developers. DEV valued this focus on DX right away: Neon’s intuitive UI and [API-first approach](https://neon.com/blog/provision-postgres-neon-api) that made it easy to automate database operations, [branches](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) could be created and torn down programmatically, they were integrations with platforms like [Vercel](https://neon.com/blog/neon-vercel-integration) – making full-stack previews as simple as opening a pull request.
 
 And just like DEV, Neon was accessible by design. There’s a generous free plan, no onboarding friction, and no vendor lock-in. Just fast, flexible Postgres, built to match the way modern developers work.
 
@@ -92,7 +92,7 @@ And just like DEV, Neon was accessible by design. There’s a generous free plan
 
 The DEV team had experimented with read replicas on Heroku, but every replica was a full instance – expensive to maintain and hard to justify when the bill came.
 
-Neon’s [replicas](https://neon.tech/docs/guides/read-replica-guide) are fundamentally different. Spinning up a replica doesn’t mean duplicating your whole environment; instead, Neon can launch additional compute nodes that read from the same underlying storage, making it simple to offload read-heavy workloads without the cost and complexity of provisioning full clones.
+Neon’s [replicas](https://neon.com/docs/guides/read-replica-guide) are fundamentally different. Spinning up a replica doesn’t mean duplicating your whole environment; instead, Neon can launch additional compute nodes that read from the same underlying storage, making it simple to offload read-heavy workloads without the cost and complexity of provisioning full clones.
 
 The DEV team can now launch lightweight, read-only replicas for analytics or internal automation without any overhead in maintenance or costs. They’re connecting tools like [Metabase](https://www.metabase.com/) and their in-house workflow automation scripts to these replicas, with plans to do more over time.
 

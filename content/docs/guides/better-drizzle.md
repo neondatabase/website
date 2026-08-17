@@ -2,17 +2,17 @@
 title: Connect from Better Drizzle to Neon
 subtitle: Learn how to connect to Neon from Better Drizzle
 summary: >-
-  Better Drizzle connection guide for Neon Postgres walks through setting up
+  Better Drizzle connection guide for Lakebase Postgres walks through setting up
   better-drizzle with node-postgres driver. Learn how to
   configure a Better Drizzle client, define schema relations, seed data, run
   CRUD queries, use plugins, and manage transactions with savepoints.
 enableTableOfContents: true
-updatedOn: '2026-07-12T17:47:35.890Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 <InfoBlock>
 <DocsList title="What you will learn:">
-<p>How to set up better-drizzle with Neon Postgres</p>
+<p>How to set up better-drizzle with Lakebase Postgres</p>
 <p>How to define schemas, seed, and query your database</p>
 <p>How to use plugins, hooks, and transactions in better-drizzle</p>
 </DocsList>
@@ -25,7 +25,7 @@ updatedOn: '2026-07-12T17:47:35.890Z'
 
 </InfoBlock>
 
-[better-drizzle](https://better-drizzle.com) is a thin wrapper around [Drizzle ORM](https://orm.drizzle.team) that gives every table a consistent, type-safe API without replacing Drizzle itself. If you are already using Drizzle with Neon, better-drizzle removes the repetitive query glue you would otherwise rewrite in every service while staying close to the metal.
+[better-drizzle](https://better-drizzle.com) is a thin wrapper around [Drizzle ORM](https://orm.drizzle.team) that gives every table a consistent, type-safe API without replacing Drizzle itself. If you are already using Drizzle with Lakebase Postgres, better-drizzle removes the repetitive query glue you would otherwise rewrite in every service while staying close to the metal.
 
 better-drizzle is **sponsored by Neon**, and is maintained by [Hiago Almeida](https://github.com/almeidazs).
 
@@ -43,7 +43,7 @@ better-drizzle wraps your existing Drizzle client and generates one delegate per
 
 All of this compiles down to Drizzle queries. You still define your schema in Drizzle, choose your driver, and drop to raw SQL whenever you need to.
 
-To connect a TypeScript/Node.js project to Neon using better-drizzle, follow these steps:
+To connect a TypeScript/Node.js project to Lakebase Postgres using better-drizzle, follow these steps:
 
 <Steps>
 
@@ -62,11 +62,11 @@ Initialize a new Node.js project with a `package.json` file:
 npm init -y
 ```
 
-## Create a Neon project
+## Create a project on Neon
 
-If you do not have one already, create a Neon project.
+If you do not have one already, create a project.
 
-1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the console.
 2.  Click **New Project**.
 3.  Specify your project settings and click **Create Project**.
 
@@ -81,6 +81,10 @@ Create a `.env` file in your project's root directory and add the connection str
 ```text shouldWrap
 DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
 ```
+
+<Admonition type="note">
+Neon supports both direct and pooled connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard**. A pooled connection string (the hostname includes `-pooler`) routes through a PgBouncer connection pool, which is ideal for your application at runtime. However, using a pooled connection string for migrations can lead to errors. Use a direct (non-pooled) connection when running Drizzle Kit migrations. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
+</Admonition>
 
 ## Install dependencies
 

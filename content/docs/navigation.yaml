@@ -856,6 +856,8 @@
               slug: ai-gateway/chat-completions
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
+            - title: Anthropic Messages API
+              slug: ai-gateway/anthropic-messages
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference
@@ -878,6 +880,8 @@
           items:
             - title: Accounts
               slug: manage/accounts
+            - title: Permissions quickstart
+              slug: manage/project-permissions-get-started
             - title: User permissions
               slug: manage/user-permissions
             - title: Organizations
@@ -1070,8 +1074,8 @@
           slug: introduction/agent-plan
         - title: Manage billing
           slug: introduction/manage-billing
-        - title: Spending limit
-          slug: introduction/spending-limit
+        - title: Spending notifications
+          slug: introduction/spending-notifications
           tag: new
           tagTheme: green
         - title: Monitor billing
@@ -1165,6 +1169,8 @@
                   slug: ai/ai-database-versioning
                 - title: Neon API Reference
                   slug: reference/api
+                - title: Lakebase Search
+                  slug: ai/lakebase-search
             - section: Agent frameworks
               icon: frameworks
               items:
@@ -1214,8 +1220,14 @@
                   slug: cli/env
                 - title: set-context
                   slug: cli/set-context
+                - title: open
+                  slug: cli/open
                 - title: me
                   slug: cli/me
+                - title: profile
+                  slug: cli/profile
+                - title: api-keys
+                  slug: cli/api-keys
                 - title: completion
                   slug: cli/completion
             - title: Projects and branches
@@ -1274,6 +1286,8 @@
               items:
                 - title: inspect
                   slug: cli/inspect
+                - title: logs
+                  slug: cli/logs
         - section: API
           icon: api
           items:

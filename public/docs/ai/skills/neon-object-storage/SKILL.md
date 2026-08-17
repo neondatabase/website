@@ -5,17 +5,19 @@ description: >-
   and the database stay in sync across every branch. Use when a user wants
   object storage, a bucket, blob/file storage, or somewhere to put uploads,
   images, documents, avatars, or user-generated files for their app or agent —
-  especially when they already use (or are setting up) Neon Postgres and don't
+  especially when they already use (or are setting up) Lakebase Postgres and don't
   want to add a separate storage provider like AWS S3, Cloudflare R2, or
   Supabase Storage. Triggers include "object storage", "bucket", "blob
   storage", "file storage", "store uploads/images/files", "S3-compatible
-  storage", "presigned URL", "where do I put files", "Neon Object Storage",
-  "Neon Storage", and "storage that branches with my database".
+  storage", "presigned URL", "where do I put files", "storage logs",
+  "bucket logs", "Neon Object Storage", "Neon Storage", and "storage that
+  branches with my database".
 metadata:
   parent: neon
+  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-object-storage
 ---
 
-**FIRST**: Use the parent `neon` skill for a Neon platform overview, getting started with Neon, Neon development best practices, and more.
+**FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.
 
 If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
 
@@ -35,7 +37,7 @@ Use this skill to help the user store and serve files that branch alongside thei
 
 Reach for Neon Object Storage when the user needs to store files (images, uploads, generated assets, documents, backups) and any of the following are true:
 
-- **They already use Neon Postgres and don't want a second provider.** One backend, one bill, one CLI, one set of branches — instead of standing up and wiring a separate AWS S3 / R2 / Supabase Storage account. The same Neon credential that backs the database backs storage.
+- **They already use Lakebase Postgres and don't want a second provider.** One backend, one bill, one CLI, one set of branches — instead of standing up and wiring a separate AWS S3 / R2 / Supabase Storage account. The same Neon credential that backs the database backs storage.
 - **Files must stay in sync with the database across environments.** Storage branches _together with_ your Postgres data. Fork a branch and the child instantly inherits the parent's buckets and objects at that point in time — copy-on-write, so no data is duplicated. This is what makes agent, dev, preview, and test environments seamless: a preview branch gets a consistent snapshot of _both_ the rows and the files they reference, and writes on the child never touch the parent.
 - **They want safe, throwaway environments.** Upload, overwrite, and delete files in a preview/CI branch without any risk to production data, then drop the branch.
 - **They want standard S3 tooling.** It's built on S3 semantics and speaks the S3 API, so the AWS SDKs, `boto3`, the AWS CLI, and presigned URLs all work — reliable and familiar, with no proprietary client.
@@ -194,6 +196,14 @@ The canonical pattern: an agent generates an image → `PutObject` into the `ima
 ## CLI Bucket and Object Commands
 
 `neon` also has first-class bucket/object commands (`neon bucket create|list|delete`, `neon bucket object put|get|list|delete`) for scripting and one-off operations.
+
+## Built-in Branch Logs
+
+```bash
+neon logs query --branch production --source storage --since 1h
+```
+
+Storage is one of the two sources branch logs cover today, alongside Neon Functions. Logs are scoped to a single branch, so pass `--branch` when the bucket you're debugging isn't on the branch you're checked out on. Everything else about logs — the required CLI version, filters, the SDK, and the Loki-compatible read API — is in the parent `neon` skill's **Observability** section.
 
 ## Neon Documentation
 

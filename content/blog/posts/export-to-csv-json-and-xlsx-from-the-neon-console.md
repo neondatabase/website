@@ -36,7 +36,7 @@ seo:
 
 ![neon console export to csv, json, xlsx, zip](https://cdn.neonapi.io/public/images/pages/blog/export-to-csv-json-and-xlsx-from-the-neon-console/neon-export-csv-json-zip-xlsx-1024x576-206e8b05.jpeg)
 
-After spending a bit of time with Neon’s SQL Editor [making `\\d` and friends work](https://neon.tech/blog/bringing-psqls-d-to-your-web-browser), there were a couple of other things I wanted to bring to it, both related to the query results.
+After spending a bit of time with Neon’s SQL Editor [making `\\d` and friends work](https://neon.com/blog/bringing-psqls-d-to-your-web-browser), there were a couple of other things I wanted to bring to it, both related to the query results.
 
 The first was a simple expand-to-window control for the results pane, to get a better and less cramped look at query result tables and (especially) the graphical `EXPLAIN` output produced by PEV2. You can now find such a button at the bottom right of the SQL Editor any time there are query result on-screen.
 
@@ -72,7 +72,7 @@ In the rest of this post I set out what I learned in implementing this feature. 
 
 ### CSV + JSON
 
-There were no big surprises implementing CSV and JSON download. The key thing to ensure for both formats was that very big or precise numbers (Postgres `int8` s and `decimals`) didn’t at any point get parsed to JavaScript numbers, because that would [cause precision to be lost](https://neon.tech/blog/parsing-json-from-postgres-in-js).
+There were no big surprises implementing CSV and JSON download. The key thing to ensure for both formats was that very big or precise numbers (Postgres `int8` s and `decimals`) didn’t at any point get parsed to JavaScript numbers, because that would [cause precision to be lost](https://neon.com/blog/parsing-json-from-postgres-in-js).
 
 The other tiny wrinkle was ensuring that there are no duplicate JSON object keys even when multiple result columns have the same name.
 

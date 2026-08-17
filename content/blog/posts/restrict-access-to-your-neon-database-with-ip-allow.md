@@ -37,15 +37,15 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/restrict-access-to-your-neon-database-with-ip-allow/neon-ip-allowlist-1024x576-66d4e52a.png)
 
-Neon provides you with fully hosted and managed PostgreSQL instances. These instances have advanced [branching](https://neon.tech/docs/introduction/branching) and [autoscaling](https://neon.tech/docs/introduction/autoscaling) features and are accessible using a [connection string](https://neon.tech/docs/connect/connect-from-any-app) and a secure password.
+Neon provides you with fully hosted and managed PostgreSQL instances. These instances have advanced [branching](https://neon.com/docs/introduction/branching) and [autoscaling](https://neon.com/docs/introduction/autoscaling) features and are accessible using a [connection string](https://neon.com/docs/connect/connect-from-any-app) and a secure password.
 
 We understand that having multiple layers of security in place is essential to safeguard your data. Implementing IP address restrictions is often part of a comprehensive security strategy, especially for businesses handling sensitive data or operating under strict regulatory environments.
 
-Therefore, we’d like to introduce our newest security enhancement: [IP Allow](https://neon.tech/docs/manage/projects#configure-ip-allow). This feature is available for customers signed up for the [Neon Pro Plan](https://neon.tech/docs/introduction/pro-plan).
+Therefore, we’d like to introduce our newest security enhancement: [IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow). This feature is available for customers signed up for the [Neon Pro Plan](https://neon.com/docs/introduction/pro-plan).
 
 ## Restricting Access to Your Branch by IP
 
-Neon’s Postgres offering requires passwords to have at least [60 bits of entropy](https://neon.tech/docs/manage/roles#manage-roles-with-sql), providing a solid first layer of defense against unauthorized access. The IP Allow feature provides an extra level of verification and access control.
+Neon’s Postgres offering requires passwords to have at least [60 bits of entropy](https://neon.com/docs/manage/roles#manage-roles-with-sql), providing a solid first layer of defense against unauthorized access. The IP Allow feature provides an extra level of verification and access control.
 
 For example, restricting access to a range of known IP addresses decreases the possibility of data breaches caused by common attack vectors, such as phishing. This is because even if an attacker obtains credentials to access your database, those credentials will be useless unless the attacker can connect from an IP address on the allowlist.
 
@@ -71,4 +71,4 @@ Visit a site such as [ipinfo.io](https://ipinfo.io/) to obtain your public IP ad
 
 ## Conclusion
 
-Now you can restrict access to your Neon database’s branches using the IP Allow feature. You can read more about [IP Allow in the documentation](https://neon.tech/docs/manage/projects#configure-ip-allow). Join us on our [Discord server](https://neon.tech/discord) if you’d like to share your feedback and ideas or to hang out.
+Now you can restrict access to your Neon database’s branches using the IP Allow feature. You can read more about [IP Allow in the documentation](https://neon.com/docs/manage/projects#configure-ip-allow). Join us on our [Discord server](https://neon.tech/discord) if you’d like to share your feedback and ideas or to hang out.

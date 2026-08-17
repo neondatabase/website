@@ -85,7 +85,7 @@ Here’s the essence of their stack:
 Because much of Nodecraft’s game configuration data rarely changes, caching plays a crucial role in optimizing performance. They’ve taken advantage of Cloudflare’s [Hyperdrive](https://v/) to reduce query times and improve the responsiveness of their setup. Beyond caching, Hyperdrive also optimizes connection handling, reducing latency for Nodecraft’s global users.
 
 <Admonition type="note" title="about hyperdrive">
-[Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a globally distributed connection pooler and caching service built by Cloudflare. It helps optimize database performance for serverless environments built on [Cloudflare Workers](https://workers.cloudflare.com/). If you’re not familiar with it, start [here](https://neon.tech/blog/hyperdrive-neon-faq).
+[Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a globally distributed connection pooler and caching service built by Cloudflare. It helps optimize database performance for serverless environments built on [Cloudflare Workers](https://workers.cloudflare.com/). If you’re not familiar with it, start [here](https://neon.com/blog/hyperdrive-neon-faq).
 </Admonition>
 
 ## Using Neon Branching for Faster Development (and Live Demos!)
@@ -104,7 +104,7 @@ A couple examples of how Nodecraft likes to use branching:
 
 ## Serverless for the win. Try it
 
-By combining serverless Postgres with Neon and edge computing with Cloudflare, Nodecraft has transformed the way they manage infrastructure. If you’d like to try this stack, [get started with Neon’s Free Plan](https://console.neon.tech/signup) (no credit card required, no spam). And as you explore, don’t forget to [use Hyperdrive](https://neon.tech/docs/guides/cloudflare-hyperdrive) for an extra boost!
+By combining serverless Postgres with Neon and edge computing with Cloudflare, Nodecraft has transformed the way they manage infrastructure. If you’d like to try this stack, [get started with Neon’s Free Plan](https://console.neon.tech/signup) (no credit card required, no spam). And as you explore, don’t forget to [use Hyperdrive](https://neon.com/docs/guides/cloudflare-hyperdrive) for an extra boost!
 
 ---
 

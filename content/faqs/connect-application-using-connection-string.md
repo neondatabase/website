@@ -3,7 +3,7 @@ title: 'How do I connect my application to my Neon database using the connection
 subtitle: 'Read DATABASE_URL from your environment and pass it to a Postgres driver.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T03:15:28.979Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: create-new-database-neon-project
 ---
 
-Once you have a connection string from the **Connect** widget on your Neon **Project Dashboard**, save it as an environment variable (commonly `DATABASE_URL`) and pass it to a Postgres driver in your code. Neon speaks the standard Postgres wire protocol, so anything that talks to Postgres works: `pg`, `psycopg2`, `psql`, Prisma, Drizzle, SQLAlchemy, and so on. For serverless and edge runtimes, the [Neon serverless driver](/docs/serverless/serverless-driver) adds HTTP and WebSocket access.
+Once you have a connection string from the **Connect** widget on your Neon **Project Dashboard**, save it as an environment variable (commonly `DATABASE_URL`) and pass it to a Postgres driver in your code. Lakebase Postgres speaks the standard Postgres wire protocol, so anything that talks to Postgres works: `pg`, `psycopg2`, `psql`, Prisma, Drizzle, SQLAlchemy, and so on. For serverless and edge runtimes, the [Neon serverless driver](/docs/serverless/serverless-driver) adds HTTP and WebSocket access.
 
 ## 1. Save the connection string in `.env`
 
@@ -22,7 +22,7 @@ Once you have a connection string from the **Connect** widget on your Neon **Pro
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
-Add `.env` to `.gitignore`. Keep the `sslmode=require` and `channel_binding=require` parameters in place. Neon requires TLS.
+Add `.env` to `.gitignore`. Keep the `sslmode=require` and `channel_binding=require` parameters in place. Lakebase Postgres requires TLS.
 
 ## 2. Connect from your code
 
@@ -76,7 +76,7 @@ Neon offers two flavors of the same connection string:
 The Connect widget gives you either by toggling **Connection pooling**. Most apps set `DATABASE_URL` to the pooled URL and `DIRECT_URL` to the direct URL for migrations. See [Connection pooling](/docs/connect/connection-pooling) for when to use which.
 
 <Admonition type="important" title="Always read the string from the environment">
-Hardcoding the URL in source code is a common source of credential leaks. Read it from `process.env.DATABASE_URL`, `os.environ`, or your secret manager. If you're deploying to Vercel, Render, Fly, or similar, set `DATABASE_URL` in the platform's env settings. The [Neon-Vercel integration](/docs/guides/vercel-managed-integration) sets it automatically.
+Hardcoding the URL in source code is a common source of credential leaks. Read it from `process.env.DATABASE_URL`, `os.environ`, or your secret manager. If you're deploying to Vercel, Render, Fly, or similar, set `DATABASE_URL` in the platform's env settings. The [Vercel-Managed Integration](/docs/guides/vercel-managed-integration) sets it automatically.
 </Admonition>
 
 <CTA title="Choose your connection method" description="Compare drivers and connection types based on where you're deploying." buttonText="Read the docs" buttonUrl="/docs/connect/choose-connection" />

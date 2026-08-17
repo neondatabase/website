@@ -11,7 +11,7 @@ summary: >-
   to handle the brief disruption.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
@@ -22,7 +22,7 @@ To apply updates to your compute (Postgres upgrades, security patches, and simil
 
 To protect performance, Neon **prewarms** your compute's cache during the update process, without adding time to the restart. Prewarming means repopulating Postgres's in-memory buffer cache from storage before your workload continues, so frequently used data is already in memory instead of being read cold from storage after the restart. Prewarming runs automatically. You do not configure it. There are no additional compute or storage costs associated with this behavior.
 
-For technical details, see [Zero-Downtime Patching Part 1: Prewarming](https://neon.com/blog/prewarming).
+For technical details, see [Zero-Downtime Patching Part 1: Prewarming](/blog/prewarming).
 
 <Admonition type="important">
 Brief connection drops are expected during compute updates. Verify that your application has a retry policy configured to handle these brief interruptions. For guidance on implementing retry logic, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).

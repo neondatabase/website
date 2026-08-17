@@ -1,14 +1,14 @@
 ---
 title: Grafana Cloud integration
-subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
+subtitle: Send metrics and logs from Lakebase Postgres on Neon to Grafana Cloud
 summary: >-
-  Grafana Cloud integration for Neon Postgres sends metrics and logs via the
+  Grafana Cloud integration for Lakebase Postgres on Neon sends metrics and logs via the
   OTLP endpoint, routing metrics to Mimir and Postgres logs to Loki. Use this
   page to connect Neon to Grafana Cloud for dashboards, alerts, and LogQL
   queries covering connection counts, CPU, memory, cache hit rate, replication
   delay, and PgBouncer pooling metrics. Requires the Neon Scale plan.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 <InfoBlock>
@@ -24,7 +24,7 @@ updatedOn: '2026-06-05T17:20:32.620Z'
 </DocsList>
 </InfoBlock>
 
-The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires [OTEL support](https://neon.com/docs/guides/opentelemetry), which is available with Neon's Scale plan.
+The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires [OTEL support](/docs/guides/opentelemetry), which is available with Neon's Scale plan.
 
 ## How it works
 

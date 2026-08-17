@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-15T00:37:08.193Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -53,6 +53,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Public network transfer](#public-network-transfer)   | 5 GB included                              | 500 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB                                                        |
 | [Monitoring](#monitoring)                             | 1 day                                      | 3 days                                     | 14 days                                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | —                                          | —                                          | ✅                                                                                                |
+| [Spending notifications](#spending-notifications)     | —                                          | ✅                                         | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                                          | $0.20/GB-month                             | $0.20/GB-month                                                                                    |
 | [History window](#history-window)                     | 6 hours, up to 1 GB-month                  | Up to 7 days                               | Up to 30 days                                                                                     |
 | [Snapshots](#snapshots)                               | 1 manual snapshot                          | 100 manual snapshots                       | 100 manual snapshots                                                                              |
@@ -63,7 +64,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Private network transfer](#private-network-transfer) | —                                          | —                                          | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                                          | Protected branches                         | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                                          | —                                          | ✅                                                                                                |
-| [Support](#support)                                   | Community                                  | Billing support                            | Standard, Business, or Production                                                                 |
+| [Support](#support)                                   | Community                                  | Billing support                            | Standard (additional options for higher-volume customers)                                         |
 
 ## Plan features
 
@@ -76,6 +77,8 @@ Learn how to manage your Neon costs effectively with our [cost optimization guid
 ### Price
 
 On **Launch** and **Scale** plans, you pay only for what you use; there's no minimum monthly fee. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
+
+Higher-volume customers may qualify for annual commits. [Contact sales](/contact-sales) to learn more.
 
 <Admonition type="note">
 Invoices under $0.50 are not collected.
@@ -264,6 +267,12 @@ See [Monitoring dashboard](/docs/introduction/monitoring-page) for details.
 Export metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible platform](/docs/guides/opentelemetry).  
 Available only on the **Scale** plan.
 
+### Spending notifications
+
+Get email alerts when your organization's monthly Neon charges reach 80% and 100% of a threshold you set, so you can act before the bill grows. Available on the **Launch** and **Scale** plans.
+
+See [Spending notifications](/docs/introduction/spending-notifications) for how to set a threshold.
+
 ### Instant restore
 
 Neon stores a change history to support point-in-time restore (instant restore). You can only point-in-time restore from **root branches**, so PITR storage is charged only for root branches. Child branches do not add to this charge.
@@ -382,7 +391,9 @@ Support level by plan:
 
 - **Free**: Community support
 - **Launch**: Billing support
-- **Scale**: Standard support, with Business or Production support plans available for an additional fee
+- **Scale**: Standard support
+
+Higher-volume customers may qualify for annual commits and additional support options aligned with [Databricks Support](https://www.databricks.com/support). [Contact sales](/contact-sales) to learn more.
 
 See [Support](/docs/introduction/support) for details.
 

@@ -468,7 +468,7 @@ Lastly, we generate an embedding for the user-submitted query and return the fiv
 
 ## Final thoughts
 
-The end result is fast since it uses a small data set. However, it’s important to create an index when working with a large amount of data (e.g., tens of thousands of rows or more). You can check out pg_embedding’s documentation to learn how to [create an HNSW index to optimize search behavior](https://neon.tech/docs/extensions/pg_embedding#create-an-hnsw-index).
+The end result is fast since it uses a small data set. However, it’s important to create an index when working with a large amount of data (e.g., tens of thousands of rows or more). You can check out pg_embedding’s documentation to learn how to [create an HNSW index to optimize search behavior](https://neon.com/docs/extensions/pg_embedding#create-an-hnsw-index).
 
 If you have questions about building AI apps on Neon, feel free to reach out on [Twitter](https://twitter.com/neondatabase) or our [community forum](https://community.neon.tech/). We’d love to hear from you.
 
