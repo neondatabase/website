@@ -3,7 +3,7 @@ title: Add organization members by domain
 summary: >-
   Auto-join by domain lets admins verify email domains via DNS TXT record.
   Users who sign up or log in with a matching address are automatically added
-  as Members, with no manual invite required. Use this page to auto-provision
+  as Editors, with no manual invite required. Use this page to auto-provision
   org membership for your company domain instead of sending individual invites.
   An org can have multiple verified domains, and the same domain can be shared
   across multiple Neon organizations.
@@ -20,7 +20,7 @@ Only organization admins can add, verify, or remove domains. The **Auto-join by 
 
 - You add a domain (for example, `example.com`) on the organization **People** page under **Auto-join by domain**. The domain is added in a "Pending verification" state and Neon generates a verification code.
 - You add a TXT record at your domain with that exact code. After DNS propagates, you click **Verify** in the Console to confirm you own the domain.
-- When a user signs up or logs in to Neon with an email whose domain matches one of your verified domains (for example, `alex@example.com`), they are automatically added to your organization as a Member. They do not receive an invite email; they simply see the organization in their org switcher.
+- When a user signs up or logs in to Neon with an email whose domain matches one of your verified domains (for example, `alex@example.com`), they are automatically added to your organization as an Editor. They do not receive an invite email; they simply see the organization in their org switcher.
 
 An organization can have multiple verified domains. The same domain can also be added to multiple organizations. If a user's email domain matches verified domains in more than one org, they are added to all of those organizations.
 
@@ -64,13 +64,13 @@ Only organization admins can remove a domain. In the **Auto-join by domain** sec
 
 ## Behavior details
 
-- **Role:** Users who are automatically added receive the **Member** role. Admins can change their role later from the **People** page if needed.
+- **Role:** Users who are automatically added receive the **Editor** role, which gives them access to every project in the organization. Admins can change their role later from the **People** page if needed. See [Organization roles](/docs/manage/user-permissions#organization-roles).
 - **Existing members:** If the user is already a member of the organization, no duplicate is created; they are simply signed in as usual.
 - **Sign up and log in:** Users are automatically added both when they create a new Neon account and when an existing user logs in. So if you add and verify a domain after some colleagues already have Neon accounts, those colleagues will be added to the org the next time they log in (as long as their email domain matches).
 
 ## Related
 
 - [Manage organizations](/docs/manage/orgs-manage) for inviting members manually and managing roles.
-- [User permissions](/docs/manage/user-permissions) for a breakdown of Admin and Member capabilities.
+- [User permissions](/docs/manage/user-permissions) for a breakdown of what each organization role and per-project permission allows.
 
 <NeedHelp />

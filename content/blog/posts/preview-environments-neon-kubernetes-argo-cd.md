@@ -44,7 +44,7 @@ Coding in a local development environment provides developers with faster feedba
 
 Wouldn’t it be better to test the developer’s changes in an isolated production-like environment that’s created automatically in response to the pull request being opened? Using platforms that support serverless paradigms and shared compute make this possible, and cost-effective too.
 
-A [prior blog post by Mahmoud](https://neon.tech/blog/branching-with-preview-environments) discussed the advantages of using preview environments, and how Neon’s database branching feature enables teams to create an isolated production-like database for each of their preview environments. That blog post also included an end-to-end example of how development teams could configure such a setup using Vercel as a hosting and continuous delivery (CD) environment, Neon for serverless Postgres, and GitHub Actions workflows for continuous integration (CI).
+A [prior blog post by Mahmoud](https://neon.com/blog/branching-with-preview-environments) discussed the advantages of using preview environments, and how Neon’s database branching feature enables teams to create an isolated production-like database for each of their preview environments. That blog post also included an end-to-end example of how development teams could configure such a setup using Vercel as a hosting and continuous delivery (CD) environment, Neon for serverless Postgres, and GitHub Actions workflows for continuous integration (CI).
 
 This post describes how you can achieve a similar setup using Kubernetes and Argo CD as your hosting and continuous delivery platforms. Two Git repositories will be referenced throughout this post to demonstrate the workflow:
 
@@ -194,7 +194,7 @@ To test this setup for yourself using an Argo CD instance in a local Kubernetes 
 Each preview environment requires the creation of a new container image that contains (pun intended) the developer’s latest code changes, and a unique Neon Postgres branch with a compute endpoint. The lifecycle of the container image and Neon resources are managed using a GitHub Actions workflow in the `pr-build-and-preview.yaml` file. This workflow:
 
 1. Performs a container image build, and pushes the resulting container image to a container registry.
-2. Creates a Neon database branch and compute using Neon’s [create-branch-action](https://neon.tech/docs/guides/branching-github-actions#create-branch-action).
+2. Creates a Neon database branch and compute using Neon’s [create-branch-action](https://neon.com/docs/guides/branching-github-actions#create-branch-action).
 3. Updates the [parameters of the Argo CD Application](https://argo-cd.readthedocs.io/en/stable/user-guide/parameters/) associated with the pull request with:
    - The connection string for the Neon compute associated with the branch.
    - The tag for the container image associated with the latest commit.

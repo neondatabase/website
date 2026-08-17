@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-07-31T15:49:10.111Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 # Docs
@@ -344,6 +344,30 @@ The `ExternalCode` component allows embedding code content from external sources
 1. Always use raw URLs from the GitHub repository (for example, `https://raw.githubusercontent.com/...`).
 2. Use the `language` prop when the file extension doesn't match the actual content type.
 
+## Inline SVG
+
+The `InlineSvg` component renders an SVG from `public/` directly into the page DOM instead of through an `<img>` tag. Use it for diagrams with interactivity (CSS `:hover` states, SMIL `begin="click"` animations), which browsers ignore inside `<img>`-embedded SVGs. For static SVGs, prefer standard markdown image syntax, which adds zoom support.
+
+### Usage
+
+```markdown
+<InlineSvg src="/docs/guides/my-diagram.svg" title="One-sentence description of the diagram for screen readers" />
+```
+
+### Props
+
+| Prop      | Type   | Default    | Description                                                         |
+| --------- | ------ | ---------- | ------------------------------------------------------------------- |
+| src       | string | (required) | Path to the `.svg` file, relative to `public/`                      |
+| title     | string | (optional) | Accessible label; sets `role="img"` and `aria-label` on the wrapper |
+| className | string | (optional) | Additional CSS classes to apply to the wrapper                      |
+
+### Best Practices
+
+1. Keep SVGs script-free; `<script>` tags and inline event handlers are stripped at render time. Use CSS and SMIL for interactivity.
+2. Use unique element ids inside each SVG (for example, marker ids). Inlined SVGs share the page's id namespace, so two SVGs on one page with the same id will conflict.
+3. Always pass a `title` so the diagram is announced to screen readers.
+
 ## Tabs
 
 To display the tabs with content as image, video, code block, .etc, wrap the `TabItem` with `Tabs`
@@ -559,7 +583,7 @@ The `TwoColumnLayout` component creates a two-column layout for tutorial pages a
 
 > **Note:** Pages using `TwoColumnLayout` should include `layout: wide` prop to hide the right sidebar (Table of Contents) and provide more space for the two-column layout.
 
-Check [Managed Better Auth with Next.js](https://neon.com/docs/auth/quick-start/nextjs-api-only) and [Neon TypeScript SDK](https://neon.com/docs/reference/javascript-sdk) for usage examples.
+Check [Managed Better Auth with Next.js](/docs/auth/quick-start/nextjs-api-only) and [Neon TypeScript SDK](/docs/reference/javascript-sdk) for usage examples.
 
 ````md
 <TwoColumnLayout>

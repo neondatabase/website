@@ -100,8 +100,8 @@ As a Neon Free Tier user, your compute size is fixed at .25 CU, which gives you:
 You have a few options in this case:
 
 1. Find and remove long-running or idle connections.
-2. Upgrade to the [Neon Pro Plan](https://neon.tech/docs/introduction/pro-plan) for larger computes with a higher max_connections setting.
-3. Enable [connection pooling](https://neon.tech/docs/connect/connection-pooling).
+2. Upgrade to the [Neon Pro Plan](https://neon.com/docs/introduction/pro-plan) for larger computes with a higher max_connections setting.
+3. Enable [connection pooling](https://neon.com/docs/connect/connection-pooling).
 
 ### Find and remove long-running or idle connections
 
@@ -136,11 +136,11 @@ Replace ‘databasename’ with the actual name of your database.
 
 ### Upgrade to the Neon Pro Plan for larger compute sizes
 
-You can upgrade to the [Neon Pro Plan](https://neon.tech/docs/introduction/pro-plan) from the **Billing** page in the Neon Console. Once you are signed up, you can select a larger compute size that supports more connections. You’ll find the instructions here: [Compute size and autoscaling configuration](https://neon.tech/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
+You can upgrade to the [Neon Pro Plan](https://neon.com/docs/introduction/pro-plan) from the **Billing** page in the Neon Console. Once you are signed up, you can select a larger compute size that supports more connections. You’ll find the instructions here: [Compute size and autoscaling configuration](https://neon.com/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
 
 ### Connection Pooling
 
-Even with the largest compute size, the max_connections limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can enable [connection pooling](https://neon.tech/docs/connect/connection-pooling). All Neon plans, including the [Neon Free Tier](https://neon.tech/docs/introduction/free-tier), support connection pooling.
+Even with the largest compute size, the max_connections limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can enable [connection pooling](https://neon.com/docs/connect/connection-pooling). All Neon plans, including the [Neon Free Tier](https://neon.com/docs/introduction/free-tier), support connection pooling.
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) for connection pooling, which allows Neon to support up to 10,000 simultaneous connections.
 
@@ -168,9 +168,9 @@ Thanks for reading and stay tuned for the next ** _Support Case Recap_**!
 
 ## References
 
-- [Neon Pro Plan](https://neon.tech/docs/introduction/pro-plan)
-- [Neon Free Tier](https://neon.tech/docs/introduction/free-tier)
-- [Neon Support](https://neon.tech/docs/introduction/support)
-- [Connection pooling in Neon](https://neon.tech/docs/connect/connection-pooling)
+- [Neon Pro Plan](https://neon.com/docs/introduction/pro-plan)
+- [Neon Free Tier](https://neon.com/docs/introduction/free-tier)
+- [Neon Support](https://neon.com/docs/introduction/support)
+- [Connection pooling in Neon](https://neon.com/docs/connect/connection-pooling)
 - [PgBouncer](https://www.pgbouncer.org/)
 - [PostgreSQL Connections and Authentication](https://www.postgresql.org/docs/current/runtime-config-connection.html)

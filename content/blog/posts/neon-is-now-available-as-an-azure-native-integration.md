@@ -35,7 +35,7 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/neon-is-now-available-as-an-azure-native-integration/neon-azure-1-3-1024x576-d3c56f8d.jpg)
 
-Our collaboration with Microsoft continues to grow. [Last August](https://neon.tech/blog/neon-is-coming-to-azure), we announced a strategic investment from M12, Microsoft’s venture fund, with a goal to bring Neon closer into the Azure ecosystem. **Today, we’re excited to introduce Neon as an Azure Native Integration, allowing developers to provision databases directly from their Azure portal.**
+Our collaboration with Microsoft continues to grow. [Last August](https://neon.com/blog/neon-is-coming-to-azure), we announced a strategic investment from M12, Microsoft’s venture fund, with a goal to bring Neon closer into the Azure ecosystem. **Today, we’re excited to introduce Neon as an Azure Native Integration, allowing developers to provision databases directly from their Azure portal.**
 
 <video autoPlay muted loop width="1576" height="1014">
 <source src="https://cdn.neonapi.io/public/videos/pages/blog/neon-is-now-available-as-an-azure-native-integration/screen-recording-2024-12-03-at-91626percente2percent80percentafam-9664673c.mov" />

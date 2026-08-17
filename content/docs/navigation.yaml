@@ -91,6 +91,8 @@
               slug: guides/java
             - title: JavaScript
               slug: guides/javascript
+            - title: Kotlin
+              slug: guides/kotlin
             - title: Python
               slug: guides/python
             - title: Rust
@@ -856,6 +858,8 @@
               slug: ai-gateway/chat-completions
             - title: OpenAI Responses API
               slug: ai-gateway/openai-responses
+            - title: Anthropic Messages API
+              slug: ai-gateway/anthropic-messages
             - title: Gemini API
               slug: ai-gateway/gemini
         - section: Reference
@@ -878,6 +882,8 @@
           items:
             - title: Accounts
               slug: manage/accounts
+            - title: Permissions quickstart
+              slug: manage/project-permissions-get-started
             - title: User permissions
               slug: manage/user-permissions
             - title: Organizations
@@ -1165,6 +1171,8 @@
                   slug: ai/ai-database-versioning
                 - title: Neon API Reference
                   slug: reference/api
+                - title: Lakebase Search
+                  slug: ai/lakebase-search
             - section: Agent frameworks
               icon: frameworks
               items:
@@ -1214,10 +1222,12 @@
                   slug: cli/env
                 - title: set-context
                   slug: cli/set-context
+                - title: open
+                  slug: cli/open
                 - title: me
                   slug: cli/me
-                - title: profiles
-                  slug: cli/profiles
+                - title: profile
+                  slug: cli/profile
                 - title: api-keys
                   slug: cli/api-keys
                 - title: completion
@@ -1278,6 +1288,8 @@
               items:
                 - title: inspect
                   slug: cli/inspect
+                - title: logs
+                  slug: cli/logs
         - section: API
           icon: api
           items:

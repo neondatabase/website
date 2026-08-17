@@ -41,7 +41,7 @@ We recently published a package on NPM called [`@neondatabase/toolkit`](https://
 For example:
 
 - Vercel’s [v0](https://v0.dev/) AI product for UI generation works very well _because_ it is limited to [React](https://react.dev), [Tailwind CSS](https://tailwindcss.com/) and [ShadCN/UI](https://ui.shadcn.com/) (as the “component library”).
-- [Replit Agents](https://docs.replit.com/replitai/agent) only currently support [Postgres via Neon](https://neon.tech/blog/building-a-news-app-with-replit-agent-a-step-by-step-guide) which is also important for their efficacy in generating good apps.
+- [Replit Agents](https://docs.replit.com/replitai/agent) only currently support [Postgres via Neon](https://neon.com/blog/building-a-news-app-with-replit-agent-a-step-by-step-guide) which is also important for their efficacy in generating good apps.
 
 If these agents had to support a bunch of different frontend frameworks, or various storage providers, they wouldn’t work as well. This might become less relevant in the future as the models get better, but just like specialized software engineers can generally outperform generic engineers when operating with their comfort stack, the same might be true for all AI agents going forward.
 
@@ -94,7 +94,7 @@ console.log(await toolkit.sql(project, `SELECT name FROM users`));
 await toolkit.deleteProject(project);
 ```
 
-Since you can access the underlying `toolkit.apiClient`, you can already perform any action from the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). However, we’ll be streamlining more features through the higher-level API such as [branching](https://neon.tech/docs/introduction/branching) and [autoscaling](https://neon.tech/docs/introduction/autoscaling) configuration. Furthermore, we’ll soon expose an easier way for consumers to dictate whether they wish to connect via HTTP, WebSockets or good old TCP. (The default will continue to be HTTP.)
+Since you can access the underlying `toolkit.apiClient`, you can already perform any action from the [Neon API](https://neon.com/docs/reference/api/get-started). However, we’ll be streamlining more features through the higher-level API such as [branching](https://neon.com/docs/introduction/branching) and [autoscaling](https://neon.com/docs/introduction/autoscaling) configuration. Furthermore, we’ll soon expose an easier way for consumers to dictate whether they wish to connect via HTTP, WebSockets or good old TCP. (The default will continue to be HTTP.)
 
 ### Building Agents? Try it. Join us.
 

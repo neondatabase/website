@@ -49,7 +49,7 @@ To create a project, visit the [Neon console](https://console.neon.tech/app/proj
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/auth-setup-with-neon-keycloak-and-koyeb/create-project-1024x595-1e65d318.png)
 
-Create the Keycloak database by visiting the [SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor) section of your project, and running the following query:
+Create the Keycloak database by visiting the [SQL Editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor) section of your project, and running the following query:
 
 ```sql
 CREATE DATABASE keycloak;
@@ -59,17 +59,17 @@ You can verify that the `keycloak` database was created by viewing the **Databas
 
 ## Configure a Keycloak Database User
 
-Instead of accessing your new `keycloak` database using the default user with the [`neon_superuser`](https://neon.tech/docs/manage/roles#the-neonsuperuser-role) role, creating a new user named `keycloak_admin` is best. This new user will have administrative privileges limited to the `keycloak` database.
+Instead of accessing your new `keycloak` database using the default user with the [`neon_superuser`](https://neon.com/docs/manage/roles#the-neonsuperuser-role) role, creating a new user named `keycloak_admin` is best. This new user will have administrative privileges limited to the `keycloak` database.
 
 Use the Neon SQL Editor to input the commands to create the user and assign permissions:
 
 1. Visit the **SQL Editor** in your project.
 2. Select the `keycloak` database using the dropdown menu in the top-right.
 
-Issue the following command to create a new user named `keycloak_admin`, making sure to replace the password with a value that has 60 bits of entropy, [per our documentation](https://neon.tech/docs/manage/roles#manage-roles-with-sql):
+Issue the following command to create a new user named `keycloak_admin`, making sure to replace the password with a value that has 60 bits of entropy, [per our documentation](https://neon.com/docs/manage/roles#manage-roles-with-sql):
 
 ```sql
-/* Create a strong password per: https://neon.tech/docs/manage/roles */
+/* Create a strong password per: https://neon.com/docs/manage/roles */
 CREATE USER keycloak_admin WITH PASSWORD 'r3plac3_th1s';
 
 /* Assign permissions to the `keycloak_admin` user */
@@ -148,4 +148,4 @@ Click the **Sign In** button in the top right corner to initiate the OAuth-based
 
 ## Conclusion and Next Steps
 
-Now you know how to use Neon as your Postgres storage provider for Keycloak. Consider crafting an [optimized Keycloak container](https://www.keycloak.org/server/containers#_creating_a_customized_and_optimized_container_image) for production deployment to decrease startup time, and refer to the [Keycloak database configuration guide](https://www.keycloak.org/server/db) for information on connection pooling and other database configuration properties. You can also experiment with Neon’s branching and [point-in-time restore](https://neon.tech/docs/guides/branching-pitr) capability to discover how to restore Keycloak data to an earlier version if needed.
+Now you know how to use Neon as your Postgres storage provider for Keycloak. Consider crafting an [optimized Keycloak container](https://www.keycloak.org/server/containers#_creating_a_customized_and_optimized_container_image) for production deployment to decrease startup time, and refer to the [Keycloak database configuration guide](https://www.keycloak.org/server/db) for information on connection pooling and other database configuration properties. You can also experiment with Neon’s branching and [point-in-time restore](https://neon.com/docs/guides/branching-pitr) capability to discover how to restore Keycloak data to an earlier version if needed.

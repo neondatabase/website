@@ -56,6 +56,7 @@ export default {
   docsMigration: '/docs/import/import-data-assistant',
   docsPgvector: '/docs/extensions/pgvector',
   instantRestore: '/docs/introduction/branch-restore',
+  lakebaseSearch: '/docs/ai/lakebase-search',
   manageBilling: '/docs/introduction/manage-billing',
   migrationIntro: '/docs/import/migrate-intro',
   docsExtensionsPgVector: '/docs/extensions/pgvector',
@@ -78,7 +79,7 @@ export default {
   californiaPolicy:
     'https://www.databricks.com/legal/supplemental-privacy-notice-california-residents',
   cookiePolicy: '/cookie-policy',
-  subprocessors: '/subprocessors',
+  subprocessors: 'https://www.databricks.com/legal/databricks-subprocessors',
   businessInformation: '/business-info',
   hipaaCompliance: '/docs/security/hipaa',
   hipaaContractors: '/hipaa-contractors',

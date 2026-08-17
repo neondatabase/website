@@ -118,8 +118,8 @@ I’m sure you agree with us—**this is such an inefficient way to do cloud**. 
 
 [Neon](https://neon.tech/home) is a managed Postgres provider that offers solutions for this problem. We’ve built a serverless platform for Postgres that allows you to pay only for the compute you’re using:
 
-- [Neon’s autoscaling](https://neon.tech/docs/introduction/autoscaling) eliminates the need to overprovision your production database. Your production database dynamically autoscales according to load between minimum and maximum limits defined by you—you get full capacity when traffic peaks and save money when things are slower.
-- To lower the costs of your non-prod databases, Neon comes with [scale-to-zero functionality](https://neon.tech/docs/introduction/auto-suspend). When your non-prod databases are not being accessed, they are automatically paused by the platform—you only pay for compute when you’re using them, period.
+- [Neon’s autoscaling](https://neon.com/docs/introduction/autoscaling) eliminates the need to overprovision your production database. Your production database dynamically autoscales according to load between minimum and maximum limits defined by you—you get full capacity when traffic peaks and save money when things are slower.
+- To lower the costs of your non-prod databases, Neon comes with [scale-to-zero functionality](https://neon.com/docs/introduction/auto-suspend). When your non-prod databases are not being accessed, they are automatically paused by the platform—you only pay for compute when you’re using them, period.
 
 Neon has [a Free plan](https://neon.tech/pricing) with more than enough resources to get started and get a feel for the experience. Create an account in seconds [here](https://console.neon.tech/signup).
 

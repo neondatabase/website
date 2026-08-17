@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.43.0",
+  "neonctlVersion": "3.2.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -379,7 +379,7 @@
             },
             "protected": {
               "type": "boolean",
-              "describe": "Whether the branch is protected"
+              "describe": "Whether the branch is protected. Protected branches (and their computes) cannot be deleted, archived, or reset, and block deletion of the project. Can be gated by `protected_branches_only` in the IP allowlist. Paid plans only."
             },
             "psql": {
               "type": "boolean",
@@ -659,7 +659,16 @@
               "type": "string"
             }
           ],
-          "options": {},
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
           "commands": {},
           "describe": "Delete a bucket from a branch",
           "usage": "$0 bucket delete <name> [options]"
@@ -670,7 +679,16 @@
             "ls"
           ],
           "positionals": [],
-          "options": {},
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
           "commands": {},
           "describe": "List the buckets on a branch",
           "usage": "$0 bucket list [options]"
@@ -932,7 +950,8 @@
               "default": true
             },
             "services": {
-              "type": "string"
+              "type": "array",
+              "describe": "Services the scaffolded neon.ts declares: auth, functions, object-storage, ai-gateway. Pass \"none\" for the bare starter policy. Repeat the flag or comma-separate. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY."
             }
           },
           "commands": {},
@@ -1443,9 +1462,17 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "env": {
+              "type": "array",
+              "alias": "e"
+            },
             "file": {
               "type": "string",
               "describe": "Target .env file to write. Defaults to an existing .env, otherwise .env.local. Only Neon variables are updated; other lines are preserved."
+            },
+            "service": {
+              "type": "array",
+              "describe": "Pull only these services' variables: postgres, auth, data-api, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
             }
           },
           "commands": {},
@@ -1458,6 +1485,18 @@
             {
               "command": "$0 env pull --branch preview --file .env.preview",
               "description": "Pull a specific branch into a specific file"
+            },
+            {
+              "command": "$0 env pull -s ai-gateway -s postgres",
+              "description": "Pull only the AI Gateway and Postgres variables"
+            },
+            {
+              "command": "$0 env pull -e DATABASE_URL",
+              "description": "Pull only the pooled Postgres connection string"
+            },
+            {
+              "command": "$0 env pull -s auth -e DATABASE_URL",
+              "description": "Pull all Auth variables plus DATABASE_URL"
             }
           ],
           "usage": "$0 env pull [options]"
@@ -1836,7 +1875,7 @@
         },
         "branch": {
           "type": "string",
-          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neonctl checkout <branch>` (link never guesses a default).",
+          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neon checkout <branch>` (link never guesses a default).",
           "alias": "branch-id"
         },
         "checks": {
@@ -1903,9 +1942,179 @@
         },
         {
           "command": "$0 link --project-id polished-snowflake-12345678",
-          "description": "Link an existing project (org is inferred); pin a branch later with 'neonctl checkout'"
+          "description": "Link an existing project (org is inferred); pin a branch later with 'neon checkout'"
         }
       ]
+    },
+    "logs": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "field-values": {
+          "name": "field-values",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "field",
+              "required": true,
+              "describe": "The log field to list values for. Must be one of the names `logs fields` reports.",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "end-time": {
+              "type": "string",
+              "describe": "Exclusive end of the window (RFC 3339). Defaults to the current time."
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of distinct values to return (1-1000)"
+            },
+            "since": {
+              "type": "string",
+              "describe": "Length of the window, ending at --end-time or now. Defaults to 6h; the maximum window is 7d. Mutually exclusive with --start-time."
+            },
+            "source": {
+              "type": "string",
+              "describe": "Only consider records emitted by this service",
+              "choices": [
+                "function",
+                "storage",
+                "pg_endpoint"
+              ]
+            },
+            "start-time": {
+              "type": "string",
+              "describe": "Inclusive start of the window (RFC 3339, e.g. 2025-01-01T00:00:00Z). The maximum window is 7d. Mutually exclusive with --since."
+            }
+          },
+          "commands": {},
+          "describe": "List the distinct values observed for a log field",
+          "examples": [
+            {
+              "command": "$0 logs field-values service_name --since 6h",
+              "description": "Service names seen in the last six hours"
+            }
+          ]
+        },
+        "fields": {
+          "name": "fields",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List the log fields whose values can be discovered on a branch"
+        },
+        "query": {
+          "name": "query",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "body-contains": {
+              "type": "string",
+              "describe": "Match the case-sensitive rendered message. Structured bodies are rendered as compact JSON."
+            },
+            "cursor": {
+              "type": "string",
+              "describe": "Pagination cursor returned as next_cursor by a previous call. Repeat the same time range and filters."
+            },
+            "end-time": {
+              "type": "string",
+              "describe": "Exclusive end of the window (RFC 3339). Defaults to the current time."
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of records to return per page (1-1000)",
+              "default": 100
+            },
+            "logql": {
+              "type": "string",
+              "describe": "Raw LogQL expression (stream selectors and line filters only). Replaces the structured filters; the window, --limit, --sort-order and --cursor still apply."
+            },
+            "minimum-severity": {
+              "type": "string",
+              "describe": "Only records at or above this severity. Combines with --severity-text. If Neon reports that this filter is unsupported, use --severity-text instead.",
+              "choices": [
+                "trace",
+                "debug",
+                "info",
+                "warn",
+                "error",
+                "fatal"
+              ]
+            },
+            "scope-name": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry instrumentation scope name exactly"
+            },
+            "service-name": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry service.name resource attribute exactly"
+            },
+            "severity-text": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry severity text exactly. Run `neon logs field-values severity_text` to discover the values present."
+            },
+            "since": {
+              "type": "string",
+              "describe": "Length of the window, ending at --end-time or now. Defaults to 1h; the maximum window is 7d. Mutually exclusive with --start-time."
+            },
+            "sort-order": {
+              "type": "string",
+              "describe": "Order records by timestamp. Defaults to desc (newest first).",
+              "choices": [
+                "asc",
+                "desc"
+              ]
+            },
+            "source": {
+              "type": "string",
+              "describe": "Only records emitted by this service",
+              "choices": [
+                "function",
+                "storage",
+                "pg_endpoint"
+              ]
+            },
+            "start-time": {
+              "type": "string",
+              "describe": "Inclusive start of the window (RFC 3339, e.g. 2025-01-01T00:00:00Z). The maximum window is 7d. Mutually exclusive with --since."
+            },
+            "trace-id": {
+              "type": "string",
+              "describe": "Match records carrying this trace ID (32 lowercase hex digits)"
+            }
+          },
+          "commands": {},
+          "describe": "Query log records on a branch",
+          "examples": [
+            {
+              "command": "$0 logs query --since 1h --logql '{entity_type=\"function\"} |= \"timeout\"'",
+              "description": "A raw LogQL selection instead of the structured filters"
+            },
+            {
+              "command": "$0 logs query --branch main --source pg_endpoint --minimum-severity error",
+              "description": "Postgres compute errors on main"
+            },
+            {
+              "command": "$0 logs query --since 30m",
+              "description": "The last 30 minutes of logs on the default branch"
+            }
+          ]
+        }
+      },
+      "describe": "Query branch logs",
+      "usage": "$0 logs <sub-command> [options]"
     },
     "me": {
       "aliases": [],
@@ -2509,6 +2718,25 @@
       "describe": "Manage Neon Auth",
       "usage": "$0 neon-auth <sub-command> [options]"
     },
+    "open": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID (defaults to the project linked in .neon)"
+        }
+      },
+      "commands": {},
+      "describe": "Open the linked project in the Neon Console",
+      "usage": "$0 open [options]",
+      "examples": [
+        {
+          "command": "$0 open",
+          "description": ""
+        }
+      ]
+    },
     "operations": {
       "aliases": [
         "operation"
@@ -2552,13 +2780,61 @@
       "describe": "Manage organizations",
       "usage": "$0 orgs <sub-command> [options]"
     },
-    "profiles": {
+    "profile": {
       "aliases": [
-        "profile"
+        "profiles"
       ],
       "positionals": [],
       "options": {},
       "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "Name for the new profile",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "api-key": {
+              "type": "string",
+              "describe": "API key to store, or \"-\" to read it from stdin"
+            },
+            "force": {
+              "type": "boolean",
+              "describe": "Replace an existing profile, revoking the credential it holds now",
+              "default": false
+            },
+            "mint": {
+              "type": "boolean",
+              "describe": "Sign in once in the browser, then store a freshly minted API key and nothing else",
+              "default": false
+            },
+            "org-id": {
+              "type": "string",
+              "describe": "With --mint, mint a key for this organization instead of your account"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "With --mint, mint a key that can access only this project"
+            }
+          },
+          "commands": {},
+          "describe": "Create a profile. It holds either a browser sign-in or an API key, never both",
+          "examples": [
+            {
+              "command": "$0 profile create work",
+              "description": "Sign in with the browser, like `neon auth --profile work`"
+            },
+            {
+              "command": "$0 profile create ci --mint --org-id org-abc-123",
+              "description": "One browser sign-in, then an org-scoped key and no session left behind"
+            }
+          ]
+        },
         "list": {
           "name": "list",
           "aliases": [],
@@ -2587,11 +2863,26 @@
             }
           },
           "commands": {},
-          "describe": "Revoke a profile's token and remove it"
+          "describe": "Revoke a profile's credential where possible, and remove it"
+        },
+        "rotate-key": {
+          "name": "rotate-key",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "Profile to rotate",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Mint a fresh API key for a profile, at the same scope, and revoke the one it replaces"
         }
       },
       "describe": "Manage named sets of Neon credentials",
-      "usage": "$0 profiles <sub-command> [options]"
+      "usage": "$0 profile <sub-command> [options]"
     },
     "projects": {
       "aliases": [
@@ -2919,7 +3210,7 @@
         }
       },
       "commands": {},
-      "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
+      "describe": "Deprecated: use `neon link`. Set the .neon context (raw write).",
       "usage": "$0 set-context [options]"
     },
     "snapshots": {

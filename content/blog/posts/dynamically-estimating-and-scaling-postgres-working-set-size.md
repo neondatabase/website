@@ -38,11 +38,11 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/dynamically-estimating-and-scaling-postgres-working-set-size/neon-dynamically-estimate-2-1024x576-fc58a6e2.jpg)
 
-[With the announcement that Neon’s autoscaling feature is GA](https://neon.tech/blog/neon-autoscaling-is-generally-available), we wanted to take the opportunity to dive into the implementation of a recent improvement we made: Scaling to match your workload’s working set size. This can provide _extraordinary_ speed-ups for real-world workloads, but it’s a complex problem with no single “right” answer.
+[With the announcement that Neon’s autoscaling feature is GA](https://neon.com/blog/neon-autoscaling-is-generally-available), we wanted to take the opportunity to dive into the implementation of a recent improvement we made: Scaling to match your workload’s working set size. This can provide _extraordinary_ speed-ups for real-world workloads, but it’s a complex problem with no single “right” answer.
 
 In this post, we’ll look at the technical details of how we estimate the working set size and automatically scale your Postgres instance to keep the working set in memory – without breaking the bank.
 
-_Neon separates storage and compute to provide autoscaling, branching, point-in-time restore, and more. In this post, we’re only referring to scaling_ **_compute_**_. For more on Neon’s architecture, check out [this pos](https://neon.tech/blog/architecture-decisions-in-neon)_ [t](https://neon.tech/blog/architecture-decisions-in-neon)_._
+_Neon separates storage and compute to provide autoscaling, branching, point-in-time restore, and more. In this post, we’re only referring to scaling_ **_compute_**_. For more on Neon’s architecture, check out [this pos](https://neon.com/blog/architecture-decisions-in-neon)_ [t](https://neon.com/blog/architecture-decisions-in-neon)_._
 
 ## Working set size: Why is it so important?
 
@@ -81,7 +81,7 @@ As a brief refresher in case you’re not intimately familiar:
 
 HyperLogLog is great for estimating the cardinality of sets with unknown size, but there’s no way to handle incremental changes in cardinality from _removing_ elements – continually storing the maximum in each register means the information from any individual item has already been removed.
 
-We did originally experiment with a typical HLL implementation by instrumenting page access in our custom resizable cache ([LFC](https://neon.tech/blog/scaling-serverless-postgres#local-file-cache)) to count the number of distinct pages – but since it measured the number of distinct pages accessed since Postgres started, the calculated sizes were far greater than what users were _currently_ using.
+We did originally experiment with a typical HLL implementation by instrumenting page access in our custom resizable cache ([LFC](https://neon.com/blog/scaling-serverless-postgres#local-file-cache)) to count the number of distinct pages – but since it measured the number of distinct pages accessed since Postgres started, the calculated sizes were far greater than what users were _currently_ using.
 
 ## Estimating working set size, part 2: What’s the “true” size?
 
@@ -106,7 +106,7 @@ One assumption that helped was that we knew we only cared about the number of di
 
 Doing this gives us a way to estimate the number of distinct pages accessed since some arbitrary time in the past, which gave us much more data to use in experimentation – and as we’ll see below, plenty of data to use in the final algorithm as well.
 
-**Pro-tip:** You can try this out yourself! We implemented this as the Postgres function `neon.approximate_working_set_size_seconds(d)`, which returns the HLL estimate of the working set size (i.e. number of distinct pages accessed) for the last d seconds. Check out [our docs](https://neon.tech/docs/extensions/neon) for more information on how to use the `neon` extension.
+**Pro-tip:** You can try this out yourself! We implemented this as the Postgres function `neon.approximate_working_set_size_seconds(d)`, which returns the HLL estimate of the working set size (i.e. number of distinct pages accessed) for the last d seconds. Check out [our docs](https://neon.com/docs/extensions/neon) for more information on how to use the `neon` extension.
 
 ### Keeping it simple: Finding a heuristic
 
@@ -227,4 +227,4 @@ Although they also state the following:
 
 Perhaps there’s room to standardize on something to get merged into Postgres upstream?
 
-<br />_If you’ve enjoyed hearing about how this piece of Neon’s autoscaling works, check out [our other engineering blog posts](https://neon.tech/blog/category/engineering)._
+<br />_If you’ve enjoyed hearing about how this piece of Neon’s autoscaling works, check out [our other engineering blog posts](https://neon.com/blog/category/engineering)._

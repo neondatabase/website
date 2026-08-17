@@ -50,7 +50,7 @@ Imagine you are a pastry chef, and someone asks you how to make a good chocolate
 
 When the user asks the LLM a question, the RAG pipeline does the search to provide more context and helps steer the model towards a more accurate and helpful answer. Typically, the context is a piece of information stored in a document or a database that the model hasn’t seen during training.
 
-The below diagram illustrates the RAG process using [Neon Docs](https://neon.tech/docs/introduction) Chatbot as an example. The diagram shows three main steps:
+The below diagram illustrates the RAG process using [Neon Docs](https://neon.com/docs/introduction) Chatbot as an example. The diagram shows three main steps:
 
 1. Embedding generation: we need an embedding model to turn the user’s query into a query vector.
 2. Context retrieval: This is the process of looking for the information in a document or a database using similarity search.

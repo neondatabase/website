@@ -177,6 +177,6 @@ Get started today at [https://neon.tech](https://neon.tech) and create a Postgre
 <figcaption>Create a PostgreSQL 15 project on Neon</figcaption>
 </figure>
 
-Do you want to migrate your current project to PostgreSQL 15 with Neon? Follow the instructions in [import data from PostgreSQL](https://neon.tech/docs/import/import-from-postgres).
+Do you want to migrate your current project to PostgreSQL 15 with Neon? Follow the instructions in [import data from PostgreSQL](https://neon.com/docs/import/import-from-postgres).
 
 Let us know what other features you liked in this release. Share your ideas at [https://community.neon.tech/](https://community.neon.tech/).

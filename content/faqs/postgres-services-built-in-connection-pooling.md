@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?"
-description: "Neon runs PgBouncer on every database. Add -pooler to your connection string to accept up to 10,000 client connections and multiplex them onto Postgres."
+description: "Every database on Neon runs PgBouncer. Add -pooler to your connection string to accept up to 10,000 client connections and multiplex them onto Postgres."
 date: 2026-04-25
 slug: postgres-services-built-in-connection-pooling
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: postgres-services-capping-monthly-spend-autoscaling
 ---
 
-Neon has a managed PgBouncer pooler on every database. You don't run it, scale it, or configure it. To use it, switch your connection string to the pooled hostname.
+Every database on Neon includes a managed PgBouncer pooler. You don't run it, scale it, or configure it. To use it, switch your connection string to the pooled hostname.
 
 ## The two connection strings
 
@@ -21,19 +21,19 @@ Each Neon branch exposes both a direct and a pooled endpoint. They differ by one
 
 ```text
 # Direct connection (max_connections per compute)
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 
 # Pooled connection (up to 10,000 client connections)
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 For Lambdas, Vercel Functions, Cloudflare Workers, or any connection-per-request framework, use the pooled string.
 
 ## Why this matters under load
 
-Postgres limits direct connections based on RAM. On a 0.25 CU Neon compute, `max_connections` is 104 (with 7 reserved for the superuser). A burst of 200 serverless invocations would saturate that. PgBouncer accepts up to **10,000 client connections** and multiplexes them onto a smaller pool of actual Postgres connections, sized at 90% of `max_connections`. Most invocations spend their time waiting for upstream IO, not running SQL, so the multiplexing usually works.
+Postgres limits direct connections based on RAM. On a 0.25 CU Neon compute (≈1 GB RAM), `max_connections` is 104 (with 7 reserved for the superuser). A burst of 200 serverless invocations would saturate that. PgBouncer accepts up to **10,000 client connections** and multiplexes them onto a smaller pool of actual Postgres connections, sized at 90% of `max_connections`. Most invocations spend their time waiting for upstream IO, not running SQL, so the multiplexing usually works.
 
-See the full [pooling architecture](https://neon.com/docs/connect/connection-pooling) for limits and timeouts.
+See the full [pooling architecture](/docs/connect/connection-pooling) for limits and timeouts.
 
 ## Transaction mode trade-offs
 

@@ -90,7 +90,7 @@ But when it came to choosing a database, Rhythmic doubled down on Neon. **Neon o
 ## Making it Easy With the Neon Azure Native Integration
 
 <Admonition type="note" title="for azure teams">
-Our Azure Native Integration is now generally available. [Read the announcement to get familiar with what it offers](https://neon.tech/blog/azure-native-integration-ga)—if you’re running on Azure, this gives you a Neon experience that’s deeply integrated, just like any other Azure-native service.
+Our Azure Native Integration is now generally available. [Read the announcement to get familiar with what it offers](https://neon.com/blog/azure-native-integration-ga)—if you’re running on Azure, this gives you a Neon experience that’s deeply integrated, just like any other Azure-native service.
 </Admonition>
 
 Rhythmic was already using Neon in their initial stack, on an non-Azure Neon tenant. After joining [Microsoft for Startups](https://www.microsoft.com/en-us/startups) and shifting to Azure for long-term compliance and partner alignment, Neon’s integration with the Azure ecosystem made the transition smooth. What stood out:
@@ -116,7 +116,7 @@ Instead of reaching for a specialized vector database, Rhythmic is sticking with
 
 ## Try Neon on Azure and Start Building
 
-If you’re building on Azure, Neon’s Native Integration makes it easier than ever to get started. You get the same serverless Postgres experience loved by developers but with full Azure billing integration, support for Microsoft SSO, and [eligibility toward your MACC.](https://neon.tech/docs/introduction/billing-azure-marketplace#microsoft-azure-consumption-commitment-macc)
+If you’re building on Azure, Neon’s Native Integration makes it easier than ever to get started. You get the same serverless Postgres experience loved by developers but with full Azure billing integration, support for Microsoft SSO, and [eligibility toward your MACC.](https://neon.com/docs/introduction/billing-azure-marketplace#microsoft-azure-consumption-commitment-macc)
 
 Spin up your first Neon project directly from the [Azure Marketplace](https://azuremarketplace.microsoft.com/) or the [Azure Portal](https://portal.azure.com/), and start building with serverless Postgres that scales with you.
 

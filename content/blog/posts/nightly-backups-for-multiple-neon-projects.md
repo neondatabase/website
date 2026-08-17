@@ -37,7 +37,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/nightly-backups-for-multiple-neon-projects/neon-nightly-backups-1-1024x576-70fb49bb.jpg)
 
-**This is the second post of a series on automating nightly backups for multiple Neon projects**. [In the first post](https://neon.tech/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups), I covered how to configure AWS to set up the S3 buckets. In this post, I’ll explain how to set up nightly backups for multiple Neon Postgres databases using GitHub Actions and pg_dump/restore.
+**This is the second post of a series on automating nightly backups for multiple Neon projects**. [In the first post](https://neon.com/blog/how-to-create-an-aws-s3-bucket-for-postgres-backups), I covered how to configure AWS to set up the S3 buckets. In this post, I’ll explain how to set up nightly backups for multiple Neon Postgres databases using GitHub Actions and pg_dump/restore.
 
 There are three main components to creating this kind of scheduled backup:
 

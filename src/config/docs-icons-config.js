@@ -281,6 +281,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/knex.svg',
     darkIconPath: null,
   },
+  kotlin: {
+    name: 'kotlin',
+    lightIconPath: '/images/technology-logos/kotlin.svg',
+    darkIconPath: null,
+  },
   koyeb: {
     name: 'koyeb',
     lightIconPath: '/images/technology-logos/koyeb.svg',

@@ -66,7 +66,7 @@ As they progressed on their Neon journey, Velocity discovered more unexpected be
 
 Keeping development environments in sync with production is a challenge that most teams experience. The traditional way to handle this is to set up local instances, manage migrations manually, and constantly keep an eye on things to ensure staging and dev environments reflect the latest schema. Neon’s [branching model](https://neon.tech/flow) flips this on its head.
 
-Instead of copying production data or spinning up entirely separate databases, [Neon lets developers instantly create branches](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write)—lightweight, copy-on-write database clones. These branches can be used to test schema changes, debug issues, or validate migrations without risking production data.
+Instead of copying production data or spinning up entirely separate databases, [Neon lets developers instantly create branches](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write)—lightweight, copy-on-write database clones. These branches can be used to test schema changes, debug issues, or validate migrations without risking production data.
 
 <blockquote>
 <p><strong>“We use Neon branching in our development process to find issues, test migrations, and experiment safely. We create dev branches, test changes, and delete them when we’re done. It makes development faster and cleaner” </strong>(<a href="https://x.com/talkain">Tal Kain</a>, Founder and CEO at <a href="https://velocity.tech/">Velocity</a>)</p>
@@ -90,7 +90,7 @@ At Neon, we’re deeply invested in the success of our customers. Unlike AWS, [w
 
 ### Experimenting with pgvector for embeddings
 
-Velocity isn’t just handling traditional relational workloads on Neon: they’re also experimenting with vector search as part of their AI-powered incident response platform. By using [pgvector](https://neon.tech/docs/extensions/pgvector) on Neon, they can store and query embeddings directly alongside structured data, simplifying their architecture. Rather than relying on a patchwork of specialized databases, Velocity aims to consolidate its data stack—why use many databases when there’s a solution (Postgres) capable of handling everything?
+Velocity isn’t just handling traditional relational workloads on Neon: they’re also experimenting with vector search as part of their AI-powered incident response platform. By using [pgvector](https://neon.com/docs/extensions/pgvector) on Neon, they can store and query embeddings directly alongside structured data, simplifying their architecture. Rather than relying on a patchwork of specialized databases, Velocity aims to consolidate its data stack—why use many databases when there’s a solution (Postgres) capable of handling everything?
 
 <blockquote>
 <p><strong>“We’ve started using pgvector on Neon for embeddings, and so far, performance has been great. We tried other solutions that couldn’t scale with us, but Neon handled it smoothly”</strong> (<a href="https://x.com/talkain">Tal Kain</a>, Founder and CEO at <a href="https://velocity.tech/">Velocity</a>)</p>

@@ -48,7 +48,7 @@ This article will cover how Neon’s data branching works and how you can use it
 
 ## What is a branch?
 
-A branch acts as an isolated environment for working with your database. It is a [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) clone of your data where you can make modifications without affecting the originating data. Each Neon project has a [root branch](https://neon.tech/docs/reference/glossary#root-branch) called the main, and you can create more branches depending on your needs.
+A branch acts as an isolated environment for working with your database. It is a [copy-on-write](https://en.wikipedia.org/wiki/Copy-on-write) clone of your data where you can make modifications without affecting the originating data. Each Neon project has a [root branch](https://neon.com/docs/reference/glossary#root-branch) called the main, and you can create more branches depending on your needs.
 
 ## Creating a branch
 
@@ -62,13 +62,13 @@ You will then need to select a parent branch. If this is your first branch, then
 
 - **Head**: creates a branch with all data from the parent branch up to the current point in time.
 - **Time**: creates a branch and pulls all data from the parent branch up to a certain point in time. This feature enables you to restore your database to a previous state within a specific time window. During the technical preview, we offer a window of 7 days.
-- **LSN**: creates a branch and pulls all data from the parent branch up to a certain LSN ([Log Sequence Number](https://neon.tech/docs/reference/glossary/#lsn)). This is a pointer to a location in the WAL ([Write-Ahead Log](https://neon.tech/docs/reference/glossary/#wal)), which is the log of changes made to the database cluster.
+- **LSN**: creates a branch and pulls all data from the parent branch up to a certain LSN ([Log Sequence Number](https://neon.com/docs/reference/glossary/#lsn)). This is a pointer to a location in the WAL ([Write-Ahead Log](https://neon.com/docs/reference/glossary/#wal)), which is the log of changes made to the database cluster.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/time-travel-with-postgres/image-6-1024x576-a939e6aa.png)
 
 If you have a rough idea of when the database was in the correct state, pick the “Time” option.
 
-Alternatively, you can also create branches via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). To do that, you will first need to generate an API key. Go to the profile icon in the upper right corner and choose the “Account” option from the dropdown menu. Next, go to the Developer Settings tab and click on “Generate new API key”
+Alternatively, you can also create branches via the [Neon API](https://neon.com/docs/reference/api/get-started). To do that, you will first need to generate an API key. Go to the profile icon in the upper right corner and choose the “Account” option from the dropdown menu. Next, go to the Developer Settings tab and click on “Generate new API key”
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/time-travel-with-postgres/image-7-1024x576-96c2b22b.png)
 
@@ -297,6 +297,6 @@ Now you can create a branch using this LSN value and restore your database to th
 
 In this article, you learned how to create branches for your Neon project and how you can leverage Neon’s API along with point-in-time branches to restore your database to a correct state.
 
-Neon is currently in [Technical Preview](https://neon.tech/docs/introduction/roadmap), meaning you can [sign up](https://console.neon.tech/sign_in) and try out the platform. If you have any feedback, feel free to email us at [feedback@neon.tech](mailto:feedback@neon.tech), we would love to hear from you.
+Neon is currently in [Technical Preview](https://neon.com/docs/introduction/roadmap), meaning you can [sign up](https://console.neon.tech/sign_in) and try out the platform. If you have any feedback, feel free to email us at [feedback@neon.tech](mailto:feedback@neon.tech), we would love to hear from you.
 
 Finally, if you would like to keep up with our latest updates, make sure to subscribe to our newsletter down below.

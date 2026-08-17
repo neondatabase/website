@@ -49,7 +49,7 @@ If you’re running a B2B SaaS company that operates across multiple regions and
 
 Managing a multi-tenant design like this with traditionally managed Postgres solutions like AWS RDS is challenging. If you’re using RDS, chances are you’re hosting all your customers’ data in the same instance. Over time, that instance grows larger and larger, turning into a major bottleneck for your team as maintenance and scaling become increasingly difficult.
 
-Good news: Neon can help. Instead of cramming multiple customers into a single database, Neon makes it easy to give each customer their own region-specific, dedicated project. This ensures simpler compliance management, better performance, and smooth scalability up to [hundreds of thousands of customers.](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
+Good news: Neon can help. Instead of cramming multiple customers into a single database, Neon makes it easy to give each customer their own region-specific, dedicated project. This ensures simpler compliance management, better performance, and smooth scalability up to [hundreds of thousands of customers.](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
 
 ## The Challenges of Multi-Tenant Architectures in B2B SaaS
 
@@ -112,11 +112,11 @@ For companies expanding globally, Neon’s architecture makes it easy to comply 
 
 ### Per-customer data management and restores
 
-Since each customer gets their own project, managing backups, restores, and upgrades is far simpler than in a shared database model. If a customer needs a restore, [their data can be instantly recovered](https://neon.tech/blog/recover-large-postgres-databases) independently without affecting anyone else. When a customer offboards, their data can be securely removed without impacting other tenants, ensuring clean and efficient data lifecycle management.
+Since each customer gets their own project, managing backups, restores, and upgrades is far simpler than in a shared database model. If a customer needs a restore, [their data can be instantly recovered](https://neon.com/blog/recover-large-postgres-databases) independently without affecting anyone else. When a customer offboards, their data can be securely removed without impacting other tenants, ensuring clean and efficient data lifecycle management.
 
 ## Why Managing Thousands of Projects is Easy with the Neon API
 
-Managing thousands of projects might sound overwhelming, but this is where Neon’s unique API makes a huge difference. Unlike traditional managed databases, where provisioning and managing instances at scale is complex and expensive, [Neon is built from the ground up for programmatic deployment at scale.](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
+Managing thousands of projects might sound overwhelming, but this is where Neon’s unique API makes a huge difference. Unlike traditional managed databases, where provisioning and managing instances at scale is complex and expensive, [Neon is built from the ground up for programmatic deployment at scale.](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
 
 Here’s what makes Neon’s API stand out:
 
@@ -157,7 +157,7 @@ As we saw at the beginning of the post, if you’re using AWS RDS for Postgres, 
 With Neon, you get built-in isolation from the start, and scaling happens on a per-customer basis. Instead of dealing with rigid instances, you get a flexible, serverless approach that adjusts based on actual demand—and you can manage your entire fleet via the API.
 
 <Admonition type="info" title="Read a case study">
-[OpusFlow switched from AWS RDS to Neon](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) to manage tenant isolation without the need for a dedicated team.
+[OpusFlow switched from AWS RDS to Neon](https://neon.com/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) to manage tenant isolation without the need for a dedicated team.
 </Admonition>
 
 ## Try it

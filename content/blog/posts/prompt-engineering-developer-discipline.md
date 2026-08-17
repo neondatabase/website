@@ -39,7 +39,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/prompt-engineering-developer-discipline/ad4nxc5hjjdsbkfedl0ytkmcs5npm0vlnwttagols7ltqhcjdknahwhv-r7mfx6rtpge53of35lxirfzyhg3gqq3wn948kj9lneb9tke6modpgt43det8ejwawvxe1xhmyeotocrjg-62b8d404.png)
 
-But ‘using AI’ doesn’t necessarily mean [vibe coding](https://neon.tech/blog/tab-coding-cursor) your application into oblivion. Using AI as a developer means two things:
+But ‘using AI’ doesn’t necessarily mean [vibe coding](https://neon.com/blog/tab-coding-cursor) your application into oblivion. Using AI as a developer means two things:
 
 1. Understanding that AI is an ideal pair-programming partner
 2. Understanding how to get the most out of AI to create the code you want
@@ -746,7 +746,7 @@ Stop treating your prompts like throwaway strings. Build them like software, tes
 
 ---
 
-_Neon is the serverless Postgres database [used by Replit Agent and Create.xyz](https://neon.tech/blog/provision-postgres-neon-api) to provision databases when building apps. It also works like a charm with Cursor and Windsurf [via its MCP Server](https://neon.tech/guides/cursor-mcp-neon)._
+_Neon is the serverless Postgres database [used by Replit Agent and Create.xyz](https://neon.com/blog/provision-postgres-neon-api) to provision databases when building apps. It also works like a charm with Cursor and Windsurf [via its MCP Server](https://neon.tech/guides/cursor-mcp-neon)._
 
 <Admonition type="note" title="Try Neon - $100 on us">
 If you haven't tried Neon yet, [sign up via this link](https://fyi.neon.tech/credits) and get $100 in credits.

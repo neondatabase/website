@@ -12,7 +12,7 @@ summary: >-
   `PrismaNeon` driver adapter.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.
@@ -64,7 +64,7 @@ SHOW wal_level;
 1. If you haven't already done so, create a new account or sign in on the [Prisma Data Platform](https://pris.ly/pdp?utm_source=neon&utm_medium=pulse-guide).
 2. In the [Prisma Data Platform Console](https://console.prisma.io?utm_source=neon&utm_medium=pulse-guide) create a new project by clicking the **New project** button.
 3. In the **New project** configuration, select **Pulse** as your starting point.
-4. Copy your database connection string from Neon into the database connection input field on the Platform Console.
+4. Copy your database connection string from Neon into the database connection input field on the Platform Console. Use a direct connection to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers, so make sure the connection string does not include `-pooler` in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
 5. Choose a region that is closest to your Neon database.
 6. Click **Create project**.
 7. We recommend leaving **Event persistence** switched **on** (default). This means Prisma Pulse will automatically store events in the case your server goes down, allowing you to resume again with zero data loss.

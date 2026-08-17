@@ -6,7 +6,7 @@ summary: >-
   active branch in your local context, so subsequent commands target that
   branch without specifying `--branch` on every command.
 enableTableOfContents: true
-updatedOn: '2026-07-11T13:23:16.265Z'
+updatedOn: '2026-08-11T18:35:41.335Z'
 redirectFrom:
   - /docs/reference/cli-checkout
 ---
@@ -46,10 +46,10 @@ If none of those resolve a project, `checkout` prints an error explaining the ch
 
 ## Examples
 
-Pin a branch by name. New Neon projects create a default branch named `production`:
+Pin a branch by name. Projects created with the CLI or API get a default branch named `main`; Console-created projects use `production`. Run `neon branches list` if you're unsure:
 
 ```bash
-neon checkout production --project-id polished-snowflake-12345678
+neon checkout main --project-id polished-snowflake-12345678
 ```
 
 ```text filename="Output"

@@ -90,4 +90,4 @@ We’ll keep exploring how it fits into our workflows and continue sharing what 
 
 ---
 
-_[Neon](https://neon.com) is the serverless Postgres database supporting platforms like [Replit Agent](https://neon.tech/blog/replit-app-history-powered-by-neon-branches). It works like a charm with AI IDEs like Cursor. [Sign up for our Free Plan](https://console.neon.tech/signup) and start building._
+_[Neon](https://neon.com) is the serverless Postgres database supporting platforms like [Replit Agent](https://neon.com/blog/replit-app-history-powered-by-neon-branches). It works like a charm with AI IDEs like Cursor. [Sign up for our Free Plan](https://console.neon.tech/signup) and start building._

@@ -11,12 +11,12 @@ summary: >-
   quota enforcement, and usage monitoring via the metrics endpoint.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
 
-<CTA title="Learn how platforms embed Neon" description="Learn how <a href='https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases'>Retool manages 300k+ Postgres databases</a> and <a href='https://www.koyeb.com/blog/serverless-postgres-public-preview'>Koyeb offers serverless Postgres</a> using Neon."></CTA>
+<CTA title="Learn how platforms embed Neon" description="Learn how <a href='/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases'>Retool manages 300k+ Postgres databases</a> and <a href='https://www.koyeb.com/blog/serverless-postgres-public-preview'>Koyeb offers serverless Postgres</a> using Neon."></CTA>
 
 ## Why embed Neon?
 

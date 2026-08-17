@@ -70,8 +70,8 @@ This architecture is a game-changer for scalability. It enables a system where t
 
 This is precisely what White Widget is doing:
 
-- Via [autoscaling](https://neon.tech/docs/introduction/autoscaling), their main compute dynamically scales between the minimum and maximum CPU/memory limits they have defined. This ensures optimal performance and cost-efficiency without the manual work or the downtimes often associated with instance resizing.
-- By directing their read queries to [read replicas](https://neon.tech/docs/introduction/read-replicas) during periods of high traffic, White Widget liberates load in the main compute and ensures optimal performance.
+- Via [autoscaling](https://neon.com/docs/introduction/autoscaling), their main compute dynamically scales between the minimum and maximum CPU/memory limits they have defined. This ensures optimal performance and cost-efficiency without the manual work or the downtimes often associated with instance resizing.
+- By directing their read queries to [read replicas](https://neon.com/docs/introduction/read-replicas) during periods of high traffic, White Widget liberates load in the main compute and ensures optimal performance.
 
 Read replicas automatically scale to zero once traffic slows down. Unlike traditional database setups, Neon’s architecture allows all these compute endpoints to share access to the same storage, which makes the deployment very affordable.
 

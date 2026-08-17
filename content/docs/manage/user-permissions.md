@@ -43,7 +43,7 @@ These examples show how an organization role and per-project grants combine:
 
 A couple of behaviors are worth calling out:
 
-- **Viewers can still create their own projects.** The read-only limit applies to projects a Viewer didn't create. Any organization member except a Collaborator can create a project, and whoever creates a project becomes **Admin** on it.
+- **Viewers can still create their own projects.** The read-only limit applies to projects a Viewer didn't create. Any organization member except a Collaborator can create a project, and whoever creates a project becomes **Admin** on it. They keep that access if their organization role changes later, so to reduce it, grant them a lower permission on the project explicitly.
 - **Deleting a project takes Admin access on that project**, not the Admin organization role. Anyone granted **Admin** on a project, along with any organization Admin, can delete it after typing the project name to confirm.
 
 ## Assign project access
@@ -223,7 +223,7 @@ The new **Collaborator** organization role is not the same as the legacy project
 | ---------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | **Collaborator** | An external user invited to individual projects through project sharing | An organization role that starts with no access, then receives per-project permissions |
 
-Project sharing is being deprecated, and the new **Collaborator** role plus per-project permissions replaces it. For new access, use the Collaborator role plus per-project permissions instead of project sharing.
+Project sharing is being deprecated and will be removed in a future release. For new access, use the **Collaborator** role plus per-project permissions instead.
 
 ## Notes and limitations (#notes-and-limitations)
 

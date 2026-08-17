@@ -8,7 +8,7 @@ summary: >-
   queries covering connection counts, CPU, memory, cache hit rate, replication
   delay, and PgBouncer pooling metrics. Requires the Neon Scale plan.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:05:30.414Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 <InfoBlock>
@@ -24,7 +24,7 @@ updatedOn: '2026-08-04T05:05:30.414Z'
 </DocsList>
 </InfoBlock>
 
-The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires [OTEL support](https://neon.com/docs/guides/opentelemetry), which is available with Neon's Scale plan.
+The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires [OTEL support](/docs/guides/opentelemetry), which is available with Neon's Scale plan.
 
 ## How it works
 

@@ -53,7 +53,7 @@ To summarize:
 - **Environments drift constantly.** As the environments add up, staging lags behind prod, dev diverges from staging, and no one’s quite sure what version the tests are running against.
 
 <blockquote>
-<p><strong>“Our testing process was very manual before. Product would create a test customer in our development environment, then generate PDFs; the QA team would test and manually run through all the math; then an engineer would have to go into the database, look at all the values, and handwrite them into fixtures for our end-to-end tests… That’s multiple days for every single change”</strong> (<em><a href="https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle">Miguel Hernandez, Backend Tech Lead at Neo.Tax</a></em>)</p>
+<p><strong>“Our testing process was very manual before. Product would create a test customer in our development environment, then generate PDFs; the QA team would test and manually run through all the math; then an engineer would have to go into the database, look at all the values, and handwrite them into fixtures for our end-to-end tests… That’s multiple days for every single change”</strong> (<em><a href="https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle">Miguel Hernandez, Backend Tech Lead at Neo.Tax</a></em>)</p>
 </blockquote>
 
 All of this points to one missing primitive – a safe, fast, and repeatable way to create production-like environments without exposing real user data. This is what we’re working on in Neon.
@@ -74,7 +74,7 @@ Neon gives you both:
 <figcaption><em>Branching workflows without PII</em></figcaption>
 </figure>
 
-In Neon, a [branch](https://neon.tech/docs/introduction/branching) is a lightweight, copy-on-write clone of a Postgres database. It contains the same schema and data as its parent, but diverges safely in isolation, with its own compute endpoint and connection URL.
+In Neon, a [branch](https://neon.com/docs/introduction/branching) is a lightweight, copy-on-write clone of a Postgres database. It contains the same schema and data as its parent, but diverges safely in isolation, with its own compute endpoint and connection URL.
 
 Branches are created instantly no matter _how large the dataset_ and don’t require provisioning a new instance or duplicating storage, it’s all built into Neon’s architecture. They remain “logically connected’ to the parent, so production drift is a thing of the past – child branches can be synced with their parent in one API call, and they’ll reflect up-to-date and schema again.
 
@@ -85,7 +85,7 @@ Teams use branches where they were using redundant instances or local setups bef
 - Reproduce issues, test migrations, or preview features in realistic conditions
 
 <blockquote>
-<p><strong>“With Neon branches we get a totally isolated copy to test code changes even when they include database migrations. We can test all changes in real data and ensure that by the time we actually merge the PR to main, things really work”</strong>  <em>(<a href="https://neon.tech/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon">Avi Romanoff, Founder at Magic Circle</a>)</em></p>
+<p><strong>“With Neon branches we get a totally isolated copy to test code changes even when they include database migrations. We can test all changes in real data and ensure that by the time we actually merge the PR to main, things really work”</strong>  <em>(<a href="https://neon.com/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon">Avi Romanoff, Founder at Magic Circle</a>)</em></p>
 </blockquote>
 
 ### PostgreSQL Anonymizer – Protect PII with static masking
@@ -97,7 +97,7 @@ Teams use branches where they were using redundant instances or local setups bef
 
 Neon branches eliminate the overhead of environment setup – no need to provision a new instance, create a new database, populate it, or worry about environments drifting out of sync. But if your production database contains PII, branching it directly is not an option.
 
-That’s where the [PostgreSQL Anonymizer extension (anon)](https://neon.tech/docs/extensions/postgresql-anonymizer) comes in. This open-source extension lets you define masking rules on sensitive columns in your database, replacing real values with fake but realistic-looking alternatives. Neon currently supports static masking, meaning the data is permanently rewritten on the branch.
+That’s where the [PostgreSQL Anonymizer extension (anon)](https://neon.com/docs/extensions/postgresql-anonymizer) comes in. This open-source extension lets you define masking rules on sensitive columns in your database, replacing real values with fake but realistic-looking alternatives. Neon currently supports static masking, meaning the data is permanently rewritten on the branch.
 
 You can choose from multiple masking strategies, such as
 
@@ -145,7 +145,7 @@ SELECT * FROM users LIMIT 3;
  3  | Stefanie   | Byrd      | barbara40@example.com  | GB67CAZQ75813049489060
 ```
 
-The real data is gone, replaced by randomly generated values using PostgreSQL Anonymizer’s built-in faker functions. This approach is far more realistic and scalable than using handcrafted seed data. [Seed files are hard to maintain](https://neon.tech/blog/how-to-maintain-seed-data) and rarely reflect your actual production schema. As your app evolves with new tables, columns, relationships, your seed data drifts behind.
+The real data is gone, replaced by randomly generated values using PostgreSQL Anonymizer’s built-in faker functions. This approach is far more realistic and scalable than using handcrafted seed data. [Seed files are hard to maintain](https://neon.com/blog/how-to-maintain-seed-data) and rarely reflect your actual production schema. As your app evolves with new tables, columns, relationships, your seed data drifts behind.
 
 The anon extension takes care of masking sensitive data while preserving the structure, schema, and referential integrity of the database. Foreign keys, data types, and relationships remain intact, making the anonymized database safe but fully usable as a production clone.
 
@@ -168,14 +168,14 @@ The workflow is simple:
 Since these branches are all copy-on-write, the data overhead is minimal, and the experience is fast.
 
 <Admonition type="tip" title="Automate this workflow">
-Our docs include an example of [how to use GitHub Actions to create an anonymized Neon branch every time a pull request is opened.](https://neon.tech/docs/workflows/data-anonymization#automate-data-anonymization) The Action installs the extension, applies masking rules, and runs the anonymization, all in one CI job.
+Our docs include an example of [how to use GitHub Actions to create an anonymized Neon branch every time a pull request is opened.](https://neon.com/docs/workflows/data-anonymization#automate-data-anonymization) The Action installs the extension, applies masking rules, and runs the anonymization, all in one CI job.
 </Admonition>
 
 ## Start Building with Anonymized Branches in Neon
 
 Cloning production environments has always been a pain, especially when sensitive data is involved. But by combining Neon’s branching architecture and&nbsp; the PostgreSQL Anonymizer extension it’s much easier to create safe, production-like environments. Just branch from production, anonymize once, reuse everywhere.
 
-To get started, [sign up to Neon](https://console.neon.tech/signup) and follow [this guide](https://neon.tech/docs/workflows/data-anonymization). If you have any questions on how to integrate anonymized branching workflows into your environment, [reach out to our team.](https://neon.tech/contact-sales)
+To get started, [sign up to Neon](https://console.neon.tech/signup) and follow [this guide](https://neon.com/docs/workflows/data-anonymization). If you have any questions on how to integrate anonymized branching workflows into your environment, [reach out to our team.](https://neon.tech/contact-sales)
 
 <Admonition type="tip" title="Get $100 in credits">
 If you sign up [via this link](https://fyi.neon.tech/credits), your first $100 are on us!

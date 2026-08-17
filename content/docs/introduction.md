@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-07-31T16:42:49.697Z'
+updatedOn: '2026-08-15T10:47:27.123Z'
 ---
 
 ## Getting started
@@ -97,6 +97,8 @@ Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-start
 
 <a href="/docs/guides/java" title="Java" icon="java"></a>
 
+<a href="/docs/guides/kotlin" title="Kotlin" icon="kotlin"></a>
+
 <a href="/docs/guides/rust" title="Rust" icon="rust"></a>
 
 <a href="/docs/guides/dotnet-npgsql" title=".NET" icon="dotnet"></a>
@@ -132,6 +134,10 @@ Browse our [framework](/docs/get-started/frameworks), [language](/docs/get-start
 <a href="/docs/guides/redwoodsdk" title="Redwood" icon="redwoodsdk"></a>
 
 </CompactCards>
+
+<Callout title="Retrieval for AI agents with Lakebase Search">
+Add vector, keyword, and hybrid search directly to your database, so agent retrieval and RAG need no separate vector store. [Explore Lakebase Search →](/docs/ai/lakebase-search)
+</Callout>
 
 ## AI tools and agents
 

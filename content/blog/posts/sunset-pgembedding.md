@@ -57,7 +57,7 @@ Our focus on improving vector search in Postgres remains the same. We’re curre
 
 ## How can you prepare?
 
-- Migration: Here is a [comprehensive migration guide](https://neon.tech/docs/extensions/pg_embedding) to assist you in transitioning from `pg_embedding` to `pgvector`.
+- Migration: Here is a [comprehensive migration guide](https://neon.com/docs/extensions/pg_embedding) to assist you in transitioning from `pg_embedding` to `pgvector`.
 - Share your feedback: Your feedback is invaluable. Please share your thoughts, concerns, or questions, helping us ensure a smooth transition for everyone.
 - Stay updated: Keep an eye on our blog and official channels for further updates and details.
 

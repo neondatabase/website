@@ -45,7 +45,7 @@ seo:
 
 **We’re Neon, a cloud-native serverless Postgres solution. With Neon, your Postgres databases and environments are just one click away. You can still benefit from serverless Postgres if your application isn’t serverless. [Try using Neon’s serverless Postgres](https://console.neon.tech) with your long-running applications today.**
 
-We refer to Neon as serverless Postgres because it can [scale your database to zero](https://neon.tech/docs/guides/auto-suspend-guide) when it’s not actively serving queries and [autoscale](https://neon.tech/docs/introduction/autoscaling) when it is. Neon’s serverless Postgres pairs perfectly with applications deployed in serverless environments such as Cloudflare Workers or Vercel, thanks to our [serverless driver](https://github.com/neondatabase/serverless/) and support for [SQL over HTTP](https://github.com/neondatabase/neon/tree/main/proxy#sql-over-http). Your database should be able to scale to zero when it’s not processing queries – just like your serverless applications. This can result in savings not just for production workloads but also for development and staging environments.
+We refer to Neon as serverless Postgres because it can [scale your database to zero](https://neon.com/docs/guides/auto-suspend-guide) when it’s not actively serving queries and [autoscale](https://neon.com/docs/introduction/autoscaling) when it is. Neon’s serverless Postgres pairs perfectly with applications deployed in serverless environments such as Cloudflare Workers or Vercel, thanks to our [serverless driver](https://github.com/neondatabase/serverless/) and support for [SQL over HTTP](https://github.com/neondatabase/neon/tree/main/proxy#sql-over-http). Your database should be able to scale to zero when it’s not processing queries – just like your serverless applications. This can result in savings not just for production workloads but also for development and staging environments.
 
 If you have a traditional long-running application, sometimes called “serverfull”, and you’re interested in trying Neon, you’ll be glad to know that Neon is compatible with those applications too. After all, Neon is just Postgres. These application servers, usually running MVC-type frameworks like Ruby on Rails and Django, can take advantage of Neon’s scale-to-zero to reduce database costs and utilization during off-peak times, just like serverless applications. In the case of a long-running application, scale to zero will inevitably sever any connections between your application and the database. When your application attempts to reconnect and issue new queries, Neon will restart your Postgres database to serve them.
 
@@ -55,12 +55,12 @@ This post will illustrate configuring your Postgres driver to handle scale to ze
 
 How does scale to zero work anyway? Let’s look into it so you can better configure your applications and environments to handle scale to zero gracefully. Doing so will enable you to take advantage of cost savings and make your application more resilient to connection errors.
 
-As the name suggests, Neon’s scale to zero feature will suspend database instances if no activity has been detected within the [configured scale to zero window](https://neon.tech/docs/guides/auto-suspend-guide#configure-autosuspend-for-a-compute-endpoint) for a given compute. Scale to zero works even if clients are connected to the database, but only under certain circumstances. Since Neon is open-source, you can see exactly how this feature works by looking at files such as [compute_tools/src/monitor.rs](https://github.com/neondatabase/neon/blob/main/compute_tools/src/monitor.rs) in the [neondatabase/neon](https://github.com/neondatabase/neon) repository on GitHub.
+As the name suggests, Neon’s scale to zero feature will suspend database instances if no activity has been detected within the [configured scale to zero window](https://neon.com/docs/guides/auto-suspend-guide#configure-autosuspend-for-a-compute-endpoint) for a given compute. Scale to zero works even if clients are connected to the database, but only under certain circumstances. Since Neon is open-source, you can see exactly how this feature works by looking at files such as [compute_tools/src/monitor.rs](https://github.com/neondatabase/neon/blob/main/compute_tools/src/monitor.rs) in the [neondatabase/neon](https://github.com/neondatabase/neon) repository on GitHub.
 
 At the time of writing, scale to zero is triggered when the following conditions are true:
 
 1. No activity has been detected in a time period larger than the scale to zero window.
-2. No [WAL senders](https://neon.tech/docs/guides/logical-replication-concepts#wal-senders) are active. In other words, you’re not using Logical Replication.
+2. No [WAL senders](https://neon.com/docs/guides/logical-replication-concepts#wal-senders) are active. In other words, you’re not using Logical Replication.
 3. [Autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is not currently running.
 
 You can test the impact of scale to zero on a long-lived application that lacks error handling and reconnect logic using the following code.
@@ -97,9 +97,9 @@ This Node.js application will work fine so long as it receives consistent traffi
 The prior example’s `getVersion()` code could be modified to open and close a database connection for each query. This would address the concerns around connection loss but could also introduce the following issues:
 
 1. Add tens or hundreds of milliseconds of latency overhead per request.
-2. Exhaust Postgres’ [connection limits](https://neon.tech/docs/connect/connection-pooling#default-connection-limits).
+2. Exhaust Postgres’ [connection limits](https://neon.com/docs/connect/connection-pooling#default-connection-limits).
 
-Neon’s [pooler endpoint](https://neon.tech/docs/connect/connection-pooling#enable-connection-pooling) (based on [PgBouncer](https://www.pgbouncer.org/)) and our serverless driver can provide a workaround for these issues and are especially important for serverless application architectures where many instances of your application will open connections to the database. However, you may want to continue using your existing database driver with Neon, or the [limitations of PgBouncer](https://neon.tech/docs/connect/connection-pooling#connection-pooling-notes-and-limitations) might pose a problem for your long-running application.
+Neon’s [pooler endpoint](https://neon.com/docs/connect/connection-pooling#enable-connection-pooling) (based on [PgBouncer](https://www.pgbouncer.org/)) and our serverless driver can provide a workaround for these issues and are especially important for serverless application architectures where many instances of your application will open connections to the database. However, you may want to continue using your existing database driver with Neon, or the [limitations of PgBouncer](https://neon.com/docs/connect/connection-pooling#connection-pooling-notes-and-limitations) might pose a problem for your long-running application.
 
 Using a client-side connection pool with your existing Postgres driver can:
 

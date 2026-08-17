@@ -40,7 +40,7 @@ On 2024-08-14, about 0.4% of customer projects in us-east-1 experienced an outag
 
 ## Background
 
-Neon databases are stored on our _safekeeper_ and _pageserver_ services. Read more about [architectural decisions in Neon](https://neon.tech/blog/architecture-decisions-in-neon).
+Neon databases are stored on our _safekeeper_ and _pageserver_ services. Read more about [architectural decisions in Neon](https://neon.com/blog/architecture-decisions-in-neon).
 
 Pageservers ingest data from the Postgres WAL stored by safekeepers, and then cache & index it at 8KiB page granularity so that when a Neon compute instance needs to read a page, it can do so in microseconds.
 
@@ -85,7 +85,7 @@ Some time ago, we recognised that the first iteration of our control plane’s d
 
 The control plane’s design may be thought of as a CRUD API with an underlying queue of Operations, where Operations always run to completion, and may execute one at a time per Project. This design works fine when the underlying systems it drives are themselves highly available, but it falls short when managing individual physical nodes, which can fail. The premise that operations will always complete eventually does not hold when those operations depend on physical resources (e.g. EC2 instances) that can stop working at any time.
 
-To resolve this issue, we created a new service: the _Storage Controller_. The storage controller is designed very differently to the control plane, and was built for anti-fragility and fault tolerance from the ground up, as well as implementing Storage Sharding to [support larger databases](https://neon.tech/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust). The controller uses a reconciliation-loop model to schedule users’ Projects onto pageservers, and to re-schedule them in the event of a failure. Every API call it makes to a pageserver is considered fallible, and in the event of failures, the controller will re-consider its scheduling decisions, enabling it to respond dynamically to changes in node availability or load.
+To resolve this issue, we created a new service: the _Storage Controller_. The storage controller is designed very differently to the control plane, and was built for anti-fragility and fault tolerance from the ground up, as well as implementing Storage Sharding to [support larger databases](https://neon.com/blog/how-we-scale-an-open-source-multi-tenant-storage-engine-for-postgres-written-rust). The controller uses a reconciliation-loop model to schedule users’ Projects onto pageservers, and to re-schedule them in the event of a failure. Every API call it makes to a pageserver is considered fallible, and in the event of failures, the controller will re-consider its scheduling decisions, enabling it to respond dynamically to changes in node availability or load.
 
 The storage controller uses its own heartbeat mechanism to decide when a pageserver is available, independent of our other monitoring systems and the human-in-the-loop alerting flow. This enables it to respond autonomously and more rapidly, as the intervals between heartbeats are shorter than the intervals between metric scrapes. Failures of nodes managed by the storage controller have a minimal impact on service: the controller responds autonomously and moves work to other nodes in seconds.
 

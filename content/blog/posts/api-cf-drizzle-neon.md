@@ -52,7 +52,7 @@ Cloudflare Workers enable you to build and deploy serverless code instantly acro
 Neon is fully managed serverless Postgres. This means you do not have to pick a size for your database upfront, and it can automatically scale up based on your workload and down to zero when not in use.
 
 <blockquote>
-<p>Note: Neon’s architecture separates storage and compute. This makes a Neon Postgres instance stateless, which makes it possible to automatically scale compute resources up or down based on demand. To learn more, check out <a href="https://neon.tech/docs/introduction/architecture-overview">Neon’s architecture</a>.</p>
+<p>Note: Neon’s architecture separates storage and compute. This makes a Neon Postgres instance stateless, which makes it possible to automatically scale compute resources up or down based on demand. To learn more, check out <a href="https://neon.com/docs/introduction/architecture-overview">Neon’s architecture</a>.</p>
 </blockquote>
 
 ## What is Drizzle ORM?

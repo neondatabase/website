@@ -12,14 +12,14 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-07-31T16:04:44.241Z'
+updatedOn: '2026-08-08T09:32:54.609Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
 ## New backend primitives for apps and agents
 
-We're expanding the platform with [a branchable stack of backend primitives](https://neon.com/blog/were-building-backends): Lakebase Postgres, Managed Better Auth, Functions, Object Storage, and AI Gateway.
+We're expanding the platform with [a branchable stack of backend primitives](/blog/were-building-backends): Lakebase Postgres, Managed Better Auth, Functions, Object Storage, and AI Gateway.
 
 - **Managed Better Auth general availability**: Managed Better Auth is moving toward general availability with additional plugins and features on the way. Check the [Managed Better Auth roadmap](/docs/auth/roadmap) for details.
 - **Functions**: Node.js functions deployed alongside your database.
@@ -77,7 +77,14 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
-- **Neon backend services in beta**: Object Storage, Functions, and AI Gateway have graduated from private preview to beta and are available to everyone in AWS US East (Ohio). Declare your whole backend in one `neon.ts` file and it branches with your data. [Read the announcement](https://neon.com/blog/neon-backend-is-beta).
+- **Project-level permissions**: Grant people and agents Viewer, Editor, or Admin access on individual projects instead of across your whole organization, on top of four organization roles (Admin, Editor, Viewer, Collaborator). Now available to all organizations. [Learn more](/docs/manage/user-permissions).
+- **API keys and profiles in the Neon CLI**: New `neon api-keys` and `neon profile` commands let you mint account, organization, or project-scoped keys and switch between multiple accounts from the terminal. [Learn more](/docs/cli/api-keys).
+- **More models on the AI Gateway**: The AI Gateway catalog expanded with Kimi K3, GLM-5.2, Inkling, and new Gemini and GPT models, all reachable through one credential and one base URL. [Learn more](/docs/ai-gateway/models#available-models).
+- **New Console layout for the Neon backend**: The Console sidebar now places every branch-level backend service (Auth, Object Storage, Functions, AI Gateway) alongside your Postgres database, with a branch Overview page that shows each service's status. [Learn more](/docs/get-started/backend-overview).
+- **Debug Postgres from the CLI with `neon inspect db`**: Run read-only Postgres diagnostics (table sizes, bloat, unused indexes, long-running queries, locks, and more) straight from the Neon CLI, safe to hand to an agent. [Learn more](/docs/cli/inspect).
+- **Snapshots in the Neon CLI**: The new `neon snapshots` command group manages the full snapshot lifecycle (list, create, restore, and schedule) from your terminal. [Learn more](/docs/cli/snapshots).
+- **Query Functions and Storage logs from the Neon MCP server**: New read-only `query_logs`, `list_log_fields`, and `list_log_field_values` tools let your AI assistant investigate Functions and Object Storage failures without leaving your editor. [Learn more](/docs/ai/neon-mcp-server).
+- **Neon backend services in beta**: Object Storage, Functions, and AI Gateway have graduated from private preview to beta and are available to everyone in AWS US East (Ohio). Declare your whole backend in one `neon.ts` file and it branches with your data. [Read the announcement](/blog/neon-backend-is-beta).
 - **New TypeScript SDK for the Neon API**: `@neon/sdk` is a fetch-based, zero-dependency client that covers the full Neon Platform API, including the new backend services, and replaces `@neondatabase/api-client` as the recommended client. [Learn more](/docs/reference/typescript-sdk).
 - **Passkey support**: Sign in to Neon with a passkey using device biometrics or a security key. Passkeys satisfy organization-level 2FA requirements. [Learn more](/docs/manage/accounts#passkeys).
 - **Git-style diffs in the Neon CLI**: The new `neon diff` command shows schema changes between your current branch and any other branch, and the config commands now report their changes as a git diff. [Learn more](/docs/cli).
@@ -101,7 +108,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Organization spending notifications**: Set a monthly spending threshold for your organization from the Billing page and receive email alerts when you reach 80% and 100% of that threshold. [Learn more](/docs/introduction/spending-notifications).
 - **Neon plugin for OpenAI Codex**: The Neon plugin is now available in the OpenAI Codex plugin directory, adding the Neon MCP Server and Agent Skills to Codex so you can manage projects, branches, and databases from chat. [Learn more](/docs/ai/ai-codex-plugin)
 - **Lakebase Postgres in Stripe Projects**: Neon is now part of Stripe Projects, so you can provision a Neon database as part of a Stripe CLI app setup alongside other services. [Read the announcement](/blog/neon-works-with-stripe-projects-for-agentic-provisioning)
-- **Automatic cache prewarming**: Neon now prewarms your compute's in-memory cache during scheduled compute updates, protecting query performance immediately after the update restarts Postgres. [Read the blog post](https://neon.com/blog/prewarming)
+- **Automatic cache prewarming**: Neon now prewarms your compute's in-memory cache during scheduled compute updates, protecting query performance immediately after the update restarts Postgres. [Read the blog post](/blog/prewarming)
 - **Unlimited org members on the Free plan**: You can now add unlimited members to each organization on the Free plan. The members API supports pagination and sorting, and the Console shows a 2FA indicator per member. [Learn more](/docs/manage/orgs-manage).
 - **Managed Better Auth organization settings and webhooks**: Configure Managed Better Auth Organizations from the Console (**Auth** > **Plugins**, per branch) and use webhooks to receive HTTP callbacks for auth events (OTP, magic link, user creation). [Learn more](/docs/auth/guides/plugins/organization) and [Webhooks](/docs/auth/guides/webhooks).
 - **Network transfer guide and egress optimizer agent skill**: A new guide explains how to monitor and reduce network transfer costs. An agent skill helps your AI assistant diagnose and fix query patterns that cause excessive egress. [Learn more](/docs/introduction/network-transfer).

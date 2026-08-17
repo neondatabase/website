@@ -52,7 +52,7 @@ As a developer, being SOC2 compliant shows that Neon has put in place measures t
 
 Our journey toward SOC2 compliance was a detailed and months-long process. We started by closely examining our existing security measures against SOC2 standards, fixing any issues we found. We then adjusted our internal rules to match SOC2 criteria, implementing stronger incident management, disaster recovery, vulnerability management, logging & monitoring, vendor management, risk assessment, and access controls. As we implemented these changes, we exceeded the requirements of SOC2, thereby enhancing Neon’s overall security. The journey concluded with an audit by a third-party audit firm, confirming Neon’s compliance with the highest standards. This process not only achieved compliance, but showcased our commitment to making Neon more secure.
 
-Explore our path to SOC2 Type 1 compliance by visiting our blog at: [https://neon.tech/blog/soc2-type-1](https://neon.tech/blog/soc2-type-1)
+Explore our path to SOC2 Type 1 compliance by visiting our blog at: [https://neon.com/blog/soc2-type-1](https://neon.com/blog/soc2-type-1)
 
 ### Next Steps
 

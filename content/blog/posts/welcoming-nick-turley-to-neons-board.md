@@ -61,7 +61,7 @@ At the same time, LLM providers (OpenAI, Anthropic, Google) are launching produc
 
 ## What this means for infrastructure
 
-SAI agents aren’t just “writing code”. They’re setting up [Git repositories](https://lovable.dev/blog/incident-github-outage), [launching databases](https://neon.tech/blog/looking-at-how-replit-agent-handles-databases), [deploying applications](https://www.create.xyz/docs/publish-and-share/publish), and [running tests](https://docs.devin.ai/use-cases/testing-refactoring). This introduces new demands on infrastructure:
+SAI agents aren’t just “writing code”. They’re setting up [Git repositories](https://lovable.dev/blog/incident-github-outage), [launching databases](https://neon.com/blog/looking-at-how-replit-agent-handles-databases), [deploying applications](https://www.create.xyz/docs/publish-and-share/publish), and [running tests](https://docs.devin.ai/use-cases/testing-refactoring). This introduces new demands on infrastructure:
 
 - Parallelism at scale – AI agents generate and deploy code continuously, far exceeding human-driven workflows. Infrastructure must support high-volume and concurrent deployments.
 - Instant deploys and forkable environments — AI agents iterate rapidly. Workloads should spin up instantly while avoiding unnecessary fixed costs that act as a barrier for scale.

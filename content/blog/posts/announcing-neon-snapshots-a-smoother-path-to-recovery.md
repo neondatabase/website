@@ -55,7 +55,7 @@ You can create snapshots directly from the Neon console using the **Create snaps
 
 ### Restoring a snapshot
 
-In this initial release, a restored snapshot creates a new branch (e.g., `main_from_snapshot_2025-04-14`). You can then add a [compute](https://neon.tech/docs/reference/glossary#compute-endpoint) to the branch and interact with it like any other branch in Neon, by either connecting with your preferred Postgres client or using Neon’s built-in [SQL editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor). Future releases will make it possible to switch all client connections to the newly restored branch, similar to how Point-In-Time Restore (PITR) works today.
+In this initial release, a restored snapshot creates a new branch (e.g., `main_from_snapshot_2025-04-14`). You can then add a [compute](https://neon.com/docs/reference/glossary#compute-endpoint) to the branch and interact with it like any other branch in Neon, by either connecting with your preferred Postgres client or using Neon’s built-in [SQL editor](https://neon.com/docs/get-started-with-neon/query-with-neon-sql-editor). Future releases will make it possible to switch all client connections to the newly restored branch, similar to how Point-In-Time Restore (PITR) works today.
 
 ![Screenshot of Neon console with Restore button highlighted](https://cdn.neonapi.io/public/images/pages/blog/announcing-neon-snapshots-a-smoother-path-to-recovery/snapshots-launch-snapshot-restore-1024x640-4cd9d8bc.jpg)
 
@@ -65,7 +65,7 @@ A compute can be added to a restored branch at any time, allowing you to explore
 
 ## Point-In-Time Restore (PITR) or snapshots
 
-Both [Point-In-Time Restore](https://neon.tech/docs/manage/backups#instant-restore) (PITR) and snapshots allow you to instantly recover or preserve the state of your database, but they serve different needs and work in different ways.
+Both [Point-In-Time Restore](https://neon.com/docs/manage/backups#instant-restore) (PITR) and snapshots allow you to instantly recover or preserve the state of your database, but they serve different needs and work in different ways.
 
 ### Point-In-Time Restore (PITR)
 

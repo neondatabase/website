@@ -9,7 +9,7 @@ summary: >-
   setup. Neon's copy-on-write branching keeps development changes isolated
   until explicitly promoted.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -98,6 +98,10 @@ The target database is the database on your `feature/blog-schema` branch where y
    ```
 
 Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `ep-` and ending in `neon.tech`) differs. This is because the `feature/blog-schema` branch is a separate instance of Postgres, hosted on its own compute.
+
+<Admonition type="important">
+Use direct (non-pooled) connection strings with Liquibase. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure your connection strings do not include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Update your liquibase.properties file
 

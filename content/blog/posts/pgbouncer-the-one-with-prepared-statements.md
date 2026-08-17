@@ -76,7 +76,7 @@ Postgres runs on a system of several interlinked processes, with the `postmaster
 
 Whenever a client wants to establish a new connection, the `postmaster` creates a new backend process for that client. This new connection starts a session with the backend, which stays active until the client decides to leave or the connection drops.
 
-Here’s where it gets tricky: Many applications, such as serverless backends, open numerous connections, and most eventually become inactive. Postgres needs to create a unique backend process for each client connection. When many clients try to connect, more memory is needed. In Neon, for example, the default maximum number of [concurrent direct connections is set to 100](https://neon.tech/docs/connect/connection-pooling#default-connection-limits).
+Here’s where it gets tricky: Many applications, such as serverless backends, open numerous connections, and most eventually become inactive. Postgres needs to create a unique backend process for each client connection. When many clients try to connect, more memory is needed. In Neon, for example, the default maximum number of [concurrent direct connections is set to 100](https://neon.com/docs/connect/connection-pooling#default-connection-limits).
 
 The solution to this problem is connection pooling with PgBouncer, which helps keep the number of active backend processes low.
 

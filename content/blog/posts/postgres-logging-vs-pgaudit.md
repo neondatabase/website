@@ -41,7 +41,7 @@ But all that is precisely what the built-in Postgres logging is for—operationa
 <p><em>The goal of PostgreSQL Audit to provide the tools needed to produce audit logs required to pass certain government, financial, or ISO certification audits.</em></p>
 </blockquote>
 
-SOX, HIPAA, PCI DSS. Each of these requires detailed tracking of who accessed what data, when they accessed it, and what changes they made to sensitive information. At Neon, we’ve recently completed our [HIPAA compliance audit](https://neon.tech/blog/hipaa) and are using PGAudit under the hood for the detailed audit trails HIPAA-compliant organizations need to maintain a complete and granular record of all database operations affecting sensitive data.
+SOX, HIPAA, PCI DSS. Each of these requires detailed tracking of who accessed what data, when they accessed it, and what changes they made to sensitive information. At Neon, we’ve recently completed our [HIPAA compliance audit](https://neon.com/blog/hipaa) and are using PGAudit under the hood for the detailed audit trails HIPAA-compliant organizations need to maintain a complete and granular record of all database operations affecting sensitive data.
 
 Here, we want to show you how PGAudit compares to internal Postgres logging and why it matters for compliance-focused database operations.
 

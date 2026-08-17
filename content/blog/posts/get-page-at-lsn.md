@@ -39,7 +39,7 @@ Neon is a single writer, multiple readers, and multi-tenant system that runs in 
 1. separation of compute and storage, and
 2. non-overwriting storage.
 
-In a [previous article](https://neon.tech/blog/architecture-decisions-in-neon), I talked about architectural decisions and the reasons behind them. In this article, we take a closer look at the storage engine.
+In a [previous article](https://neon.com/blog/architecture-decisions-in-neon), I talked about architectural decisions and the reasons behind them. In this article, we take a closer look at the storage engine.
 
 ## Separation of Compute and Storage
 
@@ -75,7 +75,7 @@ Let’s first look at the write path and the read path:
 
 ### Write path
 
-In the write path, PostgreSQL writes a record to the transaction log (write-ahead log) whenever a modification is made. In Neon, this log is streamed to three safekeeper nodes, which provide durability and synchronous replication using Paxos-like consensus algorithm that was explained in a previous [article](https://neon.tech/blog/paxos).
+In the write path, PostgreSQL writes a record to the transaction log (write-ahead log) whenever a modification is made. In Neon, this log is streamed to three safekeeper nodes, which provide durability and synchronous replication using Paxos-like consensus algorithm that was explained in a previous [article](https://neon.com/blog/paxos).
 
 The safekeeper nodes then stream the logs to the pageservers, where the logs are processed, reorganized, and written to immutable files. Finally, these files are uploaded to cloud storage for long-term storage.
 

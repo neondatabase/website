@@ -36,7 +36,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/aws-privatelink-for-neon-databases/neon-aws-privatelink-for-neon-databases-1-1024x576-2721599f.jpg)
 
-**We just shipped** [Neon Private Networking](https://neon.tech/docs/guides/neon-private-networking), **a feature that lets you connect to your Neon database through [AWS PrivateLink](https://aws.amazon.com/privatelink/) with zero exposure to the public internet.** If your infra is in AWS, this feature makes it much easier to meet your security and compliance requirements while enjoying Neon’s developer experience. Private Networking is available in our [Business and Enterprise](https://neon.tech/pricing) plans.
+**We just shipped** [Neon Private Networking](https://neon.com/docs/guides/neon-private-networking), **a feature that lets you connect to your Neon database through [AWS PrivateLink](https://aws.amazon.com/privatelink/) with zero exposure to the public internet.** If your infra is in AWS, this feature makes it much easier to meet your security and compliance requirements while enjoying Neon’s developer experience. Private Networking is available in our [Business and Enterprise](https://neon.tech/pricing) plans.
 
 ## Securing Connectivity Between AWS and Neon
 
@@ -60,7 +60,7 @@ The entire setup is self-serve and easy to configure, and there’s no code chan
 
 Getting started with Neon Private Networking is straightforward. You’ll need to create a VPC endpoint in your AWS account and link it to Neon’s AWS PrivateLink service. Once set up, your application will automatically route database queries through the private connection—no code changes needed.
 
-For step-by-step instructions, [check out our Private Networking setup guide.](https://neon.tech/docs/guides/neon-private-networking)
+For step-by-step instructions, [check out our Private Networking setup guide.](https://neon.com/docs/guides/neon-private-networking)
 
 ## Wrap up
 

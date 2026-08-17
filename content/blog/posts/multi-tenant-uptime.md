@@ -75,7 +75,7 @@ We faced this problem multiple times during November and have since gained a tho
 While waking up a suspended database, we need to:
 
 1. Authenticate the user
-2. Assign an existing pod from [the pool](https://neon.tech/blog/cold-starts-just-got-hot#compute-pools) or start a new one
+2. Assign an existing pod from [the pool](https://neon.com/blog/cold-starts-just-got-hot#compute-pools) or start a new one
 3. Establish a connection between Neon’s proxy, Postgres, and the storage nodes.
 
 During this process, we can encounter transient errors. For example, if a connection is not established at the first attempt, any of the API calls could return a retriable error. This can be caused by kube-proxy rules propagating through the cluster non-atomically (e.g., a user tries connecting to the database right when it is scheduled to be suspended). For this type of internal error, we avoid spilling it to users and rely on an internal retry process.

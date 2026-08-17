@@ -33,6 +33,10 @@ const META = {
     desc: 'Write org/project/branch context to .neon.',
     examples: ['neon set-context --project-id polished-snowflake-1234'],
   },
+  open: {
+    desc: 'Open the linked project in the Neon Console in your browser.',
+    examples: ['neon open'],
+  },
   me: { desc: 'Show the authenticated user.', examples: ['neon me'] },
   completion: { desc: 'Generate a shell completion script.' },
   projects: { desc: 'Manage projects.', examples: ['neon projects list'] },

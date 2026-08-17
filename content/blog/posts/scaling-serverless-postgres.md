@@ -63,7 +63,7 @@ To understand how autoscaling works, we’ll start from a high-level overview of
 
 ![Setup and moving pieces](https://cdn.neonapi.io/public/images/pages/blog/scaling-serverless-postgres/setup-and-moving-pieces-1024x576-d5fdf465.png)
 
-At a very high level, Neon runs many compute endpoints, which are each individual Postgres instances. The storage is decoupled from the endpoints, meaning that the Postgres servers running queries are physically separate from where the data is stored. This separation provides many benefits – and it is also important for autoscaling. (See also: [Heikki’s blog post about Neon’s architecture](https://neon.tech/blog/architecture-decisions-in-neon), which goes into more depth on this subject.)
+At a very high level, Neon runs many compute endpoints, which are each individual Postgres instances. The storage is decoupled from the endpoints, meaning that the Postgres servers running queries are physically separate from where the data is stored. This separation provides many benefits – and it is also important for autoscaling. (See also: [Heikki’s blog post about Neon’s architecture](https://neon.com/blog/architecture-decisions-in-neon), which goes into more depth on this subject.)
 
 Zooming in a little, each Postgres instance is running in its own VM<sup>1</sup> in some Kubernetes cluster, with each node in the Kubernetes cluster hosting many VMs. At its core, we implement autoscaling by allocating (and removing) CPUs and memory from each VM — there’s only a couple Postgres-specific considerations.
 

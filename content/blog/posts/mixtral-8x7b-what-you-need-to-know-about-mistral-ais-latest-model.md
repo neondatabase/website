@@ -164,6 +164,6 @@ Overall, Mixtral 8x7B marks an exciting development in the AI field, offering po
 
 ## 📚 Continue reading
 
-- **[Deploy Mistral Large to Azure and create a conversation with Python and LangChain:](https://neon.tech/blog/deploy-mistral-large-to-azure-and-chat-with-langchain)** check out our step-by-step guide to deploying Mistral Large to Azure.
-- **[30x faster index build for your vector embeddings with pgvector:](https://neon.tech/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings)** learn how the new pgvector speeds up the index building process for vector embeddings by 30 times, optimizing performance for your AI apps.
-- **[How to create and publish a custom ChatGPT:](https://neon.tech/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert)** a guide walking you through how to create, publish, and potentially monetize custom ChatGPT models.
+- **[Deploy Mistral Large to Azure and create a conversation with Python and LangChain:](https://neon.com/blog/deploy-mistral-large-to-azure-and-chat-with-langchain)** check out our step-by-step guide to deploying Mistral Large to Azure.
+- **[30x faster index build for your vector embeddings with pgvector:](https://neon.com/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings)** learn how the new pgvector speeds up the index building process for vector embeddings by 30 times, optimizing performance for your AI apps.
+- **[How to create and publish a custom ChatGPT:](https://neon.com/blog/openais-gpt-store-is-live-create-and-publish-a-custom-postgres-gpt-expert)** a guide walking you through how to create, publish, and potentially monetize custom ChatGPT models.

@@ -78,7 +78,7 @@ Here’s what we’re going to use:
 
 ### Creating a vector database in Neon
 
-Neon has a Free plan: to start, [create an account here](https://console.neon.tech/signup) and follow [these instructions](https://neon.tech/docs/get-started-with-neon/signing-up#step-1-sign-up) to connect to your database.
+Neon has a Free plan: to start, [create an account here](https://console.neon.tech/signup) and follow [these instructions](https://neon.com/docs/get-started-with-neon/signing-up#step-1-sign-up) to connect to your database.
 
 Once you’re connected, to turn Neon into a vector database just takes three words:
 
@@ -202,7 +202,7 @@ What do each of these functions do?
 - **`get_embeddings(quotes)`**: This is the heart of the code. We generate an embedding for each quote using the “helper/gte-large” model via the OctoAI API and return this list of embeddings.
 - **`insert_into_db(quotes, authors, embeddings)`**: Now we can add everything to Neon. We utilize a connection pool for efficient database connections and execute an SQL INSERT statement for each quote-author-embedding trio, committing the transaction at the end. It ensures proper closure of database connections and the connection pool.
 
-With that done, we can see our data in the [Neon tables page](https://neon.tech/blog/edit-records-directly-from-the-neon-console-meet-the-new-tables-page):
+With that done, we can see our data in the [Neon tables page](https://neon.com/blog/edit-records-directly-from-the-neon-console-meet-the-new-tables-page):
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/building-a-rag-application-with-llama-3-1-and-pgvector/screenshot-2024-07-30-at-94721percente2percent80percentafam-1024x302-4aa7a1df.png)
 
@@ -429,6 +429,6 @@ Hopefully, you’ve learned three things with this post:
 
 1. **RAG is extremely powerful.** This is just a toy example, but imagine having thousands of documents in a vector database and being able to add all that knowledge to a regular LLM. It can make the applications you build much more relevant to your users.
 2. **Open-source models are up for the fight.** We’re obviously barely scratching the surface of what Llama 3.1 can do, but the benchmarks put it up against OpenAI, Claude, and Cohere, and for a fraction of the cost.
-3. **Postgres is a vector database.** Like with Llama 3.1, we’ve barely started exploring the possibilities of Postgres and vectors. You can learn more about optimizing [Neon for embeddings](https://neon.tech/docs/extensions/pgvector), and this is a great read on how [Postgres compares to specialized Vector databases](https://lantern.dev/blog/postgres-vs-pinecone).
+3. **Postgres is a vector database.** Like with Llama 3.1, we’ve barely started exploring the possibilities of Postgres and vectors. You can learn more about optimizing [Neon for embeddings](https://neon.com/docs/extensions/pgvector), and this is a great read on how [Postgres compares to specialized Vector databases](https://lantern.dev/blog/postgres-vs-pinecone).
 
 If you are using Neon, you already have a vector database. If you aren’t, [sign up for free](https://console.neon.tech/signup) and start building your AI apps.

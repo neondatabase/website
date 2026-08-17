@@ -50,7 +50,7 @@ Using Claude’s Desktop application, we can now interact with Neon’s platform
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here/ad4nxfq9wbgjl8ff4qoo0pzutmouegz07db1nwtulmrlybh5ima1tncqhbchlwpcexkqyv2gm8m8hrsvnixpnro5wlgtbf5ulgurlqktawaomczouq7ezep5jxm0-altxdvk5rrsf0zq-ba3638aa.png)
 
-Claude figured out the migration SQL code to write, and it also leveraged Neon’s [instant copy-on-write branching feature](https://neon.tech/docs/introduction/branching) to perform the migration safety by applying it first in a temporary branch (that got deleted in the end).
+Claude figured out the migration SQL code to write, and it also leveraged Neon’s [instant copy-on-write branching feature](https://neon.com/docs/introduction/branching) to perform the migration safety by applying it first in a temporary branch (that got deleted in the end).
 
 Here’s a clip showcasing the entire experience:
 
@@ -76,7 +76,7 @@ As part of this initial release, we’re exposing the following actions via MCP:
 - start_database_migration
 - commit_database_migration
 
-These _mostly_ map to [Neon API](https://neon.tech/docs/reference/api-reference) endpoints. However, certain tools such as the database migration related ones are tailored specifically for the usage we expect from AI agents and LLMs. As we showed above, these help the model by running the expected SQL on a side branch first and _then_ hinting the agent to test the migration and commit it as it sees fit.
+These _mostly_ map to [Neon API](https://neon.com/docs/reference/api-reference) endpoints. However, certain tools such as the database migration related ones are tailored specifically for the usage we expect from AI agents and LLMs. As we showed above, these help the model by running the expected SQL on a side branch first and _then_ hinting the agent to test the migration and commit it as it sees fit.
 
 ## Try it
 

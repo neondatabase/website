@@ -47,7 +47,7 @@ If it’s good enough for [Andrew Ng](https://x.com/AndrewYNg/status/19078439841
 <p><em>When debugging code, many developers copy-paste error messages — sometimes pages of them — into an LLM without further instructions. Most LLMs are smart enough to figure out that you want them to help understand and propose fixes, so you don’t need to explicitly tell them. </em></p>
 </blockquote>
 
-This is akin to Andréj Karpathy’s [vibe coding](https://neon.tech/blog/tab-coding-cursor), but the debugging version. Ng calls this “lazy prompting”—instead of presuming the LLM needs a complex prompt to decipher, just rely on the LLM’s innate ability to know what any error means. For instance, say we have this error:
+This is akin to Andréj Karpathy’s [vibe coding](https://neon.com/blog/tab-coding-cursor), but the debugging version. Ng calls this “lazy prompting”—instead of presuming the LLM needs a complex prompt to decipher, just rely on the LLM’s innate ability to know what any error means. For instance, say we have this error:
 
 ```bash
 Uncaught TypeError: Cannot read properties of undefined (reading 'map')
@@ -192,4 +192,4 @@ Let the machines handle the what of debugging while you deepen your understandin
 
 ---
 
-_Neon is the serverless Postgres database behind [Replit Agent](https://neon.tech/blog/replit-app-history-powered-by-neon-branches), it also works like a charm with AI IDEs like Cursor. [Sign up for our Free Plan](https://console.neon.tech/signup) and start building (and debugging!)_
+_Neon is the serverless Postgres database behind [Replit Agent](https://neon.com/blog/replit-app-history-powered-by-neon-branches), it also works like a charm with AI IDEs like Cursor. [Sign up for our Free Plan](https://console.neon.tech/signup) and start building (and debugging!)_

@@ -136,7 +136,7 @@ You can use the CLI in your developer workflows and pipelines. If not authentica
 npx neonctl branches create --project-id=<your_project_id> --api-key=<key>
 ```
 
-We invite you to visit the [documentation](https://neon.tech/docs/reference/neon-cli) for more information about the supported commands.
+We invite you to visit the [documentation](https://neon.com/docs/cli) for more information about the supported commands.
 
 ## We’d love to hear your feedback
 

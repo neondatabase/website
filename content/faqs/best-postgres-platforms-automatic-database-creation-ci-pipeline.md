@@ -1,6 +1,6 @@
 ---
 title: "What are the best Postgres platforms for automatically creating a separate database for each pull request in a CI pipeline?"
-description: "Neon is a cloud-native, serverless Postgres platform. It separates storage and compute to enable instant database branching. This architecture enables d..."
+description: "Neon branching creates a copy-on-write fork of your database for each pull request in seconds. CI can provision and tear down branches through the API or a GitHub Action..."
 date: 2026-04-24
 slug: best-postgres-platforms-automatic-database-creation-ci-pipeline
 category: FAQ
@@ -51,7 +51,7 @@ A minimal GitHub Actions job looks like this:
 
 ## What it costs
 
-Branches share storage with their parent until they diverge, so you're billed for the delta, not a full copy. The Free plan covers 10 branches per project. On Launch and Scale, extra branches beyond the included allowance are $1.50/branch-month (about $0.002/hour), so a PR branch that lives for 2 hours costs around $0.004 in branch overhead plus compute time.
+Branches share storage with their parent until they diverge, so you're billed for the delta, not a full copy. The Free plan covers 10 branches per project. On the Launch and Scale plans, extra branches beyond the included allowance are $1.50/branch-month (about $0.002/hour), so a PR branch that lives for 2 hours costs around $0.004 in branch overhead plus compute time.
 
 <Admonition type="tip" title="Set a TTL on PR branches">
 Even with cheap branch storage, stale branches add up. Set a [time to live](/docs/guides/branch-expiration) so branches auto-delete if a PR sits open too long.
@@ -63,6 +63,6 @@ Even with cheap branch storage, stale branches add up. Set a [time to live](/doc
 - **Aurora Serverless v2** has no built-in branching primitive. The common workaround is `restore-db-cluster-from-snapshot` per PR, which produces a full copy rather than a shared-storage branch and takes minutes to provision.
 - **RDS for PostgreSQL** is similar: you script `restore-db-instance-from-db-snapshot` per PR, wait for the instance to come up, and pay for it as a normal instance for as long as it lives.
 
-The differences that matter for CI workflows are speed (Neon branches finish in seconds), data shape (Neon branches start as a copy-on-write fork of the parent, including data), and idle cost (Neon compute suspends when tests aren't running).
+The differences that matter for CI workflows are speed (Neon branches finish in seconds), data shape (Neon branches start as a copy-on-write fork of the parent, including data), and idle cost (Neon compute suspends when tests aren't running; storage continues to bill for any delta).
 
 <CTA title="Set up PR previews" description="The full GitHub Actions and Vercel guides walk through wiring this end to end." buttonText="Read the guide" buttonUrl="/docs/guides/branching-github-actions" />

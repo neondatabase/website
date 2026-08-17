@@ -51,7 +51,7 @@ What we learned:
 - **52% reported negative customer feedback and a huge spike in support cases** due to the incident.
 - **26% also had to deal with breach of SLAs and penalties.**
 - **Only 21% felt very confident** in their ability to quickly restore after a failure.
-- **68% of teams had faster point-in-time recovery solutions, [like Neon’s,](https://neon.tech/blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery) on their wishlist.**
+- **68% of teams had faster point-in-time recovery solutions, [like Neon’s,](https://neon.com/blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery) on their wishlist.**
 
 <Admonition type="important" title="read the report">
 See the highlights of the survey (recovery horror stories included) [in this report](https://neon.tech/restores-survey). You can also download the raw results.
@@ -97,11 +97,11 @@ This is another side of the “revenue loss” coin. **For B2B SaaS businesses, 
 
 ## Experience a Faster Recovery Path With Neon’s Instant Restores
 
-If slow Postgres restores are this harmful to companies and teams, what’s the solution? **Instant restores**—and [this is what you get with Neon](https://neon.tech/docs/introduction/branch-restore). We take a fundamentally different approach to Postgres recovery [vs traditional managed Postgres like RDS](https://neon.tech/blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery):
+If slow Postgres restores are this harmful to companies and teams, what’s the solution? **Instant restores**—and [this is what you get with Neon](https://neon.com/docs/introduction/branch-restore). We take a fundamentally different approach to Postgres recovery [vs traditional managed Postgres like RDS](https://neon.com/blog/recover-large-postgres-databases#neons-instant-point-in-time-recovery):
 
 - **Neon offers instant PITR based on branching** – You can instantly create a branch snapshot from any past state and instantly revert to it. No need to replay WAL or wait for a full database restore.
-- **Instant even at 100 TB scale** – Whether your database is 10GB or 100TB, [Neon’s restore time stays the same](https://neon.tech/blog/outage-simulator): seconds, not hours.
-- **No need for lagging replicas or costly standby instances** – [Multi-AZ high availability](https://neon.tech/docs/introduction/high-availability) is built into Neon’s architecture, eliminating the need for full-size standby databases.
+- **Instant even at 100 TB scale** – Whether your database is 10GB or 100TB, [Neon’s restore time stays the same](https://neon.com/blog/outage-simulator): seconds, not hours.
+- **No need for lagging replicas or costly standby instances** – [Multi-AZ high availability](https://neon.com/docs/introduction/high-availability) is built into Neon’s architecture, eliminating the need for full-size standby databases.
 
 If you’re ready to see it in action, try it. [It takes 1 minute to sign up to Neon, without a credit card](https://console.neon.tech/signup).
 
