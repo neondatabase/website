@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Inserting data through JDBC works the same against any PostgreSQL database, so the patterns shown here with PreparedStatement, generated keys, and batch inserts apply wherever you run Postgres. If you're an enterprise standardizing on Postgres for AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) delivers a fully managed, secure, high-performance Postgres that's natively integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Inserting data through JDBC works the same against any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to insert data into a table in the PostgreSQL database using JDBC.

@@ -3,20 +3,26 @@ title: 'How do I migrate an existing Neon project to a different AWS region?'
 subtitle: 'Create a new project in the target region, copy data over with pg_dump and pg_restore, then cut over.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Can I change the region of my existing Neon project after creation?'
+  slug: change-project-region
+nextLink:
+  title: 'What are the cheapest ways to run a Postgres database for a project that gets very little traffic?'
+  slug: cheapest-ways-run-postgres-database-low-traffic
 ---
 
 ## Quick answer
 
-You can't move an existing Neon project to a new region in place. Instead, create a new project in the target region, copy the schema and data using `pg_dump` and `pg_restore` (or logical replication for larger datasets), update your connection strings, then delete the old project. The whole process takes minutes for small databases and is the same workflow for AWS-to-AWS as for AWS-to-Azure.
+You can't move an existing Neon project to a new region in place. Instead, create a new project in the target AWS region, copy the schema and data using `pg_dump` and `pg_restore` (or logical replication for larger datasets), update your connection strings, then delete the old project. The whole process takes minutes for small databases. New projects can only be created in AWS regions; Azure regions are deprecated.
 
 ## Step-by-step migration
 
 ### 1. Create the new project in the target region
 
-In the [Neon Console](https://console.neon.tech), click **New Project**, then set the cloud provider, region, and Postgres version. Use the same Postgres major version as the source project to avoid version compatibility issues.
+In the [Neon Console](https://console.neon.tech), click **New Project**, then set the AWS region and Postgres version. Use the same Postgres major version as the source project to avoid version compatibility issues.
 
 From the CLI:
 
@@ -24,7 +30,7 @@ From the CLI:
 neon projects create --name myproject-us-east-1 --region-id aws-us-east-1
 ```
 
-For the full list of supported region IDs (AWS and Azure), see [Regions](/docs/introduction/regions). Pass the ID with `--region-id`, for example `aws-us-east-1`. Full command reference: [`neon projects create`](/docs/cli/projects#create).
+For the full list of supported AWS region IDs, see [Regions](/docs/introduction/regions). Pass the ID with `--region-id`, for example `aws-us-east-1`. Full command reference: [`neon projects create`](/docs/cli/projects#create).
 
 ### 2. Dump the source database
 
@@ -58,6 +64,6 @@ Writes to the source database during the dump and restore won't appear in the ne
 
 ## What about data transfer costs?
 
-Egress between Neon regions counts as public network transfer. Check the [Pricing page](/pricing) for the current per-GB rate. The Free plan includes 5 GB per project per month, which is usually enough for a one-off migration.
+Egress between Neon regions counts as public network transfer. Check the [Pricing page](/pricing) for the current per-GB rate. The Free plan includes 5 GB/month of public network transfer, which is usually enough for a one-off migration.
 
 <CTA title="Compare migration paths" description="The region migration guide compares the Import Data Assistant, dump and restore, and logical replication." buttonText="Region migration guide" buttonUrl="https://neon.com/docs/import/migrate-neon-to-another-region" />

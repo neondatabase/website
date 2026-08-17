@@ -2,7 +2,7 @@
 title: 'Neon CLI command: operations'
 subtitle: List and manage long-running operations for a Neon project
 summary: >-
-  The Neon CLI `neonctl operations list` command retrieves the history of system
+  The Neon CLI `neon operations list` command retrieves the history of system
   operations for a Neon project, showing each operation's ID, action type (such
   as `apply_config` or `suspend_compute`), status, and creation timestamp. Use
   this command to inspect or audit long-running or recently completed operations
@@ -10,16 +10,17 @@ summary: >-
   to be installed and authenticated; scope to a specific project with
   `--project-id` when your account has multiple projects.
 enableTableOfContents: true
-updatedOn: '2026-06-12T01:42:37.157Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-operations
+  - /docs/cli/operation
 ---
 
 The `operations` command lists operations for a Neon project from the terminal. For information about operations in Neon, see [System operations](/docs/manage/operations). If `--project-id` is omitted, the CLI resolves it from your [context file](/docs/cli/set-context), auto-selects when your account has only one project, and prompts otherwise.
 
 <CliSubcommands command="operations" />
 
-## neonctl operations list (#list)
+## neon operations list (#list)
 
 Lists operations for a Neon project.
 
@@ -28,7 +29,7 @@ Lists operations for a Neon project.
 <CliOptions command="operations list" />
 
 ```bash
-neonctl operations list
+neon operations list
 ```
 
 ```text filename="Output"

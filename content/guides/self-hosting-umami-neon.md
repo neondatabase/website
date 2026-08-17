@@ -1,10 +1,10 @@
 ---
 title: Run your own analytics with Umami, Fly.io and Neon
-subtitle: Self host your Umami analytics on Fly.io and powered by Neon Postgres
+subtitle: Self host your Umami analytics on Fly.io and powered by Lakebase Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2024-06-05T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 In this guide, you will learn how to self host your Umami analytics instance on Fly.io and powered by Neon, the AI-native backend platform for apps and agents whose offering spans a Postgres Database, Auth, Storage, Functions, and an AI Gateway. Here you will use its Postgres Database as Umami's data store.
@@ -21,7 +21,7 @@ To follow along and deploy the application in this guide, you will need the foll
 - [What is Umami?](#what-is-umami)
 - [Provisioning a Postgres database using Neon](#provisioning-a-postgres-database-using-neon)
 - [Set up an Umami instance for Fly.io](#set-up-an-umami-instance-for-flyio)
-- [Configure Neon Postgres as serverless database for self-hosted Umami analytics](#set-neon-postgres-as-serverless-database-for-self-hosted-umami-analytics)
+- [Configure Postgres on Neon as serverless database for self-hosted Umami analytics](#configure-postgres-on-neon-as-serverless-database-for-self-hosted-umami-analytics)
 - [Deploy to Fly.io](#deploy-to-flyio)
 
 ## What is Umami?
@@ -170,7 +170,7 @@ This deployment will:
 
 Once the deployment is ready, you are left with just one step &#8212; to set the `DATABASE_URL` environment variable that we obtained in the previous section. We'll do that in the next section.
 
-## Configure Neon Postgres as serverless database for self-hosted Umami analytics
+## Configure Postgres on Neon as serverless database for self-hosted Umami analytics
 
 In your Fly.io [Dashboard > Apps](https://fly.io/dashboard), click on your app name, and you will be taken to the overview of your app on Fly.io.
 
@@ -184,7 +184,7 @@ In the modal, set the name of the secret as `DATABASE_URL`, and set the `Secret`
 
 ![](/guides/images/self-hosting-umami-neon/307263972-75bef039-f4d1-4b7d-a66d-dd312290a6d1.png)
 
-Great! With that done, you have successfully ensured that each deployment of your app on Fly.io will have the database URL pointing to the Neon Postgres instance. Let's trigger a deploy to see it all in action.
+Great! With that done, you have successfully ensured that each deployment of your app on Fly.io will have the database URL pointing to the Lakebase Postgres instance. Let's trigger a deploy to see it all in action.
 
 ## Deploy To Fly.io
 

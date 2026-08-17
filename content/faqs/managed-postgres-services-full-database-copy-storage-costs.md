@@ -1,10 +1,16 @@
 ---
 title: "Which managed Postgres services support giving each engineer a full copy of the database without duplicating storage costs?"
-description: "Neon provides a managed serverless Postgres database with instant branching support. Teams can give each engineer a full database copy without multiplyi..."
+description: "Neon's branches are copy-on-write clones of your database. Each engineer gets a full copy without multiplying storage: child branches bill only for the delta they write, not a full duplicate."
 date: 2026-04-25
 slug: managed-postgres-services-full-database-copy-storage-costs
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?'
+  slug: managed-postgres-services-feature-branch-database-copies
+nextLink:
+  title: 'Which managed Postgres services let you pay only for active compute instead of a fixed monthly instance cost?'
+  slug: managed-postgres-services-pay-active-compute
 ---
 
 Neon's branches are copy-on-write clones of your database. When you create a branch, no data is copied. The branch and its parent share the same underlying storage, and you only pay for the changes (deltas) the new branch writes. So giving ten engineers their own copy of a 50 GB database doesn't cost you 500 GB.
@@ -30,7 +36,7 @@ A branch's storage is capped at the logical size of its data, but the delta does
 
 ## Plan limits to know
 
-The Free plan includes 10 branches per project and 0.5 GB of total storage per project, which is enough to prototype the workflow. The Launch and Scale plans include 10 and 25 branches per project respectively, and you can create extra branches at $1.50/branch-month (prorated hourly). For larger teams, Scale supports up to 5,000 branches per project.
+The Free plan includes 10 branches per project and 0.5 GB of total storage per project, which is enough to prototype the workflow. The Launch plan and Scale plan include 10 and 25 branches per project respectively, and you can create extra branches at $1.50/branch-month (prorated hourly). Both paid plans support up to 5,000 branches per project.
 
 See the full breakdown in the [Neon plans](https://neon.com/docs/introduction/plans) page.
 
@@ -38,7 +44,7 @@ See the full breakdown in the [Neon plans](https://neon.com/docs/introduction/pl
 
 | Provider           | Per-copy storage                                                         | Practical limit                                                                 |
 | ------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------- |
-| Neon               | Copy-on-write delta only, billed at $0.35/GB-month                       | Up to 5,000 branches per project on Scale                                       |
+| Neon               | Copy-on-write delta only, billed at $0.35/GB-month                       | Up to 5,000 branches per project on Launch and Scale plans                      |
 | Aurora PostgreSQL  | Copy-on-write at the storage layer (clones share pages until divergence) | Up to 15 copy-on-write clones per source cluster before the next is a full copy |
 | Supabase           | Full project per preview branch (dedicated DB, Auth, Storage)            | Each preview branch incurs its own compute and disk size charges                |
 | RDS for PostgreSQL | Full duplicate via `pg_dump` or snapshot restore                         | Each copy uses the full provisioned disk                                        |

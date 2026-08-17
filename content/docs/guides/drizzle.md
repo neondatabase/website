@@ -2,15 +2,15 @@
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
 summary: >-
-  Drizzle ORM connection guide for Neon Postgres walks through initializing a
+  Drizzle ORM connection guide for Lakebase Postgres walks through initializing a
   TypeScript/Node.js project with supported drivers: Neon serverless HTTP, Neon
   WebSocket, node-postgres, and postgres.js. Use this page when you need
-  type-safe queries plus Drizzle Kit migrations against a Neon database and want
+  type-safe queries plus Drizzle Kit migrations against a Lakebase database and want
   to pick the right driver for serverless or long-running environments. The
   guide also shows how to point Drizzle at different Neon branches per
   environment by selecting a connection string based on NODE_ENV.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -30,7 +30,7 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 
 </InfoBlock>
 
-Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide demonstrates how to connect your application to a Neon Postgres database using Drizzle ORM.
+Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide demonstrates how to connect your application to a Lakebase Postgres database using Drizzle ORM.
 
 To connect a TypeScript/Node.js project to Neon using Drizzle ORM, follow these steps:
 
@@ -68,8 +68,16 @@ The connection string includes the user name, password, hostname, and database n
 Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
 
 ```text shouldWrap
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+# Pooled connection for your application
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
+
+# Unpooled connection for Drizzle Kit
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
 ```
+
+<Admonition type="note">
+Neon supports both direct and pooled connection strings, which you can find by clicking the **Connect** button on your **Project Dashboard**. A pooled connection string (the hostname includes `-pooler`) routes through a PgBouncer connection pool, which is ideal for your application at runtime. However, using a pooled connection string for migrations can lead to errors. Use a direct (non-pooled) connection when running Drizzle Kit migrations. For more information, see [Connection pooling](/docs/connect/connection-pooling) and [Schema migration with Drizzle ORM](/docs/guides/drizzle-migrations).
+</Admonition>
 
 ## Install Drizzle and a driver
 
@@ -131,8 +139,8 @@ Drizzle Kit uses a configuration file to manage schema and migrations. Create a 
 import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set in the .env file');
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in the .env file');
 }
 
 export default defineConfig({
@@ -140,10 +148,28 @@ export default defineConfig({
   out: './drizzle', // Your migrations folder
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL_UNPOOLED,
   },
 });
 ```
+
+<Admonition type="tip" title="Loading a .env.local file">
+`import 'dotenv/config'` loads variables from a `.env` file. If you keep your connection string in `.env.local` (a common convention in Next.js and other frameworks), point dotenv at it explicitly instead:
+
+```typescript
+import { config } from 'dotenv';
+config({ path: '.env.local' });
+
+import { defineConfig } from 'drizzle-kit';
+
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in .env.local');
+}
+
+// ...rest of config unchanged
+```
+
+</Admonition>
 
 ## Initialize the Drizzle client
 
@@ -357,13 +383,20 @@ const sql = neon(getBranchUrl()!);
 export const db = drizzle({ client: sql });
 ```
 
-Each branch has its own connection string, available in the Neon Console or via the CLI (`neonctl connection-string <branch-id-or-name> --project-id <project-id>`).
+Each branch has its own connection string, available in the Neon Console or via the CLI (`neon connection-string <branch-id-or-name> --project-id <project-id>`).
 
 ## Resources
 
 - [Get Started with Drizzle and Neon](https://orm.drizzle.team/docs/get-started/neon-new)
 - [Drizzle with Neon Postgres](https://orm.drizzle.team/docs/tutorials/drizzle-with-neon)
-- [Schema migration with Neon Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
+- [Schema migration with Lakebase Postgres and Drizzle ORM](/docs/guides/drizzle-migrations)
 - [Todo App with Neon Postgres and Drizzle ORM](https://orm.drizzle.team/docs/tutorials/drizzle-nextjs-neon)
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

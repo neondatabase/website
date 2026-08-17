@@ -122,7 +122,7 @@ const ContactForm = () => {
     } catch (error) {
       if (error.name !== 'AbortError') {
         doNowOrAfterSomeTime(() => {
-          setFormState(FORM_STATES.BROKEN);
+          setFormState(FORM_STATES.ERROR);
           setIsBroken(true);
         }, 2000);
       }
@@ -139,6 +139,7 @@ const ContactForm = () => {
       )}
       method="POST"
       id="startups-form"
+      data-test="startups-form"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className="text-xl leading-snug font-medium tracking-tighter text-white">

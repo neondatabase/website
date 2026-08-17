@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-06-23T22:05:54.707Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -146,7 +146,7 @@ Resetting a password cuts over all consumers at once. To rotate gradually, creat
 
 ## Abuse of resources
 
-Users must not engage in activities that result in unintended or non-permitted use of Neon resources, or that disrupt or degrade the service for other users. Prohibited activities include, but are not limited to, intentional or unintentional denial-of-service attacks, exceeding [rate limits](/docs/reference/api-reference#rate-limiting), using Neon for distributed computing projects, using Neon as general-purpose file storage, or other usage that falls outside the intended resource usage and limits of the applicable [Neon plan](/docs/introduction/plans).
+Users must not engage in activities that result in unintended or non-permitted use of Neon resources, or that disrupt or degrade the service for other users. Prohibited activities include, but are not limited to, intentional or unintentional denial-of-service attacks, exceeding [rate limits](/docs/reference/api#rate-limiting), using Neon for distributed computing projects, using Neon as general-purpose file storage, or other usage that falls outside the intended resource usage and limits of the applicable [Neon plan](/docs/introduction/plans).
 
 ## Unauthorized modifications
 

@@ -3,9 +3,15 @@ title: 'How do I rotate my database URL or connection string in Neon?'
 subtitle: 'Two paths: reset the role password (fast), or create a new role and migrate consumers (zero-downtime).'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rotate my database password in Neon after a security incident?'
+  slug: rotate-database-password-after-leak
+nextLink:
+  title: 'How do I rotate my Neon API keys after they''ve been exposed?'
+  slug: rotate-neon-api-keys
 ---
 
 ## Quick answer
@@ -73,7 +79,7 @@ Then:
 4. **Reset the old role's password** to invalidate the leaked credentials:
 
    ```sql
-   ALTER USER old_role_name WITH PASSWORD 'a-strong-random-value-no-one-keeps';
+   ALTER ROLE old_role_name WITH PASSWORD 'a-strong-random-value-no-one-keeps';
    ```
 
    This is the step that actually closes the breach. You can also reset it from the Console under **Roles & Databases**. Do not skip this step, even if no service uses the old role anymore.
@@ -85,4 +91,4 @@ If you do want to remove the role later (outside of incident pressure), you'll n
 </Admonition>
 
 **Note: The hostname doesn't change**
-Even with rotation, the compute hostname stays the same unless you delete and recreate the compute. The `ep-xxx-yyy` portion of your URL is the compute ID. If you need to change the hostname too, you'll need to recreate the project or compute.
+Even with rotation, the compute hostname stays the same unless you delete and recreate the compute. The `ep-xxx` portion of your URL is the compute endpoint ID. If you need a new hostname, recreate the compute (or the project).

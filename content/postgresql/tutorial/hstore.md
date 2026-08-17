@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Working with hstore key-value data applies to PostgreSQL everywhere, not just [Neon](https://neon.com). If you're an enterprise storing semi-structured attributes alongside AI and analytics workloads, [Lakebase](https://www.databricks.com/product/lakebase) gives you managed Postgres that's performant, secure, and fully integrated into the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Working with hstore key-value data applies to PostgreSQL everywhere. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you’ll learn how to work with **PostgreSQL hstore** data type.

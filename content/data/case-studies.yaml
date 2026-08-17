@@ -1,3 +1,22 @@
+- id: 'commsync'
+  title: 'CommSync'
+  isFeatured: false
+  logo:
+    mediaItemUrl: '/images/case-studies/commsync.png'
+    mediaDetails:
+      width: 163
+      height: 32
+  quote: 'We’re running lakebase_text and lakebase_vector across three different parts of our product. Query latency improved 1,000x and we don’t need a separate search stack sitting next to our Postgres'
+  author:
+    name: 'Srijit Ghosh'
+    post: 'Co-founder and CTO at CommSync'
+  isInternal: true
+  internalPostSlug: 'commsync-runs-text-vector-and-hybrid-search-on-postgres-with-lakebase-search'
+  externalUrl: ''
+  categories:
+    - slug: 'startups'
+      name: 'Startups'
+
 - id: 'magic-circle'
   title: 'Magic Circle'
   isFeatured: false

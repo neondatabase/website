@@ -11,7 +11,7 @@ When we say "Ship faster with Postgres" — it's not just about helping you buil
 See for yourself how faster gets shipped with these open source examples.
 
 - [NextFaster](https://next-faster.vercel.app/) - 400ms initial page load and 10ms nth pageloads on this full-stack Next.JS demo backed by Vercel and Neon. [Source](https://github.com/ethanniser/NextFaster) created by [@ethanniser](https://x.com/ethanniser), [RhysSullivan](https://x.com/RhysSullivan)
-- [AI Chatbot](https://chat.vercel.ai) - uses Vercel's AI SDK to provide a fast SOTA chatbot UI template on Vercel and Neon. [Source](https://github.com/vercel/ai-chatbot) created by Vercel Team
+- [Chatbot](https://chatbot.ai-sdk.dev/) - uses Vercel's AI SDK to provide a fast SOTA chatbot UI template on Vercel and Neon. [Source](https://github.com/vercel/chatbot) created by Vercel Team
 - [Book inventory](https://next-books-search.vercel.app/) - full-stack Next.JS template to search/filter/paginate 600,000 books on Vercel and Neon. [Source](https://github.com/vercel-labs/book-inventory) - credit to [@leerob](https://x.com/leeerob)
 - [Vector DB per Tenant](https://db-per-tenant.up.railway.app/) - Fast, secure chat-with-pdf app showing how to provision a dedicated vector database instance for each user on [Railway](https://railway.com) and Neon. [Source](https://github.com/neondatabase/db-per-tenant) created by [Mahmoud](https://x.com/thisismahmoud_)
 
@@ -131,7 +131,7 @@ As your business (and database) grows, connection and network transit latency re
    You can dig deeper with [pg_stat_statements](/docs/extensions/pg_stat_statements)
 3. **Add indexes on high-impact columns** – Create indexes on columns that are frequently used in `WHERE` filters, `JOIN` conditions, or `ORDER BY` clauses to avoid full table scans. An index lets Postgres perform an index scan instead of a slower sequential scan, dramatically reducing query execution time.
 4. **Reduce table and index bloat** – Reclaim wasted space and improve performance by eliminating bloat (accumulated dead rows) in tables and indexes. Schedule regular maintenance like `VACUUM` to remove dead tuples and use `REINDEX` on bloated indexes. You can also fine-tune autovacuum settings to keep bloat in check over time.
-5. **Leverage caching for reads** – Ensure frequently accessed data is served from memory instead of disk. Neon’s architecture extends Postgres’s shared memory buffers with a local file system cache, so aim for a high cache hit ratio. You can monitor the **Local file cache hit rate** chart on the **Monitoring** page in the Neon Console to see how often data is read from cache versus storage and adjust your workload or memory allocation if needed.
+5. **Leverage caching for reads** – Ensure frequently accessed data is served from memory instead of disk. In Neon, up to 75% of your compute’s RAM is used for data caching, so aim for a high cache hit ratio. You can monitor the **Compute cache hit rate** chart on the **Monitoring** page in the Neon Console to see how often data is read from cache versus storage and adjust your workload or memory allocation if needed.
 
 **Further reading** – See [PostgreSQL query performance guide](/docs/postgresql/query-performance) for in-depth explanations and tips.
 

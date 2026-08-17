@@ -3,9 +3,15 @@ title: 'Where can I find my DATABASE_URL in Neon?'
 subtitle: 'Copy it from the Connect widget on the Project Dashboard and drop it into your .env.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T19:11:12.829Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'Where can I find my database connection string in Neon?'
+  slug: find-database-connection-string
+nextLink:
+  title: 'Where can I find or generate API keys for Neon?'
+  slug: find-or-generate-neon-api-keys
 ---
 
 Your `DATABASE_URL` is the Postgres connection string Neon builds for you. Open your project in the [Neon Console](https://console.neon.tech), click **Connect** on the **Project Dashboard**, and copy the connection string from the **Connect to your database** modal. Paste it into your framework's `.env` file as `DATABASE_URL` and you're set.
@@ -23,7 +29,7 @@ A Neon `DATABASE_URL` looks like:
 postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Both `sslmode=require` and `channel_binding=require` are part of the URL because Neon requires TLS. Don't strip them. See [Connect from any app](/docs/connect/connect-from-any-app) for what each segment means.
+Neon requires SSL/TLS (`sslmode=require`). `channel_binding=require` adds SCRAM mutual authentication. Keep both unless your client doesn't support channel binding. See [Connect to Neon securely](/docs/connect/connect-securely) and [Connect from any app](/docs/connect/connect-from-any-app).
 
 ## Use it in your app
 

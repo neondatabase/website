@@ -19,7 +19,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Installing PostgreSQL on Linux works the same whether you're running it on a laptop, a VM, or a production server, and the steps below apply to any standard Postgres distribution. When you're ready to move beyond a local install, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed cloud Postgres for the AI era, with the performance, security, and Lakehouse integration that enterprises expect. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Installing PostgreSQL on Linux works the same whether you're running it on a laptop, a VM, or a production server, and the steps below apply to any standard Postgres distribution. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to download and install PostgreSQL on Linux.

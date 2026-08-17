@@ -2,7 +2,7 @@
 title: Connect an Express application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Express application
 summary: >-
-  Express and Neon Postgres connection guide covering Node.js driver options:
+  Express and Lakebase Postgres connection guide covering Node.js driver options:
   `@neondatabase/serverless` for edge and serverless platforms such as Vercel
   and Cloudflare Workers, `pg` (node-postgres) for long-running servers, and
   `postgres.js` for both. Use this page when connecting an Express API to a
@@ -11,13 +11,13 @@ summary: >-
   covers project creation, `DATABASE_URL` setup via `dotenv`, and connection
   pool initialization outside route handlers.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/express-prompt.md"
-description="Pre-built prompt for connecting ExpressJS applications to Neon Postgres"/>
+description="Pre-built prompt for connecting ExpressJS applications to Lakebase Postgres"/>
 
-This guide describes how to create a Neon project and connect to it from an Express application.
+This guide describes how to create a Neon project and connect to it from an Express application to query a Lakebase Postgres database.
 
 ## Choose a driver
 
@@ -144,6 +144,10 @@ app.listen(PORT, () => {
 });
 ```
 
+<Admonition type="note">
+Recent versions of `pg` print a warning that `sslmode=require` will be treated as `verify-full` in a future major version, which has weaker security guarantees than the current behavior. If you see this warning, either add `uselibpqcompat=true` to your connection string to keep the current behavior, or use `sslmode=verify-full` directly. See the [pg-connection-string documentation](https://www.postgresql.org/docs/current/libpq-ssl.html) for details on libpq SSL mode definitions.
+</Admonition>
+
 ```javascript
 require('dotenv').config();
 
@@ -183,6 +187,11 @@ Run `node index.js` to view the result on [localhost:4242](localhost:4242) as fo
 
 </Steps>
 
+## Connection issues
+
+- If you see an `endpoint ID is not specified` error, the TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. For `pg` (node-postgres), this means an outdated `libpq`-compatible TLS stack; upgrading `pg` usually resolves it.
+- If you encounter an `SSL SYSCALL error: EOF detected` (or a similar connection-reset error), this typically happens when an application tries to reuse a connection after the Neon compute has been suspended due to inactivity. This mainly affects long-running servers that keep a connection pool open, like the `pg` example above — closing and recreating idle connections, or reconnecting on error, resolves it.
+
 <details>
 <summary>**Notes for AI-assisted setup**</summary>
 
@@ -193,5 +202,12 @@ Run `node index.js` to view the result on [localhost:4242](localhost:4242) as fo
 - Choose the right driver for your platform. `@neondatabase/serverless` is for serverless/edge platforms without TCP support. For long-running Express servers, use `pg` or `postgres`. See [Choosing your connection method](/docs/connect/choose-connection).
 
 </details>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

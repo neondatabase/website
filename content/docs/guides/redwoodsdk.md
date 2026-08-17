@@ -1,24 +1,24 @@
 ---
 title: Connect a RedwoodSDK application to Neon
-subtitle: Set up a Neon project in seconds and connect from a Redwood application
+subtitle: Set up a project on Neon in seconds and connect from a Redwood application
 summary: >-
   RedwoodSDK is a full-stack framework for Cloudflare Workers, and connecting it
-  to Neon Postgres requires choosing between two drivers: postgres.js or the
+  to Lakebase Postgres requires choosing between two drivers: postgres.js or the
   Neon serverless driver (@neondatabase/serverless). This guide walks through
-  creating a Neon project, installing the chosen driver, storing the
+  creating a project on Neon, installing the chosen driver, storing the
   DATABASE_URL connection string in .env, and configuring route handlers in
-  TypeScript to query Postgres on Neon. Use this page when building a RedwoodSDK
+  TypeScript to query the database. Use this page when building a RedwoodSDK
   app on Cloudflare that needs a serverless Postgres backend.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"
-description="Pre-built prompt for connecting RedwoodSDK applications to Neon Postgres"/>
+description="Pre-built prompt for connecting RedwoodSDK applications to Lakebase Postgres"/>
 
 [RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application.
 
-To create a Neon project and access it from a RedwoodSDK application:
+To create a project on Neon and access it from a RedwoodSDK application:
 
 <Steps>
 
@@ -135,5 +135,12 @@ PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 
 
 - [RedwoodSDK Documentation](https://docs.rwsdk.com/)
 - [Connect to a PostgreSQL database with Cloudflare Workers](https://developers.cloudflare.com/workers/tutorials/postgres/)
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

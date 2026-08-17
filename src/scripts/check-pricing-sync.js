@@ -98,6 +98,35 @@ const extractNumber = (val) => {
   return match ? match[1] : normalizeValue(val);
 };
 
+// Boolean feature-presence rows (checkmarks). Each source renders the two states
+// differently: present as component `true` / docs ✅ / pricing.md "Yes", absent as
+// component `false` / docs — / pricing.md "-". Map the known tokens to 'yes'/'no';
+// any other wording falls through to its literal value so an unexpected cell (e.g.
+// "Coming soon") surfaces as a mismatch instead of silently reading as "yes".
+const yesNo = (val) => {
+  if (val === true) return 'yes';
+  if (val === false || val === undefined || val === null) return 'no';
+  const s = String(val).trim().toLowerCase();
+  if (!s || s === '--' || s === '—' || s === '-') return 'no';
+  if (['yes', '✅', 'included', 'true'].includes(s)) return 'yes';
+  return s;
+};
+
+// Beta features are free during beta, but each source words it differently
+// (component "No charges applied during beta…", docs "No charge during beta…",
+// pricing.md "Free during beta"). They share one reliable signal: the word
+// "beta". Collapse anything mentioning beta to a single concept; treat
+// false/—/blank as not-offered. Any other wording (e.g. a real GA rate) falls
+// through to its literal value, so post-beta drift surfaces as a mismatch
+// instead of silently matching.
+const betaValue = (val) => {
+  if (val === false || val === undefined || val === null) return '--';
+  const s = String(val).trim();
+  if (!s || s === '--' || s === '—' || s === '-') return '--';
+  if (/\bbeta\b/i.test(s)) return 'beta';
+  return normalizeValue(val);
+};
+
 function extractCore(pattern, replacement) {
   return (val) => {
     if (!val || val === '--') return val;
@@ -343,7 +372,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'compute-rate-free',
     label: 'Compute rate (Free)',
-    comp: 'Rates',
+    comp: 'Compute rates',
     docs: 'Compute',
     plan: 'free',
     norm: extractCore(/(\d+)\s*CU/i, '$1 CU-hours'),
@@ -352,7 +381,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'compute-rate-launch',
     label: 'Compute rate (Launch)',
-    comp: 'Rates',
+    comp: 'Compute rates',
     docs: 'Compute',
     plan: 'launch',
     norm: extractRate,
@@ -361,7 +390,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'compute-rate-scale',
     label: 'Compute rate (Scale)',
-    comp: 'Rates',
+    comp: 'Compute rates',
     docs: 'Compute',
     plan: 'scale',
     norm: extractRate,
@@ -370,7 +399,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'autoscaling-free',
     label: 'Autoscaling / Sizes (Free)',
-    comp: 'Sizes',
+    comp: 'Compute sizes',
     docs: 'Autoscaling',
     plan: 'free',
     norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
@@ -379,7 +408,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'autoscaling-launch',
     label: 'Autoscaling / Sizes (Launch)',
-    comp: 'Sizes',
+    comp: 'Compute sizes',
     docs: 'Autoscaling',
     plan: 'launch',
     norm: extractCore(/up to (\d+)\s*CU/i, 'Up to $1 CU'),
@@ -422,7 +451,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'storage-free',
     label: 'Storage (Free)',
-    comp: 'Database',
+    comp: 'Database storage',
     docs: 'Storage',
     plan: 'free',
     norm: extractCore(/([\d.]+\s*GB)/i),
@@ -431,7 +460,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'storage-rate-launch',
     label: 'Storage rate (Launch)',
-    comp: 'Database',
+    comp: 'Database storage',
     docs: 'Storage',
     plan: 'launch',
     norm: extractRate,
@@ -440,7 +469,7 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'storage-rate-scale',
     label: 'Storage rate (Scale)',
-    comp: 'Database',
+    comp: 'Database storage',
     docs: 'Storage',
     plan: 'scale',
     norm: extractRate,
@@ -564,8 +593,8 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'auth-free',
     label: 'Auth MAU (Free)',
-    comp: 'MAU',
-    docs: 'Auth',
+    comp: 'Managed Better Auth',
+    docs: 'Auth (Beta)',
     plan: 'free',
     norm: extractCore(/(60k|60,?000)/i, '60k'),
     agentLabel: 'Auth (MAU)',
@@ -573,8 +602,8 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'auth-launch',
     label: 'Auth MAU (Launch)',
-    comp: 'MAU',
-    docs: 'Auth',
+    comp: 'Managed Better Auth',
+    docs: 'Auth (Beta)',
     plan: 'launch',
     norm: extractCore(/(1M|1,?000,?000)/i, '1M'),
     agentLabel: 'Auth (MAU)',
@@ -582,12 +611,46 @@ const CROSS_SOURCE_CHECKS = [
   {
     id: 'auth-scale',
     label: 'Auth MAU (Scale)',
-    comp: 'MAU',
-    docs: 'Auth',
+    comp: 'Managed Better Auth',
+    docs: 'Auth (Beta)',
     plan: 'scale',
     norm: extractCore(/(1M|1,?000,?000)/i, '1M'),
     agentLabel: 'Auth (MAU)',
   },
+
+  // --- Backend (Beta) ---
+  // These features are free during beta with no per-plan numbers to drift, so we
+  // only verify that each source agrees they're offered (betaValue collapses the
+  // differently-worded "free/no charge during beta" prose to a single concept).
+  ...['free', 'launch', 'scale'].flatMap((plan) => [
+    {
+      id: `object-storage-${plan}`,
+      label: `Object Storage (${plan})`,
+      comp: 'Object Storage',
+      docs: 'Object Storage (Beta)',
+      plan,
+      norm: betaValue,
+      agentLabel: 'Object Storage',
+    },
+    {
+      id: `functions-${plan}`,
+      label: `Functions (${plan})`,
+      comp: 'Functions',
+      docs: 'Functions (Beta)',
+      plan,
+      norm: betaValue,
+      agentLabel: 'Functions',
+    },
+    {
+      id: `ai-gateway-${plan}`,
+      label: `AI Gateway (${plan})`,
+      comp: 'AI Gateway',
+      docs: 'AI Gateway (Beta)',
+      plan,
+      norm: betaValue,
+      agentLabel: 'AI Gateway',
+    },
+  ]),
 
   // --- Monitoring & Observability ---
   {
@@ -631,6 +694,20 @@ const CROSS_SOURCE_CHECKS = [
         : 'no',
     agentLabel: 'Metrics/logs export',
   },
+
+  // --- Billing & Account ---
+  // Named "Spending notifications" across all three sources (the feature sends
+  // email alerts; a hard limit is coming soon). Free plan has no notifications,
+  // so only Launch/Scale are compared.
+  ...['launch', 'scale'].map((plan) => ({
+    id: `spending-notifications-${plan}`,
+    label: `Spending notifications (${plan})`,
+    comp: 'Spending notifications',
+    docs: 'Spending notifications',
+    plan,
+    norm: yesNo,
+    agentLabel: 'Spending notifications',
+  })),
 
   // --- Compliance & Security (component preferred — separate rows beat combined cell) ---
   {
@@ -740,16 +817,34 @@ const CROSS_SOURCE_CHECKS = [
 
 // Hero numeric rates vs component table string rates
 const HERO_RATE_CHECKS = [
-  ['hero-compute-launch', 'Hero vs Table: Compute rate (Launch)', 'launch', 'computeRate', 'Rates'],
-  ['hero-compute-scale', 'Hero vs Table: Compute rate (Scale)', 'scale', 'computeRate', 'Rates'],
+  [
+    'hero-compute-launch',
+    'Hero vs Table: Compute rate (Launch)',
+    'launch',
+    'computeRate',
+    'Compute rates',
+  ],
+  [
+    'hero-compute-scale',
+    'Hero vs Table: Compute rate (Scale)',
+    'scale',
+    'computeRate',
+    'Compute rates',
+  ],
   [
     'hero-storage-launch',
     'Hero vs Table: Storage rate (Launch)',
     'launch',
     'storageRate',
-    'Database',
+    'Database storage',
   ],
-  ['hero-storage-scale', 'Hero vs Table: Storage rate (Scale)', 'scale', 'storageRate', 'Database'],
+  [
+    'hero-storage-scale',
+    'Hero vs Table: Storage rate (Scale)',
+    'scale',
+    'storageRate',
+    'Database storage',
+  ],
 ];
 
 // ---------------------------------------------------------------------------
@@ -782,10 +877,13 @@ const INTENTIONALLY_DOCS_ONLY = new Set([
 ]);
 
 // Component table rows that intentionally don't have a docs-side comparison.
-// The docs Snapshots row references scheduled backups in prose rather than
-// a dedicated table row, so the component's standalone Scheduled Backups
-// row has no docs counterpart to compare against.
-const INTENTIONALLY_COMPONENT_ONLY = new Set(['Scheduled Backups']);
+//   - Scheduled Backups: the docs Snapshots row references scheduled backups in
+//     prose rather than a dedicated table row, so there's no counterpart.
+//   - Autoscaling: a standalone yes/no checkmark in the pricing table. The
+//     substantive comparison (the CU limits) already runs via 'Compute sizes' vs
+//     the docs 'Autoscaling' row; docs folds the on/off state into that CU range,
+//     so this boolean row has no separate counterpart.
+const INTENTIONALLY_COMPONENT_ONLY = new Set(['Scheduled Backups', 'Autoscaling']);
 
 function runChecks(componentData, docsTable) {
   const results = [];

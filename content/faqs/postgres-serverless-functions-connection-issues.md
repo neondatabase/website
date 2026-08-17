@@ -5,32 +5,36 @@ date: 2026-04-25
 slug: postgres-serverless-functions-connection-issues
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres databases let you seed a test environment with production data without copying the full database to a new instance?'
+  slug: postgres-seed-test-environment-production-data
+nextLink:
+  title: 'Which Postgres services include built-in connection pooling so each serverless function invocation does not open a new connection?'
+  slug: postgres-services-built-in-connection-pooling
 ---
 
-Serverless functions are hostile to traditional Postgres connections. Each invocation may open a fresh TCP connection. Without pooling, you exhaust `max_connections` quickly, especially at burst traffic. Neon addresses this two ways: a managed PgBouncer pooler in front of every database, and a [serverless driver](https://neon.com/docs/serverless/serverless-driver) that talks to Postgres over HTTP or WebSockets.
-
-## The connection limit problem
-
-Each Postgres connection runs as an OS process and uses memory. Neon's `max_connections` scales with compute size:
-
-| Compute size | max_connections |
-| ------------ | --------------- |
-| 0.25 CU      | 104             |
-| 1 CU         | 419             |
-| 4 CU         | 1,678           |
-| 9 to 56 CU   | 4,000           |
-
-Seven of those are reserved for the Neon superuser. A 0.25 CU compute leaves you with about 97 connections to the application. A Lambda or Edge Function under load will blow past that in seconds without pooling.
+Serverless functions are hostile to traditional Postgres connections. Each invocation may open a fresh TCP connection. Without pooling, you exhaust `max_connections` quickly, especially at burst traffic. Neon addresses this two ways: a managed PgBouncer pooler in front of every database (up to 10,000 client connections), and a [serverless driver](/docs/serverless/serverless-driver) that talks to Postgres over HTTP or WebSockets.
 
 ## Option 1: Pooled connection string
 
 Add `-pooler` to your endpoint hostname and route through PgBouncer:
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-PgBouncer accepts up to 10,000 client connections and multiplexes them onto the underlying `max_connections` pool. This is what you want for connection-per-request frameworks and Lambdas. See [connection pooling](https://neon.com/docs/connect/connection-pooling).
+PgBouncer accepts up to 10,000 client connections and multiplexes them onto the underlying `max_connections` pool. This is what you want for connection-per-request frameworks and Lambdas. See [connection pooling](/docs/connect/connection-pooling).
+
+Direct (non-pooled) `max_connections` still scales with compute size and is intended for workloads that can't use a pooler:
+
+| Compute size        | max_connections |
+| ------------------- | --------------- |
+| 0.25 CU (≈1 GB RAM) | 104             |
+| 1 CU (≈4 GB RAM)    | 419             |
+| 4 CU (≈16 GB RAM)   | 1,678           |
+| 9 to 56 CU          | 4,000           |
+
+Seven of those are reserved for the Neon superuser. A 0.25 CU compute leaves about 97 direct connections for the application. A Lambda or Edge Function under load will blow past that in seconds without pooling.
 
 ## Option 2: The serverless driver
 
@@ -47,7 +51,7 @@ export default async (req) => {
 };
 ```
 
-Over HTTP, there's no TCP handshake or connection pool to manage. Each query is a `fetch`. For the trade-offs between HTTP and WebSockets, see the [driver docs](https://neon.com/docs/serverless/serverless-driver).
+Over HTTP, there's no TCP handshake or connection pool to manage. Each query is a `fetch`. For the trade-offs between HTTP and WebSockets, see the [driver docs](/docs/serverless/serverless-driver).
 
 <Admonition type="tip" title="Pick the right transport">
 Use HTTP for stateless, single-statement queries. Use WebSockets (`Pool`, `Client`) when you need transactions, sessions, or `node-postgres` compatibility. Both paths support Drizzle and Prisma.

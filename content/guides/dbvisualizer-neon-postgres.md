@@ -1,18 +1,18 @@
 ---
-title: Using DbVisualizer with Neon Postgres
+title: Using DbVisualizer with Lakebase Postgres
 subtitle: A comprehensive guide on how to manage your Postgres database using DbVisualizer.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-26T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-DbVisualizer is a universal SQL client and database‑management tool that provides an intuitive interface for connecting to, querying, visualizing, and managing data across more than 50 databases including PostgreSQL, Oracle, SQL Server, MySQL, and others. This guide walks you through setting up and using DbVisualizer with Neon Postgres.
+DbVisualizer is a universal SQL client and database‑management tool that provides an intuitive interface for connecting to, querying, visualizing, and managing data across more than 50 databases including PostgreSQL, Oracle, SQL Server, MySQL, and others. This guide walks you through setting up and using DbVisualizer with Lakebase Postgres.
 
 ## Table of Contents
 
 - [Setting up DbVisualizer](#setting-up-dbvisualizer)
-- [Connecting DbVisualizer to Neon Postgres](#connect-dbvisualizer-to-neon-postgres)
+- [Connecting DbVisualizer to your database on Neon](#connect-dbvisualizer-to-your-database-on-neon)
 - [Basic operations in DbVisualizer](#basic-operations-in-dbvisualizer)
 
 ## Setting up DbVisualizer
@@ -21,11 +21,11 @@ DbVisualizer is a universal SQL client and database‑management tool that provi
 
 2. **Launch DbVisualizer**: Open DbVisualizer from your applications menu and ensure it is running.
 
-## Create a Neon Postgres Database
+## Create a database on Neon
 
 1. If you haven't already, create a new Neon project. You can use the [Neon Console](https://console.neon.tech/).
 
-2. Retrieve connection details for your Neon Postgres database:
+2. Retrieve connection details for your Lakebase Postgres database:
    - Navigate to the **Dashboard** of your Neon project.
    - Click on the **Connect** button which opens a modal.
    - Select your database and branch.
@@ -33,14 +33,14 @@ DbVisualizer is a universal SQL client and database‑management tool that provi
      ![Neon Connection Details](/docs/connect/connection_details_parameters_only.png)
 
    You will be provided with the following details:
-   - `PGHOST`: The hostname of your Neon Postgres database.
+   - `PGHOST`: The hostname of your Lakebase Postgres database.
    - `PGDATABASE`: The name of your database
    - `PGUSER`: Your database username.
    - `PGPASSWORD`: Your database password.
 
 Save the connection details as you will need them in the next steps.
 
-## Connect DbVisualizer to Neon Postgres
+## Connect DbVisualizer to your database on Neon
 
 1. **Open DbVisualizer**: Open DbVisualizer and finish the setup if you haven't done so already.
 
@@ -65,9 +65,9 @@ Save the connection details as you will need them in the next steps.
      ![Test Connection in DbVisualizer](/docs/guides/dbvisualizer-test-connection.png)
    - Close the Test Connection dialog if the connection is successful and click **Connect** to establish the connection.
 
-The sidebar will now display your connected Neon Postgres database. You can expand the database to view its schemas, tables, views, and other objects.
+The sidebar will now display your connected Lakebase Postgres database. You can expand the database to view its schemas, tables, views, and other objects.
 
-![Connected Neon Postgres Database in DbVisualizer](/docs/guides/dbvisualizer-connected-database.png)
+![Connected Lakebase Postgres Database in DbVisualizer](/docs/guides/dbvisualizer-connected-database.png)
 
 ## Basic Operations in DbVisualizer
 
@@ -110,7 +110,7 @@ The sidebar will now display your connected Neon Postgres database. You can expa
 
 ## Conclusion
 
-You have successfully connected DbVisualizer to your Neon Postgres database and learned how to perform basic operations such as running SQL queries, managing tables, and importing/exporting data. DbVisualizer's user-friendly interface makes it easy to interact with your database, whether you're a beginner or an experienced user.
+You have successfully connected DbVisualizer to your Lakebase Postgres database and learned how to perform basic operations such as running SQL queries, managing tables, and importing/exporting data. DbVisualizer's user-friendly interface makes it easy to interact with your database, whether you're a beginner or an experienced user.
 
 Furthermore, DbVisualizer offers a rich, tab-based user interface that is highly customizable. The Pro version enhances this experience with advanced features like [Git integration](https://www.dbvis.com/docs/ug/working-with-git/) for version controlling your scripts and powerful [charting tools](https://www.dbvis.com/docs/ug/working-with-charts/) to visualize your data directly from query result sets. You can explore the official documentation for more advanced functionalities and tips to maximize your productivity with DbVisualizer. Check the resources section below for useful links.
 

@@ -2,7 +2,7 @@
 title: Replicate data with Stacksync
 subtitle: Learn how to replicate data from Neon with Stacksync
 summary: >-
-  Stacksync connects a Neon Postgres database to CRMs, ERPs, and other
+  Stacksync connects a Lakebase Postgres database to CRMs, ERPs, and other
   destinations via real-time one-way or two-way sync, using Postgres logical
   replication (wal_level=logical) as the change data capture method. Use this
   guide when you need to sync Neon table data to a Stacksync-supported connector
@@ -11,12 +11,12 @@ summary: >-
   connection pooler) when configuring the Postgres source.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
-[Stacksync](https://www.stacksync.com/) connects databases with CRMs, ERPs, and other systems using real-time, two-way sync. In this guide, you will configure Stacksync to replicate data from your Neon Postgres database to a [supported destination](https://www.stacksync.com/connectors).
+[Stacksync](https://www.stacksync.com/) connects databases with CRMs, ERPs, and other systems using real-time, two-way sync. In this guide, you will configure Stacksync to replicate data from your Lakebase Postgres database to a [supported destination](https://www.stacksync.com/connectors).
 
 ## Prerequisites
 
@@ -85,7 +85,7 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \

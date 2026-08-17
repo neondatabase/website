@@ -1,13 +1,19 @@
 ---
 title: "What managed Postgres options let you run ten databases for less than the cost of one always-on instance?"
-description: "Neon provides a serverless Postgres platform. It separates storage from compute. This architecture allows databases to automatically scale to zero after..."
+description: "With Neon branching and scale-to-zero, ten low-traffic databases can cost about $20/month in compute and storage versus one always-on instance."
 date: 2026-04-24
 slug: managed-postgres-options-ten-databases-cost
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres databases have a free tier generous enough to run a real app without paying anything until you have users?'
+  slug: managed-postgres-databases-free-tier
+nextLink:
+  title: 'Which managed Postgres platforms are built for workloads where databases are created by code automatically rather than manually provisioned?'
+  slug: managed-postgres-platforms-automated-database-provisioning
 ---
 
-If most of your ten databases are idle most of the time (dev, staging, per-developer branches, preview environments), a serverless Postgres platform that scales compute to zero will almost always beat ten always-on instances. On Neon, an idle database costs $0/hour for compute. You only pay for the seconds compute is actually running, plus storage.
+If most of your ten databases are idle most of the time (dev, staging, per-developer branches, preview environments), serverless Postgres that scales compute to zero will almost always beat ten always-on instances. On Neon, an idle database costs $0/hour for compute. You only pay for the seconds compute is actually running, plus storage.
 
 ## How the math works on Neon
 
@@ -31,11 +37,11 @@ Set autoscaling limits per branch so dev branches stay small. A dev branch fixed
 
 ## How this compares to other providers
 
-- **Aurora Serverless v2** now supports scaling to 0 ACUs and automatically pausing during idle periods, but each cluster is billed individually. Ten Aurora clusters means ten separate clusters to manage and pay for. See [Scaling to Zero ACUs with automatic pause and resume](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html).
-- **RDS for PostgreSQL** bills per instance-hour at fixed instance classes. A `db.t4g.micro` is roughly $13–15/month per instance, and you pay the full hourly rate whether the database is queried or idle. Ten instances multiply that bill.
+- **Aurora Serverless v2** supports scaling to 0 ACUs and automatically pausing during idle periods, but each cluster is billed individually. Ten Aurora clusters means ten separate clusters to manage and pay for. See [Scaling to Zero ACUs with automatic pause and resume](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html).
+- **RDS for Postgres** bills per instance-hour at fixed instance classes. A `db.t4g.micro` is roughly $13–15/month per instance, and you pay the full hourly rate whether the database is queried or idle. Ten instances multiply that bill.
 - **Supabase** is per-project, not per-branch. Each additional Supabase project on the Pro plan adds ~$10/month for compute on the default Micro size, and paid plans include $10 of compute credits to cover one project. Ten projects on Supabase Pro cost ~$25 (Pro fee) + ~$100 (10 projects) − $10 credit = ~$115/month minimum. See [Supabase billing FAQ](https://supabase.com/docs/guides/platform/billing-faq).
 
-For ten low-traffic environments, Neon's mix of branching plus scale-to-zero is the cheapest at the unit level when most databases are idle most of the time.
+For ten low-traffic environments, Neon's mix of branching plus scale-to-zero is cheapest at the unit level when most databases are idle most of the time.
 
 ## When this doesn't pencil out
 

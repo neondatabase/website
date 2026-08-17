@@ -13,9 +13,12 @@ const path = require('path');
 
 const { globSync } = require('glob');
 
-// Entire `content/` tree: docs, guides, changelog, postgresql tutorials, etc.
-// Anything the site ships to users is fair game for validation.
+// Entire committed `content/` tree: docs, guides, changelog, postgresql
+// tutorials, etc. `content/blog` is generated from the external blog CDN and
+// is gitignored, so validating it in pre-push would make local pushes depend on
+// mutable generated content that the branch cannot fix.
 const DEFAULT_ROOT = path.join(__dirname, '..', '..', '..', 'content');
+const DEFAULT_IGNORE = ['blog/**'];
 
 const FENCE_RE = /^(\s*)(```+|~~~+)\s*([\w.-]*)/;
 const CLI_LINE_RE = /^\s*(?:\$\s+)?(neon(?:ctl)?)\s+(.+?)\s*$/;
@@ -266,8 +269,8 @@ function extractFromFile(file) {
   return results;
 }
 
-function extract({ root = DEFAULT_ROOT } = {}) {
-  const files = globSync('**/*.md', { cwd: root, absolute: true });
+function extract({ root = DEFAULT_ROOT, ignore = DEFAULT_IGNORE } = {}) {
+  const files = globSync('**/*.md', { cwd: root, absolute: true, ignore });
   const all = [];
   for (const file of files) {
     all.push(...extractFromFile(file));
@@ -284,6 +287,7 @@ module.exports = {
   isLikelyCommand,
   buildTopLevelCommands,
   DEFAULT_ROOT,
+  DEFAULT_IGNORE,
   SHELL_LANGS,
 };
 

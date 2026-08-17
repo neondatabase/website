@@ -6,7 +6,7 @@ enableTableOfContents: true
 createdAt: '2025-07-15T00:00:00.000Z'
 ---
 
-Event triggers are now fully supported in Neon Postgres databases, and allow you to automatically respond to DDL events like `CREATE`, `ALTER`, `DROP`, or any other statements that define or modify the structure of the database. In this post, we'll show how you can use this feature to build a simple schema audit trail that can record who made schema changes in your production database, what those changes were, and when they occurred.
+Event triggers are now fully supported in Lakebase Postgres databases, and allow you to automatically respond to DDL events like `CREATE`, `ALTER`, `DROP`, or any other statements that define or modify the structure of the database. In this post, we'll show how you can use this feature to build a simple schema audit trail that can record who made schema changes in your production database, what those changes were, and when they occurred.
 
 ## Set Up Schema Auditing in Postgres
 
@@ -102,7 +102,7 @@ In a production environment, you would rarely apply database migrations manually
 
 ### Create a CI-Only Role
 
-Here, we'll create a dedicated `ci_user` role to run migrations in GitHub Actions. We'll grant this role the minimum permissions necessary, which includes creating objects in the public and audit schemas, referencing users in the Neon Auth schema (if you’re using auth for your project), and inserting records into the log table. This also makes it easy to spot any manual changes made outside of the CI process, since the `database_user` would be something other than `ci_user`, and the application user fields would be empty.
+Here, we'll create a dedicated `ci_user` role to run migrations in GitHub Actions. We'll grant this role the minimum permissions necessary, which includes creating objects in the public and audit schemas, referencing users in the Managed Better Auth schema (if you’re using auth for your project), and inserting records into the log table. This also makes it easy to spot any manual changes made outside of the CI process, since the `database_user` would be something other than `ci_user`, and the application user fields would be empty.
 
 ```sql
 CREATE ROLE ci_user WITH LOGIN PASSWORD '<some-strong-password>';

@@ -8,7 +8,7 @@ summary: >-
   cost-tracking tooling. Plan-specific rates, transfer allowances, and
   granularity lookback limits are documented here.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-08-11T23:11:30.998Z'
 ---
 
 This guide helps you use the Neon API to fetch your consumption data, convert raw metrics into human-readable numbers, and understand how your bill is calculated. To monitor usage in the Neon Console instead, see [Monitor billing and usage](/docs/introduction/monitor-usage).
@@ -17,7 +17,7 @@ It applies to **Launch**, **Scale**, **Agent**, and **Enterprise** plans. Consum
 
 ## Fetch your usage
 
-The [consumption history endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) returns per-project, per-day (or per-hour, or per-month) usage for every billable metric.
+The [consumption history endpoint](/docs/reference/api/consumption/get-consumption-history-per-project-v2) returns per-project, per-day (or per-hour, or per-month) usage for every billable metric.
 
 ```sh
 curl "https://console.neon.tech/api/v2/consumption_history/v2/projects?\
@@ -42,10 +42,10 @@ The older `/consumption_history/projects` endpoint returns different metrics (ac
 | API metric name                  | What it measures                                                                                                                                                                           | Raw unit     | Billing unit  |
 | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ------------- |
 | `compute_unit_seconds`           | CPU time weighted by compute size                                                                                                                                                          | CU-seconds   | CU-hours      |
-| `root_branch_bytes_month`        | Storage on root branches                                                                                                                                                                   | byte-hours   | GB-months     |
-| `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                                                                                                                              | byte-hours   | GB-months     |
-| `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                                                                                                                                    | byte-hours   | GB-months     |
-| `snapshot_storage_bytes_month`   | Storage for branch snapshots. Manual snapshots are full snapshots; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in that schedule | byte-hours   | GB-months     |
+| `root_branch_bytes_month`        | Storage on root branches                                                                                                                                                                   | byte-months  | GB-months     |
+| `child_branch_bytes_month`       | Storage on child branches (delta from parent)                                                                                                                                              | byte-months  | GB-months     |
+| `instant_restore_bytes_month`    | Instant restore (point-in-time recovery / PITR) history                                                                                                                                    | byte-months  | GB-months     |
+| `snapshot_storage_bytes_month`   | Storage for branch snapshots. Manual snapshots are full snapshots; scheduled snapshots are full for the first snapshot, then incremental (delta) for subsequent snapshots in that schedule | byte-months  | GB-months     |
 | `public_network_transfer_bytes`  | Outbound (egress) data over the public network                                                                                                                                             | bytes        | GB            |
 | `private_network_transfer_bytes` | Inbound (ingress) and outbound (egress) traffic over private networking (Scale+)                                                                                                           | bytes        | GB            |
 | `extra_branches_month`           | All child branches per hour (subtract plan allowance before billing)                                                                                                                       | branch-hours | branch-months |
@@ -59,10 +59,13 @@ Neon uses decimal gigabytes (1 GB = 10^9 bytes), not gibibytes, and a fixed bill
 | From         | To                              | Formula                                |
 | ------------ | ------------------------------- | -------------------------------------- |
 | CU-seconds   | CU-hours                        | `value / 3600`                         |
-| byte-hours   | GB-months (billing unit)        | `value / 744 / 1000000000`             |
+| byte-months  | GB-months (billing unit)        | `value / 1000000000`                   |
+| byte-hours   | GB-months (legacy field)        | `value / 744 / 1000000000`             |
 | byte-hours   | average GB (what Console shows) | `value / hours_in_period / 1000000000` |
 | bytes        | GB                              | `value / 1000000000`                   |
 | branch-hours | branch-months                   | `value / 744`                          |
+
+The v2 storage metrics (`root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`) are reported in **byte-months**: the underlying byte-hours already divided by 744, so converting to GB-months divides by `1000000000` only. The byte-hours rows above apply to the legacy `GET /projects/{project_id}` field `data_storage_bytes_hour`, which is raw byte-hours.
 
 For "average GB," `hours_in_period` is the number of hours between your `from` and `to` timestamps.
 
@@ -92,9 +95,9 @@ If the API returns `"value": 500000` for `compute_unit_seconds` on the Scale pla
 
 ### Example: storage
 
-If the API returns `"value": 2500000000000` for `root_branch_bytes_month`:
+If the API returns `"value": 3360000000` for `root_branch_bytes_month`:
 
-1. Convert: 2500000000000 / 744 / 1000000000 = 3.36 GB-months
+1. Convert: 3360000000 / 1000000000 = 3.36 GB-months
 2. Cost: 3.36 x $0.35 = **$1.18**
 
 ## Billing mechanics
@@ -105,12 +108,13 @@ Neon defines a billing month as exactly 744 hours (31 x 24). This constant is us
 
 ### Byte-hours
 
-Storage metrics are reported as byte-hours: bytes stored multiplied by hours held. For example, 2 GB stored for a full 31-day month:
+Storage is metered in byte-hours (bytes stored multiplied by hours held). The v2 consumption metrics report this **already divided by 744**, as byte-months. For example, 2 GB stored for a full 31-day month:
 
 1. Per-day byte-hours: 2000000000 x 24 = 48000000000
 2. Full-month byte-hours: 48000000000 x 31 = 1488000000000
-3. Convert: 1488000000000 / 744 / 1000000000 = 2.0 GB-months
-4. Cost: 2.0 x $0.35 = **$0.70**
+3. Byte-months the v2 API returns: 1488000000000 / 744 = 2000000000
+4. Convert to GB-months: 2000000000 / 1000000000 = 2.0 GB-months
+5. Cost: 2.0 x $0.35 = **$0.70**
 
 ### Branch-hours and the allowance
 
@@ -131,11 +135,11 @@ Repeat for each day in the billing period and sum the billable branch-hours acro
 
 ### Public transfer allowance
 
-On paid plans, the 500 GB free allowance applies **org-wide**, not per project. Sum public transfer across all projects before subtracting the allowance:
+On paid plans, each project receives a 500 GB free allowance. Subtract the allowance from each project's public transfer, then sum the billable usage:
 
 ```
-billable GB = max(0, total_org_GB - 500)
-cost = billable_GB x $0.10
+billable GB per project = max(0, project_GB - 500)
+total cost = sum(billable_GB per project) x $0.10
 ```
 
 ### Granularity and precision
@@ -159,7 +163,7 @@ To reconcile the numbers yourself:
 1. Fetch consumption history for the billing month (`from` = month start, `to` = month end or current date).
 2. Sum each metric across all projects.
 3. Convert to billing units using the formulas above.
-4. Apply allowances (500 GB public transfer, branch allowance per project).
+4. Apply the 500 GB public transfer allowance and branch allowance to each project.
 5. Multiply by your plan's rates.
 
 The result should closely match the costs in your weekly email. Small differences can occur due to:

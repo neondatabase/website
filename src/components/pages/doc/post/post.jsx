@@ -37,6 +37,7 @@ const Post = ({
     eyebrow = null,
     enableTableOfContents = false,
     tag = null,
+    tagTheme = 'gray',
     layout = null,
     contentLayout = null,
   },
@@ -51,6 +52,7 @@ const Post = ({
   changelogPosts = [],
   currentSlug,
   gitHubPath,
+  markdownPath,
   tableOfContents,
   author,
   aboveContent = null,
@@ -91,7 +93,7 @@ const Post = ({
             {isFaq ? (
               <>
                 <div className="mb-5 flex justify-end sm:mb-3">
-                  <DropdownMenu gitHubPath={gitHubPath} />
+                  <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
                 </div>
                 <div>
                   <h1
@@ -102,7 +104,9 @@ const Post = ({
                   >
                     {title}
                   </h1>
-                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                  {tag && (
+                    <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
+                  )}
                   {subtitle && (
                     <p className="mt-[1.125rem] text-xl leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-70 md:mt-1.5 md:text-lg">
                       {subtitle}
@@ -134,7 +138,9 @@ const Post = ({
                   >
                     {title}
                   </h1>
-                  {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+                  {tag && (
+                    <Tag className="relative -top-1.5 ml-3 inline" label={tag} theme={tagTheme} />
+                  )}
                   {subtitle && (
                     <p
                       className={cn(
@@ -147,7 +153,9 @@ const Post = ({
                     </p>
                   )}
                 </div>
-                {!isChangelog && !isDocsIndex && <DropdownMenu gitHubPath={gitHubPath} />}
+                {!isChangelog && !isDocsIndex && (
+                  <DropdownMenu gitHubPath={gitHubPath} markdownPath={markdownPath} />
+                )}
               </div>
             )}
             {aboveContent}
@@ -194,6 +202,7 @@ Post.propTypes = {
     eyebrow: PropTypes.string,
     enableTableOfContents: PropTypes.bool,
     tag: PropTypes.string,
+    tagTheme: PropTypes.string,
     updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
     contentLayout: PropTypes.oneOf(['split', null]),
@@ -217,6 +226,7 @@ Post.propTypes = {
   ),
   currentSlug: PropTypes.string.isRequired,
   gitHubPath: PropTypes.string.isRequired,
+  markdownPath: PropTypes.string,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
   author: PropTypes.shape({
     slug: PropTypes.string,

@@ -11,12 +11,12 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-18T20:28:34.156Z'
+updatedOn: '2026-08-17T12:17:37.017Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
 
-<CTA title="Learn from other agent platform builders" description="See how <a href='https://neon.com/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='https://neon.com/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='https://neon.com/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon."></CTA>
+<CTA title="Learn from other agent platform builders" description="See how <a href='/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon."></CTA>
 
 <Admonition type="note">
 **Prerequisites:** You must be enrolled in the [Neon Agent Plan](/docs/introduction/agent-plan). If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
@@ -39,7 +39,7 @@ After enrolling in the [Neon Agent Plan](/docs/introduction/agent-plan), you sho
 - **Two Neon organization IDs**: One for Free (sponsored) projects, one for paid projects
 - **Organization API keys**: For creating and managing projects in each organization
 - **Personal API key**: For transferring projects between organizations
-- **Admin access**: Full control over both organizations via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- **Admin access**: Full control over both organizations via the [Neon API](/docs/reference/api)
 
 Keep your API keys secure. You'll use them for all API operations in this guide. If you do not have the API keys, see [Manage API keys](/docs/manage/api-keys) for how to retrieve them.
 
@@ -49,6 +49,15 @@ This integration uses a **project-per-tenant model**, where each tenant (user, a
 
 <Admonition type="tip">
 For details about **Agent plan** structure, pricing, and benefits, refer to the [Neon Agent Plan](/docs/introduction/agent-plan) docs.
+</Admonition>
+
+<Admonition type="tip" title="Code samples and agent skill">
+The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides runnable TypeScript samples for the patterns in this guide. Install the companion agent skill with:
+
+```bash
+npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms -y
+```
+
 </Admonition>
 
 <Steps>
@@ -71,13 +80,13 @@ The two-organization structure enables you to:
 
 Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations.
 
-| Limit                    | Free Organization | Paid Organization | Notes                                                                                                            |
-| ------------------------ | ----------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Limit                    | Free Organization | Paid Organization       | Notes                                                                                                            |
+| ------------------------ | ----------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | **Max branches**         | 10 per project    | Custom limits available | Includes all branches (production, development, snapshots)                                                       |
-| **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
-| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                                                                             |
-| **History window**       | 1 day             | Up to 7 days      | Point-in-time recovery window                                                                                    |
-| **Min auto-suspend**     | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                                             |
+| **Max manual snapshots** | 1 per project     | 100 per project         | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
+| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU            | CU = Compute Units (~4GB RAM per CU)                                                                             |
+| **History window**       | 1 day             | Up to 7 days            | Point-in-time recovery window                                                                                    |
+| **Min auto-suspend**     | 5 minutes         | 1 minute                | Minimum time before compute suspends                                                                             |
 
 **Key constraints to consider:**
 
@@ -89,7 +98,7 @@ For detailed quota examples and consumption limits, see [Configure consumption l
 
 ### Creating projects for free-tier users
 
-For free-tier users, create projects in your Free organization (sponsored by Neon) with resource quotas matching (or within) Neon's Free plan limits using the [Create project](https://api-docs.neon.tech/reference/createproject) API:
+For free-tier users, create projects in your Free organization (sponsored by Neon) with resource quotas matching (or within) Neon's Free plan limits using the [Create project](/docs/reference/api/projects/create-project) API:
 
 | Resource          | Free Tier Quota    | Description                             |
 | ----------------- | ------------------ | --------------------------------------- |
@@ -194,7 +203,7 @@ For the best user experience:
 
 ### Getting connection strings
 
-After creating a project, retrieve the database connection string to give to your users using the [Retrieve connection URI](https://api-docs.neon.tech/reference/getconnectionuri) API:
+After creating a project, retrieve the database connection string to give to your users using the [Retrieve connection URI](/docs/reference/api/projects/get-connection-uri) API:
 
 ```bash
 curl --request GET \
@@ -218,7 +227,7 @@ Each new project includes:
 - **One role**: Named `neondb_owner` with full privileges
 - **One compute endpoint**: Configured with your specified settings
 
-Using the [Create project](https://api-docs.neon.tech/reference/createproject) API, you can customize these defaults during project creation or create additional databases, roles, and branches as needed.
+Using the [Create project](/docs/reference/api/projects/create-project) API, you can customize these defaults during project creation or create additional databases, roles, and branches as needed.
 
 ## Handling user upgrades
 
@@ -233,7 +242,7 @@ Project transfers between the two organizations in your agent plan require a **p
 - Organization API keys only work within a single organization
 - Transfers need to authenticate against both the source and destination organizations
 
-Use your personal API key with the [Transfer project](https://api-docs.neon.tech/reference/createprojecttransferrequest) API to transfer projects:
+Use your personal API key with the [Transfer project](/docs/reference/api/projects/create-project-transfer-request) API to transfer projects:
 
 ```bash
 curl --request PATCH \
@@ -248,7 +257,7 @@ curl --request PATCH \
 
 ### Updating quotas after transfer
 
-After transferring a project to your paid organization, update the resource quotas to match the user's new tier using the [Update project](https://api-docs.neon.tech/reference/updateproject) API:
+After transferring a project to your paid organization, update the resource quotas to match the user's new tier using the [Update project](/docs/reference/api/projects/update-project) API:
 
 ```bash
 curl --request PATCH \
@@ -336,7 +345,7 @@ Use PITR for recent history. The [history window](/docs/introduction/history-win
 
 The Free organization provides 1 day of history for **instant restore**, while the Paid organization provides up to 7 days. Factor these limits into your platform's feature offerings and set appropriate user expectations for each tier.
 
-Example creating a branch from 2 hours ago using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API:
+Example creating a branch from 2 hours ago using the [Create branch](/docs/reference/api/branches/create-project-branch) API:
 
 ```bash
 curl --request POST \
@@ -385,7 +394,7 @@ curl --request POST \
 ```
 
 <Admonition type="tip">
-Learn how our Developer Advocate approaches snapshot-based workflows in [Promoting Postgres changes safely to production](https://neon.com/blog/promoting-postgres-changes-safely-production).
+Learn how our Developer Advocate approaches snapshot-based workflows in [Promoting Postgres changes safely to production](/blog/promoting-postgres-changes-safely-production).
 </Admonition>
 
 ### When to use each approach
@@ -432,7 +441,7 @@ Development branches are:
 **Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects have **custom limits available** (see [Agent plan pricing](/docs/introduction/agent-plan#pricing)). Implement branch cleanup for temporary development branches to stay within limits.
 </Admonition>
 
-Example creating a development branch using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API:
+Example creating a development branch using the [Create branch](/docs/reference/api/branches/create-project-branch) API:
 
 ```bash
 curl --request POST \
@@ -470,7 +479,7 @@ This workflow prevents common issues like development data contaminating product
 
 ### Track usage per project
 
-You can use the Neon API to retrieve consumption metrics for your organizations and projects using the [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint, which provides detailed metrics per project at hourly, daily, or monthly granularity.
+You can use the Neon API to retrieve consumption metrics for your organizations and projects using the [Get consumption metrics for each project](/docs/reference/api/consumption/get-consumption-history-per-project) endpoint, which provides detailed metrics per project at hourly, daily, or monthly granularity.
 
 Available metrics:
 
@@ -480,14 +489,14 @@ Available metrics:
 - `synthetic_storage_size_bytes`: Total storage used
 
 <Admonition type="tip">
-On usage-based plans (Launch, Scale, Agent, Enterprise), you can also use the v2 endpoints, which return invoice-aligned metrics. The [project metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperprojectv2) (`GET /consumption_history/v2/projects`) returns billing-aligned totals per project. The [branch metrics endpoint](https://api-docs.neon.tech/reference/getconsumptionhistoryperbranchv2) (`GET /consumption_history/v2/branches`) breaks those metrics down by branch — useful for attributing usage to individual CI or development branches. See [Query consumption metrics](/docs/guides/consumption-metrics).
+On usage-based plans (Launch, Scale, Agent, Enterprise), you can also use the v2 endpoints, which return invoice-aligned metrics. The [project metrics endpoint](/docs/reference/api/consumption/get-consumption-history-per-project-v2) (`GET /consumption_history/v2/projects`) returns billing-aligned totals per project. The [branch metrics endpoint](/docs/reference/api/consumption/get-consumption-history-per-branch-v2) (`GET /consumption_history/v2/branches`) breaks those metrics down by branch — useful for attributing usage to individual CI or development branches. See [Query consumption metrics](/docs/guides/consumption-metrics).
 </Admonition>
 
 For complete details on parameters, pagination, response formats, and metric definitions, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
 ### Configure consumption limits
 
-Set consumption limits per project to control costs. You can configure these limits during [project creation](#provisioning-projects) (as shown in the examples above) or update them later using the [Update project](https://api-docs.neon.tech/reference/updateproject) API:
+Set consumption limits per project to control costs. You can configure these limits during [project creation](#provisioning-projects) (as shown in the examples above) or update them later using the [Update project](/docs/reference/api/projects/update-project) API:
 
 ```bash
 curl --request PATCH \
@@ -526,14 +535,14 @@ See [Configure consumption limits](/docs/guides/consumption-limits) for details.
 
 All platform integrations use the Neon API. You can call it directly or use language-specific SDKs:
 
-- **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)**: All operations (projects, branches, databases, monitoring) are API-driven; language-agnostic REST interface. Agent plan participants receive higher rate limits optimized for high-volume operations.
-- **SDKs**: [TypeScript SDK](/docs/reference/typescript-sdk), [Python SDK](/docs/reference/python-sdk), [Go SDK](https://github.com/kislerdm/neon-sdk-go), [Node.js/Deno SDK](https://github.com/paambaati/neon-js-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
+- **[Neon API](/docs/reference/api)**: All operations (projects, branches, databases, monitoring) are API-driven; language-agnostic REST interface. Agent plan participants receive higher rate limits optimized for high-volume operations.
+- **SDKs**: [Neon Management SDK](/docs/reference/typescript-sdk), [Python SDK](/docs/reference/python-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
 
 ## Cost management
 
 - **Free organization**: No charges to you for up to 30,000 free tier projects (Neon-sponsored).
 - **Paid organization**: Usage-based billing at $0.106 per compute unit hour, covered by your initial credits. See [Agent plan pricing](/docs/introduction/agent-plan#pricing).
-- **Monitor usage**: Track `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes` using [project metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject). Poll every 15 minutes; doesn't wake computes. See [Query consumption metrics](/docs/guides/consumption-metrics).
+- **Monitor usage**: Track `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes` using [project metrics API](/docs/reference/api/consumption/get-consumption-history-per-project). Poll every 15 minutes; doesn't wake computes. See [Query consumption metrics](/docs/guides/consumption-metrics).
 - **Set quotas**: Configure usage limits during [project creation](#provisioning-projects) or update later. See [Configure consumption limits](/docs/guides/consumption-limits).
 - **Optimize costs**: Set shorter `suspend_timeout_seconds` (5 min) for free tier computes; cap `autoscaling_limit_max_cu` per tier to limit compute size scaling; cleanup old branches/snapshots to save on storage; alert your users at 80%/95% usage thresholds; right-size compute size ranges when creating projects for your users.
 

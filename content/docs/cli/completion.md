@@ -1,25 +1,25 @@
 ---
 title: 'Neon CLI command: completion'
-subtitle: Generate shell completion scripts for neonctl commands and options
+subtitle: Generate shell completion scripts for neon commands and options
 summary: >-
-  The `neonctl completion` command generates a yargs-based shell tab-completion
-  script for `neonctl` that surfaces available commands and options when you
+  The `neon completion` command generates a yargs-based shell tab-completion
+  script for `neon` that surfaces available commands and options when you
   press Tab. Use this page when you want to enable autocomplete for the Neon
   CLI in your terminal, so you can stop typing full command names from memory.
   Installation targets include `.bashrc`, `.bash_profile`, `.profile`, and
   `.zshrc` on Linux and macOS.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:33:31.980Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-completion
 ---
 
-The `completion` command generates a shell completion script for `neonctl`. Once installed, the script presents the possible commands and options when you press the **tab** key after typing or partially typing a command or option.
+The `completion` command generates a shell completion script for `neon`. Once installed, the script presents the possible commands and options when you press the **tab** key after typing or partially typing a command or option.
 
 ## Usage
 
 ```bash
-neonctl completion
+neon completion
 ```
 
 <Admonition type="important">
@@ -30,14 +30,14 @@ Generate the completion script in your own terminal, as the script may differ de
 <summary>Show output</summary>
 
 ```text filename="Output"
-###-begin-neonctl-completions-###
+###-begin-neon-completions-###
 #
 # yargs command completion script
 #
-# Installation: neonctl completion >> ~/.bashrc
-#    or neonctl completion >> ~/.bash_profile on OSX.
+# Installation: neon completion >> ~/.bashrc
+#    or neon completion >> ~/.bash_profile on OSX.
 #
-_neonctl_yargs_completions()
+_neon_yargs_completions()
 {
     local cur_word args type_list
 
@@ -45,7 +45,7 @@ _neonctl_yargs_completions()
     args=("${COMP_WORDS[@]}")
 
     # ask yargs to generate completions.
-    type_list=$(neonctl --get-yargs-completions "${args[@]}")
+    type_list=$(neon --get-yargs-completions "${args[@]}")
 
     COMPREPLY=( $(compgen -W "${type_list}" -- ${cur_word}) )
 
@@ -56,8 +56,8 @@ _neonctl_yargs_completions()
 
     return 0
 }
-complete -o bashdefault -o default -F _neonctl_yargs_completions neonctl
-###-end-neonctl-completions-###
+complete -o bashdefault -o default -F _neon_yargs_completions neon
+###-end-neon-completions-###
 ```
 
 </details>
@@ -69,27 +69,27 @@ Add the completion script to your shell configuration file in your home director
 Add the completion script to `.bashrc`:
 
 ```bash
-neonctl completion >> ~/.bashrc
+neon completion >> ~/.bashrc
 source ~/.bashrc
 ```
 
 Add the completion script to `.bash_profile`:
 
 ```bash
-neonctl completion >> ~/.bash_profile
+neon completion >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
 Add the completion script to `.profile`:
 
 ```bash
-neonctl completion >> ~/.profile
+neon completion >> ~/.profile
 source ~/.profile
 ```
 
 Add the completion script to `.zshrc`:
 
 ```bash
-neonctl completion >> ~/.zshrc
+neon completion >> ~/.zshrc
 source ~/.zshrc
 ```

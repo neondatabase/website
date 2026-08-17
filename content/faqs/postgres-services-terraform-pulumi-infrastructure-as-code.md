@@ -1,13 +1,19 @@
 ---
 title: "What Postgres services work well with Terraform or Pulumi so database infrastructure can be managed as code?"
-description: "Neon delivers a serverless Postgres database. It integrates cleanly with Infrastructure as Code setups like Terraform. Engineering teams use programmati..."
+description: "Neon has a community-maintained Terraform provider for projects, branches, endpoints, roles, and databases. Pulumi users can wrap the Neon REST API."
 date: 2026-04-25
 slug: postgres-services-terraform-pulumi-infrastructure-as-code
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?'
+  slug: postgres-services-share-read-only-database-snapshot
+nextLink:
+  title: 'Which Postgres services are fully wire-protocol compatible so any existing tool or client works without changes?'
+  slug: postgres-services-wire-protocol-compatible
 ---
 
-Neon has a [community-maintained Terraform provider](/docs/reference/terraform) that covers projects, branches, endpoints, roles, databases, and API keys. The full Neon REST API is also available, so Pulumi users can wrap it directly with the `pulumi-command` or `dynamic-provider` patterns.
+Neon has a [community-maintained Terraform provider](https://neon.com/docs/reference/terraform) that covers projects, branches, endpoints, roles, databases, and API keys. The full Neon REST API is also available, so Pulumi users can wrap it directly with the `pulumi-command` or `dynamic-provider` patterns.
 
 ## Terraform setup
 
@@ -23,7 +29,7 @@ terraform {
 provider "neon" {}
 
 resource "neon_project" "app" {
-  name      = "my-app"
+  name       = "my-app"
   pg_version = 17
   region_id  = "aws-us-east-1"
   org_id     = "your-org-id"
@@ -40,9 +46,9 @@ resource "neon_branch" "staging" {
 }
 
 resource "neon_endpoint" "staging_rw" {
-  project_id = neon_project.app.id
-  branch_id  = neon_branch.staging.id
-  type       = "read_write"
+  project_id     = neon_project.app.id
+  branch_id      = neon_branch.staging.id
+  type           = "read_write"
   pooler_enabled = true
 }
 ```
@@ -50,12 +56,12 @@ resource "neon_endpoint" "staging_rw" {
 `terraform apply` provisions the project, branch, and pooled endpoint. The connection string is available as `neon_project.app.connection_uri` (marked sensitive).
 
 <Admonition type="warning" title="Always set org_id">
-Omitting `org_id` on `neon_project` can place resources in the wrong organization and cause subsequent applies to destroy and recreate them. The [provider docs](/docs/reference/terraform) call this out explicitly.
+Omitting `org_id` on `neon_project` can place resources in the wrong organization and cause subsequent applies to destroy and recreate them. See the [Terraform guide](https://neon.com/docs/reference/terraform) for details.
 </Admonition>
 
 ## Pulumi via the REST API
 
-Pulumi doesn't have an official Neon provider yet. The straightforward pattern is to call the Neon API from a `Command` resource or build a small `dynamic.ResourceProvider`. The [Neon API reference](https://api-docs.neon.tech) documents every endpoint.
+Pulumi doesn't have an official Neon provider yet. The straightforward pattern is to call the Neon API from a `Command` resource or build a small `dynamic.ResourceProvider`. The [Neon API Reference](https://neon.com/docs/reference/api) documents every endpoint.
 
 ```typescript
 import * as command from "@pulumi/command";
@@ -82,9 +88,9 @@ API keys and JWKS URLs can be created but not imported.
 
 Most managed Postgres services expose IaC via official or community providers, but coverage varies:
 
-- **Amazon RDS for PostgreSQL** and **Aurora PostgreSQL** are first-class in the [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) and [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-rds-dbclusterparametergroup.html), with broad resource coverage (clusters, instances, parameter groups, subnet groups, snapshots, IAM auth).
+- **Amazon RDS for Postgres** and **Aurora Postgres** are first-class in the [AWS Terraform provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster) and [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-resource-rds-dbclusterparametergroup.html), with broad resource coverage (clusters, instances, parameter groups, subnet groups, snapshots, IAM auth).
 - **Supabase** ships an official [Terraform provider](https://supabase.com/docs/guides/platform/terraform) currently in [public alpha](https://supabase.com/docs/guides/getting-started/features) per their feature status page. It manages projects, branches, and settings via the Supabase Management API.
 
-The Neon Terraform provider is community-maintained but covers the full set of project, branch, endpoint, and role resources. Pulumi users on any of these platforms can fall back to wrapping the provider's REST API.
+The Neon Terraform provider is community-maintained but covers the full set of project, branch, endpoint, and role resources. Pulumi users on any of these services can fall back to wrapping the provider's REST API.
 
 <CTA title="Read the Terraform guide" description="Step-by-step setup, import patterns, and examples for every resource type." buttonText="Open the guide" buttonUrl="https://neon.com/docs/reference/terraform" />

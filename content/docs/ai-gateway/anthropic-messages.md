@@ -6,28 +6,40 @@ summary: >-
   Gateway by changing only the base URL. Supports streaming, prompt caching,
   and extended thinking on Claude models.
 enableTableOfContents: true
-updatedOn: '2026-06-15T19:57:08.490Z'
+updatedOn: '2026-08-06T17:43:14.909Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon AI Gateway" />
 
 The Anthropic Messages endpoint exposes the [Anthropic Messages API](https://docs.anthropic.com/en/api/messages) through Neon AI Gateway. Use it when you need extended thinking or prompt caching, which require the native Anthropic SDK. For standard completions, the [chat completions](/docs/ai-gateway/chat-completions) endpoint works with all Anthropic models and doesn't require the Anthropic SDK.
 
-**Base URL:** `https://<branch-host>/ai-gateway/anthropic`
+**Base URL:** `https://<branch-host>/anthropic`
 
 <Admonition type="note">
-The Anthropic SDK appends `/v1/messages` to the base URL automatically. Set the base URL to `/ai-gateway/anthropic` (without `/v1`).
+The Anthropic SDK appends `/v1/messages` to the base URL automatically. Set the base URL to `/anthropic` (without `/v1`).
 </Admonition>
+
+This endpoint is also reachable at the longer `/ai-gateway/anthropic/v1/messages` path. Both behave identically and neither is deprecated. See [Shorter paths](/docs/ai-gateway/models#shorter-paths) for the full list of aliases.
+
+## Setup
+
+Set these environment variables. See [Get started](/docs/ai-gateway/get-started) for how to obtain them.
+
+```bash
+NEON_AI_GATEWAY_TOKEN=nt_live_...
+NEON_AI_GATEWAY_BASE_URL=https://br-winter-pond-aptw82ef-api.ai.c-2.us-east-2.aws.neon.tech
+```
 
 ## Supported models
 
 This endpoint accepts Anthropic models only. See the [AI Gateway catalog](/docs/ai-gateway/models) for the full list. Supported models:
 
-- `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5`
-- `claude-sonnet-4-6`
+- `claude-opus-5`, `claude-sonnet-5`, `claude-fable-5`
+- `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-opus-4-5`, `claude-opus-4-1`
+- `claude-sonnet-4-6`, `claude-sonnet-4-5`
 - `claude-haiku-4-5`
 
-Sending a non-Anthropic model ID returns `400 model is not available on this endpoint`. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you need to call multiple providers from the same code.
+Sending a non-Anthropic model ID returns `400 model "<model-id>" is not available on the anthropic_messages endpoint`, naming whichever model you sent. Use the [chat completions endpoint](/docs/ai-gateway/chat-completions) if you need to call multiple providers from the same code.
 
 ## Basic request
 
@@ -37,8 +49,8 @@ Sending a non-Anthropic model ID returns `400 model is not available on this end
 import Anthropic from '@anthropic-ai/sdk';
 
 const client = new Anthropic({
-  apiKey: process.env.NEON_AI_GATEWAY_TOKEN,
-  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/ai-gateway/anthropic`,
+  authToken: process.env.NEON_AI_GATEWAY_TOKEN,
+  baseURL: `${process.env.NEON_AI_GATEWAY_BASE_URL}/anthropic`,
 });
 
 const message = await client.messages.create({
@@ -55,8 +67,8 @@ import anthropic
 import os
 
 client = anthropic.Anthropic(
-    api_key=os.environ['NEON_AI_GATEWAY_TOKEN'],
-    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/ai-gateway/anthropic",
+    auth_token=os.environ['NEON_AI_GATEWAY_TOKEN'],
+    base_url=f"{os.environ['NEON_AI_GATEWAY_BASE_URL']}/anthropic",
 )
 
 message = client.messages.create(
@@ -69,7 +81,7 @@ print(message.content[0].text)
 ```
 
 ```bash shouldWrap
-curl -X POST "$NEON_AI_GATEWAY_BASE_URL/ai-gateway/anthropic/v1/messages" \
+curl -X POST "$NEON_AI_GATEWAY_BASE_URL/anthropic/v1/messages" \
   -H "Authorization: Bearer $NEON_AI_GATEWAY_TOKEN" \
   -H "Content-Type: application/json" \
   -H "anthropic-version: 2023-06-01" \
@@ -138,6 +150,19 @@ print(message.usage)
 
 The gateway forwards the `thinking` parameter to Anthropic unchanged. Set `budget_tokens` to control how many tokens Claude can use for thinking. `max_tokens` must be greater than `budget_tokens`.
 
+<Admonition type="important">
+The Claude 5 models — `claude-opus-5`, `claude-sonnet-5`, and `claude-fable-5` — do not accept `thinking.type: "enabled"`. They return `400` with:
+
+```
+"thinking.type.enabled" is not supported for this model.
+Use "thinking.type.adaptive" and "output_config.effort" to control thinking.
+```
+
+Use `thinking: { type: 'adaptive' }` with `output_config: { effort: 'low' | 'medium' | 'high' | 'xhigh' | 'max' }` instead. `claude-fable-5` also rejects `thinking.type: "disabled"` — it always thinks adaptively.
+
+The Claude 4.x models accept the `enabled` + `budget_tokens` form shown below.
+</Admonition>
+
 <CodeTabs labels={["TypeScript (Anthropic SDK)", "Python (Anthropic SDK)"]}>
 
 ```typescript shouldWrap
@@ -189,10 +214,10 @@ All other headers are stripped. The `Authorization` header is replaced with the 
 
 ## Error handling
 
-| Status            | Message                                   | Cause                                     |
-| ----------------- | ----------------------------------------- | ----------------------------------------- |
-| `400 Bad Request` | `unknown model`                           | Model ID not in the catalog               |
-| `400 Bad Request` | `model is not available on this endpoint` | Non-Anthropic model sent to this endpoint |
+| Status            | Message                                                                  | Cause                                     |
+| ----------------- | ------------------------------------------------------------------------ | ----------------------------------------- |
+| `400 Bad Request` | `unknown model "<model-id>"`                                             | Model ID not in the catalog               |
+| `400 Bad Request` | `model "<model-id>" is not available on the anthropic_messages endpoint` | Non-Anthropic model sent to this endpoint |
 
 For authentication, quota, and upstream errors, see [Troubleshooting](/docs/ai-gateway/troubleshooting).
 

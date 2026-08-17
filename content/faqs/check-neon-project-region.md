@@ -3,9 +3,15 @@ title: 'How can I check which region my Neon project is running in?'
 subtitle: 'Check Project Settings, the CLI, or your connection string hostname.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'What are the cheapest ways to run a Postgres database for a project that gets very little traffic?'
+  slug: cheapest-ways-run-postgres-database-low-traffic
+nextLink:
+  title: 'How do I check which Postgres version my Neon database is running?'
+  slug: check-postgresql-version-neon
 ---
 
 ## Quick answer
@@ -16,7 +22,7 @@ There are three quick ways to see your project's region: check the **Settings** 
 
 1. Open the [Neon Console](https://console.neon.tech) and select the project.
 2. On the **Project Dashboard**, find the **Settings** widget.
-3. The region is listed there alongside the cloud provider.
+3. The region is listed there alongside the provider (AWS, or Azure for existing projects).
 
 See [Project settings](/docs/manage/projects#project-settings).
 
@@ -52,12 +58,12 @@ The region is embedded in the hostname segment of your connection string. Take t
 postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Read backwards from `.aws.neon.tech` (or `.azure.neon.tech`). The segment immediately before is the region:
+Read backwards from `.aws.neon.tech` (or `.azure.neon.tech` on existing Azure projects). The segment immediately before is the region:
 
 - `us-east-2.aws.neon.tech` → AWS US East (Ohio)
 - `eu-central-1.aws.neon.tech` → AWS EU Central (Frankfurt)
 - `ap-southeast-1.aws.neon.tech` → AWS Asia Pacific (Singapore)
-- `eastus2.azure.neon.tech` → Azure East US 2
+- `eastus2.azure.neon.tech` → Azure East US 2 (deprecated for new projects)
 
 The `ep-cool-darkness-a1b2c3d4` portion is the compute ID, not the region.
 
@@ -75,6 +81,6 @@ curl "https://console.neon.tech/api/v2/projects/$PROJECT_ID" \
   -H "Accept: application/json" | jq '.project.region_id'
 ```
 
-The `region_id` field uses the same identifiers as the CLI (`aws-us-east-2`, `azure-eastus2`, etc.).
+The `region_id` field uses the same identifiers as the CLI (`aws-us-east-2`, and for existing Azure projects `azure-eastus2`, etc.). New projects can only be created in AWS regions.
 
 <CTA title="Need a different region?" description="A project's region is fixed. To switch, create a new project in the target region and migrate." buttonText="Migration guide" buttonUrl="https://neon.com/docs/import/region-migration" />

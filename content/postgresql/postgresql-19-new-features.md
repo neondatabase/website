@@ -65,7 +65,7 @@ The initial implementation covers fixed-depth pattern matching. Variable-length 
 
 ## DML and Query Improvements
 
-PostgreSQL 19 adds several long-requested DML primitives. `ON CONFLICT DO SELECT` finally provides atomic get-or-create semantics, `FOR PORTION OF` completes SQL:2011 temporal modifications, and convenience features like `GROUP BY ALL` and `IGNORE NULLS` reduce verbosity in common query patterns.
+PostgreSQL 19 adds several long-requested DML primitives. `ON CONFLICT DO SELECT` finally provides atomic get-or-create semantics, `FOR PORTION OF` completes SQL:2011 temporal modifications, and convenience features like `IGNORE NULLS` reduce verbosity in common query patterns.
 
 ### [ON CONFLICT DO SELECT](/postgresql/postgresql-19/on-conflict-do-select)
 
@@ -99,24 +99,6 @@ WHERE product_id = 1;
 ```
 
 This completes PostgreSQL's SQL:2011 temporal feature set, making it suitable for booking systems, employee records, insurance policies, and any data with validity periods.
-
-### [GROUP BY ALL](/postgresql/postgresql-19/query-improvements)
-
-A convenience feature that automatically groups by every non-aggregate expression in the SELECT list:
-
-```sql
--- Before: manually repeat column names
-SELECT department, role, count(*)
-FROM employees
-GROUP BY department, role;
-
--- PostgreSQL 19: GROUP BY ALL
-SELECT department, role, count(*)
-FROM employees
-GROUP BY ALL;
-```
-
-This eliminates a common source of errors when adding or removing columns from SELECT lists.
 
 ### [IGNORE NULLS / RESPECT NULLS for Window Functions](/postgresql/postgresql-19/query-improvements)
 

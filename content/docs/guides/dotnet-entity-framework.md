@@ -3,7 +3,7 @@ title: Connect an Entity Framework application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Entity Framework
   application
 summary: >-
-  Entity Framework Core connection to Neon Postgres uses Npgsql as the EF Core
+  Entity Framework Core connection to Lakebase Postgres uses Npgsql as the EF Core
   provider, demonstrated through a complete ASP.NET Core Web API project with
   DbContext setup, connection string configuration, and EF migrations. Use this
   guide when wiring a .NET application (ASP.NET Core MVC, Blazor, or console
@@ -12,11 +12,11 @@ summary: >-
   `Microsoft.EntityFrameworkCore.Design`, and `dotnet-ef`, then applying the
   initial schema with `dotnet ef database update`.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-ef-prompt.md"
-description="Pre-built prompt for connecting .NET Entity Framework projects to Neon Postgres."/>
+description="Pre-built prompt for connecting .NET Entity Framework projects to Lakebase Postgres."/>
 
 This guide describes how to create a Neon project and connect to it from an Entity Framework Core application. The example demonstrates how to set up a basic ASP.NET Core Web API project with Entity Framework Core using Npgsql as the database provider.
 
@@ -207,5 +207,10 @@ If you do not have one already, create a Neon project.
 
 - [.NET Documentation](https://learn.microsoft.com/en-us/dotnet/)
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/)
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

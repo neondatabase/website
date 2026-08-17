@@ -1,29 +1,29 @@
 ---
-title: Authenticate Neon Postgres application users with Okta
-subtitle: Learn how to add authentication to a Neon Postgres database application with
+title: Authenticate Lakebase Postgres application users with Okta
+subtitle: Learn how to add authentication to a Lakebase Postgres database application with
   Okta
 summary: >-
-  Okta Workforce Identity Cloud SSO integration for a Next.js app backed by Neon
+  Okta Workforce Identity Cloud SSO integration for a Next.js app backed by Lakebase
   Postgres, wiring Auth.js (next-auth v5) with the built-in Okta OIDC provider
   and Drizzle ORM migrations to store per-user data keyed by the Okta sub claim.
   Choose this guide for organization-internal SSO login rather than Auth0 or
-  Neon Auth. The tutorial covers creating an Okta OIDC web application, setting
+  Managed Better Auth. The tutorial covers creating an Okta OIDC web application, setting
   issuer URI and client credentials, defining a user_messages schema, and
-  running drizzle-kit push:pg migrations against a Neon database.
+  running drizzle-kit push:pg migrations against a Lakebase database.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
-Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
+Neon provides [Managed Better Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
 </Admonition>
 
 User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Identity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.
 
-In this guide, we'll walk through building a simple Next.js application using [Neon's](https://neon.tech) Postgres database, and add user authentication to it using [Okta](https://www.okta.com/). We will cover how to:
+In this guide, we'll walk through building a simple Next.js application using [Neon's](https://neon.tech) Lakebase Postgres database, and add user authentication to it using [Okta](https://www.okta.com/). We will cover how to:
 
 - Set up a Next.js project with Okta for authentication
-- Create a Neon Postgres database and connect it to your application
+- Create a database on Neon and connect it to your application
 - Define a database schema using Drizzle ORM and generate migrations
 - Store and retrieve user data associated with Okta user IDs
 
@@ -149,7 +149,7 @@ export const db = drizzle(sql, {
 });
 ```
 
-This exports a `db` instance that we can use to execute queries against the Neon database.
+This exports a `db` instance that we can use to execute queries against the database.
 
 Next, create a `schema.ts` file inside the `app/db` directory to define the database schema:
 
@@ -204,7 +204,7 @@ This will create a `drizzle` folder at the project root with the migration files
 npx drizzle-kit push:pg
 ```
 
-The `user_messages` table will now be visible in the Neon console.
+The `user_messages` table will now be visible in the console.
 
 ### Configure Okta authentication
 
@@ -434,7 +434,7 @@ Once authenticated, you'll be able to visit the home page, add a quote, and see 
 
 ## Conclusion
 
-In this guide, we walked through setting up a simple Next.js application with user authentication using Okta and a Neon Postgres database. We defined a database schema using Drizzle ORM, generated migrations, and interacted with the database to store and retrieve user data.
+In this guide, we walked through setting up a simple Next.js application with user authentication using Okta and a Lakebase Postgres database. We defined a database schema using Drizzle ORM, generated migrations, and interacted with the database to store and retrieve user data.
 
 Next, we can add more routes and features to the application. The `auth` method can be used in the Next.js API routes or middleware to protect endpoints that require authentication.
 

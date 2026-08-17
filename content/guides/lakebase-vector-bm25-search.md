@@ -4,10 +4,8 @@ subtitle: 'Learn how to build a scalable, highly-relevant semantic and full-text
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-15T00:00:00.000Z'
-updatedOn: '2026-06-19T10:53:44.178Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
-
-<RequestForm type="lakebase-search" />
 
 When building an AI application, like a knowledge base, a support agent, or a retrieval-augmented generation (RAG) pipeline, you typically need two types of search:
 
@@ -23,7 +21,7 @@ Neon's new Lakebase Search extensions, `lakebase_vector` and `lakebase_text`, so
 
 Because these indexes live in storage rather than being bound to compute memory, they work with Neon's [scale-to-zero](/docs/introduction/scale-to-zero) compute and carry over when you [branch your database](/docs/introduction/branching).
 
-In this guide, you’ll build a simple knowledge base application with Next.js that showcases how to use the `lakebase_vector` and `lakebase_text` extensions to enable both semantic and keyword search. By the end, you’ll have a fully functional search interface powered entirely by Neon Postgres, no external search services or vector databases required.
+In this guide, you’ll build a simple knowledge base application with Next.js that showcases how to use the `lakebase_vector` and `lakebase_text` extensions to enable both semantic and keyword search. By the end, you’ll have a fully functional search interface powered entirely by Lakebase Postgres, no external search services or vector databases required.
 
 ## Prerequisites
 
@@ -501,7 +499,7 @@ This guide covered the fundamentals: creating indexes, querying with cosine dist
 
 ## Conclusion
 
-You've built a search system that mirrors the capabilities of heavy, dedicated search infrastructure (like Elasticsearch paired with Pinecone), all living entirely inside Neon Postgres. As your application grows, the Lakebase Search extensions scale with it, handling over a billion vectors, surviving cold starts instantly, and carrying over effortlessly when you branch your database.
+You've built a search system that mirrors the capabilities of heavy, dedicated search infrastructure (like Elasticsearch paired with Pinecone), all living entirely inside Lakebase Postgres. As your application grows, the Lakebase Search extensions scale with it, handling over a billion vectors, surviving cold starts instantly, and carrying over effortlessly when you branch your database.
 
 ## Source code
 

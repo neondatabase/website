@@ -52,7 +52,7 @@ If the user asks what doc AI tools are available (e.g. "what AI tools for docs?"
 - **Styling**: Tailwind CSS
 - **Dev server**: `npm run dev` (http://localhost:3000)
 - **Production build**: `npm run build`
-- **Testing**: `npm run test` (Cypress for E2E)
+- **Testing**: `npm run test` (Playwright for E2E)
 
 ### Navigation Hierarchy
 

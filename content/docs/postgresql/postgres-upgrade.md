@@ -10,14 +10,14 @@ summary: >-
   pg_upgrade is not supported, minor version upgrades are automatic, and
   pg_dump must use an unpooled connection string.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This topic describes how to upgrade your Neon project from one **major** Postgres version to a newer one.
 
 Postgres version numbers consist of a **major** and a **minor** version number. For example, in the version number 16.1, 16 is the major version number and the 1 is the minor version number.
 
-Neon manages **minor** Postgres version upgrades for you, as per the [Neon Postgres Version Support Policy](/docs/postgresql/postgres-version-policy). Typically, no user action is required for **minor** version upgrades. Neon deploys minor versions soon after they become available. However, upgrading to a new major Postgres version is a manual task that must be performed by you.
+Neon manages **minor** Postgres version upgrades for you, as per the [Lakebase Postgres Version Support Policy](/docs/postgresql/postgres-version-policy). Typically, no user action is required for **minor** version upgrades. Neon deploys minor versions soon after they become available. However, upgrading to a new major Postgres version is a manual task that must be performed by you.
 
 Each Neon project is tied to a specific Postgres major version, which you selected when creating your Neon project.
 

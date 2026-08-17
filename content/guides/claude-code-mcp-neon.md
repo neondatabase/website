@@ -1,10 +1,10 @@
 ---
-title: 'Get started with Claude Code and Neon Postgres MCP Server'
+title: 'Get started with Claude Code and Neon MCP Server'
 subtitle: 'Interact with Neon APIs using Claude Code through natural language'
 author: pedro-figueiredo
 enableTableOfContents: true
 createdAt: '2025-08-27T00:00:00.000Z'
-updatedOn: '2026-06-19T23:17:10.824Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 This guide shows how to use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -30,10 +30,10 @@ Make sure you have:
 
 ### Quick Setup (Recommended)
 
-The fastest way to get started is with the [`neonctl init`](/docs/cli/init) command, which automates OAuth authentication, API key creation, and Claude Code configuration:
+The fastest way to get started is with the [`neon init`](/docs/cli/init) command, which automates OAuth authentication, API key creation, and Claude Code configuration:
 
 ```bash
-npx neonctl@latest init
+npx neon@latest init
 ```
 
 This command authenticates via OAuth, creates an API key, and configures Claude Code to connect to Neon's remote MCP server. Once complete, ask your AI assistant **"Get started with Neon"**.

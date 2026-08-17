@@ -9,6 +9,7 @@ const GROUPS = [
   { id: 'config', title: 'Config as code' },
   { id: 'surfaces', title: 'Functions, storage & data' },
   { id: 'network', title: 'Org & network' },
+  { id: 'debugging', title: 'Debugging' },
 ];
 
 const GROUP_OF = {
@@ -30,19 +31,28 @@ const GROUP_OF = {
   psql: 'connect',
   config: 'config',
   deploy: 'config',
+  status: 'config',
   dev: 'config',
   functions: 'surfaces',
-  bucket: 'surfaces',
+  buckets: 'surfaces',
   'data-api': 'surfaces',
   'neon-auth': 'surfaces',
   orgs: 'network',
   'ip-allow': 'network',
   vpc: 'network',
+  api: 'network',
+  diff: 'core',
+  snapshots: 'core',
+  inspect: 'debugging',
+  'api-keys': 'setup',
+  profile: 'setup',
+  logs: 'debugging',
+  open: 'setup',
 };
 
-// Commands documented as a section of another command's page.
-const HREF_OVERRIDES = {
-  deploy: '/docs/cli/config#deploy',
-};
+// Commands documented as a section of another command's page instead of a
+// standalone page. Empty now that deploy and status have their own pages;
+// add an entry here for any future command that lives in another page's section.
+const HREF_OVERRIDES = {};
 
 export { GROUPS, GROUP_OF, HREF_OVERRIDES };

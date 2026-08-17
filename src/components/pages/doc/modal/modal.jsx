@@ -162,7 +162,7 @@ const Modal = ({ id, title, description, destination, embedId }) => {
                 )}
                 <Link
                   className={cn(
-                    'mt-4 flex w-fit items-center gap-2 leading-none font-medium tracking-extra-tight',
+                    'mt-4 flex w-fit items-center gap-2 text-base! leading-none font-medium tracking-extra-tight',
                     '[&>svg]:text-black-new! [&>svg]:transition-all! dark:[&>svg]:text-white!',
                     'hover:text-black-new! dark:hover:text-white! [&:hover>svg]:text-black-new! dark:[&:hover>svg]:text-white!'
                   )}

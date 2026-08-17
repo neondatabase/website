@@ -9,7 +9,7 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-07-15T00:58:07.525Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -83,12 +83,12 @@ The Neon CLI supports creating and deleting databases with `neon databases creat
 
 ## Manage databases with the Neon API
 
-Database actions performed in the Neon Console can also be also performed using the Neon API. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+Database actions performed in the Neon Console can also be also performed using the Neon API. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API Reference](/docs/reference/api).
 
 In Neon, a database belongs to a branch, which means that when you create a database, it is created in a branch. Database-related requests are therefore performed using branch API methods.
 
 <Admonition type="note">
-The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to the method's request body schema in the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to the method's request body schema in the [Neon API Reference](/docs/reference/api).
 </Admonition>
 
 The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
@@ -100,7 +100,7 @@ A Neon API request requires an API key. For information about obtaining an API k
 <LinkAPIKey />
 ### Create a database with the API
 
-The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdatabase).
+The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-database).
 
 The role specified by `owner_name` is the owner of that database.
 
@@ -130,7 +130,7 @@ curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-m
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Create database](https://api-docs.neon.tech/reference/createprojectbranchdatabase) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create database](/docs/reference/api/branches/create-project-branch-database) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -163,7 +163,7 @@ For attribute definitions, find the [Create database](https://api-docs.neon.tech
 
 ### List databases with the API
 
-The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/listprojectbranchdatabases).
+The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/list-project-branch-databases).
 
 ```http
 GET /projects/{project_id}/branches/{branch_id}/databases
@@ -180,7 +180,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [List databases](https://api-docs.neon.tech/reference/listprojectbranchdatabases) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List databases](/docs/reference/api/branches/list-project-branch-databases) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -209,7 +209,7 @@ For attribute definitions, find the [List databases](https://api-docs.neon.tech/
 
 ### Update a database with the API
 
-The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/updateprojectbranchdatabase).
+The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/update-project-branch-database).
 
 ```http
 PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
@@ -232,7 +232,7 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/bran
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Update database](https://api-docs.neon.tech/reference/updateprojectbranchdatabase) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Update database](/docs/reference/api/branches/update-project-branch-database) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -265,7 +265,7 @@ For attribute definitions, find the [Update database](https://api-docs.neon.tech
 
 ### Delete a database with the API
 
-The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/deleteprojectbranchdatabase).
+The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/delete-project-branch-database).
 
 ```http
 DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}
@@ -283,7 +283,7 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the [Delete database](https://api-docs.neon.tech/reference/deleteprojectbranchdatabase) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete database](/docs/reference/api/branches/delete-project-branch-database) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
 
 ```json
 {

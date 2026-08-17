@@ -16,13 +16,13 @@ const codeSnippets = [
     name: 'Windows',
     iconName: 'windows',
     language: 'text',
-    code: `npm install -g neonctl`,
+    code: `npm install -g neon`,
   },
   {
     name: 'Linux',
     iconName: 'linux',
     language: 'text',
-    code: `npm install -g neonctl`,
+    code: `npm install -g neon`,
   },
 ];
 

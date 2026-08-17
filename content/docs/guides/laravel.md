@@ -2,19 +2,19 @@
 title: Connect from Laravel to Neon
 subtitle: Set up a Neon project in seconds and connect from a Laravel application
 summary: >-
-  Connect a Laravel application to Neon Postgres by setting the DB_CONNECTION,
+  Connect a Laravel application to Lakebase Postgres by setting the DB_CONNECTION,
   DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, and DB_PASSWORD variables in
   your .env file. Also covers the "endpoint ID is not specified" SNI error
   that affects older PDO_PGSQL or libpq drivers, with workarounds for passing
   the endpoint ID as a URL option or in the password field.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/laravel-prompt.md" 
-description="Pre-built prompt for connecting Laravel to Neon Postgres"/>
+description="Pre-built prompt for connecting Laravel to Lakebase Postgres"/>
 
-Laravel is a web application framework with expressive, elegant syntax. Connecting to Neon from Laravel is the same as connecting to a standalone Postgres installation from Laravel. Only the connection details differ.
+Laravel is a web application framework with expressive, elegant syntax. Connecting to Neon from Laravel is the same as connecting to a standalone Lakebase Postgres installation from Laravel. Only the connection details differ.
 
 To connect to Neon from Laravel:
 
@@ -75,8 +75,13 @@ For schema migration with Laravel, see our guide:
 
 <DetailIconCards>
 
-<a href="/docs/guides/laravel-migrations" description="Schema migration with Neon Postgres and Laravel" icon="app-store" icon="app-store">Laravel Migrations</a>
+<a href="/docs/guides/laravel-migrations" description="Schema migration with Lakebase Postgres and Laravel" icon="app-store" icon="app-store">Laravel Migrations</a>
 
 </DetailIconCards>
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

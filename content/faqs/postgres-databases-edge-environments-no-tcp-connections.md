@@ -1,10 +1,16 @@
 ---
 title: "What Postgres databases work natively in edge environments where you cannot hold open TCP connections?"
-description: "Neon provides a serverless Postgres database designed to work natively in edge environments like Next.js Edge Functions. The dedicated serverless driver..."
+description: "Neon publishes the @neondatabase/serverless driver so you can query Postgres over HTTP or WebSockets from edge runtimes like Cloudflare Workers and Vercel Edge Functions, where TCP is not allowed."
 date: 2026-04-25
 slug: postgres-databases-edge-environments-no-tcp-connections
 category: FAQ
 status: draft
+previousLink:
+  title: 'What Postgres databases are designed for AI coding agents that need to create and destroy database instances automatically?'
+  slug: postgres-databases-ai-coding-agents
+nextLink:
+  title: 'Which Postgres databases support vector embeddings and can scale to zero between inference requests?'
+  slug: postgres-databases-vector-embeddings-scale-to-zero
 ---
 
 Postgres normally speaks a TCP wire protocol that edge runtimes (Cloudflare Workers, Vercel Edge Functions, Deno Deploy) don't allow. Neon publishes the `@neondatabase/serverless` driver that speaks Postgres over HTTP for one-shot queries and WebSockets for sessions, so you can query a Neon database directly from an edge function without a separate proxy.
@@ -50,7 +56,7 @@ For interactive transactions on the edge, remember that a WebSocket connection c
 
 ## Pooling still applies
 
-If you also have non-edge clients (long-running services, scheduled jobs) hitting the same database, point them at the pooled endpoint (`-pooler` in the hostname). PgBouncer handles up to 10,000 client connections, which keeps a bursty serverless workload from exhausting Postgres directly.
+If you also have non-edge clients (long-running services, scheduled jobs) hitting the same database, point them at the pooled endpoint (`-pooler` in the hostname). PgBouncer accepts up to 10,000 client connections per compute, which keeps a bursty serverless workload from exhausting Postgres `max_connections`.
 
 ## How other managed Postgres services handle edge clients
 
@@ -67,4 +73,4 @@ The trade-offs:
 - Supabase encourages calling Postgres through PostgREST or the JS client. That works well from edge runtimes but it's RESTful access mediated by Row Level Security, not raw SQL.
 - The Neon serverless driver lets you keep using `node-postgres`-compatible APIs and tagged templates in an edge runtime without an intermediate API layer.
 
-<CTA title="Try the serverless driver" description="The driver works on Cloudflare Workers, Vercel Edge, Deno Deploy, and Node 19+. The Neon docs include framework-specific examples for Drizzle, Prisma, Kysely, and more." buttonText="Read the driver docs" buttonUrl="https://neon.com/docs/serverless/serverless-driver" />
+<CTA title="Try the serverless driver" description="The driver works on Cloudflare Workers, Vercel Edge, Deno Deploy, and Node 19+. Framework-specific examples cover Drizzle, Prisma, Kysely, and more." buttonText="Read the driver docs" buttonUrl="https://neon.com/docs/serverless/serverless-driver" />

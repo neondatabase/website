@@ -2,8 +2,8 @@
 title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
 summary: >-
-  Neon-to-Materialize logical replication streams Postgres WAL change events
-  from a Neon publication into a Materialize PostgreSQL source, enabling
+  Lakebase Postgres-to-Materialize logical replication streams Postgres WAL change events
+  from a Lakebase Postgres publication into a Materialize PostgreSQL source, enabling
   real-time operational analytics without a separate ETL pipeline. Follow this
   guide to enable logical replication, set REPLICA IDENTITY FULL on replicated
   tables, and verify snapshot completion via mz_source_statistics. A direct
@@ -11,14 +11,14 @@ summary: >-
   scale-to-zero and increases compute billing.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
+Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
 
 [Materialize](https://materialize.com/) is a data warehouse for operational workloads, purpose-built for low-latency applications. You can use it to process data at speeds and scales not possible in traditional databases, but without the cost, complexity, or development time of most streaming engines.
 
-In this guide, you will learn how to stream data from your Neon Postgres database to Materialize using the Materialize [PostgreSQL source](https://materialize.com/docs/sql/create-source/postgres/).
+In this guide, you will learn how to stream data from your Lakebase Postgres database to Materialize using the Materialize [PostgreSQL source](https://materialize.com/docs/sql/create-source/postgres/).
 
 ## Prerequisites
 
@@ -85,7 +85,7 @@ It is recommended that you create a dedicated Postgres role for replicating data
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
+The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](/docs/reference/api/branches/create-project-branch-role)
 
 ```bash
 neon roles create --name replication_user
@@ -110,7 +110,7 @@ To create a role in the Neon Console:
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
+The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/roles' \
@@ -158,7 +158,7 @@ If you use Neon's **IP Allow** feature to limit IP addresses that can connect to
 
 In Materialize, a [cluster](https://materialize.com/docs/get-started/key-concepts/#clusters) is an isolated environment, similar to a virtual warehouse in Snowflake. When you create a cluster, you choose the size of its compute resource allocation based on the work you need the cluster to do, whether ingesting data from a source, computing always-up-to-date query results, serving results to clients, or a combination.
 
-In this case, you’ll create 1 new cluster containing 1 medium replica for ingesting source data from your Neon Postgres database.
+In this case, you’ll create 1 new cluster containing 1 medium replica for ingesting source data from your Lakebase Postgres database.
 
 From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, run the `CREATE CLUSTER` command to create the new cluster:
 
@@ -170,7 +170,7 @@ Materialize recommends starting with a medium [size](https://materialize.com/doc
 
 ## Start ingesting data
 
-Now that you’ve configured your database network and created an ingestion cluster, you can connect Materialize to your Neon Postgres database and start ingesting data.
+Now that you’ve configured your database network and created an ingestion cluster, you can connect Materialize to your Lakebase Postgres database and start ingesting data.
 
 1. From a `psql` client connected to Materialize or from the Materialize **SQL Shell**, use the [CREATE SECRET](https://materialize.com/docs/sql/create-secret/) command to securely store the password for the Postgres role you created earlier:
 
@@ -178,7 +178,7 @@ Now that you’ve configured your database network and created an ingestion clus
    CREATE SECRET pgpass AS '<PASSWORD>';
    ```
 
-   You can access the password for your Neon Postgres role from the **Connect to your database** modal; click the **Connect** button on your **Project Dashboard** to open the modal.
+   You can access the password for your Neon role from the **Connect to your database** modal; click the **Connect** button on your **Project Dashboard** to open the modal.
 
 2. Use the [CREATE CONNECTION](https://materialize.com/docs/sql/create-connection/) command to create a connection object with access and authentication details for Materialize to use:
 
@@ -209,7 +209,7 @@ Now that you’ve configured your database network and created an ingestion clus
    - Replace `<role_name>` with the name of your Postgres role (for example, `alex`)
    - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (for example, `dbname`)
 
-3. Use the [CREATE SOURCE](https://materialize.com/docs/sql/create-source/) command to connect Materialize to your Neon Postgres database and start ingesting data from the publication you created earlier:
+3. Use the [CREATE SOURCE](https://materialize.com/docs/sql/create-source/) command to connect Materialize to your database and start ingesting data from the publication you created earlier:
 
    ```sql
    CREATE SOURCE mz_source
@@ -329,7 +329,7 @@ After the snapshotting phase, Materialize starts ingesting change events from th
         WHERE slot_name = '<slot_name>';
         ```
 
-        The result of this query is the amount of data your Postgres cluster must retain in its replication log because of this replication slot. Typically, this means Materialize has not yet communicated back to your Neon Postgres database that it has committed this data. A high value can indicate that the source has fallen behind and that you might need to scale up your ingestion cluster.
+        The result of this query is the amount of data your Postgres cluster must retain in its replication log because of this replication slot. Typically, this means Materialize has not yet communicated back to your Lakebase Postgres database that it has committed this data. A high value can indicate that the source has fallen behind and that you might need to scale up your ingestion cluster.
 
 ## Next steps
 

@@ -14,6 +14,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Button from 'components/shared/button';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+import inputWarningIcon from 'icons/input-warning.svg';
 import backendFormDarkBg from 'images/pages/docs/request-form/backend-form-dark-bg.png';
 import backendFormLightBg from 'images/pages/docs/request-form/backend-form-light-bg.png';
 import patternSvg from 'images/pages/docs/request-form/pattern.svg';
@@ -55,6 +56,7 @@ const RequestForm = ({
   const [query, setQuery] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [isSent, setIsSent] = useState(false);
+  const [hasEmailError, setHasEmailError] = useState(false);
 
   const filteredOptions = useMemo(() => {
     if (!hasOptions) return [];
@@ -79,7 +81,15 @@ const RequestForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (isValid) {
+    const hasSelection = hasOptions ? !!selected : true;
+    const canSubmit = hasSelection && (isRecognized || emailRegexp.test(email));
+
+    if (isBackendPlatformForm && !canSubmit) {
+      setHasEmailError(true);
+      return;
+    }
+
+    if (canSubmit) {
       if (window.zaraz) {
         const { eventName, eventProps } = DATA[type];
         const eventData = { email };
@@ -99,35 +109,43 @@ const RequestForm = ({
   };
 
   const isBackendPlatformForm = type === 'backend-platform';
-  const backendFormBgClassName =
-    'pointer-events-none absolute -top-3.25 left-[max(27rem,calc(100%_-_22.5rem))] aspect-400/275 w-100 md:hidden';
 
   return (
     <figure
       className={cn(
         'doc-cta not-prose relative my-5 overflow-hidden border border-gray-new-80 bg-gray-new-98 px-7 py-6 sm:p-6',
         'dark:border-gray-new-20 dark:bg-gray-new-8',
-        isBackendPlatformForm && 'p-5 sm:p-5',
+        isBackendPlatformForm && '@container/request p-5 md:p-4.5 sm:p-4.5',
         className
       )}
     >
       {isBackendPlatformForm ? (
-        <>
+        <div
+          className={cn(
+            'pointer-events-none absolute -top-px left-[64%] z-0 block h-[calc(100%+2px)] w-fit max-w-none',
+            '@max-2xl/request:left-[460px]',
+            '@max-lg/request:relative @max-lg/request:-right-10 @max-lg/request:left-auto @max-lg/request:-mt-5.25 @max-lg/request:mb-3.5 @max-lg/request:ml-auto @max-lg/request:h-41'
+          )}
+        >
+          <div
+            className="absolute top-2/3 left-[40%] z-0 h-4/5 w-2/3 -translate-x-1/2 -translate-y-1/2 rotate-60 rounded-[100%] bg-linear-to-t from-transparent to-gray-new-30 to-20% opacity-40 blur-3xl dark:to-green-44 dark:opacity-20"
+            aria-hidden="true"
+          />
           <Image
-            className={cn(backendFormBgClassName, 'dark:hidden')}
+            className="relative z-10 h-full w-auto max-w-none dark:hidden"
             src={backendFormLightBg}
             alt=""
-            width={400}
-            height={275}
+            width={333}
+            height={187}
           />
           <Image
-            className={cn(backendFormBgClassName, 'hidden dark:block')}
+            className="relative z-10 hidden h-full w-auto max-w-none dark:block"
             src={backendFormDarkBg}
             alt=""
-            width={400}
-            height={275}
+            width={333}
+            height={187}
           />
-        </>
+        </div>
       ) : (
         <Image
           className="absolute top-0 right-0 bottom-0 h-full w-auto object-cover md:hidden"
@@ -141,16 +159,17 @@ const RequestForm = ({
         <h2 className="my-0! text-xl leading-tight font-medium tracking-tight text-black-pure dark:text-white">
           {title}
         </h2>
-        <p className="mt-2.5 max-w-md text-base leading-normal font-normal tracking-tight text-gray-new-20 opacity-90 dark:text-gray-new-80">
+        <p className="mt-2.5 max-w-104 text-base leading-normal font-normal tracking-tight text-gray-new-20 opacity-90 dark:text-gray-new-80">
           {description}
         </p>
         {!isSent ? (
           <form
-            className="mt-6 flex items-end gap-4 md:flex-col md:items-start"
+            className="mt-5 flex items-end gap-4 @max-lg/request:flex-col @max-lg/request:items-start md:flex-col md:items-start md:@min-lg/request:flex-row"
             onSubmit={handleSubmit}
+            noValidate={isBackendPlatformForm}
           >
             {hasOptions && (
-              <div className="flex-1 md:w-full">
+              <div className="flex-1 @max-lg/request:w-full md:w-full">
                 <Combobox
                   value={selected}
                   immediate
@@ -224,40 +243,62 @@ const RequestForm = ({
               </div>
             )}
             {!isRecognized && (
-              <input
-                type="email"
-                name="email"
-                value={email}
+              <div
                 className={cn(
-                  'h-11 min-w-64 border border-gray-new-80 bg-white px-4 py-2 text-base leading-snug tracking-extra-tight remove-autocomplete-styles placeholder:text-gray-new-40 md:w-full',
-                  '2xl:min-w-52 xl:min-w-40',
-                  'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
-                  'dark:border-gray-new-30 dark:bg-gray-new-15 dark:placeholder:text-gray-new-60 dark:focus:outline-gray-new-30',
-                  isBackendPlatformForm && 'min-w-82.5 2xl:min-w-82.5 xl:min-w-82.5 md:min-w-0'
+                  'w-full min-w-64 2xl:min-w-52 xl:min-w-40',
+                  isBackendPlatformForm &&
+                    'relative w-fit min-w-82.5 shrink-0 @max-lg/request:w-full 2xl:min-w-82.5 xl:min-w-82.5 md:min-w-0'
                 )}
-                placeholder="Email"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              >
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  className={cn(
+                    'h-11 w-full border border-gray-new-80 bg-white px-4 py-2 text-base leading-snug tracking-extra-tight remove-autocomplete-styles placeholder:text-gray-new-40',
+                    'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
+                    'dark:border-gray-new-30 dark:bg-gray-new-15 dark:placeholder:text-gray-new-60 dark:focus:outline-gray-new-30',
+                    isBackendPlatformForm && hasEmailError && 'border-[#FFACA4] pr-13',
+                    isBackendPlatformForm && hasEmailError && 'dark:border-[#8B3932]'
+                  )}
+                  placeholder="Enter your email..."
+                  required
+                  aria-invalid={hasEmailError ? true : undefined}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setHasEmailError(false);
+                  }}
+                />
+                {isBackendPlatformForm && hasEmailError && (
+                  <Image
+                    className="pointer-events-none absolute top-1/2 right-3.5 size-6 -translate-y-1/2"
+                    src={inputWarningIcon}
+                    alt=""
+                    width={24}
+                    height={24}
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
             )}
 
             <Button
               className={cn(
-                'rounded-full px-7 py-3.5 text-base leading-none font-medium tracking-tight md:w-full',
-                !isValid
+                'rounded-full px-7 py-3.5 text-base leading-none font-medium tracking-tight @max-lg/request:w-full md:w-full @min-lg/request:md:w-fit',
+                !isValid && !isBackendPlatformForm
                   ? 'pointer-events-none bg-gray-new-40 select-none dark:bg-gray-new-80'
                   : 'bg-black-pure dark:bg-white'
               )}
               theme="white-filled-multi"
               type="submit"
-              disabled={!isValid}
+              disabled={!isBackendPlatformForm && !isValid}
             >
               {buttonText}
             </Button>
           </form>
         ) : (
           <div className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start">
-            <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
+            <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden="true" />
             <p className="text-[17px] font-light">
               {confirmation || 'Request logged. We appreciate your feedback!'}
             </p>

@@ -1,15 +1,21 @@
 ---
 title: "What tools help manage multiple Postgres databases across different projects and environments from a single account?"
 date: 2026-04-25
-description: "Neon organizes Postgres databases into projects, with branches for dev, staging, and previews, all managed from a single console, CLI, and API."
+description: "Neon organizes databases into projects, with branches for dev, staging, and previews, all managed from a single console, CLI, and API."
 slug: tools-manage-multiple-postgres-databases
 category: FAQ
 status: draft
+previousLink:
+  title: 'What tools isolate database changes per branch in modern development workflows?'
+  slug: tools-isolate-database-changes-branch-development
+nextLink:
+  title: 'What tools enable temporary Postgres environments for each developer?'
+  slug: tools-temporary-postgres-environments-developers
 ---
 
 ## Short answer
 
-Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/cli), or the [API](/docs/reference/api-reference). Free accounts include 100 projects.
+Neon organizes databases into projects. One project usually maps to one app or one customer, and each project has its own branches, computes, and storage. You manage them from a single account through the [Neon Console](https://console.neon.tech), the [Neon CLI](/docs/cli), or the [API](/docs/reference/api). The Free plan includes 100 projects.
 
 ## How the hierarchy works
 
@@ -25,11 +31,11 @@ Branches inside a project share storage, so creating a `staging` or `preview/*` 
 
 ## Project limits by plan
 
-| Plan   | Projects per account                     |
-| ------ | ---------------------------------------- |
-| Free   | 100                                      |
-| Launch | 100                                      |
-| Scale  | 1,000 (soft limit, increases on request) |
+| Plan        | Projects                                 |
+| ----------- | ---------------------------------------- |
+| Free plan   | 100                                      |
+| Launch plan | 100                                      |
+| Scale plan  | 1,000 (soft limit, increases on request) |
 
 Each project on the Free plan gets 0.5 GB of storage and 100 CU-hours of compute per month.
 
@@ -48,7 +54,7 @@ neon projects create --name acme-corp --region-id aws-us-east-1
 neon connection-string --project-id quiet-frost-12345
 ```
 
-For programmatic provisioning (for example, a new database per signed-up customer), use the [API](/docs/reference/api-reference) or the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
+For programmatic provisioning (for example, a new database per signed-up customer), use the [API](/docs/reference/api) or the [Neon TypeScript SDK](/docs/reference/typescript-sdk).
 
 ## Organizations and access control
 
@@ -61,9 +67,9 @@ If you're building a B2B app and want hard data isolation between customers, cre
 ## How other Postgres platforms handle multiple databases
 
 - **Supabase**: Each project is a dedicated Postgres instance with its own server, billed as Compute Hours independent of usage. Each launched project adds at least the Micro compute cost (~$10/month) to your bill ([compute usage](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). The Free Plan allows two projects per Free Plan organization ([Supabase billing](https://supabase.com/docs/guides/platform/billing-on-supabase)).
-- **AWS RDS for PostgreSQL**: Each database is a separate DB instance with its own instance hours and storage. There's no "project" abstraction; you organize instances with tags, accounts, or VPCs. Scripted provisioning is possible via the AWS CLI or CloudFormation ([RDS docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)).
+- **AWS RDS for Postgres**: Each database is a separate database instance with its own instance hours and storage. There's no "project" abstraction; you organize instances with tags, accounts, or VPCs. Scripted provisioning is possible via the AWS CLI or CloudFormation ([RDS docs](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.PostgreSQL.html)).
 - **AWS Aurora Serverless v2**: Same idea as RDS but with elastic compute. Each cluster is billed independently and you manage them through the AWS Console or API ([Aurora Serverless v2](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)).
 
-For per-customer database-per-tenant patterns, Neon's project model tends to be the lowest-overhead choice because idle projects scale to zero and contribute no compute cost to the invoice.
+For per-customer database-per-tenant patterns, Neon's project model tends to be the lowest-overhead choice because idle projects scale to zero and contribute no compute cost (storage continues to bill on paid plans; Free includes up to 0.5 GB/project).
 
 <CTA title="Manage projects in one place" description="Sign up and see how 100 free projects fit on one account." buttonText="Try Neon" buttonUrl="https://console.neon.tech/signup" />

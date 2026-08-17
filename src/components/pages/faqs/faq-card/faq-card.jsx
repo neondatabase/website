@@ -5,7 +5,7 @@ import LINKS from 'constants/links';
 import ArrowIcon from 'icons/arrow-right.inline.svg';
 
 const FaqCard = ({ title, subtitle, slug }) => (
-  <article className="border-b border-gray-new-15/20 pt-6 pb-5 first:pt-0 last:border-none last:pb-0 dark:border-gray-new-15/80">
+  <article className="border-b border-gray-new-15/20 pt-6 pb-5 last:border-none last:pb-0 dark:border-gray-new-15/80">
     <Link className="group" to={`${LINKS.faqs}/${slug}`}>
       <div className="flex flex-col gap-y-[18px] sm:gap-y-4">
         <div className="max-w-[832px]">

@@ -1,16 +1,22 @@
 ---
 title: 'How do I rotate my database password in Neon after a security incident?'
-subtitle: 'Reset a role password from the Neon Console, CLI, or SQL to invalidate the leaked credential.'
+subtitle: 'Reset a role password from the Neon Console, API, or SQL to invalidate the leaked credential.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T12:41:06.646Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rotate all my Neon database credentials and connection strings after a security breach?'
+  slug: rotate-database-credentials-after-breach
+nextLink:
+  title: 'How do I rotate my database URL or connection string in Neon?'
+  slug: rotate-database-url-connection-string
 ---
 
 ## Quick answer
 
-In Neon, "rotating a password" means resetting the password for the affected Postgres role. You can do this from the Neon Console (**Branches → branch → Roles & Databases → Reset password**), through the Neon API, or with an SQL `ALTER USER` statement. Neon generates a new password immediately and returns the updated connection string. Any new connection attempt using the old password will fail to authenticate.
+In Neon, rotating a password means resetting the password for the affected Postgres role. You can do this from the Neon Console (**Branches → branch → Roles & Databases → Reset password**), through the Neon API, or with an SQL `ALTER ROLE` statement. A Console or API reset generates a new password immediately. Copy the updated connection string from the **Connect** modal. Any new connection attempt using the old password fails to authenticate.
 
 ## Reset the password
 
@@ -41,7 +47,7 @@ curl -X POST \
   -H "Accept: application/json" | jq
 ```
 
-The response includes the new `password` for the role. See the [Reset role password API reference](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword).
+The response includes the new `password` for the role. See the [Reset role password API reference](/docs/reference/api/branches/reset-project-branch-role-password).
 
 </TabItem>
 
@@ -50,7 +56,7 @@ The response includes the new `password` for the role. See the [Reset role passw
 If you need to set a specific password (for example, to match a value stored in a secret manager), connect with `psql` or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and run:
 
 ```sql
-ALTER USER neondb_owner WITH PASSWORD 'AbC123dEfGhIj';
+ALTER ROLE neondb_owner WITH PASSWORD 'AbC123dEfGhIj';
 ```
 
 Passwords must have at least 60 bits of entropy. See [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql) for the password rules.

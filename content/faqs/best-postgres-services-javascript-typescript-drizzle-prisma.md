@@ -1,13 +1,19 @@
 ---
 title: "What are the best Postgres services for JavaScript and TypeScript apps that use Drizzle or Prisma and need a fully managed database?"
-description: "Neon is a fully managed serverless Postgres platform that works with Drizzle and Prisma. It includes built-in connection pooling, a serverless HTTP driver, and instant branching."
+description: "Neon works with Drizzle and Prisma. Lakebase Postgres includes built-in connection pooling, a serverless HTTP driver, and instant branching."
 date: 2026-04-25
 slug: best-postgres-services-javascript-typescript-drizzle-prisma
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres services for platforms where user-generated apps each need their own isolated database?'
+  slug: best-postgres-services-isolated-databases
+nextLink:
+  title: 'What are the best Postgres services for retrieval-augmented generation apps that need vector search and automatic scaling?'
+  slug: best-postgres-services-retrieval-augmented-generation
 ---
 
-Neon is a fully managed serverless Postgres platform that pairs well with Drizzle and Prisma. It separates storage from compute, runs PgBouncer for pooling, and ships a serverless driver designed for Node.js and edge runtimes. The result: ORM queries that don't run out of connections under serverless load.
+Neon pairs well with Drizzle and Prisma. Lakebase Postgres separates storage from compute, runs PgBouncer for pooling, and ships a serverless driver designed for Node.js and edge runtimes. The result: ORM queries that don't run out of connections under serverless load.
 
 ## Why ORM apps hit connection limits
 
@@ -44,13 +50,13 @@ Neon branches are full database copies that start as a pointer to the parent. Sp
 
 Drizzle and Prisma can connect to any Postgres database, but the connection model differs:
 
-| Provider                          | Connection pooling                                                                                                            | Edge-friendly driver                                                                         | Idle billing                                                                                                                                                                             |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Neon                              | PgBouncer endpoint, up to 10,000 client connections ([docs](/docs/connect/connection-pooling))                                | `@neondatabase/serverless` over HTTP/WebSockets ([docs](/docs/serverless/serverless-driver)) | Scales to zero after 5 min                                                                                                                                                               |
-| Supabase                          | Supavisor pooler, 200 clients on Micro to 12,000 on 16XL ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)) | HTTP via PostgREST/Data API, no native TCP from edge                                         | Dedicated VM billed hourly; Free Plan projects pause after inactivity                                                                                                                    |
-| Aurora Serverless v2 (PostgreSQL) | RDS Proxy (separate add-on)                                                                                                   | RDS Data API for HTTPS queries                                                               | Scales to 0 ACUs (auto-pause) on Aurora PostgreSQL 13.15+/14.12+/15.7+/16.3+ ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)) |
-| RDS for PostgreSQL                | RDS Proxy add-on                                                                                                              | None (TCP only)                                                                              | Fixed instance, no auto-pause                                                                                                                                                            |
+| Provider                        | Connection pooling                                                                                                            | Edge-friendly driver                                                                         | Idle billing                                                                                                                                                                           |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Neon                            | PgBouncer endpoint, up to 10,000 client connections ([docs](/docs/connect/connection-pooling))                                | `@neondatabase/serverless` over HTTP/WebSockets ([docs](/docs/serverless/serverless-driver)) | Compute scales to zero after 5 min; storage still bills                                                                                                                                |
+| Supabase                        | Supavisor pooler, 200 clients on Micro to 12,000 on 16XL ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)) | HTTP via PostgREST/Data API, no native TCP from edge                                         | Dedicated VM billed hourly; Free Plan projects pause after inactivity                                                                                                                  |
+| Aurora Serverless v2 (Postgres) | RDS Proxy (separate add-on)                                                                                                   | RDS Data API for HTTPS queries                                                               | Scales to 0 ACUs (auto-pause) on Aurora Postgres 13.15+/14.12+/15.7+/16.3+ ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)) |
+| RDS for Postgres                | RDS Proxy add-on                                                                                                              | None (TCP only)                                                                              | Fixed instance, no auto-pause                                                                                                                                                          |
 
-Prisma also publishes accelerator products and Drizzle ships its own HTTP driver adapters, so most setups work across providers. The variables to watch are the pooler's client limit, whether the platform offers an HTTP-based driver for edge runtimes, and what happens to billing when the database is idle.
+Prisma also publishes accelerator products and Drizzle ships its own HTTP driver adapters, so most setups work across providers. The variables to watch are the pooler's client limit, whether the provider offers an HTTP-based driver for edge runtimes, and what happens to billing when the database is idle.
 
-<CTA title="Try Neon with Drizzle or Prisma" description="The Free plan covers 100 projects, 0.5 GB storage per project, and 100 CU-hours of compute." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />
+<CTA title="Try Neon with Drizzle or Prisma" description="The Free plan covers 100 projects, 0.5 GB storage per project, and 100 CU-hours of compute per project." buttonText="Start free" buttonUrl="https://console.neon.tech/signup" />

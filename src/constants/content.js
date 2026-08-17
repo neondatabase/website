@@ -31,7 +31,7 @@ const EXCLUDED_ROUTES = [
 
 const EXCLUDED_DIRS = ['shared-content', 'unused'];
 
-const EXCLUDED_FILES = ['rss.xml', 'context7.json'];
+const EXCLUDED_FILES = ['rss.xml', 'context7.json', 'llms.txt', 'llms-full.txt'];
 
 const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||

@@ -2,21 +2,22 @@
 title: 'Neon CLI command: orgs'
 subtitle: List the Neon organizations you belong to
 summary: >-
-  The `neonctl orgs` CLI command lists all Neon organizations associated with the
+  The `neon orgs` CLI command lists all Neon organizations associated with the
   authenticated user, returning org ID, name, handle, and timestamps in table
   or JSON output. Use this command to identify which organizations your account
   belongs to before running project or branch commands scoped to a specific org.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:40:08.097Z'
+updatedOn: '2026-07-01T13:41:48.668Z'
 redirectFrom:
   - /docs/reference/cli-orgs
+  - /docs/cli/org
 ---
 
 The `orgs` command lists the organizations you belong to. Its subcommand takes only the [global options](/docs/cli#global-options).
 
 <CliSubcommands command="orgs" />
 
-## neonctl orgs list (#list)
+## neon orgs list (#list)
 
 Lists all organizations associated with the authenticated Neon CLI user.
 
@@ -27,7 +28,7 @@ Lists all organizations associated with the authenticated Neon CLI user.
 List your organizations with the default `table` output format:
 
 ```bash
-neonctl orgs list
+neon orgs list
 ```
 
 ```text filename="Output"
@@ -42,7 +43,7 @@ Organizations
 List your organizations with `--output json`, which also shows the `created_at` and `updated_at` timestamps omitted from the `table` output:
 
 ```bash
-neonctl orgs list -o json
+neon orgs list -o json
 ```
 
 <details>

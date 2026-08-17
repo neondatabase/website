@@ -28,7 +28,7 @@ async function main() {
     if (version && version !== neonctlVersion) {
       console.warn(
         `\n[neonctl docs] schema.json is pinned to neonctl ${neonctlVersion}, but ${version} is the latest on npm.\n` +
-          `[neonctl docs] Run: npm run refresh:cli-docs\n`
+          `[neonctl docs] Run: npm run cli-docs -- refresh\n`
       );
     }
   } catch {

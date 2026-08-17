@@ -5,14 +5,14 @@ summary: >-
   Covers the usage of the `data-api` command in the Neon CLI to create, inspect,
   update, refresh, and delete the Neon Data API for a database.
 enableTableOfContents: true
-updatedOn: '2026-06-12T00:40:08.097Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 redirectFrom:
   - /docs/reference/cli-data-api
 ---
 
 The `data-api` command provisions and manages the [Neon Data API](/docs/data-api/overview) for a database. For Console-based management, see [Manage Data API](/docs/data-api/manage).
 
-Requires neonctl 2.22.2 or later. Check your version with `neonctl --version`.
+Requires neon 2.22.2 or later. Check your version with `neon --version`.
 
 <CliSubcommands command="data-api" />
 
@@ -35,7 +35,7 @@ The `create` and `update` subcommands share a set of settings flags that configu
 | `--server-cors-allowed-origins` | CORS allowed origins                                        | string  |
 | `--server-timing-enabled`       | Enable Server-Timing response headers                       | boolean |
 
-## neonctl data-api create (#create)
+## neon data-api create (#create)
 
 Provisions the Neon Data API for a database.
 
@@ -45,13 +45,13 @@ Provisions the Neon Data API for a database.
 
 `create` also accepts [settings flags](#settings-flags) to configure the Data API at provision time.
 
-Provision the Data API with Neon Auth:
+Provision the Data API with Managed Better Auth:
 
 ```bash
-neonctl data-api create --database neondb --auth-provider neon_auth
+neon data-api create --database neondb --auth-provider neon_auth
 ```
 
-## neonctl data-api get (#get)
+## neon data-api get (#get)
 
 Shows the Neon Data API status and settings.
 
@@ -60,10 +60,10 @@ Shows the Neon Data API status and settings.
 <CliOptions command="data-api get" />
 
 ```bash
-neonctl data-api get --database neondb
+neon data-api get --database neondb
 ```
 
-## neonctl data-api update (#update)
+## neon data-api update (#update)
 
 Updates Neon Data API settings. By default, the flags you provide are merged with the current settings. Pass `--replace` to overwrite all settings with only the flags you provide.
 
@@ -74,10 +74,10 @@ Updates Neon Data API settings. By default, the flags you provide are merged wit
 `update` requires at least one [settings flag](#settings-flags). To refresh the schema cache without changing settings, use [`refresh-schema`](#refresh-schema) instead.
 
 ```bash
-neonctl data-api update --database neondb --db-max-rows 1000
+neon data-api update --database neondb --db-max-rows 1000
 ```
 
-## neonctl data-api refresh-schema (#refresh-schema)
+## neon data-api refresh-schema (#refresh-schema)
 
 Refreshes the Data API schema cache without changing settings.
 
@@ -86,10 +86,10 @@ Refreshes the Data API schema cache without changing settings.
 <CliOptions command="data-api refresh-schema" />
 
 ```bash
-neonctl data-api refresh-schema --database neondb
+neon data-api refresh-schema --database neondb
 ```
 
-## neonctl data-api delete (#delete)
+## neon data-api delete (#delete)
 
 Deletes the Neon Data API for a database.
 
@@ -98,5 +98,5 @@ Deletes the Neon Data API for a database.
 <CliOptions command="data-api delete" />
 
 ```bash
-neonctl data-api delete --database neondb
+neon data-api delete --database neondb
 ```

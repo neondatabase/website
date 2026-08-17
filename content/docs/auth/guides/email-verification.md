@@ -2,21 +2,21 @@
 title: Email verification
 subtitle: Verify user email addresses during sign-up or account creation
 summary: >-
-  Neon Auth email verification confirms that users own the email address
+  Managed Better Auth email verification confirms that users own the email address
   they register with, using either a numeric OTP code (works with shared or
   custom email providers) or a click-through verification link (requires a
   custom email provider). Both methods expire after 15 minutes and can be
   resent; verification can be configured as required or optional in the Neon
   Console, controlling whether unverified users can sign in.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
 Email verification ensures users own the email addresses they register with. The application name shown in these emails is configurable per branch. See [Application name](/docs/auth/production-checklist#application-name).
 
-Neon Auth supports two verification methods:
+Managed Better Auth supports two verification methods:
 
 - **Verification codes** (users enter a numeric code from their email) - works with shared or custom email providers
 - **Verification links** (users click a link in their email) - requires a custom email provider
@@ -35,7 +35,7 @@ In your project's **Settings** → **Auth** page, enable **Sign-up with Email** 
 
 Verification links require a custom email provider. See [Email provider configuration](/docs/auth/production-checklist#email-provider) to set this up.
 
-When a user clicks the verification link in their email, the Neon Auth server handles verification and redirects them back to your application. Your app checks for the new session and shows the appropriate UI.
+When a user clicks the verification link in their email, the Managed Better Auth server handles verification and redirects them back to your application. Your app checks for the new session and shows the appropriate UI.
 
 ### 1. Check session on mount (#check-session-on-mount)
 

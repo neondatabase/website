@@ -2,22 +2,22 @@
 title: Objects
 subtitle: Upload, download, list, and delete files
 summary: >-
-  Work with objects in Neon Storage using the Files SDK, any S3-compatible SDK,
+  Work with objects in Neon Object Storage using the Files SDK, any S3-compatible SDK,
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-06-25T15:31:37.545Z'
+updatedOn: '2026-07-15T23:47:24.799Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Object Storage" />
 
-Objects in Neon Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
+Objects in Neon Object Storage are files stored inside a bucket. Every object has a key (its path within the bucket), a body, a content type, and optional metadata. Objects branch with your database. Each branch inherits the parent's objects at the moment of forking without copying any data.
 
 The examples below show both the [Files SDK](https://files-sdk.dev) and the AWS S3 client. See [Get started](/docs/storage/get-started) to configure either client, or [Authentication](/docs/storage/authentication) if you need to create a credential.
 
 ## Upload
 
-<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
@@ -29,8 +29,8 @@ await files.upload('images/photo.jpg', fileBuffer, {
 ```
 
 ```bash
-neonctl bucket object put my-bucket/images/photo.jpg --file ./photo.jpg
-neonctl bucket object put my-bucket/images/photo.jpg --file ./photo.jpg --content-type image/jpeg
+neon buckets object put my-bucket/images/photo.jpg --file ./photo.jpg
+neon buckets object put my-bucket/images/photo.jpg --file ./photo.jpg --content-type image/jpeg
 ```
 
 ```typescript shouldWrap
@@ -67,7 +67,7 @@ aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
 </CodeTabs>
 
 <Admonition type="note">
-`neonctl bucket object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
+`neon buckets object put` uploads via a presigned URL and supports files up to the presign size limit. For large or streaming uploads use the AWS SDK with [multipart upload](#multipart-upload).
 </Admonition>
 
 ## Multipart upload
@@ -113,7 +113,7 @@ client.upload_file(
 
 ## Download
 
-<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
@@ -124,8 +124,8 @@ const buffer = await result.arrayBuffer();
 
 ```bash
 # Downloads to ./photo.jpg by default; use --file to specify a different path
-neonctl bucket object get my-bucket/images/photo.jpg
-neonctl bucket object get my-bucket/images/photo.jpg --file ./downloads/photo.jpg
+neon buckets object get my-bucket/images/photo.jpg
+neon buckets object get my-bucket/images/photo.jpg --file ./downloads/photo.jpg
 ```
 
 ```typescript shouldWrap
@@ -169,7 +169,7 @@ const response = await client.send(new GetObjectCommand({
 
 Use a prefix to filter results. The Files SDK returns a flat array of items; the S3 client supports a delimiter to simulate folder structure.
 
-<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
@@ -182,13 +182,13 @@ for (const item of items) {
 
 ```bash
 # Folder-collapsed view by default (same as aws s3 ls)
-neonctl bucket object list my-bucket
+neon buckets object list my-bucket
 
 # List objects under a prefix
-neonctl bucket object list my-bucket/images/
+neon buckets object list my-bucket/images/
 
 # Flat listing of every key, no folder collapsing
-neonctl bucket object list my-bucket --recursive
+neon buckets object list my-bucket --recursive
 ```
 
 ```typescript shouldWrap
@@ -249,7 +249,7 @@ do {
 
 **Single object:**
 
-<CodeTabs labels={["Files SDK", "neonctl", "S3 Client", "Python", "AWS CLI"]}>
+<CodeTabs labels={["Files SDK", "neon", "S3 Client", "Python", "AWS CLI"]}>
 
 ```typescript shouldWrap
 import { files } from './client';
@@ -258,7 +258,7 @@ await files.delete('images/photo.jpg');
 ```
 
 ```bash
-neonctl bucket object delete my-bucket/images/photo.jpg
+neon buckets object delete my-bucket/images/photo.jpg
 ```
 
 ```typescript shouldWrap
@@ -321,11 +321,11 @@ client.delete_objects(
 
 **Delete a folder (all objects under a prefix):**
 
-<CodeTabs labels={["neonctl", "Neon API"]}>
+<CodeTabs labels={["neon", "Neon API"]}>
 
 ```bash
 # The prefix must end with /
-neonctl bucket object delete my-bucket/images/ --recursive
+neon buckets object delete my-bucket/images/ --recursive
 ```
 
 ```bash shouldWrap
@@ -429,9 +429,9 @@ print(url)
 
 ## Object branching
 
-Objects branch with your database. When you fork a branch, the child immediately inherits the parent's buckets and objects at that point in time. No data is copied. From that point:
+Objects branch with your database. When you fork a branch, the child can immediately read every object that existed in the parent's buckets at that point in time, using the same copy-on-write model Neon uses for branching Postgres data, so nothing is duplicated upfront. From that point:
 
-- Uploading a new object to a child branch is only visible on that branch and its descendants.
+- Uploading a new object to a child branch, or overwriting or deleting one that existed at fork time, is only visible on that branch and its descendants.
 - Deleting an object on a child branch does not affect the parent.
 - The parent's objects remain unchanged regardless of what happens on child branches.
 

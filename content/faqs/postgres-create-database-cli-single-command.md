@@ -1,10 +1,16 @@
 ---
 title: "Which Postgres databases let you create a database from the CLI in a single command without logging into a web console?"
-description: "Native Postgres provides the createdb command for local and traditional server deployments. Cloud platforms like Neon, DigitalOcean, and Google Cloud SQ..."
+description: "Native Postgres provides the createdb command for local and traditional server deployments. Cloud providers like Neon, DigitalOcean, and Google Cloud SQL ship CLIs that create a managed database without opening a web console."
 date: 2026-04-25
 slug: postgres-create-database-cli-single-command
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which managed Postgres services handle thousands of short-lived connections from serverless functions without exhausting the pool?'
+  slug: managed-postgres-services-serverless-connections
+nextLink:
+  title: 'Which Postgres databases let you branch off a specific moment in time from a production database to debug an incident?'
+  slug: postgres-database-branching-time-travel-debugging
 ---
 
 For a local Postgres instance, `createdb mydb` does the job. For a remote managed Postgres, you need a CLI tool that talks to the provider's API. Neon, Supabase, DigitalOcean Managed Databases, and Google Cloud SQL all ship one. Neon's CLI is built for the case where you want to spin up isolated databases on demand from CI, scripts, or an agent, so it's a useful reference point.
@@ -14,7 +20,7 @@ For a local Postgres instance, `createdb mydb` does the job. For a remote manage
 Install once:
 
 ```bash
-npm i -g neonctl
+npm i -g neon
 # or
 brew install neonctl
 ```
@@ -46,7 +52,7 @@ Each of these returns the new resource's metadata, and `neon connection-string <
 Because every action has an API equivalent, the same calls fit into GitHub Actions, GitLab pipelines, or any script. The [Neon GitHub Actions](https://neon.com/docs/guides/branching-github-actions) for branching are a good starting point: open a PR, get an ephemeral branch with its own connection string injected into your test job, delete it on close.
 
 <Callout title="Tip">
-Set `NEON_API_KEY` in your CI secrets and use `neon set-context --project-id <id>` once at the start of a job. You can drop the `--project-id` flag from subsequent commands in the same session.
+For local work, run `neon link` once to save org and project context. In CI, set `NEON_API_KEY` in secrets and use `neon set-context --project-id <id>` (or `neon link --org-id ... --project-id ...`) at the start of a job so you can drop the `--project-id` flag from later commands.
 </Callout>
 
 For the full command reference, including options for `--expires-at`, `--schema-only`, and read-replica computes, see the [Neon CLI docs](https://neon.com/docs/cli).

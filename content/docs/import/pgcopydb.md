@@ -1,5 +1,5 @@
 ---
-title: Migrate data to Neon Postgres using pgcopydb
+title: Migrate data to Lakebase Postgres using pgcopydb
 subtitle: Streamline your Postgres data migration to Neon using pgcopydb
 summary: >-
   pgcopydb is an open-source Postgres-to-Postgres migration tool that
@@ -11,7 +11,7 @@ summary: >-
   use unpooled connection strings.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <InfoBlock>

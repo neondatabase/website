@@ -1,10 +1,10 @@
 ---
 title: Manage Neon with SST
-subtitle: Use SST to provision Neon resources and build a serverless API with a Neon Postgres database.
+subtitle: Use SST to provision Neon resources and build a serverless API with a Lakebase Postgres database.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-10-10T00:00:00.000Z'
-updatedOn: '2025-10-10T13:12:54.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 [SST](https://sst.dev/) is an open-source framework that simplifies building full-stack applications on your own infrastructure. By integrating Neon with SST, you can automate, version-control, and streamline your database provisioning workflows alongside your serverless applications.
@@ -173,7 +173,7 @@ Now that you have understood how to manage Neon resources with SST, let's explor
 
 ## Example: Building an API with SST and Neon
 
-A key feature of SST is [Resource Linking](https://sst.dev/docs/linking/), which allows your application code to securely access infrastructure resources in a typesafe manner. In this example, we’ll build a simple API using [Hono](https://hono.dev/) that connects to a Neon Postgres database. The connection string for the database will be securely passed to the API using resource linking.
+A key feature of SST is [Resource Linking](https://sst.dev/docs/linking/), which allows your application code to securely access infrastructure resources in a typesafe manner. In this example, we’ll build a simple API using [Hono](https://hono.dev/) that connects to a Lakebase Postgres database. The connection string for the database will be securely passed to the API using resource linking.
 
 The Hono API will be deployed to AWS Lambda, and we’ll use SST to manage both the Neon database and the API.
 

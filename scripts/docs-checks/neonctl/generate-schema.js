@@ -7,17 +7,20 @@
 // parent's help; `vpc endpoint list --help` does the same). The source
 // code is canonical.
 //
-// The source path is required — there is no default. Clone neonctl and
-// pass it explicitly so this script is reproducible across machines:
+// The source path is required — there is no default. The CLI lives in the
+// neon-pkgs monorepo under packages/cli; clone it and point --src at that
+// subdirectory (it must contain the CLI's package.json and src/commands):
 //
-//   git clone https://github.com/neondatabase/neonctl ~/src/neonctl
-//   node scripts/docs-checks/neonctl/generate-schema.js --src ~/src/neonctl
+//   git clone https://github.com/neondatabase/neon-pkgs ~/src/neon-pkgs
+//   node scripts/docs-checks/neonctl/generate-schema.js --src ~/src/neon-pkgs/packages/cli
 //
 // Or via environment variable:
 //
-//   NEONCTL_SRC=~/src/neonctl node scripts/docs-checks/neonctl/generate-schema.js
+//   NEONCTL_SRC=~/src/neon-pkgs/packages/cli node scripts/docs-checks/neonctl/generate-schema.js
 //
 // Run this whenever you upgrade the neonctl pin. Commit `schema.json`.
+// (`npm run cli-docs -- refresh` automates the clone/extract and points --src
+// at packages/cli for you.)
 
 const fs = require('fs');
 const path = require('path');
@@ -119,6 +122,26 @@ function collectModuleConsts(sf) {
   return consts;
 }
 
+// Builds a map of module-level `const name = (argv) => ...` / `const name =
+// function (argv) {...}` builder functions, so a `.command('db', 'desc',
+// dbBuilder)` that passes its builder as a bare identifier (rather than an
+// inline arrow) can still be walked. `inspect db` is the only command that
+// does this today, but the resolution is general.
+function collectFunctionConsts(sf) {
+  const fns = new Map();
+  sf.forEachChild((node) => {
+    if (!ts.isVariableStatement(node)) return;
+    for (const decl of node.declarationList.declarations) {
+      if (!ts.isIdentifier(decl.name) || !decl.initializer) continue;
+      const init = unwrapExpression(decl.initializer);
+      if (init && (ts.isArrowFunction(init) || ts.isFunctionExpression(init))) {
+        fns.set(decl.name.text, init);
+      }
+    }
+  });
+  return fns;
+}
+
 // Resolves an expression to an option-spec ObjectLiteralExpression, if
 // possible. Handles inline object literals and external references like
 // `projectCreateRequest['project.name']` where the referenced const (e.g.
@@ -152,6 +175,13 @@ function resolveStringValue(expr, consts) {
   const direct = stringLiteralValue(e);
   if (direct !== undefined) return direct;
   if (!e) return undefined;
+  // Bare identifier bound to a string literal — used to resolve factory-function
+  // parameters (`windowOptions(defaultWindow)`) whose value was substituted into
+  // `consts` as a string-literal node by resolveOptionsObject.
+  if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
+    const bound = stringLiteralValue(consts.get(e.text));
+    if (bound !== undefined) return bound;
+  }
   if (ts.isPropertyAccessExpression(e) && ts.isIdentifier(e.name)) {
     const target = resolveSpecObject(e.expression, consts);
     if (target) {
@@ -183,6 +213,19 @@ function resolveStringValue(expr, consts) {
     const sep = e.arguments.length ? stringLiteralValue(e.arguments[0]) : ',';
     if (arr && sep !== undefined) return arr.join(sep);
     return undefined;
+  }
+  // `getCliName()` resolves to the rendered binary name. The CLI defines it as
+  // `basename(argv[1]) === 'neonctl' ? 'neonctl' : 'neon'`, i.e. "neon" for
+  // every invocation these docs describe. Source switched several describes
+  // from hardcoded strings to `${getCliName()} …` templates (neon-pkgs #361);
+  // without this, those spans fail to resolve and the whole describe is dropped.
+  if (
+    ts.isCallExpression(e) &&
+    ts.isIdentifier(e.expression) &&
+    e.expression.text === 'getCliName' &&
+    e.arguments.length === 0
+  ) {
+    return 'neon';
   }
   // Template literals: resolvable only if every `${...}` span resolves.
   if (ts.isTemplateExpression(e)) {
@@ -225,6 +268,19 @@ function literalValue(expr) {
 // choices, alias, required, hidden }`. Handles internal spreads
 // (`{ ...req['key'], describe: 'override' }`) by merging the resolved
 // spread first so explicit props win.
+//
+// LIMITATION: an option spec produced by a *factory call* rather than an
+// object literal — e.g. `services: servicesOption({ ... })` in config.ts and
+// env.ts, where servicesOption() lives in the non-command file
+// neon_services.ts and composes its `describe` from a conditional plus an
+// array filter/join — is not resolved. resolveSpecObject returns undefined
+// and the option falls back to `{ type: 'unknown' }` (safe: validation just
+// skips type/choices on it). Recovering type + describe correctly would need
+// cross-file function resolution and static evaluation of the composed
+// string, so those two flags are patched in overrides.json instead
+// (config init --services, env pull --service). Contrast the `.options(...)`
+// / spread positions, which resolveOptionsObject *does* resolve through a
+// factory call.
 function parseOptionSpec(expr, consts) {
   const obj = resolveSpecObject(expr, consts);
   if (!obj) return { type: 'unknown' };
@@ -295,6 +351,47 @@ function parseOptionSpec(expr, consts) {
   return spec;
 }
 
+// Resolves an expression to an options ObjectLiteralExpression, if possible.
+// Handles inline object literals, bare identifiers bound to a module-level
+// object const (`.options(scopeOptions)`), and calls to a module-level factory
+// arrow that returns an object literal (`...windowOptions("1h")`). For a
+// factory call, the arrow's parameters are bound to the call's argument
+// expressions in a child `consts` map so the returned object's templates
+// (`Defaults to ${defaultWindow}`) resolve; the resolved map is returned
+// alongside the object so callers can parse it with the right scope.
+function resolveOptionsObject(expr, consts) {
+  const e = unwrapExpression(expr);
+  if (!e) return undefined;
+  if (ts.isObjectLiteralExpression(e)) return { obj: e, consts };
+  if (ts.isIdentifier(e) && consts && consts.has(e.text)) {
+    const target = consts.get(e.text);
+    if (target && ts.isObjectLiteralExpression(target)) return { obj: target, consts };
+  }
+  if (
+    ts.isCallExpression(e) &&
+    ts.isIdentifier(e.expression) &&
+    consts &&
+    consts.has(e.expression.text)
+  ) {
+    const fn = consts.get(e.expression.text);
+    if (fn && (ts.isArrowFunction(fn) || ts.isFunctionExpression(fn))) {
+      const body = unwrapExpression(fn.body);
+      if (body && ts.isObjectLiteralExpression(body)) {
+        // Bind each parameter name to its call-site argument expression so
+        // string interpolations inside the returned object resolve.
+        const scoped = new Map(consts);
+        fn.parameters.forEach((param, i) => {
+          if (ts.isIdentifier(param.name) && e.arguments[i]) {
+            scoped.set(param.name.text, unwrapExpression(e.arguments[i]));
+          }
+        });
+        return { obj: body, consts: scoped };
+      }
+    }
+  }
+  return undefined;
+}
+
 // Parse the argument to `.options({...})` into a map of
 // `{ name: { type, describe, default, choices, alias, required } }`.
 // `consts` resolves `...identifier` spreads and external spec references
@@ -303,9 +400,9 @@ function parseOptionsObject(obj, consts) {
   const out = {};
   for (const p of obj.properties) {
     if (ts.isSpreadAssignment(p)) {
-      const spread = unwrapExpression(p.expression);
-      if (spread && ts.isIdentifier(spread) && consts && consts.has(spread.text)) {
-        Object.assign(out, parseOptionsObject(consts.get(spread.text), consts));
+      const resolved = resolveOptionsObject(p.expression, consts);
+      if (resolved) {
+        Object.assign(out, parseOptionsObject(resolved.obj, resolved.consts));
       }
       continue;
     }
@@ -398,11 +495,21 @@ function parseCommandCall(callArgs, consts) {
 // Walks an arrow-function / function builder body, collecting
 // `.options(...)` and `.command(...)` calls into the `node` accumulator.
 function walkBuilder(builderNode, node, consts) {
+  // A builder passed as a bare identifier (`.command('db', 'desc', dbBuilder)`)
+  // resolves to its module-level function const, whose body we then walk. Only
+  // `inspect db` does this today; the resolution is general.
+  let resolvedBuilder = builderNode;
+  if (builderNode && ts.isIdentifier(builderNode) && consts && consts.has(builderNode.text)) {
+    const target = consts.get(builderNode.text);
+    if (target && (ts.isArrowFunction(target) || ts.isFunctionExpression(target))) {
+      resolvedBuilder = target;
+    }
+  }
   let body;
-  if (ts.isArrowFunction(builderNode) || ts.isFunctionExpression(builderNode)) {
-    body = builderNode.body;
+  if (ts.isArrowFunction(resolvedBuilder) || ts.isFunctionExpression(resolvedBuilder)) {
+    body = resolvedBuilder.body;
   } else {
-    body = builderNode;
+    body = resolvedBuilder;
   }
   // The body is either a block (with a return and/or expression
   // statements) or a single expression. Collect every candidate so we
@@ -434,12 +541,12 @@ function walkBuilder(builderNode, node, consts) {
       if (ts.isPropertyAccessExpression(callee) && ts.isIdentifier(callee.name)) {
         const method = callee.name.text;
         if (method === 'options') {
-          // yargs.options({...}) or .options({...}). Merge argument into
-          // accumulator.
-          const arg = e.arguments[0];
-          if (arg && ts.isObjectLiteralExpression(arg)) {
-            const parsed = parseOptionsObject(arg, consts);
-            Object.assign(node.options, parsed);
+          // yargs.options({...}) or .options({...}). The argument is an object
+          // literal, a bare identifier bound to one (`.options(scopeOptions)`),
+          // or a factory call returning one. Merge it into the accumulator.
+          const resolved = resolveOptionsObject(e.arguments[0], consts);
+          if (resolved) {
+            Object.assign(node.options, parseOptionsObject(resolved.obj, resolved.consts));
           }
         } else if (method === 'option') {
           // .option('name', { ... }) single-form.
@@ -532,8 +639,14 @@ function walkBuilder(builderNode, node, consts) {
 
 function parseCommandFile(srcFile, externalConsts) {
   const sf = readSource(srcFile);
-  // File-local consts shadow external ones (parameters.gen.ts).
-  const consts = new Map([...(externalConsts || new Map()), ...collectModuleConsts(sf)]);
+  // File-local consts shadow external ones (parameters.gen.ts). Function
+  // consts (builder functions passed by identifier) live in the same map so
+  // walkBuilder can resolve `.command('db', 'desc', dbBuilder)`.
+  const consts = new Map([
+    ...(externalConsts || new Map()),
+    ...collectModuleConsts(sf),
+    ...collectFunctionConsts(sf),
+  ]);
   const result = {
     name: null,
     aliases: [],
@@ -628,6 +741,84 @@ function parseGlobalOptions(cliSrc) {
   return filtered;
 }
 
+// Reads the top-level keys (and their `describeProp` values) of a const
+// object literal declared in a source file. Used to enumerate subcommands
+// neonctl registers dynamically (see applyDynamicCommands). Returns an
+// ordered array of `{ name, describe }`, or null if the const can't be
+// resolved (source moved, const renamed) so the caller can fail loudly.
+function enumerateConstEntries(srcFile, constName, describeProp) {
+  if (!fs.existsSync(srcFile)) return null;
+  const sf = readSource(srcFile);
+  const consts = collectModuleConsts(sf);
+  const obj = consts.get(constName);
+  if (!obj || !ts.isObjectLiteralExpression(obj)) return null;
+  const entries = [];
+  for (const p of obj.properties) {
+    if (!ts.isPropertyAssignment(p)) continue;
+    let key;
+    if (ts.isIdentifier(p.name)) key = p.name.text;
+    else if (ts.isStringLiteral(p.name)) key = p.name.text;
+    if (!key) continue;
+    const entry = { name: key };
+    const spec = resolveSpecObject(p.initializer, consts);
+    if (spec) {
+      const descProp = getProp(spec, describeProp);
+      if (descProp && ts.isPropertyAssignment(descProp)) {
+        const d = resolveStringValue(descProp.initializer, consts);
+        if (d !== undefined) entry.describe = d.trim();
+      }
+    }
+    entries.push(entry);
+  }
+  return entries;
+}
+
+// Injects subcommands that neonctl registers dynamically (in a loop over a
+// const map) into the command tree. These are invisible to the static parser
+// — `dynamic-commands.json` names the const and source file to enumerate. The
+// parent node (e.g. `inspect db`) must already exist from the static walk;
+// its options and usage came through Gap-1 identifier-builder resolution.
+//
+// A configured parent that isn't in this CLI version is skipped (the config is
+// forward-compatible: it lies dormant until the command ships upstream). But a
+// parent that IS present with a const that can't be enumerated throws — that's
+// real drift (renamed/moved const) and must fail the refresh loudly rather
+// than silently emit an empty leaf list.
+function applyDynamicCommands(schema, src) {
+  const configPath = path.join(__dirname, 'dynamic-commands.json');
+  if (!fs.existsSync(configPath)) return schema;
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  for (const [cmdPath, spec] of Object.entries(config.commands || {})) {
+    const parts = cmdPath.split('.');
+    let node = { commands: schema.commands };
+    let missing = false;
+    for (const part of parts) {
+      node = node.commands && node.commands[part];
+      if (!node) {
+        missing = true;
+        break;
+      }
+    }
+    // Parent absent: this CLI version doesn't have the command yet. Skip.
+    if (missing) continue;
+    const srcFile = path.join(src, spec.sourceFile);
+    const entries = enumerateConstEntries(srcFile, spec.enumerateConst, spec.describeProp);
+    if (!entries || entries.length === 0) {
+      throw new Error(
+        `dynamic-commands.json: could not enumerate "${spec.enumerateConst}" in ${spec.sourceFile} ` +
+          `for "${cmdPath}". The const may have been renamed or moved upstream — update the config.`
+      );
+    }
+    node.commands = node.commands || {};
+    for (const entry of entries) {
+      const leaf = { aliases: [], positionals: [], options: {}, commands: {} };
+      if (entry.describe) leaf.describe = entry.describe;
+      node.commands[entry.name] = leaf;
+    }
+  }
+  return schema;
+}
+
 // Deep-merges `overrides.json` (if present) into the schema. Overrides are
 // the escape hatch for terse or missing upstream descriptions — same shape
 // as the schema itself, merged key-by-key with overrides winning.
@@ -709,26 +900,54 @@ function buildSchema({ src } = {}) {
     commands[parsed.name] = entry;
   }
 
-  return applyOverrides({
-    schemaVersion: 2,
-    neonctlVersion: pkg.version,
-    generatedAt: new Date().toISOString(),
-    // The published binary names; `neon` is an alias of `neonctl`.
-    binaries: ['neonctl', 'neon'],
-    docsUrl: 'https://neon.com/docs/cli',
-    globalOptions,
-    commands,
-  });
+  const schema = applyDynamicCommands(
+    {
+      schemaVersion: 2,
+      neonctlVersion: pkg.version,
+      // The published binary names; `neon` is an alias of `neonctl`.
+      binaries: ['neonctl', 'neon'],
+      docsUrl: 'https://neon.com/docs/cli',
+      globalOptions,
+      commands,
+    },
+    src
+  );
+  return applyOverrides(schema);
 }
 
 const USAGE = [
   'Usage: node scripts/docs-checks/neonctl/generate-schema.js --src <path> [--out <file>]',
   '',
-  '  --src <path>   Path to a local clone of https://github.com/neondatabase/neonctl',
+  '  --src <path>   Path to the CLI package in a neon-pkgs clone,',
+  '                 e.g. ~/src/neon-pkgs/packages/cli',
   '                 (or set the NEONCTL_SRC environment variable).',
   '  --out <file>   Where to write the schema JSON. Defaults to the committed',
   '                 schema.json next to this script.',
 ].join('\n');
+
+// Sorts a map object's keys alphabetically, returning a new object. Used to
+// keep schema.json order stable regardless of the CLI's command-registration
+// (import) order — otherwise an upstream reshuffle of src/commands/index.ts
+// produces a huge, all-noise diff. Arrays (aliases, choices, positionals) are
+// left as-is: their order can be meaningful.
+function sortKeys(map) {
+  const out = {};
+  for (const key of Object.keys(map).sort()) out[key] = map[key];
+  return out;
+}
+
+// Recursively sorts the command tree: every `commands` and `options` map is
+// alphabetized, but each command entry keeps its authored key order
+// (aliases, positionals, options, commands, describe, ...).
+function sortCommandTree(commands) {
+  const sorted = sortKeys(commands);
+  for (const name of Object.keys(sorted)) {
+    const entry = sorted[name];
+    if (entry.options) entry.options = sortKeys(entry.options);
+    if (entry.commands) entry.commands = sortCommandTree(entry.commands);
+  }
+  return sorted;
+}
 
 function main() {
   const args = process.argv.slice(2);
@@ -748,7 +967,7 @@ function main() {
   }
   if (!src) {
     console.error(
-      'Missing --src (or NEONCTL_SRC env var). Point it at a local clone of https://github.com/neondatabase/neonctl.\n'
+      'Missing --src (or NEONCTL_SRC env var). Point it at packages/cli in a clone of https://github.com/neondatabase/neon-pkgs.\n'
     );
     console.error(USAGE);
     process.exit(2);
@@ -756,11 +975,13 @@ function main() {
   const resolvedSrc = path.resolve(src);
   if (!fs.existsSync(path.join(resolvedSrc, 'src', 'commands'))) {
     console.error(
-      `No neonctl source found at ${resolvedSrc}. Expected a clone of https://github.com/neondatabase/neonctl with a \`src/commands\` directory.`
+      `No neonctl source found at ${resolvedSrc}. Expected the CLI package (packages/cli in a https://github.com/neondatabase/neon-pkgs clone) with a \`src/commands\` directory.`
     );
     process.exit(2);
   }
   const schema = buildSchema({ src: resolvedSrc });
+  schema.commands = sortCommandTree(schema.commands);
+  schema.globalOptions = sortKeys(schema.globalOptions);
   fs.writeFileSync(out, `${JSON.stringify(schema, null, 2)}\n`);
   const nCmds = Object.keys(schema.commands).length;
   const nLeafs = countLeaves(schema.commands);
@@ -786,6 +1007,7 @@ module.exports = {
   parseGlobalOptions,
   parseOptionsObject,
   parseCommandCall,
+  enumerateConstEntries,
 };
 
 if (require.main === module) main();

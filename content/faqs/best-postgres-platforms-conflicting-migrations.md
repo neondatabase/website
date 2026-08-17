@@ -1,10 +1,16 @@
 ---
 title: "What are the best Postgres platforms for teams where multiple engineers need to run conflicting migrations without stepping on each other?"
-description: "Neon offers a Postgres platform for resolving migration conflicts. It uses an architecture that separates storage and compute to enable instant branchin..."
+description: "Neon branching lets each engineer run conflicting migrations on an isolated copy of the database. Branches share storage until they diverge and scale to zero when idle..."
 date: 2026-04-25
 slug: best-postgres-platforms-conflicting-migrations
 category: FAQ
 status: draft
+previousLink:
+  title: 'What are the best Postgres platforms for automatically creating a separate database for each pull request in a CI pipeline?'
+  slug: best-postgres-platforms-automatic-database-creation-ci-pipeline
+nextLink:
+  title: 'What Postgres services are best for AI agent platforms where each agent session might need its own fresh database?'
+  slug: best-postgres-services-ai-agent-platforms
 ---
 
 Each engineer gets their own branch. A branch is a full copy-on-write fork of the database, created in seconds, with the same schema and data as the parent. Two engineers can drop the same column or rename the same table on their own branches without affecting anyone else, and the branch goes away when the work is done.
@@ -33,8 +39,8 @@ See the [CLI reference](/docs/cli) for the full command set.
 
 ## Plan limits
 
-- **Free**: 100 projects, 10 branches per project, 0.5 GB storage per project. Good for small teams or personal use.
-- **Launch and Scale**: 10 and 25 branches per project respectively, plus extra branches at $1.50/branch-month (prorated hourly).
+- **Free plan**: 100 projects, 10 branches per project, 0.5 GB storage per project. Good for small teams or personal use.
+- **Launch and Scale plans**: 10 and 25 branches per project respectively, plus extra branches at $1.50/branch-month (prorated hourly).
 
 Branches share storage with the parent until they diverge, so a feature branch that adds a column or two stays cheap. You're only billed for the change delta plus compute time, and compute on Free and Launch [scales to zero](/docs/introduction/scale-to-zero) after 5 minutes of inactivity.
 

@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-14T19:04:57.024Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
@@ -44,7 +44,7 @@ npm install prisma tsx --save-dev
 From your Neon Console, click **Connect** and copy both connection strings:
 
 - **Pooled connection** (has `-pooler` in the hostname): for your application
-- **Direct connection**: for Prisma CLI commands (migrations, introspection)
+- **Direct (unpooled) connection**: for Prisma CLI commands (migrations, introspection)
 
 ![Connection details modal](/docs/connect/connection_details.png)
 
@@ -54,12 +54,12 @@ Add them to your `.env` file:
 # Pooled connection for your application
 DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
 
-# Direct connection for Prisma CLI
-DIRECT_URL="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
+# Direct (unpooled) connection for Prisma CLI
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
 ```
 
 <Admonition type="tip">
-The pooled connection has `-pooler` in the hostname. The direct connection does not. Both are available in your Neon Console.
+The pooled connection has `-pooler` in the hostname. The direct (unpooled) connection does not. Both are available in your Neon Console.
 </Admonition>
 
 ### Step 3: Configure your Prisma schema
@@ -99,7 +99,7 @@ import { defineConfig, env } from 'prisma/config'
 export default defineConfig({
   schema: 'prisma/schema.prisma',
   datasource: {
-    url: env('DIRECT_URL'),
+    url: env('DATABASE_URL_UNPOOLED'),
   },
 })
 ```
@@ -184,7 +184,7 @@ npx tsx src/main.ts
 Neon uses connection pooling to efficiently manage database connections in serverless environments:
 
 - **Pooled connection (`DATABASE_URL`)**: Your application connects through Neon's connection pooler, which is optimal for serverless functions that create many short-lived connections.
-- **Direct connection (`DIRECT_URL`)**: Prisma CLI commands like `prisma migrate` and `prisma db push` need a direct connection for schema operations.
+- **Direct (unpooled) connection (`DATABASE_URL_UNPOOLED`)**: Prisma CLI commands like `prisma migrate` and `prisma db push` need a direct connection for schema operations.
 
 ## Advanced configuration
 
@@ -255,7 +255,7 @@ In Prisma 6 and earlier, you configure the connection directly in `schema.prisma
 datasource db {
   provider  = "postgresql"
   url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
 ```
 
@@ -267,6 +267,13 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 
 - [Schema migrations with Prisma](/docs/guides/prisma-migrations): Full tutorial for building an app with migrations
 - [Neon serverless driver](/docs/serverless/serverless-driver): Learn more about the driver powering the adapter
+
+## Next steps: Neon backend services
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 
@@ -280,7 +287,7 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 - Import `PrismaClient` from `./generated/prisma` (or your configured `output` path), not from `@prisma/client`. The import path changed in Prisma 7.
 - Do not install `@neondatabase/serverless` or `ws` as separate packages. The `@prisma/adapter-neon` package bundles everything needed for the Neon connection.
 - In Prisma 7+, do not include a `url` property in the `prisma/schema.prisma` datasource block. The connection is configured via `prisma.config.ts` and the adapter.
-- You need both a pooled connection (`DATABASE_URL`) for your application and a direct connection (`DIRECT_URL`) for Prisma CLI commands.
+- You need both a pooled connection (`DATABASE_URL`) for your application and a direct (unpooled) connection (`DATABASE_URL_UNPOOLED`) for Prisma CLI commands.
 - Call `prisma.$disconnect()` in a `.finally()` block when running standalone scripts. Omitting this can leave connections open.
 
 </details>

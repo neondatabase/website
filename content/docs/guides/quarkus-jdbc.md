@@ -1,24 +1,24 @@
 ---
 title: Connect Quarkus (JDBC) to Neon
-subtitle: Learn how to connect to Neon from Quarkus using JDBC
+subtitle: Learn how to connect to a Lakebase Postgres database from Quarkus using JDBC
 summary: >-
-  Quarkus JDBC connection to Neon uses the PostgreSQL JDBC driver with Agroal
+  Quarkus JDBC connection to a Lakebase Postgres database uses the PostgreSQL JDBC driver with Agroal
   datasource and RESTEasy Reactive extensions, configured via
   `QUARKUS_DATASOURCE_*` environment variables in a `.env` file. Use this guide
-  when connecting a Java Quarkus app to a Neon Postgres database over JDBC
+  when connecting a Java Quarkus app to a Lakebase Postgres database over JDBC
   rather than a reactive driver. The guide covers Quarkus project scaffolding,
   datasource configuration with SSL required, and a working HTTP endpoint that
   queries the Postgres version.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-jdbc-prompt.md"
-description="Pre-built prompt for connecting Quarkus applications to Neon using JDBC"/>
+description="Pre-built prompt for connecting Quarkus applications to Lakebase Postgres using JDBC"/>
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.
 
-To connect to Neon from a Quarkus application using the Postgres JDBC Driver:
+To connect to a Lakebase Postgres database from a Quarkus application using the Postgres JDBC Driver:
 
 <Steps>
 
@@ -45,7 +45,7 @@ You now have a Quarkus project in a folder named `neon-with-quarkus-jdbc` with t
 
 ## Configure a PostgreSQL data source
 
-Create a `.env` file in the root of your Quarkus project directory. Configure a JDBC data source using the components of your Neon database connection string and specifying the database kind as shown:
+Create a `.env` file in the root of your Quarkus project directory. Configure a JDBC data source using the components of your database connection string and specifying the database kind as shown:
 
 ```shell shouldWrap
 QUARKUS_DATASOURCE_DB_KIND=postgresql
@@ -118,5 +118,10 @@ PostgreSQL 17.5 (6bc9ef8) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0
 ```
 
 </Steps>
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

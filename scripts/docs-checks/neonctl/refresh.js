@@ -1,12 +1,17 @@
 // One-command maintenance for the neonctl docs pipeline. Run when a new
 // neonctl version ships:
 //
-//   npm run refresh:cli-docs
+//   npm run cli-docs -- refresh
+//
+// The CLI source lives in the neon-pkgs monorepo (packages/cli); its
+// releases are tagged `neon@<version>`. The CLI is published as the `neon`
+// package and invoked as `neon`; `neonctl` is now a compatibility package
+// that depends on it. The `neonctlVersion` schema field keeps its name.
 //
 // What it does:
-//   1. Looks up the latest neonctl release tag on GitHub (no clone needed).
+//   1. Looks up the latest `neon@*` release tag on GitHub (no clone needed).
 //   2. Downloads and extracts the release tarball to a temp directory.
-//   3. Regenerates schema.json from it (generate-schema.js + overrides.json).
+//   3. Regenerates schema.json from packages/cli (generate-schema.js + overrides.json).
 //   4. Prints a summary of command/option additions and removals vs the
 //      previously committed schema.
 //   5. Runs the validation + generation test suite.
@@ -20,7 +25,14 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 
-const REPO = 'neondatabase/neonctl';
+const REPO = 'neondatabase/neon-pkgs';
+// Monorepo release tags are `<package>@<version>`; the CLI uses this prefix.
+// Releases up to 2.37.1 were tagged `neonctl@<version>`, before the CLI package
+// was renamed to `neon`. Sibling packages like `neon-new@*` don't collide,
+// because the `@` has to follow `neon` immediately.
+const TAG_PREFIX = 'neon@';
+// The CLI package lives under this subdirectory of the repo tarball.
+const CLI_SUBDIR = path.join('packages', 'cli');
 const SCHEMA_PATH = path.join(__dirname, 'schema.json');
 
 // When the CLI ships a rename, docs may lag. List preferred names here:
@@ -28,32 +40,60 @@ const SCHEMA_PATH = path.join(__dirname, 'schema.json');
 //   value = what the docs expect (old primary, now an alias in schema)
 // The refresh script will swap these so docs-facing tooling stays stable.
 // Remove an entry once docs are updated to match the CLI's new name.
-const PREFER_ALIAS = {
-  function: 'functions', // neonctl 2.26.5 renamed functions→function; revert when docs catch up
-};
+const PREFER_ALIAS = {};
+
+// The monorepo publishes releases for many packages, so `/releases/latest`
+// is not necessarily the CLI. List releases and pick the highest-versioned
+// `neon@*` tag.
+function compareSemver(a, b) {
+  const pa = a.split('.').map(Number);
+  const pb = b.split('.').map(Number);
+  for (let i = 0; i < 3; i++) {
+    if ((pa[i] || 0) !== (pb[i] || 0)) return (pa[i] || 0) - (pb[i] || 0);
+  }
+  return 0;
+}
 
 async function latestTag() {
-  const res = await fetch(`https://api.github.com/repos/${REPO}/releases/latest`, {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/releases?per_page=100`, {
     headers: { accept: 'application/vnd.github+json' },
   });
-  if (!res.ok) throw new Error(`GitHub API ${res.status} fetching latest release`);
-  const release = await res.json();
-  if (!release.tag_name) throw new Error('Latest release has no tag_name');
-  return release.tag_name;
+  if (!res.ok) throw new Error(`GitHub API ${res.status} fetching releases`);
+  const releases = await res.json();
+  const cliTags = releases
+    .map((r) => r.tag_name)
+    .filter((t) => t && t.startsWith(TAG_PREFIX))
+    // Stable releases only; skip pre-release versions (e.g. 2.30.0-beta.1).
+    .filter((t) => !t.slice(TAG_PREFIX.length).includes('-'));
+  if (cliTags.length === 0) {
+    throw new Error(`No ${TAG_PREFIX}* releases found on ${REPO}`);
+  }
+  cliTags.sort((a, b) => compareSemver(a.slice(TAG_PREFIX.length), b.slice(TAG_PREFIX.length)));
+  return cliTags[cliTags.length - 1];
 }
 
 async function downloadTarball(tag, destDir) {
-  const url = `https://codeload.github.com/${REPO}/tar.gz/refs/tags/${tag}`;
+  // Tags contain `@` (e.g. neon@2.38.0); encode it for the codeload path.
+  const url = `https://codeload.github.com/${REPO}/tar.gz/refs/tags/${encodeURIComponent(tag)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Tarball download failed: ${res.status} for ${url}`);
   const tarPath = path.join(destDir, 'neonctl.tar.gz');
   fs.writeFileSync(tarPath, Buffer.from(await res.arrayBuffer()));
   execSync(`tar -xzf ${JSON.stringify(tarPath)} -C ${JSON.stringify(destDir)}`);
+  // GitHub names the extracted dir after the repo and tag, replacing `/` and
+  // `@` with `-` (e.g. neon-pkgs-neon-2.38.0). Match the repo prefix.
+  const repoName = REPO.split('/')[1];
   const extracted = fs
     .readdirSync(destDir)
-    .find((d) => d.startsWith('neonctl-') && fs.statSync(path.join(destDir, d)).isDirectory());
-  if (!extracted) throw new Error('Could not find extracted neonctl directory');
-  return path.join(destDir, extracted);
+    .find((d) => d.startsWith(`${repoName}-`) && fs.statSync(path.join(destDir, d)).isDirectory());
+  if (!extracted) throw new Error(`Could not find extracted ${repoName} directory`);
+  // The CLI package is a subdirectory of the monorepo; generate-schema.js
+  // expects a path whose `src/commands` and `package.json` are the CLI's.
+  const cliDir = path.join(destDir, extracted, CLI_SUBDIR);
+  if (!fs.existsSync(cliDir)) {
+    throw new Error(`Extracted tarball is missing ${CLI_SUBDIR} (looked in ${extracted})`);
+  }
+  return cliDir;
 }
 
 // Flattens a schema's command tree into "path --option" keys for diffing.
@@ -130,7 +170,7 @@ async function main() {
   console.log(`Committed schema: neonctl ${before.neonctlVersion}`);
 
   const tag = await latestTag();
-  console.log(`Latest release:   neonctl ${tag.replace(/^v/, '')}`);
+  console.log(`Latest release:   neonctl ${tag.replace(new RegExp(`^${TAG_PREFIX}`), '')}`);
 
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'neonctl-refresh-'));
   try {
@@ -169,7 +209,7 @@ async function main() {
     }
 
     console.log('\nRunning validation...');
-    execSync('npm run check:docs:neonctl', {
+    execSync('npm run cli-docs -- check', {
       stdio: 'inherit',
       cwd: path.join(__dirname, '..', '..', '..'),
     });

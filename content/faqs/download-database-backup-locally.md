@@ -3,12 +3,18 @@ title: 'How do I create and download a backup of my Neon database to my local ma
 subtitle: 'Run pg_dump in custom format against a direct connection string and save the archive to disk.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-08-14T03:15:28.979Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I delete a database in Neon?'
+  slug: delete-database-neon
+nextLink:
+  title: 'How do I enable or disable connection pooling for my Neon database?'
+  slug: enable-disable-connection-pooling-neon
 ---
 
-Use `pg_dump` against a direct (non-pooled) Neon connection string. The custom format (`-Fc`) gives you a single compressed archive that `pg_restore` can read selectively and in parallel. The output file lives on your local machine, so it's an off-platform copy independent of Neon. See [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres) for the full reference.
+Use `pg_dump` against a direct (non-pooled) Neon connection string. The custom format (`-Fc`) gives you a single compressed archive that `pg_restore` can read selectively and in parallel. The output file lives on your local machine, so it's an external copy independent of Neon. See [Backups with pg_dump](/docs/manage/backup-pg-dump) for the full reference.
 
 ## Create the backup
 
@@ -43,11 +49,11 @@ Add `--no-owner` if you're restoring to a different role, and `--clean --if-exis
 
 ## When to use a local backup
 
-Neon already keeps a change history that supports [instant restore](/docs/introduction/branch-restore) (point-in-time restore) within your project's [history window](/docs/introduction/history-window): up to 6 hours on Free, up to 7 days on Launch, and up to 30 days on Scale. For most accidental-delete recoveries, restoring from history inside Neon is faster than rebuilding from a local file.
+Neon already keeps a change history that supports [instant restore](/docs/introduction/branch-restore) (point-in-time restore) within your project's [history window](/docs/introduction/history-window): up to 6 hours on the Free plan, up to 7 days on the Launch plan, and up to 30 days on the Scale plan. For most accidental-delete recoveries, restoring from history inside Neon is faster than rebuilding from a local file.
 
 Local `pg_dump` backups are useful for:
 
-- Off-platform redundancy (your project's history doesn't help if you lose access to your Neon org)
+- External redundancy (your project's history doesn't help if you lose access to your Neon Organization)
 - Long-term archival beyond your history window
 - Compliance requirements that mandate an external copy
 - Moving data into a different Postgres instance

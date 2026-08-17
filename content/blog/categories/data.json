@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "product",
+    "name": "Product"
+  },
+  {
+    "slug": "company",
+    "name": "Company"
+  },
+  {
+    "slug": "engineering",
+    "name": "Engineering"
+  },
+  {
+    "slug": "case-study",
+    "name": "Case Studies"
+  },
+  {
+    "slug": "community",
+    "name": "Community"
+  },
+  {
+    "slug": "postgres",
+    "name": "Postgres"
+  }
+]

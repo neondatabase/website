@@ -3,12 +3,18 @@ title: 'How do I reset or change my database password in Neon?'
 subtitle: 'Reset a role password from the Console, the Neon API, or with ALTER ROLE in SQL.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-18T14:42:53.313Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rename a database in my Neon project?'
+  slug: rename-database-neon-project
+nextLink:
+  title: 'How do I rotate my Neon database connection string for security purposes?'
+  slug: rotate-database-connection-string-security
 ---
 
-Neon stores a password per Postgres role per branch. You can reset it from the **Roles & Databases** tab in the Console, with the Neon API, or by running `ALTER ROLE ... WITH PASSWORD '...'` from any SQL client. The reset is immediate: the old password stops working, and the connection string for that role updates with the new password.
+Neon stores a password per Postgres role per branch. You can reset it from the **Roles & Databases** tab in the Console, with the Neon API, or by running `ALTER ROLE ... WITH PASSWORD '...'` from any SQL client. The reset is immediate: the old password stops working on the next connection, and you copy the updated connection string from the **Connect** modal.
 
 ## Reset the password
 

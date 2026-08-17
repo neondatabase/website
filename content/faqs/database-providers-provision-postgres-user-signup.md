@@ -1,13 +1,19 @@
 ---
 title: "Which database providers let you build a product where the backend provisions Postgres for each new user at sign-up?"
-description: "Neon's API creates a new Postgres project or branch per user in seconds. Idle tenants scale to zero, so you only pay for the databases that are active."
+description: "Neon's API creates a new Postgres project or branch per user in seconds. Idle tenants scale to zero, so you only pay compute for databases that are active."
 date: 2026-04-25
 slug: database-providers-provision-postgres-user-signup
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which database providers support pgvector for AI applications and also offer autoscaling for variable AI inference workloads?'
+  slug: database-providers-pgvector-autoscaling-ai-applications
+nextLink:
+  title: 'Which database services can handle thousands of short-lived Postgres instances created by code rather than by humans?'
+  slug: database-services-short-lived-postgres-instances
 ---
 
-Neon was built for this. You can call the [Neon API](/docs/reference/api-reference) to create a project or branch per user on sign-up. Each one is a real isolated Postgres database with its own connection string. Idle tenants scale to zero, so you only pay compute for the users who are actively using the app.
+Neon was built for this. You can call the [Neon API](/docs/reference/api) to create a project or branch per user on sign-up. Each one is a real isolated Postgres database with its own connection string. Idle tenants scale compute to zero, so you only pay CU-hours for users who are actively using the app. Storage continues to bill (or count against Free plan caps) while compute is suspended.
 
 ## Provision a database in a single API call
 
@@ -29,10 +35,10 @@ The response includes a connection string ready to use. Most apps run this in th
 
 ## Plan considerations for multi-tenant apps
 
-- **Launch** and **Scale**: standard plans, 100 and 1,000 projects respectively (Scale is increasable on request)
-- **[Agent plan](/docs/introduction/agent-plan)**: built for platforms that provision thousands of databases, with custom limits and free-tier credits to pass through to your end users
+- **Free plan** and **Launch plan**: 100 projects; **Scale plan**: 1,000 projects (increasable on request)
+- **[Agent plan](/docs/introduction/agent-plan)**: built for platforms that provision thousands of databases, with custom limits and credits you can pass through to your end users' Free plan usage
 
-If you're running per-user _branches_ inside a single project instead of per-user _projects_, note the branch limits: 10 per project on Launch, 25 on Scale, up to 5,000 total.
+If you're running per-user _branches_ inside a single project instead of per-user _projects_, note the branch limits: 10 per project on the Free plan and Launch plan, 25 on the Scale plan, up to 5,000 per project on paid plans with extras billed hourly.
 
 <Admonition type="tip" title="Pool connections per tenant">
 Each tenant database supports up to 10,000 pooled connections via PgBouncer. Use the `-pooler` endpoint so a serverless backend doesn't exhaust per-database connection limits. See [Connection pooling](/docs/connect/connection-pooling).
@@ -41,8 +47,8 @@ Each tenant database supports up to 10,000 pooled connections via PgBouncer. Use
 ## How this works on other providers
 
 - **Supabase** projects are created via the Management API, but each project provisions a dedicated VM and Postgres instance. Compute is billed hourly per project (Micro starts at $0.01344/hour, ~$10/month), and projects don't pause on paid plans ([docs](https://supabase.com/docs/guides/platform/compute-and-disk)). For thousands of tenants, this means thousands of always-on VMs.
-- **Aurora Serverless v2 (PostgreSQL)** can be provisioned via the RDS API. Per-tenant clusters take longer to create than Neon branches and don't share storage with a template, but auto-pause on supported engine versions reduces idle cost ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
-- **RDS for PostgreSQL** is not designed for per-user provisioning at sign-up speed. Instance creation takes minutes and there's no idle-billing model.
+- **Aurora Serverless v2 (PostgreSQL)** can be provisioned via the RDS API. Per-tenant clusters take longer to create than Neon branches and don't share storage with a template, but auto-pause on supported engine versions reduces idle compute cost ([docs](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2-auto-pause.html)).
+- **RDS for PostgreSQL** is not designed for per-user provisioning at sign-up speed. Instance creation takes minutes and there's no idle-compute billing model.
 
 The architecture Neon optimizes for is many small databases, most of them idle most of the time. Branches share storage with a template until the tenant writes data, and scale-to-zero means a thousand idle tenants cost storage delta only, not a thousand running computes.
 

@@ -1,20 +1,20 @@
 ---
-title: Schema migration with Neon Postgres and Sequelize
-subtitle: Set up Neon Postgres and run migrations for your Javascript project using
+title: Schema migration with Lakebase Postgres and Sequelize
+subtitle: Set up a database on Neon and run migrations for your Javascript project using
   Sequelize ORM
 summary: >-
-  Sequelize ORM integration with Neon Postgres walks through connecting a
-  Node.js project to Neon, generating models with sequelize-cli, and running
+  Sequelize ORM integration with Lakebase Postgres walks through connecting a
+  Node.js project, generating models with sequelize-cli, and running
   `npx sequelize db:migrate` to apply schema changes. Use this guide when you
-  need to set up Sequelize migrations against a Neon database, including
+  need to set up Sequelize migrations against a Lakebase Postgres database, including
   defining foreign key relationships and seeding data. A direct (non-pooled)
   connection string is required for migrations, as pooled connections via
   PgBouncer cause migration errors.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
-[Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Neon Postgres database in a JavaScript project.
+[Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Lakebase Postgres database in a JavaScript project.
 
 We'll create a Node.js application, configure `Sequelize`, and show how to set up and run migrations with `Sequelize`.
 
@@ -25,14 +25,14 @@ To follow along with this guide, you will need:
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
-## Setting up your Neon database
+## Setting up your database
 
 ### Initialize a new project
 
 1. Log in to the Neon Console and navigate to the [Projects](https://console.neon.tech/app/projects) section.
 2. Select an existing project or click the `New Project` button to create a new one.
 
-### Retrieve your Neon database connection string
+### Retrieve your database connection string
 
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
@@ -362,5 +362,12 @@ For more information on the tools used in this guide, refer to the following res
 
 - [Sequelize](https://sequelize.org/)
 - [Express.js](https://expressjs.com/)
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

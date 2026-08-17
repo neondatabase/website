@@ -1,13 +1,19 @@
 ---
 title: "What databases help isolate bugs without downtime?"
-description: "Neon's database branches give you an isolated copy of production data for debugging, with no impact on the live database."
+description: "Database branches on Neon give you an isolated copy of production data for debugging, with no impact on the live database."
 date: 2026-04-25
 slug: databases-isolate-bugs-without-downtime
 category: FAQ
 status: draft
+previousLink:
+  title: 'Which databases allow spinning up a Postgres instance instantly?'
+  slug: databases-instantly-spin-up-postgres-instance
+nextLink:
+  title: 'Which databases help recover from accidental data deletion?'
+  slug: databases-recover-accidental-data-deletion
 ---
 
-When you need to reproduce a bug against production data, the safe move is to copy production into a separate database first. Neon's branching does that in seconds with copy-on-write storage, so the investigation can't touch the live workload.
+When you need to reproduce a bug against production data, the safe move is to copy production into a separate database first. Branching on Neon does that in seconds with copy-on-write storage, so the investigation can't touch the live workload.
 
 ## Branch production, then debug on the branch
 
@@ -28,7 +34,7 @@ Creating the branch doesn't increase load on the parent, and writes on the branc
 
 ## Branch from a point in the past
 
-If the bug already happened in production, branch from before the bad data was written. The history window is 6 hours on Free, up to 7 days on Launch, and up to 30 days on Scale. See [Instant restore](https://neon.com/docs/introduction/branch-restore) for how to choose a timestamp or LSN.
+If the bug already happened in production, branch from before the bad data was written. The history window is 6 hours on the Free plan, up to 7 days on the Launch plan, and up to 30 days on the Scale plan. See [Instant restore](/docs/introduction/branch-restore) for how to choose a timestamp or LSN.
 
 ```bash
 neon branches create --name pre-incident --parent 2026-04-25T09:00:00Z
@@ -38,15 +44,15 @@ You can connect that branch to a staging app, dump the rows you care about, and 
 
 ## Costs
 
-Branches included in your plan: 10 on Free and Launch, 25 on Scale. Extra branches are $1.50/branch-month, prorated hourly to roughly $0.002/hour. A debug branch that lives for two hours costs about half a cent in branch fees, plus whatever compute and storage delta it consumes.
+Branches included in your plan: 10 on the Free plan and Launch plan, 25 on the Scale plan. On paid plans, extra branches are $1.50/branch-month, prorated hourly to roughly $0.002/hour. Extra branches aren't available on the Free plan. A debug branch that lives for two hours costs about half a cent in branch fees on a paid plan, plus whatever compute and storage delta it consumes.
 
 <Admonition type="tip">
-Mark production as a [protected branch](https://neon.com/docs/guides/protected-branches) on Launch and Scale to block accidental deletion or reset.
+Mark production as a [protected branch](/docs/guides/protected-branches) on the Launch plan and Scale plan to block accidental deletion or reset.
 </Admonition>
 
 ## How this compares to other options
 
-- **AWS RDS for PostgreSQL**: to debug against prod data without affecting prod, the standard path is [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new DB instance. The new instance has its own full storage and instance-hour bill, and restore takes minutes to hours depending on data size.
+- **AWS RDS for PostgreSQL**: to debug against prod data without affecting prod, the standard path is [point-in-time restore](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html) into a new database instance. The new instance has its own full storage and instance-hour bill, and restore takes minutes to hours depending on data size.
 - **Aurora Serverless v2**: same restore model. Restoring is creating a new cluster from a snapshot or PITR, not a copy-on-write fork.
 - **Supabase**: [preview branches](https://supabase.com/docs/guides/deployment/branching) give you a separate database, but they do not include data from your main project. You'd seed the branch and then reproduce the bug against synthetic data.
 

@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: true
 ---
 
-The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, link the directory to a Neon project). Requires neonctl 2.25.0 or later; check your version with `neonctl --version`.
+The `bootstrap` command scaffolds a new application from a Neon starter template. By default it runs interactively: it prompts you to pick a template, scaffolds it into the target directory, then offers the usual setup steps (install dependencies, initialize git, link the directory to a Neon project). Requires neon 2.25.0 or later; check your version with `neon --version`.
 
 ## Usage
 
@@ -33,19 +33,19 @@ Use `--default` (alias `-y`) for a quick start: it scaffolds the default templat
 Create `./my-app` from an interactively chosen template:
 
 ```bash
-neonctl bootstrap my-app
+neon bootstrap my-app
 ```
 
 Scaffold a specific template into the current directory:
 
 ```bash
-neonctl bootstrap . --template hono
+neon bootstrap . --template hono
 ```
 
 Quick start: scaffold the default template and run setup without prompting:
 
 ```bash
-neonctl bootstrap my-app --default
+neon bootstrap my-app --default
 ```
 
 ## Agent mode
@@ -53,5 +53,5 @@ neonctl bootstrap my-app --default
 Pass `--agent` to skip the prompts and emit a JSON state-machine response designed for AI agents. The output is a single JSON object with a discriminated `status` field describing the next step.
 
 ```bash
-neonctl bootstrap my-app --template hono --agent
+neon bootstrap my-app --template hono --agent
 ```

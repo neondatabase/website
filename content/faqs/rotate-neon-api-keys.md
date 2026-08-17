@@ -3,18 +3,24 @@ title: "How do I rotate my Neon API keys after they've been exposed?"
 subtitle: 'Revoke the compromised key, create a new one, and update every system that uses it.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-05-22T12:41:06.646Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
+previousLink:
+  title: 'How do I rotate my database URL or connection string in Neon?'
+  slug: rotate-database-url-connection-string
+nextLink:
+  title: 'Which serverless database services charge per second instead of per month for Postgres?'
+  slug: serverless-database-services-postgres-charge-per-second
 ---
 
 ## Quick answer
 
-Neon API keys don't auto-rotate. To rotate a compromised key, revoke it (which immediately invalidates it), create a new key, and update every CI job, script, or service that uses the old value. You'll handle personal, organization, and project-scoped keys the same way, just from different settings pages.
+Neon API keys don't expire or rotate on a schedule. For a compromised key, revoke it first (revocation is immediate), then create a replacement and update every CI job, script, or service that used the old value. For routine rotation with no exposure, create the replacement first, roll it out, then revoke the old key so you avoid downtime. Personal, organization, and project-scoped keys follow the same pattern from different settings pages.
 
 ## Revoke the compromised key
 
-Revocation is immediate and permanent. Any request using the revoked key returns `401 Unauthorized` on the next call.
+Revocation is immediate and permanent. Any request using the revoked key returns `401 Unauthorized` on the next call. If the key was exposed, revoke before you create a replacement.
 
 <Tabs labels={["Personal", "Organization", "Project-scoped"]}>
 
@@ -55,7 +61,7 @@ See [Revoke API keys](/docs/manage/api-keys#revoke-api-keys).
 
 ## Create a replacement key
 
-After revoking, create a new key with the same scope as the old one. Use a descriptive name so you can tell keys apart in the dashboard.
+Create a new key with the same scope as the old one. Use a descriptive name so you can tell keys apart in the dashboard. For routine (non-incident) rotation, do this before you revoke the old key.
 
 In the Console, go to **Account settings → API keys** (personal) or your organization's **Settings → API keys** (organization or project-scoped) and click **Create new**.
 
@@ -90,7 +96,7 @@ After rotation, find and update:
 - MCP server configurations that authenticate with the Neon API
 
 <Admonition type="warning" title="There's no automatic rotation feature">
-Neon does not currently rotate API keys on a schedule. Build rotation into your own operational cadence, store keys in a secret manager so updates only happen in one place, and prefer [project-scoped keys](/docs/manage/api-keys#create-project-scoped-organization-api-keys) over personal keys for CI workloads.
+Neon does not rotate API keys on a schedule. For routine rotation, create the new key first, update callers, then revoke the old one. Store keys in a secret manager so updates happen in one place, and prefer [project-scoped keys](/docs/manage/api-keys#create-project-scoped-organization-api-keys) over personal keys for CI workloads.
 </Admonition>
 
 For broader credential rotation (Postgres passwords plus API keys), see [How do I rotate all my Neon database credentials?](/faqs/rotate-database-credentials-after-breach).
