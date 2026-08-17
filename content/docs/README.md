@@ -356,11 +356,11 @@ The `InlineSvg` component renders an SVG from `public/` directly into the page D
 
 ### Props
 
-| Prop      | Type   | Default    | Description                                                          |
-| --------- | ------ | ---------- | -------------------------------------------------------------------- |
-| src       | string | (required) | Path to the `.svg` file, relative to `public/`                       |
-| title     | string | (optional) | Accessible label; sets `role="img"` and `aria-label` on the wrapper  |
-| className | string | (optional) | Additional CSS classes to apply to the wrapper                       |
+| Prop      | Type   | Default    | Description                                                         |
+| --------- | ------ | ---------- | ------------------------------------------------------------------- |
+| src       | string | (required) | Path to the `.svg` file, relative to `public/`                      |
+| title     | string | (optional) | Accessible label; sets `role="img"` and `aria-label` on the wrapper |
+| className | string | (optional) | Additional CSS classes to apply to the wrapper                      |
 
 ### Best Practices
 

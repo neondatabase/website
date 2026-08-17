@@ -68,7 +68,11 @@ The connection string includes the user name, password, hostname, and database n
 Create a `.env` file in your project's root directory and add the connection string to it. Your `.env` file should look like this:
 
 ```text shouldWrap
-DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
+# Pooled connection for your application
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
+
+# Unpooled connection for Drizzle Kit
+DATABASE_URL_UNPOOLED="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
 ```
 
 <Admonition type="note">
@@ -135,8 +139,8 @@ Drizzle Kit uses a configuration file to manage schema and migrations. Create a 
 import 'dotenv/config';
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set in the .env file');
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in the .env file');
 }
 
 export default defineConfig({
@@ -144,7 +148,7 @@ export default defineConfig({
   out: './drizzle', // Your migrations folder
   dialect: 'postgresql',
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: process.env.DATABASE_URL_UNPOOLED,
   },
 });
 ```
@@ -158,8 +162,8 @@ config({ path: '.env.local' });
 
 import { defineConfig } from 'drizzle-kit';
 
-if (!process.env.DATABASE_URL) {
-  throw new Error('DATABASE_URL is not set in .env.local');
+if (!process.env.DATABASE_URL_UNPOOLED) {
+  throw new Error('DATABASE_URL_UNPOOLED is not set in .env.local');
 }
 
 // ...rest of config unchanged
