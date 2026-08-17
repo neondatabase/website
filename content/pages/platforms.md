@@ -27,15 +27,15 @@ This page covers the embedded Postgres model for SaaS and developer platforms. I
 
 ## Built to scale Postgres fleets
 
-Neon is the Postgres layer platforms use when every user, workspace, or generated app needs its own database. You do not need a DevOps team to run a large Neon fleet. The Neon API lets you track usage, enforce limits, and scale programmatically. With pay-per-use pricing and automatic scale-to-zero, [you spend a fraction of what you'd pay on AWS for the same fleet](/cost-fleets).
-
-What you get:
+Neon is the Postgres layer platforms use when every user, workspace, or generated app needs its own database. What you get:
 
 - Dedicated connection strings for every user or project, each in its own secure, isolated Neon [project](/docs/manage/projects)
 - High connection capacity, with pooled endpoints that support up to 10,000 connections
 - Full Postgres compatibility, with no proprietary query layer
 - Branching and instant restore for copies and rollbacks, without manual backups
 - Multi-region placement, autoscaling, and high availability on the same model
+
+With pay-per-use pricing and automatic scale-to-zero, [you spend a fraction of what you'd pay on AWS for the same fleet](/cost-fleets).
 
 <QuoteBlock quote="We’ve been able to manage 300K+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort." author="himanshu-bhandoh" role="Software Engineer at Retool" link="/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
 
@@ -68,8 +68,6 @@ Neon's API is built for platforms that manage large fleets of Postgres databases
 
 Platforms that ship free, pro, and enterprise tiers need hard caps per user, not just observability. Neon exposes those caps on the project itself through the `quota` object on [Create project](/docs/reference/api/projects/create-project) and [Update project](/docs/reference/api/projects/update-project). Set them when you provision a tenant, then raise or lower them when the user changes plan, without downtime.
 
-When any configured quota is hit, Neon suspends every active compute on that project and keeps them suspended until the next billing period starts. That is a hard stop, not scale-to-zero: the next connection does not wake the database unless you raise or clear the quota.
-
 | Quota | Scope | What it caps |
 | --- | --- | --- |
 | `active_time_seconds` | Project, per billing period | How long computes can stay active, excluding idle scale-to-zero time |
@@ -78,9 +76,7 @@ When any configured quota is hit, Neon suspends every active compute on that pro
 | `data_transfer_bytes` | Project, per billing period | Egress through the Neon proxy |
 | `logical_size_bytes` | Branch, lifetime of the branch | Maximum size of any one branch. Only that branch's compute is suspended when hit |
 
-Project quotas reset with the monthly billing cycle. `logical_size_bytes` does not: it is a standing size ceiling for the life of the branch.
-
-You can also size each endpoint from the same API surface, as project defaults, on branch create, or when creating or updating an endpoint:
+You can also size each endpoint from the same API surface, as project defaults, on branch create, or when creating or updating an endpoint.
 
 | Setting | What it controls |
 | --- | --- |
@@ -130,8 +126,6 @@ You can use these to:
 - Poll on your own schedule. Consumption data refreshes about every 15 minutes, and polling does not wake idle computes
 
 [Learn how to query consumption metrics via the API](/docs/guides/consumption-metrics), including request parameters, pagination, and a worked usage-dashboard example.
-
-<QuoteBlock quote="Neon’s serverless philosophy is aligned with our vision: no infrastructure to manage, no servers to provision, no database cluster to maintain." author={{ name: 'Edouard Bonlieu', company: 'Co-founder at Koyeb' }} link="/case-studies#platforms" />
 
 ## Claimable databases for frictionless onboarding
 
