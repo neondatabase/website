@@ -125,7 +125,9 @@ jobs:
 
       - name: Run pg_dump
         run: |
-          $POSTGRES/pg_dump ${{ env.DATABASE_URL }} | gzip > "${{ env.GZIP_NAME }}"
+          set -o pipefail
+          : "${DATABASE_URL:?DATABASE_URL secret is not set}"
+          "${POSTGRES}/pg_dump" "$DATABASE_URL" | gzip > "$GZIP_NAME"
 
       - name: Empty bucket of old files
         run: |
@@ -259,8 +261,12 @@ This step runs `pg_dump` and saves the output in the Action's virtual memory usi
 ```yml
 - name: Run pg_dump
   run: |
-    $POSTGRES/$pg_dump ${{ env.DATABASE_URL }} | gzip > "${{ env.GZIP_NAME }}"
+    set -o pipefail
+    : "${DATABASE_URL:?DATABASE_URL secret is not set}"
+    "${POSTGRES}/pg_dump" "$DATABASE_URL" | gzip > "$GZIP_NAME"
 ```
+
+GitHub Actions already runs `bash` steps with `pipefail` enabled, but setting it explicitly makes the intent clear and keeps the step correct even if the shell is overridden: the step fails if `pg_dump` fails, instead of masking the error behind a successful `gzip`. The `DATABASE_URL` check fails the step early with a clear message if the secret is missing.
 
 ## Empty bucket of old files
 
