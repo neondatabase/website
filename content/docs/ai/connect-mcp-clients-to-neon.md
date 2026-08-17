@@ -15,10 +15,10 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:05:30.414Z'
+updatedOn: '2026-08-17T11:33:55.500Z'
 ---
 
-This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Lakebase Postgres databases.
+Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
 
 <Admonition type="important" title="Security">
 The Neon MCP Server is intended for **development and testing only**. Always review LLM-requested actions before execution. See [MCP security guidance](/docs/ai/neon-mcp-server#mcp-security-guidance).
@@ -424,6 +424,16 @@ For more details, including workflow examples and troubleshooting, see [Get star
 2. Go to [jules.google.com](https://jules.google.com) > **Settings** > **MCP** (or use [this direct link](https://jules.google.com/settings/mcp)).
 3. Click **Connect** on the Neon server and paste your API key when prompted.
 4. Run a task invoking the Neon MCP server to verify the connection.
+
+## Kimi Code
+
+Kimi Code doesn't use `add-mcp`. Instead, install Neon's [agent skills](https://github.com/neondatabase/agent-skills) repository as a plugin. Kimi reads its own manifest (`kimi.plugin.json`), which declares the Neon MCP Server, so this one command wires up the MCP connection along with the skills:
+
+```bash
+/plugins install https://github.com/neondatabase/agent-skills
+```
+
+Plugin changes apply to new sessions, so run `/new` afterward. See [Agent Skills](/docs/ai/agent-skills) for more on what's included.
 
 ## Other MCP clients
 
