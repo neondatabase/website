@@ -435,6 +435,13 @@ Kimi Code doesn't use `add-mcp`. Instead, install Neon's [agent skills](https://
 
 Plugin changes apply to new sessions, so run `/new` afterward. See [Agent Skills](/docs/ai/agent-skills) for more on what's included.
 
+## Gamut
+
+1. In your [Gamut](https://www.gamut.so/mcp/developer-tools/neon) agent, go to **Connections** and click **Add Connection**.
+2. Search for **Neon** and click **+** to add it.
+3. When the OAuth window opens, sign in to Neon and authorize the connection.
+4. Ask your agent to query or manage your Neon database to verify the connection.
+
 ## Other MCP clients
 
 Prefer **`npx neon@latest init`** for the full flow (see [Quick setup](#quick-setup-neon-init) above). If you **only** want MCP config lines, or you are re-running wiring for one tool, use **add-mcp**:
