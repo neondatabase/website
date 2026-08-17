@@ -7,7 +7,7 @@ page_description: >-
 prev_url: >-
   https://www.postgresqltutorial.com/postgresql-string-functions/postgresql-substring/
 ogImage: /postgresqltutorial/PostgreSQL-substring-function-example.jpg
-updatedOn: '2026-06-19T17:44:03.964Z'
+updatedOn: '2026-08-17T11:14:42.184Z'
 enableTableOfContents: true
 previousLink:
   title: PostgreSQL POSITION() Function
@@ -71,7 +71,7 @@ Output:
 
 In the example, we extract a substring that has a length of 8, starting at the first character of the `PostgreSQL` string. The result is `PostgreS` as illustrated in the following picture:
 
-![PostgreSQL substring function example](/postgresqltutorial/PostgreSQL-substring-function-example.jpg)The following example uses the `SUBSTRING()` function to extract the whole `PostgreSQL` string started at position 8:
+![PostgreSQL substring function example](/postgresqltutorial/PostgreSQL-substring-function-example.jpg)The following example uses the `SUBSTRING()` function to extract the substring of the `PostgreSQL` string starting at position 8:
 
 ```sql
 SELECT
