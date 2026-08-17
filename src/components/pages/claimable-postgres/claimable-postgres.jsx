@@ -144,7 +144,20 @@ const Provisioner = () => {
       }).format(new Date(value));
     const expiresAt = formatTime(project.expires_at);
     const claimExpiresAt = formatTime(Date.now() + claim.expires_in * 1000);
+    const granted = new Set(
+      capabilities.filter(({ granted }) => granted).map(({ capability }) => capability)
+    );
     const denied = capabilities.filter(({ granted }) => !granted);
+    const stayEnabled = [
+      granted.has('auth') ? 'Auth' : null,
+      granted.has('data_api') ? 'the Data API' : null,
+    ].filter(Boolean);
+    const stayEnabledSentence =
+      stayEnabled.length === 0
+        ? ''
+        : stayEnabled.length === 1
+          ? ` ${stayEnabled[0]} stays enabled.`
+          : ` ${stayEnabled.join(' and ')} stay enabled.`;
 
     return (
       <div
@@ -193,7 +206,7 @@ const Provisioner = () => {
           <p className="text-sm leading-relaxed text-gray-new-70">
             Copy these values now. This page will not show them again. The claim link expires on{' '}
             {claimExpiresAt}. Claiming transfers the Postgres database and rotates the database
-            password. Auth and the Data API stay enabled. The project itself expires on {expiresAt}.
+            password.{stayEnabledSentence} The project itself expires on {expiresAt}.
           </p>
           <Button
             className="mt-4 w-full"

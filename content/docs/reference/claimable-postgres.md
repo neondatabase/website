@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-08-17T08:13:01.739Z'
+updatedOn: '2026-08-17T08:37:19.303Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
@@ -212,12 +212,14 @@ npx neon@latest claim create --service data-api --service auth --env-pull
 
 npx neon@latest claim status
 
-npx neon@latest claim accept
+npx neon@latest claim accept --no-open
 
 npx neon@latest claim list
 
 npx neon@latest claim delete --yes
 ```
+
+`neon claim accept` opens a browser by default. `--no-open` prints the URL for a human to open.
 
 After `claim create`, regular Neon CLI commands exchange the saved identity assertion and route supported management operations through Claimable Neon. Explicit Neon account credentials take precedence when you pass them.
 
