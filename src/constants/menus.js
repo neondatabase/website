@@ -68,9 +68,10 @@ export default {
       ],
     },
     {
-      text: 'Use cases',
+      text: 'Solutions',
       sections: [
         {
+          title: 'Use cases',
           items: [
             {
               title: 'Full-stack apps',
@@ -80,31 +81,36 @@ export default {
             {
               title: 'Branching workflows',
               to: `${LINKS.useCases}/branching-workflows`,
-              description: 'Simplify operations to ship faster & safer',
+              description: 'Simplify DB ops to ship faster & safer',
             },
             {
               title: 'Bursty workloads',
               to: `${LINKS.useCases}/bursty-workloads`,
               description: 'Avoid overprovisioning & optimize performance',
             },
+            {
+              title: 'Large databases',
+              to: `${LINKS.useCases}/large-databases`,
+              description: 'Restore & replicate your DB in seconds',
+            },
           ],
         },
         {
+          title: 'Deploy at scale',
+          variant: 'cards',
           items: [
             {
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
-              description: 'Infra for app generation agents',
+              description:
+                'Infra for app generation agents - used by Replit Agent, v0, and Databutton',
+              graphic: 'agents',
             },
             {
               title: 'Platforms',
               to: LINKS.platforms,
               description: 'Deploy isolated backends for your end users',
-            },
-            {
-              title: 'Large databases',
-              to: `${LINKS.useCases}/large-databases`,
-              description: 'Restore & replicate your DB in seconds',
+              graphic: 'platforms',
             },
           ],
         },
