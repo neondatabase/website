@@ -11,7 +11,7 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-08-17T13:01:54.000Z'
 ---
 
 <Admonition type="note">
@@ -377,6 +377,24 @@ Proper cleanup reduces costs and keeps your project manageable:
 - **Keep backup branches briefly**: After restore, keep the automatically-created backup branch (for example, `prod (old)`) for sanity checks before deletion, or assign a [time to live](/docs/guides/branch-expiration) for automatic cleanup.
 - **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete orphaned branches (for example, `production (old)`) created during restores.
 - **Version metadata**: Keep version metadata separate to preserve audit trail across restores.
+
+## Scheduling snapshots at scale
+
+<Admonition type="note">
+This applies only if you're creating scheduled snapshots programmatically at high volume—for example, an agent platform or automation layer that schedules snapshots across many branches. If you're scheduling snapshots manually or for a handful of branches, you won't hit this limit and can skip this section.
+</Admonition>
+
+Each account can schedule up to **5,000 snapshots per hour** (the default limit). If you exceed this in the same hour, snapshot creation returns an error:
+
+> You have reached the maximum of 5,000 scheduled snapshots per hour for your account. Schedule this snapshot for a different hour.
+
+Because a scheduled snapshot's hour (`0`–`23`) determines when it's created, concentrating thousands of branches on the same hour can reach this limit. When you generate snapshot schedules programmatically, distribute the `hour` value across branches to stay well under it:
+
+- **Hash the branch name or ID**: map it to a consistent hour (`0`–`23`) so each branch always schedules to the same, evenly distributed hour.
+- **Cycle through hours**: assign hours sequentially as you create new schedules.
+- **Pick a random hour**: choose one per branch and keep it.
+
+Spreading scheduled snapshots across hours keeps you under the per-hour limit as your branch count grows.
 
 ## FAQ
 
