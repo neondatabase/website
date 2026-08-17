@@ -6,7 +6,7 @@ summary: >-
   `@prisma/adapter-neon` serverless driver adapter, which routes queries over
   WebSockets for compatibility with serverless environments. The setup requires
   two connection strings: a pooled URL (`DATABASE_URL`) for application queries
-  and a direct URL (`DIRECT_URL`) for Prisma CLI commands such as migrations and
+  and a direct URL (`DATABASE_URL_UNPOOLED`) for Prisma CLI commands such as migrations and
   `db push`. Newer Prisma versions configure the direct connection in
   `prisma.config.ts`; older versions use the `directUrl` property in
   `schema.prisma`.
@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-08-17T13:35:16.350Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
