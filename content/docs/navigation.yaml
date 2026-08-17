@@ -1440,6 +1440,8 @@
                   slug: guides/logical-replication-kafka-confluent
                 - title: Databricks
                   slug: guides/logical-replication-databricks
+                - title: DBConvert Streams
+                  slug: guides/logical-replication-dbconvert-streams
                 - title: Decodable
                   slug: guides/logical-replication-decodable
                 - title: Estuary Flow
