@@ -15,7 +15,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-10T20:46:10.540Z'
+updatedOn: '2026-08-17T11:33:55.500Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -429,7 +429,7 @@ For more details, including workflow examples and troubleshooting, see [Get star
 
 Kimi Code doesn't use `add-mcp`. Instead, install Neon's [agent skills](https://github.com/neondatabase/agent-skills) repository as a plugin. Kimi reads its own manifest (`kimi.plugin.json`), which declares the Neon MCP Server, so this one command wires up the MCP connection along with the skills:
 
-```text
+```bash
 /plugins install https://github.com/neondatabase/agent-skills
 ```
 
