@@ -1,4 +1,4 @@
-text: 'You can now deploy Neon Functions - they live in the branch next to your DB, are long-running, perfect for agents and realtime'
+text: 'You can now call LLMs directly from Neon via AI Gateway, backed by Databricks Foundation Model APIs'
 link:
-  url: 'https://neon.com/blog/neon-functions-backend-logic-next-to-your-data'
+  url: 'https://neon.com/blog/llms-belong-in-your-backend'
   target: '_blank'
