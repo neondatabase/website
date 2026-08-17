@@ -10,7 +10,7 @@ summary: >-
 enableTableOfContents: false
 redirectFrom:
   - /docs/introduction/monitor-external-tools
-updatedOn: '2026-07-14T12:12:52.695Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
@@ -65,9 +65,9 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <DetailIconCards>
 
-<a href="/docs/introduction/monitor-pgadmin" description="Monitor your Neon Postgres database with pgAdmin" icon="wrench">pgAdmin</a>
+<a href="/docs/introduction/monitor-pgadmin" description="Monitor your Lakebase Postgres database with pgAdmin" icon="wrench">pgAdmin</a>
 
-<a href="/docs/introduction/monitor-pghero" description="Monitor your Neon Postgres database with PgHero" icon="wrench">PgHero</a>
+<a href="/docs/introduction/monitor-pghero" description="Monitor your Lakebase Postgres database with PgHero" icon="wrench">PgHero</a>
 
 </DetailIconCards>
 

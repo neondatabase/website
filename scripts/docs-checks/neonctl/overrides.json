@@ -17,10 +17,53 @@
     }
   },
   "commands": {
+    "config": {
+      "commands": {
+        "init": {
+          "options": {
+            "services": {
+              "_comment": "Built by the servicesOption() factory in neon_services.ts, which the static parser can't evaluate (factory call as an option-spec value, in a non-command file; the describe is composed from a conditional + array filter/join). See generate-schema.js parseOptionSpec for the limitation. type and describe verified against `neon config init --help` at neonctl 3.1.0.",
+              "type": "array",
+              "describe": "Services the scaffolded neon.ts declares: auth, functions, object-storage, ai-gateway. Pass \"none\" for the bare starter policy. Repeat the flag or comma-separate. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY."
+            }
+          }
+        }
+      }
+    },
+    "env": {
+      "commands": {
+        "pull": {
+          "options": {
+            "service": {
+              "_comment": "Built by the servicesOption() factory in neon_services.ts (see config init services override). type and describe verified against `neon env pull --help` at neonctl 3.1.0.",
+              "type": "array",
+              "describe": "Pull only these services' variables: postgres, auth, data-api, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
+            }
+          }
+        }
+      }
+    },
     "checkout": {
       "options": {
         "env-pull": {
           "describe": "Pull the branch's Neon env vars (DATABASE_URL, ...) into a local .env after checkout. On by default; use --no-env-pull to skip, for example when injecting env at runtime with `neon-env run` (from `@neon/env`) or `neon dev`."
+        }
+      }
+    },
+    "profile": {
+      "_comment": "Limit the table to the two common create paths (browser sign-in, then --mint). The upstream `.example()` list also demonstrates storing a pre-existing key via --api-key; that rarer path and its stdin/argument trade-off are covered in prose on the page instead. Same commands and descriptions as source (profile.ts) for the examples kept.",
+      "commands": {
+        "create": {
+          "examples": [
+            {
+              "command": "$0 profile create work",
+              "description": "Sign in with the browser, like `neon auth --profile work`"
+            },
+            {
+              "command": "$0 profile create ci --mint --org-id org-abc-123",
+              "description": "One browser sign-in, then an org-scoped key and no session left behind"
+            }
+          ]
         }
       }
     },
@@ -123,6 +166,26 @@
                     "google",
                     "github",
                     "vercel"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "snapshots": {
+      "commands": {
+        "schedule": {
+          "commands": {
+            "set": {
+              "options": {
+                "frequency": {
+                  "describe": "How often to take snapshots. Combine with --hour, --day, and --retention to build a single-entry schedule.",
+                  "choices": [
+                    "daily",
+                    "weekly",
+                    "monthly"
                   ]
                 }
               }

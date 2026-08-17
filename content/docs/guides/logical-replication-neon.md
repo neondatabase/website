@@ -11,7 +11,7 @@ summary: >-
   `pgoutput` and `wal2json`.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
@@ -24,7 +24,7 @@ When replicating data from Neon, enable logical replication on your Neon project
 Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
 </Admonition>
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -32,6 +32,16 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 2. On the **Project Dashboard**, select **Settings**.
 3. Select **Logical replication**.
 4. Click **Enable** to enable logical replication.
+
+</TabItem>
+
+<TabItem>
+
+Use the [Neon CLI](/docs/cli) `projects update` command with `--enable-logical-replication`. Replace `$PROJECT_ID` with your project ID. The `--yes` flag skips the confirmation prompt.
+
+```bash
+neon projects update $PROJECT_ID --enable-logical-replication --yes
+```
 
 </TabItem>
 
@@ -130,6 +140,10 @@ WHERE rolname = '<role_name>';
 ## Subscriber access
 
 A subscriber must be able to access the Neon database that is acting as a publisher. In Neon, no action is required unless you use Neon's **IP Allow** feature to limit IP addresses that can connect to Neon.
+
+<Admonition type="important">
+When a subscriber connects to a Neon publisher, use a direct connection string, not a pooled one. Logical replication requires a persistent connection and is not compatible with connection poolers. Make sure the connection string you give the subscriber does not include the `-pooler` suffix in the hostname. See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 If you use Neon's **IP Allow** feature:
 

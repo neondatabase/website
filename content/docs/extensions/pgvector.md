@@ -3,7 +3,7 @@ title: The pgvector extension
 subtitle: Enable Postgres as a vector store with the pgvector extension
 summary: >-
   The pgvector extension adds vector embedding storage and similarity search to
-  Neon Postgres, supporting exact and approximate nearest-neighbor queries with
+  Lakebase Postgres, supporting exact and approximate nearest-neighbor queries with
   L2, cosine, inner product, L1, Hamming, and Jaccard distance operators. Use
   this page when building AI or NLP applications that store embeddings from
   models such as OpenAI text-embedding-3-small and need to choose between HNSW
@@ -13,7 +13,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It's a natural fit for natural language processing applications, including those built on top of OpenAI's GPT models.

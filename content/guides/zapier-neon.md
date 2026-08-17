@@ -1,13 +1,13 @@
 ---
-title: Using Neon Postgres with Zapier
-subtitle: Automate workflows by connecting Neon Postgres to hundreds of apps with Zapier, triggering actions from database events or pushing data into Neon from other services.
+title: Using Lakebase Postgres with Zapier
+subtitle: Automate workflows by connecting Lakebase Postgres to hundreds of apps with Zapier, triggering actions from database events or pushing data into Neon from other services.
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-29T00:00:00.000Z'
-updatedOn: '2026-04-24T22:05:15.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-Zapier is a powerful no-code automation platform that allows you to connect Neon Postgres to thousands of other web services. By linking your Neon database with apps like Slack, Google Sheets, Gmail, Stripe, or Typeform, you can automate actions based on database events (e.g., a new row is added) or push data into Neon from these external systems.
+Zapier is a powerful no-code automation platform that allows you to connect Lakebase Postgres to thousands of other web services. By linking your Neon database with apps like Slack, Google Sheets, Gmail, Stripe, or Typeform, you can automate actions based on database events (e.g., a new row is added) or push data into Neon from these external systems.
 
 This guide will walk you through setting up two common automation scenarios:
 
@@ -55,7 +55,7 @@ Before you begin, ensure you have the following:
 For Zapier's "New Row" trigger to reliably detect new entries in Neon, your table should have an auto-incrementing `PRIMARY KEY` (like `SERIAL` or `BIGSERIAL`) or a column that strictly orders new rows (like a `created_at` timestamp). Zapier uses this "Ordering Column" to check for new entries.
 </Admonition>
 
-## Connecting Neon Postgres to Zapier
+## Connecting your database on Neon to Zapier
 
 Before creating Zaps, you need to connect your Neon database to Zapier. Zapier uses a generic "PostgreSQL" app integration. Due to how [Neon uses Server Name Indication (SNI) for routing connections](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) and how some clients handle SNI, a specific format is required for the password field in Zapier to ensure a successful connection.
 
@@ -71,7 +71,7 @@ Before creating Zaps, you need to connect your Neon database to Zapier. Zapier u
     - **Username:** Your Neon database user (e.g., `neon_user`)
     - **Password:** **This is where the special format is needed.** See the important note below.
 
-    <Admonition type="important" title="Password Format for Neon Postgres in Zapier">
+    <Admonition type="important" title="Password Format for Lakebase Postgres in Zapier">
     To connect Zapier to Neon successfully, you must include your Neon **Endpoint ID** within the password field. This is because Neon uses SNI to route connections, and some clients like Zapier's PostgreSQL connector do not pass SNI information in a way that Neon can use directly without this workaround.
     1.  Find your **Endpoint ID**. It's the first part of your Neon hostname (e.g., if your host is `ep-tight-boat-a6aplura-pooler.us-west-2.aws.neon.tech`, your endpoint ID is `ep-tight-boat-a6aplura`).
     2.  In Zapier's **Password** field, enter the following string, replacing `[endpoint_id]` with your actual endpoint ID and `[your_actual_password]` with your database user's password:
@@ -149,7 +149,7 @@ Let's create a Zap that sends a Slack message whenever a new user is added to `u
     ![Zapier message test in Slack](/docs/guides/zapier-slack-test-message.png)
 4.  If the test is successful, click "**Publish Zap**".
 
-Now, whenever a new row is added to your `users` table in Neon Postgres, a message will automatically be posted to your specified Slack channel.
+Now, whenever a new row is added to your `users` table in Lakebase Postgres, a message will automatically be posted to your specified Slack channel.
 
 <Admonition type="note" title="Trigger frequency">
 Zapier uses a polling system for its "New Row" trigger, checking Postgres for new data every 2-15 minutes (depending on your Zapier plan), not in real-time. This means a new row added to Neon may take a few minutes to trigger your Zap and send the Slack message.
@@ -188,7 +188,7 @@ Let's create a Zap that adds a new row to our `form_submissions` table in Neon w
 4.  **Verify in Neon:** Check your `form_submissions` table in Neon to confirm the new row was added.
 5.  If the test is successful and the data appears in Neon, click "**Publish Zap**".
 
-Now, every time your Google Form is submitted, the data will be automatically logged into your Neon Postgres database.
+Now, every time your Google Form is submitted, the data will be automatically logged into your Lakebase Postgres database.
 
 ## Expanding to other use cases
 
@@ -223,7 +223,7 @@ The process for building these Zaps will be very similar:
 
 If you encounter issues connecting Neon to Zapier or if your Zaps involving Neon are not working as expected, consider the following:
 
-- **Verify password format:** Ensure you are using the correct password format when connecting Neon to Zapier, which includes the `endpoint=[endpoint_id]$` prefix before your actual password. Refer to the details in the [Connecting Neon Postgres to Zapier](#connecting-neon-postgres-to-zapier) section for the exact structure. An incorrect password format is a common reason for connection failures.
+- **Verify password format:** Ensure you are using the correct password format when connecting Neon to Zapier, which includes the `endpoint=[endpoint_id]$` prefix before your actual password. Refer to the details in the [Connecting your database on Neon to Zapier](#connecting-your-database-on-neon-to-zapier) section for the exact structure. An incorrect password format is a common reason for connection failures.
 
 - **Specific Errors:**
 
@@ -233,7 +233,7 @@ If you encounter issues connecting Neon to Zapier or if your Zaps involving Neon
 
 ## Conclusion
 
-Zapier provides a user-friendly way to connect your Neon Postgres database to the wider ecosystem of cloud applications, enabling powerful automations without writing code. By understanding the trigger and action model, you can streamline workflows, synchronize data, and save significant time.
+Zapier provides a user-friendly way to connect your Lakebase Postgres database to the wider ecosystem of cloud applications, enabling powerful automations without writing code. By understanding the trigger and action model, you can streamline workflows, synchronize data, and save significant time.
 
 ## Resources
 

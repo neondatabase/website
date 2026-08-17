@@ -686,22 +686,46 @@ function generateApiMd(tagOps) {
 // drift.
 const GLOBAL_CLI_FLAGS = new Set(CLI_GLOBAL_FLAGS_LIST);
 
-// Return operationIds with CLI coverage where the kebab→snake heuristic in
-// buildCliFlags failed to map any non-global flag to its API param twin.
+// cli-global-flags.json must cover every flag neonctl declares globally.
+// A global flag missing from the list leaks through as an API-specific flag,
+// which makes pure-positional commands look unmapped and skews the tripwire
+// below. Fail hard: a neonctl bump that adds a global flag needs the list
+// updated, and a silent warning here caused exactly that drift before.
+export function assertGlobalFlagsCovered(cliSchema, globalFlags = GLOBAL_CLI_FLAGS) {
+  const declared = Object.keys(cliSchema?.globalOptions ?? {});
+  const missing = declared.filter((name) => !globalFlags.has(name));
+  if (missing.length > 0) {
+    throw new Error(
+      `scripts/data/cli-global-flags.json is missing neonctl global flag(s): ${missing.join(', ')}. ` +
+        'Add them so they are not counted as API-specific flags.'
+    );
+  }
+}
+
+// Return operationIds with CLI coverage where NOTHING in the rendered command
+// maps back to the API — no positional, no flag. Both carry `apiEquiv`, and
+// both count: `neon projects delete <project_id>` is fully mapped via its
+// positional even though it has no flags. A hit means the command genuinely
+// shares no inputs with the operation it documents (usually a mis-mapped
+// cli-coverage entry), not merely that a naming heuristic missed.
 // Exclusions (skip the warning):
-//   - operation has 0 non-global flags (nothing to map)
-//   - operation has 0 API params (heuristic compares against params)
-//   - operation is pure-positional (>=1 positional AND 0 non-global flags)
+//   - operation has no positionals AND no non-global flags (nothing to map)
 // Returns an empty array when everything is healthy.
-export function findOpsWithNoFlagMappings(allOps) {
+export function findOpsWithNoApiMappings(allOps) {
   const unmapped = [];
   for (const op of allOps) {
-    if (!op.cli?.command) continue; // multi-cmd ops have flags per-cmd; out of scope
-    if (!op.parameters?.length) continue;
-    const nonGlobal = (op.cli.flags ?? []).filter((f) => !GLOBAL_CLI_FLAGS.has(f.name));
-    if (nonGlobal.length === 0) continue; // nothing to map
-    const mapped = nonGlobal.filter((f) => f.apiEquiv);
-    if (mapped.length === 0) unmapped.push(op.operationId);
+    // Multi-command ops carry inputs per-command; check each independently.
+    const commands = op.cli?.commands ?? (op.cli?.command ? [op.cli] : []);
+    for (const cmd of commands) {
+      const positionals = cmd.positionals ?? [];
+      const nonGlobalFlags = (cmd.flags ?? []).filter((f) => !GLOBAL_CLI_FLAGS.has(f.name));
+      if (positionals.length === 0 && nonGlobalFlags.length === 0) continue;
+      const mapped = [...positionals, ...nonGlobalFlags].filter((x) => x.apiEquiv);
+      if (mapped.length === 0) {
+        unmapped.push(op.operationId);
+        break;
+      }
+    }
   }
   return unmapped;
 }
@@ -762,24 +786,45 @@ function collectCliPathOptions(commandStr, cliSchema) {
   return accumulated;
 }
 
+// Index a request-body schema by leaf field name -> dot path, so a CLI flag
+// can be matched against a nested body field (`--hipaa` ->
+// `project.settings.hipaa`). Shallower paths win: `--name` on
+// `neon projects create` resolves to `project.name`, not `project.branch.name`.
+// Recurses through objects and arrays-of-objects; depth-capped like the other
+// schema walkers here.
+export function indexBodyFieldPaths(properties, prefix = '', index = new Map(), depth = 0) {
+  if (!properties || depth > 6) return index;
+  for (const [name, schema] of Object.entries(properties)) {
+    const path = prefix ? `${prefix}.${name}` : name;
+    if (!index.has(name)) index.set(name, path);
+    const children = schema.type === 'object' ? schema.properties : schema.items?.properties;
+    indexBodyFieldPaths(children, path, index, depth + 1);
+  }
+  return index;
+}
+
 // Build the flags array for an operation by merging command-level options
 // with global options, excluding hidden flags. Heuristic mapping:
 //   - apiEquiv: kebab-case flag name maps to a snake_case OP PARAMETER name
-//     (path or query). Drives the API↔CLI hover hint today.
-export function buildCliFlags(commandStr, cliSchema, paramProps) {
+//     (path or query), else to a request-body field's dot path.
+//   - apiEquivIn: 'parameter' | 'body' — which of the two matched. Together
+//     they drive the API↔CLI hover hint and the interactive CLI snippet.
+export function buildCliFlags(commandStr, cliSchema, paramProps, bodyProperties = null) {
   if (!cliSchema) return [];
   const globalOpts = cliSchema.globalOptions ?? {};
   const cmdOpts = collectCliPathOptions(commandStr, cliSchema);
   const allOpts = { ...globalOpts, ...cmdOpts };
 
   const paramNames = new Set(paramProps.map((p) => p.name));
+  const bodyPaths = indexBodyFieldPaths(bodyProperties);
   const kebabToSnake = (s) => s.replace(/-/g, '_');
 
   return Object.entries(allOpts)
     .filter(([, v]) => !v.hidden)
     .map(([name, spec]) => {
       const snake = kebabToSnake(name);
-      const apiEquiv = paramNames.has(snake) ? snake : null;
+      const apiEquiv = paramNames.has(snake) ? snake : (bodyPaths.get(snake) ?? null);
+      const apiEquivIn = apiEquiv ? (paramNames.has(snake) ? 'parameter' : 'body') : null;
       const flag = {
         name,
         type: spec.type === 'unknown' ? 'string' : (spec.type ?? 'string'),
@@ -792,7 +837,10 @@ export function buildCliFlags(commandStr, cliSchema, paramProps) {
       }
       if (spec.choices) flag.enum = spec.choices;
       if (spec.default !== undefined) flag.default = spec.default;
-      if (apiEquiv) flag.apiEquiv = apiEquiv;
+      if (apiEquiv) {
+        flag.apiEquiv = apiEquiv;
+        flag.apiEquivIn = apiEquivIn;
+      }
       return flag;
     });
 }
@@ -1097,7 +1145,12 @@ function buildOperationData(
       cliSchema,
       paramProps
     );
-    const flags = buildCliFlags(enrichedCommand, cliSchema, paramProps);
+    const flags = buildCliFlags(
+      enrichedCommand,
+      cliSchema,
+      paramProps,
+      requestBodyData?.properties
+    );
     cliData = { command: enrichedCommand, flags, positionals };
   } else if (cliCoverageEntry?.commands) {
     const commands = cliCoverageEntry.commands.map(({ cmd, covers }) => {
@@ -1106,7 +1159,12 @@ function buildOperationData(
         cliSchema,
         paramProps
       );
-      const flags = buildCliFlags(enrichedCommand, cliSchema, paramProps);
+      const flags = buildCliFlags(
+        enrichedCommand,
+        cliSchema,
+        paramProps,
+        requestBodyData?.properties
+      );
       return { command: enrichedCommand, covers, flags, positionals };
     });
     cliData = { commands, uncovered: cliCoverageEntry.uncovered ?? [] };
@@ -1157,6 +1215,38 @@ function buildOperationData(
 // Main
 // ---------------------------------------------------------------------------
 
+// Compare the committed operation-id manifest against the freshly generated
+// operationIds and warn (non-fatal) on any set difference. Reads the committed
+// file directly rather than diffing rendered files so it works from a single
+// source of truth; a parse/read failure is treated as "nothing to compare".
+function warnIfManifestStale(freshOperationIds) {
+  let committed;
+  try {
+    committed = JSON.parse(readFileSync(PATHS.operationIdsPath, 'utf8'));
+  } catch {
+    return; // no committed manifest yet (or unreadable) — nothing to compare
+  }
+
+  const committedIds = new Set(committed?.operationIds ?? []);
+  const fresh = new Set(freshOperationIds);
+  const removed = [...committedIds].filter((id) => !fresh.has(id)).sort();
+  const added = [...fresh].filter((id) => !committedIds.has(id)).sort();
+
+  if (removed.length === 0 && added.length === 0) return;
+
+  process.stderr.write(
+    `[api-ref] WARNING: committed api-operation-ids.json is stale vs the spec used this run ` +
+      `(${committedIds.size} -> ${fresh.size} operations). ` +
+      `Commit the regenerated content/docs/api-navigation.yaml and api-operation-ids.json.\n`
+  );
+  if (removed.length) {
+    process.stderr.write(`[api-ref]   removed (spec dropped): ${removed.join(', ')}\n`);
+  }
+  if (added.length) {
+    process.stderr.write(`[api-ref]   added (spec introduced): ${added.join(', ')}\n`);
+  }
+}
+
 async function main() {
   const { cachePath, ttlMs } = getSpecCacheConfig();
   const { spec: specRaw, cacheCandidate } = await loadOpenApiSpec({
@@ -1198,6 +1288,8 @@ async function main() {
   process.stderr.write(`CLI table output examples: ${Object.keys(cliTableOutput).length} ops\n`);
   process.stderr.write(`Response examples override: ${Object.keys(responseExamples).length} ops\n`);
 
+  if (cliSchema) assertGlobalFlagsCovered(cliSchema);
+
   const allOps = [];
   const tagOps = {};
 
@@ -1235,14 +1327,14 @@ async function main() {
 
   process.stderr.write(`Generated ${opCount} operations.\n`);
 
-  // Tripwire: surface ops where the kebab→snake CLI-flag heuristic mapped
-  // ZERO non-global flags to API params. Either a new flag naming convention
-  // in neonctl OR a positional-only command (excluded). Not fail-hard —
+  // Tripwire: surface ops whose CLI command shares no inputs at all with the
+  // API operation — no positional and no flag maps back. Usually a mis-mapped
+  // cli-coverage entry or a new neonctl naming convention. Not fail-hard —
   // heuristic warnings are advisory; review on bumps.
-  const unmappedFlagOps = findOpsWithNoFlagMappings(allOps);
-  if (unmappedFlagOps.length > 0) {
+  const unmappedOps = findOpsWithNoApiMappings(allOps);
+  if (unmappedOps.length > 0) {
     process.stderr.write(
-      `[cli-flags] WARNING: ${unmappedFlagOps.length} op(s) with CLI coverage have ZERO API↔flag mappings (review if these aren't pure-positional): ${unmappedFlagOps.join(', ')}\n`
+      `[cli-flags] WARNING: ${unmappedOps.length} op(s) with CLI coverage have ZERO API↔CLI mappings (no positional or flag maps to a parameter or body field): ${unmappedOps.join(', ')}\n`
     );
   }
 
@@ -1287,10 +1379,18 @@ async function main() {
 
   // Operation-id manifest (committed — docs-side source of truth for API
   // reference coverage; see scripts/lib/api-coverage.mjs)
-  writeOperationIdsManifest(
-    PATHS,
-    allOps.map((op) => op.operationId)
-  );
+  const freshOperationIds = allOps.map((op) => op.operationId);
+
+  // Build-visible staleness warning. The build overwrites the committed manifest
+  // regardless (so this never blocks — that failure class was removed from
+  // prebuild), but comparing the committed operationIds against the freshly
+  // generated set surfaces spec drift in every build log, matching the
+  // [cli-flags]/field-group advisory pattern. The weekly docs↔API workflow is
+  // the enforcing signal; this is the early heads-up so drift is noticed before
+  // Monday. WARN-ONLY.
+  warnIfManifestStale(freshOperationIds);
+
+  writeOperationIdsManifest(PATHS, freshOperationIds);
 
   writeRunSummary(PATHS, {
     opCount,

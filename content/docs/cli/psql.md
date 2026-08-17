@@ -6,7 +6,7 @@ summary: >-
   against a branch in your Neon project, including pooled connections and
   time-travel support.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-08-11T18:35:41.335Z'
 redirectFrom:
   - /docs/reference/cli-psql
 ---
@@ -35,28 +35,28 @@ Connect to the default branch:
 neon psql
 ```
 
-Connect to a named branch. New Neon projects create a default branch named `production`:
+Connect to a named branch. Projects created with the CLI or API get a default branch named `main`; Console-created projects use `production` (run `neon branches list` if you're unsure):
 
 ```bash
-neon psql production
+neon psql main
 ```
 
 Run a single query:
 
 ```bash
-neon psql production -- -c "SELECT version()"
+neon psql main -- -c "SELECT version()"
 ```
 
 Run an SQL file:
 
 ```bash
-neon psql production -- -f dump.sql
+neon psql main -- -f dump.sql
 ```
 
 Connect to a branch at a specific point in time:
 
 ```bash
-neon psql production@2024-01-01T00:00:00Z
+neon psql main@2024-01-01T00:00:00Z
 ```
 
 Use a pooled connection:

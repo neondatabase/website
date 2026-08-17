@@ -8,7 +8,7 @@ summary: >-
   releases, blog posts, or incidents without polling the site, including routing
   feeds into Slack with the /feed subscribe command.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T13:21:50.559Z'
 ---
 
 Stay updated with the latest information and announcements from Neon by subscribing to our RSS feeds. You can monitor the Neon Changelog, and blog posts, and Neon status updates through your preferred RSS reader or [Slack channel](#subscribe-to-feeds-in-slack).
@@ -42,8 +42,6 @@ https://neon.com/guides/rss.xml
 Monitor the operational status of Neon across different regions by subscribing to the [Neon Status](https://neonstatus.com/) RSS feed.
 
 You can find the Neon Status RSS URL by navigating to the [Neon Status](https://neonstatus.com/) page, clicking subscribe, and choosing the RSS option.
-
-![Neon Status RSS Subscribe button](/docs/introduction/status_subscribe.png)
 
 ## Subscribe to feeds in Slack
 

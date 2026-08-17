@@ -19,7 +19,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-PostgreSQL's built-in functions work the same whether you're running Postgres on your laptop, on self-managed infrastructure, or on any managed service, so everything you learn here carries over. If you're an enterprise looking for the best managed cloud Postgres for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers performance, security, and native integration with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+PostgreSQL's built-in functions work the same whether you're running Postgres on your laptop, on self-managed infrastructure, or on any managed service. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 The **PostgreSQL Functions** section provides comprehensive coverage of PostgreSQL's powerful built-in functions for data manipulation, analysis, and transformation. These functions are essential tools for working with data in PostgreSQL, enabling you to perform complex calculations, format data, and extract meaningful insights from your databases.

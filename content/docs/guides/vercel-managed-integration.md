@@ -3,19 +3,19 @@ title: Connecting with the Vercel-Managed Integration
 subtitle: Create and manage Neon databases directly from your Vercel dashboard
 summary: >-
   The Vercel-Managed Integration (also called Neon Postgres Native Integration)
-  provisions a Neon Postgres database from the Vercel Marketplace and routes all
+  provisions a Lakebase Postgres database from the Vercel Marketplace and routes all
   billing through your Vercel invoice, injecting DATABASE_URL and related
   environment variables automatically. Choose this path over the Neon-Managed
   Integration when you have no existing Neon account or want a single Vercel
   bill; it does not support the neon auth CLI command. Automated Preview
-  Branching creates an isolated copy-on-write Neon branch for every Vercel
+  Branching creates an isolated copy-on-write Lakebase Postgres branch for every Vercel
   Preview Deployment, with branches cleaned up according to Vercel's 6-month
   default deployment retention policy.
 redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 <InfoBlock>
@@ -36,7 +36,7 @@ updatedOn: '2026-07-15T00:08:00.682Z'
 
 ## About this integration
 
-**Vercel-Managed Integration** (also known as _Neon Postgres Native Integration_) lets you add a Neon Postgres database to your Vercel project **with billing handled entirely inside Vercel**. Installing it:
+**Vercel-Managed Integration** (also known as _Neon Postgres Native Integration_) lets you add a Lakebase Postgres database to your Vercel project **with billing handled entirely inside Vercel**. Installing it:
 
 - Creates a Neon account + project for you (if you don't already have one)
 - For existing Neon users, adds a new organization named `Vercel: <team-name>` to your account
@@ -175,6 +175,10 @@ Team membership changes in Vercel automatically sync to your Neon organization:
 - **Removals**: When a user is removed from your Vercel team, they're automatically removed from the associated Neon organization.
 
 This ensures both platforms stay aligned for security and access control.
+
+<Admonition type="note">
+Organizations managed through the Vercel-managed integration use Neon's legacy roles (Admin and Member), as described above. The newer [organization roles and per-project permissions](/docs/manage/user-permissions) don't apply to Vercel-managed organizations.
+</Admonition>
 
 ### Project transfers between teams
 

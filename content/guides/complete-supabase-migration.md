@@ -4,7 +4,7 @@ subtitle: A comprehensive guide to migrating your Postgres database, user accoun
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-09-03T00:00:00.000Z'
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 This guide walks you through migrating your Postgres database, user accounts, and Row-Level Security (RLS) policies from Supabase to Neon. It addresses key differences between the platforms, including the reassignment of `user_id` values during the auth migration, and provides steps to remap IDs, restore data integrity, and update your application code.
@@ -793,7 +793,7 @@ For most developers the primary use case for branching is creating preview envir
 
 Congratulations! You've successfully migrated your Supabase database, users, and Row-Level Security (RLS) policies to Neon. Data integrity is intact, security policies are fully operational, and users can sign in using their original passwords with no resets required.
 
-If your users were authenticated via OAuth providers like GitHub or Google in Supabase, you can seamlessly continue using these in Managed Better Auth without any issues. Note that Managed Better Auth currently supports OAuth for Microsoft, Google, and GitHub. For more details on setting up OAuth in production, refer to the [Managed Better Auth best practices documentation](https://neon.com/docs/neon-auth/best-practices#production-oauth-setup).
+If your users were authenticated via OAuth providers like GitHub or Google in Supabase, you can seamlessly continue using these in Managed Better Auth without any issues. Note that Managed Better Auth currently supports OAuth for Microsoft, Google, and GitHub. For more details on setting up OAuth in production, refer to the [Managed Better Auth best practices documentation](/docs/neon-auth/best-practices#production-oauth-setup).
 
 </Steps>
 

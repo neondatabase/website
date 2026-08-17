@@ -9,11 +9,24 @@ description: >-
   from their database to their application. Also use when reviewing query
   patterns for cost efficiency, even if the user doesn't explicitly mention
   egress or data transfer.
+metadata:
+  parent: neon
+  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres-egress-optimizer
 ---
+
+**FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.
+
+If the `neon` skill is not installed, fetch it from https://neon.com/docs/ai/skills/neon/SKILL.md or install it with:
+
+```bash
+npx skills add neondatabase/agent-skills --skill neon
+```
 
 # Postgres Egress Optimizer
 
 Guide the user through diagnosing and fixing application-side query patterns that cause excessive data transfer (egress) from their Postgres database. Most high egress bills come from the application fetching more data than it uses.
+
+Work the four steps in order: **diagnose** which queries transfer the most data, **analyze** the codebase behind them, **fix** the anti-patterns, then **verify** nothing broke and the transfer actually dropped.
 
 ## Step 1: Diagnose
 
@@ -31,7 +44,7 @@ If this errors, the extension needs to be created:
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
 
-On Neon, it is available by default but may need this CREATE EXTENSION step.
+On Neon the extension is available by default, but it may still need this CREATE EXTENSION step.
 
 ### Handle empty stats
 
@@ -96,7 +109,7 @@ Rank findings by estimated egress impact:
 - **Extreme call frequency** on even small queries adds up. A query called 50,000 times/day returning 10 rows each = 500,000 rows/day.
 - **Cross-reference with the schema** to identify which columns are wide. Look for JSONB, TEXT, BYTEA, and large VARCHAR columns.
 
-## Step 2: Analyze codebase
+## Step 2: Analyze the Codebase
 
 For each query identified in Step 1, or for each database query in the codebase if no stats are available, check:
 
@@ -113,6 +126,8 @@ Apply the appropriate fix for each problem found. Below are the most common egre
 ### Unused columns (SELECT \*)
 
 **Problem:** The query fetches all columns but the application only uses a few. Large columns (JSONB blobs, TEXT fields) get transferred over the wire and discarded.
+
+**Fix:** Name only the columns the response needs.
 
 **Before:**
 
@@ -131,6 +146,8 @@ SELECT id, name, price, image_urls FROM products;
 **Problem:** A list endpoint returns all rows with no LIMIT. This is an unbounded egress risk — every new row in the table increases data transfer on every request. Flag this regardless of current table size.
 
 This is easy to miss because the application may work fine with small datasets. But at scale, an unpaginated endpoint returning 10,000 rows with even moderate column widths can transfer hundreds of megabytes per day.
+
+**Fix:** Bound the result set with `ORDER BY` plus `LIMIT`/`OFFSET`.
 
 **Before:**
 
@@ -180,6 +197,8 @@ GROUP BY p.category_id;
 **Problem:** A JOIN between a wide parent table and a child table duplicates all parent columns across every child row. If a product has 200 reviews and the product row includes a 50KB JSONB column, the join sends that 50KB × 200 = ~10MB for a single request.
 
 This is distinct from the SELECT \* problem. Even if you select only needed columns, a JOIN still repeats the parent data for every child row. The fix is structural: avoid the join entirely.
+
+**Fix:** Split the join into two queries, one per table.
 
 **Before:**
 
@@ -241,7 +260,7 @@ neon config apply   # apply to the current branch (neon deploy is an alias)
 
 This is complementary, not a substitute: query-pattern fixes are what actually reduce egress charges, while these settings keep non-production compute and storage from quietly inflating the same bill. Because `neon checkout` applies the policy when it creates a branch, new dev/preview branches inherit the cheap profile automatically.
 
-## Further reading
+## Further Reading
 
 - https://neon.com/docs/introduction/network-transfer.md
 - https://neon.com/docs/introduction/cost-optimization.md

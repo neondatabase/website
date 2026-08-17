@@ -1,15 +1,15 @@
 ---
-title: Building a Job Queue System with Node.js, Bull, and Neon Postgres
-subtitle: Learn how to implement a job queue system to handle background tasks efficiently using Node.js, Bull, and Neon Postgres
+title: Building a Job Queue System with Node.js, Bull, and Lakebase Postgres
+subtitle: Learn how to implement a job queue system to handle background tasks efficiently using Node.js, Bull, and Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2025-03-16T00:00:00.000Z'
-updatedOn: '2026-02-18T14:29:21.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Job queues are essential components in modern applications. Queues enable you to handle resource-intensive or time-consuming tasks asynchronously. This approach improves application responsiveness by moving heavy processing out of the request-response cycle.
 
-In this guide, we'll walk through building a job queue system using Node.js, Bull (a Redis-backed queue library), and Neon Postgres to process jobs efficiently at scale.
+In this guide, we'll walk through building a job queue system using Node.js, Bull (a Redis-backed queue library), and Lakebase Postgres to process jobs efficiently at scale.
 
 ## Prerequisites
 
@@ -35,14 +35,14 @@ Here's how our architecture will work:
 1. The main application adds jobs to the queue
 2. Bull manages the queue in Redis
 3. Worker processes consume jobs from the queue
-4. Job statuses and results are stored in Neon Postgres
+4. Job statuses and results are stored in Lakebase Postgres
 5. The application can check job status and retrieve results
 
 This separation improves system performance, reliability, and scalability. It also allows for better error handling, retry logic, monitoring and even user experience as the application can respond quickly to user requests regardless of the job processing time.
 
 ## Create a Neon project
 
-First, let's set up a new Neon Postgres database to store our job metadata.
+First, let's set up a new Lakebase Postgres database to store our job metadata.
 
 1. Navigate to the [Neon Console](https://console.neon.tech/app/projects) and create a new project.
 
@@ -253,8 +253,8 @@ module.exports = {
 
 This helper file provides two main functions:
 
-1. `addJob`: Adds a job to a Bull queue and records it in our Neon Postgres database
-2. `updateJobStatus`: Updates a job's status in the Neon Postgres as it progresses through the queue
+1. `addJob`: Adds a job to a Bull queue and records it in our Lakebase Postgres database
+2. `updateJobStatus`: Updates a job's status in the Lakebase Postgres as it progresses through the queue
 
 ## Create the job processor
 
@@ -1017,7 +1017,7 @@ If you've set up Bull Board as described earlier, you can visit `http://localhos
 
 ## Verifying Database Records
 
-To check that the job information is being correctly stored in your Neon Postgres database, you can use the Neon SQL Editor or any PostgreSQL client to run queries:
+To check that the job information is being correctly stored in your Lakebase Postgres database, you can use the Neon SQL Editor or any PostgreSQL client to run queries:
 
 ```sql
 SELECT * FROM jobs;
@@ -1039,7 +1039,7 @@ This query will show you the processing time for each completed job in seconds.
 
 ## Conclusion
 
-In this guide, you've built a job queue system using Node.js, Bull, and Neon Postgres. This system can handle different types of background tasks, retry failed jobs, and track job status and results in a PostgreSQL database.
+In this guide, you've built a job queue system using Node.js, Bull, and Lakebase Postgres. This system can handle different types of background tasks, retry failed jobs, and track job status and results in a PostgreSQL database.
 
 The combination of Bull's queue management backed by Redis and Neon's serverless Postgres for persistent job tracking provides a scalable and reliable solution for background processing. It is a great foundation for building more complex job processing systems in your applications.
 
@@ -1048,7 +1048,7 @@ You can extend this system by adding more specialized queues, extending the moni
 ## Additional resources
 
 - [Bull Documentation](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md)
-- [Neon Postgres Documentation](/docs)
+- [Neon Documentation](/docs)
 - [Node.js PostgreSQL Client (pg)](https://node-postgres.com/)
 - [Redis Documentation](https://redis.io/documentation)
 

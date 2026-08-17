@@ -2,12 +2,12 @@
 title: Scale your AI application with Neon
 subtitle: Scale your AI application with Neon's Autoscaling and Read Replica features
 summary: >-
-  Scaling options for AI applications that use pgvector on Neon Postgres,
+  Scaling options for AI applications that use pgvector on Lakebase Postgres,
   covering vertical scaling from 0.25 CU (1 GB RAM) to 56 CU (224 GB RAM) with
   autoscaling up to 16 CU, and horizontal scaling via read replicas for
   offloading vector similarity search workloads at no extra storage cost.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.

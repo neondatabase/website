@@ -3,7 +3,7 @@ title: 'Where can I find or generate API keys for Neon?'
 subtitle: 'Generate keys in Account or Organization settings. Neon shows the token once at creation.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -48,7 +48,7 @@ See [Create an organization API key](/docs/manage/api-keys#create-an-organizatio
 
 <TabItem>
 
-Project-scoped keys can only access a single project and can't delete it. Any org member can create one.
+Project-scoped keys have Editor access on a single project: they can read and modify project resources but can't delete the project or manage who can access it. Only organization admins can create them.
 
 1. In your organization's **Settings** > **API keys**, click **Create new** and select **Project-scoped**.
 2. Pick the project, name the key, and click **Create**.
@@ -70,7 +70,7 @@ Use the key with `Authorization: Bearer $NEON_API_KEY` on Neon API calls. For th
 Revocation is immediate and permanent. Any request using a revoked key returns `401 Unauthorized`. To rotate, create a new key first, switch your callers over, then revoke the old one.
 
 <Admonition type="warning" title="The token is shown once and only once">
-Neon displays the secret token a single time, in the modal that opens right after you click **Create**. The Console will list the key's name and ID afterward, but there's no way to view the token again. If you didn't save it, you'll need to revoke the key and create a new one. Store new tokens in a secret manager (AWS KMS, Azure Key Vault, 1Password, Vault, etc.) at creation time.
+Neon displays the secret token a single time, in the modal that opens right after you click **Create**. The Console will list the key's name and ID afterward, but there's no way to view the token again. If you didn't save it, you'll need to revoke the key and create a new one. Store new tokens in a secret manager (AWS KMS, 1Password, Vault, etc.) at creation time.
 </Admonition>
 
 <Admonition type="note" title="There are no client-safe Neon keys">

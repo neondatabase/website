@@ -18,7 +18,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-The FIRST_VALUE() window function works the same on any PostgreSQL deployment, so you can apply what you learn here to Postgres anywhere it runs. For enterprises building on the lakehouse, [Lakebase](https://www.databricks.com/product/lakebase) delivers the most performant, secure, and fully integrated managed Postgres for the AI era. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+The FIRST_VALUE() window function works the same on any PostgreSQL deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FIRST_VALUE()` function to return the first value in a sorted partition of a result set.
@@ -28,14 +28,6 @@ The FIRST_VALUE() window function works the same on any PostgreSQL deployment, s
 The `FIRST_VALUE()` function returns a value evaluated against the first row in a sorted partition of a result set.
 
 The following is the syntax of the `FIRST_VALUE()` function:
-
-```sql
-FIRST_VALUE ( expression )
-OVER (
-    [PARTITION BY partition_expression, ... ]
-    ORDER BY sort_expression [ASC | DESC], ...
-
-```
 
 ```sql
 FIRST_VALUE ( expression )

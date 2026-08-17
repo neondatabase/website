@@ -1,8 +1,8 @@
 ---
 title: Use Neon with Cloudflare Workers
-subtitle: Connect a Neon Postgres database to your Cloudflare Workers application
+subtitle: Connect a Lakebase Postgres database to your Cloudflare Workers application
 summary: >-
-  Connecting Neon Postgres to Cloudflare Workers covers two approaches:
+  Connecting Lakebase Postgres to Cloudflare Workers covers two approaches:
   Cloudflare Hyperdrive (recommended, included in all Workers plans), which
   pools connections across Cloudflare's network using native drivers like
   node-postgres, and the Neon serverless driver, which connects over HTTP or
@@ -10,12 +10,12 @@ summary: >-
   Worker that queries Postgres and needs to choose between Hyperdrive's
   connection pooling and the serverless driver's lightweight setup.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
 
-This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Workers application using two approaches:
+This guide demonstrates how to connect to a Lakebase Postgres database from your Cloudflare Workers application using two approaches:
 
 - **[Hyperdrive](https://developers.cloudflare.com/hyperdrive/)** (recommended): Cloudflare's connection pooling service that provides the lowest possible latencies by performing database connection setup and connection pooling across Cloudflare's network. Hyperdrive is included in all Workers plans and supports native PostgreSQL drivers like [node-postgres](https://node-postgres.com/).
 - **[Neon serverless driver](/docs/serverless/serverless-driver)**: A low-latency Postgres driver designed for serverless environments that connects over HTTP or WebSockets.

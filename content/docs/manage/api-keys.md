@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-04T19:37:07.626Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -24,6 +24,8 @@ Neon supports three types of API keys:
 | Personal API Key       | Any user                    | All organization projects where the user is a member | Valid until revoked; org project access ends if user leaves organization |
 | Organization API Key   | Organization administrators | All projects within the organization                 | Valid until revoked                                                      |
 | Project-scoped API Key | Organization administrators | Single specified project                             | Valid until revoked or project leaves organization                       |
+
+Only organization **Admins** can create organization or project-scoped keys. If you're an Editor, Viewer, or Collaborator, create a personal API key instead; it's scoped to your own access. See [User permissions](/docs/manage/user-permissions) for what each role can do.
 
 While there is no strict limit on the number of API keys you can create, we recommend keeping it under 10,000 per Neon account.
 
@@ -44,14 +46,43 @@ You are responsible for maintaining the records and associations of any API keys
 
 ### Create a personal API key
 
-You can create a personal API key in the Neon Console or using the Neon API.
+You can create a personal API key in the Neon Console, with the Neon CLI, or using the Neon API.
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 In the Neon Console, select **Account settings** > **API keys**. You'll see a list of any existing keys, along with the button to create a new key.
 
 ![Creating a personal API key in the Neon Console](/docs/manage/personal_api_key.png)
+</TabItem>
+
+<TabItem>
+
+The [`neon api-keys create`](/docs/cli/api-keys#create) command creates a personal key. `--name` is required, and the key is printed once:
+
+```bash
+neon api-keys create --name development
+```
+
+```text shouldWrap
+API key
+┌─────────┬─────────────┐
+│ Id      │ Name        │
+├─────────┼─────────────┤
+│ 3225999 │ development │
+└─────────┴─────────────┘
+
+napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
+WARNING: Store this key now: it is not shown again.
+WARNING: This key reaches everything your account can, in every organization. Pass --org-id or --project-id to narrow it.
+```
+
+The key is the last line of stdout, so you can capture it directly:
+
+```bash shouldWrap
+echo "NEON_API_KEY=$(neon api-keys create --name local-dev -o json | jq -r .key)" >> .env
+```
+
 </TabItem>
 
 <TabItem>
@@ -88,13 +119,38 @@ Organization API keys provide admin-level access to all organization resources. 
 
 For more detail about organization-related methods, see [Organization API Keys](/docs/manage/orgs-api#api-keys).
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
 Navigate to your organization's **Settings** > **API keys** to view a list of existing keys and the button to create a new key.
 
 ![creating an api key from the console](/docs/manage/org_api_keys.png)
+</TabItem>
+
+<TabItem>
+
+Pass `--org-id` to [`neon api-keys create`](/docs/cli/api-keys#create). Find your organization ID with `neon orgs list`:
+
+```bash
+neon api-keys create --name orgkey --org-id org-example-12345678
+```
+
+```text shouldWrap
+API key
+┌─────────┬────────┐
+│ Id      │ Name   │
+├─────────┼────────┤
+│ 3243302 │ orgkey │
+└─────────┴────────┘
+
+napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
+WARNING: Store this key now: it is not shown again.
+WARNING: This key reaches every project in org-example-12345678, including ones created later. Pass --project-id instead to restrict it to one.
+```
+
+You need admin permissions in the organization. As a member the command fails with a permissions error naming your role.
+
 </TabItem>
 
 <TabItem>
@@ -127,18 +183,43 @@ curl --request POST \
 
 ### Create project-scoped organization API keys
 
-Project-scoped API keys have [member-level access](/docs/manage/organizations#user-roles-and-permissions), meaning they **cannot** delete the project they are associated with. These keys:
+Project-scoped API keys have [**Editor** access](/docs/manage/user-permissions#per-project-permissions) on their project, meaning they can read and modify project resources but **cannot** delete the project or manage who can access it. These keys:
 
 - Can only access and manage the specified project
 - Cannot perform organization-related actions or create new projects
 - Will stop working if the project is transferred out of the organization
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 In your organization's **Settings** > **API keys**, click **Create new** and select **Project-scoped** to create a key for your chosen project.
 
 ![Project-scoped API keys from the Console](/docs/manage/project_scoped_select.png)
+
+</TabItem>
+
+<TabItem>
+
+Pass `--project-id` to [`neon api-keys create`](/docs/cli/api-keys#create). You don't name the organization: the CLI looks it up from the project, and `--org-id` and `--project-id` are mutually exclusive.
+
+```bash shouldWrap
+neon api-keys create --name only-this-project --project-id some-project-123
+```
+
+```text shouldWrap
+API key
+┌─────────┬───────────────────┬───────────────────┐
+│ Id      │ Name              │ Project           │
+├─────────┼───────────────────┼───────────────────┤
+│ 3243162 │ only-this-project │ some-project-123  │
+└─────────┴───────────────────┴───────────────────┘
+
+napi_examplekey1234567890abcdefghijklmnopqrstuvwxyz
+WARNING: Store this key now: it is not shown again.
+INFO: Limited to some-project-123: it cannot create projects, mint API keys, or read any other project. It can still change and delete everything inside that project.
+```
+
+A project-scoped key is owned by the project's organization, not by your account, so it does not appear in `neon api-keys list`. Use `neon api-keys list --org-id <org-id>` to see it, and pass the same `--org-id` to revoke it.
 
 </TabItem>
 

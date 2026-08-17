@@ -69,6 +69,6 @@ Slugs must match `^[a-z0-9]{1,20}$` and are immutable after the first deployment
 
 ## Environment variables
 
-See [Environment variables](/docs/compute/functions/environment-variables#constraints) for limits on variable count, total size, and the reserved `NEON_` prefix.
+See [Environment variables](/docs/compute/functions/environment-variables#constraints) for limits on variable count and total size.
 
 <NeedHelp/>

@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/postgres-intro
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Explore Postgres features with Neon's Postgres guides. Learn about data types, extensions, functions, and optimizing query performance. Remember, **Neon is Postgres**, so you're encouraged to reference both the Neon documentation and the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/).
@@ -29,7 +29,7 @@ Explore Postgres features with Neon's Postgres guides. Learn about data types, e
 
 <a href="/docs/reference/compatibility" description="Learn about Neon as a managed Postgres service" icon="puzzle">Compatibility</a>
 
-<a href="/docs/postgresql/postgres-version-policy" description="Read about Neon's policy for Postgres version support and maintenance" icon="trend-up">Neon Postgres Version Support</a>
+<a href="/docs/postgresql/postgres-version-policy" description="Read about Lakebase Postgres version support and maintenance policy" icon="trend-up">Lakebase Postgres Version Support</a>
 
 <a href="/docs/postgresql/postgres-upgrade" description="Learn how to upgrade your Postgres version in Neon" icon="trend-up">Upgrade Postgres</a>
 

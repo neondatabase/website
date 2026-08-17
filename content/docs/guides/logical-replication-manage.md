@@ -11,7 +11,7 @@ summary: >-
   require manual intervention on the subscriber.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-22T19:54:54.241Z'
 ---
 
 This topic provides commands for managing publications, subscriptions, and replication slots.
@@ -213,6 +213,8 @@ SELECT * FROM pg_replication_slots;
 ```
 
 It's important to keep an eye on replication lag, which indicates how far behind the subscriber is from the publisher. A significant replication lag could mean that the subscriber isn't receiving updates in a timely manner, which could lead to data inconsistencies.
+
+From the Neon CLI, [`neon inspect db replication-slots`](/docs/cli/inspect#db-replication-slots) shows slot status and lag, and [`neon inspect db subscriptions`](/docs/cli/inspect#db-subscriptions) shows per-table progress on a subscriber.
 
 ## References
 

@@ -4,7 +4,7 @@ subtitle: Build a Web scraper AI Agent in minutes with AgentStack, Neon, and Fir
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-04T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 The rapid evolution of AI agents has created a key challenge: how to build and deploy agents quickly and efficiently. Imagine creating intelligent agents that can not only perform complex tasks but also interact easily with your data infrastructure, without adding unnecessary complexity to the code.
@@ -20,7 +20,7 @@ This example will show you how to:
 - Set up an **AgentStack** project.
 - Use the **AgentStack CLI** to generate agents and tasks.
 - Equip your agents with **tools** like **Neon** for data storage and **Firecrawl** for web scraping.
-- Run your agent crew to scrape the [neon.tech/guides](/guides) page, extract blog post metadata (titles, authors, dates) from it, and store it in a Neon Postgres database.
+- Run your agent crew to scrape the [neon.tech/guides](/guides) page, extract blog post metadata (titles, authors, dates) from it, and store it in a Lakebase Postgres database.
 - Use **AgentOps** for observability of your agent's execution.
 
 ## Prerequisites
@@ -85,7 +85,7 @@ We will create 3 agents for our Web Scraper crew:
 
 - **`web_scraper`:** Responsible for web scraping and markdown extraction.
 - **`data_extractor`:** Specialized in extracting structured data from web content.
-- **`content_storer`:** Manages storing extracted data in a Neon Postgres database.
+- **`content_storer`:** Manages storing extracted data in a Lakebase Postgres database.
 
 Now, let's generate the agents using the AgentStack CLI.
 
@@ -325,7 +325,7 @@ AGENTOPS_API_KEY=YOUR_AGENTOPS_API_KEY
 
 ### Running the Web Scraper agent
 
-Now that we have set up our agents, tasks, and tools, let's run the agent crew to scrape the `neon.tech/guides` page, extract blog post metadata, and store it in a Neon Postgres database.
+Now that we have set up our agents, tasks, and tools, let's run the agent crew to scrape the `neon.tech/guides` page, extract blog post metadata, and store it in a Lakebase Postgres database.
 
 ```bash
 agentstack run

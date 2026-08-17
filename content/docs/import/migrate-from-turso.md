@@ -1,7 +1,7 @@
 ---
-title: Migrate from Turso to Neon Postgres
+title: Migrate from Turso to Lakebase Postgres
 summary: >-
-  Migration guide for moving a Turso (libSQL/SQLite) database to Neon Postgres
+  Migration guide for moving a Turso (libSQL/SQLite) database to Lakebase Postgres
   using pgloader. Dumps the Turso database to a local SQLite file with the
   Turso CLI, then loads it into Neon where pgloader converts SQLite type
   affinities to Postgres types. Use this guide when the source is Turso or
@@ -11,12 +11,12 @@ summary: >-
   supports up to 0.5 GB; larger Turso databases require a paid Neon plan.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This guide describes how to migrate your Turso database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
+This guide describes how to migrate your Turso database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
 
-`pgloader` is an open-source data loading and migration tool that efficiently transfers data from various sources (like CSV, MySQL, SQLite, MS SQL, etc.) into Postgres, handling schema and data transformations on the fly. Since Turso databases are SQLite-compatible, you can dump them to a local SQLite file and then use `pgloader` to migrate that file to Neon Postgres.
+`pgloader` is an open-source data loading and migration tool that efficiently transfers data from various sources (like CSV, MySQL, SQLite, MS SQL, etc.) into Postgres, handling schema and data transformations on the fly. Since Turso databases are SQLite-compatible, you can dump them to a local SQLite file and then use `pgloader` to migrate that file to Lakebase Postgres.
 
 ## Prerequisites
 
@@ -156,7 +156,7 @@ COPY Threads Completion          0          4                     1.080s
       Total import time          ✓          8     0.3 kB          6.581s
 ```
 
-pgloader will automatically create the necessary tables and indexes in your Neon Postgres database, and transfer all data from the `turso_export.db` file. The summary report at the end confirms that the migration completed successfully without errors.
+pgloader will automatically create the necessary tables and indexes in your Lakebase Postgres database, and transfer all data from the `turso_export.db` file. The summary report at the end confirms that the migration completed successfully without errors.
 
 </Steps>
 

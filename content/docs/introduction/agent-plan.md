@@ -12,7 +12,7 @@ summary: >-
   provisioning and fleet management runs through the Neon API, with
   autoscaling, scale-to-zero, branching, and point-in-time recovery included.
 enableTableOfContents: true
-updatedOn: '2026-06-23T22:05:54.707Z'
+updatedOn: '2026-08-17T12:17:37.017Z'
 ---
 
 <InfoBlock>
@@ -25,6 +25,7 @@ updatedOn: '2026-06-23T22:05:54.707Z'
 <a href="/docs/guides/ai-agent-integration">AI agent integration guide</a>
 <a href="/docs/guides/platform-integration-overview">Integrating with Neon</a>
 <a href="/docs/ai/ai-database-versioning">Database versioning with snapshots</a>
+<a href="https://github.com/neondatabase/neon-for-agent-platforms">neon-for-agent-platforms on GitHub</a>
 </DocsList>
 </InfoBlock>
 
@@ -34,7 +35,7 @@ The Neon agent plan provides infrastructure for platforms that deploy Postgres d
 
 ## Why Neon for agent platforms
 
-Neon's architecture aligns with how agent platforms operate:
+The lakebase architecture aligns with how agent platforms operate:
 
 - **Instant provisioning**: Serverless Postgres with separated compute and storage provisions databases in seconds
 - **Autoscaling and scale-to-zero**: Compute scales up and down automatically based on workload, and idle databases cost nothing while remaining instantly accessible
@@ -145,3 +146,12 @@ Once enrolled in the agent plan:
 4. Monitor usage and billing using the Neon API
 
 For step-by-step implementation instructions, see the [AI Agent integration guide](/docs/guides/ai-agent-integration).
+
+<Admonition type="tip" title="Code samples and agent skill">
+The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides TypeScript samples and a companion agent skill for building on the agent plan. Install the companion skill with:
+
+```bash
+npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms -y
+```
+
+</Admonition>

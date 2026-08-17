@@ -4,7 +4,7 @@ subtitle: 'Automate database branching for every preview deployment using the na
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-07-14T00:00:00.000Z'
-updatedOn: '2026-06-03T18:28:10.050Z'
+updatedOn: '2026-08-07T16:05:20.768Z'
 ---
 
 [Nuxt.js](https://nuxt.com) is an open-source, progressive framework built on [Vue.js](https://vuejs.org/) that simplifies web development. It enhances Vue with versatile rendering options, including default [universal rendering (SSR)](https://nuxt.com/docs/guide/concepts/rendering#universal-rendering) for fast initial loads and strong SEO, and [client-side rendering](https://nuxt.com/docs/guide/concepts/rendering#client-side-rendering) for highly interactive applications. Nuxt also supports advanced strategies like [hybrid rendering](https://nuxt.com/docs/guide/concepts/rendering#hybrid-rendering) to mix modes per-route.
@@ -761,6 +761,6 @@ This workflow allows developers to make and test schema changes with confidence,
 - **Vercel-managed Neon Integration:** [Vercel Marketplace](https://vercel.com/marketplace/neon)
 - **Nuxt.js Documentation:** [nuxt.com](https://nuxt.com)
 - **Drizzle ORM:** [orm.drizzle.team](https://orm.drizzle.team)
-- **Neon Documentation:** [neon.tech/docs](/docs)
+- **Neon Documentation:** [neon.com/docs](/docs)
 
 <NeedHelp/>

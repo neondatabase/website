@@ -1,8 +1,8 @@
 ---
-title: Connect a Go application to Neon Postgres
+title: Connect a Go application to Lakebase Postgres
 subtitle: Learn how to run SQL queries in Neon from Go using the pgx library
 summary: >-
-  Connecting a Go application to Neon Postgres with pgx/v5 requires Go 1.21 or
+  Connecting a Go application to Lakebase Postgres with pgx/v5 requires Go 1.21 or
   later and a DATABASE_URL connection string passed via environment variable.
   Use this page for raw SQL access with parameterized queries, not an ORM: it
   walks through CREATE, SELECT, UPDATE, DELETE, bulk inserts via CopyFrom, and
@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 
@@ -19,7 +19,7 @@ description="Pre-built prompt for connecting Go applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Go (Golang) application using [pgx](https://github.com/jackc/pgx), a high-performance and feature-rich PostgreSQL driver for Go.
 
-You'll learn how to connect to your Neon database from a Go application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
+You'll learn how to connect to your database from a Go application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 ## Prerequisites
 
@@ -541,6 +541,11 @@ go run transaction_example.go
 ```
 
 </Steps>
+
+## Connection issues
+
+- If you see an `endpoint ID is not specified` error, the TLS client your Postgres driver depends on doesn't support Server Name Indication (SNI), which Neon uses to route connections. This is uncommon with `pgx/v5`, which uses Go's standard `crypto/tls` package and supports SNI by default, but can occur with an older driver or an outdated TLS implementation.
+- If you encounter an `SSL SYSCALL error: EOF detected` (or a similar connection-reset error), this typically happens when an application tries to reuse a connection after the Neon compute has been suspended due to inactivity. The examples in this guide open a fresh connection with `pgx.Connect` each time they run, so this mainly affects long-running servers that keep a connection or pool open across requests. For production use, consider [pgxpool](https://pkg.go.dev/github.com/jackc/pgx/v5/pgxpool) with health checks, or reconnecting on error.
 
 <details>
 <summary>**Notes for AI-assisted setup**</summary>

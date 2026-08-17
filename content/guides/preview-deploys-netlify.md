@@ -1,10 +1,10 @@
 ---
 title: Automate Preview Deployments with Netlify and Neon Database Branching
-subtitle: Set up automated preview deployments with isolated database branches for every pull request using GitHub Actions, Netlify, and Neon Postgres
+subtitle: Set up automated preview deployments with isolated database branches for every pull request using GitHub Actions, Netlify, and Lakebase Postgres
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2025-11-25T00:00:00.000Z'
-updatedOn: '2025-11-27T14:22:42.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 ## Introduction

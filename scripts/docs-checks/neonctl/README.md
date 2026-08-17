@@ -17,6 +17,21 @@ The schema is parsed from the neonctl TypeScript source (not `--help`
 output, which has known per-subcommand bugs) and patched by `overrides.json`
 for values the parser can't resolve.
 
+## Dynamically-registered subcommands
+
+Most commands declare subcommands as literal `.command('name', ...)` chains the
+parser reads directly. `inspect db` instead registers its 14 leaves in a loop
+over `INSPECT_QUERIES` (in `src/utils/inspect_queries.ts`), which is invisible
+to a static parse. `dynamic-commands.json` declares which const to enumerate;
+`applyDynamicCommands` in `generate-schema.js` reads its keys + describes from
+source and injects the leaves (throwing if the const or parent can't be
+resolved, so drift fails the refresh loudly).
+
+Verify with `npm run cli-docs -- verify-dynamic`: it cross-checks the schema
+leaves against a local `neon <path> --help`. Local/manual (needs the `neon`
+binary) and version-gated — it skips if the installed binary doesn't match
+`schema.json`'s pin, rather than reporting spurious drift.
+
 ## Run
 
 All commands run through a single `cli-docs` dispatcher. Run it with no
@@ -29,6 +44,7 @@ npm run cli-docs -- refresh               # full refresh from the latest GitHub 
 npm run cli-docs -- schema --src <path>   # regenerate schema.json from a CLI checkout
 npm run cli-docs -- scaffold <name> --group <group-id>   # wire a new command
 npm run cli-docs -- preview               # emit fragments to fragments/ (local preview)
+npm run cli-docs -- verify-dynamic        # cross-check dynamic subcommands vs local `neon --help`
 ```
 
 For a local Markdown validation report:
@@ -96,6 +112,8 @@ override deletes a stale key.
 | `schema.json`                     | Committed schema. Canonical, version-pinned, the only refresh artifact. |
 | `generate-schema.js`              | Parses neonctl's TS source → `schema.json`.                   |
 | `overrides.json`                  | Hand-maintained patches for parser-unresolvable values.       |
+| `dynamic-commands.json`           | Declares loop-registered subcommands to enumerate from source (e.g. `inspect db`). |
+| `verify-dynamic.js`               | `verify-dynamic`: cross-checks dynamic subcommands vs a matching-version local `neon --help`. |
 | `generate-docs.js`                | Markdown renderers shared by components + llms mirror; `--fragments` preview. |
 | `cli.js`                          | The `npm run cli-docs` dispatcher; routes to the scripts below. |
 | `fragments/`                      | Local-only preview dump from `npm run cli-docs -- preview` (gitignored). |
@@ -131,6 +149,14 @@ The TypeScript source is canonical. CI only reads `schema.json`.
   by keeping output out of bash fences entirely.)
 - **Enum-reference defaults render as source text** unless patched via
   `overrides.json`.
+- **Factory-built option specs aren't resolved.** An option whose spec is a
+  factory call rather than an object literal (e.g. `services: servicesOption({…})`
+  in `config init` and `env pull`, where `servicesOption()` lives in the
+  non-command file `neon_services.ts` and builds its `describe` from a
+  conditional + array join) falls back to `type: unknown`; both are patched in
+  `overrides.json`. `.options(…)` and `...spread` positions built from a factory
+  call *are* resolved (see `resolveOptionsObject`) — the gap is only the
+  individual-option-value position (`parseOptionSpec`).
 - **Server-side defaults** (generated branch names, default CU) exist only
   in the control plane; they are documented as verified `defaultText`
   overrides, never inferred.

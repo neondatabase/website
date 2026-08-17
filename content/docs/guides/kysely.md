@@ -2,7 +2,7 @@
 title: Connect from Kysely to Neon
 subtitle: Learn how to connect to Neon from Kysely
 summary: >-
-  Connect Kysely to Neon Postgres using the Neon HTTP serverless driver for
+  Connect Kysely to Lakebase Postgres using the Neon HTTP serverless driver for
   edge environments, the Neon WebSocket driver for serverless workloads that
   need transactions, or node-postgres for long-running servers. Choose this
   guide when you want full SQL control with TypeScript type-checking and need
@@ -10,7 +10,7 @@ summary: >-
   interface-based schema definitions, client initialization per driver,
   optional migrations via FileMigrationProvider, and CRUD query examples.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/kysely-prompt.md" 
@@ -30,7 +30,7 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 
 </InfoBlock>
 
-Kysely is a modern, type‑safe SQL query builder for TypeScript. Unlike traditional ORMs, it focuses on providing a flexible and intuitive API for building SQL queries while leveraging TypeScript's type system for safety and autocompletion. This guide walks you through connecting your application to a Neon Postgres database using Kysely.
+Kysely is a modern, type‑safe SQL query builder for TypeScript. Unlike traditional ORMs, it focuses on providing a flexible and intuitive API for building SQL queries while leveraging TypeScript's type system for safety and autocompletion. This guide walks you through connecting your application to a Lakebase Postgres database using Kysely.
 
 To connect a TypeScript/Node.js project to Neon using Kysely, follow these steps:
 

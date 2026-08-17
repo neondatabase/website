@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 import { cn } from 'utils/cn';
+import normalizeDocNavigationPath from 'utils/normalize-doc-navigation-path';
 
 import Tag from '../../tag';
 
@@ -26,12 +27,14 @@ function hasActiveDescendant(items, slug) {
 }
 
 const MethodDot = ({ method }) => (
-  <span
-    className={cn(
-      'mt-[5px] inline-block size-[5px] shrink-0 rounded-full opacity-70',
-      METHOD_DOT_COLOR[method?.toUpperCase()] ?? 'bg-gray-new-50'
-    )}
-  />
+  <span className="flex h-[1.25em] shrink-0 items-center">
+    <span
+      className={cn(
+        'size-[5px] rounded-full opacity-70',
+        METHOD_DOT_COLOR[method?.toUpperCase()] ?? 'bg-gray-new-50'
+      )}
+    />
+  </span>
 );
 
 const Item = ({
@@ -49,7 +52,7 @@ const Item = ({
   closeMobileMenu = null,
 }) => {
   const pathname = usePathname();
-  const currentSlug = pathname.replace(basePath, '');
+  const currentSlug = normalizeDocNavigationPath(pathname.replace(basePath, ''));
 
   const isActive = slug === currentSlug;
   const isActiveMenu = isActive || hasActiveDescendant(items, currentSlug);
@@ -207,10 +210,10 @@ const Item = ({
             transition={{ duration: 0.2 }}
           >
             <ul className="border-l border-gray-new-80 pl-3 dark:border-gray-new-20">
-              {items.map((item) => (
+              {items.map((item, index) => (
                 <Item
                   {...item}
-                  key={item.slug ?? item.title}
+                  key={item.slug ?? item.title ?? item.section ?? index}
                   basePath={basePath}
                   closeMobileMenu={closeMobileMenu}
                   isHidden={isCollapsed}

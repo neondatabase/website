@@ -3,19 +3,19 @@ title: Inngest
 subtitle: Quickly build AI RAG and Agentic workflows that scale with Inngest and Neon
 summary: >-
   Inngest is a TypeScript workflow framework for building AI RAG and agentic
-  pipelines on Neon Postgres, providing per-step caching, automatic retries,
+  pipelines on Lakebase Postgres, providing per-step caching, automatic retries,
   concurrency controls, and LLM request offloading via step.ai.infer() that
   pauses compute while waiting for slow model responses. Use this page when you
   need database-change-triggered or event-driven AI workflows, or want to avoid
   unnecessary serverless compute costs during LLM calls. Starter apps for
   Next.js RAG, multi-tenant RAG, and auto-embeddings with OpenAI are included.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 Inngest is a popular framework for building AI RAG and Agentic workflows. [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=inngest-ai-integration) provides automatic retries, caching along with concurrency and throttling management and AI requests offloading.
 
-Inngest also integrates with Neon Postgres to trigger workflows based on database changes.
+Inngest also integrates with the database to trigger workflows based on database changes.
 
 ## Build RAG with `step.run()`
 
@@ -96,9 +96,9 @@ Learn more about using `step.ai.infer()` in the following article: [step.ai: Bui
 
 ## Trigger AI workflows based on database changes
 
-Inngest also integrates with Neon Postgres to trigger AI workflows based on database changes:
+Inngest also integrates with Lakebase Postgres to trigger AI workflows based on database changes:
 
-![Inngest integrates with Neon Postgres to trigger AI workflows based on database changes](/docs/guides/inngest.jpg)
+![Inngest integrates with Lakebase Postgres to trigger AI workflows based on database changes](/docs/guides/inngest.jpg)
 
 This integration allows you to trigger AI workflows based on database changes, such as generating embeddings as soon as a new row is inserted into a table (see example below).
 

@@ -2,13 +2,13 @@
 title: Connect from Knex to Neon
 subtitle: Learn how to connect to Neon from Knex
 summary: >-
-  Connect Knex to Neon Postgres by passing the Neon connection string to the
+  Connect Knex to Lakebase Postgres by passing the Neon connection string to the
   `connectionString` option with `sslmode=require`. Serverless deployments
   should use Neon's pooled endpoint to prevent connection exhaustion. You can
   also improve performance by switching to `pg-native` via the
   `NODE_PG_FORCE_NATIVE` environment variable.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Knex is an open-source SQL query builder for Postgres. This guide covers the following topics:
@@ -54,6 +54,10 @@ DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east
 ```
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
+
+<Admonition type="important">
+Use a pooled connection string for your application at runtime, but use a direct (non-pooled) connection string when running Knex migrations. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that migration tools rely on, so running migrations over a pooled connection can lead to errors. See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Performance tips
 

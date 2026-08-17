@@ -21,7 +21,7 @@ When this prompt is triggered, automatically configure the open Kotlin project a
 1.  If the project uses a version catalog (`gradle/libs.versions.toml`), add:
     ```toml
     [versions]
-    postgresql = "42.7.13"
+    postgresql = "42.7.7"
     dotenv = "6.5.1"
 
     [libraries]
@@ -35,7 +35,7 @@ When this prompt is triggered, automatically configure the open Kotlin project a
     ```
 2.  If there is no version catalog, add these dependencies directly to the module `build.gradle.kts`:
     ```kotlin
-    implementation("org.postgresql:postgresql:42.7.13")
+    implementation("org.postgresql:postgresql:42.7.7")
     implementation("io.github.cdimascio:dotenv-kotlin:6.5.1")
     ```
 

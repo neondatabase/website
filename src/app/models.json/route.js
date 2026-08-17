@@ -12,10 +12,10 @@ export const dynamic = 'force-static';
 // read this endpoint.
 //
 // Every entry is live-verified against the Neon AI Gateway (text output +
-// image-input + tool-calling probed directly). The data in ./data.json is
-// generated from the Neon provider definition in models.dev and committed here
-// (like .well-known/ai-catalog.json) so the endpoint stays self-contained.
-// Served at /models.json.
+// image-input + tool-calling probed directly). ./data.json is authored and
+// reviewed in this repo rather than derived from anywhere, so publishing a model
+// never waits on a third party; the `neon` provider on models.dev is a mirror
+// kept in sync afterwards. Served at /models.json.
 export function GET() {
   return new Response(JSON.stringify(data), {
     headers: {

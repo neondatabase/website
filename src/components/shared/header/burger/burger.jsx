@@ -11,7 +11,7 @@ const LINE_STYLE = {
   willChange: 'transform, opacity',
 };
 
-const Burger = ({ className = null, isToggled = null, onClick = null }) => (
+const Burger = ({ className = null, dataTest = null, isToggled = null, onClick = null }) => (
   <LazyMotion features={domAnimation}>
     <m.button
       className={cn('relative flex h-8 w-8 shrink', className)}
@@ -19,6 +19,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
       initial={false}
       animate={isToggled ? 'toggled' : 'initial'}
       aria-label={isToggled ? 'Close menu' : 'Open menu'}
+      data-test={dataTest}
       onClick={onClick}
     >
       <m.span
@@ -185,6 +186,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
 
 Burger.propTypes = {
   className: PropTypes.string,
+  dataTest: PropTypes.string,
   isToggled: PropTypes.bool,
   onClick: PropTypes.func,
 };

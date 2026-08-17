@@ -3,7 +3,7 @@ title: 'Where can I find my database connection details in the Neon Console?'
 subtitle: 'Everything you need lives in the Connect widget on the Project Dashboard.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: find-database-connection-string-url
 ---
 
-Open your project in the [Neon Console](https://console.neon.tech) and click **Connect** on the **Project Dashboard**. The **Connect to your database** modal lists every detail you need to connect: branch, compute, database, role, host, password, and a constructed connection string. They all live in this one widget rather than being scattered across the Console.
+Open your project in the [Neon Console](https://console.neon.tech) and click **Connect** on the **Project Dashboard**. The **Connect to your database** modal lists every detail you need to connect: branch, compute, database, role, host, password, and a constructed connection string. See [Connect from any app](/docs/connect/connect-from-any-app).
 
 ## Open the Connect widget
 
@@ -43,7 +43,7 @@ Direct: ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech
 Pooled: ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech
 ```
 
-The compute ID (the `ep-...` segment) is the same in both. See [Connection pooling](/docs/connect/connection-pooling) for when to use each.
+The compute ID (the `ep-...` segment) is the same in both. Neon shows the pooled string by default. See [Connection pooling](/docs/connect/connection-pooling) for when to use each.
 
 ## Individual fields for a `.env` file
 
@@ -57,7 +57,7 @@ PGPASSWORD=AbC123dEf
 PGPORT=5432
 ```
 
-Neon uses the default Postgres port, `5432`. See [Connect from any app](/docs/connect/connect-from-any-app#get-a-connection-string-from-the-neon-console) for more.
+Neon uses the default Postgres port, `5432`.
 
 <Admonition type="tip" title="Looking for code snippets?">
 The Connect modal also shows ready-to-paste examples for Node.js, Python, Go, Java, Rust, and other languages, with the connection string baked in. Switch the **Connection examples** dropdown to your language of choice.

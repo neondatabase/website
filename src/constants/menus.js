@@ -9,9 +9,9 @@ export default {
           title: 'Core Primitives',
           items: [
             {
-              title: 'Database',
+              title: 'Lakebase Postgres',
               to: LINKS.postgresOverview,
-              description: 'Serverless Postgres',
+              description: 'Serverless Postgres database',
             },
             {
               title: 'Auth',
@@ -52,6 +52,11 @@ export default {
               title: 'Branching',
               to: LINKS.branching,
               description: 'Faster Postgres workflows',
+            },
+            {
+              title: 'Search',
+              to: LINKS.lakebaseSearch,
+              description: 'Vector, keyword, and hybrid search',
             },
             {
               title: 'Instant Restore',

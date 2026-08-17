@@ -147,12 +147,12 @@ const AI_CHATBOTS = [
   },
 ];
 
-const DropdownMenu = ({ gitHubPath, className }) => {
+const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
   const siteUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || '';
-  const markdownPath = `/${gitHubPath.replace('content/', '')}`;
+  const markdownPath = customMarkdownPath || `/${gitHubPath.replace('content/', '')}`;
   const markdownUrl = `${siteUrl}${markdownPath}`;
 
   const close = useCallback(() => setIsOpen(false), []);
@@ -220,6 +220,7 @@ const DropdownMenu = ({ gitHubPath, className }) => {
 
 DropdownMenu.propTypes = {
   gitHubPath: PropTypes.string.isRequired,
+  markdownPath: PropTypes.string,
   className: PropTypes.string,
 };
 

@@ -1,15 +1,15 @@
 ---
 title: The lakebase_vector extension
-subtitle: Fast approximate nearest-neighbor vector search for Neon Postgres
+subtitle: Fast approximate nearest-neighbor vector search for Lakebase Postgres
 summary: >-
-  The lakebase_vector extension adds the lakebase_ann index type to Neon Postgres
+  The lakebase_vector extension adds the lakebase_ann index type to Lakebase Postgres
   for fast approximate nearest-neighbor vector search. It requires no migration
   from pgvector — the same vector types, distance operators, and query syntax
   work unchanged. Use this page to enable the extension, create a lakebase_ann
   index, configure build_mode, tune search with the lakebase_ann.probes and
   lakebase_ann.epsilon GUCs, and reference all operator classes and index options.
 enableTableOfContents: true
-updatedOn: '2026-07-14T23:16:53.813Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 The `lakebase_vector` extension adds the `lakebase_ann` index type to Postgres for approximate nearest-neighbor (ANN) vector search. It is a drop-in companion to `pgvector`: the same `vector` types, distance operators, and query syntax work unchanged; only the index type changes.

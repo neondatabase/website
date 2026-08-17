@@ -1,15 +1,15 @@
 ---
 title: Sentiment Analysis with Azure AI Services and Neon
-subtitle: Learn how to analyze customer feedback using Azure AI Language and store results in Neon Postgres
+subtitle: Learn how to analyze customer feedback using Azure AI Language and store results in Lakebase Postgres
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-30T00:00:00.000Z'
-updatedOn: '2026-01-07T13:45:46.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Analyzing customer sentiment can help you understand your customer satisfaction and identify areas for improvement. The Azure AI Language Services provide tools for sentiment analysis, key phrase extraction, and language detection which can be used to analyze customer feedback and extract valuable insights.
 
-In this guide, you'll learn how to use Azure AI Language Services to analyze customer feedback and save the results in Neon Postgres. We'll go through setting up your environment, creating a database to store feedback and analysis results, and running the analysis to get useful insights.
+In this guide, you'll learn how to use Azure AI Language Services to analyze customer feedback and save the results in Lakebase Postgres. We'll go through setting up your environment, creating a database to store feedback and analysis results, and running the analysis to get useful insights.
 
 ## Prerequisites
 
@@ -115,7 +115,7 @@ With everything set up, let's start implementing the sentiment analysis script. 
 
 ### Database Connection
 
-In this step, we'll set up a connection to our Neon Postgres database using the `pg` package. This connection will allow you to read customer feedback and store sentiment analysis results whenever the analysis script runs.
+In this step, we'll set up a connection to our Lakebase Postgres database using the `pg` package. This connection will allow you to read customer feedback and store sentiment analysis results whenever the analysis script runs.
 
 We'll use a connection pool to manage multiple database connections efficiently, which is especially useful when running scripts that perform multiple queries.
 
@@ -428,7 +428,7 @@ Alternatively, you can use a scheduled task to process feedback at regular inter
 
 2. Create a new Azure Function with a timer trigger. The schedule expression `0 0 */2 * * *` will run the function every two hours.
 
-3. Replace the default function code with the following to process the feedback from your Neon Postgres database:
+3. Replace the default function code with the following to process the feedback from your Lakebase Postgres database:
 
    ```javascript
    const { processFeedback } = require('./src/analyze');
@@ -467,7 +467,7 @@ The timer schedule is defined in the `function.json` file as follows:
 
 This configuration makes sure that the function runs every two hours. You can adjust the schedule as needed using a [cron expression](https://learn.microsoft.com/en-gb/azure/azure-functions/functions-bindings-timer).
 
-For more details on connecting Azure Functions to a Postgres database and deploying the function to Azure, see the [Building a Serverless Referral System with Neon Postgres and Azure Functions](/guides/azure-functions-referral-system) guide.
+For more details on connecting Azure Functions to a Postgres database and deploying the function to Azure, see the [Neon documentation](/docs/introduction).
 
 ## Analyzing Results
 
@@ -502,7 +502,7 @@ Now that you've processed customer feedback and stored the sentiment analysis re
 
 ## Conclusion
 
-In this guide, we covered how to analyze customer feedback using Azure AI Language Services and store the results in a Neon Postgres database. This setup is just a starting point. You can expand it by adding real-time triggers, building dashboards, or supporting multiple languages.
+In this guide, we covered how to analyze customer feedback using Azure AI Language Services and store the results in a Lakebase Postgres database. This setup is just a starting point. You can expand it by adding real-time triggers, building dashboards, or supporting multiple languages.
 
 The Azure AI Language service also includes SDKs for other languages like [Python](https://learn.microsoft.com/en-us/python/api/overview/azure/ai-textanalytics-readme), [Java](https://learn.microsoft.com/en-us/java/api/overview/azure/ai-textanalytics-readme), and [.NET](https://learn.microsoft.com/en-us/dotnet/api/overview/azure/ai.textanalytics-readme), so you can integrate sentiment analysis into your existing applications.
 

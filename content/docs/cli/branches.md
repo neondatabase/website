@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-07-14T22:23:35.340Z'
+updatedOn: '2026-07-22T13:42:19.210Z'
 redirectFrom:
   - /docs/reference/cli-branches
   - /docs/cli/branch
@@ -48,7 +48,7 @@ neon branches list --project-id solitary-leaf-288182
 └────────────────────────┴──────────────────────────┴──────────────────────┴──────────────────────┘
 ```
 
-Branch names include text labels that indicate status: `[default]` marks the project's default branch, `[protected]` marks a protected branch, and `[current]` marks the branch pinned in your local `.neon` context file.
+Branch names include text labels that indicate status: `[default]` marks the project's default branch, `[protected]` marks a protected branch, `[anon]` marks an anonymized branch, and `[current]` marks the branch pinned in your local `.neon` context file.
 
 List branches with `--output json`, which returns more information than the `table` format:
 
@@ -262,6 +262,12 @@ Create a schema-only branch:
 
 ```bash
 neon branches create --schema-only
+```
+
+Create a [protected branch](/docs/guides/protected-branches):
+
+```bash
+neon branches create --name production --protected
 ```
 
 ## neon branches reset (#reset)

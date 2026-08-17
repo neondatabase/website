@@ -20,7 +20,7 @@ This is the Neon database company's marketing website and documentation hub. It'
 - **Search:** Algolia for documentation search
 - **Animations:** GSAP, Framer Motion, Rive
 - **Code Highlighting:** Shiki
-- **Testing:** Cypress for E2E tests
+- **Testing:** Playwright for E2E tests, Vitest for unit tests
 
 ## Project Structure
 
@@ -71,7 +71,8 @@ npm run lint:md     # Markdown lint audit: intentional use only, never automatic
 ### Testing
 
 ```bash
-npm run test             # Open Cypress
+npm run test             # Run the complete Playwright E2E matrix
+npm run test:critical:ui # Open Playwright UI mode
 npm run check:broken-links -- https://neon.com  # Check for broken links
 ```
 
@@ -111,6 +112,8 @@ Official Neon documentation written and maintained by the Neon docs team. All pa
 ### content/guides/ — Third-party integration guides
 
 Community and third-party contributed guides showing how to use Neon with other technologies, frameworks, and services. These go through a lighter review process than core docs. Guides do **not** require a `navigation.yaml` entry — they are surfaced through their own index. Follow the same frontmatter and style conventions as `content/docs/` unless a guide contributor has a specific format.
+
+Optional guide-only field: `canonical` — an absolute `http://` or `https://` URL. When set, `<link rel="canonical">` points there instead of the Neon guide URL, and the guide is omitted from the sitemap. Use it when a partner published the same guide and should receive the search ranking. Invalid values fail the build.
 
 ### Updating components
 

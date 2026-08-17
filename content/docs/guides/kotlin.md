@@ -65,7 +65,7 @@ Create a project using the Gradle `init` command. This sets up a standard Kotlin
 
     ```toml title="gradle/libs.versions.toml"
     [versions]
-    postgresql = "42.7.13"
+    postgresql = "42.7.7"
     dotenv = "6.5.1"
 
     [libraries]

@@ -1,17 +1,17 @@
 ---
 title: Database Migrations in Spring Boot with Flyway and Neon
-subtitle: Learn how to manage database schema changes in a Spring Boot application using Flyway with Neon Postgres.
+subtitle: Learn how to manage database schema changes in a Spring Boot application using Flyway with Lakebase Postgres.
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-07T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Database schema management is an essential part of every application development and maintenance process.
 
 As your application grows, you need a reliable way to manage database changes across different environments.
 
-This guide will walk you through setting up and using [Flyway](https://github.com/flyway/flyway) for database migrations in a [Spring Boot](https://github.com/spring-projects/spring-boot) application with Neon Postgres.
+This guide will walk you through setting up and using [Flyway](https://github.com/flyway/flyway) for database migrations in a [Spring Boot](https://github.com/spring-projects/spring-boot) application with Lakebase Postgres.
 
 ## Prerequisites
 
@@ -326,7 +326,7 @@ There are several things to keep in mind when managing database migrations:
 
 ## Conclusion
 
-Using Flyway with Spring Boot and Neon Postgres provides a production ready solution for managing database schema changes. By following these practices, you can ensure that your database schema evolves safely and consistently across all environments.
+Using Flyway with Spring Boot and Lakebase Postgres provides a production ready solution for managing database schema changes. By following these practices, you can ensure that your database schema evolves safely and consistently across all environments.
 
 Remember to always test your migrations thoroughly and have a solid backup and rollback strategy in place. Neon's features like branching and point-in-time recovery can be a great addition to your already existing lifecycle of your database schema.
 

@@ -12,7 +12,7 @@ export async function GET() {
       subfolder: 'landing',
     },
     version: '1.0.0',
-    websiteUrl: 'https://neon.tech/docs/ai/neon-mcp-server',
+    websiteUrl: 'https://neon.com/docs/ai/neon-mcp-server',
     icons: [
       {
         src: 'https://neon.com/brand/neon-logo-light-color.svg',

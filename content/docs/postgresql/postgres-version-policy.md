@@ -1,5 +1,5 @@
 ---
-title: Neon Postgres Version Support Policy
+title: Lakebase Postgres Version Support Policy
 summary: >-
   Neon's Postgres version support policy tracks the latest major versions,
   applies minor releases automatically at the next compute restart, and
@@ -7,7 +7,7 @@ summary: >-
   Minor release downgrades and version skipping are not supported. Upgrading
   to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
-updatedOn: '2026-06-18T20:46:14.637Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).

@@ -1,8 +1,11 @@
 import { describe, it, expect } from 'vitest';
 
 import {
+  BUMP_ACTION,
   NON_OPERATION_RAW_EXPORTS,
+  REGEN_ACTION,
   computeCoverage,
+  groupCoverageActions,
   operationIdsFromSpec,
   sdkRawOperationNames,
 } from './api-coverage.mjs';
@@ -64,6 +67,7 @@ describe('computeCoverage', () => {
     expect(result.sdkNotDocumented).toEqual([]);
     expect(result.documentedNotInSdk).toEqual([]);
     expect(result.specNotDocumented).toBeNull();
+    expect(result.documentedNotInSpec).toBeNull();
     expect(result.specNotInSdk).toBeNull();
   });
 
@@ -93,5 +97,70 @@ describe('computeCoverage', () => {
     });
     expect(result.specNotDocumented).toEqual(['newEndpoint']);
     expect(result.specNotInSdk).toEqual(['newEndpoint']);
+    expect(result.documentedNotInSpec).toEqual([]);
+  });
+
+  it('flags documented operations the spec no longer exposes (stale artifacts)', () => {
+    // Synthetic op names — `removedOp` stands for the build-breaking class where
+    // the committed manifest still lists an operation the live spec has dropped.
+    const result = computeCoverage({
+      documentedOps: ['presentOp', 'removedOp'],
+      rawOps: ['presentOp'],
+      specOps: ['presentOp'],
+    });
+    expect(result.documentedNotInSpec).toEqual(['removedOp']);
+    expect(result.specNotDocumented).toEqual([]);
+  });
+});
+
+describe('groupCoverageActions', () => {
+  const group = (coverage, opts) =>
+    groupCoverageActions(coverage, { sdkVersion: '1.0.0', ...opts });
+
+  it('routes a stale documented op (missing from spec AND sdk) to regenerate, not bump', () => {
+    // Regression for the routing bug: `removedOp` is gone from the spec and
+    // absent from the SDK, so it lands in documentedNotInSdk too. Spec-first
+    // classification must call this "regenerate", never "bump @neon/sdk".
+    const coverage = computeCoverage({
+      documentedOps: ['presentOp', 'removedOp'],
+      rawOps: ['presentOp'],
+      specOps: ['presentOp'],
+    });
+    const groups = group(coverage, { hasSpec: true });
+    const forOp = groups.find((g) => g.ops.includes('removedOp'));
+    expect(forOp.action).toBe(REGEN_ACTION);
+    expect(groups.some((g) => g.action === BUMP_ACTION)).toBe(false);
+  });
+
+  it('routes a genuine SDK-behind op to bump', () => {
+    const coverage = computeCoverage({
+      documentedOps: ['presentOp', 'sdkMissingOp'],
+      rawOps: ['presentOp'],
+      specOps: ['presentOp', 'sdkMissingOp'],
+    });
+    const groups = group(coverage, { hasSpec: true });
+    const forOp = groups.find((g) => g.ops.includes('sdkMissingOp'));
+    expect(forOp.action).toBe(BUMP_ACTION);
+  });
+
+  it('emits no groups when everything is aligned', () => {
+    const coverage = computeCoverage({
+      documentedOps: ['presentOp'],
+      rawOps: ['presentOp'],
+      specOps: ['presentOp'],
+    });
+    expect(group(coverage, { hasSpec: true })).toEqual([]);
+  });
+
+  it('offline: reports documentedNotInSdk with an ambiguous action (no spec to classify)', () => {
+    const coverage = computeCoverage({
+      documentedOps: ['presentOp', 'removedOp'],
+      rawOps: ['presentOp'],
+    });
+    const groups = group(coverage, { hasSpec: false });
+    const forOp = groups.find((g) => g.ops.includes('removedOp'));
+    expect(forOp).toBeDefined();
+    expect(forOp.action).not.toBe(BUMP_ACTION);
+    expect(forOp.action).not.toBe(REGEN_ACTION);
   });
 });

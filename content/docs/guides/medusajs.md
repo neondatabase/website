@@ -1,9 +1,9 @@
 ---
 title: Self-Host Medusa with Neon
-subtitle: Learn how to self-host Medusa using Neon Postgres as your database.
+subtitle: Learn how to self-host Medusa using Lakebase Postgres as your database.
 summary: >-
   Self-hosting Medusa, an open-source headless e-commerce platform, with Neon
-  serverless Postgres uses a Neon connection string passed via `--db-url` to
+  serverless Lakebase Postgres uses a Neon connection string passed via `--db-url` to
   `create-medusa-app`, which runs database migrations and seeds demo data
   automatically. A non-pooled connection string is required during initial
   setup for migrations; switch to the pooled string afterward for better
@@ -11,12 +11,12 @@ summary: >-
   and self-hosted environments such as DigitalOcean, AWS EC2, Render, and
   Fly.io.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.
 
-In this guide, you'll learn how to set up and self-host Medusa using [Neon](https://neon.com) as your Postgres database. Neon is the backend for apps and agents. Neon Postgres is serverless, with autoscaling and scale-to-zero, making it an excellent choice for hosting your Medusa backend.
+In this guide, you'll learn how to set up and self-host Medusa using [Neon](https://neon.com) as your Postgres database. Neon is the backend for apps and agents. Lakebase Postgres is serverless, with autoscaling and scale-to-zero, making it an excellent choice for hosting your Medusa backend.
 
 ## Prerequisites
 

@@ -11,13 +11,21 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/project-sharing-guide
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-04T15:25:12.468Z'
 ---
 
 You can invite other users to collaborate with you on a Neon project. Project collaboration lets other users access and contribute to your project from all supported Neon interfaces, including the Neon Console, Neon API, and Neon CLI. Follow this guide to learn how.
 
+<Admonition type="important">
+Project sharing is being deprecated and will be removed in a future release, so switch to organization-based collaboration now: add the person to your organization as a **Collaborator**, then grant them a permission on each project they need. See [Assign project access](/docs/manage/user-permissions#assign-project-access).
+
+Project sharing still works today, and it remains the option for organizations on the [legacy permissions](/docs/manage/user-permissions#legacy-permissions) model, including [Vercel-managed organizations](/docs/guides/vercel-managed-integration).
+
+Note that the **Collaborator** organization role is not the same as a project-sharing collaborator, even though the names match. A Collaborator is a member of your organization who you grant per-project permissions to. A project-sharing collaborator is an external Neon account invited to a single project, as described on this page.
+</Admonition>
+
 <Admonition type="note">
-Use project collaboration to work with people outside your organization. If you're working with team members, create an [Organization](/docs/manage/organizations) instead. Organization members get automatic access to all projects within that organization. Organizations can still use project collaboration when needed (for example, to allow an external contractor to contribute to a specific project without making them a full organization member).
+Use project collaboration to work with people outside your organization. If you're working with team members, create an [Organization](/docs/manage/organizations) instead. Organization members get access to projects based on their organization role and any per-project permissions you grant them.
 </Admonition>
 
 ## Set up Neon accounts

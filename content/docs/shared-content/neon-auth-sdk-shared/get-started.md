@@ -1,10 +1,10 @@
 ---
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
 
-Managed Better Auth lets you add authentication to your app in seconds. User data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
+Managed Better Auth lets you add authentication to your app in seconds. User data is synced directly to your database, so you can query and join it just like any other table.
 
 <Steps>
 

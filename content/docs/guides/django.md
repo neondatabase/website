@@ -2,11 +2,11 @@
 title: Connect a Django application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Django application
 summary: >-
-  Connecting Django to Neon serverless Postgres requires configuring the
+  Connecting Django to Neon serverless Lakebase Postgres requires configuring the
   `DATABASES` block in `settings.py` with the psycopg3 driver, `sslmode:
   require`, and `CONN_HEALTH_CHECKS: True` to prevent dropped connections when
-  Neon's compute scales to zero after 5 minutes of inactivity. Use this page
-  when setting up a new Django-to-Neon connection or debugging the `Endpoint ID
+  the compute scales to zero after 5 minutes of inactivity. Use this page
+  when setting up a new Django connection or debugging the `Endpoint ID
   is not specified` SNI error, which occurs with psycopg2 and libpq versions
   older than v14. For schema migrations after connecting, see the separate Django
   Migrations guide.
@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
@@ -105,6 +105,18 @@ Neon places computes into an idle state and closes connections after 5 minutes o
 
 You can find all of the connection details listed above by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
+Add a `.env` file to your project's root directory with the individual connection parameters (not a single `DATABASE_URL`, since Django's `DATABASES` setting expects separate fields):
+
+```shell shouldWrap
+PGHOST="<endpoint_hostname>.neon.tech"
+PGDATABASE="<dbname>"
+PGUSER="<user>"
+PGPASSWORD="<password>"
+PGPORT=5432
+```
+
+> Replace `<endpoint_hostname>`, `<dbname>`, `<user>`, and `<password>` with your actual database credentials.
+
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
 
 ## Test the connection
@@ -176,18 +188,18 @@ For schema migration with Django, see our guide:
 
 <DetailIconCards>
 
-<a href="/docs/guides/django-migrations" description="Schema migration with Neon Postgres and Django" icon="app-store" icon="app-store">Django Migrations</a>
+<a href="/docs/guides/django-migrations" description="Schema migration with Lakebase Postgres and Django" icon="app-store" icon="app-store">Django Migrations</a>
 
 </DetailIconCards>
 
 ## Django application blog post and sample application
 
-Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
+Learn how to use Django with Lakebase Postgres with this blog post and the accompanying sample application.
 
 <DetailIconCards>
-<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
+<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Lakebase Postgres" icon="import">Blog Post: Using Django with Neon</a>
 
-<a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
+<a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Lakebase Postgres" icon="github">Django sample application</a>
 </DetailIconCards>
 
 ## Community resources

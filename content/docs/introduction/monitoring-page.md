@@ -7,7 +7,7 @@ summary: >-
   connection saturation, cache misses, or replication lag, and decide whether
   to scale up or enable pooling. Historical data retention depends on your plan.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-13T12:40:58.627Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -197,26 +197,27 @@ The **Replication delay bytes** graph shows the total size, in bytes, of the dat
 
 The **Replication delay seconds** graph shows the time delay, in seconds, between the last transaction committed on the primary compute and the application of that transaction on the replica. A higher value suggests that the replica is behind the primary, potentially due to network latency, high replication load, or resource constraints on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
 
-## Local file cache hit rate
+## Compute cache hit rate
 
-![local file cache hit rate graph](/docs/introduction/local_file_cache_hit_rate.png)
+![compute cache hit rate graph](/docs/introduction/compute_cache_hit_rate.png)
 
-The **Local file cache hit rate** graph shows the percentage of read requests served from Neon's Local File Cache (LFC).
-Queries not served from either Postgres shared buffers or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
+The **Compute cache hit rate** graph shows the percentage of read requests served from your [compute cache](/docs/reference/glossary#compute-cache) rather than from storage. Reads served from storage are more costly and can result in slower query performance. To learn more about how Neon caches data, see [Monitoring compute cache usage](/docs/extensions/neon#monitoring-compute-cache-usage).
 
 ## Working set size
 
 ![working set size graph](/docs/introduction/working_set_size.png)
 
-Your working set is the size of the distinct set of Postgres pages (relation data and indexes) accessed in a given time interval - to optimize for performance and consistent latency it is recommended to size your compute so that the working set fits into Neon's [Local File Cache (LFC)](/docs/extensions/neon#what-is-the-local-file-cache) for quick access.
+Your working set is the size of the distinct set of Postgres pages (relation data and indexes) accessed in a given time interval - to optimize for performance and consistent latency it is recommended to size your compute so that the working set fits into your [compute cache](/docs/manage/computes#how-to-size-your-compute) for quick access.
 
 The **Working set size** graph visualizes the amount of data accessed (calculated as unique pages accessed × page size) over a given interval. Here's how to interpret the graph:
 
 - **5m** (5 minutes): This line shows the data accessed in the last 5 minutes.
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in the last 15 minutes.
 - **1h** (1 hour): This line represents the data accessed in the last hour.
-- **Local file cache size**: This is the size of the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
-  For optimal performance the local file cache should be larger than your working set size for a given time interval.
-  If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
+- **Compute cache size**: The size of your compute cache, determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
-If your workload pattern doesn't change much over time it is recommended to compare the 1h time interval working set size with the LFC size and make sure that working set size is smaller than LFC size.
+For optimal performance your compute cache should be larger than your working set size for a given time interval. If your working set size is larger than the compute cache size it is recommended to increase the maximum size of the compute to improve the cache hit rate and achieve good performance.
+
+If your workload pattern doesn't change much over time it is recommended to compare the 1h time interval working set size with the compute cache size and make sure that working set size is smaller than the compute cache size.
+
+To read these values from the terminal, see [`neon inspect db working-set`](/docs/cli/inspect#db-working-set) and [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate).

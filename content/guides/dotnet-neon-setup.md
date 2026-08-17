@@ -4,10 +4,10 @@ subtitle: Learn how to connect your .NET applications to Neon's serverless Postg
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-11-02T00:00:00.000Z'
-updatedOn: '2025-06-26T22:22:29.000Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
-In this guide, we'll walk through the process of connecting a .NET application to Neon Postgres, exploring best practices for connection management and basic performance optimization.
+In this guide, we'll walk through the process of connecting a .NET application to Lakebase Postgres, exploring best practices for connection management and basic performance optimization.
 
 ## Prerequisites
 
@@ -359,7 +359,7 @@ For more information on logging and monitoring in .NET applications, check out t
 
 ## Conclusion
 
-You now have the foundational knowledge needed to connect your .NET application to Neon Postgres. We've covered the basics of setting up connections, implementing pooling, and following best practices for performance and security.
+You now have the foundational knowledge needed to connect your .NET application to Lakebase Postgres. We've covered the basics of setting up connections, implementing pooling, and following best practices for performance and security.
 
 As a next step, consider checking out the [Building ASP.NET Core Applications with Neon and Entity Framework Core](/guides/dotnet-neon-entity-framework) guide for a more detailed example of integrating Neon with Entity Framework Core.
 

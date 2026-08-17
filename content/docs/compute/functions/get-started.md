@@ -7,12 +7,57 @@ summary: >-
   neon deploy. The function gets a public HTTPS URL with DATABASE_URL
   injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-08-03T21:34:20.270Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
 
-A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. This guide builds one by hand: define it in `neon.ts`, run it locally, deploy it, and call it over HTTP.
+A function takes a request and returns a web response, running on long-lived Node.js compute next to your database.
+
+## Hello world
+
+Write a file and deploy it:
+
+```ts filename="hello-world.ts"
+export default {
+  fetch: (request: Request) => new Response('Hello world'),
+};
+```
+
+```bash filename="Neon CLI"
+neon link
+neon functions deploy helloworld --src hello-world.ts
+```
+
+Done, function deployed. Get the public URL:
+
+```bash filename="Neon CLI"
+neon functions get helloworld -o yaml
+```
+
+```yaml
+id: helloworld
+slug: helloworld
+name: helloworld
+invocation_url: https://br-wispy-brook-a1b2c3d4-helloworld.compute.c-2.us-east-2.aws.neon.tech/
+current_deployment:
+  id: 1
+  status: completed
+  memory_mib: 2048
+  runtime: nodejs24
+  created_at: 2026-08-03T21:19:18.120982Z
+active_deployment:
+  id: 1
+  status: completed
+  memory_mib: 2048
+  runtime: nodejs24
+  created_at: 2026-08-03T21:19:18.120982Z
+created_at: 2026-08-03T21:19:17.989227Z
+```
+
+When `status` is `completed`, the function is live. Call `invocation_url` to see the function's output, which is "Hello world" in this case.
+
+That's a deployed function in three commands. The rest of this guide builds a more realistic one: declared in `neon.ts`, run locally with `neon dev`, and querying Postgres.
 
 <Steps>
 
@@ -169,13 +214,13 @@ neon functions get hello
 The `invocation_url` field contains the public URL for your function:
 
 ```
-https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech
+https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/
 ```
 
 Call it with curl:
 
 ```bash shouldWrap
-curl https://<branch_id>-hello.compute.<cell>.us-east-2.aws.neon.tech
+curl https://<branch_id>-hello.compute.<cell>.us-east-2.aws.neon.tech/
 ```
 
 The response is a JSON object with your branch's Postgres version:

@@ -9,7 +9,7 @@ export default [
     price: 0,
     features: {
       database: {
-        title: 'Postgres database',
+        title: 'Lakebase Postgres',
         features: [
           {
             title: '100 projects',
@@ -65,7 +65,7 @@ export default [
     storageRate: 0.35,
     features: {
       database: {
-        title: 'Postgres database',
+        title: 'Lakebase Postgres',
         features: [
           {
             title: '100 projects',
@@ -122,7 +122,7 @@ export default [
     storageRate: 0.35,
     features: {
       database: {
-        title: 'Postgres database',
+        title: 'Lakebase Postgres',
         features: [
           {
             title: '1,000+ projects',

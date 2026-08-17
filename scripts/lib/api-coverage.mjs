@@ -58,6 +58,8 @@ export function sdkRawOperationNames(rawModule) {
  *   - sdkNotDocumented   raw methods with no matching documented operation
  *   - documentedNotInSdk documented operations with no matching raw method
  *   - specNotDocumented  spec operations the docs manifest omits (live only)
+ *   - documentedNotInSpec documented operations the spec no longer exposes,
+ *                        i.e. committed api-ref artifacts are stale (live only)
  *   - specNotInSdk       spec operations with no matching raw method (live only)
  */
 export function computeCoverage({ documentedOps, rawOps, specOps = null }) {
@@ -68,17 +70,96 @@ export function computeCoverage({ documentedOps, rawOps, specOps = null }) {
   const documentedAsMethods = new Set([...documented].map((id) => toSdkMethodName(id)));
 
   const sdkNotDocumented = [...raw].filter((m) => !documentedAsMethods.has(m)).sort();
-  const documentedNotInSdk = [...documented]
-    .filter((id) => !raw.has(toSdkMethodName(id)))
-    .sort();
+  const documentedNotInSdk = [...documented].filter((id) => !raw.has(toSdkMethodName(id))).sort();
 
   let specNotDocumented = null;
+  let documentedNotInSpec = null;
   let specNotInSdk = null;
   if (specOps) {
     const spec = new Set(specOps);
     specNotDocumented = [...spec].filter((id) => !documented.has(id)).sort();
+    documentedNotInSpec = [...documented].filter((id) => !spec.has(id)).sort();
     specNotInSdk = [...spec].filter((id) => !raw.has(toSdkMethodName(id))).sort();
   }
 
-  return { sdkNotDocumented, documentedNotInSdk, specNotDocumented, specNotInSdk };
+  return {
+    sdkNotDocumented,
+    documentedNotInSdk,
+    specNotDocumented,
+    documentedNotInSpec,
+    specNotInSdk,
+  };
+}
+
+export const REGEN_ACTION = 'run `npm run generate:api-ref` and commit the regenerated artifacts';
+export const BUMP_ACTION = 'publish/bump @neon/sdk to a version that includes these operations';
+
+/**
+ * Collapse the pairwise coverage diffs into a small, ordered list of action
+ * groups — each { title, action, ops } — ready to render in a report or an
+ * issue body. Pure and side-effect-free so the routing logic can be unit tested.
+ *
+ * The spec is the source of truth. When it's available (strict runs) every op is
+ * classified relative to the spec, so a documented op missing from BOTH the spec
+ * and the SDK is correctly routed to "regenerate" (stale artifacts), never to
+ * "bump @neon/sdk". Offline (no spec) we fall back to the two SDK-relative diffs
+ * and can't distinguish those cases, so documentedNotInSdk gets an ambiguous
+ * action.
+ *
+ * @param coverage result of computeCoverage()
+ * @param opts.sdkVersion used only for group titles
+ * @param opts.hasSpec whether the live spec was compared (specOps provided)
+ */
+export function groupCoverageActions(coverage, { sdkVersion, hasSpec }) {
+  const {
+    sdkNotDocumented,
+    documentedNotInSdk,
+    specNotDocumented,
+    documentedNotInSpec,
+    specNotInSdk,
+  } = coverage;
+  const groups = [];
+
+  if (hasSpec) {
+    if (documentedNotInSpec?.length) {
+      groups.push({
+        title:
+          'Committed api-ref artifacts are stale (docs describe operations the spec no longer exposes)',
+        action: REGEN_ACTION,
+        ops: documentedNotInSpec,
+      });
+    }
+    if (specNotDocumented?.length) {
+      groups.push({
+        title: 'Docs are behind the spec (spec exposes undocumented endpoints)',
+        action: REGEN_ACTION,
+        ops: specNotDocumented,
+      });
+    }
+    if (specNotInSdk?.length) {
+      groups.push({
+        title: `@neon/sdk@${sdkVersion} raw layer is behind the spec (missing operations)`,
+        action: BUMP_ACTION,
+        ops: specNotInSdk,
+      });
+    }
+    return groups;
+  }
+
+  if (documentedNotInSdk.length) {
+    groups.push({
+      title: `docs document operations missing from @neon/sdk@${sdkVersion} raw layer`,
+      action:
+        'if the spec still exposes them, bump @neon/sdk; if not, regenerate the api-ref artifacts',
+      ops: documentedNotInSdk,
+    });
+  }
+  if (sdkNotDocumented.length) {
+    groups.push({
+      title: `@neon/sdk@${sdkVersion} raw layer exposes operations the docs do not cover`,
+      action: REGEN_ACTION,
+      ops: sdkNotDocumented,
+    });
+  }
+  return groups;
 }
