@@ -3,7 +3,7 @@ title: Replicate data to Databricks with Lakeflow Connect
 subtitle: Learn how to replicate data from Neon to Databricks Lakehouse using the
   Lakeflow Connect PostgreSQL connector
 summary: >-
-  Replicate data from Neon Postgres to Databricks Lakehouse Delta tables using
+  Replicate data from Lakebase Postgres to Databricks Lakehouse Delta tables using
   Lakeflow Connect's PostgreSQL connector and logical replication with the
   pgoutput plugin. Use this guide for continuous, low-latency ingestion from
   Neon into Unity Catalog, covering publication setup, replication slot
@@ -12,10 +12,10 @@ summary: >-
   supported.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
-Neon's logical replication feature lets you stream changes from your Neon Postgres database into external systems. This guide shows how to use Databricks Lakeflow Connect's PostgreSQL connector to replicate data from Neon Postgres into Databricks Lakehouse using PostgreSQL logical replication.
+Neon's logical replication feature lets you stream changes from your Lakebase Postgres database into external systems. This guide shows how to use Databricks Lakeflow Connect's PostgreSQL connector to replicate data from Lakebase Postgres into Databricks Lakehouse using PostgreSQL logical replication.
 
 The PostgreSQL connector for Lakeflow Connect is a managed ingestion connector that:
 
@@ -49,11 +49,11 @@ You need:
 - **A Databricks workspace** with Unity Catalog enabled, serverless compute available for Lakeflow Spark Declarative Pipelines, and the Lakeflow Connect PostgreSQL connector enabled (Public Preview)
 - **Permissions in Databricks**: `CREATE CONNECTION` on the metastore (if you will create a new Unity Catalog connection); `USE CATALOG` on target and staging catalogs; `USE SCHEMA`, `CREATE TABLE`, and `CREATE VOLUME` on target schemas, or `CREATE SCHEMA` on the catalogs
 - **Network connectivity**: Neon must accept inbound connections from your Databricks workspace (or via VPN/PrivateLink, depending on setup). If you use [IP Allow](/docs/manage/projects#configure-ip-allow) in Neon, add the Databricks egress addresses to your allowlist. See [Subscriber access](/docs/guides/logical-replication-neon#subscriber-access)
-- **PostgreSQL**: Neon Postgres running v13 or later with logical replication enabled on the primary. The connector does not support logical replication from a read replica
+- **PostgreSQL**: Lakebase Postgres running v13 or later with logical replication enabled on the primary. The connector does not support logical replication from a read replica
 
 Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
-## Step 1: Prepare your Neon Postgres database
+## Step 1: Prepare your database
 
 Configure Neon as a logical replication publisher that Lakeflow Connect can subscribe to.
 
@@ -185,7 +185,7 @@ Lakeflow Connect uses Unity Catalog connections to store JDBC connection details
 3. Enter a **Connection name**.
    Choose **PostgreSQL** as the connection type.
 4. For Auth type, select `Username and password`.
-5. Enter your Neon connection details (from the **Connect** button on your Neon project dashboard):
+5. Enter your Neon connection details (from the **Connect** button on your Neon project dashboard). Use your direct Neon host, not the pooled host. Logical replication requires a persistent connection and is not compatible with connection poolers, so the host must not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
    - **Host**: your Neon host (e.g. `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
    - **Port**: 5432
    - **Database**: your Neon database name

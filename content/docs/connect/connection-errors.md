@@ -13,7 +13,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2026-06-19T14:28:23.449Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -28,6 +28,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
 - [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
 - [Relation not found](#relation-not-found)
+- [cannot execute ... in a read-only transaction (SQLSTATE 25006)](#error-read-only-transaction)
 - [Postgrex: DBConnection ConnectionError ssl send: closed](#postgrex-dbconnection-connectionerror-ssl-send-closed)
 - [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
@@ -232,6 +233,32 @@ If you are already using connection pooling, you may need to reach out to Neon S
 ## Relation not found
 
 This error is often encountered when attempting to set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection. For more information and workarounds, please see [Connection pooling in transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).
+
+## cannot execute ... in a read-only transaction (SQLSTATE 25006) (#error-read-only-transaction)
+
+You attempted a write (`INSERT`, `UPDATE`, `DELETE`, `MERGE`, `COPY ... FROM`, or DDL such as `CREATE`, `ALTER`, `DROP`, or `TRUNCATE`) in a transaction that Postgres treats as read-only. The error looks like this:
+
+```text
+ERROR: cannot execute INSERT in a read-only transaction (SQLSTATE 25006)
+```
+
+Postgres raises this error (error code `25006`, `read_only_sql_transaction`) in three situations:
+
+**1. You're connected to a read replica.** A [read replica](/docs/introduction/read-replicas) runs on a compute in recovery, which forces every transaction to be read-only. This is the most common cause. Writes must go to your read/write (primary) compute.
+
+- Confirm which compute you're connected to. If your connection string points at a read replica compute, switch to your read/write compute for writes.
+- If your framework routes reads and writes separately, make sure write and transaction queries target the primary. See [Use read replicas with Prisma](/docs/guides/read-replica-prisma) for an example.
+- You can check whether the current connection is a replica by running `SELECT pg_is_in_recovery();`. A result of `t` means you're on a read replica.
+
+**2. The session or transaction was set read-only.** An explicit `BEGIN TRANSACTION READ ONLY`, `SET TRANSACTION READ ONLY`, or `SET default_transaction_read_only = on` makes writes fail with this error.
+
+- Check the setting with `SHOW default_transaction_read_only;`. If it's `on`, reset it with `RESET default_transaction_read_only;` (or `SET default_transaction_read_only = off;`).
+- Prefer scoping read-only mode to individual transactions (`BEGIN TRANSACTION READ ONLY`) rather than setting it at the session, database, or role level.
+
+**3. A pooled connection inherited a read-only setting from a previous session.** Neon's [pooled connection](/docs/connect/connection-pooling) uses PgBouncer in transaction mode, where backend connections are reused across clients. If one client sets `default_transaction_read_only = on` (or `SET SESSION CHARACTERISTICS AS TRANSACTION READ ONLY`) and doesn't reset it, a later client that reuses the same backend can inherit the read-only state and hit this error intermittently.
+
+- Audit your application code, migrations, and scheduled jobs for session-level `SET default_transaction_read_only` or `SET SESSION CHARACTERISTICS AS TRANSACTION READ ONLY`. Replace them with transaction-scoped `BEGIN TRANSACTION READ ONLY`, or run `RESET default_transaction_read_only` / `DISCARD ALL` before returning the connection.
+- Run schema migrations, `pg_dump`, `pg_restore`, and other administrative tasks over a [direct (unpooled) connection string](/docs/connect/connection-pooling#when-to-use-pooled-vs-direct-connections) so session state can't leak into the pool. Note that the pooled endpoint does not route you to a read replica; it targets your read/write compute.
 
 ## Postgrex: DBConnection ConnectionError ssl send: closed
 

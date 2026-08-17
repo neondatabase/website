@@ -47,6 +47,27 @@ const renderBlogImage = ({ src, alt = '', ...props }) => {
 };
 /* eslint-enable @next/next/no-img-element */
 
+const renderBlogRequestForm = (props) => {
+  const isBackendPlatformForm = props.type === 'backend-platform';
+
+  return (
+    <RequestForm
+      {...props}
+      isBlogBackendCta={isBackendPlatformForm}
+      title={
+        isBackendPlatformForm && !props.title
+          ? 'Early access to the Neon backend platform'
+          : props.title
+      }
+      description={
+        isBackendPlatformForm && !props.description
+          ? "We're expanding Neon into a complete backend platform. Drop your email and we'll reach out soon."
+          : props.description
+      }
+    />
+  );
+};
+
 const mdxComponents = {
   h2: AnchorHeading('h2'),
   h3: AnchorHeading('h3'),
@@ -62,7 +83,7 @@ const mdxComponents = {
   CodeTabs,
   CTA,
   EmbedTweet,
-  RequestForm,
+  RequestForm: renderBlogRequestForm,
   YoutubeIframe,
 };
 

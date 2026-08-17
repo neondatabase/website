@@ -1,5 +1,5 @@
 ---
-title: Migrate from Heroku to Neon Postgres
+title: Migrate from Heroku to Lakebase Postgres
 summary: >-
   Heroku to Neon migration using the Heroku CLI command `heroku pg:pull`, which
   runs pg_dump and pg_restore under the hood. Walks through creating a Neon
@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/how-to-guides/hasura-heroku-migration
   - /docs/how-to-guides/import-from-heroku
   - /docs/import/import-from-heroku
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 This guide describes how to import your data from Heroku Postgres to Neon.

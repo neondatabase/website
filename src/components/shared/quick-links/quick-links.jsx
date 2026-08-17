@@ -26,7 +26,7 @@ const content = {
     },
     {
       id: 4,
-      href: '/docs/reference/api-reference',
+      href: '/docs/reference/api',
       label: 'Explore the Neon API',
       type: 'Docs',
     },

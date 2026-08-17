@@ -2,21 +2,21 @@
 title: Migrate from Supabase to Neon
 subtitle: Switch from Supabase Auth and Database to Neon in a few steps
 summary: >-
-  Step-by-step migration from Supabase Auth and Supabase database to Neon Auth
+  Step-by-step migration from Supabase Auth and Supabase database to Managed Better Auth
   and Neon Data API. Replace `@supabase/supabase-js` with `@neondatabase/neon-js`,
   swap environment variables, and update client initialization while keeping
   existing auth method calls and `from()` database queries code-compatible.
   Existing password-based users cannot transfer due to incompatible password
   hashing algorithms, so this guide targets new projects, early development, or
-  OAuth-only apps. Neon Auth does not support phone authentication (SMS/WhatsApp),
+  OAuth-only apps. Managed Better Auth does not support phone authentication (SMS/WhatsApp),
   SAML SSO, or Web3 wallet sign-in.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+<FeatureBetaProps feature_name="Managed Better Auth" />
 
-Neon Auth provides a Supabase-compatible API, and Neon Data API provides PostgreSQL database access. This guide shows how to migrate from Supabase to Neon.
+Managed Better Auth provides a Supabase-compatible API, and Neon Data API provides PostgreSQL database access. This guide shows how to migrate from Supabase to Neon.
 
 <Admonition type="About user migration">
 Existing password-based users cannot migrate due to different hashing algorithms. They'll need to create new accounts or re-authenticate via OAuth. This guide works best for new projects, early development, or rebuilding your app.
@@ -25,10 +25,10 @@ Existing password-based users cannot migrate due to different hashing algorithms
 ## Prerequisites
 
 - A Neon project ([create one here](https://console.neon.tech))
-- Data API enabled (Neon Auth is enabled by default when you enable Data API):
+- Data API enabled (Managed Better Auth is enabled by default when you enable Data API):
   - Go to **Data API** in the Neon Console and enable it
-  - In **Data API → Configuration**, verify it's configured with **Neon Auth**
-  - Copy your Data API base URL and Auth URL from the Console - you'll need both
+  - In **Data API → Configuration**, verify it's configured with **Managed Better Auth**
+  - Copy your Neon connection host and database name from **Connect** in the Console. The SDK derives both the Auth and Data API URLs from this single base URL. See [Initialize the client](/docs/reference/javascript-sdk#initializing) for the derivation rules, or use the separate Auth and Data API base URLs instead if you'd rather configure them explicitly
 
 <Steps>
 
@@ -43,25 +43,27 @@ npm install @neondatabase/neon-js@latest
 
 ## Update environment variables
 
-Replace your Supabase credentials with your Neon Auth and Data API URLs:
+Replace your Supabase credentials with a single Neon base URL. `createClient()` derives both the Auth and Data API URLs from it automatically:
 
 ```env filename=".env"
 # Remove these:
 # VITE_SUPABASE_URL=https://your-project.supabase.co
 # VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
-# Add these:
-VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
-VITE_NEON_DATA_API_URL=https://ep-xxx.us-east-2.aws.neon.build/neondb/rest/v1
+# Add this:
+VITE_NEON_URL=https://ep-xxx.c-2.us-east-2.aws.neon.build/dbname
 ```
 
-**Get your URLs:**
+**Get your URL:**
 
-1. **Auth URL**: Go to **Auth → Configuration** in the Neon Console
-2. **Data API URL**: Go to **Data API** in the Neon Console
+Your Neon base URL is the host and database name from your Neon connection string, served over `https://`. Find these values under **Connect** in the Neon Console.
 
 <Admonition type="note">
 The `VITE_` prefix is for Vite. Use `NEXT_PUBLIC_` for Next.js, or no prefix for Node.js.
+</Admonition>
+
+<Admonition type="tip">
+If you already copied separate Auth and Data API base URLs from the Console (for example, from an earlier setup), you can still pass them explicitly with the object form. See [Initialize the client](/docs/reference/javascript-sdk#initializing) for both forms.
 </Admonition>
 
 ## Update client initialization
@@ -84,14 +86,8 @@ export const supabase = createClient(
 ```typescript filename="src/auth.ts"
 import { createClient, SupabaseAuthAdapter } from '@neondatabase/neon-js';
 
-export const client = createClient({
-  auth: {
-    url: import.meta.env.VITE_NEON_AUTH_URL,
-    adapter: SupabaseAuthAdapter(),
-  },
-  dataApi: {
-    url: import.meta.env.VITE_NEON_DATA_API_URL,
-  },
+export const client = createClient(import.meta.env.VITE_NEON_URL, {
+  auth: { adapter: SupabaseAuthAdapter() },
 });
 ```
 
@@ -184,16 +180,16 @@ ORDER BY "createdAt" DESC;
 
 ## What changed?
 
-| Feature                   | Supabase                            | Neon                                 |
-| ------------------------- | ----------------------------------- | ------------------------------------ |
-| **User ID type**          | `UUID`                              | `UUID`                               |
-| **Client config**         | URL + anon key                      | Auth URL + Data API URL              |
-| **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_AUTH_URL`, `NEON_DATA_API_URL` |
-| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js`              |
+| Feature                   | Supabase                            | Neon                                                |
+| ------------------------- | ----------------------------------- | --------------------------------------------------- |
+| **User ID type**          | `UUID`                              | `UUID`                                              |
+| **Client config**         | URL + anon key                      | Single base URL (auto-derives Auth + Data API URLs) |
+| **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_URL`                                          |
+| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js`                             |
 
 ## API compatibility
 
-Neon Auth supports most Supabase Auth methods including sign up, sign in (password and OAuth), session management, user updates, and email verification. See the [Neon TypeScript SDK](/docs/reference/javascript-sdk) for the complete API.
+Managed Better Auth supports most Supabase Auth methods including sign up, sign in (password and OAuth), session management, user updates, and email verification. See the [Neon TypeScript SDK](/docs/reference/javascript-sdk) for the complete API.
 
 **Not supported:**
 
@@ -205,10 +201,10 @@ Neon Auth supports most Supabase Auth methods including sign up, sign in (passwo
 
 **Different behavior:**
 
-| Method             | Notes                                                                                                                                                                                                      |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `updateUser()`     | Does not support `password` or `email` parameters                                                                                                                                                          |
-| Email verification | Unlike Supabase's automatic verification flow, Neon Auth requires you to build the verification UI in your app. See [Email Verification](/docs/auth/guides/email-verification) for implementation details. |
+| Method             | Notes                                                                                                                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `updateUser()`     | Does not support `password` or `email` parameters                                                                                                                                                                    |
+| Email verification | Unlike Supabase's automatic verification flow, Managed Better Auth requires you to build the verification UI in your app. See [Email Verification](/docs/auth/guides/email-verification) for implementation details. |
 
 If you're using any unsupported methods or verification flows, you'll need to adjust your implementation.
 

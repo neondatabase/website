@@ -1,5 +1,5 @@
 ---
-title: 'Neon Storage: Bottomless, Branchable'
+title: 'Database storage: Bottomless, Branchable'
 subtitle: The foundation for scalable, copy-on-write Postgres with usage-based pricing and zero storage management.
 updatedOn: '2025-06-04T09:00:00.000Z'
 ---
@@ -20,7 +20,7 @@ The most common examples:
 
 Neon’s architecture separates storage from compute, implementing a multi-tenant cloud service where each layer can scale independently. The Pageserver (running on SSDs) and Safekeepers (which replicate Postgres’ write-ahead log) form a distributed storage system, with durable object storage (e.g., S3) as the ultimate source of truth. This design decouples performance-critical caching and log replication from long-term storage, enabling both dynamic scaling and built-in fault tolerance.
 
-![Neon storage architecture](/pages/storage/schema.jpg)
+![Database storage architecture](/pages/storage/schema.jpg)
 
 Unlike traditional serverful setups, where compute and storage are tightly coupled inside a VM, Neon keeps storage completely independent. A Postgres instance can be paused, scaled, or replicated without moving data. Stateless compute nodes simply reconnect to the storage layer on demand.
 

@@ -147,12 +147,12 @@ const AI_CHATBOTS = [
   },
 ];
 
-const DropdownMenu = ({ gitHubPath, className }) => {
+const DropdownMenu = ({ gitHubPath, markdownPath: customMarkdownPath, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
   const siteUrl = process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || '';
-  const markdownPath = `/${gitHubPath.replace('content/', '')}`;
+  const markdownPath = customMarkdownPath || `/${gitHubPath.replace('content/', '')}`;
   const markdownUrl = `${siteUrl}${markdownPath}`;
 
   const close = useCallback(() => setIsOpen(false), []);
@@ -195,7 +195,7 @@ const DropdownMenu = ({ gitHubPath, className }) => {
         </button>
       </div>
       {isOpen && (
-        <div className="absolute top-8.25 right-0 z-10 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0">
+        <div className="absolute top-8.25 right-0 z-50 w-65 origin-top-right border border-gray-new-90 bg-white focus:outline-none dark:border-gray-new-20 dark:bg-black-new sm:left-0">
           <CopyMarkdownButton markdownPath={markdownPath} description="Copy page as Markdown" />
           {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
             <DropdownItem
@@ -220,6 +220,7 @@ const DropdownMenu = ({ gitHubPath, className }) => {
 
 DropdownMenu.propTypes = {
   gitHubPath: PropTypes.string.isRequired,
+  markdownPath: PropTypes.string,
   className: PropTypes.string,
 };
 

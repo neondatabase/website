@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
@@ -77,7 +77,7 @@ Use this approach when you want to create databases for your users without requi
 
 **Example implementations:**
 
-- [TanStack](https://neon.com/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development): Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
+- [TanStack](/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development): Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
 - [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/): One-click Postgres databases for Netlify projects, built on the claimable database flow
 - [Claimable Postgres by Neon](https://neon.new/): Try instant Postgres provisioning without signup using `npx neon-new` or at [neon.new](https://neon.new/)
 
@@ -117,7 +117,7 @@ Use the embedded Postgres approach when you want to provision and manage Postgre
 
 <a href="/docs/guides/embedded-postgres" description="Learn how to embed Postgres in your platform" icon="import">Embedded Postgres guide</a>
 
-<a href="/docs/reference/api-reference" description="Explore the Neon API" icon="transactions">Neon API reference</a>
+<a href="/docs/reference/api" description="Explore the Neon API" icon="transactions">Neon API Reference</a>
 
 </DetailIconCards>
 

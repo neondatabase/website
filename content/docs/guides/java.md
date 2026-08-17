@@ -1,9 +1,9 @@
 ---
-title: Connect a Java application to Neon Postgres
+title: Connect a Java application to Lakebase Postgres
 subtitle: Learn how to run SQL queries in Neon from Java using the PostgreSQL JDBC
   driver
 summary: >-
-  Connect a Java application to Neon Postgres using the PostgreSQL JDBC driver
+  Connect a Java application to Lakebase Postgres using the PostgreSQL JDBC driver
   with Apache Maven. Covers complete CRUD examples including PreparedStatement
   inserts, batch operations, and transaction control with setAutoCommit,
   commit, and rollback. Also covers dotenv-java for credential management.
@@ -12,13 +12,13 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/java-prompt.md" 
 description="Pre-built prompt for connecting Java applications to Neon"/>
 
-This guide describes how to create a Neon project and connect to it from a Java application using **Java Database Connectivity (JDBC)**, the standard API for interacting with relational databases in Java.
+This guide describes how to create a Neon project and connect to it from a Java application using **Java Database Connectivity (JDBC)**, the standard API for interacting with relational databases in Lakebase Postgres.
 
 You will learn how to set up a project, connect to your database, and perform basic create, read, update, and delete (CRUD) operations.
 
@@ -314,7 +314,7 @@ public class UpdateData {
 
 The above code does the following:
 
-- Connects to the Neon database.
+- Connects to the Lakebase Postgres database.
 - Prepares an SQL `UPDATE` statement to set the `in_stock` status of the book 'Dune' to `true`.
 - Executes the update and prints a confirmation message if successful.
 
@@ -377,7 +377,7 @@ public class DeleteData {
 
 The above code does the following:
 
-- Connects to the Neon database.
+- Connects to the Lakebase Postgres database.
 - Prepares an SQL `DELETE` statement to remove the book '1984'.
 - Executes the delete and prints a confirmation message if successful.
 
@@ -499,6 +499,11 @@ While this guide demonstrates how to connect to Neon using raw SQL queries, for 
 Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Database Schema Changes with Hibernate, Spring Boot, and Neon](/guides/spring-boot-hibernate)
+
+## Next steps: Neon backend services
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 

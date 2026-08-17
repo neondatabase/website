@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Deleting data from PostgreSQL tables with psycopg2 works the same way on any standard Postgres deployment, so the patterns here carry over wherever you run your database. If you're an enterprise that wants managed Postgres purpose-built for the AI era, [Lakebase](https://www.databricks.com/product/lakebase) delivers a performant, secure engine fully integrated with the Lakehouse. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Deleting data from PostgreSQL tables with psycopg2 works the same way on any standard Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: This tutorial shows you how to delete data from PostgreSQL tables in Python.

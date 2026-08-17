@@ -3,19 +3,19 @@ title: Connecting with the Vercel-Managed Integration
 subtitle: Create and manage Neon databases directly from your Vercel dashboard
 summary: >-
   The Vercel-Managed Integration (also called Neon Postgres Native Integration)
-  provisions a Neon Postgres database from the Vercel Marketplace and routes all
+  provisions a Lakebase Postgres database from the Vercel Marketplace and routes all
   billing through your Vercel invoice, injecting DATABASE_URL and related
   environment variables automatically. Choose this path over the Neon-Managed
   Integration when you have no existing Neon account or want a single Vercel
   bill; it does not support the neon auth CLI command. Automated Preview
-  Branching creates an isolated copy-on-write Neon branch for every Vercel
+  Branching creates an isolated copy-on-write Lakebase Postgres branch for every Vercel
   Preview Deployment, with branches cleaned up according to Vercel's 6-month
   default deployment retention policy.
 redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-06-30T15:58:53.991Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 <InfoBlock>
@@ -36,7 +36,7 @@ updatedOn: '2026-06-30T15:58:53.991Z'
 
 ## About this integration
 
-**Vercel-Managed Integration** (also known as _Neon Postgres Native Integration_) lets you add a Neon Postgres database to your Vercel project **with billing handled entirely inside Vercel**. Installing it:
+**Vercel-Managed Integration** (also known as _Neon Postgres Native Integration_) lets you add a Lakebase Postgres database to your Vercel project **with billing handled entirely inside Vercel**. Installing it:
 
 - Creates a Neon account + project for you (if you don't already have one)
 - For existing Neon users, adds a new organization named `Vercel: <team-name>` to your account
@@ -99,8 +99,8 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 Preview branching creates an isolated Neon branch (copy-on-write) for every Vercel Preview Deployment so database schema changes can be tested safely.
 
-<Admonition type="tip" title="Neon Auth support for preview deployments">
-If you've enabled [Neon Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
+<Admonition type="tip" title="Managed Better Auth support for preview deployments">
+If you've enabled [Managed Better Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
 </Admonition>
 
 To enable:
@@ -176,6 +176,10 @@ Team membership changes in Vercel automatically sync to your Neon organization:
 
 This ensures both platforms stay aligned for security and access control.
 
+<Admonition type="note">
+Organizations managed through the Vercel-managed integration use Neon's legacy roles (Admin and Member), as described above. The newer [organization roles and per-project permissions](/docs/manage/user-permissions) don't apply to Vercel-managed organizations.
+</Admonition>
+
 ### Project transfers between teams
 
 When you transfer a Vercel project to another team, the linked Neon project automatically moves to the new team's Neon organization:
@@ -240,7 +244,7 @@ Branches you don't delete are eventually [archived](/docs/guides/branch-archivin
 | `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                            |
 | `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                  |
 | `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates |
-| `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`                        | Neon Auth endpoints (when enabled on production branch)             |
+| `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`                        | Managed Better Auth endpoints (when enabled on production branch)   |
 
 ---
 

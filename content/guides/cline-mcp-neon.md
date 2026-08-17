@@ -1,10 +1,10 @@
 ---
-title: 'Get started with Cline and Neon Postgres MCP Server'
+title: 'Get started with Cline and Neon MCP Server'
 subtitle: 'Make schema changes with natural language using Cline and Neon MCP Server'
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-06-19T23:17:10.824Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 This guide shows how to use [Cline](https://cline.bot) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.

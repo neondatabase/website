@@ -9,7 +9,6 @@ const Spacing = () => (
   <Section
     title="Spacing considerations"
     description="The safety area surrounding the Logo is defined by the height of our symbol."
-    className="mb-40 xl:mb-32 lg:mb-28 md:mb-[88px]"
   >
     <div className="flex items-center justify-between md:justify-start md:gap-20 sm:flex-col sm:items-start sm:gap-7">
       <Image

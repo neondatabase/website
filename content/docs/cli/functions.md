@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cli/function
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
 The `functions` command manages [Neon Functions](/docs/compute/functions/overview) on a branch. This is the command reference; for the full deployment workflow, see [Deploy functions](/docs/compute/functions/deploy). To run functions locally, see [`neon dev`](/docs/cli/dev).
 
@@ -26,7 +26,7 @@ Deploys a function from a local directory or entry file. The `<slug>` is the per
 
 <CliOptions command="functions deploy" />
 
-Use `--wait` to block until the deployment finishes building, which is the predictable path for scripts and CI.
+By default, `deploy` waits until the deployment finishes building (`--wait=true`), which is the predictable path for scripts and CI. Use `--no-wait` to return immediately after triggering the deployment.
 
 Deploy a function from an entry file:
 
@@ -126,7 +126,7 @@ function
 ├───────┼───────┼─────────────────────────────────────────────────────────────────────────────┼─────────────────────────────┤
 │ hello │ hello │ https://br-cool-darkness-123456-hello.compute.c-1.us-east-2.aws.neon.tech/ │ 2026-06-12T00:14:57.942988Z │
 └───────┴───────┴─────────────────────────────────────────────────────────────────────────────┴─────────────────────────────┘
-active deployment
+deployment (current, active)
 ┌────┬───────────┬──────────┬────────────┬─────────────────────────────┐
 │ Id │ Status    │ Runtime  │ Memory Mib │ Created At                  │
 ├────┼───────────┼──────────┼────────────┼─────────────────────────────┤

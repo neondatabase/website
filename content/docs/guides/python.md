@@ -1,16 +1,16 @@
 ---
-title: Connect a Python application to Neon Postgres
-subtitle: Learn how to run SQL queries in Neon from Python using psycopg, psycopg2, or
+title: Connect a Python application to Lakebase Postgres
+subtitle: Learn how to run SQL queries from Python using psycopg, psycopg2, or
   asyncpg
 summary: >-
-  Connecting Python to Neon Postgres requires choosing between three drivers:
+  Connecting Python to Lakebase Postgres requires choosing between three drivers:
   psycopg (v3, synchronous), psycopg2 (legacy synchronous), and asyncpg
   (asyncio-based async). The guide covers project setup, .env connection string
   configuration, and full CRUD examples for all three drivers. Pick this over
   the SQLAlchemy or Django guides when you need raw SQL driver code rather than
   an ORM.
 enableTableOfContents: true
-updatedOn: '2026-07-08T18:21:32.749Z'
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 
@@ -18,7 +18,7 @@ description="Pre-built prompt for connecting Python applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Python application using popular Postgres drivers. We'll cover [Psycopg 3](https://www.psycopg.org/psycopg3/docs/), the latest generation of the popular synchronous adapter, its predecessor [Psycopg 2 (psycopg2)](https://pypi.org/project/psycopg2-binary/), and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
 
-You'll learn how to connect to your Neon database from a Python application and perform basic Create, Read, Update, and Delete (CRUD) operations.
+You'll learn how to connect to the database from a Python application and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 ## Prerequisites
 
@@ -721,6 +721,11 @@ Explore the following resources to learn how to integrate ORMs with Neon:
 
 - [Connect an SQLAlchemy application to Neon](/docs/guides/sqlalchemy)
 - [Connect a Django application to Neon](/docs/guides/django)
+
+## Next steps: Neon backend services
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 ## Resources
 

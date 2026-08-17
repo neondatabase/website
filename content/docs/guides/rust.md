@@ -1,9 +1,9 @@
 ---
-title: Connect a Rust application to Neon Postgres
-subtitle: Learn how to run SQL queries in Neon from Rust using the postgres or
+title: Connect a Rust application to Lakebase Postgres
+subtitle: Learn how to run SQL queries from Rust using the postgres or
   tokio-postgres crates
 summary: >-
-  Connecting a Rust application to Neon Postgres using either the synchronous
+  Connecting a Rust application to Lakebase Postgres using either the synchronous
   `postgres` crate or the async `tokio-postgres` crate with the Tokio runtime.
   Both options require SSL/TLS via postgres-openssl. Use this page when you need
   working Rust code for each CRUD operation, including when to use `execute`,
@@ -12,13 +12,13 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
-description="Pre-built prompt for connecting Rust applications to Neon"/>
+description="Pre-built prompt for connecting Rust applications to Lakebase Postgres"/>
 
-This guide describes how to create a Neon project and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
+This guide describes how to create a project on Neon and connect to it from a Rust application using two popular Postgres drivers: [rust-postgres](https://crates.io/crates/postgres), a synchronous driver, and [tokio-postgres](https://crates.io/crates/tokio-postgres), an asynchronous driver for use with the [Tokio](https://tokio.rs/) runtime.
 
 ## Prerequisites
 
@@ -674,5 +674,10 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: true
 - [rust-postgres crate documentation](https://docs.rs/postgres/latest/postgres/)
 - [tokio-postgres crate documentation](https://docs.rs/tokio-postgres/latest/tokio_postgres/)
 - [Tokio async runtime](https://tokio.rs/)
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

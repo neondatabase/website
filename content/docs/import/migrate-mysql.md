@@ -1,7 +1,7 @@
 ---
-title: Migrate from MySQL to Neon Postgres
+title: Migrate from MySQL to Lakebase Postgres
 summary: >-
-  MySQL to Neon Postgres migration uses pgloader, which reads from a MySQL
+  MySQL to Lakebase Postgres migration uses pgloader, which reads from a MySQL
   source and streams data into Postgres via the COPY protocol, automatically
   transforming data types. Use this page when moving an existing MySQL database
   to Neon. It covers credentials, connection string setup including the required
@@ -11,10 +11,10 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/import/import-from-mysql
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
+This topic describes how to migrate your MySQL database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
 
 The `pgloader` utility transforms data to a Postgres-compatible format as it is read from your MySQL database. It uses the `COPY` Postgres protocol to stream the data into your Postgres database.
 

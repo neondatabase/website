@@ -4,14 +4,14 @@ subtitle: 'Learn how to use Vercel Preview Deployments and Neon Database Branchi
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-01-15T00:00:00.000Z'
-updatedOn: '2026-01-15T17:22:44.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 Authentication and user management are critical to any application, yet often the hardest to test. For example, how do you validate a moderation feature without risking real user data? Or ensure that role-based access control changes work correctly across your entire user base?
 
 Traditionally, teams rely on staging environments, but keeping them in sync with production is complex, and synthetic data rarely reflects real behavior. A better approach is to give each feature branch access to realistic production data. The challenge is that cloning entire databases for every branch is slow, costly, and difficult to keep authentication data aligned.
 
-Neon solves this with **Database Branching**. Using [Copy‑on‑Write](/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write), Neon creates instant, isolated branches that are lightweight and cost‑effective making it practical to spin up a new database for every pull request. This extends naturally to [Neon Auth](/docs/auth/branching-authentication): because identity data lives in the database, it is cloned automatically with each branch, giving you a safe, production‑like environment to test destructive authentication flows without risk.
+Neon solves this with **Database Branching**. Using [Copy‑on‑Write](/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write), Neon creates instant, isolated branches that are lightweight and cost‑effective making it practical to spin up a new database for every pull request. This extends naturally to [Managed Better Auth](/docs/auth/branching-authentication): because identity data lives in the database, it is cloned automatically with each branch, giving you a safe, production‑like environment to test destructive authentication flows without risk.
 
 This guide demonstrates that workflow using **Neon Branching** and **Vercel**. With the [Neon‑Managed Vercel Integration](/docs/guides/vercel-previews-integration), every pull request triggers a Vercel Preview Deployment, and Neon provisions a matching database branch containing a snapshot of your production users.
 
@@ -36,7 +36,7 @@ Before you begin, ensure you have the following:
 You will start with a basic message board application where any authenticated user can post messages and see messages from others. To focus on the branching workflow this guide uses a pre-built starter repository.
 
 <Admonition type="note">
-If you need a refresher on setting up a new Next.js application with Neon Auth from scratch, check out  [Getting started with Neon Auth and Next.js](/guides/neon-auth-nextjs).
+If you need a refresher on setting up a new Next.js application with Managed Better Auth from scratch, check out  [Getting started with Managed Better Auth and Next.js](/guides/neon-auth-nextjs).
 </Admonition>
 
 ### Fork the repository
@@ -44,12 +44,12 @@ If you need a refresher on setting up a new Next.js application with Neon Auth f
 Navigate to the [starter repository](https://github.com/dhanushreddy291/vercel-neon-auth-branching) and fork it into your own GitHub account.
 
 <DetailIconCards>
-    <a href="https://github.com/dhanushreddy291/vercel-neon-auth-branching" description="Message board application with Neon Auth and Vercel Branching" icon="github">
+    <a href="https://github.com/dhanushreddy291/vercel-neon-auth-branching" description="Message board application with Managed Better Auth and Vercel Branching" icon="github">
       Starter Repository
     </a>
 </DetailIconCards>
 
-This project is built with **Next.js (App Router)**, **Neon Auth** for authentication, and **Drizzle ORM** for database interactions.
+This project is built with **Next.js (App Router)**, **Managed Better Auth** for authentication, and **Drizzle ORM** for database interactions.
 
 ### Deploy to Production
 
@@ -84,10 +84,10 @@ You will need to create a Neon project and connect it to Vercel using the Neon V
 
 8. Click Connect to finalize the integration.
 
-Vercel will automatically inject the database connection strings and Neon Auth URLs into your selected project’s environment variables for both production and preview deployments.
+Vercel will automatically inject the database connection strings and Managed Better Auth URLs into your selected project’s environment variables for both production and preview deployments.
 
 <Admonition type="info" title="How automated Auth configuration works">
-The Vercel integration is aware of Neon Auth. For the `production` branch, it injects your production Auth URL. For preview deployments, it creates a new database branch, provisions a dedicated Auth API endpoint for that branch, and automatically injects *that specific endpoint* into the Vercel preview environment.
+The Vercel integration is aware of Managed Better Auth. For the `production` branch, it injects your production Auth URL. For preview deployments, it creates a new database branch, provisions a dedicated Auth API endpoint for that branch, and automatically injects *that specific endpoint* into the Vercel preview environment.
 </Admonition>
 
 Now that the integration is set up, trigger a new deployment by navigating to the **Deployments** tab and clicking **Redeploy** on the latest deployment. You should see a successful deployment this time.
@@ -472,8 +472,8 @@ Although this guide demonstrated the workflow with a simple message board, the s
 
 ## Resources
 
-- [Neon Auth Admin API Reference](/docs/auth/guides/plugins/admin)
-- [Neon Auth Overview](/docs/auth/overview)
+- [Managed Better Auth Admin API Reference](/docs/auth/guides/plugins/admin)
+- [Managed Better Auth Overview](/docs/auth/overview)
 - [Vercel-Managed Neon Integration](/docs/guides/vercel-managed-integration)
 - [Neon Database Branching](/branching)
-- [Getting started with Neon Auth and Next.js](/guides/neon-auth-nextjs)
+- [Getting started with Managed Better Auth and Next.js](/guides/neon-auth-nextjs)

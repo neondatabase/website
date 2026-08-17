@@ -6,7 +6,7 @@ export default {
   index: {
     title: 'Neon — Postgres backends for apps and agents',
     description:
-      'The backend for apps and agents. Build with Serverless Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.',
+      'The backend for apps and agents. Build with Lakebase Postgres, Auth, Functions, Storage, and an AI Gateway: instant, branchable, serverless.',
     pathname: '',
   },
   about: {
@@ -61,12 +61,6 @@ export default {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
     pathname: LINKS.contactSales,
-  },
-  demos: {
-    title: 'Serverless showcase: unleashing the power of Neon',
-    description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
-    pathname: LINKS.demos,
-    imagePath: '/images/social-previews/demos.jpg',
   },
   enterprise: {
     title: 'Neon for Enterprise - Neon',

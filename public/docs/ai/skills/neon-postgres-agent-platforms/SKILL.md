@@ -74,8 +74,8 @@ operations to completion before reconnecting. Delete orphaned `(old)` branches
 to avoid storage cost.
 - **Billing-aligned usage:** prefer
 `GET /api/v2/consumption_history/v2/projects` over legacy consumption
-endpoints. **`GET /api/v2/consumption_history/account`** is deprecated with a
-planned sunset of **2026-06-01**; migrate to the v2 **per-project** endpoint
+endpoints. The legacy account-level endpoint has been retired; use the v2
+**per-project** endpoint
 ([legacy consumption guide](https://neon.com/docs/guides/consumption-metrics-legacy.md)).
 - **V2 `metrics` parameter values** (for implementers): `compute_unit_seconds`,
 `root_branch_bytes_month`, `child_branch_bytes_month`,
@@ -260,8 +260,8 @@ Link:
 [Agent Plan](https://neon.com/docs/introduction/agent-plan.md) and
 [consumption metrics](https://neon.com/docs/guides/consumption-metrics.md).
 - Use `GET /api/v2/consumption_history/v2/projects` for billing-aligned fields.
-Legacy endpoints differ. **`GET /api/v2/consumption_history/account`** is
-deprecated (sunset **2026-06-01**); use v2 per-project metrics instead
+Legacy endpoints differ. The legacy account-level endpoint has been retired;
+use v2 per-project metrics instead
 ([legacy guide](https://neon.com/docs/guides/consumption-metrics-legacy.md)).
 - V2 `metrics` query strings are exactly: `compute_unit_seconds`,
 `root_branch_bytes_month`, `child_branch_bytes_month`,

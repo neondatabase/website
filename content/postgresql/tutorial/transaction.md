@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Transactions with BEGIN, COMMIT, and ROLLBACK work the same across every Postgres deployment, so what you learn here applies anywhere you run PostgreSQL. If you're an enterprise that needs ACID guarantees backed by managed, secure, high-performance Postgres fully integrated with your Lakehouse and ready for AI workloads, [Lakebase](https://www.databricks.com/product/lakebase) is the best place to run it. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Transactions with BEGIN, COMMIT, and ROLLBACK work the same across every Postgres deployment. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn how to handle PostgreSQL transactions using the `BEGIN`, `COMMIT`, and `ROLLBACK` statements.

@@ -6,12 +6,12 @@ summary: >-
   directory to a Neon project, including interactive, non-interactive, and
   agent-oriented workflows.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-07-11T13:23:16.265Z'
 redirectFrom:
   - /docs/reference/cli-link
 ---
 
-The `link` command binds the current directory to a Neon project. It picks (or creates) an organization and project, resolves the project's default branch, and writes a `.neon` file with `orgId`, `projectId`, and `branchId`. Subsequent commands run in this directory (or any subdirectory) automatically pick up that context.
+The `link` command binds the current directory to a Neon project. It picks (or creates) an organization and project, writes `orgId` and `projectId` to a `.neon` file, and also writes `branch` (holding the branch's name or ID) when you pass `--branch` or `--branch-id`. Subsequent commands run in this directory (or any subdirectory) automatically pick up that context; branch-scoped commands can use it once a branch is pinned by `link --branch` or [`checkout`](/docs/cli/checkout).
 
 Requires neon 2.22.2 or later. Check your version with `neon --version`.
 
@@ -46,7 +46,7 @@ Created project polished-snowflake-12345678 ("my-app") in aws-us-east-2.
 Linked .neon:
   orgId:     org-abc123
   projectId: polished-snowflake-12345678
-  branchId:  br-steep-math-aiu3vve7
+  branch:    br-steep-math-aiu3vve7
 ```
 
 ## Non-interactive mode
@@ -110,7 +110,7 @@ Example `.neon` file:
 {
   "orgId": "org-abc123",
   "projectId": "polished-snowflake-12345678",
-  "branchId": "br-steep-math-aiu3vve7"
+  "branch": "br-steep-math-aiu3vve7"
 }
 ```
 

@@ -31,12 +31,16 @@ const Menu = ({
     <ul className="flex flex-col">
       {items?.map((item, index) => {
         if (item.section) {
+          const SectionLabel = item.slug ? Link : 'div';
           return (
             <li className="mt-4 first:mt-0" key={index}>
-              <div className="my-2 flex items-center gap-2.5 text-[15px] leading-snug font-medium tracking-extra-tight">
+              <SectionLabel
+                className="my-2 flex items-center gap-2.5 text-[15px] leading-snug font-medium tracking-extra-tight text-black-pure dark:text-white"
+                {...(item.slug ? { to: `${basePath}${item.slug}` } : {})}
+              >
                 {item.icon && <Icon title={item.icon} className="size-4.5 shrink-0" />}
-                {item.section}
-              </div>
+                {item.title || item.section}
+              </SectionLabel>
               <ul className="flex flex-col">
                 {item.items?.map((item, index) => (
                   <Item

@@ -7,22 +7,65 @@ summary: >-
   neon deploy. The function gets a public HTTPS URL with DATABASE_URL
   injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-07-02T22:08:19.260Z'
+updatedOn: '2026-08-03T21:34:20.270Z'
 ---
 
-<PrivatePreviewEnquire/>
+<FeatureBetaProps feature_name="Neon Functions" />
 
-A function takes a request and returns a web response, running on long-lived Node.js compute next to your database. This guide builds one by hand: define it in `neon.ts`, run it locally, deploy it, and call it over HTTP.
+A function takes a request and returns a web response, running on long-lived Node.js compute next to your database.
+
+## Hello world
+
+Write a file and deploy it:
+
+```ts filename="hello-world.ts"
+export default {
+  fetch: (request: Request) => new Response('Hello world'),
+};
+```
+
+```bash filename="Neon CLI"
+neon link
+neon functions deploy helloworld --src hello-world.ts
+```
+
+Done, function deployed. Get the public URL:
+
+```bash filename="Neon CLI"
+neon functions get helloworld -o yaml
+```
+
+```yaml
+id: helloworld
+slug: helloworld
+name: helloworld
+invocation_url: https://br-wispy-brook-a1b2c3d4-helloworld.compute.c-2.us-east-2.aws.neon.tech/
+current_deployment:
+  id: 1
+  status: completed
+  memory_mib: 2048
+  runtime: nodejs24
+  created_at: 2026-08-03T21:19:18.120982Z
+active_deployment:
+  id: 1
+  status: completed
+  memory_mib: 2048
+  runtime: nodejs24
+  created_at: 2026-08-03T21:19:18.120982Z
+created_at: 2026-08-03T21:19:17.989227Z
+```
+
+When `status` is `completed`, the function is live. Call `invocation_url` to see the function's output, which is "Hello world" in this case.
+
+That's a deployed function in three commands. The rest of this guide builds a more realistic one: declared in `neon.ts`, run locally with `neon dev`, and querying Postgres.
 
 <Steps>
 
 ## Prerequisites
 
-- A Neon account with Functions preview access. See [Preview access](/docs/compute/functions/preview-access).
-- The latest `neon`, installed and authenticated. Functions commands are new and change often during the preview, so upgrade before you start (`npm install -g neon@latest`).
+- A Neon project in AWS US East (Ohio) (`aws-us-east-2`), the only region where Functions are available during beta.
+- The latest `neon`, installed and authenticated. Functions commands are new and change often, so upgrade before you start (`npm install -g neon@latest`).
 - Node.js 20 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
-
-Functions are available on new projects in AWS us-east-2 only, created on or after June 15, 2026.
 
 `neon init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install the Neon Platform (`neon`) and Neon Functions skills separately:
 
@@ -171,13 +214,13 @@ neon functions get hello
 The `invocation_url` field contains the public URL for your function:
 
 ```
-https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech
+https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech/
 ```
 
 Call it with curl:
 
 ```bash shouldWrap
-curl https://<branch_id>-hello.compute.<cell>.us-east-2.aws.neon.tech
+curl https://<branch_id>-hello.compute.<cell>.us-east-2.aws.neon.tech/
 ```
 
 The response is a JSON object with your branch's Postgres version:

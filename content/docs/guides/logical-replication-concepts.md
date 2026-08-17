@@ -11,7 +11,7 @@ summary: >-
   alongside the standard pgoutput plugin.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 Logical Replication is a method of replicating data between databases or between your database and other data services or platforms. It differs from physical replication in that it replicates transactional changes rather than copying the entire database byte-for-byte. This approach allows for selective replication, where users can choose specific tables or rows for replication. It works by capturing DML operations in the source database and applying these changes to the target, which could be another Postgres database or data platform.
@@ -76,6 +76,10 @@ PUBLICATION users_publication;
 ```
 
 A subscription requires a unique name, a database connection string, the name and password of your replication role, and the name of the publication it subscribes to.
+
+<Admonition type="note">
+When the connection string points at a Neon database, use a direct connection, not a pooled one. Logical replication requires a persistent connection and is not compatible with connection poolers, so the hostname must not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## How does it work under the hood?
 

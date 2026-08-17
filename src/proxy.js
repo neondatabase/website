@@ -3,12 +3,15 @@ import { NextResponse } from 'next/server';
 import { checkCookie, getReferer } from 'app/actions';
 import { CONTENT_ROUTES } from 'constants/content';
 import LINKS from 'constants/links';
+import { STATIC_MD_PATHS } from 'constants/static-md-manifest';
 
 import {
   isAIAgentRequest,
   getMarkdownPath,
   buildAgent404Response,
 } from './utils/ai-agent-detection';
+import { trackLLMPageview } from './utils/llm-analytics';
+import { markdownNotFoundResponse } from './utils/markdown-404';
 
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
@@ -31,37 +34,167 @@ function applyDocHeaders(response) {
   return response;
 }
 
-function trackLLMPageview(req, { is404 = false } = {}) {
-  const url = req.nextUrl.href;
-  const referrer = req.headers.get('referer') || '';
-  const cookies = req.headers.get('cookie') || '';
-  const userAgent = req.headers.get('user-agent') || '';
+const BLOG_CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
 
-  // Match the payload shape the Zaraz JS tag sends to this endpoint
-  const payload = {
-    name: 'Pageview',
-    data: { llm_agent: true, llm_404: is404 },
-    zarazData: {
-      c: cookies, // raw cookie string — Zaraz extracts ajs_anonymous_id / ajs_user_id from here
-      l: url,
-      r: referrer,
-    },
-    system: {
-      device: {
-        ip: '192.168.0.1',
-      },
-    },
-  };
+// Resolve where a moved `.md` page should redirect. next.config `redirectFrom`
+// rules match only the non-`.md` source, so we probe the HTML sibling (which
+// flows through those rules) and mirror its permanent redirect onto the `.md`.
+// Returns the target `.md` path, or null to fall through to the normal 404.
+async function resolveMarkdownRedirect(pathname, origin) {
+  const htmlPathname = pathname.endsWith('.md') ? pathname.slice(0, -3) : pathname;
 
-  // Fire and forget — do not await to avoid blocking the response
-  fetch('https://neonapi.io/t.js', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'User-Agent': `LLMAGENT: ${userAgent}` },
-    body: JSON.stringify(payload),
-  }).catch(() => {});
+  try {
+    // Neutral UA so the probe isn't classified as an AI agent (isAIAgentRequest
+    // matches broad tokens like curl/got/axios) and gets the next.config 308.
+    const response = await fetch(`${origin}${htmlPathname}`, {
+      headers: { Accept: 'text/html', 'User-Agent': 'neon-md-redirect-probe' },
+      redirect: 'manual',
+    });
+
+    // Permanent redirects only; a 302/307 must not become a hard-cached 308.
+    if (response.status !== 301 && response.status !== 308) return null;
+
+    const location = response.headers.get('location');
+    if (!location) return null;
+
+    // Off-origin or root targets have no `.md` equivalent.
+    const url = new URL(location, origin);
+    if (url.origin !== origin) return null;
+
+    const targetPathname = url.pathname.replace(/\/$/, '');
+    if (!targetPathname) return null;
+
+    return `${targetPathname}.md`;
+  } catch (error) {
+    console.error('[.md] Error resolving markdown redirect', { pathname, error: error.message });
+    return null;
+  }
 }
 
-const BLOG_CDN_BASE = process.env.BLOG_CDN_URL || 'https://blog.neonapi.io/blog';
+// 308 to a moved `.md` page's target, or null if there's no redirect. Handled
+// here (not next.config) to keep the route count under Next's 1000-route limit.
+async function markdownRedirectResponse(req, pathname) {
+  if (!pathname.endsWith('.md')) return null;
+
+  const target = await resolveMarkdownRedirect(pathname, req.nextUrl.origin);
+  if (!target) return null;
+
+  const response = NextResponse.redirect(new URL(target, req.url), 308);
+  // Short TTL so cached 308s still re-enter the proxy and get tracked.
+  response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300');
+  return response;
+}
+
+// A 308 to the moved target if one exists, else the agent 404 body. `source`
+// sets X-Content-Source so logs distinguish the agent vs direct `.md` branch.
+async function markdownMovedOr404Response(req, pathname, source) {
+  const redirect = await markdownRedirectResponse(req, pathname);
+  if (redirect) return redirect;
+
+  return markdownNotFoundResponse(pathname, { source });
+}
+
+// Retired neon-postgres skill reference files. The `references/` directory was
+// removed when the vendored skills were reconciled 1:1 with upstream (#5309),
+// and SKILL.md was updated (#4666) to link the consolidated docs pages instead.
+// Tools that cached the old SKILL.md still fetch these URLs, so 308 them to the
+// consolidated pages. Keyed by the reference basename (no `.md`); values are the
+// live targets.
+const SKILL_REFERENCE_BASE = '/docs/ai/skills/neon-postgres/references/';
+const SKILL_REFERENCE_REDIRECTS = {
+  'what-is-neon': '/docs/introduction/architecture-overview.md',
+  'getting-started': '/docs/get-started/connect-neon.md',
+  'connection-methods': '/docs/connect/choose-connection.md',
+  'neon-serverless': '/docs/serverless/serverless-driver.md',
+  'neon-js': '/docs/reference/javascript-sdk.md',
+  'neon-rest-api': '/docs/reference/api-reference.md',
+  'neon-typescript-sdk': '/docs/reference/typescript-sdk.md',
+  'neon-python-sdk': '/docs/reference/python-sdk.md',
+  'neon-auth': '/docs/auth/overview.md',
+  branching: '/docs/introduction/branching.md',
+  'neon-cli': '/docs/cli/install.md',
+  devtools: '/docs/reference/api.md',
+};
+
+// 308 for a retired skill reference URL, or null if it isn't one. Normalizes the
+// variants seen in logs: missing `.md` (`…/neon-auth`) and doubled (`…/neon-auth.md.md`).
+function skillReferenceRedirectResponse(req, pathname) {
+  if (!pathname.startsWith(SKILL_REFERENCE_BASE)) return null;
+
+  let basename = pathname.slice(SKILL_REFERENCE_BASE.length);
+  while (basename.endsWith('.md')) basename = basename.slice(0, -3);
+
+  const target = SKILL_REFERENCE_REDIRECTS[basename];
+  if (!target) return null;
+
+  const response = NextResponse.redirect(new URL(target, req.url), 308);
+  // Short TTL so cached redirects still re-enter the proxy and get LLM-tracked.
+  response.headers.set('Cache-Control', 'public, max-age=60, s-maxage=300');
+  return response;
+}
+
+// Real static .md files (skills SKILL.md, prompts, /pricing.md, …) live in
+// public/ and have no generated /md sibling, so getMarkdownPath returns null for
+// them. STATIC_MD is the build-time manifest of those files.
+const STATIC_MD = new Set(STATIC_MD_PATHS);
+
+// For a `.md` URL with no generated /md sibling: serve the real static file if it
+// exists (manifest hit → next), else a markdown 404. This makes every missing
+// `.md` — skills, .well-known, or an arbitrary path like /foo/bar.md — return
+// markdown instead of the HTML 404, using a Set lookup with no per-request fetch.
+// Runs at the proxy layer (before rewrites/routes), so nothing downstream can
+// pre-empt it. Returns a response, or null when this isn't an unmirrored `.md`
+// (generated-docs `.md` keep their existing fetch-based handling).
+// next() that serves a static `.md` as-is, carrying the doc headers + noindex the
+// isContentRoute branch would otherwise apply (this short-circuit runs before it)
+// plus the LLM read beacon. Without this, static skill files would lose the
+// X-Robots-Tag: noindex they get on the isContentRoute path and become indexable.
+function servedStaticMarkdown(req) {
+  trackLLMPageview(req);
+  const response = applyDocHeaders(NextResponse.next());
+  response.headers.set('X-Robots-Tag', 'noindex');
+  return response;
+}
+
+// Maps a skill-discovery alias to the real SKILL.md path a next.config rewrite
+// sends it to, or null if pathname isn't such an alias. These have no physical
+// file at the request path. Keep in sync with the skill-discovery rewrites in
+// next.config.js.
+function skillAliasTarget(pathname) {
+  if (pathname === '/skill.md') return '/docs/ai/skills/neon-postgres/SKILL.md';
+  const match = pathname.match(
+    /^\/(?:docs\/)?\.well-known\/(?:agent-skills|skills)\/([^/]+)\/SKILL\.md$/
+  );
+  return match ? `/docs/ai/skills/${match[1]}/SKILL.md` : null;
+}
+
+function staticMarkdownResponse(req, pathname) {
+  if (!pathname.endsWith('.md') || pathname.startsWith('/md/')) return null;
+
+  // Skill-discovery alias: no physical file here — a next.config rewrite maps it
+  // to a real SKILL.md. Serve (via the rewrite) if that skill exists, else a
+  // markdown 404. Returning next() rather than null keeps a single beacon —
+  // falling through would fire again in the agent branch for agent UAs.
+  const aliasTarget = skillAliasTarget(pathname);
+  if (aliasTarget !== null) {
+    if (STATIC_MD.has(aliasTarget)) return servedStaticMarkdown(req);
+    trackLLMPageview(req, { is404: true });
+    return markdownNotFoundResponse(pathname, { source: 'agent-404' });
+  }
+
+  // Real static file (SKILL.md, references, prompts, /pricing.md): serve it as-is.
+  // Checked before getMarkdownPath because some static files also have a
+  // CUSTOM_MARKDOWN_PATHS mapping (e.g. /pricing.md) — the file is right here.
+  if (STATIC_MD.has(pathname)) return servedStaticMarkdown(req);
+
+  // Has a generated /md sibling → let the existing fetch-based branch serve it
+  // (or return its own markdown 404); both outcomes are tracked there.
+  if (getMarkdownPath(pathname) !== null) return null;
+
+  // No static file and no /md sibling → genuine miss.
+  trackLLMPageview(req, { is404: true });
+  return markdownNotFoundResponse(pathname, { source: 'agent-404' });
+}
 
 export async function proxy(req) {
   try {
@@ -87,6 +220,7 @@ export async function proxy(req) {
           });
         }
         if (res.status === 404) {
+          trackLLMPageview(req, { is404: true });
           return new NextResponse(
             buildAgent404Response(pathname, {
               context: 'Neon Blog',
@@ -119,7 +253,19 @@ export async function proxy(req) {
       }
     }
 
-    if (isAIAgentRequest(req)) {
+    // Retired neon-postgres skill reference URLs (PR #4666) → 308 to their
+    // consolidated docs pages. Runs before agent detection so browsers and tools
+    // both follow the redirect.
+    const skillRedirect = skillReferenceRedirectResponse(req, pathname);
+    if (skillRedirect) return skillRedirect;
+
+    // Missing `.md` with no generated /md sibling → markdown 404 (real static
+    // files pass through). Covers skills, .well-known, and arbitrary paths.
+    const staticMd = staticMarkdownResponse(req, pathname);
+    if (staticMd) return staticMd;
+
+    const isAgent = isAIAgentRequest(req);
+    if (isAgent) {
       let agentHit404 = false;
       const markdownPath = getMarkdownPath(pathname);
 
@@ -159,17 +305,7 @@ export async function proxy(req) {
       trackLLMPageview(req, { is404: agentHit404 });
 
       if (agentHit404) {
-        return applyDocHeaders(
-          new NextResponse(buildAgent404Response(pathname), {
-            status: 404,
-            headers: {
-              'Content-Type': 'text/markdown; charset=utf-8',
-              'Cache-Control': 'public, max-age=60, s-maxage=300',
-              'X-Content-Source': 'agent-404',
-              'X-Robots-Tag': 'noindex',
-            },
-          })
-        );
+        return markdownMovedOr404Response(req, pathname, 'agent-404');
       }
     }
 
@@ -198,6 +334,16 @@ export async function proxy(req) {
             const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
             const response = await fetch(markdownUrl);
 
+            // Track .md as agent traffic, but only on outcomes handled here
+            // (200/404). A 5xx falls through untracked. Skip agents entirely:
+            // the agent branch above already tracked them, and an agent whose
+            // first fetch threw falls through to here — tracking again would
+            // double-count (a browser only ever reaches this branch).
+            const isMarkdown404 = response.status === 404;
+            if (!isAgent && (response.ok || isMarkdown404)) {
+              trackLLMPageview(req, { is404: isMarkdown404 });
+            }
+
             if (response.ok) {
               const markdown = await response.text();
               return applyDocHeaders(
@@ -214,17 +360,7 @@ export async function proxy(req) {
             }
 
             if (response.status === 404) {
-              return applyDocHeaders(
-                new NextResponse(buildAgent404Response(pathname), {
-                  status: 404,
-                  headers: {
-                    'Content-Type': 'text/markdown; charset=utf-8',
-                    'Cache-Control': 'public, max-age=60, s-maxage=300',
-                    'X-Content-Source': 'md-404',
-                    'X-Robots-Tag': 'noindex',
-                  },
-                })
-              );
+              return markdownMovedOr404Response(req, pathname, 'md-404');
             }
           } catch (error) {
             console.error('[.md] Error serving markdown', { pathname, error: error.message });
@@ -287,5 +423,6 @@ export const config = {
     '/blog/:slug.md', // Individual blog post markdown
     '/(docs|postgresql|guides|branching|programs|use-cases|faqs)/:path*', // All markdown routes
     '/:path(docs|postgresql|guides|branching|programs|use-cases).md', // Top-level .md index URLs
+    '/(.*\\.md)', // Any .md anywhere: staticMarkdownResponse serves the file or a markdown 404
   ],
 };

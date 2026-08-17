@@ -121,6 +121,11 @@
       @apply my-2!;
     }
 
+    /* DocsList owns its item spacing; do not apply loose Markdown list margins. */
+    & .docs-list li > p {
+      @apply my-0!;
+    }
+
     > h2:first-child,
     > h3:first-child,
     > h4:first-child {
@@ -273,8 +278,34 @@
       }
     }
 
+    /* AI Gateway model table (AiGatewayModelIndex): the model-id chips are long
+       hyphenated slugs (e.g. qwen3-next-80b-a3b-instruct). The global inline-code
+       rule's `overflow-wrap: anywhere` would break them across many lines; keep
+       each id on one line (the table wrapper scrolls horizontally if needed). */
+    .ai-gateway-model-table {
+      td code,
+      th code {
+        overflow-wrap: normal;
+        word-break: normal;
+        white-space: nowrap;
+      }
+    }
+
     .sticky-table {
       @apply relative lg:[--docs-header-height:0px];
+    }
+
+    .sticky-table--native {
+      @apply grid;
+
+      > .sticky-table-header,
+      > .table-wrapper {
+        grid-area: 1 / 1;
+      }
+
+      > .sticky-table-header {
+        @apply sticky left-auto w-auto self-start;
+      }
     }
 
     .sticky-table-header {

@@ -1,4 +1,4 @@
-text: 'Autoscaling Report: Production databases on Neon use 2.4x less compute and 50% less cost than if they were running on a provisioned platform.'
+text: 'You can now deploy Neon Functions - they live in the branch next to your DB, are long-running, perfect for agents and realtime'
 link:
-  url: 'https://neon.com/autoscaling-report'
+  url: 'https://neon.com/blog/neon-functions-backend-logic-next-to-your-data'
   target: '_blank'

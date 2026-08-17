@@ -1,8 +1,8 @@
 ---
 title: The lakebase_text extension
-subtitle: BM25 full-text search for Neon Postgres
+subtitle: BM25 full-text search for Lakebase Postgres
 summary: >-
-  The lakebase_text extension adds the lakebase_bm25 index type to Neon Postgres
+  The lakebase_text extension adds the lakebase_bm25 index type to Lakebase Postgres
   for BM25 full-text search. It requires no migration from PostgreSQL's built-in
   full-text search — standard tsvector types and tsquery operators work unchanged.
   Use this page to enable the extension, create a lakebase_bm25 index, query
@@ -10,7 +10,7 @@ summary: >-
   and prefilter GUCs, set fallback parameters at the index level, and reference
   all types, operators, functions, and index parameters.
 enableTableOfContents: true
-updatedOn: '2026-06-26T12:58:36.951Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 The `lakebase_text` extension adds a `lakebase_bm25` index type to Postgres for [BM25](https://en.wikipedia.org/wiki/Okapi_BM25) full-text search. It is a native upgrade to PostgreSQL's built-in full-text search: standard `tsvector` type and query operators work unchanged; only the index type changes.

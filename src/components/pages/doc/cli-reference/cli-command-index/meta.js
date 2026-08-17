@@ -15,7 +15,7 @@ const META = {
   auth: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon auth'] },
   init: {
     desc: 'Wire up MCP, agent skills, and editor (Cursor/VS Code/Claude).',
-    examples: ['npx neonctl@latest init'],
+    examples: ['npx neon@latest init'],
   },
   link: {
     desc: 'Bind the directory to a project; writes .neon and pulls env.',
@@ -32,6 +32,10 @@ const META = {
   'set-context': {
     desc: 'Write org/project/branch context to .neon.',
     examples: ['neon set-context --project-id polished-snowflake-1234'],
+  },
+  open: {
+    desc: 'Open the linked project in the Neon Console in your browser.',
+    examples: ['neon open'],
   },
   me: { desc: 'Show the authenticated user.', examples: ['neon me'] },
   completion: { desc: 'Generate a shell completion script.' },

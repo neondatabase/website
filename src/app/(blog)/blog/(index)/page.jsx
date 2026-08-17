@@ -65,6 +65,6 @@ const BlogPage = async () => {
   );
 };
 
-export const revalidate = 300;
+export const revalidate = false;
 
 export default BlogPage;

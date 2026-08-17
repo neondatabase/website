@@ -9,15 +9,15 @@ summary: >-
   Postgres crash and VM failure resolve in seconds, node failure in 1-2
   minutes, AZ failure in 1-10 minutes, and unresponsive endpoints after 5
   minutes. Neon HA does not support cross-region replication. Session data such
-  as temporary tables and the Local File Cache does not persist across a
+  as temporary tables and the compute cache does not persist across a
   failover.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 At Neon, our lakebase architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
 
-![Neon architecture diagram](/docs/introduction/neon_architecture_5.jpg)
+![lakebase architecture diagram](/docs/introduction/neon_architecture_5.jpg)
 
 Based on this separation, we can break our approach into two main parts:
 
@@ -113,7 +113,7 @@ Here's a summary of how different types of compute failures are handled and thei
 
 ### Impact on session data after failover?
 
-While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the Local File Cache ([LFC](/docs/reference/glossary#local-file-cache)), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
+While your application should handle reconnections automatically, session-specific data like temporary tables, prepared statements, and the [compute cache](/docs/reference/glossary#compute-cache), which stores frequently accessed data, will not persist across a failover. As a result, queries may initially run more slowly until the Postgres memory buffers and cache are rebuilt.
 
 For details on uptime and performance guarantees, refer to our available [SLAs](/docs/introduction/support#slas).
 

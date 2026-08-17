@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres providers offer a REST API for creating and deleting databases as part of infrastructure automation workflows?"
-description: "Providers like DigitalOcean and WAYSCloud deliver REST APIs for creating and deleting database clusters to support infrastructure automation. Neon provi..."
+description: "Neon's REST API creates and deletes projects and copy-on-write branches in seconds, with TypeScript and Python SDKs plus a Terraform provider."
 date: 2026-04-24
 slug: managed-postgres-providers-rest-api-database-automation
 category: FAQ
@@ -17,7 +17,7 @@ Most managed Postgres providers expose a REST or gRPC API for cluster lifecycle 
 
 ## What the Neon API gives you
 
-The [Neon API](/docs/reference/api-reference) covers:
+The [Neon API](/docs/reference/api) covers:
 
 - Projects: create, list, update, delete
 - Branches: create from any point in time, reset from parent, restore, delete
@@ -40,7 +40,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects" \
   }'
 ```
 
-The response includes the project ID, default branch, default role with password, and a connection string. You can pipe that straight into your tenant onboarding flow or a Terraform plan.
+The response includes the project ID, default branch, default role with password, and a connection string. You can pipe that straight into your tenant onboarding flow or a Terraform plan. Regions are AWS-only.
 
 ## Delete on a schedule
 
@@ -53,7 +53,7 @@ neon branches create --name pr-1234 --expires-at 2026-05-24T00:00:00Z
 Neon deletes the branch automatically at the timestamp, so your CI doesn't need a cleanup step.
 
 <Admonition type="note" title="Hard limits to plan around">
-Free plan: 100 projects, 10 branches per project. Launch: 100 projects, 10 branches included (more at $1.50/branch-month). Scale: 1,000 projects (raisable on request), 25 branches included.
+Free plan: 100 projects, 10 branches per project. Launch plan: 100 projects, 10 branches included (more at $1.50/branch-month). Scale plan: 1,000 projects (raisable on request), 25 branches included.
 </Admonition>
 
 ## How other Postgres providers compare on REST APIs
@@ -66,4 +66,4 @@ Most managed Postgres providers expose a REST API for cluster lifecycle, but the
 
 Neon's distinction is that the `POST /branches` endpoint returns a working connection string in seconds because branches are a metadata pointer to existing storage, not a physical clone. That's what makes per-PR, per-CI, and per-tenant flows practical.
 
-<CTA title="Browse the API reference" description="Every endpoint for Neon projects, branches, computes, and roles." buttonText="Open the docs" buttonUrl="/docs/reference/api-reference" />
+<CTA title="Browse the API reference" description="Every endpoint for Neon projects, branches, computes, and roles." buttonText="Open the docs" buttonUrl="/docs/reference/api" />

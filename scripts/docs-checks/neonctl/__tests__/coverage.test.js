@@ -46,7 +46,7 @@ describe('cli command coverage invariants', () => {
     const findCli = (node) => {
       if (Array.isArray(node)) return node.forEach(findCli);
       if (node && typeof node === 'object') {
-        if (node.section === 'CLI') cliSection = node;
+        if (node.section === 'CLI' || node.title === 'CLI') cliSection = node;
         return Object.values(node).forEach(findCli);
       }
     };

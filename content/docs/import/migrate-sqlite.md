@@ -1,7 +1,7 @@
 ---
-title: Migrate from SQLite to Neon Postgres
+title: Migrate from SQLite to Lakebase Postgres
 summary: >-
-  SQLite-to-Neon Postgres migration using pgloader transfers schemas and data
+  SQLite-to-Lakebase Postgres migration using pgloader transfers schemas and data
   while mapping SQLite type affinities to strict Postgres types. Use this page
   when moving an existing SQLite or Turso database to Neon and needing control
   over type casting via pgloader CAST clauses, as distinct from guides covering
@@ -10,12 +10,12 @@ summary: >-
   SSL workaround.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
-This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
+This guide describes how to migrate your SQLite database to Lakebase Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
 
-`pgloader` is an open-source data loading and migration tool that efficiently transfers data from various sources (like CSV, MySQL, SQLite, MS SQL, etc.) into Postgres, handling schema and data transformations on the fly. We'll use it to migrate a sample SQLite database to Neon Postgres
+`pgloader` is an open-source data loading and migration tool that efficiently transfers data from various sources (like CSV, MySQL, SQLite, MS SQL, etc.) into Postgres, handling schema and data transformations on the fly. We'll use it to migrate a sample SQLite database to Lakebase Postgres
 
 ## Prerequisites
 

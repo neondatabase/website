@@ -1,10 +1,10 @@
 ---
 title: Building a Robust JSON API with TypeScript, Postgres, and Azure Functions
-subtitle: Learn how to leverage TypeScript, Neon Postgres Databases, and Azure Functions for Next-Level API Performance
+subtitle: Learn how to leverage TypeScript, Lakebase Postgres Databases, and Azure Functions for Next-Level API Performance
 author: jess-chadwick
 enableTableOfContents: true
 createdAt: '2025-02-01T00:00:00.000Z'
-updatedOn: '2026-05-09T19:22:21.118Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 Creating scalable and maintainable APIs is a cornerstone of modern web development. In this post I will show you how to build a simple (but realistic) Recipes API using one of my favorite combinations of technologies: TypeScript for type safety, Postgres for database storage, and Azure Functions for serverless hosting.

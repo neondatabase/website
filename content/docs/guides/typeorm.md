@@ -1,31 +1,31 @@
 ---
 title: Connect from TypeORM to Neon
-subtitle: Learn how to connect to Neon from TypeORM
+subtitle: Learn how to connect to Lakebase Postgres from TypeORM
 summary: >-
-  TypeORM connects to Neon Postgres by setting `DataSource` type to `postgres`,
-  supplying the Neon connection string via `DATABASE_URL`, and enabling `ssl:
+  TypeORM connects to Lakebase Postgres by setting `DataSource` type to `postgres`,
+  supplying the Lakebase Postgres connection string via `DATABASE_URL`, and enabling `ssl:
   true`. Serverless deployments should use a pooled connection string (add
   `-pooler` to the endpoint ID) to handle high concurrency without exhausting
-  connections. To prevent timeouts from Neon's idle-compute cold start (default
+  connections. To prevent timeouts from Lakebase Postgres idle-compute cold start (default
   5 minutes), add `connect_timeout=10` to the connection string.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 <CopyPrompt src="/prompts/typeorm-prompt.md" 
-description="Pre-built prompt for connecting Node.js applications to Neon using TypeORM."/>
+description="Pre-built prompt for connecting Node.js applications to Lakebase Postgres using TypeORM."/>
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
 
-- [Connect to Neon from TypeORM](#connect-to-neon-from-typeorm)
+- [Connect to a database on Neon from TypeORM](#connect-to-a-database-on-neon-from-typeorm)
 - [Use connection pooling with TypeORM](#use-connection-pooling-with-typeorm)
 - [Connection timeouts](#connection-timeouts)
 
-## Connect to Neon from TypeORM
+## Connect to a database on Neon from TypeORM
 
-To establish a basic connection from TypeORM to Neon, perform the following steps:
+To establish a basic connection from TypeORM to a database on Neon, perform the following steps:
 
-1. Retrieve your Neon connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+1. Retrieve your database connection string. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. Select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
    ![Connection details modal](/docs/connect/connection_details.png)
    The connection string includes the user name, password, hostname, and database name.
 
@@ -67,6 +67,10 @@ DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east
 
 A pooled Neon connection string adds `-pooler` to the endpoint ID, which tells Neon to use a pooled connection. You can add `-pooler` to your connection string manually or copy a pooled connection string from the **Connect to your database** modal, which you can access by clicking **Connect** on your **Project Dashboard**. Enable the **Connection pooling** toggle to add the `-pooler` suffix.
 
+<Admonition type="important">
+Use a pooled connection string for your application at runtime, but use a direct (non-pooled) connection string when running TypeORM migrations. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that migration tools rely on, so running migrations over a pooled connection can lead to errors. See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
+
 ## Connection timeouts
 
 A connection timeout that occurs when connecting from TypeORM to Neon causes an error similar to the following:
@@ -89,5 +93,12 @@ DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=re
 <Admonition type="note">
 A `connect_timeout` setting of 0 means no timeout.
 </Admonition>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

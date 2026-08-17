@@ -1,8 +1,8 @@
 ---
 title: Use Neon with Deno Deploy
-subtitle: Connect a Neon Postgres database to your Deno Deploy application
+subtitle: Connect a Lakebase Postgres database to your Deno Deploy application
 summary: >-
-  Guide to connecting a Neon Postgres database to a Deno application using the
+  Guide to connecting a Lakebase Postgres database to a Deno application using the
   Neon serverless driver (@neon/serverless on JSR) for both local Deno Runtime
   and production edge deployment on Deno Deploy via deployctl. Use this page
   when building a TypeScript or JavaScript app on Deno's serverless platform
@@ -10,12 +10,12 @@ summary: >-
   DATABASE_URL setup, the deployctl deploy command, and optional GitHub
   integration for automated deployments.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 [Deno Deploy](https://deno.com/deploy) is a scalable serverless platform for running JavaScript, TypeScript, and WebAssembly at the edge, designed by the creators of Deno. It simplifies the deployment process and offers automatic scaling, zero-downtime deployments, and global distribution.
 
-This guide demonstrates how to connect to a Neon Postgres database from a simple Deno application using the [Neon serverless driver](https://jsr.io/@neon/serverless) on [JSR](https://jsr.io/).
+This guide demonstrates how to connect to a Lakebase Postgres database from a simple Deno application using the Neon serverless driver on JSR.
 
 The guide covers two deployment options:
 

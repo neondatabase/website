@@ -2,11 +2,11 @@
 title: Connect a Django application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Django application
 summary: >-
-  Connecting Django to Neon serverless Postgres requires configuring the
+  Connecting Django to Neon serverless Lakebase Postgres requires configuring the
   `DATABASES` block in `settings.py` with the psycopg3 driver, `sslmode:
   require`, and `CONN_HEALTH_CHECKS: True` to prevent dropped connections when
-  Neon's compute scales to zero after 5 minutes of inactivity. Use this page
-  when setting up a new Django-to-Neon connection or debugging the `Endpoint ID
+  the compute scales to zero after 5 minutes of inactivity. Use this page
+  when setting up a new Django connection or debugging the `Endpoint ID
   is not specified` SNI error, which occurs with psycopg2 and libpq versions
   older than v14. For schema migrations after connecting, see the separate Django
   Migrations guide.
@@ -15,7 +15,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2026-07-08T18:21:32.749Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
@@ -188,18 +188,18 @@ For schema migration with Django, see our guide:
 
 <DetailIconCards>
 
-<a href="/docs/guides/django-migrations" description="Schema migration with Neon Postgres and Django" icon="app-store" icon="app-store">Django Migrations</a>
+<a href="/docs/guides/django-migrations" description="Schema migration with Lakebase Postgres and Django" icon="app-store" icon="app-store">Django Migrations</a>
 
 </DetailIconCards>
 
 ## Django application blog post and sample application
 
-Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
+Learn how to use Django with Lakebase Postgres with this blog post and the accompanying sample application.
 
 <DetailIconCards>
-<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
+<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Lakebase Postgres" icon="import">Blog Post: Using Django with Neon</a>
 
-<a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
+<a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Lakebase Postgres" icon="github">Django sample application</a>
 </DetailIconCards>
 
 ## Community resources
@@ -219,6 +219,7 @@ Learn how to use Django with Neon Postgres with this blog post and the accompany
 
 ## Next steps
 
-- [Set up Neon Auth](/docs/auth/overview): Add managed authentication that branches with your database.
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database.
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential.
 
 <NeedHelp/>

@@ -143,7 +143,7 @@ Projects linked to **GitHub** or **Vercel** in Neon cannot be transferred; the t
 | `CONSUMPTION_PROJECT_IDS` | Optional comma-separated Neon project ids to include (this script does **not** read `NEON_PROJECT_ID`) |
 | `CONSUMPTION_LIMIT`, `CONSUMPTION_CURSOR` | Pagination |
 
-**Legacy account endpoint:** `GET /api/v2/consumption_history/account` is **deprecated** with a planned sunset of **2026-06-01**. Prefer this repo’s **`consumption-query.ts`** (`GET /consumption_history/v2/projects`) for invoice-aligned, per-project metrics. If you still need legacy metric shapes, see [Query consumption metrics (legacy)](https://neon.com/docs/guides/consumption-metrics-legacy.md).
+**Legacy account endpoint:** the legacy `GET /api/v2/consumption_history/account` endpoint has been retired. Use this repo’s **`consumption-query.ts`** (`GET /consumption_history/v2/projects`) for invoice-aligned, per-project metrics instead. If you still need legacy metric shapes, see [Query consumption metrics (legacy)](https://neon.com/docs/guides/consumption-metrics-legacy.md).
 
 **`metrics` values (v2):** pass a subset or all of: `compute_unit_seconds`, `root_branch_bytes_month`, `child_branch_bytes_month`, `instant_restore_bytes_month`, `snapshot_storage_bytes_month`, `public_network_transfer_bytes`, `private_network_transfer_bytes`, `extra_branches_month`. These are the strings accepted in `CONSUMPTION_METRICS` and by the API `metrics` parameter ([consumption metrics guide](https://neon.com/docs/guides/consumption-metrics.md#required-parameters)).
 

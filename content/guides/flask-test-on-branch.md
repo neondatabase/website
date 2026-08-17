@@ -4,7 +4,7 @@ subtitle: Leveraging Realistic Production Data for Robust Testing with Flask and
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-07-31T19:05:29.503Z'
 ---
 
 [Flask](https://flask.palletsprojects.com/) is a popular Python micro-framework widely used for building web applications. It includes powerful tools for automated testing, with [pytest](https://docs.pytest.org/) being a preferred option due to its simplicity and effectiveness.
@@ -190,7 +190,7 @@ With the simple test in place, you can now run the tests using pytest:
 pytest
 ```
 
-This setup provides a foundation for testing Flask applications with Neon Postgres, which you can expand upon for more complex applications and comprehensive test suites.
+This setup provides a foundation for testing Flask applications with Lakebase Postgres, which you can expand upon for more complex applications and comprehensive test suites.
 
 ## Using Neon Branching with Flask
 

@@ -13,14 +13,15 @@ summary: >-
   resource replacements and data loss during `terraform init -upgrade`.
 enableTableOfContents: true
 tag: community
-updatedOn: '2026-06-05T17:20:32.620Z'
+tagTheme: gray
+updatedOn: '2026-08-04T08:34:18.168Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
 
 This guide will show you how to use **Terraform to manage your Neon projects**, including your branches, databases, and compute endpoints. By using Terraform with Neon, you get better control, can track changes, and automate your database setup.
 
-Neon sponsors the following community-developed Terraform provider for managing Neon Postgres platform resources:
+Neon sponsors the following community-developed Terraform provider for managing Neon resources:
 
 **Terraform Provider Neon - Maintainer: Dmitry Kisler**
 
@@ -44,7 +45,7 @@ This provider is not maintained or officially supported by Neon. Use at your own
   - Explicitly define all critical resource parameters in your Terraform configurations, even if they had defaults previously.
   - On Neon paid plans, you can enable branch protection to prevent unintended deletion of branches and projects. To learn more, see [Protected branches](/docs/guides/protected-branches).
 
-- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
+- **Provider maintenance**: As Neon enhances existing features and introduces new ones, the [Neon API](/docs/reference/api) will continue to evolve. These changes may not immediately appear in community-maintained Terraform providers. If you notice that a provider requires an update, please reach out to the maintainer by opening an issue or contributing to the provider's GitHub repository.
 
 ## Prerequisites
 
@@ -854,7 +855,7 @@ Terraform will ask for confirmation before deleting the resources.
 
 ## Example application
 
-The following example application demonstrates how to set up Terraform, connect to a Neon Postgres database, and perform a Terraform run that inserts data. It covers how to:
+The following example application demonstrates how to set up Terraform, connect to a database, and perform a Terraform run that inserts data. It covers how to:
 
 - Use Go's `os/exec` package to run Terraform commands
 - Write a Go test function to validate Terraform execution

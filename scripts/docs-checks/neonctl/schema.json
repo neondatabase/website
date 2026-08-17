@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.30.0",
+  "neonctlVersion": "3.2.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -15,6 +15,7 @@
     "api-key": {
       "type": "string",
       "describe": "Neon API key, authenticates without `neon auth`",
+      "default": "",
       "defaultText": "NEON_API_KEY environment variable"
     },
     "color": {
@@ -47,6 +48,10 @@
         "yaml",
         "table"
       ]
+    },
+    "profile": {
+      "type": "string",
+      "describe": "Named credentials to use, from profiles.json (default: NEON_PROFILE, else DEFAULT)"
     },
     "version": {
       "type": "boolean",
@@ -135,6 +140,72 @@
           "description": "List every available API route"
         }
       ]
+    },
+    "api-keys": {
+      "aliases": [
+        "api-key"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "A name to identify the key later",
+              "required": true
+            },
+            "org-id": {
+              "type": "string",
+              "describe": "Create a key for this organization instead of your account"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Create a key that can access only this project. Its organization is looked up from the project"
+            }
+          },
+          "commands": {},
+          "describe": "Create an API key. The key is shown once and cannot be retrieved again"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "List the organization's keys instead of your account's"
+            }
+          },
+          "commands": {},
+          "describe": "List API keys for your account, or for an organization"
+        },
+        "revoke": {
+          "name": "revoke",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true,
+              "describe": "The API key id, from `api-keys list`",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "org-id": {
+              "type": "string",
+              "describe": "Revoke an organization key instead of an account key"
+            }
+          },
+          "commands": {},
+          "describe": "Revoke an API key. Anything using it stops working immediately"
+        }
+      },
+      "describe": "Manage API keys",
+      "usage": "$0 api-keys <sub-command> [options]"
     },
     "auth": {
       "aliases": [
@@ -305,6 +376,10 @@
             "parent": {
               "type": "string",
               "describe": "Parent branch name or id or timestamp or LSN. Defaults to the default branch"
+            },
+            "protected": {
+              "type": "boolean",
+              "describe": "Whether the branch is protected. Protected branches (and their computes) cannot be deleted, archived, or reset, and block deletion of the project. Can be gated by `protected_branches_only` in the IP allowlist. Paid plans only."
             },
             "psql": {
               "type": "boolean",
@@ -584,7 +659,16 @@
               "type": "string"
             }
           ],
-          "options": {},
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
           "commands": {},
           "describe": "Delete a bucket from a branch",
           "usage": "$0 bucket delete <name> [options]"
@@ -595,7 +679,16 @@
             "ls"
           ],
           "positionals": [],
-          "options": {},
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
           "commands": {},
           "describe": "List the buckets on a branch",
           "usage": "$0 bucket list [options]"
@@ -847,10 +940,18 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "from-branch": {
+              "type": "boolean",
+              "describe": "Seed neon.ts from a branch's live Neon state instead of asking. Uses the branch pinned in .neon, or --branch <name|id>, or the project's default branch. The only mode of `config init` that calls the Neon API."
+            },
             "install": {
               "type": "boolean",
               "describe": "Install @neon/config and @neon/env if they're missing. On by default; use --no-install to just print the command.",
               "default": true
+            },
+            "services": {
+              "type": "array",
+              "describe": "Services the scaffolded neon.ts declares: auth, functions, object-storage, ai-gateway. Pass \"none\" for the bare starter policy. Repeat the flag or comma-separate. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY."
             }
           },
           "commands": {},
@@ -1295,6 +1396,53 @@
         }
       ]
     },
+    "diff": {
+      "aliases": [],
+      "positionals": [
+        {
+          "name": "compare-branch",
+          "describe": "Branch name or id to compare against (the reference / '---' side). Defaults to the current branch's parent.",
+          "type": "string"
+        }
+      ],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "The branch to review (the '+++' side). Defaults to the branch pinned in the local context (.neon).",
+          "alias": "b"
+        },
+        "database": {
+          "type": "string",
+          "describe": "Limit the diff to a single database. Defaults to every database on the current branch.",
+          "alias": "db"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {},
+      "describe": "Show a git-style schema diff between the current branch and another branch",
+      "usage": "$0 diff [compare-branch] [options]",
+      "examples": [
+        {
+          "command": "$0 diff main --db neondb",
+          "description": "Diff only the neondb database against main"
+        },
+        {
+          "command": "$0 diff main --branch feature/checkout",
+          "description": "Diff an explicit branch against main (ignoring the .neon context)"
+        },
+        {
+          "command": "$0 diff",
+          "description": "Diff the current branch's schema against its parent branch"
+        },
+        {
+          "command": "$0 diff main",
+          "description": "Diff the current branch's schema against the main branch"
+        }
+      ]
+    },
     "env": {
       "aliases": [],
       "positionals": [],
@@ -1314,9 +1462,17 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "env": {
+              "type": "array",
+              "alias": "e"
+            },
             "file": {
               "type": "string",
               "describe": "Target .env file to write. Defaults to an existing .env, otherwise .env.local. Only Neon variables are updated; other lines are preserved."
+            },
+            "service": {
+              "type": "array",
+              "describe": "Pull only these services' variables: postgres, auth, data-api, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
             }
           },
           "commands": {},
@@ -1329,6 +1485,18 @@
             {
               "command": "$0 env pull --branch preview --file .env.preview",
               "description": "Pull a specific branch into a specific file"
+            },
+            {
+              "command": "$0 env pull -s ai-gateway -s postgres",
+              "description": "Pull only the AI Gateway and Postgres variables"
+            },
+            {
+              "command": "$0 env pull -e DATABASE_URL",
+              "description": "Pull only the pooled Postgres connection string"
+            },
+            {
+              "command": "$0 env pull -s auth -e DATABASE_URL",
+              "description": "Pull all Auth variables plus DATABASE_URL"
             }
           ],
           "usage": "$0 env pull [options]"
@@ -1478,6 +1646,146 @@
       "commands": {},
       "describe": "Initialize a project with Neon using your AI coding assistant"
     },
+    "inspect": {
+      "aliases": [
+        "inspection"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "db": {
+          "name": "db",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "database-name": {
+              "type": "string",
+              "describe": "Database name"
+            },
+            "db-url": {
+              "type": "string",
+              "describe": "Inspect any Postgres via a connection string, bypassing the Neon API (project/branch resolution is skipped)"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            },
+            "role-name": {
+              "type": "string",
+              "describe": "Role name"
+            }
+          },
+          "commands": {
+            "bloat": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Estimated table/index bloat (statistical estimate, no extension needed)"
+            },
+            "calls": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Most frequently called queries (needs pg_stat_statements)"
+            },
+            "index-sizes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Size of each index, largest first (pg_relation_size)"
+            },
+            "lfc-hit-rate": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Local File Cache hit rate (needs neon extension)"
+            },
+            "locks": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Locks held with the acquiring query and its age (pg_locks + pg_stat_activity)"
+            },
+            "long-running-queries": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Queries running longer than 5 minutes (pg_stat_activity)"
+            },
+            "outliers": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Queries taking the most cumulative execution time (needs pg_stat_statements)"
+            },
+            "replication-slots": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Replication slots: kind, status, client, restart/confirmed-flush LSNs, and lag (pg_replication_slots + pg_stat_replication)"
+            },
+            "seq-scans": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Number of sequential scans recorded against each table (pg_stat_user_tables)"
+            },
+            "subscriptions": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Per-table logical replication progress on this subscriber (pg_subscription_rel)"
+            },
+            "table-sizes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Size of each table (including TOAST), largest first (pg_table_size)"
+            },
+            "unused-indexes": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Non-unique indexes with few scans — candidates for removal (pg_stat_user_indexes)"
+            },
+            "vacuum-stats": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Autovacuum status per table: last (auto)vacuum, dead tuples, threshold"
+            },
+            "working-set": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Estimated working set vs LFC size (needs neon extension)"
+            }
+          },
+          "describe": "Run a diagnostic query against a branch's Postgres",
+          "usage": "$0 inspect db <sub-command> [options]"
+        }
+      },
+      "describe": "Inspect a database's health and configuration",
+      "usage": "$0 inspect <sub-command> [options]"
+    },
     "ip-allow": {
       "aliases": [],
       "positionals": [],
@@ -1567,7 +1875,7 @@
         },
         "branch": {
           "type": "string",
-          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neonctl checkout <branch>` (link never guesses a default).",
+          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neon checkout <branch>` (link never guesses a default).",
           "alias": "branch-id"
         },
         "checks": {
@@ -1634,9 +1942,179 @@
         },
         {
           "command": "$0 link --project-id polished-snowflake-12345678",
-          "description": "Link an existing project (org is inferred); pin a branch later with 'neonctl checkout'"
+          "description": "Link an existing project (org is inferred); pin a branch later with 'neon checkout'"
         }
       ]
+    },
+    "logs": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "field-values": {
+          "name": "field-values",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "field",
+              "required": true,
+              "describe": "The log field to list values for. Must be one of the names `logs fields` reports.",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "end-time": {
+              "type": "string",
+              "describe": "Exclusive end of the window (RFC 3339). Defaults to the current time."
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of distinct values to return (1-1000)"
+            },
+            "since": {
+              "type": "string",
+              "describe": "Length of the window, ending at --end-time or now. Defaults to 6h; the maximum window is 7d. Mutually exclusive with --start-time."
+            },
+            "source": {
+              "type": "string",
+              "describe": "Only consider records emitted by this service",
+              "choices": [
+                "function",
+                "storage",
+                "pg_endpoint"
+              ]
+            },
+            "start-time": {
+              "type": "string",
+              "describe": "Inclusive start of the window (RFC 3339, e.g. 2025-01-01T00:00:00Z). The maximum window is 7d. Mutually exclusive with --since."
+            }
+          },
+          "commands": {},
+          "describe": "List the distinct values observed for a log field",
+          "examples": [
+            {
+              "command": "$0 logs field-values service_name --since 6h",
+              "description": "Service names seen in the last six hours"
+            }
+          ]
+        },
+        "fields": {
+          "name": "fields",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List the log fields whose values can be discovered on a branch"
+        },
+        "query": {
+          "name": "query",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "body-contains": {
+              "type": "string",
+              "describe": "Match the case-sensitive rendered message. Structured bodies are rendered as compact JSON."
+            },
+            "cursor": {
+              "type": "string",
+              "describe": "Pagination cursor returned as next_cursor by a previous call. Repeat the same time range and filters."
+            },
+            "end-time": {
+              "type": "string",
+              "describe": "Exclusive end of the window (RFC 3339). Defaults to the current time."
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of records to return per page (1-1000)",
+              "default": 100
+            },
+            "logql": {
+              "type": "string",
+              "describe": "Raw LogQL expression (stream selectors and line filters only). Replaces the structured filters; the window, --limit, --sort-order and --cursor still apply."
+            },
+            "minimum-severity": {
+              "type": "string",
+              "describe": "Only records at or above this severity. Combines with --severity-text. If Neon reports that this filter is unsupported, use --severity-text instead.",
+              "choices": [
+                "trace",
+                "debug",
+                "info",
+                "warn",
+                "error",
+                "fatal"
+              ]
+            },
+            "scope-name": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry instrumentation scope name exactly"
+            },
+            "service-name": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry service.name resource attribute exactly"
+            },
+            "severity-text": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry severity text exactly. Run `neon logs field-values severity_text` to discover the values present."
+            },
+            "since": {
+              "type": "string",
+              "describe": "Length of the window, ending at --end-time or now. Defaults to 1h; the maximum window is 7d. Mutually exclusive with --start-time."
+            },
+            "sort-order": {
+              "type": "string",
+              "describe": "Order records by timestamp. Defaults to desc (newest first).",
+              "choices": [
+                "asc",
+                "desc"
+              ]
+            },
+            "source": {
+              "type": "string",
+              "describe": "Only records emitted by this service",
+              "choices": [
+                "function",
+                "storage",
+                "pg_endpoint"
+              ]
+            },
+            "start-time": {
+              "type": "string",
+              "describe": "Inclusive start of the window (RFC 3339, e.g. 2025-01-01T00:00:00Z). The maximum window is 7d. Mutually exclusive with --since."
+            },
+            "trace-id": {
+              "type": "string",
+              "describe": "Match records carrying this trace ID (32 lowercase hex digits)"
+            }
+          },
+          "commands": {},
+          "describe": "Query log records on a branch",
+          "examples": [
+            {
+              "command": "$0 logs query --since 1h --logql '{entity_type=\"function\"} |= \"timeout\"'",
+              "description": "A raw LogQL selection instead of the structured filters"
+            },
+            {
+              "command": "$0 logs query --branch main --source pg_endpoint --minimum-severity error",
+              "description": "Postgres compute errors on main"
+            },
+            {
+              "command": "$0 logs query --since 30m",
+              "description": "The last 30 minutes of logs on the default branch"
+            }
+          ]
+        }
+      },
+      "describe": "Query branch logs",
+      "usage": "$0 logs <sub-command> [options]"
     },
     "me": {
       "aliases": [],
@@ -2240,6 +2718,25 @@
       "describe": "Manage Neon Auth",
       "usage": "$0 neon-auth <sub-command> [options]"
     },
+    "open": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID (defaults to the project linked in .neon)"
+        }
+      },
+      "commands": {},
+      "describe": "Open the linked project in the Neon Console",
+      "usage": "$0 open [options]",
+      "examples": [
+        {
+          "command": "$0 open",
+          "description": ""
+        }
+      ]
+    },
     "operations": {
       "aliases": [
         "operation"
@@ -2282,6 +2779,110 @@
       },
       "describe": "Manage organizations",
       "usage": "$0 orgs <sub-command> [options]"
+    },
+    "profile": {
+      "aliases": [
+        "profiles"
+      ],
+      "positionals": [],
+      "options": {},
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "Name for the new profile",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "api-key": {
+              "type": "string",
+              "describe": "API key to store, or \"-\" to read it from stdin"
+            },
+            "force": {
+              "type": "boolean",
+              "describe": "Replace an existing profile, revoking the credential it holds now",
+              "default": false
+            },
+            "mint": {
+              "type": "boolean",
+              "describe": "Sign in once in the browser, then store a freshly minted API key and nothing else",
+              "default": false
+            },
+            "org-id": {
+              "type": "string",
+              "describe": "With --mint, mint a key for this organization instead of your account"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "With --mint, mint a key that can access only this project"
+            }
+          },
+          "commands": {},
+          "describe": "Create a profile. It holds either a browser sign-in or an API key, never both",
+          "examples": [
+            {
+              "command": "$0 profile create work",
+              "description": "Sign in with the browser, like `neon auth --profile work`"
+            },
+            {
+              "command": "$0 profile create ci --mint --org-id org-abc-123",
+              "description": "One browser sign-in, then an org-scoped key and no session left behind"
+            }
+          ]
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List profiles, the account each holds, and where its credentials live"
+        },
+        "remove": {
+          "name": "remove",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "Profile to remove",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt",
+              "default": false,
+              "alias": "y"
+            }
+          },
+          "commands": {},
+          "describe": "Revoke a profile's credential where possible, and remove it"
+        },
+        "rotate-key": {
+          "name": "rotate-key",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "Profile to rotate",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Mint a fresh API key for a profile, at the same scope, and revoke the one it replaces"
+        }
+      },
+      "describe": "Manage named sets of Neon credentials",
+      "usage": "$0 profile <sub-command> [options]"
     },
     "projects": {
       "aliases": [
@@ -2330,6 +2931,10 @@
             "org-id": {
               "type": "string",
               "describe": "The project's organization ID"
+            },
+            "pg-version": {
+              "type": "number",
+              "describe": "Major PostgreSQL version (14–19). Version 19 is available only in regions where it has been enabled."
             },
             "psql": {
               "type": "boolean",
@@ -2432,6 +3037,10 @@
               "type": "string",
               "describe": "The number of Compute Units. Could be a fixed size (e.g. \"2\") or a range delimited by a dash (e.g. \"0.5-3\")."
             },
+            "enable-logical-replication": {
+              "type": "boolean",
+              "describe": "Enable logical replication for all project endpoints. This suspends active endpoints and cannot be disabled."
+            },
             "hipaa": {
               "type": "boolean",
               "describe": "Enable HIPAA compliance for the project."
@@ -2439,6 +3048,11 @@
             "name": {
               "type": "string",
               "describe": "The project name"
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt when enabling logical replication.",
+              "default": false
             }
           },
           "commands": {},
@@ -2596,8 +3210,268 @@
         }
       },
       "commands": {},
-      "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
+      "describe": "Deprecated: use `neon link`. Set the .neon context (raw write).",
       "usage": "$0 set-context [options]"
+    },
+    "snapshots": {
+      "aliases": [
+        "snapshot"
+      ],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch id or name to snapshot. Defaults to the branch in your context, or the project's default branch.",
+              "alias": "b"
+            },
+            "expires-at": {
+              "type": "string",
+              "describe": "When the snapshot is automatically deleted (RFC 3339, e.g. 2025-12-31T23:59:59Z). Omit to keep it indefinitely."
+            },
+            "lsn": {
+              "type": "string",
+              "describe": "Take the snapshot at this LSN (e.g. 0/1F3C8A0). Must fall within the branch's restore window. Mutually exclusive with --timestamp."
+            },
+            "name": {
+              "type": "string",
+              "describe": "A name for the snapshot"
+            },
+            "timestamp": {
+              "type": "string",
+              "describe": "Take the snapshot at this point in time (RFC 3339, e.g. 2025-01-01T00:00:00Z). Must fall within the branch's restore window. Mutually exclusive with --lsn."
+            }
+          },
+          "commands": {},
+          "describe": "Create a snapshot from a branch",
+          "examples": [
+            {
+              "command": "$0 snapshots create --branch main --lsn 0/1F3C8A0 --expires-at 2025-12-31T23:59:59Z",
+              "description": "Snapshot main at an LSN, auto-deleting at the given time"
+            },
+            {
+              "command": "$0 snapshots create --branch main --timestamp 2025-01-01T00:00:00Z",
+              "description": "Snapshot main at a point in time"
+            },
+            {
+              "command": "$0 snapshots create --branch main --name pre-migration",
+              "description": "Snapshot the head of main with a name"
+            },
+            {
+              "command": "$0 snapshots create",
+              "description": "Snapshot the head of the context/default branch"
+            }
+          ]
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Delete a snapshot by id or name"
+        },
+        "finalize": {
+          "name": "finalize",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "branch",
+              "required": true
+            }
+          ],
+          "options": {
+            "name": {
+              "type": "string",
+              "describe": "Name to give the replaced (old) branch. Auto-generated when omitted."
+            }
+          },
+          "commands": {},
+          "describe": "Finalize a previewed snapshot restore (swap the restored branch in)"
+        },
+        "get": {
+          "name": "get",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Get a snapshot by id or name"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List snapshots in the project"
+        },
+        "restore": {
+          "name": "restore",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {
+            "finalize": {
+              "type": "boolean",
+              "describe": "Finalize the restore immediately: move computes onto the restored branch and swap it in for the target. Without this, the restore is left un-finalized so you can inspect it first, then run `snapshots finalize <branch>`.",
+              "default": false
+            },
+            "name": {
+              "type": "string",
+              "describe": "Name for the newly restored branch. Auto-generated when omitted."
+            },
+            "target-branch": {
+              "type": "string",
+              "describe": "Branch id or name to restore the snapshot onto. Defaults to the snapshot's source branch. Recommended when you intend to finalize (replace an existing branch)."
+            }
+          },
+          "commands": {},
+          "describe": "Restore a snapshot into a branch",
+          "examples": [
+            {
+              "command": "$0 snapshots restore snap-1234 --target-branch main",
+              "description": "Restore onto main un-finalized to preview, then run `snapshots finalize`"
+            },
+            {
+              "command": "$0 snapshots restore snap-1234 --target-branch main --finalize",
+              "description": "Restore onto main and swap it in immediately"
+            },
+            {
+              "command": "$0 snapshots restore snap-1234 --name recovered",
+              "description": "Restore a snapshot to a new branch named 'recovered'"
+            }
+          ]
+        },
+        "schedule": {
+          "name": "schedule",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {
+            "get": {
+              "name": "get",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch id or name. Defaults to the branch in your context, or the project's default branch.",
+                  "alias": "b"
+                }
+              },
+              "commands": {},
+              "describe": "Get a branch's automatic snapshot schedule"
+            },
+            "set": {
+              "name": "set",
+              "aliases": [],
+              "positionals": [],
+              "options": {
+                "branch": {
+                  "type": "string",
+                  "describe": "Branch id or name. Defaults to the branch in your context, or the project's default branch.",
+                  "alias": "b"
+                },
+                "day": {
+                  "type": "number",
+                  "describe": "Day of the week/month (1-31) to take the snapshot (used with --frequency)."
+                },
+                "frequency": {
+                  "type": "string",
+                  "describe": "How often to take snapshots. Combine with --hour, --day, and --retention to build a single-entry schedule.",
+                  "choices": [
+                    "daily",
+                    "weekly",
+                    "monthly"
+                  ]
+                },
+                "hour": {
+                  "type": "number",
+                  "describe": "Hour of the day (0-23) to take the snapshot (used with --frequency)."
+                },
+                "month": {
+                  "type": "number",
+                  "describe": "Month of the year (1-12) to take the snapshot (used with --frequency)."
+                },
+                "retention": {
+                  "type": "number",
+                  "describe": "How long to keep each snapshot, in seconds (min 3600). Omit to keep indefinitely."
+                },
+                "schedule": {
+                  "type": "string",
+                  "describe": "Full schedule as JSON, for multi-entry schedules, e.g. '[{\"frequency\":\"daily\",\"hour\":3,\"retention_seconds\":604800}]'. Overrides the single-entry flags."
+                }
+              },
+              "commands": {},
+              "describe": "Set a branch's automatic snapshot schedule",
+              "examples": [
+                {
+                  "command": "$0 snapshots schedule set --branch main --schedule '[{\"frequency\":\"weekly\",\"day\":1,\"hour\":2},{\"frequency\":\"daily\",\"hour\":3}]'",
+                  "description": "A multi-entry schedule via JSON"
+                },
+                {
+                  "command": "$0 snapshots schedule set --branch main --frequency daily --hour 3 --retention 604800",
+                  "description": "A daily 03:00 snapshot kept for 7 days"
+                }
+              ]
+            }
+          },
+          "describe": "Manage the automatic snapshot (backup) schedule of a branch",
+          "usage": "$0 snapshots schedule <sub-command> [options]"
+        },
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "id",
+              "required": true
+            }
+          ],
+          "options": {
+            "clear-expiration": {
+              "type": "boolean",
+              "describe": "Clear the expiration so the snapshot is kept indefinitely."
+            },
+            "expires-at": {
+              "type": "string",
+              "describe": "Set when the snapshot expires (RFC 3339). Mutually exclusive with --clear-expiration."
+            },
+            "name": {
+              "type": "string",
+              "describe": "Rename the snapshot"
+            }
+          },
+          "commands": {},
+          "describe": "Update a snapshot's name or expiration"
+        }
+      },
+      "describe": "Manage snapshots",
+      "usage": "$0 snapshots <sub-command> [options]"
     },
     "status": {
       "aliases": [],

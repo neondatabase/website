@@ -10,7 +10,7 @@ summary: >-
   the doc AI tools (Cursor and Claude slash commands) for consistency checks,
   redirects, and guided writing.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:49:10.111Z'
 ---
 
 This page covers everything you need to contribute to the Neon documentation, whether you're fixing a typo or writing a full guide.
@@ -293,7 +293,7 @@ Example file structure:
 To add an image to your Markdown file, add an entry that looks like this:
 
 ```md
-![Neon architecture diagram](/docs/introduction/neon_architecture.png)
+![lakebase architecture diagram](/docs/introduction/neon_architecture.png)
 ```
 
 ## Style Guide

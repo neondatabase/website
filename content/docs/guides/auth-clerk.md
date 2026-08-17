@@ -1,9 +1,9 @@
 ---
-title: Authenticate Neon Postgres application users with Clerk
-subtitle: Learn how to add authentication to a Neon Postgres database application using
+title: Authenticate Lakebase Postgres application users with Clerk
+subtitle: Learn how to add authentication to a Lakebase Postgres database application using
   Clerk
 summary: >-
-  Clerk authentication integration with Neon Postgres in a Next.js app uses
+  Clerk authentication integration with Lakebase Postgres in a Next.js app uses
   Clerk user IDs as primary keys in a Drizzle ORM schema to associate database
   rows with authenticated users, supporting social login, email, and
   multi-factor auth without building auth infrastructure. Choose this guide
@@ -12,11 +12,11 @@ summary: >-
   Drizzle-kit migration commands, ClerkProvider setup, and Next.js server
   actions backed by the Neon serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-06-18T16:36:42.941Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <Admonition type="tip" title="Building on Neon?">
-Neon provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
+Neon provides [Managed Better Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Auth state **branches with your data**, so preview and CI environments get isolated users and sessions.
 </Admonition>
 
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
@@ -25,12 +25,12 @@ User authentication is a critical requirement for web applications. Modern appli
 Looking to manage **authorization** along with authentication? [Neon RLS](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
 </Admonition>
 
-[Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Neon Postgres database.
+[Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Lakebase Postgres database.
 
-In this guide, we'll walk through setting up a simple Next.js application using Neon Postgres as the database, and add user authentication using [Clerk](https://clerk.com/). We will go over how to:
+In this guide, we'll walk through setting up a simple Next.js application using Lakebase Postgres as the database, and add user authentication using [Clerk](https://clerk.com/). We will go over how to:
 
 - Set up a Next.js project with Clerk for authentication
-- Create a Neon Postgres database and connect it to your application
+- Create a database on Neon and connect it to your application
 - Define a database schema using Drizzle ORM and generate migrations
 - Store and retrieve user data associated with Clerk user IDs
 
@@ -134,7 +134,7 @@ export const db = drizzle(sql, {
 });
 ```
 
-This exports a `db` instance that we can use to execute queries against the Neon database.
+This exports a `db` instance that we can use to execute queries against the database.
 
 Next, create a `schema.ts` file inside the `app/db` directory to define the database schema:
 
@@ -180,7 +180,7 @@ This will create a `drizzle` folder at the project root with the migration files
 npx drizzle-kit push:pg
 ```
 
-The `user_messages` table will now be visible in the Neon console.
+The `user_messages` table will now be visible in the console.
 
 ### Add authentication middleware
 
@@ -355,7 +355,7 @@ This will start the Next.js development server. Open your browser and navigate t
 
 ## Conclusion
 
-In this guide, we walked through setting up a simple Next.js application with user authentication using Clerk and a Neon Postgres database. We defined a database schema using Drizzle ORM, generated migrations, and interacted with the database to store and retrieve user data.
+In this guide, we walked through setting up a simple Next.js application with user authentication using Clerk and a Lakebase Postgres database. We defined a database schema using Drizzle ORM, generated migrations, and interacted with the database to store and retrieve user data.
 
 Next, we can add more routes and features to the application. The Clerk middleware ensures that only authenticated users can access any app routes, and the `ClerkProvider` component provides the user context to each of them.
 

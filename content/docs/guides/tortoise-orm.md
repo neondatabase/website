@@ -1,9 +1,9 @@
 ---
 title: Connect a Tortoise ORM application to Neon
-subtitle: Set up a Neon project in seconds and connect from a Python async application
+subtitle: Set up a project on Neon in seconds and connect from a Python async application
 summary: >-
   Tortoise ORM is an asyncio-native Python ORM (inspired by Django) that
-  connects to Neon Postgres via the asyncpg driver, enabling non-blocking
+  connects to Lakebase Postgres via the asyncpg driver, enabling non-blocking
   database access in FastAPI, Starlette, and other async frameworks. Use this
   guide for setup including virtual environment configuration, connection string
   formatting with ssl=true, model definition, schema generation, and
@@ -12,21 +12,21 @@ summary: >-
   python-dotenv, and avoiding hanging processes by calling
   Tortoise.close_connections() or using run_async().
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 <CopyPrompt src="/prompts/tortoise-orm-prompt.md" 
-description="Pre-built prompt for connecting Tortoise ORM applications to Neon Postgres"/>
+description="Pre-built prompt for connecting Tortoise ORM applications to Lakebase Postgres"/>
 
 [Tortoise ORM](https://tortoise.github.io/) is an easy-to-use `asyncio` Object Relational Mapper (ORM) inspired by Django. It is designed specifically for asynchronous Python applications, making it a great choice for building efficient, non-blocking database interactions in frameworks like FastAPI, Starlette, or any custom async application.
 
-In this guide, you’ll learn how to set up a Neon project and connect to it using Tortoise ORM with the `asyncpg` driver.
+In this guide, you’ll learn how to set up a Lakebase Postgres project and connect to it using Tortoise ORM with the `asyncpg` driver.
 
 ## Prerequisites
 
 To complete the steps in this guide, ensure that you have Python 3.10+ installed. If you do not have Python installed, refer to the [official Python website](https://www.python.org/downloads/) for installation instructions.
 
-To connect to Neon from Tortoise ORM:
+To connect to a Lakebase Postgres database from Tortoise ORM:
 
 <Steps>
 
@@ -81,6 +81,10 @@ DATABASE_URL="postgres://[PGUSER]:[PGPASSWORD]@[PGHOST]/[PGDATABASE]?ssl=true"
 ```
 
 > Replace the placeholders `[PGUSER]`, `[PGPASSWORD]`, `[PGHOST]`, and `[PGDATABASE]` with the corresponding values from your Neon connection details. Make sure to include `ssl=true` to ensure a secure connection.
+
+<Admonition type="important">
+Use a direct (non-pooled) connection string when generating schemas or running migrations (for example, with Aerich). Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema changes rely on, so running them over a pooled connection can lead to errors. Make sure the hostname does not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Create the application
 
@@ -214,5 +218,10 @@ The `in_transaction()` block ensures an all-or-nothing execution. Because the si
 
 - [Tortoise ORM documentation](https://tortoise.github.io/)
 - [asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
+
+## Next steps
+
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

@@ -1,65 +1,66 @@
 ---
-title: Neon's lakebase architecture
-subtitle: 'Inside Neon Postgres: decoupled compute and durable storage'
+title: The lakebase architecture
+subtitle: 'Inside Lakebase Postgres: decoupled compute and durable storage'
 summary: >-
-  Neon's lakebase architecture splits Postgres into an ephemeral compute layer
-  and a durable storage layer connected by WAL, so compute nodes can scale,
-  restart, or fail without data loss. The storage layer uses Paxos-based WAL
-  quorum across safekeepers to define commit correctness, a pageserver to
-  reconstruct page versions on demand, and object storage for immutable
-  long-term history. None of those components sit on the hot query path. This
-  design enables copy-on-write branching, instant point-in-time restores, and
-  serverless autoscaling including scale-to-zero, all as metadata operations
-  rather than data copies.
+  The lakebase architecture splits Postgres into an ephemeral compute layer and
+  a durable storage layer connected by WAL, so compute nodes can scale, restart,
+  or fail without data loss. The storage layer uses Paxos-based WAL quorum
+  across safekeepers to define commit correctness, a pageserver to reconstruct
+  page versions on demand, and object storage for immutable long-term history.
+  None of those components sit on the hot query path. This design enables
+  copy-on-write branching, instant point-in-time restores, and serverless
+  autoscaling including scale-to-zero, all as metadata operations rather than
+  data copies. Lakebase Postgres on Neon and on Databricks both run on this
+  architecture.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 ## Top level overview
 
-Instead of running Postgres as a single stateful system tied to a VM and its filesystem, Neon is a serverless database that splits the system into two independent layers: compute and storage. These layers communicate over the network, with a stream of write-ahead log (WAL) records connecting them.
+Instead of running Postgres as a single stateful system tied to a VM and its filesystem, Lakebase Postgres is a serverless database that splits the system into two independent layers: compute and storage. These layers communicate over the network, with a stream of write-ahead log (WAL) records connecting them.
 
-This separation is what puts Neon in the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) of OLTP databases. Compute can scale up, scale down, go idle, and be restarted instantly without risking data loss or requiring data movement.
+This separation is what puts Lakebase Postgres in the [lakebase category](https://www.databricks.com/blog/what-is-a-lakebase) of OLTP databases. Compute can scale up, scale down, go idle, and be restarted instantly without risking data loss or requiring data movement.
 
 - **Ephemeral compute layer**: optimized for latency and execution. This layer runs Postgres, executing queries and transactions using RAM and local NVMe for performance. Compute nodes do not own durable state and can be replaced freely.
 - **Durable storage layer**: optimized for correctness, history, and scale. This layer defines durability by replicating WAL via quorum, materializes Postgres pages on demand, and stores long-term, immutable history in object storage.
 
-Neon’s design intentionally keeps object storage off the critical path. Object storage provides durability and scale, but never sits in front of query execution. Latency-sensitive work stays close to compute, while durability and history are handled asynchronously and independently.
+The lakebase architecture intentionally keeps object storage off the critical path. Object storage provides durability and scale, but never sits in front of query execution. Latency-sensitive work stays close to compute, while durability and history are handled asynchronously and independently.
 
-![Neon architecture overview](/docs/introduction/neon-architecture-overview.png)
+![Lakebase architecture overview](/docs/introduction/neon-architecture-overview.png)
 
 <Admonition type="note" title="What is the difference between Neon and Lakebase?">
-Both products share the same architectural foundation but Lakebase comes with additional features integrating it with the rest of the Databricks Data and AI platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
+Neon and Databricks run the same database, Lakebase Postgres, on the same infrastructure. What surrounds it differs: on Neon it anchors a complete backend for apps and agents, while Databricks integrates it with the rest of the Data Intelligence Platform. For a full comparison, see [Neon and Lakebase](/docs/introduction/neon-and-lakebase).
 </Admonition>
 
 ## Resource hierarchy
 
-While the sections below describe Neon's physical architecture, the platform organizes resources into a logical hierarchy:
+While the sections below describe the physical architecture, Lakebase Postgres on Neon organizes resources into a logical hierarchy:
 
 | Concept          | Description                                                           | Relationship              |
 | ---------------- | --------------------------------------------------------------------- | ------------------------- |
 | Organization     | Highest-level container for billing, users, and projects              | Contains Projects         |
 | Project          | Primary container for all database resources for an application       | Contains Branches         |
 | Branch           | Lightweight, copy-on-write clone of database state                    | Contains Databases, Roles |
-| Compute Endpoint | Running PostgreSQL instance (CPU/RAM for queries)                     | Attached to a Branch      |
+| Compute Endpoint | Running Postgres instance (CPU/RAM for queries)                       | Attached to a Branch      |
 | Database         | Logical container for data (tables, schemas, views)                   | Exists within a Branch    |
-| Role             | PostgreSQL role for authentication and authorization                  | Belongs to a Branch       |
+| Role             | Postgres role for authentication and authorization                    | Belongs to a Branch       |
 | Operation        | Async action by the control plane (creating branch, starting compute) | Associated with Project   |
 
 For details on each concept, see the [glossary](/docs/reference/glossary).
 
 ## Compute layer
 
-The compute layer is where Postgres actually runs. Each Neon compute node is a standard Postgres instance: it parses SQL, plans queries, executes transactions, enforces MVCC, and manages locks and indexes. From the perspective of the query engine, nothing about Postgres itself is rewritten or replaced.
+The compute layer is where Postgres actually runs. Each Lakebase Postgres compute node is a standard Postgres instance: it parses SQL, plans queries, executes transactions, enforces MVCC, and manages locks and indexes. From the perspective of the query engine, nothing about Postgres itself is rewritten or replaced.
 
-What is different in Neon is what the compute node is responsible for. **It exists to execute work, not to preserve data.** A compute node can start, stop, scale, or fail at any time without putting durability at risk.
+What is different is what the compute node is responsible for. **It exists to execute work, not to preserve data.** A compute node can start, stop, scale, or fail at any time without putting durability at risk.
 
 ### Components
 
-A Neon compute node has access to fast, local resources:
+A compute node has access to fast, local resources:
 
 - RAM - used for shared_buffers, session state, and hot data
 - Local NVMe - used as a performance cache for data pages
@@ -74,7 +75,7 @@ When a query runs, the compute node behaves as you would expect:
 - Pages are accessed through the buffer manager
 - Changes are applied in memory
 
-The Neon difference appears when the system crosses the boundary between execution and durability. **Instead of flushing WAL to a local filesystem, the compute node streams WAL to the storage layer.** A transaction is considered committed once that WAL has been acknowledged by a quorum of safekeepers (more on this later). The compute node does not wait for data pages to be written to disk or object storage.
+The architectural difference appears when the system crosses the boundary between execution and durability. **Instead of flushing WAL to a local filesystem, the compute node streams WAL to the storage layer.** A transaction is considered committed once that WAL has been acknowledged by a quorum of safekeepers (more on this later). The compute node does not wait for data pages to be written to disk or object storage.
 
 For reads, **the compute node always prefers local access.** It first looks in memory, then in the local NVMe cache. Only when a page is missing locally does the compute node request it from the pageserver, which reconstructs the correct page version and returns it over the network. At no point does the compute node read directly from object storage.
 
@@ -82,7 +83,7 @@ For reads, **the compute node always prefers local access.** It first looks in m
 
 If the compute layer is responsible for execution, the storage layer is responsible for correctness, durability, and history. **This layer exists independently of any single compute node and continues to operate even when computes come and go.**
 
-Rather than exposing a traditional filesystem, the Neon storage layer is built around three distinct components, each with a well-defined role:
+Rather than exposing a traditional filesystem, the database storage layer is built around three distinct components, each with a well-defined role:
 
 - Safekeepers: define correctness by replicating WAL
 - The pageserver: turns WAL into queryable data pages
@@ -90,31 +91,31 @@ Rather than exposing a traditional filesystem, the Neon storage layer is built a
 
 ### Safekeepers: defining correctness via WAL quorum
 
-Safekeepers are responsible for one thing: **durable replication of WAL**. When a compute node generates WAL records, it streams them to multiple safekeepers. A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record [via the Paxos protocol](https://neon.com/blog/paxos).
+Safekeepers are responsible for one thing: **durable replication of WAL**. When a compute node generates WAL records, it streams them to multiple safekeepers. A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record [via the Paxos protocol](/blog/paxos).
 
 This is a fundamental difference from how traditional Postgres works:
 
-- Correctness in Neon is enforced through replication and consensus
-- Commit latency depends on network RTT, not disk fsync
+- Correctness is enforced through replication and consensus
+- Commit latency is primarily quorum/network-bound, with safekeepers batching WAL flushes rather than relying on compute-local fsync
 - No single machine defines the durable state of the database
 
 ### Pageserver: WAL ⇄ pages
 
-The pageserver sits between WAL and data [pages](https://neon.com/docs/reference/glossary#page). Its job is to **materialize page versions** by combining previously materialized base pages and committed WAL records. It is the system’s translation layer between the logical history of the database and the physical representation needed to run queries.
+The pageserver sits between WAL and data [pages](/docs/reference/glossary#page). Its job is to **materialize page versions** by combining previously materialized base pages and committed WAL records. It is the system’s translation layer between the logical history of the database and the physical representation needed to run queries.
 
-When a compute node needs a page at a specific [LSN (Log Sequence Number)](https://neon.com/docs/reference/glossary#lsn), it asks the pageserver. The pageserver checks whether it already has that version available. If not, it reconstructs the page by replaying WAL up to the requested LSN and returns the result. Materialized pages are later persisted into object storage asynchronously, building up the long-term history of the database.
+When a compute node needs a page at a specific [LSN (Log Sequence Number)](/docs/reference/glossary#lsn), it asks the pageserver. The pageserver checks whether it already has that version available. If not, it reconstructs the page by replaying WAL up to the requested LSN and returns the result. Materialized pages are later persisted into object storage asynchronously, building up the long-term history of the database.
 
 Importantly, page materialization is not on the transaction’s critical path. Commits do not wait for pages to be written or uploaded.
 
 ### Object storage: long-term, immutable history
 
-Object storage is where Neon keeps the **durable history** of the database. This layer stores materialized page versions, historical snapshots of data, and immutable representations of past states. It is not a query engine, and it is never accessed directly by the compute layer. It backs the pageserver, not Postgres.
+Object storage is where Lakebase Postgres keeps the **durable history** of the database. This layer stores materialized page versions, historical snapshots of data, and immutable representations of past states. It is not a query engine, and it is never accessed directly by the compute layer. It backs the pageserver, not Postgres.
 
-This distinction is critical for performance. Object storage is optimal for durability, scale, and cost, not latency. Reads from object storage may take hundreds of milliseconds, but in Neon, those reads happen only inside the pageserver when reconstructing pages, and never on the hot query path.
+This distinction is critical for performance. Object storage is optimal for durability, scale, and cost, not latency. Reads from object storage may take hundreds of milliseconds, but those reads happen only inside the pageserver when reconstructing pages, and never on the hot query path.
 
-## Write path: committing a transaction in Neon
+## Write path: committing a transaction
 
-![Write path in Neon](/docs/introduction/neon-write-path.png)
+![Write path in Lakebase Postgres](/docs/introduction/neon-write-path.png)
 
 When a transaction executes on a compute node:
 
@@ -125,9 +126,9 @@ When a transaction executes on a compute node:
 
 ## Read path: serving data without object-store latency
 
-![Read path in Neon](/docs/introduction/neon-read-path.png)
+![Read path in Lakebase Postgres](/docs/introduction/neon-read-path.png)
 
-The obvious concern with running a database on object storage is latency, but Neon’s architecture is designed specifically to avoid this. The most important thing to understand about reads in Neon is this: **queries do not read from object storage.** Object storage backs the system, but it is never on the hot query path.
+The obvious concern with running a database on object storage is latency, but the lakebase architecture is designed specifically to avoid this. The most important thing to understand about reads is this: **queries do not read from object storage.** Object storage backs the system, but it is never on the hot query path.
 
 ### The preferred path: local first
 
@@ -149,9 +150,9 @@ Once returned, the page can be cached in RAM and NVMe, making subsequent reads f
 
 ## Durability
 
-Durability in Neon is not a single mechanism but a composition of responsibilities. No single component is responsible for everything, and no single machine defines the state of the database.
+Durability in the lakebase architecture is not a single mechanism but a composition of responsibilities. No single component is responsible for everything, and no single machine defines the state of the database.
 
-This layering is what allows Neon to tolerate failures intrinsically:
+This layering is what allows Lakebase Postgres to tolerate failures intrinsically:
 
 - If a compute node dies → queries stop, but data is safe. A new compute attaches immediately and continues from the same history.
 - If a pageserver dies → no durable state is lost. Another pageserver can be deployed and it can reconstruct pages using WAL and object storage.
@@ -160,20 +161,20 @@ This layering is what allows Neon to tolerate failures intrinsically:
 
 ## What this architecture enables
 
-**This design turns traditionally heavy-weight database operations (which usually require copying large amounts of data) into simple metadata operations.** These include creating a new branch, restoring from a snapshot, spinning up a read replica, or attaching a new compute node. In Neon, these operations are fast because they operate on references to existing history, not on the data itself.
+**This design turns traditionally heavy-weight database operations (which usually require copying large amounts of data) into simple metadata operations.** These include creating a new branch, restoring from a snapshot, spinning up a read replica, or attaching a new compute node. In Lakebase Postgres, these operations are fast because they operate on references to existing history, not on the data itself.
 
-- **Serverless compute provisioning.** Because durable state lives outside the compute layer, compute endpoints can [automatically scale up and down according to load](https://neon.com/docs/introduction/autoscaling), or [scale to zero](https://neon.com/docs/introduction/scale-to-zero) entirely. When compute starts, it simply attaches to existing database history rather than reconstructing local state.
-- **Copy-on-write branching.** When you create a [branch](https://neon.com/docs/introduction/branching) in Neon, the engine does not duplicate files or pages. Instead, the new branch points to an existing point in history and begins diverging from there using copy-on-write semantics. Only new or modified data consumes additional storage.
-- **Instant restores.** Because the database’s history is preserved as immutable page versions in object storage, [restoring the database](https://neon.com/docs/introduction/branch-restore) does not involve copying data back into place. Compute can reattach to a past point in history, and execution can resume from the restored state. This process is fast and predictable, even for multi-terabyte databases.
-- **A unified foundation for OLTP and OLAP.** Once transactional data lives in object storage, it is no longer isolated from analytical or AI workloads. The same underlying history that supports an OLTP engine (Neon) can also support OLAP engines and AI systems. This is the principle behind the [lakebase architecture](https://www.databricks.com/product/lakebase).
+- **Serverless compute provisioning.** Because durable state lives outside the compute layer, compute endpoints can [automatically scale up and down according to load](/docs/introduction/autoscaling), or [scale to zero](/docs/introduction/scale-to-zero) entirely. When compute starts, it simply attaches to existing database history rather than reconstructing local state.
+- **Copy-on-write branching.** When you create a [branch](/docs/introduction/branching), the engine does not duplicate files or pages. Instead, the new branch points to an existing point in history and begins diverging from there using copy-on-write semantics. Only new or modified data consumes additional storage.
+- **Instant restores.** Because the database’s history is preserved as immutable page versions in object storage, [restoring the database](/docs/introduction/branch-restore) does not involve copying data back into place. Compute can reattach to a past point in history, and execution can resume from the restored state. This process is fast and predictable, even for multi-terabyte databases.
+- **One foundation for OLTP and OLAP.** Once transactional data lives in object storage, it is no longer isolated from analytical or AI workloads. The same underlying history that supports an OLTP engine (Lakebase Postgres) can also support OLAP engines and AI systems. This is the principle behind the [lakebase architecture](https://www.databricks.com/product/lakebase).
 
 ## In short
 
-Neon Postgres, the database service in the Neon backend, is a serverless engine that treats:
+Lakebase Postgres, the database product at the center of Neon’s backend primitives, is a serverless engine that treats:
 
 - compute as ephemeral and replaceable;
 - storage as durable, replicated, and shared;
 - WAL as the source of truth;
 - and object storage as the foundation.
 
-The result is a database architecture that scales, recovers, and evolves without being constrained by a single machine or filesystem. For developers, this means faster iteration, safer workflows, and infrastructure that adapts automatically as applications grow from early prototypes to large-scale production systems. This design also enables advanced lakebase architectures that unify transactional and analytical data platforms.
+The result is a database architecture that scales, recovers, and evolves without being constrained by a single machine or filesystem. For developers, this means faster iteration, safer workflows, and infrastructure that adapts automatically as applications grow from early prototypes to large-scale production systems. The same lakebase architecture underpins Lakebase Postgres via Neon and via Databricks, so transactional and analytical data can share one storage foundation.

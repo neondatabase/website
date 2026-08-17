@@ -26,9 +26,9 @@ const BlogPreviewCategoryPage = async ({ params, searchParams }) => {
     getBlogSnapshot
   );
   const [categories, category, posts] = await Promise.all([
-    getAllBlogCategories({ previewBranch: branch, strictBranch: true }),
-    getCategoryBySlug(slug, { previewBranch: branch, strictBranch: true }),
-    getPostsByCategorySlug(slug, { previewBranch: branch, strictBranch: true }),
+    getAllBlogCategories({ previewBranch: branch }),
+    getCategoryBySlug(slug, { previewBranch: branch }),
+    getPostsByCategorySlug(slug, { previewBranch: branch }),
   ]);
   const validPosts = Array.isArray(posts) ? posts.filter(Boolean) : [];
 
@@ -57,14 +57,12 @@ const BlogPreviewCategoryPage = async ({ params, searchParams }) => {
           posts={validPosts}
           routeConfig={routeConfig}
         >
-          <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1 md:pt-[96px]">
+          <div className="grid grid-cols-1 md:pt-24">
             {validPosts.slice(0, 10).map((post, index) => (
               <BlogGridItem
                 key={post.slug}
-                className={index < 2 ? 'lg:border-t-0! lg:pt-0! md:border-t-0! md:pt-0!' : ''}
                 post={post}
                 category={category}
-                isFeatured={post.isFeatured}
                 isPriority={index < 5}
                 routeConfig={routeConfig}
               />
@@ -103,5 +101,6 @@ export async function generateMetadata({ params, searchParams }) {
 
 export const revalidate = 0;
 export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
 
 export default BlogPreviewCategoryPage;

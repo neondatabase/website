@@ -40,6 +40,7 @@ const NAV_TITLE_BY_GROUP = {
   config: 'Config as code',
   surfaces: 'Functions, storage and data',
   network: 'Organizations and networking',
+  debugging: 'Debugging',
 };
 
 // Extract group ids from the GROUPS array literal in groups.js, so the list of
@@ -77,7 +78,9 @@ function loadSchema() {
 
 function addGroupMapping(name, group) {
   const src = fs.readFileSync(GROUPS_PATH, 'utf8');
-  const key = /^[a-z][a-z0-9-]*$/.test(name) ? name : `'${name}'`;
+  // Only a bare JS identifier can go unquoted. Hyphenated command names
+  // (api-keys, ip-allow, set-context) must be quoted or groups.js won't parse.
+  const key = /^[a-z][a-z0-9]*$/.test(name) ? name : `'${name}'`;
   if (new RegExp(`\\n\\s*'?${name}'?:\\s`).test(src)) {
     return { changed: false, note: `groups.js already maps "${name}"` };
   }
@@ -209,6 +212,9 @@ function addNavEntry(name, group) {
   const itemsIndent = lines[itemsIdx].match(/^\s*/)[0];
   const childIndent = `${itemsIndent}  `;
   const entry = [`${childIndent}- title: ${name}`, `${childIndent}  slug: ${slug}`];
+  // Inserted as the FIRST child, which is rarely the right reading order: these
+  // sections are ordered editorially (setup runs auth -> init -> link, ending in
+  // utilities), not alphabetically. Move the entry by hand after scaffolding.
   lines.splice(itemsIdx + 1, 0, ...entry);
   fs.writeFileSync(NAV_PATH, lines.join('\n'));
   return { changed: true, note: `navigation.yaml: added ${slug} under "${navTitle}"` };

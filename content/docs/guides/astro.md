@@ -3,19 +3,19 @@ title: Connect Astro to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres from .astro files or API
   routes.
 summary: >-
-  Connecting Astro to Neon Postgres requires the Astro Node adapter for
+  Connecting Astro to Lakebase Postgres requires the Astro Node adapter for
   on-demand (SSR) rendering so pages query the database at request time rather
   than only at build time. The guide covers driver options including
   node-postgres, postgres.js, and the Neon serverless driver, and shows query
   patterns for both .astro page components and server endpoint API routes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-04T05:18:26.469Z'
 ---
 
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 
 description="Pre-built prompt for connecting Astro to Neon using the Neon serverless driver"/>
 
-Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
+Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a database on Neon and access it from an Astro site or application.
 
 To create a Neon project and access it from an Astro site or application:
 
@@ -230,5 +230,12 @@ When you run `npm run dev` you can expect to see something like the following wh
 ```
 
 </Steps>
+
+## Next steps
+
+- [Set up Managed Better Auth](/docs/auth/overview): Add managed authentication that branches with your database
+- [Add Object Storage](/docs/storage/overview): S3-compatible file storage that branches with your database
+- [Deploy a Function](/docs/compute/functions/overview): Run backend compute next to your database, no separate hosting needed
+- [Call an LLM with AI Gateway](/docs/ai-gateway/overview): Access foundation models from Anthropic, OpenAI, Google, and more with one credential
 
 <NeedHelp/>

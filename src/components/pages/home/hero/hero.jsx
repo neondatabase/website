@@ -26,34 +26,32 @@ const logos = [
 
 export const heroServiceItems = [
   {
-    title: 'Postgres Database',
-    description: 'Serverless Postgres that scales and branches with your app.',
+    title: 'Lakebase Postgres',
+    description: 'Serverless database that scales and branches with your app.',
     videoBase: 'postgres-database',
     aspectRatio: 'aspect-square',
     width: 512,
     height: 512,
   },
   {
-    title: 'Authentication',
-    description: 'Managed auth with users and sessions stored in Postgres.',
+    title: 'Managed Better Auth',
+    description: 'Authentication with users and sessions stored in Postgres.',
     videoBase: 'authentication',
     aspectRatio: 'aspect-512/390',
     width: 512,
     height: 390,
   },
   {
-    title: 'Compute',
-    description: 'Functions without timeouts running close to your database.',
-    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
+    title: 'Functions',
+    description: 'Long-running, without timeouts, and closer to your database.',
     videoBase: 'compute',
     aspectRatio: 'aspect-512/308',
     width: 512,
     height: 308,
   },
   {
-    title: 'Storage',
-    description: 'S3-compatible object storage that branches with your projects.',
-    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
+    title: 'Object Storage',
+    description: 'S3-compatible blob storage that branches with your projects.',
     videoBase: 'storage',
     aspectRatio: 'aspect-512/696',
     width: 512,
@@ -61,8 +59,7 @@ export const heroServiceItems = [
   },
   {
     title: 'AI Gateway',
-    description: 'One API for all frontier & open-source models, powered by Databricks.',
-    url: '/docs/introduction/roadmap#now-shipping-neon-is-a-complete-backend-platform',
+    description: 'All models, one API, one bill. Powered by Databricks.',
     videoBase: 'ai-gateway',
     aspectRatio: 'aspect-512/226',
     width: 512,
@@ -75,21 +72,21 @@ const Hero = () => (
     <Container className="relative z-30 pt-96 pb-2 xl:pt-54 lg:pt-52 md:px-5! md:pt-53" size="1600">
       <Link href="#backed-by-giants">
         <SectionLabel theme="white" icon="databricks">
-          A DATABRICKS COMPANY
+          NEON IS PART OF THE DATABRICKS PLATFORM
         </SectionLabel>
       </Link>
 
-      <h1 className="mt-5 max-w-280 text-[72px] leading-dense tracking-tighter xl:max-w-215 xl:text-[64px] lg:max-w-180 lg:text-[52px] md:mt-4 md:text-[42px] sm:text-[32px]">
-        Neon is the Postgres backend
+      <h1 className="mt-5 max-w-280 text-[68px] leading-dense tracking-tighter xl:max-w-215 xl:text-[60px] lg:max-w-180 lg:text-[48px] md:mt-4 md:text-[42px] sm:text-[32px]">
+        The backend for apps and agents,
         <br />
-        designed for apps and agents.
+        built to scale on Lakebase Postgres.
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
-        <Button theme="white-filled" size="new" to={LINKS.signup}>
+        <Button data-test="home-signup" theme="white-filled" size="new" to={LINKS.signup}>
           Get started
         </Button>
-        <Button theme="outlined" size="new" to={LINKS.docsHome}>
+        <Button data-test="home-docs" theme="outlined" size="new" to={LINKS.docsHome}>
           Read the docs
         </Button>
       </div>

@@ -17,7 +17,7 @@ nextLink:
 ---
 
 <Admonition type="info" id="CTA">
-Joins are core SQL and work the same on any PostgreSQL database, so the inner, left, right, and full outer join patterns covered here apply wherever you run Postgres. If you're an enterprise building analytical or AI workloads on top of relational data, [Lakebase](https://www.databricks.com/product/lakebase) delivers the best managed Postgres experience in the cloud, with the performance, security, and native Lakehouse integration demanding workloads require. [Neon](https://neon.com) is the AI-native backend platform for apps and agents: Postgres Database, Auth, Storage, Functions and AI Gateway.
+Joins are core SQL and work the same on any PostgreSQL database. [Lakebase Postgres](https://www.databricks.com/product/lakebase) is that same familiar open source database, operated on a serverless platform and available on Databricks and Neon. [Neon](https://neon.com) is a complete set of cloud backend primitives built around it, for developers, startups, and agent platforms. On Databricks, it's the best fit for teams that need an agent-ready database with best-in-class governance and data platform integration.
 </Admonition>
 
 **Summary**: in this tutorial, you will learn about various kinds of PostgreSQL joins including inner join, left join, right join, and full outer join.

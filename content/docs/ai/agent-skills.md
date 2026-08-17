@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-06-26T10:41:58.102Z'
+updatedOn: '2026-08-10T23:01:57.354Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -79,9 +79,19 @@ See [Claude Code plugin for Neon](/docs/ai/ai-claude-code-plugin) for details.
 
 ### Codex plugin
 
-If you're using OpenAI Codex, install the **Neon Postgres** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon Postgres app (MCP), the main Neon skill, and the egress optimizer skill.
+If you're using OpenAI Codex, install the **Neon** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon app (MCP), the main Neon skill, and the egress optimizer skill.
 
 See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
+
+### Kimi Code plugin
+
+If you're using Kimi Code, install the Neon plugin for skills and MCP integration. In the Kimi CLI chat, run:
+
+```bash
+/plugins install https://github.com/neondatabase/agent-skills
+```
+
+Plugin changes apply to new sessions, so run `/new` afterward.
 
 ### neon init
 
@@ -91,7 +101,7 @@ The `neon init` command sets up your project to use Neon with your AI coding ass
 npx neon@latest init
 ```
 
-If you're in the **platform private preview** (Functions, Storage, AI Gateway), use `neon init --preview` instead. See the [Platform private preview guide](/docs/get-started/platform-private-preview) for access and setup.
+If you're using the **Neon backend beta** (Functions, Storage, AI Gateway), use `neon init --preview` instead. See the [Neon backend beta guide](/docs/get-started/backend-beta) for access and setup.
 
 After running `init`, restart your editor and ask your AI assistant to "Get started with Neon" to launch the interactive onboarding guide. See the [`neon init` reference](/docs/cli/init) for details.
 
@@ -106,21 +116,21 @@ Start here for platform overview and Postgres development.
 | Skill                                                                        | Description                                                                                                                 |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | [`neon`](https://skills.sh/neondatabase/agent-skills/neon)                   | Platform overview for apps and agents: Postgres, Auth, Data API, Functions, Storage, and AI Gateway, and how to get started |
-| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Comprehensive index of Neon Serverless Postgres documentation and best practices                                            |
+| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Full index of Neon Serverless Postgres documentation and best practices                                                     |
 
 ### Database workflows
 
 Provision, branch, and optimize Postgres projects.
 
-| Skill                                                                                                          | Description                                                                                                       |
-| -------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| [`claimable-postgres`](https://skills.sh/neondatabase/agent-skills/claimable-postgres)                         | Instant temporary Postgres via [Claimable Postgres](/docs/reference/claimable-postgres) — no login or credit card |
-| [`neon-postgres-branches`](https://skills.sh/neondatabase/agent-skills/neon-postgres-branches)                 | Choose and create the right branch type for migrations, schema-only branches, and reset-from-parent workflows     |
-| [`neon-postgres-egress-optimizer`](https://skills.sh/neondatabase/agent-skills/neon-postgres-egress-optimizer) | Diagnose and fix excessive Postgres egress and query overfetching                                                 |
+| Skill                                                                                                          | Description                                                                                                               |
+| -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| [`claimable-postgres`](https://skills.sh/neondatabase/agent-skills/claimable-postgres)                         | Instant temporary Postgres via [Claimable Postgres](/docs/reference/claimable-postgres), no login or credit card required |
+| [`neon-postgres-branches`](https://skills.sh/neondatabase/agent-skills/neon-postgres-branches)                 | Choose and create the right branch type for migrations, schema-only branches, and reset-from-parent workflows             |
+| [`neon-postgres-egress-optimizer`](https://skills.sh/neondatabase/agent-skills/neon-postgres-egress-optimizer) | Diagnose and fix excessive Postgres egress and query overfetching                                                         |
 
 ### Neon Platform
 
-Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in private preview. See [Who has access](/docs/get-started/platform-private-preview#who-has-access) before using these skills in production workflows.
+Use Neon services beyond core Postgres. **Functions**, **Object Storage**, and **AI Gateway** are in beta. See [Check your access](/docs/get-started/backend-beta#check-your-access) before using these skills in production workflows.
 
 | Skill                                                                                    | Description                                                                                                     | Docs                                               |
 | ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
@@ -151,7 +161,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 
 - **Getting started** with Neon, including project setup and key features (branching, autoscaling, scale-to-zero, instant restore, read replicas)
 - **Connections**, including the serverless driver, connection pooling, and connection strings
-- **Authentication** with Neon Auth
+- **Authentication** with Managed Better Auth
 - **Data API** via `@neondatabase/neon-js`
 - **Platform APIs and SDKs**, including the REST API, TypeScript SDK, and Python SDK
 - **Developer tools**, including the CLI, VS Code extension, and MCP server
@@ -162,13 +172,13 @@ With the full skill set installed, your assistant can guide you across the Neon 
 - **Branch types and workflows** for migrations, schema-only branches, and reset-from-parent
 - **Egress optimization** for high transfer costs and query anti-patterns
 
-**Platform services (private preview)**
+**Platform services (beta)**
 
 - **Neon Functions**: declare, deploy, and connect long-running compute next to your database
 - **Object Storage**: S3-compatible storage that branches with your data
 - **AI Gateway**: model routing, logging, and cost controls with a single Neon credential
 
-For example, ask your assistant to "set up Neon Auth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow platform preview constraints and the right SDK patterns.
+For example, ask your assistant to "set up Managed Better Auth in my Next.js app" and it will provide the correct imports, configuration, and middleware setup. Or ask it to "add an AI Gateway route in my `neon.ts` file" and it will follow beta constraints and the right SDK patterns.
 
 ## Example prompts
 
@@ -185,7 +195,7 @@ Set up Drizzle ORM with Neon
 ```
 
 ```
-Set up Neon Auth for my Next.js app
+Set up Managed Better Auth for my Next.js app
 ```
 
 ```

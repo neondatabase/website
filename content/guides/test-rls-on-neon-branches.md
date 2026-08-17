@@ -4,7 +4,7 @@ subtitle: Validate row level security policies on production-like branches with 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-07-02T00:00:00.000Z'
-updatedOn: '2026-07-02T00:00:00.000Z'
+updatedOn: '2026-07-15T00:08:00.682Z'
 ---
 
 Row level security (RLS) is a Postgres feature that attaches per-row access rules to a table, so a SELECT, INSERT, UPDATE, or DELETE only accesses the rows the current role is permitted to. You define this with a policy, and as that policy changes over time, it gets hard to prove on every change that it still runs for every caller you have in production, and that is not just your web app. It is also cron jobs, serverless functions, background workers, and internal services, each connecting with its own role and level of access.
@@ -253,10 +253,10 @@ Since `role` and `org_id` come from the verified token and the rule is defined i
 
 Testing policy changes like these before deploying to production, which affect user-level access, needs real users and sessions in the preview database. While locally you may be able to seed data with few entries, replicating production like cases will be hard and time consuming for the reasons we learned earlier in this guide.
 
-[Neon Auth](/docs/auth/overview) keeps users and sessions in Postgres, so [branching with auth](/docs/auth/branching-authentication) copies them onto each preview branch. You sign in on the preview URL, hit real API routes, and let the stack set the session the same way production does.
+[Managed Better Auth](/docs/auth/overview) keeps users and sessions in Postgres, so [branching with auth](/docs/auth/branching-authentication) copies them onto each preview branch. You sign in on the preview URL, hit real API routes, and let the stack set the session the same way production does.
 
 <Callout title="Any Postgres-backed auth works">
-Auth.js or Better Auth work too, as long as sessions live in Postgres and previews copy those tables. With them you usually read the session in app code and set a GUC rather than call `auth.uid()`, so the policy looks different, but the testing story does not change. Neon Auth just removes the wiring for teams already on Neon.
+Auth.js or Better Auth work too, as long as sessions live in Postgres and previews copy those tables. With them you usually read the session in app code and set a GUC rather than call `auth.uid()`, so the policy looks different, but the testing story does not change. Managed Better Auth just removes the wiring for teams already on Neon.
 </Callout>
 
 ## Connection pooling and the `SET LOCAL` trap

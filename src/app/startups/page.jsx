@@ -69,7 +69,7 @@ const faqItems = [
   {
     question: 'How does the application process work?',
     answer: `
-      <p>Apply using the form on this page. Our team reviews each application and typically responds within a few business days. If you qualify, we'll confirm and apply your credits to your account.</p>
+      <p>Apply using the link on this page. Our team reviews each application and typically responds within a few business days. If you qualify, we'll confirm and apply your credits to your account.</p>
     `,
   },
   {

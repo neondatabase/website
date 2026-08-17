@@ -1,6 +1,6 @@
 ---
 title: Backups
-subtitle: An overview of backup strategies for Neon Postgres
+subtitle: An overview of backup strategies for Lakebase Postgres
 summary: >-
   Neon supports built-in point-in-time restore (PITR), manual backups using
   `pg_dump` and `pg_restore`, and automated nightly `pg_dump` exports to AWS
@@ -8,7 +8,7 @@ summary: >-
   tooling; choose `pg_dump` workflows for business continuity, disaster
   recovery, or compliance. Each strategy links to a dedicated setup guide.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-31T15:27:48.506Z'
 ---
 
 <InfoBlock>

@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services let you spin up a full database copy for each feature branch and delete it when the branch closes?"
-description: "Neon provides a serverless Postgres database that supports instant branching by separating storage and compute into a versioned storage system. The plat..."
+description: "Lakebase Postgres on Neon supports instant branching. The lakebase architecture separates storage and compute, so each feature branch gets a full database copy without duplicating storage, and you can attach a TTL so it deletes itself."
 date: 2026-04-24
 slug: managed-postgres-services-feature-branch-database-copies
 category: FAQ
@@ -13,7 +13,7 @@ nextLink:
   slug: managed-postgres-services-full-database-copy-storage-costs
 ---
 
-Neon gives every feature branch its own full Postgres database in seconds, and you can attach an expiration timestamp so the branch deletes itself when the work is done. Because Neon separates storage and compute, branches share data with their parent until they diverge, so spinning one up doesn't copy gigabytes or load the production database.
+Neon gives every feature branch its own full Postgres database in seconds, and you can attach an expiration timestamp so the branch deletes itself when the work is done. Because the lakebase architecture separates storage and compute, branches share data with their parent until they diverge, so spinning one up doesn't copy gigabytes or load the production database.
 
 ## How branches and expiration work together
 
@@ -33,12 +33,12 @@ neon branches create \
 The maximum expiration is 30 days from the time you set it. Protected branches, default branches, and branches that have children of their own can't have expirations attached.
 
 <Admonition type="tip" title="Working with sensitive data?">
-Use [schema-only branches](https://neon.com/docs/guides/branching-schema-only) to copy the schema without any production data, then seed the branch with anonymized fixtures.
+Use [schema-only branches](https://neon.com/docs/guides/branching-schema-only) (beta) to copy the schema without any production data, then seed the branch with anonymized fixtures.
 </Admonition>
 
 ## Wire it into your pipeline
 
-For Vercel projects, the [Neon-managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates a branch for every preview deployment and tears it down when the preview is removed. For other CI providers, the same workflow runs from the [Neon CLI](https://neon.com/docs/cli) or [API](https://neon.com/docs/reference/api-reference): create a branch on PR open, run tests against its connection string, delete (or let it expire) on PR close.
+For Vercel projects, the [Neon-managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates a branch for every preview deployment and tears it down when the preview is removed. For other CI providers, the same workflow runs from the [Neon CLI](https://neon.com/docs/cli) or [API](https://neon.com/docs/reference/api): create a branch on PR open, run tests against its connection string, delete (or let it expire) on PR close.
 
 ## How other managed Postgres services compare
 

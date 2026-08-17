@@ -1,0 +1,16 @@
+[
+  "auth.ts",
+  "neon_auth.ts",
+  "user.ts",
+  "orgs.ts",
+  "projects.ts",
+  "ip_allow.ts",
+  "vpc_endpoints.ts",
+  "branches.ts",
+  "databases.ts",
+  "roles.ts",
+  "operations.ts",
+  "connection_string.ts",
+  "set_context.ts",
+  "init.ts"
+]

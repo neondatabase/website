@@ -1,18 +1,18 @@
 ---
 title: The neon extension
-subtitle: An extension for Neon-specific statistics including the Local File Cache hit
+subtitle: An extension for Neon-specific statistics including the compute cache hit
   ratio
 summary: >-
   The `neon` PostgreSQL extension exposes the `neon_stat_file_cache` view,
-  which reports Local File Cache (LFC) hit ratio, misses, hits, and writes for
+  which reports compute cache hit ratio, misses, hits, and writes for
   a Neon compute instance. Use it to diagnose cache efficiency and determine
   whether your working set fits in memory. OLTP workloads should target a
   `file_cache_hit_ratio` of 99% or better; a low ratio signals a need for a
-  larger compute size. LFC statistics reset on compute restart. `EXPLAIN
-  ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query LFC
+  larger compute size. Cache statistics reset on compute restart. `EXPLAIN
+  ANALYZE` with the `FILECACHE` and `PREFETCH` options provides per-query cache
   and prefetch metrics without requiring the extension.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-07T13:46:01.605Z'
 ---
 
 The `neon` extension provides functions and views designed to gather Neon-specific metrics.
@@ -22,27 +22,25 @@ The `neon` extension provides functions and views designed to gather Neon-specif
 
 ## The neon_stat_file_cache view
 
-The `neon_stat_file_cache` view provides insights into how effectively your Neon compute's Local File Cache (LFC) is being used.
+The `neon_stat_file_cache` view provides insights into how effectively your Neon compute's cache is being used.
 
-## What is the Local File Cache?
+## What is the compute cache?
 
-Neon computes have a Local File Cache (LFC), which is a layer of caching that stores frequently accessed data in the local memory of the Neon compute. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), the LFC reduces latency and improves query performance by minimizing the need to fetch data from Neon storage. The LFC acts as an add-on or extension of Postgres shared buffers. In Neon computes, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends the cache memory to approximately 75% of your compute's RAM. To view the LFC size for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+Neon uses up to 75% of your compute's RAM for data caching. This cache stores frequently accessed data in the local memory of the Neon compute, which reduces latency and improves query performance by minimizing the need to fetch data from database storage. Like Postgres [shared buffers](/docs/reference/glossary#shared-buffers), it caches your most recently accessed data. To view the compute cache size for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
-When data is requested, Postgres checks shared buffers first, then the LFC. If the requested data is not found in the LFC, it is read from Neon storage. Shared buffers and the LFC both cache your most recently accessed data, but they may not cache exactly the same data due to different cache eviction patterns. The LFC is also much larger than shared buffers, so it stores significantly more data.
+## Monitoring compute cache usage
 
-## Monitoring Local File Cache usage
-
-You can monitor Local File Cache (LFC) usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neon_stat_file_cache-view) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate) graph on the **Monitoring** page in the Neon console.
+You can monitor compute cache usage by installing the `neon` extension on your database and querying the [neon_stat_file_cache](#the-neon_stat_file_cache-view) view or [using EXPLAIN ANALYZE](#view-lfc-metrics-with-explain-analyze). Additionally, you can monitor the [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate) graph on the **Monitoring** page in the Neon console, or check it from the terminal with [`neon inspect db lfc-hit-rate`](/docs/cli/inspect#db-lfc-hit-rate) and [`neon inspect db working-set`](/docs/cli/inspect#db-working-set).
 
 ## neon_stat_file_cache view
 
 The `neon_stat_file_cache` view includes the following metrics:
 
-- `file_cache_misses`: The number of times the requested page block is not found in Postgres shared buffers or the LFC. In this case, the page block is retrieved from Neon storage.
-- `file_cache_hits`: The number of times the requested page block was not found in Postgres shared buffers but was found in the LFC.
-- `file_cache_used`: The number of times the LFC was accessed.
-- `file_cache_writes`: The number of writes to the LFC. A write occurs when a requested page block is not found in Postgres shared buffers or the LFC. In this case, the data is retrieved from Neon storage and then written to shared buffers and the LFC.
-- `file_cache_hit_ratio`: The percentage of database requests that are served from the LFC rather than Neon storage. This is a measure of cache efficiency, indicating how often requested data is found in the cache. A higher cache hit ratio suggests better performance, as accessing data from memory is faster than accessing data from storage. The ratio is calculated using the following formula:
+- `file_cache_misses`: The number of times the requested page block is not found in Postgres shared buffers or the compute cache. In this case, the page block is retrieved from database storage.
+- `file_cache_hits`: The number of times the requested page block was not found in Postgres shared buffers but was found in the compute cache.
+- `file_cache_used`: The number of times the compute cache was accessed.
+- `file_cache_writes`: The number of writes to the compute cache. A write occurs when a requested page block is not found in Postgres shared buffers or the compute cache. In this case, the data is retrieved from database storage and then written to shared buffers and the compute cache.
+- `file_cache_hit_ratio`: The percentage of database requests that are served from the compute cache rather than database storage. This is a measure of cache efficiency, indicating how often requested data is found in the cache. A higher cache hit ratio suggests better performance, as accessing data from memory is faster than accessing data from storage. The ratio is calculated using the following formula:
 
   ```
   file_cache_hit_ratio = (file_cache_hits / (file_cache_hits + file_cache_misses)) * 100
@@ -66,7 +64,7 @@ To connect to your database. You can find a connection string for your database 
 psql postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Issue the following query to view LFC usage data for your compute:
+Issue the following query to view compute cache usage data for your compute:
 
 ```sql
 SELECT * FROM neon_stat_file_cache;
@@ -76,14 +74,14 @@ SELECT * FROM neon_stat_file_cache;
 ```
 
 <Admonition type="note">
-Local File Cache statistics represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved.
+Compute cache statistics represent the lifetime of your compute, from the last time the compute started until the time you ran the query. Be aware that statistics are lost when your compute stops and gathered again from scratch when your compute restarts. You'll only want to run the cache hit ratio query after a representative workload has been run. For example, say that you increased your compute size after seeing a cache hit ratio below 99%. Changing the compute size restarts your compute, so you lose all of your current usage statistics. In this case, you should run your workload before you try the cache hit ratio query again to see if your cache hit ratio improved.
 
-Remember that Postgres checks shared buffers first before it checks your compute's Local File Cache. If you are only working with a small amount of data, queries may be served entirely from the shared buffers, resulting in no LFC hits.
+Remember that Postgres checks shared buffers first before it checks your compute cache. If you are only working with a small amount of data, queries may be served entirely from the shared buffers, resulting in no compute cache hits.
 </Admonition>
 
-## View LFC metrics with EXPLAIN ANALYZE
+## View compute cache metrics with EXPLAIN ANALYZE (#view-lfc-metrics-with-explain-analyze)
 
-You can also use `EXPLAIN ANALYZE` with the `FILECACHE` and `PREFETCH` options to view LFC cache hit and miss data, as well as prefetch statistics. Installing the `neon` extension is not required. For example, this query fetches data for a `SELECT COUNT(*)` query.
+You can also use `EXPLAIN ANALYZE` with the `FILECACHE` and `PREFETCH` options to view compute cache hit and miss data, as well as prefetch statistics. Installing the `neon` extension is not required. For example, this query fetches data for a `SELECT COUNT(*)` query.
 
 ```sql {5,6,11,12,15,16,20,21}
 EXPLAIN (ANALYZE,BUFFERS,PREFETCH,FILECACHE) SELECT COUNT(*) FROM pgbench_accounts;
@@ -120,10 +118,10 @@ The `PREFETCH` option provides information about Neon's prefetching mechanism, w
 
 ### FILECACHE option
 
-The `FILECACHE` option provides information about the Local File Cache (LFC) usage during query execution:
+The `FILECACHE` option provides information about compute cache usage during query execution:
 
-- `hits` - Number of accessed pages found in the LFC.
-- `misses` - Number of accessed pages not found in the LFC.
+- `hits` - Number of accessed pages found in the compute cache.
+- `misses` - Number of accessed pages not found in the compute cache.
 
 ## Views for Neon internal use
 
