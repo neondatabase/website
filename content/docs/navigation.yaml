@@ -209,31 +209,27 @@
         - title: Sample data
           slug: import/import-sample-data
 
-- nav: Neon fundamentals
+- nav: Concepts
   slug: get-started/backend-overview
-  title: Neon fundamentals
+  title: Concepts
   icon: book
   items:
-    - section: Core concepts
+    - section: Backend primitives
       items:
-        - title: How Neon fits together
+        - title: Overview
           slug: get-started/backend-overview
-        - title: The Neon object model
+        - title: The object model
           slug: manage/overview
         - title: Branch your backend
           slug: platform/branching
-        - title: Credentials
-          slug: manage/credentials
-    - section: More fundamentals (planned)
+    - section: Backend behavior
       items:
-        - title: Access model
-          slug: fundamentals/access-model
-        - title: Serverless
-          slug: fundamentals/serverless
-        - title: High availability
-          slug: fundamentals/high-availability
-        - title: Regions
-          slug: fundamentals/regions
+        - title: Credentials & access
+          slug: fundamentals/credentials-access
+        - title: Regions & availability
+          slug: fundamentals/regions-availability
+        - title: Serverless & scaling
+          slug: fundamentals/serverless-scaling
 - nav: Products
   title: Products
   icon: features
