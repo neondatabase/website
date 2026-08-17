@@ -6,7 +6,7 @@ summary: >-
   buckets via the Neon Console, the Neon API, or the S3 API. Set the access
   level to private or public_read to control who can read objects.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:27:36.554Z'
+updatedOn: '2026-08-17T23:18:55.558Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -19,7 +19,7 @@ You can create a bucket from the Neon Console, the Neon CLI, the Neon API, or di
 
 **Neon Console**
 
-In the Neon Console, navigate to your project, select a branch, and open the **Storage** tab. Click **New bucket**, enter a name, choose an access level, and click **Create**.
+In the Neon Console, navigate to your project, select a branch, and open the **Object storage** tab. Click **New bucket**, enter a name, choose an access level, and click **Create**.
 
 <CodeTabs labels={["neon", "Neon API", "TypeScript", "Python", "AWS CLI"]}>
 
@@ -92,7 +92,7 @@ Every bucket has an access level that controls who can read objects in it.
 | `private`     | Require a valid credential            | Require a valid credential |
 | `public_read` | Open to anyone (no credential needed) | Require a valid credential |
 
-The default is `private`. Set the access level when creating a bucket via the Neon API, or change it from the **Storage** tab in the Console.
+The default is `private`. Set the access level when creating a bucket via the Neon API, or change it from the **Object storage** tab in the Console.
 
 <Admonition type="note">
 Access level is set through the Neon Console or API, not through the S3 API. S3 ACL and bucket policy mutation requests (PutBucketAcl, PutBucketPolicy) return `501 Not Implemented`. If you need to change access level on an existing bucket, use the Console or Neon API.
