@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "3.2.0",
+  "neonctlVersion": "3.5.1",
   "binaries": [
     "neonctl",
     "neon"
@@ -216,6 +216,10 @@
         "context-file": {
           "type": "unknown",
           "hidden": true
+        },
+        "keyring": {
+          "type": "boolean",
+          "describe": "Store the credential in the OS keyring. Per profile; later auth without the flag stays there. See `neon profile list`."
         }
       },
       "commands": {},
@@ -1664,7 +1668,7 @@
             },
             "database-name": {
               "type": "string",
-              "describe": "Database name"
+              "describe": "Database to inspect. Omit to cover every database the API lists for the branch. Ranking and row limits stay per database. One failing database fails the whole run. Compute-wide checks run once against the first listed database. Ignored with --db-url."
             },
             "db-url": {
               "type": "string",
@@ -1706,7 +1710,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Local File Cache hit rate (needs neon extension)"
+              "describe": "Local File Cache hit rate (compute-wide, needs neon extension)"
             },
             "locks": {
               "aliases": [],
@@ -1734,7 +1738,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Replication slots: kind, status, client, restart/confirmed-flush LSNs, and lag (pg_replication_slots + pg_stat_replication)"
+              "describe": "Replication slots (compute-wide): kind, status, client, restart/confirmed-flush LSNs, and lag (pg_replication_slots + pg_stat_replication)"
             },
             "seq-scans": {
               "aliases": [],
@@ -1776,14 +1780,14 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Estimated working set vs LFC size (needs neon extension)"
+              "describe": "Estimated working set vs LFC size (compute-wide, needs neon extension)"
             }
           },
           "describe": "Run a diagnostic query against a branch's Postgres",
           "usage": "$0 inspect db <sub-command> [options]"
         }
       },
-      "describe": "Inspect a database's health and configuration",
+      "describe": "Inspect a branch's Postgres health and configuration",
       "usage": "$0 inspect <sub-command> [options]"
     },
     "ip-allow": {
@@ -2805,8 +2809,11 @@
             },
             "force": {
               "type": "boolean",
-              "describe": "Replace an existing profile, revoking the credential it holds now",
-              "default": false
+              "hidden": true
+            },
+            "keyring": {
+              "type": "boolean",
+              "describe": "Store the credential in the OS keyring. Per profile; later create without the flag stays there. See `neon profile list`."
             },
             "mint": {
               "type": "boolean",

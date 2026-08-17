@@ -89,6 +89,8 @@ neon profile create work --api-key "$KEY"
 
 `create` ignores `NEON_API_KEY`, so exporting that variable doesn't supply the key here. Pass it explicitly with `--api-key`.
 
+By default the credential is saved to a `credentials.json` file. Pass `--keyring` to store it in your operating system's keyring instead. The choice is saved per profile and shown in the `Storage` column of `neon profile list`.
+
 ## neon profile list (#list)
 
 Lists each profile, the account it holds, and where its credentials live. `Active` marks the profile this invocation would use.
@@ -103,18 +105,24 @@ neon profile list
 
 ```text filename="Output"
 Profiles
-┌────────┬─────────┬──────────────────────────────────────┬─────────┬─────────┬──────┬──────────────────────────────────────┐
-│ Active │ Name    │ Account                              │ Auth    │ Scope   │ File │ Credentials                          │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼─────────┼──────┼──────────────────────────────────────┤
-│ *      │ DEFAULT │ 3f8a1c2e-5b7d-4e9a-8c1f-2d6b9e0a4c53 │ oauth   │ -       │ ok   │ ~/.config/neon/credentials.json      │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼─────────┼──────┼──────────────────────────────────────┤
-│        │ work    │ alex@domain.com                      │ oauth   │ -       │ ok   │ ~/.config/neon/credentials.work.json │
-├────────┼─────────┼──────────────────────────────────────┼─────────┼─────────┼──────┼──────────────────────────────────────┤
-│        │ ci      │ alex@domain.com                      │ api key │ account │ ok   │ ~/.config/neon/credentials.ci.json   │
-└────────┴─────────┴──────────────────────────────────────┴─────────┴─────────┴──────┴──────────────────────────────────────┘
+┌────────┬─────────┬──────────────────────────────────────┬─────────┬────────────────────────────────┬──────┬─────────┬──────────────────────────┐
+│ Active │ Name    │ Account                              │ Auth    │ Scope                          │ File │ Storage │ Credentials              │
+├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
+│ *      │ DEFAULT │ 3f8a1c2e-5b7d-4e9a-8c1f-2d6b9e0a4c53 │ oauth   │ -                              │ ok   │ file    │ credentials.json         │
+├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
+│        │ work    │ alex@example.com                     │ oauth   │ -                              │ ok   │ file    │ credentials.work.json    │
+├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
+│        │ ci      │ alex@example.com                     │ api key │ account                        │ ok   │ file    │ credentials.ci.json      │
+├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
+│        │ org     │ org-example-12345678                 │ api key │ org org-example-12345678       │ ok   │ file    │ credentials.org.json     │
+├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
+│        │ project │ org-example-12345678                 │ api key │ project cool-darkness-12345678 │ ok   │ file    │ credentials.project.json │
+├────────┼─────────┼──────────────────────────────────────┼─────────┼────────────────────────────────┼──────┼─────────┼──────────────────────────┤
+│        │ laptop  │ alex@example.com                     │ oauth   │ -                              │ ok   │ keyring │ keyring                  │
+└────────┴─────────┴──────────────────────────────────────┴─────────┴────────────────────────────────┴──────┴─────────┴──────────────────────────┘
 ```
 
-`Account` is the recorded email label, or the user ID when there's no label, as with a `DEFAULT` profile from a plain `neon auth`. `Auth` shows how the profile authenticates (`oauth` for a browser sign-in, `api key` for a stored key), and `Scope` shows what a minted key is limited to: `account`, `org <org-id>`, or `project <project-id>`. `File` is `ok` when the credentials file is present and readable, and `missing` when it isn't.
+`Account` is the recorded email label, the user ID when there's no label (as with a `DEFAULT` profile from a plain `neon auth`), or the organization identifier for an organization- or project-scoped key. `Auth` shows how the profile authenticates (`oauth` for a browser sign-in, `api key` for a stored key), and `Scope` shows what a minted key is limited to: `account`, `org <org-id>`, or `project <project-id>`. `File` reports whether the credential could be read: `ok` when it's present and readable, otherwise `missing`, `invalid`, or `unreadable`. `Storage` shows where the credential lives, `file` or `keyring`, and `Credentials` gives the file's name, or `keyring` when it's kept in the OS keyring.
 
 ## neon profile rotate-key (#rotate-key)
 
@@ -131,7 +139,7 @@ neon profile rotate-key ci
 This works for account-scoped keys, where the profile's own credential can mint the replacement. An organization- or project-scoped key can't rotate itself, since only a personal credential can mint those keys. Re-mint it with a browser sign-in instead, matching the original scope:
 
 ```bash
-neon profile create ci --mint --org-id org-example-12345678 --force
+neon profile create ci --mint --org-id org-example-12345678
 ```
 
 The `rotate-key` error names the exact command to run for the profile's scope.
