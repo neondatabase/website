@@ -11,7 +11,7 @@ summary: >-
   `--api-key` flag, then `NEON_API_KEY` env var, then the credentials file,
   then triggers browser auth if none are found.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-08-17T19:10:39.997Z'
 redirectFrom:
   - /docs/reference/cli-auth
   - /docs/cli/login
@@ -48,4 +48,6 @@ The Neon CLI resolves authentication in this order:
 
 ## Options
 
-Takes only the [global options](/docs/cli#global-options).
+<CliOptions command="auth" />
+
+Pass `--keyring` to store the credential in your operating system's keyring instead of the `credentials.json` file. The choice is saved per profile, so once set, `neon auth` keeps using the keyring for that profile even without the flag. Along with this option, `auth` accepts the [global options](/docs/cli#global-options).
