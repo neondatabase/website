@@ -105,6 +105,22 @@ A typical decoded JWT payload looks like this:
 }
 ```
 
+### Organization claim
+
+When the session has an active organization and the **Organization plugin** is enabled for the project, the JWT includes an `o` claim with the following structure:
+
+```json
+{
+  "o": {
+    "id": "org-123",
+    "slug": "my-org",
+    "role": "owner"
+  }
+}
+```
+
+The Organization plugin is controlled by a per-project configuration toggle, not a rollout flag. The `role` value is snapshotted from the user's organization membership when the token is issued and does not update in an already-issued token.
+
 ## Verify a token
 
 To verify the authenticity of a JWT, you need to validate its signature using the public keys provided by JWKS (JSON Web Key Set).
