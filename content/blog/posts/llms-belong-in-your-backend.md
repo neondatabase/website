@@ -13,8 +13,12 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/llms-belong-in-your-backend/cover.jpg
+  alt: >-
+    The title "LLMs belong in your backend" beside a code window enabling
+    aiGateway in a Neon config file, with model provider logos floating around
+    it
 isFeatured: false
 seo:
   title: LLMs belong in your backend - Neon
@@ -23,7 +27,8 @@ seo:
   noindex: false
   ogTitle: LLMs belong in your backend - Neon
   ogDescription: AI Gateway brings Databricks-scale inference to your Neon branch
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/llms-belong-in-your-backend/cover.jpg
 ---
 
 <Admonition type="note" title="We're building backends">
@@ -40,7 +45,7 @@ Most teams still treat them that way though. They’re calling OpenAI, Google, A
 Neon AI Gateway is not a thin proxy that marks up someone else's API. It serves models hosted by Databricks, on the same [Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/) infrastructure Databricks already runs at scale.
 </Admonition>
 
-**[ADD DIAGRAM 1]**
+![Neon AI Gateway sits in the Neon backend next to Postgres, Object Storage, Functions, and Auth](https://cdn.neonapi.io/public/images/pages/blog/llms-belong-in-your-backend/diagram-1.jpg)
 
 ## What you get when model calls live in your backend
 
@@ -63,7 +68,7 @@ Chat completions sit on an OpenAI-compatible /v1 path, so the same client works 
 
 Our supported model list grows often enough that any number we aim to print goes stale immediately. Check the live catalog on the [models page](https://neon.com/docs/ai-gateway/models). We aim to offer new models the same day they launch, and we’re committed to shipping both open-weight and proprietary models on the same endpoint.
 
-**[ADD VIDEO CLIP - INLINE, AUTOPLAY IN LOOP, NO CONTROLS]**
+<video width="2328" height="1366" style={{ aspectRatio: '2328 / 1366' }} autoPlay loop muted playsInline src="https://cdn.neonapi.io/public/images/pages/blog/llms-belong-in-your-backend/ai-models.mp4"></video>
 
 ### All your LLM usage gets unified in one bill, without penalizing you on pricing
 
@@ -83,7 +88,7 @@ So, each Neon branch gets its own AI Gateway host - so a preview deploy hits br-
 
 Credentials follow lineage, not a single shared lab key. A credential created on `main` works on `main` and its descendants (preview, feature, CI). It does not work on a sibling lineage. So you are not pasting the same OpenAI (or Google, or Anthropic) key into every PR bot - instead, each branch calls its own gateway host, with a Neon credential that is only valid inside that branch family. When you delete the branch, that host goes with it.
 
-**[ADD DIAGRAM 2]**
+![Each Neon branch gets its own AI Gateway host, with credentials that follow branch lineage](https://cdn.neonapi.io/public/images/pages/blog/llms-belong-in-your-backend/diagram-2.png)
 
 ### Agent state, data, models - all lives in one Neon branch
 
@@ -110,7 +115,7 @@ In practice, a request already looks like this today:
 
 One branch, one deploy, one set of env vars. The Function already gets `DATABASE_URL`, `NEON_AI_GATEWAY_TOKEN`, and `NEON_AI_GATEWAY_BASE_URL` [injected automatically](https://neon.com/docs/ai-gateway/authentication#credentials-in-neon-functions). The model call and the data live one process.env apart. Create a Neon branch and you copy that whole story, not just the database.
 
-**[ADD DIAGRAM 3]**
+![A Neon Function on a branch reads the database, pulls a file from Object Storage, and calls a model through AI Gateway](https://cdn.neonapi.io/public/images/pages/blog/llms-belong-in-your-backend/diagram-3.jpg)
 
 ## Neon AI Gateway = Databricks scale and performance
 
