@@ -89,10 +89,10 @@
               slug: guides/go
             - title: Java
               slug: guides/java
-            - title: Kotlin
-              slug: guides/kotlin
             - title: JavaScript
               slug: guides/javascript
+            - title: Kotlin
+              slug: guides/kotlin
             - title: Python
               slug: guides/python
             - title: Rust
