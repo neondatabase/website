@@ -100,7 +100,6 @@ RETURNS TRIGGER AS
 $$
 BEGIN
     RAISE EXCEPTION 'Truncating the companies table is not allowed';
-    RETURN NULL;
 END;
 $$
 LANGUAGE plpgsql;
@@ -121,7 +120,7 @@ Fifth, attempt to truncate the `companies` table:
 TRUNCATE TABLE companies;
 ```
 
-Output:
+Error:
 
 ```
 ERROR:  Truncating the companies table is not allowed
