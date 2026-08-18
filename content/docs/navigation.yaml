@@ -1384,6 +1384,8 @@
               items:
                 - title: Convex
                   slug: https://neon.com/guides/convex-neon
+                - title: Cursor Origin
+                  slug: guides/cursor-origin
                 - title: GitHub integration
                   slug: guides/neon-github-integration
                 - title: Knex
