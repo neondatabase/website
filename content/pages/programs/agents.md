@@ -30,21 +30,39 @@ If you're building agents that generate apps from prompts, your users want to bu
 
 ## Agent Plan Pricing
 
+Agent plan pricing and limits differ from [Scale](/docs/introduction/plans). You enroll from Scale, then move to Agent for Launch-rate compute, unlimited projects, and fleet-oriented limits.
+
 |                                 | Agent Plan                                                                                            |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Projects                        | **Custom limits available** <br/> _Agents create a new project for each user application._            |
-| Branches per Project            | **Custom limits available** <br/> _Agents use branches to quickly toggle between application states._ |
-| Compute                         | from **$0.106 per CU-hour** <br/> _Same as Launch_                                                    |
+| Projects                        | **Unlimited** <br/> _We incrementally raise your limit to accommodate growing usage._                 |
+| Branches per Project            | **Up to 1,000** <br/> _Agents use branches to quickly toggle between application states._             |
+| Compute                         | from **$0.106 per CU-hour** <br/> _Same as Launch; lower than Scale_                                  |
 | Storage                         | **$0.35 per GB-month** <br/> _Same as Launch/Scale_                                                   |
-| Instant Restore (PITR)          | **$0.2 per GB-month** <br/> _Same as Launch/Scale_                                                    |
+| Instant Restore (PITR)          | **$0.2 per GB-month** <br/> _Up to 7-day history window (Scale allows up to 30 days)_                  |
+| Public network transfer         | **100 GB per project included**, then $0.10/GB <br/> _Scale includes 500 GB_                          |
 | Neon Auth                       | **Included** <br/> _All-in-one API for handling user signup and management in Neon_                   |
 | Management API                  | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_     |
 | Data API (PostgREST-compatible) | **Higher Rate Limits Available**                                                                      |
 | Support                         | **Shared Slack Channel**                                                                              |
 | <br/>**Agent Incentives**       |                                                                                                       |
-| **Your Free Tier is Free**      | Neon pays for up to 30,000 projects/month used in your free tier.                                     |
+| **Your Free Tier is Free**      | Neon pays for projects used in your free tier. Unlimited projects; we incrementally raise your limit to accommodate growing usage. |
 | **General Use Credits**         | Up to $25K in credits for those not eligible for the [Startup Program](/startups).                    |
 | **Co-Marketing**                | Blog and Social promotions, hackathons and more.                                                      |
+
+### How Agent differs from Scale
+
+| Feature | Agent | Scale |
+| ------- | ----- | ----- |
+| Projects | Unlimited. We incrementally raise your limit to accommodate growing usage. | 1,000 |
+| Compute | $0.106/CU-hour | $0.222/CU-hour |
+| Max fixed compute | 16 CU | 56 CU |
+| Read replicas | Up to 3 | Unlimited |
+| Root branches | 5 | 25 |
+| Instant restore window | Up to 7 days | Up to 30 days |
+| Public network included | 100 GB/project | 500 GB/project |
+| Automated snapshot schedules | Available upon request | Available |
+
+For the full comparison, see the [Agent Plan docs](/docs/introduction/agent-plan#agent-vs-scale).
 
 <QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 

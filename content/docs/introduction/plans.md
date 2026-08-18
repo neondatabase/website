@@ -35,7 +35,7 @@ Start for free, then **pay only for what you use** as your needs grow.
 Compare Neon's **Free**, **Launch**, and **Scale** plans.
 
 <Admonition type="comingSoon" title="Building an agent platform?">
-For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with custom resource limits and credits for **your** free tier. [Learn more](/docs/introduction/agent-plan)
+For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with unlimited projects, Launch-rate compute, and credits for **your** free tier. Agent limits differ from Scale. [Learn more](/docs/introduction/agent-plan)
 </Admonition>
 
 | Plan feature                                          | **Free**                                   | **Launch**                                 | **Scale**                                                                                         |
@@ -315,7 +315,7 @@ Manual snapshot limits per plan:
 
 For billing, manual snapshots are charged as full snapshots. Scheduled snapshots are charged as full snapshots for the first snapshot in a schedule, then as incremental (delta) storage for subsequent snapshots in that schedule.
 
-Automated backup schedules are available on paid plans except for the Agent plan. See [Backup & restore](/docs/guides/backup-restore) for details.
+Automated backup schedules are available on paid plans. On the Agent plan, they are available upon request. See [Backup & restore](/docs/guides/backup-restore) for details.
 
 ### Auth
 
