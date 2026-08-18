@@ -17,10 +17,11 @@ import { eq } from "drizzle-orm";
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPTransport } from "@hono/mcp";
+import { attachDatabasePool } from "@neon/functions";
 import { contacts } from "./db/schema";
 
-// One pool per isolate, reused across requests.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const db = drizzle(pool);
 
 const mcpServer = new McpServer({ name: "contacts", version: "1.0.0" });
@@ -52,8 +53,15 @@ mcpServer.registerTool(
     inputSchema: { id: z.number().int().positive() },
   },
   async ({ id }) => {
-    const [row] = await db.delete(contacts).where(eq(contacts.id, id)).returning();
-    return { content: [{ type: "text", text: JSON.stringify(row ?? { error: "not found" }) }] };
+    const [row] = await db
+      .delete(contacts)
+      .where(eq(contacts.id, id))
+      .returning();
+    return {
+      content: [
+        { type: "text", text: JSON.stringify(row ?? { error: "not found" }) },
+      ],
+    };
   },
 );
 
@@ -124,7 +132,8 @@ Either way it's one check at the top of the `/mcp` route — reject anything tha
 ```typescript
 app.all("/mcp", async (c) => {
   const auth = c.req.header("authorization");
-  if (!(await isValidApiKey(auth))) return c.json({ error: "unauthorized" }, 401); // your check
+  if (!(await isValidApiKey(auth)))
+    return c.json({ error: "unauthorized" }, 401);
   if (!mcpServer.isConnected()) await mcpServer.connect(transport);
   return transport.handleRequest(c);
 });

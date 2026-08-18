@@ -97,11 +97,13 @@ import { Hono } from "hono";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import { parseEnv } from "@neon/env";
+import { attachDatabasePool } from "@neon/functions";
 import config from "../neon";
 import { todos } from "./db/schema";
 
 const env = parseEnv(config);
 const pool = new Pool({ connectionString: env.postgres.databaseUrl, max: 5 });
+attachDatabasePool(pool);
 const db = drizzle(pool);
 
 const app = new Hono();
@@ -116,13 +118,14 @@ app.get("/todos", async (c) => c.json(await db.select().from(todos)));
 export default app;
 ```
 
-Create the `pg` pool at module scope (reused across requests on the same isolate) and keep `max` small (e.g. 5), since each isolate keeps its own pool.
+Create the `pg` pool at module scope (reused across requests on the same isolate) and keep `max` small (e.g. 5), since each isolate keeps its own pool. Call `attachDatabasePool(pool)` so an idle disconnect is not an `uncaughtException` — see [Connecting to Postgres](#connecting-to-postgres).
 
 `parseEnv(config)` requires _every_ variable the config implies. A function that only talks to Postgres over the pooled URL can scope it to just that key — `parseEnv` then validates and returns only what you asked for (the keys autocomplete from your `neon.ts`):
 
 ```typescript
 const { postgres } = parseEnv(config, ["DATABASE_URL"]); // not the unpooled URL, auth, etc.
 const pool = new Pool({ connectionString: postgres.databaseUrl, max: 5 });
+attachDatabasePool(pool);
 ```
 
 ## Develop Locally and Deploy
@@ -165,13 +168,13 @@ export default defineConfig({
 
 Neon injects branch-scoped connection strings and service URLs at runtime — you don't declare these or pass them at deploy time:
 
-| Variable                | Notes                                                                                    |
-| ----------------------- | ---------------------------------------------------------------------------------------- |
+| Variable                | Notes                                                                                              |
+| ----------------------- | -------------------------------------------------------------------------------------------------- |
 | `NEON_BRANCH`           | The branch **name** (e.g. `main`, `preview/foo`). Injected on every branch, including the default. |
-| `DATABASE_URL`          | Pooled connection string. Use for most queries. Present only if the branch has Postgres. |
-| `DATABASE_URL_UNPOOLED` | Direct connection. Use for migrations, `LISTEN`/`NOTIFY`, multi-round-trip transactions. |
-| `NEON_AUTH_BASE_URL`    | Present when Neon Auth is enabled on the branch.                                         |
-| `NEON_DATA_API_URL`     | Present when the Data API is enabled on the branch.                                      |
+| `DATABASE_URL`          | Pooled connection string. Use for most queries. Present only if the branch has Postgres.           |
+| `DATABASE_URL_UNPOOLED` | Direct connection. Use for migrations, `LISTEN`/`NOTIFY`, multi-round-trip transactions.           |
+| `NEON_AUTH_BASE_URL`    | Present when Neon Auth is enabled on the branch.                                                   |
+| `NEON_DATA_API_URL`     | Present when the Data API is enabled on the branch.                                                |
 
 Object storage (`AWS_*`) and AI Gateway (`NEON_AI_GATEWAY_*`) vars are also injected when those services are declared — see the `neon-object-storage` and `neon-ai-gateway` skills.
 
@@ -203,13 +206,16 @@ When the branch has Postgres, Neon **injects the connection strings at runtime**
 Create the connection pool **once at module scope** and reuse it across requests — don't open a connection per request:
 
 ```typescript
+import { attachDatabasePool } from "@neon/functions";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
-// Created once per isolate; reused by every request that isolate handles.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const db = drizzle(pool);
 ```
+
+node-postgres emits idle-client failures as `error` on the pool. With no listener that is an `uncaughtException` and Node exits the isolate. Call `attachDatabasePool(pool)` once after `new Pool`. Requires `@neon/functions` ≥ 0.8.0. Expected idle disconnects (`ECONNRESET`, `EPIPE`, `ETIMEDOUT`, Postgres `57P01`, node-postgres's `Connection terminated unexpectedly`) are silent. Anything else is `console.error`, or `onUnexpectedError` if you pass it on the first call. The first call wins; a later call that passes `onUnexpectedError` is ignored and warns. This does not close the pool.
 
 **Pooling is recommended because an isolate is reused across many requests** (and several requests can be in flight on the same isolate at once — see [Timeouts and Runtime Limits](#timeouts-and-runtime-limits)). A module-scope pool is opened once on cold start and then shared by every subsequent request that isolate serves, so you amortize connection setup instead of paying it on every request and you avoid exhausting Postgres connections under load.
 
@@ -251,15 +257,21 @@ Browser ──▶ your app backend ──▶ Neon Function                      
 // src/index.ts — verify the caller before doing any work
 import { createRemoteJWKSet, jwtVerify } from "jose";
 
-const jwks = createRemoteJWKSet(new URL(`${process.env.AUTH_BASE_URL}/api/auth/jwks`));
+const jwks = createRemoteJWKSet(
+  new URL(`${process.env.AUTH_BASE_URL}/api/auth/jwks`),
+);
 
 export default {
   async fetch(request: Request) {
-    if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: cors(request) });
+    if (request.method === "OPTIONS")
+      return new Response(null, { status: 204, headers: cors(request) });
 
     const auth = request.headers.get("authorization");
     if (!auth?.toLowerCase().startsWith("bearer ")) {
-      return new Response("Unauthorized", { status: 401, headers: cors(request) });
+      return new Response("Unauthorized", {
+        status: 401,
+        headers: cors(request),
+      });
     }
     try {
       const { payload } = await jwtVerify(auth.slice(7), jwks, {
@@ -269,7 +281,10 @@ export default {
       const userId = payload.sub; // scope the agent to this user
       // ... run the agent, return result.toUIMessageStreamResponse({ headers: cors(request) })
     } catch {
-      return new Response("Unauthorized", { status: 401, headers: cors(request) });
+      return new Response("Unauthorized", {
+        status: 401,
+        headers: cors(request),
+      });
     }
   },
 };
@@ -356,7 +371,9 @@ app.get("/ws", async (c) => {
 
   const { socket, response } = upgradeWebSocket(c.req.raw);
   socket.addEventListener("open", () => socket.send("welcome"));
-  socket.addEventListener("message", (event) => socket.send(`echo: ${event.data}`));
+  socket.addEventListener("message", (event) =>
+    socket.send(`echo: ${event.data}`),
+  );
   return response;
 });
 
@@ -415,14 +432,23 @@ poller.unref?.();
 **2. `LISTEN`/`NOTIFY` — lowest latency, but requires disabling Scale to Zero.** Each isolate `LISTEN`s on a channel over a dedicated **unpooled** connection; broadcasting is `NOTIFY`, so every isolate (including the sender's) re-pushes to its sockets. Near-instant — but the listener holds an idle connection that **does not count as active**, so [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) suspends the compute and drops it, silently killing the feed. Only use it on an **always-on** compute (Scale to Zero disabled — a paid-plan setting).
 
 ```typescript
+import { attachDatabasePool } from "@neon/functions";
 import { Pool, Client } from "pg";
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const CHANNEL = "chat_events";
 
 // One dedicated DIRECT connection per isolate, just to receive events.
 // Use DATABASE_URL_UNPOOLED — LISTEN needs a real session, not a pooled one.
-const listener = new Client({ connectionString: process.env.DATABASE_URL_UNPOOLED });
+// Don't call attachDatabasePool here: it would silence the idle drop that killed the feed.
+// An error listener keeps the isolate alive; the feed stays down until the isolate restarts.
+const listener = new Client({
+  connectionString: process.env.DATABASE_URL_UNPOOLED,
+});
+listener.on("error", (err) => {
+  console.error(err);
+});
 listener.connect().then(() => listener.query(`LISTEN ${CHANNEL}`));
 listener.on("notification", (msg) => {
   if (!msg.payload) return;
@@ -433,7 +459,10 @@ listener.on("notification", (msg) => {
 
 // Broadcast by NOTIFYing through the pool — every isolate's listener fires.
 function broadcast(event: unknown) {
-  return pool.query("SELECT pg_notify($1, $2)", [CHANNEL, JSON.stringify(event)]);
+  return pool.query("SELECT pg_notify($1, $2)", [
+    CHANNEL,
+    JSON.stringify(event),
+  ]);
 }
 ```
 
@@ -446,18 +475,25 @@ function broadcast(event: unknown) {
 Idle functions are evicted (and isolates restart for operational reasons), so a client's socket **will** drop — treat reconnection as normal, not exceptional. Reconnect with exponential backoff, capped, and **re-mint a fresh token on every attempt** (tokens are short-lived, so a stale one fails the `upgrade` auth check):
 
 ```typescript
-let closed = false, retry = 0, timer: ReturnType<typeof setTimeout>;
+let closed = false,
+  retry = 0,
+  timer: ReturnType<typeof setTimeout>;
 
 async function connect() {
   if (closed) return;
   const token = await getToken(); // re-mint each attempt; short-lived
   const ws = new WebSocket(`${WS_URL}?token=${encodeURIComponent(token)}`);
-  ws.onopen = () => { retry = 0; };          // reset backoff on success
-  ws.onmessage = (e) => { /* apply the event */ };
-  ws.onclose = () => {
-    if (!closed) timer = setTimeout(connect, Math.min(1000 * 2 ** retry++, 15000));
+  ws.onopen = () => {
+    retry = 0; // reset backoff on success
   };
-  ws.onerror = () => ws.close();             // let onclose drive the retry
+  ws.onmessage = (e) => {
+    /* apply the event */
+  };
+  ws.onclose = () => {
+    if (!closed)
+      timer = setTimeout(connect, Math.min(1000 * 2 ** retry++, 15000));
+  };
+  ws.onerror = () => ws.close(); // let onclose drive the retry
 }
 connect();
 ```
@@ -477,11 +513,19 @@ export default {
       new ReadableStream<Uint8Array>({
         start(controller) {
           controller.enqueue(encoder.encode("data: hello\n\n"));
-          const t = setInterval(() => controller.enqueue(encoder.encode(": ping\n\n")), 25_000);
+          const t = setInterval(
+            () => controller.enqueue(encoder.encode(": ping\n\n")),
+            25_000,
+          );
           return () => clearInterval(t); // fires when the client disconnects
         },
       }),
-      { headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache, no-transform" } },
+      {
+        headers: {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache, no-transform",
+        },
+      },
     ),
 };
 ```
