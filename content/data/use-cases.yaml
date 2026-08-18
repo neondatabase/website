@@ -2,10 +2,10 @@
   title: 'Full-stack apps'
   description: 'Deploy a complete Neon backend from your editor or coding agent: Lakebase Postgres plus Auth, Object Storage, Functions, and AI Gateway.'
   link: '/use-cases/full-stack-apps'
-  linkedCaseStudy: 'create-xyz'
+  linkedCaseStudy: 'daisy'
   tags:
-    - slug: 'instant-provisioning'
-      name: 'Instant provisioning'
+    - slug: 'backend'
+      name: 'Backend'
     - slug: 'automation'
       name: 'Automation'
 
