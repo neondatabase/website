@@ -11,7 +11,7 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-08-18T12:50:47.000Z'
+updatedOn: '2026-08-18T13:12:58.000Z'
 ---
 
 <Admonition type="note">
@@ -380,7 +380,7 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 ## Scheduling snapshots at scale
 
-If you create scheduled snapshots programmatically at high volume (for example, an agent platform that schedules across many branches), it's good practice to distribute snapshot creation across different hours of the day rather than concentrating it in one, such as scheduling every branch at midnight.
+If you create scheduled snapshots programmatically at high volume (for example, an agent platform that schedules across many branches), it's good practice to distribute snapshot creation across different hours of the day rather than concentrating it in one. For example, avoid scheduling every branch at midnight.
 
 A scheduled snapshot's `hour` (`0`–`23`) sets when it's created. Spread the `hour` across branches:
 
