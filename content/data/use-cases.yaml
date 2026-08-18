@@ -1,28 +1,50 @@
-- icon: 'connections'
-  title: 'Faster development'
-  description: "Remove database friction and ship faster thanks to Neon's serverless provisioning and instant branching. "
-  link: '/use-cases/fast-dev-workflows'
-  linkedCaseStudy: 'mindvalley'
+- icon: 'window-code'
+  title: 'Full-stack apps'
+  description: 'Deploy a complete Neon backend from your editor or coding agent: Lakebase Postgres plus Auth, Object Storage, Functions, and AI Gateway.'
+  link: '/use-cases/full-stack-apps'
+  linkedCaseStudy: 'create-xyz'
   tags:
+    - slug: 'instant-provisioning'
+      name: 'Instant provisioning'
     - slug: 'automation'
       name: 'Automation'
+
+- icon: 'branching'
+  title: 'Branching workflows'
+  description: 'Give every developer, pull request, preview, and test run its own Postgres without copying data, so you can ship faster and safer.'
+  link: '/use-cases/branching-workflows'
+  linkedCaseStudy: 'mindvalley'
+  tags:
+    - slug: 'branching'
+      name: 'Branching'
+    - slug: 'ci-workflows'
+      name: 'CI workflows'
+
+- icon: 'elastic-scaling'
+  title: 'Bursty workloads'
+  description: 'Avoid overprovisioning and keep performance steady as traffic spikes. Autoscaling allocates compute with load and bills only what you use.'
+  link: '/use-cases/bursty-workloads'
+  linkedCaseStudy: '222'
+  tags:
+    - slug: 'autoscaling'
+      name: 'Autoscaling'
+    - slug: 'scale-to-zero'
+      name: 'Scale-to-zero'
+
+- icon: 'database'
+  title: 'Large databases'
+  description: 'Restore and replicate multi-TB Postgres in seconds. Branches and read replicas add compute without duplicating storage.'
+  link: '/use-cases/large-databases'
+  linkedCaseStudy: 'traconiq'
+  tags:
+    - slug: 'instant-restores'
+      name: 'Instant restores'
     - slug: 'branching'
       name: 'Branching'
 
-- icon: 'window-code'
-  title: 'Variable load'
-  description: "Your traffic isn't flat, so your compute shouldn't be either. Optimize performance and cost by autoscaling compute in real time."
-  link: '/use-cases/variable-load'
-  linkedCaseStudy: 'nodecraft'
-  tags:
-    - slug: 'connection-pooling'
-      name: 'Connection pooling'
-    - slug: 'autoscaling'
-      name: 'Autoscaling'
-
 - icon: 'sparkle'
   title: 'Agents'
-  description: 'Build full-stack AI agents that provision Postgres infrastructure autonomously, including prod/dev environments, versioning, and authentication. '
+  description: 'Infra for app generation agents - used by Replit, v0, and others. Provision full-stack backends for every generated app.'
   link: '/use-cases/ai-agents'
   linkedCaseStudy: 'replit'
   tags:
@@ -31,10 +53,10 @@
     - slug: 'instant-provisioning'
       name: 'Instant provisioning'
 
-- icon: 'database'
-  title: 'Database per user'
-  description: 'Boost your end-user experience by deploying isolated Postgres databases for each one of your customers, fully managed by Neon.'
-  link: '/use-cases/database-per-user'
+- icon: 'multi-tenancy'
+  title: 'Platforms'
+  description: 'Deploy isolated Postgres backends for your end users instantly, affordably, and at scale with an API-first fleet model.'
+  link: '/platforms'
   linkedCaseStudy: 'retool'
   tags:
     - slug: 'data-isolation'
