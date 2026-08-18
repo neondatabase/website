@@ -98,7 +98,6 @@ Agent and Scale are different plans. Enrollment starts from Scale, but after you
 | Instant restore history window | Up to 7 days | Up to 30 days |
 | Public network transfer | 100 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB |
 | Automated snapshot schedules | Available upon request | Available |
-| Storage and project update notifications | Not available | Available |
 
 Both plans include metrics/logs export, SOC 2 reporting, private networking, and configurable scale-to-zero. For the full Scale feature list, see [Neon plans](/docs/introduction/plans).
 
