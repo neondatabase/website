@@ -16,8 +16,9 @@ categories:
 authors:
   - andre-landgraf
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/query-neon-backend-logs/cover.jpg
+  alt: Query Neon backend logs
 isFeatured: false
 seo:
   title: Query Neon backend logs - Neon
