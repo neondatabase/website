@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Complex queries that modify data or alter schemas have the potential to be destructive. It is advisable to test these types of queries before running them in production. On other database systems, testing potentially destructive queries can be time and resource intensive. For example, testing may involve setting up a separate database instance and replicating data. With Neon, you can instantly create a database branch with a full copy-on-write clone of your production data in just a few clicks. When you finish testing, you can remove the branch just as easily.
@@ -51,7 +51,7 @@ VALUES
 ## Create a test branch
 
 1. In the Neon Console, select your project.
-2. Select **Branches**.
+2. Select **Branches** under **Project**.
 3. Click **Create branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch. This guide uses the name `my_test_branch`.
@@ -88,7 +88,7 @@ curl --request POST \
 
 ## Test your query
 
-Navigate to the **SQL Editor**, select the test branch, and run your query. For example, perhaps you are deleting blog posts from your database for a certain author published before a certain date, and you want to make sure the query only removes the intended records.
+Navigate to **Postgres database** > **SQL Editor**, select the test branch, and run your query. For example, perhaps you are deleting blog posts from your database for a certain author published before a certain date, and you want to make sure the query only removes the intended records.
 
 ```sql
 DELETE FROM Post
@@ -108,7 +108,7 @@ Before the `DELETE` query, there were 5 records. If the query ran correctly, thi
 When you finish testing your query, you can delete the test branch:
 
 1. In the Neon Console, select a project.
-2. Select **Branches**.
+2. Select **Branches** under **Project**.
 3. Select the test branch from the table.
 4. From the **Actions** menu on the branch overview page, select **Delete**.
 

@@ -10,7 +10,7 @@ summary: >-
   can be combined with the IP Allow feature to restrict network access to
   protected branches only. Available on paid plans.
 enableTableOfContents: true
-updatedOn: '2026-08-11T18:35:41.335Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Neon's protected branches feature implements a series of protections:
@@ -35,7 +35,7 @@ This example sets a branch as protected.
 To set a branch as protected:
 
 1. In the Neon Console, select a project.
-2. Select **Branches** to view the branches for the project.
+2. Select **Branches** under **Project** to view the branches for the project.
 
    ![Branch page](/docs/guides/ip_allow_branch_page.png)
 

@@ -11,7 +11,7 @@ summary: >-
   & Restore page, or the Neon CLI using RFC 3339 timestamps or Log Sequence
   Numbers (LSN).
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time still covered by your project's **history window** (the retention configured for **instant restore**) and then run queries against that connection. Time Travel is part of Neon's **instant restore** feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
@@ -82,7 +82,7 @@ Here is how to use Time Travel from the **SQL Editor**, from **Backup & Restore*
 
 <TabItem>
 
-1. In the Neon Console, open the **SQL Editor**.
+1. In the Neon Console, select your branch, then open **Postgres database** > **SQL Editor**.
 1. Use the **Time Travel** (🕣) icon to enable querying against an earlier point in time.
 
    ![Time Travel toggle](/docs/get-started/time_travel_sql_editor.png)
@@ -94,7 +94,7 @@ Here is how to use Time Travel from the **SQL Editor**, from **Backup & Restore*
 
 <TabItem>
 
-1. In the Neon Console, open the branch's **Backup & Restore** page and go to **Restore from history**.
+1. In the Neon Console, select your branch, then open **Postgres database** > **Backup & Restore** and go to **Restore from history**.
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
    ![time travel selection](/docs/guides/time_travel_restore_select.png)

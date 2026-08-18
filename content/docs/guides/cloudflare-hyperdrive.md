@@ -12,7 +12,7 @@ summary: >-
   behavior in Hyperdrive local connection strings and how to test with
   wrangler dev --remote.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 [Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection.
@@ -41,7 +41,7 @@ To follow along with this guide, you require:
 
 2. Click the **New Project** button to create a new project.
 
-3. From your project dashboard, navigate to the **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
+3. From your project dashboard, navigate to **Postgres database** > **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
    ```sql
    CREATE TABLE books_to_read (

@@ -12,7 +12,7 @@ summary: >-
   connected.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Lakebase Postgres database to an external Postgres database (a Postgres destination other than Neon). If you're looking to replicate data from one Lakebase Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
@@ -87,12 +87,11 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to create the role.
-5. Select the **Roles & Databases** tab.
-6. Click **Add Role**.
-7. In the role creation dialog, specify a role name.
-8. Click **Create**. The role is created, and you are provided with the password for the role.
+3. In the sidebar, select your branch from the **BRANCH** selector.
+4. Under **Postgres database**, select **Roles**.
+5. Click **Add Role**.
+6. In the role creation dialog, specify a role name.
+7. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 

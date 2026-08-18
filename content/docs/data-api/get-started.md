@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -30,7 +30,7 @@ You can also enable the Data API using the [Neon API](/docs/data-api/manage#mana
 
 ### 1. Navigate to the Data API page
 
-In the Neon Console, select your project and go to the **Data API** page in the sidebar.
+In the Neon Console, select your project and select **Postgres database** > **Data API**.
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
@@ -207,7 +207,7 @@ The Data API caches your database schema for performance. When you modify your s
 
 **Option 1: Neon Console**
 
-Go to the **Data API** page in the Neon Console and click **Refresh schema cache**.
+Go to **Postgres database** > **Data API** in the Neon Console and click **Refresh schema cache**.
 
 ![Data API refresh schema cache button](/docs/data-api/data_api_schema_refresh.png)
 

@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 ## access token
@@ -245,7 +245,7 @@ A Neon Control Plane operation that deletes stored data when a Neon project is d
 
 ## Endpoint ID
 
-A string that identifies a Neon compute endpoint. Neon Endpoint IDs are generated Heroku-like memorable random names, similar to `ep-calm-flower-a5b75h79`. These names are always prefixed by `ep` for "endpoint". You can find your Endpoint ID by navigating to your project in the Neon Console, selecting **Branches** from the sidebar, and clicking on a branch. The **Endpoint ID** is shown in the table under the **Computes** heading.
+A string that identifies a Neon compute endpoint. Neon Endpoint IDs are generated Heroku-like memorable random names, similar to `ep-calm-flower-a5b75h79`. These names are always prefixed by `ep` for "endpoint". You can find your Endpoint ID by navigating to your project in the Neon Console, selecting **Branches** under **Project** in the sidebar, and clicking on a branch. The **Endpoint ID** is shown in the table under the **Computes** heading.
 
 ## Egress
 

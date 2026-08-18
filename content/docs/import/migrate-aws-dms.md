@@ -10,7 +10,7 @@ summary: >-
   endpoint setup, migration task configuration, table mapping, and post-migration
   verification in the Neon Console.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database server. AWS DMS supports a variety of database migration sources including PostgreSQL, MySQL, Oracle, and Microsoft SQL Server. For a complete list of data migration sources supported by AWS DMS, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
@@ -109,7 +109,7 @@ Configure the table mapping:
 To verify that data was migrated to your Neon database:
 
 1. In the Neon Console, select your Neon project.
-2. Select **Tables** from the side bar.
+2. Select **Postgres database** > **Tables** from the sidebar.
 3. Select the **Branch**, **Database**, and **Schema** where you imported the data.
    ![Neon Tables view showing imported data](/docs/import/dms_neon_table_data.png).
 

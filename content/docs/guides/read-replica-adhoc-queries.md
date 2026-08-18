@@ -9,7 +9,7 @@ summary: >-
   running them against production. Replicas share primary storage at no extra
   cost and automatically suspend after 5 minutes of inactivity.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 In many situations, you may need to run quick, one-time queries to retrieve specific data or test an idea. These are known as **ad-hoc queries**. Ad-hoc queries work well for tasks like analytics, troubleshooting, or exploring your data without setting up complex reports. However, running resource-intensive queries on your production database can degrade performance, especially if they target heavily used tables.
@@ -48,8 +48,8 @@ The Free plan is limited to a maximum of 3 read replica computes per project.
 
 You can add a read replica compute to any branch in your Neon project by following these steps:
 
-1. In the Neon Console, select **Branches**.
-2. Select the branch where your database resides.
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+2. Under **Postgres database**, select **Computes**.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
 5. Specify the **Compute size settings**. You can configure a fixed-size compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size using the slider. On paid plans, you can adjust the **Scale to zero time** setting, which controls whether a compute suspends due to inactivity after 5 minutes.
@@ -58,7 +58,7 @@ You can add a read replica compute to any branch in your Neon project by followi
    </Admonition>
 6. When you finish making your selections, click **Create**.
 
-Your read replica is provisioned and appears on the **Computes** tab of the **Branches** page. The following section describes how to connect to your read replica.
+Your read replica is provisioned and appears on the **Computes** tab under **Postgres database**. The following section describes how to connect to your read replica.
 
 Alternatively, you can create read replicas using the [Neon CLI](/docs/cli/branches#create) or [Neon API](/docs/reference/api/endpoints/create-project-endpoint).
 

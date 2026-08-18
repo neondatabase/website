@@ -9,7 +9,7 @@ summary: >-
   using Render's native database. The guide uses Node.js with the pg library and
   Render's Git-based continuous deployment.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 [Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Render supports full-stack applications, offering both web services and background workers.
@@ -33,7 +33,7 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 
 - Click the `New Project` button to create a new project.
 
-- From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
+- From your project dashboard, navigate to **Postgres database** > **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
   ```sql
   CREATE TABLE books_to_read (

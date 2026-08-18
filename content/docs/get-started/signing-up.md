@@ -14,7 +14,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 <InfoBlock>
@@ -94,7 +94,7 @@ Your organization is now set up. You can start inviting teammates immediately. S
 
 Let's get familiar with the **SQL Editor**, where you can run queries against your databases directly from the Neon Console, as well as access more advanced features like [Time Travel](/docs/guides/time-travel-assist) and [Explain and Analyze](/docs/get-started/query-with-neon-sql-editor#explain-and-analyze).
 
-From the Neon Console, use the sidebar navigation to open the **SQL Editor** page. Notice that your default branch `production` is already selected, along with the database created during onboarding, `neondb`.
+From the Neon Console, use the sidebar navigation to open **Postgres database** > **SQL Editor**. Notice that your default branch `production` is already selected, along with the database created during onboarding, `neondb`.
 
 ![Neon SQL Editor](/docs/get-started/sql_editor.png)
 
@@ -168,7 +168,7 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
 1. **Create a development branch**
 
-   From the Neon Console, navigate to the **Branches** page and click **Create branch**. Name it `development`, select `production` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
+   From the Neon Console, navigate to the **Branches** page (under **Project**) and click **Create branch**. Name it `development`, select `production` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
 
 2. **Install CLI with Brew or NPM**
 

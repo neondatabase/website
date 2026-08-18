@@ -11,7 +11,7 @@ summary: >-
   Postgres, which provisions a database instantly without signup and stays
   claimable for 72 hours.
 enableTableOfContents: true
-updatedOn: '2026-08-04T04:41:00.271Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 [Railway](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon) is a cloud deployment platform that allows users to deploy anything, anywhere, seamlessly. On Railway, develop locally, connect to a repository or image, and have infrastructure provisioned automatically. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.
@@ -41,7 +41,7 @@ To follow along with this guide, you will need:
 
 2. Click the `New Project` button to create a new project.
 
-3. From your project dashboard, navigate to the `SQL Editor` from the sidebar, and run the following SQL command to create a new table in your database:
+3. From your project dashboard, navigate to **Postgres database** > **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
    ```sql
    CREATE TABLE plant_care_log (

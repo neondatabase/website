@@ -10,7 +10,7 @@ summary: >-
   page when the goal is serverless backend database access inside a Netlify
   Function, not edge middleware or static site build steps.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 [Netlify Functions](https://www.netlify.com/products/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.
@@ -33,7 +33,7 @@ After logging into the Neon Console, proceed to the [Projects](https://console.n
 
 1. Click `New Project` to start a new one.
 
-2. In the Neon **Dashboard**, use the `SQL Editor` from the sidebar to execute the SQL command below, creating a new table for coffee blends:
+2. In the Neon **Dashboard**, use **Postgres database** > **SQL Editor** from the sidebar to execute the SQL command below, creating a new table for coffee blends:
 
    ```sql
    CREATE TABLE favorite_coffee_blends (

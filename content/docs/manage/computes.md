@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -32,7 +32,7 @@ Your Neon plan determines the resources available to a compute. The Neon Free pl
 
 ## View a compute
 
-A compute is associated with a branch. To view a compute, select **Branches** in the Neon Console, and select a branch. If the branch has a compute, it is shown on the **Computes** tab on the branch page.
+A compute is associated with a branch. To view a compute, in the Neon Console select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes**. If the branch has a compute, it is shown on the **Computes** tab of the branch overview.
 
 Compute details shown on the **Computes** tab include:
 
@@ -50,9 +50,9 @@ You can only create a single primary read-write compute for a branch that does n
 
 To create an endpoint:
 
-1. In the Neon Console, select **Branches**.
-1. Select a branch.
-1. On the **Computes** tab, click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Computes**.
+1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
 1. On the **Add new compute** drawer or **Add read replica** drawer, specify your compute settings, and click **Add**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
 
 ## Edit a compute
@@ -61,9 +61,9 @@ You can edit a compute to change the [compute size](#compute-size-and-autoscalin
 
 To edit a compute:
 
-1. In the Neon Console, select **Branches**.
-1. Select a branch.
-1. From the **Computes** tab, select **Edit** for the compute you want to edit.
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Computes**.
+1. Select **Edit** for the compute you want to edit.
 
    The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration, and your scale to zero setting.
 
@@ -241,7 +241,7 @@ Restarting a compute interrupts any connections currently using the compute. To 
 
 You can restart a compute using these methods:
 
-- Use the **Restart compute** option in the Neon console. Navigate to the **Branches** page from your project dashboard, and select a branch. On the Computes tab, select **Restart compute** from the menu.
+- Use the **Restart compute** option in the Neon console. Select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes** and choose **Restart compute** from the compute's menu.
   ![Restart a compute in the console](/docs/manage/restart_compute.png)
 - Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
 
@@ -264,9 +264,9 @@ A branch can have a single read-write compute and multiple read replica computes
 
 To delete a compute:
 
-1. In the Neon Console, select **Branches**.
-1. Select a branch.
-1. On the **Computes** tab, click **Edit** for the compute you want to delete.
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Computes**.
+1. Click **Edit** for the compute you want to delete.
 1. At the bottom of the **Edit compute** drawer, click **Delete compute**.
 
 ## Manage computes with the Neon API

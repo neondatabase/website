@@ -9,7 +9,7 @@ summary: >-
   rows, stale schema cache hiding new tables, and OpenAPI spec "Entry not
   found" errors.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 <InfoBlock>
@@ -136,7 +136,7 @@ If authenticated users can see all rows in a table regardless of ownership, Row-
 
 ### Check RLS status
 
-In the Neon Console, go to the **Data API** page. If a table has RLS disabled, you'll see a warning:
+In the Neon Console, go to **Postgres database** > **Data API**. If a table has RLS disabled, you'll see a warning:
 
 > "table_name has RLS disabled. All authenticated users can view all rows in this table(s)."
 
@@ -195,7 +195,7 @@ The OpenAPI schema feature is disabled in your Data API configuration.
 
 ### Fix
 
-1. Go to the **Data API** page in the Neon Console
+1. Go to **Postgres database** > **Data API** in the Neon Console
 2. Open the **Settings** tab
 3. Enable the **OpenAPI schema** toggle
 4. Try your request again
@@ -225,7 +225,7 @@ The Data API caches your database schema for performance. When you create or mod
 
 ### Fix
 
-1. Go to the **Data API** page in the Neon Console
+1. Go to **Postgres database** > **Data API** in the Neon Console
 2. Click the **Refresh schema cache** button
 3. Retry your request
 

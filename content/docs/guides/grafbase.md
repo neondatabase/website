@@ -12,7 +12,7 @@ summary: >-
   environment variable configuration, and local testing with the Grafbase CLI.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 _This guide was contributed by Josep Vidal from Grafbase_
@@ -53,7 +53,7 @@ The example project in this guide simulates a marketplace of products, where the
 ## Create the schema in Neon
 
 1. Navigate to the Neon Console and select your project.
-2. Open the Neon **SQL Editor** and run the following `CREATE TABLE` statement:
+2. In the Neon Console, open **Postgres database** > **SQL Editor** and run the following `CREATE TABLE` statement:
 
    ```sql
    CREATE TABLE product_visits(id SERIAL PRIMARY KEY, product_id TEXT NOT NULL);
