@@ -60,7 +60,7 @@ Agent plan pricing and limits differ from [Scale](/docs/introduction/plans). You
 | Root branches | 5 | 25 |
 | Instant restore window | Up to 7 days | Up to 30 days |
 | Public network included | 100 GB/project | 500 GB/project |
-| Automated snapshot schedules | Not available | Available |
+| Automated snapshot schedules | Available upon request | Available |
 
 For the full comparison, see the [Agent Plan docs](/docs/introduction/agent-plan#agent-vs-scale).
 

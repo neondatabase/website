@@ -83,14 +83,14 @@ Each organization has different limits that apply to all projects created within
 | Limit                    | Free Organization | Paid Organization | Notes                                                                                     |
 | ------------------------ | ----------------- | ----------------- | ----------------------------------------------------------------------------------------- |
 | **Max branches**         | 10 per project    | Up to 1,000       | Includes all branches (production, development, snapshots)                                |
-| **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. Automated snapshot schedules are not available on the Agent plan.  |
+| **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. Automated snapshot schedules are available upon request on the Agent plan. |
 | **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU). Fixed sizes up to 16 CU (Scale allows up to 56 CU). |
 | **History window**       | 1 day             | Up to 7 days      | Point-in-time recovery window (Scale allows up to 30 days)                                |
 | **Min auto-suspend**     | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                      |
 
 **Key constraints to consider:**
 
-- **Manual snapshot limits**: Free projects can only maintain 1 manual snapshot at a time, while paid projects can keep up to 100. Automated snapshot schedules are not available on the Agent plan. This significantly impacts versioning strategies.
+- **Manual snapshot limits**: Free projects can only maintain 1 manual snapshot at a time, while paid projects can keep up to 100. Automated snapshot schedules are available upon request on the Agent plan.
 - **Branch limits**: Free projects are limited to 10 branches total, so you'll need to implement cleanup for development branches and temporary snapshots. Paid projects support up to 1,000 branches.
 - **Compute limits**: Free projects can autoscale up to 2 CU, while paid projects can scale up to 16 CU for more demanding workloads.
 
