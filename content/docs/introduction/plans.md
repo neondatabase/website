@@ -315,7 +315,7 @@ Manual snapshot limits per plan:
 
 For billing, manual snapshots are charged as full snapshots. Scheduled snapshots are charged as full snapshots for the first snapshot in a schedule, then as incremental (delta) storage for subsequent snapshots in that schedule.
 
-Automated backup schedules are available on paid plans except for the Agent plan. See [Backup & restore](/docs/guides/backup-restore) for details.
+Automated backup schedules are available on paid plans. On the Agent plan, they are available upon request. See [Backup & restore](/docs/guides/backup-restore) for details.
 
 ### Auth
 

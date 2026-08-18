@@ -16,7 +16,7 @@ updatedOn: '2026-08-05T22:15:40.109Z'
 ---
 
 <Admonition type="note" title="Snapshots">
-The **Snapshots** feature is available to all users. Manual snapshot limits: 1 on the Free plan and 100 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+The **Snapshots** feature is available to all users. Manual snapshot limits: 1 on the Free plan and 100 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans; on the Agent plan, they are available upon request. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
 **Pricing:** Snapshot storage is billed at $0.09/GB-month.
 
