@@ -62,7 +62,7 @@
       "type": "skill-md",
       "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, an MCP server, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"MCP server\", \"run code next to my database\", \"function that won't time out\", \"function logs\", \"Neon Functions\", and \"Neon Compute\".",
       "url": "/.well-known/agent-skills/neon-functions/SKILL.md",
-      "digest": "sha256:b7d9b1a6267a1013e928531128a0730f4b4b176b3e24e1a69bdf2f189271c0a8"
+      "digest": "sha256:d8adfeedf65a0dd401e4cdaa66f8dc3f8bf11b0c2596bf479f72c5799942bdcf"
     }
   ]
 }
