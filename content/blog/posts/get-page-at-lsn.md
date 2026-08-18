@@ -34,6 +34,10 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/get-page-at-lsn/deep-dive-into-neon-storage-engine-1024x538-e4149a07.jpg)
 
+<Admonition type="note" title="This storage engine is part of the lakebase architecture">
+This 2023 deep dive explains Neon’s storage engine (GetPage@LSN): how compute streams WAL, how pageservers materialize page versions, and how durable history lands in object storage. Those pieces are core to what we now call the **lakebase architecture**, the foundation of [Lakebase Postgres](/docs/get-started/why-neon) via Neon or via Databricks. For the current system overview (compute, safekeepers, pageserver, object storage, and the read/write paths), see [Lakebase architecture](/docs/introduction/architecture-overview). For the earlier design decisions that led here, see [Architecture decisions in Neon](/blog/architecture-decisions-in-neon).
+</Admonition>
+
 Neon is a single writer, multiple readers, and multi-tenant system that runs in Kubernetes containers. The two cornerstones of Neon’s architecture are:
 
 1. separation of compute and storage, and
