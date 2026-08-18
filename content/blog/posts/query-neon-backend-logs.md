@@ -33,11 +33,13 @@ seo:
   image: null
 ---
 
-We keep expanding our [backend](https://neon.com/blog/neon-backend-is-beta) observability - the most recent addition: you can now query backend logs outside the Console! `neon logs` reads what Neon Functions and Object Storage emit on a branch, with filters for source, severity, and message text. The same log stream is also available through the [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server), the [Logs API](https://opentelemetry.io/docs/specs/otel/logs/api/), [@neon/sdk](https://neon.com/docs/reference/sdk), and raw [Loki](https://grafana.com/docs/loki/latest/) endpoints.
+We keep expanding our [backend](https://neon.com/blog/neon-backend-is-beta) observability. The most recent addition: you can now query backend logs outside the Console!
+
+`neon logs` reads what Neon Functions and Object Storage emit on a branch, with filters for source, severity, and message text. The same log stream is also available through the [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server), the [Logs API](https://opentelemetry.io/docs/specs/otel/logs/api/), [@neon/sdk](https://neon.com/docs/reference/sdk), and raw [Loki](https://grafana.com/docs/loki/latest/) endpoints.
 
 ## A quick recap: Functions and Object Storage
 
-`neon logs` is in beta, and it currently covers Functions and Object Storage on a branch. If you haven’t been following the progress of the [Neon backend beta](https://neon.com/blog/neon-backend-is-beta), these are the newer primitives sitting next to [Lakebase Postgres](https://neon.com/docs/postgres/overview) (the Neon database):
+`neon logs` is in beta, and it currently covers Neon Functions and Object Storage on a branch. If you haven’t been following the progress of the [Neon backend beta](https://neon.com/blog/neon-backend-is-beta), these are the newer primitives sitting next to [Lakebase Postgres](https://neon.com/docs/postgres/overview) (the Neon database):
 
 - [Neon Functions](https://neon.com/docs/compute/functions/overview) are serverless Node.js compute you deploy onto your Neon branch, so your backend code runs next to your database. They’re long-running enough for streaming agents and realtime work.
 - [Neon Object Storage](https://neon.com/docs/storage/overview) is S3-compatible object storage built into a Neon branch, so you can deploy buckets that branch with your data. Point a standard S3 SDK or tool at your branch endpoint, authenticate with a Neon credential, and you’re done.
@@ -82,8 +84,8 @@ Plus,
 
 The CLI isn’t the only surface: the same log stream is also available for your agents / programmatic tooling.
 
-- The [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server) exposes the same log workflow as read-only tools in the `observability` category: `query_logs`, `list_log_fields`, and `list_log_field_values`. Once MCP is connected, you can ask your agent something like, “Why did my function error in the last hour? Check the logs.”
-- For scripts and apps, the same operations are in the [Logs API](https://neon.com/docs/reference/api/logs) (OpenAPI) and [`@neon/sdk`](https://neon.com/docs/reference/typescript-sdk) — including `queryProjectBranchLogs`, `listProjectBranchLogFields`, and `listProjectBranchLogFieldValues`.
+- The [Neon MCP server](https://neon.com/docs/ai/neon-mcp-server) exposes the same log workflow as read-only tools in the `observability` category. Once MCP is connected, you can ask your agent something like, “Why did my function error in the last hour? Check the logs.”
+- For scripts and apps, the same operations are in the [Logs API](https://neon.com/docs/reference/api/logs) (OpenAPI) and [`@neon/sdk`](https://neon.com/docs/reference/typescript-sdk)
 - We’re also exposing [raw Loki endpoints](https://grafana.com/docs/loki/latest/), for Grafana users - you can query Neon backend logs with tooling that already speaks LogQL
 
 ## Try it
