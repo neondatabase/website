@@ -44,7 +44,7 @@ const Hero = () => (
 
       <h1 className="mt-5 max-w-288 text-[4.5rem] leading-dense tracking-tighter text-balance xl:max-w-244 xl:text-[3.25rem]/dense lg:max-w-200 lg:text-[2.5rem]/dense md:mt-4 md:text-[2.625rem]/dense sm:text-[2rem]/dense">
         The backend for apps and agents, built to scale on{' '}
-        <Link className="group relative inline-block text-inherit" to="#autoscaling" smoothScroll>
+        <Link className="group relative inline-block text-inherit" to="#architecture" smoothScroll>
           Lakebase
           <span
             className="absolute bottom-px left-0 h-0.5 w-full opacity-40 transition-opacity duration-150 group-hover:opacity-80 group-focus-visible:opacity-80 motion-reduce:transition-none"
