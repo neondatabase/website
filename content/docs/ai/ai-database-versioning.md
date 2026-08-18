@@ -11,7 +11,7 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-08-17T14:20:06.000Z'
+updatedOn: '2026-08-18T12:50:47.000Z'
 ---
 
 <Admonition type="note">
@@ -380,11 +380,9 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 ## Scheduling snapshots at scale
 
-If you create scheduled snapshots programmatically at high volume (for example, an agent platform that schedules across many branches), we recommend distributing snapshot creation across several hours rather than concentrating it in one. For example, avoid scheduling every branch at the same hour, such as midnight.
+If you create scheduled snapshots programmatically at high volume (for example, an agent platform that schedules across many branches), it's good practice to distribute snapshot creation across different hours of the day rather than concentrating it in one, such as scheduling every branch at midnight.
 
-Each account can schedule up to 5,000 snapshots per hour by default, so concentrating too many in a single hour can reach this limit.
-
-A scheduled snapshot's `hour` (`0`–`23`) determines when it's created. Spread the `hour` across branches using one of these approaches:
+A scheduled snapshot's `hour` (`0`–`23`) sets when it's created. Spread the `hour` across branches:
 
 - **Hash the branch ID**: map each branch to a fixed hour (`0`–`23`) so it always schedules to the same hour.
 - **Cycle through hours**: assign each new schedule the next hour in sequence.
