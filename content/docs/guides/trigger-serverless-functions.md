@@ -10,7 +10,7 @@ summary: >-
   installing the Inngest client, writing TypeScript Inngest functions, and
   syncing with the Inngest platform across all three serverless runtimes.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**
@@ -40,7 +40,7 @@ If you do not have one already, create a Neon project:
 
 ## Create a table in Neon
 
-To create a table, navigate to the **SQL Editor** in the [Neon Console](https://console.neon.tech/):
+To create a table, navigate to **Postgres database** > **SQL Editor** in the [Neon Console](https://console.neon.tech/):
 
 In the SQL Editor, run the following queries to create a `users` table and insert some data:
 

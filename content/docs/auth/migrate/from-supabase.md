@@ -11,7 +11,7 @@ summary: >-
   OAuth-only apps. Managed Better Auth does not support phone authentication (SMS/WhatsApp),
   SAML SSO, or Web3 wallet sign-in.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
@@ -26,7 +26,7 @@ Existing password-based users cannot migrate due to different hashing algorithms
 
 - A Neon project ([create one here](https://console.neon.tech))
 - Data API enabled (Managed Better Auth is enabled by default when you enable Data API):
-  - Go to **Data API** in the Neon Console and enable it
+  - Go to **Postgres database** > **Data API** in the Neon Console and enable it
   - In **Data API → Configuration**, verify it's configured with **Managed Better Auth**
   - Copy your Neon connection host and database name from **Connect** in the Console. The SDK derives both the Auth and Data API URLs from this single base URL. See [Initialize the client](/docs/reference/javascript-sdk#initializing) for the derivation rules, or use the separate Auth and Data API base URLs instead if you'd rather configure them explicitly
 

@@ -11,7 +11,7 @@ summary: >-
   Schema Diff to see exactly which tables, sequences, and constraints differ
   before merging or restoring.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
@@ -37,11 +37,11 @@ First, create a new database called `people` on the `production` branch and add 
 
 1. Create the database.
 
-   In the **Neon Console**, go to **Databases** &#8594; **New Database**. Make sure your `production` branch is selected, then create the new database called `people`.
+   In the **Neon Console**, go to **Postgres database** > **Databases** &#8594; **New Database**. Make sure your `production` branch is selected, then create the new database called `people`.
 
 2. Add the schema.
 
-   Go to the **SQL Editor**, enter the following SQL statement and click **Run** to apply.
+   Go to **Postgres database** > **SQL Editor**, enter the following SQL statement and click **Run** to apply.
 
    ```sql
    CREATE TABLE person (
@@ -165,7 +165,7 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 
 1. Create the development branch
 
-   On the **Branches** page, click **Create Branch**, making sure of the following:
+   On the **Branches** page (under **Project**), click **Create Branch**, making sure of the following:
    - Select `production` as the parent branch.
    - Name the branch `feature/address`.
 

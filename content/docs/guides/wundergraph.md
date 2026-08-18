@@ -11,7 +11,7 @@ summary: >-
   full-stack app without a dedicated CI/CD pipeline or DevOps setup.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 _This guide was contributed by the team at WunderGraph_
@@ -46,7 +46,7 @@ The deployment will take a few moments.
 
 While the project is deploying, add some sample data to your database.
 
-1. Navigate to the Console and select **SQL Editor** from the sidebar.
+1. Navigate to the Console and select **Postgres database** > **SQL Editor** from the sidebar.
 2. Run the following SQL statements to add the sample data.
 
 ```sql

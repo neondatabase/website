@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -68,9 +68,9 @@ To create a role:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to create the role.
-5. On the **Roles & Databases** tab, click **Add role**.
+3. In the sidebar, select your branch from the **BRANCH** selector.
+4. Under **Postgres database**, select **Roles**.
+5. Click **Add role**.
 6. In the role creation modal, specify a role name. The branch is pre-selected.
 7. Click **Create**. The role is created and you are provided with the password for the role.
 
@@ -86,9 +86,9 @@ To delete a role:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to delete a role.
-5. On the **Roles & Databases** tab, select **Delete role** from the role menu.
+3. In the sidebar, select your branch from the **BRANCH** selector.
+4. Under **Postgres database**, select **Roles**.
+5. Select **Delete role** from the role menu.
 6. On the confirmation modal, click **Delete**.
 
 ### Reset a password
@@ -97,9 +97,9 @@ To reset a role's password:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Branches**.
-4. Select the role's branch.
-5. On the **Roles & Databases** tab, select **Reset password** from the role menu.
+3. In the sidebar, select your branch from the **BRANCH** selector.
+4. Under **Postgres database**, select **Roles**.
+5. Select **Reset password** from the role menu.
 6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.
 
 <Admonition type="note">

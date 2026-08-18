@@ -9,7 +9,7 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -43,9 +43,8 @@ To create a database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Branches** from the sidebar.
-1. Select the branch where you want to create the database.
-1. Select the **Roles** & **Databases** tab.
+1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Databases**.
 1. Click **Add database**.
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
@@ -60,9 +59,8 @@ To view databases:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Branches** from the sidebar.
-1. Select the branch where you want to view databases.
-1. Select the **Roles** & **Databases** tab.
+1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Databases**.
 
 ### Delete a database
 
@@ -72,8 +70,8 @@ To delete a database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Databases** from the sidebar.
-1. Select a branch to view the databases in the branch.
+1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Databases**.
 1. For the database you want to delete, click the delete icon.
 1. In the confirmation dialog, click **Delete**.
 

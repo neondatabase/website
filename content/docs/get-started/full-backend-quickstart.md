@@ -190,7 +190,7 @@ Then seed three sample posts in the [Neon Console SQL Editor](https://console.ne
 npx drizzle-kit push
 ```
 
-Open your project in the Neon Console, go to **SQL Editor**, and run:
+Open your project in the Neon Console, go to **Postgres database** > **SQL Editor**, and run:
 
 ```sql
 INSERT INTO posts (author, content, is_published) VALUES

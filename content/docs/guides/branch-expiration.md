@@ -12,7 +12,7 @@ summary: >-
   default, or parent branches, and deletion is permanent and also removes
   associated compute endpoints.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 ## Overview
@@ -141,7 +141,7 @@ When a branch expires and is deleted, all associated compute endpoints are also 
 
 <TabItem>
 
-1. Navigate to the **Branches** page in the Console
+1. Navigate to the **Branches** page (under **Project**) in the Console
 2. Click **New branch**
 3. Enter branch name and select parent branch
 4. By default, **Automatically delete branch after** is checked with 1 day selected. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable.
@@ -214,7 +214,7 @@ curl --request POST \
 
 <TabItem>
 
-1. Navigate to the **Branches** page in the Console
+1. Navigate to the **Branches** page (under **Project**) in the Console
 2. Choose the **Update expiration** option for your branch
 
 ![Update branch expiration](/docs/guides/branch-update-set-expiration.png)
@@ -291,7 +291,7 @@ Check expiration status of your branches:
 
 <TabItem>
 
-1. Navigate to the **Branches** page in the Console
+1. Navigate to the **Branches** page (under **Project**) in the Console
 2. Click on the desired branch to open the **Branch Overview**
 3. See information similar to the following if branch expiration is set:
 

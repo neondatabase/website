@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 <InfoBlock>
@@ -39,7 +39,7 @@ With Neon's instant restore capability, also known as point-in-time restore or P
 
 ### Restore from history
 
-In the Neon Console, open a branch's **Backup & Restore** page and use **Restore from history** to start this flow.
+In the Neon Console, select your branch, then open **Postgres database** > **Backup & Restore** and use **Restore from history** to start this flow.
 
 Instant restore is only supported for root branches. You can revert a root branch to an earlier point in time in its own or another root branch's history, using time and date or Log Sequence Number (LSN). For example, you can revert to a state just before a data loss occurred.
 
@@ -282,7 +282,7 @@ Backup branches are deletable except in two cases:
 
 To delete a backup branch:
 
-1. Navigate to the **Branches** page.
+1. Navigate to the **Branches** page (under **Project**).
 2. Find the backup branch you want to delete. It will have a name with the following format:
 
    ```

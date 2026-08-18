@@ -11,7 +11,7 @@ summary: >-
   allowlisting for Estuary's egress addresses.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Lakebase Postgres database to external destinations.
@@ -74,12 +74,11 @@ To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to create the role.
-5. Select the **Roles & Databases** tab.
-6. Click **Add Role**.
-7. In the role creation dialog, specify a role name (for example, `cdc_role`).
-8. Click **Create**. The role is created, and you are provided with the password for the role.
+3. In the sidebar, select your branch from the **BRANCH** selector.
+4. Under **Postgres database**, select **Roles**.
+5. Click **Add Role**.
+6. In the role creation dialog, specify a role name (for example, `cdc_role`).
+7. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>
 
