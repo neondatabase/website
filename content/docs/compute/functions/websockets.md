@@ -6,7 +6,7 @@ summary: >-
   backends. Use WebSockets for two-way connections via an upgrade export, or
   server-sent events for one-way streams, and Postgres LISTEN/NOTIFY to
   broadcast across isolates.
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-08-18T19:33:13.398Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -117,12 +117,16 @@ export default {
 
 WebSocket connections are local to the isolate they land on, so clients on different isolates can't communicate through shared memory.
 
-For broadcast, use Postgres `LISTEN/NOTIFY`. Each isolate maintains one `LISTEN` connection at module scope and a `Set` of its connected clients. When a message arrives via `NOTIFY`, every isolate broadcasts it to its clients, so all users receive it regardless of which isolate they landed on.
+One approach is Postgres `LISTEN/NOTIFY`. Each isolate maintains one `LISTEN` connection at module scope and a `Set` of its connected clients. When a message arrives via `NOTIFY`, every isolate broadcasts it to its clients, so all users receive it regardless of which isolate they landed on.
+
+<Admonition type="warning" title="LISTEN/NOTIFY disables scale to zero">
+The `LISTEN` client holds an idle connection open on every isolate, and an idle connection doesn't count as active traffic. [Scale to zero](/docs/introduction/scale-to-zero) suspends the compute on its normal timer and drops that connection, silently killing the feed. Only use `LISTEN`/`NOTIFY` on an always-on compute, with scale to zero disabled (a paid-plan setting). To keep scale to zero, poll Postgres on a short interval instead: each isolate re-reads new rows past a cursor and pushes them to its own clients, and polling stops when an isolate has no clients, so an idle compute still suspends.
+</Admonition>
 
 Install the additional dependencies:
 
 ```bash
-npm install pg
+npm install @neon/functions pg
 npm install --save-dev @types/pg
 ```
 
@@ -130,13 +134,18 @@ npm install --save-dev @types/pg
 import type { IncomingMessage } from 'node:http';
 import type { Duplex } from 'node:stream';
 import { Hono } from 'hono';
+import { attachDatabasePool } from '@neon/functions';
 import { WebSocketServer, type WebSocket } from 'ws';
 import { Pool, Client } from 'pg';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 
-// One dedicated LISTEN client per isolate.
+// One dedicated LISTEN client per isolate. Don't call attachDatabasePool on it:
+// that would swallow the idle drop that kills the feed. A plain error listener
+// keeps the isolate alive; the feed resumes when the isolate restarts.
 const listener = new Client({ connectionString: process.env.DATABASE_URL_UNPOOLED });
+listener.on('error', (err) => console.error('[listen]', err));
 listener
   .connect()
   .then(() => listener.query('LISTEN chat'))
@@ -172,11 +181,6 @@ export default {
     });
   },
 };
-
-// Optional: drain the pool and listener on shutdown (the platform sends SIGINT).
-process.on('SIGINT', () => {
-  Promise.allSettled([pool.end(), listener.end()]).then(() => process.exit(0));
-});
 ```
 
 <Admonition type="note">
@@ -283,7 +287,7 @@ For a complete example with JWT verification, Managed Better Auth integration, a
 
 ## Eviction and shutdown
 
-On shutdown the platform sends `SIGINT`, then forcibly stops the function 5 seconds later. Cleanup is optional: when the process exits, the OS closes its sockets, so dropped connections are usually detected without it. To shut down more gracefully, drain open resources in a `SIGINT` handler, as the LISTEN/NOTIFY example above does with `Promise.allSettled([pool.end(), listener.end()])`.
+On shutdown the platform sends `SIGINT`, then forcibly stops the function 5 seconds later. You don't need to drain the `pg` pool: when the process exits, the OS closes its sockets and Neon's pooler reclaims those connections. Use a `SIGINT` handler only to flush in-flight work that would otherwise be lost, such as clearing the heartbeat timer above.
 
 See [Runtime limits](/docs/compute/functions/reference/runtime-limits) for eviction and timeout behavior.
 

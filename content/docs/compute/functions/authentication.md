@@ -6,7 +6,7 @@ summary: >-
   Auth JWT against the injected JWKS, check an API key, and add CORS when the
   browser calls the function directly.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-08-18T19:33:13.398Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -80,7 +80,8 @@ export default {
     if (request.method === 'OPTIONS') {
       return new Response(null, { status: 204, headers: cors(request) });
     }
-    // ... verify the JWT as above, then return responses with cors(request) headers
+    // ... verify the JWT as above, then do the work ...
+    return Response.json({ ok: true }, { headers: cors(request) });
   },
 };
 ```
