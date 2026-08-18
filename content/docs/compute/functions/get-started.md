@@ -2,12 +2,12 @@
 title: Get started with Neon Functions
 subtitle: Deploy your first Neon Function and call it over HTTP.
 summary: >-
-  Deploy your first Neon Function with neon: initialize a project, define
-  the function in neon.ts, develop locally with neon dev, and deploy with
-  neon deploy. The function gets a public HTTPS URL with DATABASE_URL
-  injected from the branch's Postgres database.
+  Deploy your first Neon Function, a long-running serverless function that runs on your Neon
+  branch: initialize a project, define the function in neon.ts, develop locally
+  with neon dev, and deploy with neon deploy. The function gets a public HTTPS
+  URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-08-03T21:34:20.270Z'
+updatedOn: '2026-08-18T17:01:39.853Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />

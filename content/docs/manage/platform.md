@@ -9,7 +9,7 @@ summary: >-
   observability, security and compliance, and operations and maintenance.
   Use this page to find the right sub-topic when you know the management
   area but not the specific doc.
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T16:41:42.467Z'
 ---
 
 ## The Neon platform, in brief
@@ -26,7 +26,7 @@ Neon is a full backend platform for apps and agents, not just a database. For an
 
 <a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Beta" tagTheme="orange-muted">Object Storage</a>
 
-<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Beta" tagTheme="orange-muted">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running serverless functions on Node.js, deployed alongside your database." icon="code" tag="Beta" tagTheme="orange-muted">Functions</a>
 
 <a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Beta" tagTheme="orange-muted">AI Gateway</a>
 

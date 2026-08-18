@@ -4,10 +4,10 @@ subtitle: 'Set up CI/CD for Neon Functions: deploy to production on merge and cr
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-06T00:00:00.000Z'
-updatedOn: '2026-08-10T23:26:27.219Z'
+updatedOn: '2026-08-18T17:01:39.853Z'
 ---
 
-[Neon Functions](/docs/compute/functions/overview) are serverless compute you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
+[Neon Functions](/docs/compute/functions/overview) are long-running serverless functions you deploy onto a Neon branch, so your backend runs right next to your Postgres database. Each branch runs its own function at its own URL against its own database state, with `DATABASE_URL` injected automatically. That makes them a natural fit for a workflow where every environment gets its own isolated function.
 
 The Neon CLI (`neon deploy`) lets you deploy a function to any branch with a single command. It works well for testing locally, but as a best practice you should never deploy to the production branch by hand or push changes to it directly. Instead, every change should go through a pull request that gets exercised in isolation first. Because a PR's preview branch runs the exact same code, config, and deploy command as production, merging it becomes a simple step: if it worked in preview, it works in production.
 

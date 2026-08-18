@@ -12,7 +12,7 @@ redirectFrom:
   - /guides/azure-service-connector
   - /guides/azure-todo-static-web-app
   - /guides/azure-functions-referral-system
-updatedOn: '2026-08-15T10:47:27.123Z'
+updatedOn: '2026-08-18T16:41:42.467Z'
 ---
 
 ## Getting started
@@ -53,7 +53,7 @@ Every service is agent-ready: instant, branchable, and serverless.
 
 <a href="/docs/storage/overview" description="S3-compatible object storage that branches with your database." icon="data" tag="Beta" tagTheme="orange-muted">Object Storage</a>
 
-<a href="/docs/compute/functions/overview" description="Long-running Node.js compute, deployed alongside your database." icon="code" tag="Beta" tagTheme="orange-muted">Functions</a>
+<a href="/docs/compute/functions/overview" description="Long-running serverless functions on Node.js, deployed alongside your database." icon="code" tag="Beta" tagTheme="orange-muted">Functions</a>
 
 <a href="/docs/ai-gateway/overview" description="One API for frontier and open-source models, built into your Neon project." icon="sparkle" tag="Beta" tagTheme="orange-muted">AI Gateway</a>
 
