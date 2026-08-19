@@ -6,21 +6,15 @@ import { cn } from 'utils/cn';
 
 const DatabaseIcon = ({ className }) => (
   <svg
-    className={className}
-    width="28"
-    height="28"
-    viewBox="0 0 28 28"
+    className={cn('size-6 shrink-0', className)}
+    viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden
   >
-    <ellipse cx="14" cy="7" rx="8" ry="3.5" stroke="currentColor" strokeWidth="1.4" />
-    <path
-      d="M6 7v14c0 1.93 3.58 3.5 8 3.5s8-1.57 8-3.5V7"
-      stroke="currentColor"
-      strokeWidth="1.4"
-    />
-    <path d="M6 14c0 1.93 3.58 3.5 8 3.5s8-1.57 8-3.5" stroke="currentColor" strokeWidth="1.4" />
+    <ellipse cx="12" cy="6" rx="7" ry="3" stroke="currentColor" strokeWidth="1.2" />
+    <path d="M5 6v12c0 1.66 3.13 3 7 3s7-1.34 7-3V6" stroke="currentColor" strokeWidth="1.2" />
+    <path d="M5 12c0 1.66 3.13 3 7 3s7-1.34 7-3" stroke="currentColor" strokeWidth="1.2" />
   </svg>
 );
 
@@ -28,64 +22,53 @@ DatabaseIcon.propTypes = {
   className: PropTypes.string,
 };
 
-const NeonMark = ({ className }) => (
+const AiChip = () => (
+  <span
+    className={cn(
+      'flex size-6 shrink-0 items-center justify-center rounded-[5px] border text-[11px] leading-none font-medium tracking-tight',
+      'border-gray-new-80 text-black-pure dark:border-gray-new-30 dark:text-white'
+    )}
+    aria-hidden
+  >
+    AI
+  </span>
+);
+
+const Connector = () => (
   <svg
-    className={className}
-    width="28"
-    height="28"
-    viewBox="0 0 28 28"
+    width="41"
+    height="78"
+    viewBox="0 0 41 78"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden
+    className="shrink-0 text-gray-new-80 dark:text-gray-new-20"
   >
-    <rect width="28" height="28" rx="6" className="fill-green-45" />
-    <path
-      d="M22.5 4.5v19.5L15.1 17.4v6.6H4.5V4.5h18Zm-16.7 17h7V11.7l7.5 6.7V6.9h-14.5v14.6Z"
-      className="fill-black-pure"
-    />
+    <path d="M0 39h20M20 1v76M20 1h21M20 39h21M20 77h21" stroke="currentColor" strokeWidth="1.2" />
   </svg>
 );
 
-NeonMark.propTypes = {
-  className: PropTypes.string,
-};
-
 const AgentsGraphic = () => (
-  <div className="pointer-events-none absolute top-1/2 right-3 flex -translate-y-1/2 items-center gap-x-2 sm:right-2">
-    <NeonMark className="shrink-0" />
-    <svg
-      width="28"
-      height="52"
-      viewBox="0 0 28 52"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      className="text-gray-new-80 dark:text-gray-new-20"
-    >
-      <path d="M0 26h10" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M10 26v-18h10" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M10 26h10" stroke="currentColor" strokeWidth="1.4" />
-      <path d="M10 26v18h10" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
-    <div className="flex flex-col gap-y-1.5 text-gray-new-50 dark:text-gray-new-60">
-      <DatabaseIcon className="text-green-45" />
+  <div className="pointer-events-none absolute top-1/2 right-5 flex -translate-y-1/2 items-center gap-x-2 lg:right-4 md:right-3">
+    <AiChip />
+    <Connector />
+    <div className="flex flex-col gap-y-[14px] text-gray-new-80 dark:text-gray-new-20">
+      <DatabaseIcon className="text-green-52" />
       <DatabaseIcon />
       <DatabaseIcon />
     </div>
   </div>
 );
 
+// Which tiles in the 3x3 grid read as "provisioned", per the design
 const PLATFORM_TILES = [false, true, false, true, false, false, false, false, true];
 
 const PlatformsGraphic = () => (
-  <div className="pointer-events-none absolute top-1/2 right-4 grid -translate-y-1/2 grid-cols-3 gap-1.5 sm:right-2">
-    {PLATFORM_TILES.map((isHighlighted, index) => (
+  <div className="pointer-events-none absolute top-1/2 right-5 grid -translate-y-1/2 grid-cols-3 gap-x-4 gap-y-[14px] lg:right-4 md:right-3">
+    {PLATFORM_TILES.map((isProvisioned, index) => (
       <DatabaseIcon
         key={index}
-        className={cn(
-          'size-7',
-          isHighlighted ? 'text-green-45' : 'text-gray-new-80 dark:text-gray-new-30'
-        )}
+        className={isProvisioned ? 'text-green-52' : 'text-gray-new-80 dark:text-gray-new-20'}
       />
     ))}
   </div>
@@ -100,23 +83,26 @@ const MenuFeatureCards = ({
   items,
   linkProps: { className, ...linkProps } = {},
   className: wrapperClassName,
+  ariaLabelledBy,
+  // The graphics are decorative and need ~105px of their own; the mobile menu lays
+  // these cards out in columns far narrower than that, so it opts out.
+  withGraphic = true,
 }) => (
   <ul
-    className={cn(
-      'flex h-full w-[340px] flex-1 flex-col gap-y-3 lg:w-auto md:w-[320px]',
-      wrapperClassName
-    )}
+    className={cn('flex h-full w-full min-w-0 flex-1 flex-col gap-y-6', wrapperClassName)}
+    role="group"
+    aria-labelledby={ariaLabelledBy}
   >
     {items.map(({ title, description, to, isExternal, graphic }) => {
-      const Graphic = GRAPHICS[graphic];
+      const Graphic = withGraphic ? GRAPHICS[graphic] : null;
 
       return (
         <li key={title} className="min-h-0 flex-1" role="none">
           <Link
             className={cn(
-              'group relative flex h-full min-h-[104px] items-end overflow-hidden rounded border border-gray-new-90 bg-gray-new-98 p-5 pr-32 transition-colors duration-200',
-              'hover:border-gray-new-80 dark:border-gray-new-15 dark:bg-gray-new-8 dark:hover:border-gray-new-30',
-              'lg:pr-24 md:pr-20',
+              'group relative flex h-full min-h-[141px] items-end overflow-hidden rounded border p-5 transition-colors duration-200',
+              'border-gray-new-90 bg-gray-new-98 hover:border-gray-new-80',
+              'dark:border-gray-new-20 dark:bg-gray-new-10 dark:hover:border-gray-new-30',
               className
             )}
             to={to}
@@ -127,7 +113,12 @@ const MenuFeatureCards = ({
             {...linkProps}
           >
             {Graphic && <Graphic />}
-            <div className="relative z-10 flex max-w-[200px] flex-col gap-y-2 lg:max-w-[170px]">
+            <div
+              className={cn(
+                'relative z-10 flex flex-col gap-y-2',
+                Graphic ? 'max-w-[168px] md:max-w-[150px]' : 'max-w-full'
+              )}
+            >
               <p className="flex items-baseline gap-x-2 text-lg leading-none font-medium tracking-extra-tight text-black-pure dark:text-white">
                 {title}
                 <ArrowTopRightIcon className="-translate-x-2 scale-75 text-black-pure opacity-0 transition-[translate,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 dark:text-white" />
@@ -153,8 +144,15 @@ MenuFeatureCards.propTypes = {
       graphic: PropTypes.oneOf(['agents', 'platforms']),
     })
   ).isRequired,
-  linkProps: Link.propTypes,
+  linkProps: PropTypes.shape({
+    className: PropTypes.string,
+    tabIndex: PropTypes.number,
+    onKeyDown: PropTypes.func,
+    tagName: PropTypes.string,
+  }),
   className: PropTypes.string,
+  ariaLabelledBy: PropTypes.string,
+  withGraphic: PropTypes.bool,
 };
 
 export default MenuFeatureCards;

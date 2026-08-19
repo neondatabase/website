@@ -69,7 +69,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                         </h3>
                       )}
                       {variant === 'cards' ? (
-                        <MenuFeatureCards items={items} className="w-full" />
+                        <MenuFeatureCards items={items} className="w-full" withGraphic={false} />
                       ) : (
                         <ul className="flex flex-col gap-5">
                           {items.map(({ title, description, to, isExternal }) => (

@@ -89,6 +89,11 @@ export default {
               description: 'Avoid overprovisioning & optimize performance',
             },
             {
+              title: 'Instant restores',
+              to: `${LINKS.useCases}/large-databases#restore-postgres-in-seconds-even-at-multi-tb-scale`,
+              description: 'Recover TBs in seconds',
+            },
+            {
               title: 'Large databases',
               to: `${LINKS.useCases}/large-databases`,
               description: 'Restore & replicate your DB in seconds',
@@ -102,7 +107,7 @@ export default {
             {
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
-              description: 'Infra for app generation agents - used by Replit, v0, and others',
+              description: 'Infra for app-generation agents like Replit & v0',
               graphic: 'agents',
             },
             {

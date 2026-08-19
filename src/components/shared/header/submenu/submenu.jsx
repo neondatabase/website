@@ -73,7 +73,11 @@ const Submenu = ({
                       )}
                       {variant === 'cards' ? (
                         <MenuFeatureCards
+                          className="w-[356px] xl:w-[300px]"
                           items={items}
+                          ariaLabelledBy={
+                            title ? `submenu-${index}-section-${sectionIndex}` : undefined
+                          }
                           linkProps={{
                             className: submenuLinkClassName,
                             tabIndex: isActive ? 0 : -1,
