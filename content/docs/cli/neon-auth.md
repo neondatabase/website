@@ -151,8 +151,10 @@ Adds a trusted domain.
 <CliOptions command="neon-auth domain add" />
 
 ```bash
-neon neon-auth domain add example.com
+neon neon-auth domain add https://app.example.com
 ```
+
+A trusted domain is an origin, so include the protocol (`https://`, or `http://` for local development) and omit any trailing slash. Use `https://app.example.com`, not `app.example.com` or `https://app.example.com/`. See [Configure trusted domains](/docs/auth/guides/configure-domains).
 
 ### neon neon-auth domain delete (#domain-delete)
 
