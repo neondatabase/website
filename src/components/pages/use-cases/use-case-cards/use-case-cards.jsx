@@ -9,6 +9,7 @@ import { cn } from 'utils/cn';
 import ApiDrivenIcon from './icons/api-driven.inline.svg';
 import AutomationIcon from './icons/automation.inline.svg';
 import AutoscalingIcon from './icons/autoscaling.inline.svg';
+import BackendIcon from './icons/backend.inline.svg';
 import BranchingIcon from './icons/branching.inline.svg';
 import CiWorkflowsIcon from './icons/ci-workflows.inline.svg';
 import ConnectionPoolingIcon from './icons/connection-pooling.inline.svg';
@@ -34,6 +35,7 @@ const ICONS = {
   'api-driven': ApiDrivenIcon,
   automation: AutomationIcon,
   autoscaling: AutoscalingIcon,
+  backend: BackendIcon,
   branching: BranchingIcon,
   'ci-workflows': CiWorkflowsIcon,
   'connection-pooling': ConnectionPoolingIcon,
