@@ -64,6 +64,7 @@ import Mermaid from 'components/shared/mermaid';
 import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
 import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
+import StatBlock from 'components/shared/stat-block';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 import { cn } from 'utils/cn';
@@ -236,6 +237,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CopyPrompt,
   McpSetupConfigurator,
   SqlToRestConverter,
+  StatBlock,
   AiGatewayModelIndex,
   ...sharedComponents,
 });

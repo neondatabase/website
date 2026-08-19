@@ -11,7 +11,7 @@ updatedOn: '2026-08-15T15:45:00.000Z'
 image: '/images/social-previews/use-cases/bursty-workloads.jpg'
 ---
 
-![Neon autoscaling allocating compute above a spiky database load curve, with a panel reporting that resources were adjusted by four compute units](/use-cases/bursty-workloads/autoscaling-hero.png)
+![Neon autoscaling allocating compute above a spiky database load curve, with a panel reporting that resources were adjusted by four compute units](/use-cases/bursty-workloads/autoscaling-hero.svg)
 
 <Admonition type="note" title="Summary">
 Every database's demand for CPU and memory changes constantly. On a provisioned platform you buy one instance size and live with it, so you either pay for peak capacity around the clock or run out of headroom when traffic spikes. Lakebase Postgres (Neon's database) separates compute from storage, which lets it resize compute in seconds while queries keep running.
@@ -32,7 +32,7 @@ A provisioned database can't follow any of that. You pick a CPU and memory confi
 
 AWS at least gives you a formula. Its [RDS rightsizing tool](https://aws.amazon.com/blogs/aws-cloud-financial-management/new-rightsizing-recommendations-for-amazon-rds-mysql-and-rds-postgresql-in-aws-compute-optimizer/) takes the P99.5 of CPU and memory utilization over a lookback window and adds 20%. Follow it and most of what you bought sits idle most of the time.
 
-![One week of a production workload where autoscaling tracks the load curve while the provisioned allocation stays flat above it, with spikes that still exceed the provisioned ceiling](/use-cases/bursty-workloads/autoscaling-vs-provisioned.jpg)
+![One week of a production workload where autoscaling tracks the load curve while the provisioned allocation stays flat above it, with spikes that still exceed the provisioned ceiling](/use-cases/bursty-workloads/autoscaling-vs-provisioned.svg)
 
 The orange area is compute that was paid for and delivered nothing. The red spikes are worse: they're the moments the workload needed more than the instance had, even at the size AWS recommends. Provisioning at P99.5 + 20% is provisioning below the top 0.5% of your load, and load spikes are frequently larger than a 20% buffer.
 
@@ -58,7 +58,7 @@ Lakebase Postgres, the Neon database built on the [lakebase architecture](https:
 
 Neon runs an autoscaling algorithm that watches CPU, memory, and cache pressure and adjusts the compute size within the range you set, in both directions, while connections stay open:
 
-![A day of database compute usage with the autoscaling allocation tracking each spike in demand closely](/use-cases/bursty-workloads/autoscaling-matches-workload.jpg)
+![A day of database compute usage with the autoscaling allocation tracking each spike in demand closely](/use-cases/bursty-workloads/autoscaling-matches-workload.svg)
 
 The green is the compute Neon allocated. The blue is what the workload used. Allocation tracks the shape of the load instead of drawing a flat line above it, which is what removes both the waste and the ceiling at the same time.
 

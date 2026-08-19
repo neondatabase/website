@@ -49,7 +49,7 @@ const Connector = () => (
 );
 
 const AgentsGraphic = () => (
-  <div className="pointer-events-none absolute top-1/2 right-5 flex -translate-y-1/2 items-center gap-x-2 lg:right-4 md:right-3">
+  <div className="pointer-events-none flex shrink-0 items-center gap-x-2 self-center">
     <AiChip />
     <Connector />
     <div className="flex flex-col gap-y-[14px] text-gray-new-80 dark:text-gray-new-20">
@@ -64,7 +64,7 @@ const AgentsGraphic = () => (
 const PLATFORM_TILES = [false, true, false, true, false, false, false, false, true];
 
 const PlatformsGraphic = () => (
-  <div className="pointer-events-none absolute top-1/2 right-5 grid -translate-y-1/2 grid-cols-3 gap-x-4 gap-y-[14px] lg:right-4 md:right-3">
+  <div className="pointer-events-none grid shrink-0 grid-cols-3 gap-x-4 gap-y-[14px] self-center">
     {PLATFORM_TILES.map((isProvisioned, index) => (
       <DatabaseIcon
         key={index}
@@ -100,7 +100,7 @@ const MenuFeatureCards = ({
         <li key={title} className="min-h-0 flex-1" role="none">
           <Link
             className={cn(
-              'group relative flex h-full min-h-[141px] items-end overflow-hidden rounded border p-5 transition-colors duration-200',
+              'group relative flex h-full min-h-[141px] items-stretch justify-between gap-x-4 overflow-hidden rounded border p-5 transition-colors duration-200',
               'border-gray-new-90 bg-gray-new-98 hover:border-gray-new-80',
               'dark:border-gray-new-20 dark:bg-gray-new-10 dark:hover:border-gray-new-30',
               className
@@ -112,11 +112,10 @@ const MenuFeatureCards = ({
             role="menuitem"
             {...linkProps}
           >
-            {Graphic && <Graphic />}
             <div
               className={cn(
-                'relative z-10 flex flex-col gap-y-2',
-                Graphic ? 'max-w-[168px] md:max-w-[150px]' : 'max-w-full'
+                'relative z-10 flex min-w-0 flex-1 flex-col justify-end gap-y-2',
+                Graphic && 'max-w-[168px]'
               )}
             >
               <p className="flex items-baseline gap-x-2 text-lg leading-none font-medium tracking-extra-tight text-black-pure dark:text-white">
@@ -127,6 +126,7 @@ const MenuFeatureCards = ({
                 {description}
               </p>
             </div>
+            {Graphic && <Graphic />}
           </Link>
         </li>
       );

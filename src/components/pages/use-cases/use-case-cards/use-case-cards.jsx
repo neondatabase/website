@@ -6,12 +6,12 @@ import Link from 'components/shared/link';
 import DotsPattern from 'images/dots-pattern.inline.svg';
 import { cn } from 'utils/cn';
 
-import CardBranchingIcon from './card-icons/branching.inline.svg';
-import CardDatabaseIcon from './card-icons/database.inline.svg';
-import CardElasticScalingIcon from './card-icons/elastic-scaling.inline.svg';
-import CardMultiTenancyIcon from './card-icons/multi-tenancy.inline.svg';
-import CardSparkleIcon from './card-icons/sparkle.inline.svg';
-import CardWindowCodeIcon from './card-icons/window-code.inline.svg';
+import CardAgentsIcon from './card-icons/agents.inline.svg';
+import CardBranchingWorkflowsIcon from './card-icons/branching-workflows.inline.svg';
+import CardBurstyWorkloadsIcon from './card-icons/bursty-workloads.inline.svg';
+import CardFullStackAppsIcon from './card-icons/full-stack-apps.inline.svg';
+import CardLargeDatabasesIcon from './card-icons/large-databases.inline.svg';
+import CardPlatformsIcon from './card-icons/platforms.inline.svg';
 import ApiDrivenIcon from './icons/api-driven.inline.svg';
 import AutomationIcon from './icons/automation.inline.svg';
 import AutoscalingIcon from './icons/autoscaling.inline.svg';
@@ -40,13 +40,15 @@ import UsageBasedIcon from './icons/usage-based.inline.svg';
 // hardcoded off-white fill and render at their intrinsic size inside a tag chip.
 // A few names exist in both families on purpose — a card and a tag can be about
 // the same thing — so keep the maps separate rather than merging them.
+// Keyed by the card it belongs to, so content/data/use-cases.yaml reads the same
+// name in `icon:` as it does in `link:`.
 const CARD_ICONS = {
-  branching: CardBranchingIcon,
-  database: CardDatabaseIcon,
-  'elastic-scaling': CardElasticScalingIcon,
-  'multi-tenancy': CardMultiTenancyIcon,
-  sparkle: CardSparkleIcon,
-  'window-code': CardWindowCodeIcon,
+  agents: CardAgentsIcon,
+  'branching-workflows': CardBranchingWorkflowsIcon,
+  'bursty-workloads': CardBurstyWorkloadsIcon,
+  'full-stack-apps': CardFullStackAppsIcon,
+  'large-databases': CardLargeDatabasesIcon,
+  platforms: CardPlatformsIcon,
 };
 
 const TAG_ICONS = {

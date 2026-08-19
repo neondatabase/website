@@ -11,7 +11,7 @@ updatedOn: '2026-08-15T23:20:00.000Z'
 image: '/images/social-previews/use-cases/large-databases.jpg'
 ---
 
-![A production branch diverging after a failure, with a restored production branch created from the healthy point in history](/use-cases/large-databases/restore-branch-diagram.png)
+![A production branch diverging after a failure, with a restored production branch created from the healthy point in history](/use-cases/large-databases/restore-branch-diagram.svg 'square')
 
 <Admonition type="note" title="Summary">
 On a conventional Postgres instance, compute and storage live on the same machine. Past a few hundred gigabytes, this monolithic design starts to hurt operations: restores take hours, replicas duplicate storage, and it becomes too painful to keep staging and development environments in sync with production.
@@ -41,9 +41,13 @@ Restores take hours because snapshot plus WAL replay has to rebuild the whole vo
 
 Failures on large Postgres databases are not rare events, and recovery is rarely quick.
 
-![59% of companies experienced a critical production failure in the past 12 months, including hardware failures, accidental table drops, and data corruption](/use-cases/large-databases/survey-critical-failures.png)
+<StatBlock value="59%">
+of companies experienced a critical production failure in the past 12 months. Including hardware failures, accidental table drop, or data corruption.
+</StatBlock>
 
-![30% of teams had 3+ hours of downtime, some pushed past half a day, and only 21% recovered in less than 60 minutes](/use-cases/large-databases/survey-downtime.png)
+<StatBlock value="30%">
+of teams had 3+ hours of downtime – and some pushed past half a day. Only 21% recovered in less than 60 minutes.
+</StatBlock>
 
 _Source: [Impact of Postgres restores survey](/restores-survey), based on 50 developers running 1TB+ Postgres in production._
 

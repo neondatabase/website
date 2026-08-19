@@ -651,6 +651,37 @@ const componentHandlers = {
   },
 
   /**
+   * StatBlock -> the figure inlined as one sentence
+   * <StatBlock value="59%">of companies saw a failure.</StatBlock>
+   * -> **59%** of companies saw a failure.
+   * The value lives in a prop, so without this the mirror would drop the number
+   * and leave the supporting line without its subject.
+   */
+  StatBlock(node) {
+    const value = getAttr(node, 'value');
+    const children = node.children || [];
+    if (!value) return children;
+
+    // Children arrive as a paragraph; splice the value into it so the sentence stays whole.
+    const [first, ...rest] = children;
+    const valueNode = { type: 'strong', children: [{ type: 'text', value }] };
+
+    if (first?.type === 'paragraph') {
+      return [
+        {
+          ...first,
+          children: [valueNode, { type: 'text', value: ' ' }, ...(first.children || [])],
+        },
+        ...rest,
+      ];
+    }
+
+    return [
+      { type: 'paragraph', children: [valueNode, { type: 'text', value: ' ' }, ...children] },
+    ];
+  },
+
+  /**
    * Admonition -> blockquote-style callout
    * <Admonition type="tip">content</Admonition>
    * -> **Tip:** content

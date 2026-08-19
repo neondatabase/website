@@ -60,16 +60,22 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                 transition={{ duration: ANIMATION_DURATION }}
                 className="flex gap-x-3.5 md:flex-col md:gap-y-9"
               >
-                <ul className="grid grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
+                <ul className="grid w-full grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
                   {sections.map(({ title, items, variant }, index) => (
-                    <li key={index} className={cn(variant === 'cards' && 'flex flex-col')}>
+                    <li
+                      key={index}
+                      className={cn(variant === 'cards' && 'col-span-full flex flex-col')}
+                    >
                       {title && (
                         <h3 className="mb-5 text-[10px] leading-none tracking-snug text-gray-new-50 uppercase">
                           {title}
                         </h3>
                       )}
                       {variant === 'cards' ? (
-                        <MenuFeatureCards items={items} className="w-full" withGraphic={false} />
+                        <MenuFeatureCards
+                          items={items}
+                          className="w-full flex-row gap-x-4 sm:max-w-[480px] sm:flex-col sm:gap-y-6"
+                        />
                       ) : (
                         <ul className="flex flex-col gap-5">
                           {items.map(({ title, description, to, isExternal }) => (

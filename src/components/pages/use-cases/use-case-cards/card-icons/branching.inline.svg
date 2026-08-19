@@ -1,8 +1,0 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g transform="scale(1.5)">
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7.7998L15.7712 11.5711L12 15.3423L12 7.7998Z" fill="currentColor"/>
-    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.77148 0.200195L11.5427 3.97149L7.77152 7.7427L7.77148 0.200195Z" fill="currentColor"/>
-    <path d="M9.33398 4H3.33398V12" stroke="currentColor" stroke-width="1.06667"/>
-    <path d="M0 11.7334L12 11.7334" stroke="currentColor" stroke-width="1.06667"/>
-  </g>
-</svg>
