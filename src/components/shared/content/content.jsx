@@ -121,25 +121,27 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
     const unoptimizedPreserveAlpha =
       typeof src === 'string' && /^\/docs\/.+\.(png|gif)$/i.test(src);
 
+    const isSquare = title === 'square';
+    const titleAttr = title === 'no-border' || isSquare ? undefined : title;
+    const templateRounding = isTemplate && !isSquare && 'rounded-lg';
+
     // No zoom on PostgreSQLTutorial Images
     if (!isPostgres) {
       return (
         <ImageZoom src={src}>
           <Image
-            className={cn(
-              className,
-              { 'no-border': title === 'no-border' },
-              isTemplate && 'rounded-lg'
-            )}
+            className={cn(className, { 'no-border': title === 'no-border' }, templateRounding)}
             src={src}
             width={704}
             height={447}
             style={{ width: '100%', height: '100%' }}
-            title={title !== 'no-border' ? title : undefined}
+            title={titleAttr}
             unoptimized={unoptimizedPreserveAlpha}
             {...rest}
           />
-          {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
+          {isTemplate && (
+            <GradientBorder className={templateRounding || 'rounded-none'} withBlend />
+          )}
         </ImageZoom>
       );
     }
@@ -160,7 +162,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
         width={100}
         height={100}
         style={{ width: 'auto', height: 'auto', maxWidth: '128px', maxHeight: '128px' }}
-        title={title !== 'no-border' ? title : undefined}
+        title={titleAttr}
         {...rest}
       />
     ) : (
@@ -170,7 +172,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
         width={200}
         height={100}
         style={{ width: 'auto', height: 'auto' }}
-        title={title !== 'no-border' ? title : undefined}
+        title={titleAttr}
         {...rest}
       />
     );

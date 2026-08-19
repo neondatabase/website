@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-08-07T16:05:20.768Z'
+updatedOn: '2026-08-19T14:37:11.742Z'
 ---
 
 # Docs
@@ -741,6 +741,12 @@ If you need an image without border to show an annotated piece of UI, use the `"
 
 ```md
 ![lakebase architecture diagram](/docs/conceptual-guides/neon_architecture_2.png 'no-border')
+```
+
+Pages under `content/pages/` round the corners of every image. If the artwork runs edge to edge and the rounding shaves off something you need to keep, opt that image out with the `"square"` attribute:
+
+```md
+![agent setup in a code editor](/use-cases/full-stack-apps/neon-init.jpg 'square')
 ```
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
