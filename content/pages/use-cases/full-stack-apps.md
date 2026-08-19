@@ -172,4 +172,4 @@ You can start building on the [Neon Free plan](/docs/introduction/plans). It com
 - **Autoscaling** up to 2 CU (≈8 GB RAM) with scale to zero after 5 minutes of inactivity
 - **Managed Better Auth** up to 60,000 MAU (beta)
 
-<CTA title="Start building" description="Create a project on the Free plan, run npx neon@latest init, and deploy your first backend primitive in minutes." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" linkText="Browse templates" linkUrl="https://build-on-neon.vercel.app/" />
+<CTA title="Start building" description="Create a project on the Free plan, run npx neon@latest init, and deploy your first backend primitive in minutes." buttonText="Get started" buttonUrl="https://console.neon.tech/signup" secondaryButtonText="Browse templates" secondaryButtonUrl="https://build-on-neon.vercel.app/" />

@@ -151,4 +151,4 @@ Everything above covers the database half of an environment. For a long time tha
 - **[Managed Better Auth](/docs/auth/overview)** - Users, sessions, and OAuth configuration live in your Postgres database, so a branch gets its own isolated sign-up and login flows
 - **[Neon Functions](/docs/compute/functions/overview)** - Node.js handlers deployed onto a branch, each with its own URL and its own database state, deleted when the branch is
 
-<CTA title="Start branching" description="Ask your agent to create a Neon and experiment with branching right away. We have a generous free plan, no credit card required." buttonText="Get started" buttonUrl="https://neon.com/docs/introduction" linkText="Read the branching guide" linkUrl="/branching" />
+<CTA title="Start branching" description="Ask your agent to create a Neon and experiment with branching right away. We have a generous free plan, no credit card required." buttonText="Get started" buttonUrl="https://neon.com/docs/introduction" secondaryButtonText="Read the branching guide" secondaryButtonUrl="/branching" />

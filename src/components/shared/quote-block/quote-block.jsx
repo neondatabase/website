@@ -21,6 +21,7 @@ import oliJuhlAvatar from 'images/authors/oli-juhl.png';
 import oliverStenbomAvatar from 'images/authors/oliver-stenbom.jpg';
 import pierreBurgyAvatar from 'images/authors/pierre-burgy.jpg';
 import rickBlalockAvatar from 'images/authors/rick-blalock.jpg';
+import tejasSiripurapuAvatar from 'images/authors/tejas-siripurapu.jpg';
 import thorstenRiessAvatar from 'images/authors/thorsten-riess.jpg';
 import { cn } from 'utils/cn';
 
@@ -100,6 +101,10 @@ const quotes = {
   'rick-blalock': {
     name: 'Rick Blalock',
     avatar: rickBlalockAvatar,
+  },
+  'tejas-siripurapu': {
+    name: 'Tejas Siripurapu',
+    avatar: tejasSiripurapuAvatar,
   },
   'thorsten-riess': {
     name: 'Thorsten Rieß',
