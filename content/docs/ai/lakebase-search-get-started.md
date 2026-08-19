@@ -17,90 +17,13 @@ This guide sets up Lakebase Search on a Neon project: enabling both extensions, 
 - A Neon project. You enable Lakebase Search on it in the first step below.
 - Postgres 16 or later (Lakebase Search requires PG16+)
 - Node.js 18 or later
-- An [OpenAI API key](https://platform.openai.com/api-keys) for generating embeddings
+- An [OpenAI API key](https://platform.openai.com/api-keys) for generating embeddings (this guide uses OpenAI, but any embedding provider works)
 
 <Steps>
 
-## Enable the preload libraries
-
-`lakebase_vector` and `lakebase_text` rely on preloaded libraries that aren't enabled by default. Check your project's current state in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
-
-```sql
-SHOW shared_preload_libraries;
-```
-
-If the list already includes `lakebase_vector` and `lakebase_text`, skip to [Install the extensions](#install-the-extensions). If not, you'll add them with the Neon API, using a [Neon API key](/docs/manage/api-keys) and your project ID.
-
-<Admonition type="note">
-The `curl` examples below use a [Neon API key](/docs/manage/api-keys). If you'd rather not manage a key, the `neon api` command (an authenticated passthrough that reuses your existing CLI login) calls the same endpoints. For example, `neon api /projects/$PROJECT_ID/available_preload_libraries` replaces the first `curl` below; the `PATCH` and `restart` calls map the same way, passing the request body with `-d`.
-
-</Admonition>
-
-First, confirm the libraries are available to your project:
-
-```bash
-export NEON_API_KEY=...
-export PROJECT_ID=...
-
-curl -sS \
-  -H "authorization: Bearer $NEON_API_KEY" \
-  -H "accept: application/json" \
-  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/available_preload_libraries" \
-| jq '.libraries[] | select(.library_name | test("lakebase"))'
-```
-
-If that returns the two libraries, enable them. The Neon API replaces the preload list rather than appending, so the command below reads your current libraries (plus the defaults) and re-sends them with the Lakebase Search libraries added, leaving your existing preloads in place. The `split(",")` guards against a default `library_name` that packs several names into one comma-separated string. Note that experimental or beta libraries may remain in `enabled_libraries` without loading into `shared_preload_libraries`; confirm what actually loaded with `SHOW shared_preload_libraries` after the restart.
-
-```bash
-AVAILABLE="$(curl -sS \
-  -H "authorization: Bearer $NEON_API_KEY" \
-  -H "accept: application/json" \
-  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/available_preload_libraries")"
-
-CURRENT="$(curl -sS \
-  -H "authorization: Bearer $NEON_API_KEY" \
-  -H "accept: application/json" \
-  "https://console.neon.tech/api/v2/projects/$PROJECT_ID")"
-
-BODY="$(jq -n --argjson avail "$AVAILABLE" --argjson cur "$CURRENT" '
-  { project: { settings: { preload_libraries: { enabled_libraries: (
-    [$avail.libraries[] | select(.is_default == true) | .library_name | split(",")[]]
-    + ($cur.project.settings.preload_libraries.enabled_libraries // [])
-    + ["lakebase_vector", "lakebase_text"]
-    | unique
-  ) } } } }
-')"
-
-curl -sS -X PATCH \
-  -H "authorization: Bearer $NEON_API_KEY" \
-  -H "accept: application/json" \
-  -H "content-type: application/json" \
-  --data "$BODY" \
-  "https://console.neon.tech/api/v2/projects/$PROJECT_ID"
-```
-
-For more on how Neon handles preloaded libraries, see [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries).
-
-## Restart the compute
-
-The new `shared_preload_libraries` setting applies the next time the compute starts. If the compute is idle (suspended), you don't need to do anything: the next connection wakes it and picks up the change. If it's active, restart it to apply the setting, which drops current connections:
-
-```bash
-export ENDPOINT_ID=...
-
-curl -sS -X POST \
-  -H "authorization: Bearer $NEON_API_KEY" \
-  -H "accept: application/json" \
-  "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$ENDPOINT_ID/restart"
-```
-
-<Admonition type="note">
-The restart call requires an **active** compute. On an idle compute it returns `endpoint is not active, could not restart`. That's expected; skip the restart and just connect, and the compute picks up the new setting when it wakes.
-</Admonition>
-
 ## Enable the extensions
 
-Run the following in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected Postgres client:
+Install the extensions in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any connected Postgres client:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS lakebase_vector CASCADE;
@@ -108,10 +31,6 @@ CREATE EXTENSION IF NOT EXISTS lakebase_text CASCADE;
 ```
 
 `CASCADE` automatically installs `pgvector` if it is not already present, since `lakebase_vector` depends on it.
-
-<Admonition type="note">
-If you get `ERROR: lakebase_vector must be loaded via shared_preload_libraries`, the preload step hasn't taken effect on the running compute yet. Confirm the libraries are enabled (the step above) and that the compute has restarted or woken since, then try again.
-</Admonition>
 
 ## Create a table
 
