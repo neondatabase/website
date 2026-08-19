@@ -144,6 +144,7 @@ export default {
     description: 'Offer Postgres to your users',
     pathname: LINKS.platforms,
     type: 'article',
+    imagePath: '/images/social-previews/platforms.jpg',
   },
   security: {
     title: 'Security — Neon',
