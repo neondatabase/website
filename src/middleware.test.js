@@ -179,16 +179,6 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Index /guides', path: '/guides', reason: 'index page without markdown' },
       { name: 'Index /branching', path: '/branching', reason: 'index page without markdown' },
       { name: 'Index /faqs', path: '/faqs', reason: 'index page without markdown' },
-      {
-        name: 'Use case multi-tb',
-        path: '/use-cases/multi-tb',
-        reason: 'no markdown available',
-      },
-      {
-        name: 'Use case serverless-apps',
-        path: '/use-cases/serverless-apps',
-        reason: 'no markdown available',
-      },
       { name: 'RSS file', path: '/guides/rss.xml', reason: 'RSS file' },
     ];
 

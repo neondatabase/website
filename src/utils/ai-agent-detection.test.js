@@ -237,16 +237,6 @@ describe('getMarkdownPath', () => {
       const result = getMarkdownPath('/docs/changelog/2026-03-13');
       expect(result).toBe('/md/changelog/2026-03-13.md');
     });
-
-    it('should exclude /use-cases/multi-tb', () => {
-      const result = getMarkdownPath('/use-cases/multi-tb');
-      expect(result).toBeNull();
-    });
-
-    it('should exclude /use-cases/serverless-apps', () => {
-      const result = getMarkdownPath('/use-cases/serverless-apps');
-      expect(result).toBeNull();
-    });
   });
 
   describe('Excluded files (should return null)', () => {
