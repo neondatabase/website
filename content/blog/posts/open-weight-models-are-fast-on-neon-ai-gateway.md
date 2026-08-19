@@ -16,8 +16,9 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/open-weight-models-are-fast-on-neon-ai-gateway-md-tmp-neon-open-weight-models-fast-on-neon-ai-gateway-content-blog-posts-open-weight-models-are-fast-on-neon-ai-gateway/neon-open-weight.jpg
+  alt: Open-weight models are fast on Neon AI Gateway
 isFeatured: false
 seo:
   title: Open-weight models are fast on Neon AI Gateway. Here's why - Neon
@@ -30,7 +31,8 @@ seo:
   ogDescription: >-
     AI Gateway runs on the Databricks Foundation Model APIs, which boosts
     performance with prompt caching and other optimizations
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/open-weight-models-are-fast-on-neon-ai-gateway-md-tmp-neon-open-weight-models-fast-on-neon-ai-gateway-content-blog-posts-open-weight-models-are-fast-on-neon-ai-gateway/neon-open-weight.jpg
 ---
 
 Open-weight models are built for performance, but how they’re served determines whether end users actually feel that speed.
@@ -38,6 +40,8 @@ Open-weight models are built for performance, but how they’re served determine
 [Neon AI Gateway](https://neon.com/docs/ai-gateway/overview) calls [Databricks Foundation Model APIs](https://docs.databricks.com/aws/en/machine-learning/foundation-model-apis/) for Databricks-hosted open-weight models, a stack that has years of inference engineering behind it - including continuous batching and KV-cache paging, a TensorRT-LLM-era backend with custom kernels, careful quantization, hardware-tuned multi-GPU layouts, and prompt caching. 
 
 That last optimization (prompt caching) is the one that maps most directly to agent loops, a main use case for the Neon backend. Coding agents and multi-step tool loops tend to resend the same system prompt, tools schema, and few-shot examples on every turn - prompt caching speeds up that traffic pattern. When Databricks first rolled prompt caching out on gpt-oss in a large production batch-inference pipeline, [per-replica input-token throughput went up 2.5× and P50 latency went down 3×, even at a ~30% cache hit rate.](https://www.databricks.com/blog/accelerating-llm-inference-prompt-caching-open-source-models-databricks)
+
+![Prompt caching increases input-token throughput by 2.5x and reduces P50 latency by 3x for gpt-oss on Databricks Foundation Model APIs](https://cdn.neonapi.io/public/images/pages/blog/open-weight-models-are-fast-on-neon-ai-gateway-md-tmp-neon-open-weight-models-fast-on-neon-ai-gateway-content-blog-posts-open-weight-models-are-fast-on-neon-ai-gateway/open-weight-diagram.jpg)
 
 ## Open-weight models are built to be fast, but bad serving cancels that
 
