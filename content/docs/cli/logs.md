@@ -2,18 +2,19 @@
 title: 'Neon CLI command: logs'
 subtitle: Query the logs a branch's services emit
 summary: >-
-  The Neon CLI `neon logs` command reads the logs a branch's services emit
-  (Postgres compute, storage, and Neon Functions). Query records over a time
+  The Neon CLI `neon logs` command reads the logs a branch's services emit.
+  Today that covers Neon Functions and Object Storage; Postgres compute logs
+  are coming. Query records over a time
   window, filter by source, severity, or OpenTelemetry attributes, run raw
   LogQL, and list which fields and values a branch reports. Logs are in beta
   and available only in AWS US East (Ohio) (aws-us-east-2).
 enableTableOfContents: true
-updatedOn: '2026-08-10T15:04:49.412Z'
+updatedOn: '2026-08-19T00:03:14.837Z'
 ---
 
 <FeatureBeta />
 
-The `logs` command reads the logs a branch's services emit: the Postgres compute, storage, and Neon Functions. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters.
+The `logs` command reads the logs a branch's services emit. Today that covers Neon Functions and Object Storage; Postgres compute logs are coming. Query records over a time window, filter by source, severity, or OpenTelemetry attribute, and list which fields and values a branch reports so you can build precise filters.
 
 Logs are in beta and available only in **AWS US East (Ohio) (`aws-us-east-2`)**, so your project must be in that region to use them.
 
@@ -33,14 +34,18 @@ Bound the window with `--since` (a duration like `30m` or `1h`, ending at `--end
 
 The structured content filters (`--source`, `--service-name`, `--scope-name`, `--minimum-severity`, `--severity-text`, `--body-contains`, and `--trace-id`) combine with each other. Passing `--logql` replaces all of them with a raw [LogQL](https://grafana.com/docs/loki/latest/query/) expression (stream selectors and line filters only); the window, `--limit`, `--sort-order`, and `--cursor` still apply.
 
+`--source` accepts `function`, `storage`, and `pg_endpoint`. Only `function` and `storage` return records today; `pg_endpoint` (Postgres compute) is accepted but comes back empty until Postgres logs ship.
+
+Filter by severity with `--severity-text`, which matches the exact, case-sensitive value a record carries (for example `ERROR` or `INFO`, uppercase). Severities vary by source, so a filter can legitimately return nothing: storage logs are S3 access records and are all `INFO`, so `--source storage --severity-text ERROR` matches none. Run `neon logs field-values severity_text` to see the values a branch actually reports before filtering. `--minimum-severity` (match a level and everything above it) is not supported by the branch log backend; use `--severity-text` for an exact match instead.
+
 ```bash
 neon logs query --since 30m
 ```
 
-Filter Postgres compute errors on a specific branch:
+Filter function errors on a specific branch:
 
 ```bash
-neon logs query --branch main --source pg_endpoint --minimum-severity error
+neon logs query --branch main --source function --minimum-severity error
 ```
 
 Use a raw LogQL selection instead of the structured filters:
@@ -72,3 +77,26 @@ Show the service names seen in the last six hours:
 ```bash
 neon logs field-values service_name --since 6h
 ```
+
+## Loki-compatible read API (#loki-read-api)
+
+The same branch logs are also readable over HTTP through a Loki-compatible endpoint, for tools that speak the [Loki](https://grafana.com/docs/loki/latest/reference/loki-http-api/) query API directly rather than through the CLI. Authenticate with a Neon API key as a bearer token, against this branch-scoped base URL:
+
+```text
+https://console.neon.tech/telemetry/v1/projects/{project_id}/branches/{branch_id}/loki
+```
+
+It exposes a read-only subset of the Loki HTTP API:
+
+- `GET /api/v1/query_range`: query log lines over a window. Supports LogQL stream selectors and line filters, `since` or `start`/`end`, `limit`, and `direction`. It does not support aggregations, parsers, or formatting stages.
+- `GET /api/v1/labels`: list the available stream labels (for example `entity_type`, `service_name`, `severity_text`).
+- `GET /api/v1/label/{name}/values`: list the values a label carries (for example `entity_type` returns `function` and `storage`).
+
+```bash
+curl "https://console.neon.tech/telemetry/v1/projects/$PROJECT_ID/branches/$BRANCH_ID/loki/api/v1/labels" \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+The stream label is `entity_type` (not `--source`), so a LogQL selector reads `{entity_type="function"}`. This is a read-only subset, not a push endpoint or a complete Loki deployment. A Loki client that builds its own paths may need a different root: a Grafana data source, for example, appends `/loki/api/v1` to whatever URL it is given. Confirm the data-source URL against this base rather than pasting it verbatim.
+
+Like the CLI, this API reads logs only on branches in **AWS US East (Ohio) (`aws-us-east-2`)**, the only region where branch logs are available during the beta period. A branch in any other region returns `404`.
