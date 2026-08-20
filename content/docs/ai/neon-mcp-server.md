@@ -121,7 +121,7 @@ For per-client setup instructions, see [Connect MCP clients](/docs/ai/connect-mc
 ### Deprecated HTTP+SSE transport (#retired-sse)
 
 <Admonition type="important">
-The hosted Neon MCP Server uses Streamable HTTP at `https://mcp.neon.tech/mcp`. The older HTTP+SSE endpoints (`/sse` and `/message`) are deprecated and will stop working on or after October 1, 2026. After that date they return `410 Gone`.
+The hosted Neon MCP Server uses Streamable HTTP at `https://mcp.neon.tech/mcp`. The older HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop working on or after October 1, 2026. When it is retired it returns `410 Gone`.
 
 If your client still points at `/sse`, change the URL to `https://mcp.neon.tech/mcp`. If your client only supports local stdio servers, put this in the client config so [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) bridges to Streamable HTTP:
 
