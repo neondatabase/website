@@ -2588,6 +2588,16 @@ const defaultConfig = {
         destination: '/use-cases/bursty-workloads',
         permanent: true,
       },
+      {
+        source: '/use-cases/variable-load',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
+        source: '/use-cases/fast-dev-workflows',
+        destination: '/use-cases/branching-workflows',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];

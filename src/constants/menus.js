@@ -89,11 +89,6 @@ export default {
               description: 'Avoid overprovisioning & optimize performance',
             },
             {
-              title: 'Instant restores',
-              to: `${LINKS.useCases}/large-databases#restore-postgres-in-seconds-even-at-multi-tb-scale`,
-              description: 'Recover TBs in seconds',
-            },
-            {
               title: 'Large databases',
               to: `${LINKS.useCases}/large-databases`,
               description: 'Restore & replicate your DB in seconds',
