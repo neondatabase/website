@@ -139,8 +139,8 @@ const QuoteBlock = ({ author, className = '', quote, text, role, link }) => {
           &quot;{actualQuote}&quot;
         </blockquote>
 
-        <figcaption className="flex items-center justify-between gap-2.5">
-          <div className="flex items-center gap-2.5">
+        <figcaption className="flex flex-wrap items-center justify-between gap-x-2.5 gap-y-3">
+          <div className="flex min-w-0 items-center gap-2.5">
             {avatar && (
               <div className="relative overflow-hidden rounded-full">
                 <Image
@@ -152,7 +152,7 @@ const QuoteBlock = ({ author, className = '', quote, text, role, link }) => {
                 />
               </div>
             )}
-            <div className="flex items-center gap-1.5 text-base leading-snug tracking-tight">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 text-base leading-snug tracking-tight">
               <span className="font-medium text-black-pure dark:text-white">{name}</span>
               {company && (
                 <>

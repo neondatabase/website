@@ -1,0 +1,19 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_n_menu_card)">
+        <rect width="120" height="120" fill="black"/>
+    </g>
+    <defs>
+        <filter id="filter0_n_menu_card" x="0" y="0" width="120" height="120" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feTurbulence type="fractalNoise" baseFrequency="0.9 0.9" stitchTiles="stitch" numOctaves="1" result="noise" seed="6815"/>
+            <feColorMatrix in="noise" type="luminanceToAlpha" result="alphaNoise"/>
+            <feComponentTransfer in="alphaNoise" result="grain">
+                <feFuncA type="discrete" tableValues="1 1 1 1 1 0 0 0 0 0"/>
+            </feComponentTransfer>
+            <feComposite operator="in" in2="shape" in="grain" result="grainClipped"/>
+            <feFlood flood-color="white" result="solid"/>
+            <feComposite operator="in" in2="grainClipped" in="solid" result="effect1_noise_menu_card"/>
+        </filter>
+    </defs>
+</svg>

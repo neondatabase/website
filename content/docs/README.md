@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-08-19T14:37:11.742Z'
+updatedOn: '2026-08-20T15:50:59.873Z'
 ---
 
 # Docs
@@ -748,6 +748,14 @@ Pages under `content/pages/` round the corners of every image. If the artwork ru
 ```md
 ![agent setup in a code editor](/use-cases/full-stack-apps/neon-init.jpg 'square')
 ```
+
+Images load lazily by default. For the one image that sits above the fold at the top of a page, add `"priority"` so it loads eagerly instead of waiting:
+
+```md
+![agent setup in a code editor](/use-cases/full-stack-apps/neon-init.jpg 'priority')
+```
+
+Flags can be combined, separated by a space: `'square priority'`. Use `priority` only for a hero image, never for images further down the page.
 
 With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
 

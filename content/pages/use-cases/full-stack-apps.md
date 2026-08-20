@@ -11,7 +11,7 @@ updatedOn: '2026-08-14T13:30:00.000Z'
 image: '/images/social-previews/use-cases/full-stack-apps.jpg'
 ---
 
-![Running npx neon init in a code editor to add Neon Rules and the Neon MCP server](/use-cases/full-stack-apps/neon-init.jpg 'square')
+![Running npx neon init in a code editor to add Neon Rules and the Neon MCP server](/use-cases/full-stack-apps/neon-init.jpg 'square priority')
 
 <Admonition type="note" title="Summary">
 Neon is a complete set of cloud backend primitives built around Lakebase Postgres. You can deploy the database, auth, object storage, serverless functions, and model access from one project, then wire it into your app with your editor or a coding agent.

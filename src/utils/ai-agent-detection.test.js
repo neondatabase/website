@@ -237,6 +237,15 @@ describe('getMarkdownPath', () => {
       const result = getMarkdownPath('/docs/changelog/2026-03-13');
       expect(result).toBe('/md/changelog/2026-03-13.md');
     });
+
+    it.each([
+      ['/use-cases/full-stack-apps', '/md/use-cases/full-stack-apps.md'],
+      ['/use-cases/branching-workflows', '/md/use-cases/branching-workflows.md'],
+      ['/use-cases/bursty-workloads', '/md/use-cases/bursty-workloads.md'],
+      ['/use-cases/large-databases', '/md/use-cases/large-databases.md'],
+    ])('should resolve %s to its markdown mirror', (path, expected) => {
+      expect(getMarkdownPath(path)).toBe(expected);
+    });
   });
 
   describe('Excluded files (should return null)', () => {

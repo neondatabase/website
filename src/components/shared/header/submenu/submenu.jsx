@@ -75,6 +75,7 @@ const Submenu = ({
                         <MenuFeatureCards
                           className="w-[330px] xl:w-[290px]"
                           items={items}
+                          withMenuSemantics
                           ariaLabelledBy={
                             title ? `submenu-${index}-section-${sectionIndex}` : undefined
                           }

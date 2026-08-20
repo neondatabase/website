@@ -81,6 +81,7 @@ const UseCaseCard = ({
   description,
   link,
   logo,
+  company,
   testimonial,
   tags,
   index,
@@ -177,7 +178,7 @@ const UseCaseCard = ({
           <Image
             className="max-h-7 w-fit lg:max-h-6 md:max-h-5"
             src={logo.mediaItemUrl}
-            alt={title}
+            alt={company || ''}
             width={logo.mediaDetails.width}
             height={logo.mediaDetails.height}
             priority={index <= 1}
@@ -222,6 +223,7 @@ UseCaseCard.propTypes = {
       height: PropTypes.number.isRequired,
     }).isRequired,
   }),
+  company: PropTypes.string,
   testimonial: PropTypes.shape({
     quote: PropTypes.node.isRequired,
     author: PropTypes.string.isRequired,
@@ -263,6 +265,7 @@ UseCaseCards.propTypes = {
           height: PropTypes.number.isRequired,
         }).isRequired,
       }),
+      company: PropTypes.string,
       testimonial: PropTypes.shape({
         quote: PropTypes.node.isRequired,
         author: PropTypes.string.isRequired,

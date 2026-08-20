@@ -11,7 +11,7 @@ updatedOn: '2026-08-15T23:20:00.000Z'
 image: '/images/social-previews/use-cases/large-databases.jpg'
 ---
 
-![A production branch diverging after a failure, with a restored production branch created from the healthy point in history](/use-cases/large-databases/restore-branch-diagram.svg 'square')
+![A production branch diverging after a failure, with a restored production branch created from the healthy point in history](/use-cases/large-databases/restore-branch-diagram.svg 'square priority')
 
 <Admonition type="note" title="Summary">
 On a conventional Postgres instance, compute and storage live on the same machine. Past a few hundred gigabytes, this monolithic design starts to hurt operations: restores take hours, replicas duplicate storage, and it becomes too painful to keep staging and development environments in sync with production.

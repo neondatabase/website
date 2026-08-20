@@ -11,7 +11,7 @@ updatedOn: '2026-08-14T17:30:00.000Z'
 image: '/images/social-previews/use-cases/branching-workflows.jpg'
 ---
 
-![Timeline showing preview, test, and dev branches created from a production branch and deleted when work finishes](/use-cases/branching-workflows/branch-timeline.jpg)
+![Timeline showing preview, test, and dev branches created from a production branch and deleted when work finishes](/use-cases/branching-workflows/branch-timeline.jpg 'priority')
 
 <Admonition type="note" title="Summary">
 [Lakebase Postgres](https://neon.com/docs/postgres/overview) (the Neon database) separates compute from storage, and that storage is copy-on-write. Creating a branch takes seconds and copies no data, so every developer, pull request, preview, and CI run can get its own database that starts from real production state.

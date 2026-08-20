@@ -75,6 +75,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                         <MenuFeatureCards
                           items={items}
                           className="w-full flex-col gap-y-4 md:flex-row md:gap-x-4 sm:max-w-[480px] sm:flex-col sm:gap-y-6"
+                          linkProps={{ tagName: 'MobileMenu' }}
                         />
                       ) : (
                         <ul className="flex flex-col gap-5">

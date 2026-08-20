@@ -88,6 +88,10 @@ describe('Middleware - AI Agent Integration Tests', () => {
       { name: 'Branching', path: '/branching/introduction' },
       { name: 'Programs', path: '/programs/agents' },
       { name: 'Use Cases', path: '/use-cases/ai-agents' },
+      { name: 'Use Cases full-stack apps', path: '/use-cases/full-stack-apps' },
+      { name: 'Use Cases branching workflows', path: '/use-cases/branching-workflows' },
+      { name: 'Use Cases bursty workloads', path: '/use-cases/bursty-workloads' },
+      { name: 'Use Cases large databases', path: '/use-cases/large-databases' },
       { name: 'Pricing', path: '/pricing' },
       { name: 'FAQs', path: '/faqs/connect-application-using-connection-string' },
     ];
