@@ -6,7 +6,7 @@ import { cn } from 'utils/cn';
 
 const DatabaseIcon = ({ className }) => (
   <svg
-    className={cn('size-6 shrink-0', className)}
+    className={cn('size-5 shrink-0', className)}
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -36,15 +36,15 @@ const AiChip = () => (
 
 const Connector = () => (
   <svg
-    width="41"
-    height="78"
-    viewBox="0 0 41 78"
+    width="23"
+    height="62"
+    viewBox="0 0 23 62"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     aria-hidden
     className="shrink-0 text-gray-new-80 dark:text-gray-new-20"
   >
-    <path d="M0 39h20M20 1v76M20 1h21M20 39h21M20 77h21" stroke="currentColor" strokeWidth="1.2" />
+    <path d="M0 31h11M11 1v60M11 1h12M11 31h12M11 61h12" stroke="currentColor" strokeWidth="1.2" />
   </svg>
 );
 
@@ -52,7 +52,7 @@ const AgentsGraphic = () => (
   <div className="pointer-events-none flex shrink-0 items-center gap-x-2 self-center">
     <AiChip />
     <Connector />
-    <div className="flex flex-col gap-y-[14px] text-gray-new-80 dark:text-gray-new-20">
+    <div className="flex flex-col gap-y-[10px] text-gray-new-80 dark:text-gray-new-20">
       <DatabaseIcon className="text-green-52" />
       <DatabaseIcon />
       <DatabaseIcon />
@@ -64,7 +64,7 @@ const AgentsGraphic = () => (
 const PLATFORM_TILES = [false, true, false, true, false, false, false, false, true];
 
 const PlatformsGraphic = () => (
-  <div className="pointer-events-none grid shrink-0 grid-cols-3 gap-x-4 gap-y-[14px] self-center">
+  <div className="pointer-events-none grid shrink-0 grid-cols-3 gap-x-[10px] gap-y-[10px] self-center">
     {PLATFORM_TILES.map((isProvisioned, index) => (
       <DatabaseIcon
         key={index}
@@ -84,25 +84,22 @@ const MenuFeatureCards = ({
   linkProps: { className, ...linkProps } = {},
   className: wrapperClassName,
   ariaLabelledBy,
-  // The graphics are decorative and need ~105px of their own; the mobile menu lays
-  // these cards out in columns far narrower than that, so it opts out.
-  withGraphic = true,
 }) => (
   <ul
-    className={cn('flex h-full w-full min-w-0 flex-1 flex-col gap-y-6', wrapperClassName)}
+    className={cn('flex w-full min-w-0 flex-col gap-y-4', wrapperClassName)}
     role="group"
     aria-labelledby={ariaLabelledBy}
   >
     {items.map(({ title, description, to, isExternal, graphic }) => {
-      const Graphic = withGraphic ? GRAPHICS[graphic] : null;
+      const Graphic = GRAPHICS[graphic];
 
       return (
         <li key={title} className="min-h-0 flex-1" role="none">
           <Link
             className={cn(
-              'group relative flex h-full min-h-[141px] items-stretch justify-between gap-x-4 overflow-hidden rounded border p-5 transition-colors duration-200',
-              'border-gray-new-90 bg-gray-new-98 hover:border-gray-new-80',
-              'dark:border-gray-new-20 dark:bg-gray-new-10 dark:hover:border-gray-new-30',
+              'group relative flex h-full min-h-[112px] items-stretch justify-between gap-x-4 overflow-hidden p-4 ring-1 transition-colors duration-200 ring-inset',
+              'bg-white ring-gray-new-90 hover:bg-gray-new-98 hover:ring-gray-new-80',
+              'dark:bg-black-pure dark:ring-gray-new-20 dark:hover:bg-gray-new-10 dark:hover:ring-gray-new-30',
               className
             )}
             to={to}
@@ -115,14 +112,14 @@ const MenuFeatureCards = ({
             <div
               className={cn(
                 'relative z-10 flex min-w-0 flex-1 flex-col justify-end gap-y-2',
-                Graphic && 'max-w-[168px]'
+                Graphic && 'max-w-[154px]'
               )}
             >
               <p className="flex items-baseline gap-x-2 text-lg leading-none font-medium tracking-extra-tight text-black-pure dark:text-white">
                 {title}
                 <ArrowTopRightIcon className="-translate-x-2 scale-75 text-black-pure opacity-0 transition-[translate,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 dark:text-white" />
               </p>
-              <p className="text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60">
+              <p className="text-[13px] leading-[18px] tracking-extra-tight text-gray-new-40 dark:text-gray-new-60">
                 {description}
               </p>
             </div>
@@ -152,7 +149,6 @@ MenuFeatureCards.propTypes = {
   }),
   className: PropTypes.string,
   ariaLabelledBy: PropTypes.string,
-  withGraphic: PropTypes.bool,
 };
 
 export default MenuFeatureCards;

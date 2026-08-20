@@ -56,7 +56,7 @@ const Submenu = ({
                 className="flex w-full gap-x-40 overflow-hidden pt-7 pb-20 xl:gap-x-8"
                 size="1920"
               >
-                <ul className="flex gap-x-[128px] pl-[195px] xl:gap-x-5 xl:pl-[143px]" role="menu">
+                <ul className="flex gap-x-[128px] pl-[195px] xl:gap-x-8 xl:pl-[143px]" role="menu">
                   {sections.map(({ title, items, variant }, sectionIndex) => (
                     <li
                       key={sectionIndex}
@@ -73,7 +73,7 @@ const Submenu = ({
                       )}
                       {variant === 'cards' ? (
                         <MenuFeatureCards
-                          className="w-[356px] xl:w-[300px]"
+                          className="w-[330px] xl:w-[290px]"
                           items={items}
                           ariaLabelledBy={
                             title ? `submenu-${index}-section-${sectionIndex}` : undefined
@@ -95,7 +95,7 @@ const Submenu = ({
                           {items?.map(({ title, description, to, isExternal }) => (
                             <li key={title} role="none">
                               <Link
-                                className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60`}
+                                className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-extra-tight text-gray-new-40 dark:text-gray-new-60`}
                                 to={to}
                                 isExternal={isExternal}
                                 tagName="Navigation"

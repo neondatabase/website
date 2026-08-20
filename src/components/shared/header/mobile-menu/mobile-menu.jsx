@@ -60,11 +60,11 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                 transition={{ duration: ANIMATION_DURATION }}
                 className="flex gap-x-3.5 md:flex-col md:gap-y-9"
               >
-                <ul className="grid w-full grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
+                <ul className="grid w-full grid-cols-2 gap-x-8 gap-y-9 pt-3 md:grid-cols-1 sm:grid-cols-2 xs:grid-cols-1">
                   {sections.map(({ title, items, variant }, index) => (
                     <li
                       key={index}
-                      className={cn(variant === 'cards' && 'col-span-full flex flex-col')}
+                      className={cn(variant === 'cards' && 'flex flex-col md:col-span-full')}
                     >
                       {title && (
                         <h3 className="mb-5 text-[10px] leading-none tracking-snug text-gray-new-50 uppercase">
@@ -74,7 +74,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                       {variant === 'cards' ? (
                         <MenuFeatureCards
                           items={items}
-                          className="w-full flex-row gap-x-4 sm:max-w-[480px] sm:flex-col sm:gap-y-6"
+                          className="w-full flex-col gap-y-4 md:flex-row md:gap-x-4 sm:max-w-[480px] sm:flex-col sm:gap-y-6"
                         />
                       ) : (
                         <ul className="flex flex-col gap-5">
