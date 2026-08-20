@@ -379,15 +379,15 @@ export async function POST(req: Request) {
 
 The model takes in the recent turns as `messages` rather than just the latest one. This way, both retrieval and generation have access to the full conversation, so the model can handle references like "the second one" by itself.
 
-Also, implement `formatChunksAsContext` so it extracts the title and url from each chunk's metadata ([example](https://github.com/rishi-raj-jain/neon-production-rag/blob/db7db273ce477271e602f073b38a8a654635b59c/frontend/lib/rag.ts#L104)). The function should track the total token count and remove the lowest scoring chunks first if including all of them would exceed the token limit for your context window. If you do not enforce a budget in this way, you may end up with too much context, and your model could silently truncate important information or degrade answer quality without any obvious error message to help you debug.
+Also, implement `formatChunksAsContext` so it extracts the title and url from each chunk's metadata ([example](https://github.com/rishi-raj-jain/neon-production-rag/blob/db7db273ce477271e602f073b38a8a654635b59c/frontend/lib/rag.ts#L104)). The function should track the total token count and remove the lowest scoring chunks first if including all of them would exceed the token limit for your context window. If you do not enforce a budget in this way, you may end up with too much context, and your model could truncate important information or degrade answer quality without any obvious error message to help you debug.
 
 ## Eval before you add complexity
 
-Before you add rerankers or query rewriting, build a way to measure retrieval quality. A change that helps one query type often hurts another, and without a fixed set you will not see it.
+Build a quality measurement before you add rerankers or query rewriting. Some changes to your retrieval engine will help only a type of query. Without a fixed set of queries to measure, you won't see this. For example:
 
-- **Paraphrase questions**, where vector search should win.
-- **Exact code or SKU lookups**, where keyword or hybrid should win.
-- **Follow-ups** that only make sense with session context, like "tell me more about that."
+- **Paraphrase questions** where vector search should win.
+- **Exact code or SKU lookups** where keyword or hybrid should win.
+- **Follow-ups** that only make sense with session context, like "tell me more about that".
 
 ![An eval set of paraphrase, exact-lookup, and follow-up queries run against a Neon branch, with a recall at k bar chart comparing vector-only against hybrid](/guides/images/hybrid-rag-postgres-agent/hybrid-rag-eval.svg 'no-border')
 
