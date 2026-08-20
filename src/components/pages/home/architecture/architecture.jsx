@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
-import RiveAnimation from 'components/shared/rive-animation';
+
+import Animation from './animation';
 
 const Highlight = ({ children }) => (
   <mark className="relative inline bg-transparent">
@@ -13,16 +14,6 @@ const Highlight = ({ children }) => (
 Highlight.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-const ArchitectureAnimation = () => (
-  <RiveAnimation
-    className="pointer-events-none"
-    wrapperClassName="relative aspect-[2770/1530] w-full overflow-hidden border-b border-gray-new-10 bg-[#D8E9E1]"
-    src="/animations/pages/home/lakebase-postgres.riv"
-    artboard="main"
-    stateMachines="SM"
-  />
-);
 
 const Architecture = () => (
   <section
@@ -40,7 +31,7 @@ const Architecture = () => (
         <div className="grid grid-cols-[14rem_minmax(0,1fr)] gap-x-32 xl:grid-cols-1">
           <div aria-hidden="true" className="xl:hidden" />
           <div className="min-w-0">
-            <ArchitectureAnimation />
+            <Animation />
 
             <p className="mt-9 max-w-248 text-4xl leading-dense tracking-tighter text-gray-new-40 xl:text-[2rem] lg:text-[1.75rem] md:text-[1.375rem] sm:text-xl">
               <span className="text-black-new">Postgres without compromise </span>gives developers
