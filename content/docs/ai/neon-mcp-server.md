@@ -5,7 +5,8 @@ summary: >-
   The Neon MCP Server implements the Model Context Protocol (MCP), letting AI
   assistants interact with your Neon projects on your behalf. Set up with
   `npx neon@latest init` or use the config generator. Supports OAuth and
-  API key auth.
+  API key auth. The older HTTP+SSE endpoints (`/sse`, `/message`) are retired
+  and return 410.
 enableTableOfContents: true
 updatedOn: '2026-08-13T22:11:29.293Z'
 ---
@@ -26,7 +27,7 @@ Runs `neon init` via npx to configure MCP and other integrations for your editor
 
 ## Config generator
 
-Use the generator to build an MCP config for your editor, auth method, and transport, including the `Authorization` header for API key or remote agent setups.
+Use the generator to build an MCP config for your editor and auth method, including the `Authorization` header for API key or remote agent setups.
 
 <McpSetupConfigurator />
 
@@ -107,8 +108,21 @@ npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 
 For per-client setup instructions, see [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon).
 
+### Retired HTTP+SSE transport (#retired-sse)
+
 <Admonition type="note">
-For clients that don't support Streamable HTTP, you can use the deprecated SSE endpoint: `https://mcp.neon.tech/sse`. SSE is not supported with API key authentication.
+The hosted Neon MCP Server uses Streamable HTTP at `https://mcp.neon.tech/mcp`. The older HTTP+SSE endpoints (`/sse` and `/message`) are retired and return `410 Gone`. If your client only supports local stdio servers, put this in the client config so [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) bridges to Streamable HTTP:
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.neon.tech/mcp"]
+    }
+  }
+}
+```
 </Admonition>
 
 ## Resources

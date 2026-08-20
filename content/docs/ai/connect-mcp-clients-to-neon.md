@@ -10,8 +10,7 @@ summary: >-
   per-client setup instructions for `npx neon@latest init`, OAuth, or local
   API key authentication with `@neondatabase/mcp-server-neon`. Also covers
   troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache)
-  and the deprecated SSE endpoint for clients that don't support Streamable
-  HTTP.
+  and the retired HTTP+SSE endpoints (`/sse`, `/message`), which return 410.
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
@@ -487,7 +486,7 @@ npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 ```
 
 <Admonition type="note">
-For clients that don't support Streamable HTTP, you can use the deprecated SSE endpoint: `https://mcp.neon.tech/sse`. SSE is not supported with API key authentication.
+The older HTTP+SSE endpoints (`/sse` and `/message`) are retired and return `410 Gone`. Use `https://mcp.neon.tech/mcp` (Streamable HTTP). If your client only supports local stdio servers, put `npx -y mcp-remote https://mcp.neon.tech/mcp` in its MCP config.
 </Admonition>
 
 ### OAuth Authentication Errors
