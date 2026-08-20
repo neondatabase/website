@@ -7,7 +7,7 @@ createdAt: '2026-07-07T00:00:00.000Z'
 updatedOn: '2026-07-07T00:00:00.000Z'
 ---
 
-When you start building retrieval-augmented generation (RAG), the typical first step is to choose an embedding model, turn on [pgvector](/docs/extensions/pgvector), add some chunks, and query with `ORDER BY embedding <=> query_vector LIMIT 5`. This vector search works for paraphrased questions, but has two main limitations as your project grows.
+When you start building retrieval-augmented generation (RAG), the typical first step is to choose an embedding model, turn on [pgvector](/docs/extensions/pgvector), add some chunks, and query with `ORDER BY embedding <=> query_vector LIMIT 5`. This vector search works for paraphrased questions, but has two main limitations as your project grows:
 
 1. Embeddings approximate meaning, so exact tokens like product codes and error strings drift toward semantically similar text instead of the chunk that contains them verbatim.
 
@@ -15,7 +15,7 @@ When you start building retrieval-augmented generation (RAG), the typical first 
 
 ![How vector-only retrieval misses on exact tokens and on follow-up questions that depend on earlier turns](/guides/images/hybrid-rag-postgres-agent/hybrid-rag-vector-limits.svg 'no-border')
 
-These are retrieval design problems, not model problems, and Postgres holds every layer that fixes them in one database, covering chunks, keyword indexes, vectors, and conversation state. This guide builds those layers with copy-paste SQL and TypeScript, in sections you can hand straight to a coding agent.
+These are retrieval design problems, and Postgres holds every layer that fixes them in one database, covering chunks, keyword indexes, vectors, and conversation state. This guide builds those layers with copy-paste SQL and TypeScript, in sections you can hand straight to a coding agent.
 
 ## Agent prompt
 
@@ -52,7 +52,7 @@ The [agent prompt](#agent-prompt) above was used to generate a full reference ap
 
 ## What agents should build first (checklist)
 
-Build these three layers before you tune any prompts, in order.
+Build these three layers in order:
 
 1. **Chunk table** with stable ids, source metadata, and both `tsvector` and `vector` columns.
 2. **Hybrid retrieval** that runs keyword and semantic search in parallel, then fuses the ranks.
@@ -66,7 +66,7 @@ If you leave out one of these layers, your model has to compensate. This leads t
 
 ![Entity diagram showing rag_documents one-to-many rag_chunks, and chat_sessions one-to-many chat_messages, with the chunk table holding tsvector and vector columns](/guides/images/hybrid-rag-postgres-agent/hybrid-rag-schema.svg 'no-border')
 
-Neon is standard Postgres, so enable the `vector` extension once.
+Neon is standard Postgres, so enable the `vector` extension with the following:
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS vector;
