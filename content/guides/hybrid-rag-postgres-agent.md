@@ -72,7 +72,10 @@ Neon is standard Postgres, so enable the `vector` extension with the following:
 CREATE EXTENSION IF NOT EXISTS vector;
 ```
 
-The main data is organized in two tables. `rag_documents` stores information about each source, while `rag_chunks` contains the text chunks, their embeddings, and keyword vectors.
+The main data is organized in two tables:
+
+- `rag_documents` stores information about each source.
+- `rag_chunks` contains the text chunks, their embeddings, and keyword vectors.
 
 ```sql
 CREATE TABLE rag_documents (
@@ -105,7 +108,7 @@ CREATE INDEX rag_chunks_tenant_idx ON rag_chunks (tenant_id);
 ```
 
 <Admonition type="important" title="ANN recall under a tenant filter">
-HNSW applies your `WHERE tenant_id = ...` filter around the approximate scan, not before it. For a small tenant inside a large index, that can return fewer than `LIMIT` rows or miss the best matches. If recall drops in production, raise `hnsw.ef_search` (for example `SET hnsw.ef_search = 100;`), enable iterative scans on pgvector 0.8 or later (`SET hnsw.iterative_scan = 'relaxed_order';`), or build a partial index for your largest tenants.
+HNSW applies your `WHERE tenant_id = ...` filter around the approximate scan. For a small tenant inside a large index, that can return fewer than `LIMIT` rows or miss the best matches. If recall drops in production, raise `hnsw.ef_search` (for example `SET hnsw.ef_search = 100;`), enable iterative scans on pgvector 0.8 or later (`SET hnsw.iterative_scan = 'relaxed_order';`), or build a partial index for your largest tenants.
 </Admonition>
 
 Chat state has its own tables since the way you access messages is different from chunks. You retrieve chunks using vector and keyword searches, while messages are fetched by session and timestamp.
@@ -133,7 +136,7 @@ CREATE INDEX chat_messages_session_idx ON chat_messages (session_id, created_at 
 Always include a `tenant_id` filter in every retrieval query. If you leave it out, you risk showing one tenant's data in another tenant's results, since the model will use that data immediately before any other checks catch the mistake. To keep tenant data separate at the database level, see [Adopt Postgres RLS for Multi-Tenant Apps](/guides/rls-multi-tenant-apps).
 
 <Callout title="Shared table vs project per customer">
-The `tenant_id` column keeps every customer in one set of tables, which means one index and one migration to manage, but you carry the filter on every query and inherit the ANN recall caveat above. A [Neon project per customer](/use-cases/database-per-user) is the other option. Each customer gets isolated tables, so you drop the `tenant_id` filters entirely, each HNSW index holds only one customer's vectors (which removes that recall problem), and a delete is just dropping a project. The cost moves to routing connections per request and running migrations across many projects. For B2B with a bounded number of substantial tenants, the per-project model is often the better fit.
+The use of a `tenant_id` column keeps all customers in one set of tables, so you'll need a filter on every query against it. You'll also have to account for the ANN recall caveat outlined above. A [Neon project per customer](/use-cases/database-per-user) is the other option. Each customer gets isolated tables, so you drop the `tenant_id` filters entirely, each HNSW index holds only one customer's vectors (which removes that recall problem), and a delete is just dropping a project. The cost moves to routing connections per request and running migrations across many projects. For B2B with a bounded number of substantial tenants, the per-project model is often the better fit.
 </Callout>
 
 ## Chunking: how to maximize retrieval quality
