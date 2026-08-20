@@ -56,7 +56,7 @@ const Submenu = ({
                 className="flex w-full gap-x-40 overflow-hidden pt-7 pb-20 xl:gap-x-8"
                 size="1920"
               >
-                <ul className="flex gap-x-[128px] pl-[195px] xl:gap-x-8 xl:pl-[143px]" role="menu">
+                <ul className="flex gap-x-[128px] pl-[195px] xl:gap-x-14 xl:pl-[143px]" role="menu">
                   {sections.map(({ title, items, variant }, sectionIndex) => (
                     <li
                       key={sectionIndex}

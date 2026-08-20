@@ -119,8 +119,8 @@ const MenuFeatureCards = ({
               style={{
                 maskImage: `url(${noise.src})`,
                 WebkitMaskImage: `url(${noise.src})`,
-                maskSize: '120px 120px',
-                WebkitMaskSize: '120px 120px',
+                maskSize: '330px 112px',
+                WebkitMaskSize: '330px 112px',
               }}
               aria-hidden
             />
