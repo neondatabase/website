@@ -9,13 +9,13 @@ summary: >-
   Lakebase Postgres databases on Neon using natural language. Use this page when you need
   per-client setup instructions for `npx neon@latest init`, OAuth, or local
   API key authentication with `@neondatabase/mcp-server-neon`. Also covers
-  troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache)
-  and the deprecated SSE endpoint for clients that don't support Streamable
-  HTTP.
+  troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache).
+  The HTTP+SSE `/sse` endpoint is deprecated and stops working on or after
+  October 1, 2026.
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-17T11:33:55.500Z'
+updatedOn: '2026-08-20T23:04:25.063Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -486,8 +486,8 @@ npx -y mcp-remote https://mcp.neon.tech/mcp
 npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
 ```
 
-<Admonition type="note">
-For clients that don't support Streamable HTTP, you can use the deprecated SSE endpoint: `https://mcp.neon.tech/sse`. SSE is not supported with API key authentication.
+<Admonition type="important">
+The HTTP+SSE endpoints (`https://mcp.neon.tech/sse` and `/message`) are deprecated and will stop working on or after October 1, 2026. After that date they return `410 Gone`. Point your client at `https://mcp.neon.tech/mcp` instead. SSE is not supported with API key authentication. For the stdio bridge, see [Deprecated HTTP+SSE transport](/docs/ai/neon-mcp-server#retired-sse).
 </Admonition>
 
 ### OAuth Authentication Errors
