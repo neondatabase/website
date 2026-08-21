@@ -13,7 +13,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-21T02:00:14.259Z'
+updatedOn: '2026-08-21T02:09:26.597Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -264,22 +264,46 @@ Connect ChatGPT to Neon using custom MCP connectors. Enable Developer mode, add 
 
 <TabItem>
 
-```bash
-npx add-mcp https://mcp.neon.tech/mcp -a claude-desktop
+Add this to `claude_desktop_config.json` (Claude Desktop → **Settings** → **Developer** → **Edit Config**), then restart Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+    }
+  }
+}
 ```
 
-Restart Claude Desktop. When the OAuth window opens, click **Authorize** to complete the connection.
+When the OAuth window opens, click **Authorize** to complete the connection.
 
 </TabItem>
 
 <TabItem>
 
-```bash
-npx add-mcp https://mcp.neon.tech/mcp -a claude-desktop \
-  --header "Authorization: Bearer <YOUR_NEON_API_KEY>"
-```
+Add this to `claude_desktop_config.json`. Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys), then restart Claude Desktop:
 
-Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys), then restart Claude Desktop.
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.neon.tech/mcp",
+        "--header",
+        "Authorization:${NEON_AUTH_HEADER}"
+      ],
+      "env": {
+        "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+      }
+    }
+  }
+}
+```
 
 </TabItem>
 </Tabs>
@@ -320,16 +344,10 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
    {
      "mcpServers": {
        "neon": {
-         "command": "npx",
-         "args": [
-           "-y",
-           "mcp-remote@latest",
-           "https://mcp.neon.tech/mcp",
-           "--header",
-           "Authorization:${NEON_AUTH_HEADER}"
-         ],
-         "env": {
-           "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+         "type": "streamableHttp",
+         "url": "https://mcp.neon.tech/mcp",
+         "headers": {
+           "Authorization": "Bearer <YOUR_NEON_API_KEY>"
          }
        }
      }
@@ -380,16 +398,9 @@ For more, see [Get started with Cline and Neon MCP Server](/guides/cline-mcp-neo
     {
       "mcpServers": {
         "neon": {
-          "command": "npx",
-          "args": [
-            "-y",
-            "mcp-remote@latest",
-            "https://mcp.neon.tech/mcp",
-            "--header",
-            "Authorization:${NEON_AUTH_HEADER}"
-          ],
-          "env": {
-            "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+          "serverUrl": "https://mcp.neon.tech/mcp",
+          "headers": {
+            "Authorization": "Bearer <YOUR_NEON_API_KEY>"
           }
         }
       }
@@ -429,17 +440,10 @@ Add this to `~/.config/zed/settings.json`. Replace `<YOUR_NEON_API_KEY>` with yo
 "context_servers": {
   "Neon": {
     "source": "custom",
-    "enabled": true,
-    "command": "npx",
-    "args": [
-      "-y",
-      "mcp-remote@latest",
-      "https://mcp.neon.tech/mcp",
-      "--header",
-      "Authorization:${NEON_AUTH_HEADER}"
-    ],
-    "env": {
-      "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+    "type": "http",
+    "url": "https://mcp.neon.tech/mcp",
+    "headers": {
+      "Authorization": "Bearer <YOUR_NEON_API_KEY>"
     }
   }
 }
@@ -493,7 +497,25 @@ This tool auto-detects supported clients and configures them. Use `-a <agent>` t
 }
 ```
 
-The local stdio package (`@neondatabase/mcp-server-neon`) is deprecated. If your client only supports stdio, use the `mcp-remote` config above. See [Deprecated local stdio](/docs/ai/neon-mcp-server#deprecated-stdio).
+**API key:**
+
+```json
+"neon": {
+  "command": "npx",
+  "args": [
+    "-y",
+    "mcp-remote@latest",
+    "https://mcp.neon.tech/mcp",
+    "--header",
+    "Authorization:${NEON_AUTH_HEADER}"
+  ],
+  "env": {
+    "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+  }
+}
+```
+
+The local stdio package (`@neondatabase/mcp-server-neon`) is deprecated. If your client only supports stdio, use one of the `mcp-remote` configs above. See [Deprecated local stdio](/docs/ai/neon-mcp-server#deprecated-stdio).
 
 For Windows-specific configurations, see [Other MCP clients](/docs/ai/connect-mcp-clients-to-neon#other-mcp-clients).
 
@@ -508,7 +530,8 @@ The HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop 
 If your client doesn't support JSON config (such as older Cursor versions), use the stdio bridge. See [Deprecated local stdio](/docs/ai/neon-mcp-server#deprecated-stdio).
 
 ```bash
-npx -y mcp-remote@latest https://mcp.neon.tech/mcp
+npx -y mcp-remote@latest https://mcp.neon.tech/mcp \
+  --header "Authorization: Bearer <YOUR_NEON_API_KEY>"
 ```
 
 ### OAuth Authentication Errors

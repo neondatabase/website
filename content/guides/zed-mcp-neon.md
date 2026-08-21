@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Zed and Neon MCP Serv
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-10T00:00:00.000Z'
-updatedOn: '2026-08-21T02:00:14.259Z'
+updatedOn: '2026-08-21T02:09:26.597Z'
 ---
 
 This guide shows how to use [Zed](https://zed.dev) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -45,7 +45,7 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
     {
       "Neon": {
         "command": "npx",
-        "args": ["-y", "mcp-remote", "https://mcp.neon.tech/mcp"],
+        "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"],
         "env": {}
       }
     }
@@ -71,21 +71,15 @@ This method uses the hosted Neon MCP Server with a Neon API key.
     ```json
     {
       "Neon": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "mcp-remote@latest",
-          "https://mcp.neon.tech/mcp",
-          "--header",
-          "Authorization:${NEON_AUTH_HEADER}"
-        ],
-        "env": {
-          "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+        "source": "custom",
+        "type": "http",
+        "url": "https://mcp.neon.tech/mcp",
+        "headers": {
+          "Authorization": "Bearer <YOUR_NEON_API_KEY>"
         }
       }
     }
     ```
-    ![Zed add Neon Local MCP server](/docs/guides/zed/add-neon-local-mcp-server.png)
 5.  Click **Add Server**.
 6.  Check the **Model Context Protocol (MCP) Servers** section in Zed **Settings** to ensure the connection is successful. Neon should be listed as an MCP server.
     ![Zed with Neon MCP](/docs/guides/zed/with-neon-mcp.png)
@@ -130,50 +124,16 @@ If you experience issues adding an MCP server from the Assistant panel, you can 
 "context_servers": {
     "Neon": {
       "source": "custom",
-      "enabled": true,
-      "command": "npx",
-      "args": [
-        "-y",
-        "mcp-remote@latest",
-        "https://mcp.neon.tech/mcp",
-        "--header",
-        "Authorization:${NEON_AUTH_HEADER}"
-      ],
-      "env": {
-        "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+      "type": "http",
+      "url": "https://mcp.neon.tech/mcp",
+      "headers": {
+        "Authorization": "Bearer <YOUR_NEON_API_KEY>"
       }
     }
 }
 ```
 
 </CodeTabs>
-
-#### Troubleshooting on Windows
-
-If you are using Windows and the command line fails, run `npx` through `cmd`:
-
-```json
-"context_servers": {
-   "neon": {
-      "command": {
-         "path": "cmd",
-         "args": [
-            "/c",
-            "npx",
-            "-y",
-            "mcp-remote@latest",
-            "https://mcp.neon.tech/mcp",
-            "--header",
-            "Authorization:${NEON_AUTH_HEADER}"
-         ],
-         "env": {
-            "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
-         }
-      },
-      "settings": {}
-   }
-}
-```
 
 For a full list of available tools, see [available tools](/docs/ai/neon-mcp-server#available-tools) in the Neon MCP Server overview.
 

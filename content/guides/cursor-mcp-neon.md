@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Cursor and Neon MCP S
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-20T00:00:00.000Z'
-updatedOn: '2026-08-21T02:00:14.259Z'
+updatedOn: '2026-08-21T02:09:26.597Z'
 ---
 
 This guide shows how to use [Cursor](https://cursor.com) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -104,8 +104,6 @@ This method uses the hosted Neon MCP Server with a Neon API key.
    ```
 
    If you have other MCP servers configured, you can copy just the `Neon` part.
-
-   ![Cursor Local MCP JSON](/docs/guides/cursor-local-mcp-server-json.png)
 
 4. Save the `mcp.json` file after pasting the configuration.
 

@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Codeium Windsurf and 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-08-21T02:00:14.259Z'
+updatedOn: '2026-08-21T02:09:26.597Z'
 ---
 
 This guide shows how to use [Windsurf](https://codeium.com/windsurf) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -93,16 +93,9 @@ This method uses the hosted Neon MCP Server with a Neon API key.
    {
      "mcpServers": {
        "Neon": {
-         "command": "npx",
-         "args": [
-           "-y",
-           "mcp-remote@latest",
-           "https://mcp.neon.tech/mcp",
-           "--header",
-           "Authorization:${NEON_AUTH_HEADER}"
-         ],
-         "env": {
-           "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+         "serverUrl": "https://mcp.neon.tech/mcp",
+         "headers": {
+           "Authorization": "Bearer <YOUR_NEON_API_KEY>"
          }
        }
      }
