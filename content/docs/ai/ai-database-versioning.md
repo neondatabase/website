@@ -11,7 +11,7 @@ summary: >-
   connection string stable, or when you need temporary preview branches from any
   saved version. Snapshot limits and storage pricing vary by plan.
 enableTableOfContents: true
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-08-18T13:12:58.000Z'
 ---
 
 <Admonition type="note">
@@ -377,6 +377,16 @@ Proper cleanup reduces costs and keeps your project manageable:
 - **Keep backup branches briefly**: After restore, keep the automatically-created backup branch (for example, `prod (old)`) for sanity checks before deletion, or assign a [time to live](/docs/guides/branch-expiration) for automatic cleanup.
 - **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete orphaned branches (for example, `production (old)`) created during restores.
 - **Version metadata**: Keep version metadata separate to preserve audit trail across restores.
+
+## Scheduling snapshots at scale
+
+If you create scheduled snapshots programmatically at high volume (for example, an agent platform that schedules across many branches), it's good practice to distribute snapshot creation across different hours of the day rather than concentrating it in one. For example, avoid scheduling every branch at midnight.
+
+A scheduled snapshot's `hour` (`0`–`23`) sets when it's created. Spread the `hour` across branches:
+
+- **Hash the branch ID**: map each branch to a fixed hour (`0`–`23`) so it always schedules to the same hour.
+- **Cycle through hours**: assign each new schedule the next hour in sequence.
+- **Pick a random hour**: choose one per branch and keep it.
 
 ## FAQ
 
