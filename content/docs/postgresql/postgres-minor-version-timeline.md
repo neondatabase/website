@@ -8,9 +8,9 @@ summary: >-
 enableTableOfContents: true
 ---
 
-The PostgreSQL Global Development Group ships a minor release for every supported major version at least once a quarter, plus out-of-cycle releases when a security fix is too urgent to wait. Neon rebuilds its compute images from each of those releases and rolls them out automatically: you don't request the update, and you don't schedule a maintenance window.
+The PostgreSQL Global Development Group ships a minor release for every supported major version at least once a quarter, plus out-of-cycle releases when a security fix is too urgent to wait. Neon builds updated compute images from community releases and rolls them out automatically: you don't request the update, and you don't schedule a maintenance window.
 
-The [Postgres version support policy](/docs/postgresql/postgres-version-policy) describes that commitment. This page is the record of how it has played out. For recent on-schedule community releases, the new minor versions have reached Neon computes within a week of the community announcement, and Postgres 18 was available the day it went GA.
+The [Postgres version support policy](/docs/postgresql/postgres-version-policy) describes that commitment. This page is the record of how it has played out. The three most recent on-schedule community releases each reached Neon computes within five days of the announcement, and Postgres 18 was available the day it went GA. Adoption has not always been that quick; the notes under the table explain the exceptions.
 
 ## Rollout timeline
 
@@ -39,7 +39,7 @@ The **First available on Neon** date is the point at which a release became avai
 
 Each compute picks up a new minor version the next time it restarts, for any reason, so computes move onto it across the following days. If your compute suspends when idle, it is updated the next time it wakes. If your compute is always active and you want to pick up an update right away, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
-Minor releases and security patches require no action from you. In the rare case where an update does need a decision that depends on your application, Neon notifies you directly; see [Manual actions after minor release upgrades](/docs/postgresql/postgres-version-policy#manual-actions-after-minor-release-upgrades).
+Minor releases and security patches typically require no action from you. In the rare case where an update does need a decision that depends on your application, Neon notifies you directly; see [Manual actions after minor release upgrades](/docs/postgresql/postgres-version-policy#manual-actions-after-minor-release-upgrades).
 
 ## Current minor versions
 
