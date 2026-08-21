@@ -11,7 +11,7 @@ summary: >-
   files get created and where. The `--agent` flag targets a specific editor
   without the interactive prompt.
 enableTableOfContents: true
-updatedOn: '2026-08-21T13:36:10.536Z'
+updatedOn: '2026-08-21T13:42:46.659Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -56,8 +56,8 @@ Use `--agent` to configure a specific editor, skipping the interactive selection
 | MCP config (VS Code)                                                                                              | VS Code global `mcp.json` (written by extension) | Global  |
 | MCP config (Claude Code)                                                                                          | `~/.claude.json` (written by init)               | Global  |
 | [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) | Cursor / VS Code                                 | Global  |
-| Agent skills                                                                                                      | `.agents/skills/`                                | Project |
-| Skills symlink (Claude Code only)                                                                                 | `.claude/skills/neon-postgres`                   | Project |
+| Agent skills (Cursor, VS Code)                                                                                    | `.agents/skills/`                                | Project |
+| Agent skills (Claude Code)                                                                                        | `.claude/skills/`                                | Project |
 | `skills-lock.json`                                                                                                | Project root                                     | Project |
 
 ## Credentials and API keys
