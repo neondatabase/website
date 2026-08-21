@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Codeium Windsurf and 
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-21T02:00:14.259Z'
 ---
 
 This guide shows how to use [Windsurf](https://codeium.com/windsurf) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -21,7 +21,7 @@ Make sure you have:
 
 1.  **Codeium Windsurf Editor:** Download and install Windsurf from [codeium.com/windsurf](https://codeium.com/windsurf).
 2.  **A Neon Account and Project:** You'll need a Neon account and a project. You can create a new Neon project in the [Neon Console](https://console.neon.tech)
-3.  **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
+3.  **Neon API Key (for API key authentication):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
 
     <Admonition type="important" title="Neon API Key Security">
     Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
@@ -77,10 +77,9 @@ If you encounter an error message like `{"code":"invalid_request","error":"inval
 This error commonly occurs when there are changes to the OAuth configuration or when cached credentials become invalid.
 </Admonition>
 
-### Option 2: Setting up the Local Neon MCP Server
+### Option 2: API key authentication
 
-This method runs the Neon MCP server locally on your machine, using a Neon API
-key for authentication.
+This method uses the hosted Neon MCP Server with a Neon API key.
 
 1. Open Windsurf.
 2. Open Cascade by using `⌘L` on MacOS or `Ctrl+L` on Windows/Linux.
@@ -90,49 +89,25 @@ key for authentication.
 5. Click **View raw config** to edit the JSON directly.
 6. Add the "Neon" server entry within the `mcpServers` object:
 
-   <CodeTabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
-
    ```json
    {
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-       }
-     }
-   }
-   ```
-
-   ```json
-   {
-     "mcpServers": {
-       "Neon": {
-         "command": "cmd",
          "args": [
-           "/c",
-           "npx",
            "-y",
-           "@neondatabase/mcp-server-neon",
-           "start",
-           "<YOUR_NEON_API_KEY>"
-         ]
+           "mcp-remote@latest",
+           "https://mcp.neon.tech/mcp",
+           "--header",
+           "Authorization:${NEON_AUTH_HEADER}"
+         ],
+         "env": {
+           "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+         }
        }
      }
    }
    ```
-
-   ```json
-   {
-     "mcpServers": {
-       "Neon": {
-         "command": "wsl",
-         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-       }
-     }
-   }
-   ```
-
-   </CodeTabs>
 
    > Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section:
 

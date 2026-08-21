@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Zed and Neon MCP Serv
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-04-10T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-21T02:00:14.259Z'
 ---
 
 This guide shows how to use [Zed](https://zed.dev) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -21,7 +21,7 @@ Make sure you have:
 
 1.  **Zed editor:** Download and install Zed from [zed.dev](https://zed.dev/download).
 2.  **A Neon account and project:** You'll need a Neon account and a project. You can create a new Neon project in the [Neon Console](https://console.neon.tech)
-3.  **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
+3.  **Neon API Key (for API key authentication):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
 
     <Admonition type="warning" title="Neon API Key Security">
     Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
@@ -58,22 +58,30 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
 7.  Check the **Model Context Protocol (MCP) Servers** section in Zed **Settings** to ensure the connection is successful. Neon should be listed as an MCP server.
     ![Zed with Neon MCP](/docs/guides/zed/with-neon-mcp.png)
 
-### Option 2: Setting up the Local Neon MCP Server
+### Option 2: API key authentication
 
-This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
+This method uses the hosted Neon MCP Server with a Neon API key.
 
 1.  Open Zed.
 2.  Click the Assistant (✨) icon in the bottom right corner of Zed.
     ![Zed Assistant icon](/docs/guides/zed/assistant-icon.png)
 3.  Click **Add custom server** in the top right panel of the Assistant.
     ![Zed add custom server](/docs/guides/zed/add-custom-server.png)
-4.  Enter the following configuration for the Neon MCP server in the JSON input field.
+4.  Enter the following configuration for the Neon MCP server in the JSON input field. Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys):
     ```json
     {
       "Neon": {
         "command": "npx",
-        "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"],
-        "env": {}
+        "args": [
+          "-y",
+          "mcp-remote@latest",
+          "https://mcp.neon.tech/mcp",
+          "--header",
+          "Authorization:${NEON_AUTH_HEADER}"
+        ],
+        "env": {
+          "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+        }
       }
     }
     ```
@@ -104,7 +112,7 @@ If you experience issues adding an MCP server from the Assistant panel, you can 
 1.  Open the `~/.config/zed/settings.json` file. You can access this file by clicking on **Settings** in the Zed menu bar.
 2.  Add the following `context_servers` section to the file.
 
-<CodeTabs labels={["Remote MCP server", "Local MCP server"]}>
+<CodeTabs labels={["OAuth", "API key"]}>
 
 ```json
 "context_servers": {
@@ -112,7 +120,7 @@ If you experience issues adding an MCP server from the Assistant panel, you can 
       "source": "custom",
       "enabled": true,
       "command": "npx",
-      "args": [ "-y", "mcp-remote", "https://mcp.neon.tech/mcp" ],
+      "args": [ "-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp" ],
       "env": {}
     }
 }
@@ -124,8 +132,16 @@ If you experience issues adding an MCP server from the Assistant panel, you can 
       "source": "custom",
       "enabled": true,
       "command": "npx",
-      "args": [ "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>" ],
-      "env": {}
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.neon.tech/mcp",
+        "--header",
+        "Authorization:${NEON_AUTH_HEADER}"
+      ],
+      "env": {
+        "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+      }
     }
 }
 ```
@@ -134,37 +150,30 @@ If you experience issues adding an MCP server from the Assistant panel, you can 
 
 #### Troubleshooting on Windows
 
-If you are using Windows, and you encounter issues with the command line, you may need to adjust the command to use `cmd` or `wsl` to run the MCP server. For example, here's how you can set it up:
-
-<CodeTabs labels={["Windows", "Windows (WSL)"]}>
+If you are using Windows and the command line fails, run `npx` through `cmd`:
 
 ```json
 "context_servers": {
    "neon": {
       "command": {
          "path": "cmd",
-         "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"],
-         "env": null
+         "args": [
+            "/c",
+            "npx",
+            "-y",
+            "mcp-remote@latest",
+            "https://mcp.neon.tech/mcp",
+            "--header",
+            "Authorization:${NEON_AUTH_HEADER}"
+         ],
+         "env": {
+            "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+         }
       },
       "settings": {}
    }
 }
 ```
-
-```json
-"context_servers": {
-   "neon": {
-      "command": {
-         "path": "wsl",
-         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"],
-         "env": null
-      },
-      "settings": {}
-   }
-}
-```
-
-</CodeTabs>
 
 For a full list of available tools, see [available tools](/docs/ai/neon-mcp-server#available-tools) in the Neon MCP Server overview.
 
