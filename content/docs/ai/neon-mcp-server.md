@@ -7,7 +7,7 @@ summary: >-
   `npx neon@latest init` or use the config generator. Supports OAuth and
   API key auth.
 enableTableOfContents: true
-updatedOn: '2026-08-13T22:11:29.293Z'
+updatedOn: '2026-08-21T12:59:00.700Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -15,6 +15,17 @@ The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assi
 <Admonition type="important" title="Security">
 The Neon MCP Server grants broad database management capabilities. **Always review and authorize actions requested by the LLM before execution.** Restrict access to trusted users only. See [MCP security guidance](#mcp-security-guidance).
 </Admonition>
+
+## Claude connector
+
+The Neon MCP server is an official Claude connector, so you don't need a custom connector URL. To add it in [Claude.ai](https://claude.ai) or Claude Desktop:
+
+1. Open **Settings** from your profile menu (bottom-left of the sidebar).
+2. Select **Connectors** (sometimes shown under **Customize > Connectors**).
+3. Click **Browse connectors** (top-right of that page), find **Neon**, and add it.
+4. Authorize access to your Neon account.
+
+For other clients, use Quick setup or the config generator below.
 
 ## Quick setup
 
