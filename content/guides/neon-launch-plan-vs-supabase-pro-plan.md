@@ -8,12 +8,16 @@ createdAt: '2026-07-15T00:00:00.000Z'
 ---
 
 <Admonition type="note">
-Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 13, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
+Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 13, 2026, and the headline plan and pricing figures were re-checked on August 21, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
 </Admonition>
 
 This comparison is for a small team launching an MVP: real users signing in, uploading files, and hitting your API, with cost sensitivity and not much time for infrastructure work. For the service-by-service comparison, start with [Neon vs Supabase](/guides/neon-vs-supabase).
 
-The entry-level paid plans are Neon's Launch plan and Supabase's Pro plan. They differ less in individual rates than in shape: Neon meters the backend with no monthly minimum, while Supabase Pro is a $25/month subscription that bundles service quotas plus hourly compute per project. This guide compares what each plan includes across the backend, works through what three common app shapes cost, and covers the production features a launch depends on.
+The entry-level paid plans are Neon's Launch plan and Supabase's Pro plan. They differ less in individual rates than in shape, and the shape favors Neon for most launching teams. Launch has no monthly minimum; the bill is metered compute, storage, and usage, so it tracks what your app actually does ([source](/docs/introduction/plans)). Pro is a $25/month subscription plus an always-on instance billed hourly for every project you run ([source](https://supabase.com/docs/guides/platform/manage-your-usage/compute)). The per-project clause is the one teams miss: staging, a second app, or a tenant database each adds its own instance, so ten small backends run about $115/month on Pro against about $11.50 on Launch (worked through below).
+
+Three more gaps matter at launch. Neon includes auth for up to 1M MAU against Pro's 100,000, then $0.00325 per MAU ([source](/docs/introduction/plans#auth), [Supabase pricing](https://supabase.com/pricing)). Instant restore to any point in up to 7 days is part of the Launch plan, billed only for retained history, while point-in-time recovery on Pro is a $100 per month per 7 days add-on ([source](/docs/introduction/branch-restore), [Supabase pricing](https://supabase.com/pricing)). And a Neon preview branch comes up with production-shaped data in seconds, while a Supabase branch is an hourly-billed environment rebuilt from seed files ([source](/docs/introduction/branching), [Supabase branching](https://supabase.com/docs/guides/deployment/branching)). Pro's flat fee still buys services Neon doesn't offer as managed products, Realtime and Cron and Queues among them; if your app is built on those, weigh them in.
+
+This guide compares what each plan includes across the backend, works through what three common app shapes cost, and covers the production features a launch depends on.
 
 ## Paid entry plan comparison
 
