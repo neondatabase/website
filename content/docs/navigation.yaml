@@ -521,9 +521,6 @@
             - title: Version support
               slug: postgresql/postgres-version-policy
               icon: version
-            - title: Minor version timeline
-              slug: postgresql/postgres-minor-version-timeline
-              icon: changelog
             - title: Upgrade
               slug: postgresql/postgres-upgrade
               icon: upgrade
