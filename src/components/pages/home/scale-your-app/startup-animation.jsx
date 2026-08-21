@@ -10,8 +10,9 @@ import { cn } from 'utils/cn';
 
 const ASSET_ROOT = '/images/pages/home/scale-your-app';
 const CARD_REVEAL_DURATION = 450;
-const FINAL_STATE_START = 6100;
-const STAT_REVEAL_START = FINAL_STATE_START + 500;
+const PROGRESS_COMPLETE_START = 6100;
+const FINAL_STATE_START = PROGRESS_COMPLETE_START + 800;
+const STAT_REVEAL_START = FINAL_STATE_START + 1000;
 const ANIMATION_DURATION = STAT_REVEAL_START + CARD_REVEAL_DURATION;
 
 const TIMELINE = [
@@ -28,6 +29,13 @@ const TIMELINE = [
   { at: 4260, screen: 'progress', progress: 72, filledBlocks: 11, status: 'preparing' },
   { at: 4520, screen: 'progress', progress: 84, filledBlocks: 13, status: 'preparing' },
   { at: 5300, screen: 'progress', progress: 92, filledBlocks: 14, status: 'preparing' },
+  {
+    at: PROGRESS_COMPLETE_START,
+    screen: 'progress',
+    progress: 100,
+    filledBlocks: 15,
+    status: 'preparing',
+  },
   {
     at: FINAL_STATE_START,
     screen: 'progress',
