@@ -16,7 +16,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-21T00:09:53.843Z'
+updatedOn: '2026-08-21T00:15:25.295Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -470,15 +470,15 @@ For Windows-specific configurations, see [Other MCP clients](/docs/ai/connect-mc
 
 ### Configuration Issues
 
-If your client doesn't support JSON config (such as older Cursor versions), run:
+<Admonition type="important">
+The HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop working on or after October 1, 2026. When it is retired it returns `410 Gone`. Point your client at `https://mcp.neon.tech/mcp` instead. SSE is not supported with API key authentication.
+</Admonition>
+
+If your client doesn't support JSON config (such as older Cursor versions), use the stdio bridge. See [Deprecated local stdio](/docs/ai/neon-mcp-server#deprecated-stdio).
 
 ```bash
 npx -y mcp-remote@latest https://mcp.neon.tech/mcp
 ```
-
-<Admonition type="important">
-The HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop working on or after October 1, 2026. When it is retired it returns `410 Gone`. Point your client at `https://mcp.neon.tech/mcp` instead. SSE is not supported with API key authentication.
-</Admonition>
 
 ### OAuth Authentication Errors
 
