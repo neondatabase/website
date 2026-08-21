@@ -7,15 +7,16 @@ summary: >-
   GitHub Copilot, ChatGPT, Cline, Windsurf, Zed, Claude Desktop, and more via
   the add-mcp CLI) to the Neon MCP Server so AI assistants can query and manage
   Lakebase Postgres databases on Neon using natural language. Use this page when you need
-  per-client setup instructions for `npx neon@latest init`, OAuth, or local
-  API key authentication with `@neondatabase/mcp-server-neon`. Also covers
+  per-client setup instructions for `npx neon@latest init`, OAuth, or API
+  key authentication against `https://mcp.neon.tech/mcp`. Also covers
   troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache).
   The HTTP+SSE `/sse` endpoint is deprecated and stops working on or after
-  October 1, 2026.
+  October 1, 2026. The local stdio package `@neondatabase/mcp-server-neon`
+  is deprecated.
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-20T23:22:08.351Z'
+updatedOn: '2026-08-21T00:09:53.843Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -450,7 +451,7 @@ Prefer **`npx neon@latest init`** for the full flow (see [Quick setup](#quick-se
 npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-This tool auto-detects supported clients and configures them. Use `-a <agent>` to target a specific agent (for example, `-a cursor`). Add `-g` for global (user-level) setup instead of project-level. For more options (including global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp). For manual configuration, add one of these to your client's `mcpServers` section:
+This tool auto-detects supported clients and configures them. Use `-a <agent>` to target a specific agent (for example, `-a cursor`). Add `-g` for global (user-level) setup instead of project-level. For more options (including global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp). For manual configuration, add this to your client's `mcpServers` section:
 
 **OAuth (remote server):**
 
@@ -461,14 +462,7 @@ This tool auto-detects supported clients and configures them. Use `-a <agent>` t
 }
 ```
 
-**Local setup:**
-
-```json
-"neon": {
-  "command": "npx",
-  "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-}
-```
+The local stdio package (`@neondatabase/mcp-server-neon`) is deprecated. If your client only supports stdio, use the `mcp-remote` config above. See [Deprecated local stdio](/docs/ai/neon-mcp-server#deprecated-stdio).
 
 For Windows-specific configurations, see [Other MCP clients](/docs/ai/connect-mcp-clients-to-neon#other-mcp-clients).
 
@@ -479,15 +473,11 @@ For Windows-specific configurations, see [Other MCP clients](/docs/ai/connect-mc
 If your client doesn't support JSON config (such as older Cursor versions), run:
 
 ```bash
-# For OAuth (remote server)
-npx -y mcp-remote https://mcp.neon.tech/mcp
-
-# For Local setup
-npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+npx -y mcp-remote@latest https://mcp.neon.tech/mcp
 ```
 
 <Admonition type="important">
-The HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop working on or after October 1, 2026. When it is retired it returns `410 Gone`. Point your client at `https://mcp.neon.tech/mcp` instead. SSE is not supported with API key authentication. For the stdio bridge, see [Other MCP clients](#other-mcp-clients).
+The HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop working on or after October 1, 2026. When it is retired it returns `410 Gone`. Point your client at `https://mcp.neon.tech/mcp` instead. SSE is not supported with API key authentication.
 </Admonition>
 
 ### OAuth Authentication Errors
