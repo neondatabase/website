@@ -71,6 +71,19 @@ Neon sends `SIGINT`/`SIGTERM` before evicting an idle isolate, so flush buffered
 process.on('SIGINT', () => void Sentry.flush(2000));
 ```
 
+To send unexpected database pool errors to your monitoring SDK, pass `onUnexpectedError` when you call [`attachDatabasePool`](/docs/compute/functions/get-started#connect-to-postgres). Expected idle disconnects are still swallowed; only unexpected errors reach the handler:
+
+```ts
+import { attachDatabasePool } from '@neon/functions';
+import { Pool } from 'pg';
+import { Sentry } from './instrument';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool, {
+  onUnexpectedError: (err) => Sentry.captureException(err),
+});
+```
+
 `neon deploy` bundles your code with esbuild, which defeats auto-instrumentation that patches modules at import time. If a library's spans are missing from a deployed function, that's the first thing to check.
 
 ## Filter, search, and retention
