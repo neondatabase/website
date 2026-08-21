@@ -51,7 +51,7 @@ export default {
     const { messages } = (await request.json()) as { messages: ModelMessage[] };
 
     const result = streamText({
-      model: neon("claude-sonnet-4-6"), // swap to gpt-5-mini, gemini-2-5-flash, …
+      model: neon("claude-sonnet-4-6"), // swap to gpt-5-mini, gemini-3-flash, …
       system: "You are a concise assistant with access to the user's todos.",
       messages,
       tools: {
