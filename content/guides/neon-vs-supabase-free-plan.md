@@ -8,12 +8,14 @@ createdAt: '2026-07-15T00:00:00.000Z'
 ---
 
 <Admonition type="note">
-Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 13, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
+Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 13, 2026, and the headline plan figures were re-checked on August 21, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
 </Admonition>
 
 This comparison is for prototypes, side projects, and AI-assisted development, where the goal is a working app (database, sign-in, files, an API) on a free plan, kept running without a bill. For the service-by-service comparison, start with [Neon vs Supabase](/guides/neon-vs-supabase).
 
-At this stage, three questions matter more than headline quotas: can the free plan run your whole backend, what happens when the project sits idle, and how many separate things you can build. The sections below take those in order.
+The two free plans are sized for different ways of prototyping. Supabase Free assumes a couple of projects you touch regularly: it includes 2 active projects and pauses a project after 1 week of inactivity until you restore it from the dashboard ([source](https://supabase.com/pricing)). Neon Free assumes experiments accumulate: it includes 100 projects, 50 times as many, and an idle project just suspends compute and wakes on the next query ([source](/docs/introduction/plans), [scale to zero](/docs/introduction/scale-to-zero)). Neon Free also includes 10 branches per project and a 6-hour restore window; Supabase Free includes no branching and no backups ([source](https://supabase.com/pricing)). Prototyping today looks like the second shape more often than the first: many parallel experiments, long idle stretches, and agents that need a disposable copy and an undo. Supabase Free still bundles managed Realtime and image transformations, which Neon doesn't offer, so a realtime-first prototype you touch weekly is the case where it wins.
+
+Beyond that split, three questions matter more than headline quotas: can the free plan run your whole backend, what happens when the project sits idle, and how many separate things you can build. The sections below take those in order.
 
 ## Free plan comparison
 

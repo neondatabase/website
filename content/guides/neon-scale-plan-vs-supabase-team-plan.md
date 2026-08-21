@@ -8,12 +8,14 @@ createdAt: '2026-07-15T00:00:00.000Z'
 ---
 
 <Admonition type="note">
-Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 13, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
+Pricing and feature claims in this guide were verified against the live Neon and Supabase documentation on August 13, 2026, and the headline plan and pricing figures were re-checked on August 21, 2026. Confirm the [Neon pricing](/pricing) and [Supabase pricing](https://supabase.com/pricing) pages before making a decision.
 </Admonition>
 
 This comparison is for established production workloads: higher capacity, read scaling, recovery guarantees, compliance controls, and support commitments across the whole backend, services included. For the service-by-service comparison, start with [Neon vs Supabase](/guides/neon-vs-supabase).
 
-The plans at this stage are Neon's Scale plan and Supabase's Team plan. At this level the headline price matters less than how Neon and Supabase handle capacity growth, replicas, recovery windows, audits, and a growing service bill, so this guide compares those mechanics directly and closes with how to model a representative month.
+The plans at this stage are Neon's Scale plan and Supabase's Team plan, and the structural differences compound with scale. Team starts at $599/month before any compute; Scale has no monthly minimum ([source](/docs/introduction/plans), [Supabase pricing](https://supabase.com/pricing)). Capacity works differently: Neon autoscales in place, and fleet data shows production databases using 2.4x less compute under autoscaling than the same workloads provisioned at P99.5 + 20% ([autoscaling report](/autoscaling-report)), while a Supabase instance is provisioned for peak and resized by hand with brief downtime ([source](https://supabase.com/docs/guides/platform/compute-and-disk#compute-upgrades)). Read replicas share the primary's storage on Neon and bill only their compute hours; each Supabase replica bills a full instance plus a disk 1.25x the primary's ([source](/docs/introduction/read-replicas), [Supabase replicas](https://supabase.com/docs/guides/platform/manage-your-usage/read-replicas)). Instant restore reaches any point up to 30 days back on Scale; Team includes daily backups, with point-in-time recovery a $100 per month per 7 days add-on ([source](/docs/introduction/branch-restore), [Supabase pricing](https://supabase.com/pricing)). An uptime SLA is included on Scale; Supabase's pricing page lists SLAs under Enterprise only ([source](/docs/introduction/plans#support), [Supabase pricing](https://supabase.com/pricing)). The Team plan's strongest remaining argument is its wired-in suite, Realtime, Cron, and Queues, if your architecture depends on them.
+
+At this level the headline price matters less than how capacity growth, replicas, recovery windows, audits, and the service bill behave, so this guide compares those mechanics directly and closes with how to model a representative month.
 
 ## Production plan comparison
 
