@@ -7,15 +7,13 @@ summary: >-
   GitHub Copilot, ChatGPT, Cline, Windsurf, Zed, Claude Desktop, and more via
   the add-mcp CLI) to the Neon MCP Server so AI assistants can query and manage
   Lakebase Postgres databases on Neon using natural language. Use this page when you need
-  per-client setup instructions for `npx neon@latest init`, OAuth, or local
-  API key authentication with `@neondatabase/mcp-server-neon`. Also covers
-  troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache)
-  and the deprecated SSE endpoint for clients that don't support Streamable
-  HTTP.
+  per-client setup instructions for `npx neon@latest init`, OAuth, or API
+  key authentication against `https://mcp.neon.tech/mcp`. Also covers
+  troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache).
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-17T11:33:55.500Z'
+updatedOn: '2026-08-21T02:09:26.597Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -79,7 +77,7 @@ For manual configuration, Kiro reads **`~/.kiro/settings/mcp.json`** (global) or
 
 ## Cursor
 
-<Tabs labels={["Quick Setup", "OAuth", "Local"]}>
+<Tabs labels={["Quick Setup", "OAuth", "API key"]}>
 <TabItem>
 
 Run the [init](/docs/cli/init) command:
@@ -110,8 +108,11 @@ Restart Cursor (or enable the MCP server in settings). When the OAuth window ope
     {
       "mcpServers": {
         "neon": {
-          "command": "npx",
-          "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          "type": "http",
+          "url": "https://mcp.neon.tech/mcp",
+          "headers": {
+            "Authorization": "Bearer <YOUR_NEON_API_KEY>"
+          }
         }
       }
     }
@@ -130,7 +131,7 @@ For more, see [Get started with Cursor and Neon MCP Server](/guides/cursor-mcp-n
 
 ## Claude Code
 
-<Tabs labels={["Quick Setup", "OAuth", "Local"]}>
+<Tabs labels={["Quick Setup", "OAuth", "API key"]}>
 <TabItem>
 
 Run the [init](/docs/cli/init) command:
@@ -156,7 +157,8 @@ Restart Claude Code (or enable the MCP server in settings). When the OAuth windo
 <TabItem>
 
 ```bash
-claude mcp add neon -- npx -y @neondatabase/mcp-server-neon start "<YOUR_NEON_API_KEY>"
+claude mcp add --transport http neon https://mcp.neon.tech/mcp \
+  --header "Authorization: Bearer <YOUR_NEON_API_KEY>"
 ```
 
 Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys).
@@ -172,7 +174,7 @@ For more, see [Get started with Claude Code and Neon MCP Server](/guides/claude-
 To use MCP servers with VS Code, you need [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot) and [GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat) extensions installed
 </Admonition>
 
-<Tabs labels={["Quick Setup", "OAuth", "Local"]}>
+<Tabs labels={["Quick Setup", "OAuth", "API key"]}>
 <TabItem>
 
 Run the [init](/docs/cli/init) command:
@@ -204,8 +206,11 @@ Add the Neon MCP server to your [User Settings (JSON)](https://code.visualstudio
   "mcp": {
     "servers": {
       "neon": {
-        "command": "npx",
-        "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+        "type": "http",
+        "url": "https://mcp.neon.tech/mcp",
+        "headers": {
+          "Authorization": "Bearer <YOUR_NEON_API_KEY>"
+        }
       }
     }
   }
@@ -255,25 +260,50 @@ Connect ChatGPT to Neon using custom MCP connectors. Enable Developer mode, add 
 
 ## Claude Desktop
 
-<Tabs labels={["OAuth", "Local"]}>
+<Tabs labels={["OAuth", "API key"]}>
 
 <TabItem>
 
-```bash
-npx add-mcp https://mcp.neon.tech/mcp -a claude-desktop
+Add this to `claude_desktop_config.json` (Claude Desktop → **Settings** → **Developer** → **Edit Config**), then restart Claude Desktop:
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+    }
+  }
+}
 ```
 
-Restart Claude Desktop. When the OAuth window opens, click **Authorize** to complete the connection.
+When the OAuth window opens, click **Authorize** to complete the connection.
 
 </TabItem>
 
 <TabItem>
 
-```bash
-npx @neondatabase/mcp-server-neon init <YOUR_NEON_API_KEY>
-```
+Add this to `claude_desktop_config.json`. Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys), then restart Claude Desktop:
 
-Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys), then restart Claude Desktop.
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.neon.tech/mcp",
+        "--header",
+        "Authorization:${NEON_AUTH_HEADER}"
+      ],
+      "env": {
+        "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+      }
+    }
+  }
+}
+```
 
 </TabItem>
 </Tabs>
@@ -282,7 +312,7 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 
 ## Cline (VS Code Extension)
 
-<Tabs labels={["OAuth", "Local"]}>
+<Tabs labels={["OAuth", "API key"]}>
 <TabItem>
 
 1. Open Cline in VS Code (Sidebar -> Cline icon).
@@ -308,20 +338,21 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 
 1. Open Cline in VS Code (Sidebar -> Cline icon).
 2. Click **MCP Servers** Icon -> **Installed** -> **Configure MCP Servers** to open the configuration file.
-3. Add the "Neon" server entry within the `mcpServers` object:
+3. Add the "Neon" server entry within the `mcpServers` object. Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys):
 
    ```json
    {
      "mcpServers": {
        "neon": {
-         "command": "npx",
-         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+         "type": "streamableHttp",
+         "url": "https://mcp.neon.tech/mcp",
+         "headers": {
+           "Authorization": "Bearer <YOUR_NEON_API_KEY>"
+         }
        }
      }
    }
    ```
-
-   > Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
 
 4. Save the file. Cline should reload the configuration automatically.
 
@@ -332,7 +363,7 @@ For more, see [Get started with Cline and Neon MCP Server](/guides/cline-mcp-neo
 
 ## Windsurf (Codeium)
 
-<Tabs labels={["OAuth", "Local"]}>
+<Tabs labels={["OAuth", "API key"]}>
 <TabItem>
 
 1.  Open Windsurf and navigate to the Cascade assistant sidebar.
@@ -361,20 +392,20 @@ For more, see [Get started with Cline and Neon MCP Server](/guides/cline-mcp-neo
 1.  Open Windsurf and navigate to the Cascade assistant sidebar.
 2.  Click the hammer (MCP) icon, then **Configure** which opens up the "Manage MCPs" configuration file.
 3.  Click on "View raw config" to open the raw configuration file in Windsurf.
-4.  Add the "Neon" server entry within the `mcpServers` object:
+4.  Add the "Neon" server entry within the `mcpServers` object. Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys):
 
     ```json
     {
       "mcpServers": {
         "neon": {
-          "command": "npx",
-          "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+          "serverUrl": "https://mcp.neon.tech/mcp",
+          "headers": {
+            "Authorization": "Bearer <YOUR_NEON_API_KEY>"
+          }
         }
       }
     }
     ```
-
-    > Replace `<YOUR_NEON_API_KEY>` with your Neon API key.
 
 5.  Save the file.
 6.  Click the **Refresh** button in the Cascade sidebar next to "available MCP servers".
@@ -390,7 +421,7 @@ For more, see [Get started with Windsurf and Neon MCP Server](/guides/windsurf-m
 MCP support in Zed is currently in **preview**. Ensure you're using the Preview version of Zed to add MCP servers (called **Context Servers** in Zed). Download the preview version from [zed.dev/releases/preview](https://zed.dev/releases/preview).
 </Admonition>
 
-<Tabs labels={["OAuth", "Local"]}>
+<Tabs labels={["OAuth", "API key"]}>
 <TabItem>
 
 ```bash
@@ -403,15 +434,20 @@ Restart Zed (or enable the MCP server in settings). When the OAuth window opens,
 
 <TabItem>
 
-1. Open the Zed Preview application.
-2. Click the Assistant (✨) icon, then **Settings** > **Context Servers** > **+ Add Context Server**.
-3. Enter **neon** as the name and this command:
+Add this to `~/.config/zed/settings.json`. Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys):
 
-   ```bash
-   npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
-   ```
-
-4. Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys) and click **Add Server**.
+```json
+"context_servers": {
+  "Neon": {
+    "source": "custom",
+    "type": "http",
+    "url": "https://mcp.neon.tech/mcp",
+    "headers": {
+      "Authorization": "Bearer <YOUR_NEON_API_KEY>"
+    }
+  }
+}
+```
 
 </TabItem>
 </Tabs>
@@ -450,7 +486,7 @@ Prefer **`npx neon@latest init`** for the full flow (see [Quick setup](#quick-se
 npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-This tool auto-detects supported clients and configures them. Use `-a <agent>` to target a specific agent (for example, `-a cursor`). Add `-g` for global (user-level) setup instead of project-level. For more options (including global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp). For manual configuration, add one of these to your client's `mcpServers` section:
+This tool auto-detects supported clients and configures them. Use `-a <agent>` to target a specific agent (for example, `-a cursor`). Add `-g` for global (user-level) setup instead of project-level. For more options (including global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp). For manual configuration, add this to your client's `mcpServers` section:
 
 **OAuth (remote server):**
 
@@ -461,14 +497,25 @@ This tool auto-detects supported clients and configures them. Use `-a <agent>` t
 }
 ```
 
-**Local setup:**
+**API key:**
 
 ```json
 "neon": {
   "command": "npx",
-  "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+  "args": [
+    "-y",
+    "mcp-remote@latest",
+    "https://mcp.neon.tech/mcp",
+    "--header",
+    "Authorization:${NEON_AUTH_HEADER}"
+  ],
+  "env": {
+    "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+  }
 }
 ```
+
+The local stdio package (`@neondatabase/mcp-server-neon`) is deprecated. If your client only supports stdio, use one of the `mcp-remote` configs above. See [Deprecated local stdio](/docs/ai/neon-mcp-server#deprecated-stdio).
 
 For Windows-specific configurations, see [Other MCP clients](/docs/ai/connect-mcp-clients-to-neon#other-mcp-clients).
 
@@ -476,19 +523,16 @@ For Windows-specific configurations, see [Other MCP clients](/docs/ai/connect-mc
 
 ### Configuration Issues
 
-If your client doesn't support JSON config (such as older Cursor versions), run:
+<Admonition type="important">
+The HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop working on or after October 1, 2026. When it is retired it returns `410 Gone`. Point your client at `https://mcp.neon.tech/mcp` instead. SSE is not supported with API key authentication.
+</Admonition>
+
+If your client doesn't support JSON config (such as older Cursor versions), use the stdio bridge. See [Deprecated local stdio](/docs/ai/neon-mcp-server#deprecated-stdio).
 
 ```bash
-# For OAuth (remote server)
-npx -y mcp-remote https://mcp.neon.tech/mcp
-
-# For Local setup
-npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
+npx -y mcp-remote@latest https://mcp.neon.tech/mcp \
+  --header "Authorization: Bearer <YOUR_NEON_API_KEY>"
 ```
-
-<Admonition type="note">
-For clients that don't support Streamable HTTP, you can use the deprecated SSE endpoint: `https://mcp.neon.tech/sse`. SSE is not supported with API key authentication.
-</Admonition>
 
 ### OAuth Authentication Errors
 
