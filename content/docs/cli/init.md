@@ -11,7 +11,7 @@ summary: >-
   files get created and where. The `--agent` flag targets a specific editor
   without the interactive prompt.
 enableTableOfContents: true
-updatedOn: '2026-08-21T13:32:28.984Z'
+updatedOn: '2026-08-21T13:36:10.536Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -30,7 +30,7 @@ npx neon@latest init
 
 After running the command, restart your editor and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The installed agent skills help you get started, including configuring a database connection. For Cursor and VS Code, the Neon Local Connect extension also provides database schema browsing, SQL editing, and table data management directly in your IDE.
 
-Under the hood, `init` installs the Neon agent skills for each selected editor, running `npx skills add neondatabase/agent-skills --skill <name> --agent <name>` once per skill. You can also run these commands directly to install skills without the rest of the init flow, or use `npx skills add ... -g` to install globally. See [Agent Skills](/docs/ai/agent-skills) for the full list of skills and other ways to install them.
+`init` installs the Neon agent skills for each selected editor. To install them without running the full `init` flow, or to install them globally across all projects, see [Agent Skills](/docs/ai/agent-skills).
 
 <Admonition type="warning">
 Skills are installed at the project level in the current working directory. Run `init` from your project root, otherwise skills will end up in the wrong location. You may want to commit project-level files so teammates get the same skills, or add them to `.gitignore` for per-developer setup.
