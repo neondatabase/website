@@ -2578,6 +2578,26 @@ const defaultConfig = {
         destination: 'https://github.com/neondatabase/examples',
         permanent: true,
       },
+      {
+        source: '/use-cases/multi-tb',
+        destination: '/use-cases/large-databases',
+        permanent: true,
+      },
+      {
+        source: '/use-cases/serverless-apps',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
+        source: '/use-cases/variable-load',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
+        source: '/use-cases/fast-dev-workflows',
+        destination: '/use-cases/branching-workflows',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];

@@ -66,7 +66,6 @@ export default {
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   scaleToZero: '/docs/guides/scale-to-zero-guide',
-  variableTraffic: '/use-cases/serverless-apps',
   whyNeon: '/docs/get-started/why-neon',
 
   // Legal

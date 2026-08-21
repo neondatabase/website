@@ -21,13 +21,7 @@ const CONTENT_ROUTES = {
   programs: PROGRAMS_DIR_PATH,
 };
 
-const EXCLUDED_ROUTES = [
-  'guides',
-  'faqs',
-  'branching',
-  'use-cases/multi-tb',
-  'use-cases/serverless-apps',
-];
+const EXCLUDED_ROUTES = ['guides', 'faqs', 'branching'];
 
 const EXCLUDED_DIRS = ['shared-content', 'unused'];
 

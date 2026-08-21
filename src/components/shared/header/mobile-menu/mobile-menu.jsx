@@ -16,6 +16,7 @@ import { cn } from 'utils/cn';
 
 import Burger from '../burger';
 import MenuBanner from '../menu-banner';
+import MenuFeatureCards from '../menu-feature-cards';
 
 const ANIMATION_DURATION = 0.2;
 
@@ -59,32 +60,43 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                 transition={{ duration: ANIMATION_DURATION }}
                 className="flex gap-x-3.5 md:flex-col md:gap-y-9"
               >
-                <ul className="grid grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
-                  {sections.map(({ title, items }, index) => (
-                    <li key={index}>
+                <ul className="grid w-full grid-cols-2 gap-x-8 gap-y-9 pt-3 md:grid-cols-1 sm:grid-cols-2 xs:grid-cols-1">
+                  {sections.map(({ title, items, variant }, index) => (
+                    <li
+                      key={index}
+                      className={cn(variant === 'cards' && 'flex flex-col md:col-span-full')}
+                    >
                       {title && (
                         <h3 className="mb-5 text-[10px] leading-none tracking-snug text-gray-new-50 uppercase">
                           {title}
                         </h3>
                       )}
-                      <ul className="flex flex-col gap-5">
-                        {items.map(({ title, description, to, isExternal }) => (
-                          <li key={title}>
-                            <Link
-                              className="grid gap-y-2 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60"
-                              to={to}
-                              isExternal={isExternal}
-                              tagName="MobileMenu"
-                            >
-                              <span className="text-lg leading-none font-medium tracking-extra-tight text-black-pure dark:text-white sm:text-base">
-                                {title}
-                              </span>
+                      {variant === 'cards' ? (
+                        <MenuFeatureCards
+                          items={items}
+                          className="w-full flex-col gap-y-4 md:flex-row md:gap-x-4 sm:max-w-[480px] sm:flex-col sm:gap-y-6"
+                          linkProps={{ tagName: 'MobileMenu' }}
+                        />
+                      ) : (
+                        <ul className="flex flex-col gap-5">
+                          {items.map(({ title, description, to, isExternal }) => (
+                            <li key={title}>
+                              <Link
+                                className="grid gap-y-2 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60"
+                                to={to}
+                                isExternal={isExternal}
+                                tagName="MobileMenu"
+                              >
+                                <span className="text-lg leading-none font-medium tracking-extra-tight text-black-pure dark:text-white sm:text-base">
+                                  {title}
+                                </span>
 
-                              {description}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                                {description}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </li>
                   ))}
                 </ul>

@@ -75,24 +75,11 @@ export default {
     pathname: LINKS.migration,
     imagePath: '/images/social-previews/migration.jpg',
   },
-  multiTB: {
-    title: 'Neon for Multi-TB Migrations - Neon',
-    description: 'Migrating a multi-TB workload? We can help.',
-    pathname: LINKS.multiTB,
-    imagePath: '/images/social-previews/multi-tb.jpg',
-  },
   useCases: {
     title: 'Use Cases — Neon',
     description:
       'Explore how teams use Neon to support branching databases, CI pipelines, preview environments, and production workloads.',
     pathname: LINKS.useCases,
-  },
-  serverlessApps: {
-    title: 'Postgres and backend platform for serverless apps — Neon',
-    description:
-      'Scale your app effortlessly on Neon’s serverless backend: Postgres, Auth, Functions, Storage, and an AI Gateway, with automatic scaling and usage-based pricing.',
-    pathname: `${LINKS.useCases}/serverless-apps`,
-    imagePath: '/images/social-previews/serverless-apps.jpg',
   },
   partners: {
     title: 'Accelerate your business with Neon partnership — Neon',
@@ -144,6 +131,7 @@ export default {
     description: 'Offer Postgres to your users',
     pathname: LINKS.platforms,
     type: 'article',
+    imagePath: '/images/social-previews/platforms.jpg',
   },
   security: {
     title: 'Security — Neon',

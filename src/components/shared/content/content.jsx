@@ -64,6 +64,7 @@ import Mermaid from 'components/shared/mermaid';
 import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
 import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
+import StatBlock from 'components/shared/stat-block';
 import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 import { cn } from 'utils/cn';
@@ -78,6 +79,8 @@ const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
   acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
   return acc;
 }, {});
+
+const KNOWN_IMAGE_FLAGS = new Set(['no-border', 'square', 'priority']);
 
 const getHeadingComponent = (heading, withoutAnchorHeading) => {
   if (withoutAnchorHeading) {
@@ -121,25 +124,33 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
     const unoptimizedPreserveAlpha =
       typeof src === 'string' && /^\/docs\/.+\.(png|gif)$/i.test(src);
 
+    const flags = typeof title === 'string' ? title.trim().split(/\s+/).filter(Boolean) : [];
+    const hasFlag = (flag) => flags.includes(flag);
+    const isNoBorder = hasFlag('no-border');
+    const isSquare = hasFlag('square');
+
+    const isPriority = hasFlag('priority');
+    const titleAttr = flags.every((flag) => KNOWN_IMAGE_FLAGS.has(flag)) ? undefined : title;
+    const templateRounding = isTemplate && !isSquare && 'rounded-lg';
+
     // No zoom on PostgreSQLTutorial Images
     if (!isPostgres) {
       return (
         <ImageZoom src={src}>
           <Image
-            className={cn(
-              className,
-              { 'no-border': title === 'no-border' },
-              isTemplate && 'rounded-lg'
-            )}
+            className={cn(className, { 'no-border': isNoBorder }, templateRounding)}
             src={src}
             width={704}
             height={447}
             style={{ width: '100%', height: '100%' }}
-            title={title !== 'no-border' ? title : undefined}
+            title={titleAttr}
             unoptimized={unoptimizedPreserveAlpha}
+            priority={isPriority}
             {...rest}
           />
-          {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
+          {isTemplate && (
+            <GradientBorder className={templateRounding || 'rounded-none'} withBlend />
+          )}
         </ImageZoom>
       );
     }
@@ -150,8 +161,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
         className={cn(
           className,
           {
-            'no-border':
-              title === 'no-border' || src.includes('alignleft') || src.includes('alignright'),
+            'no-border': isNoBorder || src.includes('alignleft') || src.includes('alignright'),
           },
           { 'float-right clear-left p-4 grayscale filter': src.includes('alignright') },
           { 'float-left clear-right p-4 grayscale filter': src.includes('alignleft') }
@@ -160,17 +170,17 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
         width={100}
         height={100}
         style={{ width: 'auto', height: 'auto', maxWidth: '128px', maxHeight: '128px' }}
-        title={title !== 'no-border' ? title : undefined}
+        title={titleAttr}
         {...rest}
       />
     ) : (
       <Image
-        className={cn(className, { 'no-border': title === 'no-border' })}
+        className={cn(className, { 'no-border': isNoBorder })}
         src={src}
         width={200}
         height={100}
         style={{ width: 'auto', height: 'auto' }}
-        title={title !== 'no-border' ? title : undefined}
+        title={titleAttr}
         {...rest}
       />
     );
@@ -234,6 +244,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   CopyPrompt,
   McpSetupConfigurator,
   SqlToRestConverter,
+  StatBlock,
   AiGatewayModelIndex,
   ...sharedComponents,
 });

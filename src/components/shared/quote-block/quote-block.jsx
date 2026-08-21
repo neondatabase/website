@@ -21,6 +21,7 @@ import oliJuhlAvatar from 'images/authors/oli-juhl.png';
 import oliverStenbomAvatar from 'images/authors/oliver-stenbom.jpg';
 import pierreBurgyAvatar from 'images/authors/pierre-burgy.jpg';
 import rickBlalockAvatar from 'images/authors/rick-blalock.jpg';
+import tejasSiripurapuAvatar from 'images/authors/tejas-siripurapu.jpg';
 import thorstenRiessAvatar from 'images/authors/thorsten-riess.jpg';
 import { cn } from 'utils/cn';
 
@@ -101,6 +102,10 @@ const quotes = {
     name: 'Rick Blalock',
     avatar: rickBlalockAvatar,
   },
+  'tejas-siripurapu': {
+    name: 'Tejas Siripurapu',
+    avatar: tejasSiripurapuAvatar,
+  },
   'thorsten-riess': {
     name: 'Thorsten Rieß',
     avatar: thorstenRiessAvatar,
@@ -134,8 +139,8 @@ const QuoteBlock = ({ author, className = '', quote, text, role, link }) => {
           &quot;{actualQuote}&quot;
         </blockquote>
 
-        <figcaption className="flex items-center justify-between gap-2.5">
-          <div className="flex items-center gap-2.5">
+        <figcaption className="flex flex-wrap items-center justify-between gap-x-2.5 gap-y-3">
+          <div className="flex min-w-0 items-center gap-2.5">
             {avatar && (
               <div className="relative overflow-hidden rounded-full">
                 <Image
@@ -147,7 +152,7 @@ const QuoteBlock = ({ author, className = '', quote, text, role, link }) => {
                 />
               </div>
             )}
-            <div className="flex items-center gap-1.5 text-base leading-snug tracking-tight">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 text-base leading-snug tracking-tight">
               <span className="font-medium text-black-pure dark:text-white">{name}</span>
               {company && (
                 <>

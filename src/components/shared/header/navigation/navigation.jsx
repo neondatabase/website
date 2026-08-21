@@ -157,18 +157,12 @@ const Navigation = () => {
     if (!links || links.length === 0) return () => {};
     if (!menuButtonRefs.current[containerIndex]) return () => {};
 
-    let linkIndex = -1;
     return (e) => {
       const menuTrigger = menuButtonRefs.current[containerIndex];
       const nextMenuTrigger = menuButtonRefs.current[containerIndex + 1] || null;
 
-      if (linkIndex === -1) {
-        links.forEach((link, idx) => {
-          if (link === e.target) {
-            linkIndex = idx;
-          }
-        });
-      }
+      const linkIndex = Array.prototype.indexOf.call(links, e.currentTarget);
+      if (linkIndex === -1) return;
 
       if (e.key === 'ArrowDown') {
         e.preventDefault();

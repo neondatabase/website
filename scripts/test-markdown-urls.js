@@ -343,8 +343,6 @@ function buildTests() {
   const excludedRoutes = [
     { path: '/guides', hasDotMd: true },
     { path: '/branching', hasDotMd: true },
-    { path: '/use-cases/multi-tb', hasDotMd: false },
-    { path: '/use-cases/serverless-apps', hasDotMd: false },
   ];
 
   for (const { path, hasDotMd } of excludedRoutes) {

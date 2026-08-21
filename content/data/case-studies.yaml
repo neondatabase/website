@@ -351,7 +351,7 @@
     mediaDetails:
       width: 100
       height: 32
-  quote: 'Using Neon with Neon Auth just made everything simpler. Our database and auth live in the same place, and it’s the kind of backend you forget it exists. That’s exactly how it should be'
+  quote: 'Using Neon with Neon Auth just made everything simpler. Our database and auth live in the same place, and it’s the kind of <mark>backend</mark> you forget it exists. That’s exactly how it should be'
   author:
     name: 'Gabriel Tumlos'
     post: 'Founder of Daisy'

@@ -172,6 +172,33 @@ Be careful with this setting.
       expect(result).not.toContain('<Admonition');
     });
 
+    it('should inline the StatBlock value into its sentence', async () => {
+      const result = await processInlineMdx(`
+<StatBlock value="59%">of companies experienced a critical production failure.</StatBlock>
+`);
+      expect(result).toContain('**59%** of companies experienced a critical production failure.');
+      expect(result).not.toContain('<StatBlock');
+    });
+
+    it('should keep StatBlock children when the value prop is missing', async () => {
+      const result = await processInlineMdx(`
+<StatBlock>of companies experienced a critical production failure.</StatBlock>
+`);
+      expect(result).toContain('of companies experienced a critical production failure.');
+      expect(result).not.toContain('<StatBlock');
+    });
+
+    it('should drop image render flags from the markdown mirror', async () => {
+      const result = await processInlineMdx(`
+![A restored branch](/use-cases/large-databases/restore-branch-diagram.svg 'square priority')
+
+![A real caption survives](/use-cases/large-databases/lakebase-architecture.jpg 'Lakebase architecture')
+`);
+      expect(result).not.toContain('square priority');
+      expect(result).toContain('restore-branch-diagram.svg)');
+      expect(result).toContain('"Lakebase architecture"');
+    });
+
     it('should convert DetailIconCards to bullet list with descriptions', async () => {
       const result = await processInlineMdx(`
 <DetailIconCards>
