@@ -7,16 +7,13 @@ summary: >-
   GitHub Copilot, ChatGPT, Cline, Windsurf, Zed, Claude Desktop, and more via
   the add-mcp CLI) to the Neon MCP Server so AI assistants can query and manage
   Lakebase Postgres databases on Neon using natural language. Use this page when you need
-  per-client setup instructions for `npx neon@latest init`, OAuth, or API
-  key authentication against `https://mcp.neon.tech/mcp`. Also covers
+  per-client setup instructions for `npx neon@latest init`, OAuth, or local
+  API key authentication with `@neondatabase/mcp-server-neon`. Also covers
   troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache).
-  The HTTP+SSE `/sse` endpoint is deprecated and stops working on or after
-  October 1, 2026. The local stdio package `@neondatabase/mcp-server-neon`
-  is deprecated.
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-21T00:15:25.295Z'
+updatedOn: '2026-08-21T01:51:17.503Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.

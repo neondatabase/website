@@ -5,9 +5,7 @@ summary: >-
   The Neon MCP Server implements the Model Context Protocol (MCP), letting AI
   assistants interact with your Neon projects on your behalf. Set up with
   `npx neon@latest init` or use the config generator. Supports OAuth and
-  API key auth. The HTTP+SSE `/sse` endpoint is deprecated and stops working
-  on or after October 1, 2026. The local stdio package
-  `@neondatabase/mcp-server-neon` is deprecated.
+  API key auth.
 enableTableOfContents: true
 updatedOn: '2026-08-21T12:59:00.700Z'
 ---
