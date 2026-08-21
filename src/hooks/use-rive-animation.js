@@ -5,6 +5,9 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { getCachedFontLoader } from 'utils/rive-font-loader';
+import { configureRiveRuntime } from 'utils/rive-runtime';
+
+configureRiveRuntime();
 
 const useRiveAnimation = ({
   src,
@@ -22,6 +25,7 @@ const useRiveAnimation = ({
   assetLoader,
   onLoad,
   pauseOnHide = true,
+  managePlayback = true,
 } = {}) => {
   const [isReady, setIsReady] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -65,14 +69,14 @@ const useRiveAnimation = ({
 
   // Control play/pause based on visibility
   useEffect(() => {
-    if (riveInstance && isLoaded) {
+    if (managePlayback && riveInstance && isLoaded) {
       if (isVisible) {
         riveInstance.play();
       } else if (pauseOnHide) {
         riveInstance.pause();
       }
     }
-  }, [riveInstance, isVisible, isLoaded, pauseOnHide]);
+  }, [managePlayback, riveInstance, isVisible, isLoaded, pauseOnHide]);
 
   // Fade in when ready
   useEffect(() => {

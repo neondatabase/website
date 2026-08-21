@@ -8,8 +8,20 @@ import { cn } from 'utils/cn';
 
 const ARTBOARD_WIDTH = 2770;
 const ARTBOARD_HEIGHT = 1530;
+// The 1184 × 529 Figma base is exported at 2× inside the larger Rive artboard.
+const BASE_X = 276;
+const BASE_Y = 316;
+const BASE_WIDTH = 2368;
+const BASE_HEIGHT = 1058;
 const POINTER_ORIGIN_X = 1112;
 const POINTER_ORIGIN_Y = 656;
+
+const ARTBOARD_STYLE = {
+  aspectRatio: `${ARTBOARD_WIDTH} / ${ARTBOARD_HEIGHT}`,
+  left: `${(-BASE_X / BASE_WIDTH) * 100}%`,
+  top: `${(-BASE_Y / BASE_HEIGHT) * 100}%`,
+  width: `${(ARTBOARD_WIDTH / BASE_WIDTH) * 100}%`,
+};
 
 const HOVER_REGIONS = [
   { key: 'scales', minX: 471, maxX: 857, minY: 855, maxY: 960 },
@@ -119,11 +131,8 @@ const Animation = () => {
     if (!pointer) return;
 
     const { clientX, clientY, rect } = pointer;
-    const scale = Math.min(rect.width / ARTBOARD_WIDTH, rect.height / ARTBOARD_HEIGHT);
-    const offsetX = (rect.width - ARTBOARD_WIDTH * scale) / 2;
-    const offsetY = (rect.height - ARTBOARD_HEIGHT * scale) / 2;
-    const x = (clientX - rect.left - offsetX) / scale;
-    const y = (clientY - rect.top - offsetY) / scale;
+    const x = BASE_X + ((clientX - rect.left) / rect.width) * BASE_WIDTH;
+    const y = BASE_Y + ((clientY - rect.top) / rect.height) * BASE_HEIGHT;
 
     const properties = getProperties();
     if (properties) {
@@ -174,18 +183,18 @@ const Animation = () => {
   return (
     <div
       className={cn(
-        'relative aspect-[2770/1530] w-full overflow-hidden bg-[#D8E9E1] transition-opacity',
-        'after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:left-0 after:z-10 after:h-px after:bg-gray-new-10',
+        'relative aspect-[1184/529] w-full transition-opacity',
         isReady ? 'opacity-100' : 'opacity-0'
       )}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
+      onPointerCancel={handlePointerLeave}
+      ref={wrapperRef}
     >
-      <span className="absolute top-0 left-1/2 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div
-        className="size-full [&_canvas]:h-full! [&_canvas]:w-full!"
+        className="pointer-events-none absolute [&_canvas]:h-full! [&_canvas]:w-full!"
         ref={animationRef}
-        onPointerMove={handlePointerMove}
-        onPointerLeave={handlePointerLeave}
-        onPointerCancel={handlePointerLeave}
+        style={ARTBOARD_STYLE}
         aria-hidden
       >
         {isIntersecting ? <RiveComponent /> : null}

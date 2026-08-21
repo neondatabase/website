@@ -1,8 +1,7 @@
-import Image from 'next/image';
-
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
-import operateWithAgentsImage from 'images/pages/home/operate-with-agents/operate-with-agents.png';
+
+import Animation from './animation';
 
 const BENEFITS = [
   {
@@ -22,17 +21,9 @@ const BENEFITS = [
   },
 ];
 
-// Keep the current bitmap isolated so it can be replaced by a Rive animation without changing layout.
 const OperateWithAgentsVisual = () => (
   <div className="min-w-0">
-    <Image
-      className="h-auto w-full object-contain"
-      src={operateWithAgentsImage}
-      width={1184}
-      height={508}
-      sizes="(max-width: 47.9375rem) calc(100vw - 2.5rem), (max-width: 63.9375rem) calc(100vw - 4rem), 74rem"
-      alt=""
-    />
+    <Animation />
   </div>
 );
 
@@ -43,7 +34,7 @@ const OperateWithAgents = () => (
     aria-labelledby="operate-with-agents-heading"
   >
     <Container
-      className="grid grid-cols-[22rem_minmax(0,1fr)] gap-y-16 xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-y-14 lg:grid-cols-1 lg:gap-y-10 md:gap-y-8"
+      className="grid grid-cols-[22rem_minmax(0,1fr)] gap-y-[70px] xl:grid-cols-[16rem_minmax(0,1fr)] xl:gap-y-14 lg:grid-cols-1 lg:gap-y-10 md:gap-y-8"
       size="1600"
     >
       <div className="pt-3.25 lg:pt-0">
@@ -58,7 +49,7 @@ const OperateWithAgents = () => (
 
       <header className="min-w-0">
         <h2
-          className="max-w-296 indent-24 text-5xl leading-dense font-normal tracking-tighter text-pretty text-gray-new-50 xl:indent-16 xl:text-4xl lg:indent-0 lg:text-[2.25rem] md:text-[2rem]"
+          className="ml-px max-w-[1182px] indent-24 text-5xl leading-dense font-normal tracking-tighter text-pretty text-gray-new-50 xl:ml-0 xl:indent-16 xl:text-4xl lg:indent-0 lg:text-[2.25rem] md:text-[2rem]"
           id="operate-with-agents-heading"
         >
           <span className="text-white">Built for developers working with coding agents.</span>{' '}
@@ -66,7 +57,7 @@ const OperateWithAgents = () => (
         </h2>
       </header>
 
-      <ul className="mt-auto flex max-w-64 min-w-0 flex-col gap-12 lg:max-w-lg lg:gap-8">
+      <ul className="flex max-w-64 min-w-0 flex-col gap-12 pt-[50px] lg:max-w-lg lg:gap-8 lg:pt-0">
         {BENEFITS.map(({ title, description }) => (
           <li className="flex flex-col gap-2" key={title}>
             <h3 className="text-base leading-tight font-normal tracking-extra-tight text-white">
