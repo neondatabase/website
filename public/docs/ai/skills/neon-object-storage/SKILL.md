@@ -53,7 +53,7 @@ If the user has no Neon project, isn't on Postgres, and just needs a standalone 
 
 ## Availability
 
-Check this precondition before setting anything up: Neon Object Storage is a public beta feature available only on new projects in the `us-east-2` region. Confirm the user's Neon project is a new project in `us-east-2` before proceeding; it can't be enabled on existing projects.
+Check this precondition before setting anything up: Neon Object Storage is a public beta feature available in the `us-east-2` region. Confirm the user's Neon project is in `us-east-2` before proceeding.
 
 ## Setup
 
