@@ -6,7 +6,7 @@ summary: >-
   or the AWS CLI. Supports single-part and multipart uploads, range requests,
   batch deletes, and presigned URLs for browser-side access.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:47:24.799Z'
+updatedOn: '2026-08-21T11:21:12.007Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -72,7 +72,7 @@ aws s3 cp ./photo.jpg s3://my-bucket/images/photo.jpg \
 
 ## Multipart upload
 
-For large files, the AWS SDK automatically uses multipart upload above a configurable threshold. You can also initiate multipart upload manually for fine-grained control.
+The maximum object size is 5 GiB, whether you upload it in a single request or as a multipart upload. For large files, the AWS SDK automatically uses multipart upload above a configurable threshold. You can also initiate multipart upload manually for fine-grained control. Multipart upload doesn't raise the 5 GiB per-object ceiling; it makes large uploads more reliable because each part is retried independently.
 
 <CodeTabs labels={["TypeScript", "Python"]}>
 
