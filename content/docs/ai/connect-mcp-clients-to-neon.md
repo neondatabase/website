@@ -492,6 +492,8 @@ A running session applies the change with `/mcp reload`. Then authorize from the
 /mcp auth neon --open
 ```
 
+Confirm with `/mcp list`.
+
 </TabItem>
 
 <TabItem>
@@ -517,12 +519,12 @@ A running session applies the change with `/mcp reload`. Then authorize from the
    }
    ```
 
-3. Apply the file with `/mcp reload`, or start a new `fx` / `fx ask` session.
+3. Start a new `fx` or `fx ask` session from this shell. Confirm with `/mcp list`. `/mcp reload` applies a later file change only in a session that already has `NEON_API_KEY`.
 
 </TabItem>
 </Tabs>
 
-See [fx MCP](https://fx.sh/docs/capabilities/mcp) for `/mcp reload`, `/mcp auth`, and `bearer_token_env`.
+See [fx MCP](https://fx.sh/docs/capabilities/mcp) for `/mcp reload`, `/mcp auth`, `/mcp list`, and `bearer_token_env`.
 
 ## Jules
 
