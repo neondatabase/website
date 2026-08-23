@@ -470,6 +470,8 @@ fx rejects a literal `Authorization` header. Do not pass `--header "Authorizatio
 npx add-mcp https://mcp.neon.tech/mcp -a fx
 ```
 
+Requires add-mcp 2.2.0 or later (`npx add-mcp list-agents` should list `fx`). If it does not, write the file below yourself.
+
 This writes `~/.fx/mcp.json`:
 
 ```json
