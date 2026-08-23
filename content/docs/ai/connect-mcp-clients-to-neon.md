@@ -13,7 +13,7 @@ summary: >-
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-21T02:09:26.597Z'
+updatedOn: '2026-08-23T13:30:00.000Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -57,6 +57,7 @@ This adds the MCP config to your editor's configuration files. Add `-g` for glob
 | Claude Desktop            | `claude-desktop`     |
 | Codex                     | `codex`              |
 | Cursor                    | `cursor`             |
+| fx                        | `fx`                 |
 | Gemini CLI                | `gemini-cli`         |
 | GitHub Copilot CLI        | `github-copilot-cli` |
 | Goose                     | `goose`              |
@@ -453,6 +454,73 @@ Add this to `~/.config/zed/settings.json`. Replace `<YOUR_NEON_API_KEY>` with yo
 </Tabs>
 
 For more details, including workflow examples and troubleshooting, see [Get started with Zed and Neon MCP Server](/guides/zed-mcp-neon).
+
+## fx
+
+[fx](https://fx.sh) reads MCP servers only from **`~/.fx/mcp.json`**. A project file cannot add a server. add-mcp always writes that global file; `-g` is not required.
+
+<Admonition type="note">
+fx rejects a literal `Authorization` header. Do not pass `--header "Authorization: Bearer $NEON_API_KEY"` when installing to fx. Use `bearer_token_env` (API key tab) or `/mcp auth` (OAuth tab).
+</Admonition>
+
+<Tabs labels={["OAuth", "API key"]}>
+<TabItem>
+
+```bash
+npx add-mcp https://mcp.neon.tech/mcp -a fx
+```
+
+This writes `~/.fx/mcp.json`:
+
+```json
+{
+  "mcp": {
+    "neon": {
+      "type": "http",
+      "url": "https://mcp.neon.tech/mcp",
+      "enabled": true
+    }
+  }
+}
+```
+
+A running session applies the change with `/mcp reload`. Then authorize from the fx shell:
+
+```text
+/mcp auth neon --open
+```
+
+</TabItem>
+
+<TabItem>
+
+1. Create a [Neon API key](/docs/manage/api-keys#creating-api-keys) and export it in the environment fx will inherit:
+
+   ```bash
+   export NEON_API_KEY=<YOUR_NEON_API_KEY>
+   ```
+
+2. Write `~/.fx/mcp.json`:
+
+   ```json
+   {
+     "mcp": {
+       "neon": {
+         "type": "http",
+         "url": "https://mcp.neon.tech/mcp",
+         "enabled": true,
+         "bearer_token_env": "NEON_API_KEY"
+       }
+     }
+   }
+   ```
+
+3. Apply the file with `/mcp reload`, or start a new `fx` / `fx ask` session.
+
+</TabItem>
+</Tabs>
+
+See [fx MCP](https://fx.sh/docs/capabilities/mcp) for `/mcp reload`, `/mcp auth`, and `bearer_token_env`.
 
 ## Jules
 
