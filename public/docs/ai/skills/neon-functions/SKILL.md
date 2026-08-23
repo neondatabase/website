@@ -55,7 +55,7 @@ If the workload is a pure static site, a cron/background job that needs its own 
 
 ## Availability
 
-Check this precondition before setting anything up: Neon Functions is a public beta feature available only on new projects in the `us-east-2` region. Confirm the user's Neon project is a new project in `us-east-2`; it can't be enabled on existing projects. Functions usage isn't billed during the public beta.
+Check this precondition before setting anything up: Neon Functions is a public beta feature available in the `us-east-2` region. Confirm the user's Neon project is in `us-east-2`. Functions usage isn't billed during the public beta.
 
 ## Architecture: Where Functions Fit
 
@@ -135,7 +135,7 @@ neon dev      # serves every function in neon.ts with hot reload; injects DATABA
 neon deploy   # bundles with esbuild, uploads, and applies neon.ts to the linked branch
 ```
 
-To deploy a single function without `neon.ts`: `neon functions deploy <slug> --src src/index.ts` (`--src` takes either the entry file or a directory containing `index.ts`, `index.mjs`, or `index.js`). Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.c-1.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
+To deploy a single function without `neon.ts`: `neon functions deploy <slug> --src src/index.ts` (`--src` takes either the entry file or a directory containing `index.ts`, `index.mjs`, or `index.js`). Retrieve the public URL with `neon functions get <slug>` (the `invocation_url` field, of the form `https://<branch_id>-<slug>.compute.<cell>.us-east-2.aws.neon.tech`). Manage with `neon functions list|get|delete`.
 
 When `neon checkout` _creates_ a new branch and a `neon.ts` is present, it applies the policy automatically — deploying the function to the fresh branch. Checking out an existing branch does not re-deploy; run `neon deploy` explicitly.
 
@@ -229,7 +229,7 @@ Functions are long-running but **still serverless** — they are a request/respo
 
 - **Time to first byte: 15 minutes.** Your handler must _begin_ returning a response within 15 minutes of receiving a request. Most handlers finish in seconds; the 15-minute ceiling exists so agent workloads like image/video generation have room.
 - **Heartbeat: 15 minutes.** Open WebSocket/SSE connections stay alive as long as data flows. The timeout only fires when a connection goes silent — send at least one byte every 15 minutes to keep a quiet stream alive.
-- **`waitUntil`: 15 minutes.** Work registered with `waitUntil` keeps the invocation alive after the response is sent, up to 15 minutes — for cleanup like analytics writes and audit logs, **not** a background job runner. (`waitUntil` from `@neon/functions` is currently a stub during the preview.)
+- **`waitUntil`: 15 minutes.** Work registered with `waitUntil` (from `@neon/functions`) keeps the invocation alive after the response is sent, up to 15 minutes — for cleanup like analytics writes and audit logs, **not** a background job runner. Off the Neon runtime (local `neon dev`, tests) it's a no-op: the promise still runs but isn't tracked.
 - **Idle eviction.** With no active connections Neon shuts the function down; it may also evict/restart for operational reasons — e.g. maintenance, or moving the function to a different compute node (active functions can run for hours first). Treat eviction like a process restart — WebSocket/SSE clients must reconnect. Neon sends `SIGINT` before evicting, so a `process.on("SIGINT", ...)` handler lets you detect that the function is about to be evicted and run any last-minute cleanup. You don't need one just to close Postgres connections — Neon's pooler reclaims those on its own.
 - **Runtime:** Node.js 24, memory fixed at 2048 MiB during the preview. Slugs must match `^[a-z0-9]{1,20}$`. **An isolate is reused across many requests** — multiple requests can be in flight on the same isolate at once (interleaved on Node's single-threaded event loop), and under load the runtime runs several isolates in parallel, each with its own copy of module state. State held in module scope is therefore per-isolate (shared by every request that isolate handles) and in-memory only — persist anything that must survive eviction in Postgres. This reuse is exactly why you create a connection pool once at module scope rather than per request (see [Connecting to Postgres](#connecting-to-postgres)).
 
