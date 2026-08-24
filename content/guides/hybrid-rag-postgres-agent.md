@@ -4,7 +4,7 @@ subtitle: Ship hybrid keyword and vector retrieval, reciprocal rank fusion, and 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-08-25T00:00:00.000Z'
-updatedOn: '2026-08-25T00:00:00.000Z'
+updatedOn: '2026-08-24T23:33:24.862Z'
 ---
 
 When you start building retrieval-augmented generation (RAG), the typical first step is to choose an embedding model, turn on [pgvector](/docs/extensions/pgvector), add some chunks, and query with `ORDER BY embedding <=> query_vector LIMIT 5`. This vector search works for paraphrased questions, but has two main limitations as your project grows:
@@ -182,17 +182,31 @@ async function ingestDocument(opts: {
   chunks: { index: number; content: string; metadata: Record<string, unknown> }[];
 }) {
   const { tenantId, documentId, chunks } = opts;
-  const embeddings = await embedMany(chunks.map((c) => c.content));
 
-  for (const [i, chunk] of chunks.entries()) {
-    const hash = createHash('sha256').update(chunk.content).digest('hex');
+  // Hash every chunk, then look up the hashes already stored for this document.
+  const hashed = chunks.map((chunk) => ({
+    ...chunk,
+    hash: createHash('sha256').update(chunk.content).digest('hex'),
+  }));
 
+  const existing = await db.execute(sql`
+    SELECT chunk_index, content_hash FROM rag_chunks
+    WHERE document_id = ${documentId}
+  `);
+  const storedHash = new Map(existing.map((r) => [r.chunk_index, r.content_hash]));
+
+  // Only embed chunks whose content is new or changed, so embedMany never
+  // pays to re-embed text that already exists verbatim.
+  const changed = hashed.filter((c) => storedHash.get(c.index) !== c.hash);
+  const embeddings = await embedMany(changed.map((c) => c.content));
+
+  for (const [i, chunk] of changed.entries()) {
     await db.execute(sql`
       INSERT INTO rag_chunks
         (document_id, tenant_id, chunk_index, content, metadata, embedding, content_hash)
       VALUES
         (${documentId}, ${tenantId}, ${chunk.index}, ${chunk.content},
-         ${JSON.stringify(chunk.metadata)}::jsonb, ${embeddings[i]}::vector, ${hash})
+         ${JSON.stringify(chunk.metadata)}::jsonb, ${embeddings[i]}::vector, ${chunk.hash})
       ON CONFLICT (document_id, chunk_index) DO UPDATE
         SET content      = EXCLUDED.content,
             metadata     = EXCLUDED.metadata,
@@ -204,7 +218,7 @@ async function ingestDocument(opts: {
 }
 ```
 
-The `WHERE content_hash IS DISTINCT FROM EXCLUDED.content_hash` clause ensures that only rows with changed content are updated. This way, if you re-ingest a document that has only a few edits, the database updates just those specific chunks. To save on embedding costs, hash each chunk first and only call `embedMany` for chunks with a new hash.
+The code above hashes each chunk up front and compares it against the hashes already stored for the document, so `embedMany` runs only for chunks whose content is new or changed. This helps save the additional cost that occurs during re-ingestion.
 
 ## Baseline: vector-only retrieval (understand what you are improving)
 
@@ -319,7 +333,7 @@ function buildRetrievalQuery(latestUserMessage: string, recent: { role: string; 
 }
 ```
 
-Instead of embedding only the latest message, embed the result from `buildRetrievalQuery(...)` so you capture the full conversation context. After each turn, store both the user message and this combined context, ensuring future retrievals include recent history. For conversations running beyond your fixed window, maintain a rolling summary on the session.
+Instead of embedding only the latest message, embed the output of `buildRetrievalQuery(...)`. This encodes the full context of the conversation up to that point. After each turn, be sure to store the raw user and assistant messages. Since `buildRetrievalQuery` will rebuild the combined context from the stored messages on the next turn, you don't need to persist the combined string itself. Doing so would just re-embed the role-prefixed history into the store. For conversations that exceed the fixed window, you will want to maintain a rolling summary on the session itself.
 
 ```sql
 UPDATE chat_sessions
@@ -349,7 +363,11 @@ export async function POST(req: Request) {
   const embedding = await embed(retrievalText);
 
   const chunks = await db.execute(sql`
-    -- insert your fused hybrid SQL with ${tenantId}, ${retrievalText}, and ${embedding}
+    -- insert your fused hybrid SQL: ${embedding} for the vector arm ($1),
+    -- ${message} for the keyword arm ($2), filtered by ${tenantId} ($3).
+    -- The embedding uses the full context from retrievalText,
+    -- while the keyword search uses the raw message so it only matches
+    -- exact tokens from the latest turn.
   `);
 
   await db.insert(chatMessages).values({ sessionId, role: 'user', content: message });
