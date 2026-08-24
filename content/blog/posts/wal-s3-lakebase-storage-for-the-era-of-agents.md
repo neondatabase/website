@@ -109,6 +109,8 @@ The storage layer owns correctness, durability, and history. It outlives any ind
 - Pageservers - to turns WAL into pages. Another component called the Pageserver combines base pages with committed WAL records to materialize the version of a page that a given query needs, and it persists those materialized versions into object storage asynchronously.
 - Object storage - where the immutable history is stored. S3 stores materialized page versions and historical states, kept as an append-only record rather than a mutable filesystem.
 
+**[ADD DIAGRAM 1]**
+
 Let's take a look in more detail. 
 
 ## How requests move through storage
@@ -122,6 +124,8 @@ A commit in this system looks like this:
 3. The transaction is committed once a quorum of safekeepers has acknowledged the record. That is the point where the client hears success.
 4. Page materialization happens afterward, in the storage layer, off the transaction's critical path. A commit never waits for pages to be written or uploaded.
 
+**[ADD DIAGRAM 2]**
+
 ### The read path
 
 Reads are a central operation in this architecture. When the compute node asks storage for a page, the request carries a page identifier and an LSN, and storage returns that page as it existed at that LSN. That call is `GetPage@LSN`. Serving it fast is the key.
@@ -131,6 +135,8 @@ When Postgres needs a page, it tries local first:
 1. First hits RAM, as in any Postgres
 2. If it cannot be served with RAM, then comes the local NVMe cache - still fast, still local
 3. If there's a local miss, the request crosses the network into the pageserver. The pageserver then checks whether it already has that page version materialized. If not, it finds the most recent image of the page at or before the requested LSN, collects the WAL records on top of it, replays them, and returns the reconstructed page. The returned page is then cached in RAM and on NVMe, so the next read of it is local again.
+
+**[ADD DIAGRAM 3]**
 
 A primary node asks for the latest version of every page, so in steady state it behaves like any Postgres reading from a warm cache. But nothing in the protocol requires "latest." Ask for a page at an LSN from four hours ago and you get that page from four hours ago.
 
