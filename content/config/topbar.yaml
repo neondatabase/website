@@ -1,4 +1,4 @@
-text: 'Open weight models are particularly fast in the Neon AI Gateway thanks to optimizations like prompt caching. Free to run during beta'
+text: 'A deep dive on the lakebase storage: S3 + WAL for the era of agents'
 link:
-  url: 'https://neon.com/blog/open-weight-models-are-fast-on-neon-ai-gateway'
+  url: 'https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents'
   target: '_blank'
