@@ -266,7 +266,7 @@ That WAL piece is the key. Object storage adds a cheap and scalable way to store
 
 Lakebase Postgres runs in two places, on the same infrastructure and with the same core feature set. What differs is what surrounds it:
 
-- On [Neon](https://neon.com/), it anchors a complete set of cloud backend primitives for developers, startups, and agent platforms: Lakebase Postgres alongside Object Storage, Functions, Managed Better Auth, and an AI Gateway.
-- On [Databricks](https://www.databricks.com/product/lakebase), it is integrated with the rest of the Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows.
+- On [Neon](https://neon.com/), it anchors a complete set of cloud backend primitives for developers, startups, and agent platforms
+- On [Databricks](https://www.databricks.com/product/lakebase), it is integrated with the rest of the Data Intelligence Platform: Unity Catalog governance, lakehouse analytics, notebooks, and AI workflows
 
 Ask your agent to deploy either of those, and put the lakebase architecture to the test.
