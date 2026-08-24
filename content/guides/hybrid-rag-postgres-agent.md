@@ -127,6 +127,7 @@ CREATE TABLE chat_messages (
   session_id   uuid NOT NULL REFERENCES chat_sessions(id) ON DELETE CASCADE,
   role         text NOT NULL CHECK (role IN ('user', 'assistant', 'system')),
   content      text NOT NULL,
+  metadata     jsonb NOT NULL DEFAULT '{}',   -- holds cited chunk_ids and other per-message data
   created_at   timestamptz NOT NULL DEFAULT now()
 );
 
