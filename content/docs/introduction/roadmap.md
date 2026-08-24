@@ -12,7 +12,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-08-21T18:17:03.548Z'
+updatedOn: '2026-08-24T12:09:13.878Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
@@ -29,6 +29,10 @@ We're expanding the platform with [a branchable stack of backend primitives](/bl
 ## Core Postgres database features and improvements
 
 We're accelerating work on improving and scaling the core database on Neon as well. Here is what is on the roadmap.
+
+### Real-time sync
+
+- Real-time Postgres sync powered by the Electric sync engine, keeping your database and connected clients (browser tabs, mobile apps, and agents) continuously in sync so you can build real-time, collaborative, and agentic apps without hand-rolling a sync layer. [Read the announcement](/blog/electric-joins-neon).
 
 ### Backups & restore
 
