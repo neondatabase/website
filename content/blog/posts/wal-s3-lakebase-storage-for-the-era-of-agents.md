@@ -17,8 +17,9 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
-  alt: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/wal-s3-lakebase-storage-for-the-era-of-agents/cover.jpg
+  alt: 'WAL + S3: Lakebase storage for the era of agents'
 isFeatured: false
 seo:
   title: 'WAL + S3: Lakebase storage for the era of agents - Neon'
@@ -31,7 +32,8 @@ seo:
   ogDescription: >-
     How treating WAL as the source of truth changes the way you work with
     Postgres (a deep dive)
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/wal-s3-lakebase-storage-for-the-era-of-agents/cover.jpg
 ---
 
 Working with an OLTP database is traditionally heavy and full of friction, but very little of that is a Postgres problem. Most of it is a storage problem: deployments, copies, restores, and replicas all mean moving large volumes of data around, and that is slow and expensive.
@@ -109,7 +111,7 @@ The storage layer owns correctness, durability, and history. It outlives any ind
 - Pageservers - to turns WAL into pages. Another component called the Pageserver combines base pages with committed WAL records to materialize the version of a page that a given query needs, and it persists those materialized versions into object storage asynchronously.
 - Object storage - where the immutable history is stored. S3 stores materialized page versions and historical states, kept as an append-only record rather than a mutable filesystem.
 
-**[ADD DIAGRAM 1]**
+![Lakebase Postgres architecture: a compute layer running standard Postgres on top of a storage layer made of safekeepers, pageservers, and object storage](https://cdn.neonapi.io/public/images/pages/blog/wal-s3-lakebase-storage-for-the-era-of-agents/diagram-1.png)
 
 Let's take a look in more detail. 
 
@@ -124,7 +126,7 @@ A commit in this system looks like this:
 3. The transaction is committed once a quorum of safekeepers has acknowledged the record. That is the point where the client hears success.
 4. Page materialization happens afterward, in the storage layer, off the transaction's critical path. A commit never waits for pages to be written or uploaded.
 
-**[ADD DIAGRAM 2]**
+![The write path: the compute node streams WAL to the safekeepers, a quorum acknowledges the commit, and pageservers materialize pages into object storage afterward](https://cdn.neonapi.io/public/images/pages/blog/wal-s3-lakebase-storage-for-the-era-of-agents/diagram-2.png)
 
 ### The read path
 
@@ -136,7 +138,7 @@ When Postgres needs a page, it tries local first:
 2. If it cannot be served with RAM, then comes the local NVMe cache - still fast, still local
 3. If there's a local miss, the request crosses the network into the pageserver. The pageserver then checks whether it already has that page version materialized. If not, it finds the most recent image of the page at or before the requested LSN, collects the WAL records on top of it, replays them, and returns the reconstructed page. The returned page is then cached in RAM and on NVMe, so the next read of it is local again.
 
-**[ADD DIAGRAM 3]**
+![The read path: Postgres checks RAM, then local NVMe, then asks the pageserver for GetPage@LSN, which reconstructs the page from an image layer plus WAL records](https://cdn.neonapi.io/public/images/pages/blog/wal-s3-lakebase-storage-for-the-era-of-agents/diagram-3.png)
 
 A primary node asks for the latest version of every page, so in steady state it behaves like any Postgres reading from a warm cache. But nothing in the protocol requires "latest." Ask for a page at an LSN from four hours ago and you get that page from four hours ago.
 
