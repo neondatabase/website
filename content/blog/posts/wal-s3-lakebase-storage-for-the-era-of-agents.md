@@ -256,7 +256,7 @@ The distinction from CDC and mirroring is that there is nothing to opt into. The
 
 ## Wrap up
 
-We started this post with a question: could object storage sit underneath Postgres and make it lighter to work with? The answer is yes. Object storage can sit underneath Postgres and change how you interact with it, but not just because S3 is fast or cheap to run. The picture requires more engineering than that. RAM and local NVMe are needed to serve queries fast enough, and a commit lands on replicated WAL rather than in a bucket.
+We started this post with a question: could object storage sit underneath Postgres and make it lighter to work with? The answer is yes, but not just because S3 is fast or cheap to run. The picture requires more engineering than that. RAM and local NVMe are needed to serve queries fast enough, and a commit lands on replicated WAL rather than in a bucket.
 
 That WAL piece is the key. Object storage adds a cheap and scalable way to store all history, but making the WAL the source of truth is what makes that history addressable. This completely changes how you interact with Postgres and the features you can build on top of it.
 
