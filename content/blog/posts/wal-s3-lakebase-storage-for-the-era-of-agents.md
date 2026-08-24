@@ -36,6 +36,8 @@ seo:
     https://cdn.neonapi.io/public/images/pages/blog/wal-s3-lakebase-storage-for-the-era-of-agents/cover.jpg
 ---
 
+![WAL + S3: Lakebase storage for the era of agents](https://cdn.neonapi.io/public/images/pages/blog/wal-s3-lakebase-storage-for-the-era-of-agents/cover.jpg)
+
 Working with an OLTP database is traditionally heavy and full of friction, but very little of that is a Postgres problem. Most of it is a storage problem: deployments, copies, restores, and replicas all mean moving large volumes of data around, and that is slow and expensive.
 
 The polar opposite is object storage. S3 is cheap, performant, almost invisible to operate. That is why the storage question keeps returning - can object storage sit underneath Postgres and make it lighter to work with?
