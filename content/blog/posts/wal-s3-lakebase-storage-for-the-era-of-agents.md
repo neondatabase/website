@@ -156,7 +156,7 @@ So GetPage@LSN becomes a search:
 
 The search described above sounds simple, but it is not. It is worth spending some time on, since it determines whether the whole design is viable.
 
-A read names a key and an LSN. The storage system has to find the nearest layer that covers that key at or before that LSN. That is a geometric problem, and it is not obvious how to solve it across tens of millions of layers. A linear scan is far too slow, and the obvious spatial structures do not fit: R-trees answer containment queries rather than "the first layer below this point," and segment trees scale with the size of the coordinate space rather than with the number of layers.
+A read names a key and an LSN; the storage system has to find the nearest layer that covers that key at or before that LSN. That is a geometric problem, and it is not obvious how to solve it across tens of millions of layers. A linear scan is far too slow, and the obvious spatial structures do not fit: R-trees answer containment queries rather than "the first layer below this point," and segment trees scale with the size of the coordinate space rather than with the number of layers.
 
 We tried several approaches. What ended up working was to solve the easy problem first, then make the data structure remember its own past.
 
@@ -172,12 +172,10 @@ Persistent as in, “keep the old versions available”. We build the coverage i
 
 Two things follow from that:
 
-- The insert costs a handful of new nodes rather than a whole new tree, because everything off the path is shared
-- The old root still describes the tree exactly as it was before the insert, so it remains a valid coverage for the earlier LSN.
+1. The insert costs a handful of new nodes rather than a whole new tree, because everything off the path is shared
+2. The old root still describes the tree exactly as it was before the insert, so it remains a valid coverage for the earlier LSN.
 
-We do that for every layer, in order, and we end up with a single structure that contains every intermediate root, each one the coverage at a different LSN. We get all of those trees for close to the price of one.
-
-A historical read then costs the same as a current one: the system picks the root for the LSN you want, and does the same single lookup.
+We do that for every layer, in order, and we end up with a single structure that contains every intermediate root, each one the coverage at a different LSN. A historical read then costs the same as a current one: the system picks the root for the LSN you want, and does the same single lookup.
 
 That is the trick, in summary:
 
@@ -187,13 +185,13 @@ That is the trick, in summary:
 
 ## Where object storage actually sits
 
-This is where the current argument about Postgres and object storage tends to go wrong, in both directions.
+Let's recap this, since it is where the current argument about Postgres and object storage tends to go wrong. 
 
 The classic argument against building OLTP on object storage looks like this:
 
-- Postgres processes many small, latency-sensitive I/Os,
-- but object storage is built for larger requests at higher latency, and a read from it can take hundreds of milliseconds,
-- therefore if you put S3 in front of query execution, the result is a slow database.
+- "Postgres processes many small, latency-sensitive I/Os",
+- "but object storage is built for larger requests at higher latency, and a read from it can take hundreds of milliseconds", 
+- "therefore if you put S3 in front of query execution, the result is a slow database"
 
 In on itself, that is not a controversial claim. What the argument gets wrong is the assumption that a database built on object storage must be reading from object storage to answer queries.
 
@@ -202,7 +200,7 @@ In the architecture we’re proposing, it never does:
 - Queries do not read object storage. The compute node reads RAM, then local NVMe, then the pageserver. Object storage is read only inside the pageserver, only when reconstructing a page version it does not have, and never by Postgres directly.
 - Commits do not write object storage. A commit is acknowledged when a quorum of safekeepers has the WAL record, materializing pages and uploading them happens afterward.
 
-<Admonition type="note" title="A new kind of database">
+<Admonition type="note" title="This is what we call a lakebase">
 A Postgres built this way sits far enough from the traditional architecture that it needs its own product category. That’s what we’ve called a [lakebase](https://www.databricks.com/blog/what-is-a-lakebase): an OLTP database where compute and storage are decoupled, and the durable source of truth is built on object storage.
 
 Consistently with this category, we’re calling our database [Lakebase Postgres](https://neon.com/docs/postgres/overview).
@@ -210,41 +208,35 @@ Consistently with this category, we’re calling our database [Lakebase Postgres
 
 ## What the lakebase brings to Postgres
 
-When you design Postgres as a lakebase, the transaction history is addressable by LSN, and copies are references rather than data. That makes it possible to build features that give Postgres the lightweight workflow we were looking for at the start of this post, which is an absolute requirement for agents.
+When you design Postgres as a lakebase, the transaction history is addressable by LSN, and copies are references rather than data. That makes it possible to build features that give Postgres the lightweight workflow we were aiming for at the start of this post, inspired by S3, which by the way - is an absolute requirement for agents.
 
 ### Branching
 
-First, Postgres can [branch](https://neon.com/docs/introduction/branching) now. Creating a branch does not copy pages, it creates a pointer to a specific LSN, and the branch begins diverging from there with copy-on-write semantics.
+First, Postgres can [branch](https://neon.com/docs/introduction/branching) now. Creating a branch does not copy pages: it creates a pointer to a specific LSN, and the branch begins diverging from there with copy-on-write semantics. Writes to the branch are stored as deltas against the parent, so a branch of a TB-size database is created in seconds and costs nothing until it changes something. The parent sees no additional load, which is why this is safe to do against production.
 
-Writes to the branch are stored as deltas against the parent, so a branch of a 2 TB database is created in seconds and costs nothing until it changes something. The parent sees no additional load, which is why this is safe to do against production.
-
-This is what an agent needs to work safely. It can take a branch per task, run the migration it just wrote against real data at real volume, and inspect the result before anything touches the parent. Twenty agents can do that at once, each isolated from the others and from production.
+Agents use branches in multiple ways. E.g. an agent can take a branch per task, run migrations, and inspect the result before anything touches the parent. Twenty agents (or hundreds) can do that at once, consuming minimal resources, without affecting prod.
 
 <Admonition type="note" title="Extending branching to the backend">
-On Neon, branching now extends past the database: Object Storage buckets, Functions, Managed Better Auth state, and AI Gateway configuration branch alongside it, so a branch is an isolated copy of the backend rather than just the Postgres tables.
+We're now extending this branching experience to the whole backend - starting with [Object Storage buckets](https://neon.com/docs/storage/overview), [Functions](https://neon.com/docs/compute/functions/overview), [Auth](https://neon.com/docs/auth/overview), and [AI Gateway](https://neon.com/docs/ai-gateway/overview) that branches.
 </Admonition>
 
 ### Instant restore
 
-Point-in-time recovery is branching with a different intent. Restoring means pointing at an earlier LSN and resuming from there, so it does not involve copying data back into place and its cost does not scale with database size. How far back you can go is a [retention setting](https://neon.com/docs/introduction/history-window).
+In this architecture, point-in-time recovery is branching with a different intent. Restoring means pointing at an earlier LSN and resuming from there, so it does not involve copying data back into place and its cost does not scale with database size. How far back you can go is simply a [retention setting](https://neon.com/docs/introduction/history-window).
 
-This is what makes an agent's mistakes cheap. When an agent runs the wrong statement, the answer is not a restore window and a recovery plan, it is pointing the branch back at the LSN from before it ran. Undo costs the same on a 2 TB database as on an empty one, so an agent can retry instead of escalating to a human.
+This makes an agent's mistakes cheap. When an agent runs the wrong statement, this is simply solved by pointing the branch back at the LSN from before it ran. Undo costs the same on a huge database as on an empty one. How fast can you restore is no longer a factor of how large your database is.
 
 ### Time travel queries
 
-Because the pageserver can reconstruct any page at any LSN inside the history window, you can query a past state directly instead of restoring it first.
-
-The practical use is diffing: what did this table look like before the migration, and what does it look like now. It is also how you confirm you picked the right timestamp before committing to a restore.
+Because the pageserver can reconstruct any page at any LSN inside the history window, you can also query a past state directly instead of restoring it first. The practical use is diffing: "what did this table look like before the migration, and what does it look like now" is trivial to answer. It is also how you (or the agent) can confirm the right timestamp before committing to a restore.
 
 ### Read replicas without replicas
 
-A read-only compute node is not a copy of the data. It requests pages from the same storage layer as the primary, so adding one does not mean provisioning a dataset and waiting for it to catch up. Spinning one up is a metadata operation.
+"Replicating the database" in this architecture is simply spinning up one more compute and attaching it to the shared storage. E.g. for read replicas, a read-only compute requests pages from the same storage layer as the primary. Creating replicas no longer means provisioning a dataset and waiting for it to catch up, it is just a metadata operation.
 
 ### Scale to zero
 
-Since durable state lives outside compute, an idle compute node can be shut down entirely rather than left running to protect data. Computes [suspend](https://neon.com/docs/introduction/scale-to-zero) after 5 minutes of inactivity and reactivate within a few hundred milliseconds on the next query. For a fleet of per-session or per-branch databases, most of which are idle most of the time, this is the difference between a viable cost model and an unviable one. Note that compute stops billing while suspended; storage continues to be billed, because the history is still there.
-
-An agent session that works for four minutes and goes quiet stops drawing compute cost five minutes later, with nobody having to tear it down. That is what makes a database per agent, or per session, or per branch, affordable enough to be the default.
+Since durable state lives outside compute, an idle compute node can be shut down entirely rather than left running to protect data. Computes can [suspend](https://neon.com/docs/introduction/scale-to-zero) after minutes of inactivity and reactivate within a few hundred milliseconds on the next query. For a fleet of per-session or per-branch databases, most of which are idle most of the time, this is a key difference - it is what makes the cost model viable. Creating a database per agent, or per session, or per branch becomes affordable enough at scale to be the default.
 
 ## One copy for transactions and analytics
 
