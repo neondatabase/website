@@ -199,7 +199,7 @@ The classic argument against building OLTP on object storage looks like this:
 - "but object storage is built for larger requests at higher latency, and a read from it can take hundreds of milliseconds", 
 - "therefore if you put S3 in front of query execution, the result is a slow database"
 
-In on itself, that is not a controversial claim. What the argument gets wrong is the assumption that a database built on object storage must be reading from object storage to answer queries.
+In on itself, that is not a controversial claim. What the argument gets wrong is the assumption that a database built on object storage must be *reading from object storage* to answer queries.
 
 In the architecture we’re proposing, it never does:
 
