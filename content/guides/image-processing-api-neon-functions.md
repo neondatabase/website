@@ -4,7 +4,7 @@ subtitle: 'Learn how to build an image API that resizes, crops, optimizes, analy
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-24T00:00:00.000Z'
-updatedOn: '2026-08-24T07:44:20.743Z'
+updatedOn: '2026-08-24T08:45:59.374Z'
 ---
 
 If you're building an application that handles images (profile avatars, product photos, or user uploads), you run into the same set of problems every time. Users upload 12-megapixel photos straight from their phones, and if you serve those files back as-is, pages get slow and bandwidth costs climb. Every image needs resizing for different layouts, cropping to fit, and re-encoding into modern formats like WebP. On top of that, every image needs alt text for accessibility and SEO.
@@ -632,10 +632,10 @@ You can run your function locally using `neon dev`, which starts a local server 
 neon dev
 ```
 
-Grab a sample image to test with (any photo works; this one is from Wikimedia Commons):
+Grab a sample image to test with (any photo works; this one comes from [Lorem Picsum](https://picsum.photos), a free placeholder image service):
 
 ```bash shouldWrap
-curl -o sample.jpg "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/2024_Solar_Eclipse_Prominences.jpg/1280px-2024_Solar_Eclipse_Prominences.jpg"
+curl -L -o sample.jpg "https://picsum.photos/id/1015/1280/853"
 ```
 
 Try the endpoints. First, a raw binary upload to `/resize`:
@@ -658,7 +658,7 @@ curl -X POST "http://localhost:8787/caption" -H "Content-Type: image/jpeg" --dat
 
 ```json
 {
-  "caption": "A total solar eclipse glows in a dark sky, with pink prominences visible along the sun's edge."
+  "caption": "A scenic view of a fjord surrounded by rocky cliffs, with people gathered on a cliff edge under a partly cloudy sky."
 }
 ```
 
@@ -714,8 +714,8 @@ curl -si -X POST "$API_URL/optimize?format=webp&quality=70" -H "Content-Type: im
 ```text
 HTTP/2 200
 content-type: image/webp
-x-original-size: 196431
-x-optimized-size: 38210
+x-original-size: 201611
+x-optimized-size: 158974
 ...
 ```
 
@@ -730,9 +730,9 @@ curl -X POST "$API_URL/analyze" -H "Content-Type: image/jpeg" --data-binary @sam
   "width": 1280,
   "height": 853,
   "format": "jpeg",
-  "sizeBytes": 196431,
+  "sizeBytes": 201611,
   "hasAlpha": false,
-  "dominantColor": "#0d1b2e"
+  "dominantColor": "#084898"
 }
 ```
 
