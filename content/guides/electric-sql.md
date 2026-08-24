@@ -4,10 +4,14 @@ subtitle: A step-by-step guide to integrating Electric with Lakebase Postgres
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-05-28T00:00:00.000Z'
-updatedOn: '2026-08-14T09:39:45.068Z'
+updatedOn: '2026-08-24T12:09:13.878Z'
 ---
 
 This guide demonstrates how to integrate [Electric](https://electric.ax/) with Lakebase Postgres. Electric is a Postgres sync engine designed to handle partial replication, fan-out, and data delivery, making apps faster and more collaborative. It can scale to millions of users while maintaining low, stable, and predictable compute and memory usage.
+
+<Admonition type="info" title="Electric has joined Neon">
+Electric, the team behind the Electric sync engine, is [joining Neon at Databricks](/blog/electric-joins-neon). Real-time sync is coming to Neon Postgres, with deeper integration already underway. In the meantime, this guide shows how to use Electric with Neon today.
+</Admonition>
 
 Electric acts as a read-path sync engine, efficiently replicating partial subsets of your Postgres data to client applications. These data subsets are defined using [Shapes](https://electric.ax/docs/guides/shapes), which are similar to live queries. Writes are handled by your application's existing API and backend logic, ensuring Electric integrates smoothly with your current stack.
 
