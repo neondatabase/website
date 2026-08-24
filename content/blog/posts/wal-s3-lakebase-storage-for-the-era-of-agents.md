@@ -20,7 +20,7 @@ cover:
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/wal-s3-lakebase-storage-for-the-era-of-agents/cover.jpg
   alt: 'WAL + S3: Lakebase storage for the era of agents'
-isFeatured: false
+isFeatured: true
 seo:
   title: 'WAL + S3: Lakebase storage for the era of agents - Neon'
   description: >-
