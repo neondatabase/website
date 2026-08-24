@@ -12,7 +12,7 @@ summary: >-
 tag: new
 tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-08-24T14:50:50.826Z'
+updatedOn: '2026-08-24T17:29:27.361Z'
 ---
 
 <Admonition type="note" title="Snapshots">
@@ -101,10 +101,6 @@ neon branches restore development ^self@2025-01-01T00:00:00Z --preserve-under-na
 This command resets the target branch `development` to its state at the start of 2025. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
-
-<Admonition type="note">
-Instant restore reverts Postgres database data and Managed Better Auth state (stored in the `neon_auth` schema). Object Storage buckets, Functions deployments, and AI Gateway configuration are not affected by database restores. See [Backup & recovery](/docs/platform/backup-recovery) for recovery strategies for other backend components.
-</Admonition>
 
 </TabItem>
 

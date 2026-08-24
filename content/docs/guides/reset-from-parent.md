@@ -10,7 +10,7 @@ summary: >-
   cannot be reset, and branches with their own children must have those children
   deleted first.
 enableTableOfContents: true
-updatedOn: '2026-08-24T14:59:06.918Z'
+updatedOn: '2026-08-24T17:29:27.361Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -128,15 +128,7 @@ Start feature development with a clean slate by resetting your development branc
 neon branches reset dev-branch --parent
 ```
 
-This strategy preserves a stable connection string for your development environment, while still ensuring every new feature begins with a Postgres-consistent baseline.
-
-<Admonition type="important" title="What resets and what doesn't">
-**Resets:** Postgres databases, roles, schema, data, and Managed Better Auth state (stored in the `neon_auth` schema).
-
-**Does NOT reset:** Object Storage bucket contents, Functions deployments, and AI Gateway configuration remain unchanged. A reset does not revert these components. If your workflow depends on them, you'll need to handle them separately. See [Backup & recovery](/docs/platform/backup-recovery) for the complete boundary.
-
-**Gotcha:** Logical replication slots and subscriptions are **not inherited** by a branch after reset. You'll need to recreate them if your workflow uses logical replication.
-</Admonition>
+This strategy preserves a stable connection string for your development environment, while still ensuring every new feature begins with a Postgres-consistent baseline that includes your database and Managed Better Auth state.
 
 ### Refresh staging
 
@@ -146,7 +138,7 @@ Reset **staging** to match its parent branch (i.e., **production**) for a reliab
 neon branches reset staging --parent
 ```
 
-This ensures staging accurately reflects the current production database state for reliable testing. Remember that Object Storage, Functions, and other backend components are not reset—plan your staging refresh strategy accordingly.
+This ensures staging accurately reflects the current production database state for reliable testing.
 
 ## Limitations
 

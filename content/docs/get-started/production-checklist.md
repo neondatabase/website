@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-08-24T14:59:06.918Z'
+updatedOn: '2026-08-24T17:29:27.361Z'
 ---
 
 <CheckList title="Production checklist">
@@ -183,15 +183,6 @@ Don't wait for an incident to learn how restore works. Plan and test your recove
 - [Restore from a snapshot into a new branch](/docs/guides/backup-restore#multi-step-restore)
 
 Plan and test which restore method you will use for production incidents, how your application will switch connections if a new branch is created, and how you will validate restored data before resuming traffic.
-
-**Other backend components** require separate recovery strategies:
-
-- **Object Storage**: Verify your bucket versioning settings or external backup strategy
-- **Functions**: Ensure you can redeploy from version-controlled source code
-- **AI Gateway**: Model routing and rate-limit configuration is platform-global and is not restored with the database—back up and reconfigure separately
-- **Secrets**: Document external configuration (Better Auth provider credentials, API keys) that must be restored independently
-
-Database restores do **not** affect Object Storage buckets, Functions deployments, or AI Gateway configuration. See [Backup & recovery](/docs/platform/backup-recovery) for a complete disaster recovery strategy across all backend components.
 
 ## Clean up your branches regularly
 

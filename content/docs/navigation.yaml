@@ -1032,8 +1032,6 @@
         - section: Data recovery
           icon: report
           items:
-            - title: Backup & recovery
-              slug: platform/backup-recovery
             - title: Backup & restore
               slug: guides/backup-restore
             - title: Schema diff
