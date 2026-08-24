@@ -286,8 +286,8 @@ Sends a test email so you can verify your SMTP configuration.
 
 <CliOptions command="neon-auth config email-provider test" />
 
-```bash shouldWrap
-neon neon-auth config email-provider test --recipient-email user@example.com --host smtp.example.com --port 587 --username example_username --password AbC123dEf --sender-email noreply@example.com --sender-name "Example App"
+```bash
+neon neon-auth config email-provider test --recipient-email user@example.com
 ```
 
 ### neon neon-auth config organization (#config-organization)

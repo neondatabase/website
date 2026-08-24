@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "3.5.1",
+  "neonctlVersion": "4.1.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -1747,6 +1747,13 @@
               "commands": {},
               "describe": "Number of sequential scans recorded against each table (pg_stat_user_tables)"
             },
+            "stalled-queries": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Active queries running longer than 30 seconds with parallel workers, waits, and blockers (compute-wide)"
+            },
             "subscriptions": {
               "aliases": [],
               "positionals": [],
@@ -2226,44 +2233,14 @@
                   "aliases": [],
                   "positionals": [],
                   "options": {
-                    "host": {
-                      "type": "string",
-                      "describe": "SMTP host",
-                      "required": true
-                    },
-                    "password": {
-                      "type": "string",
-                      "describe": "SMTP password",
-                      "required": true
-                    },
-                    "port": {
-                      "type": "number",
-                      "describe": "SMTP port",
-                      "required": true
-                    },
                     "recipient-email": {
                       "type": "string",
-                      "describe": "Email address to send test email to",
-                      "required": true
-                    },
-                    "sender-email": {
-                      "type": "string",
-                      "describe": "Sender email address",
-                      "required": true
-                    },
-                    "sender-name": {
-                      "type": "string",
-                      "describe": "Sender display name",
-                      "required": true
-                    },
-                    "username": {
-                      "type": "string",
-                      "describe": "SMTP username",
+                      "describe": "Email address to deliver the test message to",
                       "required": true
                     }
                   },
                   "commands": {},
-                  "describe": "Send a test email"
+                  "describe": "Send a test message through the saved custom SMTP provider"
                 },
                 "update": {
                   "name": "update",
