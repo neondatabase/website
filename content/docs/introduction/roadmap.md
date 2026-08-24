@@ -81,6 +81,8 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
+- **Neon MCP server as a Claude connector**: The Neon MCP server is now listed in Claude's connector directory, so you can create projects and branches, run SQL, change schemas, and diagnose slow queries from Claude.ai or Claude Desktop. [Learn more](/docs/ai/neon-mcp-server#claude-connector).
+- **AI Gateway as a Vercel AI SDK provider**: The Neon AI Gateway is now a community provider for the Vercel AI SDK, so you can reach frontier and open-source models through one credential built into your branch and swap models without per-provider SDKs or keys. [Learn more](/docs/ai-gateway/overview).
 - **Project-level permissions**: Grant people and agents Viewer, Editor, or Admin access on individual projects instead of across your whole organization, on top of four organization roles (Admin, Editor, Viewer, Collaborator). Now available to all organizations. [Learn more](/docs/manage/user-permissions).
 - **API keys and profiles in the Neon CLI**: New `neon api-keys` and `neon profile` commands let you mint account, organization, or project-scoped keys and switch between multiple accounts from the terminal. [Learn more](/docs/cli/api-keys).
 - **More models on the AI Gateway**: The AI Gateway catalog expanded with Kimi K3, GLM-5.2, Inkling, and new Gemini and GPT models, all reachable through one credential and one base URL. [Learn more](/docs/ai-gateway/models#available-models).
