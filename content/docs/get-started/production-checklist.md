@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-08-24T14:50:50.826Z'
+updatedOn: '2026-08-24T14:59:06.918Z'
 ---
 
 <CheckList title="Production checklist">
@@ -188,6 +188,7 @@ Plan and test which restore method you will use for production incidents, how yo
 
 - **Object Storage**: Verify your bucket versioning settings or external backup strategy
 - **Functions**: Ensure you can redeploy from version-controlled source code
+- **AI Gateway**: Model routing and rate-limit configuration is platform-global and is not restored with the database—back up and reconfigure separately
 - **Secrets**: Document external configuration (Better Auth provider credentials, API keys) that must be restored independently
 
 Database restores do **not** affect Object Storage buckets, Functions deployments, or AI Gateway configuration. See [Backup & recovery](/docs/platform/backup-recovery) for a complete disaster recovery strategy across all backend components.

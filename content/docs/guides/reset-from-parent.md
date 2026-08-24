@@ -10,7 +10,7 @@ summary: >-
   cannot be reset, and branches with their own children must have those children
   deleted first.
 enableTableOfContents: true
-updatedOn: '2026-08-24T14:50:50.826Z'
+updatedOn: '2026-08-24T14:59:06.918Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -133,7 +133,7 @@ This strategy preserves a stable connection string for your development environm
 <Admonition type="important" title="What resets and what doesn't">
 **Resets:** Postgres databases, roles, schema, data, and Managed Better Auth state (stored in the `neon_auth` schema).
 
-**Does NOT reset:** Object Storage buckets, Functions deployments, and AI Gateway configuration remain unchanged. If your workflow depends on these, you'll need to handle them separately. See [Backup & recovery](/docs/platform/backup-recovery) for recovery strategies.
+**Does NOT reset:** Object Storage bucket contents, Functions deployments, and AI Gateway configuration remain unchanged. A reset does not revert these components. If your workflow depends on them, you'll need to handle them separately. See [Backup & recovery](/docs/platform/backup-recovery) for the complete boundary.
 
 **Gotcha:** Logical replication slots and subscriptions are **not inherited** by a branch after reset. You'll need to recreate them if your workflow uses logical replication.
 </Admonition>

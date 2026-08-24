@@ -28,7 +28,7 @@ Because Managed Better Auth stores its state inside your Postgres database (in t
 Database restore operations do **not** revert:
 
 - **Object Storage buckets**: Files and objects stored in Neon Object Storage remain unchanged. Bucket contents are not rolled back when you restore a database.
-- **Functions deployments**: Deployed functions and their versions are not reverted. The function code that was deployed remains active regardless of database restores.
+- **Functions deployments**: A branch keeps whatever function version it has. Database restores do not revert Functions deployments.
 - **AI Gateway configuration**: Model routing, rate limits, and gateway settings are platform-global and are not affected by database restores.
 
 These products maintain their own state independent of the database timeline. If you need to recover or revert these components, you must handle them separately.
@@ -37,53 +37,13 @@ These products maintain their own state independent of the database timeline. If
 
 - **Logical replication**: Replication slots and subscriptions are **not inherited** by a branch. After restoring, you'll need to recreate logical replication configurations.
 
-## Recovery strategy by product
+## Recovering each component
 
-To build a complete disaster recovery plan, you need to address each backend component separately:
+Each backend component has its own recovery documentation:
 
-### Postgres database + Managed Better Auth
-
-Use Neon's built-in database backup and restore:
-
-- [Instant restore (PITR)](/docs/postgres/backup-restore/branch-restore) — Roll back to any point within your history window
-- [Snapshots](/docs/guides/backup-restore) — Create manual or scheduled restore points
-- [History window configuration](/docs/postgres/backup-restore/history-window) — Control how far back you can restore
-
-### Object Storage
-
-Object Storage recovery depends on your own backup strategy:
-
-- **Versioning**: If enabled for your buckets, you can recover previous versions of objects (check your bucket configuration for versioning status and retention)
-- **External backups**: Set up your own backup process to copy critical objects to external storage
-- **Application-level recovery**: Rebuild objects from source data or application state
-
-See [Object Storage documentation](/docs/storage) for durability details and versioning capabilities.
-
-### Functions
-
-Functions are immutable once deployed. Recovery approaches:
-
-- **Redeploy from source**: Functions should be deployed from version-controlled source code. To recover, redeploy the correct version from your repository.
-- **Version history**: Previous function versions remain available unless explicitly deleted. You can revert to an earlier deployment if needed.
-
-See [Functions documentation](/docs/functions) for deployment and versioning details.
-
-### Secrets and configuration
-
-Environment variables, API keys, and other secrets are not stored in the database:
-
-- **Better Auth configuration**: External provider credentials, OAuth apps, and signing keys are configured outside the database. Back these up separately in your secrets management system.
-- **Application secrets**: Database connection strings, API keys, and other application configuration must be backed up independently.
-
-## Testing your restore workflow
-
-Before you need it in production:
-
-1. **Test database restore**: Practice restoring a branch from both instant restore and snapshots
-2. **Document Object Storage recovery**: Identify which buckets contain critical data and verify your backup or versioning strategy
-3. **Verify Functions redeployment**: Ensure you can redeploy functions from source in your CI/CD pipeline
-4. **Inventory secrets**: Document all external configuration and secrets needed to restore a fully functioning environment
-
-See [Getting ready for production](/docs/get-started/production-checklist#test-your-restore-workflow) for a complete production readiness checklist.
+- **Postgres database + Managed Better Auth**: [Backup & restore](/docs/postgres/backup-restore/backups) — instant restore, snapshots, and history window configuration
+- **Object Storage**: [Object Storage documentation](/docs/storage) — durability, versioning, and backup strategies
+- **Functions**: [Functions documentation](/docs/functions) — deployment and recovery
+- **Disaster recovery testing**: [Production checklist](/docs/get-started/production-checklist#test-your-restore-workflow) — testing your complete recovery workflow
 
 <NeedHelp/>
