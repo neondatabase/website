@@ -72,7 +72,7 @@ CREATE TABLE users (
 INSERT INTO users (name, email) VALUES ('John Doe', 'john@example.com');
 ```
 
-Before that change reaches the users table on disk, Postgres appends it to the WAL. The log is binary, but pg_waldump will render it. The records for this insert look roughly like this:
+Before that change reaches the users table on disk, Postgres appends it to the WAL.
 
 ```
 rmgr: Transaction  lsn: 0/03000020  desc: BEGIN
@@ -83,33 +83,35 @@ rmgr: Transaction  lsn: 0/030000A0  desc: COMMIT 2024-04-20 10:00:00.123456 EST
 
 These are four records, and one transaction. Note how each has an LSN (log sequence number), a monotonically increasing identifier.
 
-The heap and btree lines also name the exact 8 KB page that changed. The log does not say "a row was added." It says which page, in which relation, at which point in the timeline.
+The heap and btree lines also name the exact page that changed. The log does not say "a row was added" - it says which page, in which relation, at which point in the timeline.
 
-Read that as a recovery mechanism and it is a list of work to redo after a crash. But if you read it as a transaction journal, it is something else - a complete, ordered, byte-level account of every page the database has ever changed, with a unique name on every entry.
+Read this as a recovery mechanism and it is a list of work to redo after a crash. But if you read it as a transaction journal, it is something else - a complete, ordered, byte-level account of every page the database has ever changed, with a unique name on every entry.
 
 That name, the LSN, is the part that matters most. It means the timeline is already addressable. Nothing needs to be added to Postgres to make "the database as of a point in time" a well-defined thing. It only needs a storage layer that keeps the log around and can answer questions against it.
 
 ## Making the log the source of truth
 
-In a conventional Postgres deployment, the WAL is a means to an end. The data files are the database, the log protects them, and the log is trimmed once its records are safely applied. Storage is simply a disk attached to the machine running Postgres, and everything about the database's identity is tied to that machine.
+In a conventional Postgres deployment, the WAL is a means to an end. Storage is a disk attached to the machine running Postgres, and everything about the database's identity is tied to that machine.
 
 Now, let’s invert it. Make the log the database, and the data files a derived, cached representation of it. Then you can keep the full timeline, and you no longer have to move data to copy or rewind the database. History becomes addressable, so a database “copy” becomes a pointer instead of a second set of files. This makes deployments, restores, and replicas cheap enough to treat like code.
 
-That’s what we did in Lakebase Postgres. Concretely, we split the system into two layers:
+That’s what we did in [Lakebase Postgres](https://neon.com/docs/postgres/overview). We split the system into two layers:
 
 ### The compute layer
 
-The compute layer runs standard Postgres. It parses SQL, plans and executes queries, enforces MVCC, manages locks and indexes.
-
-Nothing in the query engine is rewritten. What changes is what the compute node is responsible for: it exists to execute work, not to preserve data. It has RAM for shared buffers and local NVMe as a page cache, and it can start, stop, scale, or die at any moment without putting durability at risk.
+Compute in Lakebase Postgres runs standard Postgres: it parses SQL, plans and executes queries, enforces MVCC, manages locks and indexes. Nothing in the query engine is rewritten - what changes vs traditional Postgres is what the compute node is responsible for: it exists to execute work, not to preserve data. It has RAM for shared buffers and local NVMe as a page cache, and it can start, stop, scale, or die at any moment without putting durability at risk.
 
 ### The storage layer
 
 The storage layer owns correctness, durability, and history. It outlives any individual compute node, and it is built from three components with distinct jobs:
 
-- Safekeepers replicate the WAL. When the compute node generates WAL records, it streams them to several safekeepers, and a transaction is committed once a quorum acknowledges the record through [a Paxos-based protocol](https://neon.com/blog/paxos). Durability is a property of replication and consensus rather than of one machine's fsync.
-- The pageserver turns WAL into pages. It combines base pages with committed WAL records to materialize the version of a page that a given query needs, and it persists those materialized versions into object storage asynchronously.
-- Object storage holds long-term, immutable history: materialized page versions and historical states, kept as an append-only record rather than a mutable filesystem.
+- Safekeepers - to replicate the WAL. When the compute node generates WAL records, it streams them to several safekeepers, and a transaction is committed once a quorum acknowledges the record through [a Paxos-based protocol](https://neon.com/blog/paxos). Durability is a property of replication and consensus rather than of one machine's fsync.
+- Pageservers - to turns WAL into pages. Another component called the Pageserver combines base pages with committed WAL records to materialize the version of a page that a given query needs, and it persists those materialized versions into object storage asynchronously.
+- Object storage - where the immutable history is stored. S3 stores materialized page versions and historical states, kept as an append-only record rather than a mutable filesystem.
+
+Let's take a look in more detail. 
+
+## How requests move through storage
 
 ### The write path
 
@@ -120,39 +122,36 @@ A commit in this system looks like this:
 3. The transaction is committed once a quorum of safekeepers has acknowledged the record. That is the point where the client hears success.
 4. Page materialization happens afterward, in the storage layer, off the transaction's critical path. A commit never waits for pages to be written or uploaded.
 
-This design might get an obvious objection: that step 2 adds a network hop to the commit path. But any Postgres deployment that takes durability seriously is already running synchronous replication, which is also a network hop. Externalizing the WAL replaces one network round trip with another rather than adding one.
-
 ### The read path
 
-Every read request from a compute node carries a page identifier and an LSN, and the storage layer returns the page as it existed at that LSN. This GetPage@LSN is a central operation in this architecture.
+Reads are a central operation in this architecture. When the compute node asks storage for a page, the request carries a page identifier and an LSN, and storage returns that page as it existed at that LSN. That call is `GetPage@LSN`. Serving it fast is the key.
 
-Serving it takes a preference order:
+When Postgres needs a page, it tries local first:
 
-First comes RAM: for Postgres shared buffers, exactly as in any Postgres.
-
-Then comes the local NVMe - still fast, still local. If the page is not in memory, the compute node checks its local disk cache
-
-Only on a local miss does the request cross the network into the pageserver. The pageserver then checks whether it already has that page version materialized. If not, it finds the most recent image of the page at or before the requested LSN, collects the WAL records on top of it, replays them, and returns the reconstructed page.
-
-The returned page is then cached in RAM and on NVMe, so the next read of it is local again.
+1. First hits RAM, as in any Postgres
+2. If it cannot be served with RAM, then comes the local NVMe cache - still fast, still local
+3. If there's a local miss, the request crosses the network into the pageserver. The pageserver then checks whether it already has that page version materialized. If not, it finds the most recent image of the page at or before the requested LSN, collects the WAL records on top of it, replays them, and returns the reconstructed page. The returned page is then cached in RAM and on NVMe, so the next read of it is local again.
 
 A primary node asks for the latest version of every page, so in steady state it behaves like any Postgres reading from a warm cache. But nothing in the protocol requires "latest." Ask for a page at an LSN from four hours ago and you get that page from four hours ago.
 
-The useful consequence is that the distinction between live data and historical backups disappears. There is one storage system. Old page versions are not a separate artifact kept somewhere else in a different format; they are the same immutable files, still addressable.
+The crucial consequence is that the distinction between live data and historical backups disappears. There is one storage system. Old page versions are not a separate artifact kept somewhere else in a different format; they are the same immutable files, still addressable.
 
-## Non-overwriting storage
+### Non-overwriting
 
 In other words, the pageserver never updates a file in place. Files are created, merged, and deleted, but never modified. This is a perfect fit for object storage, which does not offer random updates, and that makes history cheap enough to keep.
 
-Data is organized into two kinds of layer files:
+In this design, "data" is actually organized into two kinds of layer files:
 
 - An image layer holds a snapshot of every key in a key range at one LSN
-- A delta layer holds all the changes in a key and LSN range. Keys that were not modified are not stored. Incoming WAL is written out as delta layers.
+- A delta layer holds all the changes in a key and LSN range. Incoming WAL is written out as delta layers.
 
 Image layers are produced in the background, for two reasons: they shorten the replay chain a read has to walk, and they make old deltas collectable. Without them, reconstructing a page could require walking back arbitrarily far.
 
-So GetPage@LSN becomes a search: start at the requested key and LSN, walk down through the layers collecting WAL records for that page, and stop at the first image of it. To keep that search short, delta and image layers are reshuffled by background compaction, and layers that fall outside the retention window are garbage collected.
-
+So GetPage@LSN becomes a search: 
+1. start at the requested key and LSN
+2. walk down through the layers collecting WAL records for that page
+3. and stop at the first image of it
+  
 ## Finding the right layer, quickly
 
 The search described above sounds simple, but it is not. It is worth spending some time on, since it determines whether the whole design is viable.
