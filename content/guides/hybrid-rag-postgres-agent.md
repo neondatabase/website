@@ -4,7 +4,7 @@ subtitle: Ship hybrid keyword and vector retrieval, reciprocal rank fusion, and 
 author: rishi-raj-jain
 enableTableOfContents: true
 createdAt: '2026-08-25T00:00:00.000Z'
-updatedOn: '2026-08-24T23:33:24.862Z'
+updatedOn: '2026-08-25T00:00:00.000Z'
 ---
 
 When you start building retrieval-augmented generation (RAG), the typical first step is to choose an embedding model, turn on [pgvector](/docs/extensions/pgvector), add some chunks, and query with `ORDER BY embedding <=> query_vector LIMIT 5`. This vector search works for paraphrased questions, but has two main limitations as your project grows:
