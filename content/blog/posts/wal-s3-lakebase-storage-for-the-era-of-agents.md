@@ -34,13 +34,11 @@ seo:
   image: null
 ---
 
-Agents treat code as lightweight: branch it, deploy it, throw it away. The infrastructure under that code should work the same way.
-
 Working with an OLTP database is traditionally heavy and full of friction, but very little of that is a Postgres problem. Most of it is a storage problem: deployments, copies, restores, and replicas all mean moving large volumes of data around, and that is slow and expensive.
 
-The polar opposite is object storage. S3 is cheap, performant, almost invisible to operate. That is why the storage question keeps returning to the Postgres conversation - can object storage sit underneath a transactional database and make it lighter to work with?
+The polar opposite is object storage. S3 is cheap, performant, almost invisible to operate. That is why the storage question keeps returning - can object storage sit underneath Postgres and make it lighter to work with?
 
-This question is what started Neon. The answer depends less on how fast S3 is, and more on where do you place the source of truth.
+This question is what started Neon. The answer depends less on S3 itself and more on where do you place the source of truth.
 
 ## Two ways to think about a database
 
