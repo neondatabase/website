@@ -12,7 +12,7 @@ summary: >-
 tag: new
 tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-08-05T22:15:40.109Z'
+updatedOn: '2026-08-24T14:50:50.826Z'
 ---
 
 <Admonition type="note" title="Snapshots">
@@ -53,7 +53,7 @@ Instantly restore your branch to a specific time in its history.
 
 <TabItem>
 
-You can restore from any time that falls within your project's [history window](/docs/introduction/history-window).
+You can restore from any time that falls within your project's [history window](/docs/postgres/backup-restore/history-window).
 
 1. **Select a time**
 
@@ -86,7 +86,7 @@ You can restore from any time that falls within your project's [history window](
 
    ![Backup branch on the Branches page](/docs/guides/backup_restore_backup_branch.png)
 
-   For information about removing backup branches, see [Deleting backup branches](/docs/introduction/branch-restore#deleting-backup-branches).
+   For information about removing backup branches, see [Deleting backup branches](/docs/postgres/backup-restore/branch-restore#deleting-backup-branches).
 
 </TabItem>
 
@@ -101,6 +101,10 @@ neon branches restore development ^self@2025-01-01T00:00:00Z --preserve-under-na
 This command resets the target branch `development` to its state at the start of 2025. The command also preserves the original state of the branch in a backup file called `development_old` using the `preserve-under-name` parameter (mandatory when resetting to self).
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/cli/branches#restore).
+
+<Admonition type="note">
+Instant restore reverts Postgres database data and Managed Better Auth state (stored in the `neon_auth` schema). Object Storage buckets, Functions deployments, and AI Gateway configuration are not affected by database restores. See [Backup & recovery](/docs/platform/backup-recovery) for recovery strategies for other backend components.
+</Admonition>
 
 </TabItem>
 
@@ -166,7 +170,7 @@ Use the [snapshots create](/docs/cli/snapshots#create) command to snapshot a bra
 neon snapshots create --branch main --name pre-migration
 ```
 
-To capture an earlier point within the branch's [history window](/docs/introduction/history-window), pass `--timestamp` or `--lsn`. The two options are mutually exclusive.
+To capture an earlier point within the branch's [history window](/docs/postgres/backup-restore/history-window), pass `--timestamp` or `--lsn`. The two options are mutually exclusive.
 
 ```bash
 neon snapshots create --branch main --timestamp 2025-07-29T21:00:00Z
@@ -208,7 +212,7 @@ For all subcommands and flags, see the [snapshots](/docs/cli/snapshots) CLI refe
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](/docs/reference/api/snapshots/create-snapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/introduction/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](/docs/reference/api/snapshots/create-snapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [history window](/docs/postgres/backup-restore/history-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
 
 This endpoint takes its parameters in the query string. It has no request body, and a body you send is ignored without an error.
 
@@ -692,5 +696,6 @@ Use this option if you need to inspect the restored data before you switch over 
 
 - Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
 - **Reset from parent is unavailable on child branches for up to 24 hours after restoring a parent from a snapshot.** When you restore a branch from a snapshot, any child branches of that restored branch cannot use the [Reset from parent](/docs/guides/reset-from-parent) feature for up to 24 hours.
+- Logical replication slots and subscriptions are **not inherited** by branches created from or restored to snapshots. You'll need to recreate them after restore.
 
 <NeedHelp/>

@@ -15,10 +15,15 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/restore-window
-updatedOn: '2026-06-05T17:20:32.620Z'
+  - /docs/introduction/history-window
+updatedOn: '2026-08-24T14:50:50.826Z'
 ---
 
-**Instant restore** is Neon's point-in-time recovery feature: you can roll a root branch back to an earlier state without copying the whole database. Instant restore (and Time Travel queries, branching from past states, and snapshots) rely on Neon retaining a **history** of changes. The **history window** is the Console control—on **Settings → Instant restore**—that sets how long that change history is kept, which defines how far back instant restore and the other features can reach.
+**Instant restore** is Neon's point-in-time recovery feature: you can roll a root branch's database timeline back to an earlier state without copying the whole database. Instant restore (and Time Travel queries, branching from past states, and snapshots) rely on Neon retaining a **history** of changes. The **history window** is the Console control—on **Settings → Instant restore**—that sets how long that change history is kept, which defines how far back instant restore and the other features can reach.
+
+<Admonition type="note">
+The history window controls retention for Postgres database changes (including Managed Better Auth data in the `neon_auth` schema). Object Storage, Functions, and AI Gateway have separate durability models. See [Backup & recovery](/docs/platform/backup-recovery) for the complete picture.
+</Admonition>
 
 ## Defaults and plan limits
 
@@ -122,8 +127,8 @@ See [Getting ready for production](/docs/get-started/production-checklist#size-t
 
 The history window setting bounds how far back these capabilities can go:
 
-- [Instant restore](/docs/introduction/branch-restore): Restore a root branch to an earlier point in time
-- [Time Travel](/docs/guides/time-travel-assist): Query historical data
+- [Instant restore](/docs/postgres/backup-restore/branch-restore): Restore a root branch to an earlier point in time
+- [Time Travel](/docs/postgres/backup-restore/time-travel-assist): Query historical data
 - [Branching](/docs/introduction/branching): Create branches from past states
 - [Snapshots](/docs/guides/backup-restore): Capture and restore from specific points
 

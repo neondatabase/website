@@ -8,7 +8,9 @@ summary: >-
   tooling; choose `pg_dump` workflows for business continuity, disaster
   recovery, or compliance. Each strategy links to a dedicated setup guide.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+redirectFrom:
+  - /docs/manage/backups
+updatedOn: '2026-08-24T14:50:50.826Z'
 ---
 
 <InfoBlock>
@@ -19,7 +21,8 @@ updatedOn: '2026-07-31T15:27:48.506Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/introduction/branch-restore">Instant restore</a>
+  <a href="/docs/postgres/backup-restore/branch-restore">Instant restore</a>
+  <a href="/docs/platform/backup-recovery">Backup & recovery</a>
 </DocsList>
 
 </InfoBlock>
@@ -30,13 +33,17 @@ Neon supports different backup strategies, which you can use separately or in co
 
 ## Instant restore
 
-With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes, ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your database to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can automatically retain a "history" of changes, ranging from 1 day up to 30 days, depending on your Neon plan. This feature lets you restore your Postgres database and Managed Better Auth data to any specific moment without the need for traditional database backups or separate backup automation. It's ideal if your primary concern is fast recovery after an unexpected event.
 
-With this strategy, the only required action is setting your desired [history window](/docs/introduction/history-window). Please keep in mind that increasing your history window also increases storage, as changes to your data are retained for a longer period.
+<Admonition type="note">
+Instant restore reverts Postgres data and Managed Better Auth state (stored in the `neon_auth` schema). Object Storage buckets, Functions deployments, and AI Gateway configuration are not affected. See [Backup & recovery](/docs/platform/backup-recovery) for recovery strategies for other backend components.
+</Admonition>
+
+With this strategy, the only required action is setting your desired [history window](/docs/postgres/backup-restore/history-window). Please keep in mind that increasing your history window also increases storage, as changes to your data are retained for a longer period.
 
 ![History window](/docs/manage/history_retention.png)
 
-To get started, see [Instant restore](/docs/introduction/branch-restore).
+To get started, see [Instant restore](/docs/postgres/backup-restore/branch-restore).
 
 ## Backups with `pg_dump`
 

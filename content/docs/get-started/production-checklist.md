@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-08-07T13:46:01.605Z'
+updatedOn: '2026-08-24T14:50:50.826Z'
 ---
 
 <CheckList title="Production checklist">
@@ -156,15 +156,15 @@ Keep reading:
 
 ## Size the history window for instant restore
 
-**[Instant restore](/docs/introduction/branch-restore)** lets you roll a branch back in time. How far back you can go depends on the **history window** you configure (under **Settings → Instant restore**). On paid plans, the default history window is 1 day, which you can increase up to 30 days.
+**[Instant restore](/docs/postgres/backup-restore/branch-restore)** lets you roll a branch's database timeline back in time. How far back you can go depends on the **history window** you configure (under **Settings → Instant restore**). On paid plans, the default history window is 1 day, which you can increase up to 30 days.
 
 A longer history window gives you more flexibility to recover from bugs discovered later or accidental data loss. However, longer windows retain more change history, which increases **History** usage on your bill. Choose a window that balances recovery needs with predictable storage costs.
 
-Keep reading: [Storage and billing for instant restore](/docs/introduction/history-window#storage-and-billing)
+Keep reading: [Storage and billing for instant restore](/docs/postgres/backup-restore/history-window#storage-and-billing)
 
 ## Consider snapshot schedules
 
-Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While **[instant restore](/docs/introduction/branch-restore)** lets you roll back to any moment still inside your **history window**, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen history window.
+Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While **[instant restore](/docs/postgres/backup-restore/branch-restore)** lets you roll back to any moment still inside your **history window**, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen history window.
 
 Snapshot schedules are only available on [root branches](/docs/manage/branches#root-branch).
 
@@ -176,13 +176,21 @@ Keep reading: [Snapshot schedules](/docs/guides/backup-restore#create-backup-sch
 
 Don't wait for an incident to learn how restore works. Plan and test your recovery process in advance.
 
-Neon supports multiple restore patterns:
+**Database restore** (Postgres + Managed Better Auth) uses Neon's built-in capabilities:
 
 - [Instant branch restores](/docs/guides/backup-restore#instantly-restore-a-branch), where the existing branch is restored to a previous state
 - [Restore from a snapshot into the same branch](/docs/guides/backup-restore#one-step-restore)
 - [Restore from a snapshot into a new branch](/docs/guides/backup-restore#multi-step-restore)
 
 Plan and test which restore method you will use for production incidents, how your application will switch connections if a new branch is created, and how you will validate restored data before resuming traffic.
+
+**Other backend components** require separate recovery strategies:
+
+- **Object Storage**: Verify your bucket versioning settings or external backup strategy
+- **Functions**: Ensure you can redeploy from version-controlled source code
+- **Secrets**: Document external configuration (Better Auth provider credentials, API keys) that must be restored independently
+
+Database restores do **not** affect Object Storage buckets, Functions deployments, or AI Gateway configuration. See [Backup & recovery](/docs/platform/backup-recovery) for a complete disaster recovery strategy across all backend components.
 
 ## Clean up your branches regularly
 
