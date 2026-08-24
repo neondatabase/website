@@ -153,7 +153,7 @@ In this design, "data" is actually organized into two kinds of layer files:
 
 Image layers are produced in the background, for two reasons: they shorten the replay chain a read has to walk, and they make old deltas collectable. Without them, reconstructing a page could require walking back arbitrarily far.
 
-So GetPage@LSN becomes a search: 
+So `GetPage@LSN` becomes a search: 
 1. start at the requested key and LSN
 2. walk down through the layers collecting WAL records for that page
 3. and stop at the first image of it
