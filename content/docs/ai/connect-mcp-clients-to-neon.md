@@ -66,12 +66,15 @@ This writes the MCP config to your editor. Add `-g` for global (user-level) inst
 | Gemini CLI                | `gemini-cli`         |
 | GitHub Copilot CLI        | `github-copilot-cli` |
 | Goose                     | `goose`              |
+| Kilo Code                 | `kilo-code`          |
+| Kimi Code                 | `kimi-code`          |
+| Kiro CLI                  | `kiro-cli`           |
 | MCPorter                  | `mcporter`           |
 | OpenCode                  | `opencode`           |
 | VS Code                   | `vscode`             |
 | Zed                       | `zed`                |
 
-**Aliases:** `cline-vscode` → `cline`, `gemini` → `gemini-cli`, `github-copilot` → `vscode`. Config paths differ by agent and by project vs global (`-g`); see the [add-mcp README](https://github.com/neondatabase/add-mcp#supported-agents).
+**Aliases:** `cline-vscode` → `cline`, `gemini` → `gemini-cli`, `github-copilot` → `vscode`, `kilo`/`kilocode` → `kilo-code`, `kimi` → `kimi-code`, `kiro` → `kiro-cli`. Config paths differ by agent and by project vs global (`-g`); see the [add-mcp README](https://github.com/neondatabase/add-mcp#supported-agents).
 
 ## ChatGPT
 
@@ -387,7 +390,15 @@ See [fx MCP](https://fx.sh/docs/capabilities/mcp) for `/mcp reload`, `/mcp auth`
 
 ## Kimi Code
 
-Kimi Code doesn't use `add-mcp`. Instead, install Neon's [agent skills](https://github.com/neondatabase/agent-skills) repository as a plugin. Kimi reads its own manifest (`kimi.plugin.json`), which declares the Neon MCP Server, so this one command wires up the MCP connection along with the skills:
+Wire up the Neon MCP Server with add-mcp:
+
+```bash
+npx add-mcp https://mcp.neon.tech/mcp -a kimi-code
+```
+
+Restart Kimi Code (or run `/new` to start a fresh session). When the OAuth window opens, click **Authorize** to complete the connection.
+
+Alternatively, install Neon's [agent skills](https://github.com/neondatabase/agent-skills) repository as a plugin. Kimi reads its own manifest (`kimi.plugin.json`), which declares the Neon MCP Server, so this one command wires up the MCP connection along with the skills:
 
 ```bash
 /plugins install https://github.com/neondatabase/agent-skills
@@ -396,6 +407,14 @@ Kimi Code doesn't use `add-mcp`. Instead, install Neon's [agent skills](https://
 Plugin changes apply to new sessions, so run `/new` afterward. See [Agent Skills](/docs/ai/agent-skills) for more on what's included.
 
 ## Kiro
+
+Wire up the Neon MCP Server with add-mcp:
+
+```bash
+npx add-mcp https://mcp.neon.tech/mcp -a kiro-cli
+```
+
+Restart Kiro (or enable the MCP server in settings). When the OAuth window opens, click **Authorize** to complete the connection.
 
 For manual configuration, Kiro reads **`~/.kiro/settings/mcp.json`** (global) or **`.kiro/settings/mcp.json`** (project). See [Kiro MCP documentation](https://kiro.dev/docs/mcp/).
 
