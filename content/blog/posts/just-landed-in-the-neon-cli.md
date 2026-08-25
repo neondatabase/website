@@ -15,7 +15,8 @@ categories:
 authors:
   - carlota-soto
 cover:
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/just-landed-in-the-neon-cli/neon-just-landed.jpg
   alt: null
 isFeatured: false
 seo:
