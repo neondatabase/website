@@ -54,7 +54,7 @@ const CopyButton = ({ value, label = 'Copy', ariaLabel }) => {
     <button
       className="shrink-0 rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium text-gray-new-70 transition-colors hover:border-white/30 hover:text-white"
       type="button"
-      aria-label={ariaLabel ?? label}
+      aria-label={isCopied ? 'Copied' : (ariaLabel ?? label)}
       onClick={() => handleCopy(value)}
     >
       {isCopied ? 'Copied' : label}
@@ -122,7 +122,7 @@ Capability.propTypes = {
   granted: PropTypes.bool.isRequired,
 };
 
-const ProvisionResult = ({ result }) => {
+const ProvisionResult = ({ result, onReset }) => {
   const headingRef = useRef(null);
   const { capabilities, claim, credentials, project } = result;
   const formatTime = (value) =>
@@ -208,22 +208,34 @@ const ProvisionResult = ({ result }) => {
           transfer finishes.
           {stayEnabledSentence} The project itself expires on {expiresAt}.
         </p>
-        <Button
-          className="mt-4 w-full"
-          size="new"
-          theme="outlined-new"
-          to={claim.verification_uri_complete}
-          target="_blank"
-          rel="noreferrer"
-        >
-          Open the claim link
-        </Button>
+        <div className="mt-4 flex flex-col gap-3">
+          <Button
+            className="w-full"
+            size="new"
+            theme="outlined-new"
+            to={claim.verification_uri_complete}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open the claim link
+          </Button>
+          <Button
+            className="w-full"
+            size="new"
+            theme="green-underlined"
+            type="button"
+            handleClick={onReset}
+          >
+            Create another project
+          </Button>
+        </div>
       </div>
     </div>
   );
 };
 
 ProvisionResult.propTypes = {
+  onReset: PropTypes.func.isRequired,
   result: PropTypes.shape({
     capabilities: PropTypes.arrayOf(
       PropTypes.shape({
@@ -289,7 +301,7 @@ const Provisioner = () => {
   };
 
   if (state.status === 'success') {
-    return <ProvisionResult result={state.result} />;
+    return <ProvisionResult result={state.result} onReset={() => setState({ status: 'idle' })} />;
   }
 
   return (

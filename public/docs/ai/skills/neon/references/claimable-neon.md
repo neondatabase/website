@@ -32,8 +32,6 @@ npm i @neon/config
 neon claim --help
 ```
 
-If that help lists `create`, run `neon claim create --env-pull`. If it does not, use [If the Neon CLI cannot be used](#if-the-neon-cli-cannot-be-used).
-
 `neon claim create` reads `neon.ts` when it is present. It writes provisioned vars to an existing `.env`, otherwise `.env.local`, and gitignores that file. If `.env` or `.env.local` already has a `DATABASE_URL` (or other Neon-managed keys), pass `--file <path>` or `--no-env-pull`. The identity assertion is the pre-claim credential.
 
 Before claim, Postgres is always granted; Auth and the Data API are granted when requested. Functions, Object Storage, and AI Gateway come back with `granted: false` and `reason: "requires_claim"`. The CLI prints those as `denied_capabilities`. Report what you were given. Do not retry or strip them.

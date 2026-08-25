@@ -66,7 +66,7 @@ Creates a claim code and opens the URL where a human signs in and takes the proj
 neon claim accept --no-open
 ```
 
-Continuing to Neon from that URL freezes issuance and rotates `DATABASE_URL` before the console org picker.
+Opening the URL does not freeze access. Continuing to Neon from that URL starts the transfer and rotates `DATABASE_URL` before the console org picker.
 
 ## neon claim list (#list)
 
