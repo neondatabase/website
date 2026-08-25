@@ -10,8 +10,8 @@ import cubicBezierEasing from 'utils/cubic-bezier-easing';
 const IMAGE_ROOT = '/images/pages/home/scale-your-app';
 const SCENE_WIDTH = 2154;
 const SCENE_HEIGHT = 916;
-const REVEAL_DURATION = 3600;
-const revealEasing = cubicBezierEasing([0.17, 0.64, 0.84, 0.48]);
+const REVEAL_DURATION = 2800;
+const revealEasing = cubicBezierEasing([0.16, 0.68, 0.88, 0.54]);
 
 const CARD_POSITIONS = [
   [1, 62],
