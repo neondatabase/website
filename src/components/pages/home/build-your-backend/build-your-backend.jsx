@@ -53,7 +53,7 @@ const SERVICE_ITEMS = [
 
 const BuildYourBackend = () => (
   <section
-    className="build-your-backend mt-49 overflow-hidden bg-black-pure safe-paddings lg:mt-36 md:mt-24 sm:mt-18"
+    className="build-your-backend mt-53 overflow-hidden bg-black-pure safe-paddings lg:mt-24 md:mt-20 sm:mt-18"
     id="build-your-backend"
     aria-labelledby="build-your-backend-heading"
   >
@@ -79,7 +79,7 @@ const BuildYourBackend = () => (
         </h2>
       </div>
 
-      <div className="mt-32.5 lg:mt-16 md:mt-14 sm:mt-12">
+      <div className="mt-33 lg:mt-16 md:mt-14 sm:mt-12">
         <BackendServices items={SERVICE_ITEMS} />
       </div>
     </Container>

@@ -133,8 +133,12 @@ const DeploymentCards = () => {
   }, [inView, isDocumentVisible, shouldReduceMotion]);
 
   return (
-    <div className="pointer-events-none absolute inset-0" ref={ref} aria-hidden="true">
-      <div className="absolute top-0 left-0 h-[916px] w-[112.1875vw] origin-top-left lg:left-1/2 lg:min-w-[1120px] lg:-translate-x-1/2 md:min-w-[960px]">
+    <div
+      className="pointer-events-none absolute inset-y-0 left-1/2 w-full max-w-[1920px] -translate-x-1/2"
+      ref={ref}
+      aria-hidden="true"
+    >
+      <div className="absolute top-0 left-0 aspect-[2154/916] w-[112.1875%] origin-top-left lg:top-10 lg:left-1/2 lg:min-w-[1120px] lg:-translate-x-3/5 md:min-w-[960px]">
         {CARD_POSITIONS.map(([left, top], index) => (
           <Image
             className="absolute h-auto w-[15.3203%] max-w-[330px] select-none"

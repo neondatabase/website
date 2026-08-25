@@ -14,29 +14,73 @@ import useRiveAnimation from 'hooks/use-rive-animation';
 import { cn } from 'utils/cn';
 import { createRiveFontLoader } from 'utils/rive-font-loader';
 
-import Chat from './chat';
+import Chat, { CHAT_PROMPTS } from './chat';
 
 const VISUAL_WIDTH = 1184;
 const VISUAL_HEIGHT = 878;
 const RIVE_WIDTH = 704;
 const RIVE_HEIGHT = 878;
 const CHAT_WIDTH = 384;
-const CHAT_HEIGHT = 788;
+const MOBILE_CHAT_HEIGHT = 295;
 const MOBILE_VISUAL_GAP = 32;
 const MOBILE_VIEWPORT_QUERY = '(max-width: 47.9375rem)';
-const ANIMATION_DURATION = 15500;
+const SEND_DURATION = 150;
+const MESSAGE_REVEAL_DURATION = 250;
+const PAUSE_DURATION = 1000;
 
-const TIMELINE = [
-  { at: 0, riveState: 1, visibleMessages: 0 },
-  { at: 333, riveState: 1, visibleMessages: 1 },
-  { at: 5833, riveState: 1, visibleMessages: 2 },
-  { at: 7000, riveState: 2, visibleMessages: 2 },
-  { at: 7167, riveState: 2, visibleMessages: 3 },
-  { at: 10333, riveState: 2, visibleMessages: 4 },
-  { at: 11833, riveState: 2, visibleMessages: 5 },
-  { at: 12000, riveState: 3, visibleMessages: 5 },
-  { at: 15000, riveState: 3, visibleMessages: 6 },
+const PROMPT_STEPS = [
+  { prompt: CHAT_PROMPTS[0], typeDuration: 1400, riveState: 1, riveDuration: 5000 },
+  { prompt: CHAT_PROMPTS[1], typeDuration: 800, riveState: 2, riveDuration: 2500 },
+  { prompt: CHAT_PROMPTS[2], typeDuration: 900, riveState: 3, riveDuration: 3000 },
 ];
+
+const buildAnimationSequence = () => {
+  const timeline = [{ at: 0, riveState: 0, visibleMessages: 0 }];
+  const typingWindows = [];
+  let elapsed = 0;
+  let currentRiveState = 0;
+
+  PROMPT_STEPS.forEach(({ prompt, typeDuration, riveState, riveDuration }, index) => {
+    const typingStartsAt = elapsed;
+    const typingEndsAt = typingStartsAt + typeDuration;
+    const sendEndsAt = typingEndsAt + SEND_DURATION;
+
+    typingWindows.push({ prompt, startsAt: typingStartsAt, typingEndsAt, sendEndsAt });
+
+    elapsed = sendEndsAt;
+    timeline.push({ at: elapsed, riveState: currentRiveState, visibleMessages: index * 2 + 1 });
+
+    elapsed += MESSAGE_REVEAL_DURATION + PAUSE_DURATION;
+    currentRiveState = riveState;
+    timeline.push({ at: elapsed, riveState, visibleMessages: index * 2 + 1 });
+
+    elapsed += riveDuration;
+    timeline.push({ at: elapsed, riveState, visibleMessages: index * 2 + 2 });
+
+    elapsed += MESSAGE_REVEAL_DURATION;
+  });
+
+  return { duration: elapsed, timeline, typingWindows };
+};
+
+const ANIMATION_SEQUENCE = buildAnimationSequence();
+const ANIMATION_DURATION = ANIMATION_SEQUENCE.duration;
+
+const { timeline: TIMELINE, typingWindows: TYPING_WINDOWS } = ANIMATION_SEQUENCE;
+
+const getComposerText = (elapsed) => {
+  const typingWindow = TYPING_WINDOWS.find(
+    ({ startsAt, sendEndsAt }) => elapsed >= startsAt && elapsed < sendEndsAt
+  );
+
+  if (!typingWindow) return '';
+
+  const { prompt, startsAt, typingEndsAt } = typingWindow;
+  if (elapsed >= typingEndsAt) return prompt;
+
+  const progress = (elapsed - startsAt) / (typingEndsAt - startsAt);
+  return prompt.slice(0, Math.floor(progress * prompt.length));
+};
 
 const FINAL_MESSAGE_COUNT = 6;
 const RIVE_FONT_URL = '/fonts/pages/home/operate-with-agents/geist-mono.ttf';
@@ -50,6 +94,7 @@ const Animation = () => {
   const [visualWidth, setVisualWidth] = useState(null);
   const [isMobileLayout, setIsMobileLayout] = useState(false);
   const [timelineIndex, setTimelineIndex] = useState(0);
+  const [composerText, setComposerText] = useState('');
   const shouldReduceMotion = useReducedMotion() ?? false;
   const fontLoader = useMemo(() => createRiveFontLoader({ 'Geist Mono': RIVE_FONT_URL }), []);
 
@@ -151,6 +196,7 @@ const Animation = () => {
       appliedTimelineIndexRef.current = TIMELINE.length - 1;
       appliedRiveStateRef.current = 3;
       setTimelineIndex(TIMELINE.length - 1);
+      setComposerText('');
       setRiveState(3);
       rive?.play();
 
@@ -165,6 +211,11 @@ const Animation = () => {
     let animationFrame = null;
 
     const applyTimeline = (elapsed) => {
+      const nextComposerText = getComposerText(elapsed);
+      setComposerText((currentText) =>
+        currentText === nextComposerText ? currentText : nextComposerText
+      );
+
       let nextTimelineIndex = 0;
 
       for (let index = 1; index < TIMELINE.length; index += 1) {
@@ -223,14 +274,15 @@ const Animation = () => {
   const chatLeft = isMobileLayout
     ? (measuredWidth - CHAT_WIDTH * chatScale) / 2
     : 800 * desktopScale;
-  const chatTop = isMobileLayout ? RIVE_HEIGHT * riveScale + MOBILE_VISUAL_GAP : 0;
+  const chatTop = 0;
+  const riveTop = isMobileLayout ? MOBILE_CHAT_HEIGHT * chatScale + MOBILE_VISUAL_GAP : 0;
   const visualHeight = isMobileLayout
-    ? chatTop + CHAT_HEIGHT * chatScale
+    ? riveTop + RIVE_HEIGHT * riveScale
     : VISUAL_HEIGHT * desktopScale;
 
   return (
     <div
-      className="relative w-full overflow-hidden"
+      className="relative w-full overflow-hidden md:mx-auto md:max-w-sm"
       ref={setVisualRef}
       style={
         visualWidth === null
@@ -244,9 +296,10 @@ const Animation = () => {
           'absolute top-0 h-[878px] w-[704px] origin-top-left transition-opacity duration-300',
           isReady ? 'opacity-100' : 'opacity-0'
         )}
+        data-operate-rive
         style={{
           left: riveLeft,
-          transform: `scale(${riveScale})`,
+          transform: `translateY(${riveTop}px) scale(${riveScale})`,
         }}
       >
         {isIntersecting ? (
@@ -257,6 +310,8 @@ const Animation = () => {
       <LazyMotion features={domAnimation}>
         <Chat
           className="absolute top-0 left-0 origin-top-left"
+          composerText={composerText}
+          isCompact={isMobileLayout}
           style={{
             transform: `translate(${chatLeft}px, ${chatTop}px) scale(${chatScale})`,
           }}

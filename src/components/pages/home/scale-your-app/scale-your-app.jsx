@@ -7,7 +7,7 @@ import Startups from './startups';
 
 const ScaleYourApp = () => (
   <section
-    className="scale-your-app relative mt-65 overflow-hidden bg-black-pure safe-paddings text-white lg:mt-52 md:mt-40 sm:mt-28"
+    className="scale-your-app relative mt-40 overflow-hidden bg-black-pure safe-paddings text-white lg:mt-32 md:mt-28 sm:mt-24"
     id="scale-your-app"
     aria-labelledby="scale-your-app-heading"
   >

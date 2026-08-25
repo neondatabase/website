@@ -41,7 +41,7 @@ const ScaleNoise = () => (
 );
 
 const ScaleStat = () => (
-  <div className="h-[330px] w-[736px] border border-[#242628] bg-black-pure p-1 lg:w-[640px] md:h-[286px] md:w-full">
+  <div className="h-[330px] w-[736px] border border-[#242628] bg-black-pure p-1 xl:w-[640px] lg:w-md md:h-[286px] md:w-sm sm:h-auto sm:w-full">
     <div className="flex h-[37px] items-center justify-between bg-[#303236] px-3 font-mono text-base font-semibold text-white md:text-sm">
       <span>Trusted by giants</span>
       <span className="flex gap-2" aria-hidden="true">
@@ -55,7 +55,7 @@ const ScaleStat = () => (
         <Image src={`${ASSET_ROOT}/scale-window-arrow.svg`} width={18} height={18} alt="" />
       </span>
     </div>
-    <div className="px-[27px] pt-[92px] md:px-5 md:pt-15">
+    <div className="px-[27px] pt-[92px] md:px-5 md:pt-15 sm:pt-8 sm:pb-8">
       <strong className="block text-[98px] leading-none font-normal tracking-[-0.02em] text-white md:text-[5rem] sm:text-[4rem]">
         250M+
       </strong>
@@ -67,12 +67,12 @@ const ScaleStat = () => (
 );
 
 const Scale = () => (
-  <div className="relative h-[1051px] overflow-hidden lg:h-[1120px] md:h-[900px] sm:h-[760px]">
+  <div className="relative h-[1051px] overflow-hidden lg:h-[820] md:h-[700px] sm:h-[600px]">
     <div
       className="pointer-events-none absolute top-0 left-1/2 z-0 h-[1610px] w-[1920px] -translate-x-1/2 lg:h-[1120px] lg:w-[1336px] sm:h-[760px] sm:w-[906px]"
       aria-hidden="true"
     >
-      <div className="absolute top-[231px] left-1/2 h-[1176px] w-[1176px] -translate-x-1/2 overflow-hidden rounded-full lg:top-[163.5px] lg:h-[818px] lg:w-[818px] sm:top-[178px] sm:h-[555px] sm:w-[555px]">
+      <div className="absolute top-[231px] left-1/2 h-[1176px] w-[1176px] -translate-x-1/2 overflow-hidden rounded-full lg:top-[163.5px] lg:h-[818px] lg:w-[818px] sm:top-32 sm:h-[555px] sm:w-[555px]">
         <div className="absolute top-1/2 left-1/2 h-[1610px] w-[1920px] -translate-x-1/2 -translate-y-1/2 lg:h-[1120px] lg:w-[1336px] sm:h-[760px] sm:w-[906px]">
           <GlobeAnimation />
         </div>
@@ -91,14 +91,9 @@ const Scale = () => (
       />
     </Container>
 
-    <Container
-      className="pointer-events-none absolute inset-x-0 top-[570px] z-10 lg:top-[430px] md:top-[360px] sm:top-[325px]"
-      size="1600"
-    >
-      <div className="ml-56 lg:ml-0">
-        <ScaleStat />
-      </div>
-    </Container>
+    <div className="absolute top-[570px] left-1/2 -translate-x-3/4 lg:top-[430px] md:top-[360px] sm:inset-5 sm:top-88 sm:translate-x-0">
+      <ScaleStat />
+    </div>
   </div>
 );
 

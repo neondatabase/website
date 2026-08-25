@@ -4,9 +4,6 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
-import backgroundAccentOne from 'images/pages/home/agent-platform/background-accent-one.svg';
-import backgroundAccentTwo from 'images/pages/home/agent-platform/background-accent-two.svg';
-import backgroundNoise from 'images/pages/home/agent-platform/background-noise.svg';
 import efficientDevTestIcon from 'images/pages/home/agent-platform/efficient-dev-test-icon.svg';
 import lowEntryBarrierIcon from 'images/pages/home/agent-platform/low-entry-barrier-icon.svg';
 import multiTenancyIcon from 'images/pages/home/agent-platform/multi-tenancy-icon.svg';
@@ -41,27 +38,15 @@ const DecorativeBackground = () => (
     className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none lg:hidden"
     aria-hidden="true"
   >
-    <Image
-      className="absolute -top-84 -right-40 h-auto w-298.75 max-w-none"
-      src={backgroundNoise}
-      width={1195}
-      height={1559}
-      alt=""
-    />
-    <Image
-      className="absolute -top-72 -right-20 h-auto w-221.5 max-w-none"
-      src={backgroundAccentOne}
-      width={886}
-      height={1140}
-      alt=""
-    />
-    <Image
-      className="absolute -top-98 -right-70 h-auto w-212 max-w-none"
-      src={backgroundAccentTwo}
-      width={848}
-      height={1201}
-      alt=""
-    />
+    <div className="absolute top-56 right-0 h-[719px] w-[466px] translate-x-2/3 rotate-[31.195deg] rounded-[100%] bg-[linear-gradient(0deg,rgba(57,165,125,0.10)_0%,rgba(57,165,125,0.10)_100%),radial-gradient(70.97%_70.97%_at_50%_29.03%,#61756C_21.28%,rgba(97,117,108,0)_100%)] opacity-30 blur-3xl xl:hidden" />
+
+    <div className="absolute top-0 left-1/2 h-[1358px] w-[995px] translate-x-1/3 -translate-y-2/3 rotate-45 rounded-[100%]">
+      <div className="absolute top-1/2 left-1/2 h-[1000px] w-[648px] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-[linear-gradient(0deg,rgba(57,165,125,0.10)_0%,rgba(57,165,125,0.10)_100%),radial-gradient(70.97%_70.97%_at_50%_29.03%,#61756C_21.28%,rgba(97,117,108,0)_100%)] opacity-35 blur-2xl" />
+      <div className="absolute inset-0 rounded-[100%] bg-[radial-gradient(89.74%_48.14%_at_50%_25.91%,rgba(228,241,235,0.60)_28.09%,#E4F1EB_100%)] mix-blend-soft-light blur-2xl" />
+      <div className="absolute inset-0 overflow-hidden rounded-[100%] [mask-image:radial-gradient(100%_100%_at_50%_50%,black_40%,transparent_100%)] opacity-10">
+        <div className="absolute inset-0 bg-[url('/images/pages/home/agent-platform/noise.png')] bg-size-[256px_256px] bg-repeat" />
+      </div>
+    </div>
   </div>
 );
 
@@ -106,7 +91,7 @@ const AgentPlatform = () => (
               <h3 className="text-[1.75rem] leading-tight font-normal tracking-extra-tight md:text-2xl/tight sm:text-[1.375rem]/tight">
                 {title}
               </h3>
-              <p className="max-w-61 text-base leading-snug font-normal tracking-tight text-gray-new-20 md:max-w-full md:text-[0.9375rem] md:leading-snug">
+              <p className="max-w-xl text-base leading-snug font-normal tracking-tight text-pretty text-gray-new-20 md:text-[0.9375rem] md:leading-snug">
                 {description}
               </p>
             </div>

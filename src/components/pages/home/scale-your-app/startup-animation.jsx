@@ -84,8 +84,7 @@ const InitializationNoise = ({ asset }) => (
       <Image
         className="block size-full max-w-none"
         src={`${ASSET_ROOT}/${asset}`}
-        width={845}
-        height={522}
+        fill
         sizes="845px"
         alt=""
       />
@@ -307,7 +306,7 @@ const StartupAnimation = () => {
       />
       <LazyMotion features={domAnimation}>
         <m.div
-          className="absolute top-[229px] left-[607px] z-10 h-[173px] w-[398px] font-mono text-[#94979e] will-change-transform 2xl:right-0 2xl:left-auto lg:top-[250px] lg:right-0 md:top-[230px] md:h-[160px] md:w-[360px] sm:top-[219px] sm:right-auto sm:left-0 sm:w-full"
+          className="absolute top-[229px] left-[607px] z-20 h-[173px] w-[398px] font-mono text-[#94979e] will-change-transform 2xl:right-0 2xl:left-auto lg:top-[250px] lg:right-0 md:top-[230px] md:h-[160px] md:w-[360px] sm:top-[219px] sm:right-auto sm:left-0 sm:w-full"
           style={{
             opacity: shouldReduceMotion ? 1 : rightCardOpacity,
             y: shouldReduceMotion ? 0 : rightCardY,
@@ -334,7 +333,7 @@ const StartupAnimation = () => {
         </m.div>
 
         <m.div
-          className="absolute top-[361px] left-0 z-10 h-[248px] w-[511px] border border-[#242628] bg-black-pure px-8 pt-8 will-change-transform lg:top-[390px] md:w-[480px] sm:top-[407px] sm:h-[226px] sm:w-full sm:px-5 sm:pt-5"
+          className="absolute top-[361px] left-0 z-10 h-[248px] w-[511px] border border-[#242628] bg-black-pure px-8 pt-8 will-change-transform xl:top-112 md:w-[480px] sm:top-100 sm:h-[226px] sm:w-full sm:px-5 sm:pt-5"
           style={{
             opacity: shouldReduceMotion ? 1 : statCardOpacity,
             y: shouldReduceMotion ? 0 : statCardY,

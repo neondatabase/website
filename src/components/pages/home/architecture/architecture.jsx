@@ -5,9 +5,8 @@ import Container from 'components/shared/container';
 import Animation from './animation';
 
 const Highlight = ({ children }) => (
-  <mark className="relative inline bg-transparent">
-    <span className="absolute top-[0.15em] -right-1 bottom-[-0.025em] left-[-0.1em] bg-green-44/60" />
-    <span className="relative z-10 inline">{children}</span>
+  <mark className="-mr-[0.15em] -ml-[0.1em] bg-transparent bg-[linear-gradient(to_bottom,transparent_0.15em,rgba(57,165,125,0.6)_0.15em)] box-decoration-clone pr-[0.15em] pl-[0.1em]">
+    {children}
   </mark>
 );
 
@@ -17,7 +16,7 @@ Highlight.propTypes = {
 
 const Architecture = () => (
   <section
-    className="architecture scroll-mt-16 bg-[#E4F1EB] py-40 safe-paddings xl:pt-34 xl:pb-38 lg:scroll-mt-0 lg:pt-20 lg:pb-26 md:pt-16 md:pb-20"
+    className="architecture scroll-mt-16 overflow-hidden bg-[#E4F1EB] py-40 safe-paddings xl:pt-34 xl:pb-38 lg:scroll-mt-0 lg:pt-20 lg:pb-26 md:pt-16 md:pb-20"
     id="architecture"
   >
     <Container className="md:px-5!" size="1600">

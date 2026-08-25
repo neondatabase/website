@@ -29,7 +29,7 @@ const OperateWithAgentsVisual = () => (
 
 const OperateWithAgents = () => (
   <section
-    className="operate-with-agents relative mt-65 overflow-hidden bg-black-pure safe-paddings text-white lg:mt-52 md:mt-40 sm:mt-28"
+    className="operate-with-agents relative mt-40 overflow-hidden bg-black-pure safe-paddings text-white lg:mt-32 md:mt-28 sm:mt-24"
     id="operate-with-agents"
     aria-labelledby="operate-with-agents-heading"
   >
