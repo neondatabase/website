@@ -4,7 +4,7 @@ subtitle: 'Learn how to build an image API that resizes, crops, optimizes, analy
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-24T00:00:00.000Z'
-updatedOn: '2026-08-25T11:23:07.374Z'
+updatedOn: '2026-08-25T12:12:52.004Z'
 ---
 
 If you're building an application that handles images (profile avatars, product photos, or user uploads), you run into the same set of problems every time. Users upload 12-megapixel photos straight from their phones, and if you serve those files back as-is, pages get slow and bandwidth costs climb. Every image needs resizing for different layouts, cropping to fit, and re-encoding into modern formats like WebP. On top of that, every image needs alt text for accessibility and SEO.
@@ -495,7 +495,7 @@ You now have a working image processing API deployed on Neon Functions: five end
 
 ## Optional: Store processed images in your branch bucket
 
-The endpoints you've built return the processed bytes directly in the response. That works, but the same image gets reprocessed from scratch on every cache miss. The `Cache-Control: immutable` header only helps clients and CDNs, not your function. Storing each result in your branch's [Neon Object Storage](/docs/storage/overview) bucket turns this into a real media pipeline: process once, store, and serve from the bucket. The `AWS_*` credentials for the bucket are injected into your function automatically, so there are still no secrets in your code.
+The endpoints you've built return the processed bytes directly in the response. That works, but the same image gets reprocessed from scratch on every cache miss. The `Cache-Control: immutable` header only helps clients and CDNs, not your function. Storing each result in your branch's [Neon Object Storage](/docs/storage/overview) bucket turns this into a real media pipeline: process once, store, and serve from the bucket.
 
 ### Install the AWS SDK
 
@@ -607,36 +607,22 @@ curl -X POST "$API_URL/store?width=400&format=webp" -H "Content-Type: image/jpeg
 }
 ```
 
-The URL is a presigned GET link that works for an hour. The object also lives in your bucket, so you can list it with `neon buckets object list processed-images` or browse it in the Neon Console.
+The URL is a presigned GET link that works for an hour. The object also lives in your bucket, so you can list it with `neon buckets object list processed-images --recursive` or browse it in the Neon Console.
 
 </Steps>
 
-## Extending this workflow
+## Next steps
 
-The API you built processes images on the fly and returns them directly, which is a solid foundation. Because the function runs on your Neon branch with Postgres and Object Storage credentials already injected, you can grow it into a full media pipeline:
+Because the function runs on your Neon branch with Postgres and Object Storage credentials already injected, you can grow this API into a full media pipeline:
 
-- **Persist images with Neon Object Storage**: The `/store` route above shows the pattern: process, upload to your branch's S3-compatible bucket, and return a presigned URL. To go further, save originals alongside their processed variants, or switch the bucket to `public_read` for unauthenticated serving. See the [Object Storage docs](/docs/storage/overview).
 - **Cache transforms and captions in Postgres**: Image transforms are deterministic, so hash the image bytes plus the query parameters and cache the result location in a table. You can also store every caption and `/analyze` result alongside the image record, giving you a searchable media library with alt text included. `DATABASE_URL` is already injected into your function.
 - **Add authentication and rate limiting**: Image processing burns CPU, and AI captions burn tokens. Verify callers with a JWT and cap per-user usage using the pattern from [Build an LLM proxy with Neon Functions, Neon AI Gateway, and Managed Better Auth](/guides/llm-proxy-neon-functions).
-- **Smarter cropping**: Instead of cropping from the center, pass `position: sharp.strategy.attention` to `resize()` and Sharp crops around the most visually interesting region of the image.
-- **Remote images**: Accept a `?url=` parameter that fetches an image from a URL when the client has a link instead of the bytes, then run it through the same pipeline.
-
-## Source code
-
-You can find the complete source code for this example on GitHub.
-
-<DetailIconCards>
-<a href="https://github.com/dhanushreddy291/image-processing-api-neon-functions" description="Complete source code for the Image processing API example" icon="github">Image Processing API Example Repository</a>
-</DetailIconCards>
 
 ## Resources
 
 - [Neon Functions overview](/docs/compute/functions/overview)
-- [Neon Functions environment variables](/docs/compute/functions/environment-variables)
 - [Neon AI Gateway overview](/docs/ai-gateway/overview)
-- [AI Gateway models](/docs/ai-gateway/models)
 - [Neon Object Storage overview](/docs/storage/overview)
-- [Neon Object Storage get started](/docs/storage/get-started)
 - [Sharp API documentation](https://sharp.pixelplumbing.com/)
 - [Vercel AI SDK: Generate Text with Image Prompt](https://ai-sdk.dev/cookbook/node/generate-text-with-image-prompt)
 - [Neon AI SDK Provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider)
