@@ -37,9 +37,7 @@ const NEON_API = {
   docsUrl: 'https://neon.com/docs/reference/api',
 };
 
-// Claimable Neon. The resource and token endpoints stay on claimable.neon.tech.
-// The authorization server is a path issuer on neon.com so the apex well-known
-// document on neon.com remains unused.
+// A path issuer avoids publishing Claimable metadata at neon.com's apex.
 const CLAIMABLE = {
   issuer: 'https://neon.com/claimable',
   skillUrl: 'https://neon.com/auth.md',
@@ -87,9 +85,6 @@ function buildApiCatalog() {
   };
 }
 
-// /.well-known/oauth-authorization-server/claimable — RFC 8414 metadata for
-// issuer https://neon.com/claimable. Token, JWKS, identity, and claim stay on
-// the resource origin.
 function buildClaimableAuthorizationServer() {
   return {
     issuer: CLAIMABLE.issuer,
