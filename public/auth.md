@@ -18,7 +18,7 @@ https://claimable.neon.tech/.well-known/jwks.json
 ```
 
 `agent_auth.skill` is this file. `identity_endpoint` is where you register. `claim_endpoint`
-starts a claim with the identity assertion. JWT `iss` is `https://neon.com/claimable`. Token
+accepts `{"claim_token":"<identity_assertion>"}`. JWT `iss` is `https://neon.com/claimable`. Token
 `aud` / `resource` is `https://claimable.neon.tech/`.
 
 ## Install the Neon CLI
