@@ -88,6 +88,10 @@ const CAPABILITY_LABELS = {
   auth: 'Managed Better Auth',
 };
 
+const DENIED_REASON_COPY = {
+  requires_claim: 'Claim the project to enable it.',
+};
+
 const capabilityLabel = (name) => CAPABILITY_LABELS[name] ?? name.replaceAll('_', ' ');
 
 const Capability = ({ name, granted }) => (
@@ -192,10 +196,10 @@ const Provisioner = () => {
         </div>
         {denied.length > 0 && (
           <ul className="mt-3 space-y-1 text-sm leading-relaxed text-gray-new-60">
-            {denied.map(({ capability, reason, message }) => (
+            {denied.map(({ capability, reason }) => (
               <li key={capability}>
                 {capabilityLabel(capability)} was not granted
-                {message || reason ? `: ${message || reason}` : '.'}
+                {DENIED_REASON_COPY[reason] ? `. ${DENIED_REASON_COPY[reason]}` : '.'}
               </li>
             ))}
           </ul>
@@ -221,12 +225,12 @@ const Provisioner = () => {
           <Button
             className="mt-4 w-full"
             size="new"
-            theme="primary"
+            theme="outlined-new"
             to={claim.verification_uri_complete}
             target="_blank"
             rel="noreferrer"
           >
-            Claim this project
+            Claim when you are done building
           </Button>
         </div>
       </div>
@@ -326,7 +330,7 @@ const InterfaceCard = ({ eyebrow, title, description, code }) => (
     <h3 className="mt-3 font-title text-2xl tracking-tight">{title}</h3>
     <p className="mt-2 min-h-12 text-sm leading-relaxed text-gray-new-60">{description}</p>
     <div className="mt-5 min-w-0 grow rounded-xl border border-white/10 bg-black-pure/70 p-4">
-      <pre className="overflow-x-auto font-mono text-xs leading-relaxed break-all whitespace-pre-wrap text-gray-new-70">
+      <pre className="overflow-x-auto font-mono text-xs leading-relaxed whitespace-pre text-gray-new-70">
         <code>{code}</code>
       </pre>
     </div>
@@ -363,7 +367,7 @@ const ClaimableNeon = () => (
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-5">
               <Button size="new" theme="white-filled" to="#provision" tagName="Claimable Neon Hero">
-                Create a project
+                Start with the form
               </Button>
               <Link
                 className="text-sm font-medium"
@@ -419,13 +423,13 @@ const ClaimableNeon = () => (
           <InterfaceCard
             eyebrow="Neon CLI"
             title="Use existing commands"
-            description="Create a claimable project once. Branch, query, and configure it with the same CLI commands used by account-backed projects."
+            description="Create a claimable project once. Branch, query, and configure it with the same CLI commands used by account-backed projects. If neon claim is not a command, use the auth.md card."
             code={CODE_EXAMPLES.cli}
           />
           <InterfaceCard
             eyebrow="neon.ts"
             title="Declare services"
-            description="If neon.ts is present, neon claim create requests its declared services. Unsupported pre-claim services return capability_requires_claim."
+            description="If neon.ts is present, neon claim create requests its declared services. Services that need a claimed project are recorded as denied until then."
             code={CODE_EXAMPLES.config}
           />
         </div>

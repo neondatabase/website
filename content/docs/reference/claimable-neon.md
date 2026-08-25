@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
   - /docs/reference/claimable-postgres
-updatedOn: '2026-08-25T17:09:07.082Z'
+updatedOn: '2026-08-25T18:13:36.253Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
@@ -22,6 +22,8 @@ Start in the browser at [neon.com/claimable-neon](/claimable-neon), or give an a
 <Tabs labels={["Neon CLI", "Agent API"]}>
 
 <TabItem>
+
+If `neon claim` is not a command, or `neon claim --help` does not list `create`, use the Agent API tab.
 
 Create a project and write its credentials to `.env`:
 
@@ -37,8 +39,6 @@ npx neon@latest claim create \
   --service auth \
   --env-pull
 ```
-
-If `neon claim` is not a command, or `neon claim --help` does not list `create`, use the Agent API tab.
 
 The CLI saves the project's identity assertion in its secure credential store. Existing commands then use the claimable project automatically:
 
@@ -206,7 +206,7 @@ Registration records those as `{ granted: false, reason: "requires_claim" }`. A 
 
 ## Use the Neon CLI
 
-`neon claim` and its `neon claimable` alias manage anonymous projects:
+`neon claim` and its `neon claimable` alias manage anonymous projects. If `neon claim` is not a command, or `neon claim --help` does not list `create`, use the HTTP flow in this page.
 
 ```bash
 npx neon@latest claim create --env-pull

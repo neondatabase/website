@@ -18,6 +18,8 @@ If they cannot sign in or provide a key right now, ask before continuing. Contin
 
 ## Path
 
+If `neon claim` is not a command, or `neon claim --help` does not list `create`, skip to [If the Neon CLI cannot be used](#if-the-neon-cli-cannot-be-used).
+
 1. Install the CLI: `npm i -g neon@latest`
 2. Write a `neon.ts` that declares the services you need, or skip the file and pass `--service` on create. Postgres is always requested.
 3. Create the project: `neon claim create --env-pull` (add `--service data-api --service auth` if there is no `neon.ts`)
