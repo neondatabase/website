@@ -21,7 +21,7 @@ const Architecture = () => (
     className="architecture scroll-mt-16 overflow-hidden bg-[#E4F1EB] py-40 safe-paddings xl:pt-34 xl:pb-38 lg:scroll-mt-0 lg:pt-20 lg:pb-26 md:pt-16 md:pb-20"
     id="architecture"
   >
-    <Container className="md:px-5!" size="1600">
+    <Container className="xl:px-16 md:px-5!" size="1600">
       <h2 className="max-w-320 indent-24 text-[3.5rem] leading-dense font-normal tracking-tighter text-black-pure xl:max-w-240 xl:indent-16 xl:text-5xl lg:max-w-180 lg:text-[2.25rem] md:max-w-full md:indent-0 md:text-[2rem] sm:text-[1.625rem]">
         The way we build software is changing, but the fundamentals remain the same:{' '}
         <Highlight>powerful databases, reliable infrastructure,</Highlight> and{' '}
