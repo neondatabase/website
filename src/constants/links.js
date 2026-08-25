@@ -119,5 +119,4 @@ export default {
   apiReference: '/docs/reference/api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
-  claimableNeonApi: 'https://claimable.neon.tech',
 };

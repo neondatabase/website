@@ -122,10 +122,11 @@ POST https://claimable.neon.tech/v1/projects/<project_id>/claim
 Authorization: Bearer <access_token>
 ```
 
-Open the returned `verification_uri_complete`. The human signs in to Neon, selects a destination
-organization, and accepts the transfer.
+Open the returned `verification_uri_complete`. Opening the URL does not freeze access. Continuing
+to Neon starts the transfer and rotates `DATABASE_URL`. The human signs in to Neon, selects a
+destination organization, and accepts the transfer.
 
-Browser redemption revokes existing access tokens. Re-exchange the identity assertion; while the
+Continuing to Neon revokes existing access tokens. Re-exchange the identity assertion; while the
 claim is in progress, the new token has no project scopes and authorizes only claim-status polling:
 
 ```http

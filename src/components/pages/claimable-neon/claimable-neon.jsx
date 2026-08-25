@@ -1,7 +1,7 @@
 'use client';
 
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -47,13 +47,14 @@ export default defineConfig({
 });`,
 };
 
-const CopyButton = ({ value, label = 'Copy' }) => {
+const CopyButton = ({ value, label = 'Copy', ariaLabel }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(1600);
 
   return (
     <button
       className="shrink-0 rounded-full border border-white/10 px-3 py-1.5 text-xs font-medium text-gray-new-70 transition-colors hover:border-white/30 hover:text-white"
       type="button"
+      aria-label={ariaLabel ?? label}
       onClick={() => handleCopy(value)}
     >
       {isCopied ? 'Copied' : label}
@@ -64,13 +65,14 @@ const CopyButton = ({ value, label = 'Copy' }) => {
 CopyButton.propTypes = {
   value: PropTypes.string.isRequired,
   label: PropTypes.string,
+  ariaLabel: PropTypes.string,
 };
 
 const Credential = ({ label, value }) => (
   <div>
     <div className="mb-2 flex items-center justify-between gap-4">
       <span className="text-xs font-medium tracking-wide text-gray-new-50 uppercase">{label}</span>
-      <CopyButton value={value} />
+      <CopyButton value={value} ariaLabel={`Copy ${label}`} />
     </div>
     <code className="block overflow-x-auto rounded-lg border border-white/10 bg-black-pure/70 px-3.5 py-3 text-[13px] leading-relaxed text-green-45">
       {value}
@@ -95,6 +97,14 @@ const DENIED_REASON_COPY = {
 
 const capabilityLabel = (name) => CAPABILITY_LABELS[name] ?? name.replaceAll('_', ' ');
 
+const provisionErrorMessage = (error) => {
+  if (!(error instanceof Error)) return 'The project could not be created.';
+  if (error.name === 'TypeError' || error.message === 'Failed to fetch') {
+    return 'The project could not be created. Check your connection and try again.';
+  }
+  return error.message;
+};
+
 const Capability = ({ name, granted }) => (
   <span
     className={`rounded-full border px-2.5 py-1 text-xs ${
@@ -110,6 +120,134 @@ const Capability = ({ name, granted }) => (
 Capability.propTypes = {
   name: PropTypes.string.isRequired,
   granted: PropTypes.bool.isRequired,
+};
+
+const ProvisionResult = ({ result }) => {
+  const headingRef = useRef(null);
+  const { capabilities, claim, credentials, project } = result;
+  const formatTime = (value) =>
+    new Intl.DateTimeFormat(undefined, {
+      dateStyle: 'medium',
+      timeStyle: 'short',
+    }).format(new Date(value));
+  const expiresAt = formatTime(project.expires_at);
+  const claimExpiresAt = formatTime(Date.now() + claim.expires_in * 1000);
+  const granted = new Set(
+    capabilities.filter(({ granted: isGranted }) => isGranted).map(({ capability }) => capability)
+  );
+  const denied = capabilities.filter(({ granted: isGranted }) => !isGranted);
+  const stayEnabled = [
+    granted.has('auth') ? 'Managed Better Auth' : null,
+    granted.has('data_api') ? 'the Data API' : null,
+  ].filter(Boolean);
+  const stayEnabledSentence =
+    stayEnabled.length === 0
+      ? ''
+      : stayEnabled.length === 1
+        ? ` ${stayEnabled[0][0].toUpperCase()}${stayEnabled[0].slice(1)} stays enabled.`
+        : ` ${stayEnabled.join(' and ')} stay enabled.`;
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, []);
+
+  return (
+    <div
+      className="relative overflow-hidden rounded-2xl border border-green-45/30 bg-[#0b1311] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.45)] md:p-5"
+      role="status"
+      aria-live="polite"
+    >
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-45 to-transparent" />
+      <div className="flex items-start justify-between gap-5">
+        <div>
+          <p className="text-sm font-medium text-green-45">Project ready</p>
+          <h2
+            ref={headingRef}
+            tabIndex={-1}
+            className="mt-1 font-title text-2xl tracking-tight outline-none"
+          >
+            Connect your agent
+          </h2>
+        </div>
+        <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-xs text-gray-new-60">
+          {project.id}
+        </span>
+      </div>
+
+      <div className="mt-5 flex flex-wrap gap-2">
+        {capabilities.map(({ capability, granted: isGranted }) => (
+          <Capability key={capability} name={capability} granted={isGranted} />
+        ))}
+      </div>
+      {denied.length > 0 && (
+        <ul className="mt-3 space-y-1 text-sm leading-relaxed text-gray-new-60">
+          {denied.map(({ capability, reason }) => (
+            <li key={capability}>
+              {capabilityLabel(capability)} was not granted
+              {DENIED_REASON_COPY[reason] ? `. ${DENIED_REASON_COPY[reason]}` : '.'}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="mt-6 space-y-5">
+        <Credential label="DATABASE_URL" value={credentials.database_url} />
+        {credentials.services.data_api?.url && (
+          <Credential label="NEON_DATA_API_URL" value={credentials.services.data_api.url} />
+        )}
+        {credentials.services.auth?.base_url && (
+          <Credential label="NEON_AUTH_BASE_URL" value={credentials.services.auth.base_url} />
+        )}
+      </div>
+
+      <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
+        <p className="text-sm leading-relaxed text-gray-new-70">
+          Copy these values now. This page will not show them again. The claim link expires at{' '}
+          {claimExpiresAt}. If it expires, create another project from this page. Continuing to Neon
+          on that page rotates <code>DATABASE_URL</code>. Pull a new one from the console after the
+          transfer finishes.
+          {stayEnabledSentence} The project itself expires on {expiresAt}.
+        </p>
+        <Button
+          className="mt-4 w-full"
+          size="new"
+          theme="outlined-new"
+          to={claim.verification_uri_complete}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open the claim link
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+ProvisionResult.propTypes = {
+  result: PropTypes.shape({
+    capabilities: PropTypes.arrayOf(
+      PropTypes.shape({
+        capability: PropTypes.string.isRequired,
+        granted: PropTypes.bool.isRequired,
+        reason: PropTypes.string,
+      })
+    ).isRequired,
+    claim: PropTypes.shape({
+      expires_in: PropTypes.number.isRequired,
+      verification_uri_complete: PropTypes.string.isRequired,
+    }).isRequired,
+    credentials: PropTypes.shape({
+      database_url: PropTypes.string.isRequired,
+      services: PropTypes.shape({
+        data_api: PropTypes.shape({ url: PropTypes.string }),
+        auth: PropTypes.shape({ base_url: PropTypes.string }),
+      }).isRequired,
+    }).isRequired,
+    project: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      expires_at: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 const Provisioner = () => {
@@ -145,97 +283,13 @@ const Provisioner = () => {
     } catch (error) {
       setState({
         status: 'error',
-        message: error instanceof Error ? error.message : 'The project could not be created.',
+        message: provisionErrorMessage(error),
       });
     }
   };
 
   if (state.status === 'success') {
-    const { capabilities, claim, credentials, project } = state.result;
-    const formatTime = (value) =>
-      new Intl.DateTimeFormat(undefined, {
-        dateStyle: 'medium',
-        timeStyle: 'short',
-      }).format(new Date(value));
-    const expiresAt = formatTime(project.expires_at);
-    const granted = new Set(
-      capabilities.filter(({ granted }) => granted).map(({ capability }) => capability)
-    );
-    const denied = capabilities.filter(({ granted }) => !granted);
-    const stayEnabled = [
-      granted.has('auth') ? 'Managed Better Auth' : null,
-      granted.has('data_api') ? 'the Data API' : null,
-    ].filter(Boolean);
-    const stayEnabledSentence =
-      stayEnabled.length === 0
-        ? ''
-        : stayEnabled.length === 1
-          ? ` ${stayEnabled[0][0].toUpperCase()}${stayEnabled[0].slice(1)} stays enabled.`
-          : ` ${stayEnabled.join(' and ')} stay enabled.`;
-
-    return (
-      <div
-        className="relative overflow-hidden rounded-2xl border border-green-45/30 bg-[#0b1311] p-6 shadow-[0_32px_100px_rgba(0,0,0,0.45)] md:p-5"
-        role="status"
-        aria-live="polite"
-      >
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-45 to-transparent" />
-        <div className="flex items-start justify-between gap-5">
-          <div>
-            <p className="text-sm font-medium text-green-45">Project ready</p>
-            <h2 className="mt-1 font-title text-2xl tracking-tight">Connect your agent</h2>
-          </div>
-          <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-xs text-gray-new-60">
-            {project.id}
-          </span>
-        </div>
-
-        <div className="mt-5 flex flex-wrap gap-2">
-          {capabilities.map(({ capability, granted }) => (
-            <Capability key={capability} name={capability} granted={granted} />
-          ))}
-        </div>
-        {denied.length > 0 && (
-          <ul className="mt-3 space-y-1 text-sm leading-relaxed text-gray-new-60">
-            {denied.map(({ capability, reason }) => (
-              <li key={capability}>
-                {capabilityLabel(capability)} was not granted
-                {DENIED_REASON_COPY[reason] ? `. ${DENIED_REASON_COPY[reason]}` : '.'}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className="mt-6 space-y-5">
-          <Credential label="DATABASE_URL" value={credentials.database_url} />
-          {credentials.services.data_api?.url && (
-            <Credential label="NEON_DATA_API_URL" value={credentials.services.data_api.url} />
-          )}
-          {credentials.services.auth?.base_url && (
-            <Credential label="NEON_AUTH_BASE_URL" value={credentials.services.auth.base_url} />
-          )}
-        </div>
-
-        <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
-          <p className="text-sm leading-relaxed text-gray-new-70">
-            Copy these values now. This page will not show them again. The claim link expires in{' '}
-            {Math.round(claim.expires_in / 60)} minutes. Continuing to Neon on that page rotates{' '}
-            <code>DATABASE_URL</code>. Pull a new one from the console after the transfer finishes.
-            {stayEnabledSentence} The project itself expires on {expiresAt}.
-          </p>
-          <Button
-            className="mt-4 w-full"
-            size="new"
-            theme="outlined-new"
-            to={claim.verification_uri_complete}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open the claim link
-          </Button>
-        </div>
-      </div>
-    );
+    return <ProvisionResult result={state.result} />;
   }
 
   return (
@@ -326,7 +380,7 @@ const InterfaceCard = ({ eyebrow, title, description, code }) => (
   <article className="flex min-w-0 flex-col rounded-2xl border border-white/10 bg-white/[0.025] p-6 md:p-5">
     <div className="flex items-start justify-between gap-3">
       <p className="font-mono text-xs tracking-wide text-green-45 uppercase">{eyebrow}</p>
-      <CopyButton value={code} />
+      <CopyButton value={code} ariaLabel={`Copy ${eyebrow} sample`} />
     </div>
     <h3 className="mt-3 font-title text-2xl tracking-tight">{title}</h3>
     <p className="mt-2 min-h-12 text-sm leading-relaxed text-gray-new-60">{description}</p>
@@ -410,7 +464,7 @@ const ClaimableNeon = () => (
             auth.md, the Neon CLI and neon.ts
           </h2>
           <p className="mt-5 max-w-[680px] text-lg leading-relaxed text-gray-new-60 md:text-base">
-            The same scoped agent credential works through the Claimable Neon API, Neon CLI, and{' '}
+            The same scoped agent credential works through auth.md, the Neon CLI, and{' '}
             <code>neon.ts</code>.
           </p>
         </div>
