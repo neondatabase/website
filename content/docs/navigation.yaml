@@ -1216,6 +1216,8 @@
                   slug: cli/mcp
                 - title: skills
                   slug: cli/skills
+                - title: claim
+                  slug: cli/claim
                 - title: bootstrap
                   slug: cli/bootstrap
                 - title: link

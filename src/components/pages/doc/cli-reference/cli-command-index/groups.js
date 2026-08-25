@@ -50,6 +50,7 @@ const GROUP_OF = {
   open: 'setup',
   mcp: 'setup',
   skills: 'setup',
+  claim: 'setup',
 };
 
 // Commands documented as a section of another command's page instead of a
