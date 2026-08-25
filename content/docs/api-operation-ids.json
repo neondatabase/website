@@ -1,6 +1,6 @@
 {
   "_generatedBy": "scripts/generate-api-ref.mjs — do not edit by hand",
-  "count": 168,
+  "count": 169,
   "operationIds": [
     "acceptProjectTransferRequest",
     "addBranchNeonAuthOauthProvider",
@@ -138,6 +138,7 @@
     "revokeCredential",
     "revokeOrgApiKey",
     "revokePermissionFromProject",
+    "sendNeonAuthEmailProviderTest",
     "sendNeonAuthTestEmail",
     "setDefaultProjectBranch",
     "setOrganizationSpendingLimit",

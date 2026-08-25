@@ -314,7 +314,7 @@ and timeline.
 invoices are in the Neon Console under Billing.
 - **Community:** [Neon Discord](https://discord.gg/92vNTzKDGp) ·
 [Docs](https://neon.com/docs) ·
-[API reference](https://api-docs.neon.tech)
+[API reference](https://neon.com/docs/reference/api)
 
 ## Repository samples
 

@@ -11,7 +11,7 @@ summary: >-
 description: >-
   Install the Neon Cursor plugin to use Neon agent skills and MCP-powered
   database operations directly in Cursor.
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-25T02:37:06.867Z'
 ---
 
 The **Neon Cursor plugin** adds Neon-specific Skills and MCP integration to Cursor so your assistant can both reason about best practices and take database actions.
@@ -64,7 +64,7 @@ If you want Neon to configure AI tooling automatically, run:
 npx neon@latest init
 ```
 
-This configures MCP and installs Neon agent skills for supported editors.
+This configures MCP and installs Neon agent skills for supported editors. To install just the Neon MCP server for Cursor, run [`npx neon@latest mcp --agent cursor`](/docs/cli/mcp).
 
 ## Learn more
 

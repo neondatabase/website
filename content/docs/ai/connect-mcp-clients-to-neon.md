@@ -1,19 +1,16 @@
 ---
 title: Connect MCP clients to Neon
-subtitle: Learn how to connect MCP clients such as Cursor, Claude Code, VS Code,
-  ChatGPT, and other tools to your Lakebase Postgres database on Neon.
+subtitle: Connect MCP clients like Cursor, Claude Code, VS Code, and ChatGPT to
+  your Lakebase Postgres database on Neon.
 summary: >-
-  Connection guide for wiring MCP clients (Cursor, Claude Code, VS Code with
-  GitHub Copilot, ChatGPT, Cline, Windsurf, Zed, Claude Desktop, and more via
-  the add-mcp CLI) to the Neon MCP Server so AI assistants can query and manage
-  Lakebase Postgres databases on Neon using natural language. Use this page when you need
-  per-client setup instructions for `npx neon@latest init`, OAuth, or API
-  key authentication against `https://mcp.neon.tech/mcp`. Also covers
-  troubleshooting OAuth errors (invalid redirect URI, stale ~/.mcp-auth cache).
+  Connect MCP clients (Cursor, Claude Code, VS Code, ChatGPT, and more) to the
+  Neon MCP Server so AI assistants can query and manage your Lakebase Postgres
+  databases on Neon in natural language. Covers per-client setup, OAuth and API
+  key auth, and OAuth troubleshooting.
 redirectFrom:
   - /guides/neon-mcp-server-github-copilot-vs-code
 enableTableOfContents: true
-updatedOn: '2026-08-24T20:08:07.987Z'
+updatedOn: '2026-08-25T02:37:06.867Z'
 ---
 
 Connect MCP clients to the Neon MCP Server to interact with your Lakebase Postgres databases in natural language.
@@ -36,13 +33,21 @@ npx neon@latest init
 Each run of `npx neon@latest init` creates a new Neon API key. If you run it multiple times, review your [API keys](https://console.neon.tech/app/settings/api-keys) and revoke any you no longer need.
 </Admonition>
 
-If you only want the MCP server and nothing else, use:
+If you only want the MCP server and nothing else, run [`neon mcp`](/docs/cli/mcp):
+
+```bash
+neon mcp
+```
+
+It prompts for config location, agents, and auth, then writes the config. Pass `-y` to run non-interactively, or `--oauth` to skip minting a key. See the [`neon mcp` reference](/docs/cli/mcp) for all flags and supported agents.
+
+To use the lower-level `add-mcp` tool directly instead:
 
 ```bash
 npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-This adds the MCP config to your editor's configuration files. Add `-g` for global (user-level) setup instead of project-level. Restart your editor (or enable the MCP server in your editor's settings); when you use the connection, an OAuth window will open to authorize. For API key authentication, add `--header "Authorization: Bearer $NEON_API_KEY"`. For more options, see the [add-mcp repository](https://github.com/neondatabase/add-mcp).
+This writes the MCP config to your editor. Add `-g` for global (user-level) instead of project-level, then restart your editor. On first use, an OAuth window opens to authorize; for API key auth, add `--header "Authorization: Bearer $NEON_API_KEY"`. See the [add-mcp repository](https://github.com/neondatabase/add-mcp) for more.
 
 ## Supported agents (add-mcp)
 

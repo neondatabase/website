@@ -4,10 +4,9 @@ subtitle: Connect your AI assistant to Neon to manage projects, run queries, and
 summary: >-
   The Neon MCP Server implements the Model Context Protocol (MCP), letting AI
   assistants interact with your Neon projects on your behalf. Set up with
-  `npx neon@latest init` or use the config generator. Supports OAuth and
-  API key auth.
+  `npx neon@latest mcp` or use the config generator. Supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-08-21T12:59:00.700Z'
+updatedOn: '2026-08-25T02:37:06.867Z'
 ---
 
 The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
@@ -15,6 +14,28 @@ The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assi
 <Admonition type="important" title="Security">
 The Neon MCP Server grants broad database management capabilities. **Always review and authorize actions requested by the LLM before execution.** Restrict access to trusted users only. See [MCP security guidance](#mcp-security-guidance).
 </Admonition>
+
+## Quick setup
+
+Install the Neon MCP server into your coding agents with [`neon mcp`](/docs/cli/mcp):
+
+```bash
+npx neon@latest mcp
+```
+
+It prompts for where to write the config, which agents to install into, and how to authenticate, then writes it for you.
+
+To set up the MCP server together with agent skills and editor tooling, run [`neon init`](/docs/cli/init):
+
+```bash
+npx neon@latest init
+```
+
+## Config generator
+
+Use the generator to build an MCP config for your editor and auth method, including the `Authorization` header for API key or remote agent setups.
+
+<McpSetupConfigurator />
 
 ## Claude connector
 
@@ -25,21 +46,7 @@ The Neon MCP server is an official Claude connector, so you don't need a custom 
 3. Click **Browse connectors** (top-right of that page), find **Neon**, and add it.
 4. Authorize access to your Neon account.
 
-For other clients, use Quick setup or the config generator below.
-
-## Quick setup
-
-```bash
-npx neon@latest init
-```
-
-Runs `neon init` via npx to configure MCP and other integrations for your editor. If you only want the MCP server, use the config generator below.
-
-## Config generator
-
-Use the generator to build an MCP config for your editor and auth method, including the `Authorization` header for API key or remote agent setups.
-
-<McpSetupConfigurator />
+For other clients, use Quick setup or the config generator above.
 
 ## Access control
 

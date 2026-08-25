@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "3.5.1",
+  "neonctlVersion": "4.2.1",
   "binaries": [
     "neonctl",
     "neon"
@@ -1747,6 +1747,13 @@
               "commands": {},
               "describe": "Number of sequential scans recorded against each table (pg_stat_user_tables)"
             },
+            "stalled-queries": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Active queries running longer than 30 seconds with parallel workers, waits, and blockers (compute-wide)"
+            },
             "subscriptions": {
               "aliases": [],
               "positionals": [],
@@ -2120,6 +2127,84 @@
       "describe": "Query branch logs",
       "usage": "$0 logs <sub-command> [options]"
     },
+    "mcp": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker",
+          "alias": "a"
+        },
+        "category": {
+          "type": "array",
+          "describe": "MCP tool category (repeatable or comma-separated). Default: all"
+        },
+        "oauth": {
+          "type": "boolean",
+          "describe": "Write the server URL only. The agent prompts for Neon sign-in on first use. No CLI login, no API key minted. Skips the auth question",
+          "default": false
+        },
+        "project": {
+          "type": "boolean",
+          "describe": "Write project-level MCP config. Skips the config-location question. Does not change the minted key",
+          "default": false
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Pin MCP tools to one Neon project (?projectId=). Does not change the minted key. Interactive asks only for a linked project-folder install"
+        },
+        "read-only": {
+          "type": "boolean",
+          "describe": "Restrict MCP tools to read-only (?readonly=true). Not prompted. Does not change the minted key",
+          "default": false,
+          "alias": "readonly"
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Skip prompts. Defaults to global config, every detected agent and a minted account-wide API key. --project, --oauth, --agent, --read-only, --project-id and --category still apply",
+          "default": false,
+          "alias": "y"
+        }
+      },
+      "commands": {},
+      "describe": "Install the Neon MCP server into coding agents",
+      "usage": "$0 mcp [options]",
+      "examples": [
+        {
+          "command": "$0 mcp",
+          "description": "Interactive: config location, agents, auth, then confirm"
+        },
+        {
+          "command": "$0 mcp -y",
+          "description": "Global config, detected agents, minted API key"
+        },
+        {
+          "command": "$0 mcp --oauth",
+          "description": "Install with OAuth; the agent signs in on first use"
+        },
+        {
+          "command": "$0 mcp --project",
+          "description": "Write project-level config"
+        },
+        {
+          "command": "$0 mcp --agent cursor --agent claude-code",
+          "description": "Install into specific agents"
+        },
+        {
+          "command": "$0 mcp --read-only",
+          "description": "Hide write tools via ?readonly=true"
+        },
+        {
+          "command": "$0 mcp --project-id <id>",
+          "description": "Pin tools to one project via ?projectId="
+        },
+        {
+          "command": "$0 mcp --category querying --category schema",
+          "description": "Limit tools to those categories"
+        }
+      ]
+    },
     "me": {
       "aliases": [],
       "positionals": [],
@@ -2226,44 +2311,14 @@
                   "aliases": [],
                   "positionals": [],
                   "options": {
-                    "host": {
-                      "type": "string",
-                      "describe": "SMTP host",
-                      "required": true
-                    },
-                    "password": {
-                      "type": "string",
-                      "describe": "SMTP password",
-                      "required": true
-                    },
-                    "port": {
-                      "type": "number",
-                      "describe": "SMTP port",
-                      "required": true
-                    },
                     "recipient-email": {
                       "type": "string",
-                      "describe": "Email address to send test email to",
-                      "required": true
-                    },
-                    "sender-email": {
-                      "type": "string",
-                      "describe": "Sender email address",
-                      "required": true
-                    },
-                    "sender-name": {
-                      "type": "string",
-                      "describe": "Sender display name",
-                      "required": true
-                    },
-                    "username": {
-                      "type": "string",
-                      "describe": "SMTP username",
+                      "describe": "Email address to deliver the test message to",
                       "required": true
                     }
                   },
                   "commands": {},
-                  "describe": "Send a test email"
+                  "describe": "Send a test message through the saved custom SMTP provider"
                 },
                 "update": {
                   "name": "update",

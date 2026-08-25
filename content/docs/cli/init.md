@@ -1,22 +1,20 @@
 ---
 title: 'Neon CLI command: init'
-subtitle: Initialize an app project with Neon, including auth, MCP server, extensions,
-  and agent skills
+subtitle: Install the Neon CLI and set up a project with auth, agent skills, and
+  optionally the MCP server and editor extension
 summary: >-
   The `neon init` command sets up a project to use Neon with an AI coding
-  assistant by running OAuth, creating an API key, writing the Neon MCP server
-  config, and installing agent skills. It supports Cursor, VS Code, Claude
-  Code, and any editor supported by add-mcp. Use this page when starting a
-  new project with `npx neon@latest init` or when you need to know which
-  files get created and where. The `--agent` flag targets a specific editor
-  without the interactive prompt.
+  assistant: it installs or updates the Neon CLI, runs OAuth, creates an API
+  key, installs agent skills, and can configure the Neon MCP server. Works with
+  Cursor, VS Code, Claude Code, and any add-mcp client. The `--agent` flag runs
+  it in agent/JSON mode.
 enableTableOfContents: true
-updatedOn: '2026-08-21T13:46:47.152Z'
+updatedOn: '2026-08-25T02:37:06.867Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
 
-The `init` command sets up your app project to use Neon with your AI coding assistant. It authenticates via OAuth, creates a Neon API key, configures the Neon MCP server for your editor (installing the [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) for Cursor and VS Code), and installs [Neon agent skills](https://github.com/neondatabase/agent-skills). Run it once from your project root.
+The `init` command sets up your app project to use Neon with your AI coding assistant. It installs or updates the Neon CLI, authenticates via OAuth, creates a Neon API key, can configure the Neon MCP server for your editor (installing the [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) for Cursor and VS Code), and installs [Neon agent skills](https://github.com/neondatabase/agent-skills). Run it once from your project root.
 
 ## Usage
 
@@ -40,11 +38,11 @@ Skills are installed at the project level in the current working directory. Run 
 
 <CliOptions command="init" />
 
-Use `--agent` to configure a specific editor, skipping the interactive selection prompt. Without `--agent`, `init` runs an interactive wizard that detects installed tools and lets you choose which to configure; if nothing is detected, you go straight to that list.
+Use `--agent` (alias `-a`) to run `init` in agent/JSON mode, designed for when an AI coding assistant runs the command for you; the agent type is auto-detected. Without `--agent`, `init` runs an interactive wizard that detects installed tools and lets you choose which to configure; if nothing is detected, you go straight to that list.
 
 ## Coding assistant support
 
-`init` is backed by the `neon-init` package bundled with `neon`. Besides Cursor, VS Code, and Claude Code, the interactive flow can configure any client that [add-mcp supports](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp). To register only the Neon MCP server in a client config (no `init`, no agent skills, no extension install), run `npx add-mcp https://mcp.neon.tech/mcp`. See [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
+`init` is backed by the `neon-init` package bundled with `neon`. Besides Cursor, VS Code, and Claude Code, the interactive flow can configure any client that [add-mcp supports](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp). To register only the Neon MCP server in a client config (no `init`, no agent skills, no extension install), run [`neon mcp`](/docs/cli/mcp), or `npx add-mcp https://mcp.neon.tech/mcp` for the lower-level tool directly. See [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
 
 ## What gets created
 
