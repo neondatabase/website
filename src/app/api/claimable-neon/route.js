@@ -127,11 +127,17 @@ const requireCredentials = (body, project) => {
 };
 
 const requireClaim = (body) => {
+  let claimUrl;
+  try {
+    claimUrl = new URL(body?.verification_uri_complete);
+  } catch {
+    throw new ClaimableContractError('Claimable Neon returned an invalid claim link.');
+  }
   if (
-    !body ||
-    typeof body.verification_uri_complete !== 'string' ||
+    claimUrl.origin !== claimableOrigin() ||
     typeof body.expires_in !== 'number' ||
-    !Number.isFinite(body.expires_in)
+    !Number.isFinite(body.expires_in) ||
+    body.expires_in <= 0
   ) {
     throw new ClaimableContractError('Claimable Neon returned an invalid claim link.');
   }

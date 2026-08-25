@@ -239,6 +239,74 @@ describe('/api/claimable-neon', () => {
     });
   });
 
+  it('returns 502 when the claim URL is not on the Claimable origin', async () => {
+    global.fetch
+      .mockResolvedValueOnce(jsonResponse(registration))
+      .mockResolvedValueOnce(jsonResponse(token))
+      .mockResolvedValueOnce(jsonResponse(credentials))
+      .mockResolvedValueOnce(
+        jsonResponse({
+          ...claim,
+          verification_uri_complete: 'https://example.invalid/claim?user_code=ABCD-2345',
+        })
+      )
+      .mockResolvedValueOnce(new Response(null, { status: 204 }));
+
+    const response = await POST(
+      new Request('https://neon.com/api/claimable-neon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ services: [] }),
+      })
+    );
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({
+      error: {
+        code: 'invalid_claimable_response',
+        message: 'Claimable Neon returned an invalid claim link.',
+      },
+    });
+    expect(global.fetch).toHaveBeenNthCalledWith(
+      5,
+      `${ORIGIN}/v1/projects/${registration.project.id}`,
+      expect.objectContaining({
+        method: 'DELETE',
+        headers: expect.objectContaining({ Authorization: `Bearer ${token.access_token}` }),
+      })
+    );
+  });
+
+  it('returns 502 when the claim link expiry is not a positive duration', async () => {
+    global.fetch
+      .mockResolvedValueOnce(jsonResponse(registration))
+      .mockResolvedValueOnce(jsonResponse(token))
+      .mockResolvedValueOnce(jsonResponse(credentials))
+      .mockResolvedValueOnce(jsonResponse({ ...claim, expires_in: -1 }))
+      .mockResolvedValueOnce(new Response(null, { status: 204 }));
+
+    const response = await POST(
+      new Request('https://neon.com/api/claimable-neon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ services: [] }),
+      })
+    );
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({
+      error: {
+        code: 'invalid_claimable_response',
+        message: 'Claimable Neon returned an invalid claim link.',
+      },
+    });
+    expect(global.fetch).toHaveBeenNthCalledWith(
+      5,
+      `${ORIGIN}/v1/projects/${registration.project.id}`,
+      expect.objectContaining({ method: 'DELETE' })
+    );
+  });
+
   it('deletes the remote project when setup fails after registration', async () => {
     const upstreamError = {
       error: {
