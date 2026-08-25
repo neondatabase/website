@@ -49,7 +49,7 @@ After create, report the `project_id`, `expires_at`, and `denied_capabilities` t
 
 ## Claim
 
-Do not run `neon claim accept` until the human is ready. Accept mints a claim URL and puts the project in `claim_in_progress`, after which only claim-status polling remains.
+Do not run `neon claim accept` until the human is ready. Accept mints a claim URL. Credentials keep working until the human opens that URL and accepts the transfer; then the project is `claim_in_progress` and only claim-status polling remains.
 
 When the human is ready, run `neon claim accept --no-open`. Bare `neon claim accept` opens a browser. Report the `verification_url`, `user_code`, and `expires_in_seconds` the CLI printed. If the code expires, run `neon claim accept --no-open` again. Claiming transfers the project and rotates `DATABASE_URL`. Auth and the Data API stay enabled.
 
