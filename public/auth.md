@@ -27,7 +27,7 @@ disagree on a field, use that copy. Token exchange, JWKS, and project REST stay 
 ## Install the Neon CLI
 
 The Neon CLI is the client. Do not start from the HTTP examples unless you are implementing a
-client. Install it. If `NEON_API_KEY` is set, `NEON_PROFILE` is set, or `neon profile list -o json`
+client. Install it. If `NEON_API_KEY` is set, or `neon profile list -o json`
 lists a profile whose `account` is not `-`, use that account and stop. A `DEFAULT` row with
 `account: "-"` and `file: "missing"` is not an account. If a command waits on a browser or
 authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Do not
