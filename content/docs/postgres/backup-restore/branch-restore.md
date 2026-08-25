@@ -20,7 +20,7 @@ redirectFrom:
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
   - /docs/introduction/branch-restore
-updatedOn: '2026-08-24T17:29:27.361Z'
+updatedOn: '2026-08-25T13:29:13.862Z'
 ---
 
 <InfoBlock>
@@ -30,11 +30,11 @@ updatedOn: '2026-08-24T17:29:27.361Z'
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/introduction/history-window">History window for instant restore</a>
+  <a href="/docs/postgres/backup-restore/history-window">History window for instant restore</a>
 </DocsList>
 </InfoBlock>
 
-With Neon's instant restore capability, also known as point-in-time restore or PITR, you can restore a root branch to an earlier state in its own or another root branch's history. You can only point-in-time restore from root branches; child branches do not support instant restore. You can use Time Travel Assist to connect to a specific point in time still covered by your **history window** setting. See [History window](/docs/introduction/history-window), where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can restore a root branch to an earlier state in its own or another root branch's history. You can only point-in-time restore from root branches; child branches do not support instant restore. You can use Time Travel Assist to connect to a specific point in time still covered by your **history window** setting. See [History window](/docs/postgres/backup-restore/history-window), where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
 
 ## How instant restore works
 
@@ -46,7 +46,7 @@ Instant restore is only supported for root branches. You can revert a root branc
 
 ![branch restore to timestamp](/docs/guides/branch-restore_feature.png)
 
-The default **history window** for a Neon project differs by plan. You can revert a root branch to any time within that window using **instant restore**, down to the millisecond. See [History window](/docs/introduction/history-window).
+The default **history window** for a Neon project differs by plan. You can revert a root branch to any time within that window using **instant restore**, down to the millisecond. See [History window](/docs/postgres/backup-restore/history-window).
 
 A few key points to keep in mind about the restore operation:
 
@@ -109,7 +109,7 @@ Similar to the manual restore operation using the Neon Console and API described
 
 Use Time Travel Assist to make sure you've targeted the correct restore point before you restore your branch.
 
-See [Time Travel Assist](/docs/guides/time-travel-assist) to learn more.
+See [Time Travel Assist](/docs/postgres/backup-restore/time-travel-assist) to learn more.
 
 ## How to use instant restore
 
@@ -272,9 +272,9 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
 </TabItem>
 </Tabs>
 
-To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/guides/time-travel-assist) before running a restore job, but the backup branch is there if you need it.
+To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/postgres/backup-restore/time-travel-assist) before running a restore job, but the backup branch is there if you need it.
 
-If you need to revert your changes, use [Instant restore](/docs/introduction/branch-restore) again and select the backup branch as the source, since the backup is not a parent branch.
+If you need to revert your changes, use [Instant restore](/docs/postgres/backup-restore/branch-restore) again and select the backup branch as the source, since the backup is not a parent branch.
 
 ## Deleting backup branches
 
@@ -303,7 +303,7 @@ To keep your **Branches** page organized, consider renaming backup branches that
 There are minimal impacts to billing from the instant restore and Time Travel Assist features:
 
 - **Instant restore:** The backup branches created when you restore a branch do add to your total number of branches and incur storage costs, but since they do not have a compute attached, they do not add to compute costs.
-- **Time Travel Assist:** Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
+- **Time Travel Assist:** Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/postgres/backup-restore/time-travel-assist#billing-considerations).
 
 ## Limitations
 
