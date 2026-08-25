@@ -240,17 +240,16 @@ export async function POST(request) {
   let registration;
   let accessToken;
   try {
-    registration = requireRegistration(
-      await requestClaimable('/v1/agent/identity', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'anonymous',
-          capabilities,
-          source: 'neon_website',
-        }),
-      })
-    );
+    registration = await requestClaimable('/v1/agent/identity', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'anonymous',
+        capabilities,
+        source: 'neon_website',
+      }),
+    });
+    requireRegistration(registration);
 
     accessToken = requireToken(await exchangeAssertion(registration.identity_assertion));
     const authorization = { Authorization: `Bearer ${accessToken}` };
@@ -280,7 +279,7 @@ export async function POST(request) {
       201
     );
   } catch (error) {
-    if (registration) {
+    if (registration?.project?.id) {
       try {
         if (!accessToken) {
           accessToken = requireToken(await exchangeAssertion(registration.identity_assertion));

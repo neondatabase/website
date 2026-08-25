@@ -160,12 +160,15 @@ describe('/api/claimable-neon', () => {
   });
 
   it('returns 502 when registration capabilities cannot be rendered', async () => {
-    global.fetch.mockResolvedValueOnce(
-      jsonResponse({
-        ...registration,
-        capabilities: [{}],
-      })
-    );
+    global.fetch
+      .mockResolvedValueOnce(
+        jsonResponse({
+          ...registration,
+          capabilities: [{}],
+        })
+      )
+      .mockResolvedValueOnce(jsonResponse(token))
+      .mockResolvedValueOnce(new Response(null, { status: 204 }));
 
     const response = await POST(
       new Request('https://neon.com/api/claimable-neon', {
@@ -182,6 +185,14 @@ describe('/api/claimable-neon', () => {
         message: 'Claimable Neon returned an invalid registration.',
       },
     });
+    expect(global.fetch).toHaveBeenNthCalledWith(
+      3,
+      `${ORIGIN}/v1/projects/${registration.project.id}`,
+      expect.objectContaining({
+        method: 'DELETE',
+        headers: expect.objectContaining({ Authorization: `Bearer ${token.access_token}` }),
+      })
+    );
   });
 
   it('preserves structured Claimable Neon errors', async () => {
