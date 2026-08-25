@@ -1212,6 +1212,8 @@
                   slug: cli/auth
                 - title: init
                   slug: cli/init
+                - title: mcp
+                  slug: cli/mcp
                 - title: bootstrap
                   slug: cli/bootstrap
                 - title: link
