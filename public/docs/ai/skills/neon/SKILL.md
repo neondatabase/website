@@ -129,9 +129,9 @@ Before `npx neon@latest init --agent`, check whether the CLI is already authenti
 
 - `NEON_API_KEY` is set
 - `NEON_PROFILE` is set
-- `neon profile list -o json` lists a profile whose `account` is not `-`
+- `npx neon@latest profile list -o json` lists a profile whose `account` is not `-`
 
-A `DEFAULT` row with `account: "-"` and `file: "missing"` is not an account.
+A `DEFAULT` row with `account: "-"` and `file: "missing"` is not an account. If `neon` is not installed, or `npx neon@latest profile list` cannot run, that is not an account.
 
 If none of those hold, follow [Starting without a Neon account](#starting-without-a-neon-account).
 

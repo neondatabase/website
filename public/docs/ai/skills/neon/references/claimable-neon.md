@@ -2,7 +2,7 @@
 
 Claimable Neon provisions a temporary Neon project — Lakebase Postgres, and optionally the Data API and Managed Better Auth — before a human creates an account. The agent holds an identity assertion, not a Neon API key. A human can later claim the project into their organization.
 
-This flow follows the [auth.md](https://neon.com/auth.md) protocol. Fetch that file for request and response fields. REST is on `https://claimable.neon.tech`. Do not guess `POST /v1/agent/identity`.
+This flow follows the [auth.md](https://neon.com/auth.md) protocol. Fetch `https://neon.com/auth.md` for request and response fields. If that URL 404s, fetch `https://claimable.neon.tech/auth.md`. REST is on `https://claimable.neon.tech`. Use the table below; do not invent other identity paths.
 
 Use this after the neon skill account check found no account.
 
@@ -60,7 +60,7 @@ neon claim delete --yes
 
 ## If the Neon CLI cannot be used
 
-Fall back to the REST API. Fetch `https://neon.com/auth.md` for request and response fields. The claimable resource is `/v1/projects/{id}` on `https://claimable.neon.tech`, not `/v1/databases/{id}`.
+Fall back to the REST API. Fetch `https://neon.com/auth.md` for request and response fields. If that URL 404s, fetch `https://claimable.neon.tech/auth.md`. The claimable resource is `/v1/projects/{id}` on `https://claimable.neon.tech`, not `/v1/databases/{id}`.
 
 ```http
 POST https://claimable.neon.tech/v1/agent/identity
