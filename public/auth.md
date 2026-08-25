@@ -24,8 +24,14 @@ accepts `{"claim_token":"<identity_assertion>"}`. JWT `iss` is `https://neon.com
 ## Install the Neon CLI
 
 The Neon CLI is the client. Do not start from the HTTP examples unless you are implementing a
-client. Install it, declare services in `neon.ts`, and let the CLI register, store the identity
-assertion, and pull env. Do not run `neon auth`. That needs a human Neon account.
+client. Install it. If `NEON_API_KEY` is set, `NEON_PROFILE` is set, or `neon profile list -o json`
+lists a profile whose `account` is not `-`, use that account and stop. A `DEFAULT` row with
+`account: "-"` and `file: "missing"` is not an account. If a command waits on a browser or
+authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Do not
+run `neon auth` on this path.
+
+If there is no account, declare services in `neon.ts`, and let the CLI register, store the identity
+assertion, and pull env.
 
 ```bash
 npm i -g neon@latest
