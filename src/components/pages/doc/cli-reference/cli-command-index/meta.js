@@ -38,6 +38,10 @@ const META = {
     examples: ['neon open'],
   },
   me: { desc: 'Show the authenticated user.', examples: ['neon me'] },
+  mcp: {
+    desc: 'Install the Neon MCP server into your coding agents.',
+    examples: ['neon mcp', 'neon mcp -y'],
+  },
   completion: { desc: 'Generate a shell completion script.' },
   projects: { desc: 'Manage projects.', examples: ['neon projects list'] },
   branches: {

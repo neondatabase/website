@@ -9,7 +9,7 @@ summary: >-
   Cursor, VS Code, Claude Code, and any add-mcp client. The `--agent` flag runs
   it in agent/JSON mode.
 enableTableOfContents: true
-updatedOn: '2026-08-24T21:22:07.503Z'
+updatedOn: '2026-08-25T02:37:06.867Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -42,7 +42,7 @@ Use `--agent` (alias `-a`) to run `init` in agent/JSON mode, designed for when a
 
 ## Coding assistant support
 
-`init` is backed by the `neon-init` package bundled with `neon`. Besides Cursor, VS Code, and Claude Code, the interactive flow can configure any client that [add-mcp supports](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp). To register only the Neon MCP server in a client config (no `init`, no agent skills, no extension install), run `npx add-mcp https://mcp.neon.tech/mcp`. See [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
+`init` is backed by the `neon-init` package bundled with `neon`. Besides Cursor, VS Code, and Claude Code, the interactive flow can configure any client that [add-mcp supports](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp). To register only the Neon MCP server in a client config (no `init`, no agent skills, no extension install), run [`neon mcp`](/docs/cli/mcp), or `npx add-mcp https://mcp.neon.tech/mcp` for the lower-level tool directly. See [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
 
 ## What gets created
 
