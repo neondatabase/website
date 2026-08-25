@@ -9,7 +9,7 @@ summary: >-
   Cursor, VS Code, Claude Code, and any add-mcp client. The `--agent` flag runs
   it in agent/JSON mode.
 enableTableOfContents: true
-updatedOn: '2026-08-25T02:37:06.867Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -28,7 +28,7 @@ npx neon@latest init
 
 After running the command, restart your editor and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The installed agent skills help you get started, including configuring a database connection. For Cursor and VS Code, the Neon Local Connect extension also provides database schema browsing, SQL editing, and table data management directly in your IDE.
 
-Under the hood, `init` runs `npx skills add neondatabase/agent-skills --skill neon --skill neon-postgres --agent <name>` for each selected editor. You can also run this command directly to install skills without the rest of the init flow, or use `npx skills add ... -g` to install globally. See [neon-postgres on skills.sh](https://skills.sh/neondatabase/agent-skills/neon-postgres) for more about the skills.
+Under the hood, `init` runs `npx skills add neondatabase/agent-skills --skill neon --skill neon-postgres --agent <name>` for each selected editor. To install skills on their own, without the rest of the init flow, use [`neon skills`](/docs/cli/skills) (add `--global` for a user-level install). See [neon-postgres on skills.sh](https://skills.sh/neondatabase/agent-skills/neon-postgres) for more about the skills.
 
 <Admonition type="warning">
 Skills are installed at the project level in the current working directory. Run `init` from your project root, otherwise skills will end up in the wrong location. You may want to commit project-level files so teammates get the same skills, or add them to `.gitignore` for per-developer setup.
