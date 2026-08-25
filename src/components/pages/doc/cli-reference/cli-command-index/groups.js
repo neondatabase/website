@@ -49,6 +49,7 @@ const GROUP_OF = {
   logs: 'debugging',
   open: 'setup',
   mcp: 'setup',
+  skills: 'setup',
 };
 
 // Commands documented as a section of another command's page instead of a

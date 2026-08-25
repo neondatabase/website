@@ -12,7 +12,7 @@ summary: >-
   through the Neon API, with autoscaling, scale-to-zero, branching, and
   point-in-time recovery included.
 enableTableOfContents: true
-updatedOn: '2026-08-17T12:17:37.017Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 ---
 
 <InfoBlock>
@@ -86,18 +86,18 @@ Compute is billed at $0.106 per compute unit hour (Launch rate, lower than Scale
 
 Agent and Scale are different plans. Enrollment starts from Scale, but after you join Agent your organizations use Agent pricing and limits.
 
-| Feature | Agent plan | Scale plan |
-| ------- | ---------- | ---------- |
-| Projects | Unlimited. We incrementally raise your limit to accommodate growing usage. | 1,000 (can be increased on request) |
-| Compute | $0.106 per CU-hour | $0.222 per CU-hour |
-| Max fixed compute size | 16 CU | 56 CU |
-| Autoscaling | Up to 16 CU | Up to 16 CU |
-| Branches per project | Up to 1,000 | Up to 5,000 |
-| Root branches per project | 5 | 25 |
-| Read replicas | Up to 3 | Unlimited |
-| Instant restore history window | Up to 7 days | Up to 30 days |
-| Public network transfer | 100 GB per project included, then $0.10/GB | 500 GB per project included, then $0.10/GB |
-| Automated snapshot schedules | Available upon request | Available |
+| Feature                        | Agent plan                                                                 | Scale plan                                 |
+| ------------------------------ | -------------------------------------------------------------------------- | ------------------------------------------ |
+| Projects                       | Unlimited. We incrementally raise your limit to accommodate growing usage. | 1,000 (can be increased on request)        |
+| Compute                        | $0.106 per CU-hour                                                         | $0.222 per CU-hour                         |
+| Max fixed compute size         | 16 CU                                                                      | 56 CU                                      |
+| Autoscaling                    | Up to 16 CU                                                                | Up to 16 CU                                |
+| Branches per project           | Up to 1,000                                                                | Up to 5,000                                |
+| Root branches per project      | 5                                                                          | 25                                         |
+| Read replicas                  | Up to 3                                                                    | Unlimited                                  |
+| Instant restore history window | Up to 7 days                                                               | Up to 30 days                              |
+| Public network transfer        | 100 GB per project included, then $0.10/GB                                 | 500 GB per project included, then $0.10/GB |
+| Automated snapshot schedules   | Available upon request                                                     | Available                                  |
 
 Both plans include metrics/logs export, SOC 2 reporting, private networking, and configurable scale-to-zero. For the full Scale feature list, see [Neon plans](/docs/introduction/plans).
 
@@ -122,17 +122,17 @@ See [transfer projects between organizations](/docs/manage/orgs-project-transfer
 
 The agent plan uses usage-based pricing with dedicated support. See [Agent vs Scale](#agent-vs-scale) for how limits compare to Scale.
 
-| Resource                        | Agent plan                                                                                            |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Projects                        | **Unlimited** <br/> _We incrementally raise your limit to accommodate growing usage._                 |
-| Branches per Project            | **Up to 1,000** <br/> _Agents use branches to quickly toggle between application states._             |
-| Compute                         | **$0.106 per compute unit hour** <br/> _Same rate as Launch; lower than Scale_                        |
-| Storage                         | **$0.35 per GB-month** <br/> _Same as Launch and Scale_                                               |
-| Instant Restore (PITR)          | **$0.2 per GB-month** <br/> _Up to 7-day history window_                                              |
-| Public network transfer         | **100 GB per project included**, then $0.10/GB                                                        |
-| Management API                  | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_     |
-| Data API (PostgREST-compatible) | **Higher Rate Limits Available** <br/> _REST API for direct database access_                          |
-| Support                         | **Shared Slack Channel** <br/> _Direct access to the Neon team_                                       |
+| Resource                        | Agent plan                                                                                        |
+| ------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Projects                        | **Unlimited** <br/> _We incrementally raise your limit to accommodate growing usage._             |
+| Branches per Project            | **Up to 1,000** <br/> _Agents use branches to quickly toggle between application states._         |
+| Compute                         | **$0.106 per compute unit hour** <br/> _Same rate as Launch; lower than Scale_                    |
+| Storage                         | **$0.35 per GB-month** <br/> _Same as Launch and Scale_                                           |
+| Instant Restore (PITR)          | **$0.2 per GB-month** <br/> _Up to 7-day history window_                                          |
+| Public network transfer         | **100 GB per project included**, then $0.10/GB                                                    |
+| Management API                  | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_ |
+| Data API (PostgREST-compatible) | **Higher Rate Limits Available** <br/> _REST API for direct database access_                      |
+| Support                         | **Shared Slack Channel** <br/> _Direct access to the Neon team_                                   |
 
 > _Pricing applies to the paid organization only._
 
@@ -150,13 +150,13 @@ Track compute time, storage, and network I/O per project to monitor usage and bu
 
 The agent plan includes these benefits for participating platforms:
 
-| Benefit                    | Description                                                                                                                                 |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Benefit                    | Description                                                                                                                                                            |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Your Free Tier is free** | Neon sponsors projects in your free tier, covering infrastructure costs. Project limits are unlimited; we incrementally raise your limit to accommodate growing usage. |
-| **General use credits**    | Up to $25,000 in credits for paid tier usage (for platforms not already enrolled in the [Neon Startup Program](https://neon.com/startups)). |
-| **Higher rate limits**     | Custom rate limits for Management API and Data API to support high-volume operations.                                                       |
-| **Dedicated support**      | Shared Slack channel with direct access to the Neon team for technical support.                                                             |
-| **Co-marketing**           | Blog features, social promotions, hackathon support, and joint marketing opportunities.                                                     |
+| **General use credits**    | Up to $25,000 in credits for paid tier usage (for platforms not already enrolled in the [Neon Startup Program](https://neon.com/startups)).                            |
+| **Higher rate limits**     | Custom rate limits for Management API and Data API to support high-volume operations.                                                                                  |
+| **Dedicated support**      | Shared Slack channel with direct access to the Neon team for technical support.                                                                                        |
+| **Co-marketing**           | Blog features, social promotions, hackathon support, and joint marketing opportunities.                                                                                |
 
 ## Getting started
 
@@ -170,10 +170,10 @@ Once enrolled in the agent plan:
 For step-by-step implementation instructions, see the [AI Agent integration guide](/docs/guides/ai-agent-integration).
 
 <Admonition type="tip" title="Code samples and agent skill">
-The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides TypeScript samples and a companion agent skill for building on the agent plan. Install the companion skill with:
+The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides TypeScript samples and a companion agent skill for building on the agent plan. Install the companion skill with the [Neon CLI](/docs/cli):
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon-postgres-agent-platforms -y
+neon skills -s neon-postgres-agent-platforms -y
 ```
 
 </Admonition>

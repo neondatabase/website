@@ -13,7 +13,7 @@ summary: >-
 description: >-
   Install the Neon plugin in OpenAI Codex for MCP-backed database
   management plus skills for Neon workflows and egress cost optimization.
-updatedOn: '2026-08-25T02:37:06.867Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 ---
 
 The **Neon** Codex plugin helps you manage Neon projects and databases. It adds Neon-specific [Agent Skills](https://developers.openai.com/codex/skills/) and Neon API access to [OpenAI Codex](https://developers.openai.com/codex/), including the **Neon MCP Server** for project and database management and skills that cover connection methods, branching, autoscaling, [Managed Better Auth](/docs/auth/overview), and more.
@@ -116,13 +116,13 @@ That flow can set up OAuth, API keys, MCP configuration, and project-level skill
 
 ## Use skills outside the Codex plugin
 
-The [Agent Skills repository](https://github.com/neondatabase/agent-skills) publishes the same skills for other AI tools. Install the main Neon skill with:
+The [Agent Skills repository](https://github.com/neondatabase/agent-skills) publishes the same skills for other AI tools. With the [Neon CLI](/docs/cli), install the core Neon skills with:
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon-postgres
+neon skills -s neon -s neon-postgres
 ```
 
-See [Agent Skills](/docs/ai/agent-skills) for global vs project install and other options.
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s neon-postgres`. See [Agent Skills](/docs/ai/agent-skills) for global vs project install and other options.
 
 ## Learn more
 

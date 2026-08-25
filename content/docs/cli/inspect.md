@@ -127,6 +127,14 @@ neon inspect db locks
 No locks held in any database.
 ```
 
+### neon inspect db stalled-queries (#db-stalled-queries)
+
+Active queries that have been running for at least 30 seconds, reported with their waits, blockers, parallel workers, query IDs, and query text. Where `long-running-queries` catches statements past a five-minute mark, this surfaces stalls sooner and shows what each backend is waiting on. Parallel workers are grouped with their leader process, and the `Blocking Pids` column shows which backends are holding others up. Run it during an incident to see what is running right now and what is blocking it.
+
+```bash
+neon inspect db stalled-queries
+```
+
 ### neon inspect db outliers (#db-outliers)
 
 The top 25 queries by cumulative execution time (`Total Exec Time`), with each query's share of the total (`Prop Exec Time`) and how often it ran (`Ncalls`). This ranks by total time spent, so a cheap query that runs constantly can outrank an expensive one that runs rarely. Needs the [`pg_stat_statements`](/docs/extensions/pg_stat_statements) extension.

@@ -1214,6 +1214,8 @@
                   slug: cli/init
                 - title: mcp
                   slug: cli/mcp
+                - title: skills
+                  slug: cli/skills
                 - title: bootstrap
                   slug: cli/bootstrap
                 - title: link

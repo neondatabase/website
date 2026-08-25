@@ -42,6 +42,10 @@ const META = {
     desc: 'Install the Neon MCP server into your coding agents.',
     examples: ['neon mcp', 'neon mcp -y'],
   },
+  skills: {
+    desc: 'Install and update Neon agent skills in your coding agents.',
+    examples: ['neon skills', 'neon skills -y', 'neon skills update -y'],
+  },
   completion: { desc: 'Generate a shell completion script.' },
   projects: { desc: 'Manage projects.', examples: ['neon projects list'] },
   branches: {

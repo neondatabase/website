@@ -6,16 +6,18 @@ summary: >-
   a client, creating a bucket, and uploading and downloading your first file.
   Use the Files SDK or any AWS S3-compatible SDK. Just point it at your branch endpoint.
 enableTableOfContents: true
-updatedOn: '2026-07-15T23:47:24.799Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
 
-To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills:
+To set up Neon Object Storage with an AI coding assistant, install the Neon Platform (`neon`) and Neon Object Storage skills with the [Neon CLI](/docs/cli):
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon -s neon-object-storage
+neon skills -s neon -s neon-object-storage
 ```
+
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s neon-object-storage` instead.
 
 To follow this guide, you need:
 
