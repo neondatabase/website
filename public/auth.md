@@ -102,6 +102,9 @@ The project-scoped Neon API key stays inside Claimable Neon and is never returne
 
 ## Claim the project
 
+Metadata `claim_endpoint` is `POST /v1/agent/identity/claim` with `{"claim_token":"<identity_assertion>"}`.
+The HTTP below uses the access token instead. Both create the same claim code.
+
 Create a short-lived human claim code when the project is ready to keep:
 
 ```http
