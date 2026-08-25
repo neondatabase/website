@@ -175,15 +175,13 @@ neon diff main
 
 ## Call any Neon API route with neon api (agent fallback)
 
-Most humans will never need this. Coding agents reach for [`neon api`](https://neon.com/docs/cli/api) when they need an API route that doesn't have a dedicated CLI command yet - a fallback for automation, not day-to-day terminal work. It uses your existing CLI login:
+Most humans will never need this - this is a fallback for agent automation. Coding agents can now reach for [`neon api`](https://neon.com/docs/cli/api) when they need an API route that doesn't have a dedicated CLI command yet. It uses your existing CLI login:
 
 ```
 neon api --list
 neon api /projects -Q org_id=org-cool-darkness-12345678
 neon api /projects/late-frost-12345678/branches -X POST -F branch.name=dev
 ```
-
--F branch.name=dev builds nested JSON. Bodies can also come from -d @file.
 
 ## Snapshots from the terminal: neon snapshots
 
