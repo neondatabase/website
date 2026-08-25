@@ -6,7 +6,7 @@ import DeploymentCards from './deployment-cards';
 import FeatureHeading from './feature-heading';
 
 const EncoreTestimonial = () => (
-  <figure className="absolute top-[72px] left-1/2 z-10 flex min-h-[257px] w-[36.6667%] max-w-[704px] min-w-140 flex-col justify-between border border-[#242628] bg-black-pure px-8 py-8 2xl:top-10 2xl:right-24 2xl:left-auto 2xl:w-1/4 lg:right-auto lg:left-1/5 lg:min-h-[230px] md:inset-x-10 md:top-0 md:min-h-[240px] md:w-auto md:min-w-80 md:translate-x-0 md:px-6 md:py-6 sm:inset-x-5 sm:min-h-[260px] sm:px-5">
+  <figure className="absolute top-[72px] left-1/2 z-10 flex min-h-[257px] w-[36.6667%] max-w-[704px] min-w-140 flex-col justify-between border border-[#242628] bg-black-pure px-8 py-8 2xl:top-0 2xl:right-24 2xl:left-auto 2xl:w-1/4 xl:right-18 xl:w-1/5 xl:min-w-128 xl:px-6 xl:py-6 lg:right-auto lg:left-1/4 lg:min-h-[230px] lg:min-w-124 md:inset-x-10 md:min-h-[240px] md:w-auto md:min-w-80 md:translate-x-0 sm:inset-x-5 sm:min-h-[260px] sm:px-5">
     <blockquote className="max-w-[620px] text-2xl leading-normal tracking-extra-tight text-white xl:text-xl sm:text-lg">
       “Our users were asking for preview environments that already had their data in place. Neon’s
       branching was exactly what we needed”

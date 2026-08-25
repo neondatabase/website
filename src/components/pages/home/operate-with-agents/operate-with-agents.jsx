@@ -21,12 +21,6 @@ const BENEFITS = [
   },
 ];
 
-const OperateWithAgentsVisual = () => (
-  <div className="min-w-0">
-    <Animation />
-  </div>
-);
-
 const OperateWithAgents = () => (
   <section
     className="operate-with-agents relative mt-40 overflow-hidden bg-black-pure safe-paddings text-white lg:mt-32 md:mt-28 sm:mt-24"
@@ -70,7 +64,9 @@ const OperateWithAgents = () => (
         ))}
       </ul>
 
-      <OperateWithAgentsVisual />
+      <div className="w-full">
+        <Animation />
+      </div>
     </Container>
   </section>
 );

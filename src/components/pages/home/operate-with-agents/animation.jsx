@@ -7,8 +7,9 @@ import {
   useViewModelInstance,
   useViewModelInstanceNumber,
 } from '@rive-app/react-canvas';
-import { domAnimation, LazyMotion, useReducedMotion } from 'framer-motion';
+import { cubicBezier, domAnimation, LazyMotion, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import useRiveAnimation from 'hooks/use-rive-animation';
 import { cn } from 'utils/cn';
@@ -24,31 +25,38 @@ const CHAT_WIDTH = 384;
 const MOBILE_CHAT_HEIGHT = 295;
 const MOBILE_VISUAL_GAP = 32;
 const MOBILE_VIEWPORT_QUERY = '(max-width: 47.9375rem)';
-const SEND_DURATION = 150;
+const PRE_SEND_PAUSE_DURATION = 100;
 const MESSAGE_REVEAL_DURATION = 250;
 const PAUSE_DURATION = 1000;
+const RESULT_PAUSE_DURATION = 600;
+const TYPING_EASE = cubicBezier(0.2, 0.07, 0.3, 1);
 
 const PROMPT_STEPS = [
-  { prompt: CHAT_PROMPTS[0], typeDuration: 1400, riveState: 1, riveDuration: 5000 },
-  { prompt: CHAT_PROMPTS[1], typeDuration: 800, riveState: 2, riveDuration: 2500 },
-  { prompt: CHAT_PROMPTS[2], typeDuration: 900, riveState: 3, riveDuration: 3000 },
+  { prompt: CHAT_PROMPTS[0], typeDuration: 0, riveState: 1, riveDuration: 5000 },
+  { prompt: CHAT_PROMPTS[1], typeDuration: 900, riveState: 2, riveDuration: 2500 },
+  { prompt: CHAT_PROMPTS[2], typeDuration: 1000, riveState: 3, riveDuration: 3000 },
 ];
 
 const buildAnimationSequence = () => {
-  const timeline = [{ at: 0, riveState: 0, visibleMessages: 0 }];
+  const timeline = [
+    { at: 0, riveState: 0, visibleMessages: 0 },
+    { at: 0, riveState: 0, visibleMessages: 1 },
+  ];
   const typingWindows = [];
   let elapsed = 0;
   let currentRiveState = 0;
 
   PROMPT_STEPS.forEach(({ prompt, typeDuration, riveState, riveDuration }, index) => {
-    const typingStartsAt = elapsed;
-    const typingEndsAt = typingStartsAt + typeDuration;
-    const sendEndsAt = typingEndsAt + SEND_DURATION;
+    if (typeDuration > 0) {
+      const typingStartsAt = elapsed;
+      const typingEndsAt = typingStartsAt + typeDuration;
+      const sendEndsAt = typingEndsAt + PRE_SEND_PAUSE_DURATION;
 
-    typingWindows.push({ prompt, startsAt: typingStartsAt, typingEndsAt, sendEndsAt });
+      typingWindows.push({ prompt, startsAt: typingStartsAt, typingEndsAt, sendEndsAt });
 
-    elapsed = sendEndsAt;
-    timeline.push({ at: elapsed, riveState: currentRiveState, visibleMessages: index * 2 + 1 });
+      elapsed = sendEndsAt;
+      timeline.push({ at: elapsed, riveState: currentRiveState, visibleMessages: index * 2 + 1 });
+    }
 
     elapsed += MESSAGE_REVEAL_DURATION + PAUSE_DURATION;
     currentRiveState = riveState;
@@ -58,6 +66,9 @@ const buildAnimationSequence = () => {
     timeline.push({ at: elapsed, riveState, visibleMessages: index * 2 + 2 });
 
     elapsed += MESSAGE_REVEAL_DURATION;
+    if (index < PROMPT_STEPS.length - 1) {
+      elapsed += RESULT_PAUSE_DURATION;
+    }
   });
 
   return { duration: elapsed, timeline, typingWindows };
@@ -79,7 +90,7 @@ const getComposerText = (elapsed) => {
   if (elapsed >= typingEndsAt) return prompt;
 
   const progress = (elapsed - startsAt) / (typingEndsAt - startsAt);
-  return prompt.slice(0, Math.floor(progress * prompt.length));
+  return prompt.slice(0, Math.floor(TYPING_EASE(progress) * prompt.length));
 };
 
 const FINAL_MESSAGE_COUNT = 6;
@@ -95,6 +106,7 @@ const Animation = () => {
   const [isMobileLayout, setIsMobileLayout] = useState(false);
   const [timelineIndex, setTimelineIndex] = useState(0);
   const [composerText, setComposerText] = useState('');
+  const [chatVisibilityRef, isChatVisible] = useInView({ threshold: 0.3, triggerOnce: true });
   const shouldReduceMotion = useReducedMotion() ?? false;
   const fontLoader = useMemo(() => createRiveFontLoader({ 'Geist Mono': RIVE_FONT_URL }), []);
 
@@ -114,7 +126,9 @@ const Animation = () => {
     autoBind: true,
     fit: Fit.Contain,
     alignment: Alignment.Center,
-    threshold: 0.2,
+    threshold: 0.1,
+    rootMargin: '2000px 0px',
+    visibilityRootMargin: '250px 0px',
     assetLoader: fontLoader,
     managePlayback: false,
   });
@@ -187,6 +201,16 @@ const Animation = () => {
     }
 
     if (!isVisible) {
+      if (elapsedRef.current === 0) {
+        if (appliedRiveStateRef.current !== 0) {
+          appliedRiveStateRef.current = 0;
+          setRiveState(0);
+        }
+
+        rive?.play();
+        return () => rive?.pause();
+      }
+
       rive?.pause();
       return undefined;
     }
@@ -263,9 +287,10 @@ const Animation = () => {
     };
   }, [isLoaded, isVisible, rive, setRiveState, shouldReduceMotion, viewModelInstance]);
 
-  const visibleMessages = shouldReduceMotion
+  const timelineVisibleMessages = shouldReduceMotion
     ? FINAL_MESSAGE_COUNT
     : TIMELINE[timelineIndex].visibleMessages;
+  const visibleMessages = isChatVisible ? timelineVisibleMessages : 0;
   const measuredWidth = visualWidth ?? VISUAL_WIDTH;
   const desktopScale = Math.min(measuredWidth / VISUAL_WIDTH, 1);
   const riveScale = isMobileLayout ? Math.min(measuredWidth / RIVE_WIDTH, 1) : desktopScale;
@@ -282,7 +307,7 @@ const Animation = () => {
 
   return (
     <div
-      className="relative w-full overflow-hidden md:mx-auto md:max-w-sm"
+      className="relative w-full overflow-hidden md:mx-auto md:mt-8 md:max-w-sm"
       ref={setVisualRef}
       style={
         visualWidth === null
@@ -293,7 +318,7 @@ const Animation = () => {
     >
       <div
         className={cn(
-          'absolute top-0 h-[878px] w-[704px] origin-top-left transition-opacity duration-300',
+          'absolute top-0 h-[878px] w-[704px] origin-top-left transition-opacity duration-150',
           isReady ? 'opacity-100' : 'opacity-0'
         )}
         data-operate-rive
@@ -310,6 +335,7 @@ const Animation = () => {
       <LazyMotion features={domAnimation}>
         <Chat
           className="absolute top-0 left-0 origin-top-left"
+          chatRef={chatVisibilityRef}
           composerText={composerText}
           isCompact={isMobileLayout}
           style={{

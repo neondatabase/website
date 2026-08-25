@@ -236,6 +236,7 @@ ChatComposer.propTypes = {
 
 const Chat = ({
   className,
+  chatRef,
   composerText,
   isCompact,
   style,
@@ -249,6 +250,7 @@ const Chat = ({
       className
     )}
     data-operate-chat
+    ref={chatRef}
     style={style}
     aria-hidden
   >
@@ -273,6 +275,7 @@ const Chat = ({
 
 Chat.propTypes = {
   className: PropTypes.string,
+  chatRef: PropTypes.func,
   composerText: PropTypes.string.isRequired,
   isCompact: PropTypes.bool.isRequired,
   visibleMessages: PropTypes.number.isRequired,

@@ -11,7 +11,7 @@ const IMAGE_ROOT = '/images/pages/home/scale-your-app';
 const SCENE_WIDTH = 2154;
 const SCENE_HEIGHT = 916;
 const REVEAL_DURATION = 3600;
-const revealEasing = cubicBezierEasing([0.645, 0.045, 0.355, 1]);
+const revealEasing = cubicBezierEasing([0.17, 0.64, 0.84, 0.48]);
 
 const CARD_POSITIONS = [
   [1, 62],
