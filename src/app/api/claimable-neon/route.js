@@ -6,7 +6,7 @@ const ALLOWED_SERVICES = new Map([
 
 class ClaimableResponseError extends Error {
   constructor(status, body) {
-    super('Claimable Postgres rejected the request.');
+    super('Claimable Neon rejected the request.');
     this.name = 'ClaimableResponseError';
     this.status = status;
     this.body = body;
@@ -15,7 +15,7 @@ class ClaimableResponseError extends Error {
 
 class ClaimableConnectionError extends Error {
   constructor(cause) {
-    super('Claimable Postgres could not be reached.', { cause });
+    super('Claimable Neon could not be reached.', { cause });
     this.name = 'ClaimableConnectionError';
   }
 }
@@ -62,7 +62,7 @@ const requestClaimable = async (path, init = {}) => {
       body = JSON.parse(text);
     } catch {
       throw new ClaimableContractError(
-        `Claimable Postgres returned non-JSON content with HTTP ${response.status}.`
+        `Claimable Neon returned non-JSON content with HTTP ${response.status}.`
       );
     }
   }
@@ -94,14 +94,14 @@ const requireRegistration = (body) => {
     typeof body.project.expires_at !== 'string' ||
     !Array.isArray(body.capabilities)
   ) {
-    throw new ClaimableContractError('Claimable Postgres returned an invalid registration.');
+    throw new ClaimableContractError('Claimable Neon returned an invalid registration.');
   }
   return body;
 };
 
 const requireToken = (body) => {
   if (!body || typeof body.access_token !== 'string') {
-    throw new ClaimableContractError('Claimable Postgres returned an invalid access token.');
+    throw new ClaimableContractError('Claimable Neon returned an invalid access token.');
   }
   return body.access_token;
 };
@@ -116,7 +116,7 @@ const requireCredentials = (body, project) => {
     typeof body.services !== 'object'
   ) {
     throw new ClaimableContractError(
-      'Claimable Postgres returned invalid credentials for the provisioned project.'
+      'Claimable Neon returned invalid credentials for the provisioned project.'
     );
   }
   return body;
@@ -128,7 +128,7 @@ const requireClaim = (body) => {
     typeof body.verification_uri_complete !== 'string' ||
     typeof body.expires_in !== 'number'
   ) {
-    throw new ClaimableContractError('Claimable Postgres returned an invalid claim link.');
+    throw new ClaimableContractError('Claimable Neon returned an invalid claim link.');
   }
   return body;
 };
@@ -139,7 +139,7 @@ const errorFor = (error) => {
       error.body ?? {
         error: {
           code: 'claimable_request_failed',
-          message: `Claimable Postgres returned HTTP ${error.status}.`,
+          message: `Claimable Neon returned HTTP ${error.status}.`,
         },
       },
       error.status
@@ -167,12 +167,12 @@ const errorFor = (error) => {
       502
     );
   }
-  console.error('[claimable-postgres] Unexpected error:', error);
+  console.error('[claimable-neon] Unexpected error:', error);
   return jsonResponse(
     {
       error: {
         code: 'internal_error',
-        message: 'The database could not be created.',
+        message: 'The project could not be created.',
       },
     },
     500
@@ -273,7 +273,7 @@ export async function POST(request) {
         });
       } catch (cleanupError) {
         console.error(
-          `[claimable-postgres] Cleanup failed for project ${registration.project.id}:`,
+          `[claimable-neon] Cleanup failed for project ${registration.project.id}:`,
           cleanupError
         );
         return jsonResponse(

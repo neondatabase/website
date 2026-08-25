@@ -10,7 +10,7 @@ summary: >-
   with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
   `neon init`, or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-08-20T11:15:28.658Z'
+updatedOn: '2026-08-25T16:36:05.871Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -123,10 +123,10 @@ Skills are grouped by area. Each skill is a `SKILL.md` entry point that your age
 
 Start here for platform overview and Postgres development.
 
-| Skill                                                                        | Description                                                                                                                 |
-| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| Skill                                                                        | Description                                                                                                                                                |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`neon`](https://skills.sh/neondatabase/agent-skills/neon)                   | Platform overview for apps and agents: Postgres, Auth, Data API, Functions, Storage, and AI Gateway, including Claimable Neon when there is no account yet |
-| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Full index of Neon Serverless Postgres documentation and best practices                                                     |
+| [`neon-postgres`](https://skills.sh/neondatabase/agent-skills/neon-postgres) | Full index of Neon Serverless Postgres documentation and best practices                                                                                    |
 
 ### Database workflows
 
@@ -177,7 +177,7 @@ With the full skill set installed, your assistant can guide you across the Neon 
 
 **Database workflows**
 
-- **Disposable databases** via [Claimable Postgres](/claimable-postgres), for agents and tests
+- **Disposable projects** via [Claimable Neon](/claimable-neon), for agents and tests
 - **Branch types and workflows** for migrations, schema-only branches, and reset-from-parent
 - **Egress optimization** for high transfer costs and query anti-patterns
 

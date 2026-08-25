@@ -1,5 +1,5 @@
 ---
-title: Claimable Postgres by Neon
+title: Claimable Neon
 subtitle: CLI, claim, and HTTP reference
 summary: >-
   If an agent needs a Neon account and the user is not around, provision a
@@ -9,12 +9,13 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-08-25T15:08:57.673Z'
+  - /docs/reference/claimable-postgres
+updatedOn: '2026-08-25T16:36:05.871Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
 
-Start in the browser at [neon.com/claimable-postgres](/claimable-postgres), or give an agent [`auth.md`](https://neon.com/auth.md).
+Start in the browser at [neon.com/claimable-neon](/claimable-neon), or give an agent [`auth.md`](https://neon.com/auth.md).
 
 ## Quick start
 
@@ -76,7 +77,7 @@ The response contains an `identity_assertion`, project metadata, and one decisio
 
 If an agent needs a Neon account and the user is not around, [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt) points at [`auth.md`](https://neon.com/auth.md). This page is the human reference.
 
-Claimable Postgres implements [auth.md](https://workos.com/auth-md/docs/auth-md). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
+Claimable Neon implements [auth.md](https://workos.com/auth-md/docs/auth-md). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
 
 | Document or endpoint                                                    | Purpose                                                                               |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
@@ -312,7 +313,7 @@ Common codes include:
 
 ## Resources
 
-- [Create a database in the browser](/claimable-postgres)
+- [Create a project in the browser](/claimable-neon)
 - [Claimable Neon auth.md](https://neon.com/auth.md)
 - [Neon CLI reference](/docs/cli)
 - [Claimable database integration](/docs/workflows/claimable-database-integration)

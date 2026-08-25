@@ -32,7 +32,7 @@ The last command prints a Postgres connection string you can pass to any driver.
 
 For automated provisioning, the [Neon API](/docs/reference/api) creates a project, branch, and compute in one call. This is how platforms like Vercel and Replit spin up a per-user database the moment someone signs up.
 
-If you don't want to sign up at all, [Claimable Postgres](https://neon.com/claimable-postgres) gives you a working database in seconds without an account. Claim it to a Neon account before it expires to keep it. See the [Claimable Postgres docs](https://neon.com/docs/reference/claimable-postgres.md).
+If you don't want to sign up at all, [Claimable Neon](https://neon.com/claimable-neon) gives you a working project in seconds without an account. Claim it to a Neon account before it expires to keep it. See the [Claimable Neon docs](https://neon.com/docs/reference/claimable-neon.md).
 
 ## What you get on the Free plan
 

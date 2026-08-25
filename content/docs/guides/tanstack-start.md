@@ -12,7 +12,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-08-16T17:43:51.979Z'
+updatedOn: '2026-08-25T16:36:05.871Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"
@@ -62,7 +62,7 @@ Add a `.env` file to your project directory and add your Neon connection string 
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
-If you haven't created a database yet, [Claimable Postgres](/claimable-postgres) provisions a temporary database on Neon without an account. A human can claim the project into a Neon account before it expires. See [Claimable Postgres](/docs/reference/claimable-postgres).
+If you haven't created a project yet, [Claimable Neon](/claimable-neon) provisions a temporary Neon project without an account. A human can claim the project into a Neon account before it expires. See [Claimable Neon](/docs/reference/claimable-neon).
 
 ## Configure the Postgres client
 

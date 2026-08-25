@@ -73,7 +73,7 @@ See [Plans](https://neon.com/docs/introduction/plans.md) for full details.
 
 ### How can I try Neon without signing up?
 
-Use [Claimable Postgres](https://neon.com/claimable-postgres) for an instant database, with no signup and no card. Provision from that page or the [API](https://neon.com/docs/reference/claimable-postgres.md). Claim it to a Neon account before expiration to keep it.
+Use [Claimable Neon](https://neon.com/claimable-neon) for an instant project, with no signup and no card. Provision from that page or the [API](https://neon.com/docs/reference/claimable-neon.md). Claim it to a Neon account before expiration to keep it.
 
 ### What is a project?
 

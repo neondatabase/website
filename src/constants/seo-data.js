@@ -51,11 +51,11 @@ export default {
     pathname: LINKS.caseStudies,
     imagePath: '/images/social-previews/case-studies.jpg',
   },
-  claimablePostgres: {
-    title: 'Claimable Postgres for agents — Neon',
+  claimableNeon: {
+    title: 'Claimable Neon for agents — Neon',
     description:
-      'Let agents provision temporary Lakebase Postgres, Data API, and Managed Better Auth before a human creates a Neon account.',
-    pathname: LINKS.claimablePostgres,
+      'Let agents provision a temporary Neon project — Lakebase Postgres, Data API, and Managed Better Auth — before a human creates a Neon account.',
+    pathname: LINKS.claimableNeon,
   },
   cli: {
     title: 'Your Neon workflow lives in the terminal',

@@ -110,10 +110,10 @@ const Provisioner = () => {
     });
   };
 
-  const createDatabase = async () => {
+  const createProject = async () => {
     setState({ status: 'loading' });
     try {
-      const response = await fetch('/api/claimable-postgres', {
+      const response = await fetch('/api/claimable-neon', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ services: [...selectedServices] }),
@@ -123,14 +123,14 @@ const Provisioner = () => {
         throw new Error(
           body?.error?.message ||
             body?.error ||
-            `Database creation failed with HTTP ${response.status}.`
+            `Project creation failed with HTTP ${response.status}.`
         );
       }
       setState({ status: 'success', result: body });
     } catch (error) {
       setState({
         status: 'error',
-        message: error instanceof Error ? error.message : 'The database could not be created.',
+        message: error instanceof Error ? error.message : 'The project could not be created.',
       });
     }
   };
@@ -168,7 +168,7 @@ const Provisioner = () => {
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-green-45 to-transparent" />
         <div className="flex items-start justify-between gap-5">
           <div>
-            <p className="text-sm font-medium text-green-45">Database ready</p>
+            <p className="text-sm font-medium text-green-45">Project ready</p>
             <h2 className="mt-1 font-title text-2xl tracking-tight">Connect your agent</h2>
           </div>
           <span className="rounded-full border border-white/10 px-2.5 py-1 font-mono text-xs text-gray-new-60">
@@ -294,9 +294,9 @@ const Provisioner = () => {
         theme="primary"
         type="button"
         disabled={state.status === 'loading'}
-        handleClick={createDatabase}
+        handleClick={createProject}
       >
-        {state.status === 'loading' ? 'Creating database…' : 'Create temporary database'}
+        {state.status === 'loading' ? 'Creating project…' : 'Create a project'}
       </Button>
 
       <p className="mt-3 text-center text-xs leading-relaxed text-gray-new-50">
@@ -330,7 +330,7 @@ InterfaceCard.propTypes = {
   code: PropTypes.string.isRequired,
 };
 
-const ClaimablePostgres = () => (
+const ClaimableNeon = () => (
   <>
     <section className="relative overflow-hidden pt-[150px] safe-paddings pb-24 xl:pt-32 lg:pt-20 md:pt-14 md:pb-16">
       <div
@@ -342,27 +342,22 @@ const ClaimablePostgres = () => (
           <div className="max-w-[700px]">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 font-mono text-xs text-gray-new-70">
               <span className="size-1.5 rounded-full bg-green-45 shadow-[0_0_12px_#00e599]" />
-              Claimable Postgres
+              Claimable Neon
             </div>
             <h1 className="mt-7 font-title text-[72px] leading-[0.94] font-medium tracking-[-0.055em] xl:text-[64px] lg:text-[56px] md:text-[44px] sm:text-[38px]">
-              A database when your agent needs one.
+              A project when your agent needs one.
             </h1>
             <p className="mt-6 max-w-[620px] text-xl leading-relaxed tracking-tight text-gray-new-60 xl:text-lg md:text-base">
-              Agents can provision Lakebase Postgres on Neon before a human creates an account.
-              Start building, then claim the project into a Neon organization before it expires.
+              Agents can provision a Neon project before a human creates an account. Start building,
+              then claim the project into a Neon organization before it expires.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-5">
-              <Button
-                size="new"
-                theme="white-filled"
-                to="#provision"
-                tagName="Claimable Postgres Hero"
-              >
-                Create a database
+              <Button size="new" theme="white-filled" to="#provision" tagName="Claimable Neon Hero">
+                Create a project
               </Button>
               <Link
                 className="text-sm font-medium"
-                to="/docs/reference/claimable-postgres"
+                to="/docs/reference/claimable-neon"
                 theme="green"
                 withArrow
               >
@@ -400,7 +395,7 @@ const ClaimablePostgres = () => (
             auth.md, the Neon CLI, and neon.ts.
           </h2>
           <p className="mt-5 max-w-[680px] text-lg leading-relaxed text-gray-new-60 md:text-base">
-            The same scoped agent credential works through the Claimable Postgres API, Neon CLI, and{' '}
+            The same scoped agent credential works through the Claimable Neon API, Neon CLI, and{' '}
             <code>neon.ts</code>.
           </p>
         </div>
@@ -466,4 +461,4 @@ const ClaimablePostgres = () => (
   </>
 );
 
-export default ClaimablePostgres;
+export default ClaimableNeon;
