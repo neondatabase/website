@@ -17,7 +17,7 @@ authors:
 cover:
   image: >-
     https://cdn.neonapi.io/public/images/pages/blog/just-landed-in-the-neon-cli/neon-just-landed.jpg
-  alt: null
+  alt: Just landed in the Neon CLI
 isFeatured: false
 seo:
   title: Just landed in the Neon CLI - Neon
@@ -30,8 +30,11 @@ seo:
   ogDescription: >-
     New commands for branch-first workflows, Postgres diagnostics, schema diffs,
     and a lot more
-  image: null
+  image: >-
+    https://cdn.neonapi.io/public/images/pages/blog/just-landed-in-the-neon-cli/neon-just-landed.jpg
 ---
+
+![Just landed in the Neon CLI](https://cdn.neonapi.io/public/images/pages/blog/just-landed-in-the-neon-cli/neon-just-landed.jpg)
 
 The [Neon CLI](https://neon.com/docs/cli) moved fast over the last couple of months. It is a key tool for agents, who do all the work without ever opening the Console - let’s take a look at some of recent changes:
 
@@ -49,10 +52,20 @@ neon auth
 For agents, set up skills and the MCP server in one shot:
 
 ```
-npx neon@latest init
+neon init
 ```
 
 neonctl still works as an alias - no re-auth is required if you already used the old name.
+
+## Agent tooling: neon init, mcp, and skills
+
+If you're wiring up a coding agent, you have three focused entry points:
+
+- [`neon init`](https://neon.com/docs/cli/init) - full onboarding: OAuth, API key, MCP server, editor extension, and agent skills
+- [`neon mcp`](https://neon.com/docs/cli/mcp) - MCP server only
+- [`neon skills`](https://neon.com/docs/cli/skills) - agent skills only
+
+`neon init` is the one-shot setup. Use `mcp` or `skills` when you only need one piece. To refresh skills you've already installed, run `neon skills update`.
 
 ## New commands for branch-first workflows: link, checkout, env pull
 
@@ -75,6 +88,32 @@ A recent refinement - pull only the services you name (postgres, auth, data-api,
 ```
 neon env pull --service ai-gateway --service postgres
 ```
+
+## Debug Postgres via neon inspect db
+
+This [diagnostics tool](https://neon.com/docs/cli/inspect) bundles read-only diagnostics against Postgres stats and catalogs, with connection resolution handled by the CLI:
+
+```
+neon link
+neon inspect db bloat
+neon inspect db outliers
+neon inspect db unused-indexes
+```
+
+Examples of what you get:
+
+- table/index sizes
+- bloat estimates
+- unused indexes
+- sequential scans
+- long-running and stalled queries
+- locks
+- pg_stat_statements outliers/calls
+- vacuum stats
+- replication slots/subscriptions
+- and Neon Local File Cache hit rate / working set ([inspect](https://neon.com/docs/cli/inspect), [deep dive](https://neon.com/blog/neon-inspect-db), [changelog](https://neon.com/docs/changelog/2026-07-24#debug-postgres-from-the-terminal-with-neon-inspect-db)).
+
+Omit the database name to inspect every database on the branch (the output adds a `database` column). It works against a linked branch, or any Postgres URL via --db-url. Same checks are also available on the Neon MCP server as `inspect_database`.
 
 ## Jump to the Console: neon open
 
@@ -134,9 +173,9 @@ neon checkout feature/checkout
 neon diff main
 ```
 
-## Call any Neon API route with neon api
+## Call any Neon API route with neon api (agent fallback)
 
-When you need a route that does not have a CLI command yet, use the [authenticated passthrough](https://neon.com/docs/cli/api) - this command uses your existing CLI login:
+Most humans will never need this. Coding agents reach for [`neon api`](https://neon.com/docs/cli/api) when they need an API route that doesn't have a dedicated CLI command yet - a fallback for automation, not day-to-day terminal work. It uses your existing CLI login:
 
 ```
 neon api --list
@@ -145,32 +184,6 @@ neon api /projects/late-frost-12345678/branches -X POST -F branch.name=dev
 ```
 
 -F branch.name=dev builds nested JSON. Bodies can also come from -d @file.
-
-## Debug Postgres via neon inspect db
-
-This [diagnostics tool](https://neon.com/docs/cli/inspect) bundles 14 read-only diagnostics against Postgres stats and catalogs, with connection resolution handled by the CLI:
-
-```
-neon link
-neon inspect db bloat
-neon inspect db outliers
-neon inspect db unused-indexes
-```
-
-Examples of what you get:
-
-- table/index sizes
-- bloat estimates
-- unused indexes
-- sequential scans
-- long-running queries
-- Locks
-- pg_stat_statements outliers/calls
-- vacuum stats
-- replication slots/subscriptions
-- and Neon Local File Cache hit rate / working set ([inspect](https://neon.com/docs/cli/inspect), [deep dive](https://neon.com/blog/neon-inspect-db), [changelog](https://neon.com/docs/changelog/2026-07-24#debug-postgres-from-the-terminal-with-neon-inspect-db)).
-
-It works against a linked branch, or any Postgres URL via --db-url. Same checks are also available on the Neon MCP server as inspect_database.
 
 ## Snapshots from the terminal: neon snapshots
 
@@ -222,6 +235,9 @@ For declarative branch policy, neon config init scaffolds a starter [neon.ts](ht
 | --- | --- | --- |
 | Install / upgrade | `npm i -g neon@latest` | [install](https://neon.com/docs/cli/install) |
 | Sign in | `neon auth` | [auth](https://neon.com/docs/cli/auth) |
+| Agent onboarding | `neon init` | [init](https://neon.com/docs/cli/init) |
+| MCP server only | `neon mcp` | [mcp](https://neon.com/docs/cli/mcp) |
+| Agent skills only | `neon skills` | [skills](https://neon.com/docs/cli/skills) |
 | Link a project | `neon link` | [link](https://neon.com/docs/cli/link) |
 | Switch branch + env | `neon checkout <name>` | [checkout](https://neon.com/docs/cli/checkout) |
 | Pull env (optionally by service) | `neon env pull [--service …]` | [env](https://neon.com/docs/cli/env) |
@@ -229,26 +245,25 @@ For declarative branch policy, neon config init scaffolds a starter [neon.ts](ht
 | Mint / revoke API keys | `neon api-keys …` | [api-keys](https://neon.com/docs/cli/api-keys) |
 | Multi-account credentials | `neon profile …` | [profile](https://neon.com/docs/cli/profile) |
 | Schema diff | `neon diff [branch]` | [diff](https://neon.com/docs/cli/diff) |
-| Any API route | `neon api <path>` | [api](https://neon.com/docs/cli/api) |
+| Any API route (agent fallback) | `neon api <path>` | [api](https://neon.com/docs/cli/api) |
 | Postgres diagnostics | `neon inspect db <check>` | [inspect](https://neon.com/docs/cli/inspect) |
 | Snapshots | `neon snapshots …` | [snapshots](https://neon.com/docs/cli/snapshots) |
 | Auth management | `neon neon-auth …` | [neon-auth](https://neon.com/docs/cli/neon-auth) |
 | Data API | `neon data-api …` | [data-api](https://neon.com/docs/cli/data-api) |
 | SQL shell | `neon psql` | [psql](https://neon.com/docs/cli/psql) |
-| Agent / MCP setup | `npx neon@latest init` | [init](https://neon.com/docs/cli/init) |
 
 ## What to put in AGENTS.md
 
-If you want coding agents to use the branch-first loop by default, a short rule is enough:
+Drop this into your project's AGENTS.md (or Cursor rules) so coding agents default to the branch-first loop:
 
+```
 When starting a feature, run `neon checkout <branch-name>` alongside `git checkout -b`.
 
 Prefer project-scoped API keys (`neon api-keys create --project-id …`) for automation.
 
 Use `neon diff` before merging schema changes, and `neon inspect db` for read-only Postgres diagnostics.
 
-Install current Neon skills so the agent knows the new commands:
+Install current Neon skills so the agent knows the commands:
 
-```
-npx neon@latest init
+neon skills
 ```
