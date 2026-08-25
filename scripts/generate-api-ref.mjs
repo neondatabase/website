@@ -711,9 +711,23 @@ export function assertGlobalFlagsCovered(cliSchema, globalFlags = GLOBAL_CLI_FLA
 // Exclusions (skip the warning):
 //   - operation has no positionals AND no non-global flags (nothing to map)
 // Returns an empty array when everything is healthy.
+// Operations that are correctly mapped to a CLI command which shares no
+// flags/positionals with them, so the "no API mappings" heuristic below would
+// false-positive. Each is a verified-correct mapping, not a mis-map:
+//   - listApiKeys: no inputs at all; the `api-keys list` org flag serves the
+//     sibling listOrgApiKeys.
+//   - listSharedProjects: only pagination params (cursor/limit/search), which
+//     the CLI list commands don't surface as flags.
+//   - createApiKey: `--name` corresponds to the `key_name` body field, but the
+//     flag/field name divergence means the heuristic can't auto-detect it.
+// Keep this list tight — it suppresses the warning, so a genuine future mis-map
+// of one of these ops would go unflagged.
+const KNOWN_NO_CLI_MAPPING = new Set(['listApiKeys', 'listSharedProjects', 'createApiKey']);
+
 export function findOpsWithNoApiMappings(allOps) {
   const unmapped = [];
   for (const op of allOps) {
+    if (KNOWN_NO_CLI_MAPPING.has(op.operationId)) continue;
     // Multi-command ops carry inputs per-command; check each independently.
     const commands = op.cli?.commands ?? (op.cli?.command ? [op.cli] : []);
     for (const cmd of commands) {

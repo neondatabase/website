@@ -12,5 +12,11 @@
   "operations.ts",
   "connection_string.ts",
   "set_context.ts",
-  "init.ts"
+  "init.ts",
+  "api_keys.ts",
+  "snapshots.ts",
+  "bucket.ts",
+  "data_api.ts",
+  "functions.ts",
+  "logs.ts"
 ]

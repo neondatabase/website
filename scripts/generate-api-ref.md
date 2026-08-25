@@ -105,7 +105,7 @@ These files are read by the generator and must be in the repo. Some are hand-cur
 | `mcp-coverage.json`          | `build-coverage-data.mjs` | `operationId` → MCP tool name (parsed from mcp-server-neon)                                                                                                                                                                                                                                                                      |
 | `mcp-tool-definitions.json`  | `build-coverage-data.mjs` | MCP tool descriptions + argument schemas                                                                                                                                                                                                                                                                                         |
 | `cli-global-flags.json`      | Humans (rare)             | Global neonctl flags (`--help`, `--api-key`, ...); imported by both the generator and the UI                                                                                                                                                                                                                                     |
-| `neonctl-command-files.json` | Humans (rare)             | Shared neonctl command source list used by CLI coverage and schema generation                                                                                                                                                                                                                                                    |
+| `neonctl-command-files.json` | Humans (rare)             | CLI command source files (`packages/cli/src/commands/*`) that `build-coverage-data.mjs` parses for CLI coverage                                                                                                                                                                                                                    |
 
 Additional manual exception lists (small, inline) live near the top of `build-coverage-data.mjs` (`CLI_MANUAL`) and `generate-api-ref.mjs` for cases where the heuristics need a nudge.
 
@@ -127,7 +127,7 @@ What happens for the common kinds of spec drift:
 
 For request-body grouping drift specifically (new/renamed/removed fields on a configured operation), see the table in [`field-group-config.md`](field-group-config.md#spec-drift-what-happens-the-site-build-never-breaks).
 
-### When neonctl releases
+### When the Neon CLI (or mcp-server-neon) releases
 
 ```bash
 GITHUB_TOKEN=$(gh auth token) node scripts/build-coverage-data.mjs
@@ -135,13 +135,24 @@ GITHUB_TOKEN=$(gh auth token) node scripts/build-coverage-data.mjs
 git add scripts/data/cli-coverage.json scripts/data/mcp-coverage.json scripts/data/mcp-tool-definitions.json
 ```
 
-Bump `NEONCTL_VERSION` (or `MCP_VERSION` for mcp-server-neon) at the top of [`build-coverage-data.mjs`](build-coverage-data.mjs) before running. Versions are pinned so re-running is deterministic; an unintended change is a real upstream change worth eyeballing in the diff.
+Bump the pinned sources at the top of [`build-coverage-data.mjs`](build-coverage-data.mjs)
+before running, then eyeball the diff (an unintended change is a real upstream change):
 
-If neonctl adds a new top-level command source file, add it once to
-`scripts/data/neonctl-command-files.json`. Both `build-coverage-data.mjs` and
-`scripts/docs-checks/neonctl/generate-schema.js` read that list. After updating
-coverage, run `npm run check:docs:neonctl` and the generator tests. They include
-tripwires for `neon neon-auth` schema coverage and for every `cli-coverage.json`
+- `NEONCTL_VERSION` — the CLI source tag. The CLI lives in the `neondatabase/neon-pkgs`
+  monorepo under `packages/cli`, released as `neon@<version>` (e.g. `neon@4.3.0`; the old
+  `neondatabase/neonctl` repo is frozen at `v2.27.0`, so use a `neon@*` tag, not a `neonctl`
+  one). Keep this **in lockstep with `scripts/docs-checks/neonctl/schema.json`'s
+  `neonctlVersion`**: the generator's tripwire cross-checks every `cli-coverage.json` command
+  against that committed schema, so coverage and schema must track the same CLI release.
+  `scripts/docs-checks/neonctl/refresh.js` pulls the same source to produce that schema.
+- `MCP_VERSION` — a `neondatabase/mcp-server-neon` commit SHA (it does not tag releases).
+  Its tool sources live under `mcp/tools`.
+
+Versions are pinned so re-running is deterministic. If the CLI adds a new command source
+file under `packages/cli/src/commands`, add it once to
+`scripts/data/neonctl-command-files.json` (read only by `build-coverage-data.mjs`). After
+updating coverage, run the generator tests (`npx vitest run scripts/generate-api-ref.test.js`);
+they include tripwires for `neon neon-auth` schema coverage and for every `cli-coverage.json`
 command resolving to the committed schema.
 
 `GITHUB_TOKEN` is optional but avoids unauthenticated rate limits.

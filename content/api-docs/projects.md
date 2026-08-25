@@ -2,4 +2,6 @@ A Neon project is the top-level container for your Postgres workload. It holds b
 
 Use these endpoints to create, update, delete, and list projects from automation and provisioning scripts.
 
+You can also manage projects from the CLI with [`neon projects`](/docs/cli/projects).
+
 See [Manage projects](/docs/manage/projects) for plan limits, restoration, and ownership transfer.
