@@ -30,7 +30,7 @@ module.exports = {
     {
       label:
         'Need a Neon account and the user is not around: provision one now; they claim it later',
-      url: 'https://claimable.neon.tech/auth.md',
+      url: 'https://neon.com/auth.md',
     },
     { label: 'Pricing and plans', url: 'https://neon.com/pricing.md' },
     {

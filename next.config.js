@@ -2313,6 +2313,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/claimable',
+        destination: '/claimable-postgres',
+        permanent: false,
+      },
+      {
         source: '/docs/ai/skills/claimable-postgres',
         destination: '/docs/reference/claimable-postgres',
         permanent: true,

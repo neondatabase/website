@@ -37,6 +37,21 @@ const NEON_API = {
   docsUrl: 'https://neon.com/docs/reference/api',
 };
 
+// Claimable Neon. The resource and token endpoints stay on claimable.neon.tech.
+// The authorization server is a path issuer on neon.com so the apex well-known
+// document on neon.com remains unused.
+const CLAIMABLE = {
+  issuer: 'https://neon.com/claimable',
+  skillUrl: 'https://neon.com/auth.md',
+  resource: 'https://claimable.neon.tech/',
+  tokenEndpoint: 'https://claimable.neon.tech/v1/oauth2/token',
+  revocationEndpoint: 'https://claimable.neon.tech/v1/oauth2/revoke',
+  jwksUri: 'https://claimable.neon.tech/.well-known/jwks.json',
+  identityEndpoint: 'https://claimable.neon.tech/v1/agent/identity',
+  claimEndpoint: 'https://claimable.neon.tech/v1/agent/identity/claim',
+  authMarkdownPath: 'public/auth.md',
+};
+
 // ── Payload builders ───────────────────────────────────────────────────────
 // Each builder returns the exact JSON body served at the corresponding path.
 // The route handlers are thin wrappers around these so the verifier can assert
@@ -72,9 +87,30 @@ function buildApiCatalog() {
   };
 }
 
+// /.well-known/oauth-authorization-server/claimable — RFC 8414 metadata for
+// issuer https://neon.com/claimable. Token, JWKS, identity, and claim stay on
+// the resource origin.
+function buildClaimableAuthorizationServer() {
+  return {
+    issuer: CLAIMABLE.issuer,
+    token_endpoint: CLAIMABLE.tokenEndpoint,
+    revocation_endpoint: CLAIMABLE.revocationEndpoint,
+    jwks_uri: CLAIMABLE.jwksUri,
+    grant_types_supported: ['urn:ietf:params:oauth:grant-type:jwt-bearer'],
+    agent_auth: {
+      skill: CLAIMABLE.skillUrl,
+      identity_endpoint: CLAIMABLE.identityEndpoint,
+      claim_endpoint: CLAIMABLE.claimEndpoint,
+      identity_types_supported: ['anonymous'],
+    },
+  };
+}
+
 module.exports = {
   MCP_SERVER,
   NEON_API,
+  CLAIMABLE,
   buildMcpServerCard,
   buildApiCatalog,
+  buildClaimableAuthorizationServer,
 };

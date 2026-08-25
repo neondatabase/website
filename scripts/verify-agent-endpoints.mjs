@@ -224,6 +224,27 @@ const SCHEMAS = {
       info: { type: 'object', required: ['title'], properties: { title: { type: 'string' } } },
     },
   },
+  claimableAuthorizationServer: {
+    type: 'object',
+    required: ['issuer', 'token_endpoint', 'jwks_uri', 'grant_types_supported', 'agent_auth'],
+    properties: {
+      issuer: { type: 'string' },
+      token_endpoint: { type: 'string' },
+      revocation_endpoint: { type: 'string' },
+      jwks_uri: { type: 'string' },
+      grant_types_supported: { type: 'array', items: { type: 'string' } },
+      agent_auth: {
+        type: 'object',
+        required: ['skill', 'identity_endpoint', 'claim_endpoint'],
+        properties: {
+          skill: { type: 'string' },
+          identity_endpoint: { type: 'string' },
+          claim_endpoint: { type: 'string' },
+          identity_types_supported: { type: 'array', items: { type: 'string' } },
+        },
+      },
+    },
+  },
 };
 
 const VALIDATORS = {
@@ -353,10 +374,7 @@ const VALIDATORS = {
       if (res.status === 0) {
         const debt = output.includes('[SYNC DEBT]');
         checks.push(
-          ok(
-            'models.dev mirror',
-            debt ? 'behind — upstream PR owed' : output.split('\n').pop()
-          )
+          ok('models.dev mirror', debt ? 'behind — upstream PR owed' : output.split('\n').pop())
         );
       } else if (res.status === 1) {
         checks.push(fail('models.dev mirror', `advertises a model we do not publish — ${output}`));
@@ -439,6 +457,56 @@ const VALIDATORS = {
     }
     if (!liveJson) return [fail(`schema (${entry.spec.name})`, 'response was not valid JSON')];
     return [schemaCheck(entry.spec.name, SCHEMAS.openapi, liveJson)];
+  },
+
+  'claimable-authorization-server'(payload, entry, sot) {
+    const checks = [schemaCheck(entry.spec.name, SCHEMAS.claimableAuthorizationServer, payload)];
+    checks.push(equalsCheck('issuer matches SoT', payload.issuer, sot.CLAIMABLE.issuer));
+    checks.push(
+      equalsCheck('token_endpoint matches SoT', payload.token_endpoint, sot.CLAIMABLE.tokenEndpoint)
+    );
+    checks.push(equalsCheck('jwks_uri matches SoT', payload.jwks_uri, sot.CLAIMABLE.jwksUri));
+    checks.push(
+      equalsCheck('agent_auth.skill matches SoT', payload.agent_auth?.skill, sot.CLAIMABLE.skillUrl)
+    );
+    checks.push(
+      equalsCheck(
+        'identity_endpoint matches SoT',
+        payload.agent_auth?.identity_endpoint,
+        sot.CLAIMABLE.identityEndpoint
+      )
+    );
+    const skill = new URL(sot.CLAIMABLE.skillUrl);
+    const issuer = new URL(sot.CLAIMABLE.issuer);
+    checks.push(
+      skill.origin === issuer.origin
+        ? ok('skill is on the issuer host')
+        : fail('skill is on the issuer host', `${skill.origin} vs ${issuer.origin}`)
+    );
+    checks.push(
+      issuer.pathname.replace(/\/+$/, '') !== ''
+        ? ok('issuer is a path identifier')
+        : fail('issuer is a path identifier', issuer.href)
+    );
+    try {
+      const markdown = fs.readFileSync(path.join(ROOT, sot.CLAIMABLE.authMarkdownPath), 'utf-8');
+      for (const [name, value] of [
+        ['skill URL', sot.CLAIMABLE.skillUrl],
+        ['token endpoint', sot.CLAIMABLE.tokenEndpoint],
+        ['identity endpoint', sot.CLAIMABLE.identityEndpoint],
+        ['resource', sot.CLAIMABLE.resource],
+        ['issuer', sot.CLAIMABLE.issuer],
+      ]) {
+        checks.push(
+          markdown.includes(value)
+            ? ok(`auth.md contains ${name}`)
+            : fail(`auth.md contains ${name}`, `missing ${value}`)
+        );
+      }
+    } catch (err) {
+      checks.push(fail('auth.md readable', err.message));
+    }
+    return checks;
   },
 };
 

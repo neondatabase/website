@@ -164,3 +164,21 @@ endpoints:
     validator: openapi
     check: live
     rewriteFile: next.config.js
+
+  - id: claimable-authorization-server
+    name: Claimable Neon authorization server
+    description: >-
+      RFC 8414 metadata for the Claimable Neon path issuer on neon.com.
+      Token, JWKS, identity, and claim endpoints stay on claimable.neon.tech.
+      The protocol file is /auth.md. The apex
+      /.well-known/oauth-authorization-server on neon.com is unused.
+    servedPath: /.well-known/oauth-authorization-server/claimable
+    contentType: application/json
+    spec:
+      name: RFC 8414 Authorization Server Metadata
+      url: https://www.rfc-editor.org/rfc/rfc8414
+      standard: true
+    validator: claimable-authorization-server
+    check: builder
+    builder: buildClaimableAuthorizationServer
+    routeFile: src/app/.well-known/oauth-authorization-server/claimable/route.js

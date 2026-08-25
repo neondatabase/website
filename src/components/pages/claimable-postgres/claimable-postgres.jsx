@@ -22,7 +22,7 @@ const SERVICES = [
 ];
 
 const CODE_EXAMPLES = {
-  agent: `GET https://claimable.neon.tech/auth.md
+  agent: `GET https://neon.com/auth.md
 
 POST https://claimable.neon.tech/v1/agent/identity
 Content-Type: application/json

@@ -4,17 +4,17 @@ subtitle: CLI, claim, and HTTP reference
 summary: >-
   If an agent needs a Neon account and the user is not around, provision a
   project now; they claim it later. Agents fetch
-  https://claimable.neon.tech/auth.md from neon.com/docs/llms.txt.
+  https://neon.com/auth.md from neon.com/docs/llms.txt.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-08-17T08:37:19.303Z'
+updatedOn: '2026-08-25T15:08:57.673Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
 
-Start in the browser at [neon.com/claimable-postgres](/claimable-postgres), or give an agent the service's [`auth.md`](https://claimable.neon.tech/auth.md) document.
+Start in the browser at [neon.com/claimable-postgres](/claimable-postgres), or give an agent [`auth.md`](https://neon.com/auth.md).
 
 ## Quick start
 
@@ -51,7 +51,7 @@ neon psql --role-name neondb_owner
 An agent starts with the protocol document:
 
 ```bash
-curl https://claimable.neon.tech/auth.md
+curl https://neon.com/auth.md
 ```
 
 Register an anonymous agent identity:
@@ -74,24 +74,24 @@ The response contains an `identity_assertion`, project metadata, and one decisio
 
 ## Agent discovery
 
-If an agent needs a Neon account and the user is not around, [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt) points at [`auth.md`](https://claimable.neon.tech/auth.md) on the service origin. This page is the human reference.
+If an agent needs a Neon account and the user is not around, [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt) points at [`auth.md`](https://neon.com/auth.md). This page is the human reference.
 
 Claimable Postgres implements [auth.md](https://workos.com/auth-md/docs/auth-md). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
 
-| Document or endpoint                          | Purpose                                                      |
-| --------------------------------------------- | ------------------------------------------------------------ |
-| `GET /auth.md`                                | Human-readable agent instructions and examples               |
-| `GET /.well-known/oauth-protected-resource`   | Resource server metadata                                     |
-| `GET /.well-known/oauth-authorization-server` | Token, revocation, identity, and skill endpoint discovery    |
-| `GET /.well-known/jwks.json`                  | Public keys for verifying Claimable Neon tokens              |
-| `POST /v1/agent/identity`                     | Provision a project and issue a durable identity assertion   |
-| `POST /v1/oauth2/token`                       | Exchange the assertion for a short-lived bearer access token |
-| `POST /v1/oauth2/revoke`                      | Revoke an access token or identity assertion                 |
-| `GET /v1/projects/{project_id}/credentials`   | Read scoped project and service credentials                  |
-| `POST /v1/projects/{project_id}/claim`        | Create a short-lived human claim code                        |
-| `GET /v1/projects/{project_id}/claim`         | Read claim and reconciliation status                         |
-| `DELETE /v1/projects/{project_id}`            | Delete an unclaimed project                                  |
-| `/v1/projects/{project_id}/...`               | Use supported Neon Management API operations before claiming |
+| Document or endpoint                                                    | Purpose                                                                               |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `GET https://neon.com/auth.md`                                          | Protocol file (`agent_auth.skill`)                                                    |
+| `GET https://neon.com/.well-known/oauth-authorization-server/claimable` | Token, revocation, identity, and skill discovery. Issuer `https://neon.com/claimable` |
+| `GET https://claimable.neon.tech/.well-known/oauth-protected-resource`  | Resource server metadata                                                              |
+| `GET https://claimable.neon.tech/.well-known/jwks.json`                 | Public keys for verifying Claimable Neon tokens                                       |
+| `POST https://claimable.neon.tech/v1/agent/identity`                    | Provision a project and issue a durable identity assertion                            |
+| `POST https://claimable.neon.tech/v1/oauth2/token`                      | Exchange the assertion for a short-lived bearer access token                          |
+| `POST https://claimable.neon.tech/v1/oauth2/revoke`                     | Revoke an access token or identity assertion                                          |
+| `GET https://claimable.neon.tech/v1/projects/{project_id}/credentials`  | Read scoped project and service credentials                                           |
+| `POST https://claimable.neon.tech/v1/projects/{project_id}/claim`       | Create a short-lived human claim code                                                 |
+| `GET https://claimable.neon.tech/v1/projects/{project_id}/claim`        | Read claim and reconciliation status                                                  |
+| `DELETE https://claimable.neon.tech/v1/projects/{project_id}`           | Delete an unclaimed project                                                           |
+| `/v1/projects/{project_id}/...` on `claimable.neon.tech`                | Use supported Neon Management API operations before claiming                          |
 
 The identity assertion is a secret. Store it like an API key. There are no refresh tokens. Exchange the assertion again when an access token expires.
 
@@ -313,6 +313,6 @@ Common codes include:
 ## Resources
 
 - [Create a database in the browser](/claimable-postgres)
-- [Claimable Neon auth.md](https://claimable.neon.tech/auth.md)
+- [Claimable Neon auth.md](https://neon.com/auth.md)
 - [Neon CLI reference](/docs/cli)
 - [Claimable database integration](/docs/workflows/claimable-database-integration)
