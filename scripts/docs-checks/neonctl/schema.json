@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.3.0",
+  "neonctlVersion": "4.4.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -2147,12 +2147,12 @@
         },
         "project": {
           "type": "boolean",
-          "describe": "Write project-level MCP config. Skips the config-location question. Does not change the minted key",
+          "describe": "Write project-level MCP config. Skips the config-location question. A linked project-folder install may still pin a project and scope a newly minted key",
           "default": false
         },
         "project-id": {
           "type": "string",
-          "describe": "Pin MCP tools to one Neon project (?projectId=). Does not change the minted key. Interactive asks only for a linked project-folder install"
+          "describe": "Pin MCP tools to one Neon project (?projectId=). A newly minted API key is limited to that project. A linked project-folder install asks the same when you pick API-key auth"
         },
         "read-only": {
           "type": "boolean",
@@ -2838,6 +2838,49 @@
       },
       "describe": "Manage organizations",
       "usage": "$0 orgs <sub-command> [options]"
+    },
+    "plugins": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker",
+          "alias": "a"
+        },
+        "global": {
+          "type": "boolean",
+          "describe": "Install user-level. Default is project",
+          "default": false
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Skip prompts",
+          "default": false,
+          "alias": "y"
+        }
+      },
+      "commands": {},
+      "describe": "Install the Neon plugin into coding agents",
+      "usage": "$0 plugins [options]",
+      "examples": [
+        {
+          "command": "$0 plugins",
+          "description": "Interactive: agents, then confirm"
+        },
+        {
+          "command": "$0 plugins -y",
+          "description": "Detected agents, skip prompts"
+        },
+        {
+          "command": "$0 plugins --agent cursor --agent claude-code",
+          "description": "Install into specific agents"
+        },
+        {
+          "command": "$0 plugins --global",
+          "description": "Install user-level"
+        }
+      ]
     },
     "profile": {
       "aliases": [
