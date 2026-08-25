@@ -109,7 +109,7 @@ If [IP Allow](/docs/introduction/ip-allow) is enabled on your project, add these
 
 ## Database diagnostics
 
-When you ask why a branch is slow, large, or behind, the MCP server can run `inspect_database` instead of inventing catalog SQL. It exposes the same 14 read-only checks as [`neon inspect db`](/docs/cli/inspect): table and index sizes, unused indexes, sequential scans, long-running queries and locks, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state.
+When you ask why a branch is slow, large, or behind, the MCP server can run `inspect_database` instead of inventing catalog SQL. It exposes the same 15 read-only checks as [`neon inspect db`](/docs/cli/inspect): table and index sizes, unused indexes, sequential scans, long-running and stalled queries and locks, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state. The `stalled-queries` check reports active queries running longer than 30 seconds, with their waits, blockers, parallel workers, query IDs, and query text.
 
 Pick a check with the `check` parameter (for example `table-sizes` or `unused-indexes`). The tool runs inside a read-only transaction, so it works with [`?readonly=true`](#read-only-mode). It belongs to the `querying` category, not `observability`. Some checks need [`pg_stat_statements`](/docs/extensions/pg_stat_statements) or the [`neon`](/docs/extensions/neon) extension; the tool reports that and asks before suggesting installation.
 

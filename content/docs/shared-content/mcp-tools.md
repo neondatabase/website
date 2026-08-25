@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-08-13T22:11:29.293Z'
+updatedOn: '2026-08-24T20:23:46.738Z'
 ---
 
 ## Available tools
@@ -21,7 +21,7 @@ Search and navigation tools (search across projects, fetch resource details by I
 
 Schema tools accept schema-qualified table names, such as `crm.contacts`. An unqualified name resolves against the database `search_path`, which defaults to the `public` schema.
 
-The `querying` category includes `inspect_database`, which runs the same 14 read-only checks as [`neon inspect db`](/docs/cli/inspect): relation and index sizes, unused indexes, sequential scans, active queries and locks, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state. Some checks need [`pg_stat_statements`](/docs/extensions/pg_stat_statements) or the [`neon`](/docs/extensions/neon) extension; the tool asks before suggesting `CREATE EXTENSION`.
+The `querying` category includes `inspect_database`, which runs the same 15 read-only checks as [`neon inspect db`](/docs/cli/inspect): relation and index sizes, unused indexes, sequential scans, active queries and locks, stalled queries running longer than 30 seconds, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state. Some checks need [`pg_stat_statements`](/docs/extensions/pg_stat_statements) or the [`neon`](/docs/extensions/neon) extension; the tool asks before suggesting `CREATE EXTENSION`.
 
 <Admonition type="note">
 The `observability` tools query [Neon Functions logs](/docs/compute/functions/logs) and [object storage logs](/docs/storage/logs), which are part of the Neon backend beta, currently available in AWS `us-east-2` only. Log querying returns results only for projects in a supported region. Database diagnostics via `inspect_database` are under `querying`, not `observability`.
