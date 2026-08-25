@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.2.1",
+  "neonctlVersion": "4.3.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -3274,6 +3274,84 @@
       "commands": {},
       "describe": "Deprecated: use `neon link`. Set the .neon context (raw write).",
       "usage": "$0 set-context [options]"
+    },
+    "skills": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker",
+          "alias": "a"
+        },
+        "global": {
+          "type": "boolean",
+          "describe": "Install user-level skills (skills CLI -g). Default is this directory",
+          "default": false
+        },
+        "skill": {
+          "type": "array",
+          "describe": "Skill to install (repeatable). Skips the skill picker",
+          "alias": "s"
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Skip prompts",
+          "default": false,
+          "alias": "y"
+        }
+      },
+      "commands": {
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "global": {
+              "type": "boolean",
+              "describe": "Update user-level skills (skills CLI -g). Default is this directory",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Update installed skills to the latest versions",
+          "examples": [
+            {
+              "command": "$0 skills update",
+              "description": "Interactive: confirm, then update skills in this directory"
+            },
+            {
+              "command": "$0 skills update -y",
+              "description": "Update skills in this directory without prompting"
+            },
+            {
+              "command": "$0 skills update --global -y",
+              "description": "Update user-level skills"
+            }
+          ],
+          "usage": "$0 skills update [options]"
+        }
+      },
+      "describe": "Install Neon agent skills into coding agents",
+      "usage": "$0 skills [command] [options]",
+      "examples": [
+        {
+          "command": "$0 skills",
+          "description": "Interactive: this directory, agents, skills, then confirm"
+        },
+        {
+          "command": "$0 skills -y",
+          "description": "This directory, detected agents, the default skills"
+        },
+        {
+          "command": "$0 skills -s neon -s neon-ai-gateway --agent cursor",
+          "description": "Install named skills into specific agents"
+        },
+        {
+          "command": "$0 skills --global",
+          "description": "Install user-level skills"
+        }
+      ]
     },
     "snapshots": {
       "aliases": [

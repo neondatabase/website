@@ -6,11 +6,11 @@ summary: >-
   assistants accurate knowledge of Neon's platform, APIs, SDKs, and best
   practices. Install them when using Cursor, Claude Code, OpenAI Codex, or any
   Agent Skills-compatible tool. Skills cover Postgres, Auth, Neon Functions,
-  Object Storage, AI Gateway, branching workflows, and more. Install all skills
-  with `npx skills add neondatabase/agent-skills -y`, a single skill with `-s`,
-  `neon init`, or editor plugins at project level or globally.
+  Object Storage, AI Gateway, branching workflows, and more. Install them
+  with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
+  or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-08-20T11:15:28.658Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -30,6 +30,16 @@ Agent Skills provide your AI coding assistant with structured context about Neon
 
 There are several ways to install Neon skills depending on your editor and workflow.
 
+### neon skills
+
+The [Neon CLI](/docs/cli) installs skills interactively:
+
+```bash
+neon skills
+```
+
+It pre-selects your detected agents, lets you pick which skills to add, and confirms before writing. Pass `-s <skill>` and `--agent <name>` to skip the prompts, `--global` to install user-level, and run `neon skills update` to refresh installed skills. See the [`neon skills` reference](/docs/cli/skills) for all options.
+
 ### npx skills
 
 For any AI tool that supports the [Agent Skills](https://agentskills.io) format, install skills from the [Agent Skills repository](https://github.com/neondatabase/agent-skills):
@@ -41,7 +51,7 @@ npx skills add neondatabase/agent-skills -y
 This installs **all** skills in the repository. To install a specific skill instead, pass the `-s` flag:
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon-postgres -y
+npx skills add neondatabase/agent-skills -s neon -y
 ```
 
 Useful flags:
@@ -156,7 +166,7 @@ For codegen tools and multi-tenant products that provision Neon for their users,
 
 Skills can be installed at two levels:
 
-- **Project level** (default): Skills are installed in your project directory, for example via `neon init` or `npx skills add`. Your AI assistant picks them up when working in that project. This is best for team workflows since the configuration can be committed with the project.
+- **Project level** (default): Skills are installed in your project directory, for example via `neon skills`, `neon init`, or `npx skills add`. Your AI assistant picks them up when working in that project. This is best for team workflows since the configuration can be committed with the project.
 - **Global**: Skills are installed at the user or system level and available across all projects. Useful for personal development environments where you want Neon context everywhere. Pass the `-g` flag to install globally:
 
   ```bash

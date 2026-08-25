@@ -7,7 +7,7 @@ summary: >-
   skills, and can configure the MCP server, so your agent can create a
   project and connect your app.
 enableTableOfContents: true
-updatedOn: '2026-08-25T02:37:06.867Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 ---
 
 Set up Neon for your project without leaving your editor. `neon init` installs the Neon CLI, signs you in, installs Neon-specific agent skills, and can set up the [Neon MCP server](/docs/ai/neon-mcp-server). Together these give your agent what it needs to create a Neon project, connect your app, and use Neon features as you build. For Cursor and VS Code, it also installs the Neon Local Connect extension for in-editor schema browsing.
@@ -61,7 +61,7 @@ npx neon@latest init
 
 The wizard asks which editor to configure, then signs you in, creates an API key, installs [agent skills](/docs/ai/agent-skills), optionally configures the [Neon MCP server](/docs/ai/neon-mcp-server), and (for Cursor and VS Code) installs the [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect). Run it from your project root so the skills land in the right place. For details and manual setup, see the [`neon init` reference](/docs/cli/init).
 
-If you only want the MCP server, without the skills or extension, run [`npx neon@latest mcp`](/docs/cli/mcp) instead.
+If you only want the MCP server, without the skills or extension, run [`npx neon@latest mcp`](/docs/cli/mcp) instead. If you only want agent skills, run [`npx neon@latest skills`](/docs/cli/skills).
 
 ## Tell your agent
 
