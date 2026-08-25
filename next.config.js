@@ -2334,52 +2334,52 @@ const defaultConfig = {
       },
       {
         source: '/docs/ai/skills/claimable-postgres',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/docs/ai/skills/claimable-postgres/:path*',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/.well-known/agent-skills/claimable-postgres',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/.well-known/agent-skills/claimable-postgres/:path*',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/.well-known/skills/claimable-postgres',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/.well-known/skills/claimable-postgres/:path*',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/docs/.well-known/agent-skills/claimable-postgres',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/docs/.well-known/agent-skills/claimable-postgres/:path*',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/docs/.well-known/skills/claimable-postgres',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {
         source: '/docs/.well-known/skills/claimable-postgres/:path*',
-        destination: '/docs/reference/claimable-neon',
+        destination: '/auth.md',
         permanent: true,
       },
       {

@@ -339,4 +339,48 @@ describe('/api/claimable-neon', () => {
       })
     );
   });
+
+  it('rejects a CLAIMABLE_NEON_ORIGIN that is not a bare origin', async () => {
+    process.env.CLAIMABLE_NEON_ORIGIN = 'https://claimable.example/v1';
+
+    const response = await POST(
+      new Request('https://neon.com/api/claimable-neon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ services: [] }),
+      })
+    );
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      error: {
+        code: 'invalid_configuration',
+        message:
+          'CLAIMABLE_NEON_ORIGIN must be an http(s) origin with no path, query, or fragment.',
+      },
+    });
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it('rejects a CLAIMABLE_NEON_ORIGIN that is not a URL', async () => {
+    process.env.CLAIMABLE_NEON_ORIGIN = 'claimable.example';
+
+    const response = await POST(
+      new Request('https://neon.com/api/claimable-neon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ services: [] }),
+      })
+    );
+
+    expect(response.status).toBe(500);
+    expect(await response.json()).toEqual({
+      error: {
+        code: 'invalid_configuration',
+        message:
+          'CLAIMABLE_NEON_ORIGIN must be an http(s) origin with no path, query, or fragment.',
+      },
+    });
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
 });

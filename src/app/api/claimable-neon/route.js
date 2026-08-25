@@ -27,6 +27,13 @@ class ClaimableContractError extends Error {
   }
 }
 
+class ClaimableConfigError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ClaimableConfigError';
+  }
+}
+
 const jsonResponse = (body, status = 200) =>
   Response.json(body, {
     status,
@@ -37,17 +44,27 @@ const jsonResponse = (body, status = 200) =>
 
 const claimableOrigin = () => {
   const configured = process.env.CLAIMABLE_NEON_ORIGIN || DEFAULT_CLAIMABLE_NEON_ORIGIN;
-  const url = new URL(configured);
-  if (url.protocol !== 'https:' && url.protocol !== 'http:') {
-    throw new Error('CLAIMABLE_NEON_ORIGIN must use http or https.');
+  let url;
+  try {
+    url = new URL(configured);
+  } catch {
+    throw new ClaimableConfigError(
+      'CLAIMABLE_NEON_ORIGIN must be an http(s) origin with no path, query, or fragment.'
+    );
+  }
+  if ((url.protocol !== 'https:' && url.protocol !== 'http:') || configured !== url.origin) {
+    throw new ClaimableConfigError(
+      'CLAIMABLE_NEON_ORIGIN must be an http(s) origin with no path, query, or fragment.'
+    );
   }
   return url.origin;
 };
 
 const requestClaimable = async (path, init = {}) => {
+  const origin = claimableOrigin();
   let response;
   try {
-    response = await fetch(`${claimableOrigin()}${path}`, {
+    response = await fetch(`${origin}${path}`, {
       ...init,
       cache: 'no-store',
     });
@@ -165,6 +182,17 @@ const errorFor = (error) => {
         },
       },
       502
+    );
+  }
+  if (error instanceof ClaimableConfigError) {
+    return jsonResponse(
+      {
+        error: {
+          code: 'invalid_configuration',
+          message: error.message,
+        },
+      },
+      500
     );
   }
   if (error instanceof ClaimableContractError) {
