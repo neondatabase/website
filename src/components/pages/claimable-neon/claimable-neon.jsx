@@ -218,8 +218,9 @@ const Provisioner = () => {
         <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
           <p className="text-sm leading-relaxed text-gray-new-70">
             Copy these values now. This page will not show them again. The claim link expires in{' '}
-            {Math.round(claim.expires_in / 60)} minutes. Open it before then. Claiming rotates{' '}
-            <code>DATABASE_URL</code>; pull a new one from the console after you claim.
+            {Math.round(claim.expires_in / 60)} minutes. Open it before then. Continuing to Neon on
+            that page rotates <code>DATABASE_URL</code> before you pick an organization. Pull a new
+            one from the console after the transfer finishes.
             {stayEnabledSentence} The project itself expires on {expiresAt}.
           </p>
           <Button
