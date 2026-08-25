@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
   - /docs/reference/claimable-postgres
-updatedOn: '2026-08-25T16:36:05.871Z'
+updatedOn: '2026-08-25T17:09:07.082Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
@@ -37,6 +37,8 @@ npx neon@latest claim create \
   --service auth \
   --env-pull
 ```
+
+If `neon claim` is not a command, or `neon claim --help` does not list `create`, use the Agent API tab.
 
 The CLI saves the project's identity assertion in its secure credential store. Existing commands then use the claimable project automatically:
 
@@ -191,14 +193,14 @@ Only requested and granted services appear under `services`.
 
 ## Capabilities
 
-| Capability | Available before claim | Environment variable          |
-| ---------- | ---------------------- | ----------------------------- |
-| Postgres   | Yes                    | `DATABASE_URL`                |
-| Data API   | When requested         | `NEON_DATA_API_URL`           |
-| Auth       | When requested         | `NEON_AUTH_BASE_URL`          |
-| Functions  | No                     | Requires claiming the project |
-| Storage    | No                     | Requires claiming the project |
-| AI Gateway | No                     | Requires claiming the project |
+| Capability          | Available before claim | Environment variable          |
+| ------------------- | ---------------------- | ----------------------------- |
+| Postgres            | Yes                    | `DATABASE_URL`                |
+| Data API            | When requested         | `NEON_DATA_API_URL`           |
+| Managed Better Auth | When requested         | `NEON_AUTH_BASE_URL`          |
+| Functions           | No                     | Requires claiming the project |
+| Object Storage      | No                     | Requires claiming the project |
+| AI Gateway          | No                     | Requires claiming the project |
 
 Registration records those as `{ granted: false, reason: "requires_claim" }`. A later protected operation returns `capability_requires_claim`. Preserve the denied capability and give the human a claim link; do not retry or drop it.
 

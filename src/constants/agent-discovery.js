@@ -93,6 +93,7 @@ function buildClaimableAuthorizationServer() {
     jwks_uri: CLAIMABLE.jwksUri,
     grant_types_supported: ['urn:ietf:params:oauth:grant-type:jwt-bearer'],
     token_endpoint_auth_methods_supported: ['none'],
+    response_types_supported: [],
     agent_auth: {
       skill: CLAIMABLE.skillUrl,
       identity_endpoint: CLAIMABLE.identityEndpoint,

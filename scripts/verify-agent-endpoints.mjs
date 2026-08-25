@@ -232,6 +232,7 @@ const SCHEMAS = {
       'jwks_uri',
       'grant_types_supported',
       'token_endpoint_auth_methods_supported',
+      'response_types_supported',
       'agent_auth',
     ],
     properties: {
@@ -241,6 +242,7 @@ const SCHEMAS = {
       jwks_uri: { type: 'string' },
       grant_types_supported: { type: 'array', items: { type: 'string' } },
       token_endpoint_auth_methods_supported: { type: 'array', items: { type: 'string' } },
+      response_types_supported: { type: 'array', items: { type: 'string' } },
       agent_auth: {
         type: 'object',
         required: ['skill', 'identity_endpoint', 'claim_endpoint'],

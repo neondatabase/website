@@ -80,6 +80,14 @@ Credential.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
+const CAPABILITY_LABELS = {
+  postgres: 'Lakebase Postgres',
+  data_api: 'Data API',
+  auth: 'Managed Better Auth',
+};
+
+const capabilityLabel = (name) => CAPABILITY_LABELS[name] ?? name.replaceAll('_', ' ');
+
 const Capability = ({ name, granted }) => (
   <span
     className={`rounded-full border px-2.5 py-1 text-xs ${
@@ -88,7 +96,7 @@ const Capability = ({ name, granted }) => (
         : 'border-white/10 text-gray-new-50'
     }`}
   >
-    {name.replaceAll('_', ' ')}
+    {capabilityLabel(name)}
   </span>
 );
 
@@ -143,13 +151,12 @@ const Provisioner = () => {
         timeStyle: 'short',
       }).format(new Date(value));
     const expiresAt = formatTime(project.expires_at);
-    const claimExpiresAt = formatTime(Date.now() + claim.expires_in * 1000);
     const granted = new Set(
       capabilities.filter(({ granted }) => granted).map(({ capability }) => capability)
     );
     const denied = capabilities.filter(({ granted }) => !granted);
     const stayEnabled = [
-      granted.has('auth') ? 'Auth' : null,
+      granted.has('auth') ? 'Managed Better Auth' : null,
       granted.has('data_api') ? 'the Data API' : null,
     ].filter(Boolean);
     const stayEnabledSentence =
@@ -185,7 +192,7 @@ const Provisioner = () => {
           <ul className="mt-3 space-y-1 text-sm leading-relaxed text-gray-new-60">
             {denied.map(({ capability, reason, message }) => (
               <li key={capability}>
-                {capability.replaceAll('_', ' ')} was not granted
+                {capabilityLabel(capability)} was not granted
                 {message || reason ? `: ${message || reason}` : '.'}
               </li>
             ))}
@@ -204,8 +211,9 @@ const Provisioner = () => {
 
         <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
           <p className="text-sm leading-relaxed text-gray-new-70">
-            Copy these values now. This page will not show them again. The claim link expires on{' '}
-            {claimExpiresAt}. Claiming transfers the project and rotates the database password.
+            Copy these values now. This page will not show them again. The claim link expires in{' '}
+            {Math.round(claim.expires_in / 60)} minutes. Open it before then. Claiming rotates{' '}
+            <code>DATABASE_URL</code>; pull a new one from the console after you claim.
             {stayEnabledSentence} The project itself expires on {expiresAt}.
           </p>
           <Button
@@ -392,7 +400,7 @@ const ClaimableNeon = () => (
             One service, three interfaces
           </p>
           <h2 className="mt-4 font-title text-5xl tracking-[-0.04em] xl:text-4xl md:text-[34px]">
-            auth.md, the Neon CLI, and neon.ts.
+            auth.md, the Neon CLI and neon.ts
           </h2>
           <p className="mt-5 max-w-[680px] text-lg leading-relaxed text-gray-new-60 md:text-base">
             The same scoped agent credential works through the Claimable Neon API, Neon CLI, and{' '}
@@ -435,7 +443,7 @@ const ClaimableNeon = () => (
             {[
               [
                 'Scoped from the first request',
-                'The service creates one project and issues credentials for that project. It does not expose the provisioning account.',
+                'The service creates one project and issues credentials for that project.',
               ],
               [
                 'Human ownership starts at claim',
