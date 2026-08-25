@@ -140,6 +140,50 @@ describe('/api/claimable-neon', () => {
     expect(global.fetch).not.toHaveBeenCalled();
   });
 
+  it('rejects non-JSON content types before provisioning', async () => {
+    const response = await POST(
+      new Request('https://neon.com/api/claimable-neon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: '{}',
+      })
+    );
+
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({
+      error: {
+        code: 'invalid_request',
+        message: 'Content-Type must be application/json.',
+      },
+    });
+    expect(global.fetch).not.toHaveBeenCalled();
+  });
+
+  it('returns 502 when registration capabilities cannot be rendered', async () => {
+    global.fetch.mockResolvedValueOnce(
+      jsonResponse({
+        ...registration,
+        capabilities: [{}],
+      })
+    );
+
+    const response = await POST(
+      new Request('https://neon.com/api/claimable-neon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ services: [] }),
+      })
+    );
+
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({
+      error: {
+        code: 'invalid_claimable_response',
+        message: 'Claimable Neon returned an invalid registration.',
+      },
+    });
+  });
+
   it('preserves structured Claimable Neon errors', async () => {
     const upstreamError = {
       error: {

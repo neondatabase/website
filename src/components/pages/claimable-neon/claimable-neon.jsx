@@ -205,8 +205,8 @@ const Provisioner = () => {
         <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
           <p className="text-sm leading-relaxed text-gray-new-70">
             Copy these values now. This page will not show them again. The claim link expires on{' '}
-            {claimExpiresAt}. Claiming transfers the Postgres database and rotates the database
-            password.{stayEnabledSentence} The project itself expires on {expiresAt}.
+            {claimExpiresAt}. Claiming transfers the project and rotates the database password.
+            {stayEnabledSentence} The project itself expires on {expiresAt}.
           </p>
           <Button
             className="mt-4 w-full"

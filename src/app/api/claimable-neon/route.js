@@ -92,7 +92,11 @@ const requireRegistration = (body) => {
     typeof body.project.id !== 'string' ||
     typeof body.project.branch_id !== 'string' ||
     typeof body.project.expires_at !== 'string' ||
-    !Array.isArray(body.capabilities)
+    Number.isNaN(Date.parse(body.project.expires_at)) ||
+    !Array.isArray(body.capabilities) ||
+    body.capabilities.some(
+      (item) => !item || typeof item.capability !== 'string' || typeof item.granted !== 'boolean'
+    )
   ) {
     throw new ClaimableContractError('Claimable Neon returned an invalid registration.');
   }
@@ -126,7 +130,8 @@ const requireClaim = (body) => {
   if (
     !body ||
     typeof body.verification_uri_complete !== 'string' ||
-    typeof body.expires_in !== 'number'
+    typeof body.expires_in !== 'number' ||
+    !Number.isFinite(body.expires_in)
   ) {
     throw new ClaimableContractError('Claimable Neon returned an invalid claim link.');
   }
@@ -180,6 +185,19 @@ const errorFor = (error) => {
 };
 
 export async function POST(request) {
+  const mediaType = (request.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
+  if (mediaType !== 'application/json') {
+    return jsonResponse(
+      {
+        error: {
+          code: 'invalid_request',
+          message: 'Content-Type must be application/json.',
+        },
+      },
+      400
+    );
+  }
+
   let input;
   try {
     input = await request.json();
@@ -281,7 +299,7 @@ export async function POST(request) {
             error: {
               code: 'claimable_cleanup_failed',
               message:
-                'Database setup failed and the temporary project could not be deleted. It will expire automatically.',
+                'Project setup failed and the temporary project could not be deleted. It will expire automatically.',
             },
           },
           500

@@ -226,13 +226,21 @@ const SCHEMAS = {
   },
   claimableAuthorizationServer: {
     type: 'object',
-    required: ['issuer', 'token_endpoint', 'jwks_uri', 'grant_types_supported', 'agent_auth'],
+    required: [
+      'issuer',
+      'token_endpoint',
+      'jwks_uri',
+      'grant_types_supported',
+      'token_endpoint_auth_methods_supported',
+      'agent_auth',
+    ],
     properties: {
       issuer: { type: 'string' },
       token_endpoint: { type: 'string' },
       revocation_endpoint: { type: 'string' },
       jwks_uri: { type: 'string' },
       grant_types_supported: { type: 'array', items: { type: 'string' } },
+      token_endpoint_auth_methods_supported: { type: 'array', items: { type: 'string' } },
       agent_auth: {
         type: 'object',
         required: ['skill', 'identity_endpoint', 'claim_endpoint'],
@@ -465,7 +473,18 @@ const VALIDATORS = {
     checks.push(
       equalsCheck('token_endpoint matches SoT', payload.token_endpoint, sot.CLAIMABLE.tokenEndpoint)
     );
-    checks.push(equalsCheck('jwks_uri matches SoT', payload.jwks_uri, sot.CLAIMABLE.jwksUri));
+    checks.push(
+      equalsCheck('jwks_uri matches SoT', payload.jwks_uri, sot.CLAIMABLE.jwksUri)
+    );
+    checks.push(
+      Array.isArray(payload.token_endpoint_auth_methods_supported) &&
+        payload.token_endpoint_auth_methods_supported.includes('none')
+        ? ok('token endpoint advertises no client authentication')
+        : fail(
+            'token endpoint advertises no client authentication',
+            payload.token_endpoint_auth_methods_supported
+          )
+    );
     checks.push(
       equalsCheck('agent_auth.skill matches SoT', payload.agent_auth?.skill, sot.CLAIMABLE.skillUrl)
     );
