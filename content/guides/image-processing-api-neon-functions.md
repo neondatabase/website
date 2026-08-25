@@ -4,7 +4,7 @@ subtitle: 'Learn how to build an image API that resizes, crops, optimizes, analy
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-24T00:00:00.000Z'
-updatedOn: '2026-08-24T08:45:59.374Z'
+updatedOn: '2026-08-25T11:23:07.374Z'
 ---
 
 If you're building an application that handles images (profile avatars, product photos, or user uploads), you run into the same set of problems every time. Users upload 12-megapixel photos straight from their phones, and if you serve those files back as-is, pages get slow and bandwidth costs climb. Every image needs resizing for different layouts, cropping to fit, and re-encoding into modern formats like WebP. On top of that, every image needs alt text for accessibility and SEO.
@@ -26,7 +26,7 @@ flowchart LR
 
 1. **Upload**: The client POSTs an image to any endpoint, either as a raw binary body with an `image/*` content type or as a `multipart/form-data` upload.
 2. **Sharp processing**: The `/resize`, `/crop`, `/optimize`, and `/analyze` routes decode the image and run the pipeline in-process.
-3. **AI captioning**: The `/caption` route uses Sharp to downscale the image, then sends it to the Neon AI Gateway for captioning. The gateway handles authentication and routing to the model.
+3. **AI captioning**: The `/caption` route uses Sharp to downscale the image, then sends it to a vision model through the Neon AI Gateway for a one-sentence alt text caption.
 
 ## Prerequisites
 
@@ -81,15 +81,16 @@ Linked ~/image-api/.neon:
   projectId: quiet-fog-09491284
   branch:    main
 
-INFO: Pulled 3 Neon variables into ~/image-api/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED
 ✔ Manage this project's Neon setup as code? Adds a neon.ts you can edit and apply with `neon config apply`. … yes
-✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions
-INFO: Created neon.ts declaring functions.
+✔ Which Neon services should neon.ts declare? (space to toggle, enter to confirm) › Functions, AI Gateway
+
+INFO: Pulled 5 Neon variables into ~/image-api/.env.local: NEON_BRANCH, DATABASE_URL, DATABASE_URL_UNPOOLED, NEON_AI_GATEWAY_TOKEN, NEON_AI_GATEWAY_BASE_URL
+INFO: Created neon.ts declaring functions, ai-gateway.
 INFO: Created hello.ts - the source of the hello function.
 INFO: Installing @neon/config, @neon/env with npm…
 ```
 
-The `neon link` command also creates a placeholder function, `hello.ts`, at your project root. You'll build the image API in your own `index.ts` file, so delete the placeholder:
+The `neon link` command also creates a placeholder function: `hello.ts`, at your project root. You'll build the image API in your own `index.ts` file, so delete the placeholder:
 
 ```bash
 rm hello.ts
@@ -97,17 +98,14 @@ rm hello.ts
 
 It also creates a `.env.local` file with your project's variables.
 
-Install the dependencies for your function. You'll need `hono` for routing, `sharp` for image processing, and the Neon AI SDK provider and Vercel AI SDK for captioning. You'll also install TypeScript and Node.js types for development:
+Install the dependencies for your function. You'll need [`hono`](https://hono.dev/) for routing, [`sharp`](https://sharp.pixelplumbing.com) for image processing, and the [Neon AI SDK provider](https://github.com/neondatabase/neon-pkgs/tree/main/packages/ai-sdk-provider) and [Vercel AI SDK](https://ai-sdk.dev/docs) for captioning. You'll also install TypeScript, type definitions, and `esbuild` for bundling:
 
 ```bash
-npm install hono sharp @neon/ai-sdk-provider ai
+npm install hono sharp @neon/ai-sdk-provider ai@6
 npm install --save-dev @types/node typescript esbuild
 ```
 
-- `hono`: A lightweight web framework for routing the API endpoints.
-- `sharp`: A high-performance image processing library (resizing, cropping, format conversion, metadata) powered by libvips.
-- `@neon/ai-sdk-provider`: Neon's provider for the [Vercel AI SDK](https://ai-sdk.dev/docs), giving you access to models through the Neon AI Gateway.
-- `ai`: The Vercel AI SDK, used here for `generateText` with image input.
+> Install `ai` version 6. Newer versions of the Vercel AI SDK have breaking changes with the `generateText` API used in this guide.
 
 TypeScript needs a `tsconfig.json` for the linter to resolve types correctly. Create it in your project root:
 
@@ -128,11 +126,7 @@ TypeScript needs a `tsconfig.json` for the linter to resolve types correctly. Cr
 
 ## Build the image API
 
-Create an `index.ts` file in the root of your project. This is where you'll implement the API endpoints.
-
-### Import dependencies and set constants
-
-Import the required modules and define constants for maximum image size, allowed formats, and fit modes. Also, define a custom error class for handling bad requests:
+Create an `index.ts` file in the root of your project. It defines a `GET /` smoke-test route, the API's five endpoints, and the shared helpers they rely on:
 
 ```ts filename="index.ts"
 import { Hono, type Context } from 'hono';
@@ -148,18 +142,6 @@ const FITS = ['cover', 'contain', 'fill', 'inside', 'outside'];
 
 class BadRequest extends Error {}
 
-```
-
-- `hono` is the web framework that handles routing, and `sharp` is the image processing library. `Context`, `FitEnum`, and `FormatEnum` are types used across the route handlers.
-- `neon` is Neon's AI SDK provider, and `generateText` comes from the Vercel AI SDK. You'll use both in the `/caption` route.
-- `MAX_IMAGE_SIZE` caps uploads at 10 MB. `FORMATS` and `FITS` are the allowed values for the `format` and `fit` query parameters; the routes validate against them.
-- `BadRequest` is a custom error type. Routes throw it for bad input, and the central error handler at the bottom maps it to a `400` response.
-
-### Read the uploaded image
-
-Every endpoint starts the same way: reading the image bytes from the request. This helper accepts the image two ways, as a raw binary body with an `image/*` content type (what `curl --data-binary` sends) or as `multipart/form-data` with the file in a `file` field (what browsers and HTML forms send). Anything else gets a `400`, and uploads are capped at 10 MB:
-
-```ts filename="index.ts"
 // Reads the uploaded image from the request, either as a raw binary body
 // (Content-Type: image/*) or as multipart/form-data with a "file" field.
 async function getImageBuffer(c: Context): Promise<Buffer> {
@@ -189,15 +171,6 @@ function checkSize(buffer: Buffer): Buffer {
   return buffer;
 }
 
-```
-
-`getImageBuffer` branches on the `Content-Type` header. For a multipart body it reads the `file` field from the parsed form; for a raw body it reads the entire request as a buffer. Both paths run through `checkSize`, which rejects empty requests and anything over 10 MB.
-
-### Output helpers
-
-Two small helpers shape every response. `getFormat` reads the `format` query parameter (default `webp`) and validates it against `FORMATS`. `imageResponse` builds the response with the right `Content-Type`, a long-lived `Cache-Control` header, and any extra headers you pass in:
-
-```ts filename="index.ts"
 function getFormat(c: Context): keyof FormatEnum {
   const format = c.req.query('format') ?? 'webp';
   if (!FORMATS.includes(format)) throw new BadRequest(`format must be one of: ${FORMATS.join(', ')}`);
@@ -212,28 +185,12 @@ function imageResponse(c: Context, output: Buffer, format: keyof FormatEnum, ext
   });
 }
 
-```
-
-The `Cache-Control` header marks processed images as immutable for a year, so you can cache them at the edge or in a CDN. The `/optimize` route uses `extraHeaders` to report the size savings.
-
-### List the endpoints
-
-A `GET /` route returns the list of available endpoints, which is handy for a quick smoke test after deployment:
-
-```ts filename="index.ts"
 app.get('/', (c) =>
   c.json({
     endpoints: ['POST /resize', 'POST /crop', 'POST /optimize', 'POST /analyze', 'POST /caption'],
   })
 );
 
-```
-
-### Resize images
-
-The `/resize` route resizes to the given `width` and `height`. Pass one or both; if you pass only one, Sharp preserves the aspect ratio. The `fit` parameter controls how the image fills the box: `cover` fills it and crops the overflow, `contain` fits it entirely inside the box, and so on. `.rotate()` applies any EXIF orientation first, so phone photos come out upright:
-
-```ts filename="index.ts"
 app.post('/resize', async (c) => {
   const input = await getImageBuffer(c);
   const width = Number(c.req.query('width')) || undefined;
@@ -253,15 +210,6 @@ app.post('/resize', async (c) => {
   return imageResponse(c, output, format);
 });
 
-```
-
-The route validates its query parameters up front: at least one dimension is required, and `fit` must be one of `FITS`. Then the Sharp pipeline runs `.rotate()` → `.resize()` → `.toFormat()` → `.toBuffer()`, and the result goes out through `imageResponse`.
-
-### Crop images
-
-The `/crop` route extracts a pixel rectangle defined by `left`, `top`, `width`, and `height` using Sharp's [`extract`](https://sharp.pixelplumbing.com/api-operation#extract):
-
-```ts filename="index.ts"
 app.post('/crop', async (c) => {
   const input = await getImageBuffer(c);
   const left = Number(c.req.query('left'));
@@ -288,15 +236,6 @@ app.post('/crop', async (c) => {
   return imageResponse(c, output, format);
 });
 
-```
-
-Unlike resize, crop coordinates are absolute pixels, so the route is strict about validation: `left` and `top` must be non-negative integers, and `width` and `height` must be positive integers.
-
-### Optimize images
-
-The `/optimize` route re-encodes the image to `format` (default `webp`) at `quality` (1-100, default 80). The `X-Original-Size` and `X-Optimized-Size` response headers let you see the savings without opening the file:
-
-```ts filename="index.ts"
 app.post('/optimize', async (c) => {
   const input = await getImageBuffer(c);
   const format = getFormat(c);
@@ -313,15 +252,6 @@ app.post('/optimize', async (c) => {
   });
 });
 
-```
-
-`quality` is clamped to the 1-100 range, so a bad value can't crash the pipeline or produce a useless output.
-
-### Analyze images
-
-The `/analyze` route runs [`metadata()`](https://sharp.pixelplumbing.com/api-input#metadata) and [`stats()`](https://sharp.pixelplumbing.com/api-input#stats) in parallel and returns the dimensions, format, size, alpha channel, and dominant color as a hex string. The dominant color is useful for placeholder backgrounds and theme colors while the full image loads:
-
-```ts filename="index.ts"
 app.post('/analyze', async (c) => {
   const input = await getImageBuffer(c);
   const [metadata, stats] = await Promise.all([sharp(input).metadata(), sharp(input).stats()]);
@@ -339,15 +269,6 @@ app.post('/analyze', async (c) => {
   });
 });
 
-```
-
-Because the two Sharp calls run in `Promise.all`, metadata and stats are gathered concurrently. The response is JSON rather than an image, so this route returns through `c.json` instead of `imageResponse`.
-
-### Caption images
-
-The `/caption` route is the AI-powered one. It downscales the image to fit within 1024x1024 first. Vision models don't benefit from full-resolution input, so this cuts token usage and latency. The downscaled JPEG then goes to `llama-4-maverick` as an `image` content part in a [`generateText`](https://ai-sdk.dev/cookbook/node/generate-text-with-image-prompt) call, and the model returns a one-sentence alt text caption:
-
-```ts filename="index.ts"
 app.post('/caption', async (c) => {
   const input = await getImageBuffer(c);
 
@@ -378,226 +299,50 @@ app.post('/caption', async (c) => {
   return c.json({ caption: text });
 });
 
+// Central error handler: BadRequest becomes a 400, anything else a 500.
+app.onError((err, c) => {
+  if (err instanceof BadRequest) return c.json({ error: err.message }, 400);
+  console.error(err);
+  return c.json({ error: 'Failed to process image' }, 500);
+});
+
+export default app;
 ```
 
-Notice there are no credentials in this code. The `neon()` provider reads `NEON_AI_GATEWAY_BASE_URL` and `NEON_AI_GATEWAY_TOKEN` from the environment. Neon injects both automatically when the AI Gateway is enabled, which you'll do in `neon.ts` next. See [Neon Functions environment variables](/docs/compute/functions/environment-variables) for the full list of injected variables.
+Here's how the pieces fit together.
+
+### Setup and shared helpers
+
+- `hono` handles routing and `sharp` does the image processing. `MAX_IMAGE_SIZE` caps uploads at 10 MB, `FORMATS` and `FITS` hold the allowed `format` and `fit` values, and `BadRequest` is a custom error type mapped to a `400` by the handler at the bottom.
+- **`getImageBuffer`** reads the image from every request, either as a raw binary body (`Content-Type: image/*`) or as `multipart/form-data` with a `file` field. Anything else returns a `400`, and `checkSize` rejects empty bodies and uploads over 10 MB.
+- **`getFormat`** reads the `format` query parameter (default `webp`) and validates it against `FORMATS`. **`imageResponse`** sets the correct `Content-Type` and a year-long `Cache-Control` header, plus any extra headers a route passes in.
+
+### Endpoints
+
+- **`/resize`** resizes to the given `width` and `height` (pass one or both; Sharp preserves the aspect ratio with one). The `fit` parameter controls how the image fills the box, and `.rotate()` applies EXIF orientation so phone photos come out upright.
+- **`/crop`** extracts a pixel rectangle defined by `left`, `top`, `width`, and `height` using Sharp's [`extract`](https://sharp.pixelplumbing.com/api-resize/#extract).
+- **`/optimize`** re-encodes to `format` at `quality` (1-100) and reports the savings via the `X-Original-Size` and `X-Optimized-Size` headers.
+- **`/analyze`** runs `metadata()` and `stats()` in parallel and returns the dimensions, format, size, alpha channel, and dominant color.
+
+### Captioning
+
+The `/caption` route downscales the image and sends the thumbnail to `llama-4-maverick` for a one-sentence alt text caption. The `generateText` call uses the Neon AI SDK provider to route the request through the Neon AI Gateway.
+
+### Error handler
+
+Bad input throws `BadRequest`, mapped to a `400`; anything else becomes a `500`. The final line exports the app so Neon Functions can serve it.
 
 <Admonition type="note" title="Model access">
-For improved captioning, you can use frontier vision models like `gemini-3-flash` instead of `llama-4-maverick`.
+For improved captioning, you can use frontier vision models like `claude-opus-5`, `gpt-5-6-sol` instead of `llama-4-maverick`.
 
-Frontier models are [rolling out gradually](/docs/ai-gateway/models#model-access). If `gemini-3-flash` isn’t available in your project yet, open-weight vision models such as `llama-4-maverick` and `gemma-3-12b` are accessible immediately. Just swap the model ID in the `/caption` route. No other changes are required.
+Frontier models are [rolling out gradually](/docs/ai-gateway/models#model-access). If `claude-opus-5`, `gpt-5-6-sol` etc. aren't available in your project yet, open-weight vision models such as `llama-4-maverick` and `gemma-3-12b` are accessible immediately. Just swap the model ID in the `/caption` route. No other changes are required.
 </Admonition>
-
-### Handle errors and export
-
-Finally, the central error handler. Bad input throws a `BadRequest`, which `onError` maps to a `400` JSON response. Unexpected failures, including Sharp rejecting a corrupt file, become a `500`. Defining the mapping once keeps the route handlers focused on the image pipeline. The last line exports the app so Neon Functions can serve it:
-
-```ts filename="index.ts"
-// Central error handler: BadRequest becomes a 400, anything else a 500.
-app.onError((err, c) => {
-  if (err instanceof BadRequest) return c.json({ error: err.message }, 400);
-  console.error(err);
-  return c.json({ error: 'Failed to process image' }, 500);
-});
-
-export default app;
-```
-
-### Full code
-
-Every snippet above is added to the same `index.ts` file. Here's the complete file, ready to copy:
-
-<details>
-<summary>Complete `index.ts` file</summary>
-
-```ts filename="index.ts"
-import { Hono, type Context } from 'hono';
-import sharp, { type FitEnum, type FormatEnum } from 'sharp';
-import { neon } from '@neon/ai-sdk-provider';
-import { generateText } from 'ai';
-
-const app = new Hono();
-
-const MAX_IMAGE_SIZE = 10 * 1024 * 1024; // 10 MB
-const FORMATS = ['jpeg', 'png', 'webp', 'avif'];
-const FITS = ['cover', 'contain', 'fill', 'inside', 'outside'];
-
-class BadRequest extends Error {}
-
-// Reads the uploaded image from the request, either as a raw binary body
-// (Content-Type: image/*) or as multipart/form-data with a "file" field.
-async function getImageBuffer(c: Context): Promise<Buffer> {
-  const contentType = c.req.header('content-type') ?? '';
-
-  if (contentType.startsWith('multipart/form-data')) {
-    const form = await c.req.parseBody();
-    const file = form['file'];
-    if (!(file instanceof File) || !file.type.startsWith('image/')) {
-      throw new BadRequest('Expected an image in the "file" form field');
-    }
-    return checkSize(Buffer.from(await file.arrayBuffer()));
-  }
-
-  if (!contentType.startsWith('image/')) {
-    throw new BadRequest(
-      'Send the image as a raw body with an image/* Content-Type, or as multipart/form-data'
-    );
-  }
-
-  return checkSize(Buffer.from(await c.req.arrayBuffer()));
-}
-
-function checkSize(buffer: Buffer): Buffer {
-  if (buffer.byteLength === 0) throw new BadRequest('Empty request body');
-  if (buffer.byteLength > MAX_IMAGE_SIZE) throw new BadRequest('Image exceeds the 10 MB limit');
-  return buffer;
-}
-
-function getFormat(c: Context): keyof FormatEnum {
-  const format = c.req.query('format') ?? 'webp';
-  if (!FORMATS.includes(format)) throw new BadRequest(`format must be one of: ${FORMATS.join(', ')}`);
-  return format as keyof FormatEnum;
-}
-
-function imageResponse(c: Context, output: Buffer, format: keyof FormatEnum, extraHeaders: Record<string, string> = {}) {
-  return c.body(new Uint8Array(output), 200, {
-    'Content-Type': `image/${format}`,
-    'Cache-Control': 'public, max-age=31536000, immutable',
-    ...extraHeaders,
-  });
-}
-
-app.get('/', (c) =>
-  c.json({
-    endpoints: ['POST /resize', 'POST /crop', 'POST /optimize', 'POST /analyze', 'POST /caption'],
-  })
-);
-
-app.post('/resize', async (c) => {
-  const input = await getImageBuffer(c);
-  const width = Number(c.req.query('width')) || undefined;
-  const height = Number(c.req.query('height')) || undefined;
-  const fit = c.req.query('fit') ?? 'cover';
-  const format = getFormat(c);
-
-  if (!width && !height) throw new BadRequest('Pass at least one of ?width or ?height');
-  if (!FITS.includes(fit)) throw new BadRequest(`fit must be one of: ${FITS.join(', ')}`);
-
-  const output = await sharp(input)
-    .rotate() // normalize EXIF orientation from phone cameras
-    .resize({ width, height, fit: fit as keyof FitEnum })
-    .toFormat(format, { quality: 80 })
-    .toBuffer();
-
-  return imageResponse(c, output, format);
-});
-
-app.post('/crop', async (c) => {
-  const input = await getImageBuffer(c);
-  const left = Number(c.req.query('left'));
-  const top = Number(c.req.query('top'));
-  const width = Number(c.req.query('width'));
-  const height = Number(c.req.query('height'));
-  const format = getFormat(c);
-
-  const valid =
-    Number.isInteger(left) && left >= 0 &&
-    Number.isInteger(top) && top >= 0 &&
-    Number.isInteger(width) && width > 0 &&
-    Number.isInteger(height) && height > 0;
-  if (!valid) {
-    throw new BadRequest('Pass non-negative integer ?left and ?top, and positive integer ?width and ?height');
-  }
-
-  const output = await sharp(input)
-    .rotate()
-    .extract({ left, top, width, height })
-    .toFormat(format, { quality: 80 })
-    .toBuffer();
-
-  return imageResponse(c, output, format);
-});
-
-app.post('/optimize', async (c) => {
-  const input = await getImageBuffer(c);
-  const format = getFormat(c);
-  const quality = Math.min(Math.max(Number(c.req.query('quality')) || 80, 1), 100);
-
-  const output = await sharp(input)
-    .rotate()
-    .toFormat(format, { quality })
-    .toBuffer();
-
-  return imageResponse(c, output, format, {
-    'X-Original-Size': String(input.byteLength),
-    'X-Optimized-Size': String(output.byteLength),
-  });
-});
-
-app.post('/analyze', async (c) => {
-  const input = await getImageBuffer(c);
-  const [metadata, stats] = await Promise.all([sharp(input).metadata(), sharp(input).stats()]);
-
-  const { r, g, b } = stats.dominant;
-  const toHex = (v: number) => v.toString(16).padStart(2, '0');
-
-  return c.json({
-    width: metadata.width,
-    height: metadata.height,
-    format: metadata.format,
-    sizeBytes: input.byteLength,
-    hasAlpha: metadata.hasAlpha,
-    dominantColor: `#${toHex(r)}${toHex(g)}${toHex(b)}`,
-  });
-});
-
-app.post('/caption', async (c) => {
-  const input = await getImageBuffer(c);
-
-  // Downscale before calling the model: vision models don't need full-resolution
-  // input, and a smaller image costs fewer tokens and less latency.
-  const thumbnail = await sharp(input)
-    .rotate()
-    .resize(1024, 1024, { fit: 'inside', withoutEnlargement: true })
-    .jpeg({ quality: 80 })
-    .toBuffer();
-
-  const { text } = await generateText({
-    model: neon('llama-4-maverick'),
-    messages: [
-      {
-        role: 'user',
-        content: [
-          {
-            type: 'text',
-            text: 'Write a concise one-sentence alt text caption for this image. Describe only what is visible.',
-          },
-          { type: 'image', image: thumbnail, mediaType: 'image/jpeg' },
-        ],
-      },
-    ],
-  });
-
-  return c.json({ caption: text });
-});
-
-// Central error handler: BadRequest becomes a 400, anything else a 500.
-app.onError((err, c) => {
-  if (err instanceof BadRequest) return c.json({ error: err.message }, 400);
-  console.error(err);
-  return c.json({ error: 'Failed to process image' }, 500);
-});
-
-export default app;
-```
-
-</details>
 
 ## Configure neon.ts
 
 The `neon link` command created a `neon.ts` file in your project root. Replace its contents with the following:
 
-```ts filename="neon.ts" {4-12}
+```ts filename="neon.ts" {4-13}
 import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({
@@ -607,17 +352,17 @@ export default defineConfig({
         name: 'Image API',
         source: './index.ts',
         externalPackages: ['sharp'],
-      },
+      }
     },
-    aiGateway: true,
-  },
+    aiGateway: true
+  }
 });
 ```
 
 Here's what each property does:
 
-- **`preview.functions.imageapi`**: Registers `index.ts` as a deployable function. The key (`imageapi`) is the function's slug, which becomes part of its invocation URL and can't be changed after the first deploy. Slugs are limited to lowercase letters and numbers, so it's `imageapi`, not `image-api`.
-- **`externalPackages: ['sharp']`**: Ships Sharp's files with the deploy instead of bundling them into the function bundle. Sharp depends on a compiled native library (libvips), which can't be bundled. This matters most when you deploy from an x86-64 machine; see the admonition below.
+- **`preview.functions.imageapi`**: Registers `index.ts` as a deployable function. The key (`imageapi`) is the function's slug, which becomes part of its invocation URL.
+- **`externalPackages: ['sharp']`**: Ships Sharp's files with the deploy instead of bundling them into the function bundle. See the note below for why this matters.
 - **`aiGateway: true`**: Enables the Neon AI Gateway on the branch. This is what injects the `NEON_AI_GATEWAY_*` credentials your `/caption` route uses.
 
 <Admonition type="important" title="Deploying from an x86-64 machine">
@@ -658,7 +403,7 @@ curl -X POST "http://localhost:8787/caption" -H "Content-Type: image/jpeg" --dat
 
 ```json
 {
-  "caption": "A scenic view of a fjord surrounded by rocky cliffs, with people gathered on a cliff edge under a partly cloudy sky."
+  "caption": "A group of people stand on a rocky outcropping, overlooking a blue body of water surrounded by mountains under a partly cloudy sky."
 }
 ```
 
@@ -667,7 +412,7 @@ curl -X POST "http://localhost:8787/caption" -H "Content-Type: image/jpeg" --dat
 Deploy your function to Neon:
 
 ```bash
-neon deploy --env .env.local
+neon deploy
 ```
 
 The CLI bundles your function, applies the `neon.ts` configuration (which enables the AI Gateway), and prints the public URL:
@@ -708,15 +453,17 @@ curl -X POST "$API_URL/crop?left=300&top=100&width=600&height=600" -H "Content-T
 **Optimize** an image and inspect the size headers:
 
 ```bash shouldWrap
-curl -si -X POST "$API_URL/optimize?format=webp&quality=70" -H "Content-Type: image/jpeg" --data-binary @sample.jpg -o optimized.webp
+curl -X POST "$API_URL/optimize?format=webp&quality=70" \
+  -F "file=@sample.jpg" \
+  -D - \
+  -o optimized.webp
 ```
 
 ```text
-HTTP/2 200
 content-type: image/webp
-x-original-size: 201611
+cache-control: public, max-age=31536000, immutable
 x-optimized-size: 158974
-...
+x-original-size: 201611
 ```
 
 **Analyze** an image:
@@ -727,12 +474,12 @@ curl -X POST "$API_URL/analyze" -H "Content-Type: image/jpeg" --data-binary @sam
 
 ```json
 {
-  "width": 1280,
-  "height": 853,
-  "format": "jpeg",
-  "sizeBytes": 201611,
-  "hasAlpha": false,
-  "dominantColor": "#084898"
+  "width":1280,
+  "height":853,
+  "format":"jpeg",
+  "sizeBytes":201611,
+  "hasAlpha":false,
+  "dominantColor":"#084898"
 }
 ```
 
@@ -844,7 +591,7 @@ The `{}` means the bucket is `private`: only the branch's credentials can read a
 Redeploy. This provisions the bucket and injects the `AWS_*` credentials into your function:
 
 ```bash
-neon deploy --env .env.local
+neon deploy
 ```
 
 Then store a resized image:
