@@ -12,8 +12,9 @@ redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
+  - /docs/guides/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-25T16:32:40.555Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
