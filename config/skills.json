@@ -4,7 +4,7 @@
     { "name": "neon-postgres", "ref": "main" },
     { "name": "neon-postgres-egress-optimizer", "ref": "main" },
     { "name": "neon-postgres-branches", "ref": "main" },
-    { "name": "neon", "ref": "3671832ddffe9bcf12cd25c94c49689483b0f724" },
+    { "name": "neon", "ref": "d9d9e58c57931cb125f2172774b2b74404c858df" },
     {
       "name": "neon-postgres-agent-platforms",
       "ref": "main",

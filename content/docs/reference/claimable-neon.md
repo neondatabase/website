@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
   - /docs/reference/claimable-postgres
-updatedOn: '2026-08-25T18:13:36.253Z'
+updatedOn: '2026-08-25T18:27:18.311Z'
 ---
 
 If an agent needs a Neon account and the user is not around, it provisions a project now. A human claims it later if they want to keep it. The agent receives credentials scoped to one project, builds with standard Postgres tools, and hands over a claim link. Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer.
@@ -28,13 +28,13 @@ If `neon claim` is not a command, or `neon claim --help` does not list `create`,
 Create a project and write its credentials to `.env`:
 
 ```bash
-npx neon@latest claim create --env-pull
+neon claim create --env-pull
 ```
 
 Request Data API or Managed Better Auth when the app needs them:
 
 ```bash
-npx neon@latest claim create \
+neon claim create \
   --service data-api \
   --service auth \
   --env-pull
@@ -77,7 +77,7 @@ The response contains an `identity_assertion`, project metadata, and one decisio
 
 ## Agent discovery
 
-If an agent needs a Neon account and the user is not around, [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt) points at [`auth.md`](https://neon.com/auth.md). This page is the human reference.
+If an agent needs a Neon account and the user is not around, [neon.com/docs/llms.txt](https://neon.com/docs/llms.txt) points at [`auth.md`](https://neon.com/auth.md).
 
 Claimable Neon implements [auth.md](https://workos.com/auth-md/docs/auth-md). Agents can discover the complete authentication and provisioning flow without a vendor-specific integration.
 
@@ -209,17 +209,17 @@ Registration records those as `{ granted: false, reason: "requires_claim" }`. A 
 `neon claim` and its `neon claimable` alias manage anonymous projects. If `neon claim` is not a command, or `neon claim --help` does not list `create`, use the HTTP flow in this page.
 
 ```bash
-npx neon@latest claim create --env-pull
+neon claim create --env-pull
 
-npx neon@latest claim create --service data-api --service auth --env-pull
+neon claim create --service data-api --service auth --env-pull
 
-npx neon@latest claim status
+neon claim status
 
-npx neon@latest claim accept --no-open
+neon claim accept --no-open
 
-npx neon@latest claim list
+neon claim list
 
-npx neon@latest claim delete --yes
+neon claim delete --yes
 ```
 
 `neon claim accept` opens a browser by default. `--no-open` prints the URL for a human to open.

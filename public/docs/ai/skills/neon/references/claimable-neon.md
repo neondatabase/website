@@ -4,17 +4,7 @@ Claimable Neon provisions a temporary Neon project — Lakebase Postgres, and op
 
 This flow follows the [auth.md](https://neon.com/auth.md) protocol. Fetch that file for request and response fields. REST is on `https://claimable.neon.tech`. Do not guess `POST /v1/agent/identity`.
 
-Use this when there is no Neon account yet. The CLI is already authenticated if any of these is true:
-
-- `NEON_API_KEY` is set
-- `NEON_PROFILE` is set
-- `neon profile list -o json` lists a profile whose `account` is not `-`
-
-A `DEFAULT` row with `account: "-"` and `file: "missing"` is not an account.
-
-If the CLI is authenticated, stop and use those credentials. If a command waits on a browser (`Awaiting authentication in web browser`) or authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Prefer that over Claimable Neon unless they say otherwise.
-
-If they cannot sign in or provide a key right now, ask before continuing. Continue only after they say yes. That is a temporary workaround.
+Use this after the neon skill account check found no account.
 
 ## Path
 
@@ -24,9 +14,9 @@ If `neon claim` is not a command, or `neon claim --help` does not list `create`,
 2. Write a `neon.ts` that declares the services you need, or skip the file and pass `--service` on create. Postgres is always requested.
 3. Create the project: `neon claim create --env-pull` (add `--service data-api --service auth` if there is no `neon.ts`)
 4. Pull env if create did not write it: `neon env pull`
-5. Use the `neon-postgres` skill for connections, schemas, and queries. Install it if it is missing: `npx skills add neondatabase/agent-skills -s neon-postgres`
+5. Use the `neon-postgres` skill for connections, schemas, and queries. Install it if it is missing: `neon skills -s neon-postgres`
 
-Do not run `npx neon@latest init --agent` or `neon auth` on this path; those need a human Neon account. `--api-key` and `--profile` are refused on `neon claim`.
+Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. `--api-key` and `--profile` are refused on `neon claim`.
 
 ```typescript
 import { defineConfig } from "@neon/config/v1";

@@ -35,7 +35,7 @@ assertion, and pull env.
 
 ```bash
 npm i -g neon@latest
-npx skills add neondatabase/agent-skills -s neon -s neon-postgres
+neon skills -s neon -s neon-postgres
 ```
 
 https://neon.com/docs/cli/install.md

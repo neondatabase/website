@@ -31,13 +31,14 @@ Content-Type: application/json
   "type": "anonymous",
   "capabilities": ["postgres", "data_api", "auth"]
 }`,
-  cli: `npx neon@latest claim create \\
+  cli: `npm i -g neon@latest
+neon claim create \\
   --service data-api \\
   --service auth \\
   --env-pull
 
-npx neon@latest branches list
-npx neon@latest claim accept --no-open`,
+neon branches list
+neon claim accept --no-open`,
   config: `import { defineConfig } from '@neon/config/v1';
 
 export default defineConfig({

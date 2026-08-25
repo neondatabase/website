@@ -129,7 +129,9 @@ Before `npx neon@latest init --agent`, check whether the CLI is already authenti
 
 - `NEON_API_KEY` is set
 - `NEON_PROFILE` is set
-- `npx neon@latest profile list -o json` lists a profile whose `account` is not `-`
+- `neon profile list -o json` lists a profile whose `account` is not `-`
+
+A `DEFAULT` row with `account: "-"` and `file: "missing"` is not an account.
 
 If none of those hold, follow [Starting without a Neon account](#starting-without-a-neon-account).
 
@@ -182,26 +184,11 @@ Useful MCP tools to initialize a project:
 
 ## Starting without a Neon account
 
-Install the CLI, then check whether it is already authenticated:
-
-```bash
-npm i -g neon@latest
-neon profile list -o json
-```
-
-The CLI is authenticated if any of these is true:
-
-- `NEON_API_KEY` is set
-- `NEON_PROFILE` is set
-- a listed profile has `account` other than `-`
-
-A `DEFAULT` row with `account: "-"` and `file: "missing"` is not an account.
-
-If it is authenticated, use those credentials and [Getting Started](#getting-started-with-neon). If a command waits on a browser (`Awaiting authentication in web browser`) or authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Prefer that over Claimable Neon unless they say otherwise.
+If the Getting Started account check found credentials, use them. If a command waits on a browser (`Awaiting authentication in web browser`) or authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Prefer that over Claimable Neon unless they say otherwise.
 
 If they cannot sign in or provide a key right now, ask before using Claimable Neon. Continue only after they say yes. That is a temporary workaround.
 
-If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `npx neon@latest init --agent` or `neon auth` on this path; those need a human Neon account. If the Neon CLI cannot be used, the reference has the REST fallback.
+If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. If the Neon CLI cannot be used, the reference has the REST fallback.
 
 Requests for neon.new, Claimable Postgres, claimable.neon.tech, instant Postgres, or a no-signup database are the same path.
 
