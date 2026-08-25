@@ -128,7 +128,6 @@ Use the same method that was used to install them. With the `skills` CLI, run th
 Before `npx neon@latest init --agent`, check whether the CLI is already authenticated:
 
 - `NEON_API_KEY` is set
-- `NEON_PROFILE` is set
 - `npx neon@latest profile list -o json` lists a profile whose `account` is not `-`
 
 A `DEFAULT` row with `account: "-"` and `file: "missing"` is not an account. If `neon` is not installed, or `npx neon@latest profile list` cannot run, that is not an account.
@@ -188,7 +187,7 @@ If the Getting Started account check found credentials, use them. If a command w
 
 If they cannot sign in or provide a key right now, ask before using Claimable Neon. Continue only after they say yes. That is a temporary workaround.
 
-If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. If the Neon CLI cannot be used, the reference has the REST fallback.
+If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. If `neon claim` is missing, the reference has the REST fallback.
 
 Requests for neon.new, Claimable Postgres, claimable.neon.tech, instant Postgres, or a no-signup database are the same path.
 
