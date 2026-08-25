@@ -9,7 +9,12 @@ description: >-
   are the trigger: "object storage" or "S3", "buckets", "serverless functions",
   "AI gateway", "call an LLM", "logs", "branch logs", "query logs",
   "log export", "Loki", "Grafana", "observability", "telemetry", "postgres",
-  "database", or "backend".
+  "database", or "backend". Also use when there is no Neon account yet, the
+  user cannot sign in or provide an API key right now and needs a project they
+  can claim later, or the user asks for a throwaway DATABASE_URL, Claimable Neon,
+  Claimable Postgres, neon.new, claimable.neon.tech, instant Postgres, a no-signup
+  database, temporary postgres, quick postgres, a no credit card database, or
+  npx neon-new.
 metadata:
   source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon
 ---
@@ -79,15 +84,14 @@ Neon provides a set of agent skills in addition to the official documentation. W
 
 The skills below live in the [`neondatabase/agent-skills`](https://github.com/neondatabase/agent-skills) repo:
 
-| Skill | Use it for |
-| --- | --- |
-| `neon-postgres` | Working with databases, including connections, schemas, queries, and autoscaling: SQL development, schema design, performance optimization, and scaling decisions. |
-| `neon-postgres-branches` | Choosing or creating the right branch type for dev, preview, test, or CI workflows. Use this skill as a slash command. |
-| `neon-object-storage` | Storing and serving files (uploads, images, blobs), including branching them with the database. |
-| `neon-functions` | Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers. |
-| `neon-ai-gateway` | Calling an LLM or routing across model providers with one credential, including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint. |
-| `claimable-postgres` | Provisioning instant, claimable temporary Postgres databases (for example, one per end user or demo). |
-| `neon-postgres-egress-optimizer` | Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase. |
+| Skill                            | Use it for                                                                                                                                                                           |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `neon-postgres`                  | Working with databases, including connections, schemas, queries, and autoscaling: SQL development, schema design, performance optimization, and scaling decisions.                   |
+| `neon-postgres-branches`         | Choosing or creating the right branch type for dev, preview, test, or CI workflows. Use this skill as a slash command.                                                               |
+| `neon-object-storage`            | Storing and serving files (uploads, images, blobs), including branching them with the database.                                                                                      |
+| `neon-functions`                 | Deploying long-running or streaming serverless functions — APIs, agents, SSE/WebSocket servers.                                                                                      |
+| `neon-ai-gateway`                | Calling an LLM or routing across model providers with one credential, including discovering the branch's servable models at runtime via the OpenAI-compatible `/v1/models` endpoint. |
+| `neon-postgres-egress-optimizer` | Diagnosing or fixing excessive Postgres egress (network data-transfer) costs in a codebase.                                                                                          |
 
 For guidance on agent platforms that provision and operate Lakebase Postgres on Neon at scale, use `neon-postgres-agent-platforms`, which lives in a separate repo: [`neondatabase/neon-for-agent-platforms`](https://github.com/neondatabase/neon-for-agent-platforms).
 
@@ -120,6 +124,14 @@ Keep the skills up to date: for every new session, update them so you are workin
 Use the same method that was used to install them. With the `skills` CLI, run the install command above with `update` in place of `add`, or run `npx skills update` to update all Neon skills. If the skills were installed via a plugin, they are updated automatically.
 
 ## Getting Started with Neon
+
+Before `npx neon@latest init --agent`, check whether the CLI is already authenticated:
+
+- `NEON_API_KEY` is set
+- `NEON_PROFILE` is set
+- `npx neon@latest profile list -o json` lists a profile whose `account` is not `-`
+
+If none of those hold, follow [Starting without a Neon account](#starting-without-a-neon-account).
 
 The easiest way to get started with Neon is to use our CLI and the project bootstrap wizard:
 
@@ -168,6 +180,31 @@ Useful MCP tools to initialize a project:
 - `create_project` — Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
 - `get_connection_string` — Returns your database connection string.
 
+## Starting without a Neon account
+
+Install the CLI, then check whether it is already authenticated:
+
+```bash
+npm i -g neon@latest
+neon profile list -o json
+```
+
+The CLI is authenticated if any of these is true:
+
+- `NEON_API_KEY` is set
+- `NEON_PROFILE` is set
+- a listed profile has `account` other than `-`
+
+A `DEFAULT` row with `account: "-"` and `file: "missing"` is not an account.
+
+If it is authenticated, use those credentials and [Getting Started](#getting-started-with-neon). If a command waits on a browser (`Awaiting authentication in web browser`) or authentication fails, stop and ask the user to sign in (`neon auth`) or mint an API key. Prefer that over Claimable Neon unless they say otherwise.
+
+If they cannot sign in or provide a key right now, ask before using Claimable Neon. Continue only after they say yes. That is a temporary workaround.
+
+If there is no Neon account yet, follow [references/claimable-neon.md](https://neon.com/docs/ai/skills/neon/references/claimable-neon.md). Do not run `npx neon@latest init --agent` or `neon auth` on this path; those need a human Neon account. If the Neon CLI cannot be used, the reference has the REST fallback.
+
+Requests for neon.new, Claimable Postgres, claimable.neon.tech, instant Postgres, or a no-signup database are the same path.
+
 ## Neon Infrastructure as Code
 
 `neon.ts` is Neon's branch config and infrastructure-as-code file: declare which Neon services your project's branches should have, get type-safe env vars, and program branch settings — all in TypeScript. It's the config layer for your Neon services, and it composes with the branch-first loop below. Add it with `@neon/config`:
@@ -208,12 +245,8 @@ export default defineConfig({
   auth: true,
   dataApi: true,
   preview: {
-    functions: {
-      /* ... */
-    }, // see the neon-functions skill
-    buckets: {
-      /* ... */
-    }, // see the neon-object-storage skill
+    functions: {},
+    buckets: {},
     aiGateway: true, // see the neon-ai-gateway skill
   },
 });
@@ -395,7 +428,11 @@ for await (const record of neon.logs.query(projectId, branchId, {
 }
 
 const { data: fields } = await neon.logs.fields(projectId, branchId);
-const { data: serviceNames } = await neon.logs.fieldValues(projectId, branchId, "service_name");
+const { data: serviceNames } = await neon.logs.fieldValues(
+  projectId,
+  branchId,
+  "service_name",
+);
 ```
 
 `query`'s iterator always throws on error, but `fields` and `fieldValues` follow the client's `throwOnError`, which defaults to `false` and hands back `{ data, error }`. `fieldValues` resolves to the whole response, not a bare array: read `serviceNames.values`, and treat them as an arbitrary subset whenever `serviceNames.is_truncated` is true.

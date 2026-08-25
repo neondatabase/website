@@ -24,6 +24,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon-postgres-egress-optimizer/SKILL.md',
   '/docs/ai/skills/neon-postgres/SKILL.md',
   '/docs/ai/skills/neon/SKILL.md',
+  '/docs/ai/skills/neon/references/claimable-neon.md',
   '/pricing.md',
   '/prompts/astro-serverless-prompt.md',
   '/prompts/connection-issues-prompt.md',
