@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-08-25T16:36:05.871Z'
+updatedOn: '2026-08-25T17:49:33.991Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
@@ -63,7 +63,7 @@ Use this approach when you want to create databases for your users without requi
 - Instant database provisioning with no user signup required
 - 72-hour database lifespan if not claimed
 - Seamless ownership transfer when users are ready
-- Connection strings remain valid after claiming
+- Claiming moves the project into the user's organization. neon.new keeps the connection string; Claimable Neon rotates `DATABASE_URL`
 - Configurable transfer request expiration
 
 **Example use cases:**
