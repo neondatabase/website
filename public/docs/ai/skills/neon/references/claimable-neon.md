@@ -2,19 +2,18 @@
 
 Claimable Neon provisions a temporary Neon project — Lakebase Postgres, and optionally the Data API and Managed Better Auth — before a human creates an account. The agent holds an identity assertion, not a Neon API key. A human can later claim the project into their organization.
 
-This flow follows the [auth.md](https://neon.com/auth.md) protocol. Fetch `https://neon.com/auth.md` for request and response fields. If that URL 404s, fetch `https://claimable.neon.tech/auth.md`. REST is on `https://claimable.neon.tech`. Use the table below; do not invent other identity paths.
+This flow follows the [auth.md](https://claimable.neon.tech/auth.md) protocol. Fetch `https://claimable.neon.tech/auth.md` for request and response fields. REST is on `https://claimable.neon.tech`. Use the table below; do not invent other identity paths.
 
 Use this after the neon skill account check found no account.
 
 ## Path
 
-If `neon claim` is not a command, or `neon claim --help` does not list `create`, skip to [If the Neon CLI cannot be used](#if-the-neon-cli-cannot-be-used).
-
 1. Install the CLI: `npm i -g neon@latest`
-2. Write a `neon.ts` that declares the services you need, or skip the file and pass `--service` on create. Postgres is always requested.
-3. Create the project: `neon claim create --env-pull` (add `--service data-api --service auth` if there is no `neon.ts`)
-4. Pull env if create did not write it: `neon env pull`
-5. Use the `neon-postgres` skill for connections, schemas, and queries. Install it if it is missing: `neon skills -s neon-postgres`
+2. If `npx neon@latest claim --help` does not list `create`, skip to [If the Neon CLI cannot be used](#if-the-neon-cli-cannot-be-used).
+3. Write a `neon.ts` that declares the services you need, or skip the file and pass `--service` on create. Postgres is always requested.
+4. Create the project: `neon claim create --env-pull` (add `--service data-api --service auth` if there is no `neon.ts`)
+5. If create did not write env, pull it: `neon env pull`
+6. Use the `neon-postgres` skill for connections, schemas, and queries. Install it if it is missing: `neon skills -s neon-postgres`
 
 Do not run `neon init --agent` or `neon auth` on this path; those need a human Neon account. `--api-key` and `--profile` are refused on `neon claim`.
 
@@ -28,9 +27,9 @@ export default defineConfig({
 ```
 
 ```bash
+npm i -g neon@latest
 npm i @neon/config
 neon claim create --env-pull
-neon env pull
 ```
 
 `neon claim create` reads `neon.ts` when it is present. It writes provisioned vars to an existing `.env`, otherwise `.env.local`, and gitignores that file. If `.env` or `.env.local` already has a `DATABASE_URL` (or other Neon-managed keys), pass `--file <path>` or `--no-env-pull`. The identity assertion is the pre-claim credential.
@@ -41,7 +40,7 @@ After create, report the `project_id`, `expires_at`, and `denied_capabilities` t
 
 ## Claim
 
-Do not run `neon claim accept` until the human is ready. Accept mints a claim URL. Opening the URL does not freeze access. Continuing from that page to Neon starts the transfer, rotates `DATABASE_URL`, and puts the project in `claim_in_progress`; then only claim-status polling remains.
+Do not run `neon claim accept` until the human is ready. Accept mints a claim URL. Opening the URL does not freeze access. Continuing from that page to Neon starts the transfer and rotates `DATABASE_URL`. Existing access tokens are revoked; re-exchange the identity assertion and poll claim status with the new token.
 
 When the human is ready, run `neon claim accept --no-open`. Bare `neon claim accept` opens a browser. Report the `verification_url`, `user_code`, and `expires_in_seconds` the CLI printed. If the code expires, run `neon claim accept --no-open` again. Claiming transfers the project and rotates `DATABASE_URL`. Auth and the Data API stay enabled.
 
@@ -60,7 +59,7 @@ neon claim delete --yes
 
 ## If the Neon CLI cannot be used
 
-Fall back to the REST API. Fetch `https://neon.com/auth.md` for request and response fields. If that URL 404s, fetch `https://claimable.neon.tech/auth.md`. The claimable resource is `/v1/projects/{id}` on `https://claimable.neon.tech`, not `/v1/databases/{id}`.
+Fall back to the REST API. Fetch `https://claimable.neon.tech/auth.md` for request and response fields. The claimable resource is `/v1/projects/{id}` on `https://claimable.neon.tech`, not `/v1/databases/{id}`.
 
 ```http
 POST https://claimable.neon.tech/v1/agent/identity
@@ -82,4 +81,4 @@ An agent must not complete the claim. The human opens `verification_uri_complete
 
 When `error.code` is `capability_requires_claim`, preserve the denied capability and give the human a claim link instead of retrying or silently omitting it.
 
-Only `invalid_grant`, `project_expired`, and `project_claimed` mean the stored identity assertion is dead. `token_expired` means re-exchange the assertion. `claim_in_progress` means only claim-status polling remains.
+Only `invalid_grant`, `project_expired`, and `project_claimed` mean the stored identity assertion is dead. `token_expired` means re-exchange the assertion. After the human continues to Neon, existing access tokens are revoked: re-exchange, then poll `GET /v1/projects/{id}/claim` with that token at the interval `auth.md` returns. `claim_in_progress` means keep polling with the post-redemption token, not the token from create.
