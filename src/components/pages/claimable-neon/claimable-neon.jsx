@@ -230,7 +230,7 @@ const Provisioner = () => {
             target="_blank"
             rel="noreferrer"
           >
-            Claim when you are done building
+            Open the claim link
           </Button>
         </div>
       </div>
