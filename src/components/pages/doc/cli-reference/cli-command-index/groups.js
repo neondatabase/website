@@ -50,6 +50,7 @@ const GROUP_OF = {
   open: 'setup',
   mcp: 'setup',
   skills: 'setup',
+  plugins: 'setup',
   claim: 'setup',
 };
 

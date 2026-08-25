@@ -10,7 +10,7 @@ summary: >-
   with `neon skills`, `npx skills add neondatabase/agent-skills -y`, `neon init`,
   or editor plugins at project level or globally.
 enableTableOfContents: true
-updatedOn: '2026-08-25T16:36:05.871Z'
+updatedOn: '2026-08-25T21:56:50.915Z'
 redirectFrom:
   - /docs/ai/ai-rules
   - /docs/ai/ai-rules-neon-toolkit
@@ -39,6 +39,16 @@ neon skills
 ```
 
 It pre-selects your detected agents, lets you pick which skills to add, and confirms before writing. Pass `-s <skill>` and `--agent <name>` to skip the prompts, `--global` to install user-level, and run `neon skills update` to refresh installed skills. See the [`neon skills` reference](/docs/cli/skills) for all options.
+
+### neon plugins
+
+For agents that support plugin marketplaces (Claude Code, Cursor, Codex, and more), the Neon CLI can install the plugin, which bundles the skills and the Neon MCP Server:
+
+```bash
+neon plugins
+```
+
+It pre-selects your detected agents and confirms before writing. Pass `--agent <name>` to name agents, `-y` to install into detected agents without prompts, and `--global` to install user-level. See the [`neon plugins` reference](/docs/cli/plugins) for all options.
 
 ### npx skills
 
@@ -70,7 +80,7 @@ In Cursor chat, run:
 /add-plugin neon-postgres
 ```
 
-Or install from [cursor.com/marketplace/neon](https://cursor.com/marketplace/neon). See [Cursor plugin for Neon](/docs/ai/ai-cursor-plugin) for details.
+Or install from [cursor.com/marketplace/neon](https://cursor.com/marketplace/neon). To install from the command line, run [`npx neon@latest plugins --agent cursor`](/docs/cli/plugins). See [Cursor plugin for Neon](/docs/ai/ai-cursor-plugin) for details.
 
 <Admonition type="note">
 Editor plugins currently bundle the core Postgres skill set and MCP integration. To give your assistant context for **Neon Functions**, **Object Storage**, and **AI Gateway**, run `npx skills add neondatabase/agent-skills -y` or install the platform skills individually (see [Available skills](#available-skills)).
@@ -85,13 +95,13 @@ If you're using Claude Code, install the Neon plugin for skills and MCP integrat
 /plugin install neon-postgres@neon
 ```
 
-See [Claude Code plugin for Neon](/docs/ai/ai-claude-code-plugin) for details.
+Or install it from the command line with [`npx neon@latest plugins --agent claude-code`](/docs/cli/plugins). See [Claude Code plugin for Neon](/docs/ai/ai-claude-code-plugin) for details.
 
 ### Codex plugin
 
 If you're using OpenAI Codex, install the **Neon** plugin from the [Codex plugin directory](https://developers.openai.com/codex/plugins/) (in the Codex app under **Plugins**, or in the Codex CLI with `/plugins`). It includes the Neon app (MCP), the main Neon skill, and the egress optimizer skill.
 
-See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
+To install from the command line instead, run [`npx neon@latest plugins --agent codex`](/docs/cli/plugins). See [Codex plugin for Neon](/docs/ai/ai-codex-plugin) for details.
 
 ### Kimi Code plugin
 

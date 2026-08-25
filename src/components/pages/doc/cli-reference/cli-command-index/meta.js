@@ -46,6 +46,10 @@ const META = {
     desc: 'Install and update Neon agent skills in your coding agents.',
     examples: ['neon skills', 'neon skills -y', 'neon skills update -y'],
   },
+  plugins: {
+    desc: 'Install the Neon plugin (skills plus MCP) into your coding agents.',
+    examples: ['neon plugins', 'neon plugins -y', 'neon plugins --global'],
+  },
   claim: {
     desc: 'Create and claim a temporary project without an account.',
     examples: ['neon claim create --env-pull', 'neon claim accept'],
