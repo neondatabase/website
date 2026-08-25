@@ -163,7 +163,7 @@ const Provisioner = () => {
       stayEnabled.length === 0
         ? ''
         : stayEnabled.length === 1
-          ? ` ${stayEnabled[0]} stays enabled.`
+          ? ` ${stayEnabled[0][0].toUpperCase()}${stayEnabled[0].slice(1)} stays enabled.`
           : ` ${stayEnabled.join(' and ')} stay enabled.`;
 
     return (
