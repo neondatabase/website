@@ -103,6 +103,18 @@ neon inspect db long-running-queries
 No long-running queries in any database.
 ```
 
+### neon inspect db stalled-queries (#db-stalled-queries)
+
+Active queries running longer than 30 seconds, with their parallel workers, what each one is waiting on, and any queries blocking them. It runs compute-wide. When nothing qualifies, it says so instead of printing an empty table:
+
+```bash
+neon inspect db stalled-queries
+```
+
+```text
+No active queries running longer than 30 seconds.
+```
+
 ### neon inspect db locks (#db-locks)
 
 Locks currently held, with the query that acquired each one and its age. When writes are blocked, run this to find what is holding the lock.

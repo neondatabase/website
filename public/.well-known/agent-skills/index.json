@@ -34,35 +34,35 @@
       "type": "skill-md",
       "description": "Overview of Neon, a complete set of cloud backend primitives for apps and agents, spanning Lakebase Postgres, Auth, the Data API, Object Storage, Compute Functions, and the AI Gateway. Start here to route to the right Neon skill, set up the CLI or MCP server, and follow the branch-first workflow. Use when \"Neon\" or \"Lakebase Postgres\" is mentioned, or when any of its individual capabilities are the trigger: \"object storage\" or \"S3\", \"buckets\", \"serverless functions\", \"AI gateway\", \"call an LLM\", \"logs\", \"branch logs\", \"query logs\", \"log export\", \"Loki\", \"Grafana\", \"observability\", \"telemetry\", \"postgres\", \"database\", or \"backend\".",
       "url": "/.well-known/agent-skills/neon/SKILL.md",
-      "digest": "sha256:9883a1dc3758a662bfcc3b088da60e58cb5e5af16f094ecabceea0f20d17a1df"
+      "digest": "sha256:2288231fb0aaeedae21eb77762dcb44ced134d0b9e241404f2c6c35a6c2e4a5b"
     },
     {
       "name": "neon-postgres-agent-platforms",
       "type": "skill-md",
       "description": "Build and operate multi-tenant AI agent platforms on Neon. Use this skill whenever the user is designing an agent/app builder, provisioning a Neon project or database per user/app/agent run, managing thousands of tenant projects, separating sponsored free users from paid customers, moving projects between orgs, choosing personal vs organization vs project-scoped API keys, tracking fleet consumption or Agent Plan costs, creating compound checkpoints that combine DB snapshots with source revisions/secrets/deploy metadata, or orchestrating snapshot/restore flows for generated apps. Also use it for Neon Agent Program, Agent Plan, org/project limits, HIPAA, co-marketing, support, or neondatabase/neon-for-agent-platforms examples.",
       "url": "/.well-known/agent-skills/neon-postgres-agent-platforms/SKILL.md",
-      "digest": "sha256:21ebbbf8f15e50f39f5f65de9c9459ed83993b5752d8f238aff9ffccb5c25061"
+      "digest": "sha256:167e52b3c75f41b479a10a731ca2dd8729eec5f9f597d5a589a576a044345499"
     },
     {
       "name": "neon-object-storage",
       "type": "skill-md",
       "description": "S3-compatible object storage that branches with your Neon project, so files and the database stay in sync across every branch. Use when a user wants object storage, a bucket, blob/file storage, or somewhere to put uploads, images, documents, avatars, or user-generated files for their app or agent — especially when they already use (or are setting up) Lakebase Postgres and don't want to add a separate storage provider like AWS S3, Cloudflare R2, or Supabase Storage. Triggers include \"object storage\", \"bucket\", \"blob storage\", \"file storage\", \"store uploads/images/files\", \"S3-compatible storage\", \"presigned URL\", \"where do I put files\", \"storage logs\", \"bucket logs\", \"Neon Object Storage\", \"Neon Storage\", and \"storage that branches with my database\".",
       "url": "/.well-known/agent-skills/neon-object-storage/SKILL.md",
-      "digest": "sha256:95787daa904f2ade179c564593567d9615c1ce9a81a1e5b34139e27de58931fc"
+      "digest": "sha256:c937192cacad6dc774d8f6f72997e64b27072226bb21badd90f8924db4a8e03d"
     },
     {
       "name": "neon-ai-gateway",
       "type": "skill-md",
-      "description": "One API and one credential for frontier and open-source LLMs, built into your Neon branch and powered by Databricks. Use when a user wants to call an LLM, add AI/chat/an agent to their app, route between model providers (OpenAI, Anthropic, Google/Gemini, Meta, Alibaba, DeepSeek), or avoid juggling separate provider API keys and accounts — especially when they already use Neon and want AI requests to branch with their project. Works with the OpenAI SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing only the base URL. Triggers include \"call an LLM\", \"add AI to my app\", \"chat completion\", \"model routing\", \"LLM proxy/gateway\", \"one API for all models\", \"use Claude/GPT/Gemini\", \"AI SDK\", \"Mastra agent\", \"Neon AI Gateway\", and \"log/rate-limit AI calls\".",
+      "description": "One API and one credential for frontier and open-source LLMs, built into your Neon branch and powered by Databricks. Use when a user wants to call an LLM, add AI/chat/an agent to their app, route between model providers (OpenAI, Anthropic, Google/Gemini, Meta, Alibaba, and more), or avoid juggling separate provider API keys and accounts — especially when they already use Neon and want AI requests to branch with their project. Works with the OpenAI SDK, Anthropic SDK, google-genai, the Vercel AI SDK, and Mastra by changing only the base URL. Triggers include \"call an LLM\", \"add AI to my app\", \"chat completion\", \"model routing\", \"LLM proxy/gateway\", \"one API for all models\", \"use Claude/GPT/Gemini\", \"AI SDK\", \"Mastra agent\", \"Neon AI Gateway\", and \"log/rate-limit AI calls\".",
       "url": "/.well-known/agent-skills/neon-ai-gateway/SKILL.md",
-      "digest": "sha256:141fd81e4cb907b9290b9853d74d889228ada9769b800209996198f8a09abb25"
+      "digest": "sha256:5f7b7d3f9490fda3d3e78ade52f8df053a0f0ce9fad38d6f17d47c5d92ba4ce4"
     },
     {
       "name": "neon-functions",
       "type": "skill-md",
       "description": "Long-running, serverless Node.js HTTP functions deployed onto your Neon branch, with DATABASE_URL injected automatically and compute that runs next to your data. Use when a user wants to host an API, an AI agent with long streaming responses, a WebSocket or server-sent-events (SSE) server, a webhook handler, a Discord bot, an MCP server, or any request/response workload that risks timing out on short, lambda-style serverless functions — and wants it to branch with their database. Triggers include \"serverless function\", \"deploy an API\", \"long-running function\", \"streaming agent\", \"SSE server\", \"WebSocket server\", \"webhook handler\", \"MCP server\", \"run code next to my database\", \"function that won't time out\", \"function logs\", \"Neon Functions\", and \"Neon Compute\".",
       "url": "/.well-known/agent-skills/neon-functions/SKILL.md",
-      "digest": "sha256:d8adfeedf65a0dd401e4cdaa66f8dc3f8bf11b0c2596bf479f72c5799942bdcf"
+      "digest": "sha256:92b3a6a025885d45b7976e9d4338ea98712e091afac5309aa59ba9c9771706fa"
     }
   ]
 }

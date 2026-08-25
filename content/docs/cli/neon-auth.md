@@ -280,7 +280,7 @@ neon neon-auth config email-provider update --type standard --host smtp.example.
 
 ### neon neon-auth config email-provider test (#config-email-provider-test)
 
-Sends a test email so you can verify your SMTP configuration.
+Sends a test email through your saved SMTP provider so you can verify it works. Configure the provider first with [`update`](#config-email-provider-update).
 
 <CliUsage command="neon-auth config email-provider test" />
 

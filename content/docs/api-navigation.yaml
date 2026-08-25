@@ -227,8 +227,8 @@
     - title: "Delete OAuth provider"
       slug: reference/api/auth/delete-branch-neon-auth-oauth-provider
       method: DELETE
-    - title: "Send test email"
-      slug: reference/api/auth/send-neon-auth-test-email
+    - title: "Send test email using the saved email provider"
+      slug: reference/api/auth/send-neon-auth-email-provider-test
       method: POST
     - title: "Retrieve email and password configuration"
       slug: reference/api/auth/get-neon-auth-email-and-password-config
@@ -272,6 +272,11 @@
     - title: "Update Neon Auth webhook configuration"
       slug: reference/api/auth/update-neon-auth-webhook-config
       method: PUT
+    - title: "Send test email"
+      slug: reference/api/auth/send-neon-auth-test-email
+      method: POST
+      tag: deprecated
+      tagTheme: orange
 - title: "Organizations"
   slug: reference/api/organizations
   items:
