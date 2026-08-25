@@ -136,9 +136,9 @@ const Provisioner = () => {
       const body = await response.json();
       if (!response.ok) {
         throw new Error(
-          body?.error?.message ||
-            body?.error ||
-            `Project creation failed with HTTP ${response.status}.`
+          typeof body?.error?.message === 'string'
+            ? body.error.message
+            : `Project creation failed with HTTP ${response.status}.`
         );
       }
       setState({ status: 'success', result: body });
@@ -219,9 +219,8 @@ const Provisioner = () => {
         <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
           <p className="text-sm leading-relaxed text-gray-new-70">
             Copy these values now. This page will not show them again. The claim link expires in{' '}
-            {Math.round(claim.expires_in / 60)} minutes. Open it before then. Continuing to Neon on
-            that page rotates <code>DATABASE_URL</code> before you pick an organization. Pull a new
-            one from the console after the transfer finishes.
+            {Math.round(claim.expires_in / 60)} minutes. Continuing to Neon on that page rotates{' '}
+            <code>DATABASE_URL</code>. Pull a new one from the console after the transfer finishes.
             {stayEnabledSentence} The project itself expires on {expiresAt}.
           </p>
           <Button
@@ -459,7 +458,7 @@ const ClaimableNeon = () => (
               ],
               [
                 'Unclaimed projects expire',
-                'Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer. Claim the project before then to keep it. Claiming rotates the database password; Auth and the Data API stay enabled.',
+                'Unclaimed projects expire in 72 hours and are capped at 100 MB storage and 1 GB transfer. Claim the project before then to keep it. Claiming rotates DATABASE_URL; Auth and the Data API stay enabled.',
               ],
             ].map(([title, description], index) => (
               <div className="grid grid-cols-[36px_1fr] gap-4" key={title}>

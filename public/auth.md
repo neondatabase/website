@@ -19,7 +19,10 @@ https://claimable.neon.tech/.well-known/jwks.json
 
 `agent_auth.skill` is this file. `identity_endpoint` is where you register. `claim_endpoint`
 accepts `{"claim_token":"<identity_assertion>"}`. JWT `iss` is `https://neon.com/claimable`. Token
-`aud` / `resource` is `https://claimable.neon.tech/`.
+`aud` / `resource` is `https://claimable.neon.tech/`. Request and response field names for the
+HTTP calls below also live at `https://claimable.neon.tech/auth.md`. If this file and that file
+disagree on a field, use that copy. Token exchange, JWKS, and project REST stay on
+`https://claimable.neon.tech`.
 
 ## Install the Neon CLI
 
