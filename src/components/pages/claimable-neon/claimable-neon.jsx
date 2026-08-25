@@ -198,14 +198,16 @@ const ProvisionResult = ({ result, onReset }) => {
         {credentials.services.auth?.base_url && (
           <Credential label="NEON_AUTH_BASE_URL" value={credentials.services.auth.base_url} />
         )}
+        <Credential label="Claim link" value={claim.verification_uri_complete} />
       </div>
 
       <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
         <p className="text-sm leading-relaxed text-gray-new-70">
           Copy these values now. This page will not show them again. The claim link expires at{' '}
-          {claimExpiresAt}. If it expires, create another project from this page. Continuing to Neon
-          on that page rotates <code>DATABASE_URL</code>. Pull a new one from the console after the
-          transfer finishes.
+          {claimExpiresAt}. If it expires, create another project from this page. Opening the claim
+          link does not freeze access. Continuing to Neon on the claim page rotates{' '}
+          <code>DATABASE_URL</code>. After the transfer finishes, pull a new one from the Neon
+          console.
           {stayEnabledSentence} The project itself expires on {expiresAt}.
         </p>
         <div className="mt-4 flex flex-col gap-3">

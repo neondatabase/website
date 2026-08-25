@@ -54,7 +54,7 @@ export default {
   claimableNeon: {
     title: 'Claimable Neon for agents — Neon',
     description:
-      'Let agents provision a temporary Neon project — Lakebase Postgres, Data API, and Managed Better Auth — before a human creates a Neon account.',
+      'Let agents provision a temporary Neon project (Lakebase Postgres, Data API, and Managed Better Auth) before a human creates a Neon account.',
     pathname: LINKS.claimableNeon,
   },
   cli: {
