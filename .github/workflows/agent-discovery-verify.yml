@@ -24,6 +24,7 @@ on:
       - 'src/constants/agent-discovery.js'
       - 'scripts/verify-agent-endpoints.mjs'
       - 'src/app/.well-known/**'
+      - 'public/auth.md'
       - 'src/app/models.json/**'
       - 'src/app/models/**'
       - 'src/scripts/generate-skills-index.js'

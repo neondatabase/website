@@ -893,6 +893,95 @@
         }
       ]
     },
+    "claim": {
+      "aliases": [
+        "claimable"
+      ],
+      "positionals": [],
+      "options": {
+        "claimable-host": {
+          "type": "string",
+          "describe": "Claimable Neon service origin",
+          "defaultText": "process.env.CLAIMABLE_NEON_HOST ?? DEFAULT_CLAIMABLE_ORIGIN",
+          "hidden": true
+        }
+      },
+      "commands": {
+        "accept": {
+          "name": "accept",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "open": {
+              "type": "boolean",
+              "describe": "Open the verification URL in a browser",
+              "default": true
+            }
+          },
+          "commands": {},
+          "describe": "Create a claim code and open the URL where a human signs in and takes the project"
+        },
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "config": {
+              "type": "string",
+              "describe": "Path to neon.ts. Defaults to walking up from the current directory"
+            },
+            "env-pull": {
+              "type": "boolean",
+              "describe": "Write the provisioned DATABASE_URL and service URLs to a dotenv file",
+              "default": true
+            },
+            "file": {
+              "type": "string",
+              "describe": "Target dotenv file. Defaults to an existing .env, otherwise .env.local"
+            },
+            "service": {
+              "type": "array",
+              "describe": "Services to request for the claimable project: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Postgres is always included. Services unavailable before claim are recorded and reported."
+            }
+          },
+          "commands": {},
+          "describe": "Create a temporary Neon project without an account"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt",
+              "default": false,
+              "alias": "y"
+            }
+          },
+          "commands": {},
+          "describe": "Permanently delete the linked unclaimed project"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List claimable projects saved on this machine"
+        },
+        "status": {
+          "name": "status",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "Show the linked claimable project's lifecycle and claim status"
+        }
+      },
+      "describe": "Create and claim temporary Neon projects",
+      "usage": "$0 claim <sub-command> [options]"
+    },
     "config": {
       "aliases": [],
       "positionals": [],

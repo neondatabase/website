@@ -193,6 +193,18 @@
           }
         }
       }
+    },
+    "claim": {
+      "commands": {
+        "create": {
+          "options": {
+            "service": {
+              "type": "array",
+              "describe": "Services to request for the claimable project: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Postgres is always included. Services unavailable before claim are recorded and reported."
+            }
+          }
+        }
+      }
     }
   }
 }

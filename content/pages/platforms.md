@@ -154,7 +154,7 @@ _Netlify DB provisioning a Postgres database from a Netlify project, powered by 
 <Admonition type="info" title="Implement claimable databases">
 - [Platform integration overview: claimable database flow](/docs/guides/platform-integration-overview#claimable-database-flow) - when this path fits vs embedded Postgres, OAuth, or the Agent plan
 - [Claimable database integration guide](/docs/workflows/claimable-database-integration) - create a project, issue a transfer request, and hand off ownership
-- [Claimable Postgres](/docs/reference/claimable-postgres) - reference for the neon.new instant-database flow
+- [Claimable Neon](/docs/reference/claimable-neon) - reference for the claimable Neon project flow
 </Admonition>
 
 <QuoteBlock quote="Our users were asking for preview environments that already had their data in place. Neon’s branching was exactly what we needed: it lets us copy databases very quickly so teams can validate changes end to end immediately" author={{ name: 'Marcus Kohlberg', company: 'Founder at Encore' }} link="/blog/where-agents-meet-infrastructure-encore-leap-and-neon" />

@@ -1115,11 +1115,11 @@
               slug: guides/consumption-metrics
             - title: Query consumption metrics (legacy)
               slug: guides/consumption-metrics-legacy
-        - section: Claimable Postgres
+        - section: Claimable Neon
           icon: rocket
           items:
-            - title: Claimable Postgres
-              slug: reference/claimable-postgres
+            - title: Claimable Neon
+              slug: reference/claimable-neon
         - section: Guides
           icon: book
           items:
@@ -1218,6 +1218,8 @@
                   slug: cli/skills
                 - title: plugins
                   slug: cli/plugins
+                - title: claim
+                  slug: cli/claim
                 - title: bootstrap
                   slug: cli/bootstrap
                 - title: link

@@ -4,7 +4,7 @@
 
 export const STATIC_MD_PATHS = [
   '/agentic-provisioning-llm-context.md',
-  '/docs/ai/skills/claimable-postgres/SKILL.md',
+  '/auth.md',
   '/docs/ai/skills/neon-ai-gateway/SKILL.md',
   '/docs/ai/skills/neon-functions/SKILL.md',
   '/docs/ai/skills/neon-functions/references/ai-sdk.md',
@@ -24,6 +24,7 @@ export const STATIC_MD_PATHS = [
   '/docs/ai/skills/neon-postgres-egress-optimizer/SKILL.md',
   '/docs/ai/skills/neon-postgres/SKILL.md',
   '/docs/ai/skills/neon/SKILL.md',
+  '/docs/ai/skills/neon/references/claimable-neon.md',
   '/pricing.md',
   '/prompts/astro-serverless-prompt.md',
   '/prompts/connection-issues-prompt.md',

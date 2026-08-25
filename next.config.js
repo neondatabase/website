@@ -2304,13 +2304,83 @@ const defaultConfig = {
       },
       {
         source: '/launchpad',
-        destination: 'https://neon.new',
+        destination: '/claimable-neon',
         permanent: false,
       },
       {
         source: '/instagres',
-        destination: 'https://neon.new',
+        destination: '/claimable-neon',
         permanent: false,
+      },
+      {
+        source: '/claimable',
+        destination: '/claimable-neon',
+        permanent: false,
+      },
+      {
+        source: '/claimable-postgres',
+        destination: '/claimable-neon',
+        permanent: true,
+      },
+      {
+        source: '/docs/reference/claimable-postgres',
+        destination: '/docs/reference/claimable-neon',
+        permanent: true,
+      },
+      {
+        source: '/docs/reference/claimable-postgres.md',
+        destination: '/docs/reference/claimable-neon.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
       },
       {
         source: '/docs/local/neon-local-vscode',
