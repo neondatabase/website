@@ -27,9 +27,9 @@ seo:
   image: null
 ---
 
-Today we're launching [Neon Labs](https://labs.neon.com), a home for experimental tools built around Lakebase Postgres. We want Neon Labs to be a playground for ideas that could help the broader Postgres community; it gives us a space to publish early tools, [share the code,](https://github.com/neondatabase/neon-upgrade-advisor ) and learn from how developers use them. Overtime, some experiments may grow into supported features, while others may remain prototypes or lead to better approaches elsewhere.
+**Today we're launching [Neon Labs](https://labs.neon.com), a home for experimental tools built around Lakebase Postgres.** We want Neon Labs to be a playground for ideas that could help the broader Postgres community; it gives us a space to publish early tools, [share the code,](https://github.com/neondatabase/neon-upgrade-advisor ) and learn from how developers use them. Overtime, some experiments may grow into supported features, while others may remain prototypes or lead to better approaches elsewhere.
 
-This first release includes two tools: a Postgres Upgrade Assessment, which reports what will break when you move to a new Postgres major version, and a Migration Assistant, which recommends a migration method and walks you through it. To try them, sign in at [labs.neon.com](https://labs.neon.com/) with your Neon account, pick a source project and a target Postgres version, and run the assessment.
+**This first release includes two tools: a Postgres Upgrade Assessment, which reports what will break when you move to a new Postgres major version, and a Migration Assistant, which recommends a migration method and walks you through it.** To try them, sign in at [labs.neon.com](https://labs.neon.com/) with your Neon account, pick a source project and a target Postgres version, and run the assessment.
 
 <Admonition type="note" title="These tools are still in the experimental phase">
 We do not recommend using the migration tools for production workloads yet. Try them first with a development or test project, or clone the repository and run it locally.
@@ -70,7 +70,9 @@ Logical replication does not copy DDL or sequence state. The assistant copies th
 
 From there, it tracks table synchronization and measures lag between the source WAL position and the replication slot's confirmed position. It also checks whether the slot is actually active, so an orphaned subscription doesn't read as healthy.
 
-Before cutover, it checks subscription state and flags row-count differences and sequence drift. Where sequences have drifted, the cutover step can reset target sequences past the highest replicated ID, which is the duplicate-key failure from earlier, prevented. It also runs ANALYZE on the target while it's still idle, so the planner has statistics before production traffic arrives instead of after. If you need to back out, there's a rollback, and a teardown that shows you the exact publications, subscriptions, and slots it's about to remove and makes you confirm them.
+Before cutover, it checks subscription state and flags row-count differences and sequence drift. Where sequences have drifted, the cutover step can reset target sequences past the highest replicated ID, which is the duplicate-key failure from earlier, prevented. 
+
+It also runs `ANALYZE` on the target while it's still idle, so the planner has statistics before production traffic arrives instead of after. If you need to back out, there's a rollback, and a teardown that shows you the exact publications, subscriptions, and slots it's about to remove and makes you confirm them.
 
 A safe cutover still requires you to pause writes to the source, confirm that replication has caught up, and update your application's connection string. Neon Labs does not pause application traffic or change application configuration for you.
 
@@ -78,7 +80,7 @@ A safe cutover still requires you to pause writes to the source, confirm that re
 We've tested this Labs workflow with databases in the 1–2 TB range. We do not recommend it for production workloads yet. For production upgrades, follow the existing Postgres upgrade paths. This limitation applies to the experimental Labs tool, not Lakebase Postgres logical replication.
 </Admonition>
 
-## Why we built this: Major Postgres upgrades are still hard (but worth it)
+## Why we built this: major Postgres upgrades are still hard (but worth it)
 
 It’s soon gonna be time for upgrading: Postgres 19 is around the corner, [and Postgres 14 reaches the end of community support on November.](https://www.postgresql.org/support/versioning/) A lot of teams are about to be two or three majors behind, looking at an upgrade they've been deferring.
 
@@ -95,9 +97,9 @@ Through the years, we've helped a lot of customers through major migrations in p
 - Logical replication copies rows, not sequence values. Target sequences stay near 1 while replicated IDs already sit at the source max. First insert after cutover hits a duplicate key; every write after that fails until you bump the sequences.
 - Neither path carries pg_statistic. The planner treats tables as tiny, picks sequential scans and nested loops, and pins CPU. Scaling compute runs the same bad plan in more workers. Autovacuum often doesn’t save you: autoanalyze waits on tuple churn, so a freshly loaded read-mostly table can stay slow.
 - Tables without a primary key or replica identity replicate inserts, then fail on updates and deletes. A subscription can look enabled while the slot is inactive, so new writes stop arriving. Prepared transactions block the migration. Event triggers re-fire when the target replays DDL.
-- An unsupported extension stops the restore. Postgres 15 revoked CREATE on public from PUBLIC. Postgres 17 blocks unsafe search_path during ANALYZE / REINDEX / CREATE INDEX. Postgres 18 made generated columns VIRTUAL by default. Easy to fix once you know they apply. Expensive to find during cutover.
+- An unsupported extension stops the restore. Postgres 15 revoked `CREATE` on `public` from `PUBLIC`. Postgres 17 blocks unsafe `search_path` during `ANALYZE` / `REINDEX` / `CREATE INDEX`. Postgres 18 made generated columns `VIRTUAL` by default. These are easy to fix once you know they apply, expensive to find during cutover.
 
-These tools we’re launching make this whole process easier.
+The migration tools we’re launching via Neon Labs will make this whole process easier.
 
 ## How we built Neon Labs
 
