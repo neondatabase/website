@@ -8,7 +8,7 @@ summary: >-
   Use this page when choosing between similar components or looking up correct
   prop names and MDX syntax.
 enableTableOfContents: true
-updatedOn: '2026-08-26T05:16:28.993Z'
+updatedOn: '2026-08-26T16:06:50.814Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.
@@ -661,7 +661,7 @@ Individual checklist items used within CheckList components.
 
 ### Faq / FaqItem
 
-The standard, SEO-friendly frequently-asked-questions section for the end of docs and guides. Use it instead of ad-hoc `### question` headings, `**Q:/A:**` text, or `DefinitionList` for FAQs, so every FAQ looks and behaves the same. It emits `FAQPage` schema.org JSON-LD (eligible for Google's FAQ rich results) and uses native collapsible `<details>`, so answers stay crawlable and accessible even when collapsed.
+The standard, SEO-friendly frequently-asked-questions section for the end of docs and guides. Use it instead of ad-hoc `### question` headings, `**Q:/A:**` text, or `DefinitionList` for FAQs, so every FAQ looks and behaves the same. It emits `FAQPage` schema.org JSON-LD to help search engines and AI agents parse the questions and answers, and it renders each answer with native collapsible `<details>`, so answers stay crawlable and accessible even when collapsed. It also gives every FAQ consistent styling and deep-link anchors.
 
 Add a `## Frequently asked questions` heading above the component (sentence case) so the section appears in the table of contents.
 

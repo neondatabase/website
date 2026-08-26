@@ -1,5 +1,5 @@
 ---
-updatedOn: '2026-08-26T05:16:28.993Z'
+updatedOn: '2026-08-26T16:06:50.814Z'
 ---
 
 # Docs
@@ -823,7 +823,7 @@ Another term for smoke test
 
 Use the `Faq` component with `FaqItem` items to add a frequently-asked-questions section at the end of a page. This is the standard component for FAQs across docs and guides. Prefer it over ad-hoc `### question` headings, bold `**Q:/A:**` text, or `DefinitionList` so every FAQ looks and behaves the same.
 
-The component is built for SEO. It emits `FAQPage` [schema.org](https://schema.org/FAQPage) JSON-LD structured data (making the page eligible for Google's FAQ rich results), and it renders each answer with native `<details>`/`<summary>` so the answer text stays in the DOM even when collapsed, keeping it crawlable and accessible.
+The component is built for SEO. It emits `FAQPage` [schema.org](https://schema.org/FAQPage) JSON-LD structured data to help search engines and AI agents parse the questions and answers, and it renders each answer with native `<details>`/`<summary>` so the answer text stays in the DOM even when collapsed, keeping it crawlable and accessible. It also gives every FAQ consistent styling and deep-link anchors.
 
 Add a `## Frequently asked questions` heading above the component so the section shows up in the table of contents, then wrap the questions:
 
