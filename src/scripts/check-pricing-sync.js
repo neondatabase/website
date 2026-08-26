@@ -127,6 +127,19 @@ const betaValue = (val) => {
   return normalizeValue(val);
 };
 
+// Weaker sibling of betaValue for cells where the two sources deliberately say
+// different things: the pricing page leads with the Free-plan allowance (5 GB,
+// 10 active capacity-hours) while the docs table still leads with beta status.
+// There's no shared wording left to compare, so only verify that both sources
+// offer the feature on that plan. The allowances themselves live in plans.md
+// prose (see the #object-storage and #functions sections).
+const offeredValue = (val) => {
+  if (val === false || val === undefined || val === null) return '--';
+  const s = String(val).trim();
+  if (!s || s === '--' || s === '—' || s === '-') return '--';
+  return 'offered';
+};
+
 function extractCore(pattern, replacement) {
   return (val) => {
     if (!val || val === '--') return val;
@@ -619,9 +632,13 @@ const CROSS_SOURCE_CHECKS = [
   },
 
   // --- Backend (Beta) ---
-  // These features are free during beta with no per-plan numbers to drift, so we
-  // only verify that each source agrees they're offered (betaValue collapses the
+  // These features are free during beta, so on Launch and Scale we only verify
+  // that each source agrees they're offered (betaValue collapses the
   // differently-worded "free/no charge during beta" prose to a single concept).
+  // Object Storage and Functions publish their post-beta rates on the pricing
+  // page, but the cells keep a beta note, so betaValue still applies there.
+  // The Free cells lead with the included allowance instead of a beta note and
+  // have nothing comparable in the docs table, hence offeredValue.
   ...['free', 'launch', 'scale'].flatMap((plan) => [
     {
       id: `object-storage-${plan}`,
@@ -629,7 +646,7 @@ const CROSS_SOURCE_CHECKS = [
       comp: 'Object Storage',
       docs: 'Object Storage (Beta)',
       plan,
-      norm: betaValue,
+      norm: plan === 'free' ? offeredValue : betaValue,
       agentLabel: 'Object Storage',
     },
     {
@@ -638,7 +655,7 @@ const CROSS_SOURCE_CHECKS = [
       comp: 'Functions',
       docs: 'Functions (Beta)',
       plan,
-      norm: betaValue,
+      norm: plan === 'free' ? offeredValue : betaValue,
       agentLabel: 'Functions',
     },
     {

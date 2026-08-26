@@ -176,12 +176,11 @@ export default {
         tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Compute and invocations',
       },
-      free:
-        '10 active Capacity-Hours<span>400 waiting Capacity-Hours, 1M invocations. No charges during beta</span>',
+      free: '<span>10 active and 400 waiting capacity-hours, 1M invocations</span>',
       launch:
-        '$0.10 per active Capacity-Hour<span>$0.025 per waiting Capacity-Hour, $0.60 per 1M invocations. No charges during beta</span>',
+        '<span>$0.10 per active and $0.025 per waiting capacity-hour, $0.60 per 1M invocations. No charges during beta</span>',
       scale:
-        '$0.12 per active Capacity-Hour<span>$0.03 per waiting Capacity-Hour, $0.60 per 1M invocations. No charges during beta</span>',
+        '<span>$0.12 per active and $0.03 per waiting capacity-hour, $0.60 per 1M invocations. No charges during beta</span>',
     },
     {
       rows: '2',
