@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-08-26T11:08:26.808Z'
+updatedOn: '2026-08-26T18:46:03.510Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -368,6 +368,8 @@ There's no charge for Functions during the beta, but [usage limits](/docs/comput
 | Invocations     | $0.60/M              | $0.60/M             |
 
 On the **Free** plan, you get 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month.
+
+Egress (data a function sends out) counts toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products.
 
 See [Neon Functions](/docs/compute/functions/overview) for what's included and current limitations.
 
