@@ -1,6 +1,6 @@
 ---
 title: Introducing Neon Labs
-description: A space for Postgres tooling
+description: An experimental space for Postgres tooling
 excerpt: >-
   Today we're launching Neon Labs, a home for experimental tools built around
   Lakebase Postgres. We want Neon Labs to be a playground for ideas that could
