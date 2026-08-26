@@ -9,7 +9,7 @@ summary: >-
   resent; verification can be configured as required or optional in the Neon
   Console, controlling whether unverified users can sign in.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
@@ -27,9 +27,43 @@ Verification links require a [custom email provider](/docs/auth/production-check
 
 ## Enable email verification
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
 In your project's **Settings** → **Auth** page, enable **Sign-up with Email** and **Verify at Sign-up**. Choose your verification method.
 
 ![Email verification settings in Neon Console](/docs/auth/email-verification-settings.png)
+
+</TabItem>
+
+<TabItem>
+
+Enable email and password authentication with verification required using [`neon neon-auth config email-password update`](/docs/cli/neon-auth#config-email-password-update):
+
+```bash
+neon neon-auth config email-password update --enabled --require-email-verification
+```
+
+</TabItem>
+
+<TabItem>
+
+Update the configuration with the [Update email and password configuration](/docs/reference/api/auth/update-neon-auth-email-and-password-config) endpoint. Replace `{project_id}` and `{branch_id}` with your project and branch IDs:
+
+```bash
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_and_password' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "enabled": true,
+  "require_email_verification": true
+}'
+```
+
+</TabItem>
+
+</Tabs>
 
 ## Verification links
 

@@ -90,4 +90,10 @@ attachDatabasePool(pool, {
 
 For details on filtering by level or service name, searching log bodies, live tail, downloading logs, and the 3-day retention window, see [Monitor logs](/docs/introduction/monitor-logs).
 
+You can also read function logs from the terminal with [`neon logs query`](/docs/cli/logs), scoped with `--source function`:
+
+```bash
+neon logs query --source function --since 1h
+```
+
 <NeedHelp/>

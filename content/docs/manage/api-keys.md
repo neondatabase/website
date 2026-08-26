@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2026-08-04T19:37:07.626Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -306,10 +306,22 @@ Refer to the [Neon API Reference](/docs/reference/api) for other supported Neon 
 
 ## List API keys
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 Navigate to **Account settings** > **API keys** to view your personal API keys, or your organization's **Settings** > **API keys** to view organization API keys.
+</TabItem>
+
+<TabItem>
+
+List your account keys with [`neon api-keys list`](/docs/cli/api-keys#list). It shows key metadata, never the keys themselves:
+
+```bash
+neon api-keys list
+```
+
+Organization keys aren't visible to your account, so pass `--org-id` to list them.
+
 </TabItem>
 
 <TabItem>
@@ -347,12 +359,24 @@ You should revoke API keys that are no longer needed or if you suspect a key may
 - Organization API keys can be revoked by organization admins
 - Project-scoped keys can be revoked by organization admins
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 In the Neon Console, navigate to **Account settings** > **API keys** and click **Revoke** next to the key you want to revoke. The key will be immediately revoked. Any request that uses this key will now fail.
 
 ![Revoking an API key in the Neon Console](/docs/manage/revoke_api_key.png)
+</TabItem>
+
+<TabItem>
+
+Revoke a key with [`neon api-keys revoke`](/docs/cli/api-keys#revoke), passing the numeric key ID (not the name). The action is immediate and permanent, so confirm the ID with `neon api-keys list` first:
+
+```bash
+neon api-keys revoke 177630
+```
+
+Organization and project-scoped keys need admin permissions and `--org-id`.
+
 </TabItem>
 
 <TabItem>

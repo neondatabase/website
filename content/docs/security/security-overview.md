@@ -11,7 +11,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/security/security
   - /docs/security
-updatedOn: '2026-06-23T22:05:54.707Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 At Neon, security is our highest priority. We are committed to implementing best practices and earning the trust of our users. A key aspect of earning this trust is by ensuring that every touchpoint in our system, from connections, to data storage, to our internal processes, adheres to the highest security standards.
@@ -138,7 +138,7 @@ If a credential is exposed, for example through a leaked `.env` file, a compromi
 4. Tighten your [IP allowlist](#ip-allowlist-support) to limit which addresses can connect.
 5. Audit your roles and remove any you do not recognize.
 
-Neon has no single command to rotate everything at once. To rotate many roles, list every project, branch, and role, then loop the [reset-password API](/docs/manage/roles#reset-a-password-with-the-api).
+Neon has no single command to rotate everything at once. To rotate many roles, list every project, branch, and role, then loop the [reset-password API](/docs/manage/roles#reset-a-password).
 
 ### Rotate without downtime
 
