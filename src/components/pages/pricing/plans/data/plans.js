@@ -1,3 +1,7 @@
+import BACKEND_PRICING from 'constants/backend-pricing';
+
+const { objectStorage, functions } = BACKEND_PRICING;
+
 export default {
   headings: {
     feature: '',
@@ -165,23 +169,70 @@ export default {
         tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Stored volume',
       },
-      free: '5 GB included',
-      launch: '$0.023 per GB-month<span>No charges during beta</span>',
-      scale: '$0.023 per GB-month<span>No charges during beta</span>',
+      free: `${objectStorage.freeAllowanceGb} GB included`,
+      launch: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
+      scale: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
     },
     {
-      rows: '4',
+      rows: 'functions',
       feature: {
         title: 'Functions',
         tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Compute and invocations',
       },
-      free:
-        '<span>10 active capacity-hours</span><span>400 waiting capacity-hours</span><span>1M invocations</span>',
-      launch:
-        '<span>$0.10 per active capacity-hour</span><span>$0.025 per waiting capacity-hour</span><span>$0.60 per 1M invocations</span><span>No charges during beta</span>',
-      scale:
-        '<span>$0.12 per active capacity-hour</span><span>$0.03 per waiting capacity-hour</span><span>$0.60 per 1M invocations</span><span>No charges during beta</span>',
+      free: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `${functions.free.activeCapacityHours} active capacity-hours`,
+              `${functions.free.waitingCapacityHours} waiting capacity-hours`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`${functions.free.invocations} invocations`],
+          },
+        ],
+      },
+      launch: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `$${functions.launch.activeCapacityHourRate} per active capacity-hour`,
+              `$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`$${functions.launch.invocationRatePerMillion} per 1M invocations`],
+          },
+          {
+            title: 'Charges',
+            details: ['No charges during beta'],
+          },
+        ],
+      },
+      scale: {
+        sections: [
+          {
+            title: 'Compute',
+            details: [
+              `$${functions.scale.activeCapacityHourRate} per active capacity-hour`,
+              `$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour`,
+            ],
+          },
+          {
+            title: 'Invocations',
+            details: [`$${functions.scale.invocationRatePerMillion} per 1M invocations`],
+          },
+          {
+            title: 'Charges',
+            details: ['No charges during beta'],
+          },
+        ],
+      },
     },
     {
       rows: '2',

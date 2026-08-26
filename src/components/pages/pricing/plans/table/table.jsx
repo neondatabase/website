@@ -17,7 +17,31 @@ const rowClass = {
   '1-2': 'h-[50px] lg:h-[65px]',
   2: 'h-[73px]',
   3: 'h-[92px] xl:h-[108px]',
-  4: 'h-[116px] xl:h-[140px] lg:h-[156px]',
+  functions: 'h-[244px] xl:h-[260px] lg:h-[304px]',
+};
+
+const PricingSections = ({ sections }) => (
+  <div className="flex flex-col gap-y-7 leading-snug font-normal tracking-extra-tight">
+    {sections.map(({ title, details }) => (
+      <div className="flex flex-col gap-y-1" key={title}>
+        <span className="text-base text-gray-new-80">{title}</span>
+        {details.map((detail) => (
+          <span className="text-sm text-gray-new-50" key={detail}>
+            {detail}
+          </span>
+        ))}
+      </div>
+    ))}
+  </div>
+);
+
+PricingSections.propTypes = {
+  sections: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      details: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ).isRequired,
 };
 
 const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan }) => {
@@ -180,8 +204,10 @@ const Table = () => {
                       <span className="pricing-cross-icon flex size-[14px] bg-gray-new-30" />
                     );
                   } else if (typeof item[key] === 'object') {
-                    const { title, info, moreLink } = item[key];
-                    cell = (
+                    const { title, info, moreLink, sections } = item[key];
+                    cell = sections ? (
+                      <PricingSections sections={sections} />
+                    ) : (
                       <div className="leading-snug font-normal tracking-extra-tight">
                         {title}
                         {info && (

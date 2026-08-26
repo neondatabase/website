@@ -1,4 +1,7 @@
+import BACKEND_PRICING from 'constants/backend-pricing';
 import LINKS from 'constants/links';
+
+const { objectStorage, functions } = BACKEND_PRICING;
 
 export default [
   {
@@ -37,16 +40,14 @@ export default [
         features: [
           { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
           {
-            title: '5 GB of Object Storage',
+            title: `${objectStorage.freeAllowanceGb} GB of Object Storage`,
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info:
-              '<p>Measured across your account, not per project</p>',
+            info: '<p>Measured across your account, not per project</p>',
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info:
-              '<p>10 active capacity-hours per month</p><p>400 waiting capacity-hours per month</p><p>1M invocations per month</p>',
+            info: `<p>${functions.free.activeCapacityHours} active capacity-hours per month</p><p>${functions.free.waitingCapacityHours} waiting capacity-hours per month</p><p>${functions.free.invocations} invocations per month</p>`,
           },
         ],
       },
@@ -93,13 +94,12 @@ export default [
           {
             title: 'Object Storage',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: '<p>$0.023 per GB-month</p><p>No charges applied during beta</p>',
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>No charges applied during beta</p>`,
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info:
-              '<p>$0.10 per active capacity-hour</p><p>$0.025 per waiting capacity-hour</p><p>$0.60 per million invocations</p><p>No charges applied during beta</p>',
+            info: `<p>$${functions.launch.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.launch.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.launch.invocationRatePerMillion} per million invocations</p><p>No charges applied during beta</p>`,
           },
           {
             title: 'AI Gateway',
@@ -151,13 +151,12 @@ export default [
           {
             title: 'Object Storage',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: '<p>$0.023 per GB-month</p><p>No charges applied during beta</p>',
+            info: `<p>$${objectStorage.storageRatePerGbMonth} per GB-month</p><p>No charges applied during beta</p>`,
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info:
-              '<p>$0.12 per active Capacity-Hour</p><p>$0.03 per waiting Capacity-Hour</p><p>$0.60 per million invocations</p><p>No charges applied during beta</p>',
+            info: `<p>$${functions.scale.activeCapacityHourRate} per active capacity-hour</p><p>$${functions.scale.waitingCapacityHourRate} per waiting capacity-hour</p><p>$${functions.scale.invocationRatePerMillion} per million invocations</p><p>No charges applied during beta</p>`,
           },
           {
             title: 'AI Gateway',
