@@ -12,7 +12,7 @@ summary: >-
   credentials and redirect URIs must be configured per branch; preview
   deployments can use wildcard trusted domain patterns to cover multiple hosts.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
@@ -162,11 +162,46 @@ Before testing production OAuth, add every origin you pass as **`callbackURL`** 
 
 ### 3. Create OAuth apps and paste credentials into Neon
 
-1. Create OAuth apps with your providers:
-   - [Google OAuth setup](https://developers.google.com/identity/protocols/oauth2/web-server) (see [Google OAuth branding](#google-oauth-branding) below before going live)
-   - [GitHub OAuth setup](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
-   - [Vercel OAuth setup](https://vercel.com/docs/sign-in-with-vercel/manage-from-dashboard#create-an-app)
-2. In the Neon Console, open your **project**, select the **branch**, open **Auth**, then enter the **Client ID** and **Client Secret** for each provider.
+Create OAuth apps with your providers:
+
+- [Google OAuth setup](https://developers.google.com/identity/protocols/oauth2/web-server) (see [Google OAuth branding](#google-oauth-branding) below before going live)
+- [GitHub OAuth setup](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
+- [Vercel OAuth setup](https://vercel.com/docs/sign-in-with-vercel/manage-from-dashboard#create-an-app)
+
+Then give the **Client ID** and **Client Secret** to Managed Better Auth for that branch:
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+In the Neon Console, open your **project**, select the **branch**, open **Auth**, then enter the **Client ID** and **Client Secret** for each provider.
+
+</TabItem>
+
+<TabItem>
+
+Add a provider with [`neon neon-auth oauth-provider add`](/docs/cli/neon-auth#oauth-provider-add):
+
+```bash shouldWrap
+neon neon-auth oauth-provider add --provider-id google --oauth-client-id <client-id> --oauth-client-secret <client-secret>
+```
+
+</TabItem>
+
+<TabItem>
+
+Send a `POST` request to the [add OAuth provider](/docs/reference/api/auth/add-branch-neon-auth-oauth-provider) endpoint. Replace `{project_id}` and `{branch_id}` with your project and branch IDs.
+
+```bash shouldWrap
+curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/oauth_providers' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"id": "google", "client_id": "<client-id>", "client_secret": "<client-secret>"}'
+```
+
+</TabItem>
+
+</Tabs>
 
 Managed Better Auth will use your configured credentials for that branch.
 

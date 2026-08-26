@@ -13,7 +13,7 @@ summary: >-
   window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-08-04T15:25:12.468Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -383,7 +383,7 @@ Logical replication lets you replicate data changes from Neon to external data s
 Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
 </Admonition>
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -391,6 +391,16 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 2. On the **Project Dashboard**, select **Settings**.
 3. Select **Logical replication**.
 4. Click **Enable** to enable logical replication.
+
+</TabItem>
+
+<TabItem>
+
+Use [`neon projects update`](/docs/cli/projects#update) with the `--enable-logical-replication` flag. Because this can't be undone, add `--yes` to skip the confirmation prompt. Replace `$PROJECT_ID` with your project ID.
+
+```bash
+neon projects update $PROJECT_ID --enable-logical-replication --yes
+```
 
 </TabItem>
 

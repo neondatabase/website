@@ -67,4 +67,10 @@ Most of what shows up here is routine S3 traffic. A few entries look worse than 
 
 For details on filtering by level or service name, searching log bodies, live tail, downloading logs, and the 3-day retention window, see [Monitor logs](/docs/introduction/monitor-logs).
 
+You can also read storage logs from the terminal with [`neon logs query`](/docs/cli/logs), scoped with `--source storage`:
+
+```bash
+neon logs query --source storage --since 1h
+```
+
 <NeedHelp/>

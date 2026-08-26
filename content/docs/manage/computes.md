@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -32,7 +32,13 @@ Your Neon plan determines the resources available to a compute. The Neon Free pl
 
 ## View a compute
 
-A compute is associated with a branch. To view a compute, in the Neon Console select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes**. If the branch has a compute, it is shown on the **Computes** tab of the branch overview.
+A compute is associated with a branch.
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+In the Neon Console, select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes**. If the branch has a compute, it is shown on the **Computes** tab of the branch overview.
 
 Compute details shown on the **Computes** tab include:
 
@@ -44,22 +50,230 @@ Compute details shown on the **Computes** tab include:
 
 **Edit**, **Monitor**, and **Connect** actions for a compute can be accessed from the **Computes** tab.
 
+</TabItem>
+
+<TabItem>
+
+The CLI has no separate compute object; a branch's compute state (`current_state`, `compute_time_seconds`) is shown by [`neon branches list`](/docs/cli/branches#list):
+
+```bash
+neon branches list --output json
+```
+
+<details>
+<summary>Show output</summary>
+
+```json
+[
+  {
+    "id": "br-dry-glitter-a1rh0x6q",
+    "project_id": "autumn-lake-30024670",
+    "name": "br-dry-glitter-a1rh0x6q",
+    "current_state": "ready",
+    "logical_size": 29515776,
+    "creation_source": "console",
+    "default": true,
+    "cpu_used_sec": 78,
+    "compute_time_seconds": 78,
+    "active_time_seconds": 312,
+    "written_data_bytes": 107816,
+    "data_transfer_bytes": 0,
+    "created_at": "2023-07-09T17:01:34Z",
+    "updated_at": "2023-07-09T17:15:13Z"
+  }
+]
+```
+
+</details>
+
+Or list the project's computes directly through the [`neon api`](/docs/cli/api) passthrough:
+
+```bash
+neon api /projects/autumn-lake-30024670/endpoints
+```
+
+</TabItem>
+
+<TabItem>
+
+List the computes for a project with the [List computes](/docs/reference/api/endpoints/list-project-endpoints) endpoint:
+
+```bash
+curl -X 'GET' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [List computes](/docs/reference/api/endpoints/list-project-endpoints) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "endpoints": [
+    {
+      "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+      "id": "ep-misty-morning-a1pfa4ez",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dry-glitter-a1rh0x6q",
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 2,
+      "region_id": "aws-ap-southeast-1",
+      "type": "read_write",
+      "current_state": "idle",
+      "settings": {},
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "last_active": "2025-08-03T17:40:20Z",
+      "creation_source": "console",
+      "created_at": "2025-08-03T17:40:19Z",
+      "updated_at": "2025-08-03T17:45:24Z",
+      "suspended_at": "2025-08-03T17:45:24Z",
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
+    },
+    {
+      "host": "ep-autumn-frost-a1wlmval.ap-southeast-1.aws.neon.tech",
+      "id": "ep-autumn-frost-a1wlmval",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dark-bar-a11jneqm",
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 2,
+      "region_id": "aws-ap-southeast-1",
+      "type": "read_write",
+      "current_state": "idle",
+      "settings": {},
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "last_active": "2025-08-03T17:34:40Z",
+      "creation_source": "console",
+      "created_at": "2025-08-03T11:27:50Z",
+      "updated_at": "2025-08-03T17:41:11Z",
+      "suspended_at": "2025-08-03T17:41:11Z",
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
+    }
+  ]
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
+
 ## Create a compute
 
 You can only create a single primary read-write compute for a branch that does not have a compute, but a branch can have multiple read replica computes.
 
-To create an endpoint:
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
 
 1. In the Neon Console, select your branch from the **BRANCH** selector.
 1. Under **Postgres database**, select **Computes**.
 1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
 1. On the **Add new compute** drawer or **Add read replica** drawer, specify your compute settings, and click **Add**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
 
+</TabItem>
+
+<TabItem>
+
+Add a compute to a branch with [`neon branches add-compute`](/docs/cli/branches#add-compute), passing `--type read_write` for the branch's primary compute. Add `--cu` to set a fixed size or an autoscaling range:
+
+```bash
+neon branches add-compute br-dry-glitter-a1rh0x6q --type read_write
+```
+
+</TabItem>
+
+<TabItem>
+
+Create a compute with the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint. The branch you specify cannot already have a read-write compute:
+
+```bash
+curl -X 'POST' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "endpoint": {
+    "branch_id": "br-dry-glitter-a1rh0x6q",
+    "type": "read_write"
+  }
+}'
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "endpoint": {
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-dry-glitter-a1rh0x6q",
+    "autoscaling_limit_min_cu": 1,
+    "autoscaling_limit_max_cu": 2,
+    "region_id": "aws-ap-southeast-1",
+    "type": "read_write",
+    "current_state": "init",
+    "pending_state": "active",
+    "settings": {},
+    "pooler_enabled": false,
+    "pooler_mode": "transaction",
+    "disabled": false,
+    "passwordless_access": true,
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:40:19Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
+  },
+  "operations": [
+    {
+      "id": "d6ef3cc2-663b-440a-88e7-ea6a59ea2c6a",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dry-glitter-a1rh0x6q",
+      "endpoint_id": "ep-misty-morning-a1pfa4ez",
+      "action": "start_compute",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2025-08-03T17:40:19Z",
+      "updated_at": "2025-08-03T17:40:19Z",
+      "total_duration_ms": 0
+    }
+  ]
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
+
 ## Edit a compute
 
 You can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [scale to zero](#scale-to-zero-configuration) configuration.
 
-To edit a compute:
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
 
 1. In the Neon Console, select your branch from the **BRANCH** selector.
 1. Under **Postgres database**, select **Computes**.
@@ -68,6 +282,77 @@ To edit a compute:
    The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration, and your scale to zero setting.
 
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
+
+</TabItem>
+
+<TabItem>
+
+No dedicated command edits a compute, so reach for the [`neon api`](/docs/cli/api) passthrough, which sends the request with your CLI credentials. For example, change the autoscaling range:
+
+```bash shouldWrap
+neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez -X PATCH -F endpoint.autoscaling_limit_min_cu=0.5 -F endpoint.autoscaling_limit_max_cu=3
+```
+
+</TabItem>
+
+<TabItem>
+
+Update a compute with the [Update compute](/docs/reference/api/endpoints/update-project-endpoint) endpoint. For example, change the autoscaling range:
+
+```bash
+curl -X 'PATCH' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "endpoint": {
+    "autoscaling_limit_min_cu": 0.5,
+    "autoscaling_limit_max_cu": 3
+  }
+}'
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Update compute](/docs/reference/api/endpoints/update-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "endpoint": {
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-dry-glitter-a1rh0x6q",
+    "autoscaling_limit_min_cu": 0.5,
+    "autoscaling_limit_max_cu": 3,
+    "region_id": "aws-ap-southeast-1",
+    "type": "read_write",
+    "current_state": "idle",
+    "settings": {},
+    "pooler_enabled": false,
+    "pooler_mode": "transaction",
+    "disabled": false,
+    "passwordless_access": true,
+    "last_active": "2025-08-03T17:40:20Z",
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:49:01Z",
+    "suspended_at": "2025-08-03T17:45:24Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
+  },
+  "operations": []
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
 
 For information about selecting an appropriate compute size or autoscaling configuration, see [How to size your compute](#how-to-size-your-compute).
 
@@ -239,272 +524,75 @@ Restarting ensures your compute is running with the latest configurations and im
 Restarting a compute interrupts any connections currently using the compute. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 </Admonition>
 
-You can restart a compute using these methods:
+<Tabs labels={["Console", "CLI", "API"]}>
 
-- Use the **Restart compute** option in the Neon console. Select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes** and choose **Restart compute** from the compute's menu.
-  ![Restart a compute in the console](/docs/manage/restart_compute.png)
-- Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
+<TabItem>
 
-  ```bash
-  curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/cool-forest-86753099/endpoints/ep-calm-flower-a5b75h79/restart \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
-  ```
+Use the **Restart compute** option in the Neon Console. Select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes** and choose **Restart compute** from the compute's menu.
 
-  <Admonition type="note">
-  The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API. 
-  </Admonition>
+![Restart a compute in the console](/docs/manage/restart_compute.png)
 
-- Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
+You can also restart a compute by letting it suspend: stop activity (stop running queries) and wait for the compute to suspend due to inactivity, which happens after 5 minutes by default. Watch the compute's **Status** field on the **Branches** page until it reports `Idle`. The compute restarts the next time it's accessed, and the status changes to `Active`.
+
+</TabItem>
+
+<TabItem>
+
+Restart the compute through the [`neon api`](/docs/cli/api) passthrough:
+
+```bash
+neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez/restart -X POST
+```
+
+</TabItem>
+
+<TabItem>
+
+Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key):
+
+```bash
+curl --request POST \
+   --url https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez/restart \
+   --header 'accept: application/json' \
+   --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+<Admonition type="note">
+The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If your compute is idle, you can wake it up with a query or the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API.
+</Admonition>
+
+</TabItem>
+
+</Tabs>
 
 ## Delete a compute
 
 A branch can have a single read-write compute and multiple read replica computes. You can delete any of these computes from a branch. However, be aware that a compute is required to connect to a branch and access its data. If you delete a compute and add it back later, the new compute will have different connection details.
 
-To delete a compute:
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
 
 1. In the Neon Console, select your branch from the **BRANCH** selector.
 1. Under **Postgres database**, select **Computes**.
 1. Click **Edit** for the compute you want to delete.
 1. At the bottom of the **Edit compute** drawer, click **Delete compute**.
 
-## Manage computes with the Neon API
+</TabItem>
 
-Compute actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). The following examples demonstrate how to create, view, update, and delete computes using the Neon API. For other compute-related API methods, refer to the [Neon API Reference](/docs/reference/api).
+<TabItem>
 
-<Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API Reference](/docs/reference/api).
-</Admonition>
-
-The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
-
-### Prerequisites
-
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
-
-<LinkAPIKey />
-### Create a compute with the API
-
-The following Neon API method creates a compute.
-
-```http
-POST /projects/{project_id}/endpoints
-```
-
-The API method appears as follows when specified in a cURL command. The branch you specify cannot have an existing compute. A compute must be associated with a branch. Neon supports read-write and read replica compute. A branch can have a single primary read-write compute but supports multiple read replica computes.
+Delete the compute through the [`neon api`](/docs/cli/api) passthrough:
 
 ```bash
-curl -X 'POST' \
-  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
-  -H 'accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "endpoint": {
-    "branch_id": "br-dry-glitter-a1rh0x6q",
-    "type": "read_write"
-  }
-}'
+neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez -X DELETE
 ```
 
-<details>
-<summary>Response body</summary>
+</TabItem>
 
-For attribute definitions, find the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+<TabItem>
 
-```json
-{
-  "endpoint": {
-    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
-    "id": "ep-misty-morning-a1pfa4ez",
-    "project_id": "autumn-lake-30024670",
-    "branch_id": "br-dry-glitter-a1rh0x6q",
-    "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 2,
-    "region_id": "aws-ap-southeast-1",
-    "type": "read_write",
-    "current_state": "init",
-    "pending_state": "active",
-    "settings": {},
-    "pooler_enabled": false,
-    "pooler_mode": "transaction",
-    "disabled": false,
-    "passwordless_access": true,
-    "creation_source": "console",
-    "created_at": "2025-08-03T17:40:19Z",
-    "updated_at": "2025-08-03T17:40:19Z",
-    "proxy_host": "ap-southeast-1.aws.neon.tech",
-    "suspend_timeout_seconds": 0,
-    "provisioner": "k8s-neonvm"
-  },
-  "operations": [
-    {
-      "id": "d6ef3cc2-663b-440a-88e7-ea6a59ea2c6a",
-      "project_id": "autumn-lake-30024670",
-      "branch_id": "br-dry-glitter-a1rh0x6q",
-      "endpoint_id": "ep-misty-morning-a1pfa4ez",
-      "action": "start_compute",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2025-08-03T17:40:19Z",
-      "updated_at": "2025-08-03T17:40:19Z",
-      "total_duration_ms": 0
-    }
-  ]
-}
-```
-
-</details>
-
-### List computes with the API
-
-The following Neon API method lists computes for the specified project. A compute belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/list-project-endpoints).
-
-```http
-GET /projects/{project_id}/endpoints
-```
-
-The API method appears as follows when specified in a cURL command:
-
-```bash
-curl -X 'GET' \
-  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
-  -H 'accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY"
-```
-
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [List computes](/docs/reference/api/endpoints/list-project-endpoints) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "endpoints": [
-    {
-      "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
-      "id": "ep-misty-morning-a1pfa4ez",
-      "project_id": "autumn-lake-30024670",
-      "branch_id": "br-dry-glitter-a1rh0x6q",
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 2,
-      "region_id": "aws-ap-southeast-1",
-      "type": "read_write",
-      "current_state": "idle",
-      "settings": {},
-      "pooler_enabled": false,
-      "pooler_mode": "transaction",
-      "disabled": false,
-      "passwordless_access": true,
-      "last_active": "2025-08-03T17:40:20Z",
-      "creation_source": "console",
-      "created_at": "2025-08-03T17:40:19Z",
-      "updated_at": "2025-08-03T17:45:24Z",
-      "suspended_at": "2025-08-03T17:45:24Z",
-      "proxy_host": "ap-southeast-1.aws.neon.tech",
-      "suspend_timeout_seconds": 0,
-      "provisioner": "k8s-neonvm"
-    },
-    {
-      "host": "ep-autumn-frost-a1wlmval.ap-southeast-1.aws.neon.tech",
-      "id": "ep-autumn-frost-a1wlmval",
-      "project_id": "autumn-lake-30024670",
-      "branch_id": "br-dark-bar-a11jneqm",
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 2,
-      "region_id": "aws-ap-southeast-1",
-      "type": "read_write",
-      "current_state": "idle",
-      "settings": {},
-      "pooler_enabled": false,
-      "pooler_mode": "transaction",
-      "disabled": false,
-      "passwordless_access": true,
-      "last_active": "2025-08-03T17:34:40Z",
-      "creation_source": "console",
-      "created_at": "2025-08-03T11:27:50Z",
-      "updated_at": "2025-08-03T17:41:11Z",
-      "suspended_at": "2025-08-03T17:41:11Z",
-      "proxy_host": "ap-southeast-1.aws.neon.tech",
-      "suspend_timeout_seconds": 0,
-      "provisioner": "k8s-neonvm"
-    }
-  ]
-}
-```
-
-</details>
-
-### Update a compute with the API
-
-The following Neon API method updates the specified compute. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/update-project-endpoint).
-
-```http
-PATCH /projects/{project_id}/endpoints/{endpoint_id}
-```
-
-The API method appears as follows when specified in a cURL command. The example reassigns the compute to another branch by changing the `branch_id`. The branch that you specify cannot have an existing compute. A compute must be associated with a branch, and a branch can have only one primary read-write compute. Multiple read-replica computes are allowed.
-
-```bash
-curl -X 'PATCH' \
-  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez' \
-  -H 'accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "endpoint": {
-    "branch_id": "br-raspy-pine-a1hspnzv"
-  }
-}'
-```
-
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [Update compute](/docs/reference/api/endpoints/update-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "endpoint": {
-    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
-    "id": "ep-misty-morning-a1pfa4ez",
-    "project_id": "autumn-lake-30024670",
-    "branch_id": "br-raspy-pine-a1hspnzv",
-    "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 2,
-    "region_id": "aws-ap-southeast-1",
-    "type": "read_write",
-    "current_state": "idle",
-    "settings": {},
-    "pooler_enabled": false,
-    "pooler_mode": "transaction",
-    "disabled": false,
-    "passwordless_access": true,
-    "last_active": "2025-08-03T17:40:20Z",
-    "creation_source": "console",
-    "created_at": "2025-08-03T17:40:19Z",
-    "updated_at": "2025-08-03T17:49:01Z",
-    "suspended_at": "2025-08-03T17:45:24Z",
-    "proxy_host": "ap-southeast-1.aws.neon.tech",
-    "suspend_timeout_seconds": 0,
-    "provisioner": "k8s-neonvm"
-  },
-  "operations": []
-}
-```
-
-</details>
-
-### Delete a compute with the API
-
-The following Neon API method deletes the specified compute. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/delete-project-endpoint).
-
-```http
-DELETE /projects/{project_id}/endpoints/{endpoint_id}
-```
-
-The API method appears as follows when specified in a cURL command.
+Delete a compute with the [Delete compute](/docs/reference/api/endpoints/delete-project-endpoint) endpoint:
 
 ```bash
 curl -X 'DELETE' \
@@ -524,9 +612,9 @@ For attribute definitions, find the [Delete compute](/docs/reference/api/endpoin
     "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
     "id": "ep-misty-morning-a1pfa4ez",
     "project_id": "autumn-lake-30024670",
-    "branch_id": "br-raspy-pine-a1hspnzv",
-    "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 2,
+    "branch_id": "br-dry-glitter-a1rh0x6q",
+    "autoscaling_limit_min_cu": 0.5,
+    "autoscaling_limit_max_cu": 3,
     "region_id": "aws-ap-southeast-1",
     "type": "read_write",
     "current_state": "idle",
@@ -549,6 +637,10 @@ For attribute definitions, find the [Delete compute](/docs/reference/api/endpoin
 ```
 
 </details>
+
+</TabItem>
+
+</Tabs>
 
 ## Compute-related issues
 

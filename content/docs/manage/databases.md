@@ -9,7 +9,7 @@ summary: >-
   ALTER TABLE ... OWNER TO or REASSIGN OWNED.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.
@@ -24,22 +24,15 @@ As of Postgres 15, only a database owner has the `CREATE` privilege on a databas
 
 Databases belong to a branch. If you create a child branch, databases from the parent branch are copied to the child branch. For example, if database `mydb` exists in the parent branch, it will be copied to the child branch. The only time this does not occur is when you create a branch that includes data up to a particular point in time. If a database was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
-Neon supports creating and managing databases from the following interfaces:
-
-- [Neon Console](#manage-databases-in-the-neon-console)
-- [Neon CLI](#manage-databases-with-the-neon-cli)
-- [Neon API](#manage-databases-with-the-neon-api)
-- [SQL](#manage-databases-with-sql)
-
-## Manage databases in the Neon Console
-
-This section describes how to create, view, and delete databases in the Neon Console.
+Neon supports creating and managing databases from the Neon Console, CLI, and API, and directly with [SQL](#manage-databases-with-sql).
 
 The role that creates a database is automatically made the owner of that database. The `neon_superuser` role is also granted all privileges on databases created in the Neon Console. For information about this role, see [The neon_superuser role](/docs/manage/roles#the-neonsuperuser-role).
 
-### Create a database
+## Create a database
 
-To create a database:
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
@@ -49,68 +42,21 @@ To create a database:
 1. Enter a database name, and select a database owner.
 1. Click **Create**.
 
-<Admonition type="note">
-Some names are not permitted. See [Reserved database names](#reserved-database-names).
-</Admonition>
+</TabItem>
 
-### View databases
+<TabItem>
 
-To view databases:
+Create a database with [`neon databases create`](/docs/cli/databases#create). If you omit `--branch`, the CLI uses the project's default branch:
 
-1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select a project.
-1. In the sidebar, select your branch from the **BRANCH** selector.
-1. Under **Postgres database**, select **Databases**.
-
-### Delete a database
-
-Deleting a database is a permanent action. All database objects belonging to the database such as schemas, tables, and roles are also deleted.
-
-To delete a database:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select a project.
-1. In the sidebar, select your branch from the **BRANCH** selector.
-1. Under **Postgres database**, select **Databases**.
-1. For the database you want to delete, click the delete icon.
-1. In the confirmation dialog, click **Delete**.
-
-## Manage databases with the Neon CLI
-
-The Neon CLI supports creating and deleting databases with `neon databases create --name <database_name>` and `neon databases delete <database_name>`. If you omit `--branch`, the CLI uses the project's default branch. For full instructions and options, see [Neon CLI commands — databases](/docs/cli/databases).
-
-## Manage databases with the Neon API
-
-Database actions performed in the Neon Console can also be also performed using the Neon API. The following examples demonstrate how to create, view, update, and delete databases using the Neon API. For other database-related methods, refer to the [Neon API Reference](/docs/reference/api).
-
-In Neon, a database belongs to a branch, which means that when you create a database, it is created in a branch. Database-related requests are therefore performed using branch API methods.
-
-<Admonition type="note">
-The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to the method's request body schema in the [Neon API Reference](/docs/reference/api).
-</Admonition>
-
-The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
-
-### Prerequisites
-
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
-
-<LinkAPIKey />
-### Create a database with the API
-
-The following Neon API method creates a database. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-database).
-
-The role specified by `owner_name` is the owner of that database.
-
-```http
-POST /projects/{project_id}/branches/{branch_id}/databases
+```bash
+neon databases create --name mydb --owner-name casey
 ```
 
-<Admonition type="note">
-Some names are not permitted for databases. See [Reserved database names](#reserved-database-names).
-</Admonition>
+</TabItem>
 
-The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and a database `name` and `owner` are required attributes.
+<TabItem>
+
+Create a database with the [Create database](/docs/reference/api/branches/create-project-branch-database) endpoint. A database `name` and `owner_name` are required:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases' \
@@ -122,7 +68,7 @@ curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-m
     "name": "mydb",
     "owner_name": "casey"
   }
-}' | jq
+}'
 ```
 
 <details>
@@ -159,20 +105,55 @@ For attribute definitions, find the [Create database](/docs/reference/api/branch
 
 </details>
 
-### List databases with the API
+</TabItem>
 
-The following Neon API method lists databases for the specified branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/list-project-branch-databases).
+</Tabs>
 
-```http
-GET /projects/{project_id}/branches/{branch_id}/databases
-```
+<Admonition type="note">
+Some names are not permitted. See [Reserved database names](#reserved-database-names).
+</Admonition>
 
-The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters.
+## View databases
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+1. Select a project.
+1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Databases**.
+
+</TabItem>
+
+<TabItem>
+
+List databases with [`neon databases list`](/docs/cli/databases#list). If you omit `--branch`, the CLI uses the project's default branch:
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/databases' \
+neon databases list
+```
+
+```text filename="Output"
+┌────────┬────────────┬──────────────────────┐
+│ Name   │ Owner Name │ Created At           │
+├────────┼────────────┼──────────────────────┤
+│ neondb │ casey      │ 2023-06-19T18:27:19Z │
+├────────┼────────────┼──────────────────────┤
+│ mydb   │ casey      │ 2023-06-19T18:27:19Z │
+└────────┴────────────┴──────────────────────┘
+```
+
+</TabItem>
+
+<TabItem>
+
+List databases for a branch with the [List databases](/docs/reference/api/branches/list-project-branch-databases) endpoint:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases' \
   -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" | jq
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -185,7 +166,7 @@ For attribute definitions, find the [List databases](/docs/reference/api/branche
   "databases": [
     {
       "id": 1139149,
-      "branch_id": "br-blue-tooth-671580",
+      "branch_id": "br-morning-meadow-afu2s1jl",
       "name": "neondb",
       "owner_name": "casey",
       "created_at": "2023-01-04T18:38:23Z",
@@ -193,7 +174,7 @@ For attribute definitions, find the [List databases](/docs/reference/api/branche
     },
     {
       "id": 1140822,
-      "branch_id": "br-blue-tooth-671580",
+      "branch_id": "br-morning-meadow-afu2s1jl",
       "name": "mydb",
       "owner_name": "casey",
       "created_at": "2023-01-04T21:17:17Z",
@@ -205,15 +186,13 @@ For attribute definitions, find the [List databases](/docs/reference/api/branche
 
 </details>
 
-### Update a database with the API
+</TabItem>
 
-The following Neon API method updates the specified database. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/update-project-branch-database).
+</Tabs>
 
-```http
-PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}
-```
+## Update a database
 
-The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters. This example updates the database `name` value to `database1`.
+Rename a database with the [Update database](/docs/reference/api/branches/update-project-branch-database) endpoint, or with [SQL](#rename-a-database-with-sql). This example renames `mydb` to `database1`:
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/mydb' \
@@ -224,7 +203,7 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/bran
   "database": {
     "name": "database1"
   }
-}' | jq
+}'
 ```
 
 <details>
@@ -261,21 +240,42 @@ For attribute definitions, find the [Update database](/docs/reference/api/branch
 
 </details>
 
-### Delete a database with the API
+## Delete a database
 
-The following Neon API method deletes the specified database. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/delete-project-branch-database).
+Deleting a database is a permanent action. All database objects belonging to the database such as schemas, tables, and roles are also deleted.
 
-```http
-DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+1. Select a project.
+1. In the sidebar, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Databases**.
+1. For the database you want to delete, click the delete icon.
+1. In the confirmation dialog, click **Delete**.
+
+</TabItem>
+
+<TabItem>
+
+Delete a database with [`neon databases delete`](/docs/cli/databases#delete):
+
+```bash
+neon databases delete database1
 ```
 
-The API method appears as follows when specified in a cURL command. The `project_id`, `branch_id`, and `database_name` are required parameters.
+</TabItem>
+
+<TabItem>
+
+Delete a database with the [Delete database](/docs/reference/api/branches/delete-project-branch-database) endpoint:
 
 ```bash
 curl -X 'DELETE' \
   'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/databases/database1' \
   -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" | jq
+  -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
 <details>
@@ -312,6 +312,9 @@ For attribute definitions, find the [Delete database](/docs/reference/api/branch
 
 </details>
 
+</TabItem>
+
+</Tabs>
 ## Manage databases with SQL
 
 You can create and manage databases in Neon with SQL, as you can with any standalone Postgres installation. To create a database, issue a `CREATE DATABASE` statement from a client such as [psql](/docs/connect/query-with-psql-editor) or from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
@@ -347,7 +350,7 @@ WHERE datname = 'old_db_name'
   AND pid <> pg_backend_pid();
 ```
 
-The rename is instant, and data, schemas, tables, roles, and grants are unaffected. The database name is part of every connection string for the database, so update any application, script, or stored secret that references the old name. You can also rename a database with the [Neon API](#update-a-database-with-the-api).
+The rename is instant, and data, schemas, tables, roles, and grants are unaffected. The database name is part of every connection string for the database, so update any application, script, or stored secret that references the old name. You can also rename a database with the [Neon API](#update-a-database).
 
 ### Delete a database with SQL
 
@@ -357,7 +360,7 @@ To delete a database, use `DROP DATABASE`. As with renaming, connect to a differ
 DROP DATABASE old_db_name;
 ```
 
-Deletion is permanent. All schemas, tables, indexes, and other objects in the database are dropped along with it. You can also delete a database from the [Neon Console](#delete-a-database), the [Neon CLI](#manage-databases-with-the-neon-cli), or the [Neon API](#delete-a-database-with-the-api).
+Deletion is permanent. All schemas, tables, indexes, and other objects in the database are dropped along with it. You can also delete a database from the [Neon Console, CLI, or API](#delete-a-database).
 
 ## Transfer database table ownership between roles
 

@@ -9,7 +9,7 @@ summary: >-
   LogQL, and list which fields and values a branch reports. Logs are in beta
   and available only in AWS US East (Ohio) (aws-us-east-2).
 enableTableOfContents: true
-updatedOn: '2026-08-19T00:03:14.837Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 <FeatureBeta />
@@ -32,7 +32,7 @@ Query log records over a time window. By default it returns the last hour of log
 
 Bound the window with `--since` (a duration like `30m` or `1h`, ending at `--end-time` or now) or with an explicit `--start-time`/`--end-time` pair. `--since` and `--start-time` are mutually exclusive, and the maximum window is 7 days.
 
-The structured content filters (`--source`, `--service-name`, `--scope-name`, `--minimum-severity`, `--severity-text`, `--body-contains`, and `--trace-id`) combine with each other. Passing `--logql` replaces all of them with a raw [LogQL](https://grafana.com/docs/loki/latest/query/) expression (stream selectors and line filters only); the window, `--limit`, `--sort-order`, and `--cursor` still apply.
+The structured content filters (`--source`, `--service-name`, `--scope-name`, `--severity-text`, `--body-contains`, and `--trace-id`) combine with each other. Passing `--logql` replaces all of them with a raw [LogQL](https://grafana.com/docs/loki/latest/query/) expression (stream selectors and line filters only); the window, `--limit`, `--sort-order`, and `--cursor` still apply.
 
 `--source` accepts `function`, `storage`, and `pg_endpoint`. Only `function` and `storage` return records today; `pg_endpoint` (Postgres compute) is accepted but comes back empty until Postgres logs ship.
 
@@ -45,7 +45,7 @@ neon logs query --since 30m
 Filter function errors on a specific branch:
 
 ```bash
-neon logs query --branch main --source function --minimum-severity error
+neon logs query --branch main --source function --severity-text ERROR
 ```
 
 Use a raw LogQL selection instead of the structured filters:
