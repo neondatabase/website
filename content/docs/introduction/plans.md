@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-08-26T10:59:34.509Z'
+updatedOn: '2026-08-26T11:08:26.808Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -358,8 +358,6 @@ Compute is measured in **Capacity-Hours**. During the beta, functions run at a f
 - **Waiting compute**: billed at a lower rate when your code isn't using much CPU, typically while it waits on the network, a timer, or other I/O.
 
 **Invocations** are counted separately: each time your function is called counts as one invocation, regardless of how long it runs. Billed per million.
-
-For example, a request that queries Postgres and returns JSON might take 300 ms but use the CPU for only about 30 ms of that. You'd be billed for roughly 30 ms of active compute, the remaining ~270 ms as waiting compute (time spent waiting on the query), and one invocation. A long-lived request, such as a WebSocket or SSE connection, is billed for as long as the connection stays open, mostly at the waiting rate because it spends most of that time idle on the CPU.
 
 There's no charge for Functions during the beta, but [usage limits](/docs/compute/functions/reference/runtime-limits) apply. When billing begins, the following rates apply:
 
