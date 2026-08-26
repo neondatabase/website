@@ -4,9 +4,8 @@ subtitle: Scaffold a new project from a Neon starter template
 summary: >-
   Covers the usage of the `bootstrap` command in the Neon CLI to scaffold a
   new application from a Neon starter template, including the interactive
-  template picker, the `--default` quick start, post-scaffold setup steps
-  (dependency install, git init, project linking), and the `--agent` JSON
-  output mode for AI agents.
+  template picker, the `--default` quick start, and post-scaffold setup steps
+  (dependency install, git init, project linking).
 enableTableOfContents: true
 ---
 
@@ -22,7 +21,7 @@ The directory argument is optional. Use `.` to scaffold into the current directo
 
 <CliOptions command="bootstrap" />
 
-Run with `--list-templates` to see the available templates, and pass one with `--template` to skip the interactive picker.
+Run with `--list-templates` to see the available templates (add `--output json` for a machine-readable catalog), and pass one with `--template` to skip the interactive picker.
 
 The post-scaffold steps (`--install`, `--git`, `--link`) all default to on. In interactive mode, bootstrap asks about each one; use the negated form (`--no-install`, `--no-git`, `--no-link`) to skip a step without being asked. With `--link`, bootstrap runs [`neon link`](/docs/cli/link) in the scaffolded directory after installing.
 
@@ -48,10 +47,19 @@ Quick start: scaffold the default template and run setup without prompting:
 neon bootstrap my-app --default
 ```
 
-## Agent mode
-
-Pass `--agent` to skip the prompts and emit a JSON state-machine response designed for AI agents. The output is a single JSON object with a discriminated `status` field describing the next step.
+List the template catalog as JSON, for scripting or driving `bootstrap` from an agent. Each entry's `id` is what you pass to `--template`:
 
 ```bash
-neon bootstrap my-app --template hono --agent
+neon bootstrap --list-templates --output json
+```
+
+The command prints an array of template objects, each shaped like:
+
+```json
+{
+  "id": "hono",
+  "title": "REST API",
+  "description": "A Hono REST API on Neon Functions, backed by Lakebase Postgres via Drizzle.",
+  "services": ["Postgres", "Functions"]
+}
 ```
