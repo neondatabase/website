@@ -40,13 +40,13 @@ export default [
             title: '5 GB of Object Storage',
             tag: { label: 'Beta', theme: 'orange-muted' },
             info:
-              '<p>Measured across your account, not per project</p><p>No charges applied during beta</p>',
+              '<p>Measured across your account, not per project</p>',
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
             info:
-              '<p>10 active Capacity-Hours per month</p><p>400 waiting Capacity-Hours per month</p><p>1M invocations per month</p>',
+              '<p>10 active capacity-hours per month</p><p>400 waiting capacity-hours per month</p><p>1M invocations per month</p>',
           },
         ],
       },
@@ -99,7 +99,7 @@ export default [
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
             info:
-              '<p>$0.10 per active Capacity-Hour</p><p>$0.025 per waiting Capacity-Hour</p><p>$0.60 per million invocations</p><p>No charges applied during beta</p>',
+              '<p>$0.10 per active capacity-hour</p><p>$0.025 per waiting capacity-hour</p><p>$0.60 per million invocations</p><p>No charges applied during beta</p>',
           },
           {
             title: 'AI Gateway',
