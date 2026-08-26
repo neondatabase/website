@@ -49,7 +49,7 @@ Continuing to Neon starts a transfer with a new 15-minute window and leaves the 
 
 When `reconciled` is true, the pre-claim `DATABASE_URL` no longer works. Auth and Data API URLs stay if they were granted. The human signs in with `neon auth`. Then the agent runs `neon link --agent` and `neon env pull` to write the new `DATABASE_URL`. `neon link --agent` discovers the project after that sign-in.
 
-You cannot add Auth or the Data API to the unclaimed project after registration. Request them at create, or add them after claim with `neon.ts` and `neon deploy`:
+Auth and the Data API stay off unless requested at create or enabled later. On the unclaimed project, `neon.ts` plus `neon deploy` enables them. After claim, the same config talks to Neon directly. An external JWKS is only accepted after claim. Data API with the default auth provider requires Auth:
 
 ```typescript
 import { defineConfig } from "@neon/config/v1";
@@ -63,8 +63,6 @@ export default defineConfig({
 ```bash
 neon deploy
 ```
-
-Data API with the default auth provider requires Auth. An external JWKS is the other option:
 
 ```typescript
 export default defineConfig({

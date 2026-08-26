@@ -196,15 +196,15 @@ Only requested and granted services appear under `services`.
 | Capability          | Available before claim | Environment variable          |
 | ------------------- | ---------------------- | ----------------------------- |
 | Postgres            | Yes                    | `DATABASE_URL`                |
-| Data API            | When requested         | `NEON_DATA_API_URL`           |
-| Managed Better Auth | When requested         | `NEON_AUTH_BASE_URL`          |
+| Data API            | When requested, or later with `neon deploy` | `NEON_DATA_API_URL`           |
+| Managed Better Auth | When requested, or later with `neon deploy` | `NEON_AUTH_BASE_URL`          |
 | Functions           | No                     | Requires claiming the project |
 | Object Storage      | No                     | Requires claiming the project |
 | AI Gateway          | No                     | Requires claiming the project |
 
 Registration records those as `{ granted: false, reason: "requires_claim" }`. A later protected operation returns `capability_requires_claim`. Preserve the denied capability and give the human a claim link; do not retry or drop it.
 
-After the project is claimed, add Auth or the Data API with `neon.ts` and `neon deploy` even if they were not requested at registration. You cannot add them to the unclaimed project after create.
+After create, add Auth or the Data API with `neon.ts` and `neon deploy` on the unclaimed project. After claim, the same config talks to Neon directly.
 
 ## Use the Neon CLI
 
@@ -263,7 +263,7 @@ curl --request POST \
 
 `expires_in` is 900 seconds (15 minutes) today. If the unused code expires, POST `/claim` again. Each POST cancels the previous unused code and returns a new one. Re-issue only while `project.expires_at` is still in the future.
 
-Open `verification_uri_complete` and sign in to Neon. Opening the URL does not freeze access. Continuing to Neon starts a transfer with a new 15-minute window: it revokes the project key, access tokens, and database password before the console transfer URL is shown. Auth and the Data API stay enabled and transfer with the project if they were granted at registration. If that transfer window expires before you accept, POST `/claim` again. The project key and database password stay revoked.
+Open `verification_uri_complete` and sign in to Neon. Opening the URL does not freeze access. Continuing to Neon starts a transfer with a new 15-minute window: it revokes the project key, access tokens, and database password before the console transfer URL is shown. Auth and the Data API stay enabled and transfer with the project if they were enabled. If that transfer window expires before you accept, POST `/claim` again. The project key and database password stay revoked.
 
 Choose the destination organization. The project then moves through these states:
 
@@ -284,9 +284,9 @@ curl https://claimable.neon.tech/v1/projects/quiet-fog-12345678/claim \
   --header "Authorization: Bearer $ACCESS_TOKEN"
 ```
 
-Only `reconciled` means the assertion is dead. Use credentials from the destination Neon organization after that. Fetch a new `DATABASE_URL` there; Auth and the Data API keep working if they were granted at registration.
+Only `reconciled` means the assertion is dead. Use credentials from the destination Neon organization after that. Fetch a new `DATABASE_URL` there; Auth and the Data API keep working if they were enabled.
 
-You cannot add Auth or the Data API to the unclaimed project after registration. Request them at create, or add them after claim with `neon.ts` and `neon deploy`. Data API with the default auth provider requires Auth:
+Add Auth or the Data API with `neon.ts` and `neon deploy` before or after claim. Data API with the default auth provider requires Auth. An external JWKS is only accepted after claim:
 
 ```typescript filename="neon.ts"
 import { defineConfig } from '@neon/config/v1';
@@ -301,7 +301,7 @@ export default defineConfig({
 neon deploy
 ```
 
-`neon checkout` does not apply this to an existing branch. `neon deploy` (alias of `neon config apply`) does. An external JWKS is the other Data API option:
+`neon checkout` does not apply this to an existing branch. `neon deploy` (alias of `neon config apply`) does.
 
 ```typescript
 dataApi: {

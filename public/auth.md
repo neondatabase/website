@@ -155,12 +155,14 @@ Authorization: Bearer <claim_status_access_token>
 The claim moves through `pending`, `accepted`, and `reconciled`. Stop using pre-claim
 credentials when the browser claim starts. At `reconciled`, the identity assertion, access
 tokens, project key, and database password no longer authorize project access. Auth and the
-Data API stay enabled and transfer with the project if they were granted at registration. The
-status endpoint keeps returning the terminal `reconciled` state when retried with the retained
-status token.
+Data API stay enabled and transfer with the project if they were enabled. The status endpoint
+keeps returning the terminal `reconciled` state when retried with the retained status token.
 
-After `reconciled`, add Auth or the Data API with `neon.ts` and `neon deploy`. Data API with
-the default auth provider requires Auth:
+## Add Auth or the Data API
+
+They stay off unless requested at create or enabled later. On the unclaimed project, `neon.ts`
+plus `neon deploy` enables them. After claim, the same config talks to Neon directly. Data API
+with the default auth provider requires Auth:
 
 ```typescript
 import { defineConfig } from "@neon/config/v1";
@@ -175,7 +177,7 @@ export default defineConfig({
 neon deploy
 ```
 
-An external JWKS is the other Data API option:
+An external JWKS is not accepted on the unclaimed project. After claim:
 
 ```typescript
 dataApi: {
@@ -183,9 +185,6 @@ dataApi: {
   jwksUrl: "https://example.com/.well-known/jwks.json",
 }
 ```
-
-You cannot add those services on the unclaimed project after registration. Request them at
-create, or add them after claim.
 
 ## Delete or revoke
 
