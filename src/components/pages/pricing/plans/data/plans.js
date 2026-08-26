@@ -165,7 +165,7 @@ export default {
         tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Stored volume',
       },
-      free: '5 GB included<span>No charges during beta</span>',
+      free: '5 GB included',
       launch: '$0.023 per GB-month<span>No charges during beta</span>',
       scale: '$0.023 per GB-month<span>No charges during beta</span>',
     },
