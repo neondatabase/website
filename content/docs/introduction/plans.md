@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-08-15T00:37:08.193Z'
+updatedOn: '2026-08-26T18:49:52.579Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -250,6 +250,8 @@ Allowances per plan:
 - **Launch**: 500 GB per project per month, then $0.10/GB
 - **Scale**: 500 GB per project per month, then $0.10/GB
 
+> On the **Free** plan, the 5 GB allowance is a single account-wide pool shared across all products, including Postgres, [Object Storage](#object-storage), and [Functions](#functions). On paid plans, the 500 GB allowance is per project and also shared across products.
+
 ### Monitoring
 
 View metrics such as RAM, CPU, connections, and database size in the **Monitoring** dashboard in the Neon Console.
@@ -367,6 +369,8 @@ There's no charge for Functions during the beta, but [usage limits](/docs/comput
 
 On the **Free** plan, you get 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1 million invocations per month.
 
+When billing begins, egress (data a function sends out) will count toward your [public network transfer](#public-network-transfer) allowance, which is shared across all products.
+
 See [Neon Functions](/docs/compute/functions/overview) for what's included and current limitations.
 
 ### AI Gateway
@@ -375,7 +379,7 @@ Neon AI Gateway provides access to foundation models from Anthropic, OpenAI, Goo
 
 Inference is free during the beta. When billing begins, prices will match each provider's published list prices, with no additional markup.
 
-See [AI Gateway models](/docs/ai-gateway/models#pricing) for details.
+See [AI Gateway pricing](/docs/ai-gateway/overview#pricing) for details.
 
 ### Private network transfer
 

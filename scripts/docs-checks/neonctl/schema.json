@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.4.0",
+  "neonctlVersion": "4.6.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -237,8 +237,7 @@
       "options": {
         "agent": {
           "type": "boolean",
-          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
-          "default": false
+          "hidden": true
         },
         "default": {
           "type": "boolean",
@@ -268,7 +267,7 @@
         },
         "list-templates": {
           "type": "boolean",
-          "describe": "List available templates and exit.",
+          "describe": "List available templates and exit. --output json and --output yaml print a machine-readable catalog.",
           "default": false,
           "alias": [
             "list",
@@ -297,8 +296,8 @@
           "description": "Quick start: scaffold the default template and run setup without prompting"
         },
         {
-          "command": "$0 bootstrap my-app --template hono --agent",
-          "description": "Scaffold without prompting and emit the JSON state machine for AI agents"
+          "command": "$0 bootstrap --list-templates --output json",
+          "description": "Print the template catalog as JSON"
         }
       ]
     },
@@ -910,7 +909,13 @@
         "accept": {
           "name": "accept",
           "aliases": [],
-          "positionals": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
           "options": {
             "open": {
               "type": "boolean",
@@ -950,7 +955,13 @@
         "delete": {
           "name": "delete",
           "aliases": [],
-          "positionals": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
           "options": {
             "yes": {
               "type": "boolean",
@@ -960,7 +971,7 @@
             }
           },
           "commands": {},
-          "describe": "Permanently delete the linked unclaimed project"
+          "describe": "Permanently delete an unclaimed project, or drop a local record that can no longer reach the service"
         },
         "list": {
           "name": "list",
@@ -973,10 +984,16 @@
         "status": {
           "name": "status",
           "aliases": [],
-          "positionals": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
           "options": {},
           "commands": {},
-          "describe": "Show the linked claimable project's lifecycle and claim status"
+          "describe": "Show a claimable project's lifecycle and claim status"
         }
       },
       "describe": "Create and claim temporary Neon projects",
@@ -2222,12 +2239,12 @@
       "options": {
         "agent": {
           "type": "array",
-          "describe": "Coding agent to install into (repeatable). Skips the agent picker",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
           "alias": "a"
         },
         "category": {
           "type": "array",
-          "describe": "MCP tool category (repeatable or comma-separated). Default: all"
+          "describe": "MCP tool category (repeatable or comma-separated). Default: all. Values listed below"
         },
         "oauth": {
           "type": "boolean",
@@ -2251,7 +2268,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts. Defaults to global config, every detected agent and a minted account-wide API key. --project, --oauth, --agent, --read-only, --project-id and --category still apply",
+          "describe": "Skip prompts. Defaults listed below. --project, --oauth, --agent, --read-only, --project-id and --category still apply",
           "default": false,
           "alias": "y"
         }
@@ -2266,7 +2283,7 @@
         },
         {
           "command": "$0 mcp -y",
-          "description": "Global config, detected agents, minted API key"
+          "description": "Global config, detected agents, reuse or mint an API key"
         },
         {
           "command": "$0 mcp --oauth",
@@ -2934,7 +2951,7 @@
       "options": {
         "agent": {
           "type": "array",
-          "describe": "Coding agent to install into (repeatable). Skips the agent picker",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
           "alias": "a"
         },
         "global": {
@@ -3413,7 +3430,7 @@
       "options": {
         "agent": {
           "type": "array",
-          "describe": "Coding agent to install into (repeatable). Skips the agent picker",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
           "alias": "a"
         },
         "global": {
@@ -3423,7 +3440,7 @@
         },
         "skill": {
           "type": "array",
-          "describe": "Skill to install (repeatable). Skips the skill picker",
+          "describe": "Skill to install (repeatable). Skips the skill picker. Values listed below",
           "alias": "s"
         },
         "yes": {

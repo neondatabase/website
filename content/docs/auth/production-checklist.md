@@ -10,7 +10,7 @@ summary: >-
   rate-limited and does not support verification links. A custom SMTP provider
   is required for both.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
@@ -53,6 +53,10 @@ A custom SMTP provider uses your sender address but still sends Neon's default e
 
 ### Configure custom SMTP
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
 In your project's **Settings** → **Auth** page, configure your email provider:
 
 1. Select **Custom SMTP provider**
@@ -64,6 +68,33 @@ In your project's **Settings** → **Auth** page, configure your email provider:
    - **Sender email**: Email address to send from
    - **Sender name**: Display name for sent emails
 3. Click **Save**
+
+</TabItem>
+
+<TabItem>
+
+Configure a standard SMTP provider with [`neon neon-auth config email-provider update`](/docs/cli/neon-auth#config-email-provider-update):
+
+```bash shouldWrap
+neon neon-auth config email-provider update --type standard --host smtp.example.com --port 587 --username example_username --password AbC123dEf --sender-email noreply@example.com --sender-name "Example App"
+```
+
+</TabItem>
+
+<TabItem>
+
+Update the provider with the [Update email provider configuration](/docs/reference/api/auth/update-neon-auth-email-provider) endpoint. Replace `{project_id}` and `{branch_id}` with your project and branch IDs:
+
+```bash shouldWrap
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/email_provider' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{"type": "standard", "host": "smtp.example.com", "port": 587, "username": "example_username", "password": "AbC123dEf", "sender_email": "noreply@example.com", "sender_name": "Example App"}'
+```
+
+</TabItem>
+
+</Tabs>
 
 ### Email provider requirements
 
