@@ -122,12 +122,21 @@ POST https://claimable.neon.tech/v1/projects/<project_id>/claim
 Authorization: Bearer <access_token>
 ```
 
+The unclaimed project expires at `project.expires_at` (72 hours today). A claim code expires in
+`expires_in` seconds (900 today). If the unused code expires, POST this endpoint again. Each POST
+cancels the previous unused code and returns a new one. Re-issue only while `project.expires_at`
+is still in the future.
+
 Open the returned `verification_uri_complete`. Opening the URL does not freeze access. Continuing
-to Neon starts the transfer and rotates `DATABASE_URL`. The human signs in to Neon, selects a
-destination organization, and accepts the transfer.
+to Neon starts a transfer with a new `expires_in` window, revokes access tokens, and rotates
+`DATABASE_URL`. If that window expires before the human accepts, POST this endpoint again. The
+project key and database password stay revoked.
+
+The human signs in to Neon, selects a destination organization, and accepts the transfer.
 
 Continuing to Neon revokes existing access tokens. Re-exchange the identity assertion; while the
-claim is in progress, the new token has no project scopes and authorizes only claim-status polling:
+claim is in progress, the new token has no project scopes and authorizes claim-status polling and
+a replacement claim code if the transfer window expires:
 
 ```http
 POST https://claimable.neon.tech/v1/oauth2/token
@@ -146,8 +155,37 @@ Authorization: Bearer <claim_status_access_token>
 The claim moves through `pending`, `accepted`, and `reconciled`. Stop using pre-claim
 credentials when the browser claim starts. At `reconciled`, the identity assertion, access
 tokens, project key, and database password no longer authorize project access. Auth and the
-Data API stay enabled and transfer with the project. The status endpoint keeps returning the
-terminal `reconciled` state when retried with the retained status token.
+Data API stay enabled and transfer with the project if they were granted at registration. The
+status endpoint keeps returning the terminal `reconciled` state when retried with the retained
+status token.
+
+After `reconciled`, add Auth or the Data API with `neon.ts` and `neon deploy`. Data API with
+the default auth provider requires Auth:
+
+```typescript
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true,
+  dataApi: true,
+});
+```
+
+```bash
+neon deploy
+```
+
+An external JWKS is the other Data API option:
+
+```typescript
+dataApi: {
+  authProvider: "external",
+  jwksUrl: "https://example.com/.well-known/jwks.json",
+}
+```
+
+You cannot add those services on the unclaimed project after registration. Request them at
+create, or add them after claim.
 
 ## Delete or revoke
 
