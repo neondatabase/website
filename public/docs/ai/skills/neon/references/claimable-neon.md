@@ -37,13 +37,43 @@ export default defineConfig({
 
 Before claim, Postgres is always granted; Auth and the Data API are granted when requested. Functions, Object Storage, and AI Gateway come back with `granted: false` and `reason: "requires_claim"`. The CLI prints those as `denied_capabilities`. Report what you were given. Do not retry or strip them.
 
-After create, report the `project_id`, `project_expires_at`, and any denied capabilities. Do not invent the window.
+After create, report the `project_id`, `project_expires_at`, and any denied capabilities. Do not invent the window. Unclaimed projects expire at `project_expires_at` (72 hours today). That clock is independent of the claim code.
 
 ## Claim
 
 Do not mint a claim URL until the human is ready. Opening the URL does not freeze access. Continuing to Neon starts the transfer and rotates `DATABASE_URL`. Existing access tokens are revoked. Auth and the Data API stay enabled when they were granted.
 
-When `reconciled` is true, the pre-claim `DATABASE_URL` no longer works. Auth and Data API URLs stay. The human signs in with `neon auth`. Then the agent runs `neon link --agent` and `neon env pull` to write the new `DATABASE_URL`. `neon link --agent` discovers the project after that sign-in.
+A claim code expires in `expires_in` seconds (15 minutes / 900 today). If the unused code expires, mint another: `neon claim accept --no-open` or `POST /v1/projects/{id}/claim`. Each mint cancels the previous unused code. You can mint several times; only the latest unused code works. Re-issue only while `project_expires_at` is still in the future.
+
+Continuing to Neon starts a transfer with a new 15-minute window and leaves the project key and database password revoked. If that window expires before the human accepts, mint again. Do not restore pre-claim `DATABASE_URL`.
+
+When `reconciled` is true, the pre-claim `DATABASE_URL` no longer works. Auth and Data API URLs stay if they were granted. The human signs in with `neon auth`. Then the agent runs `neon link --agent` and `neon env pull` to write the new `DATABASE_URL`. `neon link --agent` discovers the project after that sign-in.
+
+Auth and the Data API stay off unless requested at create or enabled later. On the unclaimed project, `neon.ts` plus `neon deploy` enables them. After claim, the same config talks to Neon directly. An external JWKS is only accepted after claim. Data API with the default auth provider requires Auth:
+
+```typescript
+import { defineConfig } from "@neon/config/v1";
+
+export default defineConfig({
+  auth: true,
+  dataApi: true,
+});
+```
+
+```bash
+neon deploy
+```
+
+```typescript
+export default defineConfig({
+  dataApi: {
+    authProvider: "external",
+    jwksUrl: "https://example.com/.well-known/jwks.json",
+  },
+});
+```
+
+`neon checkout` does not apply this to an existing branch. `neon deploy` (alias of `neon config apply`) does.
 
 ### With the CLI
 
@@ -62,9 +92,9 @@ neon claim delete --yes
 
 ### With REST
 
-An agent must not complete the claim. Do not `POST /v1/projects/{id}/claim` until the human is ready. The human opens `verification_uri_complete` and accepts the transfer. If the claim code expires, `POST /v1/projects/{id}/claim` again. The live claim response also includes `user_code` and `expires_in`. `auth.md` documents `verification_uri_complete` and the polling `interval`.
+An agent must not complete the claim. Do not `POST /v1/projects/{id}/claim` until the human is ready. The human opens `verification_uri_complete` and accepts the transfer. If the claim code expires, `POST /v1/projects/{id}/claim` again. Each POST replaces the unused previous code. If the human continued to Neon and that transfer expired, POST again for a new code. The live claim response also includes `user_code` and `expires_in`. `auth.md` documents `verification_uri_complete` and the polling `interval`.
 
-After the human continues to Neon, existing access tokens are revoked: re-exchange the identity assertion, then poll `GET /v1/projects/{id}/claim` with that token at the interval `auth.md` returns. `claim_in_progress` means keep polling with the post-redemption token, not the token from create. Report `verification_uri_complete`, `user_code`, and `expires_in`.
+After the human continues to Neon, existing access tokens are revoked: re-exchange the identity assertion, then poll `GET /v1/projects/{id}/claim` with that token at the interval `auth.md` returns. `claim_in_progress` on a new mint means the transfer window is still live: poll, do not mint. After that window expires, POST claim again. Report `verification_uri_complete`, `user_code`, and `expires_in`.
 
 When `error.code` is `capability_requires_claim`, preserve the denied capability and give the human a claim link instead of retrying or silently omitting it.
 
