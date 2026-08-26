@@ -44,7 +44,7 @@ After create, regular Neon CLI commands use the saved assertion. Explicit Neon a
 
 ## neon claim status (#status)
 
-Shows the linked claimable project's lifecycle and claim status.
+Shows a claimable project's lifecycle and claim status. Pass a project ID from `neon claim list`, or omit it to use the project linked in the current directory.
 
 <CliUsage command="claim status" />
 
@@ -82,7 +82,7 @@ neon claim list
 
 ## neon claim delete (#delete)
 
-Permanently deletes the linked unclaimed project. Pass `--yes` to skip the confirmation prompt.
+Permanently deletes an unclaimed project, or drops a local record that can no longer reach the service. Pass a project ID from `neon claim list`, or omit it to use the linked project. Pass `--yes` to skip the confirmation prompt.
 
 <CliUsage command="claim delete" />
 

@@ -64,7 +64,7 @@ Run the interactive install. It walks you through config location, agents, and a
 neon mcp
 ```
 
-Install non-interactively into every detected agent, using global config and a freshly minted API key. You need to be signed in already for the mint to succeed:
+Install non-interactively into every detected agent, using global config. It reuses an API key already configured for an agent, or mints a new one (you must be signed in to mint):
 
 ```bash
 neon mcp -y
