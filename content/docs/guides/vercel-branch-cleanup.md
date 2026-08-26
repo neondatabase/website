@@ -12,7 +12,7 @@ summary: >-
   Stale branches count toward plan branch limits and incur storage costs even
   after being auto-archived.
 enableTableOfContents: true
-updatedOn: '2026-08-18T10:29:02.410Z'
+updatedOn: '2026-08-26T05:16:28.993Z'
 ---
 
 <InfoBlock>
@@ -172,20 +172,26 @@ Preview branches that aren't cleaned up still consume resources and count toward
 
 ---
 
-## FAQ
+## Frequently asked questions
 
-### Why aren't my preview branches being deleted?
+<Faq>
+
+<FaqItem question="Why aren't my preview branches being deleted?">
 
 The most common cause is Vercel's deployment retention policy. With the default 6-month retention, preview branches can persist for months after a PR is closed. To fix this:
 
 1. [Reduce your Vercel retention policy](#reducing-vercels-retention-policy) for pre-production deployments
 2. [Set up a GitHub Action](#github-action-on-pr-close-recommended) to delete branches immediately on PR close
 
-### I reduced retention but branches are still not being deleted
+</FaqItem>
+
+<FaqItem question="I reduced retention but branches are still not being deleted">
 
 Vercel keeps a minimum number of recent deployments regardless of your retention settings. The project's `deploymentsToKeep` value (typically 10, visible via the [Vercel project API](https://vercel.com/docs/rest-api/projects/retrieve-a-list-of-projects)) controls how many are protected. Neon branches tied to these deployments won't be auto-deleted. Use the [GitHub Action workaround](#github-action-on-pr-close-recommended) or [manual cleanup](#cleaning-up-existing-stale-branches) for these branches.
 
-### Which integration type gives faster cleanup?
+</FaqItem>
+
+<FaqItem question="Which integration type gives faster cleanup?">
 
 It depends on your deployment cadence.
 
@@ -193,8 +199,14 @@ The [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration) del
 
 The **Vercel-Managed Integration** has predictable but slow cleanup tied to deployment retention. The **Neon-Managed Integration** has fast cleanup during active development but no cleanup during idle periods. Both benefit from the [GitHub Action approach](#github-action-on-pr-close-recommended), which works regardless of integration type and removes branches immediately on PR close.
 
-### How do I clean up branches that already accumulated?
+</FaqItem>
+
+<FaqItem question="How do I clean up branches that already accumulated?">
 
 See [Cleaning up existing stale branches](#cleaning-up-existing-stale-branches) above for options including the Neon Console, CLI, and API.
+
+</FaqItem>
+
+</Faq>
 
 <NeedHelp/>

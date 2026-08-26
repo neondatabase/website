@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-08-15T00:37:08.193Z'
+updatedOn: '2026-08-26T05:16:28.993Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -503,94 +503,116 @@ The following examples show what your monthly bill might look like on the **Laun
 
     **Amount due:** **$658.70**
 
-## FAQs
+## Frequently asked questions
 
-<DefinitionList>
+<Faq>
 
-What is a CU?
-: A CU (Compute Unit) is Neon's measure of compute size. Each CU allocates approximately 4 GB of RAM to the database instance, along with associated CPU and local SSD resources. Scaling up increases these resources linearly. For example, a 2 CU compute has 8 GB RAM.
+<FaqItem question="What is a CU?">
+A CU (Compute Unit) is Neon's measure of compute size. Each CU allocates approximately 4 GB of RAM to the database instance, along with associated CPU and local SSD resources. Scaling up increases these resources linearly. For example, a 2 CU compute has 8 GB RAM.
+</FaqItem>
 
-How is compute usage measured in Neon?
-: Compute usage is measured in **CU-hours**:  
- CU-hours = compute size (in CU) × hours running  
- Examples:  
- • 0.25 CU for 4 hours = 1 CU-hour  
- • 2 CU for 3 hours = 6 CU-hours  
- Your plan's compute price per CU-hour depends on whether you are on Launch or Scale. On the Free plan, you have 100 CU-hours/month included.
+<FaqItem question="How is compute usage measured in Neon?">
+Compute usage is measured in **CU-hours**:  
+CU-hours = compute size (in CU) × hours running  
+Examples:  
+• 0.25 CU for 4 hours = 1 CU-hour  
+• 2 CU for 3 hours = 6 CU-hours  
+Your plan's compute price per CU-hour depends on whether you are on Launch or Scale. On the Free plan, you have 100 CU-hours/month included.
+</FaqItem>
 
-How is storage usage billed in Neon?
-: Storage is billed based on actual usage, measured in **GB-months**:  
- 1 GB-month = 1 GB stored for 1 month  
- Storage usage is metered hourly and summed over the month. For child branches, you're billed for the minimum of accumulated changes or logical data size; capped at your actual data size. On the Free plan, you get 0.5 GB per project.
+<FaqItem question="How is storage usage billed in Neon?">
+Storage is billed based on actual usage, measured in **GB-months**:  
+1 GB-month = 1 GB stored for 1 month  
+Storage usage is metered hourly and summed over the month. For child branches, you're billed for the minimum of accumulated changes or logical data size; capped at your actual data size. On the Free plan, you get 0.5 GB per project.
+</FaqItem>
 
-How do branches affect storage?
-: Your root branch contains your main data. Child branches share data with the root until changes are made. Child branches are billed for the minimum of accumulated changes or logical data size; you never pay more than your actual data size. Delete unused branches to control storage costs.
+<FaqItem question="How do branches affect storage?">
+Your root branch contains your main data. Child branches share data with the root until changes are made. Child branches are billed for the minimum of accumulated changes or logical data size; you never pay more than your actual data size. Delete unused branches to control storage costs.
+</FaqItem>
 
-How is extra branch usage billed?
-: Paid plans include a set number of branches per project. Additional branches are billed at **$1.50/branch-month**, prorated hourly (about $0.002/hour).  
- Example: If your plan includes 10 branches and you run 2 extra branches for 5 hours each, that's 10 branch-hours (~$0.02).
+<FaqItem question="How is extra branch usage billed?">
+Paid plans include a set number of branches per project. Additional branches are billed at **$1.50/branch-month**, prorated hourly (about $0.002/hour).  
+Example: If your plan includes 10 branches and you run 2 extra branches for 5 hours each, that's 10 branch-hours (~$0.02).
+</FaqItem>
 
-How are instant restores billed?
-: Neon charges for PITR (point-in-time restore) storage only for branches you can point-in-time restore from: root branches. The charge is based on the amount of change history retained on those branches, not the number of restores you perform. Child branches do not add to PITR storage charges.  
- • Free: Up to 6 hours of history, capped at 1 GB of changes, no charge.  
- • Launch: Up to 7 days of history, billed at $0.20/GB-month.  
- • Scale: Up to 30 days of history, billed at $0.20/GB-month.  
- Change history is stored as Postgres WAL records.
+<FaqItem question="How are instant restores billed?">
+Neon charges for PITR (point-in-time restore) storage only for branches you can point-in-time restore from: root branches. The charge is based on the amount of change history retained on those branches, not the number of restores you perform. Child branches do not add to PITR storage charges.  
+• Free: Up to 6 hours of history, capped at 1 GB of changes, no charge.  
+• Launch: Up to 7 days of history, billed at $0.20/GB-month.  
+• Scale: Up to 30 days of history, billed at $0.20/GB-month.  
+Change history is stored as Postgres WAL records.
+</FaqItem>
 
-Is instant restore history accumulated at the project or branch level?
-: You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single **history window** (for example, 7 days or 30 days) for the entire project for **instant restore**. You cannot enable, disable, or configure the history window per branch.
+<FaqItem question="Is instant restore history accumulated at the project or branch level?">
+You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single **history window** (for example, 7 days or 30 days) for the entire project for **instant restore**. You cannot enable, disable, or configure the history window per branch.
+</FaqItem>
 
-Can I disable scale-to-zero?
-: Free: No, it's always enabled (5 min idle timeout).  
- Launch: Yes, you can disable it.  
- Scale: Yes, fully configurable (1 minute to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
+<FaqItem question="Can I disable scale-to-zero?">
+Free: No, it's always enabled (5 min idle timeout).  
+Launch: Yes, you can disable it.  
+Scale: Yes, fully configurable (1 minute to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
+</FaqItem>
 
-What is autoscaling and how does it work?
-: Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
+<FaqItem question="What is autoscaling and how does it work?">
+Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
+</FaqItem>
 
-How are read replicas billed?
-: Each read replica is its own compute and contributes to CU-hours.
+<FaqItem question="How are read replicas billed?">
+Each read replica is its own compute and contributes to CU-hours.
+</FaqItem>
 
-Do public network transfer limits reset each month?
-: Yes. Free includes 5 GB/month. Launch and Scale include 500 GB per project per month. Beyond that, it's $0.10/GB.
+<FaqItem question="Do public network transfer limits reset each month?">
+Yes. Free includes 5 GB/month. Launch and Scale include 500 GB per project per month. Beyond that, it's $0.10/GB.
+</FaqItem>
 
-How is private network transfer billed?
-: Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
+<FaqItem question="How is private network transfer billed?">
+Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
+</FaqItem>
 
-What are the limits and quotas for the Free plan?
-: The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+<FaqItem question="What are the limits and quotas for the Free plan?">
+The Free plan costs $0/month and includes 100 projects, 10 branches per project, 100 CU-hours of compute per project per month, autoscaling up to 2 CU (≈8 GB RAM), 0.5 GB of storage per project, and 5 GB of public network transfer per month. It also includes a 6-hour instant restore history (capped at 1 GB-month of changes), 1 manual snapshot, up to 60,000 Managed Better Auth MAU, 1 day of monitoring history, and community support. Scale to zero is always enabled (computes suspend after 5 minutes of inactivity) and can't be disabled. Compute (CU-hours) and network transfer reset each monthly billing period; projects, branches, and storage are continuous limits. For the full row-by-row breakdown, see the [Plan overview](#plan-overview) table.
+</FaqItem>
 
-What happens if I exceed my Free plan limits?
-: On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 0.5 GB storage cap causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
+<FaqItem question="What happens if I exceed my Free plan limits?">
+On the Free plan, when you run out of CU-hours or public network transfer, your compute is suspended until the next billing period or until you upgrade. Exceeding the 0.5 GB storage cap causes operations that increase storage (inserts, updates, and deletes) to fail until you free space or upgrade. Branch creation fails once you reach 10 branches per project. None of these limits delete your data.
+</FaqItem>
 
-Do you charge for idle computes?
-: If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.
+<FaqItem question="Do you charge for idle computes?">
+If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.
+</FaqItem>
 
-What is the difference between root and child branch storage billing?
-: Root branches are billed for their full logical data size. Child branches are billed for the minimum of accumulated changes since creation or logical data size; ensuring you never pay more than your actual data size.
+<FaqItem question="What is the difference between root and child branch storage billing?">
+Root branches are billed for their full logical data size. Child branches are billed for the minimum of accumulated changes since creation or logical data size; ensuring you never pay more than your actual data size.
+</FaqItem>
 
-Can I get more than the listed project limit?
-: Yes, on Scale you can request increases for projects beyond the listed limit.
+<FaqItem question="Can I get more than the listed project limit?">
+Yes, on Scale you can request increases for projects beyond the listed limit.
+</FaqItem>
 
-Why is the compute rate higher on Scale than Launch?
-: Scale includes higher availability, advanced security features, compliance certifications, and SLAs. The higher CU-hour rate reflects these additional capabilities.
+<FaqItem question="Why is the compute rate higher on Scale than Launch?">
+Scale includes higher availability, advanced security features, compliance certifications, and SLAs. The higher CU-hour rate reflects these additional capabilities.
+</FaqItem>
 
-How can I control my costs?
-: • Set a maximum autoscaling limit to cap compute size.  
- • Enable scale-to-zero for idle databases.  
- • Delete unused branches to reduce storage costs.  
- • Shorten your **history window** to reduce **History** usage (instant restore storage).  
- For more detailed strategies, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
+<FaqItem question="How can I control my costs?">
+• Set a maximum autoscaling limit to cap compute size.  
+• Enable scale-to-zero for idle databases.  
+• Delete unused branches to reduce storage costs.  
+• Shorten your **history window** to reduce **History** usage (instant restore storage).  
+For more detailed strategies, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
+</FaqItem>
 
-Do you offer credits for startups?
-: Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
+<FaqItem question="Do you offer credits for startups?">
+Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
+</FaqItem>
 
-How is storage charged for snapshots?
-: Snapshot storage is billed at $0.09/GB-month.
+<FaqItem question="How is storage charged for snapshots?">
+Snapshot storage is billed at $0.09/GB-month.
+</FaqItem>
 
-Is storage cost different for archived branches?
-: No. Archived branches are billed at the same rate as active branches. Neon automatically archives inactive branches to optimize storage resources and maintain a cost-efficient storage infrastructure. See [Branch archiving](/docs/guides/branch-archiving) for details on how archiving works.
+<FaqItem question="Is storage cost different for archived branches?">
+No. Archived branches are billed at the same rate as active branches. Neon automatically archives inactive branches to optimize storage resources and maintain a cost-efficient storage infrastructure. See [Branch archiving](/docs/guides/branch-archiving) for details on how archiving works.
+</FaqItem>
 
-</DefinitionList>
+</Faq>
 
 <NeedHelp/>

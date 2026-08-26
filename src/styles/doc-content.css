@@ -447,16 +447,17 @@
       }
     }
 
-    /* Details/Summary dropdown styling */
-    h2 + details {
+    /* Details/Summary dropdown styling. The Faq component (details.faq-item)
+       opts out of these shared styles and defines its own accordion look. */
+    h2 + details:not(.faq-item) {
       @apply mt-6;
     }
 
-    details {
+    details:not(.faq-item) {
       @apply relative -mb-px border border-gray-new-80 bg-transparent p-4 dark:border-gray-new-20;
     }
 
-    details summary {
+    details:not(.faq-item) summary {
       @apply flex cursor-pointer items-center gap-2 text-base leading-normal font-normal tracking-tight text-black-pure dark:text-white;
       list-style: none;
 
@@ -468,28 +469,28 @@
       }
     }
 
-    details[open] > summary::before {
+    details:not(.faq-item)[open] > summary::before {
       transform: rotate(90deg);
     }
 
-    details > *:not(summary):not(.code-block) {
+    details:not(.faq-item) > *:not(summary):not(.code-block) {
       @apply mt-6 pl-[26px] text-base leading-normal font-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
     }
 
-    details > * {
+    details:not(.faq-item) > * {
       @apply prose-li:text-base prose-li:leading-snug prose-li:tracking-extra-tight;
     }
 
-    details > .code-block {
+    details:not(.faq-item) > .code-block {
       @apply my-6 ml-[26px];
     }
 
     /* Ensure list items inside details have proper spacing */
-    details ul {
+    details:not(.faq-item) ul {
       @apply mb-0;
     }
 
-    details ul > li:last-child {
+    details:not(.faq-item) ul > li:last-child {
       @apply mb-0;
     }
 
