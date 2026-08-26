@@ -17,6 +17,7 @@ const rowClass = {
   '1-2': 'h-[50px] lg:h-[65px]',
   2: 'h-[73px]',
   3: 'h-[92px] xl:h-[108px]',
+  4: 'h-[116px] xl:h-[140px] lg:h-[156px]',
 };
 
 const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan }) => {

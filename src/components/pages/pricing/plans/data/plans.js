@@ -170,17 +170,18 @@ export default {
       scale: '$0.023 per GB-month<span>No charges during beta</span>',
     },
     {
-      rows: '3',
+      rows: '4',
       feature: {
         title: 'Functions',
         tag: { label: 'Beta', theme: 'orange-muted' },
         subtitle: 'Compute and invocations',
       },
-      free: '<span>10 active and 400 waiting capacity-hours, 1M invocations</span>',
+      free:
+        '<span>10 active capacity-hours</span><span>400 waiting capacity-hours</span><span>1M invocations</span>',
       launch:
-        '<span>$0.10 per active and $0.025 per waiting capacity-hour, $0.60 per 1M invocations. No charges during beta</span>',
+        '<span>$0.10 per active capacity-hour</span><span>$0.025 per waiting capacity-hour</span><span>$0.60 per 1M invocations</span><span>No charges during beta</span>',
       scale:
-        '<span>$0.12 per active and $0.03 per waiting capacity-hour, $0.60 per 1M invocations. No charges during beta</span>',
+        '<span>$0.12 per active capacity-hour</span><span>$0.03 per waiting capacity-hour</span><span>$0.60 per 1M invocations</span><span>No charges during beta</span>',
     },
     {
       rows: '2',
