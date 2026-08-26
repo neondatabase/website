@@ -174,7 +174,7 @@ export default {
       scale: `$${objectStorage.storageRatePerGbMonth} per GB-month<span>No charges during beta</span>`,
     },
     {
-      rows: 'functions',
+      fluid: true,
       feature: {
         title: 'Functions',
         tag: { label: 'Beta', theme: 'orange-muted' },
