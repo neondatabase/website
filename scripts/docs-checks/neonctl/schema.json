@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.6.0",
+  "neonctlVersion": "4.7.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -1987,8 +1987,7 @@
       "options": {
         "agent": {
           "type": "boolean",
-          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
-          "default": false
+          "hidden": true
         },
         "branch": {
           "type": "string",
