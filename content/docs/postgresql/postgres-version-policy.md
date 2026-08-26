@@ -65,7 +65,7 @@ Neon does not support skipping minor releases or downgrading to a previous minor
 
 #### Recent minor version rollouts
 
-The table below shows when recent Postgres releases become available on Neon.
+The table below shows when recent Postgres releases became available on Neon.
 
 | Postgres release date | Versions in the release          | First available on Neon | Time to availability |
 | --------------------- | -------------------------------- | ----------------------- | -------------------- |
