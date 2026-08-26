@@ -163,20 +163,25 @@ export default {
       feature: {
         title: 'Object Storage',
         tag: { label: 'Beta', theme: 'orange-muted' },
+        subtitle: 'Stored volume',
       },
-      free: 'No charges applied during beta, with usage limits',
-      launch: 'No charges applied during beta, with usage limits',
-      scale: 'No charges applied during beta, with usage limits',
+      free: '5 GB included<span>No charges during beta</span>',
+      launch: '$0.023 per GB-month<span>No charges during beta</span>',
+      scale: '$0.023 per GB-month<span>No charges during beta</span>',
     },
     {
-      rows: '2',
+      rows: '3',
       feature: {
         title: 'Functions',
         tag: { label: 'Beta', theme: 'orange-muted' },
+        subtitle: 'Compute and invocations',
       },
-      free: 'No charges applied during beta, with usage limits',
-      launch: 'No charges applied during beta, with usage limits',
-      scale: 'No charges applied during beta, with usage limits',
+      free:
+        '10 active Capacity-Hours<span>400 waiting Capacity-Hours, 1M invocations. No charges during beta</span>',
+      launch:
+        '$0.10 per active Capacity-Hour<span>$0.025 per waiting Capacity-Hour, $0.60 per 1M invocations. No charges during beta</span>',
+      scale:
+        '$0.12 per active Capacity-Hour<span>$0.03 per waiting Capacity-Hour, $0.60 per 1M invocations. No charges during beta</span>',
     },
     {
       rows: '2',

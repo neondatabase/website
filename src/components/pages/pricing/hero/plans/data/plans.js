@@ -37,14 +37,16 @@ export default [
         features: [
           { title: 'Managed Better Auth', info: 'Up to 60k MAUs' },
           {
-            title: 'Object Storage',
+            title: '5 GB of Object Storage',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info:
+              '<p>Measured across your account, not per project</p><p>No charges applied during beta</p>',
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info:
+              '<p>10 active Capacity-Hours per month</p><p>400 waiting Capacity-Hours per month</p><p>1M invocations per month</p>',
           },
         ],
       },
@@ -91,12 +93,13 @@ export default [
           {
             title: 'Object Storage',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info: '<p>$0.023 per GB-month</p><p>No charges applied during beta</p>',
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info:
+              '<p>$0.10 per active Capacity-Hour</p><p>$0.025 per waiting Capacity-Hour</p><p>$0.60 per million invocations</p><p>No charges applied during beta</p>',
           },
           {
             title: 'AI Gateway',
@@ -148,12 +151,13 @@ export default [
           {
             title: 'Object Storage',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info: '<p>$0.023 per GB-month</p><p>No charges applied during beta</p>',
           },
           {
             title: 'Functions',
             tag: { label: 'Beta', theme: 'orange-muted' },
-            info: 'No charges applied during beta, with usage limits',
+            info:
+              '<p>$0.12 per active Capacity-Hour</p><p>$0.03 per waiting Capacity-Hour</p><p>$0.60 per million invocations</p><p>No charges applied during beta</p>',
           },
           {
             title: 'AI Gateway',
