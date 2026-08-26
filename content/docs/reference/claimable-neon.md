@@ -271,7 +271,7 @@ Choose the destination organization. The project then moves through these states
 2. `accepted`: the project has left the unclaimed-project organization.
 3. `reconciled`: the identity assertion is revoked and the ceremony is finished.
 
-Continuing to Neon revokes existing access tokens. Re-exchange the identity assertion, then poll claim status at the server-provided `interval`. The new token is only good for that poll until `reconciled`.
+Continuing to Neon revokes existing access tokens. Re-exchange the identity assertion, then poll claim status at the server-provided `interval`. The new token has no project scopes. It authorizes that poll, and a replacement claim code if the transfer window expires.
 
 ```bash
 curl --request POST https://claimable.neon.tech/v1/oauth2/token \
