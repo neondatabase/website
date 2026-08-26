@@ -66,6 +66,8 @@ All plans include: multi-AZ storage, autoscaling, database branching, read repli
 - **Auth (MAU)** can scale beyond 1M; contact Neon for higher limits.
 - **Private Networking** ($0.01/GB on Scale) counts traffic in **both directions**.
 - **HIPAA** is self-serve on Scale (BAA required), currently at no additional cost. See [HIPAA](https://neon.com/docs/security/hipaa.md) for details.
+- **Object Storage** and **Functions** are free during beta. When billing begins: Object Storage is $0.023/GB-month (stored volume only, no per-operation charge). Functions active compute is $0.10/Capacity-Hour (Launch) or $0.12/Capacity-Hour (Scale), waiting compute is $0.025/Capacity-Hour (Launch) or $0.03/Capacity-Hour (Scale), and invocations are $0.60/M on both plans. Object Storage egress counts toward the shared network transfer allowance.
+- **Free tier** for the backend services: 5 GB Object Storage and, for Functions, 10 active Capacity-Hours, 400 waiting Capacity-Hours, and 1M invocations per month. These are account-wide, not per project.
 
 See [Plans](https://neon.com/docs/introduction/plans.md) for full details.
 
@@ -107,4 +109,3 @@ See [Cost optimization](https://neon.com/docs/introduction/cost-optimization.md)
 - Get credits for building Open Source on Neon: https://neon.com/programs/open-source.md
 - Apply for the Agent Plan (for AI agent platforms): https://neon.com/docs/introduction/agent-plan.md
 - More plan details: https://neon.com/docs/introduction/plans.md
-

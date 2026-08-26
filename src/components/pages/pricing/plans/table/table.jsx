@@ -17,7 +17,30 @@ const rowClass = {
   '1-2': 'h-[50px] lg:h-[65px]',
   2: 'h-[73px]',
   3: 'h-[92px] xl:h-[108px]',
-  4: 'h-[116px] xl:h-[140px] lg:h-[156px]',
+};
+
+const PricingSections = ({ sections }) => (
+  <div className="flex flex-col gap-y-7 leading-snug font-normal tracking-extra-tight">
+    {sections.map(({ title, details }) => (
+      <div className="flex flex-col gap-y-1" key={title}>
+        <span className="text-base text-gray-new-80">{title}</span>
+        {details.map((detail) => (
+          <span className="text-sm text-gray-new-50" key={detail}>
+            {detail}
+          </span>
+        ))}
+      </div>
+    ))}
+  </div>
+);
+
+PricingSections.propTypes = {
+  sections: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      details: PropTypes.arrayOf(PropTypes.string).isRequired,
+    })
+  ).isRequired,
 };
 
 const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan }) => {
@@ -87,7 +110,7 @@ const Table = () => {
 
           return (
             <li
-              className={cn('relative pt-6 xl:pt-4', {
+              className={cn('relative flex flex-col pt-6 xl:pt-4', {
                 'z-30 flex-1 bg-black-pure lt:min-w-[200px] lg:sticky lg:top-0 lg:left-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] md:min-w-[180px]':
                   isLabelsColumn,
                 'basis-[296px] xl:basis-[252px] lg:shrink-0 lg:basis-[240px]': !isLabelsColumn,
@@ -115,6 +138,7 @@ const Table = () => {
                           isGroupTitle
                             ? 'h-[86px] justify-end border-t pb-[18px] lg:h-[66px]'
                             : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
+                          item.fluid && 'grow',
                           i === 1 && 'lg:pl-5',
                           index === 0 && 'border-t-0',
                           'before:opacity-0',
@@ -180,8 +204,10 @@ const Table = () => {
                       <span className="pricing-cross-icon flex size-[14px] bg-gray-new-30" />
                     );
                   } else if (typeof item[key] === 'object') {
-                    const { title, info, moreLink } = item[key];
-                    cell = (
+                    const { title, info, moreLink, sections } = item[key];
+                    cell = sections ? (
+                      <PricingSections sections={sections} />
+                    ) : (
                       <div className="leading-snug font-normal tracking-extra-tight">
                         {title}
                         {info && (
@@ -227,6 +253,7 @@ const Table = () => {
                         rowsWithGroupTitles.includes(index)
                           ? 'h-[86px] lg:h-[66px]'
                           : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
+                        item.fluid && 'grow',
                         item[key] !== undefined && !rowsWithGroupTitles.includes(index),
                         i === arr.length - 1 &&
                           'before:absolute before:-inset-y-px before:-right-4 before:z-0 before:w-4 before:rounded-tr-lg before:rounded-br-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
