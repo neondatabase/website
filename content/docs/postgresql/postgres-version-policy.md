@@ -7,7 +7,7 @@ summary: >-
   Minor release downgrades and version skipping are not supported. Upgrading
   to a new major version requires creating a new project and migrating data.
 enableTableOfContents: true
-updatedOn: '2026-08-21T15:27:30.599Z'
+updatedOn: '2026-08-26T14:40:58.742Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -65,14 +65,14 @@ Neon does not support skipping minor releases or downgrading to a previous minor
 
 #### Recent minor version rollouts
 
-The table below shows when recent Postgres releases become available on Neon. The three most recent on-schedule community releases each reached Neon within five days of the announcement.
+The table below shows when recent Postgres releases become available on Neon.
 
 | Postgres release date | Versions in the release          | First available on Neon | Time to availability |
 | --------------------- | -------------------------------- | ----------------------- | -------------------- |
 | 2026-08-13            | 18.6, 17.11, 16.15, 15.19, 14.24 | 2026-08-18              | 5 days               |
 | 2026-05-14            | 18.4, 17.10, 16.14, 15.18, 14.23 | 2026-05-19              | 5 days               |
-| 2026-02-12            | 18.2, 17.8, 16.12, 15.16, 14.21  | 2026-02-14              | 2 days               |
-| 2025-11-13            | 18.1, 17.7, 16.11, 15.15, 14.20  | 2025-12-04              | 21 days              |
+| 2026-02-12            | 18.2, 17.8, 16.12, 15.16, 14.21  | 2026-02-13              | 1 day                |
+| 2025-11-13            | 18.1, 17.7, 16.11, 15.15, 14.20  | 2025-12-03              | 20 days              |
 
 The **First available on Neon** date marks when a release first became available to run, not the point at which every compute is running it; each compute picks it up on the next restart, as described above.
 
