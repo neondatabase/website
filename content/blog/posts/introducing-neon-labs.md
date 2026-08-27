@@ -31,7 +31,7 @@ seo:
 
 **This first release includes two tools: a Postgres Upgrade Assessment, which reports what will break when you move to a new Postgres major version, and a Migration Assistant, which recommends a migration method and walks you through it.** To try them, sign in at [labs.neon.com](https://labs.neon.com/) with your Neon account, pick a source project and a target Postgres version, and run the assessment.
 
-<YoutubeIframe embedId="J7D_U-YcVfw" isDocPost={false} autoplay muted controls={false} />
+**[ADD CLIP]**
 
 <Admonition type="note" title="These tools are still in the experimental phase">
 We do not recommend using the migration tools for production workloads yet. Try them first with a development or test project, or clone the repository and run it locally.
