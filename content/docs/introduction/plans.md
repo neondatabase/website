@@ -22,7 +22,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-08-26T05:16:28.993Z'
+updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -98,7 +98,7 @@ You can invite teammates to your organization and they'll have access to all pro
 
 ### Projects
 
-A project is a container for your database environment. It includes your database, branches, compute resources, and more. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your database resources. Learn more about [Neon's object hierarchy](/docs/manage/overview).
+A project is a container for your database environment. It includes your database, branches, compute resources, and more. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your database resources. Learn more about [Neon's object model](/docs/concepts/the-object-model).
 
 > For most use cases, create a project for each app or customer to isolate data and manage resources.
 

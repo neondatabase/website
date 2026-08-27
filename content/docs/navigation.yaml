@@ -211,6 +211,17 @@
         - title: Sample data
           slug: import/import-sample-data
 
+- nav: Concepts
+  slug: concepts/the-object-model
+  title: Concepts
+  icon: glossary
+  items:
+    - section: Backend primitives
+      icon: book
+      items:
+        - title: The object model
+          slug: concepts/the-object-model
+
 - nav: Products
   title: Products
   icon: features
@@ -918,8 +929,8 @@
         - section: Projects & resources
           icon: book
           items:
-            - title: Object hierarchy
-              slug: manage/overview
+            - title: The object model
+              slug: concepts/the-object-model
             - title: Projects
               slug: manage/projects
             - title: Multitenancy
