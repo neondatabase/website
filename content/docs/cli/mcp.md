@@ -30,8 +30,8 @@ Run `neon mcp` with no flags for an interactive walkthrough: it asks whether to 
 
 By default, `mcp` mints a new Neon API key and writes it into each agent's config. Minting requires you to already be signed in, so run [`neon auth`](/docs/cli/auth) first or pass `--api-key`. If you aren't authenticated, the command stops and tells you to sign in, pass `--api-key`, or use `--oauth`.
 
-<Admonition type="warning" title="Minted keys are account-wide">
-A minted API key reaches everything your account can access, in every organization. The command prints the key's id when it mints one. Revoke it with [`neon api-keys revoke <id>`](/docs/cli/api-keys).
+<Admonition type="warning" title="Minted keys are account-wide by default">
+By default a minted API key reaches everything your account can access, in every organization. Pass `--project-id` to limit a newly minted key to a single project instead (see [Scoping the tools](#scoping-the-tools)). The command prints the key's id when it mints one. Revoke it with [`neon api-keys revoke <id>`](/docs/cli/api-keys).
 </Admonition>
 
 To install without minting a key, pass `--oauth`. This writes the server URL only, and the agent prompts you to sign in to Neon on first use. When `mcp` finds a Neon API key already configured for an agent, it reuses that key instead of minting a new one.
@@ -48,9 +48,9 @@ By default the server exposes every MCP tool. Use these flags to narrow what an 
 
 - `--read-only` hides the write tools by adding `?readonly=true` to the server URL.
 - `--category <name>` limits tools to one or more categories (repeatable, or comma-separated). Categories are `projects`, `branches`, `schema`, `querying`, `neon_auth`, `data_api`, `observability`, and `docs`.
-- `--project-id <id>` pins the tools to a single Neon project with `?projectId=`.
+- `--project-id <id>` pins the tools to a single Neon project with `?projectId=`, and limits a newly minted key to that project.
 
-These flags shape the server URL only. They don't change the scope of a minted API key.
+`--read-only` and `--category` shape the server URL only; they don't change a key's scope, and neither does reusing an already-configured key.
 
 ### Global vs project config
 
@@ -64,7 +64,7 @@ Run the interactive install. It walks you through config location, agents, and a
 neon mcp
 ```
 
-Install non-interactively into every detected agent, using global config and a freshly minted API key. You need to be signed in already for the mint to succeed:
+Install non-interactively into every detected agent, using global config. It reuses an API key already configured for an agent, or mints a new one (you must be signed in to mint):
 
 ```bash
 neon mcp -y
@@ -109,7 +109,7 @@ Limit the agent to schema and querying tools:
 neon mcp --category querying --category schema
 ```
 
-Pin the MCP tools to a single project:
+Pin the tools to one project and limit the minted key to it:
 
 ```bash
 neon mcp --project-id cold-grass-40154007

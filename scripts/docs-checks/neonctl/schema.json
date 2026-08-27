@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.3.0",
+  "neonctlVersion": "4.7.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -237,8 +237,7 @@
       "options": {
         "agent": {
           "type": "boolean",
-          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
-          "default": false
+          "hidden": true
         },
         "default": {
           "type": "boolean",
@@ -268,7 +267,7 @@
         },
         "list-templates": {
           "type": "boolean",
-          "describe": "List available templates and exit.",
+          "describe": "List available templates and exit. --output json and --output yaml print a machine-readable catalog.",
           "default": false,
           "alias": [
             "list",
@@ -297,8 +296,8 @@
           "description": "Quick start: scaffold the default template and run setup without prompting"
         },
         {
-          "command": "$0 bootstrap my-app --template hono --agent",
-          "description": "Scaffold without prompting and emit the JSON state machine for AI agents"
+          "command": "$0 bootstrap --list-templates --output json",
+          "description": "Print the template catalog as JSON"
         }
       ]
     },
@@ -892,6 +891,113 @@
           "description": "Pick a branch interactively from the project in the closest .neon file"
         }
       ]
+    },
+    "claim": {
+      "aliases": [
+        "claimable"
+      ],
+      "positionals": [],
+      "options": {
+        "claimable-host": {
+          "type": "string",
+          "describe": "Claimable Neon service origin",
+          "defaultText": "process.env.CLAIMABLE_NEON_HOST ?? DEFAULT_CLAIMABLE_ORIGIN",
+          "hidden": true
+        }
+      },
+      "commands": {
+        "accept": {
+          "name": "accept",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "open": {
+              "type": "boolean",
+              "describe": "Open the verification URL in a browser",
+              "default": true
+            }
+          },
+          "commands": {},
+          "describe": "Create a claim code and open the URL where a human signs in and takes the project"
+        },
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "config": {
+              "type": "string",
+              "describe": "Path to neon.ts. Defaults to walking up from the current directory"
+            },
+            "env-pull": {
+              "type": "boolean",
+              "describe": "Write the provisioned DATABASE_URL and service URLs to a dotenv file",
+              "default": true
+            },
+            "file": {
+              "type": "string",
+              "describe": "Target dotenv file. Defaults to an existing .env, otherwise .env.local"
+            },
+            "service": {
+              "type": "array",
+              "describe": "Services to request for the claimable project: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Postgres is always included. Services unavailable before claim are recorded and reported."
+            }
+          },
+          "commands": {},
+          "describe": "Create a temporary Neon project without an account"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt",
+              "default": false,
+              "alias": "y"
+            }
+          },
+          "commands": {},
+          "describe": "Permanently delete an unclaimed project, or drop a local record that can no longer reach the service"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List claimable projects saved on this machine"
+        },
+        "status": {
+          "name": "status",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Show a claimable project's lifecycle and claim status"
+        }
+      },
+      "describe": "Create and claim temporary Neon projects",
+      "usage": "$0 claim <sub-command> [options]"
     },
     "config": {
       "aliases": [],
@@ -1881,8 +1987,7 @@
       "options": {
         "agent": {
           "type": "boolean",
-          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
-          "default": false
+          "hidden": true
         },
         "branch": {
           "type": "string",
@@ -2133,12 +2238,12 @@
       "options": {
         "agent": {
           "type": "array",
-          "describe": "Coding agent to install into (repeatable). Skips the agent picker",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
           "alias": "a"
         },
         "category": {
           "type": "array",
-          "describe": "MCP tool category (repeatable or comma-separated). Default: all"
+          "describe": "MCP tool category (repeatable or comma-separated). Default: all. Values listed below"
         },
         "oauth": {
           "type": "boolean",
@@ -2147,12 +2252,12 @@
         },
         "project": {
           "type": "boolean",
-          "describe": "Write project-level MCP config. Skips the config-location question. Does not change the minted key",
+          "describe": "Write project-level MCP config. Skips the config-location question. A linked project-folder install may still pin a project and scope a newly minted key",
           "default": false
         },
         "project-id": {
           "type": "string",
-          "describe": "Pin MCP tools to one Neon project (?projectId=). Does not change the minted key. Interactive asks only for a linked project-folder install"
+          "describe": "Pin MCP tools to one Neon project (?projectId=). A newly minted API key is limited to that project. A linked project-folder install asks the same when you pick API-key auth"
         },
         "read-only": {
           "type": "boolean",
@@ -2162,7 +2267,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts. Defaults to global config, every detected agent and a minted account-wide API key. --project, --oauth, --agent, --read-only, --project-id and --category still apply",
+          "describe": "Skip prompts. Defaults listed below. --project, --oauth, --agent, --read-only, --project-id and --category still apply",
           "default": false,
           "alias": "y"
         }
@@ -2177,7 +2282,7 @@
         },
         {
           "command": "$0 mcp -y",
-          "description": "Global config, detected agents, minted API key"
+          "description": "Global config, detected agents, reuse or mint an API key"
         },
         {
           "command": "$0 mcp --oauth",
@@ -2839,6 +2944,49 @@
       "describe": "Manage organizations",
       "usage": "$0 orgs <sub-command> [options]"
     },
+    "plugins": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
+          "alias": "a"
+        },
+        "global": {
+          "type": "boolean",
+          "describe": "Install user-level. Default is project",
+          "default": false
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Skip prompts",
+          "default": false,
+          "alias": "y"
+        }
+      },
+      "commands": {},
+      "describe": "Install the Neon plugin into coding agents",
+      "usage": "$0 plugins [options]",
+      "examples": [
+        {
+          "command": "$0 plugins",
+          "description": "Interactive: agents, then confirm"
+        },
+        {
+          "command": "$0 plugins -y",
+          "description": "Detected agents, skip prompts"
+        },
+        {
+          "command": "$0 plugins --agent cursor --agent claude-code",
+          "description": "Install into specific agents"
+        },
+        {
+          "command": "$0 plugins --global",
+          "description": "Install user-level"
+        }
+      ]
+    },
     "profile": {
       "aliases": [
         "profiles"
@@ -3281,7 +3429,7 @@
       "options": {
         "agent": {
           "type": "array",
-          "describe": "Coding agent to install into (repeatable). Skips the agent picker",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
           "alias": "a"
         },
         "global": {
@@ -3291,7 +3439,7 @@
         },
         "skill": {
           "type": "array",
-          "describe": "Skill to install (repeatable). Skips the skill picker",
+          "describe": "Skill to install (repeatable). Skips the skill picker. Values listed below",
           "alias": "s"
         },
         "yes": {

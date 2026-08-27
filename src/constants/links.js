@@ -7,6 +7,7 @@ export default {
   careers:
     'https://www.databricks.com/company/careers/open-positions?department=engineering&location=all&itm_source=www&itm_category=company&itm_page=engineering-at-databricks&itm_location=body&itm_component=hero&itm_offer=open-positions',
   caseStudies: '/case-studies',
+  claimableNeon: '/claimable-neon',
   cli: '/cli',
   contactSales: '/contact-sales',
   enterprise: '/enterprise',
@@ -118,5 +119,4 @@ export default {
   apiReference: '/docs/reference/api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
-  claimablePostgres: 'https://neon.new/',
 };

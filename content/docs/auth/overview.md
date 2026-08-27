@@ -8,7 +8,7 @@ summary: >-
   gets its own isolated auth environment, so you can test sign-up, login, and
   OAuth flows in preview or CI branches without touching production.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:49:10.111Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -83,7 +83,7 @@ As Managed Better Auth evolves, more Better Auth integrations and features will 
 
 ## Basic usage
 
-Enable Auth in the Neon Console or [with your AI editor](#set-up-with-your-ai-editor), then add authentication to your app.
+Enable Auth in the Neon Console, from the terminal with [`neon neon-auth enable`](/docs/cli/neon-auth#enable), or [with your AI editor](#set-up-with-your-ai-editor), then add authentication to your app.
 
 **For Next.js (server-side):**
 

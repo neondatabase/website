@@ -35,7 +35,7 @@ Bare "Lakebase Postgres" is a claim about the database on **either** access path
 
 Add the qualifier when the sentence touches any of these:
 
-- A Neon-only or Databricks-only feature (Managed Better Auth, Object Storage, Functions, AI Gateway, Data API, Claimable Postgres, Unity Catalog governance, high availability)
+- A Neon-only or Databricks-only feature (Managed Better Auth, Object Storage, Functions, AI Gateway, Data API, Claimable Neon, Unity Catalog governance, high availability)
 - Console or UI instructions, signup, or account creation
 - Pricing, plans, credits, or free-tier limits
 - A path-specific API, CLI, SDK, Terraform provider, or MCP Server

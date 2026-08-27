@@ -13,7 +13,7 @@ summary: >-
   phone_number.verified, use EdDSA Ed25519 detached JWS signatures for
   verification, and retry blocking events within a global timeout.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
@@ -44,7 +44,7 @@ When you subscribe to `send.otp` or `send.magic_link`, Managed Better Auth skips
 
 ## Configure webhooks
 
-Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS protocol. See the API reference for [Get webhook configuration](/docs/reference/api/auth/get-neon-auth-webhook-config) and [Update webhook configuration](/docs/reference/api/auth/update-neon-auth-webhook-config).
+Configure webhooks per project and branch using the Neon Console, CLI, or API. Your webhook URL must use HTTPS protocol. See the API reference for [Get webhook configuration](/docs/reference/api/auth/get-neon-auth-webhook-config) and [Update webhook configuration](/docs/reference/api/auth/update-neon-auth-webhook-config).
 
 ```bash
 PUT /projects/{project_id}/branches/{branch_id}/auth/webhooks
@@ -78,6 +78,24 @@ Webhook endpoints that point at private networks, localhost, cloud metadata serv
 
 ### Set or update configuration
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+In the Neon Console, go to **Auth → Configuration → Webhooks** to enable webhook delivery, set the **Webhook URL** (an HTTPS endpoint; see [Webhook URL requirements](#webhook-url-requirements)), choose which events to send, and set the per-attempt timeout in seconds (1-10, default 5). Save to apply.
+
+</TabItem>
+
+<TabItem>
+
+```bash shouldWrap
+neon neon-auth config webhook update --enabled --url https://your-app.com/webhooks/neon-auth --enabled-events user.created --timeout 5
+```
+
+</TabItem>
+
+<TabItem>
+
 ```bash
 curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/webhooks" \
   -H "Content-Type: application/json" \
@@ -90,12 +108,38 @@ curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branches/{br
   }'
 ```
 
+</TabItem>
+
+</Tabs>
+
 ### Get current configuration
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+View the current webhook configuration under **Auth → Configuration → Webhooks** in the Neon Console.
+
+</TabItem>
+
+<TabItem>
+
+```bash
+neon neon-auth config webhook get
+```
+
+</TabItem>
+
+<TabItem>
 
 ```bash
 curl "https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/webhooks" \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
+
+</TabItem>
+
+</Tabs>
 
 Both endpoints return the configuration in the same format:
 

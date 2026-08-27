@@ -9,7 +9,7 @@ summary: >-
   them via the Neon Console or Neon API. The Organization plugin has partial
   support.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 <FeatureBetaProps feature_name="Managed Better Auth" />
@@ -19,7 +19,7 @@ Managed Better Auth is built on [Better Auth](https://www.better-auth.com/), whi
 <Admonition type="info" title="Plugins are managed by Managed Better Auth">
 Managed Better Auth is a **managed** Better Auth service. You **don’t install or configure Better Auth plugins directly** - instead, Managed Better Auth exposes a supported subset of plugins through the Neon SDK.
 
-For plugins that have Console settings (for example [Organization](/docs/auth/guides/plugins/organization)), open **Auth** > **Plugins** (beta) in the Neon Console, or use the Neon API. Additional plugin options may still arrive over time; see the [Managed Better Auth roadmap](/docs/auth/roadmap).
+For plugins that have Console settings (for example [Organization](/docs/auth/guides/plugins/organization)), open **Auth** > **Plugins** (beta) in the Neon Console, or use the Neon API. From the terminal, [`neon neon-auth config organization update`](/docs/cli/neon-auth#config-organization-update) configures the Organization plugin, and [`neon neon-auth plugins list`](/docs/cli/neon-auth#plugins-list) shows the current plugin configurations. Additional plugin options may still arrive over time; see the [Managed Better Auth roadmap](/docs/auth/roadmap).
 </Admonition>
 
 The following Better Auth plugins are currently supported in Managed Better Auth:

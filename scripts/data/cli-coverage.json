@@ -15,11 +15,15 @@
     "commands": [
       {
         "cmd": "neon neon-auth domain allow-localhost enable",
-        "covers": ["allow_localhost"]
+        "covers": [
+          "allow_localhost"
+        ]
       },
       {
         "cmd": "neon neon-auth domain allow-localhost disable",
-        "covers": ["allow_localhost"]
+        "covers": [
+          "allow_localhost"
+        ]
       }
     ],
     "uncovered": []
@@ -28,7 +32,7 @@
   "updateNeonAuthEmailAndPasswordConfig": "neon neon-auth config email-password update",
   "getNeonAuthEmailProvider": "neon neon-auth config email-provider get",
   "updateNeonAuthEmailProvider": "neon neon-auth config email-provider update",
-  "sendNeonAuthTestEmail": "neon neon-auth config email-provider test",
+  "sendNeonAuthEmailProviderTest": "neon neon-auth config email-provider test",
   "getNeonAuthPluginConfigs": {
     "commands": [
       {
@@ -54,6 +58,7 @@
   "updateNeonAuthUserRole": "neon neon-auth user set-role <user-id>",
   "getCurrentUserOrganizations": "neon orgs list",
   "listProjects": "neon projects list",
+  "listSharedProjects": "neon projects list",
   "createProject": "neon projects create",
   "deleteProject": "neon projects delete",
   "updateProject": "neon projects update",
@@ -70,14 +75,20 @@
     "commands": [
       {
         "cmd": "neon branches rename <id|name> <new-name>",
-        "covers": ["name"]
+        "covers": [
+          "name"
+        ]
       },
       {
         "cmd": "neon branches set-expiration <id|name>",
-        "covers": ["expires_at"]
+        "covers": [
+          "expires_at"
+        ]
       }
     ],
-    "uncovered": ["protected"]
+    "uncovered": [
+      "protected"
+    ]
   },
   "setDefaultProjectBranch": "neon branches set-default <id|name>",
   "deleteProjectBranch": "neon branches delete",
@@ -91,8 +102,42 @@
   "createProjectBranchRole": "neon roles create",
   "deleteProjectBranchRole": "neon roles delete",
   "listProjectOperations": "neon operations list",
+  "getProjectBranchRolePassword": "neon connection-string [branch] get",
+  "listOrgApiKeys": "neon api-keys list",
+  "listApiKeys": "neon api-keys list",
+  "createApiKey": "neon api-keys create",
+  "createOrgApiKey": "neon api-keys create",
+  "revokeOrgApiKey": "neon api-keys revoke <id>",
+  "revokeApiKey": "neon api-keys revoke <id>",
+  "listSnapshots": "neon snapshots list",
+  "createSnapshot": "neon snapshots create",
+  "updateSnapshot": "neon snapshots update",
+  "deleteSnapshot": "neon snapshots delete",
+  "restoreSnapshot": "neon snapshots restore",
+  "finalizeRestoreBranch": "neon snapshots finalize",
+  "getSnapshotSchedule": "neon snapshots schedule get",
+  "setSnapshotSchedule": "neon snapshots schedule set",
+  "createProjectBranchBucket": "neon buckets create",
+  "listProjectBranchBuckets": "neon buckets list",
+  "deleteProjectBranchBucket": "neon buckets delete",
+  "listProjectBranchBucketObjects": "neon buckets object list",
+  "getProjectBranchBucketObject": "neon buckets object get",
+  "deleteProjectBranchBucketObjectsByPrefix": "neon buckets object delete",
+  "deleteProjectBranchBucketObject": "neon buckets object delete",
+  "createProjectBranchDataAPI": "neon data-api create",
+  "getProjectBranchDataAPI": "neon data-api get",
+  "updateProjectBranchDataAPI": "neon data-api update",
+  "deleteProjectBranchDataAPI": "neon data-api delete",
+  "queryProjectBranchLogs": "neon logs query",
+  "listProjectBranchLogFields": "neon logs fields",
+  "listProjectBranchLogFieldValues": "neon logs field-values",
   "getProjectBranchSchema": "neon branches schema-diff [base] [compare]",
   "getConnectionURI": "neon connection-string [branch]",
+  "sendNeonAuthTestEmail": "neon neon-auth config email-provider test",
   "assignOrganizationVPCEndpoint": "neon vpc endpoint assign <vpc_endpoint_id> --org-id <id> --region-id <region_id>",
-  "assignProjectVPCEndpoint": "neon vpc project restrict <vpc_endpoint_id> --project-id <id>"
+  "assignProjectVPCEndpoint": "neon vpc project restrict <vpc_endpoint_id> --project-id <id>",
+  "createProjectBranchFunctionDeployment": "neon functions deploy",
+  "getProjectBranchFunction": "neon functions get",
+  "listProjectBranchFunctions": "neon functions list",
+  "deleteProjectBranchFunction": "neon functions delete"
 }

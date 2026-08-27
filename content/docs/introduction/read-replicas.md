@@ -11,7 +11,7 @@ summary: >-
   Autoscaling and Scale to Zero. Cross-region replicas require logical
   replication to a separate Neon project.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate or duplicate data. Instead, read requests are served from the same storage, as shown in the diagram below. While your read-write queries are directed through your primary compute, read queries can be offloaded to one or more read replicas.
@@ -31,21 +31,33 @@ You can instantly create read replicas for any branch in your Neon project and c
 
 You can create read replicas using the Neon Console, [Neon CLI](/docs/cli), or [Neon API](/docs/reference/api), providing the flexibility required to integrate read replicas into your workflow or CI/CD processes.
 
-From the Neon Console, it's a simple **Add Read Replica** action on a branch.
-
 <Admonition type="note">
 You can add read replicas to a branch as needed to accommodate your workload. The Free plan is limited to a maximum of 3 read replica computes per project.
 </Admonition>
 
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+From the Neon Console, it's a simple **Add Read Replica** action on a branch.
+
 ![Create a read replica](/docs/introduction/create_read_replica.png)
 
-From the CLI or API:
+</TabItem>
 
-<CodeTabs labels={["CLI", "API"]}>
+<TabItem>
+
+Add a read-only compute to a branch with [`neon branches add-compute`](/docs/cli/branches#add-compute):
 
 ```bash
-neon branches add-compute mybranch --type read_only
+neon branches add-compute br-young-fire-15282225 --type read_only
 ```
+
+</TabItem>
+
+<TabItem>
+
+Create a read-only compute with the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint:
 
 ```bash
 curl --request POST \
@@ -63,7 +75,9 @@ curl --request POST \
 ' | jq
 ```
 
-</CodeTabs>
+</TabItem>
+
+</Tabs>
 
 For more details and how to connect to a read replica, see [Create and manage Read Replicas](/docs/guides/read-replica-guide).
 
