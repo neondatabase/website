@@ -31,6 +31,8 @@ seo:
 
 **This first release includes two tools: a Postgres Upgrade Assessment, which reports what will break when you move to a new Postgres major version, and a Migration Assistant, which recommends a migration method and walks you through it.** To try them, sign in at [labs.neon.com](https://labs.neon.com/) with your Neon account, pick a source project and a target Postgres version, and run the assessment.
 
+<YoutubeIframe embedId="J7D_U-YcVfw" isDocPost={false} autoplay muted controls={false} />
+
 <Admonition type="note" title="These tools are still in the experimental phase">
 We do not recommend using the migration tools for production workloads yet. Try them first with a development or test project, or clone the repository and run it locally.
 </Admonition>
@@ -65,6 +67,8 @@ The methods considered are three:
 - [Logical replication](https://neon.com/docs/guides/logical-replication-guide) for larger databases that require minimal downtime.
 
 This last path (logical replication) is the path with the most moving parts and more prone to errors, and the one the assistant automates most:
+
+<YoutubeIframe embedId="5JKcsMI-9AU" isDocPost={false} />
 
 Logical replication does not copy DDL or sequence state. The assistant copies the initial schema before replication, creates the publication and subscription, and enables logical replication on the source if it isn't on yet, which restarts the compute.
 
