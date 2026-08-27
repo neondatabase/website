@@ -23,7 +23,7 @@ Neon nests your backend resources in three containers: an **organization** holds
 
 This page explains how those pieces fit together: what each resource belongs to, what you get a copy of when you branch, and where to read about each product.
 
-![Tree diagram of the Neon object model. An organization contains projects; a project (one region per project) contains branches; a branch is your whole backend and holds five products: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. Lakebase Postgres has four children of its own: computes, roles, databases, and the Data API. The AI Gateway is branch-aware for endpoint, credentials, access, and metering, with a shared, global model catalog and no per-branch models.](/docs/concepts/the-object-model.png 'no-border')
+![Tree diagram of the Neon object model. An organization contains projects; a project (one region per project) contains branches; a branch is your whole backend and holds five products: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. Lakebase Postgres has four children of its own: computes, roles, databases, and the Data API. The AI Gateway is branch-aware for endpoint, credentials, access, and metering, with a shared, global model catalog and no per-branch model configuration.](/docs/concepts/the-object-model.png 'no-border')
 
 
 ## The three containers
@@ -73,7 +73,6 @@ Branching is copy-on-write across the backend, but it isn't one mechanism, and t
 | Managed Better Auth | Nothing separate to provision. Its state (users, sessions, and configuration) lives in the branch's database, so it rides the database branch. Each branch gets its own Auth URL. See [Branching authentication](/docs/auth/branching-authentication). |
 | Object Storage    | Buckets and the objects already in them fork copy-on-write, so nothing is duplicated up front. Availability is limited, so check the [Object Storage](/docs/storage/overview) overview first. See [Buckets](/docs/storage/buckets).                    |
 | Functions         | Branch-aware. Each branch runs its own function at its own URL, against that branch's data, with no redeploy needed.                                                                                                                                   |
-| Data API          | Nothing provisioned per branch. It rides the branch's compute endpoint, so once it's enabled on a database it's reachable on that branch's own endpoint hostname.                                                                                      |
 | AI Gateway        | Branch-aware for endpoint, credentials, access, and metering. The [model catalog](/docs/ai-gateway/models) is shared and global: there is no per-branch model configuration.                                                                           |
 
 That's as far as this page goes on branching. For what branches are for and how to work with them, see [Branching](/docs/introduction/branching) and [Manage branches](/docs/manage/branches).

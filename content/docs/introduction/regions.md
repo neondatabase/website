@@ -39,7 +39,7 @@ Not every product is available in every region yet. Postgres is available in all
 | Product | Availability |
 | --- | --- |
 | Lakebase Postgres | All regions listed above. |
-| Managed Better Auth | Beta. Stores its state in your database, so it's available wherever your database is. |
+| Managed Better Auth | Beta. Runs in the same region as your database. |
 | Object Storage | Beta. AWS US East (Ohio) (`aws-us-east-2`) only. |
 | Functions | Beta. AWS US East (Ohio) (`aws-us-east-2`) only. |
 | AI Gateway | Beta. AWS US East (Ohio) (`aws-us-east-2`) only; requires a paid plan. |
