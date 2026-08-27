@@ -4,7 +4,7 @@ subtitle: 'Practice a real orphan-cleanup job on a Neon branch before running it
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-26T00:00:00.000Z'
-updatedOn: '2026-08-27T18:19:06.335Z'
+updatedOn: '2026-08-27T18:38:44.047Z'
 ---
 
 If you're building an application that handles user files (avatars, invoices, PDF exports, or chat attachments), you run into the same two-part architecture every time: the files live in object storage, and the metadata lives in Postgres. A row in an `attachments` table stores an `object_key`, and that key points to a file in an S3 bucket.
@@ -19,9 +19,9 @@ If you've worked on an app with file uploads for long enough, you've likely ship
 4. **Failed insert:** An upload writes the file to S3, then the database insert fails or is cancelled.
 5. **Bulk admin script:** An operator deletes rows in `psql` and stops before removing the matching objects.
 
-In every case, the row is gone but the file remains. That leftover file is an **orphaned object**: nothing in your database references it, but you still pay to store it. A few orphans are harmless. Months of account deletions, purges, and failed uploads later, orphaned bytes turn into a real line item on your storage bill.
+In every case, the row is deleted but the file remains. That leftover file is an **orphaned object**: nothing in your database references it, but you still pay to store it. A few orphans are harmless. Months of account deletions, purges, and failed uploads later, orphaned bytes turn into a real line item on your storage bill.
 
-The bill is only part of it. If your app handles personal data, a deletion feature isn't finished until the bytes are gone. Under GDPR and similar privacy laws, an erasure request isn't satisfied while the user's files still sit in your bucket, no matter what your database says. Leftover files from deleted accounts are exactly the kind of finding a data audit surfaces, and they're invisible unless you go looking. Drift cuts the other way too: when the S3 delete succeeds but the row survives, your users hit broken downloads instead.
+The bill is only part of it. If your app handles personal data, a deletion feature isn't finished until the bytes are actually deleted. Under GDPR and similar privacy laws, an erasure request isn't satisfied while the user's files still sit in your bucket, no matter what your database says. Leftover files from deleted accounts are exactly the kind of finding a data audit surfaces, and they're invisible unless you go looking. Drift cuts the other way too: when the S3 delete succeeds but the row survives, your users hit broken downloads instead.
 
 The standard fix is a vacuum job: list every object in the bucket, load every `object_key` still referenced by a row, and delete the difference. You can write that job in a few lines of code, but you can't safely run it against production. A `--dry-run` flag lets you review the candidate keys, but it cannot validate real delete calls or protect you from a mistake in how those candidates are interpreted. Running the real thing against production means trusting an untested script with live user files. That leaves you with two unappealing options: run an untested cleanup against production, or leave the drift in place and keep paying for it.
 
@@ -118,7 +118,7 @@ TypeScript needs a `tsconfig.json` for the linter to resolve types correctly. Cr
 }
 ```
 
-The `neon link` command generated a `neon.ts` file in your project root. Replace its contents with the following configuration, which creates a bucket named `uploads` and sets a 7-day TTL on new branches, so rehearsal branches created by `neon checkout` are cleaned up automatically if you forget to delete them:
+The `neon link` command generated a `neon.ts` file in your project root. Replace its contents with the following configuration, which creates a bucket named `uploads` and sets a 7-day TTL on new branches, so any branches created by `neon checkout` are cleaned up automatically if you forget to delete them:
 
 ```typescript filename="neon.ts"
 import { defineConfig } from "@neon/config/v1";
@@ -444,7 +444,7 @@ Create a new branch to test the vacuum job. Run the `neon checkout` command with
 neon checkout vacuum-orphans
 ```
 
-The branch is created from the current state of your production branch, so it inherits the drift you just created. The `neon checkout` command also updates `.env.local` to point at the branch's own bucket and database.
+> When prompted, select **Yes** to create the branch. The branch is created from the current state of your production branch, so it inherits the drift you just created. The `neon checkout` command also updates `.env.local` to point at the branch's own bucket and database.
 
 You can now run the vacuum job against the branch. The `DeleteObject` calls will only affect the branch's bucket, not production. Run the consistency checker first to confirm the drift:
 
@@ -534,13 +534,15 @@ For large buckets, process one `ListObjectsV2` page at a time and use `DeleteObj
 
 ## Promote the verified vacuum to production
 
-Promotion is running the same script you just verified, against your production branch with the concurrent-write safeguards in place:
+Promotion is running the same script you just verified, against your production branch with the concurrent-write safeguards in place. Run the following commands:
 
 ```bash
 neon checkout main # or your production branch name
 npx tsx scripts/vacuum-orphans.ts
 npx tsx scripts/check-consistency.ts
 ```
+
+You should see output like this:
 
 ```text
 Found 3 orphaned object(s)
@@ -555,7 +557,7 @@ dangling rows:         0
 orphaned objects:      0
 ```
 
-You now have a clean production bucket, and the checker proves it. The orphaned bytes are gone, and all the remaining rows point to real objects.
+You now have a clean production bucket, and the checker proves it. The orphaned bytes are deleted, and all the remaining rows point to real objects.
 
 You can now delete the temporary branch by running:
 
@@ -571,7 +573,7 @@ After the vacuum, you can prevent future drift by following these best practices
 
 ### Prefer delete object, then delete row
 
-When product code removes an attachment, delete the object first (or mark the row `pending_delete` and let a sweeper finish). `DeleteObject` is idempotent. If the process crashes after the object is gone but before the row is removed, you get a temporary dangling row for something the user already deleted, not silent orphaned storage. A later vacuum or the same sweeper can reconcile either side.
+When product code removes an attachment, delete the object first (or mark the row `pending_delete` and let a sweeper finish). `DeleteObject` is idempotent. If the process crashes after the object is deleted but before the row is removed, you get a temporary dangling row for something the user already deleted, not silent orphaned storage. A later vacuum or the same sweeper can reconcile either side.
 
 ```typescript
 await s3.send(new DeleteObjectCommand({ Bucket: BUCKET, Key: row.object_key }));
@@ -592,7 +594,7 @@ Account purges, GDPR erasure pipelines, media re-keys, and bulk admin tools all 
 4. Promote only when both counts are zero.
 5. Delete the rehearsal branch.
 
-Because [object branching](/docs/storage/objects#object-branching) is copy-on-write, creating the rehearsal branch is cheap even when the bucket is large.
+Because [object branching](/docs/storage/objects#object-branching) is copy-on-write, creating a branch is fast and cheap.
 
 ## Summary
 
