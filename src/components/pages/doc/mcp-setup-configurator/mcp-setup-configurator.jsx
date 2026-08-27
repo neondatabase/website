@@ -39,7 +39,7 @@ const SCOPE_CATEGORIES = [
   { id: 'endpoints', label: 'Endpoints', description: 'Start, suspend, and manage computes' },
   { id: 'snapshots', label: 'Snapshots', description: 'Create, restore, and schedule snapshots' },
   { id: 'schema', label: 'Schema', description: 'Tables, columns, and schema compare' },
-  { id: 'querying', label: 'Querying', description: 'Run SQL and explain plans' },
+  { id: 'querying', label: 'Querying', description: 'SQL, explain plans, and migrations' },
   { id: 'neon_auth', label: 'Neon Auth', description: 'Provision and configure Auth' },
   { id: 'data_api', label: 'Data API', description: 'Enable, update, and disable the Data API' },
   { id: 'observability', label: 'Observability', description: 'Function and storage logs' },

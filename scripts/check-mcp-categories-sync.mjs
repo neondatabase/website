@@ -3,25 +3,26 @@
  * MCP tool-category drift check.
  *
  * The Neon MCP server owns the list of tool categories (`?category=` values).
- * Two places in this repo restate that list for readers, and both silently rot
- * when the server gains or drops a category:
+ * Three places in this repo restate that list for readers, and all three
+ * silently rot when the server gains or drops a category:
  *
  *   1. SCOPE_CATEGORIES in the config generator
  *      (src/components/pages/doc/mcp-setup-configurator/mcp-setup-configurator.jsx)
  *      — a missing entry means the generator emits a `?category=` URL that
  *      quietly disables tools the user never chose to turn off.
  *   2. The "Available tools" table in content/docs/shared-content/mcp-tools.md.
+ *   3. The `--category` sentence in content/docs/cli/mcp.md.
  *
  * The server advertises its own list at
  * https://mcp.neon.tech/.well-known/oauth-authorization-server under
  * `x-neon-scope-categories`, so drift is detectable rather than guessable.
  *
- *   - Offline (default, PR gate): the generator and the docs table must list the
- *     same categories in the same order. Deterministic, no network. This alone
- *     catches the common case where one of the two gets updated and the other
- *     doesn't.
+ *   - Offline (default, PR gate): the generator, the docs table, and the CLI
+ *     list must list the same categories in the same order. Deterministic, no
+ *     network. This alone catches the common case where one of the three gets
+ *     updated and the others don't.
  *   - --live (daily schedule / manual): additionally fetches the well-known
- *     document and requires both local lists to match the server exactly. This
+ *     document and requires every local list to match the server exactly. This
  *     is what catches a category added to the MCP server that nobody mirrored
  *     here at all.
  *
