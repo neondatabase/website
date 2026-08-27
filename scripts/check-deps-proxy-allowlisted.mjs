@@ -18,7 +18,7 @@
  *
  * How it decides
  * --------------
- * On the JFrog mirror (same-repo CI): HEAD the tarball. 403 is a failure even
+ * On the JFrog mirror (same-repo CI): request one byte of the tarball. 403 is a failure even
  * if a local JSON allowlist names the version — that file cannot make the
  * mirror serve a quarantined tarball.
  * On public npm (fork PRs, which cannot mint JFrog OIDC): fail when the
@@ -146,7 +146,7 @@ export function tarballStatusFromHttp(status) {
 }
 
 /**
- * Same-repo CI talks to JFrog: the tarball status is whether `npm ci` will
+ * Same-repo CI talks to JFrog: tarball status is whether `npm ci` will
  * succeed. Forks only see public npm, which serves new tarballs, so age is
  * the cooldown signal.
  */
@@ -244,6 +244,7 @@ async function fetchPackument(registry, headers, name) {
 }
 
 async function probeTarball(url, headers) {
+  // Range GET returns the same 403 npm ci sees, without downloading the tarball.
   const res = await fetch(url, {
     method: 'GET',
     headers: { ...headers, Range: 'bytes=0-0' },

@@ -69,7 +69,7 @@ jobs:
           node-version: '22'
 
       # No `npm ci` here on purpose: the check only reads registry metadata and
-      # HEADs tarballs, and a too-new dependency is exactly what would make
+      # probes tarballs, and a too-new dependency is exactly what would make
       # `npm ci` fail with a 403.
       - name: Check dependencies are available on the Databricks proxy
         env:
