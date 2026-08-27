@@ -4,7 +4,7 @@ subtitle: Leveraging Realistic Production Data for Robust Testing with Flask and
 author: bobbyiliev
 enableTableOfContents: true
 createdAt: '2024-09-15T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-27T23:52:24.570Z'
 ---
 
 [Flask](https://flask.palletsprojects.com/) is a popular Python micro-framework widely used for building web applications. It includes powerful tools for automated testing, with [pytest](https://docs.pytest.org/) being a preferred option due to its simplicity and effectiveness.
@@ -268,10 +268,10 @@ Once `neon` is installed, you can use it to interact with your Neon database bra
 To create a new branch, use the `neon branches create` command:
 
 ```bash
-neon branches create --project-id PROJECT_ID --parent PARENT_BRANCH_ID --name BRANCH_NAME
+neon branches create --project-id PROJECT_ID --parent PARENT_BRANCH_ID --name BRANCH_NAME --no-secrets
 ```
 
-Replace `PROJECT_ID`, `PARENT_BRANCH_ID`, and `BRANCH_NAME` with the appropriate values for your Neon project. This command will create a new branch based on the specified parent branch.
+Replace `PROJECT_ID`, `PARENT_BRANCH_ID`, and `BRANCH_NAME` with the appropriate values for your Neon project. This command will create a new branch based on the specified parent branch. `--no-secrets` (Neon CLI 4.9.0+) keeps the connection string out of CI logs; you fetch it next with `neon connection-string`.
 
 #### 2. [Listing Branches](/docs/cli/branches#list)
 
