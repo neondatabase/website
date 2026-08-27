@@ -4,7 +4,7 @@ subtitle: 'Learn how to build Full-Stack Cloud Agents using Cloudflare Sandboxes
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-16T00:00:00.000Z'
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-27T18:03:21.795Z'
 ---
 
 ![Cloudflare Sandbox and Neon Branching architecture](/docs/guides/cloudflare_sandbox_neon_branching.png)
@@ -185,11 +185,11 @@ async function createNeonBranch(
     throwOnError: true
   })
 
-  const branch = await neon.branches.createWithCompute(projectId, {
+  const { connectionString } = await neon.branches.createAndConnect(projectId, {
     name: branchName
   })
 
-  return branch.connectionString
+  return connectionString
 }
 
 async function run(sandbox: ReturnType<typeof getSandbox>, cmd: string) {

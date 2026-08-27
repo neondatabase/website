@@ -118,15 +118,10 @@ await neon.projects.transfer({
 
 ### Create a branch with its own compute
 
-If you create a Neon branch through the API, you have to chain two calls:
-
-1. Create the branch
-2. Provision compute for the branch
-
-If you're used to the Neon UI, this is done automatically for you, but over the REST API it's split into two calls, which usually takes both devs and agents a few attempts to get right. `createWithCompute` creates the branch, spins up a read-write endpoint, waits for it to be ready and returns a connection string, all in one call:
+`branches.create` attaches a read-write endpoint by default. `createAndConnect` does the same, waits until the branch is ready, and returns a connection string:
 
 ```ts
-const { data, error } = await neon.branches.createWithCompute(projectId, {
+const { data, error } = await neon.branches.createAndConnect(projectId, {
   name: "preview/pr-123",
   compute: { minCu: 0.25, maxCu: 2 },
 });
