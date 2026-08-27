@@ -8,7 +8,7 @@ summary: >-
   Use this page when choosing between similar components or looking up correct
   prop names and MDX syntax.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T16:06:50.814Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.
@@ -656,6 +656,55 @@ Individual checklist items used within CheckList components.
 - `title` prop is required
 - `href` prop is optional for anchor linking
 - Content is the description text
+
+---
+
+### Faq / FaqItem
+
+The standard, SEO-friendly frequently-asked-questions section for the end of docs and guides. Use it instead of ad-hoc `### question` headings, `**Q:/A:**` text, or `DefinitionList` for FAQs, so every FAQ looks and behaves the same. It emits `FAQPage` schema.org JSON-LD to help search engines and AI agents parse the questions and answers, and it renders each answer with native collapsible `<details>`, so answers stay crawlable and accessible even when collapsed. It also gives every FAQ consistent styling and deep-link anchors.
+
+Add a `## Frequently asked questions` heading above the component (sentence case) so the section appears in the table of contents.
+
+```mdx
+## Frequently asked questions
+
+<Faq>
+
+<FaqItem question="What is a branch?">
+A branch is a copy-on-write clone of your data that you can create from a current or past state.
+</FaqItem>
+
+<FaqItem question="Does creating a branch affect my production database?">
+No. Creating a branch does not increase load on the parent branch or affect its performance.
+</FaqItem>
+
+</Faq>
+```
+
+**Live preview:**
+
+## Frequently asked questions
+
+<Faq>
+
+<FaqItem question="What is a branch?">
+A branch is a copy-on-write clone of your data that you can create from a current or past state.
+</FaqItem>
+
+<FaqItem question="Does creating a branch affect my production database?">
+No. Creating a branch does not increase load on the parent branch or affect its performance.
+</FaqItem>
+
+</Faq>
+
+**Usage Notes:**
+
+- `FaqItem` requires a `question` prop. It renders as an `<h3>` inside the summary and is used verbatim in the JSON-LD.
+- `id` (optional) sets the anchor; it defaults to a slug of the question, so `#your-question` deep links work.
+- `defaultOpen` (optional) renders an item expanded on load.
+- Answers accept full markdown (lists, tables, links, images, code). Keep blank lines around block content.
+- Questions do not appear in the table of contents; the `## Frequently asked questions` heading is the single TOC entry.
+- Put shared blocks like `<NeedHelp/>` after `</Faq>`, not inside an item.
 
 ### CTA (Call to Action)
 

@@ -965,6 +965,30 @@ const componentHandlers = {
   },
 
   /**
+   * Faq -> container for FaqItem entries, extract children
+   * <Faq><FaqItem question="...">answer</FaqItem></Faq>
+   */
+  Faq(node) {
+    return node.children || null;
+  },
+
+  /**
+   * FaqItem -> heading (question) + answer content
+   * <FaqItem question="What is a branch?">A branch is a copy-on-write clone.</FaqItem>
+   */
+  FaqItem(node) {
+    const question = getAttr(node, 'question') || '';
+    const result = [];
+    if (question) {
+      result.push({ type: 'heading', depth: 3, children: [{ type: 'text', value: question }] });
+    }
+    if (node.children?.length > 0) {
+      result.push(...node.children);
+    }
+    return result.length > 0 ? result : null;
+  },
+
+  /**
    * Shared content components with props - load from template files with interpolation
    */
   FeatureBetaProps(node) {

@@ -443,6 +443,20 @@ Connection pool
 </DefinitionList>
 ```
 
+**Faq + FaqItem** — SEO-friendly frequently-asked-questions section for the end of a page. This is the standard FAQ component for both docs and guides. Prefer it over ad-hoc `### question` headings, `**Q:/A:**` text, or `DefinitionList` for FAQs. It emits `FAQPage` schema.org JSON-LD (eligible for Google FAQ rich results) and renders each answer with native `<details>`/`<summary>`, so answers stay crawlable even when collapsed. Add a `## Frequently asked questions` heading above it (sentence case) so the section appears in the table of contents. Answers accept full markdown (lists, tables, links, code); keep blank lines around block content. Place `<NeedHelp/>` after `</Faq>`, not inside an item.
+
+```mdx
+## Frequently asked questions
+
+<Faq>
+
+<FaqItem question="Why must I poll operations after restore?">
+With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
+</FaqItem>
+
+</Faq>
+```
+
 ### Interactive elements
 
 **CheckList + CheckItem** — Interactive checklist saved in browser local storage. Best used alongside Steps.
