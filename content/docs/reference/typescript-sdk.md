@@ -148,21 +148,23 @@ for await (const project of neon.projects.list()) {
 
 Neon mutations return operations that complete in the background. The client-wide `waitForReadiness` default is `false`. `projects.create`, `branches.create`, and both `createAndConnect` workflows turn polling on for that call.
 
-`create` returns the resource. `createAndConnect` also waits, then returns a connection string. The primitive underneath is `neon.operations.waitFor(operations)`.
+`create` returns the resource. `createAndConnect` also waits, then returns `{ branch, endpoint, connectionString }` (or `{ project, connectionString }`). The primitive underneath is `neon.operations.waitFor(operations)`.
+
+Pick one. `create` uses REST field names (`parent_id`). `createAndConnect` uses `{ name?, parentId?, compute? }`.
 
 ```ts
 const { data: branch, error } = await neon.branches.create(projectId, {
   name: "preview",
 });
 if (error) throw error;
-branch; // Branch with a read-write endpoint. No connection string.
+branch; // Branch with a read-write endpoint. No connectionString.
 
 const { data, error: connectError } = await neon.branches.createAndConnect(
   projectId,
-  { name: "preview" }
+  { name: "preview-uri" }
 );
 if (connectError) throw connectError;
-data; // { branch, endpoint, connectionString }
+const { connectionString } = data;
 ```
 
 On any other namespaced mutation, pass `{ waitForReadiness: true }` as the trailing options argument to poll before the call resolves. For raw API calls that return an `operations` array, use [`neon.operations.waitFor`](#neonoperations) instead.
@@ -184,7 +186,7 @@ Create, manage, and share Neon projects. One API call per method; `list` is pagi
 | `list(query?)`                    | [`Paginated`](#lazy-auto-paginated-lists)`<ProjectListItem>` | `query`: `{ search?, org_id?, limit? }`                                                                                                                                                                                   |
 | `get(id)`                         | `Project`                                                    |                                                                                                                                                                                                                           |
 | `create(input?)`                  | `Project`                                                    | Default-branch compute is always attached. No connection string. Readiness polling on by default. `input`: `{ name?, region_id?, pg_version?, org_id?, autoscaling_limit_min_cu?, autoscaling_limit_max_cu?, settings? }` |
-| `createAndConnect(input?, opts?)` | `{ project: Project, connectionString: string }`             | Creates, then polls until ready, and returns a URI. `opts`: `{ pooled? }` (default `true`)                                                                                                                                |
+| `createAndConnect(input?, opts?)` | `{ project: Project, connectionString: string }`             | Creates, then polls until ready. `opts`: `{ pooled? }` (default `true`)                                                                                                                                                   |
 | `update(id, input)`               | `Project`                                                    | `input`: `{ name?, settings? }`                                                                                                                                                                                           |
 | `delete(id)`                      | `Project`                                                    |                                                                                                                                                                                                                           |
 | `recover(id)`                     | `Project`                                                    | Recover a soft-deleted project within its retention window                                                                                                                                                                |
@@ -219,12 +221,14 @@ Branch a project's data and schema. `create` attaches a read-write endpoint by d
 | `list(projectId, query?)`                      | [`Paginated`](#lazy-auto-paginated-lists)`<Branch>`                | `query`: `{ search?, sort_by?, sort_order?, include_deleted? }`                                                                                                                                                                                                     |
 | `get(projectId, branchId)`                     | `Branch`                                                           |                                                                                                                                                                                                                                                                     |
 | `create(projectId, input?)`                    | `Branch`                                                           | Read-write compute on by default; `noCompute: true` skips it. No connection string. Readiness polling on by default. `input`: `{ name?, parent_id?, parent_lsn?, parent_timestamp?, protected?, compute?: { minCu?, maxCu?, suspendTimeoutSeconds? }, noCompute? }` |
-| `createAndConnect(projectId, input?, opts?)`   | `{ branch: Branch, endpoint: Endpoint, connectionString: string }` | Creates, then polls until ready, and returns a URI. `input`: `{ name?, parentId?, compute?: { minCu?, maxCu?, suspendTimeoutSeconds? } }`. `opts`: `{ pooled? }`                                                                                                    |
+| `createAndConnect(projectId, input?, opts?)`   | `{ branch: Branch, endpoint: Endpoint, connectionString: string }` | Creates, then polls until ready. `input`: `{ name?, parentId?, compute?: { minCu?, maxCu?, suspendTimeoutSeconds? } }`. `opts`: `{ pooled? }`                                                                                                                       |
 | `update(projectId, branchId, input)`           | `Branch`                                                           | `input`: `{ name?, protected?, expires_at? }`                                                                                                                                                                                                                       |
 | `delete(projectId, branchId)`                  | `void`                                                             |                                                                                                                                                                                                                                                                     |
 | `getDefault(projectId)`                        | `Branch`                                                           | Resolve the project's default branch by flag, not by name                                                                                                                                                                                                           |
 | `setDefault(projectId, branchId)`              | `Branch`                                                           |                                                                                                                                                                                                                                                                     |
 | `finalizeRestore(projectId, branchId, input?)` | `void`                                                             | Commit a restore previewed with `snapshots.restore({ finalize: false })`                                                                                                                                                                                            |
+
+Three modes: default compute, schema-only (`noCompute: true`), and create-plus-URI.
 
 ```ts
 const { data: prod } = await neon.branches.getDefault(projectId);
@@ -241,11 +245,11 @@ await neon.branches.create(projectId, {
 });
 
 const { data } = await neon.branches.createAndConnect(projectId, {
-  name: "preview/pr-123",
+  name: "preview/pr-123-uri",
   parentId: prod?.id,
   compute: { minCu: 0.25, maxCu: 2 },
 });
-// data: { branch, endpoint, connectionString }
+const { connectionString } = data;
 ```
 
 ## neon.postgres
