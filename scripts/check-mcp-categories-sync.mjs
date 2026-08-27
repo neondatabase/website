@@ -47,6 +47,7 @@ const CONFIGURATOR_PATH = path.join(
   'src/components/pages/doc/mcp-setup-configurator/mcp-setup-configurator.jsx'
 );
 const DOCS_TABLE_PATH = path.join(ROOT, 'content/docs/shared-content/mcp-tools.md');
+const CLI_MCP_PATH = path.join(ROOT, 'content/docs/cli/mcp.md');
 
 const DEFAULT_SERVER = 'https://mcp.neon.tech';
 const WELL_KNOWN_PATH = '/.well-known/oauth-authorization-server';
@@ -87,6 +88,18 @@ export function parseDocsTableCategories(markdown) {
   }
   if (slugs.length === 0) {
     throw new Error('the "Available tools" table listed no `category` slugs');
+  }
+  return slugs;
+}
+
+export function parseCliMcpCategories(markdown) {
+  const match = markdown.match(/Categories are ([^.]+)\./);
+  if (!match) {
+    throw new Error('could not find a "Categories are ..." sentence');
+  }
+  const slugs = [...match[1].matchAll(/`([^`]+)`/g)].map((entry) => entry[1]);
+  if (slugs.length === 0) {
+    throw new Error('the "Categories are ..." sentence listed no `category` slugs');
   }
   return slugs;
 }
@@ -143,6 +156,7 @@ const REMEDIATION = [
   '    src/components/pages/doc/mcp-setup-configurator/mcp-setup-configurator.jsx',
   '    (each entry also needs a user-facing label and description)',
   '  - docs table: the "Available tools" table in content/docs/shared-content/mcp-tools.md',
+  '  - CLI mcp docs: the "Categories are ..." sentence in content/docs/cli/mcp.md',
   'The server list is authoritative:',
   `  curl -s ${DEFAULT_SERVER}${WELL_KNOWN_PATH} | jq '."${CATEGORIES_FIELD}"'`,
 ].join('\n');
@@ -160,11 +174,13 @@ async function main() {
 
   const configurator = parseConfiguratorCategories(fs.readFileSync(CONFIGURATOR_PATH, 'utf8'));
   const docsTable = parseDocsTableCategories(fs.readFileSync(DOCS_TABLE_PATH, 'utf8'));
+  const cliMcp = parseCliMcpCategories(fs.readFileSync(CLI_MCP_PATH, 'utf8'));
 
-  // Offline, the generator is the reference the docs table is compared against;
-  // live, both are compared against the server, which actually owns the list.
   let reference = { label: 'config generator', categories: configurator };
-  const sources = [{ label: 'docs table', categories: docsTable }];
+  const sources = [
+    { label: 'docs table', categories: docsTable },
+    { label: 'CLI mcp docs', categories: cliMcp },
+  ];
 
   if (live) {
     reference = { label: 'MCP server', categories: await fetchServerCategories(serverBase) };

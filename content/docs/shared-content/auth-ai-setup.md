@@ -12,10 +12,10 @@ This command configures the [Neon MCP server](/docs/ai/neon-mcp-server) and inst
 
 1. **Configure Managed Better Auth on your branch (MCP).** After `init`, ask your assistant to enable and configure auth in natural language. The MCP server exposes:
    - `provision_neon_auth`: Enable Managed Better Auth on a branch
-   - `configure_neon_auth`: Set OAuth providers, email, sign-in methods, trusted domains, and more
-   - `get_neon_auth_config`: Read the current configuration
+   - `add_auth_oauth_provider`, `add_auth_trusted_domain`, `update_auth_config`: Change Auth settings
+   - `get_neon_auth_config`: Read the current configuration (secrets redacted)
 
-   See [Neon MCP Server: Managed Better Auth tools](/docs/ai/neon-mcp-server#supported-actions-tools) for details.
+   See [Available tools](/docs/ai/neon-mcp-server#available-tools) (`neon_auth`) for the full set.
 
 2. **Add Managed Better Auth to your application (Agent Skills).** Skills teach your assistant how to install the SDK, environment variables, and routes for your framework. Use the quick start guides on this page, or ask your assistant directly.
 

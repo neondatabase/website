@@ -57,7 +57,7 @@ Run the following in your project directory:
 npx neon@latest init
 ```
 
-Follow the prompts in your browser to authenticate. Once complete, Claude Code will have access to [Neon MCP tools](/docs/ai/neon-mcp-server#supported-actions-tools) and the installed agent skills.
+Follow the prompts in your browser to authenticate. Once complete, Claude Code will have access to [Neon MCP tools](/docs/ai/neon-mcp-server#available-tools) and the installed agent skills.
 
 ## Step 2: Set up the Vercel MCP server
 
