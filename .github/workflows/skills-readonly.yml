@@ -4,8 +4,8 @@ name: Skills Read-Only
 # repos (neondatabase/agent-skills, and per-skill overrides such as
 # neondatabase/neon-for-agent-platforms) via `npm run update:skills`. It must not
 # be hand-edited here. This check re-fetches each skill's file tree from its
-# upstream repo at the ref pinned in config/skills.json (currently `main`) and
-# fails if any vendored file drifts (content differs or a file is missing).
+# upstream repo and fails if any vendored file drifts (content differs
+# or a file is missing).
 # Website-only reference files that have no upstream counterpart are allowed.
 #
 #   - Pull requests touching skills / the sync config / the checker -> block on drift.

@@ -4,7 +4,30 @@ import { describe, it, expect } from 'vitest';
 
 // Use createRequire so we can load the CJS script in an ESM test file
 const require = createRequire(import.meta.url);
-const { filesToPrune, toLocalRelative } = require('./sync-skills.js');
+const skillsConfig = require('../../config/skills.json');
+
+const { filesToPrune, resolveSkillRef, toLocalRelative } = require('./sync-skills.js');
+
+describe('resolveSkillRef', () => {
+  it('returns main when the skill has no ref field', () => {
+    expect(resolveSkillRef({ name: 'neon' })).toBe('main');
+  });
+
+  it('throws when ref is present, including main', () => {
+    expect(() => resolveSkillRef({ name: 'neon', ref: 'main' })).toThrow(/config\/skills\.json/);
+    expect(() => resolveSkillRef({ name: 'neon', ref: '5460c18' })).toThrow(/neon/);
+    expect(() => resolveSkillRef({ name: 'neon', ref: null })).toThrow(/config\/skills\.json/);
+    expect(() => resolveSkillRef({ name: 'neon', ref: undefined })).toThrow(/config\/skills\.json/);
+  });
+});
+
+describe('config/skills.json', () => {
+  it('does not pin skills to a git ref', () => {
+    for (const skill of skillsConfig.skills) {
+      expect(skill, skill.name).not.toHaveProperty('ref');
+    }
+  });
+});
 
 describe('toLocalRelative', () => {
   it('strips the upstream skills/{name}/ prefix', () => {

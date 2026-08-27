@@ -15,10 +15,10 @@
  *   Set GITHUB_TOKEN env var to avoid the 60 req/hr unauthenticated rate limit.
  *   Without a token, syncing 2-3 skills (~5 API calls each) is well within limits.
  *
- * Config: config/skills.json controls which skills are synced and at what ref.
- * Each entry may set an optional "repo" (owner/name) and "path" to source a
- * skill from a different repository than the default neondatabase/agent-skills
- * (e.g. neon-postgres-agent-platforms lives in neondatabase/neon-for-agent-platforms).
+ * Config: config/skills.json controls which skills are synced. Each entry may
+ * set an optional "repo" (owner/name) and "path" to source a skill from a
+ * different repository than the default neondatabase/agent-skills (e.g.
+ * neon-postgres-agent-platforms lives in neondatabase/neon-for-agent-platforms).
  */
 
 const fs = require('fs').promises;
@@ -26,8 +26,20 @@ const path = require('path');
 
 const DEFAULT_REPO = 'neondatabase/agent-skills';
 const DEFAULT_SKILLS_PATH = 'skills';
+const UPSTREAM_REF = 'main';
 const LOCAL_SKILLS_DIR = path.resolve(__dirname, '../../public/docs/ai/skills');
 const CONFIG_PATH = path.resolve(__dirname, '../../config/skills.json');
+
+/** A ref pin would freeze the hosted copy. */
+function resolveSkillRef(skill) {
+  if (Object.hasOwn(skill, 'ref')) {
+    throw new Error(
+      `config/skills.json skill "${skill.name}" has "ref": ${JSON.stringify(skill.ref)}. ` +
+        `Hosted skills always track ${UPSTREAM_REF}; remove the field.`
+    );
+  }
+  return UPSTREAM_REF;
+}
 
 function githubHeaders() {
   const headers = { 'User-Agent': 'neon-website-sync-skills' };
@@ -134,12 +146,9 @@ async function downloadFile(downloadUrl, localRelative, skillName) {
   console.log(`  ✓ ${localRelative}`);
 }
 
-async function syncSkill({
-  name,
-  ref,
-  repo = DEFAULT_REPO,
-  path: skillsPath = DEFAULT_SKILLS_PATH,
-}) {
+async function syncSkill(skill) {
+  const { name, repo = DEFAULT_REPO, path: skillsPath = DEFAULT_SKILLS_PATH } = skill;
+  const ref = resolveSkillRef(skill);
   const apiUrl = `https://api.github.com/repos/${repo}/contents/${skillsPath}/${name}?ref=${ref}`;
   console.log(`\nSyncing ${name} @ ${ref} from ${repo}...`);
 
@@ -153,7 +162,7 @@ async function syncSkill({
   // Refuse to prune against an empty listing: that would delete the whole
   // vendored copy on an upstream rename or a partial API response.
   if (files.length === 0) {
-    console.warn(`  Warning: no files found for skill "${name}" at ref "${ref}"`);
+    console.warn(`  Warning: no files found for skill "${name}" at ${ref}`);
     return;
   }
 
@@ -191,6 +200,10 @@ async function main() {
     process.exit(1);
   }
 
+  for (const skill of config.skills) {
+    resolveSkillRef(skill);
+  }
+
   let skillsToSync = config.skills;
 
   if (skillArg) {
@@ -220,4 +233,4 @@ if (require.main === module) {
 }
 
 // Export pure helpers for testing
-module.exports = { filesToPrune, toLocalRelative };
+module.exports = { filesToPrune, resolveSkillRef, toLocalRelative };

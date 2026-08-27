@@ -11,10 +11,9 @@
  * This check does two things and fails on either:
  *
  *   1. Upstream sync (1:1) — fetches each skill's file tree from its upstream repo
- *      at the ref pinned in config/skills.json (currently `main`, i.e. latest) and
- *      fails if a file that exists upstream is missing locally, its content
- *      differs, or a local file has no upstream counterpart. The vendored copy
- *      must mirror the source repo exactly.
+ *      and fails if a file that exists upstream is missing locally, its
+ *      content differs, or a local file has no upstream counterpart. The vendored
+ *      copy must mirror the source repo exactly.
  *
  *   2. Link integrity — every SKILL.md link that points at a vendored skill file —
  *      a full https://neon.com/docs/ai/skills/… URL or a relative reference link —
@@ -39,9 +38,13 @@
  */
 
 import crypto from 'node:crypto';
+import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+const require = createRequire(import.meta.url);
+const { resolveSkillRef } = require('../src/scripts/sync-skills.js');
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -91,7 +94,10 @@ async function listUpstreamFiles(apiUrl) {
  *  `sha` the GitHub API reports for a file, so equal content => equal sha. */
 function gitBlobSha(buf) {
   const header = Buffer.from(`blob ${buf.length}\u0000`, 'utf8');
-  return crypto.createHash('sha1').update(Buffer.concat([header, buf])).digest('hex');
+  return crypto
+    .createHash('sha1')
+    .update(Buffer.concat([header, buf]))
+    .digest('hex');
 }
 
 /** All files under a local directory, as absolute paths (empty if dir absent). */
@@ -144,12 +150,8 @@ function localTargetForLink(rawLink, skillDir) {
 }
 
 async function checkSkill(skill) {
-  const {
-    name,
-    ref = 'main',
-    repo = DEFAULT_REPO,
-    path: skillsPath = DEFAULT_SKILLS_PATH,
-  } = skill;
+  const { name, repo = DEFAULT_REPO, path: skillsPath = DEFAULT_SKILLS_PATH } = skill;
+  const ref = resolveSkillRef(skill);
 
   const source = `${repo}@${ref}:${skillsPath}/${name}`;
   const apiUrl = `https://api.github.com/repos/${repo}/contents/${skillsPath}/${name}?ref=${encodeURIComponent(
@@ -226,6 +228,9 @@ async function main() {
   }
 
   let skills = Array.isArray(config.skills) ? config.skills : [];
+  for (const skill of skills) {
+    resolveSkillRef(skill);
+  }
   if (skillArg) {
     skills = skills.filter((s) => s.name === skillArg);
     if (skills.length === 0) {
