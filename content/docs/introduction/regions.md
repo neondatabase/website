@@ -32,6 +32,20 @@ Each Neon **project** exists in exactly one region. Your database runs in that r
 
 <AzureRegionsDeprecation/>
 
+## Product availability
+
+Not every product is available in every region yet. Postgres is available in all regions listed above; the newer backend products are in beta and rolling out region by region.
+
+| Product | Availability |
+| --- | --- |
+| Lakebase Postgres | All regions listed above. |
+| Managed Better Auth | Beta. Stores its state in your database, so it's available wherever your database is. |
+| Object Storage | Beta. AWS US East (Ohio) (`aws-us-east-2`) only. |
+| Functions | Beta. AWS US East (Ohio) (`aws-us-east-2`) only. |
+| AI Gateway | Beta. AWS US East (Ohio) (`aws-us-east-2`) only; requires a paid plan. |
+
+For the latest details and usage limits, see each product's overview: [Lakebase Postgres](/docs/postgres/overview), [Managed Better Auth](/docs/auth/overview), [Object Storage](/docs/storage/overview), [Functions](/docs/compute/functions/overview), [AI Gateway](/docs/ai-gateway/overview).
+
 ## Request a region
 
 <RequestForm type="region" />

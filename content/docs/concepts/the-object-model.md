@@ -19,11 +19,11 @@ redirectFrom:
 updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
-Neon nests your resources in three containers: an **organization** holds **projects**, and a project holds **branches**. What sits inside a branch is the part worth reading carefully, because a branch is not just a Postgres database. It's your whole backend. Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway all live inside a branch as peers.
+Neon nests your backend resources in three containers: an **organization** holds **projects**, and a project holds **branches**. A branch is not just a Postgres database — it's your whole backend. Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway all live inside a branch.
 
-This page explains how those pieces relate, so you can reason about scope: what a given resource belongs to, what you get a copy of when you branch, and where the details of each product live.
+This page explains how those pieces fit together: what each resource belongs to, what you get a copy of when you branch, and where to read about each product.
 
-![Tree diagram of the Neon object model. An organization contains projects; a project (one region per project) contains branches; a branch is your whole backend and holds five peer products: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. Lakebase Postgres has four children of its own: computes, roles, databases, and the Data API. The AI Gateway is branch-aware for endpoint, credentials, access, and metering, with a shared, global model catalog and no per-branch models.](/docs/concepts/the-object-model.png 'no-border')
+![Tree diagram of the Neon object model. An organization contains projects; a project (one region per project) contains branches; a branch is your whole backend and holds five products: Lakebase Postgres, Managed Better Auth, Object Storage, Functions, and the AI Gateway. Lakebase Postgres has four children of its own: computes, roles, databases, and the Data API. The AI Gateway is branch-aware for endpoint, credentials, access, and metering, with a shared, global model catalog and no per-branch models.](/docs/concepts/the-object-model.png 'no-border')
 
 
 ## The three containers
@@ -38,23 +38,23 @@ Organizations, projects, and branches nest, and each one answers a different que
 
 ## A branch is the whole backend
 
-The older way to describe a branch was "computes, roles, and databases," which is really a description of Postgres. That's too narrow. A branch holds five products as peers, and Postgres is one of them rather than the definition of the branch.
+The older way to describe a branch was "computes, roles, and databases," which is really a description of Postgres. That's too narrow. A branch holds five products, and Postgres is one of them, not the definition of the branch.
 
-| Product               | What it is                                                                                                                                 |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Lakebase Postgres** | Serverless Postgres, and for most applications the system of record for relational data. See [Lakebase Postgres](/docs/postgres/overview). |
-| **Managed Better Auth** | Managed authentication: sign-in, users, sessions, and auth configuration. See [Managed Better Auth](/docs/auth/overview). |
-| **Object Storage**    | S3-compatible buckets and objects, for files too large to sit in a row. See [Object Storage](/docs/storage/overview).                      |
-| **Functions**         | Long-running serverless compute deployed onto the branch, next to your data. See [Functions](/docs/compute/functions/overview).            |
-| **AI Gateway**        | One Neon credential for reaching many LLM providers, with no provider keys to manage. See [AI Gateway](/docs/ai-gateway/overview).         |
+| Product | What it is |
+| --- | --- |
+| [**Lakebase Postgres**](/docs/postgres/overview) | Serverless Postgres, and for most applications the system of record for relational data. |
+| [**Managed Better Auth**](/docs/auth/overview) | Managed authentication: sign-in, users, sessions, and auth configuration. |
+| [**Object Storage**](/docs/storage/overview) | S3-compatible buckets and objects, for files too large to sit in a row. |
+| [**Functions**](/docs/compute/functions/overview) | Long-running serverless compute deployed onto the branch, next to your data. |
+| [**AI Gateway**](/docs/ai-gateway/overview) | One Neon credential for reaching many LLM providers, with no provider keys to manage. |
 
-Availability differs by product and by region. This page describes the model, not the rollout, so check each product's overview page for its current availability before you plan around it.
+Availability differs by product and by region. See [Product availability](/docs/introduction/regions#product-availability).
 
 For a detailed example that builds one app across all five, see [How a Neon backend fits together](/docs/get-started/backend-overview).
 
 ### What Lakebase Postgres contains
 
-Postgres is the one product with a set of child objects you manage directly:
+Lakebase Postgres contains four objects you manage directly:
 
 - **Computes:** the Postgres processes that serve your queries. A branch has one read-write compute and can have additional [read replicas](/docs/introduction/read-replicas). Compute size, autoscaling, and scale to zero are compute settings. See [Computes](/docs/manage/computes).
 - **Roles:** Postgres roles, which belong to a branch. A role is what you connect as, and what owns database objects. See [Roles](/docs/manage/roles).
@@ -65,11 +65,11 @@ Those four are the object model's view of Postgres. The layer underneath, where 
 
 ## What a branch gives you a copy of
 
-Branching is copy-on-write across the backend, but it isn't one mechanism, and the products don't behave identically. It's worth knowing which row applies to you before you rely on it.
+Branching is copy-on-write across the backend, but it isn't one mechanism, and the products don't behave identically.
 
 | Product           | What a new branch gets                                                                                                                                                                                                                                 |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Lakebase Postgres | A real copy-on-write copy of the parent's data at the moment of branching. Nothing is duplicated up front, and writes on either side stay separate.                                                                                                    |
+| Lakebase Postgres | A copy-on-write clone of the parent's data at the moment of branching. Nothing is duplicated up front, and writes on either side stay separate.                                                                                                    |
 | Managed Better Auth | Nothing separate to provision. Its state (users, sessions, and configuration) lives in the branch's database, so it rides the database branch. Each branch gets its own Auth URL. See [Branching authentication](/docs/auth/branching-authentication). |
 | Object Storage    | Buckets and the objects already in them fork copy-on-write, so nothing is duplicated up front. Availability is limited, so check the [Object Storage](/docs/storage/overview) overview first. See [Buckets](/docs/storage/buckets).                    |
 | Functions         | Branch-aware. Each branch runs its own function at its own URL, against that branch's data, with no redeploy needed.                                                                                                                                   |
