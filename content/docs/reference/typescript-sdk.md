@@ -157,7 +157,6 @@ const { data: branch, error } = await neon.branches.create(projectId, {
   name: "preview",
 });
 if (error) throw error;
-branch; // Branch with a read-write endpoint. No connectionString.
 
 const { data, error: connectError } = await neon.branches.createAndConnect(
   projectId,
@@ -244,11 +243,12 @@ await neon.branches.create(projectId, {
   noCompute: true,
 });
 
-const { data } = await neon.branches.createAndConnect(projectId, {
+const { data, error } = await neon.branches.createAndConnect(projectId, {
   name: "preview/pr-123-uri",
   parentId: prod?.id,
   compute: { minCu: 0.25, maxCu: 2 },
 });
+if (error) throw error;
 const { connectionString } = data;
 ```
 
