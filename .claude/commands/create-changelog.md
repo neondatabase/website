@@ -66,6 +66,23 @@ Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu 
 - **Dropdown sections:** After the main `##` feature sections, include one or more `<details>` blocks with **descriptive titles** that group fixes or improvements by product area (e.g. **Neon API**, **Console**, **Tables page**). Use multiple titled dropdowns, not a single "Fixes & improvements" section.
 - Leave all feature content as Lorem ipsum placeholders. The author fills in real content after the file is created.
 
+## Recurring entries: infrastructure and region updates
+
+Some PRs recur often and don't need a full feature write-up. The most common is a **new-cell or region turn-up** that adds NAT gateway IP addresses and Private Networking VPC endpoint services (updates to `content/docs/introduction/regions.md` and `content/docs/guides/neon-private-networking.md`).
+
+The standing explanation and the instructions for updating an allowlist live in the docs (the **NAT Gateway IP addresses** section in `regions.md` and the Private Networking guide). So the changelog entry should be a single minimal bullet inside a titled `<details>` block, not a full `##` section:
+
+```md
+<details>
+<summary>**Regions and networking**</summary>
+
+- Added NAT gateway IP addresses and Private Networking VPC endpoint service names in AWS US East (Ohio) (`us-east-2`). If you allowlist Neon's outbound IPs, add the new addresses from the [Regions](/docs/introduction/regions#nat-gateway-ip-addresses) page, or outbound connections can fail intermittently. If you use Private Networking in this region, add the new service names from the [Private Networking guide](/docs/guides/neon-private-networking).
+
+</details>
+```
+
+When you write one of these entries, also update the IP and endpoint tables in `regions.md` and `neon-private-networking.md`, and bump the "NAT gateway IP lists last updated" date in `regions.md`. Keep the changelog bullet to one line; the docs carry the detail.
+
 ## After creating
 
 Report:
