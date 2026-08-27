@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Cursor and Neon MCP S
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-20T00:00:00.000Z'
-updatedOn: '2026-08-21T02:09:26.597Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 This guide shows how to use [Cursor](https://cursor.com) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -31,13 +31,13 @@ Make sure you have:
 
 ### Quick Setup (Recommended)
 
-The fastest way to get started is with the [`neon init`](/docs/cli/init) command, which automates OAuth authentication, API key creation, and Cursor configuration:
+The fastest way to get started is with the [`neon init`](/docs/cli/init) command, which sets up the current directory for Neon, including the MCP server for Cursor:
 
 ```bash
 npx neon@latest init
 ```
 
-This command authenticates via OAuth, creates an API key, and configures Cursor to connect to Neon's remote MCP server. API key authentication means **fewer approval prompts** when using MCP tools. Once complete, ask your AI assistant **"Get started with Neon"**.
+Run it in a terminal. It installs agent tooling (either the Neon plugin, or agent skills and the MCP server) and links a Neon project. Once complete, restart Cursor and ask your AI assistant **"Get started with Neon"**.
 
 <Admonition type="tip" title="Cursor Users: One-Click Alternative">
 Cursor offers a deep link for quick OAuth setup:

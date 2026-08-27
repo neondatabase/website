@@ -7,7 +7,7 @@ summary: >-
   with neon dev, and deploy with neon deploy. The function gets a public HTTPS
   URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-08-25T15:36:44.109Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -67,7 +67,7 @@ That's a deployed function in three commands. The rest of this guide builds a mo
 - The latest `neon`, installed and authenticated. Functions commands are new and change often, so upgrade before you start (`npm install -g neon@latest`).
 - Node.js 20 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
 
-`neon init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install the Neon Platform (`neon`) and Neon Functions skills separately with the [Neon CLI](/docs/cli):
+To give your AI coding assistant context for Neon and Functions, install the [agent skills](/docs/ai/agent-skills) with the [Neon CLI](/docs/cli):
 
 ```bash
 neon skills -s neon -s neon-functions
@@ -85,15 +85,15 @@ mkdir my-function && cd my-function
 
 Then link the directory to your Neon project. There are two ways:
 
-**With an AI coding assistant.** Ask it to run `neon init --preview`. The command returns structured JSON instructions for the full setup: MCP server and agent skills, optional template scaffolding, project linking, and env var pull. Sign-in opens a browser window, and the agent pauses while you complete the OAuth step.
+**With an AI coding assistant.** Ask your assistant to set up Neon for the project. Using the skills you installed, it links your project (creating one if you need it) with `neon link` and pulls your environment variables. Sign-in opens a browser window, so complete the OAuth step when prompted.
 
-**By hand.** Run `neon link` and select your project and branch when prompted (or pass `--project-id`). This writes a `.neon` file and pulls the branch's environment variables into a local `.env`.
+**By hand.** Run `neon link` and select your project and branch when prompted (or pass `--project-id`). This writes a `.neon` file and pulls the branch's environment variables into a local `.env` file (or `.env.local` if there's no `.env` yet).
 
 ```bash
 neon link
 ```
 
-To start from a working example instead, run `neon bootstrap`. It scaffolds a starter template and links it. Available templates: Hono API, AI SDK agent, Mastra agent, MCP server, Realtime chat (Next.js + WebSockets), and Realtime counter (TanStack Router + SSE), all on Neon Functions. This guide builds the function by hand.
+To start from a working example instead, run `neon bootstrap`. It scaffolds a starter template, installs dependencies, and links it. Templates include a REST API, GraphQL API, tRPC API, MCP server, realtime chat and counter, AI agents, and Discord, Telegram, and WhatsApp bots. Run `neon bootstrap --list-templates` for the full catalog. This guide builds the function by hand.
 
 ## Define your function
 

@@ -8,7 +8,7 @@ summary: >-
   agents and skip the prompts. Use `neon skills update` to refresh installed
   skills to their latest versions.
 enableTableOfContents: true
-updatedOn: '2026-08-25T15:36:44.109Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 The `skills` command installs [Neon agent skills](/docs/ai/agent-skills) into your coding agents, so tools like Cursor and Claude Code know how to work with Neon's Postgres, AI Gateway, Object Storage, and Functions.
@@ -22,7 +22,7 @@ neon skills
 With no flags it runs an interactive walkthrough: pick the agents, then the skills, then confirm. Pass flags to skip the prompts and script it. Without a terminal, pass `-y` or `--skill` to tell it which skills to install; `--agent` alone isn't enough.
 
 <Callout title="skills vs init">
-[`neon init`](/docs/cli/init) is the broader onboarding command: it sets up the Neon MCP Server along with agent skills and editor config. Use `neon skills` when you only want to install or update agent skills, and [`neon mcp`](/docs/cli/mcp) when you only want the [Neon MCP Server](/docs/ai/neon-mcp-server).
+For the full setup, use [`neon init`](/docs/cli/init). For just one piece: `neon skills` (skills), [`neon plugins`](/docs/cli/plugins) (skills and MCP), or [`neon mcp`](/docs/cli/mcp) (MCP server).
 </Callout>
 
 `skills` runs via `npx`, so it needs Node.js 22.20.0+; older or missing Node stops the command with an upgrade message.

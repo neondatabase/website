@@ -4,7 +4,7 @@ subtitle: 'Leverage Vercel logs and Neon branching to give AI agents the context
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-03-02T00:00:00.000Z'
-updatedOn: '2026-03-05T08:21:55.000Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 AI agents are evolving from simple task executors into integral parts of modern development workflows. As their role expands, giving them the right context and safeguards becomes essential especially when they’re trusted to diagnose and debug issues in production environments.
@@ -49,7 +49,7 @@ You can follow the guide using your own projects.
 
 The Neon MCP server gives Claude Code tools to work with your Neon database, including creating database branches, running SQL queries, and applying migrations. For this scenario, we will use it to validate database schema changes in an isolated environment.
 
-The simplest way to connect Claude Code to Neon is with the `neon init` command. It handles OAuth authentication, API key creation, configures Claude Code to use Neon's remote MCP server, and installs [Neon agent skills](https://github.com/neondatabase/agent-skills) for best practices.
+The simplest way to connect Claude Code to Neon is with the `neon init` command. Run it in a terminal: it installs agent tooling (either the Neon plugin, or [agent skills](https://github.com/neondatabase/agent-skills) and the MCP server) and links a Neon project.
 
 Run the following in your project directory:
 

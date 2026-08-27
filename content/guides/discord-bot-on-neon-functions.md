@@ -4,7 +4,7 @@ subtitle: 'Learn how to build a Discord bot with AI chat and image generation us
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-06-28T00:00:00.000Z'
-updatedOn: '2026-08-06T15:58:59.107Z'
+updatedOn: '2026-08-27T22:59:15.528Z'
 ---
 
 If you've spent any time on Discord, you've run into bots: moderation bots, music players, AI image generators like Midjourney, which started out as a Discord bot before becoming a standalone product. They all do the same basic thing under the hood: listen for a command and respond, whether that's a one-line reply or a fully generated image.
@@ -45,47 +45,10 @@ Create a new directory for your bot and initialize a Neon Functions project.
 mkdir neon-discord-bot && cd neon-discord-bot
 ```
 
-Run the Neon CLI initialization command. This will prompt you to authenticate and link the directory to a Neon project:
+Install the Neon agent skills so AI agents like Claude Code and Cursor have the context to help you build and deploy. This Discord bot uses the **Neon**, **Neon Functions**, and **Neon AI Gateway** skills:
 
 ```bash
-neon init
-```
-
-When asked to choose a template, select **No thanks - continue without scaffolding**, since you'll be writing the code from scratch. During setup, install the Neon MCP server and extensions when prompted. The Neon agent skill will be automatically added to your project, enabling AI agents to assist with development tasks such as code generation, testing, and deployment.
-
-```bash
-$ neon init
-
-  ██╗  ██╗██████╗  ██████╗ ██╗  ██╗
-  ███╗ ██║██╔═══╝ ██╔═══██╗███╗ ██║
-  ████╗██║██████╗ ██║   ██║████╗██║
-  ██╔████║██╔═══╝ ██║   ██║██╔████║
-  ██║╚███║██████╗ ╚██████╔╝██║╚███║
-  ╚═╝ ╚══╝╚═════╝  ╚═════╝ ╚═╝ ╚══╝
-
-  Let's get your project set up with Neon. We'll install the MCP server, agent skills, and IDE extension, then connect your app to
-  a database.
-
-  │
-  ◇  Configuration checked ✓
-  │
-  ◆  Which Neon features would you like to enable for this project?
-  │  Database
-
-  Neon editor extension already installed ✓
-  │
-  ◆  Configure VS Code for Neon:
-  │  ● Install with defaults (MCP server (global), agent skills (project))
-  │  ○ Customize installation
-  │  ○ Configure a different editor
-
-  Agent skills installed ✓
-```
-
-During initialization, the **Neon Postgres** skills are installed automatically. You'll also need the **Neon Functions** and **Neon AI Gateway** skills so AI agents have the context to help you build and deploy your Discord bot. Install them with the following command:
-
-```bash
-npx skills add neondatabase/agent-skills --skill neon-ai-gateway --skill neon-functions
+neon skills -s neon -s neon-functions -s neon-ai-gateway
 ```
 
 Next, install the required dependencies:

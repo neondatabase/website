@@ -21,7 +21,7 @@ neon plugins
 With no flags it runs an interactive walkthrough: pick the agents, then confirm. Pass flags to skip the prompts and script it. Without a terminal, pass `-y` to install into detected agents, or name agents with `--agent`.
 
 <Callout title="plugins vs skills vs mcp">
-Use `neon plugins` for agents that support plugin marketplaces, where the plugin bundles skills and MCP access together. Use [`neon skills`](/docs/cli/skills) to install [agent skills](/docs/ai/agent-skills) on their own, and [`neon mcp`](/docs/cli/mcp) to set up just the [Neon MCP Server](/docs/ai/neon-mcp-server). [`neon init`](/docs/cli/init) is the broader onboarding command that sets these up together.
+Use [`neon plugins`](/docs/cli/plugins) for agents that support plugin marketplaces, where the plugin bundles skills and MCP in one. For the full setup, use [`neon init`](/docs/cli/init); for skills or the MCP server on their own, use [`neon skills`](/docs/cli/skills) or [`neon mcp`](/docs/cli/mcp).
 </Callout>
 
 `plugins` runs via `npx`, so it needs Node.js; without it the command stops with a message to install Node.js and retry.

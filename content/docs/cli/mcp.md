@@ -15,7 +15,7 @@ The `mcp` command installs the [Neon MCP Server](/docs/ai/neon-mcp-server) into 
 Run `neon mcp` with no flags for an interactive walkthrough: it asks whether to write global or project-level config, which detected agents to install into, and whether to authenticate with a minted API key or OAuth, then shows you what it will do before writing anything. Pass flags to skip the prompts and run it non-interactively, which is what you want in scripts or a headless environment.
 
 <Callout title="mcp vs init">
-[`neon init`](/docs/cli/init) is the broader onboarding command: it sets up the MCP Server along with agent skills and editor config. Use `neon mcp` when you only want to install the Neon MCP Server into your agents, or [`neon skills`](/docs/cli/skills) when you only want to install agent skills.
+For the full setup, use [`neon init`](/docs/cli/init). For just one piece: [`neon skills`](/docs/cli/skills) (skills), [`neon plugins`](/docs/cli/plugins) (skills and MCP), or `neon mcp` (MCP server).
 </Callout>
 
 ## Usage

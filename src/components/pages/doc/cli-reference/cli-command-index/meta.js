@@ -14,7 +14,7 @@
 const META = {
   auth: { desc: 'Browser OAuth; stores credentials locally.', examples: ['neon auth'] },
   init: {
-    desc: 'Wire up MCP, agent skills, and editor (Cursor/VS Code/Claude).',
+    desc: 'Set up this directory for Neon: agent tooling, a linked project, and neon.ts.',
     examples: ['npx neon@latest init'],
   },
   link: {

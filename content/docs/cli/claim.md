@@ -13,7 +13,7 @@ The `claim` command creates a temporary Neon project when there is no Neon accou
 
 If `neon claim` is not a command, or `neon claim --help` does not list `create`, install the latest CLI (`npm i -g neon@latest`) or use the HTTP flow in [Claimable Neon](/docs/reference/claimable-neon).
 
-Do not pass `--api-key` or `--profile`. Those are refused. `neon auth` and `neon init --agent` need a human Neon account; use this command instead when there is none.
+Do not pass `--api-key` or `--profile`. Those are refused. `neon auth` and `neon init` need a Neon account; use this command instead when there is none.
 
 Start in the browser at [neon.com/claimable-neon](/claimable-neon), or give an agent [`auth.md`](https://neon.com/auth.md).
 
