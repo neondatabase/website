@@ -16,7 +16,7 @@ Tools are grouped into categories. Use the `?category=` URL parameter to restric
 | SQL (`querying`)                  | Execute queries and transactions; apply schema changes on a temporary branch; run the same diagnostics as `neon inspect db` |
 | Managed Better Auth (`neon_auth`) | Provision Auth; manage OAuth providers, trusted domains, and users                                                          |
 | Neon Data API (`data_api`)        | Enable, update, and disable the Data API for a branch                                                                       |
-| Observability (`observability`)   | Query function and storage logs; inspect AI Gateway usage                                                                   |
+| Observability (`observability`)   | Query function and storage logs; check AI Gateway availability                                                              |
 | Documentation (`docs`)            | Look up Neon documentation from within your assistant (no OAuth required)                                                   |
 | Functions (`functions`)           | List, deploy, update, and delete Neon Functions                                                                             |
 | Object storage (`storage`)        | Manage buckets and objects; create presigned URLs                                                                           |
