@@ -10,8 +10,9 @@ summary: >-
   branch. Branching is copy-on-write across the backend, though the semantics
   differ by product: Postgres forks its data, Managed Better Auth rides the
   database
-  branch, Functions and the AI Gateway are branch-aware for their endpoints and
-  credentials, and the AI Gateway model catalog stays global.
+  branch, Functions are branch-aware with their own URLs, and the AI Gateway is
+  branch-aware for its endpoint and credentials while its model catalog stays
+  global.
 enableTableOfContents: true
 redirectFrom:
   - /docs/manage/overview
