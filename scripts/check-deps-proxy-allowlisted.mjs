@@ -235,14 +235,22 @@ async function fetchPackument(registry, headers, name) {
   return res.json();
 }
 
-async function probeTarball(url, headers) {
-  // Range GET returns the same 403 npm ci sees, without downloading the tarball.
+export async function probeTarball(url, headers) {
+  // Range GET returns the same 403 npm ci sees. Cancel the body: some registries
+  // ignore Range and would otherwise stream the whole tarball until the job hangs.
+  const controller = new AbortController();
   const res = await fetch(url, {
     method: 'GET',
     headers: { ...headers, Range: 'bytes=0-0' },
     redirect: 'follow',
+    signal: controller.signal,
   });
-  return tarballStatusFromHttp(res.status);
+  const status = tarballStatusFromHttp(res.status);
+  controller.abort();
+  if (res.body) {
+    await res.body.cancel().catch(() => {});
+  }
+  return status;
 }
 
 /** Resolve tasks with bounded concurrency, preserving input order. */
@@ -278,18 +286,18 @@ function loadBaseDepMap() {
   return null;
 }
 
-function formatFailure(v) {
+export function formatFailure(v, cooldownDays = COOLDOWN_DAYS) {
   const id = `${v.name}@${v.version}`;
   if (v.status === 'blocked' && v.ageDays != null) {
-    return `  ✗ ${id} — proxy returned 403; published ${v.ageDays.toFixed(1)}d ago (< ${COOLDOWN_DAYS}d cooldown).`;
+    return `  ✗ ${id} — proxy returned 403; published ${v.ageDays.toFixed(1)}d ago (< ${cooldownDays}d cooldown).`;
   }
   if (v.status === 'blocked') {
     return `  ✗ ${id} — tarball is forbidden on the Databricks proxy.`;
   }
   if (v.status === 'immature') {
-    return `  ✗ ${id} — published ${v.ageDays.toFixed(1)}d ago (< ${COOLDOWN_DAYS}d cooldown); blocked by the Databricks proxy.`;
+    return `  ✗ ${id} — published ${v.ageDays.toFixed(1)}d ago (< ${cooldownDays}d cooldown); too new for the Databricks npm mirror.`;
   }
-  return `  ✗ ${id} — cannot confirm it is available on the Databricks proxy.`;
+  return `  ✗ ${id} — cannot confirm it is available on the Databricks npm mirror.`;
 }
 
 async function main() {

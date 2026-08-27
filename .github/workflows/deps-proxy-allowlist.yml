@@ -5,10 +5,8 @@ name: Dependencies ↔ Databricks proxy
 # ("immature package" cooldown). A lockfile that pins a too-new version fails
 # `npm ci` deep in every build with an opaque 403.
 #
-# This gate runs first and fails fast with a clear message naming the offending
-# dependency, so a contributor who bumps a package before it clears the cooldown
-# learns exactly what to do (pin an older version / refresh the lockfile) instead
-# of chasing a 403 in an unrelated job. See scripts/check-deps-proxy-allowlisted.mjs.
+# Names the quarantined package here instead of failing later inside an unrelated
+# `npm ci`. See scripts/check-deps-proxy-allowlisted.mjs.
 #
 # Run on every PR so the required check also reports on content-only changes.
 # Forks cannot mint JFrog OIDC, so they age-check against public npm instead.

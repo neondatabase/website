@@ -1,3 +1,6 @@
+// @vitest-environment node
+import http from 'node:http';
+
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -5,8 +8,10 @@ import {
   collectRegistryDeps,
   decideAvailability,
   fallbackTarballUrl,
+  formatFailure,
   nameFromPackageKey,
   newlyIntroduced,
+  probeTarball,
   tarballStatusFromHttp,
   usesTarballGate,
 } from './check-deps-proxy-allowlisted.mjs';
@@ -153,5 +158,53 @@ describe('usesTarballGate', () => {
   it('is true for the Databricks JFrog npm API and false for public npm', () => {
     expect(usesTarballGate('https://databricks.jfrog.io/artifactory/api/npm/db-npm/')).toBe(true);
     expect(usesTarballGate('https://registry.npmjs.org/')).toBe(false);
+  });
+});
+
+describe('formatFailure', () => {
+  it('does not claim a fork age check contacted the proxy', () => {
+    expect(
+      formatFailure({ name: 'next', version: '16.3.3', status: 'immature', ageDays: 2 }, 7)
+    ).toBe(
+      '  ✗ next@16.3.3 — published 2.0d ago (< 7d cooldown); too new for the Databricks npm mirror.'
+    );
+  });
+
+  it('names a 403 when the tarball probe is the signal', () => {
+    expect(
+      formatFailure({ name: 'next', version: '16.3.3', status: 'blocked', ageDays: 2 }, 7)
+    ).toBe('  ✗ next@16.3.3 — proxy returned 403; published 2.0d ago (< 7d cooldown).');
+  });
+});
+
+describe('probeTarball', () => {
+  it('returns after status when the server ignores Range and streams a large body', async () => {
+    const server = http.createServer((req, res) => {
+      res.writeHead(200, {
+        'Content-Type': 'application/octet-stream',
+        'Content-Length': 50 * 1024 * 1024,
+      });
+      const chunk = Buffer.alloc(64 * 1024, 0x78);
+      const write = () => {
+        if (!res.writableEnded && res.writable) res.write(chunk);
+      };
+      write();
+      const timer = setInterval(write, 20);
+      const stop = () => clearInterval(timer);
+      req.on('close', stop);
+      res.on('close', stop);
+    });
+    await new Promise((resolve) => {
+      server.listen(0, '127.0.0.1', resolve);
+    });
+    const { port } = server.address();
+    const started = Date.now();
+    try {
+      const status = await probeTarball(`http://127.0.0.1:${port}/next-16.3.3.tgz`, {});
+      expect(status).toBe('ok');
+      expect(Date.now() - started).toBeLessThan(2000);
+    } finally {
+      await new Promise((resolve) => server.close(resolve));
+    }
   });
 });
