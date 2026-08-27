@@ -586,7 +586,6 @@ Use `/simple-content` for edits to existing pages, shorter additions, or when yo
 
 | Command             | When to use                                                                                        |
 | ------------------- | -------------------------------------------------------------------------------------------------- |
-| `/create-pr-report` | Weekly report of merged PRs across monitored repos; supports PR deep dives and follow-on workflows |
 | `/create-changelog` | Generate next Friday's changelog draft (or a specific date) with placeholder content               |
 | `/post-changelog`   | Post the changelog preview to Lakebase Slack channels for review. Databricks employees only.       |
 | `/update-roadmap`   | Sync the introduction roadmap with recent changelog entries                                        |
