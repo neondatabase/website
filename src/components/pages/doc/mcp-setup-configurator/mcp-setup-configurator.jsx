@@ -42,7 +42,7 @@ const SCOPE_CATEGORIES = [
   { id: 'querying', label: 'Querying', description: 'SQL, explain plans, and migrations' },
   { id: 'neon_auth', label: 'Neon Auth', description: 'Provision and configure Auth' },
   { id: 'data_api', label: 'Data API', description: 'Enable, update, and disable the Data API' },
-  { id: 'observability', label: 'Observability', description: 'Function and storage logs' },
+  { id: 'observability', label: 'Observability', description: 'Function logs, storage logs, and AI Gateway' },
   { id: 'docs', label: 'Docs', description: 'Search and fetch docs' },
   { id: 'functions', label: 'Functions', description: 'List, deploy, and update functions' },
   { id: 'storage', label: 'Storage', description: 'Buckets, objects, and presigned URLs' },

@@ -8,7 +8,7 @@ Tools are grouped into categories. Use the `?category=` URL parameter to restric
 
 | Category                          | What it enables                                                                                                             |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
-| Project management (`projects`)   | List, create, describe, and delete projects and organizations                                                               |
+| Project management (`projects`)   | List, create, describe, and delete projects; list organizations                                                             |
 | Branch management (`branches`)    | Create, reset, and delete branches; manage Postgres roles and databases                                                     |
 | Compute endpoints (`endpoints`)   | List, create, start, suspend, and restart branch computes                                                                   |
 | Snapshots (`snapshots`)           | Create, restore, and schedule snapshots                                                                                     |
@@ -16,7 +16,7 @@ Tools are grouped into categories. Use the `?category=` URL parameter to restric
 | SQL (`querying`)                  | Execute queries and transactions; apply schema changes on a temporary branch; run the same diagnostics as `neon inspect db` |
 | Managed Better Auth (`neon_auth`) | Provision Auth; manage OAuth providers, trusted domains, and users                                                          |
 | Neon Data API (`data_api`)        | Enable, update, and disable the Data API for a branch                                                                       |
-| Observability (`observability`)   | Query logs from your serverless functions and storage                                                                       |
+| Observability (`observability`)   | Query function and storage logs; inspect AI Gateway usage                                                                   |
 | Documentation (`docs`)            | Look up Neon documentation from within your assistant (no OAuth required)                                                   |
 | Functions (`functions`)           | List, deploy, update, and delete Neon Functions                                                                             |
 | Object storage (`storage`)        | Manage buckets and objects; create presigned URLs                                                                           |
