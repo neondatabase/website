@@ -16,14 +16,11 @@
  * one: it names the offending dependency and tells the contributor to pin an
  * older version.
  *
- * How it decides
- * --------------
- * On the JFrog mirror (same-repo CI): request one byte of the tarball. 403 is a failure even
- * if a local JSON allowlist names the version — that file cannot make the
- * mirror serve a quarantined tarball.
- * On public npm (fork PRs, which cannot mint JFrog OIDC): fail when the
- * packument publish time is missing or younger than COOLDOWN_DAYS. Public npm
- * serves new tarballs, so age is the only cooldown signal a fork can see.
+ * Why the signals differ
+ * ----------------------
+ * Same-repo CI can probe JFrog tarballs directly. Forks cannot mint JFrog
+ * credentials, so they use public npm publish age as the closest available
+ * cooldown signal.
  *
  * Scope: to stay fast and to target the "bumped a dep too aggressively" case,
  * only versions newly introduced relative to the base branch are checked. When
@@ -130,7 +127,6 @@ export function classify({ name, version }, timeMap, now, cooldownMs = COOLDOWN_
   };
 }
 
-/** npm tarball path: unscoped `foo/-/foo-1.0.0.tgz`, scoped `@scope/foo/-/foo-1.0.0.tgz`. */
 export function fallbackTarballUrl(registry, name, version) {
   const encoded = name.startsWith('@')
     ? `@${encodeURIComponent(name.slice(1))}`
@@ -145,11 +141,7 @@ export function tarballStatusFromHttp(status) {
   return 'unknown';
 }
 
-/**
- * Same-repo CI talks to JFrog: tarball status is whether `npm ci` will
- * succeed. Forks only see public npm, which serves new tarballs, so age is
- * the cooldown signal.
- */
+/** Forks use publish age because they cannot access JFrog's tarball gate. */
 export function decideAvailability({ tarballStatus, ageStatus, useTarballGate }) {
   if (useTarballGate) {
     if (tarballStatus === 'ok') return 'ok';
