@@ -35,7 +35,7 @@ const SERVICE_ITEMS = [
     title: 'Storage',
     description: 'S3-compatible object storage that branches with your projects.',
     videoBase: 'storage',
-    version: '20260813-3',
+    version: '20260827',
     aspectRatio: 'aspect-590/680',
     width: 590,
     height: 680,

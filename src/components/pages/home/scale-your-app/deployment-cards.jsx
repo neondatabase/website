@@ -37,26 +37,32 @@ const CARD_POSITIONS = [
   [1824, 348],
 ];
 
-const UNIQUE_CARD_NAMES = [
-  'vercel',
-  'anything',
-  'atoms',
-  'encore',
-  'laravel',
-  'qwikbuild',
-  'replit',
-  'retool',
-  'riff',
-  'same',
-  'specific',
-  'v0',
+const CARD_NAMES = [
+  'same-new',
+  'zite-com',
   'vapi',
-  'xpander',
-  'zite',
-  'strapi',
+  'vercel',
+  'qwikbuild-com',
+  'specific-dev',
+  'riff-ai',
+  'xpander-ai',
+  'atoms-dev',
+  'layers-com',
+  'encore-dev',
+  'cognee-ai',
+  'konghq-com',
+  'glideapps-com',
+  'retool-com',
+  'anything-com',
+  'laravel-com',
+  'replit-com',
+  'netlify-com',
+  'v0-app',
+  'strapi-io',
 ];
 
-const CARD_NAMES = [...UNIQUE_CARD_NAMES.slice(-5), ...UNIQUE_CARD_NAMES];
+const CARD_HOVER_LIFTS = [44, 38, 30, 24, 20];
+const DEFAULT_CARD_HOVER_LIFT = 20;
 const CARD_COUNT = CARD_POSITIONS.length;
 
 const getVisibleCardCount = (elapsed) => {
@@ -140,21 +146,26 @@ const DeploymentCards = () => {
     >
       <div className="absolute top-0 left-0 aspect-[2154/916] w-[112.1875%] origin-top-left lg:top-10 lg:left-1/2 lg:min-w-[1120px] lg:-translate-x-3/5 md:min-w-[960px]">
         {CARD_POSITIONS.map(([left, top], index) => (
-          <Image
-            className="absolute h-auto w-[15.3203%] max-w-[330px] select-none"
+          <div
+            className="group pointer-events-auto absolute aspect-[55/42] w-[15.3203%] max-w-[330px]"
             style={{
               left: `${(left / SCENE_WIDTH) * 100}%`,
               top: `${(top / SCENE_HEIGHT) * 100}%`,
               visibility: index < visibleCardCount ? 'visible' : 'hidden',
+              '--card-hover-lift': `-${CARD_HOVER_LIFTS[index] ?? DEFAULT_CARD_HOVER_LIFT}%`,
             }}
-            src={`${IMAGE_ROOT}/deploy-${CARD_NAMES[index]}.jpg`}
-            width={660}
-            height={504}
-            quality={90}
-            sizes="(max-width: 1023px) 172px, (max-width: 1919px) 17.2vw, 330px"
-            alt=""
-            key={`${CARD_NAMES[index]}-${index}`}
-          />
+            key={CARD_NAMES[index]}
+          >
+            <Image
+              className="pointer-events-none h-full w-full select-none motion-safe:transition-transform motion-safe:duration-150 motion-safe:ease-[cubic-bezier(0.16,0.68,0.88,0.54)] motion-safe:group-hover:translate-y-[var(--card-hover-lift)]"
+              src={`${IMAGE_ROOT}/deploy-${CARD_NAMES[index]}.jpg`}
+              width={660}
+              height={504}
+              quality={90}
+              sizes="(max-width: 1023px) 172px, (max-width: 1919px) 17.2vw, 330px"
+              alt=""
+            />
+          </div>
         ))}
       </div>
     </div>
