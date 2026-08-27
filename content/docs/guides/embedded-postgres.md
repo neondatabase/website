@@ -11,7 +11,7 @@ summary: >-
   quota enforcement, and usage monitoring via the metrics endpoint.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-08-07T17:19:40.308Z'
+updatedOn: '2026-08-27T15:07:41.821Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
@@ -35,7 +35,7 @@ When integrating Neon into your platform, we strongly recommend a **project-per-
 
 ### What is a project?
 
-In Neon, resources such as branches, databases, roles, and computes are organized within a Neon [project](/docs/manage/overview). When a user signs up with Neon directly, they start by creating a project, which includes a default branch, database, role, and compute instance. We recommend the same approach for your integration.
+In Neon, resources such as branches, databases, roles, and computes are organized within a Neon [project](/docs/concepts/the-object-model). When a user signs up with Neon directly, they start by creating a project, which includes a default branch, database, role, and compute instance. We recommend the same approach for your integration.
 
 ### Why project-per-user?
 

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <rect x="1" y="1" width="898" height="478" rx="14" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="24" y="32" font-size="15" font-weight="700" fill="#111827">The Neon object model: Organization &gt; Project &gt; Branch</text>
+  <text x="876" y="32" font-size="10" font-weight="700" letter-spacing="0.5" fill="#b45309" text-anchor="end">PLACEHOLDER: DESIGN TO REPLACE</text>
+
+  <!-- Organization -->
+  <rect x="24" y="48" width="852" height="376" rx="12" fill="#f9fafb" stroke="#d1d5db"/>
+  <text x="40" y="70" font-size="10" font-weight="700" letter-spacing="0.5" fill="#6b7280">ORGANIZATION</text>
+
+  <!-- Project -->
+  <rect x="40" y="80" width="820" height="330" rx="10" fill="#ffffff" stroke="#d1d5db"/>
+  <text x="56" y="102" font-size="10" font-weight="700" letter-spacing="0.5" fill="#6b7280">PROJECT (ONE REGION)</text>
+
+  <!-- Branch -->
+  <rect x="56" y="112" width="788" height="286" rx="10" fill="#ffffff" stroke="#9ca3af" stroke-width="1.5"/>
+  <text x="72" y="134" font-size="11" font-weight="700" letter-spacing="0.5" fill="#047857">BRANCH = YOUR WHOLE BACKEND</text>
+  <text x="72" y="150" font-size="10" fill="#6b7280">The five products below are peers inside a branch. None of them defines the branch.</text>
+
+  <!-- peer 1: Lakebase Postgres -->
+  <rect x="72" y="160" width="140" height="104" rx="8" fill="#ffffff" stroke="#9ca3af"/>
+  <text x="82" y="182" font-size="11.5" font-weight="600" fill="#111827">Lakebase Postgres</text>
+  <line x1="82" y1="190" x2="202" y2="190" stroke="#e5e7eb"/>
+  <text x="82" y="205" font-size="10" fill="#4b5563">Serverless Postgres,</text>
+  <text x="82" y="218" font-size="10" fill="#4b5563">your system of record</text>
+  <text x="82" y="231" font-size="10" fill="#4b5563">for relational data.</text>
+  <line x1="142" y1="264" x2="142" y2="276" stroke="#9ca3af" stroke-width="1.5"/>
+
+  <!-- peer 1 children -->
+  <rect x="72" y="276" width="140" height="110" rx="8" fill="#f9fafb" stroke="#d1d5db" stroke-dasharray="5 4"/>
+  <text x="82" y="292" font-size="9" font-weight="700" letter-spacing="0.5" fill="#6b7280">ITS CHILDREN</text>
+  <rect x="82" y="300" width="120" height="17" rx="5" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="142" y="312" font-size="9.5" fill="#374151" text-anchor="middle">computes</text>
+  <rect x="82" y="320" width="120" height="17" rx="5" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="142" y="332" font-size="9.5" fill="#374151" text-anchor="middle">roles</text>
+  <rect x="82" y="340" width="120" height="17" rx="5" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="142" y="352" font-size="9.5" fill="#374151" text-anchor="middle">databases</text>
+  <rect x="82" y="360" width="120" height="17" rx="5" fill="#ffffff" stroke="#e5e7eb"/>
+  <text x="142" y="372" font-size="9.5" fill="#374151" text-anchor="middle">Data API</text>
+
+  <!-- peer 2: Better Auth -->
+  <rect x="226" y="160" width="140" height="104" rx="8" fill="#ffffff" stroke="#9ca3af"/>
+  <text x="236" y="182" font-size="11.5" font-weight="600" fill="#111827">Better Auth</text>
+  <line x1="236" y1="190" x2="356" y2="190" stroke="#e5e7eb"/>
+  <text x="236" y="205" font-size="10" fill="#4b5563">Managed sign-in, users,</text>
+  <text x="236" y="218" font-size="10" fill="#4b5563">sessions, and auth</text>
+  <text x="236" y="231" font-size="10" fill="#4b5563">configuration.</text>
+  <text x="236" y="292" font-size="9.5" fill="#6b7280">Rides the database</text>
+  <text x="236" y="305" font-size="9.5" fill="#6b7280">branch: its state lives</text>
+  <text x="236" y="318" font-size="9.5" fill="#6b7280">in the database.</text>
+
+  <!-- peer 3: Object Storage -->
+  <rect x="380" y="160" width="140" height="104" rx="8" fill="#ffffff" stroke="#9ca3af"/>
+  <text x="390" y="182" font-size="11.5" font-weight="600" fill="#111827">Object Storage</text>
+  <line x1="390" y1="190" x2="510" y2="190" stroke="#e5e7eb"/>
+  <text x="390" y="205" font-size="10" fill="#4b5563">S3-compatible buckets</text>
+  <text x="390" y="218" font-size="10" fill="#4b5563">and objects for files</text>
+  <text x="390" y="231" font-size="10" fill="#4b5563">too big for a row.</text>
+  <text x="390" y="292" font-size="9.5" fill="#6b7280">Copy-on-write forks of</text>
+  <text x="390" y="305" font-size="9.5" fill="#6b7280">buckets. See the</text>
+  <text x="390" y="318" font-size="9.5" fill="#6b7280">availability notes.</text>
+
+  <!-- peer 4: Functions -->
+  <rect x="534" y="160" width="140" height="104" rx="8" fill="#ffffff" stroke="#9ca3af"/>
+  <text x="544" y="182" font-size="11.5" font-weight="600" fill="#111827">Functions</text>
+  <line x1="544" y1="190" x2="664" y2="190" stroke="#e5e7eb"/>
+  <text x="544" y="205" font-size="10" fill="#4b5563">Long-running serverless</text>
+  <text x="544" y="218" font-size="10" fill="#4b5563">compute deployed onto</text>
+  <text x="544" y="231" font-size="10" fill="#4b5563">the branch.</text>
+  <text x="544" y="292" font-size="9.5" fill="#6b7280">Branch-aware: each</text>
+  <text x="544" y="305" font-size="9.5" fill="#6b7280">branch gets its own URL,</text>
+  <text x="544" y="318" font-size="9.5" fill="#6b7280">no redeploy needed.</text>
+
+  <!-- peer 5: AI Gateway -->
+  <rect x="688" y="160" width="140" height="104" rx="8" fill="#ffffff" stroke="#9ca3af"/>
+  <text x="698" y="182" font-size="11.5" font-weight="600" fill="#111827">AI Gateway</text>
+  <line x1="698" y1="190" x2="818" y2="190" stroke="#e5e7eb"/>
+  <text x="698" y="205" font-size="10" fill="#4b5563">One credential for many</text>
+  <text x="698" y="218" font-size="10" fill="#4b5563">LLM providers, with no</text>
+  <text x="698" y="231" font-size="10" fill="#4b5563">provider keys to manage.</text>
+  <line x1="758" y1="264" x2="758" y2="276" stroke="#9ca3af" stroke-width="1.5"/>
+
+  <!-- peer 5 scope callout -->
+  <rect x="688" y="276" width="140" height="110" rx="8" fill="#f9fafb" stroke="#d1d5db" stroke-dasharray="5 4"/>
+  <text x="698" y="292" font-size="9" font-weight="700" letter-spacing="0.5" fill="#6b7280">WHAT BRANCHES</text>
+  <text x="698" y="306" font-size="9.5" fill="#374151">Branch-aware for</text>
+  <text x="698" y="319" font-size="9.5" fill="#374151">endpoint, credentials,</text>
+  <text x="698" y="332" font-size="9.5" fill="#374151">access, and metering.</text>
+  <text x="698" y="350" font-size="9.5" fill="#374151">Shared (global) model</text>
+  <text x="698" y="363" font-size="9.5" fill="#374151">catalog. There is no</text>
+  <text x="698" y="376" font-size="9.5" fill="#374151">per-branch model config.</text>
+
+  <text x="24" y="452" font-size="11" fill="#6b7280">Branching is copy-on-write across the backend, but the semantics differ per product. See the table on this page.</text>
+</svg>
