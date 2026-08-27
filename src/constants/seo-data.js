@@ -22,6 +22,12 @@ export default {
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
+  aiGateway: {
+    title: 'AI Gateway — One API for frontier models | Neon',
+    description:
+      'Call frontier and open-weight models from your Neon backend with one credential, one bill, and zero markup.',
+    pathname: LINKS.aiGateway,
+  },
   aboutUs: {
     title: 'About Us — Neon',
     description:

@@ -20,9 +20,32 @@ const variantsAnimation = {
   },
 };
 
-const Item = ({ question, answer, id = null, initialState = 'closed', index }) => {
+const variants = {
+  default: {
+    item: null,
+    title: null,
+    icon: null,
+    content: null,
+  },
+  light: {
+    item: 'border-gray-new-70',
+    title: 'text-black-pure font-normal',
+    icon: 'border-gray-new-40 size-2.25',
+    content: 'text-gray-new-20',
+  },
+};
+
+const Item = ({
+  question,
+  answer,
+  id = null,
+  initialState = 'closed',
+  index,
+  variant = 'default',
+}) => {
   const { hash } = useLocation();
   const [isOpen, setIsOpen] = useState(initialState === 'open');
+  const styles = variants[variant] ?? variants.default;
 
   const handleOpen = () => {
     setIsOpen((prev) => {
@@ -54,7 +77,10 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
 
   return (
     <li
-      className="-mx-1 overflow-hidden border-b border-gray-new-15 px-1 py-[19px] last:border-0 xl:py-[18px] md:py-[14px]"
+      className={cn(
+        '-mx-1 overflow-hidden border-b border-gray-new-15 px-1 py-[19px] last:border-0 xl:py-[18px] md:py-[14px]',
+        styles.item
+      )}
       id={id}
     >
       <button
@@ -64,12 +90,18 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
         aria-controls={`panel-${index}`}
         onClick={handleOpen}
       >
-        <h3 className="text-xl leading-snug font-medium tracking-tighter transition-colors duration-300 lg:text-lg">
+        <h3
+          className={cn(
+            'text-xl leading-snug font-medium tracking-tighter transition-colors duration-300 lg:text-lg',
+            styles.title
+          )}
+        >
           {question}
         </h3>
         <span
           className={cn(
             'mt-2.5 mr-2.5 h-2 w-2 shrink-0 transform border-t border-l border-gray-new-80 transition duration-300',
+            styles.icon,
             isOpen ? 'rotate-[405deg]' : 'rotate-[225deg]'
           )}
         />
@@ -96,7 +128,8 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
               '[&_li]:relative [&_li]:list-inside [&_li]:pl-4!',
               '[&_li]:before:absolute [&_li]:before:top-0 [&_li]:before:left-0 [&_li]:before:content-["-"]',
               '[&_code]:my-4 [&_code]:inline-block [&_code]:rounded-lg [&_code]:bg-gray-new-10 [&_code]:px-[10px] [&_code]:py-1',
-              '[&_a]:rounded-sm [&_a]:text-white [&_a]:transition-colors [&_a]:duration-200 [&_a:hover]:text-gray-new-80'
+              '[&_a]:rounded-sm [&_a]:text-white [&_a]:transition-colors [&_a]:duration-200 [&_a:hover]:text-gray-new-80',
+              styles.content
             )}
             dangerouslySetInnerHTML={{ __html: answer }}
           />
@@ -110,8 +143,9 @@ Item.propTypes = {
   question: PropTypes.string.isRequired,
   answer: PropTypes.string.isRequired,
   id: PropTypes.string,
-  initialState: PropTypes.string,
+  initialState: PropTypes.oneOf(['open', 'closed']),
   index: PropTypes.number.isRequired,
+  variant: PropTypes.oneOf(Object.keys(variants)),
 };
 
 export default Item;

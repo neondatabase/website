@@ -1,6 +1,7 @@
 export default {
   aboutUs: '/about-us',
   ai: '/ai',
+  aiGateway: '/ai-gateway',
   blog: '/blog',
   branching: '/branching',
   brand: '/brand',
@@ -42,6 +43,7 @@ export default {
   functionsOverview: '/docs/compute/functions/overview',
   objectStorageOverview: '/docs/storage/overview',
   aiGatewayOverview: '/docs/ai-gateway/overview',
+  aiGatewayGetStarted: '/docs/ai-gateway/get-started',
   autoscaling: '/docs/introduction/autoscaling',
   billing: '/docs/introduction/about-billing',
   branchRestore: '/docs/introduction/branch-restore',
