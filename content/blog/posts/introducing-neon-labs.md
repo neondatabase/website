@@ -14,7 +14,7 @@ categories:
 authors:
   - savannah-longoria
 cover:
-  image: null
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/introducing-neon-labs/cover.jpg'
   alt: null
 isFeatured: false
 seo:
@@ -24,14 +24,19 @@ seo:
   noindex: false
   ogTitle: Introducing Neon Labs - Neon
   ogDescription: A space for Postgres tooling
-  image: null
+  image: 'https://cdn.neonapi.io/public/images/pages/blog/introducing-neon-labs/social.jpg'
 ---
 
 **Today we're launching [Neon Labs](https://labs.neon.com), a home for experimental tools built around Lakebase Postgres.** We want Neon Labs to be a playground for ideas that could help the broader Postgres community; it gives us a space to publish early tools, [share the code,](https://github.com/neondatabase/neon-upgrade-advisor ) and learn from how developers use them. Overtime, some experiments may grow into supported features, while others may remain prototypes or lead to better approaches elsewhere.
 
 **This first release includes two tools: a Postgres Upgrade Assessment, which reports what will break when you move to a new Postgres major version, and a Migration Assistant, which recommends a migration method and walks you through it.** To try them, sign in at [labs.neon.com](https://labs.neon.com/) with your Neon account, pick a source project and a target Postgres version, and run the assessment.
 
-**[ADD CLIP]**
+<figure>
+<video autoPlay muted loop playsInline width="1416" height="824" aria-label="Neon Labs Migration Assistant walkthrough">
+<source src="https://cdn.neonapi.io/public/images/pages/blog/introducing-neon-labs/migration-assistant-trimmed-1416.webm" type="video/webm" />
+<source src="https://cdn.neonapi.io/public/images/pages/blog/introducing-neon-labs/migration-assistant-trimmed-1416.mp4" type="video/mp4" />
+</video>
+</figure>
 
 <Admonition type="note" title="These tools are still in the experimental phase">
 We do not recommend using the migration tools for production workloads yet. Try them first with a development or test project, or clone the repository and run it locally.
