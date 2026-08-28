@@ -199,7 +199,7 @@
         "update": {
           "options": {
             "yes": {
-              "_comment": "Source defines `yes` as a bare { describe } with no type, so the static parser marks it unknown. It's a boolean flag (skip the confirm prompt). Verified against skills.ts at neonctl 4.11.0.",
+              "_comment": "`skills update` re-declares `yes` as a bare { describe }; its alias and boolean type are inherited from the parent `skills` command's `yes`, which the isolated per-builder parse misses (so it comes out type unknown). Remove this override once generate-schema.js models parent-option inheritance. Verified against skills.ts at neonctl 4.11.0.",
               "type": "boolean"
             }
           }
