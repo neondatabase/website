@@ -4,7 +4,6 @@ subtitle: 'Learn how to build an image API that resizes, crops, optimizes, analy
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2026-08-24T00:00:00.000Z'
-updatedOn: '2026-08-25T13:19:08.179Z'
 ---
 
 If you're building an application that handles images (profile avatars, product photos, or user uploads), you run into the same set of problems every time. Users upload 12-megapixel photos straight from their phones, and if you serve those files back as-is, pages get slow and bandwidth costs climb. Every image needs resizing for different layouts, cropping to fit, and re-encoding into modern formats like WebP. On top of that, every image needs alt text for accessibility and SEO.
