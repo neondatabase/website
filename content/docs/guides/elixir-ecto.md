@@ -9,7 +9,7 @@ summary: >-
   Postgrex idle_interval defaults that can prevent Neon's scale-to-zero
   autosuspend from triggering.
 enableTableOfContents: true
-updatedOn: '2026-07-14T19:04:57.024Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-ecto-prompt.md" 
@@ -31,7 +31,7 @@ To create the database:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Databases**.
+1. Select **Postgres database** > **Databases**.
 1. Select the branch where you want to create the database.
 1. Click **New Database**.
 1. Enter a database name (`friends`), and select a database owner.
@@ -188,7 +188,7 @@ You can use the **Tables** feature in the Neon Console to view the table that wa
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 1. Select a project.
-1. Select **Tables** from the sidebar.
+1. Select **Postgres database** > **Tables** from the sidebar.
 1. Select the Branch, Database (`friends`), and the schema (`public`). You should see the `people` table along with a `schema_migration` table that was created by the migration.
 
 </Steps>

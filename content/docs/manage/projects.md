@@ -9,11 +9,11 @@ summary: >-
   configure, and delete, via the Console or API. Use it when you need to set
   project-level defaults such as compute autoscaling, history window for
   instant restore and Time Travel, IP Allow rules, logical replication, or
-  collaborator access. Deleted projects can be recovered within a 7-day
+  project access. Deleted projects can be recovered within a 7-day
   window using the CLI or API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -81,11 +81,12 @@ The **Settings** page includes these sub-pages:
 - **Compute**: Set the scale to zero and sizing defaults for any new computes you create when branching.
 - **Instant restore**: Under **Settings → Instant restore**, set the **history window** to control how far back **instant restore**, Time Travel queries, and branching from past states can reach.
 - **Updates**: Schedule a time for Postgres and Neon updates.
+- **Project permissions**: Grant organization members access to this project, and review who can already reach it. See [User permissions](/docs/manage/user-permissions).
 - **Collaborators**: Invite external collaborators to join your Neon project.
 - **Network security**: Configure Neon's IP and Private Networking features for secure access.
 - **RLS**: Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
 - **Logical replication**: Enable logical replication to replicate data from your Neon project to external data services and platforms.
-- **Transfer**: Transfer your project from the current organization to another organization you are a member of.
+- **Transfer**: Transfer your project from the current organization to another organization you belong to. Transferring a project out of an organization requires the **Admin** organization role.
 - **Delete**: Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
 ### General project settings
@@ -148,13 +149,22 @@ To set your project's update schedule or view currently scheduled updates:
 
 For more information, see [Updates](/docs/manage/updates).
 
-### Invite collaborators to a project
+### Give someone access to a project
+
+How you grant access depends on whether the person is already in your organization:
+
+- **Organization members**: Grant them a per-project permission (**Viewer**, **Editor**, or **Admin**) from the project's **Settings** → **Project permissions** page. This is also how you give a member more access on one project than their organization role provides. See [Assign project access](/docs/manage/user-permissions#assign-project-access).
+- **People outside your organization**: Invite them as a collaborator, as described below.
+
+#### Invite collaborators to a project
 
 Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
 
 <Admonition type="note">
-Organization members cannot be added as collaborators to organization-owned projects since they already have access to all projects through their organization membership.
+Project sharing is being deprecated and will be removed in a future release. To give a contractor or other limited-access user access to specific projects, add them to the organization as a **Collaborator** and grant per-project permissions instead. See [User permissions](/docs/manage/user-permissions).
 </Admonition>
+
+Organization members can't be added as collaborators on organization-owned projects. Grant them a per-project permission instead.
 
 To invite collaborators to a Neon project:
 
@@ -373,7 +383,7 @@ Logical replication lets you replicate data changes from Neon to external data s
 Enabling logical replication changes the PostgreSQL `wal_level` setting from `replica` to `logical` for all databases in your Neon project. This allows Postgres to record the row-level WAL detail required for logical decoding. Once changed, it cannot be reverted. Enabling logical replication also restarts all computes, so active connections will be dropped and have to reconnect.
 </Admonition>
 
-<Tabs labels={["Console", "API"]}>
+<Tabs labels={["Console", "CLI", "API"]}>
 
 <TabItem>
 
@@ -381,6 +391,16 @@ Enabling logical replication changes the PostgreSQL `wal_level` setting from `re
 2. On the **Project Dashboard**, select **Settings**.
 3. Select **Logical replication**.
 4. Click **Enable** to enable logical replication.
+
+</TabItem>
+
+<TabItem>
+
+Use [`neon projects update`](/docs/cli/projects#update) with the `--enable-logical-replication` flag. Because this can't be undone, add `--yes` to skip the confirmation prompt. Replace `$PROJECT_ID` with your project ID.
+
+```bash
+neon projects update $PROJECT_ID --enable-logical-replication --yes
+```
 
 </TabItem>
 
@@ -420,6 +440,8 @@ After enabling logical replication, the next steps involve creating publications
 ### Delete a project
 
 Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
+
+Deleting a project requires **Admin** access on that project, which every organization Admin has. A member granted Admin on a single project can delete that project. See [Per-project permissions](/docs/manage/user-permissions#per-project-permissions).
 
 To delete a project:
 

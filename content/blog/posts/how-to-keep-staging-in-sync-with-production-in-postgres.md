@@ -121,7 +121,7 @@ neon branches reset staging --parent main
 
 ### Anonymized branches for PII compliance
 
-If your staging environment can’t contain production PII, Neon lets you build anonymization directly into your [branching workflow](https://neon.com/blog/practical-guide-to-database-branching). Instead of branching staging straight from production, you first [create an anonymized branch](https://api-docs.neon.tech/reference/createprojectbranchanonymized) from prod. Neon applies [masking rules](https://neon.com/docs/workflows/data-anonymization#manage-masking-rules) to sensitive columns like emails, names, phone numbers, and custom fields, replacing them with realistic synthetic values while preserving schema, data types, and relationships. You can then simply derive staging (and dev) branches from this anonymized version of prod.
+If your staging environment can’t contain production PII, Neon lets you build anonymization directly into your [branching workflow](https://neon.com/blog/practical-guide-to-database-branching). Instead of branching staging straight from production, you first [create an anonymized branch](https://neon.com/docs/reference/api/branches/create-project-branch-anonymized) from prod. Neon applies [masking rules](https://neon.com/docs/workflows/data-anonymization#manage-masking-rules) to sensitive columns like emails, names, phone numbers, and custom fields, replacing them with realistic synthetic values while preserving schema, data types, and relationships. You can then simply derive staging (and dev) branches from this anonymized version of prod.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/how-to-keep-staging-in-sync-with-production-in-postgres/image-14-1024x403-e17f6187.png)
 

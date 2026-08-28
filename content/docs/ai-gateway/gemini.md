@@ -6,7 +6,7 @@ summary: >-
   streamGenerateContent APIs through Neon AI Gateway. Use the google-genai SDK
   with a custom base URL.
 enableTableOfContents: true
-updatedOn: '2026-08-06T17:43:14.909Z'
+updatedOn: '2026-08-07T13:59:02.632Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
@@ -38,7 +38,9 @@ This endpoint accepts Google models only:
 
 | Model ID                | Notes |
 | ----------------------- | ----- |
+| `gemini-3-6-flash`      |       |
 | `gemini-3-5-flash`      |       |
+| `gemini-3-5-flash-lite` |       |
 | `gemini-3-1-pro`        |       |
 | `gemini-3-1-flash-lite` |       |
 | `gemini-3-flash`        |       |

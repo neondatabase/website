@@ -4,4 +4,6 @@ Use these endpoints from automation that manages team membership, handles invita
 
 Some endpoints require the admin role. Member-level tokens can read org state but cannot modify members or billing settings.
 
+You can also list your organizations from the CLI with [`neon orgs`](/docs/cli/orgs).
+
 See [Organizations](/docs/manage/organizations) for full role permissions and plan limits.

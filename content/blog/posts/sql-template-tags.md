@@ -33,7 +33,7 @@ seo:
   image: 'https://cdn.neonapi.io/public/images/pages/blog/sql-template-tags/social.jpg'
 ---
 
-SQL injection is one of the most well-known security vulnerabilities, allowing attackers to manipulate database queries and potentially gain unauthorized access to sensitive data. However, using our [serverless driver](https://neon.tech/docs/serverless/serverless-driver), you can continue to write queries as you always have, but feel confident you’re not leaving your application open to malicious attacks.
+SQL injection is one of the most well-known security vulnerabilities, allowing attackers to manipulate database queries and potentially gain unauthorized access to sensitive data. However, using our [serverless driver](https://neon.com/docs/serverless/serverless-driver), you can continue to write queries as you always have, but feel confident you’re not leaving your application open to malicious attacks.
 
 To learn more, check out the docs for the [@neondatabase/serverless](https://www.npmjs.com/package/@neondatabase/serverless) driver, which lets you securely connect to your database from serverless and edge environments.
 
@@ -218,6 +218,6 @@ This is a common pattern in modern JS SQL libraries and is not just specific to 
 
 In this post, you learned about SQL injection attacks, how SQL template tags work, and why they are not vulnerable to SQL injection attacks.
 
-To learn more about the `@neondatabase/serverless` driver, refer to the [API Reference](https://neon.tech/docs/serverless/serverless-driver).
+To learn more about the `@neondatabase/serverless` driver, refer to the [API Reference](https://neon.com/docs/serverless/serverless-driver).
 
 If you are new to Neon, you can [sign up today](https://console.neon.tech) for free. No credit card required.

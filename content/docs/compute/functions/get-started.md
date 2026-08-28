@@ -2,12 +2,12 @@
 title: Get started with Neon Functions
 subtitle: Deploy your first Neon Function and call it over HTTP.
 summary: >-
-  Deploy your first Neon Function with neon: initialize a project, define
-  the function in neon.ts, develop locally with neon dev, and deploy with
-  neon deploy. The function gets a public HTTPS URL with DATABASE_URL
-  injected from the branch's Postgres database.
+  Deploy your first Neon Function, a long-running serverless function that runs on your Neon
+  branch: initialize a project, define the function in neon.ts, develop locally
+  with neon dev, and deploy with neon deploy. The function gets a public HTTPS
+  URL with DATABASE_URL injected from the branch's Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-08-03T21:34:20.270Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -67,11 +67,13 @@ That's a deployed function in three commands. The rest of this guide builds a mo
 - The latest `neon`, installed and authenticated. Functions commands are new and change often, so upgrade before you start (`npm install -g neon@latest`).
 - Node.js 20 or later. Deployed functions run on Node.js 24, so use 24 locally for the closest match.
 
-`neon init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install the Neon Platform (`neon`) and Neon Functions skills separately:
+`neon init --preview` is designed to be run by your AI coding assistant. It outputs structured instructions that guide the agent through setup. To install the Neon Platform (`neon`) and Neon Functions skills separately with the [Neon CLI](/docs/cli):
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon -s neon-functions
+neon skills -s neon -s neon-functions
 ```
+
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s neon-functions` instead.
 
 ## Set up your project
 
@@ -120,7 +122,7 @@ The slug is permanent: it can't be renamed after the first deploy. See the [neon
 Install dependencies:
 
 ```bash
-npm install @neon/config hono pg
+npm install @neon/config @neon/functions hono pg
 npm install --save-dev @types/pg
 ```
 
@@ -144,10 +146,12 @@ A Hono app exports the object shape, so `export default app` works directly. For
 
 ```ts filename="functions/hello.ts"
 import { Hono } from 'hono';
+import { attachDatabasePool } from '@neon/functions';
 import { Pool } from 'pg';
 
 // Create the pool once at module scope so it's reused across requests.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const app = new Hono();
 
 app.get('/', async (c) => {
@@ -156,17 +160,14 @@ app.get('/', async (c) => {
 });
 
 export default app;
-
-// Optional: drain the pool on shutdown (the platform sends SIGINT).
-process.on('SIGINT', () => {
-  pool.end().then(() => process.exit(0));
-});
 ```
 
 <a id="connect-to-postgres"></a>
 
 <Admonition type="important" title="Use a connection pool, not the serverless driver">
 A function keeps running across requests, so connect to Postgres with a long-lived `pg` `Pool` created once at module scope. Don't use `@neondatabase/serverless` here: it's built for short-lived, edge-style invocations that open a connection per request, which wastes the persistent runtime a function gives you. Use the pooled `DATABASE_URL` for queries; use `DATABASE_URL_UNPOOLED` only where you need a dedicated connection (such as `LISTEN`/`NOTIFY`).
+
+Call `attachDatabasePool(pool)` once after creating the pool (requires `@neon/functions` 0.8.0 or later). When Postgres drops an idle client (scale-to-zero, pooler reclaim, a TCP reset), `pg` emits an `error` on the pool; with no listener attached, that becomes an uncaught exception and the isolate exits. `attachDatabasePool` swallows expected idle disconnects and logs anything unexpected. The pool has already discarded the dead client, so the next query opens a fresh connection. You don't need to drain the pool on shutdown: when the runtime evicts an isolate, Neon's pooler reclaims those connections for you.
 </Admonition>
 
 ## Develop locally

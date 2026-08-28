@@ -45,7 +45,13 @@ const GROUP_OF = {
   snapshots: 'core',
   inspect: 'debugging',
   'api-keys': 'setup',
-  profiles: 'setup',
+  profile: 'setup',
+  logs: 'debugging',
+  open: 'setup',
+  mcp: 'setup',
+  skills: 'setup',
+  plugins: 'setup',
+  claim: 'setup',
 };
 
 // Commands documented as a section of another command's page instead of a

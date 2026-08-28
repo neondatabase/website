@@ -104,6 +104,9 @@ package-lock.json
 .vercel
 .neon
 
+# Isaac Review local tooling state
+.isaac/
+
 # Evals directory (test validation for documentation)
 .evals/
 

@@ -91,6 +91,8 @@
               slug: guides/java
             - title: JavaScript
               slug: guides/javascript
+            - title: Kotlin
+              slug: guides/kotlin
             - title: Python
               slug: guides/python
             - title: Rust
@@ -880,6 +882,8 @@
           items:
             - title: Accounts
               slug: manage/accounts
+            - title: Permissions quickstart
+              slug: manage/project-permissions-get-started
             - title: User permissions
               slug: manage/user-permissions
             - title: Organizations
@@ -1111,11 +1115,11 @@
               slug: guides/consumption-metrics
             - title: Query consumption metrics (legacy)
               slug: guides/consumption-metrics-legacy
-        - section: Claimable Postgres
+        - section: Claimable Neon
           icon: rocket
           items:
-            - title: Claimable Postgres
-              slug: reference/claimable-postgres
+            - title: Claimable Neon
+              slug: reference/claimable-neon
         - section: Guides
           icon: book
           items:
@@ -1167,6 +1171,8 @@
                   slug: ai/ai-database-versioning
                 - title: Neon API Reference
                   slug: reference/api
+                - title: Lakebase Search
+                  slug: ai/lakebase-search
             - section: Agent frameworks
               icon: frameworks
               items:
@@ -1206,6 +1212,14 @@
                   slug: cli/auth
                 - title: init
                   slug: cli/init
+                - title: mcp
+                  slug: cli/mcp
+                - title: skills
+                  slug: cli/skills
+                - title: plugins
+                  slug: cli/plugins
+                - title: claim
+                  slug: cli/claim
                 - title: bootstrap
                   slug: cli/bootstrap
                 - title: link
@@ -1216,10 +1230,12 @@
                   slug: cli/env
                 - title: set-context
                   slug: cli/set-context
+                - title: open
+                  slug: cli/open
                 - title: me
                   slug: cli/me
-                - title: profiles
-                  slug: cli/profiles
+                - title: profile
+                  slug: cli/profile
                 - title: api-keys
                   slug: cli/api-keys
                 - title: completion
@@ -1280,6 +1296,8 @@
               items:
                 - title: inspect
                   slug: cli/inspect
+                - title: logs
+                  slug: cli/logs
         - section: API
           icon: api
           items:

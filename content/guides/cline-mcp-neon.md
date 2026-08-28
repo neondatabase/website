@@ -4,7 +4,7 @@ subtitle: 'Make schema changes with natural language using Cline and Neon MCP Se
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-22T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-21T02:09:26.597Z'
 ---
 
 This guide shows how to use [Cline](https://cline.bot) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -23,7 +23,7 @@ Make sure you have:
     - Download and install the Cline VS Code extension from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev).
     - Set up Cline by following the [Getting Started guide](https://docs.cline.bot/getting-started/getting-started-new-coders#setting-up-openrouter-api-key) which involves obtaining an [OpenRouter API key](https://openrouter.ai) to work with Cline.
 2.  **A Neon Account and Project:** You'll need a Neon account and a project. You can create a new Neon project in the [Neon Console](https://console.neon.tech)
-3.  **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
+3.  **Neon API Key (for API key authentication):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
     <Admonition type="warning" title="Neon API Key Security">
     Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
     </Admonition>
@@ -52,9 +52,9 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
    ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 8. Once authentication is complete, Cline will display a confirmation message, and **Neon** will appear under your list of available MCP servers.
 
-### Option 2: Setting up the Local Neon MCP Server
+### Option 2: API key authentication
 
-This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
+This method uses the hosted Neon MCP Server with a Neon API key.
 
 1. Open Cline by clicking the **Cline** icon in the VS Code sidebar.
 2. In the Cline navigation bar, select the **MCP Servers** icon.
@@ -63,54 +63,25 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
    ![Cline MCP Server Configure](/docs/guides/cline-mcp-server-configure.png)
 4. This opens `cline_mcp_settings.json`.
 5. Paste the following JSON configuration into it. Replace `<YOUR_NEON_API_KEY>` with your Neon API key:
-   <CodeTabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
 
    ```json
    {
      "mcpServers": {
        "neon": {
-         "command": "npx",
-         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+         "type": "streamableHttp",
+         "url": "https://mcp.neon.tech/mcp",
+         "headers": {
+           "Authorization": "Bearer <YOUR_NEON_API_KEY>"
+         }
        }
      }
    }
    ```
-
-   ```json
-   {
-     "mcpServers": {
-       "neon": {
-         "command": "cmd",
-         "args": [
-           "/c",
-           "npx",
-           "-y",
-           "@neondatabase/mcp-server-neon",
-           "start",
-           "<YOUR_NEON_API_KEY>"
-         ]
-       }
-     }
-   }
-   ```
-
-   ```json
-   {
-     "mcpServers": {
-       "neon": {
-         "command": "wsl",
-         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-       }
-     }
-   }
-   ```
-
-   </CodeTabs>
 
 6. **Save** the `cline_mcp_settings.json` file.
 7. You should see a notification in VS Code that says: "MCP servers updated".
    ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
-8. Cline is now configured to use the local Neon MCP server. You should see **neon** listed under available MCP servers.
+8. Cline is now configured to use the hosted Neon MCP Server. You should see **neon** listed under available MCP servers.
 
 ### Verifying the Integration
 

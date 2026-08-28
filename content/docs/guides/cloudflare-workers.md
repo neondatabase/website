@@ -10,7 +10,7 @@ summary: >-
   Worker that queries Postgres and needs to choose between Hyperdrive's
   connection pooling and the serverless driver's lightweight setup.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 [Cloudflare Workers](https://workers.cloudflare.com/) is a serverless platform allowing you to deploy your applications globally across Cloudflare's network. It supports running JavaScript, TypeScript, and WebAssembly, making it a great choice for high-performance, low-latency web applications.
@@ -40,7 +40,7 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 
 1. Click the **New Project** button to create a new project.
 
-2. From the Neon **Dashboard**, navigate to the **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
+2. From the Neon **Dashboard**, navigate to **Postgres database** > **SQL Editor** from the sidebar, and run the following SQL command to create a new table in your database:
 
    ```sql
    CREATE TABLE books_to_read (
@@ -72,8 +72,8 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
 To use Hyperdrive with Neon, you'll need to create a dedicated database role for Hyperdrive to use:
 
 1. In the Neon Console, navigate to your project.
-2. Select **Branches** from the sidebar, then select the branch you want to use.
-3. Navigate to the **Roles & Databases** section.
+2. In the sidebar, select your branch from the **BRANCH** selector.
+3. Under **Postgres database**, select **Roles**.
 4. Click **New Role** and enter `hyperdrive-user` as the name (or your preferred name).
 5. **Copy the password** that is generated. You'll use this password in the connection string in the next step.
 

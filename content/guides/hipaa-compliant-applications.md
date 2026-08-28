@@ -15,7 +15,7 @@ This guide walks through how Neon supports HIPAA compliance. You’ll see how it
 
 When evaluating Neon for healthcare workloads, you likely have a few specific requirements. Here is how Neon addresses them:
 
-- **BAA & Certifications:** Neon signs a BAA, available [here](https://www.databricks.com/sites/default/files/2025-08/baa-neon.pdf). Neon is audited for HIPAA, SOC 2 Type 1 and Type 2, ISO 27001, ISO 27701, GDPR, and CCPA.
+- **BAA & Certifications:** Neon signs a BAA (available [here](https://www.databricks.com/sites/default/files/2025-08/baa-neon.pdf)) and supports PHI on the Scale plan. Neon is audited for HIPAA, SOC 2 Type 1 and Type 2, ISO 27001, ISO 27701, GDPR, and CCPA.
 - **Availability & Cost:** HIPAA compliance is currently included at no additional cost on the [Scale plan](/docs/introduction/plans). A 15% surcharge will be applied to your monthly invoice in the future when billing begins. You will be notified well in advance of any billing changes. Free and Launch plan projects are not HIPAA compliant and should not be used for PHI.
 - **Architecture & Isolation:** HIPAA-enabled projects run on specially configured infrastructure. Neon enforces strict tenant isolation at the project level, network controls, and storage-level encryption (AES-256).
 - **Compliant Features:** Core Postgres operations, database branching, read replicas, backups, and Point-in-Time Recovery (PITR) are fully covered under the BAA. [Data anonymization](/docs/workflows/data-anonymization) is also recommended in non-production branches.

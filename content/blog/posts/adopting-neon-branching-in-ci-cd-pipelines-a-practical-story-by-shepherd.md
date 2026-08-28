@@ -55,7 +55,7 @@ Alchemist is a crucial component of Shepherd’s product, responsible for underw
 
 ## Adopting Neon branching
 
-When evaluating different Postgres options, Shepherd was attracted to Neon mostly because of its [branching paradigm](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal). Neon implements database branching at the storage level, enabling users to create database branches with data and schema via copy-on-write.
+When evaluating different Postgres options, Shepherd was attracted to Neon mostly because of its [branching paradigm](https://neon.com/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal). Neon implements database branching at the storage level, enabling users to create database branches with data and schema via copy-on-write.
 
 The team at Shepherd immediately recognized the **benefits of this model**, especially when combined with Neon’s serverless architecture with auto-scaling and scale to zero:
 

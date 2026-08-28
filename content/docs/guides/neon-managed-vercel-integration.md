@@ -163,7 +163,7 @@ This isolation allows you to test data and schema changes safely in each pull re
 1. Go to **Vercel Dashboard → Settings → Build and Deployment Settings**
 2. Enable **Override** and add your build commands, including migrations, for example:
    ```bash
-   npx prisma migrate deploy && npm run build
+   npx prisma generate && npx prisma migrate deploy && npm run build
    ```
 
 This ensures schema changes in your commits are applied to each preview deployment's database branch.

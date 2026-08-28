@@ -10,7 +10,7 @@ summary: >-
   branch for a single database and does not support projects with IP Allow or
   Private Networking configured.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 This guide walks you through enabling the Data API, creating a table with RLS, and running your first query.
@@ -25,12 +25,12 @@ This guide walks you through enabling the Data API, creating a table with RLS, a
 ## Enable the Data API
 
 <Admonition type="tip" title="Enable programmatically">
-You can also enable the Data API using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api) or the [Neon MCP Server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_data_api` tool).
+You can also enable the Data API from the terminal with [`neon data-api create`](/docs/cli/data-api#create), using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api), or with the [Neon MCP Server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_data_api` tool).
 </Admonition>
 
 ### 1. Navigate to the Data API page
 
-In the Neon Console, select your project and go to the **Data API** page in the sidebar.
+In the Neon Console, select your project and select **Postgres database** > **Data API**.
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
@@ -207,7 +207,7 @@ The Data API caches your database schema for performance. When you modify your s
 
 **Option 1: Neon Console**
 
-Go to the **Data API** page in the Neon Console and click **Refresh schema cache**.
+Go to **Postgres database** > **Data API** in the Neon Console and click **Refresh schema cache**.
 
 ![Data API refresh schema cache button](/docs/data-api/data_api_schema_refresh.png)
 

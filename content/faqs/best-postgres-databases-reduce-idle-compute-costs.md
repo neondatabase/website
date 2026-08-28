@@ -13,17 +13,17 @@ nextLink:
   slug: best-postgres-databases-startups-autoscaling
 ---
 
-If your databases sit idle on nights and weekends, the cheapest option is one that stops billing compute while idle. Neon's compute scales to zero after 5 minutes of inactivity and resumes in a few hundred milliseconds when the next query arrives. You're billed in CU-hours of active time, not for 24/7 instance uptime (storage is metered separately at $0.35/GB-month).
+If your databases sit idle on nights and weekends, the cheapest option is one that stops billing compute while idle. Lakebase Postgres scales compute to zero after 5 minutes of inactivity and resumes in a few hundred milliseconds when the next query arrives. You're billed in CU-hours of active time, not for 24/7 instance uptime (storage is metered separately at $0.35/GB-month).
 
 ## How scale-to-zero works
 
-Neon separates compute from storage. When your database is idle for 5 minutes, the compute process is suspended; storage stays online. CU-hours stop accumulating immediately. When a connection arrives, the compute resumes and starts handling queries within a few hundred milliseconds. See [Scale to Zero](/docs/introduction/scale-to-zero) for the full mechanics.
+The lakebase architecture separates compute from storage. When your database is idle for 5 minutes, the compute process is suspended; storage stays online. CU-hours stop accumulating immediately. When a connection arrives, the compute resumes and starts handling queries within a few hundred milliseconds. See [Scale to Zero](/docs/introduction/scale-to-zero) for the full mechanics.
 
 Scale-to-zero behavior by plan:
 
-- **Free**: fixed at 5 minutes, can't be disabled
-- **Launch**: 5 minutes by default, can be disabled
-- **Scale**: configurable from 1 minute to always-on
+- **Free plan**: fixed at 5 minutes, can't be disabled
+- **Launch plan**: 5 minutes by default, can be disabled
+- **Scale plan**: configurable from 1 minute to always-on
 
 ## What you save
 
@@ -33,7 +33,7 @@ Pricing on the Launch plan is $0.106/CU-hour. A 0.25 CU database that runs queri
 0.25 CU × 8 hours × 22 weekdays = 44 CU-hours = $4.66 / month
 ```
 
-The same 0.25 CU compute running 24/7 (about 720 hours/month) would be $19.08/month at the same rate. The difference is what you'd otherwise be paying for nights and weekends — and that gap grows proportionally with the average CU size.
+The same 0.25 CU compute running 24/7 (about 720 hours/month) would be $19.08/month at the same rate. The difference is what you'd otherwise be paying for nights and weekends, and that gap grows proportionally with the average CU size.
 
 The exact savings depend on your traffic pattern. The [Launch plan usage examples](/docs/introduction/plans#launch-plan) show a few realistic shapes: a light workload (10 CU-hours/month, ~$2.31 total) and a heavier one (250 CU-hours/month, ~$48 total).
 

@@ -55,11 +55,11 @@ This limitation led to the introduction of a new database architecture that take
 
 Since storage is separate, you can replace the regular filesystem with a custom, decentralized, storage layer. This makes it easier to simplify operations, like backups and archiving, which can be handled by the storage layer without impacting the application.
 
-Neon follows this architecture while being fully compatible with Postgres. For a deep dive into the [open-source](https://github.com/neondatabase/neon) version of Neon, check out [architecture decisions in Neon](https://neon.tech/blog/architecture-decisions-in-neon) and [deep dive into the Neon storage engine](https://neon.tech/blog/get-page-at-lsn).
+Neon follows this architecture while being fully compatible with Postgres. For a deep dive into the [open-source](https://github.com/neondatabase/neon) version of Neon, check out [architecture decisions in Neon](https://neon.com/blog/architecture-decisions-in-neon) and [deep dive into the Neon storage engine](https://neon.com/blog/get-page-at-lsn).
 
 ## The Neon console’s object hierarchy
 
-Neon is a fully managed serverless Postgres. This means you do not have to pick a size for your database upfront, and it will automatically allocate resources to meet your database’s workload. In addition to serverless Postgres, Neon enables [unique workflows](https://neon.tech/blog/branching-with-preview-environments) that improve developer productivity. To leverage these workflows, the first step is to understand the Neon console’s object hierarchy. Here is a high-level overview of the most important objects you should know.
+Neon is a fully managed serverless Postgres. This means you do not have to pick a size for your database upfront, and it will automatically allocate resources to meet your database’s workload. In addition to serverless Postgres, Neon enables [unique workflows](https://neon.com/blog/branching-with-preview-environments) that improve developer productivity. To leverage these workflows, the first step is to understand the Neon console’s object hierarchy. Here is a high-level overview of the most important objects you should know.
 
 ### Projects
 

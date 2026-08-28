@@ -107,17 +107,17 @@ In the life of a DBA, there are plenty of these _database moments_ you’d like 
 
 ## How Neon Implements A New Architecture for Snapshots
 
-At [Neon](https://neon.tech/home), we’ve taken a different approach to snapshots, one that’s built on our underlying [copy-on-write storage architecture](https://neon.tech/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write).
+At [Neon](https://neon.tech/home), we’ve taken a different approach to snapshots, one that’s built on our underlying [copy-on-write storage architecture](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write).
 
 **In Neon, a snapshot isn’t a static backup stored in S3, but a point-in-time reference to the state of a branch, captured instantly and without performance impact.** When you restore a snapshot, you’re not spinning up a new instance or copying terabytes of data: you’re creating a new branch. This new branch points to the same underlying storage and can be queried immediately.
 
 <Admonition type="note" title="new to branches?">
-Branches in Neon behave like lightweight clones of your database at a specific point in time [. Learn more about them](https://neon.tech/docs/introduction/branching) and the [workflows they enable.](https://neon.tech/flow)
+Branches in Neon behave like lightweight clones of your database at a specific point in time [. Learn more about them](https://neon.com/docs/introduction/branching) and the [workflows they enable.](https://neon.tech/flow)
 </Admonition>
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/postgres-snapshots-neon-vs-rds/ad4nxdziq9ltligjvoncaazysdwd08j8j7jodjlbngoy2o9mrcy4s3r2mkwn-6lvw2hiij0l5we3isbhnl7wnwrryqfsw1pekyg5gq7cbbwku93s69z7egrrqaa7jvs-smi929orwxg-6b113902.png)
 
-Because Neon [separates storage from compute](https://neon.tech/docs/introduction/serverless), you can attach a new compute to a snapshot at any time. Once you do, your snapshot behaves like a fully independent Postgres instance, with its own connection string, isolated environment, and no impact on your production branch.
+Because Neon [separates storage from compute](https://neon.com/docs/introduction/serverless), you can attach a new compute to a snapshot at any time. Once you do, your snapshot behaves like a fully independent Postgres instance, with its own connection string, isolated environment, and no impact on your production branch.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/postgres-snapshots-neon-vs-rds/ad4nxdeufe85bylipvtt5zy9nuzsr3ofqp9sarn2xzr0t7y13eijecwcsl1nx8ziifmbwvfrc6qtjc2jollm6kj5lkilxpdpfjxlruzsvcxmikwrscz28rqhgpatsdyhjmdls7qainj-6cd05d21.png)
 
@@ -129,7 +129,7 @@ All compute endpoints in Neon autoscale, scale to zero when idle, and you only p
 
 Because snapshots in Neon are fast, lightweight, and can be attached to a compute quickly, they unlock all those workflows that are slow or impractical in RDS, especially at scale:
 
-- **Restore TBs instantly.** You restore a snapshot to a new branch in seconds, no matter how large the dataset. This same branching model powers Neon’s [Instant Point-in-Time Recovery (PITR) feature](https://neon.tech/docs/introduction/branch-restore), which lets you restore large databases to any moment within your retention window.
+- **Restore TBs instantly.** You restore a snapshot to a new branch in seconds, no matter how large the dataset. This same branching model powers Neon’s [Instant Point-in-Time Recovery (PITR) feature](https://neon.com/docs/introduction/branch-restore), which lets you restore large databases to any moment within your retention window.
 - **Test risky migrations safely.** Snapshot your branch → restore to a new branch → apply the migration → validate it. No downtime, no duplicated infrastructure, no impact on your production branch.
 - **Preserve a known-good state for future testing**. Take a snapshot after every cleanup, release, or migration. Consider it a stable baseline you can inspect (or restore to quickly).
 - **Investigate production issues using historical data.** If you’re doing the above, e.g. preserving interesting _database moments_ before prod changes are pushed, investigating issues becomes much easier. You can directly query your snapshots to find when things broke, and restore to a branch once you find a relevant data state that you’d like to test on.
@@ -147,8 +147,8 @@ For large Postgres databases, this means:
 - **More confidence**. You can test before you touch prod, debug safely, and validate fixes with real data.
 - **Better workflows**. Snapshots become part of your dev and ops toolkit, not just your disaster plan.
 
-[Neon has a Free plan](https://neon.tech/pricing) that allows you to test this experience immediately. [Sign up](https://console.neon.tech/signup) and [follow the instructions in our docs](https://neon.tech/docs/guides/backup-restore) to create and use your first snapshots.
+[Neon has a Free plan](https://neon.tech/pricing) that allows you to test this experience immediately. [Sign up](https://console.neon.tech/signup) and [follow the instructions in our docs](https://neon.com/docs/guides/backup-restore) to create and use your first snapshots.
 
 <Admonition type="note" title="request early access">
-Snapshots are in Early Access. [Follow these instructions to enable them in your project.](https://neon.tech/docs/introduction/roadmap#join-the-neon-early-access-program)
+Snapshots are in Early Access. [Follow these instructions to enable them in your project.](https://neon.com/docs/introduction/roadmap#join-the-neon-early-access-program)
 </Admonition>

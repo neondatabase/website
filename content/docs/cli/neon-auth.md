@@ -151,8 +151,10 @@ Adds a trusted domain.
 <CliOptions command="neon-auth domain add" />
 
 ```bash
-neon neon-auth domain add example.com
+neon neon-auth domain add https://app.example.com
 ```
+
+A trusted domain is an origin, so include the protocol (`https://`, or `http://` for local development) and omit any trailing slash. Use `https://app.example.com`, not `app.example.com` or `https://app.example.com/`. See [Configure trusted domains](/docs/auth/guides/configure-domains).
 
 ### neon neon-auth domain delete (#domain-delete)
 
@@ -278,14 +280,14 @@ neon neon-auth config email-provider update --type standard --host smtp.example.
 
 ### neon neon-auth config email-provider test (#config-email-provider-test)
 
-Sends a test email so you can verify your SMTP configuration.
+Sends a test email through your saved SMTP provider so you can verify it works. Configure the provider first with [`update`](#config-email-provider-update).
 
 <CliUsage command="neon-auth config email-provider test" />
 
 <CliOptions command="neon-auth config email-provider test" />
 
-```bash shouldWrap
-neon neon-auth config email-provider test --recipient-email user@example.com --host smtp.example.com --port 587 --username example_username --password AbC123dEf --sender-email noreply@example.com --sender-name "Example App"
+```bash
+neon neon-auth config email-provider test --recipient-email user@example.com
 ```
 
 ### neon neon-auth config organization (#config-organization)

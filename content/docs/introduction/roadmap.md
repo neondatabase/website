@@ -12,14 +12,14 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-07-31T16:04:44.241Z'
+updatedOn: '2026-08-25T17:09:07.082Z'
 ---
 
 This roadmap describes what's in flight, what we delivered recently, and what's on the horizon.
 
 ## New backend primitives for apps and agents
 
-We're expanding the platform with [a branchable stack of backend primitives](https://neon.com/blog/were-building-backends): Lakebase Postgres, Managed Better Auth, Functions, Object Storage, and AI Gateway.
+We're expanding the platform with [a branchable stack of backend primitives](/blog/were-building-backends): Lakebase Postgres, Managed Better Auth, Functions, Object Storage, and AI Gateway.
 
 - **Managed Better Auth general availability**: Managed Better Auth is moving toward general availability with additional plugins and features on the way. Check the [Managed Better Auth roadmap](/docs/auth/roadmap) for details.
 - **Functions**: Node.js functions deployed alongside your database.
@@ -29,6 +29,10 @@ We're expanding the platform with [a branchable stack of backend primitives](htt
 ## Core Postgres database features and improvements
 
 We're accelerating work on improving and scaling the core database on Neon as well. Here is what is on the roadmap.
+
+### Real-time sync
+
+- Real-time Postgres sync powered by the Electric sync engine, keeping your database and connected clients (browser tabs, mobile apps, and agents) continuously in sync so you can build real-time, collaborative, and agentic apps without hand-rolling a sync layer. [Read the announcement](/blog/electric-joins-neon).
 
 ### Backups & restore
 
@@ -77,7 +81,16 @@ We're accelerating work on improving and scaling the core database on Neon as we
 
 ## What we've shipped recently 🚢
 
-- **Neon backend services in beta**: Object Storage, Functions, and AI Gateway have graduated from private preview to beta and are available to everyone in AWS US East (Ohio). Declare your whole backend in one `neon.ts` file and it branches with your data. [Read the announcement](https://neon.com/blog/neon-backend-is-beta).
+- **Neon MCP server as a Claude connector**: The Neon MCP server is now listed in Claude's connector directory, so you can create projects and branches, run SQL, change schemas, and diagnose slow queries from Claude.ai or Claude Desktop. [Learn more](/docs/ai/neon-mcp-server#claude-connector).
+- **AI Gateway as a Vercel AI SDK provider**: The Neon AI Gateway is now a community provider for the Vercel AI SDK, so you can reach frontier and open-source models through one credential built into your branch and swap models without per-provider SDKs or keys. [Learn more](/docs/ai-gateway/overview).
+- **Project-level permissions**: Grant people and agents Viewer, Editor, or Admin access on individual projects instead of across your whole organization, on top of four organization roles (Admin, Editor, Viewer, Collaborator). Now available to all organizations. [Learn more](/docs/manage/user-permissions).
+- **API keys and profiles in the Neon CLI**: New `neon api-keys` and `neon profile` commands let you mint account, organization, or project-scoped keys and switch between multiple accounts from the terminal. [Learn more](/docs/cli/api-keys).
+- **More models on the AI Gateway**: The AI Gateway catalog expanded with Kimi K3, GLM-5.2, Inkling, and new Gemini and GPT models, all reachable through one credential and one base URL. [Learn more](/docs/ai-gateway/models#available-models).
+- **New Console layout for the Neon backend**: The Console sidebar now places every branch-level backend service (Auth, Object Storage, Functions, AI Gateway) alongside your Postgres database, with a branch Overview page that shows each service's status. [Learn more](/docs/get-started/backend-overview).
+- **Debug Postgres from the CLI with `neon inspect db`**: Run read-only Postgres diagnostics (table sizes, bloat, unused indexes, long-running queries, locks, and more) straight from the Neon CLI, safe to hand to an agent. [Learn more](/docs/cli/inspect).
+- **Snapshots in the Neon CLI**: The new `neon snapshots` command group manages the full snapshot lifecycle (list, create, restore, and schedule) from your terminal. [Learn more](/docs/cli/snapshots).
+- **Query Functions and Storage logs from the Neon MCP server**: New read-only `query_logs`, `list_log_fields`, and `list_log_field_values` tools let your AI assistant investigate Functions and Object Storage failures without leaving your editor. [Learn more](/docs/ai/neon-mcp-server).
+- **Neon backend services in beta**: Object Storage, Functions, and AI Gateway have graduated from private preview to beta and are available to everyone in AWS US East (Ohio). Declare your whole backend in one `neon.ts` file and it branches with your data. [Read the announcement](/blog/neon-backend-is-beta).
 - **New TypeScript SDK for the Neon API**: `@neon/sdk` is a fetch-based, zero-dependency client that covers the full Neon Platform API, including the new backend services, and replaces `@neondatabase/api-client` as the recommended client. [Learn more](/docs/reference/typescript-sdk).
 - **Passkey support**: Sign in to Neon with a passkey using device biometrics or a security key. Passkeys satisfy organization-level 2FA requirements. [Learn more](/docs/manage/accounts#passkeys).
 - **Git-style diffs in the Neon CLI**: The new `neon diff` command shows schema changes between your current branch and any other branch, and the config commands now report their changes as a git diff. [Learn more](/docs/cli).
@@ -101,7 +114,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Organization spending notifications**: Set a monthly spending threshold for your organization from the Billing page and receive email alerts when you reach 80% and 100% of that threshold. [Learn more](/docs/introduction/spending-notifications).
 - **Neon plugin for OpenAI Codex**: The Neon plugin is now available in the OpenAI Codex plugin directory, adding the Neon MCP Server and Agent Skills to Codex so you can manage projects, branches, and databases from chat. [Learn more](/docs/ai/ai-codex-plugin)
 - **Lakebase Postgres in Stripe Projects**: Neon is now part of Stripe Projects, so you can provision a Neon database as part of a Stripe CLI app setup alongside other services. [Read the announcement](/blog/neon-works-with-stripe-projects-for-agentic-provisioning)
-- **Automatic cache prewarming**: Neon now prewarms your compute's in-memory cache during scheduled compute updates, protecting query performance immediately after the update restarts Postgres. [Read the blog post](https://neon.com/blog/prewarming)
+- **Automatic cache prewarming**: Neon now prewarms your compute's in-memory cache during scheduled compute updates, protecting query performance immediately after the update restarts Postgres. [Read the blog post](/blog/prewarming)
 - **Unlimited org members on the Free plan**: You can now add unlimited members to each organization on the Free plan. The members API supports pagination and sorting, and the Console shows a 2FA indicator per member. [Learn more](/docs/manage/orgs-manage).
 - **Managed Better Auth organization settings and webhooks**: Configure Managed Better Auth Organizations from the Console (**Auth** > **Plugins**, per branch) and use webhooks to receive HTTP callbacks for auth events (OTP, magic link, user creation). [Learn more](/docs/auth/guides/plugins/organization) and [Webhooks](/docs/auth/guides/webhooks).
 - **Network transfer guide and egress optimizer agent skill**: A new guide explains how to monitor and reduce network transfer costs. An agent skill helps your AI assistant diagnose and fix query patterns that cause excessive egress. [Learn more](/docs/introduction/network-transfer).
@@ -111,12 +124,12 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Neon CircleCI orb**: A community-contributed orb provisions a Neon database branch per job for isolated, production-like CI. [Learn more](/docs/guides/branching-circleci).
 - **Add organization members by domain**: Verify email domains on the organization People page so users with matching addresses automatically join your org. [Learn more](/docs/manage/orgs-add-members-by-domain).
 - **TimescaleDB on Postgres 18**: The timescaledb extension is now supported on Postgres 18. [Learn more](/docs/extensions/timescaledb).
-- **Claimable Postgres agent skill**: A new agent skill lets your AI assistant provision instant temporary databases via Claimable Postgres (neon.new) with no signup or credit card. [Learn more](/docs/reference/claimable-postgres).
+- **Claimable Neon**: Agents can provision a temporary Neon project with no signup or credit card, then a human claims it. [Learn more](/docs/reference/claimable-neon).
 - **Neon MCP Server documentation tools**: The MCP Server now includes `list_docs_resources` and `get_doc_resource` so your agent can fetch Neon docs on demand. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
 - **Compute autoscaling report**: A published report compares Neon autoscaling to provisioned compute using real production workloads, with methodology and key findings. [Learn more](https://neon.com/autoscaling-report).
 - **Consumption history API**: The consumption history API is now available on all paid plans. You can use it with Neon's usage-based pricing plans to track usage programmatically: query compute, storage, and data transfer at hourly, daily, or monthly granularity for custom dashboards and alerts. [Learn more](/docs/guides/consumption-metrics).
 - **Simpler MCP Server setup**: Configure the Neon MCP Server for all detected AI agents and editors with a single command: `npx add-mcp https://mcp.neon.tech/mcp`. OAuth opens in your browser to authorize access. For full setup (MCP plus agent skills and VS Code extension), use `npx neon@latest init`. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
-- **Claimable Postgres REST API**: Claimable Postgres now offers a REST API for programmatic database provisioning, making it easy to integrate Postgres into platforms, CI/CD, and automation. [Learn more](/docs/reference/claimable-postgres).
+- **Claimable Neon REST API**: Claimable Neon offers an auth.md agent API for programmatic project provisioning. [Learn more](/docs/reference/claimable-neon).
 - **Managed Better Auth SDK simplified**: The server-side Managed Better Auth SDK for Next.js now uses a unified `createNeonAuth()` API, explicit configuration, and session caching that reduces Auth Server API calls by 95–99%. [Learn more](/docs/auth/migrate/from-auth-v0.1).
 - **Agent Skills**: Install [Agent Skills](https://github.com/neondatabase/agent-skills) to teach your AI assistant about Neon best practices. The Neon MCP Server can also provision the Data API with optional Managed Better Auth or external auth. [Learn more](/docs/ai/connect-mcp-clients-to-neon).
 - **Managed Better Auth on Vercel previews**: Both Vercel-managed and Neon-managed integrations now automatically provision Managed Better Auth on preview branches when enabled on production, so preview deployments get the right auth environment variables. [Learn more](/docs/auth/overview).
@@ -150,7 +163,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including a Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
 - **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
 - **Monitoring platform support**: Neon supports exporting metrics and Postgres logs to any OpenTelemetry-compatible backend, like New Relic. For details, refer to our [OpenTelemetry docs](/docs/guides/opentelemetry).
-- **Claimable Postgres**: A new way for SaaS vendors to partner with Neon to offer instant Postgres databases. Let your users create Postgres databases with no registration required. [Learn more about Claimable Postgres](/docs/reference/claimable-postgres), and see our [Claimable database integration guide](/docs/workflows/claimable-database-integration).
+- **Claimable Neon**: A new way for SaaS vendors to partner with Neon to offer instant Neon projects. Let your users create a project with no registration required. [Learn more about Claimable Neon](/docs/reference/claimable-neon), and see our [Claimable database integration guide](/docs/workflows/claimable-database-integration).
 - **Neon on Azure GA**: We've announced our general availability release on Azure with deeper Azure integration. [Read the announcement](/blog/azure-native-integration-ga).
 - **Import Data Assistant**: The [Import Data Assistant](/docs/import/import-data-assistant) makes data import easier and faster.
 - **Neon serverless driver GA**: Our JavaScript/TypeScript serverless driver has reached version 1.0.0, bringing stronger SQL injection safeguards and better performance for serverless environments.
@@ -170,7 +183,7 @@ We're accelerating work on improving and scaling the core database on Neon as we
 - **Query monitoring in the console**: Monitor your [active queries](/docs/introduction/monitor-active-queries) and [query performance](/docs/introduction/monitor-query-performance) in the Neon Console.
 - **Schema-only branches**: Create branches that include only your database schema, ideal for workflows involving sensitive data. [Learn more](/docs/guides/branching-schema-only).
 - Support for the [postgres_fdw](/docs/extensions/postgres_fdw), [dblink](/docs/extensions/dblink), and [pg_repack](/docs/extensions/pg_repack) Postgres extensions.
-- **Claimable Postgres: No signup, instant Postgres**: An app that lets you generate a Postgres database URL almost instantly, with no sign up required. Give it a try at [https://neon.new/](https://neon.new/) or by running `npx neon-new` in your terminal. See how fast Neon can spin up a Postgres database (AI agents love this).
+- **Claimable Neon: No signup, instant project**: Provision a temporary Neon project with no signup, then claim it. Start at [neon.com/claimable-neon](/claimable-neon) or [`auth.md`](https://neon.com/auth.md).
 - **Neon Chat for Visual Studio Code**: This AI-powered assistant lets you chat with the latest Neon documentation without leaving your IDE. You can find it here: [Neon VS Code Extension](https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N).
 - **A GitHub Copilot extension**: This extension provides chat-based access to the latest Neon documentation directly from your repository. You can find it here: [Neon Copilot Extension](https://github.com/marketplace/neon-database)
 - **Schema Diff API**: Neon now supports schema checks in agentic systems and deployment pipelines with the new schema diff API endpoint. Learn more about [Schema Diff](/docs/guides/schema-diff), which is also available via the console and CLI.

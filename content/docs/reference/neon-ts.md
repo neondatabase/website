@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/compute/functions/reference/neon-ts/
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-19T00:03:14.837Z'
 ---
 
 `neon.ts` is a TypeScript config file you commit to your repository. It declares which Neon services exist on your project and how each branch is configured.
@@ -219,6 +219,39 @@ postgres.databaseUrl; // string (databaseUrlUnpooled is absent)
 ```
 
 The key list autocompletes from your config, so selecting a variable from a service you haven't declared is a type error.
+
+### Inject env at runtime without a file
+
+`@neon/env` also ships a `neon-env` binary for the cases where you don't want the branch's variables written to disk. It resolves them from your `neon.ts` policy at runtime:
+
+```bash
+# Run a command with the branch's Neon env vars injected into its environment.
+# Use `--` to separate the command:
+neon-env run -- npm run dev
+
+# Print the branch's Neon env vars to stdout, as dotenv lines or JSON,
+# for piping into another env manager:
+neon-env export
+neon-env export --format json
+```
+
+Use `neon-env run` as the runtime counterpart to the on-disk [`neon env pull`](/docs/cli/env) when you'd rather not keep secrets in the working tree, and `neon-env export` when another tool (for example [varlock](https://varlock.dev)) should ingest the values.
+
+### Resolve env in code with `fetchEnv`
+
+`parseEnv` reads variables already present in `process.env`. `fetchEnv` is its programmatic runtime sibling: it fetches a branch's env from Neon and returns the same typed, namespaced shape, so code can resolve a branch's env without shelling out or writing a file first. Unlike the `neon-env` CLI, `fetchEnv` reads no environment variables or credential files on your behalf. Pass a Neon API key explicitly as `apiKey`, or it throws.
+
+```ts
+import { fetchEnv } from '@neon/env';
+import config from './neon';
+
+const env = await fetchEnv(config, {
+  projectId: 'patient-art-12345',
+  branch: 'main',
+  apiKey: process.env.NEON_API_KEY,
+});
+env.postgres.databaseUrl;
+```
 
 ## CLI commands
 

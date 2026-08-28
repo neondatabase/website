@@ -21,7 +21,7 @@ Neon clones a Postgres database in seconds by creating a [branch](/docs/introduc
 
 In a typical setup, cloning a production database means running `pg_dump`, transferring the file, and restoring it onto another instance. For a 100 GB database, that can take hours and doubles your storage cost.
 
-Neon separates storage from compute and treats storage like a versioned filesystem. When you create a branch, Neon records a pointer to the parent's state. The new branch gets its own compute and connection string, but reads from the same underlying data pages. Only the pages your branch writes are stored separately. The [child branch storage section in the pricing docs](/docs/introduction/plans#storage) explains the billing math: you pay for the smaller of the delta or your logical data size.
+The lakebase architecture separates storage from compute and treats storage like a versioned filesystem. When you create a branch, Neon records a pointer to the parent's state. The new branch gets its own compute and connection string, but reads from the same underlying data pages. Only the pages your branch writes are stored separately. The [child branch storage section in the pricing docs](/docs/introduction/plans#storage) explains the billing math: you pay for the smaller of the delta or your logical data size.
 
 ## Creating a branch
 
@@ -49,9 +49,9 @@ The new branch has its own connection string and a [time-to-live](/docs/guides/b
 
 ## Plan limits
 
-- **Free**: 10 branches per project, 0.5 GB storage cap
-- **Launch**: 10 branches included, extra branches at $1.50/branch-month (prorated hourly)
-- **Scale**: 25 branches included, same overage rate
+- **Free plan**: 10 branches per project, 0.5 GB storage cap
+- **Launch plan**: 10 branches included, extra at $1.50/branch-month (prorated hourly), up to 5,000 per project
+- **Scale plan**: 25 branches included, same overage rate, up to 5,000 per project
 
 ## How other Postgres options compare
 
@@ -61,6 +61,6 @@ The new branch has its own connection string and a [time-to-live](/docs/guides/b
 
 - **Supabase.** [Supabase Branching](https://supabase.com/docs/guides/deployment/branching) creates a fresh Postgres environment per branch and runs your migrations on it, but [no production data is copied to the preview branch](https://supabase.com/docs/guides/deployment/branching/github-integration#seeding). Branches are seeded from a `seed.sql` file instead. That's a deliberate choice for security; it also means a branch isn't a clone of production data.
 
-Neon's branches are copy-on-write at the storage layer and include the parent's data by default. You can also create a branch [without data](/docs/guides/branching-without-data) when that fits your workflow.
+Neon's branches are copy-on-write at the storage layer and include the parent's data by default. You can also create a [schema-only branch](/docs/guides/branching-schema-only) when you need the structure without production data.
 
 <CTA title="Branch a database in seconds" description="Free plan includes 10 branches per project." buttonText="Try it free" buttonUrl="https://console.neon.tech/signup" />

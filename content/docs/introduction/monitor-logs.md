@@ -53,6 +53,16 @@ If no logs match the current filters, the empty state offers a **Widen time rang
 
 **Download** saves the log lines currently loaded in the view, exactly as filtered, to a plain-text `.log` file, newest first. Downloading doesn't re-run the query against the full retention window: it's a snapshot of what's on screen, so narrow your search, levels, and time range first if you want a smaller or more targeted file.
 
+## Query logs from the CLI
+
+The same branch logs are available from the terminal with [`neon logs query`](/docs/cli/logs), so you can filter and script against them without opening the Console:
+
+```bash
+neon logs query --since 30m
+```
+
+Combine filters like `--source`, `--service-name`, and `--severity-text`, or pass a raw `--logql` expression.
+
 ## Retention
 
 Logs are retained for **3 days**. Once a log line falls outside that window, it's no longer queryable in the Console.

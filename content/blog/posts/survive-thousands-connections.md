@@ -44,7 +44,7 @@ If you're looking for a comparison of Neon vs Aurora Serverless v2, check out [n
 
 Well, that’s the dream. The reality can be a bit nearer earth, especially when Lambda bumps up against other services, say databases. This isn’t Lambda’s fault (Lambda really is awesome), as it is a function of how AWS services work (or don’t) together.
 
-So, what’s the answer? [Pooled connections](https://neon.tech/docs/connect/connection-pooling) are the way to go in this scenario, but AWS seems to be struggling even here. Let’s look into why.
+So, what’s the answer? [Pooled connections](https://neon.com/docs/connect/connection-pooling) are the way to go in this scenario, but AWS seems to be struggling even here. Let’s look into why.
 
 ## When AWS Lambda and Aurora Serverless v2 Don’t Mix
 
@@ -87,7 +87,7 @@ But RDS Proxy has its limitations. It imposes hard limits on concurrent connecti
 <p>“Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS” <em>(Cody Jenkins, Head of Engineering at Invenco)</em></p>
 </blockquote>
 
-[Invenco](https://www.invenco.net/), an e-commerce logistics company, [suffered these problems](https://neon.tech/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon). Their architecture involved Lambda functions processing payment transactions against Aurora Serverless v2. In theory, AWS Lambda and Aurora Serverless v2 should be a match made in cloud heaven. But Aurora Serverless v2 struggled to handle the concurrent connections from their Lambda functions during traffic spikes, and adding RDS Proxy didn’t solve the issues.
+[Invenco](https://www.invenco.net/), an e-commerce logistics company, [suffered these problems](https://neon.com/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon). Their architecture involved Lambda functions processing payment transactions against Aurora Serverless v2. In theory, AWS Lambda and Aurora Serverless v2 should be a match made in cloud heaven. But Aurora Serverless v2 struggled to handle the concurrent connections from their Lambda functions during traffic spikes, and adding RDS Proxy didn’t solve the issues.
 
 Why? Let’s take a look at a typical Aurora Serverless v2 connection pattern during a traffic spike:
 
@@ -107,7 +107,7 @@ This pattern shows how a sudden 20x increase in incoming traffic creates a casca
 
 [Neon](https://neon.tech/home), a serverless Postgres service that can be an alternative to Aurora Serverless v2, takes a fundamentally different approach to the connection management problem by integrating [PgBouncer](https://www.pgbouncer.org/) directly into its architecture.
 
-Rather than requiring a separate proxy service like RDS Proxy, [Neon connection pooling](https://neon.tech/docs/connect/connection-pooling) is built into every Neon endpoint. Here’s how it works:
+Rather than requiring a separate proxy service like RDS Proxy, [Neon connection pooling](https://neon.com/docs/connect/connection-pooling) is built into every Neon endpoint. Here’s how it works:
 
 ```javascript
 // Instead of connecting directly to Postgres
@@ -133,7 +133,7 @@ Remember: connection pooling isn’t magic. Those 10,000 concurrent connections 
 
 ## How to Use Neon Connection Pooling With AWS Lambda
 
-Let’s build an app that might need to take advantage of this type of pooling. We will mimic a service like [Invenco](https://neon.tech/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon) with fulfillment, sales, and inventory management endpoints.
+Let’s build an app that might need to take advantage of this type of pooling. We will mimic a service like [Invenco](https://neon.com/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon) with fulfillment, sales, and inventory management endpoints.
 
 We’ll start with Neon. We’ll create a [new project](https://console.neon.tech/app/projects), our schema, and some mock data:
 
@@ -258,7 +258,7 @@ What goes here isn’t super important; we just want to ensure we have some some
 
 The only difference from a user’s point of view is the “-pooler” addition to the connection string. But as we’ll see, this makes a big difference.
 
-With our DB string, we’ll go ahead and set up our Lambda functions (Here’s the entire [AWS Lambda &lt;&gt; Neon setup details](https://neon.tech/docs/guides/aws-lambda)). First, we want to install [Serverless](https://www.serverless.com/). This framework will abstract away much of the AWS infrastructure configuration, handling everything from function deployment to API Gateway setup through declarative YAML files:
+With our DB string, we’ll go ahead and set up our Lambda functions (Here’s the entire [AWS Lambda &lt;&gt; Neon setup details](https://neon.com/docs/guides/aws-lambda)). First, we want to install [Serverless](https://www.serverless.com/). This framework will abstract away much of the AWS infrastructure configuration, handling everything from function deployment to API Gateway setup through declarative YAML files:
 
 ```bash
 npm install -g serverless
@@ -600,7 +600,7 @@ You can see that once Neon detected more usage for both memory and compute, it a
 Neon’s approach stands out for two key reasons:
 
 1. It makes connection pooling a first-class citizen. Adding “-pooler” to your connection string is all it takes—no additional services, no complex configuration.
-2. The [autoscaling](https://neon.tech/docs/introduction/autoscaling) capabilities work in concert with the connection pooling. Neon responded by scaling up resources rather than just failing connections when our non-pooled test hit limits.
+2. The [autoscaling](https://neon.com/docs/introduction/autoscaling) capabilities work in concert with the connection pooling. Neon responded by scaling up resources rather than just failing connections when our non-pooled test hit limits.
 
 This matters for teams building serverless applications. It means you can focus on building features rather than wrestling with infrastructure. The future of serverless isn’t just about scaling compute—it’s about all parts of your stack working together when that scaling happens.
 

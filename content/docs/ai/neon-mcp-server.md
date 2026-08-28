@@ -4,13 +4,12 @@ subtitle: Connect your AI assistant to Neon to manage projects, run queries, and
 summary: >-
   The Neon MCP Server implements the Model Context Protocol (MCP), letting AI
   assistants interact with your Neon projects on your behalf. Set up with
-  `npx neon@latest init` or use the config generator. Supports OAuth and
-  API key auth.
+  `npx neon@latest mcp` or use the config generator. Supports OAuth and API key auth.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-25T02:37:06.867Z'
 ---
 
-The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/reference/neon-cli) commands directly.
+The Neon MCP Server implements the Model Context Protocol (MCP), letting AI assistants interact with your Neon projects on your behalf. Your AI agent can interact with Neon via MCP tools or by running [Neon CLI](/docs/cli) commands directly.
 
 <Admonition type="important" title="Security">
 The Neon MCP Server grants broad database management capabilities. **Always review and authorize actions requested by the LLM before execution.** Restrict access to trusted users only. See [MCP security guidance](#mcp-security-guidance).
@@ -18,17 +17,36 @@ The Neon MCP Server grants broad database management capabilities. **Always revi
 
 ## Quick setup
 
+Install the Neon MCP server into your coding agents with [`neon mcp`](/docs/cli/mcp):
+
+```bash
+npx neon@latest mcp
+```
+
+It prompts for where to write the config, which agents to install into, and how to authenticate, then writes it for you.
+
+To set up the MCP server together with agent skills and editor tooling, run [`neon init`](/docs/cli/init):
+
 ```bash
 npx neon@latest init
 ```
 
-Runs `neon init` via npx to configure MCP and other integrations for your editor. If you only want the MCP server, use the config generator below.
-
 ## Config generator
 
-Use the generator to build an MCP config for your editor, auth method, and transport, including the `Authorization` header for API key or remote agent setups.
+Use the generator to build an MCP config for your editor and auth method, including the `Authorization` header for API key or remote agent setups.
 
 <McpSetupConfigurator />
+
+## Claude connector
+
+The Neon MCP server is an official Claude connector, so you don't need a custom connector URL. To add it in [Claude.ai](https://claude.ai) or Claude Desktop:
+
+1. Open **Settings** from your profile menu (bottom-left of the sidebar).
+2. Select **Connectors** (sometimes shown under **Customize > Connectors**).
+3. Click **Browse connectors** (top-right of that page), find **Neon**, and add it.
+4. Authorize access to your Neon account.
+
+For other clients, use Quick setup or the config generator above.
 
 ## Access control
 
@@ -89,20 +107,68 @@ The hosted Neon MCP Server (`mcp.neon.tech`) connects to your Neon databases fro
 
 If [IP Allow](/docs/introduction/ip-allow) is enabled on your project, add these addresses to your allowlist so the MCP server can connect.
 
+## Database diagnostics
+
+When you ask why a branch is slow, large, or behind, the MCP server can run `inspect_database` instead of inventing catalog SQL. It exposes the same 15 read-only checks as [`neon inspect db`](/docs/cli/inspect): table and index sizes, unused indexes, sequential scans, long-running and stalled queries and locks, heavy and frequent statements, cache hit rate and working set, autovacuum and bloat, and replication state. The `stalled-queries` check reports active queries running longer than 30 seconds, with their waits, blockers, parallel workers, query IDs, and query text.
+
+Pick a check with the `check` parameter (for example `table-sizes` or `unused-indexes`). The tool runs inside a read-only transaction, so it works with [`?readonly=true`](#read-only-mode). It belongs to the `querying` category, not `observability`. Some checks need [`pg_stat_statements`](/docs/extensions/pg_stat_statements) or the [`neon`](/docs/extensions/neon) extension; the tool reports that and asks before suggesting installation.
+
 <MCPTools />
 
 ## Troubleshooting
 
-If your client doesn't support JSON for MCP server configuration (such as older versions of Cursor), use this command when prompted:
-
-```bash
-npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>
-```
-
 For per-client setup instructions, see [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon).
 
-<Admonition type="note">
-For clients that don't support Streamable HTTP, you can use the deprecated SSE endpoint: `https://mcp.neon.tech/sse`. SSE is not supported with API key authentication.
+### Deprecated local stdio (#deprecated-stdio)
+
+<Admonition type="important">
+The local stdio package (`@neondatabase/mcp-server-neon`) is deprecated. Use the hosted server at `https://mcp.neon.tech/mcp`.
+
+If your client only supports local stdio servers, put one of these in the client config so [`mcp-remote`](https://www.npmjs.com/package/mcp-remote) bridges to Streamable HTTP.
+
+**OAuth:**
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+    }
+  }
+}
+```
+
+**API key:**
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.neon.tech/mcp",
+        "--header",
+        "Authorization:${NEON_AUTH_HEADER}"
+      ],
+      "env": {
+        "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+</Admonition>
+
+### Deprecated HTTP+SSE transport (#retired-sse)
+
+<Admonition type="important">
+The hosted Neon MCP Server uses Streamable HTTP at `https://mcp.neon.tech/mcp`. The older HTTP+SSE endpoint (`https://mcp.neon.tech/sse`) is deprecated and will stop working on or after October 1, 2026. When it is retired it returns `410 Gone`. SSE is not supported with API key authentication.
+
+If your client still points at `/sse`, change the URL to `https://mcp.neon.tech/mcp`.
 </Admonition>
 
 ## Resources

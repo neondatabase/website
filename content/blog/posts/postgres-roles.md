@@ -33,7 +33,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/postgres-roles/neon-roles-1-1024x576-63177e35.jpg)
 
-You’re building your app on top of Postgres. Stellar idea. You’ve created a Postgres database, the initial tables, and even [seeded the initial data](https://neon.tech/blog/database-testing-with-fixtures-and-seeding).
+You’re building your app on top of Postgres. Stellar idea. You’ve created a Postgres database, the initial tables, and even [seeded the initial data](https://neon.com/blog/database-testing-with-fixtures-and-seeding).
 
 Nothing is going to stop you n… **Roles**. Roles will stop you now.
 

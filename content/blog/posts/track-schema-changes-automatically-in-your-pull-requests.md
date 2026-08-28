@@ -35,11 +35,11 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/track-schema-changes-automatically-in-your-pull-requests/neon-schema-diff-2-1024x576-5085491c.jpg)
 
-**We just launched the Schema Diff GitHub Action, a tool that simplifies schema migrations by automatically tracking schema changes as a comment in your pull requests. [Check out our docs](https://neon.tech/docs/guides/branching-github-actions#schema-diff-action) for step-by-step instructions to get started.**
+**We just launched the Schema Diff GitHub Action, a tool that simplifies schema migrations by automatically tracking schema changes as a comment in your pull requests. [Check out our docs](https://neon.com/docs/guides/branching-github-actions#schema-diff-action) for step-by-step instructions to get started.**
 
-[Neon branches](https://neon.tech/docs/introduction/branching) are great for many things, but testing schema changes has to be at the top of the list. With Neon, you can create child branches that serve as [isolated environments](https://neon.tech/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) containing an exact copy of the data and schema from the parent branch. This setup allows you to safely test schema changes in the child branch, ensuring everything works as expected before applying those changes to the parent branch.
+[Neon branches](https://neon.com/docs/introduction/branching) are great for many things, but testing schema changes has to be at the top of the list. With Neon, you can create child branches that serve as [isolated environments](https://neon.com/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) containing an exact copy of the data and schema from the parent branch. This setup allows you to safely test schema changes in the child branch, ensuring everything works as expected before applying those changes to the parent branch.
 
-This is a common workflow for Neon users, so we introduced our [Schema Diff](https://neon.tech/docs/guides/schema-diff) tool a while back to help them track their schema changes.
+This is a common workflow for Neon users, so we introduced our [Schema Diff](https://neon.com/docs/guides/schema-diff) tool a while back to help them track their schema changes.
 
 ## The starting point: Schema Diff
 
@@ -66,7 +66,7 @@ The comment (which stays updated) allows you to quickly identify differences in 
 
 ## How schema migrations look like with Neon branches and GitHub Actions
 
-The action works best combined with the [Neon GitHub Integration](https://neon.tech/docs/guides/neon-github-integration), managing migrations as [database branching workflows](https://neon.tech/flow).
+The action works best combined with the [Neon GitHub Integration](https://neon.com/docs/guides/neon-github-integration), managing migrations as [database branching workflows](https://neon.tech/flow).
 
 An example pipeline that incorporates the schema diff action would look similar to this:
 
@@ -182,6 +182,6 @@ Ultimately, this gives developers more confidence in managing schema changes whi
 
 ## How to get started
 
-Every Neon user can install this Action, including the [Free Plan](https://console.neon.tech/signup). [Go to our docs](https://neon.tech/docs/guides/branching-github-actions#schema-diff-action) and follow the instructions to get started.
+Every Neon user can install this Action, including the [Free Plan](https://console.neon.tech/signup). [Go to our docs](https://neon.com/docs/guides/branching-github-actions#schema-diff-action) and follow the instructions to get started.
 
 We would also love it if you make suggestions and directly contribute to our Schema Diff action in our [GitHub repository](https://github.com/neondatabase/schema-diff-action). It’s open source!

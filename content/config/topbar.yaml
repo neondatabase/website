@@ -1,4 +1,4 @@
-text: 'Add files to your Postgres branches via Neon Object Storage, our S3-compatible object store'
+text: 'A deep dive on the lakebase storage: S3 + WAL for the era of agents'
 link:
-  url: 'https://neon.com/blog/building-neon-object-storage'
+  url: 'https://neon.com/blog/wal-s3-lakebase-storage-for-the-era-of-agents'
   target: '_blank'

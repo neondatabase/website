@@ -36,7 +36,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/how-we-added-support-for-postgresql-v15-in-neon/neon-how-we-added-support-1024x538-d0676d99.jpg)
 
-A few weeks ago, we added [support for PostgreSQL 15](https://neon.tech/blog/postgresql-15-three-features-you-can-try-with-neon/). You can choose the version of PostgreSQL you want to use (PostgreSQL v14 or v15) when you create a Neon project.
+A few weeks ago, we added [support for PostgreSQL 15](https://neon.com/blog/postgresql-15-three-features-you-can-try-with-neon/). You can choose the version of PostgreSQL you want to use (PostgreSQL v14 or v15) when you create a Neon project.
 
 This post describes how we add support for multiple PostgreSQL versions in our Rust code, which might be helpful for other Rust projects that want to support multiple versions of the same C library simultaneously.
 
@@ -48,7 +48,7 @@ Compute nodes are stateless PostgreSQL nodes backed by the Neon storage engine.
 
 From a code perspective, a compute node is a patched PostgreSQL that enables the Neon API to access the storage engine.
 
-Storage consists of several modules, but in this blog post, we will consider it as one piece of software. If you are interested in learning about the individual modules, please refer to the [Architecture decisions in Neon](https://neon.tech/blog/architecture-decisions-in-neon/) blog post.
+Storage consists of several modules, but in this blog post, we will consider it as one piece of software. If you are interested in learning about the individual modules, please refer to the [Architecture decisions in Neon](https://neon.com/blog/architecture-decisions-in-neon/) blog post.
 
 Storage accepts Postgres write-ahead-log (WAL), durably stores it, digests it, and turns it into Postgres data pages. Storage is implemented in Rust, and to handle Postgres data and WAL file formats, it needs to use Postgres C code.<br />To do that, we use the [bindgen](https://github.com/rust-lang/rust-bindgen) crate.
 

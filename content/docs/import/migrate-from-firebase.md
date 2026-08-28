@@ -13,7 +13,7 @@ summary: >-
 redirectFrom:
   - /docs/import/import-from-firebase
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 This guide describes how to migrate data from Firebase Firestore to Lakebase Postgres.
@@ -191,7 +191,7 @@ This section describes how to prepare your destination Lakebase Postgres databas
 ### Create the Neon database
 
 1. In the Neon Console, go to your project dashboard.
-2. In the sidebar, click on **Databases**.
+2. In the sidebar, select **Postgres database** > **Databases**.
 3. Click the **New Database** button.
 4. Enter a name for your database and click **Create**.
 

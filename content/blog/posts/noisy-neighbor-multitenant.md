@@ -72,7 +72,7 @@ The main point is that if you share resources across multiple tenants, any singl
 
 ## The Problems Caused by Noisy Neighbors in AWS RDS
 
-This can be a massive problem for scaling teams. [OpusFlow](https://neon.tech/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) experienced this firsthand when trying to ensure data isolation for their European customers in RDS. They found that having multiple databases compete for resources in a single instance created problematic edge cases.
+This can be a massive problem for scaling teams. [OpusFlow](https://neon.com/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-servers) experienced this firsthand when trying to ensure data isolation for their European customers in RDS. They found that having multiple databases compete for resources in a single instance created problematic edge cases.
 
 What might these edge cases be?
 
@@ -132,11 +132,11 @@ Neon flips the model. It gives you database-per-tenant isolation without the RDS
 
 ### Project-per-tenant isolation
 
-With Neon, you create a [separate project for each tenant](https://neon.tech/docs/use-cases/database-per-user#setting-up-neon-for-database-per-user), which maps to a logically isolated Postgres environment. Each project has its own compute and endpoint, so tenant workloads never bleed into each other.
+With Neon, you create a [separate project for each tenant](https://neon.com/docs/use-cases/database-per-user#setting-up-neon-for-database-per-user), which maps to a logically isolated Postgres environment. Each project has its own compute and endpoint, so tenant workloads never bleed into each other.
 
 ### Decoupled compute and storage
 
-Neon [separates storage from compute](https://neon.tech/docs/introduction/architecture-overview):
+Neon [separates storage from compute](https://neon.com/docs/introduction/architecture-overview):
 
 - Storage is shared across all tenants, efficiently managed in the background.
 - Compute is isolated—each tenant gets its own autoscaling compute node that can grow or shrink based on their workload.
@@ -147,7 +147,7 @@ This means a heavy reporting workload from Tenant A has zero impact on Tenant B.
 
 Because compute and storage are decoupled:
 
-- Compute can [scale to zero](https://neon.tech/docs/introduction/scale-to-zero) when idle—ideal for long-tail tenants or bursty workloads.
+- Compute can [scale to zero](https://neon.com/docs/introduction/scale-to-zero) when idle—ideal for long-tail tenants or bursty workloads.
 - You only pay for what you use. A database that gets queried once a day costs a fraction of what it would on RDS.
 - There’s [no overprovisioning](https://neon.tech/use-cases/serverless-apps)—Neon automatically scales up under load, then scales back down.
 
@@ -155,7 +155,7 @@ This makes the database-per-tenant model financially viable, even for low-tier p
 
 ### Autoscaling compute
 
-When a tenant runs a complex job (like a big monthly report), Neon [automatically scales compute capacity up to meet demand](https://neon.tech/docs/introduction/autoscaling). When the job finishes, compute scales down. This happens independently for each tenant, eliminating contention and ensuring snappy performance.
+When a tenant runs a complex job (like a big monthly report), Neon [automatically scales compute capacity up to meet demand](https://neon.com/docs/introduction/autoscaling). When the job finishes, compute scales down. This happens independently for each tenant, eliminating contention and ensuring snappy performance.
 
 ## The End of Noisy Neighbors?
 

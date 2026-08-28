@@ -244,7 +244,7 @@ If you are building a RAG application, or simply need a Postgres database that s
 
 ## Resources
 
-- [Mixtral 8x7B: What you need to know about Mistral AI’s latest model](https://neon.tech/blog/mixtral-8x7b-what-you-need-to-know-about-mistral-ais-latest-model)
-- [Mistral 7B and BAAI on Workers AI vs. OpenAI Models for RAG](https://neon.tech/blog/mistral-7b-and-baai-on-workers-ai-vs-openai-models-for-rag)
-- [pgvector: 30x Faster Index Build for your Vector Embeddings](https://neon.tech/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings)
-- [Building an AI-powered ChatBot using Vercel, OpenAI, and Postgres](https://neon.tech/blog/building-an-ai-powered-chatbot-using-vercel-openai-and-postgres)
+- [Mixtral 8x7B: What you need to know about Mistral AI’s latest model](https://neon.com/blog/mixtral-8x7b-what-you-need-to-know-about-mistral-ais-latest-model)
+- [Mistral 7B and BAAI on Workers AI vs. OpenAI Models for RAG](https://neon.com/blog/mistral-7b-and-baai-on-workers-ai-vs-openai-models-for-rag)
+- [pgvector: 30x Faster Index Build for your Vector Embeddings](https://neon.com/blog/pgvector-30x-faster-index-build-for-your-vector-embeddings)
+- [Building an AI-powered ChatBot using Vercel, OpenAI, and Postgres](https://neon.com/blog/building-an-ai-powered-chatbot-using-vercel-openai-and-postgres)

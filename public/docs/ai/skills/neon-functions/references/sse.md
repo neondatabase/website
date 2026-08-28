@@ -1,6 +1,6 @@
 # Server-sent events (SSE) on Neon Functions
 
-SSE is the one-way (server → client) streaming counterpart to WebSockets: the browser opens a long-lived `GET` with [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) and the server pushes text frames down it. On Neon Functions there's **no adapter or extra library to install** — unlike the [Hono WebSocket helper](hono-websockets.md), an SSE endpoint is just a normal `fetch` handler that returns a `Response` whose body is a `ReadableStream` with `Content-Type: text/event-stream`. The runtime holds the response open as long as bytes keep flowing (15-minute heartbeat, see [Timeouts](../SKILL.md#timeouts-and-runtime-limits)).
+SSE is the one-way (server → client) streaming counterpart to WebSockets: the browser opens a long-lived `GET` with [`EventSource`](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) and the server pushes text frames down it. On Neon Functions an SSE endpoint is just a normal `fetch` handler that returns a `Response` whose body is a `ReadableStream` with `Content-Type: text/event-stream` — there is no library to install and nothing to upgrade. The runtime holds the response open as long as bytes keep flowing (15-minute heartbeat, see [Timeouts](../SKILL.md#timeouts-and-runtime-limits)).
 
 Reach for SSE over WebSockets when you only need server → client updates (live counters, notifications, progress, token streams) — it's simpler to run (plain HTTP, no `upgrade`), and `EventSource` **reconnects on its own**, so there's no client backoff to write.
 
@@ -64,7 +64,10 @@ app.get("/events", (c) => {
     },
   });
   return new Response(stream, {
-    headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache, no-transform" },
+    headers: {
+      "Content-Type": "text/event-stream",
+      "Cache-Control": "no-cache, no-transform",
+    },
   });
 });
 
@@ -76,16 +79,25 @@ export default app;
 The fan-out rule is identical to WebSockets ([Keeping clients in sync across isolates](../SKILL.md#keeping-clients-in-sync-across-isolates-do-not-skip-this)): each isolate keeps its **own** set of open streams, so broadcasting in-process only reaches the clients on that isolate. Hold a `Set` of stream controllers and pick a strategy there — **poll Postgres** by default (keeps Scale to Zero), or `LISTEN`/`NOTIFY` (shown below) for lowest latency on always-on compute. Keep the source-of-truth state in Postgres — module state doesn't survive eviction.
 
 ```typescript
+import { attachDatabasePool } from "@neon/functions";
 import { Pool, Client } from "pg";
 
 const encoder = new TextEncoder();
 const clients = new Set<ReadableStreamDefaultController<Uint8Array>>();
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const CHANNEL = "events";
 
 // One dedicated DIRECT connection per isolate to receive events (LISTEN needs a
 // real session — use DATABASE_URL_UNPOOLED, not the pooled URL).
-const listener = new Client({ connectionString: process.env.DATABASE_URL_UNPOOLED });
+// Don't call attachDatabasePool here: it would silence the idle drop that killed the feed.
+// An error listener keeps the isolate alive; the feed stays down until the isolate restarts.
+const listener = new Client({
+  connectionString: process.env.DATABASE_URL_UNPOOLED,
+});
+listener.on("error", (err) => {
+  console.error(err);
+});
 listener.connect().then(() => listener.query(`LISTEN ${CHANNEL}`));
 listener.on("notification", (msg) => {
   if (!msg.payload) return;
@@ -101,7 +113,10 @@ listener.on("notification", (msg) => {
 
 // Anywhere you mutate state, NOTIFY so every isolate pushes to its own streams.
 function publish(payload: unknown) {
-  return pool.query("SELECT pg_notify($1, $2)", [CHANNEL, JSON.stringify(payload)]);
+  return pool.query("SELECT pg_notify($1, $2)", [
+    CHANNEL,
+    JSON.stringify(payload),
+  ]);
 }
 ```
 
@@ -125,8 +140,10 @@ Send `data:` with no `event:` field to deliver the default `message` event, whic
 
 ```typescript
 const source = new EventSource(`${FUNCTION_URL}/events`); // GET only
-source.onmessage = (e) => console.log("update", e.data);  // default "message" events
-source.onerror = () => {/* EventSource auto-reconnects; nothing to do */};
+source.onmessage = (e) => console.log("update", e.data);
+source.onerror = () => {
+  /* EventSource auto-reconnects; nothing to do */
+};
 // source.close() to stop.
 ```
 

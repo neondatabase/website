@@ -8,7 +8,7 @@ summary: >-
   Neon database using the pg library, the Serverless Framework CLI, and
   DATABASE_URL with SSL enabled via sslmode=require.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -35,7 +35,7 @@ If you do not have one already, create a Neon project:
 
 ## Create a table in Neon
 
-To create a table, navigate to the **SQL Editor** in the [Neon Console](https://console.neon.tech/):
+To create a table, navigate to **Postgres database** > **SQL Editor** in the [Neon Console](https://console.neon.tech/):
 
 In the SQL Editor, run the following queries to create a `users` table and insert some data:
 

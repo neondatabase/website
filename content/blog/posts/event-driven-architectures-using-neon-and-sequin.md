@@ -37,7 +37,7 @@ seo:
 
 You’ll often want changes in your database to trigger changes in your application. Or want to replicate a database change to another service. Think of fanning out work when a new order comes in, updating a materialized view as sales finalize, or logging a change to an audit system.
 
-Capturing changes from your database (CDC) to then trigger events or replicate data is commonly implemented [with a combination of Debezium and Kafka](https://neon.tech/docs/guides/logical-replication-kafka-confluent). Debezium captures the changes while Kafka persists those changes until they are processed. But this is a notoriously complex stack: both tools require significant time and expertise to properly configure while also requiring you to master and scale new infrastructure. It’s a heavy dependency compared to the nimbleness of Neon.
+Capturing changes from your database (CDC) to then trigger events or replicate data is commonly implemented [with a combination of Debezium and Kafka](https://neon.com/docs/guides/logical-replication-kafka-confluent). Debezium captures the changes while Kafka persists those changes until they are processed. But this is a notoriously complex stack: both tools require significant time and expertise to properly configure while also requiring you to master and scale new infrastructure. It’s a heavy dependency compared to the nimbleness of Neon.
 
 In this post, we present you with an alternative, using [Sequin](https://sequinstream.com/) to detect, stream, and process every row change in Neon with no new dependencies.
 
@@ -55,11 +55,11 @@ Let’s see how to get this set up:
 
 You can use Sequin as an open-source, self-hosted Docker container in front of your Neon database, or take advantage of their hosted service.
 
-You’ll then connect your Neon database to Sequin, configure the tables you want to stream, and then begin processing changes in real-time using Sequin’s APIs. We’ll walk through the steps below, but feel free to check out the [integration guide in the Neon docs](https://neon.tech/docs/guides/sequin) if you need more details.
+You’ll then connect your Neon database to Sequin, configure the tables you want to stream, and then begin processing changes in real-time using Sequin’s APIs. We’ll walk through the steps below, but feel free to check out the [integration guide in the Neon docs](https://neon.com/docs/guides/sequin) if you need more details.
 
 ### Connect your Neon database to Sequin
 
-Sequin uses a logical replication slot to detect changes from your Postgres database. As a first step, [enable logical replication for your project:](https://neon.tech/docs/guides/logical-replication-postgres)
+Sequin uses a logical replication slot to detect changes from your Postgres database. As a first step, [enable logical replication for your project:](https://neon.com/docs/guides/logical-replication-postgres)
 
 1. Select your project in the Neon Console.
 2. Navigate to settings and select **Logical Replication**.

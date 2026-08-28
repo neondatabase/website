@@ -35,7 +35,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/supabase-auth-neon-auth/neon-supabase-migration-1-1024x576-28d69a58.jpg)
 
-[Neon Auth](https://neon.tech/docs/guides/neon-auth) allows you to integrate authentication with your Postgres database, eliminating the traditional complexity of keeping user data in sync. With Neon Auth, your user profiles are exposed in a standard Neon Postgres table, giving you the simplicity of a managed auth solution while maintaining complete data ownership. You can reference user data in your application queries with simple JOINs and build out complex user-based applications with simple logic.
+[Neon Auth](https://neon.com/docs/guides/neon-auth) allows you to integrate authentication with your Postgres database, eliminating the traditional complexity of keeping user data in sync. With Neon Auth, your user profiles are exposed in a standard Neon Postgres table, giving you the simplicity of a managed auth solution while maintaining complete data ownership. You can reference user data in your application queries with simple JOINs and build out complex user-based applications with simple logic.
 
 If you’re in the process of moving from Supabase to Neon, here’s how you can migrate your Auth.
 
@@ -273,9 +273,9 @@ That’s all there is to it. Calling it a three-step process is overkill. It’s
 
 Here’s more reading on Neon Auth to help you get your bearings:
 
-- [Neon Auth is Here](https://neon.tech/blog/neon-auth-is-here-get-authentication-in-a-couple-of-clicks)
-- [About Neon Auth](https://neon.tech/docs/guides/neon-auth)
-- [Neon Auth Tutorial](https://neon.tech/docs/guides/neon-auth-tutorial)
-- [Manage Neon Auth using the API](https://neon.tech/docs/guides/neon-auth-api)
+- [Neon Auth is Here](https://neon.com/blog/neon-auth-is-here-get-authentication-in-a-couple-of-clicks)
+- [About Neon Auth](https://neon.com/docs/guides/neon-auth)
+- [Neon Auth Tutorial](https://neon.com/docs/guides/neon-auth-tutorial)
+- [Manage Neon Auth using the API](https://neon.com/docs/guides/neon-auth-api)
 
 Also, check out the [Stack Auth documentation](https://docs.stack-auth.com/overview) to learn more about building with Stack Auth + Neon. If you are currently on Supabase and want to try Neon, [sign up for a free Neon account](https://console.neon.tech/signup) to see how easy it is to migrate.

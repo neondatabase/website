@@ -258,8 +258,8 @@ export default {
     {
       rows: '2',
       feature: {
-        title: 'Spending limits',
-        subtitle: 'Control your monthly spend',
+        title: 'Spending notifications',
+        subtitle: 'Get alerts as your spend grows',
       },
       free: false,
       launch: true,

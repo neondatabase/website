@@ -36,23 +36,23 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/bringing-psqls-d-to-your-web-browser/image-34-1024x576-4e2ca775.png)
 
-Different database systems provide different ways to list or describe the things they hold. For instance, to find a particular table and column in MySQL, you run `SHOW TABLES` followed by `SHOW COLUMNS FROM my_table`. In SQLite, you do `.tables` and then `.schema my_table`. And in Postgres, the commands are `\\d` (for describe) followed by `\\d mytable`.
+Different database systems provide different ways to list or describe the things they hold. For instance, to find a particular table and column in MySQL, you run `SHOW TABLES` followed by `SHOW COLUMNS FROM my_table`. In SQLite, you do `.tables` and then `.schema my_table`. And in Postgres, the commands are `\d` (for describe) followed by `\d mytable`.
 
-# \\d wasn’t working
+# \d wasn’t working
 
-When I got access to my first Neon Postgres database, almost the first thing I did was go to the web-based SQL Editor and type `\\d`. I was a little sad when the response I got back was: `ERROR: syntax error at or near "\\" (SQLSTATE 42601)`.
+When I got access to my first Neon Postgres database, almost the first thing I did was go to the web-based SQL Editor and type `\d`. I was a little sad when the response I got back was: `ERROR: syntax error at or near "\" (SQLSTATE 42601)`.
 
-It turns out that `\\d`, `\\l`, and their relatives are a psql feature. That is, these introspection commands are found in [the C code that implements the psql client](https://github.com/postgres/postgres/blob/master/src/bin/psql/describe.c), not the C code that implements the Postgres server. Each time you issue one of these commands in psql, you’re running a little local routine that constructs one or more SQL queries, sends them to execute on the server one by one, and stitches the results together into a nice little table.
+It turns out that `\d`, `\l`, and their relatives are a psql feature. That is, these introspection commands are found in [the C code that implements the psql client](https://github.com/postgres/postgres/blob/master/src/bin/psql/describe.c), not the C code that implements the Postgres server. Each time you issue one of these commands in psql, you’re running a little local routine that constructs one or more SQL queries, sends them to execute on the server one by one, and stitches the results together into a nice little table.
 
 <blockquote>
 <p>You may already know that you can see those underlying SQL queries by running psql with the <a href="https://www.postgresql.org/docs/devel/app-psql.html#APP-PSQL-OPTION-ECHO-HIDDEN"><code>-E</code> or <code>--echo-hidden</code> option</a>. <code>\d</code> issues only one query, but try <code>\d pg_a*</code> and you’ll see dozens. This is a useful way to explore some of Postgres’ internals. It was helpful, for example, in putting together the queries <a href="https://jawj.github.io/zapatos/">Zapatos</a> uses to fetch type information from your database.</p>
 </blockquote>
 
-Of course, it’s not just `\\d` and `\\l`: there are lots of other useful backslash commands. You can get a brief cheat-sheet with `\\? `, or look up [more details in the Postgres docs](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS). Some personal favourites are `\\dconfig`, which lists configuration parameter values; `\\du` and `\\dx`, which list users and installed extensions; `\\sf` and `\\sv`, which display the source of functions and views; and `\\h`, which provides a syntax reference for SQL commands.
+Of course, it’s not just `\d` and `\l`: there are lots of other useful backslash commands. You can get a brief cheat-sheet with `\? `, or look up [more details in the Postgres docs](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS). Some personal favourites are `\dconfig`, which lists configuration parameter values; `\du` and `\dx`, which list users and installed extensions; `\sf` and `\sv`, which display the source of functions and views; and `\h`, which provides a syntax reference for SQL commands.
 
-# \\d **works now**
+# \d **works now**
 
-Fast-forward a year or two. Having put together Neon’s [serverless driver](https://neon.tech/docs/serverless/serverless-driver) — which runs in environments that don’t offer raw TCP connections, such as web browsers — I was tasked to upgrade our web-based SQL Editor to make use of it. This enables interactive sessions and transactions in the SQL Editor, and reduces memory usage on our back-end, amongst other things.
+Fast-forward a year or two. Having put together Neon’s [serverless driver](https://neon.com/docs/serverless/serverless-driver) — which runs in environments that don’t offer raw TCP connections, such as web browsers — I was tasked to upgrade our web-based SQL Editor to make use of it. This enables interactive sessions and transactions in the SQL Editor, and reduces memory usage on our back-end, amongst other things.
 
 <blockquote>
 <p>Easter egg alert! As a as result of this work, if you open your browser’s dev tools in the SQL Editor, you can also run queries there using the currently-connected serverless driver client. The client is a property of the window, named <code>rawClient</code>. It’s so named because all parsing has been turned off: it returns the raw Postgres text format for each data type. Try pasting in <code>rawClient.query('SELECT now()').then(console.log)</code>, for instance.</p>
@@ -64,8 +64,8 @@ As I mentioned above, these commands are implemented in C. An obvious place to s
 
 That second approach — translating C to JavaScript — was the approach I ended up taking:
 
-- I turned C syntax into JS syntax using a bunch of RegExp search-and-replace. For example, I replaced `int x` with `let x`; concatenated consecutive strings (`"a" "b"` becomes `"ab”`); turned the `->` arrow operator into `. `; and so on. (I felt a little bit dirty doing this with RegExps, and I did briefly look at using a C parser and transforming the AST instead … but RegExps were **so** much quicker).
-- I reimplemented some C and Postgres functions. That includes dead simple ones like `function atoi(str) \{ return parseInt(str, 10); \}` or `function pg_tolower(ch) \{ return ch.toLowerCase(); \}`, and also some slightly more complex ones, like a minimal `sprintf` function, or the psql code to pretty-print a table.
+- I turned C syntax into JS syntax using a bunch of RegExp search-and-replace. For example, I replaced `int x` with `let x`; concatenated consecutive strings (`"a" "b"` becomes `"ab"`); turned the `->` arrow operator into `.`; and so on. (I felt a little bit dirty doing this with RegExps, and I did briefly look at using a C parser and transforming the AST instead … but RegExps were **so** much quicker).
+- I reimplemented some C and Postgres functions. That includes dead simple ones like `function atoi(str) { return parseInt(str, 10); }` or `function pg_tolower(ch) { return ch.toLowerCase(); }`, and also some slightly more complex ones, like a minimal `sprintf` function, or the psql code to pretty-print a table.
 - Last, I wrote down [examples of all the different psql introspection commands](https://github.com/neondatabase/psql-describe/blob/main/test/tests.txt), and a test script that compares their results in psql to the results generated by my code. I then went through these, one by one, until every last one matched. Almost all the required fixes were in places the original C code was doing something with pointers — pointer arithmetic, pointer dereferencing, and so on — without any direct JavaScript equivalent. It didn’t take too long this way to get a JavaScript implementation up and running. You can use it right now in the SQL Editor in the Neon console. You can also [see the code on GitHub](https://github.com/neondatabase/psql-describe), and do whatever you like with it (within the Postgres license terms) from there.
 
 <blockquote>
@@ -94,7 +94,7 @@ To figure out which semicolons are the significant ones, there are three syntax 
 - Comments are only a little trickier. Single-line comments extend from a double-dash to the end of a line. C-style `/* … */` block comments also exist, and can be nested.
 - Strings are the most complex. They can be plain single-quoted, in which case the character-escape behaviour inside them depends on the Postgres server’s `standard_conforming_strings` configuration parameter. Or they can be ‘escape strings’, which have an `e` or `E` before the opening quote. Both these sorts of strings can combine across whitespace (but only if it includes a newline). Or, of course, they can be dollar-quoted strings.
 
-In any case, the upshot is that I wrote [another little open-source package](https://github.com/neondatabase/semicolons) to do only this much parsing. It makes heavy use of [sticky RegExps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky) — a JS parser-writer’s best friend, [as I’ve mentioned elsewhere](https://neon.tech/blog/parsing-json-from-postgres-in-js) — to efficiently locate both comments and statement-terminating semicolons in SQL string.
+In any case, the upshot is that I wrote [another little open-source package](https://github.com/neondatabase/semicolons) to do only this much parsing. It makes heavy use of [sticky RegExps](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky) — a JS parser-writer’s best friend, [as I’ve mentioned elsewhere](https://neon.com/blog/parsing-json-from-postgres-in-js) — to efficiently locate both comments and statement-terminating semicolons in SQL string.
 
 We also allow backslash commands to be newline-terminated, which is just a small extra step on top of the work done by the package.
 

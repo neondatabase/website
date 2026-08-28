@@ -10,7 +10,7 @@ summary: >-
   for a working end-to-end example of Data API query patterns, RLS setup, and
   ON DELETE CASCADE.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 This tutorial uses a note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with authentication and Row-Level Security (RLS) policies keeping your data secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
@@ -41,7 +41,7 @@ Before you begin, ensure you have:
 ### Create a Neon project with Auth and Data API
 
 1. Go to the [Neon Console](https://console.neon.tech) to create a new Neon project
-2. In the Neon Console, navigate to your project and go to the **Data API** page in the left sidebar
+2. In the Neon Console, navigate to your project and go to **Postgres database** > **Data API**
 3. Select **Managed Better Auth** as your authentication option (the default), then click **Enable**
 
 This enables both the Data API and Managed Better Auth in one step. For detailed instructions, see [Getting started with Data API](/docs/data-api/get-started).

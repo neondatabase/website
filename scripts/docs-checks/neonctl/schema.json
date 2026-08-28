@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "2.43.0",
+  "neonctlVersion": "4.6.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -216,6 +216,10 @@
         "context-file": {
           "type": "unknown",
           "hidden": true
+        },
+        "keyring": {
+          "type": "boolean",
+          "describe": "Store the credential in the OS keyring. Per profile; later auth without the flag stays there. See `neon profile list`."
         }
       },
       "commands": {},
@@ -233,8 +237,7 @@
       "options": {
         "agent": {
           "type": "boolean",
-          "describe": "Emit a JSON state-machine response designed for AI agents instead of prompting. The output is a single JSON object with a discriminated `status` field describing the next step.",
-          "default": false
+          "hidden": true
         },
         "default": {
           "type": "boolean",
@@ -264,7 +267,7 @@
         },
         "list-templates": {
           "type": "boolean",
-          "describe": "List available templates and exit.",
+          "describe": "List available templates and exit. --output json and --output yaml print a machine-readable catalog.",
           "default": false,
           "alias": [
             "list",
@@ -293,8 +296,8 @@
           "description": "Quick start: scaffold the default template and run setup without prompting"
         },
         {
-          "command": "$0 bootstrap my-app --template hono --agent",
-          "description": "Scaffold without prompting and emit the JSON state machine for AI agents"
+          "command": "$0 bootstrap --list-templates --output json",
+          "description": "Print the template catalog as JSON"
         }
       ]
     },
@@ -379,7 +382,7 @@
             },
             "protected": {
               "type": "boolean",
-              "describe": "Whether the branch is protected"
+              "describe": "Whether the branch is protected. Protected branches (and their computes) cannot be deleted, archived, or reset, and block deletion of the project. Can be gated by `protected_branches_only` in the IP allowlist. Paid plans only."
             },
             "psql": {
               "type": "boolean",
@@ -659,7 +662,16 @@
               "type": "string"
             }
           ],
-          "options": {},
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
           "commands": {},
           "describe": "Delete a bucket from a branch",
           "usage": "$0 bucket delete <name> [options]"
@@ -670,7 +682,16 @@
             "ls"
           ],
           "positionals": [],
-          "options": {},
+          "options": {
+            "branch": {
+              "type": "string",
+              "describe": "Branch ID or name"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "Project ID"
+            }
+          },
           "commands": {},
           "describe": "List the buckets on a branch",
           "usage": "$0 bucket list [options]"
@@ -871,6 +892,113 @@
         }
       ]
     },
+    "claim": {
+      "aliases": [
+        "claimable"
+      ],
+      "positionals": [],
+      "options": {
+        "claimable-host": {
+          "type": "string",
+          "describe": "Claimable Neon service origin",
+          "defaultText": "process.env.CLAIMABLE_NEON_HOST ?? DEFAULT_CLAIMABLE_ORIGIN",
+          "hidden": true
+        }
+      },
+      "commands": {
+        "accept": {
+          "name": "accept",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "open": {
+              "type": "boolean",
+              "describe": "Open the verification URL in a browser",
+              "default": true
+            }
+          },
+          "commands": {},
+          "describe": "Create a claim code and open the URL where a human signs in and takes the project"
+        },
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "config": {
+              "type": "string",
+              "describe": "Path to neon.ts. Defaults to walking up from the current directory"
+            },
+            "env-pull": {
+              "type": "boolean",
+              "describe": "Write the provisioned DATABASE_URL and service URLs to a dotenv file",
+              "default": true
+            },
+            "file": {
+              "type": "string",
+              "describe": "Target dotenv file. Defaults to an existing .env, otherwise .env.local"
+            },
+            "service": {
+              "type": "array",
+              "describe": "Services to request for the claimable project: postgres, auth, data-api, functions, object-storage, ai-gateway. Repeat the flag or comma-separate. Postgres is always included. Services unavailable before claim are recorded and reported."
+            }
+          },
+          "commands": {},
+          "describe": "Create a temporary Neon project without an account"
+        },
+        "delete": {
+          "name": "delete",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirmation prompt",
+              "default": false,
+              "alias": "y"
+            }
+          },
+          "commands": {},
+          "describe": "Permanently delete an unclaimed project, or drop a local record that can no longer reach the service"
+        },
+        "list": {
+          "name": "list",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List claimable projects saved on this machine"
+        },
+        "status": {
+          "name": "status",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "project-id",
+              "describe": "Project from `neon claim list`. Defaults to the project linked in this directory",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Show a claimable project's lifecycle and claim status"
+        }
+      },
+      "describe": "Create and claim temporary Neon projects",
+      "usage": "$0 claim <sub-command> [options]"
+    },
     "config": {
       "aliases": [],
       "positionals": [],
@@ -932,7 +1060,8 @@
               "default": true
             },
             "services": {
-              "type": "string"
+              "type": "array",
+              "describe": "Services the scaffolded neon.ts declares: auth, functions, object-storage, ai-gateway. Pass \"none\" for the bare starter policy. Repeat the flag or comma-separate. Omitted: pick interactively on a terminal, starter policy in CI or without a TTY."
             }
           },
           "commands": {},
@@ -1443,9 +1572,17 @@
           "aliases": [],
           "positionals": [],
           "options": {
+            "env": {
+              "type": "array",
+              "alias": "e"
+            },
             "file": {
               "type": "string",
               "describe": "Target .env file to write. Defaults to an existing .env, otherwise .env.local. Only Neon variables are updated; other lines are preserved."
+            },
+            "service": {
+              "type": "array",
+              "describe": "Pull only these services' variables: postgres, auth, data-api, object-storage, ai-gateway. Repeat the flag or comma-separate. Overrides neon.ts, and prunes only within the services you name."
             }
           },
           "commands": {},
@@ -1458,6 +1595,18 @@
             {
               "command": "$0 env pull --branch preview --file .env.preview",
               "description": "Pull a specific branch into a specific file"
+            },
+            {
+              "command": "$0 env pull -s ai-gateway -s postgres",
+              "description": "Pull only the AI Gateway and Postgres variables"
+            },
+            {
+              "command": "$0 env pull -e DATABASE_URL",
+              "description": "Pull only the pooled Postgres connection string"
+            },
+            {
+              "command": "$0 env pull -s auth -e DATABASE_URL",
+              "description": "Pull all Auth variables plus DATABASE_URL"
             }
           ],
           "usage": "$0 env pull [options]"
@@ -1625,7 +1774,7 @@
             },
             "database-name": {
               "type": "string",
-              "describe": "Database name"
+              "describe": "Database to inspect. Omit to cover every database the API lists for the branch. Ranking and row limits stay per database. One failing database fails the whole run. Compute-wide checks run once against the first listed database. Ignored with --db-url."
             },
             "db-url": {
               "type": "string",
@@ -1667,7 +1816,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Local File Cache hit rate (needs neon extension)"
+              "describe": "Local File Cache hit rate (compute-wide, needs neon extension)"
             },
             "locks": {
               "aliases": [],
@@ -1695,7 +1844,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Replication slots: kind, status, client, restart/confirmed-flush LSNs, and lag (pg_replication_slots + pg_stat_replication)"
+              "describe": "Replication slots (compute-wide): kind, status, client, restart/confirmed-flush LSNs, and lag (pg_replication_slots + pg_stat_replication)"
             },
             "seq-scans": {
               "aliases": [],
@@ -1703,6 +1852,13 @@
               "options": {},
               "commands": {},
               "describe": "Number of sequential scans recorded against each table (pg_stat_user_tables)"
+            },
+            "stalled-queries": {
+              "aliases": [],
+              "positionals": [],
+              "options": {},
+              "commands": {},
+              "describe": "Active queries running longer than 30 seconds with parallel workers, waits, and blockers (compute-wide)"
             },
             "subscriptions": {
               "aliases": [],
@@ -1737,14 +1893,14 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Estimated working set vs LFC size (needs neon extension)"
+              "describe": "Estimated working set vs LFC size (compute-wide, needs neon extension)"
             }
           },
           "describe": "Run a diagnostic query against a branch's Postgres",
           "usage": "$0 inspect db <sub-command> [options]"
         }
       },
-      "describe": "Inspect a database's health and configuration",
+      "describe": "Inspect a branch's Postgres health and configuration",
       "usage": "$0 inspect <sub-command> [options]"
     },
     "ip-allow": {
@@ -1836,7 +1992,7 @@
         },
         "branch": {
           "type": "string",
-          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neonctl checkout <branch>` (link never guesses a default).",
+          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neon checkout <branch>` (link never guesses a default).",
           "alias": "branch-id"
         },
         "checks": {
@@ -1903,7 +2059,255 @@
         },
         {
           "command": "$0 link --project-id polished-snowflake-12345678",
-          "description": "Link an existing project (org is inferred); pin a branch later with 'neonctl checkout'"
+          "description": "Link an existing project (org is inferred); pin a branch later with 'neon checkout'"
+        }
+      ]
+    },
+    "logs": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "branch": {
+          "type": "string",
+          "describe": "Branch ID or name"
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID"
+        }
+      },
+      "commands": {
+        "field-values": {
+          "name": "field-values",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "field",
+              "required": true,
+              "describe": "The log field to list values for. Must be one of the names `logs fields` reports.",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "end-time": {
+              "type": "string",
+              "describe": "Exclusive end of the window (RFC 3339). Defaults to the current time."
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of distinct values to return (1-1000)"
+            },
+            "since": {
+              "type": "string",
+              "describe": "Length of the window, ending at --end-time or now. Defaults to 6h; the maximum window is 7d. Mutually exclusive with --start-time."
+            },
+            "source": {
+              "type": "string",
+              "describe": "Only consider records emitted by this service",
+              "choices": [
+                "function",
+                "storage",
+                "pg_endpoint"
+              ]
+            },
+            "start-time": {
+              "type": "string",
+              "describe": "Inclusive start of the window (RFC 3339, e.g. 2025-01-01T00:00:00Z). The maximum window is 7d. Mutually exclusive with --since."
+            }
+          },
+          "commands": {},
+          "describe": "List the distinct values observed for a log field",
+          "examples": [
+            {
+              "command": "$0 logs field-values service_name --since 6h",
+              "description": "Service names seen in the last six hours"
+            }
+          ]
+        },
+        "fields": {
+          "name": "fields",
+          "aliases": [],
+          "positionals": [],
+          "options": {},
+          "commands": {},
+          "describe": "List the log fields whose values can be discovered on a branch"
+        },
+        "query": {
+          "name": "query",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "body-contains": {
+              "type": "string",
+              "describe": "Match the case-sensitive rendered message. Structured bodies are rendered as compact JSON."
+            },
+            "cursor": {
+              "type": "string",
+              "describe": "Pagination cursor returned as next_cursor by a previous call. Repeat the same time range and filters."
+            },
+            "end-time": {
+              "type": "string",
+              "describe": "Exclusive end of the window (RFC 3339). Defaults to the current time."
+            },
+            "limit": {
+              "type": "number",
+              "describe": "Maximum number of records to return per page (1-1000)",
+              "default": 100
+            },
+            "logql": {
+              "type": "string",
+              "describe": "Raw LogQL expression (stream selectors and line filters only). Replaces the structured filters; the window, --limit, --sort-order and --cursor still apply."
+            },
+            "minimum-severity": {
+              "type": "string",
+              "describe": "Only records at or above this severity. Combines with --severity-text. If Neon reports that this filter is unsupported, use --severity-text instead.",
+              "choices": [
+                "trace",
+                "debug",
+                "info",
+                "warn",
+                "error",
+                "fatal"
+              ]
+            },
+            "scope-name": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry instrumentation scope name exactly"
+            },
+            "service-name": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry service.name resource attribute exactly"
+            },
+            "severity-text": {
+              "type": "string",
+              "describe": "Match the OpenTelemetry severity text exactly. Run `neon logs field-values severity_text` to discover the values present."
+            },
+            "since": {
+              "type": "string",
+              "describe": "Length of the window, ending at --end-time or now. Defaults to 1h; the maximum window is 7d. Mutually exclusive with --start-time."
+            },
+            "sort-order": {
+              "type": "string",
+              "describe": "Order records by timestamp. Defaults to desc (newest first).",
+              "choices": [
+                "asc",
+                "desc"
+              ]
+            },
+            "source": {
+              "type": "string",
+              "describe": "Only records emitted by this service",
+              "choices": [
+                "function",
+                "storage",
+                "pg_endpoint"
+              ]
+            },
+            "start-time": {
+              "type": "string",
+              "describe": "Inclusive start of the window (RFC 3339, e.g. 2025-01-01T00:00:00Z). The maximum window is 7d. Mutually exclusive with --since."
+            },
+            "trace-id": {
+              "type": "string",
+              "describe": "Match records carrying this trace ID (32 lowercase hex digits)"
+            }
+          },
+          "commands": {},
+          "describe": "Query log records on a branch",
+          "examples": [
+            {
+              "command": "$0 logs query --since 1h --logql '{entity_type=\"function\"} |= \"timeout\"'",
+              "description": "A raw LogQL selection instead of the structured filters"
+            },
+            {
+              "command": "$0 logs query --branch main --source pg_endpoint --minimum-severity error",
+              "description": "Postgres compute errors on main"
+            },
+            {
+              "command": "$0 logs query --since 30m",
+              "description": "The last 30 minutes of logs on the default branch"
+            }
+          ]
+        }
+      },
+      "describe": "Query branch logs",
+      "usage": "$0 logs <sub-command> [options]"
+    },
+    "mcp": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
+          "alias": "a"
+        },
+        "category": {
+          "type": "array",
+          "describe": "MCP tool category (repeatable or comma-separated). Default: all. Values listed below"
+        },
+        "oauth": {
+          "type": "boolean",
+          "describe": "Write the server URL only. The agent prompts for Neon sign-in on first use. No CLI login, no API key minted. Skips the auth question",
+          "default": false
+        },
+        "project": {
+          "type": "boolean",
+          "describe": "Write project-level MCP config. Skips the config-location question. A linked project-folder install may still pin a project and scope a newly minted key",
+          "default": false
+        },
+        "project-id": {
+          "type": "string",
+          "describe": "Pin MCP tools to one Neon project (?projectId=). A newly minted API key is limited to that project. A linked project-folder install asks the same when you pick API-key auth"
+        },
+        "read-only": {
+          "type": "boolean",
+          "describe": "Restrict MCP tools to read-only (?readonly=true). Not prompted. Does not change the minted key",
+          "default": false,
+          "alias": "readonly"
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Skip prompts. Defaults listed below. --project, --oauth, --agent, --read-only, --project-id and --category still apply",
+          "default": false,
+          "alias": "y"
+        }
+      },
+      "commands": {},
+      "describe": "Install the Neon MCP server into coding agents",
+      "usage": "$0 mcp [options]",
+      "examples": [
+        {
+          "command": "$0 mcp",
+          "description": "Interactive: config location, agents, auth, then confirm"
+        },
+        {
+          "command": "$0 mcp -y",
+          "description": "Global config, detected agents, reuse or mint an API key"
+        },
+        {
+          "command": "$0 mcp --oauth",
+          "description": "Install with OAuth; the agent signs in on first use"
+        },
+        {
+          "command": "$0 mcp --project",
+          "description": "Write project-level config"
+        },
+        {
+          "command": "$0 mcp --agent cursor --agent claude-code",
+          "description": "Install into specific agents"
+        },
+        {
+          "command": "$0 mcp --read-only",
+          "description": "Hide write tools via ?readonly=true"
+        },
+        {
+          "command": "$0 mcp --project-id <id>",
+          "description": "Pin tools to one project via ?projectId="
+        },
+        {
+          "command": "$0 mcp --category querying --category schema",
+          "description": "Limit tools to those categories"
         }
       ]
     },
@@ -2013,44 +2417,14 @@
                   "aliases": [],
                   "positionals": [],
                   "options": {
-                    "host": {
-                      "type": "string",
-                      "describe": "SMTP host",
-                      "required": true
-                    },
-                    "password": {
-                      "type": "string",
-                      "describe": "SMTP password",
-                      "required": true
-                    },
-                    "port": {
-                      "type": "number",
-                      "describe": "SMTP port",
-                      "required": true
-                    },
                     "recipient-email": {
                       "type": "string",
-                      "describe": "Email address to send test email to",
-                      "required": true
-                    },
-                    "sender-email": {
-                      "type": "string",
-                      "describe": "Sender email address",
-                      "required": true
-                    },
-                    "sender-name": {
-                      "type": "string",
-                      "describe": "Sender display name",
-                      "required": true
-                    },
-                    "username": {
-                      "type": "string",
-                      "describe": "SMTP username",
+                      "describe": "Email address to deliver the test message to",
                       "required": true
                     }
                   },
                   "commands": {},
-                  "describe": "Send a test email"
+                  "describe": "Send a test message through the saved custom SMTP provider"
                 },
                 "update": {
                   "name": "update",
@@ -2509,6 +2883,25 @@
       "describe": "Manage Neon Auth",
       "usage": "$0 neon-auth <sub-command> [options]"
     },
+    "open": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "project-id": {
+          "type": "string",
+          "describe": "Project ID (defaults to the project linked in .neon)"
+        }
+      },
+      "commands": {},
+      "describe": "Open the linked project in the Neon Console",
+      "usage": "$0 open [options]",
+      "examples": [
+        {
+          "command": "$0 open",
+          "description": ""
+        }
+      ]
+    },
     "operations": {
       "aliases": [
         "operation"
@@ -2552,13 +2945,107 @@
       "describe": "Manage organizations",
       "usage": "$0 orgs <sub-command> [options]"
     },
-    "profiles": {
+    "plugins": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
+          "alias": "a"
+        },
+        "global": {
+          "type": "boolean",
+          "describe": "Install user-level. Default is project",
+          "default": false
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Skip prompts",
+          "default": false,
+          "alias": "y"
+        }
+      },
+      "commands": {},
+      "describe": "Install the Neon plugin into coding agents",
+      "usage": "$0 plugins [options]",
+      "examples": [
+        {
+          "command": "$0 plugins",
+          "description": "Interactive: agents, then confirm"
+        },
+        {
+          "command": "$0 plugins -y",
+          "description": "Detected agents, skip prompts"
+        },
+        {
+          "command": "$0 plugins --agent cursor --agent claude-code",
+          "description": "Install into specific agents"
+        },
+        {
+          "command": "$0 plugins --global",
+          "description": "Install user-level"
+        }
+      ]
+    },
+    "profile": {
       "aliases": [
-        "profile"
+        "profiles"
       ],
       "positionals": [],
       "options": {},
       "commands": {
+        "create": {
+          "name": "create",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "Name for the new profile",
+              "type": "string"
+            }
+          ],
+          "options": {
+            "api-key": {
+              "type": "string",
+              "describe": "API key to store, or \"-\" to read it from stdin"
+            },
+            "force": {
+              "type": "boolean",
+              "hidden": true
+            },
+            "keyring": {
+              "type": "boolean",
+              "describe": "Store the credential in the OS keyring. Per profile; later create without the flag stays there. See `neon profile list`."
+            },
+            "mint": {
+              "type": "boolean",
+              "describe": "Sign in once in the browser, then store a freshly minted API key and nothing else",
+              "default": false
+            },
+            "org-id": {
+              "type": "string",
+              "describe": "With --mint, mint a key for this organization instead of your account"
+            },
+            "project-id": {
+              "type": "string",
+              "describe": "With --mint, mint a key that can access only this project"
+            }
+          },
+          "commands": {},
+          "describe": "Create a profile. It holds either a browser sign-in or an API key, never both",
+          "examples": [
+            {
+              "command": "$0 profile create work",
+              "description": "Sign in with the browser, like `neon auth --profile work`"
+            },
+            {
+              "command": "$0 profile create ci --mint --org-id org-abc-123",
+              "description": "One browser sign-in, then an org-scoped key and no session left behind"
+            }
+          ]
+        },
         "list": {
           "name": "list",
           "aliases": [],
@@ -2587,11 +3074,26 @@
             }
           },
           "commands": {},
-          "describe": "Revoke a profile's token and remove it"
+          "describe": "Revoke a profile's credential where possible, and remove it"
+        },
+        "rotate-key": {
+          "name": "rotate-key",
+          "aliases": [],
+          "positionals": [
+            {
+              "name": "name",
+              "required": true,
+              "describe": "Profile to rotate",
+              "type": "string"
+            }
+          ],
+          "options": {},
+          "commands": {},
+          "describe": "Mint a fresh API key for a profile, at the same scope, and revoke the one it replaces"
         }
       },
       "describe": "Manage named sets of Neon credentials",
-      "usage": "$0 profiles <sub-command> [options]"
+      "usage": "$0 profile <sub-command> [options]"
     },
     "projects": {
       "aliases": [
@@ -2919,8 +3421,86 @@
         }
       },
       "commands": {},
-      "describe": "Deprecated: use `neonctl link`. Set the .neon context (raw write).",
+      "describe": "Deprecated: use `neon link`. Set the .neon context (raw write).",
       "usage": "$0 set-context [options]"
+    },
+    "skills": {
+      "aliases": [],
+      "positionals": [],
+      "options": {
+        "agent": {
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Skips the agent picker. Values listed below",
+          "alias": "a"
+        },
+        "global": {
+          "type": "boolean",
+          "describe": "Install user-level skills (skills CLI -g). Default is this directory",
+          "default": false
+        },
+        "skill": {
+          "type": "array",
+          "describe": "Skill to install (repeatable). Skips the skill picker. Values listed below",
+          "alias": "s"
+        },
+        "yes": {
+          "type": "boolean",
+          "describe": "Skip prompts",
+          "default": false,
+          "alias": "y"
+        }
+      },
+      "commands": {
+        "update": {
+          "name": "update",
+          "aliases": [],
+          "positionals": [],
+          "options": {
+            "global": {
+              "type": "boolean",
+              "describe": "Update user-level skills (skills CLI -g). Default is this directory",
+              "default": false
+            }
+          },
+          "commands": {},
+          "describe": "Update installed skills to the latest versions",
+          "examples": [
+            {
+              "command": "$0 skills update",
+              "description": "Interactive: confirm, then update skills in this directory"
+            },
+            {
+              "command": "$0 skills update -y",
+              "description": "Update skills in this directory without prompting"
+            },
+            {
+              "command": "$0 skills update --global -y",
+              "description": "Update user-level skills"
+            }
+          ],
+          "usage": "$0 skills update [options]"
+        }
+      },
+      "describe": "Install Neon agent skills into coding agents",
+      "usage": "$0 skills [command] [options]",
+      "examples": [
+        {
+          "command": "$0 skills",
+          "description": "Interactive: this directory, agents, skills, then confirm"
+        },
+        {
+          "command": "$0 skills -y",
+          "description": "This directory, detected agents, the default skills"
+        },
+        {
+          "command": "$0 skills -s neon -s neon-ai-gateway --agent cursor",
+          "description": "Install named skills into specific agents"
+        },
+        {
+          "command": "$0 skills --global",
+          "description": "Install user-level skills"
+        }
+      ]
     },
     "snapshots": {
       "aliases": [

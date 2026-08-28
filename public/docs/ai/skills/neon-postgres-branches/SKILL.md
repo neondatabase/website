@@ -11,6 +11,7 @@ description: >-
   "sensitive data testing".
 metadata:
   parent: neon
+  source: https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres-branches
 ---
 
 **FIRST**: Use the parent `neon` skill for a Neon overview, getting started with Neon, Neon development best practices, and more.

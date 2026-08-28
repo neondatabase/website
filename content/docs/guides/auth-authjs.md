@@ -6,16 +6,18 @@ summary: >-
   Auth.js (NextAuth.js v5) with the Lakebase Postgres adapter stores users,
   sessions, and magic-link verification tokens directly in a Lakebase database,
   enabling passwordless email authentication in Next.js without a separate auth
-  service. Use this guide when you want self-hosted auth with full database
-  control, as an alternative to the managed Managed Better Auth option. The setup uses
-  @auth/pg-adapter, @neondatabase/serverless, and Resend as the email provider
+  service. Use this guide when you want self-managed auth with full database
+  control, as an alternative to the Managed Better Auth option. The setup uses
+  @auth/neon-adapter, @neondatabase/serverless, and Resend as the email provider
   for magic link delivery.
 enableTableOfContents: true
-updatedOn: '2026-08-04T05:18:26.469Z'
+updatedOn: '2026-08-17T18:59:17.453Z'
 ---
 
-<Admonition type="tip" title="Authentication on Neon">
-This guide uses the [Neon Adapter](https://authjs.dev/getting-started/adapters/neon) for Auth.js to store users and sessions in your database. If you prefer a managed option with no separate auth infrastructure, see [Managed Better Auth](/docs/auth/overview). Auth state branches with your database for preview and CI environments.
+<Admonition type="important" title="Start here: pick your auth setup">
+Want authentication tables in your Postgres database with no separate auth service to run? Use [Managed Better Auth](/docs/auth/overview). It stores users and sessions directly in your database under the `neon_auth` schema, and every database branch gets its own isolated auth environment for preview and CI.
+
+Choose this guide instead when you want to own and control the auth tables yourself: self-managed Auth.js with the [Neon adapter](https://authjs.dev/getting-started/adapters/neon) (`@auth/neon-adapter`), which stores users and sessions in tables you define and manage.
 </Admonition>
 
 [Auth.js](https://authjs.dev/) (formerly NextAuth.js) is a popular authentication solution that supports a wide range of authentication methods, including social logins (for example, Google, Facebook), traditional email/password, and passwordless options like magic links. For simple authentication flows, such as social logins, Auth.js can operate using only in-memory session storage (in a browser cookie). However, if you want to implement custom login flows, or persist the signed-in users' information in your database, you need to specify a database backend.
@@ -51,7 +53,7 @@ Now, navigate to the project directory and install the required dependencies:
 ```bash
 cd guide-neon-next-authjs
 npm install next-auth@beta
-npm install @auth/pg-adapter @neondatabase/serverless
+npm install @auth/neon-adapter @neondatabase/serverless
 ```
 
 For authentication, we'll use the `Auth.js` library (aliased as v5 of the `next-auth` package), which provides a simple way to add authentication to Next.js applications. It comes with built-in support for Resend as an authentication provider. We use the `@neondatabase/serverless` package as the Postgres client for the `Auth.js` database adapter.
@@ -111,7 +113,7 @@ Create a new file `auth.ts` in the root directory of the project and add the fol
 
 import NextAuth from 'next-auth';
 import Resend from 'next-auth/providers/resend';
-import PostgresAdapter from '@auth/pg-adapter';
+import NeonAdapter from '@auth/neon-adapter';
 import { Pool } from '@neondatabase/serverless';
 
 // *DO NOT* create a `Pool` here, outside the request handler.
@@ -119,13 +121,13 @@ import { Pool } from '@neondatabase/serverless';
 export const { handlers, auth, signIn, signOut } = NextAuth(() => {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   return {
-    adapter: PostgresAdapter(pool),
+    adapter: NeonAdapter(pool),
     providers: [Resend({ from: 'Test <onboarding@resend.dev>' })],
   };
 });
 ```
 
-This file sets up Auth.js with the Lakebase Postgres adapter and configures the Email provider for magic link authentication.
+This file sets up Auth.js with the Lakebase Postgres adapter (`@auth/neon-adapter`) and configures the Email provider for magic link authentication.
 
 Additionally, `Auth.js` also requires setting up an `AUTH_SECRET` environment variable, which is used to encrypt cookies and magic tokens. You can use the `Auth.js` CLI to generate one:
 

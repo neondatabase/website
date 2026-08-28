@@ -60,7 +60,7 @@ Hyperdrive is available as a binding in Cloudflare Pages when using Pages Functi
 
 This provides two options for integrating a Nuxt application with Neon Postgres on Cloudflare:
 
-1. Use the [Neon Serverless driver](https://neon.tech/docs/serverless/serverless-driver) and connect to Neon directly from the Nuxt server route with the [Cloudflare Pages Postgres](https://neon.tech/docs/guides/cloudflare-pages) integration.
+1. Use the [Neon Serverless driver](https://neon.com/docs/serverless/serverless-driver) and connect to Neon directly from the Nuxt server route with the [Cloudflare Pages Postgres](https://neon.com/docs/guides/cloudflare-pages) integration.
 2. Or, deploy a Worker configured with the Hyperdrive configuration that’s accessible using the Drizzle Postgres HTTP Proxy driver from the Pages app.
 
 In both scenarios, Drizzle can be used to access and query Neon databases. We’ll cover the second approach that uses _both Hyperdrive and Neon Postgres_. Using the Worker in this setup offers a flexible workaround for integrating other dependencies or services too, if needed.
@@ -198,7 +198,7 @@ pnpm add @types/pg -D
 
 ### Create the Postgres Hyperdrive Configuration
 
-In Neon, create a new project named **hyperdrive-ai**. This will be the Postgres cluster used with Hyperdrive. Optionally, [create a new role](https://neon.tech/docs/manage/roles) (i.e.**hyperdrive-ai**) for the connection configuration.
+In Neon, create a new project named **hyperdrive-ai**. This will be the Postgres cluster used with Hyperdrive. Optionally, [create a new role](https://neon.com/docs/manage/roles) (i.e.**hyperdrive-ai**) for the connection configuration.
 
 Select the **Pooled connection** option and copy the connection string.
 
@@ -425,7 +425,7 @@ export const Elements = pgTable("Element", {
 ...
 ```
 
-In a production setup, consider setting up [database migrations with Drizzle and Neon](https://neon.tech/blog/api-cf-drizzle-neon) to speed up development iteration and harden your workflow.
+In a production setup, consider setting up [database migrations with Drizzle and Neon](https://neon.com/blog/api-cf-drizzle-neon) to speed up development iteration and harden your workflow.
 
 ### Update the Nuxt Server Route
 

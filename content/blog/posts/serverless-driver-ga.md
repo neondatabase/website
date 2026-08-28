@@ -42,7 +42,7 @@ The driver has been available for several years, but it was still wearing a pre-
 
 ## Structure and stability
 
-The first thing that’s changed is the structure of the code. The serverless driver emerged somewhat organically out of initial experiments in using [standalone WebSocket-to-TCP proxies and userspace TLS](https://neon.tech/blog/serverless-driver-for-postgres). The upshot of this was that the repo was rather oddly structured; the bundled TypeScript types (i.e.`.d.ts` files) were generated and maintained by hand; and there were no conventional tests (although there was a bunch of code that exercised various features of the driver). Over time, these things became bit of an impediment to progress, both Neon-developed improvements and perhaps also contributions from outside.
+The first thing that’s changed is the structure of the code. The serverless driver emerged somewhat organically out of initial experiments in using [standalone WebSocket-to-TCP proxies and userspace TLS](https://neon.com/blog/serverless-driver-for-postgres). The upshot of this was that the repo was rather oddly structured; the bundled TypeScript types (i.e.`.d.ts` files) were generated and maintained by hand; and there were no conventional tests (although there was a bunch of code that exercised various features of the driver). Over time, these things became bit of an impediment to progress, both Neon-developed improvements and perhaps also contributions from outside.
 
 So version 1.0.0 of the driver is published from [a heavily refactored codebase](https://github.com/neondatabase/serverless), which has a more normal and familiar structure; the types are now extracted and bundled up automatically (using Microsoft’s [api-extractor](https://api-extractor.com/)); and there’s a decent set of CI tests to catch any future regressions. That includes testing on Node, Bun, Deno, Firefox, Chrome, Cloudflare Workers and Vercel Functions, and via adapters for the Prisma and Drizzle ORMs.
 
@@ -65,7 +65,7 @@ const name = "Robert'); DROP TABLE students; --";
 const result = await sql `SELECT * FROM students WHERE name = ${name}`;
 ```
 
-[The reason this is safe](https://neon.tech/blog/sql-template-tags) is that untrusted values are not directly interpolated into the SQL string. Instead, we insert numbered placeholders — `$1`, `$2`, etc. — and the actual values are sent to the server separately.
+[The reason this is safe](https://neon.com/blog/sql-template-tags) is that untrusted values are not directly interpolated into the SQL string. Instead, we insert numbered placeholders — `$1`, `$2`, etc. — and the actual values are sent to the server separately.
 
 As of version 1.0.0, one of the things you can now interpolate into your tagged-template SQL queries is … tagged template SQL queries. In other words, queries are now **composable** (just as they already were in libraries such as [postgres.js](https://github.com/porsager/postgres)). This makes it easy to build up queries from smaller component parts. For example:
 

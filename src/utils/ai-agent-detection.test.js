@@ -238,14 +238,13 @@ describe('getMarkdownPath', () => {
       expect(result).toBe('/md/changelog/2026-03-13.md');
     });
 
-    it('should exclude /use-cases/multi-tb', () => {
-      const result = getMarkdownPath('/use-cases/multi-tb');
-      expect(result).toBeNull();
-    });
-
-    it('should exclude /use-cases/serverless-apps', () => {
-      const result = getMarkdownPath('/use-cases/serverless-apps');
-      expect(result).toBeNull();
+    it.each([
+      ['/use-cases/full-stack-apps', '/md/use-cases/full-stack-apps.md'],
+      ['/use-cases/branching-workflows', '/md/use-cases/branching-workflows.md'],
+      ['/use-cases/bursty-workloads', '/md/use-cases/bursty-workloads.md'],
+      ['/use-cases/large-databases', '/md/use-cases/large-databases.md'],
+    ])('should resolve %s to its markdown mirror', (path, expected) => {
+      expect(getMarkdownPath(path)).toBe(expected);
     });
   });
 

@@ -190,7 +190,7 @@ Then seed three sample posts in the [Neon Console SQL Editor](https://console.ne
 npx drizzle-kit push
 ```
 
-Open your project in the Neon Console, go to **SQL Editor**, and run:
+Open your project in the Neon Console, go to **Postgres database** > **SQL Editor**, and run:
 
 ```sql
 INSERT INTO posts (author, content, is_published) VALUES
@@ -365,13 +365,14 @@ A function keeps running across requests, so open a `pg` `Pool` once at module s
 <TwoColumnLayout.Block>
 
 ```bash filename="Terminal"
-npm install hono pg ai @neon/ai-sdk-provider zod
+npm install hono pg ai@^7 @neon/ai-sdk-provider @neon/functions zod
 npm install -D @types/pg
 ```
 
 ```typescript filename="functions/posts.ts"
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
+import { attachDatabasePool } from '@neon/functions';
 import { Pool } from 'pg';
 import { neon } from '@neon/ai-sdk-provider';
 import { streamText, generateText, convertToModelMessages, tool, stepCountIs } from 'ai';
@@ -379,6 +380,8 @@ import { z } from 'zod';
 
 // Reused across requests. Use a pooled pg client, not the serverless driver.
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+// Keep an idle disconnect from crashing the isolate.
+attachDatabasePool(pool);
 
 const app = new Hono();
 

@@ -6,7 +6,7 @@ summary: >-
   Each credential maps to an S3 Access Key ID and Secret Access Key. Credentials
   are scoped to a branch and valid for that branch and all its descendants.
 enableTableOfContents: true
-updatedOn: '2026-07-20T20:13:30.657Z'
+updatedOn: '2026-08-17T23:18:55.558Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Object Storage" />
@@ -23,12 +23,12 @@ An object storage credential requires at minimum one of:
 <Tabs labels={["Console", "API"]}>
 <TabItem>
 
-In the Neon Console, select your branch and click **Credentials** under **APP BACKEND** in the sidebar. Click **Create credential**, give it a name, and check the storage scopes you need.
+In the Neon Console, select your branch and click **Credentials** under **Branch** in the sidebar. Click **Create credential**, give it a name, and check the storage scopes you need.
 
 After creation, the credentials are shown once. Copy the snippet or click **Download .env** before closing:
 
 ```text
-AWS_ENDPOINT_URL_S3=https://br-cool-darkness-a1b2c3d4.storage.c-1.us-east-2.aws.neon.build
+AWS_ENDPOINT_URL_S3=https://br-cool-darkness-a1b2c3d4.storage.c-1.us-east-2.aws.neon.tech
 AWS_ACCESS_KEY_ID=nak_live_...
 AWS_SECRET_ACCESS_KEY=nsk_live_...
 AWS_REGION=us-east-2

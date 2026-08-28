@@ -5,7 +5,8 @@ summary: >-
   View a deployed function's logs in the Neon Console: standard output and
   standard error from your handler, plus a platform-emitted invoke begin /
   invoke end line around each request. Covers the console-method-to-level
-  mapping and common log entries that look like a problem but aren't.
+  mapping, common log entries that look like a problem but aren't, and
+  wiring up application instrumentation like Sentry or OpenTelemetry.
 enableTableOfContents: true
 ---
 
@@ -60,8 +61,39 @@ It's a `pg` (node-postgres) deprecation warning, not a connection problem: the i
 
 **Function not starting after a deploy? Read the response body, not the logs.** A missing entry point, an import that throws at load time, or a default export of the wrong shape returns a `function_load_failed` error with your actual error message in the response body of the failed request, not as a log line. Check the response you got back from calling the function, not the Logs tab.
 
+## Application instrumentation
+
+A function is a long-lived Node.js process, so standard Node monitoring SDKs like [Sentry](https://sentry.io) and [OpenTelemetry](https://opentelemetry.io) work unchanged. Initialize the SDK once at module load, before your handler starts serving requests, so the whole isolate is instrumented. Gate it on an environment variable (the SDK's DSN or endpoint) so local `neon dev` runs and branches without the secret configured stay a no-op, then pass the SDK's secret at deploy time as a [user-defined variable](/docs/compute/functions/environment-variables#user-defined-variables).
+
+Neon sends `SIGINT`/`SIGTERM` before evicting an idle isolate, so flush buffered telemetry in a shutdown handler or the last events are lost:
+
+```ts
+process.on('SIGINT', () => void Sentry.flush(2000));
+```
+
+To send unexpected database pool errors to your monitoring SDK, pass `onUnexpectedError` when you call [`attachDatabasePool`](/docs/compute/functions/get-started#connect-to-postgres). Expected idle disconnects are still swallowed; only unexpected errors reach the handler:
+
+```ts
+import { attachDatabasePool } from '@neon/functions';
+import { Pool } from 'pg';
+import { Sentry } from './instrument';
+
+const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool, {
+  onUnexpectedError: (err) => Sentry.captureException(err),
+});
+```
+
+`neon deploy` bundles your code with esbuild, which defeats auto-instrumentation that patches modules at import time. If a library's spans are missing from a deployed function, that's the first thing to check.
+
 ## Filter, search, and retention
 
 For details on filtering by level or service name, searching log bodies, live tail, downloading logs, and the 3-day retention window, see [Monitor logs](/docs/introduction/monitor-logs).
+
+You can also read function logs from the terminal with [`neon logs query`](/docs/cli/logs), scoped with `--source function`:
+
+```bash
+neon logs query --source function --since 1h
+```
 
 <NeedHelp/>

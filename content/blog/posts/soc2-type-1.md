@@ -55,7 +55,7 @@ First and foremost, it’s about trust. In the digital age, data security is cru
 
 Second, achieving SOC2 compliance involves a thorough review of our systems and controls, which helps us identify areas where we can improve. It’s a rigorous process that pushes us to enhance our security measures, ultimately benefiting our users.
 
-Finally, [we recently launched a partners program](https://neon.tech/blog/partner-program), and SOC2 compliance shows potential customers and partners that we’re committed to maintaining high standards of security and privacy, which can help us stand out from the crowd.
+Finally, [we recently launched a partners program](https://neon.com/blog/partner-program), and SOC2 compliance shows potential customers and partners that we’re committed to maintaining high standards of security and privacy, which can help us stand out from the crowd.
 
 ## Our journey to SOC2
 

@@ -34,10 +34,10 @@ seo:
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/building-slack-notifications-to-monitor-pg_dump-and-restore-workflows/neon-slack-1024x576-43860fff.jpg)
 
 <blockquote>
-<p>📚 <strong>This article is part of a series on setting up Neon for dev, test, and staging environments while keeping your prod database in RDS. </strong><a href="https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres">Find out what we’re talking about. </a></p>
+<p>📚 <strong>This article is part of a series on setting up Neon for dev, test, and staging environments while keeping your prod database in RDS. </strong><a href="https://neon.com/blog/development-environments-for-aws-rds-using-neon-postgres">Find out what we’re talking about. </a></p>
 </blockquote>
 
-In a [previous blog post](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon), we showed you how to create a Neon Twin using a GitHub Action that automatically runs a pg_dump of your RDS production database and restores it to Neon on a recurring nightly schedule.
+In a [previous blog post](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon), we showed you how to create a Neon Twin using a GitHub Action that automatically runs a pg_dump of your RDS production database and restores it to Neon on a recurring nightly schedule.
 
 In this blog post, we’ll guide you through setting up a Slack Webhook to send notifications to a public Slack channel. This will inform your team about the latest pg_dump and restore activities.
 
@@ -54,7 +54,7 @@ We’ll also cover how to surface more detailed information about the dump and r
 
 Before diving in, ensure you have the following:
 
-- **Completion of previous steps.** Make sure you have completed [all the steps outlined in the previous article](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon), particularly the setup of the Neon Twin and the GitHub Action for pg_dump and restore.
+- **Completion of previous steps.** Make sure you have completed [all the steps outlined in the previous article](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon), particularly the setup of the Neon Twin and the GitHub Action for pg_dump and restore.
 - **Slack API admin access.** You’ll need administrator privileges to your company’s Slack workspace to create and manage Slack apps and webhooks.
 - **GitHub repo access.** Ensure you have access to the GitHub repository where the Actions will run, including permissions to manage Actions and Secrets.
 
@@ -73,7 +73,7 @@ In this section, we will guide you through how to set up Slack notifications for
 
 1. Creating a Slack channel in your company’s Slack workspace for receiving notification
 2. Setting up and configuring a Slack App using the Slack developer console
-3. Modify your existing GitHub Actions workflow ([from the previous blog post](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon))
+3. Modify your existing GitHub Actions workflow ([from the previous blog post](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon))
 4. Develop JavaScript functions to post formatted notifications to your Slack channel
 5. Commit changes and deploy the action
 
@@ -147,7 +147,7 @@ You will now be able to **Copy** the Webhook URL. Add this as an env var in your
 
 ### Update GitHub Action
 
-Now, it’s time to update the workflow we set up [in the previous blog post.](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) To post a notification to Slack with information about the pg_dump/restore job there are a number of additions that need to be made to the .yml file, and three new JavaScript files that are responsible for posting a formatted message to Slack for both success and failure scenarios.
+Now, it’s time to update the workflow we set up [in the previous blog post.](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon) To post a notification to Slack with information about the pg_dump/restore job there are a number of additions that need to be made to the .yml file, and three new JavaScript files that are responsible for posting a formatted message to Slack for both success and failure scenarios.
 
 To begin with, add the following to your .yml file and we’ll explain what each part is for.
 
@@ -525,13 +525,13 @@ And that’s it. You now have a full pg_dump and restore of your production data
 
 ## Next steps
 
-**Continue building the workflow:** Navigate to [Part IV of the series – How to deploy a chance tested in Neon to prod in RDS](https://neon.tech/blog/neon-twin-deploy-workflow)
+**Continue building the workflow:** Navigate to [Part IV of the series – How to deploy a chance tested in Neon to prod in RDS](https://neon.com/blog/neon-twin-deploy-workflow)
 
 ## In case you missed it
 
-**Part I:** [Building a Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS](https://neon.tech/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
+**Part I:** [Building a Neon Twin: Move Dev/Test/Staging to Neon, Keep Production on RDS](https://neon.com/blog/optimizing-dev-environments-in-aws-rds-with-neon-postgres-part-ii-using-github-actions-to-mirror-rds-in-neon)
 
-Part II: [Optimize your AWS RDS Dev Environments with Neon Postgres](https://neon.tech/blog/development-environments-for-aws-rds-using-neon-postgres)
+Part II: [Optimize your AWS RDS Dev Environments with Neon Postgres](https://neon.com/blog/development-environments-for-aws-rds-using-neon-postgres)
 
 Check out the [Twin Thing app](https://neon.tech/dev-for-rds#github-action-builder?twin=true&twinWorkflowName=Create+Neon+Twin&twinSchedule=0+0+*+*+*&twinJob=default&twinSSLName=prod-us-east-1.pem&reverseTwin=false&reverseTwinWorkflowName=Run+Migrations&reverseTwinJob=sql&reverseTwinSubJob=null&pgVersion=16)—it helps you build your Github Action workflows to build your Neon Twins:
 

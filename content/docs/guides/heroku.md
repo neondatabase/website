@@ -9,7 +9,7 @@ summary: >-
   Useful when migrating from Heroku Postgres or hosting a new Node app on
   Heroku with Neon.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 [Heroku](https://heroku.com) is a popular platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud. It simplifies the deployment process, making it a favorite among developers for its ease of use and integration capabilities.
@@ -33,7 +33,7 @@ To follow along with this guide, you will need:
 
 2. Click **New Project** to create a new project.
 
-3. In your project dashboard, go to the **SQL Editor** and run the following SQL command to create a new table:
+3. In your project dashboard, go to **Postgres database** > **SQL Editor** and run the following SQL command to create a new table:
 
    ```sql
    CREATE TABLE music_albums (

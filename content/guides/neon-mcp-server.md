@@ -4,7 +4,7 @@ subtitle: 'Connect Claude Desktop to Neon to manage projects, run queries, and m
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-02-06T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-21T02:00:14.259Z'
 ---
 
 This guide shows how to connect Claude Desktop to the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) so you can manage your Neon databases.
@@ -20,7 +20,7 @@ The Neon MCP Server grants broad database management capabilities. Always review
 - **Node.js (>= v18):** Install from [nodejs.org](https://nodejs.org/).
 - **Claude Desktop:** Install Anthropic's [Claude Desktop](https://claude.ai/download).
 - **Neon Account:** Sign up for a free Neon account at [neon.tech](https://neon.tech).
-- **Neon API Key (for Local MCP server):** Get your [Neon API Key](/docs/manage/api-keys#creating-api-keys).
+- **Neon API Key (for API key authentication):** Get your [Neon API Key](/docs/manage/api-keys#creating-api-keys).
 
 ### Option 1: Setting up the remote hosted Neon MCP Server
 
@@ -74,29 +74,31 @@ Choose one of the following methods to set up the Remote Neon MCP server in Clau
 </TabItem>
 </Tabs>
 
-### Option 2: Setting up the Local Neon MCP Server
+### Option 2: API key authentication
 
-This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
+This method uses the hosted Neon MCP Server with a Neon API key.
 
-1.  Open your terminal.
-2.  Run the following command to install the Local Neon MCP server for use with Claude Desktop:
+1.  Open `claude_desktop_config.json` (Claude Desktop → **Settings** → **Developer** → **Edit Config**).
+2.  Add the "Neon" server entry within the `mcpServers` object. Replace `<YOUR_NEON_API_KEY>` with your [Neon API key](/docs/manage/api-keys#creating-api-keys):
 
-    ```bash
-    npx @neondatabase/mcp-server-neon init $NEON_API_KEY
-    ```
-
-    > Make sure to replace `$NEON_API_KEY` with your actual Neon API key. You can generate one through the Neon Console by following the instructions in [Creating API keys](/docs/manage/api-keys#creating-api-keys).
-
-    You'll be prompted to install the required dependencies. Type `y` to proceed. You should see output similar to this:
-
-    ```bash
-    npx @neondatabase/mcp-server-neon init napi_xxxx
-    Need to install the following packages:
-    @neondatabase/mcp-server-neon@0.x.x
-    Ok to proceed? (y) y
-
-    Config written to: /Users/USERNAME/Library/Application Support/Claude/claude_desktop_config.json
-    The Neon MCP server will start automatically the next time you open Claude.
+    ```json
+    {
+      "mcpServers": {
+        "Neon": {
+          "command": "npx",
+          "args": [
+            "-y",
+            "mcp-remote@latest",
+            "https://mcp.neon.tech/mcp",
+            "--header",
+            "Authorization:${NEON_AUTH_HEADER}"
+          ],
+          "env": {
+            "NEON_AUTH_HEADER": "Bearer <YOUR_NEON_API_KEY>"
+          }
+        }
+      }
+    }
     ```
 
 3.  Restart Claude Desktop.

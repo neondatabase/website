@@ -39,7 +39,7 @@ Most developers approach AI coding with the wrong mental model. The tendency, ex
 
 The result? Hallucinations, slop, and edge cases missed. But by taking a more strategic approach to working with AI coding, you can achieve far better results and move from [producing programming to producing products](https://dylanbeattie.net/2025/04/11/the-problem-with-vibe-coding.html).
 
-The first way to do this is through better tactical prompting. By [seeing prompting as a new developer discipline](https://neon.tech/blog/prompt-engineering-developer-discipline), you can significantly improve your results from AI coding. Just like developers follow principles such as DRY and SOLID, prompting should be approached with the same rigor they bring to traditional code: designing, refining, and optimizing for clear outputs.
+The first way to do this is through better tactical prompting. By [seeing prompting as a new developer discipline](https://neon.com/blog/prompt-engineering-developer-discipline), you can significantly improve your results from AI coding. Just like developers follow principles such as DRY and SOLID, prompting should be approached with the same rigor they bring to traditional code: designing, refining, and optimizing for clear outputs.
 
 **The second is to understand that LLMs shine when treated like a senior teammate: someone who can think with you, given the right context and room to reason.** This simple shift in mindset–framing AI as a senior developer rather than a junior one–enables better prompting, better outputs, and more robust systems.
 

@@ -3,7 +3,7 @@ title: 'Where can I find the pooled connection string in my Neon dashboard?'
 subtitle: 'Open the Connect widget on the Project Dashboard and toggle Connection pooling on.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: free-plan-limits-and-quotas
 ---
 
-Open your project in the [Neon Console](https://console.neon.tech), click **Connect** on the **Project Dashboard**, and turn the **Connection pooling** toggle on. The hostname in the connection string gains a `-pooler` suffix, which routes traffic through Neon's PgBouncer pool. The toggle is on by default for new projects.
+Open your project in the [Neon Console](https://console.neon.tech), click **Connect** on the **Project Dashboard**, and turn the **Connection pooling** toggle on. The hostname in the connection string gains a `-pooler` suffix, which routes traffic through Neon's PgBouncer pooler. The toggle is on by default for new projects. The pooled endpoint is always available; the toggle only switches which string the Console shows.
 
 ## Get the pooled string
 
@@ -40,7 +40,7 @@ See [Connect from any app](/docs/connect/connect-from-any-app) for the field-by-
 
 ## Pooled vs direct: which one to use
 
-Neon's pooled endpoint supports up to 10,000 concurrent client connections by multiplexing them over a smaller pool of real Postgres connections. Use it when you'd otherwise exhaust `max_connections` (104 on a 0.25 CU compute, 419 on a 1 CU compute).
+Neon's pooled endpoint supports up to 10,000 concurrent client connections by multiplexing them over a smaller pool of real Postgres connections. Use it when you'd otherwise exhaust `max_connections` (104 on a 0.25 CU compute, 419 on a 1 CU compute). Direct connections are for workloads that can't use the pooler.
 
 | Use case                                                      | Use this |
 | ------------------------------------------------------------- | -------- |

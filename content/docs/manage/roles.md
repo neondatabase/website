@@ -11,7 +11,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
@@ -28,10 +28,8 @@ In Neon, roles belong to a branch, which could be your production branch or a ch
 
 Neon supports creating and managing roles from the following interfaces:
 
-- [Neon Console](#manage-roles-in-the-neon-console)
-- [Neon CLI](#manage-roles-with-the-neon-cli)
-- [Neon API](#manage-roles-with-the-neon-api)
-- [SQL](#manage-roles-with-sql)
+- [Manage roles](#manage-roles) using the Neon Console, CLI, or API
+- [Manage roles with SQL](#manage-roles-with-sql)
 
 ## The neon_superuser role
 
@@ -58,101 +56,39 @@ You can think of roles with `neon_superuser` privileges as administrator roles. 
 Creating a database with the `neon_superuser` role, altering a database to have owner `neon_superuser`, and altering the `neon_superuser role` itself are _not_ permitted. This `NOLOGIN` role is not intended to be used directly or modified.
 </Admonition>
 
-## Manage roles in the Neon Console
+## Manage roles
 
-This section describes how to create, view, and delete roles in the Neon Console. All roles created in the Neon Console are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
+You can create, list, delete, and reset passwords for roles using the Neon Console, CLI, or API. Roles created through any of these interfaces are granted membership in the [neon_superuser](#the-neonsuperuser-role) role. To create roles with limited privileges, use [SQL](#manage-roles-with-sql).
 
 ### Create a role
 
-To create a role:
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to create the role.
-5. On the **Roles & Databases** tab, click **Add role**.
+3. In the sidebar, select your branch from the **BRANCH** selector.
+4. Under **Postgres database**, select **Roles**.
+5. Click **Add role**.
 6. In the role creation modal, specify a role name. The branch is pre-selected.
 7. Click **Create**. The role is created and you are provided with the password for the role.
 
-<Admonition type="note">
-Role names cannot exceed 63 characters, and some names are not permitted. See [Reserved role names](#reserved-role-names).
-</Admonition>
+</TabItem>
 
-### Delete a role
+<TabItem>
 
-Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before deleting the role that owns the database.
+Create a role with [`neon roles create`](/docs/cli/roles#create). Pass `--no-login` to create a `NOLOGIN` role:
 
-To delete a role:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to delete a role.
-5. On the **Roles & Databases** tab, select **Delete role** from the role menu.
-6. On the confirmation modal, click **Delete**.
-
-### Reset a password
-
-To reset a role's password:
-
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select a project.
-3. Select **Branches**.
-4. Select the role's branch.
-5. On the **Roles & Databases** tab, select **Reset password** from the role menu.
-6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.
-
-<Admonition type="note">
-Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor) with the following syntax:
-
-```sql
-ALTER USER user_name WITH PASSWORD 'new_password';
+```bash
+neon roles create --name alex
 ```
 
-For password requirements, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
-</Admonition>
+</TabItem>
 
-A password reset takes effect immediately. The old password stops working on the next connection, so copy the new connection string from the **Connect** modal and update it wherever it is stored (deployment environment variables, secret managers, and `.env` files). Resets are branch-scoped, so reset the role on each branch where it is used.
+<TabItem>
 
-Resetting a password is also how you rotate the credential behind a connection string. To rotate after a leak or as routine security practice, see [Rotate credentials](/docs/security/security-overview#rotate-credentials).
-
-## Manage roles with the Neon CLI
-
-The Neon CLI supports creating and deleting roles. For instructions, see [Neon CLI commands — roles](/docs/cli/roles). Roles created with the Neon CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
-
-## Manage roles with the Neon API
-
-Role actions performed in the Neon Console can also be performed using Neon API role methods. The following examples demonstrate how to create, view, reset passwords for, and delete roles using the Neon API. For other role-related methods, refer to the [Neon API Reference](/docs/reference/api).
-
-Roles created with the Neon API are granted membership in the [neon_superuser](#the-neonsuperuser-role) role.
-
-In Neon, roles belong to branches, which means that when you create a role, it is created in a branch. Role-related requests are therefore performed using branch API methods.
-
-<Admonition type="note">
-The API examples that follow may not show all user-configurable request body attributes that are available to you. To view all  attributes for a particular method, refer to method's request body schema in the [Neon API Reference](/docs/reference/api).
-</Admonition>
-
-The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
-
-### Prerequisites
-
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
-
-<LinkAPIKey />
-
-### Create a role with the API
-
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/create-project-branch-role).
-
-```http
-POST /projects/{project_id}/branches/{branch_id}/roles
-```
-
-<Admonition type="note">
-Role names cannot exceed 63 characters, and some role names are not permitted. See [Reserved role names](#reserved-role-names).
-</Admonition>
-
-The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and the role `name` is a required attribute. The length of a role name is limited to 63 bytes.
+Create a role with the [Create role](/docs/reference/api/branches/create-project-branch-role) endpoint. The role `name` is required and limited to 63 bytes:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles' \
@@ -200,18 +136,50 @@ For attribute definitions, find the [Create role](/docs/reference/api/branches/c
 
 </details>
 
-### List roles with the API
+</TabItem>
 
-The following Neon API method lists roles for the specified branch. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/list-project-branch-roles).
+</Tabs>
 
-```http
-GET /projects/{project_id}/branches/{branch_id}/roles
-```
+<Admonition type="note">
+Role names cannot exceed 63 characters, and some names are not permitted. See [Reserved role names](#reserved-role-names).
+</Admonition>
 
-The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters.
+### List roles
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+In the Neon Console, select your branch from the **BRANCH** selector, then under **Postgres database** select **Roles** to see the roles on the branch.
+
+</TabItem>
+
+<TabItem>
+
+List the roles on a branch with [`neon roles list`](/docs/cli/roles#list):
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+neon roles list
+```
+
+```text filename="Output"
+┌────────┬──────────────────────┐
+│ Name   │ Created At           │
+├────────┼──────────────────────┤
+│ daniel │ 2023-06-19T18:27:19Z │
+├────────┼──────────────────────┤
+│ alex   │ 2023-07-13T06:42:55Z │
+└────────┴──────────────────────┘
+```
+
+</TabItem>
+
+<TabItem>
+
+List roles with the [List roles](/docs/reference/api/branches/list-project-branch-roles) endpoint:
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -225,14 +193,14 @@ For attribute definitions, find the [List roles](/docs/reference/api/branches/li
 {
   "roles": [
     {
-      "branch_id": "br-blue-tooth-671580",
+      "branch_id": "br-morning-meadow-afu2s1jl",
       "name": "daniel",
       "protected": false,
       "created_at": "2023-07-09T17:01:34Z",
       "updated_at": "2023-07-09T17:01:34Z"
     },
     {
-      "branch_id": "br-blue-tooth-671580",
+      "branch_id": "br-morning-meadow-afu2s1jl",
       "name": "alex",
       "protected": false,
       "created_at": "2023-07-13T06:42:55Z",
@@ -244,15 +212,105 @@ For attribute definitions, find the [List roles](/docs/reference/api/branches/li
 
 </details>
 
-### Reset a password with the API
+</TabItem>
 
-The following Neon API method resets the password for the specified role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/reset-project-branch-role-password).
+</Tabs>
 
-```http
-POST /projects/{project_id}/branches/{branch_id}/roles/{role_name}/reset_password
+### Delete a role
+
+Deleting a role is a permanent action that cannot be undone, and you cannot delete a role that owns a database. The database must be deleted before deleting the role that owns the database.
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Select a project.
+3. In the sidebar, select your branch from the **BRANCH** selector.
+4. Under **Postgres database**, select **Roles**.
+5. Select **Delete role** from the role menu.
+6. On the confirmation modal, click **Delete**.
+
+</TabItem>
+
+<TabItem>
+
+Delete a role with [`neon roles delete`](/docs/cli/roles#delete), passing the role name:
+
+```bash
+neon roles delete alex
 ```
 
-The API method appears as follows when specified in a cURL command. The `project_id`, `branch_id`, and `role_name` are required parameters.
+</TabItem>
+
+<TabItem>
+
+Delete a role with the [Delete role](/docs/reference/api/branches/delete-project-branch-role) endpoint:
+
+```bash
+curl -X 'DELETE' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles/alex' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Delete role](/docs/reference/api/branches/delete-project-branch-role) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "role": {
+    "branch_id": "br-morning-meadow-afu2s1jl",
+    "name": "alex",
+    "protected": false,
+    "created_at": "2025-08-04T07:47:05Z",
+    "updated_at": "2025-08-04T07:51:10Z"
+  },
+  "operations": [
+    {
+      "id": "722b9f9b-c50e-424c-845e-78b38151b82f",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
+      "action": "apply_config",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2025-08-04T07:53:22Z",
+      "updated_at": "2025-08-04T07:53:22Z",
+      "total_duration_ms": 0
+    }
+  ]
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
+
+### Reset a password
+
+You can reset a role's password from the Neon Console or API. There's no CLI command for this operation. Resetting in the Console sets a generated password; to set your own value, use [SQL](#manage-roles-with-sql).
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Select a project.
+3. In the sidebar, select your branch from the **BRANCH** selector.
+4. Under **Postgres database**, select **Roles**.
+5. Select **Reset password** from the role menu.
+6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.
+
+</TabItem>
+
+<TabItem>
+
+Reset a role's password with the [Reset role password](/docs/reference/api/branches/reset-project-branch-role-password) endpoint:
 
 ```bash
 curl -X 'POST' \
@@ -295,55 +353,23 @@ For attribute definitions, find the [Reset role password](/docs/reference/api/br
 
 </details>
 
-### Delete a role with the API
+</TabItem>
 
-The following Neon API method deletes the specified role. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/branches/delete-project-branch-role).
+</Tabs>
 
-```http
-DELETE /projects/{project_id}/branches/{branch_id}/roles/{role_name}
+<Admonition type="note">
+Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor) with the following syntax:
+
+```sql
+ALTER USER user_name WITH PASSWORD 'new_password';
 ```
 
-The API method appears as follows when specified in a cURL command. The `project_id`, `branch_id`, and `role_name` are required parameters.
+For password requirements, see [Manage roles with SQL](/docs/manage/roles#manage-roles-with-sql).
+</Admonition>
 
-```bash
-curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles/alex' \
-  -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" | jq
-```
+A password reset takes effect immediately. The old password stops working on the next connection, so copy the new connection string from the **Connect** modal and update it wherever it is stored (deployment environment variables, secret managers, and `.env` files). Resets are branch-scoped, so reset the role on each branch where it is used.
 
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [Delete role](/docs/reference/api/branches/delete-project-branch-role) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "role": {
-    "branch_id": "br-morning-meadow-afu2s1jl",
-    "name": "alex",
-    "protected": false,
-    "created_at": "2025-08-04T07:47:05Z",
-    "updated_at": "2025-08-04T07:51:10Z"
-  },
-  "operations": [
-    {
-      "id": "722b9f9b-c50e-424c-845e-78b38151b82f",
-      "project_id": "dry-heart-13671059",
-      "branch_id": "br-morning-meadow-afu2s1jl",
-      "endpoint_id": "ep-holy-heart-afbmgcfx",
-      "action": "apply_config",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2025-08-04T07:53:22Z",
-      "updated_at": "2025-08-04T07:53:22Z",
-      "total_duration_ms": 0
-    }
-  ]
-}
-```
-
-</details>
+Resetting a password is also how you rotate the credential behind a connection string. To rotate after a leak or as routine security practice, see [Rotate credentials](/docs/security/security-overview#rotate-credentials).
 
 ## Manage roles with SQL
 

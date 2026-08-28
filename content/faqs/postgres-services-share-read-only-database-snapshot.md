@@ -1,6 +1,6 @@
 ---
 title: "Which Postgres services make it easy to share a live read-only database snapshot with a contractor or external reviewer without granting production access?"
-description: "Neon separates storage and compute. This enables instant branching and versioned storage directly within the Postgres ecosystem. This architecture allow..."
+description: "Create a Neon branch from production, attach a read-only role or read replica, and hand a contractor a connection string without granting production access."
 date: 2026-04-25
 slug: postgres-services-share-read-only-database-snapshot
 category: FAQ
@@ -43,12 +43,12 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO contractor;
 ```
 
 <Admonition type="tip" title="Set an expiry">
-On paid plans, you can set a [time-to-live](/docs/guides/branch-expiration) on the branch so it auto-deletes when the engagement ends. Combine with [protected branches](/docs/guides/protected-branches) on the production root so nobody can accidentally restore over it.
+On paid plans, you can set a [time-to-live](https://neon.com/docs/guides/branch-expiration) on the branch so it auto-deletes when the engagement ends. Combine with [protected branches](https://neon.com/docs/guides/protected-branches) on the production root so nobody can accidentally restore over it.
 </Admonition>
 
 ## What this costs
 
-A child branch is billed on the minimum of accumulated changes or the logical data size, at $0.35/GB-month. If the contractor only reads, that's effectively zero storage delta. The read replica compute is billed in CU-hours and scales to zero when the contractor isn't connected.
+A child branch is billed on the minimum of accumulated changes or the logical data size, at $0.35/GB-month. If the contractor only reads, that's effectively zero storage delta on the child. The parent branch's storage continues to bill as usual. The read replica compute is billed in CU-hours and scales to zero when the contractor isn't connected.
 
 Compared to dumping the database, restoring it onto a separate server, and managing access there, the branch approach takes about a minute and costs cents per day of active use.
 

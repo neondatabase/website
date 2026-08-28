@@ -32,6 +32,7 @@ The function's default export is a web-standard `{ fetch }` handler. The `@neon/
 ```typescript
 // src/index.ts
 import { neon } from "@neon/ai-sdk-provider";
+import { attachDatabasePool } from "@neon/functions";
 import { streamText, tool, stepCountIs, type ModelMessage } from "ai";
 import { z } from "zod";
 import { drizzle } from "drizzle-orm/node-postgres";
@@ -39,6 +40,7 @@ import { Pool } from "pg";
 import { todos } from "./db/schema";
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 const db = drizzle(pool);
 
 export default {
@@ -49,7 +51,7 @@ export default {
     const { messages } = (await request.json()) as { messages: ModelMessage[] };
 
     const result = streamText({
-      model: neon("claude-sonnet-4-6"), // swap to gpt-5-mini, gemini-2-5-flash, …
+      model: neon("claude-sonnet-4-6"), // swap to gpt-5-mini, gemini-3-flash, …
       system: "You are a concise assistant with access to the user's todos.",
       messages,
       tools: {
@@ -68,7 +70,8 @@ export default {
     });
 
     return result.toUIMessageStreamResponse({
-      onError: (error) => (error instanceof Error ? error.message : String(error)),
+      onError: (error) =>
+        error instanceof Error ? error.message : String(error),
     });
   },
 };
@@ -91,7 +94,8 @@ const files = new Files({ adapter: neonFiles({ bucket: "images" }) });
 
 const result = streamText({
   model: neon("gpt-5-mini"),
-  system: "Use image_generation when the user asks for a picture, then describe it.",
+  system:
+    "Use image_generation when the user asks for a picture, then describe it.",
   messages,
   tools: {
     image_generation: neon.tools.imageGeneration({
@@ -106,7 +110,9 @@ const result = streamText({
       const base64 = imageResultBase64(tr.output);
       if (!base64) continue;
       const key = `generated/${randomUUID()}.jpg`;
-      await files.upload(key, Buffer.from(base64, "base64"), { contentType: "image/jpeg" });
+      await files.upload(key, Buffer.from(base64, "base64"), {
+        contentType: "image/jpeg",
+      });
       // …insert a row keyed by `key` into Postgres; serve later via files.url(key)
     }
   },

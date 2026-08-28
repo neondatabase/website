@@ -94,8 +94,8 @@ override deletes a stale key.
 ## Page conventions (content/docs/cli/)
 
 - Full-path headings with short custom anchors:
-  `## neonctl branches restore (#restore)`; nested leaves use prefixed
-  anchors (`### neonctl vpc endpoint list (#endpoint-list)`) matching the
+  `## neon branches restore (#restore)`; nested leaves use prefixed
+  anchors (`### neon vpc endpoint list (#endpoint-list)`) matching the
   links `<CliSubcommands anchorParts="..."/>` emits.
 - Options tables are generated; link-rich caveats live as prose below them.
 - Example outputs go in ```` ```text ```` / ```` ```json ```` fences, never
@@ -103,7 +103,7 @@ override deletes a stale key.
   outputs (18 lines or fewer) sit inline under the command; long outputs
   and JSON dumps collapse in `<details><summary>Show output</summary>`.
   Never invent output: reuse captured output or ship command-only examples.
-- The binary is `neonctl` everywhere.
+- The binary is `neon` everywhere in headings and examples.
 
 ## Files
 
@@ -149,6 +149,14 @@ The TypeScript source is canonical. CI only reads `schema.json`.
   by keeping output out of bash fences entirely.)
 - **Enum-reference defaults render as source text** unless patched via
   `overrides.json`.
+- **Factory-built option specs aren't resolved.** An option whose spec is a
+  factory call rather than an object literal (e.g. `services: servicesOption({…})`
+  in `config init` and `env pull`, where `servicesOption()` lives in the
+  non-command file `neon_services.ts` and builds its `describe` from a
+  conditional + array join) falls back to `type: unknown`; both are patched in
+  `overrides.json`. `.options(…)` and `...spread` positions built from a factory
+  call *are* resolved (see `resolveOptionsObject`) — the gap is only the
+  individual-option-value position (`parseOptionSpec`).
 - **Server-side defaults** (generated branch names, default CU) exist only
   in the control plane; they are documented as verified `defaultText`
   overrides, never inferred.

@@ -8,7 +8,7 @@ summary: >-
   when authoring cards. TechCards uses kebab-case. DetailIconCards accepts
   camelCase or kebab-case. Also covers SVG file locations.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-07-17T21:07:05.131Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.
@@ -156,6 +156,7 @@ To test if an icon works:
 <a href="#" title="Hono" description="Web framework (icon: hono)" icon="hono">Hono</a>
 <a href="#" title="Java" description="Programming language (icon: java)" icon="java">Java</a>
 <a href="#" title="JavaScript" description="Programming language (icon: javascript)" icon="javascript">JavaScript</a>
+<a href="#" title="Kotlin" description="Programming language (icon: kotlin)" icon="kotlin">Kotlin</a>
 <a href="#" title="Laravel" description="PHP framework (icon: laravel)" icon="laravel">Laravel</a>
 <a href="#" title="Nest.js" description="Node.js framework (icon: nest-js)" icon="nest-js">Nest.js</a>
 <a href="#" title="Next.js" description="React framework (icon: next-js)" icon="next-js">Next.js</a>

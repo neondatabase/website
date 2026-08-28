@@ -6,7 +6,7 @@ summary: >-
   stream a response for minutes while the agent calls models and tools, with
   the Neon AI Gateway wired in automatically and Postgres next to your code.
 enableTableOfContents: true
-updatedOn: '2026-07-15T17:54:41.160Z'
+updatedOn: '2026-08-18T19:33:13.398Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Functions" />
@@ -38,18 +38,22 @@ export default defineConfig({
 Install the AI SDK, the Neon provider, and `pg`:
 
 ```bash
-npm install ai @neon/ai-sdk-provider pg zod
+npm install ai@^7 @neon/ai-sdk-provider @neon/functions pg zod
 ```
+
+Pin `ai` to v7, the major `@neon/ai-sdk-provider` supports.
 
 The handler streams a tool-calling agent. The `@neon/ai-sdk-provider` reads the injected gateway credentials on its own, so `neon('<model>')` is the only model configuration you need. Tools run inside the function, right next to Postgres:
 
 ```ts filename="functions/agent.ts"
 import { neon } from '@neon/ai-sdk-provider';
+import { attachDatabasePool } from '@neon/functions';
 import { streamText, tool, stepCountIs, type ModelMessage } from 'ai';
 import { z } from 'zod';
 import { Pool } from 'pg';
 
 const pool = new Pool({ connectionString: process.env.DATABASE_URL, max: 5 });
+attachDatabasePool(pool);
 
 export default {
   async fetch(request: Request) {
@@ -86,14 +90,9 @@ export default {
     });
   },
 };
-
-// Optional: drain the pool on shutdown (the platform sends SIGINT).
-process.on('SIGINT', () => {
-  pool.end().then(() => process.exit(0));
-});
 ```
 
-`tool({ inputSchema, execute })` is the AI SDK v5+ shape. Create the `pg` pool once at module scope so it's reused across requests (see [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres)). Pick any model from the [AI Gateway catalog](/docs/ai-gateway/models); swap `claude-sonnet-4-6` for a different one without changing anything else.
+`tool({ inputSchema, execute })` is the AI SDK v5+ shape. Create the `pg` pool once at module scope so it's reused across requests, and call `attachDatabasePool(pool)` so an idle disconnect can't crash the isolate (see [Connecting to Postgres](/docs/compute/functions/get-started#connect-to-postgres)). Pick any model from the [AI Gateway catalog](/docs/ai-gateway/models); swap `claude-sonnet-4-6` for a different one without changing anything else.
 
 Deploy and call it. `toUIMessageStreamResponse()` returns a stream the AI SDK's `useChat` hook consumes directly:
 

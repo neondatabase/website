@@ -3,7 +3,7 @@ title: 'How do I enable the pgvector extension in my Neon database?'
 subtitle: 'Run CREATE EXTENSION vector once and start storing embeddings.'
 enableTableOfContents: true
 createdAt: '2026-05-18T00:00:00.000Z'
-updatedOn: '2026-06-01T20:42:32.665Z'
+updatedOn: '2026-08-14T02:59:16.781Z'
 isDraft: false
 redirectFrom: []
 previousLink:
@@ -14,7 +14,7 @@ nextLink:
   slug: export-database-sql-file
 ---
 
-Connect to your database and run `CREATE EXTENSION IF NOT EXISTS vector;`. That's the whole install step. `pgvector` is available on every Neon plan with no add-on or paid tier required. You can run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), psql, or any Postgres client. See [The pgvector extension](/docs/extensions/pgvector) for distance operators, index types, and supported vector types.
+Connect to your database and run `CREATE EXTENSION IF NOT EXISTS vector;`. That's the whole install step. `pgvector` is available on every Neon plan with no add-on required. You can run the statement from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), psql, or any Postgres client. See [The pgvector extension](/docs/extensions/pgvector) for distance operators, index types, and supported vector types.
 
 ## Enable the extension
 
@@ -32,13 +32,11 @@ FROM pg_extension
 WHERE extname = 'vector';
 ```
 
-To install the prior supported version (one back from latest):
+Neon also lets you install the previous supported version (one back from the latest). Check the [Postgres extensions page](/docs/extensions/pg-extensions) for the current latest on your Postgres major, then pass that prior version explicitly if you need it:
 
 ```sql
-CREATE EXTENSION vector VERSION '0.7.4';
+CREATE EXTENSION vector VERSION '<prior_version>';
 ```
-
-Check the [Postgres extensions page](/docs/extensions/pg-extensions) for the current latest supported version on Neon.
 
 ## Try it with embeddings
 

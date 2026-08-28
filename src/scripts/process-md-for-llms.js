@@ -651,6 +651,37 @@ const componentHandlers = {
   },
 
   /**
+   * StatBlock -> the figure inlined as one sentence
+   * <StatBlock value="59%">of companies saw a failure.</StatBlock>
+   * -> **59%** of companies saw a failure.
+   * The value lives in a prop, so without this the mirror would drop the number
+   * and leave the supporting line without its subject.
+   */
+  StatBlock(node) {
+    const value = getAttr(node, 'value');
+    const children = node.children || [];
+    if (!value) return children;
+
+    // Children arrive as a paragraph; splice the value into it so the sentence stays whole.
+    const [first, ...rest] = children;
+    const valueNode = { type: 'strong', children: [{ type: 'text', value }] };
+
+    if (first?.type === 'paragraph') {
+      return [
+        {
+          ...first,
+          children: [valueNode, { type: 'text', value: ' ' }, ...(first.children || [])],
+        },
+        ...rest,
+      ];
+    }
+
+    return [
+      { type: 'paragraph', children: [valueNode, { type: 'text', value: ' ' }, ...children] },
+    ];
+  },
+
+  /**
    * Admonition -> blockquote-style callout
    * <Admonition type="tip">content</Admonition>
    * -> **Tip:** content
@@ -1324,6 +1355,20 @@ const componentHandlers = {
           children: [{ type: 'text', value: 'Watch on YouTube' }],
         },
       ],
+    };
+  },
+
+  /**
+   * InlineSvg -> markdown image, using the title attribute as descriptive alt text
+   * <InlineSvg src="/docs/guides/diagram.svg" title="What the diagram shows" />
+   */
+  InlineSvg(node) {
+    const src = getAttr(node, 'src');
+    if (!src) return null;
+    const title = getAttr(node, 'title') || '';
+    return {
+      type: 'paragraph',
+      children: [{ type: 'image', url: src, alt: title, title: null }],
     };
   },
 
@@ -2026,6 +2071,16 @@ function remarkAbsoluteUrls(pageUrl) {
     // Convert images
     visit(tree, 'image', (node) => {
       node.url = toAbsoluteUrl(node.url, pageUrl);
+      // The markdown title slot doubles as a rendering-flag slot ('square',
+      // 'no-border', 'priority'). Those are layout hints for the site, not
+      // information for an agent reading the mirror, so drop them.
+      if (typeof node.title === 'string') {
+        const kept = node.title
+          .trim()
+          .split(/\s+/)
+          .filter((flag) => flag && !IMAGE_RENDER_FLAGS.has(flag));
+        node.title = kept.length ? kept.join(' ') : null;
+      }
     });
     // Strip custom anchor IDs from heading text: "### create (#create)" is
     // an authoring convention for short anchors; the "(#create)" suffix is
@@ -2038,6 +2093,10 @@ function remarkAbsoluteUrls(pageUrl) {
     });
   };
 }
+
+// Rendering flags authors put in an image's markdown title slot. Kept in sync
+// with KNOWN_IMAGE_FLAGS in src/components/shared/content/content.jsx.
+const IMAGE_RENDER_FLAGS = new Set(['no-border', 'square', 'priority']);
 
 /**
  * Calculate page URL from file path

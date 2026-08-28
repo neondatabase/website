@@ -37,7 +37,7 @@ seo:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write/neon-magic-copy-1024x576-be8b396e.jpg)
 
-Neon’s [serverless architecture with decoupled storage and compute](https://neon.tech/blog/architecture-decisions-in-neon) makes it possible to offer database branching via copy-on-write. This feature is among the most loved by [teams using Neon](https://neon.tech/case-studies), but if you’ve never seen it in action, it’s hard to visualize how it works or why it’s useful.
+Neon’s [serverless architecture with decoupled storage and compute](https://neon.com/blog/architecture-decisions-in-neon) makes it possible to offer database branching via copy-on-write. This feature is among the most loved by [teams using Neon](https://neon.tech/case-studies), but if you’ve never seen it in action, it’s hard to visualize how it works or why it’s useful.
 
 That’s why we’ve built this demo:
 
@@ -57,7 +57,7 @@ Neon branches are what make this speed possible. Let’s take a closer look.
 
 ## Copy-on-write in action
 
-This demo lives within a [Neon project](https://neon.tech/docs/manage/overview). When we built it, we loaded the original 1 TB dataset (1047.48 GB to be exact) into the main branch of this project:
+This demo lives within a [Neon project](https://neon.com/docs/manage/overview). When we built it, we loaded the original 1 TB dataset (1047.48 GB to be exact) into the main branch of this project:
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write/ad4nxfjrphm9-wyxdeo0fik84kws6cb4q58dvb2fztxvsvxyfrrwyin3mnhgc3fbvhvcnvwdmsokpjhtmem0cseyizwhiel-6dosyajzgqmqtwjnumnffx03pxqkum-gisrltg4svdq-336bed3b.png)
 
@@ -69,7 +69,7 @@ When you click `Copy` in the demo, you’re actually creating a Neon branch unde
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write/ad4nxdfxj3tljatqjt6lxfwjqgqmdbvkzv9y8kmf8uq75hhhstqfg2ghx1bstukzon3i4fa6m1nlodjfoho3xc938ehnaizdmhpfzoa-xvgczi0i6ebgxkcjho4pwgcmusshgvhg-7fcac78d.png)
 
-Thanks to the magic of copy-on-write, Neon branches are incredibly agile and can be treated as ephemeral. When you create a branch, Neon doesn’t have to load the entire dataset again. Instead, it references the same data pages as the parent environment ([read about Neon’s storage design](https://neon.tech/blog/get-page-at-lsn)).
+Thanks to the magic of copy-on-write, Neon branches are incredibly agile and can be treated as ephemeral. When you create a branch, Neon doesn’t have to load the entire dataset again. Instead, it references the same data pages as the parent environment ([read about Neon’s storage design](https://neon.com/blog/get-page-at-lsn)).
 
 Since branches are ready instantly, even for very large datasets (in fact, the size of the dataset has no impact at all) they can be created for a specific purpose—a development task, a test run, a Vercel preview, this demo—and deleted once the task is done.
 
@@ -88,21 +88,21 @@ _![Image](https://cdn.neonapi.io/public/images/pages/blog/instantly-copy-tb-size
 You may still be thinking, _this is flashy for a demo—but how can I benefit from it?_ As we said at the start of this post, branching is probably the most loved Neon feature by our users:
 
 <blockquote>
-<p>“We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day—to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this” (Avi Romanoff, Founder at <a href="https://magiccircle.studio">Magic Circle</a> – <a href="https://neon.tech/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon">Read more</a>)</p>
+<p>“We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day—to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this” (Avi Romanoff, Founder at <a href="https://magiccircle.studio">Magic Circle</a> – <a href="https://neon.com/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon">Read more</a>)</p>
 </blockquote>
 
 <blockquote>
-<p>“Branching saves us both money and developer time. We no longer have to set up an actual testing database instance and make sure the data is always synced with production. We now spin up an ephemeral branch when we need to and then tear it down via the create/delete Github Actions” (Angelina Quach, Software Engineer at <a href="https://shepherdinsurance.com">Shepherd</a> – <a href="https://neon.tech/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd">Read more</a>)</p>
+<p>“Branching saves us both money and developer time. We no longer have to set up an actual testing database instance and make sure the data is always synced with production. We now spin up an ephemeral branch when we need to and then tear it down via the create/delete Github Actions” (Angelina Quach, Software Engineer at <a href="https://shepherdinsurance.com">Shepherd</a> – <a href="https://neon.com/blog/adopting-neon-branching-in-ci-cd-pipelines-a-practical-story-by-shepherd">Read more</a>)</p>
 </blockquote>
 
 <blockquote>
-<p>“Database branching is the best quality-of-life improvement to my tech stack that I can think of in recent years. Second to maybe only Copilot” (Miguel Hernandez, Backend Tech Lead at Neo.Tax – <a href="https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle">Read more</a>)</p>
+<p>“Database branching is the best quality-of-life improvement to my tech stack that I can think of in recent years. Second to maybe only Copilot” (Miguel Hernandez, Backend Tech Lead at Neo.Tax – <a href="https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle">Read more</a>)</p>
 </blockquote>
 
 Once you’ve experimented with branches and understand the basics of how they work, it gets easier to appreciate their potential. Here are the most popular use cases among our user base:
 
-- **Ephemeral dev/test environments**. If you sync a testing dataset into a Neon main branch, you can use branches to create as many ephemeral environments as you need for development and testing. Each branch serves as a clean, independent workspace. When it’s time to resync the environments, you do it with a single click or an API call. [Read more.](https://neon.tech/docs/use-cases/dev-test)
-- **Previews.** You can also use Neon branches to automatically create a preview environment for each pull request, e.g. via Vercel. Each preview branch mirrors the same state as production at the time it was created. When the pull request is closed, you delete the branch. [This guide](https://neon.tech/docs/guides/vercel-previews-integration) explains how to set this up with Vercel.
+- **Ephemeral dev/test environments**. If you sync a testing dataset into a Neon main branch, you can use branches to create as many ephemeral environments as you need for development and testing. Each branch serves as a clean, independent workspace. When it’s time to resync the environments, you do it with a single click or an API call. [Read more.](https://neon.com/docs/use-cases/dev-test)
+- **Previews.** You can also use Neon branches to automatically create a preview environment for each pull request, e.g. via Vercel. Each preview branch mirrors the same state as production at the time it was created. When the pull request is closed, you delete the branch. [This guide](https://neon.com/docs/guides/vercel-previews-integration) explains how to set this up with Vercel.
 - **Local development.** On a team, every engineer can have their own Neon branch as a personal development environment, preloaded with a realistic dataset.
 
 ## Not all branching is the same
@@ -149,7 +149,7 @@ select * from users;
 
 Only the table definitions exist, but the data has not been brought into the branch with it. This is the implementation of branching that [Supabase](https://supabase.com/docs/guides/deployment/branching) and [Planetscale](https://planetscale.com/docs/concepts/branching) offer (Planetscale has a separate Data Branching feature that we’ll discuss in a minute).
 
-Branching schemas can be useful for some very specific use cases ([which is why we’re planning to offer this in Neon soon](https://neon.tech/docs/introduction/roadmap)) but for most workflows, schema-only branching has a massive trade-off: **it still requires loading a dataset into every branch.** If you wanted to implement this type of branching for your dev/test environments for example, you would still be stuck managing seed data files, which is complex (code to manage), slow (generation takes time), and error-prone (not necessarily representative of production).
+Branching schemas can be useful for some very specific use cases ([which is why we’re planning to offer this in Neon soon](https://neon.com/docs/introduction/roadmap)) but for most workflows, schema-only branching has a massive trade-off: **it still requires loading a dataset into every branch.** If you wanted to implement this type of branching for your dev/test environments for example, you would still be stuck managing seed data files, which is complex (code to manage), slow (generation takes time), and error-prone (not necessarily representative of production).
 
 ### Schema and data branching
 
@@ -183,7 +183,7 @@ It’s easy to see how the Planetscale method is also problematic at scale, e.g.
 
 ### The next frontier: Schema and data branching w/ PII transformed
 
-From here, it’s easy to see what the next step would be. If we consider [Neon’s model for ephemeral environments](https://neon.tech/docs/use-cases/dev-test), if you have PII and can’t use production data directly for dev and testing, you still have to manually load your transformed dataset at least once to the main branch (and keep it updated). Many environments can be directly derived from it, but some management of seed/transformed data is still necessary.
+From here, it’s easy to see what the next step would be. If we consider [Neon’s model for ephemeral environments](https://neon.com/docs/use-cases/dev-test), if you have PII and can’t use production data directly for dev and testing, you still have to manually load your transformed dataset at least once to the main branch (and keep it updated). Many environments can be directly derived from it, but some management of seed/transformed data is still necessary.
 
 Instead, the ideal workflow would be
 

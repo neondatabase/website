@@ -9,7 +9,7 @@ summary: >-
   setup. Neon's copy-on-write branching keeps development changes isolated
   until explicitly promoted.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -41,7 +41,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 1. Open the [Neon Console](https://console.neon.tech/app/projects).
 1. Select your project.
-1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
+1. Select **Postgres database** > **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 1. Using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), add the following tables:
 
    ```sql
@@ -70,7 +70,7 @@ Now, let's prepare a development database in Neon by creating a development bran
 
 To create a branch:
 
-1. In the Neon Console, select **Branches**. You will see your `production` branch, where you just created your `blog` database and tables.
+1. In the Neon Console, select **Branches** under **Project**. You will see your `production` branch, where you just created your `blog` database and tables.
 2. Click **New Branch** to open the branch creation dialog.
 3. Enter a name for the branch. Let's call it `feature/blog-schema`.
 4. Leave `production` selected as the parent branch. This is where you created the `blog` database.
@@ -98,6 +98,10 @@ The target database is the database on your `feature/blog-schema` branch where y
    ```
 
 Be careful not to mix up your connection strings. You'll see that the hostname (the part starting with `ep-` and ending in `neon.tech`) differs. This is because the `feature/blog-schema` branch is a separate instance of Postgres, hosted on its own compute.
+
+<Admonition type="important">
+Use direct (non-pooled) connection strings with Liquibase. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure your connection strings do not include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Update your liquibase.properties file
 
@@ -264,7 +268,7 @@ When you run a changeset for the first time, Liquibase automatically creates two
 - [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html): Tracks which changesets have been run.
 - [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html): Ensures only one instance of Liquibase runs at a time.
 
-You can verify these tables were created by viewing the `blog` database on your `feature/blog-schema` branch on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
+You can verify these tables were created by viewing the `blog` database on your `feature/blog-schema` branch on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar.
 </Admonition>
 
 At this point, you can continue to iterate, applying schema changes to your database, until you are satisfied with the modified schema.

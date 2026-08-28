@@ -14,7 +14,7 @@ redirectFrom:
 tag: new
 tagTheme: green
 enableTableOfContents: true
-updatedOn: '2026-07-13T14:20:27.525Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 <FeatureBeta />
@@ -42,10 +42,10 @@ This feature uses **static masking**, which permanently transforms data in the b
 To create a branch with anonymized data from the Neon Console:
 
 1. Select your project.
-2. Select **Branches**.
+2. Select **Branches** under **Project**.
 3. Click **New branch** to open the branch creation dialog.
    ![Neon Console 'Create new branch' dialog with 'Anonymized data' selected](/docs/workflows/anon-create-a-new-branch.png)
-4. Select a **Parent branch**. This determines the origin of the schema and data for your new branch. By default, your project's default branch (e.g., `production`) is selected, but you can choose any existing branch in your project.
+4. Select a **Parent branch**. This determines the origin of the schema and data for your new branch. By default, your project's default branch (named `main` if the project was created with the CLI or API, or `production` if created in the Console) is selected, but you can choose any existing branch in your project.
 5. Specify a branch name, or leave it blank to use the default generated name.
 6. Select the **Anonymized data** option.
 7. Configure auto-deletion: By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable expiration entirely. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API branches have no expiration by default. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.

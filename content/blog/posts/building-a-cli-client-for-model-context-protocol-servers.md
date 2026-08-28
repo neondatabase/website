@@ -36,7 +36,7 @@ seo:
 
 ![Building a CLI Client For Model Context Protocol Servers](https://cdn.neonapi.io/public/images/pages/blog/building-a-cli-client-for-model-context-protocol-servers/building-a-cli-client-for-model-context-protocol-servers-1024x576-1e7b300c.jpg)
 
-The Model Context Protocol (MCP) keeps gaining traction in the AI space, and since the launch of the [Neon MCP Server](https://neon.tech/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here) (~2 weeks ago), the community has built dozens of these servers across a [wide spectrum of domains](https://github.com/modelcontextprotocol/servers/#-third-party-servers). However, the Claude Desktop app has established itself as the default MCP Client, with most servers having exclusive instructions on how to integrate it with this client.
+The Model Context Protocol (MCP) keeps gaining traction in the AI space, and since the launch of the [Neon MCP Server](https://neon.com/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here) (~2 weeks ago), the community has built dozens of these servers across a [wide spectrum of domains](https://github.com/modelcontextprotocol/servers/#-third-party-servers). However, the Claude Desktop app has established itself as the default MCP Client, with most servers having exclusive instructions on how to integrate it with this client.
 
 But MCP is not coupled to Claude Desktop and it can be used with any other LLM client that supports it. With that in mind, we’ve decided to build an MCP CLI client that demonstrates this. This MCP client can be used to test MCP servers much more quickly as well.
 

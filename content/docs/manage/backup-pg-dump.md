@@ -7,7 +7,7 @@ summary: >-
   regions. Always use a direct (unpooled) connection string for both
   operations; pooled connections are not supported and will cause errors.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-24T11:52:16.866Z'
 ---
 
 This topic describes how to create a backup of your Neon database using the Postgres `pg_dump` utility and how to restore a backup using `pg_restore`.
@@ -133,8 +133,8 @@ Before performing this procedure:
 
 - A new Neon project was created for the destination database, and a database with the same name as the source database was created (`neondb`)
 - Connection strings for the source and destination databases were collected:
-  - source: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
-  - destination: `postgresql://neondb_owner:npg_AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
+  - source: `postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
+  - destination: `postgresql://alex:AbC123dEf@ep-dry-morning-a8vn5za2.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require`
 
 ```bash shouldWrap
 ~$ cd mydump

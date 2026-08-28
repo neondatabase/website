@@ -9,7 +9,7 @@ summary: >-
   neon_utils extension exposes a num_cpus() function for observing live CPU
   allocation.
 enableTableOfContents: true
-updatedOn: '2026-06-05T17:20:32.620Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 <InfoBlock>
@@ -36,9 +36,9 @@ You can edit an individual compute to alter the compute configuration, which inc
 
 To edit a compute:
 
-1. In the Neon Console, select **Branches**.
-1. Select a branch.
-1. On the **Computes** tab, identify the compute you want to configure and click **Edit**.
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Computes**.
+1. Identify the compute you want to configure and click **Edit**.
    ![Edit compute menu](/docs/guides/autoscaling_edit.png)
 1. On the **Edit compute** drawer, select **Autoscale** and use the slider to specify a minimum and maximum compute size.
 

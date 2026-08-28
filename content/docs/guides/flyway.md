@@ -10,7 +10,7 @@ summary: >-
   migration workflow across multiple Neon branches or environments, see the
   companion guide on multiple database environments.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Flyway is a database migration tool that provides version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
@@ -71,6 +71,10 @@ Your Java connection string should look something like this:
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
 ```
 
+<Admonition type="important">
+Use a direct (non-pooled) connection string with Flyway. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure the hostname does not include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
+
 ## Configure flyway
 
 To configure Flyway to connect to your Neon database, create a `flyway.conf` file in the /conf directory. Include the following items, modified to use the connection details you retrieved in the previous step.
@@ -115,7 +119,7 @@ Migrating schema "PUBLIC" to version 1 - Create person table
 Successfully applied 1 migration to schema "PUBLIC" (execution time 00:00.033s)
 ```
 
-To verify that the `person` table was created, you can view it on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
+To verify that the `person` table was created, you can view it on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar and select your database.
 
 ## Add a second migration
 
@@ -144,7 +148,7 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
-You can verify that the data was added by viewing the table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
+You can verify that the data was added by viewing the table on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar and select your database.
 
 ## View your schema migration history
 
@@ -163,7 +167,7 @@ Schema version: 2
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/sql/report.html
 ```
 
-You can also view the table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
+You can also view the table on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar and select your database.
 
 ## Next steps
 

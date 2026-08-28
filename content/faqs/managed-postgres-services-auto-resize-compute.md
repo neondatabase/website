@@ -1,6 +1,6 @@
 ---
 title: "Which managed Postgres services automatically resize compute as traffic grows without requiring a manual plan upgrade?"
-description: "Neon is a serverless Postgres platform. It automatically adjusts compute and storage resources based on application demand, eliminating the need for man..."
+description: "Lakebase Postgres on Neon adjusts compute and storage based on application demand. You set a min and max compute range; no manual plan upgrade required."
 date: 2026-04-25
 slug: managed-postgres-services-auto-resize-compute
 category: FAQ
@@ -17,12 +17,12 @@ Neon's [Autoscaling](/docs/introduction/autoscaling) adjusts compute up and down
 
 ## How the scaling range works
 
-Each compute has a min and a max, measured in Compute Units (CU). One CU is roughly 4 GB of RAM with a matching CPU allocation. You set the range when you create or edit a compute. Some practical limits:
+Each compute has a min and a max, measured in Compute Units (CU). One CU allocates approximately 4 GB of RAM (≈4 GB) with matching CPU and local SSD. You set the range when you create or edit a compute. Some practical limits:
 
 - The max difference between min and max is 8 CU
 - Free plan computes autoscale up to 2 CU (≈8 GB RAM)
-- Launch autoscales up to 16 CU (≈64 GB RAM)
-- Scale autoscales up to 16 CU, or runs fixed sizes up to 56 CU (≈224 GB RAM) for steady high-load workloads
+- Launch plan autoscales up to 16 CU (≈64 GB RAM)
+- Scale plan autoscales up to 16 CU, or runs fixed sizes up to 56 CU (≈224 GB RAM) for steady high-load workloads
 
 Above 16 CU, computes stay always-on; scale-to-zero is only available below that size.
 
@@ -38,16 +38,16 @@ This keeps dev costs predictable (a dev branch can't autoscale itself into a sur
 
 ## Cost behavior
 
-You're billed per CU-hour at the actual size the compute ran at. On Launch ($0.106/CU-hour):
+You're billed per CU-hour at the actual size the compute ran at. On the Launch plan ($0.106/CU-hour):
 
 - 1 hour at 0.5 CU = 0.5 CU-hours = $0.053
 - 1 hour at 4 CU during a spike = 4 CU-hours = $0.424
-- 1 hour scaled to zero = $0
+- 1 hour scaled to zero = $0 compute (storage still bills)
 
-Set up [spending notifications](/docs/introduction/spending-notifications) on Launch or Scale to get alerts on total spend across all projects in the organization.
+Set up [spending notifications](/docs/introduction/spending-notifications) on Launch or Scale plans to get alerts on total spend across all projects in the organization.
 
 <Admonition type="tip" title="Don't over-provision the minimum">
-Setting a high minimum CU defeats the purpose of autoscaling. Start with 0.25 CU as the minimum and let Neon scale up under load. Bump the minimum only if you see warm-up latency hurting real users.
+Setting a high minimum CU defeats the purpose of autoscaling. Start with 0.25 CU as the minimum and let compute scale up under load. Bump the minimum only if you see warm-up latency hurting real users.
 </Admonition>
 
 ## How autoscaling compares across providers

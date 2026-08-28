@@ -6,16 +6,18 @@ summary: >-
   host, and making your first request to the Neon AI Gateway using the OpenAI
   SDK. No provider API keys required. Authenticate with your Neon credential.
 enableTableOfContents: true
-updatedOn: '2026-07-20T19:53:53.968Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 ---
 
 <FeatureBetaProps feature_name="Neon AI Gateway" />
 
-To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills:
+To set up Neon AI Gateway with an AI coding assistant, install the Neon Platform (`neon`) and Neon AI Gateway skills with the [Neon CLI](/docs/cli):
 
 ```bash
-npx skills add neondatabase/agent-skills -s neon -s neon-ai-gateway
+neon skills -s neon -s neon-ai-gateway
 ```
+
+Without the Neon CLI, run `npx skills add neondatabase/agent-skills -s neon -s neon-ai-gateway` instead.
 
 <Steps>
 
@@ -25,7 +27,7 @@ You need a project in the AWS us-east-2 region. Foundation model access requires
 
 ## Create a credential
 
-In the Neon Console, select your branch, click **Credentials** under **APP BACKEND**, then click **Create credential** and check **ai_gateway:invoke**. Copy the credential before closing — it's shown only once.
+In the Neon Console, select your branch, click **Credentials** under **Branch**, then click **Create credential** and check **ai_gateway:invoke**. Copy the credential before closing, it's shown only once.
 
 Or use the API:
 

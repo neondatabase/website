@@ -8,7 +8,7 @@ summary: >-
   page to switch auth providers, tighten security, or manage the API lifecycle
   programmatically via the Neon REST API.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:08:00.682Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -32,7 +32,7 @@ You can configure which authentication provider validates JWT tokens for your Da
 
 <TabItem>
 
-Navigate to the **Data API** page in your project sidebar and select the **Settings** tab. The **Authentication** section shows the current provider.
+Navigate to **Postgres database** > **Data API** and select the **Settings** tab. The **Authentication** section shows the current provider.
 
 ![Data API settings](/docs/data-api/data_api_advanced_settings.png)
 

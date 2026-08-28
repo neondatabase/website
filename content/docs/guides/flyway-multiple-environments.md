@@ -11,7 +11,7 @@ summary: >-
   environments and want to integrate Neon branch creation with Flyway migration
   ordering.
 enableTableOfContents: true
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -49,7 +49,7 @@ Perform these steps twice, once for your _development_ branch and once for your 
 
 <TabItem>
 1. In the Neon Console, select your project.
-2. Select **Branches**.
+2. Select **Branches** under **Project**.
 3. Click **New Branch** to open the branch creation dialog.
 4. Enter a name for the branch. For example, name the branch for the environment (_development_ or _staging_).
 5. Select a parent branch. This should be the branch where you created the `person` table.
@@ -115,6 +115,10 @@ Your connection strings should look something like the ones shown below. Note th
   ```bash shouldWrap
   jdbc:postgresql://ep-shrill-shape-27763949.us-east-2.aws.neon.tech/neondb?user=alex&password=AbC123dEf
   ```
+
+<Admonition type="important">
+Use direct (non-pooled) connection strings with Flyway. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure none of the hostnames include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Configure flyway to connect each environment
 
@@ -206,7 +210,7 @@ Successfully applied 1 migration to schema "public", now at version v2 (executio
 A Flyway report has been generated here: /home/alex/flyway-x.y.z/report.html
 ```
 
-After you run the migration commands, your database should be consistent across all three environments. You can verify that the data was added to each database by viewing the branch and table on the **Tables** page in the Neon Console. Select **Tables** from the sidebar and select your database.
+After you run the migration commands, your database should be consistent across all three environments. You can verify that the data was added to each database by viewing the branch and table on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar and select your database.
 
 ## Conclusion
 

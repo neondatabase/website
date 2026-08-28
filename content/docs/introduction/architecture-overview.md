@@ -16,7 +16,7 @@ redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-08-04T04:07:29.373Z'
+updatedOn: '2026-08-07T17:19:40.308Z'
 ---
 
 ## Top level overview
@@ -91,7 +91,7 @@ Rather than exposing a traditional filesystem, the database storage layer is bui
 
 ### Safekeepers: defining correctness via WAL quorum
 
-Safekeepers are responsible for one thing: **durable replication of WAL**. When a compute node generates WAL records, it streams them to multiple safekeepers. A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record [via the Paxos protocol](https://neon.com/blog/paxos).
+Safekeepers are responsible for one thing: **durable replication of WAL**. When a compute node generates WAL records, it streams them to multiple safekeepers. A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record [via the Paxos protocol](/blog/paxos).
 
 This is a fundamental difference from how traditional Postgres works:
 
@@ -101,9 +101,9 @@ This is a fundamental difference from how traditional Postgres works:
 
 ### Pageserver: WAL ⇄ pages
 
-The pageserver sits between WAL and data [pages](https://neon.com/docs/reference/glossary#page). Its job is to **materialize page versions** by combining previously materialized base pages and committed WAL records. It is the system’s translation layer between the logical history of the database and the physical representation needed to run queries.
+The pageserver sits between WAL and data [pages](/docs/reference/glossary#page). Its job is to **materialize page versions** by combining previously materialized base pages and committed WAL records. It is the system’s translation layer between the logical history of the database and the physical representation needed to run queries.
 
-When a compute node needs a page at a specific [LSN (Log Sequence Number)](https://neon.com/docs/reference/glossary#lsn), it asks the pageserver. The pageserver checks whether it already has that version available. If not, it reconstructs the page by replaying WAL up to the requested LSN and returns the result. Materialized pages are later persisted into object storage asynchronously, building up the long-term history of the database.
+When a compute node needs a page at a specific [LSN (Log Sequence Number)](/docs/reference/glossary#lsn), it asks the pageserver. The pageserver checks whether it already has that version available. If not, it reconstructs the page by replaying WAL up to the requested LSN and returns the result. Materialized pages are later persisted into object storage asynchronously, building up the long-term history of the database.
 
 Importantly, page materialization is not on the transaction’s critical path. Commits do not wait for pages to be written or uploaded.
 
@@ -163,9 +163,9 @@ This layering is what allows Lakebase Postgres to tolerate failures intrinsicall
 
 **This design turns traditionally heavy-weight database operations (which usually require copying large amounts of data) into simple metadata operations.** These include creating a new branch, restoring from a snapshot, spinning up a read replica, or attaching a new compute node. In Lakebase Postgres, these operations are fast because they operate on references to existing history, not on the data itself.
 
-- **Serverless compute provisioning.** Because durable state lives outside the compute layer, compute endpoints can [automatically scale up and down according to load](https://neon.com/docs/introduction/autoscaling), or [scale to zero](https://neon.com/docs/introduction/scale-to-zero) entirely. When compute starts, it simply attaches to existing database history rather than reconstructing local state.
-- **Copy-on-write branching.** When you create a [branch](https://neon.com/docs/introduction/branching), the engine does not duplicate files or pages. Instead, the new branch points to an existing point in history and begins diverging from there using copy-on-write semantics. Only new or modified data consumes additional storage.
-- **Instant restores.** Because the database’s history is preserved as immutable page versions in object storage, [restoring the database](https://neon.com/docs/introduction/branch-restore) does not involve copying data back into place. Compute can reattach to a past point in history, and execution can resume from the restored state. This process is fast and predictable, even for multi-terabyte databases.
+- **Serverless compute provisioning.** Because durable state lives outside the compute layer, compute endpoints can [automatically scale up and down according to load](/docs/introduction/autoscaling), or [scale to zero](/docs/introduction/scale-to-zero) entirely. When compute starts, it simply attaches to existing database history rather than reconstructing local state.
+- **Copy-on-write branching.** When you create a [branch](/docs/introduction/branching), the engine does not duplicate files or pages. Instead, the new branch points to an existing point in history and begins diverging from there using copy-on-write semantics. Only new or modified data consumes additional storage.
+- **Instant restores.** Because the database’s history is preserved as immutable page versions in object storage, [restoring the database](/docs/introduction/branch-restore) does not involve copying data back into place. Compute can reattach to a past point in history, and execution can resume from the restored state. This process is fast and predictable, even for multi-terabyte databases.
 - **One foundation for OLTP and OLAP.** Once transactional data lives in object storage, it is no longer isolated from analytical or AI workloads. The same underlying history that supports an OLTP engine (Lakebase Postgres) can also support OLAP engines and AI systems. This is the principle behind the [lakebase architecture](https://www.databricks.com/product/lakebase).
 
 ## In short

@@ -121,7 +121,7 @@ The setup looks like this:
 
 1. **Start with your existing `prod` branch.** This is your live production environment.
 2. **Take a snapshot of `prod`.** This captures the exact data + schema state of production.
-3. **Restore the snapshot and name the restored branch `dev`.** When restoring a snapshot in Neon, you can specify the name of the new branch directly using the [restore API](https://api-docs.neon.tech/reference/restoresnapshot).
+3. **Restore the snapshot and name the restored branch `dev`.** When restoring a snapshot in Neon, you can specify the name of the new branch directly using the [restore API](https://neon.com/docs/reference/api/snapshots/restore-snapshot).
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/promoting-postgres-changes-safely-production/image-1024x162-488f3fd9.jpeg)
 

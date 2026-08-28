@@ -25,7 +25,11 @@ Run a single diagnostic query against a branch's Postgres. Pick the query with a
 
 By default the command resolves the project, branch, database, and role from your [context](/docs/cli/set-context) and connects through the Neon API. Pass `--db-url` to inspect any Postgres directly from a connection string, which bypasses API resolution and lets you point `inspect` at a database outside Neon.
 
+When you omit `--database-name`, `inspect` covers every database on the branch and adds a `database` column so you can tell the rows apart. Pass `--database-name` to inspect a single database, which also scopes `locks` and `long-running-queries` to that database so lock and relation names resolve correctly. Database-scoped checks such as `table-sizes`, `locks`, and `outliers` run against each database, while compute-wide checks (`lfc-hit-rate`, `working-set`, and `replication-slots`) run once. If any database fails, the whole run fails, so pass `--database-name` to narrow to one when that happens. `--db-url` always inspects the single database in the connection string and never adds the `database` column.
+
 Some queries read from Postgres statistics extensions. `outliers` and `calls` need [`pg_stat_statements`](/docs/extensions/pg_stat_statements), and `lfc-hit-rate` and `working-set` need the [`neon`](/docs/extensions/neon) extension. If a required extension is not installed, the command reports it instead of returning rows.
+
+From an AI assistant, the same checks are available through the Neon MCP server's `inspect_database` tool. See [Database diagnostics](/docs/ai/neon-mcp-server#database-diagnostics).
 
 <CliSubcommands command="inspect db" anchorParts="db" />
 
@@ -96,7 +100,19 @@ neon inspect db long-running-queries
 ```
 
 ```text
-No long-running queries.
+No long-running queries in any database.
+```
+
+### neon inspect db stalled-queries (#db-stalled-queries)
+
+Active queries running longer than 30 seconds, with their parallel workers, what each one is waiting on, and any queries blocking them. It runs compute-wide. When nothing qualifies, it says so instead of printing an empty table:
+
+```bash
+neon inspect db stalled-queries
+```
+
+```text
+No active queries running longer than 30 seconds.
 ```
 
 ### neon inspect db locks (#db-locks)
@@ -108,7 +124,15 @@ neon inspect db locks
 ```
 
 ```text
-No locks held.
+No locks held in any database.
+```
+
+### neon inspect db stalled-queries (#db-stalled-queries)
+
+Active queries that have been running for at least 30 seconds, reported with their waits, blockers, parallel workers, query IDs, and query text. Where `long-running-queries` catches statements past a five-minute mark, this surfaces stalls sooner and shows what each backend is waiting on. Parallel workers are grouped with their leader process, and the `Blocking Pids` column shows which backends are holding others up. Run it during an incident to see what is running right now and what is blocking it.
+
+```bash
+neon inspect db stalled-queries
 ```
 
 ### neon inspect db outliers (#db-outliers)
@@ -163,7 +187,7 @@ neon inspect db calls
 
 ### neon inspect db lfc-hit-rate (#db-lfc-hit-rate)
 
-Local File Cache hit rate, the share of reads served from Neon's Local File Cache instead of storage. A low or falling ratio means your working set no longer fits in the cache. Read it after the compute has handled some traffic, not on a freshly resumed one. Needs the [`neon`](/docs/extensions/neon) extension.
+Compute cache hit rate, the share of reads served from your compute's cache instead of storage. A low or falling ratio means your working set no longer fits in the cache. Read it after the compute has handled some traffic, not on a freshly resumed one. Needs the [`neon`](/docs/extensions/neon) extension.
 
 ```bash
 neon inspect db lfc-hit-rate
@@ -171,7 +195,7 @@ neon inspect db lfc-hit-rate
 
 ### neon inspect db working-set (#db-working-set)
 
-Estimated working set size over several time windows, compared with the Local File Cache size. When `Exceeds Lfc` is `no`, your recent data fits in cache. A `yes` means the working set has outgrown the cache, and a larger compute may help. Needs the [`neon`](/docs/extensions/neon) extension.
+Estimated working set size over several time windows, compared with the compute cache size. When `Exceeds Lfc` is `no`, your recent data fits in cache. A `yes` means the working set has outgrown the cache, and a larger compute may help. Needs the [`neon`](/docs/extensions/neon) extension.
 
 ```bash
 neon inspect db working-set

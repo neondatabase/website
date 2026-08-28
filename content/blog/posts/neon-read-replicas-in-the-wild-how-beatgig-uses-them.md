@@ -54,9 +54,9 @@ seo:
 
 BeatGig chose Neon after testing many different SQL providers, and here’s why:
 
-**Developer experience**:<br />Among all the solutions the team tested—including Supabase, Google Cloud SQL, RDS, and Aurora—Neon stood out for its fast provisioning, query speed, and [native connection pooling](https://neon.tech/docs/connect/connection-pooling), which streamlined their workflow.
+**Developer experience**:<br />Among all the solutions the team tested—including Supabase, Google Cloud SQL, RDS, and Aurora—Neon stood out for its fast provisioning, query speed, and [native connection pooling](https://neon.com/docs/connect/connection-pooling), which streamlined their workflow.
 
-**Ease of use**:<br />Onboarding engineers who aren’t Postgres or DevOps experts is much easier with Neon. Provisioning is instantaneous and maintenance is minimal: every database BeatGig runs uses [autoscaling](https://neon.tech/docs/introduction/auto-suspend), and non-prod databases and replicas have [autosuspend](https://neon.tech/docs/introduction/auto-suspend) enabled. This reduces the need for manual server maintenance.
+**Ease of use**:<br />Onboarding engineers who aren’t Postgres or DevOps experts is much easier with Neon. Provisioning is instantaneous and maintenance is minimal: every database BeatGig runs uses [autoscaling](https://neon.com/docs/introduction/auto-suspend), and non-prod databases and replicas have [autosuspend](https://neon.com/docs/introduction/auto-suspend) enabled. This reduces the need for manual server maintenance.
 
 **Read replicas**:<br />Neon’s read replicas were the icing on the cake. BeatGig frequently runs business intelligence and analytics, and with read replicas, non-SQL-expert team members could run queries through tools like Metabase without risking the core operations of the app.
 
@@ -68,7 +68,7 @@ More about read replicas in this next section:
 <p><strong>“Our team members use Metabase frequently, but many aren’t SQL experts, so they sometimes write inefficient queries that could mess up the database. To avoid any issues, we create read replicas with their own connection string, so they can run queries without affecting anything”</strong> <em>(Jeremy Berman, CTO at BeatGig)</em></p>
 </blockquote>
 
-Neon’s [read replicas](https://neon.tech/docs/introduction/read-replicas) are an elegant solution for granting safe, read-only access to your data in a cost-efficient way:
+Neon’s [read replicas](https://neon.com/docs/introduction/read-replicas) are an elegant solution for granting safe, read-only access to your data in a cost-efficient way:
 
 - Replicas can be created and deleted in seconds, providing quick access when needed.
 - Your primary compute stays protected from resource-heavy or inefficient queries.
@@ -84,4 +84,4 @@ You also save on compute: replicas automatically scale to zero when not in use, 
 
 ## Try them out. Now in the Free plan
 
-[We just made read replicas available in the Neon Free Plan](https://neon.tech/blog/create-read-replicas-in-the-free-plan), so you can give them a spin for free. [Create a Neon account](https://console.neon.tech/signup), run some tests, and if you have any questions, [find us on Discord.](https://discord.gg/92vNTzKDGp)
+[We just made read replicas available in the Neon Free Plan](https://neon.com/blog/create-read-replicas-in-the-free-plan), so you can give them a spin for free. [Create a Neon account](https://console.neon.tech/signup), run some tests, and if you have any questions, [find us on Discord.](https://discord.gg/92vNTzKDGp)

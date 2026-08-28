@@ -33,7 +33,7 @@ seo:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/multi-tenant-rag/neon-multi-tenant-1-1024x576-5dd11a94.jpg)
 
-<p><strong>A common SaaS pattern involves deploying a</strong> <a href="https://neon.tech/blog/shared-application-environment">single application environment shared among all users</a> <strong>. However, RAG presents additional reliability and security challenges, relying heavily on user-provided information and unpredictable model APIs. This article covers a multi-tenant RAG pipeline example (</strong> <a href="https://github.com/inngest/multi-tenant-rag-example">available on GitHub</a> <strong>) that leverages Neon’s</strong> <a href="https://neon.tech/use-cases/database-per-tenant">database-per-user design</a> <strong>and the multi-tenancy features of the Inngest workflow engine.</strong></p>
+<p><strong>A common SaaS pattern involves deploying a</strong> <a href="https://neon.com/blog/shared-application-environment">single application environment shared among all users</a> <strong>. However, RAG presents additional reliability and security challenges, relying heavily on user-provided information and unpredictable model APIs. This article covers a multi-tenant RAG pipeline example (</strong> <a href="https://github.com/inngest/multi-tenant-rag-example">available on GitHub</a> <strong>) that leverages Neon’s</strong> <a href="https://neon.tech/use-cases/database-per-tenant">database-per-user design</a> <strong>and the multi-tenancy features of the Inngest workflow engine.</strong></p>
 
 ## The Noisy Neighbor Problem: RAG Edition
 
@@ -74,7 +74,7 @@ Let’s first look at how our application isolates each workspace’s applicatio
 
 ### Database architecture
 
-To provide complete data isolation and guaranteed database performance, our application leverages [Neon’s “database-per-user” design](https://neon.tech/blog/multi-tenancy-and-database-per-user-design-in-postgres), where each organization gets a new Neon project containing a contacts and embeddings tables:
+To provide complete data isolation and guaranteed database performance, our application leverages [Neon’s “database-per-user” design](https://neon.com/blog/multi-tenancy-and-database-per-user-design-in-postgres), where each organization gets a new Neon project containing a contacts and embeddings tables:
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/multi-tenant-rag/214-1024x658-adcc0a20.jpg)
 
@@ -119,11 +119,11 @@ async function seed() {
 
 In a real-world application, each workspace creation sets up the Neon project and creates the schema, [as covered in the db-per-tenant repository](https://github.com/neondatabase/db-per-tenant#:~:text=Code%20snippet%20example%20of%20provisioning%20a%20vector%20database). Creating a new workspace and its associated databases only takes a few seconds and can be easily integrated into a Next.js API route.
 
-Note that Neon’s [database-per-user design](https://neon.tech/use-cases/database-per-tenant) differs from regular isolated database architecture. By leveraging Neon projects, our end-users benefit from complete data isolation [without the usual associated cost](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) of duplicated architecture.
+Note that Neon’s [database-per-user design](https://neon.tech/use-cases/database-per-tenant) differs from regular isolated database architecture. By leveraging Neon projects, our end-users benefit from complete data isolation [without the usual associated cost](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) of duplicated architecture.
 
 ### Querying multi-tenant databases
 
-[Neon’s serverless SDK](https://neon.tech/docs/serverless/serverless-driver) makes connecting to a database on the fly easy. Our project provides a `getTenantConnectionString(workspaceId)` helper that retrieves the Neon project associated with a given workspace:
+[Neon’s serverless SDK](https://neon.com/docs/serverless/serverless-driver) makes connecting to a database on the fly easy. Our project provides a `getTenantConnectionString(workspaceId)` helper that retrieves the Neon project associated with a given workspace:
 
 ```javascript
 import { neon } from "@neondatabase/serverless";
@@ -180,7 +180,7 @@ Let’s now see how our RAG guarantees fair processing performance by applying t
 
 Our RAG relies on two rate-limited and _costly_ 3rd party APIs: the SERP and OpenAI APIs.
 
-To protect our RAG from spikes in usage that could affect the application’s performance and cost, our RAG is implemented leveraging [Inngest workflows](https://neon.tech/blog/serverless-triggers-how-and-why) and its multi-tenancy features.
+To protect our RAG from spikes in usage that could affect the application’s performance and cost, our RAG is implemented leveraging [Inngest workflows](https://neon.com/blog/serverless-triggers-how-and-why) and its multi-tenancy features.
 
 Our first AI workflow performs enrichment (using the SERP and OpenAI APIs) and generates an embedding document for each contact of the CSV file:
 
@@ -280,6 +280,6 @@ Feel free to explore this article’s demo by [looking at the repository on Gith
 
 ---
 
-_[Neon](https://neon.tech/home) is a serverless Postgres platform that helps you build faster. We have a generous Free Plan – create your account [here](https://console.neon.tech/signup) (no credit card required). You can add the Inngest integration in [one click](https://neon.tech/docs/guides/trigger-serverless-functions)._
+_[Neon](https://neon.tech/home) is a serverless Postgres platform that helps you build faster. We have a generous Free Plan – create your account [here](https://console.neon.tech/signup) (no credit card required). You can add the Inngest integration in [one click](https://neon.com/docs/guides/trigger-serverless-functions)._
 
 ![Post image](https://cdn.neonapi.io/public/images/pages/blog/multi-tenant-rag/image-1024x474-ab1a278d.png)

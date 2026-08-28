@@ -114,7 +114,7 @@ Every Vercel preview deployment now runs against its own Neon database branch. T
 
 Like most teams these days, [Modem engineers constantly experiment with agentic coding](https://www.youtube.com/watch?v=xoynR-hWNZY). Many of their PRs are actually opened by agents working through Claude Code or internal workflows triggered from Slack and Linear, so preview environments are among the primary way changes get evaluated.
 
-To make sure this works smoothly, rather than relying on Neon’s [one-click integrations](https://neon.com/docs/guides/integrations), Modem favors explicit, scriptable workflows built on the [Neon CLI](https://neon.com/docs/reference/neon-cli) and automation so that agents can reason about infrastructure, with branch creation, migration application, and cleanup are all defined in code.
+To make sure this works smoothly, rather than relying on Neon’s [one-click integrations](https://neon.com/docs/guides/integrations), Modem favors explicit, scriptable workflows built on the [Neon CLI](https://neon.com/docs/cli) and automation so that agents can reason about infrastructure, with branch creation, migration application, and cleanup are all defined in code.
 
 ### Navigating short-lived tokens
 

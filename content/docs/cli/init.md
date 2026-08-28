@@ -1,22 +1,20 @@
 ---
 title: 'Neon CLI command: init'
-subtitle: Initialize an app project with Neon, including auth, MCP server, extensions,
-  and agent skills
+subtitle: Install the Neon CLI and set up a project with auth, agent skills, and
+  optionally the MCP server and editor extension
 summary: >-
   The `neon init` command sets up a project to use Neon with an AI coding
-  assistant by running OAuth, creating an API key, writing the Neon MCP server
-  config, and installing agent skills. It supports Cursor, VS Code, Claude
-  Code, and any editor supported by add-mcp. Use this page when starting a
-  new project with `npx neon@latest init` or when you need to know which
-  files get created and where. The `--agent` flag targets a specific editor
-  without the interactive prompt.
+  assistant: it installs or updates the Neon CLI, runs OAuth, creates an API
+  key, installs agent skills, and can configure the Neon MCP server. Works with
+  Cursor, VS Code, Claude Code, and any add-mcp client. The `--agent` flag runs
+  it in agent/JSON mode.
 enableTableOfContents: true
-updatedOn: '2026-07-01T13:41:48.668Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
 
-The `init` command sets up your app project to use Neon with your AI coding assistant. It authenticates via OAuth, creates a Neon API key, configures the Neon MCP server for your editor (installing the [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) for Cursor and VS Code), and installs [Neon agent skills](https://github.com/neondatabase/agent-skills). Run it once from your project root.
+The `init` command sets up your app project to use Neon with your AI coding assistant. It installs or updates the Neon CLI, authenticates via OAuth, creates a Neon API key, can configure the Neon MCP server for your editor (installing the [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) for Cursor and VS Code), and installs [Neon agent skills](https://github.com/neondatabase/agent-skills). Run it once from your project root.
 
 ## Usage
 
@@ -30,7 +28,7 @@ npx neon@latest init
 
 After running the command, restart your editor and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The installed agent skills help you get started, including configuring a database connection. For Cursor and VS Code, the Neon Local Connect extension also provides database schema browsing, SQL editing, and table data management directly in your IDE.
 
-Under the hood, `init` runs `npx skills add neondatabase/agent-skills --skill neon-postgres --agent <name>` for each selected editor. You can also run this command directly to install skills without the rest of the init flow, or use `npx skills add ... -g` to install globally. See [neon-postgres on skills.sh](https://skills.sh/neondatabase/agent-skills/neon-postgres) for more about the skill.
+Under the hood, `init` runs `npx skills add neondatabase/agent-skills --skill neon --skill neon-postgres --agent <name>` for each selected editor. To install skills on their own, without the rest of the init flow, use [`neon skills`](/docs/cli/skills) (add `--global` for a user-level install). See [neon-postgres on skills.sh](https://skills.sh/neondatabase/agent-skills/neon-postgres) for more about the skills.
 
 <Admonition type="warning">
 Skills are installed at the project level in the current working directory. Run `init` from your project root, otherwise skills will end up in the wrong location. You may want to commit project-level files so teammates get the same skills, or add them to `.gitignore` for per-developer setup.
@@ -40,11 +38,11 @@ Skills are installed at the project level in the current working directory. Run 
 
 <CliOptions command="init" />
 
-Use `--agent` to configure a specific editor, skipping the interactive selection prompt. Without `--agent`, `init` runs an interactive wizard that detects installed tools and lets you choose which to configure; if nothing is detected, you go straight to that list.
+Use `--agent` (alias `-a`) to run `init` in agent/JSON mode, designed for when an AI coding assistant runs the command for you; the agent type is auto-detected. Without `--agent`, `init` runs an interactive wizard that detects installed tools and lets you choose which to configure; if nothing is detected, you go straight to that list.
 
 ## Coding assistant support
 
-`init` is backed by the `neon-init` package bundled with `neon`. Besides Cursor, VS Code, and Claude Code, the interactive flow can configure any client that [add-mcp supports](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp). To register only the Neon MCP server in a client config (no `init`, no agent skills, no extension install), run `npx add-mcp https://mcp.neon.tech/mcp`. See [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
+`init` is backed by the `neon-init` package bundled with `neon`. Besides Cursor, VS Code, and Claude Code, the interactive flow can configure any client that [add-mcp supports](/docs/ai/connect-mcp-clients-to-neon#supported-agents-add-mcp). To register only the Neon MCP server in a client config (no `init`, no agent skills, no extension install), run [`neon mcp`](/docs/cli/mcp), or `npx add-mcp https://mcp.neon.tech/mcp` for the lower-level tool directly. See [Connect MCP clients to Neon](/docs/ai/connect-mcp-clients-to-neon).
 
 ## What gets created
 
@@ -56,8 +54,8 @@ Use `--agent` to configure a specific editor, skipping the interactive selection
 | MCP config (VS Code)                                                                                              | VS Code global `mcp.json` (written by extension) | Global  |
 | MCP config (Claude Code)                                                                                          | `~/.claude.json` (written by init)               | Global  |
 | [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) | Cursor / VS Code                                 | Global  |
-| Agent skills                                                                                                      | `.agents/skills/`                                | Project |
-| Skills symlink (Claude Code only)                                                                                 | `.claude/skills/neon-postgres`                   | Project |
+| Agent skills (Cursor, VS Code)                                                                                    | `.agents/skills/`                                | Project |
+| Agent skills (Claude Code)                                                                                        | `.claude/skills/`                                | Project |
 | `skills-lock.json`                                                                                                | Project root                                     | Project |
 
 ## Credentials and API keys

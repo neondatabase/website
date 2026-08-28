@@ -54,6 +54,11 @@ export default {
               description: 'Faster Postgres workflows',
             },
             {
+              title: 'Search',
+              to: LINKS.lakebaseSearch,
+              description: 'Vector, keyword, and hybrid search',
+            },
+            {
               title: 'Instant Restore',
               to: LINKS.instantRestore,
               description: 'Instant recovery when mistakes happen',
@@ -69,39 +74,42 @@ export default {
           title: 'Use cases',
           items: [
             {
-              title: 'Serverless App',
-              to: `${LINKS.useCases}/serverless-apps`,
-              description: 'Autoscale with traffic',
+              title: 'Full-stack apps',
+              to: `${LINKS.useCases}/full-stack-apps`,
+              description: 'Deploy backends via your agent',
             },
             {
-              title: 'Multi-TB',
-              to: `${LINKS.useCases}/multi-tb`,
-              description: 'Scale and restore instantly',
+              title: 'Branching workflows',
+              to: `${LINKS.useCases}/branching-workflows`,
+              description: 'Simplify DB ops to ship faster & safer',
             },
             {
-              title: 'Database per tenant',
-              to: `${LINKS.useCases}/database-per-tenant`,
-              description: 'Data isolation without overhead',
+              title: 'Bursty workloads',
+              to: `${LINKS.useCases}/bursty-workloads`,
+              description: 'Avoid overprovisioning & optimize performance',
+            },
+            {
+              title: 'Large databases',
+              to: `${LINKS.useCases}/large-databases`,
+              description: 'Restore & replicate your DB in seconds',
             },
           ],
         },
         {
-          title: 'Build & operate',
+          title: 'Deploy at scale',
+          variant: 'cards',
           items: [
-            {
-              title: 'Platforms',
-              to: LINKS.platforms,
-              description: 'Offer Postgres for your users',
-            },
-            {
-              title: 'Dev/Tests',
-              to: `${LINKS.useCases}/dev-test`,
-              description: 'Production-like environment',
-            },
             {
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
-              description: 'Build full-stack AI agents',
+              description: 'Infra for app-generation agents like Replit & v0',
+              graphic: 'agents',
+            },
+            {
+              title: 'Platforms',
+              to: LINKS.platforms,
+              description: 'Deploy isolated backends for your end users',
+              graphic: 'platforms',
             },
           ],
         },

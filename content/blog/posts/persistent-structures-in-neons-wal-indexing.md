@@ -37,7 +37,7 @@ seo:
 
 Neon is a serverless Postgres system that separates storage from compute, providing users with all the customary Postgres features and more, including usage-based billing, autoscaling, database branching, and point-in-time recovery.
 
-We previously provided a comprehensive overview of our [storage engine architecture](https://neon.tech/blog/get-page-at-lsn), which enables us to deliver these features. In this article, we elaborate on the read path of the system (the code executed during a read request) and introduce a new data structure that speeds up the storage system’s search for WAL (Write-Ahead Log) by 70 to 2000x compared to our previous non-trivial data structure.
+We previously provided a comprehensive overview of our [storage engine architecture](https://neon.com/blog/get-page-at-lsn), which enables us to deliver these features. In this article, we elaborate on the read path of the system (the code executed during a read request) and introduce a new data structure that speeds up the storage system’s search for WAL (Write-Ahead Log) by 70 to 2000x compared to our previous non-trivial data structure.
 
 ## The read path and the big indexing problem
 

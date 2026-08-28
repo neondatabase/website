@@ -31,6 +31,7 @@
         ],
         "tool_call": true,
         "temperature": false,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2026-01-31",
         "release_date": "2026-06-09",
@@ -75,6 +76,7 @@
         ],
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-02-28",
         "release_date": "2025-10-15",
@@ -119,6 +121,7 @@
         ],
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-03-31",
         "release_date": "2025-08-05",
@@ -163,6 +166,7 @@
         ],
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-05",
         "release_date": "2025-11-24",
@@ -207,6 +211,7 @@
         ],
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-05-31",
         "release_date": "2026-02-05",
@@ -256,6 +261,7 @@
         ],
         "tool_call": true,
         "temperature": false,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2026-01-31",
         "release_date": "2026-04-16",
@@ -305,6 +311,7 @@
         ],
         "tool_call": true,
         "temperature": false,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2026-01",
         "release_date": "2026-05-28",
@@ -354,6 +361,7 @@
         ],
         "tool_call": true,
         "temperature": false,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2026-05",
         "release_date": "2026-07-24",
@@ -398,6 +406,7 @@
         ],
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-07-31",
         "release_date": "2025-09-29",
@@ -442,6 +451,7 @@
         ],
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
         "release_date": "2026-02-17",
@@ -491,6 +501,7 @@
         ],
         "tool_call": true,
         "temperature": false,
+        "structured_output": true,
         "open_weights": false,
         "knowledge": "2026-01-31",
         "release_date": "2026-06-30",
@@ -549,7 +560,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 32768
+          "output": 25000
         },
         "cost": {
           "input": 0.072,
@@ -589,7 +600,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 32768
+          "output": 25000
         },
         "cost": {
           "input": 0.05,
@@ -753,7 +764,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2024-09-30",
@@ -800,7 +811,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -847,7 +858,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -895,7 +906,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -959,7 +970,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -1006,7 +1017,7 @@
           }
         ],
         "tool_call": true,
-        "temperature": false,
+        "temperature": true,
         "structured_output": true,
         "open_weights": false,
         "knowledge": "2025-08-31",
@@ -1136,6 +1147,24 @@
           "context": 1050000,
           "input": 922000,
           "output": 128000
+        },
+        "cost": {
+          "input": 30,
+          "output": 180,
+          "tiers": [
+            {
+              "input": 60,
+              "output": 270,
+              "tier": {
+                "type": "context",
+                "size": 272000
+              }
+            }
+          ],
+          "context_over_200k": {
+            "input": 60,
+            "output": 270
+          }
         }
       },
       "gpt-5-6-luna": {
@@ -1537,6 +1566,101 @@
           "input_audio": 1.5
         }
       },
+      "gemini-3-5-flash-lite": {
+        "id": "gemini-3-5-flash-lite",
+        "name": "Gemini 3.5 Flash Lite",
+        "provider": "google",
+        "family": "gemini-flash-lite",
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "minimal",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-03",
+        "release_date": "2026-07-21",
+        "last_updated": "2026-07-21",
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 0.3,
+          "output": 2.5,
+          "cache_read": 0.03
+        }
+      },
+      "gemini-3-6-flash": {
+        "id": "gemini-3-6-flash",
+        "name": "Gemini 3.6 Flash",
+        "provider": "google",
+        "family": "gemini-flash",
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "effort",
+            "values": [
+              "minimal",
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        ],
+        "tool_call": true,
+        "temperature": false,
+        "structured_output": true,
+        "open_weights": false,
+        "knowledge": "2026-03",
+        "release_date": "2026-07-21",
+        "last_updated": "2026-07-21",
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video",
+            "audio",
+            "pdf"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 1.5,
+          "output": 7.5,
+          "cache_read": 0.15,
+          "input_audio": 1.5
+        }
+      },
       "gemma-3-12b": {
         "id": "gemma-3-12b",
         "name": "Gemma 3 12B",
@@ -1562,7 +1686,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 16384
+          "output": 8192
         },
         "cost": {
           "input": 0.15,
@@ -1593,7 +1717,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 16384
+          "output": 8192
         },
         "cost": {
           "input": 0.15,
@@ -1609,6 +1733,7 @@
         "reasoning": false,
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": true,
         "knowledge": "2024-08",
         "release_date": "2025-04-05",
@@ -1624,7 +1749,7 @@
         },
         "limit": {
           "context": 1000000,
-          "output": 16384
+          "output": 8192
         },
         "cost": {
           "input": 0.5,
@@ -1640,6 +1765,7 @@
         "reasoning": false,
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": true,
         "knowledge": "2023-12",
         "release_date": "2024-12-06",
@@ -1654,7 +1780,7 @@
         },
         "limit": {
           "context": 128000,
-          "output": 4096
+          "output": 8192
         },
         "cost": {
           "input": 0.5,
@@ -1670,6 +1796,7 @@
         "reasoning": false,
         "tool_call": true,
         "temperature": true,
+        "structured_output": true,
         "open_weights": true,
         "knowledge": "2025-04",
         "release_date": "2025-09",
@@ -1684,7 +1811,7 @@
         },
         "limit": {
           "context": 131072,
-          "output": 32768
+          "output": 10000
         },
         "cost": {
           "input": 0.15,
@@ -1725,7 +1852,7 @@
         },
         "limit": {
           "context": 262144,
-          "output": 8000
+          "output": 25000
         },
         "cost": {
           "input": 0.22,
@@ -1771,7 +1898,7 @@
         },
         "limit": {
           "context": 1000000,
-          "output": 131072
+          "output": 65536
         },
         "cost": {
           "input": 1.4,
@@ -1804,6 +1931,7 @@
         ],
         "tool_call": true,
         "temperature": true,
+        "structured_output": false,
         "open_weights": true,
         "release_date": "2026-07-15",
         "last_updated": "2026-07-15",
@@ -1819,7 +1947,56 @@
         },
         "limit": {
           "context": 1048576,
-          "output": 1048576
+          "output": 65536
+        }
+      },
+      "kimi-k3": {
+        "id": "kimi-k3",
+        "name": "Kimi K3",
+        "provider": "moonshotai",
+        "family": "kimi-k3",
+        "attachment": true,
+        "reasoning": true,
+        "reasoning_options": [
+          {
+            "type": "toggle"
+          },
+          {
+            "type": "effort",
+            "values": [
+              "none",
+              "minimal",
+              "low",
+              "medium",
+              "high",
+              "max"
+            ]
+          }
+        ],
+        "tool_call": true,
+        "temperature": true,
+        "structured_output": true,
+        "open_weights": true,
+        "release_date": "2026-07-16",
+        "last_updated": "2026-07-16",
+        "modalities": {
+          "input": [
+            "text",
+            "image",
+            "video"
+          ],
+          "output": [
+            "text"
+          ]
+        },
+        "limit": {
+          "context": 1048576,
+          "output": 65536
+        },
+        "cost": {
+          "input": 3,
+          "output": 15,
+          "cache_read": 0.3
         }
       }
     }

@@ -52,7 +52,7 @@ Full-text search is precisely one of these cases. While a basic ILIKE query work
 
 This is where you face a critical architectural decision: double down on Postgres and use its built-in full-text search capabilities, or reach for a purpose-built option like ElasticSearch? But what if you could get ElasticSearch-level search capabilities without leaving Postgres, without managing a separate cluster, and without the complexity of keeping two data stores in sync?
 
-That’s what you get with [pg_search](https://neon.tech/blog/pgsearch-on-neon).
+That’s what you get with [pg_search](https://neon.com/blog/pgsearch-on-neon).
 
 ## The problems with Postgres full-text search
 
@@ -182,7 +182,7 @@ LIMIT 5;
 
 ### pg_search performance that matches ElasticSearch
 
-The numbers speak for themselves. In [Neon’s benchmarks](https://neon.tech/blog/pgsearch-on-neon#appendix-detailed-benchmark-results) on a 10-million-row dataset, pg_search consistently outperformed native Postgres FTS by 20-1000x, while matching or exceeding ElasticSearch performance:
+The numbers speak for themselves. In [Neon’s benchmarks](https://neon.com/blog/pgsearch-on-neon#appendix-detailed-benchmark-results) on a 10-million-row dataset, pg_search consistently outperformed native Postgres FTS by 20-1000x, while matching or exceeding ElasticSearch performance:
 
 - Simple count queries: 770ms (pg_search) vs 22,214ms (native FTS)
 - Filtered searches with highlighting: 34ms vs 758ms
@@ -210,7 +210,7 @@ pg_search hits the sweet spot for most applications that need better search than
 - You need consistent search results that reflect the current state of your data
 - You want modern search features without operational complexity
 
-The pg_search extension is production-ready, actively maintained by ParadeDB, and [available to all Neon users](https://neon.tech/blog/pgsearch-on-neon). For most teams building modern applications, pg_search delivers ElasticSearch-quality search with Postgres-level simplicity—a combination that’s hard to beat.
+The pg_search extension is production-ready, actively maintained by ParadeDB, and [available to all Neon users](https://neon.com/blog/pgsearch-on-neon). For most teams building modern applications, pg_search delivers ElasticSearch-quality search with Postgres-level simplicity—a combination that’s hard to beat.
 
 ---
 

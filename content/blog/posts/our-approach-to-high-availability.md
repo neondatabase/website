@@ -44,11 +44,11 @@ Despite this ambiguity, the concept of high availability is crucial. One of the 
 
 ## High availability in an architecture with separated storage and compute
 
-To understand how Neon stays highly available, let’s start by mapping the types of failures that might cause your database to go down. [Neon natively separates storage and compute](https://neon.tech/blog/architecture-decisions-in-neon), so in a given database, there are primarily two components that can experience failures: compute and storage. Each can potentially cause a loss of availability, but they affect the system in different ways.
+To understand how Neon stays highly available, let’s start by mapping the types of failures that might cause your database to go down. [Neon natively separates storage and compute](https://neon.com/blog/architecture-decisions-in-neon), so in a given database, there are primarily two components that can experience failures: compute and storage. Each can potentially cause a loss of availability, but they affect the system in different ways.
 
 In Neon, “compute” refers to the stateless processing nodes that handle database operations. A **compute failure** could happen due to a crash or malfunction of the Postgres process, or due to VM crashes from hardware issues, a kernel panic, or the termination of the host machine.
 
-Neon’s storage [is designed to be independent of the compute layer](https://neon.tech/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal), and it is responsible for persisting the actual data via Write-Ahead Logs (WAL records). A **storage failure** could result from issues with the distributed storage service, such as network connectivity problems, failure of a Safekeeper responsible for WAL replication, or a Pageserver malfunction.
+Neon’s storage [is designed to be independent of the compute layer](https://neon.com/blog/what-you-get-when-you-think-of-postgres-storage-as-a-transaction-journal), and it is responsible for persisting the actual data via Write-Ahead Logs (WAL records). A **storage failure** could result from issues with the distributed storage service, such as network connectivity problems, failure of a Safekeeper responsible for WAL replication, or a Pageserver malfunction.
 
 So, what does Neon do to solve these issues?
 
@@ -56,7 +56,7 @@ So, what does Neon do to solve these issues?
 
 **In Neon, compute failures can be resolved quickly.** Since compute nodes in Neon are stateless, most issues can be addressed by immediately provisioning a new compute node. The queries being processed at the time of failure may be interrupted, but the expected downtime typically ends there.
 
-**In terms of storage, Neon’s custom-built design offers not just redundancy, but also ultra-high durability through the use of cloud object storage.** [Neon’s architecture automatically replicates and distributes data across multiple nodes for failure tolerance](https://neon.tech/blog/get-page-at-lsn), always keeping a full data copy on object storage.
+**In terms of storage, Neon’s custom-built design offers not just redundancy, but also ultra-high durability through the use of cloud object storage.** [Neon’s architecture automatically replicates and distributes data across multiple nodes for failure tolerance](https://neon.com/blog/get-page-at-lsn), always keeping a full data copy on object storage.
 
 If you want the long story, keep reading.
 

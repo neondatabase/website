@@ -9,7 +9,7 @@ summary: >-
   JDBC URL format for Neon and demonstrates the update and rollbackCount
   commands.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -84,7 +84,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 1. Open the [Neon Console](https://console.neon.tech/app/projects).
 1. Select your project.
-1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
+1. Select **Postgres database** > **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 1. Using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), add the following tables:
 
    ```sql
@@ -116,6 +116,10 @@ Your Java connection string should look something like the one shown below.
 ```bash shouldWrap
 jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf
 ```
+
+<Admonition type="important">
+Use a direct (non-pooled) connection string with Liquibase. Neon's pooled connection uses PgBouncer in transaction mode, which doesn't support all session-level operations that schema migration tools rely on, so running migrations over a pooled connection can lead to errors. Make sure the hostname does not include the `-pooler` suffix (turn the **Connection pooling** toggle off in the **Connect** modal). See [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
 
 ## Connect from Liquibase to your Neon database
 
@@ -264,7 +268,7 @@ When you run a changeset for the first time, Liquibase automatically creates two
 - [databasechangelog](https://docs.liquibase.com/concepts/tracking-tables/databasechangelog-table.html): Tracks which changesets have been run.
 - [databasechangeloglock](https://docs.liquibase.com/concepts/tracking-tables/databasechangeloglock-table.html): Ensures only one instance of Liquibase runs at a time.
 
-You can verify these tables were created by viewing the `blog` database on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
+You can verify these tables were created by viewing the `blog` database on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar.
 </Admonition>
 
 ## Rollback a change
@@ -290,7 +294,7 @@ Liquibase command 'rollbackCount' was executed successfully.
 
 </details>
 
-You can verify that creation of the `comments` table was rolled back viewing the `blog` database on the **Tables** page in the Neon Console. Select **Tables** from the sidebar.
+You can verify that creation of the `comments` table was rolled back viewing the `blog` database on the **Tables** page in the Neon Console. Select **Postgres database** > **Tables** from the sidebar.
 
 ## Next steps
 

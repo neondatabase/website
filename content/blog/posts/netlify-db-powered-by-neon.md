@@ -58,7 +58,7 @@ That’s what the concept of [Agent Experience](https://www.netlify.com/agent-ex
 
 **Scale to zero.** Most often than not, AI agents create short-lived databases. In most platforms, that would lead to an explosion in idle resources and cost – but in Neon, unused databases automatically scale to zero.
 
-**API-first management.** Neon’s API lets platforms, developers, and agents create and manage databases programmatically. Everything from provisioning to resource limits to telemetry is accessible via well-documented endpoints [tested at scale](https://neon.tech/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases).
+**API-first management.** Neon’s API lets platforms, developers, and agents create and manage databases programmatically. Everything from provisioning to resource limits to telemetry is accessible via well-documented endpoints [tested at scale](https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases).
 
 **100% Postgres.** Neon is Postgres, the world’s most-loved database and the best backend for modern apps. Agents and developers can interact using standard SQL, rely Postgres’ extensive documentation and training data, and take advantage of popular extensions like pgvector for embeddings.
 

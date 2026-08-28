@@ -11,7 +11,7 @@ summary: >-
 enableTableOfContents: true
 tag: beta
 tagTheme: blue
-updatedOn: '2026-07-13T14:20:27.525Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -35,7 +35,7 @@ You'll need:
   postgresql://username:password@host:port/database?sslmode=require&channel_binding=require
   ```
 
-  If you are migrating a database from one Neon project to another, you need the connection string for the source database, which you can access from the **Connect** modal on the project dashboard.
+  If you are migrating a database from one Neon project to another, you need the connection string for the source database, which you can access from the **Connect** modal on the project dashboard. When the source is a Neon project, use a direct (unpooled) connection string, not a pooled one. Make sure the hostname does not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
 
 - **Admin privileges** on your source database. We recommend using a superuser if migrating from another platform, or a user with the necessary `CREATE`, `SELECT`, `INSERT`, and `REPLICATION` privileges.
 - A database **smaller than 10 GB** in size for automated import. For larger databases, use [Migrate data from Postgres with pg_dump and pg_restore](/docs/import/migrate-from-postgres).

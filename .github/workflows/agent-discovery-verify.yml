@@ -3,14 +3,19 @@ name: Agent Discovery Verify
 # Single flow that verifies every agent / discovery endpoint cataloged in
 # config/agent-endpoints.yaml stays correct and in sync with the source of truth
 # (src/constants/agent-discovery.js). Covers skills, MCP, API/OpenAPI, OAuth,
-# the AI-Gateway model catalog (folded in from the old models-sync check), and
-# llms.txt.
+# the AI-Gateway model catalog, and llms.txt.
 #
 #   - Pull requests touching a discovery surface -> offline verification (fast,
 #     no network): schema + source-of-truth consistency + committed artifacts.
 #   - Daily schedule / manual dispatch -> --live: additionally fetches neon.com
-#     and compares /models.json against models.dev. Opens/updates a tracking
-#     issue on failure so drift can't rot silently.
+#     and checks how far the models.dev mirror has fallen behind /models.json.
+#     Opens/updates a tracking issue on failure so drift can't rot silently.
+#
+# /models.json is a source of truth, not a mirror of models.dev, so the two are
+# expected to differ whenever we have shipped a model and the upstream PR has not
+# merged. That lag does not fail the run — it is reported on its own issue, which
+# closes when the mirror catches up. A red run means something else: models.dev
+# advertising a `neon` model we do not publish, or a catalog that is malformed.
 
 on:
   pull_request:
@@ -19,11 +24,14 @@ on:
       - 'src/constants/agent-discovery.js'
       - 'scripts/verify-agent-endpoints.mjs'
       - 'src/app/.well-known/**'
+      - 'public/auth.md'
       - 'src/app/models.json/**'
       - 'src/app/models/**'
       - 'src/scripts/generate-skills-index.js'
-      - 'src/scripts/check-models-sync.js'
+      - 'src/scripts/check-models-sync.mjs'
       - 'src/scripts/check-models-endpoint-sync.js'
+      - 'src/scripts/import-models-from-models-dev.mjs'
+      - 'scripts/lib/models-catalog.mjs'
       - 'next.config.js'
   schedule:
     # Every day at 8:00 AM UTC (matches the old AI Gateway Models Sync cadence)
@@ -43,7 +51,7 @@ jobs:
       labels: linux-ubuntu-latest
     steps:
       - name: Harden the runner (Audit all outbound calls)
-        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        uses: step-security/harden-runner@b09bb98e06d4d774595224525879c09bc6e98c40 # v2.20.1
         with:
           egress-policy: audit
 
@@ -82,6 +90,13 @@ jobs:
       # crashes. That masked a partial npm install (ERR_MODULE_NOT_FOUND on ajv)
       # for months, so no drift was ever reported.
       # PRs: offline verification only (deterministic, no network dependency).
+      # The catalog classification and validation rules are pure functions with
+      # their own tests. unit-tests.yml only runs weekly, so without this a
+      # regression in either could merge unnoticed.
+      - name: Test the catalog rules
+        shell: bash
+        run: npx vitest run scripts/lib/models-catalog.test.js
+
       - name: Verify (offline)
         if: github.event_name == 'pull_request'
         shell: bash
@@ -96,6 +111,48 @@ jobs:
         run: |
           set -o pipefail
           node scripts/verify-agent-endpoints.mjs --live | tee verify-report.txt
+
+      # Sync debt is expected and non-failing, so it needs a channel of its own or
+      # nobody would ever see it. Runs even when the step above failed, because an
+      # unrelated endpoint failure should not hide how far the mirror has drifted.
+      - name: Report models.dev mirror sync debt
+        if: always() && github.event_name != 'pull_request'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -o pipefail
+          status=0
+          node src/scripts/check-models-sync.mjs --ci > mirror-report.txt 2>&1 || status=$?
+          # Exit 1 is a fault and exit 2 is an unreadable catalog; both are
+          # reported by the verify step above. Only act on the issue when the
+          # comparison actually succeeded, or a failed read would look like a
+          # mirror that has caught up and close the issue.
+          if [ "${status}" -ne 0 ]; then
+            echo "sync check exited ${status}; leaving the tracking issue untouched"
+            cat mirror-report.txt
+            # The drift issue is opened from verify-report.txt by the next step.
+            # That file describes the earlier run, which succeeded, so append this
+            # failure or the issue would describe a healthy check.
+            {
+              printf '\n## models.dev mirror check failed (exit %s)\n\n' "${status}"
+              cat mirror-report.txt
+            } >> verify-report.txt
+            exit "${status}"
+          fi
+          title="models.dev mirror is behind neon.com/models.json"
+          existing="$(gh issue list --state open --search "${title} in:title" --json number --jq '.[0].number')"
+          if grep -q '\[SYNC DEBT\]' mirror-report.txt; then
+            body="$(cat mirror-report.txt)"
+            body="${body}"$'\n\n'"— Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+            if [ -n "${existing}" ]; then
+              gh issue comment "${existing}" --body "${body}"
+            else
+              gh issue create --title "${title}" --body "${body}"
+            fi
+          elif [ -n "${existing}" ]; then
+            gh issue close "${existing}" --comment "models.dev now mirrors the published catalog."
+          fi
 
       - name: Open or update drift issue
         if: failure() && github.event_name != 'pull_request'

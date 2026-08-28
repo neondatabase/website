@@ -39,9 +39,9 @@ seo:
 
 We’re thrilled to announce the release of the [Neon integration for Vercel](https://vercel.com/integrations/neon) in beta!
 
-The integration allows you to connect a Neon Postgres database to a Vercel project and create a [database branch](https://neon.tech/docs/introduction/branching) for every Preview Deployment.
+The integration allows you to connect a Neon Postgres database to a Vercel project and create a [database branch](https://neon.com/docs/introduction/branching) for every Preview Deployment.
 
-To get started with the integration, check out [the documentation guide](https://neon.tech/docs/guides/vercel/).
+To get started with the integration, check out [the documentation guide](https://neon.com/docs/guides/vercel/).
 
 ## Database branching with Vercel Preview Deployments
 
@@ -56,7 +56,7 @@ However, when databases are involved, some teams share a single database contain
 
 To address these issues, you want each Preview Deployment to have its own isolated database. Here is how you can do it with Neon.
 
-<br />Neon’s [branching feature](https://neon.tech/docs/introduction/branching) addresses all these challenges. A branch is a copy-on-write clone of your data, so creating it only takes a few seconds. This makes it a scalable and cost-effective solution for Preview Deployments, enabling you to create a branch for every pull request.
+<br />Neon’s [branching feature](https://neon.com/docs/introduction/branching) addresses all these challenges. A branch is a copy-on-write clone of your data, so creating it only takes a few seconds. This makes it a scalable and cost-effective solution for Preview Deployments, enabling you to create a branch for every pull request.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/neon-vercel-integration/database-branching-with-vercel-preview-deployments-1024x576-e0914c1d.png)
 

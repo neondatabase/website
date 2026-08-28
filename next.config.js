@@ -10,6 +10,12 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 const defaultConfig = {
   poweredByHeader: false,
   transpilePackages: ['geist', 'react-icons'],
+  outputFileTracingExcludes: {
+    '*': ['./public/**'],
+  },
+  outputFileTracingIncludes: {
+    '*': ['./public/**/*.svg', './public/**/*.md'],
+  },
   images: {
     formats: ['image/avif', 'image/webp'],
     qualities: [75, 85, 90, 95, 99, 100],
@@ -2298,13 +2304,83 @@ const defaultConfig = {
       },
       {
         source: '/launchpad',
-        destination: 'https://neon.new',
+        destination: '/claimable-neon',
         permanent: false,
       },
       {
         source: '/instagres',
-        destination: 'https://neon.new',
+        destination: '/claimable-neon',
         permanent: false,
+      },
+      {
+        source: '/claimable',
+        destination: '/claimable-neon',
+        permanent: false,
+      },
+      {
+        source: '/claimable-postgres',
+        destination: '/claimable-neon',
+        permanent: true,
+      },
+      {
+        source: '/docs/reference/claimable-postgres',
+        destination: '/docs/reference/claimable-neon',
+        permanent: true,
+      },
+      {
+        source: '/docs/reference/claimable-postgres.md',
+        destination: '/docs/reference/claimable-neon.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/ai/skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/agent-skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/.well-known/skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/agent-skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/claimable-postgres',
+        destination: '/auth.md',
+        permanent: true,
+      },
+      {
+        source: '/docs/.well-known/skills/claimable-postgres/:path*',
+        destination: '/auth.md',
+        permanent: true,
       },
       {
         source: '/docs/local/neon-local-vscode',
@@ -2570,6 +2646,26 @@ const defaultConfig = {
       {
         source: '/templates/:slug*',
         destination: 'https://github.com/neondatabase/examples',
+        permanent: true,
+      },
+      {
+        source: '/use-cases/multi-tb',
+        destination: '/use-cases/large-databases',
+        permanent: true,
+      },
+      {
+        source: '/use-cases/serverless-apps',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
+        source: '/use-cases/variable-load',
+        destination: '/use-cases/bursty-workloads',
+        permanent: true,
+      },
+      {
+        source: '/use-cases/fast-dev-workflows',
+        destination: '/use-cases/branching-workflows',
         permanent: true,
       },
       ...docsRedirects,

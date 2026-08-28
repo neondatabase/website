@@ -36,13 +36,13 @@ seo:
 
 <img alt="Post image" width="1024" height="576" src="https://cdn.neonapi.io/public/images/pages/blog/title-a-deep-dive-into-polyscales-architecture/neon-polyscale-architecture-1024x576-7dfbf3fe.jpg" />
 
-We are very excited about the new [PolyScale integration with Neon](https://neon.tech/blog/neon-polyscale-integration). Neon’s serverless Postgres separates storage and compute to offer autoscaling, branching, and bottomless storage, while PolyScale is a fully autonomous database cache, which makes the two services a match made in heaven.
+We are very excited about the new [PolyScale integration with Neon](https://neon.com/blog/neon-polyscale-integration). Neon’s serverless Postgres separates storage and compute to offer autoscaling, branching, and bottomless storage, while PolyScale is a fully autonomous database cache, which makes the two services a match made in heaven.
 
 With the PolyScale integration, Neon users can add automated caching to allow global low-latency access to their database, while reducing load on their database without needing to write any code.
 
 If you have slow queries with your database, if your database is seeing too much load, or if you’d like to access your database from multiple locations without the complexity of adding a read replica, it’s time for you to explore how easy it is to add automated caching with PolyScale. With PolyScale, you don’t need to update your application; you simply replace your existing database connection string with a PolyScale connection string and you are done!
 
-If you’d like to learn more about how to connect PolyScale to Neon, you can see Neon’s recent [announcement blog post](https://neon.tech/blog/neon-polyscale-integration). In this post, we will cover:
+If you’d like to learn more about how to connect PolyScale to Neon, you can see Neon’s recent [announcement blog post](https://neon.com/blog/neon-polyscale-integration). In this post, we will cover:
 
 1. How PolyScale’s caching algorithms work
 2. How to Use PolyScale’s Performance test to see the performance benefits of PolyScale

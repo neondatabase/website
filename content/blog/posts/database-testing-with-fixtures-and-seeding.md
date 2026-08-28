@@ -362,7 +362,7 @@ In practice, the line between seeding and fixtures can sometimes blur, especiall
 
 ## Branching: the next level of database testing
 
-While seeding and fixtures are great tools for populating your database with consistent data, [database branching](https://neon.tech/docs/introduction/branching) in Neon offers a powerful UX enhancement to these practices.
+While seeding and fixtures are great tools for populating your database with consistent data, [database branching](https://neon.com/docs/introduction/branching) in Neon offers a powerful UX enhancement to these practices.
 
 1. **Instantaneous data cloning.** Branching allows for a quick copy of your database. You create a branch (available immediately) and run your tests. If anything goes wrong, you can simply reset the branch to its original state, restore it to a point in time, or start afresh.
 2. **Isolated test environments.** Branches act like isolated environments: you can create a separate branch of your database for each feature you’re developing or bug you’re fixing.
@@ -371,6 +371,6 @@ While seeding and fixtures are great tools for populating your database with con
 
 ## Seeds, Fixtures, and Everything in Between
 
-Database testing is challenging. This is one of the reasons we created [branching](https://neon.tech/docs/introduction/branching) in Neon: to give database developers more maneuverability when testing new databases, schema changes, and queries.
+Database testing is challenging. This is one of the reasons we created [branching](https://neon.com/docs/introduction/branching) in Neon: to give database developers more maneuverability when testing new databases, schema changes, and queries.
 
 But seeding and fixtures, and the tooling around them, are ideal starting points for robust database design. Seeding sets the stage with your app’s essential data, while fixtures give you a focused test environment.

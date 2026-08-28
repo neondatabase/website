@@ -9,7 +9,7 @@ summary: >-
   number of days. Set `PG_VERSION` and `AWS_REGION` to target any Postgres
   version or AWS region.
 enableTableOfContents: true
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-07T18:39:13.799Z'
 ---
 
 This guide shows you how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.
@@ -35,6 +35,10 @@ Setting up a scheduled backup involves three key components:
   - The **connection string** for your database
   - The **AWS region** where your database is deployed
   - The **Postgres version** your database is running
+
+<Admonition type="important">
+Use a direct (unpooled) connection string for `DATABASE_URL`. Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary#pooled-connection-string); use an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string) instead. Make sure the hostname does not include the `-pooler` suffix.
+</Admonition>
 
 ### 3. GitHub Action
 
@@ -121,7 +125,9 @@ jobs:
 
       - name: Run pg_dump
         run: |
-          $POSTGRES/pg_dump ${{ env.DATABASE_URL }} | gzip > "${{ env.GZIP_NAME }}"
+          set -o pipefail
+          : "${DATABASE_URL:?DATABASE_URL secret is not set}"
+          "${POSTGRES}/pg_dump" "$DATABASE_URL" | gzip > "$GZIP_NAME"
 
       - name: Empty bucket of old files
         run: |
@@ -255,8 +261,12 @@ This step runs `pg_dump` and saves the output in the Action's virtual memory usi
 ```yml
 - name: Run pg_dump
   run: |
-    $POSTGRES/$pg_dump ${{ env.DATABASE_URL }} | gzip > "${{ env.GZIP_NAME }}"
+    set -o pipefail
+    : "${DATABASE_URL:?DATABASE_URL secret is not set}"
+    "${POSTGRES}/pg_dump" "$DATABASE_URL" | gzip > "$GZIP_NAME"
 ```
+
+GitHub Actions already runs `bash` steps with `pipefail` enabled, but setting it explicitly makes the intent clear and keeps the step correct even if the shell is overridden: the step fails if `pg_dump` fails, instead of masking the error behind a successful `gzip`. The `DATABASE_URL` check fails the step early with a clear message if the secret is missing.
 
 ## Empty bucket of old files
 

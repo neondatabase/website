@@ -8,7 +8,7 @@ summary: >-
   compute endpoints via the Neon Console or API.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-26T13:16:52.511Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -32,7 +32,13 @@ Your Neon plan determines the resources available to a compute. The Neon Free pl
 
 ## View a compute
 
-A compute is associated with a branch. To view a compute, select **Branches** in the Neon Console, and select a branch. If the branch has a compute, it is shown on the **Computes** tab on the branch page.
+A compute is associated with a branch.
+
+<Tabs labels={["Console", "CLI", "API"]}>
+
+<TabItem>
+
+In the Neon Console, select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes**. If the branch has a compute, it is shown on the **Computes** tab of the branch overview.
 
 Compute details shown on the **Computes** tab include:
 
@@ -44,30 +50,309 @@ Compute details shown on the **Computes** tab include:
 
 **Edit**, **Monitor**, and **Connect** actions for a compute can be accessed from the **Computes** tab.
 
+</TabItem>
+
+<TabItem>
+
+The CLI has no separate compute object; a branch's compute state (`current_state`, `compute_time_seconds`) is shown by [`neon branches list`](/docs/cli/branches#list):
+
+```bash
+neon branches list --output json
+```
+
+<details>
+<summary>Show output</summary>
+
+```json
+[
+  {
+    "id": "br-dry-glitter-a1rh0x6q",
+    "project_id": "autumn-lake-30024670",
+    "name": "br-dry-glitter-a1rh0x6q",
+    "current_state": "ready",
+    "logical_size": 29515776,
+    "creation_source": "console",
+    "default": true,
+    "cpu_used_sec": 78,
+    "compute_time_seconds": 78,
+    "active_time_seconds": 312,
+    "written_data_bytes": 107816,
+    "data_transfer_bytes": 0,
+    "created_at": "2023-07-09T17:01:34Z",
+    "updated_at": "2023-07-09T17:15:13Z"
+  }
+]
+```
+
+</details>
+
+Or list the project's computes directly through the [`neon api`](/docs/cli/api) passthrough:
+
+```bash
+neon api /projects/autumn-lake-30024670/endpoints
+```
+
+</TabItem>
+
+<TabItem>
+
+List the computes for a project with the [List computes](/docs/reference/api/endpoints/list-project-endpoints) endpoint:
+
+```bash
+curl -X 'GET' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [List computes](/docs/reference/api/endpoints/list-project-endpoints) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "endpoints": [
+    {
+      "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+      "id": "ep-misty-morning-a1pfa4ez",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dry-glitter-a1rh0x6q",
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 2,
+      "region_id": "aws-ap-southeast-1",
+      "type": "read_write",
+      "current_state": "idle",
+      "settings": {},
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "last_active": "2025-08-03T17:40:20Z",
+      "creation_source": "console",
+      "created_at": "2025-08-03T17:40:19Z",
+      "updated_at": "2025-08-03T17:45:24Z",
+      "suspended_at": "2025-08-03T17:45:24Z",
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
+    },
+    {
+      "host": "ep-autumn-frost-a1wlmval.ap-southeast-1.aws.neon.tech",
+      "id": "ep-autumn-frost-a1wlmval",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dark-bar-a11jneqm",
+      "autoscaling_limit_min_cu": 1,
+      "autoscaling_limit_max_cu": 2,
+      "region_id": "aws-ap-southeast-1",
+      "type": "read_write",
+      "current_state": "idle",
+      "settings": {},
+      "pooler_enabled": false,
+      "pooler_mode": "transaction",
+      "disabled": false,
+      "passwordless_access": true,
+      "last_active": "2025-08-03T17:34:40Z",
+      "creation_source": "console",
+      "created_at": "2025-08-03T11:27:50Z",
+      "updated_at": "2025-08-03T17:41:11Z",
+      "suspended_at": "2025-08-03T17:41:11Z",
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
+    }
+  ]
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
+
 ## Create a compute
 
 You can only create a single primary read-write compute for a branch that does not have a compute, but a branch can have multiple read replica computes.
 
-To create an endpoint:
+<Tabs labels={["Console", "CLI", "API"]}>
 
-1. In the Neon Console, select **Branches**.
-1. Select a branch.
-1. On the **Computes** tab, click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
+<TabItem>
+
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Computes**.
+1. Click **Add a compute** or **Add Read Replica** if you already have a primary read-write compute.
 1. On the **Add new compute** drawer or **Add read replica** drawer, specify your compute settings, and click **Add**. Selecting the **Read replica** compute type creates a [read replica](/docs/introduction/read-replicas).
+
+</TabItem>
+
+<TabItem>
+
+Add a compute to a branch with [`neon branches add-compute`](/docs/cli/branches#add-compute), passing `--type read_write` for the branch's primary compute. Add `--cu` to set a fixed size or an autoscaling range:
+
+```bash
+neon branches add-compute br-dry-glitter-a1rh0x6q --type read_write
+```
+
+</TabItem>
+
+<TabItem>
+
+Create a compute with the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint. The branch you specify cannot already have a read-write compute:
+
+```bash
+curl -X 'POST' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "endpoint": {
+    "branch_id": "br-dry-glitter-a1rh0x6q",
+    "type": "read_write"
+  }
+}'
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "endpoint": {
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-dry-glitter-a1rh0x6q",
+    "autoscaling_limit_min_cu": 1,
+    "autoscaling_limit_max_cu": 2,
+    "region_id": "aws-ap-southeast-1",
+    "type": "read_write",
+    "current_state": "init",
+    "pending_state": "active",
+    "settings": {},
+    "pooler_enabled": false,
+    "pooler_mode": "transaction",
+    "disabled": false,
+    "passwordless_access": true,
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:40:19Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
+  },
+  "operations": [
+    {
+      "id": "d6ef3cc2-663b-440a-88e7-ea6a59ea2c6a",
+      "project_id": "autumn-lake-30024670",
+      "branch_id": "br-dry-glitter-a1rh0x6q",
+      "endpoint_id": "ep-misty-morning-a1pfa4ez",
+      "action": "start_compute",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2025-08-03T17:40:19Z",
+      "updated_at": "2025-08-03T17:40:19Z",
+      "total_duration_ms": 0
+    }
+  ]
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
 
 ## Edit a compute
 
 You can edit a compute to change the [compute size](#compute-size-and-autoscaling-configuration) or [scale to zero](#scale-to-zero-configuration) configuration.
 
-To edit a compute:
+<Tabs labels={["Console", "CLI", "API"]}>
 
-1. In the Neon Console, select **Branches**.
-1. Select a branch.
-1. From the **Computes** tab, select **Edit** for the compute you want to edit.
+<TabItem>
+
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Computes**.
+1. Select **Edit** for the compute you want to edit.
 
    The **Edit** drawer opens, letting you modify settings such as compute size, the autoscaling configuration, and your scale to zero setting.
 
 1. Once you've made your changes, click **Save**. All changes take immediate effect.
+
+</TabItem>
+
+<TabItem>
+
+No dedicated command edits a compute, so reach for the [`neon api`](/docs/cli/api) passthrough, which sends the request with your CLI credentials. For example, change the autoscaling range:
+
+```bash shouldWrap
+neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez -X PATCH -F endpoint.autoscaling_limit_min_cu=0.5 -F endpoint.autoscaling_limit_max_cu=3
+```
+
+</TabItem>
+
+<TabItem>
+
+Update a compute with the [Update compute](/docs/reference/api/endpoints/update-project-endpoint) endpoint. For example, change the autoscaling range:
+
+```bash
+curl -X 'PATCH' \
+  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez' \
+  -H 'accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "endpoint": {
+    "autoscaling_limit_min_cu": 0.5,
+    "autoscaling_limit_max_cu": 3
+  }
+}'
+```
+
+<details>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Update compute](/docs/reference/api/endpoints/update-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+
+```json
+{
+  "endpoint": {
+    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
+    "id": "ep-misty-morning-a1pfa4ez",
+    "project_id": "autumn-lake-30024670",
+    "branch_id": "br-dry-glitter-a1rh0x6q",
+    "autoscaling_limit_min_cu": 0.5,
+    "autoscaling_limit_max_cu": 3,
+    "region_id": "aws-ap-southeast-1",
+    "type": "read_write",
+    "current_state": "idle",
+    "settings": {},
+    "pooler_enabled": false,
+    "pooler_mode": "transaction",
+    "disabled": false,
+    "passwordless_access": true,
+    "last_active": "2025-08-03T17:40:20Z",
+    "creation_source": "console",
+    "created_at": "2025-08-03T17:40:19Z",
+    "updated_at": "2025-08-03T17:49:01Z",
+    "suspended_at": "2025-08-03T17:45:24Z",
+    "proxy_host": "ap-southeast-1.aws.neon.tech",
+    "suspend_timeout_seconds": 0,
+    "provisioner": "k8s-neonvm"
+  },
+  "operations": []
+}
+```
+
+</details>
+
+</TabItem>
+
+</Tabs>
 
 For information about selecting an appropriate compute size or autoscaling configuration, see [How to size your compute](#how-to-size-your-compute).
 
@@ -145,47 +430,47 @@ For information about monitoring your compute as it scales up and down, see [Mon
 
 The size of your compute determines the amount of frequently accessed data you can cache in memory and the maximum number of simultaneous connections you can support. As a result, if your compute size is too small, this can lead to suboptimal query performance and connection limit issues.
 
-In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) and Neon also uses a Local File Cache (LFC) to extend the amount of memory available for caching data. The LFC can use up to 75% of your compute's RAM.
+In Postgres, the `shared_buffers` setting defines the amount of data that can be held in memory. In Neon, up to 75% of your compute's RAM is used for data caching.
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration.
 
-The following table outlines the RAM, LFC size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+The following table outlines the RAM, compute cache size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
 Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
 </Admonition>
 
-| Compute Size (CU) | RAM (GB) | LFC size (GB) | max_connections |
-| :---------------- | :------- | :------------ | :-------------- |
-| 0.25              | 1        | 0.75          | 104             |
-| 0.50              | 2        | 1.5           | 209             |
-| 1                 | 4        | 3             | 419             |
-| 2                 | 8        | 6             | 839             |
-| 3                 | 12       | 9             | 1258            |
-| 4                 | 16       | 12            | 1678            |
-| 5                 | 20       | 15            | 2098            |
-| 6                 | 24       | 18            | 2517            |
-| 7                 | 28       | 21            | 2937            |
-| 8                 | 32       | 24            | 3357            |
-| 9                 | 36       | 27            | 4000            |
-| 10                | 40       | 30            | 4000            |
-| 11                | 44       | 33            | 4000            |
-| 12                | 48       | 36            | 4000            |
-| 13                | 52       | 39            | 4000            |
-| 14                | 56       | 42            | 4000            |
-| 15                | 60       | 45            | 4000            |
-| 16                | 64       | 48            | 4000            |
-| 18                | 72       | 54            | 4000            |
-| 20                | 80       | 60            | 4000            |
-| 22                | 88       | 66            | 4000            |
-| 24                | 96       | 72            | 4000            |
-| 26                | 104      | 78            | 4000            |
-| 28                | 112      | 84            | 4000            |
-| 30                | 120      | 90            | 4000            |
-| 32                | 128      | 96            | 4000            |
-| 34                | 136      | 102           | 4000            |
-| 36                | 144      | 108           | 4000            |
-| 38                | 152      | 114           | 4000            |
+| Compute Size (CU) | RAM (GB) | Compute cache size (GB) | max_connections |
+| :---------------- | :------- | :---------------------- | :-------------- |
+| 0.25              | 1        | 0.75                    | 104             |
+| 0.50              | 2        | 1.5                     | 209             |
+| 1                 | 4        | 3                       | 419             |
+| 2                 | 8        | 6                       | 839             |
+| 3                 | 12       | 9                       | 1258            |
+| 4                 | 16       | 12                      | 1678            |
+| 5                 | 20       | 15                      | 2098            |
+| 6                 | 24       | 18                      | 2517            |
+| 7                 | 28       | 21                      | 2937            |
+| 8                 | 32       | 24                      | 3357            |
+| 9                 | 36       | 27                      | 4000            |
+| 10                | 40       | 30                      | 4000            |
+| 11                | 44       | 33                      | 4000            |
+| 12                | 48       | 36                      | 4000            |
+| 13                | 52       | 39                      | 4000            |
+| 14                | 56       | 42                      | 4000            |
+| 15                | 60       | 45                      | 4000            |
+| 16                | 64       | 48                      | 4000            |
+| 18                | 72       | 54                      | 4000            |
+| 20                | 80       | 60                      | 4000            |
+| 22                | 88       | 66                      | 4000            |
+| 24                | 96       | 72                      | 4000            |
+| 26                | 104      | 78                      | 4000            |
+| 28                | 112      | 84                      | 4000            |
+| 30                | 120      | 90                      | 4000            |
+| 32                | 128      | 96                      | 4000            |
+| 34                | 136      | 102                     | 4000            |
+| 36                | 144      | 108                     | 4000            |
+| 38                | 152      | 114                     | 4000            |
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 
@@ -195,12 +480,12 @@ Regarding connection limits, you'll want a compute size that can support your an
 
 If it's not possible to hold your entire dataset in memory, the next best option is to ensure that your working set is in memory. A working set is your frequently accessed or recently used data and indexes. To determine whether your working set is fully in memory, you can query the cache hit ratio for your Neon compute. The cache hit ratio tells you how many queries are served from memory. Queries not served from memory bypass the cache to retrieve data from database storage (the [Pageserver](#docs/reference/glossary#pageserver)), which can affect query performance.
 
-As mentioned above, Neon computes use a Local File Cache (LFC) to extend Postgres shared buffers. You can monitor the Local File Cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
+You can monitor your compute cache hit rate and your working set size from Neon's **Monitoring** page, where you'll find the following charts:
 
-- [Local file cache hit rate](/docs/introduction/monitoring-page#local-file-cache-hit-rate)
+- [Compute cache hit rate](/docs/introduction/monitoring-page#compute-cache-hit-rate)
 - [Working set size](/docs/introduction/monitoring-page#working-set-size)
 
-Neon also provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view that you can use to query the cache hit ratio for your compute's Local File Cache. For more information, see [The neon extension](/docs/extensions/neon).
+Neon also provides a [neon](/docs/extensions/neon) extension with a `neon_stat_file_cache` view that you can use to query the cache hit ratio for your compute. For more information, see [The neon extension](/docs/extensions/neon).
 
 #### Autoscaling considerations
 
@@ -239,272 +524,75 @@ Restarting ensures your compute is running with the latest configurations and im
 Restarting a compute interrupts any connections currently using the compute. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 </Admonition>
 
-You can restart a compute using these methods:
+<Tabs labels={["Console", "CLI", "API"]}>
 
-- Use the **Restart compute** option in the Neon console. Navigate to the **Branches** page from your project dashboard, and select a branch. On the Computes tab, select **Restart compute** from the menu.
-  ![Restart a compute in the console](/docs/manage/restart_compute.png)
-- Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
+<TabItem>
 
-  ```bash
-  curl --request POST \
-     --url https://console.neon.tech/api/v2/projects/cool-forest-86753099/endpoints/ep-calm-flower-a5b75h79/restart \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
-  ```
+Use the **Restart compute** option in the Neon Console. Select your branch from the **BRANCH** selector, then select **Postgres database** > **Computes** and choose **Restart compute** from the compute's menu.
 
-  <Admonition type="note">
-  The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If you're compute is idle, you can wake it up with a query or the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API. 
-  </Admonition>
+![Restart a compute in the console](/docs/manage/restart_compute.png)
 
-- Stop activity on your compute (stop running queries) and wait for your compute to suspend due to inactivity. By default, Neon suspends a compute after 5 minutes of inactivity. You can watch the status of your compute on the **Branches** page in the Neon Console. Select your branch and monitor your compute's **Status** field. Wait for it to report an `Idle` status. The compute will restart the next time it's accessed, and the status will change to `Active`.
+You can also restart a compute by letting it suspend: stop activity (stop running queries) and wait for the compute to suspend due to inactivity, which happens after 5 minutes by default. Watch the compute's **Status** field on the **Branches** page until it reports `Idle`. The compute restarts the next time it's accessed, and the status changes to `Active`.
+
+</TabItem>
+
+<TabItem>
+
+Restart the compute through the [`neon api`](/docs/cli/api) passthrough:
+
+```bash
+neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez/restart -X POST
+```
+
+</TabItem>
+
+<TabItem>
+
+Issue a [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) call. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key):
+
+```bash
+curl --request POST \
+   --url https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez/restart \
+   --header 'accept: application/json' \
+   --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+<Admonition type="note">
+The [Restart compute endpoint](/docs/reference/api/endpoints/restart-project-endpoint) API only works on an active compute. If your compute is idle, you can wake it up with a query or the [Start compute endpoint](/docs/reference/api/endpoints/start-project-endpoint) API.
+</Admonition>
+
+</TabItem>
+
+</Tabs>
 
 ## Delete a compute
 
 A branch can have a single read-write compute and multiple read replica computes. You can delete any of these computes from a branch. However, be aware that a compute is required to connect to a branch and access its data. If you delete a compute and add it back later, the new compute will have different connection details.
 
-To delete a compute:
+<Tabs labels={["Console", "CLI", "API"]}>
 
-1. In the Neon Console, select **Branches**.
-1. Select a branch.
-1. On the **Computes** tab, click **Edit** for the compute you want to delete.
+<TabItem>
+
+1. In the Neon Console, select your branch from the **BRANCH** selector.
+1. Under **Postgres database**, select **Computes**.
+1. Click **Edit** for the compute you want to delete.
 1. At the bottom of the **Edit compute** drawer, click **Delete compute**.
 
-## Manage computes with the Neon API
+</TabItem>
 
-Compute actions performed in the Neon Console can also be performed using the [Neon API](/docs/reference/api). The following examples demonstrate how to create, view, update, and delete computes using the Neon API. For other compute-related API methods, refer to the [Neon API Reference](/docs/reference/api).
+<TabItem>
 
-<Admonition type="note">
-The API examples that follow may not show all of the user-configurable request body attributes that are available to you. To view all attributes for a particular method, refer to method's request body schema in the [Neon API Reference](/docs/reference/api).
-</Admonition>
-
-The `jq` option specified in each example is an optional third-party tool that formats the `JSON` response, making it easier to read. For information about this utility, see [jq](https://stedolan.github.io/jq/).
-
-### Prerequisites
-
-A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
-
-<LinkAPIKey />
-### Create a compute with the API
-
-The following Neon API method creates a compute.
-
-```http
-POST /projects/{project_id}/endpoints
-```
-
-The API method appears as follows when specified in a cURL command. The branch you specify cannot have an existing compute. A compute must be associated with a branch. Neon supports read-write and read replica compute. A branch can have a single primary read-write compute but supports multiple read replica computes.
+Delete the compute through the [`neon api`](/docs/cli/api) passthrough:
 
 ```bash
-curl -X 'POST' \
-  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
-  -H 'accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "endpoint": {
-    "branch_id": "br-dry-glitter-a1rh0x6q",
-    "type": "read_write"
-  }
-}'
+neon api /projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez -X DELETE
 ```
 
-<details>
-<summary>Response body</summary>
+</TabItem>
 
-For attribute definitions, find the [Create compute](/docs/reference/api/endpoints/create-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
+<TabItem>
 
-```json
-{
-  "endpoint": {
-    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
-    "id": "ep-misty-morning-a1pfa4ez",
-    "project_id": "autumn-lake-30024670",
-    "branch_id": "br-dry-glitter-a1rh0x6q",
-    "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 2,
-    "region_id": "aws-ap-southeast-1",
-    "type": "read_write",
-    "current_state": "init",
-    "pending_state": "active",
-    "settings": {},
-    "pooler_enabled": false,
-    "pooler_mode": "transaction",
-    "disabled": false,
-    "passwordless_access": true,
-    "creation_source": "console",
-    "created_at": "2025-08-03T17:40:19Z",
-    "updated_at": "2025-08-03T17:40:19Z",
-    "proxy_host": "ap-southeast-1.aws.neon.tech",
-    "suspend_timeout_seconds": 0,
-    "provisioner": "k8s-neonvm"
-  },
-  "operations": [
-    {
-      "id": "d6ef3cc2-663b-440a-88e7-ea6a59ea2c6a",
-      "project_id": "autumn-lake-30024670",
-      "branch_id": "br-dry-glitter-a1rh0x6q",
-      "endpoint_id": "ep-misty-morning-a1pfa4ez",
-      "action": "start_compute",
-      "status": "running",
-      "failures_count": 0,
-      "created_at": "2025-08-03T17:40:19Z",
-      "updated_at": "2025-08-03T17:40:19Z",
-      "total_duration_ms": 0
-    }
-  ]
-}
-```
-
-</details>
-
-### List computes with the API
-
-The following Neon API method lists computes for the specified project. A compute belongs to a Neon project. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/list-project-endpoints).
-
-```http
-GET /projects/{project_id}/endpoints
-```
-
-The API method appears as follows when specified in a cURL command:
-
-```bash
-curl -X 'GET' \
-  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints' \
-  -H 'accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY"
-```
-
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [List computes](/docs/reference/api/endpoints/list-project-endpoints) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "endpoints": [
-    {
-      "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
-      "id": "ep-misty-morning-a1pfa4ez",
-      "project_id": "autumn-lake-30024670",
-      "branch_id": "br-dry-glitter-a1rh0x6q",
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 2,
-      "region_id": "aws-ap-southeast-1",
-      "type": "read_write",
-      "current_state": "idle",
-      "settings": {},
-      "pooler_enabled": false,
-      "pooler_mode": "transaction",
-      "disabled": false,
-      "passwordless_access": true,
-      "last_active": "2025-08-03T17:40:20Z",
-      "creation_source": "console",
-      "created_at": "2025-08-03T17:40:19Z",
-      "updated_at": "2025-08-03T17:45:24Z",
-      "suspended_at": "2025-08-03T17:45:24Z",
-      "proxy_host": "ap-southeast-1.aws.neon.tech",
-      "suspend_timeout_seconds": 0,
-      "provisioner": "k8s-neonvm"
-    },
-    {
-      "host": "ep-autumn-frost-a1wlmval.ap-southeast-1.aws.neon.tech",
-      "id": "ep-autumn-frost-a1wlmval",
-      "project_id": "autumn-lake-30024670",
-      "branch_id": "br-dark-bar-a11jneqm",
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 2,
-      "region_id": "aws-ap-southeast-1",
-      "type": "read_write",
-      "current_state": "idle",
-      "settings": {},
-      "pooler_enabled": false,
-      "pooler_mode": "transaction",
-      "disabled": false,
-      "passwordless_access": true,
-      "last_active": "2025-08-03T17:34:40Z",
-      "creation_source": "console",
-      "created_at": "2025-08-03T11:27:50Z",
-      "updated_at": "2025-08-03T17:41:11Z",
-      "suspended_at": "2025-08-03T17:41:11Z",
-      "proxy_host": "ap-southeast-1.aws.neon.tech",
-      "suspend_timeout_seconds": 0,
-      "provisioner": "k8s-neonvm"
-    }
-  ]
-}
-```
-
-</details>
-
-### Update a compute with the API
-
-The following Neon API method updates the specified compute. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/update-project-endpoint).
-
-```http
-PATCH /projects/{project_id}/endpoints/{endpoint_id}
-```
-
-The API method appears as follows when specified in a cURL command. The example reassigns the compute to another branch by changing the `branch_id`. The branch that you specify cannot have an existing compute. A compute must be associated with a branch, and a branch can have only one primary read-write compute. Multiple read-replica computes are allowed.
-
-```bash
-curl -X 'PATCH' \
-  'https://console.neon.tech/api/v2/projects/autumn-lake-30024670/endpoints/ep-misty-morning-a1pfa4ez' \
-  -H 'accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "endpoint": {
-    "branch_id": "br-raspy-pine-a1hspnzv"
-  }
-}'
-```
-
-<details>
-<summary>Response body</summary>
-
-For attribute definitions, find the [Update compute](/docs/reference/api/endpoints/update-project-endpoint) endpoint in the [Neon API Reference](/docs/reference/api). Definitions are provided in the **Responses** section.
-
-```json
-{
-  "endpoint": {
-    "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
-    "id": "ep-misty-morning-a1pfa4ez",
-    "project_id": "autumn-lake-30024670",
-    "branch_id": "br-raspy-pine-a1hspnzv",
-    "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 2,
-    "region_id": "aws-ap-southeast-1",
-    "type": "read_write",
-    "current_state": "idle",
-    "settings": {},
-    "pooler_enabled": false,
-    "pooler_mode": "transaction",
-    "disabled": false,
-    "passwordless_access": true,
-    "last_active": "2025-08-03T17:40:20Z",
-    "creation_source": "console",
-    "created_at": "2025-08-03T17:40:19Z",
-    "updated_at": "2025-08-03T17:49:01Z",
-    "suspended_at": "2025-08-03T17:45:24Z",
-    "proxy_host": "ap-southeast-1.aws.neon.tech",
-    "suspend_timeout_seconds": 0,
-    "provisioner": "k8s-neonvm"
-  },
-  "operations": []
-}
-```
-
-</details>
-
-### Delete a compute with the API
-
-The following Neon API method deletes the specified compute. To view the API documentation for this method, refer to the [Neon API Reference](/docs/reference/api/endpoints/delete-project-endpoint).
-
-```http
-DELETE /projects/{project_id}/endpoints/{endpoint_id}
-```
-
-The API method appears as follows when specified in a cURL command.
+Delete a compute with the [Delete compute](/docs/reference/api/endpoints/delete-project-endpoint) endpoint:
 
 ```bash
 curl -X 'DELETE' \
@@ -524,9 +612,9 @@ For attribute definitions, find the [Delete compute](/docs/reference/api/endpoin
     "host": "ep-misty-morning-a1pfa4ez.ap-southeast-1.aws.neon.tech",
     "id": "ep-misty-morning-a1pfa4ez",
     "project_id": "autumn-lake-30024670",
-    "branch_id": "br-raspy-pine-a1hspnzv",
-    "autoscaling_limit_min_cu": 1,
-    "autoscaling_limit_max_cu": 2,
+    "branch_id": "br-dry-glitter-a1rh0x6q",
+    "autoscaling_limit_min_cu": 0.5,
+    "autoscaling_limit_max_cu": 3,
     "region_id": "aws-ap-southeast-1",
     "type": "read_write",
     "current_state": "idle",
@@ -549,6 +637,10 @@ For attribute definitions, find the [Delete compute](/docs/reference/api/endpoin
 ```
 
 </details>
+
+</TabItem>
+
+</Tabs>
 
 ## Compute-related issues
 

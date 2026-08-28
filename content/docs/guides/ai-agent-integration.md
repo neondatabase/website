@@ -11,12 +11,12 @@ summary: >-
   Project transfers require a personal API key.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-15T00:58:07.525Z'
+updatedOn: '2026-08-25T15:36:44.109Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
 
-<CTA title="Learn from other agent platform builders" description="See how <a href='https://neon.com/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='https://neon.com/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='https://neon.com/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon."></CTA>
+<CTA title="Learn from other agent platform builders" description="See how <a href='/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon."></CTA>
 
 <Admonition type="note">
 **Prerequisites:** You must be enrolled in the [Neon Agent Plan](/docs/introduction/agent-plan). If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
@@ -51,6 +51,15 @@ This integration uses a **project-per-tenant model**, where each tenant (user, a
 For details about **Agent plan** structure, pricing, and benefits, refer to the [Neon Agent Plan](/docs/introduction/agent-plan) docs.
 </Admonition>
 
+<Admonition type="tip" title="Code samples and agent skill">
+The [neon-for-agent-platforms](https://github.com/neondatabase/neon-for-agent-platforms) repository provides runnable TypeScript samples for the patterns in this guide. Install the companion agent skill with the [Neon CLI](/docs/cli):
+
+```bash
+neon skills -s neon-postgres-agent-platforms -y
+```
+
+</Admonition>
+
 <Steps>
 
 ## Provisioning projects
@@ -62,27 +71,27 @@ When a user on your platform needs a database, create a project in the appropria
 
 The two-organization structure enables you to:
 
-1. **Offer a truly free tier**: Neon sponsors all infrastructure costs for up to 30,000 free projects
+1. **Offer a truly free tier**: Neon sponsors infrastructure costs for free-tier projects (unlimited projects; we incrementally raise your limit to accommodate growing usage)
 2. **Scale sustainably**: Paid users consume from your credits ($0.106 per compute unit hour)
 3. **Upgrade users**: Transfer projects from free to paid organizations when users upgrade
 4. **Control resources**: Set different usage quotas/limits for projects to match your desired pricing model
 
 ### Project limits by organization
 
-Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations.
+Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations. For how Agent compares to Scale, see [Agent vs Scale](/docs/introduction/agent-plan#agent-vs-scale).
 
-| Limit                    | Free Organization | Paid Organization       | Notes                                                                                                            |
-| ------------------------ | ----------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| **Max branches**         | 10 per project    | Custom limits available | Includes all branches (production, development, snapshots)                                                       |
-| **Max manual snapshots** | 1 per project     | 100 per project         | Manual snapshots only. On paid plans, scheduled backup snapshots do not count. Critical for versioning workflows |
-| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU            | CU = Compute Units (~4GB RAM per CU)                                                                             |
-| **History window**       | 1 day             | Up to 7 days            | Point-in-time recovery window                                                                                    |
-| **Min auto-suspend**     | 5 minutes         | 1 minute                | Minimum time before compute suspends                                                                             |
+| Limit                    | Free Organization | Paid Organization | Notes                                                                                             |
+| ------------------------ | ----------------- | ----------------- | ------------------------------------------------------------------------------------------------- |
+| **Max branches**         | 10 per project    | Up to 1,000       | Includes all branches (production, development, snapshots)                                        |
+| **Max manual snapshots** | 1 per project     | 100 per project   | Manual snapshots only. Automated snapshot schedules are available upon request on the Agent plan. |
+| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU). Fixed sizes up to 16 CU (Scale allows up to 56 CU).         |
+| **History window**       | 1 day             | Up to 7 days      | Point-in-time recovery window (Scale allows up to 30 days)                                        |
+| **Min auto-suspend**     | 5 minutes         | 1 minute          | Minimum time before compute suspends                                                              |
 
 **Key constraints to consider:**
 
-- **Manual snapshot limits**: Free projects can only maintain 1 manual snapshot at a time, while paid projects can keep up to 100. On paid projects, scheduled backup snapshots do not count toward this limit. This significantly impacts versioning strategies.
-- **Branch limits**: Free projects are limited to 10 branches total, so you'll need to implement cleanup for development branches and temporary snapshots.
+- **Manual snapshot limits**: Free projects can only maintain 1 manual snapshot at a time, while paid projects can keep up to 100. Automated snapshot schedules are available upon request on the Agent plan.
+- **Branch limits**: Free projects are limited to 10 branches total, so you'll need to implement cleanup for development branches and temporary snapshots. Paid projects support up to 1,000 branches.
 - **Compute limits**: Free projects can autoscale up to 2 CU, while paid projects can scale up to 16 CU for more demanding workloads.
 
 For detailed quota examples and consumption limits, see [Configure consumption limits](/docs/guides/consumption-limits).
@@ -385,7 +394,7 @@ curl --request POST \
 ```
 
 <Admonition type="tip">
-Learn how our Developer Advocate approaches snapshot-based workflows in [Promoting Postgres changes safely to production](https://neon.com/blog/promoting-postgres-changes-safely-production).
+Learn how our Developer Advocate approaches snapshot-based workflows in [Promoting Postgres changes safely to production](/blog/promoting-postgres-changes-safely-production).
 </Admonition>
 
 ### When to use each approach
@@ -429,7 +438,7 @@ Development branches are:
 - **Easy to reset**: Restore development branch to match production anytime
 
 <Admonition type="note">
-**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects have **custom limits available** (see [Agent plan pricing](/docs/introduction/agent-plan#pricing)). Implement branch cleanup for temporary development branches to stay within limits.
+**Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects support **up to 1,000 branches** (see [Agent plan pricing](/docs/introduction/agent-plan#pricing)). Implement branch cleanup for temporary development branches to stay within limits.
 </Admonition>
 
 Example creating a development branch using the [Create branch](/docs/reference/api/branches/create-project-branch) API:
@@ -531,7 +540,7 @@ All platform integrations use the Neon API. You can call it directly or use lang
 
 ## Cost management
 
-- **Free organization**: No charges to you for up to 30,000 free tier projects (Neon-sponsored).
+- **Free organization**: No charges to you for free-tier projects (Neon-sponsored). Project limits are unlimited; we incrementally raise your limit to accommodate growing usage.
 - **Paid organization**: Usage-based billing at $0.106 per compute unit hour, covered by your initial credits. See [Agent plan pricing](/docs/introduction/agent-plan#pricing).
 - **Monitor usage**: Track `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes` using [project metrics API](/docs/reference/api/consumption/get-consumption-history-per-project). Poll every 15 minutes; doesn't wake computes. See [Query consumption metrics](/docs/guides/consumption-metrics).
 - **Set quotas**: Configure usage limits during [project creation](#provisioning-projects) or update later. See [Configure consumption limits](/docs/guides/consumption-limits).

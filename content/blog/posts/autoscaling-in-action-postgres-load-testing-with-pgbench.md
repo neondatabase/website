@@ -39,7 +39,7 @@ In this article, I’ll show Neon autoscaling in action by running a load test u
 
 While 30 doesn’t sound like a lot, the query involves a mathematical function with high computational overhead, which signals to the autoscaler-agent that it needs to allocate more resources to the VM.
 
-We will not cover how autoscaling works, but for those interested in knowing the details, you can read more about [how we implemented autoscaling in Neon](https://neon.tech/blog/scaling-serverless-postgres).
+We will not cover how autoscaling works, but for those interested in knowing the details, you can read more about [how we implemented autoscaling in Neon](https://neon.com/blog/scaling-serverless-postgres).
 
 For this load test, you will need:
 
@@ -108,7 +108,7 @@ Combine 30 of those, and we should stress Postgres enough to trigger autoscaling
 
 ## Enabling autoscaling
 
-Autoscaling is the process of automatically increasing or decreasing the CPU and memory allocated to a database based on its current load. It dynamically adjusts the compute resources allocated to a Neon compute instance in response to the current load, eliminating the need for manual intervention. [Learn more about autoscaling in the docs](https://neon.tech/docs/introduction/autoscaling).
+Autoscaling is the process of automatically increasing or decreasing the CPU and memory allocated to a database based on its current load. It dynamically adjusts the compute resources allocated to a Neon compute instance in response to the current load, eliminating the need for manual intervention. [Learn more about autoscaling in the docs](https://neon.com/docs/introduction/autoscaling).
 
 You can enable autoscaling by defining the minimum and maximum compute units (CU) you’d like to allocate to your Postgres instance. This way, you remain in control of your resource consumption. For example, 1 CU allocates 1vCPU and 4GB of RAM to your instance.
 

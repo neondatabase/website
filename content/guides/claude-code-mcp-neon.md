@@ -4,7 +4,7 @@ subtitle: 'Interact with Neon APIs using Claude Code through natural language'
 author: pedro-figueiredo
 enableTableOfContents: true
 createdAt: '2025-08-27T00:00:00.000Z'
-updatedOn: '2026-07-31T19:05:29.503Z'
+updatedOn: '2026-08-21T02:00:14.259Z'
 ---
 
 This guide shows how to use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) with the [Neon MCP Server](https://github.com/neondatabase/mcp-server-neon) to manage your Neon databases.
@@ -20,7 +20,7 @@ The Neon MCP Server grants broad database management capabilities. Always review
 Make sure you have:
 
 1. **Claude Code:** Ensure you have Claude Code installed. Visit [docs.anthropic.com/en/docs/claude-code](https://docs.anthropic.com/en/docs/claude-code) for installation instructions.
-2. **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
+2. **Neon API Key (for API key authentication):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
 
    <Admonition type="important" title="Neon API Key Security">
    Keep your Neon API key secure, and never share it publicly. It provides access to your Neon projects.
@@ -67,22 +67,6 @@ claude mcp add --transport http neon https://mcp.neon.tech/mcp \
 Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section.
 
 </Admonition>
-
-### Option 2: Setting up the Local Neon MCP Server
-
-This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
-
-1. Open your terminal.
-2. Add the Neon MCP server to Claude Code with the following command, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
-
-   ```sh
-   claude mcp add neon -- npx -y @neondatabase/mcp-server-neon start "<YOUR_NEON_API_KEY>"
-   ```
-
-3. Start a new Claude Code session with the `claude` command and start using the Neon MCP server:
-   ```sh
-   claude
-   ```
 
 ### Verification
 

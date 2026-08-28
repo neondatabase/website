@@ -95,14 +95,14 @@ This simple problem means you end up carrying over many of the same issues you w
 
 The database often becomes a bottleneck in an otherwise highly agile workflow. One way to address this is by using **Neon branches** to deploy Postgres in your ephemeral environments.
 
-[Neon](https://neon.tech/home) is a serverless Postgres platform [with a free plan](https://neon.tech/pricing) that lets you deploy Postgres databases in milliseconds and supports [branching](https://neon.tech/docs/introduction/branching). Neon branches are lightweight, copy-on-write clones of your database; instead of duplicating data for every environment, Neon branches reference the same underlying storage as the parent database, which acts as the source of truth. This allows you to spin up fully functional database “clones” almost instantly, which is great for ephemeral environments.
+[Neon](https://neon.tech/home) is a serverless Postgres platform [with a free plan](https://neon.tech/pricing) that lets you deploy Postgres databases in milliseconds and supports [branching](https://neon.com/docs/introduction/branching). Neon branches are lightweight, copy-on-write clones of your database; instead of duplicating data for every environment, Neon branches reference the same underlying storage as the parent database, which acts as the source of truth. This allows you to spin up fully functional database “clones” almost instantly, which is great for ephemeral environments.
 
 - **Copy-on-write magic.** When you create a Neon branch, it doesn’t copy all the data upfront. Instead, it references the same data pages as the parent database.
 - **Ready instantly.** Because Neon branches don’t require a full copy of the database, they can be created in seconds, even for large datasets (dataset size has no effect actually).
 - **Ephemeral by design.** Branches are temporary and can be deleted automatically when no longer needed (you can set this up via CI/CD automations and APIs).
 - **One-click reset.** If you need to refresh your test environment, it can be reset to match the parent database state instantly—it just takes one API call.
 
-**Instead of deploying Postgres directly into your containers, you can use Neon branches as your Postgres database.** Each branch has its own [unique URL](https://neon.tech/docs/manage/branches#connect-to-a-branch), and everything can be managed through the [Neon API](https://neon.tech/docs/reference/api-reference). This way, each database you create already includes your testing data, drastically reducing the effort required to maintain data consistency.
+**Instead of deploying Postgres directly into your containers, you can use Neon branches as your Postgres database.** Each branch has its own [unique URL](https://neon.com/docs/manage/branches#connect-to-a-branch), and everything can be managed through the [Neon API](https://neon.com/docs/reference/api-reference). This way, each database you create already includes your testing data, drastically reducing the effort required to maintain data consistency.
 
 ## Example workflow
 
@@ -120,14 +120,14 @@ Once the ephemeral environment is ready, engineers in your team can:
 
 - **Work in isolation.** All changes are confined to the branch associated with this particular environment. The parent and other environments are unaffected.
 - **Keep data consistency.** Neon branches are instantly populated with the same dataset as the parent.
-- **Iterate quickly.** If the environment needs a refresh during testing, the branch can be reset instantly to match the parent branch’s current state using Neon’s [Reset from Parent](https://neon.tech/docs/guides/reset-from-parent) feature.
-- **Keep it affordable.** Neon’s [scale-to-zero](https://neon.tech/docs/guides/scale-to-zero-guide) ensures that inactive branches consume no resources, reducing costs even if cleanup workflows are delayed.
+- **Iterate quickly.** If the environment needs a refresh during testing, the branch can be reset instantly to match the parent branch’s current state using Neon’s [Reset from Parent](https://neon.com/docs/guides/reset-from-parent) feature.
+- **Keep it affordable.** Neon’s [scale-to-zero](https://neon.com/docs/guides/scale-to-zero-guide) ensures that inactive branches consume no resources, reducing costs even if cleanup workflows are delayed.
 
 #### Discarding the environment
 
 When the PR is merged, GitHub Actions triggers the deletion of the environment, including its database branch.
 
-[Explore our documentation](https://neon.tech/docs/use-cases/dev-test) for detailed guides on how to implement this workflow.
+[Explore our documentation](https://neon.com/docs/use-cases/dev-test) for detailed guides on how to implement this workflow.
 
 ## Use cases to get started
 
@@ -135,9 +135,9 @@ By integrating Neon branches into your ephemeral environments, you’re solving 
 
 You can try it for multiple use cases:
 
-- [Preview environments for each PR](https://neon.tech/docs/guides/vercel-previews-integration)
-- [End-to-end testing](https://neon.tech/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
+- [Preview environments for each PR](https://neon.com/docs/guides/vercel-previews-integration)
+- [End-to-end testing](https://neon.com/blog/from-days-to-minutes-how-neo-tax-accelerated-their-development-lifecycle)
 - [Local development](https://neon.tech/guides/local-development-with-neon)
-- [Onboarding new engineers](https://neon.tech/blog/how-supergood-unlocked-their-postgres-developer-productivity)
+- [Onboarding new engineers](https://neon.com/blog/how-supergood-unlocked-their-postgres-developer-productivity)
 
 [Neon’s Free Plan](https://console.neon.tech/signup) gives you 10 independent projects with up to 10 branches per project at no cost. Give it a go let us know how it went on [Discord](https://discord.gg/92vNTzKDGp). For larger teams, Neon’s [Scale Plan](https://neon.tech/pricing) ($69/month) will give you thousands of branches at no additional cost, more than enough to cover all your non-prod environments.

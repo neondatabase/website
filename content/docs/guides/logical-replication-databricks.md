@@ -12,7 +12,7 @@ summary: >-
   supported.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-07-31T15:27:48.506Z'
+updatedOn: '2026-08-18T10:29:02.410Z'
 ---
 
 Neon's logical replication feature lets you stream changes from your Lakebase Postgres database into external systems. This guide shows how to use Databricks Lakeflow Connect's PostgreSQL connector to replicate data from Lakebase Postgres into Databricks Lakehouse using PostgreSQL logical replication.
@@ -82,8 +82,8 @@ Databricks recommends a dedicated database user for ingestion. Create a role in 
 
 <TabItem>
 
-1. In the [Neon Console](https://console.neon.tech), select your project and **Branches**.
-2. Select the branch, then the **Roles & Databases** tab.
+1. In the [Neon Console](https://console.neon.tech), select your project.
+2. In the sidebar, select your branch from the **BRANCH** selector, then under **Postgres database** select **Roles**.
 3. Click **Add Role**, enter the role name (e.g. `databricks_replication`), and click **Create**. Save the password.
 
 </TabItem>
@@ -185,7 +185,7 @@ Lakeflow Connect uses Unity Catalog connections to store JDBC connection details
 3. Enter a **Connection name**.
    Choose **PostgreSQL** as the connection type.
 4. For Auth type, select `Username and password`.
-5. Enter your Neon connection details (from the **Connect** button on your Neon project dashboard):
+5. Enter your Neon connection details (from the **Connect** button on your Neon project dashboard). Use your direct Neon host, not the pooled host. Logical replication requires a persistent connection and is not compatible with connection poolers, so the host must not include the `-pooler` suffix. See [Connection pooling](/docs/connect/connection-pooling).
    - **Host**: your Neon host (e.g. `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
    - **Port**: 5432
    - **Database**: your Neon database name

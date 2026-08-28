@@ -6,7 +6,7 @@ summary: >-
   timeouts, slug constraints, and the Node.js 24 runtime. Functions are
   long-running but still serverless.
 enableTableOfContents: true
-updatedOn: '2026-07-15T11:08:18.153Z'
+updatedOn: '2026-08-18T19:33:13.398Z'
 ---
 
 Neon Functions run on Node.js 24.
@@ -15,7 +15,7 @@ Neon Functions run on Node.js 24.
 
 Neon Functions are long-running: you can host WebSocket servers, SSE endpoints, and agents that stream over HTTP without hitting a short execution timeout. They're still serverless. The platform shuts a function down when it's idle, with no open connections or pending `waitUntil` work, and can also evict and restart it for operational reasons. Treat eviction like a process restart: clients should reconnect when a connection drops.
 
-When the platform stops a function, it sends `SIGINT`. If the process is still running 5 seconds later, the platform forcibly stops the function. Handle `SIGINT` with `process.on('SIGINT', ...)` to close connections and flush in-flight work within that window. When the process exits, the OS closes its sockets, so dropped connections are usually detected without extra handling.
+When the platform stops a function, it sends `SIGINT`. If the process is still running 5 seconds later, the platform forcibly stops the function. Handle `SIGINT` with `process.on('SIGINT', ...)` to flush in-flight work within that window. You don't need to drain a `pg` pool: when the process exits, the OS closes its sockets and Neon's pooler reclaims those connections, so dropped connections are detected without extra handling.
 
 ## Timeouts
 

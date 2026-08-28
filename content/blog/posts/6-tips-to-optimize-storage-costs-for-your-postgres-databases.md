@@ -54,7 +54,7 @@ In production settings, it’s common practice not just to maintain a single pro
 <figcaption>Production Postgres deployments often include multiple data copies (e.g. for dev instances) which increases the overall costs for storage.</figcaption>
 </figure>
 
-If you’re in Neon, you can use [database branching](https://neon.tech/docs/introduction/branching) to avoid this. The custom storage architecture of Neon, allows for the creation of database copies via copy-on-write (just like you’re used to with code in Git). This means that database branches share the same underlying data as the main database branch until changes are made, and as a result, you can have numerous development, testing, and staging environments that mirror your production database without paying extra for storage.
+If you’re in Neon, you can use [database branching](https://neon.com/docs/introduction/branching) to avoid this. The custom storage architecture of Neon, allows for the creation of database copies via copy-on-write (just like you’re used to with code in Git). This means that database branches share the same underlying data as the main database branch until changes are made, and as a result, you can have numerous development, testing, and staging environments that mirror your production database without paying extra for storage.
 
 ![Image](https://cdn.neonapi.io/public/images/pages/blog/6-tips-to-optimize-storage-costs-for-your-postgres-databases/screenshot-2024-03-15-at-104257percente2percent80percentafam-30a860e5.png)
 
@@ -103,7 +103,7 @@ CREATE TABLE user_info_optimized (
 
 ## 5. Adjust your history retention period in Neon
 
-Neon automatically retains a [history of changes](https://neon.tech/docs/introduction/point-in-time-restore#history-retention) across all branches within a project, empowering users with the capability to restore data to any point within the defined retention period. Therefore, the size of storage for a Neon project will be calculated as the sum of two variables:
+Neon automatically retains a [history of changes](https://neon.com/docs/introduction/point-in-time-restore#history-retention) across all branches within a project, empowering users with the capability to restore data to any point within the defined retention period. Therefore, the size of storage for a Neon project will be calculated as the sum of two variables:
 
 - Data size (size of all the tables in Postgres databases)
 - History size (corresponding to the WAL size up to the configurable history retention period)

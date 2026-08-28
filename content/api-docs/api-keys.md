@@ -8,6 +8,6 @@ Neon API keys authenticate all REST API requests. Each key has a scope that limi
 
 Keys are shown once at creation. Store them immediately; Neon cannot retrieve them later. Revoking a key takes effect immediately.
 
-The [Neon CLI](/docs/cli/auth) also supports OAuth-based authentication via `neon auth`, which opens a browser to authorize access without requiring a manually created key.
+You can also manage API keys from the CLI with [`neon api-keys`](/docs/cli/api-keys). The Neon CLI also supports OAuth-based authentication via [`neon auth`](/docs/cli/auth), which opens a browser to authorize access without requiring a manually created key.
 
 See [Manage API keys](/docs/manage/api-keys) for rotation strategy and org key management.

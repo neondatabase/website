@@ -6,8 +6,10 @@
  * the validator named in its `validator` field. Each validator checks that the
  * served payload BOTH matches its governing spec AND is up to date with the
  * spec-agnostic source of truth (src/constants/agent-discovery.js). Model
- * catalog verification (/models.json vs models.dev) is folded in here too, so a
- * single command / CI job covers every discovery surface.
+ * catalog verification is folded in here too, so a single command / CI job
+ * covers every discovery surface. /models.json is itself a source of truth, so
+ * what gets verified there is the catalog's own shape offline, and how far the
+ * models.dev mirror has fallen behind it live.
  *
  * The run never stops at the first failure: it collects every check across all
  * endpoints and prints exactly what failed and why, then exits non-zero if any
@@ -15,7 +17,7 @@
  *
  * Usage:
  *   node scripts/verify-agent-endpoints.mjs               # offline (PR gate)
- *   node scripts/verify-agent-endpoints.mjs --live        # + fetch neon.com and run models.dev sync
+ *   node scripts/verify-agent-endpoints.mjs --live        # + fetch neon.com and check the models.dev mirror
  *   node scripts/verify-agent-endpoints.mjs --live --base https://preview.example.com
  *   node scripts/verify-agent-endpoints.mjs --json        # machine-readable
  */
@@ -29,6 +31,8 @@ import crypto from 'crypto';
 
 import Ajv from 'ajv';
 import { load as loadYaml } from 'js-yaml';
+
+import { validateCatalog } from './lib/models-catalog.mjs';
 
 const require = createRequire(import.meta.url);
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -220,6 +224,37 @@ const SCHEMAS = {
       info: { type: 'object', required: ['title'], properties: { title: { type: 'string' } } },
     },
   },
+  claimableAuthorizationServer: {
+    type: 'object',
+    required: [
+      'issuer',
+      'token_endpoint',
+      'jwks_uri',
+      'grant_types_supported',
+      'token_endpoint_auth_methods_supported',
+      'response_types_supported',
+      'agent_auth',
+    ],
+    properties: {
+      issuer: { type: 'string' },
+      token_endpoint: { type: 'string' },
+      revocation_endpoint: { type: 'string' },
+      jwks_uri: { type: 'string' },
+      grant_types_supported: { type: 'array', items: { type: 'string' } },
+      token_endpoint_auth_methods_supported: { type: 'array', items: { type: 'string' } },
+      response_types_supported: { type: 'array', items: { type: 'string' } },
+      agent_auth: {
+        type: 'object',
+        required: ['skill', 'identity_endpoint', 'claim_endpoint'],
+        properties: {
+          skill: { type: 'string' },
+          identity_endpoint: { type: 'string' },
+          claim_endpoint: { type: 'string' },
+          identity_types_supported: { type: 'array', items: { type: 'string' } },
+        },
+      },
+    },
+  },
 };
 
 const VALIDATORS = {
@@ -323,21 +358,39 @@ const VALIDATORS = {
     return checks;
   },
 
+  // /models.json is the source of truth for the gateway catalog, not a copy of
+  // anything, so offline verification validates the catalog on its own terms.
+  // That used to be implied by the file being machine-generated from models.dev;
+  // now that it is authored, the invariants have to be stated and checked.
   'models-json'(payload, entry, sot, { live }) {
     const checks = [schemaCheck(entry.spec.name, SCHEMAS.modelsJson, payload)];
+
+    const errors = validateCatalog(payload);
+    checks.push(
+      errors.length === 0
+        ? ok('catalog is well formed', `${Object.keys(payload.neon.models).length} models`)
+        : fail('catalog is well formed', errors.slice(0, 10).join('; '))
+    );
+
     if (live && entry.liveSync) {
       const res = spawnSync('node', [path.join(ROOT, entry.liveSync), '--ci'], {
         cwd: ROOT,
         encoding: 'utf-8',
       });
       const output = `${res.stdout || ''}${res.stderr || ''}`.trim();
+      // Exit 0 covers both "mirrored" and "models.dev is behind". Lag is the
+      // normal state of an in-flight change and must not fail the run; the
+      // workflow reports it as sync debt instead.
       if (res.status === 0) {
-        checks.push(ok('in sync with models.dev', output.split('\n').pop()));
+        const debt = output.includes('[SYNC DEBT]');
+        checks.push(
+          ok('models.dev mirror', debt ? 'behind — upstream PR owed' : output.split('\n').pop())
+        );
       } else if (res.status === 1) {
-        checks.push(fail('in sync with models.dev', `catalog drift — ${output}`));
+        checks.push(fail('models.dev mirror', `advertises a model we do not publish — ${output}`));
       } else {
         checks.push(
-          fail('in sync with models.dev', `sync check errored (exit ${res.status}) — ${output}`)
+          fail('models.dev mirror', `sync check errored (exit ${res.status}) — ${output}`)
         );
       }
     }
@@ -414,6 +467,67 @@ const VALIDATORS = {
     }
     if (!liveJson) return [fail(`schema (${entry.spec.name})`, 'response was not valid JSON')];
     return [schemaCheck(entry.spec.name, SCHEMAS.openapi, liveJson)];
+  },
+
+  'claimable-authorization-server'(payload, entry, sot) {
+    const checks = [schemaCheck(entry.spec.name, SCHEMAS.claimableAuthorizationServer, payload)];
+    checks.push(equalsCheck('issuer matches SoT', payload.issuer, sot.CLAIMABLE.issuer));
+    checks.push(
+      equalsCheck('token_endpoint matches SoT', payload.token_endpoint, sot.CLAIMABLE.tokenEndpoint)
+    );
+    checks.push(
+      equalsCheck('jwks_uri matches SoT', payload.jwks_uri, sot.CLAIMABLE.jwksUri)
+    );
+    checks.push(
+      Array.isArray(payload.token_endpoint_auth_methods_supported) &&
+        payload.token_endpoint_auth_methods_supported.includes('none')
+        ? ok('token endpoint advertises no client authentication')
+        : fail(
+            'token endpoint advertises no client authentication',
+            payload.token_endpoint_auth_methods_supported
+          )
+    );
+    checks.push(
+      equalsCheck('agent_auth.skill matches SoT', payload.agent_auth?.skill, sot.CLAIMABLE.skillUrl)
+    );
+    checks.push(
+      equalsCheck(
+        'identity_endpoint matches SoT',
+        payload.agent_auth?.identity_endpoint,
+        sot.CLAIMABLE.identityEndpoint
+      )
+    );
+    const skill = new URL(sot.CLAIMABLE.skillUrl);
+    const issuer = new URL(sot.CLAIMABLE.issuer);
+    checks.push(
+      skill.origin === issuer.origin
+        ? ok('skill is on the issuer host')
+        : fail('skill is on the issuer host', `${skill.origin} vs ${issuer.origin}`)
+    );
+    checks.push(
+      issuer.pathname.replace(/\/+$/, '') !== ''
+        ? ok('issuer is a path identifier')
+        : fail('issuer is a path identifier', issuer.href)
+    );
+    try {
+      const markdown = fs.readFileSync(path.join(ROOT, sot.CLAIMABLE.authMarkdownPath), 'utf-8');
+      for (const [name, value] of [
+        ['skill URL', sot.CLAIMABLE.skillUrl],
+        ['token endpoint', sot.CLAIMABLE.tokenEndpoint],
+        ['identity endpoint', sot.CLAIMABLE.identityEndpoint],
+        ['resource', sot.CLAIMABLE.resource],
+        ['issuer', sot.CLAIMABLE.issuer],
+      ]) {
+        checks.push(
+          markdown.includes(value)
+            ? ok(`auth.md contains ${name}`)
+            : fail(`auth.md contains ${name}`, `missing ${value}`)
+        );
+      }
+    } catch (err) {
+      checks.push(fail('auth.md readable', err.message));
+    }
+    return checks;
   },
 };
 
@@ -522,6 +636,8 @@ async function main() {
     if (!entryOk) {
       console.log(`      spec: ${entry.spec.name} → ${entry.spec.url}`);
       if (entry.generator) console.log(`      regenerate: node ${entry.generator}`);
+      // Authored endpoints have no generator; "regenerate" would be wrong advice.
+      else if (entry.editedBy) console.log(`      maintained: ${entry.editedBy}`);
     }
     console.log('');
   }
