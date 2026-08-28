@@ -241,8 +241,10 @@ export default {
         tag: { label: 'Beta', theme: 'orange-muted' },
       },
       free: false,
-      launch: 'No charges applied during beta. <span>Pricing will match model provider</span>',
-      scale: 'No charges applied during beta. <span>Pricing will match model provider</span>',
+      launch:
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Pricing matches model provider (no markup)</span>",
+      scale:
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Pricing matches model provider (no markup)</span>",
     },
     {
       rows: '1',

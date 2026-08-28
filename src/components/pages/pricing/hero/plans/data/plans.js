@@ -105,6 +105,10 @@ export default [
             title: 'AI Gateway',
             tag: { label: 'Beta', theme: 'orange-muted' },
             info: 'Pricing matches model provider list prices (no markup)',
+            moreLink: {
+              text: 'Full list here',
+              href: '/docs/ai-gateway/models#available-models',
+            },
           },
         ],
       },
@@ -162,6 +166,10 @@ export default [
             title: 'AI Gateway',
             tag: { label: 'Beta', theme: 'orange-muted' },
             info: 'Pricing matches model provider list prices (no markup)',
+            moreLink: {
+              text: 'Full list here',
+              href: '/docs/ai-gateway/models#available-models',
+            },
           },
         ],
       },
