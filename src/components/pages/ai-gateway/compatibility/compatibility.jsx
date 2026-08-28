@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 import SectionLabel from 'components/shared/section-label';
-import cn from 'utils/cn';
+import { cn } from 'utils/cn';
 
 const ITEMS = [
   {
@@ -36,7 +36,7 @@ const Compatibility = () => (
         <h2 className="max-w-162.5 text-[3rem] leading-dense tracking-tighter text-pretty xl:text-[2.5rem] lg:text-[2rem]">
           Powered by Databricks Foundation Model APIs. OpenAI-compatible, so your SDK already works.
         </h2>
-        <p className="mt-auto max-w-165 text-[1.25rem] leading-normal tracking-extra-tight text-pretty text-gray-new-60 lg:mt-8 lg:text-[1.125rem]">
+        <p className="mt-auto max-w-165 text-[1.25rem] leading-normal tracking-extra-tight text-pretty text-gray-new-60 lg:mt-6 lg:text-[1.125rem] md:mt-5">
           Pointing a standard client at Neon takes a URL and credential change — the rest of your
           code stays exactly as it is.
         </p>
@@ -52,7 +52,7 @@ const Compatibility = () => (
             )}
             key={title}
           >
-            <p className="text-[1.5rem] leading-snug tracking-extra-tight text-pretty text-gray-new-60 xl:text-[1.25rem] md:text-[1.125rem]">
+            <p className="text-[1.5rem] leading-snug tracking-extra-tight text-pretty text-gray-new-60 xl:text-[1.25rem] lg:text-[1.125rem]">
               <strong className="font-normal text-white">{title}</strong> {description}
             </p>
           </li>
