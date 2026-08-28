@@ -51,7 +51,7 @@ const OperateWithAgents = () => (
         </h2>
       </header>
 
-      <ul className="flex max-w-64 min-w-0 flex-col gap-12 pt-[50px] lg:max-w-lg lg:gap-8 lg:pt-0">
+      <ul className="flex max-w-64 min-w-0 flex-col gap-12 pt-[50px] lg:grid lg:w-full lg:max-w-none lg:grid-cols-3 lg:gap-x-10 lg:pt-0 md:flex md:max-w-lg md:flex-col md:gap-8">
         {BENEFITS.map(({ title, description }) => (
           <li className="flex flex-col gap-2" key={title}>
             <h3 className="text-base leading-tight font-normal tracking-extra-tight text-white">

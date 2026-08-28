@@ -41,22 +41,12 @@ const ScaleNoise = () => (
 );
 
 const ScaleStat = () => (
-  <div className="h-[330px] w-[736px] border border-[#242628] bg-black-pure p-1 xl:w-[640px] lg:w-md md:h-[286px] md:w-sm sm:h-auto sm:w-full">
+  <div className="h-[330px] w-[736px] border border-[#242628] bg-black-pure p-1 xl:h-80 xl:w-160 lg:w-md md:h-[286px] md:w-sm sm:h-auto sm:w-full">
     <div className="flex h-[37px] items-center justify-between bg-[#303236] px-3 font-mono text-base font-semibold text-white md:text-sm">
       <span>Trusted by giants</span>
-      <span className="flex gap-2" aria-hidden="true">
-        <Image
-          className="-scale-x-100"
-          src={`${ASSET_ROOT}/scale-window-arrow.svg`}
-          width={18}
-          height={18}
-          alt=""
-        />
-        <Image src={`${ASSET_ROOT}/scale-window-arrow.svg`} width={18} height={18} alt="" />
-      </span>
     </div>
-    <div className="px-[27px] pt-[92px] md:px-5 md:pt-15 sm:pt-8 sm:pb-8">
-      <strong className="block text-[98px] leading-none font-normal tracking-[-0.02em] text-white md:text-[5rem] sm:text-[4rem]">
+    <div className="px-[27px] pt-[92px] xl:pt-20 md:px-5 md:pt-15 sm:pt-8 sm:pb-8">
+      <strong className="block text-[98px] leading-none font-normal tracking-extra-tight text-white md:text-[5rem] sm:text-[4rem]">
         250M+
       </strong>
       <p className="mt-[18px] max-w-[235px] text-xl leading-tight tracking-extra-tight text-gray-new-80 md:mt-4 md:text-lg sm:max-w-[220px] sm:text-base">
@@ -67,13 +57,13 @@ const ScaleStat = () => (
 );
 
 const Scale = () => (
-  <div className="relative h-[1051px] overflow-hidden lg:h-[820] md:h-[700px] sm:h-[600px]">
+  <div className="relative h-[1051px] overflow-hidden xl:h-250 lg:h-205 md:h-[700px] sm:h-[600px]">
     <div
-      className="pointer-events-none absolute top-0 left-1/2 z-0 h-[1610px] w-[1920px] -translate-x-1/2 lg:h-[1120px] lg:w-[1336px] sm:h-[760px] sm:w-[906px]"
+      className="pointer-events-none absolute top-0 left-1/2 z-0 h-[1610px] w-[1920px] -translate-x-1/2 lg:h-[1120px] lg:w-[1336px] sm:h-[760px] sm:w-[906px] sm:-translate-x-[53%]"
       aria-hidden="true"
     >
       <div className="absolute top-[231px] left-1/2 h-[1176px] w-[1176px] -translate-x-1/2 overflow-hidden rounded-full lg:top-[163.5px] lg:h-[818px] lg:w-[818px] sm:top-32 sm:h-[555px] sm:w-[555px]">
-        <div className="absolute top-1/2 left-1/2 h-[1610px] w-[1920px] -translate-x-1/2 -translate-y-1/2 lg:h-[1120px] lg:w-[1336px] sm:h-[760px] sm:w-[906px]">
+        <div className="xl: absolute top-1/2 left-1/2 aspect-1920/1610 w-[1920px] -translate-x-1/2 -translate-y-1/2 xl:w-410 lg:h-[1120px] lg:w-[1336px] sm:h-[760px] sm:w-[906px]">
           <GlobeAnimation />
         </div>
       </div>

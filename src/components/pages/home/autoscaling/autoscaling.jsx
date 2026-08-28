@@ -66,7 +66,7 @@ const Autoscaling = () => {
           <h2
             className={cn(
               'max-w-272 indent-24 text-4xl leading-dense tracking-tighter text-pretty text-gray-new-50',
-              'xl:max-w-200 xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-2xl'
+              'xl:max-w-200 xl:text-[2.25rem] lg:indent-16 lg:text-[1.75rem] md:indent-0 md:text-[1.375rem] md:tracking-tighter'
             )}
           >
             <strong className="font-normal text-white">
@@ -80,11 +80,11 @@ const Autoscaling = () => {
             className={cn(
               'relative z-10 mt-17 w-max max-w-none pt-14 lg:pt-0',
               '3xl:max-w-[calc(50vw+25.5rem)] 2xl:max-w-[calc(100%+2rem)]',
-              'xl:left-1/2 xl:w-full xl:max-w-none xl:-translate-x-1/2 lg:mt-10 md:mt-8 md:w-full'
+              'xl:left-1/2 xl:w-full xl:max-w-none xl:-translate-x-1/2 lg:mt-10 md:mt-11 md:w-full'
             )}
             ref={animationWrapperRef}
           >
-            <div className="group absolute top-0 left-0 z-20 flex lg:static lg:mb-6 md:mt-8">
+            <div className="group absolute top-0 left-0 z-20 flex lg:static lg:mb-6 md:mt-8 md:mb-4">
               {TABS.map((item, index) => (
                 <button
                   className={cn(
@@ -105,7 +105,7 @@ const Autoscaling = () => {
                 </button>
               ))}
             </div>
-            <div className="relative aspect-1378/300 w-344.5 overflow-hidden 3xl:max-w-full md:hidden">
+            <div className="relative aspect-1378/300 w-344.5 overflow-hidden 3xl:max-w-full xl:left-1/2 xl:w-screen xl:max-w-none xl:-translate-x-1/2 md:hidden">
               {isAnimationIntersecting && (
                 <Animation className="absolute inset-0 h-full w-full" state={activeItem} />
               )}
@@ -131,7 +131,7 @@ const Autoscaling = () => {
               )}
             </div>
 
-            <div className="relative z-20 flex min-h-9 items-center border-b border-gray-new-30 bg-gray-new-15 px-3 md:-mx-5 md:px-5">
+            <div className="relative z-20 flex min-h-9 items-center border-b border-gray-new-30 bg-gray-new-15 px-3 xl:left-1/2 xl:w-screen xl:-translate-x-1/2 xl:px-16 lg:px-8 md:px-5 md:py-2">
               <LazyMotion features={domAnimation}>
                 {STATS.map(({ prefix, number, text }, index) => {
                   if (index !== activeItem) {
@@ -140,7 +140,7 @@ const Autoscaling = () => {
 
                   return (
                     <m.p
-                      className="font-mono text-base leading-none font-medium text-[#ACACAC] uppercase xl:text-sm lg:text-xs"
+                      className="font-mono text-base leading-none font-medium text-balance text-[#ACACAC] uppercase xl:text-sm lg:text-xs/snug"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}
@@ -163,19 +163,26 @@ const Autoscaling = () => {
             </div>
           </div>
 
-          <div className="relative z-20 mt-7 flex items-start justify-between gap-10 text-gray-new-80 3xl:grid 3xl:w-[calc(100%+(100vw-100%)/2-12rem)] 3xl:grid-cols-2 xl:mt-6 xl:w-full lg:mt-5 lg:gap-8 md:flex md:flex-col md:gap-6">
-            <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 xl:mt-0 lg:gap-x-7 xs:flex-col">
+          <div className="relative z-20 mt-7 flex items-start justify-between gap-10 text-gray-new-80 3xl:grid 3xl:w-[calc(100%+(100vw-100%)/2-12rem)] 3xl:grid-cols-2 xl:mt-6 xl:w-full lg:mt-5 lg:gap-8 md:flex md:flex-col">
+            <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 xl:mt-0 lg:gap-x-7 xs:flex-col xs:gap-y-3">
               {LEGEND.map(({ text, icon }) => (
                 <li
-                  className="flex items-center gap-x-2.5 text-[0.9375rem] leading-snug tracking-extra-tight whitespace-nowrap xl:gap-x-2 md:text-sm"
+                  className="flex items-center gap-x-2.5 text-[0.9375rem] leading-snug tracking-extra-tight whitespace-nowrap xl:gap-x-2 md:text-sm/snug"
                   key={text}
                 >
-                  <Image src={icon} width={16} height={16} loading="lazy" alt="" />
+                  <Image
+                    className="sm:size-3.5"
+                    src={icon}
+                    width={16}
+                    height={16}
+                    loading="lazy"
+                    alt=""
+                  />
                   <p>{text}</p>
                 </li>
               ))}
             </ul>
-            <p className="max-w-120 shrink-0 text-lg leading-normal tracking-extra-tight md:text-[0.9375rem]">
+            <p className="max-w-120 shrink-0 text-lg leading-normal tracking-extra-tight md:text-[0.9375rem]/snug">
               Neon monitors your database load ten times a second and autoscales CPU and memory to
               exactly fit your workload.
             </p>

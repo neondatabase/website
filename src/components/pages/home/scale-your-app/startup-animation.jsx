@@ -12,8 +12,7 @@ const ASSET_ROOT = '/images/pages/home/scale-your-app';
 const CARD_REVEAL_DURATION = 450;
 const PROGRESS_COMPLETE_START = 6100;
 const FINAL_STATE_START = PROGRESS_COMPLETE_START + 800;
-const STAT_REVEAL_START = FINAL_STATE_START + 1000;
-const ANIMATION_DURATION = STAT_REVEAL_START + CARD_REVEAL_DURATION;
+const ANIMATION_DURATION = FINAL_STATE_START;
 
 const TIMELINE = [
   { at: 0, screen: 'create', isCreatePressed: false },
@@ -208,17 +207,16 @@ InitializationProgress.propTypes = {
   status: PropTypes.oneOf(['creating', 'preparing', 'complete']).isRequired,
 };
 
-const StartupAnimation = () => {
+const StartupAnimation = ({ onStart }) => {
   const elapsedRef = useRef(0);
   const frameIndexRef = useRef(0);
+  const hasStartedRef = useRef(false);
   const hasCompletedRef = useRef(false);
   const [frameIndex, setFrameIndex] = useState(0);
   const [isDocumentVisible, setIsDocumentVisible] = useState(true);
   const shouldReduceMotion = useReducedMotion() ?? false;
   const rightCardOpacity = useMotionValue(0);
   const rightCardY = useMotionValue(12);
-  const statCardOpacity = useMotionValue(0);
-  const statCardY = useMotionValue(12);
   const { ref, inView } = useInView({ threshold: 0.2 });
 
   useEffect(() => {
@@ -236,12 +234,9 @@ const StartupAnimation = () => {
     const applyElapsed = (elapsed) => {
       const nextFrameIndex = getTimelineIndex(elapsed);
       const rightReveal = getRevealProgress(elapsed, 0);
-      const statReveal = getRevealProgress(elapsed, STAT_REVEAL_START);
 
       rightCardOpacity.set(rightReveal);
       rightCardY.set(12 * (1 - rightReveal));
-      statCardOpacity.set(statReveal);
-      statCardY.set(12 * (1 - statReveal));
 
       if (nextFrameIndex !== frameIndexRef.current) {
         frameIndexRef.current = nextFrameIndex;
@@ -259,6 +254,11 @@ const StartupAnimation = () => {
     }
 
     if (!inView || !isDocumentVisible || hasCompletedRef.current) return undefined;
+
+    if (!hasStartedRef.current) {
+      hasStartedRef.current = true;
+      onStart();
+    }
 
     let animationFrame = null;
     let previousFrameAt = performance.now();
@@ -285,15 +285,7 @@ const StartupAnimation = () => {
     return () => {
       if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
     };
-  }, [
-    inView,
-    isDocumentVisible,
-    rightCardOpacity,
-    rightCardY,
-    shouldReduceMotion,
-    statCardOpacity,
-    statCardY,
-  ]);
+  }, [inView, isDocumentVisible, onStart, rightCardOpacity, rightCardY, shouldReduceMotion]);
 
   const frame = shouldReduceMotion ? TIMELINE[FINAL_FRAME_INDEX] : TIMELINE[frameIndex];
 
@@ -332,13 +324,7 @@ const StartupAnimation = () => {
           />
         </m.div>
 
-        <m.div
-          className="absolute top-[361px] left-0 z-10 h-[248px] w-[511px] border border-[#242628] bg-black-pure px-8 pt-8 will-change-transform xl:top-112 md:w-[480px] sm:top-100 sm:h-[226px] sm:w-full sm:px-5 sm:pt-5"
-          style={{
-            opacity: shouldReduceMotion ? 1 : statCardOpacity,
-            y: shouldReduceMotion ? 0 : statCardY,
-          }}
-        >
+        <div className="absolute top-[361px] left-0 z-10 h-[248px] w-[511px] border border-[#242628] bg-black-pure px-8 pt-8 xl:top-112 md:w-[480px] sm:top-100 sm:h-[226px] sm:w-full sm:px-5 sm:pt-5">
           <strong className="block text-[5rem] leading-none font-normal tracking-extra-tight text-white sm:text-[4rem]">
             100K+
           </strong>
@@ -346,10 +332,14 @@ const StartupAnimation = () => {
             Projects built and launched with Neon, from early-stage products to growing
             applications.
           </p>
-        </m.div>
+        </div>
       </LazyMotion>
     </div>
   );
+};
+
+StartupAnimation.propTypes = {
+  onStart: PropTypes.func.isRequired,
 };
 
 export default StartupAnimation;
