@@ -2,64 +2,82 @@
 title: Credentials & access
 subtitle: Which credential reaches what, and what gates each service endpoint
 summary: >-
-  Neon has two credential tiers. Platform API keys authenticate control-plane
-  operations across every product and mint the credentials your application
-  uses. Scoped credentials are a single data-plane credential type shared by
-  Object Storage, the AI Gateway, Functions, and telemetry ingest, told apart by
-  their scopes and anchored to a branch and its descendants. Access for people is
-  two additive layers: an organization role plus per-project grants. Network
-  controls such as IP Allow and Private Networking gate the Postgres endpoint,
-  while the other service endpoints are gated by credentials.
+  Neon issues two kinds of credentials: platform API keys that manage your Neon
+  setup and live in your tooling, and scoped credentials that your running app
+  uses. A scoped credential is one Neon-managed grant, exposed as
+  service-specific credential material, limited by its scopes and anchored to a
+  branch and its descendants. The Data API is the exception, trusting an
+  end-user JWT from an issuer you register. Access for people is two additive
+  layers: an organization role plus per-project grants. IP Allow and Private
+  Networking gate the Postgres endpoint, while the other services are gated by
+  credentials.
 enableTableOfContents: true
 ---
 
-Neon issues two kinds of credentials, and they aren't interchangeable. One manages your account and your resources. The other lets a running application read an object, call a model, or ship telemetry. Mixing them up gets you either a broken deploy or a secret with far more reach than it needs.
+Neon issues two kinds of credentials, and they aren't interchangeable. One kind manages your Neon setup: your projects, branches, and settings. The other kind is what a running application uses to read a file, call a model, or ship telemetry. Mixing them up gets you either a broken deploy or a secret with far more reach than it needs.
 
-This page explains the two tiers, what "scoped" actually means, how human access is layered on top, and which service endpoints network controls do and don't cover. Creating, listing, and revoking credentials are procedures, and each section links to them.
+This page explains the two kinds, what "scoped" actually means, how access for people is layered on top, and which service endpoints network controls do and don't cover. Creating, listing, and revoking credentials are procedures, and each section links to them.
 
 Availability differs by product and by region. See [Product availability](/docs/introduction/regions#product-availability).
 
-## Two credential tiers
+## Which credential do you need?
 
-Every Neon credential talks to one of two planes.
+| If you need to...                                                            | Reach for                                                           | What it's for          | How it's scoped / where it reaches                                                                                                                       | Lives in                    |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| Create or manage projects, branches, and settings, or mint other credentials | Platform API key (personal, organization, or project-scoped)        | Manage your Neon setup | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it | Your tooling or CI          |
+| Have a workload read files, call models, or ship telemetry                   | Scoped credential (one grant, exposed as service-specific material) | Run your app           | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   | Your app runtime            |
+| Connect to Postgres                                                          | A database connection credential and the branch endpoint            | Run your app           | IP Allow and Private Networking apply here, and only here                                                                                                | Your backend runtime        |
+| Authorize an end user through the Data API                                   | An end-user JWT from a trusted issuer, plus database roles and RLS  | The exception          | Trust is registered on the project, not carried by a scoped credential                                                                                   | Your identity provider flow |
 
-- **The control plane** is the Neon API and the Console: creating projects and branches, changing settings, reading usage, and issuing credentials. Platform API keys authenticate it.
-- **The data plane** is where your application does its work: an S3 request, a model call, an OTLP export. Scoped credentials authenticate it.
+The rest of this page explains why the rows differ.
 
-The tiers are deliberately asymmetric. An API key can mint a scoped credential. A scoped credential can't mint anything, and it can't reach the control plane at all. That asymmetry is the reason an API key belongs in your own tooling and a scoped credential belongs in your application.
+## Two kinds of credentials
+
+The split is about what a credential is allowed to do, and it decides where the credential belongs.
+
+- **Credentials that manage your Neon setup.** Platform API keys create projects and branches, change settings, read usage, and mint the credentials your app uses. They belong in your own tooling and CI, not in shipped application code.
+- **Credentials your running app uses.** Scoped credentials do the application's work: an object read, a model call, a telemetry export. They belong in your app's runtime environment.
+
+The two are deliberately asymmetric. An API key manages your Neon resources and can mint app credentials. An app credential can't manage anything and can't mint anything: it does its one job and nothing more. That asymmetry is the whole reason the API key stays in your tooling and the app credential ships with your app.
 
 ### Platform API keys
 
-An API key is a bearer token for the [Neon API](/docs/reference/api). There is one control-plane surface for the whole platform, not one per product, so a single key covers Postgres, Object Storage, the AI Gateway, Functions, and Managed Better Auth alike.
+An API key is a bearer token for the [Neon API](/docs/reference/api). There's one API surface for the whole platform rather than one per product, so a single key covers Postgres, Object Storage, the AI Gateway, Functions, and Managed Better Auth alike.
 
-Keys come in three rungs, in decreasing reach:
+Keys come in three kinds, in decreasing reach:
 
-- **Personal keys** carry your own access: every project in every organization where you're a member. Any user can create one.
+- **Personal keys** act as you. On each request, Neon evaluates your effective access to the target project, which is your organization role plus any project-level grant you hold. Belonging to an organization doesn't by itself give you access to every project in it. Any user can create a personal key.
 - **Organization keys** cover every project in one organization. Organization Admins only.
-- **Project-scoped keys** are pinned to a single project and act at member level inside it. This rung is genuinely narrower, not just labeled that way: a project-scoped key can't act on other projects and can't create projects.
+- **Project-scoped keys** are limited to one project. They can't create projects and can't act on other projects.
 
-Two consequences worth holding on to. First, a key never exceeds the access of the identity behind it, and that access is evaluated per request, so changing someone's role changes what their existing keys can do. Second, because a personal or organization key is what mints data-plane credentials, it sits above everything else you issue. Treat it as a management credential and keep it out of deployed application code.
+Two consequences worth holding on to. First, because a key's reach is evaluated per request against its owner's access, changing someone's role changes what their existing keys can do. Second, because a personal or organization key is what mints app credentials, it sits above everything else you issue. Treat it as a management credential.
 
 To create, list, or revoke keys, see [Manage API keys](/docs/manage/api-keys).
 
 ### Scoped credentials
 
-Object Storage, the AI Gateway, telemetry ingest, and Functions don't have four unrelated token systems. They share one credential type, and what differs is the **scopes** you attach to it:
+Object Storage, the AI Gateway, and telemetry ingest don't have three unrelated token systems. They share one kind of credential, and what differs is the **scopes** you attach to it:
 
 - `storage:read` and `storage:write` for [Object Storage](/docs/storage/overview)
 - `ai_gateway:invoke` for the [AI Gateway](/docs/ai-gateway/overview)
-- `telemetry:write` for OTLP ingest
+- `telemetry:write` for telemetry ingest
 
-One credential can carry several scopes, so a single credential can serve an application that both stores files and calls models. Present a credential to a service it has no matching scope for and the request is refused.
+Present a credential to a service it has no matching scope for and the request is refused.
 
-That one credential also speaks two wire protocols, because the services expect different shapes:
+#### One grant, service-specific material
 
-- **S3 SigV4:** Object Storage hands you an access key ID and a secret access key that an AWS SDK accepts unmodified, with no AWS account or IAM setup.
-- **Bearer token:** the AI Gateway and the other HTTP surfaces take an `Authorization: Bearer` header.
+It helps to separate two things that are easy to conflate:
 
-Those aren't two credentials. They're two representations of one, issued together and revoked together. Secrets are returned once, at creation time, so store them then.
+- **The credential** is one grant that Neon manages for you. It's the thing you create, list, and revoke.
+- **The credential material** is what you actually put in a client, and it differs by target service. Object Storage exposes S3-compatible access-key material that an AWS SDK accepts unmodified, with no AWS account or IAM setup. The HTTP services take a bearer token.
+
+Different material, one grant underneath. That's why revoking or deleting the grant disables every piece of material issued for it, and why you don't have to track the pieces separately. Material is shown once, when the grant is created, so store it then.
 
 For the procedures and the environment variables each service expects, see [Object storage authentication](/docs/storage/authentication) and [AI Gateway authentication](/docs/ai-gateway/authentication).
+
+#### One credential or several?
+
+A credential can carry more than one scope, which is right when a single workload genuinely needs all of them. But reaching for one credential everywhere isn't the safer default. Prefer separate credentials per service, per environment, or per deployment unit whenever that shrinks what a leaked credential exposes, or makes revoking one thing safe to do without breaking the others.
 
 ### Where Functions fit
 
@@ -69,7 +87,7 @@ Inbound is a separate question. A function has a public HTTPS URL and no platfor
 
 ## What a scoped credential reaches
 
-A scoped credential has two dimensions. The scope says what it can do. Its **branch anchor** says where.
+A scoped credential has two dimensions. Its scopes say what it can do. Its **branch anchor** says where.
 
 A credential is anchored to one branch, and it's valid on that branch and on every branch descended from it. This is lineage, not an exact-branch match, and the distinction changes how you provision:
 
@@ -84,7 +102,7 @@ Don't reason about these two in branch-lineage terms. They don't use scoped cred
 
 ### A different trust model: the Data API and Managed Better Auth
 
-The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) don't authenticate with a scoped credential. Their trust comes from a JWKS URL you register plus the endpoint the request arrives on:
+The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) don't authenticate with a scoped credential. Their trust comes from an issuer you register on the project plus the endpoint the request arrives on:
 
 - **You register a trusted issuer** on the project by adding its JWKS URL. It applies project-wide by default, and can be narrowed to a single branch.
 - **Requests carry a JWT** from that issuer. The Data API verifies the token, selects a Postgres role from it, and runs the query as that role, so authorization is `GRANT`s and Row-Level Security in your database rather than a scope on a token.
@@ -101,28 +119,32 @@ Credentials answer "what can this token do." Roles answer "what can this person 
 
 The layers are **additive**: your effective access on a project is the higher of the two, so a per-project grant can only raise access, never lower it. Collaborators are the closed-by-default case: without an explicit grant, a project doesn't appear to them at all.
 
-This is the layer API keys inherit from, which is why a personal key's reach follows its owner's roles rather than being fixed at creation. For the roles, the grants, and how they combine, see [User permissions](/docs/manage/user-permissions) and the [Permissions quickstart](/docs/manage/project-permissions-get-started).
+This is the layer a personal API key inherits from, which is why its reach follows its owner's current access rather than being fixed at creation. For the roles, the grants, and how they combine, see [User permissions](/docs/manage/user-permissions) and the [Permissions quickstart](/docs/manage/project-permissions-get-started). Both live under **Access & collaboration** in the [Platform](/docs/manage/platform) section, along with organizations and database access.
 
 ## Network controls gate the Postgres endpoint
 
-Neon's network and compliance controls attach to the Postgres endpoint. They aren't a perimeter around the project as a whole:
+Neon's network controls attach to the Postgres endpoint. They aren't a perimeter around the project as a whole:
 
 - **[IP Allow](/docs/introduction/ip-allow)** restricts which client addresses can connect to your database.
 - **[Private Networking](/docs/guides/neon-private-networking)** routes database traffic over AWS PrivateLink instead of the public internet.
-- **[HIPAA](/docs/security/hipaa)** is a compliance configuration on the organization and the project. Its technical effect lands on the Postgres compute, chiefly as an audit logging floor.
 
-The other services reach the internet on their own endpoints: Object Storage, the AI Gateway, telemetry ingest, and Function URLs. Those endpoints are public, and the credential is what gates them.
+Object Storage, the AI Gateway, telemetry ingest, and Function URLs use service-specific public endpoints of their own. IP Allow and Private Networking for Postgres don't restrict requests to those endpoints.
 
 <Admonition type="important" title="Network controls don't cover every service">
-IP Allow and Private Networking gate the Postgres endpoint. They don't restrict Object Storage, the AI Gateway, Function URLs, or telemetry ingest. For those services, the credential is the access control, so scope it and anchor it deliberately instead of relying on a network boundary that isn't in front of them.
+IP Allow and Private Networking gate the Postgres endpoint. They don't restrict requests to Object Storage, the AI Gateway, Function URLs, or telemetry ingest. For those services the credential is the access control, so scope it and anchor it deliberately instead of relying on a network boundary that isn't in front of them.
 </Admonition>
 
-That leads to a short set of habits:
+## Compliance controls
 
-- **Attach the narrowest scopes** that the workload actually needs. Reach for `storage:read` before `storage:write`.
+[HIPAA](/docs/security/hipaa) is a compliance configuration available to eligible organizations and projects, and it belongs in a different category from everything above. It isn't an access-control or network mechanism: enabling it doesn't restrict who can reach a service or narrow what a credential can do. It also doesn't replace credential scoping, authorization in your database, or network restrictions on the Postgres endpoint. You still need those.
+
+## Secure defaults
+
+- **Attach the narrowest scopes** the workload actually needs. Reach for `storage:read` before `storage:write`.
 - **Anchor to the narrowest branch** that needs the credential, remembering that descendants inherit it.
-- **Keep API keys out of applications.** Ship scoped credentials, and mint them from a key held by your deployment tooling.
-- **Revoke credentials you no longer need.** Revocation is the reliable way to end access. See [Revoking credentials](/docs/storage/authentication#revoking-credentials).
+- **Keep API keys out of deployed application code.** Ship app credentials, and mint them from a key held by your tooling.
+- **Don't assume Postgres network controls protect your other services.** They don't.
+- **Revoke a credential when you no longer need it.** See [Revoking credentials](/docs/storage/authentication#revoking-credentials).
 
 ## Where to go next
 
@@ -130,9 +152,9 @@ That leads to a short set of habits:
 
 <a href="/docs/manage/api-keys" description="Create, list, and revoke personal, organization, and project-scoped keys" icon="lock-landscape">Manage API keys</a>
 
-<a href="/docs/storage/authentication" description="Mint an S3 keypair and use it with an AWS SDK" icon="data">Object storage authentication</a>
+<a href="/docs/storage/authentication" description="Create a credential and use it with an AWS SDK" icon="data">Object storage authentication</a>
 
-<a href="/docs/ai-gateway/authentication" description="Mint a bearer credential for model calls" icon="sparkle">AI Gateway authentication</a>
+<a href="/docs/ai-gateway/authentication" description="Create a bearer credential for model calls" icon="sparkle">AI Gateway authentication</a>
 
 <a href="/docs/manage/user-permissions" description="Organization roles, per-project grants, and how they combine" icon="user">User permissions</a>
 
