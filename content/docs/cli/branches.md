@@ -10,7 +10,7 @@ summary: >-
   any two branches or historical states, expiration timestamps, or adding
   read replica computes.
 enableTableOfContents: true
-updatedOn: '2026-07-22T13:42:19.210Z'
+updatedOn: '2026-08-27T23:52:24.570Z'
 redirectFrom:
   - /docs/reference/cli-branches
   - /docs/cli/branch
@@ -140,6 +140,14 @@ connection_uris
 <Admonition type="note">
 If the parent branch has more than one role or database, the `branches create` command does not output a connection URI. As an alternative, you can use the `connection-string` command to retrieve the connection URI for a branch. This command includes options for specifying the role and database. See [the connection-string command](/docs/cli/connection-string).
 </Admonition>
+
+Omit the connection string from the output, keeping it out of terminal scrollback and CI logs:
+
+```bash
+neon branches create --no-secrets
+```
+
+Needs Neon CLI 4.9.0+; older versions ignore `--no-secrets` and still print the connection string.
 
 Create a branch with `--output json`, which returns the full branch response data:
 

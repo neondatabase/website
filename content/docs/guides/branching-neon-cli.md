@@ -10,7 +10,7 @@ summary: >-
   Console and API equivalents for these operations are covered on separate
   pages.
 enableTableOfContents: true
-updatedOn: '2026-06-11T23:50:21.258Z'
+updatedOn: '2026-08-27T23:52:24.570Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/cli/branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -57,6 +57,8 @@ connection_uris
 <Admonition type="tip">
 The Neon CLI provides a `neon connection-string` command you can use to extract a connection uri programmatically. See [Neon CLI commands — connection-string](/docs/cli/connection-string).
 </Admonition>
+
+Pass `--no-secrets` (Neon CLI 4.9.0+) to keep the connection string out of terminal scrollback and CI logs; older versions ignore it and still print it.
 
 ## Create a branch from a non-default parent
 

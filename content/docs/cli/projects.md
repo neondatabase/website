@@ -10,7 +10,7 @@ summary: >-
   its 7-day recovery window. Projects created via the CLI default to Postgres
   18; use `--pg-version` to select a different major version.
 enableTableOfContents: true
-updatedOn: '2026-07-24T11:09:31.723Z'
+updatedOn: '2026-08-27T23:52:24.570Z'
 redirectFrom:
   - /docs/reference/cli-projects
   - /docs/cli/project
@@ -123,6 +123,14 @@ Create a project with a specific Postgres major version:
 ```bash
 neon projects create --name mynewproject --pg-version 17
 ```
+
+Omit the connection string from the output, keeping it out of terminal scrollback and CI logs:
+
+```bash
+neon projects create --name mynewproject --no-secrets
+```
+
+Needs Neon CLI 4.9.0+; older versions ignore `--no-secrets` and still print the connection string.
 
 - Create a project with `--output json`, which returns the full project response data and is the recommended format for scripts and agents. The output below was captured on an earlier CLI version; new projects report `"pg_version": 18`.
 

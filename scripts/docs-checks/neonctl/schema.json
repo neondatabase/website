@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "neonctlVersion": "4.7.0",
+  "neonctlVersion": "4.11.0",
   "binaries": [
     "neonctl",
     "neon"
@@ -75,6 +75,11 @@
           "describe": "Raw request body: a JSON string, @file, or - for stdin. Overrides --field.",
           "alias": "d"
         },
+        "describe": {
+          "type": "boolean",
+          "describe": "Print path, query, and body fields from the OpenAPI spec without calling the API. Body names are dotted for -F.",
+          "default": false
+        },
         "field": {
           "type": "array",
           "describe": "Body field key=value (repeatable). Dot-notation nests objects (e.g. -F branch.name=dev); values are typed (numbers, booleans, null, JSON).",
@@ -113,12 +118,12 @@
         },
         "refresh": {
           "type": "boolean",
-          "describe": "Refresh the cached OpenAPI spec (used with --list).",
+          "describe": "Refresh the cached OpenAPI spec (used with --list and --describe).",
           "default": false
         },
         "spec-url": {
           "type": "string",
-          "describe": "OpenAPI spec URL used by --list.",
+          "describe": "OpenAPI spec URL used by --list and --describe.",
           "defaultText": "process.env.NEON_API_SPEC_URL ?? DEFAULT_SPEC_URL",
           "hidden": true
         }
@@ -138,6 +143,14 @@
         {
           "command": "$0 api --list",
           "description": "List every available API route"
+        },
+        {
+          "command": "$0 api /projects --describe",
+          "description": "Show GET /projects query parameters"
+        },
+        {
+          "command": "$0 api /projects -X POST --describe",
+          "description": "Show the create-project body fields"
         }
       ]
     },
@@ -236,12 +249,18 @@
       ],
       "options": {
         "agent": {
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Forwarded to plugins, or to skills and mcp. Skips agent selection. Values listed below",
+          "alias": "a"
+        },
+        "agent-setup": {
           "type": "boolean",
-          "hidden": true
+          "describe": "After scaffolding, install the Neon plugin or skills and MCP. Use --no-agent-setup to skip",
+          "default": true
         },
         "default": {
           "type": "boolean",
-          "describe": "Quick start: scaffold the default template (or --template) and run the usual setup (install dependencies, git init) without prompting. Linking is left to you since it needs a project choice.",
+          "describe": "Quick start: scaffold the default template (or --template), then install, git, agent tooling (project folders, else the host CLI agent; if none, pass --agent or omit --default in a terminal), and link --yes. Skips those pickers; link --yes still asks for a project unless one is already linked",
           "default": false,
           "alias": "y"
         },
@@ -262,7 +281,7 @@
         },
         "link": {
           "type": "boolean",
-          "describe": "Run `neon link` in the scaffolded directory after installing. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
+          "describe": "Run `neon link` after scaffolding. Templates with neon.ts link after install so env pull works; otherwise link runs before install. In interactive mode this is offered as a prompt; use --no-link to skip without being asked.",
           "default": true
         },
         "list-templates": {
@@ -280,7 +299,7 @@
         }
       },
       "commands": {},
-      "describe": "Scaffold a new project from a Neon starter template",
+      "describe": "Scaffold a new project from a Neon starter template, then install agent tooling and link a Neon project",
       "usage": "$0 bootstrap [directory] [options]",
       "examples": [
         {
@@ -293,11 +312,15 @@
         },
         {
           "command": "$0 bootstrap my-app --default",
-          "description": "Quick start: scaffold the default template and run setup without prompting"
+          "description": "Skip the pickers; link --yes still asks for a project unless one is already linked"
         },
         {
           "command": "$0 bootstrap --list-templates --output json",
           "description": "Print the template catalog as JSON"
+        },
+        {
+          "command": "$0 bootstrap my-app --agent cursor --agent claude-code",
+          "description": "Skip agent selection; install the plugin for those agents"
         }
       ]
     },
@@ -393,6 +416,11 @@
               "type": "boolean",
               "describe": "Create a schema-only branch. Requires exactly one read-write compute.",
               "default": false
+            },
+            "secrets": {
+              "type": "boolean",
+              "describe": "Include connection credentials in command output. Use --no-secrets to omit them",
+              "default": true
             },
             "suspend-timeout": {
               "type": "number",
@@ -1729,9 +1757,8 @@
       "positionals": [],
       "options": {
         "agent": {
-          "type": "boolean",
-          "describe": "Enable agent/JSON mode (agent type is auto-detected).",
-          "default": false,
+          "type": "array",
+          "describe": "Coding agent to install into (repeatable). Forwarded to plugins, or to skills and mcp. Skips agent selection. Values listed below",
           "alias": "a"
         },
         "context-file": {
@@ -1740,21 +1767,38 @@
         },
         "data": {
           "type": "string",
-          "describe": "JSON object with a \"step\" field to route to a specific phase and phase-specific options."
+          "hidden": true
         },
-        "preview": {
-          "type": "boolean",
-          "describe": "Enable preview features (e.g. project bootstrapping from templates).",
-          "default": false
+        "output": {
+          "type": "unknown",
+          "describe": "Not supported; the commands init runs print their own output",
+          "alias": "o",
+          "hidden": true
         },
-        "skip-migrations": {
+        "yes": {
           "type": "boolean",
-          "describe": "Skip the migrations phase.",
-          "default": false
+          "describe": "Empty dir: bootstrap --default. Otherwise plugin, or skills and MCP, for project folders, else the host CLI agent. Exits if none. Then link --yes and config init --services none. link --yes still asks for a project unless one is already linked",
+          "default": false,
+          "alias": "y"
         }
       },
       "commands": {},
-      "describe": "Initialize a project with Neon using your AI coding assistant"
+      "describe": "Set up this directory for Neon: agent tooling, a linked project, and neon.ts. In an empty directory, scaffolds a template first. Skills needs Node.js 22.20 or newer.",
+      "usage": "$0 init [options]",
+      "examples": [
+        {
+          "command": "$0 init",
+          "description": "Empty dir: bootstrap (scaffold, agent tooling, link). Existing app: agent tooling, link, config init"
+        },
+        {
+          "command": "$0 init -y",
+          "description": "Same steps, using each child's defaults"
+        },
+        {
+          "command": "$0 init --agent cursor --agent claude-code",
+          "description": "Skip agent selection; install the plugin for those agents"
+        }
+      ]
     },
     "inspect": {
       "aliases": [
@@ -1858,7 +1902,7 @@
               "positionals": [],
               "options": {},
               "commands": {},
-              "describe": "Active queries running longer than 30 seconds with parallel workers, waits, and blockers (compute-wide)"
+              "describe": "Active queries running longer than 30 seconds with parallel workers, waits, and blockers, oldest group first (compute-wide)"
             },
             "subscriptions": {
               "aliases": [],
@@ -1985,13 +2029,9 @@
       "aliases": [],
       "positionals": [],
       "options": {
-        "agent": {
-          "type": "boolean",
-          "hidden": true
-        },
         "branch": {
           "type": "string",
-          "describe": "Branch name or ID to pin in the context (resolved to its ID before writing). Without it, link only resolves the org and project — pin a branch with `neon checkout <branch>` (link never guesses a default).",
+          "describe": "Branch name or ID to pin in the context (resolved to its name before writing).",
           "alias": "branch-id"
         },
         "checks": {
@@ -2031,7 +2071,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip the \"already linked\" confirmation in interactive mode and re-link anyway.",
+          "describe": "Skip the \"already linked\" confirmation, and pin the project's default branch when linking a project that has more than one.",
           "default": false,
           "alias": "y"
         }
@@ -2057,8 +2097,12 @@
           "description": "Create a new project and link it"
         },
         {
+          "command": "$0 link --project-id polished-snowflake-12345678 -y",
+          "description": "Same, pinning the project's default branch when several exist"
+        },
+        {
           "command": "$0 link --project-id polished-snowflake-12345678",
-          "description": "Link an existing project (org is inferred); pin a branch later with 'neon checkout'"
+          "description": "Link an existing project (org is inferred). Pins the only branch; several prompt in a TTY"
         }
       ]
     },
@@ -2267,7 +2311,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts. Defaults listed below. --project, --oauth, --agent, --read-only, --project-id and --category still apply",
+          "describe": "Skip prompts. Defaults listed below. --agent, --project, --oauth, --read-only, --project-id and --category still apply",
           "default": false,
           "alias": "y"
         }
@@ -2282,19 +2326,19 @@
         },
         {
           "command": "$0 mcp -y",
-          "description": "Global config, detected agents, reuse or mint an API key"
+          "description": "Global config, installed apps else the host CLI agent, reuse or mint an API key"
         },
         {
           "command": "$0 mcp --oauth",
           "description": "Install with OAuth; the agent signs in on first use"
         },
         {
-          "command": "$0 mcp --project",
-          "description": "Write project-level config"
-        },
-        {
           "command": "$0 mcp --agent cursor --agent claude-code",
           "description": "Install into specific agents"
+        },
+        {
+          "command": "$0 mcp --project",
+          "description": "Write project-level config"
         },
         {
           "command": "$0 mcp --read-only",
@@ -2960,7 +3004,7 @@
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts",
+          "describe": "Skip prompts. Detected agents (project folders, else the host CLI agent). --global uses installed apps, else the host CLI agent",
           "default": false,
           "alias": "y"
         }
@@ -2975,7 +3019,7 @@
         },
         {
           "command": "$0 plugins -y",
-          "description": "Detected agents, skip prompts"
+          "description": "Detected agents (project folders, else the host CLI agent), skip prompts"
         },
         {
           "command": "$0 plugins --agent cursor --agent claude-code",
@@ -3159,6 +3203,11 @@
               "type": "string",
               "describe": "The role name. If not specified, the default role name, `{database_name}_owner`, will be used.",
               "defaultText": "{database}_owner"
+            },
+            "secrets": {
+              "type": "boolean",
+              "describe": "Include connection credentials in command output. Use --no-secrets to omit them",
+              "default": true
             },
             "set-context": {
               "type": "boolean",
@@ -3439,12 +3488,12 @@
         },
         "skill": {
           "type": "array",
-          "describe": "Skill to install (repeatable). Skips the skill picker. Values listed below",
+          "describe": "Skill to install (repeatable). Skips the skill picker. Does not select agents. Values listed below",
           "alias": "s"
         },
         "yes": {
           "type": "boolean",
-          "describe": "Skip prompts",
+          "describe": "Skip prompts. Detected agents (project folders, else the host CLI agent). --global uses installed apps, else the host CLI agent",
           "default": false,
           "alias": "y"
         }
@@ -3459,6 +3508,11 @@
               "type": "boolean",
               "describe": "Update user-level skills (skills CLI -g). Default is this directory",
               "default": false
+            },
+            "yes": {
+              "type": "boolean",
+              "describe": "Skip the confirm prompt",
+              "alias": "y"
             }
           },
           "commands": {},
@@ -3489,11 +3543,15 @@
         },
         {
           "command": "$0 skills -y",
-          "description": "This directory, detected agents, the default skills"
+          "description": "This directory, detected agents (project folders, else the host CLI agent), the default skills"
+        },
+        {
+          "command": "$0 skills -y -s neon -s neon-ai-gateway",
+          "description": "Named skills into detected agents"
         },
         {
           "command": "$0 skills -s neon -s neon-ai-gateway --agent cursor",
-          "description": "Install named skills into specific agents"
+          "description": "Named skills into a named agent"
         },
         {
           "command": "$0 skills --global",
