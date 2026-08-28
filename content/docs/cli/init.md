@@ -6,10 +6,10 @@ summary: >-
   The `neon init` command sets up the current directory to use Neon with your AI
   coding assistant. In an empty directory it scaffolds a starter template first,
   then installs agent tooling (either a plugin, or skills and the MCP server), links a
-  Neon project, and writes a neon.ts config. It runs interactively; for agents and
-  CI, run the underlying commands directly.
+  Neon project, and writes a neon.ts config. It runs interactively by default;
+  pass -y and --agent for an unattended agent setup.
 enableTableOfContents: true
-updatedOn: '2026-08-27T22:59:15.528Z'
+updatedOn: '2026-08-28T15:55:20.032Z'
 redirectFrom:
   - /docs/reference/cli-init
 ---
@@ -49,6 +49,8 @@ In a directory that already has files, `init` asks how your coding agents should
 
 The plugin and the skills-plus-MCP option are mutually exclusive. Installing skills needs Node.js 22.20 or newer.
 
+`init` sets up agent tooling at the project level. It has no global option; for a user-level install, run [`neon skills --global`](/docs/cli/skills) or [`neon plugins --global`](/docs/cli/plugins) directly.
+
 ### Link a project and write neon.ts
 
 After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directory is already linked). Linking writes a `.neon` file with your org, project, and branch, and pulls the branch's environment variables (including `DATABASE_URL`) into `.env` if one exists, otherwise `.env.local`. It then runs [`neon config init`](/docs/cli/config), which creates a `neon.ts` config you can edit and apply with `neon config apply`.
@@ -57,13 +59,19 @@ After agent setup, `init` runs [`neon link`](/docs/cli/link) (unless the directo
 
 <CliOptions command="init" />
 
-Pass `-y` (alias `--yes`) to run each step with its defaults instead of prompting: in an empty directory it scaffolds the default template; otherwise it installs the plugin when a project-level Cursor, Claude Code, or Codex setup is detected (else skills and MCP), then links and writes `neon.ts`. Even with `-y`, first-time sign-in still opens a browser, and `link` still asks which project to use unless the directory is already linked.
+Pass `-y` (alias `--yes`) to run each step with its defaults instead of prompting. In an empty directory it scaffolds the default template. Otherwise it sets up agent tooling, then links and writes `neon.ts`. With `-y`, `init` detects the target agent from the project folders, else the host CLI agent you're running inside. It installs the plugin for a plugin-capable agent (Cursor, Claude Code, or Codex), or skills and MCP for any other agent. If it detects no agent, it exits and asks you to pass `--agent`. Even with `-y`, first-time sign-in still opens a browser, and `link` still asks which project to use unless the directory is already linked.
 
-The old `--agent`, `--data`, `--preview`, and `--skip-migrations` flags were removed. `neon init --agent` and `neon init --data` now return an error pointing you to `neon init` or `neon init -y`.
+Pass `--agent` (alias `-a`) to name the coding agents to set up, which skips both detection and the picker. It's repeatable (`neon init --agent cursor --agent claude-code`) and works with `-y`. `init` sets up one family per run, so it forwards the names to the plugin, or to skills and the MCP server, not both. Run `neon init --help` to see which agents each family supports. Passing `--agent` with no value returns an error.
 
 ## Run it non-interactively
 
-`init` needs an interactive terminal. It can't finish in a non-interactive shell (such as CI, a script, or many in-editor agent shells) because it prompts for agent setup and for a project to link, and it has no flag to supply those. To set up Neon without prompts, run the underlying commands directly, each of which takes explicit flags:
+Combine `-y` with `--agent` to do the agent setup without prompts, for example in CI or from an agent:
+
+```bash
+neon init -y --agent cursor
+```
+
+For the project, `init` links to the one the directory is already linked to. When the directory isn't linked yet, `neon link` picks the project interactively. To target a specific project without prompts, run the underlying commands directly and pass the project explicitly, each taking its own flags:
 
 ```bash
 # Install agent tooling for a specific editor
@@ -84,13 +92,13 @@ Authenticate without a browser by setting `NEON_API_KEY` or passing `--api-key`.
 
 The files created depend on the path you take. Each one is written by the command `init` runs, so see that command's page for details.
 
-| Artifact                                              | Written by                                                                                            | Scope                        |
-| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ---------------------------- |
-| `.neon` (org, project, and branch context)            | [`neon link`](/docs/cli/link)                                                                         | Project                      |
-| `.env` or `.env.local` (`DATABASE_URL` and Neon vars) | [`neon link`](/docs/cli/link)                                                                         | Project                      |
-| `neon.ts` (config-as-code policy)                     | [`neon config init`](/docs/cli/config)                                                                | Project                      |
-| Agent skills, MCP config, or plugin                   | [`neon skills`](/docs/cli/skills) / [`neon mcp`](/docs/cli/mcp) / [`neon plugins`](/docs/cli/plugins) | Project or global, per agent |
-| Scaffolded template files (empty dir only)            | [`neon bootstrap`](/docs/cli/bootstrap)                                                               | Project                      |
+| Artifact                                              | Written by                                                                                            | Scope              |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------ |
+| `.neon` (org, project, and branch context)            | [`neon link`](/docs/cli/link)                                                                         | Project            |
+| `.env` or `.env.local` (`DATABASE_URL` and Neon vars) | [`neon link`](/docs/cli/link)                                                                         | Project            |
+| `neon.ts` (config-as-code policy)                     | [`neon config init`](/docs/cli/config)                                                                | Project            |
+| Agent skills, MCP config, or plugin                   | [`neon skills`](/docs/cli/skills) / [`neon mcp`](/docs/cli/mcp) / [`neon plugins`](/docs/cli/plugins) | Project, per agent |
+| Scaffolded template files (empty dir only)            | [`neon bootstrap`](/docs/cli/bootstrap)                                                               | Project            |
 
 ## Examples
 

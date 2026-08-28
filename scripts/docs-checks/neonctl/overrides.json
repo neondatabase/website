@@ -194,6 +194,18 @@
         }
       }
     },
+    "skills": {
+      "commands": {
+        "update": {
+          "options": {
+            "yes": {
+              "_comment": "Source defines `yes` as a bare { describe } with no type, so the static parser marks it unknown. It's a boolean flag (skip the confirm prompt). Verified against skills.ts at neonctl 4.11.0.",
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
     "claim": {
       "commands": {
         "create": {

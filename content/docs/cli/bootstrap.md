@@ -23,7 +23,12 @@ The directory argument is optional. Use `.` to scaffold into the current directo
 
 Run with `--list-templates` to see the available templates (add `--output json` for a machine-readable catalog), and pass one with `--template` to skip the interactive picker.
 
-The post-scaffold steps (`--install`, `--git`, `--agent-setup`, `--link`) all default to on. In interactive mode, bootstrap asks about each one; use the negated form (`--no-install`, `--no-git`, `--no-agent-setup`, `--no-link`) to skip a step without being asked. Agent setup installs either the Neon plugin, or agent skills and the MCP server, into your coding agents. With `--link`, bootstrap runs [`neon link`](/docs/cli/link) in the scaffolded directory.
+The post-scaffold steps all default to on. In interactive mode, bootstrap asks about each one; pass the negated flag to skip it without being asked:
+
+- `--install` / `--no-install`: install dependencies.
+- `--git` / `--no-git`: initialize a git repository.
+- `--agent-setup` / `--no-agent-setup`: install agent tooling, either the Neon plugin, or agent skills and the MCP server. Pass `--agent` (alias `-a`, repeatable) to name the agents and skip the picker, for example `neon bootstrap my-app --agent cursor`.
+- `--link` / `--no-link`: run [`neon link`](/docs/cli/link) in the scaffolded directory.
 
 Use `--default` (alias `-y`) for a quick start: it scaffolds the default template (or the one you pass with `--template`), then runs dependency install, git init, agent tooling, and `neon link --yes` without prompting. `link --yes` still asks which project to use unless the directory is already linked.
 
