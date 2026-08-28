@@ -654,6 +654,8 @@ const CROSS_SOURCE_CHECKS = [
   // differently-worded "free/no charge during beta" prose to a single concept).
   // Object Storage and Functions publish their post-beta rates on the pricing
   // page, but the cells keep a beta note, so betaValue still applies there.
+  // AI Gateway links to its published model prices instead of repeating beta
+  // status, so only verify that every source agrees the feature is offered.
   // The Free cells lead with the included allowance instead of a beta note and
   // have nothing comparable in the docs table, hence offeredValue.
   ...['free', 'launch', 'scale'].flatMap((plan) => [
@@ -681,7 +683,7 @@ const CROSS_SOURCE_CHECKS = [
       comp: 'AI Gateway',
       docs: 'AI Gateway (Beta)',
       plan,
-      norm: betaValue,
+      norm: offeredValue,
       agentLabel: 'AI Gateway',
     },
   ]),
