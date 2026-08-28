@@ -3512,6 +3512,7 @@
             "yes": {
               "type": "boolean",
               "describe": "Skip the confirm prompt",
+              "default": false,
               "alias": "y"
             }
           },

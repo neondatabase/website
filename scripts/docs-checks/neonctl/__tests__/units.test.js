@@ -14,7 +14,7 @@ const {
   isLikelyCommand,
   buildTopLevelCommands,
 } = require('../extract-examples.js');
-const { parseCommandFile, enumerateConstEntries } = require('../generate-schema.js');
+const { parseCommandFile, enumerateConstEntries, inheritParentOptions } = require('../generate-schema.js');
 const { loadSchema, resolvePath, resolveValidOptions } = require('../schema.js');
 
 // Writes `source` to a temp .ts file and returns its path, for exercising the
@@ -323,5 +323,112 @@ describe('enumerateConstEntries', () => {
 
   it('returns null when the source file does not exist', () => {
     expect(enumerateConstEntries('/no/such/file.ts', 'X', 'describe')).toBeNull();
+  });
+});
+
+describe('inheritParentOptions', () => {
+  it('backfills a subcommand option from the same-named parent option (like skills update yes)', () => {
+    // Mirrors skills.ts: the parent command declares `yes` fully, and the
+    // `update` subcommand re-declares it with only a describe.
+    const file = writeTempSource(`
+      import type yargs from "yargs";
+      export const command = "skills";
+      export const describe = "Install skills";
+      export const builder = (argv: yargs.Argv) =>
+        argv
+          .command("update", "Update skills", (y: yargs.Argv) =>
+            y.options({ yes: { describe: "Skip the confirm prompt" } })
+          )
+          .options({
+            yes: { alias: "y", type: "boolean", default: false, describe: "Skip prompts" },
+            agent: { alias: "a", type: "array", describe: "Coding agent" },
+          });
+    `);
+    const parsed = parseCommandFile(file, new Map());
+    // Before inheritance the subcommand has only its own describe, and the
+    // parser can't infer the type from the bare spec, so it's the `unknown`
+    // sentinel with no alias.
+    expect(parsed.commands.update.options.yes).toEqual({
+      describe: 'Skip the confirm prompt',
+      type: 'unknown',
+    });
+
+    inheritParentOptions(parsed, {});
+
+    const yes = parsed.commands.update.options.yes;
+    // Own describe wins; alias, type, and default are inherited from the parent.
+    expect(yes.describe).toBe('Skip the confirm prompt');
+    expect(yes.alias).toBe('y');
+    expect(yes.type).toBe('boolean');
+    expect(yes.default).toBe(false);
+    // A parent option the subcommand never declared must NOT leak onto it.
+    expect(parsed.commands.update.options.agent).toBeUndefined();
+  });
+
+  it('treats a local type "unknown" as a gap and never shares object references', () => {
+    const inherited = {
+      fmt: { type: 'string', choices: ['a', 'b'], describe: 'Parent format' },
+    };
+    const node = {
+      // `fmt` re-declared with its own describe but an unresolved (unknown) type
+      // and no choices.
+      options: { fmt: { describe: 'Output format', type: 'unknown' } },
+      commands: {},
+    };
+    inheritParentOptions(node, inherited);
+    const fmt = node.options.fmt;
+    expect(fmt.describe).toBe('Output format'); // own field kept
+    expect(fmt.type).toBe('string'); // unknown filled from parent
+    expect(fmt.choices).toEqual(['a', 'b']); // array inherited
+    // The inherited array must be cloned, not shared.
+    expect(fmt.choices).not.toBe(inherited.fmt.choices);
+    fmt.choices.push('c');
+    expect(inherited.fmt.choices).toEqual(['a', 'b']);
+  });
+
+  it('does not inherit a parent `hidden` flag onto a re-declaring child', () => {
+    const node = {
+      options: { debug: { describe: 'Debug output' } },
+      commands: {},
+    };
+    inheritParentOptions(node, {
+      debug: { type: 'boolean', hidden: true, describe: 'Parent debug' },
+    });
+    const debug = node.options.debug;
+    expect(debug.type).toBe('boolean'); // type still inherited
+    expect(debug.describe).toBe('Debug output'); // own field wins
+    expect('hidden' in debug).toBe(false); // hidden is never inherited
+  });
+
+  it('cascades through nested subcommands with the nearest ancestor winning', () => {
+    // grandparent declares `fmt` fully; the mid subcommand re-declares it with
+    // its own alias; the leaf re-declares only a describe.
+    const grandparent = {
+      options: { fmt: { type: 'string', alias: 'x', default: 'gp', describe: 'gp fmt' } },
+      commands: {
+        mid: {
+          options: { fmt: { alias: 'm', describe: 'mid fmt' } },
+          commands: {
+            leaf: { options: { fmt: { describe: 'leaf fmt' } }, commands: {} },
+          },
+        },
+      },
+    };
+    inheritParentOptions(grandparent, {});
+
+    // mid keeps its own alias/describe, inherits type + default from grandparent.
+    expect(grandparent.commands.mid.options.fmt).toEqual({
+      alias: 'm',
+      describe: 'mid fmt',
+      type: 'string',
+      default: 'gp',
+    });
+    // leaf keeps its own describe; alias comes from the nearest ancestor (mid's
+    // 'm', not grandparent's 'x'); grandparent's default still flows through.
+    const leaf = grandparent.commands.mid.commands.leaf.options.fmt;
+    expect(leaf.describe).toBe('leaf fmt');
+    expect(leaf.alias).toBe('m');
+    expect(leaf.type).toBe('string');
+    expect(leaf.default).toBe('gp');
   });
 });
