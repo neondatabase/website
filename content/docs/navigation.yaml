@@ -1160,6 +1160,8 @@
                   slug: ai/ai-codex-plugin
                 - title: Cursor plugin
                   slug: ai/ai-cursor-plugin
+                - title: Grok Bot plugin
+                  slug: ai/ai-grok-bot-plugin
                 - title: GitHub Copilot agents
                   slug: ai/ai-github-copilot-agents
             - section: Build AI agents
