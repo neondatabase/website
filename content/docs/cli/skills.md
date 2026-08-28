@@ -8,7 +8,7 @@ summary: >-
   agents and skip the prompts. Use `neon skills update` to refresh installed
   skills to their latest versions.
 enableTableOfContents: true
-updatedOn: '2026-08-28T15:55:20.032Z'
+updatedOn: '2026-08-28T19:48:06.838Z'
 ---
 
 The `skills` command installs [Neon agent skills](/docs/ai/agent-skills) into your coding agents, so tools like Cursor and Claude Code know how to work with Neon's Postgres, AI Gateway, Object Storage, and Functions.
@@ -113,7 +113,7 @@ Updates every skill installed in the current directory to its latest version, or
 Update skills in the current directory without prompting:
 
 ```bash
-neon skills update --yes
+neon skills update -y
 ```
 
 ```text filename="Output"
@@ -125,5 +125,5 @@ this directory  updated  ✓ Updated 1 skill(s)
 Update user-level skills:
 
 ```bash
-neon skills update --global --yes
+neon skills update --global -y
 ```

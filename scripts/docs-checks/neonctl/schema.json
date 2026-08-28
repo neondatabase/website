@@ -3511,7 +3511,8 @@
             },
             "yes": {
               "type": "boolean",
-              "describe": "Skip the confirm prompt"
+              "describe": "Skip the confirm prompt",
+              "alias": "y"
             }
           },
           "commands": {},

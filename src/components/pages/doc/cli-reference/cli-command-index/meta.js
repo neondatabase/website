@@ -44,7 +44,7 @@ const META = {
   },
   skills: {
     desc: 'Install and update Neon agent skills in your coding agents.',
-    examples: ['neon skills', 'neon skills -y', 'neon skills update --yes'],
+    examples: ['neon skills', 'neon skills -y', 'neon skills update -y'],
   },
   plugins: {
     desc: 'Install the Neon plugin (skills plus MCP) into your coding agents.',
