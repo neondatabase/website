@@ -242,9 +242,9 @@ export default {
       },
       free: false,
       launch:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Pricing matches model provider (no markup)</span>",
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
       scale:
-        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>Pricing matches model provider (no markup)</span>",
+        "<a href='/docs/ai-gateway/models#available-models'>List prices here</a><span>No charges during beta</span>",
     },
     {
       rows: '1',
