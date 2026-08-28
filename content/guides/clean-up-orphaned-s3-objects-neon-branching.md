@@ -16,7 +16,7 @@ If you've worked on an app with file uploads for long enough, you've likely ship
 1. **Account deletion timeout:** A user deletes their account. The attachment rows are removed, but the S3 cleanup call times out partway through.
 2. **Retention purge:** A nightly job hard-deletes soft-deleted rows and never calls S3.
 3. **Crash between steps:** Your API deletes the row first, then crashes before `DeleteObject` runs.
-4. **Failed insert:** An upload writes the file to S3, then the database insert fails or is cancelled.
+4. **Failed insert:** An upload writes the file to S3, then the database insert fails or is canceled.
 5. **Bulk admin script:** An operator deletes rows in `psql` and stops before removing the matching objects.
 
 In every case, the row is deleted but the file remains. That leftover file is an **orphaned object**: nothing in your database references it, but you still pay to store it. A few orphans are harmless. Months of account deletions, purges, and failed uploads later, orphaned bytes turn into a real line item on your storage bill.
