@@ -1,11 +1,10 @@
-import Image from 'next/image';
-
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Logos from 'components/shared/logos';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
-import heroImage from 'images/pages/ai-gateway/hero/ai-gateway.jpg';
+
+import HeroDiagram from './hero-diagram';
 
 const LOGOS = [
   'replit',
@@ -50,16 +49,7 @@ const Hero = () => (
         </div>
       </div>
 
-      <Image
-        className="mt-13 h-auto w-full md:mt-10"
-        src={heroImage}
-        width={2688}
-        height={1004}
-        sizes="(max-width: 47.9375rem) calc(100vw - 2.5rem), (max-width: 63.9375rem) calc(100vw - 4rem), 84rem"
-        quality={100}
-        alt="A Neon backend routing AI Gateway requests to models from multiple providers"
-        loading="eager"
-      />
+      <HeroDiagram className="mt-13 md:mt-10" />
 
       <div className="relative mt-14 select-none lg:mt-12 md:mt-10">
         <Logos className="max-w-full p-0!" logos={LOGOS} size="md" />

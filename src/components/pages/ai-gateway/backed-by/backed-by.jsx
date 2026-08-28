@@ -48,7 +48,7 @@ const BackedBy = () => (
 
         <div className="flex min-h-113.5 flex-col border-l border-gray-new-50 px-8 lg:min-h-105 lg:px-6 md:min-h-0 md:gap-y-4 md:border-l-0 md:px-0">
           <SectionLabel>Trusted by the best</SectionLabel>
-          <div className="mt-auto [&_blockquote]:text-[1.125rem]! [&_blockquote]:leading-[1.5]! md:[&_blockquote]:h-fit md:[&_blockquote]:min-h-40 md:[&_blockquote]:text-base! [&_figcaption>.block]:inline! [&_figcaption>.block]:after:content-['_–_'] md:[&_figure]:relative md:[&_figure]:bottom-auto">
+          <div className="mt-auto [&_blockquote]:text-[1.125rem]! [&_blockquote]:leading-[1.5]! lg:[&_blockquote]:text-base! md:[&_blockquote]:h-fit md:[&_blockquote]:min-h-40 md:[&_blockquote]:text-base! [&_figcaption>.block]:inline! [&_figcaption>.block]:after:content-['_–_'] md:[&_figure]:relative md:[&_figure]:bottom-auto">
             <Quotes />
           </div>
         </div>
