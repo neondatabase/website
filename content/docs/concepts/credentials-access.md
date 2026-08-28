@@ -7,7 +7,7 @@ summary: >-
   uses. A scoped credential is one Neon-managed grant, exposed as
   service-specific credential material, limited by its scopes and anchored to a
   branch and its descendants. The Data API is the exception, trusting an
-  end-user JWT from an issuer you register. Access for people is two additive
+  end-user JWT from a trusted issuer. Access for people is two additive
   layers: an organization role plus per-project grants. IP Allow and Private
   Networking gate the Postgres endpoint, while the other services are gated by
   credentials.
@@ -22,12 +22,12 @@ Availability differs by product and by region. See [Product availability](/docs/
 
 ## Which credential do you need?
 
-| If you need to...                                                            | Reach for                                                           | What it's for          | How it's scoped / where it reaches                                                                                                                       | Lives in                    |
-| ---------------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| Create or manage projects, branches, and settings, or mint other credentials | Platform API key (personal, organization, or project-scoped)        | Manage your Neon setup | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it | Your tooling or CI          |
-| Have a workload read files, call models, or ship telemetry                   | Scoped credential (one grant, exposed as service-specific material) | Run your app           | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   | Your app runtime            |
-| Connect to Postgres                                                          | A database connection credential and the branch endpoint            | Run your app           | IP Allow and Private Networking apply here, and only here                                                                                                | Your backend runtime        |
-| Authorize an end user through the Data API                                   | An end-user JWT from a trusted issuer, plus database roles and RLS  | The exception          | Trust is registered on the project, not carried by a scoped credential                                                                                   | Your identity provider flow |
+| If you need to...                                                             | Reach for                                                           | What it's for          | How it's scoped / where it reaches                                                                                                                       | Lives in                    |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| Create or manage projects, branches, and settings, or issue other credentials | Platform API key (personal, organization, or project-scoped)        | Manage your Neon setup | Personal keys act with your effective access; organization keys cover one organization; project-scoped keys cover one project and can't reach outside it | Your tooling or CI          |
+| Have a workload read files, call models, or ship telemetry                    | Scoped credential (one grant, exposed as service-specific material) | Run your app           | By its scopes, such as `storage:read`, plus a branch anchor that covers the branch and its descendants                                                   | Your app runtime            |
+| Connect to Postgres                                                           | A database connection credential and the branch endpoint            | Run your app           | IP Allow and Private Networking apply here, and only here                                                                                                | Your backend runtime        |
+| Authorize an end user through the Data API                                    | An end-user JWT from a trusted issuer, plus database roles and RLS  | The exception          | Trust is registered on the project, not carried by a scoped credential                                                                                   | Your identity provider flow |
 
 The rest of this page explains why the rows differ.
 
@@ -35,10 +35,10 @@ The rest of this page explains why the rows differ.
 
 The split is about what a credential is allowed to do, and it decides where the credential belongs.
 
-- **Credentials that manage your Neon setup.** Platform API keys create projects and branches, change settings, read usage, and mint the credentials your app uses. They belong in your own tooling and CI, not in shipped application code.
+- **Credentials that manage your Neon setup.** Platform API keys create projects and branches, change settings, read usage, and issue the credentials your app uses. They belong in your own tooling and CI, not in shipped application code.
 - **Credentials your running app uses.** Scoped credentials do the application's work: an object read, a model call, a telemetry export. They belong in your app's runtime environment.
 
-The two are deliberately asymmetric. An API key manages your Neon resources and can mint app credentials. An app credential can't manage anything and can't mint anything: it does its one job and nothing more. That asymmetry is the whole reason the API key stays in your tooling and the app credential ships with your app.
+The two are deliberately asymmetric. An API key manages your Neon resources and can create app credentials. An app credential can't manage anything and can't create anything: it does its one job and nothing more. That asymmetry is the whole reason the API key stays in your tooling and the app credential ships with your app.
 
 ### Platform API keys
 
@@ -50,7 +50,7 @@ Keys come in three kinds, in decreasing reach:
 - **Organization keys** cover every project in one organization. Organization Admins only.
 - **Project-scoped keys** are limited to one project. They can't create projects and can't act on other projects.
 
-Two consequences worth holding on to. First, because a key's reach is evaluated per request against its owner's access, changing someone's role changes what their existing keys can do. Second, because a personal or organization key is what mints app credentials, it sits above everything else you issue. Treat it as a management credential.
+Two consequences worth holding on to. First, only a personal key's reach moves: it's evaluated per request against its owner's current access, so changing that person's role changes what their existing personal keys can do. Organization and project-scoped keys instead carry a reach fixed when they're created, at organization-admin reach and member-level on their one project respectively. Second, any API key with write access to a project can create app credentials for it, and that includes a project-scoped key acting on its own project. So treat every API key, whatever its kind, as a management credential that sits above the app credentials it can create.
 
 To create, list, or revoke keys, see [Manage API keys](/docs/manage/api-keys).
 
@@ -91,10 +91,10 @@ A scoped credential has two dimensions. Its scopes say what it can do. Its **bra
 
 A credential is anchored to one branch, and it's valid on that branch and on every branch descended from it. This is lineage, not an exact-branch match, and the distinction changes how you provision:
 
-- **Anchored on `main`:** works on `main` and on every branch created from it, including preview branches that don't exist yet. Nothing to re-mint per branch.
+- **Anchored on `main`:** works on `main` and on every branch created from it, including preview branches that don't exist yet. There's no need to issue a new one for each branch.
 - **Anchored on a child branch:** works on that branch and its own descendants, but not on its parent and not on a sibling. This is the least-privilege choice for one environment.
 
-So read "branch-scoped" as _this branch and its descendants_. A credential minted on your default branch is effectively a project-wide credential for that service, which is convenient for preview workflows and worth being deliberate about in production. For how branches relate to each other, see [The object model](/docs/concepts/the-object-model) and [Branching](/docs/introduction/branching).
+So read "branch-scoped" as _this branch and its descendants_. A credential anchored on your default branch therefore reaches every branch descended from that anchor, and only those: a branch outside its lineage isn't covered. That reach is convenient for preview workflows and worth being deliberate about in production. For how branches relate to each other, see [The object model](/docs/concepts/the-object-model) and [Branching](/docs/introduction/branching).
 
 <Admonition type="note" title="The Data API and Managed Better Auth work differently">
 Don't reason about these two in branch-lineage terms. They don't use scoped credentials at all, so the rest of this section doesn't apply to them. See [A different trust model](#a-different-trust-model-the-data-api-and-managed-better-auth).
@@ -102,9 +102,9 @@ Don't reason about these two in branch-lineage terms. They don't use scoped cred
 
 ### A different trust model: the Data API and Managed Better Auth
 
-The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) don't authenticate with a scoped credential. Their trust comes from an issuer you register on the project plus the endpoint the request arrives on:
+The [Data API](/docs/data-api/overview) and [Managed Better Auth](/docs/auth/overview) don't authenticate with a scoped credential. Their trust comes from an issuer the project trusts plus the endpoint the request arrives on:
 
-- **You register a trusted issuer** on the project by adding its JWKS URL. It applies project-wide by default, and can be narrowed to a single branch.
+- **The project trusts an issuer.** With an external provider, you register it yourself by adding its JWKS URL to the project. With Managed Better Auth, Neon provides the JWKS URL for you, so there's no external issuer to register. Either way the trust applies project-wide by default, and can be narrowed to a single branch.
 - **Requests carry a JWT** from that issuer. The Data API verifies the token, selects a Postgres role from it, and runs the query as that role, so authorization is `GRANT`s and Row-Level Security in your database rather than a scope on a token.
 - **Which branch you touch** follows from the endpoint you call, not from anything inside the token.
 
@@ -142,7 +142,7 @@ IP Allow and Private Networking gate the Postgres endpoint. They don't restrict 
 
 - **Attach the narrowest scopes** the workload actually needs. Reach for `storage:read` before `storage:write`.
 - **Anchor to the narrowest branch** that needs the credential, remembering that descendants inherit it.
-- **Keep API keys out of deployed application code.** Ship app credentials, and mint them from a key held by your tooling.
+- **Keep API keys out of deployed application code.** Ship app credentials, and issue them from a key held by your tooling.
 - **Don't assume Postgres network controls protect your other services.** They don't.
 - **Revoke a credential when you no longer need it.** See [Revoking credentials](/docs/storage/authentication#revoking-credentials).
 
