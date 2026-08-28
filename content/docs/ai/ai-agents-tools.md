@@ -10,7 +10,7 @@ summary: >-
   neon@latest init`) configures OAuth, installs Agent Skills, and connects
   your editor in a single step.
 enableTableOfContents: true
-updatedOn: '2026-08-15T10:40:27.257Z'
+updatedOn: '2026-08-28T19:01:12.212Z'
 ---
 
 Neon is the backend for apps and agents. This page covers Neon's integrations with AI tools and agent frameworks, from natural language database control to autonomous agent platforms. Choose the tools that fit your workflow.
@@ -48,6 +48,14 @@ If you're using Cursor, install the Neon plugin to get Neon Skills and MCP integ
 
 <DetailIconCards>
 <a href="/docs/ai/ai-cursor-plugin" description="Install the Neon Cursor plugin to use Neon Skills and Neon MCP integration directly in Cursor" icon="github">Cursor plugin for Neon</a>
+</DetailIconCards>
+
+## Grok Bot plugin
+
+If you're using Grok Bot, install the Neon plugin to get Neon Skills and MCP in one package.
+
+<DetailIconCards>
+<a href="/docs/ai/ai-grok-bot-plugin" description="Install the Neon plugin in Grok Bot for Neon Skills and MCP" icon="github">Grok Bot plugin for Neon</a>
 </DetailIconCards>
 
 ## GitHub Copilot agents
