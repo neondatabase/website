@@ -13,7 +13,10 @@ summary: >-
 enableTableOfContents: true
 ---
 
-Neon issues two kinds of credentials: platform API keys to manage your Neon resources, meaning projects, branches, and settings, and service credentials your running app uses to read a file, call a model, or ship telemetry. API keys belong in your own tooling and CI, not in shipped application code. Service credentials belong in your app's runtime environment.
+Neon issues two kinds of credentials, and where each one belongs follows from what it's allowed to do:
+
+- **Credentials that manage your Neon setup.** Platform API keys create projects and branches, change settings, read usage, and issue the service credentials your app uses. They belong in your own tooling and CI, not in shipped application code.
+- **Credentials your running app uses.** Service credentials do the application's work: an object read, a model call, a telemetry export. They belong in your app's runtime environment.
 
 Availability differs by product and by region. See [Product availability](/docs/introduction/regions#product-availability).
 
